@@ -807,6 +807,11 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
             showSpinnerIncludeNavigationBar()
             output.recognizeTextForCurrentItem(image: image) { [weak cell, weak self] data in
                 self?.hideSpinnerIncludeNavigationBar()
+                
+                guard let data = data else {
+                    cell?.removeCurrentTextSelectionInteraction()
+                    return
+                }
                 cell?.addTextSelectionInteraction(data)
             }
         }

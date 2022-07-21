@@ -21,12 +21,12 @@ final class IAPManager: NSObject {
     
     typealias OfferAppleHandler = ResponseBool
     typealias PurchaseHandler = (_ isSuccess: PurchaseResult) -> Void
-    
+
     private var restorePurchasesCallback: RestoreHandler?
     private var offerAppleHandler: OfferAppleHandler = {_ in }
     private var purchaseHandler: PurchaseHandler = {_ in }
-    
-    private var productsRequests = [SKRequest]()
+
+    private var pendingRequests = [SKRequest]()
     
     private var restoreInProgress = false
     private var purchaseInProgress = false
@@ -60,7 +60,7 @@ final class IAPManager: NSObject {
             self.offerAppleHandler = handler
             let request = SKProductsRequest(productIdentifiers: Set(productIds))
             
-            self.productsRequests.append(request)
+            self.pendingRequests.append(request)
             request.delegate = self
             request.start()
         }
@@ -93,12 +93,17 @@ final class IAPManager: NSObject {
         restoreInProgress = true
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
-    
+
+    var receiptData: Data? {
+        guard let receiptURL = Bundle.main.appStoreReceiptURL else {
+            return nil
+        }
+
+        return try? Data(contentsOf: receiptURL)
+    }
+
     var receipt: String? {
-        guard let receiptUrl = Bundle.main.appStoreReceiptURL,
-            let receiptData = try? Data(contentsOf: receiptUrl)
-            else { return nil }
-        return receiptData.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0))
+        return receiptData?.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0))
     }
     
     func product(for productId: String) -> SKProduct? {
@@ -135,12 +140,13 @@ extension IAPManager: SKProductsRequestDelegate {
     }
     
     func requestDidFinish(_ request: SKRequest) {
-        guard let request = productsRequests.first(where: { $0 == request}) else {
+        guard let request = pendingRequests.first(where: { $0 == request}) else {
             assertionFailure()
             return
         }
+
         request.delegate = nil
-        productsRequests.remove(request)
+        pendingRequests.remove(request)
     }
 }
 
