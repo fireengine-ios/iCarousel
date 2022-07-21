@@ -104,6 +104,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         if (isBigSize()) {
             bigContentImageView.contentMode = .scaleAspectFill
             bigContentImageView.image = image
+            smallContentImageView.contentMode = .center
         } else {
             smallContentImageView.contentMode = .scaleAspectFill
             smallContentImageView.clipsToBounds = true
@@ -144,10 +145,12 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         if !isBigSize() {
             detailsLabel.text = detailsLabelText
             detailsLabel.isHidden = detailsLabelText.isEmpty
+            smallContentImageView.contentMode = .center
         } else {
             detailsLabel.isHidden = true
             gridCellDetailLabel.text = detailsLabelText
             gridCellDetailLabel.isHidden = detailsLabelText.isEmpty
+            smallContentImageView.contentMode = .scaleAspectFit
         }
 
         bigContentImageView.image = nil
@@ -162,8 +165,6 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             smallCellSelectionImageView.isHidden = true
             smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: wrappered.fileType)
         }
-        smallContentImageView.contentMode = .center
-        
         bigContentImageView.contentMode = .center
 
         separatorView.isHidden = isBigSize()

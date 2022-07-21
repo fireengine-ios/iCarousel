@@ -61,7 +61,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                                style: .default,
                                                tintColor: AppColor.tint.color,
                                                unselectedItemTintColor: AppColor.label.color,
-                                               barTintColor: AppColor.background.color)
+                                               barTintColor: AppColor.drawerBackground.color)
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: .Grid,
             availableSortTypes: baseSortTypes,
@@ -92,7 +92,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                                style: .default,
                                                tintColor: AppColor.tint.color,
                                                unselectedItemTintColor: AppColor.label.color,
-                                               barTintColor: AppColor.background.color)
+                                               barTintColor: AppColor.drawerBackground.color)
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: .Grid,
             availableSortTypes: baseSortTypes,
@@ -123,7 +123,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
             style: .default,
             tintColor: AppColor.tint.color,
             unselectedItemTintColor: AppColor.label.color,
-            barTintColor: AppColor.background.color
+            barTintColor: AppColor.drawerBackground.color
         )
         
         let gridListTopBarConfig = GridListTopBarConfig(
@@ -161,7 +161,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                                style: .default,
                                                tintColor: AppColor.tint.color,
                                                unselectedItemTintColor: AppColor.label.color,
-                                               barTintColor: AppColor.background.color)
+                                               barTintColor: AppColor.drawerBackground.color)
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: viewType,
             availableSortTypes: allFilesSortTypes,
@@ -199,7 +199,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                                style: .default,
                                                tintColor: AppColor.tint.color,
                                                unselectedItemTintColor: AppColor.label.color,
-                                               barTintColor: AppColor.background.color)
+                                               barTintColor: AppColor.drawerBackground.color)
 
         let sortedRule: SortedRules = status == .active ? .lastModifiedTimeDown : .timeDown
         let presenter = DocumentsGreedPresenter(sortedRule: sortedRule)

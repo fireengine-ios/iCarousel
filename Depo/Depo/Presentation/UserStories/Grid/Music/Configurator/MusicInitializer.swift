@@ -28,7 +28,7 @@ final class MusicInitializer {
                                                style: .default,
                                                tintColor: AppColor.tint.color,
                                                unselectedItemTintColor: AppColor.label.color,
-                                               barTintColor: AppColor.background.color)
+                                               barTintColor: AppColor.drawerBackground.color)
 
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: .Grid,
