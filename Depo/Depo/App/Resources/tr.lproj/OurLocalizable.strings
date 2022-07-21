@@ -2034,8 +2034,8 @@ then {11,99 TRY/Month}*/
 
 /*First {6 months} {6,99 TRY/Month}
 then {11,99 TRY/Month}*/
-"iap_intro_offer_pay_as_you_go" = "İlk %@ %@\nSonraki %@";
+"iap_intro_offer_pay_as_you_go" = "İlk %@ %@\nSonraki Aylar %@";
 
 /*First {6 months} {6,99 TRY}
 then {11,99 TRY/Month}*/
-"iap_intro_offer_pay_up_front" = "İlk %@ %@\nSonraki %@";
+"iap_intro_offer_pay_up_front" = "İlk %@ %@\nSonraki Aylar %@";

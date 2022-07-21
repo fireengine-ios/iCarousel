@@ -992,7 +992,7 @@
 "create_story_pop_up_message" = "Povestea e creată";
 "create_story_path_to_story" = "Poze & Video > Poveștile Mele";
 "You can not share empty album" = "Nu poți partaja albumul gol";
-"etk_permission_description" = "";
+"etk_permission_description" = "Prin prezenta îmi dau consimțământul de a primi mesaje comerciale de e-mail pentru a fi informat cu privire la produsele și serviciile avansate ale Lifecell Bulut Çözümleri A.Ş cu excepția cazului în care și până când nu solicit altfel, în conformitate cu Legea Nr.6563 și cu alte legislații aplicabile.";
 "global_permission_title_label" = "Permisiune Globală de Date";
 "global_permission_description" = "Îmi exprim consimțământul ca datele mele personale să fie împărtășite de către Turkcell cu operatorii cu care cooperează, pentru a putea beneficia de avantajele serviciilor oferite de operatorii respectivi, în ce privește lifebox.";
 "terms_and_use_etk_checkbox_header" = "Mesaj Electronic Comercial";
@@ -2008,12 +2008,12 @@
 
 /*Free for {3 months}
 then {11,99 TRY/Month}*/
-"iap_intro_offer_free_trial" = "";
+"iap_intro_offer_free_trial" = "Primul %@ gratuit\nLunile următoare %@";
 
 /*First {6 months} {6,99 TRY/Month}
 then {11,99 TRY/Month}*/
-"iap_intro_offer_pay_as_you_go" = "";
+"iap_intro_offer_pay_as_you_go" = "Primul %@ %@\nLunile următoare %@";
 
 /*First {6 months} {6,99 TRY}
 then {11,99 TRY/Month}*/
-"iap_intro_offer_pay_up_front" = "";
+"iap_intro_offer_pay_up_front" = "Primul %@ %@\nLunile următoare %@";
