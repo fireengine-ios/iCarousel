@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18122"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20037"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,14 +14,14 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="14"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dT6-JG-J0F">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dT6-JG-J0F">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
                     <color key="backgroundColor" name="darkBorder"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="weO-Tg-wIw"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fzp-vs-7OY">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fzp-vs-7OY">
                     <rect key="frame" x="0.0" y="13" width="375" height="1"/>
                     <color key="backgroundColor" name="darkBorder"/>
                     <constraints>
@@ -29,7 +29,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" name="settingsSeperatorColor"/>
+            <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Fzp-vs-7OY" secondAttribute="trailing" id="1kI-bB-KjQ"/>
                 <constraint firstItem="dT6-JG-J0F" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="XWp-K6-BY1"/>
@@ -45,10 +45,10 @@
     </objects>
     <resources>
         <namedColor name="darkBorder">
-            <color red="0.59215700626373291" green="0.59215700626373291" blue="0.59215700626373291" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.59200000762939453" green="0.59200000762939453" blue="0.59200000762939453" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="settingsSeperatorColor">
-            <color red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="0.30000001192092896" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

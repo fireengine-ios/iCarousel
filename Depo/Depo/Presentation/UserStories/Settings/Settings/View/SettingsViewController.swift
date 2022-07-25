@@ -92,7 +92,13 @@ final class SettingsViewController: BaseViewController {
     
     private func setupTableView() {
         tableView.register(nibCell: SettingsTableViewCell.self)
-        tableView.backgroundColor = .clear
+        tableView.addRoundedShadows(cornerRadius: 16,
+                                    shadowColor: AppColor.viewShadowLight.cgColor,
+                                    opacity: 0.8, radius: 6.0)
+        tableView.backgroundColor = AppColor.primaryBackground.color
+
+        tableView.layer.masksToBounds = true
+        tableView.clipsToBounds = true
     }
     
     private func setupTableViewSubview() {
@@ -100,7 +106,7 @@ final class SettingsViewController: BaseViewController {
             let header = userInfoSubView.view
             userInfoSubView.actionsDelegate = self
             tableView.tableHeaderView = header
-            header?.heightAnchor.constraint(equalToConstant: 201).activate()
+            header?.heightAnchor.constraint(equalToConstant: 190).activate()
             
             setupTableViewFooter()
             return
@@ -110,12 +116,8 @@ final class SettingsViewController: BaseViewController {
     }
 
     private func setupTableViewFooter() {
-        var footerHeight: CGFloat = 110
+        let footerHeight: CGFloat = 190
         let footer = SettingFooterView.initFromNib()
-        if ((Device.locale == "tr" || Device.locale == "en") && self.isChatbotShown && !RouteRequests.isBillo) {
-            footer.leaveFeedbackButton.isHidden = true
-            footerHeight = 65
-        }
         footer.delegate = self
         tableView.tableFooterView = footer
         footer.heightAnchor.constraint(equalToConstant: footerHeight).activate()
@@ -130,7 +132,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 14
+        return 16
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -235,8 +237,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             } else {
                 output.goToTermsAndPolicy()
             }
-        case .logout:
-            output.onLogout()
         case .chatbot:
             if let delegate = settingsDelegate {
                 delegate.goToChatbot()
@@ -431,7 +431,7 @@ extension SettingsViewController: UIImagePickerControllerDelegate {
 
 //MARK: - SettingFooterViewDelegate
 extension SettingsViewController: SettingFooterViewDelegate {
-    func didTappedLeaveFeedback() {
-        RouterVC().showFeedbackSubView()
+    func didTappedLogOut() {
+        output.onLogout()
     }
 }

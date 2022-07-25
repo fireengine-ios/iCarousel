@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,9 +20,9 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="M7i-kt-Jaj">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="M7i-kt-Jaj">
+                    <rect key="frame" x="8" y="0.0" width="359" height="667"/>
+                    <color key="backgroundColor" name="primaryBackground"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="AeJ-9b-l3Y"/>
                         <outlet property="delegate" destination="-1" id="9ib-Xd-QUG"/>
@@ -32,10 +32,10 @@
             <viewLayoutGuide key="safeArea" id="2EM-su-Qne"/>
             <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="M7i-kt-Jaj" secondAttribute="trailing" id="9oR-9J-diX"/>
+                <constraint firstAttribute="trailing" secondItem="M7i-kt-Jaj" secondAttribute="trailing" constant="8" id="9oR-9J-diX"/>
                 <constraint firstAttribute="bottom" secondItem="M7i-kt-Jaj" secondAttribute="bottom" id="Lcu-qq-RWK"/>
                 <constraint firstItem="M7i-kt-Jaj" firstAttribute="top" secondItem="2EM-su-Qne" secondAttribute="top" id="P8Z-fN-pp0"/>
-                <constraint firstItem="M7i-kt-Jaj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hKh-jC-yLe"/>
+                <constraint firstItem="M7i-kt-Jaj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="hKh-jC-yLe"/>
             </constraints>
             <point key="canvasLocation" x="32.5" y="53.5"/>
         </view>
@@ -44,8 +44,5 @@
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="groupTableViewBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
     </resources>
 </document>

@@ -9,19 +9,14 @@
 import Foundation
 import UIKit
 
-enum DarkModeOption: Int, CaseIterable {
-    case dark = 0
-    case light = 1
-    case defaultOption = 2
-}
 
-protocol DarkModeOptionsViewDelegate: AnyObject {
+protocol dDarkModeOptionsViewDelegate: AnyObject {
     func appearanceDidSelected(with option: DarkModeOption)
 }
 
 class DarkModeOptionsView: UIView, NibInit {
 
-    weak var delegate: DarkModeOptionsViewDelegate?
+    weak var delegate: dDarkModeOptionsViewDelegate?
     lazy var storageVars: StorageVars = factory.resolve()
     private var checkmarkImage: UIImage? { UIImage(named: "backupCheckmark")?.withRenderingMode(.alwaysOriginal) }
 

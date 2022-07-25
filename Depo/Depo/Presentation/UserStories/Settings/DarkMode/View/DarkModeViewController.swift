@@ -33,7 +33,7 @@ class DarkModeViewController: BaseViewController {
 
     private lazy var darkModeSwitchView: UIView = {
         let darkModeSwitchView = DarkModeOptionsView.initFromNib()
-        darkModeSwitchView.delegate = self
+//        darkModeSwitchView.delegate = self
         return darkModeSwitchView
     }()
 
@@ -49,20 +49,3 @@ class DarkModeViewController: BaseViewController {
     }
 }
 
-//MARK: -DarkModeOptionsViewDelegate
-extension DarkModeViewController: DarkModeOptionsViewDelegate {
-    func appearanceDidSelected(with option: DarkModeOption) {
-        if #available(iOS 13.0, *) {
-            switch option {
-            case .dark:
-                storageVars.isDarkModeEnabled = true
-            case .light:
-                storageVars.isDarkModeEnabled = false
-            case .defaultOption:
-                storageVars.isDarkModeEnabled = nil
-            }
-            let appDelegate = UIApplication.shared.delegate as? AppDelegate
-            appDelegate?.overrideApplicationThemeStyle()
-        }
-    }
-}

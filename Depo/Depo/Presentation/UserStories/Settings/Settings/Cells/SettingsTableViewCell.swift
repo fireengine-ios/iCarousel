@@ -17,9 +17,13 @@ class SettingsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
+        self.backgroundColor = AppColor.secondaryBackground.color
         titleLabel.textColor = AppColor.label.color
-        titleLabel.font = .appFont(.regular, size: 18)
+        titleLabel.font = .appFont(.regular, size: 14)
+        
+//        self.addRoundedShadows(cornerRadius: 16,
+//                               shadowColor: AppColor.viewShadowLight.cgColor,
+//                               opacity: 0.8, radius: 6.0)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -30,7 +34,7 @@ class SettingsTableViewCell: UITableViewCell {
             backgroundColor = ColorConstants.selectedCellBlueColor
         } else {
             titleLabel.font = .appFont(.regular, size: 18)
-            backgroundColor = AppColor.primaryBackground.color
+            backgroundColor = AppColor.secondaryBackground.color
         }
         //backgroundView = bgView
         // Configure the view for the selected state
