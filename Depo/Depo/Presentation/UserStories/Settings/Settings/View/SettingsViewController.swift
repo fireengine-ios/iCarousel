@@ -95,10 +95,7 @@ final class SettingsViewController: BaseViewController {
         tableView.addRoundedShadows(cornerRadius: 16,
                                     shadowColor: AppColor.viewShadowLight.cgColor,
                                     opacity: 0.8, radius: 6.0)
-        tableView.backgroundColor = AppColor.primaryBackground.color
-
-        tableView.layer.masksToBounds = true
-        tableView.clipsToBounds = true
+        tableView.backgroundColor = .clear
     }
     
     private func setupTableViewSubview() {
@@ -106,7 +103,8 @@ final class SettingsViewController: BaseViewController {
             let header = userInfoSubView.view
             userInfoSubView.actionsDelegate = self
             tableView.tableHeaderView = header
-            header?.heightAnchor.constraint(equalToConstant: 190).activate()
+            header?.backgroundColor = .clear
+            header?.heightAnchor.constraint(equalToConstant: 180).activate()
             
             setupTableViewFooter()
             return
@@ -118,6 +116,7 @@ final class SettingsViewController: BaseViewController {
     private func setupTableViewFooter() {
         let footerHeight: CGFloat = 190
         let footer = SettingFooterView.initFromNib()
+        footer.backgroundColor = .clear
         footer.delegate = self
         tableView.tableFooterView = footer
         footer.heightAnchor.constraint(equalToConstant: footerHeight).activate()
@@ -139,23 +138,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         return SettingHeaderView.viewFromNib()
     }
     
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        guard section == cellTypes.count - 1 else {
-            return nil
-        }
-        return SettingHeaderView.viewFromNib()
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cellTypes[section].count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 62
+        return 50
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -250,6 +238,27 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 output.goToDarkMode()
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cornerRadius = 16
+        var corners: UIRectCorner = []
+
+        if indexPath.row == 0 {
+            corners.update(with: .topLeft)
+            corners.update(with: .topRight)
+        }
+
+        if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+            corners.update(with: .bottomLeft)
+            corners.update(with: .bottomRight)
+        }
+
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = UIBezierPath(roundedRect: cell.bounds,
+                                      byRoundingCorners: corners,
+                                      cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)).cgPath
+        cell.layer.mask = maskLayer
     }
     
     // MARK: - UITableViewDelegate & UITableViewDataSource Private Utility Methods
