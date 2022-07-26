@@ -49,7 +49,7 @@ final class SettingFooterView: UIView, NibInit {
             
             newValue.layer.cornerRadius = newValue.frame.height * 0.5
             newValue.setTitleColor(AppColor.label.color, for: [])
-            newValue.layer.borderColor = AppColor.label.cgColor
+            newValue.layer.borderColor = AppColor.tbMatikBlurColor.cgColor
             newValue.layer.borderWidth = 1.0
             newValue.titleLabel?.font = .appFont(.medium, size: 16.0)
         }
