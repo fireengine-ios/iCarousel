@@ -30,7 +30,7 @@ final class SettingFooterView: UIView, NibInit {
     weak var darkModeDelegate: DarkModeOptionsViewDelegate?
     
     lazy var storageVars: StorageVars = factory.resolve()
-    private var checkmarkImage: UIImage? { UIImage(named: "iconDisplaySelected")?.withRenderingMode(.alwaysOriginal) }
+    private var checkmarkImage: UIImage? { Image.iconDisplaySelected.image }
     
     @IBOutlet var selectionButtons: [UIButton]!
 
