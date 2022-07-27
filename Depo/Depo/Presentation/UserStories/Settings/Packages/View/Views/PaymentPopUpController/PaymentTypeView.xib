@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina3_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,26 +23,26 @@
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XHE-Zs-PmF">
-                    <rect key="frame" x="52.5" y="47.5" width="50" height="50"/>
+                    <rect key="frame" x="37" y="47.5" width="50" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="hwu-Cd-7t6"/>
                         <constraint firstAttribute="width" constant="50" id="ugD-2Q-TbV"/>
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sih-o5-1vI" userLabel="right View">
-                    <rect key="frame" x="138" y="21" width="163" height="104"/>
+                    <rect key="frame" x="107" y="21" width="194" height="104"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="R96-6s-rlq">
-                            <rect key="frame" x="7" y="0.0" width="156" height="58"/>
+                            <rect key="frame" x="7" y="0.0" width="187" height="58"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VcX-Zv-NIh">
-                                    <rect key="frame" x="0.0" y="0.0" width="156" height="33.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="187" height="33.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQf-tr-pkc">
-                                    <rect key="frame" x="0.0" y="37.5" width="156" height="20.5"/>
+                                    <rect key="frame" x="0.0" y="37.5" width="187" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -79,11 +79,11 @@
                 <constraint firstItem="9TD-Qs-vA4" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="E5W-it-6jA"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Sih-o5-1vI" secondAttribute="bottom" constant="20" id="KvH-vN-OP5"/>
                 <constraint firstItem="Sih-o5-1vI" firstAttribute="top" secondItem="9TD-Qs-vA4" secondAttribute="bottom" constant="20" id="MJf-oq-CT3"/>
-                <constraint firstItem="XHE-Zs-PmF" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" multiplier="0.5" id="Tmt-Rj-rRV"/>
+                <constraint firstItem="XHE-Zs-PmF" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" multiplier="0.4" id="Tmt-Rj-rRV"/>
                 <constraint firstItem="9TD-Qs-vA4" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.8" id="UEy-fX-0BJ"/>
                 <constraint firstItem="9TD-Qs-vA4" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="VRD-u4-MFy"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Sih-o5-1vI" secondAttribute="trailing" constant="8" id="eXs-Ur-Uev"/>
-                <constraint firstItem="Sih-o5-1vI" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" multiplier="1.42" id="fVf-1r-a2c"/>
+                <constraint firstItem="Sih-o5-1vI" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" multiplier="1.32" id="fVf-1r-a2c"/>
                 <constraint firstItem="XHE-Zs-PmF" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="yRh-Pa-GfP"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

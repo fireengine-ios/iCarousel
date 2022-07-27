@@ -3,6 +3,16 @@
     {
       "filename" : "iconCancelUnborder.pdf",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "iconCancelUnborder-1.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

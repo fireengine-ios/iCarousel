@@ -60,9 +60,11 @@ final class SubscriptionPlan {
     let store: String
     let packageStatus: String?
     let gracePeriodEndDate: String
+    let introductoryPrice: String?
 
     init(name: String,
          price: String,
+         introductoryPrice: String?,
          type: SubscriptionPlanType,
          model: Any,
          quota: Int64,
@@ -76,6 +78,7 @@ final class SubscriptionPlan {
          gracePeriodEndDate: String) {
         self.name = name
         self.price = price
+        self.introductoryPrice = introductoryPrice
         self.type = type
         self.model = model
         self.quota = quota

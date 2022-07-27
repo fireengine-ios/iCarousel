@@ -12,9 +12,9 @@ final class SecretAnswerView: UIView, NibInit {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.textColor = UIColor.lrTealish
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.text = TextConstants.userProfileSecretQuestionAnswer
+            newValue.textColor = AppColor.label.color
+            newValue.font = UIFont.appFont(.light, size: 14.0)
+            newValue.text = "  " + TextConstants.userProfileSecretQuestionAnswer + "  "
             newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
         }
@@ -22,7 +22,7 @@ final class SecretAnswerView: UIView, NibInit {
     
     @IBOutlet weak var answerTextField: QuickDismissPlaceholderTextField! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            newValue.font = UIFont.appFont(.regular, size: 14.0)
             newValue.textColor = AppColor.blackColor.color
             newValue.borderStyle = .none
             newValue.backgroundColor = AppColor.primaryBackground.color
@@ -34,7 +34,7 @@ final class SecretAnswerView: UIView, NibInit {
     @IBOutlet private weak var errorLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.textOrange
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 15)
+            newValue.font = UIFont.appFont(.regular, size: 12.0)
             newValue.isHidden = true
             newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
@@ -43,8 +43,10 @@ final class SecretAnswerView: UIView, NibInit {
     
     @IBOutlet private weak var lineView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.placeholderGrayColor
             newValue.isOpaque = true
+            newValue.layer.borderWidth = 1.0
+            newValue.layer.borderColor = AppColor.darkTextAndLightGray.cgColor
+            newValue.layer.cornerRadius = 8.0
         }
     }
     

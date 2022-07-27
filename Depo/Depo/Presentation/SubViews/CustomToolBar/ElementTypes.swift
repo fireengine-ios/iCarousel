@@ -724,9 +724,9 @@ enum ElementTypes {
         case .share:
             return Image.iconShare.image
         case .info:
-            return UIImage(named: "InfoButtonIcon")
+            return Image.iconInfo.image
         case .edit:
-            return UIImage(named: "EditButtonIcon")
+            return Image.iconEdit.image
         case .delete:
             return UIImage(named: "DeleteShareButton")
         case .emptyTrashBin:
@@ -734,7 +734,7 @@ enum ElementTypes {
         case .deleteDeviceOriginal:
             return Image.iconDelete.image
         case .move:
-            return UIImage(named: "MoveButtonIcon")
+            return Image.iconMove.image
         case .sync:
             return Image.iconBackupBordered.image
         case .syncInProgress:
@@ -746,7 +746,7 @@ enum ElementTypes {
         case .undetermend:
             return nil
         case .rename:
-            return nil
+            return Image.iconEdit.image
         case .removeAlbum:
             return UIImage(named: "DeleteShareButton")
         case .moveToTrash:

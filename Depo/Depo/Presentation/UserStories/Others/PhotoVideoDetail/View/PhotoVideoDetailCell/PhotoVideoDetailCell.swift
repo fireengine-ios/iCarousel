@@ -191,7 +191,8 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         }
     }
 
-    func addTextSelectionInteraction(_ data: ImageTextSelectionData) {
+    func addTextSelectionInteraction(_ data: ImageTextSelectionData?) {
+        guard let data = data else { return }
         removeCurrentTextSelectionInteraction()
 
         let interaction = ImageTextSelectionInteraction(data: data)

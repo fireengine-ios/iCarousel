@@ -19,9 +19,10 @@ final class ProductSubscriptionPeriodFormatter {
     }()
 
     /// Formats a given `SKProductSubscriptionPeriod` into a localized period string
-    func string(from period: SKProductSubscriptionPeriod) -> String? {
+    func string(from period: SKProductSubscriptionPeriod, numberOfPeriods: Int = 1) -> String? {
         // Return "Month" / "Day" / etc.. for a single units
-        if period.numberOfUnits == 1 {
+        let numberOfUnits = period.numberOfUnits * numberOfPeriods
+        if numberOfUnits == 1 {
             return period.unit.localized
         }
 
@@ -30,13 +31,13 @@ final class ProductSubscriptionPeriodFormatter {
         dateComponents.calendar = Calendar.current
         switch period.unit {
         case .day:
-            dateComponents.setValue(period.numberOfUnits, for: .day)
+            dateComponents.setValue(numberOfUnits, for: .day)
         case .week:
-            dateComponents.setValue(period.numberOfUnits, for: .weekOfMonth)
+            dateComponents.setValue(numberOfUnits, for: .weekOfMonth)
         case .month:
-            dateComponents.setValue(period.numberOfUnits, for: .month)
+            dateComponents.setValue(numberOfUnits, for: .month)
         case .year:
-            dateComponents.setValue(period.numberOfUnits, for: .year)
+            dateComponents.setValue(numberOfUnits, for: .year)
         @unknown default:
             debugLog("unknown SKProduct.PeriodUnit \(self)")
             return nil

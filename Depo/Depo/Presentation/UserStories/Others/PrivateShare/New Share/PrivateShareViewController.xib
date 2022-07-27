@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -68,7 +69,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" name="background"/>
                     <constraints>
                         <constraint firstItem="r31-rU-1Pz" firstAttribute="leading" secondItem="ui7-rz-0Ps" secondAttribute="leading" constant="16" id="5pM-eO-baq"/>
                         <constraint firstAttribute="trailing" secondItem="r31-rU-1Pz" secondAttribute="trailing" constant="16" id="AVQ-cb-lAR"/>
@@ -90,7 +91,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" name="background"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2mQ-Dg-Efm" secondAttribute="trailing" id="ADc-im-Fxp"/>
                 <constraint firstItem="2mQ-Dg-Efm" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="72" id="BSe-jp-cqI"/>
@@ -110,6 +111,9 @@
         </view>
     </objects>
     <resources>
+        <namedColor name="background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

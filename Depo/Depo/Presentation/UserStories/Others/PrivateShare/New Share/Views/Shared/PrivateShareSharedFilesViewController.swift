@@ -27,6 +27,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     @IBOutlet weak var collectionViewBarContainer: UIView!
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var headerStackView: UIStackView!
     
     private let cardsContainer = CardsContainerView()
     private var contentSliderTopY: NSLayoutConstraint?
@@ -36,6 +37,12 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         let bar = GridListTopBar.initFromXib()
         bar.delegate = self
         return bar
+    }()
+    
+    private lazy var countView: GridListCountView  = {
+        let view = GridListCountView.initFromNib()
+        view.delegate = self
+        return view
     }()
     
     private(set) var shareType: PrivateShareType = .byMe
@@ -127,6 +134,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     private func setupCollectionViewBar() {
         gridListBar.view.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.contentInset.bottom = 60
         collectionViewBarContainer.addSubview(gridListBar.view)
         gridListBar.view.pinToSuperviewEdges()
         
@@ -189,6 +197,14 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
             threeDotsManager.showActions(for: shareType, sender: self)
         }
     }
+    
+    func configureCountView(isShown: Bool) {
+        countView.removeFromSuperview()
+        
+        if isShown {
+            headerStackView.addArrangedSubview(countView)
+        }
+    }
 }
 
 
@@ -215,6 +231,7 @@ extension PrivateShareSharedFilesViewController: GridListTopBarDelegate {
 extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollectionManagerDelegate {
     func didStartSelection(selected: Int) {
         updateBars(isSelecting: true)
+        configureCountView(isShown: true)
     }
     
     func didEndSelection() {
@@ -224,6 +241,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     func didChangeSelection(selectedItems: [WrapData]) {
         show(selectedItemsCount: selectedItems.count)
         bottomBarManager.update(for: selectedItems)
+        countView.setCountLabel(with: selectedItems.count)
         
         if selectedItems.isEmpty {
             bottomBarManager.hide()
@@ -271,6 +289,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             }
             if isSelecting {
                 let selectedItems = self.collectionManager.selectedItems()
+                self.countView.setCountLabel(with: selectedItems.count)
                 self.show(selectedItemsCount: selectedItems.count)
                 if !selectedItems.isEmpty {
                     self.bottomBarManager.show()
@@ -337,6 +356,7 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
     
     func stopModeSelected() {
         collectionManager.endSelection()
+        configureCountView(isShown: false)
     }
     
     func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
@@ -430,5 +450,11 @@ extension PrivateShareSharedFilesViewController: CardsContainerViewDelegate {
                 self.collectionView.contentOffset = CGPoint(x: 0.0, y: -self.collectionView.contentInset.top)
             }
         })
+    }
+}
+
+extension PrivateShareSharedFilesViewController: GridListCountViewDelegate {
+    func cancelSelection() {
+        stopModeSelected()
     }
 }
