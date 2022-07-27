@@ -51,4 +51,14 @@ final class PeopleCollectionViewCell: UICollectionViewCell {
         thumbnail.cancelLoadRequest()
         thumbnail.image = nil
     }
+    
+    func configure(with item: WrapData) {
+        titleLabel.text = item.name
+        switch item.patchToPreview {
+        case.remoteUrl(let url):
+            thumbnail.loadImageData(with: url, animated: true)
+        default:
+            return
+        }
+    }
 }

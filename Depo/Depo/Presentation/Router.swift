@@ -523,6 +523,10 @@ class RouterVC: NSObject {
     func gallery() -> PhotoVideoController {
         return PhotoVideoController.initFromNib()
     }
+    
+    func forYou() -> HeaderContainingViewController.ChildViewController {
+        return ForYouInitilizer.initializeViewController(with: "ForYou")
+    }
 
     // MARK: Music
     

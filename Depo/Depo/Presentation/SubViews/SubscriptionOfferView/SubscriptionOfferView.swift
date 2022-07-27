@@ -56,7 +56,7 @@ final class SubscriptionOfferView: UIView, NibInit {
     @IBOutlet private weak var priceLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0
-            newValue.textColor = AppColor.marineTwoAndWhite.color!
+            newValue.textColor = AppColor.marineTwoAndWhite.color
         }
     }
     

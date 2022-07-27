@@ -96,10 +96,10 @@ final class TabBarConfigurator {
         
         let list: [HeaderContainingViewController.ChildViewController] = [
             router.gallery(),
-            EmptyViewController(),
+            router.forYou(),
             syncContactsVC,
             router.segmentedFiles,
-            EmptyViewController2()
+            EmptyViewController()
         ]
         return list.map {
             let headerContaining = HeaderContainingViewController(child: $0)
@@ -114,13 +114,5 @@ private class EmptyViewController: UIViewController, HeaderContainingViewControl
         super.viewDidLoad()
         let router = RouterVC()
         router.pushViewController(viewController: router.peopleListController())
-    }
-}
-
-private class EmptyViewController2: UIViewController, HeaderContainingViewControllerChild {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let router = RouterVC()
-        router.pushViewController(viewController: router.placesListController())
     }
 }
