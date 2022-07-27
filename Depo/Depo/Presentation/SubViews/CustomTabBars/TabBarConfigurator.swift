@@ -112,7 +112,5 @@ final class TabBarConfigurator {
 private class EmptyViewController: UIViewController, HeaderContainingViewControllerChild {
     override func viewDidLoad() {
         super.viewDidLoad()
-        let router = RouterVC()
-        router.pushViewController(viewController: router.peopleListController())
     }
 }
