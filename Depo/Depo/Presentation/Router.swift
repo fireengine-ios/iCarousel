@@ -968,12 +968,6 @@ class RouterVC: NSObject {
         return ChatbotViewController()
     }
 
-    // MARK: Chatbot
-
-    var darkMode: UIViewController {
-        return DarkModeInitializer.initializeViewController()
-    }
-
     // MARK: Auto Upload
 
     var autoUpload: UIViewController {

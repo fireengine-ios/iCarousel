@@ -107,6 +107,9 @@ enum Image: String, AppImage {
     case popupIconDelete
     case popupIconQuestion
     
+    
+    /// User  Info
+    case iconDisplaySelected
     ///  UiSwitch
     case gradientSwitch
 }

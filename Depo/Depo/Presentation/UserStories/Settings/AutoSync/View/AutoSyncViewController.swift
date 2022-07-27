@@ -77,17 +77,23 @@ final class AutoSyncViewController: BaseViewController, NibInit {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         let text = TextConstants.autoSyncFromSettingsTitle as NSString
         
-        let attributedString = NSMutableAttributedString(string: text as String,
-                                                         attributes: [.font: UIFont.appFont(.regular, size: 14.0),
-                                                                      .foregroundColor: AppColor.label.color])
+        if text.contains(" \n\n") {
+            let attributedString = NSMutableAttributedString(string: text as String,
+                                                             attributes: [.font: UIFont.appFont(.regular, size: 14.0),
+                                                                          .foregroundColor: AppColor.label.color])
+            
+            let range = text.range(of: " \n\n")
+            let startRange = (text as NSString).range(of: " \n\n")
+            let endRange = NSRange(location: range.location + range.length, length: text.length - range.location - range.length)
+            
+            attributedString.addAttribute(.font, value: UIFont.appFont(.medium, size: 14.0), range: startRange )
+            attributedString.addAttribute(.font, value: UIFont.appFont(.regular, size: 12.0), range: endRange )
+            titleLabel.attributedText = attributedString
+        } else {
+            titleLabel.text = "\(text)"
+        }
         
-        let range = text.range(of: " \n\n")
-        let startRange = (text as NSString).range(of: " \n\n")
-        let endRange = NSRange(location: range.location + range.length, length: text.length - range.location - range.length)
-        
-        attributedString.addAttribute(.font, value: UIFont.appFont(.medium, size: 14.0), range: startRange )
-        attributedString.addAttribute(.font, value: UIFont.appFont(.regular, size: 12.0), range: endRange )
-        titleLabel.attributedText = attributedString
+
         
         titleLabel.textColor = AppColor.label.color
         titleLabel.lineBreakMode = .byWordWrapping
