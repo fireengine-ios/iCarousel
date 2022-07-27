@@ -21,35 +21,39 @@ final class UserInfoSubViewViewController: ViewController, NibInit {
     
     @IBOutlet private weak var userNameLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 16)
+            newValue.font = UIFont.appFont(.medium, size: 14.0)
         }
     }
     
     @IBOutlet private weak var userEmailLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 15)
+            newValue.font = UIFont.appFont(.medium, size: 12.0)
         }
     }
     
     @IBOutlet private weak var userPhoneNumber: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 15)
+            newValue.font = UIFont.appFont(.medium, size: 12.0)
         }
     }
     
-    @IBOutlet private weak var statusLabel: UILabel! {
-        willSet {
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 15)
-            newValue.textColor = AppColor.blackColor.color
-            if output.isPremiumUser {
-                newValue.text = TextConstants.premiumUser
-            } else if output.isMiddleUser {
-                newValue.text = TextConstants.midUser
-            } else {
-                newValue.text = TextConstants.standardUser
-            }
-        }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        headerBackView.addRoundedShadows(cornerRadius: 16,
+                                   shadowColor: AppColor.viewShadowLight.cgColor,
+                                   opacity: 0.8, radius: 6.0)
+        headerBackView.backgroundColor = AppColor.secondaryBackground.color
+        
     }
+    
+    
+    @IBAction private func accountDetailsButton(_ sender: Any) {
+        actionsDelegate?.upgradeButtonPressed(quotaInfo: output.quotaInfo)
+
+    }
+    
     
     @IBOutlet private weak var premiumButton: GradientPremiumButton! {
         willSet {
@@ -59,44 +63,8 @@ final class UserInfoSubViewViewController: ViewController, NibInit {
         }
     }
     
-    @IBOutlet private weak var accountDetailsButton: UIButton!
+    @IBOutlet private weak var headerBackView: UIView!
     
-    @IBOutlet private weak var accountDetailsLabel: UILabel! {
-        willSet {
-            newValue.textColor = ColorConstants.blueColor
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 15)
-            newValue.text = TextConstants.accountDetails
-        }
-    }
-    
-    @IBOutlet private weak var userStorrageInformationLabel: UILabel! {
-        willSet {
-            newValue.textColor = ColorConstants.blueColor
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
-        }
-    }
-    
-    @IBOutlet private weak var usedAsPercentageLabel: UILabel! {
-        willSet {
-            newValue.textColor = ColorConstants.blueColor
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
-        }
-    }
-    
-    @IBOutlet private weak var circleProgressView: CircleProgressView! {
-        willSet {
-            newValue.backWidth = NumericConstants.usageInfoProgressWidth
-            newValue.progressWidth = NumericConstants.usageInfoProgressWidth
-            newValue.progressRatio = 0.0
-            newValue.progressColor = .lrTealish
-            newValue.backColor = UIColor.lrTealish
-                .withAlphaComponent(NumericConstants.progressViewBackgroundColorAlpha)
-            newValue.set(progress: 0, withAnimation: true)
-            newValue.backWidth = 8
-            newValue.progressWidth = 8
-            newValue.layoutIfNeeded()
-        }
-    }
     
     @IBOutlet private weak var avatarImageView: UIImageView! {
         willSet {
@@ -113,11 +81,11 @@ final class UserInfoSubViewViewController: ViewController, NibInit {
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        accountDetailsButton.accessibilityLabel = accountDetailsLabel.text
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
         
         avatarImageView.layer.cornerRadius = avatarImageView.bounds.height * 0.5
     }
@@ -150,10 +118,7 @@ extension UserInfoSubViewViewController {
 
 // MARK: Interface Builder Actions
 extension UserInfoSubViewViewController {
-    
-    @IBAction private func onEditUserInformationButton(_ sender: UIButton) {
-        actionsDelegate?.upgradeButtonPressed(quotaInfo: output.quotaInfo)
-    }
+
     
     @IBAction private func onUpdateUserPhoto() {
         actionsDelegate?.changePhotoPressed(quotaInfo: output.quotaInfo)
@@ -211,15 +176,6 @@ extension UserInfoSubViewViewController: UserInfoSubViewViewInput {
         else {
             return
         }
-        let usagePercentage = CGFloat(usedBytes) / CGFloat(quotaBytes)
-        circleProgressView.set(progress: usagePercentage, withAnimation: true)
-
-        let percentage = (usagePercentage  * 100).rounded(.toNearestOrAwayFromZero)
-        usedAsPercentageLabel.text = String(format: TextConstants.usagePercentage, percentage)
-
-        let quotaString = quotaBytes.bytesString
-        let usedString = usedBytes.bytesString
-        userStorrageInformationLabel.text = String(format: TextConstants.leftSpace, usedString, quotaString)
     }
     
     // MARK: - UserInfoSubViewViewInput Private Utility Methods

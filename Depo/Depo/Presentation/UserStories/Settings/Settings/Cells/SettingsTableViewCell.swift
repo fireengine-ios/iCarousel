@@ -17,20 +17,21 @@ class SettingsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
+        self.backgroundColor = AppColor.secondaryBackground.color
         titleLabel.textColor = AppColor.label.color
-        titleLabel.font = .appFont(.regular, size: 18)
+        titleLabel.font = .appFont(.regular, size: 14)
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         //let bgView = UIView()
         if (selected) {
-            titleLabel.font = .appFont(.bold, size: 18)
+            titleLabel.font = .appFont(.regular, size: 14)
             backgroundColor = ColorConstants.selectedCellBlueColor
         } else {
-            titleLabel.font = .appFont(.regular, size: 18)
-            backgroundColor = AppColor.primaryBackground.color
+            titleLabel.font = .appFont(.regular, size: 14)
+            backgroundColor = AppColor.secondaryBackground.color
         }
         //backgroundView = bgView
         // Configure the view for the selected state

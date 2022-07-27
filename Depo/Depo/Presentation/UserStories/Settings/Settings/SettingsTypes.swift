@@ -19,7 +19,6 @@ enum SettingsTypes: Int {
     case helpAndSupport
     case termsAndPolicy
     case darkMode
-    case logout
     case chatbot
     
     var text: String {
@@ -36,7 +35,6 @@ enum SettingsTypes: Int {
         case .helpAndSupport: return TextConstants.settingsViewCellHelp
         case .darkMode: return localized(.darkModePageTitle)
         case .termsAndPolicy: return TextConstants.settingsViewCellPrivacyAndTerms
-        case .logout: return TextConstants.settingsViewCellLogout
         case .chatbot: return TextConstants.chatbotMenuTitle
         }
     }
@@ -44,7 +42,7 @@ enum SettingsTypes: Int {
     static let allSectionOneTypes = [autoUpload, periodicContactSync, faceImage]
     static let allSectionTwoTypes = [connectAccounts, permissions]
     static let allSectionThreeTypes = [myActivities, passcode, security]
-    static var allSectionFourTypes = [helpAndSupport, termsAndPolicy, .darkMode, logout]
+    static var allSectionFourTypes = [helpAndSupport, termsAndPolicy, .darkMode]
 
     static func prepareTypes(hasPermissions: Bool, isInvitationShown: Bool, isChatbotShown: Bool) -> [[SettingsTypes]] {
         var result = [[SettingsTypes]]()

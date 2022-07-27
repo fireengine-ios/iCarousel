@@ -9139,29 +9139,6 @@
 		F0A091382812D970009EFF9E /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A091362812D970009EFF9E /* Credentials.swift */; };
 		F0A091392812D970009EFF9E /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A091362812D970009EFF9E /* Credentials.swift */; };
 		F0A0913A2812D970009EFF9E /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A091362812D970009EFF9E /* Credentials.swift */; };
-		F0B64C65275D4F2500002F66 /* DarkModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C63275D4F2500002F66 /* DarkModeViewController.swift */; };
-		F0B64C66275D4F2500002F66 /* DarkModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C63275D4F2500002F66 /* DarkModeViewController.swift */; };
-		F0B64C67275D4F2500002F66 /* DarkModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C63275D4F2500002F66 /* DarkModeViewController.swift */; };
-		F0B64C69275D4F2500002F66 /* DarkModeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0B64C64275D4F2500002F66 /* DarkModeViewController.xib */; };
-		F0B64C6A275D4F2500002F66 /* DarkModeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0B64C64275D4F2500002F66 /* DarkModeViewController.xib */; };
-		F0B64C6B275D4F2500002F66 /* DarkModeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0B64C64275D4F2500002F66 /* DarkModeViewController.xib */; };
-		F0B64C6C275D4F2500002F66 /* DarkModeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0B64C64275D4F2500002F66 /* DarkModeViewController.xib */; };
-		F0B64C6F275DDF4900002F66 /* DarkModeConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C6E275DDF4800002F66 /* DarkModeConfigurator.swift */; };
-		F0B64C70275DDF4900002F66 /* DarkModeConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C6E275DDF4800002F66 /* DarkModeConfigurator.swift */; };
-		F0B64C71275DDF4900002F66 /* DarkModeConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C6E275DDF4800002F66 /* DarkModeConfigurator.swift */; };
-		F0B64C72275DDF4900002F66 /* DarkModeConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C6E275DDF4800002F66 /* DarkModeConfigurator.swift */; };
-		F0B64C74275DDFA700002F66 /* DarkModeInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C73275DDFA700002F66 /* DarkModeInitializer.swift */; };
-		F0B64C75275DDFA700002F66 /* DarkModeInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C73275DDFA700002F66 /* DarkModeInitializer.swift */; };
-		F0B64C76275DDFA700002F66 /* DarkModeInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C73275DDFA700002F66 /* DarkModeInitializer.swift */; };
-		F0B64C77275DDFA700002F66 /* DarkModeInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C73275DDFA700002F66 /* DarkModeInitializer.swift */; };
-		F0B64C7E275DEBD000002F66 /* DarkModeOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C7D275DEBD000002F66 /* DarkModeOptionsView.swift */; };
-		F0B64C7F275DEBD000002F66 /* DarkModeOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C7D275DEBD000002F66 /* DarkModeOptionsView.swift */; };
-		F0B64C80275DEBD000002F66 /* DarkModeOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C7D275DEBD000002F66 /* DarkModeOptionsView.swift */; };
-		F0B64C81275DEBD000002F66 /* DarkModeOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C7D275DEBD000002F66 /* DarkModeOptionsView.swift */; };
-		F0B64C83275DEBEA00002F66 /* DarkModeOptionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0B64C82275DEBEA00002F66 /* DarkModeOptionsView.xib */; };
-		F0B64C84275DEBEA00002F66 /* DarkModeOptionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0B64C82275DEBEA00002F66 /* DarkModeOptionsView.xib */; };
-		F0B64C85275DEBEA00002F66 /* DarkModeOptionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0B64C82275DEBEA00002F66 /* DarkModeOptionsView.xib */; };
-		F0B64C86275DEBEA00002F66 /* DarkModeOptionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0B64C82275DEBEA00002F66 /* DarkModeOptionsView.xib */; };
 		F0BF840A27A7E802000F7F4E /* PublicShareSaveErrorStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BF840927A7E802000F7F4E /* PublicShareSaveErrorStatus.swift */; };
 		F0BF840B27A7E802000F7F4E /* PublicShareSaveErrorStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BF840927A7E802000F7F4E /* PublicShareSaveErrorStatus.swift */; };
 		F0BF840C27A7E802000F7F4E /* PublicShareSaveErrorStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BF840927A7E802000F7F4E /* PublicShareSaveErrorStatus.swift */; };
@@ -9188,7 +9165,6 @@
 		F0CDA6952775187F0026C1C4 /* DragAndDropHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CDA6932775187F0026C1C4 /* DragAndDropHelper.swift */; };
 		F0CDA6962775187F0026C1C4 /* DragAndDropHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CDA6932775187F0026C1C4 /* DragAndDropHelper.swift */; };
 		F0CDA6972775187F0026C1C4 /* DragAndDropHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CDA6932775187F0026C1C4 /* DragAndDropHelper.swift */; };
-		F0CDA6AB277605F50026C1C4 /* DarkModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C63275D4F2500002F66 /* DarkModeViewController.swift */; };
 		F0CF433D27B67A2E0061DC79 /* PublicShareDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0441F3727B5147E000E94EB /* PublicShareDownloader.swift */; };
 		F0CF434127B67A2F0061DC79 /* PublicShareDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0441F3727B5147E000E94EB /* PublicShareDownloader.swift */; };
 		F0CF434327B67A310061DC79 /* PublicShareDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0441F3727B5147E000E94EB /* PublicShareDownloader.swift */; };
@@ -12062,12 +12038,6 @@
 		F09279A32886CA4400874ADD /* AlertFilesCancelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesCancelView.swift; sourceTree = "<group>"; };
 		F09279A82886CA8A00874ADD /* AlertFilesCancelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertFilesCancelView.xib; sourceTree = "<group>"; };
 		F0A091362812D970009EFF9E /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
-		F0B64C63275D4F2500002F66 /* DarkModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeViewController.swift; sourceTree = "<group>"; };
-		F0B64C64275D4F2500002F66 /* DarkModeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DarkModeViewController.xib; sourceTree = "<group>"; };
-		F0B64C6E275DDF4800002F66 /* DarkModeConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeConfigurator.swift; sourceTree = "<group>"; };
-		F0B64C73275DDFA700002F66 /* DarkModeInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeInitializer.swift; sourceTree = "<group>"; };
-		F0B64C7D275DEBD000002F66 /* DarkModeOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeOptionsView.swift; sourceTree = "<group>"; };
-		F0B64C82275DEBEA00002F66 /* DarkModeOptionsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DarkModeOptionsView.xib; sourceTree = "<group>"; };
 		F0BF840927A7E802000F7F4E /* PublicShareSaveErrorStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicShareSaveErrorStatus.swift; sourceTree = "<group>"; };
 		F0C447282848C85F00129228 /* AllFilesTypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFilesTypeCollectionViewCell.swift; sourceTree = "<group>"; };
 		F0C447292848C85F00129228 /* AllFilesTypeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllFilesTypeCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -19688,7 +19658,6 @@
 		CE3EB30D1FC7F512000B70D6 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				F0B64C5E275D4E3000002F66 /* DarkMode */,
 				3A0B421B266F7D5900FD8F3C /* Chatbot */,
 				3A6D27BF26400A7800A7BBE2 /* Invitation */,
 				CF7145A024B597A700D83E60 /* ContactSync */,
@@ -21554,35 +21523,6 @@
 			path = SecurityInfoPopup;
 			sourceTree = "<group>";
 		};
-		F0B64C5E275D4E3000002F66 /* DarkMode */ = {
-			isa = PBXGroup;
-			children = (
-				F0B64C62275D4EF000002F66 /* View */,
-				F0B64C6D275DDF2200002F66 /* Configurator */,
-			);
-			path = DarkMode;
-			sourceTree = "<group>";
-		};
-		F0B64C62275D4EF000002F66 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				F0B64C63275D4F2500002F66 /* DarkModeViewController.swift */,
-				F0B64C64275D4F2500002F66 /* DarkModeViewController.xib */,
-				F0B64C7D275DEBD000002F66 /* DarkModeOptionsView.swift */,
-				F0B64C82275DEBEA00002F66 /* DarkModeOptionsView.xib */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		F0B64C6D275DDF2200002F66 /* Configurator */ = {
-			isa = PBXGroup;
-			children = (
-				F0B64C6E275DDF4800002F66 /* DarkModeConfigurator.swift */,
-				F0B64C73275DDFA700002F66 /* DarkModeInitializer.swift */,
-			);
-			path = Configurator;
-			sourceTree = "<group>";
-		};
 		F0D2975A27F6E18E0082C768 /* AppleGoogleLoginService */ = {
 			isa = PBXGroup;
 			children = (
@@ -22402,7 +22342,6 @@
 				98792DDB22FD486F000A77E5 /* SpotifyImportedTracksViewController.xib in Resources */,
 				8C0E90321FDEBDFF00789C91 /* ActivityTimelineTableBackView.xib in Resources */,
 				8C0E90331FDEBDFF00789C91 /* PasscodeEnterViewController.xib in Resources */,
-				F0B64C69275D4F2500002F66 /* DarkModeViewController.xib in Resources */,
 				8C0E90341FDEBDFF00789C91 /* CollectionViewCellForVideo.xib in Resources */,
 				8C208654228D4B2E000BEDAD /* PhotoVideoCell.xib in Resources */,
 				8C0E90351FDEBDFF00789C91 /* MusicBar.xib in Resources */,
@@ -22437,7 +22376,6 @@
 				7373EC26235EE0F100B150BA /* InstaPickCampaignViewController.xib in Resources */,
 				927E508721E8AAE600E44CC0 /* InstaPickCard.xib in Resources */,
 				07C6D4F6284CFA5900502C28 /* ProgressTabBarCard.xib in Resources */,
-				F0B64C83275DEBEA00002F66 /* DarkModeOptionsView.xib in Resources */,
 				8C0E90401FDEBDFF00789C91 /* TurkcellSaturaMedIta.ttf in Resources */,
 				8C0E90411FDEBDFF00789C91 /* GridListTopBar.xib in Resources */,
 				B5AB5B7321F9B040003AABB4 /* InstagramAccountConnectionCell.xib in Resources */,
@@ -22916,7 +22854,6 @@
 				CE784DA122A685FB00662219 /* LargeFullOfQuotaPopUp.xib in Resources */,
 				CE784DA922A685FB00662219 /* ActivityTimelineTableBackView.xib in Resources */,
 				CF7146DF24B597A900D83E60 /* DeleteDuplicatesMainView.xib in Resources */,
-				F0B64C6B275D4F2500002F66 /* DarkModeViewController.xib in Resources */,
 				985FFB6C255C1FD9001AA845 /* FileMetaInfoView.xib in Resources */,
 				F0C447302848C85F00129228 /* AllFilesTypeCollectionViewCell.xib in Resources */,
 				982319BA24F3A1E700FD16E2 /* HSLView.xib in Resources */,
@@ -22958,7 +22895,6 @@
 				9823197824F3A1E600FD16E2 /* PreparedFiltersView.xib in Resources */,
 				CE784DD522A685FB00662219 /* FacebookAccountConnectionCell.xib in Resources */,
 				0711889B27FAF44000F512A1 /* TabBar.xcassets in Resources */,
-				F0B64C85275DEBEA00002F66 /* DarkModeOptionsView.xib in Resources */,
 				CF71472124B597AA00D83E60 /* ContactListHeader.xib in Resources */,
 				7373EC27235EE0F100B150BA /* InstaPickCampaignViewController.xib in Resources */,
 				98185BAA248A709E0013929C /* WarningPopupController.xib in Resources */,
@@ -23291,7 +23227,6 @@
 				CF8B699423CBC9D70021B021 /* RegistrationScreen.xib in Resources */,
 				3A0CCF252642CA87002E811D /* InvitationCollectionReusableView.xib in Resources */,
 				CF8B699523CBC9D70021B021 /* EmailVerifiedPopUp.xib in Resources */,
-				F0B64C84275DEBEA00002F66 /* DarkModeOptionsView.xib in Resources */,
 				CF8B699723CBC9D70021B021 /* ActivityTimelineTimeCell.xib in Resources */,
 				982319C424F3A1E700FD16E2 /* AdjustmentParameterSliderView.xib in Resources */,
 				F013FA8A28059150004B9BB8 /* SecurityInfoWarningPopup.xib in Resources */,
@@ -23334,7 +23269,6 @@
 				CF8B69D823CBC9D70021B021 /* InstaPickCard.xib in Resources */,
 				CF8B69D923CBC9D70021B021 /* TurkcellSaturaMedIta.ttf in Resources */,
 				CF8B69DC23CBC9D70021B021 /* GridListTopBar.xib in Resources */,
-				F0B64C6A275D4F2500002F66 /* DarkModeViewController.xib in Resources */,
 				CF8B69DD23CBC9D70021B021 /* InstagramAccountConnectionCell.xib in Resources */,
 				98231A1E24F3A1E700FD16E2 /* SelectionMenuCell.xib in Resources */,
 				CF8B69DF23CBC9D70021B021 /* CollectionViewCellForPhoto.xib in Resources */,
@@ -23692,7 +23626,6 @@
 				89E3409624747CC000EB68C3 /* PeopleCollectionViewCell.xib in Resources */,
 				89DCC5D62403A99900488F1F /* SubscriptionOfferView.xib in Resources */,
 				988BA1C92559248C0086E4BE /* PrivateShareDurationView.xib in Resources */,
-				F0B64C6C275D4F2500002F66 /* DarkModeViewController.xib in Resources */,
 				CF8B717C23CBCA280021B021 /* CollectionViewCellForVideo.xib in Resources */,
 				F0C447312848C85F00129228 /* AllFilesTypeCollectionViewCell.xib in Resources */,
 				CF8B718023CBCA280021B021 /* CustomScrollIndicator.xib in Resources */,
@@ -23734,7 +23667,6 @@
 				CF8B71AA23CBCA280021B021 /* TurkcellSaturaMedIta.ttf in Resources */,
 				CF8B71AF23CBCA280021B021 /* GoogleService-Info-ent.plist in Resources */,
 				0711889C27FAF44000F512A1 /* TabBar.xcassets in Resources */,
-				F0B64C86275DEBEA00002F66 /* DarkModeOptionsView.xib in Resources */,
 				CF8B71B323CBCA280021B021 /* PremiumInfoCard.xib in Resources */,
 				CF8B71B823CBCA280021B021 /* SuggestionTableViewCell.xib in Resources */,
 				9808B3192553DEBD002B0032 /* PrivateShareViewController.xib in Resources */,
@@ -25314,7 +25246,6 @@
 				CE61D1B82045947C001D01DC /* SharedConstants.swift in Sources */,
 				8C0E8D181FDEBDFF00789C91 /* AccountType.swift in Sources */,
 				8C0E8D191FDEBDFF00789C91 /* InfoButtonCellProtocol.swift in Sources */,
-				F0B64C65275D4F2500002F66 /* DarkModeViewController.swift in Sources */,
 				98B0488B259314750011DAEB /* PartialInfo.m in Sources */,
 				8C0E8D1A1FDEBDFF00789C91 /* Mail.swift in Sources */,
 				CE92456A206E0910000C7791 /* InfinityRotater.swift in Sources */,
@@ -25673,7 +25604,6 @@
 				8C0E8DE31FDEBDFF00789C91 /* VisualMusicPlayerInteractorOutput.swift in Sources */,
 				9808B30F2553DEBD002B0032 /* PrivateShareViewController.swift in Sources */,
 				8C0E8DE41FDEBDFF00789C91 /* UserProfileInteractorOutput.swift in Sources */,
-				F0B64C74275DDFA700002F66 /* DarkModeInitializer.swift in Sources */,
 				8C0E8DE51FDEBDFF00789C91 /* IntroducePresenter.swift in Sources */,
 				B56FBB352122C85D004F4A59 /* TermsOfUseInteractorOutput.swift in Sources */,
 				8C0E8DE61FDEBDFF00789C91 /* CreateStoryService.swift in Sources */,
@@ -26143,7 +26073,6 @@
 				CE3E4D10201B69A200173045 /* PVViewerController.swift in Sources */,
 				8C0E8EF21FDEBDFF00789C91 /* IAPManager.swift in Sources */,
 				CE23A0FB205FF5AF0048267D /* Images.swift in Sources */,
-				F0B64C7E275DEBD000002F66 /* DarkModeOptionsView.swift in Sources */,
 				8C0E8EF31FDEBDFF00789C91 /* UserInfoSubViewViewController.swift in Sources */,
 				A74ADA7923A9F0FD007DD192 /* CarouselPagerDataSource.swift in Sources */,
 				8C0E8EF41FDEBDFF00789C91 /* UserInfoSubViewModuleInput.swift in Sources */,
@@ -26472,7 +26401,6 @@
 				07DB93C52860B46900D5CACF /* IAPIntroEligibilityStatus.swift in Sources */,
 				CF71460424B597A800D83E60 /* ContactDetailCell.swift in Sources */,
 				B50B4A6A220C27C20056FC86 /* SocialAccountRemoveConnectionCell.swift in Sources */,
-				F0B64C6F275DDF4900002F66 /* DarkModeConfigurator.swift in Sources */,
 				8CD2B3B11FE7B3BD00280547 /* UIButton+Color.swift in Sources */,
 				A20B356E21B823D000A5E4F2 /* FaceImageItemsDataSource.swift in Sources */,
 				8C0E8F851FDEBDFF00789C91 /* SelectNameConfigurator.swift in Sources */,
@@ -27082,7 +27010,6 @@
 				CE78480122A685FB00662219 /* Bool+Init.swift in Sources */,
 				CE78480222A685FB00662219 /* Router.swift in Sources */,
 				CE78480322A685FB00662219 /* AugmentedRealityItem.swift in Sources */,
-				F0B64C71275DDF4900002F66 /* DarkModeConfigurator.swift in Sources */,
 				3A134C522645476500CFC736 /* ScreenConstants.swift in Sources */,
 				98A86D7F23A7721B00438225 /* HiddenPhotosThreeDotMenuManager.swift in Sources */,
 				8C1E5BE622CB8C33008FDA02 /* ScrollBarView.swift in Sources */,
@@ -28402,7 +28329,6 @@
 				8C1E5BE322CB8C29008FDA02 /* ThresholdBlockService.swift in Sources */,
 				73A183472359B1A10095719F /* CampaignCardDesigner.swift in Sources */,
 				F013FA90280591DF004B9BB8 /* SecurityInfoWarningPopup.swift in Sources */,
-				F0B64C76275DDFA700002F66 /* DarkModeInitializer.swift in Sources */,
 				07585D64280D7E69001B8E8D /* PhotoVideoController+ContentType.swift in Sources */,
 				CE784B9B22A685FB00662219 /* SplashInteractorInput.swift in Sources */,
 				CF71472724B597AA00D83E60 /* ContactSyncOperationResultController.swift in Sources */,
@@ -28471,7 +28397,6 @@
 				98231A0E24F3A1E700FD16E2 /* SelectionMenuController.swift in Sources */,
 				CE784BC122A685FB00662219 /* PromoView.swift in Sources */,
 				CE784BC222A685FB00662219 /* InstapickAnalyze.swift in Sources */,
-				F0B64C80275DEBD000002F66 /* DarkModeOptionsView.swift in Sources */,
 				CE784BC322A685FB00662219 /* AuthorityType.swift in Sources */,
 				B51805F0234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */,
 				73D723EE231D08D0006AE835 /* PaymentModels.swift in Sources */,
@@ -28568,7 +28493,6 @@
 				CE784C0722A685FB00662219 /* SelectNamePresenter.swift in Sources */,
 				CE784C0822A685FB00662219 /* PVViewerController.swift in Sources */,
 				CEEFB8DB2361C64700200A7F /* AnalyzeHistoryEmptyCell.swift in Sources */,
-				F0B64C67275D4F2500002F66 /* DarkModeViewController.swift in Sources */,
 				B527CF8F2420C66E00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift in Sources */,
 				CE784C0922A685FB00662219 /* BaseCardView.swift in Sources */,
 				9823198424F3A1E700FD16E2 /* AdjustView.swift in Sources */,
@@ -29057,7 +28981,6 @@
 				CF8B642523CBC9D70021B021 /* MyStorageInteractor.swift in Sources */,
 				B5DD3D69250F830F00AFF934 /* MTIVignetteFilter.swift in Sources */,
 				CF8B642623CBC9D70021B021 /* ServerValueError.swift in Sources */,
-				F0B64C7F275DEBD000002F66 /* DarkModeOptionsView.swift in Sources */,
 				CF8B642723CBC9D70021B021 /* TermsAndPolicyViewController.swift in Sources */,
 				CF8B642823CBC9D70021B021 /* HomePageModuleInput.swift in Sources */,
 				CF8B642923CBC9D70021B021 /* GSMCodeModel.swift in Sources */,
@@ -29447,7 +29370,6 @@
 				CF8B655023CBC9D70021B021 /* SavingAttemptsCounterByUnigueUserID.swift in Sources */,
 				CF8B655123CBC9D70021B021 /* FaceImageItemsModuleOutput.swift in Sources */,
 				981617A42578BA5F009F1C31 /* FirebaseAnalyticsDementions.swift in Sources */,
-				F0B64C70275DDF4900002F66 /* DarkModeConfigurator.swift in Sources */,
 				CF8B655223CBC9D70021B021 /* RegistrationRouterInput.swift in Sources */,
 				CF8B655323CBC9D70021B021 /* PaymentModels.swift in Sources */,
 				CFA9D6D22562062D00C8F25D /* DismissKeyboardScrollView.swift in Sources */,
@@ -29608,7 +29530,6 @@
 				0305A32523D5C3B5004D1EC7 /* HiddenPhotosBottomBarManager.swift in Sources */,
 				CF8B65C723CBC9D70021B021 /* URL+Video.swift in Sources */,
 				CF8B65C823CBC9D70021B021 /* PhoneVerificationViewInput.swift in Sources */,
-				F0B64C66275D4F2500002F66 /* DarkModeViewController.swift in Sources */,
 				CF8B65C923CBC9D70021B021 /* SplitIpadViewContoller.swift in Sources */,
 				CF8B65CA23CBC9D70021B021 /* InstagramService.swift in Sources */,
 				CF8B65CB23CBC9D70021B021 /* LocationManager.swift in Sources */,
@@ -30391,7 +30312,6 @@
 				07C6D4D3284B43D100502C28 /* BaseTabBarCard.swift in Sources */,
 				CF8B680D23CBC9D70021B021 /* DropboxStatusValue.swift in Sources */,
 				07E8469B27C104C400B3AFA5 /* ItemGroupAnnotationView.swift in Sources */,
-				F0B64C75275DDFA700002F66 /* DarkModeInitializer.swift in Sources */,
 				CF8B680E23CBC9D70021B021 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */,
 				CF7146E324B597A900D83E60 /* DeleteDuplicatesHeader.swift in Sources */,
 				CF8B680F23CBC9D70021B021 /* CreateStoryPreviewViewIO.swift in Sources */,
@@ -30580,7 +30500,6 @@
 				CF8B6B4823CBCA280021B021 /* Router.swift in Sources */,
 				CF8B6B4923CBCA280021B021 /* AugmentedRealityItem.swift in Sources */,
 				CF8B6B4A23CBCA280021B021 /* ScrollBarView.swift in Sources */,
-				F0B64C72275DDF4900002F66 /* DarkModeConfigurator.swift in Sources */,
 				3A134C532645476500CFC736 /* ScreenConstants.swift in Sources */,
 				CF8B6B4B23CBCA280021B021 /* ValidationResults.swift in Sources */,
 				CF8B6B4C23CBCA280021B021 /* UIButton+Properties.swift in Sources */,
@@ -31900,7 +31819,6 @@
 				CF8B6F2623CBCA280021B021 /* SearchViewInteractorOutput.swift in Sources */,
 				CF8B6F2723CBCA280021B021 /* ThresholdBlockService.swift in Sources */,
 				F013FA91280591DF004B9BB8 /* SecurityInfoWarningPopup.swift in Sources */,
-				F0B64C77275DDFA700002F66 /* DarkModeInitializer.swift in Sources */,
 				07585D65280D7E69001B8E8D /* PhotoVideoController+ContentType.swift in Sources */,
 				CF8B6F2823CBCA280021B021 /* CampaignCardDesigner.swift in Sources */,
 				CF8B6F2923CBCA280021B021 /* SplashInteractorInput.swift in Sources */,
@@ -31969,7 +31887,6 @@
 				98231A0F24F3A1E700FD16E2 /* SelectionMenuController.swift in Sources */,
 				CF8B6F5523CBCA280021B021 /* InstapickAnalyze.swift in Sources */,
 				CF8B6F5623CBCA280021B021 /* AuthorityType.swift in Sources */,
-				F0B64C81275DEBD000002F66 /* DarkModeOptionsView.swift in Sources */,
 				CF8B6F5723CBCA280021B021 /* PaymentModels.swift in Sources */,
 				CF8B6F5823CBCA280021B021 /* SecurityQuestionView.swift in Sources */,
 				CF8B6F5923CBCA280021B021 /* FileInfoInteractorOutput.swift in Sources */,
@@ -32292,7 +32209,6 @@
 				CF8B704623CBCA280021B021 /* OTPViewRouterInput.swift in Sources */,
 				0780AB5327916834000760D9 /* RemoteTextRecognitionModels.swift in Sources */,
 				CF8B704723CBCA280021B021 /* OTPViewConfigurator.swift in Sources */,
-				F0CDA6AB277605F50026C1C4 /* DarkModeViewController.swift in Sources */,
 				CF8B704823CBCA280021B021 /* OTPViewInitializer.swift in Sources */,
 				077EEFA026E759CC004D0D74 /* BaseEmailVerificationPopUp.swift in Sources */,
 				CF8B704923CBCA280021B021 /* FileManager+Size.swift in Sources */,

@@ -107,6 +107,8 @@ enum AppColor {
     case popUpBackground
     case blackAndWhite
     case viewShadowLight
+    case borderLightGray
+    case tbMatikBlurColor
 
     var color: UIColor {
         guard let uiColor = UIColor(named: String(describing: self)) else {
