@@ -8950,10 +8950,10 @@
 		CFEB1FFD25304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEB1FF925304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift */; };
 		D0A9A44EC3C58B0D7CBF8A1A /* Pods_LifeboxFileProviderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD15AE640AD597AB4E12CDEE /* Pods_LifeboxFileProviderUI.framework */; };
 		D910F773C4C0ED4D155C904A /* Pods_LifeboxShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194FFE25625A80F2C0B29404 /* Pods_LifeboxShared.framework */; };
-		E7426F6C286DDDDF00666A79 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7426F6B286DDDDF00666A79 /* GradientSwitch.swift */; };
-		E7426F6D286DDDDF00666A79 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7426F6B286DDDDF00666A79 /* GradientSwitch.swift */; };
-		E7426F6E286DDDDF00666A79 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7426F6B286DDDDF00666A79 /* GradientSwitch.swift */; };
-		E7426F6F286DDDDF00666A79 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7426F6B286DDDDF00666A79 /* GradientSwitch.swift */; };
+		E7426F74286E559D00666A79 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7426F73286E559D00666A79 /* GradientSwitch.swift */; };
+		E7426F75286E559D00666A79 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7426F73286E559D00666A79 /* GradientSwitch.swift */; };
+		E7426F76286E559D00666A79 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7426F73286E559D00666A79 /* GradientSwitch.swift */; };
+		E7426F77286E559D00666A79 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7426F73286E559D00666A79 /* GradientSwitch.swift */; };
 		F00D7DDF2851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */; };
 		F00D7DE02851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */; };
 		F00D7DE12851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */; };
@@ -11965,7 +11965,7 @@
 		E5F0F170EDB776DE7E055F18 /* TermsAndServicesViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesViewController.swift; sourceTree = "<group>"; };
 		E61A7EDD38B6D6D880916FFF /* Pods-LifeTech-LifeboxFileProviderUI.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech-LifeboxFileProviderUI.enterprise.xcconfig"; path = "Target Support Files/Pods-LifeTech-LifeboxFileProviderUI/Pods-LifeTech-LifeboxFileProviderUI.enterprise.xcconfig"; sourceTree = "<group>"; };
 		E70E4E2532914C44F1B96A96 /* TermsAndServicesViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesViewInput.swift; sourceTree = "<group>"; };
-		E7426F6B286DDDDF00666A79 /* GradientSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientSwitch.swift; sourceTree = "<group>"; };
+		E7426F73286E559D00666A79 /* GradientSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientSwitch.swift; sourceTree = "<group>"; };
 		E7F9CA614F6A1DD5CFEFFAFD /* UserInfoSubViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewRouterInput.swift; sourceTree = "<group>"; };
 		E829DBD8933CDFA043AFECB2 /* SelectNamePresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNamePresenter.swift; sourceTree = "<group>"; };
 		E9F6A1C9F3695D2974AEF4DA /* SettingsInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsInteractorOutput.swift; sourceTree = "<group>"; };
@@ -15664,7 +15664,7 @@
 			isa = PBXGroup;
 			children = (
 				7CD1F8D11F014EF90028F51A /* CustomSwitch.swift */,
-				E7426F6B286DDDDF00666A79 /* GradientSwitch.swift */,
+				E7426F73286E559D00666A79 /* GradientSwitch.swift */,
 			);
 			path = CustomSwitch;
 			sourceTree = "<group>";
@@ -24908,6 +24908,7 @@
 				CE292C1A21BE5DE9004FC745 /* PremiumPresenter.swift in Sources */,
 				F0D2977227FA336A0082C768 /* PasswordEnterPopup.swift in Sources */,
 				CE292C1B21BE5DE9004FC745 /* PremiumInteractor.swift in Sources */,
+				E7426F74286E559D00666A79 /* GradientSwitch.swift in Sources */,
 				CE292C1C21BE5DE9004FC745 /* PremiumInteractorOutput.swift in Sources */,
 				CE292C1D21BE5DE9004FC745 /* PremiumInteractorInput.swift in Sources */,
 				983A397C2409357700418F5E /* SubscriptionsPolicyView.swift in Sources */,
@@ -27046,6 +27047,7 @@
 				CE78481B22A685FB00662219 /* PasscodeEnterViewController.swift in Sources */,
 				CE78481D22A685FB00662219 /* UIImageView.swift in Sources */,
 				89E51D5522CA1126007A7DBC /* CreateStoryPreviewPresenter.swift in Sources */,
+				E7426F76286E559D00666A79 /* GradientSwitch.swift in Sources */,
 				4B857862233908B400F378AB /* SubjectDetailsViewController.swift in Sources */,
 				CE78481F22A685FB00662219 /* PHPhotoLibraryChangeObserver.swift in Sources */,
 				CE78482022A685FB00662219 /* UserProfileModuleInput.swift in Sources */,
@@ -30418,6 +30420,7 @@
 				98B04854259314750011DAEB /* AbstractHelper.m in Sources */,
 				CF8B685923CBC9D70021B021 /* PremiumViewController.swift in Sources */,
 				CF8B685A23CBC9D70021B021 /* FeedbackViewInteractorOutput.swift in Sources */,
+				E7426F75286E559D00666A79 /* GradientSwitch.swift in Sources */,
 				CF8B685B23CBC9D70021B021 /* FeedbackViewInteractor.swift in Sources */,
 				CF8B685C23CBC9D70021B021 /* FeedbackViewRouterInput.swift in Sources */,
 				CF8B685D23CBC9D70021B021 /* FeedbackViewRouter.swift in Sources */,
@@ -30536,6 +30539,7 @@
 				CF8B6B6423CBCA280021B021 /* SubjectDetailsViewController.swift in Sources */,
 				CF8B6B6623CBCA280021B021 /* PHPhotoLibraryChangeObserver.swift in Sources */,
 				CF8B6B6723CBCA280021B021 /* UserProfileModuleInput.swift in Sources */,
+				E7426F77286E559D00666A79 /* GradientSwitch.swift in Sources */,
 				CF8B6B6823CBCA280021B021 /* SettingsBundleHelper.swift in Sources */,
 				0305A35323D5C5DB004D1EC7 /* CoreDataMigrator.swift in Sources */,
 				CF8B6B6923CBCA280021B021 /* UIEdgeInsets+Extensions.swift in Sources */,

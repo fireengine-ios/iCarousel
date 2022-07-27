@@ -110,4 +110,6 @@ enum Image: String, AppImage {
     
     /// User  Info
     case iconDisplaySelected
+    ///  UiSwitch
+    case gradientSwitch
 }
