@@ -49,9 +49,8 @@ final class FileInfoPeopleView: UIView, NibInit, FileInfoPeopleViewProtocol {
     @IBOutlet private weak var enableFIRStackView: UIStackView!
     @IBOutlet private weak var enableFIRTextLabel: UILabel! {
         willSet {
-            newValue.text = TextConstants.fileInfoPeople
-            newValue.font = .TurkcellSaturaFont(size: 18)
-            newValue.textColor = ColorConstants.closeIconButtonColor
+            newValue.font = .appFont(.light, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
     

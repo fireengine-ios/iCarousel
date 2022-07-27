@@ -74,6 +74,10 @@ enum AppColor {
     
     // MARK: Face Image
     case mapCountBackground
+    
+    // MARK: For You
+    case forYouButton
+    case forYouFaceImageBackground
 
     
     // MARK: Legacy
