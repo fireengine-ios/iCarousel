@@ -91,6 +91,9 @@ final class GalleryCollectionViewLayout: UICollectionViewLayout {
 
     override func prepare() {
         guard let collectionView = self.collectionView, collectionView.numberOfSections > 0 else {
+            cache = [:]
+            headerCache = [:]
+            contentHeight = 0
             return
         }
 

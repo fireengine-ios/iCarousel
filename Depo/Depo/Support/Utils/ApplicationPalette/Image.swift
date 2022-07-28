@@ -41,6 +41,11 @@ enum Image: String, AppImage {
     case iconCopy
     case iconChangePhoto
     case iconChangePerson
+    case iconAll
+    case iconVideo
+    case iconGalleryPhoto
+    case iconBackupCheck
+    case iconBackupUncheck
     case iconEdit
     case iconInfo
     case iconMove

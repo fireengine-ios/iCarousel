@@ -64,6 +64,9 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     private var canShowDetail = true
     
+    private var category: QuickScrollCategory = .photosAndVideos
+    private var fileTypes: [FileType] = [.image, .video]
+    
     // MARK: - life cycle
     
     override func viewDidLoad() {
@@ -141,7 +144,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     // MARK: - setup
     
     private func performFetch() {
-        dataSource.setupOriginalPredicates(fileTypes: contentTypes.mappedToFileTypes()) { [weak self] in
+        dataSource.setupOriginalPredicates(fileTypes: fileTypes) { [weak self] in
             DispatchQueue.main.async {
                 self?.fetchAndReload()
 
@@ -412,10 +415,8 @@ extension PhotoVideoController: UIScrollViewDelegate {
                         endId = bottomAPIInfo.id
                     }
                     
-                    let category: QuickScrollCategory = .photosAndVideos
-                    debugLog("RangeAPI category \(category)")
-                    let fileTypes: [FileType] = [.image, .video]
-                    self.quickScrollService.requestListOfDateRange(startDate: topAPIInfo.date, endDate: bottomAPIInfo.date, startID: startId, endID: endId, category: category, pageSize: RequestSizeConstant.quickScrollRangeApiPageSize) { response in
+                    debugLog("RangeAPI category \(self.category)")
+                    self.quickScrollService.requestListOfDateRange(startDate: topAPIInfo.date, endDate: bottomAPIInfo.date, startID: startId, endID: endId, category: self.category, pageSize: RequestSizeConstant.quickScrollRangeApiPageSize) { response in
                         debugLog("RangeAPI response recieved")
                         switch response {
                         case .success(let quckScrollResponse):
@@ -423,7 +424,7 @@ extension PhotoVideoController: UIScrollViewDelegate {
                             debugLog("RangeAPI response count \(quckScrollResponse.size) \(quckScrollResponse.files.count)")
                             debugLog("RangeAPI first date \(quckScrollResponse.files.first?.metaDate) last date \(quckScrollResponse.files.last?.metaDate)")
                             self.dispatchQueue.async {
-                                MediaItemOperationsService.shared.updateRemoteItems(remoteItems: quckScrollResponse.files, fileTypes: fileTypes, topInfo: topAPIInfo, bottomInfo: bottomAPIInfo, completion: {
+                                MediaItemOperationsService.shared.updateRemoteItems(remoteItems: quckScrollResponse.files, fileTypes: self.fileTypes, topInfo: topAPIInfo, bottomInfo: bottomAPIInfo, completion: {
                                     debugLog("RangeAPI DB UPDATED")
                                     debugPrint("appended and updated")
                                 })
@@ -883,6 +884,32 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         ///delay for getting items from server
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.updateDB()
+        }
+    }
+    
+    func elementTypeChanged(type: ElementTypes) {
+        switch type {
+        case .galleryAll:
+            category = .photosAndVideos
+            fileTypes = [.image, .video]
+            collectionViewManager.viewType = .all
+            performFetch()
+        case .galleryPhotos:
+            category = .photos
+            fileTypes = [.image]
+            collectionViewManager.viewType = .all
+            performFetch()
+        case .galleryVideos:
+            category = .videos
+            fileTypes = [.video]
+            collectionViewManager.viewType = .all
+            performFetch()
+        case .gallerySync:
+            changeViewType(to: .synced)
+        case .galleryUnsync:
+            changeViewType(to: .unsynced)
+        default:
+            return
         }
     }
 }

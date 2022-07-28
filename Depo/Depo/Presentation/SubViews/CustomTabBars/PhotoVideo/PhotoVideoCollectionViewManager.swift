@@ -12,6 +12,7 @@ protocol PhotoVideoCollectionViewManagerDelegate: AnyObject {
     func openAutoSyncSettings()
     func openViewTypeMenu(sender: UIButton)
     func openUploadPhotos()
+    func threeDotsButtonTapped(_ button: UIButton?)
 }
 
 enum GalleryViewType: CaseIterable {
@@ -53,6 +54,7 @@ enum GalleryViewType: CaseIterable {
 final class PhotoVideoCollectionViewManager {
 
     private let emptyDataView = EmptyDataView.initFromNib()
+    private var moreButton = UIButton()
     
     private weak var collectionView: UICollectionView!
     private weak var delegate: PhotoVideoCollectionViewManagerDelegate?
@@ -82,17 +84,23 @@ final class PhotoVideoCollectionViewManager {
     func showEmptyDataViewIfNeeded(isShow: Bool) {
         guard isShow else {
             emptyDataView.removeFromSuperview()
+            moreButton.removeFromSuperview()
             return
         }
         
         emptyDataView.configure(viewType: viewType)
         emptyDataView.delegate = self
         
+        moreButton.frame = CGRect(x: collectionView.frame.width - 40, y: 13 , width: 24, height: 24)
+        moreButton.setImage(Image.iconThreeDotsHorizontal.image, for: .normal)
+        moreButton.addTarget(self, action: #selector(threeDotsButtonTapped(_:)), for: .primaryActionTriggered)
+        
         guard emptyDataView.superview == nil else {
             return
         }
         
         collectionView.addSubview(emptyDataView)
+        collectionView.addSubview(moreButton)
         
         emptyDataView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -110,6 +118,10 @@ final class PhotoVideoCollectionViewManager {
         collectionView.register(nibCell: PhotoVideoCell.self)
         collectionView.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self, kind: UICollectionView.elementKindSectionHeader)
         collectionView.isPrefetchingEnabled = false
+    }
+    
+    @objc private func threeDotsButtonTapped(_ button: UIButton?) {
+        delegate?.threeDotsButtonTapped(button)
     }
 }
 
