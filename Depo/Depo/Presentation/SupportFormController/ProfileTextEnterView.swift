@@ -23,7 +23,7 @@ class ProfileTextEnterView: UIView {
 
     let subtitleLabel: UILabel = {
         let newValue = UILabel()
-        newValue.textColor = AppColor.borderDarkGrayAndLightGray.color
+        newValue.textColor = AppColor.borderColor.color
         newValue.font = .appFont(.regular, size: 14.0)
         newValue.isOpaque = true
         newValue.isHidden = true
@@ -33,7 +33,7 @@ class ProfileTextEnterView: UIView {
     
     let textField: QuickDismissPlaceholderTextField = {
         let newValue = QuickDismissPlaceholderTextField()
-        newValue.textColor = AppColor.borderDarkGrayAndLightGray.color
+        newValue.textColor = AppColor.borderColor.color
         newValue.font = .appFont(.regular, size: 14.0)
         newValue.borderStyle = .none
         newValue.isOpaque = true
@@ -52,7 +52,7 @@ class ProfileTextEnterView: UIView {
         return newValue
     }()
     
-    var underlineColor = AppColor.borderDarkGrayAndLightGray.color {
+    var underlineColor = AppColor.borderColor.color {
         didSet {
             underlineLayer.backgroundColor = underlineColor.cgColor
         }
@@ -147,7 +147,7 @@ class ProfileTextEnterView: UIView {
         underlineLayer.cornerRadius = 8
         underlineLayer.borderWidth = 1.0
         underlineLayer.backgroundColor = AppColor.primaryBackground.cgColor
-        underlineLayer.borderColor = AppColor.borderDarkGrayAndLightGray.cgColor
+        underlineLayer.borderColor = AppColor.borderColor.cgColor
         
         self.bringSubviewToFront(titleLabel)
         

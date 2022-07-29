@@ -4,7 +4,7 @@ final class ProfileTextViewEnterView: UIView {
     
     let titleLabel: UILabel = {
         let newValue = UILabel()
-        newValue.textColor = AppColor.borderDarkGrayAndLightGray.color
+        newValue.textColor = AppColor.borderColor.color
         newValue.font = .appFont(.regular, size: 14.0)
         newValue.backgroundColor = AppColor.primaryBackground.color
         newValue.isOpaque = true
@@ -13,7 +13,7 @@ final class ProfileTextViewEnterView: UIView {
     
     let subtitleLabel: UILabel = {
         let newValue = UILabel()
-        newValue.textColor = AppColor.borderDarkGrayAndLightGray.color
+        newValue.textColor = AppColor.borderColor.color
         newValue.font = .appFont(.regular, size: 14.0)
         newValue.backgroundColor = AppColor.primaryBackground.color
         newValue.isOpaque = true
@@ -24,7 +24,7 @@ final class ProfileTextViewEnterView: UIView {
     
     let textView: IntrinsicTextView = {
         let newValue = IntrinsicTextView()
-        newValue.textColor = AppColor.borderDarkGrayAndLightGray.color
+        newValue.textColor = AppColor.borderColor.color
         newValue.font = .appFont(.regular, size: 14.0)
         newValue.backgroundColor = AppColor.primaryBackground.color
         newValue.isOpaque = true
@@ -48,7 +48,7 @@ final class ProfileTextViewEnterView: UIView {
         return newValue
     }()
     
-    var underlineColor = AppColor.borderDarkGrayAndLightGray.color {
+    var underlineColor = AppColor.borderColor.color {
         didSet {
             underlineLayer.backgroundColor = underlineColor.cgColor
         }

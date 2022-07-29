@@ -14,7 +14,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let dayLayer: CALayer = {
         let newValue = CALayer()
         
-        newValue.backgroundColor = AppColor.borderDarkGrayAndLightGray.color.cgColor
+        newValue.backgroundColor = AppColor.borderColor.color.cgColor
         
         return newValue
     }()
@@ -22,7 +22,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let monthLayer: CALayer = {
         let newValue = CALayer()
         
-        newValue.backgroundColor = AppColor.borderDarkGrayAndLightGray.color.cgColor
+        newValue.backgroundColor = AppColor.borderColor.color.cgColor
         
         return newValue
     }()
@@ -30,7 +30,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let yearLayer: CALayer = {
         let newValue = CALayer()
         
-        newValue.backgroundColor = AppColor.borderDarkGrayAndLightGray.color.cgColor
+        newValue.backgroundColor = AppColor.borderColor.color.cgColor
         
         return newValue
     }()
@@ -38,7 +38,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let monthTextField: UITextField = {
         let newValue = UITextField()
         
-        newValue.textColor = AppColor.borderDarkGrayAndLightGray.color
+        newValue.textColor = AppColor.borderColor.color
         newValue.font = .appFont(.regular, size: 14.0)
         newValue.tintColor = UIColor.clear
         newValue.isUserInteractionEnabled = false
@@ -49,7 +49,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let yearTextField: UITextField = {
         let newValue = UITextField()
         
-        newValue.textColor = AppColor.borderDarkGrayAndLightGray.color
+        newValue.textColor = AppColor.borderColor.color
         newValue.font = .appFont(.regular, size: 14.0)
         newValue.tintColor = UIColor.clear
         newValue.isUserInteractionEnabled = false

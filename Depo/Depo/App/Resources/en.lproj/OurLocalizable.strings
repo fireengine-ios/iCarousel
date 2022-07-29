@@ -1966,7 +1966,6 @@
 "DELETE_ACC_POP_UP_BTN_CONTINUE" = "Continue";
 "DELETE_ACC_POP_UP_BTN_CONFIRM" = "Confirm";
 "DELETE_ACC_POP_UP_BTN_CLOSE" = "Close";
-"DELETE_ACC_INPUT_PLACE_HOLDER" = "Enter your password";
 
 /*Change album cover photo*/
 "change_album_cover_snackbar_text" = "Album cover changed successfully.";

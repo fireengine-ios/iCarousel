@@ -118,7 +118,7 @@ class ProfileFieldView: UIView {
         underlineLayer.cornerRadius = 8
         underlineLayer.borderWidth = 1.0
         underlineLayer.backgroundColor = UIColor.clear.cgColor
-        underlineLayer.borderColor = AppColor.borderDarkGrayAndLightGray.cgColor
+        underlineLayer.borderColor = AppColor.borderColor.cgColor
 
     }
     
@@ -138,9 +138,7 @@ class ProfileFieldView: UIView {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
         descriptionLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20).isActive = true
-//        descriptionLabel.bottomAnchor.constraint(equalTo: centerYAnchor, constant: -25).isActive = true
         descriptionLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5).isActive = true
-//        descriptionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -166,7 +164,7 @@ class ProfileFieldView: UIView {
     
     private func setupUnderline() {
         layer.addSublayer(underlineLayer)
-        underlineLayer.backgroundColor = AppColor.borderDarkGrayAndLightGray.cgColor
+        underlineLayer.backgroundColor = AppColor.borderColor.cgColor
         
         self.bringSubviewToFront(descriptionLabel)
     }

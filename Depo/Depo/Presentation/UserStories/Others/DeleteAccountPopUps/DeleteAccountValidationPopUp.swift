@@ -55,7 +55,7 @@ final class DeleteAccountValidationPopUp: UIViewController {
             newValue.textField.textContentType = .password
             newValue.subtitleLabel.text = localized(.deleteAccountPasswordError)
             newValue.textField.delegate = self
-            newValue.textField.placeholder = localized(.deleteAccountPasswordPlaceHolder)
+            newValue.textField.placeholder = TextConstants.enterYourPassword
             newValue.textField.returnKeyType = .done
 
             newValue.textField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)

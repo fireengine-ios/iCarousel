@@ -9,7 +9,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     private let phoneBorderLayer = CALayer()
     private let underlineWidth: CGFloat = 1.0
     
-    var underlineColor = AppColor.borderDarkGrayAndLightGray.color {
+    var underlineColor = AppColor.borderColor.color {
         didSet {
             underlineLayer.backgroundColor = underlineColor.cgColor
         }
@@ -52,7 +52,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     
     @IBOutlet public weak var subtitleLabel: UILabel! {
         willSet {
-            newValue.textColor = AppColor.borderDarkGrayAndLightGray.color
+            newValue.textColor = AppColor.borderColor.color
             newValue.font = .appFont(.regular, size: 14.0)
             newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
@@ -62,7 +62,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     
     @IBOutlet public weak var codeTextField: UnderlineTextField! {
         willSet {
-            newValue.textColor = AppColor.borderDarkGrayAndLightGray.color
+            newValue.textColor = AppColor.borderColor.color
             newValue.font = .appFont(.regular, size: 14.0)
             newValue.borderStyle = .none
             newValue.backgroundColor = AppColor.primaryBackground.color
@@ -116,7 +116,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     
     @IBOutlet public weak var numberTextField: QuickDismissPlaceholderTextField! {
         willSet {
-            newValue.textColor = AppColor.borderDarkGrayAndLightGray.color
+            newValue.textColor = AppColor.borderColor.color
             newValue.font = .appFont(.regular, size: 14.0)
             newValue.borderStyle = .none
             newValue.backgroundColor = AppColor.primaryBackground.color

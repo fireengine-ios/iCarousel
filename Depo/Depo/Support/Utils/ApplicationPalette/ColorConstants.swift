@@ -115,7 +115,7 @@ enum AppColor {
     case tbMatikBlurColor
     
     // MARK: Profile Colors
-    case borderDarkGrayAndLightGray
+    case borderColor
     case profileInfoOrange
 
     var color: UIColor {
