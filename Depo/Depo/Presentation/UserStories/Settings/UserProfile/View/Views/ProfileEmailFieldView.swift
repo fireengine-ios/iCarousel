@@ -51,7 +51,7 @@ final class ProfileEmailFieldView: ProfileTextEnterView {
 
     // MARK: Private
 
-    static let verificationViewHeight: CGFloat = 24
+    static let verificationViewHeight: CGFloat = 15
 
     private let verificationView: UIStackView = {
         let view = UIStackView()
@@ -65,15 +65,16 @@ final class ProfileEmailFieldView: ProfileTextEnterView {
         let label = UILabel()
         label.text = localized(.profileMailVerified)
         label.textColor = verifiedColor
-        label.font = .TurkcellSaturaFont(size: 16)
+        label.font = .appFont(.medium, size: 12.0)
 
         let icon = UIImageView(image: UIImage(named: "checkmark"))
         icon.contentMode = .scaleAspectFit
         icon.tintColor = verifiedColor
+        icon.backgroundColor = AppColor.primaryBackground.color
 
-        let stackView = UIStackView(arrangedSubviews: [label, icon])
-        stackView.axis = .horizontal
-        stackView.spacing = 4
+        let stackView = UIStackView(arrangedSubviews: [icon,label])
+        stackView.axis = .vertical
+        stackView.spacing = 3
         return stackView
     }()
 
@@ -81,9 +82,9 @@ final class ProfileEmailFieldView: ProfileTextEnterView {
         let button = UIButton()
         button.setTitle(localized(.profileVerifyButtonTitle), for: .normal)
         button.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        button.titleLabel?.font = .TurkcellSaturaFont(size: 16)
+        button.titleLabel?.font = .appFont(.regular, size: 14.0)
         button.contentEdgeInsets = UIEdgeInsets(topBottom: 0, rightLeft: 10)
-        button.backgroundColor = ColorConstants.errorOrangeGradientStart
+        button.backgroundColor = AppColor.primaryBackground.color
         button.layer.cornerRadius = ProfileEmailFieldView.verificationViewHeight / 2
         return button
     }()
@@ -94,7 +95,7 @@ final class ProfileEmailFieldView: ProfileTextEnterView {
 
         let textFieldStackView = UIStackView(arrangedSubviews: [textField, verificationView])
         textFieldStackView.axis = .horizontal
-        textFieldStackView.spacing = 8
+        textFieldStackView.spacing = 0
         textFieldStackView.alignment = .center
         stackView.removeArrangedSubview(textField) // added in superview (ProfileTextEnterView)
         stackView.addArrangedSubview(textFieldStackView)
