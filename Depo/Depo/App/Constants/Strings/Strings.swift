@@ -177,4 +177,8 @@ enum Strings: String, Localizable {
     // MARK: - TabBarCards
     case syncing = "syncing"
     case downloading = "downloading"
+    // MARK: - IAP Intro Offers
+    case iapIntroOfferFreeTrial  = "iap_intro_offer_free_trial"
+    case iapIntroOfferPayAsYouGo = "iap_intro_offer_pay_as_you_go"
+    case iapIntroOfferPayUpFront = "iap_intro_offer_pay_up_front"
 }

@@ -23,7 +23,7 @@ final class PrivateShareDurationCell: UICollectionViewCell {
             newValue.clipsToBounds = true
             newValue.addRoundedShadows(cornerRadius: 12,
                                        shadowColor: AppColor.filesBigCellShadow.cgColor,
-                                       opacity: 0.8, radius: 6.0)
+                                       opacity: 0.4, radius: 4.0, offset: CGSize(width: .zero, height: 4.0))
         }
     }
 
@@ -32,9 +32,9 @@ final class PrivateShareDurationCell: UICollectionViewCell {
     }
     
     func setSelection(isSelected: Bool) {
-        borderView.backgroundColor = isSelected ? AppColor.filesSharedTabSeperator.color : .clear
+        borderView.backgroundColor = isSelected ? AppColor.filesSharedTabSeperator.color : AppColor.filesShareDurationBackground.color
         titleLabel.textColor = isSelected ? .white : AppColor.filesLabel.color
-        borderView.layer.shadowOpacity = isSelected ? 0.0 : 0.8
+        borderView.layer.shadowOpacity = isSelected ? 0.0 : 0.4
     }
     
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {

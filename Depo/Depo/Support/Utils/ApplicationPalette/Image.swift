@@ -42,6 +42,9 @@ enum Image: String, AppImage {
     case iconCopy
     case iconChangePhoto
     case iconChangePerson
+    case iconEdit
+    case iconInfo
+    case iconMove
 
     ///  Files Tab
     case iconFileAudio
@@ -104,4 +107,13 @@ enum Image: String, AppImage {
     case popupIconError
     case popupIconDelete
     case popupIconQuestion
+    
+    ///For You
+    case forYouPeople
+    case popupProfileScan
+    
+    /// User  Info
+    case iconDisplaySelected
+    ///  UiSwitch
+    case gradientSwitch
 }

@@ -13,8 +13,14 @@ final class PackageService {
     
     private let iapManager = IAPManager.shared
 
+    @available(iOS 12.0, *)
+    private lazy var iapIntroEligibilityChecker = IAPIntroPriceEligibilityChecker()
+
+    private lazy var introOfferEligibilityStatusByProductId: [String: IAPIntroEligibilityStatus] = [:]
+
     @available(iOS 11.2, *)
     private lazy var iapSubscriptionPeriodFormatter = ProductSubscriptionPeriodFormatter()
+
     
     //MARK: Utility Methods(public)
     func getAccountType(for accountType: String, offers: [Any] = []) -> AccountType? {
@@ -41,10 +47,34 @@ final class PackageService {
     
     func getInfoForAppleProducts(offers: [Any], isActivePurchases: Bool = false, success: @escaping () -> (), fail: @escaping (Error) -> ()) {
         let appleOffers = getAppleIds(for: offers)
-        iapManager.loadProducts(productIds: appleOffers, isActivePurchases: isActivePurchases) { response in
+        iapManager.loadProducts(productIds: appleOffers, isActivePurchases: isActivePurchases) { [weak self] response in
             switch response {
             case .success(_):
-                success()
+                self?.introOfferEligibilityStatusByProductId = [:]
+                guard #available(iOS 12.0, *) else {
+                    success()
+                    return
+                }
+
+                // No need to check eligibility for already purchased products
+                guard !isActivePurchases else {
+                    success()
+                    return
+                }
+
+                guard let receiptData = self?.iapManager.receiptData else {
+                    success()
+                    return
+                }
+
+                self?.iapIntroEligibilityChecker.checkEligibility(
+                    with: receiptData,
+                    productIdentifiers: Set(appleOffers)
+                ) { [weak self] eligibilityStatusDict, _ in
+                    self?.introOfferEligibilityStatusByProductId = eligibilityStatusDict
+                    success()
+                }
+
             case .failed(let error):
                 fail(error)
             }
@@ -87,22 +117,125 @@ final class PackageService {
         }
         return fullPrice
     }
-    
-    func convertToSubscriptionPlan(offers: [Any], accountType: AccountType) -> [SubscriptionPlan] {
+
+    func getIntroductoryPrice(for offer: Any, isPurchasedOffer: Bool) -> String? {
+        guard #available(iOS 11.2, *) else {
+            return nil
+        }
+
+        // get SKProduct
+        guard let productId = getAppleIds(for: [offer]).first,
+              let product = iapManager.product(for: productId) else {
+            return nil
+        }
+
+        // Make sure it has an intro offer
+        guard let introductoryPrice = product.introductoryPrice else {
+            return nil
+        }
+
+        let shouldDisplayIntroPrice: Bool
+
+        if !isPurchasedOffer {
+            // Make sure the user is eligible for buying an intro offer for this product
+            shouldDisplayIntroPrice = introOfferEligibilityStatusByProductId[product.productIdentifier] == .eligible
+        } else {
+            // Make sure the user has a product that was purchased with an intro price
+            shouldDisplayIntroPrice = (try? receiptHasActiveSubscriptionPurchasedWithIntroPrice(productId: productId)) ?? false
+        }
+
+        guard shouldDisplayIntroPrice else {
+            return nil
+        }
+
+        return formattedIntroductoryOfferText(from: introductoryPrice, product: product)
+    }
+
+    private func receiptHasActiveSubscriptionPurchasedWithIntroPrice(productId: String) throws -> Bool {
+        let receipt = try ReceiptParser().parse(from: iapManager.receiptData ?? Data())
+        let inAppPurchases = receipt.inAppPurchases
+        return inAppPurchases.contains { purchase in
+            return purchase.productId == productId &&
+                   (purchase.isInIntroOfferPeriod == true || purchase.isInTrialPeriod == true)
+        }
+    }
+
+    @available(iOS 11.2, *)
+    private func formattedIntroductoryOfferText(from introductoryPrice: SKProductDiscount, product: SKProduct) -> String {
+        guard let subscriptionPeriod = product.subscriptionPeriod else {
+            return ""
+        }
+
+        let price = formattedPrice(product.price, priceLocale: product.priceLocale)
+        let period = iapSubscriptionPeriodFormatter.string(from: subscriptionPeriod) ?? ""
+
+        let discountPrice = formattedPrice(introductoryPrice.price, priceLocale: introductoryPrice.priceLocale)
+        let discountPeriod = iapSubscriptionPeriodFormatter.string(from: introductoryPrice.subscriptionPeriod) ?? ""
+        let discountTotalPeriod = iapSubscriptionPeriodFormatter.string(
+            from: introductoryPrice.subscriptionPeriod,
+            numberOfPeriods: introductoryPrice.numberOfPeriods
+        ) ?? ""
+
+        func combined(_ price: String, _ period: String) -> String {
+            [price, period].joined(separator: "/")
+        }
+
+        switch introductoryPrice.paymentMode {
+        case .freeTrial:
+            return String(
+                format: localized(.iapIntroOfferFreeTrial),
+                discountTotalPeriod,
+                combined(price, period)
+            )
+        case .payAsYouGo:
+            return String(
+                format: localized(.iapIntroOfferPayAsYouGo),
+                discountTotalPeriod,
+                combined(discountPrice, discountPeriod),
+                combined(price, period)
+            )
+        case .payUpFront:
+            return String(
+                format: localized(.iapIntroOfferPayUpFront),
+                discountTotalPeriod,
+                discountPrice,
+                combined(price, period)
+            )
+        @unknown default:
+            return ""
+        }
+    }
+
+    private func formattedPrice(_ price: NSNumber, priceLocale: Locale) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.formatterBehavior = .behavior10_4
+        numberFormatter.positiveFormat = "#.## ¤¤"
+        numberFormatter.locale = priceLocale
+        return numberFormatter.string(from: price) ?? ""
+    }
+
+    func convertToSubscriptionPlan(
+        offers: [Any],
+        accountType: AccountType,
+        isPurchasedOffers: Bool = false
+    ) -> [SubscriptionPlan] {
         return offers.map { offer in
-            return subscriptionPlanWith(name: getOfferName(offer: offer),
-                                        price: getOfferPrice(for: offer, accountType: accountType),
-                                        type: getOfferType(for: offer),
-                                        model: offer,
-                                        quota: getOfferQuota(offer: offer),
-                                        amount: getOfferAmount(offer: offer),
-                                        isRecommended: getOfferRecommendationStatus(offer: offer),
-                                        features: getOfferAvailableFeatures(offer: offer),
-                                        addonType: .make(model: offer),
-                                        date: getOfferDate(for: offer),
-                                        store: getOfferStore(for: offer),
-                                        packageStatus: getPackageStatus(for: offer),
-                                        gracePeriodEndDate: getGracePeriodEndDate(for: offer))
+            subscriptionPlanWith(
+                name: getOfferName(offer: offer),
+                price: getOfferPrice(for: offer, accountType: accountType),
+                introductoryPrice: getIntroductoryPrice(for: offer, isPurchasedOffer: isPurchasedOffers),
+                type: getOfferType(for: offer),
+                model: offer,
+                quota: getOfferQuota(offer: offer),
+                amount: getOfferAmount(offer: offer),
+                isRecommended: getOfferRecommendationStatus(offer: offer),
+                features: getOfferAvailableFeatures(offer: offer),
+                addonType: .make(model: offer),
+                date: getOfferDate(for: offer),
+                store: getOfferStore(for: offer),
+                packageStatus: getPackageStatus(for: offer),
+                gracePeriodEndDate: getGracePeriodEndDate(for: offer)
+            )
         }
     }
     
@@ -142,11 +275,7 @@ final class PackageService {
                 event = isTurkcellOffer ? .purchaseTurkcellPremium : .purchaseNonTurkcellPremium
                 
             } else if name.contains("500") {
-                if hasIntroductoryPrice(offer) {
-                    event = isTurkcellOffer ? .purchaseTurkcell500Advertising : .purchaseNonTurkcell500Advertising
-                } else {
-                    event = isTurkcellOffer ? .purchaseTurkcell500 : .purchaseNonTurkcell500
-                }
+                event = isTurkcellOffer ? .purchaseTurkcell500 : .purchaseNonTurkcell500
             } else if name.contains("100") {
                 event = isTurkcellOffer ? .purchaseTurkcell100 : .purchaseNonTurkcell100
                 
@@ -165,6 +294,8 @@ final class PackageService {
             } else if name.contains("2.5") || name.contains("2,5") {
                 event = isTurkcellOffer ? .purchaseTurkcell2500 : .purchaseNonTurkcell2500
                 
+            } else if name.contains("digital advertising package") {
+                event = isTurkcellOffer ? .purchaseTurkcell500Advertising : .purchaseNonTurkcell500Advertising
             }
         }
         return event
@@ -173,6 +304,7 @@ final class PackageService {
     //MARK: Utility Methods(private)
     private func subscriptionPlanWith(name: String,
                                       price: String,
+                                      introductoryPrice: String?,
                                       type: SubscriptionPlanType,
                                       model: Any,
                                       quota: Int64,
@@ -186,6 +318,7 @@ final class PackageService {
                                       gracePeriodEndDate: String = "") -> SubscriptionPlan {
         return SubscriptionPlan(name: name,
                                 price: price,
+                                introductoryPrice: introductoryPrice,
                                 type: type,
                                 model: model,
                                 quota: quota,
@@ -199,7 +332,7 @@ final class PackageService {
                                 gracePeriodEndDate: gracePeriodEndDate)
     }
     
-    private func localized(offerPeriod: String) -> String {
+    private func localizedOfferPeriod(_ offerPeriod: String) -> String {
         if offerPeriod.contains("year") {
             return TextConstants.packagePeriodYear
         } else if offerPeriod.contains("sixmonth") {
@@ -252,9 +385,9 @@ final class PackageService {
     private func getOfferPeriod(for offer: Any) -> String? {
         var period: String?
         if let offer = offer as? PackageModelResponse, let periodString = offer.period {
-            period = localized(offerPeriod: periodString.lowercased())
+            period = localizedOfferPeriod(periodString.lowercased())
         } else if let offer = offer as? SubscriptionPlanBaseResponse, let periodString = offer.subscriptionPlanPeriod {
-            period = localized(offerPeriod: periodString.lowercased())
+            period = localizedOfferPeriod(periodString.lowercased())
         }
         return period
     }

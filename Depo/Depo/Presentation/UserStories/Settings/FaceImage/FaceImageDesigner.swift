@@ -38,7 +38,7 @@ final class FaceImageDesigner: NSObject {
         willSet {
             newValue.text = " "
             newValue.textColor = ColorConstants.darkText
-            newValue.font = .appFont(.regular, size: 15)
+            newValue.font = .appFont(.regular, size: 12)
         }
     }
     
@@ -53,7 +53,7 @@ final class FaceImageDesigner: NSObject {
     @IBOutlet private weak var secondFaceImageLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.darkText
-            newValue.font = .appFont(.regular, size: 15)
+            newValue.font = .appFont(.regular, size: 12)
             newValue.text = TextConstants.faceImageUpgrade
         }
     }
@@ -61,7 +61,7 @@ final class FaceImageDesigner: NSObject {
     @IBOutlet private weak var threeFaceImageLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.darkText
-            newValue.font = .appFont(.regular, size: 15)
+            newValue.font = .appFont(.regular, size: 12)
             newValue.text = TextConstants.faceTagsDescriptionStandart
         }
     }
@@ -70,7 +70,7 @@ final class FaceImageDesigner: NSObject {
         willSet {
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.backgroundColor = ColorConstants.darkBlueColor
-            newValue.titleLabel?.font = .appFont(.bold, size: 18)
+            newValue.titleLabel?.font = .appFont(.medium, size: 16)
             newValue.layer.cornerRadius = 25
             newValue.setTitle(TextConstants.importFromFB, for: .normal)
         }
@@ -79,7 +79,7 @@ final class FaceImageDesigner: NSObject {
     @IBOutlet private weak var faceImagePremiumButton: UIButton! {
         willSet {
             newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.titleLabel?.font = .appFont(.bold, size: 18)
+            newValue.titleLabel?.font = .appFont(.medium, size: 16)
             newValue.setTitle(TextConstants.becomePremiumMember, for: .normal)
             newValue.titleEdgeInsets = UIEdgeInsets(top: 6, left: 17, bottom: 6, right: 17)
         }

@@ -992,7 +992,7 @@
 "create_story_pop_up_message" = "Povestea e creată";
 "create_story_path_to_story" = "Poze & Video > Poveștile Mele";
 "You can not share empty album" = "Nu poți partaja albumul gol";
-"etk_permission_description" = "";
+"etk_permission_description" = "Prin prezenta îmi dau consimțământul de a primi mesaje comerciale de e-mail pentru a fi informat cu privire la produsele și serviciile avansate ale Lifecell Bulut Çözümleri A.Ş cu excepția cazului în care și până când nu solicit altfel, în conformitate cu Legea Nr.6563 și cu alte legislații aplicabile.";
 "global_permission_title_label" = "Permisiune Globală de Date";
 "global_permission_description" = "Îmi exprim consimțământul ca datele mele personale să fie împărtășite de către Turkcell cu operatorii cu care cooperează, pentru a putea beneficia de avantajele serviciilor oferite de operatorii respectivi, în ce privește lifebox.";
 "terms_and_use_etk_checkbox_header" = "Mesaj Electronic Comercial";
@@ -1493,7 +1493,7 @@
 "import_from_facebook_started" = "Transferul de pe Facebook a început.";
 "instapick_hashtags_copied" = "Hashtag-urile au fost copiate.";
 "create_story_selection_limit" = "Te rugăm să selectați maximum %d fotografii.";
-"etk_html" = "";
+"etk_html" = "<p><strong>MESAJ ELECTRONIC COMERCIAL ȘI CONSIMȚĂMÂNT DE DATE</strong></p>\n<p>Prin prezenta sunt de acord pentru a permite Lifecell Bulut Çözümleri A.Ş, Lifecell Dijital Servisler ve Çözümler A.Ş. și Companiile de Grup enumerate mai jos pentru a procesa datele mele personale și a le împărtăși părților enumerate în Politica de Permisiune și pentru a-mi trimite mesaje electronice comerciale în conformitate cu \"Politica de Permisiune\" disponibilă la <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\">aici</a> dacă nu mi se solicită altfel conform Legii nr. 6563 și alte reglementări aplicabile în scopul de a mă informa cu privire la reduceri, oferte și oferte speciale, care sunt în conformitate cu nevoile și preferințele mele cu privire la produsele și serviciile acestor companii. Recunosc că îmi pot revoca consimțământul pentru prelucrarea/partajarea datelor mele personale sau pentru primirea de e-mailuri electronice comerciale și informații detaliate privind domeniul de aplicare și revocarea unui astfel de consimțământ sunt disponibile în domeniul de aplicare al \"<a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\">Politica de Permisiune</a>\".</p>\n<table>\n<tbody>\n<tr>\n<td width=\"532\">\n<p><strong><u>Grup de companii care i s-a acordat permisiunea de a procesa/partaja date</u></strong></p>\n</td>\n</tr>\n<tr>\n<td width=\"532\"> \n<p>Lifecell Dijital Servisler ve Çözümler A.Ş.</p> \n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Müzik Yayın ve İletim A.Ş.</p> \n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell TV Yayın ve İçerik Hizmetleri Anonim Şirketi</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Bulut Çözümleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell İletişim Teknolojileri ve Dijital Servisler A.Ş.</p> \n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turktell Bilişim Servisleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p><strong><u>Grup de companii care au acordat comunicări comerciale</u></strong></p>\n</td> \n</tr> \n<tr> \n<td width=\"532\"> \n<p>Turktell Bilişim Servisleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Global Bilgi Pazarlama Danışma ve Çağrı Servisi Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Finansman A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Ödeme ve Elektronik Para Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Sigorta Aracılık Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Teknoloji Araştırma ve Geliştirme A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Satış ve Dağıtım Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Enerji Çözümleri ve Elektrik Satış Ticaret A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Müzik Yayın ve İletim A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell TV Yayın ve İçerik Hizmetleri Anonim Şirketi</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Bulut Çözümleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell İletişim Teknolojileri ve Dijital Servisler A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Dijital Servisler ve Çözümler A.Ş</p>\n</td>\n</tr>\n</tbody>\n</table>";
 "free_up_space_alert_title" = "Eliberează spațiu pe telefon";
 "free_up_space_no_duplicates" = "Nu există fotografii / videoclipuri repetate.";
 "free_up_space_in_progress" = "Lista ta de fișiere repetate nu este încă pregătită, încercați mai târziu";
@@ -2002,6 +2002,20 @@
 "ETK_KVKK_Izin_Politikasi" = "Politica de Permisiuni";
 "kvkk_firms_link" = "";
 "kvkk_commercial_info_link" = "";
+"syncing" = "";
+"downloading" = "";
 "ETK_KVKK_Izin_Politikası" = "";
 "syncing" = "";
 "downloading" = "";
+
+/*Free for {3 months}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_free_trial" = "Primul %@ gratuit\nLunile următoare %@";
+
+/*First {6 months} {6,99 TRY/Month}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_pay_as_you_go" = "Primul %@ %@\nLunile următoare %@";
+
+/*First {6 months} {6,99 TRY}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_pay_up_front" = "Primul %@ %@\nLunile următoare %@";

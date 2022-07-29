@@ -29,29 +29,21 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D8w-cS-76U">
                                     <rect key="frame" x="0.0" y="0.0" width="314" height="31"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ee6-5X-oa9">
-                                            <rect key="frame" x="0.0" y="0.0" width="314" height="31"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eH-pQ-DLc" userLabel="Title Label">
-                                                    <rect key="frame" x="0.0" y="5" width="257" height="21"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="18"/>
-                                                    <color key="textColor" name="label"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XhQ-9N-Hd4">
-                                                    <rect key="frame" x="265" y="0.0" width="51" height="31"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="49" id="feF-oE-oPs"/>
-                                                    </constraints>
-                                                    <color key="onTintColor" name="tint"/>
-                                                    <connections>
-                                                        <action selector="permissionSwitchTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="WA6-Ez-38u"/>
-                                                    </connections>
-                                                </switch>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </stackView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eH-pQ-DLc" userLabel="Title Label">
+                                            <rect key="frame" x="0.0" y="5" width="274" height="21"/>
+                                            <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="18"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XhQ-9N-Hd4" customClass="GradientSwitch" customModule="Billo" customModuleProvider="target">
+                                            <rect key="frame" x="282" y="0.0" width="51" height="31"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="49" id="feF-oE-oPs"/>
+                                            </constraints>
+                                            <connections>
+                                                <action selector="permissionSwitchTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="WA6-Ez-38u"/>
+                                            </connections>
+                                        </switch>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>

@@ -121,7 +121,6 @@ class SettingsRouter: SettingsRouterInput {
     }
 
     func goToDarkMode() {
-        router.pushViewController(viewController: router.darkMode)
     }
     
 }

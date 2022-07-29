@@ -2,11 +2,11 @@
 //  GradientSwitch.swift
 //  Depo
 //
-//  Created by Hooman Seven on 30/6/2022.
+//  Created by Hooman Seven on 01/7/2022.
 //  Copyright © 2022 LifeTech. All rights reserved.
 //
 
-import Foundation
+import UIKit
 class GradientSwitch: UISwitch {
     
     override init(frame: CGRect) {
@@ -18,13 +18,20 @@ class GradientSwitch: UISwitch {
         super.init(coder: aDecoder)
         configure()
     }
+    
+    //will set gradient color for switch On  state
     func configure() {
-        onTintColor = AppColor.tint.color
+        onTintColor = .clear
         tintColor = ColorConstants.switcherGrayColor
-        // Switch height 32 pixel
+        //         Switch height 32 pixel
         layer.cornerRadius = 16
-        layer.borderColor = UIColor.white.cgColor
-        layer.borderWidth = 2
         backgroundColor = ColorConstants.switcherGrayColor
+        
+        let onImage = Image.gradientSwitch.image
+        self.onTintColor = UIColor(patternImage: onImage)
+        
+        self.clipsToBounds = true
     }
+    
+    
 }

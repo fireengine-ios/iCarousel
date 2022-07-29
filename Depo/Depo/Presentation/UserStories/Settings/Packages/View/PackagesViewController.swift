@@ -185,7 +185,13 @@ extension PackagesViewController: SubscriptionOfferViewDelegate {
         
         let paymentMethods: [PaymentMethod] = plan.offers.compactMap { offer in
             if let model = offer.model as? PackageModelResponse {
-                return createPaymentMethod(model: model, priceString: offer.price, offer: plan, planIndex: planIndex)
+                return createPaymentMethod(
+                    model: model,
+                    priceString: offer.price,
+                    introPriceString: offer.introductoryPrice,
+                    offer: plan,
+                    planIndex: planIndex
+                )
             } else {
                 return nil
             }
@@ -213,13 +219,25 @@ extension PackagesViewController: SubscriptionOfferViewDelegate {
         return showableMethods.sorted { $0.price < $1.price }
     }
     
-    private func createPaymentMethod(model: PackageModelResponse, priceString: String, offer: PackageOffer, planIndex: Int) -> PaymentMethod? {
+    private func createPaymentMethod(
+        model: PackageModelResponse,
+        priceString: String,
+        introPriceString: String?,
+        offer: PackageOffer,
+        planIndex: Int
+    ) -> PaymentMethod? {
         guard let name = model.name, let type = model.type, let price = model.price else {
             return nil
         }
         
         let paymentType = type.paymentType
-        return PaymentMethod(name: name, price: price, priceLabel: priceString, type: paymentType, action: { [weak self] in
+        return PaymentMethod(
+            name: name,
+            price: price,
+            priceLabel: priceString,
+            introPriceLabel: introPriceString,
+            type: paymentType
+        ) { [weak self] in
             guard let subscriptionPlan = self?.getChoosenSubscriptionPlan(availableOffers: offer, packageType: type) else {
                 assertionFailure()
                 return
@@ -235,8 +253,7 @@ extension PackagesViewController: SubscriptionOfferViewDelegate {
                                                 eventLabel: eventLabel)
             
             self?.output.didPressOn(plan: subscriptionPlan, planIndex: planIndex)
-        })
-        
+        }
     }
     
     private func getChoosenSubscriptionPlan(availableOffers: PackageOffer, packageType: PackageContentType) -> SubscriptionPlan?  {

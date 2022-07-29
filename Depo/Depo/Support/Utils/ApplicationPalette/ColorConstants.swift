@@ -32,6 +32,7 @@ enum AppColor {
     case background
     case secondaryBackground
     case label
+    case darkLabel
     case tint
     case separator
     case lightText
@@ -44,6 +45,8 @@ enum AppColor {
     case filesBigCellBackground
     case filesLabel
     case filesBigCellShadow
+    case filesBigImageBackground
+    case filesRefresher
     
     case filesTypesBackground
     case filesMusicTab
@@ -53,11 +56,13 @@ enum AppColor {
     case filesSeperator
     case filesSharedTabSeperator
     case filesSharedInfoBackground
+    case filesShareDurationBackground
 
     // MARK: Drawer
     case drawerShadow
     case drawerIndicator
     case drawerBackground
+    case drawerButtonBorder
 
     // MARK: PopUp
     case popUpTitle
@@ -69,6 +74,10 @@ enum AppColor {
     
     // MARK: Face Image
     case mapCountBackground
+    
+    // MARK: For You
+    case forYouButton
+    case forYouFaceImageBackground
 
     
     // MARK: Legacy
@@ -102,6 +111,8 @@ enum AppColor {
     case popUpBackground
     case blackAndWhite
     case viewShadowLight
+    case borderLightGray
+    case tbMatikBlurColor
     
     // MARK: Profile Colors
     case borderDarkGrayAndLightGray

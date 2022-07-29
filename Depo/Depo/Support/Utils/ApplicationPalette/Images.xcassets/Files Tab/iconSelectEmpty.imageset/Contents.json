@@ -3,6 +3,16 @@
     {
       "filename" : "iconSelectEmpty.pdf",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "iconSelectEmpty-1.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

@@ -41,7 +41,7 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2qo-KL-FfO" customClass="CustomSwitch" customModule="Billo" customModuleProvider="target">
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2qo-KL-FfO" customClass="GradientSwitch" customModule="Billo" customModuleProvider="target">
                         <rect key="frame" x="270" y="3" width="51" height="31"/>
                         <connections>
                             <action selector="onSwitcherValueChanged" destination="KGk-i7-Jjw" eventType="valueChanged" id="3IG-ag-L4a"/>
