@@ -14,7 +14,7 @@ class UnderlineTextField: UITextField {
         didSet { setNeedsDisplay() }
     }
     
-    var underlineColor = UIColor.white {
+    var underlineColor = AppColor.primaryBackground.color {
         didSet {
             underlineLayer.backgroundColor = underlineColor.cgColor
         }
@@ -22,7 +22,10 @@ class UnderlineTextField: UITextField {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        underlineLayer.backgroundColor = underlineColor.cgColor
+        underlineLayer.backgroundColor = AppColor.primaryBackground.cgColor
+        underlineLayer.borderColor = AppColor.borderDarkGrayAndLightGray.cgColor
+        underlineLayer.borderWidth = 1.0
+        
     }
     
     private let underlineLayer = CALayer()
@@ -44,10 +47,10 @@ class UnderlineTextField: UITextField {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        underlineLayer.frame = CGRect(x: 0.0,
-                                      y: frame.size.height - underlineWidth,
-                                      width: frame.width,
-                                      height: underlineWidth);
+//        underlineLayer.frame = CGRect(x: 0.0,
+//                                      y: frame.size.height - 56,
+//                                      width: frame.width,
+//                                      height: 56);
     }  
 }
 

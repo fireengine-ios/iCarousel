@@ -4,8 +4,8 @@ final class ProfileTextViewEnterView: UIView {
     
     let titleLabel: UILabel = {
         let newValue = UILabel()
-        newValue.textColor = UIColor.lrTealish
-        newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
+        newValue.textColor = AppColor.borderDarkGrayAndLightGray.color
+        newValue.font = .appFont(.regular, size: 14.0)
         newValue.backgroundColor = AppColor.primaryBackground.color
         newValue.isOpaque = true
         return newValue
@@ -13,8 +13,8 @@ final class ProfileTextViewEnterView: UIView {
     
     let subtitleLabel: UILabel = {
         let newValue = UILabel()
-        newValue.textColor = ColorConstants.textOrange
-        newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
+        newValue.textColor = AppColor.borderDarkGrayAndLightGray.color
+        newValue.font = .appFont(.regular, size: 14.0)
         newValue.backgroundColor = AppColor.primaryBackground.color
         newValue.isOpaque = true
         newValue.isHidden = true
@@ -24,8 +24,8 @@ final class ProfileTextViewEnterView: UIView {
     
     let textView: IntrinsicTextView = {
         let newValue = IntrinsicTextView()
-        newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        newValue.textColor = AppColor.blackColor.color
+        newValue.textColor = AppColor.borderDarkGrayAndLightGray.color
+        newValue.font = .appFont(.regular, size: 14.0)
         newValue.backgroundColor = AppColor.primaryBackground.color
         newValue.isOpaque = true
         
@@ -48,13 +48,13 @@ final class ProfileTextViewEnterView: UIView {
         return newValue
     }()
     
-    var underlineColor = ColorConstants.lightGrayColor {
+    var underlineColor = AppColor.borderDarkGrayAndLightGray.color {
         didSet {
             underlineLayer.backgroundColor = underlineColor.cgColor
         }
     }
     
-    private let underlineWidth: CGFloat = 0.5
+    private let underlineWidth: CGFloat = 1.0
     private let underlineLayer = CALayer()
     
     override init(frame: CGRect) {
@@ -98,7 +98,7 @@ final class ProfileTextViewEnterView: UIView {
     
     private func setupUnderline() {
         layer.addSublayer(underlineLayer)
-        underlineLayer.backgroundColor = underlineColor.cgColor
+
     }
     
     override func layoutSubviews() {
@@ -107,7 +107,12 @@ final class ProfileTextViewEnterView: UIView {
         underlineLayer.frame = CGRect(x: 0,
                                       y: frame.size.height - underlineWidth,
                                       width: frame.width,
-                                      height: underlineWidth);
+                                      height: 56);
+        
+        underlineLayer.borderWidth = 1.0
+        underlineLayer.borderColor = underlineColor.cgColor
+        underlineLayer.backgroundColor = AppColor.primaryBackground.cgColor
+        underlineLayer.cornerRadius = 16
     }
     
     func showSubtitleAnimated() {

@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import SwiftUI
 
 final class ProfileBirthdayFieldView: ProfileFieldView {
     
     private let dayLayer: CALayer = {
         let newValue = CALayer()
         
-        newValue.backgroundColor = AppColor.itemSeperator.color.cgColor
+        newValue.backgroundColor = AppColor.borderDarkGrayAndLightGray.color.cgColor
         
         return newValue
     }()
@@ -21,7 +22,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let monthLayer: CALayer = {
         let newValue = CALayer()
         
-        newValue.backgroundColor = AppColor.itemSeperator.color.cgColor
+        newValue.backgroundColor = AppColor.borderDarkGrayAndLightGray.color.cgColor
         
         return newValue
     }()
@@ -29,7 +30,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let yearLayer: CALayer = {
         let newValue = CALayer()
         
-        newValue.backgroundColor = AppColor.itemSeperator.color.cgColor
+        newValue.backgroundColor = AppColor.borderDarkGrayAndLightGray.color.cgColor
         
         return newValue
     }()
@@ -37,8 +38,8 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let monthTextField: UITextField = {
         let newValue = UITextField()
         
-        newValue.textColor = AppColor.blackColor.color
-        newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+        newValue.textColor = AppColor.borderDarkGrayAndLightGray.color
+        newValue.font = .appFont(.regular, size: 14.0)
         newValue.tintColor = UIColor.clear
         newValue.isUserInteractionEnabled = false
         
@@ -48,8 +49,8 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let yearTextField: UITextField = {
         let newValue = UITextField()
         
-        newValue.textColor = AppColor.blackColor.color
-        newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+        newValue.textColor = AppColor.borderDarkGrayAndLightGray.color
+        newValue.font = .appFont(.regular, size: 14.0)
         newValue.tintColor = UIColor.clear
         newValue.isUserInteractionEnabled = false
 
@@ -58,12 +59,12 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     
     private let fourDigitsUnderlineWidth: CGFloat = 60
     private let twoDigitsUnderlineWidth: CGFloat = 30
-    private let underlineOffset: CGFloat = 16
+    private let underlineOffset: CGFloat = 10
     
     private lazy var dateFormatter: DateFormatter = {
         let newValue = DateFormatter()
         
-        newValue.dateFormat = "dd MM yyyy"
+        newValue.dateFormat = "dd / MM / yyyy"
 
         return newValue
     }()
@@ -107,7 +108,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
         datePicker.datePickerMode = .date
         datePicker.isOpaque = true
 
-        if let minDate = dateFormatter.date(from: "01 01 1900") {
+        if let minDate = dateFormatter.date(from: "01 / 01 / 1900") {
             datePicker.minimumDate = minDate
         }
         
@@ -165,19 +166,24 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
         
         let twoDigitsTextFieldWidth = twoDigitsUnderlineWidth + underlineOffset
         textField.widthAnchor.constraint(equalToConstant: twoDigitsTextFieldWidth).isActive = true
+        textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 14).isActive = true
+        textField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
+        textField.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
         addSubview(monthTextField)
         textFieldStackView.addArrangedSubview(monthTextField)
         
         monthTextField.translatesAutoresizingMaskIntoConstraints = false
         monthTextField.widthAnchor.constraint(equalToConstant: twoDigitsTextFieldWidth).isActive = true
-        
+        monthTextField.heightAnchor.constraint(equalToConstant: 20).isActive = true
+
         addSubview(yearTextField)
         textFieldStackView.addArrangedSubview(yearTextField)
         
         yearTextField.translatesAutoresizingMaskIntoConstraints = false
         yearTextField.widthAnchor.constraint(equalToConstant: fourDigitsUnderlineWidth).isActive = true
-        
+        yearTextField.heightAnchor.constraint(equalToConstant: 20).isActive = true
+
         ///need to fill stackView
         textFieldStackView.addArrangedSubview(UIView())
     }

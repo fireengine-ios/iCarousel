@@ -4,8 +4,9 @@ class ProfileTextEnterView: UIView {
     
     let titleLabel: UILabel = {
         let newValue = UILabel()
-        newValue.textColor = UIColor.lrTealish
-        newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
+        newValue.textColor = AppColor.label.color
+        newValue.backgroundColor = AppColor.primaryBackground.color
+        newValue.font = .appFont(.light, size: 14.0)
         newValue.isOpaque = true
         newValue.numberOfLines = 0
         return newValue
@@ -15,15 +16,15 @@ class ProfileTextEnterView: UIView {
         let newValue = UIButton(type: .custom)
         let infoIcon = UIImage(named: "action_info")?.withRenderingMode(.alwaysTemplate)
         newValue.setImage(infoIcon, for: .normal)
-        newValue.tintColor = UIColor.lrTealish
+        newValue.tintColor = AppColor.profileInfoOrange.color
         newValue.isHidden = true
         return newValue
     }()
 
     let subtitleLabel: UILabel = {
         let newValue = UILabel()
-        newValue.textColor = ColorConstants.textOrange
-        newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
+        newValue.textColor = AppColor.borderDarkGrayAndLightGray.color
+        newValue.font = .appFont(.regular, size: 14.0)
         newValue.isOpaque = true
         newValue.isHidden = true
         newValue.numberOfLines = 0
@@ -32,8 +33,8 @@ class ProfileTextEnterView: UIView {
     
     let textField: QuickDismissPlaceholderTextField = {
         let newValue = QuickDismissPlaceholderTextField()
-        newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        newValue.textColor = AppColor.blackColor.color
+        newValue.textColor = AppColor.borderDarkGrayAndLightGray.color
+        newValue.font = .appFont(.regular, size: 14.0)
         newValue.borderStyle = .none
         newValue.isOpaque = true
         newValue.returnKeyType = .next
@@ -43,7 +44,7 @@ class ProfileTextEnterView: UIView {
     
     let stackView: UIStackView = {
         let newValue = UIStackView()
-        newValue.spacing = NumericConstants.profileStackViewHiddenSubtitleSpacing
+        newValue.spacing = 0
         newValue.axis = .vertical
         newValue.alignment = .fill
         newValue.distribution = .fill
@@ -51,7 +52,7 @@ class ProfileTextEnterView: UIView {
         return newValue
     }()
     
-    var underlineColor = AppColor.itemSeperator.color {
+    var underlineColor = AppColor.borderDarkGrayAndLightGray.color {
         didSet {
             underlineLayer.backgroundColor = underlineColor.cgColor
         }
@@ -62,7 +63,7 @@ class ProfileTextEnterView: UIView {
         underlineLayer.backgroundColor = underlineColor.cgColor
     }
     
-    private let underlineWidth: CGFloat = 0.5
+    private let underlineWidth: CGFloat = 1.0
     private let underlineLayer = CALayer()
     
     var isEditState: Bool {
@@ -94,15 +95,16 @@ class ProfileTextEnterView: UIView {
         addSubview(stackView)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        let edgeInset: CGFloat = 0
+        let edgeInset: CGFloat = 9
         stackView.topAnchor.constraint(equalTo: topAnchor, constant: edgeInset).isActive = true
         stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: edgeInset).isActive = true
         stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -edgeInset).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
 
         stackView.addArrangedSubview(createTitleView())
-        stackView.addArrangedSubview(subtitleLabel)
         stackView.addArrangedSubview(textField)
+        stackView.addArrangedSubview(subtitleLabel)
+
     }
 
     private func createTitleView() -> UIView {
@@ -111,17 +113,18 @@ class ProfileTextEnterView: UIView {
         titleView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: titleView.topAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: titleView.bottomAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: titleView.leadingAnchor)
+            titleLabel.centerYAnchor.constraint(equalTo: titleView.centerYAnchor, constant: 0),
+            titleLabel.leadingAnchor.constraint(equalTo: titleView.leadingAnchor, constant: 0),
+            titleLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
 
         titleView.addSubview(infoButton)
         infoButton.translatesAutoresizingMaskIntoConstraints = false
+        infoButton.setBackgroundColor(AppColor.primaryBackground.color, for: .normal)
         NSLayoutConstraint.activate([
-            infoButton.topAnchor.constraint(equalTo: titleView.topAnchor),
-            infoButton.bottomAnchor.constraint(equalTo: titleView.bottomAnchor),
-            infoButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 16),
+            infoButton.topAnchor.constraint(equalTo: titleView.topAnchor , constant: 5),
+            infoButton.bottomAnchor.constraint(equalTo: titleView.bottomAnchor , constant: -5),
+            infoButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 0),
             infoButton.trailingAnchor.constraint(lessThanOrEqualTo: titleView.trailingAnchor)
         ])
 
@@ -129,7 +132,7 @@ class ProfileTextEnterView: UIView {
     }
     
     private func setupUnderline() {
-        layer.addSublayer(underlineLayer)
+        layer.insertSublayer(underlineLayer, at: 0)
         underlineLayer.backgroundColor = underlineColor.cgColor
     }
     
@@ -137,9 +140,18 @@ class ProfileTextEnterView: UIView {
         super.layoutSubviews()
         
         underlineLayer.frame = CGRect(x: 0,
-                                      y: frame.size.height - underlineWidth,
+                                      y: frame.size.height - 58,
                                       width: frame.width,
-                                      height: underlineWidth);
+                                      height: 56);
+        
+        underlineLayer.cornerRadius = 8
+        underlineLayer.borderWidth = 1.0
+        underlineLayer.backgroundColor = AppColor.primaryBackground.cgColor
+        underlineLayer.borderColor = AppColor.borderDarkGrayAndLightGray.cgColor
+        
+        self.bringSubviewToFront(titleLabel)
+        
+        
     }
     
     func showSubtitleAnimated() {

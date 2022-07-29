@@ -102,6 +102,10 @@ enum AppColor {
     case popUpBackground
     case blackAndWhite
     case viewShadowLight
+    
+    // MARK: Profile Colors
+    case borderDarkGrayAndLightGray
+    case profileInfoOrange
 
     var color: UIColor {
         guard let uiColor = UIColor(named: String(describing: self)) else {

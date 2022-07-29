@@ -21,6 +21,7 @@ enum Image: String, AppImage {
     case iconArrowDown
     case iconNetworkWifi
     case iconNetworkLTE
+    case iconInfoDeleteAccount
     
     /// Actions
     case iconShare

@@ -1934,6 +1934,7 @@
 "DELETE_ACC_POP_UP_BTN_CONTINUE" = "Devam Et";
 "DELETE_ACC_POP_UP_BTN_CONFIRM" = "Onayla";
 "DELETE_ACC_POP_UP_BTN_CLOSE" = "Kapat";
+"DELETE_ACC_INPUT_PLACE_HOLDER" = "Şifreni gir";
 
 /*Change album cover photo*/
 "change_album_cover_snackbar_text" = "Kapak fotoğrafı başarıyla güncellendi.";

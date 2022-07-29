@@ -46,7 +46,7 @@ final class PasswordView: UIView, NibInit {
     
     @IBOutlet private weak var rulesLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaFont(size: 14)
+            newValue.font = .appFont(.medium, size: 12.0)
             newValue.textColor = ColorConstants.lightText
             newValue.numberOfLines = 0
         }
@@ -54,9 +54,9 @@ final class PasswordView: UIView, NibInit {
     
     @IBOutlet weak var passwordTextField: UITextField! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            newValue.font = .appFont(.regular, size: 16.0)
             newValue.isSecureTextEntry = true
-            newValue.textColor = AppColor.blackColor.color
+            newValue.textColor = AppColor.label.color
             newValue.borderStyle = .none
             newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
