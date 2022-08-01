@@ -108,6 +108,7 @@ protocol ItemOperationManagerViewProtocol: AnyObject {
     func publicSharedItemsAdded()
     
     func appleGoogleLoginDisconnected(type: AppleGoogleUserType)
+    func elementTypeChanged(type: ElementTypes)
     func faceImageRecogChaned(to isAllowed: Bool)
 }
 
@@ -216,6 +217,7 @@ extension ItemOperationManagerViewProtocol {
     func publicSharedItemsAdded() {}
     
     func appleGoogleLoginDisconnected(type: AppleGoogleUserType) {}
+    func elementTypeChanged(type: ElementTypes) {}
     func faceImageRecogChaned(to isAllowed: Bool) {}
 }
 
@@ -631,6 +633,12 @@ class ItemOperationManager: NSObject {
     func appleGoogleLoginDisconnected(type: AppleGoogleUserType) {
         DispatchQueue.main.async {
             self.views.invoke { $0.appleGoogleLoginDisconnected(type: type) }
+        }
+    }
+    
+    func elementTypeChanged(type: ElementTypes) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.elementTypeChanged(type: type) }
         }
     }
     
