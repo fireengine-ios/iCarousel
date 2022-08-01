@@ -73,6 +73,12 @@ enum ElementTypes {
     case shareLink
     case sharePrivate
     
+    case galleryAll
+    case galleryPhotos
+    case galleryVideos
+    case gallerySync
+    case galleryUnsync
+    
     static var trashState: [ElementTypes] = [.restore, .delete]
     static var hiddenState: [ElementTypes] = [.unhide, .moveToTrash]
     static var activeState: [ElementTypes] = [.hide, .moveToTrash]
@@ -598,6 +604,16 @@ enum ElementTypes {
             return TextConstants.actionSheetShareShareViaLink
         case .sharePrivate:
             return TextConstants.actionSheetSharePrivate
+        case .galleryAll:
+            return TextConstants.galleryFilterActionSheetAll
+        case .galleryPhotos:
+            return TextConstants.topBarPhotosFilter
+        case .galleryVideos:
+            return TextConstants.topBarVideosFilter
+        case .gallerySync:
+            return TextConstants.galleryFilterActionSheetSynced
+        case .galleryUnsync:
+            return TextConstants.galleryFilterActionSheetUnsynced
         default:
             return ""
         }
@@ -710,6 +726,16 @@ enum ElementTypes {
         case .shareLink:
             return ""
         case .sharePrivate:
+            return ""
+        case .galleryAll:
+            return ""
+        case .galleryPhotos:
+            return ""
+        case .galleryVideos:
+            return ""
+        case .gallerySync:
+            return ""
+        case .galleryUnsync:
             return ""
         }
     }
@@ -827,6 +853,16 @@ enum ElementTypes {
             return Image.iconCopy.image
         case .sharePrivate:
             return Image.iconShare.image
+        case .galleryAll:
+            return Image.iconAll.image
+        case .galleryPhotos:
+            return Image.iconGalleryPhoto.image
+        case .galleryVideos:
+            return Image.iconVideo.image
+        case .gallerySync:
+            return Image.iconBackupCheck.image
+        case .galleryUnsync:
+            return Image.iconBackupUncheck.image
         }
     }
 }

@@ -300,7 +300,12 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                      .makePersonThumbnail,
                      .shareOriginal,
                      .shareLink,
-                     .sharePrivate:
+                     .sharePrivate,
+                     .galleryAll,
+                     .galleryPhotos,
+                     .galleryVideos,
+                     .gallerySync,
+                     .galleryUnsync:
 
                     //
                     action = AlertFilesAction(title: type.actionTitle()) { [weak self] in
@@ -602,12 +607,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
                 UIApplication.showErrorAlert(message: text)
             }
-        case .shareOriginal:
-            interactor.handleShareAction(type: .shareOriginal, sourceRect: self.getSourceRect(sender: sender, controller: nil), items: items)
-        case .shareLink:
-            interactor.handleShareAction(type: .shareLink, sourceRect: self.getSourceRect(sender: sender, controller: nil), items: items)
-        case .sharePrivate:
-            interactor.handleShareAction(type: .sharePrivate, sourceRect: self.getSourceRect(sender: sender, controller: nil), items: items)
+        case .shareOriginal, .shareLink, .sharePrivate:
+            interactor.handleShareAction(type: type, sourceRect: self.getSourceRect(sender: sender, controller: nil), items: items)
+        case .galleryAll, .gallerySync, .galleryUnsync, .galleryVideos, .galleryPhotos:
+            ItemOperationManager.default.elementTypeChanged(type: type)
             
         default:
             break
