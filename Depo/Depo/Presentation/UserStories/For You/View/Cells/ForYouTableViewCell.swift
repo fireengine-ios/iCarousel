@@ -14,8 +14,9 @@ enum ForYouViewEnum: CaseIterable {
     case things
     case places
     case albums
-    case throwback
-    case collage
+    case photopick
+//    case throwback
+//    case collage
     
     var title: String {
         switch self {
@@ -23,9 +24,10 @@ enum ForYouViewEnum: CaseIterable {
         case .people: return "People"
         case .things: return "Things"
         case .places: return "Places"
-        case .throwback: return "Throwback"
-        case .collage: return "Collage"
+//        case .throwback: return "Throwback"
+//        case .collage: return "Collage"
         case .albums: return "Albums"
+        case .photopick: return "Photopick"
         }
     }
 }
@@ -64,6 +66,7 @@ class ForYouTableViewCell: UITableViewCell {
     private let placesService = PlacesService()
     private let peopleService = PeopleService()
     private let albumServie = SearchService()
+    private let instapickService = InstapickServiceImpl()
     
     private var thingsData: [WrapData] = [] {
         didSet {
@@ -89,6 +92,12 @@ class ForYouTableViewCell: UITableViewCell {
         }
     }
     
+    private var photopickData: [InstapickAnalyze] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         configureTableView()
@@ -97,7 +106,7 @@ class ForYouTableViewCell: UITableViewCell {
     func configure(with type: ForYouViewEnum) {
         currentView = type
         titleLabel.text = type.title
-        seeAllButton.isHidden = type == .people || type == .faceImage
+        seeAllButton.isHidden = type == .people
         
         switch type {
         case .faceImage:
@@ -120,10 +129,12 @@ class ForYouTableViewCell: UITableViewCell {
             } fail: {
                 print("PLACES ERROR")
             }
-        case .throwback:
-            break
-        case .collage:
-            break
+        case .photopick:
+            getInstapickThumbnails { data in
+                self.photopickData = data
+            } fail: {
+                print("PHOTOPICK ERROR")
+            }
         case .albums:
             getAlbums { data in
                 self.albumsData = data
@@ -215,6 +226,17 @@ class ForYouTableViewCell: UITableViewCell {
             fail()
         })
     }
+    
+    private func getInstapickThumbnails(success: @escaping ([InstapickAnalyze]) -> Void, fail: @escaping FailRemoteItems) {
+        instapickService.getAnalyzeHistory(offset: 0, limit: 10) { result in
+            switch result {
+            case .success(let history):
+                success(history)
+            case .failed(_):
+                fail()
+            }
+        }
+    }
 
     @IBAction func seeAllButtonTapped(_ sender: UIButton) {
         if let currentView = currentView {
@@ -235,6 +257,8 @@ extension ForYouTableViewCell: UICollectionViewDataSource {
             return placesData.count
         case .albums:
             return albumsData.count
+        case .photopick:
+            return photopickData.count
         default:
             return 0
         }
@@ -259,6 +283,10 @@ extension ForYouTableViewCell: UICollectionViewDataSource {
         case .albums:
             let item = albumsData[indexPath.row]
             cell.configureAlbum(with: item)
+            return cell
+        case .photopick:
+            let url = photopickData[indexPath.row]
+            cell.configure(with: url)
             return cell
         default:
             return cell

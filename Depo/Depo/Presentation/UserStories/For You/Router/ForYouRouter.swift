@@ -14,7 +14,7 @@ final class ForYouRouter: ForYouRouterInput {
     
     func navigateToSeeAll(for view: ForYouViewEnum) {
         switch view {
-        case .faceImage, .throwback, .collage:
+        case .faceImage, .photopick:
             break
         case .people:
             let people = router.peopleListController()
@@ -29,6 +29,11 @@ final class ForYouRouter: ForYouRouterInput {
             let albums = router.albumsListController()
             router.pushViewController(viewController: albums)
         }
+    }
+    
+    func navigateToFaceImage() {
+        let vc = router.faceImage
+        router.pushViewController(viewController: vc)
     }
 }
 

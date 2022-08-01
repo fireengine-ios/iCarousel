@@ -128,6 +128,7 @@ final class FaceImageViewController: ViewController, NibInit {
                 case .success(let result):
                     NotificationCenter.default.post(name: .changeFaceImageStatus, object: self)
                     self?.sendAnaliticsForFaceImageAllowed(isAllowed: result.isFaceImageAllowed == true)
+                    ItemOperationManager.default.faceImageChanged(to: result.isFaceImageAllowed == true)
                     
                     if result.isFaceImageAllowed == true {
                         if self?.authorityStorage.faceRecognition == false {
