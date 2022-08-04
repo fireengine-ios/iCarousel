@@ -127,6 +127,10 @@ extension ForYouViewController: ForYouFaceImageTableViewCellDelegae {
     func onFaceImageButton() {
         output.onFaceImageButton()
     }
+    
+    func navigateToCreate(for view: ForYouViewEnum) {
+        output.navigateToCreate(for: view)
+    }
 }
 
 //MARK: -ItemOperationManagerViewProtocol

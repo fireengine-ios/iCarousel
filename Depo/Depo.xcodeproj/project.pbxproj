@@ -8954,6 +8954,10 @@
 		E7426F75286E559D00666A79 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7426F73286E559D00666A79 /* GradientSwitch.swift */; };
 		E7426F76286E559D00666A79 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7426F73286E559D00666A79 /* GradientSwitch.swift */; };
 		E7426F77286E559D00666A79 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7426F73286E559D00666A79 /* GradientSwitch.swift */; };
+		F00610CD2899324700911048 /* ForYouViewEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610CC2899324700911048 /* ForYouViewEnum.swift */; };
+		F00610CE2899324700911048 /* ForYouViewEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610CC2899324700911048 /* ForYouViewEnum.swift */; };
+		F00610CF2899324700911048 /* ForYouViewEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610CC2899324700911048 /* ForYouViewEnum.swift */; };
+		F00610D02899324700911048 /* ForYouViewEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610CC2899324700911048 /* ForYouViewEnum.swift */; };
 		F00D7DDF2851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */; };
 		F00D7DE02851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */; };
 		F00D7DE12851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */; };
@@ -9276,6 +9280,14 @@
 		F0D2977327FA336A0082C768 /* PasswordEnterPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D2977127FA336A0082C768 /* PasswordEnterPopup.swift */; };
 		F0D2977427FA336A0082C768 /* PasswordEnterPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D2977127FA336A0082C768 /* PasswordEnterPopup.swift */; };
 		F0D2977527FA336A0082C768 /* PasswordEnterPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D2977127FA336A0082C768 /* PasswordEnterPopup.swift */; };
+		F0E0A4782897F36400528B39 /* ForYouEmptyCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0E0A4772897F36400528B39 /* ForYouEmptyCellView.xib */; };
+		F0E0A4792897F36400528B39 /* ForYouEmptyCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0E0A4772897F36400528B39 /* ForYouEmptyCellView.xib */; };
+		F0E0A47A2897F36400528B39 /* ForYouEmptyCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0E0A4772897F36400528B39 /* ForYouEmptyCellView.xib */; };
+		F0E0A47B2897F36400528B39 /* ForYouEmptyCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0E0A4772897F36400528B39 /* ForYouEmptyCellView.xib */; };
+		F0E0A4802897F38500528B39 /* ForYouEmptyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0A47F2897F38500528B39 /* ForYouEmptyCellView.swift */; };
+		F0E0A4812897F38500528B39 /* ForYouEmptyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0A47F2897F38500528B39 /* ForYouEmptyCellView.swift */; };
+		F0E0A4822897F38500528B39 /* ForYouEmptyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0A47F2897F38500528B39 /* ForYouEmptyCellView.swift */; };
+		F0E0A4832897F38500528B39 /* ForYouEmptyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E0A47F2897F38500528B39 /* ForYouEmptyCellView.swift */; };
 		F0F5E1BA272162A2003AC6AF /* FileDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F028D7992719C0F000FF204D /* FileDescriptionView.swift */; };
 		F0F5E1BE272162A2003AC6AF /* FileDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F028D7992719C0F000FF204D /* FileDescriptionView.swift */; };
 		F0F5E1BF272162A7003AC6AF /* FileDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F028D79B2719C0FD00FF204D /* FileDescriptionView.xib */; };
@@ -12065,6 +12077,7 @@
 		EFA74FAC1FBF378F00CF946E /* PrintInteractorOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintInteractorOutput.swift; sourceTree = "<group>"; };
 		EFA74FAD1FBF378F00CF946E /* PrintInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintInteractor.swift; sourceTree = "<group>"; };
 		EFE9E4488118296DCE476A71 /* Pods-LifeTech_BilloShared.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_BilloShared.appstore.xcconfig"; path = "Target Support Files/Pods-LifeTech_BilloShared/Pods-LifeTech_BilloShared.appstore.xcconfig"; sourceTree = "<group>"; };
+		F00610CC2899324700911048 /* ForYouViewEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouViewEnum.swift; sourceTree = "<group>"; };
 		F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedItemsSegmentView.swift; sourceTree = "<group>"; };
 		F00D7DE32851C7000004E619 /* SharedItemsSegmentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SharedItemsSegmentView.xib; sourceTree = "<group>"; };
 		F01244C8282A988800835B4E /* agconnect-services.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "agconnect-services.plist"; sourceTree = "<group>"; };
@@ -12146,6 +12159,8 @@
 		F0D2976627F783060082C768 /* MessageAndButtonPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageAndButtonPopup.xib; sourceTree = "<group>"; };
 		F0D2976C27FA33540082C768 /* PasswordEnterPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasswordEnterPopup.xib; sourceTree = "<group>"; };
 		F0D2977127FA336A0082C768 /* PasswordEnterPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEnterPopup.swift; sourceTree = "<group>"; };
+		F0E0A4772897F36400528B39 /* ForYouEmptyCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForYouEmptyCellView.xib; sourceTree = "<group>"; };
+		F0E0A47F2897F38500528B39 /* ForYouEmptyCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouEmptyCellView.swift; sourceTree = "<group>"; };
 		F233973492D247406E39E96E /* ForgotPasswordRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordRouter.swift; sourceTree = "<group>"; };
 		F2C8ED61D6F265F87FC23FBA /* FileInfoInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoInteractor.swift; sourceTree = "<group>"; };
 		F39582799B29F58A62C1236E /* PhoneVerificationViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewOutput.swift; sourceTree = "<group>"; };
@@ -21585,11 +21600,14 @@
 		F0571E9A288AE2FC00A0D6AC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F00610CC2899324700911048 /* ForYouViewEnum.swift */,
 				F0571EA5288AE4B800A0D6AC /* Cells */,
 				F0571E9B288AE31700A0D6AC /* ForYou.xib */,
 				F0571EA0288AE33700A0D6AC /* ForYouViewController.swift */,
 				F0571EE6288AE75700A0D6AC /* ForYouViewInput.swift */,
 				F0571EEB288AE76400A0D6AC /* ForYouViewOutput.swift */,
+				F0E0A4772897F36400528B39 /* ForYouEmptyCellView.xib */,
+				F0E0A47F2897F38500528B39 /* ForYouEmptyCellView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -22669,6 +22687,7 @@
 				4A6DBE8821A6F9190003D1B4 /* PackagePremiumView.xib in Resources */,
 				F0571E9C288AE31700A0D6AC /* ForYou.xib in Resources */,
 				8CD2B3B81FE7B44000280547 /* WaitingForWiFiPopUp.xib in Resources */,
+				F0E0A4782897F36400528B39 /* ForYouEmptyCellView.xib in Resources */,
 				985786F823E01F8800D35DDA /* SettingFooterView.xib in Resources */,
 				8C0E90601FDEBDFF00789C91 /* SearchView.xib in Resources */,
 				F013FA8928059150004B9BB8 /* SecurityInfoWarningPopup.xib in Resources */,
@@ -22956,6 +22975,7 @@
 				CE784D1E22A685FB00662219 /* SingleThumbnailAlbumCell.xib in Resources */,
 				CE784D1F22A685FB00662219 /* LeavePremiumView.xib in Resources */,
 				CE784D2222A685FB00662219 /* SocialAccountRemoveConnectionCell.xib in Resources */,
+				F0E0A47A2897F36400528B39 /* ForYouEmptyCellView.xib in Resources */,
 				CE784D2522A685FB00662219 /* PVViewerController.xib in Resources */,
 				CE784D2622A685FB00662219 /* InstapickPopUpController.xib in Resources */,
 				07C75A27281A786400B028F0 /* GT-America-LC-Standard-Medium.ttf in Resources */,
@@ -23387,6 +23407,7 @@
 				CF8B697623CBC9D70021B021 /* TurkcellSaturaReg.ttf in Resources */,
 				988BA1C62559248C0086E4BE /* PrivateShareDurationView.xib in Resources */,
 				CF8B697823CBC9D70021B021 /* TermsOfUseViewController.xib in Resources */,
+				F0E0A4792897F36400528B39 /* ForYouEmptyCellView.xib in Resources */,
 				CF8B697923CBC9D70021B021 /* CampaignCard.xib in Resources */,
 				CF8B697B23CBC9D70021B021 /* SmallFullOfQuotaPopUp.xib in Resources */,
 				CF8B697D23CBC9D70021B021 /* ActivityTimelineHeader.xib in Resources */,
@@ -23736,6 +23757,7 @@
 				CF8B70E123CBCA280021B021 /* PVViewerController.xib in Resources */,
 				988BA18E255924670086E4BE /* PrivateShareAddMessageView.xib in Resources */,
 				CF8B70E223CBCA280021B021 /* InstapickPopUpController.xib in Resources */,
+				F0E0A47B2897F36400528B39 /* ForYouEmptyCellView.xib in Resources */,
 				CF8B70E523CBCA280021B021 /* CollectionViewCellForController.xib in Resources */,
 				CF8B70E623CBCA280021B021 /* LoginPhoneMailCell.xib in Resources */,
 				07C75A28281A786400B028F0 /* GT-America-LC-Standard-Medium.ttf in Resources */,
@@ -25644,7 +25666,6 @@
 				8C0E8D9D1FDEBDFF00789C91 /* EULAService.swift in Sources */,
 				98B0485B259314750011DAEB /* RestoreHelper.m in Sources */,
 				73EA170222EB2C7700BAD2D3 /* SpotifyRoutingService.swift in Sources */,
-				E7426F6C286DDDDF00666A79 /* GradientSwitch.swift in Sources */,
 				8C208652228D4B2E000BEDAD /* RangeAPIInfo.swift in Sources */,
 				9886113A240FF4DC00A49C5B /* BecomePremiumViewSourceType.swift in Sources */,
 				0780AB252791681F000760D9 /* RecognizedText.swift in Sources */,
@@ -25715,9 +25736,11 @@
 				73D723ED231D08CF006AE835 /* PaymentModels.swift in Sources */,
 				8C0E8DBE1FDEBDFF00789C91 /* RegistrationRouter.swift in Sources */,
 				0762029A269B842C00D4FB2C /* OverlayStickerSelectorDataSource.swift in Sources */,
+				F0E0A4802897F38500528B39 /* ForYouEmptyCellView.swift in Sources */,
 				8C0E8DBF1FDEBDFF00789C91 /* SpringLabel.swift in Sources */,
 				8C0E8DC01FDEBDFF00789C91 /* BottomSelectionTabBarViewInput.swift in Sources */,
 				4BE126902304351900BFE06F /* ServerErrors.swift in Sources */,
+				F00610CD2899324700911048 /* ForYouViewEnum.swift in Sources */,
 				8C0E8DC11FDEBDFF00789C91 /* RegistrationConfigurator.swift in Sources */,
 				8C0E8DC21FDEBDFF00789C91 /* LocalAlbumViewController.swift in Sources */,
 				CEDA44DA207CA9FB00E653DD /* NumericConstants.swift in Sources */,
@@ -27841,6 +27864,7 @@
 				CE7849AA22A685FB00662219 /* ImportPhotosInteractorOutput.swift in Sources */,
 				CF71466124B597A900D83E60 /* ContactSyncBigCardView.swift in Sources */,
 				B527CF952420C66E00293E3E /* MediaItemsLocalAlbum+CoreDataProperties.swift in Sources */,
+				F0E0A4822897F38500528B39 /* ForYouEmptyCellView.swift in Sources */,
 				CE7849AB22A685FB00662219 /* Keys.swift in Sources */,
 				CE7849AC22A685FB00662219 /* LoginPhoneMailCell.swift in Sources */,
 				CE7849AD22A685FB00662219 /* AlbumDetailModuleOutput.swift in Sources */,
@@ -28188,6 +28212,7 @@
 				8E26D9902306B48800D08123 /* MusicViewOutput.swift in Sources */,
 				8C1E5BD522CB8BB4008FDA02 /* AssetFileCacheManager.swift in Sources */,
 				CE784A9D22A685FB00662219 /* PeriodicContactSyncRouterInput.swift in Sources */,
+				F00610CF2899324700911048 /* ForYouViewEnum.swift in Sources */,
 				CE784A9E22A685FB00662219 /* PredicateRules.swift in Sources */,
 				071188A027FAF49900F512A1 /* TabBarImage.swift in Sources */,
 				98231A0824F3A1E700FD16E2 /* SliderView.swift in Sources */,
@@ -28823,7 +28848,6 @@
 				CE784C4A22A685FB00662219 /* UIButton+Color.swift in Sources */,
 				CF71473924B597AA00D83E60 /* ContactSyncScheduleCard.swift in Sources */,
 				CE784C4B22A685FB00662219 /* GradientOrangeView.swift in Sources */,
-				E7426F6E286DDDDF00666A79 /* GradientSwitch.swift in Sources */,
 				CE784C4C22A685FB00662219 /* AlbumDetailInteractor.swift in Sources */,
 				B528DF882552CED8002D9718 /* LocalContactsService.swift in Sources */,
 				CE784C4D22A685FB00662219 /* PasscodeSettingsInteractor.swift in Sources */,
@@ -29098,7 +29122,6 @@
 				CF8B63E023CBC9D70021B021 /* MyStorageViewController.swift in Sources */,
 				CF8B63E223CBC9D70021B021 /* VisualMusicPlayerViewController.swift in Sources */,
 				CF8B63E323CBC9D70021B021 /* InstaPickSmallPhotoView.swift in Sources */,
-				E7426F6D286DDDDF00666A79 /* GradientSwitch.swift in Sources */,
 				CF8B63E423CBC9D70021B021 /* LeavePremiumHeaderView.swift in Sources */,
 				CF8B63E523CBC9D70021B021 /* LoginViewController.swift in Sources */,
 				CF8B63E623CBC9D70021B021 /* AutoSyncSwitcherTableViewCell.swift in Sources */,
@@ -29507,6 +29530,7 @@
 				CF8B651323CBC9D70021B021 /* UsageInfoInteractorInput.swift in Sources */,
 				CF8B651423CBC9D70021B021 /* SpotifyStatusView.swift in Sources */,
 				CF8B651523CBC9D70021B021 /* FaceImagePhotosRouterInput.swift in Sources */,
+				F00610CE2899324700911048 /* ForYouViewEnum.swift in Sources */,
 				98B047AC259314740011DAEB /* Configuration.m in Sources */,
 				B527CF8D2420C66E00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift in Sources */,
 				CF8B651723CBC9D70021B021 /* ResponseResult.swift in Sources */,
@@ -29593,6 +29617,7 @@
 				CF8B655123CBC9D70021B021 /* FaceImageItemsModuleOutput.swift in Sources */,
 				981617A42578BA5F009F1C31 /* FirebaseAnalyticsDementions.swift in Sources */,
 				CF8B655223CBC9D70021B021 /* RegistrationRouterInput.swift in Sources */,
+				F0E0A4812897F38500528B39 /* ForYouEmptyCellView.swift in Sources */,
 				CF8B655323CBC9D70021B021 /* PaymentModels.swift in Sources */,
 				CFA9D6D22562062D00C8F25D /* DismissKeyboardScrollView.swift in Sources */,
 				CF8B655423CBC9D70021B021 /* RegistrationRouter.swift in Sources */,
@@ -31300,6 +31325,7 @@
 				CF8B6CF223CBCA280021B021 /* RegistrationUserInfoModel.swift in Sources */,
 				CF8B6CF323CBCA280021B021 /* SmartAlbumsManager.swift in Sources */,
 				989FDC1C24190CD100F2F7D2 /* MediaItemsAlbumOperationService.swift in Sources */,
+				F00610D02899324700911048 /* ForYouViewEnum.swift in Sources */,
 				CF71471024B597AA00D83E60 /* ContactListHeader.swift in Sources */,
 				CF8B6CF423CBCA280021B021 /* InstaPickCampaignViewController.swift in Sources */,
 				F0571ED1288AE6F000A0D6AC /* ForYouInteractorOutput.swift in Sources */,
@@ -32046,6 +32072,7 @@
 				CF8B6F1623CBCA280021B021 /* SettingsRouterInput.swift in Sources */,
 				CF8B6F1723CBCA280021B021 /* CreateStoryPreviewConfigurator.swift in Sources */,
 				CF8B6F1823CBCA280021B021 /* SettingsRouter.swift in Sources */,
+				F0E0A4832897F38500528B39 /* ForYouEmptyCellView.swift in Sources */,
 				076BD1A027BBBDE3004609E3 /* MapSearchInteractor.swift in Sources */,
 				CF8B6F1923CBCA280021B021 /* SettingsConfigurator.swift in Sources */,
 				F0C447392848DFFA00129228 /* UIView+Extensions.swift in Sources */,
@@ -32346,7 +32373,6 @@
 				CF8B6FF323CBCA280021B021 /* AlbumDetailInteractor.swift in Sources */,
 				CF8B6FF423CBCA280021B021 /* PasscodeSettingsInteractor.swift in Sources */,
 				B528DF892552CED8002D9718 /* LocalContactsService.swift in Sources */,
-				E7426F6F286DDDDF00666A79 /* GradientSwitch.swift in Sources */,
 				CF8B6FF623CBCA280021B021 /* PeriodicContactSyncViewController.swift in Sources */,
 				CF8B6FF723CBCA280021B021 /* PackagesRouter.swift in Sources */,
 				CF8B6FF823CBCA280021B021 /* AlbumDetailRouter.swift in Sources */,

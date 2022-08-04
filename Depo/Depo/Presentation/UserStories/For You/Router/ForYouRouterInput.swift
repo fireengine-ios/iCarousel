@@ -11,4 +11,5 @@ import Foundation
 protocol ForYouRouterInput {
     func navigateToSeeAll(for view: ForYouViewEnum)
     func navigateToFaceImage()
+    func navigateToCreate(for view: ForYouViewEnum)
 }

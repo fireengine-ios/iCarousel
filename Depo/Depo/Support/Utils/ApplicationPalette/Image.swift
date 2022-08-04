@@ -116,9 +116,11 @@ enum Image: String, AppImage {
     ///For You
     case forYouPeople
     case popupProfileScan
+    case popupLoading
     
     /// User  Info
     case iconDisplaySelected
+    
     ///  UiSwitch
     case gradientSwitch
 }
