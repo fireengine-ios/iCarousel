@@ -8,7 +8,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     private let underlineLayer = CALayer()
     private let phoneBorderLayer = CALayer()
     private let underlineWidth: CGFloat = 1.0
-    
+
     var underlineColor = AppColor.borderColor.color {
         didSet {
             underlineLayer.backgroundColor = underlineColor.cgColor
@@ -78,11 +78,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             newValue.smartQuotesType = .no
             newValue.smartDashesType = .no
             
-            let image = UIImage(named: "ic_arrow_down")
-            let imageView = UIImageView(image: image)
-            newValue.rightView = imageView
             newValue.rightViewMode = .always
-            
             newValue.underlineColor = AppColor.primaryBackground.color
             
             /// true from IB by default
@@ -113,6 +109,9 @@ final class ProfilePhoneEnterView: UIView, FromNib {
                                           selector: #selector(nextAfterCode))
         }
     }
+    
+    
+    @IBOutlet public weak var arrowImageView: UIImageView!
     
     @IBOutlet public weak var numberTextField: QuickDismissPlaceholderTextField! {
         willSet {
@@ -234,6 +233,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
         guard subtitleLabel.isHidden else {
             return
         }
+        arrowImageView.image = Image.iconArrowDownActive.image
         stackView.spacing = NumericConstants.profileStackViewShowSubtitleSpacing
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.subtitleLabel.isHidden = false
@@ -246,6 +246,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
         guard !subtitleLabel.isHidden else {
             return
         }
+        arrowImageView.image = Image.iconArrowDown.image
         stackView.spacing = NumericConstants.profileStackViewHiddenSubtitleSpacing
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.subtitleLabel.isHidden = true
