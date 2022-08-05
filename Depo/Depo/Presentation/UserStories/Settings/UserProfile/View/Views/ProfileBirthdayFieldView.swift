@@ -57,9 +57,28 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
         return newValue
     }()
     
+    
+    private let monthSlashLabel : UILabel = {
+        let newValue = UILabel()
+        newValue.text = "/  "
+        newValue.textColor = AppColor.borderColor.color
+        newValue.font = .appFont(.regular, size: 14.0)
+        newValue.tintColor = UIColor.clear
+        return newValue
+    }()
+    
+    private let yearSlashLabel : UILabel = {
+        let newValue = UILabel()
+        newValue.text = "/  "
+        newValue.textColor = AppColor.borderColor.color
+        newValue.font = .appFont(.regular, size: 14.0)
+        newValue.tintColor = UIColor.clear
+        return newValue
+    }()
+    
     private let fourDigitsUnderlineWidth: CGFloat = 60
-    private let twoDigitsUnderlineWidth: CGFloat = 30
-    private let underlineOffset: CGFloat = 10
+    private let twoDigitsUnderlineWidth: CGFloat = 20
+    private let underlineOffset: CGFloat = 0
     
     private lazy var dateFormatter: DateFormatter = {
         let newValue = DateFormatter()
@@ -166,16 +185,19 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
         
         let twoDigitsTextFieldWidth = twoDigitsUnderlineWidth + underlineOffset
         textField.widthAnchor.constraint(equalToConstant: twoDigitsTextFieldWidth).isActive = true
+        textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
         textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 14).isActive = true
         textField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
         textField.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        
+        textFieldStackView.addArrangedSubview(monthSlashLabel)
         addSubview(monthTextField)
         textFieldStackView.addArrangedSubview(monthTextField)
         
         monthTextField.translatesAutoresizingMaskIntoConstraints = false
         monthTextField.widthAnchor.constraint(equalToConstant: twoDigitsTextFieldWidth).isActive = true
         monthTextField.heightAnchor.constraint(equalToConstant: 20).isActive = true
+//        addSubview(slashLabel)
+        textFieldStackView.addArrangedSubview(yearSlashLabel)
 
         addSubview(yearTextField)
         textFieldStackView.addArrangedSubview(yearTextField)
