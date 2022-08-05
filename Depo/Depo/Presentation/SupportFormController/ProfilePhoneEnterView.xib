@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfilePhoneEnterView" customModule="Billo" customModuleProvider="target">
             <connections>
+                <outlet property="arrowImageView" destination="bK9-w3-htI" id="zzr-dd-Xv9"/>
                 <outlet property="codeTextField" destination="BYD-sI-gkX" id="jug-QE-yKu"/>
                 <outlet property="codeTextFieldBackView" destination="aLX-fp-CBh" id="Nzc-ZR-yD3"/>
                 <outlet property="contentView" destination="Ev9-8J-dhu" id="zfr-4b-aZL"/>
@@ -50,10 +51,19 @@
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits"/>
                                                                 </textField>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconArrowDownDisable" translatesAutoresizingMaskIntoConstraints="NO" id="bK9-w3-htI">
+                                                                    <rect key="frame" x="53.5" y="17" width="22.5" height="22"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="bK9-w3-htI" secondAttribute="height" multiplier="1:1" id="ZPJ-lX-HpE"/>
+                                                                    </constraints>
+                                                                </imageView>
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
+                                                                <constraint firstItem="BYD-sI-gkX" firstAttribute="trailing" secondItem="bK9-w3-htI" secondAttribute="trailing" constant="6" id="3AU-1G-Lww"/>
+                                                                <constraint firstItem="bK9-w3-htI" firstAttribute="height" secondItem="aLX-fp-CBh" secondAttribute="height" multiplier="0.7:1" id="3QD-xV-6sD"/>
                                                                 <constraint firstAttribute="width" constant="90" id="9MK-Bs-i7H"/>
+                                                                <constraint firstItem="bK9-w3-htI" firstAttribute="centerY" secondItem="BYD-sI-gkX" secondAttribute="centerY" id="GfB-MJ-ahA"/>
                                                                 <constraint firstItem="BYD-sI-gkX" firstAttribute="leading" secondItem="aLX-fp-CBh" secondAttribute="leading" constant="8" id="Kz8-Tj-QNp"/>
                                                                 <constraint firstAttribute="bottom" secondItem="BYD-sI-gkX" secondAttribute="bottom" constant="-12" id="Rca-Z3-0c8"/>
                                                                 <constraint firstAttribute="trailing" secondItem="BYD-sI-gkX" secondAttribute="trailing" constant="8" id="c1W-L7-FfO"/>
@@ -165,6 +175,7 @@
         </view>
     </objects>
     <resources>
+        <image name="iconArrowDownDisable" width="24" height="24"/>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

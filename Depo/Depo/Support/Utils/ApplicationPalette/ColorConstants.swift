@@ -117,6 +117,7 @@ enum AppColor {
     // MARK: Profile Colors
     case borderColor
     case profileInfoOrange
+    case arrowDownOpenColor
 
     var color: UIColor {
         guard let uiColor = UIColor(named: String(describing: self)) else {

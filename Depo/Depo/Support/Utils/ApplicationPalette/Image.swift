@@ -121,4 +121,9 @@ enum Image: String, AppImage {
     case iconDisplaySelected
     ///  UiSwitch
     case gradientSwitch
+    
+    
+    /// Profile
+    case iconArrowDownActive
+    case iconArrowDownDisable
 }
