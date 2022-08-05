@@ -8,6 +8,7 @@
 
 enum SettingsTypes: Int {
     case invitation
+    case paycell
     case autoUpload
     case periodicContactSync
     case faceImage
@@ -25,6 +26,7 @@ enum SettingsTypes: Int {
     var text: String {
         switch self {
         case .invitation: return TextConstants.settingsItemInvitation
+        case .paycell: return "Marka Elçisi Ol"
         case .autoUpload: return TextConstants.settingsViewCellAutoUpload
         case .periodicContactSync: return TextConstants.settingsViewCellContactsSync
         case .faceImage: return TextConstants.settingsViewCellFaceAndImageGrouping
@@ -46,10 +48,14 @@ enum SettingsTypes: Int {
     static let allSectionThreeTypes = [myActivities, passcode, security]
     static var allSectionFourTypes = [helpAndSupport, termsAndPolicy, .darkMode, logout]
 
-    static func prepareTypes(hasPermissions: Bool, isInvitationShown: Bool, isChatbotShown: Bool) -> [[SettingsTypes]] {
+    static func prepareTypes(hasPermissions: Bool, isInvitationShown: Bool, isChatbotShown: Bool, isPaycellShown: Bool) -> [[SettingsTypes]] {
         var result = [[SettingsTypes]]()
         if isInvitationShown {
             result.append([SettingsTypes.invitation])
+        }
+        
+        if isPaycellShown {
+            result.append([SettingsTypes.paycell])
         }
 
         result.append(SettingsTypes.allSectionOneTypes)

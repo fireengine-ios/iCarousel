@@ -936,6 +936,11 @@ class RouterVC: NSObject {
         return InvitationViewController()
     }
     
+    func paycellCampaign() -> InvitationViewController {
+        let vc = InvitationViewController()
+        return vc
+    }
+    
     // MARK: Face Image Recognition Photos
     
     func imageFacePhotosController(album: AlbumItem, item: Item, status: ItemStatus, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool = false, faceImageType: FaceImageType? = nil) -> BaseFilesGreedChildrenViewController {

@@ -51,6 +51,10 @@ extension SettingsPresenter: SettingsViewOutput {
     func goToInvitation() {
         router.goToInvitation()
     }
+    
+    func goToPaycellCampaign() {
+        router.goToPaycellCampaing()
+    }
 
     func viewIsReady() {
         interactor.trackScreen()
@@ -174,8 +178,8 @@ extension SettingsPresenter: SettingsViewOutput {
 // MARK: - SettingsInteractorOutput
 extension SettingsPresenter: SettingsInteractorOutput {
     
-    func cellsDataForSettings(isPermissionShown: Bool, isInvitationShown: Bool, isChatbotShown: Bool) {
-        view.prepareCellsData(isPermissionShown: isPermissionShown, isInvitationShown: isInvitationShown, isChatbotShown: isChatbotShown)
+    func cellsDataForSettings(isPermissionShown: Bool, isInvitationShown: Bool, isChatbotShown: Bool, isPaycellShown: Bool) {
+        view.prepareCellsData(isPermissionShown: isPermissionShown, isInvitationShown: isInvitationShown, isChatbotShown: isChatbotShown, isPaycellShown: isPaycellShown)
     }
     
     func goToOnboarding() {
