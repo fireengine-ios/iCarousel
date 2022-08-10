@@ -37,6 +37,7 @@ enum AppColor {
     case separator
     case lightText
 
+    case loginShadowBlue
     case darkContentOverlay
     case lightContentOverlay
     

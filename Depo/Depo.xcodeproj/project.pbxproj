@@ -8954,6 +8954,10 @@
 		E7426F75286E559D00666A79 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7426F73286E559D00666A79 /* GradientSwitch.swift */; };
 		E7426F76286E559D00666A79 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7426F73286E559D00666A79 /* GradientSwitch.swift */; };
 		E7426F77286E559D00666A79 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7426F73286E559D00666A79 /* GradientSwitch.swift */; };
+		E7F9A62528A079CD00B347E7 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F9A62428A079CD00B347E7 /* Gradient.swift */; };
+		E7F9A62628A079CD00B347E7 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F9A62428A079CD00B347E7 /* Gradient.swift */; };
+		E7F9A62728A079CD00B347E7 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F9A62428A079CD00B347E7 /* Gradient.swift */; };
+		E7F9A62828A079CD00B347E7 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F9A62428A079CD00B347E7 /* Gradient.swift */; };
 		F00D7DDF2851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */; };
 		F00D7DE02851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */; };
 		F00D7DE12851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */; };
@@ -12042,6 +12046,7 @@
 		E61A7EDD38B6D6D880916FFF /* Pods-LifeTech-LifeboxFileProviderUI.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech-LifeboxFileProviderUI.enterprise.xcconfig"; path = "Target Support Files/Pods-LifeTech-LifeboxFileProviderUI/Pods-LifeTech-LifeboxFileProviderUI.enterprise.xcconfig"; sourceTree = "<group>"; };
 		E70E4E2532914C44F1B96A96 /* TermsAndServicesViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesViewInput.swift; sourceTree = "<group>"; };
 		E7426F73286E559D00666A79 /* GradientSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientSwitch.swift; sourceTree = "<group>"; };
+		E7F9A62428A079CD00B347E7 /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		E7F9CA614F6A1DD5CFEFFAFD /* UserInfoSubViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewRouterInput.swift; sourceTree = "<group>"; };
 		E829DBD8933CDFA043AFECB2 /* SelectNamePresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNamePresenter.swift; sourceTree = "<group>"; };
 		E9F6A1C9F3695D2974AEF4DA /* SettingsInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsInteractorOutput.swift; sourceTree = "<group>"; };
@@ -19582,6 +19587,7 @@
 				98A867762080DCBC00D2D4F4 /* ArrayExtension.swift */,
 				CE00B255220334D800A5A696 /* BackButtonActions.swift */,
 				CE343601224B92BB00AFAABB /* Bool+Init.swift */,
+				E7F9A62428A079CD00B347E7 /* Gradient.swift */,
 				CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */,
 				985FF9E6255BE477001AA845 /* Codable+Extesions.swift */,
 				8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */,
@@ -25644,7 +25650,6 @@
 				8C0E8D9D1FDEBDFF00789C91 /* EULAService.swift in Sources */,
 				98B0485B259314750011DAEB /* RestoreHelper.m in Sources */,
 				73EA170222EB2C7700BAD2D3 /* SpotifyRoutingService.swift in Sources */,
-				E7426F6C286DDDDF00666A79 /* GradientSwitch.swift in Sources */,
 				8C208652228D4B2E000BEDAD /* RangeAPIInfo.swift in Sources */,
 				9886113A240FF4DC00A49C5B /* BecomePremiumViewSourceType.swift in Sources */,
 				0780AB252791681F000760D9 /* RecognizedText.swift in Sources */,
@@ -25948,6 +25953,7 @@
 				989BDE4722F47B1E001DDEB2 /* SpotifyAuthViewController.swift in Sources */,
 				07FBA20526E0BBA800ED4132 /* Strings.swift in Sources */,
 				CF71463A24B597A800D83E60 /* LineProgressView.swift in Sources */,
+				E7F9A62528A079CD00B347E7 /* Gradient.swift in Sources */,
 				8C0E8E211FDEBDFF00789C91 /* PackagesViewController.swift in Sources */,
 				8C0E8E221FDEBDFF00789C91 /* PasscodeSettingsModuleInput.swift in Sources */,
 				076BD1D427BC12EB004609E3 /* MapSearchViewOutput.swift in Sources */,
@@ -27270,6 +27276,7 @@
 				CE78482B22A685FB00662219 /* EditinglBar.swift in Sources */,
 				CE78482C22A685FB00662219 /* NotificationName+Extensions.swift in Sources */,
 				CE78482D22A685FB00662219 /* AugmentedRealityController.swift in Sources */,
+				E7F9A62728A079CD00B347E7 /* Gradient.swift in Sources */,
 				98AC47FF252DFC05003EB6C5 /* FunTabBar.swift in Sources */,
 				98792DD122FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift in Sources */,
 				CE78482F22A685FB00662219 /* VisualMusicPlayerViewController.swift in Sources */,
@@ -28823,7 +28830,6 @@
 				CE784C4A22A685FB00662219 /* UIButton+Color.swift in Sources */,
 				CF71473924B597AA00D83E60 /* ContactSyncScheduleCard.swift in Sources */,
 				CE784C4B22A685FB00662219 /* GradientOrangeView.swift in Sources */,
-				E7426F6E286DDDDF00666A79 /* GradientSwitch.swift in Sources */,
 				CE784C4C22A685FB00662219 /* AlbumDetailInteractor.swift in Sources */,
 				B528DF882552CED8002D9718 /* LocalContactsService.swift in Sources */,
 				CE784C4D22A685FB00662219 /* PasscodeSettingsInteractor.swift in Sources */,
@@ -29098,7 +29104,6 @@
 				CF8B63E023CBC9D70021B021 /* MyStorageViewController.swift in Sources */,
 				CF8B63E223CBC9D70021B021 /* VisualMusicPlayerViewController.swift in Sources */,
 				CF8B63E323CBC9D70021B021 /* InstaPickSmallPhotoView.swift in Sources */,
-				E7426F6D286DDDDF00666A79 /* GradientSwitch.swift in Sources */,
 				CF8B63E423CBC9D70021B021 /* LeavePremiumHeaderView.swift in Sources */,
 				CF8B63E523CBC9D70021B021 /* LoginViewController.swift in Sources */,
 				CF8B63E623CBC9D70021B021 /* AutoSyncSwitcherTableViewCell.swift in Sources */,
@@ -29618,6 +29623,7 @@
 				CF8B656323CBC9D70021B021 /* TermsAndServicesViewInput.swift in Sources */,
 				CF8B656423CBC9D70021B021 /* SharedFactory.swift in Sources */,
 				CF8B656523CBC9D70021B021 /* WhiteButtonWithRoundedCorner.swift in Sources */,
+				E7F9A62628A079CD00B347E7 /* Gradient.swift in Sources */,
 				CF8B656623CBC9D70021B021 /* AlbumService.swift in Sources */,
 				CF8B656723CBC9D70021B021 /* TermsAndServicesViewOutput.swift in Sources */,
 				98B0482C259314750011DAEB /* Utils.m in Sources */,
@@ -31966,6 +31972,7 @@
 				CF8B6EDD23CBCA280021B021 /* UserProfileRouterInput.swift in Sources */,
 				07567DA82721DFBC00557BCF /* DeleteAccountPopUp.swift in Sources */,
 				CF8B6EE123CBCA280021B021 /* FBService.swift in Sources */,
+				E7F9A62828A079CD00B347E7 /* Gradient.swift in Sources */,
 				CF7146B624B597A900D83E60 /* ContactsBackupCell.swift in Sources */,
 				CF8B6EE223CBCA280021B021 /* PasscodeSettingsInitializer.swift in Sources */,
 				CF8B6EE523CBCA280021B021 /* UserProfileViewInput.swift in Sources */,
@@ -32346,7 +32353,6 @@
 				CF8B6FF323CBCA280021B021 /* AlbumDetailInteractor.swift in Sources */,
 				CF8B6FF423CBCA280021B021 /* PasscodeSettingsInteractor.swift in Sources */,
 				B528DF892552CED8002D9718 /* LocalContactsService.swift in Sources */,
-				E7426F6F286DDDDF00666A79 /* GradientSwitch.swift in Sources */,
 				CF8B6FF623CBCA280021B021 /* PeriodicContactSyncViewController.swift in Sources */,
 				CF8B6FF723CBCA280021B021 /* PackagesRouter.swift in Sources */,
 				CF8B6FF823CBCA280021B021 /* AlbumDetailRouter.swift in Sources */,

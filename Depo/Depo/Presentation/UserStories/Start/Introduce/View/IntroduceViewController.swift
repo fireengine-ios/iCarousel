@@ -24,9 +24,9 @@ class IntroduceViewController: ViewController {
     @IBOutlet private weak var startUsingLifeBoxButton: RoundedInsetsButton! {
         willSet {
             newValue.setTitle(TextConstants.itroViewGoToRegisterButtonText, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
-            newValue.backgroundColor = AppColor.marineTwoAndTealish.color
-            newValue.setTitleColor(.white, for: .normal)
+            newValue.titleLabel?.font = UIFont.appFont(.medium, size: 16.0)
+            newValue.backgroundColor = .clear
+            newValue.setTitleColor(AppColor.label.color, for: .normal)
             newValue.insets = UIEdgeInsets(topBottom: 0, rightLeft: 12)
             newValue.adjustsFontSizeToFitWidth()
         }
@@ -35,9 +35,9 @@ class IntroduceViewController: ViewController {
     @IBOutlet private weak var haveAccountButton: RoundedInsetsButton! {
         willSet {
             newValue.setTitle(TextConstants.introViewGoToLoginButtonText, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
-            newValue.backgroundColor = .white
-            newValue.setTitleColor(ColorConstants.marineTwo, for: .normal)
+            newValue.titleLabel?.font = UIFont.appFont(.medium, size: 16.0)
+            newValue.backgroundColor = ColorConstants.darkBlueColor
+            newValue.setTitleColor(ColorConstants.whiteColor, for: .normal)
             newValue.insets = UIEdgeInsets(topBottom: 0, rightLeft: 12)
             newValue.adjustsFontSizeToFitWidth()
         }
@@ -54,13 +54,26 @@ class IntroduceViewController: ViewController {
     @IBOutlet private weak var orLabel: UILabel! {
         willSet {
             newValue.text = localized(.onboardingButtonOr)
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 15)
-            newValue.textColor = .white
+            newValue.font = UIFont.appFont(.regular, size: 15.0)
+            newValue.textColor = AppColor.label.color
         }
     }
     
+    @IBOutlet weak var logoTitleLabel: UILabel! {
+        willSet {
+            newValue.font = .appFont(.medium, size: 20)
+            newValue.textColor = AppColor.label.color
+            newValue.text = TextConstants.NotLocalized.appNameLowercased
+            newValue.textAlignment = .center
+        }
+    }
+    
+    
     @IBOutlet private weak var signInWithGoogleButton: RoundedInsetsButton! {
         willSet {
+            newValue.layer.borderWidth = 1.0
+            newValue.layer.borderColor = AppColor.label.cgColor
+            newValue.layer.cornerRadius = newValue.frame.height * 0.5
             newValue.setTitle(localized(.connectWithGoogle), for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
             newValue.backgroundColor = .white
@@ -73,6 +86,9 @@ class IntroduceViewController: ViewController {
     
     @IBOutlet weak var signInWithAppleButton: RoundedInsetsButton! {
         willSet {
+            newValue.layer.borderWidth = 1.0
+            newValue.layer.borderColor = AppColor.label.cgColor
+            newValue.layer.cornerRadius = newValue.frame.height * 0.5
             newValue.setTitle(localized(.connectWithApple), for: .normal)
             newValue.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             newValue.backgroundColor = .white
@@ -92,24 +108,29 @@ class IntroduceViewController: ViewController {
     @IBOutlet private weak var welcomeTopLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: Device.isIpad ? 28 : 22)
-            newValue.textColor = ColorConstants.whiteColor
+            newValue.font = .appFont(.medium, size: 20)
+            newValue.textColor = AppColor.label.color
             newValue.minimumScaleFactor = 0.5
             newValue.adjustsFontSizeToFitWidth = true
             newValue.text = TextConstants.welcome1Info
+            newValue.textAlignment = .center
         }
     }
     
     @IBOutlet private weak var welcomeBottomLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: Device.isIpad ? 24 : 16)
-            newValue.textColor = ColorConstants.whiteColor
+            newValue.font = .appFont(.regular, size: 15.0)
+            newValue.textColor = AppColor.label.color
             newValue.minimumScaleFactor = 0.5
             newValue.adjustsFontSizeToFitWidth = true
             newValue.text = TextConstants.welcome1SubInfo
+            newValue.textAlignment = .center
         }
     }
+    
+    @IBOutlet private weak var gradientView: UIView!
+    
     
     // MARK: Lifecycle
     override func viewDidLoad() {

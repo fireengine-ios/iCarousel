@@ -64,8 +64,8 @@ final class LoginViewController: ViewController {
         willSet {
             newValue.setTitle(TextConstants.loginTitle, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.backgroundColor = UIColor.lrTealish
+            newValue.titleLabel?.font = UIFont.appFont(.medium, size: 16.0)
+            newValue.backgroundColor = ColorConstants.darkBlueColor
             newValue.isOpaque = true
         }
     }
@@ -91,17 +91,17 @@ final class LoginViewController: ViewController {
             newValue.textField.autocapitalizationType = .none
             newValue.textField.autocorrectionType = .no
             newValue.textField.quickDismissPlaceholder = TextConstants.loginEmailOrPhonePlaceholder
-            newValue.titleLabel.text = TextConstants.loginCellTitleEmail
+            newValue.titleLabel.text = "  " + TextConstants.loginCellTitleEmail + "  "
         }
     }
     
-    @IBOutlet private weak var passwordEnterView: ProfilePasswordEnterView! {
+    @IBOutlet private weak var passwordEnterView: BorderedPasswordEnterView! {
         willSet {
             newValue.textField.enablesReturnKeyAutomatically = true
 
             newValue.textField.quickDismissPlaceholder = TextConstants.loginPasswordPlaceholder
 
-            newValue.titleLabel.text = TextConstants.loginCellTitlePassword
+            newValue.titleLabel.text = "  " + TextConstants.loginCellTitlePassword + "  "
         }
     }
     
