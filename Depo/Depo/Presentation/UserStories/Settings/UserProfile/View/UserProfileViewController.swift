@@ -275,12 +275,14 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     }
 
     @objc private func onEditButtonAction() {
+        phoneView.arrowImageView.image = Image.iconArrowDownActive.image
         setupEditState(true)
         output.tapEditButton()
         saveFields()
     }
     
     @objc private func onReadyButtonAction() {
+        phoneView.arrowImageView.image = Image.iconArrowDownDisable.image
         updateProfile()
     }
     

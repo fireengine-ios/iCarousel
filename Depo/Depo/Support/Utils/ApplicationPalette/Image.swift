@@ -122,6 +122,10 @@ enum Image: String, AppImage {
     ///  UiSwitch
     case gradientSwitch
     
+    
+    /// Profile
+    case iconArrowDownActive
+    case iconArrowDownDisable
     /// Introduce
     case circleIntoduce
     
