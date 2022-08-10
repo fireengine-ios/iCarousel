@@ -936,9 +936,8 @@ class RouterVC: NSObject {
         return InvitationViewController()
     }
     
-    func paycellCampaign() -> InvitationViewController {
-        let vc = InvitationViewController()
-        return vc
+    func paycellCampaign() -> PaycellCampaignViewController {
+        return PaycellCampaignViewController()
     }
     
     // MARK: Face Image Recognition Photos
@@ -1011,6 +1010,10 @@ class RouterVC: NSObject {
 
     var invitation: UIViewController {
         return InvitationViewController()
+    }
+    
+    var paycell: UIViewController {
+        return PaycellCampaignViewController()
     }
 
     // MARK: Chatbot
@@ -1475,6 +1478,17 @@ class RouterVC: NSObject {
         controller.modalTransitionStyle = .crossDissolve
         controller.errorMessage = errorMessage
         controller.warningType = warningType
+        
+        return controller
+    }
+    
+    func paycellDetailPopup(with model: PaycellDetailModel, type: PaycellDetailType) -> PaycellDetailPopup {
+        let controller = PaycellDetailPopup()
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        controller.detailType = type
+        controller.model = model
         
         return controller
     }

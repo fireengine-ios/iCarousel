@@ -130,7 +130,7 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
     
     func goToPaycellCampaign() {
         if let left = leftController {
-            configurateWithControllers(leftViewController: left, controllers: [RouterVC().paycellCampaign()])
+            configurateWithControllers(leftViewController: left, controllers: [RouterVC().paycell])
         }
     }
 }

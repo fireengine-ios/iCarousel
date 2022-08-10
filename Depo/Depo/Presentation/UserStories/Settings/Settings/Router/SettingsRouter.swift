@@ -21,7 +21,7 @@ class SettingsRouter: SettingsRouterInput {
     }
     
     func goToPaycellCampaing() {
-        router.pushViewController(viewController: router.paycellCampaign())
+        router.pushViewController(viewController: router.paycell)
     }
 
     func goToConnectedAccounts() {

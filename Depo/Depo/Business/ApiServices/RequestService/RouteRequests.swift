@@ -498,4 +498,11 @@ struct RouteRequests {
     static let appleLoginStatus = baseUrl +/ "apple/login/status"
     static let appleLoginDisconnect = baseUrl +/ "apple/login/disconnect"
     static let appleLoginConnect = baseUrl +/ "apple/login/connect"
+    
+    // MARK: - Paycell Campaign
+    static let paycellLink = baseUrl +/ "paycell/link"
+    static let paycellDetail = baseUrl +/ "paycell/detail/\(Device.locale)"
+    static let paycellConsent = baseUrl +/ "paycell/consent"
+
+    
 }
