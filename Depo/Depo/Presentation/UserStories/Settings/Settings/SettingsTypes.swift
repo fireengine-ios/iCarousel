@@ -50,14 +50,17 @@ enum SettingsTypes: Int {
 
     static func prepareTypes(hasPermissions: Bool, isInvitationShown: Bool, isChatbotShown: Bool, isPaycellShown: Bool) -> [[SettingsTypes]] {
         var result = [[SettingsTypes]]()
+        
+        var invitationTypes: [SettingsTypes] = []
         if isInvitationShown {
-            result.append([SettingsTypes.invitation])
+            invitationTypes.append(SettingsTypes.invitation)
         }
         
         if isPaycellShown {
-            result.append([SettingsTypes.paycell])
+            invitationTypes.append(SettingsTypes.paycell)
         }
-
+        
+        result.append(invitationTypes)
         result.append(SettingsTypes.allSectionOneTypes)
 
         var accountTypes = [SettingsTypes.connectAccounts]
