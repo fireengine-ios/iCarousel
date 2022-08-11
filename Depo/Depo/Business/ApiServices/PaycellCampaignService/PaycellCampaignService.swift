@@ -39,4 +39,14 @@ final class PaycellCampaignService: BaseRequestService {
             .responseVoid(handler)
             .task
     }
+    
+    @discardableResult
+    func paycellGain(handler: @escaping ResponseHandler<PaycellGainResponse>) -> URLSessionTask? {
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.paycellGain)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
 }

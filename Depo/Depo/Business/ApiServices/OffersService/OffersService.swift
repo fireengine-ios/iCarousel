@@ -12,7 +12,7 @@ protocol OffersService {
     func offersAll(success: SuccessResponse?, fail: @escaping FailResponse)
     func activate(offer: OfferServiceResponse, success: SuccessResponse?, fail: @escaping FailResponse)
     func offersAllApple(success: SuccessResponse?, fail: @escaping FailResponse)
-    func validateApplePurchase(with receiptId: String, productId: String?, success: SuccessResponse?, fail: @escaping FailResponse)
+    func validateApplePurchase(with receiptId: String, productId: String?, referer: String?, success: SuccessResponse?, fail: @escaping FailResponse)
     func initOffer(offer: PackageModelResponse, success: SuccessResponse?, fail: @escaping FailResponse)
     func verifyOffer(otp: String, referenceToken: String, success: SuccessResponse?, fail: @escaping FailResponse)
     func getJobExists(success: SuccessResponse?, fail: @escaping FailResponse)
@@ -45,10 +45,10 @@ class OffersServiceIml: BaseRequestService, OffersService {
         executeGetRequest(param: param, handler: handler)
     }
     
-    func validateApplePurchase(with receiptId: String, productId: String?, success: SuccessResponse?, fail: @escaping FailResponse) {
+    func validateApplePurchase(with receiptId: String, productId: String?, referer: String? = nil, success: SuccessResponse?, fail: @escaping FailResponse) {
         debugLog("OffersServiceIml validateApplePurchase")
 
-        let param = ValidateApplePurchaseParameters(receiptId: receiptId, productId: productId)
+        let param = ValidateApplePurchaseParameters(receiptId: receiptId, productId: productId, referer: referer)
         let handler = BaseResponseHandler<ValidateApplePurchaseResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: param, handler: handler)
     }

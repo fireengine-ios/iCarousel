@@ -20,3 +20,7 @@ struct PaycellDetailResponse: Codable {
 struct PaycellDetailModel: Codable {
     let locale, title, content, image: String
 }
+
+struct PaycellGainResponse: Codable {
+    let result: Double
+}
