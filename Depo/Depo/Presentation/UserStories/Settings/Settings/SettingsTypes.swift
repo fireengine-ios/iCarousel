@@ -26,7 +26,7 @@ enum SettingsTypes: Int {
     var text: String {
         switch self {
         case .invitation: return TextConstants.settingsItemInvitation
-        case .paycell: return "Marka Elçisi Ol"
+        case .paycell: return localized(.paycellCampaignTitle)
         case .autoUpload: return TextConstants.settingsViewCellAutoUpload
         case .periodicContactSync: return TextConstants.settingsViewCellContactsSync
         case .faceImage: return TextConstants.settingsViewCellFaceAndImageGrouping
