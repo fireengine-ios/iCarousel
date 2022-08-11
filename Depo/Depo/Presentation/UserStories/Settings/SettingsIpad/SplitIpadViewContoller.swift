@@ -127,4 +127,10 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
             configurateWithControllers(leftViewController: left, controllers: [RouterVC().darkMode])
         }
     }
+    
+    func goToPaycellCampaign() {
+        if let left = leftController {
+            configurateWithControllers(leftViewController: left, controllers: [RouterVC().paycell])
+        }
+    }
 }

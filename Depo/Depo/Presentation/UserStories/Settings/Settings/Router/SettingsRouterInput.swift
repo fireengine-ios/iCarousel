@@ -55,4 +55,6 @@ protocol SettingsRouterInput {
     func goToChatbot()
 
     func goToDarkMode()
+    
+    func goToPaycellCampaing()
 }

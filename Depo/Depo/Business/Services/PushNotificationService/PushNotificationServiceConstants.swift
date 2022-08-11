@@ -58,6 +58,7 @@ enum PushNotificationAction: String {
     case hiddenBin = "hidden_bin"
     case silent = "silent"
     case saveToMyLifebox = "save_to_my_lifebox"
+    case paycellCampaign = "paycell_campaign"
     
     case widgetLogout = "widget_logout"
     case widgetQuota = "widget_quota"
@@ -121,5 +122,7 @@ enum UniversalLinkPath: String {
 enum DeepLinkParameter: String {
     case affiliate = "affiliate" // ex: packages?affiliate=campaign1
     case albumUUID = "albumUUID"
-    case publicToken = "public_token"
+    case publicToken = "public_token" // public shared items
+    case paycellCampaign = "paycell_campaign" // campaign name like affiliate
+    case paycellToken = "referer_token" // provider user's token
 }

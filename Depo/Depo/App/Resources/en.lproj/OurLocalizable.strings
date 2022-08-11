@@ -2067,3 +2067,9 @@ then {11,99 TRY/Month}*/
 /*First {6 months} {6,99 TRY}
 then {11,99 TRY/Month}*/
 "iap_intro_offer_pay_up_front" = "First %@ %@\nthen %@";
+
+/*Paycell Campaign*/
+"settings_item_paycell" = "";
+"title_paycell_link" = "";
+"title_paycell_createlink" = "";
+"title_paycell_campaign" = "";
