@@ -190,8 +190,6 @@ class BorderedTextEnterView: UIView {
     
     let holderView : UIView = {
         let newValue = UIView()
-        
-        
         return newValue
     }()
     

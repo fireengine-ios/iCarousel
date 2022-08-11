@@ -8954,10 +8954,10 @@
 		E7426F75286E559D00666A79 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7426F73286E559D00666A79 /* GradientSwitch.swift */; };
 		E7426F76286E559D00666A79 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7426F73286E559D00666A79 /* GradientSwitch.swift */; };
 		E7426F77286E559D00666A79 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7426F73286E559D00666A79 /* GradientSwitch.swift */; };
-		E7F9A62528A079CD00B347E7 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F9A62428A079CD00B347E7 /* Gradient.swift */; };
-		E7F9A62628A079CD00B347E7 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F9A62428A079CD00B347E7 /* Gradient.swift */; };
-		E7F9A62728A079CD00B347E7 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F9A62428A079CD00B347E7 /* Gradient.swift */; };
-		E7F9A62828A079CD00B347E7 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F9A62428A079CD00B347E7 /* Gradient.swift */; };
+		E797AF7E28A51FD900F0B200 /* BorderedPasswordEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E797AF7D28A51FD900F0B200 /* BorderedPasswordEnterView.swift */; };
+		E797AF7F28A51FD900F0B200 /* BorderedPasswordEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E797AF7D28A51FD900F0B200 /* BorderedPasswordEnterView.swift */; };
+		E797AF8028A51FD900F0B200 /* BorderedPasswordEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E797AF7D28A51FD900F0B200 /* BorderedPasswordEnterView.swift */; };
+		E797AF8128A51FD900F0B200 /* BorderedPasswordEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E797AF7D28A51FD900F0B200 /* BorderedPasswordEnterView.swift */; };
 		F00D7DDF2851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */; };
 		F00D7DE02851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */; };
 		F00D7DE12851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */; };
@@ -12046,7 +12046,7 @@
 		E61A7EDD38B6D6D880916FFF /* Pods-LifeTech-LifeboxFileProviderUI.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech-LifeboxFileProviderUI.enterprise.xcconfig"; path = "Target Support Files/Pods-LifeTech-LifeboxFileProviderUI/Pods-LifeTech-LifeboxFileProviderUI.enterprise.xcconfig"; sourceTree = "<group>"; };
 		E70E4E2532914C44F1B96A96 /* TermsAndServicesViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesViewInput.swift; sourceTree = "<group>"; };
 		E7426F73286E559D00666A79 /* GradientSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientSwitch.swift; sourceTree = "<group>"; };
-		E7F9A62428A079CD00B347E7 /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
+		E797AF7D28A51FD900F0B200 /* BorderedPasswordEnterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedPasswordEnterView.swift; sourceTree = "<group>"; };
 		E7F9CA614F6A1DD5CFEFFAFD /* UserInfoSubViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewRouterInput.swift; sourceTree = "<group>"; };
 		E829DBD8933CDFA043AFECB2 /* SelectNamePresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNamePresenter.swift; sourceTree = "<group>"; };
 		E9F6A1C9F3695D2974AEF4DA /* SettingsInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsInteractorOutput.swift; sourceTree = "<group>"; };
@@ -13179,6 +13179,7 @@
 			isa = PBXGroup;
 			children = (
 				17589F622275E33800A5DB37 /* ProfilePasswordEnterView.swift */,
+				E797AF7D28A51FD900F0B200 /* BorderedPasswordEnterView.swift */,
 				17589F632275E33800A5DB37 /* ErrorBannerView.swift */,
 				4B34A3F82334CF8C00C9B12B /* SupportFormBannerView.swift */,
 				F02F6A9D269C16C000A64ED8 /* PasswordRulesView.swift */,
@@ -19587,7 +19588,6 @@
 				98A867762080DCBC00D2D4F4 /* ArrayExtension.swift */,
 				CE00B255220334D800A5A696 /* BackButtonActions.swift */,
 				CE343601224B92BB00AFAABB /* Bool+Init.swift */,
-				E7F9A62428A079CD00B347E7 /* Gradient.swift */,
 				CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */,
 				985FF9E6255BE477001AA845 /* Codable+Extesions.swift */,
 				8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */,
@@ -25363,6 +25363,7 @@
 				98495F59255975810093B2C2 /* PlaceholderTextView.swift in Sources */,
 				CE49E8FB2099BD83007F05A6 /* UIButton+Font.swift in Sources */,
 				B5AB5B6521F9B01B003AABB4 /* DropboxAccountConnectionCell.swift in Sources */,
+				E797AF7E28A51FD900F0B200 /* BorderedPasswordEnterView.swift in Sources */,
 				98A86D5723A238E700438225 /* AlbumsSliderCell.swift in Sources */,
 				8C0E8CEA1FDEBDFF00789C91 /* BaseFilesGreedChildrenViewController.swift in Sources */,
 				8C0E8CED1FDEBDFF00789C91 /* CustomSwitch.swift in Sources */,
@@ -25953,7 +25954,6 @@
 				989BDE4722F47B1E001DDEB2 /* SpotifyAuthViewController.swift in Sources */,
 				07FBA20526E0BBA800ED4132 /* Strings.swift in Sources */,
 				CF71463A24B597A800D83E60 /* LineProgressView.swift in Sources */,
-				E7F9A62528A079CD00B347E7 /* Gradient.swift in Sources */,
 				8C0E8E211FDEBDFF00789C91 /* PackagesViewController.swift in Sources */,
 				8C0E8E221FDEBDFF00789C91 /* PasscodeSettingsModuleInput.swift in Sources */,
 				076BD1D427BC12EB004609E3 /* MapSearchViewOutput.swift in Sources */,
@@ -27276,7 +27276,6 @@
 				CE78482B22A685FB00662219 /* EditinglBar.swift in Sources */,
 				CE78482C22A685FB00662219 /* NotificationName+Extensions.swift in Sources */,
 				CE78482D22A685FB00662219 /* AugmentedRealityController.swift in Sources */,
-				E7F9A62728A079CD00B347E7 /* Gradient.swift in Sources */,
 				98AC47FF252DFC05003EB6C5 /* FunTabBar.swift in Sources */,
 				98792DD122FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift in Sources */,
 				CE78482F22A685FB00662219 /* VisualMusicPlayerViewController.swift in Sources */,
@@ -28619,6 +28618,7 @@
 				CE784BC022A685FB00662219 /* (null) in Sources */,
 				98231A0E24F3A1E700FD16E2 /* SelectionMenuController.swift in Sources */,
 				CE784BC122A685FB00662219 /* PromoView.swift in Sources */,
+				E797AF8028A51FD900F0B200 /* BorderedPasswordEnterView.swift in Sources */,
 				CE784BC222A685FB00662219 /* InstapickAnalyze.swift in Sources */,
 				CE784BC322A685FB00662219 /* AuthorityType.swift in Sources */,
 				B51805F0234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */,
@@ -29623,7 +29623,6 @@
 				CF8B656323CBC9D70021B021 /* TermsAndServicesViewInput.swift in Sources */,
 				CF8B656423CBC9D70021B021 /* SharedFactory.swift in Sources */,
 				CF8B656523CBC9D70021B021 /* WhiteButtonWithRoundedCorner.swift in Sources */,
-				E7F9A62628A079CD00B347E7 /* Gradient.swift in Sources */,
 				CF8B656623CBC9D70021B021 /* AlbumService.swift in Sources */,
 				CF8B656723CBC9D70021B021 /* TermsAndServicesViewOutput.swift in Sources */,
 				98B0482C259314750011DAEB /* Utils.m in Sources */,
@@ -29854,6 +29853,7 @@
 				CF8B660D23CBC9D70021B021 /* CreateStoryPreviewModuleInput.swift in Sources */,
 				CF8B660E23CBC9D70021B021 /* ImportFromInstagramInteractor.swift in Sources */,
 				CF8B660F23CBC9D70021B021 /* CredsUpdateCheckPopUp.swift in Sources */,
+				E797AF7F28A51FD900F0B200 /* BorderedPasswordEnterView.swift in Sources */,
 				CF8B661023CBC9D70021B021 /* PeopleAlbumsManager.swift in Sources */,
 				CF8B661123CBC9D70021B021 /* SpotifyPlaylistsNavbarManager.swift in Sources */,
 				CF8B661223CBC9D70021B021 /* ForgotPasswordInteractor.swift in Sources */,
@@ -31972,8 +31972,8 @@
 				CF8B6EDD23CBCA280021B021 /* UserProfileRouterInput.swift in Sources */,
 				07567DA82721DFBC00557BCF /* DeleteAccountPopUp.swift in Sources */,
 				CF8B6EE123CBCA280021B021 /* FBService.swift in Sources */,
-				E7F9A62828A079CD00B347E7 /* Gradient.swift in Sources */,
 				CF7146B624B597A900D83E60 /* ContactsBackupCell.swift in Sources */,
+				E797AF8128A51FD900F0B200 /* BorderedPasswordEnterView.swift in Sources */,
 				CF8B6EE223CBCA280021B021 /* PasscodeSettingsInitializer.swift in Sources */,
 				CF8B6EE523CBCA280021B021 /* UserProfileViewInput.swift in Sources */,
 				0302079623D1D2D300BF8006 /* NetmeraService.swift in Sources */,

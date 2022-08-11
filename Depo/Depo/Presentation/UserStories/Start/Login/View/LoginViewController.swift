@@ -55,7 +55,7 @@ final class LoginViewController: ViewController {
             let normalImage = UIImage(named: "checkBoxNotSelected")
             newValue.setImage(normalImage, for: .normal)
             
-            let selectedImage = UIImage(named: "checkbox_active")
+            let selectedImage = UIImage(named: "iconSelectCheck")
             newValue.setImage(selectedImage, for: .selected)
         }
     }
@@ -73,9 +73,9 @@ final class LoginViewController: ViewController {
     @IBOutlet private weak var forgotPasswordButton: UIButton! {
         willSet {
             let attributes: [NSAttributedString.Key : Any] = [
-                .foregroundColor : UIColor.lrTealish,
+                .foregroundColor : AppColor.label.color,
                 .underlineStyle : NSUnderlineStyle.single.rawValue,
-                .font : UIFont.TurkcellSaturaDemFont(size: 16)
+                .font : UIFont.appFont(.regular, size: 14.0)
             ]
             
             let attributedTitle = NSAttributedString(string: TextConstants.loginCantLoginButtonTitle,
