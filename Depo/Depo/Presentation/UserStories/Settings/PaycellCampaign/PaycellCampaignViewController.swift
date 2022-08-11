@@ -70,12 +70,55 @@ class PaycellCampaignViewController: BaseViewController {
         }
     }
     
+    @IBOutlet private weak var earnedMoneyTitle: UILabel! {
+        willSet {
+            newValue.text = "Kazandığın TL"
+            newValue.textColor = .lrBrownishGrey
+            newValue.font = UIFont.TurkcellSaturaFont(size: 18)
+        }
+    }
+    
+    @IBOutlet private weak var earnedMoneyView: UIView! {
+        willSet {
+            newValue.backgroundColor = .lrTealishTwo
+            newValue.clipsToBounds = true
+        }
+    }
+    
+    @IBOutlet private weak var earnedMoneyLabel: UILabel! {
+        willSet {
+            newValue.textColor = .white
+            newValue.numberOfLines = 2
+            newValue.text = "0 TL"
+            newValue.font = .TurkcellSaturaBolFont(size: 18)
+            newValue.minimumScaleFactor = 0.5
+        }
+    }
+    
+    @IBOutlet private weak var paycellGiftTitle: UILabel! {
+        willSet {
+            newValue.textColor = .white
+            newValue.numberOfLines = 2
+            newValue.text = "Paycell Hediyesi"
+            newValue.font = .TurkcellSaturaFont(size: 14)
+            newValue.minimumScaleFactor = 0.5
+        }
+    }
+    
+    @IBOutlet private weak var earnedMoneyStackView: UIStackView! {
+        willSet {
+            newValue.alignment = .center
+            newValue.spacing = 4
+        }
+    }
+    
     //MARK: -Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationBarWithGradientStyle(isHidden: false, hideLogo: true)
         setTitle(withString: localized(.paycellCampaignTitle))
         getPaycellLink()
+        addGradient()
     }
     
     //MARK: -IBAction
@@ -142,14 +185,24 @@ class PaycellCampaignViewController: BaseViewController {
         }
     }
     
+    private func addGradient() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [UIColor.lrTealishTwo.cgColor, UIColor.lrGreyish.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+        gradientLayer.frame = self.earnedMoneyView.bounds
+        
+        earnedMoneyView.layer.insertSublayer(gradientLayer, at:0)
+        earnedMoneyView.layer.cornerRadius = earnedMoneyView.frame.height / 2
+    }
+    
     private func createAppLink(with deeplink: String) {
-        let link = "https://tcloudstb.turkcell.com.tr.com/deep_link=akillidepo://kampanya4=c25e910d-5aca-4372-a8d6-c3e09e17fa7b"
         let components = AGCAppLinkingComponents()
-        components.uriPrefix = "https://mylifebox.dre.agconnect.link"
-        components.deepLink = link
+        components.uriPrefix = "https://mylifeboxpaycell.dre.agconnect.link"
+        components.deepLink = deeplink
         components.iosBundleId = Bundle.main.bundleIdentifier
-        components.iosDeepLink = link
-        components.androidDeepLink = link
+        components.iosDeepLink = deeplink
+        components.androidDeepLink = deeplink
         components.androidPackageName = Device.androidPackageName
         components.previewType = .appInfo
         components.buildShortLink { shortLink, error in

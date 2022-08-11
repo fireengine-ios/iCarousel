@@ -26,7 +26,7 @@ struct RouteRequests {
     
     // MARK: Environment
     
-    static var currentServerEnvironment = ServerEnvironment.production
+    static var currentServerEnvironment = ServerEnvironment.test
     private static let applicationTarget = TextConstants.NotLocalized.appName
     
     static let baseShortUrlString: String = {
@@ -503,6 +503,7 @@ struct RouteRequests {
     static let paycellLink = baseUrl +/ "paycell/link"
     static let paycellDetail = baseUrl +/ "paycell/detail/\(Device.locale)"
     static let paycellConsent = baseUrl +/ "paycell/consent"
+    static let paycellGain = baseUrl +/ "paycell/gain"
 
     
 }
