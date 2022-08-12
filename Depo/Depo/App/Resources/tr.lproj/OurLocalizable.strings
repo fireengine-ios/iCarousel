@@ -2053,3 +2053,7 @@ then {11,99 TRY/Month}*/
 "title_paycell_friends" = "Davetini Kabul Edenler ( %@ Kişi)";
 "paycell_share_message" = "lifebox Marka Elçisi Programına dahil oldum. Programa özel lifebox 6 aylık 250GB Premium paketine aşağıdaki linke tıklarak sadece 59.99TL’ye sahip olabilirsin. Fırsatı kaçırma 😊";
 "beeline_cancel_TC" = "Beeline";
+"settings_item_paycell" = "Marka Elçisi Ol";
+"title_paycell_link" = "Size Özel Davet Linki";
+"title_paycell_createlink" = "Link Oluştur";
+"title_paycell_campaign" = "Kampanya detayları";

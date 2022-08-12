@@ -936,6 +936,10 @@ class RouterVC: NSObject {
         return InvitationViewController()
     }
     
+    func paycellCampaign() -> PaycellCampaignViewController {
+        return PaycellCampaignViewController()
+    }
+    
     // MARK: Face Image Recognition Photos
     
     func imageFacePhotosController(album: AlbumItem, item: Item, status: ItemStatus, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool = false, faceImageType: FaceImageType? = nil) -> BaseFilesGreedChildrenViewController {
@@ -1006,6 +1010,10 @@ class RouterVC: NSObject {
 
     var invitation: UIViewController {
         return InvitationViewController()
+    }
+    
+    var paycell: UIViewController {
+        return PaycellCampaignViewController()
     }
 
     // MARK: Chatbot
@@ -1114,8 +1122,8 @@ class RouterVC: NSObject {
     }
     // MARK: - Packages
     
-    func packages(quotaInfo: QuotaInfoResponse? = nil, affiliate: String? = nil) -> PackagesViewController {
-        return PackagesModuleInitializer.viewController(quotaInfo: quotaInfo, affiliate: affiliate)
+    func packages(quotaInfo: QuotaInfoResponse? = nil, affiliate: String? = nil, refererToken: String? = nil) -> PackagesViewController {
+        return PackagesModuleInitializer.viewController(quotaInfo: quotaInfo, affiliate: affiliate, refererToken: refererToken)
     }
 
     // MARK: - Passcode
@@ -1470,6 +1478,17 @@ class RouterVC: NSObject {
         controller.modalTransitionStyle = .crossDissolve
         controller.errorMessage = errorMessage
         controller.warningType = warningType
+        
+        return controller
+    }
+    
+    func paycellDetailPopup(with model: PaycellDetailModel, type: PaycellDetailType) -> PaycellDetailPopup {
+        let controller = PaycellDetailPopup()
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        controller.detailType = type
+        controller.model = model
         
         return controller
     }

@@ -2031,3 +2031,7 @@ then {11,99 TRY/Month}*/
 "title_paycell_friends" = "";
 "paycell_share_message" = "";
 "beeline_cancel_TC" = "";
+"settings_item_paycell" = "";
+"title_paycell_link" = "";
+"title_paycell_createlink" = "";
+"title_paycell_campaign" = "";

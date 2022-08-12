@@ -21,6 +21,7 @@ class PackagesInteractor {
 
     /// When set, available-offers/IOS will be called with a query param
     var affiliate: String?
+    var refererToken: String?
     
     init(offersService: OffersService = OffersServiceIml(),
          subscriptionsService: SubscriptionsService = SubscriptionsServiceIml(),
@@ -237,7 +238,7 @@ extension PackagesInteractor: PackagesInteractorInput {
             return
         }
         
-        offersService.validateApplePurchase(with: receipt, productId: productId, success: { [weak self] response in
+        offersService.validateApplePurchase(with: receipt, productId: productId, referer: refererToken, success: { [weak self] response in
             guard
                 let response = response as? ValidateApplePurchaseResponse,
                 let status = response.status
@@ -274,7 +275,7 @@ extension PackagesInteractor: PackagesInteractorInput {
         
         //just sending reciept
         group.enter()
-        offersService.validateApplePurchase(with: receipt, productId: nil, success: { response in
+        offersService.validateApplePurchase(with: receipt, productId: nil, referer: nil, success: { response in
             group.leave()
             guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
                 return
@@ -366,7 +367,7 @@ extension PackagesInteractor: PackagesInteractorInput {
             return false
         }
         
-        offersService.validateApplePurchase(with: receipt, productId: nil, success: { [weak self] response in
+        offersService.validateApplePurchase(with: receipt, productId: nil, referer: nil, success: { [weak self] response in
             guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
                 return
             }

@@ -56,10 +56,12 @@ class ValidateApplePurchaseParameters: BaseRequestParametrs {
     
     let receiptId: String
     let productId: String?
+    let referer: String?
     
-    init(receiptId: String, productId: String? = nil) {
+    init(receiptId: String, productId: String? = nil, referer: String? = nil) {
         self.receiptId = receiptId
         self.productId = productId
+        self.referer   = referer
     }
     
     override var patch: URL {
@@ -67,11 +69,17 @@ class ValidateApplePurchaseParameters: BaseRequestParametrs {
     }
     
     override var requestParametrs: Any {
+        var params = ["receiptId": receiptId]
+        
         if let productId = productId {
-            return ["receiptId": receiptId,
-                    "productId": productId]
+            params.updateValue(productId, forKey: "productId")
         }
-        return ["receiptId": receiptId]
+        
+        if let referer = referer {
+            params.updateValue(referer, forKey: "referer")
+        }
+        
+        return params
     }
 }
 

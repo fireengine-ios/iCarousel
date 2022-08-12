@@ -17,6 +17,7 @@
 		<string>applinks:testlifebox.page.link</string>
 		<string>applinks:mylifebox.page.link</string>
 		<string>applinks:mylifebox.dre.agconnect.link</string>
+		<string>applinks:mylifeboxpaycell.dre.agconnect.link</string>
 	</array>
 	<key>com.apple.security.application-groups</key>
 	<array>
