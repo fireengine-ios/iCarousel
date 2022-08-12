@@ -2019,6 +2019,16 @@ then {11,99 TRY/Month}*/
 "iap_intro_offer_pay_up_front" = "Zuerst %@ %@\nNächste Monate %@";
 
 /*Paycell Campaign*/
+"settings_item_paycell" = "Werden Sie ein lifebox Markenbotschafter";
+"title_paycell_link" = "Freigabelink für Sie";
+"title_paycell_createlink" = "Link Erstellen";
+"title_paycell_campaign" = "Kampagnenbedingungen";
+"paycell_share_message " = "";
+"title_paycell_total" = "";
+"title_paycell_subtitle" = "";
+"title_paycell_friends" = "";
+"paycell_share_message" = "";
+"beeline_cancel_TC" = "";
 "settings_item_paycell" = "";
 "title_paycell_link" = "";
 "title_paycell_createlink" = "";

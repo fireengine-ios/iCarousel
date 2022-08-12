@@ -2041,6 +2041,18 @@ then {11,99 TRY/Month}*/
 "iap_intro_offer_pay_up_front" = "İlk %@ %@\nSonraki Aylar %@";
 
 /*Paycell Campaign*/
+"settings_item_paycell" = "lifebox Marka Elçisi Ol";
+"title_paycell_link" = "Size Özel Paylaşım Linki";
+
+/*Burdaki çeviri "Link Oluştur" olmalı. Linki Paylaş için mevcutta bir keyimiz var zaten*/
+"title_paycell_createlink" = "Link Oluştur";
+"title_paycell_campaign" = "Kampanya Koşulları";
+"paycell_share_message " = "";
+"title_paycell_total" = "Kazandığın TL";
+"title_paycell_subtitle" = "Paycell Hediyesi";
+"title_paycell_friends" = "Davetini Kabul Edenler ( %@ Kişi)";
+"paycell_share_message" = "lifebox Marka Elçisi Programına dahil oldum. Programa özel lifebox 6 aylık 250GB Premium paketine aşağıdaki linke tıklarak sadece 59.99TL’ye sahip olabilirsin. Fırsatı kaçırma 😊";
+"beeline_cancel_TC" = "Beeline";
 "settings_item_paycell" = "Marka Elçisi Ol";
 "title_paycell_link" = "Size Özel Davet Linki";
 "title_paycell_createlink" = "Link Oluştur";

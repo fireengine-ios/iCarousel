@@ -2031,6 +2031,16 @@ then {11,99 TRY/Month}*/
 "iap_intro_offer_pay_up_front" = "الأول %@ %@\nالتالي %@";
 
 /*Paycell Campaign*/
+"settings_item_paycell" = "كن سفيرًا للعلامة التجارية  lifebox";
+"title_paycell_link" = "رابط مشاركة خاص لك";
+"title_paycell_createlink" = "إنشاء رابط";
+"title_paycell_campaign" = "شروط الحملة";
+"paycell_share_message " = "";
+"title_paycell_total" = "";
+"title_paycell_subtitle" = "";
+"title_paycell_friends" = "";
+"paycell_share_message" = "";
+"beeline_cancel_TC" = "";
 "settings_item_paycell" = "";
 "title_paycell_link" = "";
 "title_paycell_createlink" = "";
