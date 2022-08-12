@@ -2060,3 +2060,15 @@ then {11,99 TRY/Month}*/
 /*First {6 months} {6,99 TRY}
 then {11,99 TRY/Month}*/
 "iap_intro_offer_pay_up_front" = "Së pari %@ %@\nMuajt pasues %@";
+
+/*Paycell Campaign*/
+"settings_item_paycell" = "Bëhuni një Përfaqësues i Markës së lifebox";
+"title_paycell_link" = "Lidhje Special Për Ju";
+"title_paycell_createlink" = "Krijo Lidhje";
+"title_paycell_campaign" = "Kushtet e Kampanjës";
+"paycell_share_message " = "";
+"title_paycell_total" = "";
+"title_paycell_subtitle" = "";
+"title_paycell_friends" = "";
+"paycell_share_message" = "";
+"beeline_cancel_TC" = "";

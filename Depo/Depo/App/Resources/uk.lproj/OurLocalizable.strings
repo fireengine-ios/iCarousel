@@ -2019,3 +2019,15 @@ then {11,99 TRY/Month}*/
 /*First {6 months} {6,99 TRY}
 then {11,99 TRY/Month}*/
 "iap_intro_offer_pay_up_front" = "Перший %@ %@\nНаступні Місяці %@";
+
+/*Paycell Campaign*/
+"settings_item_paycell" = "Станьте Амбасадором Бренду lifebox";
+"title_paycell_link" = "Спеціальне Посилання Для Вас";
+"title_paycell_createlink" = "Створити Посилання";
+"title_paycell_campaign" = "Умови Кампанії";
+"paycell_share_message " = "";
+"title_paycell_total" = "";
+"title_paycell_subtitle" = "";
+"title_paycell_friends" = "";
+"paycell_share_message" = "";
+"beeline_cancel_TC" = "";

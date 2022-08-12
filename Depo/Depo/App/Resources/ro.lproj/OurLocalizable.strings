@@ -2017,3 +2017,15 @@ then {11,99 TRY/Month}*/
 /*First {6 months} {6,99 TRY}
 then {11,99 TRY/Month}*/
 "iap_intro_offer_pay_up_front" = "Primul %@ %@\nLunile următoare %@";
+
+/*Paycell Campaign*/
+"settings_item_paycell" = "Deveniți un Ambasador al Mărcii lifebox";
+"title_paycell_link" = "Link Special Pentru Tine";
+"title_paycell_createlink" = "Creați Link";
+"title_paycell_campaign" = "Condiții de Campanie";
+"paycell_share_message " = "";
+"title_paycell_total" = "";
+"title_paycell_subtitle" = "";
+"title_paycell_friends" = "";
+"paycell_share_message" = "";
+"beeline_cancel_TC" = "";
