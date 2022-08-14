@@ -58,7 +58,6 @@ enum PushNotificationAction: String {
     case hiddenBin = "hidden_bin"
     case silent = "silent"
     case saveToMyLifebox = "save_to_my_lifebox"
-    case paycellCampaign = "paycell_campaign"
     
     case widgetLogout = "widget_logout"
     case widgetQuota = "widget_quota"

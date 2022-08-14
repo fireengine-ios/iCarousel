@@ -404,6 +404,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else if url.absoluteString.contains("kampanya") { //TODO: -Fix it later
                 if let campaign = url.lastPathComponent.components(separatedBy: "=").first,
                    let refererToken = url.lastPathComponent.components(separatedBy: "=").last {
+                    storageVars.paycellRefererToken = refererToken
                     if PushNotificationService.shared.assignDeepLink(innerLink: campaign,
                                                                      options: [DeepLinkParameter.paycellCampaign.rawValue: campaign,
                                                                                DeepLinkParameter.paycellToken.rawValue: refererToken]) {

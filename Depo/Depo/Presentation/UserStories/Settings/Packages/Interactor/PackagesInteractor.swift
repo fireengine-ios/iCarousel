@@ -18,10 +18,16 @@ class PackagesInteractor {
     private let accountService: AccountServicePrl
     private let packageService = PackageService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var storageVars: StorageVars = factory.resolve()
 
     /// When set, available-offers/IOS will be called with a query param
+    /// referer token must be used for paycell campaign only
     var affiliate: String?
-    var refererToken: String?
+    var refererToken: String? {
+        didSet {
+            storageVars.paycellRefererToken = nil
+        }
+    }
     
     init(offersService: OffersService = OffersServiceIml(),
          subscriptionsService: SubscriptionsService = SubscriptionsServiceIml(),
