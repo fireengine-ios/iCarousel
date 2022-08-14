@@ -29,7 +29,7 @@ class PaycellCampaignViewController: BaseViewController {
     
     @IBOutlet private weak var campaignDetailLabel: UILabel! {
         willSet {
-            newValue.text = TextConstants.titleInvitationCampaign
+            newValue.text = localized(.paycellCampaignDetailTitle)
             newValue.textColor = .lrBrownishGrey
             newValue.font = .TurkcellSaturaFont(size: 18)
         }
@@ -232,7 +232,7 @@ class PaycellCampaignViewController: BaseViewController {
         self.invitationRegisteredResponse = response
         calculateNumberOfItems(invitationRegisteredResponse: response)
         accountBGColors = AccountConstants.shared.generateBGColors(numberOfItems: maxShownNumberOfItem)
-        acceptedInvitationTitle.text = String(format: TextConstants.titleInvitationFriends, self.invitationRegisteredResponse?.totalAccount ?? 0)
+        acceptedInvitationTitle.text = String(format: localized(.paycellAcceptedFriends), self.invitationRegisteredResponse?.totalAccount ?? 0)
         collectionView.reloadData()
         seeAllButton.isHidden = response.accounts.count == 0
     }
