@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SDWebImage
+import WebKit
 
 enum PaycellDetailType {
     case detail
@@ -50,6 +51,8 @@ class PaycellDetailPopup: BasePopUpController, NibInit {
             newValue.contentMode = .scaleAspectFill
         }
     }
+    
+    @IBOutlet private weak var webView: WKWebView!
     
     @IBOutlet private weak var approveButton: RoundedButton! {
         willSet {
@@ -100,7 +103,10 @@ class PaycellDetailPopup: BasePopUpController, NibInit {
         }
         
         guard let model = model else {  return }
-        textView.text = model.content
+        let hexColor = AppColor.blackColor.color?.toHexString() ?? "#000000"
+        let htmlString = String().prepareHtmlString(with: model.content, hexColor: hexColor)
+        webView.loadHTMLString(htmlString, baseURL: nil)
+        
         if let url = URL(string: model.image) {
             thumbnailImage.sd_setImage(with: url)
         }
@@ -111,9 +117,14 @@ class PaycellDetailPopup: BasePopUpController, NibInit {
             switch result {
             case .success(_):
                 self.dismiss(animated: true)
-            case .failed(_):
-                break
+            case .failed(let error):
+                debugLog("Paycell consent response error = \(error.description)")
             }
         }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        configureUI()
     }
 }
