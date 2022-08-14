@@ -22,5 +22,5 @@ struct PaycellDetailModel: Codable {
 }
 
 struct PaycellGainResponse: Codable {
-    let result: Double
+    let result: String
 }

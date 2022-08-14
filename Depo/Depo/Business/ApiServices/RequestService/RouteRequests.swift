@@ -95,6 +95,10 @@ struct RouteRequests {
             }
         }
     }()
+    
+    static let appLinkDomain: String = {
+        return "https://mylifeboxpaycell.dre.agconnect.link"
+    }()
 
     private static let privacyPolicySubDomain = "privacyPolicy/get/\(Device.locale)?brand=" + applicationTarget
     static let privacyPolicy = URL(string: privacyPolicySubDomain, relativeTo: baseUrl)!
@@ -504,6 +508,7 @@ struct RouteRequests {
     static let paycellDetail = baseUrl +/ "paycell/detail/\(Device.locale)"
     static let paycellConsent = baseUrl +/ "paycell/consent"
     static let paycellGain = baseUrl +/ "paycell/gain"
+    static let paycellAcceptedFriends = "paycell/sold?pageNumber=%d&pageSize=%d"
 
     
 }

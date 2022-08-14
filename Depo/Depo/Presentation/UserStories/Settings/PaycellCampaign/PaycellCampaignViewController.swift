@@ -15,6 +15,9 @@ class PaycellCampaignViewController: BaseViewController {
     //MARK: -Properties
     private let service = PaycellCampaignService()
     private let router = RouterVC()
+    private var acceptedCollectionViewNumberOfItem = 0
+    private var accountBGColors = [UIColor]()
+    private var invitationRegisteredResponse: InvitationRegisteredResponse?
     
     //MARK: -IBOutlet
     @IBOutlet private weak var copyLinkView: UIView! {
@@ -26,7 +29,7 @@ class PaycellCampaignViewController: BaseViewController {
     
     @IBOutlet private weak var campaignDetailLabel: UILabel! {
         willSet {
-            newValue.text = TextConstants.titleInvitationCampaign
+            newValue.text = localized(.paycellCampaignDetailTitle)
             newValue.textColor = .lrBrownishGrey
             newValue.font = .TurkcellSaturaFont(size: 18)
         }
@@ -72,7 +75,7 @@ class PaycellCampaignViewController: BaseViewController {
     
     @IBOutlet private weak var earnedMoneyTitle: UILabel! {
         willSet {
-            newValue.text = "Kazandığın TL"
+            newValue.text = localized(.paycellEarnedTitle)
             newValue.textColor = .lrBrownishGrey
             newValue.font = UIFont.TurkcellSaturaFont(size: 18)
         }
@@ -95,11 +98,11 @@ class PaycellCampaignViewController: BaseViewController {
         }
     }
     
-    @IBOutlet private weak var paycellGiftTitle: UILabel! {
+    @IBOutlet private weak var earnedMoneySubtitle: UILabel! {
         willSet {
             newValue.textColor = .white
             newValue.numberOfLines = 2
-            newValue.text = "Paycell Hediyesi"
+            newValue.text = localized(.paycellEarnedSubtitle)
             newValue.font = .TurkcellSaturaFont(size: 14)
             newValue.minimumScaleFactor = 0.5
         }
@@ -112,18 +115,41 @@ class PaycellCampaignViewController: BaseViewController {
         }
     }
     
+    @IBOutlet private weak var seeAllButton: UIButton! {
+        willSet {
+            newValue.isHidden = true
+        }
+    }
+    
+    @IBOutlet private weak var acceptedInvitationTitle: UILabel!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    
     //MARK: -Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationBarWithGradientStyle(isHidden: false, hideLogo: true)
-        setTitle(withString: localized(.paycellCampaignTitle))
-        getPaycellLink()
-        addGradient()
+        configureUI()
+        configureCollectionView()
+        fetchInitialState()
     }
     
     //MARK: -IBAction
     @IBAction func onShareLink(_ sender: UIButton) {
-        
+        guard let invitationLinkValue = linkLabel.text, let url =  URL(string: invitationLinkValue) else { return }
+
+        let message = localized(.paycellShareMessage)
+        let activityVC = UIActivityViewController(activityItems: [message, url], applicationActivities: nil)
+        activityVC.completionWithItemsHandler = { activityType, completed, _, _ in
+            return
+        }
+
+        ///works only on iPad
+        activityVC.popoverPresentationController?.sourceView = shareLinkButton
+        self.present(activityVC, animated: true, completion: nil)
+    }
+    
+    @IBAction func onSeeAllPeopleButton(_ sender: UIButton) {
+        let acceptedInvitation = AcceptedInvitationViewController(invitationType: .paycell)
+        self.navigationController?.pushViewController(acceptedInvitation, animated: true)
     }
     
     @IBAction func onCreateLink(_ sender: UIButton) {
@@ -145,37 +171,21 @@ class PaycellCampaignViewController: BaseViewController {
         SnackbarManager.shared.show(type: SnackbarType.action, message: message)
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        shareLinkButton.setBackgroundColor(AppColor.darkBlueAndTealish.color ?? ColorConstants.navy, for: .normal)
+        shareLinkButton.setBackgroundColor(AppColor.darkBlueAndTealish.color ?? ColorConstants.navy, for: .highlighted)
+        copyLinkView.layer.borderColor = AppColor.darkBlueAndTealish.color?.cgColor
+    }
+    
     //MARK: -Helpers
-    private func getPaycellLink() {
-        service.getPaycellLink { result in
-            switch result {
-            case .success(let deeplink):
-                self.changeState(hasLink: true)
-                self.createAppLink(with: deeplink.link)
-            case .failed(let error):
-                if error.description == "CONSENT_REQUIRED" {
-                    self.changeState(hasLink: false)
-                }
-            }
-        }
-    }
-    
-    private func getPaycellDetail(for type: PaycellDetailType) {
-        service.getPaycellDetail { result in
-            switch result {
-            case .success(let response):
-                self.showCampaignDetail(with: response.value, type: type)
-            case .failed(_):
-                break
-            }
-        }
-    }
-    
     private func changeState(hasLink: Bool) {
-        shareLinkButton.isUserInteractionEnabled = hasLink
-        linkLabel.isHidden = !hasLink
-        copyLinkButton.isHidden = !hasLink
-        createLinkButton.isHidden = hasLink
+        DispatchQueue.main.async {
+            self.shareLinkButton.isUserInteractionEnabled = hasLink
+            self.linkLabel.isHidden = !hasLink
+            self.copyLinkButton.isHidden = !hasLink
+            self.createLinkButton.isHidden = hasLink
+        }
     }
     
     private func showCampaignDetail(with model: PaycellDetailModel, type: PaycellDetailType) {
@@ -183,6 +193,10 @@ class PaycellCampaignViewController: BaseViewController {
         router.presentViewController(controller: vc) {
             self.getPaycellLink()
         }
+    }
+    
+    private func showGain(with amount: String) {
+        earnedMoneyLabel.text = "\(amount) TL"
     }
     
     private func addGradient() {
@@ -198,7 +212,7 @@ class PaycellCampaignViewController: BaseViewController {
     
     private func createAppLink(with deeplink: String) {
         let components = AGCAppLinkingComponents()
-        components.uriPrefix = "https://mylifeboxpaycell.dre.agconnect.link"
+        components.uriPrefix = RouteRequests.appLinkDomain
         components.deepLink = deeplink
         components.iosBundleId = Bundle.main.bundleIdentifier
         components.iosDeepLink = deeplink
@@ -207,10 +221,127 @@ class PaycellCampaignViewController: BaseViewController {
         components.previewType = .appInfo
         components.buildShortLink { shortLink, error in
             if error != nil {
-                print(error)
+                debugLog(error?.localizedDescription ?? "")
             }
             
             self.linkLabel.text = shortLink?.url.absoluteString
         }
+    }
+    
+    private func configureAcceptedPeople(response: InvitationRegisteredResponse) {
+        self.invitationRegisteredResponse = response
+        calculateNumberOfItems(invitationRegisteredResponse: response)
+        accountBGColors = AccountConstants.shared.generateBGColors(numberOfItems: maxShownNumberOfItem)
+        acceptedInvitationTitle.text = String(format: localized(.paycellAcceptedFriends), self.invitationRegisteredResponse?.totalAccount ?? 0)
+        collectionView.reloadData()
+        seeAllButton.isHidden = response.accounts.count == 0
+    }
+    
+    private func calculateNumberOfItems(invitationRegisteredResponse: InvitationRegisteredResponse) {
+        if invitationRegisteredResponse.accounts.count > maxShownNumberOfItem {
+            acceptedCollectionViewNumberOfItem = maxShownNumberOfItem
+        } else {
+            acceptedCollectionViewNumberOfItem = invitationRegisteredResponse.accounts.count
+        }
+    }
+    
+    private func configureCollectionView() {
+        collectionView.register(nibCell: InvitedPeopleCollectionViewCell.self)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+    }
+    
+    private func fetchInitialState() {
+        getPaycellLink()
+        getPaycellGain()
+        getAcceptedList()
+    }
+    
+    private func configureUI() {
+        navigationBarWithGradientStyle(isHidden: false, hideLogo: true)
+        setTitle(withString: localized(.paycellCampaignTitle))
+        addGradient()
+    }
+    
+    var maxShownNumberOfItem: Int {
+        let collectionViewWidth = collectionView.bounds.width
+        let cellWidthWithSpace: CGFloat = 95
+
+        return Int(collectionViewWidth / cellWidthWithSpace)
+    }
+}
+
+//Interactor
+extension PaycellCampaignViewController {
+    private func getPaycellLink() {
+        service.getPaycellLink { [weak self] result in
+            switch result {
+            case .success(let deeplink):
+                self?.changeState(hasLink: true)
+                self?.createAppLink(with: deeplink.link)
+            case .failed(let error):
+                if error.description == "CONSENT_REQUIRED" {
+                    self?.changeState(hasLink: false)
+                }
+            }
+        }
+    }
+    
+    private func getPaycellDetail(for type: PaycellDetailType) {
+        service.getPaycellDetail { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.showCampaignDetail(with: response.value, type: type)
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
+                debugLog("Paycell detail response error = \(error.description)")
+            }
+        }
+    }
+    
+    private func getPaycellGain() {
+        service.paycellGain { result in
+            switch result {
+            case .success(let response):
+                self.showGain(with: response.result)
+            case .failed(let error):
+                debugLog("Paycell gain response error = \(error.description)")
+            }
+        }
+    }
+    
+    private func getAcceptedList() {
+        service.paycellAcceptedList(pageNumber: 0, pageSize: 10) { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.configureAcceptedPeople(response: response)
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
+                debugLog("Paycell Accepted response error = \(error.description)")
+            }
+        }
+    }
+}
+
+//UICollectionViewDelegate
+extension PaycellCampaignViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 55, height: 71)
+    }
+}
+
+//UICollectionViewDataSource
+extension PaycellCampaignViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return acceptedCollectionViewNumberOfItem
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let invitationRegisteredAccount = self.invitationRegisteredResponse?.accounts[indexPath.item]
+        let bgColor = self.accountBGColors[indexPath.item]
+
+        let cell = collectionView.dequeue(cell: InvitedPeopleCollectionViewCell.self, for: indexPath)
+        cell.configureCell(invitationRegisteredAccount: invitationRegisteredAccount!, bgColor: bgColor)
+        return cell
     }
 }

@@ -49,4 +49,20 @@ final class PaycellCampaignService: BaseRequestService {
             .responseObject(handler)
             .task
     }
+    
+    @discardableResult
+    func paycellAcceptedList(pageNumber: Int, pageSize: Int, handler: @escaping ResponseHandler<InvitationRegisteredResponse>) -> URLSessionTask? {
+
+        let path = String(format: RouteRequests.paycellAcceptedFriends, pageNumber, pageSize)
+        guard let url = URL(string: path, relativeTo: RouteRequests.baseUrl) else {
+            assertionFailure()
+           return nil
+        }
+        return SessionManager
+            .customDefault
+            .request(url)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
 }
