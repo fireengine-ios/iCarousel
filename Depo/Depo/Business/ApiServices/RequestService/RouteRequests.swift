@@ -504,6 +504,7 @@ struct RouteRequests {
     static let paycellDetail = baseUrl +/ "paycell/detail/\(Device.locale)"
     static let paycellConsent = baseUrl +/ "paycell/consent"
     static let paycellGain = baseUrl +/ "paycell/gain"
+    static let paycellAcceptedFriends = "paycell/sold?pageNumber=%d&pageSize=%d"
 
     
 }

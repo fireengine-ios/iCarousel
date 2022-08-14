@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum InvitationType {
+    case reference
+    case paycell
+}
+
 class AcceptedInvitationViewController: BaseViewController {
 
     @IBOutlet weak var acceptedCollectionView: UICollectionView!
@@ -19,6 +24,12 @@ class AcceptedInvitationViewController: BaseViewController {
 
     private var acceptedList: [InvitationRegisteredAccount] = []
     private var accountBGColors: [UIColor] = []
+    private var invitationType: InvitationType = .reference
+    
+    convenience init(invitationType: InvitationType) {
+        self.init()
+        self.invitationType = invitationType
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +37,11 @@ class AcceptedInvitationViewController: BaseViewController {
         setTitle(withString: TextConstants.invitationFriends)
         setupCollectionView()
 
-        fetchInvitationAcceptedList(pageNumber: self.pageNumber)
+        if invitationType == .reference {
+            fetchInvitationAcceptedList(pageNumber: self.pageNumber)
+        } else {
+            fetchPaycellAcceptedList(pageNumber: pageNumber)
+        }
     }
 
     private func setupCollectionView() {
@@ -52,6 +67,27 @@ class AcceptedInvitationViewController: BaseViewController {
             }
         }
     }
+    
+    func fetchPaycellAcceptedList(pageNumber: Int) {
+        self.showSpinner()
+        isFetchingAcceptedList = true
+        PaycellCampaignService().paycellAcceptedList(pageNumber: pageNumber, pageSize: pageSize) { [weak self] result in
+            defer {
+                self?.isFetchingAcceptedList = false
+                self?.hideSpinner()
+            }
+            switch result {
+            case .success(let response):
+                self?.hasMore = response.hasMore
+                self?.acceptedList.append(contentsOf: response.accounts)
+                self?.accountBGColors = AccountConstants.shared.generateBGColors(numberOfItems: self?.acceptedList.count ?? 0)
+                self?.acceptedCollectionView.reloadData()
+            case .failed(let error):
+                print("Paycell Accepted response error = \(error.description)")
+            }
+        }
+    }
+
 }
 
 extension AcceptedInvitationViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {

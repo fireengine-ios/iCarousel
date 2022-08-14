@@ -20,17 +20,20 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PaycellCampaignViewController" customModule="Billo" customModuleProvider="target">
             <connections>
+                <outlet property="acceptedInvitationTitle" destination="4pJ-n7-Yvg" id="cbZ-ip-ugO"/>
                 <outlet property="campaignDetailLabel" destination="E9h-LU-pHt" id="DMB-k3-5u1"/>
+                <outlet property="collectionView" destination="e0C-A1-7E4" id="bE3-ao-9By"/>
                 <outlet property="copyLinkButton" destination="tBF-Ob-LcI" id="TBc-Xo-sA5"/>
                 <outlet property="copyLinkView" destination="ifE-un-J5Z" id="6jq-5x-BOI"/>
                 <outlet property="createLinkButton" destination="Boz-TD-Y8D" id="Avf-ko-vT8"/>
                 <outlet property="earnedMoneyLabel" destination="Yo1-VP-hXI" id="AOR-Vh-ZOF"/>
                 <outlet property="earnedMoneyStackView" destination="zwT-Ll-rVN" id="lOv-wW-Kgv"/>
+                <outlet property="earnedMoneySubtitle" destination="aHP-RN-SLe" id="Kez-WS-Zpt"/>
                 <outlet property="earnedMoneyTitle" destination="0k3-1k-XXg" id="snF-3k-HcL"/>
                 <outlet property="earnedMoneyView" destination="mAH-8x-m8N" id="YME-0g-Kdm"/>
                 <outlet property="linkLabel" destination="lzV-9C-jM9" id="thB-3E-N1Y"/>
                 <outlet property="linkTitleLabel" destination="hbA-Jy-Uxc" id="lec-lX-9ac"/>
-                <outlet property="paycellGiftTitle" destination="aHP-RN-SLe" id="Kez-WS-Zpt"/>
+                <outlet property="seeAllButton" destination="0HI-tx-uuq" id="hsd-B4-MO9"/>
                 <outlet property="shareLinkButton" destination="sdd-7n-mIO" id="hWt-R2-to7"/>
                 <outlet property="view" destination="Ivb-iv-cQo" id="RX4-Pg-rbT"/>
             </connections>
@@ -41,10 +44,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bMC-ra-fN4">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Pfq-YA-bPA">
-                            <rect key="frame" x="0.0" y="16" width="414" height="522"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Pfq-YA-bPA">
+                            <rect key="frame" x="0.0" y="16" width="414" height="488"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kow-gR-QXB" userLabel="CampaignDetail">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
@@ -106,8 +109,15 @@
                                         <constraint firstItem="pjG-hU-NsU" firstAttribute="top" secondItem="kow-gR-QXB" secondAttribute="top" id="ya3-Cz-sgc"/>
                                     </constraints>
                                 </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fth-GK-CCx">
+                                    <rect key="frame" x="0.0" y="55" width="414" height="14"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="14" id="ayw-eH-Hbv"/>
+                                    </constraints>
+                                </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B9m-R8-7o9" userLabel="Link">
-                                    <rect key="frame" x="0.0" y="71" width="414" height="114"/>
+                                    <rect key="frame" x="0.0" y="69" width="414" height="114"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZaV-rW-T6J">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
@@ -224,7 +234,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FAP-fk-cyQ" userLabel="EarnedMoney">
-                                    <rect key="frame" x="0.0" y="201" width="414" height="167"/>
+                                    <rect key="frame" x="0.0" y="183" width="414" height="167"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0k3-1k-XXg">
                                             <rect key="frame" x="10" y="14" width="395" height="21"/>
@@ -241,13 +251,13 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zwT-Ll-rVN">
                                                     <rect key="frame" x="8" y="0.0" width="84" height="100"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yo1-VP-hXI">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yo1-VP-hXI">
                                                             <rect key="frame" x="17" y="0.0" width="50" height="50"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aHP-RN-SLe">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aHP-RN-SLe">
                                                             <rect key="frame" x="17" y="50" width="50" height="50"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
@@ -287,7 +297,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CwB-ZS-dX4" userLabel="AccepedInvitation">
-                                    <rect key="frame" x="0.0" y="384" width="414" height="138"/>
+                                    <rect key="frame" x="0.0" y="350" width="414" height="138"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4pJ-n7-Yvg">
                                             <rect key="frame" x="10" y="14" width="395" height="21"/>
@@ -325,6 +335,9 @@
                                             </constraints>
                                             <inset key="imageEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" image="Arrow"/>
+                                            <connections>
+                                                <action selector="onSeeAllPeopleButton:" destination="-1" eventType="touchUpInside" id="BLe-7j-jEW"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -363,7 +376,7 @@
             <color key="backgroundColor" name="secondaryBackground"/>
             <constraints>
                 <constraint firstItem="bMC-ra-fN4" firstAttribute="leading" secondItem="Ivb-iv-cQo" secondAttribute="leading" id="FuG-4I-4b8"/>
-                <constraint firstItem="1CL-6j-Vsh" firstAttribute="bottom" secondItem="bMC-ra-fN4" secondAttribute="bottom" id="e6T-Qr-E0H"/>
+                <constraint firstAttribute="bottom" secondItem="bMC-ra-fN4" secondAttribute="bottom" id="e6T-Qr-E0H"/>
                 <constraint firstAttribute="trailing" secondItem="bMC-ra-fN4" secondAttribute="trailing" id="jeN-6i-MbL"/>
                 <constraint firstItem="bMC-ra-fN4" firstAttribute="top" secondItem="Ivb-iv-cQo" secondAttribute="top" id="vBF-1g-UEa"/>
             </constraints>

@@ -183,5 +183,9 @@ enum Strings: String, Localizable {
     case paycellLinkTitle           = "title_paycell_link"
     case paycellCampaignDetailTitle = "title_paycell_campaign"
     case paycellCampaignTitle       = "settings_item_paycell"
+    case paycellEarnedTitle         = "title_paycell_total"
+    case paycellEarnedSubtitle      = "title_paycell_subtitle"
+    case paycellAcceptedFriends     = "title_paycell_friends"
+    case paycellShareMessage        = "paycell_share_message"
 
 }
