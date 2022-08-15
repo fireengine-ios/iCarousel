@@ -22,6 +22,7 @@ class PaycellDetailPopup: BasePopUpController, NibInit {
     var model: PaycellDetailModel?
     var detailType: PaycellDetailType = .detail
     private let service = PaycellCampaignService()
+    var successCallback: (() -> Void)?
     
     //MARK: -IBOutlet
     @IBOutlet private weak var textView: UITextView! {
@@ -116,6 +117,7 @@ class PaycellDetailPopup: BasePopUpController, NibInit {
         service.paycellConsent { result in
             switch result {
             case .success(_):
+                self.successCallback?()
                 self.dismiss(animated: true)
             case .failed(let error):
                 debugLog("Paycell consent response error = \(error.description)")

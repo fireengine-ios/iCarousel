@@ -190,9 +190,10 @@ class PaycellCampaignViewController: BaseViewController {
     
     private func showCampaignDetail(with model: PaycellDetailModel, type: PaycellDetailType) {
         let vc = router.paycellDetailPopup(with: model, type: type)
-        router.presentViewController(controller: vc) {
-            self.getPaycellLink()
+        vc.successCallback = { [weak self] in
+            self?.getPaycellLink()
         }
+        router.presentViewController(controller: vc)
     }
     
     private func showGain(with amount: String) {
