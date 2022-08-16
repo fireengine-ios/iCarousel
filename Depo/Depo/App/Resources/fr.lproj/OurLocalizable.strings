@@ -2328,9 +2328,9 @@ then {11,99 TRY/Month}*/
 "title_paycell_link" = "Lien Spécial Pour Vous";
 "title_paycell_createlink" = "Créer un Lien";
 "title_paycell_campaign" = "Conditions de la Campagne";
+"title_paycell_total" = "Solde Paycell Mérité";
+"title_paycell_subtitle" = "Solde Paycell";
+"title_paycell_friends" = "Personnes Ayant Acheté le Forfait (%d personnes)";
+"paycell_share_message" = "J'ai rejoint le Programme d'Ambassadeur de Marque lifebox. Vous pouvez avoir le forfait Premium lifebox spécifique au programme de 6 mois de 250 Go à prix réduit, en cliquant sur le lien ci-dessous. Ne le manquez pas 😊";
+"beeline_cancel_TC" = "Vous pouvez annuler ou gérer votre abonnement à lifebox depuis l'application  Beeline.";
 "paycell_share_message " = "";
-"title_paycell_total" = "";
-"title_paycell_subtitle" = "";
-"title_paycell_friends" = "";
-"paycell_share_message" = "";
-"beeline_cancel_TC" = "";

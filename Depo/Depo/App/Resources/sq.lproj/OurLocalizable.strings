@@ -2062,13 +2062,13 @@ then {11,99 TRY/Month}*/
 "iap_intro_offer_pay_up_front" = "Së pari %@ %@\nMuajt pasues %@";
 
 /*Paycell Campaign*/
-"settings_item_paycell" = "Bëhuni një Përfaqësues i Markës së lifebox";
+"settings_item_paycell" = "Bëhuni një Ambasador i Markës lifebox";
 "title_paycell_link" = "Lidhje Special Për Ju";
 "title_paycell_createlink" = "Krijo Lidhje";
 "title_paycell_campaign" = "Kushtet e Kampanjës";
+"title_paycell_total" = "Balanca e Fituar e Paycell";
+"title_paycell_subtitle" = "Bilanci i Paycell";
+"title_paycell_friends" = "Blerësit e Paketave (%d Persona)";
+"paycell_share_message" = "Unë iu bashkua Programit të Ambasadorit të Markës lifebox. Mund të merrni një paketë Premium lifebox 6-mujore 250 GB me çmim të reduktuar duke klikuar në lidhjen më poshtë. Mos e humbisni rastin 😊";
+"beeline_cancel_TC" = "Ju mund të anuloni ose menaxhoni abonimin tuaj të lifebox nga aplikacioni Beeline.";
 "paycell_share_message " = "";
-"title_paycell_total" = "";
-"title_paycell_subtitle" = "";
-"title_paycell_friends" = "";
-"paycell_share_message" = "";
-"beeline_cancel_TC" = "";
