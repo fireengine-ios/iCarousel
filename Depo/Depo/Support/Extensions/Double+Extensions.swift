@@ -27,3 +27,17 @@ extension Double {
         return Int64(self)
     }
 }
+
+extension Double {
+    static let twoFractionDigits: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.locale = Locale(identifier: "tr-TR")
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 1
+        return formatter
+    }()
+    var formatted: String {
+        return Double.twoFractionDigits.string(for: self) ?? ""
+    }
+}
