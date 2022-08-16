@@ -2065,6 +2065,11 @@ then {11,99 TRY/Month}*/
 "title_paycell_link" = "Enlace Especial Para Ti";
 "title_paycell_createlink" = "Crear Enlace";
 "title_paycell_campaign" = "Condiciones de la Campaña";
+"title_paycell_total" = "Saldo de Paycell Merecido";
+"title_paycell_subtitle" = "Saldo de Paycell";
+"title_paycell_friends" = "Personas que Compraron el Paquete (%d Personas)";
+"paycell_share_message" = "Me uní al Programa de Embajadores de la Marca lifebox. Puede obtener el paquete Premium lifebox de 6 meses y 250 GB específico del programa a un precio con descuento, haciendo clic en el enlace a continuación. No te lo pierdas 😊";
+"beeline_cancel_TC" = "Puedes cancelar o gestionar tu suscripción a lifebox desde la aplicación Beeline.";
 "paycell_share_message " = "";
 "title_paycell_total" = "";
 "title_paycell_subtitle" = "";

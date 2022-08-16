@@ -56,6 +56,7 @@ class PaycellCampaignViewController: BaseViewController {
             newValue.setTitleColor(AppColor.navyAndWhite.color, for: .normal)
             newValue.setTitle(localized(.paycellCreateLink), for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
+            newValue.isHidden = true
         }
     }
     
@@ -95,6 +96,7 @@ class PaycellCampaignViewController: BaseViewController {
             newValue.text = "0 TL"
             newValue.font = .TurkcellSaturaBolFont(size: 18)
             newValue.minimumScaleFactor = 0.5
+            newValue.lineBreakMode = .byWordWrapping
         }
     }
     
@@ -105,6 +107,7 @@ class PaycellCampaignViewController: BaseViewController {
             newValue.text = localized(.paycellEarnedSubtitle)
             newValue.font = .TurkcellSaturaFont(size: 14)
             newValue.minimumScaleFactor = 0.5
+            newValue.lineBreakMode = .byWordWrapping
         }
     }
     
@@ -196,8 +199,14 @@ class PaycellCampaignViewController: BaseViewController {
         router.presentViewController(controller: vc)
     }
     
-    private func showGain(with amount: String) {
-        earnedMoneyLabel.text = "\(amount) TL"
+    private func showGain(with amount: Double?) {
+        guard let amount = amount else {
+            earnedMoneyLabel.text = "0 TL"
+            return
+        }
+        
+        let formattedPrice = amount.formatted
+        earnedMoneyLabel.text = "\(formattedPrice) TL"
     }
     
     private func addGradient() {
@@ -231,19 +240,11 @@ class PaycellCampaignViewController: BaseViewController {
     
     private func configureAcceptedPeople(response: InvitationRegisteredResponse) {
         self.invitationRegisteredResponse = response
-        calculateNumberOfItems(invitationRegisteredResponse: response)
-        accountBGColors = AccountConstants.shared.generateBGColors(numberOfItems: maxShownNumberOfItem)
-        acceptedInvitationTitle.text = String(format: localized(.paycellAcceptedFriends), self.invitationRegisteredResponse?.totalAccount ?? 0)
+        acceptedCollectionViewNumberOfItem = response.accounts.count
+        accountBGColors = AccountConstants.shared.generateBGColors(numberOfItems: response.accounts.count)
+        acceptedInvitationTitle.text = String(format: localized(.paycellAcceptedFriends), response.totalAccount)
         collectionView.reloadData()
         seeAllButton.isHidden = response.accounts.count == 0
-    }
-    
-    private func calculateNumberOfItems(invitationRegisteredResponse: InvitationRegisteredResponse) {
-        if invitationRegisteredResponse.accounts.count > maxShownNumberOfItem {
-            acceptedCollectionViewNumberOfItem = maxShownNumberOfItem
-        } else {
-            acceptedCollectionViewNumberOfItem = invitationRegisteredResponse.accounts.count
-        }
     }
     
     private func configureCollectionView() {
@@ -262,13 +263,6 @@ class PaycellCampaignViewController: BaseViewController {
         navigationBarWithGradientStyle(isHidden: false, hideLogo: true)
         setTitle(withString: localized(.paycellCampaignTitle))
         addGradient()
-    }
-    
-    var maxShownNumberOfItem: Int {
-        let collectionViewWidth = collectionView.bounds.width
-        let cellWidthWithSpace: CGFloat = 95
-
-        return Int(collectionViewWidth / cellWidthWithSpace)
     }
 }
 
@@ -312,7 +306,7 @@ extension PaycellCampaignViewController {
     }
     
     private func getAcceptedList() {
-        service.paycellAcceptedList(pageNumber: 0, pageSize: 10) { [weak self] result in
+        service.paycellAcceptedList(pageNumber: 0, pageSize: 5) { [weak self] result in
             switch result {
             case .success(let response):
                 self?.configureAcceptedPeople(response: response)

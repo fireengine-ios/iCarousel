@@ -121,6 +121,11 @@ extension AcceptedInvitationViewController: UICollectionViewDataSource {
         }
 
         self.pageNumber += 1
-        self.fetchInvitationAcceptedList(pageNumber: self.pageNumber)
+        
+        if invitationType == .reference {
+            fetchInvitationAcceptedList(pageNumber: self.pageNumber)
+        } else {
+            fetchPaycellAcceptedList(pageNumber: self.pageNumber)
+        }
     }
 }

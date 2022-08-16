@@ -393,7 +393,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func handleIncomingApplink(_ appLink: AGCResolvedLink) {
         if let url = URL(string: appLink.deepLink) {
-            if url.absoluteString.contains("publicToken") {
+            if url.absoluteString.contains("shr") { ///public share flow
                 if let publicToken = url.lastPathComponent.split(separator: "&").first {
                     if PushNotificationService.shared.assignDeepLink(innerLink: PushNotificationAction.saveToMyLifebox.rawValue,
                                                                      options: [DeepLinkParameter.publicToken.rawValue: publicToken]) {
@@ -401,7 +401,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         PushNotificationService.shared.openActionScreen()
                     }
                 }
-            } else if url.absoluteString.contains("kampanya") { //TODO: -Fix it later
+            } else if url.absoluteString.contains("paycell") { ///paycell campaign flow
                 if let campaign = url.lastPathComponent.components(separatedBy: "=").first,
                    let refererToken = url.lastPathComponent.components(separatedBy: "=").last {
                     storageVars.paycellRefererToken = refererToken
