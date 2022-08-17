@@ -402,10 +402,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }
             } else if url.absoluteString.contains("paycell") { ///paycell campaign flow
-                if let campaign = url.lastPathComponent.components(separatedBy: "=").first,
+                if let campaign = url.lastPathComponent.split(separator: "&").first,
                    let refererToken = url.lastPathComponent.components(separatedBy: "=").last {
                     storageVars.paycellRefererToken = refererToken
-                    if PushNotificationService.shared.assignDeepLink(innerLink: campaign,
+                    if PushNotificationService.shared.assignDeepLink(innerLink: String(campaign),
                                                                      options: [DeepLinkParameter.paycellCampaign.rawValue: campaign,
                                                                                DeepLinkParameter.paycellToken.rawValue: refererToken]) {
                         debugLog("Should open Action Screen")
