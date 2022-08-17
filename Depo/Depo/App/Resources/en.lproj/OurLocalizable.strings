@@ -2082,4 +2082,7 @@ then {11,99 TRY/Month}*/
 "title_paycell_link" = "";
 "title_paycell_createlink" = "";
 "title_paycell_campaign" = "";
+
+/*Fuzzy*/
+"beeline_cancel_TC" = "You can cancel or manage your lifebox subscription from the Beeline Application.";
 "paycell_share_message " = "You have been sent 5GB of lifebox storage, click to redeem";
