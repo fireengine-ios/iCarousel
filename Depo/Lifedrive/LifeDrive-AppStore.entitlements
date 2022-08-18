@@ -14,6 +14,7 @@
 		<string>applinks:mybilloapp.com</string>
 		<string>applinks:billo.page.link</string>
 		<string>applinks:mylifebox.dre.agconnect.link</string>
+		<string>applinks:mylifeboxpaycell.dre.agconnect.link</string>
 	</array>
 	<key>com.apple.security.application-groups</key>
 	<array>

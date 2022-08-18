@@ -73,18 +73,8 @@ class InvitationCampaignDetailView: UIView, NibInit {
         campaignDetailImageView.setLogs(enabled: true)
         let imageUrl = URL(string: campaign.value.image)
         campaignDetailImageView.loadImageData(with: imageUrl)
-        let htmlString = prepareHtmlString(with: campaign.value.content, hexColor: hexColor)
+        let htmlString = String().prepareHtmlString(with: campaign.value.content, hexColor: hexColor)
         campaignDetailWebView.loadHTMLString(htmlString, baseURL: nil)
-    }
-
-    private func prepareHtmlString(with content: String, hexColor: String) -> String {
-        var htmlString = content
-        htmlString = "<style>" +
-                "html *" +
-                "{" +
-                "color: \(hexColor)"  +
-                "}</style> \(content)"
-        return htmlString
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

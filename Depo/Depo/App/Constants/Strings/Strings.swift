@@ -177,4 +177,15 @@ enum Strings: String, Localizable {
     case iapIntroOfferFreeTrial  = "iap_intro_offer_free_trial"
     case iapIntroOfferPayAsYouGo = "iap_intro_offer_pay_as_you_go"
     case iapIntroOfferPayUpFront = "iap_intro_offer_pay_up_front"
+    
+    // MARK: - Paycell Campaign
+    case paycellCreateLink          = "title_paycell_createlink"
+    case paycellLinkTitle           = "title_paycell_link"
+    case paycellCampaignDetailTitle = "title_paycell_campaign"
+    case paycellCampaignTitle       = "settings_item_paycell"
+    case paycellEarnedTitle         = "title_paycell_total"
+    case paycellEarnedSubtitle      = "title_paycell_subtitle"
+    case paycellAcceptedFriends     = "title_paycell_friends"
+    case paycellShareMessage        = "paycell_share_message"
+
 }

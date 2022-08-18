@@ -51,6 +51,7 @@ final class PushNotificationService {
         }
 
         guard let resolvedAction = resolve(actionString: actionString) else {
+            storageVars.deepLinkParameters = options
             return false
         }
 
@@ -148,7 +149,7 @@ final class PushNotificationService {
     }
     
     func openActionScreen() {
-        guard var action = notificationAction else {
+         guard var action = notificationAction else {
             return
         }
         
@@ -363,7 +364,8 @@ private extension PushNotificationService {
 
     func openPackages() {
         let affiliate = storageVars.value(forDeepLinkParameter: .affiliate) as? String
-        let viewController = router.packages(affiliate: affiliate)
+        let refererToken = storageVars.paycellRefererToken
+        let viewController = router.packages(affiliate: affiliate, refererToken: refererToken)
         pushTo(viewController)
     }
 
@@ -666,5 +668,12 @@ private extension PushNotificationService {
         if tokenStorage.accessToken == nil {
             clear()
         }
+    }
+    
+    func openPaycellCampaign() {
+        let campaign = storageVars.value(forDeepLinkParameter: .paycellCampaign) as? String
+        let refererToken = storageVars.value(forDeepLinkParameter: .paycellToken) as? String
+        let viewController = router.packages(affiliate: campaign, refererToken: refererToken)
+        pushTo(viewController)
     }
 }

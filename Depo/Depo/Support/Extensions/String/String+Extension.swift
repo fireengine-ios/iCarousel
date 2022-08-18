@@ -41,6 +41,16 @@ extension String {
         }
     }
     
+    func prepareHtmlString(with content: String, hexColor: String) -> String {
+        var htmlString = content
+        htmlString = "<style>" +
+                "html *" +
+                "{" +
+                "color: \(hexColor)"  +
+                "}</style> \(content)"
+        return htmlString
+    }
+    
     var hasCharacters: Bool {
         return !self.isEmpty
     }

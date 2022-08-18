@@ -53,6 +53,7 @@ struct AccountJSONConstants {
     static let msisdnRegion = "msisdnRegion"
     static let showInvitation = "showInvitation"
     static let hasRecoveryMail = "hasRecoveryMailInfo"
+    static let showPaycell = "showPaycell"
 }
 
 class AccountInfoResponse: ObjectRequestResponse {
@@ -86,6 +87,7 @@ class AccountInfoResponse: ObjectRequestResponse {
     var msisdnRegion: String?
     var showInvitation: Bool?
     var hasRecoveryMail: Bool?
+    var showPaycell: Bool?
 
     var fullPhoneNumber: String {
         if let code = countryCode, let number = phoneNumber {
@@ -132,6 +134,7 @@ class AccountInfoResponse: ObjectRequestResponse {
         msisdnRegion = json?[AccountJSONConstants.msisdnRegion].string
         showInvitation = json?[AccountJSONConstants.showInvitation].bool
         hasRecoveryMail = json?[AccountJSONConstants.hasRecoveryMail].bool
+        showPaycell = json?[AccountJSONConstants.showPaycell].bool
     }
 }
 

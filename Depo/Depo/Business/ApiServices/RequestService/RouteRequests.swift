@@ -26,12 +26,12 @@ struct RouteRequests {
     
     // MARK: Environment
     
-    static var currentServerEnvironment = ServerEnvironment.production
+    static var currentServerEnvironment = ServerEnvironment.test
     private static let applicationTarget = TextConstants.NotLocalized.appName
     
     static let baseShortUrlString: String = {
         switch currentServerEnvironment {
-        case .test: return "https://tcloudstb.turkcell.com.tr/"
+        case .test: return "https://adepodev.turkcell.com.tr/"
         case .preProduction: return "https://adepotest.turkcell.com.tr/"
         case .production: return "https://adepo.turkcell.com.tr/"
         }
@@ -94,6 +94,10 @@ struct RouteRequests {
             case .production: return "https://mylifebox.page.link"
             }
         }
+    }()
+    
+    static let appLinkDomain: String = {
+        return "https://mylifeboxpaycell.dre.agconnect.link"
     }()
 
     private static let privacyPolicySubDomain = "privacyPolicy/get/\(Device.locale)?brand=" + applicationTarget
@@ -498,4 +502,13 @@ struct RouteRequests {
     static let appleLoginStatus = baseUrl +/ "apple/login/status"
     static let appleLoginDisconnect = baseUrl +/ "apple/login/disconnect"
     static let appleLoginConnect = baseUrl +/ "apple/login/connect"
+    
+    // MARK: - Paycell Campaign
+    static let paycellLink = baseUrl +/ "paycell/link"
+    static let paycellDetail = baseUrl +/ "paycell/detail/\(Device.locale)"
+    static let paycellConsent = baseUrl +/ "paycell/consent"
+    static let paycellGain = baseUrl +/ "paycell/gain"
+    static let paycellAcceptedFriends = "paycell/sold?pageNumber=%d&pageSize=%d"
+
+    
 }

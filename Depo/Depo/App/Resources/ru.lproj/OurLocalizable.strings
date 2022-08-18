@@ -2031,3 +2031,24 @@ then {11,99 TRY/Month}*/
 /*First {6 months} {6,99 TRY}
 then {11,99 TRY/Month}*/
 "iap_intro_offer_pay_up_front" = "Первый(ые) %@ %@\nПоследующие Месяцы %@";
+
+/*Paycell Campaign*/
+"settings_item_paycell" = "Станьте Амбассадором Бренда lifebox";
+"title_paycell_link" = "Специальная Ссылка Для Вас";
+"title_paycell_createlink" = "Создать Ссылку";
+"title_paycell_campaign" = "Условия Кампании";
+"title_paycell_total" = "Заслуженный Баланс Paycell";
+"title_paycell_subtitle" = "Баланс Paycell";
+"title_paycell_friends" = "Покупатели Пакета (%d Человек)";
+"paycell_share_message" = "Я присоединился к Программе Амбассадоров Бренда lifebox. Вы можете получить 6-месячный Премиум-пакет lifebox объемом 250 ГБ по сниженной цене, перейдя по ссылке ниже. Не упустите возможность 😊";
+"beeline_cancel_TC" = "Вы можете отменить или управлять своей подпиской lifebox из приложения Beeline.";
+"paycell_share_message " = "";
+"title_paycell_total" = "";
+"title_paycell_subtitle" = "";
+"title_paycell_friends" = "";
+"paycell_share_message" = "";
+"beeline_cancel_TC" = "";
+"settings_item_paycell" = "";
+"title_paycell_link" = "";
+"title_paycell_createlink" = "";
+"title_paycell_campaign" = "";

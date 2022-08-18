@@ -144,7 +144,7 @@ extension PremiumInteractor: PremiumInteractorInput {
             return
         }
         
-        offersService.validateApplePurchase(with: receipt, productId: productId, success: { [weak self] response in
+        offersService.validateApplePurchase(with: receipt, productId: productId, referer: nil, success: { [weak self] response in
             guard
                 let response = response as? ValidateApplePurchaseResponse,
                 let status = response.status
@@ -193,7 +193,7 @@ extension PremiumInteractor: PremiumInteractorInput {
         
         //just sending reciept
         group.enter()
-        offersService.validateApplePurchase(with: receipt, productId: nil, success: { [weak self] response in
+        offersService.validateApplePurchase(with: receipt, productId: nil, referer: nil, success: { [weak self] response in
             group.leave()
             guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
                 DispatchQueue.main.async {

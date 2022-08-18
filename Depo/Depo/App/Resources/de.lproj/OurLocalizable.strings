@@ -2017,3 +2017,24 @@ then {11,99 TRY/Month}*/
 /*First {6 months} {6,99 TRY}
 then {11,99 TRY/Month}*/
 "iap_intro_offer_pay_up_front" = "Zuerst %@ %@\nNächste Monate %@";
+
+/*Paycell Campaign*/
+"settings_item_paycell" = "Werden Sie ein lifebox Markenbotschafter";
+"title_paycell_link" = "Freigabelink für Sie";
+"title_paycell_createlink" = "Link Erstellen";
+"title_paycell_campaign" = "Kampagnenbedingungen";
+"title_paycell_total" = "Verdientes Paycell-Guthaben";
+"title_paycell_subtitle" = "Paycell-Guthaben";
+"title_paycell_friends" = "Paketkäufer (%d Personen)";
+"paycell_share_message" = "Ich bin dem lifebox Brand Ambassador Program beigetreten. Sie können das programmspezifische lifebox 6-Monats-250-GB Premium-Paket zu einem ermäßigten Preis erwerben, indem Sie auf den folgenden Link klicken. Verpassen Sie es nicht 😊";
+"beeline_cancel_TC" = "Sie können Ihr Abonnement von lifebox über die Beeline-App kündigen oder verwalten.";
+"paycell_share_message " = "";
+"title_paycell_total" = "";
+"title_paycell_subtitle" = "";
+"title_paycell_friends" = "";
+"paycell_share_message" = "";
+"beeline_cancel_TC" = "";
+"settings_item_paycell" = "";
+"title_paycell_link" = "";
+"title_paycell_createlink" = "";
+"title_paycell_campaign" = "";

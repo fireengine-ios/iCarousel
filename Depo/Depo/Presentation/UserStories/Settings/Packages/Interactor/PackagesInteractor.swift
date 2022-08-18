@@ -18,9 +18,16 @@ class PackagesInteractor {
     private let accountService: AccountServicePrl
     private let packageService = PackageService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var storageVars: StorageVars = factory.resolve()
 
     /// When set, available-offers/IOS will be called with a query param
+    /// referer token must be used for paycell campaign only
     var affiliate: String?
+    var refererToken: String? {
+        didSet {
+            storageVars.paycellRefererToken = nil
+        }
+    }
     
     init(offersService: OffersService = OffersServiceIml(),
          subscriptionsService: SubscriptionsService = SubscriptionsServiceIml(),
@@ -42,6 +49,10 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     func getAvailableOffers(with accountType: AccountType) {
+        //TODO: Testfligh - will be removed
+        SnackbarManager.shared.show(type: .critical, message: "referer token packages opening: \(refererToken ?? "YOK")")
+        //
+        
         accountService.availableOffers(affiliate: self.affiliate) { [weak self] (result) in
             switch result {
             case .success(let response):
@@ -232,12 +243,15 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     private func validatePurchase(productId: String) {
+        //TODO: Testfligh - will be removed
+        SnackbarManager.shared.show(type: .critical, message: "referer token on validate purchase: \(refererToken ?? "YOK")")
+        //
         guard let receipt = iapManager.receipt else {
             output?.refreshPackages()
             return
         }
         
-        offersService.validateApplePurchase(with: receipt, productId: productId, success: { [weak self] response in
+        offersService.validateApplePurchase(with: receipt, productId: productId, referer: refererToken, success: { [weak self] response in
             guard
                 let response = response as? ValidateApplePurchaseResponse,
                 let status = response.status
@@ -274,7 +288,7 @@ extension PackagesInteractor: PackagesInteractorInput {
         
         //just sending reciept
         group.enter()
-        offersService.validateApplePurchase(with: receipt, productId: nil, success: { response in
+        offersService.validateApplePurchase(with: receipt, productId: nil, referer: nil, success: { response in
             group.leave()
             guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
                 return
@@ -366,7 +380,7 @@ extension PackagesInteractor: PackagesInteractorInput {
             return false
         }
         
-        offersService.validateApplePurchase(with: receipt, productId: nil, success: { [weak self] response in
+        offersService.validateApplePurchase(with: receipt, productId: nil, referer: nil, success: { [weak self] response in
             guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
                 return
             }

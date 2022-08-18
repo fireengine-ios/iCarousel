@@ -188,7 +188,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("I have received a URL through a custom sceme! \(url.absoluteString)")
 
         if AGCAppLinking.instance().openDeepLinkURL(url) {
-            storageVars.isAppFirstLaunchForPublicSharedItems = true
+            if url.absoluteString.contains("publicToken") {
+                storageVars.isAppFirstLaunchForPublicSharedItems = true
+            }
             return true
         }
 
@@ -391,14 +393,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func handleIncomingApplink(_ appLink: AGCResolvedLink) {
         if let url = URL(string: appLink.deepLink) {
-            if let publicToken = url.lastPathComponent.split(separator: "&").first {
-                if PushNotificationService.shared.assignDeepLink(innerLink: PushNotificationAction.saveToMyLifebox.rawValue,
-                                                                 options: [DeepLinkParameter.publicToken.rawValue: publicToken]) {
-                    debugLog("Should open Action Screen")
-                    PushNotificationService.shared.openActionScreen()
+            if url.absoluteString.contains("shr") { ///public share flow
+                if let publicToken = url.lastPathComponent.split(separator: "&").first {
+                    if PushNotificationService.shared.assignDeepLink(innerLink: PushNotificationAction.saveToMyLifebox.rawValue,
+                                                                     options: [DeepLinkParameter.publicToken.rawValue: publicToken]) {
+                        debugLog("Should open Action Screen")
+                        PushNotificationService.shared.openActionScreen()
+                    }
                 }
-                debugLog("Your incoming link parameter is \(url.absoluteString)")
+            } else if url.absoluteString.contains("paycell") { ///paycell campaign flow
+                if let campaign = url.lastPathComponent.split(separator: "&").first,
+                   let refererToken = url.lastPathComponent.components(separatedBy: "=").last {
+                    storageVars.paycellRefererToken = refererToken
+                    //TODO: Testfligh - will be removed
+                    SnackbarManager.shared.show(type: .critical, message: "referer token yakalandı: \(refererToken )")
+                    //
+                    if PushNotificationService.shared.assignDeepLink(innerLink: String(campaign),
+                                                                     options: [DeepLinkParameter.paycellCampaign.rawValue: campaign,
+                                                                               DeepLinkParameter.paycellToken.rawValue: refererToken]) {
+                        debugLog("Should open Action Screen")
+                        PushNotificationService.shared.openActionScreen()
+                    }
+                }
             }
+            
+            debugLog("Your incoming link parameter is \(url.absoluteString)")
         } else {
             debugLog("Applink object has no deeplink")
         }

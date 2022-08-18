@@ -344,7 +344,7 @@
 "You’re skipping auto-sync setting turned off. You can activate this later in preferences." = "შენ ტოვებ ავტომატური ატვირთვის პარამეტრებს. ამის მოგვიანებით გააქტიურება შეგიძლია პარამეტრებში.";
 "Skip setting Auto-Sync?" = "გსურს გამოტოვო ავტომატური ატვირთვის პარამეტრები?";
 "Skip for now" = "გამოტოვება";
-"Let’s start using Lifebox" = "დავიწყოთ lifebox-ის გამოყენება";
+"Let’s start using Lifebox" = "დაიწყე გამოყენება";
 "Select the items to sync with mobile data." = "აირჩიე პუნქტი მობილური ინტერნეტის სინქრონიზაციისთვის.";
 "Mobile Data" = "მობილური ინტერნეტი";
 "Wi-fi" = "Wi-Fi";
@@ -518,7 +518,7 @@
 "Start adding your files" = "დაიწყე ფაილების დამატება";
 "Suggestions" = "რჩევები ";
 "Recent Searches" = "ბოლო ძიებები";
-"Lifebox can sync your files automatically." = "lifebox-ს შეუძლია შენი ფაილების, ფოტოების და ვიდეოების ავტომატურად სინქრონიზაცია.\n\nშენი ფოტოებისა და ვიდეოების ფონური სინქრონიზაციის ჩასართავად, დარწმუნდი, რომ შენი მდებარეობის ნებართვა დაყენებულია „ყოველთვის“ მენიუში „მოწყობილობის პარამეტრები > სიცოცხლის ყუთი > მდებარეობა“ გადასვლით.";
+"Lifebox can sync your files automatically." = "ჩვენ შეგვიძლია შენი ფაილების, ფოტოების და ვიდეოების ავტომატურად სინქრონიზაცია.\n\nშენი ფოტოებისა და ვიდეოების ფონური სინქრონიზაციის ჩასართავად, დარწმუნდი, რომ შენი მდებარეობის ნებართვა დაყენებულია „ყოველთვის“ მენიუში „მოწყობილობის პარამეტრები > სიცოცხლის ყუთი > მდებარეობა“ გადასვლით.";
 "Get Started" = "დაწყება";
 "I have read and accepted terms of use" = "მე წავიკითხე და დავეთანხმე მოხმარების წესებს";
 "Welcome to Lifebox!" = "მოგესალმები ლაიფბოქსში!";
@@ -540,7 +540,7 @@
 "Missing Dates" = "თარიღები აკლია";
 "You have successfully registered, please log in with your credentials" = "შენ რეგისტრაცია წარმატებულად გაიარე, გთხოვ შენი მონაცემით შეხვიდე სისტემაში";
 "Animation" = "ანიმაცია";
-"We have created an animation from your photos!" = "შენთვის შენი ფოტოებისგან ანიმაცია შევქმენით!";
+"We have created an animation from your photos!" = "შენი ფოტოებისგან ანიმაცია შევქმენით შენთვის!";
 "Save Animation" = "შეინახე ანიმაცია";
 "Delete Duplicated" = "წაშალე დუბლიკატი";
 "Lifebox %@ and Passcode" = "Lifebox %@ და პაროლი";
@@ -589,7 +589,7 @@
 "landingTitle0" = "იცხოვრე. შეაგროვე. გაიხსენე";
 "landingSubTitle0" = "დაარეზერვე შენი ფოტოები, ვიდეოები, კონტაქტები და სხვა ფაილები ლაიფბოსში და შეინახე ისინი სამუდამოდ";
 "landingTitle1" = "ავტ.სინქრონიზაცია";
-"landingSubTitle1" = "შენი ფოტოებისა და ვიდეოების ავტომატურად სინქრონიზაცია და წვდომა იქ, სადაც არ უნდა იყოთ";
+"landingSubTitle1" = "შენი ფოტოებისა და ვიდეოების სინქრონიზაცია და წვდომა იქ, სადაც არ უნდა იყო";
 "landingTitle2" = "სახის & სურათის ამოცნობა";
 "landingSubTitle2" = "იპოვნე შენი მოგონებები მარტივად სმარტ ალბომით";
 "landingTitle5" = "ავტომატური სთორები";
@@ -867,7 +867,7 @@
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell და მისი ჯგუფის კომპანიები";
 "terms_and_use_etk_link_commercial_email_messages" = "კომერციული მეილის მესიჯები";
 "commercial_email_messages" = "წერილობითი თანხმობა ელ.ფოსტის კომერციულ შეტყობინებებზე\n\nმე თანახმა ვარ და ვაძლევ Turkcell-ს და მისი ჯგუფის კომპანიებს უფლებას, გამომიგზავნონ კომერციული ელ.ფოსტის მესიჯები. (რომელიც გულისხმობს: მონაცემებს, ხმას და ვიდეოებს, რომლებიც იგზავნება კომერციული მიზნებისთვის და გადაიცემა ელექტრონულად ისეთი საშუალებების გამოყენებით, როგორიცაა ტელეფონი, ქოლ ცენტრი, ფაქსი. , ავტომატური აკრეფის მოწყობილობა, ჭკვიანი ხმის ჩამწერი, ელექტრონული ფოსტა, მოკლე შეტყობინებების სისტემა) ჩემი საკონტაქტო მონაცემების მეშვეობით, რომელიც მე მივაწოდე lifebox აპლიკაციის გამოწერისას ან რომელიც უკვე ფლობს Turkcell-ს და მის ჯგუფურ კომპანიებს, რეკლამირებისა და სხვადასხვა ახალი სერვისის ან პროდუქტის მარკეტინგის მიზნით.";
-"NSLocationAlwaysUsageDescription" = "შენს მდებარეობა გამოყენებული იქნება ფონური სინქრონიზაციისთვის და შენი ფოტოების ორგანიზებისა და ძიებისთვის.";
+"NSLocationAlwaysUsageDescription" = "მდებარეობა გამოყენებული იქნება ფონური სინქრონიზაციისთვის და შენი ფოტოების ორგანიზებისა და ძიებისთვის.";
 "NSPhotoLibraryAddUsageDescription" = "შენი ფოტოებისა და ვიდეოების აპლიკაციაში საჩვენებლად და მათი სარეზერვო ასლის შესაქმნელად, lifebox-ი საჭიროებს შენს ფოტო ბიბლიოთეკაზე წვდომას.";
 "NSPhotoLibraryUsageDescription" = "შენი ფოტოებისა და ვიდეოების აპლიკაციაში საჩვენებლად და მათი სარეზერვო ასლის შესაქმნელად, lifebox-ი საჭიროებს შენს ფოტო ბიბლიოთეკაზე წვდომას.";
 
@@ -970,7 +970,7 @@
 "Temporary error occurred. Please try again later." = "დროებითი შეცდომა დაფიქსირდა, მოგვიანებთ სცადე";
 "face_tags_description_premium" = "როდესაც ჩართავ Face&Image Recognition ფუნქციას, შენ მიერ ატვირთული ფოტოები დაჯგუფდება სახეებისა და ობიექტების მიხედვით. თუ მდებარეობის სერვისის ვარიანტი ჩართულია, ფოტოები ასევე დაჯგუფდება მდებარეობის ინფორმაციის მიხედვით. ჩვენ შევძლებთ შენთვის ავტომატური ისტორიების შექმნას ამ დაჯგუფების საფუძველზე.";
 "terms_of_use" = "გამოყენების წესები";
-"privacy_policy" = "დეტალური ინფორმაციისთვის შენი პერსონალური მონაცემების შესახებ, რომლებსაც ვაგროვებ lifebox-ის მეშვეობით, გთხოვთ, წაიკითხო ჩვენი კონფიდენციალურობის შეტყობინება";
+"privacy_policy" = "დეტალური ინფორმაციისთვის შენი პერსონალური მონაცემების შესახებ, რომლებსაც ვაგროვებ lifebox-ის მეშვეობით, გთხოვთ, წაიკითხო ჩვენი კონფიდ.შეტყობინება";
 "face_tags_description_standart" = "როდესაც ჩართავ Face&Image Recognition ფუნქციას, შენ მიერ ატვირთული ფოტოები დაჯგუფდება სახეებისა და ობიექტების მიხედვით. თუ მდებარეობის სერვისის ვარიანტი ჩართულია, ფოტოები ასევე დაჯგუფდება მდებარეობის ინფორმაციის მიხედვით. ჩვენ შევძლებთ შენთვის ავტომატური ისტორიების შექმნას ამ დაჯგუფების საფუძველზე.";
 "terms_and_use_introduction_checkbox" = "მე წავიკითხე და დავთანხმდი გამოყენების წესებს.";
 "privacy_policy_condition" = "კონფიდ.შეტყობინება";
@@ -1957,61 +1957,73 @@
 "signup_phone_verification_title" = "ტელეფონის ვერიფიკაცია";
 "signup_phone_verification_subtitle" = "ჩაწერეთ ტელეფონის უსაფრთხოების კოდი";
 "save_to_my_lifebox" = "შეინახე ჩემს ლაიფბოქსში";
-"save_to_my_lifebox_download" = "";
-"contact_sync_storage_fail_desc" = "";
+"save_to_my_lifebox_download" = "გსურს ჩამოტვირთო lifebox - %@ - %@.zip ფაილი?";
+"contact_sync_storage_fail_desc" = "ვინაიდან მეხსიერება სავსეა,კონტაქტების backup-ი არ შესრულდება \" კონტაქტების ექსპორტის\" შემდეგ. გსურს გაგრძელება?";
 "contact_sync_storage_fail_cont_button" = "გაგრძელება";
 "save_to_my_lifebox_full_storage_title" = "აიფონის მეხსიერება სავსეა";
 "save_to_my_lifebox_full_storage_body" = "შენ შეგიძლია ადგილის გათავისუფლება, მეხსიერების ";
 "places_map_title" = "რუკა";
 "map_location_detail_header" = "ფოტოები ამ ლოკაციაზე ";
-"beeline_feature_cancel_TC" = "";
+"beeline_feature_cancel_TC" = "შეგიძლიათ მართოთ ან გააუქმოთ თქვენი Lifebox გამოწერა ბილაინის არხებიდან.";
 "security_popup_body" = "გთხოვ შეიყვანო სულ მცირე 1 აღდგენითი ანგარიში, რათა მარტივად შეხვიდე სისტემაში თუ პაროლი დაგავიწყდა";
 "security_popup_header" = "დააყენე აღდგენის მეილი ან უსაფრთხოების კითხვა";
-"save_to_my_billo" = "";
-"save_to_my_billo_download" = "";
+"save_to_my_billo" = "შეინახე My Billo-ში";
+"save_to_my_billo_download" = "გსურს ჩამოტვირთო billo - %@ - %@.zip ფაილი?";
 "on_boarding_btn_google_login" = "Google-ით სისტემაში შესვლა";
 "on_boarding_or" = "ან ";
 "on_boarding_btn_apple_login" = "Apple-ით სისტემაში შესვლა";
-"google_login_user_exists_body" = "";
-"settings_googe_apple_connect" = "";
+"google_login_user_exists_body" = "ნაპოვნია არსებული რეგისტრირებული ანგარიში %@ ელ. ფოსტით, Google Login ID არსებულ lifebox ანგარიშთან დასაკავშირებლად ჯერ უნდა შეიყვანო lifebox-ის პაროლი.";
+"settings_googe_apple_connect" = "შესვლის ვარიანტები";
 "settings_googe" = "Google ID-ით სისტემაში შესვლა";
 "settings_apple" = "Apple ID-ით სისტემაში შესვლა";
-"settings_google_password_required" = "";
+"settings_google_password_required" = "\nიმისათვის, რომ გამორთოთ Google ID შესვლა, ჯერ უნდა დააყენოთ lifebox პაროლი.";
 "settings_google_apple_connect" = "შესვლის ვარიანტები";
 "settings_google" = "Google ID-ით შესვლა სისტემაში";
-"settings_change_password_google_warning" = "";
-"settings_change_password_apple_warning" = "";
-"settings_change_password_apple_google_warning" = "";
-"settings_googe_apple_set_password" = "";
-"settings_google_apple_mail_match_error" = "";
-"googe_apple_login_invalid_token" = "";
-"settings_google_apple_empty_mail_error" = "";
-"password_change_external_auth_required_error" = "";
-"password_change_forgot_password_required_error" = "";
-"kvkk_toggle_desc" = "";
-"kvkk_toggle_text" = "";
-"security_popup_warning_header" = "";
-"security_popup_warning_body1" = "";
-"security_popup_warning_body2" = "";
+"settings_change_password_google_warning" = "პაროლის შესაცვლელად,უნდა შეხვიდე შენს lifebox ანგარიშზე,შენი Google ID-ით.";
+"settings_change_password_apple_warning" = "პაროლის შესაცვლელად,უნდა შეხვიდე შენს lifebox ანგარიშზე შენი Apple ID-ით.";
+"settings_change_password_apple_google_warning" = "პაროლის შესაცვლელად,უნდა შეხვიდე lifebox ანგარიშში თქვენი Google ID-ით ან Apple ID-ით.";
+"settings_googe_apple_set_password" = "დააყენე lifebox პაროლი";
+"settings_google_apple_mail_match_error" = "ანგარიშის lifebox-თან დასაკავშირებლად,შენი ელ. ფოსტა ერთნაირი უნდა იყოს თითოეულ პლატფორმაზე.";
+"googe_apple_login_invalid_token" = "შესვლის არასწორი მცდელობა,გთხოვთ,შეამოწმო ავტორიზაცია და სცადო ხელახლა.";
+"settings_google_apple_empty_mail_error" = "უნდა დაამატო ელ.ფოსტის მისამართი შენს ანგარიშზე.";
+"password_change_external_auth_required_error" = "პაროლის შესაცვლელად, შეგიძლია შეხვიდე lifebox ანგარიშში შენი Google ID/Apple ID-ით ან მიჰყვე \"დამავიწყდა პაროლი\" ინსტრუქციას ეკრანზე.";
+"password_change_forgot_password_required_error" = "პაროლის შესაცვლელად, ჯერ უნდა გამოხვიდე შენი ანგარიშიდან და მიჰყვე \"დამავიწყდა პაროლი\" ინსტრუქციას ეკრანზე.";
+"kvkk_toggle_desc" = "მონაცემთა დამუშავების/გაზიარების თანხმობა";
+"kvkk_toggle_text" = "მე ვაძლევ თანხმობას Lifecell Bulut Çözümleri A.Ş. ჩემი პერსონალური მონაცემების დამუშავებისა და მათი გაზიარების %@-ში ჩამოთვლილ მხარეებთან.";
+"security_popup_warning_header" = "შეყვანილია არასწორი ინფორმაცია";
+"security_popup_warning_body1" = "უსაფრთხოების შეკითხვა წარმატებით შენახულია, აღდგენის ელ. ფოსტის შემდეგი შეცდომა მოხდა:";
+"security_popup_warning_body2" = "აღდგენის ელ.ფოსტა წარმატებით არის შენახული,უსაფრთხოების კითხვის შემდეგი დაფიქსირდა შეცდომა:";
 "security_popup_warning_footer" = "აღსადგენი მეილის თავიდან შეყვანა შეგიძლია პარამეტრები -> ანგარიშის დეტალები -> ჩემი პროფილი.";
-"apple_login_user_exists_body" = "";
-"settings_apple_password_required" = "Apple ID გამოსართავად, ჯერ უნდა დააყენო ლაიფბოქსის პაროლი.";
-"apple_login_show_mail_warning" = "";
-"ETK_KVKK_Izin_Politikasi" = "";
-"kvkk_firms_link" = "";
-"kvkk_commercial_info_link" = "";
-"syncing" = "";
-"downloading" = "";
-"ETK_KVKK_Izin_Politikası" = "";
+"apple_login_user_exists_body" = "ნაპოვნია არსებული რეგისტრირებული ანგარიში %@ ელ.ფოსტით, Apple Login ID არსებულ lifebox ანგარიშთან დასაკავშირებლად ჯერ უნდა შეიყვანო lifebox პაროლი.";
+"settings_apple_password_required" = "Apple ID გამოსართავად, ჯერ უნდა დააყენო lifebox-ის პაროლი.";
+"apple_login_show_mail_warning" = "მოგვეცი ნება გავაზიაროთ შენი მეილი lifebox-თან, რათა შეხვიდეთ Apple ID-ით. გთხოვ,დააწკაპუნო ქვემოთ მოცემულ ღილაკზე, რომ გადახვიდე პარამეტრების გვერდზე,მიჰყევი ინსტრუქციებს Lifebox ანგარიშის წასაშლელად Apple ID-ით > პაროლი და უსაფრთხოება > Apps Using Apple ID და კვლავ მიჰყევი ნაბიჯებს შენი Apple ID-ით შესასვლელად";
+"ETK_KVKK_Izin_Politikasi" = "ნებართვის პოლიტიკა";
+"kvkk_firms_link" = "kvkk_firms_link";
+"kvkk_commercial_info_link" = "kvkk_commercial_info_link";
+"syncing" = "სინქრონიზაცია";
+"downloading" = "ჩამოტვირთვა";
+"ETK_KVKK_Izin_Politikası" = "ნებართვის პოლიტიკა";
 
 /*Free for {3 months}
 then {11,99 TRY/Month}*/
-"iap_intro_offer_free_trial" = "";
+"iap_intro_offer_free_trial" = "უფასო %@-ისთვის\nშემდეგ %@";
 
 /*First {6 months} {6,99 TRY/Month}
 then {11,99 TRY/Month}*/
-"iap_intro_offer_pay_as_you_go" = "";
+"iap_intro_offer_pay_as_you_go" = "პირველი %@ %@\nშემდეგ %@";
 
 /*First {6 months} {6,99 TRY}
 then {11,99 TRY/Month}*/
-"iap_intro_offer_pay_up_front" = "";
+"iap_intro_offer_pay_up_front" = "პირველი %@ %@\nშემდეგ %@";
+
+/*Paycell Campaign*/
+"settings_item_paycell" = "settings_item_paycell";
+"title_paycell_link" = "title_paycell_link";
+"title_paycell_createlink" = "გააზიარე ლინკი";
+"title_paycell_campaign" = "კამპანიის პირობები";
+"paycell_share_message " = "გამოგეგზავნა 5 გბ-ი lifebox მეხსიერება,დააწკაპუნე გამოსასყიდად";
+"title_paycell_total" = "title_paycell_total";
+"title_paycell_subtitle" = "title_paycell_subtitle";
+"title_paycell_friends" = "title_paycell_friends";
+"paycell_share_message" = "paycell_share_message";
+"beeline_cancel_TC" = "შეგიძლიათ მართოთ ან გააუქმოთ თქვენი Lifebox გამოწერა ბილაინის არხებიდან.";

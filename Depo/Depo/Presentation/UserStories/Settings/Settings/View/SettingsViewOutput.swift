@@ -15,6 +15,8 @@ protocol SettingsViewOutput {
     func onLogout()
 
     func goToInvitation()
+    
+    func goToPaycellCampaign()
 
     func goToConnectedAccounts()
 

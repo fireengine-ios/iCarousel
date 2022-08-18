@@ -39,6 +39,7 @@ protocol StorageVars: AnyObject {
     var publicSharedItemsToken: String? {get set}
     var isAppFirstLaunchForPublicSharedItems: Bool? {get set}
     var isUserFirstLoggedIn: Bool { get set }
+    var paycellRefererToken: String? { get set }
 
     func value(forDeepLinkParameter key: DeepLinkParameter) -> Any?
 }
@@ -278,6 +279,12 @@ final class UserDefaultsVars: StorageVars {
     var isUserFirstLoggedIn: Bool {
         get { return userDefaults.object(forKey: isUserFirstLoggedInKey) as? Bool ?? true }
         set { userDefaults.set(newValue, forKey: isUserFirstLoggedInKey) }
+    }
+    
+    private let paycellRefererTokenKey = "paycellRefererToken"
+    var paycellRefererToken: String? {
+        get { return userDefaults.object(forKey: paycellRefererTokenKey) as? String }
+        set { userDefaults.set(newValue, forKey: paycellRefererTokenKey) }
     }
     
 }

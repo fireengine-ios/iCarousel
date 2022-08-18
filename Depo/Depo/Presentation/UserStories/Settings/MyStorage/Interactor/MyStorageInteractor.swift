@@ -107,7 +107,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
             return false
         }
         
-        offersService.validateApplePurchase(with: receipt, productId: nil, success: { [weak self] response in
+        offersService.validateApplePurchase(with: receipt, productId: nil, referer: nil, success: { [weak self] response in
             guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
                 return
             }
@@ -138,7 +138,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
         }
         
         //just sending reciept
-        offersService.validateApplePurchase(with: receipt, productId: nil, success: { [weak self] response in
+        offersService.validateApplePurchase(with: receipt, productId: nil, referer: nil, success: { [weak self] response in
             guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
                 return
             }
