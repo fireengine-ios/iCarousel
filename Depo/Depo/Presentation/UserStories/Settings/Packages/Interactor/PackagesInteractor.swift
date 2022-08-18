@@ -20,14 +20,10 @@ class PackagesInteractor {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var storageVars: StorageVars = factory.resolve()
 
-    /// When set, available-offers/IOS will be called with a query param
+    /// When affiliate set, available-offers/IOS will be called with a query param
     /// referer token must be used for paycell campaign only
     var affiliate: String?
-    var refererToken: String? {
-        didSet {
-            storageVars.paycellRefererToken = nil
-        }
-    }
+    var refererToken: String?
     
     init(offersService: OffersService = OffersServiceIml(),
          subscriptionsService: SubscriptionsService = SubscriptionsServiceIml(),
@@ -53,6 +49,7 @@ extension PackagesInteractor: PackagesInteractorInput {
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
+                    self?.refererToken = (response.count == 1) ? self?.refererToken : nil
                     self?.getInfoForAppleProducts(offers: response)
                 }
             case .failed(let error):
