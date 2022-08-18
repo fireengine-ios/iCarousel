@@ -405,6 +405,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if let campaign = url.lastPathComponent.split(separator: "&").first,
                    let refererToken = url.lastPathComponent.components(separatedBy: "=").last {
                     storageVars.paycellRefererToken = refererToken
+                    //TODO: Testfligh - will be removed
+                    SnackbarManager.shared.show(type: .critical, message: "referer token yakalandı: \(refererToken )")
+                    //
                     if PushNotificationService.shared.assignDeepLink(innerLink: String(campaign),
                                                                      options: [DeepLinkParameter.paycellCampaign.rawValue: campaign,
                                                                                DeepLinkParameter.paycellToken.rawValue: refererToken]) {

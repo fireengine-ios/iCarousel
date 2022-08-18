@@ -49,6 +49,10 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     func getAvailableOffers(with accountType: AccountType) {
+        //TODO: Testfligh - will be removed
+        SnackbarManager.shared.show(type: .critical, message: "referer token packages opening: \(refererToken ?? "YOK")")
+        //
+        
         accountService.availableOffers(affiliate: self.affiliate) { [weak self] (result) in
             switch result {
             case .success(let response):
@@ -239,6 +243,9 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     private func validatePurchase(productId: String) {
+        //TODO: Testfligh - will be removed
+        SnackbarManager.shared.show(type: .critical, message: "referer token on validate purchase: \(refererToken ?? "YOK")")
+        //
         guard let receipt = iapManager.receipt else {
             output?.refreshPackages()
             return

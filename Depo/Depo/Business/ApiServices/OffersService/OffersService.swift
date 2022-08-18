@@ -50,6 +50,9 @@ class OffersServiceIml: BaseRequestService, OffersService {
 
         let param = ValidateApplePurchaseParameters(receiptId: receiptId, productId: productId, referer: referer)
         let handler = BaseResponseHandler<ValidateApplePurchaseResponse, ObjectRequestResponse>(success: success, fail: fail)
+        //TODO: Testfligh - will be removed
+        SnackbarManager.shared.show(type: .critical, message: "PARAMS: \(param.referer ?? "YOK")")
+        //
         executePostRequest(param: param, handler: handler)
     }
     
