@@ -2077,11 +2077,6 @@ then {11,99 TRY/Month}*/
 "title_paycell_subtitle" = "Paycell Reload";
 "title_paycell_friends" = "People Who Bought the Package (%d People)";
 "paycell_share_message" = "I joined the lifebox Brand Ambassador Program. You can have the program-specific lifebox 6-month 250GB Premium package for discounted price by clicking the link below. Don't miss it 😊";
-"beeline_cancel_TC" = "Beeline";
-"settings_item_paycell" = "";
-"title_paycell_link" = "";
-"title_paycell_createlink" = "";
-"title_paycell_campaign" = "";
 
 /*Fuzzy*/
 "beeline_cancel_TC" = "You can cancel or manage your lifebox subscription from the Beeline Application.";

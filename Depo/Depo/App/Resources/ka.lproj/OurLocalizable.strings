@@ -1925,11 +1925,11 @@
 "private_share_empty_list_error" = "მომხმარებელთა სია არ შეიძლება იყოს ცარიელი ან გაზიარებული შენს საკუთარ ანგარიშთან.";
 
 /*Change album cover photo*/
-"dark_mode_page_title_text" = "Dark Mode";
-"dark_mode_title_text" = "Mode";
-"dark_mode_dark_text" = "Dark";
-"dark_mode_light_text" = "Light";
-"dark_mode_default_text" = "Default";
+"dark_mode_page_title_text" = "ღამის რეჟიმი";
+"dark_mode_title_text" = "რეჟიმი";
+"dark_mode_dark_text" = "ღამის";
+"dark_mode_light_text" = "დღის";
+"dark_mode_default_text" = "სტანდარტული";
 
 /*Change person thumbnail*/
 "change_album_person_snackbar_text" = "Person photo changed successfully";
@@ -2017,13 +2017,13 @@ then {11,99 TRY/Month}*/
 "iap_intro_offer_pay_up_front" = "პირველი %@ %@\nშემდეგ %@";
 
 /*Paycell Campaign*/
-"settings_item_paycell" = "settings_item_paycell";
-"title_paycell_link" = "title_paycell_link";
-"title_paycell_createlink" = "გააზიარე ლინკი";
+"settings_item_paycell" = "გახდი Lifebox-ის ბრენდის ელჩი";
+"title_paycell_link" = "ბმულის გაზიარება";
+"title_paycell_createlink" = "შექმენი ბმული";
 "title_paycell_campaign" = "კამპანიის პირობები";
-"paycell_share_message " = "გამოგეგზავნა 5 გბ-ი lifebox მეხსიერება,დააწკაპუნე გამოსასყიდად";
-"title_paycell_total" = "title_paycell_total";
-"title_paycell_subtitle" = "title_paycell_subtitle";
-"title_paycell_friends" = "title_paycell_friends";
-"paycell_share_message" = "paycell_share_message";
+"title_paycell_total" = "მიღებული Paycell ბალანსი";
+"title_paycell_subtitle" = "Paycell გადატვირთვა";
+"title_paycell_friends" = "მომხმარებლები, რომლებმაც შეიძინეს პაკეტი (%d)";
+"paycell_share_message" = "შევუერთდი Lifebox Brand Ambassador პროგრამას. შეგიძლია მიიღო პროგრამის სპეციფიკური lifebox 6 თვიანი 250 GB Premium პაკეტი სპეციალურ ფასად ქვემოთ მოცემულ ბმულზე დაწკაპუნებით. არ გამოტოვო 😊";
 "beeline_cancel_TC" = "შეგიძლიათ მართოთ ან გააუქმოთ თქვენი Lifebox გამოწერა ბილაინის არხებიდან.";
+"paycell_share_message " = "შენ მიიღე 5 GB Lifebox მეხსიერება საჩუქრად, დააჭირე გასააქტიურებლად.";
