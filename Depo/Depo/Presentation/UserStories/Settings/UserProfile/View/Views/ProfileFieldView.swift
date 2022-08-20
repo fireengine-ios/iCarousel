@@ -137,7 +137,7 @@ class ProfileFieldView: UIView {
 
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        descriptionLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
         descriptionLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5).isActive = true
         
         let stackView = UIStackView()

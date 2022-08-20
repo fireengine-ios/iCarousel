@@ -15,7 +15,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     
     @IBOutlet private weak var stackView: UIStackView! {
         willSet {
-            newValue.spacing = 0
+            newValue.spacing = 16
             newValue.axis = .vertical
             newValue.alignment = .fill
             newValue.distribution = .fill
