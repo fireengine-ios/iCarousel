@@ -9181,6 +9181,16 @@
 		F064FB3D278CF29500B461D0 /* PublicSharedItemsActionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F064FB30278C111100B461D0 /* PublicSharedItemsActionView.xib */; };
 		F064FB3E278CF29700B461D0 /* PublicSharedItemsActionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F064FB30278C111100B461D0 /* PublicSharedItemsActionView.xib */; };
 		F064FB3F278CF29700B461D0 /* PublicSharedItemsActionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F064FB30278C111100B461D0 /* PublicSharedItemsActionView.xib */; };
+		F0743DB728B428F900CC1F24 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0743DB628B428F900CC1F24 /* AppColor.swift */; };
+		F0743DB828B428FA00CC1F24 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0743DB628B428F900CC1F24 /* AppColor.swift */; };
+		F0743DB928B428FA00CC1F24 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0743DB628B428F900CC1F24 /* AppColor.swift */; };
+		F0743DBA28B428FA00CC1F24 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0743DB628B428F900CC1F24 /* AppColor.swift */; };
+		F0743DBB28B428FA00CC1F24 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0743DB628B428F900CC1F24 /* AppColor.swift */; };
+		F0743DBC28B428FA00CC1F24 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0743DB628B428F900CC1F24 /* AppColor.swift */; };
+		F0743DBD28B428FA00CC1F24 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0743DB628B428F900CC1F24 /* AppColor.swift */; };
+		F0743DBE28B428FA00CC1F24 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0743DB628B428F900CC1F24 /* AppColor.swift */; };
+		F0743DBF28B428FA00CC1F24 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0743DB628B428F900CC1F24 /* AppColor.swift */; };
+		F0743DC028B428FA00CC1F24 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0743DB628B428F900CC1F24 /* AppColor.swift */; };
 		F077B23D280FDE3B0034F73C /* agconnect-services.plist in Resources */ = {isa = PBXBuildFile; fileRef = F077B23C280FDE3A0034F73C /* agconnect-services.plist */; };
 		F077B23E280FDE3B0034F73C /* agconnect-services.plist in Resources */ = {isa = PBXBuildFile; fileRef = F077B23C280FDE3A0034F73C /* agconnect-services.plist */; };
 		F081F9C62779138F0064D25C /* DragAndDropItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F081F9C52779138F0064D25C /* DragAndDropItemType.swift */; };
@@ -12140,6 +12150,7 @@
 		F064FB2D278B209500B461D0 /* PublicSharedItemsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublicSharedItemsTableViewCell.xib; sourceTree = "<group>"; };
 		F064FB30278C111100B461D0 /* PublicSharedItemsActionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublicSharedItemsActionView.xib; sourceTree = "<group>"; };
 		F064FB32278C168300B461D0 /* PublicSharedItemsActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSharedItemsActionView.swift; sourceTree = "<group>"; };
+		F0743DB628B428F900CC1F24 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
 		F077B23C280FDE3A0034F73C /* agconnect-services.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "agconnect-services.plist"; sourceTree = "<group>"; };
 		F081F9C52779138F0064D25C /* DragAndDropItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropItemType.swift; sourceTree = "<group>"; };
 		F092578727DCF78C0001737C /* SecurityInfoPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityInfoPopup.swift; sourceTree = "<group>"; };
@@ -19573,11 +19584,6 @@
 			isa = PBXGroup;
 			children = (
 				CE3318E51EFCFE1800E25989 /* ApplicationPalette.swift */,
-				CE58FB0520444BE8007F3F54 /* ColorConstants.swift */,
-				0711886F27F6EBDE00F512A1 /* AppImage.swift */,
-				07C759E52819369200B028F0 /* Image.swift */,
-				07C759EA281936C800B028F0 /* Images.xcassets */,
-				077D1D9B280568CD001C6E72 /* AppFont.swift */,
 			);
 			path = ApplicationPalette;
 			sourceTree = "<group>";
@@ -20489,10 +20495,11 @@
 		CEBBDDD91F01E4CF00CDF527 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F0743DC128B42ABE00CC1F24 /* Images */,
+				F0743DB228B428CB00CC1F24 /* Colors */,
+				CEBBDDDA1F01E4CF00CDF527 /* Fonts */,
 				8C7B9F3D2253F8970050DABE /* SettingsTC.bundle */,
 				CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */,
-				07A8779726D3929F00D7BC03 /* Colors.xcassets */,
-				CEBBDDDA1F01E4CF00CDF527 /* Fonts */,
 				8C75D2491FDD1BF700CBE1A7 /* Settings.bundle */,
 				7C73CDF3200356B6000824AA /* OurLocalizable.strings */,
 				CEEB7A9D20A5BC230070FDC2 /* InfoPlist.strings */,
@@ -20503,6 +20510,7 @@
 		CEBBDDDA1F01E4CF00CDF527 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				077D1D9B280568CD001C6E72 /* AppFont.swift */,
 				07C759F4281A785E00B028F0 /* GT-America-LC-Standard-Black.ttf */,
 				07C759F8281A786100B028F0 /* GT-America-LC-Standard-Bold.ttf */,
 				07C759FB281A786200B028F0 /* GT-America-LC-Standard-Light.ttf */,
@@ -21687,6 +21695,26 @@
 				F064FB30278C111100B461D0 /* PublicSharedItemsActionView.xib */,
 			);
 			path = SubViews;
+			sourceTree = "<group>";
+		};
+		F0743DB228B428CB00CC1F24 /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				07A8779726D3929F00D7BC03 /* Colors.xcassets */,
+				F0743DB628B428F900CC1F24 /* AppColor.swift */,
+				CE58FB0520444BE8007F3F54 /* ColorConstants.swift */,
+			);
+			path = Colors;
+			sourceTree = "<group>";
+		};
+		F0743DC128B42ABE00CC1F24 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				0711886F27F6EBDE00F512A1 /* AppImage.swift */,
+				07C759E52819369200B028F0 /* Image.swift */,
+				07C759EA281936C800B028F0 /* Images.xcassets */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		F077B238280FDE000034F73C /* AGConnect */ = {
@@ -25543,6 +25571,7 @@
 				98BBF0D625024D610038A31E /* PhotoEditImageScrollView.swift in Sources */,
 				984A8ADD252EF95C002FB400 /* FunNavBar.swift in Sources */,
 				B52BAC6823AE20190051E21D /* NSManagedObjectModel+Resource.swift in Sources */,
+				F0743DB728B428F900CC1F24 /* AppColor.swift in Sources */,
 				CEF371A720887774007AD36E /* AppConfigurator.swift in Sources */,
 				F04E5C2527EB2B7400CAAEB5 /* AppleGoogleUser.swift in Sources */,
 				8C0E8D3F1FDEBDFF00789C91 /* HomeViewTopView.swift in Sources */,
@@ -26920,6 +26949,7 @@
 				0309F93123D57EDB001DB5FA /* NetmeraScreenEvents.swift in Sources */,
 				8C3BA31A22B3CC45006D901E /* MD5.swift in Sources */,
 				8C3BA31B22B3CC45006D901E /* PasscodeInputView.swift in Sources */,
+				F0743DBE28B428FA00CC1F24 /* AppColor.swift in Sources */,
 				8C1E72F022BEB65300DC57B6 /* SharedConstants.swift in Sources */,
 				8C3BA31C22B3CC45006D901E /* UIViewController+NavBar.swift in Sources */,
 				0309F93723D57EFB001DB5FA /* NetmeraScreenEventTemplate.swift in Sources */,
@@ -26950,6 +26980,7 @@
 				8C3BA34522B3CC49006D901E /* RequestHeader.swift in Sources */,
 				8C3BA34622B3CC49006D901E /* SwiftyJSONExtension.swift in Sources */,
 				8C3BA34722B3CC49006D901E /* FileProviderExtension.swift in Sources */,
+				F0743DBF28B428FA00CC1F24 /* AppColor.swift in Sources */,
 				8C3BA34822B3CC49006D901E /* AuthorizationRepository.swift in Sources */,
 				8C3BA34922B3CC49006D901E /* Constants.swift in Sources */,
 				8C3BA34A22B3CC49006D901E /* ErrorIdentificators.swift in Sources */,
@@ -27012,6 +27043,7 @@
 				8C3BA38222B3CC53006D901E /* Device.swift in Sources */,
 				8C3BA38322B3CC53006D901E /* ColorConstants.swift in Sources */,
 				8C3BA38422B3CC53006D901E /* DocumentActionCustomizator.swift in Sources */,
+				F0743DC028B428FA00CC1F24 /* AppColor.swift in Sources */,
 				8C3BA38522B3CC53006D901E /* UIViewController+NavBar.swift in Sources */,
 				8C3BA38622B3CC53006D901E /* DeviceExtension.swift in Sources */,
 				07FBA22126E0BD5600ED4132 /* Strings.swift in Sources */,
@@ -27071,6 +27103,7 @@
 				8C9CE3B3229DA611004B5C73 /* FileProviderWormholeListener.swift in Sources */,
 				CEF371AF20887DAA007AD36E /* MD5.swift in Sources */,
 				CEF371A020873B41007AD36E /* UIViewController+NavBar.swift in Sources */,
+				F0743DBA28B428FA00CC1F24 /* AppColor.swift in Sources */,
 				CE1BE94C20492C870074BDDC /* AuthorizationURLs.swift in Sources */,
 				B577AE2122D4B8F700D074BA /* URL+TrimmedQuery.swift in Sources */,
 				CE1BE94820492C510074BDDC /* SharedFactory.swift in Sources */,
@@ -27114,6 +27147,7 @@
 				CE4D281B207E0A5B003AE4FB /* Device.swift in Sources */,
 				CE125176204E83DC00886F8D /* ColorConstants.swift in Sources */,
 				CE18CC7D204E84DE00FA3F44 /* DocumentActionCustomizator.swift in Sources */,
+				F0743DBB28B428FA00CC1F24 /* AppColor.swift in Sources */,
 				CEF371A120873B42007AD36E /* UIViewController+NavBar.swift in Sources */,
 				8CCA071020C4639700558AB0 /* DeviceExtension.swift in Sources */,
 				07FBA21526E0BD5200ED4132 /* Strings.swift in Sources */,
@@ -27204,6 +27238,7 @@
 				CEE3017F2049520C007E70CE /* Mapping.swift in Sources */,
 				CEBDB1D720444C73007EE1AE /* UIColor+Adjust.swift in Sources */,
 				CEF371AE20887BC4007AD36E /* MD5.swift in Sources */,
+				F0743DB928B428FA00CC1F24 /* AppColor.swift in Sources */,
 				CE4D2811207E0997003AE4FB /* PasscodeInputView.swift in Sources */,
 				0309F93623D57EF6001DB5FA /* NetmeraScreenEventTemplate.swift in Sources */,
 				CEF3719F20873B40007AD36E /* UIViewController+NavBar.swift in Sources */,
@@ -28560,6 +28595,7 @@
 				CE784B8E22A685FB00662219 /* SettingsConfigurator.swift in Sources */,
 				F0C447382848DFFA00129228 /* UIView+Extensions.swift in Sources */,
 				CE784B8F22A685FB00662219 /* NavigationBarStyle.swift in Sources */,
+				F0743DBC28B428FA00CC1F24 /* AppColor.swift in Sources */,
 				CE784B9022A685FB00662219 /* SettingsInitializer.swift in Sources */,
 				CE784B9122A685FB00662219 /* AlertFilesActionsSheetInitialConfig.swift in Sources */,
 				CE784B9222A685FB00662219 /* SplashViewInput.swift in Sources */,
@@ -30721,6 +30757,7 @@
 				982319D024F3A1E700FD16E2 /* AdjustmentCategoryCell.swift in Sources */,
 				CF8B687523CBC9D70021B021 /* UploadParametrs.swift in Sources */,
 				CF8B687623CBC9D70021B021 /* ImportFromDropboxPresenter.swift in Sources */,
+				F0743DB828B428FA00CC1F24 /* AppColor.swift in Sources */,
 				CF01729623D00B9F00C0B0DE /* NetmeraCustomUser.swift in Sources */,
 				CF8B687723CBC9D70021B021 /* Alamofire+Request.swift in Sources */,
 				CF8B687823CBC9D70021B021 /* OTPViewPresenter.swift in Sources */,
@@ -31846,6 +31883,7 @@
 				CF8B6E6323CBCA280021B021 /* CreateStorySelectionController.swift in Sources */,
 				CF8B6E6423CBCA280021B021 /* PasscodeSettingsRouter.swift in Sources */,
 				CF8B6E6523CBCA280021B021 /* PackageModelResponse.swift in Sources */,
+				F0743DBD28B428FA00CC1F24 /* AppColor.swift in Sources */,
 				734CA117244D64000076F6A7 /* DocumentsAlbumCard.swift in Sources */,
 				CF8B6E6623CBCA280021B021 /* MovieCard.swift in Sources */,
 				CF8B6E6723CBCA280021B021 /* FBResponses.swift in Sources */,

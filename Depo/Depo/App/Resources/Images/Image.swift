@@ -107,31 +107,24 @@ enum Image: String, AppImage {
     case iconHideSelect
     case iconBackupContact
 
-
-    ///  Popup
+    /// Popup
     case popupIconError
     case popupIconDelete
     case popupIconQuestion
     
-    ///For You
+    /// For You
     case forYouPeople
     case popupProfileScan
     case popupLoading
     
-    /// User  Info
+    /// Settings
     case iconDisplaySelected
-    
-    ///  UiSwitch
     case gradientSwitch
-    
-    
-    /// Profile
     case iconArrowDownActive
     case iconArrowDownDisable
+    
     /// Introduce
     case circleIntoduce
     case iconHideSee
-    
-    
-    
+
 }
