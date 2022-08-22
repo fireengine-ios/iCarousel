@@ -54,6 +54,7 @@ final class DeleteAccountValidationPopUp: UIViewController {
             newValue.textField.isSecureTextEntry = true
             newValue.textField.textContentType = .password
             newValue.subtitleLabel.text = localized(.deleteAccountPasswordError)
+            newValue.subtitleLabel.textColor = AppColor.profileInfoOrange.color
             newValue.textField.delegate = self
             newValue.textField.placeholder = TextConstants.enterYourPassword
             newValue.textField.returnKeyType = .done

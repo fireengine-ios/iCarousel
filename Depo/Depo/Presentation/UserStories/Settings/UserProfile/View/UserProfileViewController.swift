@@ -15,7 +15,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     
     @IBOutlet private weak var stackView: UIStackView! {
         willSet {
-            newValue.spacing = 0
+            newValue.spacing = 16
             newValue.axis = .vertical
             newValue.alignment = .fill
             newValue.distribution = .fill
@@ -138,10 +138,10 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     }()
 
     lazy var deleteAccountInfoButton: UIButton = {
-        let newValue = UIButton(type: .custom)
-        let infoIcon = UIImage(named: "action_info")?.withRenderingMode(.alwaysTemplate)
+        let newValue = UIButton(type: .system)
+        let infoIcon = UIImage(named: "action_info")
         newValue.setImage(infoIcon, for: .normal)
-        newValue.tintColor = UIColor.lrTealish
+        newValue.tintColor = AppColor.profileTintColor.color
         newValue.addTarget(self, action: #selector(deleteAccountInfoTapped), for: .touchUpInside)
         return newValue
     }()
