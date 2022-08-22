@@ -7,31 +7,11 @@
 //
 
 import UIKit
-
-enum ForYouViewEnum: CaseIterable {
-    case faceImage
-    case people
-    case things
-    case places
-    case albums
-    case throwback
-    case collage
-    
-    var title: String {
-        switch self {
-        case .faceImage: return ""
-        case .people: return "People"
-        case .things: return "Things"
-        case .places: return "Places"
-        case .throwback: return "Throwback"
-        case .collage: return "Collage"
-        case .albums: return "Albums"
-        }
-    }
-}
+import MBProgressHUD
 
 protocol ForYouTableViewCellDelegate: AnyObject {
     func onSeeAllButton(for view: ForYouViewEnum)
+    func navigateToCreate(for view: ForYouViewEnum)
 }
 
 class ForYouTableViewCell: UITableViewCell {
@@ -64,6 +44,9 @@ class ForYouTableViewCell: UITableViewCell {
     private let placesService = PlacesService()
     private let peopleService = PeopleService()
     private let albumServie = SearchService()
+    private let instapickService = InstapickServiceImpl()
+    private var hud: MBProgressHUD?
+    private let emptyDataView = ForYouEmptyCellView.initFromNib()
     
     private var thingsData: [WrapData] = [] {
         didSet {
@@ -89,6 +72,12 @@ class ForYouTableViewCell: UITableViewCell {
         }
     }
     
+    private var photopickData: [InstapickAnalyze] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         configureTableView()
@@ -97,36 +86,48 @@ class ForYouTableViewCell: UITableViewCell {
     func configure(with type: ForYouViewEnum) {
         currentView = type
         titleLabel.text = type.title
-        seeAllButton.isHidden = type == .people || type == .faceImage
+        seeAllButton.isHidden = type == .people
+        addSpinner()
         
         switch type {
         case .faceImage:
             break
         case .people:
             getPeople { data in
+                self.showEmptyDataViewIfNeeded(isShow: data.isEmpty)
                 self.peopleData = data
+                self.hud?.hide(animated: true)
             } fail: {
                 print("PEOPLE ERROR")
             }
         case .things:
             getThings { data in
+                self.showEmptyDataViewIfNeeded(isShow: data.isEmpty)
                 self.thingsData = data
+                self.hud?.hide(animated: true)
             } fail: {
                 print("THINGS ERROR")
             }
         case .places:
             getPlaces { data in
+                self.showEmptyDataViewIfNeeded(isShow: data.isEmpty)
                 self.placesData = data
+                self.hud?.hide(animated: true)
             } fail: {
                 print("PLACES ERROR")
             }
-        case .throwback:
-            break
-        case .collage:
-            break
+        case .photopick:
+            getInstapickThumbnails { data in
+                self.showEmptyDataViewIfNeeded(isShow: data.isEmpty)
+                self.photopickData = data
+                self.hud?.hide(animated: true)
+            } fail: {
+                print("PHOTOPICK ERROR")
+            }
         case .albums:
             getAlbums { data in
                 self.albumsData = data
+                self.hud?.hide(animated: true)
             } fail: {
                 print("ALBUMS ERROR")
             }
@@ -146,6 +147,7 @@ class ForYouTableViewCell: UITableViewCell {
     }
     
     private func getThings(success: ListRemoteItems?, fail: FailRemoteItems?) {
+        debugLog("ForYou getThings")
         let param = ThingsPageParameters(pageSize: 10, pageNumber: 0)
         
         thingsService.getThingsPage(param: param, success: { response in
@@ -162,6 +164,7 @@ class ForYouTableViewCell: UITableViewCell {
     }
     
     private func getPlaces(success: ListRemoteItems?, fail: FailRemoteItems?) {
+        debugLog("ForYou getPlaces")
         let param = PlacesPageParameters(pageSize: 10, pageNumber: 0)
 
         placesService.getPlacesPage(param: param, success: { response in
@@ -178,6 +181,7 @@ class ForYouTableViewCell: UITableViewCell {
     }
     
     private func getPeople(success: ListRemoteItems?, fail: FailRemoteItems?) {
+        debugLog("ForYou getPeople")
         let param = PeoplePageParameters(pageSize: 10, pageNumber: 0)
         
         peopleService.getPeoplePage(param: param, success: { response in
@@ -194,8 +198,7 @@ class ForYouTableViewCell: UITableViewCell {
     }
     
     private func getAlbums(success: @escaping ListRemoteAlbums, fail: @escaping FailRemoteItems ) {
-        debugLog("AlbumService nextItems")
-
+        debugLog("ForYou getAlbums")
         let serchParam = AlbumParameters(fieldName: .album,
                                          sortBy: .date,
                                          sortOrder: .asc,
@@ -214,6 +217,47 @@ class ForYouTableViewCell: UITableViewCell {
             errorResponse.showInternetErrorGlobal()
             fail()
         })
+    }
+    
+    private func getInstapickThumbnails(success: @escaping ([InstapickAnalyze]) -> Void, fail: @escaping FailRemoteItems) {
+        instapickService.getAnalyzeHistory(offset: 0, limit: 10) { result in
+            switch result {
+            case .success(let history):
+                success(history)
+            case .failed(_):
+                fail()
+            }
+        }
+    }
+    
+    private func addSpinner() {
+        hud = MBProgressHUD.showAdded(to: self, animated: true)
+        hud?.mode = .customView
+        hud?.customView?.backgroundColor = .clear
+        hud?.customView = UIImageView(image: Image.popupLoading.image)
+        hud?.offset = CGPoint(x: 0.0, y: MBProgressMaxOffset)
+    }
+    
+    func showEmptyDataViewIfNeeded(isShow: Bool) {
+        guard isShow else {
+            emptyDataView.removeFromSuperview()
+            return
+        }
+        
+        collectionView.isHidden = isShow
+        emptyDataView.translatesAutoresizingMaskIntoConstraints = false
+        emptyDataView.configure(with: currentView ?? .photopick)
+        emptyDataView.delegate = self
+        
+        guard emptyDataView.superview == nil else {
+            return
+        }
+        self.addSubview(emptyDataView)
+        NSLayoutConstraint.activate([
+            emptyDataView.topAnchor.constraint(equalTo: collectionView.topAnchor),
+            emptyDataView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            emptyDataView.widthAnchor.constraint(equalTo: self.widthAnchor)
+        ])
     }
 
     @IBAction func seeAllButtonTapped(_ sender: UIButton) {
@@ -235,6 +279,8 @@ extension ForYouTableViewCell: UICollectionViewDataSource {
             return placesData.count
         case .albums:
             return albumsData.count
+        case .photopick:
+            return photopickData.count
         default:
             return 0
         }
@@ -260,6 +306,10 @@ extension ForYouTableViewCell: UICollectionViewDataSource {
             let item = albumsData[indexPath.row]
             cell.configureAlbum(with: item)
             return cell
+        case .photopick:
+            let url = photopickData[indexPath.row]
+            cell.configure(with: url)
+            return cell
         default:
             return cell
         }
@@ -281,5 +331,11 @@ extension ForYouTableViewCell: UICollectionViewDelegateFlowLayout {
         }
         
         return 8
+    }
+}
+
+extension ForYouTableViewCell: ForYouEmptyCellViewDelegate {
+    func navigateTo(view: ForYouViewEnum) {
+        delegate?.navigateToCreate(for: view)
     }
 }

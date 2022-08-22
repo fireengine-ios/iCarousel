@@ -11,4 +11,6 @@ import Foundation
 protocol ForYouViewOutput: AnyObject {
     func onSeeAllButton(for view: ForYouViewEnum)
     func checkFIRisAllowed()
+    func onFaceImageButton()
+    func navigateToCreate(for view: ForYouViewEnum)
 }

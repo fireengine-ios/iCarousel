@@ -11,30 +11,33 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="195" id="KGk-i7-Jjw" customClass="ForYouFaceImageTableViewCell" customModule="Billo" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="369" height="220"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="ForYouFaceImageTableViewCell" customModule="Billo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="376" height="224"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="369" height="220"/>
+                <rect key="frame" x="0.0" y="0.0" width="376" height="224"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xeV-x6-fG4">
-                        <rect key="frame" x="8" y="8" width="360" height="204"/>
+                        <rect key="frame" x="8" y="0.0" width="360" height="224"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PqY-Op-6lz">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PqY-Op-6lz">
                                 <rect key="frame" x="16" y="16" width="328" height="74"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="74" id="VuH-S6-rGV"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xl2-Xn-2sS" customClass="RoundedButton" customModule="Billo" customModuleProvider="target">
-                                <rect key="frame" x="20" y="139" width="320" height="45"/>
+                                <rect key="frame" x="20" y="159" width="320" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="C0I-Jn-IAd"/>
                                     <constraint firstAttribute="width" constant="320" id="Tv7-l3-LGX"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="onFaceImageButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="TdF-NX-Ygj"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QHh-qZ-jNr">
                                 <rect key="frame" x="147" y="52" width="66" height="66"/>
@@ -43,13 +46,23 @@
                                     <constraint firstAttribute="height" constant="66" id="tqc-MO-l8h"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="224" translatesAutoresizingMaskIntoConstraints="NO" id="Tal-rG-3vl">
+                                <rect key="frame" x="8" y="122" width="344" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Tal-rG-3vl" secondAttribute="trailing" constant="8" id="0qL-2I-olG"/>
                             <constraint firstItem="PqY-Op-6lz" firstAttribute="leading" secondItem="xeV-x6-fG4" secondAttribute="leading" constant="16" id="JAV-H0-lb2"/>
                             <constraint firstItem="xl2-Xn-2sS" firstAttribute="centerX" secondItem="xeV-x6-fG4" secondAttribute="centerX" id="Jvn-d7-DEc"/>
                             <constraint firstItem="xl2-Xn-2sS" firstAttribute="leading" secondItem="xeV-x6-fG4" secondAttribute="leading" constant="20" id="KGp-Uc-3cz"/>
+                            <constraint firstItem="Tal-rG-3vl" firstAttribute="top" secondItem="QHh-qZ-jNr" secondAttribute="bottom" constant="4" id="Mrd-rj-FCg"/>
+                            <constraint firstItem="xl2-Xn-2sS" firstAttribute="top" secondItem="Tal-rG-3vl" secondAttribute="bottom" constant="4" id="RtX-FI-ePv"/>
                             <constraint firstAttribute="trailing" secondItem="PqY-Op-6lz" secondAttribute="trailing" constant="16" id="XRu-p9-nhE"/>
+                            <constraint firstItem="Tal-rG-3vl" firstAttribute="leading" secondItem="xeV-x6-fG4" secondAttribute="leading" constant="8" id="YL8-XI-Tkv"/>
                             <constraint firstItem="QHh-qZ-jNr" firstAttribute="centerX" secondItem="PqY-Op-6lz" secondAttribute="centerX" id="isf-HS-cLc"/>
                             <constraint firstItem="QHh-qZ-jNr" firstAttribute="bottom" secondItem="PqY-Op-6lz" secondAttribute="bottom" constant="28" id="jRA-An-eVe"/>
                             <constraint firstItem="PqY-Op-6lz" firstAttribute="top" secondItem="xeV-x6-fG4" secondAttribute="top" constant="16" id="rs6-X0-lXO"/>
@@ -65,21 +78,24 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="xeV-x6-fG4" secondAttribute="bottom" constant="8" id="2Nd-aV-Eis"/>
-                    <constraint firstItem="xeV-x6-fG4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="45J-sP-Xh1"/>
-                    <constraint firstAttribute="trailing" secondItem="xeV-x6-fG4" secondAttribute="trailing" constant="8" id="XoM-qZ-qNM"/>
-                    <constraint firstItem="xeV-x6-fG4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="YXG-2S-b4f"/>
+                    <constraint firstAttribute="bottom" secondItem="xeV-x6-fG4" secondAttribute="bottom" id="2Nd-aV-Eis"/>
+                    <constraint firstItem="xeV-x6-fG4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="YXG-2S-b4f"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="njF-e1-oar" firstAttribute="trailing" secondItem="xeV-x6-fG4" secondAttribute="trailing" constant="8" id="070-mi-1vO"/>
+                <constraint firstItem="xeV-x6-fG4" firstAttribute="leading" secondItem="njF-e1-oar" secondAttribute="leading" constant="8" id="iyt-29-2pt"/>
+            </constraints>
             <connections>
                 <outlet property="cellView" destination="xeV-x6-fG4" id="a4S-Pr-N2D"/>
+                <outlet property="descriptionLabel" destination="Tal-rG-3vl" id="RFQ-aH-yte"/>
                 <outlet property="faceImageButton" destination="xl2-Xn-2sS" id="qZ7-uk-z7v"/>
                 <outlet property="peopleImageView" destination="PqY-Op-6lz" id="8wl-Ac-bpy"/>
                 <outlet property="peopleScanImageView" destination="QHh-qZ-jNr" id="DiF-9h-w8e"/>
             </connections>
-            <point key="canvasLocation" x="171.72897196261681" y="141.2526997840173"/>
+            <point key="canvasLocation" x="173.83177570093457" y="154.21166306695466"/>
         </tableViewCell>
     </objects>
     <resources>

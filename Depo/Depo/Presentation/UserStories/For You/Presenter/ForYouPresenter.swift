@@ -27,4 +27,12 @@ extension ForYouPresenter: ForYouViewOutput {
             print(error.localizedDescription)
         }
     }
+    
+    func onFaceImageButton() {
+        router.navigateToFaceImage()
+    }
+    
+    func navigateToCreate(for view: ForYouViewEnum) {
+        router.navigateToCreate(for: view)
+    }
 }
