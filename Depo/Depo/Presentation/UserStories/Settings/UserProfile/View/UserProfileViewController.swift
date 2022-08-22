@@ -138,10 +138,10 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     }()
 
     lazy var deleteAccountInfoButton: UIButton = {
-        let newValue = UIButton(type: .custom)
-        let infoIcon = UIImage(named: "action_info")?.withRenderingMode(.alwaysOriginal)
+        let newValue = UIButton(type: .system)
+        let infoIcon = UIImage(named: "action_info")
         newValue.setImage(infoIcon, for: .normal)
-        //newValue.tintColor = UIColor.lrTealish
+        newValue.tintColor = AppColor.profileTintColor.color
         newValue.addTarget(self, action: #selector(deleteAccountInfoTapped), for: .touchUpInside)
         return newValue
     }()
