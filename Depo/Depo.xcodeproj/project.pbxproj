@@ -1343,7 +1343,6 @@
 		8930DDB622C8F666003CE856 /* CreateStoryMusicEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930DDB322C8F666003CE856 /* CreateStoryMusicEnterView.swift */; };
 		8934DD6E23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8934DD6C23069599006B0998 /* EmailVerifiedPopUp.xib */; };
 		8934DD6F23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8934DD6C23069599006B0998 /* EmailVerifiedPopUp.xib */; };
-		894E985D235F37A8002F4A27 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */; };
 		896133A42338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */; };
 		896133A52338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */; };
 		897B8F3A2338B7400028C690 /* HomePagePopUpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */; };
@@ -7250,7 +7249,6 @@
 		CF8B6AE423CBC9D70021B021 /* ForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CA6C6A61EF2C7BD00D21EBE /* ForgotPasswordViewController.xib */; };
 		CF8B6AE523CBC9D70021B021 /* TBMatikCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0808A52347202E00F1944F /* TBMatikCard.xib */; };
 		CF8B6AE623CBC9D70021B021 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C634FA41F0F8BA200B5B93D /* SettingsViewController.xib */; };
-		CF8B6AE923CBC9D70021B021 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */; };
 		CF8B6AEC23CBC9D70021B021 /* PeriodicContactSyncSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9F8E5220875A4300622A6C /* PeriodicContactSyncSettingsTableViewCell.xib */; };
 		CF8B6AF023CBC9D70021B021 /* ActionsMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C2F56F51F1CC0FE0014870B /* ActionsMenuView.xib */; };
 		CF8B6AF123CBC9D70021B021 /* AutoSyncSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5C4C8A12049272800886F21 /* AutoSyncSettingsTableViewCell.xib */; };
@@ -11558,7 +11556,6 @@
 		CE2976D81FD58E1F00350F3A /* LocalAlbumConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumConfigurator.swift; sourceTree = "<group>"; };
 		CE2976DA1FD58E1F00350F3A /* LocalAlbumInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumInteractor.swift; sourceTree = "<group>"; };
 		CE2976DC1FD58E1F00350F3A /* LocalAlbumRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumRouter.swift; sourceTree = "<group>"; };
-		CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CE2DBA142058EC7A00D08C5E /* FaceImageItemsViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceImageItemsViewInput.swift; sourceTree = "<group>"; };
 		CE2DBA182059043200D08C5E /* SharedItemImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedItemImageLoader.swift; sourceTree = "<group>"; };
 		CE2F55F51F75515C00F49DA1 /* PlanType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanType.swift; sourceTree = "<group>"; };
@@ -20499,7 +20496,6 @@
 				F0743DB228B428CB00CC1F24 /* Colors */,
 				CEBBDDDA1F01E4CF00CDF527 /* Fonts */,
 				8C7B9F3D2253F8970050DABE /* SettingsTC.bundle */,
-				CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */,
 				8C75D2491FDD1BF700CBE1A7 /* Settings.bundle */,
 				7C73CDF3200356B6000824AA /* OurLocalizable.strings */,
 				CEEB7A9D20A5BC230070FDC2 /* InfoPlist.strings */,
@@ -22757,7 +22753,6 @@
 				CE0808A7234720C800F1944F /* TBMatikCard.xib in Resources */,
 				8C0E90661FDEBDFF00789C91 /* SettingsViewController.xib in Resources */,
 				0711888A27FA9E7900F512A1 /* NavigationBar.xcassets in Resources */,
-				894E985D235F37A8002F4A27 /* Images.xcassets in Resources */,
 				4A9F8E5620875A4300622A6C /* PeriodicContactSyncSettingsTableViewCell.xib in Resources */,
 				8C0E90681FDEBDFF00789C91 /* ActionsMenuView.xib in Resources */,
 				B57F8F332587A73600799405 /* FirebaseRemoteConfigDefaults.plist in Resources */,
@@ -23666,7 +23661,6 @@
 				CF8B6AE523CBC9D70021B021 /* TBMatikCard.xib in Resources */,
 				CF8B6AE623CBC9D70021B021 /* SettingsViewController.xib in Resources */,
 				9808B42B25540E4A002B0032 /* PrivateShareContactSuggestionView.xib in Resources */,
-				CF8B6AE923CBC9D70021B021 /* Images.xcassets in Resources */,
 				CF8B6AEC23CBC9D70021B021 /* PeriodicContactSyncSettingsTableViewCell.xib in Resources */,
 				CF8B6AF023CBC9D70021B021 /* ActionsMenuView.xib in Resources */,
 				F0D2975727F596E10082C768 /* AppleGoogleAccountConnectionCell.xib in Resources */,
