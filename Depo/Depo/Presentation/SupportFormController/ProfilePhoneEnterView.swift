@@ -8,7 +8,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     private let underlineLayer = CALayer()
     private let phoneBorderLayer = CALayer()
     private let underlineWidth: CGFloat = 1.0
-    
+
     var underlineColor = AppColor.borderColor.color {
         didSet {
             underlineLayer.backgroundColor = underlineColor.cgColor
@@ -31,7 +31,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     
     @IBOutlet public weak var stackView: UIStackView! {
         willSet {
-            newValue.spacing = 24
+            newValue.spacing = 0
             newValue.axis = .vertical
             newValue.alignment = .fill
             newValue.distribution = .fill
@@ -49,14 +49,23 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             newValue.isOpaque = true
         }
     }
+    @IBOutlet weak var subtitleContent: UIView! {
+        willSet {
+            
+            newValue.isOpaque = true
+            newValue.isHidden = true
+            newValue.backgroundColor = .clear
+            newValue.layer.cornerRadius = 8
+            newValue.layer.borderWidth = 1
+            newValue.layer.borderColor = AppColor.profileInfoOrange.cgColor
+        }
+    }
     
     @IBOutlet public weak var subtitleLabel: UILabel! {
         willSet {
-            newValue.textColor = AppColor.borderColor.color
+            newValue.textColor = AppColor.profileInfoOrange.color
             newValue.font = .appFont(.regular, size: 14.0)
-            newValue.backgroundColor = AppColor.primaryBackground.color
-            newValue.isOpaque = true
-            newValue.isHidden = true
+            newValue.numberOfLines = 0
         }
     }
     
@@ -78,11 +87,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             newValue.smartQuotesType = .no
             newValue.smartDashesType = .no
             
-            let image = UIImage(named: "ic_arrow_down")
-            let imageView = UIImageView(image: image)
-            newValue.rightView = imageView
             newValue.rightViewMode = .always
-            
             newValue.underlineColor = AppColor.primaryBackground.color
             
             /// true from IB by default
@@ -113,6 +118,9 @@ final class ProfilePhoneEnterView: UIView, FromNib {
                                           selector: #selector(nextAfterCode))
         }
     }
+    
+    
+    @IBOutlet public weak var arrowImageView: UIImageView!
     
     @IBOutlet public weak var numberTextField: QuickDismissPlaceholderTextField! {
         willSet {
@@ -184,11 +192,23 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     
     private func setup() {
         setupFromNib()
+        setupSubtitleLabelLayout()
     }
     
     private func setupUnderline() {
         codeTextFieldBackView.layer.insertSublayer(underlineLayer, at: 1)
         phoneTextFieldBackView.layer.insertSublayer(phoneBorderLayer, at: 1)
+    }
+    
+    private func setupSubtitleLabelLayout() {
+        subtitleContent.topAnchor.constraint(equalTo: contentView.bottomAnchor,
+                                             constant: -10).isActive = true
+        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        subtitleLabel.leadingAnchor.constraint(equalTo: subtitleContent.leadingAnchor, constant: 10).isActive = true
+        subtitleLabel.trailingAnchor.constraint(equalTo: subtitleContent.trailingAnchor, constant: -10).isActive = true
+        subtitleLabel.bottomAnchor.constraint(equalTo: subtitleContent.bottomAnchor, constant: -10).isActive = true
+        subtitleLabel.topAnchor.constraint(equalTo: subtitleContent.topAnchor, constant: 20).isActive = true
+        stackView.sendSubviewToBack(subtitleContent)
     }
     
     override func layoutSubviews() {
@@ -218,9 +238,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
         self.bringSubviewToFront(numberTextField)
         self.bringSubviewToFront(titleLabel)
         
-        
     }
-    
     
     @objc private func nextAfterCode() {
         numberTextField.becomeFirstResponder()
@@ -231,24 +249,24 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     }
     
     func showSubtitleAnimated() {
-        guard subtitleLabel.isHidden else {
+        guard subtitleContent.isHidden else {
             return
         }
-        stackView.spacing = NumericConstants.profileStackViewShowSubtitleSpacing
+        arrowImageView.image = Image.iconArrowDownActive.image
         UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.subtitleLabel.isHidden = false
+            self.subtitleContent.isHidden = false
             /// https://stackoverflow.com/a/46412621/5893286
             self.layoutIfNeeded()
         }
     }
     
     func hideSubtitleAnimated() {
-        guard !subtitleLabel.isHidden else {
+        guard !subtitleContent.isHidden else {
             return
         }
-        stackView.spacing = NumericConstants.profileStackViewHiddenSubtitleSpacing
+        arrowImageView.image = Image.iconArrowDown.image
         UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.subtitleLabel.isHidden = true
+            self.subtitleContent.isHidden = true
             /// https://stackoverflow.com/a/46412621/5893286
             self.layoutIfNeeded()
         }

@@ -1103,6 +1103,10 @@
 		4BF7CF4E223103E2002DAF37 /* DropDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF7CF49223103E2002DAF37 /* DropDownTableViewCell.swift */; };
 		4BF7CF50223103E2002DAF37 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF7CF4A223103E2002DAF37 /* DropDownView.swift */; };
 		4BF7CF5322310519002DAF37 /* AdjustsFontSizeInsetsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF7CF5122310519002DAF37 /* AdjustsFontSizeInsetsButton.swift */; };
+		52346AB628AD933F00091C20 /* PasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5921D722564465005882CE /* PasswordView.xib */; };
+		52346AB728AD934000091C20 /* PasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5921D722564465005882CE /* PasswordView.xib */; };
+		52346AB828AD934100091C20 /* PasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5921D722564465005882CE /* PasswordView.xib */; };
+		52346AB928AD934200091C20 /* PasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5921D722564465005882CE /* PasswordView.xib */; };
 		723C81CF3249CC1EF7F7DAF1 /* Pods_BilloFileProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF880A5861684656277FAD7B /* Pods_BilloFileProvider.framework */; };
 		723FF6D31512172E605BB2C3 /* Pods_Billo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE60BD355BDE6BAFF11EEDAB /* Pods_Billo.framework */; };
 		730A997222D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730A996F22D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift */; };
@@ -5261,7 +5265,6 @@
 		CE784CD322A685FB00662219 /* FaceImageChangeCoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BA37C2C2028374E00660394 /* FaceImageChangeCoverViewController.xib */; };
 		CE784CD422A685FB00662219 /* AutoUploadIsOffPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEA863C1FDE84D900F17D9D /* AutoUploadIsOffPopUp.xib */; };
 		CE784CD622A685FB00662219 /* AnimationCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD92DB820750A4400010BFA /* AnimationCard.xib */; };
-		CE784CDB22A685FB00662219 /* PasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5921D722564465005882CE /* PasswordView.xib */; };
 		CE784CDD22A685FB00662219 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C634FA91F0F936700B5B93D /* SettingsTableViewCell.xib */; };
 		CE784CE422A685FB00662219 /* BottomSelectionTabBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C6EF8731F348B5C002AC795 /* BottomSelectionTabBarViewController.xib */; };
 		CE784CE622A685FB00662219 /* EmailEnterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEB27347205BE3DC00E1AE9C /* EmailEnterController.xib */; };
@@ -5467,7 +5470,6 @@
 		CEE3B7CB225791C400B99FE7 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B7C9225791AD00B99FE7 /* UITextField+Extensions.swift */; };
 		CEE3B7CF225791D900B99FE7 /* ChangePasswordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5921CF225623D3005882CE /* ChangePasswordController.xib */; };
 		CEE3B7D0225791D900B99FE7 /* ChangePasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5921CE225623D3005882CE /* ChangePasswordController.swift */; };
-		CEE3B7D1225791D900B99FE7 /* PasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5921D722564465005882CE /* PasswordView.xib */; };
 		CEE3B7D2225791D900B99FE7 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5921D92256446F005882CE /* PasswordView.swift */; };
 		CEE3B7D3225791D900B99FE7 /* CaptchaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B7C72257917200B99FE7 /* CaptchaView.swift */; };
 		CEEFB8DB2361C64700200A7F /* AnalyzeHistoryEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFB8D72361C64500200A7F /* AnalyzeHistoryEmptyCell.swift */; };
@@ -7205,7 +7207,6 @@
 		CF8B6A6A23CBC9D70021B021 /* PhoneVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2600A22291E2310063E913 /* PhoneVerificationViewController.xib */; };
 		CF8B6A6B23CBC9D70021B021 /* AutoUploadIsOffPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEA863C1FDE84D900F17D9D /* AutoUploadIsOffPopUp.xib */; };
 		CF8B6A7223CBC9D70021B021 /* SupportFormController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17589F6E2276336700A5DB37 /* SupportFormController.xib */; };
-		CF8B6A7323CBC9D70021B021 /* PasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5921D722564465005882CE /* PasswordView.xib */; };
 		CF8B6A7423CBC9D70021B021 /* AlbumCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4F60AB2019E2BC0033C58F /* AlbumCard.xib */; };
 		CF8B6A7923CBC9D70021B021 /* CaptchaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE127E992268A025005A4214 /* CaptchaView.xib */; };
 		CF8B6A7D23CBC9D70021B021 /* InternetDataUsageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9216F57822493127008339F5 /* InternetDataUsageCollectionViewCell.xib */; };
@@ -8547,7 +8548,6 @@
 		CF8B708923CBCA280021B021 /* SpotifyCancelImportPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98C298512302B15300C9811E /* SpotifyCancelImportPopup.xib */; };
 		CF8B708A23CBCA280021B021 /* AutoUploadIsOffPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEA863C1FDE84D900F17D9D /* AutoUploadIsOffPopUp.xib */; };
 		CF8B708C23CBCA280021B021 /* AnimationCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD92DB820750A4400010BFA /* AnimationCard.xib */; };
-		CF8B709123CBCA280021B021 /* PasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5921D722564465005882CE /* PasswordView.xib */; };
 		CF8B709223CBCA280021B021 /* TwoFactorAuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A997022D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib */; };
 		CF8B709423CBCA280021B021 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C634FA91F0F936700B5B93D /* SettingsTableViewCell.xib */; };
 		CF8B709A23CBCA280021B021 /* BottomSelectionTabBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C6EF8731F348B5C002AC795 /* BottomSelectionTabBarViewController.xib */; };
@@ -8954,6 +8954,10 @@
 		E7426F75286E559D00666A79 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7426F73286E559D00666A79 /* GradientSwitch.swift */; };
 		E7426F76286E559D00666A79 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7426F73286E559D00666A79 /* GradientSwitch.swift */; };
 		E7426F77286E559D00666A79 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7426F73286E559D00666A79 /* GradientSwitch.swift */; };
+		E797AF7E28A51FD900F0B200 /* BorderedPasswordEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E797AF7D28A51FD900F0B200 /* BorderedPasswordEnterView.swift */; };
+		E797AF7F28A51FD900F0B200 /* BorderedPasswordEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E797AF7D28A51FD900F0B200 /* BorderedPasswordEnterView.swift */; };
+		E797AF8028A51FD900F0B200 /* BorderedPasswordEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E797AF7D28A51FD900F0B200 /* BorderedPasswordEnterView.swift */; };
+		E797AF8128A51FD900F0B200 /* BorderedPasswordEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E797AF7D28A51FD900F0B200 /* BorderedPasswordEnterView.swift */; };
 		F00610CD2899324700911048 /* ForYouViewEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610CC2899324700911048 /* ForYouViewEnum.swift */; };
 		F00610CE2899324700911048 /* ForYouViewEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610CC2899324700911048 /* ForYouViewEnum.swift */; };
 		F00610CF2899324700911048 /* ForYouViewEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610CC2899324700911048 /* ForYouViewEnum.swift */; };
@@ -12054,6 +12058,7 @@
 		E61A7EDD38B6D6D880916FFF /* Pods-LifeTech-LifeboxFileProviderUI.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech-LifeboxFileProviderUI.enterprise.xcconfig"; path = "Target Support Files/Pods-LifeTech-LifeboxFileProviderUI/Pods-LifeTech-LifeboxFileProviderUI.enterprise.xcconfig"; sourceTree = "<group>"; };
 		E70E4E2532914C44F1B96A96 /* TermsAndServicesViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesViewInput.swift; sourceTree = "<group>"; };
 		E7426F73286E559D00666A79 /* GradientSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientSwitch.swift; sourceTree = "<group>"; };
+		E797AF7D28A51FD900F0B200 /* BorderedPasswordEnterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedPasswordEnterView.swift; sourceTree = "<group>"; };
 		E7F9CA614F6A1DD5CFEFFAFD /* UserInfoSubViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewRouterInput.swift; sourceTree = "<group>"; };
 		E829DBD8933CDFA043AFECB2 /* SelectNamePresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNamePresenter.swift; sourceTree = "<group>"; };
 		E9F6A1C9F3695D2974AEF4DA /* SettingsInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsInteractorOutput.swift; sourceTree = "<group>"; };
@@ -13189,6 +13194,7 @@
 			isa = PBXGroup;
 			children = (
 				17589F622275E33800A5DB37 /* ProfilePasswordEnterView.swift */,
+				E797AF7D28A51FD900F0B200 /* BorderedPasswordEnterView.swift */,
 				17589F632275E33800A5DB37 /* ErrorBannerView.swift */,
 				4B34A3F82334CF8C00C9B12B /* SupportFormBannerView.swift */,
 				F02F6A9D269C16C000A64ED8 /* PasswordRulesView.swift */,
@@ -22625,6 +22631,7 @@
 				9823195724F3A1E600FD16E2 /* PreparedFilterSliderView.xib in Resources */,
 				CF71464024B597A800D83E60 /* ContactSyncProgressView.xib in Resources */,
 				7C73CDF1200356B6000824AA /* OurLocalizable.strings in Resources */,
+				52346AB628AD933F00091C20 /* PasswordView.xib in Resources */,
 				981EA2E7247D4CA700A51B7D /* ContactsOperationView.xib in Resources */,
 				730A998622D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */,
 				9823198724F3A1E700FD16E2 /* ColorView.xib in Resources */,
@@ -22638,7 +22645,6 @@
 				9842FB8D2563D25700B07606 /* PrivateShareContactsViewController.xib in Resources */,
 				17589F792276336800A5DB37 /* SupportFormController.xib in Resources */,
 				CF38A839257532550000994F /* PrivateShareDurationCell.xib in Resources */,
-				CEE3B7D1225791D900B99FE7 /* PasswordView.xib in Resources */,
 				9823197B24F3A1E600FD16E2 /* AdjustView.xib in Resources */,
 				07A8779B26D392A000D7BC03 /* Colors.xcassets in Resources */,
 				0711889927FAF44000F512A1 /* TabBar.xcassets in Resources */,
@@ -22923,7 +22929,6 @@
 				CE784CD422A685FB00662219 /* AutoUploadIsOffPopUp.xib in Resources */,
 				CE784CD622A685FB00662219 /* AnimationCard.xib in Resources */,
 				F013FA8B28059150004B9BB8 /* SecurityInfoWarningPopup.xib in Resources */,
-				CE784CDB22A685FB00662219 /* PasswordView.xib in Resources */,
 				07C75A2F281A786400B028F0 /* GT-America-LC-Standard-Light.ttf in Resources */,
 				7378053C23ABC130001D57BD /* OverlayStickerViewController.xib in Resources */,
 				730A997622D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib in Resources */,
@@ -23237,6 +23242,7 @@
 				98BE78AC24517E4300B8864F /* SnackbarView.xib in Resources */,
 				CE784EBA22A685FB00662219 /* ActionsMenuView.xib in Resources */,
 				CE784EBC22A685FB00662219 /* InstaPickCircularLoader.xib in Resources */,
+				52346AB828AD934100091C20 /* PasswordView.xib in Resources */,
 				989BDE5122F47B1E001DDEB2 /* SpotifyOverwritePopup.xib in Resources */,
 				CF71473324B597AA00D83E60 /* ContactSyncScheduleCard.xib in Resources */,
 				98A86D8523A7C87F00438225 /* EmptyView.xib in Resources */,
@@ -23527,6 +23533,7 @@
 				07CCBF7E26FC7254002322B0 /* ValidateSecurityQuestionViewController.xib in Resources */,
 				0305A34F23D5C5A6004D1EC7 /* HSCompletionPopUp.xib in Resources */,
 				9808B3F025540D6C002B0032 /* PrivateShareSuggestionsView.xib in Resources */,
+				52346AB728AD934000091C20 /* PasswordView.xib in Resources */,
 				CF8B6A5723CBC9D70021B021 /* RecentlySearchedFaceImageTableViewCell.xib in Resources */,
 				CF8B6A5A23CBC9D70021B021 /* ManageContactTableViewCell.xib in Resources */,
 				CF8B6A5C23CBC9D70021B021 /* CollectionViewStoryReorderView.xib in Resources */,
@@ -23549,7 +23556,6 @@
 				F0571EB2288AE50500A0D6AC /* ForYouTableViewCell.xib in Resources */,
 				3A134C672645535700CFC736 /* InvitedPeopleCollectionViewCell.xib in Resources */,
 				CF8B6A7223CBC9D70021B021 /* SupportFormController.xib in Resources */,
-				CF8B6A7323CBC9D70021B021 /* PasswordView.xib in Resources */,
 				CF8B6A7423CBC9D70021B021 /* AlbumCard.xib in Resources */,
 				0305A36023D5C652004D1EC7 /* CarouselPagerReusableViewController.xib in Resources */,
 				CF8B6A7923CBC9D70021B021 /* CaptchaView.xib in Resources */,
@@ -23705,7 +23711,6 @@
 				CF8B708A23CBCA280021B021 /* AutoUploadIsOffPopUp.xib in Resources */,
 				CF8B708C23CBCA280021B021 /* AnimationCard.xib in Resources */,
 				F013FA8C28059150004B9BB8 /* SecurityInfoWarningPopup.xib in Resources */,
-				CF8B709123CBCA280021B021 /* PasswordView.xib in Resources */,
 				07C75A30281A786400B028F0 /* GT-America-LC-Standard-Light.ttf in Resources */,
 				CF8B709223CBCA280021B021 /* TwoFactorAuthenticationViewController.xib in Resources */,
 				CF8B709423CBCA280021B021 /* SettingsTableViewCell.xib in Resources */,
@@ -24019,6 +24024,7 @@
 				98231A2124F3A1E700FD16E2 /* SelectionMenuCell.xib in Resources */,
 				CF71473424B597AA00D83E60 /* ContactSyncScheduleCard.xib in Resources */,
 				CF8B729823CBCA280021B021 /* UsageInfoViewController.xib in Resources */,
+				52346AB928AD934200091C20 /* PasswordView.xib in Resources */,
 				CF8B729A23CBCA280021B021 /* SmallFullOfQuotaPopUp.xib in Resources */,
 				CF8B729D23CBCA280021B021 /* PremiumHeaderView.xib in Resources */,
 				0305A36123D5C654004D1EC7 /* CarouselPagerReusableViewController.xib in Resources */,
@@ -25379,6 +25385,7 @@
 				98495F59255975810093B2C2 /* PlaceholderTextView.swift in Sources */,
 				CE49E8FB2099BD83007F05A6 /* UIButton+Font.swift in Sources */,
 				B5AB5B6521F9B01B003AABB4 /* DropboxAccountConnectionCell.swift in Sources */,
+				E797AF7E28A51FD900F0B200 /* BorderedPasswordEnterView.swift in Sources */,
 				98A86D5723A238E700438225 /* AlbumsSliderCell.swift in Sources */,
 				8C0E8CEA1FDEBDFF00789C91 /* BaseFilesGreedChildrenViewController.swift in Sources */,
 				8C0E8CED1FDEBDFF00789C91 /* CustomSwitch.swift in Sources */,
@@ -28637,6 +28644,7 @@
 				CE784BC022A685FB00662219 /* (null) in Sources */,
 				98231A0E24F3A1E700FD16E2 /* SelectionMenuController.swift in Sources */,
 				CE784BC122A685FB00662219 /* PromoView.swift in Sources */,
+				E797AF8028A51FD900F0B200 /* BorderedPasswordEnterView.swift in Sources */,
 				CE784BC222A685FB00662219 /* InstapickAnalyze.swift in Sources */,
 				CE784BC322A685FB00662219 /* AuthorityType.swift in Sources */,
 				B51805F0234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */,
@@ -29873,6 +29881,7 @@
 				CF8B660D23CBC9D70021B021 /* CreateStoryPreviewModuleInput.swift in Sources */,
 				CF8B660E23CBC9D70021B021 /* ImportFromInstagramInteractor.swift in Sources */,
 				CF8B660F23CBC9D70021B021 /* CredsUpdateCheckPopUp.swift in Sources */,
+				E797AF7F28A51FD900F0B200 /* BorderedPasswordEnterView.swift in Sources */,
 				CF8B661023CBC9D70021B021 /* PeopleAlbumsManager.swift in Sources */,
 				CF8B661123CBC9D70021B021 /* SpotifyPlaylistsNavbarManager.swift in Sources */,
 				CF8B661223CBC9D70021B021 /* ForgotPasswordInteractor.swift in Sources */,
@@ -31993,6 +32002,7 @@
 				07567DA82721DFBC00557BCF /* DeleteAccountPopUp.swift in Sources */,
 				CF8B6EE123CBCA280021B021 /* FBService.swift in Sources */,
 				CF7146B624B597A900D83E60 /* ContactsBackupCell.swift in Sources */,
+				E797AF8128A51FD900F0B200 /* BorderedPasswordEnterView.swift in Sources */,
 				CF8B6EE223CBCA280021B021 /* PasscodeSettingsInitializer.swift in Sources */,
 				CF8B6EE523CBCA280021B021 /* UserProfileViewInput.swift in Sources */,
 				0302079623D1D2D300BF8006 /* NetmeraService.swift in Sources */,

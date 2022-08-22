@@ -55,7 +55,7 @@ final class LoginViewController: ViewController {
             let normalImage = UIImage(named: "checkBoxNotSelected")
             newValue.setImage(normalImage, for: .normal)
             
-            let selectedImage = UIImage(named: "checkbox_active")
+            let selectedImage = UIImage(named: "iconSelectCheck")
             newValue.setImage(selectedImage, for: .selected)
         }
     }
@@ -64,8 +64,8 @@ final class LoginViewController: ViewController {
         willSet {
             newValue.setTitle(TextConstants.loginTitle, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.backgroundColor = UIColor.lrTealish
+            newValue.titleLabel?.font = UIFont.appFont(.medium, size: 16.0)
+            newValue.backgroundColor = ColorConstants.darkBlueColor
             newValue.isOpaque = true
         }
     }
@@ -73,9 +73,9 @@ final class LoginViewController: ViewController {
     @IBOutlet private weak var forgotPasswordButton: UIButton! {
         willSet {
             let attributes: [NSAttributedString.Key : Any] = [
-                .foregroundColor : UIColor.lrTealish,
+                .foregroundColor : AppColor.label.color,
                 .underlineStyle : NSUnderlineStyle.single.rawValue,
-                .font : UIFont.TurkcellSaturaDemFont(size: 16)
+                .font : UIFont.appFont(.regular, size: 14.0)
             ]
             
             let attributedTitle = NSAttributedString(string: TextConstants.loginCantLoginButtonTitle,
@@ -91,17 +91,17 @@ final class LoginViewController: ViewController {
             newValue.textField.autocapitalizationType = .none
             newValue.textField.autocorrectionType = .no
             newValue.textField.quickDismissPlaceholder = TextConstants.loginEmailOrPhonePlaceholder
-            newValue.titleLabel.text = TextConstants.loginCellTitleEmail
+            newValue.titleLabel.text = "  " + TextConstants.loginCellTitleEmail + "  "
         }
     }
     
-    @IBOutlet private weak var passwordEnterView: ProfilePasswordEnterView! {
+    @IBOutlet private weak var passwordEnterView: BorderedPasswordEnterView! {
         willSet {
             newValue.textField.enablesReturnKeyAutomatically = true
 
             newValue.textField.quickDismissPlaceholder = TextConstants.loginPasswordPlaceholder
 
-            newValue.titleLabel.text = TextConstants.loginCellTitlePassword
+            newValue.titleLabel.text = "  " + TextConstants.loginCellTitlePassword + "  "
         }
     }
     

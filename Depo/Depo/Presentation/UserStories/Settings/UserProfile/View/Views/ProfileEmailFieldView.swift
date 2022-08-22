@@ -44,7 +44,6 @@ final class ProfileEmailFieldView: ProfileTextEnterView {
 
         verifyButton.addTarget(self, action: #selector(verifyTapped), for: .touchUpInside)
 
-        configureVerificationContainer()
         updateVerificationStatus()
         updateVerificationVisibility()
     }
@@ -88,20 +87,6 @@ final class ProfileEmailFieldView: ProfileTextEnterView {
         button.layer.cornerRadius = ProfileEmailFieldView.verificationViewHeight / 2
         return button
     }()
-
-    private func configureVerificationContainer() {
-        verificationView.addArrangedSubview(verifiedView)
-        verificationView.addArrangedSubview(verifyButton)
-
-        let textFieldStackView = UIStackView(arrangedSubviews: [textField, verificationView])
-        textFieldStackView.axis = .horizontal
-        textFieldStackView.spacing = 0
-        textFieldStackView.alignment = .center
-        stackView.removeArrangedSubview(textField) // added in superview (ProfileTextEnterView)
-        stackView.addArrangedSubview(textFieldStackView)
-
-        textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-    }
 
     private func updateVerificationVisibility() {
         verificationView.isHidden = !showsVerificationStatus || isEditState

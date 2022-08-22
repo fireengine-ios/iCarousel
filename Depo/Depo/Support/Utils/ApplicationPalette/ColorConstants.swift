@@ -37,6 +37,7 @@ enum AppColor {
     case separator
     case lightText
 
+    case loginShadowBlue
     case darkContentOverlay
     case lightContentOverlay
     
@@ -117,6 +118,8 @@ enum AppColor {
     // MARK: Profile Colors
     case borderColor
     case profileInfoOrange
+    case arrowDownOpenColor
+    case profileTintColor
 
     var color: UIColor {
         guard let uiColor = UIColor(named: String(describing: self)) else {

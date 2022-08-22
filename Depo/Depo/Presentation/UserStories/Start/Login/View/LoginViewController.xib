@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -99,17 +99,17 @@
                                     </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JEG-SY-yH4">
-                                    <rect key="frame" x="0.0" y="246" width="414" height="318"/>
+                                    <rect key="frame" x="0.0" y="246" width="414" height="337"/>
                                     <color key="backgroundColor" name="primaryBackground"/>
                                 </view>
                                 <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="3pB-Lp-wU7">
-                                    <rect key="frame" x="20" y="246" width="374" height="318"/>
+                                    <rect key="frame" x="20" y="246" width="374" height="337"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="zR0-Yb-crR" userLabel="email" customClass="ProfileTextEnterView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="80"/>
                                             <color key="backgroundColor" name="primaryBackground"/>
                                         </view>
-                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="Fd4-XR-iy0" userLabel="password" customClass="ProfilePasswordEnterView" customModule="Billo" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="Fd4-XR-iy0" userLabel="password" customClass="BorderedPasswordEnterView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="96" width="374" height="80"/>
                                             <color key="backgroundColor" name="primaryBackground"/>
                                         </view>
@@ -117,8 +117,15 @@
                                             <rect key="frame" x="0.0" y="192" width="374" height="80"/>
                                             <color key="backgroundColor" name="primaryBackground"/>
                                         </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="amm-cu-bEu">
+                                            <rect key="frame" x="0.0" y="288" width="374" height="3"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="3" id="j3N-cB-Seu"/>
+                                            </constraints>
+                                        </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="s8F-tB-ErQ" customClass="AccessibleCheckBoxView" customModule="Billo" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="288" width="374" height="30"/>
+                                            <rect key="frame" x="0.0" y="307" width="374" height="30"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nqg-tP-cJg">
                                                     <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -126,18 +133,29 @@
                                                         <constraint firstAttribute="height" constant="30" id="cwh-mx-goD"/>
                                                         <constraint firstAttribute="width" constant="30" id="n9k-EG-7ih"/>
                                                     </constraints>
-                                                    <state key="normal" image="checkbox"/>
+                                                    <state key="normal" image="iconSelectCheck"/>
                                                     <state key="selected" image="checkboxSelected"/>
                                                     <connections>
                                                         <action selector="onRememberMeTap:" destination="-1" eventType="touchUpInside" id="gan-Xb-wfe"/>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zp4-cQ-sFI">
-                                                    <rect key="frame" x="38" y="0.0" width="336" height="30"/>
+                                                    <rect key="frame" x="38" y="0.0" width="41.5" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GFG-n0-P2R">
+                                                    <rect key="frame" x="87.5" y="0.0" width="232.5" height="30"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AWM-PX-Ia2">
+                                                    <rect key="frame" x="328" y="0.0" width="46" height="30"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <action selector="onForgotPasswordTap:" destination="-1" eventType="touchUpInside" id="c4a-Kf-3Ex"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <connections>
                                                 <outlet property="button" destination="Nqg-tP-cJg" id="dts-VV-Cdr"/>
@@ -147,7 +165,7 @@
                                     </subviews>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhc-pL-wnH" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="93" y="614" width="228" height="44"/>
+                                    <rect key="frame" x="52" y="633" width="310.5" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="G6T-7F-LuP"/>
                                     </constraints>
@@ -156,28 +174,17 @@
                                         <action selector="onLoginTap:" destination="-1" eventType="touchUpInside" id="JYW-7t-4YE"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AWM-PX-Ia2">
-                                    <rect key="frame" x="184" y="681" width="46" height="30"/>
-                                    <state key="normal" title="Button"/>
-                                    <connections>
-                                        <action selector="onForgotPasswordTap:" destination="-1" eventType="touchUpInside" id="c4a-Kf-3Ex"/>
-                                    </connections>
-                                </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="JEG-SY-yH4" firstAttribute="bottom" secondItem="3pB-Lp-wU7" secondAttribute="bottom" id="3EM-cp-fe4"/>
-                                <constraint firstItem="AWM-PX-Ia2" firstAttribute="centerX" secondItem="ufk-2Q-UcS" secondAttribute="centerX" id="ENW-zg-K6M"/>
                                 <constraint firstAttribute="trailing" secondItem="IUh-15-NB0" secondAttribute="trailing" constant="16" id="FTD-vo-ohD"/>
-                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="AWM-PX-Ia2" secondAttribute="bottom" constant="16" id="Rnx-L2-CiT"/>
-                                <constraint firstItem="dhc-pL-wnH" firstAttribute="width" secondItem="ufk-2Q-UcS" secondAttribute="width" multiplier="0.55" id="Rp3-g8-WN0"/>
-                                <constraint firstItem="AWM-PX-Ia2" firstAttribute="top" secondItem="dhc-pL-wnH" secondAttribute="bottom" constant="23" id="TjA-wO-mmJ"/>
+                                <constraint firstItem="dhc-pL-wnH" firstAttribute="width" secondItem="ufk-2Q-UcS" secondAttribute="width" multiplier="0.75" id="Rp3-g8-WN0"/>
                                 <constraint firstItem="dhc-pL-wnH" firstAttribute="top" secondItem="3pB-Lp-wU7" secondAttribute="bottom" constant="50" id="a1G-4c-g9V"/>
                                 <constraint firstItem="IUh-15-NB0" firstAttribute="top" secondItem="ufk-2Q-UcS" secondAttribute="top" id="ay0-2B-jlA"/>
                                 <constraint firstAttribute="trailing" secondItem="JEG-SY-yH4" secondAttribute="trailing" id="fQS-aI-NzQ"/>
                                 <constraint firstItem="3pB-Lp-wU7" firstAttribute="leading" secondItem="ufk-2Q-UcS" secondAttribute="leading" constant="20" id="icQ-Vn-UCI"/>
                                 <constraint firstItem="IUh-15-NB0" firstAttribute="leading" secondItem="ufk-2Q-UcS" secondAttribute="leading" constant="16" id="k3d-jh-4iy"/>
-                                <constraint firstItem="AWM-PX-Ia2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ufk-2Q-UcS" secondAttribute="leading" constant="16" id="l14-aT-1Vg"/>
                                 <constraint firstItem="3pB-Lp-wU7" firstAttribute="top" secondItem="IUh-15-NB0" secondAttribute="bottom" constant="16" id="ng8-DS-Hak"/>
                                 <constraint firstItem="dhc-pL-wnH" firstAttribute="centerX" secondItem="ufk-2Q-UcS" secondAttribute="centerX" id="olA-u9-38w"/>
                                 <constraint firstItem="JEG-SY-yH4" firstAttribute="leading" secondItem="ufk-2Q-UcS" secondAttribute="leading" id="pBt-Pq-RW2"/>
@@ -210,9 +217,9 @@
         </view>
     </objects>
     <resources>
-        <image name="checkbox" width="18" height="18"/>
         <image name="checkboxSelected" width="26" height="26"/>
         <image name="chevronLeft" width="16" height="9"/>
+        <image name="iconSelectCheck" width="24" height="24"/>
         <image name="question_symbol" width="31" height="55"/>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
