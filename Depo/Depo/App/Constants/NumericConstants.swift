@@ -162,7 +162,7 @@ struct NumericConstants {
     static let maxStringLengthForUserProfile = 255
     
     static let profileStackViewHiddenSubtitleSpacing: CGFloat = 8
-    static let profileStackViewShowSubtitleSpacing: CGFloat = 2
+    static let profileStackViewShowSubtitleSpacing: CGFloat = 4
     static let firstResponderBottomOffset: CGFloat = 50
     
     static let createStoryImagesCountLimit: Int = 20

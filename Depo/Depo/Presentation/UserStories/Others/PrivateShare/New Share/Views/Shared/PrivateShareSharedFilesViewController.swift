@@ -122,6 +122,11 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         setupNavBar()
         setupCollectionViewBar()
         bottomBarManager.setup()
+        setupTabBar(needToShow: true)
+    }
+    
+    private func setupTabBar(needToShow value: Bool) {
+        needToShowTabBar = value
     }
     
     private func setupNavBar() {
