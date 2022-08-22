@@ -126,4 +126,10 @@ enum Image: String, AppImage {
     /// Profile
     case iconArrowDownActive
     case iconArrowDownDisable
+    /// Introduce
+    case circleIntoduce
+    case iconHideSee
+    
+    
+    
 }
