@@ -23,7 +23,7 @@ class ProfileTextEnterView: UIView {
     
     let subtitleLabel: UILabel = {
         let newValue = UILabel()
-        newValue.textColor = ColorConstants.textOrange
+        newValue.textColor = AppColor.profileInfoOrange.color
         newValue.font = .appFont(.regular, size: 14.0)
         newValue.isOpaque = true
         newValue.numberOfLines = 0
@@ -34,7 +34,7 @@ class ProfileTextEnterView: UIView {
         let newValue = QuickDismissPlaceholderTextField()
         newValue.textColor = AppColor.borderColor.color
         newValue.font = .appFont(.regular, size: 14.0)
-        newValue.backgroundColor = .white
+        newValue.backgroundColor = AppColor.primaryBackground.color
         newValue.borderStyle = .none
         newValue.layer.cornerRadius = 8
         newValue.layer.borderWidth = 1
@@ -179,19 +179,5 @@ class ProfileTextEnterView: UIView {
     func showSubtitleTextAnimated(text: String) {
         subtitleLabel.text = text
         showSubtitleAnimated()
-    }
-}
-
-extension UITextField {
-    func setLeftPaddingPoints(_ amount:CGFloat){
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
-        self.leftView = paddingView
-        self.leftViewMode = .always
-    }
-    
-    func setRightPaddingPoints(_ amount:CGFloat) {
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
-        self.rightView = paddingView
-        self.rightViewMode = .always
     }
 }

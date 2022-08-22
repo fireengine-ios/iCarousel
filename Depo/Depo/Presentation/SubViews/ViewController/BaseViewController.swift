@@ -10,7 +10,7 @@ import UIKit
 
 class BaseViewController: ViewController {
     var keyboardHeight: CGFloat = 0
-    var needToShowTabBar: Bool = false
+    var needToShowTabBar: Bool = true
     var floatingButtonsArray = [FloatingButtonsType]()
     var parentUUID: String = ""
     var segmentImage: SegmentedImage?
