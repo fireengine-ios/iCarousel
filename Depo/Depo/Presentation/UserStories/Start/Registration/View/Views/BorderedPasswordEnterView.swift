@@ -8,10 +8,10 @@
 
 import Foundation
 
-class BorderedPasswordEnterView: BorderedTextEnterView {
+class BorderedPasswordEnterView: ProfileTextEnterView {
     
     private let showPasswordImage = Image.iconHideSee.image
-    private let hidePasswordImage = UIImage(named: "ic_eye_hide")
+    private let hidePasswordImage = Image.iconHideUnselect.image
     private let eyeSize: CGFloat = 44
     private let eyeButton = UIButton()
     
@@ -27,43 +27,13 @@ class BorderedPasswordEnterView: BorderedTextEnterView {
         textField.autocapitalizationType = .none
     }
     
-    override func setupViews() {
-        addSubview(holderView)
+    override func setupStackView() {
+        super.setupStackView()
         
-        holderView.translatesAutoresizingMaskIntoConstraints = false
-        holderView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
-        holderView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
-        holderView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
-        holderView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
-        
-        holderView.addSubview(titleLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: holderView.topAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: holderView.leadingAnchor, constant: 12),
-            titleLabel.heightAnchor.constraint(equalToConstant: 20)
-        ])
-        
-        holderView.addSubview(stackView)
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        let edgeInset: CGFloat = 12
-        stackView.topAnchor.constraint(equalTo: holderView.topAnchor, constant: 25).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: holderView.leadingAnchor, constant: edgeInset).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: holderView.trailingAnchor, constant: -edgeInset).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: holderView.bottomAnchor, constant: -4).isActive = true
-        
-        holderView.addSubview(eyeButton)
+        textField.addSubview(eyeButton)
         eyeButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        eyeButton.widthAnchor.constraint(equalToConstant: eyeSize).isActive = true
-        eyeButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
-        eyeButton.centerYAnchor.constraint(equalTo: holderView.centerYAnchor, constant: 10).isActive = true
-        eyeButton.trailingAnchor.constraint(equalTo: holderView.trailingAnchor, constant: -16).isActive = true
-
-        stackView.addArrangedSubview(subtitleLabel)
-        stackView.addArrangedSubview(textField)
+        eyeButton.centerYAnchor.constraint(equalTo: textField.centerYAnchor).isActive = true
+        eyeButton.trailingAnchor.constraint(equalTo: textField.trailingAnchor, constant: -10).isActive = true
     }
 
     @objc private func changeVisibilityState() {

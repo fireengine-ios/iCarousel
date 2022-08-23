@@ -126,5 +126,5 @@ enum Image: String, AppImage {
     /// Introduce
     case circleIntoduce
     case iconHideSee
-
+    case iconHideUnselect
 }
