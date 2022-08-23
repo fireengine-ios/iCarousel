@@ -176,9 +176,6 @@ final class LoginViewController: ViewController {
     private func setup() {
         setupDelegates()
         configureKeyboard()
-//
-//        fieldsStackView.translatesAutoresizingMaskIntoConstraints = false
-//        fieldsStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
     }
     
     private func setupDelegates() {
