@@ -116,7 +116,8 @@ final class FaceImageViewController: ViewController, NibInit {
     }
     
     private func showFaceImageWaitAlert() {
-        SnackbarManager.shared.show(type: .critical, message: TextConstants.faceImageWaitAlbum, action: .ok)
+        let router = RouterVC()
+        router.presentViewController(controller: router.bottomInfoBanner(text: TextConstants.faceImageWaitAlbum))
     }
     
     // MARK: - face image

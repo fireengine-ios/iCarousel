@@ -37,7 +37,7 @@ final class FaceImageDesigner: NSObject {
     @IBOutlet private weak var secondFacebookLabel: UILabel! {
         willSet {
             newValue.text = " "
-            newValue.textColor = ColorConstants.darkText
+            newValue.textColor = AppColor.label.color
             newValue.font = .appFont(.regular, size: 12)
         }
     }
@@ -52,7 +52,7 @@ final class FaceImageDesigner: NSObject {
     
     @IBOutlet private weak var secondFaceImageLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.darkText
+            newValue.textColor = AppColor.label.color
             newValue.font = .appFont(.regular, size: 12)
             newValue.text = TextConstants.faceImageUpgrade
         }
@@ -60,7 +60,7 @@ final class FaceImageDesigner: NSObject {
     
     @IBOutlet private weak var threeFaceImageLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.darkText
+            newValue.textColor = AppColor.label.color
             newValue.font = .appFont(.regular, size: 12)
             newValue.text = TextConstants.faceTagsDescriptionStandart
         }

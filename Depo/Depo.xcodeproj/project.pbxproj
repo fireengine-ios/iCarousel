@@ -9189,6 +9189,14 @@
 		F0743DBE28B428FA00CC1F24 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0743DB628B428F900CC1F24 /* AppColor.swift */; };
 		F0743DBF28B428FA00CC1F24 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0743DB628B428F900CC1F24 /* AppColor.swift */; };
 		F0743DC028B428FA00CC1F24 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0743DB628B428F900CC1F24 /* AppColor.swift */; };
+		F0743DC928B4C63100CC1F24 /* BottomInfoBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0743DC828B4C63100CC1F24 /* BottomInfoBanner.swift */; };
+		F0743DCA28B4C63100CC1F24 /* BottomInfoBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0743DC828B4C63100CC1F24 /* BottomInfoBanner.swift */; };
+		F0743DCB28B4C63100CC1F24 /* BottomInfoBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0743DC828B4C63100CC1F24 /* BottomInfoBanner.swift */; };
+		F0743DCC28B4C63100CC1F24 /* BottomInfoBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0743DC828B4C63100CC1F24 /* BottomInfoBanner.swift */; };
+		F0743DCE28B4C63C00CC1F24 /* BottomInfoBanner.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0743DCD28B4C63C00CC1F24 /* BottomInfoBanner.xib */; };
+		F0743DCF28B4C63C00CC1F24 /* BottomInfoBanner.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0743DCD28B4C63C00CC1F24 /* BottomInfoBanner.xib */; };
+		F0743DD028B4C63C00CC1F24 /* BottomInfoBanner.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0743DCD28B4C63C00CC1F24 /* BottomInfoBanner.xib */; };
+		F0743DD128B4C63C00CC1F24 /* BottomInfoBanner.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0743DCD28B4C63C00CC1F24 /* BottomInfoBanner.xib */; };
 		F077B23D280FDE3B0034F73C /* agconnect-services.plist in Resources */ = {isa = PBXBuildFile; fileRef = F077B23C280FDE3A0034F73C /* agconnect-services.plist */; };
 		F077B23E280FDE3B0034F73C /* agconnect-services.plist in Resources */ = {isa = PBXBuildFile; fileRef = F077B23C280FDE3A0034F73C /* agconnect-services.plist */; };
 		F081F9C62779138F0064D25C /* DragAndDropItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F081F9C52779138F0064D25C /* DragAndDropItemType.swift */; };
@@ -12148,6 +12156,8 @@
 		F064FB30278C111100B461D0 /* PublicSharedItemsActionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublicSharedItemsActionView.xib; sourceTree = "<group>"; };
 		F064FB32278C168300B461D0 /* PublicSharedItemsActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSharedItemsActionView.swift; sourceTree = "<group>"; };
 		F0743DB628B428F900CC1F24 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
+		F0743DC828B4C63100CC1F24 /* BottomInfoBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomInfoBanner.swift; sourceTree = "<group>"; };
+		F0743DCD28B4C63C00CC1F24 /* BottomInfoBanner.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomInfoBanner.xib; sourceTree = "<group>"; };
 		F077B23C280FDE3A0034F73C /* agconnect-services.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "agconnect-services.plist"; sourceTree = "<group>"; };
 		F081F9C52779138F0064D25C /* DragAndDropItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropItemType.swift; sourceTree = "<group>"; };
 		F092578727DCF78C0001737C /* SecurityInfoPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityInfoPopup.swift; sourceTree = "<group>"; };
@@ -19046,6 +19056,7 @@
 		C206234150DD1B9E1424D61C /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				F0743DC428B4C60B00CC1F24 /* BottomInfoBanner */,
 				F013FA8428059047004B9BB8 /* SecurityInfoWarningPopup */,
 				F013FA6727FF27D0004B9BB8 /* AppleGoogleUpdatePasswordPoup */,
 				F0D2976B27FA330D0082C768 /* PasswordEnterPopup */,
@@ -21713,6 +21724,15 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		F0743DC428B4C60B00CC1F24 /* BottomInfoBanner */ = {
+			isa = PBXGroup;
+			children = (
+				F0743DC828B4C63100CC1F24 /* BottomInfoBanner.swift */,
+				F0743DCD28B4C63C00CC1F24 /* BottomInfoBanner.xib */,
+			);
+			path = BottomInfoBanner;
+			sourceTree = "<group>";
+		};
 		F077B238280FDE000034F73C /* AGConnect */ = {
 			isa = PBXGroup;
 			children = (
@@ -22500,6 +22520,7 @@
 				8C0E901C1FDEBDFF00789C91 /* CollectionViewCellForStoryPhoto.xib in Resources */,
 				9219B19D21ECB7B900098021 /* InstaPickHashtagCell.xib in Resources */,
 				8C0E901E1FDEBDFF00789C91 /* MailVerificationViewController.xib in Resources */,
+				F0743DCE28B4C63C00CC1F24 /* BottomInfoBanner.xib in Resources */,
 				4A8CC306201A00D400C040C4 /* FaceImageViewController.xib in Resources */,
 				98BCD714224A615A0090C13D /* SmartAlbumCell.xib in Resources */,
 				98B04783259314740011DAEB /* Localizable.strings in Resources */,
@@ -23018,6 +23039,7 @@
 				CE784D3122A685FB00662219 /* FreeAppSpaceViewCotroller.xib in Resources */,
 				9842FC192563D34800B07606 /* PrivateShareContactCell.xib in Resources */,
 				CE784D3322A685FB00662219 /* CollectionViewCellForFaceImageAddName.xib in Resources */,
+				F0743DD028B4C63C00CC1F24 /* BottomInfoBanner.xib in Resources */,
 				989BDE3C22F47B1E001DDEB2 /* SpotifyPlaylistsViewController.xib in Resources */,
 				A74ADA3F23A2AC40007DD192 /* DivorceCard.xib in Resources */,
 				CE784D3A22A685FB00662219 /* InstaPickSmartAlbumCell.xib in Resources */,
@@ -23558,6 +23580,7 @@
 				9808B3F025540D6C002B0032 /* PrivateShareSuggestionsView.xib in Resources */,
 				52346AB728AD934000091C20 /* PasswordView.xib in Resources */,
 				CF8B6A5723CBC9D70021B021 /* RecentlySearchedFaceImageTableViewCell.xib in Resources */,
+				F0743DCF28B4C63C00CC1F24 /* BottomInfoBanner.xib in Resources */,
 				CF8B6A5A23CBC9D70021B021 /* ManageContactTableViewCell.xib in Resources */,
 				CF8B6A5C23CBC9D70021B021 /* CollectionViewStoryReorderView.xib in Resources */,
 				CF71465924B597A800D83E60 /* ContactSyncSmallCardView.xib in Resources */,
@@ -23799,6 +23822,7 @@
 				0731E93926318A9900883566 /* RegistrationTermsInfoViewController.xib in Resources */,
 				CF8B70F723CBCA280021B021 /* InstaPickSmartAlbumCell.xib in Resources */,
 				CF8B70FA23CBCA280021B021 /* CaptchaView.xib in Resources */,
+				F0743DD128B4C63C00CC1F24 /* BottomInfoBanner.xib in Resources */,
 				CF8B70FB23CBCA280021B021 /* MailVerificationViewController.xib in Resources */,
 				CF8B70FC23CBCA280021B021 /* LandingPageViewController.xib in Resources */,
 				CF8B710123CBCA280021B021 /* PrintViewController.xib in Resources */,
@@ -25494,6 +25518,7 @@
 				92004B6721AD18FE00582C45 /* MyStoragePresenter.swift in Sources */,
 				4A56D5CE202B316F003A4624 /* FaceImageAddNameDataSource.swift in Sources */,
 				984A515521E87883004525F5 /* AnalyzeHistoryDesigner.swift in Sources */,
+				F0743DC928B4C63100CC1F24 /* BottomInfoBanner.swift in Sources */,
 				8C0E8D1C1FDEBDFF00789C91 /* UIApplication+Settings.swift in Sources */,
 				CFACACA4247CF65300645B40 /* NetmeraExtensionService.swift in Sources */,
 				8C0E8D1D1FDEBDFF00789C91 /* LoginRouterInput.swift in Sources */,
@@ -27718,6 +27743,7 @@
 				0786E18A2660E55400BA7136 /* AccessibleCheckBoxView.swift in Sources */,
 				CE78493122A685FB00662219 /* UINavigationController+Push.swift in Sources */,
 				CE78493222A685FB00662219 /* ManageContactsInteractor.swift in Sources */,
+				F0743DCB28B4C63100CC1F24 /* BottomInfoBanner.swift in Sources */,
 				98A86D7023A2795B00438225 /* HiddenPhotosDataLoader.swift in Sources */,
 				076BD1A927BBBE02004609E3 /* MapSearchInteractorOutput.swift in Sources */,
 				07620291269B83F600D4FB2C /* OverlayAnimationService.swift in Sources */,
@@ -30524,6 +30550,7 @@
 				CF8B67D423CBC9D70021B021 /* LeavePremiumConfigurator.swift in Sources */,
 				CF8B67D523CBC9D70021B021 /* VisualMusicPlayerInteractor.swift in Sources */,
 				F0571ED4288AE6FE00A0D6AC /* ForYouRouter.swift in Sources */,
+				F0743DCA28B4C63100CC1F24 /* BottomInfoBanner.swift in Sources */,
 				3A0CCF2E2642D20E002E811D /* InvitationGiftCollectionViewCell.swift in Sources */,
 				CF8B67D623CBC9D70021B021 /* SelectNameViewInput.swift in Sources */,
 				F0CF433D27B67A2E0061DC79 /* PublicShareDownloader.swift in Sources */,
@@ -30959,6 +30986,7 @@
 				CF8B6BBE23CBCA280021B021 /* LeavePremiumViewInput.swift in Sources */,
 				CF8B6BBF23CBCA280021B021 /* ActivityTimelineParameters.swift in Sources */,
 				CF8B6BC023CBCA280021B021 /* PhotosOrderCollectionViewCell.swift in Sources */,
+				F0743DCC28B4C63100CC1F24 /* BottomInfoBanner.swift in Sources */,
 				CF8B6BC123CBCA280021B021 /* FaceImageAddNameInteractorInput.swift in Sources */,
 				CF8B6BC223CBCA280021B021 /* InstagramResponses.swift in Sources */,
 				CF8B6BC323CBCA280021B021 /* HelpAndSupportPresenter.swift in Sources */,
