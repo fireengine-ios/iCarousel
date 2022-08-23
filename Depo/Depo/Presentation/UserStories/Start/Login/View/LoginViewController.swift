@@ -28,6 +28,8 @@ final class LoginViewController: ViewController {
             newValue.alignment = .fill
             newValue.axis = .vertical
             newValue.distribution = .fill
+            newValue.isOpaque = true
+            newValue.backgroundColor = AppColor.primaryBackground.color
         }
     }
 

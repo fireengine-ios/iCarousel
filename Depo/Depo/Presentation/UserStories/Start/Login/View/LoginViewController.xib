@@ -98,34 +98,37 @@
                                         </view>
                                     </subviews>
                                 </stackView>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JEG-SY-yH4">
-                                    <rect key="frame" x="0.0" y="246" width="414" height="337"/>
-                                    <color key="backgroundColor" name="primaryBackground"/>
-                                </view>
                                 <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="3pB-Lp-wU7" userLabel="FieldsStackView">
-                                    <rect key="frame" x="20" y="246" width="374" height="337"/>
+                                    <rect key="frame" x="20" y="246" width="374" height="356"/>
                                     <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bFr-On-oXs" userLabel="Spacing">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="3"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="3" id="PmR-9r-5Hq"/>
+                                            </constraints>
+                                        </view>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="zR0-Yb-crR" userLabel="email" customClass="ProfileTextEnterView" customModule="Billo" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="80"/>
+                                            <rect key="frame" x="0.0" y="19" width="374" height="80"/>
                                             <color key="backgroundColor" name="primaryBackground"/>
                                         </view>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="Fd4-XR-iy0" userLabel="password" customClass="BorderedPasswordEnterView" customModule="Billo" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="96" width="374" height="80"/>
+                                            <rect key="frame" x="0.0" y="115" width="374" height="80"/>
                                             <color key="backgroundColor" name="primaryBackground"/>
                                         </view>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="OQy-rH-Hwu" userLabel="captcha" customClass="CaptchaView" customModule="Billo" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="192" width="374" height="80"/>
+                                            <rect key="frame" x="0.0" y="211" width="374" height="80"/>
                                             <color key="backgroundColor" name="primaryBackground"/>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="amm-cu-bEu">
-                                            <rect key="frame" x="0.0" y="288" width="374" height="3"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="amm-cu-bEu" userLabel="Spacing">
+                                            <rect key="frame" x="0.0" y="307" width="374" height="3"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="3" id="j3N-cB-Seu"/>
                                             </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="s8F-tB-ErQ" customClass="AccessibleCheckBoxView" customModule="Billo" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="307" width="374" height="30"/>
+                                            <rect key="frame" x="0.0" y="326" width="374" height="30"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nqg-tP-cJg">
                                                     <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -163,10 +166,9 @@
                                             </connections>
                                         </stackView>
                                     </subviews>
-                                    <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhc-pL-wnH" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="52" y="633" width="310.5" height="44"/>
+                                    <rect key="frame" x="52" y="652" width="310.5" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="G6T-7F-LuP"/>
                                     </constraints>
@@ -178,19 +180,15 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="JEG-SY-yH4" firstAttribute="bottom" secondItem="3pB-Lp-wU7" secondAttribute="bottom" id="3EM-cp-fe4"/>
                                 <constraint firstAttribute="trailing" secondItem="IUh-15-NB0" secondAttribute="trailing" constant="16" id="FTD-vo-ohD"/>
                                 <constraint firstItem="dhc-pL-wnH" firstAttribute="width" secondItem="ufk-2Q-UcS" secondAttribute="width" multiplier="0.75" id="Rp3-g8-WN0"/>
                                 <constraint firstItem="dhc-pL-wnH" firstAttribute="top" secondItem="3pB-Lp-wU7" secondAttribute="bottom" constant="50" id="a1G-4c-g9V"/>
                                 <constraint firstItem="IUh-15-NB0" firstAttribute="top" secondItem="ufk-2Q-UcS" secondAttribute="top" id="ay0-2B-jlA"/>
-                                <constraint firstAttribute="trailing" secondItem="JEG-SY-yH4" secondAttribute="trailing" id="fQS-aI-NzQ"/>
                                 <constraint firstItem="3pB-Lp-wU7" firstAttribute="leading" secondItem="ufk-2Q-UcS" secondAttribute="leading" constant="20" id="icQ-Vn-UCI"/>
                                 <constraint firstItem="IUh-15-NB0" firstAttribute="leading" secondItem="ufk-2Q-UcS" secondAttribute="leading" constant="16" id="k3d-jh-4iy"/>
                                 <constraint firstItem="3pB-Lp-wU7" firstAttribute="top" secondItem="IUh-15-NB0" secondAttribute="bottom" constant="16" id="ng8-DS-Hak"/>
                                 <constraint firstItem="dhc-pL-wnH" firstAttribute="centerX" secondItem="ufk-2Q-UcS" secondAttribute="centerX" id="olA-u9-38w"/>
-                                <constraint firstItem="JEG-SY-yH4" firstAttribute="leading" secondItem="ufk-2Q-UcS" secondAttribute="leading" id="pBt-Pq-RW2"/>
                                 <constraint firstAttribute="trailing" secondItem="3pB-Lp-wU7" secondAttribute="trailing" constant="20" id="x2B-pG-aOr"/>
-                                <constraint firstItem="JEG-SY-yH4" firstAttribute="top" secondItem="3pB-Lp-wU7" secondAttribute="top" id="xoY-ab-A1q"/>
                             </constraints>
                         </view>
                     </subviews>

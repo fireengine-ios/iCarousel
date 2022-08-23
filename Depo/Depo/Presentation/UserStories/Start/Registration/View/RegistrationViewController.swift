@@ -80,7 +80,6 @@ final class RegistrationViewController: ViewController {
     }
     
     //MARK: Vars
-    
     private let keyboard = Typist.shared
     var output: RegistrationViewOutput!
     private let updateScrollDelay: DispatchTime = .now() + 0.3
@@ -112,8 +111,8 @@ final class RegistrationViewController: ViewController {
         return newValue
     }()
     
-    private let passwordEnterView: ProfilePasswordEnterView = {
-        let newValue = ProfilePasswordEnterView()
+    private let passwordEnterView: BorderedPasswordEnterView = {
+        let newValue = BorderedPasswordEnterView()
         newValue.textField.enablesReturnKeyAutomatically = true
         newValue.textField.quickDismissPlaceholder = TextConstants.enterYourNewPassword
         newValue.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
@@ -122,8 +121,8 @@ final class RegistrationViewController: ViewController {
         return newValue
     }()
     
-    private let rePasswordEnterView: ProfilePasswordEnterView = {
-        let newValue = ProfilePasswordEnterView()
+    private let rePasswordEnterView: BorderedPasswordEnterView = {
+        let newValue = BorderedPasswordEnterView()
         
         newValue.textField.quickDismissPlaceholder = TextConstants.reenterYourPassword
         newValue.textField.enablesReturnKeyAutomatically = true
