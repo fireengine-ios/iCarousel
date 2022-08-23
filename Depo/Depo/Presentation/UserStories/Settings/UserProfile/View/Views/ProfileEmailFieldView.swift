@@ -34,23 +34,9 @@ final class ProfileEmailFieldView: ProfileTextEnterView {
             updateVerificationVisibility()
         }
     }
-
-    override func initialSetup() {
-        super.initialSetup()
-
-        textField.keyboardType = .emailAddress
-        textField.autocorrectionType = .no
-        textField.autocapitalizationType = .none
-
-        verifyButton.addTarget(self, action: #selector(verifyTapped), for: .touchUpInside)
-
-        updateVerificationStatus()
-        updateVerificationVisibility()
-    }
-
+    
     // MARK: Private
-
-    static let verificationViewHeight: CGFloat = 15
+    static let verificationViewHeight: CGFloat = 16
 
     private let verificationView: UIStackView = {
         let view = UIStackView()
@@ -78,15 +64,49 @@ final class ProfileEmailFieldView: ProfileTextEnterView {
     }()
 
     private let verifyButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle(localized(.profileVerifyButtonTitle), for: .normal)
         button.setTitleColor(ColorConstants.whiteColor, for: .normal)
         button.titleLabel?.font = .appFont(.regular, size: 14.0)
         button.contentEdgeInsets = UIEdgeInsets(topBottom: 0, rightLeft: 10)
-        button.backgroundColor = AppColor.primaryBackground.color
-        button.layer.cornerRadius = ProfileEmailFieldView.verificationViewHeight / 2
+        button.backgroundColor = AppColor.profileInfoOrange.color
+        button.layer.cornerRadius = ProfileEmailFieldView.verificationViewHeight
+        button.addTarget(ProfileEmailFieldView.self, action: #selector(verifyTapped), for: .touchUpInside)
         return button
     }()
+
+    override func initialSetup() {
+        super.initialSetup()
+
+        textField.keyboardType = .emailAddress
+        textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
+
+        updateVerificationStatus()
+        updateVerificationVisibility()
+        setupLayout()
+    }
+    
+    private func setupLayout() {
+        verifiedViewLayout()
+        verifyButtonLayout()
+    }
+    
+    private func verifiedViewLayout() {
+        textField.addSubview(verifiedView)
+        verifiedView.translatesAutoresizingMaskIntoConstraints = false
+        verifiedView.topAnchor.constraint(equalTo: textField.topAnchor, constant: 10).isActive = true
+        verifiedView.bottomAnchor.constraint(equalTo: textField.bottomAnchor, constant: -10).isActive = true
+        verifiedView.trailingAnchor.constraint(equalTo: textField.trailingAnchor, constant: -20).isActive = true
+    }
+    
+    private func verifyButtonLayout() {
+        textField.addSubview(verifyButton)
+        verifyButton.translatesAutoresizingMaskIntoConstraints = false
+        verifyButton.topAnchor.constraint(equalTo: textField.topAnchor, constant: 10).isActive = true
+        verifyButton.bottomAnchor.constraint(equalTo: textField.bottomAnchor, constant: -10).isActive = true
+        verifyButton.trailingAnchor.constraint(equalTo: textField.trailingAnchor, constant: -20).isActive = true
+    }
 
     private func updateVerificationVisibility() {
         verificationView.isHidden = !showsVerificationStatus || isEditState
