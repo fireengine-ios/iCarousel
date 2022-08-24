@@ -20,14 +20,10 @@ class PackagesInteractor {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var storageVars: StorageVars = factory.resolve()
 
-    /// When set, available-offers/IOS will be called with a query param
+    /// When affiliate set, available-offers/IOS will be called with a query param
     /// referer token must be used for paycell campaign only
     var affiliate: String?
-    var refererToken: String? {
-        didSet {
-            storageVars.paycellRefererToken = nil
-        }
-    }
+    var refererToken: String?
     
     init(offersService: OffersService = OffersServiceIml(),
          subscriptionsService: SubscriptionsService = SubscriptionsServiceIml(),
@@ -49,14 +45,11 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     func getAvailableOffers(with accountType: AccountType) {
-        //TODO: Testfligh - will be removed
-        SnackbarManager.shared.show(type: .critical, message: "referer token packages opening: \(refererToken ?? "YOK")")
-        //
-        
         accountService.availableOffers(affiliate: self.affiliate) { [weak self] (result) in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
+                    self?.refererToken = (response.count == 1) ? self?.refererToken : nil
                     self?.getInfoForAppleProducts(offers: response)
                 }
             case .failed(let error):
@@ -243,9 +236,6 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     private func validatePurchase(productId: String) {
-        //TODO: Testfligh - will be removed
-        SnackbarManager.shared.show(type: .critical, message: "referer token on validate purchase: \(refererToken ?? "YOK")")
-        //
         guard let receipt = iapManager.receipt else {
             output?.refreshPackages()
             return

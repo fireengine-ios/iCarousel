@@ -229,6 +229,7 @@ class PaycellCampaignViewController: BaseViewController {
         components.androidDeepLink = deeplink
         components.androidPackageName = Device.androidPackageName
         components.previewType = .appInfo
+        components.androidOpenType = .localMarket
         components.buildShortLink { shortLink, error in
             if error != nil {
                 debugLog(error?.localizedDescription ?? "")

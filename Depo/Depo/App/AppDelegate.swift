@@ -404,17 +404,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else if url.absoluteString.contains("paycell") { ///paycell campaign flow
                 if let campaign = url.lastPathComponent.split(separator: "&").first,
                    let refererToken = url.lastPathComponent.components(separatedBy: "=").last {
-                    storageVars.paycellRefererToken = refererToken
-                    //TODO: Testfligh - will be removed
-                    SnackbarManager.shared.show(type: .critical, message: "referer token yakalandı: \(refererToken )")
-                    //
-                    if PushNotificationService.shared.assignDeepLink(innerLink: String(campaign),
-                                                                     options: [DeepLinkParameter.paycellCampaign.rawValue: campaign,
-                                                                               DeepLinkParameter.paycellToken.rawValue: refererToken]) {
-                        debugLog("Should open Action Screen")
-                        PushNotificationService.shared.openActionScreen()
-                    }
+                    PushNotificationService.shared.resolveUnknownAction(actionString: String(campaign), refererToken: refererToken)
                 }
+            } else {
+                debugLog("Applink url couldn't be parsed")
             }
             
             debugLog("Your incoming link parameter is \(url.absoluteString)")

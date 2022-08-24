@@ -2044,12 +2044,3 @@ then {11,99 TRY/Month}*/
 "paycell_share_message" = "انضممت إلى برنامج سفير العلامة التجارية lifebox. يمكنك الحصول على حزمة lifebox الخاصة بالبرنامج لمدة 6 أشهر 250 جيجابايت Premium بسعر مخفض بالنقر فوق الرابط أدناه. لا تفوت الفرصة 😊";
 "beeline_cancel_TC" = "يمكنك إلغاء أو إدارة اشتراكك في lifebox من Beeline التطبيق.";
 "paycell_share_message " = "";
-"title_paycell_total" = "";
-"title_paycell_subtitle" = "";
-"title_paycell_friends" = "";
-"paycell_share_message" = "";
-"beeline_cancel_TC" = "";
-"settings_item_paycell" = "";
-"title_paycell_link" = "";
-"title_paycell_createlink" = "";
-"title_paycell_campaign" = "";
