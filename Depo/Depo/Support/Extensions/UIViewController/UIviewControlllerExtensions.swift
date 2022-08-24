@@ -55,13 +55,10 @@ extension UIViewController: Waiting {
             guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
             let hud = MBProgressHUD.showAdded(to: window, animated: true)
             hud.backgroundView.color = ColorConstants.whiteColor.withAlphaComponent(0.88)
-            let oldColor = self.statusBarColor
-            self.statusBarColor = .clear
             let gestureRecognizer = TapGestureRecognizerWithClosure(closure: { [weak self] in
                 DispatchQueue.main.async {
                     cancel()
                     self?.hideSpinnerIncludeNavigationBar()
-                    self?.statusBarColor = oldColor
                     self?.postAccessibilityScreenChanged(view: self!.view)
                 }
             })

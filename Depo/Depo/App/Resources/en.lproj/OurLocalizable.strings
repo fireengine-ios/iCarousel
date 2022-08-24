@@ -2055,6 +2055,8 @@
 "syncing" = "Syncing";
 "downloading" = "Downloading";
 "ETK_KVKK_Izin_Politikası" = "Permission Policy";
+"syncing" = "Syncing";
+"downloading" = "Downloading";
 
 /*Free for {3 months}
 then {11,99 TRY/Month}*/

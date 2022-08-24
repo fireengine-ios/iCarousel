@@ -26,24 +26,7 @@ class RouterVC: NSObject {
     var tabBarController: TabBarViewController? {
         return rootViewController as? TabBarViewController
     }
-    
-    func getFloatingButtonsArray() -> [FloatingButtonsType] {
-        let nController = navigationController
-        let viewController = nController?.viewControllers.last
         
-        if let segmentedVC = viewController as? SegmentedController,
-            let vc = segmentedVC.currentController as? BaseViewController
-        {
-            return vc.floatingButtonsArray
-        }
-        
-        if let baseViewController = viewController as? BaseViewController {
-            return baseViewController.floatingButtonsArray
-        }
-        
-        return [FloatingButtonsType]()
-    }
-    
     func getParentUUID() -> String {
         //TODO: get rid of getParentUUID
         if topNavigationController?.viewControllers.first is PhotoVideoDetailViewController,
@@ -159,11 +142,7 @@ class RouterVC: NSObject {
         }
     }
     
-    func pushViewController(viewController: UIViewController, animated: Bool = true) {
-        if let viewController = viewController as? BaseViewController, !viewController.needToShowTabBar {
-            NotificationCenter.default.post(name: .hideTabBar, object: nil)
-        }
-        
+    func pushViewController(viewController: UIViewController, animated: Bool = true) {        
         if let navController = topNavigationController {
             navController.pushViewController(viewController, animated: animated)
         } else {
@@ -171,46 +150,19 @@ class RouterVC: NSObject {
         }
     
         viewController.navigationController?.isNavigationBarHidden = false
-        
-        if let tabBarViewController = tabBarController, let baseView = viewController as? BaseViewController {
-            tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
-        }
     }
     
     func pushViewControllerAndRemoveCurrentOnCompletion(_ viewController: UIViewController) {
-        if let viewController = viewController as? BaseViewController, !viewController.needToShowTabBar {
-            NotificationCenter.default.post(name: .hideTabBar, object: nil)
-        }
-        
         navigationController?.pushViewControllerAndRemoveCurrentOnCompletion(viewController)
         viewController.navigationController?.isNavigationBarHidden = false
-        
-        if let tabBarViewController = tabBarController, let baseView = viewController as? BaseViewController {
-            tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
-        }
-        
     }
     
     func pushSeveralControllers(_ viewControllers: [UIViewController], animated: Bool = true) {
-        if let viewController = viewControllers.last as? BaseViewController, !viewController.needToShowTabBar {
-            NotificationCenter.default.post(name: .hideTabBar, object: nil)
-        }
-        
         var viewControllersStack = navigationController?.viewControllers ?? []
         viewControllersStack.append(contentsOf: viewControllers)
 
         navigationController?.setViewControllers(viewControllersStack, animated: animated)
         viewControllers.last?.navigationController?.setNavigationBarHidden(false, animated: false)
-
-        if let tabBarViewController = tabBarController, let baseView = viewControllers.last as? BaseViewController {
-            tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
-        }
-    }
-    
-    func setBackgroundColor(color: UIColor) {
-        if let tabBarViewController = tabBarController {
-            tabBarViewController.setBGColor(color: color)
-        }
     }
     
     func pushViewControllerWithoutAnimation(viewController: UIViewController) {
@@ -345,18 +297,20 @@ class RouterVC: NSObject {
         controller.checkModalPresentationStyle()
         
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
-        if let lastViewController = getViewControllerForPresent() {
-            if controller.popoverPresentationController?.sourceView == nil,
-                controller.popoverPresentationController?.barButtonItem == nil {
-                controller.popoverPresentationController?.sourceView = lastViewController.view
-            }
-            lastViewController.present(controller, animated: animated, completion: {
-                completion?()
-            })
-        } else {
+
+        guard let topViewController = UIApplication.topController() else {
             assertionFailure("top vc: \(String(describing: UIApplication.topController()))")
-            UIApplication.topController()?.present(controller, animated: animated, completion: completion)
+            return
         }
+
+        // TODO: Facelift, double check this is needed
+        if controller.modalPresentationStyle == .popover,
+           controller.popoverPresentationController?.sourceView == nil,
+           controller.popoverPresentationController?.barButtonItem == nil {
+            controller.popoverPresentationController?.sourceView = topViewController.view
+        }
+
+        topViewController.present(controller, animated: animated, completion: completion)
     }
         
     func showSpiner() {
@@ -547,13 +501,12 @@ class RouterVC: NSObject {
     // MARK: TabBar
     
     var tabBarScreen: UIViewController? {
-        let controller = TabBarViewController(nibName: "TabBarView", bundle: nil)
-        return controller
+        return TabBarViewController()
     }
     
     
     // MARK: Home Page
-    var homePageScreen: UIViewController? {
+    var homePageScreen: HeaderContainingViewController.ChildViewController {
         if (!SingletonStorage.shared.isAppraterInited) {
             AppRater.sharedInstance().daysUntilPrompt = 5
             AppRater.sharedInstance().launchesUntilPrompt = 10
@@ -564,17 +517,17 @@ class RouterVC: NSObject {
             SingletonStorage.shared.isAppraterInited = true
         }
         
-        let controller = HomePageModuleInitializer.initializeViewController(with: "HomePage")
-        return controller
+        return HomePageModuleInitializer.initializeViewController(with: "HomePage")
+    }
+
+    func gallery() -> PhotoVideoController {
+        return PhotoVideoController.initFromNib()
     }
     
-    func segmentedMedia() -> PhotoVideoSegmentedController {
-        let photos = PhotoVideoController.initPhotoFromNib()
-        let videos = PhotoVideoController.initVideoFromNib()
-        
-        return PhotoVideoSegmentedController.initPhotoVideoSegmentedControllerWith([photos, videos]) 
+    func forYou() -> HeaderContainingViewController.ChildViewController {
+        return ForYouInitilizer.initializeViewController(with: "ForYou")
     }
-    
+
     // MARK: Music
     
     var musics: UIViewController? {
@@ -611,12 +564,17 @@ class RouterVC: NSObject {
         return controller
     }
     
-    var segmentedFiles: UIViewController? {
-        guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles, let trashBin = trashBin else {
+    var documentsAndMusic: UIViewController? {
+        let controller = BaseFilesGreedModuleInitializer.initializeDocumentsAndMusicViewController(with: "BaseFilesGreedViewController")
+        return controller
+    }
+    
+    var segmentedFiles: HeaderContainingViewController.ChildViewController {
+        guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles, let documentsAndMusic = documentsAndMusic else {
             assertionFailure()
-            return SegmentedController()
+            return AllFilesSegmentedController()
         }
-        let controllers = [allFiles, shareByMeSegment, documents, musics, favorites, trashBin]
+        let controllers = [documents, musics, favorites, sharedWithMe, shareByMeSegment, allFiles, documentsAndMusic]
         return AllFilesSegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
     }
     
@@ -1022,12 +980,6 @@ class RouterVC: NSObject {
         return ChatbotViewController()
     }
 
-    // MARK: Chatbot
-
-    var darkMode: UIViewController {
-        return DarkModeInitializer.initializeViewController()
-    }
-
     // MARK: Auto Upload
 
     var autoUpload: UIViewController {
@@ -1386,6 +1338,8 @@ class RouterVC: NSObject {
                 
             case .gallery:
                 tabBarVC.showPhotoScreen()
+            case .discover:
+                break
             }
         } else {
             tabBarVC.popToRootCurrentNavigationController(animated: true)
@@ -1481,6 +1435,16 @@ class RouterVC: NSObject {
         
         return controller
     }
+    
+    func bottomInfoBanner(text: String) -> BottomInfoBanner {
+        let controller = BottomInfoBanner(infoText: text)
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        
+        return controller
+    }
+    
     
     func paycellDetailPopup(with model: PaycellDetailModel, type: PaycellDetailType) -> PaycellDetailPopup {
         let controller = PaycellDetailPopup()

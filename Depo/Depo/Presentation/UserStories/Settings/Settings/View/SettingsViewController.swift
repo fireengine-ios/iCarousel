@@ -71,8 +71,7 @@ final class SettingsViewController: BaseViewController {
             isFromPhotoPicker = false
             return
         }
-        
-        navigationBarWithGradientStyle()
+
         if Device.isIpad {
             splitViewController?.navigationController?.viewControllers.last?.title = TextConstants.settings
         } else {
@@ -81,12 +80,7 @@ final class SettingsViewController: BaseViewController {
         output.viewWillBecomeActive()
         userInfoSubView.reloadUserInfo()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        navigationBarWithGradientStyle()
-    }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -100,6 +94,9 @@ final class SettingsViewController: BaseViewController {
     
     private func setupTableView() {
         tableView.register(nibCell: SettingsTableViewCell.self)
+        tableView.addRoundedShadows(cornerRadius: 16,
+                                    shadowColor: AppColor.viewShadowLight.cgColor,
+                                    opacity: 0.8, radius: 6.0)
         tableView.backgroundColor = .clear
     }
     
@@ -108,7 +105,8 @@ final class SettingsViewController: BaseViewController {
             let header = userInfoSubView.view
             userInfoSubView.actionsDelegate = self
             tableView.tableHeaderView = header
-            header?.heightAnchor.constraint(equalToConstant: 201).activate()
+            header?.backgroundColor = .clear
+            header?.heightAnchor.constraint(equalToConstant: 180).activate()
             
             setupTableViewFooter()
             return
@@ -118,12 +116,9 @@ final class SettingsViewController: BaseViewController {
     }
 
     private func setupTableViewFooter() {
-        var footerHeight: CGFloat = 110
+        let footerHeight: CGFloat = 190
         let footer = SettingFooterView.initFromNib()
-        if ((Device.locale == "tr" || Device.locale == "en") && self.isChatbotShown && !RouteRequests.isBillo) {
-            footer.leaveFeedbackButton.isHidden = true
-            footerHeight = 65
-        }
+        footer.backgroundColor = .clear
         footer.delegate = self
         tableView.tableFooterView = footer
         footer.heightAnchor.constraint(equalToConstant: footerHeight).activate()
@@ -138,21 +133,10 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 14
+        return 16
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return SettingHeaderView.viewFromNib()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        guard section == cellTypes.count - 1 else {
-            return nil
-        }
         return SettingHeaderView.viewFromNib()
     }
     
@@ -161,7 +145,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 62
+        return 50
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -249,8 +233,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             } else {
                 output.goToTermsAndPolicy()
             }
-        case .logout:
-            output.onLogout()
         case .chatbot:
             if let delegate = settingsDelegate {
                 delegate.goToChatbot()
@@ -264,6 +246,27 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 output.goToDarkMode()
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cornerRadius = 16
+        var corners: UIRectCorner = []
+
+        if indexPath.row == 0 {
+            corners.update(with: .topLeft)
+            corners.update(with: .topRight)
+        }
+
+        if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+            corners.update(with: .bottomLeft)
+            corners.update(with: .bottomRight)
+        }
+
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = UIBezierPath(roundedRect: cell.bounds,
+                                      byRoundingCorners: corners,
+                                      cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)).cgPath
+        cell.layer.mask = maskLayer
     }
     
     // MARK: - UITableViewDelegate & UITableViewDataSource Private Utility Methods
@@ -448,7 +451,7 @@ extension SettingsViewController: UIImagePickerControllerDelegate {
 
 //MARK: - SettingFooterViewDelegate
 extension SettingsViewController: SettingFooterViewDelegate {
-    func didTappedLeaveFeedback() {
-        RouterVC().showFeedbackSubView()
+    func didTappedLogOut() {
+        output.onLogout()
     }
 }

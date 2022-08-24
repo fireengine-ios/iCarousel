@@ -11,6 +11,7 @@ protocol GridListTopBarDelegate: AnyObject {
     func filterChanged(filter: MoreActionsConfig.MoreActionsFileType)
     func sortingRuleChanged(rule: MoreActionsConfig.SortRullesType)
     func representationChanged(viewType: MoreActionsConfig.ViewType)
+    func onMoreButton()
     
 }
 
@@ -24,6 +25,13 @@ class GridListTopBar: ViewController {
     }
     
     @IBOutlet fileprivate weak var gridListButton: UIButton!
+    @IBOutlet private weak var moreButton: UIButton!
+    @IBOutlet private weak var middleLabel: UILabel! {
+        willSet {
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.medium, size: 14)
+        }
+    }
     
     @IBOutlet fileprivate weak var segmentFilter: UISegmentedControl!
     
@@ -53,7 +61,7 @@ class GridListTopBar: ViewController {
     }
     
     private func setupInitialState() {
-        sortByButton.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 14)
+        sortByButton.titleLabel?.font = UIFont.appFont(.medium, size: 16)
         sortByButton.titleLabel?.textColor = UIColor.darkGray        
         segmentFilter.tintColor = ColorConstants.darkBlueColor
         sortByButton.forceImageToRightSide()
@@ -70,9 +78,15 @@ class GridListTopBar: ViewController {
         }
         
         gridListButton.isHidden = !config.showGridListButton
+        moreButton.isHidden = !config.showMoreButton
         
         if centeredContent {
             centerYConstraint.constant = 0
+        }
+        
+        if let middleText = config.middleText {
+            middleLabel.isHidden = false
+            middleLabel.text = middleText
         }
     }
     
@@ -131,34 +145,28 @@ class GridListTopBar: ViewController {
         guard let unwrapedConfig = currentConfig else {
             return
         }
-        let sortingTable = GridListTopBarSortingTableView(style: .plain)
+        let sortingTable = GridListTopBarSortingTableView()
         sortingTable.actionDelegate = self
         let titles = unwrapedConfig.availableSortTypes.map({ $0.description })
+        let images = unwrapedConfig.availableSortTypes.map({ $0.sortImage })
         var selectedSort: Int
         if (selectedIndex != -1) {
             selectedSort = selectedIndex
         } else {
             selectedSort = currentConfig?.availableSortTypes.firstIndex(of: unwrapedConfig.defaultSortType) ?? 0
         }
-        sortingTable.setup(withTitles: titles, selectedIndex: selectedSort)
-       
-        let router = RouterVC()
-        let rootVC = router.tabBarVC
-
-        let popUpHeight = sortingTable.defaultCellHeight * CGFloat(titles.count)
-        
-        let floatingVC = FloatingContainerVC.createContainerVC(withContentView: sortingTable,
-                                                               sourceView: sortByButton.imageView!,
-                                                               popOverSize: CGSize(width: floatingContainerWidth,
-                                                                                   height: popUpHeight))
-        
-        rootVC?.present(floatingVC, animated: true, completion: nil)
+        sortingTable.setup(withTitles: titles, images: images, selectedIndex: selectedSort)
+        sortingTable.presentAsDrawer()
     }
     
     @IBAction func gridListAction(_ sender: Any) {
         gridListButton.isSelected = !gridListButton.isSelected
         let type: MoreActionsConfig.ViewType = gridListButton.isSelected ? .Grid : .List
         delegate?.representationChanged(viewType: type)
+    }
+    
+    @IBAction func onMoreButton(_ sender: Any) {
+        delegate?.onMoreButton()
     }
     
 }

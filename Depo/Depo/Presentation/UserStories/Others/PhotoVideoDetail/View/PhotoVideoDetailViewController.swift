@@ -136,6 +136,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
         navigationItem.leftBarButtonItem = BackButtonItem(action: hideView)
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
+
+        extendedLayoutIncludesOpaqueBars = true
+
         showSpinner()
     }
     
@@ -149,8 +152,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         ItemOperationManager.default.startUpdateView(view: self)
         
         onStopPlay()
-        rootNavController(vizible: true)
-        blackNavigationBarStyle()
         editingTabBar?.view.layoutIfNeeded()
         editingTabBar.view.backgroundColor = .black
         viewForBottomBar.backgroundColor = .black
@@ -164,8 +165,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         editingTabBar.editingBar.barStyle = .blackOpaque
         editingTabBar.editingBar.clipsToBounds = true
         //editingTabBar.editingBar.layer.borderWidth = 0
-        
-        statusBarColor = .black
+
+        statusBarStyle = .lightContent
         
         NotificationCenter.default.post(name: .reusePlayer, object: self)
 
@@ -185,14 +186,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        setNavigationBackgroundColor(color: UIColor.clear)
-        
-        visibleNavigationBarStyle()
-        statusBarColor = .clear
-        
+
         NotificationCenter.default.post(name: .deinitPlayer, object: self)
-        
+
         output.viewWillDisappear()
         passThroughView?.disableGestures()
         backButtonForNavigationItem(title: TextConstants.backTitle)
@@ -334,10 +330,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         needToScrollAfterRotation = true
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
         collectionView.reloadData()
-    }
-    
-    override func getBackgroundColor() -> UIColor {
-        return UIColor.black
     }
     
     @objc private func applicationDidEnterBackground(_ application: UIApplication) {

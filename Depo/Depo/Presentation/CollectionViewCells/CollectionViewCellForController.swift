@@ -21,7 +21,7 @@ class CollectionViewCellForController: BaseCollectionViewCellWithSwipe {
         let layer = CALayer()
         layer.frame = contentView.layer.frame
         
-        layer.shadowColor = AppColor.cellShadow.color?.cgColor
+        layer.shadowColor = AppColor.cellShadow.color.cgColor
         layer.shadowOpacity = 1
         layer.shadowOffset = CGSize.zero
         layer.shadowRadius = 3
@@ -76,7 +76,7 @@ class CollectionViewCellForController: BaseCollectionViewCellWithSwipe {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        contentView.layer.sublayers?.first?.shadowColor = AppColor.cellShadow.color?.cgColor
+        contentView.layer.sublayers?.first?.shadowColor = AppColor.cellShadow.color.cgColor
     }
     
 }

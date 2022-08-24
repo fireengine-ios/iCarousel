@@ -94,7 +94,7 @@ final class IdentityVerificationViewController: BaseViewController {
             self?.navigationController?.popViewController(animated: true)
         }
 
-        present(popup, animated: true)
+        popup.open()
     }
 
     private func navigateToOTP(phoneNumber: String) {

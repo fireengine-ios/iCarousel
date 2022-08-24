@@ -13,10 +13,7 @@ enum OperationType: String {
     case sync                       = "Sync"
     case sharedWithMeUpload         = "SharedWithMeUpload"
     case download                   = "Download"
-    case prepareToAutoSync          = "prepareToAutoSync"
     case prepareQuickScroll         = "prepareQuickScroll"
-//    case preparePhotosQuickScroll   = "preparePhotosQuickScroll"
-//    case prepareVideosQuickScroll   = "prepareVideosQuickScroll"
     case autoUploadIsOff            = "autoUploadIsOff"
     case waitingForWiFi             = "waitingForWiFi"
     
@@ -66,7 +63,7 @@ class CardsManager: NSObject {
     private var deletedCards = Set<OperationType>()
     
     var cardsThatStartedByDevice: [OperationType] {
-        return [.upload, .sync, .download, .prepareToAutoSync, .sharedWithMeUpload, .prepareQuickScroll, .autoUploadIsOff, .waitingForWiFi, .freeAppSpace, .freeAppSpaceLocalWarning]
+        return [.upload, .sync, .download, .sharedWithMeUpload, .prepareQuickScroll, .autoUploadIsOff, .waitingForWiFi, .freeAppSpace, .freeAppSpaceLocalWarning]
     }
     
     func clear() {
@@ -293,23 +290,16 @@ class CardsManager: NSObject {
     func hidePopUpsByDepends(type: OperationType) {
         switch type {
         case .sync:
-            stopOperationWith(type: .prepareToAutoSync)
             stopOperationWith(type: .waitingForWiFi)
             stopOperationWith(type: .autoUploadIsOff)
         case .upload:
-//            stopOperationWithType(type: .prepareToAutoSync)
             stopOperationWith(type: .waitingForWiFi)
         case .freeAppSpace:
             stopOperationWith(type: .emptyStorage)
-        case .prepareToAutoSync:
-            stopOperationWith(type: .waitingForWiFi)
-            stopOperationWith(type: .autoUploadIsOff)
         case .waitingForWiFi:
             stopOperationWith(type: .sync)
             stopOperationWith(type: .autoUploadIsOff)
-            stopOperationWith(type: .prepareToAutoSync)
         case .autoUploadIsOff:
-            stopOperationWith(type: .prepareToAutoSync)
             stopOperationWith(type: .waitingForWiFi)
             stopOperationWith(type: .sync)
         default:
@@ -369,8 +359,6 @@ class CardsManager: NSObject {
             let popUp = ProgressCard.initFromNib()
             popUp.configurateWithType(viewType: type)
             cardView = popUp
-        case .prepareToAutoSync:
-            cardView = PrepareToAutoSync.initFromNib()
         case .prepareQuickScroll:
             cardView = PrepareQuickScroll.initFromNib()
 //        case .preparePhotosQuickScroll:

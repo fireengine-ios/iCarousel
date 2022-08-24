@@ -35,7 +35,6 @@ class ManageContactsViewController: BaseViewController, ManageContactsViewInput 
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
     }
     
     private func configureSearchBar() {

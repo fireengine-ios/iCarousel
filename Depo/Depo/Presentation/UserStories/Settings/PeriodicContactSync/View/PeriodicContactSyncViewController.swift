@@ -26,10 +26,10 @@ final class PeriodicContactSyncViewController: ViewController {
         titleLabel.textColor = ColorConstants.textGrayColor
 
         if Device.isIpad {
-            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 22)
+            titleLabel.font = .appFont(.medium, size: 22)
             titleLabel.textAlignment = .center
         } else {
-            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
+            titleLabel.font = .appFont(.medium, size: 16)
             titleLabel.textAlignment = .left
             setNavigationTitle(title: TextConstants.periodicContactsSync)
         }
@@ -53,7 +53,6 @@ final class PeriodicContactSyncViewController: ViewController {
     
     private func configureNavBar() {
         setTitle(withString: TextConstants.backTitle)
-        navigationBarWithGradientStyle()
     }
 
 }

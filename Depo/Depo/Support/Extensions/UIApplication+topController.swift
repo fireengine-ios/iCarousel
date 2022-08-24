@@ -19,7 +19,11 @@ extension UIApplication {
                 return topController(controller: selected)
             }
         }
-        if let presented = controller?.presentedViewController {
+        // checking !presented.isBeingDismissed
+        // for cases where we're presenting while the top view controller is being dimissed
+        // example for this is in
+        // Gallery screen --> select photos --> three dots button --> share --> copy public link
+        if let presented = controller?.presentedViewController, !presented.isBeingDismissed {
             return topController(controller: presented)
         }
         return controller
@@ -28,7 +32,7 @@ extension UIApplication {
     static func showOnTabBar(errorMessage: String) {
         let errorPopUpVC = PopUpController.with(errorMessage: errorMessage)
         DispatchQueue.toMain {
-            RouterVC().tabBarVC?.present(errorPopUpVC, animated: false, completion: nil)
+            errorPopUpVC.open()
         }
     }
     
@@ -47,7 +51,7 @@ extension UIApplication {
         }
         
         DispatchQueue.toMain {
-            controller?.present(vc, animated: false, completion: nil)
+            vc.open()
         }
     }
     
@@ -58,25 +62,7 @@ extension UIApplication {
             }
         }
         DispatchQueue.toMain {
-            topController()?.present(vc, animated: false, completion: nil)
+            vc.open()
         }
     }
-    
-    var statusBarView: UIView? {
-        if #available(iOS 13, *) {
-            let tag = 31415926
-            if let statusBar = self.keyWindow?.viewWithTag(tag) {
-                return statusBar
-            }
-            
-            let newStatusBar = UIView(frame: UIApplication.shared.statusBarFrame)
-            newStatusBar.tag = tag
-            self.keyWindow?.addSubview(newStatusBar)
-            return newStatusBar
-            
-        } else {
-            return value(forKey: "statusBar") as? UIView
-        }
-    }
-
 }

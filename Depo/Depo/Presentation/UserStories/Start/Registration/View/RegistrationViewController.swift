@@ -26,9 +26,9 @@ final class RegistrationViewController: ViewController {
     @IBOutlet private weak var nextButton: RoundedInsetsButton! {
         willSet {
             newValue.setBackgroundColor(UIColor.lrTealish, for: .normal)
-            newValue.setBackgroundColor(AppColor.inactiveButtonColor.color ?? ColorConstants.lighterGray, for: .disabled)
+            newValue.setBackgroundColor(AppColor.inactiveButtonColor.color, for: .disabled)
             newValue.setTitleColor(ColorConstants.whiteColor, for: .normal)
-            newValue.setTitleColor(AppColor.textPlaceholderColor.color ?? ColorConstants.lightGrayColor, for: .disabled)
+            newValue.setTitleColor(AppColor.textPlaceholderColor.color, for: .disabled)
             newValue.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
             newValue.setTitle(TextConstants.registrationNextButtonText, for: .normal)
             newValue.isOpaque = true
@@ -80,7 +80,6 @@ final class RegistrationViewController: ViewController {
     }
     
     //MARK: Vars
-    
     private let keyboard = Typist.shared
     var output: RegistrationViewOutput!
     private let updateScrollDelay: DispatchTime = .now() + 0.3
@@ -112,8 +111,8 @@ final class RegistrationViewController: ViewController {
         return newValue
     }()
     
-    private let passwordEnterView: ProfilePasswordEnterView = {
-        let newValue = ProfilePasswordEnterView()
+    private let passwordEnterView: BorderedPasswordEnterView = {
+        let newValue = BorderedPasswordEnterView()
         newValue.textField.enablesReturnKeyAutomatically = true
         newValue.textField.quickDismissPlaceholder = TextConstants.enterYourNewPassword
         newValue.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
@@ -122,8 +121,8 @@ final class RegistrationViewController: ViewController {
         return newValue
     }()
     
-    private let rePasswordEnterView: ProfilePasswordEnterView = {
-        let newValue = ProfilePasswordEnterView()
+    private let rePasswordEnterView: BorderedPasswordEnterView = {
+        let newValue = BorderedPasswordEnterView()
         
         newValue.textField.quickDismissPlaceholder = TextConstants.reenterYourPassword
         newValue.textField.enablesReturnKeyAutomatically = true
@@ -200,10 +199,6 @@ final class RegistrationViewController: ViewController {
 
     }
     
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
-    
     //MARK: Utility Methods (private)
     private func setup() {
         setupStackView()
@@ -213,7 +208,6 @@ final class RegistrationViewController: ViewController {
     }
     
     private func setupNavBar() {
-        navigationBarWithGradientStyle()
         backButtonForNavigationItem(title: TextConstants.backTitle)
         setNavigationTitle(title: TextConstants.registerTitle)
         setNavigationRightBarButton(title: TextConstants.loginFAQButton, target: self, action: #selector(handleFaqButtonTap))

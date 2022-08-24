@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,6 +18,7 @@
             <connections>
                 <outlet property="collectionView" destination="0Sm-wn-Msc" id="6uf-wF-aXI"/>
                 <outlet property="floatingHeaderContainerHeightConstraint" destination="J3A-WS-4mi" id="c9c-o0-s47"/>
+                <outlet property="headerStackView" destination="acy-kT-cr5" id="6Ie-82-uaS"/>
                 <outlet property="noFilesImage" destination="qz2-SP-6oQ" id="rwb-kw-oSL"/>
                 <outlet property="noFilesLabel" destination="fdq-Cf-39W" id="gmp-PY-CFM"/>
                 <outlet property="noFilesTopLabel" destination="0lC-K4-1ac" id="TJd-tm-6eI"/>

@@ -23,7 +23,7 @@ extension FaceImageAddNameRouter: FaceImageAddNameRouterInput {
             vc.close(completion: completion)
         })
         
-        RouterVC().presentViewController(controller: vc)
+        vc.open()
     }
     
     func popToPeopleItems() {

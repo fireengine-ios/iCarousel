@@ -76,7 +76,6 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
     }
     
     private func configureNavBarActions() {
-        navigationBarWithGradientStyle()
         setTitle(withString: TextConstants.createStoryAudioSelected)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: TextConstants.createStorySelectAudioButton,

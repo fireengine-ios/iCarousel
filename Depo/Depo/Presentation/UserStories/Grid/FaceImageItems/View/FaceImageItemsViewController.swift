@@ -18,9 +18,9 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
     var isCanChangeVisibility: Bool = false
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
         setTitle(withString: mainTitle )
-        
-        navigationBarWithGradientStyle()
         
         editingTabBar?.view.layoutIfNeeded()
         
@@ -83,6 +83,7 @@ extension FaceImageItemsViewController: FaceImageItemsViewInput {
         ugglaViewBottomConstraint.isActive = true
         
         collectionView.contentInset.bottom = hidden ? 0 : ugglaViewHeight
+        collectionView.contentInset.top = 16
     }
     
     func updateUgglaViewPosition() {

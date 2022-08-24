@@ -58,7 +58,7 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
             newValue.text = localized(.settingsSetNewPassword)
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 20)
             newValue.numberOfLines = 0
-            newValue.textColor = AppColor.blackColor.color?.withAlphaComponent(0.9)
+            newValue.textColor = AppColor.blackColor.color.withAlphaComponent(0.9)
         }
     }
     
@@ -137,7 +137,7 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
                                                 AppConfigurator.logout()
                                             }
         })
-        router.presentViewController(controller: popupVC)
+        popupVC.open()
     }
     
     private func actionOnUpdateOnError(_ error: UpdatePasswordErrors) {

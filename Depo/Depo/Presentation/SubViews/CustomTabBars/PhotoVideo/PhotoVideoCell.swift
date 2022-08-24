@@ -21,22 +21,22 @@ final class PhotoVideoCell: UICollectionViewCell {
         case regular
         
         var isBleached: Bool { [.notSynced, .syncInQueue, .syncFailed].contains(self) }
-        
-        var imageName: String {
+
+        var icon: AppImage? {
             switch self {
             case .notSynced:
-                return "thumbnailNotSyncedStatus"
+                return Image.iconSyncStatusNotSynced
             case .syncInQueue:
-                return "thumbnailInQueueStatus"
+                return Image.iconSyncStatusQueued
             case .syncing, .regular:
-                return ""
+                return nil
             case .synced:
-                return "thumbnailSyncedStatus"
+                return Image.iconSyncStatusSynced
             case .syncFailed:
-                return "thumbnailSyncFailedStatus"
+                return Image.iconSyncStatusFailed
             }
         }
-    }
+   }
 
     @IBOutlet private weak var favoriteImageView: UIImageView! {
         willSet {
@@ -51,16 +51,12 @@ final class PhotoVideoCell: UICollectionViewCell {
     @IBOutlet private weak var selectionStateView: UIView! {
         willSet {
             newValue.layer.borderWidth = 3
-            newValue.layer.borderColor = AppColor.darkBlueAndTealish.color?.cgColor
+            newValue.layer.borderColor = AppColor.tint.cgColor
             newValue.alpha = 0
         }
     }
     
-    @IBOutlet private weak var bleachView: UIView! {
-        willSet {
-            newValue.alpha = 0.5
-        }
-    }
+    @IBOutlet private weak var bleachView: UIView!
 
     @IBOutlet private weak var thumbnailBlurVisualEffectView: UIVisualEffectView! {
         willSet {
@@ -68,18 +64,16 @@ final class PhotoVideoCell: UICollectionViewCell {
         }
     }
 
-    @IBOutlet private weak var gradientImageView: UIImageView! {
+    @IBOutlet weak var videoPlayIcon: UIImageView! {
         willSet {
-            newValue.image = UIImage(named: "thumbnailBottomGradient")
+            newValue.image = Image.iconPlay.image
         }
     }
-
-    @IBOutlet weak var videoPlayIcon: UIImageView!
     
     @IBOutlet weak var videoDurationLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.whiteColor
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 16)
+            newValue.font = .appFont(.medium, size: 12)
         }
     }
     
@@ -91,6 +85,7 @@ final class PhotoVideoCell: UICollectionViewCell {
     private var uuid: String?
     private var requestImageID: PHImageRequestID?
     private var isBlurred = false
+    private var currentFileType = FileType.image
     
     private var progressLayer: CAShapeLayer?
 
@@ -111,25 +106,26 @@ final class PhotoVideoCell: UICollectionViewCell {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        selectionStateView.layer.borderColor = AppColor.darkBlueAndTealish.color?.cgColor
+        selectionStateView.layer.borderColor = AppColor.tint.cgColor
     }
 
     // MARK: Utility Methods(Public)
 
     func setup(with mediaItem: MediaItem) {
+        currentFileType = FileType(value: mediaItem.fileTypeValue)
+
         checkmarkImageView.isHidden = true
-        
+
         accessibilityLabel = mediaItem.nameValue ?? ""
         favoriteImageView.isHidden = !mediaItem.favoritesValue
-        
+
         if mediaItem.isLocalItemValue, mediaItem.fileSizeValue < NumericConstants.fourGigabytes {
             update(syncStatus: .notSynced)
         } else {
             update(syncStatus: .regular)
         }
         
-        let fileType = FileType(value: mediaItem.fileTypeValue)
-        switch fileType {
+        switch currentFileType {
         case .video:
             videoDurationLabel.text = WrapData.getDuration(duration: mediaItem.metadata?.duration)
             videoPlayIcon.isHidden = false
@@ -138,7 +134,7 @@ final class PhotoVideoCell: UICollectionViewCell {
             videoPlayIcon.isHidden = true
             videoDurationLabel.isHidden = true
         }
-        
+
         trimmedLocalFileID = mediaItem.trimmedLocalFileID
         
         let assetIdentifier = mediaItem.isLocalItemValue ? mediaItem.localFileID : mediaItem.relatedLocal?.localFileID
@@ -191,10 +187,15 @@ final class PhotoVideoCell: UICollectionViewCell {
     }
 
     func update(syncStatus: SyncStatus) {
-        let image = UIImage(named: syncStatus.imageName)
-        syncStatusImageView.image = image
-        bleachView.isHidden = !syncStatus.isBleached
-        gradientImageView.isHidden = !syncStatus.isBleached
+        syncStatusImageView.image = syncStatus.icon?.image
+
+        if syncStatus.isBleached {
+            bleachView.backgroundColor = AppColor.darkContentOverlay.color
+        } else if currentFileType == .video {
+            bleachView.backgroundColor = AppColor.lightContentOverlay.color
+        } else {
+            bleachView.backgroundColor = .clear
+        }
 
         switch syncStatus {
         case .syncing(let value):
@@ -235,8 +236,10 @@ extension PhotoVideoCell {
 
 extension PhotoVideoCell {
     func updateSelection(isSelectionMode: Bool, animated: Bool) {
+        videoPlayIcon.isHidden = isSelectionMode || currentFileType != .video
         checkmarkImageView.isHidden = !isSelectionMode
-        checkmarkImageView.image = UIImage(named: isSelected ? "selected" : "notSelected")
+        let selectionStateImage = isSelected ? Image.iconCheckmarkSelected : Image.iconCheckmarkNotSelected
+        checkmarkImageView.image = selectionStateImage.image
         
         let selection = isSelectionMode && isSelected
         if animated {

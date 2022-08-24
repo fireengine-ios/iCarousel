@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "iconSyncStatusNotSynced.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol {
+final class InstaPickDetailViewController: BaseViewController {
     
     private enum PhotoViewType: String {
         case bigView = "bigView"
@@ -54,8 +54,7 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
     private var dataSource = InstaPickHashtagCollectionViewDataSource()
     private var isShown = false
     private var selectedPhoto: InstapickAnalyze?
-    private var isShowTabBar = true
-    
+
     private var analyzes: [InstapickAnalyze] = []
     private var analyzesCount: InstapickAnalyzesCount?
     
@@ -75,17 +74,12 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
         open()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        showTabBarIfNeeded()
-    }
-    
+
     //MARK: - Utility Methods(public)
     func configure(with models: [InstapickAnalyze], analyzesCount: InstapickAnalyzesCount, isShowTabBar: Bool) {
         analyzes = models
         self.analyzesCount = analyzesCount
-        self.isShowTabBar = isShowTabBar
+        needToShowTabBar = isShowTabBar
     }
     
     //MARK: - Utility Methods(private)
@@ -99,7 +93,6 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
     
     private func open() {
         if isShown {
-            self.statusBarColor = .clear
             return
         }
         isShown = true
@@ -181,7 +174,7 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
         copyToClipboardButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 19 : 14)
         copyToClipboardButton.setTitleColor(UIColor.lrTealishTwo, for: .normal)
         
-        shareButton.setBackgroundColor(AppColor.secondaryBackground.color ?? .white, for: .disabled)
+        shareButton.setBackgroundColor(AppColor.secondaryBackground.color, for: .disabled)
         shareButton.setTitleColor(ColorConstants.darkBlueColor.lighter(by: 40.0), for: .disabled)
     }
 
@@ -296,10 +289,6 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
     
     private func showErrorWith(message: String) {
         UIApplication.showErrorAlert(message: message)
-    }
-    
-    private func showTabBarIfNeeded() {
-        isShowTabBar ? showTabBar() : hideTabBar()
     }
     
     //MARK: - Actions

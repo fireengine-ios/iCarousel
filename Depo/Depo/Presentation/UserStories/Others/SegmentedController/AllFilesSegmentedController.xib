@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AllFilesSegmentedController" customModule="Billo" customModuleProvider="target">
             <connections>
+                <outlet property="collectionView" destination="mBe-sb-MyQ" id="hZm-QQ-NfU"/>
                 <outlet property="containerView" destination="AfE-FJ-x8O" id="Yn8-f0-2GI"/>
+                <outlet property="segmentStackView" destination="FZ4-LF-1EG" id="o8H-f6-tY1"/>
                 <outlet property="segmentedControl" destination="BTw-Tw-zCW" id="vEY-K7-5ix"/>
                 <outlet property="segmentedControlContainer" destination="ChU-gk-RnU" id="Xg7-v4-EDC"/>
                 <outlet property="view" destination="YCK-Ld-STD" id="jIA-Pb-9XU"/>
@@ -23,10 +26,35 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ChU-gk-RnU">
-                    <rect key="frame" x="0.0" y="44" width="414" height="60"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="73"/>
                     <subviews>
-                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="BTw-Tw-zCW" customClass="SegmentedControl" customModule="Billo" customModuleProvider="target">
-                            <rect key="frame" x="127" y="14.5" width="160" height="32"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="FZ4-LF-1EG">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="73"/>
+                            <subviews>
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="mBe-sb-MyQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="72"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="72" id="grA-b7-6ob"/>
+                                    </constraints>
+                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YkU-Tx-iKw">
+                                        <size key="itemSize" width="128" height="128"/>
+                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </collectionViewFlowLayout>
+                                </collectionView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sTb-Se-lk9">
+                                    <rect key="frame" x="0.0" y="72" width="414" height="1"/>
+                                    <color key="backgroundColor" name="filesSeperator"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1" id="qT2-k7-Baq"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                        </stackView>
+                        <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="BTw-Tw-zCW" customClass="SegmentedControl" customModule="Billo" customModuleProvider="target">
+                            <rect key="frame" x="127" y="21" width="160" height="32"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="8Oz-cn-aRF"/>
                             </constraints>
@@ -39,37 +67,46 @@
                             </connections>
                         </segmentedControl>
                     </subviews>
-                    <color key="backgroundColor" name="primaryBackground"/>
+                    <color key="backgroundColor" name="filesBackground"/>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="FZ4-LF-1EG" secondAttribute="bottom" id="4lC-Nj-2Mx"/>
+                        <constraint firstItem="FZ4-LF-1EG" firstAttribute="leading" secondItem="ChU-gk-RnU" secondAttribute="leading" id="Rra-0Q-A7e"/>
                         <constraint firstItem="BTw-Tw-zCW" firstAttribute="centerX" secondItem="ChU-gk-RnU" secondAttribute="centerX" id="TXE-vo-CiD"/>
                         <constraint firstItem="BTw-Tw-zCW" firstAttribute="centerY" secondItem="ChU-gk-RnU" secondAttribute="centerY" id="UwF-LS-RAK"/>
-                        <constraint firstAttribute="height" constant="60" id="Yyq-M7-Rr2"/>
                         <constraint firstItem="BTw-Tw-zCW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ChU-gk-RnU" secondAttribute="leading" constant="10" id="aVi-rc-f4m"/>
+                        <constraint firstItem="FZ4-LF-1EG" firstAttribute="top" secondItem="ChU-gk-RnU" secondAttribute="top" id="cHf-nP-XNO"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BTw-Tw-zCW" secondAttribute="trailing" constant="10" id="uvx-ef-SK2"/>
+                        <constraint firstAttribute="trailing" secondItem="FZ4-LF-1EG" secondAttribute="trailing" id="wsS-Yq-TYE"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AfE-FJ-x8O">
-                    <rect key="frame" x="0.0" y="104" width="414" height="758"/>
-                    <color key="backgroundColor" name="primaryBackground"/>
+                    <rect key="frame" x="0.0" y="117" width="414" height="779"/>
+                    <color key="backgroundColor" name="filesBackground"/>
                 </view>
             </subviews>
-            <viewLayoutGuide key="safeArea" id="yQf-Ex-lDW"/>
-            <color key="backgroundColor" name="primaryBackground"/>
+            <viewLayoutGuide key="safeArea" id="jch-WX-Mvt"/>
+            <color key="backgroundColor" name="filesBackground"/>
             <constraints>
-                <constraint firstItem="yQf-Ex-lDW" firstAttribute="trailing" secondItem="ChU-gk-RnU" secondAttribute="trailing" id="3uM-M7-3GI"/>
-                <constraint firstItem="yQf-Ex-lDW" firstAttribute="bottom" secondItem="AfE-FJ-x8O" secondAttribute="bottom" id="6F1-Iy-Rn1"/>
-                <constraint firstItem="ChU-gk-RnU" firstAttribute="top" secondItem="yQf-Ex-lDW" secondAttribute="top" id="Bsb-7h-vmp"/>
+                <constraint firstAttribute="trailing" secondItem="ChU-gk-RnU" secondAttribute="trailing" id="3uM-M7-3GI"/>
+                <constraint firstAttribute="bottom" secondItem="AfE-FJ-x8O" secondAttribute="bottom" id="6F1-Iy-Rn1"/>
+                <constraint firstItem="ChU-gk-RnU" firstAttribute="top" secondItem="jch-WX-Mvt" secondAttribute="top" id="Bsb-7h-vmp"/>
                 <constraint firstItem="AfE-FJ-x8O" firstAttribute="top" secondItem="ChU-gk-RnU" secondAttribute="bottom" id="ItY-UO-LyO"/>
-                <constraint firstItem="AfE-FJ-x8O" firstAttribute="leading" secondItem="yQf-Ex-lDW" secondAttribute="leading" id="PcN-fq-KXg"/>
-                <constraint firstItem="yQf-Ex-lDW" firstAttribute="trailing" secondItem="AfE-FJ-x8O" secondAttribute="trailing" id="feu-iU-fiN"/>
-                <constraint firstItem="ChU-gk-RnU" firstAttribute="leading" secondItem="yQf-Ex-lDW" secondAttribute="leading" id="rrW-WV-J9Q"/>
+                <constraint firstItem="AfE-FJ-x8O" firstAttribute="leading" secondItem="YCK-Ld-STD" secondAttribute="leading" id="PcN-fq-KXg"/>
+                <constraint firstAttribute="trailing" secondItem="AfE-FJ-x8O" secondAttribute="trailing" id="feu-iU-fiN"/>
+                <constraint firstItem="ChU-gk-RnU" firstAttribute="leading" secondItem="YCK-Ld-STD" secondAttribute="leading" id="rrW-WV-J9Q"/>
             </constraints>
             <point key="canvasLocation" x="140" y="154"/>
         </view>
     </objects>
     <resources>
-        <namedColor name="primaryBackground">
+        <namedColor name="filesBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="filesSeperator">
+            <color red="0.92156862745098034" green="0.92549019607843142" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

@@ -47,6 +47,7 @@ struct CollectionViewCellsIdsConstant {
     static let cellForFaceImage = "CollectionViewCellForFaceImage"
     static let cellForFaceImageAddName = "CollectionViewCellForFaceImageAddName"
     static let cellForInstapickPhoto = "CollectionViewCellForInstapickPhoto"
+    static let cellForAllFilesType = "AllFilesTypeCollectionViewCell"
 }
 
 struct CollectionViewSuplementaryConstants {

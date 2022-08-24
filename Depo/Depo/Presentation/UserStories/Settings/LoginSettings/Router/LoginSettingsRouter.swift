@@ -21,6 +21,7 @@ extension LoginSettingsRouter: LoginSettingsRouterInput {
                                             controller.close()
         }
         
-        router.presentViewController(controller: popUp)
+        popUp.open()
+
     }
 }

@@ -11,8 +11,9 @@ import UIKit
 protocol PhotoVideoDataSourceDelegate: AnyObject {
     func selectedModeDidChange(_ selectingMode: Bool)
     func fetchPredicateCreated()
-    func contentDidChange(_ fetchedObjects: [MediaItem])
+    func contentDidChange(sections: [NSFetchedResultsSectionInfo], fetchedObjects: [MediaItem])
     func convertFetchedObjectsInProgress()
+    func threeDotsButtonTapped(_ button: UIButton?)
 }
 
 final class PhotoVideoDataSource: NSObject {
@@ -133,6 +134,7 @@ final class PhotoVideoDataSource: NSObject {
             section.numberOfObjects > indexPath.row else {
                 return nil
         }
+
         return fetchedResultsController.object(at: indexPath)
     }
     
@@ -256,27 +258,24 @@ final class PhotoVideoDataSource: NSObject {
         updateLastFetchedObjects(deletedIds: [], updatedIds: [], insertedIds: [])
     }
     
-    func setupOriginalPredicates(isPhotos: Bool, predicateSetupedCallback: @escaping VoidHandler) {
-        predicateManager.getMainCompoundedPredicate(isPhotos: isPhotos) { [weak self] compoundedPredicate in
-            self?.fetchedResultsController.fetchRequest.predicate = compoundedPredicate
-            predicateSetupedCallback()
-        }
+    func setupOriginalPredicates(fileTypes: [FileType], predicateSetupedCallback: @escaping VoidHandler) {
+        let predicate = predicateManager.getMainCompoundedPredicate(fileTypes: fileTypes)
+        fetchedResultsController.fetchRequest.predicate = predicate
+        predicateSetupedCallback()
     }
     
-    func changeSourceFilter(type: GalleryViewType, isPhotos: Bool, newPredicateSetupedCallback: @escaping VoidHandler) {
+    func changeSourceFilter(type: GalleryViewType, fileTypes: [FileType], newPredicateSetupedCallback: @escaping VoidHandler) {
         lastWrapedObjects.removeAll()
         
         switch type {
         case .all:
-            predicateManager.getMainCompoundedPredicate(isPhotos: isPhotos) { [weak self] compundedPredicate in
-                self?.fetchedResultsController.fetchRequest.predicate = compundedPredicate
-                newPredicateSetupedCallback()
-            }
+            fetchedResultsController.fetchRequest.predicate = predicateManager.getMainCompoundedPredicate(fileTypes: fileTypes)
+            newPredicateSetupedCallback()
         case .synced:
-            fetchedResultsController.fetchRequest.predicate = predicateManager.getSyncPredicate(isPhotos: isPhotos)
+            fetchedResultsController.fetchRequest.predicate = predicateManager.getSyncPredicate(fileTypes: fileTypes)
             newPredicateSetupedCallback()
         case .unsynced:
-            fetchedResultsController.fetchRequest.predicate = predicateManager.getUnsyncPredicate(isPhotos: isPhotos)
+            fetchedResultsController.fetchRequest.predicate = predicateManager.getUnsyncPredicate(fileTypes: fileTypes)
             newPredicateSetupedCallback()
         }
     }
@@ -456,6 +455,10 @@ final class PhotoVideoDataSource: NSObject {
         updatedItemsIds.removeAll()
         objectUpdates.removeAll()
     }
+
+    @objc private func threeDotsButtonTapped(_ button: UIButton?) {
+        delegate?.threeDotsButtonTapped(button)
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -472,7 +475,9 @@ extension PhotoVideoDataSource: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        return collectionView.dequeue(supplementaryView: CollectionViewSimpleHeaderWithText.self, kind: kind, for: indexPath)
+        let headerView = collectionView.dequeue(supplementaryView: CollectionViewSimpleHeaderWithText.self, kind: kind, for: indexPath)
+        headerView.menuButton.addTarget(self, action: #selector(threeDotsButtonTapped(_:)), for: .primaryActionTriggered)
+        return headerView
     }
 }
 
@@ -611,7 +616,10 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
                 return
             }
             self.lastUpdateFetchedObjects = fetchedObjects
-            self.delegate?.contentDidChange(fetchedObjects)
+            self.delegate?.contentDidChange(
+                sections: self.fetchedResultsController.sections ?? [],
+                fetchedObjects: fetchedObjects
+            )
             if self.lastWrapedObjects.isEmpty, !self.isConverting {
                 self.convertFetchedObjects()
             } else {
@@ -634,7 +642,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     
 }
 
-extension PhotoVideoDataSource: PhotoVideoCollectionViewLayoutDelegate {
+extension PhotoVideoDataSource: GalleryCollectionViewLayoutDelegate {
     func targetContentOffset() -> CGPoint? {
         return focusedOffset()
     }

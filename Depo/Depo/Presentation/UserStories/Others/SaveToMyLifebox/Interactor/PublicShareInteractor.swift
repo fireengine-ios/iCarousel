@@ -96,6 +96,8 @@ class PublicShareInteractor: NSObject, PublicShareInteractorInput {
                 return "Music"
             case .folder, .unknown:
                 return "File"
+            case .documentsAndMusic:
+                return "DocumentAndMusic"
             }
         }
         

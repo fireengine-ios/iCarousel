@@ -27,7 +27,10 @@ class SearchViewInitializer {
         )
         
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
-                                               style: .default, tintColor: nil)
+                                               style: .default,
+                                               tintColor: AppColor.tint.color,
+                                               unselectedItemTintColor: AppColor.label.color,
+                                               barTintColor: AppColor.background.color)
         
         configurator.configure(viewController: viewController,
                                remoteServices: RemoteSearchService(requestSize: 100),

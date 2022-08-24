@@ -25,22 +25,22 @@ final class FileMetaInfoView: UIView, NibInit, FileMetaInfoViewProtocol {
     @IBOutlet private weak var fileInfoLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.fileInfoFileInfoTitle
-            newValue.font = .TurkcellSaturaBolFont(size: 14)
-            newValue.textColor = AppColor.marineTwoAndTealish.color
+            newValue.font = .appFont(.regular, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
     
     @IBOutlet private weak var fileSizeTitleLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaFont(size: 18)
-            newValue.textColor = .lrBrownishGrey
+            newValue.font = .appFont(.light, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
     
     @IBOutlet private weak var fileSizeLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaFont(size: 18)
-            newValue.textColor = ColorConstants.closeIconButtonColor
+            newValue.font = .appFont(.light, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
 
@@ -49,15 +49,15 @@ final class FileMetaInfoView: UIView, NibInit, FileMetaInfoViewProtocol {
     @IBOutlet private weak var durationTitleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.fileInfoDurationTitle
-            newValue.font = .TurkcellSaturaFont(size: 18)
-            newValue.textColor = .lrBrownishGrey
+            newValue.font = .appFont(.light, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
     
     @IBOutlet private weak var durationLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaFont(size: 18)
-            newValue.textColor = ColorConstants.closeIconButtonColor
+            newValue.font = .appFont(.light, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
     
@@ -66,15 +66,15 @@ final class FileMetaInfoView: UIView, NibInit, FileMetaInfoViewProtocol {
     @IBOutlet private weak var uploadDateTitleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.fileInfoUploadDateTitle
-            newValue.font = .TurkcellSaturaFont(size: 18)
-            newValue.textColor = .lrBrownishGrey
+            newValue.font = .appFont(.light, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
     
     @IBOutlet private weak var uploadDateLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaFont(size: 18)
-            newValue.textColor = ColorConstants.closeIconButtonColor
+            newValue.font = .appFont(.light, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
 
@@ -83,15 +83,15 @@ final class FileMetaInfoView: UIView, NibInit, FileMetaInfoViewProtocol {
     @IBOutlet private weak var takenDateTitleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.fileInfoTakenDateTitle
-            newValue.font = .TurkcellSaturaFont(size: 18)
-            newValue.textColor = .lrBrownishGrey
+            newValue.font = .appFont(.light, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
     
     @IBOutlet private weak var takenDateLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaFont(size: 18)
-            newValue.textColor = ColorConstants.closeIconButtonColor
+            newValue.font = .appFont(.light, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
     

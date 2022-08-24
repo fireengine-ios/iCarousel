@@ -55,7 +55,6 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationBarWithGradientStyle()
         
         //need to fix crash on show bottom bar
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()

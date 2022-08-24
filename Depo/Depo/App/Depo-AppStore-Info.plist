@@ -176,6 +176,10 @@
 		<string>TurkcellSaturaDem.ttf</string>
 		<string>TurkcellSaturaBol.ttf</string>
 		<string>TurkcellSaturaBolIta.ttf</string>
+		<string>GT-America-LC-Standard-Light.ttf</string>
+		<string>GT-America-LC-Standard-Regular.ttf</string>
+		<string>GT-America-LC-Standard-Medium.ttf</string>
+		<string>GT-America-LC-Standard-Bold.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
@@ -192,7 +196,7 @@
 	<key>UIStatusBarHidden</key>
 	<true/>
 	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleLightContent</string>
+	<string>UIStatusBarStyleDefault</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

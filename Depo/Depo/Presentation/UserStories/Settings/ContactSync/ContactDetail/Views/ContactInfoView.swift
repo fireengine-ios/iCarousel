@@ -14,7 +14,7 @@ final class ContactInfoView: UIView, NibInit {
         willSet {
             newValue.text = ""
             newValue.textColor = ColorConstants.lightText
-            newValue.font = .TurkcellSaturaMedFont(size: 14)
+            newValue.font = .appFont(.medium, size: 14)
         }
     }
     
@@ -22,7 +22,7 @@ final class ContactInfoView: UIView, NibInit {
         willSet {
             newValue.text = ""
             newValue.textColor = ColorConstants.duplicatesGray
-            newValue.font = .TurkcellSaturaMedFont(size: 20)
+            newValue.font = .appFont(.medium, size: 20)
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
         }

@@ -14,43 +14,59 @@ protocol BasicCollectionMultiFileCellActionDelegate: AnyObject {
 }
 
 class BasicCollectionMultiFileCell: BaseCollectionViewCell {
-    
-    private var smallSelectionImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
-    
+        
     @IBOutlet weak var bottomSeparator: UIView!
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var cellContentView: UIView!
-    
     @IBOutlet weak var barView: UIView!
-    
     @IBOutlet weak var smallContentImageView: SelectionImageView!
     @IBOutlet weak var bigContentImageView: UIImageView!
-    
     @IBOutlet weak var fileNameLabel: UILabel!
     @IBOutlet weak var detailsLabel: UILabel!
-    
     @IBOutlet weak var moreView: UIView!
     @IBOutlet weak var moreButton: ExtendedTapAreaButton!
-    
     @IBOutlet weak var activity: UIActivityIndicatorView!
-    
-    @IBOutlet weak var selectionImageView: UIImageView!
-    
+    @IBOutlet weak var gridselectionImageView: UIImageView! //grid selection
     @IBOutlet weak var separatorView: UIView!
-    
-    @IBOutlet weak var smallCellSelectionView: UIImageView!
+    @IBOutlet weak var smallCellSelectionImageView: UIImageView!
+    @IBOutlet weak var bottomFavoritesStar: UIImageView!
+    @IBOutlet weak var sharedIcon: UIImageView!
+    @IBOutlet weak var gridCellFavIcon: UIImageView!
+    @IBOutlet weak var gridCellShareIcon: UIImageView!
     
     @IBOutlet weak var bottomViewH: NSLayoutConstraint!
     @IBOutlet weak var smallContentImageViewW: NSLayoutConstraint!
     @IBOutlet weak var smallContentImageViewH: NSLayoutConstraint!
     @IBOutlet weak var leftSpaceForSmallmage: NSLayoutConstraint!
+    @IBOutlet weak var moreButtonTrailingConst: NSLayoutConstraint!
     
-    @IBOutlet weak var smallSelectonView: UIView!
-    @IBOutlet weak var bigSelectionView: UIView!
-    @IBOutlet weak var topFavoritesStar: UIImageView!
-    @IBOutlet weak var bottomFavoritesStar: UIImageView!
-    @IBOutlet weak var sharedIcon: UIImageView!
+    @IBOutlet private weak var shadowView: UIView! {
+        willSet {
+            newValue.addRoundedShadows(cornerRadius: 12,
+                                       shadowColor: AppColor.filesBigCellShadow.cgColor,
+                                       opacity: 0.4, radius: 4.0, offset: CGSize(width: .zero, height: 4.0))
+        }
+    }
     
+    @IBOutlet private weak var gridCellInfoView: UIStackView! {
+        willSet {
+            newValue.spacing = 2
+        }
+    }
+    
+    @IBOutlet private weak var gridCellFileNameLabel: UILabel! {
+        willSet {
+            newValue.font = UIFont.appFont(.medium, size: 12)
+            newValue.textColor = AppColor.filesLabel.color
+        }
+    }
+    
+    @IBOutlet private weak var gridCellDetailLabel: UILabel! {
+        willSet {
+            newValue.font = UIFont.appFont(.light, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
+        }
+    }
     
     override weak var delegate: LBCellsDelegate? {
         didSet {
@@ -66,9 +82,10 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     static let bigH: CGFloat = 65
     static let frameSize: CGFloat = 66
     
-    static let smallContentImageViewWConst: CGFloat = 20
+    static let smallContentImageViewWConst: CGFloat = 24
     static let smallContentImageViewHConst: CGFloat = 24
-    static let smallContentImageViewBigSize: CGFloat = 42
+    static let smallContentImageViewBigSize: CGFloat = 38
+    static let bigContentImageViewSize: CGFloat = 48
     
     static let leftSpaceBigCell: CGFloat = 6
     static let leftSpaceSmallCell: CGFloat = 14
@@ -77,6 +94,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     var filesDataSource: FilesDataSource?
     private var cellImageManager: CellImageManager?
     private var uuid: String?
+    private var detailsLabelText = ""
     
     var canShowSharedIcon = true
 
@@ -86,13 +104,12 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         if (isBigSize()) {
             bigContentImageView.contentMode = .scaleAspectFill
             bigContentImageView.image = image
+            smallContentImageView.contentMode = .center
         } else {
             smallContentImageView.contentMode = .scaleAspectFill
             smallContentImageView.clipsToBounds = true
             smallContentImageView.configured = true
             smallContentImageView.setImage(image: image)
-            smallContentImageView.isHidden = false
-            smallCellSelectionView.isHidden = true
         }
     }
 
@@ -116,48 +133,42 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         itemModel = wrappered
         
         fileNameLabel.text = wrappedObj.name
+        fileNameLabel.isHidden = isBigSize()
+        gridCellInfoView.isHidden = !isBigSize()
+        gridCellFileNameLabel.text = wrappedObj.name
+        moreButtonTrailingConst.constant =  isBigSize() ? 4 : 16
+        shadowView.isHidden = !isBigSize()
+        cellContentView.isHidden = !isBigSize()
+        
+        configureDetailLabel(with: wrappedObj)
         
         if !isBigSize() {
-            var detailsLabelText = ""
-            
-            switch wrappered.fileType {
-            case .folder:
-                if let itemCount = wrappered.childCount {
-                    detailsLabelText = String(format: TextConstants.folderItemsText, itemCount)
-                } else {
-                    detailsLabelText = String(format: TextConstants.folderItemsText, 0)
-                }
-            case .audio, .video:
-                if let duration = wrappered.duration {
-                    detailsLabelText = duration
-                }
-            default:
-                break
-            }
             detailsLabel.text = detailsLabelText
             detailsLabel.isHidden = detailsLabelText.isEmpty
+            smallContentImageView.contentMode = .center
         } else {
             detailsLabel.isHidden = true
+            gridCellDetailLabel.text = detailsLabelText
+            gridCellDetailLabel.isHidden = detailsLabelText.isEmpty
+            smallContentImageView.contentMode = .scaleAspectFit
         }
 
         bigContentImageView.image = nil
-        bigContentImageView.image = WrapperedItemUtil.getPreviewImageForWrapperedObject(fileType: wrappered.fileType)
-        if isBigSize() {
+        bigContentImageView.image = WrapperedItemUtil.getBigPreviewImageForWrapperedObject(fileType: wrappered.fileType)
+        if isCellSelectionEnabled {
+            smallContentImageView.isHidden = true
             smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: wrappered.fileType)
-            smallContentImageView.contentMode = .scaleAspectFit
+            smallCellSelectionImageView.isHidden = false
+            smallCellSelectionImageView.image = isCellSelected ? Image.iconSelectCheck.image : Image.iconSelectEmpty.image
         } else {
-            if isCellSelectionEnabled {
-                smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForNotSelectedWrapperedObject(fileType: wrappered.fileType)
-            } else {
-                smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: wrappered.fileType)
-            }
-            smallContentImageView.contentMode = .center
+            smallContentImageView.isHidden = false
+            smallCellSelectionImageView.isHidden = true
+            smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: wrappered.fileType)
         }
-        
         bigContentImageView.contentMode = .center
 
         separatorView.isHidden = isBigSize()
-        barView.backgroundColor = isBigSize() ? ColorConstants.fileGreedCellColorSecondary : AppColor.primaryBackground.color ?? .white
+        bgView.backgroundColor = isBigSize() ? AppColor.filesBigCellBackground.color : AppColor.filesBackground.color
         
         //Big size (Grid)
         if isBigSize() && bottomViewH.constant != BasicCollectionMultiFileCell.smallH {
@@ -165,11 +176,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             
             smallContentImageViewW.constant = BasicCollectionMultiFileCell.smallContentImageViewWConst
             smallContentImageViewH.constant = BasicCollectionMultiFileCell.smallContentImageViewHConst
-            
             leftSpaceForSmallmage.constant = BasicCollectionMultiFileCell.leftSpaceBigCell
-            
-            fileNameLabel.font = UIFont.TurkcellSaturaRegFont(size: 10)
-            detailsLabel.font = UIFont.TurkcellSaturaRegFont(size: 10)
             
             layoutIfNeeded()
         }
@@ -180,144 +187,98 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             
             smallContentImageViewW.constant = BasicCollectionMultiFileCell.smallContentImageViewBigSize
             smallContentImageViewH.constant = BasicCollectionMultiFileCell.smallContentImageViewBigSize
-            
             leftSpaceForSmallmage.constant = BasicCollectionMultiFileCell.leftSpaceSmallCell
             
-            fileNameLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            detailsLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            fileNameLabel.font = .appFont(.regular, size: 14)
+            detailsLabel.font = .appFont(.regular, size: 12)
             layoutIfNeeded()
         }
         
-        topFavoritesStar.isHidden = !wrappered.favorites
+        gridCellFavIcon.isHidden = !wrappered.favorites
         bottomFavoritesStar.isHidden = !wrappered.favorites
         if isBigSize() {
             bottomFavoritesStar.isHidden = true
             sharedIcon.isHidden = true
+            gridCellShareIcon.isHidden = !wrappered.isShared
         } else {
-            topFavoritesStar.isHidden = true
+            gridCellFavIcon.isHidden = true
             sharedIcon.isHidden = !wrappered.isShared || !canShowSharedIcon
+            gridCellShareIcon.isHidden = true
         }
+
+        moreButton.addTarget(self, action: #selector(moreButtonAction(_:)), for: .touchUpInside)
+    }
     
+    private func configureDetailLabel(with wrappedObj: BaseDataSourceItem) {
+        detailsLabelText = ""
         
-        if isCellSelected, !isBigSize() {
-            var isHidden = !isImageOrVideoType(wrappered.fileType)
-            if wrappered.fileType == .audio, smallContentImageView.configured {
-                isHidden = !isSelected
-            }
-            setSelectionSmallSelectionImageView(isSelected, isHidden: isHidden)
+        guard let wrappered = wrappedObj as? Item, !isAlreadyConfigured else {
+            return
         }
         
-        configureMoreActionButton()
+        switch wrappered.fileType {
+        case .folder:
+            if let itemCount = wrappered.childCount {
+                detailsLabelText = String(format: TextConstants.folderItemsText, itemCount)
+            } else {
+                detailsLabelText = String(format: TextConstants.folderItemsText, 0)
+            }
+        case .audio, .video:
+            if let duration = wrappered.duration {
+                detailsLabelText = duration
+            }
+        default:
+            break
+        }
     }
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
-        smallCellSelectionView.isHidden = true
+        smallCellSelectionImageView.isHidden = !isSelectionActive
         moreView.isHidden = isSelectionActive
-        moreView.backgroundColor = isBigSize() ? AppColor.secondaryBackground.color : AppColor.primaryBackground.color ?? .white
-        smallContentImageView.isHidden = false
+        smallContentImageView.isHidden = isSelectionActive
         
         if let isFavorite = itemModel?.favorites {
             if isBigSize() {
-                topFavoritesStar.isHidden = !isFavorite
+                gridCellFavIcon.isHidden = !isFavorite
                 bottomFavoritesStar.isHidden = true
             } else {
-                topFavoritesStar.isHidden = true
+                gridCellFavIcon.isHidden = true
                 bottomFavoritesStar.isHidden = !isFavorite
             }
         } else {
-            topFavoritesStar.isHidden = true
+            gridCellFavIcon.isHidden = true
             bottomFavoritesStar.isHidden = true
         }
         
         isCellSelected = isSelected
         isCellSelectionEnabled = isSelectionActive
-        selectionImageView.isHidden = !isSelectionActive
-        var bgColor: UIColor = AppColor.secondaryBackground.color ?? ColorConstants.whiteColor
+        gridselectionImageView.isHidden = !isSelectionActive
+
         if isSelectionActive {
-            selectionImageView.image = UIImage(named: isSelected ? "selected" : "notSelected")
-            
-            selectionImageView.accessibilityLabel = isSelected ? TextConstants.accessibilitySelected : TextConstants.accessibilityNotSelected
-            if isBigSize() {
-                UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
-                    self.bigSelectionView.alpha = isSelected ? 1 : 0
-                })
-                smallContentImageView.setSelection(selection: false, showSelectonBorder: false)
-                setSelectionSmallSelectionImageView(false, isHidden: true)
-            } else {
-                bigSelectionView.alpha = 0
-                bgColor = AppColor.secondaryBackground.color ?? ColorConstants.whiteColor
-                if !smallContentImageView.configured {
-                    smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForNotSelectedWrapperedObject(fileType: itemModel?.fileType ?? .unknown)
-                    smallCellSelectionView.isHidden = !isSelected
-                    smallContentImageView.isHidden = isSelected
-                }
-                //because if we have image for object and object is not selected we should not show empty circle in top right corner of image
-                smallContentImageView.setSelection(selection: isSelected, showSelectonBorder: isSelected)
-                setSelectionSmallSelectionImageView(isSelected, isHidden: !isSelected)
+            if !smallContentImageView.configured {
+                smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: itemModel?.fileType ?? .unknown)
             }
+            smallCellSelectionImageView.image = isCellSelected ? Image.iconSelectCheck.image : Image.iconSelectEmpty.image
+            //because if we have image for object and object is not selected we should not show empty circle in top right corner of image
+            smallContentImageView.setSelection(selection: isSelected)
         } else {
-            if isBigSize() {
-                bgColor = ColorConstants.fileGreedCellColorSecondary
-                if self.bigSelectionView.alpha != 0 {
-                    UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
-                        self.bigSelectionView.alpha = 0
-                    })
-                }
-            } else {
-                if !smallContentImageView.configured {
-                    smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: itemModel?.fileType ?? .unknown)
-                }
-                bgColor = AppColor.primaryBackground.color ?? .white
+            if !smallContentImageView.configured {
+                smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: itemModel?.fileType ?? .unknown)
             }
-            smallContentImageView.setSelection(selection: false, showSelectonBorder: false)
-            setSelectionSmallSelectionImageView(false, isHidden: true)
-        }
-        
-        bgView.backgroundColor = bgColor
-        
-        if let item = itemModel, isCellSelected, !isBigSize() {
-            var isHidden = !isImageOrVideoType(item.fileType)
-            if item.fileType == .audio, smallContentImageView.configured {
-                //we need show small selection icon for audio items if load image
-                isHidden = !isSelected
-            }
-            setSelectionSmallSelectionImageView(isSelected, isHidden: isHidden)
+            smallContentImageView.setSelection(selection: false)
+            smallCellSelectionImageView.image = Image.iconSelectEmpty.image
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        bigContentImageView.clipsToBounds = true
-        
-        smallCellSelectionView.contentMode = .center
-        
-        smallSelectonView.layer.borderWidth = 3
-        smallSelectonView.layer.borderColor = AppColor.darkBlueAndTealish.color?.cgColor
-        smallSelectonView.alpha = 0
-        
-        bigSelectionView.layer.borderWidth = 3
-        bigSelectionView.layer.borderColor = AppColor.darkBlueAndTealish.color?.cgColor
-        bigSelectionView.alpha = 0
-        
-        fileNameLabel.font = UIFont.TurkcellSaturaRegFont(size: 10)
-        fileNameLabel.textColor = ColorConstants.textGrayColor
-        
-        detailsLabel.font = UIFont.TurkcellSaturaRegFont(size: 10)
-        
-        moreButton.accessibilityLabel = TextConstants.accessibilityMore
-        
-        configureSmallSelectionImageView()
-        setSelectionSmallSelectionImageView(false, isHidden: true)
-        
-        sharedIcon.isHidden = true
+        configureUI()
     }
     
     override func updating() {
         super.updating()
         smallContentImageView.configured = false
-        smallContentImageView.setSelection(selection: false, showSelectonBorder: false)
-        setSelectionSmallSelectionImageView(false, isHidden: true)
+        smallContentImageView.setSelection(selection: false)
     }
     
     override func set(name: String?) {
@@ -327,23 +288,28 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         }
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        shadowView.addRoundedShadows(cornerRadius: 12,
+                                     shadowColor: AppColor.filesBigCellShadow.cgColor,
+                                     opacity: 0.4, radius: 4.0, offset: CGSize(width: .zero, height: 4.0))
+    }
+    
     @IBAction func moreButtonAction(_ sender: Any) {
         actionDelegate?.morebuttonGotPressed(sender: sender, itemModel: itemModel)
     }
     
     // MARK: - Utility methods
-    
-    private func setSelectionSmallSelectionImageView(_ isSelected: Bool, isHidden: Bool) {
-        smallSelectionImageView.isHidden = isHidden
-        smallSelectionImageView.image = UIImage(named: "selected")
-    }
-    
-    private func configureSmallSelectionImageView() {
-        addSubview(smallSelectionImageView)
-        smallSelectionImageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        smallSelectionImageView.rightAnchor.constraint(equalTo: smallContentImageView.rightAnchor, constant: smallSelectionImageView.bounds.width /  2).isActive = true
-        smallSelectionImageView.topAnchor.constraint(equalTo: smallContentImageView.topAnchor, constant: -(smallContentImageView.bounds.height / 4)).isActive = true
+    private func configureUI() {
+        bgView.layer.cornerRadius = 8
+        bigContentImageView.clipsToBounds = true
+        smallCellSelectionImageView.contentMode = .center
+        fileNameLabel.font = UIFont.appFont(.regular, size: 14)
+        fileNameLabel.textColor = AppColor.filesLabel.color
+        detailsLabel.font = UIFont.appFont(.regular, size: 12)
+        detailsLabel.textColor = AppColor.filesLabel.color
+        moreButton.accessibilityLabel = TextConstants.accessibilityMore
+        sharedIcon.isHidden = true
     }
     
     private func isImageOrVideoType(_ type: FileType) -> Bool {
@@ -412,20 +378,4 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         cellImageManager?.cancelImageLoading()
     }
     
-    private func configureMoreActionButton() {
-        if #available(iOS 14.0, *) {
-            moreButton.showsMenuAsPrimaryAction = true
-
-            guard let item = itemModel else {
-                return
-            }
-            
-            let menu = MenuItemsFabric.generateMenu(for: item, status: item.status) { [weak self] actionType in
-                self?.actionDelegate?.onSelectMoreAction(type: actionType, itemModel: self?.itemModel, sender: self?.moreButton)
-            }
-            moreButton.menu = menu
-        } else {
-            moreButton.addTarget(self, action: #selector(moreButtonAction(_:)), for: .touchUpInside)
-        }
-    }
 }

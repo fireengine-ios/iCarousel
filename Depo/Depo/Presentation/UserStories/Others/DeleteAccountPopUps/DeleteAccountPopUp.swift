@@ -19,12 +19,12 @@ class DeleteAccountPopUp: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var popUpView: UIView! {
         willSet {
-            newValue.layer.cornerRadius = 4
+            newValue.layer.cornerRadius = 16
 
             newValue.layer.shadowOffset = .zero
             newValue.layer.shadowOpacity = 0.5
             newValue.layer.shadowRadius = 4
-            newValue.layer.shadowColor = AppColor.cellShadow.color?.cgColor
+            newValue.layer.shadowColor = AppColor.cellShadow.color.cgColor
         }
     }
 
@@ -33,7 +33,7 @@ class DeleteAccountPopUp: UIViewController {
         willSet {
             newValue.numberOfLines = 0
             newValue.textAlignment = .center
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 22)
+            newValue.font = .appFont(.medium, size: 20.0)
         }
     }
 
@@ -41,18 +41,18 @@ class DeleteAccountPopUp: UIViewController {
         willSet {
             newValue.numberOfLines = 0
             newValue.textAlignment = .center
-            newValue.textColor = ColorConstants.darkText
-            newValue.font = UIFont.TurkcellSaturaFont(size: 18)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 14.0)
         }
     }
 
     @IBOutlet private weak var firstButton: UIButton! {
         willSet {
             newValue.setTitleColor(AppColor.marineTwoAndTealish.color, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
+            newValue.titleLabel?.font = .appFont(.medium, size: 16.0)
             newValue.layer.cornerRadius = 25
             newValue.layer.borderWidth = 1
-            newValue.layer.borderColor = AppColor.marineTwoAndTealish.color?.cgColor
+            newValue.layer.borderColor = AppColor.marineTwoAndTealish.color.cgColor
         }
     }
 
@@ -60,7 +60,7 @@ class DeleteAccountPopUp: UIViewController {
         willSet {
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.backgroundColor = AppColor.marineTwoAndTealish.color
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
+            newValue.titleLabel?.font = .appFont(.medium, size: 16.0)
             newValue.layer.cornerRadius = 25
         }
     }
@@ -135,14 +135,15 @@ class DeleteAccountPopUp: UIViewController {
         switch type {
         case .firstConfirmation,
              .finalConfirmation:
-            iconView.image = UIImage(named: "customPopUpInfo")?.withRenderingMode(.alwaysTemplate)
             iconView.tintColor = ColorConstants.textOrange
-            titleLabel.textColor = ColorConstants.textOrange
+
+            iconView.image = Image.iconInfoDeleteAccount.image
+            titleLabel.textColor = AppColor.label.color
 
         case .success:
             iconView.image = UIImage(named: "successImage")?.withRenderingMode(.alwaysTemplate)
             iconView.tintColor = ColorConstants.aquaMarineTwo
-            titleLabel.textColor = ColorConstants.aquaMarineTwo
+            titleLabel.textColor = AppColor.label.color
         }
     }
 }

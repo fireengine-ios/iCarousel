@@ -6,6 +6,8 @@
 //  Copyright © 2020 LifeTech. All rights reserved.
 //
 
+import UIKit
+
 enum ElementTypes {
     case share
     case info//one for alert one for tab
@@ -66,6 +68,16 @@ enum ElementTypes {
     case endSharing
     case leaveSharing
     case moveToTrashShared
+    
+    case shareOriginal
+    case shareLink
+    case sharePrivate
+    
+    case galleryAll
+    case galleryPhotos
+    case galleryVideos
+    case gallerySync
+    case galleryUnsync
     
     static var trashState: [ElementTypes] = [.restore, .delete]
     static var hiddenState: [ElementTypes] = [.unhide, .moveToTrash]
@@ -318,8 +330,14 @@ enum ElementTypes {
         } else if item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum {
             types = [.shareAlbum, .albumDetails, .download]
         } else {
-            types = [.info, .share, .move]
+            types = [.info]
             
+            let shareInfo = ElementTypes.allowedTypes(for: [item])
+            if !shareInfo.isEmpty {
+                types.append(contentsOf: shareInfo)
+            }
+            
+            types.append(.move)
             types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
             if !item.isReadOnlyFolder {
                 types.append(.moveToTrash)
@@ -337,6 +355,28 @@ enum ElementTypes {
         }
         
         return types
+    }
+    
+    static func allowedTypes(for items: [BaseDataSourceItem]) -> [ElementTypes] {
+        var allowedTypes = [ElementTypes]()
+        
+        if items.contains(where: { $0.fileType == .folder}) {
+            allowedTypes = [.shareLink, .sharePrivate]
+        } else if items.contains(where: { return $0.fileType != .image && $0.fileType != .video && !$0.fileType.isDocumentPageItem && $0.fileType != .audio}) {
+            allowedTypes = [.shareLink]
+        } else {
+            allowedTypes = [.shareOriginal, .shareLink, .sharePrivate]
+        }
+        
+        if items.count > NumericConstants.numberOfSelectedItemsBeforeLimits {
+            allowedTypes.remove(.shareOriginal)
+        }
+        
+        if items.contains(where: { $0.isLocalItem }) {
+            allowedTypes.remove(.sharePrivate)
+        }
+        
+        return allowedTypes
     }
     
     func snackbarSuccessMessage(relatedItems: [BaseDataSourceItem] = [], divorseItems: DivorseItems? = nil) -> String? {
@@ -558,8 +598,271 @@ enum ElementTypes {
             return TextConstants.privateSharedEndSharingActionTitle
         case .leaveSharing:
             return TextConstants.privateSharedLeaveSharingActionTitle
+        case .shareOriginal:
+            return TextConstants.actionSheetShareOriginalSize
+        case .shareLink:
+            return TextConstants.actionSheetShareShareViaLink
+        case .sharePrivate:
+            return TextConstants.actionSheetSharePrivate
+        case .galleryAll:
+            return TextConstants.galleryFilterActionSheetAll
+        case .galleryPhotos:
+            return TextConstants.topBarPhotosFilter
+        case .galleryVideos:
+            return TextConstants.topBarVideosFilter
+        case .gallerySync:
+            return TextConstants.galleryFilterActionSheetSynced
+        case .galleryUnsync:
+            return TextConstants.galleryFilterActionSheetUnsynced
         default:
             return ""
+        }
+    }
+
+    var editingBarTitle: String {
+        switch self {
+        case .share:
+            return TextConstants.tabBarShareLabel
+        case .info:
+            return TextConstants.tabBarInfoLabel
+        case .edit:
+            return TextConstants.tabBarEditeLabel
+        case .delete:
+            return TextConstants.tabBarDeleteLabel
+        case .emptyTrashBin:
+            return ""
+        case .deleteDeviceOriginal:
+            return ""
+        case .move:
+            return TextConstants.tabBarMoveLabel
+        case .sync:
+            return TextConstants.tabBarSyncLabel
+        case .syncInProgress:
+            return ""
+        case .download:
+            return TextConstants.tabBarDownloadLabel
+        case .downloadDocument:
+            return TextConstants.tabBarDownloadLabel
+        case .undetermend:
+            return ""
+        case .rename:
+            return ""
+        case .removeAlbum:
+            return TextConstants.tabBarRemoveAlbumLabel
+        case .moveToTrash:
+            return TextConstants.tabBarDeleteLabel
+        case .restore:
+            return TextConstants.actionSheetRestore
+        case .createStory:
+            return ""
+        case .createAlbum:
+            return ""
+        case .copy:
+            return ""
+        case .addToFavorites:
+            return ""
+        case .removeFromFavorites:
+            return ""
+        case .addToAlbum:
+            return TextConstants.tabBarAddToAlbumLabel
+        case .backUp:
+            return ""
+        case .addToCmeraRoll:
+            return ""
+        case .removeFromAlbum:
+            return TextConstants.tabBarRemoveLabel
+        case .removeFromFaceImageAlbum:
+            return TextConstants.tabBarRemoveLabel
+        case .print:
+            return TextConstants.tabBarPrintLabel
+        case .changeCoverPhoto:
+            return ""
+        case .changePeopleThumbnail:
+            return ""
+        case .hide:
+            return TextConstants.tabBarHideLabel
+        case .unhide:
+            return TextConstants.tabBarUnhideLabel
+        case .smash:
+            return TextConstants.tabBarSmashLabel
+        case .photos:
+            return ""
+        case .iCloudDrive:
+            return ""
+        case .lifeBox:
+            return ""
+        case .more:
+            return ""
+        case .select:
+            return ""
+        case .selectAll:
+            return ""
+        case .deSelectAll:
+            return ""
+        case .documentDetails:
+            return ""
+        case .addToPlaylist:
+            return ""
+        case .musicDetails:
+            return ""
+        case .shareAlbum:
+            return ""
+        case .makeAlbumCover:
+            return ""
+        case .makePersonThumbnail:
+            return ""
+        case .albumDetails:
+            return ""
+        case .instaPick:
+            return ""
+        case .endSharing:
+            return ""
+        case .leaveSharing:
+            return ""
+        case .moveToTrashShared:
+            return ""
+        case .shareOriginal:
+            return ""
+        case .shareLink:
+            return ""
+        case .sharePrivate:
+            return ""
+        case .galleryAll:
+            return ""
+        case .galleryPhotos:
+            return ""
+        case .galleryVideos:
+            return ""
+        case .gallerySync:
+            return ""
+        case .galleryUnsync:
+            return ""
+        }
+    }
+
+    var editingBarAccessibilityId: String {
+        // TODO: Facelift, accessibilityId for editingBar items
+        return ""
+    }
+
+    var icon: UIImage? {
+        switch self {
+        case .share:
+            return Image.iconShare.image
+        case .info:
+            return Image.iconInfo.image
+        case .edit:
+            return Image.iconEdit.image
+        case .delete:
+            return UIImage(named: "DeleteShareButton")
+        case .emptyTrashBin:
+            return Image.iconDelete.image
+        case .deleteDeviceOriginal:
+            return Image.iconDelete.image
+        case .move:
+            return Image.iconMove.image
+        case .sync:
+            return Image.iconBackupBordered.image
+        case .syncInProgress:
+            return nil
+        case .download:
+            return Image.iconDownload.image
+        case .downloadDocument:
+            return UIImage(named: "downloadTB")
+        case .undetermend:
+            return nil
+        case .rename:
+            return Image.iconEdit.image
+        case .removeAlbum:
+            return UIImage(named: "DeleteShareButton")
+        case .moveToTrash:
+            return Image.iconDelete.image
+        case .restore:
+            return UIImage(named: "RestoreButtonIcon")
+        case .createStory:
+            return Image.iconStory.image
+        case .createAlbum:
+            return nil
+        case .copy:
+            return nil
+        case .addToFavorites:
+            return Image.iconFavorite.image
+        case .removeFromFavorites:
+            return nil
+        case .addToAlbum:
+            return Image.iconAddToAlbum.image
+        case .backUp:
+            return nil
+        case .addToCmeraRoll:
+            return nil
+        case .removeFromAlbum:
+            return UIImage(named: "DeleteShareButton")
+        case .removeFromFaceImageAlbum:
+            return UIImage(named: "DeleteShareButton")
+        case .print:
+            return Image.iconPrint.image
+        case .changeCoverPhoto:
+            return Image.iconChangePhoto.image
+        case .changePeopleThumbnail:
+            return Image.iconChangePerson.image
+        case .hide:
+            return UIImage(named: "HideButtonIcon")
+        case .unhide:
+            return UIImage(named: "UnhideButtonIcon")
+        case .smash:
+            return UIImage(named: "SmashButtonIcon")
+        case .photos:
+            return nil
+        case .iCloudDrive:
+            return nil
+        case .lifeBox:
+            return nil
+        case .more:
+            return nil
+        case .select:
+            return Image.iconSelect.image
+        case .selectAll:
+            return nil
+        case .deSelectAll:
+            return nil
+        case .documentDetails:
+            return nil
+        case .addToPlaylist:
+            return nil
+        case .musicDetails:
+            return nil
+        case .shareAlbum:
+            return nil
+        case .makeAlbumCover:
+            return nil
+        case .makePersonThumbnail:
+            return nil
+        case .albumDetails:
+            return nil
+        case .instaPick:
+            return Image.iconPrint.image
+        case .endSharing:
+            return Image.iconUnShare.image
+        case .leaveSharing:
+            return nil
+        case .moveToTrashShared:
+            return nil
+        case .shareOriginal:
+            return Image.iconSend.image
+        case .shareLink:
+            return Image.iconCopy.image
+        case .sharePrivate:
+            return Image.iconShare.image
+        case .galleryAll:
+            return Image.iconAll.image
+        case .galleryPhotos:
+            return Image.iconGalleryPhoto.image
+        case .galleryVideos:
+            return Image.iconVideo.image
+        case .gallerySync:
+            return Image.iconBackupCheck.image
+        case .galleryUnsync:
+            return Image.iconBackupUncheck.image
         }
     }
 }

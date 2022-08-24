@@ -21,39 +21,43 @@ final class PhotoVideoThreeDotMenuManager {
     init(delegate: BaseItemInputPassingProtocol) {
         self.delegate = delegate
     }
-    
-    func showActions(for items: [WrapData], isSelectingMode: Bool, isPhoto: Bool, sender: Any?) {
+
+    func showActions(for items: [WrapData], isSelectingMode: Bool, sender: Any?) {
         if isSelectingMode {
-            if isPhoto {
-                actionsForImageItems(items) { [weak self] types in
-                    self?.alert.show(with: types, for: items, presentedBy: sender, onSourceView: nil, viewController: nil)
-                }
-            } else {
-                actionsForVideoItems(items) { [weak self] types in
-                    self?.alert.show(with: types, for: items, presentedBy: sender, onSourceView: nil, viewController: nil)
-                }
+            actionsForItems(items) { [weak self] types in
+                self?.alert.show(with: types, for: items, presentedBy: sender, onSourceView: nil, viewController: nil)
             }
-            
+
         } else {
-            self.alert.show(with: [.select, .instaPick], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
+            self.alert.show(with: [.galleryAll,
+                                   .gallerySync,
+                                   .galleryUnsync,
+                                   .galleryPhotos,
+                                   .galleryVideos],
+                            for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
         }
     }
     
-    private func actionsForImageItems(_ items: [WrapData], completion: @escaping ([ElementTypes]) -> Void) {
+    private func actionsForItems(_ items: [WrapData], completion: @escaping ([ElementTypes]) -> Void) {
         
         let remoteItems = items.filter { !$0.isLocalItem }
+        let containsPhotos = items.contains { $0.fileType == .image }
         
         var actionTypes: [ElementTypes]
-        
+
         /// locals only
         if remoteItems.isEmpty {
-            actionTypes = [.createStory, .addToAlbum]
+            if containsPhotos {
+                actionTypes = [.createStory, .addToAlbum]
+            } else {
+                actionTypes = []
+            }
             completion(actionTypes)
             
             /// local and remotes or remotes only
         } else {
             actionTypes = [.createStory]
-            
+
             /// add .addToFavorites if need
             let hasUnfavorite = remoteItems.first(where: { !$0.favorites }) != nil
             if hasUnfavorite {
@@ -69,7 +73,7 @@ final class PhotoVideoThreeDotMenuManager {
             ///FE-2455 Removing Print Option - Print option is displayed
             actionTypes.append(contentsOf: [.addToAlbum/*, .print*/])
 
-            if PrintService.isEnabled {
+            if containsPhotos, PrintService.isEnabled {
                 actionTypes.append(.print)
             }
             
@@ -80,39 +84,6 @@ final class PhotoVideoThreeDotMenuManager {
                 }
                 completion(actionTypes)
             }
-        }
-    }
-    
-    private func actionsForVideoItems(_ items: [WrapData], completion: @escaping ([ElementTypes]) -> Void) {
-        
-        let remoteItems = items.filter { !$0.isLocalItem }
-        var actionTypes = [ElementTypes]()
-        
-        guard !remoteItems.isEmpty else {
-            completion(actionTypes)
-            return
-        }
-        
-        /// add .addToFavorites if need
-        let thereIsNoFavorite = remoteItems.first(where: { !$0.favorites }) != nil
-        if thereIsNoFavorite {
-            actionTypes.append(.addToFavorites)
-        }
-        
-        /// add .removeFromFavorites if need
-        let thereIsFavorite = remoteItems.first(where: { $0.favorites }) != nil
-        if thereIsFavorite {
-            actionTypes.append(.removeFromFavorites)
-        }
-        
-        actionTypes.append(.addToAlbum)
-        
-        /// remove .deleteDeviceOriginal if need
-        MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: remoteItems) { duplicates in
-            if !duplicates.isEmpty {
-                actionTypes.append(.deleteDeviceOriginal)
-            }
-            completion(actionTypes)
         }
     }
 }

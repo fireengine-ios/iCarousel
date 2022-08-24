@@ -13,7 +13,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     
     @IBOutlet private weak var passwordsStackView: UIStackView! {
         willSet {
-            newValue.spacing = 18
+            newValue.spacing = 12
             newValue.axis = .vertical
             newValue.alignment = .fill
             newValue.distribution = .fill
@@ -28,9 +28,10 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     
     @IBOutlet private weak var captchaView: CaptchaView!
     
+    // empty string "  " is because of label padding
     private let oldPasswordView: PasswordView = {
         let view = PasswordView.initFromNib()
-        view.titleLabel.text = TextConstants.oldPassword
+        view.titleLabel.text = "  " + TextConstants.oldPassword + "  "
         view.passwordTextField.placeholder = TextConstants.enterYourOldPassword
         view.passwordTextField.returnKeyType = .next
         return view
@@ -38,7 +39,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     
     private let newPasswordView: PasswordView = {
         let view = PasswordView.initFromNib()
-        view.titleLabel.text = TextConstants.newPassword
+        view.titleLabel.text = "  " + TextConstants.newPassword + "  "
         view.passwordTextField.placeholder = TextConstants.enterYourNewPassword
         view.passwordTextField.returnKeyType = .next
         view.isNeedToShowRules = true
@@ -47,7 +48,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     
     private let repeatPasswordView: PasswordView = {
         let view = PasswordView.initFromNib()
-        view.titleLabel.text = TextConstants.repeatPassword
+        view.titleLabel.text = "  " + TextConstants.repeatPassword + "  "
         view.passwordTextField.placeholder = TextConstants.enterYourRepeatPassword
         view.passwordTextField.returnKeyType = .next
         return view
@@ -89,7 +90,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
         oldPasswordView.passwordTextField.delegate = self
         newPasswordView.passwordTextField.delegate = self
         repeatPasswordView.passwordTextField.delegate = self
-        captchaView.captchaAnswerTextField.delegate = self
+        captchaView.captchaAnswerTextField.delegate = self        
         
         addTapGestureToHideKeyboard()
         
@@ -103,6 +104,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
         navigationItem.rightBarButtonItem = doneButton
     }
     
+
     @objc private func onDoneButton(_ button: UIBarButtonItem) {
         updatePassword()
     }
@@ -222,7 +224,8 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
                                                 AppConfigurator.logout()
                                             }
         })
-        router.presentViewController(controller: popupVC)
+        popupVC.open()
+
     }
     
     private func showSuccessPopup() {

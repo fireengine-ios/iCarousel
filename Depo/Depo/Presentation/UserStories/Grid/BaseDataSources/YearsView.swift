@@ -13,19 +13,10 @@ final class YearsView: UIView {
     typealias YearsArray = [(key: Int, value: (monthNumber: Int, lines: Int))]
     
     private var scrollView: UIScrollView?
-    
-    private let handleViewHalfHeight: CGFloat = 32
-    
+
     private var labels = [UILabel]()
     private var labelsOffsetRatio = [CGFloat]()
     private var selfWidth: CGFloat = 85
-    
-    private var cellHeight: CGFloat = 1
-    private var headerHeight: CGFloat = 1
-    private var lineSpaceHeight: CGFloat = 1
-    private var numberOfColumns = 1
-    
-    private var additionalSections: [(name: String, count: Int)] = []
     
     private let lock = NSLock()
     
@@ -90,11 +81,10 @@ final class YearsView: UIView {
         guard let scrollView = scrollView else {
             return
         }
-        
-        frame = CGRect(x: scrollView.frame.width - selfWidth,
-                       y: scrollView.contentOffset.y,
-                       width: selfWidth,
-                       height: scrollView.frame.height)
+
+        frame.origin = CGPoint(x: scrollView.frame.width - selfWidth,
+                               y: scrollView.contentOffset.y + scrollView.adjustedContentInset.top)
+        frame.size = CGSize(width: selfWidth, height: scrollView.frame.height - (scrollView.adjustedContentInset.top + scrollView.adjustedContentInset.bottom))
     }
     
     override func layoutSubviews() {
@@ -103,25 +93,22 @@ final class YearsView: UIView {
         lock.lock()
         defer { lock.unlock() }
         
-        var lastLabelOffset: CGFloat = 0
-        
+
+        let minimumSpacingBetweenLabels: CGFloat = 2
+        let availableSpace: CGFloat = frame.height - minimumSpacingBetweenLabels * (CGFloat(labels.count) - 1) - (labels.last?.frame.height ?? 0)
+
+        var previousLabelOffset: CGFloat = 0
         for (label, offsetRatio) in zip(labels, labelsOffsetRatio) {
-            let offet: CGFloat
-            if offsetRatio == 0 {
-                offet = handleViewHalfHeight - label.frame.height * 0.5
-            } else {
-                /// 0.98 is magic number to correct offset
-                offet = offsetRatio * 0.98 * (frame.height - handleViewHalfHeight) + label.frame.height * 0.5
+            var offset = offsetRatio * availableSpace
+
+            if offset != 0 && offset <= previousLabelOffset {
+                offset = previousLabelOffset + minimumSpacingBetweenLabels
             }
-            
-            if lastLabelOffset > offet {
-                label.isHidden = true
-                continue
-            }
-            label.isHidden = false
-            
-            label.frame = CGRect(x: 0, y: offet, width: label.frame.width, height: label.frame.height)
-            lastLabelOffset = offet + label.frame.height
+
+            label.frame = CGRect(x: 0, y: offset, width: label.frame.width, height: label.frame.height)
+            previousLabelOffset = offset + label.frame.height
+
+            label.isHidden = label.frame.maxY > frame.height
         }
     }
     
@@ -139,139 +126,49 @@ final class YearsView: UIView {
     
     // MARK: - Dates
     
-    func update(by yearMonthValues: [YearMonthTuple]) {
+    func update(by years: [YearHeightTuple]) {
         lock.lock()
         defer { lock.unlock() }
-        
-        if yearMonthValues.isEmpty {
-            return
-        }
-        
-        let yearsArray = getYearsArray(from: yearMonthValues)
-        let newYearsArray = updateLabelsOffsetRatio(from: yearsArray)
-        udpateLabels(from: newYearsArray)
+
+        updateLabelsOffsetRatio(from: years)
+        udpateLabels(from: years)
     }
-    
-    func update(cellHeight: CGFloat, headerHeight: CGFloat, numberOfColumns: Int) {
-        self.cellHeight = cellHeight
-        self.headerHeight = headerHeight
-        self.numberOfColumns = numberOfColumns
-        
-        /// we need to attach labels to the left side of last column
-        selfWidth = cellHeight
-    }
-    
-    func update(additionalSections: [(name: String, count: Int)]) {
-        self.additionalSections = additionalSections
-    }
-    
-    private func getYearsArray(from yearMonthValues: [YearMonthTuple]) -> YearsArray {
-        var yearByMonthNumberOfDays: [Int: [Int: Int]] = [:]
-        
-        for date in yearMonthValues {
-            
-            let year = date.year
-            let month = date.month
-            
-            if yearByMonthNumberOfDays[year] == nil {
-                yearByMonthNumberOfDays[year] = [month: 1]
-            } else {
-                if yearByMonthNumberOfDays[year]![month] == nil {
-                    yearByMonthNumberOfDays[year]![month] = 1 
-                } else {
-                    yearByMonthNumberOfDays[year]![month]! += 1
-                }
-            }
-        }
-        
-        var yearByMonthNumberLinesNumber: [Int: (monthNumber: Int, lines: Int)] = [:]
-        
-        yearByMonthNumberOfDays.forEach { (year, month) in
-            let monthLines = month.reduce(0, { (sum, month) in
-                let daysNumber = month.value
-                let addtionalLine = (daysNumber % numberOfColumns == 0) ? 0 : 1 
-                return sum + daysNumber / numberOfColumns + addtionalLine
-            })
-            
-            yearByMonthNumberLinesNumber[year, default: (0, 0)].lines += monthLines
-            yearByMonthNumberLinesNumber[year, default: (0, 0)].monthNumber += month.keys.count
-        }
-        
-        let yearsArray = yearByMonthNumberLinesNumber.sorted { year1, year2 in
-            year1.key > year2.key
-        }
-        
-        return yearsArray
-    }
-    
-    private func updateLabelsOffsetRatio(from yearsArray: YearsArray) -> YearsArray {
-        
-        let totalLines = yearsArray.reduce(0) { sum, arg in
-            sum + arg.value.lines
-        }
-        
-        let totalMonthes = yearsArray.reduce(0) { sum, arg in
-            sum + arg.value.monthNumber
-        }
-        
-        let additionalSectionsLines = additionalSections.map { section -> Int in
-            let addtionalLine = (section.count % numberOfColumns == 0) ? 0 : 1 
-            return section.count / numberOfColumns + addtionalLine
-        }
-        
-        let totalAdditionalSectionsLines = additionalSectionsLines.reduce(0) { $0 + $1 }
-        
-        let totalSpace = CGFloat(totalLines + totalAdditionalSectionsLines) * cellHeight + headerHeight * CGFloat(totalMonthes + additionalSections.count) + lineSpaceHeight * CGFloat(totalLines + totalMonthes + additionalSections.count + totalAdditionalSectionsLines)
-        
-        var previusOffsetRation: CGFloat = 0
+
+    private func updateLabelsOffsetRatio(from years: [YearHeightTuple]) {
+        let totalSpace = scrollView?.contentSize.height ?? .zero
+
+        var previusOffsetRatio: CGFloat = 0
         labelsOffsetRatio = [0]
         
-        for year in yearsArray {
-            let linesSpaceHeight = lineSpaceHeight * CGFloat(year.value.lines + year.value.monthNumber)
-            let headersHeight = CGFloat(year.value.monthNumber) * headerHeight
-            let cellsHeight = CGFloat(year.value.lines) * cellHeight
-            let yearRatio = (cellsHeight + headersHeight + linesSpaceHeight) / totalSpace
+        for year in years {
+            let yearRatio = year.height / totalSpace
             
-            let yearContentRatio = yearRatio + previusOffsetRation
+            let yearContentRatio = yearRatio + previusOffsetRatio
             
-            previusOffsetRation = yearContentRatio
+            previusOffsetRatio = yearContentRatio
             labelsOffsetRatio.append(yearContentRatio)
         }
-        
-        /// dropLast bcz we put 0 to labelsOffsetRatio
-        for additionalSectionLinesNumber in additionalSectionsLines.dropLast() {
-            let linesSpaceHeight = lineSpaceHeight * CGFloat(additionalSectionLinesNumber + 1) /// +1 for section header
-            let headersHeight = headerHeight
-            let cellsHeight = CGFloat(additionalSectionLinesNumber) * cellHeight
-            let yearRatio = (cellsHeight + headersHeight + linesSpaceHeight) / totalSpace
-            
-            let yearContentRatio = yearRatio + previusOffsetRation
-            
-            previusOffsetRation = yearContentRatio
-            labelsOffsetRatio.append(yearContentRatio)
-        }
-        
-        return yearsArray
     }
     
-    private func udpateLabels(from yearsArray: YearsArray) {
+    private func udpateLabels(from yearsArray: [YearHeightTuple]) {
         DispatchQueue.main.async {
             self.lock.lock()
             
             self.labels.forEach { $0.removeFromSuperview() }
             self.labels.removeAll()
             
-            for year in yearsArray {
-                let label = self.createLabel(for: "\(year.key)")
+            for entry in yearsArray {
+                let labelText: String
+                if let year = entry.year {
+                    labelText = String(year)
+                } else {
+                    labelText = TextConstants.photosVideosViewMissingDatesHeaderText
+                }
+                let label = self.createLabel(for: labelText)
                 self.addSubview(label)
                 self.labels.append(label)
             }
             
-            for section in self.additionalSections {
-                let label = self.createLabel(for: section.name)
-                self.addSubview(label)
-                self.labels.append(label)
-            }
             self.lock.unlock()
         }
     }
@@ -280,9 +177,9 @@ final class YearsView: UIView {
         let label = TextInsetsLabel()
         label.text = text
         label.textAlignment = .center
-        label.font = UIFont.TurkcellSaturaDemFont(size: 12)
-        label.backgroundColor = UIColor.white.withAlphaComponent(0.7)
-        label.textColor = AppColor.lrTealishAndDarkBlue.color
+        label.font = UIFont.appFont(.regular, size: 12)
+        label.backgroundColor = AppColor.secondaryBackground.withAlphaComponent(0.7)
+        label.textColor = AppColor.label.color
         label.textInsets = UIEdgeInsets(top: 3, left: 10, bottom: 3, right: 10)
         label.sizeToFit()
         label.layer.cornerRadius = label.frame.height * 0.5

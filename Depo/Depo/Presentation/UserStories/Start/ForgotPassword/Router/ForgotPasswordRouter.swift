@@ -17,8 +17,9 @@ class ForgotPasswordRouter: ForgotPasswordRouterInput {
                 self?.popBack()
             }
         }
+        
+        vc.open()
 
-        RouterVC().presentViewController(controller: vc)
     }
 
     func proceedToIdentityVerification(service: ResetPasswordService,

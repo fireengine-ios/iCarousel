@@ -37,6 +37,10 @@
 		<string>TurkcellSaturaDem.ttf</string>
 		<string>TurkcellSaturaBol.ttf</string>
 		<string>TurkcellSaturaBolIta.ttf</string>
+		<string>GT-America-LC-Standard-Light.ttf</string>
+		<string>GT-America-LC-Standard-Regular.ttf</string>
+		<string>GT-America-LC-Standard-Medium.ttf</string>
+		<string>GT-America-LC-Standard-Bold.ttf</string>
 	</array>
 	<key>NSExtension</key>
 	<dict>

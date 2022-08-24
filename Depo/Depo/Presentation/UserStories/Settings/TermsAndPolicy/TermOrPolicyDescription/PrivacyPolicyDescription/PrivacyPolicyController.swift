@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 
 final class PrivacyPolicyController: UIViewController {
-    
+
     private let privacyPolicyService: PrivacyPolicyService = factory.resolve()
     
     private let webView: WKWebView = {
@@ -27,6 +27,7 @@ final class PrivacyPolicyController: UIViewController {
         /// there is a bug for iOS 9
         /// https://stackoverflow.com/a/32843700/5893286
         webView.scrollView.decelerationRate = .normal
+        
         return webView
     }()
     
@@ -74,7 +75,6 @@ final class PrivacyPolicyController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationBarWithGradientStyle()
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
@@ -84,7 +84,7 @@ final class PrivacyPolicyController: UIViewController {
     }
     
     private func setupWebView() {
-        let hexColor = AppColor.blackColor.color?.toHexString() ?? "#000000"
+        let hexColor = AppColor.blackColor.color.toHexString()
         privacyPolicyService.getPrivacyPolicy { [weak self] response in
             switch response {
             case .success(let privacyPolicy):

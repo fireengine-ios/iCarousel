@@ -83,9 +83,6 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
 
     //MARK: lifecycle
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
     
     init(response: TwoFactorAuthErrorResponse) {
         self.twoFactorAuthResponse = response
@@ -128,7 +125,6 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     private func configureNavBar() {
         setTitle(withString: TextConstants.twoFactorAuthenticationNavigationTitle)
 
-        navigationBarWithGradientStyle()
     }
     
     private func setReasonDescriptionLabel() {
@@ -254,7 +250,8 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
                                             }
         }
         
-        router.presentViewController(controller: popUp)
+        popUp.open()
+        
     }
     
     //MARK: Action

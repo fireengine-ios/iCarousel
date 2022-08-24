@@ -29,7 +29,6 @@ class LocalAlbumViewController: BaseFilesGreedChildrenViewController {
     }
     
     override func configureNavBarActions(isSelecting: Bool = false) {
-        visibleNavigationBarStyle()
         setNavigationTitle(title: mainTitle)
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: TextConstants.selectFolderCancelButton,

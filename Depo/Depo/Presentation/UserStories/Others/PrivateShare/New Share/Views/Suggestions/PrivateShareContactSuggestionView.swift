@@ -26,8 +26,8 @@ final class PrivateShareContactSuggestionView: UIView, NibInit {
     @IBOutlet private weak var nameLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.font = .TurkcellSaturaMedFont(size: 16)
-            newValue.textColor = .lrBrownishGrey
+            newValue.font = UIFont.appFont(.medium, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
     

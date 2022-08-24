@@ -26,8 +26,8 @@ final class PasswordView: UIView, NibInit {
     
     @IBOutlet weak var titleLabel: UILabel! {
         willSet {
-            newValue.textColor = UIColor.lrTealish
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 16)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.light, size: 14.0)
             newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
         }
@@ -36,7 +36,7 @@ final class PasswordView: UIView, NibInit {
     @IBOutlet weak var errorLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.textOrange
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 15)
+            newValue.font = .appFont(.medium, size: 12.0)
             newValue.isHidden = true
             newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
@@ -46,7 +46,7 @@ final class PasswordView: UIView, NibInit {
     
     @IBOutlet private weak var rulesLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaFont(size: 14)
+            newValue.font = .appFont(.medium, size: 12.0)
             newValue.textColor = ColorConstants.lightText
             newValue.numberOfLines = 0
         }
@@ -54,12 +54,19 @@ final class PasswordView: UIView, NibInit {
     
     @IBOutlet weak var passwordTextField: UITextField! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            newValue.font = .appFont(.regular, size: 16.0)
             newValue.isSecureTextEntry = true
-            newValue.textColor = AppColor.blackColor.color
+            newValue.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: self.frame.size.height))
+            newValue.leftViewMode = .always
+            newValue.rightViewMode = .always
+            newValue.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: self.frame.size.height))
+            newValue.textColor = AppColor.label.color
             newValue.borderStyle = .none
             newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
+            newValue.layer.borderColor = AppColor.darkTextAndLightGray.cgColor
+            newValue.layer.borderWidth = 1.0
+            newValue.layer.cornerRadius = 8
         }
     }
     

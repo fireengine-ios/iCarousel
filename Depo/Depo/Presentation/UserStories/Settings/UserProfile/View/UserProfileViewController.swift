@@ -15,7 +15,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     
     @IBOutlet private weak var stackView: UIStackView! {
         willSet {
-            newValue.spacing = 24
+            newValue.spacing = 16
             newValue.axis = .vertical
             newValue.alignment = .fill
             newValue.distribution = .fill
@@ -23,7 +23,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             newValue.isOpaque = true
             
             let fullnameStackView = UIStackView(arrangedSubviews: [nameView, surnameView])
-            fullnameStackView.spacing = 20
+            fullnameStackView.spacing = 7
             fullnameStackView.axis = .horizontal
             fullnameStackView.alignment = .fill
             fullnameStackView.distribution = .fillEqually
@@ -32,7 +32,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
                 deleteAccountButton,
                 deleteAccountInfoButton
             ])
-            deleteAccountRow.spacing = 18
+            deleteAccountRow.spacing = 12
             deleteAccountRow.axis = .horizontal
 
             let buttonsStackView = UIStackView(arrangedSubviews: [
@@ -43,7 +43,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             buttonsStackView.axis = .vertical
             buttonsStackView.alignment = .leading
             buttonsStackView.distribution = .fill
-            buttonsStackView.spacing = 12
+            buttonsStackView.spacing = 10
 
             let arrangedSubviews = [
                 fullnameStackView,
@@ -56,14 +56,14 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             ]
             arrangedSubviews.forEach { newValue.addArrangedSubview($0) }
 
-            buttonsStackView.setCustomSpacing(50, after: changeSecurityQuestionButton)
+            buttonsStackView.setCustomSpacing(24, after: changeSecurityQuestionButton)
         }
     }
     
     let nameView: ProfileTextEnterView = {
         let newValue = ProfileTextEnterView()
-        newValue.titleLabel.text = TextConstants.userProfileName
-        newValue.subtitleLabel.text = TextConstants.pleaseEnterYourName
+        newValue.titleLabel.text = "  " + TextConstants.userProfileName + "  "
+        newValue.subtitleLabel.text = "  " + TextConstants.pleaseEnterYourName + "  "
         newValue.textField.quickDismissPlaceholder = TextConstants.enterYourName
         newValue.textField.autocorrectionType = .no
         return newValue
@@ -71,8 +71,8 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     
     let surnameView: ProfileTextEnterView = {
         let newValue = ProfileTextEnterView()
-        newValue.titleLabel.text = TextConstants.userProfileSurname
-        newValue.subtitleLabel.text = TextConstants.pleaseEnterYourSurname
+        newValue.titleLabel.text = "  " + TextConstants.userProfileSurname + "  "
+        newValue.subtitleLabel.text = "  " + TextConstants.pleaseEnterYourSurname + "  "
         newValue.textField.quickDismissPlaceholder = TextConstants.enterYourSurname
         newValue.textField.autocorrectionType = .no
         return newValue
@@ -80,7 +80,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     
     let emailView: ProfileEmailFieldView = {
         let newValue = ProfileEmailFieldView()
-        newValue.titleLabel.text = TextConstants.userProfileEmailSubTitle
+        newValue.titleLabel.text = "  " + TextConstants.userProfileEmailSubTitle + "  "
         newValue.textField.quickDismissPlaceholder = TextConstants.enterYourEmailAddress
         return newValue
     }()
@@ -89,8 +89,8 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
 
     private lazy var recoveryEmailView: ProfileEmailFieldView = {
         let newValue = ProfileEmailFieldView()
-        newValue.titleLabel.text = localized(.profileRecoveryMail)
-        newValue.subtitleLabel.text = localized(.profileRecoveryMailDescription)
+        newValue.titleLabel.text = "  " + localized(.profileRecoveryMail) + "  "
+        newValue.subtitleLabel.text = "  " + localized(.profileRecoveryMailDescription) +   "  "
         newValue.textField.quickDismissPlaceholder = localized(.profileRecoveryMailHint)
         newValue.infoButton.isHidden = false
         newValue.infoButton.addTarget(self, action: #selector(recoveryEmailInfoButtonTapped), for: .primaryActionTriggered)
@@ -99,14 +99,14 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     
     private let birthdayDetailView: ProfileBirthdayFieldView = {
         let newValue = ProfileBirthdayFieldView()
-        newValue.title = TextConstants.userProfileBirthday
+        newValue.title = "  " + TextConstants.userProfileBirthday + "  "
         return newValue
     }()
     
     let addressView: ProfileTextEnterView = {
         let newValue = ProfileTextEnterView()
-        newValue.titleLabel.text = TextConstants.profileDetailAddressTitle
-        newValue.subtitleLabel.text = TextConstants.profileDetailAddressSubtitle
+        newValue.titleLabel.text = "  " + TextConstants.profileDetailAddressTitle + "  "
+        newValue.subtitleLabel.text = "  " + TextConstants.profileDetailAddressSubtitle + "  "
         newValue.textField.quickDismissPlaceholder = TextConstants.profileDetailAddressPlaceholder
         newValue.textField.autocorrectionType = .no
         newValue.textField.returnKeyType = .done
@@ -138,27 +138,19 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     }()
 
     lazy var deleteAccountInfoButton: UIButton = {
-        let newValue = UIButton(type: .custom)
-        let infoIcon = UIImage(named: "action_info")?.withRenderingMode(.alwaysTemplate)
+        let newValue = UIButton(type: .system)
+        let infoIcon = UIImage(named: "action_info")
         newValue.setImage(infoIcon, for: .normal)
-        newValue.tintColor = UIColor.lrTealish
+        newValue.tintColor = AppColor.profileTintColor.color
         newValue.addTarget(self, action: #selector(deleteAccountInfoTapped), for: .touchUpInside)
         return newValue
     }()
     
     private lazy var editButton = UIBarButtonItem(title: TextConstants.userProfileEditButton,
-                                                  font: UIFont.TurkcellSaturaRegFont(size: 19),
-                                                  tintColor: .white,
-                                                  accessibilityLabel: TextConstants.userProfileEditButton,
-                                                  style: .plain,
                                                   target: self,
                                                   selector: #selector(onEditButtonAction))
-    
+
     private lazy var readyButton = UIBarButtonItem(title: TextConstants.userProfileDoneButton,
-                                                   font: UIFont.TurkcellSaturaRegFont(size: 19),
-                                                   tintColor: .white,
-                                                   accessibilityLabel: TextConstants.userProfileDoneButton,
-                                                   style: .plain,
                                                    target: self,
                                                    selector: #selector(onReadyButtonAction))
     
@@ -202,7 +194,6 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        navigationBarWithGradientStyle()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -241,6 +232,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
 
     private func setRightBarButton(isEdit: Bool) {
         let button = isEdit ? readyButton : editButton
+        button.setTitleTextAttributes([.font : UIFont.appFont(.medium, size: 16.0), .foregroundColor : AppColor.label.color], for: [])
         button.fixEnabledState()
         navigationItem.setRightBarButton(button, animated: true)
     }
@@ -283,12 +275,14 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     }
 
     @objc private func onEditButtonAction() {
+        phoneView.arrowImageView.image = Image.iconArrowDownActive.image
         setupEditState(true)
         output.tapEditButton()
         saveFields()
     }
     
     @objc private func onReadyButtonAction() {
+        phoneView.arrowImageView.image = Image.iconArrowDownDisable.image
         updateProfile()
     }
     
@@ -366,7 +360,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
                     }
                 })
             
-            self.present(controller, animated: true, completion: nil)
+            controller.open()
             
         } else {
             output.tapReadyButton(name: name,
@@ -383,8 +377,8 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     private func set(title: String, for button: UIButton) {
         let attributedString = NSAttributedString(string: title,
                                                   attributes: [
-                                                    .font: UIFont.TurkcellSaturaDemFont(size: 18),
-                                                    .foregroundColor: UIColor.lrTealish,
+                                                    .font: UIFont.appFont(.regular, size: 14.0),
+                                                    .foregroundColor: AppColor.label.color,
                                                     .underlineStyle: NSUnderlineStyle.single.rawValue])
         button.setAttributedTitle(attributedString, for: .normal)
     }

@@ -82,7 +82,8 @@ extension SettingsPresenter: SettingsViewOutput {
                                                 }
         })
         
-        UIApplication.topController()?.present(controller, animated: false, completion: nil)
+        controller.open()
+
     }
     
     func goToConnectedAccounts() {

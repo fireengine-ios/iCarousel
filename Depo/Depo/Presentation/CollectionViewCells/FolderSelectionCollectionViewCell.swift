@@ -24,7 +24,7 @@ class FolderSelectionCollectionViewCell: BaseCollectionViewCell {
         fileNameLabel.text = wrappedObj.name
         
         if isCellSelectionEnabled {
-            smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForNotSelectedWrapperedObject(fileType: wrappered.fileType)
+            smallContentImageView.image = Image.iconSelectEmpty.image
         } else {
             smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: wrappered.fileType)
         }
@@ -41,9 +41,9 @@ class FolderSelectionCollectionViewCell: BaseCollectionViewCell {
                 smallCellSelectionView.isHidden = !isSelected
                 smallContentImageView.isHidden = isSelected
             }
-            smallContentImageView.setSelection(selection: isSelected, showSelectonBorder: isSelectionActive)
+            smallContentImageView.setSelection(selection: isSelected)
         } else {
-            smallContentImageView.setSelection(selection: false, showSelectonBorder: false)
+            smallContentImageView.setSelection(selection: false)
         }
         
         backgroundColor = ColorConstants.whiteColor

@@ -25,7 +25,10 @@ final class MusicInitializer {
         
         let configurator = MusicConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
-                                               style: .default, tintColor: nil)
+                                               style: .default,
+                                               tintColor: AppColor.tint.color,
+                                               unselectedItemTintColor: AppColor.label.color,
+                                               barTintColor: AppColor.drawerBackground.color)
 
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: .Grid,

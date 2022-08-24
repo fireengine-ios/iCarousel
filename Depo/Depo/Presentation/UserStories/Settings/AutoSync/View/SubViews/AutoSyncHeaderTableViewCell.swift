@@ -13,24 +13,24 @@ final class AutoSyncHeaderTableViewCell: AutoSyncTableViewCell {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.textColor = AppColor.blackColor.color
-            newValue.font = UIFont.TurkcellSaturaFont(size: 18)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 14)
         }
     }
     
     @IBOutlet private weak var optionLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.textColor = ColorConstants.billoGray
-            newValue.font = UIFont.TurkcellSaturaFont(size: 18)
+            newValue.textColor = AppColor.lightText.color
+            newValue.font = .appFont(.regular, size: 14)
         }
     }
     
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.textColor = ColorConstants.billoGray
-            newValue.font = UIFont.TurkcellSaturaFont(size: 15)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 14)
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
         }

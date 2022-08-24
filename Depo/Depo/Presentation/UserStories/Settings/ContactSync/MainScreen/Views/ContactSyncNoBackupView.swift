@@ -16,8 +16,8 @@ final class ContactSyncNoBackupView: UIView, NibInit {
 
     @IBOutlet private weak var title: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 24.0)
-            newValue.textColor = AppColor.marineTwoAndWhite.color
+            newValue.font = .appFont(.medium, size: 24.0)
+            newValue.textColor = AppColor.label.color
             newValue.textAlignment = .center
             newValue.text = TextConstants.contactSyncBackupTitle
             newValue.numberOfLines = 0
@@ -26,8 +26,8 @@ final class ContactSyncNoBackupView: UIView, NibInit {
     }
     @IBOutlet private weak var message: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaFont(size: 16.0)
-            newValue.textColor = ColorConstants.charcoalGrey
+            newValue.font = .appFont(.regular, size: 16.0)
+            newValue.textColor = AppColor.label.color
             newValue.textAlignment = .center
             newValue.text = TextConstants.contactSyncBackupMessage
             newValue.numberOfLines = 0
@@ -40,7 +40,7 @@ final class ContactSyncNoBackupView: UIView, NibInit {
             newValue.insets = UIEdgeInsets(topBottom: 2.0, rightLeft: 48.0)
             newValue.backgroundColor = AppColor.darkBlueAndTealish.color
             newValue.setTitleColor(.white, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 16)
+            newValue.titleLabel?.font = .appFont(.regular, size: 16)
             newValue.setTitle(TextConstants.contactSyncBackupButton, for: .normal)
             newValue.adjustsFontSizeToFitWidth()
         }

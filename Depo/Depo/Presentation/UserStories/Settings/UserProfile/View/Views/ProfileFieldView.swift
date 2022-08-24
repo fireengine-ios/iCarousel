@@ -14,8 +14,9 @@ class ProfileFieldView: UIView {
     private let descriptionLabel: UILabel = {
         let newValue = UILabel()
         
-        newValue.textColor = UIColor.lrTealish
-        newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
+        newValue.textColor = AppColor.label.color
+        newValue.font = .appFont(.light, size: 14.0)
+        newValue.backgroundColor = AppColor.primaryBackground.color
         newValue.isOpaque = true
 
         return newValue
@@ -25,7 +26,7 @@ class ProfileFieldView: UIView {
         let newValue = UITextField()
         
         newValue.textColor = UIColor.black
-        newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+        newValue.font = .appFont(.regular, size: 14.0)
         newValue.autocorrectionType = .yes
         newValue.autocapitalizationType = .words
         
@@ -64,8 +65,8 @@ class ProfileFieldView: UIView {
     }()
     
     let underlineLayer = CALayer()
-    let underlineHeight: CGFloat = 0.5
-    let stackViewTopOffset: CGFloat = 4
+    let underlineHeight: CGFloat = 0
+    let stackViewTopOffset: CGFloat = 14
     
     private var blockFieldIfNeeded: (() -> ())?
     private var stackViewTopConstraint: NSLayoutConstraint?
@@ -110,9 +111,15 @@ class ProfileFieldView: UIView {
         super.layoutSubviews()
         
         underlineLayer.frame = CGRect(x: 0,
-                                      y: frame.size.height - underlineHeight,
+                                      y: frame.size.height - 56,
                                       width: frame.width,
-                                      height: underlineHeight)
+                                      height: 56);
+        
+        underlineLayer.cornerRadius = 8
+        underlineLayer.borderWidth = 1.0
+        underlineLayer.backgroundColor = UIColor.clear.cgColor
+        underlineLayer.borderColor = AppColor.borderColor.cgColor
+
     }
     
     //MARK: Utility Methods (private)
@@ -130,9 +137,8 @@ class ProfileFieldView: UIView {
 
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        descriptionLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        descriptionLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        descriptionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        descriptionLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5).isActive = true
         
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -149,7 +155,7 @@ class ProfileFieldView: UIView {
         
         stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -4).isActive = true
+        stackView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10).isActive = true
         
         stackViewTopConstraint = stackView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor)
         stackViewTopConstraint?.constant = stackViewTopOffset
@@ -158,7 +164,9 @@ class ProfileFieldView: UIView {
     
     private func setupUnderline() {
         layer.addSublayer(underlineLayer)
-        underlineLayer.backgroundColor = ColorConstants.lightGrayColor.cgColor
+        underlineLayer.backgroundColor = AppColor.borderColor.cgColor
+        
+        self.bringSubviewToFront(descriptionLabel)
     }
     
     //MARK: Utility Methods (public)

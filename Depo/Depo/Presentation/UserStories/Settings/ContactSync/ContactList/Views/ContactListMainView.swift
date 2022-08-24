@@ -28,7 +28,7 @@ final class ContactListMainView: UIView, NibInit {
     
     @IBOutlet private weak var shadowView: UIView! {
         willSet {
-            let gradientView = TransparentGradientView(style: .vertical, mainColor: AppColor.primaryBackground.color ?? ColorConstants.lighterGray)
+            let gradientView = TransparentGradientView(style: .vertical, mainColor: AppColor.primaryBackground.color)
             gradientView.frame = newValue.bounds
             newValue.addSubview(gradientView)
             newValue.sendSubviewToBack(gradientView)
@@ -41,7 +41,7 @@ final class ContactListMainView: UIView, NibInit {
             newValue.setTitle(TextConstants.contactListRestore, for: .normal)
             newValue.setTitleColor(.white, for: .normal)
             newValue.backgroundColor = AppColor.darkBlueAndTealish.color
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 16)
+            newValue.titleLabel?.font = .appFont(.medium, size: 16.0)
         }
     }
     

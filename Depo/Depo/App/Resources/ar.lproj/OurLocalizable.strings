@@ -1995,6 +1995,7 @@
 "settings_change_password_apple_warning" = "لتغيير كلمة المرور الخاصة بك ، يجب عليك تسجيل الدخول إلى lifebox باستخدام معرف Apple الخاص بك.";
 "settings_change_password_apple_google_warning" = "لتغيير كلمة المرور الخاصة بك ، تحتاج إلى تسجيل الدخول إلى lifebox باستخدام معرف Google أو معرف Apple الخاص بك.";
 "settings_googe_apple_set_password" = "تعيين كلمة مرور lifebox";
+"settings_googe_apple_set_password" = "تعيين كلمة مرور Lifebox";
 "settings_google_apple_mail_match_error" = "لربط حسابك بـ lifebox ، يجب أن يكون عنوان بريدك الإلكتروني هو نفسه على كل نظام أساسي.";
 "googe_apple_login_invalid_token" = "محاولة تسجيل الدخول غير صحيحة ، يرجى التحقق من بيانات الاعتماد الخاصة بك والمحاولة مرة أخرى.";
 "settings_google_apple_empty_mail_error" = "يجب عليك إضافة عنوان بريد إلكتروني إلى حسابك.";
@@ -2017,6 +2018,8 @@
 "syncing" = "";
 "downloading" = "";
 "ETK_KVKK_Izin_Politikası" = "";
+"syncing" = "";
+"downloading" = "";
 
 /*Free for {3 months}
 then {11,99 TRY/Month}*/

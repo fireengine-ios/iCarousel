@@ -72,7 +72,6 @@ final class PrivateShateAccessListViewController: BaseViewController, NibInit {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationBarWithGradientStyle()
     }
     
     override func viewDidLayoutSubviews() {
@@ -137,7 +136,7 @@ final class PrivateShateAccessListViewController: BaseViewController, NibInit {
                                          secondAction: { vc in
                                             close(controller: vc, result: true)
                                          })
-        router.presentViewController(controller: popup)
+        popup.open()
     }
 }
 

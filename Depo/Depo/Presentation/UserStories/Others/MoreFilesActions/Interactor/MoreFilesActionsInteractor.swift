@@ -150,6 +150,41 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
     }
     
+    func handleShareAction(type: ElementTypes, sourceRect: CGRect?, items: [BaseDataSourceItem]) {
+        guard !items.isEmpty else {
+            return
+        }
+        
+        sharingItems.removeAll()
+        sharingItems.append(contentsOf: items)
+        
+        self.sharingItems = items
+        switch type {
+        case .shareLink:
+            let needSync = items.contains(where: { $0.isLocalItem })
+            if needSync {
+                sync(items: sharingItems, action: { [weak self] in
+                    self?.shareViaLink(sourceRect: sourceRect)
+                }, fail: { errorResponse in
+                    debugLog("sync(items: \(errorResponse.description)")
+                    UIApplication.showErrorAlert(message: errorResponse.description)
+                })
+            } else {
+                shareViaLink(sourceRect: sourceRect)
+            }
+        case .shareOriginal:
+            sync(items: sharingItems, action: { [weak self] in
+                self?.shareOrignalSize(sourceRect: sourceRect)
+                }, fail: { errorResponse in
+                    UIApplication.showErrorAlert(message: errorResponse.description)
+            })
+        case .sharePrivate:
+            privateShare()
+        default:
+            return
+        }
+    }
+    
     func privateShare() {
         guard let items = sharingItems as? [WrapData] else {
             return
@@ -304,9 +339,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         })
     }
     
-    func info(item: [BaseDataSourceItem], isRenameMode: Bool) {
-        self.output?.operationFinished(type: .info)
-        
+    func info(item: [BaseDataSourceItem], isRenameMode: Bool) {        
         guard let item = item.first, let infoController = router.fileInfo(item: item) as? FileInfoViewController else {
             return
         }
@@ -314,7 +347,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         if let topViewController = RouterVC().getViewControllerForPresent() as? PhotoVideoDetailViewInput, !UIDevice.current.orientation.isLandscape {
             topViewController.showBottomDetailView()
         } else {
-            router.pushOnPresentedView(viewController: infoController)
+            router.pushViewController(viewController: infoController)
         }
         
         if isRenameMode {
@@ -588,8 +621,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                          firstAction: cancelHandler,
                                          secondAction: okHandler)
         
-        router.presentViewController(controller: popup, animated: false)
-        
+        popup.open()
     }
     
     func hide(items: [BaseDataSourceItem]) {
@@ -663,8 +695,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                          secondButtonTitle: TextConstants.ok,
                                          firstAction: cancelHandler,
                                          secondAction: okHandler)
-        
-        router.presentViewController(controller: popup, animated: false)
+        popup.open()
+    
     }
     
     func restore(items: [BaseDataSourceItem]) {
@@ -707,7 +739,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                               firstAction: cancelHandler,
                                               secondAction: okHandler)
         
-        router.presentViewController(controller: controller)
+        controller.open()
         router.hideSpiner()
     }
     
@@ -742,7 +774,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                                 vc.close(completion: okHandler)
         })
         
-        router.presentViewController(controller: controller)
+        controller.open()
     }
     
     private func deletePhotosFromAlbum(items: [BaseDataSourceItem], item: Item) {
@@ -787,8 +819,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                               secondAction: { vc in
                                                 vc.close(completion: okHandler)
         })
+        controller.open()
         
-        router.presentViewController(controller: controller)
     }
     
     func move(item: [BaseDataSourceItem], toPath: String) {
@@ -1078,7 +1110,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                                         UIApplication.shared.openSettings()
                                                     }
             })
-            UIApplication.topController()?.present(controller, animated: false, completion: nil)
+            
+            controller.open()
         }
     }
     
@@ -1115,7 +1148,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                          firstAction: cancelHandler,
                                          secondAction: okHandler)
         
-        router.presentViewController(controller: popup, animated: false)
+        popup.open()
     }
     
     func deleteDeviceOriginal(items: [BaseDataSourceItem]) {
@@ -1156,8 +1189,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                                 self?.fileService.endSharing(file: item, success: successAction, fail: failAction)
                                             }
                                          })
-        
-        router.presentViewController(controller: popup, animated: false)
+        popup.open()
     }
     
     func leaveSharing(item: BaseDataSourceItem?) {
@@ -1191,7 +1223,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                             }
                                          })
         
-        router.presentViewController(controller: popup, animated: false)
+        popup.open()
+        
     }
     
     
@@ -1229,7 +1262,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                          firstAction: cancelHandler,
                                          secondAction: okHandler)
         
-        router.presentViewController(controller: popup, animated: false)
+        popup.open()
+
     }
     
     
@@ -1248,7 +1282,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                          secondButtonTitle: TextConstants.ok,
                                          secondAction: okHandler)
         
-        router.presentViewController(controller: popup, animated: false)
+        popup.open()
     }
     
     func emptyTrashBin() {
@@ -1272,7 +1306,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                          firstAction: cancelHandler,
                                          secondAction: okHandler)
         
-        router.presentViewController(controller: popup, animated: false)
+        popup.open()
+        
     }
     
     private func removeAlbums(_ items: [BaseDataSourceItem]) {
@@ -1420,7 +1455,8 @@ extension MoreFilesActionsInteractor {
                                                 self?.output?.successPopupClosed()
                                             }
                                         }
-        router.presentViewController(controller: popup)
+        
+        popup.open()
     }
     
     private func showSnackbar(elementType: ElementTypes, itemsType: DivorseItems? = nil, relatedItems: [BaseDataSourceItem]) {

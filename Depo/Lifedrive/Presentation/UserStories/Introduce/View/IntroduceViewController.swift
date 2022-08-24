@@ -73,7 +73,7 @@ final class IntroduceViewController: ViewController {
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
             newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
-            newValue.layer.borderColor = AppColor.darkBlueAndBilloBlue.color?.cgColor
+            newValue.layer.borderColor = AppColor.darkBlueAndBilloBlue.color.cgColor
             newValue.layer.borderWidth = 1
             newValue.setTitleColor(AppColor.darkBlueAndBilloBlue.color, for: .normal)
             newValue.adjustsFontSizeToFitWidth()
@@ -132,7 +132,7 @@ final class IntroduceViewController: ViewController {
     }
     
     func configurateView() {
-        hidenNavigationBarStyle()
+        navigationBarHidden = true
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
@@ -154,10 +154,6 @@ final class IntroduceViewController: ViewController {
         orLabel.isHidden = signInWithAppleButton.isHidden && signInWithGoogleButton.isHidden
     }
 
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
             return .darkContent

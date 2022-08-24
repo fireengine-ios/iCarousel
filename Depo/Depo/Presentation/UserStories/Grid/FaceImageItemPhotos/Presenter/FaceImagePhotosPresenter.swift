@@ -193,6 +193,15 @@ extension FaceImagePhotosPresenter: FaceImagePhotosViewOutput {
         return nil
     }
     
+    func setCountLabel(with text: String) {
+        guard var unwrapedConfig = topBarConfig else {
+            return
+        }
+        
+        unwrapedConfig.middleText = text
+        view.setupUnderNavBarBar(withConfig: unwrapedConfig)
+    }
+    
 }
 
 // MARK: FaceImagePhotosModuleOutput

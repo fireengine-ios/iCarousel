@@ -25,7 +25,8 @@ class AlbumDetailModuleInitializer: NSObject {
         let viewController = AlbumDetailViewController(nibName: nibName, bundle: nil)
         viewController.album = album
         viewController.status = status
-        viewController.needToShowTabBar = !status.isContained(in: [.hidden, .trashed])
+        // TODO: Facelift: fix when implementing plus button
+//        viewController.needToShowTabBar = !status.isContained(in: [.hidden, .trashed])
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .uploadFromLifebox])
         viewController.cardsContainerView.addPermittedPopUpViewTypes(types: [.sync, .upload])
         viewController.cardsContainerView.isEnable = true

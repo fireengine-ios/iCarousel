@@ -50,7 +50,7 @@ class BaseFilesGreedModuleConfigurator {
         
         if let barConfig = bottomBarConfig {
             let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
-            let botvarBarVC = bottomBarVCmodule.setupModule(config: barConfig, settablePresenter: BottomSelectionTabBarPresenter())
+            let botvarBarVC = bottomBarVCmodule.setupDrawerVariantModule(config: barConfig, settablePresenter: BottomSelectionTabBarPresenter())
             viewController.editingTabBar = botvarBarVC
             presenter?.bottomBarPresenter = bottomBarVCmodule.presenter
             bottomBarVCmodule.presenter?.basePassingPresenter = presenter
@@ -128,7 +128,7 @@ class BaseFilesGreedModuleConfigurator {
         
         if let barConfig = bottomBarConfig {
             let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
-            let botvarBarVC = bottomBarVCmodule.setupModule(config: barConfig, settablePresenter: BottomSelectionTabBarPresenter())
+            let botvarBarVC = bottomBarVCmodule.setupDrawerVariantModule(config: barConfig, settablePresenter: BottomSelectionTabBarPresenter())
             
             viewController.editingTabBar = botvarBarVC
             presenter.bottomBarPresenter = bottomBarVCmodule.presenter

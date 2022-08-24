@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput, GridListTopBarDelegate, CardsContainerViewDelegate {
+class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput, CardsContainerViewDelegate {
 
     var output: BaseFilesGreedViewOutput!
     
@@ -20,7 +20,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     var backAsCancelBarButton: UIBarButtonItem?
     
-    var editingTabBar: BottomSelectionTabBarViewController?
+    var editingTabBar: BottomSelectionTabBarDrawerViewController?
     
     var isFavorites: Bool = false
     
@@ -48,6 +48,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     @IBOutlet weak var floatingHeaderContainerHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet private weak var headerStackView: UIStackView!
     var contentSlider: LBAlbumLikePreviewSliderViewController?
     weak var contentSliderTopY: NSLayoutConstraint?
     weak var contentSliderH: NSLayoutConstraint?
@@ -67,6 +68,12 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     var isRefreshAllowed = true
     
     var status: ItemStatus = .active
+    
+    private lazy var countView: GridListCountView  = {
+        let view = GridListCountView.initFromNib()
+        view.delegate = self
+        return view
+    }()
     
     // MARK: Life cycle
     
@@ -141,13 +148,13 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func configurateNavigationBar() {
-        homePageNavigationBarStyle()
         configureNavBarActions()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         output.viewWillDisappear()
+        countView.removeFromSuperview()
     }
     
     deinit {
@@ -161,10 +168,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] _ in
             self?.output.searchPressed(output: self)
         })
-        let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
-            self?.output.moreActionsPressed(sender: NavigationBarList().more)
-        })
-        let rightActions: [NavBarWithAction] = isSelecting ? [more] : [more, search]
+        let rightActions: [NavBarWithAction] = [search]
         navBarConfigurator.configure(right: rightActions, left: [])
     
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
@@ -205,7 +209,18 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navBarConfigurator.configure(right: rightActions, left: [])
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
-
+    
+    func configureCountView(isShown: Bool) {
+        countView.removeFromSuperview()
+        
+        if isShown {
+            headerStackView.addArrangedSubview(countView)
+        }
+    }
+    
+    func setCountView(selectedItemsCount: Int) {
+        countView.setCountLabel(with: selectedItemsCount)
+    }
     
     @IBAction func onStartCreatingFilesButton() {
         output.onStartCreatingPhotoAndVideos()
@@ -265,18 +280,18 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
         navigationItem.leftBarButtonItem = cancelSelectionButton
         selectedItemsCountChange(with: numberOfItems)
-        navigationBarWithGradientStyle()
         configureNavBarActions(isSelecting: true)
         underNavBarBar?.setSorting(enabled: false)
+        configureCountView(isShown: true)
     }
     
     func stopSelection() {
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
         navigationItem.leftBarButtonItem = nil
         
-        homePageNavigationBarStyle()
         configureNavBarActions(isSelecting: false)
         underNavBarBar?.setSorting(enabled: true)
+        configureCountView(isShown: false)
     }
     
     func setThreeDotsMenu(active isActive: Bool) {
@@ -361,6 +376,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         setTitle(withString: title)
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
         navigationItem.title = title
+        
+        setCountView(selectedItemsCount: count)
     }
     
     static let sliderH: CGFloat = 139
@@ -496,22 +513,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         floatingHeaderContainerHeightConstraint.constant = underNavBarBarHeight
         calculatedUnderNavBarBarHeight = underNavBarBarHeight
     }
-    
-    
-    // MARK: - TopBar/UnderNavBarBar
-    
-    func filterChanged(filter: MoreActionsConfig.MoreActionsFileType) {
-         output.filtersTopBar(cahngedTo: [filter])
-    }
-    
-    func sortingRuleChanged(rule: MoreActionsConfig.SortRullesType) {
-        output.sortedPushedTopBar(with: rule)
-    }
-    
-    func representationChanged(viewType: MoreActionsConfig.ViewType) {
-        let asGrid = viewType == .Grid ? true : false
-        output.viewAppearanceChangedTopBar(asGrid: asGrid)
-    }
 }
 
 // MARK: - ScrollViewIndicator
@@ -541,6 +542,7 @@ extension BaseFilesGreedViewController {
     }
 }
 
+// MARK: - PrivateShareSliderFilesCollectionManagerDelegate
 extension BaseFilesGreedViewController: PrivateShareSliderFilesCollectionManagerDelegate {
     func showAll() {
         output.openPrivateShareFiles()
@@ -556,5 +558,33 @@ extension BaseFilesGreedViewController: PrivateShareSliderFilesCollectionManager
     
     func completeAsyncOperation() {
         hideSpinner()
+    }
+}
+
+// MARK: - GridListTopBarDelegate
+extension BaseFilesGreedViewController: GridListTopBarDelegate {
+    func onMoreButton() {
+        output.moreActionsPressed(sender: self)
+    }
+    
+    func filterChanged(filter: MoreActionsConfig.MoreActionsFileType) {
+         output.filtersTopBar(cahngedTo: [filter])
+    }
+    
+    func sortingRuleChanged(rule: MoreActionsConfig.SortRullesType) {
+        output.sortedPushedTopBar(with: rule)
+    }
+    
+    func representationChanged(viewType: MoreActionsConfig.ViewType) {
+        let asGrid = viewType == .Grid ? true : false
+        output.viewAppearanceChangedTopBar(asGrid: asGrid)
+    }
+}
+
+// MARK: - GridListTopBarDelegate
+extension BaseFilesGreedViewController: GridListCountViewDelegate {
+    func cancelSelection() {
+        output.onCancelSelection()
+        configureCountView(isShown: false)
     }
 }

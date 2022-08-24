@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 typealias  ContainsAction = (_ sender: UIBarButtonItem) -> Void
@@ -34,13 +35,12 @@ class NavigationBarList {
                                    style: .plain,
                                    target: nil,
                                    action: nil)
-        
         settings.accessibilityLabel = TextConstants.accessibilitySettings
-        
+
         search = UIBarButtonItem(image: UIImage(named: TextConstants.searchBtnImgName),
                                  style: .plain,
                                  target: nil,
-                                 action: nil )
+                                 action: nil)
         search.accessibilityLabel = TextConstants.accessibilitySearch
 
         more = UIBarButtonItem(image: UIImage(named: TextConstants.moreBtnImgName),
@@ -55,9 +55,10 @@ class NavigationBarList {
                                  action: nil)
         delete.accessibilityLabel = TextConstants.accessibilityDelete
         
-        showHide = UIBarButtonItem.init(title: TextConstants.showHideBtnTitleName,
-                                        target: nil,
-                                        selector: nil)
+        showHide = UIBarButtonItem(image: Image.iconHideSelect.image,
+                                   style: .plain,
+                                   target: nil,
+                                   action: nil)
         showHide.accessibilityLabel = TextConstants.accessibilityshowHide
         
         done = UIBarButtonItem(title: TextConstants.faceImageDone,
@@ -81,9 +82,8 @@ class NavigationBarList {
                                action: nil)
         newAlbum.setBackgroundImage(UIImage(named: TextConstants.newAlbumBtnImgName), for: .normal, barMetrics: .default)
         newAlbum.accessibilityLabel = TextConstants.createAlbum
-        
-        
-        // upload 
+
+        // upload
         // create
         // add
         // edit
@@ -112,10 +112,19 @@ class NavigationBarConfigurator {
     var rightItems: [UIBarButtonItem]? {
         return self.right?.compactMap { $0.navItem }
     }
-    
+
+    var leftItems: [UIBarButtonItem]? {
+        return self.left?.compactMap { $0.navItem }
+    }
+
     func configure(right: [NavBarWithAction]?, left: [NavBarWithAction]?) {
         self.right = right
         self.right?.forEach {
+            setActionAndTarget(navBarAction: $0)
+        }
+
+        self.left = left
+        self.left?.forEach {
             setActionAndTarget(navBarAction: $0)
         }
     }
@@ -138,12 +147,11 @@ class NavigationBarConfigurator {
     
     @objc func baseAction(sender: UIBarButtonItem) {
 
-        var list: [NavBarWithAction]?
-        list = right
-        
-        if let btn = list?.filter({ $0.navItem == sender }) {
-            btn.first?.action(sender)
+        if let button = right?.first(where: { $0.navItem == sender }) {
+            button.action(sender)
         }
-
+        else if let button = left?.first(where: { $0.navItem == sender }) {
+            button.action(sender)
+        }
     }
 }
