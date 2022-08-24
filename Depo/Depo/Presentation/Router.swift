@@ -1427,4 +1427,15 @@ class RouterVC: NSObject {
         
         return controller
     }
+    
+    func bottomInfoBanner(text: String) -> BottomInfoBanner {
+        let controller = BottomInfoBanner(infoText: text)
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        
+        return controller
+    }
+    
+    
 }

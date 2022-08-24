@@ -80,11 +80,13 @@ enum AppColor {
     case forYouButton
     case forYouFaceImageBackground
     
-    // MARK: Profile
+    // MARK: Settings
     case borderColor
     case profileInfoOrange
     case arrowDownOpenColor
     case profileTintColor
+    case settingsBottomInfo
+
     
     //MARK: Landing
     case landingGradientFinish
