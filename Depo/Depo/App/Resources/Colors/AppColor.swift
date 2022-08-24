@@ -88,6 +88,13 @@ enum AppColor {
     case settingsBottomInfo
 
     
+    //MARK: Landing
+    case landingGradientFinish
+    case landingGradientStart
+    case appleGoogleLoginLabel
+
+    // MARK: Login
+    case loginAlertView
 
     
     //TODO: Facelift: Uncomment below

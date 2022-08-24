@@ -13212,7 +13212,6 @@
 			isa = PBXGroup;
 			children = (
 				17589F622275E33800A5DB37 /* ProfilePasswordEnterView.swift */,
-				E797AF7D28A51FD900F0B200 /* BorderedPasswordEnterView.swift */,
 				17589F632275E33800A5DB37 /* ErrorBannerView.swift */,
 				4B34A3F82334CF8C00C9B12B /* SupportFormBannerView.swift */,
 				F02F6A9D269C16C000A64ED8 /* PasswordRulesView.swift */,
@@ -13223,6 +13222,7 @@
 		17589F6A2276336700A5DB37 /* SupportFormController */ = {
 			isa = PBXGroup;
 			children = (
+				E797AF7D28A51FD900F0B200 /* BorderedPasswordEnterView.swift */,
 				8C26009022919DCB0063E913 /* ProfileTextViewEnterView.swift */,
 				17589F6B2276336700A5DB37 /* ProfilePhoneEnterView.swift */,
 				17589F6C2276336700A5DB37 /* PhoneCodeInputView.swift */,
