@@ -41,7 +41,7 @@
                     <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ufk-2Q-UcS">
-                            <rect key="frame" x="0.0" y="30" width="414" height="896"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="382" placeholderIntrinsicHeight="178" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IUh-15-NB0">
                                     <rect key="frame" x="16" y="0.0" width="382" height="230"/>
@@ -194,7 +194,7 @@
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="ufk-2Q-UcS" secondAttribute="trailing" id="GSy-AK-CpA"/>
-                        <constraint firstItem="ufk-2Q-UcS" firstAttribute="top" secondItem="G71-fS-dIW" secondAttribute="top" constant="30" id="gYZ-Hj-n2Z" userLabel="View.top = top"/>
+                        <constraint firstItem="ufk-2Q-UcS" firstAttribute="top" secondItem="G71-fS-dIW" secondAttribute="top" id="gYZ-Hj-n2Z" userLabel="View.top = top"/>
                         <constraint firstItem="ufk-2Q-UcS" firstAttribute="leading" secondItem="G71-fS-dIW" secondAttribute="leading" id="oHM-6k-stA"/>
                         <constraint firstAttribute="bottom" secondItem="ufk-2Q-UcS" secondAttribute="bottom" id="zsd-06-Dit"/>
                     </constraints>

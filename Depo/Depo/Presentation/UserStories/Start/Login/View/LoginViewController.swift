@@ -94,16 +94,16 @@ final class LoginViewController: ViewController {
             newValue.textField.autocorrectionType = .no
             newValue.textField.quickDismissPlaceholder = TextConstants.loginEmailOrPhonePlaceholder
             newValue.titleLabel.text = "  " + TextConstants.loginCellTitleEmail + "  "
+            newValue.textField.textColor = AppColor.label.color
         }
     }
     
     @IBOutlet private weak var passwordEnterView: BorderedPasswordEnterView! {
         willSet {
             newValue.textField.enablesReturnKeyAutomatically = true
-
             newValue.textField.quickDismissPlaceholder = TextConstants.loginPasswordPlaceholder
-
             newValue.titleLabel.text = "  " + TextConstants.loginCellTitlePassword + "  "
+            newValue.textField.textColor = AppColor.label.color
         }
     }
     
