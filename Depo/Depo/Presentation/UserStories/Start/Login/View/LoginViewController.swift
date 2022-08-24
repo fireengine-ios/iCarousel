@@ -15,7 +15,7 @@ final class LoginViewController: ViewController {
     //MARK: IBOutlets
     @IBOutlet private weak var alertsStackView: UIStackView! {
         willSet {
-            newValue.spacing = 16
+            newValue.spacing = 0
             newValue.alignment = .fill
             newValue.axis = .vertical
             newValue.distribution = .fill
@@ -28,6 +28,8 @@ final class LoginViewController: ViewController {
             newValue.alignment = .fill
             newValue.axis = .vertical
             newValue.distribution = .fill
+            newValue.isOpaque = true
+            newValue.backgroundColor = AppColor.primaryBackground.color
         }
     }
 
@@ -92,16 +94,16 @@ final class LoginViewController: ViewController {
             newValue.textField.autocorrectionType = .no
             newValue.textField.quickDismissPlaceholder = TextConstants.loginEmailOrPhonePlaceholder
             newValue.titleLabel.text = "  " + TextConstants.loginCellTitleEmail + "  "
+            newValue.textField.textColor = AppColor.label.color
         }
     }
     
     @IBOutlet private weak var passwordEnterView: BorderedPasswordEnterView! {
         willSet {
             newValue.textField.enablesReturnKeyAutomatically = true
-
             newValue.textField.quickDismissPlaceholder = TextConstants.loginPasswordPlaceholder
-
             newValue.titleLabel.text = "  " + TextConstants.loginCellTitlePassword + "  "
+            newValue.textField.textColor = AppColor.label.color
         }
     }
     
@@ -116,12 +118,19 @@ final class LoginViewController: ViewController {
     @IBOutlet private weak var errorView: ErrorBannerView! {
         willSet {
             newValue.isHidden = true
+            newValue.backgroundColor = .clear
+            newValue.layer.cornerRadius = 8
+            newValue.layer.borderWidth = 1
+            newValue.layer.borderColor = AppColor.profileInfoOrange.cgColor
         }
     }
     
     @IBOutlet private weak var bannerView: SupportFormBannerView! {
         willSet {
             newValue.isHidden = true
+            newValue.layer.cornerRadius = 8
+            newValue.layer.borderColor = AppColor.borderColor.cgColor
+            newValue.backgroundColor = AppColor.loginAlertView.color
             newValue.delegate = self
             newValue.screenType = .login
         }
@@ -148,6 +157,11 @@ final class LoginViewController: ViewController {
         #endif
         
         setGoogleUserIfNeeded()
+        
+        errorView.translatesAutoresizingMaskIntoConstraints = false
+        errorView.topAnchor.constraint(equalTo: bannerView.bottomAnchor, constant: -10).activate()
+        //errorView.heightAnchor.constraint(equalToConstant: 46).activate()
+        alertsStackView.sendSubviewToBack(errorView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
