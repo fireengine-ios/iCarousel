@@ -85,6 +85,11 @@ enum AppColor {
     case profileInfoOrange
     case arrowDownOpenColor
     case profileTintColor
+    
+    //MARK: Landing
+    case landingGradientFinish
+    case landingGradientStart
+    case appleGoogleLoginLabel
 
     // MARK: Login
     case loginAlertView

@@ -25,15 +25,17 @@ extension UIView {
         layer.masksToBounds = false
     }
     
-    func addGradient(firstColor : CGColor, secondColor: CGColor, startPoint: CGPoint, endPoint: CGPoint) {
+    func addGradient(firstColor : CGColor, secondColor: CGColor, startPoint: CGPoint? = nil, endPoint: CGPoint? = nil) {
+        self.layer.sublayers = self.layer.sublayers?.filter { theLayer in
+            !theLayer.isKind(of: CAGradientLayer.classForCoder())
+        }
         
         let gradient = CAGradientLayer()
         gradient.frame = self.bounds
         gradient.colors = [firstColor, secondColor]
         gradient.locations = [0.0 , 1.0]
-        gradient.startPoint = startPoint
-        gradient.endPoint = endPoint
-
+        gradient.startPoint = startPoint ?? CGPoint(x: 0.5, y: 0.0)
+        gradient.endPoint = endPoint ??  CGPoint(x: 0.5, y: 1.0)
         self.layer.insertSublayer(gradient, at: 0)
         
     }

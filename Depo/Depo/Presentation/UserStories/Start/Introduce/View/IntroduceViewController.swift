@@ -20,11 +20,11 @@ class IntroduceViewController: ViewController {
     var user: AppleGoogleUser?
     
     // MARK: IBOutlets
-    @IBOutlet private weak var welcomeViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var welcomeViewTopConstraint: NSLayoutConstraint!
     @IBOutlet private weak var startUsingLifeBoxButton: RoundedInsetsButton! {
         willSet {
             newValue.setTitle(TextConstants.itroViewGoToRegisterButtonText, for: .normal)
-            newValue.titleLabel?.font = UIFont.appFont(.medium, size: 16.0)
+            newValue.titleLabel?.font = UIFont.appFont(.medium, size: 14.0)
             newValue.backgroundColor = .clear
             newValue.setTitleColor(AppColor.label.color, for: .normal)
             newValue.insets = UIEdgeInsets(topBottom: 0, rightLeft: 12)
@@ -75,9 +75,9 @@ class IntroduceViewController: ViewController {
             newValue.layer.borderColor = AppColor.label.cgColor
             newValue.layer.cornerRadius = newValue.frame.height * 0.5
             newValue.setTitle(localized(.connectWithGoogle), for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
+            newValue.titleLabel?.font = .appFont(.regular, size: 14)
             newValue.backgroundColor = .white
-            newValue.setTitleColor(ColorConstants.billoGray, for: .normal)
+            newValue.setTitleColor(AppColor.appleGoogleLoginLabel.color, for: .normal)
             newValue.adjustsFontSizeToFitWidth()
             newValue.setImage(UIImage(named: "googleLogo"), for: .normal)
             newValue.moveImageLeftTextCenter()
@@ -90,9 +90,9 @@ class IntroduceViewController: ViewController {
             newValue.layer.borderColor = AppColor.label.cgColor
             newValue.layer.cornerRadius = newValue.frame.height * 0.5
             newValue.setTitle(localized(.connectWithApple), for: .normal)
-            newValue.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            newValue.titleLabel?.font = .appFont(.regular, size: 14)
             newValue.backgroundColor = .white
-            newValue.setTitleColor(UIColor.black, for: .normal)
+            newValue.setTitleColor(AppColor.appleGoogleLoginLabel.color, for: .normal)
             newValue.adjustsFontSizeToFitWidth()
             newValue.setImage(UIImage(named: "appleLogo"), for: .normal)
             newValue.moveImageLeftTextCenter()
@@ -129,8 +129,11 @@ class IntroduceViewController: ViewController {
         }
     }
     
-    @IBOutlet private weak var gradientView: UIView!
-    
+    @IBOutlet private weak var gradientView: UIView! {
+        willSet {
+            newValue.alpha = 0.15
+        }
+    }
     
     // MARK: Lifecycle
     override func viewDidLoad() {
@@ -155,6 +158,8 @@ class IntroduceViewController: ViewController {
     func configurateView() {
         navigationBarHidden = true
         backButtonForNavigationItem(title: TextConstants.backTitle)
+        gradientView.addGradient(firstColor: AppColor.landingGradientStart.cgColor,
+                                 secondColor: AppColor.landingGradientFinish.cgColor)
     }
     
     @objc private func handleRemoteConfig() {
@@ -176,9 +181,15 @@ class IntroduceViewController: ViewController {
 
         if !signInWithAppleButton.isHidden && !signInWithGoogleButton.isHidden {
             if Device.isIphoneSmall {
-                welcomeViewHeightConstraint.constant = 174
+                welcomeViewTopConstraint.constant = 30
             }
         }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        gradientView.addGradient(firstColor: AppColor.landingGradientStart.cgColor,
+                                 secondColor: AppColor.landingGradientFinish.cgColor)
     }
     
     // MARK: Actions
