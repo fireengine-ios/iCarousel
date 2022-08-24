@@ -23,7 +23,7 @@ class PaycellCampaignViewController: BaseViewController {
     @IBOutlet private weak var copyLinkView: UIView! {
         willSet {
             newValue.layer.borderWidth = 1
-            newValue.layer.borderColor = AppColor.darkBlueAndTealish.color?.cgColor
+            newValue.layer.borderColor = AppColor.darkBlueAndTealish.color.cgColor
         }
     }
     
@@ -176,9 +176,9 @@ class PaycellCampaignViewController: BaseViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        shareLinkButton.setBackgroundColor(AppColor.darkBlueAndTealish.color ?? ColorConstants.navy, for: .normal)
-        shareLinkButton.setBackgroundColor(AppColor.darkBlueAndTealish.color ?? ColorConstants.navy, for: .highlighted)
-        copyLinkView.layer.borderColor = AppColor.darkBlueAndTealish.color?.cgColor
+        shareLinkButton.setBackgroundColor(AppColor.darkBlueAndTealish.color , for: .normal)
+        shareLinkButton.setBackgroundColor(AppColor.darkBlueAndTealish.color , for: .highlighted)
+        copyLinkView.layer.borderColor = AppColor.darkBlueAndTealish.color.cgColor
     }
     
     //MARK: -Helpers
@@ -261,7 +261,6 @@ class PaycellCampaignViewController: BaseViewController {
     }
     
     private func configureUI() {
-        navigationBarWithGradientStyle(isHidden: false, hideLogo: true)
         setTitle(withString: localized(.paycellCampaignTitle))
         addGradient()
     }
