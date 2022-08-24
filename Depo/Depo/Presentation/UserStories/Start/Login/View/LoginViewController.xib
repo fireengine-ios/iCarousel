@@ -44,32 +44,19 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="382" placeholderIntrinsicHeight="178" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IUh-15-NB0">
-                                    <rect key="frame" x="16" y="0.0" width="382" height="230"/>
+                                    <rect key="frame" x="16" y="0.0" width="382" height="214"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCN-Fn-UUh">
-                                            <rect key="frame" x="0.0" y="0.0" width="382" height="0.0"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" id="SlY-z7-gFl"/>
-                                            </constraints>
-                                        </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rnZ-Cc-viq" customClass="SupportFormBannerView" customModule="Billo" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="382" height="52"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="382" height="36"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="751" text="If you are having difficulty signing up, contact us for support." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fj0-ye-wAx">
-                                                    <rect key="frame" x="12" y="10" width="289.5" height="32"/>
+                                                    <rect key="frame" x="12" y="10" width="366" height="16"/>
                                                     <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="question_symbol" translatesAutoresizingMaskIntoConstraints="NO" id="GNs-Rv-VwL">
-                                                    <rect key="frame" x="309.5" y="6" width="26.5" height="47"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="GNs-Rv-VwL" secondAttribute="height" multiplier="31:55" id="uf0-m1-vXO"/>
-                                                    </constraints>
-                                                </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="chevronLeft" translatesAutoresizingMaskIntoConstraints="NO" id="AZt-SW-P39">
-                                                    <rect key="frame" x="346" y="21.5" width="16" height="9"/>
+                                                    <rect key="frame" x="346" y="13.5" width="16" height="9"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="9" id="9zW-9Q-pLq"/>
                                                     </constraints>
@@ -80,12 +67,8 @@
                                                 <constraint firstItem="fj0-ye-wAx" firstAttribute="leading" secondItem="rnZ-Cc-viq" secondAttribute="leading" constant="12" id="3RP-UY-BLe"/>
                                                 <constraint firstAttribute="trailing" secondItem="AZt-SW-P39" secondAttribute="trailing" constant="20" id="5w5-1u-kpY"/>
                                                 <constraint firstItem="fj0-ye-wAx" firstAttribute="top" secondItem="rnZ-Cc-viq" secondAttribute="top" constant="10" id="6Hj-vO-QJx"/>
-                                                <constraint firstItem="GNs-Rv-VwL" firstAttribute="height" secondItem="rnZ-Cc-viq" secondAttribute="height" multiplier="0.9" id="FPh-bS-GJC"/>
-                                                <constraint firstAttribute="bottom" secondItem="GNs-Rv-VwL" secondAttribute="bottom" constant="-1" id="K5b-F6-bWh"/>
                                                 <constraint firstAttribute="bottom" secondItem="fj0-ye-wAx" secondAttribute="bottom" constant="10" id="M3M-1k-cZG"/>
                                                 <constraint firstItem="AZt-SW-P39" firstAttribute="centerY" secondItem="rnZ-Cc-viq" secondAttribute="centerY" id="U2O-wb-aC3"/>
-                                                <constraint firstItem="GNs-Rv-VwL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fj0-ye-wAx" secondAttribute="trailing" constant="8" id="puC-bS-kyH"/>
-                                                <constraint firstItem="AZt-SW-P39" firstAttribute="leading" secondItem="GNs-Rv-VwL" secondAttribute="trailing" constant="10" id="qBc-fJ-Jgv"/>
                                             </constraints>
                                             <connections>
                                                 <outlet property="arrowImageView" destination="AZt-SW-P39" id="KpP-1d-hyw"/>
@@ -93,13 +76,13 @@
                                             </connections>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSC-e7-bAJ" customClass="ErrorBannerView" customModule="Billo" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="52" width="382" height="178"/>
+                                            <rect key="frame" x="0.0" y="36" width="382" height="178"/>
                                             <color key="backgroundColor" name="primaryBackground"/>
                                         </view>
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="3pB-Lp-wU7" userLabel="FieldsStackView">
-                                    <rect key="frame" x="20" y="246" width="374" height="356"/>
+                                    <rect key="frame" x="20" y="230" width="374" height="356"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bFr-On-oXs" userLabel="Spacing">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="3"/>
@@ -168,7 +151,7 @@
                                     </subviews>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhc-pL-wnH" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="52" y="652" width="310.5" height="44"/>
+                                    <rect key="frame" x="52" y="636" width="310.5" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="G6T-7F-LuP"/>
                                     </constraints>
@@ -219,7 +202,6 @@
         <image name="checkboxSelected" width="26" height="26"/>
         <image name="chevronLeft" width="16" height="9"/>
         <image name="iconSelectCheck" width="24" height="24"/>
-        <image name="question_symbol" width="31" height="55"/>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

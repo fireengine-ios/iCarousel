@@ -53,7 +53,7 @@ final class SupportFormBannerView: UIView, NibInit {
     
     var type: SupportBannerViewType? {
         didSet {
-            setupGradient()
+            //setupGradient()
             setupArrowImageView()
             messageLabel.text = type?.text
         }
@@ -119,19 +119,22 @@ final class SupportFormBannerView: UIView, NibInit {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
         addGestureRecognizer(tapGesture)
         
-        layer.cornerRadius = 4
+        layer.cornerRadius = 8
+        backgroundColor = AppColor.loginAlertView.color
+        layer.borderColor = AppColor.borderColor.cgColor
+        messageLabel.textColor = AppColor.label.color
     }
 
-    private func setupGradient() {
-        guard let gradientLayer = layer as? CAGradientLayer else {
-            assertionFailure()
-            return
-        }
-
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
-        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
-        gradientLayer.colors = type?.gradientColors
-    }
+//    private func setupGradient() {
+//        guard let gradientLayer = layer as? CAGradientLayer else {
+//            assertionFailure()
+//            return
+//        }
+//
+//        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+//        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+//        gradientLayer.colors = type?.gradientColors
+//    }
     
     private func setupArrowImageView() {
         if type == .faq {

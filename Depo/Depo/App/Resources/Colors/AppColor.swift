@@ -86,7 +86,8 @@ enum AppColor {
     case arrowDownOpenColor
     case profileTintColor
 
-    
+    // MARK: Login
+    case loginAlertView
 
     
     //TODO: Facelift: Uncomment below

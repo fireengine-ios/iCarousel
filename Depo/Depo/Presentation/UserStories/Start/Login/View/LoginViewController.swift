@@ -15,7 +15,7 @@ final class LoginViewController: ViewController {
     //MARK: IBOutlets
     @IBOutlet private weak var alertsStackView: UIStackView! {
         willSet {
-            newValue.spacing = 16
+            newValue.spacing = 0
             newValue.alignment = .fill
             newValue.axis = .vertical
             newValue.distribution = .fill
@@ -118,6 +118,10 @@ final class LoginViewController: ViewController {
     @IBOutlet private weak var errorView: ErrorBannerView! {
         willSet {
             newValue.isHidden = true
+            newValue.backgroundColor = .clear
+            newValue.layer.cornerRadius = 8
+            newValue.layer.borderWidth = 1
+            newValue.layer.borderColor = AppColor.profileInfoOrange.cgColor
         }
     }
     
@@ -150,6 +154,11 @@ final class LoginViewController: ViewController {
         #endif
         
         setGoogleUserIfNeeded()
+        
+        errorView.translatesAutoresizingMaskIntoConstraints = false
+        errorView.topAnchor.constraint(equalTo: bannerView.bottomAnchor, constant: -10).activate()
+        //errorView.heightAnchor.constraint(equalToConstant: 46).activate()
+        alertsStackView.sendSubviewToBack(errorView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
