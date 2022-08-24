@@ -128,6 +128,9 @@ final class LoginViewController: ViewController {
     @IBOutlet private weak var bannerView: SupportFormBannerView! {
         willSet {
             newValue.isHidden = true
+            newValue.layer.cornerRadius = 8
+            newValue.layer.borderColor = AppColor.borderColor.cgColor
+            newValue.backgroundColor = AppColor.loginAlertView.color
             newValue.delegate = self
             newValue.screenType = .login
         }
