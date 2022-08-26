@@ -832,13 +832,13 @@ enum ElementTypes {
         case .musicDetails:
             return nil
         case .shareAlbum:
-            return nil
+            return Image.iconShare.image
         case .makeAlbumCover:
             return nil
         case .makePersonThumbnail:
             return nil
         case .albumDetails:
-            return nil
+            return Image.iconAlbum.image
         case .instaPick:
             return Image.iconPrint.image
         case .endSharing:

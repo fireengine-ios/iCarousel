@@ -86,7 +86,6 @@ class ForYouTableViewCell: UITableViewCell {
     func configure(with type: ForYouViewEnum) {
         currentView = type
         titleLabel.text = type.title
-        seeAllButton.isHidden = type == .people
         addSpinner()
         
         switch type {

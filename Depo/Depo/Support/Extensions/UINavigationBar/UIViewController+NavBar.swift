@@ -26,8 +26,10 @@ extension UIViewController {
             }
             #endif
         } else {
-            navigationItem.titleView = nil
-            navigationItem.title = title
+            DispatchQueue.main.async {
+                self.navigationItem.titleView = nil
+                self.navigationItem.title = title
+            }
         }
     }
 }
