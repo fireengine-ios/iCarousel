@@ -1,7 +1,7 @@
 import UIKit
 
 /// used KeyboardLayoutConstraint as bottom scrollView constraint
-final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit {
+final class ChangePasswordController: BaseViewController, KeyboardHandler, NibInit {
     
     // MARK: - Properties
     
