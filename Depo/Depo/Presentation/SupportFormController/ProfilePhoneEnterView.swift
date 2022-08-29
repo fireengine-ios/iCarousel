@@ -74,7 +74,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             newValue.textColor = AppColor.borderColor.color
             newValue.font = .appFont(.regular, size: 14.0)
             newValue.borderStyle = .none
-            newValue.backgroundColor = AppColor.primaryBackground.color
+            newValue.backgroundColor = .clear
             newValue.isOpaque = true
             
             /// removes suggestions bar above keyboard
@@ -127,7 +127,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             newValue.textColor = AppColor.borderColor.color
             newValue.font = .appFont(.regular, size: 14.0)
             newValue.borderStyle = .none
-            newValue.backgroundColor = AppColor.primaryBackground.color
+            newValue.backgroundColor = .clear
             newValue.isOpaque = true
             newValue.quickDismissPlaceholder = TextConstants.profilePhoneNumberPlaceholder
             
