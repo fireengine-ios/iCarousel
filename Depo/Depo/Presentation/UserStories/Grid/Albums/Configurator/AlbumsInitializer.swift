@@ -22,7 +22,9 @@ class AlbumsModuleInitializer: NSObject {
         viewController.cardsContainerView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download] + ElementTypes.activeState,
-                                               style: .default, tintColor: nil)
+                                               style: .default, tintColor: AppColor.tint.color,
+                                               unselectedItemTintColor: AppColor.label.color,
+                                               barTintColor: AppColor.drawerBackground.color)
         
         let presenter = AlbumsPresenter()
         

@@ -62,7 +62,7 @@ final class FaceImagePhotosConfigurator {
                                                style: .default,
                                                tintColor: AppColor.tint.color,
                                                unselectedItemTintColor: AppColor.label.color,
-                                               barTintColor: AppColor.background.color)
+                                               barTintColor: AppColor.drawerBackground.color)
         let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
         let bottomBarVC = bottomBarVCmodule.setupDrawerVariantModule(config: bottomBarConfig, settablePresenter: BottomSelectionTabBarPresenter())
 
