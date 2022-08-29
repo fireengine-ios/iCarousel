@@ -43,6 +43,8 @@ class BaseViewController: ViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         customTabBarController?.setBottomBarsHidden(!needToShowTabBar)
+        navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: "", style: .plain, target: nil, action: nil)
     }
 
     deinit {

@@ -10,9 +10,21 @@ import UIKit
 
 final class AlbumCellView: UIView {
     
-    @IBOutlet weak private var imageView: LoadingImageView!
     @IBOutlet weak private var selectionIcon: UIImageView!
-    @IBOutlet weak private var titleLabel: UILabel!
+    @IBOutlet weak private var imageView: LoadingImageView! {
+        willSet {
+            newValue.layer.cornerRadius = 5
+        }
+    }
+    
+    @IBOutlet weak private var titleLabel: UILabel!{
+        willSet {
+            newValue.textAlignment = .left
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.medium, size: 12)
+        }
+    }
+    
     @IBOutlet weak private var shadowView: UIView! {
         willSet {
             newValue.layer.shadowColor = UIColor.lightGray.cgColor
@@ -23,6 +35,7 @@ final class AlbumCellView: UIView {
             newValue.layer.cornerRadius = 2
         }
     }
+    
     @IBOutlet weak private var imageBorderView: UIView! {
         willSet {
             newValue.layer.cornerRadius = 2
@@ -36,6 +49,7 @@ final class AlbumCellView: UIView {
     func setupStyle(with displayType: BaseDataSourceDisplayingType) {
         switch displayType {
         case .greed:
+            shadowView.isHidden = true
             titleLabel.textColor = AppColor.blackColor.color
             titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
         case .list:
@@ -56,12 +70,11 @@ final class AlbumCellView: UIView {
         
         layoutIfNeeded()
         
-        setGradient(isEnabled: album.isTBMatik)
     }
     
     func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         selectionIcon.isHidden = !isSelectionActive
-        selectionIcon.image = UIImage(named: isSelected ? "selected" : "notSelected")
+        selectionIcon.image = isSelected ? Image.iconCheckmarkSelected.image : Image.iconCheckmarkNotSelected.image
         imageView.set(borderIsVisible: isSelected)
     }
     

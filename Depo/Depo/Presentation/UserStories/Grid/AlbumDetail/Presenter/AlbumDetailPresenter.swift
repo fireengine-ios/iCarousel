@@ -59,7 +59,9 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
                 
                 barConfig = EditingBarConfig(elementsConfig: actionTypes,
                                              style: barConfig.style,
-                                             tintColor: barConfig.tintColor)
+                                             tintColor: AppColor.tint.color,
+                                             unselectedItemTintColor: AppColor.label.color,
+                                             barTintColor: AppColor.drawerBackground.color)
             }
             
             self?.bottomBarPresenter?.setupTabBarWith(config: barConfig)

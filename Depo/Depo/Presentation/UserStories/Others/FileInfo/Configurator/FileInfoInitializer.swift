@@ -17,6 +17,7 @@ class FileInfoModuleInitializer: NSObject {
         let viewController = FileInfoViewController(nibName: nibName, bundle: nil)
         let configurator = FileInfoModuleConfigurator()
         configurator.configureModuleForViewInput(viewInput: viewController, item: item)
+        viewController.setTitle(withString: item.name ?? "")
         return viewController
     }
 

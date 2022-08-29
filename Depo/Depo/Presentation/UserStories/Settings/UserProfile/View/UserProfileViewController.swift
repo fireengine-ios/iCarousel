@@ -3,7 +3,7 @@ import GoogleSignIn
 import FirebaseCore
 import AuthenticationServices
 
-final class UserProfileViewController: ViewController, KeyboardHandler {
+final class UserProfileViewController: BaseViewController, KeyboardHandler {
     
     var output: UserProfileViewOutput!
     

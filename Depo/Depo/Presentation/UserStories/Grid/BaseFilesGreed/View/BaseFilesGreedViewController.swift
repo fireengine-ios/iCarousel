@@ -169,7 +169,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             self?.output.searchPressed(output: self)
         })
         let rightActions: [NavBarWithAction] = [search]
-        navBarConfigurator.configure(right: rightActions, left: [])
+        navBarConfigurator.configure(right: isSelecting ? [] : rightActions, left: [])
     
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems

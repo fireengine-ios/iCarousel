@@ -22,7 +22,15 @@ class AlbumDetailViewController: BaseFilesGreedChildrenViewController {
             mainTitle = name
         }
         super.viewWillAppear(animated)
-        configureNavBarActions()
+    }
+    
+    override func configurateNavigationBar() {
+        navigationItem.rightBarButtonItem = nil
+    }
+    
+    override func stopSelection() {
+        super.stopSelection()
+        configurateNavigationBar()
     }
 }
 
