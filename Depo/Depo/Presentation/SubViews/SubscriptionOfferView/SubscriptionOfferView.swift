@@ -9,7 +9,12 @@
 import UIKit
 
 protocol SubscriptionOfferViewDelegate: AnyObject {
-    func didPressSubscriptionPlanButton(planIndex: Int)
+    func didPressSubscriptionPlanButton(planIndex: Int, storageOfferType: StorageOfferType)
+}
+
+// Extend it according to storage offering
+enum StorageOfferType {
+    case subscriptionPlan, packageOffer
 }
 
 final class SubscriptionOfferView: UIView, NibInit {
@@ -141,6 +146,7 @@ final class SubscriptionOfferView: UIView, NibInit {
 
     private weak var delegate: SubscriptionOfferViewDelegate?
     private var index: Int?
+    private var storageOfferType: StorageOfferType = .subscriptionPlan
 
     func configure(with plan: SubscriptionPlan,
                    delegate: SubscriptionOfferViewDelegate,
@@ -183,6 +189,8 @@ final class SubscriptionOfferView: UIView, NibInit {
         }
         
         configure(with: plan, delegate: delegate, index: index, style: .full, needHidePurchaseInfo: needHidePurchaseInfo)
+        // It is already set to SubscriptionPlan so no need to reset in configure with SubscriptionPlan plan
+        self.storageOfferType = .packageOffer
     }
     
     private func makePrice(_ price: String) -> NSAttributedString {
@@ -287,7 +295,7 @@ final class SubscriptionOfferView: UIView, NibInit {
             let color: UIColor
             switch style {
             case .full:
-                color = AppColor.marineTwoAndTealish.color ?? ColorConstants.marineTwo
+                color = AppColor.marineTwoAndTealish.color
                 button.setTitle(TextConstants.purchase, for: UIControl.State())
             case .short:
                 let titleColor = plan.isRecommended ? ColorConstants.whiteColor : AppColor.marineTwoAndWhite.color
@@ -295,7 +303,7 @@ final class SubscriptionOfferView: UIView, NibInit {
                 let borderColor = isRecommended ? ColorConstants.marineTwo : ColorConstants.darkTintGray
                 button.layer.borderColor = borderColor.cgColor
                 button.layer.borderWidth = 2
-                color = isRecommended ? (AppColor.marineTwoAndTealish.color ?? ColorConstants.marineTwo) : .clear
+                color = isRecommended ? AppColor.marineTwoAndTealish.color : .clear
                 button.setTitle(TextConstants.upgrade, for: UIControl.State())
             }
             button.setBackgroundColor(color, for: UIControl().state)
@@ -350,6 +358,6 @@ final class SubscriptionOfferView: UIView, NibInit {
         guard let index = index else {
             return
         }
-        delegate?.didPressSubscriptionPlanButton(planIndex: index)
+        delegate?.didPressSubscriptionPlanButton(planIndex: index, storageOfferType: storageOfferType)
     }
 }

@@ -170,7 +170,7 @@ extension PackagesViewController: PackagesViewInput {
 // MARK: SubscriptionPlanCellDelegate
 extension PackagesViewController: SubscriptionOfferViewDelegate {
     
-    func didPressSubscriptionPlanButton(planIndex: Int) {
+    func didPressSubscriptionPlanButton(planIndex: Int, storageOfferType: StorageOfferType) {
         let plan = output.availableOffers[planIndex]
         presentPaymentPopUp(plan: plan, planIndex: planIndex)
     }

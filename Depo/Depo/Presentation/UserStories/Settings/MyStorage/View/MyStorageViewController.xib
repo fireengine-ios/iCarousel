@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,7 +11,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyStorageViewController" customModule="Billo" customModuleProvider="target">
             <connections>
-                <outlet property="cardStackView" destination="a7S-hr-xxl" id="dN0-IS-KHL"/>
                 <outlet property="descriptionLabel" destination="lz6-qd-uEC" id="WZ8-LG-ID9"/>
                 <outlet property="menuTableView" destination="dyO-SR-wwv" id="W1p-hN-7Qc"/>
                 <outlet property="packagesLabel" destination="2MI-mT-CtQ" id="sjf-h2-iLJ"/>
@@ -49,19 +48,6 @@
                                         </mask>
                                     </variation>
                                 </tableView>
-                                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="345.5" placeholderIntrinsicHeight="0.0" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="a7S-hr-xxl">
-                                    <rect key="frame" x="16" y="16" width="0.0" height="0.0"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" id="W5p-qP-Zkf"/>
-                                        <constraint firstAttribute="width" id="kto-4V-GfI"/>
-                                    </constraints>
-                                    <variation key="heightClass=regular-widthClass=regular">
-                                        <mask key="constraints">
-                                            <exclude reference="W5p-qP-Zkf"/>
-                                            <exclude reference="kto-4V-GfI"/>
-                                        </mask>
-                                    </variation>
-                                </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="FSL-Bc-IHK">
                                     <rect key="frame" x="8" y="140" width="304" height="457.5"/>
                                     <subviews>
@@ -104,29 +90,20 @@
                                 <constraint firstItem="FSL-Bc-IHK" firstAttribute="top" secondItem="ybg-yo-WWN" secondAttribute="top" constant="16" id="Eb1-MQ-rlB"/>
                                 <constraint firstItem="dyO-SR-wwv" firstAttribute="leading" secondItem="ybg-yo-WWN" secondAttribute="leading" id="GrI-mI-sZE"/>
                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="FSL-Bc-IHK" secondAttribute="bottom" constant="16" id="P8v-QW-KFA"/>
-                                <constraint firstItem="a7S-hr-xxl" firstAttribute="top" secondItem="ybg-yo-WWN" secondAttribute="top" constant="16" id="Qtb-h6-qY6"/>
-                                <constraint firstItem="a7S-hr-xxl" firstAttribute="width" secondItem="ybg-yo-WWN" secondAttribute="width" multiplier="0.45" id="VQx-Y9-hRC"/>
                                 <constraint firstAttribute="trailing" secondItem="FSL-Bc-IHK" secondAttribute="trailing" constant="16" id="VfW-7S-HUk">
                                     <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                                 </constraint>
-                                <constraint firstItem="FSL-Bc-IHK" firstAttribute="leading" secondItem="a7S-hr-xxl" secondAttribute="trailing" constant="14" id="cU3-FD-u9F"/>
-                                <constraint firstItem="a7S-hr-xxl" firstAttribute="leading" secondItem="ybg-yo-WWN" secondAttribute="leading" constant="16" id="fbo-Mm-rh0"/>
-                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="a7S-hr-xxl" secondAttribute="bottom" constant="16" id="jPi-kb-thM"/>
                                 <constraint firstItem="FSL-Bc-IHK" firstAttribute="leading" secondItem="ybg-yo-WWN" secondAttribute="leading" constant="8" id="kQf-4g-zEx"/>
                                 <constraint firstItem="FSL-Bc-IHK" firstAttribute="top" secondItem="dyO-SR-wwv" secondAttribute="bottom" constant="12" id="lvG-mb-rue"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
-                                    <exclude reference="VQx-Y9-hRC"/>
                                     <exclude reference="Eb1-MQ-rlB"/>
-                                    <exclude reference="cU3-FD-u9F"/>
                                 </mask>
                             </variation>
                             <variation key="heightClass=regular-widthClass=regular">
                                 <mask key="constraints">
-                                    <include reference="VQx-Y9-hRC"/>
                                     <include reference="Eb1-MQ-rlB"/>
-                                    <include reference="cU3-FD-u9F"/>
                                     <exclude reference="kQf-4g-zEx"/>
                                     <exclude reference="lvG-mb-rue"/>
                                 </mask>

@@ -17040,16 +17040,8 @@
 				92004B2621AD0F2100582C45 /* MyStorageViewController.swift */,
 				92004B5921AD136400582C45 /* MyStorageViewInput.swift */,
 				92004B5621AD11EF00582C45 /* MyStorageViewOutput.swift */,
-				92004B2821AD0F2100582C45 /* Views */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		92004B2821AD0F2100582C45 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		92004B2921AD0F2200582C45 /* Interactor */ = {

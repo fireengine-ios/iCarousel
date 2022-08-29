@@ -9,4 +9,7 @@
 protocol MyStorageViewInput: AnyObject, ActivityIndicator {
     func reloadPackages()
     func showRestoreButton()
+    
+    func reloadData()
+    func showInAppPolicy()
 }

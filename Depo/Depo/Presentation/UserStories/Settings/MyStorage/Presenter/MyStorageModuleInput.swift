@@ -6,6 +6,6 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-protocol MyStorageModuleInput: ActivityIndicator {
+protocol MyStorageModuleInput: AnyObject {
 
 }
