@@ -18,7 +18,7 @@ protocol SetSecurityQuestionViewControllerDelegate {
     func didCloseSetSecurityQuestionViewController(with selectedQuestion: SecretQuestionWithAnswer)
 }
 
-final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler, NibInit {
+final class SetSecurityQuestionViewController: BaseViewController, KeyboardHandler, NibInit {
     
     private let accountService = AccountService()
     private lazy var answer = SecretQuestionWithAnswer()
@@ -90,7 +90,6 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         securityQuestionView.delegate = self
         secretAnswerView.answerTextField.addTarget(self, action: #selector(checkButtonStatus), for: .editingChanged)
         captchaView.captchaAnswerTextField.addTarget(self, action: #selector(checkButtonStatus), for: .editingChanged)
-        addTapGestureToHideKeyboard()
     }
     
     override func viewDidLoad() {
@@ -98,6 +97,7 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         
         analyticsService.logScreen(screen: .securityQuestion)
         analyticsService.trackDimentionsEveryClickGA(screen: .securityQuestion)
+        addTapGestureToHideKeyboard()
     }
     
     override func viewWillAppear(_ animated: Bool) {
