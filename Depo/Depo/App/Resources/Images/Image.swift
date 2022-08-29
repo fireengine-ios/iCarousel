@@ -50,6 +50,7 @@ enum Image: String, AppImage {
     case iconEdit
     case iconInfo
     case iconMove
+    case iconAlbum
 
     ///  Files Tab
     case iconFileAudio

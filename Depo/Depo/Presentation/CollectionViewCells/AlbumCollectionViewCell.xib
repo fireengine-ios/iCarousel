@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -100,10 +100,10 @@
                                 <rect key="frame" x="5" y="5" width="331" height="82"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="21n-xE-cSS">
-                                <rect key="frame" x="316" y="5" width="20" height="20"/>
+                                <rect key="frame" x="304" y="13" width="24" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="OYn-1z-z0J"/>
-                                    <constraint firstAttribute="height" constant="20" id="e3x-Qf-Sb7"/>
+                                    <constraint firstAttribute="width" constant="24" id="OYn-1z-z0J"/>
+                                    <constraint firstAttribute="height" constant="24" id="e3x-Qf-Sb7"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fj8-ox-U8Q">
@@ -121,8 +121,8 @@
                             <constraint firstItem="LNQ-WG-hXG" firstAttribute="bottom" secondItem="3H5-qh-3Jq" secondAttribute="bottom" constant="-2" id="1GJ-b8-fdo"/>
                             <constraint firstItem="P6F-Wn-fos" firstAttribute="leading" secondItem="3H5-qh-3Jq" secondAttribute="leading" id="7Lp-Ao-Cj7"/>
                             <constraint firstItem="LNQ-WG-hXG" firstAttribute="trailing" secondItem="3H5-qh-3Jq" secondAttribute="trailing" constant="-2" id="AEV-mv-vLY"/>
-                            <constraint firstItem="21n-xE-cSS" firstAttribute="trailing" secondItem="LNQ-WG-hXG" secondAttribute="trailing" id="M2s-5X-8ei"/>
-                            <constraint firstItem="21n-xE-cSS" firstAttribute="top" secondItem="LNQ-WG-hXG" secondAttribute="top" id="Mst-bc-mfp"/>
+                            <constraint firstItem="21n-xE-cSS" firstAttribute="trailing" secondItem="LNQ-WG-hXG" secondAttribute="trailing" constant="-8" id="M2s-5X-8ei"/>
+                            <constraint firstItem="21n-xE-cSS" firstAttribute="top" secondItem="LNQ-WG-hXG" secondAttribute="top" constant="8" id="Mst-bc-mfp"/>
                             <constraint firstAttribute="trailing" secondItem="3H5-qh-3Jq" secondAttribute="trailing" constant="3" id="PXa-Pv-SXP"/>
                             <constraint firstAttribute="trailing" secondItem="fj8-ox-U8Q" secondAttribute="trailing" constant="8" id="Qyu-aX-YI7"/>
                             <constraint firstItem="P6F-Wn-fos" firstAttribute="trailing" secondItem="3H5-qh-3Jq" secondAttribute="trailing" id="TXY-ZS-Ejk"/>

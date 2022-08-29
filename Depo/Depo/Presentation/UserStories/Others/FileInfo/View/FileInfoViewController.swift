@@ -37,11 +37,10 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
     var interactor: FileInfoInteractor!
     private var fileType: FileType = .unknown
     
-    private let sectionFont = UIFont.TurkcellSaturaBolFont(size: 14)
-    private let sectionColor = AppColor.marineTwoAndTealish.color
-    private let infoFont = UIFont.TurkcellSaturaFont(size: 18)
-    private let titleColor = UIColor.lrBrownishGrey
-    private let infoColor = ColorConstants.closeIconButtonColor
+    private let sectionFont = UIFont.appFont(.medium, size: 14)
+    private let sectionColor = AppColor.label.color
+    private let infoFont = UIFont.appFont(.regular, size: 14)
+    private let infoColor = AppColor.label.color
     
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -66,7 +65,7 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
         
         let infoTitles = [folderSizeTitle, durationTitle, uploadDateTitle, takenDateTitle]
         infoTitles.forEach {
-            $0?.textColor = titleColor
+            $0?.textColor = infoColor
             $0?.font = infoFont
         }
         
@@ -76,7 +75,7 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
             $0?.font = infoFont
         }
         
-        fileName.textColor = titleColor
+        fileName.textColor = infoColor
         fileName.font = infoFont
         
         fileNameTitle.text = TextConstants.fileInfoFileNameTitle
