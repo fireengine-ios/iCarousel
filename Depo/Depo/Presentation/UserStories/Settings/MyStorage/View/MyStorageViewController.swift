@@ -14,17 +14,6 @@ final class MyStorageViewController: BaseViewController {
     var output: MyStorageViewOutput!
     private lazy var activityManager = ActivityIndicatorManager()
     
-    //MARK: IBOutlet
-    @IBOutlet private weak var menuTableView: ResizableTableView! {
-        willSet {
-            newValue.rowHeight = 51
-            let nib = UINib(nibName: String(describing: PackagesTableViewCell.self), bundle: nil)
-            let identifier = String(describing: PackagesTableViewCell.self)
-            newValue.register(nib, forCellReuseIdentifier: identifier)
-            newValue.isScrollEnabled = false
-        }
-    }
-    
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.switcherGrayColor
@@ -126,9 +115,6 @@ final class MyStorageViewController: BaseViewController {
     private func setup() {
         setTitle(withString: output.title)
         self.view.backgroundColor = ColorConstants.fileGreedCellColorSecondary
-        
-        menuTableView.delegate = self
-        menuTableView.dataSource = self
         
         activityManager.delegate = self
         automaticallyAdjustsScrollViewInsets = false
@@ -302,36 +288,5 @@ extension MyStorageViewController: ActivityIndicator {
 
     func stopActivityIndicator() {
         activityManager.stop()
-    }
-}
-
-// MARK: - UITableViewDataSource
-extension MyStorageViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableView.dequeue(reusable: PackagesTableViewCell.self)
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return menuViewModels.count
-    }
-}
-
-// MARK: - UITableViewDelegate
-extension MyStorageViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.selectionStyle = .none
-        guard let item = menuViewModels[safe: indexPath.row] else {
-            return
-        }
-        
-        let cell = cell as? PackagesTableViewCell
-        cell?.configure(type: item)
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let type = menuViewModels[safe: indexPath.row] else {
-            return
-        }
-        (output as? PackageInfoViewDelegate)?.onSeeDetailsTap(with: type)
     }
 }

@@ -5,14 +5,12 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyStorageViewController" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="descriptionLabel" destination="lz6-qd-uEC" id="WZ8-LG-ID9"/>
-                <outlet property="menuTableView" destination="dyO-SR-wwv" id="W1p-hN-7Qc"/>
                 <outlet property="packagesLabel" destination="2MI-mT-CtQ" id="sjf-h2-iLJ"/>
                 <outlet property="packagesStackView" destination="u5R-GY-RpU" id="N5z-g2-R9x"/>
                 <outlet property="restorePurchasesButton" destination="35h-M2-DXI" id="2AP-Px-PGP"/>
@@ -29,27 +27,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ybg-yo-WWN">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="613.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="489.5"/>
                             <subviews>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="128" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dyO-SR-wwv" customClass="ResizableTableView" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="128"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" id="Nd5-OH-61A"/>
-                                    </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="Nd5-OH-61A"/>
-                                        </mask>
-                                    </variation>
-                                    <variation key="heightClass=regular-widthClass=regular">
-                                        <mask key="constraints">
-                                            <include reference="Nd5-OH-61A"/>
-                                        </mask>
-                                    </variation>
-                                </tableView>
                                 <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="FSL-Bc-IHK">
-                                    <rect key="frame" x="8" y="140" width="304" height="457.5"/>
+                                    <rect key="frame" x="8" y="16" width="304" height="457.5"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Fll-sA-Yi1" userLabel="My Packages Stack View">
                                             <rect key="frame" x="0.0" y="0.0" width="304" height="50"/>
@@ -85,29 +66,11 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="dyO-SR-wwv" firstAttribute="top" secondItem="ybg-yo-WWN" secondAttribute="top" id="4eW-em-36J"/>
-                                <constraint firstAttribute="trailing" secondItem="dyO-SR-wwv" secondAttribute="trailing" id="7d1-BD-1yy"/>
-                                <constraint firstItem="FSL-Bc-IHK" firstAttribute="top" secondItem="ybg-yo-WWN" secondAttribute="top" constant="16" id="Eb1-MQ-rlB"/>
-                                <constraint firstItem="dyO-SR-wwv" firstAttribute="leading" secondItem="ybg-yo-WWN" secondAttribute="leading" id="GrI-mI-sZE"/>
-                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="FSL-Bc-IHK" secondAttribute="bottom" constant="16" id="P8v-QW-KFA"/>
-                                <constraint firstAttribute="trailing" secondItem="FSL-Bc-IHK" secondAttribute="trailing" constant="16" id="VfW-7S-HUk">
-                                    <variation key="heightClass=regular-widthClass=compact" constant="8"/>
-                                </constraint>
-                                <constraint firstItem="FSL-Bc-IHK" firstAttribute="leading" secondItem="ybg-yo-WWN" secondAttribute="leading" constant="8" id="kQf-4g-zEx"/>
-                                <constraint firstItem="FSL-Bc-IHK" firstAttribute="top" secondItem="dyO-SR-wwv" secondAttribute="bottom" constant="12" id="lvG-mb-rue"/>
+                                <constraint firstItem="FSL-Bc-IHK" firstAttribute="top" secondItem="ybg-yo-WWN" secondAttribute="top" constant="16" id="NrB-wx-Myc"/>
+                                <constraint firstItem="FSL-Bc-IHK" firstAttribute="leading" secondItem="ybg-yo-WWN" secondAttribute="leading" constant="8" id="guP-pH-LSy"/>
+                                <constraint firstAttribute="trailing" secondItem="FSL-Bc-IHK" secondAttribute="trailing" constant="8" id="sIq-pk-Y69"/>
+                                <constraint firstAttribute="bottom" secondItem="FSL-Bc-IHK" secondAttribute="bottom" constant="16" id="xcU-Px-ATa"/>
                             </constraints>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="Eb1-MQ-rlB"/>
-                                </mask>
-                            </variation>
-                            <variation key="heightClass=regular-widthClass=regular">
-                                <mask key="constraints">
-                                    <include reference="Eb1-MQ-rlB"/>
-                                    <exclude reference="kQf-4g-zEx"/>
-                                    <exclude reference="lvG-mb-rue"/>
-                                </mask>
-                            </variation>
                         </view>
                     </subviews>
                     <constraints>
@@ -123,8 +86,6 @@
             <constraints>
                 <constraint firstItem="pRB-cn-WJI" firstAttribute="top" secondItem="R22-lb-Fq7" secondAttribute="top" id="3QP-H1-OTy"/>
                 <constraint firstItem="pRB-cn-WJI" firstAttribute="leading" secondItem="R22-lb-Fq7" secondAttribute="leading" id="MyD-ao-sOD"/>
-                <constraint firstItem="ybg-yo-WWN" firstAttribute="height" secondItem="KIa-OX-vsV" secondAttribute="height" priority="250" id="TQZ-5w-kEM"/>
-                <constraint firstItem="ybg-yo-WWN" firstAttribute="width" secondItem="KIa-OX-vsV" secondAttribute="width" id="Tvg-cw-NQS"/>
                 <constraint firstItem="ybg-yo-WWN" firstAttribute="centerX" secondItem="pRB-cn-WJI" secondAttribute="centerX" id="Z56-he-2nM"/>
                 <constraint firstItem="pRB-cn-WJI" firstAttribute="bottom" secondItem="R22-lb-Fq7" secondAttribute="bottom" id="et4-3i-zlj"/>
                 <constraint firstItem="R22-lb-Fq7" firstAttribute="trailing" secondItem="pRB-cn-WJI" secondAttribute="trailing" id="ya2-m1-Xki"/>
@@ -132,9 +93,4 @@
             <point key="canvasLocation" x="800.625" y="151.05633802816902"/>
         </view>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>
