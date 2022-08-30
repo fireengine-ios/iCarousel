@@ -10,8 +10,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyStorageViewController" customModule="Billo" customModuleProvider="target">
             <connections>
-                <outlet property="descriptionLabel" destination="lz6-qd-uEC" id="WZ8-LG-ID9"/>
-                <outlet property="packagesLabel" destination="2MI-mT-CtQ" id="sjf-h2-iLJ"/>
                 <outlet property="packagesStackView" destination="u5R-GY-RpU" id="N5z-g2-R9x"/>
                 <outlet property="restorePurchasesButton" destination="35h-M2-DXI" id="2AP-Px-PGP"/>
                 <outlet property="scrollView" destination="R22-lb-Fq7" id="5oX-dQ-saW"/>
@@ -27,39 +25,19 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ybg-yo-WWN">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="489.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="407.5"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="FSL-Bc-IHK">
-                                    <rect key="frame" x="8" y="16" width="304" height="457.5"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="FSL-Bc-IHK">
+                                    <rect key="frame" x="8" y="16" width="304" height="375.5"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Fll-sA-Yi1" userLabel="My Packages Stack View">
-                                            <rect key="frame" x="0.0" y="0.0" width="304" height="50"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2MI-mT-CtQ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="142" height="50"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="35h-M2-DXI" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
-                                                    <rect key="frame" x="158" y="0.0" width="146" height="50"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="146" id="bad-gO-Cd1"/>
-                                                    </constraints>
-                                                    <connections>
-                                                        <action selector="restorePurhases" destination="-1" eventType="touchUpInside" id="37M-F3-52a"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                        </stackView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lz6-qd-uEC">
-                                            <rect key="frame" x="0.0" y="64" width="304" height="50"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="35h-M2-DXI" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="304" height="30"/>
+                                            <connections>
+                                                <action selector="restorePurhases" destination="-1" eventType="touchUpInside" id="37M-F3-52a"/>
+                                            </connections>
+                                        </button>
                                         <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="296" placeholderIntrinsicHeight="329.5" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="u5R-GY-RpU">
-                                            <rect key="frame" x="0.0" y="128" width="304" height="329.5"/>
+                                            <rect key="frame" x="0.0" y="46" width="304" height="329.5"/>
                                         </stackView>
                                     </subviews>
                                 </stackView>

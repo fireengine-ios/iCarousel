@@ -275,10 +275,10 @@ final class SubscriptionOfferView: UIView, NibInit {
         [purchaseButton, introductoryPurchaseButton].forEach { button in
             updateButton(button: button, plan: plan, style: style)
         }
-        updateDetails(plan: plan)
+        //updateDetails(plan: plan)
         updateFeaturesView(features: makeFeatures(plan: plan), style: style)
         updateBorderView(isRecommended: plan.isRecommended)
-        updateGracePeriodView(plan: plan)
+        //updateGracePeriodView(plan: plan)
     }
     
     private func updateButton(button: RoundedInsetsButton, plan: SubscriptionPlan, style: Style) {

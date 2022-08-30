@@ -14,36 +14,32 @@ final class MyStorageViewController: BaseViewController {
     var output: MyStorageViewOutput!
     private lazy var activityManager = ActivityIndicatorManager()
     
-    @IBOutlet private weak var descriptionLabel: UILabel! {
-        willSet {
-            newValue.textColor = ColorConstants.switcherGrayColor
-            newValue.font = UIFont.TurkcellSaturaFont(size: 16)
-            newValue.backgroundColor = .clear
-            newValue.numberOfLines = 0
-            newValue.text = TextConstants.myPackagesDescription
-        }
-    }
+//    @IBOutlet private weak var descriptionLabel: UILabel! {
+//        willSet {
+//            newValue.textColor = ColorConstants.switcherGrayColor
+//            newValue.font = UIFont.TurkcellSaturaFont(size: 16)
+//            newValue.backgroundColor = .clear
+//            newValue.numberOfLines = 0
+//            newValue.text = TextConstants.myPackagesDescription
+//        }
+//    }
+//
+//
+//    @IBOutlet private weak var packagesLabel: UILabel! {
+//        willSet {
+//            newValue.adjustsFontSizeToFitWidth()
+//            newValue.text = TextConstants.packagesIHave
+//            newValue.textColor = ColorConstants.darkText
+//            newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
+//        }
+//    }
     
-    @IBOutlet private weak var packagesStackView: UIStackView! {
-        willSet {
-            newValue.spacing = 16
-        }
-    }
-
     @IBOutlet private weak var scrollView: ControlContainableScrollView! {
         willSet {
             newValue.delaysContentTouches = false
         }
     }
-    
-    @IBOutlet private weak var packagesLabel: UILabel! {
-        willSet {
-            newValue.adjustsFontSizeToFitWidth()
-            newValue.text = TextConstants.packagesIHave
-            newValue.textColor = ColorConstants.darkText
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
-        }
-    }
+
         
     @IBOutlet private weak var restorePurchasesButton: RoundedInsetsButton! {
         willSet {
@@ -53,34 +49,62 @@ final class MyStorageViewController: BaseViewController {
             newValue.adjustsFontSizeToFitWidth()
             newValue.insets = UIEdgeInsets(topBottom: 8, rightLeft: 12)
             newValue.setTitle(TextConstants.restorePurchasesButton, for: .normal)
-            newValue.setTitleColor(.lrBrownishGrey, for: .normal)
-            newValue.setBackgroundColor(AppColor.secondaryBackground.color, for: UIControl.State())
+            newValue.setTitleColor(AppColor.settingsRestoreTextColor.color, for: .normal)
+            newValue.backgroundColor = .white
             newValue.titleLabel?.font = .TurkcellSaturaBolFont(size: 16)
             newValue.layer.borderWidth = 1
-            newValue.layer.borderColor = UIColor.lrTealishTwo.cgColor
+            newValue.layer.borderColor = AppColor.settingsRestoreTextColor.cgColor
+            newValue.layer.cornerRadius = 23
+        }
+    }
+    
+    @IBOutlet private weak var packagesStackView: UIStackView! {
+        willSet {
+            newValue.spacing = 24
         }
     }
         
     lazy var myPackages: UIStackView = {
         let view = UIStackView()
+        view.spacing = 16
         view.axis = .vertical
         view.alignment = .fill
         view.distribution = .fill
+        
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 16
+        view.layer.borderColor = AppColor.settingsMyPackages.cgColor
+        view.backgroundColor = AppColor.settingsMyPackages.color
         return view
     }()
     
     lazy var packages: UIStackView = {
         let view = UIStackView()
+        view.spacing = 16
         view.axis = .vertical
         view.alignment = .fill
         view.distribution = .fill
+        
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 16
+        view.layer.borderColor = AppColor.settingsPackages.cgColor
+        view.backgroundColor = AppColor.settingsPackages.color
         return view
     }()
     
-    lazy var subtitleLabel: UILabel = {
+    lazy var packagesTitleLabel: UILabel = {
+       let view = UILabel()
+        view.textColor = AppColor.settingsRestoreTextColor.color
+        view.text = TextConstants.packageSectionTitle
+        view.font = UIFont.TurkcellSaturaBolFont(size: 18)
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    lazy var myPackagesTitleLabel: UILabel = {
        let view = UILabel()
         view.textColor = ColorConstants.darkText
-        view.text = TextConstants.packageSectionTitle
+        view.text = TextConstants.myPackages
         view.font = UIFont.TurkcellSaturaBolFont(size: 18)
         view.backgroundColor = .clear
         return view
@@ -118,11 +142,20 @@ final class MyStorageViewController: BaseViewController {
         
         activityManager.delegate = self
         automaticallyAdjustsScrollViewInsets = false
-        
+        setupLayout()
+    }
+    
+    private func setupLayout() {
         packagesStackView.addArrangedSubview(myPackages)
         packagesStackView.addArrangedSubview(packages)
         packagesStackView.addArrangedSubview(policyStackView)
         policyStackView.addArrangedSubview(policyView)
+        
+        setupMyPackagesLayout()
+    }
+    
+    private func setupMyPackagesLayout() {
+        
     }
         
     @IBAction private func restorePurhases() {
@@ -136,26 +169,55 @@ extension MyStorageViewController: MyStorageViewInput {
     
     func reloadPackages() {
         myPackages.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        let outerTopView = UIView()
+        outerTopView.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        myPackages.addArrangedSubview(outerTopView)
+        
+        myPackages.addArrangedSubview(myPackagesTitleLabel)
         for offer in output.displayableOffers.enumerated() {
             let view = SubscriptionOfferView.initFromNib()
             let packageOffer = PackageOffer(quotaNumber: .zero, offers: [offer.element])
             view.configure(with: packageOffer, delegate: self, index: offer.offset, needHidePurchaseInfo: false)
             view.setNeedsLayout()
             view.layoutIfNeeded()
+            
             myPackages.addArrangedSubview(view)
+            
+            view.leadingAnchor.constraint(equalTo: myPackages.leadingAnchor,
+                                          constant: 16).isActive = true
+            view.trailingAnchor.constraint(equalTo: myPackages.trailingAnchor,
+                                           constant: -16).isActive = true
         }
+        let outerBottomView = UIView()
+        outerBottomView.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        myPackages.addArrangedSubview(outerBottomView)
     }
     
     func reloadData() {
         packages.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        packages.addArrangedSubview(subtitleLabel)
+        
+        let outerTopView = UIView()
+        outerTopView.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        packages.addArrangedSubview(outerTopView)
+        
+        packages.addArrangedSubview(packagesTitleLabel)
         for offer in output.availableOffers.enumerated() {
             let view = SubscriptionOfferView.initFromNib()
             view.configure(with: offer.element, delegate: self, index: offer.offset)
             view.setNeedsLayout()
             view.layoutIfNeeded()
             packages.addArrangedSubview(view)
+            
+            view.leadingAnchor.constraint(equalTo: packages.leadingAnchor,
+                                          constant: 16).isActive = true
+            view.trailingAnchor.constraint(equalTo: packages.trailingAnchor,
+                                           constant: -16).isActive = true
         }
+        
+        let outerBottomView = UIView()
+        outerBottomView.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        packages.addArrangedSubview(outerBottomView)
     }
     
     func showRestoreButton() {
