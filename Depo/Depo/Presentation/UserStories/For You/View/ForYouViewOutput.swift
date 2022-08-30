@@ -13,4 +13,6 @@ protocol ForYouViewOutput: AnyObject {
     func checkFIRisAllowed()
     func onFaceImageButton()
     func navigateToCreate(for view: ForYouViewEnum)
+    func navigateToItemDetail(item: WrapData)
+    func navigateToAlbumDetail(album: AlbumItem)
 }

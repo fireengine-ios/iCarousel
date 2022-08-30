@@ -9,4 +9,8 @@
 import Foundation
 
 protocol ForYouInteractorOutput: AnyObject {
+    func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item)
+    func asyncOperationSuccess()
+    func asyncOperationFail(errorMessage: String?)
+    func startAsyncOperation()
 }
