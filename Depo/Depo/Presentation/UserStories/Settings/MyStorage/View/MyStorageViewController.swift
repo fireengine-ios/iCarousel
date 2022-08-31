@@ -33,13 +33,23 @@ final class MyStorageViewController: BaseViewController {
 //            newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
 //        }
 //    }
+
+    @IBOutlet weak var menuTableView: ResizableTableView! {
+        willSet {
+            newValue.rowHeight = 51
+            let nib = UINib(nibName: String(describing: PackagesTableViewCell.self), bundle: nil)
+            let identifier = String(describing: PackagesTableViewCell.self)
+            newValue.register(nib, forCellReuseIdentifier: identifier)
+            newValue.isScrollEnabled = false
+        }
+    }
+    
     
     @IBOutlet private weak var scrollView: ControlContainableScrollView! {
         willSet {
             newValue.delaysContentTouches = false
         }
     }
-
         
     @IBOutlet private weak var restorePurchasesButton: RoundedInsetsButton! {
         willSet {
@@ -63,7 +73,9 @@ final class MyStorageViewController: BaseViewController {
             newValue.spacing = 24
         }
     }
-        
+    
+    @IBOutlet weak var cardsStackView: UIStackView!
+    
     lazy var myPackages: UIStackView = {
         let view = UIStackView()
         view.spacing = 16
@@ -128,6 +140,10 @@ final class MyStorageViewController: BaseViewController {
         setup()
         output.viewDidLoad()
         
+        menuTableView.delegate = self
+        menuTableView.dataSource = self
+        
+        setupCardStackView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -228,6 +244,31 @@ extension MyStorageViewController: MyStorageViewInput {
     
     func showInAppPolicy() {
         policyStackView.addArrangedSubview(policyView)
+    }
+    
+    func setupCardStackView() {
+        menuViewModels.removeAll()
+        for view in cardsStackView.arrangedSubviews {
+            view.removeFromSuperview()
+        }
+        
+        let isMiddleUser = AuthoritySingleton.shared.accountType.isMiddle
+        let isPremiumUser = AuthoritySingleton.shared.accountType.isPremium
+        let type: ControlPackageType.AccountType = isPremiumUser ? .premium : (isMiddleUser ? .middle : .standard)
+        addNewCard(type: .accountType(type))
+        menuTableView.reloadData()
+    }
+    
+    private func addNewCard(type: ControlPackageType) {
+        if Device.isIpad {
+            let card = PackageInfoView.initFromNib()
+            card.configure(with: type)
+            
+            output.configureCard(card)
+            cardsStackView.addArrangedSubview(card)
+        } else {
+            menuViewModels.append(type)
+        }
     }
 }
 
@@ -341,6 +382,40 @@ extension MyStorageViewController: SubscriptionOfferViewDelegate {
         }
     }
 }
+
+// MARK: - UITableViewDataSource
+extension MyStorageViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        tableView.dequeue(reusable: PackagesTableViewCell.self)
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return menuViewModels.count
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension MyStorageViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.selectionStyle = .none
+        guard let item = menuViewModels[safe: indexPath.row] else {
+            return
+        }
+        
+        let cell = cell as? PackagesTableViewCell
+        cell?.configure(type: item)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let type = menuViewModels[safe: indexPath.row] else {
+            return
+        }
+        (output as? PackageInfoViewDelegate)?.onSeeDetailsTap(with: type)
+    }
+}
+
+
+
 
 // MARK: - ActivityIndicator
 extension MyStorageViewController: ActivityIndicator {

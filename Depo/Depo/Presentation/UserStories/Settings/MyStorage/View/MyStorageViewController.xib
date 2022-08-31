@@ -5,11 +5,14 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyStorageViewController" customModule="Billo" customModuleProvider="target">
             <connections>
+                <outlet property="cardsStackView" destination="cQG-OZ-8DS" id="Stt-ln-bzy"/>
+                <outlet property="menuTableView" destination="sJL-4c-3eP" id="Rn6-3l-Xly"/>
                 <outlet property="packagesStackView" destination="u5R-GY-RpU" id="N5z-g2-R9x"/>
                 <outlet property="restorePurchasesButton" destination="35h-M2-DXI" id="2AP-Px-PGP"/>
                 <outlet property="scrollView" destination="R22-lb-Fq7" id="5oX-dQ-saW"/>
@@ -22,32 +25,43 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R22-lb-Fq7" customClass="ControlContainableScrollView" customModule="Billo" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <rect key="frame" x="0.0" y="0.0" width="312" height="568"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ybg-yo-WWN">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="407.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="312" height="685.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="FSL-Bc-IHK">
-                                    <rect key="frame" x="8" y="16" width="304" height="375.5"/>
+                                    <rect key="frame" x="8" y="0.0" width="296" height="685.5"/>
                                     <subviews>
+                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="sJL-4c-3eP" customClass="ResizableTableView" customModule="Billo" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="296" height="228"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        </tableView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cQG-OZ-8DS" userLabel="CardStackView">
+                                            <rect key="frame" x="0.0" y="244" width="296" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" id="QYd-iK-woM"/>
+                                            </constraints>
+                                        </stackView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="35h-M2-DXI" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="304" height="30"/>
+                                            <rect key="frame" x="0.0" y="310" width="296" height="30"/>
                                             <connections>
                                                 <action selector="restorePurhases" destination="-1" eventType="touchUpInside" id="37M-F3-52a"/>
                                             </connections>
                                         </button>
                                         <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="296" placeholderIntrinsicHeight="329.5" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="u5R-GY-RpU">
-                                            <rect key="frame" x="0.0" y="46" width="304" height="329.5"/>
+                                            <rect key="frame" x="0.0" y="356" width="296" height="329.5"/>
                                         </stackView>
                                     </subviews>
                                 </stackView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="FSL-Bc-IHK" firstAttribute="top" secondItem="ybg-yo-WWN" secondAttribute="top" constant="16" id="NrB-wx-Myc"/>
-                                <constraint firstItem="FSL-Bc-IHK" firstAttribute="leading" secondItem="ybg-yo-WWN" secondAttribute="leading" constant="8" id="guP-pH-LSy"/>
-                                <constraint firstAttribute="trailing" secondItem="FSL-Bc-IHK" secondAttribute="trailing" constant="8" id="sIq-pk-Y69"/>
-                                <constraint firstAttribute="bottom" secondItem="FSL-Bc-IHK" secondAttribute="bottom" constant="16" id="xcU-Px-ATa"/>
+                                <constraint firstAttribute="bottom" secondItem="FSL-Bc-IHK" secondAttribute="bottom" id="OI0-EM-8CW"/>
+                                <constraint firstItem="FSL-Bc-IHK" firstAttribute="top" secondItem="ybg-yo-WWN" secondAttribute="top" id="Vz5-Nz-era"/>
+                                <constraint firstAttribute="trailing" secondItem="FSL-Bc-IHK" secondAttribute="trailing" constant="8" id="eCH-58-D7e"/>
+                                <constraint firstItem="FSL-Bc-IHK" firstAttribute="leading" secondItem="ybg-yo-WWN" secondAttribute="leading" constant="8" id="rXk-OA-Dze"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -66,9 +80,16 @@
                 <constraint firstItem="pRB-cn-WJI" firstAttribute="leading" secondItem="R22-lb-Fq7" secondAttribute="leading" id="MyD-ao-sOD"/>
                 <constraint firstItem="ybg-yo-WWN" firstAttribute="centerX" secondItem="pRB-cn-WJI" secondAttribute="centerX" id="Z56-he-2nM"/>
                 <constraint firstItem="pRB-cn-WJI" firstAttribute="bottom" secondItem="R22-lb-Fq7" secondAttribute="bottom" id="et4-3i-zlj"/>
+                <constraint firstItem="ybg-yo-WWN" firstAttribute="width" secondItem="KIa-OX-vsV" secondAttribute="width" id="jRC-Ms-2ht"/>
+                <constraint firstItem="ybg-yo-WWN" firstAttribute="height" secondItem="KIa-OX-vsV" secondAttribute="height" priority="250" id="wYi-yZ-QLC"/>
                 <constraint firstItem="R22-lb-Fq7" firstAttribute="trailing" secondItem="pRB-cn-WJI" secondAttribute="trailing" id="ya2-m1-Xki"/>
             </constraints>
             <point key="canvasLocation" x="800.625" y="151.05633802816902"/>
         </view>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

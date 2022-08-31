@@ -27,13 +27,13 @@ final class SubscriptionOfferView: UIView, NibInit {
     @IBOutlet private weak var borderView: UIView! {
         willSet {
             newValue.backgroundColor = ColorConstants.darkTintGray
-            newValue.layer.cornerRadius = 8
+            newValue.layer.cornerRadius = 16
         }
     }
     
     @IBOutlet private weak var recommendationLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaFont(size: 16)
+            newValue.font = .appFont(.medium, size: 12)
             newValue.backgroundColor = .clear
             newValue.textAlignment = .center
             newValue.textColor = .white
@@ -44,20 +44,20 @@ final class SubscriptionOfferView: UIView, NibInit {
     @IBOutlet private weak var plateView: UIView! {
         willSet {
             newValue.layer.masksToBounds = true
-            newValue.layer.cornerRadius = 8
+            newValue.layer.cornerRadius = 16
         }
     }
     
     @IBOutlet private weak var nameLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 24)
+            newValue.font = .appFont(.medium, size: 14)
             newValue.textColor = AppColor.marineTwoAndWhite.color
             newValue.adjustsFontSizeToFitWidth = true
             newValue.lineBreakMode = .byWordWrapping
         }
     }
 
-    private let priceIntroFont = UIFont.TurkcellSaturaFont(size: 17)
+    private let priceIntroFont = UIFont.appFont(.medium, size: 14)
     @IBOutlet private weak var priceLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0
@@ -70,32 +70,13 @@ final class SubscriptionOfferView: UIView, NibInit {
             newValue.numberOfLines = 0
         }
     }
-    
-    @IBOutlet private weak var purchaseButton: RoundedInsetsButton! {
-        willSet {
-            newValue.setTitleColor(.white, for: UIControl.State())
-            newValue.insets = UIEdgeInsets(topBottom: 0, rightLeft: 12)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
-            newValue.adjustsFontSizeToFitWidth()
-        }
-    }
-
-    @IBOutlet private weak var introductoryPurchaseButtonContainer: UIView!
-    @IBOutlet private weak var introductoryPurchaseButton: RoundedInsetsButton! {
-        willSet {
-            newValue.setTitleColor(.white, for: UIControl.State())
-            newValue.insets = UIEdgeInsets(topBottom: 0, rightLeft: 12)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
-            newValue.adjustsFontSizeToFitWidth()
-        }
-    }
 
     @IBOutlet private weak var detailsView: UIView!
     
     @IBOutlet private weak var paydayLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0
-            newValue.font = UIFont.TurkcellSaturaFont(size: 15)
+            newValue.font = UIFont.appFont(.regular, size: 15)
             newValue.textColor = ColorConstants.darkText
         }
     }
@@ -103,7 +84,7 @@ final class SubscriptionOfferView: UIView, NibInit {
     @IBOutlet private weak var offerStoreLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0
-            newValue.font = UIFont.TurkcellSaturaFont(size: 15)
+            newValue.font = UIFont.appFont(.regular, size: 15)
             newValue.textColor = ColorConstants.darkText
             newValue.textAlignment = .right
         }
@@ -120,7 +101,7 @@ final class SubscriptionOfferView: UIView, NibInit {
     @IBOutlet private weak var graceDateLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 14)
+            newValue.font = .appFont(.regular, size: 12)
             newValue.textColor = ColorConstants.darkText
         }
     }
@@ -128,25 +109,13 @@ final class SubscriptionOfferView: UIView, NibInit {
     @IBOutlet private weak var graceDescriptionLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0
-            newValue.font = UIFont.TurkcellSaturaFont(size: 15)
+            newValue.font = .appFont(.regular, size: 12)
             newValue.textColor = ColorConstants.switcherGrayColor
             newValue.text = localized(.gracePackageDescription)
         }
     }
     
     @IBOutlet private weak var featureView: SubscriptionFeaturesView!
-
-    @IBOutlet private weak var purchaseButtonWidthConstraint: NSLayoutConstraint! {
-        willSet {
-            purchaseButtonWidth = newValue.constant
-        }
-    }
-
-    private var purchaseButtonWidth: CGFloat!
-
-    private weak var delegate: SubscriptionOfferViewDelegate?
-    private var index: Int?
-    private var storageOfferType: StorageOfferType = .subscriptionPlan
 
     func configure(with plan: SubscriptionPlan,
                    delegate: SubscriptionOfferViewDelegate,
@@ -162,11 +131,11 @@ final class SubscriptionOfferView: UIView, NibInit {
             priceLabel.font = priceIntroFont
             priceLabel.textAlignment = .center
         } else {
-            priceLabel.attributedText = makePrice(plan.price)
+            //priceLabel.attributedText = makePrice(plan.price)
+            priceLabel.text = plan.price
         }
-        purchaseButton.isHidden = hasIntroPrice
-        introductoryPurchaseButtonContainer.isHidden = !hasIntroPrice
-        purchaseButtonWidthConstraint.constant = hasIntroPrice ? 0 : purchaseButtonWidth
+        featureView.purchaseButton.isHidden = hasIntroPrice
+//        featureView.purchaseButtonHeightConstaint.constant = hasIntroPrice ? 0 : featureView.purchaseButtonHeight
         detailsView.isHidden = needHidePurchaseInfo
         if let attributedText = makePackageFeature(plan: plan) {
             typeLabel.attributedText = attributedText
@@ -176,8 +145,8 @@ final class SubscriptionOfferView: UIView, NibInit {
         
         updateDesign(with: plan, style: style)
         
-        self.delegate = delegate
-        self.index = index
+        featureView.delegate = delegate
+        featureView.index = index
     }
     
     func configure(with offer: PackageOffer,
@@ -190,7 +159,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         
         configure(with: plan, delegate: delegate, index: index, style: .full, needHidePurchaseInfo: needHidePurchaseInfo)
         // It is already set to SubscriptionPlan so no need to reset in configure with SubscriptionPlan plan
-        self.storageOfferType = .packageOffer
+        featureView.storageOfferType = .packageOffer
     }
     
     private func makePrice(_ price: String) -> NSAttributedString {
@@ -199,13 +168,13 @@ final class SubscriptionOfferView: UIView, NibInit {
         paragraphStyle.alignment = .center
         
         let priceAttributes: [NSAttributedString.Key: AnyObject] = [
-            .font: UIFont.TurkcellSaturaBolFont(size: 16),
+            .font: UIFont.appFont(.bold, size: 16),
             .foregroundColor: AppColor.marineTwoAndWhite.color,
             .paragraphStyle: paragraphStyle
         ]
         
         let currencyAttributes: [NSAttributedString.Key: AnyObject] = [
-            .font: UIFont.TurkcellSaturaFont(size: 16),
+            .font: UIFont.appFont(.regular, size: 16),
             .foregroundColor: AppColor.marineTwoAndWhite.color,
             .paragraphStyle: paragraphStyle
         ]
@@ -230,10 +199,10 @@ final class SubscriptionOfferView: UIView, NibInit {
         let font: UIFont
         
         if plan.addonType == .storageOnly {
-            font = UIFont.TurkcellSaturaFont(size: 14)
+            font = UIFont.appFont(.regular, size: 16)
             textColor = AppColor.marineTwoAndWhite.color
         } else {
-            font = UIFont.TurkcellSaturaBolFont(size: 14)
+            font = UIFont.appFont(.bold, size: 16)
             textColor = ColorConstants.cardBorderOrange
         }
         
@@ -272,9 +241,9 @@ final class SubscriptionOfferView: UIView, NibInit {
     }
     
     private func updateDesign(with plan: SubscriptionPlan, style: Style) {
-        [purchaseButton, introductoryPurchaseButton].forEach { button in
-            updateButton(button: button, plan: plan, style: style)
-        }
+        
+        updateButton(button: featureView.purchaseButton, plan: plan, style: style)
+        
         //updateDetails(plan: plan)
         updateFeaturesView(features: makeFeatures(plan: plan), style: style)
         updateBorderView(isRecommended: plan.isRecommended)
@@ -309,6 +278,7 @@ final class SubscriptionOfferView: UIView, NibInit {
             button.setBackgroundColor(color, for: UIControl().state)
     
         case .free:
+            featureView.purchaseButtonHeightConstaint.constant = 0
             button.isEnabled = false
             button.setTitle(nil, for: UIControl.State())
             button.setBackgroundColor(.clear, for: UIControl.State())
@@ -336,6 +306,12 @@ final class SubscriptionOfferView: UIView, NibInit {
     private func updateBorderView(isRecommended: Bool) {
         let color = isRecommended ? ColorConstants.cardBorderOrange : ColorConstants.darkTintGray
         recommendationLabel.isHidden = !isRecommended
+        
+        if isRecommended {
+            plateView.layer.cornerRadius = 16
+            plateView.clipsToBounds = true
+            plateView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        }
         borderView.backgroundColor = color
     }
     
@@ -348,16 +324,9 @@ final class SubscriptionOfferView: UIView, NibInit {
         detailsView.isHidden = true
         featureView.isHidden = true
         recommendationLabel.isHidden = false
-        purchaseButton.isHidden = true
+        featureView.purchaseButton.isHidden = true
         borderView.backgroundColor = .lrButterScotch
         recommendationLabel.text = localized(.gracePackageTitle)
         graceDateLabel.text = String(format: localized(.gracePackageExpirationDateTitle), "\(plan.gracePeriodEndDate)")
-    }
-
-    @IBAction private func onPurchaseTap(_ sender: UIButton) {
-        guard let index = index else {
-            return
-        }
-        delegate?.didPressSubscriptionPlanButton(planIndex: index, storageOfferType: storageOfferType)
     }
 }
