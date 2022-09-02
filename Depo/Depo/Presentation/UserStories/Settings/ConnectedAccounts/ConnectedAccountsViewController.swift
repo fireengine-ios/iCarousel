@@ -43,7 +43,7 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
     
     private func setupScreen() {
         setTitle(withString: TextConstants.settingsViewCellConnectedAccounts)
-        navigationController?.navigationItem.title = TextConstants.backTitle
+        navigationController?.navigationItem.title = ""
     }
     
     private func setupTableView() {

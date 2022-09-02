@@ -12,7 +12,7 @@ import GoogleSignIn
 import FirebaseCore
 import AuthenticationServices
 
-class IntroduceViewController: ViewController {
+class IntroduceViewController: BaseViewController {
 
     // MARK: Properties
     private lazy var appleGoogleService = AppleGoogleLoginService()
@@ -157,7 +157,6 @@ class IntroduceViewController: ViewController {
     
     func configurateView() {
         navigationBarHidden = true
-        backButtonForNavigationItem(title: TextConstants.backTitle)
         gradientView.addGradient(firstColor: AppColor.landingGradientStart.cgColor,
                                  secondColor: AppColor.landingGradientFinish.cgColor)
     }

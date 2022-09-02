@@ -180,8 +180,6 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
         })
         
         firstSecurityCodeTextField.becomeFirstResponder()
-
-        navigationItem.backBarButtonItem?.title = TextConstants.backTitle
         
         mainTitle.font = UIFont.TurkcellSaturaRegFont(size: 35)
         mainTitle.textColor = AppColor.blackAndLrTealish.color

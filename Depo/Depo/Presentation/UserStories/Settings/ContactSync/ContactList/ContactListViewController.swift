@@ -88,7 +88,6 @@ final class ContactListViewController: BaseViewController {
     
     private func setupNavigationBar() {
         setTitle(withString: TextConstants.contactListNavBarTitle)
-        backButtonForNavigationItem(title: TextConstants.backTitle)
     }
 }
 

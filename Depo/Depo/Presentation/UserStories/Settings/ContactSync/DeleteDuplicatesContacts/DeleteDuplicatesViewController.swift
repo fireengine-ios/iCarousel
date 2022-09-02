@@ -37,7 +37,6 @@ final class DeleteDuplicatesViewController: BaseViewController {
         
         trackScreen()
         
-        backButtonForNavigationItem(title: TextConstants.backTitle)
         setTitle(withString: TextConstants.deleteDuplicatesTitle)
         
         showRelatedView()

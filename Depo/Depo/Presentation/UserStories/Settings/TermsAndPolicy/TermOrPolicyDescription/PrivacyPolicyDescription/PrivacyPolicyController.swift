@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-final class PrivacyPolicyController: UIViewController {
+final class PrivacyPolicyController: BaseViewController {
 
     private let privacyPolicyService: PrivacyPolicyService = factory.resolve()
     
@@ -75,7 +75,6 @@ final class PrivacyPolicyController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

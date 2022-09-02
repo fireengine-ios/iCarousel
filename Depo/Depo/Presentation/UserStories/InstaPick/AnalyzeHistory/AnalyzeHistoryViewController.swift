@@ -65,7 +65,6 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         
         reloadCards()
         
-        backButtonForNavigationItem(title: TextConstants.backTitle)
         editingTabBar?.view.layoutIfNeeded()
     }
     

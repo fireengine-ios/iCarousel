@@ -34,7 +34,6 @@ final class ContactsBackupHistoryController: BaseViewController {
         trackScreen()
         
         setNavigationTitle(title: TextConstants.contactBackupHistoryNavbarTitle)
-        backButtonForNavigationItem(title: TextConstants.backTitle)
         
         reloadBackups()
         showRelatedView()

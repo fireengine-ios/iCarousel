@@ -11,7 +11,7 @@ import GoogleSignIn
 import FirebaseCore
 import AuthenticationServices
 
-final class IntroduceViewController: ViewController {
+final class IntroduceViewController: BaseViewController {
 
     private lazy var appleGoogleService = AppleGoogleLoginService()
     var output: IntroduceViewOutput!
@@ -133,7 +133,6 @@ final class IntroduceViewController: ViewController {
     
     func configurateView() {
         navigationBarHidden = true
-        backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
     @objc private func handleRemoteConfig() {

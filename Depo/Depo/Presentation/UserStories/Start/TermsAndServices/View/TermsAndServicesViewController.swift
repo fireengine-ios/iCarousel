@@ -77,7 +77,6 @@ class TermsAndServicesViewController: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
     override func viewDidLoad() {

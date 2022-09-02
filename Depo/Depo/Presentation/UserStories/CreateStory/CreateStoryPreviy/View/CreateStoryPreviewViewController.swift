@@ -62,7 +62,7 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
                                                name: UIApplication.didEnterBackgroundNotification,
                                                object: nil)
         
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: TextConstants.backTitle,
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "",
                                                            style: .plain,
                                                            target: nil,
                                                            action: nil)
