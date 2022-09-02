@@ -210,8 +210,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             }
         case .passcode:
             showPasscodeOrPasscodeSettings()
-        case .security:
-            output.goTurkcellSecurity()
         case .helpAndSupport:
             if let delegate = settingsDelegate {
                 delegate.goToHelpAndSupport()
@@ -229,12 +227,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 delegate.goToChatbot()
             } else {
                 output.goToChatbot()
-            }
-        case .darkMode:
-            if let delegate = settingsDelegate {
-                delegate.goToDarkMode()
-            } else {
-                output.goToDarkMode()
             }
         }
     }

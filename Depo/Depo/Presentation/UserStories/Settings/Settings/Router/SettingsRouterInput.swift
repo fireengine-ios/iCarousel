@@ -43,9 +43,7 @@ protocol SettingsRouterInput {
     func openPasscode(handler: @escaping VoidHandler)
 
     func goToConnectedToNetworkFailed()
-    
-    func goTurkcellSecurity(isTurkcell: Bool)
-    
+        
     func showMailUpdatePopUp(delegate: MailVerificationViewControllerDelegate?)
     
     func showError(errorMessage: String)

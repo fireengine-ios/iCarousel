@@ -953,12 +953,6 @@ class RouterVC: NSObject {
     var termsAndPolicy: UIViewController? {
         return TermsAndPolicyViewController.initFromNib()
     }
-    
-    // MARK: Turkcell Security
-    
-    func turkcellSecurity(isTurkcell: Bool) -> UIViewController {
-        return LoginSettingsModuleInitializer.viewController(isTurkcell: isTurkcell)
-    }
 
     // MARK: Invitation
 
