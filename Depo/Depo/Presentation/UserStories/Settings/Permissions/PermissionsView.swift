@@ -26,8 +26,20 @@ protocol PermissionsViewProtocol: AnyObject {
 }
 
 class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
-    @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var inProgressLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel! {
+        willSet {
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 14)
+        }
+    }
+    
+    @IBOutlet private weak var inProgressLabel: UILabel! {
+        willSet {
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 12)
+        }
+    }
+    
     @IBOutlet private weak var descriptionView: UITextView!
     @IBOutlet private weak var permissionSwitch: UISwitch!
     @IBOutlet private weak var backView: UIView!
@@ -81,7 +93,7 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
             title = TextConstants.etkPermissionTitleLabel
             descriptionText = NSMutableAttributedString(string: TextConstants.etkPermissionDescription,
                                                         attributes: [.font: UIFont.TurkcellSaturaFont(size: 16),
-                                                                     .foregroundColor: ColorConstants.lightText])
+                                                                     .foregroundColor: AppColor.label.color])
         case .globalPermission:
             title = TextConstants.globalPermissionTitleLabel
             descriptionText = NSMutableAttributedString(string: TextConstants.globalPermissionDescriptionLabel,

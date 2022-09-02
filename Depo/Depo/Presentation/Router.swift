@@ -951,7 +951,7 @@ class RouterVC: NSObject {
     // MARK: Terms and policy
     
     var termsAndPolicy: UIViewController? {
-        return TermsAndPolicyViewController.initFromNib()
+        return UIViewController()
     }
 
     // MARK: Invitation

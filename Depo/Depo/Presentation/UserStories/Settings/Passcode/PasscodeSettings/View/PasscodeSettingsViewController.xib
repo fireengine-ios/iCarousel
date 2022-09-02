@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PasscodeSettingsViewController" customModule="Billo" customModuleProvider="target">
             <connections>
+                <outlet property="authViewTopAnchor" destination="7to-fd-IpR" id="KEf-HP-m7x"/>
                 <outlet property="biometricsErrorLabel" destination="896-SX-PG3" id="lbW-G8-WBt"/>
                 <outlet property="biometricsLabel" destination="ydG-LF-VUl" id="Iit-gq-AIX"/>
                 <outlet property="biometricsSwitch" destination="4lc-iZ-AQB" id="qTv-q1-yde"/>
@@ -163,7 +164,7 @@
                         <constraint firstAttribute="trailing" secondItem="hFy-VM-Qq2" secondAttribute="trailing" constant="19" id="xkm-Om-gza"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R2f-sO-PRs" userLabel="TouchID View">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R2f-sO-PRs" userLabel="Auth View">
                     <rect key="frame" x="8" y="233.5" width="359" height="87.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Two - Factor Authentication" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x44-8Z-0Wp">

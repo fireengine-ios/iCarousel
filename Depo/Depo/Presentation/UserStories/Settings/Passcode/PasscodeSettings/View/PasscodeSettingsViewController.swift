@@ -78,12 +78,14 @@ final class PasscodeSettingsViewController: BaseViewController {
         }
     }
     
+    @IBOutlet private weak var authViewTopAnchor: NSLayoutConstraint!
     @IBOutlet private weak var twoFactorAuthView: UIView! {
         willSet {
             newValue.backgroundColor = AppColor.secondaryBackground.color
             newValue.addRoundedShadows(cornerRadius: 16,
                                        shadowColor: AppColor.filesBigCellShadow.cgColor,
                                        opacity: 0.4, radius: 4.0)
+            newValue.translatesAutoresizingMaskIntoConstraints = false
         }
     }
     
@@ -178,6 +180,27 @@ final class PasscodeSettingsViewController: BaseViewController {
         output.updatedTwoFactorAuth(isEnabled: sender.isOn)
     }
     
+    private func setLayoutTwoFactorAuth(state: PasscodeSettingsViewState) {
+        twoFactorAuthView.removeFromSuperview()
+        
+        switch state {
+        case .ready:
+            view.addSubview(twoFactorAuthView)
+            
+            twoFactorAuthView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8).activate()
+            twoFactorAuthView.topAnchor.constraint(equalTo: passcodeStackView.bottomAnchor, constant: 24).activate()
+            twoFactorAuthView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 8).activate()
+            twoFactorAuthView.widthAnchor.constraint(equalTo: passcodeStackView.widthAnchor).activate()
+        case .set:
+            view.addSubview(twoFactorAuthView)
+            
+            twoFactorAuthView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8).activate()
+            twoFactorAuthView.topAnchor.constraint(equalTo: setPasscodeView.bottomAnchor, constant: 24).activate()
+            twoFactorAuthView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 8).activate()
+            twoFactorAuthView.widthAnchor.constraint(equalTo: setPasscodeView.widthAnchor).activate()
+        }
+    }
+    
 }
 
 // MARK: PasscodeSettingsViewInput
@@ -197,6 +220,7 @@ extension PasscodeSettingsViewController: PasscodeSettingsViewInput {
             }
             self.setPasscodeView.transform = animationTransform
             self.setPasscodeView.alpha = 0
+            setLayoutTwoFactorAuth(state: state)
             
             UIView.animate(withDuration: animateTime) {
                 views.forEach {
@@ -215,6 +239,7 @@ extension PasscodeSettingsViewController: PasscodeSettingsViewInput {
             }
             self.setPasscodeView.transform = .identity
             self.setPasscodeView.alpha = 1
+            setLayoutTwoFactorAuth(state: state)
             
             UIView.animate(withDuration: animateTime) {
                 views.forEach {

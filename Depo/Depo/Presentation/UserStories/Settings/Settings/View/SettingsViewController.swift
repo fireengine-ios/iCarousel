@@ -216,12 +216,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             } else {
                 output.goToHelpAndSupport()
             }
-        case .termsAndPolicy:
-            if let delegate = settingsDelegate {
-                delegate.goToTermsAndPolicy()
-            } else {
-                output.goToTermsAndPolicy()
-            }
         case .chatbot:
             if let delegate = settingsDelegate {
                 delegate.goToChatbot()
