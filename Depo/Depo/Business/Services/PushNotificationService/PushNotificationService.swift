@@ -355,8 +355,7 @@ private extension PushNotificationService {
     }
 
     func openPackages() {
-        let affiliate = storageVars.value(forDeepLinkParameter: .affiliate) as? String
-        let viewController = router.packages(affiliate: affiliate)
+        let viewController = router.packages()
         pushTo(viewController)
     }
 
