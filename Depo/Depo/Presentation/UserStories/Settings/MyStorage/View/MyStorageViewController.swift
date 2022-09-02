@@ -13,34 +13,21 @@ final class MyStorageViewController: BaseViewController {
     //MARK: Properties
     var output: MyStorageViewOutput!
     private lazy var activityManager = ActivityIndicatorManager()
-    
-//    @IBOutlet private weak var descriptionLabel: UILabel! {
-//        willSet {
-//            newValue.textColor = ColorConstants.switcherGrayColor
-//            newValue.font = UIFont.TurkcellSaturaFont(size: 16)
-//            newValue.backgroundColor = .clear
-//            newValue.numberOfLines = 0
-//            newValue.text = TextConstants.myPackagesDescription
-//        }
-//    }
-//
-//
-//    @IBOutlet private weak var packagesLabel: UILabel! {
-//        willSet {
-//            newValue.adjustsFontSizeToFitWidth()
-//            newValue.text = TextConstants.packagesIHave
-//            newValue.textColor = ColorConstants.darkText
-//            newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
-//        }
-//    }
 
     @IBOutlet weak var menuTableView: ResizableTableView! {
         willSet {
-            newValue.rowHeight = 51
+            newValue.rowHeight = 65
             let nib = UINib(nibName: String(describing: PackagesTableViewCell.self), bundle: nil)
             let identifier = String(describing: PackagesTableViewCell.self)
             newValue.register(nib, forCellReuseIdentifier: identifier)
+            newValue.separatorStyle = .none
             newValue.isScrollEnabled = false
+            
+            newValue.layer.cornerRadius = 16
+            newValue.layer.borderColor = AppColor.settingsPackagesCell.cgColor
+            newValue.layer.borderWidth = 1
+            newValue.backgroundColor = AppColor.settingsPackagesCell.color
+            setupShadow(view: newValue)
         }
     }
     
@@ -61,7 +48,7 @@ final class MyStorageViewController: BaseViewController {
             newValue.setTitle(TextConstants.restorePurchasesButton, for: .normal)
             newValue.setTitleColor(AppColor.settingsRestoreTextColor.color, for: .normal)
             newValue.backgroundColor = .white
-            newValue.titleLabel?.font = .TurkcellSaturaBolFont(size: 16)
+            newValue.titleLabel?.font = .appFont(.medium, size: 16)
             newValue.layer.borderWidth = 1
             newValue.layer.borderColor = AppColor.settingsRestoreTextColor.cgColor
             newValue.layer.cornerRadius = 23
@@ -108,7 +95,7 @@ final class MyStorageViewController: BaseViewController {
        let view = UILabel()
         view.textColor = AppColor.settingsRestoreTextColor.color
         view.text = TextConstants.packageSectionTitle
-        view.font = UIFont.TurkcellSaturaBolFont(size: 18)
+        view.font = .appFont(.medium, size: 14)
         view.backgroundColor = .clear
         return view
     }()
@@ -117,7 +104,7 @@ final class MyStorageViewController: BaseViewController {
        let view = UILabel()
         view.textColor = ColorConstants.darkText
         view.text = TextConstants.myPackages
-        view.font = UIFont.TurkcellSaturaBolFont(size: 18)
+        view.font = .appFont(.medium, size: 14)
         view.backgroundColor = .clear
         return view
     }()
@@ -177,6 +164,15 @@ final class MyStorageViewController: BaseViewController {
     @IBAction private func restorePurhases() {
         startActivityIndicator()
         output.restorePurchasesPressed()
+    }
+    
+    private func setupShadow(view: UIView) {
+        let shadowColor = UIColor(red: 126 / 255, green: 129 / 255, blue: 133 / 255, alpha:0.4)
+        view.layer.shadowColor = shadowColor.cgColor
+        view.layer.shadowOffset = CGSize(width: 0, height: -2)
+        view.layer.shadowOpacity = 1
+        view.layer.shadowRadius = 16
+        view.layer.masksToBounds = false
     }
 }
 
@@ -404,6 +400,12 @@ extension MyStorageViewController: UITableViewDelegate {
         
         let cell = cell as? PackagesTableViewCell
         cell?.configure(type: item)
+        
+        cell?.layer.cornerRadius = 16
+        cell?.layer.borderColor = AppColor.settingsPackagesCell.cgColor
+        cell?.layer.borderWidth = 1
+        cell?.backgroundColor = AppColor.settingsPackagesCell.color
+
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -413,9 +415,6 @@ extension MyStorageViewController: UITableViewDelegate {
         (output as? PackageInfoViewDelegate)?.onSeeDetailsTap(with: type)
     }
 }
-
-
-
 
 // MARK: - ActivityIndicator
 extension MyStorageViewController: ActivityIndicator {

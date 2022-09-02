@@ -12,7 +12,6 @@ protocol SubscriptionOfferViewDelegate: AnyObject {
     func didPressSubscriptionPlanButton(planIndex: Int, storageOfferType: StorageOfferType)
 }
 
-// Extend it according to storage offering
 enum StorageOfferType {
     case subscriptionPlan, packageOffer
 }
@@ -116,7 +115,7 @@ final class SubscriptionOfferView: UIView, NibInit {
     }
     
     @IBOutlet private weak var featureView: SubscriptionFeaturesView!
-
+    
     func configure(with plan: SubscriptionPlan,
                    delegate: SubscriptionOfferViewDelegate,
                    index: Int,
@@ -131,11 +130,9 @@ final class SubscriptionOfferView: UIView, NibInit {
             priceLabel.font = priceIntroFont
             priceLabel.textAlignment = .center
         } else {
-            //priceLabel.attributedText = makePrice(plan.price)
             priceLabel.text = plan.price
         }
         featureView.purchaseButton.isHidden = hasIntroPrice
-//        featureView.purchaseButtonHeightConstaint.constant = hasIntroPrice ? 0 : featureView.purchaseButtonHeight
         detailsView.isHidden = needHidePurchaseInfo
         if let attributedText = makePackageFeature(plan: plan) {
             typeLabel.attributedText = attributedText
@@ -160,35 +157,6 @@ final class SubscriptionOfferView: UIView, NibInit {
         configure(with: plan, delegate: delegate, index: index, style: .full, needHidePurchaseInfo: needHidePurchaseInfo)
         // It is already set to SubscriptionPlan so no need to reset in configure with SubscriptionPlan plan
         featureView.storageOfferType = .packageOffer
-    }
-    
-    private func makePrice(_ price: String) -> NSAttributedString {
-        let attributedString = NSMutableAttributedString(string: price)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .center
-        
-        let priceAttributes: [NSAttributedString.Key: AnyObject] = [
-            .font: UIFont.appFont(.bold, size: 16),
-            .foregroundColor: AppColor.marineTwoAndWhite.color,
-            .paragraphStyle: paragraphStyle
-        ]
-        
-        let currencyAttributes: [NSAttributedString.Key: AnyObject] = [
-            .font: UIFont.appFont(.regular, size: 16),
-            .foregroundColor: AppColor.marineTwoAndWhite.color,
-            .paragraphStyle: paragraphStyle
-        ]
-        
-        let fullRange = attributedString.mutableString.range(of: price)
-        attributedString.addAttributes(currencyAttributes, range: fullRange)
-        
-        let words = price.components(separatedBy: "\n")
-        if let priceWord = words[safe: 0] {
-            let priceRange = attributedString.mutableString.range(of: priceWord)
-            attributedString.addAttributes(priceAttributes, range: priceRange)
-        }
-        
-        return attributedString
     }
     
     private func makePackageFeature(plan: SubscriptionPlan) -> NSAttributedString? {
@@ -244,10 +212,10 @@ final class SubscriptionOfferView: UIView, NibInit {
         
         updateButton(button: featureView.purchaseButton, plan: plan, style: style)
         
-        //updateDetails(plan: plan)
+        updateDetails(plan: plan)
         updateFeaturesView(features: makeFeatures(plan: plan), style: style)
         updateBorderView(isRecommended: plan.isRecommended)
-        //updateGracePeriodView(plan: plan)
+        updateGracePeriodView(plan: plan)
     }
     
     private func updateButton(button: RoundedInsetsButton, plan: SubscriptionPlan, style: Style) {
@@ -261,10 +229,8 @@ final class SubscriptionOfferView: UIView, NibInit {
             
         case .default:
             let isRecommended = plan.isRecommended
-            let color: UIColor
             switch style {
             case .full:
-                color = AppColor.marineTwoAndTealish.color
                 button.setTitle(TextConstants.purchase, for: UIControl.State())
             case .short:
                 let titleColor = plan.isRecommended ? ColorConstants.whiteColor : AppColor.marineTwoAndWhite.color
@@ -272,10 +238,9 @@ final class SubscriptionOfferView: UIView, NibInit {
                 let borderColor = isRecommended ? ColorConstants.marineTwo : ColorConstants.darkTintGray
                 button.layer.borderColor = borderColor.cgColor
                 button.layer.borderWidth = 2
-                color = isRecommended ? AppColor.marineTwoAndTealish.color : .clear
                 button.setTitle(TextConstants.upgrade, for: UIControl.State())
             }
-            button.setBackgroundColor(color, for: UIControl().state)
+            button.setBackgroundColor(AppColor.forYouButton.color, for: UIControl().state)
     
         case .free:
             featureView.purchaseButtonHeightConstaint.constant = 0
@@ -304,15 +269,31 @@ final class SubscriptionOfferView: UIView, NibInit {
     }
     
     private func updateBorderView(isRecommended: Bool) {
-        let color = isRecommended ? ColorConstants.cardBorderOrange : ColorConstants.darkTintGray
         recommendationLabel.isHidden = !isRecommended
-        
         if isRecommended {
             plateView.layer.cornerRadius = 16
             plateView.clipsToBounds = true
             plateView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+            
+            let gradient = gradientBorderView(view: borderView)
+            borderView.clipsToBounds = true
+            borderView.layer.insertSublayer(gradient, at: 0)
         }
-        borderView.backgroundColor = color
+    }
+    
+    private func gradientBorderView(view: UIView) -> CAGradientLayer {
+        let gradient = CAGradientLayer()
+        gradient.type = .axial
+        gradient.colors = [
+            AppColor.SettingsPackagesRecommendedOne.cgColor,
+            AppColor.SettingsPackagesRecommendedTwo.cgColor,
+            AppColor.SettingsPackagesRecommendedThree.cgColor,
+            AppColor.SettingsPackagesRecommendedFour.cgColor
+        ]
+        gradient.frame = view.bounds
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradient.endPoint = CGPoint(x: 0.6, y: 0.6)
+        return gradient
     }
     
     private func updateGracePeriodView(plan: SubscriptionPlan) {

@@ -89,6 +89,11 @@ enum AppColor {
     case settingsMyPackages
     case settingsPackages
     case settingsRestoreTextColor
+    case settingsPackagesCell
+    case SettingsPackagesRecommendedOne
+    case SettingsPackagesRecommendedTwo
+    case SettingsPackagesRecommendedThree
+    case SettingsPackagesRecommendedFour
     
     //MARK: Landing
     case landingGradientFinish

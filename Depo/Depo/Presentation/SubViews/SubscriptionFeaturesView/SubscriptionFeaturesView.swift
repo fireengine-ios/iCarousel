@@ -84,7 +84,6 @@ final class SubscriptionFeaturesView: UIView {
     private func addSubviews() {
         addSubview(stackView)
         addSubview(showButton)
-//        addSubview(dividerLineView)
         addSubview(purchaseButton)
     }
     
@@ -100,12 +99,6 @@ final class SubscriptionFeaturesView: UIView {
         showButton.bottomAnchor.constraint(equalTo: self.bottomAnchor).activate()
         showButton.leadingAnchor.constraint(equalTo: self.leadingAnchor).activate()
         showButton.trailingAnchor.constraint(equalTo: self.trailingAnchor).activate()
-        
-//        dividerLineView.translatesAutoresizingMaskIntoConstraints = false
-//        dividerLineView.heightAnchor.constraint(equalToConstant: 1).activate()
-//        dividerLineView.bottomAnchor.constraint(equalTo: self.showButton.topAnchor).activate()
-//        dividerLineView.leadingAnchor.constraint(equalTo: self.showButton.leadingAnchor).activate()
-//        dividerLineView.trailingAnchor.constraint(equalTo: self.showButton.trailingAnchor).activate()
         
         purchaseButton.translatesAutoresizingMaskIntoConstraints = false
         purchaseButtonHeightConstaint = purchaseButton.heightAnchor.constraint(equalToConstant: purchaseButtonHeight)
@@ -134,7 +127,6 @@ final class SubscriptionFeaturesView: UIView {
     
     private func removeCollapseButton(offsetFromBottom constant: CGFloat) {
         showButton.removeFromSuperview()
-        //dividerLineView.removeFromSuperview()
         stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: constant).activate()
     }
     
