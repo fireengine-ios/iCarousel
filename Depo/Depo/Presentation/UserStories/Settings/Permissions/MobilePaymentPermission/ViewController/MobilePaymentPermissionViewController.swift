@@ -36,7 +36,7 @@ final class MobilePaymentPermissionViewController: BaseViewController, NibInit {
     }
     
     private func setupNavigation() {
-        let backButton = UIBarButtonItem(title: TextConstants.backTitle, target: self, selector: #selector(backTapped))
+        let backButton = UIBarButtonItem(title: "", target: self, selector: #selector(backTapped))
         navigationItem.leftBarButtonItem = backButton
     }
     

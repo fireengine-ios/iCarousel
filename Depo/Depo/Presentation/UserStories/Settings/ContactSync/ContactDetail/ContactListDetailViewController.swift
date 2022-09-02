@@ -27,7 +27,6 @@ final class ContactListDetailViewController: BaseViewController, NibInit {
         super.viewDidLoad()
 
         setTitle(withString: TextConstants.contactDetailNavBarTitle)
-        backButtonForNavigationItem(title: TextConstants.backTitle)
         
         setupTableView()
         setupData()

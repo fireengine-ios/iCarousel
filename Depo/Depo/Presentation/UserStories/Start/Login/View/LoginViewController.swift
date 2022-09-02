@@ -10,7 +10,7 @@ import UIKit
 import Typist
 import WidgetKit
 
-final class LoginViewController: ViewController {
+final class LoginViewController: BaseViewController {
 
     //MARK: IBOutlets
     @IBOutlet private weak var alertsStackView: UIStackView! {
@@ -223,7 +223,6 @@ final class LoginViewController: ViewController {
     private func setupNavBar() {
         
         setNavigationTitle(title: TextConstants.loginTitle)
-        backButtonForNavigationItem(title: TextConstants.backTitle)
         setNavigationRightBarButton(title: TextConstants.loginFAQButton, target: self, action: #selector(handleFaqButtonTap))
     }
     

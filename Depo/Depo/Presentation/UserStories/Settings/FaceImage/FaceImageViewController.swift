@@ -28,7 +28,6 @@ final class FaceImageViewController: ViewController, NibInit {
         super.viewDidLoad()
         
         setTitle(withString: TextConstants.faceAndImageGrouping)
-        navigationController?.navigationItem.title = TextConstants.backTitle
         
         activityManager.delegate = self
         trackScreen()

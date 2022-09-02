@@ -87,7 +87,6 @@ final class SettingsViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
     private func setupTableView() {

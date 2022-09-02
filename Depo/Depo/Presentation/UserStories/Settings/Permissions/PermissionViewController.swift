@@ -73,7 +73,6 @@ final class PermissionViewController: ViewController {
         view.backgroundColor = AppColor.primaryBackground.color
         
         setTitle(withString: TextConstants.settingsViewCellPermissions)
-//        navigationController?.navigationItem.title = TextConstants.backTitle
     }
     
     private func setupLayout() {

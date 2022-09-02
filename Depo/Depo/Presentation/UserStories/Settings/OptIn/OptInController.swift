@@ -72,7 +72,6 @@ final class OptInController: ViewController, NibInit {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupNavBar()
     }
         
     func setupTimer(withRemainingTime remainingTime: Int) {
@@ -152,9 +151,6 @@ final class OptInController: ViewController, NibInit {
     }
     
     // MARK: - Utility methods
-    private func setupNavBar() {
-        backButtonForNavigationItem(title: TextConstants.backTitle)
-    }
     
     private func setupInitialState() {
         codeTextFields.forEach({
@@ -168,7 +164,6 @@ final class OptInController: ViewController, NibInit {
         if !Device.isIpad {
             setNavigationTitle(title: TextConstants.enterSecurityCode)
         }
-        navigationItem.backBarButtonItem?.title = TextConstants.backTitle
         
         mainTitle.font = UIFont.TurkcellSaturaRegFont(size: 35)
         mainTitle.textColor = AppColor.blackAndLrTealish.color

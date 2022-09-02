@@ -14,7 +14,7 @@ protocol RegistrationViewDelegate: AnyObject {
     func showCaptcha()
 }
 
-final class RegistrationViewController: ViewController {
+final class RegistrationViewController: BaseViewController {
 
     //MARK: IBOutlets
     @IBOutlet private weak var shadowView: UIView! {
@@ -208,7 +208,6 @@ final class RegistrationViewController: ViewController {
     }
     
     private func setupNavBar() {
-        backButtonForNavigationItem(title: TextConstants.backTitle)
         setNavigationTitle(title: TextConstants.registerTitle)
         setNavigationRightBarButton(title: TextConstants.loginFAQButton, target: self, action: #selector(handleFaqButtonTap))
     }
