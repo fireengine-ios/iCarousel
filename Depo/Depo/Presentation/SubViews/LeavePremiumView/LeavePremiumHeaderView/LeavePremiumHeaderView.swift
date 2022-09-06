@@ -51,10 +51,10 @@ final class LeavePremiumHeaderView: UIView {
     }
     
     private func setupDesign() {
-        topMessageLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
-        topMessageLabel.textColor = ColorConstants.darkText
+        topMessageLabel.font = .appFont(.medium, size: 14)
+        topMessageLabel.textColor = AppColor.label.color
         
-        detailsLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
-        detailsLabel.textColor = ColorConstants.textGrayColor
+        detailsLabel.font = .appFont(.regular, size: 12)
+        detailsLabel.textColor = AppColor.label.color
     }
 }
