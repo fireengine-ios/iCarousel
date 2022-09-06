@@ -120,7 +120,6 @@ final class PremiumListView: UIView {
     // MARK: Utility methods(Public)
     func configure(with title: String, image: UIImage) {
         titleLabel.text = title
-        iconImageView.image = image
     }
     
     // MARK: Utility methods(Private)
