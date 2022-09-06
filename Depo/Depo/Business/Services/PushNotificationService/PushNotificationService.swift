@@ -191,7 +191,7 @@ final class PushNotificationService {
         case .socialMedia: openSocialMedia()
         case .faq: openFaq()
         case .passcode: openPasscode()
-        case .loginSettings: openLoginSettings()
+        case .loginSettings: openPasscode()
         case .faceImageRecognition, .widgetFIRDisabled: openFaceImageRecognition()
         case .people, .widgetFIR: openPeople()
         case .things: openThings()
@@ -446,12 +446,6 @@ private extension PushNotificationService {
     func openPasscode() {
         let isTurkcellAccount = SingletonStorage.shared.accountInfo?.accountType == "TURKCELL"
         pushTo(router.passcodeSettings(isTurkcell: isTurkcellAccount, inNeedOfMail: false))
-    }
-
-    func openLoginSettings() {
-        let isTurkcell = SingletonStorage.shared.accountInfo?.accountType == AccountType.turkcell.rawValue
-        let controller = router.turkcellSecurity(isTurkcell: isTurkcell)
-        pushTo(controller)
     }
 
     func openFaceImageRecognition() {

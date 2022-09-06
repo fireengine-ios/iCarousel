@@ -26,20 +26,18 @@ class SettingsTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         //let bgView = UIView()
-        if (selected) {
-            titleLabel.font = .appFont(.regular, size: 14)
+        
+        if Device.isIpad, selected {
             backgroundColor = ColorConstants.selectedCellBlueColor
-        } else {
-            titleLabel.font = .appFont(.regular, size: 14)
-            backgroundColor = AppColor.secondaryBackground.color
         }
         //backgroundView = bgView
         // Configure the view for the selected state
     }
     
-    func setTextForLabel(titleText: String, needShowSeparator: Bool) {
+    func setTextForLabel(titleText: String, needShowSeparator: Bool, background: UIColor? = nil) {
         titleLabel.text = titleText
         separatorView.isHidden = !needShowSeparator
+        self.backgroundColor = background ?? AppColor.secondaryBackground.color
     }
     
 }

@@ -6,17 +6,23 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class PasscodeSettingsPresenter {
+class PasscodeSettingsPresenter: BasePresenter {
     weak var view: PasscodeSettingsViewInput?
     var interactor: PasscodeSettingsInteractorInput!
     var router: PasscodeSettingsRouterInput!
+    
+    override func outputView() -> Waiting? {
+        return view as? Waiting
+    }
 }
 
 // MARK: PasscodeSettingsViewOutput
 extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
     
     func viewIsReady() {
+        startAsyncOperation()
         interactor.trackScreen()
+        interactor.requestTurkcellSecurityState()
     }
     
     func changePasscode() {
@@ -74,11 +80,31 @@ extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
     func mailVerified() {
         interactor.inNeedOfMailVerification = false
     }
+    
+    func updatedTwoFactorAuth(isEnabled: Bool) {
+        // https://jira.turkcell.com.tr/browse/DE-12172
+        startAsyncOperation()
+        interactor.changeTurkcellSecurity(passcode: false, autoLogin: false, twoFactorAuth: isEnabled)
+    }
 }
 
 // MARK: PasscodeSettingsInteractorOutput
 extension PasscodeSettingsPresenter: PasscodeSettingsInteractorOutput {
-
+    func acquiredTurkcellSecurityState(passcode: Bool, autoLogin: Bool, twoFactorAuth: Bool) {
+        asyncOperationSuccess()
+        view?.updatedTwoFactorAuth(isEnabled: twoFactorAuth)
+    }
+    
+    func failedToAcquireTurkcellSecurityState() {
+        acquiredTurkcellSecurityState(passcode: interactor.turkcellPasswordOn,
+                                      autoLogin: interactor.turkcellAutoLoginOn,
+                                      twoFactorAuth: interactor.twoFactorAuth)
+    }
+    
+    func changeTurkcellSecurityFailed(error: ErrorResponse) {
+        asyncOperationSuccess()
+        UIApplication.showErrorAlert(message: error.description)
+    }
 }
 
 // MARK: PasscodeSettingsModuleInput
