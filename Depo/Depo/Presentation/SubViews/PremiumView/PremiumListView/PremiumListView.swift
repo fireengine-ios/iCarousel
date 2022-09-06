@@ -139,8 +139,8 @@ final class PremiumListView: UIView {
     }
     
     private func setupDesign() {
-        titleLabel.font = .appFont(.medium, size: 15)
-        titleLabel.textColor = ColorConstants.darkText
+        titleLabel.font = .appFont(.regular, size: 12)
+        titleLabel.textColor = AppColor.label.color
     }
 
 }
