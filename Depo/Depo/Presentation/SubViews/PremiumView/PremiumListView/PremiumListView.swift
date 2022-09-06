@@ -109,13 +109,11 @@ final class PremiumListView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
         setupView()
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         setup()
     }
     
@@ -133,7 +131,7 @@ final class PremiumListView: UIView {
         view.frame = bounds
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.translatesAutoresizingMaskIntoConstraints = true
-        
+        view.backgroundColor = AppColor.settingsBackground.color
         addSubview(view)
     }
     
@@ -142,7 +140,7 @@ final class PremiumListView: UIView {
     }
     
     private func setupDesign() {
-        titleLabel.font = UIFont.TurkcellSaturaMedFont(size: 15)
+        titleLabel.font = .appFont(.medium, size: 15)
         titleLabel.textColor = ColorConstants.darkText
     }
 

@@ -63,12 +63,11 @@ final class LeavePremiumView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = true
         
         addSubview(view)
-        premiumListStackView.layer.borderWidth = 3
-        premiumListStackView.layer.borderColor = AppColor.profileInfoOrange.cgColor
+        premiumListStackView.insertCustomizedViewIntoStack(background: AppColor.settingsBackground.color, cornerRadius: 16, shadowColor: AppColor.settingsPremiumListShadow.cgColor, shadowOpacity: 0.2, shadowRadius: 16)
     }
     
     private func setupDesign() {
-        leavePremiumButton.setTitleColor(.white, for: .normal)
+        leavePremiumButton.setTitleColor(AppColor.settingsBackground.color, for: .normal)
         leavePremiumButton.backgroundColor = ColorConstants.darkBlueColor
         leavePremiumButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
         leavePremiumButton.layer.masksToBounds = true

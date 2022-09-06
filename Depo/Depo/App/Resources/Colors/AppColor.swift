@@ -94,6 +94,8 @@ enum AppColor {
     case SettingsPackagesRecommendedTwo
     case SettingsPackagesRecommendedThree
     case SettingsPackagesRecommendedFour
+    case settingsPremiumListShadow
+    case settingsBackground
     
     //MARK: Landing
     case landingGradientFinish
