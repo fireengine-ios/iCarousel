@@ -50,5 +50,16 @@ final class ForYouRouter: ForYouRouterInput {
             return
         }
     }
+    
+    func navigateToItemDetail(_ album: AlbumServiceResponse, forItem item: Item) {
+        let albumItem = AlbumItem(remote: album)
+        let vc = router.imageFacePhotosController(album: albumItem, item: item, status: .active, moduleOutput: nil, faceImageType: nil)
+        router.pushViewController(viewController: vc)
+    }
+    
+    func navigateToAlbumDetail(album: AlbumItem) {
+        let albumVC = router.albumDetailController(album: album, type: .List, status: .active, moduleOutput: nil)
+        router.pushViewController(viewController: albumVC)
+    }
 }
 

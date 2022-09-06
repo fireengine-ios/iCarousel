@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class ForYouPresenter: ForYouModuleInput, ForYouInteractorOutput {
+final class ForYouPresenter: BasePresenter, ForYouModuleInput {
     weak var view: ForYouViewInput!
     var interactor: ForYouInteractorInput!
     var router: ForYouRouterInput!
@@ -34,5 +34,19 @@ extension ForYouPresenter: ForYouViewOutput {
     
     func navigateToCreate(for view: ForYouViewEnum) {
         router.navigateToCreate(for: view)
+    }
+    
+    func navigateToItemDetail(item: WrapData) {
+        interactor.loadItem(item)
+    }
+    
+    func navigateToAlbumDetail(album: AlbumItem) {
+        router.navigateToAlbumDetail(album: album)
+    }
+}
+
+extension ForYouPresenter: ForYouInteractorOutput {
+    func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item) {
+        router.navigateToItemDetail(album, forItem: item)
     }
 }

@@ -131,6 +131,14 @@ extension ForYouViewController: ForYouFaceImageTableViewCellDelegae {
     func navigateToCreate(for view: ForYouViewEnum) {
         output.navigateToCreate(for: view)
     }
+    
+    func navigateToItemDetail(item: WrapData) {
+        output.navigateToItemDetail(item: item)
+    }
+    
+    func naviateToAlbumDetail(album: AlbumItem) {
+        output.navigateToAlbumDetail(album: album)
+    }
 }
 
 //MARK: -ItemOperationManagerViewProtocol

@@ -12,6 +12,8 @@ import MBProgressHUD
 protocol ForYouTableViewCellDelegate: AnyObject {
     func onSeeAllButton(for view: ForYouViewEnum)
     func navigateToCreate(for view: ForYouViewEnum)
+    func navigateToItemDetail(item: WrapData)
+    func naviateToAlbumDetail(album: AlbumItem)
 }
 
 class ForYouTableViewCell: UITableViewCell {
@@ -48,35 +50,11 @@ class ForYouTableViewCell: UITableViewCell {
     private var hud: MBProgressHUD?
     private let emptyDataView = ForYouEmptyCellView.initFromNib()
     
-    private var thingsData: [WrapData] = [] {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
-    
-    private var placesData: [WrapData] = [] {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
-    
-    private var peopleData: [WrapData] = [] {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
-    
-    private var albumsData: [AlbumItem] = [] {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
-    
-    private var photopickData: [InstapickAnalyze] = [] {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
+    private var thingsData: [WrapData] = []
+    private var placesData: [WrapData] = []
+    private var peopleData: [WrapData] = []
+    private var albumsData: [AlbumItem] = []
+    private var photopickData: [InstapickAnalyze] = []
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -95,7 +73,7 @@ class ForYouTableViewCell: UITableViewCell {
             getPeople { data in
                 self.showEmptyDataViewIfNeeded(isShow: data.isEmpty)
                 self.peopleData = data
-                self.hud?.hide(animated: true)
+                self.handleSuccessResponse()
             } fail: {
                 print("PEOPLE ERROR")
             }
@@ -103,7 +81,7 @@ class ForYouTableViewCell: UITableViewCell {
             getThings { data in
                 self.showEmptyDataViewIfNeeded(isShow: data.isEmpty)
                 self.thingsData = data
-                self.hud?.hide(animated: true)
+                self.handleSuccessResponse()
             } fail: {
                 print("THINGS ERROR")
             }
@@ -111,7 +89,7 @@ class ForYouTableViewCell: UITableViewCell {
             getPlaces { data in
                 self.showEmptyDataViewIfNeeded(isShow: data.isEmpty)
                 self.placesData = data
-                self.hud?.hide(animated: true)
+                self.handleSuccessResponse()
             } fail: {
                 print("PLACES ERROR")
             }
@@ -119,14 +97,14 @@ class ForYouTableViewCell: UITableViewCell {
             getInstapickThumbnails { data in
                 self.showEmptyDataViewIfNeeded(isShow: data.isEmpty)
                 self.photopickData = data
-                self.hud?.hide(animated: true)
+                self.handleSuccessResponse()
             } fail: {
                 print("PHOTOPICK ERROR")
             }
         case .albums:
             getAlbums { data in
                 self.albumsData = data
-                self.hud?.hide(animated: true)
+                self.handleSuccessResponse()
             } fail: {
                 print("ALBUMS ERROR")
             }
@@ -134,8 +112,9 @@ class ForYouTableViewCell: UITableViewCell {
         }
     }
     
-    func getCellHeightFor(cell: ForYouViewEnum) -> CGFloat {
-        return 140
+    private func handleSuccessResponse() {
+        hud?.hide(animated: true)
+        collectionView.reloadData()
     }
     
     private func configureTableView() {
@@ -330,6 +309,25 @@ extension ForYouTableViewCell: UICollectionViewDelegateFlowLayout {
         }
         
         return 8
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch currentView {
+        case .people:
+            let item = peopleData[indexPath.row]
+            delegate?.navigateToItemDetail(item: item)
+        case .things:
+            let item = thingsData[indexPath.row]
+            delegate?.navigateToItemDetail(item: item)
+        case .places:
+            let item = placesData[indexPath.row]
+            delegate?.navigateToItemDetail(item: item)
+        case .albums:
+            let album = albumsData[indexPath.row]
+            delegate?.naviateToAlbumDetail(album: album)
+        default:
+            return
+        }
     }
 }
 
