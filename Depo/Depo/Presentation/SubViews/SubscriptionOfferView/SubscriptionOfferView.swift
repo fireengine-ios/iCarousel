@@ -46,13 +46,6 @@ final class SubscriptionOfferView: UIView, NibInit {
         }
     }
     
-    @IBOutlet private weak var plateView: UIView! {
-        willSet {
-            newValue.layer.masksToBounds = true
-            newValue.layer.cornerRadius = 16
-        }
-    }
-    
     @IBOutlet private weak var nameLabel: UILabel! {
         willSet {
             newValue.font = .appFont(.medium, size: 14)
@@ -120,7 +113,19 @@ final class SubscriptionOfferView: UIView, NibInit {
         }
     }
     
-    @IBOutlet private weak var featureView: SubscriptionFeaturesView!
+    @IBOutlet private weak var plateView: UIView! {
+        willSet {
+            newValue.backgroundColor = AppColor.settingsBackground.color
+            newValue.layer.masksToBounds = true
+            newValue.layer.cornerRadius = 16
+        }
+    }
+    
+    @IBOutlet private weak var featureView: SubscriptionFeaturesView! {
+        willSet {
+            newValue.backgroundColor = .clear
+        }
+    }
     
     func configure(with plan: SubscriptionPlan,
                    delegate: SubscriptionOfferViewDelegate,
