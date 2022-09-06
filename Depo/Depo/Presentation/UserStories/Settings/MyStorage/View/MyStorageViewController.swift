@@ -405,7 +405,6 @@ extension MyStorageViewController: UITableViewDelegate {
         cell?.layer.borderColor = AppColor.settingsPackagesCell.cgColor
         cell?.layer.borderWidth = 1
         cell?.backgroundColor = AppColor.settingsPackagesCell.color
-
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

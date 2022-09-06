@@ -19,6 +19,7 @@ final class LeavePremiumView: UIView {
     @IBOutlet private weak var leavePremiumHeaderView: LeavePremiumHeaderView!
     @IBOutlet weak var leavePremiumButton: InsetsButton!
     @IBOutlet var premiumListViews: [PremiumListView]!
+    @IBOutlet weak var premiumListStackView: UIStackView!
     
     @IBOutlet private var view: UIView!
 
@@ -62,6 +63,8 @@ final class LeavePremiumView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = true
         
         addSubview(view)
+        premiumListStackView.layer.borderWidth = 3
+        premiumListStackView.layer.borderColor = AppColor.profileInfoOrange.cgColor
     }
     
     private func setupDesign() {

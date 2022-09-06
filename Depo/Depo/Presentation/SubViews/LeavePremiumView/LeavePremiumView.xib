@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="leavePremiumButton" destination="EyK-S1-Rmt" id="R00-T2-XnV"/>
                 <outlet property="leavePremiumHeaderView" destination="YlA-UQ-7Pw" id="rvf-hg-Ahi"/>
+                <outlet property="premiumListStackView" destination="ZIN-J6-zfJ" id="Z2e-5o-nU4"/>
                 <outlet property="view" destination="iN0-l3-epB" id="U8C-hN-cof"/>
                 <outletCollection property="premiumListViews" destination="1Vj-r9-8Mc" collectionClass="NSMutableArray" id="kEy-e7-JHM"/>
                 <outletCollection property="premiumListViews" destination="uQC-iy-KTd" collectionClass="NSMutableArray" id="mnt-0x-NfN"/>
@@ -29,7 +30,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XSv-5u-yBk">
-                    <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                    <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                     <subviews>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="647" translatesAutoresizingMaskIntoConstraints="NO" id="q6c-LM-wKc">
                             <rect key="frame" x="0.0" y="0.0" width="768" height="1443"/>

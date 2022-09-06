@@ -281,10 +281,6 @@ final class SubscriptionOfferView: UIView, NibInit {
             plateView.clipsToBounds = true
             plateView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
             
-//            let gradient = gradientBorderView(view: borderView)
-//            borderView.clipsToBounds = true
-//            borderView.layer.insertSublayer(gradient, at: 0)
-//
             let gradient = gradientBorderView(view: topStackView)
             topStackView.clipsToBounds = true
             topStackView.layer.insertSublayer(gradient, at: 0)

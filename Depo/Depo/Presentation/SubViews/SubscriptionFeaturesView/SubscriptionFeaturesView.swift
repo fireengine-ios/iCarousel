@@ -119,7 +119,6 @@ final class SubscriptionFeaturesView: UIView {
             removeCollapseButton(offsetFromBottom: 0)
             
         case .recommended(features: let features):
-            //removeCollapseButton(offsetFromBottom: -8)
             showButton.isSelected.toggle()
             addFeatures([TextConstants.featureStandardFeatures])
             addFeatures(features.map({ $0.description }), isPremium: true)
