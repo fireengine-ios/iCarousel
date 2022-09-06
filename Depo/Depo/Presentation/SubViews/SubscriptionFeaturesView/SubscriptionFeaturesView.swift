@@ -119,7 +119,8 @@ final class SubscriptionFeaturesView: UIView {
             removeCollapseButton(offsetFromBottom: 0)
             
         case .recommended(features: let features):
-            removeCollapseButton(offsetFromBottom: -8)
+            //removeCollapseButton(offsetFromBottom: -8)
+            showButton.isSelected.toggle()
             addFeatures([TextConstants.featureStandardFeatures])
             addFeatures(features.map({ $0.description }), isPremium: true)
         }
@@ -164,7 +165,7 @@ final class SubscriptionFeaturesView: UIView {
         
         if sender.isSelected {
             switch features {
-            case .recommended, .premiumOnly:
+            case .premiumOnly:
                 ///expanded by default
                 break
                 
@@ -185,6 +186,9 @@ final class SubscriptionFeaturesView: UIView {
                                         TextConstants.featureStorageOnlyAdditional1,
                                         TextConstants.featureStorageOnlyAdditional2]
                 addFeatures(redactedFeatures, isPremium: false)
+            case .recommended(features: let features):
+                addFeatures([TextConstants.featureStandardFeatures])
+                addFeatures(features.map({ $0.description }), isPremium: true)
             }
         } else {
             hideFeatures()

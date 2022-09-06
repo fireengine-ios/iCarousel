@@ -172,6 +172,7 @@
                 <outlet property="plateView" destination="RpX-Jm-dkh" id="dSC-nJ-Lgr"/>
                 <outlet property="priceLabel" destination="Q3Q-S9-RXr" id="rSh-z9-F5m"/>
                 <outlet property="recommendationLabel" destination="2uc-rE-ZjF" id="cdD-el-fqH"/>
+                <outlet property="topStackView" destination="gzP-NW-rT6" id="Hh1-1h-Qjb"/>
                 <outlet property="typeLabel" destination="ilR-RJ-Nc4" id="EgH-NM-MUV"/>
             </connections>
             <point key="canvasLocation" x="630.43478260869574" y="1501.0044642857142"/>

@@ -39,6 +39,12 @@ final class SubscriptionOfferView: UIView, NibInit {
             newValue.text = TextConstants.weRecommend
         }
     }
+    @IBOutlet weak var topStackView: UIStackView! {
+        willSet {
+            newValue.backgroundColor = ColorConstants.darkTintGray
+            newValue.layer.cornerRadius = 16
+        }
+    }
     
     @IBOutlet private weak var plateView: UIView! {
         willSet {
@@ -275,9 +281,13 @@ final class SubscriptionOfferView: UIView, NibInit {
             plateView.clipsToBounds = true
             plateView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
             
-            let gradient = gradientBorderView(view: borderView)
-            borderView.clipsToBounds = true
-            borderView.layer.insertSublayer(gradient, at: 0)
+//            let gradient = gradientBorderView(view: borderView)
+//            borderView.clipsToBounds = true
+//            borderView.layer.insertSublayer(gradient, at: 0)
+//
+            let gradient = gradientBorderView(view: topStackView)
+            topStackView.clipsToBounds = true
+            topStackView.layer.insertSublayer(gradient, at: 0)
         }
     }
     
@@ -306,7 +316,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         featureView.isHidden = true
         recommendationLabel.isHidden = false
         featureView.purchaseButton.isHidden = true
-        borderView.backgroundColor = .lrButterScotch
+        topStackView.backgroundColor = .lrButterScotch
         recommendationLabel.text = localized(.gracePackageTitle)
         graceDateLabel.text = String(format: localized(.gracePackageExpirationDateTitle), "\(plan.gracePeriodEndDate)")
     }
