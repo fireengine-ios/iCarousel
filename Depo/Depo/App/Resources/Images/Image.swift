@@ -128,4 +128,8 @@ enum Image: String, AppImage {
     case circleIntoduce
     case iconHideSee
     case iconHideUnselect
+    
+    /// Register
+    case registerIconSelectCheck
+    case registerIconSelectEmpty
 }

@@ -25,13 +25,16 @@ final class RegistrationViewController: BaseViewController {
     
     @IBOutlet private weak var nextButton: RoundedInsetsButton! {
         willSet {
-            newValue.setBackgroundColor(UIColor.lrTealish, for: .normal)
-            newValue.setBackgroundColor(AppColor.inactiveButtonColor.color, for: .disabled)
-            newValue.setTitleColor(ColorConstants.whiteColor, for: .normal)
-            newValue.setTitleColor(AppColor.textPlaceholderColor.color, for: .disabled)
-            newValue.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
+            newValue.setBackgroundColor(AppColor.registerNextButtonNormal.color, for: .normal)
+            newValue.setBackgroundColor(.white, for: .disabled)
+            newValue.setTitleColor(.white, for: .normal)
+            newValue.setTitleColor(AppColor.registerNextButtonNormalTextColor.color, for: .disabled)
+            newValue.titleLabel?.font = UIFont.appFont(.medium, size: 16)
             newValue.setTitle(TextConstants.registrationNextButtonText, for: .normal)
             newValue.isOpaque = true
+            newValue.layer.cornerRadius = 23
+            newValue.layer.borderWidth = 1
+            newValue.layer.borderColor = AppColor.registerNextButtonNormal.cgColor
         }
     }
     
@@ -46,7 +49,7 @@ final class RegistrationViewController: BaseViewController {
     
     @IBOutlet private weak var stackView: UIStackView! {
         willSet {
-            newValue.spacing = 16
+            newValue.spacing = 24   
             newValue.alignment = .fill
             newValue.axis = .vertical
             newValue.distribution = .fill
@@ -88,16 +91,6 @@ final class RegistrationViewController: BaseViewController {
     var appleGoogleUser: AppleGoogleUser?
     
     ///Fields (in right order)
-    private let phoneEnterView: ProfilePhoneEnterView = {
-        let newValue = ProfilePhoneEnterView()
-        newValue.numberTextField.enablesReturnKeyAutomatically = true
-
-        newValue.numberTextField.quickDismissPlaceholder = TextConstants.profilePhoneNumberPlaceholder
-        newValue.titleLabel.text = TextConstants.registrationCellTitleGSMNumber
-        
-        return newValue
-    }()
-    
     private let emailEnterView: ProfileTextEnterView = {
         let newValue = ProfileTextEnterView()
         newValue.textField.keyboardType = .emailAddress
@@ -111,11 +104,21 @@ final class RegistrationViewController: BaseViewController {
         return newValue
     }()
     
+    private let phoneEnterView: ProfilePhoneEnterView = {
+        let newValue = ProfilePhoneEnterView()
+        newValue.numberTextField.enablesReturnKeyAutomatically = true
+
+        newValue.numberTextField.quickDismissPlaceholder = TextConstants.profilePhoneNumberPlaceholder
+        newValue.titleLabel.text = TextConstants.registrationCellTitleGSMNumber
+        newValue.isEditState = true
+        return newValue
+    }()
+    
     private let passwordEnterView: BorderedPasswordEnterView = {
         let newValue = BorderedPasswordEnterView()
         newValue.textField.enablesReturnKeyAutomatically = true
         newValue.textField.quickDismissPlaceholder = TextConstants.enterYourNewPassword
-        newValue.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        newValue.textField.addTarget(RegistrationViewController.self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         newValue.titleLabel.text = TextConstants.registrationCellTitlePassword
         
         return newValue
@@ -214,9 +217,8 @@ final class RegistrationViewController: BaseViewController {
 
     private func setupStackView() {
         prepareFields()
-
-        stackView.addArrangedSubview(phoneEnterView)
         stackView.addArrangedSubview(emailEnterView)
+        stackView.addArrangedSubview(phoneEnterView)
         stackView.addArrangedSubview(passwordEnterView)
         setupValidationStackView()
         stackView.addArrangedSubview(validationStackView)
