@@ -7,14 +7,5 @@
 //
 
 protocol PackagesViewInput: AnyObject, ActivityIndicator {
-    func display(error: ErrorResponse)
-    func display(errorMessage: String)
-    func show(promocodeError: String)
-    func successedPromocode()
-    
-    func showRestoreButton()
-    func showInAppPolicy()
-    func reloadData()
-
     func setupStackView(with storageCapacity: CGFloat)
 }

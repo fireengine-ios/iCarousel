@@ -1060,8 +1060,8 @@ class RouterVC: NSObject {
     }
     // MARK: - Packages
     
-    func packages(quotaInfo: QuotaInfoResponse? = nil, affiliate: String? = nil) -> PackagesViewController {
-        return PackagesModuleInitializer.viewController(quotaInfo: quotaInfo, affiliate: affiliate)
+    func packages(quotaInfo: QuotaInfoResponse? = nil) -> PackagesViewController {
+        return PackagesModuleInitializer.viewController(quotaInfo: quotaInfo)
     }
 
     // MARK: - Passcode

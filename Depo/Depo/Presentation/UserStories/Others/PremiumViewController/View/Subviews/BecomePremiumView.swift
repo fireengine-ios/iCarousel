@@ -179,7 +179,7 @@ final class BecomePremiumView: UIView, NibInit {
 //MARK: - SubscriptionOfferViewDelegate
 
 extension BecomePremiumView: SubscriptionOfferViewDelegate {
-    func didPressSubscriptionPlanButton(planIndex: Int) {
+    func didPressSubscriptionPlanButton(planIndex: Int, storageOfferType: StorageOfferType) {
         guard let offer = plans[safe: planIndex] else {
             return
         }

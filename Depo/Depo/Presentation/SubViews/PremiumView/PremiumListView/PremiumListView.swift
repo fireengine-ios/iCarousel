@@ -109,20 +109,17 @@ final class PremiumListView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
         setupView()
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         setup()
     }
     
     // MARK: Utility methods(Public)
     func configure(with title: String, image: UIImage) {
         titleLabel.text = title
-        iconImageView.image = image
     }
     
     // MARK: Utility methods(Private)
@@ -133,7 +130,7 @@ final class PremiumListView: UIView {
         view.frame = bounds
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.translatesAutoresizingMaskIntoConstraints = true
-        
+        view.backgroundColor = AppColor.settingsBackground.color
         addSubview(view)
     }
     
@@ -142,8 +139,8 @@ final class PremiumListView: UIView {
     }
     
     private func setupDesign() {
-        titleLabel.font = UIFont.TurkcellSaturaMedFont(size: 15)
-        titleLabel.textColor = ColorConstants.darkText
+        titleLabel.font = .appFont(.regular, size: 12)
+        titleLabel.textColor = AppColor.label.color
     }
 
 }

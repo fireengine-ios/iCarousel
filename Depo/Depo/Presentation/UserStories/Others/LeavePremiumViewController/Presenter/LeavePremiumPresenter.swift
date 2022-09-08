@@ -161,13 +161,10 @@ final class LeavePremiumPresenter {
 
 // MARK: - LeavePremiumViewOutput
 extension LeavePremiumPresenter: LeavePremiumViewOutput {
-    
     func onViewDidLoad(with premiumView: LeavePremiumView) {
         premiumView.delegate = self
-        
         interactor.trackScreen(screenType: controllerType)
     }
-    
 }
 
 // MARK: - LeavePremiumInteractorOtuput
@@ -197,5 +194,4 @@ extension LeavePremiumPresenter: LeavePremiumViewDelegate {
             router.showAlert(with: cancelText)
         }
     }
-    
 }

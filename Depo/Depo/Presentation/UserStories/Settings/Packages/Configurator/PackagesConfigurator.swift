@@ -10,8 +10,7 @@ import UIKit
 
 class PackagesModuleConfigurator {
     func configure(viewController: PackagesViewController,
-                   quotaInfo: QuotaInfoResponse? = nil,
-                   affiliate: String? = nil) {
+                   quotaInfo: QuotaInfoResponse? = nil) {
         let router = PackagesRouter()
 
         let presenter = PackagesPresenter()
@@ -21,7 +20,6 @@ class PackagesModuleConfigurator {
 
         let interactor = PackagesInteractor()
         interactor.output = presenter
-        interactor.affiliate = affiliate
 
         presenter.interactor = interactor
         viewController.output = presenter
