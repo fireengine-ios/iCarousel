@@ -10,7 +10,7 @@ import UIKit
 
 class PackagesTableViewCell: UITableViewCell {
     
-    @IBOutlet private weak var titleLabel: UILabel! {
+    @IBOutlet weak var titleLabel: UILabel! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
             newValue.textColor = UIColor.lrBrownishGrey

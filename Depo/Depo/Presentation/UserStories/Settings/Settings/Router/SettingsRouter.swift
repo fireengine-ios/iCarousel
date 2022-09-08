@@ -99,11 +99,6 @@ class SettingsRouter: SettingsRouterInput {
         UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
     }
     
-    func goTurkcellSecurity(isTurkcell: Bool) {
-        let viewController = router.turkcellSecurity(isTurkcell: isTurkcell)
-        router.pushViewController(viewController: viewController)
-    }
-    
     func showMailUpdatePopUp(delegate: MailVerificationViewControllerDelegate?) {
         let mailController = MailVerificationViewController()
         mailController.actionDelegate = delegate

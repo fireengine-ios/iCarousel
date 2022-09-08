@@ -123,6 +123,7 @@ enum Image: String, AppImage {
     case gradientSwitch
     case iconArrowDownActive
     case iconArrowDownDisable
+    case iconArrowUpActive
     
     /// Introduce
     case circleIntoduce

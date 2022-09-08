@@ -86,7 +86,7 @@ final class PackageService {
         let fullPrice: String
         if let iapProductId = getAppleIds(for: [offer]).first, let product = iapManager.product(for: iapProductId), !product.isFree {
             
-            let price = product.localizedPrice.replacingOccurrences(of: " ", with: "\n")
+            let price = product.localizedPrice
 
             if #available(iOS 11.2, *) {
                 guard let subscriptionPeriod = product.subscriptionPeriod,
@@ -105,7 +105,7 @@ final class PackageService {
         } else {
             if let price = getOfferPrice(for: offer) {
                 let currency = getOfferCurrency(for: offer) ?? getOfferCurrency(for: accountType)
-                let priceString = String(price) + "\n" + currency
+                let priceString = String(price) + " " + currency
                 if let period = getOfferPeriod(for: offer) {
                     fullPrice = String(format: TextConstants.packageApplePrice, priceString, period)
                 } else {

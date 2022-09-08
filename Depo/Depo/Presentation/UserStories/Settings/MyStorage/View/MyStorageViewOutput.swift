@@ -9,11 +9,16 @@
 protocol MyStorageViewOutput {
     func viewDidLoad()
     
-    func didPressOn(plan: SubscriptionPlan, planIndex: Int)    
+    func didPressOn(plan: SubscriptionPlan, planIndex: Int)
+    func didPressOnOffers(plan: SubscriptionPlan, planIndex: Int)
     func restorePurchasesPressed()
     func configureCard(_ card: PackageInfoView)
 
     var displayableOffers: [SubscriptionPlan] { get }
     var accountType: AccountType { get }
     var title: String { get }
+    
+    var availableOffers: [PackageOffer] { get }
+    func getAccountTypePackages() -> AccountType
+    func viewWillAppear() 
 }

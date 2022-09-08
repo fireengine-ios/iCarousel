@@ -155,7 +155,9 @@ extension SettingsPresenter: SettingsViewOutput {
     }
     
     func goTurkcellSecurity() {
-        isMailVereficationRequired ? router.showMailUpdatePopUp(delegate: self) : router.goTurkcellSecurity(isTurkcell: isTurkCellUser)
+        if isMailVereficationRequired {
+            router.showMailUpdatePopUp(delegate: self)
+        }
     }
     
     func goToMyProfile(userInfo: AccountInfoResponse) {

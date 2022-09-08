@@ -10,7 +10,7 @@ import UIKit
 
 class MyStorageModuleInitializer: NSObject {
     
-    class func initializeMyStorageController(usage: UsageResponse?) -> MyStorageViewController {
+    class func initializeMyStorageController(usage: UsageResponse?, affiliate: String? = nil, refererToken: String? = nil) -> MyStorageViewController {
         let nibName = String(describing: MyStorageViewController.self)
         let viewController = MyStorageViewController(nibName: nibName, bundle: nil)
         let configurator = MyStorageModuleConfigurator()

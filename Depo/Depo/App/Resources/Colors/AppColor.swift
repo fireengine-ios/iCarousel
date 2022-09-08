@@ -86,7 +86,16 @@ enum AppColor {
     case arrowDownOpenColor
     case profileTintColor
     case settingsBottomInfo
-
+    case settingsMyPackages
+    case settingsPackages
+    case settingsRestoreTextColor
+    case settingsPackagesCell
+    case SettingsPackagesRecommendedOne
+    case SettingsPackagesRecommendedTwo
+    case SettingsPackagesRecommendedThree
+    case SettingsPackagesRecommendedFour
+    case settingsPremiumListShadow
+    case settingsBackground
     
     //MARK: Landing
     case landingGradientFinish

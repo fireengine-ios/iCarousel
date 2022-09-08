@@ -11,9 +11,14 @@ protocol MobilePaymentPermissionProtocol: AnyObject {
     func backTapped(url: String)
 }
 
-final class PermissionViewController: ViewController {
+final class PermissionViewController: BaseViewController {
     private let accountService = AccountService()
     
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
     
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -59,6 +64,11 @@ final class PermissionViewController: ViewController {
         return permissionView
     }()
     
+    private lazy var termsAndPolicy: UIView = {
+        let permissionView = TermsAndPolicyViewController.initFromNib()
+        return permissionView
+    }()
+    
     //MARK: - View Lifecycle
     
     override func viewDidLoad() {
@@ -76,11 +86,19 @@ final class PermissionViewController: ViewController {
     }
     
     private func setupLayout() {
-        view.addSubview(stackView)
+        view.addSubview(scrollView)
         
-        stackView.topAnchor.constraint(equalTo: view.topAnchor).activate()
-        stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
-        stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor).activate()
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).activate()
+        
+        scrollView.addSubview(stackView)
+        stackView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
     }
     
     private func checkPermissionState() {
@@ -96,6 +114,7 @@ final class PermissionViewController: ViewController {
                     self?.setupPermissionViewFromResult(result, type: .globalPermission)
                     self?.setupPermissionViewFromResult(result, type: .mobilePayment)
                     self?.setupPermissionViewFromResult(result, type: .kvkk)
+                    self?.stackView.addArrangedSubview(self?.termsAndPolicy ?? UIView())
                 case .failed(let error):
                     UIApplication.showErrorAlert(message: error.description)
                 }

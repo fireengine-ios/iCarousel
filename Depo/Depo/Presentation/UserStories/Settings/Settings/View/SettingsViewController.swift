@@ -218,31 +218,17 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             }
         case .passcode:
             showPasscodeOrPasscodeSettings()
-        case .security:
-            output.goTurkcellSecurity()
         case .helpAndSupport:
             if let delegate = settingsDelegate {
                 delegate.goToHelpAndSupport()
             } else {
                 output.goToHelpAndSupport()
             }
-        case .termsAndPolicy:
-            if let delegate = settingsDelegate {
-                delegate.goToTermsAndPolicy()
-            } else {
-                output.goToTermsAndPolicy()
-            }
         case .chatbot:
             if let delegate = settingsDelegate {
                 delegate.goToChatbot()
             } else {
                 output.goToChatbot()
-            }
-        case .darkMode:
-            if let delegate = settingsDelegate {
-                delegate.goToDarkMode()
-            } else {
-                output.goToDarkMode()
             }
         }
     }

@@ -16,10 +16,7 @@ enum SettingsTypes: Int {
     case permissions
     case myActivities
     case passcode
-    case security
     case helpAndSupport
-    case termsAndPolicy
-    case darkMode
     case chatbot
     
     var text: String {
@@ -32,19 +29,16 @@ enum SettingsTypes: Int {
         case .connectAccounts: return TextConstants.settingsViewCellConnectedAccounts
         case .permissions: return TextConstants.settingsViewCellPermissions
         case .myActivities: return TextConstants.settingsViewCellActivityTimline
-        case .passcode: return TextConstants.settingsViewCellPasscode
-        case .security: return TextConstants.settingsViewCellLoginSettings
+        case .passcode: return TextConstants.settingsViewCellLoginSettings
         case .helpAndSupport: return TextConstants.settingsViewCellHelp
-        case .darkMode: return localized(.darkModePageTitle)
-        case .termsAndPolicy: return TextConstants.settingsViewCellPrivacyAndTerms
         case .chatbot: return TextConstants.chatbotMenuTitle
         }
     }
 
     static let allSectionOneTypes = [autoUpload, periodicContactSync, faceImage]
     static let allSectionTwoTypes = [connectAccounts, permissions]
-    static let allSectionThreeTypes = [myActivities, passcode, security]
-    static var allSectionFourTypes = [helpAndSupport, termsAndPolicy, .darkMode]
+    static let allSectionThreeTypes = [myActivities, passcode]
+    static var allSectionFourTypes = [helpAndSupport]
 
     static func prepareTypes(hasPermissions: Bool, isInvitationShown: Bool, isChatbotShown: Bool, isPaycellShown: Bool) -> [[SettingsTypes]] {
         var result = [[SettingsTypes]]()
@@ -76,10 +70,6 @@ enum SettingsTypes: Int {
             } else if !isChatbotShown && allSectionFourTypes.contains(chatbot){
                 SettingsTypes.allSectionFourTypes.remove(chatbot)
             }
-        }
-
-        if #available(iOS 13.0, *) {} else {
-            SettingsTypes.allSectionFourTypes.remove(darkMode)
         }
 
         result.append(SettingsTypes.allSectionFourTypes)

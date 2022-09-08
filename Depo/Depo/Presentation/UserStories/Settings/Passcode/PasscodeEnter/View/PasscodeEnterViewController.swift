@@ -46,6 +46,7 @@ class PasscodeEnterViewController: ViewController, NibInit {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setTitle(withString: navigationTitle)
+        navigationItem.backButtonTitle = ""
     }
 
     func becomeResponder() {

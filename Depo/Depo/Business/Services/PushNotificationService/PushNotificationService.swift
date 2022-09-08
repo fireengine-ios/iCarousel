@@ -200,7 +200,7 @@ final class PushNotificationService {
         case .socialMedia: openSocialMedia()
         case .faq: openFaq()
         case .passcode: openPasscode()
-        case .loginSettings: openLoginSettings()
+        case .loginSettings: openPasscode()
         case .faceImageRecognition, .widgetFIRDisabled: openFaceImageRecognition()
         case .people, .widgetFIR: openPeople()
         case .things: openThings()
@@ -365,9 +365,7 @@ private extension PushNotificationService {
     }
 
     func openPackages() {
-        let affiliate = storageVars.value(forDeepLinkParameter: .affiliate) as? String
-        let refererToken = storageVars.value(forDeepLinkParameter: .paycellToken) as? String
-        let viewController = router.packages(affiliate: affiliate, refererToken: refererToken)
+        let viewController = router.packages()
         pushTo(viewController)
     }
 
@@ -459,12 +457,6 @@ private extension PushNotificationService {
         pushTo(router.passcodeSettings(isTurkcell: isTurkcellAccount, inNeedOfMail: false))
     }
 
-    func openLoginSettings() {
-        let isTurkcell = SingletonStorage.shared.accountInfo?.accountType == AccountType.turkcell.rawValue
-        let controller = router.turkcellSecurity(isTurkcell: isTurkcell)
-        pushTo(controller)
-    }
-
     func openFaceImageRecognition() {
         pushTo(router.faceImage)
     }
@@ -521,7 +513,10 @@ private extension PushNotificationService {
     }
 
     func openMyStorage() {
-        pushTo(router.myStorage(usageStorage: nil))
+        let affiliate = storageVars.value(forDeepLinkParameter: .affiliate) as? String
+        let refererToken = storageVars.value(forDeepLinkParameter: .paycellToken) as? String
+        let viewController = router.myStorage(usageStorage: nil, affiliate: affiliate, refererToken: refererToken)
+        pushTo(viewController)
     }
 
     func openBecomePremium() {

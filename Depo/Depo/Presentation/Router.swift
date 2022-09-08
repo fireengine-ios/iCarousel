@@ -955,13 +955,7 @@ class RouterVC: NSObject {
     // MARK: Terms and policy
     
     var termsAndPolicy: UIViewController? {
-        return TermsAndPolicyViewController.initFromNib()
-    }
-    
-    // MARK: Turkcell Security
-    
-    func turkcellSecurity(isTurkcell: Bool) -> UIViewController {
-        return LoginSettingsModuleInitializer.viewController(isTurkcell: isTurkcell)
+        return UIViewController()
     }
 
     // MARK: Invitation
@@ -1074,8 +1068,8 @@ class RouterVC: NSObject {
     }
     // MARK: - Packages
     
-    func packages(quotaInfo: QuotaInfoResponse? = nil, affiliate: String? = nil, refererToken: String? = nil) -> PackagesViewController {
-        return PackagesModuleInitializer.viewController(quotaInfo: quotaInfo, affiliate: affiliate, refererToken: refererToken)
+    func packages(quotaInfo: QuotaInfoResponse? = nil) -> PackagesViewController {
+        return PackagesModuleInitializer.viewController(quotaInfo: quotaInfo)
     }
 
     // MARK: - Passcode
@@ -1101,7 +1095,7 @@ class RouterVC: NSObject {
 
     //MARK: - My Storage
     
-    func myStorage(usageStorage: UsageResponse?) -> MyStorageViewController {
+    func myStorage(usageStorage: UsageResponse?, affiliate: String? = nil, refererToken: String? = nil) -> MyStorageViewController {
         let controller = MyStorageModuleInitializer.initializeMyStorageController(usage: usageStorage)
         return controller
     }
