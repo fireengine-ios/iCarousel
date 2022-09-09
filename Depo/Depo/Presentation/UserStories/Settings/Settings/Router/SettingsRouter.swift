@@ -62,7 +62,8 @@ class SettingsRouter: SettingsRouterInput {
     }
     
     func goToPackages() {
-        router.pushViewController(viewController: router.packages())
+        // TODO: myStorage or packages. Change myStorage to storage, and packages to account details
+        router.pushViewController(viewController: router.myStorage(usageStorage: nil))
     }
     
     func goToPremium() {
@@ -117,5 +118,4 @@ class SettingsRouter: SettingsRouterInput {
 
     func goToDarkMode() {
     }
-    
 }
