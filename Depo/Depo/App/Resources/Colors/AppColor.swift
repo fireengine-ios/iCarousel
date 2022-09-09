@@ -104,8 +104,12 @@ enum AppColor {
 
     // MARK: Login
     case loginAlertView
-
     
+    // MARK: Forget MY Password
+    case forgetPassText
+    case forgetPassButtonDisable
+    case forgetPassButtonNormal
+
     //TODO: Facelift: Uncomment below
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - FACELIFT - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     

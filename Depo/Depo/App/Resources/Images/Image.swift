@@ -129,4 +129,7 @@ enum Image: String, AppImage {
     case circleIntoduce
     case iconHideSee
     case iconHideUnselect
+    
+    /// Forget My Password
+    case forgetPassPopupLock
 }

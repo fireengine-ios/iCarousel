@@ -11,7 +11,7 @@ class ForgotPasswordRouter: ForgotPasswordRouterInput {
     func showSentToEmailPopupAndClose() {
         let vc = PopUpController.with(
             title: TextConstants.success, message: TextConstants.forgotPasswordSentEmailAddres,
-            image: .error, buttonTitle: TextConstants.ok) { vc in
+            image: .custom(Image.forgetPassPopupLock.image), buttonTitle: TextConstants.ok) { vc in
 
             vc.close { [weak self] in
                 self?.popBack()
