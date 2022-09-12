@@ -62,7 +62,6 @@ class SettingsRouter: SettingsRouterInput {
     }
     
     func goToPackages() {
-        // TODO: myStorage or packages. Change myStorage to storage, and packages to account details
         router.pushViewController(viewController: router.myStorage(usageStorage: nil))
     }
     
