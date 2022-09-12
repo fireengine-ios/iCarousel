@@ -104,7 +104,12 @@ enum AppColor {
 
     // MARK: Login
     case loginAlertView
-
+    
+    // MARK: Register
+    case registerPrivacyPolicy
+    case registerNextButtonNormal
+    case registerNextButtonNormalTextColor
+    case registerLabelTextColor
     
     //TODO: Facelift: Uncomment below
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - FACELIFT - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

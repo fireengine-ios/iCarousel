@@ -6,6 +6,8 @@
 //  Copyright © 2021 LifeTech. All rights reserved.
 //
 
+import UIKit
+
 /*
  Terms details are displayed here with a confirm button.
  This view controller is presented from RegistrationViewController.
@@ -25,20 +27,27 @@ class RegistrationTermsInfoViewController: UIViewController {
         modalPresentationStyle = .overFullScreen
         viewController.present(self, animated: false)
     }
-
+    
     // MARK: - Views
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var popupHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var containerView: UIView! {
         willSet {
-            newValue.layer.cornerRadius = 10
+            newValue.layer.cornerRadius = 16
+        }
+    }
+    
+    @IBOutlet weak var titleLabel: UILabel! {
+        willSet {
+            newValue.font = UIFont.appFont(.medium, size: 14)
+            newValue.textColor = AppColor.registerLabelTextColor.color
         }
     }
 
     @IBOutlet private weak var closeButton: UIButton! {
         willSet {
             newValue.setImage(UIImage(named: "CloseCardIcon"), for: .normal)
-            newValue.tintColor = AppColor.blackColor.color
+            newValue.tintColor = AppColor.registerLabelTextColor.color
             newValue.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
         }
     }
@@ -52,14 +61,18 @@ class RegistrationTermsInfoViewController: UIViewController {
 
     @IBOutlet weak var confirmButton: RoundedInsetsButton! {
         willSet {
-            newValue.setBackgroundColor(UIColor.lrTealish, for: .normal)
-            newValue.setBackgroundColor(ColorConstants.disabledGrayBackgroud, for: .disabled)
-            newValue.setTitleColor(ColorConstants.whiteColor, for: .normal)
-            newValue.setTitleColor(ColorConstants.disabledGrayText, for: .disabled)
-            newValue.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
+            newValue.setBackgroundColor(AppColor.registerNextButtonNormal.color, for: .normal)
+            newValue.setBackgroundColor(.white, for: .disabled)
+            newValue.setTitleColor(.white, for: .normal)
+            newValue.setTitleColor(AppColor.registerNextButtonNormalTextColor.color, for: .disabled)
+            newValue.titleLabel?.font = UIFont.appFont(.medium, size: 16)
             newValue.isOpaque = true
             newValue.setTitle(TextConstants.signupRedesignEulaAcceptButton, for: .normal)
             newValue.addTarget(self, action: #selector(confirmTapped), for: .touchUpInside)
+
+            newValue.layer.cornerRadius = 23
+            newValue.layer.borderWidth = 1
+            newValue.layer.borderColor = AppColor.registerNextButtonNormal.cgColor
         }
     }
 
@@ -101,7 +114,7 @@ class RegistrationTermsInfoViewController: UIViewController {
             assertionFailure()
             return
         }
-
+        
         guard let htmlString = prepareHtml(from: text) else {
             assertionFailure()
             return
@@ -109,6 +122,8 @@ class RegistrationTermsInfoViewController: UIViewController {
 
         textView.textStorage.append(htmlString)
         textView.dataDetectorTypes = [.phoneNumber, .address]
+        
+        titleLabel.text = htmlString.string.firstLine
     }
 
     private func prepareHtml(from text: String) -> NSAttributedString? {
@@ -116,7 +131,7 @@ class RegistrationTermsInfoViewController: UIViewController {
             return nil
         }
 
-        let font = UIFont.TurkcellSaturaRegFont(size: 16)
+        let font = UIFont.appFont(.regular, size: 16)
         /// https://stackoverflow.com/a/27422343
         //  body{font-family: '\(font.familyName)'; because turkcell fonts currently are not recognizable as family of fonts - all text from htm will be shown as regular, no bold and etc.
         let customFontString = "<style>font-size:\(font.pointSize);}</style>" + text
@@ -135,7 +150,7 @@ class RegistrationTermsInfoViewController: UIViewController {
                                                                     .characterEncoding: String.Encoding.utf8.rawValue],
                                                           documentAttributes: nil)
 
-            attributedString.addAttribute(.foregroundColor, value: AppColor.blackColor.color,
+            attributedString.addAttribute(.foregroundColor, value: AppColor.registerLabelTextColor.color,
                                           range: NSRange(location: 0, length: attributedString.length))
             return attributedString
         } catch {
@@ -162,8 +177,6 @@ private extension UITextView {
 
         linkTextAttributes = [
             .foregroundColor: UIColor.lrTealishTwo,
-            .underlineColor: UIColor.lrTealishTwo,
-            .underlineStyle: NSUnderlineStyle.single.rawValue
         ]
 
         dataDetectorTypes = [.link, .phoneNumber]
