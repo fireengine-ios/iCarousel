@@ -32,5 +32,10 @@ class AlertFilesCancelView: UIView, NibInit {
     @IBAction func onCancelButton(_ sender: RoundedButton) {
         delegate?.onCancelButton()
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        cancelButton.layer.borderColor = AppColor.drawerButtonBorder.cgColor
+    }
 }
 

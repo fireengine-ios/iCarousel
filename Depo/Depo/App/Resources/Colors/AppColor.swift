@@ -69,6 +69,8 @@ enum AppColor {
     case popUpTitle
     case popUpMessage
     case popUpTitleError
+    case popupTint
+
     
     // MARK: Switch
     case SwitchBackgroundColor

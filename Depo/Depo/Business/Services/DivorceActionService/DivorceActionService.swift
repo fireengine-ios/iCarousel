@@ -263,7 +263,7 @@ extension CommonDivorceActionService: DivorceActionAnalyticsProtocol {
 //MARK: - Utility
 private extension CommonDivorceActionService {
     func presentPopUp(controller: BasePopUpController) {
-        router.presentViewController(controller: controller, animated: false)
+        controller.open()
     }
 }
 

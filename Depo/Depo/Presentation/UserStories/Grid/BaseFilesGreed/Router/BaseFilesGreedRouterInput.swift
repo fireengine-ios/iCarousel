@@ -25,6 +25,8 @@ protocol BaseFilesGreedRouterInput {
     func openSharedFilesController()
     
     func back(to vc: UIViewController?)
+    
+    func openCreateNewAlbum()
 }
 
 extension BaseFilesGreedRouterInput {

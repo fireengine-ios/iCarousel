@@ -783,6 +783,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         router.showSearchScreen(output: output)
     }
     
+    func openCreateNewAlbum() {
+        router.openCreateNewAlbum()
+    }
     
     // MARK: - View outbut/ TopBar/UnderNavBarBar Delegates
     

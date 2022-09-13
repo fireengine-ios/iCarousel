@@ -80,7 +80,7 @@ class NavigationBarList {
                                style: .plain,
                                target: nil,
                                action: nil)
-        newAlbum.setBackgroundImage(UIImage(named: TextConstants.newAlbumBtnImgName), for: .normal, barMetrics: .default)
+        newAlbum.setBackgroundImage(NavigationBarImage.headerActionPlus.image, for: .normal, barMetrics: .default)
         newAlbum.accessibilityLabel = TextConstants.createAlbum
 
         // upload
