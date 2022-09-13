@@ -124,4 +124,10 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
 
     func goToDarkMode() {
     }
+    
+    func goToPackages() {
+        if let left = leftController {
+            configurateWithControllers(leftViewController: left, controllers: [RouterVC().packages()])
+        }
+    }
 }
