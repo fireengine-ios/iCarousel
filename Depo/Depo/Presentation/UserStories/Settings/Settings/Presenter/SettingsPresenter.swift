@@ -176,6 +176,13 @@ extension SettingsPresenter: SettingsViewOutput {
         router.goToDarkMode()
     }
     
+    func goToChatbot() {
+        router.goToChatbot()
+    }
+    
+    func goToPackages() {
+        router.goToPackages()
+    }
 }
 
 // MARK: - SettingsInteractorOutput
@@ -223,11 +230,6 @@ extension SettingsPresenter: SettingsInteractorOutput {
         asyncOperationSuccess()
         router.showError(errorMessage: errorMessage)
     }
-
-    func goToChatbot() {
-        router.goToChatbot()
-    }
-    
 }
 
 // MARK: - SettingsModuleInput

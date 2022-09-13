@@ -33,6 +33,7 @@ protocol SettingsDelegate: AnyObject {
 
     func goToDarkMode()
     
+    func goToPackages()
     func goToPaycellCampaign()
 }
 
@@ -229,6 +230,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 delegate.goToChatbot()
             } else {
                 output.goToChatbot()
+            }
+        case .packages:
+            if let delegate = settingsDelegate {
+                delegate.goToPackages()
+            } else {
+                output.goToPackages()
             }
         }
     }

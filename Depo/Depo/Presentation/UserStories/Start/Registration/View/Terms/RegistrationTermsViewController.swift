@@ -22,7 +22,7 @@ protocol RegistrationTermsViewControllerDelegate: AnyObject {
 final class RegistrationTermsViewController: UIViewController {
     // MARK: - Interface
     weak var delegate: RegistrationTermsViewControllerDelegate?
-
+    
     func setupEtk(isShowEtk: Bool) {
         if isShowEtk {
             setupEtkCheckbox()
@@ -30,23 +30,23 @@ final class RegistrationTermsViewController: UIViewController {
             etkCheckboxView?.isHidden = true
         }
     }
-
+    
     var isTermsOfUseChecked: Bool {
         get { termsCheckboxView.isChecked }
         set { termsCheckboxView.isChecked = newValue }
     }
-
+    
     var isEtkChecked: Bool {
         get { etkCheckboxView?.isChecked ?? false }
         set { etkCheckboxView.isChecked = newValue }
     }
-
+    
     // MARK: - Views
     @IBOutlet private weak var checkboxesStackView: UIStackView!
     @IBOutlet private weak var privacyPolicyView: UIView! {
         willSet {
-            newValue.layer.cornerRadius = 6
-            newValue.backgroundColor =  UIColor.lrTealishTwo.withAlphaComponent(0.05)
+            newValue.layer.cornerRadius = 16
+            newValue.backgroundColor =  AppColor.registerPrivacyPolicy.color
         }
     }
     @IBOutlet private weak var privacyPolicyTextView: IntrinsicTextView! {
@@ -54,9 +54,7 @@ final class RegistrationTermsViewController: UIViewController {
             newValue.delegate = self
             newValue.backgroundColor = .clear
             newValue.linkTextAttributes = [
-                .foregroundColor: UIColor.lrTealishTwo,
-                .underlineColor: UIColor.lrTealishTwo,
-                .underlineStyle: NSUnderlineStyle.single.rawValue
+                .foregroundColor: AppColor.registerLabelTextColor.color
             ]
         }
     }
@@ -68,57 +66,60 @@ final class RegistrationTermsViewController: UIViewController {
             }
         }
     }
-
+    
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTermsCheckbox()
         setupPrivacyPolicyTextView()
     }
-
+    
     private func setupTermsCheckbox() {
         let string = buildCheckboxString(from: TextConstants.signupRedesignEulaCheckbox,
                                          linkText: TextConstants.signupRedesignEulaLink,
                                          link: TextConstants.NotLocalized.termsOfUseLink)
-
+        
         termsCheckboxView.setup(atributedTitleText: string, atributedText: nil, delegate: self, textViewDelegate: self)
         termsCheckboxView.titleView.delegate = self
         checkboxesStackView.addArrangedSubview(termsCheckboxView)
     }
-
+    
     private func setupEtkCheckbox() {
         etkCheckboxView = TermsCheckboxTextView.initFromNib()
-
+        
         let string = buildCheckboxString(from: TextConstants.signupRedesignEtkCheckbox,
                                          linkText: TextConstants.signupRedesignEtkLink,
                                          link: TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages)
-
+        
         etkCheckboxView.setup(atributedTitleText: string, atributedText: nil, delegate: self, textViewDelegate: self)
         etkCheckboxView.titleView.delegate = self
         checkboxesStackView.addArrangedSubview(etkCheckboxView)
     }
-
+    
     private func setupPrivacyPolicyTextView() {
-
-        let header = NSMutableAttributedString(string: TextConstants.privacyPolicy,
-                                               attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
-                                                            .foregroundColor: ColorConstants.darkText])
-
+        
+        let header = NSMutableAttributedString(string: TextConstants.privacyPolicy, attributes: [.font: UIFont.appFont(.regular, size: 15),                                  .foregroundColor: AppColor.registerLabelTextColor.color])
+        
         let rangeLink = header.mutableString.range(of: TextConstants.privacyPolicyCondition)
-        header.addAttributes([.link: TextConstants.NotLocalized.privacyPolicyConditions], range: rangeLink)
-
+        header.addAttributes([.link:                                    TextConstants.NotLocalized.privacyPolicyConditions,
+                              .font: UIFont.appFont(.medium, size: 15),
+                              .foregroundColor: AppColor.registerLabelTextColor.color],
+                             range: rangeLink)
         privacyPolicyTextView.attributedText = header
     }
-
+    
     private func buildCheckboxString(from text: String, linkText: String, link: String) -> NSMutableAttributedString {
         let textFormat = text.replacingOccurrences(of: "%1$S", with: "%1$@")
         let textWithLink = String(format: textFormat, linkText)
         let result = NSMutableAttributedString(string: textWithLink,
-                                               attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
-                                                            .foregroundColor: ColorConstants.darkText])
-
+                                               attributes: [.font: UIFont.appFont(.regular, size: 15),
+                                                            .foregroundColor: AppColor.registerLabelTextColor.color])
+        
         let linkRange = result.mutableString.range(of: linkText)
-        result.addAttributes([.link: link], range: linkRange)
+        result.addAttributes([.link: link,
+                              .font: UIFont.appFont(.medium, size: 15),
+                              .foregroundColor: AppColor.registerLabelTextColor.color],
+                             range: linkRange)
         return result
     }
 }

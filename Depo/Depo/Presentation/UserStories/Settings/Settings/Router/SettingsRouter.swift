@@ -66,7 +66,7 @@ class SettingsRouter: SettingsRouterInput {
     }
     
     func goToPackages() {
-        router.pushViewController(viewController: router.packages())
+        router.pushViewController(viewController: router.myStorage(usageStorage: nil))
     }
     
     func goToPremium() {
@@ -121,5 +121,4 @@ class SettingsRouter: SettingsRouterInput {
 
     func goToDarkMode() {
     }
-    
 }

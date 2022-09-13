@@ -112,6 +112,7 @@ enum Image: String, AppImage {
     case popupIconError
     case popupIconDelete
     case popupIconQuestion
+    case popupHide
     
     /// For You
     case forYouPeople
@@ -129,4 +130,8 @@ enum Image: String, AppImage {
     case circleIntoduce
     case iconHideSee
     case iconHideUnselect
+    
+    /// Register
+    case registerIconSelectCheck
+    case registerIconSelectEmpty
 }

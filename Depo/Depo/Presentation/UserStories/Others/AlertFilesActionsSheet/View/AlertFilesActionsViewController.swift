@@ -19,7 +19,7 @@ class AlertFilesActionsViewController: UIViewController {
         stackView.pinToSuperviewEdges(offset: .init(top: 8, left: 0, bottom: 8, right: 0))
     }
 
-    func configure(with actions: [AlertFilesAction], showCancelButton: Bool? = false) {
+    func configure(with actions: [AlertFilesAction]) {
         emptyStackView()
 
         let lastIndex = actions.count - 1
@@ -30,11 +30,9 @@ class AlertFilesActionsViewController: UIViewController {
             stackView.addArrangedSubview(actionView)
         }
         
-        if showCancelButton == true {
-            let cancelView = AlertFilesCancelView.initFromNib()
-            cancelView.delegate = self
-            stackView.addArrangedSubview(cancelView)
-        }
+        let cancelView = AlertFilesCancelView.initFromNib()
+        cancelView.delegate = self
+        stackView.addArrangedSubview(cancelView)
     }
 
     private func emptyStackView() {

@@ -9,7 +9,6 @@
 import Foundation
 
 extension String {
-    
     func htmlAttributedForPrivacyPolicy(using font: UIFont) -> NSMutableAttributedString? {
         
         let boldFontAttribute = [NSAttributedString.Key.font: UIFont.TurkcellSaturaBolFont(size: 28)]
@@ -74,7 +73,6 @@ extension Optional where Wrapped == String {
 }
 
 //MARK: - path extension related
-
 extension String {
     
     func getPathExtension() -> String? {
@@ -100,5 +98,15 @@ extension String {
 extension String {
     var digits: String {
         return components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+    }
+    
+    var firstLine: String {
+        return components(separatedBy: .newlines).first ?? ""
+    }
+    
+    var removeFirstLine: String {
+        var element = components(separatedBy: .newlines)
+        element.removeFirst()
+        return element.joined()
     }
 }

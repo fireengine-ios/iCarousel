@@ -51,6 +51,8 @@ protocol SettingsRouterInput {
     func presentAlertSheet(alertController: UIAlertController)
 
     func goToChatbot()
+    
+    func goToPackages()
 
     func goToDarkMode()
     

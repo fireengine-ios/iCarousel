@@ -24,16 +24,19 @@ final class TermsCheckboxTextView: UIView, NibInit {
         }
     }
     
-    @IBOutlet private weak var checkbox: UIButton!
+    @IBOutlet private weak var checkbox: UIButton! {
+        willSet {
+            newValue.setImage(Image.registerIconSelectEmpty.image, for: .normal)
+            newValue.setImage(Image.registerIconSelectCheck.image, for: .selected)
+        }
+    }
     
     @IBOutlet weak var titleView: UITextView! {
         willSet {
             newValue.linkTextAttributes = [
-                .foregroundColor: UIColor.lrTealishTwo,
-                .underlineColor: UIColor.lrTealishTwo,
-                .underlineStyle: NSUnderlineStyle.single.rawValue
+                .foregroundColor: AppColor.registerLabelTextColor.color
             ]
-            
+            newValue.font = UIFont.appFont(.regular, size: 14)
             newValue.isEditable = false
             
             /// to remove insets
@@ -48,10 +51,9 @@ final class TermsCheckboxTextView: UIView, NibInit {
     @IBOutlet private weak var descriptionView: UITextView! {
         willSet {
             newValue.linkTextAttributes = [
-                .foregroundColor: UIColor.lrTealishTwo,
-                .underlineColor: UIColor.lrTealishTwo,
-                .underlineStyle: NSUnderlineStyle.single.rawValue
+                .foregroundColor: AppColor.registerLabelTextColor.color
             ]
+            newValue.font = UIFont.appFont(.regular, size: 14)
             newValue.isEditable = false
             
             /// to remove insets
