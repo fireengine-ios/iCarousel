@@ -112,6 +112,7 @@ enum Image: String, AppImage {
     case popupIconError
     case popupIconDelete
     case popupIconQuestion
+    case popupHide
     
     /// For You
     case forYouPeople

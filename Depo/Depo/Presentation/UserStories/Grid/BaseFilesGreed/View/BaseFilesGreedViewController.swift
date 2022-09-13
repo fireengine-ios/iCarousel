@@ -28,6 +28,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     var subTitle: String = ""
     
+    var isAlbumList: Bool = false
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var noFilesView: UIView!
@@ -168,7 +170,17 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] _ in
             self?.output.searchPressed(output: self)
         })
-        let rightActions: [NavBarWithAction] = [search]
+       
+        let newAlbum = NavBarWithAction(navItem: NavigationBarList().newAlbum, action: { [weak self] _ in
+            self?.output.openCreateNewAlbum()
+        })
+       
+        var rightActions: [NavBarWithAction] = []
+        if isAlbumList {
+            rightActions.append(newAlbum)
+            search.navItem.imageInsets.left = 28
+        }
+        rightActions.append(search)
         navBarConfigurator.configure(right: isSelecting ? [] : rightActions, left: [])
     
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem

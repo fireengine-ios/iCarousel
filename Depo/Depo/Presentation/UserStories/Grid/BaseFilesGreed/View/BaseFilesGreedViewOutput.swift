@@ -61,4 +61,6 @@ protocol BaseFilesGreedViewOutput {
     func openPrivateShareFiles()
     
     func openPrivateSharedItem(entity: BaseDataSourceItem, sharedEnteties: [BaseDataSourceItem])
+    
+    func openCreateNewAlbum()
 }

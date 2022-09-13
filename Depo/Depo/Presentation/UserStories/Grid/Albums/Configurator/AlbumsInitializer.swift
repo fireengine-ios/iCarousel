@@ -20,6 +20,7 @@ class AlbumsModuleInitializer: NSObject {
         
         viewController.cardsContainerView.addPermittedPopUpViewTypes(types: [.sync, .upload])
         viewController.cardsContainerView.isEnable = true
+        viewController.isAlbumList = true
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download] + ElementTypes.activeState,
                                                style: .default, tintColor: AppColor.tint.color,
