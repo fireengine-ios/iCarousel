@@ -69,6 +69,8 @@ enum AppColor {
     case popUpTitle
     case popUpMessage
     case popUpTitleError
+    case popUpButtonNormal
+    case popUpButtonCancel
     
     // MARK: Switch
     case SwitchBackgroundColor
@@ -109,6 +111,9 @@ enum AppColor {
     case forgetPassText
     case forgetPassButtonDisable
     case forgetPassButtonNormal
+    case forgetPassCodeClose
+    case forgetPassCodeOpen
+    case forgetPassTimer
 
     //TODO: Facelift: Uncomment below
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - FACELIFT - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

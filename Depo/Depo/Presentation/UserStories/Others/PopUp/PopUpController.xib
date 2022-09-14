@@ -26,23 +26,25 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="b7l-4P-zk8">
-                    <rect key="frame" x="167.5" y="30" width="40" height="40"/>
+                    <rect key="frame" x="154.5" y="10" width="66" height="66"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n7C-4E-QE3">
-                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                            <rect key="frame" x="0.0" y="0.0" width="66" height="66"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="n7C-4E-QE3" secondAttribute="height" id="88g-lU-O1F"/>
-                                <constraint firstAttribute="width" constant="40" id="fHZ-2t-DqX"/>
                             </constraints>
                         </imageView>
                         <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vgj-JX-vfg">
-                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                            <rect key="frame" x="0.0" y="0.0" width="66" height="66"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="Vgj-JX-vfg" secondAttribute="height" multiplier="1:1" id="B5g-Lz-oif"/>
-                                <constraint firstAttribute="width" constant="40" id="eHc-SV-EPB"/>
                             </constraints>
                         </imageView>
                     </subviews>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="66" id="BZO-30-9GB"/>
+                        <constraint firstAttribute="height" constant="66" id="deA-dO-ioW"/>
+                    </constraints>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RH9-1C-TFf" userLabel="Insets View">
                     <rect key="frame" x="20" y="90" width="335" height="149"/>
@@ -112,7 +114,7 @@
                 <constraint firstItem="RH9-1C-TFf" firstAttribute="top" secondItem="8qh-Pd-GkY" secondAttribute="top" constant="90" id="NuZ-B5-1oA"/>
                 <constraint firstAttribute="bottom" secondItem="RH9-1C-TFf" secondAttribute="bottom" constant="16" id="OdK-dU-mmu"/>
                 <constraint firstItem="b7l-4P-zk8" firstAttribute="centerX" secondItem="8qh-Pd-GkY" secondAttribute="centerX" id="Vr5-ab-TNo"/>
-                <constraint firstItem="b7l-4P-zk8" firstAttribute="top" secondItem="8qh-Pd-GkY" secondAttribute="top" constant="30" id="YZy-qK-msa"/>
+                <constraint firstItem="b7l-4P-zk8" firstAttribute="top" secondItem="8qh-Pd-GkY" secondAttribute="top" constant="10" id="YZy-qK-msa"/>
                 <constraint firstAttribute="trailing" secondItem="RH9-1C-TFf" secondAttribute="trailing" constant="20" id="xJf-7H-vS3"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -19,7 +20,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhoneVerificationViewController" customModule="Billo" customModuleProvider="target">
             <connections>
-                <outlet property="bottomTimerConstraint" destination="EVf-ei-CA7" id="ZY5-oN-FV8"/>
+                <outlet property="continueButton" destination="ij0-g8-szH" id="U8F-Kg-rhR"/>
                 <outlet property="errorLabel" destination="IFw-4W-fGh" id="wl4-aG-2z8"/>
                 <outlet property="firstSecurityCodeTextField" destination="CWG-cv-wHj" id="Dh3-Of-Sop"/>
                 <outlet property="infoTitle" destination="Ccz-va-Sqj" id="qPK-hX-hQG"/>
@@ -45,33 +46,39 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0SH-Ei-3RR">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="302.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="382"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="LGv-1U-f4g">
-                                    <rect key="frame" x="40" y="35" width="334" height="57"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="LGv-1U-f4g" userLabel="Titles">
+                                    <rect key="frame" x="16" y="16" width="382" height="57"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify Your Phone Number" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0v4-fr-f41">
-                                            <rect key="frame" x="70" y="0.0" width="194.5" height="21.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="194.5" height="21.5"/>
                                             <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="19"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" systemColor="tintColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the verification code" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ccz-va-Sqj">
-                                            <rect key="frame" x="76.5" y="35.5" width="181" height="21.5"/>
+                                            <rect key="frame" x="0.0" y="35.5" width="181" height="21.5"/>
                                             <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="19"/>
-                                            <color key="textColor" red="1" green="0.94117647059999998" blue="0.58431372550000005" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" systemColor="tintColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </stackView>
+                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBT-Oh-9zN" customClass="SmartTimerLabel" customModule="Billo" customModuleProvider="target">
+                                    <rect key="frame" x="16" y="89" width="382" height="45.5"/>
+                                    <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="40"/>
+                                    <color key="textColor" systemColor="tintColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ovo-An-V0t">
-                                    <rect key="frame" x="87" y="128" width="240" height="50"/>
+                                    <rect key="frame" x="57" y="150.5" width="300" height="46"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CWG-cv-wHj" customClass="SecurityCodeTextField" customModule="Billo" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="30" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="40" height="46"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="50" id="GWX-wV-gev"/>
-                                                <constraint firstAttribute="width" constant="30" id="mP2-Aj-1PF"/>
+                                                <constraint firstAttribute="height" constant="46" id="GWX-wV-gev"/>
+                                                <constraint firstAttribute="width" constant="40" id="mP2-Aj-1PF"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
@@ -80,7 +87,7 @@
                                             </connections>
                                         </textField>
                                         <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EPz-vZ-oad" customClass="SecurityCodeTextField" customModule="Billo" customModuleProvider="target">
-                                            <rect key="frame" x="42" y="0.0" width="30" height="50"/>
+                                            <rect key="frame" x="52" y="0.0" width="40" height="46"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>
@@ -88,7 +95,7 @@
                                             </connections>
                                         </textField>
                                         <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="puo-ZC-r3M" customClass="SecurityCodeTextField" customModule="Billo" customModuleProvider="target">
-                                            <rect key="frame" x="84" y="0.0" width="30" height="50"/>
+                                            <rect key="frame" x="104" y="0.0" width="40" height="46"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>
@@ -96,7 +103,7 @@
                                             </connections>
                                         </textField>
                                         <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uDo-3B-FdI" customClass="SecurityCodeTextField" customModule="Billo" customModuleProvider="target">
-                                            <rect key="frame" x="126" y="0.0" width="30" height="50"/>
+                                            <rect key="frame" x="156" y="0.0" width="40" height="46"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>
@@ -104,7 +111,7 @@
                                             </connections>
                                         </textField>
                                         <textField opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n5t-Bp-TVZ" customClass="SecurityCodeTextField" customModule="Billo" customModuleProvider="target">
-                                            <rect key="frame" x="168" y="0.0" width="30" height="50"/>
+                                            <rect key="frame" x="208" y="0.0" width="40" height="46"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>
@@ -112,7 +119,7 @@
                                             </connections>
                                         </textField>
                                         <textField opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uq4-jS-Fuc" customClass="SecurityCodeTextField" customModule="Billo" customModuleProvider="target">
-                                            <rect key="frame" x="210" y="0.0" width="30" height="50"/>
+                                            <rect key="frame" x="260" y="0.0" width="40" height="46"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>
@@ -122,46 +129,65 @@
                                     </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OGS-6f-YoM" userLabel="barrier view">
-                                    <rect key="frame" x="87" y="128" width="240" height="50"/>
+                                    <rect key="frame" x="57" y="150.5" width="300" height="46"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
-                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IFw-4W-fGh">
-                                    <rect key="frame" x="38" y="198" width="338" height="20.5"/>
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IFw-4W-fGh">
+                                    <rect key="frame" x="38" y="216.5" width="338" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYV-5x-qeY" customClass="BlueButtonWithWhiteText" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="93" y="242.5" width="228" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYV-5x-qeY" userLabel="Resend">
+                                    <rect key="frame" x="93" y="261" width="228" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="Seq-Qi-lY5"/>
                                     </constraints>
-                                    <state key="normal" title="Button"/>
+                                    <state key="normal" title="Resend"/>
                                     <connections>
                                         <action selector="resendCode:" destination="-1" eventType="touchUpInside" id="Nx7-LL-X2x"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ij0-g8-szH" userLabel="Continue" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
+                                    <rect key="frame" x="28" y="321" width="358" height="45"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="45" id="aCB-3H-rmZ"/>
+                                    </constraints>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                    <connections>
+                                        <action selector="continueButton:" destination="-1" eventType="touchUpInside" id="fMT-SE-79B"/>
                                     </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" name="primaryBackground"/>
                             <constraints>
                                 <constraint firstItem="cYV-5x-qeY" firstAttribute="width" secondItem="0SH-Ei-3RR" secondAttribute="width" multiplier="0.55" id="4Le-uh-xYe"/>
-                                <constraint firstItem="ovo-An-V0t" firstAttribute="top" secondItem="LGv-1U-f4g" secondAttribute="bottom" constant="36" id="6wR-As-DPr"/>
+                                <constraint firstItem="ovo-An-V0t" firstAttribute="top" secondItem="MBT-Oh-9zN" secondAttribute="bottom" constant="16" id="6wR-As-DPr"/>
                                 <constraint firstItem="cYV-5x-qeY" firstAttribute="centerX" secondItem="IFw-4W-fGh" secondAttribute="centerX" id="7V5-1p-Mv3"/>
                                 <constraint firstItem="ovo-An-V0t" firstAttribute="centerX" secondItem="0SH-Ei-3RR" secondAttribute="centerX" id="APc-0R-Cce"/>
                                 <constraint firstAttribute="bottom" secondItem="IFw-4W-fGh" secondAttribute="bottom" priority="750" constant="16" id="BpS-mI-04p"/>
                                 <constraint firstItem="cYV-5x-qeY" firstAttribute="top" secondItem="IFw-4W-fGh" secondAttribute="bottom" constant="24" id="Bzh-cx-agA"/>
-                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="cYV-5x-qeY" secondAttribute="bottom" constant="16" id="CJx-vC-94N"/>
+                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ij0-g8-szH" secondAttribute="bottom" constant="16" id="CK5-S3-T0K"/>
+                                <constraint firstAttribute="trailing" secondItem="MBT-Oh-9zN" secondAttribute="trailing" constant="16" id="Edv-Dw-hI3"/>
                                 <constraint firstItem="OGS-6f-YoM" firstAttribute="leading" secondItem="ovo-An-V0t" secondAttribute="leading" id="Gqi-Ll-bVr"/>
                                 <constraint firstItem="IFw-4W-fGh" firstAttribute="top" secondItem="ovo-An-V0t" secondAttribute="bottom" constant="20" id="KFq-ey-u5n"/>
                                 <constraint firstItem="IFw-4W-fGh" firstAttribute="centerX" secondItem="ovo-An-V0t" secondAttribute="centerX" id="Ldx-kx-EYW"/>
+                                <constraint firstItem="MBT-Oh-9zN" firstAttribute="leading" secondItem="0SH-Ei-3RR" secondAttribute="leading" constant="16" id="RKw-Cv-Bgg"/>
+                                <constraint firstItem="MBT-Oh-9zN" firstAttribute="top" secondItem="LGv-1U-f4g" secondAttribute="bottom" constant="16" id="RTF-zn-wF5"/>
+                                <constraint firstItem="ovo-An-V0t" firstAttribute="top" secondItem="MBT-Oh-9zN" secondAttribute="bottom" constant="16" id="TpU-Ex-Kfd"/>
                                 <constraint firstItem="OGS-6f-YoM" firstAttribute="bottom" secondItem="ovo-An-V0t" secondAttribute="bottom" id="WJn-f7-7zp"/>
                                 <constraint firstAttribute="trailing" secondItem="IFw-4W-fGh" secondAttribute="trailing" constant="38" id="WOz-LE-LxW"/>
-                                <constraint firstItem="LGv-1U-f4g" firstAttribute="leading" secondItem="0SH-Ei-3RR" secondAttribute="leading" constant="40" id="YPT-X4-axA"/>
+                                <constraint firstItem="ij0-g8-szH" firstAttribute="top" secondItem="cYV-5x-qeY" secondAttribute="bottom" constant="16" id="WW6-3q-TEU"/>
+                                <constraint firstItem="LGv-1U-f4g" firstAttribute="leading" secondItem="0SH-Ei-3RR" secondAttribute="leading" constant="16" id="YPT-X4-axA"/>
                                 <constraint firstItem="OGS-6f-YoM" firstAttribute="trailing" secondItem="ovo-An-V0t" secondAttribute="trailing" id="eCp-rX-Ehv"/>
-                                <constraint firstAttribute="trailing" secondItem="LGv-1U-f4g" secondAttribute="trailing" constant="40" id="gKr-pm-92r"/>
+                                <constraint firstAttribute="trailing" secondItem="LGv-1U-f4g" secondAttribute="trailing" constant="16" id="gKr-pm-92r"/>
                                 <constraint firstItem="IFw-4W-fGh" firstAttribute="leading" secondItem="0SH-Ei-3RR" secondAttribute="leading" constant="38" id="ih2-hu-ILm"/>
-                                <constraint firstItem="LGv-1U-f4g" firstAttribute="top" secondItem="0SH-Ei-3RR" secondAttribute="top" constant="35" id="sP0-N6-S0V"/>
+                                <constraint firstItem="ij0-g8-szH" firstAttribute="leading" secondItem="0SH-Ei-3RR" secondAttribute="leading" constant="28" id="kuO-eL-ntS"/>
+                                <constraint firstAttribute="trailing" secondItem="ij0-g8-szH" secondAttribute="trailing" constant="28" id="oO3-jw-yVq"/>
+                                <constraint firstItem="LGv-1U-f4g" firstAttribute="top" secondItem="0SH-Ei-3RR" secondAttribute="top" constant="16" id="sP0-N6-S0V"/>
                                 <constraint firstItem="OGS-6f-YoM" firstAttribute="top" secondItem="ovo-An-V0t" secondAttribute="top" id="tLd-OF-bnB"/>
+                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MBT-Oh-9zN" secondAttribute="bottom" priority="750" constant="16" id="vyb-Tv-CLU"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -173,23 +199,13 @@
                         <constraint firstItem="0SH-Ei-3RR" firstAttribute="leading" secondItem="4dA-Bj-4aO" secondAttribute="leading" id="yq5-pZ-TkA"/>
                     </constraints>
                 </scrollView>
-                <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBT-Oh-9zN" customClass="SmartTimerLabel" customModule="Billo" customModuleProvider="target">
-                    <rect key="frame" x="175" y="796.5" width="64" height="45.5"/>
-                    <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="40"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="acn-R9-ZAc"/>
             <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="4dA-Bj-4aO" secondAttribute="trailing" id="AZY-am-Lis"/>
-                <constraint firstItem="acn-R9-ZAc" firstAttribute="bottom" secondItem="MBT-Oh-9zN" secondAttribute="bottom" constant="20" id="EVf-ei-CA7"/>
                 <constraint firstItem="4dA-Bj-4aO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="X20-4m-zQh"/>
                 <constraint firstItem="0SH-Ei-3RR" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" priority="250" id="Zaf-lf-NCY"/>
-                <constraint firstItem="MBT-Oh-9zN" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="aZC-TG-PYA"/>
-                <constraint firstItem="MBT-Oh-9zN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="b6u-Px-OLs"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MBT-Oh-9zN" secondAttribute="trailing" constant="16" id="bgT-OT-22N"/>
                 <constraint firstAttribute="bottom" secondItem="4dA-Bj-4aO" secondAttribute="bottom" id="npo-9k-7dz"/>
                 <constraint firstItem="0SH-Ei-3RR" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="sSr-Na-rM4"/>
                 <constraint firstItem="4dA-Bj-4aO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="vl2-38-Uli"/>
@@ -201,5 +217,8 @@
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

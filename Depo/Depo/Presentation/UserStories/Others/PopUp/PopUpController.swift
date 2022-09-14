@@ -26,14 +26,14 @@ final class PopUpController: BasePopUpController {
 
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
-            titleLabel.font = UIFont.appFont(.medium, size: 20)
+            titleLabel.font = .appFont(.medium, size: 20)
         }
     }
     
     @IBOutlet private weak var messageLabel: UILabel! {
         didSet {
             messageLabel.textColor = AppColor.popUpMessage.color
-            messageLabel.font = UIFont.appFont(.regular, size: 16)
+            messageLabel.font = .appFont(.regular, size: 16)
         }
     }
     
@@ -136,22 +136,19 @@ final class PopUpController: BasePopUpController {
     private func setup(_ button: InsetsButton) {
         
         if button == firstButton {
-            button.setBackgroundColor(AppColor.whiteAndLrTealish.color, for: .normal)
+            button.setBackgroundColor(AppColor.popUpButtonNormal.color, for: .normal)
             button.setBackgroundColor(AppColor.tint.color, for: .highlighted)
-            button.setTitleColor(AppColor.tint.color, for: .normal)
+            button.setTitleColor(.white, for: .normal)
             button.setTitleColor(AppColor.whiteAndLrTealish.color.darker(by: 30.0), for: .highlighted)
         } else {
-            button.setBackgroundColor(AppColor.tint.color, for: .normal)
+            button.setBackgroundColor(AppColor.popUpButtonCancel.color, for: .normal)
             button.setBackgroundColor(AppColor.tint.color.darker(by: 30), for: .highlighted)
-            button.setTitleColor(AppColor.whiteAndLrTealish.color, for: .normal)
+            button.setTitleColor(.white, for: .normal)
             button.setTitleColor(AppColor.whiteAndLrTealish.color.darker(by: 30.0), for: .highlighted)
         }
         
         button.isExclusiveTouch = true
-
-        button.titleLabel?.font = UIFont.appFont(.medium, size: 18)
-        button.layer.borderColor = AppColor.tint.color.cgColor
-        button.layer.borderWidth = 1
+        button.titleLabel?.font = .appFont(.medium, size: 18)
 
         button.adjustsFontSizeToFitWidth()
         button.clipsToBounds = true
@@ -160,7 +157,6 @@ final class PopUpController: BasePopUpController {
         button.insets = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
         
         button.layer.cornerRadius = button.frame.height / 2
-        
     }
     
     //MARK: IBAction

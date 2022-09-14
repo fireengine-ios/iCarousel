@@ -36,6 +36,29 @@ extension UIApplication {
         }
     }
     
+    static func showCustomAlert(title: String,
+                                message: String,
+                                image: PopUpImage,
+                                buttonTitle: String,
+                                closed: (() -> Void)? = nil) {
+        guard message != TextConstants.errorBadConnection else {
+            return
+        }
+        let controller = topController()
+        if controller is PopUpController {
+            return
+        }
+        let vc = PopUpController.with(title: title, message: message, image: image, buttonTitle: buttonTitle) { vc in
+            vc.close {
+                closed?()
+            }
+        }
+        
+        DispatchQueue.toMain {
+            vc.open()
+        }
+    }
+    
     static func showErrorAlert(message: String, closed: (() -> Void)? = nil) {
         guard message != TextConstants.errorBadConnection else {
             return
