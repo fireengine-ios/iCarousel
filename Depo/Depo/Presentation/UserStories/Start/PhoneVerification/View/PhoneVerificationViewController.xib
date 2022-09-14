@@ -20,7 +20,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhoneVerificationViewController" customModule="Billo" customModuleProvider="target">
             <connections>
-                <outlet property="continueButton" destination="ij0-g8-szH" id="U8F-Kg-rhR"/>
+                <outlet property="continueButton" destination="uMm-oE-mE6" id="xwd-fa-5jo"/>
                 <outlet property="errorLabel" destination="IFw-4W-fGh" id="wl4-aG-2z8"/>
                 <outlet property="firstSecurityCodeTextField" destination="CWG-cv-wHj" id="Dh3-Of-Sop"/>
                 <outlet property="infoTitle" destination="Ccz-va-Sqj" id="qPK-hX-hQG"/>
@@ -46,7 +46,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0SH-Ei-3RR">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="382"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="895.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="LGv-1U-f4g" userLabel="Titles">
                                     <rect key="frame" x="16" y="16" width="382" height="57"/>
@@ -138,37 +138,40 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYV-5x-qeY" userLabel="Resend">
-                                    <rect key="frame" x="93" y="261" width="228" height="44"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="44" id="Seq-Qi-lY5"/>
-                                    </constraints>
-                                    <state key="normal" title="Resend"/>
-                                    <connections>
-                                        <action selector="resendCode:" destination="-1" eventType="touchUpInside" id="Nx7-LL-X2x"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ij0-g8-szH" userLabel="Continue" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="28" y="321" width="358" height="45"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="45" id="aCB-3H-rmZ"/>
-                                    </constraints>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                                    <connections>
-                                        <action selector="continueButton:" destination="-1" eventType="touchUpInside" id="fMT-SE-79B"/>
-                                    </connections>
-                                </button>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="l6h-HQ-d7e">
+                                    <rect key="frame" x="16" y="253" width="382" height="104"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYV-5x-qeY" userLabel="Resend">
+                                            <rect key="frame" x="0.0" y="0.0" width="382" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="44" id="Seq-Qi-lY5"/>
+                                            </constraints>
+                                            <state key="normal" title="Resend"/>
+                                            <connections>
+                                                <action selector="resendCode:" destination="-1" eventType="touchUpInside" id="Nx7-LL-X2x"/>
+                                            </connections>
+                                        </button>
+                                        <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMm-oE-mE6" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="60" width="382" height="44"/>
+                                            <color key="backgroundColor" name="alertOrangeAndBlueGradientStart"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="44" id="I4J-Lg-Jiq"/>
+                                            </constraints>
+                                            <state key="normal" title="Continue"/>
+                                            <connections>
+                                                <action selector="continueButton:" destination="-1" eventType="touchUpInside" id="gbT-Mj-XBy"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
                             </subviews>
                             <color key="backgroundColor" name="primaryBackground"/>
                             <constraints>
-                                <constraint firstItem="cYV-5x-qeY" firstAttribute="width" secondItem="0SH-Ei-3RR" secondAttribute="width" multiplier="0.55" id="4Le-uh-xYe"/>
+                                <constraint firstItem="l6h-HQ-d7e" firstAttribute="leading" secondItem="0SH-Ei-3RR" secondAttribute="leading" constant="16" id="4gJ-hX-y7T"/>
+                                <constraint firstAttribute="trailing" secondItem="l6h-HQ-d7e" secondAttribute="trailing" constant="16" id="5lh-gy-GH7"/>
                                 <constraint firstItem="ovo-An-V0t" firstAttribute="top" secondItem="MBT-Oh-9zN" secondAttribute="bottom" constant="16" id="6wR-As-DPr"/>
-                                <constraint firstItem="cYV-5x-qeY" firstAttribute="centerX" secondItem="IFw-4W-fGh" secondAttribute="centerX" id="7V5-1p-Mv3"/>
                                 <constraint firstItem="ovo-An-V0t" firstAttribute="centerX" secondItem="0SH-Ei-3RR" secondAttribute="centerX" id="APc-0R-Cce"/>
-                                <constraint firstAttribute="bottom" secondItem="IFw-4W-fGh" secondAttribute="bottom" priority="750" constant="16" id="BpS-mI-04p"/>
-                                <constraint firstItem="cYV-5x-qeY" firstAttribute="top" secondItem="IFw-4W-fGh" secondAttribute="bottom" constant="24" id="Bzh-cx-agA"/>
-                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ij0-g8-szH" secondAttribute="bottom" constant="16" id="CK5-S3-T0K"/>
+                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="IFw-4W-fGh" secondAttribute="bottom" priority="750" constant="16" id="BpS-mI-04p"/>
                                 <constraint firstAttribute="trailing" secondItem="MBT-Oh-9zN" secondAttribute="trailing" constant="16" id="Edv-Dw-hI3"/>
                                 <constraint firstItem="OGS-6f-YoM" firstAttribute="leading" secondItem="ovo-An-V0t" secondAttribute="leading" id="Gqi-Ll-bVr"/>
                                 <constraint firstItem="IFw-4W-fGh" firstAttribute="top" secondItem="ovo-An-V0t" secondAttribute="bottom" constant="20" id="KFq-ey-u5n"/>
@@ -178,13 +181,12 @@
                                 <constraint firstItem="ovo-An-V0t" firstAttribute="top" secondItem="MBT-Oh-9zN" secondAttribute="bottom" constant="16" id="TpU-Ex-Kfd"/>
                                 <constraint firstItem="OGS-6f-YoM" firstAttribute="bottom" secondItem="ovo-An-V0t" secondAttribute="bottom" id="WJn-f7-7zp"/>
                                 <constraint firstAttribute="trailing" secondItem="IFw-4W-fGh" secondAttribute="trailing" constant="38" id="WOz-LE-LxW"/>
-                                <constraint firstItem="ij0-g8-szH" firstAttribute="top" secondItem="cYV-5x-qeY" secondAttribute="bottom" constant="16" id="WW6-3q-TEU"/>
                                 <constraint firstItem="LGv-1U-f4g" firstAttribute="leading" secondItem="0SH-Ei-3RR" secondAttribute="leading" constant="16" id="YPT-X4-axA"/>
+                                <constraint firstItem="l6h-HQ-d7e" firstAttribute="top" secondItem="IFw-4W-fGh" secondAttribute="bottom" constant="16" id="ZxR-qJ-yMt"/>
                                 <constraint firstItem="OGS-6f-YoM" firstAttribute="trailing" secondItem="ovo-An-V0t" secondAttribute="trailing" id="eCp-rX-Ehv"/>
                                 <constraint firstAttribute="trailing" secondItem="LGv-1U-f4g" secondAttribute="trailing" constant="16" id="gKr-pm-92r"/>
                                 <constraint firstItem="IFw-4W-fGh" firstAttribute="leading" secondItem="0SH-Ei-3RR" secondAttribute="leading" constant="38" id="ih2-hu-ILm"/>
-                                <constraint firstItem="ij0-g8-szH" firstAttribute="leading" secondItem="0SH-Ei-3RR" secondAttribute="leading" constant="28" id="kuO-eL-ntS"/>
-                                <constraint firstAttribute="trailing" secondItem="ij0-g8-szH" secondAttribute="trailing" constant="28" id="oO3-jw-yVq"/>
+                                <constraint firstItem="ovo-An-V0t" firstAttribute="top" secondItem="0SH-Ei-3RR" secondAttribute="bottom" constant="-745" id="rgc-zV-LPz"/>
                                 <constraint firstItem="LGv-1U-f4g" firstAttribute="top" secondItem="0SH-Ei-3RR" secondAttribute="top" constant="16" id="sP0-N6-S0V"/>
                                 <constraint firstItem="OGS-6f-YoM" firstAttribute="top" secondItem="ovo-An-V0t" secondAttribute="top" id="tLd-OF-bnB"/>
                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MBT-Oh-9zN" secondAttribute="bottom" priority="750" constant="16" id="vyb-Tv-CLU"/>
@@ -193,7 +195,7 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="0SH-Ei-3RR" secondAttribute="bottom" id="7GI-37-tDj"/>
+                        <constraint firstAttribute="bottom" secondItem="0SH-Ei-3RR" secondAttribute="bottom" id="0Pc-BT-zJb"/>
                         <constraint firstAttribute="trailing" secondItem="0SH-Ei-3RR" secondAttribute="trailing" id="CiW-Ir-8gV"/>
                         <constraint firstItem="0SH-Ei-3RR" firstAttribute="top" secondItem="4dA-Bj-4aO" secondAttribute="top" priority="750" id="U4G-Yc-lZy"/>
                         <constraint firstItem="0SH-Ei-3RR" firstAttribute="leading" secondItem="4dA-Bj-4aO" secondAttribute="leading" id="yq5-pZ-TkA"/>
@@ -214,6 +216,9 @@
         </view>
     </objects>
     <resources>
+        <namedColor name="alertOrangeAndBlueGradientStart">
+            <color red="1" green="0.6589999794960022" blue="0.063000001013278961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

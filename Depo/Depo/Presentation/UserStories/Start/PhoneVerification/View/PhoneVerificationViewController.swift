@@ -29,22 +29,22 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
     @IBOutlet private weak var firstSecurityCodeTextField: SecurityCodeTextField!
     
     @IBOutlet private weak var errorLabel: UILabel!
-    @IBOutlet private weak var bottomTimerConstraint: NSLayoutConstraint!
+    // @IBOutlet private weak var bottomTimerConstraint: NSLayoutConstraint!
     
     @IBOutlet private var codeTextFields: [SecurityCodeTextField]!
-    
+        
     @IBOutlet weak var continueButton: RoundedInsetsButton! {
         willSet {
             newValue.adjustsFontSizeToFitWidth()
             newValue.setTitle("Continue", for: .normal)
-            newValue.setTitleColor(AppColor.forgetPassText.color, for: .normal)
+            newValue.setTitleColor(.white, for: .normal)
             newValue.titleLabel?.font = .appFont(.medium, size: 16)
-            newValue.setBackgroundColor(AppColor.forgetPassButtonNormal.color, for: .normal)
+            newValue.setBackgroundColor(AppColor.forgetPassButtonNormal.color, for: .application)
             newValue.setBackgroundColor(AppColor.forgetPassButtonDisable.color, for: .disabled)
             newValue.layer.borderColor = AppColor.forgetPassButtonNormal.cgColor
             newValue.isUserInteractionEnabled = true
             //newValue.isEnabled = true
-            
+            newValue.isOpaque = true
         }
     }
     
@@ -141,11 +141,11 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
                     return
                 }
                 
-                UIView.animate(withDuration: options.animationDuration) {
-                    self.bottomTimerConstraint?.constant = options.endFrame.height + Constants.timerLabelBottomOffset
-                    
-                    self.view.layoutIfNeeded()
-                }
+//                UIView.animate(withDuration: options.animationDuration) {
+//                    self.bottomTimerConstraint?.constant = options.endFrame.height + Constants.timerLabelBottomOffset
+//
+//                    self.view.layoutIfNeeded()
+//                }
                 
                 if let viewToScroll = (self.errorLabel.isHidden ? self.firstSecurityCodeTextField : self.errorLabel) {
                     ///convertion work correctly with firstSecurityCodeTextField-firstSecurityCodeTextField pair
@@ -167,7 +167,7 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
                 }
                 
                 UIView.animate(withDuration: options.animationDuration) {
-                    self.bottomTimerConstraint?.constant =  Constants.timerLabelBottomOffset
+                    //self.bottomTimerConstraint?.constant =  Constants.timerLabelBottomOffset
                     
                     var inset = self.scrollView.contentInset
                     inset.bottom = 0

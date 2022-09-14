@@ -88,7 +88,7 @@ final class IdentityVerificationViewController: BaseViewController {
         let buttonTitle = TextConstants.ok
 
         let popup = PopUpController.with(title: nil, message: message,
-                                         image: .success, buttonTitle: buttonTitle) { [weak self] popup in
+                                         image: .custom(Image.forgetPassPopupLock.image), buttonTitle: buttonTitle) { [weak self] popup in
             popup.close()
             self?.trackEmailSentEvent(isRecoveryEmail: isRecoveryEmail)
             self?.navigationController?.popViewController(animated: true)
