@@ -29,6 +29,12 @@ class AlertFilesCancelView: UIView, NibInit {
         }
     }
     
+    @IBOutlet private weak var seperatorView: UIView! {
+        willSet {
+            newValue.backgroundColor = AppColor.separator.color
+        }
+    }
+    
     @IBAction func onCancelButton(_ sender: RoundedButton) {
         delegate?.onCancelButton()
     }

@@ -113,6 +113,12 @@ enum AppColor {
     case registerNextButtonNormalTextColor
     case registerLabelTextColor
     
+    // MARK: Gradient
+    case premiumFirstGradient
+    case premiumSecondGradient
+    case premiumThirdGradient
+    case premiumGradientLabel
+
     //TODO: Facelift: Uncomment below
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - FACELIFT - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     
