@@ -71,9 +71,9 @@ final class GradientPremiumButton: UIButton {
             return
         }
         
-        gradientLayer.colors = [ColorConstants.lrTiffanyBlueGradient.cgColor,
-                                ColorConstants.orangeGradient.cgColor,
-                                UIColor.lrTealishTwo.withAlphaComponent(NumericConstants.alphaForColorsPremiumButton).cgColor,]
+        gradientLayer.colors = [AppColor.premiumThirdGradient.cgColor,
+                                AppColor.premiumSecondGradient.cgColor,
+                                AppColor.premiumFirstGradient.cgColor]
         gradientLayer.startPoint = GradientPoint.start
         gradientLayer.endPoint = GradientPoint.end
         gradientLayer.isOpaque = true
