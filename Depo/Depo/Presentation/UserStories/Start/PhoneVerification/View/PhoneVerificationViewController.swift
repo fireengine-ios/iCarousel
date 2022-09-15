@@ -195,12 +195,6 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
     // MARK: PhoneVerificationViewInput
     func setupInitialState(timerEnabled: Bool) {
         codeTextFields.forEach({
-            $0.layer.borderWidth = 2
-            $0.layer.cornerRadius = 6
-            $0.layer.borderColor = AppColor.forgetPassCodeClose.cgColor
-            $0.layer.masksToBounds = true
-            $0.backgroundColor = .clear
-            $0.textColor = AppColor.forgetPassText.color
             $0.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         })
         
