@@ -894,6 +894,10 @@ class RouterVC: NSObject {
         return InvitationViewController()
     }
     
+    func paycellCampaign() -> PaycellCampaignViewController {
+        return PaycellCampaignViewController()
+    }
+    
     // MARK: Face Image Recognition Photos
     
     func imageFacePhotosController(album: AlbumItem, item: Item, status: ItemStatus, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool = false, faceImageType: FaceImageType? = nil) -> BaseFilesGreedChildrenViewController {
@@ -958,6 +962,10 @@ class RouterVC: NSObject {
 
     var invitation: UIViewController {
         return InvitationViewController()
+    }
+    
+    var paycell: UIViewController {
+        return PaycellCampaignViewController()
     }
 
     // MARK: Chatbot
@@ -1087,7 +1095,7 @@ class RouterVC: NSObject {
 
     //MARK: - My Storage
     
-    func myStorage(usageStorage: UsageResponse?) -> MyStorageViewController {
+    func myStorage(usageStorage: UsageResponse?, affiliate: String? = nil, refererToken: String? = nil) -> MyStorageViewController {
         let controller = MyStorageModuleInitializer.initializeMyStorageController(usage: usageStorage)
         return controller
     }
@@ -1432,4 +1440,14 @@ class RouterVC: NSObject {
     }
     
     
+    func paycellDetailPopup(with model: PaycellDetailModel, type: PaycellDetailType) -> PaycellDetailPopup {
+        let controller = PaycellDetailPopup()
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        controller.detailType = type
+        controller.model = model
+        
+        return controller
+    }
 }

@@ -8928,6 +8928,22 @@
 		F00D7DE52851C7000004E619 /* SharedItemsSegmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00D7DE32851C7000004E619 /* SharedItemsSegmentView.xib */; };
 		F00D7DE62851C7000004E619 /* SharedItemsSegmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00D7DE32851C7000004E619 /* SharedItemsSegmentView.xib */; };
 		F00D7DE72851C7000004E619 /* SharedItemsSegmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00D7DE32851C7000004E619 /* SharedItemsSegmentView.xib */; };
+		F00610E6289DBF3100911048 /* PaycellCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610E5289DBF3100911048 /* PaycellCampaignViewController.swift */; };
+		F00610E7289DBF3100911048 /* PaycellCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610E5289DBF3100911048 /* PaycellCampaignViewController.swift */; };
+		F00610E8289DBF3100911048 /* PaycellCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610E5289DBF3100911048 /* PaycellCampaignViewController.swift */; };
+		F00610E9289DBF3100911048 /* PaycellCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610E5289DBF3100911048 /* PaycellCampaignViewController.swift */; };
+		F00610EB289DBF4D00911048 /* PaycellCampaignViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00610EA289DBF4D00911048 /* PaycellCampaignViewController.xib */; };
+		F00610EC289DBF4D00911048 /* PaycellCampaignViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00610EA289DBF4D00911048 /* PaycellCampaignViewController.xib */; };
+		F00610ED289DBF4D00911048 /* PaycellCampaignViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00610EA289DBF4D00911048 /* PaycellCampaignViewController.xib */; };
+		F00610EE289DBF4D00911048 /* PaycellCampaignViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00610EA289DBF4D00911048 /* PaycellCampaignViewController.xib */; };
+		F00610F128A0504C00911048 /* PaycellCampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610F028A0504C00911048 /* PaycellCampaignService.swift */; };
+		F00610F228A0504C00911048 /* PaycellCampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610F028A0504C00911048 /* PaycellCampaignService.swift */; };
+		F00610F328A0504C00911048 /* PaycellCampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610F028A0504C00911048 /* PaycellCampaignService.swift */; };
+		F00610F428A0504C00911048 /* PaycellCampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610F028A0504C00911048 /* PaycellCampaignService.swift */; };
+		F006110028A1181100911048 /* PaycellDetailPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00610FF28A1181000911048 /* PaycellDetailPopup.xib */; };
+		F006110128A1181100911048 /* PaycellDetailPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00610FF28A1181000911048 /* PaycellDetailPopup.xib */; };
+		F006110228A1181100911048 /* PaycellDetailPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00610FF28A1181000911048 /* PaycellDetailPopup.xib */; };
+		F006110328A1181100911048 /* PaycellDetailPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00610FF28A1181000911048 /* PaycellDetailPopup.xib */; };
 		F00DE586272196C3002F9A64 /* FileDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F028D7992719C0F000FF204D /* FileDescriptionView.swift */; };
 		F00DE58A272196C6002F9A64 /* FileDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F028D79B2719C0FD00FF204D /* FileDescriptionView.xib */; };
 		F01244C9282A988900835B4E /* agconnect-services.plist in Resources */ = {isa = PBXBuildFile; fileRef = F01244C8282A988800835B4E /* agconnect-services.plist */; };
@@ -9171,6 +9187,14 @@
 		F092578E27DE7B1F0001737C /* SecurityInfoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092578727DCF78C0001737C /* SecurityInfoPopup.swift */; };
 		F092578F27DE7B200001737C /* SecurityInfoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092578727DCF78C0001737C /* SecurityInfoPopup.swift */; };
 		F092579027DE7B200001737C /* SecurityInfoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092578727DCF78C0001737C /* SecurityInfoPopup.swift */; };
+		F095724F28A11A9D00D1D0DD /* PaycellDetailPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095724E28A11A9D00D1D0DD /* PaycellDetailPopup.swift */; };
+		F095725028A11A9D00D1D0DD /* PaycellDetailPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095724E28A11A9D00D1D0DD /* PaycellDetailPopup.swift */; };
+		F095725128A11A9D00D1D0DD /* PaycellDetailPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095724E28A11A9D00D1D0DD /* PaycellDetailPopup.swift */; };
+		F095725228A11A9D00D1D0DD /* PaycellDetailPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095724E28A11A9D00D1D0DD /* PaycellDetailPopup.swift */; };
+		F095725728A1205700D1D0DD /* PaycellCampaignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095725628A1205700D1D0DD /* PaycellCampaignModel.swift */; };
+		F095725828A1205700D1D0DD /* PaycellCampaignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095725628A1205700D1D0DD /* PaycellCampaignModel.swift */; };
+		F095725928A1205700D1D0DD /* PaycellCampaignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095725628A1205700D1D0DD /* PaycellCampaignModel.swift */; };
+		F095725A28A1205700D1D0DD /* PaycellCampaignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095725628A1205700D1D0DD /* PaycellCampaignModel.swift */; };
 		F09279972886820700874ADD /* GridListCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F09279962886820700874ADD /* GridListCountView.xib */; };
 		F09279982886820700874ADD /* GridListCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F09279962886820700874ADD /* GridListCountView.xib */; };
 		F09279992886820700874ADD /* GridListCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F09279962886820700874ADD /* GridListCountView.xib */; };
@@ -9731,6 +9755,7 @@
 		0791817526F88B7B0067FB75 /* IdentityVerificationMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityVerificationMethod.swift; sourceTree = "<group>"; };
 		0791817E26F89FAF0067FB75 /* ResetPasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordService.swift; sourceTree = "<group>"; };
 		0791818326F8B3B10067FB75 /* ResetPasswordServiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordServiceDelegate.swift; sourceTree = "<group>"; };
+		0795903527CCAF9700E1FB2F /* ka */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ka; path = ka.lproj/OurLocalizable.strings; sourceTree = "<group>"; };
 		0798D5CB26981C9F00F5EDE0 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		0798D5CD26981CBB00F5EDE0 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		07A6C48926E5EC8300B5442B /* ProfileEmailFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEmailFieldView.swift; sourceTree = "<group>"; };
@@ -12050,6 +12075,10 @@
 		F00610CC2899324700911048 /* ForYouViewEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouViewEnum.swift; sourceTree = "<group>"; };
 		F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedItemsSegmentView.swift; sourceTree = "<group>"; };
 		F00D7DE32851C7000004E619 /* SharedItemsSegmentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SharedItemsSegmentView.xib; sourceTree = "<group>"; };
+		F00610E5289DBF3100911048 /* PaycellCampaignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaycellCampaignViewController.swift; sourceTree = "<group>"; };
+		F00610EA289DBF4D00911048 /* PaycellCampaignViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaycellCampaignViewController.xib; sourceTree = "<group>"; };
+		F00610F028A0504C00911048 /* PaycellCampaignService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaycellCampaignService.swift; sourceTree = "<group>"; };
+		F00610FF28A1181000911048 /* PaycellDetailPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaycellDetailPopup.xib; sourceTree = "<group>"; };
 		F01244C8282A988800835B4E /* agconnect-services.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "agconnect-services.plist"; sourceTree = "<group>"; };
 		F01244D8283AEC6000835B4E /* JWTTokenDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTTokenDecoder.swift; sourceTree = "<group>"; };
 		F013FA6B27FF2803004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleGoogleUpdatePasswordPoup.swift; sourceTree = "<group>"; };
@@ -12117,6 +12146,16 @@
 		F09279A32886CA4400874ADD /* AlertFilesCancelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesCancelView.swift; sourceTree = "<group>"; };
 		F09279A82886CA8A00874ADD /* AlertFilesCancelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertFilesCancelView.xib; sourceTree = "<group>"; };
 		F0A091362812D970009EFF9E /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		F095724E28A11A9D00D1D0DD /* PaycellDetailPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaycellDetailPopup.swift; sourceTree = "<group>"; };
+		F095725628A1205700D1D0DD /* PaycellCampaignModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaycellCampaignModel.swift; sourceTree = "<group>"; };
+		F0A091362812D970009EFF9E /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		F0AF20DF27D63F950014C84D /* ka */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ka; path = ka.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F0B64C63275D4F2500002F66 /* DarkModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeViewController.swift; sourceTree = "<group>"; };
+		F0B64C64275D4F2500002F66 /* DarkModeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DarkModeViewController.xib; sourceTree = "<group>"; };
+		F0B64C6E275DDF4800002F66 /* DarkModeConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeConfigurator.swift; sourceTree = "<group>"; };
+		F0B64C73275DDFA700002F66 /* DarkModeInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeInitializer.swift; sourceTree = "<group>"; };
+		F0B64C7D275DEBD000002F66 /* DarkModeOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeOptionsView.swift; sourceTree = "<group>"; };
+		F0B64C82275DEBEA00002F66 /* DarkModeOptionsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DarkModeOptionsView.xib; sourceTree = "<group>"; };
 		F0BF840927A7E802000F7F4E /* PublicShareSaveErrorStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicShareSaveErrorStatus.swift; sourceTree = "<group>"; };
 		F0C447282848C85F00129228 /* AllFilesTypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFilesTypeCollectionViewCell.swift; sourceTree = "<group>"; };
 		F0C447292848C85F00129228 /* AllFilesTypeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllFilesTypeCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -19674,6 +19713,8 @@
 		CE3EB30D1FC7F512000B70D6 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				F00610E1289DBF0A00911048 /* PaycellCampaign */,
+				F0B64C5E275D4E3000002F66 /* DarkMode */,
 				3A0B421B266F7D5900FD8F3C /* Chatbot */,
 				3A6D27BF26400A7800A7BBE2 /* Invitation */,
 				CF7145A024B597A700D83E60 /* ContactSync */,
@@ -19804,6 +19845,7 @@
 		CE51A0C61EF8ED38005DCEE0 /* ApiServices */ = {
 			isa = PBXGroup;
 			children = (
+				F00610EF28A0503300911048 /* PaycellCampaignService */,
 				F0D2975A27F6E18E0082C768 /* AppleGoogleLoginService */,
 				076BD1DD27BC3249004609E3 /* MapSearchService */,
 				0780AB4D27916833000760D9 /* RemoteTextRecognitionService */,
@@ -21351,6 +21393,34 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		F00610E1289DBF0A00911048 /* PaycellCampaign */ = {
+			isa = PBXGroup;
+			children = (
+				F00610FB28A1178D00911048 /* Views */,
+				F00610E5289DBF3100911048 /* PaycellCampaignViewController.swift */,
+				F00610EA289DBF4D00911048 /* PaycellCampaignViewController.xib */,
+			);
+			path = PaycellCampaign;
+			sourceTree = "<group>";
+		};
+		F00610EF28A0503300911048 /* PaycellCampaignService */ = {
+			isa = PBXGroup;
+			children = (
+				F00610F028A0504C00911048 /* PaycellCampaignService.swift */,
+				F095725628A1205700D1D0DD /* PaycellCampaignModel.swift */,
+			);
+			path = PaycellCampaignService;
+			sourceTree = "<group>";
+		};
+		F00610FB28A1178D00911048 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F00610FF28A1181000911048 /* PaycellDetailPopup.xib */,
+				F095724E28A11A9D00D1D0DD /* PaycellDetailPopup.swift */,
+			);
+			path = Views;
+            sourceTree = "<group>";
+        };
 		F00D7DDD2851C6A30004E619 /* SharedItemsSegmentView */ = {
 			isa = PBXGroup;
 			children = (
@@ -22245,6 +22315,7 @@
 				ko,
 				"zh-Hant",
 				"pt-PT",
+				ka,
 			);
 			mainGroup = 051E1DEA19CAC2F900FD1E03;
 			productRefGroup = 051E1DF419CAC2F900FD1E03 /* Products */;
@@ -22369,6 +22440,7 @@
 				8C0E90071FDEBDFF00789C91 /* SettingHeaderView.xib in Resources */,
 				7CD92DBC20750A4400010BFA /* AnimationCard.xib in Resources */,
 				989BDE4A22F47B1E001DDEB2 /* SpotifyAuthViewController.xib in Resources */,
+				F00610EB289DBF4D00911048 /* PaycellCampaignViewController.xib in Resources */,
 				8C0E90081FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewController.xib in Resources */,
 				B5315097246D868E00E94355 /* GoogleService-Info-debug.plist in Resources */,
 				4A6DBE8C21A6F9360003D1B4 /* PremiumHeaderView.xib in Resources */,
@@ -22546,6 +22618,7 @@
 				CF7145F824B597A800D83E60 /* ContactDetailNoInfoCell.xib in Resources */,
 				C62239B6204976E40043ED44 /* FaceImagePhotosViewController.xib in Resources */,
 				989BDE3B22F47B1E001DDEB2 /* SpotifyPlaylistsViewController.xib in Resources */,
+				F006110028A1181100911048 /* PaycellDetailPopup.xib in Resources */,
 				8C0E90501FDEBDFF00789C91 /* TurkcellSaturaDem.ttf in Resources */,
 				CF38A81E2575315F0000994F /* PrivateShareWithContactView.xib in Resources */,
 				98AA104623585E0C00B12485 /* CampaignDetailViewController.xib in Resources */,
@@ -22848,6 +22921,7 @@
 				98DBC0652410FB4F00926F40 /* AutoSyncAlbumTableViewCell.xib in Resources */,
 				CEC94E46238FA6F4000BBB80 /* UserProfileViewController.xib in Resources */,
 				8E3B6B502462E44C00BCB052 /* FileInfoView.xib in Resources */,
+				F00610ED289DBF4D00911048 /* PaycellCampaignViewController.xib in Resources */,
 				CE784CD222A685FB00662219 /* OptInController.xib in Resources */,
 				CE784CD322A685FB00662219 /* FaceImageChangeCoverViewController.xib in Resources */,
 				98C298542302B15300C9811E /* SpotifyCancelImportPopup.xib in Resources */,
@@ -23158,6 +23232,7 @@
 				985E69AD255A6204006F6CD7 /* PrivateShareRoleCheckmarkView.xib in Resources */,
 				CE784EAD22A685FB00662219 /* ForgotPasswordViewController.xib in Resources */,
 				CE784EB022A685FB00662219 /* SettingsViewController.xib in Resources */,
+				F006110228A1181100911048 /* PaycellDetailPopup.xib in Resources */,
 				9892229D240D0C3C004155A5 /* BecomePremiumView.xib in Resources */,
 				07C75A2B281A786400B028F0 /* GT-America-LC-Standard-Regular.ttf in Resources */,
 				9808B7C42567EB10001DEF2E /* PrivateShateAccessListViewController.xib in Resources */,
@@ -23287,6 +23362,7 @@
 				CF8B691123CBC9D70021B021 /* PremiumHeaderView.xib in Resources */,
 				07701F872642698A0020C304 /* Settings.bundle in Resources */,
 				CF8B691623CBC9D70021B021 /* SettingsTableViewSwitchCell.xib in Resources */,
+				F00610EC289DBF4D00911048 /* PaycellCampaignViewController.xib in Resources */,
 				CF8B691A23CBC9D70021B021 /* LandingPageViewController.xib in Resources */,
 				CF8B691D23CBC9D70021B021 /* TabBarViewController.xib in Resources */,
 				CF8B691E23CBC9D70021B021 /* SocialAccountRemoveConnectionCell.xib in Resources */,
@@ -23446,6 +23522,7 @@
 				CF8B6A3823CBC9D70021B021 /* FaceImagePhotosViewController.xib in Resources */,
 				982319F424F3A1E700FD16E2 /* PhotoEditTabbar.xib in Resources */,
 				0305A31423D5C35D004D1EC7 /* AlbumCell.xib in Resources */,
+				F006110128A1181100911048 /* PaycellDetailPopup.xib in Resources */,
 				CF8B6A3923CBC9D70021B021 /* SpotifyPlaylistsViewController.xib in Resources */,
 				CF7145F924B597A800D83E60 /* ContactDetailNoInfoCell.xib in Resources */,
 				0305A30423D5C2C4004D1EC7 /* OverlayStickerViewController.xib in Resources */,
@@ -23629,6 +23706,7 @@
 				B5450210255A863C004DBD41 /* PrivateShareSharedFilesViewController.xib in Resources */,
 				CF8B708623CBCA280021B021 /* UserProfileViewController.xib in Resources */,
 				8E3B6B512462E44D00BCB052 /* FileInfoView.xib in Resources */,
+				F00610EE289DBF4D00911048 /* PaycellCampaignViewController.xib in Resources */,
 				CF8B708723CBCA280021B021 /* OptInController.xib in Resources */,
 				CF8B708823CBCA280021B021 /* FaceImageChangeCoverViewController.xib in Resources */,
 				CF8B708923CBCA280021B021 /* SpotifyCancelImportPopup.xib in Resources */,
@@ -23939,6 +24017,7 @@
 				CF8B728923CBCA280021B021 /* PackagePremiumView.xib in Resources */,
 				CF8B728A23CBCA280021B021 /* SpotifyAccountConnectionCell.xib in Resources */,
 				9862BC91255E899800D7945E /* FileInfoShareContactCell.xib in Resources */,
+				F006110328A1181100911048 /* PaycellDetailPopup.xib in Resources */,
 				985786FC23E01F8800D35DDA /* SettingFooterView.xib in Resources */,
 				07C75A2C281A786400B028F0 /* GT-America-LC-Standard-Regular.ttf in Resources */,
 				CF8B728E23CBCA280021B021 /* PeriodicContactSyncSettingsTableViewCell.xib in Resources */,
@@ -25358,6 +25437,7 @@
 				CE58FB0720444BFF007F3F54 /* ColorConstants.swift in Sources */,
 				A21A8AC82223D45200B03C05 /* AutoSyncRoutingService.swift in Sources */,
 				734D9E14233B58B600B143D4 /* SetSecretQuestionErrors.swift in Sources */,
+				F00610F128A0504C00911048 /* PaycellCampaignService.swift in Sources */,
 				CF71462824B597A800D83E60 /* ContactSyncViewController.swift in Sources */,
 				8C0E8D041FDEBDFF00789C91 /* LocalAlbumModuleInitializer.swift in Sources */,
 				8C0E8D061FDEBDFF00789C91 /* ActivityTimelineService.swift in Sources */,
@@ -25676,6 +25756,7 @@
 				F00610CD2899324700911048 /* ForYouViewEnum.swift in Sources */,
 				8C0E8DC11FDEBDFF00789C91 /* RegistrationConfigurator.swift in Sources */,
 				8C0E8DC21FDEBDFF00789C91 /* LocalAlbumViewController.swift in Sources */,
+				F095724F28A11A9D00D1D0DD /* PaycellDetailPopup.swift in Sources */,
 				CEDA44DA207CA9FB00E653DD /* NumericConstants.swift in Sources */,
 				07DB93932860AF5400D5CACF /* InAppPurchase.swift in Sources */,
 				076BD1A227BBBDEC004609E3 /* MapSearchInteractorInput.swift in Sources */,
@@ -26250,6 +26331,7 @@
 				07595512264131FB00C088B1 /* String+Extension.swift in Sources */,
 				8C0E8F041FDEBDFF00789C91 /* UserProfileRouterInput.swift in Sources */,
 				730A997922D71EA40037ABA9 /* TwoFactorAuthenticationDesigner.swift in Sources */,
+				F00610E6289DBF3100911048 /* PaycellCampaignViewController.swift in Sources */,
 				925B59A622C3BF85004697F3 /* CreateStorySelectionController.swift in Sources */,
 				8C20865E228D4B2E000BEDAD /* PhotoVideoController.swift in Sources */,
 				98231A1124F3A1E700FD16E2 /* SelectionMenuCell.swift in Sources */,
@@ -26690,6 +26772,7 @@
 				985E6977255A61FB006F6CD7 /* PrivateShareRoleCheckmarkView.swift in Sources */,
 				CE5FE966208B204A0065AC7E /* FileManager+Size.swift in Sources */,
 				A253D62B21A212020049AC15 /* PremiumViewController.swift in Sources */,
+				F095725728A1205700D1D0DD /* PaycellCampaignModel.swift in Sources */,
 				8C0E8FB81FDEBDFF00789C91 /* FeedbackViewInteractorOutput.swift in Sources */,
 				8C0E8FB91FDEBDFF00789C91 /* FeedbackViewInteractor.swift in Sources */,
 				8C0E8FBA1FDEBDFF00789C91 /* FeedbackViewRouterInput.swift in Sources */,
@@ -28215,6 +28298,7 @@
 				9816176C2578BA1D009F1C31 /* FirebaseAnalyticsActions.swift in Sources */,
 				B519A677253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */,
 				CE784ACE22A685FB00662219 /* HomeCardResponse.swift in Sources */,
+				F095725928A1205700D1D0DD /* PaycellCampaignModel.swift in Sources */,
 				0780AB3F27916820000760D9 /* ImageTextLayout.swift in Sources */,
 				CE784ACF22A685FB00662219 /* Alamofire+Request.swift in Sources */,
 				CE784AD022A685FB00662219 /* AugmentedRealityDataSource.swift in Sources */,
@@ -28452,6 +28536,7 @@
 				CE784B7D22A685FB00662219 /* SmartAlbumCell.swift in Sources */,
 				CE784B7E22A685FB00662219 /* SettingsViewController.swift in Sources */,
 				CE784B7F22A685FB00662219 /* PasscodeInputView.swift in Sources */,
+				F00610F328A0504C00911048 /* PaycellCampaignService.swift in Sources */,
 				CE784B8022A685FB00662219 /* ManageContactTableViewCell.swift in Sources */,
 				CE784B8122A685FB00662219 /* SettingsModuleInput.swift in Sources */,
 				89DCC5CF2403A99900488F1F /* SubscriptionOfferView.swift in Sources */,
@@ -28521,6 +28606,7 @@
 				CE784BA822A685FB00662219 /* PhoneCodeInputView.swift in Sources */,
 				CE784BA922A685FB00662219 /* SplashConfigurator.swift in Sources */,
 				CE784BAA22A685FB00662219 /* FacebookAccountConnectionCell.swift in Sources */,
+				F00610E8289DBF3100911048 /* PaycellCampaignViewController.swift in Sources */,
 				CE784BAB22A685FB00662219 /* UsageInfoRouterInput.swift in Sources */,
 				CE784BAC22A685FB00662219 /* SplashInitializer.swift in Sources */,
 				0724682E2855CC9E0079B07E /* DrawerTransitioningDelegate.swift in Sources */,
@@ -28760,6 +28846,7 @@
 				CE784C4222A685FB00662219 /* AlbumsInitializer.swift in Sources */,
 				CE784C4322A685FB00662219 /* AlbumDetailViewController.swift in Sources */,
 				CE784C4422A685FB00662219 /* FreeAppSpaceRouter.swift in Sources */,
+				F095725128A11A9D00D1D0DD /* PaycellDetailPopup.swift in Sources */,
 				98231A8B24F3A23500FD16E2 /* MarsFilter.swift in Sources */,
 				CE784C4522A685FB00662219 /* SingletonStorage.swift in Sources */,
 				CE784C4622A685FB00662219 /* HelpAndSupportViewOutput.swift in Sources */,
@@ -29010,6 +29097,7 @@
 				B5450207255A863C004DBD41 /* PrivateShareSharedFilesViewController.swift in Sources */,
 				07DB93AC2860AF5400D5CACF /* ASN1ContainerBuilder.swift in Sources */,
 				CF8B63C523CBC9D70021B021 /* ContactBackupEmpty.swift in Sources */,
+				F00610E7289DBF3100911048 /* PaycellCampaignViewController.swift in Sources */,
 				CF7146B324B597A900D83E60 /* ContactsBackupCell.swift in Sources */,
 				CF8B63C623CBC9D70021B021 /* SKProduct+Localized.swift in Sources */,
 				98B04B18259316E40011DAEB /* Notifications.swift in Sources */,
@@ -29185,6 +29273,7 @@
 				CF8B644523CBC9D70021B021 /* PackageInfoView.swift in Sources */,
 				CF8B644623CBC9D70021B021 /* UIImage+JPEG.swift in Sources */,
 				CF8B644723CBC9D70021B021 /* HelpAndSupportModuleInput.swift in Sources */,
+				F00610F228A0504C00911048 /* PaycellCampaignService.swift in Sources */,
 				CF8B644823CBC9D70021B021 /* UIButton+Font.swift in Sources */,
 				CF8B644923CBC9D70021B021 /* DropboxAccountConnectionCell.swift in Sources */,
 				CF71466524B597A900D83E60 /* ContactSyncAnalyzeProgressView.swift in Sources */,
@@ -29774,6 +29863,7 @@
 				CF8B65FE23CBC9D70021B021 /* EditingBarConfig.swift in Sources */,
 				B5B01A7223FA7CB900B03426 /* ResumableUploadInfoService.swift in Sources */,
 				CF8B65FF23CBC9D70021B021 /* LatestUploadCardCell.swift in Sources */,
+				F095725828A1205700D1D0DD /* PaycellCampaignModel.swift in Sources */,
 				CF8B660023CBC9D70021B021 /* TwoFactorAuthenticationViewController.swift in Sources */,
 				CF8B660123CBC9D70021B021 /* SpotifyAuthViewController.swift in Sources */,
 				CF8B660223CBC9D70021B021 /* PackagesViewController.swift in Sources */,
@@ -29846,6 +29936,7 @@
 				CF8B663023CBC9D70021B021 /* ForgotPasswordConfigurator.swift in Sources */,
 				CF8B663123CBC9D70021B021 /* CaptchaView.swift in Sources */,
 				9842FC112563D34800B07606 /* PrivateShareContactCell.swift in Sources */,
+				F095725028A11A9D00D1D0DD /* PaycellDetailPopup.swift in Sources */,
 				CF8B663223CBC9D70021B021 /* PeriodicContactSyncConfigurator.swift in Sources */,
 				CF8B663323CBC9D70021B021 /* ForgotPasswordInitializer.swift in Sources */,
 				CF8B663423CBC9D70021B021 /* PasscodeView.swift in Sources */,
@@ -31725,6 +31816,7 @@
 				B519A678253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */,
 				985786F623E01F8800D35DDA /* SettingFooterView.swift in Sources */,
 				F0CF8AA22891688800428058 /* ForYouFaceImageTableViewCell.swift in Sources */,
+				F095725A28A1205700D1D0DD /* PaycellCampaignModel.swift in Sources */,
 				0780AB4027916820000760D9 /* ImageTextLayout.swift in Sources */,
 				CF8B6E5223CBCA280021B021 /* Alamofire+Request.swift in Sources */,
 				F0571EBD288AE6AE00A0D6AC /* ForYouConfigurator.swift in Sources */,
@@ -31965,6 +32057,7 @@
 				B501EF332421FF6100DEA9B4 /* LocalAlbumsCache.swift in Sources */,
 				CF8B6F0923CBCA280021B021 /* SettingsViewController.swift in Sources */,
 				CF8B6F0A23CBCA280021B021 /* PasscodeInputView.swift in Sources */,
+				F00610F428A0504C00911048 /* PaycellCampaignService.swift in Sources */,
 				CF8B6F0B23CBCA280021B021 /* ManageContactTableViewCell.swift in Sources */,
 				CF8B6F0C23CBCA280021B021 /* SettingsModuleInput.swift in Sources */,
 				CF8B6F0D23CBCA280021B021 /* SettingsPresenter.swift in Sources */,
@@ -32033,6 +32126,7 @@
 				CF8B6F3623CBCA280021B021 /* AlertFilesActionsSheetConfigurator.swift in Sources */,
 				CF8B6F3723CBCA280021B021 /* PhoneCodeInputView.swift in Sources */,
 				CF8B6F3823CBCA280021B021 /* SplashConfigurator.swift in Sources */,
+				F00610E9289DBF3100911048 /* PaycellCampaignViewController.swift in Sources */,
 				CF8B6F3923CBCA280021B021 /* FacebookAccountConnectionCell.swift in Sources */,
 				CF8B6F3A23CBCA280021B021 /* UsageInfoRouterInput.swift in Sources */,
 				0724682F2855CC9E0079B07E /* DrawerTransitioningDelegate.swift in Sources */,
@@ -32273,6 +32367,7 @@
 				CF8B6FEC23CBCA280021B021 /* SpotifyCancelImportPopup.swift in Sources */,
 				98231A8C24F3A23500FD16E2 /* MarsFilter.swift in Sources */,
 				CF8B6FED23CBCA280021B021 /* ViewController.swift in Sources */,
+				F095725228A11A9D00D1D0DD /* PaycellDetailPopup.swift in Sources */,
 				0305A36223D5C659004D1EC7 /* CarouselPageView.swift in Sources */,
 				CF8B6FEE23CBCA280021B021 /* AlbumDetailPresenter.swift in Sources */,
 				B5632012254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */,
@@ -32780,6 +32875,7 @@
 				8C0971BB209F91EC003C5609 /* uk */,
 				8CF541EF22030F35001BB03F /* sq */,
 				8CCAC9CC224B5329006310EB /* fr */,
+				0795903527CCAF9700E1FB2F /* ka */,
 			);
 			name = OurLocalizable.strings;
 			path = .;
@@ -32831,6 +32927,7 @@
 				CEEB7AA420A5BC6A0070FDC2 /* ro */,
 				8CF541F022030F36001BB03F /* sq */,
 				8CCAC9CD224B5329006310EB /* fr */,
+				F0AF20DF27D63F950014C84D /* ka */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

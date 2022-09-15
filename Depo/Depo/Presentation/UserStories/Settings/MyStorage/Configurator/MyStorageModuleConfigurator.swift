@@ -10,13 +10,13 @@ import UIKit
 
 class MyStorageModuleConfigurator {
     
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, usage: UsageResponse?) {
+    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, usage: UsageResponse?, affiliate: String? = nil, refererToken: String? = nil) {
         if let viewController = viewInput as? MyStorageViewController {
-            configure(with: viewController, usage: usage)
+            configure(with: viewController, usage: usage, affiliate: affiliate, refererToken: refererToken)
         }
     }
 
-    private func configure(with view: MyStorageViewController, usage: UsageResponse?) {
+    private func configure(with view: MyStorageViewController, usage: UsageResponse?, affiliate: String? = nil, refererToken: String? = nil) {
         let router = MyStorageRouter()
         
         let presenter = MyStoragePresenter(title: TextConstants.myPackages)
@@ -28,6 +28,8 @@ class MyStorageModuleConfigurator {
         
         let interactor = MyStorageInteractor()
         interactor.output = presenter
+        interactor.affiliate = affiliate
+        interactor.refererToken = refererToken
         
         presenter.interactor = interactor
         view.output = presenter

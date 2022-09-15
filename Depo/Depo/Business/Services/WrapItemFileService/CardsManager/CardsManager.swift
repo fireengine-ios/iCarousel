@@ -41,6 +41,7 @@ enum OperationType: String {
     case invitation                 = "INVITATION"
     case documents                  = "THINGS_DOCUMENT"
     case photoPrint                 = "PHOTOPRINT"
+    case paycell                    = "PAYCELL"
 }
 
 typealias BlockObject = VoidHandler
@@ -403,11 +404,17 @@ class CardsManager: NSObject {
         case .divorce:
             cardView = DivorceCard.initFromNib()
         case .invitation:
-            cardView = InvitationCard.initFromNib()
+            let popup = InvitationCard.initFromNib()
+            popup.configurateWithType(viewType: .invitation)
+            cardView = popup
         case .documents:
             cardView = DocumentsAlbumCard.initFromNib()
         case .photoPrint:
             cardView = PhotoPrintCard.initFromNib()
+        case .paycell:
+            let popup = InvitationCard.initFromNib()
+            popup.configurateWithType(viewType: .paycell)
+            cardView = popup
         }
         
         /// seems like duplicated logic "set(object:".

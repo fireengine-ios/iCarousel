@@ -25,6 +25,7 @@ final class PushNotificationService {
 
     /// A pending action that requires login
     private var pendingAction: String?
+    private var pendingRefererToken: String?
     private var pendingActionOptions: [AnyHashable: Any]?
 
     //MARK: -
@@ -51,6 +52,7 @@ final class PushNotificationService {
         }
 
         guard let resolvedAction = resolve(actionString: actionString) else {
+            storageVars.deepLinkParameters = options
             return false
         }
 
@@ -92,10 +94,11 @@ final class PushNotificationService {
         return notificationAction
     }
 
-    private func resolveUnknownAction(actionString: String) {
+    func resolveUnknownAction(actionString: String, refererToken: String? = nil) {
         // can't resolve without a token
         guard tokenStorage.accessToken != nil else {
             pendingAction = actionString
+            pendingRefererToken = refererToken
             return
         }
 
@@ -109,7 +112,13 @@ final class PushNotificationService {
             }
 
             debugLog("resolved unknown action \(actionString) to \(action)")
-            self.parse(options: resolvedURL.queryParameters, action: action)
+            var options = resolvedURL.queryParameters
+            if let refererToken = refererToken {
+                options?.updateValue(refererToken, forKey: DeepLinkParameter.paycellToken.rawValue)
+            } else if let pendingRefererToken = self.pendingRefererToken {
+                options?.updateValue(pendingRefererToken, forKey: DeepLinkParameter.paycellToken.rawValue)
+            }
+            self.parse(options: options, action: action)
             self.openActionScreen()
             self.clearPendingAction()
         }
@@ -148,7 +157,7 @@ final class PushNotificationService {
     }
     
     func openActionScreen() {
-        guard var action = notificationAction else {
+         guard var action = notificationAction else {
             return
         }
         
@@ -255,6 +264,7 @@ final class PushNotificationService {
 
     private func clearPendingAction() {
         pendingAction = nil
+        pendingRefererToken = nil
         pendingActionOptions = nil
     }
 
@@ -503,7 +513,10 @@ private extension PushNotificationService {
     }
 
     func openMyStorage() {
-        pushTo(router.myStorage(usageStorage: nil))
+        let affiliate = storageVars.value(forDeepLinkParameter: .affiliate) as? String
+        let refererToken = storageVars.value(forDeepLinkParameter: .paycellToken) as? String
+        let viewController = router.myStorage(usageStorage: nil, affiliate: affiliate, refererToken: refererToken)
+        pushTo(viewController)
     }
 
     func openBecomePremium() {

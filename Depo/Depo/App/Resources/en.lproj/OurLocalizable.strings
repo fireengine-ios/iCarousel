@@ -2069,3 +2069,17 @@ then {11,99 TRY/Month}*/
 /*First {6 months} {6,99 TRY}
 then {11,99 TRY/Month}*/
 "iap_intro_offer_pay_up_front" = "First %@ %@\nthen %@";
+
+/*Paycell Campaign*/
+"settings_item_paycell" = "Become a lifebox Brand Ambassador";
+"title_paycell_link" = "Sharing Link For You";
+"title_paycell_createlink" = "Create Link";
+"title_paycell_campaign" = "Campaign Conditions";
+"title_paycell_total" = "Earned Paycell Balance";
+"title_paycell_subtitle" = "Paycell Reload";
+"title_paycell_friends" = "People Who Bought the Package (%d People)";
+"paycell_share_message" = "I joined the lifebox Brand Ambassador Program. You can have the program-specific lifebox 6-month 250GB Premium package for discounted price by clicking the link below. Don't miss it 😊";
+
+/*Fuzzy*/
+"beeline_cancel_TC" = "You can cancel or manage your lifebox subscription from the Beeline Application.";
+"paycell_share_message " = "You have been sent 5GB of lifebox storage, click to redeem";

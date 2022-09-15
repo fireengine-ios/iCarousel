@@ -159,7 +159,11 @@ final class SettingsInteractor: SettingsInteractorInput {
         let isPermissionShown = self.isNeedShowPermissions ?? false
         let isInvitationShown = self.userInfoResponse?.showInvitation ?? false
         let isChatMenuEnabled = self.isChatMenuEnabled
+        let isPaycellShown    = self.userInfoResponse?.showPaycell ?? false
 
-        output.cellsDataForSettings(isPermissionShown: isPermissionShown, isInvitationShown: isInvitationShown, isChatbotShown: isChatMenuEnabled)
+        output.cellsDataForSettings(isPermissionShown: isPermissionShown,
+                                    isInvitationShown: isInvitationShown,
+                                    isChatbotShown: isChatMenuEnabled,
+                                    isPaycellShown: isPaycellShown)
     }
 }

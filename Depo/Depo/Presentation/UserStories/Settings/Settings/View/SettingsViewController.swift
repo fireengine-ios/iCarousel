@@ -34,6 +34,7 @@ protocol SettingsDelegate: AnyObject {
     func goToDarkMode()
     
     func goToPackages()
+    func goToPaycellCampaign()
 }
 
 final class SettingsViewController: BaseViewController {
@@ -174,6 +175,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             } else {
                 output.goToInvitation()
             }
+        case .paycell:
+            if let delegate = settingsDelegate {
+                delegate.goToPaycellCampaign()
+            } else {
+                output.goToPaycellCampaign()
+            }
         case .autoUpload:
             if let delegate = settingsDelegate {
                 delegate.goToAutoUpload()
@@ -296,9 +303,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - SettingsViewInput
 extension SettingsViewController: SettingsViewInput {
 
-    func prepareCellsData(isPermissionShown: Bool, isInvitationShown: Bool, isChatbotShown: Bool) {
+    func prepareCellsData(isPermissionShown: Bool, isInvitationShown: Bool, isChatbotShown: Bool, isPaycellShown: Bool) {
         self.isChatbotShown = isChatbotShown
-        cellTypes = SettingsTypes.prepareTypes(hasPermissions: isPermissionShown, isInvitationShown: isInvitationShown, isChatbotShown: isChatbotShown)
+        cellTypes = SettingsTypes.prepareTypes(hasPermissions: isPermissionShown,
+                                               isInvitationShown: isInvitationShown,
+                                               isChatbotShown: isChatbotShown,
+                                               isPaycellShown: isPaycellShown)
         self.setupTableViewFooter()
     }
     

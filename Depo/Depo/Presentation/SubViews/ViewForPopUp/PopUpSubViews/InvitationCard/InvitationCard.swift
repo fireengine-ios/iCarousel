@@ -17,14 +17,20 @@ final class InvitationCard: BaseCardView {
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private var videoUrl: URL?
+    private var viewType: OperationType = .invitation
+    
+    func configurateWithType(viewType: OperationType) {
+        self.viewType = viewType
+        
+        let title = viewType == .invitation ? TextConstants.homeInvitationCardButtn : localized(.paycellCampaignTitle)
+        bottomButton.setTitle(title, for: .normal)
+    }
 
     override func configurateView() {
         super.configurateView()
 
         bottomButton.setTitleColor(UIColor.lrTealish, for: .normal)
         bottomButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
-
-        bottomButton.setTitle(TextConstants.homeInvitationCardButtn, for: .normal)
         bottomButton.setTitleColor(ColorConstants.blueColor, for: .normal)
         bottomButton.adjustsFontSizeToFitWidth()
     }
@@ -64,9 +70,12 @@ final class InvitationCard: BaseCardView {
 
     override func deleteCard() {
         super.deleteCard()
-        CardsManager.default.stopOperationWith(type: .invitation)
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .invitation, eventLabel: .homePageCard(.close))
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.HomepageCard(cardName: NetmeraEventValues.HomePageCardEventValue.invitation.text, action: NetmeraEventValues.HomePageCardEventValue.dismiss.text))
+        CardsManager.default.stopOperationWith(type: viewType)
+        
+        if viewType == .invitation {
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .invitation, eventLabel: .homePageCard(.close))
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.HomepageCard(cardName: NetmeraEventValues.HomePageCardEventValue.invitation.text, action: NetmeraEventValues.HomePageCardEventValue.dismiss.text))
+        }
     }
 
     @IBAction func playButtonTapped(_ sender: Any) {
@@ -76,7 +85,9 @@ final class InvitationCard: BaseCardView {
             return
         }
 
-        analyticsService.trackCustomGAEvent(eventCategory: .videoAnalytics, eventActions: .startVideo, eventLabel: .invitation(.invitationVideoButton))
+        if viewType == .invitation {
+            analyticsService.trackCustomGAEvent(eventCategory: .videoAnalytics, eventActions: .startVideo, eventLabel: .invitation(.invitationVideoButton))
+        }
 
         let player = AVPlayer(url: videoUrl)
 
@@ -92,12 +103,16 @@ final class InvitationCard: BaseCardView {
     }
 
     @IBAction func bottomButtonTapped(_ sender: Any) {
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .invitation, eventLabel: .homePageCard(.letsSee))
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.HomepageCard(cardName: NetmeraEventValues.HomePageCardEventValue.invitation.text, action: NetmeraEventValues.HomePageCardEventValue.detail.text))
-
         let router = RouterVC()
 
-        let controller = router.invitationController()
-        router.pushViewController(viewController: controller)
+        if viewType == .invitation {
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .invitation, eventLabel: .homePageCard(.letsSee))
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.HomepageCard(cardName: NetmeraEventValues.HomePageCardEventValue.invitation.text, action: NetmeraEventValues.HomePageCardEventValue.detail.text))
+
+            let controller = router.invitationController()
+            router.pushViewController(viewController: controller)
+        } else if viewType == .paycell {
+            router.pushViewController(viewController: router.paycell)
+        }
     }
 }

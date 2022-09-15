@@ -80,6 +80,7 @@ import CoreTelephony
         case "ro": return "+373"
         case "es": return "+34"
         case "sq": return "+355"//albainan - Shqip language
+        case "ka": return "+995"
         default: return "+90"
         }
     }

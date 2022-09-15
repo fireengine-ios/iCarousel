@@ -120,5 +120,7 @@ enum UniversalLinkPath: String {
 enum DeepLinkParameter: String {
     case affiliate = "affiliate" // ex: packages?affiliate=campaign1
     case albumUUID = "albumUUID"
-    case publicToken = "public_token"
+    case publicToken = "public_token" // public shared items
+    case paycellCampaign = "paycell_campaign" // campaign name like affiliate
+    case paycellToken = "referer_token" // provider user's token
 }

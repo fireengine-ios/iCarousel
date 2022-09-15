@@ -55,4 +55,6 @@ protocol SettingsRouterInput {
     func goToPackages()
 
     func goToDarkMode()
+    
+    func goToPaycellCampaing()
 }

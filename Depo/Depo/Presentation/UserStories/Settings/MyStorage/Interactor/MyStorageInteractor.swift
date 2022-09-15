@@ -13,6 +13,7 @@ final class MyStorageInteractor {
     
     private let iapManager = IAPManager.shared
     var affiliate: String?
+    var refererToken: String?
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
 
@@ -102,7 +103,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
             return
         }
         
-        offersService.validateApplePurchase(with: receipt, productId: productId, success: { [weak self] response in
+        offersService.validateApplePurchase(with: receipt, productId: productId, referer: refererToken, success: { [weak self] response in
             guard
                 let response = response as? ValidateApplePurchaseResponse,
                 let status = response.status
@@ -312,7 +313,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
             return false
         }
         
-        offersService.validateApplePurchase(with: receipt, productId: nil, success: { [weak self] response in
+        offersService.validateApplePurchase(with: receipt, productId: nil, referer: nil, success: { [weak self] response in
             guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
                 return
             }
@@ -343,7 +344,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
         }
         
         //just sending reciept
-        offersService.validateApplePurchase(with: receipt, productId: nil, success: { [weak self] response in
+        offersService.validateApplePurchase(with: receipt, productId: nil, referer: nil, success: { [weak self] response in
             guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
                 return
             }

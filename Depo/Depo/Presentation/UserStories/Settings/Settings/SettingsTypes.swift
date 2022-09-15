@@ -8,6 +8,7 @@
 
 enum SettingsTypes: Int {
     case invitation
+    case paycell
     case autoUpload
     case periodicContactSync
     case faceImage
@@ -22,6 +23,7 @@ enum SettingsTypes: Int {
     var text: String {
         switch self {
         case .invitation: return TextConstants.settingsItemInvitation
+        case .paycell: return localized(.paycellCampaignTitle)
         case .autoUpload: return TextConstants.settingsViewCellAutoUpload
         case .periodicContactSync: return TextConstants.settingsViewCellContactsSync
         case .faceImage: return TextConstants.settingsViewCellFaceAndImageGrouping
@@ -39,14 +41,15 @@ enum SettingsTypes: Int {
     static let defaultSectionTwoTypes = [myActivities, passcode]
     static var defaultSectionThreeTypes = [helpAndSupport]
     
-    static func prepareTypes(hasPermissions: Bool, isInvitationShown: Bool, isChatbotShown: Bool) -> [[SettingsTypes]] {
+    static func prepareTypes(hasPermissions: Bool, isInvitationShown: Bool, isChatbotShown: Bool, isPaycellShown: Bool) -> [[SettingsTypes]] {
         var result = [[SettingsTypes]]()
         
         addPackagesSection(to: &result)
         addDefaultSection(to: &result,
                           hasPermissions: hasPermissions,
                           isInvitationShown: isInvitationShown,
-                          isChatbotShown: isChatbotShown)
+                          isChatbotShown: isChatbotShown,
+                          isPaycellShown: isPaycellShown)
         return result
     }
     
@@ -59,11 +62,16 @@ enum SettingsTypes: Int {
     private static func addDefaultSection(to result: inout [[SettingsTypes]],
                                           hasPermissions: Bool,
                                           isInvitationShown: Bool,
-                                          isChatbotShown: Bool) {
+                                          isChatbotShown: Bool,
+                                          isPaycellShown: Bool) {
         var cells: [SettingsTypes] = []
         
         if isInvitationShown {
             cells.append(SettingsTypes.invitation)
+        }
+        
+        if isPaycellShown {
+            cells.append(SettingsTypes.paycell)
         }
         
         cells.append(contentsOf: SettingsTypes.defaultSectionOneTypes)

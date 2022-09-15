@@ -19,6 +19,10 @@ class SettingsRouter: SettingsRouterInput {
     func goToInvitation() {
         router.pushViewController(viewController: router.invitation)
     }
+    
+    func goToPaycellCampaing() {
+        router.pushViewController(viewController: router.paycell)
+    }
 
     func goToConnectedAccounts() {
         router.pushViewController(viewController: router.connectedAccounts!)
