@@ -114,7 +114,9 @@ enum AppColor {
     case forgetPassCodeClose
     case forgetPassCodeOpen
     case forgetPassTimer
-
+    case forgetPassTextGreen
+    case forgetPassTextRed
+    
     //TODO: Facelift: Uncomment below
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - FACELIFT - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     

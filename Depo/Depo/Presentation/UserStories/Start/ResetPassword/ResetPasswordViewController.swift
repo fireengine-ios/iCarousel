@@ -30,13 +30,13 @@ final class ResetPasswordViewController: BaseViewController, KeyboardHandler {
         }
     }
 
-    @IBOutlet private weak var button: WhiteButtonWithRoundedCorner! {
+    @IBOutlet private weak var button: RoundedInsetsButton! {
         willSet {
             newValue.setTitle(localized(.resetPasswordCompleteButton), for: .normal)
-            newValue.setTitleColor(ColorConstants.whiteColor, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.setBackgroundColor(UIColor.lrTealishTwo.withAlphaComponent(0.5), for: .disabled)
-            newValue.setBackgroundColor(UIColor.lrTealishTwo, for: .normal)
+            newValue.setTitleColor(.white, for: .normal)
+            newValue.titleLabel?.font = .appFont(.medium, size: 16)
+            newValue.setBackgroundColor(AppColor.forgetPassButtonDisable.color, for: .disabled)
+            newValue.setBackgroundColor(AppColor.forgetPassButtonNormal.color, for: .normal)
             newValue.isEnabled = false
         }
     }
@@ -45,7 +45,7 @@ final class ResetPasswordViewController: BaseViewController, KeyboardHandler {
         let newValue = ProfilePasswordEnterView()
         newValue.textField.enablesReturnKeyAutomatically = true
         newValue.textField.quickDismissPlaceholder = TextConstants.enterYourNewPassword
-        newValue.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        newValue.textField.addTarget(ResetPasswordViewController.self, action: #selector(textFieldDidChange), for: .editingChanged)
         newValue.titleLabel.text = TextConstants.registrationCellTitlePassword
         return newValue
     }()
@@ -54,7 +54,7 @@ final class ResetPasswordViewController: BaseViewController, KeyboardHandler {
         let newValue = ProfilePasswordEnterView()
         newValue.textField.enablesReturnKeyAutomatically = true
         newValue.textField.quickDismissPlaceholder = TextConstants.reenterYourPassword
-        newValue.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        newValue.textField.addTarget(ResetPasswordViewController.self, action: #selector(textFieldDidChange), for: .editingChanged)
         newValue.titleLabel.text = TextConstants.registrationCellTitleReEnterPassword
         newValue.textField.returnKeyType = .done
         return newValue
@@ -62,7 +62,7 @@ final class ResetPasswordViewController: BaseViewController, KeyboardHandler {
 
     private let validationStackView: UIStackView = {
         let newValue = UIStackView()
-        newValue.spacing = 11
+        newValue.spacing = 16
         newValue.axis = .vertical
         newValue.alignment = .fill
         newValue.distribution = .fillEqually
@@ -73,21 +73,24 @@ final class ResetPasswordViewController: BaseViewController, KeyboardHandler {
     private let characterRuleView: PasswordRulesView = {
         let newValue = PasswordRulesView()
         newValue.titleLabel.text = TextConstants.passwordCharacterLimitRule
-
+        newValue.titleLabel.font = .appFont(.medium, size: 12)
+        newValue.titleLabel.textColor = AppColor.forgetPassText.color
         return newValue
     }()
 
     private let capitalizationRuleView: PasswordRulesView = {
         let newValue = PasswordRulesView()
         newValue.titleLabel.text = TextConstants.passwordCapitalizationAndNumberRule
-
+        newValue.titleLabel.font = .appFont(.medium, size: 12)
+        newValue.titleLabel.textColor = AppColor.forgetPassTextGreen.color
         return newValue
     }()
 
     private let sequentialRuleView: PasswordRulesView = {
         let newValue = PasswordRulesView()
         newValue.titleLabel.text = TextConstants.passwordSequentialRule
-
+        newValue.titleLabel.font = .appFont(.medium, size: 12)
+        newValue.titleLabel.textColor = AppColor.forgetPassTextRed.color
         return newValue
     }()
 

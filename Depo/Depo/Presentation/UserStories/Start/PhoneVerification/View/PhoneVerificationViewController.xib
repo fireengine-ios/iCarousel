@@ -20,6 +20,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhoneVerificationViewController" customModule="Billo" customModuleProvider="target">
             <connections>
+                <outlet property="bottomTimerConstraint" destination="RTF-zn-wF5" id="KBe-tU-y2J"/>
                 <outlet property="continueButton" destination="uMm-oE-mE6" id="xwd-fa-5jo"/>
                 <outlet property="errorLabel" destination="IFw-4W-fGh" id="wl4-aG-2z8"/>
                 <outlet property="firstSecurityCodeTextField" destination="CWG-cv-wHj" id="Dh3-Of-Sop"/>
@@ -153,7 +154,7 @@
                                         </button>
                                         <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMm-oE-mE6" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="60" width="382" height="44"/>
-                                            <color key="backgroundColor" name="alertOrangeAndBlueGradientStart"/>
+                                            <color key="backgroundColor" name="forgetPassButtonNormal"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="44" id="I4J-Lg-Jiq"/>
                                             </constraints>
@@ -216,8 +217,8 @@
         </view>
     </objects>
     <resources>
-        <namedColor name="alertOrangeAndBlueGradientStart">
-            <color red="1" green="0.6589999794960022" blue="0.063000001013278961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="forgetPassButtonNormal">
+            <color red="0.019607843137254902" green="0.17647058823529413" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
