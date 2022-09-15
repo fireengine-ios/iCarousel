@@ -69,6 +69,8 @@ enum AppColor {
     case popUpTitle
     case popUpMessage
     case popUpTitleError
+    case popUpButtonNormal
+    case popUpButtonCancel
     case popupTint
 
     
@@ -106,7 +108,16 @@ enum AppColor {
 
     // MARK: Login
     case loginAlertView
-    
+        
+    // MARK: Forget MY Password
+    case forgetPassText
+    case forgetPassButtonDisable
+    case forgetPassButtonNormal
+    case forgetPassCodeClose
+    case forgetPassCodeOpen
+    case forgetPassTimer
+    case forgetPassTextGreen
+    case forgetPassTextRed
     // MARK: Register
     case registerPrivacyPolicy
     case registerNextButtonNormal
