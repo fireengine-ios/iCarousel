@@ -189,11 +189,11 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
         ///DO NOT DELETE. This delegate method used in BaseCollectionViewDataSource
     }
     
-    func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?) {
-        startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
+    func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?, itemCount: Int?) {
+        startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations, itemCount: itemCount)
     }
     
-    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?) {
+    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?, itemCount: Int?) {
         ///TODO: remove 'type == .instaPick' after (because of lines 227-229)
         if type == .premium || type == .instaPick {
             /// not let some cards appear anywhere else than in HomePage
@@ -228,7 +228,7 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
         
     }
     
-    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int ) {
+    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int, itemCount: Int?) {
         if let view = viewsByType[type] {
             if let popUp = view as? ProgressCard {
                 popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
@@ -237,7 +237,7 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
                 }
             }
         } else {
-            startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
+            startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations, itemCount: itemCount)
         }
     }
     

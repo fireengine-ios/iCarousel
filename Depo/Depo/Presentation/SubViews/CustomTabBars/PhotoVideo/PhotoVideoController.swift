@@ -185,6 +185,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         dataSource.isSelectingMode = false
         deselectAllCells()
         bottomBarManager.hide()
+        CardsManager.default.stopOperationWith(type: .itemSelection)
     }
     
 
@@ -209,9 +210,11 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
                 return
             }
             self.bottomBarManager.update(for: selectedObjects)
+            CardsManager.default.startOperationWith(type: .itemSelection, itemCount: selectedObjects.count)
             
             if selectedIndexes.count == 0 {
 //                self.navBarManager.threeDotsButton.isEnabled = false
+                CardsManager.default.stopOperationWith(type: .itemSelection)
                 self.bottomBarManager.hide()
             } else {
 
@@ -911,6 +914,10 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         default:
             return
         }
+    }
+    
+    func stopItemSelection() {
+        stopEditingMode()
     }
 }
 

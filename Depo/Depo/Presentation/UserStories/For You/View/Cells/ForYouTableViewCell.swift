@@ -179,7 +179,7 @@ class ForYouTableViewCell: UITableViewCell {
         debugLog("ForYou getAlbums")
         let serchParam = AlbumParameters(fieldName: .album,
                                          sortBy: .date,
-                                         sortOrder: .asc,
+                                         sortOrder: .desc,
                                          page: 0,
                                          size: 10)
         
