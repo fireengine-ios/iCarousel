@@ -51,6 +51,7 @@ enum Image: String, AppImage {
     case iconInfo
     case iconMove
     case iconAlbum
+    case iconUnstar
 
     ///  Files Tab
     case iconFileAudio
@@ -112,6 +113,7 @@ enum Image: String, AppImage {
     case popupIconError
     case popupIconDelete
     case popupIconQuestion
+    case popupHide
     
     /// For You
     case forYouPeople
@@ -133,4 +135,8 @@ enum Image: String, AppImage {
     /// Forget My Password
     case forgetPassPopupLock
     case forgetPassSelectedRadio
+    
+    /// Register
+    case registerIconSelectCheck
+    case registerIconSelectEmpty
 }

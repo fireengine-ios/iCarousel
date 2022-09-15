@@ -17,6 +17,7 @@ enum SettingsTypes: Int {
     case passcode
     case helpAndSupport
     case chatbot
+    case packages
     
     var text: String {
         switch self {
@@ -30,41 +31,59 @@ enum SettingsTypes: Int {
         case .passcode: return TextConstants.settingsViewCellLoginSettings
         case .helpAndSupport: return TextConstants.settingsViewCellHelp
         case .chatbot: return TextConstants.chatbotMenuTitle
+        case .packages: return TextConstants.packages
         }
     }
-
-    static let allSectionOneTypes = [autoUpload, periodicContactSync, faceImage]
-    static let allSectionTwoTypes = [connectAccounts, permissions]
-    static let allSectionThreeTypes = [myActivities, passcode]
-    static var allSectionFourTypes = [helpAndSupport]
-
+    
+    static let defaultSectionOneTypes = [autoUpload, periodicContactSync, faceImage]
+    static let defaultSectionTwoTypes = [myActivities, passcode]
+    static var defaultSectionThreeTypes = [helpAndSupport]
+    
     static func prepareTypes(hasPermissions: Bool, isInvitationShown: Bool, isChatbotShown: Bool) -> [[SettingsTypes]] {
         var result = [[SettingsTypes]]()
+        
+        addPackagesSection(to: &result)
+        addDefaultSection(to: &result,
+                          hasPermissions: hasPermissions,
+                          isInvitationShown: isInvitationShown,
+                          isChatbotShown: isChatbotShown)
+        return result
+    }
+    
+    private static func addPackagesSection(to result: inout [[SettingsTypes]]) {
+        var cells: [SettingsTypes] = []
+        cells.append(SettingsTypes.packages)
+        result.append(cells)
+    }
+    
+    private static func addDefaultSection(to result: inout [[SettingsTypes]],
+                                          hasPermissions: Bool,
+                                          isInvitationShown: Bool,
+                                          isChatbotShown: Bool) {
+        var cells: [SettingsTypes] = []
+        
         if isInvitationShown {
-            result.append([SettingsTypes.invitation])
+            cells.append(SettingsTypes.invitation)
         }
-
-        result.append(SettingsTypes.allSectionOneTypes)
-
+        
+        cells.append(contentsOf: SettingsTypes.defaultSectionOneTypes)
+        
         var accountTypes = [SettingsTypes.connectAccounts]
         if hasPermissions {
             accountTypes.append(SettingsTypes.permissions)
         }
-
-        result.append(accountTypes)
-
-        result.append(SettingsTypes.allSectionThreeTypes)
-
+        
+        cells.append(contentsOf: accountTypes)
+        cells.append(contentsOf: SettingsTypes.defaultSectionTwoTypes)
+        
         if ((Device.locale == "tr" || Device.locale == "en") && !RouteRequests.isBillo) {
-            if isChatbotShown && !allSectionFourTypes.contains(chatbot) {
-                SettingsTypes.allSectionFourTypes.insert(chatbot, at: 1)
-            } else if !isChatbotShown && allSectionFourTypes.contains(chatbot){
-                SettingsTypes.allSectionFourTypes.remove(chatbot)
+            if isChatbotShown && !defaultSectionThreeTypes.contains(chatbot) {
+                SettingsTypes.defaultSectionThreeTypes.insert(chatbot, at: 1)
+            } else if !isChatbotShown && defaultSectionThreeTypes.contains(chatbot){
+                SettingsTypes.defaultSectionThreeTypes.remove(chatbot)
             }
         }
-
-        result.append(SettingsTypes.allSectionFourTypes)
-
-        return result
+        cells.append(contentsOf: SettingsTypes.defaultSectionThreeTypes)
+        result.append(cells)
     }
 }

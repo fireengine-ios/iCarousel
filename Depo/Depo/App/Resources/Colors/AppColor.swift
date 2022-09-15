@@ -71,6 +71,8 @@ enum AppColor {
     case popUpTitleError
     case popUpButtonNormal
     case popUpButtonCancel
+    case popupTint
+
     
     // MARK: Switch
     case SwitchBackgroundColor
@@ -106,7 +108,7 @@ enum AppColor {
 
     // MARK: Login
     case loginAlertView
-    
+        
     // MARK: Forget MY Password
     case forgetPassText
     case forgetPassButtonDisable
@@ -116,7 +118,18 @@ enum AppColor {
     case forgetPassTimer
     case forgetPassTextGreen
     case forgetPassTextRed
+    // MARK: Register
+    case registerPrivacyPolicy
+    case registerNextButtonNormal
+    case registerNextButtonNormalTextColor
+    case registerLabelTextColor
     
+    // MARK: Gradient
+    case premiumFirstGradient
+    case premiumSecondGradient
+    case premiumThirdGradient
+    case premiumGradientLabel
+
     //TODO: Facelift: Uncomment below
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - FACELIFT - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     

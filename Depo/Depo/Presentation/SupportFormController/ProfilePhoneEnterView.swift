@@ -27,8 +27,6 @@ final class ProfilePhoneEnterView: UIView, FromNib {
         }
     }
     
-    
-    
     @IBOutlet public weak var stackView: UIStackView! {
         willSet {
             newValue.spacing = 0

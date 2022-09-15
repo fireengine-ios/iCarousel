@@ -90,7 +90,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         } else if item is Item || status == .trashed {
             constractActions(with: types, for: [item]) { [weak self] actions in
                 DispatchQueue.main.async { [weak self] in
-                    self?.presentAlertSheet(with: /*[headerAction] +*/ actions, presentedBy: sender, viewController: viewController, showCancelButton: true)
+                    self?.presentAlertSheet(with: /*[headerAction] +*/ actions, presentedBy: sender, viewController: viewController)
                 }
             }
         }
@@ -366,10 +366,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         }
     }
 
-    private func presentAlertSheet(with actions: [AlertFilesAction], presentedBy sender: Any?, onSourceView sourceView: UIView? = nil, viewController: UIViewController? = nil, showCancelButton: Bool? = false) {
+    private func presentAlertSheet(with actions: [AlertFilesAction], presentedBy sender: Any?, onSourceView sourceView: UIView? = nil, viewController: UIViewController? = nil) {
         if !actions.isEmpty {
             let actionsViewController = AlertFilesActionsViewController()
-            actionsViewController.configure(with: actions, showCancelButton: showCancelButton)
+            actionsViewController.configure(with: actions)
             actionsViewController.presentAsDrawer()
         }
     }

@@ -788,7 +788,7 @@ enum ElementTypes {
         case .addToFavorites:
             return Image.iconFavorite.image
         case .removeFromFavorites:
-            return nil
+            return Image.iconUnstar.image
         case .addToAlbum:
             return Image.iconAddToAlbum.image
         case .backUp:

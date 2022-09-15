@@ -29,7 +29,7 @@ final class PackagesViewController: BaseViewController {
     
     @IBOutlet weak private var cardsStackView: UIStackView!
 
-    private var menuViewModels: [ControlPackageType] = [.myProfile, .usage(percentage: 0), .myStorage(nil)]
+    private var menuViewModels: [ControlPackageType] = [.myProfile, .usage(percentage: 0)]
     
     // MARK: - View lifecycle
     override func viewDidLoad() {
@@ -61,13 +61,6 @@ extension PackagesViewController: PackagesViewInput {
         
         ///my usage card
         addNewCard(type: .usage(percentage: percentage))
-        
-        ///my storage card
-        let isMiddleUser = AuthoritySingleton.shared.accountType.isMiddle
-        let isPremiumUser = AuthoritySingleton.shared.accountType.isPremium
-        let type: ControlPackageType.AccountType = isPremiumUser ? .premium : (isMiddleUser ? .middle : .standard)
-        addNewCard(type: .myStorage(type))
-        
         cardsTableView.reloadData()
     }
     

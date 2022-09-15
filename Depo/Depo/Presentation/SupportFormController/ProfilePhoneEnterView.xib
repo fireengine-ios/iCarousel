@@ -30,7 +30,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="V4F-7E-ZZm">
-                    <rect key="frame" x="0.0" y="10" width="413" height="88"/>
+                    <rect key="frame" x="0.0" y="10" width="413" height="98"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ev9-8J-dhu">
                             <rect key="frame" x="0.0" y="0.0" width="413" height="56"/>
@@ -147,7 +147,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w7p-q0-W6S" userLabel="subtitleContent">
-                            <rect key="frame" x="0.0" y="56" width="413" height="32"/>
+                            <rect key="frame" x="0.0" y="56" width="413" height="42"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLZ-8v-Lna" userLabel="subtitleLabel">
                                     <rect key="frame" x="10" y="10" width="393" height="12"/>
@@ -166,7 +166,7 @@
             <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstItem="V4F-7E-ZZm" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="JQ6-rY-W46"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="V4F-7E-ZZm" secondAttribute="bottom" constant="10" id="ZEy-e6-uBZ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="V4F-7E-ZZm" secondAttribute="bottom" id="ZEy-e6-uBZ"/>
                 <constraint firstItem="V4F-7E-ZZm" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="eLv-rC-ac6"/>
                 <constraint firstItem="V4F-7E-ZZm" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="he7-T7-g7h"/>
             </constraints>

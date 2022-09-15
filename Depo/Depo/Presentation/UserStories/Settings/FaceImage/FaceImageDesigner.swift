@@ -78,10 +78,11 @@ final class FaceImageDesigner: NSObject {
     
     @IBOutlet private weak var faceImagePremiumButton: UIButton! {
         willSet {
-            newValue.setTitleColor(UIColor.white, for: .normal)
+            newValue.setTitleColor(AppColor.premiumGradientLabel.color, for: .normal)
             newValue.titleLabel?.font = .appFont(.medium, size: 16)
             newValue.setTitle(TextConstants.becomePremiumMember, for: .normal)
             newValue.titleEdgeInsets = UIEdgeInsets(top: 6, left: 17, bottom: 6, right: 17)
+            newValue.alpha = 0.85
         }
     }
     
@@ -106,5 +107,18 @@ final class FaceImageDesigner: NSObject {
         }
     }
     
+    @IBOutlet private weak var faceImageTopView: UIView! {
+        willSet {
+            newValue.backgroundColor = AppColor.secondaryBackground.color
+            newValue.addRoundedShadows(cornerRadius: 16, shadowColor: AppColor.drawerShadow.cgColor, opacity: 0.3, radius: 8, offset: CGSize(width: 0, height: 4))
+        }
+    }
+    
+    @IBOutlet private weak var facebookTopView: UIView! {
+        willSet {
+            newValue.backgroundColor = AppColor.secondaryBackground.color
+            newValue.addRoundedShadows(cornerRadius: 16, shadowColor: AppColor.drawerShadow.cgColor, opacity: 0.3, radius: 8, offset: CGSize(width: 0, height: 4))
+        }
+    }
     
 }
