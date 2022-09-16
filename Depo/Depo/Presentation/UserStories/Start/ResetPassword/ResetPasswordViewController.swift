@@ -45,7 +45,7 @@ final class ResetPasswordViewController: BaseViewController, KeyboardHandler {
         let newValue = ProfilePasswordEnterView()
         newValue.textField.enablesReturnKeyAutomatically = true
         newValue.textField.quickDismissPlaceholder = TextConstants.enterYourNewPassword
-        newValue.textField.addTarget(ResetPasswordViewController.self, action: #selector(textFieldDidChange), for: .editingChanged)
+        newValue.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         newValue.titleLabel.text = TextConstants.registrationCellTitlePassword
         return newValue
     }()
@@ -54,7 +54,7 @@ final class ResetPasswordViewController: BaseViewController, KeyboardHandler {
         let newValue = ProfilePasswordEnterView()
         newValue.textField.enablesReturnKeyAutomatically = true
         newValue.textField.quickDismissPlaceholder = TextConstants.reenterYourPassword
-        newValue.textField.addTarget(ResetPasswordViewController.self, action: #selector(textFieldDidChange), for: .editingChanged)
+        newValue.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         newValue.titleLabel.text = TextConstants.registrationCellTitleReEnterPassword
         newValue.textField.returnKeyType = .done
         return newValue
