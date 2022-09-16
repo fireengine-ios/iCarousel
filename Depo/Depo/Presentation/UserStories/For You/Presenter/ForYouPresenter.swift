@@ -36,8 +36,8 @@ extension ForYouPresenter: ForYouViewOutput {
         router.navigateToCreate(for: view)
     }
     
-    func navigateToItemDetail(item: WrapData) {
-        interactor.loadItem(item)
+    func navigateToItemDetail(item: WrapData, faceImageType: FaceImageType?) {
+        interactor.loadItem(item, faceImageType: faceImageType)
     }
     
     func navigateToAlbumDetail(album: AlbumItem) {
@@ -46,7 +46,7 @@ extension ForYouPresenter: ForYouViewOutput {
 }
 
 extension ForYouPresenter: ForYouInteractorOutput {
-    func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item) {
-        router.navigateToItemDetail(album, forItem: item)
+    func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item, faceImageType: FaceImageType?) {
+        router.navigateToItemDetail(album, forItem: item, faceImageType: faceImageType)
     }
 }

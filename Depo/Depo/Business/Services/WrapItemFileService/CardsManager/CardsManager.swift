@@ -16,6 +16,7 @@ enum OperationType: String {
     case prepareQuickScroll         = "prepareQuickScroll"
     case autoUploadIsOff            = "autoUploadIsOff"
     case waitingForWiFi             = "waitingForWiFi"
+    case itemSelection              = "itemSelection"
     
     case freeAppSpace               = "FreeAppSpace"
     case freeAppSpaceLocalWarning   = "freeAppSpaceLocalWarning"
@@ -84,7 +85,7 @@ class CardsManager: NSObject {
         let keys = progresForOperation.keys
         for key in keys {
             let progress = progresForOperation[key]
-            view.startOperationWith(type: key, allOperations: progress?.allOperations, completedOperations: progress?.completedOperations)
+            view.startOperationWith(type: key, allOperations: progress?.allOperations, completedOperations: progress?.completedOperations, itemCount: nil)
         }
     }
     
@@ -153,11 +154,11 @@ class CardsManager: NSObject {
         }
     }
     
-    func startOperationWith(type: OperationType, allOperations: Int? = nil, completedOperations: Int? = nil) {
-        startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
+    func startOperationWith(type: OperationType, allOperations: Int? = nil, completedOperations: Int? = nil, itemCount: Int? = nil) {
+        startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations, itemCount: itemCount)
     }
     
-    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?) {
+    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?, itemCount: Int?) {
         DispatchQueue.toMain {
             print("operation is started: \(type.rawValue)")
             if (!self.canShowPopUpByDepends(type: type)) {
@@ -169,10 +170,10 @@ class CardsManager: NSObject {
             
             self.hidePopUpsByDepends(type: type)
             
-            self.setProgressForOperationWith(type: type, allOperations: allOperations ?? 0, completedOperations: completedOperations ?? 0)
+            self.setProgressForOperationWith(type: type, allOperations: allOperations ?? 0, completedOperations: completedOperations ?? 0, itemCount: itemCount)
             
             for notificationView in self.foloversArray {
-                notificationView.startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
+                notificationView.startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations, itemCount: itemCount)
             }
         }
         
@@ -181,7 +182,7 @@ class CardsManager: NSObject {
     func startPremiumCard() {
         DispatchQueue.main.async {
             for notificationView in self.foloversArray {
-                notificationView.startOperationWith(type: .premium, allOperations: 0, completedOperations: 0)
+                notificationView.startOperationWith(type: .premium, allOperations: 0, completedOperations: 0, itemCount: nil)
             }
         }
     }
@@ -194,11 +195,11 @@ class CardsManager: NSObject {
         }
     }
     
-    func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ) {
-        setProgressForOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
+    func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int, itemCount: Int? = nil) {
+        setProgressForOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations, itemCount: itemCount)
     }
     
-    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int) {
+    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int, itemCount: Int? = nil) {
         guard ReachabilityService.shared.isReachable else {
             return
         }
@@ -212,7 +213,8 @@ class CardsManager: NSObject {
                 notificationView.setProgressForOperationWith(type: type,
                                                              object: object,
                                                              allOperations: allOperations,
-                                                             completedOperations: completedOperations)
+                                                             completedOperations: completedOperations,
+                                                             itemCount: itemCount)
             }
         }
     }
@@ -236,7 +238,8 @@ class CardsManager: NSObject {
                     view.setProgressForOperationWith(type: operation,
                                                      object: nil,
                                                      allOperations: allOperation,
-                                                     completedOperations: completedOperations)
+                                                     completedOperations: completedOperations,
+                                                     itemCount: nil)
                 }
             }
         }
@@ -355,7 +358,7 @@ class CardsManager: NSObject {
             let popUp = StorageCard.initFromNib()
             popUp.configurateWithType(viewType: type)
             cardView = popUp
-        case .download, .sync, .upload, .sharedWithMeUpload:
+        case .download, .sync, .upload, .sharedWithMeUpload, .itemSelection:
             let popUp = ProgressCard.initFromNib()
             popUp.configurateWithType(viewType: type)
             cardView = popUp

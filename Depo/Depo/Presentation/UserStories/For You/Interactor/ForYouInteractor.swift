@@ -26,14 +26,14 @@ final class ForYouInteractor: ForYouInteractorInput {
         }
     }
     
-    func loadItem(_ item: BaseDataSourceItem) {
+    func loadItem(_ item: BaseDataSourceItem, faceImageType: FaceImageType?) {
         guard let item = item as? Item, item.fileType.isFaceImageType, let id = item.id else {
             return
         }
         
         let successHandler: AlbumOperationResponse = { [weak self] album in
             DispatchQueue.main.async {
-                self?.output.didLoadAlbum(album, forItem: item)                
+                self?.output.didLoadAlbum(album, forItem: item, faceImageType: faceImageType)
                 self?.output?.asyncOperationSuccess()
             }
         }

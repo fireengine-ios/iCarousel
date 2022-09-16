@@ -110,6 +110,7 @@ protocol ItemOperationManagerViewProtocol: AnyObject {
     func appleGoogleLoginDisconnected(type: AppleGoogleUserType)
     func elementTypeChanged(type: ElementTypes)
     func faceImageRecogChaned(to isAllowed: Bool)
+    func stopItemSelection()
 }
 
 extension ItemOperationManagerViewProtocol {
@@ -219,6 +220,7 @@ extension ItemOperationManagerViewProtocol {
     func appleGoogleLoginDisconnected(type: AppleGoogleUserType) {}
     func elementTypeChanged(type: ElementTypes) {}
     func faceImageRecogChaned(to isAllowed: Bool) {}
+    func stopItemSelection() {}
 }
 
 
@@ -645,6 +647,12 @@ class ItemOperationManager: NSObject {
     func faceImageChanged(to isAllowed: Bool) {
         DispatchQueue.main.async {
             self.views.invoke { $0.faceImageRecogChaned(to: isAllowed) }
+        }
+    }
+    
+    func stopItemSelection() {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.stopItemSelection()}
         }
     }
 }
