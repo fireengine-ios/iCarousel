@@ -56,7 +56,7 @@ class ProfileFieldView: UIView {
     let textFieldStackView: UIStackView = {
         let newValue = UIStackView()
         
-        newValue.spacing = 1
+        newValue.spacing = 2
         newValue.axis = .horizontal
         newValue.alignment = .fill
         newValue.distribution = .fill
