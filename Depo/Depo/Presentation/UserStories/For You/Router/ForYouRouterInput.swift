@@ -12,6 +12,6 @@ protocol ForYouRouterInput {
     func navigateToSeeAll(for view: ForYouViewEnum)
     func navigateToFaceImage()
     func navigateToCreate(for view: ForYouViewEnum)
-    func navigateToItemDetail(_ album: AlbumServiceResponse, forItem item: Item)
+    func navigateToItemDetail(_ album: AlbumServiceResponse, forItem item: Item, faceImageType: FaceImageType?)
     func navigateToAlbumDetail(album: AlbumItem)
 }
