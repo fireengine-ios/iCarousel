@@ -18,7 +18,8 @@ final class TabBarCardsContainer: UIView, CardsManagerViewProtocol {
         .sync,
         .upload,
         .sharedWithMeUpload,
-        .download
+        .download,
+        .itemSelection
     ]
 
     private var viewsByType: [OperationType: BaseTabBarCard] = [:]
@@ -90,17 +91,20 @@ final class TabBarCardsContainer: UIView, CardsManagerViewProtocol {
              .sharedWithMeUpload,
              .download:
             return ProgressTabBarCard.initFromNib()
+        
+        case .itemSelection:
+            return SelectionTabBarCard.initFromNib()
 
         default:
             return nil
         }
     }
 
-    func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?) {
-        startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
+    func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?, itemCount: Int?) {
+        startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations, itemCount: itemCount)
     }
 
-    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?) {
+    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?, itemCount: Int?) {
         if !checkIsThisIsPermittedType(type: type) {
             return
         }
@@ -119,13 +123,17 @@ final class TabBarCardsContainer: UIView, CardsManagerViewProtocol {
                     progressCard.setImageForUploadingItem(item: item)
                 }
             }
+            
+            if let card = view as? SelectionTabBarCard {
+                card.setCountLabel(count: itemCount ?? 0)
+            }
             addCardView(view)
         }
     }
 
-    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int) {
+    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int, itemCount: Int?) {
         guard let view = viewsByType[type] else {
-            startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
+            startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations, itemCount: itemCount)
             return
         }
 
@@ -134,6 +142,10 @@ final class TabBarCardsContainer: UIView, CardsManagerViewProtocol {
             if let item = object {
                 progressCard.setImageForUploadingItem(item: item)
             }
+        }
+        
+        if let card = view as? SelectionTabBarCard {
+            card.setCountLabel(count: itemCount ?? 0)
         }
     }
 

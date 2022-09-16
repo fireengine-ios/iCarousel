@@ -224,7 +224,7 @@ enum ElementTypes {
                     if faceImageType == .people {
                         result.append(.changePeopleThumbnail)
                     }
-                    result.append(contentsOf: [.changeCoverPhoto, .share] + ElementTypes.activeState)
+                    result.append(contentsOf: [.share] + ElementTypes.activeState)
                 }
             }
             

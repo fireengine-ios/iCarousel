@@ -8920,14 +8920,6 @@
 		F00610CE2899324700911048 /* ForYouViewEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610CC2899324700911048 /* ForYouViewEnum.swift */; };
 		F00610CF2899324700911048 /* ForYouViewEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610CC2899324700911048 /* ForYouViewEnum.swift */; };
 		F00610D02899324700911048 /* ForYouViewEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610CC2899324700911048 /* ForYouViewEnum.swift */; };
-		F00D7DDF2851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */; };
-		F00D7DE02851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */; };
-		F00D7DE12851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */; };
-		F00D7DE22851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */; };
-		F00D7DE42851C7000004E619 /* SharedItemsSegmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00D7DE32851C7000004E619 /* SharedItemsSegmentView.xib */; };
-		F00D7DE52851C7000004E619 /* SharedItemsSegmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00D7DE32851C7000004E619 /* SharedItemsSegmentView.xib */; };
-		F00D7DE62851C7000004E619 /* SharedItemsSegmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00D7DE32851C7000004E619 /* SharedItemsSegmentView.xib */; };
-		F00D7DE72851C7000004E619 /* SharedItemsSegmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00D7DE32851C7000004E619 /* SharedItemsSegmentView.xib */; };
 		F00610E6289DBF3100911048 /* PaycellCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610E5289DBF3100911048 /* PaycellCampaignViewController.swift */; };
 		F00610E7289DBF3100911048 /* PaycellCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610E5289DBF3100911048 /* PaycellCampaignViewController.swift */; };
 		F00610E8289DBF3100911048 /* PaycellCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610E5289DBF3100911048 /* PaycellCampaignViewController.swift */; };
@@ -8944,6 +8936,14 @@
 		F006110128A1181100911048 /* PaycellDetailPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00610FF28A1181000911048 /* PaycellDetailPopup.xib */; };
 		F006110228A1181100911048 /* PaycellDetailPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00610FF28A1181000911048 /* PaycellDetailPopup.xib */; };
 		F006110328A1181100911048 /* PaycellDetailPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00610FF28A1181000911048 /* PaycellDetailPopup.xib */; };
+		F00D7DDF2851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */; };
+		F00D7DE02851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */; };
+		F00D7DE12851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */; };
+		F00D7DE22851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */; };
+		F00D7DE42851C7000004E619 /* SharedItemsSegmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00D7DE32851C7000004E619 /* SharedItemsSegmentView.xib */; };
+		F00D7DE52851C7000004E619 /* SharedItemsSegmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00D7DE32851C7000004E619 /* SharedItemsSegmentView.xib */; };
+		F00D7DE62851C7000004E619 /* SharedItemsSegmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00D7DE32851C7000004E619 /* SharedItemsSegmentView.xib */; };
+		F00D7DE72851C7000004E619 /* SharedItemsSegmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00D7DE32851C7000004E619 /* SharedItemsSegmentView.xib */; };
 		F00DE586272196C3002F9A64 /* FileDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F028D7992719C0F000FF204D /* FileDescriptionView.swift */; };
 		F00DE58A272196C6002F9A64 /* FileDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F028D79B2719C0FD00FF204D /* FileDescriptionView.xib */; };
 		F01244C9282A988900835B4E /* agconnect-services.plist in Resources */ = {isa = PBXBuildFile; fileRef = F01244C8282A988800835B4E /* agconnect-services.plist */; };
@@ -9187,14 +9187,6 @@
 		F092578E27DE7B1F0001737C /* SecurityInfoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092578727DCF78C0001737C /* SecurityInfoPopup.swift */; };
 		F092578F27DE7B200001737C /* SecurityInfoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092578727DCF78C0001737C /* SecurityInfoPopup.swift */; };
 		F092579027DE7B200001737C /* SecurityInfoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092578727DCF78C0001737C /* SecurityInfoPopup.swift */; };
-		F095724F28A11A9D00D1D0DD /* PaycellDetailPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095724E28A11A9D00D1D0DD /* PaycellDetailPopup.swift */; };
-		F095725028A11A9D00D1D0DD /* PaycellDetailPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095724E28A11A9D00D1D0DD /* PaycellDetailPopup.swift */; };
-		F095725128A11A9D00D1D0DD /* PaycellDetailPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095724E28A11A9D00D1D0DD /* PaycellDetailPopup.swift */; };
-		F095725228A11A9D00D1D0DD /* PaycellDetailPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095724E28A11A9D00D1D0DD /* PaycellDetailPopup.swift */; };
-		F095725728A1205700D1D0DD /* PaycellCampaignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095725628A1205700D1D0DD /* PaycellCampaignModel.swift */; };
-		F095725828A1205700D1D0DD /* PaycellCampaignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095725628A1205700D1D0DD /* PaycellCampaignModel.swift */; };
-		F095725928A1205700D1D0DD /* PaycellCampaignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095725628A1205700D1D0DD /* PaycellCampaignModel.swift */; };
-		F095725A28A1205700D1D0DD /* PaycellCampaignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095725628A1205700D1D0DD /* PaycellCampaignModel.swift */; };
 		F09279972886820700874ADD /* GridListCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F09279962886820700874ADD /* GridListCountView.xib */; };
 		F09279982886820700874ADD /* GridListCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F09279962886820700874ADD /* GridListCountView.xib */; };
 		F09279992886820700874ADD /* GridListCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F09279962886820700874ADD /* GridListCountView.xib */; };
@@ -9211,10 +9203,26 @@
 		F09279AA2886CA8A00874ADD /* AlertFilesCancelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F09279A82886CA8A00874ADD /* AlertFilesCancelView.xib */; };
 		F09279AB2886CA8A00874ADD /* AlertFilesCancelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F09279A82886CA8A00874ADD /* AlertFilesCancelView.xib */; };
 		F09279AC2886CA8A00874ADD /* AlertFilesCancelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F09279A82886CA8A00874ADD /* AlertFilesCancelView.xib */; };
+		F095724F28A11A9D00D1D0DD /* PaycellDetailPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095724E28A11A9D00D1D0DD /* PaycellDetailPopup.swift */; };
+		F095725028A11A9D00D1D0DD /* PaycellDetailPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095724E28A11A9D00D1D0DD /* PaycellDetailPopup.swift */; };
+		F095725128A11A9D00D1D0DD /* PaycellDetailPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095724E28A11A9D00D1D0DD /* PaycellDetailPopup.swift */; };
+		F095725228A11A9D00D1D0DD /* PaycellDetailPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095724E28A11A9D00D1D0DD /* PaycellDetailPopup.swift */; };
+		F095725728A1205700D1D0DD /* PaycellCampaignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095725628A1205700D1D0DD /* PaycellCampaignModel.swift */; };
+		F095725828A1205700D1D0DD /* PaycellCampaignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095725628A1205700D1D0DD /* PaycellCampaignModel.swift */; };
+		F095725928A1205700D1D0DD /* PaycellCampaignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095725628A1205700D1D0DD /* PaycellCampaignModel.swift */; };
+		F095725A28A1205700D1D0DD /* PaycellCampaignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F095725628A1205700D1D0DD /* PaycellCampaignModel.swift */; };
 		F0A091372812D970009EFF9E /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A091362812D970009EFF9E /* Credentials.swift */; };
 		F0A091382812D970009EFF9E /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A091362812D970009EFF9E /* Credentials.swift */; };
 		F0A091392812D970009EFF9E /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A091362812D970009EFF9E /* Credentials.swift */; };
 		F0A0913A2812D970009EFF9E /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A091362812D970009EFF9E /* Credentials.swift */; };
+		F0B1A50428D1EBE6006EB2DC /* SelectionTabBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1A50328D1EBE6006EB2DC /* SelectionTabBarCard.swift */; };
+		F0B1A50528D1EBE6006EB2DC /* SelectionTabBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1A50328D1EBE6006EB2DC /* SelectionTabBarCard.swift */; };
+		F0B1A50628D1EBE6006EB2DC /* SelectionTabBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1A50328D1EBE6006EB2DC /* SelectionTabBarCard.swift */; };
+		F0B1A50728D1EBE6006EB2DC /* SelectionTabBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1A50328D1EBE6006EB2DC /* SelectionTabBarCard.swift */; };
+		F0B1A50928D1EC00006EB2DC /* SelectionTabBarCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0B1A50828D1EC00006EB2DC /* SelectionTabBarCard.xib */; };
+		F0B1A50A28D1EC00006EB2DC /* SelectionTabBarCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0B1A50828D1EC00006EB2DC /* SelectionTabBarCard.xib */; };
+		F0B1A50B28D1EC00006EB2DC /* SelectionTabBarCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0B1A50828D1EC00006EB2DC /* SelectionTabBarCard.xib */; };
+		F0B1A50C28D1EC00006EB2DC /* SelectionTabBarCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0B1A50828D1EC00006EB2DC /* SelectionTabBarCard.xib */; };
 		F0BF840A27A7E802000F7F4E /* PublicShareSaveErrorStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BF840927A7E802000F7F4E /* PublicShareSaveErrorStatus.swift */; };
 		F0BF840B27A7E802000F7F4E /* PublicShareSaveErrorStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BF840927A7E802000F7F4E /* PublicShareSaveErrorStatus.swift */; };
 		F0BF840C27A7E802000F7F4E /* PublicShareSaveErrorStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BF840927A7E802000F7F4E /* PublicShareSaveErrorStatus.swift */; };
@@ -12073,12 +12081,12 @@
 		EFA74FAD1FBF378F00CF946E /* PrintInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintInteractor.swift; sourceTree = "<group>"; };
 		EFE9E4488118296DCE476A71 /* Pods-LifeTech_BilloShared.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_BilloShared.appstore.xcconfig"; path = "Target Support Files/Pods-LifeTech_BilloShared/Pods-LifeTech_BilloShared.appstore.xcconfig"; sourceTree = "<group>"; };
 		F00610CC2899324700911048 /* ForYouViewEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouViewEnum.swift; sourceTree = "<group>"; };
-		F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedItemsSegmentView.swift; sourceTree = "<group>"; };
-		F00D7DE32851C7000004E619 /* SharedItemsSegmentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SharedItemsSegmentView.xib; sourceTree = "<group>"; };
 		F00610E5289DBF3100911048 /* PaycellCampaignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaycellCampaignViewController.swift; sourceTree = "<group>"; };
 		F00610EA289DBF4D00911048 /* PaycellCampaignViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaycellCampaignViewController.xib; sourceTree = "<group>"; };
 		F00610F028A0504C00911048 /* PaycellCampaignService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaycellCampaignService.swift; sourceTree = "<group>"; };
 		F00610FF28A1181000911048 /* PaycellDetailPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaycellDetailPopup.xib; sourceTree = "<group>"; };
+		F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedItemsSegmentView.swift; sourceTree = "<group>"; };
+		F00D7DE32851C7000004E619 /* SharedItemsSegmentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SharedItemsSegmentView.xib; sourceTree = "<group>"; };
 		F01244C8282A988800835B4E /* agconnect-services.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "agconnect-services.plist"; sourceTree = "<group>"; };
 		F01244D8283AEC6000835B4E /* JWTTokenDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTTokenDecoder.swift; sourceTree = "<group>"; };
 		F013FA6B27FF2803004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleGoogleUpdatePasswordPoup.swift; sourceTree = "<group>"; };
@@ -12145,17 +12153,12 @@
 		F092799E2886823500874ADD /* GridListCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridListCountView.swift; sourceTree = "<group>"; };
 		F09279A32886CA4400874ADD /* AlertFilesCancelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesCancelView.swift; sourceTree = "<group>"; };
 		F09279A82886CA8A00874ADD /* AlertFilesCancelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertFilesCancelView.xib; sourceTree = "<group>"; };
-		F0A091362812D970009EFF9E /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		F095724E28A11A9D00D1D0DD /* PaycellDetailPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaycellDetailPopup.swift; sourceTree = "<group>"; };
 		F095725628A1205700D1D0DD /* PaycellCampaignModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaycellCampaignModel.swift; sourceTree = "<group>"; };
 		F0A091362812D970009EFF9E /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		F0AF20DF27D63F950014C84D /* ka */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ka; path = ka.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		F0B64C63275D4F2500002F66 /* DarkModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeViewController.swift; sourceTree = "<group>"; };
-		F0B64C64275D4F2500002F66 /* DarkModeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DarkModeViewController.xib; sourceTree = "<group>"; };
-		F0B64C6E275DDF4800002F66 /* DarkModeConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeConfigurator.swift; sourceTree = "<group>"; };
-		F0B64C73275DDFA700002F66 /* DarkModeInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeInitializer.swift; sourceTree = "<group>"; };
-		F0B64C7D275DEBD000002F66 /* DarkModeOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeOptionsView.swift; sourceTree = "<group>"; };
-		F0B64C82275DEBEA00002F66 /* DarkModeOptionsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DarkModeOptionsView.xib; sourceTree = "<group>"; };
+		F0B1A50328D1EBE6006EB2DC /* SelectionTabBarCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTabBarCard.swift; sourceTree = "<group>"; };
+		F0B1A50828D1EC00006EB2DC /* SelectionTabBarCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectionTabBarCard.xib; sourceTree = "<group>"; };
 		F0BF840927A7E802000F7F4E /* PublicShareSaveErrorStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicShareSaveErrorStatus.swift; sourceTree = "<group>"; };
 		F0C447282848C85F00129228 /* AllFilesTypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFilesTypeCollectionViewCell.swift; sourceTree = "<group>"; };
 		F0C447292848C85F00129228 /* AllFilesTypeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllFilesTypeCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -12960,6 +12963,7 @@
 		07C6D4D7284B458B00502C28 /* Cards */ = {
 			isa = PBXGroup;
 			children = (
+				F0B1A4FF28D1EBC0006EB2DC /* SelectionTabBarCard */,
 				07C6D4F2284BA70E00502C28 /* ProgressTabBarCard */,
 				07C6D4E3284B4C3400502C28 /* PrepareForQuickScrollTabBarCard */,
 			);
@@ -19714,7 +19718,6 @@
 			isa = PBXGroup;
 			children = (
 				F00610E1289DBF0A00911048 /* PaycellCampaign */,
-				F0B64C5E275D4E3000002F66 /* DarkMode */,
 				3A0B421B266F7D5900FD8F3C /* Chatbot */,
 				3A6D27BF26400A7800A7BBE2 /* Invitation */,
 				CF7145A024B597A700D83E60 /* ContactSync */,
@@ -21419,8 +21422,8 @@
 				F095724E28A11A9D00D1D0DD /* PaycellDetailPopup.swift */,
 			);
 			path = Views;
-            sourceTree = "<group>";
-        };
+			sourceTree = "<group>";
+		};
 		F00D7DDD2851C6A30004E619 /* SharedItemsSegmentView */ = {
 			isa = PBXGroup;
 			children = (
@@ -21713,6 +21716,15 @@
 				F092578927DCF7E60001737C /* SecurityInfoPopup.xib */,
 			);
 			path = SecurityInfoPopup;
+			sourceTree = "<group>";
+		};
+		F0B1A4FF28D1EBC0006EB2DC /* SelectionTabBarCard */ = {
+			isa = PBXGroup;
+			children = (
+				F0B1A50328D1EBE6006EB2DC /* SelectionTabBarCard.swift */,
+				F0B1A50828D1EC00006EB2DC /* SelectionTabBarCard.xib */,
+			);
+			path = SelectionTabBarCard;
 			sourceTree = "<group>";
 		};
 		F0D2975A27F6E18E0082C768 /* AppleGoogleLoginService */ = {
@@ -22400,6 +22412,7 @@
 				98DBC0622410FB4F00926F40 /* AutoSyncAlbumTableViewCell.xib in Resources */,
 				8E3B6B4D2462E44700BCB052 /* FileInfoView.xib in Resources */,
 				8C06AC212008AADF003D8E05 /* SuggestionTableSectionHeader.xib in Resources */,
+				F0B1A50928D1EC00006EB2DC /* SelectionTabBarCard.xib in Resources */,
 				8C0E90011FDEBDFF00789C91 /* SettingsTableViewCell.xib in Resources */,
 				89E51D6222CA2ECA007A7DBC /* CreateStoryPopUp.xib in Resources */,
 				9845489822FBFF4100D7F29C /* SpotifyStatusView.xib in Resources */,
@@ -22920,6 +22933,7 @@
 				CF7146C124B597A900D83E60 /* BackUpContactsCard.xib in Resources */,
 				98DBC0652410FB4F00926F40 /* AutoSyncAlbumTableViewCell.xib in Resources */,
 				CEC94E46238FA6F4000BBB80 /* UserProfileViewController.xib in Resources */,
+				F0B1A50B28D1EC00006EB2DC /* SelectionTabBarCard.xib in Resources */,
 				8E3B6B502462E44C00BCB052 /* FileInfoView.xib in Resources */,
 				F00610ED289DBF4D00911048 /* PaycellCampaignViewController.xib in Resources */,
 				CE784CD222A685FB00662219 /* OptInController.xib in Resources */,
@@ -23553,6 +23567,7 @@
 				CF8B6A6723CBC9D70021B021 /* BaseEmailVerificationPopUp.xib in Resources */,
 				9823195824F3A1E600FD16E2 /* PreparedFilterSliderView.xib in Resources */,
 				98231A1824F3A1E700FD16E2 /* SelectionMenuController.xib in Resources */,
+				F0B1A50A28D1EC00006EB2DC /* SelectionTabBarCard.xib in Resources */,
 				9823198824F3A1E700FD16E2 /* ColorView.xib in Resources */,
 				9862BC30255E6BF300D7945E /* FileInfoPeopleView.xib in Resources */,
 				CF8B6A6A23CBC9D70021B021 /* PhoneVerificationViewController.xib in Resources */,
@@ -23705,6 +23720,7 @@
 				98DBC0662410FB4F00926F40 /* AutoSyncAlbumTableViewCell.xib in Resources */,
 				B5450210255A863C004DBD41 /* PrivateShareSharedFilesViewController.xib in Resources */,
 				CF8B708623CBCA280021B021 /* UserProfileViewController.xib in Resources */,
+				F0B1A50C28D1EC00006EB2DC /* SelectionTabBarCard.xib in Resources */,
 				8E3B6B512462E44D00BCB052 /* FileInfoView.xib in Resources */,
 				F00610EE289DBF4D00911048 /* PaycellCampaignViewController.xib in Resources */,
 				CF8B708723CBCA280021B021 /* OptInController.xib in Resources */,
@@ -25437,6 +25453,7 @@
 				CE58FB0720444BFF007F3F54 /* ColorConstants.swift in Sources */,
 				A21A8AC82223D45200B03C05 /* AutoSyncRoutingService.swift in Sources */,
 				734D9E14233B58B600B143D4 /* SetSecretQuestionErrors.swift in Sources */,
+				F0B1A50428D1EBE6006EB2DC /* SelectionTabBarCard.swift in Sources */,
 				F00610F128A0504C00911048 /* PaycellCampaignService.swift in Sources */,
 				CF71462824B597A800D83E60 /* ContactSyncViewController.swift in Sources */,
 				8C0E8D041FDEBDFF00789C91 /* LocalAlbumModuleInitializer.swift in Sources */,
@@ -27533,6 +27550,7 @@
 				B52BAC5A23AE1BE60051E21D /* CoreDataConfig.swift in Sources */,
 				03404574240794FD0024135B /* SynchronizedDictionary.swift in Sources */,
 				CE7848C322A685FB00662219 /* SearchViewInput.swift in Sources */,
+				F0B1A50628D1EBE6006EB2DC /* SelectionTabBarCard.swift in Sources */,
 				982319AE24F3A1E700FD16E2 /* ColorCell.swift in Sources */,
 				CE7848C422A685FB00662219 /* HelpAndSupportRouterInput.swift in Sources */,
 				CE7848C522A685FB00662219 /* InstapickAlbumSelectionViewController.swift in Sources */,
@@ -29059,6 +29077,7 @@
 				CF8B63A323CBC9D70021B021 /* QuickSelectCollectionView.swift in Sources */,
 				CF8B63A423CBC9D70021B021 /* ActivityType.swift in Sources */,
 				CF8B63A523CBC9D70021B021 /* Error+Network.swift in Sources */,
+				F0B1A50528D1EBE6006EB2DC /* SelectionTabBarCard.swift in Sources */,
 				CF8B63A623CBC9D70021B021 /* FaceImagePhotosInteractorInput.swift in Sources */,
 				CF8B63A723CBC9D70021B021 /* FileServiceResponse.swift in Sources */,
 				CF8B63A823CBC9D70021B021 /* AugmentedRealityItem.swift in Sources */,
@@ -32169,6 +32188,7 @@
 				CF8B6F5423CBCA280021B021 /* PromoView.swift in Sources */,
 				98231A0F24F3A1E700FD16E2 /* SelectionMenuController.swift in Sources */,
 				CF8B6F5523CBCA280021B021 /* InstapickAnalyze.swift in Sources */,
+				F0B1A50728D1EBE6006EB2DC /* SelectionTabBarCard.swift in Sources */,
 				CF8B6F5623CBCA280021B021 /* AuthorityType.swift in Sources */,
 				CF8B6F5723CBCA280021B021 /* PaymentModels.swift in Sources */,
 				CF8B6F5823CBCA280021B021 /* SecurityQuestionView.swift in Sources */,

@@ -132,8 +132,8 @@ extension ForYouViewController: ForYouFaceImageTableViewCellDelegae {
         output.navigateToCreate(for: view)
     }
     
-    func navigateToItemDetail(item: WrapData) {
-        output.navigateToItemDetail(item: item)
+    func navigateToItemDetail(item: WrapData, faceImageType: FaceImageType?) {
+        output.navigateToItemDetail(item: item, faceImageType: faceImageType)
     }
     
     func naviateToAlbumDetail(album: AlbumItem) {

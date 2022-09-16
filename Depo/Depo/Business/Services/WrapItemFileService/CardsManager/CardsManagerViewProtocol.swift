@@ -8,13 +8,13 @@
 
 protocol CardsManagerViewProtocol {
     
-    func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?)
+    func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?, itemCount: Int?)
     
-    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?)
+    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?, itemCount: Int?)
     
     func startOperationsWith(serverObjects: [HomeCardResponse])
         
-    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int)
+    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int, itemCount: Int?)
     
     func setProgress(ratio: Float, for operationType: OperationType, object: WrapData?)
     

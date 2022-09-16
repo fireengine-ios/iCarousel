@@ -56,7 +56,11 @@ final class PhotoVideoThreeDotMenuManager {
             
             /// local and remotes or remotes only
         } else {
-            actionTypes = [.createStory]
+            if containsPhotos {
+                actionTypes = [.createStory]
+            } else {
+                actionTypes = []
+            }
 
             /// add .addToFavorites if need
             let hasUnfavorite = remoteItems.first(where: { !$0.favorites }) != nil
