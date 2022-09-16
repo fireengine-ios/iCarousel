@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftUI
 
 final class ProfileBirthdayFieldView: ProfileFieldView {
     
@@ -78,7 +77,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     
     private let fourDigitsUnderlineWidth: CGFloat = 60
     private let twoDigitsUnderlineWidth: CGFloat = 20
-    private let underlineOffset: CGFloat = 0
+    private let underlineOffset: CGFloat = 2
     
     private lazy var dateFormatter: DateFormatter = {
         let newValue = DateFormatter()
@@ -183,25 +182,26 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
         underlineLayer.addSublayer(monthLayer)
         underlineLayer.addSublayer(yearLayer)
         
-        let twoDigitsTextFieldWidth = twoDigitsUnderlineWidth + underlineOffset
-        textField.widthAnchor.constraint(equalToConstant: twoDigitsTextFieldWidth).isActive = true
-        textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
-        textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 14).isActive = true
-        textField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
-        textField.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        textFieldStackView.addArrangedSubview(monthSlashLabel)
-        addSubview(monthTextField)
-        textFieldStackView.addArrangedSubview(monthTextField)
+        textFieldStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
+        textFieldStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 14).isActive = true
+        textFieldStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
         
+        let twoDigitsTextFieldWidth = twoDigitsUnderlineWidth + underlineOffset
+        
+        /// day
+        textField.widthAnchor.constraint(equalToConstant: twoDigitsTextFieldWidth).isActive = true
+        textField.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        /// month
+        textFieldStackView.addArrangedSubview(monthSlashLabel)
+        textFieldStackView.addArrangedSubview(monthTextField)
         monthTextField.translatesAutoresizingMaskIntoConstraints = false
         monthTextField.widthAnchor.constraint(equalToConstant: twoDigitsTextFieldWidth).isActive = true
         monthTextField.heightAnchor.constraint(equalToConstant: 20).isActive = true
-//        addSubview(slashLabel)
-        textFieldStackView.addArrangedSubview(yearSlashLabel)
-
-        addSubview(yearTextField)
-        textFieldStackView.addArrangedSubview(yearTextField)
         
+        /// year
+        textFieldStackView.addArrangedSubview(yearSlashLabel)
+        textFieldStackView.addArrangedSubview(yearTextField)
         yearTextField.translatesAutoresizingMaskIntoConstraints = false
         yearTextField.widthAnchor.constraint(equalToConstant: fourDigitsUnderlineWidth).isActive = true
         yearTextField.heightAnchor.constraint(equalToConstant: 20).isActive = true
