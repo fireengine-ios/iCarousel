@@ -12,7 +12,7 @@ import MBProgressHUD
 protocol ForYouTableViewCellDelegate: AnyObject {
     func onSeeAllButton(for view: ForYouViewEnum)
     func navigateToCreate(for view: ForYouViewEnum)
-    func navigateToItemDetail(item: WrapData)
+    func navigateToItemDetail(item: WrapData, faceImageType: FaceImageType?)
     func naviateToAlbumDetail(album: AlbumItem)
 }
 
@@ -315,13 +315,13 @@ extension ForYouTableViewCell: UICollectionViewDelegateFlowLayout {
         switch currentView {
         case .people:
             let item = peopleData[indexPath.row]
-            delegate?.navigateToItemDetail(item: item)
+            delegate?.navigateToItemDetail(item: item, faceImageType: .people)
         case .things:
             let item = thingsData[indexPath.row]
-            delegate?.navigateToItemDetail(item: item)
+            delegate?.navigateToItemDetail(item: item, faceImageType: .things)
         case .places:
             let item = placesData[indexPath.row]
-            delegate?.navigateToItemDetail(item: item)
+            delegate?.navigateToItemDetail(item: item, faceImageType: .places)
         case .albums:
             let album = albumsData[indexPath.row]
             delegate?.naviateToAlbumDetail(album: album)

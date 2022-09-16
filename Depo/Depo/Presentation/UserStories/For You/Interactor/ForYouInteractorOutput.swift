@@ -9,7 +9,7 @@
 import Foundation
 
 protocol ForYouInteractorOutput: AnyObject {
-    func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item)
+    func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item, faceImageType: FaceImageType?)
     func asyncOperationSuccess()
     func asyncOperationFail(errorMessage: String?)
     func startAsyncOperation()
