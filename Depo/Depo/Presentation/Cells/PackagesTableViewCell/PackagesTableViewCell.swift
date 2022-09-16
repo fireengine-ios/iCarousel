@@ -59,6 +59,16 @@ class PackagesTableViewCell: UITableViewCell {
         case .accountType(let type):
             titleLabel.text = type.text
             descriptionLabel.isHidden = true
+            
+            switch type {
+            case.premium:
+                infoImageView.isHidden = false
+                infoImageView.image = Image.iconPremium.image
+            case .standard:
+                infoImageView.isHidden = true
+            case .middle:
+                infoImageView.isHidden = true
+            }
         }
         
         let titleLeadingConstraint: CGFloat = infoImageView.isHidden ? 16 : 48

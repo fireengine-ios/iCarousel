@@ -71,7 +71,6 @@ final class ProfileEmailFieldView: ProfileTextEnterView {
         button.contentEdgeInsets = UIEdgeInsets(topBottom: 0, rightLeft: 10)
         button.backgroundColor = AppColor.profileInfoOrange.color
         button.layer.cornerRadius = ProfileEmailFieldView.verificationViewHeight
-        button.addTarget(ProfileEmailFieldView.self, action: #selector(verifyTapped), for: .touchUpInside)
         return button
     }()
 
@@ -84,7 +83,10 @@ final class ProfileEmailFieldView: ProfileTextEnterView {
 
         updateVerificationStatus()
         updateVerificationVisibility()
+        updateVerifyButtonStatus()
         setupLayout()
+        
+        verifyButton.addTarget(self, action: #selector(verifyTapped), for: .touchUpInside)
     }
     
     private func setupLayout() {
@@ -115,6 +117,11 @@ final class ProfileEmailFieldView: ProfileTextEnterView {
     private func updateVerificationStatus() {
         verifiedView.isHidden = !isVerified
         verifyButton.isHidden = isVerified
+    }
+    
+    func updateVerifyButtonStatus() {
+        guard let text = textField.text else { return }
+        verifyButton.isHidden = text.isEmpty
     }
 
     @objc private func verifyTapped() {

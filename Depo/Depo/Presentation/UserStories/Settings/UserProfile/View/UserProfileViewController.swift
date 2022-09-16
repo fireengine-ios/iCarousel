@@ -552,6 +552,7 @@ extension UserProfileViewController: UserProfileViewInput {
         recoveryEmailView.textField.text = userInfo.recoveryEmail
         recoveryEmailView.showsVerificationStatus = userInfo.recoveryEmailVerified != nil
         recoveryEmailView.isVerified = userInfo.recoveryEmailVerified ?? false
+        recoveryEmailView.updateVerifyButtonStatus()
         addressView.textField.text = userInfo.address
         isTurkcellUser = userInfo.isTurkcellUser
         
