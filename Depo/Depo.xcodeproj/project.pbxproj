@@ -1116,6 +1116,7 @@
 		52E0994A28C1ECD8004AE4EC /* PackagesInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56051F7552A900F49DA1 /* PackagesInteractorInput.swift */; };
 		52E0994B28C1ECE1004AE4EC /* PackagesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56041F7552A900F49DA1 /* PackagesInteractor.swift */; };
 		52E0994C28C1ECE2004AE4EC /* PackagesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56041F7552A900F49DA1 /* PackagesInteractor.swift */; };
+		52F78BA228D9E005001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
 		723C81CF3249CC1EF7F7DAF1 /* Pods_BilloFileProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF880A5861684656277FAD7B /* Pods_BilloFileProvider.framework */; };
 		723FF6D31512172E605BB2C3 /* Pods_Billo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE60BD355BDE6BAFF11EEDAB /* Pods_Billo.framework */; };
 		730A997222D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730A996F22D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift */; };
@@ -30241,6 +30242,7 @@
 				078130A52808215F00E09172 /* HeaderContainingViewControllerChild.swift in Sources */,
 				F013FA6D27FF2804004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift in Sources */,
 				CF8B66FE23CBC9D70021B021 /* FreeAppSpaceConfigurator.swift in Sources */,
+				52F78BA228D9E005001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */,
 				CF8B66FF23CBC9D70021B021 /* OfferParameters.swift in Sources */,
 				CF8B670023CBC9D70021B021 /* SegmentedControl.swift in Sources */,
 				F013FA8F280591DF004B9BB8 /* SecurityInfoWarningPopup.swift in Sources */,
