@@ -1117,6 +1117,8 @@
 		52E0994B28C1ECE1004AE4EC /* PackagesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56041F7552A900F49DA1 /* PackagesInteractor.swift */; };
 		52E0994C28C1ECE2004AE4EC /* PackagesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56041F7552A900F49DA1 /* PackagesInteractor.swift */; };
 		52F78BA228D9E005001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
+		52F78BA628D9E036001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
+		52F78BA728D9E036001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
 		723C81CF3249CC1EF7F7DAF1 /* Pods_BilloFileProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF880A5861684656277FAD7B /* Pods_BilloFileProvider.framework */; };
 		723FF6D31512172E605BB2C3 /* Pods_Billo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE60BD355BDE6BAFF11EEDAB /* Pods_Billo.framework */; };
 		730A997222D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730A996F22D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift */; };
@@ -27675,6 +27677,7 @@
 				CE78490E22A685FB00662219 /* HomeCollectionViewDataSource.swift in Sources */,
 				CE78490F22A685FB00662219 /* CollectionViewSimpleHeaderWithText.swift in Sources */,
 				CE78491022A685FB00662219 /* SharedFactory.swift in Sources */,
+				52F78BA628D9E036001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */,
 				49C978372403047E00943F67 /* MobilePaymentPermissionView.swift in Sources */,
 				B558279424FE91600039DD11 /* ObjectRequestResponse.swift in Sources */,
 				CE78491122A685FB00662219 /* AutoSyncSettingsOptionView.swift in Sources */,
@@ -30906,6 +30909,7 @@
 				981EA2F1247D4CA700A51B7D /* ContactsOperationView.swift in Sources */,
 				CF8B6B9723CBCA280021B021 /* SwipeableCardCell.swift in Sources */,
 				CF8B6B9823CBCA280021B021 /* FaceImageItemsViewOutput.swift in Sources */,
+				52F78BA728D9E036001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */,
 				CF8B6B9923CBCA280021B021 /* MusicInteractorInput.swift in Sources */,
 				F034DF2A274A544200E5C015 /* AlbumCountResponse.swift in Sources */,
 				07DB93922860AF5400D5CACF /* ASN1Container.swift in Sources */,
