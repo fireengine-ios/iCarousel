@@ -185,8 +185,10 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
             return TextConstants.albumsViewNoAlbumsButtonText
         } else if remoteItems is AllFilesService {
             return TextConstants.allFilesViewNoFilesButtonText
-        } else if remoteItems is FavouritesService {
-            return TextConstants.favoritesViewNoFilesButtonText
+        } else if remoteItems is MusicService {
+            return "Start adding your music"
+        } else if remoteItems is DocumentService {
+            return "Start adding your document"
         }
     
         return ""
@@ -196,9 +198,9 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
         if remoteItems is PhotoAndVideoService {
             return UIImage(named: "ImageNoPhotos")!
         } else if remoteItems is MusicService {
-            return UIImage(named: "ImageNoMusics")!
+            return Image.popupMusic.image
         } else if remoteItems is DocumentService {
-            return UIImage(named: "ImageNoDocuments")!
+            return Image.popupDocuments.image
         } else if remoteItems is StoryService {
             return UIImage(named: "ImageNoStories")!
         } else if remoteItems is AlbumService {
@@ -206,7 +208,7 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
         } else if remoteItems is AllFilesService {
             return UIImage(named: "ImageNoAllFiles")!
         } else if remoteItems is FavouritesService {
-            return UIImage(named: "ImageNoFavorites")!
+            return Image.popupFavorites.image
         }
         return UIImage()
     }

@@ -58,4 +58,6 @@ protocol BaseFilesGreedViewInput: AnyObject {
     
     func endScrollCollectionView()
     
+    func showUploadFolder(with action: TabBarViewController.Action)
+    
 }

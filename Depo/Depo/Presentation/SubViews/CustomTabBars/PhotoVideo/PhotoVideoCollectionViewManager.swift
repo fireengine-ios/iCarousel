@@ -81,14 +81,14 @@ final class PhotoVideoCollectionViewManager {
         }
     }
     
-    func showEmptyDataViewIfNeeded(isShow: Bool) {
+    func showEmptyDataViewIfNeeded(isShow: Bool, type: ElementTypes) {
         guard isShow else {
             emptyDataView.removeFromSuperview()
             moreButton.removeFromSuperview()
             return
         }
         
-        emptyDataView.configure(viewType: viewType)
+        emptyDataView.configure(viewType: type)
         emptyDataView.delegate = self
         
         moreButton.frame = CGRect(x: collectionView.frame.width - 40, y: 13 , width: 24, height: 24)
@@ -106,7 +106,7 @@ final class PhotoVideoCollectionViewManager {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            emptyDataView.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor),
+            emptyDataView.topAnchor.constraint(equalTo: collectionView.topAnchor),
             emptyDataView.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor),
             emptyDataView.widthAnchor.constraint(equalTo: collectionView.widthAnchor)
         ])

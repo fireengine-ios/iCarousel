@@ -23,7 +23,6 @@
                 <outlet property="noFilesLabel" destination="fdq-Cf-39W" id="gmp-PY-CFM"/>
                 <outlet property="noFilesTopLabel" destination="0lC-K4-1ac" id="TJd-tm-6eI"/>
                 <outlet property="noFilesView" destination="ZI3-Dh-bXS" id="Tf2-p8-qvW"/>
-                <outlet property="noFilesViewCenterOffsetConstraint" destination="ecm-g2-fmI" id="Fcz-05-QYh"/>
                 <outlet property="scrollIndicator" destination="e3K-s6-bzd" id="6Fp-Yf-Hid"/>
                 <outlet property="startCreatingFilesButton" destination="UTy-IA-Avr" id="4gU-xN-7wR"/>
                 <outlet property="topBarContainer" destination="Stl-Nh-W5a" id="rEa-AX-y5Q"/>
@@ -66,46 +65,62 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZI3-Dh-bXS">
-                    <rect key="frame" x="16" y="266.66666666666669" width="382" height="207"/>
+                    <rect key="frame" x="16" y="100" width="382" height="185"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdq-Cf-39W">
-                            <rect key="frame" x="8" y="157" width="366" height="0.0"/>
+                            <rect key="frame" x="8" y="124" width="366" height="0.0"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTy-IA-Avr" customClass="BlueButtonWithNoFilesWhiteText" customModule="Billo" customModuleProvider="target">
-                            <rect key="frame" x="96" y="168" width="190" height="39"/>
+                            <rect key="frame" x="28" y="140" width="326" height="45"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="39" id="03I-TC-x2h"/>
-                                <constraint firstAttribute="width" constant="190" id="YLS-oM-nxu">
-                                    <variation key="widthClass=regular" constant="258"/>
-                                </constraint>
+                                <constraint firstAttribute="height" constant="45" id="03I-TC-x2h"/>
+                                <constraint firstAttribute="width" constant="326" id="pUd-hQ-hMP"/>
                             </constraints>
                             <inset key="contentEdgeInsets" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
                             <state key="normal" title="button"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="pUd-hQ-hMP"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=regular">
+                                <mask key="constraints">
+                                    <include reference="pUd-hQ-hMP"/>
+                                </mask>
+                            </variation>
                             <connections>
                                 <action selector="onStartCreatingFilesButton" destination="-1" eventType="touchUpInside" id="gVy-bU-Rnz"/>
                             </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qz2-SP-6oQ">
-                            <rect key="frame" x="143" y="45" width="96" height="96"/>
+                            <rect key="frame" x="141" y="0.0" width="100" height="100"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="96" id="vQg-yh-HbG"/>
-                                <constraint firstAttribute="width" constant="96" id="yin-c6-zcV"/>
+                                <constraint firstAttribute="height" constant="100" id="vQg-yh-HbG"/>
+                                <constraint firstAttribute="width" constant="100" id="yin-c6-zcV"/>
                             </constraints>
                         </imageView>
                     </subviews>
                     <constraints>
                         <constraint firstItem="qz2-SP-6oQ" firstAttribute="centerX" secondItem="ZI3-Dh-bXS" secondAttribute="centerX" id="6A0-hR-1ae"/>
-                        <constraint firstItem="UTy-IA-Avr" firstAttribute="top" secondItem="fdq-Cf-39W" secondAttribute="bottom" constant="11" id="9ks-nj-hts"/>
+                        <constraint firstItem="UTy-IA-Avr" firstAttribute="top" secondItem="fdq-Cf-39W" secondAttribute="bottom" constant="16" id="9ks-nj-hts"/>
                         <constraint firstAttribute="bottom" secondItem="UTy-IA-Avr" secondAttribute="bottom" id="KV4-aB-0vn"/>
                         <constraint firstItem="fdq-Cf-39W" firstAttribute="leading" secondItem="ZI3-Dh-bXS" secondAttribute="leading" constant="8" id="QSi-hF-074"/>
-                        <constraint firstItem="fdq-Cf-39W" firstAttribute="top" secondItem="qz2-SP-6oQ" secondAttribute="bottom" constant="16" id="SPi-rc-70a"/>
+                        <constraint firstItem="fdq-Cf-39W" firstAttribute="top" secondItem="qz2-SP-6oQ" secondAttribute="bottom" constant="24" id="SPi-rc-70a"/>
                         <constraint firstAttribute="trailing" secondItem="fdq-Cf-39W" secondAttribute="trailing" constant="8" id="dtr-Zd-aRq"/>
-                        <constraint firstItem="qz2-SP-6oQ" firstAttribute="top" secondItem="ZI3-Dh-bXS" secondAttribute="top" constant="45" id="dz2-C0-o9S"/>
+                        <constraint firstItem="qz2-SP-6oQ" firstAttribute="top" secondItem="ZI3-Dh-bXS" secondAttribute="top" id="dz2-C0-o9S"/>
                         <constraint firstItem="UTy-IA-Avr" firstAttribute="centerX" secondItem="ZI3-Dh-bXS" secondAttribute="centerX" id="gSt-4w-qVr"/>
+                        <constraint firstAttribute="trailing" secondItem="UTy-IA-Avr" secondAttribute="trailing" constant="28" id="gkl-g0-byM"/>
+                        <constraint firstItem="UTy-IA-Avr" firstAttribute="leading" secondItem="ZI3-Dh-bXS" secondAttribute="leading" constant="28" id="n8X-WM-A7C"/>
                     </constraints>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <mask key="constraints">
+                            <exclude reference="gkl-g0-byM"/>
+                            <exclude reference="n8X-WM-A7C"/>
+                        </mask>
+                    </variation>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="acy-kT-cr5">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
@@ -124,6 +139,7 @@
             <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstItem="0lC-K4-1ac" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="1b8-sN-taw"/>
+                <constraint firstItem="ZI3-Dh-bXS" firstAttribute="top" secondItem="THw-xy-ykx" secondAttribute="top" constant="100" id="6BJ-cD-Y7L"/>
                 <constraint firstItem="e3K-s6-bzd" firstAttribute="bottom" secondItem="0Sm-wn-Msc" secondAttribute="bottom" id="6My-mu-slE"/>
                 <constraint firstAttribute="bottom" secondItem="Umz-wA-WsK" secondAttribute="bottom" id="BPZ-rn-X4w"/>
                 <constraint firstAttribute="bottom" secondItem="0Sm-wn-Msc" secondAttribute="bottom" id="CRt-nA-Xxz"/>
@@ -140,7 +156,6 @@
                 <constraint firstAttribute="trailing" secondItem="0Sm-wn-Msc" secondAttribute="trailing" id="dLF-Ta-wrF">
                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                 </constraint>
-                <constraint firstItem="ZI3-Dh-bXS" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="1.07" id="ecm-g2-fmI"/>
                 <constraint firstAttribute="trailing" secondItem="ZI3-Dh-bXS" secondAttribute="trailing" constant="16" id="fRH-8S-qhb"/>
                 <constraint firstAttribute="trailing" secondItem="0lC-K4-1ac" secondAttribute="trailing" constant="16" id="hq9-pl-y0n"/>
                 <constraint firstItem="0Sm-wn-Msc" firstAttribute="top" secondItem="acy-kT-cr5" secondAttribute="bottom" id="t0N-2A-ZnV"/>

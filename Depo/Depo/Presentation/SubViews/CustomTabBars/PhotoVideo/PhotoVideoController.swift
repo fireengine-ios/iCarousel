@@ -67,6 +67,8 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private var category: QuickScrollCategory = .photosAndVideos
     private var fileTypes: [FileType] = [.image, .video]
     
+    private var viewType: ElementTypes = .galleryAll
+    
     // MARK: - life cycle
     
     override func viewDidLoad() {
@@ -891,6 +893,8 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
     }
     
     func elementTypeChanged(type: ElementTypes) {
+        self.viewType = type
+        
         switch type {
         case .galleryAll:
             category = .photosAndVideos
@@ -946,7 +950,7 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
 
     func contentDidChange(sections: [NSFetchedResultsSectionInfo], fetchedObjects: [MediaItem]) {
         updateYearsView(with: sections)
-        collectionViewManager.showEmptyDataViewIfNeeded(isShow: fetchedObjects.isEmpty)
+        collectionViewManager.showEmptyDataViewIfNeeded(isShow: fetchedObjects.isEmpty, type: viewType)
     }
     
     func convertFetchedObjectsInProgress() {
