@@ -126,6 +126,7 @@ enum Image: String, AppImage {
     case iconArrowDownActive
     case iconArrowDownDisable
     case iconArrowUpActive
+    case settingsIconCancel
     
     /// Introduce
     case circleIntoduce

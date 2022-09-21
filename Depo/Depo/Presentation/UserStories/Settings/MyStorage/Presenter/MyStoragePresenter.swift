@@ -227,6 +227,10 @@ extension MyStoragePresenter: MyStorageViewOutput {
     func configureCard(_ card: PackageInfoView) {
         card.delegate = self
     }
+    
+    func showPremiumProcess() {
+        router.showPremiumProcess()
+    }
 }
 
 //MARK: - MyStorageInteractorOutput

@@ -16,6 +16,10 @@ final class MyStorageRouter {
 //MARK: - MyStorageRouterInput
 extension MyStorageRouter: MyStorageRouterInput {
     
+    func showPremiumProcess() {
+        let controller = router.premium()
+        router.pushViewController(viewController: controller)
+    }
     
     func showCancelOfferAlert(with text: String) {
         let vc = PopUpController.with(title: TextConstants.offersInfo, message: text, image: .none, buttonTitle: TextConstants.offersOk)
