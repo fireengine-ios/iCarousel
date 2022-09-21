@@ -90,6 +90,11 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         setDefaultNavigationHeaderActions()
         headerContainingViewController?.isHeaderBehindContent = false
         headerContainingViewController?.statusBarBackgroundViewStyle = .plain(color: .background)
+        
+        // Handle parsed deeplink if any
+        PushNotificationService.shared.openActionScreen()
+        // handle a token pending action if any
+        PushNotificationService.shared.assignAndOpenPendingActionIfAny()
     }
     
     deinit {
