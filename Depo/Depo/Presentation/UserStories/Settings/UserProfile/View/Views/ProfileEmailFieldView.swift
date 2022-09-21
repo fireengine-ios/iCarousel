@@ -19,11 +19,7 @@ final class ProfileEmailFieldView: ProfileTextEnterView {
         }
     }
 
-    var showsVerificationStatus: Bool = true {
-        didSet {
-            updateVerificationVisibility()
-        }
-    }
+    var showsVerificationStatus: Bool = true
 
     weak var delegate: ProfileEmailFieldViewDelegate?
 
@@ -31,18 +27,11 @@ final class ProfileEmailFieldView: ProfileTextEnterView {
         get { super.isEditState }
         set {
             super.isEditState = newValue
-            updateVerificationVisibility()
         }
     }
     
     // MARK: Private
     static let verificationViewHeight: CGFloat = 16
-
-    private let verificationView: UIStackView = {
-        let view = UIStackView()
-        view.heightAnchor.constraint(equalToConstant: ProfileEmailFieldView.verificationViewHeight).isActive = true
-        return view
-    }()
 
     private let verifiedView: UIView = {
         let verifiedColor = ColorConstants.switcherGreenColor
@@ -82,7 +71,6 @@ final class ProfileEmailFieldView: ProfileTextEnterView {
         textField.autocapitalizationType = .none
 
         updateVerificationStatus()
-        updateVerificationVisibility()
         updateVerifyButtonStatus()
         setupLayout()
         
@@ -103,15 +91,11 @@ final class ProfileEmailFieldView: ProfileTextEnterView {
     }
     
     private func verifyButtonLayout() {
-        textField.addSubview(verifyButton)
+        addSubview(verifyButton)
         verifyButton.translatesAutoresizingMaskIntoConstraints = false
-        verifyButton.topAnchor.constraint(equalTo: textField.topAnchor, constant: 10).isActive = true
-        verifyButton.bottomAnchor.constraint(equalTo: textField.bottomAnchor, constant: -10).isActive = true
-        verifyButton.trailingAnchor.constraint(equalTo: textField.trailingAnchor, constant: -20).isActive = true
-    }
-
-    private func updateVerificationVisibility() {
-        verificationView.isHidden = !showsVerificationStatus || isEditState
+        verifyButton.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+        verifyButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
+        verifyButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
 
     private func updateVerificationStatus() {

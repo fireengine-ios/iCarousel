@@ -118,6 +118,7 @@ final class MyStorageViewController: BaseViewController {
     }()
     
     private lazy var policyView = SubscriptionsPolicyView()
+    private lazy var bannerView = PackagesBannerBuyPremiumView()
     
     private var menuViewModels = [ControlPackageType]()
     
@@ -129,6 +130,7 @@ final class MyStorageViewController: BaseViewController {
         
         menuTableView.delegate = self
         menuTableView.dataSource = self
+        bannerView.delegate = self
         
         setupCardStackView()
     }
@@ -146,6 +148,7 @@ final class MyStorageViewController: BaseViewController {
         activityManager.delegate = self
         automaticallyAdjustsScrollViewInsets = false
         setupLayout()
+        addPremiumBanner()
     }
     
     private func setupLayout() {
@@ -153,14 +156,19 @@ final class MyStorageViewController: BaseViewController {
         packagesStackView.addArrangedSubview(packages)
         packagesStackView.addArrangedSubview(policyStackView)
         policyStackView.addArrangedSubview(policyView)
-        
-        setupMyPackagesLayout()
     }
     
-    private func setupMyPackagesLayout() {
+    private func addPremiumBanner() {
+        guard !AuthoritySingleton.shared.accountType.isPremium else { return }
         
+        view.addSubview(bannerView)
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        bannerView.topAnchor.constraint(equalTo: view.topAnchor).activate()
+        bannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
+        bannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
+        bannerView.heightAnchor.constraint(equalToConstant: 137).activate()
     }
-        
+
     @IBAction private func restorePurhases() {
         startActivityIndicator()
         output.restorePurchasesPressed()
@@ -422,5 +430,12 @@ extension MyStorageViewController: ActivityIndicator {
 
     func stopActivityIndicator() {
         activityManager.stop()
+    }
+}
+
+// MARK: - BuyPremiumBannerDelegate
+extension MyStorageViewController: BuyPremiumBannerDelegate {
+    func buyPremium() {
+        output.showPremiumProcess()
     }
 }

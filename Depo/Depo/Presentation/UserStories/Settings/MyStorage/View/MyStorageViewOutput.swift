@@ -20,5 +20,6 @@ protocol MyStorageViewOutput {
     
     var availableOffers: [PackageOffer] { get }
     func getAccountTypePackages() -> AccountType
-    func viewWillAppear() 
+    func viewWillAppear()
+    func showPremiumProcess()
 }

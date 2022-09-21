@@ -1107,6 +1107,7 @@
 		52346AB728AD934000091C20 /* PasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5921D722564465005882CE /* PasswordView.xib */; };
 		52346AB828AD934100091C20 /* PasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5921D722564465005882CE /* PasswordView.xib */; };
 		52346AB928AD934200091C20 /* PasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5921D722564465005882CE /* PasswordView.xib */; };
+		52B9004F28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
 		52E0994528C1ECCB004AE4EC /* PackagesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56091F7552A900F49DA1 /* PackagesPresenter.swift */; };
 		52E0994628C1ECCC004AE4EC /* PackagesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56091F7552A900F49DA1 /* PackagesPresenter.swift */; };
 		52E0994728C1ECD0004AE4EC /* PackagesInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56061F7552A900F49DA1 /* PackagesInteractorOutput.swift */; };
@@ -1115,6 +1116,9 @@
 		52E0994A28C1ECD8004AE4EC /* PackagesInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56051F7552A900F49DA1 /* PackagesInteractorInput.swift */; };
 		52E0994B28C1ECE1004AE4EC /* PackagesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56041F7552A900F49DA1 /* PackagesInteractor.swift */; };
 		52E0994C28C1ECE2004AE4EC /* PackagesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56041F7552A900F49DA1 /* PackagesInteractor.swift */; };
+		52F78BA228D9E005001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
+		52F78BA628D9E036001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
+		52F78BA728D9E036001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
 		723C81CF3249CC1EF7F7DAF1 /* Pods_BilloFileProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF880A5861684656277FAD7B /* Pods_BilloFileProvider.framework */; };
 		723FF6D31512172E605BB2C3 /* Pods_Billo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE60BD355BDE6BAFF11EEDAB /* Pods_Billo.framework */; };
 		730A997222D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730A996F22D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift */; };
@@ -10076,6 +10080,7 @@
 		519FC5F5469BA37B42AA5339 /* Pods-BilloNotificationService.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BilloNotificationService.enterprise.xcconfig"; path = "Target Support Files/Pods-BilloNotificationService/Pods-BilloNotificationService.enterprise.xcconfig"; sourceTree = "<group>"; };
 		51B73FE0148359D56DBAC42C /* SplashViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashViewOutput.swift; sourceTree = "<group>"; };
 		522A5BBD8B55E5DF0DE0472B /* Pods-Billo.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billo.enterprise.xcconfig"; path = "Target Support Files/Pods-Billo/Pods-Billo.enterprise.xcconfig"; sourceTree = "<group>"; };
+		52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackagesBannerBuyPremiumView.swift; sourceTree = "<group>"; };
 		536B87BE9C6EA2601A4F42F3 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		5376886D3258645ED3B6E003 /* Pods-TC_Depo_LifeTech.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TC_Depo_LifeTech.debug.xcconfig"; path = "Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech.debug.xcconfig"; sourceTree = "<group>"; };
 		54C522C58BC4B88E39F9443C /* Pods_LifeboxFileProvider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxFileProvider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -14345,6 +14350,14 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		529DAF6F28D8750400648081 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
 		5525BBEDE21BEBBAE72FED00 /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -16972,6 +16985,7 @@
 		92004B2321AD0F2100582C45 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				529DAF6F28D8750400648081 /* SubViews */,
 				92004B2521AD0F2100582C45 /* MyStorageViewController.xib */,
 				92004B2621AD0F2100582C45 /* MyStorageViewController.swift */,
 				92004B5921AD136400582C45 /* MyStorageViewInput.swift */,
@@ -25730,6 +25744,7 @@
 				8C0E8DAE1FDEBDFF00789C91 /* RegistrationPresenter.swift in Sources */,
 				4A8CC304201A00D400C040C4 /* FaceImageViewController.swift in Sources */,
 				8C0E8DB01FDEBDFF00789C91 /* RegistrationInteractorInput.swift in Sources */,
+				52B9004F28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift in Sources */,
 				98758F622359BC3E00D06952 /* CampaignService.swift in Sources */,
 				8C0E8DB21FDEBDFF00789C91 /* RegistrationInteractorOutput.swift in Sources */,
 				B5450206255A863C004DBD41 /* PrivateShareSharedFilesViewController.swift in Sources */,
@@ -27662,6 +27677,7 @@
 				CE78490E22A685FB00662219 /* HomeCollectionViewDataSource.swift in Sources */,
 				CE78490F22A685FB00662219 /* CollectionViewSimpleHeaderWithText.swift in Sources */,
 				CE78491022A685FB00662219 /* SharedFactory.swift in Sources */,
+				52F78BA628D9E036001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */,
 				49C978372403047E00943F67 /* MobilePaymentPermissionView.swift in Sources */,
 				B558279424FE91600039DD11 /* ObjectRequestResponse.swift in Sources */,
 				CE78491122A685FB00662219 /* AutoSyncSettingsOptionView.swift in Sources */,
@@ -30229,6 +30245,7 @@
 				078130A52808215F00E09172 /* HeaderContainingViewControllerChild.swift in Sources */,
 				F013FA6D27FF2804004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift in Sources */,
 				CF8B66FE23CBC9D70021B021 /* FreeAppSpaceConfigurator.swift in Sources */,
+				52F78BA228D9E005001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */,
 				CF8B66FF23CBC9D70021B021 /* OfferParameters.swift in Sources */,
 				CF8B670023CBC9D70021B021 /* SegmentedControl.swift in Sources */,
 				F013FA8F280591DF004B9BB8 /* SecurityInfoWarningPopup.swift in Sources */,
@@ -30892,6 +30909,7 @@
 				981EA2F1247D4CA700A51B7D /* ContactsOperationView.swift in Sources */,
 				CF8B6B9723CBCA280021B021 /* SwipeableCardCell.swift in Sources */,
 				CF8B6B9823CBCA280021B021 /* FaceImageItemsViewOutput.swift in Sources */,
+				52F78BA728D9E036001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */,
 				CF8B6B9923CBCA280021B021 /* MusicInteractorInput.swift in Sources */,
 				F034DF2A274A544200E5C015 /* AlbumCountResponse.swift in Sources */,
 				07DB93922860AF5400D5CACF /* ASN1Container.swift in Sources */,
