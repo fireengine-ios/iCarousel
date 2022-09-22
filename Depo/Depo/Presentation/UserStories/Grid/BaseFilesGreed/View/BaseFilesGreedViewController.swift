@@ -34,7 +34,13 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     @IBOutlet weak var noFilesView: UIView!
     
-    @IBOutlet weak var noFilesLabel: UILabel!
+    @IBOutlet weak var noFilesLabel: UILabel! {
+        willSet {
+            newValue.font = .appFont(.medium, size: 16)
+            newValue.textColor = AppColor.label.color
+            newValue.text = TextConstants.photosVideosViewNoPhotoTitleText
+        }
+    }
     
     @IBOutlet weak var noFilesImage: UIImageView!
     
@@ -98,11 +104,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
                                                 font: .TurkcellSaturaDemFont(size: 19.0),
                                                 target: self,
                                                 selector: #selector(onBackButton))
-        
-        noFilesLabel.text = TextConstants.photosVideosViewNoPhotoTitleText
-        noFilesLabel.textColor = ColorConstants.textGrayColor
-        noFilesLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
-        
+                
         noFilesTopLabel?.text = TextConstants.folderEmptyText
         noFilesTopLabel?.textColor = ColorConstants.grayTabBarButtonsColor
         noFilesTopLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)
@@ -324,7 +326,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         topBarContainer.isHidden = needHideTopBar
         
         let service = output.getRemoteItemsService()
-        if service is DocumentService || service is MusicService {
+        if service is FavouritesService {
             startCreatingFilesButton.isHidden = true
         }
     }
@@ -524,6 +526,10 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         
         floatingHeaderContainerHeightConstraint.constant = underNavBarBarHeight
         calculatedUnderNavBarBarHeight = underNavBarBarHeight
+    }
+    
+    func showUploadFolder(with action: TabBarViewController.Action) {
+        self.customTabBarController?.handleAction(action)
     }
 }
 

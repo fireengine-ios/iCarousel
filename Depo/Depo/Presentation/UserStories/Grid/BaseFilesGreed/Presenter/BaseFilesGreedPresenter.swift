@@ -159,6 +159,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             service is PlacesItemsService ||
             service is PeopleItemsService {
             router.showUpload()
+        } else if service is DocumentService {
+            view.showUploadFolder(with: .uploadDocuments)
+        } else if service is MusicService {
+            view.showUploadFolder(with: .uploadMusic)
         }
         
         getContent()

@@ -96,6 +96,11 @@ enum Image: String, AppImage {
     case iconAddUnselect
     case iconArrowDownSmall
     
+    case popupDocuments
+    case popupFavorites
+    case popupShared
+    case popupMusic
+    
     ///  Files sorting
     case iconSizeSmallest
     case iconSizeLargest
@@ -140,4 +145,11 @@ enum Image: String, AppImage {
     /// Register
     case registerIconSelectCheck
     case registerIconSelectEmpty
+    
+    /// Gallery
+    case popupNoMemories
+    case popupNoVideo
+    case popupSuccessful
+    case popupUnsync
+
 }

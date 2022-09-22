@@ -46,9 +46,9 @@ final class EmptyView: UIView, NibInit {
                 case .trashBin:
                     return UIImage(named: "trash_big")
                 case .sharedBy:
-                    return nil
+                    return Image.popupShared.image
                 case .sharedWith:
-                    return nil
+                    return Image.popupShared.image
                 case .sharedInnerFolder:
                     return nil
             }
@@ -60,8 +60,8 @@ final class EmptyView: UIView, NibInit {
             newValue.text = ""
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
-            newValue.textColor = UIColor.lrBrownishGrey.withAlphaComponent(0.5)
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 18)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.medium, size: 16)
         }
     }
     

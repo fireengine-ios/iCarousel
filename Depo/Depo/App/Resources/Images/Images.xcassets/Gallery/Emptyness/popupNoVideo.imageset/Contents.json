@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "popupNoVideo.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
