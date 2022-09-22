@@ -66,9 +66,7 @@ class PublicShareViewController: BaseViewController {
     private func configureUI() {
         setTitle(withString: mainTitle ?? "")
         if isRootFolder == true {
-            navigationItem.leftBarButtonItem = UIBarButtonItem(title: TextConstants.cancel,
-                                                               target: self,
-                                                               selector: #selector(onCancelTapped))
+           setTitle(withString: localized(.publicShareSaveTitle))
         }
 
         view.addSubview(actionView)
