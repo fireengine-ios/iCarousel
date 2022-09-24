@@ -39,7 +39,7 @@ final class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController 
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+        super.viewWillDisappear(animated)
         delegate?.viewWillDisappear()
     }
     
