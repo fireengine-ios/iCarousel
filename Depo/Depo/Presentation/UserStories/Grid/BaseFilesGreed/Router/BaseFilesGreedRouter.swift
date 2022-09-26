@@ -107,7 +107,8 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
     }
     
     func openCreateNewAlbum() {
-        let createAlbum = router.createNewAlbum()
-        router.pushViewController(viewController: createAlbum)
+        let controller = router.createNewAlbum()
+        let nController = NavigationController(rootViewController: controller)
+        router.presentViewController(controller: nController)
     }
 }

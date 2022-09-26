@@ -308,6 +308,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     override func operationStarted(type: ElementTypes) {
         startAsyncOperationDisableScreen()
         basePassingPresenter?.stopModeSelected()
+        dismiss(animated: true)
     }
     
     func selectFolder(_ selectFolder: SelectFolderViewController) {
