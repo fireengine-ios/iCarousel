@@ -118,7 +118,7 @@ final class RegistrationViewController: BaseViewController {
         let newValue = BorderedPasswordEnterView()
         newValue.textField.enablesReturnKeyAutomatically = true
         newValue.textField.quickDismissPlaceholder = TextConstants.enterYourNewPassword
-        newValue.textField.addTarget(RegistrationViewController.self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        newValue.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         newValue.titleLabel.text = TextConstants.registrationCellTitlePassword
         
         return newValue
