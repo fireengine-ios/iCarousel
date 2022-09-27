@@ -104,8 +104,10 @@ final class ProfileEmailFieldView: ProfileTextEnterView {
     }
     
     func updateVerifyButtonStatus() {
-        guard let text = textField.text else { return }
-        verifyButton.isHidden = text.isEmpty
+        if !isVerified {
+            guard let text = textField.text else { return }
+            verifyButton.isHidden = text.isEmpty
+        }
     }
 
     @objc private func verifyTapped() {
