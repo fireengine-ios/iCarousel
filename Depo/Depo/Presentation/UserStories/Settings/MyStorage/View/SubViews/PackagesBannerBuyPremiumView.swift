@@ -10,6 +10,7 @@ import Foundation
 
 protocol BuyPremiumBannerDelegate: AnyObject {
     func buyPremium()
+    func hideBanner()
 }
 
 class PackagesBannerBuyPremiumView: UIView {
@@ -118,7 +119,7 @@ class PackagesBannerBuyPremiumView: UIView {
     }
     
     @objc private func cancelButtonAction() {
-        isHidden = true
+        delegate?.hideBanner()
     }
     
     @objc private func buyButtonAction() {
