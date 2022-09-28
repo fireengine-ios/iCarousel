@@ -24,13 +24,42 @@ class AlbumDetailViewController: BaseFilesGreedChildrenViewController {
         super.viewWillAppear(animated)
     }
     
-    override func configurateNavigationBar() {
-        navigationItem.rightBarButtonItem = nil
-    }
-    
     override func stopSelection() {
         super.stopSelection()
         configurateNavigationBar()
+    }
+    
+    override func configureNavBarActions(isSelecting: Bool = false) {
+        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] _ in
+            self?.output.searchPressed(output: self)
+        })
+        
+        let more = NavBarWithAction(navItem: NavigationBarList().newAlbum, action: { [weak self] _ in
+            let menuItems = self?.floatingButtonsArray.map { buttonType in
+                AlertFilesAction(title: buttonType.title, icon: buttonType.image) { [weak self] in
+                    self?.customTabBarController?.handleAction(buttonType.action)
+                }
+            }
+            
+            let menu = AlertFilesActionsViewController()
+            menu.configure(with: menuItems ?? [])
+            menu.presentAsDrawer()
+        })
+        
+        let rightActions: [NavBarWithAction] = [more, search]
+        search.navItem.imageInsets.left = 28
+        navBarConfigurator.configure(right: isSelecting ? [] : rightActions, left: [])
+        
+        let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
+        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+        navigationItem.title = ""
+    }
+    
+    override func showNoFilesTop(text: String) {
+        noFilesTopLabel?.text = text
+        noFilesTopLabel?.isHidden = !cardsContainerView.viewsArray.isEmpty
+        topBarContainer.isHidden = false
+        view.layoutIfNeeded()
     }
 }
 
