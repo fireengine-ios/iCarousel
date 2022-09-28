@@ -838,7 +838,7 @@ enum ElementTypes {
         case .makePersonThumbnail:
             return nil
         case .albumDetails:
-            return Image.iconAlbum.image
+            return Image.iconInfo.image
         case .instaPick:
             return Image.iconPrint.image
         case .endSharing:
