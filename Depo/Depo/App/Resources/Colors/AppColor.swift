@@ -34,8 +34,10 @@ enum AppColor {
     case label
     case darkLabel
     case tint
+    case darkTint
     case separator
     case lightText
+    case button
 
     case loginShadowBlue
     case darkContentOverlay
@@ -100,6 +102,7 @@ enum AppColor {
     case SettingsPackagesRecommendedFour
     case settingsPremiumListShadow
     case settingsBackground
+    case passcodeTint
     
     //MARK: Landing
     case landingGradientFinish

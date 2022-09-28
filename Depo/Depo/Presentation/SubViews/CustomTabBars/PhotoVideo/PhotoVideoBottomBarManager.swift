@@ -15,7 +15,7 @@ final class PhotoVideoBottomBarManager {
         style: .default,
         tintColor: AppColor.tint.color,
         unselectedItemTintColor: AppColor.label.color,
-        barTintColor: AppColor.background.color
+        barTintColor: AppColor.secondaryBackground.color
     )
     
     var editingTabBar: BottomSelectionTabBarDrawerViewController?
