@@ -29,7 +29,6 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
     @IBOutlet private weak var firstSecurityCodeTextField: SecurityCodeTextField!
     
     @IBOutlet private weak var errorLabel: UILabel!
-    @IBOutlet private weak var bottomTimerConstraint: NSLayoutConstraint!
     
     @IBOutlet private var codeTextFields: [SecurityCodeTextField]!
         
@@ -140,12 +139,6 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
                     return
                 }
                 
-                UIView.animate(withDuration: options.animationDuration) {
-                    self.bottomTimerConstraint?.constant = options.endFrame.height + Constants.timerLabelBottomOffset
-
-                    self.view.layoutIfNeeded()
-                }
-                
                 if let viewToScroll = (self.errorLabel.isHidden ? self.firstSecurityCodeTextField : self.errorLabel) {
                     ///convertion work correctly with firstSecurityCodeTextField-firstSecurityCodeTextField pair
                     ///and
@@ -166,8 +159,6 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
                 }
                 
                 UIView.animate(withDuration: options.animationDuration) {
-                    self.bottomTimerConstraint?.constant =  Constants.timerLabelBottomOffset
-                    
                     var inset = self.scrollView.contentInset
                     inset.bottom = 0
                     self.scrollView.contentInset = inset

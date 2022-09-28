@@ -20,7 +20,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhoneVerificationViewController" customModule="Billo" customModuleProvider="target">
             <connections>
-                <outlet property="bottomTimerConstraint" destination="RTF-zn-wF5" id="KBe-tU-y2J"/>
                 <outlet property="continueButton" destination="uMm-oE-mE6" id="xwd-fa-5jo"/>
                 <outlet property="errorLabel" destination="IFw-4W-fGh" id="wl4-aG-2z8"/>
                 <outlet property="firstSecurityCodeTextField" destination="CWG-cv-wHj" id="Dh3-Of-Sop"/>
@@ -170,9 +169,7 @@
                             <constraints>
                                 <constraint firstItem="l6h-HQ-d7e" firstAttribute="leading" secondItem="0SH-Ei-3RR" secondAttribute="leading" constant="16" id="4gJ-hX-y7T"/>
                                 <constraint firstAttribute="trailing" secondItem="l6h-HQ-d7e" secondAttribute="trailing" constant="16" id="5lh-gy-GH7"/>
-                                <constraint firstItem="ovo-An-V0t" firstAttribute="top" secondItem="MBT-Oh-9zN" secondAttribute="bottom" constant="16" id="6wR-As-DPr"/>
                                 <constraint firstItem="ovo-An-V0t" firstAttribute="centerX" secondItem="0SH-Ei-3RR" secondAttribute="centerX" id="APc-0R-Cce"/>
-                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="IFw-4W-fGh" secondAttribute="bottom" priority="750" constant="16" id="BpS-mI-04p"/>
                                 <constraint firstAttribute="trailing" secondItem="MBT-Oh-9zN" secondAttribute="trailing" constant="16" id="Edv-Dw-hI3"/>
                                 <constraint firstItem="OGS-6f-YoM" firstAttribute="leading" secondItem="ovo-An-V0t" secondAttribute="leading" id="Gqi-Ll-bVr"/>
                                 <constraint firstItem="IFw-4W-fGh" firstAttribute="top" secondItem="ovo-An-V0t" secondAttribute="bottom" constant="20" id="KFq-ey-u5n"/>
@@ -190,7 +187,6 @@
                                 <constraint firstItem="ovo-An-V0t" firstAttribute="top" secondItem="0SH-Ei-3RR" secondAttribute="bottom" constant="-745" id="rgc-zV-LPz"/>
                                 <constraint firstItem="LGv-1U-f4g" firstAttribute="top" secondItem="0SH-Ei-3RR" secondAttribute="top" constant="16" id="sP0-N6-S0V"/>
                                 <constraint firstItem="OGS-6f-YoM" firstAttribute="top" secondItem="ovo-An-V0t" secondAttribute="top" id="tLd-OF-bnB"/>
-                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MBT-Oh-9zN" secondAttribute="bottom" priority="750" constant="16" id="vyb-Tv-CLU"/>
                             </constraints>
                         </view>
                     </subviews>
