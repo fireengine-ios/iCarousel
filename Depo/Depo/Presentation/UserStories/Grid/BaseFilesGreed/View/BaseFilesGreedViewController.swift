@@ -106,8 +106,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
                                                 selector: #selector(onBackButton))
                 
         noFilesTopLabel?.text = TextConstants.folderEmptyText
-        noFilesTopLabel?.textColor = ColorConstants.grayTabBarButtonsColor
-        noFilesTopLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)
+        noFilesTopLabel?.textColor = AppColor.label.color
+        noFilesTopLabel?.font = .appFont(.medium, size: 16)
         
         startCreatingFilesButton.setTitle(TextConstants.photosVideosViewNoPhotoButtonText, for: .normal)
         
