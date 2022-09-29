@@ -52,6 +52,7 @@ enum Image: String, AppImage {
     case iconMove
     case iconAlbum
     case iconUnstar
+    case iconCancelBorder
 
     ///  Files Tab
     case iconFileAudio
