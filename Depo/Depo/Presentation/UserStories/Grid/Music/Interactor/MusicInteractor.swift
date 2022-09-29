@@ -27,7 +27,8 @@ final class MusicInteractor: BaseFilesGreedInteractor {
     override func viewIsReady() {
         super.viewIsReady()
         
-        getSpotifyStatus()
+//        FACELIFT: Spotify is removed
+//        getSpotifyStatus()
     }
     
     private func getSpotifyStatus() {

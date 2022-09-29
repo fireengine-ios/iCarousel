@@ -110,6 +110,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         noFilesTopLabel?.font = .appFont(.medium, size: 16)
         
         startCreatingFilesButton.setTitle(TextConstants.photosVideosViewNoPhotoButtonText, for: .normal)
+        startCreatingFilesButton.titleLabel?.font = .appFont(.medium, size: 16)
         
         scrollIndicator?.changeHiddenState(to: true, animated: false)
         

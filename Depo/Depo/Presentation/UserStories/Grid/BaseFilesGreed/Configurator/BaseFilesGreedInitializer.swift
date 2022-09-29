@@ -83,7 +83,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     class func initializeDocumentsAndMusicViewController(with nibName: String) -> UIViewController {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
-        viewController.floatingButtonsArray.append(contentsOf: [.uploadDocuments,.uploadMusic, .importFromSpotify])
+        viewController.floatingButtonsArray.append(contentsOf: [.uploadDocuments,.uploadMusic])
         viewController.cardsContainerView.isEnable = true
         viewController.cardsContainerView.addPermittedPopUpViewTypes(types: [.upload, .download])
         

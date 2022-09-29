@@ -206,7 +206,7 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
         } else if remoteItems is AlbumService {
             return UIImage(named: "ImageNoAlbums")!
         } else if remoteItems is AllFilesService {
-            return UIImage(named: "ImageNoAllFiles")!
+            return UIImage()
         } else if remoteItems is FavouritesService {
             return Image.popupFavorites.image
         }
