@@ -13,12 +13,13 @@ final class MusicPresenter: DocumentsGreedPresenter {
     override func updateNoFilesView() {
         super.updateNoFilesView()
         
-        DispatchQueue.main.async {
-            let isHiddenSpotifyStatusView = !((self.interactor as? MusicInteractorInput)?.spotifyStatus?.jobStatus != .unowned)
-            
-            (self.view as? MusicViewInput)?.didRefreshSpotifyStatusView(isHidden: isHiddenSpotifyStatusView,
-                                                                        status: (self.interactor as? MusicInteractorInput)?.spotifyStatus)
-        }
+//        FACELIFT: Spotify is removed
+//        DispatchQueue.main.async {
+//            let isHiddenSpotifyStatusView = !((self.interactor as? MusicInteractorInput)?.spotifyStatus?.jobStatus != .unowned)
+//
+//            (self.view as? MusicViewInput)?.didRefreshSpotifyStatusView(isHidden: isHiddenSpotifyStatusView,
+//                                                                        status: (self.interactor as? MusicInteractorInput)?.spotifyStatus)
+//        }
     }
     
 }

@@ -774,7 +774,7 @@ enum ElementTypes {
         case .rename:
             return Image.iconEdit.image
         case .removeAlbum:
-            return UIImage(named: "DeleteShareButton")
+            return Image.iconCancelBorder.image
         case .moveToTrash:
             return Image.iconDelete.image
         case .restore:
