@@ -47,6 +47,7 @@ final class ResetPasswordViewController: BaseViewController, KeyboardHandler {
         newValue.textField.quickDismissPlaceholder = TextConstants.enterYourNewPassword
         newValue.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         newValue.titleLabel.text = TextConstants.registrationCellTitlePassword
+        newValue.layer.borderColor = AppColor.forgetBorder.cgColor
         return newValue
     }()
 
@@ -57,6 +58,7 @@ final class ResetPasswordViewController: BaseViewController, KeyboardHandler {
         newValue.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         newValue.titleLabel.text = TextConstants.registrationCellTitleReEnterPassword
         newValue.textField.returnKeyType = .done
+        newValue.layer.borderColor = AppColor.forgetBorder.cgColor
         return newValue
     }()
 

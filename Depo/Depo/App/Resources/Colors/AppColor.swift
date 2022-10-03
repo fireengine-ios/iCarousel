@@ -122,6 +122,7 @@ enum AppColor {
     case forgetPassTimer
     case forgetPassTextGreen
     case forgetPassTextRed
+    case forgetBorder
     
     // MARK: Register
     case registerPrivacyPolicy
