@@ -103,6 +103,7 @@ enum AppColor {
     case settingsPremiumListShadow
     case settingsBackground
     case passcodeTint
+    case settingsButtonNormal
     
     //MARK: Landing
     case landingGradientFinish

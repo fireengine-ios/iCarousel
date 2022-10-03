@@ -35,7 +35,6 @@ final class ValidateSecurityQuestionViewController: BaseViewController, Keyboard
             newValue.distribution = .fill
             newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
-
             newValue.addArrangedSubview(questionView)
             newValue.addArrangedSubview(answerView)
         }
@@ -44,10 +43,10 @@ final class ValidateSecurityQuestionViewController: BaseViewController, Keyboard
     @IBOutlet private weak var continueButton: WhiteButtonWithRoundedCorner! {
         willSet {
             newValue.setTitle(localized(.resetPasswordContinueButton), for: .normal)
-            newValue.setTitleColor(ColorConstants.whiteColor, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.setBackgroundColor(UIColor.lrTealishTwo.withAlphaComponent(0.5), for: .disabled)
-            newValue.setBackgroundColor(UIColor.lrTealishTwo, for: .normal)
+            newValue.setTitleColor(.white, for: .normal)
+            newValue.titleLabel?.font = .appFont(.medium, size: 14)
+            newValue.setBackgroundColor(AppColor.forgetPassButtonDisable.color, for: .disabled)
+            newValue.setBackgroundColor(AppColor.forgetPassButtonNormal.color, for: .normal)
         }
     }
 
