@@ -10,27 +10,19 @@ import UIKit
 
 class ProfilePasswordEnterView: ProfileTextEnterView {
     
-    private let showPasswordImage = UIImage(named: "ic_eye_show")
-    private let hidePasswordImage = UIImage(named: "ic_eye_hide")
-    private let eyeSize: CGFloat = 44
+    private let showPasswordImage = Image.iconHideSee.image
+    private let hidePasswordImage = Image.iconHideUnselect.image
+    private let eyeSize: CGFloat = 24
     
-    private let eyeButton = UIButton()
-    
-    private let topStackView: UIStackView = {
-        let newValue = UIStackView()
-        newValue.spacing = 8
-        newValue.axis = .horizontal
-        newValue.alignment = .fill
-        newValue.distribution = .fill
-        
-        return newValue
+    private lazy var eyeButton: UIButton = {
+       let view = UIButton()
+        view.setImage(showPasswordImage, for: .normal)
+        view.setImage(hidePasswordImage, for: .selected)
+        return view
     }()
     
     override func initialSetup() {
         super.initialSetup()
-
-        eyeButton.setImage(showPasswordImage, for: .normal)
-        eyeButton.setImage(hidePasswordImage, for: .selected)
         eyeButton.addTarget(self, action: #selector(changeVisibilityState), for: .touchUpInside)
         updatePasswordButtonAccessibility()
         
@@ -40,24 +32,13 @@ class ProfilePasswordEnterView: ProfileTextEnterView {
     }
     
     override func setupStackView() {
-        addSubview(stackView)
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        let edgeInset: CGFloat = 0
-        stackView.topAnchor.constraint(equalTo: topAnchor, constant: edgeInset).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: edgeInset).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -edgeInset).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4).isActive = true
-        
-        topStackView.addArrangedSubview(titleLabel)
-        topStackView.addArrangedSubview(eyeButton)
-        
+        super.setupStackView()
+        textField.addSubview(eyeButton)
+        eyeButton.translatesAutoresizingMaskIntoConstraints = false
         eyeButton.widthAnchor.constraint(equalToConstant: eyeSize).isActive = true
-        eyeButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
-        
-        stackView.addArrangedSubview(topStackView)
-        stackView.addArrangedSubview(subtitleLabel)
-        stackView.addArrangedSubview(textField)
+        eyeButton.heightAnchor.constraint(equalToConstant: eyeSize).isActive = true
+        eyeButton.centerYAnchor.constraint(equalTo: textField.centerYAnchor).isActive = true
+        eyeButton.trailingAnchor.constraint(equalTo: textField.trailingAnchor, constant: -16).isActive = true
     }
 
     @objc private func changeVisibilityState() {
