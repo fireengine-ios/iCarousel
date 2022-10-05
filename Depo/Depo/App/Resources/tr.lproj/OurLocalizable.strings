@@ -594,7 +594,7 @@
 "%d%% Restored…" = "%d%% indiriliyor";
 "%d%% Analyzed…" = "%d%% analiz ediliyor";
 "START USING" = "Başla";
-"landingTitle0" = "Yaşa, Biriktir, Hatırla";
+"landingTitle0" = "Yaşa, Biriktir, Hatırla\n";
 "landingSubTitle0" = "Tüm anılarını, dosyalarını ve kontaklarını lifebox'a güvenle yedekle!";
 "landingTitle1" = "Otomatik Yedekleme";
 "landingSubTitle1" = "Fotoğraf ve videoların anında lifebox'ta!";
