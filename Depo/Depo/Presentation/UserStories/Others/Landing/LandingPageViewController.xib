@@ -10,7 +10,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LandingPageViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
-                <outlet property="pageControll" destination="QK5-jM-UnF" id="Sth-7P-g7l"/>
                 <outlet property="scrollView" destination="T2S-xG-IEs" id="7Sg-LC-2P0"/>
                 <outlet property="startUsingButton" destination="P4m-k9-Sk8" id="07m-H6-6ym"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -38,28 +37,16 @@
                         <action selector="onStartUsingButton" destination="-1" eventType="touchUpInside" id="Ove-ZV-1Jw"/>
                     </connections>
                 </button>
-                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="QK5-jM-UnF">
-                    <rect key="frame" x="122.5" y="548" width="130" height="26"/>
-                    <color key="tintColor" red="0.2666666667" green="0.80000000000000004" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="130" id="ceT-MW-1Ga"/>
-                    </constraints>
-                    <connections>
-                        <action selector="pageControlChangeValue:" destination="-1" eventType="valueChanged" id="sLd-hL-iiL"/>
-                    </connections>
-                </pageControl>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="0.25098039215686274" green="0.80000000000000004" blue="0.81568627450980391" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="T2S-xG-IEs" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="Kb9-Xb-jRy"/>
-                <constraint firstItem="P4m-k9-Sk8" firstAttribute="top" secondItem="QK5-jM-UnF" secondAttribute="bottom" constant="16" id="Ohb-Pq-qwF"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="P4m-k9-Sk8" secondAttribute="bottom" constant="32" id="PZM-hy-aRr"/>
                 <constraint firstItem="T2S-xG-IEs" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="TSN-SD-CPH"/>
                 <constraint firstItem="T2S-xG-IEs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="U5f-uk-hTQ"/>
                 <constraint firstItem="P4m-k9-Sk8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="UEZ-h9-qYh"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="P4m-k9-Sk8" secondAttribute="trailing" constant="20" id="Uws-nX-iHn"/>
-                <constraint firstItem="QK5-jM-UnF" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="eAv-62-E5u"/>
                 <constraint firstItem="T2S-xG-IEs" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="k5s-6r-9uS"/>
                 <constraint firstItem="P4m-k9-Sk8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="y9n-KQ-dAy"/>
             </constraints>

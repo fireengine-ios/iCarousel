@@ -11,7 +11,6 @@ import UIKit
 final class LandingPageViewController: ViewController, UIScrollViewDelegate {
     
     @IBOutlet private weak var scrollView: UIScrollView!
-    @IBOutlet private weak var pageControll: UIPageControl!
     @IBOutlet private weak var startUsingButton: UIButton! {
         willSet {
             newValue.setTitle(TextConstants.landingStartUsing, for: .normal)
@@ -66,10 +65,7 @@ final class LandingPageViewController: ViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setStatusBarHiddenForLandscapeIfNeed(true)
-        //        navigationBarHidden = true
-        
-        pageControll.isHidden = true
-        
+  
         view.addSubview(dots)
         dots.translatesAutoresizingMaskIntoConstraints = false
         dots.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -102,19 +98,13 @@ final class LandingPageViewController: ViewController, UIScrollViewDelegate {
         scrollView.contentSize = CGSize(width: scrollView.frame.size.width * CGFloat(count), height: scrollView.frame.size.height)
         
         scrollView.isPagingEnabled = true
-        pageControll.numberOfPages = count
     }
     
     //MARK: Utility Methods (public)
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let positionX = scrollView.contentOffset.x
         let page = Int(positionX/scrollView.frame.size.width)
-        
-        pageControll.currentPage = page
         currentPage = page
-        
-        pageControll.pageIndicatorTintColor = AppColor.landingPageIndicator.color
-        pageControll.currentPageIndicatorTintColor = AppColor.landingPageIndicator.color
     }
     
     //MARK: Utility Methods (private)
@@ -182,11 +172,6 @@ final class LandingPageViewController: ViewController, UIScrollViewDelegate {
     private func trackScreen(pageNum: Int) {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.WelcomePage(pageNum: pageNum))
         analyticsService.logScreen(screen: .welcomePage(pageNum))
-    }
-    
-    //MARK: Actions
-    @IBAction func pageControlChangeValue(_ sender: UIPageControl) {
-        scrollToPage(sender.currentPage)
     }
     
     @IBAction private func onStartUsingButton() {
