@@ -35,7 +35,7 @@ class PageForLanding: UIViewController {
     }
     
     func configurateForIndex(index: Int) {
-        titleLabel.text = getTitleForIndex(index: index)
+        titleLabel.text = getTitleForIndex(index: index).replacingOccurrences(of: "\n", with: "")
         subTitleLabel.text = getSubTitleForIndex(index: index)
         
         var localizationPrefix = "EN"
