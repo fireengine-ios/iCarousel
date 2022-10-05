@@ -135,6 +135,12 @@ enum AppColor {
     case premiumSecondGradient
     case premiumThirdGradient
     case premiumGradientLabel
+    
+    // MARK: Landing
+    case landingSubtitle
+    case landingTitle
+    case landingButton
+    case landingPageIndicator
 
     //TODO: Facelift: Uncomment below
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - FACELIFT - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
