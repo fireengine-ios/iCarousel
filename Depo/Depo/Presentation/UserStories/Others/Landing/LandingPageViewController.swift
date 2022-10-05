@@ -69,11 +69,12 @@ final class LandingPageViewController: ViewController, UIScrollViewDelegate {
         view.addSubview(dots)
         dots.translatesAutoresizingMaskIntoConstraints = false
         dots.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        dots.widthAnchor.constraint(equalToConstant: 52).isActive = true
+        dots.widthAnchor.constraint(equalToConstant: 66).isActive = true
         dots.heightAnchor.constraint(equalToConstant: 6).isActive = true
         dots.bottomAnchor.constraint(equalTo: startUsingButton.topAnchor, constant: -20).isActive = true
         
         dots.addArrangedSubview(getCurrentPageView())
+        dots.addArrangedSubview(getDefaultPageView())
         dots.addArrangedSubview(getDefaultPageView())
         dots.addArrangedSubview(getDefaultPageView())
     }
@@ -83,7 +84,7 @@ final class LandingPageViewController: ViewController, UIScrollViewDelegate {
         ///For tracking first Welcome Page by GA when view controller appears
         trackScreen(pageNum: 1)
         
-        let count = 3
+        let count = 4
         for i in 0..<count {
             let contr = PageForLanding(nibName: "PageForLanding", bundle: nil)
             contr.view.frame = CGRect(x: CGFloat(i) * scrollView.frame.size.width,
@@ -117,7 +118,7 @@ final class LandingPageViewController: ViewController, UIScrollViewDelegate {
             view.removeFromSuperview()
         }
         
-        for i in 0..<3 {
+        for i in 0..<4 {
             if i == currentPage {
                 dots.addArrangedSubview(getCurrentPageView())
             } else {
