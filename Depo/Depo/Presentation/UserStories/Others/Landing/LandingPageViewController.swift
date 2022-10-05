@@ -11,12 +11,25 @@ import UIKit
 final class LandingPageViewController: ViewController, UIScrollViewDelegate {
     
     @IBOutlet private weak var scrollView: UIScrollView!
-    @IBOutlet private weak var pageControll: UIPageControl!
-    @IBOutlet private weak var startUsingButton: BlueButtonWithMediumWhiteText! {
-        didSet {
-            startUsingButton.setTitle(TextConstants.landingStartUsing, for: .normal)
+    @IBOutlet private weak var startUsingButton: UIButton! {
+        willSet {
+            newValue.setTitle(TextConstants.landingStartUsing, for: .normal)
+            newValue.titleLabel?.font = .appFont(.bold, size: 14)
+            newValue.setTitleColor(.white, for: .normal)
+            newValue.setBackgroundColor(AppColor.landingButton.color, for: .normal)
+            newValue.layer.cornerRadius = 23
+            newValue.layer.masksToBounds = true
         }
     }
+    
+    lazy var dots: UIStackView = {
+       let view = UIStackView()
+        view.axis = .horizontal
+        view.spacing = 6
+        view.alignment = .fill
+        view.distribution = .fill
+        return view
+    }()
     
     private lazy var autoSyncRoutingService = AutoSyncRoutingService()
     
@@ -27,8 +40,11 @@ final class LandingPageViewController: ViewController, UIScrollViewDelegate {
     private var currentPage: Int = 0 {
         willSet {
             if currentPage != newValue {
-                trackScreen(pageNum: newValue+1)
+                trackScreen(pageNum: newValue + 1)
             }
+        }
+        didSet {
+            updateDots()
         }
     }
     
@@ -49,6 +65,18 @@ final class LandingPageViewController: ViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setStatusBarHiddenForLandscapeIfNeed(true)
+  
+        view.addSubview(dots)
+        dots.translatesAutoresizingMaskIntoConstraints = false
+        dots.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        dots.widthAnchor.constraint(equalToConstant: 66).isActive = true
+        dots.heightAnchor.constraint(equalToConstant: 6).isActive = true
+        dots.bottomAnchor.constraint(equalTo: startUsingButton.topAnchor, constant: -20).isActive = true
+        
+        dots.addArrangedSubview(getCurrentPageView())
+        dots.addArrangedSubview(getDefaultPageView())
+        dots.addArrangedSubview(getDefaultPageView())
+        dots.addArrangedSubview(getDefaultPageView())
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -56,9 +84,8 @@ final class LandingPageViewController: ViewController, UIScrollViewDelegate {
         ///For tracking first Welcome Page by GA when view controller appears
         trackScreen(pageNum: 1)
         
-        let count = 6
-        for i in 0...count {
-            
+        let count = 4
+        for i in 0..<count {
             let contr = PageForLanding(nibName: "PageForLanding", bundle: nil)
             contr.view.frame = CGRect(x: CGFloat(i) * scrollView.frame.size.width,
                                       y: 0,
@@ -69,36 +96,59 @@ final class LandingPageViewController: ViewController, UIScrollViewDelegate {
             contr.configurateForIndex(index: i)
         }
         
-        scrollView.contentSize = CGSize(width: scrollView.frame.size.width * CGFloat(count + 1),
-                                        height: scrollView.frame.size.height)
+        scrollView.contentSize = CGSize(width: scrollView.frame.size.width * CGFloat(count), height: scrollView.frame.size.height)
         
         scrollView.isPagingEnabled = true
-        pageControll.numberOfPages = count + 1
     }
     
     //MARK: Utility Methods (public)
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let positionX = scrollView.contentOffset.x
         let page = Int(positionX/scrollView.frame.size.width)
-        
-        pageControll.currentPage = page
         currentPage = page
-        
-        if page == 0 {
-            pageControll.pageIndicatorTintColor = ColorConstants.whiteColor
-            pageControll.currentPageIndicatorTintColor = ColorConstants.lightGrayColor
-            
-        } else {
-            pageControll.pageIndicatorTintColor = ColorConstants.blueColor
-            pageControll.currentPageIndicatorTintColor = ColorConstants.darkBlueColor
-        }
     }
     
     //MARK: Utility Methods (private)
     private func scrollToPage(_ page: Int) {
-        scrollView.setContentOffset(CGPoint(x: scrollView.frame.size.width * CGFloat(page),
-                                            y: 0),
-                                    animated: true)
+        scrollView.setContentOffset(CGPoint(x: scrollView.frame.size.width * CGFloat(page), y: 0), animated: true)
+    }
+    
+    func updateDots() {
+        dots.subviews.forEach { (view) in
+            view.removeFromSuperview()
+        }
+        
+        for i in 0..<4 {
+            if i == currentPage {
+                dots.addArrangedSubview(getCurrentPageView())
+            } else {
+                dots.addArrangedSubview(getDefaultPageView())
+            }
+        }
+    }
+    
+    private func getDefaultPageView() -> UIView {
+        let view = UIView()
+        view.backgroundColor = AppColor.landingPageIndicator.color
+        view.layer.cornerRadius = 3
+        view.layer.masksToBounds = true
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.widthAnchor.constraint(equalToConstant: 6).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 6).isActive = true
+        return view
+    }
+    
+    private func getCurrentPageView() -> UIView {
+        let view = UIView()
+        view.backgroundColor = AppColor.landingPageIndicator.color
+        view.layer.cornerRadius = 3
+        view.layer.masksToBounds = true
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 6).isActive = true
+        return view
     }
     
     private func openAutoSyncIfNeeded() {
@@ -123,11 +173,6 @@ final class LandingPageViewController: ViewController, UIScrollViewDelegate {
     private func trackScreen(pageNum: Int) {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.WelcomePage(pageNum: pageNum))
         analyticsService.logScreen(screen: .welcomePage(pageNum))
-    }
-    
-    //MARK: Actions
-    @IBAction func pageControlChangeValue(_ sender: UIPageControl) {
-        scrollToPage(sender.currentPage)
     }
     
     @IBAction private func onStartUsingButton() {
