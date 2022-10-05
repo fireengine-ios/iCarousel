@@ -128,26 +128,22 @@ class ProfileTextEnterView: UIView {
     }
     
     private func createTitleView() -> UIView {
-        let titleView = UIView()
-        titleView.addSubview(titleLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            titleLabel.centerYAnchor.constraint(equalTo: titleView.centerYAnchor, constant: 0),
-            titleLabel.leadingAnchor.constraint(equalTo: titleView.leadingAnchor, constant: 0),
-            titleLabel.heightAnchor.constraint(equalToConstant: 20)
-        ])
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.spacing = 4
+        view.alignment = .fill
+        view.distribution = .fill
         
-        titleView.addSubview(infoButton)
-        infoButton.translatesAutoresizingMaskIntoConstraints = false
-        infoButton.setBackgroundColor(AppColor.primaryBackground.color, for: .normal)
-        NSLayoutConstraint.activate([
-            infoButton.topAnchor.constraint(equalTo: titleView.topAnchor , constant: 5),
-            infoButton.bottomAnchor.constraint(equalTo: titleView.bottomAnchor , constant: -5),
-            infoButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 0),
-            infoButton.trailingAnchor.constraint(lessThanOrEqualTo: titleView.trailingAnchor)
-        ])
+        view.backgroundColor = .white
         
-        return titleView
+        view.addArrangedSubview(UIView.getSpacing(width: 5, height: 24))
+        view.addArrangedSubview(titleLabel)
+        view.addArrangedSubview(infoButton)
+        view.addArrangedSubview(UIView.getSpacing(width: 5, height: 24))
+        
+        infoButton.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        infoButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        return view
     }
     
     func showSubtitleAnimated() {

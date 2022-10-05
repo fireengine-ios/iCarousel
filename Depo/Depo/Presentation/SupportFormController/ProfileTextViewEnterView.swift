@@ -80,10 +80,9 @@ final class ProfileTextViewEnterView: UIView {
         addSubview(stackView)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        let edgeInset: CGFloat = 0
-        stackView.topAnchor.constraint(equalTo: topAnchor, constant: edgeInset).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: edgeInset).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -edgeInset).isActive = true
+        stackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4).isActive = true
         
         /// why it is not working instead of constraints???

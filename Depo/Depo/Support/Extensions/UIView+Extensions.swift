@@ -39,4 +39,10 @@ extension UIView {
         
     }
     
+    static func getSpacing(width: CGFloat, height: CGFloat) -> UIView {
+        let view = UIView()
+        view.widthAnchor.constraint(equalToConstant: width).isActive = true
+        view.heightAnchor.constraint(equalToConstant: height).isActive = true
+        return view
+    }
 }
