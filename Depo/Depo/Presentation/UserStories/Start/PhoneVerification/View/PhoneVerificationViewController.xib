@@ -20,7 +20,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhoneVerificationViewController" customModule="Billo" customModuleProvider="target">
             <connections>
-                <outlet property="continueButton" destination="uMm-oE-mE6" id="xwd-fa-5jo"/>
                 <outlet property="errorLabel" destination="IFw-4W-fGh" id="wl4-aG-2z8"/>
                 <outlet property="firstSecurityCodeTextField" destination="CWG-cv-wHj" id="Dh3-Of-Sop"/>
                 <outlet property="infoTitle" destination="Ccz-va-Sqj" id="qPK-hX-hQG"/>
@@ -139,7 +138,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="l6h-HQ-d7e">
-                                    <rect key="frame" x="16" y="253" width="382" height="104"/>
+                                    <rect key="frame" x="16" y="253" width="382" height="44"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYV-5x-qeY" userLabel="Resend">
                                             <rect key="frame" x="0.0" y="0.0" width="382" height="44"/>
@@ -149,17 +148,6 @@
                                             <state key="normal" title="Resend"/>
                                             <connections>
                                                 <action selector="resendCode:" destination="-1" eventType="touchUpInside" id="Nx7-LL-X2x"/>
-                                            </connections>
-                                        </button>
-                                        <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMm-oE-mE6" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="60" width="382" height="44"/>
-                                            <color key="backgroundColor" name="forgetPassButtonNormal"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="44" id="I4J-Lg-Jiq"/>
-                                            </constraints>
-                                            <state key="normal" title="Continue"/>
-                                            <connections>
-                                                <action selector="continueButton:" destination="-1" eventType="touchUpInside" id="gbT-Mj-XBy"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -213,9 +201,6 @@
         </view>
     </objects>
     <resources>
-        <namedColor name="forgetPassButtonNormal">
-            <color red="0.019607843137254902" green="0.17647058823529413" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
