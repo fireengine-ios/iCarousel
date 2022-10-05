@@ -30,7 +30,7 @@ final class SetSecurityQuestionViewController: BaseViewController, KeyboardHandl
     @IBOutlet private weak var saveButton: RoundedButton! {
         willSet {
             newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.setBackgroundColor(UIColor.lrTealish, for: .normal)
+            newValue.setBackgroundColor(AppColor.settingsButtonNormal.color, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
             newValue.setTitle(TextConstants.fileInfoSave, for: .normal)
         }

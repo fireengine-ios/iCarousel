@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,15 +25,15 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HnN-EC-hzr" userLabel="Container View">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="310"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="311"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="200" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PuM-C9-C2o">
                                     <rect key="frame" x="20" y="20" width="374" height="200"/>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8OT-cb-3wr" customClass="WhiteButtonWithRoundedCorner" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="93" y="242" width="228" height="44"/>
+                                    <rect key="frame" x="28" y="242" width="358" height="45"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="44" id="rqN-V0-gqe"/>
+                                        <constraint firstAttribute="height" constant="45" id="rqN-V0-gqe"/>
                                     </constraints>
                                     <state key="normal" title="Button"/>
                                     <connections>
@@ -42,14 +42,14 @@
                                 </button>
                             </subviews>
                             <constraints>
+                                <constraint firstItem="8OT-cb-3wr" firstAttribute="leading" secondItem="HnN-EC-hzr" secondAttribute="leading" constant="28" id="1Rk-Uc-gB5"/>
                                 <constraint firstItem="8OT-cb-3wr" firstAttribute="top" secondItem="PuM-C9-C2o" secondAttribute="bottom" constant="22" id="83A-zm-vb8"/>
                                 <constraint firstAttribute="bottom" secondItem="8OT-cb-3wr" secondAttribute="bottom" constant="24" id="CAM-5m-rGO"/>
                                 <constraint firstItem="PuM-C9-C2o" firstAttribute="top" secondItem="HnN-EC-hzr" secondAttribute="top" constant="20" id="dpp-ij-jn7"/>
+                                <constraint firstAttribute="trailing" secondItem="8OT-cb-3wr" secondAttribute="trailing" constant="28" id="gwp-h5-bOE"/>
                                 <constraint firstAttribute="trailing" secondItem="PuM-C9-C2o" secondAttribute="trailing" constant="20" symbolic="YES" id="m1Y-sX-KkE"/>
-                                <constraint firstItem="8OT-cb-3wr" firstAttribute="width" secondItem="HnN-EC-hzr" secondAttribute="width" multiplier="0.55" id="oWy-eB-oOw"/>
                                 <constraint firstItem="PuM-C9-C2o" firstAttribute="centerX" secondItem="HnN-EC-hzr" secondAttribute="centerX" id="p77-Yd-mnU"/>
                                 <constraint firstItem="PuM-C9-C2o" firstAttribute="leading" secondItem="HnN-EC-hzr" secondAttribute="leading" constant="20" id="tjl-F6-Wwh"/>
-                                <constraint firstItem="8OT-cb-3wr" firstAttribute="centerX" secondItem="HnN-EC-hzr" secondAttribute="centerX" id="y3i-dr-G6m"/>
                             </constraints>
                         </view>
                     </subviews>

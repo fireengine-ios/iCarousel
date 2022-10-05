@@ -28,6 +28,11 @@ final class SecretAnswerView: UIView, NibInit {
             newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
             newValue.quickDismissPlaceholder = TextConstants.userProfileSecretQuestionAnswerPlaseholder
+            newValue.layer.borderWidth = 1.0
+            newValue.layer.borderColor = AppColor.darkTextAndLightGray.cgColor
+            newValue.layer.cornerRadius = 8.0
+            newValue.setLeftPaddingPoints(10)
+            newValue.setRightPaddingPoints(10)
         }
     }
     
@@ -38,15 +43,6 @@ final class SecretAnswerView: UIView, NibInit {
             newValue.isHidden = true
             newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
-        }
-    }
-    
-    @IBOutlet private weak var lineView: UIView! {
-        willSet {
-            newValue.isOpaque = true
-            newValue.layer.borderWidth = 1.0
-            newValue.layer.borderColor = AppColor.darkTextAndLightGray.cgColor
-            newValue.layer.cornerRadius = 8.0
         }
     }
     

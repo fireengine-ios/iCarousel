@@ -103,6 +103,7 @@ enum AppColor {
     case settingsPremiumListShadow
     case settingsBackground
     case passcodeTint
+    case settingsButtonNormal
     
     //MARK: Landing
     case landingGradientFinish
@@ -121,6 +122,7 @@ enum AppColor {
     case forgetPassTimer
     case forgetPassTextGreen
     case forgetPassTextRed
+    case forgetBorder
     
     // MARK: Register
     case registerPrivacyPolicy
