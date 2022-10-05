@@ -52,7 +52,7 @@
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits"/>
                                                                 </textField>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconArrowDownDisable" translatesAutoresizingMaskIntoConstraints="NO" id="bK9-w3-htI">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconArrowDownActive" translatesAutoresizingMaskIntoConstraints="NO" id="bK9-w3-htI">
                                                                     <rect key="frame" x="53.5" y="17" width="22.5" height="22"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="bK9-w3-htI" secondAttribute="height" multiplier="1:1" id="ZPJ-lX-HpE"/>
@@ -175,7 +175,7 @@
         </view>
     </objects>
     <resources>
-        <image name="iconArrowDownDisable" width="24" height="24"/>
+        <image name="iconArrowDownActive" width="24" height="24"/>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
