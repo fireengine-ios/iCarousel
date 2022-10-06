@@ -134,7 +134,7 @@ class ProfileTextEnterView: UIView {
         view.alignment = .fill
         view.distribution = .fill
         
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor.background.color
         
         view.addArrangedSubview(UIView.getSpacing(width: 5, height: 24))
         view.addArrangedSubview(titleLabel)

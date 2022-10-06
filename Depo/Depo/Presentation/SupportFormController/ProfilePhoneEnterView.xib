@@ -121,7 +121,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" name="background"/>
                                                     <constraints>
                                                         <constraint firstItem="npA-QB-IdW" firstAttribute="leading" secondItem="zCR-lg-7Jm" secondAttribute="leading" constant="9" id="AHO-Rj-FTk"/>
                                                         <constraint firstAttribute="bottom" secondItem="npA-QB-IdW" secondAttribute="bottom" id="OSD-cy-rUC"/>
@@ -188,6 +188,9 @@
     </objects>
     <resources>
         <image name="iconArrowDownActive" width="24" height="24"/>
+        <namedColor name="background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

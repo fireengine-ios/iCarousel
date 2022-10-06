@@ -142,6 +142,7 @@ enum Image: String, AppImage {
     /// Forget My Password
     case forgetPassPopupLock
     case forgetPassSelectedRadio
+    case emptyCircle
     
     /// Register
     case registerIconSelectCheck
