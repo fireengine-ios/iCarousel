@@ -87,7 +87,7 @@ final class ForgotPasswordViewController: ViewController {
     
     private func setupInputTitle() {
         let titleLabel = loginEnterView.titleLabel
-        loginEnterView.textField.text = "yilmaz.edis@consultant.solidict.com"
+        loginEnterView.textField.text = ""
         titleLabel.textColor = AppColor.forgetPassText.color
 
         if Device.isIpad {

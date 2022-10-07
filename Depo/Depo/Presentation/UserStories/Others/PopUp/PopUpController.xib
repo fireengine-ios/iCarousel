@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -47,37 +48,58 @@
                     </constraints>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RH9-1C-TFf" userLabel="Insets View">
-                    <rect key="frame" x="20" y="110" width="335" height="174"/>
+                    <rect key="frame" x="20" y="80" width="335" height="204"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="faa-BU-RXd">
-                            <rect key="frame" x="0.0" y="0.0" width="335" height="20.5"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XKY-VJ-kva">
-                            <rect key="frame" x="0.0" y="32.5" width="335" height="20.5"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ute-ez-40c">
-                            <rect key="frame" x="0.0" y="129" width="335" height="45"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="VEd-6W-k27">
+                            <rect key="frame" x="0.0" y="0.0" width="335" height="53"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOr-8G-xaM" customClass="InsetsButton" customModule="Billo" customModuleProvider="target">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="faa-BU-RXd" userLabel="Title">
+                                    <rect key="frame" x="0.0" y="0.0" width="335" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XKY-VJ-kva" userLabel="Message">
+                                    <rect key="frame" x="0.0" y="32.5" width="335" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ute-ez-40c">
+                            <rect key="frame" x="0.0" y="159" width="335" height="45"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NFC-y7-dq2">
                                     <rect key="frame" x="0.0" y="0.0" width="163.5" height="45"/>
-                                    <state key="normal" title="Button">
-                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </state>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
-                                    </userDefinedRuntimeAttributes>
-                                    <connections>
-                                        <action selector="actionFirstButton:" destination="-1" eventType="touchUpInside" id="IZp-kj-ddd"/>
-                                    </connections>
-                                </button>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOr-8G-xaM" customClass="InsetsButton" customModule="Billo" customModuleProvider="target">
+                                            <rect key="frame" x="-35.5" y="0.0" width="234.5" height="45"/>
+                                            <color key="backgroundColor" name="AccentColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="45" id="GoE-lq-Xgn"/>
+                                                <constraint firstAttribute="width" priority="750" constant="234" id="WcU-4H-zWZ"/>
+                                            </constraints>
+                                            <state key="normal" title="Button">
+                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="actionFirstButton:" destination="-1" eventType="touchUpInside" id="IZp-kj-ddd"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="tOr-8G-xaM" firstAttribute="centerX" secondItem="NFC-y7-dq2" secondAttribute="centerX" id="2Q9-Mz-9jF"/>
+                                        <constraint firstItem="tOr-8G-xaM" firstAttribute="centerY" secondItem="NFC-y7-dq2" secondAttribute="centerY" id="Ac2-Im-aNQ"/>
+                                    </constraints>
+                                </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fg5-a4-N9J" customClass="InsetsButton" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="171.5" y="0.0" width="163.5" height="45"/>
+                                    <color key="backgroundColor" name="aquaMarineTwo"/>
                                     <state key="normal" title="Button">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
@@ -96,22 +118,19 @@
                     </subviews>
                     <color key="backgroundColor" name="secondaryBackground"/>
                     <constraints>
-                        <constraint firstItem="XKY-VJ-kva" firstAttribute="top" secondItem="faa-BU-RXd" secondAttribute="bottom" constant="12" id="3bZ-7K-bt1"/>
-                        <constraint firstItem="XKY-VJ-kva" firstAttribute="leading" secondItem="RH9-1C-TFf" secondAttribute="leading" id="4Re-rv-VK8"/>
-                        <constraint firstAttribute="trailing" secondItem="faa-BU-RXd" secondAttribute="trailing" id="4Sl-R9-S8w"/>
                         <constraint firstItem="Ute-ez-40c" firstAttribute="leading" secondItem="RH9-1C-TFf" secondAttribute="leading" id="ACr-DR-JW2"/>
-                        <constraint firstItem="faa-BU-RXd" firstAttribute="top" secondItem="RH9-1C-TFf" secondAttribute="top" id="CDa-WL-UuK"/>
+                        <constraint firstItem="VEd-6W-k27" firstAttribute="leading" secondItem="RH9-1C-TFf" secondAttribute="leading" id="DZa-iQ-boo"/>
                         <constraint firstAttribute="trailing" secondItem="Ute-ez-40c" secondAttribute="trailing" id="IR6-jB-ZMk"/>
-                        <constraint firstItem="Ute-ez-40c" firstAttribute="top" relation="greaterThanOrEqual" secondItem="XKY-VJ-kva" secondAttribute="bottom" constant="30" id="aYZ-wg-vs7"/>
-                        <constraint firstItem="faa-BU-RXd" firstAttribute="leading" secondItem="RH9-1C-TFf" secondAttribute="leading" id="fKA-O4-9V2"/>
-                        <constraint firstAttribute="trailing" secondItem="XKY-VJ-kva" secondAttribute="trailing" id="gE1-Q9-Cff"/>
+                        <constraint firstItem="VEd-6W-k27" firstAttribute="top" secondItem="RH9-1C-TFf" secondAttribute="top" id="Ket-xe-fcW"/>
+                        <constraint firstItem="Ute-ez-40c" firstAttribute="top" relation="greaterThanOrEqual" secondItem="VEd-6W-k27" secondAttribute="bottom" constant="30" id="nbU-DL-Wf5"/>
+                        <constraint firstAttribute="trailing" secondItem="VEd-6W-k27" secondAttribute="trailing" id="pdI-xP-V6U"/>
                         <constraint firstAttribute="bottom" secondItem="Ute-ez-40c" secondAttribute="bottom" id="zkI-dl-gMF"/>
                     </constraints>
                 </view>
             </subviews>
             <constraints>
                 <constraint firstItem="RH9-1C-TFf" firstAttribute="leading" secondItem="8qh-Pd-GkY" secondAttribute="leading" constant="20" id="CgI-Pg-Psq"/>
-                <constraint firstItem="RH9-1C-TFf" firstAttribute="top" secondItem="8qh-Pd-GkY" secondAttribute="top" constant="110" id="NuZ-B5-1oA"/>
+                <constraint firstItem="RH9-1C-TFf" firstAttribute="top" secondItem="8qh-Pd-GkY" secondAttribute="top" constant="80" id="NuZ-B5-1oA"/>
                 <constraint firstAttribute="bottom" secondItem="RH9-1C-TFf" secondAttribute="bottom" constant="16" id="OdK-dU-mmu"/>
                 <constraint firstItem="b7l-4P-zk8" firstAttribute="centerX" secondItem="8qh-Pd-GkY" secondAttribute="centerX" id="Vr5-ab-TNo"/>
                 <constraint firstItem="b7l-4P-zk8" firstAttribute="top" secondItem="8qh-Pd-GkY" secondAttribute="top" constant="10" id="YZy-qK-msa"/>
@@ -122,8 +141,17 @@
         </view>
     </objects>
     <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="aquaMarineTwo">
+            <color red="0.33300000429153442" green="0.875" blue="0.875" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="secondaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

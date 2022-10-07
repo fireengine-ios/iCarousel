@@ -45,7 +45,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0SH-Ei-3RR">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="895.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="LGv-1U-f4g" userLabel="Titles">
                                     <rect key="frame" x="16" y="16" width="382" height="57"/>
@@ -65,13 +65,19 @@
                                     </subviews>
                                 </stackView>
                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBT-Oh-9zN" customClass="SmartTimerLabel" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="16" y="89" width="382" height="45.5"/>
+                                    <rect key="frame" x="16" y="93" width="382" height="45.5"/>
                                     <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="40"/>
                                     <color key="textColor" systemColor="tintColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ovo-An-V0t">
-                                    <rect key="frame" x="57" y="150.5" width="300" height="46"/>
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IFw-4W-fGh">
+                                    <rect key="frame" x="38" y="158.5" width="338" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ovo-An-V0t" userLabel="Codes Stack View">
+                                    <rect key="frame" x="57" y="199" width="300" height="46"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CWG-cv-wHj" customClass="SecurityCodeTextField" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="40" height="46"/>
@@ -127,18 +133,8 @@
                                         </textField>
                                     </subviews>
                                 </stackView>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OGS-6f-YoM" userLabel="barrier view">
-                                    <rect key="frame" x="57" y="150.5" width="300" height="46"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </view>
-                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IFw-4W-fGh">
-                                    <rect key="frame" x="38" y="216.5" width="338" height="20.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="l6h-HQ-d7e">
-                                    <rect key="frame" x="16" y="253" width="382" height="44"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="l6h-HQ-d7e" userLabel="Button Stack View">
+                                    <rect key="frame" x="16" y="265" width="382" height="44"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYV-5x-qeY" userLabel="Resend">
                                             <rect key="frame" x="0.0" y="0.0" width="382" height="44"/>
@@ -159,22 +155,17 @@
                                 <constraint firstAttribute="trailing" secondItem="l6h-HQ-d7e" secondAttribute="trailing" constant="16" id="5lh-gy-GH7"/>
                                 <constraint firstItem="ovo-An-V0t" firstAttribute="centerX" secondItem="0SH-Ei-3RR" secondAttribute="centerX" id="APc-0R-Cce"/>
                                 <constraint firstAttribute="trailing" secondItem="MBT-Oh-9zN" secondAttribute="trailing" constant="16" id="Edv-Dw-hI3"/>
-                                <constraint firstItem="OGS-6f-YoM" firstAttribute="leading" secondItem="ovo-An-V0t" secondAttribute="leading" id="Gqi-Ll-bVr"/>
-                                <constraint firstItem="IFw-4W-fGh" firstAttribute="top" secondItem="ovo-An-V0t" secondAttribute="bottom" constant="20" id="KFq-ey-u5n"/>
                                 <constraint firstItem="IFw-4W-fGh" firstAttribute="centerX" secondItem="ovo-An-V0t" secondAttribute="centerX" id="Ldx-kx-EYW"/>
                                 <constraint firstItem="MBT-Oh-9zN" firstAttribute="leading" secondItem="0SH-Ei-3RR" secondAttribute="leading" constant="16" id="RKw-Cv-Bgg"/>
-                                <constraint firstItem="MBT-Oh-9zN" firstAttribute="top" secondItem="LGv-1U-f4g" secondAttribute="bottom" constant="16" id="RTF-zn-wF5"/>
-                                <constraint firstItem="ovo-An-V0t" firstAttribute="top" secondItem="MBT-Oh-9zN" secondAttribute="bottom" constant="16" id="TpU-Ex-Kfd"/>
-                                <constraint firstItem="OGS-6f-YoM" firstAttribute="bottom" secondItem="ovo-An-V0t" secondAttribute="bottom" id="WJn-f7-7zp"/>
                                 <constraint firstAttribute="trailing" secondItem="IFw-4W-fGh" secondAttribute="trailing" constant="38" id="WOz-LE-LxW"/>
+                                <constraint firstItem="ovo-An-V0t" firstAttribute="top" secondItem="IFw-4W-fGh" secondAttribute="bottom" constant="20" id="Y9S-Jc-STR"/>
                                 <constraint firstItem="LGv-1U-f4g" firstAttribute="leading" secondItem="0SH-Ei-3RR" secondAttribute="leading" constant="16" id="YPT-X4-axA"/>
-                                <constraint firstItem="l6h-HQ-d7e" firstAttribute="top" secondItem="IFw-4W-fGh" secondAttribute="bottom" constant="16" id="ZxR-qJ-yMt"/>
-                                <constraint firstItem="OGS-6f-YoM" firstAttribute="trailing" secondItem="ovo-An-V0t" secondAttribute="trailing" id="eCp-rX-Ehv"/>
+                                <constraint firstItem="MBT-Oh-9zN" firstAttribute="top" secondItem="LGv-1U-f4g" secondAttribute="bottom" constant="20" id="YwT-Td-1KF"/>
+                                <constraint firstItem="l6h-HQ-d7e" firstAttribute="top" secondItem="ovo-An-V0t" secondAttribute="bottom" constant="20" id="bj2-zR-R0k"/>
                                 <constraint firstAttribute="trailing" secondItem="LGv-1U-f4g" secondAttribute="trailing" constant="16" id="gKr-pm-92r"/>
                                 <constraint firstItem="IFw-4W-fGh" firstAttribute="leading" secondItem="0SH-Ei-3RR" secondAttribute="leading" constant="38" id="ih2-hu-ILm"/>
-                                <constraint firstItem="ovo-An-V0t" firstAttribute="top" secondItem="0SH-Ei-3RR" secondAttribute="bottom" constant="-745" id="rgc-zV-LPz"/>
-                                <constraint firstItem="LGv-1U-f4g" firstAttribute="top" secondItem="0SH-Ei-3RR" secondAttribute="top" constant="16" id="sP0-N6-S0V"/>
-                                <constraint firstItem="OGS-6f-YoM" firstAttribute="top" secondItem="ovo-An-V0t" secondAttribute="top" id="tLd-OF-bnB"/>
+                                <constraint firstItem="IFw-4W-fGh" firstAttribute="top" secondItem="MBT-Oh-9zN" secondAttribute="bottom" constant="20" id="mo6-04-xRz"/>
+                                <constraint firstItem="LGv-1U-f4g" firstAttribute="top" secondItem="0SH-Ei-3RR" secondAttribute="top" constant="16" id="vPI-fz-ecp"/>
                             </constraints>
                         </view>
                     </subviews>
