@@ -80,13 +80,13 @@ final class PasswordRulesView: UIView {
     private func configureRuleStatus(with status: PasswordRuleStatus) {
         switch status {
         case .invalid:
-            titleLabel.textColor = ColorConstants.invalidPasswordRule
+            titleLabel.textColor = AppColor.forgetPassTextRed.color
             imageView.image = UIImage(named: "unapproved_rule")
         case .valid:
-            titleLabel.textColor = ColorConstants.switcherGreenColor
+            titleLabel.textColor = AppColor.forgetPassTextGreen.color
             imageView.image = UIImage(named: "approved_rule")
         case .unedited:
-            titleLabel.textColor = ColorConstants.lightText
+            titleLabel.textColor = AppColor.forgetPassText.color
             imageView.image = UIImage(named: "unedited_dot")
         }
     }
