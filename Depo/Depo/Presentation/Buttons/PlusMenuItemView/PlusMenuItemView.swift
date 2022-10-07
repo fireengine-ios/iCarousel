@@ -26,7 +26,7 @@ enum FloatingButtonsType {
         case .takePhoto:
             return TextConstants.takePhoto
         case .upload:
-            return TextConstants.upload
+            return TextConstants.uploadPhotos
         case .uploadFiles, .uploadDocuments:
             return TextConstants.uploadFiles
         case .uploadMusic:
@@ -48,13 +48,14 @@ enum FloatingButtonsType {
         switch self {
         case .takePhoto:
             return Image.iconCamera.image
-        case .upload,
-             .uploadFiles,
+        case .uploadFiles,
              .uploadDocuments,
              .uploadMusic,
              .uploadFromLifebox,
              .uploadFromLifeboxFavorites:
             return Image.iconFileUpload.image
+        case .upload:
+            return Image.iconUploadPhoto.image
         case .createAStory:
             return Image.iconStory.image
         case .newFolder, .createAlbum:
