@@ -52,7 +52,7 @@
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits"/>
                                                                 </textField>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconArrowDownDisable" translatesAutoresizingMaskIntoConstraints="NO" id="bK9-w3-htI">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconArrowDownActive" translatesAutoresizingMaskIntoConstraints="NO" id="bK9-w3-htI">
                                                                     <rect key="frame" x="53.5" y="17" width="22.5" height="22"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="bK9-w3-htI" secondAttribute="height" multiplier="1:1" id="ZPJ-lX-HpE"/>
@@ -111,14 +111,26 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="106" height="20"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npA-QB-IdW">
-                                                    <rect key="frame" x="106" y="0.0" width="41.5" height="20"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zCR-lg-7Jm">
+                                                    <rect key="frame" x="106" y="0.0" width="50" height="20"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npA-QB-IdW">
+                                                            <rect key="frame" x="9" y="0.0" width="32" height="20"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" name="background"/>
+                                                    <constraints>
+                                                        <constraint firstItem="npA-QB-IdW" firstAttribute="leading" secondItem="zCR-lg-7Jm" secondAttribute="leading" constant="9" id="AHO-Rj-FTk"/>
+                                                        <constraint firstAttribute="bottom" secondItem="npA-QB-IdW" secondAttribute="bottom" id="OSD-cy-rUC"/>
+                                                        <constraint firstAttribute="trailing" secondItem="npA-QB-IdW" secondAttribute="trailing" constant="9" id="jMj-c6-V93"/>
+                                                        <constraint firstItem="npA-QB-IdW" firstAttribute="top" secondItem="zCR-lg-7Jm" secondAttribute="top" id="lIL-PO-vRN"/>
+                                                    </constraints>
+                                                </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gzP-1t-qfF">
-                                                    <rect key="frame" x="147.5" y="0.0" width="265.5" height="20"/>
+                                                    <rect key="frame" x="156" y="0.0" width="257" height="20"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
@@ -175,7 +187,10 @@
         </view>
     </objects>
     <resources>
-        <image name="iconArrowDownDisable" width="24" height="24"/>
+        <image name="iconArrowDownActive" width="24" height="24"/>
+        <namedColor name="background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

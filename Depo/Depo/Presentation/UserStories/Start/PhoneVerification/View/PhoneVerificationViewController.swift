@@ -31,21 +31,6 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
     @IBOutlet private weak var errorLabel: UILabel!
     
     @IBOutlet private var codeTextFields: [SecurityCodeTextField]!
-        
-    @IBOutlet weak var continueButton: RoundedInsetsButton! {
-        willSet {
-            newValue.adjustsFontSizeToFitWidth()
-            newValue.setTitle(localized(.resetPasswordContinueButton), for: .normal)
-            newValue.setTitleColor(.white, for: .normal)
-            newValue.titleLabel?.font = .appFont(.medium, size: 16)
-            newValue.setBackgroundColor(AppColor.forgetPassButtonNormal.color, for: .normal)
-            newValue.setBackgroundColor(AppColor.forgetPassButtonDisable.color, for: .disabled)
-            newValue.layer.borderColor = AppColor.forgetPassButtonNormal.cgColor
-            newValue.isUserInteractionEnabled = true
-            newValue.isEnabled = true
-            newValue.isOpaque = true
-        }
-    }
     
     @IBOutlet private weak var resendCodeButton: UIButton! {
         willSet {
@@ -89,9 +74,6 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
         }
     }
     
-    @IBAction func continueButton(_ sender: UIButton) {
-        output.verificationCodeEntered()
-    }
     @IBAction func resendCode(_ sender: Any) {
         hiddenError()
         output.resendButtonPressed()
@@ -279,7 +261,6 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
     
     func showError(_ error: String) {
         errorLabel.isHidden = false
-        continueButton.isEnabled = false
         errorLabel.text = error
     }
 }
@@ -321,7 +302,7 @@ extension PhoneVerificationViewController: UITextFieldDelegate, SmartTimerLabelD
         
         if currentStr.count == inputTextLimit, (!timerLabel.isDead || !timerEnabled) {
             output.currentSecurityCodeChanged(with: string)
-            continueButton.isEnabled = true
+            output.verificationCodeEntered()
             return true
         } else if currentStr.count > inputTextLimit {
             return false
@@ -337,6 +318,5 @@ extension PhoneVerificationViewController: UITextFieldDelegate, SmartTimerLabelD
     func timerDidFinishRunning() {
         output.timerFinishedRunning(with: timerLabel.isShowMessageWithDropTimer)
         timerLabel.isShowMessageWithDropTimer = true
-        continueButton.isEnabled = false
     }
 }

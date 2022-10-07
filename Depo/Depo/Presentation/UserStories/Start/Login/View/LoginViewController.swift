@@ -93,7 +93,7 @@ final class LoginViewController: BaseViewController {
             newValue.textField.autocapitalizationType = .none
             newValue.textField.autocorrectionType = .no
             newValue.textField.quickDismissPlaceholder = TextConstants.loginEmailOrPhonePlaceholder
-            newValue.titleLabel.text = "  " + TextConstants.loginCellTitleEmail + "  "
+            newValue.titleLabel.text = TextConstants.loginCellTitleEmail
             newValue.textField.textColor = AppColor.label.color
         }
     }
@@ -102,7 +102,7 @@ final class LoginViewController: BaseViewController {
         willSet {
             newValue.textField.enablesReturnKeyAutomatically = true
             newValue.textField.quickDismissPlaceholder = TextConstants.loginPasswordPlaceholder
-            newValue.titleLabel.text = "  " + TextConstants.loginCellTitlePassword + "  "
+            newValue.titleLabel.text = TextConstants.loginCellTitlePassword
             newValue.textField.textColor = AppColor.label.color
         }
     }
