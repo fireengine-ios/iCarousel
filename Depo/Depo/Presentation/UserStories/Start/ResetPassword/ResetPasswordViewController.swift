@@ -13,7 +13,7 @@ final class ResetPasswordViewController: BaseViewController, KeyboardHandler {
     private let resetPasswordService: ResetPasswordService
     private let validator: UserValidator
 
-    init(resetPasswordService: ResetPasswordService = ResetPasswordService(), validator: UserValidator = UserValidator()) {
+    init(resetPasswordService: ResetPasswordService, validator: UserValidator = UserValidator()) {
         self.resetPasswordService = resetPasswordService
         self.validator = validator
         super.init(nibName: nil, bundle: nil)
