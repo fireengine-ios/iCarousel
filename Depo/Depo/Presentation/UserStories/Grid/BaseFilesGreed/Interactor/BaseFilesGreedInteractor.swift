@@ -203,10 +203,6 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
             return Image.popupDocuments.image
         } else if remoteItems is StoryService {
             return UIImage(named: "ImageNoStories")!
-        } else if remoteItems is AlbumService {
-            return UIImage(named: "ImageNoAlbums")!
-        } else if remoteItems is AllFilesService {
-            return UIImage()
         } else if remoteItems is FavouritesService {
             return Image.popupFavorites.image
         }
