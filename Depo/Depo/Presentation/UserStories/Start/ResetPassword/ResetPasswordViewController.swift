@@ -84,7 +84,7 @@ final class ResetPasswordViewController: BaseViewController, KeyboardHandler {
         let newValue = PasswordRulesView()
         newValue.titleLabel.text = TextConstants.passwordCapitalizationAndNumberRule
         newValue.titleLabel.font = .appFont(.medium, size: 12)
-        newValue.titleLabel.textColor = AppColor.forgetPassTextGreen.color
+        newValue.titleLabel.textColor = AppColor.forgetPassText.color
         return newValue
     }()
 
@@ -92,7 +92,7 @@ final class ResetPasswordViewController: BaseViewController, KeyboardHandler {
         let newValue = PasswordRulesView()
         newValue.titleLabel.text = TextConstants.passwordSequentialRule
         newValue.titleLabel.font = .appFont(.medium, size: 12)
-        newValue.titleLabel.textColor = AppColor.forgetPassTextRed.color
+        newValue.titleLabel.textColor = AppColor.forgetPassText.color
         return newValue
     }()
 
@@ -189,19 +189,19 @@ final class ResetPasswordViewController: BaseViewController, KeyboardHandler {
                 characterRuleView.status = .unedited
                 sequentialRuleView.status = .unedited
             case .passwordMissingNumbers:
-                if capitalizationRuleView.status != .invalid { capitalizationRuleView.status = .unedited}
+                capitalizationRuleView.status = .invalid
             case .passwordMissingLowercase:
-                if capitalizationRuleView.status != .invalid { capitalizationRuleView.status = .unedited}
+                capitalizationRuleView.status = .invalid
             case .passwordMissingUppercase:
-                if capitalizationRuleView.status != .invalid { capitalizationRuleView.status = .unedited}
+                capitalizationRuleView.status = .invalid
             case .passwordExceedsSameCharactersLimit:
-                if sequentialRuleView.status != .invalid { sequentialRuleView.status = .unedited}
+                sequentialRuleView.status = .invalid
             case .passwordExceedsSequentialCharactersLimit:
-                if sequentialRuleView.status != .invalid { sequentialRuleView.status = .unedited}
+                sequentialRuleView.status = .invalid
             case .passwordExceedsMaximumLength:
-                if characterRuleView.status != .invalid { characterRuleView.status = .unedited}
+                characterRuleView.status = .invalid
             case .passwordBelowMinimumLength:
-                if characterRuleView.status != .invalid { characterRuleView.status = .unedited}
+                characterRuleView.status = .invalid
             case .repasswordIsEmpty:
                 rePasswordEnterView.showSubtitleTextAnimated(text: TextConstants.registrationCellPlaceholderReFillPassword)
             case .passwordsNotMatch:
