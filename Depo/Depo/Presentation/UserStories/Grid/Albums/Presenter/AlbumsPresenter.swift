@@ -124,9 +124,6 @@ extension AlbumsPresenter: AlbumDetailModuleOutput {
     
     func onAlbumRemoved() {
         reloadData()
-        if let router = router as? AlbumsRouter {
-            router.back()
-        }
     }
     
     func onAlbumDeleted() {

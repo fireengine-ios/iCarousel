@@ -1435,7 +1435,6 @@ extension MoreFilesActionsInteractor {
                     return
                 }
                 
-                self.output?.successPopupWillAppear()
                 if SnackbarType(operationType: elementType) != nil {
                     self.showSnackbar(elementType: elementType, itemsType: itemsType, relatedItems: relatedItems)
                 } else if let message = elementType.alertSuccessMessage(divorseItems: itemsType) {
