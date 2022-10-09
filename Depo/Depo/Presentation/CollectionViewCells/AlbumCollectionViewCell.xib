@@ -88,14 +88,18 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6J8-Vs-50W" customClass="AlbumCellView" customModule="Billo" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="341" height="121"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3H5-qh-3Jq">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P6F-Wn-fos">
                                 <rect key="frame" x="3" y="3" width="335" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" name="primaryBackground"/>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P6F-Wn-fos">
-                                <rect key="frame" x="3" y="3" width="335" height="86"/>
-                                <color key="backgroundColor" name="primaryBackground"/>
-                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconAlbum" translatesAutoresizingMaskIntoConstraints="NO" id="rkg-v1-gdk">
+                                <rect key="frame" x="154.5" y="30" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="HxJ-A3-P8S"/>
+                                    <constraint firstAttribute="width" constant="32" id="wpt-Ld-qUh"/>
+                                </constraints>
+                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LNQ-WG-hXG" customClass="LoadingImageView" customModule="Billo" customModuleProvider="target">
                                 <rect key="frame" x="5" y="5" width="331" height="82"/>
                             </imageView>
@@ -118,29 +122,22 @@
                         </subviews>
                         <color key="backgroundColor" name="primaryBackground"/>
                         <constraints>
-                            <constraint firstItem="LNQ-WG-hXG" firstAttribute="bottom" secondItem="3H5-qh-3Jq" secondAttribute="bottom" constant="-2" id="1GJ-b8-fdo"/>
-                            <constraint firstItem="P6F-Wn-fos" firstAttribute="leading" secondItem="3H5-qh-3Jq" secondAttribute="leading" id="7Lp-Ao-Cj7"/>
-                            <constraint firstItem="LNQ-WG-hXG" firstAttribute="trailing" secondItem="3H5-qh-3Jq" secondAttribute="trailing" constant="-2" id="AEV-mv-vLY"/>
+                            <constraint firstItem="LNQ-WG-hXG" firstAttribute="leading" secondItem="6J8-Vs-50W" secondAttribute="leading" constant="5" id="9oj-zr-tuG"/>
+                            <constraint firstItem="LNQ-WG-hXG" firstAttribute="top" secondItem="6J8-Vs-50W" secondAttribute="top" constant="5" id="FVL-W1-Zz3"/>
                             <constraint firstItem="21n-xE-cSS" firstAttribute="trailing" secondItem="LNQ-WG-hXG" secondAttribute="trailing" constant="-8" id="M2s-5X-8ei"/>
                             <constraint firstItem="21n-xE-cSS" firstAttribute="top" secondItem="LNQ-WG-hXG" secondAttribute="top" constant="8" id="Mst-bc-mfp"/>
-                            <constraint firstAttribute="trailing" secondItem="3H5-qh-3Jq" secondAttribute="trailing" constant="3" id="PXa-Pv-SXP"/>
                             <constraint firstAttribute="trailing" secondItem="fj8-ox-U8Q" secondAttribute="trailing" constant="8" id="Qyu-aX-YI7"/>
-                            <constraint firstItem="P6F-Wn-fos" firstAttribute="trailing" secondItem="3H5-qh-3Jq" secondAttribute="trailing" id="TXY-ZS-Ejk"/>
                             <constraint firstAttribute="bottom" secondItem="fj8-ox-U8Q" secondAttribute="bottom" id="UzO-ea-64E"/>
-                            <constraint firstItem="P6F-Wn-fos" firstAttribute="bottom" secondItem="3H5-qh-3Jq" secondAttribute="bottom" id="eIJ-DM-35v"/>
-                            <constraint firstItem="LNQ-WG-hXG" firstAttribute="top" secondItem="3H5-qh-3Jq" secondAttribute="top" constant="2" id="gVU-L5-NBP"/>
+                            <constraint firstItem="rkg-v1-gdk" firstAttribute="centerX" secondItem="LNQ-WG-hXG" secondAttribute="centerX" id="Wnr-H0-XL2"/>
                             <constraint firstItem="fj8-ox-U8Q" firstAttribute="leading" secondItem="6J8-Vs-50W" secondAttribute="leading" constant="8" id="gab-wp-tec"/>
-                            <constraint firstItem="fj8-ox-U8Q" firstAttribute="top" secondItem="3H5-qh-3Jq" secondAttribute="bottom" id="oGy-SD-aEL"/>
-                            <constraint firstItem="3H5-qh-3Jq" firstAttribute="leading" secondItem="6J8-Vs-50W" secondAttribute="leading" constant="3" id="pbN-5T-SPA"/>
-                            <constraint firstItem="P6F-Wn-fos" firstAttribute="top" secondItem="3H5-qh-3Jq" secondAttribute="top" id="r6b-dg-Lg7"/>
-                            <constraint firstItem="3H5-qh-3Jq" firstAttribute="top" secondItem="6J8-Vs-50W" secondAttribute="top" constant="3" id="rqh-pt-hA4"/>
-                            <constraint firstItem="LNQ-WG-hXG" firstAttribute="leading" secondItem="3H5-qh-3Jq" secondAttribute="leading" constant="2" id="xKG-6r-Wof"/>
+                            <constraint firstItem="rkg-v1-gdk" firstAttribute="centerY" secondItem="LNQ-WG-hXG" secondAttribute="centerY" id="sk7-8e-OhF"/>
+                            <constraint firstItem="fj8-ox-U8Q" firstAttribute="top" secondItem="LNQ-WG-hXG" secondAttribute="bottom" constant="2" id="vTT-qR-c4d"/>
+                            <constraint firstAttribute="trailing" secondItem="LNQ-WG-hXG" secondAttribute="trailing" constant="5" id="zVQ-Z6-gcB"/>
                         </constraints>
                         <connections>
                             <outlet property="imageBorderView" destination="P6F-Wn-fos" id="mqX-1D-1BW"/>
                             <outlet property="imageView" destination="LNQ-WG-hXG" id="86B-Br-O1J"/>
                             <outlet property="selectionIcon" destination="21n-xE-cSS" id="hr3-YD-OmH"/>
-                            <outlet property="shadowView" destination="3H5-qh-3Jq" id="TGo-F9-bUR"/>
                             <outlet property="titleLabel" destination="fj8-ox-U8Q" id="fHY-ot-B7J"/>
                         </connections>
                     </view>
@@ -165,6 +162,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="iconAlbum" width="24" height="24"/>
         <namedColor name="itemSeperator">
             <color red="0.91699999570846558" green="0.91699999570846558" blue="0.91699999570846558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
