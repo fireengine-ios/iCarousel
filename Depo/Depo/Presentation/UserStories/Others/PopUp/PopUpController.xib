@@ -12,6 +12,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PopUpController" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="firstButton" destination="tOr-8G-xaM" id="S3U-pc-XMs"/>
+                <outlet property="firstButtonLeading" destination="IBy-9g-xKm" id="Ckh-WY-Peg"/>
+                <outlet property="firstButtonTrailing" destination="1j6-DD-ymB" id="aWj-2Y-iW5"/>
                 <outlet property="firstImageView" destination="n7C-4E-QE3" id="kqK-kB-3r2"/>
                 <outlet property="messageLabel" destination="XKY-VJ-kva" id="OAt-RS-XkI"/>
                 <outlet property="noneImageConstraint" destination="NuZ-B5-1oA" id="GYD-GP-A5d"/>
@@ -73,8 +75,8 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NFC-y7-dq2">
                                     <rect key="frame" x="0.0" y="0.0" width="163.5" height="45"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOr-8G-xaM" customClass="InsetsButton" customModule="Billo" customModuleProvider="target">
-                                            <rect key="frame" x="-35.5" y="0.0" width="234.5" height="45"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOr-8G-xaM" userLabel="FirstButton" customClass="InsetsButton" customModule="Billo" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="163.5" height="45"/>
                                             <color key="backgroundColor" name="AccentColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="45" id="GoE-lq-Xgn"/>
@@ -93,11 +95,13 @@
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="tOr-8G-xaM" secondAttribute="trailing" id="1j6-DD-ymB"/>
                                         <constraint firstItem="tOr-8G-xaM" firstAttribute="centerX" secondItem="NFC-y7-dq2" secondAttribute="centerX" id="2Q9-Mz-9jF"/>
                                         <constraint firstItem="tOr-8G-xaM" firstAttribute="centerY" secondItem="NFC-y7-dq2" secondAttribute="centerY" id="Ac2-Im-aNQ"/>
+                                        <constraint firstItem="tOr-8G-xaM" firstAttribute="leading" secondItem="NFC-y7-dq2" secondAttribute="leading" id="IBy-9g-xKm"/>
                                     </constraints>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fg5-a4-N9J" customClass="InsetsButton" customModule="Billo" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fg5-a4-N9J" userLabel="SecondButton" customClass="InsetsButton" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="171.5" y="0.0" width="163.5" height="45"/>
                                     <color key="backgroundColor" name="aquaMarineTwo"/>
                                     <state key="normal" title="Button">

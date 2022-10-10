@@ -23,7 +23,10 @@ final class PopUpController: BasePopUpController {
 
     @IBOutlet weak var firstImageView: UIImageView!
     @IBOutlet weak var secondIconImageView: UIImageView!
-
+    
+    @IBOutlet weak var firstButtonLeading: NSLayoutConstraint!
+    @IBOutlet weak var firstButtonTrailing: NSLayoutConstraint!
+    
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
             titleLabel.font = .appFont(.medium, size: 20)
@@ -93,7 +96,10 @@ final class PopUpController: BasePopUpController {
             
             firstButton.isHidden = false
             secondButton.isHidden = true
-
+            
+            firstButtonLeading.isActive = false
+            firstButtonTrailing.isActive = false
+            
         case .twin:
             setup(firstButton)
             setup(secondButton)
@@ -102,6 +108,9 @@ final class PopUpController: BasePopUpController {
             
             firstButton.isHidden = false
             secondButton.isHidden = false
+            
+            firstButtonLeading.isActive = true
+            firstButtonTrailing.isActive = true
         }
     }
     
