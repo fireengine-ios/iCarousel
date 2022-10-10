@@ -42,7 +42,7 @@
             <color key="backgroundColor" red="0.25098039215686274" green="0.80000000000000004" blue="0.81568627450980391" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="T2S-xG-IEs" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="Kb9-Xb-jRy"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="P4m-k9-Sk8" secondAttribute="bottom" constant="32" id="PZM-hy-aRr"/>
+                <constraint firstAttribute="bottom" secondItem="P4m-k9-Sk8" secondAttribute="bottom" constant="32" id="PZM-hy-aRr"/>
                 <constraint firstItem="T2S-xG-IEs" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="TSN-SD-CPH"/>
                 <constraint firstItem="T2S-xG-IEs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="U5f-uk-hTQ"/>
                 <constraint firstItem="P4m-k9-Sk8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="UEZ-h9-qYh"/>
