@@ -67,8 +67,7 @@ final class AnalyticsService: NSObject {
         #if ENTERPRISE
             filePath = Bundle.main.path(forResource: "GoogleService-Info-ent", ofType: "plist")
         #elseif APPSTORE
-        //FIREBASE DUBUG: WILL BE REMOVED
-            filePath = Bundle.main.path(forResource: "GoogleService-Info-test", ofType: "plist")
+            filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
         #else
             filePath = Bundle.main.path(forResource: "GoogleService-Info-test", ofType: "plist")
         #endif

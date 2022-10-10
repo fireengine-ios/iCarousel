@@ -12,9 +12,7 @@ struct Credentials {
             return "487629516002-0q99omhe2apgrb1p7vosg1sjq51mem5r.apps.googleusercontent.com"
         } else {
             #if APPSTORE
-//            return "590528416223-1a8dnpgid8b9gg96dqphop895tk8osur.apps.googleusercontent.com"
-            //FIREBASE DUBUG: WILL BE REMOVED
-            return "685338462870-flqbnde1f2gdolak5hv9769aui2vh6nk.apps.googleusercontent.com"
+            return "590528416223-1a8dnpgid8b9gg96dqphop895tk8osur.apps.googleusercontent.com"
             #else
             return "685338462870-flqbnde1f2gdolak5hv9769aui2vh6nk.apps.googleusercontent.com"
             #endif
