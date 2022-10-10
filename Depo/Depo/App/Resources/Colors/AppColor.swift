@@ -43,6 +43,9 @@ enum AppColor {
     case darkContentOverlay
     case lightContentOverlay
     
+    case navigationBarUnselect
+    case navigationBarSelect
+    
     // MARK: FilesTab
     case filesBackground
     case filesBigCellBackground
