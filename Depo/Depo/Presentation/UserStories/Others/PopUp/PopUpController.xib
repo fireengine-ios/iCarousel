@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -67,18 +66,17 @@
                                 </label>
                             </subviews>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ute-ez-40c">
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ute-ez-40c">
                             <rect key="frame" x="0.0" y="159" width="335" height="45"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NFC-y7-dq2">
-                                    <rect key="frame" x="0.0" y="0.0" width="163.5" height="45"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cq4-eM-etj">
+                                    <rect key="frame" x="9.5" y="0.0" width="316" height="45"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOr-8G-xaM" customClass="InsetsButton" customModule="Billo" customModuleProvider="target">
-                                            <rect key="frame" x="-35.5" y="0.0" width="234.5" height="45"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOr-8G-xaM" userLabel="FirstButton" customClass="InsetsButton" customModule="Billo" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="154" height="45"/>
                                             <color key="backgroundColor" name="AccentColor"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="45" id="GoE-lq-Xgn"/>
-                                                <constraint firstAttribute="width" priority="750" constant="234" id="WcU-4H-zWZ"/>
+                                                <constraint firstAttribute="width" priority="750" constant="235" id="NXg-5T-d5m"/>
                                             </constraints>
                                             <state key="normal" title="Button">
                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -90,29 +88,28 @@
                                                 <action selector="actionFirstButton:" destination="-1" eventType="touchUpInside" id="IZp-kj-ddd"/>
                                             </connections>
                                         </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fg5-a4-N9J" userLabel="SecondButton" customClass="InsetsButton" customModule="Billo" customModuleProvider="target">
+                                            <rect key="frame" x="162" y="0.0" width="154" height="45"/>
+                                            <color key="backgroundColor" name="aquaMarineTwo"/>
+                                            <state key="normal" title="Button">
+                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="actionSecondButton:" destination="-1" eventType="touchUpInside" id="YsY-0M-0gM"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
-                                        <constraint firstItem="tOr-8G-xaM" firstAttribute="centerX" secondItem="NFC-y7-dq2" secondAttribute="centerX" id="2Q9-Mz-9jF"/>
-                                        <constraint firstItem="tOr-8G-xaM" firstAttribute="centerY" secondItem="NFC-y7-dq2" secondAttribute="centerY" id="Ac2-Im-aNQ"/>
+                                        <constraint firstItem="tOr-8G-xaM" firstAttribute="width" secondItem="fg5-a4-N9J" secondAttribute="width" id="AJw-td-BOr"/>
                                     </constraints>
-                                </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fg5-a4-N9J" customClass="InsetsButton" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="171.5" y="0.0" width="163.5" height="45"/>
-                                    <color key="backgroundColor" name="aquaMarineTwo"/>
-                                    <state key="normal" title="Button">
-                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </state>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
-                                    </userDefinedRuntimeAttributes>
-                                    <connections>
-                                        <action selector="actionSecondButton:" destination="-1" eventType="touchUpInside" id="YsY-0M-0gM"/>
-                                    </connections>
-                                </button>
+                                </stackView>
                             </subviews>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="6Kd-tX-Tz5"/>
+                                <constraint firstItem="fg5-a4-N9J" firstAttribute="width" secondItem="Ute-ez-40c" secondAttribute="width" multiplier="0.46" id="8Cb-aB-Hq2"/>
                             </constraints>
                         </stackView>
                     </subviews>
@@ -150,8 +147,5 @@
         <namedColor name="secondaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

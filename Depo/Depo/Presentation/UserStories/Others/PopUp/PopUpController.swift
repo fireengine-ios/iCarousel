@@ -23,7 +23,7 @@ final class PopUpController: BasePopUpController {
 
     @IBOutlet weak var firstImageView: UIImageView!
     @IBOutlet weak var secondIconImageView: UIImageView!
-
+    
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
             titleLabel.font = .appFont(.medium, size: 20)
@@ -92,8 +92,7 @@ final class PopUpController: BasePopUpController {
             firstButton.setTitle(firstButtonTitle, for: .normal)
             
             firstButton.isHidden = false
-            secondButton.isHidden = true
-
+            secondButton.removeFromSuperview()
         case .twin:
             setup(firstButton)
             setup(secondButton)
