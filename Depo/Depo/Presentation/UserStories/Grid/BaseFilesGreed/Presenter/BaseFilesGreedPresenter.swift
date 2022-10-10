@@ -464,7 +464,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
 
     func didDelete(items: [BaseDataSourceItem]) {
-        updateNoFilesView()
         updateThreeDotsButton()
     }
     

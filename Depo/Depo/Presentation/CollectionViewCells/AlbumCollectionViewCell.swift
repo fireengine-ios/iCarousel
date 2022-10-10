@@ -45,23 +45,9 @@ final class AlbumCellView: UIView {
     private var imageGradientBorderLayer: CAGradientLayer?
     
     // MARK: - Setup
-    
-    func setupStyle(with displayType: BaseDataSourceDisplayingType) {
-        switch displayType {
-        case .greed:
-            shadowView.isHidden = true
-            titleLabel.textColor = AppColor.blackColor.color
-            titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
-        case .list:
-            titleLabel.textColor = ColorConstants.textGrayColor
-            titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        case .faceImage:
-            break
-        }
-    }
-    
     func setup(with album: AlbumItem) {
         titleLabel.text = album.name
+        configureBorder(show: !(album.preview?.hasPreviewUrl ?? false))
         imageView.loadImage(with: album.preview, smooth: false)
         
         isAccessibilityElement = true
@@ -118,7 +104,12 @@ final class AlbumCellView: UIView {
 
         imageBorderView.layer.addSublayer(gradientBorderLayer)
     }
-}
+    
+    private func configureBorder(show: Bool) {
+        imageView.layer.borderColor = AppColor.darkTint.cgColor
+        imageView.layer.borderWidth = show ? 1 : 0
+    }
+ }
 
 final class AlbumCollectionViewCell: BaseCollectionViewCell {
 
@@ -127,13 +118,6 @@ final class AlbumCollectionViewCell: BaseCollectionViewCell {
     
     private func isBigSize() -> Bool {
         return frame.size.height > NumericConstants.albumCellListHeight
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        listView.setupStyle(with: .list)
-        greedView.setupStyle(with: .greed)
     }
     
     override func configureWithWrapper(wrappedObj: BaseDataSourceItem) {
