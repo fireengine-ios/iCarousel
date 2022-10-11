@@ -62,7 +62,7 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
     
     let nameView: ProfileTextEnterView = {
         let newValue = ProfileTextEnterView()
-        newValue.titleLabel.text = "  " + TextConstants.userProfileName + "  "
+        newValue.titleLabel.text = TextConstants.userProfileName
         newValue.subtitleLabel.text = "  " + TextConstants.pleaseEnterYourName + "  "
         newValue.textField.quickDismissPlaceholder = TextConstants.enterYourName
         newValue.textField.autocorrectionType = .no
@@ -71,7 +71,7 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
     
     let surnameView: ProfileTextEnterView = {
         let newValue = ProfileTextEnterView()
-        newValue.titleLabel.text = "  " + TextConstants.userProfileSurname + "  "
+        newValue.titleLabel.text = TextConstants.userProfileSurname
         newValue.subtitleLabel.text = "  " + TextConstants.pleaseEnterYourSurname + "  "
         newValue.textField.quickDismissPlaceholder = TextConstants.enterYourSurname
         newValue.textField.autocorrectionType = .no
@@ -80,7 +80,7 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
     
     let emailView: ProfileEmailFieldView = {
         let newValue = ProfileEmailFieldView()
-        newValue.titleLabel.text = "  " + TextConstants.userProfileEmailSubTitle + "  "
+        newValue.titleLabel.text = TextConstants.userProfileEmailSubTitle
         newValue.textField.quickDismissPlaceholder = TextConstants.enterYourEmailAddress
         return newValue
     }()
@@ -89,8 +89,8 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
 
     private lazy var recoveryEmailView: ProfileEmailFieldView = {
         let newValue = ProfileEmailFieldView()
-        newValue.titleLabel.text = "  " + localized(.profileRecoveryMail) + "  "
-        newValue.subtitleLabel.text = "  " + localized(.profileRecoveryMailDescription) +   "  "
+        newValue.titleLabel.text = localized(.profileRecoveryMail)
+        newValue.subtitleLabel.text = "  " + localized(.profileRecoveryMailDescription) + "  "
         newValue.textField.quickDismissPlaceholder = localized(.profileRecoveryMailHint)
         newValue.infoButton.isHidden = false
         newValue.infoButton.addTarget(self, action: #selector(recoveryEmailInfoButtonTapped), for: .primaryActionTriggered)
@@ -105,7 +105,7 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
     
     let addressView: ProfileTextEnterView = {
         let newValue = ProfileTextEnterView()
-        newValue.titleLabel.text = "  " + TextConstants.profileDetailAddressTitle + "  "
+        newValue.titleLabel.text = TextConstants.profileDetailAddressTitle
         newValue.subtitleLabel.text = "  " + TextConstants.profileDetailAddressSubtitle + "  "
         newValue.textField.quickDismissPlaceholder = TextConstants.profileDetailAddressPlaceholder
         newValue.textField.autocorrectionType = .no

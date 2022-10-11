@@ -55,7 +55,7 @@ class NavigationBarList {
                                  action: nil)
         delete.accessibilityLabel = TextConstants.accessibilityDelete
         
-        showHide = UIBarButtonItem(image: Image.iconHideSelect.image,
+        showHide = UIBarButtonItem(image: Image.iconHideSee.image,
                                    style: .plain,
                                    target: nil,
                                    action: nil)

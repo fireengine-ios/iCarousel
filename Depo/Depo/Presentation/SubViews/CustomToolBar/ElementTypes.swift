@@ -806,9 +806,9 @@ enum ElementTypes {
         case .changePeopleThumbnail:
             return Image.iconChangePerson.image
         case .hide:
-            return UIImage(named: "HideButtonIcon")
+            return Image.iconHideUnselect.image
         case .unhide:
-            return UIImage(named: "UnhideButtonIcon")
+            return Image.iconHideSee.image
         case .smash:
             return UIImage(named: "SmashButtonIcon")
         case .photos:

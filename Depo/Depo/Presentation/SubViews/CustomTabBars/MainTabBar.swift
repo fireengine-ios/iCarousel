@@ -54,23 +54,24 @@ final class MainTabBar: UITabBar {
         backgroundImage = nil
         shadowImage = nil
         barTintColor = nil
-        unselectedItemTintColor = color(.tabBarTint)
-        tintColor = color(.tabBarTintSelected)
+        unselectedItemTintColor = AppColor.tabBarUnselect.color
+        tintColor = AppColor.tabBarSelect.color
 
         if #available(iOS 13.0, *) {
             let appearance = UITabBarAppearance()
             appearance.configureWithTransparentBackground()
 
             appearance.backgroundEffect = UIBlurEffect(style: .prominent)
-            appearance.stackedLayoutAppearance.normal.iconColor = color(.tabBarTint)
+            appearance.stackedLayoutAppearance.normal.iconColor = AppColor.tabBarUnselect.color
             appearance.stackedLayoutAppearance.normal.titleTextAttributes = [
-                .foregroundColor: color(.tabBarTint),
+                .foregroundColor: AppColor.tabBarUnselect.color,
                 .font: UIFont.appFont(.medium, size: kItemTitleFontSize)
             ]
+            
             appearance.stackedLayoutAppearance.normal.titlePositionAdjustment = kTitlePositionAdjustment
-            appearance.stackedLayoutAppearance.selected.iconColor = color(.tabBarTintSelected)
+            appearance.stackedLayoutAppearance.selected.iconColor = AppColor.tabBarSelect.color
             appearance.stackedLayoutAppearance.selected.titleTextAttributes = [
-                .foregroundColor: color(.tabBarTintSelected),
+                .foregroundColor: AppColor.tabBarSelect.color,
                 .font: UIFont.appFont(.bold, size: kItemTitleFontSize)
             ]
 
