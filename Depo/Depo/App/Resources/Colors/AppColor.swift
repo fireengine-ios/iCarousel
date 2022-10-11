@@ -19,8 +19,6 @@ enum AppColor {
     case navigationBarIconsBlack
 
     // MARK: TabBar
-    case tabBarTint
-    case tabBarTintSelected
     case tabBarCardBackground
     case tabBarCardBackgroundAlternative
     case tabBarCardShadow
@@ -42,6 +40,9 @@ enum AppColor {
     case loginShadowBlue
     case darkContentOverlay
     case lightContentOverlay
+    
+    case tabBarUnselect
+    case tabBarSelect
     
     // MARK: FilesTab
     case filesBackground

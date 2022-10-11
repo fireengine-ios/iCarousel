@@ -24,7 +24,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TiM-VN-MSe" userLabel="Title">
-                    <rect key="frame" x="16" y="576" width="343" height="21"/>
+                    <rect key="frame" x="16" y="480.66666666666669" width="343" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="4im-4q-YQC"/>
                     </constraints>
@@ -33,7 +33,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="subtitle" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="55F-IG-bjm" userLabel="SubTitle">
-                    <rect key="frame" x="16" y="617" width="343" height="20.666666666666629"/>
+                    <rect key="frame" x="16" y="521.66666666666663" width="343" height="20.333333333333371"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20.5" id="pxE-Zz-mnP"/>
                     </constraints>
@@ -44,11 +44,11 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="55F-IG-bjm" secondAttribute="bottom" constant="125" id="1KJ-Kp-5Uc"/>
                 <constraint firstAttribute="trailing" secondItem="TiM-VN-MSe" secondAttribute="trailing" constant="16" id="3kW-Un-06a"/>
                 <constraint firstAttribute="trailing" secondItem="55F-IG-bjm" secondAttribute="trailing" constant="16" id="6NO-im-zlh"/>
                 <constraint firstAttribute="trailing" secondItem="Xqx-jn-KY5" secondAttribute="trailing" id="GCF-oM-F8w"/>
                 <constraint firstItem="TiM-VN-MSe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="JY5-im-dmV"/>
-                <constraint firstItem="TiM-VN-MSe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="576" id="Kcu-5T-N1Q"/>
                 <constraint firstAttribute="bottom" secondItem="Xqx-jn-KY5" secondAttribute="bottom" id="OQa-0A-xr5"/>
                 <constraint firstItem="55F-IG-bjm" firstAttribute="top" secondItem="TiM-VN-MSe" secondAttribute="bottom" constant="20" id="ZrM-hG-AXM"/>
                 <constraint firstItem="55F-IG-bjm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="sga-vw-bd6"/>
