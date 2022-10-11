@@ -9,6 +9,8 @@ class ProfileTextEnterView: UIView {
         newValue.font = .appFont(.light, size: 14.0)
         newValue.isOpaque = true
         newValue.numberOfLines = 0
+        newValue.setContentCompressionResistancePriority(.required, for: .horizontal)
+        newValue.sizeToFit()
         return newValue
     }()
     

@@ -112,7 +112,6 @@ enum Image: String, AppImage {
     
     /// People Flow
     case iconPremium
-    case iconHideSelect
     case iconBackupContact
 
     /// Popup

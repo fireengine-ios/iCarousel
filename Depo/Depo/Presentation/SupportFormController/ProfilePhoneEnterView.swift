@@ -40,7 +40,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     
     @IBOutlet public weak var titleLabel: UILabel! {
         willSet {
-            newValue.text = "  " + TextConstants.profilePhoneNumberTitle + "  "
+            newValue.text = TextConstants.profilePhoneNumberTitle
             newValue.textColor = AppColor.label.color
             newValue.font = .appFont(.light, size: 14.0)
             newValue.backgroundColor = AppColor.primaryBackground.color
