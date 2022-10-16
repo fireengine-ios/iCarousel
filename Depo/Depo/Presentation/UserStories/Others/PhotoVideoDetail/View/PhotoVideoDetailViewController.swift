@@ -105,7 +105,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     private lazy var threeDotsBarButtonItem: UIBarButtonItem = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
-        button.setImage(UIImage(named: "more"), for: .normal)
+        button.tintColor = .white
+        button.setImage(Image.iconKebabBorder.image.withRenderingMode(.alwaysTemplate), for: .normal)
         button.addTarget(self, action: #selector(onRightBarButtonItem(sender:)), for: .touchUpInside)
         return UIBarButtonItem(customView: button)
     }()

@@ -25,8 +25,8 @@ final class RecognizeTextButton: UIButton {
         setImage(UIImage(named: "icon-recognize-text"), for: .normal)
         imageEdgeInsets = UIEdgeInsets(topBottom: 10, rightLeft: 10)
         tintColor = .white
-        setBackgroundColor(.gray, for: .normal)
-        setBackgroundColor(.lrTealish, for: .selected)
+        setBackgroundColor(AppColor.recognizeBackground.color, for: .normal)
+        setBackgroundColor(AppColor.tabBarSelect.color, for: .selected)
 
         layer.cornerRadius = Self.size / 2
         layer.masksToBounds = true

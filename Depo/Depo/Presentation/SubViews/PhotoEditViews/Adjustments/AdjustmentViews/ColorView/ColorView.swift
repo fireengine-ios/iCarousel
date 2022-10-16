@@ -21,8 +21,9 @@ final class ColorView: AdjustmentsView, NibInit {
             newValue.tintColor = .white
             newValue.setTitle(TextConstants.photoEditHSL, for: .normal)
             newValue.setTitleColor(.white, for: .normal)
-            newValue.titleLabel?.font = Device.isIpad ? .TurkcellSaturaRegFont(size: 16) : .TurkcellSaturaMedFont(size: 12)
+            newValue.titleLabel?.font = .appFont(.regular, size: Device.isIpad ? 16 : 12)
             newValue.titleEdgeInsets = UIEdgeInsets(top: 0, left: 6, bottom: 0, right: -6)
+            newValue.setImage(Image.iconMix.image.withRenderingMode(.alwaysTemplate), for: .normal)
         }
     }
     @IBOutlet private weak var contentView: UIStackView!

@@ -17,12 +17,8 @@ enum PhotoEditTabbarItemType {
     case adjustments
     case gif
     case sticker
-
+    
     var title: String {
-        guard Device.isIpad else {
-            return ""
-        }
-        
         switch self {
         case .filters:
             return TextConstants.photoEditTabBarFilters
@@ -36,26 +32,26 @@ enum PhotoEditTabbarItemType {
     }
     
     private var templateImage: UIImage? {
-        let imageName: String
+        let imageName: UIImage
         switch self {
         case .filters:
-            imageName = "photo_edit_tabbar_filters"
+            imageName = Image.iconFilter.image
         case .adjustments:
-            imageName = "photo_edit_tabbar_adjustments"
+            imageName = Image.iconEdit.image
         case .gif:
-            imageName = "gif"
+            imageName = Image.iconGif.image
         case .sticker:
-            imageName = "sticker"
+            imageName = Image.iconSticker.image
         }
-        return UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
+        return imageName.withRenderingMode(.alwaysTemplate)
     }
     
     var normalImage: UIImage? {
-        templateImage?.mask(with: .white)
+        templateImage?.mask(with: AppColor.tabBarUnselectOnly.color)
     }
     
     var selectedImage: UIImage? {
-        templateImage?.mask(with: .lrTealish)
+        templateImage?.mask(with: AppColor.tabBarSelect.color)
     }
 }
 
@@ -68,15 +64,28 @@ private final class PhotoEditButtonItem: UIButton {
         button.setImage(type.selectedImage, for: .highlighted)
         button.setImage(type.selectedImage, for: .selected)
         button.setTitle(type.title, for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(.lrTealish, for: .highlighted)
-        button.setTitleColor(.lrTealish, for: .selected)
-        button.titleLabel?.font = .TurkcellSaturaRegFont(size: 16)
+        button.setTitleColor(AppColor.tabBarUnselectOnly.color, for: .normal)
+        button.setTitleColor(AppColor.tabBarSelect.color, for: .highlighted)
+        button.setTitleColor(AppColor.tabBarSelect.color, for: .selected)
+        button.titleLabel?.font = .appFont(.medium, size: 14)
         
         if Device.isIpad {
             button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: -30)
+        } else {
+            button.centerVertically(topPadding: 12)
         }
+        
         return button
+    }
+    
+    private var oldFrame = CGRect.zero
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if oldFrame != frame {
+            oldFrame = frame
+            centerVertically(topPadding: 12)
+        }
     }
     
     private(set) var type: PhotoEditTabbarItemType = .filters
@@ -96,7 +105,7 @@ final class PhotoEditTabbar: UIView, NibInit {
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = ColorConstants.photoEditBackgroundColor
-        heightAnchor.constraint(equalToConstant: Device.isIpad ? 60 : 44).activate()
+        heightAnchor.constraint(equalToConstant: Device.isIpad ? 60 : 64).activate()
     }
     
     func setup(with types: [PhotoEditTabbarItemType]) {
