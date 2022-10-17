@@ -40,23 +40,35 @@ final class PhotoEditNavbar: UIView, NibInit {
         }
     }
     
-    @IBOutlet private weak var closeButton: UIButton!
+    @IBOutlet private weak var closeButton: UIButton! {
+        willSet {
+            newValue.tintColor = .white
+            newValue.setImage(Image.iconCancelBorder.image.withRenderingMode(.alwaysTemplate), for: .normal)
+        }
+    }
+    
     @IBOutlet private weak var saveButton: UIButton! {
         willSet {
             newValue.setTitle(TextConstants.photoEditNavBarSave, for: .normal)
             newValue.setTitleColor(.white, for: .normal)
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: Device.isIpad ? 20 : 16)
+            newValue.titleLabel?.font = .appFont(.medium, size: Device.isIpad ? 20 : 16)
         }
     }
     @IBOutlet weak var saveAsCopyButton: UIButton! {
         willSet {
             newValue.setTitle(TextConstants.photoEditSaveAsCopy, for: .normal)
             newValue.setTitleColor(.white, for: .normal)
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: Device.isIpad ? 20 : 16)
+            newValue.titleLabel?.font = .appFont(.medium, size: Device.isIpad ? 20 : 16)
         }
     }
 
-    @IBOutlet private(set) weak var moreButton: UIButton!
+    @IBOutlet private(set) weak var moreButton: UIButton! {
+        willSet {
+            newValue.tintColor = .white
+            newValue.setImage(Image.iconKebabBorder.image.withRenderingMode(.alwaysTemplate), for: .normal)
+        }
+    }
+    
     @IBOutlet private weak var shareButton: UIButton!
     @IBOutlet private weak var rightButtonsContainer: UIStackView!
     

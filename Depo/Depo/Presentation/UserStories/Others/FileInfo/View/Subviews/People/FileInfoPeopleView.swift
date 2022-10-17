@@ -58,8 +58,8 @@ final class FileInfoPeopleView: UIView, NibInit, FileInfoPeopleViewProtocol {
         willSet {
             newValue.setTitleColor(.white, for: UIControl.State())
             newValue.insets = UIEdgeInsets(topBottom: 0, rightLeft: 12)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
-            newValue.backgroundColor = AppColor.marineTwoAndTealish.color
+            newValue.titleLabel?.font = .appFont(.bold, size: 16)
+            newValue.backgroundColor = AppColor.button.color
             newValue.setTitle(TextConstants.passcodeEnable, for: UIControl.State())
             newValue.adjustsFontSizeToFitWidth()
         }
@@ -69,7 +69,7 @@ final class FileInfoPeopleView: UIView, NibInit, FileInfoPeopleViewProtocol {
     
     @IBOutlet private weak var premiumTextLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaFont(size: 18)
+            newValue.font = .appFont(.regular, size: 18)
             newValue.textColor = ColorConstants.closeIconButtonColor
         }
     }
@@ -77,7 +77,7 @@ final class FileInfoPeopleView: UIView, NibInit, FileInfoPeopleViewProtocol {
     @IBOutlet private weak var premiumButton: GradientPremiumButton! {
         willSet {
             newValue.setTitle(TextConstants.becomePremium, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 15)
+            newValue.titleLabel?.font = .appFont(.bold, size: 15)
         }
     }
     

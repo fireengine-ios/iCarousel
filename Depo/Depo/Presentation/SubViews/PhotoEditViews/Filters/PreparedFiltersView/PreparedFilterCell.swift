@@ -10,7 +10,14 @@ import UIKit
 
 final class PreparedFilterCell: UICollectionViewCell {
 
-    @IBOutlet private weak var imageContentView: UIView!
+    @IBOutlet private weak var imageContentView: UIView! {
+        willSet {
+            newValue.layer.borderColor = AppColor.tabBarSelect.cgColor
+            newValue.layer.cornerRadius = 2
+            newValue.layer.masksToBounds = true
+        }
+    }
+    
     @IBOutlet private weak var imageView: UIImageView! {
         willSet {
             newValue.contentMode = .scaleAspectFill
@@ -19,8 +26,8 @@ final class PreparedFilterCell: UICollectionViewCell {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaMedFont(size: 12)
-            newValue.textColor = .white
+            newValue.font = .appFont(.bold, size: 12)
+            newValue.textColor = AppColor.tabBarSelect.color
             newValue.textAlignment = .center
             newValue.numberOfLines = 2
             newValue.lineBreakMode = .byWordWrapping
@@ -30,13 +37,14 @@ final class PreparedFilterCell: UICollectionViewCell {
     @IBOutlet private weak var adjustmentView: UIView! {
         willSet {
             newValue.isHidden = true
-            newValue.backgroundColor = ColorConstants.greenyBlue.withAlphaComponent(0.6)
+            newValue.backgroundColor = .black.withAlphaComponent(0.7)
         }
     }
     
     @IBOutlet private weak var adjustmentImageView: UIImageView! {
         willSet {
-            newValue.tintColor = .white
+            newValue.image = Image.iconSettingsFilter.image.withRenderingMode(.alwaysTemplate)
+            newValue.tintColor = AppColor.tabBarSelect.color
         }
     }
     
@@ -44,7 +52,9 @@ final class PreparedFilterCell: UICollectionViewCell {
         didSet {
             adjustmentView.isHidden = !isSelected || isOriginal
             adjustmentImageView.isHidden = isOriginal
-            titleLabel.textColor = isSelected ? .lrTealishTwo : .white
+            titleLabel.textColor = isSelected ? AppColor.tabBarSelect.color : .white
+            
+            imageContentView.layer.borderWidth = !isSelected || isOriginal ? 0 : 1.5
         }
     }
     
@@ -52,8 +62,6 @@ final class PreparedFilterCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        imageContentView.backgroundColor = ColorConstants.photoEditBackgroundColor
     }
     
     override func prepareForReuse() {

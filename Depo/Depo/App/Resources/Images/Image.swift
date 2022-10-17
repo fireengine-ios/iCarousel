@@ -53,6 +53,19 @@ enum Image: String, AppImage {
     case iconAlbum
     case iconUnstar
     case iconCancelBorder
+    /// Actions/Function Menu
+    case iconFilter
+    case iconGif
+    case iconSettingsFilter
+    case iconSticker
+    case iconColor
+    case iconEffect
+    case iconLight
+    case iconAdjust
+    case iconSize
+    case iconMix
+    case iconRotate
+    case iconKebabBorder
 
     ///  Files Tab
     case iconFileAudio

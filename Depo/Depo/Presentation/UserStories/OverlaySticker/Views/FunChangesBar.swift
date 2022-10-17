@@ -19,12 +19,23 @@ final class FunChangesBar: UIView {
         willSet {
             newValue.textColor = .white
             newValue.textAlignment = .center
-            newValue.font = .TurkcellSaturaMedFont(size: 16)
+            newValue.font = .appFont(.medium, size: 16)
         }
     }
     
-    @IBOutlet private weak var cancelButton: UIButton!
-    @IBOutlet private weak var applyButton: UIButton!
+    @IBOutlet private weak var cancelButton: UIButton! {
+        willSet {
+            newValue.tintColor = .white
+            newValue.setImage(Image.iconCancelBorder.image.withRenderingMode(.alwaysTemplate), for: .normal)
+        }
+    }
+    
+    @IBOutlet private weak var applyButton: UIButton! {
+        willSet {
+            newValue.tintColor = .white
+            newValue.setImage(Image.iconSelect.image.withRenderingMode(.alwaysTemplate), for: .normal)
+        }
+    }
     
     weak var delegate: FunChangesBarDelegate?
     

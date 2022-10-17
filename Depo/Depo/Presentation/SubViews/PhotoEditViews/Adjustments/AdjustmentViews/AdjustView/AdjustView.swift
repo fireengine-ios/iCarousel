@@ -45,27 +45,39 @@ final class AdjustView: UIView, NibInit, CropToolbarProtocol {
     private let defaultValue: Float = 0
     
     @IBOutlet private weak var sliderContentView: UIView!
-    @IBOutlet private weak var leftButton: UIButton!
-    @IBOutlet private weak var rightButton: UIButton!
+    
+    @IBOutlet private weak var leftButton: UIButton! {
+        willSet {
+            newValue.tintColor = .white
+            newValue.setImage(Image.iconSize.image.withRenderingMode(.alwaysTemplate), for: .normal)
+        }
+    }
+    
+    @IBOutlet private weak var rightButton: UIButton! {
+        willSet {
+            newValue.tintColor = .white
+            newValue.setImage(Image.iconRotate.image.withRenderingMode(.alwaysTemplate), for: .normal)
+        }
+    }
     
     @IBOutlet private weak var minValueLabel: UILabel! {
         willSet {
             newValue.textColor = .white
-            newValue.font = Device.isIpad ? .TurkcellSaturaRegFont(size: 16) : .TurkcellSaturaMedFont(size: 12)
+            newValue.font = Device.isIpad ? .appFont(.medium, size: 16) : .appFont(.medium, size: 12)
         }
     }
     
     @IBOutlet private weak var maxValueLabel: UILabel! {
         willSet {
             newValue.textColor = .white
-            newValue.font = Device.isIpad ? .TurkcellSaturaRegFont(size: 16) : .TurkcellSaturaMedFont(size: 12)
+            newValue.font = Device.isIpad ? .appFont(.medium, size: 16) : .appFont(.medium, size: 12)
         }
     }
     
     @IBOutlet private weak var currentValueLabel: UILabel! {
         willSet {
             newValue.textColor = .white
-            newValue.font = Device.isIpad ? .TurkcellSaturaRegFont(size: 16) : .TurkcellSaturaMedFont(size: 12)
+            newValue.font = Device.isIpad ? .appFont(.medium, size: 16) : .appFont(.medium, size: 12)
         }
     }
     
