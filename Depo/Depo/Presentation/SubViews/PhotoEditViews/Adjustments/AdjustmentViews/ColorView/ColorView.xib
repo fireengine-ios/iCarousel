@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,12 +15,12 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="252"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IOh-2b-yXS">
-                    <rect key="frame" x="20" y="16" width="50" height="20"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IOh-2b-yXS">
+                    <rect key="frame" x="20" y="16" width="53" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="JSw-vK-jIu"/>
                     </constraints>
-                    <state key="normal" title="HSL" image="photo_edit_hsl"/>
+                    <state key="normal" title="HSL" image="iconMix"/>
                     <connections>
                         <action selector="onHSLTapped:" destination="L4h-0S-5vj" eventType="touchUpInside" id="Fwv-fP-0I0"/>
                     </connections>
@@ -28,7 +29,8 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="192"/>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <viewLayoutGuide key="safeArea" id="lbw-XP-mS9"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="gyq-xi-cv2" secondAttribute="trailing" id="4PU-YI-PeY"/>
                 <constraint firstItem="gyq-xi-cv2" firstAttribute="leading" secondItem="L4h-0S-5vj" secondAttribute="leading" id="YFV-VP-8WO"/>
@@ -38,7 +40,6 @@
                 <constraint firstItem="gyq-xi-cv2" firstAttribute="top" secondItem="IOh-2b-yXS" secondAttribute="bottom" constant="8" id="vFH-4N-9sT"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="lbw-XP-mS9"/>
             <connections>
                 <outlet property="bottomConstraint" destination="cxW-6U-2kO" id="qKU-12-8O3"/>
                 <outlet property="contentView" destination="gyq-xi-cv2" id="E3Z-co-QCY"/>
@@ -53,6 +54,9 @@
         </view>
     </objects>
     <resources>
-        <image name="photo_edit_hsl" width="21" height="20"/>
+        <image name="iconMix" width="24" height="24"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

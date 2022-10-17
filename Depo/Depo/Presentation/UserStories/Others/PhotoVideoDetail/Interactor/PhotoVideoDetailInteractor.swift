@@ -88,7 +88,9 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             return EditingBarConfig(elementsConfig: [], style: .black, tintColor: nil)
         }
         let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status, viewType: viewType)
-        return EditingBarConfig(elementsConfig: elementsConfig, style: .black, tintColor: nil)
+        return EditingBarConfig(elementsConfig: elementsConfig, style: .black,
+                                tintColor: AppColor.tabBarSelect.color,
+                                unselectedItemTintColor: .white)
     }
     
     func deleteSelectedItem(type: ElementTypes) {

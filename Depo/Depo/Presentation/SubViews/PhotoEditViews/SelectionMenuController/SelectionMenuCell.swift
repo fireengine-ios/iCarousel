@@ -22,19 +22,25 @@ final class SelectionMenuCell: UITableViewCell {
     }
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaMedFont(size: 16)
+            newValue.font = .appFont(.medium, size: 15)
             newValue.textColor = .white
         }
     }
     
-    @IBOutlet private weak var checkmarkImageView: UIImageView!
+    @IBOutlet private weak var checkmarkImageView: UIImageView! {
+        willSet {
+            newValue.tintColor = .white
+        }
+    }
+    
     @IBOutlet private weak var leadingContraint: NSLayoutConstraint!
     
     private var style: Style = .simple
     
     override var isSelected: Bool {
         didSet {
-            checkmarkImageView.image = isSelected ? UIImage(named: "photo_edit_checkmark") : nil
+            
+            checkmarkImageView.image = isSelected ? Image.iconSelect.image.withRenderingMode(.alwaysTemplate) : nil
         }
     }
     
