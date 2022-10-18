@@ -2,8 +2,8 @@ import UIKit
 
 final class PasswordView: UIView, NibInit {
     
-    private let openedEyeImage = UIImage(named: "ic_eye_show")
-    private let closedEyeImage = UIImage(named: "ic_eye_hide")
+    private let openedEyeImage = Image.iconHideSee.image
+    private let closedEyeImage = Image.iconHideUnselect.image
     var isNeedToShowRules = false {
         willSet {
             if newValue {

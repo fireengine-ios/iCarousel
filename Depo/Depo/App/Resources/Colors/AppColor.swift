@@ -193,7 +193,7 @@ enum AppColor {
 
     var color: UIColor {
         guard let uiColor = UIColor(named: String(describing: self)) else {
-            assertionFailure()
+            assertionFailure("Color not found with name: \(self)")
             return UIColor()
         }
 
