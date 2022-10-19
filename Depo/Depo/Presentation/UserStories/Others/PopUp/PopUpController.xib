@@ -14,7 +14,7 @@
                 <outlet property="firstImageView" destination="n7C-4E-QE3" id="kqK-kB-3r2"/>
                 <outlet property="messageLabel" destination="XKY-VJ-kva" id="OAt-RS-XkI"/>
                 <outlet property="noneImageConstraint" destination="NuZ-B5-1oA" id="GYD-GP-A5d"/>
-                <outlet property="secondButton" destination="fg5-a4-N9J" id="tqr-x7-jg4"/>
+                <outlet property="secondButton" destination="fg5-a4-N9J" id="ytW-qh-FsR"/>
                 <outlet property="secondIconImageView" destination="Vgj-JX-vfg" id="Uel-0F-ir3"/>
                 <outlet property="titleLabel" destination="faa-BU-RXd" id="A6f-Kk-EXo"/>
                 <outlet property="view" destination="8qh-Pd-GkY" id="yIM-90-1kk"/>
@@ -72,7 +72,7 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cq4-eM-etj">
                                     <rect key="frame" x="9.5" y="0.0" width="316" height="45"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOr-8G-xaM" userLabel="FirstButton" customClass="InsetsButton" customModule="Billo" customModuleProvider="target">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOr-8G-xaM" userLabel="FirstButton" customClass="WhiteButton" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="154" height="45"/>
                                             <color key="backgroundColor" name="AccentColor"/>
                                             <constraints>
@@ -88,11 +88,10 @@
                                                 <action selector="actionFirstButton:" destination="-1" eventType="touchUpInside" id="IZp-kj-ddd"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fg5-a4-N9J" userLabel="SecondButton" customClass="InsetsButton" customModule="Billo" customModuleProvider="target">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fg5-a4-N9J" userLabel="SecondButton" customClass="DarkBlueButton" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="162" y="0.0" width="154" height="45"/>
-                                            <color key="backgroundColor" name="aquaMarineTwo"/>
                                             <state key="normal" title="Button">
-                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="titleColor" red="0.37454777960000002" green="0.37459367510000002" blue="0.37453249100000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
@@ -140,9 +139,6 @@
     <resources>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="aquaMarineTwo">
-            <color red="0.33300000429153442" green="0.875" blue="0.875" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="secondaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -25,7 +25,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GuY-4m-Vk6" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GuY-4m-Vk6" customClass="DarkBlueButton" customModule="Billo" customModuleProvider="target">
                     <rect key="frame" x="59" y="597" width="257" height="54"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="N31-4K-tau">
