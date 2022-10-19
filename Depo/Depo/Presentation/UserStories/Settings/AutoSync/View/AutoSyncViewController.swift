@@ -13,12 +13,9 @@ final class AutoSyncViewController: BaseViewController, NibInit {
     
     @IBOutlet private weak var tableView: UITableView!
     
-    @IBOutlet private weak var startButton: RoundedInsetsButton! {
+    @IBOutlet private weak var startButton: DarkBlueButton! {
         willSet {
             newValue.setTitle(TextConstants.autoSyncStartUsingLifebox, for: .normal)
-            newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.titleLabel?.font = ApplicationPalette.bigRoundButtonFont
-            newValue.backgroundColor = UIColor.lrTealish
             newValue.isOpaque = true
         }
     }

@@ -26,7 +26,7 @@ final class RegistrationViewController: BaseViewController {
     @IBOutlet private weak var nextButton: RoundedInsetsButton! {
         willSet {
             newValue.setBackgroundColor(AppColor.registerNextButtonNormal.color, for: .normal)
-            newValue.setBackgroundColor(.white, for: .disabled)
+            newValue.setBackgroundColor(AppColor.secondaryButton.color, for: .disabled)
             newValue.setTitleColor(.white, for: .normal)
             newValue.setTitleColor(AppColor.registerNextButtonNormalTextColor.color, for: .disabled)
             newValue.titleLabel?.font = UIFont.appFont(.medium, size: 16)
@@ -200,6 +200,11 @@ final class RegistrationViewController: BaseViewController {
         }
         output.isSupportFormPresenting = false
 
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        nextButton.setBackgroundColor(AppColor.secondaryButton.color, for: .disabled)
     }
     
     //MARK: Utility Methods (private)

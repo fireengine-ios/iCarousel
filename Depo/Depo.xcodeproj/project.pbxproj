@@ -9177,6 +9177,14 @@
 		F0743DCF28B4C63C00CC1F24 /* BottomInfoBanner.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0743DCD28B4C63C00CC1F24 /* BottomInfoBanner.xib */; };
 		F0743DD028B4C63C00CC1F24 /* BottomInfoBanner.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0743DCD28B4C63C00CC1F24 /* BottomInfoBanner.xib */; };
 		F0743DD128B4C63C00CC1F24 /* BottomInfoBanner.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0743DCD28B4C63C00CC1F24 /* BottomInfoBanner.xib */; };
+		F074DD042900214C002E9F1C /* DarkBlueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F074DD032900214C002E9F1C /* DarkBlueButton.swift */; };
+		F074DD052900214C002E9F1C /* DarkBlueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F074DD032900214C002E9F1C /* DarkBlueButton.swift */; };
+		F074DD062900214C002E9F1C /* DarkBlueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F074DD032900214C002E9F1C /* DarkBlueButton.swift */; };
+		F074DD072900214C002E9F1C /* DarkBlueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F074DD032900214C002E9F1C /* DarkBlueButton.swift */; };
+		F074DD0C29002681002E9F1C /* WhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F074DD0B29002680002E9F1C /* WhiteButton.swift */; };
+		F074DD0D29002681002E9F1C /* WhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F074DD0B29002680002E9F1C /* WhiteButton.swift */; };
+		F074DD0E29002681002E9F1C /* WhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F074DD0B29002680002E9F1C /* WhiteButton.swift */; };
+		F074DD0F29002681002E9F1C /* WhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F074DD0B29002680002E9F1C /* WhiteButton.swift */; };
 		F077B23D280FDE3B0034F73C /* agconnect-services.plist in Resources */ = {isa = PBXBuildFile; fileRef = F077B23C280FDE3A0034F73C /* agconnect-services.plist */; };
 		F077B23E280FDE3B0034F73C /* agconnect-services.plist in Resources */ = {isa = PBXBuildFile; fileRef = F077B23C280FDE3A0034F73C /* agconnect-services.plist */; };
 		F081F9C62779138F0064D25C /* DragAndDropItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F081F9C52779138F0064D25C /* DragAndDropItemType.swift */; };
@@ -12150,6 +12158,8 @@
 		F0743DB628B428F900CC1F24 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
 		F0743DC828B4C63100CC1F24 /* BottomInfoBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomInfoBanner.swift; sourceTree = "<group>"; };
 		F0743DCD28B4C63C00CC1F24 /* BottomInfoBanner.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomInfoBanner.xib; sourceTree = "<group>"; };
+		F074DD032900214C002E9F1C /* DarkBlueButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkBlueButton.swift; sourceTree = "<group>"; };
+		F074DD0B29002680002E9F1C /* WhiteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteButton.swift; sourceTree = "<group>"; };
 		F077B23C280FDE3A0034F73C /* agconnect-services.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "agconnect-services.plist"; sourceTree = "<group>"; };
 		F081F9C52779138F0064D25C /* DragAndDropItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropItemType.swift; sourceTree = "<group>"; };
 		F092578727DCF78C0001737C /* SecurityInfoPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityInfoPopup.swift; sourceTree = "<group>"; };
@@ -20252,6 +20262,8 @@
 				7CA4A175207F3F7E00F270C8 /* CustomCheckBox.swift */,
 				0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */,
 				A20CDBAF219DAC2700CA9A67 /* GradientPremiumButton.swift */,
+				F074DD032900214C002E9F1C /* DarkBlueButton.swift */,
+				F074DD0B29002680002E9F1C /* WhiteButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -26545,6 +26557,7 @@
 				3A134C472645476500CFC736 /* ScreenConstants.swift in Sources */,
 				8C0B91AB20170EB700A5BA81 /* ManageContactsPresenter.swift in Sources */,
 				89E51D4022CA1103007A7DBC /* CreateStoryPreviewViewController.swift in Sources */,
+				F074DD042900214C002E9F1C /* DarkBlueButton.swift in Sources */,
 				8C0E8F511FDEBDFF00789C91 /* SearchViewRouterInput.swift in Sources */,
 				8C0E8F521FDEBDFF00789C91 /* FileInfoRouterInput.swift in Sources */,
 				8C208682228D5118000BEDAD /* Double+Extensions.swift in Sources */,
@@ -26557,6 +26570,7 @@
 				8E26D9932306B49D00D08123 /* MusicInteractorInput.swift in Sources */,
 				52E0994828C1ECD2004AE4EC /* PackagesInteractorOutput.swift in Sources */,
 				8C0E8F551FDEBDFF00789C91 /* UsageInfoRouter.swift in Sources */,
+				F074DD0C29002681002E9F1C /* WhiteButton.swift in Sources */,
 				B57BC177252C89640083B5CD /* PHAsset+FetchAll.swift in Sources */,
 				7C121F01208742A800AA585F /* TokenKeychainStorage.swift in Sources */,
 				8C0E8F561FDEBDFF00789C91 /* ActionSheetPredetermendConfigs.swift in Sources */,
@@ -27858,6 +27872,7 @@
 				9809317923952CAC00ECFEF8 /* SmartAlbumsManager.swift in Sources */,
 				7373EC24235EE0F100B150BA /* InstaPickCampaignViewController.swift in Sources */,
 				F0571EE4288AE74400A0D6AC /* ForYouModuleInput.swift in Sources */,
+				F074DD062900214C002E9F1C /* DarkBlueButton.swift in Sources */,
 				CE78498822A685FB00662219 /* AutoSyncPresenter.swift in Sources */,
 				CE78498922A685FB00662219 /* HomePageViewInput.swift in Sources */,
 				89EA4F7D240902C400A2C543 /* PackagesTableViewCell.swift in Sources */,
@@ -28262,6 +28277,7 @@
 				98231A0824F3A1E700FD16E2 /* SliderView.swift in Sources */,
 				CE784A9F22A685FB00662219 /* DropboxResponse.swift in Sources */,
 				CE784AA022A685FB00662219 /* FileService.swift in Sources */,
+				F074DD0E29002681002E9F1C /* WhiteButton.swift in Sources */,
 				CE784AA122A685FB00662219 /* DispatchQueueLabels.swift in Sources */,
 				CE784AA222A685FB00662219 /* OrientationManager.swift in Sources */,
 				B545022C255A8B11004DBD41 /* PrivateShareFileInfoManager.swift in Sources */,
@@ -29115,6 +29131,7 @@
 				CF8B63B723CBC9D70021B021 /* TermsOfUseInteractor.swift in Sources */,
 				CF8B63B823CBC9D70021B021 /* MyStorageModuleInput.swift in Sources */,
 				CF8B63B923CBC9D70021B021 /* CreateStoryAudioSelectionItemViewController.swift in Sources */,
+				F074DD0D29002681002E9F1C /* WhiteButton.swift in Sources */,
 				07E7A67D2859D046005BBD4C /* BottomSelectionTabBarDrawerViewController.swift in Sources */,
 				CF8B63BA23CBC9D70021B021 /* TBMatikPhotosBottomBarManager.swift in Sources */,
 				CF8B63BB23CBC9D70021B021 /* PremiumListView.swift in Sources */,
@@ -29194,6 +29211,7 @@
 				CF8B63F423CBC9D70021B021 /* UITableView+Extensions.swift in Sources */,
 				9823198224F3A1E700FD16E2 /* AdjustView.swift in Sources */,
 				CF8B63F523CBC9D70021B021 /* InsetsTextField.swift in Sources */,
+				F074DD052900214C002E9F1C /* DarkBlueButton.swift in Sources */,
 				CF8B63F623CBC9D70021B021 /* FaceImageAddNameInteractrorOutput.swift in Sources */,
 				CF8B63F723CBC9D70021B021 /* MulticastDelegate.swift in Sources */,
 				0305A36623D5C66B004D1EC7 /* CarouselPagerDataSource.swift in Sources */,
@@ -31086,6 +31104,7 @@
 				B55EFD422565427800E11D9C /* PrivateShareSharedItemThreeDotsManager.swift in Sources */,
 				F0571EEF288AE76500A0D6AC /* ForYouViewOutput.swift in Sources */,
 				CF8B6C1923CBCA280021B021 /* HelpAndSupportRouterInput.swift in Sources */,
+				F074DD0F29002681002E9F1C /* WhiteButton.swift in Sources */,
 				CF8B6C1A23CBCA280021B021 /* InstapickAlbumSelectionViewController.swift in Sources */,
 				03404575240794FD0024135B /* SynchronizedDictionary.swift in Sources */,
 				982319AF24F3A1E700FD16E2 /* ColorCell.swift in Sources */,
@@ -31578,6 +31597,7 @@
 				CF8B6D8B23CBCA280021B021 /* IntroduceInitializer.swift in Sources */,
 				9808B3132553DEBD002B0032 /* PrivateShareViewController.swift in Sources */,
 				F0D2976527F782DE0082C768 /* MessageAndButtonPopup.swift in Sources */,
+				F074DD072900214C002E9F1C /* DarkBlueButton.swift in Sources */,
 				CF8B6D8C23CBCA280021B021 /* InstapickAlbumSelectionDataSource.swift in Sources */,
 				CF8B6D8D23CBCA280021B021 /* ImportPhotosViewOutput.swift in Sources */,
 				CF8B6D8E23CBCA280021B021 /* FaceImagePhotosInteractorInput.swift in Sources */,
