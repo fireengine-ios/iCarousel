@@ -13,4 +13,20 @@ protocol ForYouInteractorOutput: AnyObject {
     func asyncOperationSuccess()
     func asyncOperationFail(errorMessage: String?)
     func startAsyncOperation()
+    
+    func getThings(data: [WrapData])
+    func getPlaces(data: [WrapData])
+    func getPeople(data: [WrapData])
+    func getStories(data: [WrapData])
+    func getAnimations(data: [WrapData])
+    func getHidden(data: [WrapData])
+    func getCollages(data: [WrapData])
+    func getAlbums(data: [AlbumItem])
+    func getPhotopicks(data: [InstapickAnalyze])
+    func getCollageCards(data: [HomeCardResponse])
+    func getAlbumCards(data: [HomeCardResponse])
+    func getAnimationCards(data: [HomeCardResponse])
+    func getThrowbacks(data: AlbumResponse)
+    
+    func didFinishedAllRequests()
 }
