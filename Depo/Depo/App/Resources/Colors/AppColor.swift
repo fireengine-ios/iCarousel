@@ -43,6 +43,13 @@ enum AppColor {
     
     case tabBarUnselect
     case tabBarSelect
+    case tabBarUnselectOnly
+    
+    // MARK: PhotoVideoDetail
+    case functionsMenuTint
+    case recognizeBackground
+    case PVDetailTabBarSelect
+    case PVDetailTabBarUnSelect
     
     // MARK: FilesTab
     case filesBackground
@@ -186,7 +193,7 @@ enum AppColor {
 
     var color: UIColor {
         guard let uiColor = UIColor(named: String(describing: self)) else {
-            assertionFailure()
+            assertionFailure("Color not found with name: \(self)")
             return UIColor()
         }
 

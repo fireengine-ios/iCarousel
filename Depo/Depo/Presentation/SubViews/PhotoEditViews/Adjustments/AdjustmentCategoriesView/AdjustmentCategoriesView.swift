@@ -26,18 +26,20 @@ enum AdjustmentCategory: CaseIterable {
             return TextConstants.photoEditEffect
         }
     }
-    
+      
     var image: UIImage? {
+        let image: UIImage
         switch self {
         case .adjust:
-            return UIImage(named: "photo_edit_adjust")
+            image = Image.iconAdjust.image
         case .light:
-            return UIImage(named: "photo_edit_light")
+            image = Image.iconLight.image
         case .color:
-            return UIImage(named: "photo_edit_color")
+            image = Image.iconColor.image
         case .effect:
-            return UIImage(named: "photo_edit_effect")
+            image = Image.iconEffect.image
         }
+        return image.withRenderingMode(.alwaysTemplate)
     }
 }
 
