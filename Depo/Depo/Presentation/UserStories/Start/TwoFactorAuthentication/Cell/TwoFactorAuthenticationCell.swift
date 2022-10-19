@@ -14,8 +14,8 @@ protocol TwoFactorAuthenticationCellDelegate {
 
 final class TwoFactorAuthenticationCell: UITableViewCell {
     
-    private let selectedRadioButtonImage = UIImage(named: "selectedRectangle")
-    private let deselectedRadioButtonImage = UIImage(named: "emtyRectangle")
+    private let selectedRadioButtonImage = Image.forgetPassSelectedRadio.image
+    private let deselectedRadioButtonImage = Image.forgetPassUnSelectedRadio.image
 
     @IBOutlet private weak var receiveMethodLabel: UILabel! {
         willSet {
