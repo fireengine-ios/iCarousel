@@ -11,5 +11,6 @@ import Foundation
 protocol ForYouInteractorInput {
     func getFIRStatus(success: @escaping (SettingsInfoPermissionsResponse) -> (), fail: @escaping (Error) -> ())
     func loadItem(_ item: BaseDataSourceItem, faceImageType: FaceImageType?)
+    func viewIsReady() 
 }
 

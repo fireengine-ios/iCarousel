@@ -10,6 +10,8 @@ import UIKit
 import SDWebImage
 
 class ForYouCollectionViewCell: UICollectionViewCell {
+    
+    private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
 
     @IBOutlet private weak var thumbnailImage: UIImageView! {
         willSet {
@@ -26,15 +28,35 @@ class ForYouCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    @IBOutlet private weak var hiddenIcon: UIImageView! {
+        willSet {
+            newValue.image = Image.iconHideUnselect.image.withRenderingMode(.alwaysTemplate)
+            newValue.tintColor = .white
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         addGradientLayer()
     }
     
-    func configure(with wrapData: WrapData) {
+    func configure(with wrapData: WrapData, currentView: ForYouViewEnum) {
         titleLabel.text = wrapData.name
-        titleLabel.isHidden = false
+        hiddenIcon.isHidden = currentView != .hidden
+        
+        switch currentView {
+        case .places, .things, .albums:
+            titleLabel.isHidden = false
+        default:
+            titleLabel.isHidden = true
+        }
+        
+        if currentView == .hidden {
+            blurView.frame = thumbnailImage.bounds
+            thumbnailImage.addSubview(blurView)
+        } else {
+            blurView.removeFromSuperview()
+        }
         
         switch wrapData.patchToPreview {
         case .remoteUrl(let url):
@@ -47,6 +69,7 @@ class ForYouCollectionViewCell: UICollectionViewCell {
     func configureAlbum(with album: AlbumItem) {
         titleLabel.text = album.name
         titleLabel.isHidden = false
+        hiddenIcon.isHidden = true
         
         switch album.preview?.patchToPreview {
         case .remoteUrl(let url):
@@ -56,8 +79,14 @@ class ForYouCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    func configureCard(with card: HomeCardResponse) {
+        titleLabel.isHidden = true
+        hiddenIcon.isHidden = true
+    }
+    
     func configure(with data: InstapickAnalyze) {
         titleLabel.isHidden = true
+        hiddenIcon.isHidden = true
         thumbnailImage.sd_setImage(with: data.fileInfo?.metadata?.mediumUrl, completed: nil)
     }
     
