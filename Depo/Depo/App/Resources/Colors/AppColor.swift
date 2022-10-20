@@ -30,12 +30,14 @@ enum AppColor {
     case background
     case secondaryBackground
     case label
+    case labelSingle
     case darkLabel
     case tint
     case darkTint
     case separator
     case lightText
     case button
+    case secondaryButton
 
     case loginShadowBlue
     case darkContentOverlay

@@ -10,4 +10,5 @@ import Foundation
 
 protocol ForYouViewInput: AnyObject {
     func getFIRResponse(isAllowed: Bool)
+    func didFinishedAllRequests()
 }

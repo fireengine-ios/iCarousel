@@ -24,34 +24,20 @@ protocol SettingFooterViewDelegate: AnyObject {
 }
 
 final class SettingFooterView: UIView, NibInit {
-    
-    
     weak var delegate: SettingFooterViewDelegate?
     weak var darkModeDelegate: DarkModeOptionsViewDelegate?
-    
     lazy var storageVars: StorageVars = factory.resolve()
     private var checkmarkImage: UIImage? { Image.iconDisplaySelected.image }
-    
-    @IBOutlet var selectionButtons: [UIButton]!
-
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
-        
-        
     }
     
-    
-    @IBOutlet weak var logoutButton: UIButton! {
+    @IBOutlet var selectionButtons: [UIButton]!
+    @IBOutlet weak var logoutButton: WhiteButton! {
         willSet {
             newValue.setTitle(TextConstants.settingsViewCellLogout, for: .normal)
-            
-            newValue.layer.cornerRadius = newValue.frame.height * 0.5
-            newValue.setTitleColor(AppColor.label.color, for: [])
-            newValue.layer.borderColor = AppColor.tbMatikBlurColor.cgColor
-            newValue.layer.borderWidth = 1.0
-            newValue.titleLabel?.font = .appFont(.medium, size: 16.0)
         }
     }
     
@@ -64,11 +50,7 @@ final class SettingFooterView: UIView, NibInit {
         
     }
     
-    
     @IBOutlet weak var lightModeBackView: UIView!
-    
-    
-    
     @IBOutlet weak var lightModeImageView: UIImageView! {
         willSet {
             newValue.layer.borderWidth = 1.0
@@ -132,8 +114,6 @@ final class SettingFooterView: UIView, NibInit {
         }
     }
 
-
-
     @IBOutlet weak private var selectDefaultModeButton: UIButton! {
         willSet {
             newValue.tag = DarkModeOption.defaultOption.rawValue
@@ -148,8 +128,6 @@ final class SettingFooterView: UIView, NibInit {
 
         configureOptions(with: sender.tag)
     }
-
-    
     
     @IBAction private func onLeaveFeedbackButton(sender: UIButton) {
         delegate?.didTappedLogOut()
@@ -173,7 +151,6 @@ final class SettingFooterView: UIView, NibInit {
             }
         }
     }
-
 }
 
 //MARK: -DarkModeOptionsViewDelegate

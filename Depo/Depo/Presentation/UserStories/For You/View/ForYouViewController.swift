@@ -13,13 +13,7 @@ final class ForYouViewController: BaseViewController {
     //MARK: -Properties
     var output: ForYouViewOutput!
     lazy var forYouEnum: [ForYouViewEnum] = []
-    lazy var isFIREnabled: Bool = false {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
+    lazy var isFIREnabled: Bool = false
     
     //MARK: -IBOutlet
     @IBOutlet private weak var tableView: UITableView!
@@ -32,6 +26,7 @@ final class ForYouViewController: BaseViewController {
         configureUI()
         configureTableView()
         output.checkFIRisAllowed()
+        output.viewIsReady()
     }
     
     deinit {
@@ -73,6 +68,12 @@ extension ForYouViewController: ForYouViewInput {
     func getFIRResponse(isAllowed: Bool) {
         faceImagePermissionChanged(to: isAllowed)
     }
+    
+    func didFinishedAllRequests() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
 }
 
 //MARK: -UITableViewDataSource
@@ -89,7 +90,8 @@ extension ForYouViewController: UITableViewDataSource {
         }
         
         let cell = tableView.dequeue(reusable: ForYouTableViewCell.self, for: indexPath)
-        cell.configure(with: forYouEnum[indexPath.row])
+        let model = output.getModel(for: forYouEnum[indexPath.row])
+        cell.configure(with: model, currentView: forYouEnum[indexPath.row])
         cell.delegate = self
         return cell
     }
@@ -98,34 +100,18 @@ extension ForYouViewController: UITableViewDataSource {
 //MARK: -UITableViewDelegate
 extension ForYouViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if !isFIREnabled && indexPath.row == 0 {
-            return 224
-        }
-
-        if forYouEnum[indexPath.row] == .people {
-            return 150
-        }
-        
-        return 190
+        return CGFloat(output.getHeightForRow(at: forYouEnum[indexPath.row]))
     }
 }
 
 //MARK: -ForYouTableViewCellDelegate
 extension ForYouViewController: ForYouTableViewCellDelegate {
+    func navigateToItemPreview(item: WrapData, items: [WrapData]) {
+        output.navigateToItemPreview(item: item, items: items)
+    }
+    
     func onSeeAllButton(for view: ForYouViewEnum) {
         output.onSeeAllButton(for: view)
-    }
-}
-
-//MARK: -HeaderContainingViewControllerChild
-extension ForYouViewController: HeaderContainingViewControllerChild {
-    var scrollViewForHeaderTracking: UIScrollView? { tableView }
-}
-
-//MARK: -ForYouFaceImageTableViewCellDelegae
-extension ForYouViewController: ForYouFaceImageTableViewCellDelegae {
-    func onFaceImageButton() {
-        output.onFaceImageButton()
     }
     
     func navigateToCreate(for view: ForYouViewEnum) {
@@ -141,6 +127,18 @@ extension ForYouViewController: ForYouFaceImageTableViewCellDelegae {
     }
 }
 
+//MARK: -HeaderContainingViewControllerChild
+extension ForYouViewController: HeaderContainingViewControllerChild {
+    var scrollViewForHeaderTracking: UIScrollView? { tableView }
+}
+
+//MARK: -ForYouFaceImageTableViewCellDelegae
+extension ForYouViewController: ForYouFaceImageTableViewCellDelegae {
+    func onFaceImageButton() {
+        output.onFaceImageButton()
+    }
+}
+
 //MARK: -ItemOperationManagerViewProtocol
 extension ForYouViewController: ItemOperationManagerViewProtocol {
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
@@ -150,6 +148,7 @@ extension ForYouViewController: ItemOperationManagerViewProtocol {
     func faceImageRecogChaned(to isAllowed: Bool) {
         if isFIREnabled != isAllowed {
             faceImagePermissionChanged(to: isAllowed)
+            tableView.reloadData()
         }
     }
 }

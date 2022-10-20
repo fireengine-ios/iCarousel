@@ -60,7 +60,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7by-Q8-kfK" userLabel="RestoreButtonContainer">
                                             <rect key="frame" x="0.0" y="74" width="304" height="45"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="35h-M2-DXI" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="35h-M2-DXI" customClass="WhiteButton" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="0.0" width="30" height="45"/>
                                                     <connections>
                                                         <action selector="restorePurhases" destination="-1" eventType="touchUpInside" id="37M-F3-52a"/>
