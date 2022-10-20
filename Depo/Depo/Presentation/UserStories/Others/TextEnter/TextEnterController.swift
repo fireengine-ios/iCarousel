@@ -28,7 +28,7 @@ final class TextEnterController: ViewController, NibInit, ErrorPresenter {
     @IBOutlet private weak var changeButton: DarkBlueButton! {
         didSet {
             changeButton.isExclusiveTouch = true
-            changeButton.setTitle("Continue", for: .normal)
+            changeButton.setTitle(doneButtonTitle, for: .normal)
         }
     }
     
