@@ -61,7 +61,7 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qiw-6n-tBR">
                                             <rect key="frame" x="32" y="311.5" width="309" height="50"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8SP-eK-Hv8">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8SP-eK-Hv8" customClass="WhiteButton" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="150.5" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="BPl-RJ-a6H"/>
@@ -71,7 +71,7 @@
                                                         <action selector="firstButtonTapped" destination="-1" eventType="touchUpInside" id="ryK-cu-XMX"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdX-US-def">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdX-US-def" customClass="DarkBlueButton" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="158.5" y="0.0" width="150.5" height="50"/>
                                                     <state key="normal" title="Button"/>
                                                     <connections>

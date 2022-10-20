@@ -14,7 +14,7 @@ class ForYouCardsCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var bgView: UIView! {
         willSet {
             newValue.addRoundedShadows(cornerRadius: 15, shadowColor: AppColor.drawerShadow.cgColor, opacity: 0.3, radius: 4)
-            newValue.backgroundColor = AppColor.background.color
+            newValue.backgroundColor = AppColor.secondaryBackground.color
         }
     }
     
@@ -37,7 +37,6 @@ class ForYouCardsCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var saveButton: UIButton! {
         willSet {
             newValue.setTitleColor(AppColor.label.color, for: .normal)
-            newValue.setTitleColor(AppColor.label.color.darker(by: 30), for: .normal)
             newValue.setTitle("Save", for: .normal)
             newValue.titleLabel?.font = .appFont(.medium, size: 12)
         }
@@ -46,7 +45,6 @@ class ForYouCardsCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var shareButton: UIButton! {
         willSet {
             newValue.setTitleColor(AppColor.label.color, for: .normal)
-            newValue.setTitleColor(AppColor.label.color.darker(by: 30), for: .normal)
             newValue.setTitle("Share", for: .normal)
             newValue.titleLabel?.font = .appFont(.medium, size: 12)
         }
