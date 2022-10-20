@@ -46,25 +46,9 @@ class DeleteAccountPopUp: UIViewController {
         }
     }
 
-    @IBOutlet private weak var firstButton: UIButton! {
-        willSet {
-            newValue.setTitleColor(AppColor.marineTwoAndTealish.color, for: .normal)
-            newValue.titleLabel?.font = .appFont(.medium, size: 16.0)
-            newValue.layer.cornerRadius = 25
-            newValue.layer.borderWidth = 1
-            newValue.layer.borderColor = AppColor.marineTwoAndTealish.color.cgColor
-        }
-    }
-
-    @IBOutlet private weak var secondButton: UIButton! {
-        willSet {
-            newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.backgroundColor = AppColor.marineTwoAndTealish.color
-            newValue.titleLabel?.font = .appFont(.medium, size: 16.0)
-            newValue.layer.cornerRadius = 25
-        }
-    }
-
+    @IBOutlet private weak var firstButton: WhiteButton!
+    @IBOutlet private weak var secondButton: DarkBlueButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = AppColor.popUpBackground.color

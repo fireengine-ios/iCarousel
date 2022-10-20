@@ -73,23 +73,14 @@ final class DeleteAccountValidationPopUp: UIViewController {
         }
     }
     
-    @IBOutlet weak var cancelButton: UIButton! {
+    @IBOutlet weak var cancelButton: WhiteButton! {
         willSet {
-            newValue.setTitleColor(AppColor.marineTwoAndTealish.color, for: .normal)
-            newValue.titleLabel?.font = .appFont(.medium, size: 16.0)
-            newValue.layer.cornerRadius = 25
-            newValue.layer.borderWidth = 1
-            newValue.layer.borderColor = AppColor.marineTwoAndTealish.color.cgColor
             newValue.setTitle(localized(.deleteAccountCancelButton), for: .normal)
         }
     }
 
-    @IBOutlet weak var confirmButton: UIButton! {
+    @IBOutlet weak var confirmButton: DarkBlueButton! {
         willSet {
-            newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.backgroundColor = AppColor.marineTwoAndTealish.color
-            newValue.titleLabel?.font = .appFont(.medium, size: 16.0)
-            newValue.layer.cornerRadius = 25
             newValue.setTitle(localized(.deleteAccountContinueButton), for: .normal)
         }
     }

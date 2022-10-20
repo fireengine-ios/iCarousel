@@ -51,15 +51,6 @@ class WhiteButton: InsetsButton {
             return
         }
         layer.cornerRadius = bounds.height * 0.5
-        
-        setInsets()
-    }
-
-    func setInsets() {
-        let inset = frame.height * 0.3
-        let isAddedImaged = image(for: .normal) != nil
-        let leftInset: CGFloat = isAddedImaged ? 0.0 : inset
-        insets = UIEdgeInsets(top: 0.0, left: leftInset, bottom: 0.0, right: inset)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
