@@ -32,7 +32,7 @@ enum PopUpImage {
         case .delete:
             image = Image.popupIconDelete.image
         case .music:
-            image = UIImage(named: "musicAlert")
+            image = Image.popupMusic.image
         case .clock:
             image = UIImage(named: "clockAlert")
         case .hide:

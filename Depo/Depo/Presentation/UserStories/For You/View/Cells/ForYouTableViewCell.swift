@@ -14,9 +14,10 @@ protocol ForYouTableViewCellDelegate: AnyObject {
     func navigateToCreate(for view: ForYouViewEnum)
     func navigateToItemDetail(item: WrapData, faceImageType: FaceImageType?)
     func naviateToAlbumDetail(album: AlbumItem)
+    func navigateToItemPreview(item: WrapData, items: [WrapData])
 }
 
-class ForYouTableViewCell: UITableViewCell {
+final class ForYouTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var collectionView: UICollectionView! {
         willSet {
@@ -36,176 +37,70 @@ class ForYouTableViewCell: UITableViewCell {
             newValue.setTitle("See All", for: .normal)
             newValue.titleLabel?.font = .appFont(.light, size: 14)
             newValue.setTitleColor(AppColor.label.color, for: .normal)
-            newValue.setTitleColor(AppColor.label.color, for: .highlighted)
         }
     }
     
     weak var delegate: ForYouTableViewCellDelegate?
-    private var currentView: ForYouViewEnum?
-    private let thingsService = ThingsService()
-    private let placesService = PlacesService()
-    private let peopleService = PeopleService()
-    private let albumServie = SearchService()
-    private let instapickService = InstapickServiceImpl()
     private var hud: MBProgressHUD?
     private let emptyDataView = ForYouEmptyCellView.initFromNib()
-    
-    private var thingsData: [WrapData] = []
-    private var placesData: [WrapData] = []
-    private var peopleData: [WrapData] = []
+    private var wrapData: [WrapData] = []
     private var albumsData: [AlbumItem] = []
     private var photopickData: [InstapickAnalyze] = []
-    
+    private var cardsData: [HomeCardResponse] = []
+    private var currentView: ForYouViewEnum?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         configureTableView()
-    }
-    
-    func configure(with type: ForYouViewEnum) {
-        currentView = type
-        titleLabel.text = type.title
         addSpinner()
-        
-        switch type {
-        case .faceImage:
-            break
-        case .people:
-            getPeople { data in
-                self.showEmptyDataViewIfNeeded(isShow: data.isEmpty)
-                self.peopleData = data
-                self.handleSuccessResponse()
-            } fail: {
-                print("PEOPLE ERROR")
-            }
-        case .things:
-            getThings { data in
-                self.showEmptyDataViewIfNeeded(isShow: data.isEmpty)
-                self.thingsData = data
-                self.handleSuccessResponse()
-            } fail: {
-                print("THINGS ERROR")
-            }
-        case .places:
-            getPlaces { data in
-                self.showEmptyDataViewIfNeeded(isShow: data.isEmpty)
-                self.placesData = data
-                self.handleSuccessResponse()
-            } fail: {
-                print("PLACES ERROR")
-            }
-        case .photopick:
-            getInstapickThumbnails { data in
-                self.showEmptyDataViewIfNeeded(isShow: data.isEmpty)
-                self.photopickData = data
-                self.handleSuccessResponse()
-            } fail: {
-                print("PHOTOPICK ERROR")
-            }
-        case .albums:
-            getAlbums { data in
-                self.albumsData = data
-                self.handleSuccessResponse()
-            } fail: {
-                print("ALBUMS ERROR")
-            }
-
-        }
     }
     
-    private func handleSuccessResponse() {
-        hud?.hide(animated: true)
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        collectionView.delegate = self
+    }
+    
+    func configure(with model: Any?, currentView: ForYouViewEnum) {
+        guard let model = model else {
+            return
+        }
+        
+        self.currentView = currentView
+        switch currentView {
+        case .albumCards, .animationCards, .collageCards:
+            collectionView.delegate = nil
+            if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+                flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+            }
+        default:
+            collectionView.delegate = self
+        }
+
+        titleLabel.text = currentView.title
+        seeAllButton.isHidden = false
+        hideSpinner()
+        
+        switch currentView {
+        case .albums:
+            self.albumsData = model as? [AlbumItem] ?? []
+        case .photopick:
+            self.photopickData = model as? [InstapickAnalyze] ?? []
+        case .collageCards, .animationCards, .albumCards:
+            self.cardsData = model as? [HomeCardResponse] ?? []
+            seeAllButton.isHidden = true
+        default:
+            self.wrapData = model as? [WrapData] ?? []
+        }
+        
         collectionView.reloadData()
     }
     
     private func configureTableView() {
-        collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.register(nibCell: ForYouCollectionViewCell.self)
         collectionView.register(nibCell: PeopleCollectionViewCell.self)
-    }
-    
-    private func getThings(success: ListRemoteItems?, fail: FailRemoteItems?) {
-        debugLog("ForYou getThings")
-        let param = ThingsPageParameters(pageSize: 10, pageNumber: 0)
-        
-        thingsService.getThingsPage(param: param, success: { response in
-            guard let response = response as? ThingsPageResponse else {
-                fail?()
-                return
-            }
-            
-            success?(response.list.map({ ThingsItem(response: $0) }))
-        }, fail: { error in
-            error.showInternetErrorGlobal()
-            fail?()
-        })
-    }
-    
-    private func getPlaces(success: ListRemoteItems?, fail: FailRemoteItems?) {
-        debugLog("ForYou getPlaces")
-        let param = PlacesPageParameters(pageSize: 10, pageNumber: 0)
-
-        placesService.getPlacesPage(param: param, success: { response in
-            guard let response = response as? PlacesPageResponse else {
-                fail?()
-                return
-            }
-
-            success?(response.list.map({ PlacesItem(response: $0) }))
-        }, fail: { error in
-            error.showInternetErrorGlobal()
-            fail?()
-        })
-    }
-    
-    private func getPeople(success: ListRemoteItems?, fail: FailRemoteItems?) {
-        debugLog("ForYou getPeople")
-        let param = PeoplePageParameters(pageSize: 10, pageNumber: 0)
-        
-        peopleService.getPeoplePage(param: param, success: { response in
-            guard let response = response as? PeoplePageResponse else {
-                fail?()
-                return
-            }
-            
-            success?(response.list.map({ PeopleItem(response: $0) }))
-        }, fail: { error in
-            error.showInternetErrorGlobal()
-            fail?()
-        })
-    }
-    
-    private func getAlbums(success: @escaping ListRemoteAlbums, fail: @escaping FailRemoteItems ) {
-        debugLog("ForYou getAlbums")
-        let serchParam = AlbumParameters(fieldName: .album,
-                                         sortBy: .date,
-                                         sortOrder: .desc,
-                                         page: 0,
-                                         size: 10)
-        
-        albumServie.searchAlbums(param: serchParam, success: { response in
-            guard let resultResponse = response as? AlbumResponse else {
-                return fail()
-            }
-            
-            let list = resultResponse.list.compactMap { AlbumItem(remote: $0) }
-            success(list)
-
-        }, fail: { errorResponse in
-            errorResponse.showInternetErrorGlobal()
-            fail()
-        })
-    }
-    
-    private func getInstapickThumbnails(success: @escaping ([InstapickAnalyze]) -> Void, fail: @escaping FailRemoteItems) {
-        instapickService.getAnalyzeHistory(offset: 0, limit: 10) { result in
-            switch result {
-            case .success(let history):
-                success(history)
-            case .failed(_):
-                fail()
-            }
-        }
+        collectionView.register(nibCell: ForYouCardsCollectionViewCell.self)
     }
     
     private func addSpinner() {
@@ -216,7 +111,7 @@ class ForYouTableViewCell: UITableViewCell {
         hud?.offset = CGPoint(x: 0.0, y: MBProgressMaxOffset)
     }
     
-    func showEmptyDataViewIfNeeded(isShow: Bool) {
+    private func showEmptyDataViewIfNeeded(isShow: Bool) {
         guard isShow else {
             emptyDataView.removeFromSuperview()
             return
@@ -243,24 +138,19 @@ class ForYouTableViewCell: UITableViewCell {
             delegate?.onSeeAllButton(for: currentView)
         }
     }
-    
 }
 
 extension ForYouTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch currentView {
-        case .people:
-            return peopleData.count
-        case .things:
-            return thingsData.count
-        case .places:
-            return placesData.count
         case .albums:
             return albumsData.count
         case .photopick:
             return photopickData.count
+        case .collageCards, .albumCards, .animationCards:
+            return cardsData.count
         default:
-            return 0
+            return wrapData.count
         }
     }
     
@@ -269,15 +159,7 @@ extension ForYouTableViewCell: UICollectionViewDataSource {
         switch currentView {
         case .people:
             let cell = collectionView.dequeue(cell: PeopleCollectionViewCell.self, for: indexPath)
-            let item = peopleData[indexPath.row]
-            cell.configure(with: item)
-            return cell
-        case .things:
-            let item = thingsData[indexPath.row]
-            cell.configure(with: item)
-            return cell
-        case .places:
-            let item = placesData[indexPath.row]
+            let item = wrapData[indexPath.row]
             cell.configure(with: item)
             return cell
         case .albums:
@@ -285,10 +167,17 @@ extension ForYouTableViewCell: UICollectionViewDataSource {
             cell.configureAlbum(with: item)
             return cell
         case .photopick:
-            let url = photopickData[indexPath.row]
-            cell.configure(with: url)
+            let item = photopickData[indexPath.row]
+            cell.configure(with: item)
+            return cell
+        case .collageCards, .animationCards, .albumCards:
+            let cell = collectionView.dequeue(cell: ForYouCardsCollectionViewCell.self, for: indexPath)
+            let item = cardsData[indexPath.row]
+            cell.configure(with: item, currentView: currentView ?? .collageCards)
             return cell
         default:
+            let item = wrapData[indexPath.row]
+            cell.configure(with: item, currentView: currentView ?? .people)
             return cell
         }
     }
@@ -296,11 +185,12 @@ extension ForYouTableViewCell: UICollectionViewDataSource {
 
 extension ForYouTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if currentView == .people {
+        switch currentView {
+        case .people:
             return CGSize(width: 74, height: 106)
+        default:
+            return CGSize(width: 140, height: 140)
         }
-        
-        return CGSize(width: 140, height: 140)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -314,17 +204,20 @@ extension ForYouTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch currentView {
         case .people:
-            let item = peopleData[indexPath.row]
+            let item = wrapData[indexPath.row]
             delegate?.navigateToItemDetail(item: item, faceImageType: .people)
         case .things:
-            let item = thingsData[indexPath.row]
+            let item = wrapData[indexPath.row]
             delegate?.navigateToItemDetail(item: item, faceImageType: .things)
         case .places:
-            let item = placesData[indexPath.row]
+            let item = wrapData[indexPath.row]
             delegate?.navigateToItemDetail(item: item, faceImageType: .places)
         case .albums:
             let album = albumsData[indexPath.row]
             delegate?.naviateToAlbumDetail(album: album)
+        case .story, .animations, .collages, .hidden:
+            let item = wrapData[indexPath.row]
+            delegate?.navigateToItemPreview(item: item, items: wrapData)
         default:
             return
         }

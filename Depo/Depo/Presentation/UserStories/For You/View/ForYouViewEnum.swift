@@ -11,12 +11,17 @@ import Foundation
 enum ForYouViewEnum: CaseIterable {
     case faceImage
     case people
-    case things
-    case places
+    case collageCards
+    case collages
+    case animationCards
+    case animations
+    case albumCards
     case albums
+    case places
+    case story
     case photopick
-//    case throwback
-//    case collage
+    case things
+    case hidden
     
     var title: String {
         switch self {
@@ -24,17 +29,20 @@ enum ForYouViewEnum: CaseIterable {
         case .people: return "People"
         case .things: return "Things"
         case .places: return "Places"
-        case .albums: return "Albums"
+        case .albums: return "My Albums"
         case .photopick: return "Photopick"
-        //        case .throwback: return "Throwback"
-        //        case .collage: return "Collage"
+        case .story: return "My Stories"
+        case .animations: return "My Animations"
+        case .collageCards: return "Collages"
+        case .collages: return "My Collages"
+        case .hidden: return "Hidden"
+        case .animationCards: return "Animations"
+        case .albumCards: return "Albums"
         }
     }
     
     var emptyText: String {
         switch self {
-        case .faceImage:
-            return ""
         case .people:
             return "You don't have any people"
         case .things:
@@ -45,6 +53,8 @@ enum ForYouViewEnum: CaseIterable {
             return "You don't have any album"
         case .photopick:
             return "You don't have any photopick"
+        default:
+            return ""
         }
     }
     

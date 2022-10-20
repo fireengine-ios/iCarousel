@@ -59,14 +59,14 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="r9A-zr-b2X">
                                             <rect key="frame" x="24" y="353.5" width="325" height="50"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVL-98-gtl">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVL-98-gtl" customClass="DarkBlueButton" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="154.5" height="50"/>
                                                     <state key="normal" title="Button"/>
                                                     <connections>
                                                         <action selector="confirmButtonTapped" destination="-1" eventType="touchUpInside" id="uRW-HY-gP8"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E6b-in-2H1">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E6b-in-2H1" customClass="WhiteButton" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="170.5" y="0.0" width="154.5" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="Xhl-HM-yRB"/>

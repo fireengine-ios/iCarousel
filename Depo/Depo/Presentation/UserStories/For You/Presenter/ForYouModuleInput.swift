@@ -9,5 +9,5 @@
 import Foundation
 
 protocol ForYouModuleInput: AnyObject {
-
+    func viewIsReady()
 }

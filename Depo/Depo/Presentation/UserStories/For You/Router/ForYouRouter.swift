@@ -28,7 +28,13 @@ final class ForYouRouter: ForYouRouterInput {
         case .albums:
             let albums = router.albumsListController()
             router.pushViewController(viewController: albums)
-        case .photopick:
+        case .story:
+            let stories = router.storiesListController()
+            router.pushViewController(viewController: stories)
+        case .hidden:
+            let hidden = router.hiddenPhotosViewController()
+            router.pushViewController(viewController: hidden)
+        default:
             break
         }
     }
@@ -60,6 +66,17 @@ final class ForYouRouter: ForYouRouterInput {
     func navigateToAlbumDetail(album: AlbumItem) {
         let albumVC = router.albumDetailController(album: album, type: .List, status: .active, moduleOutput: nil)
         router.pushViewController(viewController: albumVC)
+    }
+    
+    func navigateToItemPreview(item: WrapData, items: [WrapData]) {
+        let detailModule = router.filesDetailModule(fileObject: item,
+                                                      items: items,
+                                                      status: item.status,
+                                                      canLoadMoreItems: false,
+                                                      moduleOutput: nil)
+        
+        let nController = NavigationController(rootViewController: detailModule.controller)
+        router.presentViewController(controller: nController)
     }
 }
 

@@ -60,32 +60,15 @@ final class PreparedFiltersView: UIView, NibInit {
         view.filtermanager = manager
         view.previewImage = previewImage
         view.setupImages()
-        
-//        let categories: [PreparedFilterCategory?] = [nil, .recent, .influncer]
-//        view.categoryButtons = categories.map { FilterCategoryButton.with(category: $0) }
-//        view.selectedCategory = nil
         return view
     }
     
-    @IBOutlet private weak var filterCategoriesScrollView: UIScrollView! {
-        willSet {
-            newValue.backgroundColor = ColorConstants.photoEditBackgroundColor
-            newValue.contentInset = UIEdgeInsets(topBottom: 0, rightLeft: 8)
-        }
-    }
-    
-    @IBOutlet private weak var filterCategoriesView: UIStackView! {
-        willSet {
-            newValue.spacing = 16
-        }
-    }
     @IBOutlet private weak var collectionView: UICollectionView!
     
     private var categoryButtons = [FilterCategoryButton]() {
         didSet {
             categoryButtons.forEach {
                 $0.addTarget(self, action: #selector(onSwitchFilterCategory(_:)), for: .touchUpInside)
-                filterCategoriesView.addArrangedSubview($0)
             }
         }
     }
@@ -100,18 +83,6 @@ final class PreparedFiltersView: UIView, NibInit {
             collectionView.reloadData()
         }
     }
-    
-//    private var selectedCategory: PreparedFilterCategory? {
-//        didSet {
-//            categoryButtons.forEach { $0.isSelected = ($0.category == selectedCategory) }
-//
-//            if let category = selectedCategory {
-//                filters = allFilters.filter { $0.category == category }
-//            } else {
-//                filters = allFilters
-//            }
-//        }
-//    }
     
     //MARK: - Setup
     

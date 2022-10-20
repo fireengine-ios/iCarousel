@@ -37,8 +37,8 @@ final class PopUpController: BasePopUpController {
         }
     }
     
-    @IBOutlet private weak var firstButton: RoundedInsetsButton!
-    @IBOutlet private weak var secondButton: RoundedInsetsButton!
+    @IBOutlet private weak var firstButton: WhiteButton!
+    @IBOutlet private weak var secondButton: DarkBlueButton!
 
     @IBOutlet weak var noneImageConstraint: NSLayoutConstraint!
     
@@ -133,19 +133,6 @@ final class PopUpController: BasePopUpController {
     }
     
     private func setup(_ button: InsetsButton) {
-        
-        if button == firstButton {
-            button.setBackgroundColor(AppColor.popUpButtonNormal.color, for: .normal)
-            button.setBackgroundColor(AppColor.tint.color, for: .highlighted)
-            button.setTitleColor(.white, for: .normal)
-            button.setTitleColor(AppColor.whiteAndLrTealish.color.darker(by: 30.0), for: .highlighted)
-        } else {
-            button.setBackgroundColor(AppColor.popUpButtonCancel.color, for: .normal)
-            button.setBackgroundColor(AppColor.tint.color.darker(by: 30), for: .highlighted)
-            button.setTitleColor(.white, for: .normal)
-            button.setTitleColor(AppColor.whiteAndLrTealish.color.darker(by: 30.0), for: .highlighted)
-        }
-        
         button.isExclusiveTouch = true
         button.titleLabel?.font = .appFont(.medium, size: 18)
 
@@ -154,8 +141,6 @@ final class PopUpController: BasePopUpController {
         
         let inset: CGFloat = 2
         button.insets = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
-        
-        button.layer.cornerRadius = button.frame.height / 2
     }
     
     //MARK: IBAction
