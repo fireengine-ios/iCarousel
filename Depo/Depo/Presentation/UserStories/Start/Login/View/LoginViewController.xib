@@ -95,7 +95,7 @@
                                             <rect key="frame" x="0.0" y="19" width="374" height="80"/>
                                             <color key="backgroundColor" name="primaryBackground"/>
                                         </view>
-                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="Fd4-XR-iy0" userLabel="password" customClass="BorderedPasswordEnterView" customModule="Billo" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="Fd4-XR-iy0" userLabel="password" customClass="ProfilePasswordEnterView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="115" width="374" height="80"/>
                                             <color key="backgroundColor" name="primaryBackground"/>
                                         </view>

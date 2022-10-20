@@ -98,7 +98,7 @@ final class LoginViewController: BaseViewController {
         }
     }
     
-    @IBOutlet private weak var passwordEnterView: BorderedPasswordEnterView! {
+    @IBOutlet private weak var passwordEnterView: ProfilePasswordEnterView! {
         willSet {
             newValue.textField.enablesReturnKeyAutomatically = true
             newValue.textField.quickDismissPlaceholder = TextConstants.loginPasswordPlaceholder

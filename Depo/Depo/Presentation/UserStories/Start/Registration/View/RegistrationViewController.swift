@@ -114,8 +114,8 @@ final class RegistrationViewController: BaseViewController {
         return newValue
     }()
     
-    private let passwordEnterView: BorderedPasswordEnterView = {
-        let newValue = BorderedPasswordEnterView()
+    private let passwordEnterView: ProfilePasswordEnterView = {
+        let newValue = ProfilePasswordEnterView()
         newValue.textField.enablesReturnKeyAutomatically = true
         newValue.textField.quickDismissPlaceholder = TextConstants.enterYourNewPassword
         newValue.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
@@ -124,8 +124,8 @@ final class RegistrationViewController: BaseViewController {
         return newValue
     }()
     
-    private let rePasswordEnterView: BorderedPasswordEnterView = {
-        let newValue = BorderedPasswordEnterView()
+    private let rePasswordEnterView: ProfilePasswordEnterView = {
+        let newValue = ProfilePasswordEnterView()
         
         newValue.textField.quickDismissPlaceholder = TextConstants.reenterYourPassword
         newValue.textField.enablesReturnKeyAutomatically = true
