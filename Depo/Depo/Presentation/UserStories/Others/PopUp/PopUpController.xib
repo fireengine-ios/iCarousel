@@ -112,7 +112,7 @@
                             </constraints>
                         </stackView>
                     </subviews>
-                    <color key="backgroundColor" name="secondaryBackground"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="Ute-ez-40c" firstAttribute="leading" secondItem="RH9-1C-TFf" secondAttribute="leading" id="ACr-DR-JW2"/>
                         <constraint firstItem="VEd-6W-k27" firstAttribute="leading" secondItem="RH9-1C-TFf" secondAttribute="leading" id="DZa-iQ-boo"/>
@@ -139,9 +139,6 @@
     <resources>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="secondaryBackground">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

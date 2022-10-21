@@ -490,20 +490,10 @@ class RouterVC: NSObject {
         return AutoSyncModuleInitializer.initializeViewController()
     }
     
-    
-    // MARK: Capcha
-    
-    var capcha: CaptchaViewController? {
-        return CaptchaViewController.initFromXib()
-    }
-    
-    
     // MARK: TabBar
-    
     var tabBarScreen: UIViewController? {
         return TabBarViewController()
     }
-    
     
     // MARK: Home Page
     var homePageScreen: HeaderContainingViewController.ChildViewController {

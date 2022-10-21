@@ -16,7 +16,7 @@ final class SupportFormController: ViewController, KeyboardHandler {
     
     @IBOutlet private weak var stackView: UIStackView! {
         willSet {
-            newValue.spacing = 11
+            newValue.spacing = 30
             newValue.axis = .vertical
             newValue.alignment = .fill
             newValue.distribution = .fill
@@ -39,20 +39,10 @@ final class SupportFormController: ViewController, KeyboardHandler {
         }
     }
     
-    @IBOutlet private weak var sendButton: RoundedInsetsButton! {
+    @IBOutlet private weak var sendButton: DarkBlueButton! {
         willSet {
-            /// Custom type in IB
             newValue.isExclusiveTouch = true
             newValue.setTitle(TextConstants.feedbackViewSendButton, for: .normal)
-            newValue.insets = UIEdgeInsets(top: 5, left: 30, bottom: 5, right: 30)
-            
-            newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.setTitleColor(UIColor.white.darker(by: 30), for: .highlighted)
-            newValue.setBackgroundColor(UIColor.lrTealish, for: .normal)
-            newValue.setBackgroundColor(UIColor.lrTealish.darker(by: 30), for: .highlighted)
-            
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.adjustsFontSizeToFitWidth()
         }
     }
     
@@ -96,8 +86,8 @@ final class SupportFormController: ViewController, KeyboardHandler {
         return newValue
     }()
     
-    let problemView: ProfileTextViewEnterView = {
-        let newValue = ProfileTextViewEnterView()
+    let problemView: ProfileTextEnterView = {
+        let newValue = ProfileTextEnterView()
         newValue.titleLabel.text = TextConstants.yourProblem
         newValue.subtitleLabel.text = TextConstants.pleaseEnterYourProblemShortly
         return newValue
@@ -130,7 +120,7 @@ final class SupportFormController: ViewController, KeyboardHandler {
         phoneView.codeTextField.delegate = self
         
         phoneView.responderOnNext = subjectView.textField
-        subjectView.responderOnNext = problemView.textView
+        subjectView.responderOnNext = problemView.textField
     }
     
     @IBAction private func onSendButton(_ sender: UIButton) {
@@ -151,7 +141,7 @@ final class SupportFormController: ViewController, KeyboardHandler {
             let phoneCode = phoneView.codeTextField.text,
             let phoneNumber = phoneView.numberTextField.text,
             let subject = subjectView.textField.text,
-            let problem = problemView.textView.text
+            let problem = problemView.textField.text
         else {
             assertionFailure("all fields should not be nil")
             return
@@ -180,7 +170,8 @@ final class SupportFormController: ViewController, KeyboardHandler {
         }
         
         /// bcz of placeholder use isTextEmpty
-        if problemView.isTextEmpty {
+        if let problemViewText = problemView.textField.text,
+           problemViewText.isEmpty {
             problems.append(.emptyProblem)
         }
         
@@ -277,7 +268,7 @@ final class SupportFormController: ViewController, KeyboardHandler {
             scrollToView(subjectView)
             
         case .emptyProblem:
-            problemView.textView.becomeFirstResponder()
+            problemView.textField.becomeFirstResponder()
             scrollToView(problemView)
             
         case .invalidEmail:
@@ -352,7 +343,7 @@ extension SupportFormController: UITextFieldDelegate {
         /// only for simulator.
         /// setup by responderOnNext:
         case subjectView.textField:
-            problemView.textView.becomeFirstResponder()
+            problemView.textField.becomeFirstResponder()
             trackSubjectSelection()
             
         default:
