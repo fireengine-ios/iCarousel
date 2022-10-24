@@ -34,14 +34,34 @@ final class CaptchaView: UIView, FromNib {
         }
     }
     
+    @IBOutlet weak var stackView: UIStackView!
+    
+    
+    @IBOutlet weak var errorContentView: UIView! {
+        willSet {
+            
+            newValue.isOpaque = true
+            newValue.isHidden = true
+            newValue.backgroundColor = .clear
+            newValue.layer.cornerRadius = 8
+            newValue.layer.borderWidth = 1
+            newValue.layer.borderColor = AppColor.profileInfoOrange.cgColor
+        }
+    }
+    
+    @IBOutlet weak var captchaView: UIView! {
+        willSet {
+            newValue.layer.borderWidth = 1.0
+            newValue.layer.borderColor = AppColor.darkTextAndLightGray.cgColor
+            newValue.layer.cornerRadius = 8
+        }
+    }
+    
     @IBOutlet weak var errorLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.textOrange
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 15)
+            newValue.textColor = AppColor.profileInfoOrange.color
+            newValue.font = .appFont(.regular, size: 14.0)
             newValue.numberOfLines = 0
-            newValue.isHidden = true
-            newValue.backgroundColor = AppColor.primaryBackground.color
-            newValue.isOpaque = true
         }
     }
     
@@ -125,10 +145,9 @@ final class CaptchaView: UIView, FromNib {
     private func setup() {
         setupFromNib()
         
-        self.layer.borderWidth = 1.0
-        self.layer.borderColor = AppColor.darkTextAndLightGray.cgColor
-        self.layer.cornerRadius = 8
-        
+        errorContentView.topAnchor.constraint(equalTo: captchaView.bottomAnchor,
+                                             constant: -10).isActive = true
+        stackView.sendSubviewToBack(errorContentView)
     }
     
     override func awakeFromNib() {
@@ -218,22 +237,22 @@ final class CaptchaView: UIView, FromNib {
     }
     
     func showErrorAnimated() {
-        guard errorLabel.isHidden else {
+        guard errorContentView.isHidden else {
             return
         }
         UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.errorLabel.isHidden = false
+            self.errorContentView.isHidden = false
             /// https://stackoverflow.com/a/46412621/5893286
             self.layoutIfNeeded()
         }
     }
     
     func hideErrorAnimated() {
-        guard !errorLabel.isHidden else {
+        guard !errorContentView.isHidden else {
             return
         }
         UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.errorLabel.isHidden = true
+            self.errorContentView.isHidden = true
             /// https://stackoverflow.com/a/46412621/5893286
             self.layoutIfNeeded()
         }
