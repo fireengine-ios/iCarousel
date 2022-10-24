@@ -9,9 +9,9 @@
 import Foundation
 
 protocol ForYouRouterInput {
-    func navigateToSeeAll(for view: ForYouViewEnum)
+    func navigateToSeeAll(for view: ForYouSections)
     func navigateToFaceImage()
-    func navigateToCreate(for view: ForYouViewEnum)
+    func navigateToCreate(for view: ForYouSections)
     func navigateToItemDetail(_ album: AlbumServiceResponse, forItem item: Item, faceImageType: FaceImageType?)
     func navigateToAlbumDetail(album: AlbumItem)
     func navigateToItemPreview(item: WrapData, items: [WrapData])

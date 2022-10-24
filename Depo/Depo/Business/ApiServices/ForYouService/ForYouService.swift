@@ -59,7 +59,7 @@ final class ForYouService: BaseRequestService {
     }
     
     @discardableResult
-    func forYouCards(for view: ForYouViewEnum, handler: @escaping (ResponseResult<[HomeCardResponse]>) -> Void) -> URLSessionTask? {
+    func forYouCards(for view: ForYouSections, handler: @escaping (ResponseResult<[HomeCardResponse]>) -> Void) -> URLSessionTask? {
         debugLog("forYouCards: \(view.title)")
         
         var url = RouteRequests.baseUrl

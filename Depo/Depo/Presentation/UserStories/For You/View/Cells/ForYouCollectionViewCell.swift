@@ -12,6 +12,7 @@ import SDWebImage
 class ForYouCollectionViewCell: UICollectionViewCell {
     
     private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+    private let gradient = CAGradientLayer()
 
     @IBOutlet private weak var thumbnailImage: UIImageView! {
         willSet {
@@ -35,12 +36,21 @@ class ForYouCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    @IBOutlet private weak var emptyAlbumView: UIView! {
+        willSet {
+            newValue.isHidden = true
+            newValue.layer.borderWidth = 1
+            newValue.layer.cornerRadius = 5
+            newValue.layer.borderColor = AppColor.darkTint.cgColor
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         addGradientLayer()
     }
     
-    func configure(with wrapData: WrapData, currentView: ForYouViewEnum) {
+    func configure(with wrapData: WrapData, currentView: ForYouSections) {
         titleLabel.text = wrapData.name
         hiddenIcon.isHidden = currentView != .hidden
         
@@ -48,6 +58,7 @@ class ForYouCollectionViewCell: UICollectionViewCell {
         case .places, .things, .albums:
             titleLabel.isHidden = false
         default:
+            gradient.removeFromSuperlayer()
             titleLabel.isHidden = true
         }
         
@@ -73,25 +84,21 @@ class ForYouCollectionViewCell: UICollectionViewCell {
         
         switch album.preview?.patchToPreview {
         case .remoteUrl(let url):
+            emptyAlbumView.isHidden = url != nil
             thumbnailImage.sd_setImage(with: url, completed: nil)
         default:
             break
         }
     }
     
-    func configureCard(with card: HomeCardResponse) {
-        titleLabel.isHidden = true
-        hiddenIcon.isHidden = true
-    }
-    
     func configure(with data: InstapickAnalyze) {
+        gradient.removeFromSuperlayer()
         titleLabel.isHidden = true
         hiddenIcon.isHidden = true
         thumbnailImage.sd_setImage(with: data.fileInfo?.metadata?.mediumUrl, completed: nil)
     }
     
     private func addGradientLayer() {
-        let gradient = CAGradientLayer()
         gradient.frame = thumbnailImage.bounds
         let startColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0).cgColor
         let endColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4).cgColor

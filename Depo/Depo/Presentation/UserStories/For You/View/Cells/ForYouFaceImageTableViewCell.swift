@@ -42,14 +42,14 @@ class ForYouFaceImageTableViewCell: UITableViewCell {
             newValue.font = .appFont(.regular, size: 12)
             newValue.numberOfLines = 2
             newValue.textAlignment = .center
-            newValue.text = "Yüz tanıma ile sevdiklerinle olan anılarına daha kolay ulaş!"
+            newValue.text = TextConstants.faceRecognitionShort
         }
     }
     
     @IBOutlet private weak var faceImageButton: RoundedButton! {
         willSet {
             newValue.backgroundColor = AppColor.forYouButton.color
-            newValue.setTitle("Yüz Tanıma Özelliğini Etkinleştir", for: .normal)
+            newValue.setTitle(TextConstants.faceImageEnable, for: .normal)
             newValue.titleLabel?.font = .appFont(.medium, size: 16)
             newValue.setTitleColor(UIColor.white, for: .normal)
         }

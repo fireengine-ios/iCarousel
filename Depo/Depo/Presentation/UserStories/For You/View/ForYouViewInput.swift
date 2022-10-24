@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ForYouViewInput: AnyObject {
+protocol ForYouViewInput: AnyObject, Waiting {
     func getFIRResponse(isAllowed: Bool)
     func didFinishedAllRequests()
 }

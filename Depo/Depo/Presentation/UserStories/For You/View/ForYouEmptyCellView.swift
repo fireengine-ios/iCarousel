@@ -10,13 +10,13 @@ import Foundation
 import UIKit
 
 protocol ForYouEmptyCellViewDelegate: AnyObject {
-    func navigateTo(view: ForYouViewEnum)
+    func navigateTo(view: ForYouSections)
 }
 
 class ForYouEmptyCellView: UIView, NibInit {
     
     weak var delegate: ForYouEmptyCellViewDelegate?
-    private var currentView: ForYouViewEnum?
+    private var currentView: ForYouSections?
     
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
@@ -42,11 +42,11 @@ class ForYouEmptyCellView: UIView, NibInit {
         }
     }
     
-    func configure(with view: ForYouViewEnum) {
+    func configure(with view: ForYouSections) {
         currentView = view
         emptyViewButton.setTitle(view.buttonText, for: .normal)
         descriptionLabel.text = view.emptyText
-        emptyViewButton.isHidden = !(view == .photopick || view == .albums)
+        emptyViewButton.isHidden = !(view == .photopick || view == .albums || view == .story)
     }
 
 }

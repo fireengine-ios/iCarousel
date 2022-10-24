@@ -10,8 +10,8 @@ import UIKit
 import MBProgressHUD
 
 protocol ForYouTableViewCellDelegate: AnyObject {
-    func onSeeAllButton(for view: ForYouViewEnum)
-    func navigateToCreate(for view: ForYouViewEnum)
+    func onSeeAllButton(for view: ForYouSections)
+    func navigateToCreate(for view: ForYouSections)
     func navigateToItemDetail(item: WrapData, faceImageType: FaceImageType?)
     func naviateToAlbumDetail(album: AlbumItem)
     func navigateToItemPreview(item: WrapData, items: [WrapData])
@@ -47,7 +47,7 @@ final class ForYouTableViewCell: UITableViewCell {
     private var albumsData: [AlbumItem] = []
     private var photopickData: [InstapickAnalyze] = []
     private var cardsData: [HomeCardResponse] = []
-    private var currentView: ForYouViewEnum?
+    private var currentView: ForYouSections?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -60,7 +60,7 @@ final class ForYouTableViewCell: UITableViewCell {
         collectionView.delegate = self
     }
     
-    func configure(with model: Any?, currentView: ForYouViewEnum) {
+    func configure(with model: Any?, currentView: ForYouSections) {
         guard let model = model else {
             return
         }
@@ -83,13 +83,17 @@ final class ForYouTableViewCell: UITableViewCell {
         switch currentView {
         case .albums:
             self.albumsData = model as? [AlbumItem] ?? []
+            showEmptyDataViewIfNeeded(isShow: albumsData.isEmpty)
         case .photopick:
             self.photopickData = model as? [InstapickAnalyze] ?? []
+            showEmptyDataViewIfNeeded(isShow: photopickData.isEmpty)
         case .collageCards, .animationCards, .albumCards:
             self.cardsData = model as? [HomeCardResponse] ?? []
             seeAllButton.isHidden = true
+            showEmptyDataViewIfNeeded(isShow: false)
         default:
             self.wrapData = model as? [WrapData] ?? []
+            showEmptyDataViewIfNeeded(isShow: wrapData.isEmpty)
         }
         
         collectionView.reloadData()
@@ -114,6 +118,7 @@ final class ForYouTableViewCell: UITableViewCell {
     private func showEmptyDataViewIfNeeded(isShow: Bool) {
         guard isShow else {
             emptyDataView.removeFromSuperview()
+            collectionView.isHidden = false
             return
         }
         
@@ -225,7 +230,7 @@ extension ForYouTableViewCell: UICollectionViewDelegateFlowLayout {
 }
 
 extension ForYouTableViewCell: ForYouEmptyCellViewDelegate {
-    func navigateTo(view: ForYouViewEnum) {
+    func navigateTo(view: ForYouSections) {
         delegate?.navigateToCreate(for: view)
     }
 }
