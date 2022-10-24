@@ -28,11 +28,12 @@ final class ForYouPresenter: BasePresenter, ForYouModuleInput {
     
     func viewIsReady() {
         interactor.viewIsReady()
+        view.showSpinner()
     }
 }
 
 extension ForYouPresenter: ForYouViewOutput {
-    func onSeeAllButton(for view: ForYouViewEnum) {
+    func onSeeAllButton(for view: ForYouSections) {
         router.navigateToSeeAll(for: view)
     }
     
@@ -49,7 +50,7 @@ extension ForYouPresenter: ForYouViewOutput {
         router.navigateToFaceImage()
     }
     
-    func navigateToCreate(for view: ForYouViewEnum) {
+    func navigateToCreate(for view: ForYouSections) {
         router.navigateToCreate(for: view)
     }
     
@@ -65,7 +66,7 @@ extension ForYouPresenter: ForYouViewOutput {
         router.navigateToItemPreview(item: item, items: items)
     }
     
-    func getHeightForRow(at view: ForYouViewEnum) -> Int {
+    func getHeightForRow(at view: ForYouSections) -> Int {
         switch view {
         case .faceImage:
             return 224
@@ -76,9 +77,9 @@ extension ForYouPresenter: ForYouViewOutput {
         case .places:
             return placesData.isEmpty ? 0 : 190
         case .albums:
-            return albumsData.isEmpty ? 0 : 190
+            return 190
         case .story:
-            return storyData.isEmpty ? 0 : 190
+            return 190
         case .animations:
             return animationsData.isEmpty ? 0 : 190
         case .collageCards:
@@ -92,11 +93,11 @@ extension ForYouPresenter: ForYouViewOutput {
         case .hidden:
             return hiddenData.isEmpty ? 0 : 190
         case .photopick:
-            return photopickData.isEmpty ? 0 : 190
+            return 190
         }
     }
     
-    func getModel(for view: ForYouViewEnum) -> Any? {
+    func getModel(for view: ForYouSections) -> Any? {
         switch view {
         case .faceImage:
             return nil
@@ -119,7 +120,7 @@ extension ForYouPresenter: ForYouViewOutput {
         case .hidden:
             return hiddenData
         case .photopick:
-            return photopickData
+            return  photopickData.filter { $0.fileInfo != nil }
         case .animationCards:
             return animationCardsData
         case .albumCards:
@@ -186,6 +187,7 @@ extension ForYouPresenter: ForYouInteractorOutput {
     }
 
     func didFinishedAllRequests() {
+        view.hideSpinner()
         view.didFinishedAllRequests()
     }
 }

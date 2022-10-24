@@ -10,11 +10,10 @@ import UIKit
 
 class PhotoSelectionNoFilesView: UIView, NibInit {
     
-    @IBOutlet weak private var cameraImageView: UIImageView!
     @IBOutlet weak private var noPhotosLabel: UILabel! {
         didSet {
-            noPhotosLabel.textColor = ColorConstants.textGrayColor
-            noPhotosLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
+            noPhotosLabel.textColor = AppColor.label.color
+            noPhotosLabel.font = .appFont(.medium, size: 14)
             noPhotosLabel.text = TextConstants.thereAreNoPhotos
         }
     }

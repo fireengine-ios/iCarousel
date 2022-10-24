@@ -190,5 +190,9 @@ enum Strings: String, Localizable {
     case paycellEarnedSubtitle      = "title_paycell_subtitle"
     case paycellAcceptedFriends     = "title_paycell_friends"
     case paycellShareMessage        = "paycell_share_message"
+    
+    // MARK: - All Files
+    case allFilesNoMusicButtonText    = "Start adding your music"
+    case allFilesNoDocumentButtonText = "Start adding your documents"
 
 }

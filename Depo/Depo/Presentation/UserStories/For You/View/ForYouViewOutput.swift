@@ -10,13 +10,13 @@ import Foundation
 
 protocol ForYouViewOutput: AnyObject {
     func viewIsReady()
-    func onSeeAllButton(for view: ForYouViewEnum)
+    func onSeeAllButton(for view: ForYouSections)
     func checkFIRisAllowed()
     func onFaceImageButton()
-    func navigateToCreate(for view: ForYouViewEnum)
+    func navigateToCreate(for view: ForYouSections)
     func navigateToItemDetail(item: WrapData, faceImageType: FaceImageType?)
     func navigateToAlbumDetail(album: AlbumItem)
     func navigateToItemPreview(item: WrapData, items: [WrapData])
-    func getHeightForRow(at view: ForYouViewEnum) -> Int
-    func getModel(for view: ForYouViewEnum) -> Any?
+    func getHeightForRow(at view: ForYouSections) -> Int
+    func getModel(for view: ForYouSections) -> Any?
 }

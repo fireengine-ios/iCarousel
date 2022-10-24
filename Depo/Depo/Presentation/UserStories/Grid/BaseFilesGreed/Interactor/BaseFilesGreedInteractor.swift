@@ -186,9 +186,9 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
         } else if remoteItems is AllFilesService {
             return TextConstants.allFilesViewNoFilesButtonText
         } else if remoteItems is MusicService {
-            return "Start adding your music"
+            return localized(.allFilesNoMusicButtonText)
         } else if remoteItems is DocumentService {
-            return "Start adding your document"
+            return localized(.allFilesNoDocumentButtonText)
         }
     
         return ""
@@ -201,8 +201,6 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
             return Image.popupMusic.image
         } else if remoteItems is DocumentService {
             return Image.popupDocuments.image
-        } else if remoteItems is StoryService {
-            return UIImage(named: "ImageNoStories")!
         } else if remoteItems is FavouritesService {
             return Image.popupFavorites.image
         }

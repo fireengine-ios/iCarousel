@@ -8888,10 +8888,10 @@
 		E7426F75286E559D00666A79 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7426F73286E559D00666A79 /* GradientSwitch.swift */; };
 		E7426F76286E559D00666A79 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7426F73286E559D00666A79 /* GradientSwitch.swift */; };
 		E7426F77286E559D00666A79 /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7426F73286E559D00666A79 /* GradientSwitch.swift */; };
-		F00610CD2899324700911048 /* ForYouViewEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610CC2899324700911048 /* ForYouViewEnum.swift */; };
-		F00610CE2899324700911048 /* ForYouViewEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610CC2899324700911048 /* ForYouViewEnum.swift */; };
-		F00610CF2899324700911048 /* ForYouViewEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610CC2899324700911048 /* ForYouViewEnum.swift */; };
-		F00610D02899324700911048 /* ForYouViewEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610CC2899324700911048 /* ForYouViewEnum.swift */; };
+		F00610CD2899324700911048 /* ForYouSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610CC2899324700911048 /* ForYouSections.swift */; };
+		F00610CE2899324700911048 /* ForYouSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610CC2899324700911048 /* ForYouSections.swift */; };
+		F00610CF2899324700911048 /* ForYouSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610CC2899324700911048 /* ForYouSections.swift */; };
+		F00610D02899324700911048 /* ForYouSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610CC2899324700911048 /* ForYouSections.swift */; };
 		F00610E6289DBF3100911048 /* PaycellCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610E5289DBF3100911048 /* PaycellCampaignViewController.swift */; };
 		F00610E7289DBF3100911048 /* PaycellCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610E5289DBF3100911048 /* PaycellCampaignViewController.swift */; };
 		F00610E8289DBF3100911048 /* PaycellCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00610E5289DBF3100911048 /* PaycellCampaignViewController.swift */; };
@@ -12065,7 +12065,7 @@
 		EFA74FAC1FBF378F00CF946E /* PrintInteractorOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintInteractorOutput.swift; sourceTree = "<group>"; };
 		EFA74FAD1FBF378F00CF946E /* PrintInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintInteractor.swift; sourceTree = "<group>"; };
 		EFE9E4488118296DCE476A71 /* Pods-LifeTech_BilloShared.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_BilloShared.appstore.xcconfig"; path = "Target Support Files/Pods-LifeTech_BilloShared/Pods-LifeTech_BilloShared.appstore.xcconfig"; sourceTree = "<group>"; };
-		F00610CC2899324700911048 /* ForYouViewEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouViewEnum.swift; sourceTree = "<group>"; };
+		F00610CC2899324700911048 /* ForYouSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouSections.swift; sourceTree = "<group>"; };
 		F00610E5289DBF3100911048 /* PaycellCampaignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaycellCampaignViewController.swift; sourceTree = "<group>"; };
 		F00610EA289DBF4D00911048 /* PaycellCampaignViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaycellCampaignViewController.xib; sourceTree = "<group>"; };
 		F00610F028A0504C00911048 /* PaycellCampaignService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaycellCampaignService.swift; sourceTree = "<group>"; };
@@ -21564,7 +21564,7 @@
 		F0571E9A288AE2FC00A0D6AC /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F00610CC2899324700911048 /* ForYouViewEnum.swift */,
+				F00610CC2899324700911048 /* ForYouSections.swift */,
 				F0571EA5288AE4B800A0D6AC /* Cells */,
 				F0571E9B288AE31700A0D6AC /* ForYou.xib */,
 				F0571EA0288AE33700A0D6AC /* ForYouViewController.swift */,
@@ -25762,7 +25762,7 @@
 				8C0E8DBF1FDEBDFF00789C91 /* SpringLabel.swift in Sources */,
 				8C0E8DC01FDEBDFF00789C91 /* BottomSelectionTabBarViewInput.swift in Sources */,
 				4BE126902304351900BFE06F /* ServerErrors.swift in Sources */,
-				F00610CD2899324700911048 /* ForYouViewEnum.swift in Sources */,
+				F00610CD2899324700911048 /* ForYouSections.swift in Sources */,
 				8C0E8DC11FDEBDFF00789C91 /* RegistrationConfigurator.swift in Sources */,
 				8C0E8DC21FDEBDFF00789C91 /* LocalAlbumViewController.swift in Sources */,
 				F095724F28A11A9D00D1D0DD /* PaycellDetailPopup.swift in Sources */,
@@ -28231,7 +28231,7 @@
 				8E26D9902306B48800D08123 /* MusicViewOutput.swift in Sources */,
 				8C1E5BD522CB8BB4008FDA02 /* AssetFileCacheManager.swift in Sources */,
 				CE784A9D22A685FB00662219 /* PeriodicContactSyncRouterInput.swift in Sources */,
-				F00610CF2899324700911048 /* ForYouViewEnum.swift in Sources */,
+				F00610CF2899324700911048 /* ForYouSections.swift in Sources */,
 				CE784A9E22A685FB00662219 /* PredicateRules.swift in Sources */,
 				071188A027FAF49900F512A1 /* TabBarImage.swift in Sources */,
 				98231A0824F3A1E700FD16E2 /* SliderView.swift in Sources */,
@@ -29555,7 +29555,7 @@
 				CF8B651323CBC9D70021B021 /* UsageInfoInteractorInput.swift in Sources */,
 				CF8B651423CBC9D70021B021 /* SpotifyStatusView.swift in Sources */,
 				CF8B651523CBC9D70021B021 /* FaceImagePhotosRouterInput.swift in Sources */,
-				F00610CE2899324700911048 /* ForYouViewEnum.swift in Sources */,
+				F00610CE2899324700911048 /* ForYouSections.swift in Sources */,
 				98B047AC259314740011DAEB /* Configuration.m in Sources */,
 				B527CF8D2420C66E00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift in Sources */,
 				CF8B651723CBC9D70021B021 /* ResponseResult.swift in Sources */,
@@ -31345,7 +31345,7 @@
 				CF8B6CF223CBCA280021B021 /* RegistrationUserInfoModel.swift in Sources */,
 				CF8B6CF323CBCA280021B021 /* SmartAlbumsManager.swift in Sources */,
 				989FDC1C24190CD100F2F7D2 /* MediaItemsAlbumOperationService.swift in Sources */,
-				F00610D02899324700911048 /* ForYouViewEnum.swift in Sources */,
+				F00610D02899324700911048 /* ForYouSections.swift in Sources */,
 				CF71471024B597AA00D83E60 /* ContactListHeader.swift in Sources */,
 				CF8B6CF423CBCA280021B021 /* InstaPickCampaignViewController.swift in Sources */,
 				F0571ED1288AE6F000A0D6AC /* ForYouInteractorOutput.swift in Sources */,

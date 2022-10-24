@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ForYouViewEnum: CaseIterable {
+enum ForYouSections: CaseIterable {
     case faceImage
     case people
     case collageCards
@@ -26,33 +26,29 @@ enum ForYouViewEnum: CaseIterable {
     var title: String {
         switch self {
         case .faceImage: return ""
-        case .people: return "People"
-        case .things: return "Things"
-        case .places: return "Places"
+        case .people: return TextConstants.myStreamPeopleTitle
+        case .things: return TextConstants.myStreamThingsTitle
+        case .places: return TextConstants.myStreamPlacesTitle
         case .albums: return "My Albums"
-        case .photopick: return "Photopick"
-        case .story: return "My Stories"
+        case .photopick: return TextConstants.myStreamInstaPickTitle
+        case .story: return TextConstants.myStreamStoriesTitle
         case .animations: return "My Animations"
         case .collageCards: return "Collages"
         case .collages: return "My Collages"
-        case .hidden: return "Hidden"
+        case .hidden: return TextConstants.smartAlbumHidden
         case .animationCards: return "Animations"
-        case .albumCards: return "Albums"
+        case .albumCards: return TextConstants.myStreamAlbumsTitle
         }
     }
     
     var emptyText: String {
         switch self {
-        case .people:
-            return "You don't have any people"
-        case .things:
-            return "You don't have any thing"
-        case .places:
-            return "You don't have any place"
         case .albums:
             return "You don't have any album"
         case .photopick:
             return "You don't have any photopick"
+        case .story:
+            return "You don't have any story"
         default:
             return ""
         }
@@ -61,9 +57,11 @@ enum ForYouViewEnum: CaseIterable {
     var buttonText: String {
         switch self {
         case .albums:
-            return "Bir albüm oluştur"
+            return TextConstants.createAlbum
         case .photopick:
             return "Photopick'i dene"
+        case .story:
+            return TextConstants.createStory
         default:
             return ""
         }
