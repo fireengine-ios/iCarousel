@@ -1,5 +1,5 @@
 //
-//  SecurityInfoPopup.swift
+//  SecurityInfoViewController.swift
 //  Lifebox
 //
 //  Created by Burak Donat on 12.03.2022.
@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Typist
 
-final class SecurityInfoPopup: UIViewController, NibInit, KeyboardHandler {
+final class SecurityInfoViewController: UIViewController, NibInit, KeyboardHandler {
 
     //MARK: -IBOutlets
     @IBOutlet private weak var scrollView: UIScrollView!
@@ -223,7 +223,7 @@ final class SecurityInfoPopup: UIViewController, NibInit, KeyboardHandler {
 }
 
 // MARK: - Presenter
-extension SecurityInfoPopup {
+extension SecurityInfoViewController {
     private func questionWasSuccessfullyUpdated() {
         SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.userProfileSetSecretQuestionSuccess)
         dismiss(animated: true)
@@ -249,7 +249,7 @@ extension SecurityInfoPopup {
 }
 
 // MARK: - Interactor
-extension SecurityInfoPopup {
+extension SecurityInfoViewController {
     private func getQuestions(handler: @escaping ([SecretQuestionsResponse]) -> Void) {
         if questions.hasItems {
             handler(questions)
@@ -313,7 +313,7 @@ extension SecurityInfoPopup {
 }
 
 // MARK: - SecurityQuestionViewDelegate
-extension SecurityInfoPopup: SecurityQuestionViewDelegate {
+extension SecurityInfoViewController: SecurityQuestionViewDelegate {
     func selectSecurityQuestionTapped() {
         getQuestions { [weak self] questions in
             guard let self = self else { return }
@@ -324,7 +324,7 @@ extension SecurityInfoPopup: SecurityQuestionViewDelegate {
 }
 
 // MARK: - SelectQuestionViewControllerDelegate
-extension SecurityInfoPopup: SelectQuestionViewControllerDelegate {
+extension SecurityInfoViewController: SelectQuestionViewControllerDelegate {
     func didSelectQuestion(question: SecretQuestionsResponse?) {
         
         guard let question = question else {
