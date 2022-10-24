@@ -50,5 +50,5 @@ protocol HomePageRouterInput {
     
     func presentFullQuotaPopup()
     
-    func presentSecurityInfoPopup()
+    func presentSecurityInfoViewController()
 }
