@@ -51,7 +51,7 @@ final class SecurityInfoViewController: UIViewController, NibInit, KeyboardHandl
     
     @IBOutlet private weak var saveButton: DarkBlueButton! {
         willSet {
-            newValue.isUserInteractionEnabled = false
+            newValue.isEnabled = false
             newValue.setTitle(TextConstants.save, for: .normal)
         }
     }
@@ -96,7 +96,7 @@ final class SecurityInfoViewController: UIViewController, NibInit, KeyboardHandl
         super.viewDidLoad()
         view.backgroundColor = AppColor.popUpBackground.color
         initSetup()
-        setupKeyboard()
+        setupKeyboard()        
     }
     
     //MARK: -Helpers
@@ -109,9 +109,7 @@ final class SecurityInfoViewController: UIViewController, NibInit, KeyboardHandl
     }
     
     private func setSaveButton(isActive: Bool) {
-        saveButton.setTitleColor(isActive ? UIColor.white : AppColor.marineTwoAndTealish.color, for: .normal)
-        saveButton.isUserInteractionEnabled = isActive
-        saveButton.backgroundColor = isActive ? AppColor.marineTwoAndTealish.color : UIColor.clear
+        saveButton.isEnabled = isActive
     }
     
     @objc private func checkButtonStatus() {
