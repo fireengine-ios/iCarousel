@@ -12,7 +12,7 @@ final class ForYouViewController: BaseViewController {
     
     //MARK: -Properties
     var output: ForYouViewOutput!
-    lazy var forYouEnum: [ForYouViewEnum] = []
+    lazy var forYouSections: [ForYouSections] = []
     lazy var isFIREnabled: Bool = false
     
     //MARK: -IBOutlet
@@ -50,13 +50,13 @@ final class ForYouViewController: BaseViewController {
     }
     
     private func faceImagePermissionChanged(to isAllowed: Bool) {
-        forYouEnum = ForYouViewEnum.allCases
+        forYouSections = ForYouSections.allCases
 
         if !isAllowed {
-            forYouEnum.remove(.people)
-            forYouEnum.remove(.things)
+            forYouSections.remove(.people)
+            forYouSections.remove(.things)
         } else {
-            forYouEnum.remove(.faceImage)
+            forYouSections.remove(.faceImage)
         }
         
         isFIREnabled = isAllowed
@@ -79,7 +79,7 @@ extension ForYouViewController: ForYouViewInput {
 //MARK: -UITableViewDataSource
 extension ForYouViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return forYouEnum.count
+        return forYouSections.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -90,8 +90,8 @@ extension ForYouViewController: UITableViewDataSource {
         }
         
         let cell = tableView.dequeue(reusable: ForYouTableViewCell.self, for: indexPath)
-        let model = output.getModel(for: forYouEnum[indexPath.row])
-        cell.configure(with: model, currentView: forYouEnum[indexPath.row])
+        let model = output.getModel(for: forYouSections[indexPath.row])
+        cell.configure(with: model, currentView: forYouSections[indexPath.row])
         cell.delegate = self
         return cell
     }
@@ -100,7 +100,7 @@ extension ForYouViewController: UITableViewDataSource {
 //MARK: -UITableViewDelegate
 extension ForYouViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(output.getHeightForRow(at: forYouEnum[indexPath.row]))
+        return CGFloat(output.getHeightForRow(at: forYouSections[indexPath.row]))
     }
 }
 
@@ -110,11 +110,11 @@ extension ForYouViewController: ForYouTableViewCellDelegate {
         output.navigateToItemPreview(item: item, items: items)
     }
     
-    func onSeeAllButton(for view: ForYouViewEnum) {
+    func onSeeAllButton(for view: ForYouSections) {
         output.onSeeAllButton(for: view)
     }
     
-    func navigateToCreate(for view: ForYouViewEnum) {
+    func navigateToCreate(for view: ForYouSections) {
         output.navigateToCreate(for: view)
     }
     

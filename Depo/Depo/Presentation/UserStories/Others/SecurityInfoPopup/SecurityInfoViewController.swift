@@ -1,5 +1,5 @@
 //
-//  SecurityInfoPopup.swift
+//  SecurityInfoViewController.swift
 //  Lifebox
 //
 //  Created by Burak Donat on 12.03.2022.
@@ -10,24 +10,24 @@ import Foundation
 import UIKit
 import Typist
 
-final class SecurityInfoPopup: BasePopUpController, NibInit, KeyboardHandler {
+final class SecurityInfoViewController: UIViewController, NibInit, KeyboardHandler {
 
     //MARK: -IBOutlets
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var scrollViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet private weak var topLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 20)
+            newValue.font = .appFont(.medium, size: 20)
             newValue.numberOfLines = 0
-            newValue.textColor = ColorConstants.textGrayColor
+            newValue.textColor = AppColor.label.color
             newValue.text = localized(.securityPopupHeader)
         }
     }
     
     @IBOutlet private weak var bottomLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 15)
-            newValue.textColor = ColorConstants.textGrayColor
+            newValue.font = .appFont(.regular, size: 14)
+            newValue.textColor = AppColor.label.color
             newValue.text = localized(.securityPopupBody)
             newValue.numberOfLines = 0
         }
@@ -49,14 +49,9 @@ final class SecurityInfoPopup: BasePopUpController, NibInit, KeyboardHandler {
         }
     }
     
-    @IBOutlet private weak var saveButton: UIButton! {
+    @IBOutlet private weak var saveButton: DarkBlueButton! {
         willSet {
-            newValue.isUserInteractionEnabled = false
-            newValue.setTitleColor(AppColor.marineTwoAndTealish.color, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
-            newValue.layer.cornerRadius = 25
-            newValue.layer.borderWidth = 1
-            newValue.layer.borderColor = AppColor.marineTwoAndTealish.color.cgColor
+            newValue.isEnabled = false
             newValue.setTitle(TextConstants.save, for: .normal)
         }
     }
@@ -84,8 +79,9 @@ final class SecurityInfoPopup: BasePopUpController, NibInit, KeyboardHandler {
         return view
     }()
     
-    private let secretAnswerView: SecretAnswerView = {
-        let view = SecretAnswerView.initFromNib()
+    private let secretAnswerView: ProfileTextEnterView = {
+        let view = ProfileTextEnterView()
+        view.titleLabel.text = TextConstants.userProfileSecretQuestionAnswer
         return view
     }()
     
@@ -100,26 +96,24 @@ final class SecurityInfoPopup: BasePopUpController, NibInit, KeyboardHandler {
         super.viewDidLoad()
         view.backgroundColor = AppColor.popUpBackground.color
         initSetup()
-        setupKeyboard()
+        setupKeyboard()        
     }
     
     //MARK: -Helpers
     private func initSetup() {
         securityQuestionView.delegate = self
-        secretAnswerView.answerTextField.addTarget(self, action: #selector(checkButtonStatus), for: .editingChanged)
+        secretAnswerView.textField.addTarget(self, action: #selector(checkButtonStatus), for: .editingChanged)
         captchaView.captchaAnswerTextField.addTarget(self, action: #selector(checkButtonStatus), for: .editingChanged)
         recoveryEmailView.textField.addTarget(self, action: #selector(checkButtonStatus), for: .editingChanged)
         addTapGestureToHideKeyboard()
     }
     
     private func setSaveButton(isActive: Bool) {
-        saveButton.setTitleColor(isActive ? UIColor.white : AppColor.marineTwoAndTealish.color, for: .normal)
-        saveButton.isUserInteractionEnabled = isActive
-        saveButton.backgroundColor = isActive ? AppColor.marineTwoAndTealish.color : UIColor.clear
+        saveButton.isEnabled = isActive
     }
     
     @objc private func checkButtonStatus() {
-        guard let secretAnswer = secretAnswerView.answerTextField.text,
+        guard let secretAnswer = secretAnswerView.textField.text,
               let recoveryEmail = recoveryEmailView.textField.text,
               let captchaAnswer = captchaView.captchaAnswerTextField.text else {
                   setSaveButton(isActive: false)
@@ -133,7 +127,7 @@ final class SecurityInfoPopup: BasePopUpController, NibInit, KeyboardHandler {
     private func setupKeyboard() {
         keyboard
             .on(event: .willShow) { [weak self] options in
-                self?.scrollViewBottomConstraint.constant = options.endFrame.height
+                self?.scrollViewBottomConstraint.constant = -options.endFrame.height
                 self?.view.layoutIfNeeded()
             }
             .on(event: .didShow) { [weak self] _ in
@@ -148,13 +142,13 @@ final class SecurityInfoPopup: BasePopUpController, NibInit, KeyboardHandler {
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         showSpinnerIncludeNavigationBar()
-        answer.questionAnswer = secretAnswerView.answerTextField.text
+        answer.questionAnswer = secretAnswerView.textField.text
         captchaView.hideErrorAnimated()
-        secretAnswerView.hideErrorAnimated()
+        secretAnswerView.hideSubtitleAnimated()
         securityQuestionOperation = nil
         recoveryEmailOperation = nil
         
-        guard let secretAnswer = secretAnswerView.answerTextField.text,
+        guard let secretAnswer = secretAnswerView.textField.text,
               let recoveryEmail = recoveryEmailView.textField.text else {
                   hideSpinnerIncludeNavigationBar()
                   return
@@ -227,7 +221,7 @@ final class SecurityInfoPopup: BasePopUpController, NibInit, KeyboardHandler {
 }
 
 // MARK: - Presenter
-extension SecurityInfoPopup {
+extension SecurityInfoViewController {
     private func questionWasSuccessfullyUpdated() {
         SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.userProfileSetSecretQuestionSuccess)
         dismiss(animated: true)
@@ -243,9 +237,9 @@ extension SecurityInfoPopup {
             captchaView.showErrorAnimated(text: errorText)
             captchaView.captchaAnswerTextField.becomeFirstResponder()
         case .invalidId:
-            secretAnswerView.showErrorAnimated(text: errorText)
+            secretAnswerView.showSubtitleTextAnimated(text: errorText)
         case .invalidAnswer:
-            secretAnswerView.showErrorAnimated(text: errorText)
+            secretAnswerView.showSubtitleTextAnimated(text: errorText)
         case .unknown:
             UIApplication.showErrorAlert(message: errorText)
         }
@@ -253,7 +247,7 @@ extension SecurityInfoPopup {
 }
 
 // MARK: - Interactor
-extension SecurityInfoPopup {
+extension SecurityInfoViewController {
     private func getQuestions(handler: @escaping ([SecretQuestionsResponse]) -> Void) {
         if questions.hasItems {
             handler(questions)
@@ -317,7 +311,7 @@ extension SecurityInfoPopup {
 }
 
 // MARK: - SecurityQuestionViewDelegate
-extension SecurityInfoPopup: SecurityQuestionViewDelegate {
+extension SecurityInfoViewController: SecurityQuestionViewDelegate {
     func selectSecurityQuestionTapped() {
         getQuestions { [weak self] questions in
             guard let self = self else { return }
@@ -328,7 +322,7 @@ extension SecurityInfoPopup: SecurityQuestionViewDelegate {
 }
 
 // MARK: - SelectQuestionViewControllerDelegate
-extension SecurityInfoPopup: SelectQuestionViewControllerDelegate {
+extension SecurityInfoViewController: SelectQuestionViewControllerDelegate {
     func didSelectQuestion(question: SecretQuestionsResponse?) {
         
         guard let question = question else {
@@ -339,9 +333,9 @@ extension SecurityInfoPopup: SelectQuestionViewControllerDelegate {
         answer.questionId = question.id
         answer.question = question.text
         securityQuestionView.setQuestion(question: question.text)
-        secretAnswerView.answerTextField.text = ""
-        secretAnswerView.answerTextField.quickDismissPlaceholder = TextConstants.userProfileSecretQuestionAnswerPlaseholder
-        secretAnswerView.answerTextField.placeholderColor = ColorConstants.placeholderGrayColor
+        secretAnswerView.textField.text = ""
+        secretAnswerView.textField.quickDismissPlaceholder = TextConstants.userProfileSecretQuestionAnswerPlaseholder
+        secretAnswerView.textField.placeholderColor = ColorConstants.placeholderGrayColor
         checkButtonStatus()
     }
     

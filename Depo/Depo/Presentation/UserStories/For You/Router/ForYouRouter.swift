@@ -11,8 +11,9 @@ import Foundation
 final class ForYouRouter: ForYouRouterInput {
     private let router = RouterVC()
     weak var presenter: ForYouPresenter!
+    private lazy var instaPickRoutingService = InstaPickRoutingService()
     
-    func navigateToSeeAll(for view: ForYouViewEnum) {
+    func navigateToSeeAll(for view: ForYouSections) {
         switch view {
         case .faceImage:
             break
@@ -34,6 +35,9 @@ final class ForYouRouter: ForYouRouterInput {
         case .hidden:
             let hidden = router.hiddenPhotosViewController()
             router.pushViewController(viewController: hidden)
+        case .photopick:
+            let photopick = router.analyzesHistoryController()
+            router.pushViewController(viewController: photopick)
         default:
             break
         }
@@ -44,14 +48,17 @@ final class ForYouRouter: ForYouRouterInput {
         router.pushViewController(viewController: vc)
     }
     
-    func navigateToCreate(for view: ForYouViewEnum) {
+    func navigateToCreate(for view: ForYouSections) {
         switch view {
         case .albums:
             let createAlbum = router.createNewAlbum()
             router.pushViewController(viewController: createAlbum)
         case .photopick:
-            // TODO: Facelift: navigate to new photopick
-            return
+            let photopick = router.analyzesHistoryController()
+            router.pushViewController(viewController: photopick)
+        case .story:
+            let createStory = router.createStory(navTitle: "")
+            router.pushViewController(viewController: createStory)
         default:
             return
         }

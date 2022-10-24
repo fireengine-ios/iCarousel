@@ -1330,12 +1330,8 @@ class RouterVC: NSObject {
         }
     }
     
-    var securityInfoPopup: SecurityInfoPopup {
-        let controller = SecurityInfoPopup()
-        
-        controller.modalPresentationStyle = .overFullScreen
-        controller.modalTransitionStyle = .crossDissolve
-        
+    var securityInfoViewController: SecurityInfoViewController {
+        let controller = SecurityInfoViewController()
         return controller
     }
     

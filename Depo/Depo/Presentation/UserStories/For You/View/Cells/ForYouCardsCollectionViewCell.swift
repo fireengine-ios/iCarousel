@@ -61,13 +61,15 @@ class ForYouCardsCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var closeButton: UIButton! {
         willSet {
             newValue.setTitle("", for: .normal)
+            newValue.setImage(Image.iconCancelBorder.image.withRenderingMode(.alwaysTemplate), for: .normal)
+            newValue.tintColor = AppColor.label.color
         }
     }
         
     private var album: AlbumServiceResponse?
     private var albumItem: AlbumItem?
     private var item: WrapData?
-    private var currentView: ForYouViewEnum?
+    private var currentView: ForYouSections?
     private var cardType = CardActionType.save {
         didSet {
             switch cardType {
@@ -104,7 +106,7 @@ class ForYouCardsCollectionViewCell: UICollectionViewCell {
     @IBAction private func onCloseCard(_ sender: UIButton) {
     }
     
-    func configure(with data: HomeCardResponse, currentView: ForYouViewEnum) {
+    func configure(with data: HomeCardResponse, currentView: ForYouSections) {
         self.currentView = currentView
         set(object: data)
         

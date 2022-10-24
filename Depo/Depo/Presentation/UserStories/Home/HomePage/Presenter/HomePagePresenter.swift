@@ -266,7 +266,7 @@ extension HomePagePresenter: HomePageInteractorOutput {
         if accountInfo.hasRecoveryMail != true && accountInfo.hasSecurityQuestionInfo != true {
             let storageVars: StorageVars = factory.resolve()
             if !storageVars.isUserFirstLoggedIn {
-                router.presentSecurityInfoPopup()
+                router.presentSecurityInfoViewController()
             } else {
                 storageVars.isUserFirstLoggedIn = false
             }
