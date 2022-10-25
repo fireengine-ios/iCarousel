@@ -106,8 +106,8 @@ extension UIImage {
             return nil
         }
 
-        let hasBlur = blurRadius > CGFloat(FLT_EPSILON)
-        let hasSaturationChange = fabs(saturationDeltaFactor - 1) > CGFloat(FLT_EPSILON)
+        let hasBlur = blurRadius > .ulpOfOne
+        let hasSaturationChange = abs(saturationDeltaFactor - 1) > .ulpOfOne
 
         let inputCGImage = cgImage!
         let inputImageScale = scale
@@ -117,7 +117,7 @@ extension UIImage {
         let outputImageSizeInPoints = size
         let outputImageRectInPoints = CGRect(origin: CGPoint.zero, size: outputImageSizeInPoints)
 
-        let useOpaqueContext = inputImageAlphaInfo == .none || inputImageAlphaInfo == .noneSkipLast || inputImageAlphaInfo == .noneSkipFirst
+        let useOpaqueContext = inputImageAlphaInfo == CGImageAlphaInfo.none || inputImageAlphaInfo == .noneSkipLast || inputImageAlphaInfo == .noneSkipFirst
         UIGraphicsBeginImageContextWithOptions(outputImageRectInPoints.size, useOpaqueContext, inputImageScale)
         let outputContext = UIGraphicsGetCurrentContext()
         outputContext?.scaleBy(x: 1, y: -1)
@@ -155,10 +155,10 @@ extension UIImage {
 
             if hasBlur {
                 var inputRadius = blurRadius * inputImageScale
-                if inputRadius - 2 < CGFloat(FLT_EPSILON) {
+                if inputRadius - 2 < .ulpOfOne {
                     inputRadius = 2
                 }
-                var radius = UInt32(floor((inputRadius * CGFloat(3) * CGFloat(sqrt(2 * M_PI)) / 4 + 0.5) / 2))
+                var radius = UInt32(floor((inputRadius * CGFloat(3) * CGFloat(sqrt(2 * Double.pi)) / 4 + 0.5) / 2))
                 radius |= 1
 
                 let flags = vImage_Flags(kvImageGetTempBufferSize) | vImage_Flags(kvImageEdgeExtend)

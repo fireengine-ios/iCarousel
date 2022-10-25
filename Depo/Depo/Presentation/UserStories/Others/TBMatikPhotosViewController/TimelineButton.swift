@@ -16,7 +16,7 @@ final class TimelineButton: UIButton {
         case photosPreparation
     }
     
-    private let borderColor = AppColor.whiteAndLrTealish.color
+    private let borderColor = UIColor.clear
     var visibleState = State.enabled {
         didSet {
             switch visibleState {
@@ -64,6 +64,8 @@ final class TimelineButton: UIButton {
         setTitle(nil, for: .normal)
         setImage(nil, for: .normal)
         
+        backgroundColor = AppColor.tbtButton.color
+        
         let stackView = UIStackView()
         stackView.isUserInteractionEnabled = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -83,8 +85,7 @@ final class TimelineButton: UIButton {
         
         timeLineLabel.text = TextConstants.tbMaticPhotosSeeTimeline
         timeLineLabel.textColor = .white
-        timeLineLabel.backgroundColor = .clear
-        timeLineLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
+        timeLineLabel.font = .appFont(.medium, size: 16)
         timeLineLabel.textAlignment = .center
         timeLineLabel.numberOfLines = 2
         timeLineLabel.lineBreakMode = .byWordWrapping

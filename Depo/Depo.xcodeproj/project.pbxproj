@@ -20211,6 +20211,7 @@
 		CEAE3F8F1EFD4CF100A405B2 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				F074DCF828FFF668002E9F1C /* DarkBlueButton.swift */,
 				98B04B1C259316FC0011DAEB /* PlusMenuItemView */,
 				7CA2A7AB1F14CDF800F37E2C /* CircleButton.swift */,
 				CEAE3F971EFD4E6900A405B2 /* WhiteButtonWithRoundedCorner.swift */,
@@ -25484,6 +25485,7 @@
 				98B0481B259314750011DAEB /* ContactSyncSDK.m in Sources */,
 				92004B6721AD18FE00582C45 /* MyStoragePresenter.swift in Sources */,
 				4A56D5CE202B316F003A4624 /* FaceImageAddNameDataSource.swift in Sources */,
+				F074DCF928FFF668002E9F1C /* DarkBlueButton.swift in Sources */,
 				984A515521E87883004525F5 /* AnalyzeHistoryDesigner.swift in Sources */,
 				F0743DC928B4C63100CC1F24 /* BottomInfoBanner.swift in Sources */,
 				8C0E8D1C1FDEBDFF00789C91 /* UIApplication+Settings.swift in Sources */,
@@ -27537,6 +27539,7 @@
 				CE7848C022A685FB00662219 /* ContactSyncParametrs.swift in Sources */,
 				CE7848C122A685FB00662219 /* ActivityTimelineService.swift in Sources */,
 				B55EFD412565427800E11D9C /* PrivateShareSharedItemThreeDotsManager.swift in Sources */,
+				F074DCFB28FFF668002E9F1C /* DarkBlueButton.swift in Sources */,
 				B52BAC5A23AE1BE60051E21D /* CoreDataConfig.swift in Sources */,
 				03404574240794FD0024135B /* SynchronizedDictionary.swift in Sources */,
 				CE7848C322A685FB00662219 /* SearchViewInput.swift in Sources */,
@@ -29277,6 +29280,7 @@
 				98231A0C24F3A1E700FD16E2 /* SelectionMenuController.swift in Sources */,
 				CF8B644323CBC9D70021B021 /* SettingsTableViewCell.swift in Sources */,
 				CF8B644423CBC9D70021B021 /* UIEdgeInsets+Extensions.swift in Sources */,
+				F074DCFA28FFF668002E9F1C /* DarkBlueButton.swift in Sources */,
 				CFBD0145253737B30055726C /* DebugLogsService.swift in Sources */,
 				CFACACA5247CF65300645B40 /* NetmeraExtensionService.swift in Sources */,
 				03135F4823F3E0900088E8BB /* ApplicationStateHelper.swift in Sources */,
@@ -31069,6 +31073,7 @@
 				07D0593126F9B24D005315E2 /* ResetPasswordOTPInteractor.swift in Sources */,
 				CF8B6C2023CBCA280021B021 /* BaseCellModel.swift in Sources */,
 				CF8B6C2123CBCA280021B021 /* FaceImagePhotosInteractorOutput.swift in Sources */,
+				F074DCFC28FFF668002E9F1C /* DarkBlueButton.swift in Sources */,
 				0305A31D23D5C375004D1EC7 /* AlbumsSliderDataSource.swift in Sources */,
 				CF8B6C2223CBCA280021B021 /* MappingError.swift in Sources */,
 				CF8B6C2323CBCA280021B021 /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */,
