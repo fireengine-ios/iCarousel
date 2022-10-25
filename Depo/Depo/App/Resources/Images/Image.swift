@@ -66,7 +66,12 @@ enum Image: String, AppImage {
     case iconMix
     case iconRotate
     case iconKebabBorder
-
+    
+    /// Action/Small
+    case iconRadioButtonSelect
+    case iconRadioButtonUnselect
+    case iconRadioButtonSelectBlue
+    
     ///  Files Tab
     case iconFileAudio
     case iconFileDoc
@@ -153,13 +158,7 @@ enum Image: String, AppImage {
     
     /// Forget My Password
     case forgetPassPopupLock
-    case forgetPassSelectedRadio
-    case forgetPassUnSelectedRadio
-    
-    /// Register
-    case registerIconSelectCheck
-    case registerIconSelectEmpty
-    
+
     /// Gallery
     case popupNoMemories
     case popupNoVideo

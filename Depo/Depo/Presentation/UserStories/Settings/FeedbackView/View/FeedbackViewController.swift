@@ -177,8 +177,8 @@ final class FeedbackViewController: ViewController {
     // MARK: IBActions
     
     func getImageForCheckbox(isSelected: Bool) -> UIImage {
-        let imageName = isSelected ? "roundSelectedCheckBox" : "roundEmptyCheckBox"
-        return UIImage(named: imageName)!.withRenderingMode(.alwaysTemplate)
+        let imageType = isSelected ? Image.iconRadioButtonSelectBlue : Image.iconRadioButtonUnselect
+        return imageType.image.withRenderingMode(.alwaysTemplate)
     }
     
     @IBAction func onCloseButton() {
