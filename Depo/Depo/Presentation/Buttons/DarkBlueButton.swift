@@ -33,9 +33,9 @@ class DarkBlueButton: InsetsButton {
     }
     
     func configurate() {
-        self.setBackgroundColor(AppColor.button.color, for: .normal)
-        self.setBackgroundColor(AppColor.button.color.withAlphaComponent(0.5), for: .disabled)
-        self.setBackgroundColor(AppColor.button.color.darker(by: 30), for: .highlighted)
+        setBackgroundColor(AppColor.button.color, for: .normal)
+        setBackgroundColor(AppColor.button.color.withAlphaComponent(0.5), for: .disabled)
+        setBackgroundColor(AppColor.button.color.darker(by: 30), for: .highlighted)
         setTitleColor(.white, for: .normal)
         titleLabel?.font = .appFont(.medium, size: 16)
         layer.masksToBounds = true
