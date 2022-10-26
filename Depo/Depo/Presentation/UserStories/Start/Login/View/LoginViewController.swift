@@ -54,10 +54,10 @@ final class LoginViewController: BaseViewController {
     
     @IBOutlet private weak var rememberMeButton: UIButton! {
         willSet {
-            let normalImage = UIImage(named: "checkBoxNotSelected")
+            let normalImage = Image.iconSelectEmpty.image
             newValue.setImage(normalImage, for: .normal)
             
-            let selectedImage = UIImage(named: "iconSelectCheck")
+            let selectedImage = Image.iconSelectCheck.image
             newValue.setImage(selectedImage, for: .selected)
         }
     }

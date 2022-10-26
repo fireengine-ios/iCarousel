@@ -95,6 +95,8 @@ enum AppColor {
     // MARK: For You
     case forYouButton
     case forYouFaceImageBackground
+    case tbtBlurBackground
+    case tbtButton
     
     // MARK: Settings
     case borderColor

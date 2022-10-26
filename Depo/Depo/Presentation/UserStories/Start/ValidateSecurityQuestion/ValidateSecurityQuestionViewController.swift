@@ -56,10 +56,10 @@ final class ValidateSecurityQuestionViewController: BaseViewController, Keyboard
         return view
     }()
 
-    private let answerView: SecretAnswerView = {
-        let view = SecretAnswerView.initFromNib()
-        view.answerTextField.returnKeyType = .done
-        view.answerTextField.enablesReturnKeyAutomatically = true
+    private let answerView: ProfileTextEnterView = {
+        let view = ProfileTextEnterView()
+        view.textField.returnKeyType = .done
+        view.textField.enablesReturnKeyAutomatically = true
         return view
     }()
 
@@ -70,8 +70,8 @@ final class ValidateSecurityQuestionViewController: BaseViewController, Keyboard
         populateQuestion()
 
         continueButton.isEnabled = false
-        answerView.answerTextField.addTarget(self, action: #selector(answerTextChanged), for: .editingChanged)
-        answerView.answerTextField.delegate = self
+        answerView.textField.addTarget(self, action: #selector(answerTextChanged), for: .editingChanged)
+        answerView.textField.delegate = self
 
         addTapGestureToHideKeyboard()
 
@@ -87,12 +87,12 @@ final class ValidateSecurityQuestionViewController: BaseViewController, Keyboard
     }
 
     @objc private func answerTextChanged() {
-        let isEmpty = answerView.answerTextField.text?.isEmpty ?? true
+        let isEmpty = answerView.textField.text?.isEmpty ?? true
         continueButton.isEnabled = !isEmpty
     }
 
     @IBAction private func continueTapped() {
-        guard let answer = answerView.answerTextField.text else { return }
+        guard let answer = answerView.textField.text else { return }
 
         showSpinnerIncludeNavigationBar()
         resetPasswordService.delegate = self

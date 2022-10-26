@@ -24,7 +24,7 @@ final class AutoSyncSwitcherTableViewCell: AutoSyncTableViewCell {
     }
     
     @IBOutlet private weak var iconImageView: UIImageView!
-    @IBOutlet weak var switcher: CustomSwitch!
+    @IBOutlet weak var switcher: GradientSwitch!
     
     private weak var delegate: AutoSyncCellDelegate?
     private var model: AutoSyncHeaderModel?
