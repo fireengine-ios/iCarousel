@@ -32,12 +32,12 @@ final class SubscriptionFeaturesView: UIView {
         // normal
         newValue.setTitle(TextConstants.showMore, for: .normal)
         newValue.setTitleColor(ColorConstants.textGrayColor, for: .normal)
-        newValue.setImage(Image.iconArrowDownActive.image, for: .normal)
+        newValue.setImage(Image.iconArrowDownSmall.image, for: .normal)
         
         // selected
         newValue.setTitle(TextConstants.showLess, for: .selected)
         newValue.setTitleColor(ColorConstants.textGrayColor, for: .selected)
-        newValue.setImage(Image.iconArrowUpActive.image, for: .selected)
+        newValue.setImage(Image.iconArrowUpSmall.image, for: .selected)
         
         newValue.forceImageToRightSide()
         
