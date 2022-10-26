@@ -1196,10 +1196,6 @@
 		737A2EA32338A5200014258A /* SecurityQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2EA02338A5200014258A /* SecurityQuestionView.swift */; };
 		737A2EA62338A5300014258A /* SecurityQuestionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EA42338A5300014258A /* SecurityQuestionView.xib */; };
 		737A2EA72338A5300014258A /* SecurityQuestionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EA42338A5300014258A /* SecurityQuestionView.xib */; };
-		737A2EAA2338AF410014258A /* SecretAnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2EA82338AF410014258A /* SecretAnswerView.swift */; };
-		737A2EAB2338AF410014258A /* SecretAnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2EA82338AF410014258A /* SecretAnswerView.swift */; };
-		737A2EAE2338AF4B0014258A /* SecretAnswerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EAC2338AF4B0014258A /* SecretAnswerView.xib */; };
-		737A2EAF2338AF4B0014258A /* SecretAnswerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EAC2338AF4B0014258A /* SecretAnswerView.xib */; };
 		737A2EBC2338E03A0014258A /* SelectQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2EB92338E03A0014258A /* SelectQuestionViewController.swift */; };
 		737A2EBD2338E03A0014258A /* SelectQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2EB92338E03A0014258A /* SelectQuestionViewController.swift */; };
 		737A2EBF2338E03A0014258A /* SelectQuestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EBA2338E03A0014258A /* SelectQuestionViewController.xib */; };
@@ -6820,7 +6816,6 @@
 		CF8B67E223CBC9D70021B021 /* SelectNameModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA6263C57B6F5D8397BB59D /* SelectNameModuleInput.swift */; };
 		CF8B67E323CBC9D70021B021 /* PhotoVideoThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C20863A228D4B2E000BEDAD /* PhotoVideoThreeDotMenuManager.swift */; };
 		CF8B67E423CBC9D70021B021 /* SelectNamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829DBD8933CDFA043AFECB2 /* SelectNamePresenter.swift */; };
-		CF8B67E523CBC9D70021B021 /* SecretAnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2EA82338AF410014258A /* SecretAnswerView.swift */; };
 		CF8B67E623CBC9D70021B021 /* FaceImageItemsInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E8E2B52023638E00A979AB /* FaceImageItemsInteractorOutput.swift */; };
 		CF8B67E723CBC9D70021B021 /* CampaingnInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA10422358597800B12485 /* CampaingnInfoView.swift */; };
 		CF8B67E823CBC9D70021B021 /* BaseCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F898C1F70ECB100740177 /* BaseCardView.swift */; };
@@ -7081,7 +7076,6 @@
 		CF8B697B23CBC9D70021B021 /* SmallFullOfQuotaPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CA4A170207E49F200F270C8 /* SmallFullOfQuotaPopUp.xib */; };
 		CF8B697D23CBC9D70021B021 /* ActivityTimelineHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F44F21F6AC1660062C2E0 /* ActivityTimelineHeader.xib */; };
 		CF8B698223CBC9D70021B021 /* EmailEnterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEB27347205BE3DC00E1AE9C /* EmailEnterController.xib */; };
-		CF8B698523CBC9D70021B021 /* SecretAnswerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EAC2338AF4B0014258A /* SecretAnswerView.xib */; };
 		CF8B698623CBC9D70021B021 /* LatestUpladsCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C849213201CB990007C502A /* LatestUpladsCard.xib */; };
 		CF8B698723CBC9D70021B021 /* InstagramAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF0C2891FC594E300105C31 /* InstagramAuthViewController.xib */; };
 		CF8B698923CBC9D70021B021 /* ProfilePhoneEnterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17589F702276336700A5DB37 /* ProfilePhoneEnterView.xib */; };
@@ -8093,7 +8087,6 @@
 		CF8B6ED223CBCA280021B021 /* UserInfoSubViewInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF703F8C0F19668138D30BD /* UserInfoSubViewInteractorOutput.swift */; };
 		CF8B6ED323CBCA280021B021 /* UserInfoSubViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6467C73E3BCBD36D9330F35B /* UserInfoSubViewInteractor.swift */; };
 		CF8B6ED423CBCA280021B021 /* UserInfoSubViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F9CA614F6A1DD5CFEFFAFD /* UserInfoSubViewRouterInput.swift */; };
-		CF8B6ED523CBCA280021B021 /* SecretAnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A2EA82338AF410014258A /* SecretAnswerView.swift */; };
 		CF8B6ED623CBCA280021B021 /* UserInfoSubViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDFC675B66399A57487FB85 /* UserInfoSubViewRouter.swift */; };
 		CF8B6ED723CBCA280021B021 /* UserInfoSubViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CCB3146C622ADE6CFE961E /* UserInfoSubViewConfigurator.swift */; };
 		CF8B6ED823CBCA280021B021 /* UserInfoSubViewInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26960B2B062ACC0F92ACEE26 /* UserInfoSubViewInitializer.swift */; };
@@ -8556,7 +8549,6 @@
 		CF8B714923CBCA280021B021 /* TermsOfUseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56FBB192122C23D004F4A59 /* TermsOfUseViewController.xib */; };
 		CF8B714C23CBCA280021B021 /* AnalyzeHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A513F21E734D2004525F5 /* AnalyzeHistoryViewController.xib */; };
 		CF8B715023CBCA280021B021 /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
-		CF8B715123CBCA280021B021 /* SecretAnswerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EAC2338AF4B0014258A /* SecretAnswerView.xib */; };
 		CF8B715423CBCA280021B021 /* TurkcellSaturaMed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE041F01E69B00CDF527 /* TurkcellSaturaMed.ttf */; };
 		CF8B715823CBCA280021B021 /* RegistrationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */; };
 		CF8B715923CBCA280021B021 /* PremiumFooterCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9240C04A21B805A4005E710C /* PremiumFooterCollectionReusableView.xib */; };
@@ -10146,8 +10138,6 @@
 		737A2E992338989B0014258A /* SetSecurityQuestionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetSecurityQuestionViewController.xib; sourceTree = "<group>"; };
 		737A2EA02338A5200014258A /* SecurityQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityQuestionView.swift; sourceTree = "<group>"; };
 		737A2EA42338A5300014258A /* SecurityQuestionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecurityQuestionView.xib; sourceTree = "<group>"; };
-		737A2EA82338AF410014258A /* SecretAnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretAnswerView.swift; sourceTree = "<group>"; };
-		737A2EAC2338AF4B0014258A /* SecretAnswerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecretAnswerView.xib; sourceTree = "<group>"; };
 		737A2EB92338E03A0014258A /* SelectQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectQuestionViewController.swift; sourceTree = "<group>"; };
 		737A2EBA2338E03A0014258A /* SelectQuestionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectQuestionViewController.xib; sourceTree = "<group>"; };
 		737A2EC22338F44E0014258A /* QuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
@@ -14595,8 +14585,6 @@
 				737A2E992338989B0014258A /* SetSecurityQuestionViewController.xib */,
 				737A2EA02338A5200014258A /* SecurityQuestionView.swift */,
 				737A2EA42338A5300014258A /* SecurityQuestionView.xib */,
-				737A2EA82338AF410014258A /* SecretAnswerView.swift */,
-				737A2EAC2338AF4B0014258A /* SecretAnswerView.xib */,
 			);
 			path = SetSecurityQuestionViewController;
 			sourceTree = "<group>";
@@ -22522,7 +22510,6 @@
 				8C0E90281FDEBDFF00789C91 /* ActivityTimelineHeader.xib in Resources */,
 				CF71462E24B597A800D83E60 /* ContactSyncViewController.xib in Resources */,
 				CE23A0F6205FF5320048267D /* EmailEnterController.xib in Resources */,
-				737A2EAE2338AF4B0014258A /* SecretAnswerView.xib in Resources */,
 				7C849215201CB990007C502A /* LatestUpladsCard.xib in Resources */,
 				8C0E902A1FDEBDFF00789C91 /* InstagramAuthViewController.xib in Resources */,
 				734CA11A244D64150076F6A7 /* DocumentsAlbumCard.xib in Resources */,
@@ -23052,7 +23039,6 @@
 				CF71463124B597A800D83E60 /* ContactSyncViewController.xib in Resources */,
 				CE784D9022A685FB00662219 /* OurLocalizable.strings in Resources */,
 				982319D824F3A1E700FD16E2 /* AdjustmentCategoryCell.xib in Resources */,
-				737A2EAF2338AF4B0014258A /* SecretAnswerView.xib in Resources */,
 				CE784D9322A685FB00662219 /* TurkcellSaturaMed.ttf in Resources */,
 				07C6D4E8284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.xib in Resources */,
 				734CA11D244D64150076F6A7 /* DocumentsAlbumCard.xib in Resources */,
@@ -23428,7 +23414,6 @@
 				CF8B697D23CBC9D70021B021 /* ActivityTimelineHeader.xib in Resources */,
 				CF71462F24B597A800D83E60 /* ContactSyncViewController.xib in Resources */,
 				CF8B698223CBC9D70021B021 /* EmailEnterController.xib in Resources */,
-				CF8B698523CBC9D70021B021 /* SecretAnswerView.xib in Resources */,
 				CF8B698623CBC9D70021B021 /* LatestUpladsCard.xib in Resources */,
 				CF8B698723CBC9D70021B021 /* InstagramAuthViewController.xib in Resources */,
 				0791816526F88AB20067FB75 /* IdentityVerificationViewController.xib in Resources */,
@@ -23833,7 +23818,6 @@
 				3A58C4DD2636A77C00570811 /* InvitationCard.xib in Resources */,
 				CF71463224B597A800D83E60 /* ContactSyncViewController.xib in Resources */,
 				CF8B715023CBCA280021B021 /* OurLocalizable.strings in Resources */,
-				CF8B715123CBCA280021B021 /* SecretAnswerView.xib in Resources */,
 				CF8B715423CBCA280021B021 /* TurkcellSaturaMed.ttf in Resources */,
 				734CA11E244D64150076F6A7 /* DocumentsAlbumCard.xib in Resources */,
 				CF8B715823CBCA280021B021 /* RegistrationScreen.xib in Resources */,
@@ -26617,7 +26601,6 @@
 				0780AB6427916846000760D9 /* TextRecognitionProcessor.swift in Sources */,
 				8C208658228D4B2E000BEDAD /* PhotoVideoThreeDotMenuManager.swift in Sources */,
 				8C0E8F7B1FDEBDFF00789C91 /* SelectNamePresenter.swift in Sources */,
-				737A2EAA2338AF410014258A /* SecretAnswerView.swift in Sources */,
 				C62239A6204972F40043ED44 /* FaceImageItemsInteractorOutput.swift in Sources */,
 				CF7B1E55256B3DD400BAF566 /* PrivateShareSliderFilesCollectionManager.swift in Sources */,
 				987E21822360380100D45AEA /* CampaingnInfoView.swift in Sources */,
@@ -28482,7 +28465,6 @@
 				CE784B4C22A685FB00662219 /* UserInfoSubViewInteractorOutput.swift in Sources */,
 				CE784B4D22A685FB00662219 /* UserInfoSubViewInteractor.swift in Sources */,
 				CE784B4E22A685FB00662219 /* UserInfoSubViewRouterInput.swift in Sources */,
-				737A2EAB2338AF410014258A /* SecretAnswerView.swift in Sources */,
 				CE784B4F22A685FB00662219 /* UserInfoSubViewRouter.swift in Sources */,
 				07915DD027F5B32100807EAB /* NavigationBarStyling.swift in Sources */,
 				CE784B5022A685FB00662219 /* UserInfoSubViewConfigurator.swift in Sources */,
@@ -30523,7 +30505,6 @@
 				CF8B67E323CBC9D70021B021 /* PhotoVideoThreeDotMenuManager.swift in Sources */,
 				0305A2EF23D5C152004D1EC7 /* TrashBinViewController.swift in Sources */,
 				CF8B67E423CBC9D70021B021 /* SelectNamePresenter.swift in Sources */,
-				CF8B67E523CBC9D70021B021 /* SecretAnswerView.swift in Sources */,
 				CF8B67E623CBC9D70021B021 /* FaceImageItemsInteractorOutput.swift in Sources */,
 				CF8B67E723CBC9D70021B021 /* CampaingnInfoView.swift in Sources */,
 				CF8B67E823CBC9D70021B021 /* BaseCardView.swift in Sources */,
@@ -31996,7 +31977,6 @@
 				CF8B6ED223CBCA280021B021 /* UserInfoSubViewInteractorOutput.swift in Sources */,
 				CF8B6ED323CBCA280021B021 /* UserInfoSubViewInteractor.swift in Sources */,
 				CF8B6ED423CBCA280021B021 /* UserInfoSubViewRouterInput.swift in Sources */,
-				CF8B6ED523CBCA280021B021 /* SecretAnswerView.swift in Sources */,
 				07407D5F2796CD4A0082FF8D /* EmailVerificationInteractor.swift in Sources */,
 				CF8B6ED623CBCA280021B021 /* UserInfoSubViewRouter.swift in Sources */,
 				CF8B6ED723CBCA280021B021 /* UserInfoSubViewConfigurator.swift in Sources */,

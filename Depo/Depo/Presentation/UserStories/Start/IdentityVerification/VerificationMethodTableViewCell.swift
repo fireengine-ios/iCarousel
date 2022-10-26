@@ -27,8 +27,8 @@ class VerificationMethodTableViewCell: UITableViewCell {
 private extension VerificationMethodTableViewCell {
     func setupButton() {
         radioButton.setBackgroundColor(.clear, for: .normal)
-        radioButton.setImage(Image.forgetPassUnSelectedRadio.image, for: .normal)
-        radioButton.setImage(Image.forgetPassSelectedRadio.image, for: .selected)
+        radioButton.setImage(Image.iconRadioButtonUnselect.image, for: .normal)
+        radioButton.setImage(Image.iconRadioButtonSelect.image, for: .selected)
 
         // selection is handled by tableView
         radioButton.isUserInteractionEnabled = false

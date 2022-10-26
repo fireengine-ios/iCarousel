@@ -75,10 +75,10 @@ final class HSSmartAlbumWarningPopUp: BasePopUpController {
         willSet {
             newValue.adjustsImageWhenHighlighted = false
 
-            let normalCheckbox = UIImage(named: "checkBoxNotSelected")
+            let normalCheckbox = Image.iconSelectEmpty.image
             newValue.setImage(normalCheckbox, for: .normal)
 
-            let selectedCheckbox = UIImage(named: "checkbox_active")
+            let selectedCheckbox = Image.iconSelectCheck.image
             newValue.setImage(selectedCheckbox, for: .selected)
         }
     }

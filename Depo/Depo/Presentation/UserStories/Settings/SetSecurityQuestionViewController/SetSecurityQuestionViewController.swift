@@ -62,8 +62,8 @@ final class SetSecurityQuestionViewController: BaseViewController, KeyboardHandl
         return view
     }()
     
-    private let secretAnswerView: SecretAnswerView = {
-        let view = SecretAnswerView.initFromNib()
+    private let secretAnswerView: ProfileTextEnterView = {
+        let view = ProfileTextEnterView()
         return view
     }()
     
@@ -88,7 +88,7 @@ final class SetSecurityQuestionViewController: BaseViewController, KeyboardHandl
     private func initSetup() {
         title = TextConstants.userProfileSecretQuestion
         securityQuestionView.delegate = self
-        secretAnswerView.answerTextField.addTarget(self, action: #selector(checkButtonStatus), for: .editingChanged)
+        secretAnswerView.textField.addTarget(self, action: #selector(checkButtonStatus), for: .editingChanged)
         captchaView.captchaAnswerTextField.addTarget(self, action: #selector(checkButtonStatus), for: .editingChanged)
     }
     
@@ -112,9 +112,9 @@ final class SetSecurityQuestionViewController: BaseViewController, KeyboardHandl
     
     @IBAction private func saveButtonTapped(_ sender: Any) {
         showSpinnerIncludeNavigationBar()
-        answer.questionAnswer = secretAnswerView.answerTextField.text
+        answer.questionAnswer = secretAnswerView.textField.text
         captchaView.hideErrorAnimated()
-        secretAnswerView.hideErrorAnimated()
+        secretAnswerView.hideSubtitleAnimated()
         
         getQuestions { [weak self] questions in
             self?.updateSecurityQuestion(questions: questions)
@@ -135,8 +135,8 @@ final class SetSecurityQuestionViewController: BaseViewController, KeyboardHandl
             return
         }
         
-        secretAnswerView.answerTextField.quickDismissPlaceholder = "* * * * * * * * *"
-        secretAnswerView.answerTextField.placeholderColor = UIColor.black
+        secretAnswerView.textField.quickDismissPlaceholder = "* * * * * * * * *"
+        secretAnswerView.textField.placeholderColor = UIColor.black
         securityQuestionView.setQuestion(question: question)
     }
     
@@ -158,9 +158,9 @@ final class SetSecurityQuestionViewController: BaseViewController, KeyboardHandl
             captchaView.showErrorAnimated(text: errorText)
             captchaView.captchaAnswerTextField.becomeFirstResponder()
         case .invalidId:
-            secretAnswerView.showErrorAnimated(text: errorText)
+            secretAnswerView.showSubtitleTextAnimated(text: errorText)
         case .invalidAnswer:
-            secretAnswerView.showErrorAnimated(text: errorText)
+            secretAnswerView.showSubtitleTextAnimated(text: errorText)
         case .unknown:
             UIApplication.showErrorAlert(message: errorText)
         }
@@ -170,7 +170,7 @@ final class SetSecurityQuestionViewController: BaseViewController, KeyboardHandl
     @objc private func checkButtonStatus() {
     
         guard let captchaText = captchaView.captchaAnswerTextField.text,
-            let answerText = secretAnswerView.answerTextField.text,
+            let answerText = secretAnswerView.textField.text,
             answer.questionId != nil
         else {
             saveButton.isEnabled = false
@@ -262,9 +262,9 @@ extension SetSecurityQuestionViewController: SelectQuestionViewControllerDelegat
         answer.questionId = question.id
         answer.question = question.text
         securityQuestionView.setQuestion(question: question.text)
-        secretAnswerView.answerTextField.text = ""
-        secretAnswerView.answerTextField.quickDismissPlaceholder = TextConstants.userProfileSecretQuestionAnswerPlaseholder
-        secretAnswerView.answerTextField.placeholderColor = ColorConstants.placeholderGrayColor
+        secretAnswerView.textField.text = ""
+        secretAnswerView.textField.quickDismissPlaceholder = TextConstants.userProfileSecretQuestionAnswerPlaseholder
+        secretAnswerView.textField.placeholderColor = ColorConstants.placeholderGrayColor
         checkButtonStatus()
     }
     

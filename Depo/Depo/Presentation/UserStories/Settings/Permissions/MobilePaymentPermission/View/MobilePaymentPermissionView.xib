@@ -16,10 +16,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gQF-ge-P27">
-                    <rect key="frame" x="40" y="397" width="334" height="102"/>
+                    <rect key="frame" x="40" y="396" width="334" height="104"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PHK-db-mh9">
-                            <rect key="frame" x="0.0" y="0.0" width="334" height="102"/>
+                            <rect key="frame" x="0.0" y="0.0" width="334" height="104"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6d-VW-WPm">
                                     <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
@@ -34,17 +34,17 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="mRk-YV-7K5" customClass="AccessibleCheckBoxView" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="50" width="334" height="22"/>
+                                    <rect key="frame" x="0.0" y="50" width="334" height="24"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="82X-oH-cn1">
-                                            <rect key="frame" x="0.0" y="0.0" width="334" height="22"/>
-                                            <state key="normal" image="checkbox"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="334" height="24"/>
+                                            <state key="normal" image="iconSelectEmpty"/>
                                             <connections>
                                                 <action selector="checkAction:" destination="B1g-4V-BbR" eventType="touchUpInside" id="hL7-yF-ScE"/>
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LWk-ad-XIv">
-                                            <rect key="frame" x="334" y="0.0" width="0.0" height="22"/>
+                                            <rect key="frame" x="334" y="0.0" width="0.0" height="24"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -56,7 +56,7 @@
                                     </connections>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Sbn-hs-3nE">
-                                    <rect key="frame" x="0.0" y="72" width="334" height="30"/>
+                                    <rect key="frame" x="0.0" y="74" width="334" height="30"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cMa-ig-FnC" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="334" height="30"/>
@@ -99,7 +99,7 @@
         </view>
     </objects>
     <resources>
-        <image name="checkbox" width="18" height="18"/>
+        <image name="iconSelectEmpty" width="24" height="24"/>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

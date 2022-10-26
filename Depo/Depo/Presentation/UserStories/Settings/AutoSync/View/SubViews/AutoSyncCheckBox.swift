@@ -10,9 +10,9 @@ import UIKit
 
 final class AutoSyncCheckBox: UIButton {
     
-    private let checkedImage = UIImage(named: "checkbox_active")
-    private let uncheckedImage = UIImage(named: "checkBoxNotSelected")
-    private let disabledImage = UIImage(named: "checkboxSelected")
+    private let checkedImage = Image.iconSelectCheck.image
+    private let uncheckedImage = Image.iconSelectEmpty.image
+    private let disabledImage = Image.iconSelectEmpty.image
     
     func setup(isSelected: Bool, isAllChecked: Bool = true) {
         let image: UIImage?

@@ -250,7 +250,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
         guard subtitleContent.isHidden else {
             return
         }
-        arrowImageView.image = Image.iconArrowDownActive.image
+        arrowImageView.image = Image.iconArrowDownSmall.image
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.subtitleContent.isHidden = false
             /// https://stackoverflow.com/a/46412621/5893286
