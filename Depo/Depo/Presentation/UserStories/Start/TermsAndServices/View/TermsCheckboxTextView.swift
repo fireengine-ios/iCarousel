@@ -26,8 +26,8 @@ final class TermsCheckboxTextView: UIView, NibInit {
     
     @IBOutlet private weak var checkbox: UIButton! {
         willSet {
-            newValue.setImage(Image.registerIconSelectEmpty.image, for: .normal)
-            newValue.setImage(Image.registerIconSelectCheck.image, for: .selected)
+            newValue.setImage(Image.iconSelectEmpty.image, for: .normal)
+            newValue.setImage(Image.iconSelectCheck.image, for: .selected)
         }
     }
     

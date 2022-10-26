@@ -27,7 +27,7 @@ final class SettingFooterView: UIView, NibInit {
     weak var delegate: SettingFooterViewDelegate?
     weak var darkModeDelegate: DarkModeOptionsViewDelegate?
     lazy var storageVars: StorageVars = factory.resolve()
-    private var checkmarkImage: UIImage? { Image.iconDisplaySelected.image }
+    private var checkmarkImage: UIImage? { Image.iconRadioButtonSelectBlue.image }
     
     override func awakeFromNib() {
         super.awakeFromNib()

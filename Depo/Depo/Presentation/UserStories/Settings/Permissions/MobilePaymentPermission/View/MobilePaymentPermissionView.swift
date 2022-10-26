@@ -53,9 +53,9 @@ final class MobilePaymentPermissionView: UIView, NibInit {
     
     @IBOutlet private weak var approveCheckbox: UIButton! {
         willSet {
-            let normalImage = UIImage(named: "checkBoxNotSelected")
+            let normalImage = Image.iconSelectEmpty.image
             newValue.setImage(normalImage, for: .normal)
-            let selectedImage = UIImage(named: "checkbox_active")
+            let selectedImage = Image.iconSelectCheck.image
             newValue.setImage(selectedImage, for: .selected)
         }
     }

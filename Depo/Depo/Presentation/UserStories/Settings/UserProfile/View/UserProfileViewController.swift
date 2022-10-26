@@ -274,7 +274,7 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
     }
 
     @objc private func onEditButtonAction() {
-        phoneView.arrowImageView.image = Image.iconArrowDownActive.image
+        phoneView.arrowImageView.image = Image.iconArrowDownSmall.image
         setupEditState(true)
         output.tapEditButton()
         saveFields()
