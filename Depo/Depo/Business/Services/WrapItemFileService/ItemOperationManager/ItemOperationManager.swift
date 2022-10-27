@@ -63,6 +63,10 @@ protocol ItemOperationManagerViewProtocol: AnyObject {
     
     func didRenameItem(_ item: BaseDataSourceItem)
     
+    func didRenameAlbumItem(_ item: AlbumItem)
+    
+    func didRenamePeople()
+    
     func syncFinished()
     
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool
@@ -171,6 +175,10 @@ extension ItemOperationManagerViewProtocol {
     func filesMoved(items: [Item], toFolder folderUUID: String) {}
     
     func didRenameItem(_ item: BaseDataSourceItem) {}
+    
+    func didRenameAlbumItem(_ item: AlbumItem) {}
+    
+    func didRenamePeople() {}
     
     func syncFinished() {
         UIApplication.setIdleTimerDisabled(false)
@@ -424,6 +432,18 @@ class ItemOperationManager: NSObject {
     func didRenameItem(_ item: BaseDataSourceItem) {
         DispatchQueue.main.async {
             self.views.invoke { $0.didRenameItem(item) }
+        }
+    }
+    
+    func didRenameAlbumItem(_ item: AlbumItem) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didRenameAlbumItem(item) }
+        }
+    }
+    
+    func didRenamePeople() {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didRenamePeople() }
         }
     }
     

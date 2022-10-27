@@ -54,6 +54,7 @@ extension FaceImageAddNameInteractor: FaceImageAddNameInteractorInput {
             if let output = self?.output as? FaceImageAddNameInteractorOutput,
                 let name = self?.currentName {
                 output.didChangeName(name)
+                ItemOperationManager.default.didRenamePeople()
             }
             
             }, fail: { [weak self] error in
@@ -73,6 +74,7 @@ extension FaceImageAddNameInteractor: FaceImageAddNameInteractorInput {
 
             if let output = self?.output as? FaceImageAddNameInteractorOutput {
                 output.didMergePeople()
+                ItemOperationManager.default.didRenamePeople()
             }
         }, fail: { [weak self] error in
             self?.output.asyncOperationFail(errorMessage: error.description)

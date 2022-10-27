@@ -67,6 +67,7 @@ extension FileInfoInteractor: FileInfoInteractorInput {
                 DispatchQueue.main.async {
                     self?.item?.name = newName
                     self?.output.updated()
+                    ItemOperationManager.default.didRenameAlbumItem(album)
                 }
                 }, fail: { [weak self] error in
                     DispatchQueue.main.async {

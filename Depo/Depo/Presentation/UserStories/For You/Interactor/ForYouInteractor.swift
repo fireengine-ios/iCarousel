@@ -8,7 +8,9 @@
 
 import Foundation
 
-final class ForYouInteractor: ForYouInteractorInput {
+typealias completion = (() -> Void)?
+
+final class ForYouInteractor {
     weak var output: ForYouInteractorOutput!
     private lazy var accountService = AccountService()
     private lazy var cardsService: HomeCardsService = factory.resolve()
@@ -20,64 +22,6 @@ final class ForYouInteractor: ForYouInteractorInput {
     private lazy var hiddenService = HiddenService()
     private lazy var instapickService = InstapickServiceImpl()
     let group = DispatchGroup()
-    
-    func viewIsReady() {
-        getThrowbacks()
-        getThings()
-        getPlaces()
-        getPeople()
-        getAlbums()
-        getInstapickThumbnails()
-        getStories()
-        getAnimations()
-        getCollages()
-        getCollageCards()
-        getHiddens()
-        getAnimationCards()
-        getAlbumCards()
-        
-        group.notify(queue: .main) {
-            self.output?.didFinishedAllRequests()
-        }
-    }
-    
-    func getFIRStatus(success: @escaping (SettingsInfoPermissionsResponse) -> (), fail: @escaping (Error) -> ()) {
-        accountService.getSettingsInfoPermissions { response in
-            switch response {
-            case .success(let result):
-                success(result)
-            case .failed(let error):
-                fail(error)
-            }
-        }
-    }
-    
-    func loadItem(_ item: BaseDataSourceItem, faceImageType: FaceImageType?) {
-        guard let item = item as? Item, item.fileType.isFaceImageType, let id = item.id else {
-            return
-        }
-        
-        let successHandler: AlbumOperationResponse = { [weak self] album in
-            DispatchQueue.main.async {
-                self?.output.didLoadAlbum(album, forItem: item, faceImageType: faceImageType)
-                self?.output?.asyncOperationSuccess()
-            }
-        }
-        
-        let failHandler: FailResponse = { [weak self] error in
-            self?.output?.asyncOperationFail(errorMessage: error.description)
-        }
-        
-        output.startAsyncOperation()
-        
-        if item is PeopleItem {
-            peopleService.getPeopleAlbum(id: Int(truncatingIfNeeded: id), status: .active, success: successHandler, fail: failHandler)
-        } else if item is ThingsItem {
-            thingsService.getThingsAlbum(id: Int(truncatingIfNeeded: id), status: .active, success: successHandler, fail: failHandler)
-        } else if item is PlacesItem {
-            placesService.getPlacesAlbum(id: Int(truncatingIfNeeded: id), status: .active, success: successHandler, fail: failHandler)
-        }
-    }
     
     private func getThings() {
         group.enter()
@@ -130,7 +74,7 @@ final class ForYouInteractor: ForYouInteractorInput {
         })
     }
     
-    private func getAlbums() {
+    private func getAlbums(completion: (() -> Void)? = nil) {
         debugLog("ForYou getAlbums")
         group.enter()
         
@@ -148,7 +92,7 @@ final class ForYouInteractor: ForYouInteractorInput {
             let list = resultResponse.list.compactMap { AlbumItem(remote: $0) }
             self?.output.getAlbums(data: list)
             self?.group.leave()
-
+            
         }, fail: { errorResponse in
             self.group.leave()
             errorResponse.showInternetErrorGlobal()
@@ -283,7 +227,7 @@ final class ForYouInteractor: ForYouInteractorInput {
         }
     }
     
-    func getHiddens() {
+    private func getHiddens() {
         debugLog("ForYou getHiddens")
         group.enter()
         hiddenService.hiddenList(sortBy: .date, sortOrder: .desc, page: 0, size: 10) { [weak self] result in
@@ -295,6 +239,101 @@ final class ForYouInteractor: ForYouInteractorInput {
             case .failed:
                 break
             }
+        }
+    }
+}
+
+extension ForYouInteractor: ForYouInteractorInput {
+    func viewIsReady() {
+        getThrowbacks()
+        getThings()
+        getPlaces()
+        getPeople()
+        getAlbums()
+        getInstapickThumbnails()
+        getStories()
+        getAnimations()
+        getCollages()
+        getCollageCards()
+        getHiddens()
+        getAnimationCards()
+        getAlbumCards()
+        
+        group.notify(queue: .main) {
+            self.output?.didFinishedAllRequests()
+        }
+    }
+    
+    func getFIRStatus(success: @escaping (SettingsInfoPermissionsResponse) -> (), fail: @escaping (Error) -> ()) {
+        accountService.getSettingsInfoPermissions { response in
+            switch response {
+            case .success(let result):
+                success(result)
+            case .failed(let error):
+                fail(error)
+            }
+        }
+    }
+    
+    func loadItem(_ item: BaseDataSourceItem, faceImageType: FaceImageType?) {
+        guard let item = item as? Item, item.fileType.isFaceImageType, let id = item.id else {
+            return
+        }
+        
+        let successHandler: AlbumOperationResponse = { [weak self] album in
+            DispatchQueue.main.async {
+                self?.output.didLoadAlbum(album, forItem: item, faceImageType: faceImageType)
+                self?.output?.asyncOperationSuccess()
+            }
+        }
+        
+        let failHandler: FailResponse = { [weak self] error in
+            self?.output?.asyncOperationFail(errorMessage: error.description)
+        }
+        
+        output.startAsyncOperation()
+        
+        if item is PeopleItem {
+            peopleService.getPeopleAlbum(id: Int(truncatingIfNeeded: id), status: .active, success: successHandler, fail: failHandler)
+        } else if item is ThingsItem {
+            thingsService.getThingsAlbum(id: Int(truncatingIfNeeded: id), status: .active, success: successHandler, fail: failHandler)
+        } else if item is PlacesItem {
+            placesService.getPlacesAlbum(id: Int(truncatingIfNeeded: id), status: .active, success: successHandler, fail: failHandler)
+        }
+    }
+    
+    func getUpdateAlbums() {
+        getAlbums()
+        group.notify(queue: .main) {
+            self.output?.didGetUpdateAlbums()
+        }
+    }
+    
+    func getUpdateThings() {
+        getThings()
+        group.notify(queue: .main) {
+            self.output?.didGetUpdateThings()
+        }
+    }
+    
+    func getUpdatePlaces() {
+        getPlaces()
+        group.notify(queue: .main) {
+            self.output?.didGetUpdatePlaces()
+        }
+    }
+    
+    func getUpdatePeople() {
+        getPeople()
+        group.notify(queue: .main) {
+            self.output?.didGetUpdatePeople()
+        }
+    }
+    
+    func getUpdateStories() {
+        getStories()
+        group.notify(queue: .main) {
+            self.output?.didGetUpdateStories()
         }
     }
 }

@@ -314,7 +314,7 @@ final class PushNotificationService {
         
         if tabBarVC.selectedIndex != index.rawValue {
             switch index {
-            case .home:
+            case .forYou:
                 guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
                     assertionFailure("This index is non existent 😵")
                     return
@@ -357,7 +357,7 @@ private extension PushNotificationService {
     }
 
     func openMain() {
-        openTabBarItem(index: .home)
+        openTabBarItem(index: .gallery)
     }
 
     func openSyncSettings() {

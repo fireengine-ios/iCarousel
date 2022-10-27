@@ -1300,7 +1300,7 @@ class RouterVC: NSObject {
         
         if tabBarVC.selectedIndex != index.rawValue {
             switch index {
-            case .home:
+            case .forYou:
                 guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
                     assertionFailure("This index is non existent 😵")
                     return
