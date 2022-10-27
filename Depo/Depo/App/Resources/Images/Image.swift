@@ -68,6 +68,7 @@ enum Image: String, AppImage {
     case iconRadioButtonSelect
     case iconRadioButtonUnselect
     case iconRadioButtonSelectBlue
+    case iconCheckBlue
     /// Action/Header
     case iconKebabBorder
     case iconViewGrid

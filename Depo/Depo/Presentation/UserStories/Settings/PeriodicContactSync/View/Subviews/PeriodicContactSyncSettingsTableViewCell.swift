@@ -16,7 +16,7 @@ protocol PeriodicContactSyncSettingsTableViewCellDelegate: AnyObject {
 class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet weak var switcher: CustomSwitch!
+    @IBOutlet weak var switcher: GradientSwitch!
     @IBOutlet private var optionsViews: [PeriodicContactsSyncSettingsOptionView]!
     @IBOutlet private weak var optionsStackView: UIStackView!
     @IBOutlet private var optionSeparators: [UIView]!
@@ -43,8 +43,8 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
         super.awakeFromNib()
         backgroundColor = .clear
         
-        titleLabel.textColor = ColorConstants.textGrayColor
-        titleLabel.font = .appFont(.medium, size: 18)
+        titleLabel.textColor = AppColor.label.color
+        titleLabel.font = .appFont(.regular, size: 14)
         
         ///iPad, iOS < 10, prevent white color
         ///https://stackoverflow.com/questions/27551291/uitableview-backgroundcolor-always-white-on-ipad
@@ -58,11 +58,6 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
         
         titleLabel.text = model.titleString
         switcher.isSelected = model.isSelected
-        
-        for view in optionsViews {
-            view.setColors()
-        }
-        
         optionsStackView.isHidden = !model.isSelected
         separatorView.isHidden = !model.isSelected
         periodicContactSyncSetting = setting
@@ -72,7 +67,6 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
         for (option, view) in zip(options, optionsViews) {
             view.setup(with: option, isSelected: periodicContactSyncSetting.option == option)
             view.delegate = self
-            view.setColors()
         }
         
         optionsStackView.isHidden = !switcher.isOn

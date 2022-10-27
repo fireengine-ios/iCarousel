@@ -37,11 +37,6 @@ final class AutoSyncHeaderTableViewCell: AutoSyncTableViewCell {
     }
     
     @IBOutlet private weak var dropDownArrow: UIImageView!
-    @IBOutlet private weak var separatorView: UIView! {
-        willSet {
-            newValue.backgroundColor = AppColor.itemSeperator.color
-        }
-    }
     
     private weak var delegate: AutoSyncCellDelegate?
     private var model: AutoSyncHeaderModel?

@@ -16,7 +16,6 @@ extension UIView {
                            radius: CGFloat,
                            offset: CGSize? = .zero) {
         layer.cornerRadius = cornerRadius
-        layer.masksToBounds = true;
         layer.shadowColor = shadowColor
         layer.shadowOpacity = opacity
         layer.shadowOffset = offset ?? .zero

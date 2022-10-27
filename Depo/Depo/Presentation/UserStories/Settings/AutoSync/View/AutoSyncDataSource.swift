@@ -23,6 +23,10 @@ final class AutoSyncDataSource: NSObject {
     private var selectedAlbums = [AutoSyncAlbum]()
     private(set) var autoSyncSetting = AutoSyncSettings()
     
+    private var timeSettingModel: PeriodContactsSyncModel?
+    private var periodContactsSyncSettings: PeriodicContactsSyncSettings?
+    weak var delegateContact: PeriodicContactSyncDataSourceDelegate?
+    
     var autoSyncAlbums: [AutoSyncAlbum] {
         return albumModels.map { $0.album }
     }
@@ -33,9 +37,10 @@ final class AutoSyncDataSource: NSObject {
     
     //MARK: - Init
     
-    init(tableView: UITableView, delegate: AutoSyncDataSourceDelegate?) {
+    init(tableView: UITableView, delegate: AutoSyncDataSourceDelegate?, delegateContact: PeriodicContactSyncDataSourceDelegate?) {
         self.tableView = tableView
         self.delegate = delegate
+        self.delegateContact = delegateContact
         super.init()
         
         setupTableView()
@@ -45,23 +50,33 @@ final class AutoSyncDataSource: NSObject {
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = AppColor.primaryBackground.color
         tableView.separatorStyle = .none
         tableView.allowsMultipleSelection = true
+        tableView.addRoundedShadows(cornerRadius: 16,
+                                    shadowColor: AppColor.viewShadowLight.cgColor,
+                                    opacity: 0.8, radius: 6.0)
+        tableView.backgroundColor = .clear
+        
         
         AutoSyncRowType.cellTypes.forEach { tableView.register(nibCell: $0.self) }
         
-        //need for correct hide animation bottom cells
-        let footer = UIView(frame: CGRect(x: 0, y: 0, width: Device.winSize.width, height: 150))
-        footer.backgroundColor = AppColor.primaryBackground.color
-        let line = UIView(frame: CGRect(x: 16, y: 0, width: Device.winSize.width - 32, height: 1))
-        line.backgroundColor = AppColor.itemSeperator.color
-        footer.addSubview(line)
-        footer.isUserInteractionEnabled = false
-        tableView.tableFooterView = footer
+        // Register Contact
+        let identifier = CellsIdConstants.periodicContactSyncSettingsCellID
+        let nib = UINib(nibName: identifier, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: identifier)
+
+        
+//        //need for correct hide animation bottom cells
+//        let footer = UIView(frame: CGRect(x: 0, y: 0, width: Device.winSize.width, height: 150))
+//        footer.backgroundColor = AppColor.primaryBackground.color
+//        let line = UIView(frame: CGRect(x: 16, y: 0, width: Device.winSize.width - 32, height: 1))
+//        line.backgroundColor = AppColor.itemSeperator.color
+//        footer.addSubview(line)
+//        footer.isUserInteractionEnabled = false
+//        tableView.tableFooterView = footer
         
         let back = UIView(frame: tableView.bounds)
-        back.backgroundColor = AppColor.primaryBackground.color
+        //back.backgroundColor = AppColor.primaryBackground.color
         tableView.backgroundView = back
         
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(collapseCells))
@@ -106,40 +121,171 @@ final class AutoSyncDataSource: NSObject {
                   AutoSyncHeaderModel(type: .albums, setting: nil, isSelected: false)]
         tableView.reloadData()
     }
+    
+    func showCells(from settings: PeriodicContactsSyncSettings) {
+        periodContactsSyncSettings = settings
+        setupCellsContact(with: settings)
+    }
+    
+    private func updateCellsContact() {
+        guard let settings = periodContactsSyncSettings else {
+            return
+        }
+        
+        timeSettingModel = nil
+        setupCellsContact(with: settings)
+    }
+    
+    private func setupCellsContact(with settings: PeriodicContactsSyncSettings) {
+        timeSettingModel = PeriodContactsSyncModel(title: TextConstants.autoSyncCellAutoSync, setting: settings.timeSetting, selected: settings.isPeriodicContactsSyncOptionEnabled)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func createAutoSyncSettings() -> PeriodicContactsSyncSettings {
+        guard let settings = periodContactsSyncSettings else {
+            return PeriodicContactsSyncSettings()
+        }
+        return settings
+    }
+    
+    func forceDisableAutoSyncContact() {
+        periodContactsSyncSettings?.disablePeriodicContactsSync()
+        updateCellsContact()
+    }
 }
 
 //MARK: - UITableViewDataSource
 
-extension AutoSyncDataSource: UITableViewDataSource {
+extension AutoSyncDataSource: UITableViewDataSource, UITableViewDelegate {
 
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        if section == 0 {
+            return 16
+        } else {
+            return 60
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return models.count
+        if section == 0 {
+            return models.count
+        } else {
+            return 1
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return ""
+        } else {
+            return TextConstants.periodContactSyncFromSettingsTitle
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = models[indexPath.row]
         
-        guard let cell = tableView.dequeue(reusable: model.type.cellClass().self, for: indexPath) as? AutoSyncTableViewCell else {
-            assertionFailure()
-            return UITableViewCell()
+        if indexPath.section == 0 {
+            let model = models[indexPath.row]
+            
+            guard let cell = tableView.dequeue(reusable: model.type.cellClass().self, for: indexPath) as? AutoSyncTableViewCell else {
+                assertionFailure()
+                return UITableViewCell()
+            }
+            
+            cell.selectionStyle = .none
+            cell.setup(with: model, delegate: self)
+            cell.backgroundColor = AppColor.secondaryBackground.color
+            return cell
+        } else {
+            // Contact
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.periodicContactSyncSettingsCellID, for: indexPath)
+            cell.selectionStyle = .none
+            let autoSyncCell = cell as! PeriodicContactSyncSettingsTableViewCell
+            autoSyncCell.delegate = self
+            if let timeSettingModel = timeSettingModel,
+                let syncSetting = timeSettingModel.syncSetting {
+                autoSyncCell.setup(with: timeSettingModel, setting: syncSetting)
+            }
+            autoSyncCell.backgroundColor = AppColor.secondaryBackground.color
+            return autoSyncCell
         }
-        
-        cell.selectionStyle = .none
-        cell.clipsToBounds = true
-        cell.setup(with: model, delegate: self)
-        
-        return cell
     }
-}
- 
-//MARK: - UITableViewDelegate
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cornerRadius = 16
+        var corners: UIRectCorner = []
 
-extension AutoSyncDataSource: UITableViewDelegate {
+        if indexPath.row == 0 {
+            corners.update(with: .topLeft)
+            corners.update(with: .topRight)
+        }
+
+        if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+            corners.update(with: .bottomLeft)
+            corners.update(with: .bottomRight)
+        }
+
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = UIBezierPath(roundedRect: cell.bounds,
+                                      byRoundingCorners: corners,
+                                      cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)).cgPath
+        cell.layer.mask = maskLayer
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let sectionTitle: String = self.tableView(tableView, titleForHeaderInSection: section)!
+        if sectionTitle == "" {
+          return nil
+        }
+
+        let title: InsetsLabel = InsetsLabel()
+
+        title.text = sectionTitle
+        title.textColor = AppColor.tableViewSection.color
+        //title.backgroundColor = .clear
+        title.font = .appFont(.medium, size: 14)
+        title.insets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+
+        return title
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? AutoSyncTableViewCell {
             cell.didSelect()
             tableView.deselectRow(at: indexPath, animated: false)
         }
+    }
+}
+
+// MARK: - PeriodicContactSyncSettingsTableViewCellDelegate
+
+extension AutoSyncDataSource: PeriodicContactSyncSettingsTableViewCellDelegate {
+    func onValueChanged(cell: PeriodicContactSyncSettingsTableViewCell) {
+        if cell.switcher.isOn {
+            periodContactsSyncSettings?.isPeriodicContactsSyncOptionEnabled = true
+            periodContactsSyncSettings?.timeSetting.option = .daily
+            updateCellsContact()
+        } else {
+            forceDisableAutoSyncContact()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        
+        delegateContact?.onValueChanged()
+    }
+    
+    func didChangeTime(setting: PeriodicContactsSyncSetting) {
+        periodContactsSyncSettings?.set(periodicContactsSync: setting)
+        
+        delegateContact?.onValueChanged()
     }
 }
 
