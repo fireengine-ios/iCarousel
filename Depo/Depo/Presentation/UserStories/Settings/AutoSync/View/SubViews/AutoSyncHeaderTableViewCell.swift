@@ -26,13 +26,14 @@ final class AutoSyncHeaderTableViewCell: AutoSyncTableViewCell {
         }
     }
     
-    @IBOutlet private weak var descriptionLabel: UILabel! {
+    @IBOutlet private weak var descriptionLabel: InsetsLabel! {
         willSet {
             newValue.text = ""
             newValue.textColor = AppColor.label.color
             newValue.font = .appFont(.regular, size: 14)
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
+            newValue.insets = .init(top: 0, left: 0, bottom: 15, right: 0)
         }
     }
     

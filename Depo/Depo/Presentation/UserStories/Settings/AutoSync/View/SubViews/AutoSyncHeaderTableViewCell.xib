@@ -39,7 +39,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Select" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gUC-Ix-fdq" userLabel="Option Label">
-                                        <rect key="frame" x="39" y="13" width="216" height="18"/>
+                                        <rect key="frame" x="212.5" y="13" width="42.5" height="18"/>
                                         <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -56,11 +56,10 @@
                                     <constraint firstAttribute="trailing" secondItem="I9V-oc-mqR" secondAttribute="trailing" id="RCR-Z6-yt3"/>
                                     <constraint firstItem="I9V-oc-mqR" firstAttribute="leading" secondItem="gUC-Ix-fdq" secondAttribute="trailing" constant="12" id="YQm-bh-8nK"/>
                                     <constraint firstItem="hjC-Gv-rOm" firstAttribute="leading" secondItem="7HM-Vn-sml" secondAttribute="leading" id="dvQ-1u-Rzk"/>
-                                    <constraint firstItem="gUC-Ix-fdq" firstAttribute="leading" secondItem="hjC-Gv-rOm" secondAttribute="trailing" constant="8" id="jlZ-RR-yIS"/>
                                     <constraint firstItem="hjC-Gv-rOm" firstAttribute="top" secondItem="7HM-Vn-sml" secondAttribute="top" id="wvW-RZ-yYZ"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g1t-cv-Zis">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g1t-cv-Zis" customClass="InsetsLabel" customModule="Billo" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="48" width="280" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
