@@ -269,7 +269,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
             }
 
-            let arrayOfIndexesOfViewsThatShouldntBeRefreshed = [TabScreenIndex.home.rawValue,
+            let arrayOfIndexesOfViewsThatShouldntBeRefreshed = [TabScreenIndex.forYou.rawValue,
                                                                 TabScreenIndex.contactsSync.rawValue,
                                                                 TabScreenIndex.documents.rawValue]
 

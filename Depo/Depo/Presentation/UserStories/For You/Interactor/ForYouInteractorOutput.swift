@@ -29,4 +29,9 @@ protocol ForYouInteractorOutput: AnyObject {
     func getThrowbacks(data: AlbumResponse)
     
     func didFinishedAllRequests()
+    func didGetUpdateAlbums()
+    func didGetUpdatePlaces()
+    func didGetUpdateThings()
+    func didGetUpdatePeople()
+    func didGetUpdateStories()
 }

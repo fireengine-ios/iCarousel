@@ -144,7 +144,7 @@ final class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController 
     }
     
     private func configureNavBarWithTouch() {
-        setTitle(withString: mainTitle)
+        setTitle(withString: mainTitle, andSubTitle: "")
         
         if let output = output as? FaceImagePhotosViewOutput,
             let type = output.faceImageType(), type == .people {

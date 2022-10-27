@@ -19,4 +19,10 @@ protocol ForYouViewOutput: AnyObject {
     func navigateToItemPreview(item: WrapData, items: [WrapData])
     func getHeightForRow(at view: ForYouSections) -> Int
     func getModel(for view: ForYouSections) -> Any?
+    
+    func getUpdateAlbums()
+    func getUpdatePeople()
+    func getUpdateThings()
+    func getUpdatePlaces()
+    func getUpdateStories()
 }
