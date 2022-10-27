@@ -19,7 +19,9 @@ class StoriesInitializer: NSObject {
         viewController.floatingButtonsArray.append(contentsOf: [.createAStory])
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .moveToTrash],
-                                               style: .default, tintColor: nil)
+                                               style: .default, tintColor: AppColor.tint.color,
+                                               unselectedItemTintColor: AppColor.label.color,
+                                               barTintColor: AppColor.drawerBackground.color)
         
         let presenter = AlbumsPresenter()
         

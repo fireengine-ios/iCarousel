@@ -61,6 +61,11 @@ final class ForYouViewController: BaseViewController {
         
         isFIREnabled = isAllowed
     }
+    
+    private func updateTableView(for view: ForYouSections) {
+        guard let index = forYouSections.firstIndex(of: view) else { return }
+        tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+    }
 }
 
 //MARK: -ForYouViewInput
@@ -73,6 +78,26 @@ extension ForYouViewController: ForYouViewInput {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
+    }
+    
+    func didGetUpdateAlbums() {
+        updateTableView(for: .albums)
+    }
+    
+    func didGetUpdatePlaces() {
+        updateTableView(for: .places)
+    }
+    
+    func didGetUpdateThings() {
+        updateTableView(for: .things)
+    }
+    
+    func didGetUpdatePeople() {
+        updateTableView(for: .people)
+    }
+    
+    func didGetUpdateStories() {
+        updateTableView(for: .story)
     }
 }
 
@@ -150,5 +175,101 @@ extension ForYouViewController: ItemOperationManagerViewProtocol {
             faceImagePermissionChanged(to: isAllowed)
             tableView.reloadData()
         }
+    }
+    
+    func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {
+        output.getUpdateAlbums()
+    }
+    
+    func albumsDeleted(albums: [AlbumItem]) {
+        output.getUpdateAlbums()
+    }
+    
+    func newAlbumCreated() {
+        output.getUpdateAlbums()
+    }
+    
+    func didHideAlbums(_ albums: [AlbumItem]) {
+        output.getUpdateAlbums()
+    }
+    
+    func didUnhideAlbums(_ albums: [AlbumItem]) {
+        output.getUpdateAlbums()
+    }
+    
+    func didHidePeople(items: [PeopleItem]) {
+        output.getUpdatePeople()
+    }
+    
+    func didHideThings(items: [ThingsItem]) {
+        output.getUpdateThings()
+    }
+    
+    func didHidePlaces(items: [PlacesItem]) {
+        output.getUpdatePlaces()
+    }
+    
+    func didUnhidePeople(items: [PeopleItem]) {
+        output.getUpdatePeople()
+    }
+    
+    func didUnhidePlaces(items: [PlacesItem]) {
+        output.getUpdatePlaces()
+    }
+    
+    func didUnhideThings(items: [ThingsItem]) {
+        output.getUpdateThings()
+    }
+    
+    func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
+        output.getUpdateAlbums()
+    }
+    
+    func didMoveToTrashPeople(items: [PeopleItem]) {
+        output.getUpdatePeople()
+    }
+    
+    func didMoveToTrashPlaces(items: [PlacesItem]) {
+        output.getUpdatePlaces()
+    }
+    
+    func didMoveToTrashThings(items: [ThingsItem]) {
+        output.getUpdateThings()
+    }
+    
+    func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
+        output.getUpdateAlbums()
+    }
+    
+    func putBackFromTrashPeople(items: [PeopleItem]) {
+        output.getUpdatePeople()
+    }
+    
+    func putBackFromTrashThings(items: [ThingsItem]) {
+        output.getUpdateThings()
+    }
+    
+    func putBackFromTrashPlaces(items: [PlacesItem]) {
+        output.getUpdatePlaces()
+    }
+    
+    func updatedPersonThumbnail(item: BaseDataSourceItem) {
+        output.getUpdatePeople()
+    }
+    
+    func didRenameAlbumItem(_ item: AlbumItem) {
+        output.getUpdateAlbums()
+    }
+    
+    func didRenamePeople() {
+        output.getUpdatePeople()
+    }
+    
+    func newStoryCreated() {
+        output.getUpdateStories()
+    }
+    
+    func deleteStories(items: [Item]) {
+        output.getUpdateStories()
     }
 }

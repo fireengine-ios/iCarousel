@@ -56,7 +56,7 @@ class PublicShareRouter: NSObject, PublicShareRouterInput {
     }
     
     func navigateToHomeScreen() {
-        router.openTabBarItem(index: .home)
+        router.openTabBarItem(index: .gallery)
     }
     
     func presentFullQuotaPopup() {

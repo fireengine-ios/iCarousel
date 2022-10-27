@@ -127,6 +127,26 @@ extension ForYouPresenter: ForYouViewOutput {
             return albumCardsData
         }
     }
+    
+    func getUpdateAlbums() {
+        interactor.getUpdateAlbums()
+    }
+    
+    func getUpdatePlaces() {
+        interactor.getUpdatePlaces()
+    }
+    
+    func getUpdateThings() {
+        interactor.getUpdateThings()
+    }
+    
+    func getUpdatePeople() {
+        interactor.getUpdatePeople()
+    }
+    
+    func getUpdateStories() {
+        interactor.getUpdateStories()
+    }
 }
 
 extension ForYouPresenter: ForYouInteractorOutput {
@@ -189,5 +209,25 @@ extension ForYouPresenter: ForYouInteractorOutput {
     func didFinishedAllRequests() {
         view.hideSpinner()
         view.didFinishedAllRequests()
+    }
+    
+    func didGetUpdateAlbums() {
+        view.didGetUpdateAlbums()
+    }
+    
+    func didGetUpdatePeople() {
+        view.didGetUpdatePeople()
+    }
+    
+    func didGetUpdatePlaces() {
+        view.didGetUpdatePlaces()
+    }
+    
+    func didGetUpdateThings() {
+        view.didGetUpdateThings()
+    }
+    
+    func didGetUpdateStories() {
+        view.didGetUpdateStories()
     }
 }

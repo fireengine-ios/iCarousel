@@ -9,8 +9,8 @@
 import UIKit
 
 enum TabScreenIndex: Int {
-    case home = 0
-    case gallery = 1
+    case gallery = 0
+    case forYou = 1
     case contactsSync = 2
     case documents = 3
     case discover = 4
@@ -18,15 +18,15 @@ enum TabScreenIndex: Int {
 
 enum TabBarItem: CaseIterable {
     case gallery
-    case home
+    case forYou
     case contacts
     case allFiles
     case discover
     
     var title: String {
         switch self {
-        case .home:
-            return TextConstants.tabBarItemHomeLabel
+        case .forYou:
+            return "For You"
         case .gallery:
             return TextConstants.tabBarItemGalleryLabel
         case .contacts:
@@ -40,7 +40,7 @@ enum TabBarItem: CaseIterable {
     
     var image: UIImage? {
         switch self {
-        case .home:
+        case .forYou:
             return TabBarImage.forYou.image
         case .gallery:
             return TabBarImage.gallery.image
@@ -55,7 +55,7 @@ enum TabBarItem: CaseIterable {
 
     var selectedImage: UIImage? {
         switch self {
-        case .home:
+        case .forYou:
             return TabBarImage.forYouSelected.image
         case .gallery:
             return TabBarImage.gallerySelected.image
@@ -70,8 +70,8 @@ enum TabBarItem: CaseIterable {
     
     var accessibilityLabel: String {
         switch self {
-        case .home:
-            return TextConstants.accessibilityHome
+        case .forYou:
+            return "For You"
         case .gallery:
             return TextConstants.accessibilityPhotosVideos
         case .contacts:
