@@ -27,7 +27,7 @@
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Aim-j8-1fw" userLabel="Top Stack View">
                         <rect key="frame" x="16" y="16" width="287" height="223"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2Rj-mp-kEk">
+                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="287" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="qLD-IJ-2Qg" userLabel="Switch Container">
                                 <rect key="frame" x="0.0" y="0.0" width="287" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vK8-ni-iua">
@@ -36,22 +36,23 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XZm-oS-1aH">
-                                        <rect key="frame" x="41.5" y="0.0" width="196.5" height="50"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    </view>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aOe-fe-AKA" customClass="GradientSwitch" customModule="Billo" customModuleProvider="target">
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aOe-fe-AKA" customClass="CustomSwitch" customModule="Billo" customModuleProvider="target">
                                         <rect key="frame" x="238" y="9.5" width="51" height="31"/>
-                                        <color key="onTintColor" name="tint"/>
                                         <connections>
                                             <action selector="onSwitcherValueChanged" destination="KGk-i7-Jjw" eventType="valueChanged" id="GBP-3e-a7M"/>
                                         </connections>
                                     </switch>
                                 </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="qZI-zi-8F2"/>
+                                    <constraint firstAttribute="trailing" secondItem="aOe-fe-AKA" secondAttribute="trailing" id="DFO-pD-4Lw"/>
+                                    <constraint firstItem="vK8-ni-iua" firstAttribute="leading" secondItem="qLD-IJ-2Qg" secondAttribute="leading" id="UBy-nL-Q2f"/>
+                                    <constraint firstItem="aOe-fe-AKA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vK8-ni-iua" secondAttribute="trailing" constant="8" id="cpI-2t-Ik3"/>
+                                    <constraint firstItem="aOe-fe-AKA" firstAttribute="centerY" secondItem="qLD-IJ-2Qg" secondAttribute="centerY" id="fLu-E8-qc8"/>
+                                    <constraint firstItem="vK8-ni-iua" firstAttribute="centerY" secondItem="qLD-IJ-2Qg" secondAttribute="centerY" id="vEd-Na-rZr"/>
+                                    <constraint firstAttribute="height" constant="50" id="wTm-Zf-ux8"/>
                                 </constraints>
-                            </stackView>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SQZ-uX-S5w" userLabel="Spacer">
                                 <rect key="frame" x="0.0" y="58" width="287" height="4"/>
                                 <color key="backgroundColor" name="secondaryBackground"/>
@@ -62,7 +63,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="LZb-e6-h8C">
                                 <rect key="frame" x="0.0" y="70" width="287" height="153"/>
                                 <subviews>
-                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LeE-sm-W0M">
+                                    <view clearsContextBeforeDrawing="NO" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LeE-sm-W0M">
                                         <rect key="frame" x="0.0" y="0.0" width="287" height="1"/>
                                         <color key="backgroundColor" name="darkBorder"/>
                                         <constraints>
@@ -235,9 +236,6 @@
         </namedColor>
         <namedColor name="secondaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="tint">
-            <color red="0.0" green="0.48199999332427979" blue="0.67100000381469727" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

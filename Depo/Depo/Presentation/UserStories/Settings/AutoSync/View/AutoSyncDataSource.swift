@@ -76,7 +76,6 @@ final class AutoSyncDataSource: NSObject {
 //        tableView.tableFooterView = footer
         
         let back = UIView(frame: tableView.bounds)
-        //back.backgroundColor = AppColor.primaryBackground.color
         tableView.backgroundView = back
         
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(collapseCells))
@@ -237,23 +236,6 @@ extension AutoSyncDataSource: UITableViewDataSource, UITableViewDelegate {
                                       byRoundingCorners: corners,
                                       cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)).cgPath
         cell.layer.mask = maskLayer
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionTitle: String = self.tableView(tableView, titleForHeaderInSection: section)!
-        if sectionTitle == "" {
-          return nil
-        }
-
-        let title: InsetsLabel = InsetsLabel()
-
-        title.text = sectionTitle
-        title.textColor = AppColor.tableViewSection.color
-        //title.backgroundColor = .clear
-        title.font = .appFont(.medium, size: 14)
-        title.insets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
-
-        return title
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -87,7 +87,6 @@ extension PeriodicContactSyncDataSource: PeriodicContactSyncSettingsTableViewCel
             periodContactsSyncSettings?.isPeriodicContactsSyncOptionEnabled = true
             periodContactsSyncSettings?.timeSetting.option = .daily
             updateCells()
-            reloadTableView()
         } else {
             forceDisableAutoSync()
             reloadTableView()

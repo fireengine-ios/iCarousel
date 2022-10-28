@@ -50,7 +50,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="22" id="lEu-WL-b3c"/>
                                             </constraints>
-                                            <state key="normal" image="downArrow"/>
+                                            <state key="normal" image="iconArrowDownSmall"/>
                                             <connections>
                                                 <action selector="arrowButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="oom-Zo-g9A"/>
                                             </connections>
@@ -99,7 +99,7 @@
         </view>
     </objects>
     <resources>
-        <image name="downArrow" width="13" height="8"/>
+        <image name="iconArrowDownSmall" width="24" height="24"/>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

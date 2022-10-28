@@ -21,17 +21,15 @@ class GradientSwitch: UISwitch {
     
     //will set gradient color for switch On  state
     func configure() {
-        onTintColor = .clear
+        //onTintColor = .clear
         tintColor = ColorConstants.switcherGrayColor
-        //         Switch height 32 pixel
+        // Switch height 32 pixel
         layer.cornerRadius = 16
         backgroundColor = ColorConstants.switcherGrayColor
         
         let onImage = Image.gradientSwitch.image
-        self.onTintColor = UIColor(patternImage: onImage)
+        onTintColor = UIColor(patternImage: onImage)
         
-        self.clipsToBounds = true
+        //clipsToBounds = true
     }
-    
-    
 }

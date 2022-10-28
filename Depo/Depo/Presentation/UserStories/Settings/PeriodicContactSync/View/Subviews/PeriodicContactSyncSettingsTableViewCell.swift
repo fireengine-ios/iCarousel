@@ -16,7 +16,7 @@ protocol PeriodicContactSyncSettingsTableViewCellDelegate: AnyObject {
 class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet weak var switcher: GradientSwitch!
+    @IBOutlet weak var switcher: CustomSwitch!
     @IBOutlet private var optionsViews: [PeriodicContactsSyncSettingsOptionView]!
     @IBOutlet private weak var optionsStackView: UIStackView!
     @IBOutlet private var optionSeparators: [UIView]!
@@ -82,7 +82,6 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
         optionsStackView.isHidden = !switcher.isOn
         separatorView.isHidden = !switcher.isOn
     }
-    
 }
 
 // MARK: - AutoSyncSettingsOptionViewDelegate

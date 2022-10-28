@@ -39,13 +39,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Select" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gUC-Ix-fdq" userLabel="Option Label">
-                                        <rect key="frame" x="212.5" y="13" width="42.5" height="18"/>
+                                        <rect key="frame" x="201.5" y="13" width="42.5" height="18"/>
                                         <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downArrow" translatesAutoresizingMaskIntoConstraints="NO" id="I9V-oc-mqR">
-                                        <rect key="frame" x="267" y="18" width="13" height="8"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconArrowDownSmall" translatesAutoresizingMaskIntoConstraints="NO" id="I9V-oc-mqR">
+                                        <rect key="frame" x="256" y="10" width="24" height="24"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" name="secondaryBackground"/>
@@ -86,7 +86,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="downArrow" width="13" height="8"/>
+        <image name="iconArrowDownSmall" width="24" height="24"/>
         <namedColor name="secondaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
