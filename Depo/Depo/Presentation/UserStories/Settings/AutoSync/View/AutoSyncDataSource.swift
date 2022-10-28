@@ -56,8 +56,6 @@ final class AutoSyncDataSource: NSObject {
                                     shadowColor: AppColor.viewShadowLight.cgColor,
                                     opacity: 0.8, radius: 6.0)
         tableView.backgroundColor = .clear
-        tableView.estimatedRowHeight = 100
-        tableView.rowHeight = UITableView.automaticDimension
         
         
         AutoSyncRowType.cellTypes.forEach { tableView.register(nibCell: $0.self) }
