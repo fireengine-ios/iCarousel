@@ -302,38 +302,42 @@ extension ForYouInteractor: ForYouInteractorInput {
         }
     }
     
-    func getUpdateAlbums() {
-        getAlbums()
-        group.notify(queue: .main) {
-            self.output?.didGetUpdateAlbums()
+    func getUpdateData(for section: ForYouSections?) {
+        guard let section = section else {
+            return
         }
-    }
-    
-    func getUpdateThings() {
-        getThings()
-        group.notify(queue: .main) {
-            self.output?.didGetUpdateThings()
+        
+        switch section {
+        case .faceImage:
+            return
+        case .people:
+            getPeople()
+        case .collageCards:
+            getCollageCards()
+        case .collages:
+            getCollages()
+        case .animationCards:
+            getAnimationCards()
+        case .animations:
+            getAnimations()
+        case .albumCards:
+            getAlbumCards()
+        case .albums:
+            getAlbums()
+        case .places:
+            getPlaces()
+        case .story:
+            getStories()
+        case .photopick:
+            getInstapickThumbnails()
+        case .things:
+            getThings()
+        case .hidden:
+            getHiddens()
         }
-    }
-    
-    func getUpdatePlaces() {
-        getPlaces()
+        
         group.notify(queue: .main) {
-            self.output?.didGetUpdatePlaces()
-        }
-    }
-    
-    func getUpdatePeople() {
-        getPeople()
-        group.notify(queue: .main) {
-            self.output?.didGetUpdatePeople()
-        }
-    }
-    
-    func getUpdateStories() {
-        getStories()
-        group.notify(queue: .main) {
-            self.output?.didGetUpdateStories()
+            self.output.didGetUpdateData()
         }
     }
 }

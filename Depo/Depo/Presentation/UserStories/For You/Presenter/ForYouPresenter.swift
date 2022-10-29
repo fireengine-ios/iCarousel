@@ -12,6 +12,7 @@ final class ForYouPresenter: BasePresenter, ForYouModuleInput {
     weak var view: ForYouViewInput!
     var interactor: ForYouInteractorInput!
     var router: ForYouRouterInput!
+    var currentSection: ForYouSections?
     
     private lazy var thingsData: [WrapData] = []
     private lazy var placesData: [WrapData] = []
@@ -34,6 +35,7 @@ final class ForYouPresenter: BasePresenter, ForYouModuleInput {
 
 extension ForYouPresenter: ForYouViewOutput {
     func onSeeAllButton(for view: ForYouSections) {
+        self.currentSection = view
         router.navigateToSeeAll(for: view)
     }
     
@@ -51,18 +53,22 @@ extension ForYouPresenter: ForYouViewOutput {
     }
     
     func navigateToCreate(for view: ForYouSections) {
+        self.currentSection = view
         router.navigateToCreate(for: view)
     }
     
-    func navigateToItemDetail(item: WrapData, faceImageType: FaceImageType?) {
+    func navigateToItemDetail(item: WrapData, faceImageType: FaceImageType?, currentSection: ForYouSections) {
+        self.currentSection = currentSection
         interactor.loadItem(item, faceImageType: faceImageType)
     }
     
     func navigateToAlbumDetail(album: AlbumItem) {
+        self.currentSection = .albums
         router.navigateToAlbumDetail(album: album)
     }
     
-    func navigateToItemPreview(item: WrapData, items: [WrapData]) {
+    func navigateToItemPreview(item: WrapData, items: [WrapData], currentSection: ForYouSections) {
+        self.currentSection = currentSection
         router.navigateToItemPreview(item: item, items: items)
     }
     
@@ -128,28 +134,16 @@ extension ForYouPresenter: ForYouViewOutput {
         }
     }
     
-    func getUpdateAlbums() {
-        interactor.getUpdateAlbums()
-    }
-    
-    func getUpdatePlaces() {
-        interactor.getUpdatePlaces()
-    }
-    
-    func getUpdateThings() {
-        interactor.getUpdateThings()
-    }
-    
-    func getUpdatePeople() {
-        interactor.getUpdatePeople()
-    }
-    
-    func getUpdateStories() {
-        interactor.getUpdateStories()
+    func getUpdateData(for section: ForYouSections?) {
+        interactor.getUpdateData(for: section)
     }
 }
 
 extension ForYouPresenter: ForYouInteractorOutput {
+    func didGetUpdateData() {
+        view.didGetUpdateData()
+    }
+    
     func getThings(data: [WrapData]) {
         self.thingsData = data
     }
@@ -209,25 +203,5 @@ extension ForYouPresenter: ForYouInteractorOutput {
     func didFinishedAllRequests() {
         view.hideSpinner()
         view.didFinishedAllRequests()
-    }
-    
-    func didGetUpdateAlbums() {
-        view.didGetUpdateAlbums()
-    }
-    
-    func didGetUpdatePeople() {
-        view.didGetUpdatePeople()
-    }
-    
-    func didGetUpdatePlaces() {
-        view.didGetUpdatePlaces()
-    }
-    
-    func didGetUpdateThings() {
-        view.didGetUpdateThings()
-    }
-    
-    func didGetUpdateStories() {
-        view.didGetUpdateStories()
     }
 }

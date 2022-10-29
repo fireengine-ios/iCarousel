@@ -29,6 +29,12 @@ final class ForYouViewController: BaseViewController {
         output.viewIsReady()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        guard let currentSection = output.currentSection else { return }
+        output.getUpdateData(for: currentSection)
+    }
+    
     deinit {
         ItemOperationManager.default.stopUpdateView(view: self)
     }
@@ -64,7 +70,9 @@ final class ForYouViewController: BaseViewController {
     
     private func updateTableView(for view: ForYouSections) {
         guard let index = forYouSections.firstIndex(of: view) else { return }
-        tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+        DispatchQueue.main.async {
+            self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
+        }
     }
 }
 
@@ -80,24 +88,9 @@ extension ForYouViewController: ForYouViewInput {
         }
     }
     
-    func didGetUpdateAlbums() {
-        updateTableView(for: .albums)
-    }
-    
-    func didGetUpdatePlaces() {
-        updateTableView(for: .places)
-    }
-    
-    func didGetUpdateThings() {
-        updateTableView(for: .things)
-    }
-    
-    func didGetUpdatePeople() {
-        updateTableView(for: .people)
-    }
-    
-    func didGetUpdateStories() {
-        updateTableView(for: .story)
+    func didGetUpdateData() {
+        guard let currentSection = output.currentSection else { return }
+        updateTableView(for: currentSection)
     }
 }
 
@@ -131,8 +124,8 @@ extension ForYouViewController: UITableViewDelegate {
 
 //MARK: -ForYouTableViewCellDelegate
 extension ForYouViewController: ForYouTableViewCellDelegate {
-    func navigateToItemPreview(item: WrapData, items: [WrapData]) {
-        output.navigateToItemPreview(item: item, items: items)
+    func navigateToItemPreview(item: WrapData, items: [WrapData], currentSection: ForYouSections) {
+        output.navigateToItemPreview(item: item, items: items, currentSection: currentSection)
     }
     
     func onSeeAllButton(for view: ForYouSections) {
@@ -143,8 +136,8 @@ extension ForYouViewController: ForYouTableViewCellDelegate {
         output.navigateToCreate(for: view)
     }
     
-    func navigateToItemDetail(item: WrapData, faceImageType: FaceImageType?) {
-        output.navigateToItemDetail(item: item, faceImageType: faceImageType)
+    func navigateToItemDetail(item: WrapData, faceImageType: FaceImageType?, currentSection: ForYouSections) {
+        output.navigateToItemDetail(item: item, faceImageType: faceImageType, currentSection: currentSection)
     }
     
     func naviateToAlbumDetail(album: AlbumItem) {
@@ -177,99 +170,7 @@ extension ForYouViewController: ItemOperationManagerViewProtocol {
         }
     }
     
-    func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {
-        output.getUpdateAlbums()
-    }
-    
-    func albumsDeleted(albums: [AlbumItem]) {
-        output.getUpdateAlbums()
-    }
-    
-    func newAlbumCreated() {
-        output.getUpdateAlbums()
-    }
-    
-    func didHideAlbums(_ albums: [AlbumItem]) {
-        output.getUpdateAlbums()
-    }
-    
-    func didUnhideAlbums(_ albums: [AlbumItem]) {
-        output.getUpdateAlbums()
-    }
-    
-    func didHidePeople(items: [PeopleItem]) {
-        output.getUpdatePeople()
-    }
-    
-    func didHideThings(items: [ThingsItem]) {
-        output.getUpdateThings()
-    }
-    
-    func didHidePlaces(items: [PlacesItem]) {
-        output.getUpdatePlaces()
-    }
-    
-    func didUnhidePeople(items: [PeopleItem]) {
-        output.getUpdatePeople()
-    }
-    
-    func didUnhidePlaces(items: [PlacesItem]) {
-        output.getUpdatePlaces()
-    }
-    
-    func didUnhideThings(items: [ThingsItem]) {
-        output.getUpdateThings()
-    }
-    
-    func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
-        output.getUpdateAlbums()
-    }
-    
-    func didMoveToTrashPeople(items: [PeopleItem]) {
-        output.getUpdatePeople()
-    }
-    
-    func didMoveToTrashPlaces(items: [PlacesItem]) {
-        output.getUpdatePlaces()
-    }
-    
-    func didMoveToTrashThings(items: [ThingsItem]) {
-        output.getUpdateThings()
-    }
-    
-    func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
-        output.getUpdateAlbums()
-    }
-    
-    func putBackFromTrashPeople(items: [PeopleItem]) {
-        output.getUpdatePeople()
-    }
-    
-    func putBackFromTrashThings(items: [ThingsItem]) {
-        output.getUpdateThings()
-    }
-    
-    func putBackFromTrashPlaces(items: [PlacesItem]) {
-        output.getUpdatePlaces()
-    }
-    
-    func updatedPersonThumbnail(item: BaseDataSourceItem) {
-        output.getUpdatePeople()
-    }
-    
-    func didRenameAlbumItem(_ item: AlbumItem) {
-        output.getUpdateAlbums()
-    }
-    
-    func didRenamePeople() {
-        output.getUpdatePeople()
-    }
-    
-    func newStoryCreated() {
-        output.getUpdateStories()
-    }
-    
-    func deleteStories(items: [Item]) {
-        output.getUpdateStories()
+    func tabBarDidChange() {
+        output.currentSection = nil
     }
 }

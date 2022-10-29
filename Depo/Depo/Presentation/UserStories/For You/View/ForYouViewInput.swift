@@ -11,10 +11,5 @@ import Foundation
 protocol ForYouViewInput: AnyObject, Waiting {
     func getFIRResponse(isAllowed: Bool)
     func didFinishedAllRequests()
-    
-    func didGetUpdateAlbums()
-    func didGetUpdatePlaces()
-    func didGetUpdateThings()
-    func didGetUpdatePeople()
-    func didGetUpdateStories()
+    func didGetUpdateData()
 }

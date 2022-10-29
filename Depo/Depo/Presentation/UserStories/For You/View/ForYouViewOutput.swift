@@ -14,15 +14,12 @@ protocol ForYouViewOutput: AnyObject {
     func checkFIRisAllowed()
     func onFaceImageButton()
     func navigateToCreate(for view: ForYouSections)
-    func navigateToItemDetail(item: WrapData, faceImageType: FaceImageType?)
+    func navigateToItemDetail(item: WrapData, faceImageType: FaceImageType?, currentSection: ForYouSections)
     func navigateToAlbumDetail(album: AlbumItem)
-    func navigateToItemPreview(item: WrapData, items: [WrapData])
+    func navigateToItemPreview(item: WrapData, items: [WrapData], currentSection: ForYouSections)
     func getHeightForRow(at view: ForYouSections) -> Int
     func getModel(for view: ForYouSections) -> Any?
+    func getUpdateData(for section: ForYouSections?)
     
-    func getUpdateAlbums()
-    func getUpdatePeople()
-    func getUpdateThings()
-    func getUpdatePlaces()
-    func getUpdateStories()
+    var currentSection: ForYouSections? {get set}
 }
