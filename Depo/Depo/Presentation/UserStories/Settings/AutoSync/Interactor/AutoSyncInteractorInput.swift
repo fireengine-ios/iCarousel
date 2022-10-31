@@ -18,4 +18,9 @@ protocol AutoSyncInteractorInput {
     func trackSettings(_ settings: AutoSyncSetting, fromSettings: Bool)
     
     func checkPermissions()
+    
+    // Contact
+    func prepareCellModelsContact()
+    func checkPermissionContact()
+    func onSaveContact(settings: PeriodicContactsSyncSettings)
 }

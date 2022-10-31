@@ -14054,9 +14054,10 @@
 			isa = PBXGroup;
 			children = (
 				4A9F8E50208759DC00622A6C /* Subviews */,
-				4A0AC134208736F100032CC7 /* PeriodicContactSyncViewController.swift */,
+				4A9F8E5720875D4300622A6C /* PeriodicContactSyncDataSource.swift */,
 				4A0AC1462087375B00032CC7 /* PeriodicContactSyncViewInput.swift */,
 				4A0AC1552087395E00032CC7 /* PeriodicContactSyncViewOutput.swift */,
+				4A0AC134208736F100032CC7 /* PeriodicContactSyncViewController.swift */,
 				4A9F8E4D2087546500622A6C /* PeriodicContactSyncViewController.xib */,
 			);
 			path = View;
@@ -14074,7 +14075,6 @@
 		4A0AC1312087369F00032CC7 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				4A9F8E5720875D4300622A6C /* PeriodicContactSyncDataSource.swift */,
 				4A0AC13A2087370B00032CC7 /* PeriodicContactSyncPresenter.swift */,
 			);
 			path = Presenter;

@@ -16,4 +16,10 @@ protocol AutoSyncInteractorOutput: AnyObject {
     
     func onCheckPermissions(photoAccessGranted: Bool, locationAccessGranted: Bool)
 
+    // Contact
+    func operationFinished()
+    func showError(error: String)
+    func prepaire(syncSettings: PeriodicContactsSyncSettings)
+    func permissionSuccess()
+    func permissionFail()
 }

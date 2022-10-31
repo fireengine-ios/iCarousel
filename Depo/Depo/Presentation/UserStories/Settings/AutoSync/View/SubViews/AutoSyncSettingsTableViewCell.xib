@@ -26,13 +26,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="1MI-yf-IMK">
-                        <rect key="frame" x="20" y="0.0" width="355" height="140"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VRc-qb-Pue" customClass="AutoSyncSettingsOptionView" customModule="Billo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="355" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W63-qF-pfU">
-                                        <rect key="frame" x="8" y="0.0" width="347" height="44"/>
+                                        <rect key="frame" x="8" y="0.0" width="367" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="GTAmericaLC-Md" family="GT America LC" pointSize="16"/>
                                         <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -44,14 +44,14 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:HxC-mn-dmR:image" translatesAutoresizingMaskIntoConstraints="NO" id="HxC-mn-dmR">
-                                        <rect key="frame" x="319" y="14" width="16" height="16"/>
+                                        <rect key="frame" x="339" y="14" width="16" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="16" id="j1b-cE-xLv"/>
                                             <constraint firstAttribute="height" constant="16" id="qqO-Ed-P0Q"/>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gR9-Hd-zOq">
-                                        <rect key="frame" x="16" y="43" width="323" height="1"/>
+                                        <rect key="frame" x="16" y="43" width="343" height="1"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="fyV-Hx-NcK"/>
@@ -77,10 +77,10 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="61z-Jn-NEA" customClass="AutoSyncSettingsOptionView" customModule="Billo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="48" width="355" height="44"/>
+                                <rect key="frame" x="0.0" y="48" width="375" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sCG-Fu-vEA">
-                                        <rect key="frame" x="8" y="0.0" width="347" height="44"/>
+                                        <rect key="frame" x="8" y="0.0" width="367" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="18"/>
                                         <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -92,14 +92,14 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:HxC-mn-dmR:image" translatesAutoresizingMaskIntoConstraints="NO" id="VRa-xn-4vE">
-                                        <rect key="frame" x="319" y="14" width="16" height="16"/>
+                                        <rect key="frame" x="339" y="14" width="16" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="1Ec-Ep-OyZ"/>
                                             <constraint firstAttribute="width" constant="16" id="FRe-5c-ZxP"/>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="btd-CZ-dx4">
-                                        <rect key="frame" x="16" y="43" width="323" height="1"/>
+                                        <rect key="frame" x="16" y="43" width="343" height="1"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="Hgh-SO-gXH"/>
@@ -124,10 +124,10 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aDh-XY-ZsJ" customClass="AutoSyncSettingsOptionView" customModule="Billo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="96" width="355" height="44"/>
+                                <rect key="frame" x="0.0" y="96" width="375" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UJW-t7-fGg">
-                                        <rect key="frame" x="8" y="0.0" width="347" height="44"/>
+                                        <rect key="frame" x="8" y="0.0" width="367" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="18"/>
                                         <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -139,7 +139,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:HxC-mn-dmR:image" translatesAutoresizingMaskIntoConstraints="NO" id="nrH-uM-PfU">
-                                        <rect key="frame" x="319" y="14" width="16" height="16"/>
+                                        <rect key="frame" x="339" y="14" width="16" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="LpP-oh-wXx"/>
                                             <constraint firstAttribute="width" constant="16" id="Nj7-7D-iOL"/>
@@ -167,7 +167,7 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="1MI-yf-IMK" secondAttribute="trailing" id="ANR-Q8-2I5"/>
-                    <constraint firstItem="1MI-yf-IMK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="cc0-uP-2ad"/>
+                    <constraint firstItem="1MI-yf-IMK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="cc0-uP-2ad"/>
                     <constraint firstItem="1MI-yf-IMK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="n6N-ke-x2G"/>
                     <constraint firstAttribute="bottom" secondItem="1MI-yf-IMK" secondAttribute="bottom" id="u0T-gI-YZY"/>
                 </constraints>

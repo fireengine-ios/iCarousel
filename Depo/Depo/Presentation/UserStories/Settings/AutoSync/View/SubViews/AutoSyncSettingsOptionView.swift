@@ -29,7 +29,7 @@ final class AutoSyncSettingsOptionView: UIView {
         }
     }
     
-    private let checkMarkImage = UIImage(named: "backupCheckmark")
+    private let checkMarkImage = Image.iconCheckBlue.image
     
     private var option: AutoSyncOption = .wifiOnly {
         willSet { button.setTitle(newValue.localizedText, for: .normal) }
