@@ -302,38 +302,76 @@ extension ForYouInteractor: ForYouInteractorInput {
         }
     }
     
-    func getUpdateAlbums() {
-        getAlbums()
+    func getUpdateData(for section: ForYouSections?) {
+        guard let section = section else {
+            return
+        }
+        
+        switch section {
+        case .faceImage:
+            return
+        case .people:
+            getPeople()
+        case .collageCards:
+            getCollageCards()
+        case .collages:
+            getCollages()
+        case .animationCards:
+            getAnimationCards()
+        case .animations:
+            getAnimations()
+        case .albumCards:
+            getAlbumCards()
+        case .albums:
+            getAlbums()
+        case .places:
+            getPlaces()
+        case .story:
+            getStories()
+        case .photopick:
+            getInstapickThumbnails()
+        case .things:
+            getThings()
+        case .hidden:
+            getHiddens()
+        }
+        
         group.notify(queue: .main) {
-            self.output?.didGetUpdateAlbums()
+            self.output.didGetUpdateData()
         }
     }
     
-    func getUpdateThings() {
-        getThings()
-        group.notify(queue: .main) {
-            self.output?.didGetUpdateThings()
+    func onCloseCard(data: HomeCardResponse, section: ForYouSections) {
+        debugLog("ForYou closeCard")
+        guard let id = data.id else { return }
+
+        cardsService.delete(with: id) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    self?.output.closeCardSuccess(data: data, section: section)
+                case .failed(_):
+                    self?.output.closeCardFailed()
+                }
+            }
         }
     }
     
-    func getUpdatePlaces() {
-        getPlaces()
-        group.notify(queue: .main) {
-            self.output?.didGetUpdatePlaces()
-        }
-    }
-    
-    func getUpdatePeople() {
-        getPeople()
-        group.notify(queue: .main) {
-            self.output?.didGetUpdatePeople()
-        }
-    }
-    
-    func getUpdateStories() {
-        getStories()
-        group.notify(queue: .main) {
-            self.output?.didGetUpdateStories()
+    func saveCard(data: HomeCardResponse, section: ForYouSections) {
+        debugLog("ForYou saveCard")
+        guard let id = data.id else { return }
+
+        cardsService.save(with: id) { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.output.saveCardSuccess(data: data, section: section)
+            case .failed(let error):
+                if error.isOutOfSpaceError {
+                    self?.output.saveCardFailedFullQuota(section: section)
+                } else {
+                    self?.output.saveCardFailed(section: section)
+                }
+            }
         }
     }
 }

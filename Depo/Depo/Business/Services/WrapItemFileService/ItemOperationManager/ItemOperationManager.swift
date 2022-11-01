@@ -115,6 +115,7 @@ protocol ItemOperationManagerViewProtocol: AnyObject {
     func elementTypeChanged(type: ElementTypes)
     func faceImageRecogChaned(to isAllowed: Bool)
     func stopItemSelection()
+    func tabBarDidChange()
 }
 
 extension ItemOperationManagerViewProtocol {
@@ -229,6 +230,7 @@ extension ItemOperationManagerViewProtocol {
     func elementTypeChanged(type: ElementTypes) {}
     func faceImageRecogChaned(to isAllowed: Bool) {}
     func stopItemSelection() {}
+    func tabBarDidChange() {}
 }
 
 
@@ -673,6 +675,12 @@ class ItemOperationManager: NSObject {
     func stopItemSelection() {
         DispatchQueue.main.async {
             self.views.invoke { $0.stopItemSelection()}
+        }
+    }
+    
+    func tabBarDidChange() {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.tabBarDidChange()}
         }
     }
 }

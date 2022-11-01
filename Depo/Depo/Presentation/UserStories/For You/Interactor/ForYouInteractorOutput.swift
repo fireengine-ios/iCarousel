@@ -29,9 +29,11 @@ protocol ForYouInteractorOutput: AnyObject {
     func getThrowbacks(data: AlbumResponse)
     
     func didFinishedAllRequests()
-    func didGetUpdateAlbums()
-    func didGetUpdatePlaces()
-    func didGetUpdateThings()
-    func didGetUpdatePeople()
-    func didGetUpdateStories()
+    func didGetUpdateData()
+    
+    func closeCardFailed()
+    func closeCardSuccess(data: HomeCardResponse, section: ForYouSections)
+    func saveCardFailed(section: ForYouSections)
+    func saveCardFailedFullQuota(section: ForYouSections)
+    func saveCardSuccess(data: HomeCardResponse, section: ForYouSections)
 }

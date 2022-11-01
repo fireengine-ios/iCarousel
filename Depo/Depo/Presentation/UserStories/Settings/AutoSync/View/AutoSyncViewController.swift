@@ -21,7 +21,8 @@ final class AutoSyncViewController: BaseViewController, NibInit {
     }
     
     private lazy var storageVars: StorageVars = factory.resolve()
-    private lazy var dataSource = AutoSyncDataSource(tableView: tableView, delegate: self)
+    private lazy var dataSource = AutoSyncDataSource(tableView: tableView, delegate: self, delegateContact: self)
+    private lazy var activityManager = ActivityIndicatorManager()
     
     var fromSettings: Bool = false
     private var onStartUsingButtonTapped = false
@@ -97,10 +98,12 @@ final class AutoSyncViewController: BaseViewController, NibInit {
         titleLabel.numberOfLines = 0
         
         view.addSubview(titleLabel)
-        titleLabel.pinToSuperviewEdges(offset: 20)
+        titleLabel.pinToSuperviewEdges(offset: 8)
         
         let size = view.sizeToFit(width: tableView.bounds.width)
         view.frame.size = size
+        
+        view.backgroundColor = .clear
         
         tableView.tableHeaderView = view
     }
@@ -113,13 +116,32 @@ final class AutoSyncViewController: BaseViewController, NibInit {
         storageVars.isAutoSyncSet = true
         output.change(settings: dataSource.autoSyncSetting, albums: dataSource.autoSyncAlbums)
     }
-    
 }
 
 // MARK: - AutoSyncViewInput
 
 extension AutoSyncViewController: AutoSyncViewInput {
     
+    func forceDisableAutoSyncContact() {
+        dataSource.forceDisableAutoSyncContact()
+    }
+    
+    func createAutoSyncSettings() -> PeriodicContactsSyncSettings {
+        dataSource.createAutoSyncSettings()
+    }
+    
+    
+    func startActivityIndicator() {
+        activityManager.start()
+    }
+    
+    func stopActivityIndicator() {
+        activityManager.stop()
+    }
+    
+    func showCells(from syncSettings: PeriodicContactsSyncSettings) {
+        dataSource.showCells(from: syncSettings)
+    }
     
     func setupInitialState() {
     }
@@ -189,6 +211,12 @@ extension AutoSyncViewController: AutoSyncDataSourceDelegate {
     
     func didChangeSettingsOption(settings: AutoSyncSetting) {
         output.didChangeSettingsOption(settings: settings)
+    }
+}
+
+extension AutoSyncViewController: PeriodicContactSyncDataSourceDelegate {
+    func onValueChanged() {
+        output.onValueChangeContact()
     }
 }
 

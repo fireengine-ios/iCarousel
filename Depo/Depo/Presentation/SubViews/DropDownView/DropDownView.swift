@@ -82,7 +82,7 @@ class DropDownView: UIView {
         constraints.append(NSLayoutConstraint(item: titleLabel!, attribute: .bottom, relatedBy: .equal, toItem: bgView!, attribute: .bottom, multiplier: 1, constant: 0))
         
         dropDownImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 8, height: 5))
-        dropDownImage!.image = UIImage(named: "dropDownArrow")
+        dropDownImage!.image = Image.iconArrowDownSmall.image
         dropDownImage?.translatesAutoresizingMaskIntoConstraints = false
         bgView!.addSubview(dropDownImage!)
         

@@ -32,6 +32,7 @@
                             <constraint firstAttribute="bottom" secondItem="L55-nY-km9" secondAttribute="bottom" constant="2" id="Jwj-M6-laY"/>
                             <constraint firstAttribute="trailing" secondItem="L55-nY-km9" secondAttribute="trailing" constant="2" id="aw1-ul-JNy"/>
                             <constraint firstItem="L55-nY-km9" firstAttribute="top" secondItem="yxa-2Z-6aZ" secondAttribute="top" constant="2" id="dbS-z8-s4t"/>
+                            <constraint firstAttribute="width" constant="66" id="kQc-jE-cuZ"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wHD-Iq-rwd">

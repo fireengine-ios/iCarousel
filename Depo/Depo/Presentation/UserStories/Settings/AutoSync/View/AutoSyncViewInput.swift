@@ -14,4 +14,10 @@ protocol AutoSyncViewInput: AnyObject {
     func checkPermissionsSuccessed()
     func checkPermissionsFailedWith(error: String)
     func showLocationPermissionPopup(completion: @escaping VoidHandler)
+    
+    func forceDisableAutoSyncContact()
+    func createAutoSyncSettings() -> PeriodicContactsSyncSettings
+    func showCells(from syncSettings: PeriodicContactsSyncSettings)
+    func startActivityIndicator()
+    func stopActivityIndicator()
 }

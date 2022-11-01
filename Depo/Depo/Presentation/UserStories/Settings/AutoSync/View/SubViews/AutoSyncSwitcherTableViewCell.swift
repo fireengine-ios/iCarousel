@@ -44,6 +44,8 @@ final class AutoSyncSwitcherTableViewCell: AutoSyncTableViewCell {
         
         titleLabel.text = model.headerType.title
         switcher.isOn = model.isSelected
+        
+        contentView.backgroundColor = AppColor.secondaryBackground.color
     }
 
     func didSelect() { }

@@ -15,6 +15,18 @@ final class AutoSyncInteractor: AutoSyncInteractorInput {
     private let analyticsManager: AnalyticsService = factory.resolve()
     private let albumsService = MediaItemsAlbumOperationService.shared
     
+    // Contact
+    private var dataStorageContact = PeriodicContactSyncDataStorage()
+    private let contactsService = ContactService()
+    
+    func prepareCellModelsContact() {
+        let settings = dataStorageContact.settings
+
+        DispatchQueue.main.async { [weak self] in
+            self?.output.prepaire(syncSettings: settings)
+        }
+    }
+    
     func prepareCellModels() {
         localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] photoAccessGranted, _ in
             if photoAccessGranted {
@@ -34,6 +46,19 @@ final class AutoSyncInteractor: AutoSyncInteractorInput {
                 }
             }
         }
+    }
+    
+    func checkPermissionContact() {
+        self.contactsService.askPermissionForContactsFramework(redirectToSettings: false, completion: { [weak self] isAccessGranted in
+            AnalyticsPermissionNetmeraEvent.sendContactPermissionNetmeraEvents(isAccessGranted)
+            DispatchQueue.main.async {
+                if isAccessGranted {
+                    self?.output.permissionSuccess()
+                } else {
+                    self?.output.permissionFail()
+                }
+            }
+        })
     }
     
     func trackScreen(fromSettings: Bool) {
@@ -56,6 +81,25 @@ final class AutoSyncInteractor: AutoSyncInteractorInput {
         dataStorage.save(autoSyncSettings: settings, fromSettings: fromSettings)
         SyncServiceManager.shared.update(syncSettings: settings)
         albumsService.saveAutoSyncAlbums(albums)
+    }
+    
+    func onSaveContact(settings: PeriodicContactsSyncSettings) {
+        dataStorageContact.save(periodicContactSyncSettings: settings)
+        
+        var periodicBackUp: SYNCPeriodic = SYNCPeriodic.none
+        
+        switch settings.timeSetting.option {
+        case .daily:
+            periodicBackUp = SYNCPeriodic.daily
+        case .weekly:
+            periodicBackUp = SYNCPeriodic.every7
+        case .monthly:
+            periodicBackUp = SYNCPeriodic.every30
+        case .off:
+            periodicBackUp = SYNCPeriodic.none
+        }
+        
+        contactsService.setPeriodicForContactsSync(periodic: periodicBackUp)
     }
     
     func checkPermissions() {
