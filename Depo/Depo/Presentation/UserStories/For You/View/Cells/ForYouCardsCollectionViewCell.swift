@@ -9,7 +9,20 @@
 import UIKit
 import SwiftyJSON
 
+protocol ForYouCardsCollectionViewCellDelegate: AnyObject {
+    func displayAlbum(item: AlbumItem)
+    func displayAnimation(item: WrapData)
+    func displayCollage(item: WrapData)
+    func onCloseCard(data: HomeCardResponse, section: ForYouSections)
+    func showSavedAnimation(item: WrapData)
+    func showSavedCollage(item: WrapData)
+    func saveCard(data: HomeCardResponse, section: ForYouSections)
+    func share(item: BaseDataSourceItem, type: CardShareType)
+}
+
 class ForYouCardsCollectionViewCell: UICollectionViewCell {
+    
+    weak var delegate: ForYouCardsCollectionViewCellDelegate?
 
     @IBOutlet private weak var bgView: UIView! {
         willSet {
@@ -33,8 +46,7 @@ class ForYouCardsCollectionViewCell: UICollectionViewCell {
     }
     
     @IBOutlet private weak var cardThumbnailImage: LoadingImageView!
-    
-    @IBOutlet private weak var saveButton: UIButton! {
+    @IBOutlet private weak var leftButton: UIButton! {
         willSet {
             newValue.setTitleColor(AppColor.label.color, for: .normal)
             newValue.setTitle("Save", for: .normal)
@@ -70,16 +82,17 @@ class ForYouCardsCollectionViewCell: UICollectionViewCell {
     private var albumItem: AlbumItem?
     private var item: WrapData?
     private var currentView: ForYouSections?
+    private var cardObject: HomeCardResponse?
     private var cardType = CardActionType.save {
         didSet {
             switch cardType {
             case .save:
                 switch currentView {
                 case .albumCards:
-                    saveButton.setTitle(TextConstants.homeAlbumCardBottomButtonSaveAlbum, for: .normal)
+                    leftButton.setTitle(TextConstants.homeAlbumCardBottomButtonSaveAlbum, for: .normal)
                     shareButton.isHidden = true
                 case .collageCards, .animationCards:
-                    saveButton.setTitle(TextConstants.homeLikeFilterSavePhotoButton, for: .normal)
+                    leftButton.setTitle(TextConstants.homeLikeFilterSavePhotoButton, for: .normal)
                     shareButton.isHidden = true
                 default:
                     break
@@ -87,10 +100,10 @@ class ForYouCardsCollectionViewCell: UICollectionViewCell {
             case .display:
                 switch currentView {
                 case .albumCards:
-                    saveButton.setTitle(TextConstants.homeAlbumCardBottomButtonViewAlbum, for: .normal)
+                    leftButton.setTitle(TextConstants.homeAlbumCardBottomButtonViewAlbum, for: .normal)
                     shareButton.isHidden = false
                 case .collageCards, .animationCards:
-                    saveButton.setTitle(TextConstants.homeLikeFilterViewPhoto, for: .normal)
+                    leftButton.setTitle(TextConstants.homeLikeFilterViewPhoto, for: .normal)
                     shareButton.isHidden = false
                 default:
                     break
@@ -98,16 +111,70 @@ class ForYouCardsCollectionViewCell: UICollectionViewCell {
             }
         }
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
 
     @IBAction private func onCloseCard(_ sender: UIButton) {
+        guard let data = cardObject, let section = currentView else { return }
+        delegate?.onCloseCard(data: data, section: section)
+    }
+    
+    @IBAction private func onShowDetail(_ sender: UIButton) {
+        guard let currentView = currentView else { return }
+
+        switch currentView {
+        case .albumCards:
+            displayAlbum()
+        case .collageCards:
+            displayCollage()
+        case .animationCards:
+            displayAnimation()
+        default:
+            return
+        }
+    }
+    
+    @IBAction func onLeftButton(_ sender: UIButton) {
+        switch cardType {
+        case .save:
+            switch currentView {
+            case .albumCards:
+                saveAlbum()
+            case .collageCards:
+                saveCollage()
+            case .animationCards:
+                saveAnimation()
+            default:
+                break
+            }
+        case .display:
+            switch currentView {
+            case .albumCards:
+                displayAlbum()
+            case .collageCards:
+                showSavedCollage()
+            case .animationCards:
+                showSavedAnimation()
+            default:
+                break
+            }
+        }
+    }
+    
+    @IBAction func onShareButton(_ sender: UIButton) {
+        switch currentView {
+        case .albumCards:
+            guard let albumItem = albumItem else { return }
+            delegate?.share(item: albumItem, type: .link)
+        case .collageCards, .animationCards:
+            guard let item = item else { return }
+            delegate?.share(item: item, type: .origin)
+        default:
+            return
+        }
     }
     
     func configure(with data: HomeCardResponse, currentView: ForYouSections) {
         self.currentView = currentView
+        self.cardObject = data
         set(object: data)
         
         switch currentView {
@@ -184,5 +251,50 @@ class ForYouCardsCollectionViewCell: UICollectionViewCell {
         attributedName.append(attributedCount)
         
         cardDescriptionLabel.text = "\(TextConstants.homeAlbumCardSubTitle)\n\(attributedName.string)"
+    }
+    
+    private func displayAlbum() {
+        guard let albumItem = albumItem else { return }
+        delegate?.displayAlbum(item: albumItem)
+    }
+    
+    private func displayAnimation() {
+        guard let item = item else { return }
+        delegate?.displayAnimation(item: item)
+    }
+    
+    private func displayCollage() {
+        guard let item = item else { return }
+        delegate?.displayCollage(item: item)
+    }
+    
+    private func showSavedAnimation() {
+        guard let item = item else { return }
+        delegate?.showSavedAnimation(item: item)
+    }
+    
+    private func showSavedCollage() {
+        guard let item = item else { return }
+        delegate?.showSavedCollage(item: item)
+    }
+    
+    private func saveAlbum() {
+        saveCard()
+        self.cardType = .display
+    }
+    
+    private func saveAnimation() {
+        saveCard()
+        self.cardType = .display
+    }
+    
+    private func saveCollage() {
+        saveCard()
+        self.cardType = .display
+    }
+    
+    private func saveCard() {
+        guard let data = cardObject, let section = currentView else { return }
+        delegate?.saveCard(data: data, section: section)
     }
 }

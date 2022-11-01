@@ -340,4 +340,38 @@ extension ForYouInteractor: ForYouInteractorInput {
             self.output.didGetUpdateData()
         }
     }
+    
+    func onCloseCard(data: HomeCardResponse, section: ForYouSections) {
+        debugLog("ForYou closeCard")
+        guard let id = data.id else { return }
+
+        cardsService.delete(with: id) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    self?.output.closeCardSuccess(data: data, section: section)
+                case .failed(_):
+                    self?.output.closeCardFailed()
+                }
+            }
+        }
+    }
+    
+    func saveCard(data: HomeCardResponse, section: ForYouSections) {
+        debugLog("ForYou saveCard")
+        guard let id = data.id else { return }
+
+        cardsService.save(with: id) { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.output.saveCardSuccess(data: data, section: section)
+            case .failed(let error):
+                if error.isOutOfSpaceError {
+                    self?.output.saveCardFailedFullQuota(section: section)
+                } else {
+                    self?.output.saveCardFailed(section: section)
+                }
+            }
+        }
+    }
 }

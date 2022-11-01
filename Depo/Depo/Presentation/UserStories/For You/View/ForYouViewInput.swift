@@ -12,4 +12,5 @@ protocol ForYouViewInput: AnyObject, Waiting {
     func getFIRResponse(isAllowed: Bool)
     func didFinishedAllRequests()
     func didGetUpdateData()
+    func saveCardFailed(section: ForYouSections)
 }

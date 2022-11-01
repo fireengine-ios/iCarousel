@@ -13,5 +13,7 @@ protocol ForYouInteractorInput {
     func loadItem(_ item: BaseDataSourceItem, faceImageType: FaceImageType?)
     func viewIsReady()
     func getUpdateData(for section: ForYouSections?)
+    func onCloseCard(data: HomeCardResponse, section: ForYouSections)
+    func saveCard(data: HomeCardResponse, section: ForYouSections)
 }
 

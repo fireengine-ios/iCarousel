@@ -30,4 +30,10 @@ protocol ForYouInteractorOutput: AnyObject {
     
     func didFinishedAllRequests()
     func didGetUpdateData()
+    
+    func closeCardFailed()
+    func closeCardSuccess(data: HomeCardResponse, section: ForYouSections)
+    func saveCardFailed(section: ForYouSections)
+    func saveCardFailedFullQuota(section: ForYouSections)
+    func saveCardSuccess(data: HomeCardResponse, section: ForYouSections)
 }

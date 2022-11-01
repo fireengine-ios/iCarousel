@@ -12,8 +12,9 @@ final class ForYouViewController: BaseViewController {
     
     //MARK: -Properties
     var output: ForYouViewOutput!
-    lazy var forYouSections: [ForYouSections] = []
-    lazy var isFIREnabled: Bool = false
+    private lazy var forYouSections: [ForYouSections] = []
+    private lazy var isFIREnabled: Bool = false
+    private lazy var shareCardContentManager = ShareCardContentManager(delegate: self)
     
     //MARK: -IBOutlet
     @IBOutlet private weak var tableView: UITableView!
@@ -92,6 +93,10 @@ extension ForYouViewController: ForYouViewInput {
         guard let currentSection = output.currentSection else { return }
         updateTableView(for: currentSection)
     }
+    
+    func saveCardFailed(section: ForYouSections) {
+        updateTableView(for: section)
+    }
 }
 
 //MARK: -UITableViewDataSource
@@ -143,6 +148,38 @@ extension ForYouViewController: ForYouTableViewCellDelegate {
     func naviateToAlbumDetail(album: AlbumItem) {
         output.navigateToAlbumDetail(album: album)
     }
+    
+    func displayAlbum(item: AlbumItem) {
+        output.displayAlbum(item: item)
+    }
+    
+    func displayAnimation(item: WrapData) {
+        output.displayAnimation(item: item)
+    }
+    
+    func displayCollage(item: WrapData) {
+        output.displayCollage(item: item)
+    }
+    
+    func onCloseCard(data: HomeCardResponse, section: ForYouSections) {
+        output.onCloseCard(data: data, section: section)
+    }
+    
+    func showSavedCollage(item: WrapData) {
+        output.showSavedCollage(item: item)
+    }
+    
+    func showSavedAnimation(item: WrapData) {
+        output.showSavedAnimation(item: item)
+    }
+    
+    func saveCard(data: HomeCardResponse, section: ForYouSections) {
+        output.saveCard(data: data, section: section)
+    }
+    
+    func share(item: BaseDataSourceItem, type: CardShareType) {
+        shareCardContentManager.presentSharingMenu(item: item, type: type)
+    }
 }
 
 //MARK: -HeaderContainingViewControllerChild
@@ -172,5 +209,16 @@ extension ForYouViewController: ItemOperationManagerViewProtocol {
     
     func tabBarDidChange() {
         output.currentSection = nil
+    }
+}
+
+//MARK: -ShareCardContentManagerDelegate
+extension ForYouViewController: ShareCardContentManagerDelegate {
+    func shareOperationStarted() {
+        showSpinner()
+    }
+    
+    func shareOperationFinished() {
+        hideSpinner()
     }
 }

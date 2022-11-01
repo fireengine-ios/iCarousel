@@ -15,6 +15,15 @@ protocol ForYouTableViewCellDelegate: AnyObject {
     func navigateToItemDetail(item: WrapData, faceImageType: FaceImageType?, currentSection: ForYouSections)
     func naviateToAlbumDetail(album: AlbumItem)
     func navigateToItemPreview(item: WrapData, items: [WrapData], currentSection: ForYouSections)
+    
+    func displayAlbum(item: AlbumItem)
+    func displayAnimation(item: WrapData)
+    func displayCollage(item: WrapData)
+    func onCloseCard(data: HomeCardResponse, section: ForYouSections)
+    func showSavedCollage(item: WrapData)
+    func showSavedAnimation(item: WrapData)
+    func saveCard(data: HomeCardResponse, section: ForYouSections)
+    func share(item: BaseDataSourceItem, type: CardShareType)
 }
 
 final class ForYouTableViewCell: UITableViewCell {
@@ -117,6 +126,7 @@ final class ForYouTableViewCell: UITableViewCell {
             return
         }
         
+        emptyDataView.isHidden = !isShow
         collectionView.isHidden = isShow
         emptyDataView.translatesAutoresizingMaskIntoConstraints = false
         emptyDataView.configure(with: currentView ?? .photopick)
@@ -175,6 +185,7 @@ extension ForYouTableViewCell: UICollectionViewDataSource {
             let cell = collectionView.dequeue(cell: ForYouCardsCollectionViewCell.self, for: indexPath)
             let item = cardsData[indexPath.row]
             cell.configure(with: item, currentView: currentView ?? .collageCards)
+            cell.delegate = self
             return cell
         case .places, .things:
             let cell = collectionView.dequeue(cell: ForYouGradientCollectionViewCell.self, for: indexPath)
@@ -231,5 +242,41 @@ extension ForYouTableViewCell: UICollectionViewDelegateFlowLayout {
 extension ForYouTableViewCell: ForYouEmptyCellViewDelegate {
     func navigateTo(view: ForYouSections) {
         delegate?.navigateToCreate(for: view)
+    }
+}
+
+extension ForYouTableViewCell: ForYouCardsCollectionViewCellDelegate {
+    func displayAlbum(item: AlbumItem) {
+        delegate?.displayAlbum(item: item)
+    }
+    
+    func displayAnimation(item: WrapData) {
+        delegate?.displayAnimation(item: item)
+    }
+    
+    func displayCollage(item: WrapData) {
+        delegate?.displayCollage(item: item)
+    }
+    
+    func onCloseCard(data: HomeCardResponse, section: ForYouSections) {
+        delegate?.onCloseCard(data: data, section: section)
+        cardsData.remove(data)
+        collectionView.reloadData()
+    }
+    
+    func showSavedCollage(item: WrapData) {
+        delegate?.showSavedCollage(item: item)
+    }
+    
+    func showSavedAnimation(item: WrapData) {
+        delegate?.showSavedAnimation(item: item)
+    }
+    
+    func saveCard(data: HomeCardResponse, section: ForYouSections) {
+        delegate?.saveCard(data: data, section: section)
+    }
+    
+    func share(item: BaseDataSourceItem, type: CardShareType) {
+        delegate?.share(item: item, type: type)
     }
 }

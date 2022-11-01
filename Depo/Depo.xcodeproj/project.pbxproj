@@ -21560,11 +21560,11 @@
 		F0571E95288AE18A00A0D6AC /* For You */ = {
 			isa = PBXGroup;
 			children = (
-				F0571EB8288AE69500A0D6AC /* Configurator */,
-				F0571EB7288AE68F00A0D6AC /* Interactor */,
-				F0571EB6288AE68300A0D6AC /* Presenter */,
-				F0571EB5288AE67E00A0D6AC /* Router */,
 				F0571E9A288AE2FC00A0D6AC /* View */,
+				F0571EB6288AE68300A0D6AC /* Presenter */,
+				F0571EB7288AE68F00A0D6AC /* Interactor */,
+				F0571EB5288AE67E00A0D6AC /* Router */,
+				F0571EB8288AE69500A0D6AC /* Configurator */,
 			);
 			path = "For You";
 			sourceTree = "<group>";

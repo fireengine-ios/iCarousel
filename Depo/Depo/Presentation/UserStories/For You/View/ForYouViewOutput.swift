@@ -21,5 +21,13 @@ protocol ForYouViewOutput: AnyObject {
     func getModel(for view: ForYouSections) -> Any?
     func getUpdateData(for section: ForYouSections?)
     
+    func onCloseCard(data: HomeCardResponse, section: ForYouSections)
+    func displayAlbum(item: AlbumItem)
+    func displayAnimation(item: WrapData)
+    func displayCollage(item: WrapData)
+    func showSavedCollage(item: WrapData)
+    func showSavedAnimation(item: WrapData)
+    func saveCard(data: HomeCardResponse, section: ForYouSections)
+    
     var currentSection: ForYouSections? {get set}
 }

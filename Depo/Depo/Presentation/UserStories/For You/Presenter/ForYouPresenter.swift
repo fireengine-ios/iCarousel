@@ -134,8 +134,39 @@ extension ForYouPresenter: ForYouViewOutput {
         }
     }
     
+    func displayAlbum(item: AlbumItem) {
+        self.currentSection = .albumCards
+        router.displayAlbum(item: item)
+    }
+    
+    func displayCollage(item: WrapData) {
+        router.displayItem(item: item)
+    }
+    
+    func displayAnimation(item: WrapData) {
+        router.displayItem(item: item)
+    }
+    
+    func showSavedCollage(item: WrapData) {
+        router.showSavedItem(item: item)
+    }
+    
+    func showSavedAnimation(item: WrapData) {
+        router.showSavedItem(item: item)
+    }
+    
     func getUpdateData(for section: ForYouSections?) {
         interactor.getUpdateData(for: section)
+    }
+    
+    func onCloseCard(data: HomeCardResponse, section: ForYouSections) {
+        view.showSpinner()
+        interactor.onCloseCard(data: data, section: section)
+    }
+    
+    func saveCard(data: HomeCardResponse, section: ForYouSections) {
+        view.showSpinner()
+        interactor.saveCard(data: data, section: section)
     }
 }
 
@@ -203,5 +234,30 @@ extension ForYouPresenter: ForYouInteractorOutput {
     func didFinishedAllRequests() {
         view.hideSpinner()
         view.didFinishedAllRequests()
+    }
+    
+    func closeCardSuccess(data: HomeCardResponse, section: ForYouSections) {
+        view.hideSpinner()
+    }
+    
+    func closeCardFailed() {
+        view.hideSpinner()
+        UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
+    }
+    
+    func saveCardFailed(section: ForYouSections) {
+        view.hideSpinner()
+        view.saveCardFailed(section: section)
+        UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
+    }
+    
+    func saveCardFailedFullQuota(section: ForYouSections) {
+        view.hideSpinner()
+        view.saveCardFailed(section: section)
+        router.showFullQuota()
+    }
+    
+    func saveCardSuccess(data: HomeCardResponse, section: ForYouSections) {
+        view.hideSpinner()
     }
 }
