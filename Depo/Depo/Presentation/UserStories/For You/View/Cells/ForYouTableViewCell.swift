@@ -12,9 +12,18 @@ import MBProgressHUD
 protocol ForYouTableViewCellDelegate: AnyObject {
     func onSeeAllButton(for view: ForYouSections)
     func navigateToCreate(for view: ForYouSections)
-    func navigateToItemDetail(item: WrapData, faceImageType: FaceImageType?)
+    func navigateToItemDetail(item: WrapData, faceImageType: FaceImageType?, currentSection: ForYouSections)
     func naviateToAlbumDetail(album: AlbumItem)
-    func navigateToItemPreview(item: WrapData, items: [WrapData])
+    func navigateToItemPreview(item: WrapData, items: [WrapData], currentSection: ForYouSections)
+    
+    func displayAlbum(item: AlbumItem)
+    func displayAnimation(item: WrapData)
+    func displayCollage(item: WrapData)
+    func onCloseCard(data: HomeCardResponse, section: ForYouSections)
+    func showSavedCollage(item: WrapData)
+    func showSavedAnimation(item: WrapData)
+    func saveCard(data: HomeCardResponse, section: ForYouSections)
+    func share(item: BaseDataSourceItem, type: CardShareType)
 }
 
 final class ForYouTableViewCell: UITableViewCell {
@@ -55,27 +64,16 @@ final class ForYouTableViewCell: UITableViewCell {
         addSpinner()
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        collectionView.delegate = self
-    }
-    
     func configure(with model: Any?, currentView: ForYouSections) {
         guard let model = model else {
             return
         }
         
-        self.currentView = currentView
-        switch currentView {
-        case .albumCards, .animationCards, .collageCards:
-            collectionView.delegate = nil
-            if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
-                flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-            }
-        default:
-            collectionView.delegate = self
+        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
-
+        
+        self.currentView = currentView
         titleLabel.text = currentView.title
         seeAllButton.isHidden = false
         hideSpinner()
@@ -100,11 +98,16 @@ final class ForYouTableViewCell: UITableViewCell {
     }
     
     private func configureTableView() {
+        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        }
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(nibCell: ForYouCollectionViewCell.self)
         collectionView.register(nibCell: PeopleCollectionViewCell.self)
         collectionView.register(nibCell: ForYouCardsCollectionViewCell.self)
+        collectionView.register(nibCell: ForYouGradientCollectionViewCell.self)
+        collectionView.register(nibCell: ForYouBlurCollectionViewCell.self)
     }
     
     private func addSpinner() {
@@ -116,12 +119,14 @@ final class ForYouTableViewCell: UITableViewCell {
     }
     
     private func showEmptyDataViewIfNeeded(isShow: Bool) {
-        guard isShow else {
+        if !isShow {
+            emptyDataView.isHidden = true
             emptyDataView.removeFromSuperview()
             collectionView.isHidden = false
             return
         }
         
+        emptyDataView.isHidden = !isShow
         collectionView.isHidden = isShow
         emptyDataView.translatesAutoresizingMaskIntoConstraints = false
         emptyDataView.configure(with: currentView ?? .photopick)
@@ -168,6 +173,7 @@ extension ForYouTableViewCell: UICollectionViewDataSource {
             cell.configure(with: item)
             return cell
         case .albums:
+            let cell = collectionView.dequeue(cell: ForYouGradientCollectionViewCell.self, for: indexPath)
             let item = albumsData[indexPath.row]
             cell.configureAlbum(with: item)
             return cell
@@ -179,6 +185,17 @@ extension ForYouTableViewCell: UICollectionViewDataSource {
             let cell = collectionView.dequeue(cell: ForYouCardsCollectionViewCell.self, for: indexPath)
             let item = cardsData[indexPath.row]
             cell.configure(with: item, currentView: currentView ?? .collageCards)
+            cell.delegate = self
+            return cell
+        case .places, .things:
+            let cell = collectionView.dequeue(cell: ForYouGradientCollectionViewCell.self, for: indexPath)
+            let item = wrapData[indexPath.row]
+            cell.configure(with: item)
+            return cell
+        case .hidden:
+            let cell = collectionView.dequeue(cell: ForYouBlurCollectionViewCell.self, for: indexPath)
+            let item = wrapData[indexPath.row]
+            cell.configure(with: item)
             return cell
         default:
             let item = wrapData[indexPath.row]
@@ -189,15 +206,6 @@ extension ForYouTableViewCell: UICollectionViewDataSource {
 }
 
 extension ForYouTableViewCell: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch currentView {
-        case .people:
-            return CGSize(width: 74, height: 106)
-        default:
-            return CGSize(width: 140, height: 140)
-        }
-    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         if currentView == .people {
             return 0
@@ -207,22 +215,24 @@ extension ForYouTableViewCell: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let currentView = currentView else { return }
+
         switch currentView {
         case .people:
             let item = wrapData[indexPath.row]
-            delegate?.navigateToItemDetail(item: item, faceImageType: .people)
+            delegate?.navigateToItemDetail(item: item, faceImageType: .people, currentSection: currentView)
         case .things:
             let item = wrapData[indexPath.row]
-            delegate?.navigateToItemDetail(item: item, faceImageType: .things)
+            delegate?.navigateToItemDetail(item: item, faceImageType: .things, currentSection: currentView)
         case .places:
             let item = wrapData[indexPath.row]
-            delegate?.navigateToItemDetail(item: item, faceImageType: .places)
+            delegate?.navigateToItemDetail(item: item, faceImageType: .places, currentSection: currentView)
         case .albums:
             let album = albumsData[indexPath.row]
             delegate?.naviateToAlbumDetail(album: album)
         case .story, .animations, .collages, .hidden:
             let item = wrapData[indexPath.row]
-            delegate?.navigateToItemPreview(item: item, items: wrapData)
+            delegate?.navigateToItemPreview(item: item, items: wrapData, currentSection: currentView)
         default:
             return
         }
@@ -232,5 +242,41 @@ extension ForYouTableViewCell: UICollectionViewDelegateFlowLayout {
 extension ForYouTableViewCell: ForYouEmptyCellViewDelegate {
     func navigateTo(view: ForYouSections) {
         delegate?.navigateToCreate(for: view)
+    }
+}
+
+extension ForYouTableViewCell: ForYouCardsCollectionViewCellDelegate {
+    func displayAlbum(item: AlbumItem) {
+        delegate?.displayAlbum(item: item)
+    }
+    
+    func displayAnimation(item: WrapData) {
+        delegate?.displayAnimation(item: item)
+    }
+    
+    func displayCollage(item: WrapData) {
+        delegate?.displayCollage(item: item)
+    }
+    
+    func onCloseCard(data: HomeCardResponse, section: ForYouSections) {
+        delegate?.onCloseCard(data: data, section: section)
+        cardsData.remove(data)
+        collectionView.reloadData()
+    }
+    
+    func showSavedCollage(item: WrapData) {
+        delegate?.showSavedCollage(item: item)
+    }
+    
+    func showSavedAnimation(item: WrapData) {
+        delegate?.showSavedAnimation(item: item)
+    }
+    
+    func saveCard(data: HomeCardResponse, section: ForYouSections) {
+        delegate?.saveCard(data: data, section: section)
+    }
+    
+    func share(item: BaseDataSourceItem, type: CardShareType) {
+        delegate?.share(item: item, type: type)
     }
 }

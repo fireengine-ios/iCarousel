@@ -12,6 +12,7 @@ final class ForYouPresenter: BasePresenter, ForYouModuleInput {
     weak var view: ForYouViewInput!
     var interactor: ForYouInteractorInput!
     var router: ForYouRouterInput!
+    var currentSection: ForYouSections?
     
     private lazy var thingsData: [WrapData] = []
     private lazy var placesData: [WrapData] = []
@@ -34,6 +35,7 @@ final class ForYouPresenter: BasePresenter, ForYouModuleInput {
 
 extension ForYouPresenter: ForYouViewOutput {
     func onSeeAllButton(for view: ForYouSections) {
+        self.currentSection = view
         router.navigateToSeeAll(for: view)
     }
     
@@ -51,18 +53,22 @@ extension ForYouPresenter: ForYouViewOutput {
     }
     
     func navigateToCreate(for view: ForYouSections) {
+        self.currentSection = view
         router.navigateToCreate(for: view)
     }
     
-    func navigateToItemDetail(item: WrapData, faceImageType: FaceImageType?) {
+    func navigateToItemDetail(item: WrapData, faceImageType: FaceImageType?, currentSection: ForYouSections) {
+        self.currentSection = currentSection
         interactor.loadItem(item, faceImageType: faceImageType)
     }
     
     func navigateToAlbumDetail(album: AlbumItem) {
+        self.currentSection = .albums
         router.navigateToAlbumDetail(album: album)
     }
     
-    func navigateToItemPreview(item: WrapData, items: [WrapData]) {
+    func navigateToItemPreview(item: WrapData, items: [WrapData], currentSection: ForYouSections) {
+        self.currentSection = currentSection
         router.navigateToItemPreview(item: item, items: items)
     }
     
@@ -128,28 +134,47 @@ extension ForYouPresenter: ForYouViewOutput {
         }
     }
     
-    func getUpdateAlbums() {
-        interactor.getUpdateAlbums()
+    func displayAlbum(item: AlbumItem) {
+        self.currentSection = .albumCards
+        router.displayAlbum(item: item)
     }
     
-    func getUpdatePlaces() {
-        interactor.getUpdatePlaces()
+    func displayCollage(item: WrapData) {
+        router.displayItem(item: item)
     }
     
-    func getUpdateThings() {
-        interactor.getUpdateThings()
+    func displayAnimation(item: WrapData) {
+        router.displayItem(item: item)
     }
     
-    func getUpdatePeople() {
-        interactor.getUpdatePeople()
+    func showSavedCollage(item: WrapData) {
+        router.showSavedItem(item: item)
     }
     
-    func getUpdateStories() {
-        interactor.getUpdateStories()
+    func showSavedAnimation(item: WrapData) {
+        router.showSavedItem(item: item)
+    }
+    
+    func getUpdateData(for section: ForYouSections?) {
+        interactor.getUpdateData(for: section)
+    }
+    
+    func onCloseCard(data: HomeCardResponse, section: ForYouSections) {
+        view.showSpinner()
+        interactor.onCloseCard(data: data, section: section)
+    }
+    
+    func saveCard(data: HomeCardResponse, section: ForYouSections) {
+        view.showSpinner()
+        interactor.saveCard(data: data, section: section)
     }
 }
 
 extension ForYouPresenter: ForYouInteractorOutput {
+    func didGetUpdateData() {
+        view.didGetUpdateData()
+    }
+    
     func getThings(data: [WrapData]) {
         self.thingsData = data
     }
@@ -211,23 +236,28 @@ extension ForYouPresenter: ForYouInteractorOutput {
         view.didFinishedAllRequests()
     }
     
-    func didGetUpdateAlbums() {
-        view.didGetUpdateAlbums()
+    func closeCardSuccess(data: HomeCardResponse, section: ForYouSections) {
+        view.hideSpinner()
     }
     
-    func didGetUpdatePeople() {
-        view.didGetUpdatePeople()
+    func closeCardFailed() {
+        view.hideSpinner()
+        UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
     }
     
-    func didGetUpdatePlaces() {
-        view.didGetUpdatePlaces()
+    func saveCardFailed(section: ForYouSections) {
+        view.hideSpinner()
+        view.saveCardFailed(section: section)
+        UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
     }
     
-    func didGetUpdateThings() {
-        view.didGetUpdateThings()
+    func saveCardFailedFullQuota(section: ForYouSections) {
+        view.hideSpinner()
+        view.saveCardFailed(section: section)
+        router.showFullQuota()
     }
     
-    func didGetUpdateStories() {
-        view.didGetUpdateStories()
+    func saveCardSuccess(data: HomeCardResponse, section: ForYouSections) {
+        view.hideSpinner()
     }
 }

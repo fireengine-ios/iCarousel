@@ -259,6 +259,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         if var tabbarSelectedIndex = (tabBar.items?.firstIndex(of: item)) {
+            
+            ItemOperationManager.default.tabBarDidChange()
 
             if tabbarSelectedIndex == TabScreenIndex.gallery.rawValue,
                 lastPhotoVideoIndex == TabScreenIndex.gallery.rawValue

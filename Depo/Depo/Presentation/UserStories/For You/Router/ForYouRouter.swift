@@ -85,5 +85,31 @@ final class ForYouRouter: ForYouRouterInput {
         let nController = NavigationController(rootViewController: detailModule.controller)
         router.presentViewController(controller: nController)
     }
+    
+    func displayAlbum(item: AlbumItem) {
+        let albumVC = router.albumDetailController(album: item, type: .List, status: .active, moduleOutput: nil)
+        router.pushViewController(viewController: albumVC)
+    }
+
+    func displayItem(item: WrapData) {
+        let controller = PVViewerController.with(item: item)
+        let navController = NavigationController(rootViewController: controller)
+        router.presentViewController(controller: navController)
+    }
+    
+    func showSavedItem(item: WrapData) {
+        let detailModule = router.filesDetailModule(fileObject: item,
+                                                    items: [item],
+                                                    status: .active,
+                                                    canLoadMoreItems: false,
+                                                    moduleOutput: nil)
+
+        let nController = NavigationController(rootViewController: detailModule.controller)
+        router.presentViewController(controller: nController)
+    }
+    
+    func showFullQuota() {
+        router.showFullQuotaPopUp()
+    }
 }
 
