@@ -80,8 +80,8 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="uaD-uF-Kyt">
-                                    <rect key="frame" x="332" y="25" width="8" height="12"/>
+                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconArrowRightsmall" translatesAutoresizingMaskIntoConstraints="NO" id="uaD-uF-Kyt">
+                                    <rect key="frame" x="316" y="19" width="24" height="24"/>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kvZ-mU-80s">
                                     <rect key="frame" x="0.0" y="0.0" width="359" height="62"/>
@@ -152,8 +152,8 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="hFy-VM-Qq2">
-                            <rect key="frame" x="332" y="25" width="8" height="12"/>
+                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconArrowRightsmall" translatesAutoresizingMaskIntoConstraints="NO" id="hFy-VM-Qq2">
+                            <rect key="frame" x="316" y="19" width="24" height="24"/>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KJj-CQ-csX">
                             <rect key="frame" x="0.0" y="0.0" width="359" height="30"/>
@@ -228,7 +228,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Arrow" width="8" height="12"/>
+        <image name="iconArrowRightsmall" width="24" height="24"/>
         <namedColor name="background">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

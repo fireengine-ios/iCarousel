@@ -66,7 +66,7 @@ final class PrivateShareAccessListCell: UITableViewCell {
             roleButton.setImage(nil, for: .normal)
             roleButton.isUserInteractionEnabled = false
         case .viewer, .editor, .varying:
-            roleButton.setImage(UIImage(named: "downArrow"), for: .normal)
+            roleButton.setImage(Image.iconArrowDownSmall.image, for: .normal)
             roleButton.isUserInteractionEnabled = true
         }
     }

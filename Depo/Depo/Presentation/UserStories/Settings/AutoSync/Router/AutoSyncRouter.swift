@@ -15,5 +15,19 @@ class AutoSyncRouter: AutoSyncRouterInput {
             self.router.setNavigationController(controller: self.router.tabBarScreen)
         }
     }
-
+    
+    func showContactsSettingsPopUp() {
+        let controller = PopUpController.with(title: TextConstants.periodicContactsSyncAccessAlertTitle,
+                                              message: TextConstants.periodicContactsSyncAccessAlertText,
+                                              image: .none,
+                                              firstButtonTitle: TextConstants.periodicContactsSyncAccessAlertNo,
+                                              secondButtonTitle: TextConstants.periodicContactsSyncAccessAlertGoToSettings,
+                                              secondAction: { vc in
+                                                vc.close {
+                                                    UIApplication.shared.openSettings()
+                                                }
+        })
+        
+        controller.open()
+    }
 }
