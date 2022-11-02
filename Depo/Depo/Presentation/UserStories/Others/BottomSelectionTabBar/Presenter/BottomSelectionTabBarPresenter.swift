@@ -293,6 +293,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     // MARK: - Interactor output
     
     override func operationFinished(type: ElementTypes) {
+        let topVC = UIApplication.topController()
+        show(animated: true, onView: topVC?.view)
         completeAsyncOperationEnableScreen()
         view.unselectAll()
         basePassingPresenter?.operationFinished(withType: type, response: nil)
