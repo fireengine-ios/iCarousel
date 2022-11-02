@@ -51,6 +51,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private lazy var analyticsManager: AnalyticsService = factory.resolve()
     private lazy var scrollDirectionManager = ScrollDirectionManager()
     private lazy var instaPickRoutingService = InstaPickRoutingService()
+    private lazy var storageVars: StorageVars = factory.resolve()
 
     private lazy var assetsFileCacheManager = AssetFileCacheManager()
     
@@ -97,6 +98,13 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         PushNotificationService.shared.openActionScreen()
         // handle a token pending action if any
         PushNotificationService.shared.assignAndOpenPendingActionIfAny()
+        
+        
+        //handle public shared items save operation after login
+        if let publicTokenToSave = storageVars.publicSharedItemsToken {
+            savePublicSharedItems(with: publicTokenToSave)
+            storageVars.publicSharedItemsToken = nil
+        }
     }
     
     deinit {
@@ -328,6 +336,22 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             }
             let title = date.getDateInTextForCollectionViewHeader()
             self?.scrollBarManager.scrollBar.setText(title)
+        }
+    }
+    
+    private func savePublicSharedItems(with publicTokenToSave: String) {
+        PublicSharedItemsService().savePublicSharedItems(publicToken: publicTokenToSave) { value in
+            SnackbarManager.shared.show(type: .action, message: localized(.publicShareSaveSuccess))
+            self.router.openTabBarItem(index: .documents, segmentIndex: 0)
+            ItemOperationManager.default.publicShareItemsAdded()
+        } fail: { error in
+            if error.errorDescription == PublicShareSaveErrorStatus.notRequiredSpace.rawValue {
+                self.router.showFullQuotaPopUp()
+                return
+            }
+            let message = PublicShareSaveErrorStatus.allCases.first(where: {$0.rawValue == error.errorDescription})?.description
+            SnackbarManager.shared.show(type: .action, message: message ?? localized(.publicShareSaveError))
+            self.router.openTabBarItem(index: .documents, segmentIndex: 0)
         }
     }
 }

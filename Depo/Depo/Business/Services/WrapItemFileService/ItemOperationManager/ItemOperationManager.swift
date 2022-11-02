@@ -116,6 +116,7 @@ protocol ItemOperationManagerViewProtocol: AnyObject {
     func faceImageRecogChaned(to isAllowed: Bool)
     func stopItemSelection()
     func tabBarDidChange()
+    func allFilesSectionChange(to index: Int)
 }
 
 extension ItemOperationManagerViewProtocol {
@@ -231,6 +232,7 @@ extension ItemOperationManagerViewProtocol {
     func faceImageRecogChaned(to isAllowed: Bool) {}
     func stopItemSelection() {}
     func tabBarDidChange() {}
+    func allFilesSectionChange(to index: Int) {}
 }
 
 
@@ -681,6 +683,12 @@ class ItemOperationManager: NSObject {
     func tabBarDidChange() {
         DispatchQueue.main.async {
             self.views.invoke { $0.tabBarDidChange()}
+        }
+    }
+    
+    func allFilesSectionChange(to index: Int) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.allFilesSectionChange(to: index)}
         }
     }
 }
