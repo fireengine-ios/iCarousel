@@ -64,6 +64,7 @@ final class SetSecurityQuestionViewController: BaseViewController, KeyboardHandl
     
     private let secretAnswerView: ProfileTextEnterView = {
         let view = ProfileTextEnterView()
+        view.titleLabel.text = TextConstants.userProfileSecretQuestionAnswer
         return view
     }()
     
