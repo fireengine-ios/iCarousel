@@ -14,7 +14,7 @@ class MyStorageModuleInitializer: NSObject {
         let nibName = String(describing: MyStorageViewController.self)
         let viewController = MyStorageViewController(nibName: nibName, bundle: nil)
         let configurator = MyStorageModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: viewController, usage: usage)
+        configurator.configureModuleForViewInput(viewInput: viewController, usage: usage, affiliate: affiliate, refererToken: refererToken)
         return viewController
     }
 }

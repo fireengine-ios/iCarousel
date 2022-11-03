@@ -560,11 +560,11 @@ class RouterVC: NSObject {
     }
     
     var segmentedFiles: HeaderContainingViewController.ChildViewController {
-        guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles, let documentsAndMusic = documentsAndMusic, let trash = trashBin else {
+        guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles, let documentsAndMusic = documentsAndMusic else {
             assertionFailure()
             return AllFilesSegmentedController()
         }
-        let controllers = [documents, musics, favorites, sharedWithMe, shareByMeSegment, trash, allFiles, documentsAndMusic]
+        let controllers = [documents, musics, favorites, sharedWithMe, shareByMeSegment, allFiles, documentsAndMusic]
         return AllFilesSegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
     }
     
@@ -1086,7 +1086,7 @@ class RouterVC: NSObject {
     //MARK: - My Storage
     
     func myStorage(usageStorage: UsageResponse?, affiliate: String? = nil, refererToken: String? = nil) -> MyStorageViewController {
-        let controller = MyStorageModuleInitializer.initializeMyStorageController(usage: usageStorage)
+        let controller = MyStorageModuleInitializer.initializeMyStorageController(usage: usageStorage, affiliate: affiliate, refererToken: refererToken)
         return controller
     }
     
@@ -1293,7 +1293,7 @@ class RouterVC: NSObject {
         defaultTopController?.present(popup, animated: true)
     }
     
-    func openTabBarItem(index: TabScreenIndex, segmentIndex: Int? = nil) {
+    func openTabBarItem(index: TabScreenIndex, segmentIndex: Int? = nil, shareType: SharedItemsSegment? = nil) {
         guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
             return
         }
@@ -1316,7 +1316,7 @@ class RouterVC: NSObject {
                 tabBarVC.selectedIndex = index.rawValue
             
                 if let segmentIndex = segmentIndex {
-                    ItemOperationManager.default.allFilesSectionChange(to: segmentIndex)
+                    ItemOperationManager.default.allFilesSectionChange(to: segmentIndex, shareType: shareType)
                 }
             case .gallery:
                 tabBarVC.showPhotoScreen()

@@ -179,7 +179,7 @@ final class PushNotificationService {
         switch action {
         case .main, .home: openMain()
         case .syncSettings, .widgetAutoSyncDisabled: openSyncSettings()
-        case .packages, .widgetQuota: openPackages()
+        case .packages, .widgetQuota: openMyStorage()
         case .photos, .widgetSyncInProgress, .widgetUnsyncedFiles, .widgetFIRLess3People, .widgetFIRStandart: openPhotos()
         case .videos: openVideos()
         case .albums: openAlbums()
@@ -328,7 +328,7 @@ private extension PushNotificationService {
     }
 
     func openPackages() {
-        let viewController = router.packages()
+        let viewController = router.myStorage(usageStorage: nil)
         pushTo(viewController)
     }
 
@@ -546,11 +546,11 @@ private extension PushNotificationService {
     }
 
     func openSharedWithMe() {
-        openSharedController(type: .withMe)
+        router.openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.share.rawValue, shareType: .sharedWithMe)
     }
 
     func openShareByMe() {
-        openSharedController(type: .byMe)
+        router.openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.share.rawValue, shareType: .sharedByMe)
     }
 
     func openInvitation() {

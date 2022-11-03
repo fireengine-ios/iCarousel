@@ -180,8 +180,14 @@ extension AllFilesSegmentedController: ItemOperationManagerViewProtocol {
         return self === object
     }
     
-    func allFilesSectionChange(to index: Int) {
+    func allFilesSectionChange(to index: Int, shareType: SharedItemsSegment?) {
         switchAllFilesCategory(to: index)
         selectedCellIndexPath = [IndexPath(item: index, section: 0)]
+        
+        if let shareType = shareType, let index = SharedItemsSegment.allCases.firstIndex(of: shareType) {
+            sharedSegmentsView.sharedSegmentControl.selectedSegmentIndex = index
+            sharedSegmentsView.sharedSegmentControl.changeUnderlinePosition()
+            sharedSegmentChanged(to: index)
+        }
     }
 }
