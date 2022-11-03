@@ -44,6 +44,11 @@ final class AllFilesSegmentedController: SegmentedController, HeaderContainingVi
         setSegmentedControl()
 
         setDefaultNavigationHeaderActions()
+        ItemOperationManager.default.startUpdateView(view: self)
+    }
+    
+    deinit {
+        ItemOperationManager.default.stopUpdateView(view: self)
     }
     
     override static func initWithControllers(_ controllers: [UIViewController], alignment: Alignment) -> AllFilesSegmentedController {
@@ -165,6 +170,24 @@ extension AllFilesSegmentedController: SharedItemsSegmentViewDelegate {
             default:
                 break
             }
+        }
+    }
+}
+
+//MARK: -ItemOperationManagerViewProtocol
+extension AllFilesSegmentedController: ItemOperationManagerViewProtocol {
+    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
+        return self === object
+    }
+    
+    func allFilesSectionChange(to index: Int, shareType: SharedItemsSegment?) {
+        switchAllFilesCategory(to: index)
+        selectedCellIndexPath = [IndexPath(item: index, section: 0)]
+        
+        if let shareType = shareType, let index = SharedItemsSegment.allCases.firstIndex(of: shareType) {
+            sharedSegmentsView.sharedSegmentControl.selectedSegmentIndex = index
+            sharedSegmentsView.sharedSegmentControl.changeUnderlinePosition()
+            sharedSegmentChanged(to: index)
         }
     }
 }
