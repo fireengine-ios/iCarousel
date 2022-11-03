@@ -537,6 +537,7 @@ struct TextConstants {
     static let userProfileTitle = localized("Your Profile")
     static let userProfileNameAndSurNameSubTitle = localized("Name and Surname")
     static let userProfileName = localized("name")
+    static let name = localized("Name")
     static let userProfileSurname = localized("surname")
     static let userProfileEmailSubTitle = localized("E-Mail")
     static let userProfileGSMNumberSubTitle = localized("GSM Number")

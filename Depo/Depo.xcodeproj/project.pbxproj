@@ -13216,10 +13216,10 @@
 			children = (
 				52BF679528FFE05300D8D4E6 /* PasswordValidationSetView.swift */,
 				17589F622275E33800A5DB37 /* ProfilePasswordEnterView.swift */,
-				17589F6B2276336700A5DB37 /* ProfilePhoneEnterView.swift */,
 				17589F6C2276336700A5DB37 /* PhoneCodeInputView.swift */,
 				17589F6D2276336700A5DB37 /* ProfileTextPickerView.swift */,
 				17589F6F2276336700A5DB37 /* ProfileTextEnterView.swift */,
+				17589F6B2276336700A5DB37 /* ProfilePhoneEnterView.swift */,
 				17589F702276336700A5DB37 /* ProfilePhoneEnterView.xib */,
 				17589F6E2276336700A5DB37 /* SupportFormController.xib */,
 				17589F712276336700A5DB37 /* SupportFormController.swift */,

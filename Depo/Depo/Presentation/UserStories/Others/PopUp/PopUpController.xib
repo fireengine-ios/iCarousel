@@ -16,6 +16,7 @@
                 <outlet property="noneImageConstraint" destination="NuZ-B5-1oA" id="GYD-GP-A5d"/>
                 <outlet property="secondButton" destination="fg5-a4-N9J" id="ytW-qh-FsR"/>
                 <outlet property="secondIconImageView" destination="Vgj-JX-vfg" id="Uel-0F-ir3"/>
+                <outlet property="textField" destination="1s7-d6-AgR" id="wBX-yJ-rZP"/>
                 <outlet property="titleLabel" destination="faa-BU-RXd" id="A6f-Kk-EXo"/>
                 <outlet property="view" destination="8qh-Pd-GkY" id="yIM-90-1kk"/>
             </connections>
@@ -25,7 +26,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="b7l-4P-zk8">
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="b7l-4P-zk8" userLabel="Images Stack View">
                     <rect key="frame" x="154.5" y="10" width="66" height="66"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n7C-4E-QE3">
@@ -49,8 +50,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RH9-1C-TFf" userLabel="Insets View">
                     <rect key="frame" x="20" y="80" width="335" height="204"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="VEd-6W-k27">
-                            <rect key="frame" x="0.0" y="0.0" width="335" height="53"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="VEd-6W-k27" userLabel="Labels Stack View">
+                            <rect key="frame" x="0.0" y="0.0" width="335" height="121"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="faa-BU-RXd" userLabel="Title">
                                     <rect key="frame" x="0.0" y="0.0" width="335" height="20.5"/>
@@ -64,9 +65,17 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1s7-d6-AgR" userLabel="TextField View" customClass="QuickDismissPlaceholderTextField" customModule="Billo" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="65" width="335" height="56"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="56" id="lMu-n4-iSv"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
                             </subviews>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ute-ez-40c">
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ute-ez-40c" userLabel="Buttons Stack View">
                             <rect key="frame" x="0.0" y="159" width="335" height="45"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cq4-eM-etj">
