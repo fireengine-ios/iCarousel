@@ -60,6 +60,7 @@ final class ValidateSecurityQuestionViewController: BaseViewController, Keyboard
         let view = ProfileTextEnterView()
         view.textField.returnKeyType = .done
         view.textField.enablesReturnKeyAutomatically = true
+        view.titleLabel.text = TextConstants.userProfileSecretQuestionAnswer
         return view
     }()
 
