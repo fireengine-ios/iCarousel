@@ -39,22 +39,11 @@ final class PeriodicContactSyncViewController: ViewController {
         output.viewIsReady(tableView: tableView)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        configureNavBar()
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         output.saveSettings()
     }
-    
-    private func configureNavBar() {
-        setTitle(withString: TextConstants.backTitle)
-    }
-
 }
 
 // MARK: - PeriodicContactSyncViewInput

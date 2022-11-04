@@ -10,11 +10,12 @@ import UIKit
 import SDWebImage
 
 enum DocumentsScreenSegmentIndex: Int {
-    case allFiles = 0
-    case documents = 2
-    case music = 3
-    case favorites = 4
-    case trashBin = 5
+    case documents = 0
+    case music = 1
+    case favorites = 2
+    case share = 3
+    case allFiles = 5
+    case trashBin = 6 //FACELIFT: Check it when trash bin will be added
 }
 
 final class TabBarViewController: ViewController, UITabBarDelegate {
@@ -51,6 +52,10 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             return customNavigationControllers[selectedIndex]
         }
         return nil
+    }
+    
+    var topMostViewController: UIViewController? {
+        tabBarController?.selectedViewController
     }
     
     var currentViewController: UIViewController? {

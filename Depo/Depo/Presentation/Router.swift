@@ -1086,7 +1086,7 @@ class RouterVC: NSObject {
     //MARK: - My Storage
     
     func myStorage(usageStorage: UsageResponse?, affiliate: String? = nil, refererToken: String? = nil) -> MyStorageViewController {
-        let controller = MyStorageModuleInitializer.initializeMyStorageController(usage: usageStorage)
+        let controller = MyStorageModuleInitializer.initializeMyStorageController(usage: usageStorage, affiliate: affiliate, refererToken: refererToken)
         return controller
     }
     
@@ -1293,7 +1293,7 @@ class RouterVC: NSObject {
         defaultTopController?.present(popup, animated: true)
     }
     
-    func openTabBarItem(index: TabScreenIndex, segmentIndex: Int? = nil) {
+    func openTabBarItem(index: TabScreenIndex, segmentIndex: Int? = nil, shareType: SharedItemsSegment? = nil) {
         guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
             return
         }
@@ -1307,19 +1307,17 @@ class RouterVC: NSObject {
                 }
                 tabBarVC.tabBar.selectedItem = newSelectedItem
                 tabBarVC.selectedIndex = index.rawValue
-            case .contactsSync, .documents://because their index is more then two. And we have one offset for button selection but when we point to array index we need - 1 for those items where index > 2.
+            case .contactsSync, .documents:
                 guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
                     assertionFailure("This index is non existent 😵")
                     return
                 }
                 tabBarVC.tabBar.selectedItem = newSelectedItem
-                tabBarVC.selectedIndex = index.rawValue - 1
+                tabBarVC.selectedIndex = index.rawValue
             
-                if let segmentIndex = segmentIndex, let segmentedController = tabBarVC.currentViewController as? SegmentedController  {
-                    segmentedController.loadViewIfNeeded()
-                    segmentedController.switchSegment(to: segmentIndex)
+                if let segmentIndex = segmentIndex {
+                    ItemOperationManager.default.allFilesSectionChange(to: segmentIndex, shareType: shareType)
                 }
-                
             case .gallery:
                 tabBarVC.showPhotoScreen()
             case .discover:
