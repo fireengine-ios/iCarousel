@@ -77,6 +77,7 @@ enum Image: String, AppImage {
     case iconViewList
     case iconHideSee
     case iconHideUnselect
+    case iconAddSelect
     /// Action/Snack
     case iconArrowDownSmall
     case iconArrowUpSmall
@@ -85,6 +86,9 @@ enum Image: String, AppImage {
     case iconCancelBorder
     case iconSelectCheck
     case iconSelectEmpty
+    /// Action/Music
+    case iconPauseRed
+    case iconPlayRed
     
     ///  Files Tab
     case iconFileAudio

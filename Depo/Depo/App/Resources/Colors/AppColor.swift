@@ -29,6 +29,7 @@ enum AppColor {
     // MARK: General
     case background
     case secondaryBackground
+    case tertiaryBackground
     case label
     case labelSingle
     case darkLabel
