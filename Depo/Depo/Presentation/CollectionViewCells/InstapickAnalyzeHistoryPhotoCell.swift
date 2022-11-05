@@ -105,7 +105,7 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         selectionImageView.isHidden = !isSelectionActive
-        selectionImageView.image = UIImage(named: isSelected ? "selected" : "notSelected")
+        selectionImageView.image = isSelected ? Image.iconSelectFills.image : Image.iconSelectEmpty.image
         imageView.alpha = isSelected && isSelectionActive ? 0.5 : 1
     }
     

@@ -6,29 +6,26 @@
 //  Copyright © 2019 LifeTech. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 final class CreateStorySelectionController: BaseViewController {
     
-    internal var selectedItems = [SearchItemResponse]() {
+    var selectedItems = [SearchItemResponse]() {
         willSet {
             DispatchQueue.main.async {
-                self.containerView?.analyzeButton.isHidden = newValue.isEmpty
+                self.navigationItem.rightBarButtonItem?.isEnabled = !newValue.isEmpty
             }
         }
     }
     
-    internal var selectionState: PhotoSelectionState = .selecting
-    
+    var selectionState: PhotoSelectionState = .selecting
     private var selectingLimit = NumericConstants.createStoryImagesCountLimit
     private var isFavouritePictures: Bool = false
-
     private let navTitle: String
-    
     var selectionDelegate: InstaPickSelectionSegmentedControllerDelegate?
     
-    private var containerView: InstaPickSelectionSegmentedView? {
-        return self.view as? InstaPickSelectionSegmentedView
+    private var containerView: CreateStorySelectionView? {
+        return self.view as? CreateStorySelectionView
     }
     
     //MARK: lifecycle
@@ -46,36 +43,31 @@ final class CreateStorySelectionController: BaseViewController {
     }
     
     override func loadView() {
-        let reachedLimitText = TextConstants.instapickSelectionAnalyzesLeftMax
-        self.view = InstaPickSelectionSegmentedView(buttonText: TextConstants.createStoryPhotosContinue,
-                                                    maxReachedText: String(format: reachedLimitText, selectingLimit),
-                                                    needShowSegmentedControll: false)
+        self.view = CreateStorySelectionView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         setup()
+        updateScreen()
     }
     
-    //MARK: Utility Mathods
     private func setup() {
         addChildVC()
-        
         setupNavigation()
-        
-        containerView?.analyzeButton.addTarget(self, action: #selector(openStorySetup), for: .touchUpInside)
         
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.CreateStoryPhotoSelectionScreen())
         let analyticsService = AnalyticsService()
         analyticsService.logScreen(screen: .createStoryPhotosSelection)
     }
-    
+
     private func setupNavigation() {
         setTitle(withString: navTitle)
-        
-        let cancelButton = UIBarButtonItem(title: TextConstants.cancel, target: self, selector: #selector(hideController))
-        navigationItem.leftBarButtonItem = cancelButton
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: TextConstants.createStoryPhotosContinue,
+                                                            target: self,
+                                                            selector: #selector(openStorySetup))
     }
     
     private func addChildVC() {
@@ -85,10 +77,14 @@ final class CreateStorySelectionController: BaseViewController {
                                                        selectingLimit: selectingLimit,
                                                        delegate: self,
                                                        dataSource: dataSource)
+        
+        // or change with TextConstants.snackbarMessageCreateStoryLimit
+        let message = String(format: TextConstants.snackbarMessageCreateStoryLimit, selectingLimit)
+        containerView?.snackBarLabel.text = message
         selectionDelegate = childController
         addChild(childController)
-        containerView?.containerView.addSubview(childController.view)
-        childController.view.frame = containerView?.containerView.bounds ?? .zero
+        containerView?.contentView.addSubview(childController.view)
+        childController.view.frame = containerView?.contentView.bounds ?? .zero
         childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         childController.didMove(toParent: self)
     }
@@ -107,13 +103,7 @@ final class CreateStorySelectionController: BaseViewController {
             let message = String(format: TextConstants.snackbarMessageCreateStoryLimit, selectingLimit)
             SnackbarManager.shared.show(type: .critical, message: message, action: .ok)
         }
-        
         selectionDelegate?.selectionStateDidChange(selectionState)
-    }
-    
-    //MARK: Actions
-    @objc private func hideController() {
-        navigationController?.popViewController(animated: true)
     }
     
     @objc private func openStorySetup() {
