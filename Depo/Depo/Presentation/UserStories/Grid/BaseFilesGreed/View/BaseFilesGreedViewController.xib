@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -20,6 +21,7 @@
                 <outlet property="floatingHeaderContainerHeightConstraint" destination="J3A-WS-4mi" id="c9c-o0-s47"/>
                 <outlet property="headerStackView" destination="acy-kT-cr5" id="6Ie-82-uaS"/>
                 <outlet property="noFilesImage" destination="qz2-SP-6oQ" id="rwb-kw-oSL"/>
+                <outlet property="noFilesImageContainer" destination="LwB-Yk-UEM" id="CXz-pr-m7K"/>
                 <outlet property="noFilesLabel" destination="fdq-Cf-39W" id="gmp-PY-CFM"/>
                 <outlet property="noFilesTopLabel" destination="0lC-K4-1ac" id="TJd-tm-6eI"/>
                 <outlet property="noFilesView" destination="ZI3-Dh-bXS" id="Tf2-p8-qvW"/>
@@ -65,16 +67,16 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZI3-Dh-bXS">
-                    <rect key="frame" x="16" y="193.66666666666663" width="382" height="205"/>
+                    <rect key="frame" x="16" y="176.66666666666663" width="382" height="239"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdq-Cf-39W">
-                            <rect key="frame" x="8" y="124.00000000000003" width="366" height="0.0"/>
+                            <rect key="frame" x="8" y="154.00000000000003" width="366" height="0.0"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTy-IA-Avr" customClass="BlueButtonWithNoFilesWhiteText" customModule="Billo" customModuleProvider="target">
-                            <rect key="frame" x="28" y="160.00000000000003" width="326" height="45"/>
+                            <rect key="frame" x="28" y="194.00000000000003" width="326" height="45"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="03I-TC-x2h"/>
                                 <constraint firstAttribute="width" constant="326" id="pUd-hQ-hMP"/>
@@ -95,25 +97,37 @@
                                 <action selector="onStartCreatingFilesButton" destination="-1" eventType="touchUpInside" id="gVy-bU-Rnz"/>
                             </connections>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qz2-SP-6oQ">
-                            <rect key="frame" x="141" y="0.0" width="100" height="100"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LwB-Yk-UEM" userLabel="Image Container">
+                            <rect key="frame" x="134" y="0.0" width="114" height="114"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qz2-SP-6oQ">
+                                    <rect key="frame" x="29.666666666666657" y="29.333333333333343" width="55" height="55"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="55" id="vQg-yh-HbG"/>
+                                        <constraint firstAttribute="width" constant="55" id="yin-c6-zcV"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="100" id="vQg-yh-HbG"/>
-                                <constraint firstAttribute="width" constant="100" id="yin-c6-zcV"/>
+                                <constraint firstItem="qz2-SP-6oQ" firstAttribute="centerY" secondItem="LwB-Yk-UEM" secondAttribute="centerY" id="VjI-nU-5dG"/>
+                                <constraint firstItem="qz2-SP-6oQ" firstAttribute="centerX" secondItem="LwB-Yk-UEM" secondAttribute="centerX" id="WdB-RA-AtM"/>
+                                <constraint firstAttribute="width" constant="114" id="bzL-fg-ekO"/>
+                                <constraint firstAttribute="height" constant="114" id="pZa-Bn-01C"/>
                             </constraints>
-                        </imageView>
+                        </view>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="qz2-SP-6oQ" firstAttribute="centerX" secondItem="ZI3-Dh-bXS" secondAttribute="centerX" id="6A0-hR-1ae"/>
-                        <constraint firstItem="UTy-IA-Avr" firstAttribute="top" secondItem="fdq-Cf-39W" secondAttribute="bottom" constant="36" id="9ks-nj-hts"/>
+                        <constraint firstItem="UTy-IA-Avr" firstAttribute="top" secondItem="fdq-Cf-39W" secondAttribute="bottom" constant="40" id="9ks-nj-hts"/>
+                        <constraint firstItem="LwB-Yk-UEM" firstAttribute="top" secondItem="ZI3-Dh-bXS" secondAttribute="top" id="Am9-NZ-BB3"/>
+                        <constraint firstItem="fdq-Cf-39W" firstAttribute="top" secondItem="LwB-Yk-UEM" secondAttribute="bottom" constant="40" id="K5H-BI-lA4"/>
                         <constraint firstAttribute="bottom" secondItem="UTy-IA-Avr" secondAttribute="bottom" id="KV4-aB-0vn"/>
                         <constraint firstItem="fdq-Cf-39W" firstAttribute="leading" secondItem="ZI3-Dh-bXS" secondAttribute="leading" constant="8" id="QSi-hF-074"/>
-                        <constraint firstItem="fdq-Cf-39W" firstAttribute="top" secondItem="qz2-SP-6oQ" secondAttribute="bottom" constant="24" id="SPi-rc-70a"/>
                         <constraint firstAttribute="trailing" secondItem="fdq-Cf-39W" secondAttribute="trailing" constant="8" id="dtr-Zd-aRq"/>
-                        <constraint firstItem="qz2-SP-6oQ" firstAttribute="top" secondItem="ZI3-Dh-bXS" secondAttribute="top" id="dz2-C0-o9S"/>
                         <constraint firstItem="UTy-IA-Avr" firstAttribute="centerX" secondItem="ZI3-Dh-bXS" secondAttribute="centerX" id="gSt-4w-qVr"/>
                         <constraint firstAttribute="trailing" secondItem="UTy-IA-Avr" secondAttribute="trailing" constant="28" id="gkl-g0-byM"/>
                         <constraint firstItem="UTy-IA-Avr" firstAttribute="leading" secondItem="ZI3-Dh-bXS" secondAttribute="leading" constant="28" id="n8X-WM-A7C"/>
+                        <constraint firstItem="LwB-Yk-UEM" firstAttribute="centerX" secondItem="ZI3-Dh-bXS" secondAttribute="centerX" id="wcd-um-yop"/>
                     </constraints>
                     <variation key="heightClass=regular-widthClass=regular">
                         <mask key="constraints">
@@ -172,5 +186,8 @@
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
