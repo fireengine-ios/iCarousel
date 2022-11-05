@@ -11,9 +11,16 @@ import UIKit
 class CreateStorySelectionView: UIView {
     
     lazy var snackBarLabel: UILabel = {
-       let view = UILabel()
+        let view = UILabel()
         view.font = .appFont(.medium, size: 14)
         view.textColor = AppColor.label.color
+        return view
+    }()
+    
+    lazy var snackBarButton: UIButton = {
+        let view = UIButton()
+        view.setImage(Image.iconTabMusicEmpty.image, for: .normal)
+        view.isHidden = true
         return view
     }()
     
@@ -26,7 +33,7 @@ class CreateStorySelectionView: UIView {
     }()
     
     lazy var contentView: UIView = {
-       let view = UIView()
+        let view = UIView()
         
         return view
     }()
@@ -42,8 +49,18 @@ class CreateStorySelectionView: UIView {
     
     private func setupLayout() {
         snackBarHeader.addSubview(snackBarLabel)
+        snackBarHeader.addSubview(snackBarButton)
         snackBarLabel.translatesAutoresizingMaskIntoConstraints = false
-        snackBarLabel.pinToSuperviewEdges(offset: UIEdgeInsets(top: 13, left: 16, bottom: 13, right: 13))
+        snackBarLabel.topAnchor.constraint(equalTo: snackBarHeader.topAnchor, constant: 13).activate()
+        snackBarLabel.leadingAnchor.constraint(equalTo: snackBarHeader.leadingAnchor, constant: 16).activate()
+        snackBarLabel.bottomAnchor.constraint(equalTo: snackBarHeader.bottomAnchor, constant: -13).activate()
+        /// lean on snackBarButton
+        snackBarLabel.trailingAnchor.constraint(equalTo: snackBarButton.leadingAnchor, constant: -16).activate()
+        
+        /// snackBarButton
+        snackBarButton.translatesAutoresizingMaskIntoConstraints = false
+        snackBarButton.centerYAnchor.constraint(equalTo: snackBarHeader.centerYAnchor).activate()
+        snackBarButton.trailingAnchor.constraint(equalTo: snackBarHeader.trailingAnchor, constant: -16).activate()
         
         addSubview(snackBarHeader)
         snackBarHeader.translatesAutoresizingMaskIntoConstraints = false
