@@ -86,6 +86,12 @@ final class ForYouRouter: ForYouRouterInput {
         router.presentViewController(controller: nController)
     }
     
+    func navigateToThrowbackDetail(item: ThrowbackDetailsData) {
+        let uuids = item.fileList.compactMap { $0?.uuid }
+        let vc = router.tbmaticPhotosContoller(uuids: uuids)
+        self.router.presentViewController(controller: vc)
+    }
+    
     func displayAlbum(item: AlbumItem) {
         let albumVC = router.albumDetailController(album: item, type: .List, status: .active, moduleOutput: nil)
         router.pushViewController(viewController: albumVC)

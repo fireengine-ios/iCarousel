@@ -8900,6 +8900,10 @@
 		F006110128A1181100911048 /* PaycellDetailPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00610FF28A1181000911048 /* PaycellDetailPopup.xib */; };
 		F006110228A1181100911048 /* PaycellDetailPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00610FF28A1181000911048 /* PaycellDetailPopup.xib */; };
 		F006110328A1181100911048 /* PaycellDetailPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00610FF28A1181000911048 /* PaycellDetailPopup.xib */; };
+		F006D1542915276400B37B28 /* ThrowbackServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F006D1532915276400B37B28 /* ThrowbackServiceResponse.swift */; };
+		F006D1552915276400B37B28 /* ThrowbackServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F006D1532915276400B37B28 /* ThrowbackServiceResponse.swift */; };
+		F006D1562915276400B37B28 /* ThrowbackServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F006D1532915276400B37B28 /* ThrowbackServiceResponse.swift */; };
+		F006D1572915276400B37B28 /* ThrowbackServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F006D1532915276400B37B28 /* ThrowbackServiceResponse.swift */; };
 		F00D7DDF2851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */; };
 		F00D7DE02851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */; };
 		F00D7DE12851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */; };
@@ -8940,6 +8944,14 @@
 		F01C14D128FB47C200F5D380 /* ForYouCardsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F01C14CB28FB47C200F5D380 /* ForYouCardsCollectionViewCell.xib */; };
 		F01C14D228FB47C200F5D380 /* ForYouCardsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F01C14CB28FB47C200F5D380 /* ForYouCardsCollectionViewCell.xib */; };
 		F01C14D328FB47C200F5D380 /* ForYouCardsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F01C14CB28FB47C200F5D380 /* ForYouCardsCollectionViewCell.xib */; };
+		F0203391291817E7003508D1 /* ForYouThrowbackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F020338F291817E7003508D1 /* ForYouThrowbackCollectionViewCell.swift */; };
+		F0203392291817E7003508D1 /* ForYouThrowbackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F020338F291817E7003508D1 /* ForYouThrowbackCollectionViewCell.swift */; };
+		F0203393291817E7003508D1 /* ForYouThrowbackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F020338F291817E7003508D1 /* ForYouThrowbackCollectionViewCell.swift */; };
+		F0203394291817E7003508D1 /* ForYouThrowbackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F020338F291817E7003508D1 /* ForYouThrowbackCollectionViewCell.swift */; };
+		F0203395291817E7003508D1 /* ForYouThrowbackCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0203390291817E7003508D1 /* ForYouThrowbackCollectionViewCell.xib */; };
+		F0203396291817E7003508D1 /* ForYouThrowbackCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0203390291817E7003508D1 /* ForYouThrowbackCollectionViewCell.xib */; };
+		F0203397291817E7003508D1 /* ForYouThrowbackCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0203390291817E7003508D1 /* ForYouThrowbackCollectionViewCell.xib */; };
+		F0203398291817E7003508D1 /* ForYouThrowbackCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0203390291817E7003508D1 /* ForYouThrowbackCollectionViewCell.xib */; };
 		F02833B92779E1D100C4217F /* DragAndDropFileExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02833B82779E1D100C4217F /* DragAndDropFileExtensions.swift */; };
 		F02833BA2779E1D100C4217F /* DragAndDropFileExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02833B82779E1D100C4217F /* DragAndDropFileExtensions.swift */; };
 		F02833BB2779E1D100C4217F /* DragAndDropFileExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02833B82779E1D100C4217F /* DragAndDropFileExtensions.swift */; };
@@ -12076,6 +12088,7 @@
 		F00610EA289DBF4D00911048 /* PaycellCampaignViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaycellCampaignViewController.xib; sourceTree = "<group>"; };
 		F00610F028A0504C00911048 /* PaycellCampaignService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaycellCampaignService.swift; sourceTree = "<group>"; };
 		F00610FF28A1181000911048 /* PaycellDetailPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaycellDetailPopup.xib; sourceTree = "<group>"; };
+		F006D1532915276400B37B28 /* ThrowbackServiceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrowbackServiceResponse.swift; sourceTree = "<group>"; };
 		F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedItemsSegmentView.swift; sourceTree = "<group>"; };
 		F00D7DE32851C7000004E619 /* SharedItemsSegmentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SharedItemsSegmentView.xib; sourceTree = "<group>"; };
 		F01244C8282A988800835B4E /* agconnect-services.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "agconnect-services.plist"; sourceTree = "<group>"; };
@@ -12086,6 +12099,8 @@
 		F013FA8D280591DF004B9BB8 /* SecurityInfoWarningPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityInfoWarningPopup.swift; sourceTree = "<group>"; };
 		F01C14CA28FB47C200F5D380 /* ForYouCardsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouCardsCollectionViewCell.swift; sourceTree = "<group>"; };
 		F01C14CB28FB47C200F5D380 /* ForYouCardsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForYouCardsCollectionViewCell.xib; sourceTree = "<group>"; };
+		F020338F291817E7003508D1 /* ForYouThrowbackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouThrowbackCollectionViewCell.swift; sourceTree = "<group>"; };
+		F0203390291817E7003508D1 /* ForYouThrowbackCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForYouThrowbackCollectionViewCell.xib; sourceTree = "<group>"; };
 		F02833B82779E1D100C4217F /* DragAndDropFileExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropFileExtensions.swift; sourceTree = "<group>"; };
 		F028C0DE2789DDBC005CE6AF /* PublicShareInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicShareInitializer.swift; sourceTree = "<group>"; };
 		F028C0E32789DE43005CE6AF /* PublicShareConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicShareConfigurator.swift; sourceTree = "<group>"; };
@@ -21599,6 +21614,8 @@
 				F062041F290D9D9C00A03F06 /* ForYouGradientCollectionViewCell.xib */,
 				F0620428290DA72300A03F06 /* ForYouBlurCollectionViewCell.swift */,
 				F0620429290DA72300A03F06 /* ForYouBlurCollectionViewCell.xib */,
+				F020338F291817E7003508D1 /* ForYouThrowbackCollectionViewCell.swift */,
+				F0203390291817E7003508D1 /* ForYouThrowbackCollectionViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -21757,6 +21774,7 @@
 			isa = PBXGroup;
 			children = (
 				F0DCDE1D28F4335A00DD864A /* ForYouService.swift */,
+				F006D1532915276400B37B28 /* ThrowbackServiceResponse.swift */,
 			);
 			path = ForYouService;
 			sourceTree = "<group>";
@@ -22491,6 +22509,7 @@
 				73FE51EF22CF5D8800270448 /* CreateStoryAudioSelectionItemViewController.xib in Resources */,
 				07AA667F26FDED36009D4FB1 /* ResetPasswordViewController.xib in Resources */,
 				9842FC162563D34800B07606 /* PrivateShareContactCell.xib in Resources */,
+				F0203395291817E7003508D1 /* ForYouThrowbackCollectionViewCell.xib in Resources */,
 				CF8B72FB23CBD1D70021B021 /* SettingsTC.bundle in Resources */,
 				8C0E901A1FDEBDFF00789C91 /* AudioSelectionCollectionViewCell.xib in Resources */,
 				CF71465224B597A800D83E60 /* ContactSyncBigCardView.xib in Resources */,
@@ -23012,6 +23031,7 @@
 				CE784D2A22A685FB00662219 /* LoginPhoneMailCell.xib in Resources */,
 				07AA668126FDED36009D4FB1 /* ResetPasswordViewController.xib in Resources */,
 				CE784D2B22A685FB00662219 /* AudioSelectionCollectionViewCell.xib in Resources */,
+				F0203397291817E7003508D1 /* ForYouThrowbackCollectionViewCell.xib in Resources */,
 				988BA153255924210086E4BE /* PrivateShareWithView.xib in Resources */,
 				CE784D2E22A685FB00662219 /* CollectionViewCellForStoryPhoto.xib in Resources */,
 				CE784D2F22A685FB00662219 /* FaceImageViewController.xib in Resources */,
@@ -23438,6 +23458,7 @@
 				CF8B697623CBC9D70021B021 /* TurkcellSaturaReg.ttf in Resources */,
 				988BA1C62559248C0086E4BE /* PrivateShareDurationView.xib in Resources */,
 				CF8B697823CBC9D70021B021 /* TermsOfUseViewController.xib in Resources */,
+				F0203396291817E7003508D1 /* ForYouThrowbackCollectionViewCell.xib in Resources */,
 				F0E0A4792897F36400528B39 /* ForYouEmptyCellView.xib in Resources */,
 				CF8B697923CBC9D70021B021 /* CampaignCard.xib in Resources */,
 				CF8B697B23CBC9D70021B021 /* SmallFullOfQuotaPopUp.xib in Resources */,
@@ -23799,6 +23820,7 @@
 				CF8B70EA23CBCA280021B021 /* CollectionViewCellForStoryPhoto.xib in Resources */,
 				07AA668226FDED36009D4FB1 /* ResetPasswordViewController.xib in Resources */,
 				CF8B70EB23CBCA280021B021 /* FaceImageViewController.xib in Resources */,
+				F0203398291817E7003508D1 /* ForYouThrowbackCollectionViewCell.xib in Resources */,
 				CF8B70ED23CBCA280021B021 /* FreeAppSpaceViewCotroller.xib in Resources */,
 				CF8B70EF23CBCA280021B021 /* CollectionViewCellForFaceImageAddName.xib in Resources */,
 				CF8B70F423CBCA280021B021 /* SpotifyPlaylistsViewController.xib in Resources */,
@@ -25784,6 +25806,7 @@
 				8C0E8DC21FDEBDFF00789C91 /* LocalAlbumViewController.swift in Sources */,
 				F095724F28A11A9D00D1D0DD /* PaycellDetailPopup.swift in Sources */,
 				CEDA44DA207CA9FB00E653DD /* NumericConstants.swift in Sources */,
+				F006D1542915276400B37B28 /* ThrowbackServiceResponse.swift in Sources */,
 				07DB93932860AF5400D5CACF /* InAppPurchase.swift in Sources */,
 				076BD1A227BBBDEC004609E3 /* MapSearchInteractorInput.swift in Sources */,
 				8C0E8DC41FDEBDFF00789C91 /* PurchaseResult.swift in Sources */,
@@ -26484,6 +26507,7 @@
 				B5E7479C208DC43F003A7110 /* BackgroundTaskService.swift in Sources */,
 				89E3408D24747CB500EB68C3 /* PeopleCollectionViewCell.swift in Sources */,
 				B5390D83216605F600A02002 /* CellImageManager.swift in Sources */,
+				F0203391291817E7003508D1 /* ForYouThrowbackCollectionViewCell.swift in Sources */,
 				8C20864E228D4B2E000BEDAD /* SegmentedChildNavBarManager.swift in Sources */,
 				0334574E23C7134700FB6386 /* NetmeraScreenEventTemplate.swift in Sources */,
 				8C0E8F3F1FDEBDFF00789C91 /* SplashRouter.swift in Sources */,
@@ -27770,6 +27794,7 @@
 				CE78494F22A685FB00662219 /* TokenKeychainStorage.swift in Sources */,
 				CF71470924B597AA00D83E60 /* ContactListMainView.swift in Sources */,
 				07E7A65F28585D9C005BBD4C /* DrawerAnimationController.swift in Sources */,
+				F0203393291817E7003508D1 /* ForYouThrowbackCollectionViewCell.swift in Sources */,
 				F0571ED5288AE6FE00A0D6AC /* ForYouRouter.swift in Sources */,
 				B549B6D624CF09D000D39C44 /* AdjustmentParameter.swift in Sources */,
 				98E4B9F923C71EF0003A4631 /* TrashBinSortingManager.swift in Sources */,
@@ -28785,6 +28810,7 @@
 				B5BBBE9E24FCF0B100A719CB /* PhotoEditSaveService.swift in Sources */,
 				B569220223ACEDA400E255C4 /* MigrationModel_1_3.xcmappingmodel in Sources */,
 				CE784C0E22A685FB00662219 /* ImageScrollView.swift in Sources */,
+				F006D1562915276400B37B28 /* ThrowbackServiceResponse.swift in Sources */,
 				98231AB524F3A23500FD16E2 /* BluemessFilter.swift in Sources */,
 				8C86111822BCF36C00108958 /* TermsDescriptionController.swift in Sources */,
 				CE784C0F22A685FB00662219 /* SelectNameInteractorOutput.swift in Sources */,
@@ -29315,6 +29341,7 @@
 				CF8B644B23CBC9D70021B021 /* CustomSwitch.swift in Sources */,
 				CF8B644C23CBC9D70021B021 /* ManageContactsViewInput.swift in Sources */,
 				CF8B644D23CBC9D70021B021 /* PackagePremiumView.swift in Sources */,
+				F006D1552915276400B37B28 /* ThrowbackServiceResponse.swift in Sources */,
 				0305A32423D5C391004D1EC7 /* HiddenPhotosDataLoader.swift in Sources */,
 				CF8B644E23CBC9D70021B021 /* SmartAlbumsDataStorage.swift in Sources */,
 				CF8B644F23CBC9D70021B021 /* MediaItemsAlbum+CoreDataClass.swift in Sources */,
@@ -30522,6 +30549,7 @@
 				CF8B67D423CBC9D70021B021 /* LeavePremiumConfigurator.swift in Sources */,
 				CF8B67D523CBC9D70021B021 /* VisualMusicPlayerInteractor.swift in Sources */,
 				F0571ED4288AE6FE00A0D6AC /* ForYouRouter.swift in Sources */,
+				F0203392291817E7003508D1 /* ForYouThrowbackCollectionViewCell.swift in Sources */,
 				F0743DCA28B4C63100CC1F24 /* BottomInfoBanner.swift in Sources */,
 				3A0CCF2E2642D20E002E811D /* InvitationGiftCollectionViewCell.swift in Sources */,
 				CF8B67D623CBC9D70021B021 /* SelectNameViewInput.swift in Sources */,
@@ -30981,6 +31009,7 @@
 				F0571EC7288AE6CE00A0D6AC /* ForYouInteractor.swift in Sources */,
 				CF8B6BD223CBCA280021B021 /* AlbumSelectionPresenter.swift in Sources */,
 				CF8B6BD323CBCA280021B021 /* PrintInteractorOutput.swift in Sources */,
+				F0203394291817E7003508D1 /* ForYouThrowbackCollectionViewCell.swift in Sources */,
 				CF8B6BD423CBCA280021B021 /* IntroduceViewController.swift in Sources */,
 				CF8B6BD523CBCA280021B021 /* PermissionType.swift in Sources */,
 				CF703F4924E3CC4E005EFFFD /* (null) in Sources */,
@@ -31286,6 +31315,7 @@
 				07595516264131FB00C088B1 /* String+Extension.swift in Sources */,
 				CF8B6CB623CBCA280021B021 /* PremiumViewOutput.swift in Sources */,
 				0708C7872677261100680ED6 /* PhotoPrintCard.swift in Sources */,
+				F006D1572915276400B37B28 /* ThrowbackServiceResponse.swift in Sources */,
 				CF8B6CB923CBCA280021B021 /* LoginInitializer.swift in Sources */,
 				CF8B6CBA23CBCA280021B021 /* PremiumInteractorOutput.swift in Sources */,
 				CF71470A24B597AA00D83E60 /* ContactListMainView.swift in Sources */,

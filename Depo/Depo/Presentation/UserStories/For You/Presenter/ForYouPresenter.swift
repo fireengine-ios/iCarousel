@@ -26,6 +26,7 @@ final class ForYouPresenter: BasePresenter, ForYouModuleInput {
     private lazy var collageCardsData: [HomeCardResponse] = []
     private lazy var albumCardsData: [HomeCardResponse] = []
     private lazy var animationCardsData: [HomeCardResponse] = []
+    private lazy var throwbackData: [ThrowbackData] = []
     
     func viewIsReady() {
         interactor.viewIsReady()
@@ -72,10 +73,17 @@ extension ForYouPresenter: ForYouViewOutput {
         router.navigateToItemPreview(item: item, items: items)
     }
     
+    func navigateToThrowbackDetail(item: ThrowbackData) {
+        self.currentSection = .throwback
+        interactor.getThrowbackDetails(with: item)
+    }
+    
     func getHeightForRow(at view: ForYouSections) -> Int {
         switch view {
         case .faceImage:
             return 224
+        case .throwback:
+            return throwbackData.isEmpty ? 0 : 225
         case .people:
             return peopleData.isEmpty ? 0 : 150
         case .things:
@@ -107,6 +115,8 @@ extension ForYouPresenter: ForYouViewOutput {
         switch view {
         case .faceImage:
             return nil
+        case .throwback:
+            return throwbackData
         case .people:
             return peopleData
         case .things:
@@ -223,8 +233,8 @@ extension ForYouPresenter: ForYouInteractorOutput {
         self.animationCardsData = data
     }
     
-    func getThrowbacks(data: AlbumResponse) {
-        //TODO: Facelift-Handle throwbacks
+    func getThrowbacks(data: [ThrowbackData]) {
+        self.throwbackData = data
     }
     
     func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item, faceImageType: FaceImageType?) {
@@ -259,5 +269,13 @@ extension ForYouPresenter: ForYouInteractorOutput {
     
     func saveCardSuccess(data: HomeCardResponse, section: ForYouSections) {
         view.hideSpinner()
+    }
+    
+    func getThrowbacksDetail(data: ThrowbackDetailsData) {
+        router.navigateToThrowbackDetail(item: data)
+    }
+    
+    func throwbackDetailFailed() {
+        UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
     }
 }

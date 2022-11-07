@@ -26,7 +26,8 @@ protocol ForYouInteractorOutput: AnyObject {
     func getCollageCards(data: [HomeCardResponse])
     func getAlbumCards(data: [HomeCardResponse])
     func getAnimationCards(data: [HomeCardResponse])
-    func getThrowbacks(data: AlbumResponse)
+    func getThrowbacks(data: [ThrowbackData])
+    func getThrowbacksDetail(data: ThrowbackDetailsData)
     
     func didFinishedAllRequests()
     func didGetUpdateData()
@@ -36,4 +37,5 @@ protocol ForYouInteractorOutput: AnyObject {
     func saveCardFailed(section: ForYouSections)
     func saveCardFailedFullQuota(section: ForYouSections)
     func saveCardSuccess(data: HomeCardResponse, section: ForYouSections)
+    func throwbackDetailFailed()
 }
