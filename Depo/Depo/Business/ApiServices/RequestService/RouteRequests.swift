@@ -518,5 +518,6 @@ struct RouteRequests {
     static let forYouAlbumCards = baseUrl +/ "foryou/albums/generated"
     static let forYouAnimationCards = baseUrl +/ "foryou/animations/generated"
     static let forYouThrowback = baseUrl +/ "foryou/years-ago"
+    static let forYouThrowbackDetail = "foryou/years-ago/%d"
     
 }

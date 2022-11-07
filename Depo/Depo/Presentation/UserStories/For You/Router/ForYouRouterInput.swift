@@ -15,6 +15,7 @@ protocol ForYouRouterInput {
     func navigateToItemDetail(_ album: AlbumServiceResponse, forItem item: Item, faceImageType: FaceImageType?)
     func navigateToAlbumDetail(album: AlbumItem)
     func navigateToItemPreview(item: WrapData, items: [WrapData])
+    func navigateToThrowbackDetail(item: ThrowbackDetailsData)
     
     func displayAlbum(item: AlbumItem)
     func displayItem(item: WrapData)

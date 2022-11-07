@@ -310,6 +310,8 @@ extension ForYouInteractor: ForYouInteractorInput {
         switch section {
         case .faceImage:
             return
+        case .throwback:
+            getThrowbacks()
         case .people:
             getPeople()
         case .collageCards:
@@ -371,6 +373,20 @@ extension ForYouInteractor: ForYouInteractorInput {
                 } else {
                     self?.output.saveCardFailed(section: section)
                 }
+            }
+        }
+    }
+    
+    func getThrowbackDetails(with item: ThrowbackData) {
+        debugLog("ForYou throwbackDetails")
+        guard let id = item.id else { return }
+
+        service.forYouThrowbackDetails(id: id) { result in
+            switch result {
+            case .success(let data):
+                self.output.getThrowbacksDetail(data: data)
+            case .failed(_):
+                self.output.throwbackDetailFailed()
             }
         }
     }
