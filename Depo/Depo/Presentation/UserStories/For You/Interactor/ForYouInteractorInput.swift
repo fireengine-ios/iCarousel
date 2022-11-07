@@ -15,5 +15,6 @@ protocol ForYouInteractorInput {
     func getUpdateData(for section: ForYouSections?)
     func onCloseCard(data: HomeCardResponse, section: ForYouSections)
     func saveCard(data: HomeCardResponse, section: ForYouSections)
+    func getThrowbackDetails(with item: ThrowbackData)
 }
 

@@ -47,12 +47,30 @@ final class ForYouService: BaseRequestService {
     }
     
     @discardableResult
-    func forYouThrowbacks(handler: @escaping (ResponseResult<AlbumResponse>) -> Void) -> URLSessionTask? {
+    func forYouThrowbacks(handler: @escaping (ResponseResult<[ThrowbackData]>) -> Void) -> URLSessionTask? {
         debugLog("forYouThrowback")
         
         return SessionManager
             .customDefault
             .request(RouteRequests.forYouThrowback)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
+    
+    @discardableResult
+    func forYouThrowbackDetails(id: Int, handler: @escaping (ResponseResult<ThrowbackDetailsData>) -> Void) -> URLSessionTask? {
+        debugLog("forYouThrowback")
+                
+        let path = String(format: RouteRequests.forYouThrowbackDetail, id)
+        guard let url = URL(string: path, relativeTo: RouteRequests.baseUrl) else {
+            assertionFailure()
+           return nil
+        }
+        
+        return SessionManager
+            .customDefault
+            .request(url)
             .customValidate()
             .responseObject(handler)
             .task

@@ -9,8 +9,10 @@
 import Foundation
 
 enum ForYouSections: CaseIterable {
+    /// this enum is sorted in the same order as the For You  screen.
     case faceImage
     case people
+    case throwback
     case collageCards
     case collages
     case animationCards
@@ -26,6 +28,7 @@ enum ForYouSections: CaseIterable {
     var title: String {
         switch self {
         case .faceImage: return ""
+        case .throwback: return "Throwback"
         case .people: return TextConstants.myStreamPeopleTitle
         case .things: return TextConstants.myStreamThingsTitle
         case .places: return TextConstants.myStreamPlacesTitle

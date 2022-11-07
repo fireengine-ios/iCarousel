@@ -15,6 +15,7 @@ protocol ForYouTableViewCellDelegate: AnyObject {
     func navigateToItemDetail(item: WrapData, faceImageType: FaceImageType?, currentSection: ForYouSections)
     func naviateToAlbumDetail(album: AlbumItem)
     func navigateToItemPreview(item: WrapData, items: [WrapData], currentSection: ForYouSections)
+    func navigateToThrowbackDetail(item: ThrowbackData)
     
     func displayAlbum(item: AlbumItem)
     func displayAnimation(item: WrapData)
@@ -56,6 +57,7 @@ final class ForYouTableViewCell: UITableViewCell {
     private var albumsData: [AlbumItem] = []
     private var photopickData: [InstapickAnalyze] = []
     private var cardsData: [HomeCardResponse] = []
+    private var throwbackData: [ThrowbackData] = []
     private var currentView: ForYouSections?
 
     override func awakeFromNib() {
@@ -89,6 +91,10 @@ final class ForYouTableViewCell: UITableViewCell {
             self.cardsData = model as? [HomeCardResponse] ?? []
             seeAllButton.isHidden = true
             showEmptyDataViewIfNeeded(isShow: false)
+        case .throwback:
+            self.throwbackData = model as? [ThrowbackData] ?? []
+            seeAllButton.isHidden = true
+            showEmptyDataViewIfNeeded(isShow: false)
         default:
             self.wrapData = model as? [WrapData] ?? []
             showEmptyDataViewIfNeeded(isShow: wrapData.isEmpty)
@@ -108,6 +114,7 @@ final class ForYouTableViewCell: UITableViewCell {
         collectionView.register(nibCell: ForYouCardsCollectionViewCell.self)
         collectionView.register(nibCell: ForYouGradientCollectionViewCell.self)
         collectionView.register(nibCell: ForYouBlurCollectionViewCell.self)
+        collectionView.register(nibCell: ForYouThrowbackCollectionViewCell.self)
     }
     
     private func addSpinner() {
@@ -159,6 +166,8 @@ extension ForYouTableViewCell: UICollectionViewDataSource {
             return photopickData.count
         case .collageCards, .albumCards, .animationCards:
             return cardsData.count
+        case .throwback:
+            return throwbackData.count
         default:
             return wrapData.count
         }
@@ -197,6 +206,11 @@ extension ForYouTableViewCell: UICollectionViewDataSource {
             let item = wrapData[indexPath.row]
             cell.configure(with: item)
             return cell
+        case .throwback:
+            let cell = collectionView.dequeue(cell: ForYouThrowbackCollectionViewCell.self, for: indexPath)
+            let item = throwbackData[indexPath.row]
+            cell.configure(with: item)
+            return cell
         default:
             let item = wrapData[indexPath.row]
             cell.configure(with: item, currentView: currentView ?? .people)
@@ -233,6 +247,9 @@ extension ForYouTableViewCell: UICollectionViewDelegateFlowLayout {
         case .story, .animations, .collages, .hidden:
             let item = wrapData[indexPath.row]
             delegate?.navigateToItemPreview(item: item, items: wrapData, currentSection: currentView)
+        case .throwback:
+            let item = throwbackData[indexPath.row]
+            delegate?.navigateToThrowbackDetail(item: item)
         default:
             return
         }
