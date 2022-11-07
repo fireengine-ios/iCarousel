@@ -137,6 +137,7 @@ enum Image: String, AppImage {
     case popupFavorites
     case popupShared
     case popupMusic
+    case popupMemories
     
     ///  Files sorting
     case iconSizeSmallest

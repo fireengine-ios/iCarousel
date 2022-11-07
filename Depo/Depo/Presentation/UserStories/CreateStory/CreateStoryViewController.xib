@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -24,8 +24,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="SFF-o9-tmC">
-                    <rect key="frame" x="16" y="10" width="343" height="128"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="SFF-o9-tmC">
+                    <rect key="frame" x="16" y="10" width="343" height="136"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IeB-rG-1di" customClass="ProfileTextEnterView" customModule="Billo" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="343" height="60"/>
@@ -35,7 +35,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KeF-x1-ey1" customClass="CreateStoryMusicEnterView" customModule="Billo" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="68" width="343" height="60"/>
+                            <rect key="frame" x="0.0" y="76" width="343" height="60"/>
                             <color key="backgroundColor" name="primaryBackground"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="60" id="kfr-4b-8RU"/>
@@ -43,17 +43,16 @@
                         </view>
                     </subviews>
                 </stackView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5I-Px-86y">
-                    <rect key="frame" x="15" y="158" width="345" height="20.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5I-Px-86y">
+                    <rect key="frame" x="15" y="166" width="345" height="14.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qY6-PL-KB4" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
-                    <rect key="frame" x="84.5" y="611" width="206" height="44"/>
+                    <rect key="frame" x="28" y="610" width="319" height="45"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="44" id="m8s-jt-A2G"/>
-                        <constraint firstAttribute="width" constant="206" id="zw5-7L-oWD"/>
+                        <constraint firstAttribute="height" constant="45" id="m8s-jt-A2G"/>
                     </constraints>
                     <state key="normal" title="Button"/>
                     <connections>
@@ -61,7 +60,7 @@
                     </connections>
                 </button>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="7aQ-Nm-zL9">
-                    <rect key="frame" x="0.0" y="198.5" width="375" height="404.5"/>
+                    <rect key="frame" x="0.0" y="200.5" width="375" height="401.5"/>
                     <color key="backgroundColor" name="primaryBackground"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Gg7-tH-F2s">
                         <size key="itemSize" width="50" height="50"/>
@@ -83,11 +82,12 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="7aQ-Nm-zL9" secondAttribute="trailing" id="XR9-0k-Rrj"/>
                 <constraint firstItem="E5I-Px-86y" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="bHt-kG-kW6"/>
                 <constraint firstItem="E5I-Px-86y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="d1W-c7-Atr"/>
-                <constraint firstItem="qY6-PL-KB4" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="eJH-qF-qOA"/>
+                <constraint firstItem="qY6-PL-KB4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="28" id="riW-sl-9ff"/>
                 <constraint firstItem="SFF-o9-tmC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ssz-NP-dXi"/>
                 <constraint firstItem="7aQ-Nm-zL9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="weC-vM-PxS"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qY6-PL-KB4" secondAttribute="trailing" constant="28" id="xbb-RP-WwC"/>
             </constraints>
-            <point key="canvasLocation" x="138.40000000000001" y="123.68815592203899"/>
+            <point key="canvasLocation" x="490" y="143"/>
         </view>
     </objects>
     <resources>

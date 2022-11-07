@@ -32,7 +32,6 @@ final class CreateStorySelectionController: BaseViewController {
     init(title: String, isFavouritePictures: Bool) {
         navTitle = title
         self.isFavouritePictures = isFavouritePictures
-        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -68,6 +67,10 @@ final class CreateStorySelectionController: BaseViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: TextConstants.createStoryPhotosContinue,
                                                             target: self,
                                                             selector: #selector(openStorySetup))
+        
+        navigationItem.rightBarButtonItem?.isEnabled = selectedItems.count == 0 ? false : true
+        
+        navigationController?.navigationBar.tintColor = AppColor.label.color
     }
     
     private func addChildVC() {
@@ -107,7 +110,11 @@ final class CreateStorySelectionController: BaseViewController {
     }
     
     @objc private func openStorySetup() {
-        let controller = CreateStoryViewController(images: selectedItems.map { return Item(remote: $0) })
+        let story = PhotoStory(name: "")
+        story.storyPhotos = selectedItems.map { Item(remote: $0) }
+        let router = RouterVC()
+        let controller = router.audioSelection(forStory: story)
+        controller.fromPhotoSelection = true
         navigationController?.pushViewController(controller, animated: true)
     }
 }

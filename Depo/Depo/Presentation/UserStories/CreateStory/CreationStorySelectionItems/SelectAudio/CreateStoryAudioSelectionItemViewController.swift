@@ -67,6 +67,8 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
         }
     }
     
+    var fromPhotoSelection: Bool = false
+    
     init(forStory story: PhotoStory) {
         photoStory = story
         super.init(nibName: nil, bundle: nil)
@@ -142,13 +144,11 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
     private func configureNavBarActions() {
         setTitle(withString: TextConstants.createStoryAudioSelected)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: TextConstants.createStorySelectAudioButton,
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: TextConstants.actionAdd,
                                                             target: self,
-                                                            selector: #selector(onNextButton))
+                                                            selector: #selector(onAddButton))
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: TextConstants.selectFolderCancelButton,
-                                                           target: self,
-                                                           selector: #selector(onCancelButton))
+        navigationController?.navigationBar.tintColor = AppColor.label.color
     }
     
     private func onChangeSource(isYourMusic: Bool) {
@@ -161,10 +161,30 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
         }
     }
     
-    @objc private func onNextButton() {
+    override func didMove(toParent parent: UIViewController?) {
+        super.didMove(toParent: parent)
+        if parent == nil {
+            smallPlayer.stop()
+            hideViewController()
+        }
+    }
+    
+    @objc private func onAddButton() {
         setMusicItemForPhotoStory()
         smallPlayer.stop()
-        hideViewController()
+        
+        if fromPhotoSelection {
+            
+            guard let item = selectedItem, let story = photoStory else {
+                return
+            }
+            story.music = item
+            
+            let controller = CreateStoryViewController(forStory: story)
+            navigationController?.pushViewController(controller, animated: true)
+        } else {
+            hideViewController()
+        }
     }
     
     private func setMusicItemForPhotoStory() {
@@ -173,11 +193,6 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
         }
         story.music = item
         self.audioItemSelectedDelegate?.photoStoryWithSelectedAudioItem(story: story)
-    }
-    
-    @objc private func onCancelButton() {
-        smallPlayer.stop()
-        hideViewController()
     }
     
     private func hideViewController() {

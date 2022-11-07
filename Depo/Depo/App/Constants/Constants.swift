@@ -868,6 +868,7 @@ struct TextConstants {
     static let actionSheetShareShareViaLink = localized("Share Via Link")
     static let actionSheetShareCancel = localized("Cancel")
     
+    static let actionAdd = localized("Add")
     static let actionSheetCreateStory = localized("Create a Story")
     static let actionSheetCopy = localized("Copy")
     static let actionSheetAddToFavorites = localized("Add to Favorites")
