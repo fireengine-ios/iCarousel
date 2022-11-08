@@ -57,7 +57,7 @@ final class ForYouRouter: ForYouRouterInput {
             let photopick = router.analyzesHistoryController()
             router.pushViewController(viewController: photopick)
         case .story:
-            let createStory = router.createStory(navTitle: "")
+            let createStory = router.createStory(navTitle: TextConstants.createStory)
             router.pushViewController(viewController: createStory)
         default:
             return

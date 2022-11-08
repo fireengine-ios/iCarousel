@@ -37,6 +37,23 @@ final class PopUpController: BasePopUpController {
         }
     }
     
+    @IBOutlet weak var textField: QuickDismissPlaceholderTextField!{
+        willSet {
+            newValue.textColor = AppColor.borderColor.color
+            newValue.font = .appFont(.regular, size: 14.0)
+            newValue.backgroundColor = AppColor.primaryBackground.color
+            newValue.borderStyle = .none
+            newValue.layer.cornerRadius = 8
+            newValue.layer.borderWidth = 1
+            newValue.layer.borderColor = AppColor.borderColor.cgColor
+            newValue.setLeftPaddingPoints(16)
+            newValue.setRightPaddingPoints(10)
+            newValue.isOpaque = true
+            newValue.quickDismissPlaceholder = TextConstants.name
+            newValue.returnKeyType = .next
+        }
+    }
+    
     @IBOutlet private weak var firstButton: WhiteButton!
     @IBOutlet private weak var secondButton: DarkBlueButton!
 
@@ -49,6 +66,7 @@ final class PopUpController: BasePopUpController {
     private var alertTitle: String?
     private var alertMessage: String?
     private var attributedAlertMessage: NSAttributedString?
+    private var alertTextField: Bool = true
     
     private var firstButtonTitle = ""
     private var secondButtonTitle = ""
@@ -83,6 +101,8 @@ final class PopUpController: BasePopUpController {
         } else {
             messageLabel.text = alertMessage
         }
+        
+        textField.isHidden = alertTextField
     }
     
     private func setupButtonState() {
@@ -159,9 +179,9 @@ extension PopUpController {
         return with(title: TextConstants.errorAlert, message: errorMessage, image: .error, buttonTitle: TextConstants.ok)
     }
     
-    static func with(title: String?, message: String?, image: PopUpImage, buttonTitle: String, action: PopUpButtonHandler? = nil) -> PopUpController {
+    static func with(title: String?, message: String?, image: PopUpImage, buttonTitle: String, action: PopUpButtonHandler? = nil, showTextField: Bool = false) -> PopUpController {
         
-        let vc = controllerWith(title: title, message: message, image: image)
+        let vc = controllerWith(title: title, message: message, image: image, showTextField: showTextField)
         vc.buttonState = .single
         
         if let action = action {
@@ -172,9 +192,9 @@ extension PopUpController {
         return vc
     }
     
-    static func with(title: String?, attributedMessage: NSAttributedString?, image: PopUpImage, buttonTitle: String, action: PopUpButtonHandler? = nil) -> PopUpController {
+    static func with(title: String?, attributedMessage: NSAttributedString?, image: PopUpImage, buttonTitle: String, action: PopUpButtonHandler? = nil, showTextField: Bool = false) -> PopUpController {
         
-        let vc = controllerWith(title: title, attributedMessage: attributedMessage, image: image)
+        let vc = controllerWith(title: title, attributedMessage: attributedMessage, image: image, showTextField: showTextField)
         vc.buttonState = .single
         
         if let action = action {
@@ -185,9 +205,18 @@ extension PopUpController {
         return vc
     }
     
-    static func with(title: String?, message: String?, image: PopUpImage, firstButtonTitle: String, secondButtonTitle: String, firstUrl: URL? = nil, secondUrl: URL? = nil, firstAction: PopUpButtonHandler? = nil, secondAction: PopUpButtonHandler? = nil) -> PopUpController {
+    static func with(title: String?,
+                     message: String?,
+                     image: PopUpImage,
+                     firstButtonTitle: String,
+                     secondButtonTitle: String,
+                     firstUrl: URL? = nil,
+                     secondUrl: URL? = nil,
+                     firstAction: PopUpButtonHandler? = nil,
+                     secondAction: PopUpButtonHandler? = nil,
+                     showTextField: Bool = false) -> PopUpController {
         
-        let vc = controllerWith(title: title, message: message, image: image, firstUrl: firstUrl, secondUrl: secondUrl)
+        let vc = controllerWith(title: title, message: message, image: image, firstUrl: firstUrl, secondUrl: secondUrl, showTextField: showTextField)
         vc.buttonState = .twin
         
         if let firstAction = firstAction {
@@ -203,9 +232,18 @@ extension PopUpController {
         return vc
     }
     
-    static func with(title: String?, attributedMessage: NSAttributedString?, image: PopUpImage, firstButtonTitle: String, secondButtonTitle: String, firstUrl: URL? = nil, secondUrl: URL? = nil, firstAction: PopUpButtonHandler? = nil, secondAction: PopUpButtonHandler? = nil) -> PopUpController {
+    static func with(title: String?,
+                     attributedMessage: NSAttributedString?,
+                     image: PopUpImage,
+                     firstButtonTitle: String,
+                     secondButtonTitle: String,
+                     firstUrl: URL? = nil,
+                     secondUrl: URL? = nil,
+                     firstAction: PopUpButtonHandler? = nil,
+                     secondAction: PopUpButtonHandler? = nil,
+                     showTextField: Bool = false) -> PopUpController {
         
-        let vc = controllerWith(title: title, attributedMessage: attributedMessage, image: image, firstUrl: firstUrl, secondUrl: secondUrl)
+        let vc = controllerWith(title: title, attributedMessage: attributedMessage, image: image, firstUrl: firstUrl, secondUrl: secondUrl, showTextField: showTextField)
         vc.buttonState = .twin
         
         if let firstAction = firstAction {
@@ -221,7 +259,12 @@ extension PopUpController {
         return vc
     }
     
-    private static func controllerWith(title: String?, attributedMessage: NSAttributedString?, image: PopUpImage, firstUrl: URL? = nil, secondUrl: URL? = nil) -> PopUpController {
+    private static func controllerWith(title: String?,
+                                       attributedMessage: NSAttributedString?,
+                                       image: PopUpImage,
+                                       firstUrl: URL? = nil,
+                                       secondUrl: URL? = nil,
+                                       showTextField: Bool = false) -> PopUpController {
         let vc = PopUpController(nibName: "PopUpController", bundle: nil)
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overFullScreen
@@ -231,12 +274,13 @@ extension PopUpController {
         vc.popUpImage = image
         vc.firstUrl = firstUrl
         vc.secondUrl = secondUrl
+        vc.alertTextField = !showTextField
         
         return vc
     }
     
     
-    private static func controllerWith(title: String?, message: String?, image: PopUpImage, firstUrl: URL? = nil, secondUrl: URL? = nil) -> PopUpController {
+    private static func controllerWith(title: String?, message: String?, image: PopUpImage, firstUrl: URL? = nil, secondUrl: URL? = nil, showTextField: Bool = false) -> PopUpController {
         let vc = PopUpController(nibName: "PopUpController", bundle: nil)
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overFullScreen
@@ -246,6 +290,7 @@ extension PopUpController {
         vc.popUpImage = image
         vc.firstUrl = firstUrl
         vc.secondUrl = secondUrl
+        vc.alertTextField = !showTextField
         
         return vc
     }

@@ -43,6 +43,13 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     @IBOutlet weak var noFilesImage: UIImageView!
+    @IBOutlet weak var noFilesImageContainer: UIView! {
+        willSet {
+            newValue.backgroundColor = AppColor.button.color
+            newValue.layer.cornerRadius = newValue.frame.width / 2
+            newValue.layer.masksToBounds = true
+        }
+    }
     
     @IBOutlet weak var noFilesViewCenterOffsetConstraint: NSLayoutConstraint!
     
@@ -320,7 +327,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String, needHideTopBar: Bool) {
         noFilesLabel.text = text
-        noFilesImage.image = image
+        noFilesImage.image = image.withRenderingMode(.alwaysTemplate)
+        noFilesImage.tintColor = .white
         startCreatingFilesButton.isHidden = createFilesButtonText.isEmpty
         startCreatingFilesButton.setTitle(createFilesButtonText, for: .normal)
         noFilesView.isHidden = false

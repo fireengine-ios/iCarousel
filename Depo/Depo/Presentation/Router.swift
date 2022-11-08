@@ -1115,7 +1115,14 @@ class RouterVC: NSObject {
     }
     
     func createStory(items: [Item]) -> UIViewController {
-        return CreateStoryViewController(images: items)
+        
+        let story = PhotoStory(name: "")
+        story.storyPhotos = items
+        
+        let router = RouterVC()
+        let controller = router.audioSelection(forStory: story)
+        controller.fromPhotoSelection = true  
+        return controller
     }
     
     func twoFactorChallenge(otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel) -> UIViewController {
