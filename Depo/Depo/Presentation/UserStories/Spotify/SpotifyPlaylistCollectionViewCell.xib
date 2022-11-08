@@ -62,7 +62,7 @@
                             <constraint firstItem="aHV-vx-EI4" firstAttribute="leading" secondItem="sDh-4A-jk1" secondAttribute="trailing" constant="15" id="s1w-ir-qID"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_create_story" translatesAutoresizingMaskIntoConstraints="NO" id="pgb-mv-jpJ">
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconArrowRightsmall" translatesAutoresizingMaskIntoConstraints="NO" id="pgb-mv-jpJ">
                         <rect key="frame" x="344" y="23" width="16" height="24"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="16" id="2fx-pw-19X"/>
@@ -105,7 +105,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="arrow_create_story" width="24" height="24"/>
+        <image name="iconArrowRightsmall" width="24" height="24"/>
         <image name="iconSelectEmpty" width="24" height="24"/>
         <namedColor name="itemSeperator">
             <color red="0.91699999570846558" green="0.91699999570846558" blue="0.91699999570846558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

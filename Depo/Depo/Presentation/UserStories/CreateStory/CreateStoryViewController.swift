@@ -14,27 +14,33 @@ final class CreateStoryViewController: BaseViewController {
     @IBOutlet private weak var storyNameView: ProfileTextEnterView! {
         willSet {
             newValue.titleLabel.text = TextConstants.createStoryNameTitle
-            newValue.titleLabel.textColor = ColorConstants.grayTabBarButtonsColor
-            newValue.titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
+            newValue.titleLabel.textColor = AppColor.label.color
+            newValue.titleLabel.font = .appFont(.medium, size: 14)
             
             newValue.textField.textColor = ColorConstants.textGrayColor
-            newValue.textField.font = UIFont.TurkcellSaturaBolFont(size: 21)
+            newValue.textField.font = .appFont(.medium, size: 14)
             
             newValue.textField.returnKeyType = .done
             newValue.textField.delegate = self
+            
+            newValue.textField.layer.borderWidth = 0
+            newValue.textField.setLeftPaddingPoints(20)
         }
     }
     
     @IBOutlet private weak var musicSelectView: CreateStoryMusicEnterView! {
         willSet {
             newValue.titleLabel.text = TextConstants.music
-            newValue.titleLabel.textColor = ColorConstants.grayTabBarButtonsColor
-            newValue.titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
+            newValue.titleLabel.textColor = AppColor.label.color
+            newValue.titleLabel.font = .appFont(.medium, size: 14)
             
             newValue.textField.textColor = ColorConstants.textGrayColor
-            newValue.textField.font = UIFont.TurkcellSaturaBolFont(size: 21)
+            newValue.textField.font = .appFont(.medium, size: 14)
             
             newValue.textField.isUserInteractionEnabled = false
+            
+            newValue.textField.layer.borderWidth = 0
+            newValue.textField.setLeftPaddingPoints(20)
         }
     }
     
