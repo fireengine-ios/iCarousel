@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -26,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SFF-o9-tmC">
-                    <rect key="frame" x="0.0" y="10" width="375" height="163"/>
+                    <rect key="frame" x="0.0" y="10" width="375" height="123"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kEh-R6-fr4" userLabel="Separator">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
@@ -35,43 +34,29 @@
                                 <constraint firstAttribute="height" constant="1" id="5er-MI-Wif"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a62-gu-OoY" userLabel="Spacing">
-                            <rect key="frame" x="0.0" y="1" width="375" height="20"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="20" id="qZk-ZQ-t8c"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IeB-rG-1di" customClass="ProfileTextEnterView" customModule="Billo" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="21" width="375" height="60"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IeB-rG-1di" customClass="SnackBarHeaderTwoLineView" customModule="Billo" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="1" width="375" height="60"/>
                             <color key="backgroundColor" name="primaryBackground"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="60" id="C87-xC-yFL"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zwY-BD-mrT" userLabel="Separator">
-                            <rect key="frame" x="0.0" y="81" width="375" height="1"/>
+                            <rect key="frame" x="0.0" y="61" width="375" height="1"/>
                             <color key="backgroundColor" name="separator"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="yR3-Mu-ITa"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K6h-72-g8O" userLabel="Spacing">
-                            <rect key="frame" x="0.0" y="82" width="375" height="20"/>
-                            <color key="backgroundColor" name="background"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="20" id="4c4-9Z-9Id"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KeF-x1-ey1" customClass="CreateStoryMusicEnterView" customModule="Billo" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="102" width="375" height="60"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KeF-x1-ey1" customClass="SnackBarHeaderTwoLineView" customModule="Billo" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="62" width="375" height="60"/>
                             <color key="backgroundColor" name="primaryBackground"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="60" id="kfr-4b-8RU"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wgk-11-w4V" userLabel="Separator">
-                            <rect key="frame" x="0.0" y="162" width="375" height="1"/>
+                            <rect key="frame" x="0.0" y="122" width="375" height="1"/>
                             <color key="backgroundColor" name="separator"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="YZe-3p-5jR"/>
@@ -80,7 +65,7 @@
                     </subviews>
                 </stackView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5I-Px-86y">
-                    <rect key="frame" x="15" y="185" width="345" height="14.5"/>
+                    <rect key="frame" x="15" y="145" width="345" height="14.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -96,7 +81,7 @@
                     </connections>
                 </button>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="7aQ-Nm-zL9">
-                    <rect key="frame" x="0.0" y="211.5" width="375" height="390.5"/>
+                    <rect key="frame" x="0.0" y="171.5" width="375" height="430.5"/>
                     <color key="backgroundColor" name="primaryBackground"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Gg7-tH-F2s">
                         <size key="itemSize" width="50" height="50"/>
@@ -127,17 +112,11 @@
         </view>
     </objects>
     <resources>
-        <namedColor name="background">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="separator">
             <color red="0.92199999094009399" green="0.92500001192092896" blue="0.92500001192092896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

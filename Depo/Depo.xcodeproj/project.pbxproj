@@ -1106,6 +1106,10 @@
 		52A5E00B2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
 		52A5E00C2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
 		52A5E00D2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
+		52A5E014291A465D00670B0C /* SnackBarHeaderTwoLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */; };
+		52A5E015291A465D00670B0C /* SnackBarHeaderTwoLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */; };
+		52A5E016291A465D00670B0C /* SnackBarHeaderTwoLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */; };
+		52A5E017291A465D00670B0C /* SnackBarHeaderTwoLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */; };
 		52B9004F28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
 		52BF679628FFE05300D8D4E6 /* PasswordValidationSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF679528FFE05300D8D4E6 /* PasswordValidationSetView.swift */; };
 		52BF679728FFE05300D8D4E6 /* PasswordValidationSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF679528FFE05300D8D4E6 /* PasswordValidationSetView.swift */; };
@@ -10080,6 +10084,7 @@
 		51B73FE0148359D56DBAC42C /* SplashViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashViewOutput.swift; sourceTree = "<group>"; };
 		522A5BBD8B55E5DF0DE0472B /* Pods-Billo.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billo.enterprise.xcconfig"; path = "Target Support Files/Pods-Billo/Pods-Billo.enterprise.xcconfig"; sourceTree = "<group>"; };
 		52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStorySelectionView.swift; sourceTree = "<group>"; };
+		52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBarHeaderTwoLineView.swift; sourceTree = "<group>"; };
 		52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackagesBannerBuyPremiumView.swift; sourceTree = "<group>"; };
 		52BF679528FFE05300D8D4E6 /* PasswordValidationSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidationSetView.swift; sourceTree = "<group>"; };
 		536B87BE9C6EA2601A4F42F3 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
@@ -13274,6 +13279,7 @@
 				9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */,
 				8930DDAC22C8C8C8003CE856 /* CreateStoryViewController.xib */,
 				8930DDAB22C8C8C8003CE856 /* CreateStoryViewController.swift */,
+				52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */,
 			);
 			path = CreateStory;
 			sourceTree = "<group>";
@@ -25790,6 +25796,7 @@
 				8C0E8DBE1FDEBDFF00789C91 /* RegistrationRouter.swift in Sources */,
 				0762029A269B842C00D4FB2C /* OverlayStickerSelectorDataSource.swift in Sources */,
 				F0E0A4802897F38500528B39 /* ForYouEmptyCellView.swift in Sources */,
+				52A5E014291A465D00670B0C /* SnackBarHeaderTwoLineView.swift in Sources */,
 				8C0E8DBF1FDEBDFF00789C91 /* SpringLabel.swift in Sources */,
 				8C0E8DC01FDEBDFF00789C91 /* BottomSelectionTabBarViewInput.swift in Sources */,
 				4BE126902304351900BFE06F /* ServerErrors.swift in Sources */,
@@ -28854,6 +28861,7 @@
 				4BAF259322F8475100979F19 /* SegmentedControl.swift in Sources */,
 				CE784C2E22A685FB00662219 /* LBAlbumLikePreviewSliderRouterInput.swift in Sources */,
 				CE784C2F22A685FB00662219 /* PrepareQuickScroll.swift in Sources */,
+				52A5E016291A465D00670B0C /* SnackBarHeaderTwoLineView.swift in Sources */,
 				73E6715823EBF789000C4AF7 /* PrivacyPolicyService.swift in Sources */,
 				9809317623952CAC00ECFEF8 /* SmartAlbumsDataStorage.swift in Sources */,
 				CE784C3022A685FB00662219 /* LBAlbumLikePreviewSliderRouter.swift in Sources */,
@@ -29592,6 +29600,7 @@
 				CF8B651423CBC9D70021B021 /* SpotifyStatusView.swift in Sources */,
 				CF8B651523CBC9D70021B021 /* FaceImagePhotosRouterInput.swift in Sources */,
 				F00610CE2899324700911048 /* ForYouSections.swift in Sources */,
+				52A5E015291A465D00670B0C /* SnackBarHeaderTwoLineView.swift in Sources */,
 				98B047AC259314740011DAEB /* Configuration.m in Sources */,
 				B527CF8D2420C66E00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift in Sources */,
 				CF8B651723CBC9D70021B021 /* ResponseResult.swift in Sources */,
@@ -32144,6 +32153,7 @@
 				CF8B6F2323CBCA280021B021 /* SetSecretQuestionErrors.swift in Sources */,
 				CF8B6F2423CBCA280021B021 /* SplashPresenter.swift in Sources */,
 				0305A2F023D5C154004D1EC7 /* TrashBinViewController.swift in Sources */,
+				52A5E017291A465D00670B0C /* SnackBarHeaderTwoLineView.swift in Sources */,
 				CF8B6F2523CBCA280021B021 /* GeneralFilesFiltration.swift in Sources */,
 				CF8B6F2623CBCA280021B021 /* SearchViewInteractorOutput.swift in Sources */,
 				CF8B6F2723CBCA280021B021 /* ThresholdBlockService.swift in Sources */,

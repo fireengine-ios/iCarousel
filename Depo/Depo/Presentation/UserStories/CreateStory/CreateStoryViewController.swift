@@ -11,36 +11,19 @@ import UIKit
 final class CreateStoryViewController: BaseViewController {
 
     //MARK: IBOutlet
-    @IBOutlet private weak var storyNameView: ProfileTextEnterView! {
+    @IBOutlet private weak var storyNameView: SnackBarHeaderTwoLineView! {
         willSet {
             newValue.titleLabel.text = TextConstants.createStoryNameTitle
-            newValue.titleLabel.textColor = AppColor.label.color
-            newValue.titleLabel.font = .appFont(.medium, size: 14)
-            
-            newValue.textField.textColor = ColorConstants.textGrayColor
-            newValue.textField.font = .appFont(.medium, size: 14)
-            
             newValue.textField.returnKeyType = .done
             newValue.textField.delegate = self
-            
-            newValue.textField.layer.borderWidth = 0
-            newValue.textField.setLeftPaddingPoints(20)
         }
     }
     
-    @IBOutlet private weak var musicSelectView: CreateStoryMusicEnterView! {
+    @IBOutlet private weak var musicSelectView: SnackBarHeaderTwoLineView! {
         willSet {
             newValue.titleLabel.text = TextConstants.music
-            newValue.titleLabel.textColor = AppColor.label.color
-            newValue.titleLabel.font = .appFont(.medium, size: 14)
-            
-            newValue.textField.textColor = ColorConstants.textGrayColor
-            newValue.textField.font = .appFont(.medium, size: 14)
-            
             newValue.textField.isUserInteractionEnabled = false
-            
-            newValue.textField.layer.borderWidth = 0
-            newValue.textField.setLeftPaddingPoints(20)
+            newValue.arrowImageView.isHidden = false
         }
     }
     
