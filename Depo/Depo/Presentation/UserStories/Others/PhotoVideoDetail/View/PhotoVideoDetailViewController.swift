@@ -384,10 +384,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
             guard let detailCell = cell as? PhotoVideoDetailCell else { continue }
             let spacing: CGFloat
             if isFullScreen {
-                spacing = view.safeAreaInsets.bottom + 16
+                spacing = view.safeAreaInsets.bottom + 20
             } else {
                 let minY = viewForBottomBar.convert(editingTabBar.view.frame, to: view).minY
-                spacing = (view.frame.maxY - minY) + 16
+                spacing = (view.frame.maxY - minY) + 50
             }
 
             detailCell.setRecognizeTextButtonBottomSpacing(spacing)
