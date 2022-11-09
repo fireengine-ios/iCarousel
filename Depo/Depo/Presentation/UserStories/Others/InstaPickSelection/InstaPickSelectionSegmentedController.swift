@@ -52,7 +52,6 @@ final class InstaPickSelectionSegmentedController: BaseViewController, ErrorPres
     private lazy var albumsVC = InstapickAlbumSelectionViewController(title: TextConstants.albumsTitle, delegate: self)
     
     private func setup() {
-        vcView.segmentedControl.addTarget(self, action: #selector(controllerDidChange), for: .valueChanged)
         vcView.analyzeButton.addTarget(self, action: #selector(analyzeWithInstapick), for: .touchUpInside)
     }
     
@@ -127,11 +126,15 @@ final class InstaPickSelectionSegmentedController: BaseViewController, ErrorPres
         assert(!segmentedViewControllers.isEmpty, "should not be empty")
         
         for (index, controller) in segmentedViewControllers.enumerated() {
-            vcView.segmentedControl.insertSegment(withTitle: controller.title, at: index, animated: false)
+            vcView.segmentedControl.insertSegment(withTitle: controller.title ?? "", tag: index)
         }
         
-        /// selectedSegmentIndex == -1 after removeAllSegments
-        vcView.segmentedControl.selectedSegmentIndex = 0
+        vcView.segmentedControl.renderSegmentButtons(segment: 0)
+        vcView.segmentedControl.action = controllerDidChange
+    }
+    
+    private func controllerDidChange(_ tag: Int) {
+        selectController(at: tag)
     }
     
     @objc private func closeSelf() {
@@ -172,10 +175,6 @@ final class InstaPickSelectionSegmentedController: BaseViewController, ErrorPres
             }
         }
     }
-
-    @objc private func controllerDidChange(_ sender: UISegmentedControl) {
-        selectController(at: sender.selectedSegmentIndex)
-    }
     
     private func selectController(at selectedIndex: Int) {
         guard selectedIndex < segmentedViewControllers.count else {
@@ -185,19 +184,6 @@ final class InstaPickSelectionSegmentedController: BaseViewController, ErrorPres
         
         children.forEach { $0.removeFromParentVC() }
         add(childController: segmentedViewControllers[selectedIndex])
-        updateLeftBarButtonItem(selectedIndex: selectedIndex)
-    }
-    
-    private func updateLeftBarButtonItem(selectedIndex: Int) {
-        /// optimized for reading, not performance
-        let isAlbumsTabOpened = (selectedIndex == albumsTabIndex)
-        let isAnyAlbumOpened = (segmentedViewControllers[albumsTabIndex] != albumsVC)
-        
-//        if isAlbumsTabOpened, isAnyAlbumOpened {
-//            navigationItem.leftBarButtonItem = closeAlbumButton
-//        } else {
-//            navigationItem.leftBarButtonItem = closeSelfButton
-//        }
     }
     
     private func add(childController: UIViewController) {

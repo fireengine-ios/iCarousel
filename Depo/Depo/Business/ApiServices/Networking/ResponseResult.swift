@@ -10,6 +10,7 @@ import Foundation
 
 public typealias VoidHandler = () -> Void
 public typealias BoolHandler = (Bool) -> Void
+public typealias IntHandler = (Int) -> Void
 public typealias ValueHandler<T> = (T) -> Void
 typealias ResponseString = (ResponseResult<String>) -> Void
 typealias ResponseVoid = (ResponseResult<Void>) -> Void
