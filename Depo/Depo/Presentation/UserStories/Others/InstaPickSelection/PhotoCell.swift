@@ -9,7 +9,7 @@ final class PhotoCell: UICollectionViewCell {
         static let selectionBorderWidth: CGFloat = 3
         
         static let checkmarkFillImage = Image.iconSelectFills.image
-        static let checkmarkEmptyImage = UIImage()
+        static let checkmarkEmptyImage = Image.iconSelectEmpty.image
     }
     
     private let imageView: UIImageView = {
