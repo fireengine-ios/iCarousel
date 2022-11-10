@@ -126,7 +126,7 @@ final class InstaPickSelectionSegmentedController: BaseViewController, ErrorPres
         assert(!segmentedViewControllers.isEmpty, "should not be empty")
         
         for (index, controller) in segmentedViewControllers.enumerated() {
-            vcView.segmentedControl.insertSegment(withTitle: controller.title ?? "", tag: index)
+            vcView.segmentedControl.insertSegment(withTitle: controller.title ?? "", tag: index, width: 112)
         }
         
         vcView.segmentedControl.renderSegmentButtons(segment: 0)

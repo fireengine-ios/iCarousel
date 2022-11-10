@@ -71,6 +71,7 @@ final class InstaPickSelectionSegmentedView: UIView {
     }
     
     private func setup() {
+        backgroundColor = AppColor.primaryBackground.color
         topView.backgroundColor = AppColor.primaryBackground.color
         containerView.backgroundColor = AppColor.primaryBackground.color
         setupLayout()
@@ -88,7 +89,7 @@ final class InstaPickSelectionSegmentedView: UIView {
         view.addSubview(analyzeButton)
         view.addSubview(analyzesLeftLabel)
         
-        let edgeOffset: CGFloat = Device.isIpad ? 40 : 0
+        let edgeOffset: CGFloat = Device.isIpad ? 40 : 12
         let transparentGradientViewHeight = NumericConstants.instaPickSelectionSegmentedTransparentGradientViewHeight
         
         topView.translatesAutoresizingMaskIntoConstraints = false
@@ -98,11 +99,10 @@ final class InstaPickSelectionSegmentedView: UIView {
         topView.heightAnchor.constraint(equalToConstant: 56).activate()
         
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        segmentedControl.leadingAnchor
-            .constraint(equalTo: topView.leadingAnchor).activate()
-        segmentedControl.trailingAnchor
-            .constraint(equalTo: topView.trailingAnchor).activate()
+        segmentedControl.leadingAnchor.constraint(equalTo: topView.leadingAnchor).activate()
+        segmentedControl.trailingAnchor.constraint(equalTo: topView.trailingAnchor).activate()
         segmentedControl.centerYAnchor.constraint(equalTo: topView.centerYAnchor).activate()
+        segmentedControl.heightAnchor.constraint(equalToConstant: 40).activate()
         
         containerView.translatesAutoresizingMaskIntoConstraints = false
         

@@ -40,18 +40,17 @@ class CustomSegmentedView: UIView {
     private func setupStackView() {
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
+        stackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
     
-    func insertSegment(withTitle title: String, tag: Int) {
+    func insertSegment(withTitle title: String, tag: Int, width: CGFloat) {
         let segmentButton = getSegmentButton(withTitle: title, tag: tag)
         let shadowView = getShadowView()
         shadowView.translatesAutoresizingMaskIntoConstraints = false
-        shadowView.widthAnchor.constraint(equalToConstant: 112).activate()
-        shadowView.heightAnchor.constraint(equalToConstant: 40).activate()
+        shadowView.widthAnchor.constraint(equalToConstant: width).activate()
         
         shadowView.addSubview(segmentButton)
         segmentButton.translatesAutoresizingMaskIntoConstraints = false
