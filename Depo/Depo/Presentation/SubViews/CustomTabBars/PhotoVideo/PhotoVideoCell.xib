@@ -51,7 +51,7 @@
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="iGO-lQ-5oj"/>
                         </constraints>
                     </imageView>
-                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favoriteStar" translatesAutoresizingMaskIntoConstraints="NO" id="2HJ-NZ-h8K">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconFavoriteStar" translatesAutoresizingMaskIntoConstraints="NO" id="2HJ-NZ-h8K">
                         <rect key="frame" x="4" y="4" width="13" height="12"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="13" id="6rb-Hw-lMR"/>
@@ -127,6 +127,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="favoriteStar" width="13" height="12"/>
+        <image name="iconFavoriteStar" width="28" height="28"/>
     </resources>
 </document>

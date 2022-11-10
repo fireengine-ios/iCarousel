@@ -31,7 +31,7 @@ final class PhotoCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.isHidden = true
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: "favoriteStar")
+        imageView.image = Image.iconFavoriteStar.image
         return imageView
     }()
     
