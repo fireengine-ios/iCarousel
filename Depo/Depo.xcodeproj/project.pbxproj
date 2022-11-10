@@ -13299,7 +13299,6 @@
 				9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */,
 				8930DDAC22C8C8C8003CE856 /* CreateStoryViewController.xib */,
 				8930DDAB22C8C8C8003CE856 /* CreateStoryViewController.swift */,
-				52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */,
 			);
 			path = CreateStory;
 			sourceTree = "<group>";
@@ -14397,6 +14396,14 @@
 				52A5E021291C17F900670B0C /* CustomSegmentedView.swift */,
 			);
 			path = CustomSegmentedView;
+			sourceTree = "<group>";
+		};
+		52A5E026291CD47000670B0C /* SnackBarHeaderTwoLineView */ = {
+			isa = PBXGroup;
+			children = (
+				52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */,
+			);
+			path = SnackBarHeaderTwoLineView;
 			sourceTree = "<group>";
 		};
 		5525BBEDE21BEBBAE72FED00 /* Router */ = {
@@ -19036,6 +19043,7 @@
 		C206234150DD1B9E1424D61C /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				52A5E026291CD47000670B0C /* SnackBarHeaderTwoLineView */,
 				52A5E01D291C17E200670B0C /* CustomSegmentedView */,
 				F0743DC428B4C60B00CC1F24 /* BottomInfoBanner */,
 				F013FA8428059047004B9BB8 /* SecurityInfoWarningPopup */,
