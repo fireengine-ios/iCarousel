@@ -16,32 +16,35 @@ class PaycellCampaignViewController: BaseViewController {
     private let service = PaycellCampaignService()
     private let router = RouterVC()
     private var acceptedCollectionViewNumberOfItem = 0
-    private var accountBGColors = [UIColor]()
     private var invitationRegisteredResponse: InvitationRegisteredResponse?
+    private var campagingDetail: PaycellDetailResponse?
+    private var isDetailShown = false
     
     //MARK: -IBOutlet
     @IBOutlet private weak var copyLinkView: UIView! {
         willSet {
-            newValue.layer.borderWidth = 1
-            newValue.layer.borderColor = AppColor.darkBlueAndTealish.color.cgColor
+            newValue.backgroundColor = AppColor.campaignBackground.color
+        }
+    }
+    
+    @IBOutlet private weak var linkBGView: UIView! {
+        willSet {
+            newValue.addRoundedShadows(cornerRadius: 15, shadowColor: AppColor.drawerShadow.cgColor, opacity: 0.3, radius: 4)
+            newValue.backgroundColor = AppColor.secondaryBackground.color
         }
     }
     
     @IBOutlet private weak var campaignDetailLabel: UILabel! {
         willSet {
             newValue.text = localized(.paycellCampaignDetailTitle)
-            newValue.textColor = .lrBrownishGrey
-            newValue.font = .TurkcellSaturaFont(size: 18)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.medium, size: 14)
         }
     }
     
-    @IBOutlet private weak var shareLinkButton: UIButton! {
+    @IBOutlet private weak var shareLinkButton: DarkBlueButton! {
         willSet {
             newValue.setTitle(TextConstants.invitationShare, for: .normal)
-            newValue.setBackgroundColor(AppColor.darkBlueAndTealish.color ?? ColorConstants.navy, for: .normal)
-            newValue.setBackgroundColor(AppColor.darkBlueAndTealish.color ?? ColorConstants.navy, for: .highlighted)
-            newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.setTitleColor(UIColor.white, for: .highlighted)
         }
     }
     
@@ -51,50 +54,51 @@ class PaycellCampaignViewController: BaseViewController {
         }
     }
     
-    @IBOutlet private weak var createLinkButton: UIButton! {
+    @IBOutlet private weak var createLinkButton: WhiteButton! {
         willSet {
-            newValue.setTitleColor(AppColor.navyAndWhite.color, for: .normal)
-            newValue.setTitle(localized(.paycellCreateLink), for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
             newValue.isHidden = true
+            newValue.setTitle(localized(.paycellCreateLink), for: .normal)
         }
     }
     
     @IBOutlet private weak var linkLabel: UILabel! {
         willSet {
             newValue.isHidden = true
+            newValue.textColor = AppColor.label.color
+            newValue.font = UIFont.appFont(.bold, size: 10)
         }
     }
     
     @IBOutlet private weak var linkTitleLabel: UILabel! {
         willSet {
             newValue.text = localized(.paycellLinkTitle)
-            newValue.font = UIFont.TurkcellSaturaFont(size: 18)
-            newValue.textColor = .lrBrownishGrey
+            newValue.textColor = AppColor.label.color
+            newValue.font = UIFont.appFont(.medium, size: 14)
         }
     }
     
     @IBOutlet private weak var earnedMoneyTitle: UILabel! {
         willSet {
             newValue.text = localized(.paycellEarnedTitle)
-            newValue.textColor = .lrBrownishGrey
-            newValue.font = UIFont.TurkcellSaturaFont(size: 18)
+            newValue.textColor = AppColor.campaignDarkLabel.color
+            newValue.font = UIFont.appFont(.medium, size: 14)
         }
     }
     
     @IBOutlet private weak var earnedMoneyView: UIView! {
         willSet {
-            newValue.backgroundColor = .lrTealishTwo
-            newValue.clipsToBounds = true
+            newValue.layer.cornerRadius = 8
+            newValue.layer.borderWidth = 1
+            newValue.layer.borderColor = AppColor.campaignBorder.cgColor
         }
     }
     
     @IBOutlet private weak var earnedMoneyLabel: UILabel! {
         willSet {
-            newValue.textColor = .white
+            newValue.textColor = AppColor.campaignLightLabel.color
             newValue.numberOfLines = 2
             newValue.text = "0 TL"
-            newValue.font = .TurkcellSaturaBolFont(size: 18)
+            newValue.font = .appFont(.bold, size: 14)
             newValue.minimumScaleFactor = 0.5
             newValue.lineBreakMode = .byWordWrapping
         }
@@ -102,10 +106,10 @@ class PaycellCampaignViewController: BaseViewController {
     
     @IBOutlet private weak var earnedMoneySubtitle: UILabel! {
         willSet {
-            newValue.textColor = .white
+            newValue.textColor = AppColor.label.color
             newValue.numberOfLines = 2
             newValue.text = localized(.paycellEarnedSubtitle)
-            newValue.font = .TurkcellSaturaFont(size: 14)
+            newValue.font = .appFont(.regular, size: 12)
             newValue.minimumScaleFactor = 0.5
             newValue.lineBreakMode = .byWordWrapping
         }
@@ -124,7 +128,35 @@ class PaycellCampaignViewController: BaseViewController {
         }
     }
     
-    @IBOutlet private weak var acceptedInvitationTitle: UILabel!
+    @IBOutlet private weak var acceptedInvitationTitle: UILabel! {
+        willSet {
+            newValue.textColor = AppColor.campaignDarkLabel.color
+            newValue.font = UIFont.appFont(.medium, size: 14)
+        }
+    }
+    
+    @IBOutlet private weak var earnedMoneyBGView: UIView! {
+        willSet {
+            newValue.addRoundedShadows(cornerRadius: 15, shadowColor: AppColor.drawerShadow.cgColor, opacity: 0.3, radius: 4)
+            newValue.backgroundColor = AppColor.secondaryBackground.color
+        }
+    }
+    
+    @IBOutlet private weak var campaignDetailView: UIStackView! {
+        willSet {
+            newValue.addRoundedShadows(cornerRadius: 15, shadowColor: AppColor.drawerShadow.cgColor, opacity: 0.3, radius: 4)
+            newValue.backgroundColor = AppColor.secondaryBackground.color
+        }
+    }
+    
+    @IBOutlet private weak var detailDescriptionLabel: UILabel! {
+        willSet {
+            newValue.isHidden = true
+            newValue.numberOfLines = 0
+        }
+    }
+    
+    @IBOutlet private weak var showCampaignDetailButton: UIButton!
     @IBOutlet private weak var collectionView: UICollectionView!
     
     //MARK: -Lifecycle
@@ -156,11 +188,23 @@ class PaycellCampaignViewController: BaseViewController {
     }
     
     @IBAction func onCreateLink(_ sender: UIButton) {
-        getPaycellDetail(for: .approval)
+        guard let campagingDetail = campagingDetail else {
+            return
+        }
+
+        self.showCampaignDetail(with: campagingDetail.value)
     }
     
+    
     @IBAction func onCampaignDetailButton(_ sender: UIButton) {
-        getPaycellDetail(for: .detail)
+        isDetailShown = !isDetailShown
+
+        UIView.transition(with: detailDescriptionLabel, duration: 0.4,
+                          options: .transitionCrossDissolve,
+                          animations: {
+            self.showCampaignDetailButton.transform = self.showCampaignDetailButton.transform.rotated(by: .pi)
+            self.detailDescriptionLabel.isHidden = !self.isDetailShown
+        })
     }
     
     @IBAction func onCopyLink(_ sender: UIButton) {
@@ -176,9 +220,11 @@ class PaycellCampaignViewController: BaseViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        shareLinkButton.setBackgroundColor(AppColor.darkBlueAndTealish.color , for: .normal)
-        shareLinkButton.setBackgroundColor(AppColor.darkBlueAndTealish.color , for: .highlighted)
-        copyLinkView.layer.borderColor = AppColor.darkBlueAndTealish.color.cgColor
+        earnedMoneyView.layer.borderColor = AppColor.campaignBorder.cgColor
+        
+        guard let campagingDetail = campagingDetail else { return }
+        self.showCampaignDetail(with: campagingDetail.value)
+
     }
     
     //MARK: -Helpers
@@ -191,8 +237,8 @@ class PaycellCampaignViewController: BaseViewController {
         }
     }
     
-    private func showCampaignDetail(with model: PaycellDetailModel, type: PaycellDetailType) {
-        let vc = router.paycellDetailPopup(with: model, type: type)
+    private func showCampaignDetail(with model: PaycellDetailModel) {
+        let vc = router.paycellDetailPopup(with: model, type: .approval)
         vc.successCallback = { [weak self] in
             self?.getPaycellLink()
         }
@@ -207,17 +253,6 @@ class PaycellCampaignViewController: BaseViewController {
         
         let formattedPrice = amount.formatted
         earnedMoneyLabel.text = "\(formattedPrice) TL"
-    }
-    
-    private func addGradient() {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.lrTealishTwo.cgColor, UIColor.lrGreyish.cgColor]
-        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
-        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-        gradientLayer.frame = self.earnedMoneyView.bounds
-        
-        earnedMoneyView.layer.insertSublayer(gradientLayer, at:0)
-        earnedMoneyView.layer.cornerRadius = earnedMoneyView.frame.height / 2
     }
     
     private func createAppLink(with deeplink: String) {
@@ -242,7 +277,6 @@ class PaycellCampaignViewController: BaseViewController {
     private func configureAcceptedPeople(response: InvitationRegisteredResponse) {
         self.invitationRegisteredResponse = response
         acceptedCollectionViewNumberOfItem = response.accounts.count
-        accountBGColors = AccountConstants.shared.generateBGColors(numberOfItems: response.accounts.count)
         acceptedInvitationTitle.text = String(format: localized(.paycellAcceptedFriends), response.totalAccount)
         collectionView.reloadData()
         seeAllButton.isHidden = response.accounts.count == 0
@@ -258,11 +292,16 @@ class PaycellCampaignViewController: BaseViewController {
         getPaycellLink()
         getPaycellGain()
         getAcceptedList()
+        getPaycellDetail()
     }
     
     private func configureUI() {
         setTitle(withString: localized(.paycellCampaignTitle))
-        addGradient()
+    }
+    
+    private func setupDetail(campaign: PaycellDetailResponse) {
+        let hexColor = AppColor.campaignContentLabel.color.toHexString()
+        detailDescriptionLabel.attributedText = campaign.value.content.convertHtmlToAttributedStringWithCSS(font: .appFont(.medium, size: 12), csscolor: hexColor, lineheight: 5, csstextalign: "left")
     }
 }
 
@@ -282,11 +321,11 @@ extension PaycellCampaignViewController {
         }
     }
     
-    private func getPaycellDetail(for type: PaycellDetailType) {
+    private func getPaycellDetail() {
         service.getPaycellDetail { [weak self] result in
             switch result {
             case .success(let response):
-                self?.showCampaignDetail(with: response.value, type: type)
+                self?.setupDetail(campaign: response)
             case .failed(let error):
                 UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
                 debugLog("Paycell detail response error = \(error.description)")
@@ -321,7 +360,7 @@ extension PaycellCampaignViewController {
 //UICollectionViewDelegate
 extension PaycellCampaignViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 55, height: 71)
+        return CGSize(width: 55, height: 100)
     }
 }
 
@@ -333,10 +372,9 @@ extension PaycellCampaignViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let invitationRegisteredAccount = self.invitationRegisteredResponse?.accounts[indexPath.item]
-        let bgColor = self.accountBGColors[indexPath.item]
 
         let cell = collectionView.dequeue(cell: InvitedPeopleCollectionViewCell.self, for: indexPath)
-        cell.configureCell(invitationRegisteredAccount: invitationRegisteredAccount!, bgColor: bgColor)
+        cell.configureCell(invitationRegisteredAccount: invitationRegisteredAccount!)
         return cell
     }
 }

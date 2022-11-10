@@ -911,14 +911,6 @@
 		3A0B422A266F7D8D00FD8F3C /* ChatbotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0B4221266F7D8C00FD8F3C /* ChatbotViewController.xib */; };
 		3A0B422C266F7D8D00FD8F3C /* ChatbotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0B4221266F7D8C00FD8F3C /* ChatbotViewController.xib */; };
 		3A0B422D266F7D8D00FD8F3C /* ChatbotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0B4221266F7D8C00FD8F3C /* ChatbotViewController.xib */; };
-		3A0CCF1E2642CA87002E811D /* InvitationCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0CCF1B2642CA87002E811D /* InvitationCollectionReusableView.swift */; };
-		3A0CCF1F2642CA87002E811D /* InvitationCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0CCF1B2642CA87002E811D /* InvitationCollectionReusableView.swift */; };
-		3A0CCF212642CA87002E811D /* InvitationCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0CCF1B2642CA87002E811D /* InvitationCollectionReusableView.swift */; };
-		3A0CCF222642CA87002E811D /* InvitationCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0CCF1B2642CA87002E811D /* InvitationCollectionReusableView.swift */; };
-		3A0CCF242642CA87002E811D /* InvitationCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0CCF1C2642CA87002E811D /* InvitationCollectionReusableView.xib */; };
-		3A0CCF252642CA87002E811D /* InvitationCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0CCF1C2642CA87002E811D /* InvitationCollectionReusableView.xib */; };
-		3A0CCF272642CA87002E811D /* InvitationCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0CCF1C2642CA87002E811D /* InvitationCollectionReusableView.xib */; };
-		3A0CCF282642CA87002E811D /* InvitationCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0CCF1C2642CA87002E811D /* InvitationCollectionReusableView.xib */; };
 		3A0CCF2D2642D20E002E811D /* InvitationGiftCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0CCF2A2642D20E002E811D /* InvitationGiftCollectionViewCell.swift */; };
 		3A0CCF2E2642D20E002E811D /* InvitationGiftCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0CCF2A2642D20E002E811D /* InvitationGiftCollectionViewCell.swift */; };
 		3A0CCF302642D20E002E811D /* InvitationGiftCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0CCF2A2642D20E002E811D /* InvitationGiftCollectionViewCell.swift */; };
@@ -9949,8 +9941,6 @@
 		3A0B420F266E040000FD8F3C /* InvitationParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationParameters.swift; sourceTree = "<group>"; };
 		3A0B4220266F7D8C00FD8F3C /* ChatbotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatbotViewController.swift; sourceTree = "<group>"; };
 		3A0B4221266F7D8C00FD8F3C /* ChatbotViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatbotViewController.xib; sourceTree = "<group>"; };
-		3A0CCF1B2642CA87002E811D /* InvitationCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCollectionReusableView.swift; sourceTree = "<group>"; };
-		3A0CCF1C2642CA87002E811D /* InvitationCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvitationCollectionReusableView.xib; sourceTree = "<group>"; };
 		3A0CCF2A2642D20E002E811D /* InvitationGiftCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationGiftCollectionViewCell.swift; sourceTree = "<group>"; };
 		3A0CCF2B2642D20E002E811D /* InvitationGiftCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvitationGiftCollectionViewCell.xib; sourceTree = "<group>"; };
 		3A134C412645476500CFC736 /* ScreenConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenConstants.swift; sourceTree = "<group>"; };
@@ -13608,8 +13598,6 @@
 		3A0CCF1A2642C892002E811D /* Headers */ = {
 			isa = PBXGroup;
 			children = (
-				3A0CCF1B2642CA87002E811D /* InvitationCollectionReusableView.swift */,
-				3A0CCF1C2642CA87002E811D /* InvitationCollectionReusableView.xib */,
 				3A134C5B264552F900CFC736 /* Cells */,
 			);
 			path = Headers;
@@ -22710,7 +22698,6 @@
 				8C0E90591FDEBDFF00789C91 /* UserInfoSubViewViewController.xib in Resources */,
 				98231A1724F3A1E700FD16E2 /* SelectionMenuController.xib in Resources */,
 				4A13DBE721A6FE6D002C3D16 /* PremiumInfoCard.xib in Resources */,
-				3A0CCF242642CA87002E811D /* InvitationCollectionReusableView.xib in Resources */,
 				984A515E21E88D64004525F5 /* InstapickAnalysisCell.xib in Resources */,
 				8C0E905A1FDEBDFF00789C91 /* PhotosOrderCollectionViewCell.xib in Resources */,
 				CE4851EE2018B029006B8854 /* FilterPhotoCard.xib in Resources */,
@@ -23007,7 +22994,6 @@
 				CF71472D24B597AA00D83E60 /* ContactSyncOperationResultController.xib in Resources */,
 				CE784D0922A685FB00662219 /* FilterPhotoCard.xib in Resources */,
 				730A998722D740130037ABA9 /* TwoFactorAuthenticationCell.xib in Resources */,
-				3A0CCF272642CA87002E811D /* InvitationCollectionReusableView.xib in Resources */,
 				CE784D0E22A685FB00662219 /* CollageCard.xib in Resources */,
 				89E51D6322CA2ECA007A7DBC /* CreateStoryPopUp.xib in Resources */,
 				CE784D1222A685FB00662219 /* DropDownTableViewCell.xib in Resources */,
@@ -23477,7 +23463,6 @@
 				CF8B699223CBC9D70021B021 /* SpotifyCancelImportPopup.xib in Resources */,
 				CF8B699323CBC9D70021B021 /* TurkcellSaturaMed.ttf in Resources */,
 				CF8B699423CBC9D70021B021 /* RegistrationScreen.xib in Resources */,
-				3A0CCF252642CA87002E811D /* InvitationCollectionReusableView.xib in Resources */,
 				CF8B699523CBC9D70021B021 /* EmailVerifiedPopUp.xib in Resources */,
 				CF8B699723CBC9D70021B021 /* ActivityTimelineTimeCell.xib in Resources */,
 				982319C424F3A1E700FD16E2 /* AdjustmentParameterSliderView.xib in Resources */,
@@ -23741,7 +23726,6 @@
 				CF8B707B23CBCA280021B021 /* InstapickAnalysisCell.xib in Resources */,
 				CF8B707D23CBCA280021B021 /* HomeViewTopView.xib in Resources */,
 				CF8B707E23CBCA280021B021 /* TermsCheckboxTextView.xib in Resources */,
-				3A0CCF282642CA87002E811D /* InvitationCollectionReusableView.xib in Resources */,
 				CF8B707F23CBCA280021B021 /* LoginViewController.xib in Resources */,
 				CF8B708223CBCA280021B021 /* LandingCollectionViewCell.xib in Resources */,
 				CF7146C224B597A900D83E60 /* BackUpContactsCard.xib in Resources */,
@@ -26544,7 +26528,6 @@
 				8C0E8F481FDEBDFF00789C91 /* FileInfoViewOutput.swift in Sources */,
 				8CD84C471FDEC68A005CD3B8 /* UploadFilesSelectionDataSource.swift in Sources */,
 				98C19F502485097800527D76 /* ContactSyncApiService.swift in Sources */,
-				3A0CCF1E2642CA87002E811D /* InvitationCollectionReusableView.swift in Sources */,
 				984A512C21E72C18004525F5 /* AnalyzeHistoryViewController.swift in Sources */,
 				8C0E8F491FDEBDFF00789C91 /* FileInfoViewController.swift in Sources */,
 				98B047DB259314750011DAEB /* Contact.m in Sources */,
@@ -27724,7 +27707,6 @@
 				CE78492522A685FB00662219 /* FolderSelectionCollectionViewCell.swift in Sources */,
 				730F8AB723CDA43D00798B61 /* UIView + CALayerBorder.swift in Sources */,
 				CE78492622A685FB00662219 /* FreeAppSpace.swift in Sources */,
-				3A0CCF212642CA87002E811D /* InvitationCollectionReusableView.swift in Sources */,
 				CE78492722A685FB00662219 /* UploadFromLifeBoxInitializer.swift in Sources */,
 				076BD1B827BC0958004609E3 /* MapSearchPresenter.swift in Sources */,
 				CE78492822A685FB00662219 /* (null) in Sources */,
@@ -29936,7 +29918,6 @@
 				CF8B660923CBC9D70021B021 /* ForgotPasswordInteractorInput.swift in Sources */,
 				CF8B660A23CBC9D70021B021 /* ForgotPasswordInteractorOutput.swift in Sources */,
 				98B04B27259316FF0011DAEB /* PlusMenuItemView.swift in Sources */,
-				3A0CCF1F2642CA87002E811D /* InvitationCollectionReusableView.swift in Sources */,
 				CF8B660B23CBC9D70021B021 /* InstaPickProgressPopup.swift in Sources */,
 				CF8B660C23CBC9D70021B021 /* AutoSyncViewOutput.swift in Sources */,
 				CF8B660D23CBC9D70021B021 /* CreateStoryPreviewModuleInput.swift in Sources */,
@@ -31252,7 +31233,6 @@
 				CF8B6C8C23CBCA280021B021 /* DataStorage.swift in Sources */,
 				CF8B6C8D23CBCA280021B021 /* CALayer+Animation.swift in Sources */,
 				CF8B6C8E23CBCA280021B021 /* FaceImageAddNameRouter.swift in Sources */,
-				3A0CCF222642CA87002E811D /* InvitationCollectionReusableView.swift in Sources */,
 				076BD1B927BC0958004609E3 /* MapSearchPresenter.swift in Sources */,
 				CF8B6C8F23CBCA280021B021 /* BaseUserInputCellView.swift in Sources */,
 				CF8B6C9023CBCA280021B021 /* CredsUpdateCheckPopUp.swift in Sources */,
