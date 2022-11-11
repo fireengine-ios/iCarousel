@@ -13,7 +13,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     @IBOutlet private var designer: AnalyzeHistoryDesigner!
     @IBOutlet private var displayManager: AnalyzeHistoryDisplayManager!
     @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet private weak var newAnalysisButton: BlueButtonWithMediumWhiteText!
+    @IBOutlet private weak var newAnalysisButton: DarkBlueButton!
     @IBOutlet private weak var newAnalysisView: UIView!
     
     private lazy var activityManager = ActivityIndicatorManager()
