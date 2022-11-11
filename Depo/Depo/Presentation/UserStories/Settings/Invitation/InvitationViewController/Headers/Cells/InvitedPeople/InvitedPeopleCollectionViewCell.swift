@@ -10,18 +10,26 @@ import UIKit
 
 class InvitedPeopleCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var profileShortCutLabel: UILabel!
-    @IBOutlet weak var profileNameLabel: UILabel!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    @IBOutlet weak var profileImageView: UIImageView! {
+        willSet {
+            newValue.backgroundColor = AppColor.campaignBackground.color
+        }
     }
-
-    func configureCell(invitationRegisteredAccount: InvitationRegisteredAccount, bgColor: UIColor) {
-        profileImageView.backgroundColor = bgColor
-
+    @IBOutlet weak var profileShortCutLabel: UILabel! {
+        willSet {
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.medium, size: 14)
+        }
+    }
+    
+    @IBOutlet weak var profileNameLabel: UILabel! {
+        willSet {
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 12)
+        }
+    }
+    
+    func configureCell(invitationRegisteredAccount: InvitationRegisteredAccount) {
         if let name = invitationRegisteredAccount.name, name.count > 0 {
             profileShortCutLabel.text = AccountConstants.shared.dotTextBy(name: name)
             profileNameLabel.text = name
