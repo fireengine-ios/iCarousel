@@ -10,18 +10,27 @@ import UIKit
 
 class AcceptedPeopleCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var shortNameBGView: UIView!
-    @IBOutlet weak var shortNameLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var shortNameBGView: UIView! {
+        willSet {
+            newValue.backgroundColor = AppColor.campaignBackground.color
+        }
+    }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    @IBOutlet weak var shortNameLabel: UILabel! {
+        willSet {
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.medium, size: 14)
+        }
+    }
+    
+    @IBOutlet weak var nameLabel: UILabel! {
+        willSet {
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 12)
+        }
     }
 
-    func configureCell(invitationRegisteredAccount: InvitationRegisteredAccount, bgColor: UIColor) {
-        shortNameBGView.backgroundColor = bgColor
-
+    func configureCell(invitationRegisteredAccount: InvitationRegisteredAccount) {
         if let name = invitationRegisteredAccount.name, name.count > 0 {
             shortNameLabel.text = AccountConstants.shared.dotTextBy(name: name)
             nameLabel.text = name

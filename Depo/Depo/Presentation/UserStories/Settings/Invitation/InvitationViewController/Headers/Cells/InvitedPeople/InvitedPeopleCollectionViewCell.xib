@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -39,10 +39,7 @@
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H2U-ni-oWI">
-                        <rect key="frame" x="2" y="49" width="51" height="23"/>
-                        <constraints>
-                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="23" id="p9d-Sx-0ZR"/>
-                        </constraints>
+                        <rect key="frame" x="2" y="49" width="51" height="22"/>
                         <string key="text">n********
 @gmail.com</string>
                         <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="10"/>
@@ -66,6 +63,7 @@
                 <constraint firstAttribute="trailing" secondItem="H2U-ni-oWI" secondAttribute="trailing" constant="2" id="0UI-QB-66L"/>
                 <constraint firstItem="PaG-P3-1LP" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="A3f-Vc-plf"/>
                 <constraint firstItem="PaG-P3-1LP" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="FzQ-oe-I95"/>
+                <constraint firstAttribute="bottom" secondItem="H2U-ni-oWI" secondAttribute="bottom" id="GT7-VI-C95"/>
                 <constraint firstItem="H2U-ni-oWI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="2" id="ZPR-7k-i4E"/>
                 <constraint firstItem="rmb-ZD-1db" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="dnS-Ky-GAS"/>
                 <constraint firstItem="rmb-ZD-1db" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="12" id="gga-xk-X7v"/>

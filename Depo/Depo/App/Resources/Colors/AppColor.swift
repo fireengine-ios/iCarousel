@@ -119,6 +119,11 @@ enum AppColor {
     case settingsBackground
     case passcodeTint
     case settingsButtonNormal
+    case campaignBackground
+    case campaignDarkLabel
+    case campaignLightLabel
+    case campaignBorder
+    case campaignContentLabel
     
     //MARK: Landing
     case landingGradientFinish
