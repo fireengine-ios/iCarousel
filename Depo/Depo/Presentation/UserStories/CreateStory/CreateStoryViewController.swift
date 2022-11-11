@@ -11,30 +11,19 @@ import UIKit
 final class CreateStoryViewController: BaseViewController {
 
     //MARK: IBOutlet
-    @IBOutlet private weak var storyNameView: ProfileTextEnterView! {
+    @IBOutlet private weak var storyNameView: SnackBarHeaderTwoLineView! {
         willSet {
             newValue.titleLabel.text = TextConstants.createStoryNameTitle
-            newValue.titleLabel.textColor = ColorConstants.grayTabBarButtonsColor
-            newValue.titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
-            
-            newValue.textField.textColor = ColorConstants.textGrayColor
-            newValue.textField.font = UIFont.TurkcellSaturaBolFont(size: 21)
-            
             newValue.textField.returnKeyType = .done
             newValue.textField.delegate = self
         }
     }
     
-    @IBOutlet private weak var musicSelectView: CreateStoryMusicEnterView! {
+    @IBOutlet private weak var musicSelectView: SnackBarHeaderTwoLineView! {
         willSet {
             newValue.titleLabel.text = TextConstants.music
-            newValue.titleLabel.textColor = ColorConstants.grayTabBarButtonsColor
-            newValue.titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
-            
-            newValue.textField.textColor = ColorConstants.textGrayColor
-            newValue.textField.font = UIFont.TurkcellSaturaBolFont(size: 21)
-            
             newValue.textField.isUserInteractionEnabled = false
+            newValue.arrowImageView.isHidden = false
         }
     }
     
@@ -42,19 +31,22 @@ final class CreateStoryViewController: BaseViewController {
         willSet {
             let text = String(format: TextConstants.createStoryPressAndHoldDescription, TextConstants.createStoryPressAndHold)
             let attributes: [NSAttributedString.Key : Any] = [
-                .font : UIFont.TurkcellSaturaMedFont(size: 18),
-                .foregroundColor : ColorConstants.blueGrey
+                .font : UIFont.appFont(.medium, size: 12),
+                .foregroundColor : AppColor.label.color
             ]
             
             let attributedString = NSMutableAttributedString(string: text, attributes:  attributes)
             
             if let range = text.range(of: TextConstants.createStoryPressAndHold) {
                 let rangeAttributes: [NSAttributedString.Key : Any] = [
-                    .font : UIFont.TurkcellSaturaBolFont(size: 18),
-                    .foregroundColor : AppColor.darkBlueAndTealish.color
+                    .font : UIFont.appFont(.bold, size: 12),
+                    .foregroundColor : AppColor.label.color
                 ]
-                let nsRange = NSRange(location: range.lowerBound.encodedOffset,
-                                      length: range.upperBound.encodedOffset - range.lowerBound.encodedOffset)
+                
+                let location = range.lowerBound.utf16Offset(in: TextConstants.createStoryPressAndHold)
+                let len = range.upperBound.utf16Offset(in: TextConstants.createStoryPressAndHold) - location
+                let nsRange = NSRange(location: location,
+                                      length: len)
                 attributedString.addAttributes(rangeAttributes, range: nsRange)
             }
             
@@ -102,9 +94,9 @@ final class CreateStoryViewController: BaseViewController {
 
 
     //MARK: Lifecycle
-    init(images: [Item]) {
-        selectedImages = images
-        
+    init(forStory story: PhotoStory) {
+        self.story = story
+        self.selectedImages = story.storyPhotos
         super.init(nibName: String(describing: CreateStoryViewController.self), bundle: nil)
     }
     
@@ -130,6 +122,9 @@ final class CreateStoryViewController: BaseViewController {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.CreateStoryNameScreen())
         let analyticsService = AnalyticsService()
         analyticsService.logScreen(screen: .createStoryDetails)
+        
+        navigationController?.navigationBar.items?.forEach({ $0.title = "" })
+        navigationController?.navigationBar.tintColor = AppColor.label.color
     }
     
     override func viewWillLayoutSubviews() {
@@ -179,13 +174,15 @@ final class CreateStoryViewController: BaseViewController {
         
         storyNameView.textField.text = name
         
-        story = PhotoStory(name: name)
         story?.storyPhotos = selectedImages
+        musicSelectView.textField.text = story?.music?.name ?? ""
         
         startActivityIndicator()
         dataSource.allItems(success: { [weak self] songs in
             self?.stopActivityIndicator()
-            self?.updateStoryIfNeeded(songs.first)
+            
+            // it may applied according to flow
+            //self?.updateStoryIfNeeded(songs.first)
 
         }, fail: { [weak self] in
             self?.stopActivityIndicator()
@@ -242,6 +239,8 @@ final class CreateStoryViewController: BaseViewController {
             
         case .possible, .cancelled, .failed:
             collectionView.cancelInteractiveMovement()
+        @unknown default:
+            break
         }
     }
     
@@ -384,6 +383,6 @@ extension CreateStoryViewController: UITextFieldDelegate {
 
 extension CreateStoryViewController: AudioItemSelectedDelegate {
     func photoStoryWithSelectedAudioItem(story: PhotoStory) {
-        self.story = story
+        self.story?.music = story.music
     }
 }

@@ -173,7 +173,11 @@ final class CreateStoryPhotoSelectionController: BaseViewController {
     }
     
     @objc private func openStorySetup() {
-        let controller = CreateStoryViewController(images: selectedItems)
+        
+        let story = PhotoStory(name: "")
+        story.storyPhotos = selectedItems
+        
+        let controller = CreateStoryViewController(forStory: story)
         navigationController?.pushViewController(controller, animated: true)
     }
 }

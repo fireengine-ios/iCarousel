@@ -25,10 +25,10 @@ final class SpotifyPlaylistCollectionViewCell: BaseCollectionViewCell {
     
     @IBOutlet private weak var selectionButton: UIButton! {
         willSet {
-            newValue.setImage(UIImage(named: "notSelected"), for: .normal)
-            newValue.setImage(UIImage(named: "selected"), for: .selected)
-            newValue.setImage(UIImage(named: "selected"), for: .highlighted)
-            newValue.setImage(UIImage(named: "notSelected"), for: [.highlighted, .selected])
+            newValue.setImage(Image.iconSelectEmpty.image, for: .normal)
+            newValue.setImage(Image.iconSelectFills.image, for: .selected)
+            newValue.setImage(Image.iconSelectFills.image, for: .highlighted)
+            newValue.setImage(Image.iconSelectEmpty.image, for: [.highlighted, .selected])
             newValue.addTarget(self, action: #selector(onSelectionButton(_:)), for: .touchUpInside)
             
             //TODO: remove when set correct images

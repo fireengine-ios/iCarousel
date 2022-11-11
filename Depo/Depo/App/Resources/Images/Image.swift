@@ -64,6 +64,7 @@ enum Image: String, AppImage {
     case iconSize
     case iconMix
     case iconRotate
+    case iconOcr
     /// Action/Small
     case iconRadioButtonSelect
     case iconRadioButtonUnselect
@@ -77,6 +78,7 @@ enum Image: String, AppImage {
     case iconViewList
     case iconHideSee
     case iconHideUnselect
+    case iconAddSelect
     /// Action/Snack
     case iconArrowDownSmall
     case iconArrowUpSmall
@@ -85,6 +87,16 @@ enum Image: String, AppImage {
     case iconCancelBorder
     case iconSelectCheck
     case iconSelectEmpty
+    case iconSelectFills
+    /// Action/Music
+    case iconPauseRed
+    case iconPlayRed
+    /// Action/Tab
+    case iconTabMusicEmpty
+    case iconTabMusic
+    case iconTabFiles
+    case iconTabShare
+    case iconTabStar
     
     ///  Files Tab
     case iconFileAudio
@@ -115,10 +127,6 @@ enum Image: String, AppImage {
     case iconFolderBig
     case iconMusicBig
     
-    case iconTabFiles
-    case iconTabMusic
-    case iconTabShare
-    case iconTabStar
     case iconFavoriteStar
     case iconMoreActions
     case iconSharePeople
@@ -130,6 +138,7 @@ enum Image: String, AppImage {
     case popupFavorites
     case popupShared
     case popupMusic
+    case popupMemories
     
     ///  Files sorting
     case iconSizeSmallest

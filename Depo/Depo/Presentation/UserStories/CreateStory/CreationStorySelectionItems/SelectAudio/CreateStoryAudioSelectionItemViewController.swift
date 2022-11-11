@@ -16,7 +16,7 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
     
     private var photoStory: PhotoStory?
     private var selectedItem: WrapData?
-    private let musicSegmentedControlIndex = 0
+    private var musicSegmentedControlIndex = true
     
     private var selectedIndexForMusic: Int?
     private var selectedIndexForUploads: Int?
@@ -35,7 +35,39 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
     @IBOutlet private var designer: CreateStoryAudioSelectionItemDesigner!
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var emtyListView: UIView!
-    @IBOutlet private weak var segmentedControl: UISegmentedControl!
+    
+    @IBOutlet weak var firstSegmentButton: InsetsButton! {
+        willSet {
+            newValue.setTitle(TextConstants.createStoryAudioMusics, for: .normal)
+            newValue.layer.cornerRadius = 12
+            newValue.titleLabel?.font = .appFont(.medium, size: 16)
+            newValue.layer.masksToBounds = true
+        }
+    }
+    
+    @IBOutlet weak var secondSegmentButton: InsetsButton! {
+        willSet {
+            newValue.setTitle(TextConstants.createStoryAudioYourUploads, for: .normal)
+            newValue.layer.cornerRadius = 12
+            newValue.titleLabel?.font = .appFont(.medium, size: 16)
+            newValue.layer.masksToBounds = true
+        }
+    }
+    
+    @IBOutlet weak var firstSegmentShadowView: UIView!{
+        willSet {
+            newValue.addRoundedShadows(cornerRadius: 12, shadowColor: AppColor.drawerShadow.cgColor, opacity: 0.3, radius: 4)
+        }
+    }
+    
+    
+    @IBOutlet weak var secondSegmentShadowView: UIView! {
+        willSet {
+            newValue.addRoundedShadows(cornerRadius: 12, shadowColor: AppColor.drawerShadow.cgColor, opacity: 0.3, radius: 4)
+        }
+    }
+    
+    var fromPhotoSelection: Bool = false
     
     init(forStory story: PhotoStory) {
         photoStory = story
@@ -68,23 +100,55 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.CreateStoryMusicSelectionScreen())
         let analyticsService = AnalyticsService()
         analyticsService.logScreen(screen: .createStoryMusicSelection)
+        renderSegmentButtons()
     }
     
-    @IBAction private func segmentedControlChanged(_ sender: UISegmentedControl) {
+    override func viewDidLayoutSubviews() {
+        renderSegmentButtons()
+    }
+    
+    @IBAction func firstSegmentButtonAction(_ sender: Any) {
+        
+        guard !musicSegmentedControlIndex else { return }
+        
         unselectPlayingCell()
-        onChangeSource(isYourMusic: sender.selectedSegmentIndex == musicSegmentedControlIndex)
+        onChangeSource(isYourMusic: true)
+        musicSegmentedControlIndex = true
+        renderSegmentButtons()
+    }
+    
+    @IBAction func SecondSegmentButtonAction(_ sender: Any) {
+        
+        guard musicSegmentedControlIndex else { return }
+        
+        unselectPlayingCell()
+        onChangeSource(isYourMusic: false)
+        musicSegmentedControlIndex = false
+        renderSegmentButtons()
+    }
+    
+    private func renderSegmentButtons() {
+        if musicSegmentedControlIndex {
+            firstSegmentButton.setBackgroundColor(AppColor.tint.color, for: .normal)
+            firstSegmentButton.setTitleColor(.white, for: .normal)
+            secondSegmentButton.setBackgroundColor(AppColor.tertiaryBackground.color, for: .normal)
+            secondSegmentButton.setTitleColor(AppColor.label.color, for: .normal)
+        } else {
+            secondSegmentButton.setBackgroundColor(AppColor.tint.color, for: .normal)
+            secondSegmentButton.setTitleColor(.white, for: .normal)
+            firstSegmentButton.setBackgroundColor(AppColor.tertiaryBackground.color, for: .normal)
+            firstSegmentButton.setTitleColor(AppColor.label.color, for: .normal)
+        }
     }
     
     private func configureNavBarActions() {
         setTitle(withString: TextConstants.createStoryAudioSelected)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: TextConstants.createStorySelectAudioButton,
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: TextConstants.actionAdd,
                                                             target: self,
-                                                            selector: #selector(onNextButton))
+                                                            selector: #selector(onAddButton))
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: TextConstants.selectFolderCancelButton,
-                                                           target: self,
-                                                           selector: #selector(onCancelButton))
+        navigationController?.navigationBar.tintColor = AppColor.label.color
     }
     
     private func onChangeSource(isYourMusic: Bool) {
@@ -97,10 +161,30 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
         }
     }
     
-    @objc private func onNextButton() {
+    override func didMove(toParent parent: UIViewController?) {
+        super.didMove(toParent: parent)
+        if parent == nil {
+            smallPlayer.stop()
+            hideViewController()
+        }
+    }
+    
+    @objc private func onAddButton() {
         setMusicItemForPhotoStory()
         smallPlayer.stop()
-        hideViewController()
+        
+        if fromPhotoSelection {
+            
+            guard let item = selectedItem, let story = photoStory else {
+                return
+            }
+            story.music = item
+            
+            let controller = CreateStoryViewController(forStory: story)
+            navigationController?.pushViewController(controller, animated: true)
+        } else {
+            hideViewController()
+        }
     }
     
     private func setMusicItemForPhotoStory() {
@@ -109,11 +193,6 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
         }
         story.music = item
         self.audioItemSelectedDelegate?.photoStoryWithSelectedAudioItem(story: story)
-    }
-    
-    @objc private func onCancelButton() {
-        smallPlayer.stop()
-        hideViewController()
     }
     
     private func hideViewController() {
@@ -202,7 +281,7 @@ extension CreateStoryAudioSelectionItemViewController: UITableViewDataSource {
     }
     
     private func isSelected(index: Int) -> Bool {
-        if segmentedControl.selectedSegmentIndex == musicSegmentedControlIndex {
+        if musicSegmentedControlIndex {
             return selectedIndexForMusic == index
         } else {
             return selectedIndexForUploads == index
@@ -218,7 +297,7 @@ extension CreateStoryAudioSelectionItemViewController: UITableViewDataSource {
             return
         }
         
-        if segmentedControl.selectedSegmentIndex == musicSegmentedControlIndex {
+        if musicSegmentedControlIndex {
             setItem(index: selectedIndexForMusic)
         } else {
             setItem(index: selectedIndexForUploads)
@@ -254,7 +333,7 @@ extension CreateStoryAudioSelectionItemViewController: CreateStoryAudioItemCellD
     }
     
     func selectButtonPressed(cell index: Int) {
-        if segmentedControl.selectedSegmentIndex == musicSegmentedControlIndex {
+        if musicSegmentedControlIndex {
             selectedIndexForMusic = index
             selectedIndexForUploads = nil
         } else {

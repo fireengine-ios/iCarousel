@@ -10,14 +10,6 @@ import UIKit
 
 final class CreateStoryAudioSelectionItemDesigner: NSObject {
     
-    @IBOutlet weak var segmentedControl: UISegmentedControl! {
-        willSet {
-            newValue.setTitle(TextConstants.createStoryAudioMusics, forSegmentAt: 0)
-            newValue.setTitle(TextConstants.createStoryAudioYourUploads, forSegmentAt: 1)
-            newValue.tintColor = ColorConstants.darkBlueColor
-        }
-    }
-    
     @IBOutlet private weak var emtyListView: UIView! {
         willSet {
             newValue.isHidden = true

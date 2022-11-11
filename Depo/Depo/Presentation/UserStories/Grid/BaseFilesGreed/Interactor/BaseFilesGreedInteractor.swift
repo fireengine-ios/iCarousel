@@ -203,6 +203,8 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
             return Image.popupDocuments.image
         } else if remoteItems is FavouritesService {
             return Image.popupFavorites.image
+        } else if remoteItems is StoryService {
+            return Image.iconStory.image
         }
         return UIImage()
     }
