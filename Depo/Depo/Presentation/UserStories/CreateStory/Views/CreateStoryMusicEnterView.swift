@@ -19,16 +19,16 @@ final class CreateStoryMusicEnterView: ProfileTextEnterView {
     }
     
     private func setupView() {
-        let arrowImageView = UIImageView(image: UIImage(named: "arrow_create_story"))
+        let arrowImageView = UIImageView(image: Image.iconArrowRightsmall.image)
         
         addSubview(arrowImageView)
         
         arrowImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        arrowImageView.centerYAnchor.constraint(equalTo: centerYAnchor).activate()
+        arrowImageView.centerYAnchor.constraint(equalTo: stackView.centerYAnchor, constant: -12).activate()
         arrowImageView.heightAnchor.constraint(equalToConstant: 24).activate()
         arrowImageView.widthAnchor.constraint(equalToConstant: 24).activate()
-        arrowImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).activate()
+        arrowImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).activate()
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
         addGestureRecognizer(gesture)

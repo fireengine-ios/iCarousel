@@ -22,11 +22,11 @@ final class RecognizeTextButton: UIButton {
     }
 
     private func setup() {
-        setImage(UIImage(named: "icon-recognize-text"), for: .normal)
+        setImage(Image.iconOcr.image, for: .normal)
         imageEdgeInsets = UIEdgeInsets(topBottom: 10, rightLeft: 10)
         tintColor = .white
         setBackgroundColor(AppColor.recognizeBackground.color, for: .normal)
-        setBackgroundColor(AppColor.tabBarSelect.color, for: .selected)
+        setBackgroundColor(AppColor.button.color, for: .selected)
 
         layer.cornerRadius = Self.size / 2
         layer.masksToBounds = true

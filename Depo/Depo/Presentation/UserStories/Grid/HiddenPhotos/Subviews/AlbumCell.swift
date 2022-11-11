@@ -62,7 +62,7 @@ final class AlbumCell: BaseCollectionViewCell {
 
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         selectionIcon.isHidden = !isSelectionActive
-        selectionIcon.image = UIImage(named: isSelected ? "selected" : "notSelected")
+        selectionIcon.image = isSelected ? Image.iconSelectFills.image : Image.iconSelectEmpty.image
     }
     
     func cancelImageLoading() {
