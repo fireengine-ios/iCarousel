@@ -49,6 +49,7 @@ enum AppColor {
     case tabBarUnselectOnly
     
     case tableViewSection
+    case cellBackground
     
     // MARK: PhotoVideoDetail
     case functionsMenuTint
