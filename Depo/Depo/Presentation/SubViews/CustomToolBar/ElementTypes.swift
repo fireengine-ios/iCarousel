@@ -834,7 +834,7 @@ enum ElementTypes {
         case .shareAlbum:
             return Image.iconShare.image
         case .makeAlbumCover:
-            return nil
+            return Image.iconChangePhoto.image
         case .makePersonThumbnail:
             return nil
         case .albumDetails:

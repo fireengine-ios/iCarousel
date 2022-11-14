@@ -25,6 +25,8 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     
     @IBOutlet weak var progressView: UIProgressView!
     
+    @IBOutlet weak var placeholderImage: UIImageView!
+    
     static let borderW: CGFloat = 3
     
     private let visualEffectBlur = UIVisualEffectView(effect: UIBlurEffect(style: .light))
@@ -86,7 +88,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     
     override func updating() {
         super.updating()
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = AppColor.cellBackground.color
     }
     
     override func setImage(image: UIImage?, animated: Bool) {
@@ -154,7 +156,14 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         }
         
     }
-
+    
+    override func setPlaceholderImage(fileType: FileType) {
+        if fileType == .image {
+            placeholderImage.image = Image.iconPhotosPlaceholder.image
+        } else if fileType == .video {
+            placeholderImage.image = Image.iconVideosPlaceholder.image
+        }
+    }
     
     class func getCellSise() -> CGSize {
         return CGSize(width: 90.0, height: 90.0)
