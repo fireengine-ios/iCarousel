@@ -379,7 +379,7 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDelegateFlo
         case .photos:
             var width = (collectionView.bounds.width - section.sectionInsets.left - section.sectionInsets.right - section.interitemSpacing * (section.numberOfColumns - 1)) / section.numberOfColumns
             width = max(width, 0)
-            return CGSize(width: width, height: width + InstapickAnalyzeHistoryPhotoCell.underPhotoOffset)
+            return CGSize(width: width + 5, height: width + InstapickAnalyzeHistoryPhotoCell.underPhotoOffset)
         }
     }
     

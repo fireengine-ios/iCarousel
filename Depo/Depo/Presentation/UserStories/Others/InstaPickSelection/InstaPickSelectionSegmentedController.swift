@@ -51,8 +51,20 @@ final class InstaPickSelectionSegmentedController: BaseViewController, ErrorPres
     
     private lazy var albumsVC = InstapickAlbumSelectionViewController(title: TextConstants.albumsTitle, delegate: self)
     
+    private lazy var closeAlbumButton = UIBarButtonItem(image: NavigationBarImage.back.image,
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(onCloseAlbum))
+    
+    private lazy var closeSelfButton = UIBarButtonItem(image: NavigationBarImage.back.image,
+                                                       style: .plain,
+                                                       target: self,
+                                                       action: #selector(closeSelf))
+    
+    
     private func setup() {
-        vcView.analyzeButton.addTarget(self, action: #selector(analyzeWithInstapick), for: .touchUpInside)
+        navigationItem.title = String(format: TextConstants.instapickSelectionPhotosSelected, 0)
+        navigationItem.leftBarButtonItem = closeSelfButton
     }
     
     override func loadView() {
@@ -79,6 +91,7 @@ final class InstaPickSelectionSegmentedController: BaseViewController, ErrorPres
         
         setupScreenWithSelectingLimit(selectingLimit)
         trackScreen()
+        vcView.analyzeButton.addTarget(self, action: #selector(analyzeWithInstapick), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -184,6 +197,19 @@ final class InstaPickSelectionSegmentedController: BaseViewController, ErrorPres
         
         children.forEach { $0.removeFromParentVC() }
         add(childController: segmentedViewControllers[selectedIndex])
+        updateLeftBarButtonItem(selectedIndex: selectedIndex)
+    }
+
+    private func updateLeftBarButtonItem(selectedIndex: Int) {
+        /// optimized for reading, not performance
+        let isAlbumsTabOpened = (selectedIndex == albumsTabIndex)
+        let isAnyAlbumOpened = (segmentedViewControllers[albumsTabIndex] != albumsVC)
+        
+        if isAlbumsTabOpened, isAnyAlbumOpened {
+            navigationItem.leftBarButtonItem = closeAlbumButton
+        } else {
+            navigationItem.leftBarButtonItem = closeSelfButton
+        }
     }
     
     private func add(childController: UIViewController) {
