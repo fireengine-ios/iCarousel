@@ -15,7 +15,7 @@ final class SnackbarView: UIView, NibInit {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.font = .TurkcellSaturaMedFont(size: 16)
+            newValue.font = .appFont(.regular, size: 12)
             newValue.textColor = .white
             newValue.lineBreakMode = .byTruncatingTail
         }
@@ -23,8 +23,8 @@ final class SnackbarView: UIView, NibInit {
 
     private lazy var actionButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitleColor(ColorConstants.blueColor, for: .normal)
-        button.titleLabel?.font = .TurkcellSaturaDemFont(size: 16)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = .appFont(.regular, size: 12)
         button.contentHorizontalAlignment = .right
         button.backgroundColor = .clear
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +38,7 @@ final class SnackbarView: UIView, NibInit {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = ColorConstants.snackbarGray
+        backgroundColor = AppColor.tint.color
     }
     
     static func with(type: SnackbarType, message: String, actionTitle: String?, axis: NSLayoutConstraint.Axis, action: VoidHandler?) -> SnackbarView {
@@ -64,7 +64,7 @@ final class SnackbarView: UIView, NibInit {
             contentView.addArrangedSubview(actionButton)
         case .vertical:
             let container = UIView()
-            container.backgroundColor = backgroundColor
+            container.backgroundColor = AppColor.tint.color
             container.translatesAutoresizingMaskIntoConstraints = false
             
             container.addSubview(actionButton)

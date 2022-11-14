@@ -28,7 +28,7 @@ enum PopUpImage {
         case .error:
             image = Image.popupIconError.image
         case .success:
-            image = UIImage(named: "successImage")
+            image = Image.popupSuccessful.image
         case .delete:
             image = Image.popupIconDelete.image
         case .music:
@@ -38,9 +38,9 @@ enum PopUpImage {
         case .hide:
             image = Image.popupHide.image
         case .unhide:
-            image = UIImage(named: "unhideAlert")
+            image = Image.popupUnHide.image
         case .restore:
-            image = UIImage(named: "restoreAlert")
+            image = Image.popupRestore.image
         case .question:
             image = Image.popupIconQuestion.image
         case .none:

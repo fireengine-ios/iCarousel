@@ -1274,7 +1274,7 @@ class RouterVC: NSObject {
                 return
             }
             tabBarVC.tabBar.selectedItem = newSelectedItem
-            tabBarVC.selectedIndex = index - 1
+            tabBarVC.selectedIndex = index
             switchToTrashBin()
         }
     }
