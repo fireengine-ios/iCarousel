@@ -1114,6 +1114,10 @@
 		52A5E023291C17F900670B0C /* CustomSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E021291C17F900670B0C /* CustomSegmentedView.swift */; };
 		52A5E024291C17F900670B0C /* CustomSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E021291C17F900670B0C /* CustomSegmentedView.swift */; };
 		52A5E025291C17F900670B0C /* CustomSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E021291C17F900670B0C /* CustomSegmentedView.swift */; };
+		52A5E0322922546000670B0C /* InstaPickLineLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0312922546000670B0C /* InstaPickLineLoader.swift */; };
+		52A5E0332922546000670B0C /* InstaPickLineLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0312922546000670B0C /* InstaPickLineLoader.swift */; };
+		52A5E0342922546000670B0C /* InstaPickLineLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0312922546000670B0C /* InstaPickLineLoader.swift */; };
+		52A5E0352922546000670B0C /* InstaPickLineLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0312922546000670B0C /* InstaPickLineLoader.swift */; };
 		52B9004F28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
 		52BF679628FFE05300D8D4E6 /* PasswordValidationSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF679528FFE05300D8D4E6 /* PasswordValidationSetView.swift */; };
 		52BF679728FFE05300D8D4E6 /* PasswordValidationSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF679528FFE05300D8D4E6 /* PasswordValidationSetView.swift */; };
@@ -10102,6 +10106,7 @@
 		52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStorySelectionView.swift; sourceTree = "<group>"; };
 		52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBarHeaderTwoLineView.swift; sourceTree = "<group>"; };
 		52A5E021291C17F900670B0C /* CustomSegmentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedView.swift; sourceTree = "<group>"; };
+		52A5E0312922546000670B0C /* InstaPickLineLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickLineLoader.swift; sourceTree = "<group>"; };
 		52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackagesBannerBuyPremiumView.swift; sourceTree = "<group>"; };
 		52BF679528FFE05300D8D4E6 /* PasswordValidationSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidationSetView.swift; sourceTree = "<group>"; };
 		536B87BE9C6EA2601A4F42F3 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
@@ -18584,6 +18589,7 @@
 				B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */,
 				B5AB2F0A2204940800E3AF23 /* InstaPickCircularLoader.swift */,
 				B5AB2F0D2204941B00E3AF23 /* InstaPickCircularLoader.xib */,
+				52A5E0312922546000670B0C /* InstaPickLineLoader.swift */,
 			);
 			path = InstaPickProgressView;
 			sourceTree = "<group>";
@@ -25388,6 +25394,7 @@
 				8C0E8CBA1FDEBDFF00789C91 /* ActivityIndicatorManager.swift in Sources */,
 				8C0E8CBB1FDEBDFF00789C91 /* FeedbackService.swift in Sources */,
 				CF38A7EA2575314C0000994F /* PrivateShareWithContactView.swift in Sources */,
+				52A5E0322922546000670B0C /* InstaPickLineLoader.swift in Sources */,
 				8C0E8CBC1FDEBDFF00789C91 /* LoginModuleInput.swift in Sources */,
 				8C7E1F66207DF862005B19D9 /* DispatchQueueLabels.swift in Sources */,
 				8C0E8CBD1FDEBDFF00789C91 /* HomeCollectionViewLayout.swift in Sources */,
@@ -28552,6 +28559,7 @@
 				CE784B3B22A685FB00662219 /* PhotoVideoDetailRouterInput.swift in Sources */,
 				CE784B3C22A685FB00662219 /* PhotoVideoDetailRouter.swift in Sources */,
 				F039B5F8279DE49A000EBAA7 /* GraceBannerView.swift in Sources */,
+				52A5E0342922546000670B0C /* InstaPickLineLoader.swift in Sources */,
 				CE784B3D22A685FB00662219 /* PhotoVideoDetailConfigurator.swift in Sources */,
 				CE784B3E22A685FB00662219 /* LeavePremiumInteractorOutput.swift in Sources */,
 				98B04828259314750011DAEB /* BackupVersion.m in Sources */,
@@ -30780,6 +30788,7 @@
 				0780AB5127916834000760D9 /* RemoteTextRecognitionModels.swift in Sources */,
 				CF8B685423CBC9D70021B021 /* FreeAppSpacePresenter.swift in Sources */,
 				98231A5F24F3A23500FD16E2 /* AudreyFilter.swift in Sources */,
+				52A5E0332922546000670B0C /* InstaPickLineLoader.swift in Sources */,
 				CF8B685523CBC9D70021B021 /* FeedbackViewInteractorInput.swift in Sources */,
 				73DFEEC524E65D19009D925D /* ShareCardContentManager.swift in Sources */,
 				CF8B685623CBC9D70021B021 /* ProfilePhoneEnterView.swift in Sources */,
@@ -32309,6 +32318,7 @@
 				CF8B6F6E23CBCA280021B021 /* SpotifyResponse.swift in Sources */,
 				CF8B6F7023CBCA280021B021 /* PeriodicContactsSyncSettingsModel.swift in Sources */,
 				07DB939E2860AF5400D5CACF /* AppleReceipt.swift in Sources */,
+				52A5E0352922546000670B0C /* InstaPickLineLoader.swift in Sources */,
 				CF8B6F7123CBCA280021B021 /* FaceImageAddNameInitializer.swift in Sources */,
 				CF7146BC24B597A900D83E60 /* DeleteDuplicatesViewController.swift in Sources */,
 				CF8B6F7223CBCA280021B021 /* UploadFilesSelectionViewInput.swift in Sources */,

@@ -39,13 +39,13 @@
                     <rect key="frame" x="12" y="16" width="351" height="651"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make sure to pick your best photos and reach more people!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="KtI-Qi-HYB">
-                            <rect key="frame" x="32" y="32" width="287" height="95"/>
+                            <rect key="frame" x="32" y="32" width="287" height="143"/>
                             <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="28"/>
                             <color key="textColor" name="marineTwoAndWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enjoy your time while we analyze your photos!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="vB8-dd-TD0">
-                            <rect key="frame" x="32" y="493" width="287" height="36"/>
+                            <rect key="frame" x="32" y="476" width="287" height="36"/>
                             <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="18"/>
                             <color key="textColor" name="marineTwoAndWhite"/>
                             <nil key="highlightedColor"/>
@@ -57,8 +57,8 @@
                                 <action selector="close:" destination="-1" eventType="touchUpInside" id="7Rd-wE-C34"/>
                             </connections>
                         </button>
-                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="255" placeholderIntrinsicHeight="255" translatesAutoresizingMaskIntoConstraints="NO" id="SIH-wk-0Wm" customClass="InstaPickCircularLoader" customModule="Billo" customModuleProvider="target">
-                            <rect key="frame" x="48" y="198" width="255" height="255"/>
+                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="255" placeholderIntrinsicHeight="255" translatesAutoresizingMaskIntoConstraints="NO" id="SIH-wk-0Wm" customClass="InstaPickLineLoader" customModule="Billo" customModuleProvider="target">
+                            <rect key="frame" x="65" y="215" width="221" height="221"/>
                             <color key="backgroundColor" name="secondaryBackground"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="SIH-wk-0Wm" secondAttribute="height" multiplier="1:1" id="Di9-gE-vyT"/>
@@ -77,9 +77,9 @@
                         <constraint firstAttribute="trailing" secondItem="KtI-Qi-HYB" secondAttribute="trailing" constant="32" id="T2g-lw-LR3"/>
                         <constraint firstItem="KtI-Qi-HYB" firstAttribute="top" secondItem="gOh-bg-eJT" secondAttribute="top" constant="32" id="T4s-mp-u1d"/>
                         <constraint firstItem="SIH-wk-0Wm" firstAttribute="centerX" secondItem="gOh-bg-eJT" secondAttribute="centerX" id="U7I-yK-f6D"/>
-                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SIH-wk-0Wm" secondAttribute="trailing" constant="16" id="Yqn-pP-bGV"/>
-                        <constraint firstItem="SIH-wk-0Wm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gOh-bg-eJT" secondAttribute="leading" constant="16" id="Zpb-E8-0gd"/>
-                        <constraint firstItem="SIH-wk-0Wm" firstAttribute="top" relation="greaterThanOrEqual" secondItem="KtI-Qi-HYB" secondAttribute="bottom" constant="8" id="vJd-uK-KfT"/>
+                        <constraint firstAttribute="trailing" secondItem="SIH-wk-0Wm" secondAttribute="trailing" constant="65" id="Yqn-pP-bGV"/>
+                        <constraint firstItem="SIH-wk-0Wm" firstAttribute="leading" secondItem="gOh-bg-eJT" secondAttribute="leading" constant="65" id="Zpb-E8-0gd"/>
+                        <constraint firstItem="SIH-wk-0Wm" firstAttribute="top" secondItem="KtI-Qi-HYB" secondAttribute="bottom" constant="40" id="vJd-uK-KfT"/>
                         <constraint firstItem="vB8-dd-TD0" firstAttribute="top" secondItem="SIH-wk-0Wm" secondAttribute="bottom" constant="40" id="vbL-M9-Zxo"/>
                     </constraints>
                 </view>

@@ -47,15 +47,19 @@ final class InstaPickProgressPopup: ViewController, NibInit {
         }
     }
     
-    @IBOutlet private weak var circularLoader: InstaPickCircularLoader! {
-        didSet {
-            circularLoader.backgroundColor = .clear
-            circularLoader.backWidth = 10.0
-            circularLoader.backColor = ColorConstants.lightBlueColor
-            circularLoader.progressWidth = 10.0
-            circularLoader.progressRatio = 0.0
-            circularLoader.progressColor = ColorConstants.blueColor
+    @IBOutlet private weak var circularLoader: InstaPickLineLoader! {
+        willSet {
+            
         }
+        
+//        didSet {
+//            circularLoader.backgroundColor = .clear
+//            circularLoader.backWidth = 10.0
+//            circularLoader.backColor = ColorConstants.lightBlueColor
+//            circularLoader.progressWidth = 10.0
+//            circularLoader.progressRatio = 0.0
+//            circularLoader.progressColor = ColorConstants.blueColor
+//        }
     }
     
     private var topCaptionTexts = [String]()
