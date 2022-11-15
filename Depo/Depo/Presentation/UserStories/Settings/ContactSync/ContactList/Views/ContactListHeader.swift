@@ -29,6 +29,7 @@ final class ContactListHeader: UIView, NibInit {
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
             newValue.font = .appFont(.regular, size: 14)
+            newValue.textColor = AppColor.label.color
         }
     }
     
@@ -42,11 +43,11 @@ final class ContactListHeader: UIView, NibInit {
             
             if let textField = newValue.textField {
                 textField.backgroundColor = ColorConstants.toolbarTintColor
-                textField.placeholder = TextConstants.search
-                textField.placeholderLabel?.textColor = ColorConstants.lightText
                 textField.font = .appFont(.medium, size: 14.0)
-                textField.textColor = AppColor.navyAndWhite.color
+                textField.textColor = AppColor.label.color
                 textField.keyboardAppearance = .dark
+                let placeholder = NSAttributedString(string: TextConstants.search, attributes: [.foregroundColor: AppColor.label.color])
+                textField.attributedPlaceholder = placeholder
             }
             
             if let cancelButton = newValue.cancelButton {

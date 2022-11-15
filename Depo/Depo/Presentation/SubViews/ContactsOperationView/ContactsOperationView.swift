@@ -91,7 +91,7 @@ enum ContactsOperationResult {
     var image: UIImage? {
         switch self {
         case .success:
-            return UIImage(named: "success")
+            return UIImage(named: "popupSuccessful")
         case .failed:
             return UIImage(named: "failed")
         }
@@ -110,9 +110,9 @@ final class ContactsOperationView: UIView, NibInit {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.font = .TurkcellSaturaDemFont(size: 24)
+            newValue.font = .appFont(.medium, size: 20)
             newValue.textAlignment = .center
-            newValue.textColor = AppColor.navyAndWhite.color
+            newValue.textColor = AppColor.label.color
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
         }
@@ -120,9 +120,9 @@ final class ContactsOperationView: UIView, NibInit {
     @IBOutlet private weak var messageLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.font = .TurkcellSaturaFont(size: 16)
+            newValue.font = .appFont(.medium, size: 14)
             newValue.textAlignment = .center
-            newValue.textColor = ColorConstants.duplicatesGray
+            newValue.textColor = AppColor.label.color
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
         }

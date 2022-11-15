@@ -634,11 +634,15 @@ extension ContactSyncControllerProtocol {
             }
         }
         
-        let popup = ContactSyncPopupFactory.createPopup(type: type) { vc in
+        ContactSyncPopupFactory.openPopUp(type: type) { vc in
             vc.close(isFinalStep: false, completion: handler)
         }
         
-        present(popup, animated: true)
+//        let popup = ContactSyncPopupFactory.createPopup(type: type) { vc in
+//            vc.close(isFinalStep: false, completion: handler)
+//        }
+//
+//        present(popup, animated: true)
     }
     
     func showResultView(type: ContactsOperationType, result: ContactsOperationResult) {

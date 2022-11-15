@@ -48,10 +48,6 @@ final class ContactListDetailViewController: BaseViewController, NibInit {
         
         let header = ContactDetailHeader.initFromNib()
         header.configure(with: contact)
-        
-        let size = header.sizeToFit(width: tableView.bounds.width)
-        header.frame.size = size
-        
         tableView.tableHeaderView = header
     }
     

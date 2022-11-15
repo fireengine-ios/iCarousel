@@ -14,15 +14,15 @@ final class ContactListCell: UITableViewCell {
         willSet {
             newValue.layer.masksToBounds = true
             newValue.layer.cornerRadius = newValue.bounds.height * 0.5
-            newValue.backgroundColor = ColorConstants.photoCell
+            newValue.backgroundColor = AppColor.grayMain.color
         }
     }
     
     @IBOutlet private weak var letterLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.font = .appFont(.regular, size: 20.0)
-            newValue.textColor = ColorConstants.duplicatesGray
+            newValue.font = .appFont(.medium, size: 14.4)
+            newValue.textColor = AppColor.darkBlue.color
         }
     }
     
@@ -37,7 +37,7 @@ final class ContactListCell: UITableViewCell {
     @IBOutlet private weak var phoneLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.font = .appFont(.regular, size: 14.0)
+            newValue.font = .appFont(.light, size: 14.0)
             newValue.textColor = AppColor.label.color
         }
     }
