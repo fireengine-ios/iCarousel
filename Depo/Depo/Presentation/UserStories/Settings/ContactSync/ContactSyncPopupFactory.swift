@@ -77,6 +77,16 @@ final class ContactSyncPopupFactory {
                                     secondAction: handler)
     }
     
+    static func openPopUp(type: ContactSyncPopupType, handler: @escaping PopUpButtonHandler) {
+        let popUp = PopUpController.with(title: type.title,
+                                 message: type.message,
+                                 image: type.image,
+                                 firstButtonTitle: TextConstants.cancel,
+                                 secondButtonTitle: TextConstants.ok,
+                                 secondAction: handler)
+        popUp.open()
+    }
+    
     static func createWarningPopup(type: WarningPopupType, handler: @escaping VoidHandler) -> UIViewController {
         return WarningPopupController.popup(type: type, closeHandler: handler)
     }
