@@ -20859,14 +20859,14 @@
 		CF7145A324B597A700D83E60 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CF7145AB24B597A700D83E60 /* ContactInfoView.xib */,
 				CF7145A424B597A700D83E60 /* ContactInfoView.swift */,
 				CF7145A524B597A700D83E60 /* ContactDetailNoInfoCell.xib */,
+				CF7145A924B597A700D83E60 /* ContactDetailNoInfoCell.swift */,
 				CF7145A624B597A700D83E60 /* ContactDetailCell.xib */,
 				CF7145A724B597A700D83E60 /* ContactDetailCell.swift */,
 				CF7145A824B597A700D83E60 /* ContactDetailHeader.xib */,
-				CF7145A924B597A700D83E60 /* ContactDetailNoInfoCell.swift */,
 				CF7145AA24B597A700D83E60 /* ContactDetailHeader.swift */,
-				CF7145AB24B597A700D83E60 /* ContactInfoView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -20902,11 +20902,11 @@
 		CF7145B424B597A700D83E60 /* Cards */ = {
 			isa = PBXGroup;
 			children = (
-				CF7145B524B597A700D83E60 /* ContactSyncSmallCardView.swift */,
 				CF7145B624B597A700D83E60 /* ContactSyncBaseCardView.swift */,
 				CF7145B724B597A700D83E60 /* ContactSyncBigCardView.xib */,
-				CF7145B824B597A700D83E60 /* ContactSyncSmallCardView.xib */,
 				CF7145B924B597A700D83E60 /* ContactSyncBigCardView.swift */,
+				CF7145B824B597A700D83E60 /* ContactSyncSmallCardView.xib */,
+				CF7145B524B597A700D83E60 /* ContactSyncSmallCardView.swift */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -20988,11 +20988,11 @@
 			children = (
 				CF7145DB24B597A700D83E60 /* ContactListCell.xib */,
 				CF7145DC24B597A700D83E60 /* ContactListCell.swift */,
-				CF7145DD24B597A700D83E60 /* ContactListMainView.swift */,
-				CF7145DE24B597A700D83E60 /* ContactListHeader.swift */,
 				CF7145DF24B597A700D83E60 /* ContactListMainView.xib */,
+				CF7145DD24B597A700D83E60 /* ContactListMainView.swift */,
 				CF7145E024B597A700D83E60 /* ContactListSectionHeader.swift */,
 				CF7145E124B597A700D83E60 /* ContactListHeader.xib */,
+				CF7145DE24B597A700D83E60 /* ContactListHeader.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

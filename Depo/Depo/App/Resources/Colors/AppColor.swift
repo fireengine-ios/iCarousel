@@ -101,6 +101,14 @@ enum AppColor {
     case tbtBlurBackground
     case tbtButton
     
+    // MARK: Contact
+    case grayMain
+    case darkBlue
+    case darkBlueColor
+    case contactHeader
+    case contactHeaderText
+    case progressFront
+    
     // MARK: Settings
     case borderColor
     case profileInfoOrange

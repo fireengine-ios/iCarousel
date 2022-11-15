@@ -12,8 +12,8 @@ class ContactSyncScheduleCard: ContactSyncBaseCardView, NibInit {
     @IBOutlet private weak var title: UILabel! {
         willSet {
             newValue.text = TextConstants.contactSyncBackupSuccessCardTitle
-            newValue.font = .TurkcellSaturaDemFont(size: 18.0)
-            newValue.textColor = AppColor.navyAndWhite.color
+            newValue.font = .appFont(.medium, size: 16)
+            newValue.textColor = AppColor.label.color
             newValue.textAlignment = .left
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
@@ -23,8 +23,8 @@ class ContactSyncScheduleCard: ContactSyncBaseCardView, NibInit {
     @IBOutlet weak var message: UILabel! {
         willSet {
             newValue.text = TextConstants.contactSyncBackupSuccessCardMessage
-            newValue.font = .TurkcellSaturaFont(size: 16.0)
-            newValue.textColor = .lrBrownishGrey
+            newValue.font = .appFont(.regular, size: 16)
+            newValue.textColor = AppColor.label.color
             newValue.textAlignment = .left
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
@@ -34,8 +34,8 @@ class ContactSyncScheduleCard: ContactSyncBaseCardView, NibInit {
     @IBOutlet private weak var syncOptionText: UILabel! {
         willSet {
             newValue.text = TextConstants.contactSyncBigCardAutobackupFormat
-            newValue.font = .TurkcellSaturaDemFont(size: 14.0)
-            newValue.textColor =  .lrTealishTwo
+            newValue.font = .appFont(.medium, size: 14)
+            newValue.textColor = AppColor.label.color
             newValue.adjustsFontSizeToFitWidth()
         }
     }

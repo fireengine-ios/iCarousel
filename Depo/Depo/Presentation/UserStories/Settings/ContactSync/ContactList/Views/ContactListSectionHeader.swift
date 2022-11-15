@@ -12,8 +12,8 @@ final class ContactListSectionHeader: UIView {
     
     private var label: UILabel = {
         let label = UILabel()
-        label.textColor = .lrTealishTwo
-        label.font = .appFont(.regular, size: 20.0)
+        label.textColor = AppColor.contactHeader.color
+        label.font = .appFont(.medium, size: 16.0)
         return label
     }()
     
