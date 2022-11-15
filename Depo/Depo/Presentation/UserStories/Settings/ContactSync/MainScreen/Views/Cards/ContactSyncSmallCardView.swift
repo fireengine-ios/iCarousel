@@ -41,8 +41,6 @@ final class ContactSyncSmallCardView: ContactSyncBaseCardView, NibInit {
     
     @IBOutlet private weak var actionButton: UIButton! {
         willSet {
-            //newValue.titleLabel?.font = .appFont(.regular, size: 14.0)
-            //newValue.setTitleColor(.lrTealishTwo, for: .normal)
             newValue.titleLabel?.font = .appFont(.medium, size: 12.0)
             newValue.setTitleColor(AppColor.label.color, for: .normal)
             newValue.adjustsFontSizeToFitWidth()
@@ -58,7 +56,6 @@ final class ContactSyncSmallCardView: ContactSyncBaseCardView, NibInit {
     
     private let attributedLastBackupMessage: NSAttributedString = {
         let attributesStatic: [NSAttributedString.Key : Any] = [
-            //.font: UIFont.appFont(.regular, size: 16.0),
             .font: UIFont.appFont(.medium, size: 14),
             .foregroundColor: ColorConstants.charcoalGrey
         ]
@@ -104,7 +101,6 @@ final class ContactSyncSmallCardView: ContactSyncBaseCardView, NibInit {
     
     private func attributedString(dateString: String) -> NSMutableAttributedString{
         let attributesDate: [NSAttributedString.Key : Any] = [
-            //.font: UIFont.TurkcellSaturaBolFont(size: 16.0),
             .font: UIFont.appFont(.medium, size: 14),
             .foregroundColor: ColorConstants.charcoalGrey
         ]

@@ -18,8 +18,6 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
     @IBOutlet private weak var message: UILabel! {
         willSet {
             newValue.text = TextConstants.contactSyncBigCardBackupMessage
-            //newValue.font = .appFont(.medium, size: 24.0)
-            //newValue.textColor =  AppColor.primaryBackground.color
             newValue.font = .appFont(.medium, size: 20.0)
             newValue.textColor =  AppColor.label.color
             newValue.numberOfLines = 0
@@ -31,7 +29,6 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
         willSet {
             newValue.text = "0"
             newValue.font = .appFont(.regular, size: 60.0)
-            //newValue.textColor =  AppColor.primaryBackground.color
             newValue.textColor =  AppColor.label.color
             newValue.numberOfLines = 1
             newValue.adjustsFontSizeToFitWidth()
@@ -41,8 +38,6 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
     @IBOutlet private weak var contactsText: UILabel! {
         willSet {
             newValue.text = TextConstants.contactSyncBigCardContacts
-            //newValue.font = .appFont(.regular, size: 20)
-            //newValue.textColor =  AppColor.primaryBackground.color
             newValue.font = .appFont(.medium, size: 20)
             newValue.textColor =  AppColor.label.color
             newValue.numberOfLines = 1
@@ -52,9 +47,6 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
     
     @IBOutlet private weak var backUpButton: RoundedInsetsButton! {
         willSet {
-            //newValue.setBackgroundColor(AppColor.whiteAndLrTealish.color, for: .normal)
-            //newValue.setTitleColor(AppColor.lrTealishAndWhite.color, for: .normal)
-            //newValue.titleLabel?.font = .appFont(.regular, size: 16.0)
             newValue.setTitle(TextConstants.contactSyncBackupButton, for: .normal)
             newValue.setBackgroundColor(AppColor.darkBlueColor.color, for: .normal)
             newValue.setTitleColor(.white, for: .normal)
@@ -69,8 +61,6 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
     @IBOutlet private weak var seeContactsButton: UIButton! {
         willSet {
             newValue.setTitle(TextConstants.contactSyncBigCardSeeContactsButton, for: .normal)
-            //newValue.titleLabel?.font = .appFont(.regular, size: 14.0)
-            //newValue.setTitleColor(.lrTealishTwo, for: .normal)
             newValue.titleLabel?.font = .appFont(.medium, size: 14.0)
             newValue.setTitleColor(AppColor.label.color, for: .normal)
             newValue.adjustsFontSizeToFitWidth()
@@ -96,8 +86,6 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
     @IBOutlet private weak var autoBackupText: UILabel! {
         willSet {
             newValue.text = TextConstants.contactSyncBigCardAutobackupFormat
-            //newValue.font = .TurkcellSaturaDemFont(size: 14.0)
-            //newValue.textColor =  .lrTealishTwo
             newValue.font = .appFont(.medium, size: 14)
             newValue.textColor = AppColor.label.color
             newValue.numberOfLines = 0
@@ -117,10 +105,6 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        //backgroundColor = AppColor.lrTealishAndWhite.color
-        //backUpButton.setTitleColor(AppColor.lrTealishAndWhite.color, for: .normal)
-        //backUpButton.setBackgroundColor(AppColor.whiteAndLrTealish.color, for: .normal)
         backgroundColor = .white
         backUpButton.setTitleColor(.white, for: .normal)
         backUpButton.setBackgroundColor(AppColor.darkBlueColor.color, for: .normal)
@@ -128,8 +112,6 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        //backUpButton.setBackgroundColor(AppColor.whiteAndLrTealish.color, for: .normal)
-        //backUpButton.setTitleColor(AppColor.lrTealishAndWhite.color, for: .normal)
         backUpButton.setTitleColor(.white, for: .normal)
         backUpButton.setBackgroundColor(AppColor.darkBlueColor.color, for: .normal)
     }
