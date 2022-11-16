@@ -21,6 +21,7 @@ final class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController 
     private var headerView = UIView()
     private var gradientHeaderLayer: CALayer?
     private var albumsHeightConstraint: NSLayoutConstraint?
+    private var tapGesture: UITapGestureRecognizer?
 
     var delegate: FaceImagePhotosViewControllerDelegate?
     
@@ -41,6 +42,10 @@ final class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         delegate?.viewWillDisappear()
+        
+        if let tapGesture = tapGesture {
+            navigationController?.navigationBar.removeGestureRecognizer(tapGesture)
+        }
     }
     
     // MARK: - BaseFilesGreedViewController
@@ -144,7 +149,9 @@ final class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController 
     }
     
     private func configureNavBarWithTouch() {
-        setTitle(withString: mainTitle, andSubTitle: "")
+        DispatchQueue.main.async {
+            self.setTitle(withString: self.mainTitle, andSubTitle: "")
+        }
         
         if let output = output as? FaceImagePhotosViewOutput,
             let type = output.faceImageType(), type == .people {
@@ -153,8 +160,10 @@ final class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController 
     }
     
     private func addNavBarTouch() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.addNameAction))
-        navigationItem.titleView?.addGestureRecognizer(tap)
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.addNameAction))
+        if let tapGesture = tapGesture {
+            self.navigationController?.navigationBar.addGestureRecognizer(tapGesture)
+        }
     }
     
 }
