@@ -93,7 +93,7 @@ private extension ForgotPasswordTexts {
     static func new() -> ForgotPasswordTexts {
         return ForgotPasswordTexts(
             instructions: localized(.resetPasswordInstructions),
-            emailInputTitle: "E-mail or Phone Number",
+            emailInputTitle: TextConstants.loginCellTitleEmail,
             emailPlaceholder: localized(.resetPasswordYourAccountEmail)
         )
     }
