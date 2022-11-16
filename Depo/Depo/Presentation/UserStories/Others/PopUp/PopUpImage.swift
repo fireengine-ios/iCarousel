@@ -18,6 +18,7 @@ enum PopUpImage {
     case unhide
     case restore
     case question
+    case logout
     case none
     case custom(UIImage?)
 
@@ -43,6 +44,8 @@ enum PopUpImage {
             image = Image.popupRestore.image
         case .question:
             image = Image.popupIconQuestion.image
+        case .logout:
+            image = Image.popupLogout.image
         case .none:
             image = nil
         case .custom(let customImage):
