@@ -44,6 +44,7 @@ final class FaceImageAddNameViewController: BaseFilesGreedChildrenViewController
 
         navBarConfigurator.configure(right: [done], left: [])
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+        navigationController?.navigationBar.gestureRecognizers?.removeAll()
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
