@@ -18,9 +18,10 @@ final class CreateStoryAudioSelectionItemDesigner: NSObject {
     
     @IBOutlet private weak var emtyListLabel: UILabel! {
         willSet{
-            newValue.textColor = ColorConstants.textGrayColor
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 14)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.medium, size: 16)
             newValue.text = TextConstants.audioViewNoAudioTitleText
+            newValue.numberOfLines = 0
         }
     }
     
