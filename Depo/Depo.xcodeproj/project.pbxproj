@@ -1102,6 +1102,10 @@
 		52A5E015291A465D00670B0C /* SnackBarHeaderTwoLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */; };
 		52A5E016291A465D00670B0C /* SnackBarHeaderTwoLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */; };
 		52A5E017291A465D00670B0C /* SnackBarHeaderTwoLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */; };
+		52A5E03D29252B4300670B0C /* CustomAVPlayerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E03C29252B4300670B0C /* CustomAVPlayerLayer.swift */; };
+		52A5E03E29252B4300670B0C /* CustomAVPlayerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E03C29252B4300670B0C /* CustomAVPlayerLayer.swift */; };
+		52A5E03F29252B4300670B0C /* CustomAVPlayerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E03C29252B4300670B0C /* CustomAVPlayerLayer.swift */; };
+		52A5E04029252B4300670B0C /* CustomAVPlayerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E03C29252B4300670B0C /* CustomAVPlayerLayer.swift */; };
 		52B9004F28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
 		52BF679628FFE05300D8D4E6 /* PasswordValidationSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF679528FFE05300D8D4E6 /* PasswordValidationSetView.swift */; };
 		52BF679728FFE05300D8D4E6 /* PasswordValidationSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF679528FFE05300D8D4E6 /* PasswordValidationSetView.swift */; };
@@ -10087,6 +10091,7 @@
 		522A5BBD8B55E5DF0DE0472B /* Pods-Billo.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billo.enterprise.xcconfig"; path = "Target Support Files/Pods-Billo/Pods-Billo.enterprise.xcconfig"; sourceTree = "<group>"; };
 		52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStorySelectionView.swift; sourceTree = "<group>"; };
 		52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBarHeaderTwoLineView.swift; sourceTree = "<group>"; };
+		52A5E03C29252B4300670B0C /* CustomAVPlayerLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAVPlayerLayer.swift; sourceTree = "<group>"; };
 		52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackagesBannerBuyPremiumView.swift; sourceTree = "<group>"; };
 		52BF679528FFE05300D8D4E6 /* PasswordValidationSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidationSetView.swift; sourceTree = "<group>"; };
 		536B87BE9C6EA2601A4F42F3 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
@@ -15493,6 +15498,7 @@
 				7C66E8B31F979C6800D98F27 /* CreateStoryPreviewViewController.xib */,
 				7C66E8A71F979C3300D98F27 /* CreateStoryPreviewViewController.swift */,
 				7C66E8A81F979C3300D98F27 /* CreateStoryPreviewViewIO.swift */,
+				52A5E03C29252B4300670B0C /* CustomAVPlayerLayer.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -26673,6 +26679,7 @@
 				F0571ED8288AE70D00A0D6AC /* ForYouRouterInput.swift in Sources */,
 				F00D7DDF2851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */,
 				8C0E8F801FDEBDFF00789C91 /* SelectNameInteractorOutput.swift in Sources */,
+				52A5E03D29252B4300670B0C /* CustomAVPlayerLayer.swift in Sources */,
 				8C0E8F811FDEBDFF00789C91 /* SelectNameInteractor.swift in Sources */,
 				7C121F0C20874BCE00AA585F /* AppMigrator.swift in Sources */,
 				8C0E8F821FDEBDFF00789C91 /* SelectNameRouterInput.swift in Sources */,
@@ -27587,6 +27594,7 @@
 				03404574240794FD0024135B /* SynchronizedDictionary.swift in Sources */,
 				CE7848C322A685FB00662219 /* SearchViewInput.swift in Sources */,
 				F0B1A50628D1EBE6006EB2DC /* SelectionTabBarCard.swift in Sources */,
+				52A5E03F29252B4300670B0C /* CustomAVPlayerLayer.swift in Sources */,
 				982319AE24F3A1E700FD16E2 /* ColorCell.swift in Sources */,
 				CE7848C422A685FB00662219 /* HelpAndSupportRouterInput.swift in Sources */,
 				CE7848C522A685FB00662219 /* InstapickAlbumSelectionViewController.swift in Sources */,
@@ -29773,6 +29781,7 @@
 				CF8B658C23CBC9D70021B021 /* LargeFullOfQuotaPopUp.swift in Sources */,
 				CF8B658D23CBC9D70021B021 /* IntroduceModuleInput.swift in Sources */,
 				98231AA724F3A23500FD16E2 /* MetropolisFilter.swift in Sources */,
+				52A5E03E29252B4300670B0C /* CustomAVPlayerLayer.swift in Sources */,
 				9808B3992553EE4D002B0032 /* PrivateShareSelectPeopleView.swift in Sources */,
 				CF8B658E23CBC9D70021B021 /* VisualMusicPlayerInteractorOutput.swift in Sources */,
 				CF8B658F23CBC9D70021B021 /* UserProfileInteractorOutput.swift in Sources */,
@@ -32518,6 +32527,7 @@
 				CF8B702A23CBCA280021B021 /* CampaignDetailViewController.swift in Sources */,
 				CF71459124B4D02A00D83E60 /* OverlayStickerDownloadManager.swift in Sources */,
 				0305A34A23D5C571004D1EC7 /* TrashBinThreeDotMenuManager.swift in Sources */,
+				52A5E04029252B4300670B0C /* CustomAVPlayerLayer.swift in Sources */,
 				CF8B702B23CBCA280021B021 /* PhotoVideoThreeDotMenuManager.swift in Sources */,
 				CF8B702C23CBCA280021B021 /* CollageCard.swift in Sources */,
 				CF8B702D23CBCA280021B021 /* ActivityTimelineRouterInput.swift in Sources */,

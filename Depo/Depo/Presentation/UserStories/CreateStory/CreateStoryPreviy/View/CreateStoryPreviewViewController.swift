@@ -14,8 +14,7 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
 
     var output: CreateStoryPreviewViewOutput!
     
-    @IBOutlet private weak var previewImageView: UIImageView!
-    @IBOutlet private weak var viewForPlayer: UIView!
+    @IBOutlet private weak var viewForPlayer: CustomAVPlayerLayer!
     
     var previewURLString: String? {
         didSet {
@@ -23,22 +22,19 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
             let sourceURL = URL(string: previewURLString)else {
                 return
             }
-            playerController?.player = nil
-            playerController?.removeFromParent()
-            playerController = nil
-            player?.pause()
-            player = nil
             
-            let plauerItem = AVPlayerItem(url: sourceURL)
+            viewForPlayer.setAVPlayerURL(url: previewURLString)
             
-            player = AVPlayer(playerItem: plauerItem)
             
-            let imageGenerator = AVAssetImageGenerator(asset: plauerItem.asset)
-            let time = CMTimeMake(value: 1, timescale: 1)
-            if let imageRef = try? imageGenerator.copyCGImage(at: time, actualTime: nil) {
-                let thumbnail = UIImage(cgImage: imageRef)
-                previewImageView.image = thumbnail
-            }
+//            playerController?.player = nil
+//            playerController?.removeFromParent()
+//            playerController = nil
+//            player?.pause()
+//            player = nil
+//
+//            let plauerItem = AVPlayerItem(url: sourceURL)
+//
+//            player = AVPlayer(playerItem: plauerItem)
         }
     }
     
@@ -50,6 +46,8 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
         
         setupNavigation()
         output.viewIsReady()
+        
+        //playVideoByURLString(urlSting: previewURLString)
     }
     
     override var preferredNavigationBarStyle: NavigationBarStyle {
@@ -70,14 +68,18 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: TextConstants.createStorySave,
                                                             target: self,
                                                             selector: #selector(onSaveButton))
+        
+        title = output.getStoryName()
     }
     
     func playVideoByURLString(urlSting: String?) {
         playerController = FixedAVPlayerViewController()
         playerController?.player = player
-        self.present(playerController!, animated: true) { [weak self] in
-            self?.playerController?.player!.play()
-        }
+        
+        addChild(playerController!)
+        playerController?.view.frame = viewForPlayer.bounds
+        viewForPlayer.addSubview((playerController?.view)!)
+        playerController?.didMove(toParent: self)
     }
     
     @objc private func onSaveButton() {
@@ -87,10 +89,6 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
     
     @objc private func didEnterBackground() {
         player?.pause()
-    }
-    
-    @IBAction private func onPlayButton() {
-        playVideoByURLString(urlSting: previewURLString)
     }
 }
 
