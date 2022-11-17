@@ -16,4 +16,5 @@ protocol CreateStoryPreviewViewInput: AnyObject {
 protocol CreateStoryPreviewViewOutput: AnyObject {
     func viewIsReady()
     func onSaveStory()
+    func getStoryName() -> String
 }

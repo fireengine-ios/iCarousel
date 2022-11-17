@@ -260,6 +260,11 @@ class RouterVC: NSObject {
         }
     }
     
+    func popToAnalizeStory() {
+        tabBarController?.selectedIndex = 1
+        tabBarController?.navigationController?.popToRootViewController(animated: true)
+    }
+    
     func popTwoFactorAuth() {
         guard let viewControllers = navigationController?.viewControllers else {
             assertionFailure("nav bar is missing!")

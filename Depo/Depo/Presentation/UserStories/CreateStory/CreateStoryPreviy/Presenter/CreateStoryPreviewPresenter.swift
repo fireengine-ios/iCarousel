@@ -29,6 +29,10 @@ extension CreateStoryPreviewPresenter: CreateStoryPreviewViewOutput {
         interactor.viewIsReady()
     }
     
+    func getStoryName() -> String {
+        return interactor.getStoryName()
+    }
+    
     func onSaveStory() {
         startAsyncOperation()
         interactor.onSaveStory()

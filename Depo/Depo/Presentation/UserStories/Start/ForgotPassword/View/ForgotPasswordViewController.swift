@@ -242,7 +242,8 @@ extension ForgotPasswordViewController: UITextFieldDelegate {
                     output.startedEnteringPhoneNumber(withPlus: true)
                     return false
                 } else if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil {
-                    output.startedEnteringPhoneNumber(withPlus: false)
+                    /// Later on, according to condition, we may add this statement again!
+                    //output.startedEnteringPhoneNumber(withPlus: false)
                 }
             }
 

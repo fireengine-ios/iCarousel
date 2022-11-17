@@ -29,6 +29,10 @@ extension CreateStoryPreviewInteractor: CreateStoryPreviewInteractorInput {
         analyticsManager.trackDimentionsEveryClickGA(screen: .createStoryPreview)
     }
     
+    func getStoryName() -> String {
+        return story?.storyName ?? ""
+    }
+    
     func onSaveStory() {
         if isRequestStarted {
             return

@@ -91,6 +91,7 @@ enum Image: String, AppImage {
     /// Action/Music
     case iconPauseRed
     case iconPlayRed
+    case iconPause
     /// Action/Tab
     case iconTabMusicEmpty
     case iconTabMusic
@@ -159,6 +160,7 @@ enum Image: String, AppImage {
     case popupHide
     case popupUnHide
     case popupRestore
+    case popupLogout
     
     /// For You
     case forYouPeople
