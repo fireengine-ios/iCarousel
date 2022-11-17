@@ -279,6 +279,10 @@ extension ForYouTableViewCell: ForYouCardsCollectionViewCellDelegate {
         delegate?.onCloseCard(data: data, section: section)
         cardsData.remove(data)
         collectionView.reloadData()
+        
+        if cardsData.isEmpty {
+            ItemOperationManager.default.allCardsRemoved(for: section)
+        }
     }
     
     func showSavedCollage(item: WrapData) {

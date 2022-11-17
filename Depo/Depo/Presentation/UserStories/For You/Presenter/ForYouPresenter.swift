@@ -166,6 +166,7 @@ extension ForYouPresenter: ForYouViewOutput {
     }
     
     func getUpdateData(for section: ForYouSections?) {
+        self.currentSection = section
         interactor.getUpdateData(for: section)
     }
     
@@ -177,6 +178,19 @@ extension ForYouPresenter: ForYouViewOutput {
     func saveCard(data: HomeCardResponse, section: ForYouSections) {
         view.showSpinner()
         interactor.saveCard(data: data, section: section)
+    }
+    
+    func emptyCardData(for section: ForYouSections) {
+        switch section {
+        case .collageCards:
+            collageCardsData = []
+        case .animationCards:
+            animationCardsData = []
+        case .albumCards:
+            albumCardsData = []
+        default:
+            return
+        }
     }
 }
 
@@ -269,6 +283,7 @@ extension ForYouPresenter: ForYouInteractorOutput {
     
     func saveCardSuccess(data: HomeCardResponse, section: ForYouSections) {
         view.hideSpinner()
+        view.saveCardSuccess(section: section)
     }
     
     func getThrowbacksDetail(data: ThrowbackDetailsData) {

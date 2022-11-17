@@ -97,6 +97,10 @@ extension ForYouViewController: ForYouViewInput {
     func saveCardFailed(section: ForYouSections) {
         updateTableView(for: section)
     }
+    
+    func saveCardSuccess(section: ForYouSections) {
+        output.getUpdateData(for: section)
+    }
 }
 
 //MARK: -UITableViewDataSource
@@ -213,6 +217,11 @@ extension ForYouViewController: ItemOperationManagerViewProtocol {
     
     func tabBarDidChange() {
         output.currentSection = nil
+    }
+    
+    func allCardsRemoved(for section: ForYouSections) {
+        output.emptyCardData(for: section)
+        updateTableView(for: section)
     }
 }
 
