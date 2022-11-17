@@ -70,7 +70,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qY6-PL-KB4" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qY6-PL-KB4" customClass="DarkBlueButton" customModule="Billo" customModuleProvider="target">
                     <rect key="frame" x="28" y="610" width="319" height="45"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="m8s-jt-A2G"/>

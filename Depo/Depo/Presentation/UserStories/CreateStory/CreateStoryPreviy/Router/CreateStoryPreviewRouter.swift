@@ -16,7 +16,7 @@ extension CreateStoryPreviewRouter: CreateStoryPreviewRouterInput {
     func goToMain() {
         let router = RouterVC()
         
-        router.popCreateStory()
+        router.popToAnalizeStory()
     }
     
     func presentFinishPopUp(image: PopUpImage,
