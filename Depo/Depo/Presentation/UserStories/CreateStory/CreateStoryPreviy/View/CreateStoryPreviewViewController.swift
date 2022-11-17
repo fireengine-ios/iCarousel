@@ -18,48 +18,26 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
     
     var previewURLString: String? {
         didSet {
-            guard let previewURLString = previewURLString,
-            let sourceURL = URL(string: previewURLString)else {
+            guard let previewURLString = previewURLString else {
                 return
             }
             
             viewForPlayer.setAVPlayerURL(url: previewURLString)
-            
-            
-//            playerController?.player = nil
-//            playerController?.removeFromParent()
-//            playerController = nil
-//            player?.pause()
-//            player = nil
-//
-//            let plauerItem = AVPlayerItem(url: sourceURL)
-//
-//            player = AVPlayer(playerItem: plauerItem)
         }
     }
     
-    var player: AVPlayer?
-    var playerController: FixedAVPlayerViewController?
-        
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupNavigation()
         output.viewIsReady()
-        
-        //playVideoByURLString(urlSting: previewURLString)
     }
     
     override var preferredNavigationBarStyle: NavigationBarStyle {
         return .black
     }
     
-    private func setupNavigation() {        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(didEnterBackground),
-                                               name: UIApplication.didEnterBackgroundNotification,
-                                               object: nil)
-        
+    private func setupNavigation() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "",
                                                            style: .plain,
                                                            target: nil,
@@ -71,24 +49,10 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
         
         title = output.getStoryName()
     }
-    
-    func playVideoByURLString(urlSting: String?) {
-        playerController = FixedAVPlayerViewController()
-        playerController?.player = player
-        
-        addChild(playerController!)
-        playerController?.view.frame = viewForPlayer.bounds
-        viewForPlayer.addSubview((playerController?.view)!)
-        playerController?.didMove(toParent: self)
-    }
-    
+
     @objc private func onSaveButton() {
         output.onSaveStory()
         navigationItem.rightBarButtonItem?.isEnabled = false
-    }
-    
-    @objc private func didEnterBackground() {
-        player?.pause()
     }
 }
 
