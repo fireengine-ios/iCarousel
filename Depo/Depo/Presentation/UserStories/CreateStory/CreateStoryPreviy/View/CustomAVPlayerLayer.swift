@@ -44,8 +44,7 @@ class CustomAVPlayerLayer: UIView {
     lazy var playButton: UIButton = {
         let view = UIButton(type: .custom)
         view.setImage(Image.iconPlay.image, for: .normal)
-        view.setImage(Image.iconPlay.image, for: .selected)
-        //view.tintColor = .red
+        view.setImage(Image.iconPause.image, for: .selected)
         return view
     }()
     
@@ -206,5 +205,6 @@ class CustomAVPlayerLayer: UIView {
 
     @objc private func didEnterBackground() {
         player?.pause()
+        playButton.isSelected = false
     }
 }
