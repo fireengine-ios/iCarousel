@@ -44,7 +44,7 @@ final class ForYouTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var seeAllButton: UIButton! {
         willSet {
-            newValue.setTitle("See All", for: .normal)
+            newValue.setTitle(localized(.forYouSeeAll), for: .normal)
             newValue.titleLabel?.font = .appFont(.light, size: 14)
             newValue.setTitleColor(AppColor.label.color, for: .normal)
         }

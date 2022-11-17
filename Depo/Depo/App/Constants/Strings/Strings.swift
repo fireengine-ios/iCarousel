@@ -194,5 +194,22 @@ enum Strings: String, Localizable {
     // MARK: - All Files
     case allFilesNoMusicButtonText    = "Start adding your music"
     case allFilesNoDocumentButtonText = "Start adding your documents"
-
+    
+    // MARK: - Facelift
+    case forYouThrowbackTitle = "foryou_throwback"
+    case forYouMyAlbumsTitle = "foryou_myalbums"
+    case forYouAnimationsTitle = "foryou_animations"
+    case forYouMyAnimationsTitle = "foryou_myanimations"
+    case forYouCollagesTitle = "foryou_collages"
+    case forYouMyCollagesTitle = "foryou_my_collages"
+    case forYouEmptyAlbumsDesc = "foryou_no_album_warn"
+    case forYouEmptyPhotopickDesc = "foryou_no_photopick_warn"
+    case forYouEmptyPhotopickButton = "foryou_try_photopick"
+    case forYouEmptyStoryDesc = "foryou_no_story_warn"
+    case forYouSeeAll = "foryou_see_all"
+    case tabBarForYouTitle = "tabbar_foryou"
+    case tabBarDiscoverTitle = "tabbar_discover"
+    case changePasswordInputTitle = "change_pass_mail_or_phone"
+    case becomePremiumBannerDesc = "mystorage_become_premium"
+    
 }

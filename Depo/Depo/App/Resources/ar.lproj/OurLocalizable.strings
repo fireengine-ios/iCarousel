@@ -1995,7 +1995,6 @@
 "settings_change_password_apple_warning" = "لتغيير كلمة المرور الخاصة بك ، يجب عليك تسجيل الدخول إلى lifebox باستخدام معرف Apple الخاص بك.";
 "settings_change_password_apple_google_warning" = "لتغيير كلمة المرور الخاصة بك ، تحتاج إلى تسجيل الدخول إلى lifebox باستخدام معرف Google أو معرف Apple الخاص بك.";
 "settings_googe_apple_set_password" = "تعيين كلمة مرور lifebox";
-"settings_googe_apple_set_password" = "تعيين كلمة مرور Lifebox";
 "settings_google_apple_mail_match_error" = "لربط حسابك بـ lifebox ، يجب أن يكون عنوان بريدك الإلكتروني هو نفسه على كل نظام أساسي.";
 "googe_apple_login_invalid_token" = "محاولة تسجيل الدخول غير صحيحة ، يرجى التحقق من بيانات الاعتماد الخاصة بك والمحاولة مرة أخرى.";
 "settings_google_apple_empty_mail_error" = "يجب عليك إضافة عنوان بريد إلكتروني إلى حسابك.";
@@ -2018,8 +2017,6 @@
 "syncing" = "";
 "downloading" = "";
 "ETK_KVKK_Izin_Politikası" = "";
-"syncing" = "";
-"downloading" = "";
 
 /*Free for {3 months}
 then {11,99 TRY/Month}*/
@@ -2044,3 +2041,21 @@ then {11,99 TRY/Month}*/
 "paycell_share_message" = "انضممت إلى برنامج سفير العلامة التجارية lifebox. يمكنك الحصول على حزمة lifebox الخاصة بالبرنامج لمدة 6 أشهر 250 جيجابايت Premium بسعر مخفض بالنقر فوق الرابط أدناه. لا تفوت الفرصة 😊";
 "beeline_cancel_TC" = "يمكنك إلغاء أو إدارة اشتراكك في lifebox من Beeline التطبيق.";
 "paycell_share_message " = "";
+"foryou_throwback" = "";
+"foryou_myalbums" = "";
+"foryou_myanimations" = "";
+"foryou_collages" = "";
+"foryou_my_collages" = "";
+"foryou_animations" = "";
+"foryou_no_album_warn" = "";
+"foryou_no_photopick_warn" = "";
+"foryou_no_story_warn" = "";
+"foryou_try_photopick" = "";
+"ksaldalks" = "";
+"foryou_see_all" = "";
+
+/*Facelift*/
+"tabbar_foryou" = "";
+"tabbar_discover" = "";
+"change_pass_mail_or_phone" = "";
+"mystorage_become_premium" = "";

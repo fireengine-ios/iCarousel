@@ -2055,8 +2055,6 @@
 "syncing" = "Syncing";
 "downloading" = "Downloading";
 "ETK_KVKK_Izin_Politikası" = "Permission Policy";
-"syncing" = "Syncing";
-"downloading" = "Downloading";
 
 /*Free for {3 months}
 then {11,99 TRY/Month}*/
@@ -2081,5 +2079,35 @@ then {11,99 TRY/Month}*/
 "paycell_share_message" = "I joined the lifebox Brand Ambassador Program. You can have the program-specific lifebox 6-month 250GB Premium package for discounted price by clicking the link below. Don't miss it 😊";
 
 /*Fuzzy*/
-"beeline_cancel_TC" = "You can cancel or manage your lifebox subscription from the Beeline Application.";
+"beeline_cancel_TC" = "You can cancel or manage your lifebox subscription from the Beeline application.";
+
+/*Fuzzy*/
 "paycell_share_message " = "You have been sent 5GB of lifebox storage, click to redeem";
+"foryou_throwback" = "Throwback";
+"foryou_myalbums" = "My Albums";
+"foryou_myanimations" = "My Animations";
+
+/*Fuzzy*/
+"foryou_collages" = "Collages";
+
+/*Fuzzy*/
+"foryou_my_collages" = "My Collages";
+"foryou_animations" = "Animations";
+
+/*Fuzzy*/
+"foryou_no_album_warn" = "You haven't created an album yet.";
+
+/*Fuzzy*/
+"foryou_no_photopick_warn" = "You haven't used PhotoPick yet.";
+
+/*Fuzzy*/
+"foryou_no_story_warn" = "No active stories currently.";
+"foryou_try_photopick" = "Try PhotoPick";
+"ksaldalks" = "";
+"foryou_see_all" = "";
+
+/*Facelift*/
+"tabbar_foryou" = "";
+"tabbar_discover" = "";
+"change_pass_mail_or_phone" = "";
+"mystorage_become_premium" = "";
