@@ -28,18 +28,18 @@ enum ForYouSections: CaseIterable {
     var title: String {
         switch self {
         case .faceImage: return ""
-        case .throwback: return "Throwback"
+        case .throwback: return localized(.forYouThrowbackTitle)
         case .people: return TextConstants.myStreamPeopleTitle
         case .things: return TextConstants.myStreamThingsTitle
         case .places: return TextConstants.myStreamPlacesTitle
-        case .albums: return "My Albums"
+        case .albums: return localized(.forYouMyAlbumsTitle)
         case .photopick: return TextConstants.myStreamInstaPickTitle
         case .story: return TextConstants.myStreamStoriesTitle
-        case .animations: return "My Animations"
-        case .collageCards: return "Collages"
-        case .collages: return "My Collages"
+        case .animations: return localized(.forYouMyAnimationsTitle)
+        case .collageCards: return localized(.forYouCollagesTitle)
+        case .collages: return localized(.forYouMyCollagesTitle)
         case .hidden: return TextConstants.smartAlbumHidden
-        case .animationCards: return "Animations"
+        case .animationCards: return localized(.forYouAnimationsTitle)
         case .albumCards: return TextConstants.myStreamAlbumsTitle
         }
     }
@@ -47,11 +47,11 @@ enum ForYouSections: CaseIterable {
     var emptyText: String {
         switch self {
         case .albums:
-            return "You don't have any album"
+            return localized(.forYouEmptyAlbumsDesc)
         case .photopick:
-            return "You don't have any photopick"
+            return localized(.forYouEmptyPhotopickDesc)
         case .story:
-            return "You don't have any story"
+            return localized(.forYouEmptyStoryDesc)
         default:
             return ""
         }
@@ -62,7 +62,7 @@ enum ForYouSections: CaseIterable {
         case .albums:
             return TextConstants.createAlbum
         case .photopick:
-            return "Photopick'i dene"
+            return localized(.forYouEmptyPhotopickButton)
         case .story:
             return TextConstants.createStory
         default:

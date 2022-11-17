@@ -17,7 +17,7 @@ class PackagesBannerBuyPremiumView: UIView {
     
     lazy var titleLabel: UILabel = {
         let view = UILabel()
-        view.text = "Premuim ol bir sürü özelliğe sahip ol"
+        view.text = localized(.becomePremiumBannerDesc)
         view.textColor = .white
         view.font = .appFont(.medium, size: 14)
         view.numberOfLines = 0
@@ -40,7 +40,7 @@ class PackagesBannerBuyPremiumView: UIView {
         view.clipsToBounds = true
         view.adjustsFontSizeToFitWidth()
         view.insets = UIEdgeInsets(topBottom: 8, rightLeft: 12)
-        view.setTitle("Get Premium", for: .normal)
+        view.setTitle(TextConstants.becomePremium, for: .normal)
         view.setTitleColor(AppColor.settingsRestoreTextColor.color, for: .normal)
         view.backgroundColor = .white
         view.titleLabel?.font = .appFont(.medium, size: 16)
