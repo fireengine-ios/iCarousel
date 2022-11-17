@@ -29,6 +29,7 @@ protocol ForYouViewOutput: AnyObject {
     func showSavedCollage(item: WrapData)
     func showSavedAnimation(item: WrapData)
     func saveCard(data: HomeCardResponse, section: ForYouSections)
+    func emptyCardData(for section: ForYouSections)
     
     var currentSection: ForYouSections? {get set}
 }
