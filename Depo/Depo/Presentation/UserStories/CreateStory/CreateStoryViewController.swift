@@ -67,11 +67,9 @@ final class CreateStoryViewController: BaseViewController {
         }
     }
     
-    @IBOutlet private weak var createButton: RoundedInsetsButton! {
+    @IBOutlet private weak var createButton: DarkBlueButton! {
         willSet {
             newValue.setTitle(TextConstants.createStoryPhotosOrderNextButton, for: .normal)
-            newValue.setTitleColor(.white, for: .normal)
-            newValue.setBackgroundColor(AppColor.darkBlueAndTealish.color, for: .normal)
             newValue.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
             
             newValue.layer.shadowOffset = .zero
