@@ -99,7 +99,8 @@ final class TabBarConfigurator {
             router.forYou(),
             syncContactsVC,
             router.segmentedFiles,
-            EmptyViewController()
+            router.discover()
+            
         ]
         return list.map {
             let headerContaining = HeaderContainingViewController(child: $0)

@@ -1336,6 +1336,8 @@
 		89104BCA22CBA1B4005B3F58 /* PackagePremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A26E66B21A6E7D70033B797 /* PackagePremiumView.swift */; };
 		8915C325233B7D4A00EFC706 /* BasePopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A723390D69000083B7 /* BasePopUpController.swift */; };
 		8915C326233B7D4A00EFC706 /* BasePopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A723390D69000083B7 /* BasePopUpController.swift */; };
+		89256CE12926994900FAD38E /* DiscoverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89256CE02926994900FAD38E /* DiscoverTableViewCell.xib */; };
+		89256CE3292699B600FAD38E /* DiscoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89256CE2292699B600FAD38E /* DiscoverTableViewCell.swift */; };
 		892B014922DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B014722DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift */; };
 		892B014A22DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B014722DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift */; };
 		892B014D22DF160700BCECBC /* TwoFactorChallengeInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B014B22DF160700BCECBC /* TwoFactorChallengeInitializer.swift */; };
@@ -1358,6 +1360,22 @@
 		896133A52338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */; };
 		897B8F3A2338B7400028C690 /* HomePagePopUpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */; };
 		897B8F3B2338B7400028C690 /* HomePagePopUpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */; };
+		8980D91629260C9800817FF8 /* Discover.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8980D91529260C9800817FF8 /* Discover.xib */; };
+		8980D91A29260E4F00817FF8 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D91929260E4F00817FF8 /* DiscoverViewController.swift */; };
+		8980D91B2926155800817FF8 /* Discover.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8980D91529260C9800817FF8 /* Discover.xib */; };
+		8980D91C2926155900817FF8 /* Discover.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8980D91529260C9800817FF8 /* Discover.xib */; };
+		8980D91D2926155A00817FF8 /* Discover.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8980D91529260C9800817FF8 /* Discover.xib */; };
+		8980D92729261D7400817FF8 /* DiscoverInitilizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92629261D7400817FF8 /* DiscoverInitilizer.swift */; };
+		8980D92929261DA300817FF8 /* DiscoverConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92829261DA300817FF8 /* DiscoverConfigurator.swift */; };
+		8980D92B29261EA800817FF8 /* DiscoverModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92A29261EA800817FF8 /* DiscoverModuleInput.swift */; };
+		8980D92F29261FBD00817FF8 /* DiscoverViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92E29261FBD00817FF8 /* DiscoverViewInput.swift */; };
+		8980D93229261FE600817FF8 /* DiscoverViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D93129261FE600817FF8 /* DiscoverViewOutput.swift */; };
+		8980D9362926203400817FF8 /* DiscoverRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D9352926203400817FF8 /* DiscoverRouterInput.swift */; };
+		8980D9382926204B00817FF8 /* DiscoverRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D9372926204B00817FF8 /* DiscoverRouter.swift */; };
+		8980D93A2926208A00817FF8 /* DiscoverPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D9392926208A00817FF8 /* DiscoverPresenter.swift */; };
+		8980D93C292620E200817FF8 /* DiscoverInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D93B292620E200817FF8 /* DiscoverInteractorOutput.swift */; };
+		8980D93E292620F700817FF8 /* DiscoverInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D93D292620F700817FF8 /* DiscoverInteractorInput.swift */; };
+		8980D942292621C200817FF8 /* DiscoverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D941292621C200817FF8 /* DiscoverInteractor.swift */; };
 		89CC89F423AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CC89F123AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift */; };
 		89CC89F623AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CC89F123AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift */; };
 		89CC89F823AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89CC89F223AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib */; };
@@ -10509,6 +10527,8 @@
 		890F737622EEFAFF00BA0020 /* BaseChangeEmailPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseChangeEmailPopUp.xib; sourceTree = "<group>"; };
 		890F737722EEFAFF00BA0020 /* BaseChangeEmailPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseChangeEmailPopUp.swift; sourceTree = "<group>"; };
 		8921222D2303FFA400396ED0 /* EmailVerifiedPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerifiedPopUp.swift; sourceTree = "<group>"; };
+		89256CE02926994900FAD38E /* DiscoverTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscoverTableViewCell.xib; sourceTree = "<group>"; };
+		89256CE2292699B600FAD38E /* DiscoverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewCell.swift; sourceTree = "<group>"; };
 		892B014722DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorChallengeConfigurator.swift; sourceTree = "<group>"; };
 		892B014B22DF160700BCECBC /* TwoFactorChallengeInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorChallengeInitializer.swift; sourceTree = "<group>"; };
 		892B015022DF168F00BCECBC /* TwoFactorChallengePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorChallengePresenter.swift; sourceTree = "<group>"; };
@@ -10521,6 +10541,19 @@
 		896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePagePopUpOperation.swift; sourceTree = "<group>"; };
 		896133A723390D69000083B7 /* BasePopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePopUpController.swift; sourceTree = "<group>"; };
 		897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePagePopUpsService.swift; sourceTree = "<group>"; };
+		8980D91529260C9800817FF8 /* Discover.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Discover.xib; sourceTree = "<group>"; };
+		8980D91929260E4F00817FF8 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
+		8980D92629261D7400817FF8 /* DiscoverInitilizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverInitilizer.swift; sourceTree = "<group>"; };
+		8980D92829261DA300817FF8 /* DiscoverConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverConfigurator.swift; sourceTree = "<group>"; };
+		8980D92A29261EA800817FF8 /* DiscoverModuleInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverModuleInput.swift; sourceTree = "<group>"; };
+		8980D92E29261FBD00817FF8 /* DiscoverViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewInput.swift; sourceTree = "<group>"; };
+		8980D93129261FE600817FF8 /* DiscoverViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewOutput.swift; sourceTree = "<group>"; };
+		8980D9352926203400817FF8 /* DiscoverRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverRouterInput.swift; sourceTree = "<group>"; };
+		8980D9372926204B00817FF8 /* DiscoverRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverRouter.swift; sourceTree = "<group>"; };
+		8980D9392926208A00817FF8 /* DiscoverPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverPresenter.swift; sourceTree = "<group>"; };
+		8980D93B292620E200817FF8 /* DiscoverInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverInteractorOutput.swift; sourceTree = "<group>"; };
+		8980D93D292620F700817FF8 /* DiscoverInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverInteractorInput.swift; sourceTree = "<group>"; };
+		8980D941292621C200817FF8 /* DiscoverInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverInteractor.swift; sourceTree = "<group>"; };
 		89CC89F123AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSSmartAlbumWarningPopUp.swift; sourceTree = "<group>"; };
 		89CC89F223AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSSmartAlbumWarningPopUp.xib; sourceTree = "<group>"; };
 		89D1EBE923EC3BF000092031 /* UIApplication+Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Display.swift"; sourceTree = "<group>"; };
@@ -16115,6 +16148,15 @@
 			path = TwoFactorChallenge;
 			sourceTree = "<group>";
 		};
+		89256CDC2926985B00FAD38E /* DiscoverCard */ = {
+			isa = PBXGroup;
+			children = (
+				89256CE02926994900FAD38E /* DiscoverTableViewCell.xib */,
+				89256CE2292699B600FAD38E /* DiscoverTableViewCell.swift */,
+			);
+			path = DiscoverCard;
+			sourceTree = "<group>";
+		};
 		892B014622DF155700BCECBC /* Configurator */ = {
 			isa = PBXGroup;
 			children = (
@@ -16164,6 +16206,75 @@
 				896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */,
 			);
 			path = HomePagePopUpsService;
+			sourceTree = "<group>";
+		};
+		8980D91229260C1B00817FF8 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				8980D91829260E1800817FF8 /* View */,
+				8980D91F29261A9600817FF8 /* Presenter */,
+				8980D92329261AA100817FF8 /* Interactor */,
+				8980D92429261AAC00817FF8 /* Router */,
+				8980D92529261AB300817FF8 /* Configurator */,
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
+		8980D91829260E1800817FF8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8980D9432926329C00817FF8 /* Cell */,
+				8980D91529260C9800817FF8 /* Discover.xib */,
+				8980D91929260E4F00817FF8 /* DiscoverViewController.swift */,
+				8980D92E29261FBD00817FF8 /* DiscoverViewInput.swift */,
+				8980D93129261FE600817FF8 /* DiscoverViewOutput.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8980D91F29261A9600817FF8 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				8980D9392926208A00817FF8 /* DiscoverPresenter.swift */,
+				8980D92A29261EA800817FF8 /* DiscoverModuleInput.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		8980D92329261AA100817FF8 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				8980D941292621C200817FF8 /* DiscoverInteractor.swift */,
+				8980D93D292620F700817FF8 /* DiscoverInteractorInput.swift */,
+				8980D93B292620E200817FF8 /* DiscoverInteractorOutput.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		8980D92429261AAC00817FF8 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				8980D9372926204B00817FF8 /* DiscoverRouter.swift */,
+				8980D9352926203400817FF8 /* DiscoverRouterInput.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		8980D92529261AB300817FF8 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				8980D92829261DA300817FF8 /* DiscoverConfigurator.swift */,
+				8980D92629261D7400817FF8 /* DiscoverInitilizer.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		8980D9432926329C00817FF8 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				89256CDC2926985B00FAD38E /* DiscoverCard */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		898B557D23ABB41B00E30472 /* HSCompletionPopUp */ = {
@@ -19709,6 +19820,7 @@
 		CE3EB30A1FC7F0AD000B70D6 /* UserStories */ = {
 			isa = PBXGroup;
 			children = (
+				8980D91229260C1B00817FF8 /* Discover */,
 				F0571E95288AE18A00A0D6AC /* For You */,
 				7378053223ABC0E7001D57BD /* OverlaySticker */,
 				CE3EB30C1FC7F4D2000B70D6 /* Start */,
@@ -21601,8 +21713,8 @@
 		F0571E9A288AE2FC00A0D6AC /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F00610CC2899324700911048 /* ForYouSections.swift */,
 				F0571EA5288AE4B800A0D6AC /* Cells */,
+				F00610CC2899324700911048 /* ForYouSections.swift */,
 				F0571E9B288AE31700A0D6AC /* ForYou.xib */,
 				F0571EA0288AE33700A0D6AC /* ForYouViewController.swift */,
 				F0571EE6288AE75700A0D6AC /* ForYouViewInput.swift */,
@@ -22718,6 +22830,7 @@
 				CF703F4A24E3CC57005EFFFD /* (null) in Resources */,
 				F064FB2F278B209500B461D0 /* PublicSharedItemsTableViewCell.xib in Resources */,
 				98DBC04D2410FB1900926F40 /* AutoSyncHeaderTableViewCell.xib in Resources */,
+				89256CE12926994900FAD38E /* DiscoverTableViewCell.xib in Resources */,
 				8C0E90581FDEBDFF00789C91 /* SwipeableCardCell.xib in Resources */,
 				8CF6A9C4207C8CF9007DEF71 /* CollectionViewSpinnerFooter.xib in Resources */,
 				A253D62A21A210690049AC15 /* PremiumViewController.xib in Resources */,
@@ -22731,6 +22844,7 @@
 				8C0E905C1FDEBDFF00789C91 /* LocalAlbumCollectionViewCell.xib in Resources */,
 				8C0E905D1FDEBDFF00789C91 /* GridListTopBarSortingTableCell.xib in Resources */,
 				8C0E905E1FDEBDFF00789C91 /* TurkcellSaturaIta.ttf in Resources */,
+				8980D91629260C9800817FF8 /* Discover.xib in Resources */,
 				98B04B20259316FF0011DAEB /* PlusMenuItemView.xib in Resources */,
 				737A2EC82338F44E0014258A /* QuestionCell.xib in Resources */,
 				8C0E905F1FDEBDFF00789C91 /* PasscodeViewImp.xib in Resources */,
@@ -23252,6 +23366,7 @@
 				CE784E7522A685FB00662219 /* PackagesViewController.xib in Resources */,
 				CE784E7922A685FB00662219 /* LocalAlbumCollectionViewCell.xib in Resources */,
 				CE784E7B22A685FB00662219 /* PrepareQuickScroll.xib in Resources */,
+				8980D91C2926155900817FF8 /* Discover.xib in Resources */,
 				CE784E8022A685FB00662219 /* ChangePasswordController.xib in Resources */,
 				98E4B9F423C6FF70003A4631 /* TrashBinViewController.xib in Resources */,
 				07C75A23281A786400B028F0 /* GT-America-LC-Standard-Bold.ttf in Resources */,
@@ -23705,6 +23820,7 @@
 				CF8B6AF423CBC9D70021B021 /* UsageInfoViewController.xib in Resources */,
 				CF8B6AFB23CBC9D70021B021 /* PaymentPopUpController.xib in Resources */,
 				CF8B6AFC23CBC9D70021B021 /* SharedImages.xcassets in Resources */,
+				8980D91B2926155800817FF8 /* Discover.xib in Resources */,
 				CF8B6B0123CBC9D70021B021 /* PhotoVideoDetailCell.xib in Resources */,
 				CF8B6AFD23CBC9D70021B021 /* (null) in Resources */,
 				CF8B6AFE23CBC9D70021B021 /* (null) in Resources */,
@@ -24039,6 +24155,7 @@
 				CF8B725023CBCA280021B021 /* ChangePasswordController.xib in Resources */,
 				CF8B725223CBCA280021B021 /* GridListTopBarSortingTableCell.xib in Resources */,
 				CF8B725423CBCA280021B021 /* TurkcellSaturaIta.ttf in Resources */,
+				8980D91D2926155A00817FF8 /* Discover.xib in Resources */,
 				CF8B725823CBCA280021B021 /* PasscodeViewImp.xib in Resources */,
 				0305A35023D5C5A9004D1EC7 /* HSCompletionPopUp.xib in Resources */,
 				07C75A24281A786400B028F0 /* GT-America-LC-Standard-Bold.ttf in Resources */,
@@ -25546,6 +25663,7 @@
 				4A0AC15D20874B9600032CC7 /* PeriodicContactSyncInteractorOutput.swift in Sources */,
 				0711887027F6EBDE00F512A1 /* AppImage.swift in Sources */,
 				98231A0524F3A1E700FD16E2 /* SliderView.swift in Sources */,
+				89256CE3292699B600FAD38E /* DiscoverTableViewCell.swift in Sources */,
 				B56FBB292122C4BA004F4A59 /* TermsOfUseRouterInput.swift in Sources */,
 				8CEE8D26214A473200150996 /* FaceImageDesigner.swift in Sources */,
 				CE00B24F2202FB4600A5A696 /* PhotoCell.swift in Sources */,
@@ -25701,12 +25819,14 @@
 				8C0E8D8C1FDEBDFF00789C91 /* WrapperedItems.swift in Sources */,
 				896133A42338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */,
 				CEF371AA20887848007AD36E /* BackButton.swift in Sources */,
+				8980D942292621C200817FF8 /* DiscoverInteractor.swift in Sources */,
 				CEBAB15C2094806C002824C6 /* InsetsButton.swift in Sources */,
 				8C0E8D8D1FDEBDFF00789C91 /* SearchService.swift in Sources */,
 				9823195D24F3A1E600FD16E2 /* PreparedFilterSliderView.swift in Sources */,
 				8C0E8D901FDEBDFF00789C91 /* MediaItemsMetaData+CoreDataClass.swift in Sources */,
 				98B04823259314750011DAEB /* BackupVersion.m in Sources */,
 				8CD84C461FDEC5E7005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */,
+				8980D92B29261EA800817FF8 /* DiscoverModuleInput.swift in Sources */,
 				B57F8E062587978400799405 /* FirebaseRemoteConfig.swift in Sources */,
 				8C0E8D921FDEBDFF00789C91 /* AutoSyncInteractorInput.swift in Sources */,
 				CF71463424B597A800D83E60 /* ContactSyncNoBackupView.swift in Sources */,
@@ -25725,6 +25845,7 @@
 				8C06AC282008AB97003D8E05 /* FreeAppSpaceViewController.swift in Sources */,
 				F0571EBF288AE6BD00A0D6AC /* ForYouInitilizer.swift in Sources */,
 				8C0E8D9A1FDEBDFF00789C91 /* MediaItemsAlbum+CoreDataProperties.swift in Sources */,
+				8980D93229261FE600817FF8 /* DiscoverViewOutput.swift in Sources */,
 				8C0E8D9B1FDEBDFF00789C91 /* BaseCollectionViewCell.swift in Sources */,
 				92004B6121AD151A00582C45 /* MyStorageRouter.swift in Sources */,
 				8C0E8D9C1FDEBDFF00789C91 /* UserProfileInteractorInput.swift in Sources */,
@@ -25734,11 +25855,13 @@
 				8C0E8D9D1FDEBDFF00789C91 /* EULAService.swift in Sources */,
 				98B0485B259314750011DAEB /* RestoreHelper.m in Sources */,
 				73EA170222EB2C7700BAD2D3 /* SpotifyRoutingService.swift in Sources */,
+				8980D92F29261FBD00817FF8 /* DiscoverViewInput.swift in Sources */,
 				8C208652228D4B2E000BEDAD /* RangeAPIInfo.swift in Sources */,
 				9886113A240FF4DC00A49C5B /* BecomePremiumViewSourceType.swift in Sources */,
 				0780AB252791681F000760D9 /* RecognizedText.swift in Sources */,
 				8C0E8DA01FDEBDFF00789C91 /* RegistrationUserInfoModel.swift in Sources */,
 				F02833B92779E1D100C4217F /* DragAndDropFileExtensions.swift in Sources */,
+				8980D93A2926208A00817FF8 /* DiscoverPresenter.swift in Sources */,
 				89DCC5CC2403A99900488F1F /* SubscriptionOfferView.swift in Sources */,
 				8C0E8DA11FDEBDFF00789C91 /* AutoSyncPresenter.swift in Sources */,
 				B52BAC5823AE1BE60051E21D /* CoreDataConfig.swift in Sources */,
@@ -25833,6 +25956,7 @@
 				8C0E8DC71FDEBDFF00789C91 /* TermsAndServicesViewInput.swift in Sources */,
 				CE58FB0120444525007F3F54 /* SharedFactory.swift in Sources */,
 				3A9C281326525FF900EFADE9 /* AccountConstants.swift in Sources */,
+				8980D92729261D7400817FF8 /* DiscoverInitilizer.swift in Sources */,
 				8C0E8DC91FDEBDFF00789C91 /* WhiteButtonWithRoundedCorner.swift in Sources */,
 				8C0E8DCA1FDEBDFF00789C91 /* AlbumService.swift in Sources */,
 				8C0E8DCB1FDEBDFF00789C91 /* TermsAndServicesViewOutput.swift in Sources */,
@@ -26065,6 +26189,7 @@
 				89E51D5022CA111F007A7DBC /* CreateStoryPreviewModuleInput.swift in Sources */,
 				076BD1CF27BC12E3004609E3 /* MapSearchViewInput.swift in Sources */,
 				8C0E8E2A1FDEBDFF00789C91 /* ImportFromInstagramInteractor.swift in Sources */,
+				8980D9382926204B00817FF8 /* DiscoverRouter.swift in Sources */,
 				CFA9D6D12562062D00C8F25D /* DismissKeyboardScrollView.swift in Sources */,
 				F028C10F2789F266005CE6AF /* PublicShareViewOutput.swift in Sources */,
 				98AC47FC252DFC05003EB6C5 /* FunTabBar.swift in Sources */,
@@ -26097,6 +26222,7 @@
 				0309F93B23D57F3B001DB5FA /* NetmeraEvents.swift in Sources */,
 				8C0E8E391FDEBDFF00789C91 /* LanguageModel.swift in Sources */,
 				98792DE722FD83BF000A77E5 /* SpotifyImportedTracksNavbarManager.swift in Sources */,
+				8980D93C292620E200817FF8 /* DiscoverInteractorOutput.swift in Sources */,
 				8E26D97B2306999000D08123 /* MusicPresenter.swift in Sources */,
 				8C208642228D4B2E000BEDAD /* ScrollBarView.swift in Sources */,
 				8C0E8E3A1FDEBDFF00789C91 /* Equatable+Contains.swift in Sources */,
@@ -26354,6 +26480,7 @@
 				9862BC87255E899700D7945E /* FileInfoShareContactCell.swift in Sources */,
 				8C0E8EEF1FDEBDFF00789C91 /* PhotoVideoDetailInitializer.swift in Sources */,
 				03056AC223BA23C000F6D57A /* NetmeraService.swift in Sources */,
+				8980D91A29260E4F00817FF8 /* DiscoverViewController.swift in Sources */,
 				7C849212201CB979007C502A /* LatestUpladsCard.swift in Sources */,
 				98B04773259314740011DAEB /* UpdateServerIntegration.m in Sources */,
 				8C0E8EF01FDEBDFF00789C91 /* UserInfoSubViewViewInput.swift in Sources */,
@@ -26512,6 +26639,7 @@
 				98231A5224F3A23500FD16E2 /* AweStruckFilter.swift in Sources */,
 				8C0E8F3E1FDEBDFF00789C91 /* SplashRouterInput.swift in Sources */,
 				F028C1002789E132005CE6AF /* PublicShareInteractor.swift in Sources */,
+				8980D92929261DA300817FF8 /* DiscoverConfigurator.swift in Sources */,
 				73E41D9522DDAFD100B036F4 /* TwoFactorAuthErrorResponse.swift in Sources */,
 				07D42135274E4D0800061EA2 /* ItemAnnotation.swift in Sources */,
 				8C208640228D4B2E000BEDAD /* PhotoVideoScrollBarManager.swift in Sources */,
@@ -26588,6 +26716,7 @@
 				B57BC177252C89640083B5CD /* PHAsset+FetchAll.swift in Sources */,
 				7C121F01208742A800AA585F /* TokenKeychainStorage.swift in Sources */,
 				8C0E8F561FDEBDFF00789C91 /* ActionSheetPredetermendConfigs.swift in Sources */,
+				8980D93E292620F700817FF8 /* DiscoverInteractorInput.swift in Sources */,
 				8C0E8F571FDEBDFF00789C91 /* FileInfoConfigurator.swift in Sources */,
 				CF71473C24B597AA00D83E60 /* ContactSyncPopupFactory.swift in Sources */,
 				8C0E8F581FDEBDFF00789C91 /* FileInfoInitializer.swift in Sources */,
@@ -26854,6 +26983,7 @@
 				8C0E8FC01FDEBDFF00789C91 /* ActivityTimelineViewController.swift in Sources */,
 				F036B15827623119005A2D7E /* SpotlightSearchHelper.swift in Sources */,
 				8C0E8FC11FDEBDFF00789C91 /* ActivityTimelineModuleInput.swift in Sources */,
+				8980D9362926203400817FF8 /* DiscoverRouterInput.swift in Sources */,
 				8C0E8FC21FDEBDFF00789C91 /* ActivityTimelinePresenter.swift in Sources */,
 				8C0E8FC31FDEBDFF00789C91 /* ActivityTimelineInteractorInput.swift in Sources */,
 				8C0E8FC41FDEBDFF00789C91 /* ActivityTimelineInteractorOutput.swift in Sources */,
