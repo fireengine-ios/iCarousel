@@ -517,6 +517,10 @@ class RouterVC: NSObject {
     func forYou() -> HeaderContainingViewController.ChildViewController {
         return ForYouInitilizer.initializeViewController(with: "ForYou")
     }
+    
+    func discover() -> HeaderContainingViewController.ChildViewController {
+        return DiscoverInitilizer.initializeViewController(with: "Discover")
+    }
 
     // MARK: Music
     
@@ -1328,7 +1332,13 @@ class RouterVC: NSObject {
             case .gallery:
                 tabBarVC.showPhotoScreen()
             case .discover:
-                break
+                guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
+                    assertionFailure("This index is non existent 😵")
+                    return
+                }
+                tabBarVC.tabBar.selectedItem = newSelectedItem
+                tabBarVC.selectedIndex = index.rawValue
+                //break
             }
         } else {
             tabBarVC.popToRootCurrentNavigationController(animated: true)

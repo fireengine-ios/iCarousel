@@ -43,6 +43,7 @@ enum OperationType: String {
     case documents                  = "THINGS_DOCUMENT"
     case photoPrint                 = "PHOTOPRINT"
     case paycell                    = "PAYCELL"
+    case drawCampaign               = "DRAW_CAMPAIGN"
 }
 
 typealias BlockObject = VoidHandler
@@ -415,6 +416,10 @@ class CardsManager: NSObject {
         case .photoPrint:
             cardView = PhotoPrintCard.initFromNib()
         case .paycell:
+            let popup = InvitationCard.initFromNib()
+            popup.configurateWithType(viewType: .paycell)
+            cardView = popup
+        case .drawCampaign:
             let popup = InvitationCard.initFromNib()
             popup.configurateWithType(viewType: .paycell)
             cardView = popup
