@@ -181,6 +181,10 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             self?.output.searchPressed(output: self)
         })
        
+       let plus = NavBarWithAction(navItem: NavigationBarList().plus, action: { [weak self] _ in
+           self?.output.plusPressed(output: self)
+       })
+       
         let newAlbum = NavBarWithAction(navItem: NavigationBarList().newAlbum, action: { [weak self] _ in
             self?.output.openCreateNewAlbum()
         })
@@ -191,6 +195,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             search.navItem.imageInsets.left = 28
         }
         rightActions.append(search)
+        rightActions.append(plus)
         navBarConfigurator.configure(right: isSelecting ? [] : rightActions, left: [])
     
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
