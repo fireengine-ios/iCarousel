@@ -786,6 +786,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         router.showSearchScreen(output: output)
     }
     
+    func plusPressed(output: UIViewController?) {
+        router.showPlusScreen(output: output)
+    }
+    
     func openCreateNewAlbum() {
         router.openCreateNewAlbum()
     }

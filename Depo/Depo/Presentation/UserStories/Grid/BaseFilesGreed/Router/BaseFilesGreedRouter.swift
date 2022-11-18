@@ -94,6 +94,11 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
         router.pushViewController(viewController: controller)
     }
     
+    func showPlusScreen(output: UIViewController?) {
+        let controller = router.createStory(navTitle: TextConstants.createStory)
+        router.pushViewController(viewController: controller)
+    }
+    
     func showUpload() {
         let controller = router.uploadPhotos()
         let navigation = NavigationController(rootViewController: controller)
