@@ -184,5 +184,6 @@ enum Image: String, AppImage {
     case popupUnsync
     case iconPhotosPlaceholder
     case iconVideosPlaceholder
+    case iconStoryGroup
 
 }
