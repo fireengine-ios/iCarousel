@@ -2107,7 +2107,7 @@ then {11,99 TRY/Month}*/
 "foryou_see_all" = "";
 
 /*Facelift*/
-"tabbar_foryou" = "";
-"tabbar_discover" = "";
+"tabbar_foryou" = "For You";
+"tabbar_discover" = "Discover";
 "change_pass_mail_or_phone" = "";
 "mystorage_become_premium" = "";
