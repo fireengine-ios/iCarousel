@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -21,7 +20,6 @@
                 <outlet property="floatingHeaderContainerHeightConstraint" destination="J3A-WS-4mi" id="c9c-o0-s47"/>
                 <outlet property="headerStackView" destination="acy-kT-cr5" id="6Ie-82-uaS"/>
                 <outlet property="noFilesImage" destination="qz2-SP-6oQ" id="rwb-kw-oSL"/>
-                <outlet property="noFilesImageContainer" destination="LwB-Yk-UEM" id="CXz-pr-m7K"/>
                 <outlet property="noFilesLabel" destination="fdq-Cf-39W" id="gmp-PY-CFM"/>
                 <outlet property="noFilesTopLabel" destination="0lC-K4-1ac" id="TJd-tm-6eI"/>
                 <outlet property="noFilesView" destination="ZI3-Dh-bXS" id="Tf2-p8-qvW"/>
@@ -97,37 +95,25 @@
                                 <action selector="onStartCreatingFilesButton" destination="-1" eventType="touchUpInside" id="gVy-bU-Rnz"/>
                             </connections>
                         </button>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LwB-Yk-UEM" userLabel="Image Container">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qz2-SP-6oQ">
                             <rect key="frame" x="134" y="0.0" width="114" height="114"/>
-                            <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qz2-SP-6oQ">
-                                    <rect key="frame" x="29.666666666666657" y="29.333333333333343" width="55" height="55"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="55" id="vQg-yh-HbG"/>
-                                        <constraint firstAttribute="width" constant="55" id="yin-c6-zcV"/>
-                                    </constraints>
-                                </imageView>
-                            </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstItem="qz2-SP-6oQ" firstAttribute="centerY" secondItem="LwB-Yk-UEM" secondAttribute="centerY" id="VjI-nU-5dG"/>
-                                <constraint firstItem="qz2-SP-6oQ" firstAttribute="centerX" secondItem="LwB-Yk-UEM" secondAttribute="centerX" id="WdB-RA-AtM"/>
-                                <constraint firstAttribute="width" constant="114" id="bzL-fg-ekO"/>
-                                <constraint firstAttribute="height" constant="114" id="pZa-Bn-01C"/>
+                                <constraint firstAttribute="width" constant="114" id="NaH-IT-V72"/>
+                                <constraint firstAttribute="height" constant="114" id="hKi-DQ-lbT"/>
                             </constraints>
-                        </view>
+                        </imageView>
                     </subviews>
                     <constraints>
                         <constraint firstItem="UTy-IA-Avr" firstAttribute="top" secondItem="fdq-Cf-39W" secondAttribute="bottom" constant="40" id="9ks-nj-hts"/>
-                        <constraint firstItem="LwB-Yk-UEM" firstAttribute="top" secondItem="ZI3-Dh-bXS" secondAttribute="top" id="Am9-NZ-BB3"/>
-                        <constraint firstItem="fdq-Cf-39W" firstAttribute="top" secondItem="LwB-Yk-UEM" secondAttribute="bottom" constant="40" id="K5H-BI-lA4"/>
                         <constraint firstAttribute="bottom" secondItem="UTy-IA-Avr" secondAttribute="bottom" id="KV4-aB-0vn"/>
                         <constraint firstItem="fdq-Cf-39W" firstAttribute="leading" secondItem="ZI3-Dh-bXS" secondAttribute="leading" constant="8" id="QSi-hF-074"/>
+                        <constraint firstItem="qz2-SP-6oQ" firstAttribute="top" secondItem="ZI3-Dh-bXS" secondAttribute="top" id="Qh5-5E-ZMH"/>
+                        <constraint firstItem="fdq-Cf-39W" firstAttribute="top" secondItem="qz2-SP-6oQ" secondAttribute="bottom" constant="40" id="TU1-3b-brR"/>
                         <constraint firstAttribute="trailing" secondItem="fdq-Cf-39W" secondAttribute="trailing" constant="8" id="dtr-Zd-aRq"/>
+                        <constraint firstItem="qz2-SP-6oQ" firstAttribute="centerX" secondItem="ZI3-Dh-bXS" secondAttribute="centerX" id="fok-0q-HXD"/>
                         <constraint firstItem="UTy-IA-Avr" firstAttribute="centerX" secondItem="ZI3-Dh-bXS" secondAttribute="centerX" id="gSt-4w-qVr"/>
                         <constraint firstAttribute="trailing" secondItem="UTy-IA-Avr" secondAttribute="trailing" constant="28" id="gkl-g0-byM"/>
                         <constraint firstItem="UTy-IA-Avr" firstAttribute="leading" secondItem="ZI3-Dh-bXS" secondAttribute="leading" constant="28" id="n8X-WM-A7C"/>
-                        <constraint firstItem="LwB-Yk-UEM" firstAttribute="centerX" secondItem="ZI3-Dh-bXS" secondAttribute="centerX" id="wcd-um-yop"/>
                     </constraints>
                     <variation key="heightClass=regular-widthClass=regular">
                         <mask key="constraints">
@@ -186,8 +172,5 @@
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>
