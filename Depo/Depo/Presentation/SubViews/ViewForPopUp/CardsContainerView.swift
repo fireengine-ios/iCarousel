@@ -213,13 +213,13 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
             }
             
             viewsByType[type] = view
-            if let popUp = view as? ProgressCard {
+            /*if let popUp = view as? ProgressCard {
                 popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
                 if let item = object {
                     popUp.setImageForUploadingItem(item: item)
                 }
             }
-            addPopUpSubView(popUp: view)
+            addPopUpSubView(popUp: view)*/
             
         }
     }
