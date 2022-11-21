@@ -12,7 +12,9 @@ class AutoSyncRouter: AutoSyncRouterInput {
  
     func routNextVC() {
         DispatchQueue.toMain {
-            self.router.setNavigationController(controller: self.router.tabBarScreen)
+            self.router.popViewController()
+            /// it was going to tabbar directly, it may change acording to flow
+            //self.router.setNavigationController(controller: self.router.tabBarScreen)
         }
     }
     
