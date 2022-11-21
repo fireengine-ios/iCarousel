@@ -14,6 +14,8 @@ protocol LoginRouterInput {
     
     func goToHomePage()
     
+    func goToSecurityInfoPage()
+    
     func goToTermsAndServices()
     
     func goToSyncSettingsView()

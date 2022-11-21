@@ -48,9 +48,28 @@ class LoginPresenter: BasePresenter {
         }
     }
     
+    private func getAccountInfo() {
+        SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] accountInfo in
+            DispatchQueue.toMain {
+                self?.addSecurityInfoIfNeeded(with: accountInfo)
+            }
+        }, fail: { error in
+            debugPrint("getAccountInfo \(error.description)")
+        })
+    }
+    
+    private func addSecurityInfoIfNeeded(with accountInfo: AccountInfoResponse) {
+        if accountInfo.hasRecoveryMail != true && accountInfo.hasSecurityQuestionInfo != true {
+            router.goToSecurityInfoPage()
+        }
+    }
+    
     private func openApp() {
         AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
         AuthoritySingleton.shared.checkNewVersionApp()
+        
+        router.goToHomePage()
+        getAccountInfo()
         openAutoSyncIfNeeded()
     }
     

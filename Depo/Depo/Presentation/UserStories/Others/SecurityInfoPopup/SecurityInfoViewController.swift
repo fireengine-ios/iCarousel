@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Typist
 
-final class SecurityInfoViewController: UIViewController, NibInit, KeyboardHandler {
+final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHandler {
 
     //MARK: -IBOutlets
     @IBOutlet private weak var scrollView: UIScrollView!
@@ -91,13 +91,26 @@ final class SecurityInfoViewController: UIViewController, NibInit, KeyboardHandl
         return view
     }()
     
+    private lazy var closeSelfButton = UIBarButtonItem(image: NavigationBarImage.back.image,
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(closeSelf))
+    
+    var fromSettings: Bool = true
+    
     //MARK: -Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = AppColor.popUpBackground.color
         initSetup()
-        setupKeyboard()        
+        setupKeyboard()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+         super.viewWillAppear(animated)
+         
+        setupNavigation()
+     }
     
     //MARK: -Helpers
     private func initSetup() {
@@ -108,8 +121,25 @@ final class SecurityInfoViewController: UIViewController, NibInit, KeyboardHandl
         addTapGestureToHideKeyboard()
     }
     
+    private func setupNavigation() {
+        navigationItem.leftBarButtonItem = closeSelfButton
+        
+        title = TextConstants.userProfileSecretQuestion
+    }
+    
     private func setSaveButton(isActive: Bool) {
         saveButton.isEnabled = isActive
+    }
+    
+    @objc private func closeSelf() {
+        if !fromSettings {
+            DispatchQueue.toMain {
+                let router = RouterVC()
+                router.popViewController()
+            }
+        } else {
+            dismiss(animated: true)
+        }
     }
     
     @objc private func checkButtonStatus() {
