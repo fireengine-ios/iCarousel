@@ -117,10 +117,11 @@ final class PassThroughView: UIView {
     }
     
     private func addGestureRecognizers() {
-        guard let window = UIApplication.shared.delegate?.window as? UIWindow  else {
-            assertionFailure()
-            return
-        }
+//        guard let window = UIApplication.shared.delegate?.window as? UIWindow  else {
+//            assertionFailure()
+//            return
+//        }
+        guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
         window.addGestureRecognizer(panGestureRecognizer)
         window.addGestureRecognizer(swipeGestureRecognizerRight)
         window.addGestureRecognizer(swipeGestureRecognizerLeft)
