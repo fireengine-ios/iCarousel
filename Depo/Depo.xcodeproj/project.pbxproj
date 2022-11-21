@@ -1356,6 +1356,48 @@
 		8930DDB622C8F666003CE856 /* CreateStoryMusicEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930DDB322C8F666003CE856 /* CreateStoryMusicEnterView.swift */; };
 		8934DD6E23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8934DD6C23069599006B0998 /* EmailVerifiedPopUp.xib */; };
 		8934DD6F23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8934DD6C23069599006B0998 /* EmailVerifiedPopUp.xib */; };
+		893DCFE0292B861B00271379 /* DiscoverInitilizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92629261D7400817FF8 /* DiscoverInitilizer.swift */; };
+		893DCFE4292B861D00271379 /* DiscoverInitilizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92629261D7400817FF8 /* DiscoverInitilizer.swift */; };
+		893DCFE5292B861E00271379 /* DiscoverInitilizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92629261D7400817FF8 /* DiscoverInitilizer.swift */; };
+		893DCFE6292B865000271379 /* DiscoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89256CE2292699B600FAD38E /* DiscoverTableViewCell.swift */; };
+		893DCFE7292B865200271379 /* DiscoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89256CE2292699B600FAD38E /* DiscoverTableViewCell.swift */; };
+		893DCFE8292B865400271379 /* DiscoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89256CE2292699B600FAD38E /* DiscoverTableViewCell.swift */; };
+		893DCFE9292B865C00271379 /* DiscoverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89256CE02926994900FAD38E /* DiscoverTableViewCell.xib */; };
+		893DCFEA292B865E00271379 /* DiscoverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89256CE02926994900FAD38E /* DiscoverTableViewCell.xib */; };
+		893DCFEB292B865F00271379 /* DiscoverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89256CE02926994900FAD38E /* DiscoverTableViewCell.xib */; };
+		893DCFEC292B866800271379 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D91929260E4F00817FF8 /* DiscoverViewController.swift */; };
+		893DCFED292B866B00271379 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D91929260E4F00817FF8 /* DiscoverViewController.swift */; };
+		893DCFEE292B866B00271379 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D91929260E4F00817FF8 /* DiscoverViewController.swift */; };
+		893DCFEF292B867100271379 /* DiscoverViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92E29261FBD00817FF8 /* DiscoverViewInput.swift */; };
+		893DCFF0292B867300271379 /* DiscoverViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92E29261FBD00817FF8 /* DiscoverViewInput.swift */; };
+		893DCFF1292B867400271379 /* DiscoverViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92E29261FBD00817FF8 /* DiscoverViewInput.swift */; };
+		893DCFF2292B867D00271379 /* DiscoverViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D93129261FE600817FF8 /* DiscoverViewOutput.swift */; };
+		893DCFF3292B867F00271379 /* DiscoverViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D93129261FE600817FF8 /* DiscoverViewOutput.swift */; };
+		893DCFF4292B868000271379 /* DiscoverViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D93129261FE600817FF8 /* DiscoverViewOutput.swift */; };
+		893DCFF5292B868400271379 /* DiscoverPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D9392926208A00817FF8 /* DiscoverPresenter.swift */; };
+		893DCFF6292B868500271379 /* DiscoverPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D9392926208A00817FF8 /* DiscoverPresenter.swift */; };
+		893DCFF7292B868600271379 /* DiscoverPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D9392926208A00817FF8 /* DiscoverPresenter.swift */; };
+		893DCFF8292B868A00271379 /* DiscoverModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92A29261EA800817FF8 /* DiscoverModuleInput.swift */; };
+		893DCFF9292B868B00271379 /* DiscoverModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92A29261EA800817FF8 /* DiscoverModuleInput.swift */; };
+		893DCFFA292B868D00271379 /* DiscoverModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92A29261EA800817FF8 /* DiscoverModuleInput.swift */; };
+		893DCFFB292B869200271379 /* DiscoverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D941292621C200817FF8 /* DiscoverInteractor.swift */; };
+		893DCFFC292B869300271379 /* DiscoverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D941292621C200817FF8 /* DiscoverInteractor.swift */; };
+		893DCFFD292B869500271379 /* DiscoverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D941292621C200817FF8 /* DiscoverInteractor.swift */; };
+		893DCFFE292B869900271379 /* DiscoverInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D93D292620F700817FF8 /* DiscoverInteractorInput.swift */; };
+		893DCFFF292B869A00271379 /* DiscoverInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D93D292620F700817FF8 /* DiscoverInteractorInput.swift */; };
+		893DD000292B869B00271379 /* DiscoverInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D93D292620F700817FF8 /* DiscoverInteractorInput.swift */; };
+		893DD001292B86F400271379 /* DiscoverInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D93B292620E200817FF8 /* DiscoverInteractorOutput.swift */; };
+		893DD002292B86F500271379 /* DiscoverInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D93B292620E200817FF8 /* DiscoverInteractorOutput.swift */; };
+		893DD003292B86F600271379 /* DiscoverInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D93B292620E200817FF8 /* DiscoverInteractorOutput.swift */; };
+		893DD004292B86FA00271379 /* DiscoverRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D9372926204B00817FF8 /* DiscoverRouter.swift */; };
+		893DD005292B86FC00271379 /* DiscoverRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D9372926204B00817FF8 /* DiscoverRouter.swift */; };
+		893DD006292B86FD00271379 /* DiscoverRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D9372926204B00817FF8 /* DiscoverRouter.swift */; };
+		893DD007292B870100271379 /* DiscoverRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D9352926203400817FF8 /* DiscoverRouterInput.swift */; };
+		893DD008292B870300271379 /* DiscoverRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D9352926203400817FF8 /* DiscoverRouterInput.swift */; };
+		893DD009292B870400271379 /* DiscoverRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D9352926203400817FF8 /* DiscoverRouterInput.swift */; };
+		893DD00A292B870800271379 /* DiscoverConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92829261DA300817FF8 /* DiscoverConfigurator.swift */; };
+		893DD00B292B870A00271379 /* DiscoverConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92829261DA300817FF8 /* DiscoverConfigurator.swift */; };
+		893DD00C292B870B00271379 /* DiscoverConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92829261DA300817FF8 /* DiscoverConfigurator.swift */; };
 		896133A42338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */; };
 		896133A52338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */; };
 		897B8F3A2338B7400028C690 /* HomePagePopUpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */; };
@@ -23105,6 +23147,7 @@
 				CE784CDD22A685FB00662219 /* SettingsTableViewCell.xib in Resources */,
 				F0CF8AA52891688800428058 /* ForYouFaceImageTableViewCell.xib in Resources */,
 				98231A0224F3A1E700FD16E2 /* PhotoEditChangesBar.xib in Resources */,
+				893DCFEA292B865E00271379 /* DiscoverTableViewCell.xib in Resources */,
 				CE784CE422A685FB00662219 /* BottomSelectionTabBarViewController.xib in Resources */,
 				CE784CE622A685FB00662219 /* EmailEnterController.xib in Resources */,
 				8E7659892333745A00D728A5 /* CredsUpdateCheckPopUp.xib in Resources */,
@@ -23495,6 +23538,7 @@
 				9862BC8E255E899800D7945E /* FileInfoShareContactCell.xib in Resources */,
 				9808B7C82567EB10001DEF2E /* PrivateShareAccessListHeader.xib in Resources */,
 				F0571EFC288C1D3000A0D6AC /* ForYouCollectionViewCell.xib in Resources */,
+				893DCFE9292B865C00271379 /* DiscoverTableViewCell.xib in Resources */,
 				3A9C284026529C3900EFADE9 /* InvitationCampaignDetailView.xib in Resources */,
 				CF8B68D223CBC9D70021B021 /* LeavePremiumViewController.xib in Resources */,
 				CF8B68D323CBC9D70021B021 /* FreeAppSpaceViewCotroller.xib in Resources */,
@@ -23894,6 +23938,7 @@
 				F0CF8AA62891688800428058 /* ForYouFaceImageTableViewCell.xib in Resources */,
 				CF8B709C23CBCA280021B021 /* EmailEnterController.xib in Resources */,
 				9808B7D72567EB10001DEF2E /* PrivateShareAccessListCell.xib in Resources */,
+				893DCFEB292B865F00271379 /* DiscoverTableViewCell.xib in Resources */,
 				CF8B709D23CBCA280021B021 /* CredsUpdateCheckPopUp.xib in Resources */,
 				CF8B709E23CBCA280021B021 /* CollectionViewSpinnerFooter.xib in Resources */,
 				9808B3F325540D6C002B0032 /* PrivateShareSuggestionsView.xib in Resources */,
@@ -27616,6 +27661,7 @@
 				CE78487722A685FB00662219 /* LeavePremiumInitializer.swift in Sources */,
 				981617A62578BA5F009F1C31 /* FirebaseAnalyticsDementions.swift in Sources */,
 				CE78487822A685FB00662219 /* DispatchQueue+Main.swift in Sources */,
+				893DCFF9292B868B00271379 /* DiscoverModuleInput.swift in Sources */,
 				890F737122EEFA3E00BA0020 /* VerifyEmailPopUp.swift in Sources */,
 				CE78487922A685FB00662219 /* PlacesServiceResponse.swift in Sources */,
 				CE78487A22A685FB00662219 /* ActivityIndicator.swift in Sources */,
@@ -27767,6 +27813,7 @@
 				3A0CCF302642D20E002E811D /* InvitationGiftCollectionViewCell.swift in Sources */,
 				CE7848E022A685FB00662219 /* LoginRouterInput.swift in Sources */,
 				CE7848E122A685FB00662219 /* AlbumDetailResponse.swift in Sources */,
+				893DD002292B86F500271379 /* DiscoverInteractorOutput.swift in Sources */,
 				CE7848E222A685FB00662219 /* CountiesGSMCodeCompositor.swift in Sources */,
 				B59E1F8425921F0000640DD1 /* PhotoSyncService.swift in Sources */,
 				CE7848E322A685FB00662219 /* HomePageInteractorInput.swift in Sources */,
@@ -27889,6 +27936,7 @@
 				CE78493222A685FB00662219 /* ManageContactsInteractor.swift in Sources */,
 				F0743DCB28B4C63100CC1F24 /* BottomInfoBanner.swift in Sources */,
 				98A86D7023A2795B00438225 /* HiddenPhotosDataLoader.swift in Sources */,
+				893DCFED292B866B00271379 /* DiscoverViewController.swift in Sources */,
 				076BD1A927BBBE02004609E3 /* MapSearchInteractorOutput.swift in Sources */,
 				07620291269B83F600D4FB2C /* OverlayAnimationService.swift in Sources */,
 				8CBD3A7F2306D4B3005FF1C9 /* RequestService.swift in Sources */,
@@ -27941,6 +27989,7 @@
 				B549B6D624CF09D000D39C44 /* AdjustmentParameter.swift in Sources */,
 				98E4B9F923C71EF0003A4631 /* TrashBinSortingManager.swift in Sources */,
 				0780AB4327916820000760D9 /* ImageTextSelectionIndex.swift in Sources */,
+				893DD005292B86FC00271379 /* DiscoverRouter.swift in Sources */,
 				98A86D7A23A76F1800438225 /* HiddenPhotosNavbarManager.swift in Sources */,
 				CE78495022A685FB00662219 /* PremiumViewOutput.swift in Sources */,
 				CE78495322A685FB00662219 /* LoginInitializer.swift in Sources */,
@@ -27998,6 +28047,8 @@
 				98B04870259314750011DAEB /* SyncSettings.m in Sources */,
 				CE78497B22A685FB00662219 /* SharedEnums.swift in Sources */,
 				CE78497C22A685FB00662219 /* ResponseResult.swift in Sources */,
+				893DCFF3292B867F00271379 /* DiscoverViewOutput.swift in Sources */,
+				893DCFFC292B869300271379 /* DiscoverInteractor.swift in Sources */,
 				CE0808AC234720D900F1944F /* TBMatikCard.swift in Sources */,
 				CE78497E22A685FB00662219 /* FreeAppSpaceInitializer.swift in Sources */,
 				CE78497F22A685FB00662219 /* CoreTelephonyService.swift in Sources */,
@@ -28063,6 +28114,7 @@
 				89E51D5122CA1121007A7DBC /* CreateStoryPreviewModuleInput.swift in Sources */,
 				CE7849A522A685FB00662219 /* RegistrationInteractorOutput.swift in Sources */,
 				CE7849A622A685FB00662219 /* MaskService.swift in Sources */,
+				893DCFF0292B867300271379 /* DiscoverViewInput.swift in Sources */,
 				989BDE4822F47B1E001DDEB2 /* SpotifyAuthViewController.swift in Sources */,
 				CE7849A722A685FB00662219 /* ArrayDataSourceForCollectionView.swift in Sources */,
 				8C86111022BCF28100108958 /* TermsAndPolicyViewController.swift in Sources */,
@@ -28289,6 +28341,7 @@
 				CE784A4422A685FB00662219 /* PushNotificationServiceConstants.swift in Sources */,
 				CE784A4522A685FB00662219 /* FaceImagePhotosRouterInput.swift in Sources */,
 				CE784A4622A685FB00662219 /* PrintInteractor.swift in Sources */,
+				893DD008292B870300271379 /* DiscoverRouterInput.swift in Sources */,
 				CE784A4722A685FB00662219 /* PhoneVerificationRouterInput.swift in Sources */,
 				CF71466724B597A900D83E60 /* ContactSyncAnalyzeProgressView.swift in Sources */,
 				CE784A4922A685FB00662219 /* PhoneVerificationRouter.swift in Sources */,
@@ -28370,6 +28423,7 @@
 				F062042C290DA72300A03F06 /* ForYouBlurCollectionViewCell.swift in Sources */,
 				CE784A7722A685FB00662219 /* UsageInfoInteractorOutput.swift in Sources */,
 				CE784A7922A685FB00662219 /* UploadFromLifeBoxViewController.swift in Sources */,
+				893DCFFF292B869A00271379 /* DiscoverInteractorInput.swift in Sources */,
 				F013FA6E27FF2804004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift in Sources */,
 				CE784A7A22A685FB00662219 /* AnalyzeHistoryDataSource.swift in Sources */,
 				CE784A7B22A685FB00662219 /* RequestsKey.swift in Sources */,
@@ -28635,6 +28689,7 @@
 				CE784B2E22A685FB00662219 /* PhotoVideoDetailPresenter.swift in Sources */,
 				CE784B2F22A685FB00662219 /* PhotoVideoDetailInteractorInput.swift in Sources */,
 				CE784B3022A685FB00662219 /* MediaItem+CoreDataClass.swift in Sources */,
+				893DCFE4292B861D00271379 /* DiscoverInitilizer.swift in Sources */,
 				CE784B3222A685FB00662219 /* HelpAndSupportInteractor.swift in Sources */,
 				CE784B3322A685FB00662219 /* BottomSelectionTabBarConfigurator.swift in Sources */,
 				CE784B3522A685FB00662219 /* BackgroundTaskService.swift in Sources */,
@@ -28737,6 +28792,7 @@
 				89DCC5CF2403A99900488F1F /* SubscriptionOfferView.swift in Sources */,
 				072468322855CC9E0079B07E /* DrawerPresentationController.swift in Sources */,
 				CE784B8222A685FB00662219 /* SettingsPresenter.swift in Sources */,
+				893DCFE7292B865200271379 /* DiscoverTableViewCell.swift in Sources */,
 				49E952A22400013E00E2ABCD /* MobilePaymentPermissionViewController.swift in Sources */,
 				CE784B8322A685FB00662219 /* SettingsInteractorInput.swift in Sources */,
 				98231A7324F3A23500FD16E2 /* CruzFilter.swift in Sources */,
@@ -28858,6 +28914,7 @@
 				CE784BCA22A685FB00662219 /* FileInfoRouter.swift in Sources */,
 				CE784BCB22A685FB00662219 /* PeopleService.swift in Sources */,
 				73EA170322EB2C7700BAD2D3 /* SpotifyRoutingService.swift in Sources */,
+				893DCFF6292B868500271379 /* DiscoverPresenter.swift in Sources */,
 				B58533232397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift in Sources */,
 				CE784BCC22A685FB00662219 /* UsageInfoRouter.swift in Sources */,
 				CE784BCD22A685FB00662219 /* AppConfigurator.swift in Sources */,
@@ -29134,6 +29191,7 @@
 				CE784C8022A685FB00662219 /* ActivityTimelineRouterInput.swift in Sources */,
 				98231AA324F3A23500FD16E2 /* RiseFilter.swift in Sources */,
 				CE784C8122A685FB00662219 /* ProfileTextEnterView.swift in Sources */,
+				893DD00B292B870A00271379 /* DiscoverConfigurator.swift in Sources */,
 				CE784C8222A685FB00662219 /* MyStorageRouter.swift in Sources */,
 				CE784C8322A685FB00662219 /* ManageContactsInteractorOutput.swift in Sources */,
 				73FE51F622CF5D8800270448 /* CreateStoryAudioSelectionItemDesigner.swift in Sources */,
@@ -29429,6 +29487,7 @@
 				CF703F4624E3CC4A005EFFFD /* (null) in Sources */,
 				CF8B642323CBC9D70021B021 /* InstaPickSelectionSegmentedController.swift in Sources */,
 				98B04774259314740011DAEB /* UpdateServerIntegration.m in Sources */,
+				893DCFE6292B865000271379 /* DiscoverTableViewCell.swift in Sources */,
 				CF71470D24B597AA00D83E60 /* ContactListHeader.swift in Sources */,
 				982319EE24F3A1E700FD16E2 /* PhotoEditTabbar.swift in Sources */,
 				CF8B642423CBC9D70021B021 /* InstaPickCircularLoader.swift in Sources */,
@@ -29499,6 +29558,7 @@
 				07DB93C62860B46900D5CACF /* IAPIntroEligibilityStatus.swift in Sources */,
 				98B0480C259314750011DAEB /* DepoAdapter.m in Sources */,
 				CF8B645723CBC9D70021B021 /* AccountResponse.swift in Sources */,
+				893DCFFB292B869200271379 /* DiscoverInteractor.swift in Sources */,
 				CF8B645823CBC9D70021B021 /* CollectionViewCellForAudio.swift in Sources */,
 				CF8B645923CBC9D70021B021 /* SpotifyPlaylistViewController.swift in Sources */,
 				CF8B645A23CBC9D70021B021 /* KeyboardLayoutConstraint.swift in Sources */,
@@ -29567,6 +29627,7 @@
 				CF8B648B23CBC9D70021B021 /* MyStoragePresenter.swift in Sources */,
 				CF8B648C23CBC9D70021B021 /* FaceImageAddNameDataSource.swift in Sources */,
 				CFACACA1247CF58F00645B40 /* NetmeraActionEvents.swift in Sources */,
+				893DCFEC292B866800271379 /* DiscoverViewController.swift in Sources */,
 				CF8B648D23CBC9D70021B021 /* AnalyzeHistoryDesigner.swift in Sources */,
 				CF8B648E23CBC9D70021B021 /* UIApplication+Settings.swift in Sources */,
 				98231A5324F3A23500FD16E2 /* AweStruckFilter.swift in Sources */,
@@ -29589,6 +29650,7 @@
 				CF8B649E23CBC9D70021B021 /* InstagramParametrs.swift in Sources */,
 				CF8B649F23CBC9D70021B021 /* CameraService.swift in Sources */,
 				CF8B64A023CBC9D70021B021 /* HelpAndSupportConfigurator.swift in Sources */,
+				893DCFEF292B867100271379 /* DiscoverViewInput.swift in Sources */,
 				CF8B64A223CBC9D70021B021 /* FileForDownload.swift in Sources */,
 				CF8B64A323CBC9D70021B021 /* AutoSyncInteractor.swift in Sources */,
 				CF8B64A423CBC9D70021B021 /* FilesDataSource.swift in Sources */,
@@ -29657,6 +29719,7 @@
 				CF8B64D323CBC9D70021B021 /* PlacesService.swift in Sources */,
 				CF8B64D423CBC9D70021B021 /* UploadFromLifeBoxInitializer.swift in Sources */,
 				98B0483C259314750011DAEB /* ContactUtil.m in Sources */,
+				893DD004292B86FA00271379 /* DiscoverRouter.swift in Sources */,
 				CF7146D724B597A900D83E60 /* DeleteDuplicatesMainView.swift in Sources */,
 				CF8B64D523CBC9D70021B021 /* DataStorage.swift in Sources */,
 				CF8B64D623CBC9D70021B021 /* BaseUserInputCellView.swift in Sources */,
@@ -29783,6 +29846,7 @@
 				CF8B652F23CBC9D70021B021 /* ImageScrollView.swift in Sources */,
 				CF8B653023CBC9D70021B021 /* ArrayExtension.swift in Sources */,
 				CF8B653123CBC9D70021B021 /* RegistrationViewOutput.swift in Sources */,
+				893DCFF5292B868400271379 /* DiscoverPresenter.swift in Sources */,
 				0762028A269B83EE00D4FB2C /* OverlayStickersModels.swift in Sources */,
 				B55EFD1F256538CF00E11D9C /* PrivateShareSharedWithThreeDotsManager.swift in Sources */,
 				CF8B653223CBC9D70021B021 /* AnalyticsDimension.swift in Sources */,
@@ -30121,6 +30185,7 @@
 				CF8B662423CBC9D70021B021 /* ForgotPasswordRouterInput.swift in Sources */,
 				CF8B662523CBC9D70021B021 /* LanguageModel.swift in Sources */,
 				CF8B662623CBC9D70021B021 /* SpotifyImportedTracksNavbarManager.swift in Sources */,
+				893DCFFE292B869900271379 /* DiscoverInteractorInput.swift in Sources */,
 				CF8B662723CBC9D70021B021 /* MusicPresenter.swift in Sources */,
 				CF71467724B597A900D83E60 /* ContactSyncProgressView.swift in Sources */,
 				0305A31B23D5C370004D1EC7 /* AlbumsSliderCell.swift in Sources */,
@@ -30285,6 +30350,7 @@
 				CF8B66A323CBC9D70021B021 /* ActionsMenuTableViewCell.swift in Sources */,
 				CF8B66A423CBC9D70021B021 /* BaseFilesGreedInitializer.swift in Sources */,
 				CF8B66A523CBC9D70021B021 /* SearchViewPresenter.swift in Sources */,
+				893DCFF8292B868A00271379 /* DiscoverModuleInput.swift in Sources */,
 				CF8B66A623CBC9D70021B021 /* UIviewControlllerExtensions.swift in Sources */,
 				CF8B66A723CBC9D70021B021 /* Dictionary.swift in Sources */,
 				0305A31C23D5C374004D1EC7 /* AlbumsSliderDataSource.swift in Sources */,
@@ -30656,6 +30722,7 @@
 				CF71468F24B597A900D83E60 /* ContactBackupDataManager.swift in Sources */,
 				0305A30F23D5C312004D1EC7 /* EmptyView.swift in Sources */,
 				B549B6CD24CF099500D39C44 /* Adjustment.swift in Sources */,
+				893DD001292B86F400271379 /* DiscoverInteractorOutput.swift in Sources */,
 				CF8B67BC23CBC9D70021B021 /* UploadFilesSelectionInteractorOutput.swift in Sources */,
 				98231AB324F3A23500FD16E2 /* BluemessFilter.swift in Sources */,
 				F0571EC0288AE6BD00A0D6AC /* ForYouInitilizer.swift in Sources */,
@@ -30738,6 +30805,7 @@
 				CF8B67F023CBC9D70021B021 /* ErrorBannerView.swift in Sources */,
 				CF8B67F123CBC9D70021B021 /* FaceImageAddNameConfigurator.swift in Sources */,
 				CF8B67F223CBC9D70021B021 /* ProfilePasswordEnterView.swift in Sources */,
+				893DCFE0292B861B00271379 /* DiscoverInitilizer.swift in Sources */,
 				CF8B67F323CBC9D70021B021 /* String+ShareActivity.swift in Sources */,
 				CF8B67F423CBC9D70021B021 /* SelectNameRouter.swift in Sources */,
 				CF8B67F523CBC9D70021B021 /* SocialAccountRemoveConnectionCell.swift in Sources */,
@@ -30895,8 +30963,10 @@
 				CF8B686123CBC9D70021B021 /* FeedbackViewInitializer.swift in Sources */,
 				F0D2976327F782DE0082C768 /* MessageAndButtonPopup.swift in Sources */,
 				CF8B686223CBC9D70021B021 /* ActivityTimelineViewInput.swift in Sources */,
+				893DD00A292B870800271379 /* DiscoverConfigurator.swift in Sources */,
 				CF8B686323CBC9D70021B021 /* ActivityTimelineViewOutput.swift in Sources */,
 				CF8B686423CBC9D70021B021 /* MappingError.swift in Sources */,
+				893DD007292B870100271379 /* DiscoverRouterInput.swift in Sources */,
 				F0571ECA288AE6DF00A0D6AC /* ForYouInteractorInput.swift in Sources */,
 				CF8B686523CBC9D70021B021 /* ActivityTimelineViewController.swift in Sources */,
 				07B5EBB8285089C000D3D242 /* ProgressTabBarCard.swift in Sources */,
@@ -30911,6 +30981,7 @@
 				CF8B686D23CBC9D70021B021 /* FaceImageAddNameRouterInput.swift in Sources */,
 				98922294240D0C0E004155A5 /* BecomePremiumView.swift in Sources */,
 				89E3408F24747CB700EB68C3 /* PeopleCollectionViewCell.swift in Sources */,
+				893DCFF2292B867D00271379 /* DiscoverViewOutput.swift in Sources */,
 				CF8B686E23CBC9D70021B021 /* AugmentedRealityDataSource.swift in Sources */,
 				CF8B686F23CBC9D70021B021 /* NavigationController.swift in Sources */,
 				CF8B687023CBC9D70021B021 /* Spotlight.swift in Sources */,
@@ -30991,6 +31062,7 @@
 				CF8B6B5723CBCA280021B021 /* CampaignService.swift in Sources */,
 				CF8B6B5823CBCA280021B021 /* ProfilePhoneEnterView.swift in Sources */,
 				CF8B6B5923CBCA280021B021 /* TermsOfUseInteractor.swift in Sources */,
+				893DCFE8292B865400271379 /* DiscoverTableViewCell.swift in Sources */,
 				CF8B6B5A23CBCA280021B021 /* ProfileFieldView.swift in Sources */,
 				CF8B6B5B23CBCA280021B021 /* WaitingForWiFiPopUp.swift in Sources */,
 				CF8B6B5C23CBCA280021B021 /* Constants.swift in Sources */,
@@ -31167,6 +31239,7 @@
 				CF8B6BD823CBCA280021B021 /* HomePageModuleInput.swift in Sources */,
 				981617332578B9A9009F1C31 /* FirebaseAnalyticsScreens.swift in Sources */,
 				CF8B6BD923CBCA280021B021 /* AnalyticsService.swift in Sources */,
+				893DD000292B869B00271379 /* DiscoverInteractorInput.swift in Sources */,
 				CF8B6BDA23CBCA280021B021 /* CustomProgressHUD.swift in Sources */,
 				B51B819A254AECEC0072C6FA /* DocumentDownloadService.swift in Sources */,
 				CF8B6BDB23CBCA280021B021 /* GSMCodeModel.swift in Sources */,
@@ -31187,9 +31260,11 @@
 				0766315127CE8F0000AB4BC2 /* MapLocationDetailViewController.swift in Sources */,
 				CF8B6BE623CBCA280021B021 /* PhotoSelectionDataSourceProtocol.swift in Sources */,
 				98B04889259314750011DAEB /* SyncAdapter.m in Sources */,
+				893DD003292B86F600271379 /* DiscoverInteractorOutput.swift in Sources */,
 				CF8B6BE723CBCA280021B021 /* SelectQuestionViewController.swift in Sources */,
 				CF8B6BE823CBCA280021B021 /* AutoSyncInteractorOutput.swift in Sources */,
 				CF8B6BE923CBCA280021B021 /* AlbumDetailService.swift in Sources */,
+				893DCFFA292B868D00271379 /* DiscoverModuleInput.swift in Sources */,
 				98B047E1259314750011DAEB /* Contact.m in Sources */,
 				CF8B6BEA23CBCA280021B021 /* RequestHeader.swift in Sources */,
 				CF8B6BEB23CBCA280021B021 /* HomePageViewController.swift in Sources */,
@@ -31264,6 +31339,7 @@
 				07D0593126F9B24D005315E2 /* ResetPasswordOTPInteractor.swift in Sources */,
 				CF8B6C2023CBCA280021B021 /* BaseCellModel.swift in Sources */,
 				CF8B6C2123CBCA280021B021 /* FaceImagePhotosInteractorOutput.swift in Sources */,
+				893DD009292B870400271379 /* DiscoverRouterInput.swift in Sources */,
 				0305A31D23D5C375004D1EC7 /* AlbumsSliderDataSource.swift in Sources */,
 				CF8B6C2223CBCA280021B021 /* MappingError.swift in Sources */,
 				CF8B6C2323CBCA280021B021 /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */,
@@ -31502,6 +31578,7 @@
 				CF7B1E59256B3DD400BAF566 /* PrivateShareSliderFilesCollectionManager.swift in Sources */,
 				F01C14CF28FB47C200F5D380 /* ForYouCardsCollectionViewCell.swift in Sources */,
 				CF8B6CD423CBCA280021B021 /* HomeCardsService.swift in Sources */,
+				893DCFF7292B868600271379 /* DiscoverPresenter.swift in Sources */,
 				CF8B6CD523CBCA280021B021 /* FileForDownload.swift in Sources */,
 				CF8B6CD723CBCA280021B021 /* ServerErrors.swift in Sources */,
 				CF8B6CD823CBCA280021B021 /* SearchService.swift in Sources */,
@@ -31827,6 +31904,7 @@
 				9808B44B25540E7B002B0032 /* PrivateShareSuggestionItemView.swift in Sources */,
 				9808B3D625540D62002B0032 /* PrivateShareSuggestionsView.swift in Sources */,
 				CF8B6DC823CBCA280021B021 /* URL+TrimmedQuery.swift in Sources */,
+				893DCFFD292B869500271379 /* DiscoverInteractor.swift in Sources */,
 				CF8B6DC923CBCA280021B021 /* AugmentedRealityInitializer.swift in Sources */,
 				CF8B6DCA23CBCA280021B021 /* PhoneVerificationConfigurator.swift in Sources */,
 				CF8B6DCB23CBCA280021B021 /* PhoneVerificationInitializer.swift in Sources */,
@@ -31885,6 +31963,7 @@
 				CF8B6DED23CBCA280021B021 /* PaycellViewController.swift in Sources */,
 				CF8B6DEE23CBCA280021B021 /* OffersService.swift in Sources */,
 				CF8B6DEF23CBCA280021B021 /* LocalMediaStorage.swift in Sources */,
+				893DD006292B86FD00271379 /* DiscoverRouter.swift in Sources */,
 				CF8B6DF023CBCA280021B021 /* FaceImageChangeCoverPresenter.swift in Sources */,
 				CF8B6DF123CBCA280021B021 /* BottomSelectionTabBarViewOutput.swift in Sources */,
 				077A4E5B271FF707008B78E7 /* DeleteAccountValidationPopUp.swift in Sources */,
@@ -32043,6 +32122,7 @@
 				CF8B6E5C23CBCA280021B021 /* ServerStatusError.swift in Sources */,
 				CF8B6E5D23CBCA280021B021 /* CreateStoryAudioSelectionItemViewController.swift in Sources */,
 				CF8B6E5E23CBCA280021B021 /* BaseRequestService.swift in Sources */,
+				893DCFF4292B868000271379 /* DiscoverViewOutput.swift in Sources */,
 				CF8B6E5F23CBCA280021B021 /* InstaPickCard.swift in Sources */,
 				F09279A22886823500874ADD /* GridListCountView.swift in Sources */,
 				CF8B6E6023CBCA280021B021 /* FaceImageAddNameDataSource.swift in Sources */,
@@ -32226,6 +32306,7 @@
 				0305A32923D5C3BF004D1EC7 /* HiddenPhotosThreeDotMenuManager.swift in Sources */,
 				0780AB6727916846000760D9 /* TextRecognitionProcessor.swift in Sources */,
 				3A58C4CF2636A74900570811 /* InvitationCard.swift in Sources */,
+				893DCFEE292B866B00271379 /* DiscoverViewController.swift in Sources */,
 				98231A5624F3A23500FD16E2 /* AweStruckFilter.swift in Sources */,
 				CF8B6EEF23CBCA280021B021 /* SearchViewConfigurator.swift in Sources */,
 				CF8B6EF023CBCA280021B021 /* VisualMusicPlayerInitializer.swift in Sources */,
@@ -32307,6 +32388,7 @@
 				CF8B6F2623CBCA280021B021 /* SearchViewInteractorOutput.swift in Sources */,
 				CF8B6F2723CBCA280021B021 /* ThresholdBlockService.swift in Sources */,
 				F013FA91280591DF004B9BB8 /* SecurityInfoWarningPopup.swift in Sources */,
+				893DCFF1292B867400271379 /* DiscoverViewInput.swift in Sources */,
 				07585D65280D7E69001B8E8D /* PhotoVideoController+ContentType.swift in Sources */,
 				CF8B6F2823CBCA280021B021 /* CampaignCardDesigner.swift in Sources */,
 				CF8B6F2923CBCA280021B021 /* SplashInteractorInput.swift in Sources */,
@@ -32450,6 +32532,7 @@
 				CF8B6F9523CBCA280021B021 /* FreeUpSpacePopUp.swift in Sources */,
 				CF8B6F9623CBCA280021B021 /* VisualMusicPlayerInteractor.swift in Sources */,
 				CF8B6F9723CBCA280021B021 /* BaseFilesGreedModuleOutput.swift in Sources */,
+				893DD00C292B870B00271379 /* DiscoverConfigurator.swift in Sources */,
 				F0D1AA6028531F6800FE6998 /* UISegmentedControl+Ext.swift in Sources */,
 				9823199724F3A1E700FD16E2 /* AdjustmentsView.swift in Sources */,
 				CF8B6F9823CBCA280021B021 /* SelectNameViewInput.swift in Sources */,
@@ -32531,6 +32614,7 @@
 				CF8B6FCC23CBCA280021B021 /* FreeAppSpaceInteractor.swift in Sources */,
 				CF8B6FCD23CBCA280021B021 /* HelpAndSupportInitializer.swift in Sources */,
 				CF8B6FCE23CBCA280021B021 /* TwoFactorAuthErrorResponse.swift in Sources */,
+				893DCFE5292B861E00271379 /* DiscoverInitilizer.swift in Sources */,
 				CF8B6FCF23CBCA280021B021 /* SegmentedControl.swift in Sources */,
 				CF8B6FD023CBCA280021B021 /* LBAlbumLikePreviewSliderRouterInput.swift in Sources */,
 				985D87E924D0156B004BCDFF /* PhotoEditViewController.swift in Sources */,

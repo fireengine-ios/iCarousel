@@ -2065,7 +2065,6 @@ then {11,99 TRY/Month}*/
 "foryou_no_photopick_warn" = "Henüz PhotoPick kullanmadın.";
 "foryou_no_story_warn" = "Şu an aktif bir hikaye yok.";
 "foryou_try_photopick" = "Photopick'i dene";
-"ksaldalks" = "";
 "foryou_see_all" = "Tümünü gör";
 
 /*Facelift*/
@@ -2073,3 +2072,6 @@ then {11,99 TRY/Month}*/
 "tabbar_discover" = "Keşfet";
 "change_pass_mail_or_phone" = "E-posta veya Telefon Numarası";
 "mystorage_become_premium" = "Premuim ol bir sürü özelliğe sahip ol";
+"we_are_creating_your_story_title" = "Hikayeni hazırlıyoruz.";
+"we_are_creating_your_story_desc" = "Hazır olduğunda Videolar albümünde bulabilirsin.";
+"ksaldalks" = "";
