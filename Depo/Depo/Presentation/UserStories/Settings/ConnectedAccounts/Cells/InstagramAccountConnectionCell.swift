@@ -32,28 +32,30 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialConnectionCel
     
     @IBOutlet private weak var caption: UILabel! {
         didSet {
-            caption.font = UIFont.TurkcellSaturaDemFont(size: 18.0)
+            caption.font = .appFont(.medium, size: 14)
+            caption.textColor = AppColor.label.color
             caption.text = TextConstants.instagram
         }
     }
     
     @IBOutlet private weak var instaPickIcon: UIImageView! {
         didSet {
-            instaPickIcon.image = UIImage(named:"instagram")
+            instaPickIcon.image = UIImage(named:"iconTabInstagramPink")
             instaPickIcon.contentMode = .center
         }
     }
     
     @IBOutlet private weak var importFromInstagramIcon: UIImageView! {
         didSet {
-            importFromInstagramIcon.image = UIImage(named:"instagram")
+            importFromInstagramIcon.image = UIImage(named:"iconTabInstagramPink")
             importFromInstagramIcon.contentMode = .center
         }
     }
     
     @IBOutlet weak var instaPickText: UILabel! {
         didSet {
-            instaPickText.font = UIFont.TurkcellSaturaRegFont(size: 18.0)
+            instaPickText.font = .appFont(.regular, size: 14)
+            instaPickText.textColor = AppColor.label.color
             instaPickText.text = TextConstants.myStreamInstaPickTitle
             instaPickText.adjustsFontSizeToFitWidth()
         }
@@ -61,21 +63,35 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialConnectionCel
     
     @IBOutlet weak var importFromInstagramText: UILabel! {
         didSet {
-            importFromInstagramText.font = UIFont.TurkcellSaturaRegFont(size: 18.0)
+            importFromInstagramText.font = .appFont(.regular, size: 14)
+            importFromInstagramText.textColor = AppColor.label.color
             importFromInstagramText.text = TextConstants.importFromInstagram
             importFromInstagramText.adjustsFontSizeToFitWidth()
         }
     }
 
+    @IBOutlet weak var bgView: UIView! {
+        willSet {
+            newValue.layer.masksToBounds = false
+            newValue.layer.cornerRadius = 15
+            newValue.layer.shadowOpacity = 0.2
+            newValue.layer.shadowColor = UIColor.gray.cgColor
+            newValue.layer.shadowOffset = CGSize(width: 0, height: 0)
+        }
+    }
     
     @IBOutlet private weak var instaPickSwitch: UISwitch! {
         didSet {
+            instaPickSwitch.transform = CGAffineTransform(scaleX: 0.9, y: 0.8)
+            instaPickSwitch.onTintColor = AppColor.toggleOn.color
             instaPickSwitch.setOn(isInstaPickOn, animated: true)
         }
     }
     
     @IBOutlet private weak var importSwitch: UISwitch! {
         didSet {
+            importSwitch.transform = CGAffineTransform(scaleX: 0.9, y: 0.8)
+            importSwitch.onTintColor = AppColor.toggleOn.color
             importSwitch.setOn(isImportOn, animated: false)
         }
     }
@@ -85,9 +101,12 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialConnectionCel
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.lineSpacing = 1.8
             
+            var font = UIFont()
+            font = .appFont(.regular, size: 12)
+            
             let attributes: [NSAttributedString.Key : Any] = [
-                .foregroundColor : ColorConstants.lightText,
-                .font : UIFont.TurkcellSaturaRegFont(size: 16),
+                .foregroundColor : AppColor.label.color,
+                .font : font,
                 .paragraphStyle : paragraphStyle
             ]
             

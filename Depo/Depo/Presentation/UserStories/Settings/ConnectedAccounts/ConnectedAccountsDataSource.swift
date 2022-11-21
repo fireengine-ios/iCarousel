@@ -50,8 +50,7 @@ final class ConnectedAccountsDataSource: NSObject {
     weak var view: SocialConnectionCellDelegate?
     weak var appleGoogleDelegate: AppleGoogleAccountConnectionCellDelegate?
     
-    private var tableSections = [Section(account: .spotify, state: .shrinked),
-                                 Section(account: .instagram, state: .shrinked),
+    private var tableSections = [Section(account: .instagram, state: .shrinked),
                                  Section(account: .facebook, state: .shrinked),
                                  Section(account: .dropbox, state: .shrinked)]
     
