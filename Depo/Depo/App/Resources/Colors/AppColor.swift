@@ -136,6 +136,9 @@ enum AppColor {
     case campaignBorder
     case campaignContentLabel
     
+    //ConnectedAccounts
+    case toggleOn
+    
     //MARK: Landing
     case landingGradientFinish
     case landingGradientStart

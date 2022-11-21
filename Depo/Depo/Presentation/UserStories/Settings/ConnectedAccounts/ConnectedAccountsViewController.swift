@@ -137,7 +137,7 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
 extension ConnectedAccountsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return (section == Section.SocialAccount.spotify.rawValue) ? 0 : 14
+        return (section == Section.SocialAccount.spotify.rawValue) ? 0 : 0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
