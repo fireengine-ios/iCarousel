@@ -25,7 +25,7 @@ class LoginRouter: LoginRouterInput {
     }
     
     func goToSyncSettingsView() {
-        router.pushViewController(viewController: router.synchronyseScreen(isPopRequired: false))
+        router.pushViewController(viewController: router.synchronyseScreen())
     }
     
     func goToRegistration() {

@@ -48,14 +48,6 @@ class LoginPresenter: BasePresenter {
         }
     }
     
-    private func getAccountInfo() {
-        SingletonStorage.shared.securityInfoIfNeeded { isNeed in
-            if isNeed {
-                RouterVC().securityInfoViewController(fromSettings: false)
-            }
-        }
-    }
-    
     private func openApp() {
         AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
         AuthoritySingleton.shared.checkNewVersionApp()
@@ -71,16 +63,8 @@ class LoginPresenter: BasePresenter {
     }
     
     private func openAutoSyncIfNeeded() {
-        view.showSpinner()
-        autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
-            self?.view.hideSpinner()
-            if needToOpenAutoSync {
-                self?.router.goToSyncSettingsView()
-            } else {
-                self?.getAccountInfo()
-            }
-        }) { [weak self] error in
-            self?.view.hideSpinner()
+        DispatchQueue.toMain { [weak self] in
+            self?.router.goToSyncSettingsView()
         }
     }
     
