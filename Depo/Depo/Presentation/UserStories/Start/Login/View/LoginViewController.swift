@@ -151,9 +151,9 @@ final class LoginViewController: BaseViewController {
         output.viewIsReady()
         
         #if DEBUG
-        loginEnterView.textField.text = "mavokij291@4tmail.com"//"qwerty@my.com"// "test3@test.test"//"test2@test.test"//"testasdasdMail@notRealMail.yep"
+        loginEnterView.textField.text = "yilmaz@test.com"//"qwerty@my.com"// "test3@test.test"//"test2@test.test"//"testasdasdMail@notRealMail.yep"
 
-        passwordEnterView.textField.text = "Alp071202+"// "zxcvbn"//".FsddQ646"
+        passwordEnterView.textField.text = "408090Ylz."// "zxcvbn"//".FsddQ646"
         #endif
         
         setGoogleUserIfNeeded()

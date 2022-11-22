@@ -10,5 +10,6 @@ import Foundation
 
 protocol AutoSyncRouterInput {
     func routNextVC()
+    func routPop()
     func showContactsSettingsPopUp()
 }

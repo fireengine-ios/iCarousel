@@ -2047,8 +2047,6 @@
 "syncing" = "";
 "downloading" = "";
 "ETK_KVKK_Izin_Politikası" = "";
-"syncing" = "";
-"downloading" = "";
 
 /*Free for {3 months}
 then {11,99 TRY/Month}*/
@@ -2073,3 +2071,23 @@ then {11,99 TRY/Month}*/
 "paycell_share_message" = "Me uní al Programa de Embajadores de la Marca lifebox. Puede obtener el paquete Premium lifebox de 6 meses y 250 GB específico del programa a un precio con descuento, haciendo clic en el enlace a continuación. No te lo pierdas 😊";
 "beeline_cancel_TC" = "Puedes cancelar o gestionar tu suscripción a lifebox desde la aplicación Beeline.";
 "paycell_share_message " = "";
+"foryou_throwback" = "";
+"foryou_myalbums" = "";
+"foryou_myanimations" = "";
+"foryou_collages" = "";
+"foryou_my_collages" = "";
+"foryou_animations" = "";
+"foryou_no_album_warn" = "";
+"foryou_no_photopick_warn" = "";
+"foryou_no_story_warn" = "";
+"foryou_try_photopick" = "";
+"foryou_see_all" = "";
+
+/*Facelift*/
+"tabbar_foryou" = "";
+"tabbar_discover" = "";
+"change_pass_mail_or_phone" = "";
+"mystorage_become_premium" = "";
+"we_are_creating_your_story_title" = "";
+"we_are_creating_your_story_desc" = "";
+"trash_bin" = "";

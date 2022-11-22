@@ -49,27 +49,16 @@ class LoginPresenter: BasePresenter {
     }
     
     private func getAccountInfo() {
-        SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] accountInfo in
-            DispatchQueue.toMain {
-                self?.addSecurityInfoIfNeeded(with: accountInfo)
+        SingletonStorage.shared.securityInfoIfNeeded { isNeed in
+            if isNeed {
+                RouterVC().securityInfoViewController(fromSettings: false)
             }
-        }, fail: { error in
-            debugPrint("getAccountInfo \(error.description)")
-        })
-    }
-    
-    private func addSecurityInfoIfNeeded(with accountInfo: AccountInfoResponse) {
-        if accountInfo.hasRecoveryMail != true && accountInfo.hasSecurityQuestionInfo != true {
-            router.goToSecurityInfoPage()
         }
     }
     
     private func openApp() {
         AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
         AuthoritySingleton.shared.checkNewVersionApp()
-        
-        router.goToHomePage()
-        getAccountInfo()
         openAutoSyncIfNeeded()
     }
     
@@ -85,9 +74,10 @@ class LoginPresenter: BasePresenter {
         view.showSpinner()
         autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
             self?.view.hideSpinner()
-            
             if needToOpenAutoSync {
                 self?.router.goToSyncSettingsView()
+            } else {
+                self?.getAccountInfo()
             }
         }) { [weak self] error in
             self?.view.hideSpinner()

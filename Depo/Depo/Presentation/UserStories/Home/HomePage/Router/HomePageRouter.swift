@@ -139,7 +139,7 @@ final class HomePageRouter: HomePageRouterInput {
     func presentSecurityInfoViewController() {
         let popUp = router.securityInfoViewController
         
-        popUpsToPresent.append(popUp)
+        //popUpsToPresent.append(popUp)
     }
     
     func presentPopUps() {

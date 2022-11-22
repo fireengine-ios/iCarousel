@@ -21,6 +21,7 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput 
     var router: AutoSyncRouterInput!
         
     var fromSettings = false
+    var isPopRequired = false
 
     func saveSettings() {
         interactor.onSaveContact(settings: view.createAutoSyncSettings())
@@ -40,7 +41,11 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput 
     
     func change(settings: AutoSyncSettings, albums: [AutoSyncAlbum]) {
         if !fromSettings {
-            router.routNextVC()
+            if isPopRequired {
+                router.routPop()
+            } else {
+                router.routNextVC()
+            }
         }
         save(settings: settings, albums: albums)
     }

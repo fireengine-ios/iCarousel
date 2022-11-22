@@ -2026,4 +2026,26 @@ then {11,99 TRY/Month}*/
 "title_paycell_friends" = "მომხმარებლები, რომლებმაც შეიძინეს პაკეტი (%d)";
 "paycell_share_message" = "შევუერთდი Lifebox Brand Ambassador პროგრამას. შეგიძლია მიიღო პროგრამის სპეციფიკური lifebox 6 თვიანი 250 GB Premium პაკეტი სპეციალურ ფასად ქვემოთ მოცემულ ბმულზე დაწკაპუნებით. არ გამოტოვო 😊";
 "beeline_cancel_TC" = "შეგიძლიათ მართოთ ან გააუქმოთ თქვენი Lifebox გამოწერა ბილაინის არხებიდან.";
+
+/*Fuzzy*/
 "paycell_share_message " = "შენ მიიღე 5 GB Lifebox მეხსიერება საჩუქრად, დააჭირე გასააქტიურებლად.";
+"foryou_throwback" = "";
+"foryou_myalbums" = "";
+"foryou_myanimations" = "";
+"foryou_collages" = "";
+"foryou_my_collages" = "";
+"foryou_animations" = "";
+"foryou_no_album_warn" = "";
+"foryou_no_photopick_warn" = "";
+"foryou_no_story_warn" = "";
+"foryou_try_photopick" = "";
+"foryou_see_all" = "";
+
+/*Facelift*/
+"tabbar_foryou" = "";
+"tabbar_discover" = "";
+"change_pass_mail_or_phone" = "";
+"mystorage_become_premium" = "";
+"we_are_creating_your_story_title" = "";
+"we_are_creating_your_story_desc" = "";
+"trash_bin" = "";

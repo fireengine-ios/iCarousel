@@ -2005,8 +2005,6 @@
 "syncing" = "";
 "downloading" = "";
 "ETK_KVKK_Izin_Politikası" = "";
-"syncing" = "";
-"downloading" = "";
 
 /*Free for {3 months}
 then {11,99 TRY/Month}*/
@@ -2031,3 +2029,23 @@ then {11,99 TRY/Month}*/
 "paycell_share_message" = "M-am alăturat Programului de Ambasador al Mărcii lifebox. Puteți obține un pachet lifebox Premium de 6 luni de 250 GB la un preț redus făcând clic pe linkul de mai jos. Nu rata ocazia 😊";
 "beeline_cancel_TC" = "Vă puteți anula sau gestiona abonamentul lifebox din aplicația Beeline.";
 "paycell_share_message " = "";
+"foryou_throwback" = "";
+"foryou_myalbums" = "";
+"foryou_myanimations" = "";
+"foryou_collages" = "";
+"foryou_my_collages" = "";
+"foryou_animations" = "";
+"foryou_no_album_warn" = "";
+"foryou_no_photopick_warn" = "";
+"foryou_no_story_warn" = "";
+"foryou_try_photopick" = "";
+"foryou_see_all" = "";
+
+/*Facelift*/
+"tabbar_foryou" = "";
+"tabbar_discover" = "";
+"change_pass_mail_or_phone" = "";
+"mystorage_become_premium" = "";
+"we_are_creating_your_story_title" = "";
+"we_are_creating_your_story_desc" = "";
+"trash_bin" = "";

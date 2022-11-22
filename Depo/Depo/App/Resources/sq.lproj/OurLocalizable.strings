@@ -2048,8 +2048,6 @@
 "syncing" = "";
 "downloading" = "";
 "ETK_KVKK_Izin_Politikası" = "";
-"syncing" = "";
-"downloading" = "";
 
 /*Free for {3 months}
 then {11,99 TRY/Month}*/
@@ -2074,3 +2072,23 @@ then {11,99 TRY/Month}*/
 "paycell_share_message" = "Unë iu bashkua Programit të Ambasadorit të Markës lifebox. Mund të merrni një paketë Premium lifebox 6-mujore 250 GB me çmim të reduktuar duke klikuar në lidhjen më poshtë. Mos e humbisni rastin 😊";
 "beeline_cancel_TC" = "Ju mund të anuloni ose menaxhoni abonimin tuaj të lifebox nga aplikacioni Beeline.";
 "paycell_share_message " = "";
+"foryou_throwback" = "";
+"foryou_myalbums" = "";
+"foryou_myanimations" = "";
+"foryou_collages" = "";
+"foryou_my_collages" = "";
+"foryou_animations" = "";
+"foryou_no_album_warn" = "";
+"foryou_no_photopick_warn" = "";
+"foryou_no_story_warn" = "";
+"foryou_try_photopick" = "";
+"foryou_see_all" = "";
+
+/*Facelift*/
+"tabbar_foryou" = "";
+"tabbar_discover" = "";
+"change_pass_mail_or_phone" = "";
+"mystorage_become_premium" = "";
+"we_are_creating_your_story_title" = "";
+"we_are_creating_your_story_desc" = "";
+"trash_bin" = "";

@@ -194,5 +194,5 @@ enum Strings: String, Localizable {
     // MARK: - All Files
     case allFilesNoMusicButtonText    = "Start adding your music"
     case allFilesNoDocumentButtonText = "Start adding your documents"
-
+    case trashBin = "trash_bin"
 }

@@ -10,11 +10,21 @@ class AutoSyncRouter: AutoSyncRouterInput {
     
     private let router = RouterVC()
  
-    func routNextVC() {
+    func routPop() {
         DispatchQueue.toMain {
             self.router.popViewController()
-            /// it was going to tabbar directly, it may change acording to flow
-            //self.router.setNavigationController(controller: self.router.tabBarScreen)
+        }
+    }
+    
+    func routNextVC() {
+        DispatchQueue.toMain {
+            self.router.setNavigationController(controller: self.router.tabBarScreen)
+            
+            SingletonStorage.shared.securityInfoIfNeeded { isNeed in
+                if isNeed {
+                    RouterVC().securityInfoViewController(fromSettings: false)
+                }
+            }
         }
     }
     

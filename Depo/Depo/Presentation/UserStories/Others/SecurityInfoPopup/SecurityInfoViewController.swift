@@ -135,7 +135,7 @@ final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHan
         if !fromSettings {
             DispatchQueue.toMain {
                 let router = RouterVC()
-                router.popViewController()
+                router.setNavigationController(controller: router.tabBarScreen)
             }
         } else {
             dismiss(animated: true)

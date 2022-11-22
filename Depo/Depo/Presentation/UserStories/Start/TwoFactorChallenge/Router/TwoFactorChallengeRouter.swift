@@ -12,7 +12,7 @@ final class TwoFactorChallengeRouter: PhoneVerificationRouter {
     
     override func goAutoSync() {
         ///RouterVC's present make no effect
-        let controller = router.synchronyseScreen
+        let controller = router.synchronyseScreen()
         controller.modalPresentationStyle = .fullScreen
         
         router.defaultTopController?.present(controller, animated: true, completion: nil)

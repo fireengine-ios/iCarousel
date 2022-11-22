@@ -491,8 +491,8 @@ class RouterVC: NSObject {
     
     // MARK: SynchronyseSettings
     
-    var synchronyseScreen: UIViewController {
-        return AutoSyncModuleInitializer.initializeViewController()
+    func synchronyseScreen(fromSettings: Bool = false, isPopRequired: Bool = true) -> UIViewController {
+        return AutoSyncModuleInitializer.initializeViewController(fromSettings: fromSettings, isPopRequired: isPopRequired)
     }
     
     // MARK: TabBar
@@ -547,7 +547,7 @@ class RouterVC: NSObject {
         return controller
     }
     
-    var trashBin: UIViewController? {
+    var trashBin: UIViewController {
         let controller = trashBinController()
         controller.segmentImage = .trashBin
         return controller
@@ -569,7 +569,7 @@ class RouterVC: NSObject {
             assertionFailure()
             return AllFilesSegmentedController()
         }
-        let controllers = [documents, musics, favorites, sharedWithMe, shareByMeSegment, allFiles, documentsAndMusic]
+        let controllers = [documents, musics, favorites, sharedWithMe, shareByMeSegment, allFiles, documentsAndMusic, trashBin]
         return AllFilesSegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
     }
     
@@ -1340,9 +1340,10 @@ class RouterVC: NSObject {
         }
     }
     
-    var securityInfoViewController: SecurityInfoViewController {
+    func securityInfoViewController(fromSettings: Bool = false) {
         let controller = SecurityInfoViewController()
-        return controller
+        controller.fromSettings = fromSettings
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     var loginWithGooglePopup: LoginWithGooglePopup {

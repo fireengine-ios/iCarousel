@@ -167,7 +167,8 @@ final class LandingPageViewController: ViewController, UIScrollViewDelegate {
     
     private func goToSyncSettingsView() {
         let router = RouterVC()
-        router.setNavigationController(controller: router.synchronyseScreen)
+        
+        router.setNavigationController(controller: router.synchronyseScreen())
     }
     
     private func trackScreen(pageNum: Int) {
