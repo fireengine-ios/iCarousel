@@ -13,6 +13,7 @@ enum AllFilesType: CaseIterable {
     case music
     case favorites
     case sharedWithMe
+    case trashBin
     case sharedByMe
     case allFiles
     case documentsAndMusic
@@ -27,6 +28,8 @@ enum AllFilesType: CaseIterable {
             return Image.iconTabStar.image
         case .sharedByMe, .sharedWithMe:
             return Image.iconTabShare.image
+        case .trashBin:
+            return Image.iconTabDelete.image
         case .allFiles, .documentsAndMusic:
             return nil
         }
@@ -42,6 +45,8 @@ enum AllFilesType: CaseIterable {
             return TextConstants.containerFavourite
         case .sharedByMe, .sharedWithMe:
             return TextConstants.containerShared
+        case .trashBin:
+            return localized(.trashBin)
         case .allFiles, .documentsAndMusic:
             return nil
         }
@@ -57,13 +62,13 @@ enum AllFilesType: CaseIterable {
             return AppColor.filesFavoriteTab.color
         case .sharedByMe, .sharedWithMe:
             return AppColor.filesSharedTab.color
-        case .allFiles, .documentsAndMusic:
+        case .allFiles, .documentsAndMusic, .trashBin:
             return nil
         }
     }
     
     static func getSegments() -> [AllFilesType] {
-        return [.documents, .music, .favorites, .sharedWithMe]
+        return [.documents, .music, .favorites, .sharedWithMe, .trashBin]
     }
     
     static func getSharedItemsSegments() -> [AllFilesType] {

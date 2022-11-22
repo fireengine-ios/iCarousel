@@ -569,7 +569,7 @@ class RouterVC: NSObject {
             assertionFailure()
             return AllFilesSegmentedController()
         }
-        let controllers = [documents, musics, favorites, sharedWithMe, shareByMeSegment, allFiles, documentsAndMusic, trashBin]
+        let controllers = [documents, musics, favorites, sharedWithMe, trashBin, shareByMeSegment, allFiles, documentsAndMusic]
         return AllFilesSegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
     }
     
