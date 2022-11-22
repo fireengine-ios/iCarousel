@@ -25,7 +25,7 @@ def core_pods
   pod 'AGConnectCore'
   pod 'AGConnectAppLinking'
 
-  pod 'Netmera', '~> 3.14.11'
+  pod 'Netmera', '~> 3.8.4'
 
   pod 'SDWebImage', '~> 4'
   pod 'GoogleConversionTracking', '~> 3'
