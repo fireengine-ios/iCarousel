@@ -123,6 +123,7 @@
                             </constraints>
                         </view>
                     </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="t8N-CH-k5d" secondAttribute="trailing" id="GXu-34-fro"/>
                         <constraint firstItem="t8N-CH-k5d" firstAttribute="height" secondItem="Cqr-ue-tw8" secondAttribute="height" priority="250" id="JHr-bN-Fje"/>

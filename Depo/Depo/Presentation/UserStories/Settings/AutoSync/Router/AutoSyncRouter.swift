@@ -9,12 +9,6 @@
 class AutoSyncRouter: AutoSyncRouterInput {
     
     private let router = RouterVC()
- 
-    func routPop() {
-        DispatchQueue.toMain {
-            self.router.popViewController()
-        }
-    }
     
     func routNextVC() {
         DispatchQueue.toMain {

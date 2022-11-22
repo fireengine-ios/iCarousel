@@ -491,8 +491,8 @@ class RouterVC: NSObject {
     
     // MARK: SynchronyseSettings
     
-    func synchronyseScreen(fromSettings: Bool = false, isPopRequired: Bool = true) -> UIViewController {
-        return AutoSyncModuleInitializer.initializeViewController(fromSettings: fromSettings, isPopRequired: isPopRequired)
+    func synchronyseScreen(fromSettings: Bool = false) -> UIViewController {
+        return AutoSyncModuleInitializer.initializeViewController(fromSettings: fromSettings)
     }
     
     // MARK: TabBar
@@ -573,7 +573,7 @@ class RouterVC: NSObject {
             assertionFailure()
             return AllFilesSegmentedController()
         }
-        let controllers = [documents, musics, favorites, sharedWithMe, shareByMeSegment, allFiles, documentsAndMusic, trashBin]
+        let controllers = [documents, musics, favorites, sharedWithMe, trashBin, shareByMeSegment, allFiles, documentsAndMusic]
         return AllFilesSegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
     }
     

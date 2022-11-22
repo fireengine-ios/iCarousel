@@ -10,14 +10,14 @@ import UIKit
 
 class AutoSyncModuleConfigurator {
 
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, fromSettings: Bool = false, isPopRequired: Bool = false) {
+    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, fromSettings: Bool = false) {
 
         if let viewController = viewInput as? AutoSyncViewController {
-            configure(viewController: viewController, fromSettings: fromSettings, isPopRequired: isPopRequired)
+            configure(viewController: viewController, fromSettings: fromSettings)
         }
     }
 
-    private func configure(viewController: AutoSyncViewController, fromSettings: Bool = false, isPopRequired: Bool = false) {
+    private func configure(viewController: AutoSyncViewController, fromSettings: Bool = false) {
 
         let router = AutoSyncRouter()
 
@@ -26,7 +26,6 @@ class AutoSyncModuleConfigurator {
         presenter.router = router
         
         presenter.fromSettings = fromSettings
-        presenter.isPopRequired = isPopRequired
         viewController.fromSettings = fromSettings
 
         let interactor = AutoSyncInteractor()

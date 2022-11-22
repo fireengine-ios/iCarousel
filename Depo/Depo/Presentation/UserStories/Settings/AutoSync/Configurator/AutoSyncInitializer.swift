@@ -13,7 +13,7 @@ class AutoSyncModuleInitializer: NSObject {
     class func initializeViewController(fromSettings: Bool = false, isPopRequired: Bool = false) -> UIViewController {
         let viewController = AutoSyncViewController.initFromNib()
         let configurator = AutoSyncModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: viewController, fromSettings: fromSettings, isPopRequired: isPopRequired)
+        configurator.configureModuleForViewInput(viewInput: viewController, fromSettings: fromSettings)
         return viewController
     }
 

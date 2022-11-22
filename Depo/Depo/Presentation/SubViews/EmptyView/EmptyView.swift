@@ -44,7 +44,7 @@ final class EmptyView: UIView, NibInit {
                 case .hiddenBin:
                     return UIImage(named: "hidden_big")
                 case .trashBin:
-                    return UIImage(named: "trash_big")
+                    return Image.popupIconDelete.image
                 case .sharedBy:
                     return Image.popupShared.image
                 case .sharedWith:
