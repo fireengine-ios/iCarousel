@@ -73,11 +73,14 @@ final class AutoSyncViewController: BaseViewController, NibInit {
         
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        let text = TextConstants.autoSyncFromSettingsTitle as NSString
+        var text = TextConstants.autoSyncFromSettingsTitle as NSString
+        if !text.components(separatedBy: ".").isEmpty {
+            text = text.components(separatedBy: ".")[0] as NSString
+        }
         
         if text.contains(" \n\n") {
             let attributedString = NSMutableAttributedString(string: text as String,
-                                                             attributes: [.font: UIFont.appFont(.regular, size: 14.0),
+                                                             attributes: [.font: UIFont.appFont(.medium, size: 14.0),
                                                                           .foregroundColor: AppColor.label.color])
             
             let range = text.range(of: " \n\n")
@@ -85,10 +88,11 @@ final class AutoSyncViewController: BaseViewController, NibInit {
             let endRange = NSRange(location: range.location + range.length, length: text.length - range.location - range.length)
             
             attributedString.addAttribute(.font, value: UIFont.appFont(.medium, size: 14.0), range: startRange )
-            attributedString.addAttribute(.font, value: UIFont.appFont(.regular, size: 12.0), range: endRange )
+            attributedString.addAttribute(.font, value: UIFont.appFont(.medium, size: 12.0), range: endRange )
             titleLabel.attributedText = attributedString
         } else {
             titleLabel.text = "\(text)"
+            titleLabel.font = .appFont(.medium, size: 14)
         }
         
 

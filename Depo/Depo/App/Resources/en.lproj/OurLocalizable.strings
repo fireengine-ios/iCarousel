@@ -2103,7 +2103,7 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "foryou_no_story_warn" = "No active stories currently.";
 "foryou_try_photopick" = "Try PhotoPick";
-"foryou_see_all" = "";
+"foryou_see_all" = "See All";
 
 /*Facelift*/
 "tabbar_foryou" = "For You";
@@ -2112,5 +2112,5 @@ then {11,99 TRY/Month}*/
 "mystorage_become_premium" = "";
 "we_are_creating_your_story_title" = "We are preparing your story.";
 "we_are_creating_your_story_desc" = "Once it is done, you can access it from Videos Album.";
-"ksaldalks" = "";
 "trash_bin" = "Trash Bin";
+"ksaldalks" = "";
