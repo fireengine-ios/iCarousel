@@ -18,7 +18,7 @@ class PhoneVerificationRouter: PhoneVerificationRouterInput {
     }
     
     func goAutoSync() {
-        router.pushViewController(viewController: router.synchronyseScreen)
+        router.pushViewController(viewController: router.synchronyseScreen())
     }
     
     func presentErrorPopUp(with message: String) {

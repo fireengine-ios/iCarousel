@@ -212,4 +212,5 @@ enum Strings: String, Localizable {
     case changePasswordInputTitle = "change_pass_mail_or_phone"
     case becomePremiumBannerDesc = "mystorage_become_premium"
     
+    case trashBin = "trash_bin"
 }

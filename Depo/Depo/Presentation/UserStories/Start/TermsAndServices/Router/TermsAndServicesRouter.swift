@@ -11,7 +11,7 @@ class TermsAndServicesRouter: TermsAndServicesRouterInput {
     let routerVC = RouterVC()
     
     func goToAutoSync() {
-        routerVC.pushViewController(viewController: routerVC.synchronyseScreen)
+        routerVC.pushViewController(viewController: routerVC.synchronyseScreen())
     }
     
     func goToHomePage() {

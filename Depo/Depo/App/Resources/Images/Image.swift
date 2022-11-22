@@ -98,6 +98,7 @@ enum Image: String, AppImage {
     case iconTabFiles
     case iconTabShare
     case iconTabStar
+    case iconTabDelete
     
     ///  Files Tab
     case iconFileAudio
