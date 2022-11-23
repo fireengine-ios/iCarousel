@@ -76,8 +76,8 @@ extension NetmeraEvents.Actions {
                 socialChannel = .facebook
             case .instagram:
                 socialChannel = .instagram
-            case .spotify:
-                socialChannel = .spotify
+//            case .spotify:
+//                socialChannel = .spotify
             case .appleGoogle:
                 socialChannel = .appleGoogle
             }

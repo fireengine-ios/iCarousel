@@ -91,7 +91,7 @@ final class AutoSyncViewController: BaseViewController, NibInit {
             attributedString.addAttribute(.font, value: UIFont.appFont(.medium, size: 12.0), range: endRange )
             titleLabel.attributedText = attributedString
         } else {
-            titleLabel.text = "\(text)"
+            titleLabel.text = "\(text)."
             titleLabel.font = .appFont(.medium, size: 14)
         }
         

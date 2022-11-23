@@ -29,15 +29,6 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialConnectionCel
             instaPickSwitch.setOn(isInstaPickOn, animated: true)
         }
     }
-    
-    @IBOutlet private weak var caption: UILabel! {
-        didSet {
-            caption.font = .appFont(.medium, size: 14)
-            caption.textColor = AppColor.label.color
-            caption.text = TextConstants.instagram
-        }
-    }
-    
     @IBOutlet private weak var instaPickIcon: UIImageView! {
         didSet {
             instaPickIcon.image = UIImage(named:"iconTabInstagramPink")

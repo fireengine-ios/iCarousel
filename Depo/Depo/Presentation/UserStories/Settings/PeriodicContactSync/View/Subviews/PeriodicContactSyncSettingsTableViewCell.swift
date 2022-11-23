@@ -22,6 +22,12 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
     @IBOutlet private var optionSeparators: [UIView]!
     @IBOutlet private weak var separatorView: UIView!
     
+    @IBOutlet weak var switchContainer: UIView! {
+        willSet {
+            newValue.backgroundColor = AppColor.secondaryBackground.color
+        }
+    }
+    
     private let options: [PeriodicContactsSyncOption] = [.daily, .weekly, .monthly]
     
     private var model: PeriodContactsSyncModel?

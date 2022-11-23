@@ -168,11 +168,6 @@ extension AutoSyncDataSource: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-//    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-//        let headerView = view as! UITableViewHeaderFooterView
-//        headerView.textLabel?.text = TextConstants.periodContactSyncFromSettingsTitle
-//    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -228,6 +223,8 @@ extension AutoSyncDataSource: UITableViewDataSource, UITableViewDelegate {
                 autoSyncCell.setup(with: timeSettingModel, setting: syncSetting)
             }
             autoSyncCell.backgroundColor = AppColor.secondaryBackground.color
+            
+            
             return autoSyncCell
         }
     }

@@ -11,7 +11,6 @@ import Foundation
 
 final class Section {
     enum SocialAccount: Int {
-        case spotify
         case instagram
         case facebook
         case dropbox
@@ -95,8 +94,6 @@ extension ConnectedAccountsDataSource: UITableViewDataSource {
             cellId = CellsIdConstants.facebookAccountConnectionCell
         case (.dropbox, .shrinked):
             cellId = CellsIdConstants.dropboxAccountConnectionCell
-        case (.spotify, .shrinked):
-            cellId = CellsIdConstants.spotifyAccountConnectionCell
         case (.appleGoogle, .shrinked):
             cellId = CellsIdConstants.appleGoogleAccountConnectionCell
             

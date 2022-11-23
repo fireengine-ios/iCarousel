@@ -30,4 +30,8 @@ extension PackagesRouter: PackagesRouterInput {
         let viewController = router.userProfile(userInfo: userInfo, isTurkcellUser: isTurkcellUser)
         router.pushViewController(viewController: viewController)
     }
+    
+    func goToConnectedAccounts() {
+        router.pushViewController(viewController: router.connectedAccounts!)
+    }
 }
