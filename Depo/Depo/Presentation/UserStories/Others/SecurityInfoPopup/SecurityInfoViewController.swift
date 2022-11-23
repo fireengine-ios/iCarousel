@@ -175,6 +175,7 @@ final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHan
         answer.questionAnswer = secretAnswerView.textField.text
         captchaView.hideErrorAnimated()
         secretAnswerView.hideSubtitleAnimated()
+        
         securityQuestionOperation = nil
         recoveryEmailOperation = nil
         
@@ -215,7 +216,7 @@ final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHan
     
     private func handleApiCalls() {
         if securityQuestionOperation == nil && recoveryEmailOperation != nil {
-            recoveryEmailOperation?.isSuccess == true ? dismiss(animated: true)
+            recoveryEmailOperation?.isSuccess == true ? questionWasSuccessfullyUpdated()
             : UIApplication.showErrorAlert(message: recoveryEmailOperation?.errorMessage ?? "")
             return
         }
@@ -254,7 +255,10 @@ final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHan
 extension SecurityInfoViewController {
     private func questionWasSuccessfullyUpdated() {
         SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.userProfileSetSecretQuestionSuccess)
-        dismiss(animated: true)
+        DispatchQueue.toMain {
+            RouterVC().setNavigationController(controller: RouterVC().tabBarScreen)
+        }
+        //dismiss(animated: true)
     }
     
     private func handleServerErrors(_ error: SetSecretQuestionErrors) {
@@ -314,13 +318,14 @@ extension SecurityInfoViewController {
             
             guard let self = self else { return }
             self.hideSpinnerIncludeNavigationBar()
-            completion()
-            
+
             switch result {
             case .success:
                 self.securityQuestionOperation = (true, nil)
+                completion()
             case .failure(let error):
                 self.securityQuestionOperation = (false, error)
+                completion()
             }
         }
     }

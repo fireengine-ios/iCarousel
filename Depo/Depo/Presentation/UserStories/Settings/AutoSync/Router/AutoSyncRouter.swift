@@ -9,10 +9,15 @@
 class AutoSyncRouter: AutoSyncRouterInput {
     
     private let router = RouterVC()
+    var fromRegister = false
     
     func routNextVC() {
-        DispatchQueue.toMain {
-            self.router.setNavigationController(controller: self.router.tabBarScreen)
+        DispatchQueue.toMain { [weak self] in
+            self?.router.setNavigationController(controller: self?.router.tabBarScreen)
+            
+            if self?.fromRegister == true {
+                return
+            }
             
             SingletonStorage.shared.securityInfoIfNeeded { isNeed in
                 if isNeed {

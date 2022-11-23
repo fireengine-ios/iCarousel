@@ -63,6 +63,8 @@ class LoginPresenter: BasePresenter {
     }
     
     private func openAutoSyncIfNeeded() {
+        /// You can use according to flow.
+        // SingletonStorage.shared.securityInfoIfNeeded
         DispatchQueue.toMain { [weak self] in
             self?.router.goToSyncSettingsView()
         }
