@@ -120,7 +120,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     private func setupBars() {
         setupNavBar()
-        setupCollectionViewBar()
+        setupCollectionViewBar(moreButtonIsHidden: false)
         bottomBarManager.setup()
         setupTabBar(needToShow: true)
     }
@@ -137,7 +137,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         floatingButtonsArray = shareType.floatingButtonTypes
     }
     
-    private func setupCollectionViewBar() {
+    private func setupCollectionViewBar(moreButtonIsHidden: Bool) {
         gridListBar.view.translatesAutoresizingMaskIntoConstraints = false
         collectionView.contentInset.bottom = 60
         collectionViewBarContainer.addSubview(gridListBar.view)
@@ -149,7 +149,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
                                           defaultSortType: .TimeNewOld,
                                           availableFilter: false,
                                           showGridListButton: true,
-                                          showMoreButton: shareType == .byMe)
+                                          showMoreButton: moreButtonIsHidden)
         gridListBar.setupWithConfig(config: config)
     }
     
@@ -259,6 +259,12 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         hideSpinner()
         
         navBarManager.threeDotsButton.isEnabled = shareType.isSelectionAllowed && !collectionManager.isCollectionEmpty
+        
+        if collectionManager.isCollectionEmpty {
+            setupCollectionViewBar(moreButtonIsHidden: false)
+        } else {
+            setupCollectionViewBar(moreButtonIsHidden: true)
+        }
     }
     
     func showActions(for item: WrapData, sender: Any) {

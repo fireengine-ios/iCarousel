@@ -44,10 +44,10 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:HxC-mn-dmR:image" translatesAutoresizingMaskIntoConstraints="NO" id="HxC-mn-dmR">
-                                        <rect key="frame" x="339" y="14" width="16" height="16"/>
+                                        <rect key="frame" x="330" y="9.5" width="25" height="25"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="16" id="j1b-cE-xLv"/>
-                                            <constraint firstAttribute="height" constant="16" id="qqO-Ed-P0Q"/>
+                                            <constraint firstAttribute="width" constant="25" id="j1b-cE-xLv"/>
+                                            <constraint firstAttribute="height" constant="25" id="qqO-Ed-P0Q"/>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gR9-Hd-zOq">
@@ -92,10 +92,10 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:HxC-mn-dmR:image" translatesAutoresizingMaskIntoConstraints="NO" id="VRa-xn-4vE">
-                                        <rect key="frame" x="339" y="14" width="16" height="16"/>
+                                        <rect key="frame" x="330" y="9.5" width="25" height="25"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="16" id="1Ec-Ep-OyZ"/>
-                                            <constraint firstAttribute="width" constant="16" id="FRe-5c-ZxP"/>
+                                            <constraint firstAttribute="height" constant="25" id="1Ec-Ep-OyZ"/>
+                                            <constraint firstAttribute="width" constant="25" id="FRe-5c-ZxP"/>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="btd-CZ-dx4">
@@ -139,10 +139,10 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:HxC-mn-dmR:image" translatesAutoresizingMaskIntoConstraints="NO" id="nrH-uM-PfU">
-                                        <rect key="frame" x="339" y="14" width="16" height="16"/>
+                                        <rect key="frame" x="330" y="9.5" width="25" height="25"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="16" id="LpP-oh-wXx"/>
-                                            <constraint firstAttribute="width" constant="16" id="Nj7-7D-iOL"/>
+                                            <constraint firstAttribute="height" constant="25" id="LpP-oh-wXx"/>
+                                            <constraint firstAttribute="width" constant="25" id="Nj7-7D-iOL"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>

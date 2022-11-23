@@ -10,9 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="TurkcellSaturaDem.ttf">
-            <string>TurkcellSaturaDem</string>
-        </array>
         <array key="Turkcell_Satura_Regular.ttf">
             <string>TurkcellSatura</string>
         </array>
@@ -27,14 +24,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="223"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instagram" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDv-b5-eXE">
-                        <rect key="frame" x="16" y="20" width="288" height="18"/>
-                        <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="18"/>
-                        <color key="textColor" name="darkText"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LN8-46-uQc">
-                        <rect key="frame" x="8" y="46" width="304" height="167"/>
+                        <rect key="frame" x="8" y="8" width="304" height="205"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="67" translatesAutoresizingMaskIntoConstraints="NO" id="BzA-ir-xxQ">
                                 <rect key="frame" x="12" y="16" width="276" height="31"/>
@@ -66,13 +57,13 @@
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" placeholderIntrinsicWidth="42" placeholderIntrinsicHeight="21" text="jkgkjhgkjhgkjhg" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4w-Mo-nUP">
-                                <rect key="frame" x="16" y="55" width="280" height="24"/>
+                                <rect key="frame" x="16" y="55" width="280" height="62"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="RmB-Ne-re5">
-                                <rect key="frame" x="12" y="114" width="280" height="31"/>
+                                <rect key="frame" x="12" y="152" width="280" height="31"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagram" translatesAutoresizingMaskIntoConstraints="NO" id="py1-23-qvm">
                                         <rect key="frame" x="0.0" y="0.0" width="31" height="31"/>
@@ -118,11 +109,8 @@
                 </subviews>
                 <color key="backgroundColor" name="primaryBackground"/>
                 <constraints>
-                    <constraint firstItem="LN8-46-uQc" firstAttribute="top" secondItem="MDv-b5-eXE" secondAttribute="bottom" constant="8" id="4A9-4x-mAc"/>
-                    <constraint firstAttribute="trailing" secondItem="MDv-b5-eXE" secondAttribute="trailing" constant="16" id="7jQ-Cw-GJV"/>
-                    <constraint firstItem="MDv-b5-eXE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="ITS-ay-5v8"/>
                     <constraint firstAttribute="trailing" secondItem="LN8-46-uQc" secondAttribute="trailing" constant="8" id="VwP-VN-ejh"/>
-                    <constraint firstItem="MDv-b5-eXE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Y8F-EN-Clu"/>
+                    <constraint firstItem="LN8-46-uQc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="h3d-jI-iGC"/>
                     <constraint firstAttribute="bottom" secondItem="LN8-46-uQc" secondAttribute="bottom" constant="10" id="oij-F1-gYB"/>
                     <constraint firstItem="LN8-46-uQc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="tci-vP-vV4"/>
                 </constraints>
@@ -131,7 +119,6 @@
             <color key="backgroundColor" name="primaryBackground"/>
             <connections>
                 <outlet property="bgView" destination="LN8-46-uQc" id="6sB-Ob-Zpb"/>
-                <outlet property="caption" destination="MDv-b5-eXE" id="CDt-44-Ux8"/>
                 <outlet property="descriptionLabel" destination="D4w-Mo-nUP" id="Krc-T9-NJ8"/>
                 <outlet property="importFromInstagramIcon" destination="py1-23-qvm" id="bgp-HJ-PrB"/>
                 <outlet property="importFromInstagramText" destination="agT-6Z-UrP" id="jjn-QD-urY"/>

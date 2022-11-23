@@ -218,6 +218,7 @@
             <connections>
                 <outlet property="optionsStackView" destination="LZb-e6-h8C" id="Ohz-T0-xEF"/>
                 <outlet property="separatorView" destination="LeE-sm-W0M" id="eir-Qz-d0h"/>
+                <outlet property="switchContainer" destination="qLD-IJ-2Qg" id="NPD-xQ-YmA"/>
                 <outlet property="switcher" destination="aOe-fe-AKA" id="g7h-EZ-BeP"/>
                 <outlet property="titleLabel" destination="vK8-ni-iua" id="oBT-em-RwD"/>
                 <outletCollection property="optionSeparators" destination="Aa2-1F-JSl" collectionClass="NSMutableArray" id="NnZ-dk-cXH"/>

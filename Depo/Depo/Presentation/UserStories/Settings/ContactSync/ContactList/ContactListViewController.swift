@@ -20,7 +20,7 @@ final class ContactListViewController: BaseViewController {
     private var searchBar: UISearchBar? {
         (tableView.tableHeaderView as? ContactListHeader)?.searchBar
     }
-    private lazy var moreButton = UIBarButtonItem(image: Images.threeDots, style: .plain, target: self, action: #selector(onMore))
+    private lazy var moreButton = UIBarButtonItem(image: Image.iconThreeDotsHorizontal.image, style: .plain, target: self, action: #selector(onMore))
     private var tableView: UITableView {
         mainView.tableView
     }
