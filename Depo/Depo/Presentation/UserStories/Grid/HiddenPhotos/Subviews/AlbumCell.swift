@@ -13,9 +13,9 @@ final class AlbumCell: BaseCollectionViewCell {
     @IBOutlet private var thumbnailsContainer: UIView! {
         willSet {
             newValue.backgroundColor = .white
-            newValue.layer.borderWidth = 1.0
+            newValue.layer.borderWidth = 0.5
             newValue.layer.masksToBounds = true
-            newValue.layer.borderColor = ColorConstants.blueColor.cgColor
+            newValue.layer.borderColor = AppColor.tint.cgColor
         }
     }
     
@@ -30,7 +30,7 @@ final class AlbumCell: BaseCollectionViewCell {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = " "
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 14)
+            newValue.font = .appFont(.regular, size: 16)
             newValue.textColor = ColorConstants.darkText
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
@@ -39,7 +39,7 @@ final class AlbumCell: BaseCollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.backgroundColor = .lrSkinTone
+        contentView.backgroundColor =  AppColor.background.color
     }
     
     override func prepareForReuse() {
