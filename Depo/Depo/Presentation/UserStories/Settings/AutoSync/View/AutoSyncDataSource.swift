@@ -232,16 +232,19 @@ extension AutoSyncDataSource: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let cornerRadius = 16
         var corners: UIRectCorner = []
-
+        print("aaaaaa \(indexPath.row) - \(indexPath.section)")
+        print("aaaaaa1 \(tableView.numberOfRows(inSection: indexPath.section))")
         if indexPath.row == 0 {
             corners.update(with: .topLeft)
             corners.update(with: .topRight)
         }
 
-        if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+        
+        if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1  {
             corners.update(with: .bottomLeft)
             corners.update(with: .bottomRight)
         }
+        
 
         let maskLayer = CAShapeLayer()
         maskLayer.path = UIBezierPath(roundedRect: cell.bounds,
@@ -345,8 +348,10 @@ extension AutoSyncDataSource: AutoSyncCellDelegate {
             case .albums:
                 if model.isSelected {
                     showAlbums()
+                    tableView.reloadData()
                 } else {
                     hideAlbums()
+                    tableView.reloadData()
                 }
             }
         } else if let model = model as? AutoSyncAlbumModel {
@@ -456,6 +461,8 @@ extension AutoSyncDataSource {
         models.append(contentsOf: albumModels)
         
         let indexPaths = (index+1...models.count-1).map { IndexPath(row: $0, section: 0)}
+        
+
         
         updateTableView({
             tableView.insertRows(at: indexPaths, with: tableViewAnimationType)

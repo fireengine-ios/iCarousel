@@ -105,7 +105,7 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = .white
+        backgroundColor = AppColor.background.color
         backUpButton.setTitleColor(.white, for: .normal)
         backUpButton.setBackgroundColor(AppColor.darkBlueColor.color, for: .normal)
     }

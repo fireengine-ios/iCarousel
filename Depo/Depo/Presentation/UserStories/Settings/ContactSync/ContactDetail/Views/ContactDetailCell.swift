@@ -37,9 +37,9 @@ enum ContactSectionCategory {
         case .phone:
             return UIImage(named: "contact_phone")
         case .email:
-            return UIImage(named: "contact_email")
+            return Image.contact_email.image
         case .address:
-            return UIImage(named: "contact_address")
+            return Image.contact_address.image
         case .birthday:
             return UIImage(named: "contact_birthday")
         case .notes:

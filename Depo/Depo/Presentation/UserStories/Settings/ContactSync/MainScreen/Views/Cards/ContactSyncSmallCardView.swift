@@ -73,12 +73,14 @@ final class ContactSyncSmallCardView: ContactSyncBaseCardView, NibInit {
 
         switch type {
             case .showBackup(_):
-                icon.image = UIImage(named: "iconBackupContactMain")
+                //icon.image = UIImage(named: "iconBackupContactMain")
+                icon.image = Image.iconBackupContactMain.image
                 message.text = " "
                 actionButton.setTitle(TextConstants.contactSyncSmallCardShowBackupButton, for: .normal)
 
             case .deleteDuplicates:
-                icon.image = UIImage(named: "iconDuplicateContact")
+                //icon.image = UIImage(named: "iconDuplicateContact")
+                icon.image = Image.iconDuplicateContact.image
                 message.text = TextConstants.contactSyncSmallCardDeleteDuplicatesMessage
                 actionButton.setTitle(TextConstants.contactSyncSmallCardDeleteDuplicatesButton, for: .normal)
         }
