@@ -39,6 +39,8 @@ enum AppColor {
     case lightText
     case button
     case secondaryButton
+    case darkBackground
+    case secondaryTint
 
     case loginShadowBlue
     case darkContentOverlay
@@ -49,6 +51,7 @@ enum AppColor {
     case tabBarUnselectOnly
     
     case tableViewSection
+    case cellBackground
     
     // MARK: PhotoVideoDetail
     case functionsMenuTint
@@ -101,6 +104,14 @@ enum AppColor {
     case tbtBlurBackground
     case tbtButton
     
+    // MARK: Contact
+    case grayMain
+    case darkBlue
+    case darkBlueColor
+    case contactHeader
+    case contactHeaderText
+    case progressFront
+    
     // MARK: Settings
     case borderColor
     case profileInfoOrange
@@ -119,6 +130,15 @@ enum AppColor {
     case settingsBackground
     case passcodeTint
     case settingsButtonNormal
+    case campaignBackground
+    case campaignDarkLabel
+    case campaignLightLabel
+    case campaignBorder
+    case campaignContentLabel
+    case syncHeader
+    
+    //ConnectedAccounts
+    case toggleOn
     
     //MARK: Landing
     case landingGradientFinish

@@ -29,6 +29,8 @@ class NavigationBarList {
     let gift: UIBarButtonItem
 
     let newAlbum: UIBarButtonItem
+    
+    let plus: UIBarButtonItem
 
     init() {
         settings = UIBarButtonItem(image: UIImage(named: TextConstants.cogBtnImgName),
@@ -36,7 +38,13 @@ class NavigationBarList {
                                    target: nil,
                                    action: nil)
         settings.accessibilityLabel = TextConstants.accessibilitySettings
-
+        
+        plus = UIBarButtonItem(image: NavigationBarImage.headerActionPlus.image.withRenderingMode(.alwaysOriginal),
+                                 style: .plain,
+                                 target: nil,
+                                 action: nil)
+        plus.accessibilityLabel = TextConstants.accessibilityPlus
+        
         search = UIBarButtonItem(image: NavigationBarImage.headerActionSearch.image.withRenderingMode(.alwaysOriginal),
                                  style: .plain,
                                  target: nil,

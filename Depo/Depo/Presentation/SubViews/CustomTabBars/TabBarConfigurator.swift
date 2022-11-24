@@ -26,7 +26,7 @@ enum TabBarItem: CaseIterable {
     var title: String {
         switch self {
         case .forYou:
-            return "For You"
+            return localized(.tabBarForYouTitle)
         case .gallery:
             return TextConstants.tabBarItemGalleryLabel
         case .contacts:
@@ -34,7 +34,7 @@ enum TabBarItem: CaseIterable {
         case .allFiles:
             return TextConstants.tabBarItemAllFilesLabel
         case .discover:
-            return "Keşfet"
+            return localized(.tabBarDiscoverTitle)
         }
     }
     
@@ -71,7 +71,7 @@ enum TabBarItem: CaseIterable {
     var accessibilityLabel: String {
         switch self {
         case .forYou:
-            return "For You"
+            return localized(.tabBarForYouTitle)
         case .gallery:
             return TextConstants.accessibilityPhotosVideos
         case .contacts:
@@ -99,7 +99,8 @@ final class TabBarConfigurator {
             router.forYou(),
             syncContactsVC,
             router.segmentedFiles,
-            EmptyViewController()
+            router.discover()
+            
         ]
         return list.map {
             let headerContaining = HeaderContainingViewController(child: $0)

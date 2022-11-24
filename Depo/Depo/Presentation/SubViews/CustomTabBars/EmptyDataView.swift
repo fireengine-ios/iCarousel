@@ -33,6 +33,8 @@ private extension ElementTypes {
     
     var emptyViewActionTitle: String? {
         switch self {
+        case .galleryAll:
+            return TextConstants.photosVideosViewNoPhotoButtonText
         default: return nil
         }
     }
@@ -67,7 +69,7 @@ final class EmptyDataView: UIView, NibInit {
     
     @IBOutlet private weak var iconImageView: UIImageView!
     
-    @IBOutlet private weak var actionButton: UIButton!
+    @IBOutlet private weak var actionButton: DarkBlueButton!
     
     func configure(viewType: ElementTypes) {
         messageLabel.text = viewType.emptyViewMessage

@@ -29,8 +29,19 @@ final class ContactsBackupCell: UITableViewCell, ContactsBackupCellProtocol {
             newValue.tintColor = AppColor.darkBlueAndTealish.color
         }
     }
-    @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var detailLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel! {
+        willSet {
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.medium, size: 14)
+        }
+    }
+    
+    @IBOutlet private weak var detailLabel: UILabel!{
+        willSet {
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.light, size: 14)
+        }
+    }
     
     weak var delegate: ContactsBackupCellDelegate?
     

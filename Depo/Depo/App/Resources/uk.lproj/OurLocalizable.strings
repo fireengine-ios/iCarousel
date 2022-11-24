@@ -2007,8 +2007,6 @@
 "syncing" = "";
 "downloading" = "";
 "ETK_KVKK_Izin_Politikası" = "";
-"syncing" = "";
-"downloading" = "";
 
 /*Free for {3 months}
 then {11,99 TRY/Month}*/
@@ -2033,3 +2031,24 @@ then {11,99 TRY/Month}*/
 "paycell_share_message" = "Я приєднався до Програми Амбасадорів Бренда lifebox. Ви можете отримати 6-місячний Преміум пакет lifebox об'ємом 250 ГБ за зниженою ціною, перейшовши за посиланням нижче. Не проґавте можливість 😊";
 "beeline_cancel_TC" = "Ви можете скасувати або керувати підпискою lifebox із програми Beeline.";
 "paycell_share_message " = "";
+"foryou_throwback" = "";
+"foryou_myalbums" = "";
+"foryou_myanimations" = "";
+"foryou_collages" = "";
+"foryou_my_collages" = "";
+"foryou_animations" = "";
+"foryou_no_album_warn" = "";
+"foryou_no_photopick_warn" = "";
+"foryou_no_story_warn" = "";
+"foryou_try_photopick" = "";
+"foryou_see_all" = "";
+
+/*Facelift*/
+"tabbar_foryou" = "";
+"tabbar_discover" = "";
+"change_pass_mail_or_phone" = "";
+"mystorage_become_premium" = "";
+"we_are_creating_your_story_title" = "";
+"we_are_creating_your_story_desc" = "";
+"trash_bin" = "";
+"ksaldalks" = "";

@@ -164,7 +164,7 @@ extension AutoSyncDataSource: UITableViewDataSource, UITableViewDelegate {
         if section == 0 {
             return 16
         } else {
-            return 60
+            return 50
         }
     }
     
@@ -179,6 +179,16 @@ extension AutoSyncDataSource: UITableViewDataSource, UITableViewDelegate {
             return 1
         }
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let sectionTitle: String = self.tableView(tableView, titleForHeaderInSection: section) else { return nil }
+        let title: InsetsLabel = InsetsLabel()
+        title.text = sectionTitle
+        title.textColor = AppColor.syncHeader.color
+        title.font = .appFont(.medium, size: 14)
+        title.insets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+        return title
+      }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
@@ -213,6 +223,8 @@ extension AutoSyncDataSource: UITableViewDataSource, UITableViewDelegate {
                 autoSyncCell.setup(with: timeSettingModel, setting: syncSetting)
             }
             autoSyncCell.backgroundColor = AppColor.secondaryBackground.color
+            
+            
             return autoSyncCell
         }
     }

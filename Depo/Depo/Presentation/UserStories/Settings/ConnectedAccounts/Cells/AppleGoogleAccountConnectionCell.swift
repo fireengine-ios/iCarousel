@@ -23,13 +23,24 @@ class AppleGoogleAccountConnectionCell: UITableViewCell {
     private lazy var appleGoogleService = AppleGoogleLoginService()
     weak var delegate: AppleGoogleAccountConnectionCellDelegate?
 
+    @IBOutlet weak var bgView: UIView! {
+        willSet {
+            newValue.layer.masksToBounds = false
+            newValue.layer.cornerRadius = 15
+            newValue.layer.shadowOpacity = 0.2
+            newValue.layer.shadowColor = UIColor.gray.cgColor
+            newValue.layer.shadowOffset = CGSize(width: 0, height: 0)
+        }
+    }
+    
+    
     //MARK: -IBOutlets
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0
             newValue.text = localized(.settingsAppleGoogleTitle)
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.textColor = ColorConstants.darkText
+            newValue.font = .appFont(.medium, size: 14)
+            newValue.textColor = AppColor.label.color
         }
     }
     
@@ -37,8 +48,8 @@ class AppleGoogleAccountConnectionCell: UITableViewCell {
         willSet {
             newValue.numberOfLines = 0
             newValue.text = localized(.settingsGoogleMatch)
-            newValue.font = UIFont.TurkcellSaturaFont(size: 14)
-            newValue.textColor = ColorConstants.darkText
+            newValue.font = .appFont(.regular, size: 14)
+            newValue.textColor = AppColor.label.color
         }
     }
     
@@ -46,26 +57,30 @@ class AppleGoogleAccountConnectionCell: UITableViewCell {
         willSet {
             newValue.numberOfLines = 0
             newValue.text = localized(.settingsAppleMatch)
-            newValue.font = UIFont.TurkcellSaturaFont(size: 14)
-            newValue.textColor = ColorConstants.darkText
+            newValue.font = .appFont(.regular, size: 14)
+            newValue.textColor = AppColor.label.color
         }
     }
     
     @IBOutlet private weak var appleLogo: UIImageView! {
         willSet {
-            newValue.image = UIImage(named: "appleLogo")?.withRenderingMode(.alwaysTemplate)
+            newValue.image = UIImage(named: "iconTabAppleCopy")?.withRenderingMode(.alwaysTemplate)
             newValue.tintColor = AppColor.blackColor.color
         }
     }
 
     @IBOutlet private weak var googleSwitch: UISwitch! {
         willSet {
+            newValue.transform = CGAffineTransform(scaleX: 0.9, y: 0.8)
+            newValue.onTintColor = AppColor.toggleOn.color
             newValue.isOn = false
         }
     }
     
     @IBOutlet private weak var appleSwitch: UISwitch! {
         willSet {
+            newValue.transform = CGAffineTransform(scaleX: 0.9, y: 0.8)
+            newValue.onTintColor = AppColor.toggleOn.color
             newValue.isOn = false
         }
     }

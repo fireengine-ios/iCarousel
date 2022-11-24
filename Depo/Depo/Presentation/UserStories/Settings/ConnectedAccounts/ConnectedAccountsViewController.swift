@@ -48,7 +48,7 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
     
     private func setupTableView() {
         tableView.dataSource = dataSource
-        tableView.delegate = self
+//        tableView.delegate = self
         
         tableView.tableFooterView = UIView()
         tableView.estimatedRowHeight = 124.0
@@ -134,16 +134,16 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
 
 
 // MARK: - UITableViewDelegate
-extension ConnectedAccountsViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return (section == Section.SocialAccount.spotify.rawValue) ? 0 : 14
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return (section == Section.SocialAccount.spotify.rawValue) ? nil : SettingHeaderView.viewFromNib()
-    }
-}
+//extension ConnectedAccountsViewController: UITableViewDelegate {
+//
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return (section == Section.SocialAccount.spotify.rawValue) ? 0 : 0
+//    }
+//
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        return (section == Section.SocialAccount.spotify.rawValue) ? nil : SettingHeaderView.viewFromNib()
+//    }
+//}
 
 // MARK: - SocialConnectionCellDelegate
 extension ConnectedAccountsViewController: SocialConnectionCellDelegate {
@@ -151,8 +151,7 @@ extension ConnectedAccountsViewController: SocialConnectionCellDelegate {
         /// DispatchQueue.toMain invokes too fast
         DispatchQueue.main.async {
             if section.set(expanded: true) {
-                let indexPath = IndexPath(row: Section.ExpandState.expanded.rawValue,
-                                          section: section.account.rawValue)
+                let indexPath = IndexPath(row: Section.ExpandState.expanded.rawValue, section: section.account.rawValue)
                 self.tableView.insertRows(at: [indexPath], with: .fade)
             }
         }

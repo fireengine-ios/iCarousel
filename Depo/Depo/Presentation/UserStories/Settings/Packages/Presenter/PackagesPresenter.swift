@@ -87,6 +87,8 @@ extension PackagesPresenter: PackageInfoViewDelegate {
             break
         case .accountType:
             assertionFailure()
+        case .connectedAccounts:
+            router.goToConnectedAccounts()
         }
     }
 }

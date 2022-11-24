@@ -81,7 +81,7 @@ enum SettingsTypes: Int {
             accountTypes.append(SettingsTypes.permissions)
         }
         
-        cells.append(contentsOf: accountTypes)
+        //cells.append(contentsOf: accountTypes)
         cells.append(contentsOf: SettingsTypes.defaultSectionTwoTypes)
         
         if ((Device.locale == "tr" || Device.locale == "en") && !RouteRequests.isBillo) {

@@ -260,6 +260,11 @@ class RouterVC: NSObject {
         }
     }
     
+    func popToAnalizeStory() {
+        tabBarController?.selectedIndex = 1
+        tabBarController?.navigationController?.popToRootViewController(animated: true)
+    }
+    
     func popTwoFactorAuth() {
         guard let viewControllers = navigationController?.viewControllers else {
             assertionFailure("nav bar is missing!")
@@ -486,8 +491,8 @@ class RouterVC: NSObject {
     
     // MARK: SynchronyseSettings
     
-    var synchronyseScreen: UIViewController {
-        return AutoSyncModuleInitializer.initializeViewController()
+    func synchronyseScreen(fromSettings: Bool = false, fromRegister: Bool = false) -> UIViewController {
+        return AutoSyncModuleInitializer.initializeViewController(fromSettings: fromSettings, fromRegister: fromRegister)
     }
     
     // MARK: TabBar
@@ -517,6 +522,10 @@ class RouterVC: NSObject {
     func forYou() -> HeaderContainingViewController.ChildViewController {
         return ForYouInitilizer.initializeViewController(with: "ForYou")
     }
+    
+    func discover() -> HeaderContainingViewController.ChildViewController {
+        return DiscoverInitilizer.initializeViewController(with: "Discover")
+    }
 
     // MARK: Music
     
@@ -542,7 +551,7 @@ class RouterVC: NSObject {
         return controller
     }
     
-    var trashBin: UIViewController? {
+    var trashBin: UIViewController {
         let controller = trashBinController()
         controller.segmentImage = .trashBin
         return controller
@@ -564,7 +573,7 @@ class RouterVC: NSObject {
             assertionFailure()
             return AllFilesSegmentedController()
         }
-        let controllers = [documents, musics, favorites, sharedWithMe, shareByMeSegment, allFiles, documentsAndMusic]
+        let controllers = [documents, musics, favorites, sharedWithMe, trashBin, shareByMeSegment, allFiles, documentsAndMusic]
         return AllFilesSegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
     }
     
@@ -1274,7 +1283,7 @@ class RouterVC: NSObject {
                 return
             }
             tabBarVC.tabBar.selectedItem = newSelectedItem
-            tabBarVC.selectedIndex = index - 1
+            tabBarVC.selectedIndex = index
             switchToTrashBin()
         }
     }
@@ -1328,16 +1337,23 @@ class RouterVC: NSObject {
             case .gallery:
                 tabBarVC.showPhotoScreen()
             case .discover:
-                break
+                guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
+                    assertionFailure("This index is non existent 😵")
+                    return
+                }
+                tabBarVC.tabBar.selectedItem = newSelectedItem
+                tabBarVC.selectedIndex = index.rawValue
+                //break
             }
         } else {
             tabBarVC.popToRootCurrentNavigationController(animated: true)
         }
     }
     
-    var securityInfoViewController: SecurityInfoViewController {
+    func securityInfoViewController(fromSettings: Bool = false) {
         let controller = SecurityInfoViewController()
-        return controller
+        controller.fromSettings = fromSettings
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     var loginWithGooglePopup: LoginWithGooglePopup {

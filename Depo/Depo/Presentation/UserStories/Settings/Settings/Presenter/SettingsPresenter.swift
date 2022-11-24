@@ -70,16 +70,16 @@ extension SettingsPresenter: SettingsViewOutput {
     }
     
     func onLogout() {
-        let controller = PopUpController.with(title: TextConstants.settingsViewLogoutCheckMessage,
-                                              message: nil,
-                                              image: .none,
+        let controller = PopUpController.with(title: TextConstants.settingsViewCellLogout,
+                                              message: TextConstants.settingsViewLogoutCheckMessage,
+                                              image: .logout,
                                               firstButtonTitle: TextConstants.cancel,
                                               secondButtonTitle: TextConstants.ok,
                                               secondAction: { [weak self] vc in
-                                                vc.close { [weak self] in
-                                                    self?.startAsyncOperation()
-                                                    self?.interactor.checkConnectedToNetwork()
-                                                }
+            vc.close { [weak self] in
+                self?.startAsyncOperation()
+                self?.interactor.checkConnectedToNetwork()
+            }
         })
         
         controller.open()

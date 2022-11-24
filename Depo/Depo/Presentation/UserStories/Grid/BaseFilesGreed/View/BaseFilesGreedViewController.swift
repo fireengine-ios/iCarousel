@@ -181,6 +181,10 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             self?.output.searchPressed(output: self)
         })
        
+       let plus = NavBarWithAction(navItem: NavigationBarList().plus, action: { [weak self] _ in
+           self?.output.plusPressed(output: self)
+       })
+       
         let newAlbum = NavBarWithAction(navItem: NavigationBarList().newAlbum, action: { [weak self] _ in
             self?.output.openCreateNewAlbum()
         })
@@ -191,6 +195,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             search.navItem.imageInsets.left = 28
         }
         rightActions.append(search)
+        rightActions.append(plus)
         navBarConfigurator.configure(right: isSelecting ? [] : rightActions, left: [])
     
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
@@ -327,8 +332,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String, needHideTopBar: Bool) {
         noFilesLabel.text = text
-        noFilesImage.image = image.withRenderingMode(.alwaysTemplate)
-        noFilesImage.tintColor = .white
+        noFilesImage.image = image
         startCreatingFilesButton.isHidden = createFilesButtonText.isEmpty
         startCreatingFilesButton.setTitle(createFilesButtonText, for: .normal)
         noFilesView.isHidden = false

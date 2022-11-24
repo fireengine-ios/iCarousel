@@ -13,7 +13,7 @@ protocol LoginRouterInput {
     func goToForgotPassword()
     
     func goToHomePage()
-    
+        
     func goToTermsAndServices()
     
     func goToSyncSettingsView()

@@ -58,7 +58,6 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput 
     }
         
     //MARK : BasePresenter
-    
     override func outputView() -> Waiting? {
         return view as? Waiting
     }

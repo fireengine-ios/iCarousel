@@ -91,12 +91,14 @@ enum Image: String, AppImage {
     /// Action/Music
     case iconPauseRed
     case iconPlayRed
+    case iconPause
     /// Action/Tab
     case iconTabMusicEmpty
     case iconTabMusic
     case iconTabFiles
     case iconTabShare
     case iconTabStar
+    case iconTabDelete
     
     ///  Files Tab
     case iconFileAudio
@@ -158,6 +160,9 @@ enum Image: String, AppImage {
     case popupIconQuestion
     case popupHide
     case iconCancelUnborder
+    case popupUnHide
+    case popupRestore
+    case popupLogout
     
     /// For You
     case forYouPeople
@@ -167,6 +172,7 @@ enum Image: String, AppImage {
     /// Settings
     case gradientSwitch
     case settingsIconCancel
+    case iconTabInstagramPink
     
     /// Introduce
     case circleIntoduce
@@ -179,5 +185,8 @@ enum Image: String, AppImage {
     case popupNoVideo
     case popupSuccessful
     case popupUnsync
+    case iconPhotosPlaceholder
+    case iconVideosPlaceholder
+    case iconStoryGroup
 
 }

@@ -64,7 +64,7 @@ final class AutoSyncSettingsOptionView: UIView {
     // MARK: - Private
     
     private func setColors() {
-        let textColor = UIColor.darkGray
+        let textColor = AppColor.label.color
         button.setTitleColor(textColor, for: .normal)
     }
     

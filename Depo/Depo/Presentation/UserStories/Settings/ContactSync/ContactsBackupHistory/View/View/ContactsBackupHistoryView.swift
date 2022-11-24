@@ -24,6 +24,8 @@ final class ContactsBackupHistoryView: UIView, NibInit {
     @IBOutlet private weak var headerLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.contactBackupHistoryHeader
+            newValue.font = .appFont(.regular, size: 16)
+            newValue.textColor = AppColor.label.color
         }
     }
     
@@ -32,7 +34,7 @@ final class ContactsBackupHistoryView: UIView, NibInit {
             newValue.setTitle(TextConstants.contactBackupHistoryRestoreButton, for: .normal)
             newValue.setTitleColor(.white, for: .normal)
             newValue.backgroundColor = AppColor.marineTwoAndTealish.color
-            newValue.titleLabel?.font = .appFont(.regular, size: 16.0)
+            newValue.titleLabel?.font = .appFont(.medium, size: 16.0)
         }
     }
     
@@ -43,7 +45,7 @@ final class ContactsBackupHistoryView: UIView, NibInit {
             newValue.setTitle(TextConstants.contactBackupHistoryDeleteButton, for: .normal)
             newValue.setTitleColor(ColorConstants.navy, for: .normal)
             newValue.backgroundColor = .white
-            newValue.titleLabel?.font = .appFont(.regular, size: 16.0)
+            newValue.titleLabel?.font = .appFont(.medium, size: 16.0)
         }
     }
     

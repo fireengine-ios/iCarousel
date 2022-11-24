@@ -75,15 +75,15 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
     }
 
     @IBAction private func connectedButtonTapped(_ sender: Any) {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .spotifyImport))
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .connectedAccounts, eventLabel: .importSpotify)
-        connectButton.isEnabled = false
-        updateAccessbilityTraits(isEnabled: false)
-        service.connectToSpotify(isSettingCell: true, completion: {
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Import(status: .on, socialType: .spotify))
-            self.connectButton.isEnabled = true
-            self.updateAccessbilityTraits(isEnabled: true)
-        })
+//        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .spotifyImport))
+//        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .connectedAccounts, eventLabel: .importSpotify)
+//        connectButton.isEnabled = false
+//        updateAccessbilityTraits(isEnabled: false)
+//        service.connectToSpotify(isSettingCell: true, completion: {
+//            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Import(status: .on, socialType: .spotify))
+//            self.connectButton.isEnabled = true
+//            self.updateAccessbilityTraits(isEnabled: true)
+//        })
     }
     
     private func setupCell() {
@@ -177,23 +177,23 @@ extension SpotifyAccountConnectionCell: SocialConnectionCell {
     }
     
     func disconnect() {
-        service.disconnectFromSpotify { [weak self] result in
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Import(status: .off, socialType: .spotify))
-            guard
-                let self = self,
-                let section = self.section
-            else {
-                assertionFailure()
-                return
-            }
-            switch result {
-            case .success(_):
-                self.analyticsService.trackConnectedAccountsGAEvent(action: .connectedAccounts, label: .spotify, dimension: .connectionStatus, status: false)
-                self.delegate?.didDisconnectSuccessfully(section: section)
-            case .failed(let error):
-                print(error)
-            }
-        }
+//        service.disconnectFromSpotify { [weak self] result in
+//            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Import(status: .off, socialType: .spotify))
+//            guard
+//                let self = self,
+//                let section = self.section
+//            else {
+//                assertionFailure()
+//                return
+//            }
+//            switch result {
+//            case .success(_):
+//                self.analyticsService.trackConnectedAccountsGAEvent(action: .connectedAccounts, label: .spotify, dimension: .connectionStatus, status: false)
+//                self.delegate?.didDisconnectSuccessfully(section: section)
+//            case .failed(let error):
+//                print(error)
+//            }
+//        }
     }
 }
 

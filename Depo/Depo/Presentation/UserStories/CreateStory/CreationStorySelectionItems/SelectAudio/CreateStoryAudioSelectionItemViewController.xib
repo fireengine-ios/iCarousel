@@ -40,17 +40,17 @@
                     </connections>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CaV-tJ-vhx" userLabel="Second View">
-                    <rect key="frame" x="16" y="270.5" width="343" height="126.5"/>
+                    <rect key="frame" x="16" y="198.5" width="343" height="210.5"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImageNoMusics" translatesAutoresizingMaskIntoConstraints="NO" id="v3S-9c-cIn">
-                            <rect key="frame" x="123.5" y="0.0" width="96" height="96"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="popupHeadPhone" translatesAutoresizingMaskIntoConstraints="NO" id="v3S-9c-cIn">
+                            <rect key="frame" x="96.5" y="0.0" width="150" height="150"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="96" id="SGH-V3-Tzj"/>
-                                <constraint firstAttribute="width" constant="96" id="pl4-Ma-iPz"/>
+                                <constraint firstAttribute="height" constant="150" id="SGH-V3-Tzj"/>
+                                <constraint firstAttribute="width" constant="150" id="pl4-Ma-iPz"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcn-zJ-6Hb">
-                            <rect key="frame" x="8" y="106" width="327" height="20.5"/>
+                            <rect key="frame" x="8" y="190" width="327" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -60,7 +60,7 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="pcn-zJ-6Hb" secondAttribute="trailing" constant="8" id="5xx-6C-laB"/>
                         <constraint firstItem="pcn-zJ-6Hb" firstAttribute="leading" secondItem="CaV-tJ-vhx" secondAttribute="leading" constant="8" id="RXW-pD-GTe"/>
-                        <constraint firstItem="pcn-zJ-6Hb" firstAttribute="top" secondItem="v3S-9c-cIn" secondAttribute="bottom" constant="10" id="WgT-N8-eOg"/>
+                        <constraint firstItem="pcn-zJ-6Hb" firstAttribute="top" secondItem="v3S-9c-cIn" secondAttribute="bottom" constant="40" id="WgT-N8-eOg"/>
                         <constraint firstAttribute="bottom" secondItem="pcn-zJ-6Hb" secondAttribute="bottom" id="oTj-YH-gGF"/>
                         <constraint firstItem="v3S-9c-cIn" firstAttribute="centerX" secondItem="CaV-tJ-vhx" secondAttribute="centerX" id="vng-q6-w36"/>
                         <constraint firstItem="v3S-9c-cIn" firstAttribute="top" secondItem="CaV-tJ-vhx" secondAttribute="top" id="wlM-pc-KZv"/>
@@ -79,7 +79,7 @@
                 <constraint firstItem="rO4-3s-YdY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="13" id="dtT-Uh-wLw"/>
                 <constraint firstItem="WvP-6C-fk1" firstAttribute="top" secondItem="rO4-3s-YdY" secondAttribute="bottom" constant="12" id="gdC-ik-2nX"/>
                 <constraint firstItem="WvP-6C-fk1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="uwR-j7-mLX"/>
-                <constraint firstItem="CaV-tJ-vhx" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="yvZ-Hk-5ZD"/>
+                <constraint firstItem="CaV-tJ-vhx" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-30" id="yvZ-Hk-5ZD"/>
             </constraints>
             <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>
         </view>

@@ -117,6 +117,8 @@ protocol ItemOperationManagerViewProtocol: AnyObject {
     func stopItemSelection()
     func tabBarDidChange()
     func allFilesSectionChange(to index: Int, shareType: SharedItemsSegment?)
+    
+    func allCardsRemoved(for section: ForYouSections)
 }
 
 extension ItemOperationManagerViewProtocol {
@@ -233,6 +235,8 @@ extension ItemOperationManagerViewProtocol {
     func stopItemSelection() {}
     func tabBarDidChange() {}
     func allFilesSectionChange(to index: Int, shareType: SharedItemsSegment?) {}
+    
+    func allCardsRemoved(for section: ForYouSections) {}
 }
 
 
@@ -691,4 +695,11 @@ class ItemOperationManager: NSObject {
             self.views.invoke { $0.allFilesSectionChange(to: index, shareType: shareType)}
         }
     }
+    
+    func allCardsRemoved(for section: ForYouSections) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.allCardsRemoved(for: section)}
+        }
+    }
+
 }

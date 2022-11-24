@@ -16,6 +16,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kzu-Tj-rOy">
+                        <rect key="frame" x="33" y="33" width="24" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="24" id="DEO-im-HgQ"/>
+                            <constraint firstAttribute="height" constant="24" id="cpK-Ca-Eof"/>
+                        </constraints>
+                    </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uip-Zv-Lj0">
                         <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                     </imageView>
@@ -82,6 +89,7 @@
                 <constraint firstItem="32d-zc-raV" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Msf-LT-G79"/>
                 <constraint firstItem="32d-zc-raV" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="NFr-R3-l3Z"/>
                 <constraint firstAttribute="trailing" secondItem="RuE-oq-wBz" secondAttribute="trailing" constant="5" id="NLW-ze-Fva"/>
+                <constraint firstItem="kzu-Tj-rOy" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Nvv-Yl-xVK"/>
                 <constraint firstAttribute="bottom" secondItem="uip-Zv-Lj0" secondAttribute="bottom" id="PSa-Qx-1RX"/>
                 <constraint firstAttribute="bottom" secondItem="RuE-oq-wBz" secondAttribute="bottom" constant="3" id="PqJ-hB-DjP"/>
                 <constraint firstItem="Vty-wj-zHS" firstAttribute="leading" secondItem="Tgi-g8-grY" secondAttribute="trailing" constant="3" id="XEN-PY-yHX"/>
@@ -90,6 +98,7 @@
                 <constraint firstAttribute="bottom" secondItem="32d-zc-raV" secondAttribute="bottom" id="dIL-Dc-EKM"/>
                 <constraint firstItem="EFu-Rx-2DV" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="eBQ-RI-ROZ"/>
                 <constraint firstItem="LGC-Nm-9e9" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="fvC-qT-sXd"/>
+                <constraint firstItem="kzu-Tj-rOy" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="gpK-Ad-WfQ"/>
                 <constraint firstItem="uip-Zv-Lj0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="lCZ-MQ-bDz"/>
                 <constraint firstAttribute="trailing" secondItem="uip-Zv-Lj0" secondAttribute="trailing" id="oR2-TF-Y6S"/>
                 <constraint firstAttribute="bottom" secondItem="Vty-wj-zHS" secondAttribute="bottom" constant="2" id="vif-We-1bV"/>
@@ -102,12 +111,13 @@
                 <outlet property="cloudStatusImage" destination="MBu-f2-VfC" id="EgY-JL-Jyd"/>
                 <outlet property="favoriteIcon" destination="LGC-Nm-9e9" id="Zht-d1-jF7"/>
                 <outlet property="imageView" destination="uip-Zv-Lj0" id="qNT-nI-EOf"/>
+                <outlet property="placeholderImage" destination="kzu-Tj-rOy" id="c9N-Um-u5f"/>
                 <outlet property="progressView" destination="RuE-oq-wBz" id="aNl-mY-6Im"/>
                 <outlet property="selectionImageView" destination="NtU-N7-Qtp" id="V5g-oc-wFw"/>
                 <outlet property="selectionView" destination="32d-zc-raV" id="Dfo-an-Pss"/>
                 <outlet property="videoLengthLabel" destination="Vty-wj-zHS" id="GMO-f6-5NN"/>
             </connections>
-            <point key="canvasLocation" x="139" y="93"/>
+            <point key="canvasLocation" x="139" y="155"/>
         </collectionViewCell>
     </objects>
     <resources>

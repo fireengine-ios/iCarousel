@@ -13,6 +13,7 @@ protocol CreateStoryPreviewInteractorInput: AnyObject {
     
     func viewIsReady()
     func onSaveStory()
+    func getStoryName() -> String
 }
 
 protocol CreateStoryPreviewInteractorOutput: AnyObject {

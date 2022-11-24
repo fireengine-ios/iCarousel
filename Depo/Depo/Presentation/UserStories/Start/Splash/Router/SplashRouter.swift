@@ -45,9 +45,9 @@ class SplashRouter: SplashRouterInput {
         router.setNavigationController(controller: router.onboardingScreen)
         
         if fromSplash {
-            router.pushViewControllerWithoutAnimation(viewController: router.synchronyseScreen)
+            router.pushViewControllerWithoutAnimation(viewController: router.synchronyseScreen())
         } else {
-            router.pushViewController(viewController: router.synchronyseScreen)
+            router.pushViewController(viewController: router.synchronyseScreen())
         }
     }
     

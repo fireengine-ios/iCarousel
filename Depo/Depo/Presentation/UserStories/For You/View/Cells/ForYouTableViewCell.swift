@@ -44,7 +44,7 @@ final class ForYouTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var seeAllButton: UIButton! {
         willSet {
-            newValue.setTitle("See All", for: .normal)
+            newValue.setTitle(localized(.forYouSeeAll), for: .normal)
             newValue.titleLabel?.font = .appFont(.light, size: 14)
             newValue.setTitleColor(AppColor.label.color, for: .normal)
         }
@@ -279,6 +279,10 @@ extension ForYouTableViewCell: ForYouCardsCollectionViewCellDelegate {
         delegate?.onCloseCard(data: data, section: section)
         cardsData.remove(data)
         collectionView.reloadData()
+        
+        if cardsData.isEmpty {
+            ItemOperationManager.default.allCardsRemoved(for: section)
+        }
     }
     
     func showSavedCollage(item: WrapData) {

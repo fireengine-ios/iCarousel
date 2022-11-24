@@ -2310,8 +2310,6 @@ Please check I have understood the intended command here*/
 "syncing" = "";
 "downloading" = "";
 "ETK_KVKK_Izin_Politikası" = "";
-"syncing" = "";
-"downloading" = "";
 
 /*Free for {3 months}
 then {11,99 TRY/Month}*/
@@ -2336,3 +2334,24 @@ then {11,99 TRY/Month}*/
 "paycell_share_message" = "J'ai rejoint le Programme d'Ambassadeur de Marque lifebox. Vous pouvez avoir le forfait Premium lifebox spécifique au programme de 6 mois de 250 Go à prix réduit, en cliquant sur le lien ci-dessous. Ne le manquez pas 😊";
 "beeline_cancel_TC" = "Vous pouvez annuler ou gérer votre abonnement à lifebox depuis l'application  Beeline.";
 "paycell_share_message " = "";
+"foryou_throwback" = "";
+"foryou_myalbums" = "";
+"foryou_myanimations" = "";
+"foryou_collages" = "";
+"foryou_my_collages" = "";
+"foryou_animations" = "";
+"foryou_no_album_warn" = "";
+"foryou_no_photopick_warn" = "";
+"foryou_no_story_warn" = "";
+"foryou_try_photopick" = "";
+"foryou_see_all" = "";
+
+/*Facelift*/
+"tabbar_foryou" = "";
+"tabbar_discover" = "";
+"change_pass_mail_or_phone" = "";
+"mystorage_become_premium" = "";
+"we_are_creating_your_story_title" = "";
+"we_are_creating_your_story_desc" = "";
+"trash_bin" = "";
+"ksaldalks" = "";

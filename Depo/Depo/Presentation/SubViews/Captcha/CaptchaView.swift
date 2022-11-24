@@ -34,8 +34,11 @@ final class CaptchaView: UIView, FromNib {
         }
     }
     
-    @IBOutlet weak var stackView: UIStackView!
-    
+    @IBOutlet weak var stackView: UIStackView! {
+        willSet {
+            newValue.backgroundColor = AppColor.background.color
+        }
+    }
     
     @IBOutlet weak var errorContentView: UIView! {
         willSet {
@@ -103,7 +106,6 @@ final class CaptchaView: UIView, FromNib {
             newValue.layer.borderWidth = 1.0
             newValue.layer.maskedCorners = [.layerMinXMaxYCorner,
                                             .layerMaxXMaxYCorner]
-            
         }
     }
     

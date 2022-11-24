@@ -13,4 +13,5 @@ protocol ForYouViewInput: AnyObject, Waiting {
     func didFinishedAllRequests()
     func didGetUpdateData()
     func saveCardFailed(section: ForYouSections)
+    func saveCardSuccess(section: ForYouSections)
 }
