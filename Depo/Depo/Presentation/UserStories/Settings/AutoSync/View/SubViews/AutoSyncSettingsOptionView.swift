@@ -17,8 +17,10 @@ final class AutoSyncSettingsOptionView: UIView {
     weak var delegate: AutoSyncSettingsOptionViewDelegate?
     
     @IBOutlet private weak var button: UIButton! {
-        didSet {
-            button.titleLabel?.font = .appFont(.medium, size: 14)
+        willSet {
+            newValue.titleLabel?.font = .appFont(.medium, size: 14)
+            let textColor = AppColor.label.color
+            newValue.titleLabel?.textColor = textColor
         }
     }
     

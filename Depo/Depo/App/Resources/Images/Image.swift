@@ -172,6 +172,11 @@ enum Image: String, AppImage {
     case gradientSwitch
     case settingsIconCancel
     case iconTabInstagramPink
+    case iconBackupContactMain
+    case iconDuplicateContact
+    case contact_phone
+    case contact_email
+    case contact_address
     
     /// Introduce
     case circleIntoduce

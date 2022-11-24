@@ -19,8 +19,9 @@ final class PeriodicContactsSyncSettingsOptionView: UIView {
     
     
     @IBOutlet private weak var button: UIButton! {
-        willSet {
-            newValue.titleLabel?.font = .appFont(.medium, size: 14)
+        didSet {
+            button.titleLabel?.font = .appFont(.medium, size: 14)
+            button.setTitleColor(AppColor.label.color, for: .normal)
         }
     }
     

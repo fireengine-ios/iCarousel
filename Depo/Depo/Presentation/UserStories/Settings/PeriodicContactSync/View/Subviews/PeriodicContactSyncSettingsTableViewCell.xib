@@ -85,10 +85,10 @@
                                                 </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCheckBlue" translatesAutoresizingMaskIntoConstraints="NO" id="DjW-TS-eAX">
-                                                <rect key="frame" x="247" y="10.5" width="24" height="24"/>
+                                                <rect key="frame" x="246" y="10" width="25" height="25"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="24" id="20U-i8-ftb"/>
-                                                    <constraint firstAttribute="width" constant="24" id="mdm-wH-GOC"/>
+                                                    <constraint firstAttribute="height" constant="25" id="20U-i8-ftb"/>
+                                                    <constraint firstAttribute="width" constant="25" id="mdm-wH-GOC"/>
                                                 </constraints>
                                             </imageView>
                                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vlD-lt-K55">
@@ -132,10 +132,10 @@
                                                 </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCheckBlue" translatesAutoresizingMaskIntoConstraints="NO" id="dDd-y4-3DP">
-                                                <rect key="frame" x="247" y="10.5" width="24" height="24"/>
+                                                <rect key="frame" x="246" y="10" width="25" height="25"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="24" id="BtG-Cw-Ooh"/>
-                                                    <constraint firstAttribute="width" constant="24" id="dfm-Z1-Ary"/>
+                                                    <constraint firstAttribute="height" constant="25" id="BtG-Cw-Ooh"/>
+                                                    <constraint firstAttribute="width" constant="25" id="dfm-Z1-Ary"/>
                                                 </constraints>
                                             </imageView>
                                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aa2-1F-JSl">
@@ -179,10 +179,10 @@
                                                 </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCheckBlue" translatesAutoresizingMaskIntoConstraints="NO" id="hxK-WM-zMk">
-                                                <rect key="frame" x="247" y="13" width="24" height="24"/>
+                                                <rect key="frame" x="248" y="12.5" width="23" height="25"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="24" id="2ig-fM-e99"/>
-                                                    <constraint firstAttribute="height" constant="24" id="iqc-RS-QyS"/>
+                                                    <constraint firstAttribute="width" constant="23" id="2ig-fM-e99"/>
+                                                    <constraint firstAttribute="height" constant="25" id="iqc-RS-QyS"/>
                                                 </constraints>
                                             </imageView>
                                         </subviews>
