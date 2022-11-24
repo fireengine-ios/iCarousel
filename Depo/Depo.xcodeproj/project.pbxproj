@@ -19270,8 +19270,8 @@
 		CE00B27C2204261700A5A696 /* InstaPickSelection */ = {
 			isa = PBXGroup;
 			children = (
-				C4D9C03121EDC6DB00693D94 /* InstaPickSelectionSegmentedController.swift */,
 				CE00B27A220424C800A5A696 /* InstaPickSelectionSegmentedView.swift */,
+				C4D9C03121EDC6DB00693D94 /* InstaPickSelectionSegmentedController.swift */,
 				CE00B24721F5A79400A5A696 /* PhotoSelectionController.swift */,
 				CE00B2782204249C00A5A696 /* PhotoSelectionDataSourceProtocol.swift */,
 				CE00B24B2202FB1400A5A696 /* InstapickAlbumSelectionViewController.swift */,

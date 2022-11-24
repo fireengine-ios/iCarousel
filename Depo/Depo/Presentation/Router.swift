@@ -491,8 +491,8 @@ class RouterVC: NSObject {
     
     // MARK: SynchronyseSettings
     
-    func synchronyseScreen(fromSettings: Bool = false) -> UIViewController {
-        return AutoSyncModuleInitializer.initializeViewController(fromSettings: fromSettings)
+    func synchronyseScreen(fromSettings: Bool = false, fromRegister: Bool = false) -> UIViewController {
+        return AutoSyncModuleInitializer.initializeViewController(fromSettings: fromSettings, fromRegister: fromRegister)
     }
     
     // MARK: TabBar
