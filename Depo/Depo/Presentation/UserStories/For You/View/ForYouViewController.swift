@@ -30,6 +30,10 @@ final class ForYouViewController: BaseViewController {
         output.viewIsReady()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        output.getUpdateData(for: .hidden)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let currentSection = output.currentSection else { return }
