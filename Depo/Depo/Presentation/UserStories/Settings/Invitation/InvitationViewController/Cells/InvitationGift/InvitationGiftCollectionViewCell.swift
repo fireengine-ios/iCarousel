@@ -31,6 +31,13 @@ class InvitationGiftCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    @IBOutlet weak var dataLabel: UILabel! {
+        willSet {
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 12)
+        }
+    }
+    
     @IBOutlet weak var giftBGView: UIView! {
         willSet {
             newValue.layer.cornerRadius = 8
@@ -42,7 +49,11 @@ class InvitationGiftCollectionViewCell: UICollectionViewCell {
     func configureCell(subscriptionPlan: SubscriptionPlan) {
         giftNameLabel.text = subscriptionPlan.name
         typeLabel.text = makePlanTypeText(plan: subscriptionPlan)
-        expirationDateLabel.text = subscriptionPlan.date
+        expirationDateLabel.text = "\(String(subscriptionPlan.date.split(separator: ":")[0])):"
+        print("aaaaa -\(subscriptionPlan.date)-")
+        let date: String = String(subscriptionPlan.date.split(separator: ":")[1])
+        let index = date.index(date.startIndex, offsetBy: 1)
+        dataLabel.text = String(date.suffix(from: index))
     }
 
     private func makePlanTypeText(plan: SubscriptionPlan) -> String {
@@ -60,3 +71,4 @@ class InvitationGiftCollectionViewCell: UICollectionViewCell {
         }
     }
 }
+

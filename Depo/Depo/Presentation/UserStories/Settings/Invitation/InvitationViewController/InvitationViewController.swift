@@ -232,8 +232,19 @@ class InvitationViewController: BaseViewController {
     }
                               
     private func setupViewWithObject(campaign: InvitationCampaignResponse) {
-        let hexColor = AppColor.campaignContentLabel.color.toHexString()
-        campaignContentLabel.attributedText = campaign.value.content.convertHtmlToAttributedStringWithCSS(font: .appFont(.medium, size: 12), csscolor: hexColor, lineheight: 5, csstextalign: "left")
+        if #available(iOS 12.0, *) {
+            if self.traitCollection.userInterfaceStyle == .light {
+                let hexColor = AppColor.campaignContentLabel.color.toHexString()
+                campaignContentLabel.attributedText = campaign.value.content.convertHtmlToAttributedStringWithCSS(font: .appFont(.medium, size: 12), csscolor: hexColor, lineheight: 5, csstextalign: "left")
+            } else {
+                let hexColor = "#ECECEC"
+                campaignContentLabel.attributedText = campaign.value.content.convertHtmlToAttributedStringWithCSS(font: .appFont(.medium, size: 12), csscolor: hexColor, lineheight: 5, csstextalign: "left")
+            }
+        } else {
+            let hexColor = AppColor.campaignContentLabel.color.toHexString()
+            campaignContentLabel.attributedText = campaign.value.content.convertHtmlToAttributedStringWithCSS(font: .appFont(.medium, size: 12), csscolor: hexColor, lineheight: 5, csstextalign: "left")
+        }
+        
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

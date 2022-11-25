@@ -40,17 +40,28 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sadece Saklama Alanı" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R7i-iJ-jBC">
-                                        <rect key="frame" x="0.0" y="89.5" width="109" height="16"/>
+                                        <rect key="frame" x="0.0" y="84.5" width="109" height="16"/>
                                         <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="14"/>
                                         <color key="textColor" name="darkText"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bitiş Tarihi : 16 Nis 22" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7m9-JC-svS">
-                                        <rect key="frame" x="0.0" y="177" width="107.5" height="16"/>
-                                        <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="14"/>
-                                        <color key="textColor" name="darkText"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2yJ-X5-4rX">
+                                        <rect key="frame" x="0.0" y="156.5" width="107.5" height="36.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bitiş Tarihi : 16 Nis 22" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7m9-JC-svS">
+                                                <rect key="frame" x="0.0" y="0.0" width="107.5" height="16"/>
+                                                <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="14"/>
+                                                <color key="textColor" name="darkText"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRc-UP-NJA">
+                                                <rect key="frame" x="0.0" y="16" width="107.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -78,6 +89,7 @@
             </constraints>
             <size key="customSize" width="236" height="243"/>
             <connections>
+                <outlet property="dataLabel" destination="qRc-UP-NJA" id="eE8-Z3-kfz"/>
                 <outlet property="expirationDateLabel" destination="7m9-JC-svS" id="Jak-QC-3GQ"/>
                 <outlet property="giftBGView" destination="aRY-Ln-IlC" id="aQ5-zj-XUc"/>
                 <outlet property="giftNameLabel" destination="yOs-VW-vUn" id="IgC-9D-x9z"/>

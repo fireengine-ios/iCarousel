@@ -23,9 +23,9 @@ final class ContactsBackupCell: UITableViewCell, ContactsBackupCellProtocol {
     
     @IBOutlet private weak var selectButton: ExtendedTapAreaButton! {
         willSet {
-            newValue.setImage(Image.iconSelectEmpty.image, for: .normal)
-            newValue.setImage(Image.iconSelectFills.image, for: .highlighted)
-            newValue.setImage(Image.iconSelectFills.image, for: .selected)
+            newValue.setImage(Image.iconRadioButtonUnselect.image, for: .normal)
+            newValue.setImage(Image.iconRadioButtonSelectBlue.image, for: .highlighted)
+            newValue.setImage(Image.iconRadioButtonSelectBlue.image, for: .selected)
             newValue.tintColor = AppColor.darkBlueAndTealish.color
         }
     }
