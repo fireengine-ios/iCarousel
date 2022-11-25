@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -30,12 +30,12 @@
                     <rect key="frame" x="28" y="148" width="264" height="272"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="utr-Zt-eZd">
-                            <rect key="frame" x="234" y="8" width="22" height="22"/>
+                            <rect key="frame" x="232" y="8" width="24" height="24"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="utr-Zt-eZd" secondAttribute="height" multiplier="1:1" id="hms-Kb-ELN"/>
                             </constraints>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" image="grayCloseButton"/>
+                            <state key="normal" image="iconCancelUnborder"/>
                             <connections>
                                 <action selector="onCloseTap:" destination="-1" eventType="touchUpInside" id="mmT-tU-zL9"/>
                             </connections>
@@ -113,7 +113,7 @@
         </view>
     </objects>
     <resources>
-        <image name="grayCloseButton" width="17" height="17"/>
+        <image name="iconCancelUnborder" width="24" height="24"/>
         <namedColor name="secondaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

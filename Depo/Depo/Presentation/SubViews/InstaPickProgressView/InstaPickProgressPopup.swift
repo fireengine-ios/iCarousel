@@ -20,6 +20,12 @@ final class InstaPickProgressPopup: ViewController, NibInit {
     @IBOutlet private weak var topConstraint: NSLayoutConstraint!
     @IBOutlet private weak var leadingConstraint: NSLayoutConstraint!
     @IBOutlet private weak var trailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var contentView: UIView! {
+        willSet {
+            newValue.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+            newValue.addRoundedShadows(cornerRadius: 16, shadowColor: AppColor.drawerShadow.cgColor, opacity: 0.5, radius: 24, offset: CGSize(width: 0, height: 6))
+        }
+    }
     
     private let instapickService: InstapickService = factory.resolve()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
@@ -28,7 +34,7 @@ final class InstaPickProgressPopup: ViewController, NibInit {
 
     @IBOutlet private weak var topCaption: UILabel! {
         didSet {
-            topCaption.font = UIFont.TurkcellSaturaBolFont(size: Device.isIpad ? 30 : 28)
+            topCaption.font = .appFont(.medium, size: Device.isIpad ? 22 : 20)
             topCaption.text = " "
             topCaption.adjustsFontSizeToFitWidth()
         }
@@ -36,20 +42,24 @@ final class InstaPickProgressPopup: ViewController, NibInit {
     
     @IBOutlet private weak var bottomCaption: UILabel! {
         didSet {
-            bottomCaption.font = UIFont.TurkcellSaturaDemFont(size: Device.isIpad ? 20 : 18)
+            bottomCaption.font = .appFont(.medium, size: Device.isIpad ? 18 : 16)
             bottomCaption.text = bottomCaptionText
         }
     }
     
-    @IBOutlet private weak var circularLoader: InstaPickCircularLoader! {
-        didSet {
-            circularLoader.backgroundColor = .clear
-            circularLoader.backWidth = 10.0
-            circularLoader.backColor = ColorConstants.lightBlueColor
-            circularLoader.progressWidth = 10.0
-            circularLoader.progressRatio = 0.0
-            circularLoader.progressColor = ColorConstants.blueColor
+    @IBOutlet private weak var circularLoader: InstaPickLineLoader! {
+        willSet {
+            
         }
+        
+//        didSet {
+//            circularLoader.backgroundColor = .clear
+//            circularLoader.backWidth = 10.0
+//            circularLoader.backColor = ColorConstants.lightBlueColor
+//            circularLoader.progressWidth = 10.0
+//            circularLoader.progressRatio = 0.0
+//            circularLoader.progressColor = ColorConstants.blueColor
+//        }
     }
     
     private var topCaptionTexts = [String]()
@@ -74,16 +84,17 @@ final class InstaPickProgressPopup: ViewController, NibInit {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
-        let marginlLeftRight: CGFloat = Device.isIpad ? 90.0 : 16.0
-        let marginTopBottom: CGFloat = Device.isIpad ? 120.0 : 20.0
+
+        let marginlLeftRight: CGFloat = Device.isIpad ? 90.0 : 12.0
+        let marginBottom: CGFloat = 0
+        let marginTop: CGFloat = Device.isIpad ? 320.0 : 160.0
         let loaderWidth: CGFloat = Device.isIpad ? view.bounds.width * 0.4 : 220
 
-        topConstraint.constant = marginTopBottom
-        bottomConstraint.constant = marginTopBottom
+        topConstraint.constant = marginTop
+        bottomConstraint.constant = marginBottom
         leadingConstraint.constant = marginlLeftRight
         trailingConstraint.constant = marginlLeftRight
-        
+
         circularLoader.widthAnchor.constraint(equalToConstant: loaderWidth).activate()
     }
     

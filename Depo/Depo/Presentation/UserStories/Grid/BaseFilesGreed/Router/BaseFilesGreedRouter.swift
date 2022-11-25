@@ -94,7 +94,7 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
         router.pushViewController(viewController: controller)
     }
     
-    func showPlusScreen(output: UIViewController?) {
+    func openCreateNewStory(output: UIViewController?) {
         let controller = router.createStory(navTitle: TextConstants.createStory)
         router.pushViewController(viewController: controller)
     }

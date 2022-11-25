@@ -36,36 +36,7 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var emtyListView: UIView!
     
-    @IBOutlet weak var firstSegmentButton: InsetsButton! {
-        willSet {
-            newValue.setTitle(TextConstants.createStoryAudioMusics, for: .normal)
-            newValue.layer.cornerRadius = 12
-            newValue.titleLabel?.font = .appFont(.medium, size: 16)
-            newValue.layer.masksToBounds = true
-        }
-    }
-    
-    @IBOutlet weak var secondSegmentButton: InsetsButton! {
-        willSet {
-            newValue.setTitle(TextConstants.createStoryAudioYourUploads, for: .normal)
-            newValue.layer.cornerRadius = 12
-            newValue.titleLabel?.font = .appFont(.medium, size: 16)
-            newValue.layer.masksToBounds = true
-        }
-    }
-    
-    @IBOutlet weak var firstSegmentShadowView: UIView!{
-        willSet {
-            newValue.addRoundedShadows(cornerRadius: 12, shadowColor: AppColor.drawerShadow.cgColor, opacity: 0.3, radius: 4)
-        }
-    }
-    
-    
-    @IBOutlet weak var secondSegmentShadowView: UIView! {
-        willSet {
-            newValue.addRoundedShadows(cornerRadius: 12, shadowColor: AppColor.drawerShadow.cgColor, opacity: 0.3, radius: 4)
-        }
-    }
+    @IBOutlet weak var segmentedControl: CustomSegmentedView!
     
     var fromPhotoSelection: Bool = false
     
@@ -91,6 +62,17 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
         selectedIndexForMusic = 0
         showSpinner()
         getMusic()
+    
+        segmentedControl.insertSegment(withTitle: TextConstants.createStoryAudioMusics, tag: 0, width: 132)
+        segmentedControl.insertSegment(withTitle: TextConstants.createStoryAudioYourUploads, tag: 1, width: 132)
+        segmentedControl.renderSegmentButtons(segment: 0)
+        segmentedControl.action = controllerDidChange
+    }
+    
+    private func controllerDidChange(_ tag: Int) {
+        unselectPlayingCell()
+        musicSegmentedControlIndex = tag == 0 ? true : false
+        onChangeSource(isYourMusic: musicSegmentedControlIndex)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,45 +82,11 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.CreateStoryMusicSelectionScreen())
         let analyticsService = AnalyticsService()
         analyticsService.logScreen(screen: .createStoryMusicSelection)
-        renderSegmentButtons()
+        segmentedControl.renderSegmentButtons(segment: musicSegmentedControlIndex ? 0 : 1)
     }
     
     override func viewDidLayoutSubviews() {
-        renderSegmentButtons()
-    }
-    
-    @IBAction func firstSegmentButtonAction(_ sender: Any) {
-        
-        guard !musicSegmentedControlIndex else { return }
-        
-        unselectPlayingCell()
-        onChangeSource(isYourMusic: true)
-        musicSegmentedControlIndex = true
-        renderSegmentButtons()
-    }
-    
-    @IBAction func SecondSegmentButtonAction(_ sender: Any) {
-        
-        guard musicSegmentedControlIndex else { return }
-        
-        unselectPlayingCell()
-        onChangeSource(isYourMusic: false)
-        musicSegmentedControlIndex = false
-        renderSegmentButtons()
-    }
-    
-    private func renderSegmentButtons() {
-        if musicSegmentedControlIndex {
-            firstSegmentButton.setBackgroundColor(AppColor.tint.color, for: .normal)
-            firstSegmentButton.setTitleColor(.white, for: .normal)
-            secondSegmentButton.setBackgroundColor(AppColor.tertiaryBackground.color, for: .normal)
-            secondSegmentButton.setTitleColor(AppColor.label.color, for: .normal)
-        } else {
-            secondSegmentButton.setBackgroundColor(AppColor.tint.color, for: .normal)
-            secondSegmentButton.setTitleColor(.white, for: .normal)
-            firstSegmentButton.setBackgroundColor(AppColor.tertiaryBackground.color, for: .normal)
-            firstSegmentButton.setTitleColor(AppColor.label.color, for: .normal)
-        }
+        segmentedControl.renderSegmentButtons(segment: musicSegmentedControlIndex ? 0 : 1)
     }
     
     private func configureNavBarActions() {

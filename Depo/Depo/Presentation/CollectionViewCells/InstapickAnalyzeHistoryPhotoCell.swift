@@ -17,7 +17,7 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
             newValue.contentMode = .scaleAspectFill
             newValue.backgroundColor = UIColor.clear
             newValue.layer.masksToBounds = true
-            newValue.layer.borderColor = UIColor.lrTealish.cgColor
+            newValue.layer.borderColor = AppColor.button.cgColor
             newValue.layer.borderWidth = 1
             newValue.alpha = 1
         }
@@ -28,21 +28,21 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
     @IBOutlet private weak var rankView: UIView! {
         willSet {
             newValue.clipsToBounds = true
-            newValue.backgroundColor = UIColor.lrTealish
+            newValue.backgroundColor = AppColor.button.color
         }
     }
     
     @IBOutlet private weak var rankLabel: UILabel! {
         willSet {
             newValue.textColor = .white
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: Device.isIpad ? 14 : 12)
+            newValue.font = .appFont(.regular, size: Device.isIpad ? 14 : 12)
         }
     }
     
     @IBOutlet private weak var countLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.lightText
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: Device.isIpad ? 16 : 14)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: Device.isIpad ? 16 : 14)
         }
     }
     
@@ -92,8 +92,8 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        imageView.layer.cornerRadius = imageView.bounds.height * 0.5
-        rankView.layer.cornerRadius = rankView.bounds.height * 0.5
+        imageView.layer.cornerRadius = 8
+        rankView.layer.cornerRadius = 4
     }
     
     override func prepareForReuse() {

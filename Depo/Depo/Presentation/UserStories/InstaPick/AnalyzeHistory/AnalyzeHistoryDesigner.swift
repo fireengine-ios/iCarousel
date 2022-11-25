@@ -13,7 +13,7 @@ final class AnalyzeHistoryDesigner: NSObject {
         willSet {
             newValue.text = TextConstants.analyzeHistoryEmptyTitle
             newValue.textColor = ColorConstants.darkText
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 20)
+            newValue.font = .appFont(.regular, size: 18)
             newValue.textAlignment = .center
             newValue.numberOfLines = 0
         }
@@ -23,7 +23,7 @@ final class AnalyzeHistoryDesigner: NSObject {
         willSet {
             newValue.text = TextConstants.analyzeHistoryEmptySubtitle
             newValue.textColor = ColorConstants.textGrayColor
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
+            newValue.font = .appFont(.regular, size: 16)
             newValue.textAlignment = .center
             newValue.numberOfLines = 0
         }
@@ -49,7 +49,7 @@ final class AnalyzeHistoryDesigner: NSObject {
         willSet {
             newValue.text = TextConstants.analyzeHistoryStartHereTitle
             newValue.textColor = ColorConstants.textGrayColor
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 14)
+            newValue.font = .appFont(.regular, size: 14)
             newValue.textAlignment = .center
             newValue.numberOfLines = 0
         }

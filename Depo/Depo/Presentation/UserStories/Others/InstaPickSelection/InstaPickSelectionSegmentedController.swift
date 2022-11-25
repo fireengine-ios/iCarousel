@@ -7,7 +7,7 @@ protocol InstaPickSelectionSegmentedControllerDelegate {
     func didDeselectItem(_ deselectItem: SearchItemResponse)
 }
 
-final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresenter, BackButtonActions {
+final class InstaPickSelectionSegmentedController: BaseViewController, ErrorPresenter {
     
     // MARK: properties
     
@@ -51,36 +51,18 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     
     private lazy var albumsVC = InstapickAlbumSelectionViewController(title: TextConstants.albumsTitle, delegate: self)
     
-    private lazy var closeAlbumButton = UIBarButtonItem(image: UIImage(named: "closeButton"),
+    private lazy var closeAlbumButton = UIBarButtonItem(image: NavigationBarImage.back.image,
                                                         style: .plain,
                                                         target: self,
                                                         action: #selector(onCloseAlbum))
     
-    private lazy var closeSelfButton = UIBarButtonItem(title: TextConstants.cancel,
-                                                    font: UIFont.TurkcellSaturaDemFont(size: 19),
-                                                    tintColor: UIColor.white,
-                                                    accessibilityLabel: TextConstants.cancel,
-                                                    style: .plain,
-                                                    target: self,
-                                                    selector: #selector(closeSelf))
+    private lazy var closeSelfButton = UIBarButtonItem(image: NavigationBarImage.back.image,
+                                                       style: .plain,
+                                                       target: self,
+                                                       action: #selector(closeSelf))
     
-    // MARK: start
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
     
     private func setup() {
-        vcView.segmentedControl.addTarget(self, action: #selector(controllerDidChange), for: .valueChanged)
-        vcView.analyzeButton.addTarget(self, action: #selector(analyzeWithInstapick), for: .touchUpInside)
-        
-        removeBackButtonTitle()
         navigationItem.title = String(format: TextConstants.instapickSelectionPhotosSelected, 0)
         navigationItem.leftBarButtonItem = closeSelfButton
     }
@@ -109,11 +91,12 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         
         setupScreenWithSelectingLimit(selectingLimit)
         trackScreen()
+        vcView.analyzeButton.addTarget(self, action: #selector(analyzeWithInstapick), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        setup()
     }
     
     private func trackScreen() {
@@ -156,11 +139,15 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         assert(!segmentedViewControllers.isEmpty, "should not be empty")
         
         for (index, controller) in segmentedViewControllers.enumerated() {
-            vcView.segmentedControl.insertSegment(withTitle: controller.title, at: index, animated: false)
+            vcView.segmentedControl.insertSegment(withTitle: controller.title ?? "", tag: index, width: 112)
         }
         
-        /// selectedSegmentIndex == -1 after removeAllSegments
-        vcView.segmentedControl.selectedSegmentIndex = 0
+        vcView.segmentedControl.renderSegmentButtons(segment: 0)
+        vcView.segmentedControl.action = controllerDidChange
+    }
+    
+    private func controllerDidChange(_ tag: Int) {
+        selectController(at: tag)
     }
     
     @objc private func closeSelf() {
@@ -201,10 +188,6 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
             }
         }
     }
-
-    @objc private func controllerDidChange(_ sender: UISegmentedControl) {
-        selectController(at: sender.selectedSegmentIndex)
-    }
     
     private func selectController(at selectedIndex: Int) {
         guard selectedIndex < segmentedViewControllers.count else {
@@ -216,7 +199,7 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         add(childController: segmentedViewControllers[selectedIndex])
         updateLeftBarButtonItem(selectedIndex: selectedIndex)
     }
-    
+
     private func updateLeftBarButtonItem(selectedIndex: Int) {
         /// optimized for reading, not performance
         let isAlbumsTabOpened = (selectedIndex == albumsTabIndex)

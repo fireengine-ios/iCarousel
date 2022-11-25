@@ -48,7 +48,7 @@ protocol BaseFilesGreedViewOutput {
     
     func searchPressed(output: UIViewController?)
     
-    func plusPressed(output: UIViewController?)
+    func openCreateNewStory(output: UIViewController?)
     
     func moveBack()
     

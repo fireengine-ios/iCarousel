@@ -38,7 +38,7 @@ final class AlbumsSliderDataSource: NSObject {
     }
     
     private func setupCollectionView() {
-        collectionView.backgroundColor = .lrSkinTone
+        collectionView.backgroundColor = AppColor.background.color
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(nibCell: AlbumCell.self)

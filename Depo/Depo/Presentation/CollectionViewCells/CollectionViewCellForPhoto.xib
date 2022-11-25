@@ -47,7 +47,7 @@
                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="qHk-K2-jJ1">
                         <rect key="frame" x="35" y="35" width="20" height="20"/>
                     </activityIndicatorView>
-                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favoriteStar" translatesAutoresizingMaskIntoConstraints="NO" id="kwv-1p-nO6">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconFavoriteStar" translatesAutoresizingMaskIntoConstraints="NO" id="kwv-1p-nO6">
                         <rect key="frame" x="6" y="8" width="13" height="12"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="13" id="vBy-RM-UEE"/>
@@ -100,6 +100,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="favoriteStar" width="13" height="12"/>
+        <image name="iconFavoriteStar" width="28" height="28"/>
     </resources>
 </document>

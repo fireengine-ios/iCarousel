@@ -13,7 +13,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     @IBOutlet private var designer: AnalyzeHistoryDesigner!
     @IBOutlet private var displayManager: AnalyzeHistoryDisplayManager!
     @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet private weak var newAnalysisButton: BlueButtonWithMediumWhiteText!
+    @IBOutlet private weak var newAnalysisButton: DarkBlueButton!
     @IBOutlet private weak var newAnalysisView: UIView!
     
     private lazy var activityManager = ActivityIndicatorManager()
@@ -169,7 +169,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                 if controller is InstapickPopUpController, let vc = self?.router.createRootNavigationControllerWithModalStyle(controller: controller) {
                     self?.router.presentViewController(controller: vc)
                 } else if let vc = self?.router.createRootNavigationController(controller: controller) {
-                    self?.router.presentViewController(controller: vc)
+                    self?.router.presentViewController(controller: vc)                    
                 } else {
                     assertionFailure("Unexpected controller")
                 }

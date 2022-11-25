@@ -9,10 +9,8 @@ final class InstaPickSelectionSegmentedView: UIView {
     private let transparentGradientView = TransparentGradientView(style: .vertical,
                                                                   mainColor: AppColor.primaryBackground.color)
     
-    let segmentedControl: UISegmentedControl = {
-        let segmentedControl = UISegmentedControl()
-        segmentedControl.tintColor = AppColor.marineTwoAndWhite.color
-        segmentedControl.setTitleTextAttributes([.font: UIFont.TurkcellSaturaRegFont(size: 14)], for: .normal)
+    lazy var segmentedControl: CustomSegmentedView = {
+        let segmentedControl = CustomSegmentedView()
         return segmentedControl
     }()
     
@@ -73,6 +71,7 @@ final class InstaPickSelectionSegmentedView: UIView {
     }
     
     private func setup() {
+        backgroundColor = AppColor.primaryBackground.color
         topView.backgroundColor = AppColor.primaryBackground.color
         containerView.backgroundColor = AppColor.primaryBackground.color
         setupLayout()
@@ -90,21 +89,20 @@ final class InstaPickSelectionSegmentedView: UIView {
         view.addSubview(analyzeButton)
         view.addSubview(analyzesLeftLabel)
         
-        let edgeOffset: CGFloat = Device.isIpad ? 75 : 35
+        let edgeOffset: CGFloat = Device.isIpad ? 40 : 12
         let transparentGradientViewHeight = NumericConstants.instaPickSelectionSegmentedTransparentGradientViewHeight
         
         topView.translatesAutoresizingMaskIntoConstraints = false
         topView.topAnchor.constraint(equalTo: view.topAnchor).activate()
-        topView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
-        topView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
-        topView.heightAnchor.constraint(equalToConstant: 50).activate()
+        topView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: edgeOffset).activate()
+        topView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -edgeOffset).activate()
+        topView.heightAnchor.constraint(equalToConstant: 56).activate()
         
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        segmentedControl.leadingAnchor
-            .constraint(equalTo: topView.leadingAnchor, constant: edgeOffset).activate()
-        segmentedControl.trailingAnchor
-            .constraint(equalTo: topView.trailingAnchor, constant: -edgeOffset).activate()
+        segmentedControl.leadingAnchor.constraint(equalTo: topView.leadingAnchor).activate()
+        segmentedControl.trailingAnchor.constraint(equalTo: topView.trailingAnchor).activate()
         segmentedControl.centerYAnchor.constraint(equalTo: topView.centerYAnchor).activate()
+        segmentedControl.heightAnchor.constraint(equalToConstant: 40).activate()
         
         containerView.translatesAutoresizingMaskIntoConstraints = false
         

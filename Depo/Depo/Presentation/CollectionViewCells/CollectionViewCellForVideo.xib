@@ -56,7 +56,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favoriteStar" translatesAutoresizingMaskIntoConstraints="NO" id="LGC-Nm-9e9">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconFavoriteStar" translatesAutoresizingMaskIntoConstraints="NO" id="LGC-Nm-9e9">
                         <rect key="frame" x="4" y="3" width="13" height="12"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="12" id="VKV-e4-PLr"/>
@@ -121,7 +121,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="favoriteStar" width="13" height="12"/>
+        <image name="iconFavoriteStar" width="28" height="28"/>
         <image name="thumbnailPlay" width="11" height="11"/>
     </resources>
 </document>

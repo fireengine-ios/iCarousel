@@ -19,12 +19,21 @@ final class AlbumsSliderCell: UICollectionViewCell {
 
     static let height: CGFloat = 180
     
+    @IBOutlet weak var containerView: UIView! {
+        willSet {
+            newValue.layer.cornerRadius = 16
+            newValue.layer.borderWidth = 0.5
+            newValue.layer.borderColor = AppColor.tint.cgColor
+        }
+    }
+    
     @IBOutlet private weak var collectionView: UICollectionView!
+    
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.textColor = UIColor.lrBrownishGrey
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 16)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.medium, size: 14)
         }
     }
     
@@ -33,8 +42,8 @@ final class AlbumsSliderCell: UICollectionViewCell {
             newValue.text = ""
             newValue.numberOfLines = 3
             newValue.lineBreakMode = .byWordWrapping
-            newValue.textColor = UIColor.lrBrownishGrey.withAlphaComponent(0.5)
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 18)
+            newValue.textColor = AppColor.label.color.withAlphaComponent(0.5)
+            newValue.font = .appFont(.regular, size: 16)
         }
     }
  
@@ -59,7 +68,7 @@ final class AlbumsSliderCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = .lrSkinTone
+        backgroundColor =  AppColor.background.color
     }
     
     func setup(title: String, emptyText: String) {

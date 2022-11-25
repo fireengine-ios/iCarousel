@@ -17,7 +17,7 @@ protocol BaseFilesGreedRouterInput {
     func showBack()
     
     func showSearchScreen(output: UIViewController?)
-    func showPlusScreen(output: UIViewController?)
+    func openCreateNewStory(output: UIViewController?)
 
     func showUpload()
     
