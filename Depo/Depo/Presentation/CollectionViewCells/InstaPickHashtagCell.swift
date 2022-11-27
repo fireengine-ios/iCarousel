@@ -26,12 +26,13 @@ final class InstaPickHashtagCell: UICollectionViewCell {
     }
     
     private func setup() {
-        hashtagLabel.font = UIFont.TurkcellSaturaMedFont(size: 14)
-        hashtagLabel.textColor = ColorConstants.darkText
+        hashtagLabel.font = .appFont(.light, size: 14)
+        hashtagLabel.textColor = AppColor.label.color
         
         shadowView.layer.cornerRadius = NumericConstants.instaPickHashtagCellCornerRadius
+        shadowView.backgroundColor = AppColor.secondaryTint.color
         
-        shadowView.layer.borderColor = ColorConstants.darkBorder.withAlphaComponent(NumericConstants.instaPickHashtagCellBorderColorAlpha).cgColor
+        shadowView.layer.borderColor =  ColorConstants.darkBorder.withAlphaComponent(NumericConstants.instaPickHashtagCellBorderColorAlpha).cgColor
         shadowView.layer.borderWidth = NumericConstants.instaPickHashtagCellBorderWidth
         
         shadowView.layer.shadowColor = UIColor.black.withAlphaComponent(NumericConstants.instaPickHashtagCellShadowColorAlpha).cgColor
@@ -42,6 +43,7 @@ final class InstaPickHashtagCell: UICollectionViewCell {
     
     func configure(with hashtag: String, delegate: InstaPickHashtagCellDelegate) {
         hashtagLabel.text = hashtag
+        hashtagLabel.setContentCompressionResistancePriority(UILayoutPriority.required, for: .vertical)
         self.delegate = delegate
     }
 

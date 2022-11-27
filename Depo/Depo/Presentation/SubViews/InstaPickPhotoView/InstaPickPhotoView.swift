@@ -54,11 +54,16 @@ class InstaPickPhotoView: UIView, NibInit {
         
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
+        imageView.clipsToBounds = true
         
         rateView.layer.masksToBounds = true
+        rateView.clipsToBounds = true
+        
         rateLabel.textAlignment = .center
         
         pickedView.layer.masksToBounds = true
+        pickedView.clipsToBounds = true
+        
         pickedLabel.textAlignment = .center
         
         setupCornerRadius()
@@ -128,19 +133,20 @@ class InstaPickPhotoView: UIView, NibInit {
     }
     
     private func setupCornerRadius() {
-        containerView.layer.cornerRadius = bounds.height * 0.5
+        containerView.layer.cornerRadius = 15
         
-        rateView.layer.cornerRadius = rateView.bounds.height * 0.5
+        rateView.layer.cornerRadius = 7
         
-        imageView.layer.cornerRadius = imageView.bounds.height * 0.5
+        imageView.layer.cornerRadius = 3.8
         
-        pickedView.layer.cornerRadius = pickedView.bounds.height * 0.5
+        pickedView.layer.cornerRadius = 6.7
+        
     }
     
     func setupLabelsDesign(isIPad: Bool) {
         rateLabel.textColor = .white
         
-        pickedLabel.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 20 : 14)
+        pickedLabel.font = .appFont(.regular, size: isIPad ? 18 : 12)
         pickedLabel.textColor = .white
         pickedLabel.text = TextConstants.instaPickPickedLabel
     }
@@ -157,7 +163,7 @@ class InstaPickPhotoView: UIView, NibInit {
 
         let pictureNotFoundLabel = UILabel()
 
-        pictureNotFoundLabel.font           = UIFont.TurkcellSaturaDemFont(size: fontSize)
+        pictureNotFoundLabel.font           = UIFont.appFont(.regular, size: fontSize)
 
         pictureNotFoundLabel.text           = TextConstants.instaPickPictureNotFoundLabel
         pictureNotFoundLabel.textColor      = ColorConstants.darkBlueColor
@@ -232,10 +238,10 @@ class InstaPickPhotoView: UIView, NibInit {
             pickedView.isHidden = true
             
             rateView.isNeedGradient = false
-            rateView.backgroundColor = UIColor.lrTealish
+            rateView.backgroundColor = AppColor.button.color
             
             containerView.isNeedGradient = false
-            containerView.backgroundColor = UIColor.lrTealish
+            containerView.backgroundColor = AppColor.button.color
         }
     }
     

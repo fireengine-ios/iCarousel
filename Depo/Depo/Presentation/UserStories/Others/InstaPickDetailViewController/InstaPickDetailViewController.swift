@@ -38,7 +38,7 @@ final class InstaPickDetailViewController: BaseViewController {
     @IBOutlet private weak var analysisLeftLabel: UILabel!
     @IBOutlet private weak var hashTagsLabel: UILabel!
     @IBOutlet private weak var copyToClipboardButton: UIButton!
-    @IBOutlet private weak var shareButton: BlueButtonWithMediumWhiteText!
+    @IBOutlet private weak var shareButton: DarkBlueButton!
     
     @IBOutlet private weak var darkView: UIView!
     @IBOutlet private weak var containerView: UIView!
@@ -67,6 +67,9 @@ final class InstaPickDetailViewController: BaseViewController {
 
         setup()
         trackScreen()
+        
+        view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        view.layer.shadowRadius = 16
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -157,25 +160,33 @@ final class InstaPickDetailViewController: BaseViewController {
         collectionView.dataSource = dataSource
         
         collectionView.register(nibCell: InstaPickHashtagCell.self)
+        
+        let shadowView = UIView()
+        shadowView.backgroundColor = .clear
+        collectionView.addSubview(shadowView)
+        shadowView.translatesAutoresizingMaskIntoConstraints = false
+        shadowView.pinToSuperviewEdges()
+        
+        shadowView.layer.shadowColor = UIColor.black.withAlphaComponent(NumericConstants.instaPickHashtagCellShadowColorAlpha).cgColor
+        shadowView.layer.shadowOpacity = NumericConstants.packageViewShadowOpacity
+        shadowView.layer.shadowOffset = .zero
+        shadowView.layer.shadowRadius = NumericConstants.instaPickHashtagCellShadowRadius
     }
     
     private func setupFonts() {
         let isIPad = Device.isIpad
         
-        topLabel.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 38 : 28)
-        topLabel.textColor = AppColor.marineTwoAndWhite.color
+        topLabel.font = .appFont(.medium, size: isIPad ? 30 : 20)
+        topLabel.textColor = AppColor.label.color
         
-        analysisLeftLabel.font = UIFont.TurkcellSaturaDemFont(size: isIPad ? 24 : 18)
-        analysisLeftLabel.textColor = ColorConstants.textGrayColor
+        analysisLeftLabel.font = .appFont(.medium, size: isIPad ? 26 : 16)
+        analysisLeftLabel.textColor = AppColor.label.color
         
         hashTagsLabel.font = UIFont.TurkcellSaturaDemFont(size: isIPad ? 24 : 18)
         hashTagsLabel.textColor = AppColor.marineTwoAndWhite.color
         
-        copyToClipboardButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 19 : 14)
-        copyToClipboardButton.setTitleColor(UIColor.lrTealishTwo, for: .normal)
-        
-        shareButton.setBackgroundColor(AppColor.secondaryBackground.color, for: .disabled)
-        shareButton.setTitleColor(ColorConstants.darkBlueColor.lighter(by: 40.0), for: .disabled)
+        copyToClipboardButton.titleLabel?.font = .appFont(.medium, size: isIPad ? 26 : 16)
+        copyToClipboardButton.setTitleColor(AppColor.label.color, for: .normal)
     }
 
     private func setupTexts() {
@@ -214,7 +225,7 @@ final class InstaPickDetailViewController: BaseViewController {
         ///if left count is 0 we seek ":"(not 0 because of RTL language) and draw in red
         if analyzesCount.left == 0, let location = text.firstIndex(of: ":"), !analyzesCount.isFree {
             let attributedString = NSMutableAttributedString(string: text, attributes: [
-                .font : UIFont.TurkcellSaturaDemFont(size: Device.isIpad ? 24 : 18),
+                .font : UIFont.appFont(.medium, size: Device.isIpad ? 26 : 16),
                 .foregroundColor : ColorConstants.textGrayColor,
                 .kern : 0.29
                 ])
@@ -308,7 +319,7 @@ final class InstaPickDetailViewController: BaseViewController {
         
         let shareButtonRect = self.shareButton.convert(self.shareButton.bounds, to: self.view)
 
-        let rect = CGRect(x: shareButtonRect.midX, y: shareButtonRect.minY - 10, width: 10, height: 50)
+        let rect = CGRect(x: shareButtonRect.midX, y: shareButtonRect.minY - 10, width: 10, height: 0)
         
         startActivityIndicator()
         let downloader = FilesDownloader()
