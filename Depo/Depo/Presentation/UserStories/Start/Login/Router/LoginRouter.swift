@@ -28,6 +28,11 @@ class LoginRouter: LoginRouterInput {
         router.pushViewController(viewController: router.synchronyseScreen())
     }
     
+    func presentEmailVerificationPopUp() {
+        let popUp = router.verifyEmailPopUp
+        router.presentViewController(controller: popUp)
+    }
+    
     func goToRegistration() {
         if let registrationScreen = router.registrationScreen {
             router.pushViewController(viewController: registrationScreen)
