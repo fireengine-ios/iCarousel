@@ -1430,6 +1430,14 @@
 		8980D93C292620E200817FF8 /* DiscoverInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D93B292620E200817FF8 /* DiscoverInteractorOutput.swift */; };
 		8980D93E292620F700817FF8 /* DiscoverInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D93D292620F700817FF8 /* DiscoverInteractorInput.swift */; };
 		8980D942292621C200817FF8 /* DiscoverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D941292621C200817FF8 /* DiscoverInteractor.swift */; };
+		89959F032934B00E000135DE /* CollageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89959F022934B00E000135DE /* CollageInteractor.swift */; };
+		89959F042934B00F000135DE /* CollageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89959F022934B00E000135DE /* CollageInteractor.swift */; };
+		89959F052934B00F000135DE /* CollageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89959F022934B00E000135DE /* CollageInteractor.swift */; };
+		89959F062934B00F000135DE /* CollageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89959F022934B00E000135DE /* CollageInteractor.swift */; };
+		89959F082934B361000135DE /* CollageInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89959F072934B361000135DE /* CollageInitializer.swift */; };
+		89959F092934B361000135DE /* CollageInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89959F072934B361000135DE /* CollageInitializer.swift */; };
+		89959F0A2934B361000135DE /* CollageInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89959F072934B361000135DE /* CollageInitializer.swift */; };
+		89959F0B2934B361000135DE /* CollageInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89959F072934B361000135DE /* CollageInitializer.swift */; };
 		89CC89F423AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CC89F123AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift */; };
 		89CC89F623AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CC89F123AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift */; };
 		89CC89F823AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89CC89F223AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib */; };
@@ -10611,6 +10619,8 @@
 		8980D93B292620E200817FF8 /* DiscoverInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverInteractorOutput.swift; sourceTree = "<group>"; };
 		8980D93D292620F700817FF8 /* DiscoverInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverInteractorInput.swift; sourceTree = "<group>"; };
 		8980D941292621C200817FF8 /* DiscoverInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverInteractor.swift; sourceTree = "<group>"; };
+		89959F022934B00E000135DE /* CollageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollageInteractor.swift; sourceTree = "<group>"; };
+		89959F072934B361000135DE /* CollageInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollageInitializer.swift; sourceTree = "<group>"; };
 		89CC89F123AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSSmartAlbumWarningPopUp.swift; sourceTree = "<group>"; };
 		89CC89F223AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSSmartAlbumWarningPopUp.xib; sourceTree = "<group>"; };
 		89D1EBE923EC3BF000092031 /* UIApplication+Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Display.swift"; sourceTree = "<group>"; };
@@ -14624,6 +14634,7 @@
 			children = (
 				0AEEA430A2A4A92D35185388 /* AlbumsInitializer.swift */,
 				984F8E7E200CE10100D9D595 /* StoriesInitializer.swift */,
+				89959F072934B361000135DE /* CollageInitializer.swift */,
 				F036B15727623119005A2D7E /* SpotlightSearchHelper.swift */,
 			);
 			path = Configurator;
@@ -18344,6 +18355,7 @@
 			children = (
 				27FAC31E7C059BFB2F435773 /* AlbumsInteractor.swift */,
 				984F8E7C200CDEA200D9D595 /* StoriesInteractor.swift */,
+				89959F022934B00E000135DE /* CollageInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -25821,6 +25833,7 @@
 				8C0E8D471FDEBDFF00789C91 /* String+Int.swift in Sources */,
 				8C0E8D4B1FDEBDFF00789C91 /* BottomSelectionTabBarInteractorInput.swift in Sources */,
 				8C0E8D4D1FDEBDFF00789C91 /* FolderSelectionCollectionViewCell.swift in Sources */,
+				89959F082934B361000135DE /* CollageInitializer.swift in Sources */,
 				03404571240794FD0024135B /* SynchronizedDictionary.swift in Sources */,
 				8C0E8D4F1FDEBDFF00789C91 /* FreeAppSpace.swift in Sources */,
 				4A9B3906201F3525009FC572 /* FaceImageItemsInteractor.swift in Sources */,
@@ -25967,6 +25980,7 @@
 				07DB93AB2860AF5400D5CACF /* ASN1ContainerBuilder.swift in Sources */,
 				8C0E8DA91FDEBDFF00789C91 /* RegistrationViewController.swift in Sources */,
 				8C0E8DAA1FDEBDFF00789C91 /* HelpAndSupportRouter.swift in Sources */,
+				89959F032934B00E000135DE /* CollageInteractor.swift in Sources */,
 				8C0E8DAC1FDEBDFF00789C91 /* SearchServiceResponse.swift in Sources */,
 				8C0E8DAD1FDEBDFF00789C91 /* RegistrationModuleInput.swift in Sources */,
 				8C0E8DAE1FDEBDFF00789C91 /* RegistrationPresenter.swift in Sources */,
@@ -29014,6 +29028,7 @@
 				CE784BF422A685FB00662219 /* UploadFilesSelectionInitializer.swift in Sources */,
 				CE784BF522A685FB00662219 /* PremiumViewInput.swift in Sources */,
 				CE784BF622A685FB00662219 /* SelectFolderViewController.swift in Sources */,
+				89959F052934B00F000135DE /* CollageInteractor.swift in Sources */,
 				CE784BF722A685FB00662219 /* SelectFolderPresenter.swift in Sources */,
 				73A1833F235855AA0095719F /* CampaignCard.swift in Sources */,
 				CE784BF922A685FB00662219 /* AlbumCollectionViewCell.swift in Sources */,
@@ -29175,6 +29190,7 @@
 				CE784C5A22A685FB00662219 /* FeedbackViewInput.swift in Sources */,
 				CE784C5B22A685FB00662219 /* FaceImageItemsInitializer.swift in Sources */,
 				CE784C5C22A685FB00662219 /* SubscriptionsService.swift in Sources */,
+				89959F0A2934B361000135DE /* CollageInitializer.swift in Sources */,
 				987E21832360380200D45AEA /* CampaingnInfoView.swift in Sources */,
 				8C1E72EE22BEB65300DC57B6 /* SharedConstants.swift in Sources */,
 				98B04780259314740011DAEB /* UpdaterController.m in Sources */,
@@ -30465,6 +30481,7 @@
 				CF8B66D823CBC9D70021B021 /* BottomSelectionTabBarConfigurator.swift in Sources */,
 				CF8B66D923CBC9D70021B021 /* TwoFactorChallengeRouter.swift in Sources */,
 				CF8B66DA23CBC9D70021B021 /* PhotoVideoDetailInteractorOutput.swift in Sources */,
+				89959F092934B361000135DE /* CollageInitializer.swift in Sources */,
 				07C6D4CB2848D80500502C28 /* TabBarCardsContainer.swift in Sources */,
 				CF8B66DB23CBC9D70021B021 /* PhoneCodeInputView.swift in Sources */,
 				9808B7CE2567EB10001DEF2E /* PrivateShareAccessListCell.swift in Sources */,
@@ -31055,6 +31072,7 @@
 				CF8B688123CBC9D70021B021 /* NSManagedObject+Extensions.swift in Sources */,
 				CF8B688223CBC9D70021B021 /* OTPViewRouterInput.swift in Sources */,
 				9823199424F3A1E700FD16E2 /* AdjustmentsView.swift in Sources */,
+				89959F042934B00F000135DE /* CollageInteractor.swift in Sources */,
 				98185BA2248A709E0013929C /* WarningPopupController.swift in Sources */,
 				CF8B688323CBC9D70021B021 /* OTPViewConfigurator.swift in Sources */,
 				CF8B688423CBC9D70021B021 /* AutoSyncRouterInput.swift in Sources */,
@@ -31632,6 +31650,7 @@
 				CF8B6CDB23CBCA280021B021 /* AutoSyncInteractorInput.swift in Sources */,
 				0780AB5727916834000760D9 /* RemoteTextRecognitionService.swift in Sources */,
 				CF8B6CDD23CBCA280021B021 /* LeavePremiumConfigurator.swift in Sources */,
+				89959F062934B00F000135DE /* CollageInteractor.swift in Sources */,
 				CF8B6CDE23CBCA280021B021 /* UserProfileViewOutput.swift in Sources */,
 				CF8B6CDF23CBCA280021B021 /* UploadResponse.swift in Sources */,
 				CF8B6CE023CBCA280021B021 /* CreateStoryPopUp.swift in Sources */,
@@ -31774,6 +31793,7 @@
 				F028C1122789F266005CE6AF /* PublicShareViewOutput.swift in Sources */,
 				0305A32B23D5C41B004D1EC7 /* SmashStickerResponse.swift in Sources */,
 				CF8B6D4B23CBCA280021B021 /* MyStorageInteractor.swift in Sources */,
+				89959F0B2934B361000135DE /* CollageInitializer.swift in Sources */,
 				CF8B6D4C23CBCA280021B021 /* TermsAndServicesInteractorOutput.swift in Sources */,
 				CF8B6D4D23CBCA280021B021 /* QuickScrollItems.swift in Sources */,
 				CF8B6D4E23CBCA280021B021 /* TextInsetsLabel.swift in Sources */,

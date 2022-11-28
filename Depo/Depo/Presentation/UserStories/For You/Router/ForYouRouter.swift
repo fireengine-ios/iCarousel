@@ -38,6 +38,9 @@ final class ForYouRouter: ForYouRouterInput {
         case .photopick:
             let photopick = router.analyzesHistoryController()
             router.pushViewController(viewController: photopick)
+        case .collages:
+            let collage = router.collageListController()
+            router.pushViewController(viewController: collage)
         default:
             break
         }

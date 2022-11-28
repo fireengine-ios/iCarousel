@@ -483,9 +483,9 @@ extension AutoSyncDataSource {
             return IndexPath(row: i, section: 0)
         }
         
-        updateTableView({
-            tableView.deleteRows(at: indexPaths, with: tableViewAnimationType)
-        }, completion: nil)
+//        updateTableView({
+//            tableView.deleteRows(at: indexPaths, with: tableViewAnimationType)
+//        }, completion: nil)
     }
     
     private func updateAlbums(isSelected: Bool?) {

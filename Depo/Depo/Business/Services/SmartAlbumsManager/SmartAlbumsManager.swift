@@ -95,6 +95,7 @@ class SmartAlbumsManagerImpl: SmartAlbumsManager {
 
             self.getAlbums(group: group)
             self.getStories(group: group)
+            self.getCollages(group: group)
             self.getInstaPickThumbnails(group: group)
             
             if result == true {
@@ -123,6 +124,8 @@ class SmartAlbumsManagerImpl: SmartAlbumsManager {
                 getInstaPickThumbnails(group: group)
             case .story:
                 getStories(group: group)
+            case .collage:
+                getCollages(group: group)
             case .albums:
                 getAlbums(group: group)
             case .people:
@@ -189,6 +192,18 @@ class SmartAlbumsManagerImpl: SmartAlbumsManager {
         let storiesService = StoryService(requestSize: NumericConstants.myStreamSliderThumbnailsCount)
         storiesService.allStories(success: { [weak self] stories in
             self?.dataStorage.addNew(item: SliderItem(withStoriesItems: stories))
+            group.leave()
+        }, fail: { [weak self] in
+            self?.operationFailed()
+            group.leave()
+        })
+    }
+    
+    private func getCollages(group: DispatchGroup) {
+        group.enter()
+        let collagesService = CollageService(requestSize: NumericConstants.myStreamSliderThumbnailsCount)
+        collagesService.allCollage(success: { [weak self] collages in
+            self?.dataStorage.addNew(item: SliderItem(withCollageItems: collages))
             group.leave()
         }, fail: { [weak self] in
             self?.operationFailed()

@@ -843,6 +843,13 @@ class RouterVC: NSObject {
         return controller
     }
     
+    // MARK: Collage list
+    
+    func collageListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
+        let controller = CollageInitializer.initializeCollageController(with: "BaseFilesGreedViewController", moduleOutput: moduleOutput)
+        return controller
+    }
+    
     // MARK: Stories list
     
     func storiesListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
