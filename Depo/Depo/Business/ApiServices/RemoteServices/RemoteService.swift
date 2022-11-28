@@ -44,6 +44,8 @@ class RemoteItemsService {
                 contentType = .album
             case .story:
                 contentType = .story
+            case .collage:
+                contentType = .collage
             default:
                 contentType = .content_type
         }
@@ -323,6 +325,45 @@ class StoryService: RemoteItemsService {
         remote.searchByField(param: searchParam, success: { [weak self] response in
             guard let resultResponse = response as? SearchResponse else {
                 debugLog("StoryService remote searchStories fail")
+                fail?()
+                return
+            }
+
+            self?.currentPage += 1
+            let list = resultResponse.list.compactMap { Item(remote: $0) }
+            success?(list)
+
+        }, fail: { errorResponse in
+            errorResponse.showInternetErrorGlobal()
+            fail?()
+        })
+    }
+}
+
+class CollageService: RemoteItemsService {
+    init(requestSize: Int) {
+        super.init(requestSize: requestSize, fieldValue: .collage)
+    }
+    
+    func allCollage(sortBy: SortType = .date, sortOrder: SortOrder = .desc, success: ListRemoteItems?, fail: FailRemoteItems?) {
+        currentPage = 0
+        nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail)
+    }
+    
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+        debugLog("CollageService nextItems")
+        
+        let searchParam = SearchByFieldParameters(fieldName: .collage,
+                                                  fieldValue: .collage,
+                                                  sortBy: sortBy,
+                                                  sortOrder: sortOrder,
+                                                  page: currentPage,
+                                                  size: requestSize,
+                                                  hidden: false)
+                
+        remote.searchByField(param: searchParam, success: { [weak self] response in
+            guard let resultResponse = response as? SearchResponse else {
+                debugLog("CollageService remote searchCollage fail")
                 fail?()
                 return
             }
