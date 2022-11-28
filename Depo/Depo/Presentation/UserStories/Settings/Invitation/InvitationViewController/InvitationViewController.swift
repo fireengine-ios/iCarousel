@@ -240,8 +240,16 @@ class InvitationViewController: BaseViewController {
                 let hexColor = "#ECECEC"
                 campaignContentLabel.attributedText = campaign.value.content.convertHtmlToAttributedStringWithCSS(font: .appFont(.medium, size: 12), csscolor: hexColor, lineheight: 5, csstextalign: "left")
             }
+        } else if #available(iOS 16.1, *) {
+            if self.traitCollection.userInterfaceStyle == .light {
+                let hexColor = AppColor.campaignContentLabel.color.toHexString()
+                campaignContentLabel.attributedText = campaign.value.content.convertHtmlToAttributedStringWithCSS(font: .appFont(.medium, size: 12), csscolor: hexColor, lineheight: 5, csstextalign: "left")
+            } else {
+                let hexColor = "#ECECEC"
+                campaignContentLabel.attributedText = campaign.value.content.convertHtmlToAttributedStringWithCSS(font: .appFont(.medium, size: 12), csscolor: hexColor, lineheight: 5, csstextalign: "left")
+            }
         } else {
-            let hexColor = AppColor.campaignContentLabel.color.toHexString()
+            let hexColor = "#ECECEC"
             campaignContentLabel.attributedText = campaign.value.content.convertHtmlToAttributedStringWithCSS(font: .appFont(.medium, size: 12), csscolor: hexColor, lineheight: 5, csstextalign: "left")
         }
         
