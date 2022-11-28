@@ -38,7 +38,7 @@ final class DeleteDuplicatesMainView: UIView, NibInit {
         willSet {
             newValue.setTitle(TextConstants.deleteDuplicatesDeleteAll, for: .normal)
             newValue.setTitleColor(.white, for: .normal)
-            newValue.backgroundColor = AppColor.darkBlueAndTealish.color
+            newValue.backgroundColor = AppColor.darkBlueColor.color
             newValue.titleLabel?.font = .appFont(.regular, size: 16.0)
         }
     }
