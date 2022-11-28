@@ -118,7 +118,7 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
         let footerHeight = tableView.tableFooterView?.frame.height ?? 0
         var h: CGFloat = headerHeight + footerHeight
         for view in viewsArray {
-            h = h + view.frame.size.height + 2 * CardsContainerView.indent
+            h = h + view.frame.size.height + 1 * CardsContainerView.indent
         }
         return h
     }
@@ -135,7 +135,7 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let view = viewsArray[indexPath.row]
-        return view.frame.size.height + 2 * CardsContainerView.indent
+        return view.frame.size.height + CardsContainerView.indent
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -213,13 +213,13 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
             }
             
             viewsByType[type] = view
-            /*if let popUp = view as? ProgressCard {
+            if let popUp = view as? ProgressCard {
                 popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
                 if let item = object {
                     popUp.setImageForUploadingItem(item: item)
                 }
             }
-            addPopUpSubView(popUp: view)*/
+            addPopUpSubView(popUp: view)
             
         }
     }

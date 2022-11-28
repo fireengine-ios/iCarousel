@@ -32,7 +32,7 @@ class BaseCardView: UIView, NibInit {
     }
     
     func configurateView() {
-        whiteView?.layer.cornerRadius = BaseCardView.baseViewCornerRadius
+        whiteView?.layer.cornerRadius = 15
         calculatedH = frame.size.height
     }
     
