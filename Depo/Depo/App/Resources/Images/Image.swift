@@ -99,6 +99,7 @@ enum Image: String, AppImage {
     case iconPlayPre
     case iconPlayThumb
     case iconSound
+    case iconPause40x40Red
     /// Action/Tab
     case iconTabMusicEmpty
     case iconTabMusic

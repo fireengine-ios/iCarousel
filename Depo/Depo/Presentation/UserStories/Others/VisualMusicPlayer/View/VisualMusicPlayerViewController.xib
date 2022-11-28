@@ -130,7 +130,8 @@
                                 <constraint firstAttribute="width" constant="44" id="ejR-P7-TWM"/>
                                 <constraint firstAttribute="height" constant="44" id="lme-ZH-cGt"/>
                             </constraints>
-                            <state key="normal" image="iconPause"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" image="iconPause40x40Red"/>
                             <state key="selected" image="iconPlay40x40"/>
                             <connections>
                                 <action selector="actionPlayButton:" destination="-1" eventType="touchUpInside" id="hXC-iB-qoF"/>
@@ -266,7 +267,7 @@
         </view>
     </objects>
     <resources>
-        <image name="iconPause" width="24" height="24"/>
+        <image name="iconPause40x40Red" width="40" height="40"/>
         <image name="iconPlay40x40" width="41" height="40"/>
         <image name="iconPlayMix" width="24" height="20"/>
         <image name="iconPlayNext" width="25" height="22"/>
