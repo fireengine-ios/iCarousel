@@ -35,11 +35,14 @@ protocol TrashBinBottomBarManagerDelegate: AnyObject {
 
 final class TrashBinBottomBarManager {
 
-    private let bottomBarConfig = EditingBarConfig(elementsConfig:  ElementTypes.trashState,
-                                                          style: .blackOpaque,
-                                                          tintColor: nil)
+    private let bottomBarConfig = EditingBarConfig(
+        elementsConfig:  ElementTypes.trashState,
+        style: .default,
+        tintColor: AppColor.tint.color,
+        unselectedItemTintColor: AppColor.label.color,
+        barTintColor: AppColor.background.color)
     
-    var editingTabBar: BottomSelectionTabBarViewController?
+    var editingTabBar: BottomSelectionTabBarDrawerViewController?
     private let bottomBarPresenter = TrashBinBottomTabBarPresenter()
     
     private weak var delegate: TrashBinBottomBarManagerDelegate?
@@ -51,7 +54,7 @@ final class TrashBinBottomBarManager {
     func setup() {
         let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
         bottomBarPresenter.setup(with: bottomBarConfig.elementsConfig, delegate: self)
-        let bottomBarVC = bottomBarVCmodule.setupModule(config: bottomBarConfig, settablePresenter: bottomBarPresenter)
+        let bottomBarVC = bottomBarVCmodule.setupDrawerVariantModule(config: bottomBarConfig, settablePresenter: bottomBarPresenter)
         editingTabBar = bottomBarVC
     }
     
