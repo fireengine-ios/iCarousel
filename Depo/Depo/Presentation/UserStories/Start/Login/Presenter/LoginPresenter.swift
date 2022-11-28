@@ -52,15 +52,6 @@ class LoginPresenter: BasePresenter {
         AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
         AuthoritySingleton.shared.checkNewVersionApp()
         openAutoSyncIfNeeded()
-        verifyEmailIfNeeded()
-    }
-    
-    private func verifyEmailIfNeeded() {
-        SingletonStorage.shared.emailVerifyIfNeeded { [weak self] result in
-            if result {
-                self?.router.presentEmailVerificationPopUp()
-            }
-        }
     }
     
     private func openEmptyEmail() {
