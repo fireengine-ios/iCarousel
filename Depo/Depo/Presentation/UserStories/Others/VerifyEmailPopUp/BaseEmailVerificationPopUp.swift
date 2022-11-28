@@ -27,11 +27,11 @@ class BaseEmailVerificationPopUp: BasePopUpController {
 
     @IBOutlet weak var popUpView: UIView! {
         willSet {
-            newValue.layer.cornerRadius = 4
-
+            newValue.layer.cornerRadius = 16
+            newValue.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
             newValue.layer.shadowOffset = .zero
             newValue.layer.shadowOpacity = 0.5
-            newValue.layer.shadowRadius = 4
+            newValue.layer.shadowRadius = 16
             newValue.layer.shadowColor = UIColor.black.cgColor
         }
     }
@@ -39,13 +39,15 @@ class BaseEmailVerificationPopUp: BasePopUpController {
     @IBOutlet weak var topLabel: UILabel! {
         willSet {
             newValue.textAlignment = .center
+            newValue.font = .appFont(.medium, size: 14)
+            newValue.textColor = AppColor.label.color
         }
     }
 
     @IBOutlet weak var errorLabel: UILabel! {
         willSet {
             newValue.textAlignment = .center
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
+            newValue.font = .appFont(.medium, size: 14)
             newValue.textColor = ColorConstants.textOrange
             newValue.isHidden = true
             newValue.numberOfLines = 0
@@ -55,9 +57,8 @@ class BaseEmailVerificationPopUp: BasePopUpController {
     @IBOutlet weak var changeEmailButton: UIButton! {
         willSet {
             let attributes: [NSAttributedString.Key : Any] = [
-                .foregroundColor : UIColor.lrTealishTwo,
-                .underlineStyle : NSUnderlineStyle.single.rawValue,
-                .font : UIFont.TurkcellSaturaMedFont(size: 15),
+                .foregroundColor : AppColor.tint.color,
+                .font : UIFont.appFont(.medium, size: 14),
             ]
 
             let attirbutedString = NSAttributedString(string: TextConstants.changeEmail, attributes: attributes)
@@ -70,9 +71,8 @@ class BaseEmailVerificationPopUp: BasePopUpController {
     @IBOutlet weak var resendCodeButton: UIButton! {
         willSet {
             let attributes: [NSAttributedString.Key : Any] = [
-                .foregroundColor : UIColor.lrTealishTwo,
-                .underlineStyle : NSUnderlineStyle.single.rawValue,
-                .font : UIFont.TurkcellSaturaMedFont(size: 15),
+                .foregroundColor : AppColor.tint.color,
+                .font : UIFont.appFont(.medium, size: 14),
             ]
 
             let attirbutedString = NSAttributedString(string: TextConstants.resendCode, attributes: attributes)
@@ -82,27 +82,15 @@ class BaseEmailVerificationPopUp: BasePopUpController {
         }
     }
 
-    @IBOutlet weak var laterButton: RoundedInsetsButton! {
+    @IBOutlet weak var laterButton: WhiteButton! {
         willSet {
-            newValue.layer.borderColor = UIColor.lrTealishTwo.cgColor
-            newValue.layer.borderWidth = 1
-
-            newValue.setTitleColor(UIColor.lrTealishTwo, for: .normal)
             newValue.setTitle(TextConstants.later, for: .normal)
         }
     }
 
-    @IBOutlet weak var confirmButton: RoundedInsetsButton! {
+    @IBOutlet weak var confirmButton: DarkBlueButton! {
         willSet {
-            newValue.layer.borderColor = UIColor.lrTealishTwo.withAlphaComponent(0.5).cgColor
-            newValue.layer.borderWidth = 1
-
             newValue.setTitle(TextConstants.confirm, for: .normal)
-            newValue.setTitleColor(UIColor.white, for: .normal)
-
-            newValue.setBackgroundColor(UIColor.lrTealishTwo, for: .normal)
-            newValue.setBackgroundColor(UIColor.lrTealishTwo.withAlphaComponent(0.5), for: .disabled)
-
             newValue.isEnabled = false
         }
     }
@@ -186,8 +174,8 @@ class BaseEmailVerificationPopUp: BasePopUpController {
         let topText = String(format: TextConstants.verifyEmailTopTitle, TextConstants.enterTheSecurityCode, email)
 
         let attributes: [NSAttributedString.Key : Any] = [
-            .font : UIFont.TurkcellSaturaMedFont(size: 15),
-            .foregroundColor : ColorConstants.blueGrey,
+            .font : UIFont.appFont(.medium, size: 14),
+            .foregroundColor : AppColor.label.color,
             .kern : 0.0
         ]
 
@@ -195,7 +183,7 @@ class BaseEmailVerificationPopUp: BasePopUpController {
 
         if let range = topText.range(of: TextConstants.enterTheSecurityCode) {
             let rangeAttributes: [NSAttributedString.Key : Any] = [
-                .foregroundColor : AppColor.blackColor.color
+                .foregroundColor : AppColor.label.color
             ]
             let nsRange = NSRange(location: range.lowerBound.encodedOffset,
                                   length: range.upperBound.encodedOffset - range.lowerBound.encodedOffset)

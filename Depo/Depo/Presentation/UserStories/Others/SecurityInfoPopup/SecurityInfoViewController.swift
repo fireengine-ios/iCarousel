@@ -133,12 +133,27 @@ final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHan
     
     @objc private func closeSelf() {
         if !fromSettings {
-            DispatchQueue.toMain {
-                let router = RouterVC()
-                router.setNavigationController(controller: router.tabBarScreen)
-            }
+            goToTabbarScreen()
         } else {
             dismiss(animated: true)
+        }
+    }
+    
+    private func goToTabbarScreen() {
+        DispatchQueue.toMain { [weak self] in
+            let router = RouterVC()
+            router.setNavigationController(controller: router.tabBarScreen)
+            
+            self?.verifyEmailIfNeeded()
+        }
+    }
+    
+    private func verifyEmailIfNeeded() {
+        SingletonStorage.shared.emailVerifyIfNeeded { result in
+            if !result {
+                let popUp = RouterVC().verifyEmailPopUp
+                RouterVC().presentViewController(controller: popUp)
+            }
         }
     }
     
@@ -255,9 +270,7 @@ final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHan
 extension SecurityInfoViewController {
     private func questionWasSuccessfullyUpdated() {
         SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.userProfileSetSecretQuestionSuccess)
-        DispatchQueue.toMain {
-            RouterVC().setNavigationController(controller: RouterVC().tabBarScreen)
-        }
+        goToTabbarScreen()
         //dismiss(animated: true)
     }
     

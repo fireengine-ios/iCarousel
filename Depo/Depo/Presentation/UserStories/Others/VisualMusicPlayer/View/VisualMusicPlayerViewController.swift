@@ -62,8 +62,13 @@ class VisualMusicPlayerViewController: ViewController, VisualMusicPlayerViewInpu
         currentDuration = player.duration
         musicName.text = player.currentMusicName
         artistName.text = player.currentArtist
+        
+//        musicName.text = "Music Name"
+//        artistName.text = "Artist Name"
 
         statusBarStyle = .lightContent
+        
+        playbackSlider.setThumbImage(Image.iconPlayThumb.image, for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {

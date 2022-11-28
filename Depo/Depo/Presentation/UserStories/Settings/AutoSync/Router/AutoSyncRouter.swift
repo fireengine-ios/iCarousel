@@ -22,6 +22,18 @@ class AutoSyncRouter: AutoSyncRouterInput {
             SingletonStorage.shared.securityInfoIfNeeded { isNeed in
                 if isNeed {
                     RouterVC().securityInfoViewController(fromSettings: false)
+                } else {
+                    self?.verifyEmailIfNeeded()
+                }
+            }
+        }
+    }
+    
+    private func verifyEmailIfNeeded() {
+        SingletonStorage.shared.emailVerifyIfNeeded { [weak self] result in
+            if !result {
+                if let popUp = self?.router.verifyEmailPopUp {
+                    self?.router.presentViewController(controller: popUp)
                 }
             }
         }

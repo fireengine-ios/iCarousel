@@ -13,6 +13,8 @@ protocol LoginRouterInput {
     func goToForgotPassword()
     
     func goToHomePage()
+    
+    func presentEmailVerificationPopUp()
         
     func goToTermsAndServices()
     

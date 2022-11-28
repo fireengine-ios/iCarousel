@@ -18,8 +18,8 @@ final class InstaPickBigPhotoView: InstaPickPhotoView {
         pickedViewCenterXConstraint.constraintWithMultiplier(0.5).isActive = true
 
         //size constraints
-        rateView.heightAnchor.constraint(equalToConstant: isIPad ? 40 : 30).isActive = true
-        pickedView.widthAnchor.constraint(equalToConstant: isIPad ? 100 : 70).isActive = true
+        rateView.heightAnchor.constraint(equalToConstant: isIPad ? 42 : 32).isActive = true
+        pickedView.widthAnchor.constraint(equalToConstant: isIPad ? 110 : 80).isActive = true
         pickedView.heightAnchor.constraint(equalToConstant: isIPad ? 40 : 30).isActive = true
         
         imageViewHeightConstraint.constraintWithMultiplier(0.97).isActive = true
@@ -32,7 +32,7 @@ final class InstaPickBigPhotoView: InstaPickPhotoView {
     override func setupLabelsDesign(isIPad: Bool) {
         super.setupLabelsDesign(isIPad: isIPad)
 
-        rateLabel.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 20 : 14)
+        rateLabel.font = .appFont(.regular, size: isIPad ? 18 : 12)
     }
     
     override func getPhotoUrl() -> URL? {
