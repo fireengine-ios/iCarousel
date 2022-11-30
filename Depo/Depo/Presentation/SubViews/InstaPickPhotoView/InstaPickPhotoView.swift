@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 protocol InstaPickPhotoViewDelegate: AnyObject {
     func didTapOnImage(_ model: InstapickAnalyze?)
@@ -15,19 +16,25 @@ protocol InstaPickPhotoViewDelegate: AnyObject {
 class InstaPickPhotoView: UIView, NibInit {
 
     private let imageView = UIImageView()
-    private let containerView = RadialGradientableView()
+    private let containerView = UIView()
     
     private let pictureNotFoundStackView = UIStackView()
     
     private let pickedLabel = UILabel()
     let rateLabel = UILabel()
     
-    let rateView = RadialGradientableView()
-    let pickedView = RadialGradientableView()
+    let rateView = UIView()
+    
+    let pickedView: UIView = {
+        let screenSize: CGRect = UIScreen.main.bounds
+        let cv = UIView(frame: CGRect(x: 0, y: 0, width: screenSize.width, height: 26))
+        cv.backgroundColor = UIColor(white: 1, alpha: 0)
+        cv.clipsToBounds = false
+        return cv
+    }()
     
     var rateViewCenterYConstraint: NSLayoutConstraint!
     var imageViewHeightConstraint: NSLayoutConstraint!
-    var pickedViewCenterXConstraint: NSLayoutConstraint!
     
     var model: InstapickAnalyze?
     private weak var delegate: InstaPickPhotoViewDelegate?
@@ -61,14 +68,24 @@ class InstaPickPhotoView: UIView, NibInit {
         
         rateLabel.textAlignment = .center
         
-        pickedView.layer.masksToBounds = true
-        pickedView.clipsToBounds = true
+        addGradient(to: pickedView)
         
         pickedLabel.textAlignment = .center
         
         setupCornerRadius()
         setupLabelsDesign(isIPad: Device.isIpad)
         configurePictureNotFound(fontSize: 16, imageWidth: 30, spacing: 8)
+    }
+    
+    private func addGradient(to target: UIView) {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = containerView.layer.bounds;
+        gradientLayer.colors = [AppColor.premiumThirdGradient.cgColor,
+                                AppColor.premiumSecondGradient.cgColor,
+                                AppColor.premiumFirstGradient.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 1.0, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 0.0, y: 0.5)
+        target.layer.insertSublayer(gradientLayer, at: 0);
     }
 
     func setupLayout(isIPad: Bool) {
@@ -119,8 +136,9 @@ class InstaPickPhotoView: UIView, NibInit {
 
         addSubview(pickedView)
         
-        pickedView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        pickedViewCenterXConstraint = pickedView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor)
+        pickedView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 13).isActive = true
+        pickedView.heightAnchor.constraint(equalToConstant: 26).isActive = true
+        pickedView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
         addSubview(pictureNotFoundStackView)
         
@@ -232,15 +250,11 @@ class InstaPickPhotoView: UIView, NibInit {
         if model.isPicked {
             pickedView.isHidden = isNeedHidePickedView(hasSmallPhotos: smallPhotosCount > 0)
             
-            rateView.isNeedGradient = true
-            containerView.isNeedGradient = true
         } else {
             pickedView.isHidden = true
             
-            rateView.isNeedGradient = false
             rateView.backgroundColor = AppColor.button.color
             
-            containerView.isNeedGradient = false
             containerView.backgroundColor = AppColor.button.color
         }
     }

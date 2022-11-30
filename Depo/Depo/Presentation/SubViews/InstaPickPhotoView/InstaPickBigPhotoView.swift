@@ -15,7 +15,7 @@ final class InstaPickBigPhotoView: InstaPickPhotoView {
         
         //relation constraints
         rateViewCenterYConstraint.constraintWithMultiplier(1.5).isActive = true
-        pickedViewCenterXConstraint.constraintWithMultiplier(0.5).isActive = true
+        //pickedViewCenterXConstraint.constraintWithMultiplier(0.5).isActive = true
 
         //size constraints
         rateView.heightAnchor.constraint(equalToConstant: isIPad ? 42 : 32).isActive = true

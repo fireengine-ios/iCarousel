@@ -40,13 +40,32 @@ final class InstaPickDetailViewController: BaseViewController {
     @IBOutlet private weak var copyToClipboardButton: UIButton!
     @IBOutlet private weak var shareButton: DarkBlueButton!
     
-    @IBOutlet private weak var darkView: UIView!
-    @IBOutlet private weak var containerView: UIView!
-    @IBOutlet private weak var smallPhotosStackView: UIStackView!
-    @IBOutlet private weak var smallPhotosContainerView: UIView!
-    @IBOutlet private weak var photosStackView: UIStackView!
+    @IBOutlet weak var hashtagShadowView: UIView! {
+        willSet {
+            newValue.layer.cornerRadius = 16
+            newValue.layer.shadowOffset = .zero
+            newValue.layer.shadowOpacity = 0.3
+            newValue.layer.shadowRadius = 16
+            newValue.layer.shadowColor = UIColor.black.withAlphaComponent(0.3).cgColor
+            newValue.clipsToBounds = true
+        }
+    }
+    @IBOutlet private weak var containerView: UIView! {
+        willSet {
+            newValue.layer.cornerRadius = 16
+            newValue.clipsToBounds = true
+            newValue.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        }
+    }
     
-    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var smallPhotosStackView: UIStackView!
+    
+    @IBOutlet private weak var collectionView: UICollectionView! {
+        willSet {
+            newValue.layer.cornerRadius = 16
+            newValue.clipsToBounds = true
+        }
+    }
     
     @IBOutlet var instaPickPhotoViews: [InstaPickPhotoView]!
 
@@ -67,16 +86,12 @@ final class InstaPickDetailViewController: BaseViewController {
 
         setup()
         trackScreen()
-        
-        view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
-        view.layer.shadowRadius = 16
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         open()
     }
-    
 
     //MARK: - Utility Methods(public)
     func configure(with models: [InstapickAnalyze], analyzesCount: InstapickAnalyzesCount, isShowTabBar: Bool) {
@@ -99,20 +114,18 @@ final class InstaPickDetailViewController: BaseViewController {
             return
         }
         isShown = true
-        containerView.transform = NumericConstants.scaleTransform
+        //containerView.transform = NumericConstants.scaleTransform
         view.alpha = 0
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.view.alpha = 1
-            self.darkView.alpha = 1
-            self.containerView.transform = .identity
+            //self.containerView.transform = .identity
         }
     }
     
     private func close() {
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.view.alpha = 0
-            self.darkView.alpha = 0
-            self.containerView.transform = NumericConstants.scaleTransform
+            //self.containerView.transform = NumericConstants.scaleTransform
         }) { _ in
             self.dismiss(animated: false, completion: nil)
         }
@@ -120,7 +133,7 @@ final class InstaPickDetailViewController: BaseViewController {
     
     private func setup() {
         activityManager.delegate = self
-        containerView.layer.cornerRadius = NumericConstants.instaPickDetailsPopUpCornerRadius
+        //containerView.layer.cornerRadius = NumericConstants.instaPickDetailsPopUpCornerRadius
         collectionView.layer.cornerRadius = NumericConstants.instaPickHashtagCellShadowRadius
         
         prepareToAppear()
@@ -149,9 +162,9 @@ final class InstaPickDetailViewController: BaseViewController {
             }
         }
         
-        if maxIndex == 0 {
-            smallPhotosContainerView.isHidden = true
-        }
+//        if maxIndex == 0 {
+//            smallPhotosContainerView.isHidden = true
+//        }
     }
     
     private func setupCollectionView() {
