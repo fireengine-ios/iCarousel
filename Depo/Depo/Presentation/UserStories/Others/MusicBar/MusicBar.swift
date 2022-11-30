@@ -7,28 +7,43 @@
 //
 
 class MusicBar: UIView {
-    static let standardHeight: CGFloat = 70
-    
+    static let standardHeight: CGFloat = 90
     lazy var player: MediaPlayer = factory.resolve()
 
-    @IBOutlet weak var gradientView: GradientView!
-    @IBOutlet weak var artistLabel: UILabel!
-    @IBOutlet weak var zoomUpButton: UIButton!
-    @IBOutlet weak var musicNameLabel: UILabel!
-    @IBOutlet weak var playPauseButton: UIButton!
-    @IBOutlet weak var progressViewContainer: GradientView!
-    @IBOutlet weak var progressConstraint: NSLayoutConstraint!
+    @IBOutlet weak var artistLabel: UILabel! {
+        willSet {
+            newValue.font = .appFont(.regular, size: 14)
+            newValue.textColor = AppColor.secondaryTint.color
+        }
+    }
+    
+    @IBOutlet weak var musicNameLabel: UILabel! {
+        willSet {
+            newValue.font = .appFont(.regular, size: 12)
+            newValue.textColor = AppColor.secondaryTint.color
+        }
+    }
+    
+    @IBOutlet weak var playPauseButton: UIButton! {
+        willSet {
+            newValue.setImage(Image.iconPlay.image, for: .selected)
+            newValue.setImage(Image.iconPause.image, for: .normal)
+            newValue.tintColor = .white
+        }
+    }
+    
     @IBOutlet var contentView: UIView!
+    @IBOutlet weak var slider: UISlider! {
+        willSet {
+            newValue.setThumbImage(UIImage(), for: .normal)
+            newValue.minimumTrackTintColor = AppColor.secondaryTint.color
+            newValue.maximumTrackTintColor = .white.withAlphaComponent(0.3)
+            newValue.maximumValue = 1
+            newValue.isEnabled = false
+        }
+    }
     
     var status: ItemStatus = .active
-    
-    @IBAction func actionZoomUpButton(_ sender: UIButton) {
-        let router = RouterVC()
-        let controller = router.musicPlayer(status: status)
-        let navigation = NavigationController(rootViewController: controller)
-        navigation.navigationBar.isHidden = false
-        router.presentViewController(controller: navigation)
-    }
     
     @IBAction func actionPlayPauseButton(_ sender: UIButton) {
         player.togglePlayPause()
@@ -55,32 +70,24 @@ class MusicBar: UIView {
         super.awakeFromNib()
         
         addSwipeRecognition()
-        setupGradientView()
         player.delegates.add(self)
         
         musicNameLabel.text = player.currentMusicName
         artistLabel.text = player.currentArtist
         
         makeProgress(value: 0)
-    }
-    
-    private func setupGradientView() {
-        gradientView.setup(withFrame: bounds,
-                           startColor: UIColor.lrRedOrange,
-                           endColoer: UIColor.lrYellowSun,
-                           startPoint: CGPoint(x: 0, y: 0.5),
-                           endPoint: CGPoint(x: 1, y: 0.5))
-
-        let progressViewRect = CGRect(x: 0, y: 0, width: Device.winSize.width, height: progressViewContainer.bounds.height)
-        progressViewContainer.setup(withFrame: progressViewRect,
-                                    startColor: UIColor.lrSLightPink,
-                                    endColoer: UIColor.lrLightYellow,
-                                    startPoint: CGPoint(x: 0, y: 0.5),
-                                    endPoint: CGPoint(x: 1, y: 0.5))
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(actionZoomUpButton))
+        addGestureRecognizer(gesture)
+        
+        layer.cornerRadius = 16
+        clipsToBounds = true
+        layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
     }
     
     private func makeProgress(value: Float) {
-        progressConstraint.constant = progressViewContainer.bounds.width * CGFloat(value)
+        DispatchQueue.main.async() { [weak self] in
+            self?.slider.setValue(value, animated: true)
+        }
     }
 
     deinit {
@@ -113,6 +120,14 @@ class MusicBar: UIView {
                 self.removePlayer()
             })
         }
+    }
+    
+    @objc func actionZoomUpButton(_ sender: UITapGestureRecognizer) {
+        let router = RouterVC()
+        let controller = router.musicPlayer(status: status)
+        let navigation = NavigationController(rootViewController: controller)
+        navigation.navigationBar.isHidden = false
+        router.presentViewController(controller: navigation)
     }
 
     private func removePlayer() {

@@ -90,7 +90,7 @@ enum AppColor {
     case popUpButtonNormal
     case popUpButtonCancel
     case popupTint
-
+    case darkRedBottomPopup
     
     // MARK: Switch
     case SwitchBackgroundColor

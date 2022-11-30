@@ -33,7 +33,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cui-rs-h2J" userLabel="botttomBarsContainerView">
-                            <rect key="frame" x="12" y="751" width="390" height="103"/>
+                            <rect key="frame" x="12" y="753" width="390" height="101"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="APj-ro-gog">
                                     <rect key="frame" x="0.0" y="0.0" width="390" height="70"/>
@@ -47,7 +47,7 @@
                                     </subviews>
                                 </stackView>
                                 <tabBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pdh-iF-uTx" customClass="MainTabBar" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="54" width="390" height="49"/>
+                                    <rect key="frame" x="0.0" y="52" width="390" height="49"/>
                                     <items/>
                                 </tabBar>
                             </subviews>
@@ -60,7 +60,7 @@
                                 <constraint firstAttribute="trailing" secondItem="APj-ro-gog" secondAttribute="trailing" id="QtF-0z-Okb"/>
                                 <constraint firstAttribute="trailing" secondItem="Pdh-iF-uTx" secondAttribute="trailing" id="ZWg-Sg-NME"/>
                                 <constraint firstItem="Pdh-iF-uTx" firstAttribute="leading" secondItem="cui-rs-h2J" secondAttribute="leading" id="hJe-vk-7hU"/>
-                                <constraint firstItem="Pdh-iF-uTx" firstAttribute="top" secondItem="APj-ro-gog" secondAttribute="bottom" constant="-16" id="nzm-xp-uuu"/>
+                                <constraint firstItem="Pdh-iF-uTx" firstAttribute="top" secondItem="APj-ro-gog" secondAttribute="bottom" constant="-18" id="nzm-xp-uuu"/>
                                 <constraint firstItem="APj-ro-gog" firstAttribute="leading" secondItem="cui-rs-h2J" secondAttribute="leading" id="og2-Sm-AJz"/>
                             </constraints>
                         </view>
