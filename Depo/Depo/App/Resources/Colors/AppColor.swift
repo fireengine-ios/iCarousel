@@ -170,6 +170,7 @@ enum AppColor {
     case premiumSecondGradient
     case premiumThirdGradient
     case premiumGradientLabel
+    case InstaPickGradientOne
     
     // MARK: Landing
     case landingSubtitle

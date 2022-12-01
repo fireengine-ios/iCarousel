@@ -114,18 +114,15 @@ final class InstaPickDetailViewController: BaseViewController {
             return
         }
         isShown = true
-        //containerView.transform = NumericConstants.scaleTransform
         view.alpha = 0
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.view.alpha = 1
-            //self.containerView.transform = .identity
         }
     }
     
     private func close() {
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.view.alpha = 0
-            //self.containerView.transform = NumericConstants.scaleTransform
         }) { _ in
             self.dismiss(animated: false, completion: nil)
         }
@@ -133,9 +130,7 @@ final class InstaPickDetailViewController: BaseViewController {
     
     private func setup() {
         activityManager.delegate = self
-        //containerView.layer.cornerRadius = NumericConstants.instaPickDetailsPopUpCornerRadius
-        collectionView.layer.cornerRadius = NumericConstants.instaPickHashtagCellShadowRadius
-        
+
         prepareToAppear()
         setupPhotoViews()
         setupCollectionView()
@@ -161,10 +156,6 @@ final class InstaPickDetailViewController: BaseViewController {
                 view.isHidden = true
             }
         }
-        
-//        if maxIndex == 0 {
-//            smallPhotosContainerView.isHidden = true
-//        }
     }
     
     private func setupCollectionView() {
@@ -173,17 +164,6 @@ final class InstaPickDetailViewController: BaseViewController {
         collectionView.dataSource = dataSource
         
         collectionView.register(nibCell: InstaPickHashtagCell.self)
-        
-        let shadowView = UIView()
-        shadowView.backgroundColor = .clear
-        collectionView.addSubview(shadowView)
-        shadowView.translatesAutoresizingMaskIntoConstraints = false
-        shadowView.pinToSuperviewEdges()
-        
-        shadowView.layer.shadowColor = UIColor.black.withAlphaComponent(NumericConstants.instaPickHashtagCellShadowColorAlpha).cgColor
-        shadowView.layer.shadowOpacity = NumericConstants.packageViewShadowOpacity
-        shadowView.layer.shadowOffset = .zero
-        shadowView.layer.shadowRadius = NumericConstants.instaPickHashtagCellShadowRadius
     }
     
     private func setupFonts() {
