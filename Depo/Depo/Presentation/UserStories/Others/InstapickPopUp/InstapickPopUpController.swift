@@ -15,59 +15,95 @@ protocol InstapickPopUpControllerDelegate: AnyObject {
 
 final class InstapickPopUpController: UIViewController {
     
-    // MARK: Static
-    static func with(instaNickname: String? = nil) -> InstapickPopUpController? {
-        let vc = controllerWith(instaNickname: instaNickname)
-        return vc
-    }
+    private lazy var scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.backgroundColor = .white
+        sv.layer.cornerRadius = 16
+        sv.clipsToBounds = true
+        sv.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        return sv
+    }()
     
-    private static func controllerWith(instaNickname: String?) -> InstapickPopUpController {
-        let vc = InstapickPopUpController(nibName: "InstapickPopUpController", bundle: nil)
-        
-        if let instaNickname = instaNickname {
-            vc.setInstaNickname(instaNickname: instaNickname)
-        }
-        
-        return vc
-    }
+    private lazy var containerView: UIView = {
+        let view = UIView()
+        return view
+    }()
     
-    // MARK: IBOutlet
-    @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var subtitleLabel: UILabel!
-    @IBOutlet private weak var descriptionLabel: UILabel!
-    @IBOutlet private weak var withoutConnectingButton: UIButton!
-    @IBOutlet private weak var checkBoxLabel: UILabel!
-    @IBOutlet private weak var darkView: UIView!
-    @IBOutlet private weak var connectWithInstaView: ConnectWithInstaView!
+    lazy var titleLabel: UILabel = {
+        let view = UILabel()
+        view.textAlignment = .center
+        view.numberOfLines = 0
+        view.text = TextConstants.instaPickAnlyze
+        view.font = .appFont(.medium, size: 20)
+        view.textColor = AppColor.label.color
+        return view
+    }()
     
-    @IBOutlet private weak var containerView: UIView! {
-        didSet {
-            containerView.layer.masksToBounds = true
-            containerView.layer.cornerRadius = Device.isIpad ? 10 : 5
-        }
-    }
+    lazy var subtitleLabel: UILabel = {
+        let view = UILabel()
+        view.textAlignment = .center
+        view.text = TextConstants.instaPickConnectedAccount
+        view.numberOfLines = 0
+        view.font = .appFont(.medium, size: 16)
+        view.textColor = AppColor.label.color
+        return view
+    }()
     
-    @IBOutlet private weak var shadowView: UIView! {
-        didSet {
-            shadowView.layer.cornerRadius = 2
-            shadowView.layer.shadowColor = UIColor.black.cgColor
-            shadowView.layer.shadowRadius = 10
-            shadowView.layer.shadowOpacity = 0.5
-            shadowView.layer.shadowOffset = .zero
-        }
-    }
+    lazy var descriptionLabel: UILabel = {
+        let view = UILabel()
+        view.textAlignment = .center
+        view.text = TextConstants.instaPickDescription
+        view.numberOfLines = 0
+        view.font = .appFont(.light, size: 16)
+        view.textColor = AppColor.label.color
+        return view
+    }()
     
-    @IBOutlet private weak var checkBoxButton: UIButton! {
-        didSet {
-            checkBoxButton.layer.borderWidth = 1
-            checkBoxButton.layer.borderColor = ColorConstants.switcherGrayColor.cgColor
-        }
-    }
+    lazy var withoutConnectingButton: UIButton = {
+        let view = UIButton()
+        return view
+    }()
+    
+    lazy var withConnectingButton: DarkBlueButton = {
+        let view = DarkBlueButton()
+        return view
+    }()
+    
+    lazy var checkBoxStackView: UIStackView = {
+        let view = UIStackView()
+        view.alignment = .fill
+        view.distribution = .fill
+        view.spacing = 16
+        return view
+    }()
+    
+    lazy var checkBoxButton: UIButton = {
+        let view = UIButton()
+        view.setImage(Image.iconSelectEmpty.image, for: .normal)
+        view.setImage(Image.iconSelectFills.image, for: .selected)
+        return view
+    }()
+    
+    lazy var checkBoxLabel: UILabel = {
+        let view = UILabel()
+        view.textAlignment = .center
+        view.numberOfLines = 0
+        view.text = TextConstants.instaPickDontShowThisAgain
+        view.font = .appFont(.regular, size: 14)
+        view.textColor = AppColor.label.color
+        return view
+    }()
+    
+    lazy var closeButton: UIButton = {
+        let view = UIButton()
+        view.setImage(Image.iconCancelUnborder.image, for: .normal)
+        return view
+    }()
     
     private lazy var instapickRoutingService = InstaPickRoutingService()
     private lazy var accountService = AccountService()
     
-    private var instaNickname: String?
+    var isInstaExist: Bool = false
     private var doNotShowAgain: Bool = false
 
     weak var delegate: InstapickPopUpControllerDelegate?
@@ -75,10 +111,16 @@ final class InstapickPopUpController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupFonts()
-        setupTextColors()
         setupWithoutConnectingButton()
-        configure()
+        setLayout()
+        
+        closeButton.addTarget(self, action: #selector(onCloseTap), for: .touchUpInside)
+        checkBoxButton.addTarget(self, action: #selector(onCheckBoxTap), for: .touchUpInside)
+        withoutConnectingButton.addTarget(self, action: #selector(onWithoutConnectingTap), for: .touchUpInside)
+        withConnectingButton.addTarget(self, action: #selector(configureInsta), for: .touchUpInside)
+        view.backgroundColor = .black.withAlphaComponent(0.6)
+        
+        withConnectingButton.setTitle(isInstaExist ? TextConstants.instaPickConnectedWithInstagramName : TextConstants.instaPickConnectedWithInstagram, for: .normal)
     }
     
     // MARK: Animation
@@ -106,12 +148,10 @@ final class InstapickPopUpController: UIViewController {
             return
         }
         isShown = true
-        shadowView.transform = NumericConstants.scaleTransform
         containerView.transform = NumericConstants.scaleTransform
         view.alpha = 0
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.view.alpha = 1
-            self.shadowView.transform = .identity
             self.containerView.transform = .identity
         }
     }
@@ -119,63 +159,15 @@ final class InstapickPopUpController: UIViewController {
     private func close(completion: VoidHandler? = nil) {
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.view.alpha = 0
-            self.shadowView.transform = NumericConstants.scaleTransform
             self.containerView.transform = NumericConstants.scaleTransform
         }) { _ in
             self.dismiss(animated: false, completion: completion)
         }
     }
     
-    // MARK: Utility methods
-    private func setInstaNickname(instaNickname: String) {
-        self.instaNickname = instaNickname
-    }
-    
-    private func configure() {
-        connectWithInstaView.delegate = self
-        connectWithInstaView.configure(instaNickname: instaNickname)
-        
-        let widthFactor: CGFloat = Device.isIpad ? 0.4 : 0.6
-        descriptionLabel.preferredMaxLayoutWidth = UIScreen.main.bounds.width * widthFactor
-        subtitleLabel.preferredMaxLayoutWidth = UIScreen.main.bounds.width * widthFactor
-        
-        let titleLabelWidthFactor: CGFloat = Device.isIpad ? 0.6 : 0.8
-        titleLabel.preferredMaxLayoutWidth = UIScreen.main.bounds.width * titleLabelWidthFactor
-        titleLabel.text = TextConstants.instaPickAnlyze
-        
-        let paragraphStyle = getParagraphStyle()
-        subtitleLabel.attributedText = NSAttributedString(string: TextConstants.instaPickConnectedAccount,
-                                                             attributes: [.paragraphStyle: paragraphStyle])
-        descriptionLabel.attributedText = NSAttributedString(string: TextConstants.instaPickDescription,
-                                                             attributes: [.paragraphStyle: paragraphStyle])
-        descriptionLabel.text = TextConstants.instaPickDescription
-        checkBoxLabel.text = TextConstants.instaPickDontShowThisAgain
-    }
-    
-    private func setupFonts() {
-        titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 28)
-        subtitleLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
-        descriptionLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
-        checkBoxLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
-    }
-    
-    private func setupTextColors() {
-        titleLabel.textColor = AppColor.marineTwoAndWhite.color
-        subtitleLabel.textColor = AppColor.marineTwoAndWhite.color
-        descriptionLabel.textColor = ColorConstants.darkGrayTransperentColor
-        checkBoxLabel.textColor = ColorConstants.textGrayColor
-    }
-    
-    private func getParagraphStyle() -> NSMutableParagraphStyle {
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 2
-        paragraphStyle.alignment = .center
-        return paragraphStyle
-    }
-    
     private func setupWithoutConnectingButton() {
-        let attributes: [NSAttributedString.Key : Any] = [.font : UIFont.TurkcellSaturaBolFont(size: 16),
-                                          .foregroundColor : UIColor.lrTealishTwo,
+        let attributes: [NSAttributedString.Key : Any] = [.font : UIFont.appFont(.medium, size: 16),
+                                                          .foregroundColor : AppColor.label.color,
                                           .underlineStyle : NSUnderlineStyle.single.rawValue]
         let attributeString = NSMutableAttributedString(string: TextConstants.instaPickConnectedWithoutInstagram,
                                                         attributes: attributes)
@@ -193,6 +185,36 @@ final class InstapickPopUpController: UIViewController {
         }
     }
     
+    @objc private func configureInsta() {
+        if isInstaExist {
+            changeLikePermissionForInstagram()
+        } else {
+            getInstagramConfig()
+        }
+    }
+    
+    private func changeLikePermissionForInstagram() {
+        showSpinnerOnView(containerView)
+
+        accountService.changeInstapickAllowed(isInstapickAllowed: true) { [weak self] response in
+            if let containerView = self?.containerView {
+                self?.hideSpinerForView(containerView)
+            }
+            
+            switch response {
+            case .success(_):
+                DispatchQueue.toMain {
+                    self?.close { [weak self] in
+                        self?.delegate?.onConnectWithInsta()
+                    }
+                }
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.description)
+            }
+        }
+    }
+    
+    // MARK: Actions
     private func getInstagramConfig() {
         showSpinnerOnView(containerView)
 
@@ -220,56 +242,20 @@ final class InstapickPopUpController: UIViewController {
         })
     }
     
-    private func changeLikePermissionForInstagram() {
-        showSpinnerOnView(containerView)
-
-        accountService.changeInstapickAllowed(isInstapickAllowed: true) { [weak self] response in
-            if let containerView = self?.containerView {
-                self?.hideSpinerForView(containerView)
-            }
-            
-            switch response {
-            case .success(_):
-                DispatchQueue.toMain {
-                    self?.close { [weak self] in
-                        self?.delegate?.onConnectWithInsta()
-                    }
-                }
-            case .failed(let error):
-                UIApplication.showErrorAlert(message: error.description)
-            }
-        }
-    }
-    
-    // MARK: Actions
-    @IBAction private func onWithoutConnectingTap(_ sender: Any) {
+    @objc private func onWithoutConnectingTap(_ sender: Any) {
         close { [weak self] in
             self?.delegate?.onConnectWithoutInsta()
         }
     }
     
-    @IBAction private func onCheckBoxTap(_ sender: UIButton) {
+    @objc private func onCheckBoxTap(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         doNotShowAgain = sender.isSelected
     }
     
-    @IBAction private func onCloseTap(_ sender: Any) {
+    @objc private func onCloseTap(_ sender: Any) {
         close()
     }
-    
-}
-
-// MARK: - ConnectWithInstaViewDelegate
-extension InstapickPopUpController: ConnectWithInstaViewDelegate {
-    
-    func onConnectTap() {
-        getInstagramConfig()
-    }
-    
-    func onConnectWithLoginInstaTap() {
-        changeLikePermissionForInstagram()
-    }
-    
 }
 
 // MARK: - InstagramAuthViewControllerDelegate
@@ -290,10 +276,77 @@ extension InstapickPopUpController: InstagramAuthViewControllerDelegate {
                 UIApplication.showErrorAlert(message: error.description)
             }
         }
-        
-        
     }
     
     func instagramAuthCancel() { }
     
+}
+
+extension InstapickPopUpController {
+    func setLayout() {
+        view.addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 270).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).isActive = true
+        
+        scrollView.addSubview(containerView)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        containerView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor).isActive = true
+        
+        containerView.addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 60).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 60).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -60).isActive = true
+        
+        containerView.addSubview(subtitleLabel)
+        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 32).isActive = true
+        subtitleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 60).isActive = true
+        subtitleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -60).isActive = true
+        
+        containerView.addSubview(descriptionLabel)
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 24).isActive = true
+        descriptionLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 60).isActive = true
+        descriptionLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -60).isActive = true
+        
+        containerView.addSubview(withConnectingButton)
+        withConnectingButton.translatesAutoresizingMaskIntoConstraints = false
+        withConnectingButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 40).isActive = true
+        withConnectingButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16).isActive = true
+        withConnectingButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16).isActive = true
+        withConnectingButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        
+        containerView.addSubview(withoutConnectingButton)
+        withoutConnectingButton.translatesAutoresizingMaskIntoConstraints = false
+        withoutConnectingButton.topAnchor.constraint(equalTo: withConnectingButton.bottomAnchor, constant: 40).isActive = true
+        withoutConnectingButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        withoutConnectingButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        
+        containerView.addSubview(checkBoxStackView)
+        checkBoxStackView.translatesAutoresizingMaskIntoConstraints = false
+        checkBoxStackView.topAnchor.constraint(equalTo: withoutConnectingButton.bottomAnchor, constant: 81).isActive = true
+        
+        checkBoxStackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        
+        checkBoxStackView.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        checkBoxStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -40).isActive = true
+        
+        checkBoxStackView.addArrangedSubview(checkBoxButton)
+        checkBoxStackView.addArrangedSubview(checkBoxLabel)
+        
+        containerView.addSubview(closeButton)
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16).isActive = true
+        closeButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 16).isActive = true
+        closeButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        closeButton.widthAnchor.constraint(equalToConstant: 24).isActive = true
+    }
 }
