@@ -1,26 +1,26 @@
 //
-//  CollageInteractor.swift
+//  AnimationInteractor.swift
 //  Depo
 //
-//  Created by Ozan Salman on 28.11.2022.
+//  Created by Ozan Salman on 29.11.2022.
 //  Copyright © 2022 LifeTech. All rights reserved.
 //
 
 import UIKit
 
-class CollageInteractor: BaseFilesGreedInteractor {
+class AnimationInteractor: BaseFilesGreedInteractor {
     
     private lazy var service = ForYouService()
 
     override func getAllItems(sortBy: SortedRules) {
-        debugLog("CollageInteractor getAllItems")
+        debugLog("AnimationInteractor getAllItems")
         
-        getCollages()
+        getAnimation()
     }
     
-    private func getCollages() {
-        debugLog("ForYou getCollages")
-        service.forYouCollages() { [weak self] result in
+    private func getAnimation() {
+        debugLog("ForYou getAnimation")
+        service.forYouAnimations() { [weak self] result in
             switch result {
             case .success(let response):
                 var array = [[BaseDataSourceItem]]()
@@ -38,4 +38,3 @@ class CollageInteractor: BaseFilesGreedInteractor {
         analyticsManager.trackDimentionsEveryClickGA(screen: .myStories)
     }
 }
-

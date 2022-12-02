@@ -60,6 +60,7 @@ enum FieldValue: CustomStringConvertible {
     case cropy
     case story
     case collage
+    case animation
     case all
     case documentsAndMusic
     
@@ -76,6 +77,7 @@ enum FieldValue: CustomStringConvertible {
         case .cropy             : return "true"
         case .story             : return "true"
         case .collage           : return "true"
+        case .animation         : return "true"
         case .all               : return ""
         case .documentsAndMusic : return "audio%20OR%20application%20OR%20text%20NOT%20directory"
         }
@@ -94,6 +96,7 @@ enum FieldValue: CustomStringConvertible {
         case .cropy             : return "true"
         case .story             : return "true"
         case .collage           : return "true"
+        case .animation         : return "true"
         case .all               : return ""
         case .documentsAndMusic : return ""
         }
@@ -107,6 +110,7 @@ enum SearchContentType: CustomStringConvertible {
     case album
     case story
     case collage
+    case animation
     
     var description: String {
         switch self {
@@ -115,7 +119,8 @@ enum SearchContentType: CustomStringConvertible {
         case .favorite     : return "metadata.X-Object-Meta-Favourite"
         case .album        : return "album/photo"
         case .story        : return "metadata.Video-Slideshow"
-        case .collage      : return "metadata.Video-Slideshow"
+        case .collage      : return "content_type"
+        case .animation      : return "content_type"
         }
     }
 }

@@ -1,22 +1,22 @@
 //
-//  CollageInitializer.swift
+//  AnimationsInitializer.swift
 //  Depo
 //
-//  Created by Ozan Salman on 28.11.2022.
+//  Created by Ozan Salman on 29.11.2022.
 //  Copyright © 2022 LifeTech. All rights reserved.
 //
 
 import UIKit
 
-class CollageInitializer: NSObject {
+class AnimationsInitializer: NSObject {
     
-    static var collagesSortTypes: [MoreActionsConfig.SortRullesType] {
+    static var animationsSortTypes: [MoreActionsConfig.SortRullesType] {
         return [.LettersAZ, .LettersZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
     }
     
-    class func initializeCollageController(with nibName: String, moduleOutput: LBAlbumLikePreviewSliderModuleInput?) -> BaseFilesGreedChildrenViewController {
+    class func initializeAnimationController(with nibName: String, moduleOutput: LBAlbumLikePreviewSliderModuleInput?) -> BaseFilesGreedChildrenViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
-        viewController.floatingButtonsArray.append(contentsOf: [.createAStory])
+        viewController.floatingButtonsArray.append(contentsOf: [.upload])
         viewController.isControllerCollageAnimations = true
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .moveToTrash],
@@ -33,11 +33,11 @@ class CollageInitializer: NSObject {
         let router = AlbumsRouter()
         router.presenter = presenter
         
-        let interactor = CollageInteractor(remoteItems: CollageService(requestSize: 140))
+        let interactor = AnimationInteractor(remoteItems: AnimationService(requestSize: 140))
         
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: .List,
-            availableSortTypes: collagesSortTypes,
+            availableSortTypes: animationsSortTypes,
             defaultSortType: .TimeNewOld,
             availableFilter: false,
             showGridListButton: true
@@ -52,8 +52,9 @@ class CollageInitializer: NSObject {
                                topBarConfig: gridListTopBarConfig)
         
         interactor.originalFilters = [.fileType(.photoAlbum)]
-        viewController.mainTitle = localized(.forYouMyCollagesTitle)
+        viewController.mainTitle = localized(.forYouAnimationsTitle)
         
         return viewController
     }
 }
+

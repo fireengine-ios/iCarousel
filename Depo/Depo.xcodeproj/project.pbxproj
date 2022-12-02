@@ -1362,6 +1362,14 @@
 		8930DDB222C8C8C8003CE856 /* CreateStoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8930DDAC22C8C8C8003CE856 /* CreateStoryViewController.xib */; };
 		8930DDB522C8F666003CE856 /* CreateStoryMusicEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930DDB322C8F666003CE856 /* CreateStoryMusicEnterView.swift */; };
 		8930DDB622C8F666003CE856 /* CreateStoryMusicEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930DDB322C8F666003CE856 /* CreateStoryMusicEnterView.swift */; };
+		893269EB29361A26006305A0 /* AnimationsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893269EA29361A26006305A0 /* AnimationsInitializer.swift */; };
+		893269EC29361A26006305A0 /* AnimationsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893269EA29361A26006305A0 /* AnimationsInitializer.swift */; };
+		893269ED29361A26006305A0 /* AnimationsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893269EA29361A26006305A0 /* AnimationsInitializer.swift */; };
+		893269EE29361A27006305A0 /* AnimationsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893269EA29361A26006305A0 /* AnimationsInitializer.swift */; };
+		893269F429361AE7006305A0 /* AnimationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893269F329361AE7006305A0 /* AnimationInteractor.swift */; };
+		893269F529361AE7006305A0 /* AnimationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893269F329361AE7006305A0 /* AnimationInteractor.swift */; };
+		893269F629361AE7006305A0 /* AnimationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893269F329361AE7006305A0 /* AnimationInteractor.swift */; };
+		893269F729361AE7006305A0 /* AnimationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893269F329361AE7006305A0 /* AnimationInteractor.swift */; };
 		8934DD6E23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8934DD6C23069599006B0998 /* EmailVerifiedPopUp.xib */; };
 		8934DD6F23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8934DD6C23069599006B0998 /* EmailVerifiedPopUp.xib */; };
 		8938AE872930C264004970F2 /* DeleteListSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938AE862930C264004970F2 /* DeleteListSectionHeader.swift */; };
@@ -10600,6 +10608,8 @@
 		8930DDAB22C8C8C8003CE856 /* CreateStoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStoryViewController.swift; sourceTree = "<group>"; };
 		8930DDAC22C8C8C8003CE856 /* CreateStoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateStoryViewController.xib; sourceTree = "<group>"; };
 		8930DDB322C8F666003CE856 /* CreateStoryMusicEnterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStoryMusicEnterView.swift; sourceTree = "<group>"; };
+		893269EA29361A26006305A0 /* AnimationsInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationsInitializer.swift; sourceTree = "<group>"; };
+		893269F329361AE7006305A0 /* AnimationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationInteractor.swift; sourceTree = "<group>"; };
 		893472AC172AD231AE3CCC5B /* Pods_LifeboxWidgetExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxWidgetExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8934DD6C23069599006B0998 /* EmailVerifiedPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmailVerifiedPopUp.xib; sourceTree = "<group>"; };
 		8938AE862930C264004970F2 /* DeleteListSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteListSectionHeader.swift; sourceTree = "<group>"; };
@@ -14636,6 +14646,7 @@
 				984F8E7E200CE10100D9D595 /* StoriesInitializer.swift */,
 				89959F072934B361000135DE /* CollageInitializer.swift */,
 				F036B15727623119005A2D7E /* SpotlightSearchHelper.swift */,
+				893269EA29361A26006305A0 /* AnimationsInitializer.swift */,
 			);
 			path = Configurator;
 			sourceTree = "<group>";
@@ -18356,6 +18367,7 @@
 				27FAC31E7C059BFB2F435773 /* AlbumsInteractor.swift */,
 				984F8E7C200CDEA200D9D595 /* StoriesInteractor.swift */,
 				89959F022934B00E000135DE /* CollageInteractor.swift */,
+				893269F329361AE7006305A0 /* AnimationInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -25757,6 +25769,7 @@
 				98231A0524F3A1E700FD16E2 /* SliderView.swift in Sources */,
 				89256CE3292699B600FAD38E /* DiscoverTableViewCell.swift in Sources */,
 				B56FBB292122C4BA004F4A59 /* TermsOfUseRouterInput.swift in Sources */,
+				893269EB29361A26006305A0 /* AnimationsInitializer.swift in Sources */,
 				8CEE8D26214A473200150996 /* FaceImageDesigner.swift in Sources */,
 				CE00B24F2202FB4600A5A696 /* PhotoCell.swift in Sources */,
 				9842FC102563D34800B07606 /* PrivateShareContactCell.swift in Sources */,
@@ -26869,6 +26882,7 @@
 				8C0E8F6E1FDEBDFF00789C91 /* SelectFolderViewController.swift in Sources */,
 				8C0E8F6F1FDEBDFF00789C91 /* SelectFolderPresenter.swift in Sources */,
 				8C0E8F701FDEBDFF00789C91 /* AlbumCollectionViewCell.swift in Sources */,
+				893269F429361AE7006305A0 /* AnimationInteractor.swift in Sources */,
 				8C0E8F711FDEBDFF00789C91 /* SelectFolderInitializer.swift in Sources */,
 				98231A8E24F3A23500FD16E2 /* AdeleFilter.swift in Sources */,
 				8C0E8F721FDEBDFF00789C91 /* FreeUpSpacePopUp.swift in Sources */,
@@ -27990,6 +28004,7 @@
 				F0743DCB28B4C63100CC1F24 /* BottomInfoBanner.swift in Sources */,
 				98A86D7023A2795B00438225 /* HiddenPhotosDataLoader.swift in Sources */,
 				893DCFED292B866B00271379 /* DiscoverViewController.swift in Sources */,
+				893269ED29361A26006305A0 /* AnimationsInitializer.swift in Sources */,
 				076BD1A927BBBE02004609E3 /* MapSearchInteractorOutput.swift in Sources */,
 				07620291269B83F600D4FB2C /* OverlayAnimationService.swift in Sources */,
 				8CBD3A7F2306D4B3005FF1C9 /* RequestService.swift in Sources */,
@@ -28130,6 +28145,7 @@
 				CE78498C22A685FB00662219 /* BottomSelectionTabBarRouter.swift in Sources */,
 				CE78498D22A685FB00662219 /* PasswordCell.swift in Sources */,
 				CE78498E22A685FB00662219 /* PremiumInitializer.swift in Sources */,
+				893269F629361AE7006305A0 /* AnimationInteractor.swift in Sources */,
 				0303ED8C23BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift in Sources */,
 				CE78498F22A685FB00662219 /* RegistrationViewInput.swift in Sources */,
 				CF7146A924B597A900D83E60 /* ContactBackupHistoryPopupFactory.swift in Sources */,
@@ -30108,6 +30124,7 @@
 				CF8B65C523CBC9D70021B021 /* HomePageInteractor.swift in Sources */,
 				CF83CF31243F1630009DF60F /* BackgroundSyncOperation.swift in Sources */,
 				07567DA62721DFBC00557BCF /* DeleteAccountPopUp.swift in Sources */,
+				893269F529361AE7006305A0 /* AnimationInteractor.swift in Sources */,
 				CF7146A724B597A900D83E60 /* ContactBackupHistoryPopupFactory.swift in Sources */,
 				07915DCE27F5B32000807EAB /* NavigationBarStyling.swift in Sources */,
 				CF8B65C623CBC9D70021B021 /* QuickScrollItems.swift in Sources */,
@@ -30223,6 +30240,7 @@
 				F0571EA2288AE33700A0D6AC /* ForYouViewController.swift in Sources */,
 				B55C97072559353800623C5C /* PrivateShareLocalSuggestionsViewController.swift in Sources */,
 				98B047E4259314750011DAEB /* BackupStats.m in Sources */,
+				893269EC29361A26006305A0 /* AnimationsInitializer.swift in Sources */,
 				CF8B661723CBC9D70021B021 /* FaceImagePhotosInitializer.swift in Sources */,
 				CF8B661823CBC9D70021B021 /* LocalMediaStorage.swift in Sources */,
 				CF8B661923CBC9D70021B021 /* BottomSelectionTabBarViewOutput.swift in Sources */,
@@ -31209,6 +31227,7 @@
 				CF8B6B9823CBCA280021B021 /* FaceImageItemsViewOutput.swift in Sources */,
 				52F78BA728D9E036001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */,
 				CF8B6B9923CBCA280021B021 /* MusicInteractorInput.swift in Sources */,
+				893269EE29361A27006305A0 /* AnimationsInitializer.swift in Sources */,
 				F034DF2A274A544200E5C015 /* AlbumCountResponse.swift in Sources */,
 				07DB93922860AF5400D5CACF /* ASN1Container.swift in Sources */,
 				CF7146CE24B597A900D83E60 /* BackUpContactsCard.swift in Sources */,
@@ -31481,6 +31500,7 @@
 				CF8B6C6223CBCA280021B021 /* PremiumInteractorInput.swift in Sources */,
 				CF8B6C6323CBCA280021B021 /* SharedService.swift in Sources */,
 				B58D36AE2509FF3A00FFF101 /* MTIConvert.swift in Sources */,
+				893269F729361AE7006305A0 /* AnimationInteractor.swift in Sources */,
 				98B04821259314750011DAEB /* ContactSyncSDK.m in Sources */,
 				CF8B6C6423CBCA280021B021 /* SecurityCodeTextField.swift in Sources */,
 				CF8B6C6523CBCA280021B021 /* SpotifySortingManager.swift in Sources */,

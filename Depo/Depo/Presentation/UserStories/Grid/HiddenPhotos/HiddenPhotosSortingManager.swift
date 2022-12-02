@@ -21,7 +21,8 @@ final class HiddenPhotosSortingManager {
         availableSortTypes: sortTypes,
         defaultSortType: .TimeNewOld,
         availableFilter: false,
-        showGridListButton: false
+        showGridListButton: false,
+        showMoreButton: false
     )
     
     private weak var delegate: HiddenPhotosSortingManagerDelegate?

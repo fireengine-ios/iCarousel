@@ -12,4 +12,5 @@ enum Images {
     static var noDocuments: UIImage { return #imageLiteral(resourceName: "ImageNoDocuments") }
     static var threeDots: UIImage { return #imageLiteral(resourceName: "more") }
     static var search: UIImage { return #imageLiteral(resourceName: "search") }
+    static var iconThreeDots: UIImage { return self.iconThreeDots }
 }

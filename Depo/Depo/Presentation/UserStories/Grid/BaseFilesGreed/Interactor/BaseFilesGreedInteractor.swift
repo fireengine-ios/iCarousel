@@ -135,7 +135,6 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
             remoteItems is MusicService || 
             remoteItems is DocumentService ||
             remoteItems is StoryService ||
-            remoteItems is CollageService ||
             remoteItems is AlbumService ||
             remoteItems is AllFilesService ||
             remoteItems is FavouritesService ||

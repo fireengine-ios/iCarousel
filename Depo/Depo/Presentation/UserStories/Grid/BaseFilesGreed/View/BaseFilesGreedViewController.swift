@@ -30,6 +30,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     var isAlbumList: Bool = false
     
+    var isControllerCollageAnimations: Bool = false
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var noFilesView: UIView!
@@ -189,12 +191,22 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             self?.output.openCreateNewAlbum()
         })
         
+        let upload = NavBarWithAction(navItem: NavigationBarList().plus, action: { [weak self] _ in
+            self?.output.openUpload()
+        })
+        
         var rightActions: [NavBarWithAction] = []
         if isAlbumList {
             rightActions.append(newAlbum)
         } else {
             rightActions.append(newStory)
         }
+        
+        if isControllerCollageAnimations {
+            rightActions.removeAll()
+            rightActions.append(upload)
+        }
+        
         search.navItem.imageInsets.left = 28
         
         rightActions.append(search)

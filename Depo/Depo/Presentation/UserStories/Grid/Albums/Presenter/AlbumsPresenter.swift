@@ -23,7 +23,7 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
 
         super.viewIsReady(collectionView: collectionView)
         
-        NotificationCenter.default.post(name: .showPlusTabBar, object: nil)
+        //NotificationCenter.default.post(name: .showPlusTabBar, object: nil)
     }
 
     override func viewWillAppear() {
@@ -34,7 +34,7 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
     override func viewWillDisappear() {
         super.viewWillDisappear()
         
-        sliderModuleOutput?.reload(types: [.story, .albums, .collage])
+        sliderModuleOutput?.reload(types: [.story, .albums])
     }
 
     override func uploadData(_ searchText: String! = nil) {
