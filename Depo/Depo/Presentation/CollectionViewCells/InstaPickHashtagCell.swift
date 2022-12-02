@@ -28,6 +28,7 @@ final class InstaPickHashtagCell: UICollectionViewCell {
     private func setup() {
         hashtagLabel.font = .appFont(.light, size: 14)
         hashtagLabel.textColor = AppColor.label.color
+        hashtagLabel.adjustsFontSizeToFitWidth = true
         
         shadowView.layer.cornerRadius = NumericConstants.instaPickHashtagCellCornerRadius
         shadowView.backgroundColor = AppColor.secondaryTint.color

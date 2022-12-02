@@ -44,9 +44,9 @@ final class InstaPickDetailViewController: BaseViewController {
         willSet {
             newValue.layer.cornerRadius = 16
             newValue.layer.shadowOffset = .zero
-            newValue.layer.shadowOpacity = 0.3
+            newValue.layer.shadowOpacity = 0.2
             newValue.layer.shadowRadius = 16
-            newValue.layer.shadowColor = UIColor.black.withAlphaComponent(0.3).cgColor
+            newValue.layer.shadowColor = UIColor.black.withAlphaComponent(0.2).cgColor
             newValue.clipsToBounds = true
         }
     }
@@ -175,11 +175,11 @@ final class InstaPickDetailViewController: BaseViewController {
         analysisLeftLabel.font = .appFont(.medium, size: isIPad ? 26 : 16)
         analysisLeftLabel.textColor = AppColor.label.color
         
-        hashTagsLabel.font = UIFont.TurkcellSaturaDemFont(size: isIPad ? 24 : 18)
+        hashTagsLabel.font = .appFont(.medium, size: isIPad ? 26 : 16)
         hashTagsLabel.textColor = AppColor.marineTwoAndWhite.color
         
         copyToClipboardButton.titleLabel?.font = .appFont(.medium, size: isIPad ? 26 : 16)
-        copyToClipboardButton.setTitleColor(AppColor.label.color, for: .normal)
+        copyToClipboardButton.setTitleColor(AppColor.tint.color, for: .normal)
     }
 
     private func setupTexts() {

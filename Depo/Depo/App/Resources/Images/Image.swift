@@ -108,6 +108,10 @@ enum Image: String, AppImage {
     case iconTabShare
     case iconTabStar
     case iconTabDelete
+    ///NoImage/PhotoPick
+    case iconPickNoAlbums
+    case iconPickNoFavorites
+    case iconPickNoPhotos
     
     ///  Files Tab
     case iconFileAudio

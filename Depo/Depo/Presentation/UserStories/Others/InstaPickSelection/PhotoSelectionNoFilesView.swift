@@ -10,6 +10,8 @@ import UIKit
 
 class PhotoSelectionNoFilesView: UIView, NibInit {
     
+    var action: VoidHandler?
+    
     @IBOutlet weak private var noPhotosLabel: UILabel! {
         didSet {
             noPhotosLabel.textColor = AppColor.label.color
@@ -17,6 +19,8 @@ class PhotoSelectionNoFilesView: UIView, NibInit {
             noPhotosLabel.text = TextConstants.thereAreNoPhotos
         }
     }
+    
+    @IBOutlet weak var noPhotos: UIImageView!
     
     var text:String? {
         get {

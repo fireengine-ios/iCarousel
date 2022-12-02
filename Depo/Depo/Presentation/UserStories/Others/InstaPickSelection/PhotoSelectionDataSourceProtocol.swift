@@ -5,6 +5,7 @@ protocol PhotoSelectionDataSourceProtocol {
     func reset()
     func getNext(handler: @escaping (ResponseResult<[SearchItemResponse]>) -> Void)
     func getNoFilesMessage() -> String?
+    func getNoFilesPhoto() -> UIImage
 }
 
 final class AllPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
@@ -80,6 +81,10 @@ final class AllPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
     func getNoFilesMessage() -> String? {
         return TextConstants.thereAreNoPhotosAll
     }
+    
+    func getNoFilesPhoto() -> UIImage {
+        return Image.iconPickNoPhotos.image
+    }
 }
 
 final class AlbumPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
@@ -146,7 +151,11 @@ final class AlbumPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
     }
     
     func getNoFilesMessage() -> String? {
-        return nil
+        return "Henüz hiç Albüm oluşturulmamış"
+    }
+    
+    func getNoFilesPhoto() -> UIImage {
+        return Image.iconPickNoAlbums.image
     }
 }
 
@@ -210,8 +219,12 @@ final class FavoritePhotosSelectionDataSource: PhotoSelectionDataSourceProtocol 
             }
         }
     }
-    
+
     func getNoFilesMessage() -> String? {
         return TextConstants.thereAreNoPhotosFavorites
+    }
+    
+    func getNoFilesPhoto() -> UIImage {
+        return Image.iconPickNoFavorites.image
     }
 }
