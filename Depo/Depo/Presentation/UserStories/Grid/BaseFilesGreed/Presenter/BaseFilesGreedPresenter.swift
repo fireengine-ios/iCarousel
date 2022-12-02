@@ -794,6 +794,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         router.openCreateNewAlbum()
     }
     
+    func openUpload() {
+        router.openUpload()
+    }
+    
     // MARK: - View outbut/ TopBar/UnderNavBarBar Delegates
     
     func viewAppearanceChangedTopBar(asGrid: Bool) {

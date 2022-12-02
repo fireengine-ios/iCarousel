@@ -22,18 +22,20 @@ final class HSCompletionPopUp: BasePopUpController {
 
     @IBOutlet private weak var popUpView: UIView! {
         willSet {
-            newValue.layer.cornerRadius = 5
-
-            newValue.layer.shadowRadius = 5
+            newValue.layer.cornerRadius = 15
+            newValue.layer.shadowRadius = 15
             newValue.layer.shadowOpacity = 0.5
             newValue.layer.shadowColor = UIColor.black.cgColor
             newValue.layer.shadowOffset = .zero
+            newValue.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         }
     }
 
     @IBOutlet private weak var darkView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.backgroundViewColor
+            newValue.backgroundColor = UIColor.clear
+            newValue.layer.cornerRadius = 15
+           
         }
     }
 
@@ -48,34 +50,37 @@ final class HSCompletionPopUp: BasePopUpController {
     @IBOutlet private weak var statusImageView: UIImageView! {
         willSet {
             newValue.contentMode = .scaleAspectFit
-            newValue.image = PopUpImage.hide.image
+            newValue.image = PopUpImage.unhide.image
         }
     }
 
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.textAlignment = .center
+            newValue.font = .appFont(.regular, size: 16)
+            newValue.textColor = AppColor.label.color
             newValue.numberOfLines = 0
         }
     }
 
-    @IBOutlet private weak var openHiddenAlbumButton: UIButton! {
-        willSet {
-            newValue.setTitle(TextConstants.hideSuccessPopupButtonTitle, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaMedFont(size: 14)
-            newValue.setTitleColor(UIColor.lrTealishTwo, for: .normal)
-        }
-    }
+//    @IBOutlet private weak var openHiddenAlbumButton: UIButton! {
+//        willSet {
+//            newValue.isHidden = true
+//            newValue.setTitle(TextConstants.hideSuccessPopupButtonTitle, for: .normal)
+//            newValue.titleLabel?.font = UIFont.TurkcellSaturaMedFont(size: 14)
+//            newValue.setTitleColor(UIColor.lrTealishTwo, for: .normal)
+//        }
+//    }
 
-    @IBOutlet private weak var gradientView: TransparentGradientView! {
-        willSet {
-            newValue.backgroundColor = AppColor.secondaryBackground.color.withAlphaComponent(0.8)
-            newValue.isFlipedColors = true
-            newValue.style = .horizontal
-        }
-    }
+//    @IBOutlet private weak var gradientView: TransparentGradientView! {
+//        willSet {
+//            newValue.backgroundColor = AppColor.secondaryBackground.color.withAlphaComponent(0.8)
+//            newValue.isFlipedColors = true
+//            newValue.style = .horizontal
+//        }
+//    }
 
-    @IBOutlet private weak var previewAlbumsImageView: UIImageView!
+//    @IBOutlet private weak var previewAlbumsImageView: UIImageView!
 
     //MARK: smartAlbumsAdditionsParentView
 
@@ -84,8 +89,8 @@ final class HSCompletionPopUp: BasePopUpController {
     @IBOutlet private weak var smartAlbumTitleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.hideSuccessedAlertPeopleAlbumTitle
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 18)
-            newValue.textColor = ColorConstants.darkText
+            newValue.font = .appFont(.medium, size: 20)
+            newValue.textColor = AppColor.label.color
             newValue.textAlignment = .center
             newValue.numberOfLines = 0
         }
@@ -94,8 +99,8 @@ final class HSCompletionPopUp: BasePopUpController {
     @IBOutlet weak var smartAlbumDescriptionLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.hideSuccessedAlertPeopleAlbumDescription
-            newValue.font = UIFont.TurkcellSaturaFont(size: 18)
-            newValue.textColor = AppColor.darkTextAndLightGray.color
+            newValue.font = .appFont(.regular, size: 16)
+            newValue.textColor = AppColor.label.color
             newValue.textAlignment = .center
             newValue.numberOfLines = 0
         }
@@ -116,17 +121,17 @@ final class HSCompletionPopUp: BasePopUpController {
     @IBOutlet private weak var doNotShowAgainLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.hideSuccessedAlertDoNotShowAgain
-            newValue.font = UIFont.TurkcellSaturaFont(size: 16)
-            newValue.textColor = UIColor.lrBrownishGrey
+            newValue.font = .appFont(.regular, size: 16)
+            newValue.textColor = AppColor.label.color
         }
     }
 
-    @IBOutlet private weak var viewPeopleAlbumButton: RoundedInsetsButton! {
+    @IBOutlet private weak var viewPeopleAlbumButton: HideInsetsRoundedButton! {
         willSet {
             newValue.setTitle(TextConstants.hideSuccessedAlertViewPeopleAlbum, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
-            newValue.backgroundColor = UIColor.lrTealishTwo
+            newValue.titleLabel?.font = .appFont(.medium, size: 16)
+            newValue.backgroundColor = AppColor.darkBlueColor.color
         }
     }
 
@@ -191,6 +196,8 @@ final class HSCompletionPopUp: BasePopUpController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.view.layer.cornerRadius = 15
+        self.view.layer.masksToBounds = true
         contentView = popUpView
 
         configureAppearance()
@@ -212,13 +219,15 @@ final class HSCompletionPopUp: BasePopUpController {
         case .showOpenSmartAlbumButton:
             let title = isSingleImage ? TextConstants.hideSuccessedAlertWithPeopleAlbumTitle : TextConstants.hideSuccessPopupMessage
             titleLabel.text = title
-            titleLabel.font = UIFont.TurkcellSaturaMedFont(size: 18)
-            titleLabel.textColor = UIColor.lrLightBrownishGrey
+            titleLabel.textAlignment = .center
+            titleLabel.font = .appFont(.regular, size: 16)
+            titleLabel.textColor = AppColor.label.color
 
             bottomButtonParentView.isHidden = true
 
         case .showBottomCloseButton:
             let title = isSingleImage ? TextConstants.hideSuccessedAlertTitle : TextConstants.hideSuccessPopupMessage
+            titleLabel.text = title
             titleLabel.text = title
             titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
             titleLabel.textColor = ColorConstants.darkBlueColor
@@ -234,20 +243,22 @@ final class HSCompletionPopUp: BasePopUpController {
             
             hiddenAlbumParentView.arrangedSubviews.forEach { $0.isHidden = true }
             bottomButtonParentView.isHidden = true
-
-            titleLabel.text = TextConstants.smashSuccessedAlertTitle
-            titleLabel.font = UIFont.TurkcellSaturaMedFont(size: 18)
-            titleLabel.textColor = UIColor.lrLightBrownishGrey
+            
+            titleLabel.text = title
+            titleLabel.textAlignment = .center
+            titleLabel.font = .appFont(.regular, size: 16)
+            titleLabel.textColor = AppColor.label.color
 
             smartAlbumTitleLabel.text = TextConstants.smashSuccessedAlertSecondTitle
-            smartAlbumTitleLabel.textColor = ColorConstants.darkBlueColor
+            smartAlbumTitleLabel.textColor = AppColor.label.color
             smartAlbumDescriptionLabel.text = TextConstants.smashSuccessedAlertDescription
             
         case .hiddenAlbums:
             let title = isSingleImage ? TextConstants.hideSingleAlbumSuccessPopupMessage : TextConstants.hideAlbumsSuccessPopupMessage
             titleLabel.text = title
-            titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
-            titleLabel.textColor = ColorConstants.darkBlueColor
+            titleLabel.textAlignment = .center
+            titleLabel.font = .appFont(.regular, size: 16)
+            titleLabel.textColor = AppColor.label.color
             
             smartAlbumsAdditionsParentView.isHidden = true
             bottomButtonParentView.isHidden = true
@@ -255,18 +266,48 @@ final class HSCompletionPopUp: BasePopUpController {
             bottomOffset.constant = 39
         }
 
-        previewAlbumsImageView.image = UIImage(named: "smartAlbumsDummy")
+//        previewAlbumsImageView.image = UIImage(named: "smartAlbumsDummy")
     }
 
     //MARK: IBAction
-
-    @IBAction private func onOpenHiddenAlbumTap(_ sender: Any) {
-        close(isFinalStep: false) {
-            //TODO: Need to change to delegate.openHiddenBin() in future
-            //now delegate == nil if hide album (custom or FIR) inside himself
-            self.openHiddenBin()
+    
+    @IBOutlet weak var rectangleView1: UIView! {
+        willSet {
+            newValue.layer.cornerRadius = 5
+            newValue.layer.shadowRadius = 1
+            newValue.layer.shadowOpacity = 0.5
+            newValue.layer.shadowColor = UIColor.black.cgColor
+            newValue.layer.shadowOffset = .zero
         }
     }
+    
+    @IBOutlet weak var rectangleView2: UIView! {
+        willSet {
+            newValue.layer.cornerRadius = 5
+            newValue.layer.shadowRadius = 2
+            newValue.layer.shadowOpacity = 0.5
+            newValue.layer.shadowColor = UIColor.black.cgColor
+            newValue.layer.shadowOffset = .zero
+        }
+    }
+    
+    @IBOutlet weak var rectangleView3: UIView! {
+        willSet {
+            newValue.layer.cornerRadius = 5
+            newValue.layer.shadowRadius = 3
+            newValue.layer.shadowOpacity = 0.5
+            newValue.layer.shadowColor = UIColor.black.cgColor
+            newValue.layer.shadowOffset = .zero
+        }
+    }
+    
+//    @IBAction private func onOpenHiddenAlbumTap(_ sender: Any) {
+//        close(isFinalStep: false) {
+//            //TODO: Need to change to delegate.openHiddenBin() in future
+//            //now delegate == nil if hide album (custom or FIR) inside himself
+//            self.openHiddenBin()
+//        }
+//    }
     
     private func openHiddenBin() {
         if #available(iOS 13, *) {

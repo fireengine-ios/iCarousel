@@ -295,6 +295,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     override func operationFinished(type: ElementTypes) {
         let topVC = UIApplication.topController()
         show(animated: true, onView: topVC?.view)
+        dismiss(animated: false)
         completeAsyncOperationEnableScreen()
         view.unselectAll()
         basePassingPresenter?.operationFinished(withType: type, response: nil)

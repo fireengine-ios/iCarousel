@@ -41,6 +41,9 @@ final class ForYouRouter: ForYouRouterInput {
         case .collages:
             let collage = router.collageListController()
             router.pushViewController(viewController: collage)
+        case .animations:
+            let animation = router.animationListController()
+            router.pushViewController(viewController: animation)
         default:
             break
         }

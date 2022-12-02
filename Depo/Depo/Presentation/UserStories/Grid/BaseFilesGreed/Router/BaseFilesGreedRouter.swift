@@ -116,4 +116,10 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
         let nController = NavigationController(rootViewController: controller)
         router.presentViewController(controller: nController)
     }
+    
+    func openUpload() {
+        let controller = router.uploadPhotos()
+        let nController = NavigationController(rootViewController: controller)
+        router.presentViewController(controller: nController)
+    }
 }

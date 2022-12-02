@@ -45,4 +45,6 @@ final class PhotoVideoBottomBarManager {
     func hide() {
         bottomBarPresenter.dismissWithNotification()
     }
+    
+    
 }

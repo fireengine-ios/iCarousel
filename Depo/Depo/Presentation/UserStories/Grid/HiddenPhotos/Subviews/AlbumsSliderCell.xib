@@ -76,9 +76,10 @@
                 <outlet property="collectionView" destination="qbz-tR-o2i" id="YPL-Kh-mJy"/>
                 <outlet property="containerView" destination="8Ta-lc-0QP" id="sH2-KF-Vvi"/>
                 <outlet property="emptyLabel" destination="CSA-ye-utE" id="xFv-2Z-5a2"/>
+                <outlet property="rightConstraint" destination="qdw-wJ-uir" id="S2J-PZ-qGs"/>
                 <outlet property="titleLabel" destination="wdO-4I-POP" id="DUF-Ve-tzl"/>
             </connections>
-            <point key="canvasLocation" x="44.927536231884062" y="104.46428571428571"/>
+            <point key="canvasLocation" x="78.260869565217391" y="101.78571428571428"/>
         </collectionViewCell>
     </objects>
     <resources>

@@ -22,7 +22,7 @@ final class HiddenPhotosNavbarManager {
                                                     target: self,
                                                     selector: #selector(onCancel))
     
-    private lazy var moreButton = UIBarButtonItem(image: Images.threeDots,
+    private lazy var moreButton = UIBarButtonItem(image: Image.iconThreeDotsHorizontal.image,
                                                  style: .plain,
                                                  target: self,
                                                  action: #selector(onMore))
@@ -42,7 +42,8 @@ final class HiddenPhotosNavbarManager {
         moreButton.isEnabled = true
         delegate?.setTitle(withString: TextConstants.hiddenBinNavBarTitle, andSubTitle: type.descriptionForTitle)
         delegate?.setLeftBarButtonItems(nil, animated: true)
-        delegate?.setRightBarButtonItems([moreButton, searchButton], animated: true)
+        //delegate?.setRightBarButtonItems([moreButton, searchButton], animated: true)
+        delegate?.setRightBarButtonItems([moreButton], animated: true)
     }
     
     func setSelectionState() {

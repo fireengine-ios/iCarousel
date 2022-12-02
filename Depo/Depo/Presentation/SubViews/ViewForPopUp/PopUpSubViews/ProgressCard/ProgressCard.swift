@@ -37,7 +37,6 @@ final class ProgressCard: BaseCardView, ProgressCardProtocol {
         willSet {
             newValue.font = .appFont(.regular, size: 12)
             newValue.textColor = AppColor.tabBarCardLabel.color
-            newValue.text = TextConstants.uploading
             newValue.numberOfLines = 1
             newValue.minimumScaleFactor = 0.5
         }
@@ -53,6 +52,7 @@ final class ProgressCard: BaseCardView, ProgressCardProtocol {
         willSet {
             newValue.font = .appFont(.medium, size: 12)
             newValue.textColor = AppColor.tabBarCardLabel.color
+            newValue.text = TextConstants.uploading
             newValue.numberOfLines = 1
             newValue.minimumScaleFactor = 0.5
         }
@@ -89,10 +89,14 @@ final class ProgressCard: BaseCardView, ProgressCardProtocol {
         guard let ready = readyItems else {
             return
         }
-//        let progressValue = Float(ready) / Float(all)
-//        progress.progress = progressValue
-        let progressText = String(format: TextConstants.uploading, ready, all)
-        loadingLabel.text = progressText
+        let progressValue = Float(ready) / Float(all)
+        progress.progress = progressValue
+       
+//        let progressText = String(format: TextConstants.uploading, ready, all)
+//        progressLabel.text = progressText
+        
+        let progressText = String(format: TextConstants.popUpProgress, ready, all)
+        progressLabel.text = progressText
         
         if let typeOfOperation = typeOfOperation, ReachabilityService.shared.isReachable {
             configurateWithType(viewType: typeOfOperation)

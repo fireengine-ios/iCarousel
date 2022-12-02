@@ -112,7 +112,7 @@ extension HideActionService {
         
         return PopUpController.with(title: title,
                                     message: makeConfirmMessage(),
-                                    image: .hide,
+                                    image: .unhide,
                                     firstButtonTitle: TextConstants.cancel,
                                     secondButtonTitle: TextConstants.ok,
                                     firstAction: cancelHandler,
@@ -176,7 +176,7 @@ extension HideActionService {
     
     private func onSuccess() {
         success?()
-        
+
         if needShowPopup() {
             showSuccessPopUp()
         } else if let items = items {
@@ -197,6 +197,7 @@ extension HideActionService {
             switch items {
             case .photos(let photos):
                 SnackbarManager.shared.show(elementType: .hide, relatedItems: photos, itemsType: .items, handler: handler)
+                
             case .albums(let albums):
                 SnackbarManager.shared.show(elementType: .hide, relatedItems: albums, itemsType: .albums, handler: handler)
             }

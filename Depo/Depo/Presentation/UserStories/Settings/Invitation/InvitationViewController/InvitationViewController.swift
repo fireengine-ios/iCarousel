@@ -232,27 +232,34 @@ class InvitationViewController: BaseViewController {
     }
                               
     private func setupViewWithObject(campaign: InvitationCampaignResponse) {
-        if #available(iOS 12.0, *) {
-            if self.traitCollection.userInterfaceStyle == .light {
-                let hexColor = AppColor.campaignContentLabel.color.toHexString()
-                campaignContentLabel.attributedText = campaign.value.content.convertHtmlToAttributedStringWithCSS(font: .appFont(.medium, size: 12), csscolor: hexColor, lineheight: 5, csstextalign: "left")
-            } else {
-                let hexColor = "#ECECEC"
-                campaignContentLabel.attributedText = campaign.value.content.convertHtmlToAttributedStringWithCSS(font: .appFont(.medium, size: 12), csscolor: hexColor, lineheight: 5, csstextalign: "left")
-            }
-        } else if #available(iOS 16.1, *) {
-            if self.traitCollection.userInterfaceStyle == .light {
-                let hexColor = AppColor.campaignContentLabel.color.toHexString()
-                campaignContentLabel.attributedText = campaign.value.content.convertHtmlToAttributedStringWithCSS(font: .appFont(.medium, size: 12), csscolor: hexColor, lineheight: 5, csstextalign: "left")
-            } else {
-                let hexColor = "#ECECEC"
-                campaignContentLabel.attributedText = campaign.value.content.convertHtmlToAttributedStringWithCSS(font: .appFont(.medium, size: 12), csscolor: hexColor, lineheight: 5, csstextalign: "left")
-            }
-        } else {
-            let hexColor = "#ECECEC"
-            campaignContentLabel.attributedText = campaign.value.content.convertHtmlToAttributedStringWithCSS(font: .appFont(.medium, size: 12), csscolor: hexColor, lineheight: 5, csstextalign: "left")
-        }
+//        if #available(iOS 12.0, *) {
+//            if self.traitCollection.userInterfaceStyle == .light {
+//                let hexColor = AppColor.campaignContentLabel.color.toHexString()
+//                campaignContentLabel.attributedText = campaign.value.content.convertHtmlToAttributedStringWithCSS(font: .appFont(.medium, size: 12), csscolor: hexColor, lineheight: 5, csstextalign: "left")
+//            } else {
+//                let hexColor = "#ECECEC"
+//                campaignContentLabel.attributedText = campaign.value.content.convertHtmlToAttributedStringWithCSS(font: .appFont(.medium, size: 12), csscolor: hexColor, lineheight: 5, csstextalign: "left")
+//            }
+//        } else if #available(iOS 16.1, *) {
+//            if self.traitCollection.userInterfaceStyle == .light {
+//                let hexColor = AppColor.campaignContentLabel.color.toHexString()
+//                campaignContentLabel.attributedText = campaign.value.content.convertHtmlToAttributedStringWithCSS(font: .appFont(.medium, size: 12), csscolor: hexColor, lineheight: 5, csstextalign: "left")
+//            } else {
+//                let hexColor = "#ECECEC"
+//                campaignContentLabel.attributedText = campaign.value.content.convertHtmlToAttributedStringWithCSS(font: .appFont(.medium, size: 12), csscolor: hexColor, lineheight: 5, csstextalign: "left")
+//            }
+//        } else {
+//            let hexColor = "#ECECEC"
+//            campaignContentLabel.attributedText = campaign.value.content.convertHtmlToAttributedStringWithCSS(font: .appFont(.medium, size: 12), csscolor: hexColor, lineheight: 5, csstextalign: "left")
+//        }
+        let data = Data(campaign.value.content.utf8)
         
+        if let attributedString = try? NSMutableAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html,.characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil) {
+            
+            campaignContentLabel.attributedText = attributedString
+            campaignContentLabel.textColor = AppColor.campaignContentLabel.color
+            campaignContentLabel.font = UIFont.appFont(.medium, size: 12)
+        }
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

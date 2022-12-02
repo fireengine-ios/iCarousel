@@ -13,6 +13,7 @@ enum MyStreamType: Int {
     case places
     case story
     case collage
+    case animation
     case albums
     case album
     case firAlbum
@@ -23,7 +24,8 @@ enum MyStreamType: Int {
         case .instaPick: return TextConstants.myStreamInstaPickTitle
         case .albums: return TextConstants.myStreamAlbumsTitle
         case .story: return TextConstants.myStreamStoriesTitle
-        case .collage: return TextConstants.homeCollageCardTitle
+        case .collage: return TextConstants.myStreamStoriesTitle
+        case .animation: return TextConstants.myStreamStoriesTitle
         case .people: return TextConstants.myStreamPeopleTitle
         case .things: return TextConstants.myStreamThingsTitle
         case .places: return TextConstants.myStreamPlacesTitle
@@ -38,6 +40,7 @@ enum MyStreamType: Int {
         case .albums: return #imageLiteral(resourceName: "album")
         case .story: return #imageLiteral(resourceName: "story")
         case .collage: return #imageLiteral(resourceName: "story")
+        case .animation: return #imageLiteral(resourceName: "story")
         case .people: return #imageLiteral(resourceName: "people")
         case .things: return #imageLiteral(resourceName: "things")
         case .places: return #imageLiteral(resourceName: "places")
@@ -58,7 +61,7 @@ enum MyStreamType: Int {
     
     func isMyStreamSliderType() -> Bool {
         switch self {
-        case .albums, .story, .collage, .people, .things, .places, .instaPick, .hidden:
+        case .albums, .story, .collage, .animation, .people, .things, .places, .instaPick, .hidden:
             return true
         case .album, .firAlbum:
             return false
@@ -116,6 +119,13 @@ class SliderItem {
             previewItems = Array(items.prefix(NumericConstants.myStreamSliderThumbnailsCount).compactMap { $0.patchToPreview })
         }
         setType(.collage)
+    }
+    
+    init(withAnimationItems items: [Item]?) {
+        if let items = items {
+            previewItems = Array(items.prefix(NumericConstants.myStreamSliderThumbnailsCount).compactMap { $0.patchToPreview })
+        }
+        setType(.animation)
     }
     
     init(withAlbum album: AlbumItem) {

@@ -850,6 +850,13 @@ class RouterVC: NSObject {
         return controller
     }
     
+    // MARK: Animation list
+    
+    func animationListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
+        let controller = AnimationsInitializer.initializeAnimationController(with: "BaseFilesGreedViewController", moduleOutput: moduleOutput)
+        return controller
+    }
+    
     // MARK: Stories list
     
     func storiesListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {

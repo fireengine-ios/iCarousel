@@ -17,6 +17,7 @@ protocol AlbumsSliderCellDelegate: AnyObject {
 
 final class AlbumsSliderCell: UICollectionViewCell {
 
+    @IBOutlet weak var rightConstraint: NSLayoutConstraint!
     static let height: CGFloat = 180
     
     @IBOutlet weak var containerView: UIView! {
@@ -71,9 +72,18 @@ final class AlbumsSliderCell: UICollectionViewCell {
         backgroundColor =  AppColor.background.color
     }
     
+    func setupViewConstranint() {
+        if isEmpty {
+            rightConstraint.constant = 8
+        } else {
+            rightConstraint.constant = -15
+        }
+    }
+    
     func setup(title: String, emptyText: String) {
         titleLabel.text = title
         emptyLabel.text = emptyText
+        setupViewConstranint()
     }
 
     func appendItems(_ newItems: [BaseDataSourceItem]) {
@@ -99,6 +109,7 @@ final class AlbumsSliderCell: UICollectionViewCell {
     
     private func checkEmptyLabel() {
         emptyLabel.isHidden = !dataSource.items.isEmpty
+        setupViewConstranint()
     }
 }
 
