@@ -235,7 +235,13 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
 
     private func setupCardsContainerView() {
-        aboveTabBarCardStack.addArrangedSubview(cardsContainerView)
+        
+        /// Rearranged musicBar and Sync bar and put Sync under to musicBar
+        aboveTabBarCardStack.insertArrangedSubview(cardsContainerView, at: 0)
+        cardsContainerView.translatesAutoresizingMaskIntoConstraints = false
+        cardsContainerView.bottomAnchor.constraint(equalTo: musicBar.topAnchor, constant: 15).isActive = true
+        aboveTabBarCardStack.sendSubviewToBack(cardsContainerView)
+        
         CardsManager.default.addViewForNotification(view: cardsContainerView)
     }
     
