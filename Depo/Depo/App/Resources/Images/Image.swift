@@ -100,6 +100,7 @@ enum Image: String, AppImage {
     case iconPlayThumb
     case iconSound
     case iconPause40x40Red
+    case iconMusicPlayerNoImage
     /// Action/Tab
     case iconTabMusicEmpty
     case iconTabMusic
@@ -107,6 +108,10 @@ enum Image: String, AppImage {
     case iconTabShare
     case iconTabStar
     case iconTabDelete
+    ///NoImage/PhotoPick
+    case iconPickNoAlbums
+    case iconPickNoFavorites
+    case iconPickNoPhotos
     
     ///  Files Tab
     case iconFileAudio

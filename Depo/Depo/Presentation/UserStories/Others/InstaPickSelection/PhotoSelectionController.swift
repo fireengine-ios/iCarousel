@@ -43,6 +43,7 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
         set {
             if newValue {
                 noFilesView.text = dataSource.getNoFilesMessage()
+                noFilesView.noPhotos.image = dataSource.getNoFilesPhoto()
             }
             noFilesView.isHidden = !newValue
         }

@@ -47,6 +47,7 @@ final class VolumeSlider: UIView {
         slider = getVolumeSlider()
         slider.minimumValueImage = Image.iconPlayLowSound.image
         slider.maximumValueImage = Image.iconSound.image
+        slider.minimumTrackTintColor = .white
     }
     
     fileprivate func getVolumeSlider() -> UISlider {

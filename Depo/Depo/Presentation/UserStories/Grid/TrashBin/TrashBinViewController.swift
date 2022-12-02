@@ -41,7 +41,6 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initTrashBin()
     }
     
@@ -265,6 +264,14 @@ extension TrashBinViewController: TrashBinDataSourceDelegate {
 //MARK: - TrashBinSortingManagerDelegate
 
 extension TrashBinViewController: TrashBinSortingManagerDelegate {
+    func onMoreButton(sender: Any) {
+        threeDotsManager.showActions(isSelectingMode: dataSource.isSelectionStateActive, sender: self)
+    }
+    
+    func filterChanged(filter: MoreActionsConfig.MoreActionsFileType) {
+        
+    }
+    
     func sortingRuleChanged(rule: SortedRules) {
         dataSource.sortedRule = rule
         interactor.sortedRule = rule

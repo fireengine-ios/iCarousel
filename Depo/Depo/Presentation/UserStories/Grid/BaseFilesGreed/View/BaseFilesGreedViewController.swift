@@ -43,27 +43,18 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     @IBOutlet weak var noFilesImage: UIImageView!
-    @IBOutlet weak var noFilesImageContainer: UIView! {
-        willSet {
-            newValue.backgroundColor = AppColor.button.color
-            newValue.layer.cornerRadius = newValue.frame.width / 2
-            newValue.layer.masksToBounds = true
-        }
-    }
-    
-    @IBOutlet weak var noFilesViewCenterOffsetConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var startCreatingFilesButton: BlueButtonWithNoFilesWhiteText!
-    
+
     @IBOutlet weak var topBarContainer: UIView!
     
     @IBOutlet weak var noFilesTopLabel: UILabel?
     
-    var cardsContainerView = CardsContainerView()
-    
     @IBOutlet weak var floatingHeaderContainerHeightConstraint: NSLayoutConstraint!
-    
+    @IBOutlet private weak var scrollIndicator: CustomScrollIndicator?
     @IBOutlet private weak var headerStackView: UIStackView!
+    
+    var cardsContainerView = CardsContainerView()
     var contentSlider: LBAlbumLikePreviewSliderViewController?
     weak var contentSliderTopY: NSLayoutConstraint?
     weak var contentSliderH: NSLayoutConstraint?
@@ -75,10 +66,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     let underNavBarBarHeight: CGFloat = 53
     var calculatedUnderNavBarBarHeight: CGFloat = 0
-    
-    @IBOutlet private weak var topCarouselConstraint: NSLayoutConstraint!
-    
-    @IBOutlet private weak var scrollIndicator: CustomScrollIndicator?
     
     var isRefreshAllowed = true
     
@@ -448,8 +435,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         
         refresherY =  -height + 30
         updateRefresher()
-        
-        noFilesViewCenterOffsetConstraint.constant = BaseFilesGreedViewController.sliderH / 2
     }
     
     //setupCardsView

@@ -3687,7 +3687,6 @@
 		A253D62A21A210690049AC15 /* PremiumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A253D62821A210690049AC15 /* PremiumViewController.xib */; };
 		A253D62B21A212020049AC15 /* PremiumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2079901219F131B00AD5037 /* PremiumViewController.swift */; };
 		A2EF976321EC7E2900EC7DE7 /* InstapickPopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EF976021EC7E2900EC7DE7 /* InstapickPopUpController.swift */; };
-		A2EF976521EC7E2900EC7DE7 /* InstapickPopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2EF976121EC7E2900EC7DE7 /* InstapickPopUpController.xib */; };
 		A2EF976821ECC3DE00EC7DE7 /* ConnectWithInstaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EF976621ECC3DE00EC7DE7 /* ConnectWithInstaView.swift */; };
 		A2EF976C21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2EF976A21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib */; };
 		A705E3C623A217C1005E8274 /* CarouselPagerReusableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A705E3C223A21698005E8274 /* CarouselPagerReusableViewController.swift */; };
@@ -5345,7 +5344,6 @@
 		CE784D1F22A685FB00662219 /* LeavePremiumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2268EC421A68C2A002F2611 /* LeavePremiumView.xib */; };
 		CE784D2222A685FB00662219 /* SocialAccountRemoveConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B50B4A68220C27C20056FC86 /* SocialAccountRemoveConnectionCell.xib */; };
 		CE784D2522A685FB00662219 /* PVViewerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3E4D06201B11BF00173045 /* PVViewerController.xib */; };
-		CE784D2622A685FB00662219 /* InstapickPopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2EF976121EC7E2900EC7DE7 /* InstapickPopUpController.xib */; };
 		CE784D2922A685FB00662219 /* CollectionViewCellForController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C355E1B1F00E949003B004C /* CollectionViewCellForController.xib */; };
 		CE784D2A22A685FB00662219 /* LoginPhoneMailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */; };
 		CE784D2B22A685FB00662219 /* AudioSelectionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C6E2FA21F32FCD900536DB6 /* AudioSelectionCollectionViewCell.xib */; };
@@ -7113,7 +7111,6 @@
 		CF8B68ED23CBC9D70021B021 /* SpotifyImportedPlaylistsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98792DCE22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.xib */; };
 		CF8B68F023CBC9D70021B021 /* TextEnterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1353382004F1530004CBBE /* TextEnterController.xib */; };
 		CF8B68F423CBC9D70021B021 /* InstaPickProgressPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = B573B93F21ECD0280085148A /* InstaPickProgressPopup.xib */; };
-		CF8B68F523CBC9D70021B021 /* InstapickPopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2EF976121EC7E2900EC7DE7 /* InstapickPopUpController.xib */; };
 		CF8B68F623CBC9D70021B021 /* SupportFormPrefilledController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7040AD22EB180C00124073 /* SupportFormPrefilledController.xib */; };
 		CF8B68F723CBC9D70021B021 /* StorageCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD7C2A520189E24009F6D3D /* StorageCard.xib */; };
 		CF8B68FD23CBC9D70021B021 /* AutoSyncSwitcherTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC8146C1EF7A93E001DFCF0 /* AutoSyncSwitcherTableViewCell.xib */; };
@@ -8595,7 +8592,6 @@
 		CF8B70DB23CBCA280021B021 /* LeavePremiumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2268EC421A68C2A002F2611 /* LeavePremiumView.xib */; };
 		CF8B70DE23CBCA280021B021 /* SocialAccountRemoveConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B50B4A68220C27C20056FC86 /* SocialAccountRemoveConnectionCell.xib */; };
 		CF8B70E123CBCA280021B021 /* PVViewerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3E4D06201B11BF00173045 /* PVViewerController.xib */; };
-		CF8B70E223CBCA280021B021 /* InstapickPopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2EF976121EC7E2900EC7DE7 /* InstapickPopUpController.xib */; };
 		CF8B70E523CBCA280021B021 /* CollectionViewCellForController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C355E1B1F00E949003B004C /* CollectionViewCellForController.xib */; };
 		CF8B70E623CBCA280021B021 /* LoginPhoneMailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */; };
 		CF8B70E723CBCA280021B021 /* AudioSelectionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C6E2FA21F32FCD900536DB6 /* AudioSelectionCollectionViewCell.xib */; };
@@ -11337,7 +11333,6 @@
 		A253D62821A210690049AC15 /* PremiumViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PremiumViewController.xib; sourceTree = "<group>"; };
 		A27FB35728F24100F410FBA2 /* TermsAndServicesInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesInitializer.swift; sourceTree = "<group>"; };
 		A2EF976021EC7E2900EC7DE7 /* InstapickPopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstapickPopUpController.swift; sourceTree = "<group>"; };
-		A2EF976121EC7E2900EC7DE7 /* InstapickPopUpController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstapickPopUpController.xib; sourceTree = "<group>"; };
 		A2EF976621ECC3DE00EC7DE7 /* ConnectWithInstaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectWithInstaView.swift; sourceTree = "<group>"; };
 		A2EF976A21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectWithInstaView.xib; sourceTree = "<group>"; };
 		A40655AE864D2491AF9B181A /* PhotoVideoDetailPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailPresenter.swift; sourceTree = "<group>"; };
@@ -18443,7 +18438,6 @@
 			isa = PBXGroup;
 			children = (
 				A2EF976021EC7E2900EC7DE7 /* InstapickPopUpController.swift */,
-				A2EF976121EC7E2900EC7DE7 /* InstapickPopUpController.xib */,
 			);
 			path = InstapickPopUp;
 			sourceTree = "<group>";
@@ -22680,7 +22674,6 @@
 				98792DD322FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.xib in Resources */,
 				8C06AC232008AAFB003D8E05 /* TextEnterController.xib in Resources */,
 				B573B94121ECD0280085148A /* InstaPickProgressPopup.xib in Resources */,
-				A2EF976521EC7E2900EC7DE7 /* InstapickPopUpController.xib in Resources */,
 				CE7040B122EB193200124073 /* SupportFormPrefilledController.xib in Resources */,
 				CF71472A24B597AA00D83E60 /* ContactSyncOperationResultController.xib in Resources */,
 				7CD7C2A720189E24009F6D3D /* StorageCard.xib in Resources */,
@@ -23240,7 +23233,6 @@
 				CE784D2222A685FB00662219 /* SocialAccountRemoveConnectionCell.xib in Resources */,
 				F0E0A47A2897F36400528B39 /* ForYouEmptyCellView.xib in Resources */,
 				CE784D2522A685FB00662219 /* PVViewerController.xib in Resources */,
-				CE784D2622A685FB00662219 /* InstapickPopUpController.xib in Resources */,
 				07C75A27281A786400B028F0 /* GT-America-LC-Standard-Medium.ttf in Resources */,
 				CE784D2922A685FB00662219 /* CollectionViewCellForController.xib in Resources */,
 				CE784D2A22A685FB00662219 /* LoginPhoneMailCell.xib in Resources */,
@@ -23606,7 +23598,6 @@
 				CF8B68F023CBC9D70021B021 /* TextEnterController.xib in Resources */,
 				CF8B68F423CBC9D70021B021 /* InstaPickProgressPopup.xib in Resources */,
 				CF71472B24B597AA00D83E60 /* ContactSyncOperationResultController.xib in Resources */,
-				CF8B68F523CBC9D70021B021 /* InstapickPopUpController.xib in Resources */,
 				CF8B68F623CBC9D70021B021 /* SupportFormPrefilledController.xib in Resources */,
 				F04BC07E2786C2B4009401C5 /* GoogleService-Info-test.plist in Resources */,
 				CF8B68F723CBC9D70021B021 /* StorageCard.xib in Resources */,
@@ -24028,7 +24019,6 @@
 				CF8B70DE23CBCA280021B021 /* SocialAccountRemoveConnectionCell.xib in Resources */,
 				CF8B70E123CBCA280021B021 /* PVViewerController.xib in Resources */,
 				988BA18E255924670086E4BE /* PrivateShareAddMessageView.xib in Resources */,
-				CF8B70E223CBCA280021B021 /* InstapickPopUpController.xib in Resources */,
 				F0E0A47B2897F36400528B39 /* ForYouEmptyCellView.xib in Resources */,
 				CF8B70E523CBCA280021B021 /* CollectionViewCellForController.xib in Resources */,
 				CF8B70E623CBCA280021B021 /* LoginPhoneMailCell.xib in Resources */,
