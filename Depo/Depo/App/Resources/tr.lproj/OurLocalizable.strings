@@ -1421,7 +1421,7 @@
 "delete_dublicate_package_description" = "+ Telefonundaki Tekrarlayan Kontakları Silme";
 "premium_user_package_description" = "+ Sınırsız PhotoPick Analizi";
 "bundle_package_addon_type" = "Saklama Alanı + Premium";
-"storage_only_package_addon_type" = "Sadece\nSaklama Alanı";
+"storage_only_package_addon_type" = "Sadece Saklama Alanı";
 "settings_userinfo_name_surname" = "Ad Soyad";
 "settings_userinfo_email" = "E-posta";
 "settings_userinfo_phone" = "Telefon Numarası";
@@ -1462,7 +1462,7 @@
 "tabbar_item_home_label" = "Anasayfa";
 "tabbar_item_gallery_label" = "Galeri";
 "tabbar_item_contacts_label" = "Rehber";
-"tabbar_item_all_files_label" = "Tüm Dosyalar";
+"tabbar_item_all_files_label" = "Dosyalar";
 "see_features" = "Özellikleri Göster";
 "middle_user_package_description" = "+ 15 PhotoPick Analizi";
 "features_only_package_addon_type" = "Premium Özellikler";
@@ -2076,3 +2076,7 @@ then {11,99 TRY/Month}*/
 "we_are_creating_your_story_desc" = "Hazır olduğunda Videolar albümünde bulabilirsin.";
 "trash_bin" = "Çöp Kutusu";
 "ksaldalks" = "";
+"empty_gallery_no_photo" = "Henüz hiç fotoğraf eklenmemiş";
+"empty_gallery_no_video" = "Henüz hiç video eklenmemiş";
+"empty_gallery_no_sync" = "";
+"empty_gallery_no_unsync" = "";

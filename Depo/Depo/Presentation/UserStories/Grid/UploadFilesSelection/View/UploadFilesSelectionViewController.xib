@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,7 +22,6 @@
                 <outlet property="noFilesLabel" destination="fdq-Cf-39W" id="gmp-PY-CFM"/>
                 <outlet property="noFilesTopLabel" destination="0lC-K4-1ac" id="TJd-tm-6eI"/>
                 <outlet property="noFilesView" destination="ZI3-Dh-bXS" id="Tf2-p8-qvW"/>
-                <outlet property="noFilesViewCenterOffsetConstraint" destination="ecm-g2-fmI" id="Fcz-05-QYh"/>
                 <outlet property="scrollIndicator" destination="e3K-s6-bzd" id="6Fp-Yf-Hid"/>
                 <outlet property="startCreatingFilesButton" destination="UTy-IA-Avr" id="4gU-xN-7wR"/>
                 <outlet property="topBarContainer" destination="Stl-Nh-W5a" id="rEa-AX-y5Q"/>
