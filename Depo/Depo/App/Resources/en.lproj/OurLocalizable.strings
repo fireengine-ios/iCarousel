@@ -1899,7 +1899,7 @@
 /*Accessibility*/
 "play_captcha" = "Play captcha";
 "refresh_captcha" = "Refresh captcha";
-"container_shared_files" = "Shared by me";
+"container_shared_files" = "Shared By Me";
 "container_document" = "Document";
 "container_music" = "Music";
 "container_favourite" = "Favourite";
@@ -2114,3 +2114,7 @@ then {11,99 TRY/Month}*/
 "we_are_creating_your_story_desc" = "Once it is done, you can access it from Videos Album.";
 "trash_bin" = "Trash Bin";
 "ksaldalks" = "";
+"empty_gallery_no_photo" = "";
+"empty_gallery_no_video" = "";
+"empty_gallery_no_sync" = "";
+"empty_gallery_no_unsync" = "";

@@ -213,4 +213,9 @@ enum Strings: String, Localizable {
     case becomePremiumBannerDesc = "mystorage_become_premium"
     
     case trashBin = "trash_bin"
+    
+    case emptyGalleryNoPhoto = "empty_gallery_no_photo"
+    case emptyGalleryNoVideo = "empty_gallery_no_video"
+    case emptyGalleryNoSync = "empty_gallery_no_sync"
+    case emptyGalleryNoUnsync = "empty_gallery_no_unsync"
 }

@@ -2355,3 +2355,7 @@ then {11,99 TRY/Month}*/
 "we_are_creating_your_story_desc" = "";
 "trash_bin" = "";
 "ksaldalks" = "";
+"empty_gallery_no_photo" = "";
+"empty_gallery_no_video" = "";
+"empty_gallery_no_sync" = "";
+"empty_gallery_no_unsync" = "";

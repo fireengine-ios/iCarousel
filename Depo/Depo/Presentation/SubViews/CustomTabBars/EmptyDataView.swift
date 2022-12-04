@@ -17,15 +17,20 @@ private extension ElementTypes {
     var emptyViewMessage: String {
         switch self {
         case .galleryAll:
-            return "Henüz hiç fotoğraf eklenmemiş"
+            //return "Henüz hiç fotoğraf eklenmemiş"
+            return localized(.emptyGalleryNoPhoto)
         case .gallerySync:
-            return "Tüm ögelerin Unsync olmuş durumda"
+            //return "Tüm ögelerin Unsync olmuş durumda"
+            return localized(.emptyGalleryNoSync)
         case .galleryUnsync:
-            return "Tüm dosyaların yedekli"
+            //return "Tüm dosyaların yedekli"
+            return localized(.emptyGalleryNoUnsync)
         case .galleryVideos:
-            return "Henüz hiç video eklenmemiş"
+            //return "Henüz hiç video eklenmemiş"
+            return localized(.emptyGalleryNoVideo)
         case .galleryPhotos:
-            return "Henüz hiç fotoğraf eklenmemiş"
+            //return "Henüz hiç fotoğraf eklenmemiş"
+            return localized(.emptyGalleryNoPhoto)
         default:
             return ""
         }
