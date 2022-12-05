@@ -66,31 +66,6 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="muL-9i-x4Y">
                     <rect key="frame" x="0.0" y="537" width="375" height="86"/>
                     <subviews>
-                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lbx-5u-NN7">
-                            <rect key="frame" x="39" y="-74.5" width="41.5" height="95"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MMl-8z-d71">
-                                    <rect key="frame" x="0.0" y="0.0" width="41.5" height="41"/>
-                                    <string key="text">Start
-Here!</string>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="path_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="kIq-Zn-3x5">
-                                    <rect key="frame" x="0.0" y="47" width="13" height="48"/>
-                                </imageView>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstItem="MMl-8z-d71" firstAttribute="leading" secondItem="Lbx-5u-NN7" secondAttribute="leading" id="6dd-y4-EZh"/>
-                                <constraint firstItem="MMl-8z-d71" firstAttribute="top" secondItem="Lbx-5u-NN7" secondAttribute="top" id="Cig-QX-CLQ"/>
-                                <constraint firstAttribute="bottom" secondItem="kIq-Zn-3x5" secondAttribute="bottom" id="Ic8-vI-CcN"/>
-                                <constraint firstItem="kIq-Zn-3x5" firstAttribute="top" secondItem="MMl-8z-d71" secondAttribute="bottom" constant="6" id="LdR-pE-hWT"/>
-                                <constraint firstItem="kIq-Zn-3x5" firstAttribute="leading" secondItem="Lbx-5u-NN7" secondAttribute="leading" id="Xi6-n6-uzZ"/>
-                                <constraint firstAttribute="trailing" secondItem="MMl-8z-d71" secondAttribute="trailing" id="waw-Ev-oxF"/>
-                            </constraints>
-                        </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LAp-wq-sNv" customClass="BlueButtonWithMediumWhiteText" customModule="Billo" customModuleProvider="target">
                             <rect key="frame" x="28" y="20.5" width="319" height="45"/>
                             <constraints>
@@ -107,9 +82,7 @@ Here!</string>
                         <constraint firstItem="LAp-wq-sNv" firstAttribute="centerX" secondItem="muL-9i-x4Y" secondAttribute="centerX" id="1gO-Vy-fTk"/>
                         <constraint firstItem="LAp-wq-sNv" firstAttribute="leading" secondItem="muL-9i-x4Y" secondAttribute="leading" constant="28" id="AZN-eS-DsJ"/>
                         <constraint firstAttribute="height" constant="86" id="DKn-b9-bh0"/>
-                        <constraint firstItem="Lbx-5u-NN7" firstAttribute="leading" secondItem="LAp-wq-sNv" secondAttribute="leading" constant="11" id="Lpu-eb-M98"/>
                         <constraint firstAttribute="trailing" secondItem="LAp-wq-sNv" secondAttribute="trailing" constant="28" id="i9u-fx-kFY"/>
-                        <constraint firstItem="LAp-wq-sNv" firstAttribute="top" secondItem="Lbx-5u-NN7" secondAttribute="bottom" id="q0D-WU-a0n"/>
                         <constraint firstItem="LAp-wq-sNv" firstAttribute="centerY" secondItem="muL-9i-x4Y" secondAttribute="centerY" id="uva-Oq-cmj"/>
                     </constraints>
                 </view>
@@ -138,19 +111,16 @@ Here!</string>
                 <outlet property="emptyTitleLabel" destination="JdK-Md-nJt" id="drf-5l-LSn"/>
                 <outlet property="newAnalyseView" destination="muL-9i-x4Y" id="udm-nA-hpQ"/>
                 <outlet property="newAnalysisButton" destination="LAp-wq-sNv" id="Heu-gY-u09"/>
-                <outlet property="startLabel" destination="MMl-8z-d71" id="fke-Yw-QGI"/>
             </connections>
         </customObject>
         <customObject id="R5A-jK-x2J" customClass="AnalyzeHistoryDisplayManager" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="emptyView" destination="a7L-a1-TzF" id="1kZ-vV-b3z"/>
                 <outlet property="newAnalysisView" destination="muL-9i-x4Y" id="1Dh-3m-mjO"/>
-                <outlet property="startHereView" destination="Lbx-5u-NN7" id="cH7-7X-cBW"/>
             </connections>
         </customObject>
     </objects>
     <resources>
-        <image name="path_arrow" width="13" height="48"/>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
