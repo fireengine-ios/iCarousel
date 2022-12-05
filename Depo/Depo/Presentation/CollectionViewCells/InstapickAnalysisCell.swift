@@ -82,7 +82,7 @@ final class InstapickAnalysisCell: UICollectionViewCell {
     @IBOutlet private weak var seeDetailsButton: UIButton! {
         willSet {
             newValue.setTitle(TextConstants.analyzeHistorySeeDetails, for: .normal)
-            newValue.setTitleColor(UIColor.lrTealishTwo, for: .normal)
+            newValue.setTitleColor(AppColor.button.color, for: .normal)
             newValue.titleLabel?.font = .appFont(.medium, size: 12)
         }
     }

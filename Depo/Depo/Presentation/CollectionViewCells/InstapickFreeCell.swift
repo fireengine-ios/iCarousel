@@ -12,7 +12,7 @@ final class InstapickFreeCell: UICollectionViewCell {
     
     @IBOutlet private weak var shadowView: UIView! {
         willSet {
-            newValue.layer.cornerRadius = 5
+            newValue.layer.cornerRadius = 12
             newValue.layer.shadowColor = UIColor.black.cgColor
             newValue.layer.shadowRadius = 5
             newValue.layer.shadowOpacity = 0.3
@@ -23,7 +23,7 @@ final class InstapickFreeCell: UICollectionViewCell {
     @IBOutlet private weak var borderView: UIView! {
         willSet {
             newValue.clipsToBounds = true
-            newValue.layer.cornerRadius = 5
+            newValue.layer.cornerRadius = 12
         }
     }
     
@@ -31,7 +31,7 @@ final class InstapickFreeCell: UICollectionViewCell {
         willSet {
             newValue.text = TextConstants.analyzeHistoryFreeText
             newValue.textColor = .white
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 18)
+            newValue.font = .appFont(.medium, size: 16)
         }
     }
 }

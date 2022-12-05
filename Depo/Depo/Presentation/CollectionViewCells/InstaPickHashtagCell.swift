@@ -15,23 +15,24 @@ protocol InstaPickHashtagCellDelegate: AnyObject {
 final class InstaPickHashtagCell: UICollectionViewCell {
 
     @IBOutlet private weak var shadowView: UIView!
-    @IBOutlet private weak var hashtagLabel: UILabel!
+    @IBOutlet private weak var hashtagLabel: UILabel! {
+        willSet {
+            newValue.font = .appFont(.light, size: 14)
+            newValue.textColor = AppColor.label.color
+            newValue.adjustsFontSizeToFitWidth = true
+        }
+    }
     
     private weak var delegate: InstaPickHashtagCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         setup()
     }
     
     private func setup() {
-        hashtagLabel.font = .appFont(.light, size: 14)
-        hashtagLabel.textColor = AppColor.label.color
-        hashtagLabel.adjustsFontSizeToFitWidth = true
-        
         shadowView.layer.cornerRadius = NumericConstants.instaPickHashtagCellCornerRadius
-        shadowView.backgroundColor = AppColor.secondaryTint.color
+        shadowView.backgroundColor = AppColor.separator.color
         
         shadowView.layer.borderColor =  ColorConstants.darkBorder.withAlphaComponent(NumericConstants.instaPickHashtagCellBorderColorAlpha).cgColor
         shadowView.layer.borderWidth = NumericConstants.instaPickHashtagCellBorderWidth

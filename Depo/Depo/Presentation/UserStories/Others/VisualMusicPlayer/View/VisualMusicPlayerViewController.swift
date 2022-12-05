@@ -64,7 +64,7 @@ class VisualMusicPlayerViewController: ViewController, VisualMusicPlayerViewInpu
         artistName.text = player.currentArtist
 
         statusBarStyle = .lightContent
-        
+        playbackSlider.minimumTrackTintColor = .white
         playbackSlider.setThumbImage(Image.iconPlayThumb.image, for: .normal)
     }
     

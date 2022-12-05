@@ -17,7 +17,7 @@
                 <outlet property="musicName" destination="dZJ-Gg-jio" id="bsw-0E-FPM"/>
                 <outlet property="passedTimeLabel" destination="cpV-6R-D54" id="qhg-bA-RSi"/>
                 <outlet property="playButton" destination="fQ8-4f-HHC" id="Soe-kS-Pub"/>
-                <outlet property="playbackSlider" destination="5KY-bX-azV" id="0JX-dI-RIr"/>
+                <outlet property="playbackSlider" destination="1Ez-Ij-L4c" id="m01-p3-YTJ"/>
                 <outlet property="shuffleButton" destination="GkX-FG-hGA" id="bfz-uA-tfX"/>
                 <outlet property="view" destination="aiV-eJ-bmf" id="aiz-6t-HWn"/>
             </connections>
@@ -57,22 +57,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="47y-xK-ike" userLabel="Slider View">
-                    <rect key="frame" x="16" y="431.5" width="343" height="16"/>
+                    <rect key="frame" x="16" y="431.5" width="343" height="30"/>
                     <subviews>
-                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="5KY-bX-azV" userLabel="musicSlider">
-                            <rect key="frame" x="53" y="7" width="232" height="3"/>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="2" id="kh8-B8-nhD"/>
-                            </constraints>
-                            <connections>
-                                <action selector="playbackSliderDidChanged:" destination="-1" eventType="valueChanged" id="ppd-Xa-kCQ"/>
-                                <action selector="playbackSliderDidEndChanging:" destination="-1" eventType="touchUpInside" id="YlW-rw-DYN"/>
-                                <action selector="playbackSliderDidEndChanging:" destination="-1" eventType="touchUpOutside" id="nUy-wd-Bzk"/>
-                            </connections>
-                        </slider>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--:--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpV-6R-D54">
-                            <rect key="frame" x="0.0" y="-0.5" width="50" height="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--:--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpV-6R-D54" userLabel="--:-- left">
+                            <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="50" id="9GX-3h-5rs"/>
                             </constraints>
@@ -80,8 +68,19 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--:--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C9K-DL-jA9">
-                            <rect key="frame" x="293" y="-0.5" width="50" height="17"/>
+                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="1Ez-Ij-L4c">
+                            <rect key="frame" x="56" y="0.0" width="231" height="31"/>
+                            <connections>
+                                <action selector="playbackSliderDidChanged:" destination="-1" eventType="valueChanged" id="6qT-Ie-OQv"/>
+                                <action selector="playbackSliderDidEndChanging:" destination="-1" eventType="touchUpInside" id="07T-GM-FgB"/>
+                                <action selector="playbackSliderDidEndChanging:" destination="-1" eventType="touchUpOutside" id="UfE-ec-RAH"/>
+                            </connections>
+                        </slider>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--:--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C9K-DL-jA9" userLabel="--:-- right">
+                            <rect key="frame" x="293" y="0.0" width="50" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="H4t-i9-PPN"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -89,19 +88,20 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="C9K-DL-jA9" firstAttribute="width" secondItem="cpV-6R-D54" secondAttribute="width" id="3Bs-rA-5zb"/>
-                        <constraint firstItem="5KY-bX-azV" firstAttribute="centerY" secondItem="47y-xK-ike" secondAttribute="centerY" id="54U-Ap-ZLz"/>
-                        <constraint firstAttribute="trailing" secondItem="C9K-DL-jA9" secondAttribute="trailing" id="DpI-7j-RoA"/>
-                        <constraint firstItem="cpV-6R-D54" firstAttribute="leading" secondItem="47y-xK-ike" secondAttribute="leading" id="Ho2-rC-RYE"/>
-                        <constraint firstItem="C9K-DL-jA9" firstAttribute="leading" secondItem="5KY-bX-azV" secondAttribute="trailing" constant="10" id="Mna-f4-7Bz"/>
-                        <constraint firstItem="5KY-bX-azV" firstAttribute="centerY" secondItem="cpV-6R-D54" secondAttribute="centerY" id="NlU-dc-dzY"/>
-                        <constraint firstItem="5KY-bX-azV" firstAttribute="leading" secondItem="cpV-6R-D54" secondAttribute="trailing" constant="5" id="VWy-xw-0hs"/>
-                        <constraint firstItem="C9K-DL-jA9" firstAttribute="centerY" secondItem="5KY-bX-azV" secondAttribute="centerY" id="qbd-1p-jkt"/>
-                        <constraint firstAttribute="height" constant="16" id="xaK-qI-7Lb"/>
+                        <constraint firstAttribute="bottom" secondItem="C9K-DL-jA9" secondAttribute="bottom" id="6mz-Ab-qEi"/>
+                        <constraint firstAttribute="trailing" secondItem="C9K-DL-jA9" secondAttribute="trailing" id="C7P-KC-8ha"/>
+                        <constraint firstItem="1Ez-Ij-L4c" firstAttribute="leading" secondItem="cpV-6R-D54" secondAttribute="trailing" constant="8" id="CoO-K9-qxW"/>
+                        <constraint firstItem="cpV-6R-D54" firstAttribute="leading" secondItem="47y-xK-ike" secondAttribute="leading" id="Nep-cr-ztD"/>
+                        <constraint firstItem="C9K-DL-jA9" firstAttribute="top" secondItem="47y-xK-ike" secondAttribute="top" id="OkF-0U-Bb9"/>
+                        <constraint firstItem="cpV-6R-D54" firstAttribute="top" secondItem="47y-xK-ike" secondAttribute="top" id="bR1-Dv-eej"/>
+                        <constraint firstItem="C9K-DL-jA9" firstAttribute="leading" secondItem="1Ez-Ij-L4c" secondAttribute="trailing" constant="8" id="dd7-GL-Blo"/>
+                        <constraint firstItem="1Ez-Ij-L4c" firstAttribute="top" secondItem="47y-xK-ike" secondAttribute="top" id="ixx-Am-En6"/>
+                        <constraint firstAttribute="bottom" secondItem="cpV-6R-D54" secondAttribute="bottom" id="loH-T3-AFO"/>
+                        <constraint firstAttribute="bottom" secondItem="1Ez-Ij-L4c" secondAttribute="bottom" id="x2g-M4-XOe"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vHm-VA-J0e" userLabel="buttons">
-                    <rect key="frame" x="20" y="477.5" width="335" height="44"/>
+                    <rect key="frame" x="20" y="491.5" width="335" height="44"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQ8-4f-HHC" userLabel="play_pause">
                             <rect key="frame" x="145.5" y="0.0" width="44" height="44"/>
@@ -169,7 +169,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKH-U3-HRk">
-                    <rect key="frame" x="177.5" y="521.5" width="20" height="57"/>
+                    <rect key="frame" x="177.5" y="535.5" width="20" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="6dG-Gz-8yU"/>
                         <constraint firstAttribute="width" constant="20" id="WBX-VN-WrV"/>
@@ -186,13 +186,13 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ks8-05-b09" userLabel="VolumeView" customClass="VolumeSlider" customModule="Billo" customModuleProvider="target">
-                    <rect key="frame" x="20" y="578.5" width="335" height="32"/>
+                    <rect key="frame" x="20" y="585.5" width="335" height="32"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="32" id="M0S-bd-kQp"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xvz-pH-Pzz">
-                    <rect key="frame" x="177.5" y="610.5" width="20" height="56.5"/>
+                    <rect key="frame" x="177.5" y="617.5" width="20" height="49.5"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="14M-jU-kcF"/>
                     </constraints>
@@ -243,7 +243,7 @@
                     <exclude reference="Xfr-O9-DHl"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="33.5" y="121.5"/>
+            <point key="canvasLocation" x="32.799999999999997" y="120.98950524737631"/>
         </view>
     </objects>
     <resources>

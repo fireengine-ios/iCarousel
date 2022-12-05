@@ -55,9 +55,7 @@ final class PremiumHeaderView: UIView {
     
     // MARK: Utility methods(Private)
     private func setup() {        
-        setupDesign()
-        
-        premiumHeaderImageView.image = UIImage(named: "iconPremium")
+        setupDesign()        
         premiumButton.setTitle(TextConstants.becomePremiumMember, for: .normal)
     }
     
