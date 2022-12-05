@@ -17,7 +17,7 @@ final class InstapickPopUpController: UIViewController {
     
     private lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
-        sv.backgroundColor = .white
+        sv.backgroundColor = AppColor.background.color
         sv.layer.cornerRadius = 16
         sv.clipsToBounds = true
         sv.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
