@@ -14,18 +14,9 @@ final class InstaPickSelectionSegmentedView: UIView {
         return segmentedControl
     }()
     
-    let analyzeButton: RoundedInsetsButton = {
-        let button = RoundedInsetsButton()
-        button.isExclusiveTouch = true
+    let analyzeButton: DarkBlueButton = {
+        let button = DarkBlueButton()
         button.setTitle(TextConstants.analyzeWithInstapick, for: .normal)
-        button.insets = UIEdgeInsets(top: 5, left: 30, bottom: 5, right: 30)
-        
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.setTitleColor(UIColor.white.darker(by: 30), for: .highlighted)
-        button.setBackgroundColor(AppColor.darkBlueAndTealish.color, for: .normal)
-        button.setBackgroundColor(AppColor.darkBlueAndTealish.color.darker(by: 30), for: .highlighted)
-        
-        button.titleLabel?.font = ApplicationPalette.bigRoundButtonFont
         button.adjustsFontSizeToFitWidth()
         button.isHidden = true
         return button
