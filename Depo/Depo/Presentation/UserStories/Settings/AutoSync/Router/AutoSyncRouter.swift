@@ -15,25 +15,31 @@ class AutoSyncRouter: AutoSyncRouterInput {
         DispatchQueue.toMain { [weak self] in
             self?.router.setNavigationController(controller: self?.router.tabBarScreen)
             
-            if self?.fromRegister == true {
-                return
-            }
+//            if self?.fromRegister == true {
+//                return
+//            }
             
-            SingletonStorage.shared.securityInfoIfNeeded { isNeed in
-                if isNeed {
-                    RouterVC().securityInfoViewController(fromSettings: false)
-                } else {
-                    self?.verifyEmailIfNeeded()
-                }
+            self?.verifyEmailIfNeeded()
+        }
+    }
+    
+    
+
+    private func verifyEmailIfNeeded() {
+        SingletonStorage.shared.emailVerifyIfNeeded { [weak self] result in
+            if !result, let popUp = self?.router.verifyEmailPopUp {
+                self?.router.presentViewController(controller: popUp)
+            } else {
+                self?.isRecoveryNeedToOpen()
             }
         }
     }
     
-    private func verifyEmailIfNeeded() {
-        SingletonStorage.shared.emailVerifyIfNeeded { [weak self] result in
-            if !result {
-                if let popUp = self?.router.verifyEmailPopUp {
-                    self?.router.presentViewController(controller: popUp)
+    private func isRecoveryNeedToOpen() {
+        if SingletonStorage.shared.isJustRegistered == nil || SingletonStorage.shared.isJustRegistered == false {
+            SingletonStorage.shared.securityInfoIfNeeded { isNeed in
+                if isNeed {
+                    RouterVC().securityInfoViewController(fromSettings: false)
                 }
             }
         }

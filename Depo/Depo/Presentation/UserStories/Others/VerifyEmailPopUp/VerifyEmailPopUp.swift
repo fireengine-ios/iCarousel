@@ -45,6 +45,18 @@ final class VerifyEmailPopUp: BaseEmailVerificationPopUp {
         analyticsService.trackCustomGAEvent(eventCategory: .emailVerification,
                                             eventActions: .otp,
                                             eventLabel: .later)
+        isRecoveryNeedToOpen()
+    }
+    
+    private func isRecoveryNeedToOpen() {
+        if SingletonStorage.shared.isJustRegistered == nil || SingletonStorage.shared.isJustRegistered == false {
+
+            SingletonStorage.shared.securityInfoIfNeeded { isNeed in
+                if isNeed {
+                    RouterVC().securityInfoViewController(fromSettings: false)
+                }
+            }
+        }
     }
 
     override var email: String {
