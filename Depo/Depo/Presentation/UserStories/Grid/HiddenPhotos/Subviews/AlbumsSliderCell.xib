@@ -26,10 +26,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ta-lc-0QP" userLabel="Container">
-                        <rect key="frame" x="8" y="28" width="421" height="152"/>
+                        <rect key="frame" x="8" y="28" width="398" height="152"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="qbz-tR-o2i">
-                                <rect key="frame" x="12" y="12" width="394" height="140"/>
+                                <rect key="frame" x="12" y="12" width="374" height="140"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="140" id="Jv3-RC-dyT"/>
@@ -42,7 +42,7 @@
                                 </collectionViewFlowLayout>
                             </collectionView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSA-ye-utE">
-                                <rect key="frame" x="0.0" y="0.0" width="406" height="152"/>
+                                <rect key="frame" x="0.0" y="0.0" width="383" height="152"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -57,7 +57,7 @@
                             <constraint firstItem="CSA-ye-utE" firstAttribute="leading" secondItem="8Ta-lc-0QP" secondAttribute="leading" id="jQF-bF-euc"/>
                             <constraint firstItem="CSA-ye-utE" firstAttribute="top" secondItem="8Ta-lc-0QP" secondAttribute="top" id="nxM-LA-VSE"/>
                             <constraint firstItem="qbz-tR-o2i" firstAttribute="top" secondItem="8Ta-lc-0QP" secondAttribute="top" constant="12" id="oMU-ke-94g"/>
-                            <constraint firstAttribute="trailing" secondItem="qbz-tR-o2i" secondAttribute="trailing" constant="15" id="qAV-ch-Zz2"/>
+                            <constraint firstAttribute="trailing" secondItem="qbz-tR-o2i" secondAttribute="trailing" constant="12" id="qAV-ch-Zz2"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -67,7 +67,7 @@
                     <constraint firstItem="wdO-4I-POP" firstAttribute="leading" secondItem="pt6-Hs-1PA" secondAttribute="leading" constant="15" id="OJ3-ji-sL0"/>
                     <constraint firstItem="8Ta-lc-0QP" firstAttribute="leading" secondItem="pt6-Hs-1PA" secondAttribute="leading" constant="8" id="R9l-JY-aYS"/>
                     <constraint firstItem="8Ta-lc-0QP" firstAttribute="top" secondItem="wdO-4I-POP" secondAttribute="bottom" constant="10" id="U1k-dk-lT6"/>
-                    <constraint firstAttribute="trailing" secondItem="8Ta-lc-0QP" secondAttribute="trailing" constant="-15" id="qdw-wJ-uir"/>
+                    <constraint firstAttribute="trailing" secondItem="8Ta-lc-0QP" secondAttribute="trailing" constant="8" id="qdw-wJ-uir"/>
                     <constraint firstItem="wdO-4I-POP" firstAttribute="top" secondItem="pt6-Hs-1PA" secondAttribute="top" id="yUp-p6-XAo"/>
                 </constraints>
             </collectionViewCellContentView>
