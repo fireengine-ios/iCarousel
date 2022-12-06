@@ -112,6 +112,12 @@ final class TabBarCardsContainer: UIView, CardsManagerViewProtocol {
         guard viewsByType[type] == nil else {
             return
         }
+        
+        let isShown: Bool = UserDefaults.standard.bool(forKey: "prepareQuickScrollProgressIsShown")
+        if type == .prepareQuickScroll && isShown {
+            return
+        }
+        UserDefaults.standard.set(true, forKey: "prepareQuickScrollProgressIsShown")
 
         if let view = getViewForOperation(operation: type) {
             viewsByType[type] = view
