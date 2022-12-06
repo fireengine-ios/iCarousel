@@ -2077,6 +2077,6 @@ then {11,99 TRY/Month}*/
 "trash_bin" = "Çöp Kutusu";
 "ksaldalks" = "";
 "empty_gallery_no_photo" = "Henüz hiç fotoğraf eklenmemiş";
-"empty_gallery_no_video" = "Henüz hiç video eklenmemiş";
+"empty_gallery_no_video" = "";
 "empty_gallery_no_sync" = "";
 "empty_gallery_no_unsync" = "";

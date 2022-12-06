@@ -65,6 +65,8 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     private var canShowDetail = true
     
+    private var isSelectionObject = 0
+    
     private var category: QuickScrollCategory = .photosAndVideos
     private var fileTypes: [FileType] = [.image, .video]
     
@@ -192,6 +194,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         dataSource.isSelectingMode = true
         deselectAllCells()
 
+        isSelectionObject = 0
         updateSelectedItemsCount()
         updateBarsForSelectedObjects()
     }
@@ -215,7 +218,12 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     private func updateSelectedItemsCount() {
         let selectedIndexesCount = collectionViewManager.selectedIndexes.count
+        isSelectionObject += 1
         self.setTitle("\(selectedIndexesCount) \(TextConstants.accessibilitySelected)")
+        if selectedIndexesCount == 0 && self.isSelectionObject > 1 {
+            stopEditingMode()
+            self.isSelectionObject = 0
+        }
     }
     
     private func updateBarsForSelectedObjects() {
