@@ -185,6 +185,7 @@ enum AppColor {
     
     
     // MARK: Legacy
+    case lightGrayColor
     case primaryBackground
     case cellShadow
     case itemSeperator
