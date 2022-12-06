@@ -31,7 +31,15 @@ class InstaPickLineLoader: UIView {
     
     lazy var lineLoader: UIProgressView = {
        let view = UIProgressView()
+        view.progressTintColor = AppColor.button.color
+        view.trackTintColor = AppColor.lightGrayColor.color
+        view.clipsToBounds = true
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 4
+        view.layer.borderColor = AppColor.lightGrayColor.cgColor
         
+        var transform : CGAffineTransform = CGAffineTransform(scaleX: 1.0, y: 1.5)
+        view.transform = transform
         return view
     }()
     

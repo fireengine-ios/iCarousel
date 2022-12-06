@@ -79,6 +79,19 @@ final class EmailVerifiedPopUp: BasePopUpController {
     //MARK: IBAction
     @IBAction private func onContinueTap() {
         close(completion: buttonAction)
+        
+        isRecoveryNeedToOpen()
+    }
+    
+    private func isRecoveryNeedToOpen() {
+        if SingletonStorage.shared.isJustRegistered == nil || SingletonStorage.shared.isJustRegistered == false {
+
+            SingletonStorage.shared.securityInfoIfNeeded { isNeed in
+                if isNeed {
+                    RouterVC().securityInfoViewController(fromSettings: false)
+                }
+            }
+        }
     }
 }
 

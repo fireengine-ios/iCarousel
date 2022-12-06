@@ -140,20 +140,9 @@ final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHan
     }
     
     private func goToTabbarScreen() {
-        DispatchQueue.toMain { [weak self] in
+        DispatchQueue.toMain {
             let router = RouterVC()
             router.setNavigationController(controller: router.tabBarScreen)
-            
-            self?.verifyEmailIfNeeded()
-        }
-    }
-    
-    private func verifyEmailIfNeeded() {
-        SingletonStorage.shared.emailVerifyIfNeeded { result in
-            if !result {
-                let popUp = RouterVC().verifyEmailPopUp
-                RouterVC().presentViewController(controller: popUp)
-            }
         }
     }
     
