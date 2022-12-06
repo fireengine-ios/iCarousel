@@ -51,7 +51,7 @@ class NavigationBarList {
                                  action: nil)
         search.accessibilityLabel = TextConstants.accessibilitySearch
 
-        more = UIBarButtonItem(image: UIImage(named: TextConstants.moreBtnImgName),
+        more = UIBarButtonItem(image: Image.iconKebabBorder.image,
                                style: .plain,
                                target: nil,
                                action: nil)
