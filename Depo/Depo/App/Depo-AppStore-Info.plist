@@ -47,6 +47,14 @@
 				<string>com.googleusercontent.apps.590528416223-jat4666l0pqhvvd9k3930vlc964v3r1t</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>deeplink</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>53</string>
