@@ -20,6 +20,11 @@ final class DiscoverRouter: DiscoverRouterInput {
         case .invitation:
             let invitation = router.invitationController()
             router.pushViewController(viewController: invitation)
+        case .drawCampaign:
+            
+            guard let url = URL(string: RouteRequests.drawCampaignUrl) else { break }
+            
+            UIApplication.shared.open(url)
         default:
             break
         }

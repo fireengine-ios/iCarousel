@@ -41,22 +41,11 @@ class DiscoverTableViewCell: UITableViewCell {
     
     
     func configure(with card: HomeCardResponse) {
-        if card.type == .paycell {
-            let url = URL(string: card.details?["thumbnail"] as! String)
-            thumbnailImage.sd_setImage(with: url)
-        }
-        if card.type == .invitation {
-            let url = URL(string: card.details?["thumbnail"] as! String)
-            thumbnailImage.sd_setImage(with: url)
-        }
-        if card.type == .drawCampaign {
-            let url = URL(string: card.details?["thumbnail"] as! String)
-            thumbnailImage.sd_setImage(with: url)
-        }
+        guard let details = card.details?["thumbnail"],
+              let urlStr = details as? String,
+              urlStr != "" else { return }
+        
+        let url = URL(string: urlStr)
+        thumbnailImage.sd_setImage(with: url)
     }
-
 }
-
-
-
-

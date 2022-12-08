@@ -25,7 +25,7 @@ struct RouteRequests {
     }
     
     // MARK: Environment
-    static var currentServerEnvironment = ServerEnvironment.production
+    static var currentServerEnvironment = ServerEnvironment.test
     private static let applicationTarget = TextConstants.NotLocalized.appName
     
     static let baseShortUrlString: String = {
@@ -47,6 +47,8 @@ struct RouteRequests {
     static let baseUrl = URL(string: "\(baseShortUrlString)api/")!
         
     static let baseContactsUrl: URL = baseContactsUrlShort +/ "ttyapi/"
+    
+    static let drawCampaignUrl = "https://www.turkcell.com.tr/kampanyalar/diger-kampanyalarimiz/lifebox-kontratli-paket-al-lifeboxi-kullan-iphone-kazan"
     
     static let baseContactsUrlShort: URL = {
         switch currentServerEnvironment {
