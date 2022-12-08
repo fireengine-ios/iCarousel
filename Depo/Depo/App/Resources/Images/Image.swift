@@ -191,6 +191,8 @@ enum Image: String, AppImage {
     case contact_phone
     case contact_email
     case contact_address
+    case contactPeople
+    
     
     /// Introduce
     case circleIntoduce

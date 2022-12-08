@@ -1024,8 +1024,8 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
 
         var yearHeightMap: YearHeightMap = [:]
         for (index, date) in dates.enumerated() {
-           // let height1 = collectionViewManager.collectionViewLayout.getCalculatedHeight(for: index)
-            let height = getCalculatedHeightNew(for: index)
+            let height = collectionViewManager.collectionViewLayout.getCalculatedHeight(for: index)
+           // let height = getCalculatedHeightNew(for: index)
             let year = date?.getYear()
             yearHeightMap[year] = yearHeightMap[year, default: 0] + height
 

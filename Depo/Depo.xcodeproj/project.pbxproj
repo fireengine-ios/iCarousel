@@ -21095,16 +21095,16 @@
 		CF7145B024B597A700D83E60 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CF7145B124B597A700D83E60 /* ContactSyncNoBackupView.swift */,
 				CF7145B224B597A700D83E60 /* LineProgressView.swift */,
 				CF7145B324B597A700D83E60 /* ContactSyncProgressView.xib */,
 				CF7145B424B597A700D83E60 /* Cards */,
 				CF7145BA24B597A700D83E60 /* ContactSyncAnalyzeProgressView.swift */,
 				CF7145BB24B597A700D83E60 /* CircleLoaderView.swift */,
 				CF7145BC24B597A700D83E60 /* ContactSyncMainView.xib */,
-				CF7145BD24B597A700D83E60 /* ContactSyncProgressView.swift */,
 				CF7145BE24B597A700D83E60 /* ContactSyncMainView.swift */,
+				CF7145BD24B597A700D83E60 /* ContactSyncProgressView.swift */,
 				CF7145BF24B597A700D83E60 /* ContactSyncNoBackupView.xib */,
+				CF7145B124B597A700D83E60 /* ContactSyncNoBackupView.swift */,
 				CF7145C024B597A700D83E60 /* ContactSyncAnalyzeProgressView.xib */,
 			);
 			path = Views;
