@@ -43,6 +43,10 @@ final class PremiumHeaderView: UIView {
                    titleEdgeInsets: UIEdgeInsets) {
         titleLabel.text = title
 
+        if description.isEmpty && ((price?.isEmpty) != nil) {
+            subtitleLabel.isHidden = true
+        }
+        
         subtitleLabel.attributedText = getAttributeText(with: description, price: price)
         
         premiumHeaderImageView.isHidden = isHiddenTitleImageView ?? false
