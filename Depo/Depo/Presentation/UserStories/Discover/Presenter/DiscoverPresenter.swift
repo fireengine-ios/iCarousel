@@ -45,7 +45,13 @@ extension DiscoverPresenter: DiscoverInteractorOutput {
 extension DiscoverPresenter: DiscoverViewOutput {
     
     func getModelCards() -> Any? {
-        cards
+        cards.filter{
+            guard let details = $0.details?["thumbnail"],
+                  let urlStr = details as? String,
+                  !urlStr.isEmpty else { return false }
+            
+            return true
+        }
     }
     
     func navigate(for view: HomeCardTypes) {
