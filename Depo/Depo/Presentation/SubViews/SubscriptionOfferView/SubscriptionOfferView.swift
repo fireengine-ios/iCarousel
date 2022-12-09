@@ -167,7 +167,17 @@ final class SubscriptionOfferView: UIView, NibInit {
         
         configure(with: plan, delegate: delegate, index: index, style: .full, needHidePurchaseInfo: needHidePurchaseInfo)
         // It is already set to SubscriptionPlan so no need to reset in configure with SubscriptionPlan plan
-        featureView.storageOfferType = .packageOffer
+        
+        if plan.type == SubscriptionPlanType.free || plan.type == SubscriptionPlanType.current {
+            featureView.storageOfferType = .subscriptionPlan
+        }
+        
+        if plan.type == SubscriptionPlanType.default {
+            featureView.storageOfferType = .packageOffer
+        }
+
+        
+        //featureView.storageOfferType = .packageOffer
     }
     
     private func makePackageFeature(plan: SubscriptionPlan) -> NSAttributedString? {
