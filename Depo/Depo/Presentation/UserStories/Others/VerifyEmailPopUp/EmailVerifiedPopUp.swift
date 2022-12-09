@@ -13,13 +13,13 @@ final class EmailVerifiedPopUp: BasePopUpController {
     //MARK: IBOutlet
     @IBOutlet private weak var popUpView: UIView! {
         willSet {
-            newValue.layer.cornerRadius = 4
             newValue.backgroundColor = AppColor.secondaryBackground.color
-            
-            newValue.layer.shadowOffset = .zero
+            newValue.layer.cornerRadius = 15
+            newValue.layer.shadowRadius = 15
             newValue.layer.shadowOpacity = 0.5
-            newValue.layer.shadowRadius = 4
             newValue.layer.shadowColor = UIColor.black.cgColor
+            newValue.layer.shadowOffset = .zero
+            newValue.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         }
     }
     
@@ -31,24 +31,14 @@ final class EmailVerifiedPopUp: BasePopUpController {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            newValue.font = .appFont(.medium, size: 20)
             newValue.textAlignment = .center
-            newValue.textColor = AppColor.blackColor.color
+            newValue.textColor = AppColor.label.color
             newValue.numberOfLines = 0
         }
     }
     
-    @IBOutlet private weak var continueButton: RoundedButton! {
-        willSet {
-            newValue.layer.borderColor = UIColor.lrTealish.cgColor
-            newValue.layer.borderWidth = 1
-            
-            newValue.setBackgroundColor(AppColor.secondaryBackground.color, for: .normal)
-            newValue.setBackgroundColor(AppColor.secondaryBackground.color, for: .selected)
-            newValue.setTitleColor(UIColor.lrTealish, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-        }
-    }
+    @IBOutlet private weak var continueButton: DarkBlueButton!
     
     //MARK: Properties
     private var image: PopUpImage?
