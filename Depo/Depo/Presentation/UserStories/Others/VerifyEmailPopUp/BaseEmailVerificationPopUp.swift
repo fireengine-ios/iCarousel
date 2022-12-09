@@ -218,7 +218,7 @@ class BaseEmailVerificationPopUp: BasePopUpController {
     func showCompletedAndClose() {
         delegate?.emailVerificationPopUpCompleted(self)
 
-        let popUp = EmailVerifiedPopUp.with(image: .custom(UIImage(named: "Path")),
+        let popUp = EmailVerifiedPopUp.with(image: .success,
                                             message: TextConstants.accountVerified,
                                             buttonTitle: TextConstants.createStoryPhotosContinue) { [weak self] in
             self?.dismissPopUp(animated: false)
