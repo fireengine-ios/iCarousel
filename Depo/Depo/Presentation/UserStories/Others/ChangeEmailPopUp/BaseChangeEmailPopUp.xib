@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -35,29 +35,29 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             <subviews>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="332" placeholderIntrinsicHeight="403.5" translatesAutoresizingMaskIntoConstraints="NO" id="5tU-ab-3jo">
-                                    <rect key="frame" x="41.5" y="227.5" width="331" height="451"/>
+                                    <rect key="frame" x="12" y="376" width="390" height="520"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Pop Up Main Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yqr-1t-46Y">
-                                            <rect key="frame" x="94" y="18" width="143" height="20.5"/>
+                                            <rect key="frame" x="123.5" y="18" width="143" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="YxJ-Ko-5Xv">
-                                            <rect key="frame" x="24" y="66.5" width="283" height="308.5"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="YxJ-Ko-5Xv" userLabel="TextFields">
+                                            <rect key="frame" x="24" y="66.5" width="342" height="342.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Bf-6L-1fP">
-                                                    <rect key="frame" x="0.0" y="0.0" width="283" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="342" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d1V-mH-Rls" customClass="ProfileTextEnterView" customModule="Billo" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="28.5" width="283" height="136"/>
+                                                    <rect key="frame" x="0.0" y="45.5" width="342" height="136"/>
                                                     <color key="backgroundColor" name="secondaryBackground"/>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVm-Er-Zl9" customClass="ProfileTextEnterView" customModule="Billo" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="172.5" width="283" height="136"/>
+                                                    <rect key="frame" x="0.0" y="206.5" width="342" height="136"/>
                                                     <color key="backgroundColor" name="secondaryBackground"/>
                                                 </view>
                                             </subviews>
@@ -65,21 +65,18 @@
                                                 <constraint firstItem="d1V-mH-Rls" firstAttribute="height" secondItem="fVm-Er-Zl9" secondAttribute="height" id="Ztp-Gs-VaV"/>
                                             </constraints>
                                         </stackView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="r39-Jc-55m">
-                                            <rect key="frame" x="57.5" y="391" width="216" height="44"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="r39-Jc-55m" userLabel="Buttons">
+                                            <rect key="frame" x="16" y="433" width="358" height="45"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x8L-di-Ha0" customClass="WhiteButtonWithRoundedCorner" customModule="Billo" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="105" height="44"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x8L-di-Ha0" customClass="WhiteButton" customModule="Billo" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="175" height="45"/>
                                                     <state key="normal" title="Button"/>
                                                     <connections>
                                                         <action selector="cancelButtonPressed:" destination="-1" eventType="touchUpInside" id="cz8-eD-TuY"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egp-oc-z9C" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
-                                                    <rect key="frame" x="111" y="0.0" width="105" height="44"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="105" id="WiY-dJ-Cpf"/>
-                                                    </constraints>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egp-oc-z9C" customClass="DarkBlueButton" customModule="Billo" customModuleProvider="target">
+                                                    <rect key="frame" x="183" y="0.0" width="175" height="45"/>
                                                     <state key="normal" title="Button"/>
                                                     <connections>
                                                         <action selector="changeButtonPressed:" destination="-1" eventType="touchUpInside" id="SJs-c0-WKm"/>
@@ -87,7 +84,7 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="44" id="lll-Pf-p9w"/>
+                                                <constraint firstAttribute="height" constant="45" id="lll-Pf-p9w"/>
                                             </constraints>
                                         </stackView>
                                     </subviews>
@@ -95,21 +92,24 @@
                                     <constraints>
                                         <constraint firstItem="YxJ-Ko-5Xv" firstAttribute="leading" secondItem="5tU-ab-3jo" secondAttribute="leading" constant="24" id="0Xi-4h-Za3"/>
                                         <constraint firstItem="yqr-1t-46Y" firstAttribute="centerX" secondItem="5tU-ab-3jo" secondAttribute="centerX" id="9t9-1v-A8T"/>
-                                        <constraint firstItem="r39-Jc-55m" firstAttribute="top" secondItem="YxJ-Ko-5Xv" secondAttribute="bottom" constant="16" id="GVk-3l-jId"/>
+                                        <constraint firstItem="r39-Jc-55m" firstAttribute="leading" secondItem="5tU-ab-3jo" secondAttribute="leading" constant="16" id="B2D-c7-6o6"/>
+                                        <constraint firstItem="r39-Jc-55m" firstAttribute="top" secondItem="YxJ-Ko-5Xv" secondAttribute="bottom" constant="24" id="GVk-3l-jId"/>
                                         <constraint firstItem="YxJ-Ko-5Xv" firstAttribute="top" secondItem="yqr-1t-46Y" secondAttribute="bottom" constant="28" id="HnA-Le-NK1"/>
+                                        <constraint firstAttribute="trailing" secondItem="r39-Jc-55m" secondAttribute="trailing" constant="16" id="PHr-pT-d6M"/>
                                         <constraint firstItem="r39-Jc-55m" firstAttribute="centerX" secondItem="5tU-ab-3jo" secondAttribute="centerX" id="enf-Qw-aOs"/>
                                         <constraint firstItem="yqr-1t-46Y" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5tU-ab-3jo" secondAttribute="leading" constant="36" id="kAt-fB-RbA"/>
                                         <constraint firstItem="yqr-1t-46Y" firstAttribute="top" secondItem="5tU-ab-3jo" secondAttribute="top" constant="18" id="ueJ-7f-gSr"/>
-                                        <constraint firstAttribute="bottom" secondItem="r39-Jc-55m" secondAttribute="bottom" constant="16" id="xMF-ec-HBY"/>
+                                        <constraint firstAttribute="bottom" secondItem="r39-Jc-55m" secondAttribute="bottom" constant="42" id="xMF-ec-HBY"/>
                                         <constraint firstItem="YxJ-Ko-5Xv" firstAttribute="centerX" secondItem="5tU-ab-3jo" secondAttribute="centerX" id="yJx-dm-fdi"/>
                                     </constraints>
                                 </view>
                             </subviews>
                             <viewLayoutGuide key="safeArea" id="A0I-qG-p7V"/>
                             <constraints>
-                                <constraint firstItem="5tU-ab-3jo" firstAttribute="centerY" secondItem="A0I-qG-p7V" secondAttribute="centerY" id="1m7-Pr-0Fk"/>
+                                <constraint firstItem="5tU-ab-3jo" firstAttribute="leading" secondItem="A0I-qG-p7V" secondAttribute="leading" constant="12" id="KU9-QS-ORQ"/>
                                 <constraint firstItem="5tU-ab-3jo" firstAttribute="centerX" secondItem="A0I-qG-p7V" secondAttribute="centerX" id="deB-Wh-ekC"/>
-                                <constraint firstItem="5tU-ab-3jo" firstAttribute="width" secondItem="8Wf-wq-XMu" secondAttribute="width" multiplier="0.8" id="hdL-nb-QAu"/>
+                                <constraint firstAttribute="bottom" secondItem="5tU-ab-3jo" secondAttribute="bottom" id="oYw-qG-7X0"/>
+                                <constraint firstItem="A0I-qG-p7V" firstAttribute="trailing" secondItem="5tU-ab-3jo" secondAttribute="trailing" constant="12" id="tv2-xF-CVA"/>
                             </constraints>
                         </view>
                     </subviews>
