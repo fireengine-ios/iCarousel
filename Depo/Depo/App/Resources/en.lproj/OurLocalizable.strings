@@ -1498,7 +1498,7 @@
 "ubsent_contacts_in_lifebox" = "There is no any contact in your lifebox";
 "auto_sync_albums_description" = "You can choose which albums to sync automatically.";
 "tabbar_item_home_label" = "Home";
-"tabbar_item_gallery_label" = "Gallery";
+"tabbar_item_gallery_label" = "Photos";
 "tabbar_item_contacts_label" = "Contacts";
 "tabbar_item_all_files_label" = "All Files";
 "see_features" = "Show features";
