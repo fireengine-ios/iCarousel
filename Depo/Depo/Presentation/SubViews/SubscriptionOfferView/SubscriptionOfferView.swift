@@ -232,9 +232,9 @@ final class SubscriptionOfferView: UIView, NibInit {
     private func updateButton(button: RoundedInsetsButton, plan: SubscriptionPlan, style: Style) {
         switch plan.type {
         case .current:
-            button.setBackgroundColor(.white, for: UIControl.State())
+            button.setBackgroundColor(AppColor.darkBlueColor.color, for: UIControl.State())
             button.setTitle(TextConstants.cancel, for: UIControl.State())
-            button.setTitleColor(ColorConstants.marineTwo, for: UIControl.State())
+            button.setTitleColor(UIColor.white, for: UIControl.State())
             button.layer.borderColor = ColorConstants.marineTwo.cgColor
             button.layer.borderWidth = 1
             
