@@ -211,6 +211,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         })
 
         adjustBottomSpacingForRecognizeTextButton()
+        editingTabBar.showBar(animated: true, onView: self.view)
     }
     
     override var preferredNavigationBarStyle: NavigationBarStyle {
@@ -386,8 +387,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
             if isFullScreen {
                 spacing = view.safeAreaInsets.bottom + 20
             } else {
-                let minY = viewForBottomBar.convert(editingTabBar.view.frame, to: view).minY
-                spacing = (view.frame.maxY - minY) + 50
+                //let minY = viewForBottomBar.convert(editingTabBar.view.frame, to: view).minY
+                //spacing = (view.frame.maxY - minY) + 50
+                spacing = view.safeAreaInsets.bottom + 90
             }
 
             detailCell.setRecognizeTextButtonBottomSpacing(spacing)
