@@ -1280,6 +1280,8 @@ class RouterVC: NSObject {
         tabBarVC.dismiss(animated: true)
         
         func switchToTrashBin() {
+            // DocumentsScreenSegmentIndex.trashBin.rawValue == 6 (TabBarViewController - DocumentsScreenSegmentIndex ENUM)
+            ItemOperationManager.default.allFilesSectionChange(to: 4, shareType: .none)
             guard let segmentedController = tabBarVC.currentViewController as? SegmentedController else {
                 return
             }
