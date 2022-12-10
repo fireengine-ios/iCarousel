@@ -132,7 +132,7 @@ final class BecomePremiumView: UIView, NibInit {
             }
             
             let view = SubscriptionOfferView.initFromNib()
-            view.configure(with: offer, delegate: self, index: index, style: .short)
+            view.configure(with: offer, delegate: self, index: index, style: .full)
             contentView.addArrangedSubview(view)
             
             view.translatesAutoresizingMaskIntoConstraints = false
