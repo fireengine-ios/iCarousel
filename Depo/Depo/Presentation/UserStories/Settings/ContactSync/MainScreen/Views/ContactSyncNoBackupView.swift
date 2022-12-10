@@ -46,10 +46,10 @@ final class ContactSyncNoBackupView: UIView, NibInit {
     
     @IBOutlet private weak var actionButton: RoundedInsetsButton! {
         willSet {
-            newValue.insets = UIEdgeInsets(topBottom: 2.0, rightLeft: 48.0)
-            newValue.backgroundColor = AppColor.darkBlueAndTealish.color
+            //newValue.insets = UIEdgeInsets(topBottom: 2.0, rightLeft: 48.0)
+            newValue.backgroundColor = AppColor.darkBlueColor.color
             newValue.setTitleColor(.white, for: .normal)
-            newValue.titleLabel?.font = .appFont(.regular, size: 16)
+            newValue.titleLabel?.font = .appFont(.medium, size: 16)
             newValue.setTitle(TextConstants.contactSyncBackupButton, for: .normal)
             newValue.adjustsFontSizeToFitWidth()
         }
