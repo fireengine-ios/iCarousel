@@ -993,6 +993,29 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
     func convertFetchedObjectsInProgress() {
         showSpinner()
     }
+    
+    func getCalculatedHeightNew(for section: Int) -> CGFloat {
+        let numberOfItemsInSection = collectionView.numberOfItems(inSection: section)
+        
+        guard numberOfItemsInSection > 0 else {
+            return .zero
+        }
+        
+        let headerFrame = collectionViewManager.collectionViewLayout.layoutAttributesForSupplementaryView(
+            ofKind: UICollectionView.elementKindSectionHeader,
+            at: IndexPath(item: 0, section: section)
+        )?.frame ?? .zero
+        
+        let firstItemIndex = 0
+        let fisrtItemFrame =  collectionViewManager.collectionViewLayout.layoutAttributesForItem(at: IndexPath(item: firstItemIndex, section: section))?.frame ?? .zero
+
+        let lastItemIndex = numberOfItemsInSection - 1
+        let lastItemFrame =  collectionViewManager.collectionViewLayout.layoutAttributesForItem(at: IndexPath(item: lastItemIndex, section: section))?.frame ?? .zero
+
+        let sectionHeightWithoutHeader = lastItemFrame.maxY - fisrtItemFrame.minY
+        
+        return max(0, sectionHeightWithoutHeader + headerFrame.height)
+    }
 
     private func updateYearsView(with sections: [NSFetchedResultsSectionInfo]) {
         let dates = getDates(of: sections)
@@ -1001,7 +1024,8 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
 
         var yearHeightMap: YearHeightMap = [:]
         for (index, date) in dates.enumerated() {
-            let height = collectionViewManager.collectionViewLayout.getCalculatedHeight(for: index)
+            //let height = collectionViewManager.collectionViewLayout.getCalculatedHeight(for: index)
+            let height = getCalculatedHeightNew(for: index)
             let year = date?.getYear()
             yearHeightMap[year] = yearHeightMap[year, default: 0] + height
 

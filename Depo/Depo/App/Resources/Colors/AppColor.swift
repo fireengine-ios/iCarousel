@@ -41,6 +41,7 @@ enum AppColor {
     case secondaryButton
     case darkBackground
     case secondaryTint
+    case purchaseButton
 
     case loginShadowBlue
     case darkContentOverlay

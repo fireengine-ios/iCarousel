@@ -38,13 +38,15 @@ final class MyStorageViewController: BaseViewController {
         }
     }
         
-    @IBOutlet private weak var restorePurchasesButton: WhiteButton! {
+    @IBOutlet private weak var restorePurchasesButton: RoundedInsetsButton! {
         willSet {
             newValue.isHidden = true
             newValue.isEnabled = false
             newValue.clipsToBounds = true
             newValue.adjustsFontSizeToFitWidth()
             newValue.insets = UIEdgeInsets(topBottom: 8, rightLeft: 12)
+            newValue.setTitleColor(AppColor.darkLabel.color, for: .normal)
+            newValue.setBackgroundColor(AppColor.purchaseButton.color, for: .normal)
             newValue.setTitle(TextConstants.restorePurchasesButton, for: .normal)
         }
     }

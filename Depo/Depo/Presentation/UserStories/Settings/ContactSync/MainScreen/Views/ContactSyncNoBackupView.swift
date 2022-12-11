@@ -13,10 +13,19 @@ final class ContactSyncNoBackupView: UIView, NibInit {
     
     weak var delegate: ContactsBackupActionProviderProtocol?
     
-
+    @IBOutlet weak var bgView: UIView! {
+        willSet {
+            newValue.layer.shadowColor = UIColor.lightGray.cgColor
+            newValue.layer.shadowOpacity = 0.5
+            newValue.layer.shadowOffset = CGSize.zero
+            newValue.layer.shadowRadius = 5
+            newValue.layer.cornerRadius = 15
+        }
+    }
+    
     @IBOutlet private weak var title: UILabel! {
         willSet {
-            newValue.font = .appFont(.medium, size: 24.0)
+            newValue.font = .appFont(.medium, size: 20.0)
             newValue.textColor = AppColor.label.color
             newValue.textAlignment = .center
             newValue.text = TextConstants.contactSyncBackupTitle
@@ -26,7 +35,7 @@ final class ContactSyncNoBackupView: UIView, NibInit {
     }
     @IBOutlet private weak var message: UILabel! {
         willSet {
-            newValue.font = .appFont(.regular, size: 16.0)
+            newValue.font = .appFont(.medium, size: 14.0)
             newValue.textColor = AppColor.label.color
             newValue.textAlignment = .center
             newValue.text = TextConstants.contactSyncBackupMessage
@@ -37,10 +46,10 @@ final class ContactSyncNoBackupView: UIView, NibInit {
     
     @IBOutlet private weak var actionButton: RoundedInsetsButton! {
         willSet {
-            newValue.insets = UIEdgeInsets(topBottom: 2.0, rightLeft: 48.0)
-            newValue.backgroundColor = AppColor.darkBlueAndTealish.color
+            //newValue.insets = UIEdgeInsets(topBottom: 2.0, rightLeft: 48.0)
+            newValue.backgroundColor = AppColor.darkBlueColor.color
             newValue.setTitleColor(.white, for: .normal)
-            newValue.titleLabel?.font = .appFont(.regular, size: 16)
+            newValue.titleLabel?.font = .appFont(.medium, size: 16)
             newValue.setTitle(TextConstants.contactSyncBackupButton, for: .normal)
             newValue.adjustsFontSizeToFitWidth()
         }

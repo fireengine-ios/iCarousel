@@ -564,7 +564,7 @@
 "dropboxLastUpdatedFile" = "Last updated on %@ - %d file";
 "dropboxLastUpdatedFiles" = "Last updated on %@ - %d files";
 "PackagesPolicyHeader" = "Auto-renewable subscription nature of the in-app purchase:";
-"PackagesPolicyText" = "Subsriptions are renewed on a monthly basis\nPayment will be charged to iTunes Account at confirmation of purchase \nSubscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period \nAccount will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen. \nSubscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase \nAny unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable \nPrivacy Notice: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik\nTerms of Use:";
+"PackagesPolicyText" = "Subscriptions are renewed on a monthly basis\nPayment will be charged to iTunes Account at confirmation of purchase \nSubscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period \nAccount will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen. \nSubscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase \nAny unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable \nPrivacy Notice: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik\nTerms of Use:";
 "Missing Dates" = "Missing Dates";
 "You have successfully registered, please log in with your credentials" = "You have successfully registered, please log in with your credentials.";
 "Animation" = "Animation";
@@ -1498,7 +1498,7 @@
 "ubsent_contacts_in_lifebox" = "There is no any contact in your lifebox";
 "auto_sync_albums_description" = "You can choose which albums to sync automatically.";
 "tabbar_item_home_label" = "Home";
-"tabbar_item_gallery_label" = "Gallery";
+"tabbar_item_gallery_label" = "Photos";
 "tabbar_item_contacts_label" = "Contacts";
 "tabbar_item_all_files_label" = "All Files";
 "see_features" = "Show features";

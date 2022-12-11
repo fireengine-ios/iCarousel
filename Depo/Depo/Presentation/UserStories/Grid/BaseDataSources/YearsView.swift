@@ -107,6 +107,9 @@ final class YearsView: UIView {
 
             label.frame = CGRect(x: 0, y: offset, width: label.frame.width, height: label.frame.height)
             previousLabelOffset = offset + label.frame.height
+            
+//            let asd: Bool = label.frame.maxY > frame.height
+//            print("ffffffff \(label.frame.maxY) - \(frame.height) \(asd)")
 
             label.isHidden = label.frame.maxY > frame.height
         }

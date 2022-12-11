@@ -2041,28 +2041,28 @@ then {11,99 TRY/Month}*/
 "paycell_share_message" = "انضممت إلى برنامج سفير العلامة التجارية lifebox. يمكنك الحصول على حزمة lifebox الخاصة بالبرنامج لمدة 6 أشهر 250 جيجابايت Premium بسعر مخفض بالنقر فوق الرابط أدناه. لا تفوت الفرصة 😊";
 "beeline_cancel_TC" = "يمكنك إلغاء أو إدارة اشتراكك في lifebox من Beeline التطبيق.";
 "paycell_share_message " = "";
-"foryou_throwback" = "";
-"foryou_myalbums" = "";
-"foryou_myanimations" = "";
-"foryou_collages" = "";
-"foryou_my_collages" = "";
-"foryou_animations" = "";
-"foryou_no_album_warn" = "";
-"foryou_no_photopick_warn" = "";
-"foryou_no_story_warn" = "";
-"foryou_try_photopick" = "";
-"foryou_see_all" = "";
+"foryou_throwback" = "ذكريات";
+"foryou_myalbums" = "ألبوماتي";
+"foryou_myanimations" = "الرسوم المتحركة الخاصة بي";
+"foryou_collages" = "الفن التصويري";
+"foryou_my_collages" = "الكولاج الخاص بي";
+"foryou_animations" = "الرسوم المتحركة";
+"foryou_no_album_warn" = "لم تقم بإنشاء ألبوم حتى الآن.";
+"foryou_no_photopick_warn" = "لم تستخدم PhotoPick حتى الآن.";
+"foryou_no_story_warn" = "لا يوجد حاليا أي قصص نشطة.";
+"foryou_try_photopick" = "جرب PhotoPick";
+"foryou_see_all" = "اظهار الكل";
 
 /*Facelift*/
-"tabbar_foryou" = "";
-"tabbar_discover" = "";
+"tabbar_foryou" = "لك";
+"tabbar_discover" = "يكتشف";
 "change_pass_mail_or_phone" = "";
 "mystorage_become_premium" = "";
-"we_are_creating_your_story_title" = "";
-"we_are_creating_your_story_desc" = "";
-"trash_bin" = "";
+"we_are_creating_your_story_title" = "نحن نجهز قصتك.";
+"we_are_creating_your_story_desc" = "بمجرد الانتهاء من ذلك ، يمكنك الوصول إليه من ألبوم مقاطع الفيديو.";
+"trash_bin" = "سلة المهملات";
 "ksaldalks" = "";
-"empty_gallery_no_photo" = "";
+"empty_gallery_no_photo" = "ليس لديك أي صور حتى الآن";
 "empty_gallery_no_video" = "";
 "empty_gallery_no_sync" = "";
 "empty_gallery_no_unsync" = "";
