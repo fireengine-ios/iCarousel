@@ -118,6 +118,26 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         return nil
     }
     
+    func getImageDataForRemoteGif(item: Item, completeData: @escaping RemoteData) -> URL? {
+            switch item.patchToPreview {
+                
+            case let .localMediaContent(local):
+                localManager.getImageData(asset: local.asset, data: completeData)
+                
+            case let .remoteUrl(url):
+                let loadUrl = item.tmpDownloadUrl != nil ? item.tmpDownloadUrl : url
+                if item.isOwner && item.isPublicSharedItem != true {
+                    getImageServise.getImageDataByTrimming(url: loadUrl, completeImage: completeData)
+                } else {
+                    getImageServise.getImageData(patch: loadUrl, completeData: completeData)
+                }
+                return loadUrl
+                
+            }
+            return nil
+        }
+
+    
     func getImageData(item: Item, completeData: @escaping RemoteData) -> URL? {
         switch item.patchToPreview {
             

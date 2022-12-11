@@ -177,9 +177,15 @@ final class LoadingImageView: UIImageView {
         
         self.path = object.patchToPreview
         
-        url = filesDataSource.getImageData(item: object, completeData: { [weak self] data in
-            self?.finishLoading(data: data, animated: smooth)
-        })
+        if object.mimeType == "image/gif", object.mimeType != nil {
+            url = filesDataSource.getImageDataForRemoteGif(item: object, completeData: { [weak self] data in
+                self?.finishLoading(data: data, animated: smooth)
+            })
+        } else {
+            url = filesDataSource.getImageData(item: object, completeData: { [weak self] data in
+                self?.finishLoading(data: data, animated: smooth)
+            })
+        }
     }
     
     func loadImage(with path: PathForItem, smooth: Bool = false) {
