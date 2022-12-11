@@ -58,8 +58,8 @@ final class HeaderContainingViewController: BaseViewController {
     let originalSafeAreaLayoutGuide = UILayoutGuide()
     private var originalSafeAreaLayoutGuideTopConstraint: NSLayoutConstraint!
 
-    private var childView: ChildView? { child as? ChildView }
-    private var childViewController: ChildViewController? { child as? ChildViewController }
+    var childView: ChildView? { child as? ChildView }
+    var childViewController: ChildViewController? { child as? ChildViewController }
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -14,8 +14,8 @@ enum DocumentsScreenSegmentIndex: Int {
     case music = 1
     case favorites = 2
     case share = 3
+    case trashBin = 4
     case allFiles = 5
-    case trashBin = 6 //FACELIFT: Check it when trash bin will be added
 }
 
 final class TabBarViewController: ViewController, UITabBarDelegate {
@@ -45,7 +45,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     private lazy var router = RouterVC()
     private let cardsContainerView = TabBarCardsContainer()
 
-    lazy var customNavigationControllers = TabBarConfigurator.generateControllers(router: router)
+    var customNavigationControllers = TabBarConfigurator.generateControllers(router: RouterVC())
 
     var selectedViewController: UIViewController? {
         if customNavigationControllers.count > 0 {
