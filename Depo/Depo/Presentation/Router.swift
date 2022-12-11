@@ -1279,17 +1279,6 @@ class RouterVC: NSObject {
         
         tabBarVC.dismiss(animated: true)
         
-        func switchToTrashBin() {
-            // DocumentsScreenSegmentIndex.trashBin.rawValue == 6 (TabBarViewController - DocumentsScreenSegmentIndex ENUM)
-            ItemOperationManager.default.allFilesSectionChange(to: 4, shareType: .none)
-            guard let segmentedController = tabBarVC.currentViewController as? SegmentedController else {
-                return
-            }
-            
-            segmentedController.loadViewIfNeeded()
-            segmentedController.switchSegment(to: DocumentsScreenSegmentIndex.trashBin.rawValue)
-        }
-        
         let index = TabScreenIndex.documents.rawValue
         if tabBarVC.selectedIndex == index {
             switchToTrashBin()
@@ -1298,10 +1287,19 @@ class RouterVC: NSObject {
                 assertionFailure("This index is non existent 😵")
                 return
             }
+            
             tabBarVC.tabBar.selectedItem = newSelectedItem
             tabBarVC.selectedIndex = index
+            
             switchToTrashBin()
         }
+    }
+        
+    func switchToTrashBin() {
+        let segmentedController = (tabBarController?.customNavigationControllers[3].viewControllers.first as? HeaderContainingViewController)?.childViewController as? AllFilesSegmentedController
+
+        segmentedController?.loadViewIfNeeded()
+        segmentedController?.switchAllFilesCategory(to: DocumentsScreenSegmentIndex.trashBin.rawValue)
     }
     
     func privateShare(items: [WrapData]) -> UIViewController {

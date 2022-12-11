@@ -71,7 +71,7 @@ final class AllFilesSegmentedController: SegmentedController, HeaderContainingVi
         sharedSegmentsView.delegate = self
     }
     
-    private func switchAllFilesCategory(to index: Int) {
+    func switchAllFilesCategory(to index: Int) {
         if AllFilesType.allCases.count >= index, selectedIndex != index {
             guard index < viewControllers.count else {
                 assertionFailure()
