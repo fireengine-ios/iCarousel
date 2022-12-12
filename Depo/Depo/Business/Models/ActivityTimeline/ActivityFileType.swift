@@ -45,7 +45,7 @@ extension ActivityFileType {
         case .audio:
             return #imageLiteral(resourceName: "fileIconAudio")
         case .directory:
-            return #imageLiteral(resourceName: "fileIconFolder")
+            return Image.iconFolder.image
         case .other:
             return #imageLiteral(resourceName: "fileIconUnknown")
         case .album:
@@ -76,7 +76,7 @@ extension ActivityFileType {
         case .pptx:
             return #imageLiteral(resourceName: "fileIconPpt")
         case .dir:
-            return #imageLiteral(resourceName: "fileIconFolder")
+            return Image.iconFolder.image
         case .zip:
             return #imageLiteral(resourceName: "fileIconZip")
         }
