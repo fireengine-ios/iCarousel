@@ -231,10 +231,10 @@ extension UsageInfoViewController: UsageInfoViewInput {
                                     quotaBytes.bytesString)
         
         let usagePercentage = CGFloat(usedBytes) / CGFloat(quotaBytes)
-        circleProgressView.set(progress: usagePercentage,
+        circleProgressView.set(progress: usagePercentage * 100,
                                withAnimation: false)
         
-        let percentage = (usagePercentage  * 100).rounded(.toNearestOrAwayFromZero)
+        let percentage = (usagePercentage  * 10000).rounded(.toNearestOrAwayFromZero)
         usagePercentageLabel.text = String(format: TextConstants.usagePercentageTwoLines, percentage)
 
         self.internetDataUsages = usage.internetDataUsage

@@ -52,7 +52,7 @@ class PackagesTableViewCell: UITableViewCell {
             
         case .usage(percentage: let percentage):
             titleLabel.text = TextConstants.usage
-            let percentageString = percentage.rounded(.toNearestOrAwayFromZero)
+            let percentageString = (percentage * 100).rounded(.toNearestOrAwayFromZero)
             let usage = String(format: TextConstants.usagePercentage, percentageString)
             descriptionLabel.text = usage
             
