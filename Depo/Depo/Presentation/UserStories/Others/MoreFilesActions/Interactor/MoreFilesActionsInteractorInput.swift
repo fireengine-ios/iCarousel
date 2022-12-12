@@ -34,7 +34,7 @@ protocol MoreFilesActionsInteractorInput {
     
     func downloadDocument(items: [WrapData]?)
     
-    func restore(items: [BaseDataSourceItem])
+    func restore(items: [BaseDataSourceItem], completion: @escaping VoidHandler)
     
     // MARK: Actions Sheet
     
@@ -82,7 +82,7 @@ protocol MoreFilesActionsInteractorInput {
     
     func downloadToCmeraRoll(items: [BaseDataSourceItem])
     
-    func delete(items: [BaseDataSourceItem])
+    func delete(items: [BaseDataSourceItem], completion: @escaping VoidHandler)
     
     func deleteDeviceOriginal(items: [BaseDataSourceItem])
     

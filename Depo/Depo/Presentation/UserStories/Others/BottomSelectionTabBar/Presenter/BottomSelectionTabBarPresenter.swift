@@ -143,14 +143,18 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                 if selectedItems.count <= allowedNumberLimit {
-                    self.interactor.delete(items: selectedItems)
+                    self.interactor.delete(items: selectedItems) {
+                        debugPrint("Restore is Done")
+                    }
                 } else {
                     let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
                 }
             case .restore:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .restore))
-                self.interactor.restore(items: selectedItems)
+                self.interactor.restore(items: selectedItems, completion: {
+                    debugPrint("Restore is done")
+                })
             case .download:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .download))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
