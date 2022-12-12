@@ -89,7 +89,6 @@ struct ColorConstants {
     static let profileLightGray = UIColor(named: "profileLightGray")!
     static let cardBorderOrange = UIColor(named: "cardBorderOrange")!
     static let linkBlack = UIColor(named: "linkBlack")!
-    static let snackbarGray = UIColor(named: "snackbarGray")!
     static let duplicatesGray = UIColor(named: "duplicatesGray")!
     static let navy = UIColor(named: "navy")!
     static let photoEditBackgroundColor = UIColor(named: "photoEditBackgroundColor")!
