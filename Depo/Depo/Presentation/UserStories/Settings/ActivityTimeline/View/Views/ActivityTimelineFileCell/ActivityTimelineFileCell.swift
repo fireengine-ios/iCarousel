@@ -10,10 +10,10 @@ import UIKit
 
 class ActivityTimelineFileCell: UITableViewCell {
 
-    @IBOutlet weak var fileNameLabel: UILabel! = UILabel() {
+    @IBOutlet weak var fileNameLabel: UILabel! {
         didSet {
-            fileNameLabel.textColor = ColorConstants.darkText
-            fileNameLabel.font = UIFont.TurkcellSaturaDemFont(size: 15)
+            fileNameLabel.textColor = AppColor.label.color
+            fileNameLabel.font = .appFont(.regular, size: 12)
         }
     }
     @IBOutlet weak var fileImageView: UIImageView!

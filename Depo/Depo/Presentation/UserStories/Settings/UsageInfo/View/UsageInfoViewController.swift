@@ -28,8 +28,8 @@ final class UsageInfoViewController: ViewController {
     @IBOutlet private weak var cardTitleLabel: UILabel! {
         didSet {
             cardTitleLabel.text = TextConstants.myStorage
-            cardTitleLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            cardTitleLabel.textColor = UIColor.lrTealish
+            cardTitleLabel.font = .appFont(.medium, size: 18)
+            cardTitleLabel.textColor = AppColor.label.color
         }
     }
     
@@ -46,11 +46,11 @@ final class UsageInfoViewController: ViewController {
     
     @IBOutlet private weak var circleProgressView: CircleProgressView! {
         didSet {
-            circleProgressView.backWidth = NumericConstants.usageInfoProgressWidth
+            circleProgressView.backWidth = NumericConstants.usageInfoProgressWidth / 2
             circleProgressView.progressWidth = NumericConstants.usageInfoProgressWidth
             circleProgressView.progressRatio = 0.0
-            circleProgressView.progressColor = .lrTealish
-            circleProgressView.backColor = UIColor.lrTealish
+            circleProgressView.progressColor = AppColor.snackbarBackground.color
+            circleProgressView.backColor = AppColor.snackbarBackground.color
                 .withAlphaComponent(NumericConstants.progressViewBackgroundColorAlpha)
         }
     }
@@ -60,8 +60,8 @@ final class UsageInfoViewController: ViewController {
             usagePercentageLabel.text = String(format: TextConstants.usagePercentageTwoLines, 0)
             usagePercentageLabel.textAlignment = .center
             usagePercentageLabel.numberOfLines = 0
-            usagePercentageLabel.textColor = UIColor.lrTealish
-            usagePercentageLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
+            usagePercentageLabel.textColor = AppColor.snackbarBackground.color
+            usagePercentageLabel.font = .appFont(.medium, size: 20)
             usagePercentageLabel.adjustsFontSizeToFitWidth()
         }
     }
@@ -71,26 +71,23 @@ final class UsageInfoViewController: ViewController {
             let zero = Int64(0).bytesString
             wholeStorageDetailLabel.text = String(format: TextConstants.usedAndLeftSpace, zero, zero)
             wholeStorageDetailLabel.numberOfLines = 0
-            wholeStorageDetailLabel.textColor = UIColor.lrTealish
-            wholeStorageDetailLabel.font = UIFont.TurkcellSaturaMedFont(size: 18)
+            wholeStorageDetailLabel.textColor = AppColor.snackbarBackground.color
+            wholeStorageDetailLabel.font = .appFont(.medium, size: 18)
         }
     }
     
-    @IBOutlet private weak var upgradeButton: RoundedInsetsButton! {
+    @IBOutlet private weak var upgradeButton: DarkBlueButton! {
         didSet {
-            upgradeButton.backgroundColor = UIColor.lrTealish
-            upgradeButton.setTitleColor(.white, for: .normal)
             upgradeButton.setTitle(TextConstants.fullQuotaSmallPopUpSecondButtonTitle, for: .normal)
-            upgradeButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 14)
-            upgradeButton.insets = UIEdgeInsets(top: 2, left: 16, bottom: 2, right: 16 )
+      
         }
     }
     
     @IBOutlet weak var myDataUsageLabel: UILabel! {
         didSet {
             myDataUsageLabel.text = TextConstants.myUsageStorage
-            myDataUsageLabel.textColor = UIColor.lrTealish
-            myDataUsageLabel.font = UIFont.TurkcellSaturaMedFont(size: 18)
+            myDataUsageLabel.textColor = AppColor.label.color
+            myDataUsageLabel.font = .appFont(.medium, size: 14)
         }
     }
     
@@ -113,8 +110,8 @@ final class UsageInfoViewController: ViewController {
             pageControl.currentPage = 0
             pageControl.hidesForSinglePage = true
             pageControl.isUserInteractionEnabled = false
-            pageControl.currentPageIndicatorTintColor = UIColor.lrTealish
-            pageControl.pageIndicatorTintColor = UIColor.lrTealish.withAlphaComponent(0.25)
+            pageControl.currentPageIndicatorTintColor = AppColor.snackbarBackground.color
+            pageControl.pageIndicatorTintColor = AppColor.snackbarBackground.color.withAlphaComponent(0.25)
         }
     }
     
@@ -231,10 +228,10 @@ extension UsageInfoViewController: UsageInfoViewInput {
                                     quotaBytes.bytesString)
         
         let usagePercentage = CGFloat(usedBytes) / CGFloat(quotaBytes)
-        circleProgressView.set(progress: usagePercentage,
+        circleProgressView.set(progress: usagePercentage * 100,
                                withAnimation: false)
         
-        let percentage = (usagePercentage  * 100).rounded(.toNearestOrAwayFromZero)
+        let percentage = (usagePercentage  * 10000).rounded(.toNearestOrAwayFromZero)
         usagePercentageLabel.text = String(format: TextConstants.usagePercentageTwoLines, percentage)
 
         self.internetDataUsages = usage.internetDataUsage
