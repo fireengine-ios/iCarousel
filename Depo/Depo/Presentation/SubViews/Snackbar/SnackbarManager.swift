@@ -134,7 +134,7 @@ final class SnackbarManager {
             handler?()
         }
 
-        let contentView = SnackbarView.with(type: type,
+        let contentView = SnackbarView.shared.with(type: type,
                                             message: message,
                                             actionTitle: action?.localizedTitle,
                                             axis: axis,
@@ -150,7 +150,7 @@ final class SnackbarManager {
         
         let snackbar = TTGSnackbar(customContentView: contentView, duration: duration)
         snackbar.animationType = .fadeInFadeOut
-        snackbar.backgroundColor = AppColor.tint.color
+        snackbar.backgroundColor = AppColor.snackbarBackground.color
         snackbar.shouldActivateLeftAndRightMarginOnCustomContentView = true
         snackbar.leftMargin = offset
         snackbar.rightMargin = offset

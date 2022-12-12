@@ -54,6 +54,8 @@ enum AppColor {
     case tableViewSection
     case cellBackground
     
+    case snackbarBackground
+    
     // MARK: PhotoVideoDetail
     case functionsMenuTint
     case recognizeBackground

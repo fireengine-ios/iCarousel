@@ -10,38 +10,44 @@ import UIKit
 
 final class SnackbarView: UIView, NibInit {
     
-    @IBOutlet private weak var contentView: UIStackView!
+    @IBOutlet weak var contentView: UIView! {
+        willSet {
+            newValue.backgroundColor = AppColor.snackbarBackground.color
+            newValue.clipsToBounds = true
+            newValue.layer.cornerRadius = 16
+        }
+    }
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.font = .appFont(.regular, size: 12)
+            newValue.font = .appFont(.regular, size: 14)
             newValue.textColor = .white
             newValue.lineBreakMode = .byTruncatingTail
         }
     }
-
-    private lazy var actionButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = .appFont(.regular, size: 12)
-        button.contentHorizontalAlignment = .right
-        button.backgroundColor = .clear
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setContentHuggingPriority(UILayoutPriority(251), for: .vertical)
-        button.addTarget(self, action: #selector(onActionButtonTap), for: .touchUpInside)
-        return button
-    }()
+    
+    @IBOutlet weak var actionButton: UIButton! {
+        willSet {
+            newValue.setBackgroundColor(.white, for: .normal)
+            newValue.setTitleColor(AppColor.button.color, for: .normal)
+            newValue.titleLabel?.font = UIFont.appFont(.medium, size: 16)
+            newValue.isOpaque = true
+            newValue.clipsToBounds = true
+            newValue.layer.cornerRadius = 16
+            newValue.isHidden = true
+        }
+    }
+    
+    static let shared = SnackbarView()
     
     private var action: VoidHandler?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        backgroundColor = AppColor.tint.color
     }
     
-    static func with(type: SnackbarType, message: String, actionTitle: String?, axis: NSLayoutConstraint.Axis, action: VoidHandler?) -> SnackbarView {
+    func with(type: SnackbarType, message: String, actionTitle: String?, axis: NSLayoutConstraint.Axis, action: VoidHandler?) -> SnackbarView {
         let view = SnackbarView.initFromNib()
         
         view.titleLabel.numberOfLines = type.numberOfLinesLimit
@@ -49,36 +55,14 @@ final class SnackbarView: UIView, NibInit {
         
         if let actionTitle = actionTitle {
             view.actionButton.setTitle(actionTitle, for: .normal)
-            view.setup(axis: axis)
             view.action = action
+            view.actionButton.isHidden = false
         }
 
         return view
     }
 
-    private func setup(axis: NSLayoutConstraint.Axis) {
-        contentView.axis = axis
-        
-        switch axis {
-        case .horizontal:
-            contentView.addArrangedSubview(actionButton)
-        case .vertical:
-            let container = UIView()
-            container.backgroundColor = AppColor.tint.color
-            container.translatesAutoresizingMaskIntoConstraints = false
-            
-            container.addSubview(actionButton)
-            container.leadingAnchor.constraint(lessThanOrEqualTo: actionButton.leadingAnchor).activate()
-            container.trailingAnchor.constraint(equalTo: actionButton.trailingAnchor).activate()
-            container.topAnchor.constraint(equalTo: actionButton.topAnchor).activate()
-            container.bottomAnchor.constraint(equalTo: actionButton.bottomAnchor).activate()
-            container.heightAnchor.constraint(equalToConstant: 20).activate()
-            
-            contentView.addArrangedSubview(container)
-        }
-    }
-    
-    @objc private func onActionButtonTap() {
+    @IBAction func onActionButtonTap(_ sender: Any) {
         action?()
     }
 }
