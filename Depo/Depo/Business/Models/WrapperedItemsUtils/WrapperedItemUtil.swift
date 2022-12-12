@@ -151,7 +151,7 @@ class WrapperedItemUtil: NSObject {
             imageName = "fileIconSmallPhotoNotSelected"
             
         case .musicPlayList: // TODO: Add icon
-            imageName = "fileIconUnknown"
+            imageName = "iconFileEmpty"
         case let .application(applicationType):
             switch applicationType {
             case .rar:
