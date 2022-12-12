@@ -455,7 +455,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             interactor.unhide(items: items)
             
         case .restore:
-            interactor.restore(items: items)
+            interactor.restore(items: items, completion: {
+                debugPrint("Restore is done")
+            })
             
         case .move:
             interactor.move(item: items, toPath: "")
@@ -561,7 +563,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         case .delete:
             let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
             if items.count <= allowedNumberLimit {
-                interactor.delete(items: items)
+                interactor.delete(items: items) {
+                    debugPrint("Restore is Done")
+                }
             } else {
                 let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
                 UIApplication.showErrorAlert(message: text)

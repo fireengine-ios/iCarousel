@@ -699,7 +699,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     }
     
-    func restore(items: [BaseDataSourceItem]) {
+    func restore(items: [BaseDataSourceItem], completion: @escaping VoidHandler) {
         let remoteItems = items.filter { !$0.isLocalItem }
         guard !remoteItems.isEmpty else {
             assertionFailure("Locals only must not be passed to hide them")
@@ -716,6 +716,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.output?.operationStarted(type: .restore)
             vc.close { [weak self] in
                 self?.putBackItems(remoteItems)
+                completion()
             }
         }
         
@@ -1115,7 +1116,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
     }
     
-    func delete(items: [BaseDataSourceItem]) {
+    func delete(items: [BaseDataSourceItem], completion: @escaping VoidHandler) {
         let cancelHandler: PopUpButtonHandler = { [weak self] vc in
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .delete, label: .cancel)
             vc.close()
@@ -1126,6 +1127,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.output?.operationStarted(type: .delete)
             vc.close { [weak self] in
                 self?.deleteItems(items)
+                completion()
             }
         }
         

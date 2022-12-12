@@ -13,6 +13,6 @@ class UsageInfoRouter {
 // MARK: - UsageInfoRouterInput
 extension UsageInfoRouter: UsageInfoRouterInput {
     func showPackages(navVC: UINavigationController?) {
-        RouterVC().pushViewController(viewController: PackagesModuleInitializer.viewController())
+        RouterVC().pushViewController(viewController: RouterVC().myStorage(usageStorage: nil))
     }
 }

@@ -324,13 +324,17 @@ extension TrashBinViewController: TrashBinBottomBarManagerDelegate {
     func onBottomBarDelete() {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
         let selectedItems = dataSource.allSelectedItems
-        interactor.delete(items: selectedItems)
+        interactor.delete(items: selectedItems) { [weak self] in
+            self?.bottomBarManager.hide()
+        }
     }
     
     func onBottomBarRestore() {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .restore))
         let selectedItems = dataSource.allSelectedItems
-        interactor.restore(items: selectedItems)
+        interactor.restore(items: selectedItems) { [weak self] in
+            self?.bottomBarManager.hide()
+        }
     }
 }
 
@@ -367,7 +371,9 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
             selectedItems = dataSource.allSelectedItems
         }
         
-        interactor.restore(items: selectedItems)
+        interactor.restore(items: selectedItems) {
+            debugPrint("Restore is Done")
+        }
     }
     
     func onThreeDotsManagerDelete(item: Item?) {
@@ -379,7 +385,9 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
             selectedItems = dataSource.allSelectedItems
         }
         
-        interactor.delete(items: selectedItems)
+        interactor.delete(items: selectedItems) {
+            debugPrint("Delete is Done")
+        }
     }
     
     func onThreeDotsManagerInfo(item: Item?) {

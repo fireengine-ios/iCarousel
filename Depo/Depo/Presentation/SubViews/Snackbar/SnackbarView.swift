@@ -12,7 +12,7 @@ final class SnackbarView: UIView, NibInit {
     
     @IBOutlet weak var contentView: UIView! {
         willSet {
-            newValue.backgroundColor = AppColor.snackbarBackground.color
+            newValue.backgroundColor = AppColor.tint.color
             newValue.clipsToBounds = true
             newValue.layer.cornerRadius = 16
         }
