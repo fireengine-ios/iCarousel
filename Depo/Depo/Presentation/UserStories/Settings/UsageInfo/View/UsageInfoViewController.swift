@@ -231,7 +231,7 @@ extension UsageInfoViewController: UsageInfoViewInput {
         circleProgressView.set(progress: usagePercentage * 100,
                                withAnimation: false)
         
-        let percentage = (usagePercentage  * 10000).rounded(.toNearestOrAwayFromZero)
+        let percentage = (usagePercentage  * 100).rounded(.toNearestOrAwayFromZero)
         usagePercentageLabel.text = String(format: TextConstants.usagePercentageTwoLines, percentage)
 
         self.internetDataUsages = usage.internetDataUsage
