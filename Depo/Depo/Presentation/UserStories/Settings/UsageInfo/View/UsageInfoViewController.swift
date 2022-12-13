@@ -228,7 +228,7 @@ extension UsageInfoViewController: UsageInfoViewInput {
                                     quotaBytes.bytesString)
         
         let usagePercentage = CGFloat(usedBytes) / CGFloat(quotaBytes)
-        circleProgressView.set(progress: usagePercentage * 100,
+        circleProgressView.set(progress: usagePercentage,
                                withAnimation: false)
         
         let percentage = (usagePercentage  * 100).rounded(.toNearestOrAwayFromZero)
