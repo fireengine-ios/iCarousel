@@ -190,10 +190,11 @@ extension TrashBinViewController {
     }
     
     private func stopSelectionState() {
-        navigationItem.hidesBackButton = false
-        dataSource.cancelSelection()
         bottomBarManager.hide()
         collectionView.contentInset.bottom = 0
+        configureCountView(isShown: false)
+        navigationItem.hidesBackButton = false
+        dataSource.cancelSelection()
 //        navbarManager.setDefaultState(sortType: dataSource.sortedRule)
 //        updateMoreButton()
         
@@ -205,9 +206,7 @@ extension TrashBinViewController {
 //        navbarManager.changeSelectionItems(count: count)
 
         if count == 0 {
-            bottomBarManager.hide()
-            collectionView.contentInset.bottom = 0
-            configureCountView(isShown: false)
+
             stopSelectionState()
             
         } else {
@@ -325,7 +324,7 @@ extension TrashBinViewController: TrashBinBottomBarManagerDelegate {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
         let selectedItems = dataSource.allSelectedItems
         interactor.delete(items: selectedItems) { [weak self] in
-            self?.bottomBarManager.hide()
+            self?.stopSelectionState()
         }
     }
     
@@ -333,7 +332,7 @@ extension TrashBinViewController: TrashBinBottomBarManagerDelegate {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .restore))
         let selectedItems = dataSource.allSelectedItems
         interactor.restore(items: selectedItems) { [weak self] in
-            self?.bottomBarManager.hide()
+            self?.stopSelectionState()
         }
     }
 }
