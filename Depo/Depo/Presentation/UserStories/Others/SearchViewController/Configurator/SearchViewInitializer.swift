@@ -23,7 +23,8 @@ class SearchViewInitializer {
             availableSortTypes: [],
             defaultSortType: .TimeNewOld,
             availableFilter: false,
-            showGridListButton: true
+            showGridListButton: true,
+            showMoreButton: false
         )
         
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
