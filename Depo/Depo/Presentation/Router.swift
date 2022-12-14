@@ -1296,7 +1296,7 @@ class RouterVC: NSObject {
     }
         
     func switchToTrashBin() {
-        let segmentedController = (tabBarController?.customNavigationControllers[3].viewControllers.first as? HeaderContainingViewController)?.childViewController as? AllFilesSegmentedController
+        let segmentedController = (tabBarController?.customNavigationControllers[TabScreenIndex.documents.rawValue].viewControllers.first as? HeaderContainingViewController)?.childViewController as? AllFilesSegmentedController
 
         segmentedController?.loadViewIfNeeded()
         segmentedController?.switchAllFilesCategory(to: DocumentsScreenSegmentIndex.trashBin.rawValue)

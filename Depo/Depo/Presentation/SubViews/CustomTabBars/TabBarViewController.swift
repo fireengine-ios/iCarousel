@@ -194,9 +194,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
     
     private func scrollPhotoPage(scrollTo item: Item) {
-        if let headerViewController = currentNavController?.topViewController as? HeaderContainingViewController,
-           let photosController = headerViewController.child as? PhotoVideoController {
-
+        if let photosController = (RouterVC().tabBarController?.customNavigationControllers[TabScreenIndex.gallery.rawValue].viewControllers.first as? HeaderContainingViewController)?.childViewController as? PhotoVideoController {
             photosController.scrollToItem(item)
         }
     }
