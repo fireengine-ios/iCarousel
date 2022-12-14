@@ -934,10 +934,11 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         
         switch type {
         case .galleryAll:
-            category = .photosAndVideos
-            fileTypes = [.image, .video]
-            collectionViewManager.viewType = .all
-            performFetch()
+//            category = .photosAndVideos
+//            fileTypes = [.image, .video]
+//            collectionViewManager.viewType = .all
+//            performFetch()
+            changeViewType(to: .all)
         case .galleryPhotos:
             category = .photos
             fileTypes = [.image]

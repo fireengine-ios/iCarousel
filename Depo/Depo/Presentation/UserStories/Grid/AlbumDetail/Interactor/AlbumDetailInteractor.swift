@@ -66,7 +66,7 @@ class AlbumDetailInteractor: BaseFilesGreedInteractor {
             }
         }, fail: { [weak self] in
             self?.isUpdating = false
-            self?.output.asyncOperationFail(errorMessage: nil)
+            //self?.output.asyncOperationFail(errorMessage: nil)
         })
     }
     
