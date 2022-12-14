@@ -109,6 +109,6 @@ extension PremiumRouter: PremiumRouterInput {
     }
     
     func showAllPackages() {
-        router.pushViewController(viewController: router.packages())
+        router.pushViewController(viewController: router.myStorage(usageStorage: nil))
     }
 }
