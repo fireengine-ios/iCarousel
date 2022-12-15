@@ -54,7 +54,7 @@ final class PrivateShareAddMessageView: UIView, NibInit {
         let done = UIBarButtonItem(barButtonSystemItem: .done,
                                    target: self,
                                    action: #selector(hideKeyboard))
-        done.tintColor = UIColor.lrTealish
+        done.tintColor = AppColor.button.color
         
         toolbar.setItems([flex, done], animated: false)
         return toolbar

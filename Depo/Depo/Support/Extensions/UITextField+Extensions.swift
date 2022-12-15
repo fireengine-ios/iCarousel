@@ -17,8 +17,8 @@ extension UITextField {
     
     func addToolBarWithButton(title: String, target: Any, selector: Selector) {
         let doneButton = UIBarButtonItem(title: title,
-                                         font: UIFont.TurkcellSaturaRegFont(size: 19),
-                                         tintColor: UIColor.lrTealish,
+                                         font: .appFont(.regular, size: 16),
+                                         tintColor: AppColor.label.color,
                                          accessibilityLabel: title,
                                          style: .plain,
                                          target: target,
