@@ -37,7 +37,7 @@ enum SettingsTypes: Int {
         }
     }
     
-    static let defaultSectionOneTypes = [autoUpload, periodicContactSync, faceImage]
+    static let defaultSectionOneTypes = [autoUpload, faceImage]
     static let defaultSectionTwoTypes = [myActivities, passcode]
     static var defaultSectionThreeTypes = [helpAndSupport]
     
