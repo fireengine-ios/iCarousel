@@ -2108,7 +2108,7 @@ then {11,99 TRY/Month}*/
 /*Facelift*/
 "tabbar_foryou" = "For You";
 "tabbar_discover" = "Discover";
-"change_pass_mail_or_phone" = "";
+"change_pass_mail_or_phone" = "E-mail or Phone number";
 "mystorage_become_premium" = "";
 "we_are_creating_your_story_title" = "We are preparing your story.";
 "we_are_creating_your_story_desc" = "Once it is done, you can access it from Videos Album.";
@@ -2116,5 +2116,6 @@ then {11,99 TRY/Month}*/
 "ksaldalks" = "";
 "empty_gallery_no_photo" = "You don’t have any photos or videos in your lifebox yet.";
 "empty_gallery_no_video" = "You don’t have any videos in your lifebox yet.";
-"empty_gallery_no_sync" = "";
+"empty_gallery_no_sync" = "You don’t have any photos in your lifebox yet.";
 "empty_gallery_no_unsync" = "";
+"subscription_offer_cancel_button" = "Cancel";

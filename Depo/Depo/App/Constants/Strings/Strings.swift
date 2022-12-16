@@ -218,4 +218,6 @@ enum Strings: String, Localizable {
     case emptyGalleryNoVideo = "empty_gallery_no_video"
     case emptyGalleryNoSync = "empty_gallery_no_sync"
     case emptyGalleryNoUnsync = "empty_gallery_no_unsync"
+    
+    case subscriptionOfferCancelButton = "subscription_offer_cancel_button"
 }

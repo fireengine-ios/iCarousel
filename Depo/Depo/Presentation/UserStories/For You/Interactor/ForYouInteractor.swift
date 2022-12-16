@@ -53,6 +53,7 @@ final class ForYouInteractor {
             self?.output.getPlaces(data: (response.list.map({ PlacesItem(response: $0) })))
         }, fail: { error in
             self.group.leave()
+            
             error.showInternetErrorGlobal()
         })
     }

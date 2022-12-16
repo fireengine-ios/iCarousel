@@ -57,6 +57,7 @@ let log: XCGLogger = {
 
 func debugLog(_ string: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
     log.debug(string, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
+    print("log debug \(string)")
     Crashlytics.crashlytics().log(format: "%@", arguments: getVaList([string]))
 }
 

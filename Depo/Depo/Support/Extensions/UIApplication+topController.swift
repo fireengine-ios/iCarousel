@@ -41,6 +41,7 @@ extension UIApplication {
                                 image: PopUpImage,
                                 buttonTitle: String,
                                 closed: (() -> Void)? = nil) {
+        debugLog("showCustomAlert \(title) - \(message)")
         guard message != TextConstants.errorBadConnection else {
             return
         }
@@ -60,6 +61,7 @@ extension UIApplication {
     }
     
     static func showErrorAlert(message: String, closed: (() -> Void)? = nil) {
+        debugLog("showErrorAlert \(message)")
         guard message != TextConstants.errorBadConnection else {
             return
         }
