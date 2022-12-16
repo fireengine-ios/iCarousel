@@ -11,6 +11,7 @@ import UIKit
 enum UniversalViewType {
     case bottomBar
     case actionSheet
+    case actionSheetWithoutChangeCover
     case selectionMode
 }
 
@@ -57,7 +58,14 @@ class AlbumDetailModuleInitializer: NSObject {
             showGridListButton: false
         )
 
-        let alertFilesActionsTypes = ElementTypes.albumElementsConfig(for: status, viewType: .actionSheet)
+        let isDisplay = UserDefaults.standard.bool(forKey: "recommendedAlbumDisplayIsActive")
+        var alertFilesActionsTypes = ElementTypes.albumElementsConfig(for: status, viewType: .actionSheet)
+        if  isDisplay {
+            alertFilesActionsTypes = ElementTypes.albumElementsConfig(for: status, viewType: .actionSheetWithoutChangeCover)
+            UserDefaults.standard.set(false, forKey: "recommendedAlbumDisplayIsActive")
+        }
+        
+        
         let selectionModeTypes = ElementTypes.albumElementsConfig(for: status, viewType: .selectionMode)
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: alertFilesActionsTypes,
                                                                    selectionModeTypes: selectionModeTypes)
