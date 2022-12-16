@@ -2071,7 +2071,6 @@ then {11,99 TRY/Month}*/
 "title_paycell_friends" = "Blerësit e Paketave (%d Persona)";
 "paycell_share_message" = "Unë iu bashkua Programit të Ambasadorit të Markës lifebox. Mund të merrni një paketë Premium lifebox 6-mujore 250 GB me çmim të reduktuar duke klikuar në lidhjen më poshtë. Mos e humbisni rastin 😊";
 "beeline_cancel_TC" = "Ju mund të anuloni ose menaxhoni abonimin tuaj të lifebox nga aplikacioni Beeline.";
-"paycell_share_message " = "";
 "foryou_throwback" = "Kujtimet e Tua";
 "foryou_myalbums" = "Albumet e Mia";
 "foryou_myanimations" = "Animacionet e Mia";
@@ -2092,8 +2091,8 @@ then {11,99 TRY/Month}*/
 "we_are_creating_your_story_title" = "Ne po përgatisim historinë tuaj.";
 "we_are_creating_your_story_desc" = "Pasi të ketë mbaruar, mund ta aksesoni atë nga Video Album.";
 "trash_bin" = "Kosh Plehrash";
-"ksaldalks" = "";
 "empty_gallery_no_photo" = "Nuk keni ende asnjë foto";
 "empty_gallery_no_video" = "";
 "empty_gallery_no_sync" = "";
 "empty_gallery_no_unsync" = "";
+"subscription_offer_cancel_button" = "";

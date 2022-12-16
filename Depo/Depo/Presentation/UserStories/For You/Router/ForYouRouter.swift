@@ -99,8 +99,9 @@ final class ForYouRouter: ForYouRouterInput {
     }
     
     func displayAlbum(item: AlbumItem) {
+        UserDefaults.standard.set(true, forKey: "recommendedAlbumDisplayIsActive")
         let albumVC = router.albumDetailController(album: item, type: .List, status: .active, moduleOutput: nil)
-        router.pushViewController(viewController: albumVC)
+        router.pushViewController(viewController: albumVC)        
     }
 
     func displayItem(item: WrapData) {

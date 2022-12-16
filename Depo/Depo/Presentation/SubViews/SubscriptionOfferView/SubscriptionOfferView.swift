@@ -243,7 +243,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         switch plan.type {
         case .current:
             button.setBackgroundColor(AppColor.darkBlueColor.color, for: UIControl.State())
-            button.setTitle(TextConstants.cancel, for: UIControl.State())
+            button.setTitle(localized(.subscriptionOfferCancelButton), for: UIControl.State())
             button.setTitleColor(UIColor.white, for: UIControl.State())
             button.layer.borderColor = ColorConstants.marineTwo.cgColor
             button.layer.borderWidth = 1

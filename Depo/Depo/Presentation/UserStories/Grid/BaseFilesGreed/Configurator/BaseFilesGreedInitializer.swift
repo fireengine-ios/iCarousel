@@ -192,6 +192,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.cardsContainerView.addPermittedPopUpViewTypes(types: [.sync, .upload, .download])
         viewController.cardsContainerView.isEnable = true
         viewController.status = status
+        viewController.plusButtonType = "Folder"
         
         let configurator = BaseFilesGreedModuleConfigurator()
         let elementsConfig = ElementTypes.filesInFolderElementsConfig(for: status, viewType: .bottomBar)

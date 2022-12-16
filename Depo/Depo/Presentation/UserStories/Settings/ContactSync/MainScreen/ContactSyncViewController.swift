@@ -83,6 +83,7 @@ final class ContactSyncViewController: BaseViewController, NibInit {
         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
             self?.updateBackupStatus()
         }
+        updateBackupStatus()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,7 +91,6 @@ final class ContactSyncViewController: BaseViewController, NibInit {
         
         setupNavBar()
         contactSyncHelper.delegate = self
-        updateBackupStatus()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

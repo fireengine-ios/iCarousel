@@ -108,7 +108,11 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
             }
             
             let numbers = newValue.components(separatedBy: " ")
-            if numbers.count == 3 {
+            if numbers.count == 5 {
+                textField.text = numbers[0]
+                monthTextField.text = numbers[2]
+                yearTextField.text = numbers[4]
+            } else if numbers.count == 3 {
                 textField.text = numbers[0]
                 monthTextField.text = numbers[1]
                 yearTextField.text = numbers[2]

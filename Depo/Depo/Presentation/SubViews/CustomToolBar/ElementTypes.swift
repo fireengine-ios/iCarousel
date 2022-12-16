@@ -181,6 +181,9 @@ enum ElementTypes {
             case .actionSheet:
                 result = [.select, .changeCoverPhoto, .shareAlbum, .download, .removeAlbum, .albumDetails]  + ElementTypes.activeState
                 
+            case .actionSheetWithoutChangeCover:
+                result = [.select, .shareAlbum, .download, .removeAlbum, .albumDetails]  + ElementTypes.activeState
+                
             case .selectionMode:
                 result = [.createStory, .addToFavorites, .removeFromFavorites]
                 if PrintService.isEnabled {
@@ -243,6 +246,24 @@ enum ElementTypes {
                 }
                 result.append(.removeFromFaceImageAlbum)
             }
+        case .actionSheetWithoutChangeCover:
+            result = [.select]
+
+            if item.fileType.isFaceImageType {
+                switch status {
+                case .hidden:
+                    result.append(contentsOf: ElementTypes.hiddenState)
+                    
+                case .trashed:
+                    result.append(contentsOf: ElementTypes.trashState)
+                    
+                default:
+                    if faceImageType == .people {
+                        result.append(.changePeopleThumbnail)
+                    }
+                    result.append(contentsOf: [.share] + ElementTypes.activeState)
+                }
+            }
         }
         
         return result
@@ -268,6 +289,8 @@ enum ElementTypes {
                 result = [.select]
             case .selectionMode:
                 result = [.rename]
+            case .actionSheetWithoutChangeCover:
+                result = [.select]
             }
         }
 
