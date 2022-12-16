@@ -61,7 +61,7 @@ final class UsageInfoViewController: ViewController {
             usagePercentageLabel.textAlignment = .center
             usagePercentageLabel.numberOfLines = 0
             usagePercentageLabel.textColor = AppColor.snackbarBackground.color
-            usagePercentageLabel.font = .appFont(.medium, size: 20)
+            usagePercentageLabel.font = .appFont(.medium, size: 16)
             usagePercentageLabel.adjustsFontSizeToFitWidth()
         }
     }
