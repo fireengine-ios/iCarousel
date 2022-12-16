@@ -52,7 +52,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>deeplink</string>
+				<string>akillidepo</string>
 			</array>
 		</dict>
 	</array>

@@ -18,7 +18,7 @@ final class BrandAmbassadorDeeplinkHandler: DeeplinkHandlerProtocol {
     // MARK: - DeeplinkHandlerProtocol
     
     func canOpenURL(_ url: URL) -> Bool {
-        return url.absoluteString == "deeplink://lifeboxBrandambassador"
+        return url.absoluteString == "akillidepo://markaelcisi"
     }
     
     func openURL(_ url: URL) {
