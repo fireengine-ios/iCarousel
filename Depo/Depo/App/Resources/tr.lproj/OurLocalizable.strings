@@ -2022,11 +2022,11 @@
 
 /*Fuzzy*/
 "ETK_KVKK_Izin_Politikasi" = "İzin Politikası";
-"kvkk_firms_link" = "";
-"kvkk_commercial_info_link" = "";
-"syncing" = "";
-"downloading" = "";
-"ETK_KVKK_Izin_Politikası" = "";
+"kvkk_firms_link" = "Lifecell Bulut Çözümleri A.Ş., Lifecell Dijital Servisler ve Çözümler A.Ş ve Grup Şirketleri";
+"kvkk_commercial_info_link" = "İzin Politikası";
+"syncing" = "Senkronize ediliyor";
+"downloading" = "İndiriliyor";
+"ETK_KVKK_Izin_Politikası" = "İzin Politikası";
 
 /*Free for {3 months}
 then {11,99 TRY/Month}*/

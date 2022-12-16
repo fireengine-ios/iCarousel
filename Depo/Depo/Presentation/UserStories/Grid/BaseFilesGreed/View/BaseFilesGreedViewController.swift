@@ -30,6 +30,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     var isAlbumList: Bool = false
     
+    var plusButtonType = String()
+    
     var isControllerCollageAnimations: Bool = false
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -137,6 +139,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         super.viewDidAppear(animated)
         configurateViewForPopUp()
         output.updateThreeDotsButton()
+        navigationItem.rightBarButtonItem?.isEnabled = true
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -187,6 +190,11 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             rightActions.append(newAlbum)
         } else {
             rightActions.append(newStory)
+        }
+        
+        if plusButtonType == "Folder" {
+            rightActions.removeAll()
+            rightActions.append(upload)
         }
         
         if isControllerCollageAnimations {
