@@ -2052,9 +2052,6 @@ then {11,99 TRY/Month}*/
 "title_paycell_friends" = "Paket Satın Alanlar (%d Kişi)";
 "paycell_share_message" = "lifebox Marka Elçisi Programına dahil oldum. Programa özel lifebox 6 aylık 250GB Premium paketine aşağıdaki linke tıklarak indirimli fiyattan sahip olabilirsin. Fırsatı kaçırma 😊";
 "beeline_cancel_TC" = "Lifebox aboneliğinizi Beeline uygulamasından iptal edebilir veya yönetebilirsiniz.";
-
-/*aynı isimli başka bir tag daha yaratılmış*/
-"paycell_share_message " = "";
 "foryou_throwback" = "Anıların";
 "foryou_myalbums" = "Albümlerim";
 "foryou_myanimations" = "Animasyonlarım";
@@ -2075,7 +2072,6 @@ then {11,99 TRY/Month}*/
 "we_are_creating_your_story_title" = "Hikayeni hazırlıyoruz.";
 "we_are_creating_your_story_desc" = "Hazır olduğunda Videolar albümünde bulabilirsin.";
 "trash_bin" = "Çöp Kutusu";
-"ksaldalks" = "";
 "empty_gallery_no_photo" = "Henüz hiç fotoğraf eklenmemiş";
 "empty_gallery_no_video" = "Henüz hiç video eklenmemiş";
 "empty_gallery_no_sync" = "lifebox'ınızda henüz hiçbir fotoğraf yedeklenmemiş";

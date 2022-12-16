@@ -2333,7 +2333,6 @@ then {11,99 TRY/Month}*/
 "title_paycell_friends" = "Personnes Ayant Acheté le Forfait (%d personnes)";
 "paycell_share_message" = "J'ai rejoint le Programme d'Ambassadeur de Marque lifebox. Vous pouvez avoir le forfait Premium lifebox spécifique au programme de 6 mois de 250 Go à prix réduit, en cliquant sur le lien ci-dessous. Ne le manquez pas 😊";
 "beeline_cancel_TC" = "Vous pouvez annuler ou gérer votre abonnement à lifebox depuis l'application  Beeline.";
-"paycell_share_message " = "";
 "foryou_throwback" = "Souvenirs";
 "foryou_myalbums" = "Mes Albums";
 "foryou_myanimations" = "Mes Animations";
@@ -2354,7 +2353,6 @@ then {11,99 TRY/Month}*/
 "we_are_creating_your_story_title" = "Nous préparons votre histoire.";
 "we_are_creating_your_story_desc" = "Lorsqu'il est prêt, vous pouvez y accéder à partir de l'album Vidéos.";
 "trash_bin" = "Corbeille";
-"ksaldalks" = "";
 "empty_gallery_no_photo" = "Vous n'avez pas encore de photos";
 "empty_gallery_no_video" = "";
 "empty_gallery_no_sync" = "";

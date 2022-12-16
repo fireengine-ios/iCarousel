@@ -2080,9 +2080,6 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "beeline_cancel_TC" = "You can cancel or manage your lifebox subscription from the Beeline application.";
-
-/*Fuzzy*/
-"paycell_share_message " = "You have been sent 5GB of lifebox storage, click to redeem";
 "foryou_throwback" = "Throwback";
 "foryou_myalbums" = "My Albums";
 "foryou_myanimations" = "My Animations";
@@ -2113,7 +2110,6 @@ then {11,99 TRY/Month}*/
 "we_are_creating_your_story_title" = "We are preparing your story.";
 "we_are_creating_your_story_desc" = "Once it is done, you can access it from Videos Album.";
 "trash_bin" = "Trash Bin";
-"ksaldalks" = "";
 "empty_gallery_no_photo" = "You don’t have any photos or videos in your lifebox yet.";
 "empty_gallery_no_video" = "You don’t have any videos in your lifebox yet.";
 "empty_gallery_no_sync" = "You don’t have any photos in your lifebox yet.";

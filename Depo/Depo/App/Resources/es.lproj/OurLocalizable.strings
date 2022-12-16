@@ -2070,7 +2070,6 @@ then {11,99 TRY/Month}*/
 "title_paycell_friends" = "Personas que Compraron el Paquete (%d Personas)";
 "paycell_share_message" = "Me uní al Programa de Embajadores de la Marca lifebox. Puede obtener el paquete Premium lifebox de 6 meses y 250 GB específico del programa a un precio con descuento, haciendo clic en el enlace a continuación. No te lo pierdas 😊";
 "beeline_cancel_TC" = "Puedes cancelar o gestionar tu suscripción a lifebox desde la aplicación Beeline.";
-"paycell_share_message " = "";
 "foryou_throwback" = "Memorias";
 "foryou_myalbums" = "Mis Álbumes";
 "foryou_myanimations" = "Mis Animaciones";
@@ -2091,7 +2090,6 @@ then {11,99 TRY/Month}*/
 "we_are_creating_your_story_title" = "Estamos preparando tu historia.";
 "we_are_creating_your_story_desc" = "Una vez hecho esto, puede acceder a él desde el Álbum de Videos.";
 "trash_bin" = "Papelera";
-"ksaldalks" = "";
 "empty_gallery_no_photo" = "Aún no tienes ninguna foto";
 "empty_gallery_no_video" = "";
 "empty_gallery_no_sync" = "";
