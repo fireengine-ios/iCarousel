@@ -579,16 +579,15 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
 
         if (selectedItemsCount == 0) {
             debugLog("BaseFilesGreedPresenter onChangeSelectedItemsCount selectedItemsCount == 0")
-
-            dismissBottomBar(animated: true)
+            
+            stopEditing()
         } else {
             debugLog("BaseFilesGreedPresenter onChangeSelectedItemsCount selectedItemsCount != 0")
 
             showBottomBar(animated: true, onView: nil)
+            view.setThreeDotsMenu(active: canShow3DotsButton())
+            self.view.selectedItemsCountChange(with: selectedItemsCount)
         }
-        
-        view.setThreeDotsMenu(active: canShow3DotsButton())
-        self.view.selectedItemsCountChange(with: selectedItemsCount)
     }
     
     func showBottomBar(animated: Bool, onView: UIView?) {

@@ -148,12 +148,10 @@ extension HiddenPhotosViewController {
     }
     
     private func updateBarsForSelectedObjects(count: Int) {
-        navbarManager.changeSelectionItems(count: count)
-
         if count == 0 {
-            bottomBarManager.hide()
-            collectionView.contentInset.bottom = 0
+            stopSelectionState()
         } else {
+            navbarManager.changeSelectionItems(count: count)
             bottomBarManager.show()
             collectionView.contentInset.bottom = bottomBarManager.editingTabBar?.editingBar.bounds.height ?? 0
         }
