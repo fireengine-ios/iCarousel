@@ -17,23 +17,22 @@ final class PrivateShareAccessListCell: UITableViewCell {
     @IBOutlet private weak var typeImageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaMedFont(size: 16)
-            newValue.textColor = ColorConstants.textGrayColor
+            newValue.font = .appFont(.regular, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
     
     @IBOutlet private weak var dateLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaFont(size: 18)
-            newValue.textColor = ColorConstants.lightText
+            newValue.font = .appFont(.light, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
     
     @IBOutlet private weak var roleButton: UIButton! {
         willSet {
-            newValue.setTitleColor(.lrTealishFour, for: .normal)
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 18)
-            newValue.tintColor = .lrTealishFour
+            newValue.setTitleColor(AppColor.filesLabel.color, for: .normal)
+            newValue.titleLabel?.font = .appFont(.regular, size: 14)
             newValue.forceImageToRightSide()
             newValue.imageEdgeInsets.left = -10
         }
