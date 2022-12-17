@@ -169,18 +169,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         switch cellType {
-        case .invitation:
-            if let delegate = settingsDelegate {
-                delegate.goToInvitation()
-            } else {
-                output.goToInvitation()
-            }
-        case .paycell:
-            if let delegate = settingsDelegate {
-                delegate.goToPaycellCampaign()
-            } else {
-                output.goToPaycellCampaign()
-            }
         case .autoUpload:
             if let delegate = settingsDelegate {
                 delegate.goToAutoUpload()
@@ -198,12 +186,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 delegate.goToFaceImage()
             } else {
                 output.goToFaceImage()
-            }
-        case .connectAccounts:
-            if let delegate = settingsDelegate {
-                delegate.goToConnectedAccounts()
-            } else {
-                output.goToConnectedAccounts()
             }
         case .permissions:
             if let delegate = settingsDelegate {
