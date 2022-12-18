@@ -36,31 +36,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
     var editingTabBar: BottomSelectionTabBarViewController!
     var isPublicSharedItem = false
     private var needToScrollAfterRotation = true
+    private var isShowPhoto = true
 
     private var isFullScreen = false {
         didSet {
-            ///  ANIMATION
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { 
-//                UIApplication.shared.isStatusBarHidden = self.isFullScreen
-//            }
-//            navigationController?.setNavigationBarHidden(self.isFullScreen, animated: true)
-//            
-//            if isFullScreen {
-//                UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
-//                    self.editingTabBar.view.transform = CGAffineTransform(translationX: 0, y: self.editingTabBar.view.bounds.height)
-//                }, completion: {_ in
-//                    self.editingTabBar.view.isHidden = self.isFullScreen
-//                })
-//                
-//            } else {      
-//                editingTabBar.view.isHidden = self.isFullScreen
-//                UIView.animate(withDuration: NumericConstants.animationDuration) { 
-//                    self.editingTabBar.view.transform = .identity
-//                }
-//            }
-            
-            /// without animation
-
             viewForBottomBar.isHidden = isFullScreen
             editingTabBar.view.isHidden = isFullScreen
             navigationController?.setNavigationBarHidden(isFullScreen, animated: false)
@@ -68,7 +47,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
             
             bottomBlackView.isHidden = self.isFullScreen
             viewForBottomBar.isUserInteractionEnabled = !self.isFullScreen
-
             adjustBottomSpacingForRecognizeTextButton()
         }
     }
@@ -87,9 +65,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
             
             if let index = selectedIndex {
                 output.setSelectedItemIndex(selectedIndex: index)
-            }
-            if oldValue != selectedIndex {
-                updateFileInfo()
             }
         }
     }
@@ -165,7 +140,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         // TODO: EditingBarConfig is not working
         editingTabBar.editingBar.barStyle = .blackOpaque
         editingTabBar.editingBar.clipsToBounds = true
-        //editingTabBar.editingBar.layer.borderWidth = 0
 
         statusBarStyle = .lightContent
         
@@ -182,7 +156,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         super.viewDidAppear(animated)
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
         passThroughView?.enableGestures()
-        updateFirstVisibleCell()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -224,15 +197,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
     }
     
-    private func updateFirstVisibleCell() {
-        guard let selectedIndex = selectedIndex else {
-            return
-        }
-        
-        let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoVideoDetailCell })
-        cells.first?.setObject(object: objects[selectedIndex])
-    }
-    
     func hideView() {
         customDeinit()
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
@@ -250,14 +214,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
     private func scrollToSelectedIndex() {
         setupNavigationBar()
         setupTitle()
-        
-        if isPublicSharedItem {
-            updateFileInfo()
-        } else {
-            output.getFIRStatus { [weak self] in
-                self?.updateFileInfo()
-            }
-        }
         
         guard let index = selectedIndex else  {
             return
@@ -290,13 +246,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
 
     private func setupTitle() {
         setNavigationTitle(title: selectedItem?.name ?? "")
-    }
-    
-    private func updateFileInfo() {
-        guard let selectedItem = selectedItem else { return }
-        bottomDetailView?.setObject(selectedItem) {
-            self.output.getPersonsForSelectedPhoto(completion: nil)
-        }
     }
     
     func onShowSelectedItem(at index: Int, from items: [Item]) {
@@ -387,8 +336,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
             if isFullScreen {
                 spacing = view.safeAreaInsets.bottom + 20
             } else {
-                //let minY = viewForBottomBar.convert(editingTabBar.view.frame, to: view).minY
-                //spacing = (view.frame.maxY - minY) + 50
                 spacing = view.safeAreaInsets.bottom + 90
             }
 
@@ -658,7 +605,7 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
         if visibleIndexes.contains(indexToChange) {
             output.updateBars()
             setupNavigationBar()
-            updateFileInfo()
+            //updateFileInfo()
             collectionView.reloadItems(at: [IndexPath(item: indexToChange, section: 0)])
         }
     }
@@ -674,13 +621,20 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? PhotoVideoDetailCell else {
-            return
-        }
         
         guard selectedIndex != nil else {
             return
         }
+        
+        guard !isShowPhoto || selectedIndex == 0 else {
+            isShowPhoto.toggle()
+            return
+        }
+        
+        guard let cell = cell as? PhotoVideoDetailCell else {
+            return
+        }
+        
         cell.delegate = self
         cell.isRecognizeTextEnabled = output.ocrEnabled
         cell.recognizeTextButton.alpha = isBottomViewOpen ? 0 : 1
