@@ -23,7 +23,6 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     @IBOutlet private weak var imageScrollView: ImageScrollView!
     @IBOutlet private weak var activity: UIActivityIndicatorView!
     @IBOutlet private weak var playVideoButton: UIButton!
-    @IBOutlet private weak var placeholderImageView: UIImageView!
 
     let recognizeTextButton = RecognizeTextButton()
     private var recognizeTextButtonBottomConstraint: NSLayoutConstraint?
@@ -121,7 +120,6 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         
         playVideoButton.isHidden = true
         imageScrollView.isHidden = true
-        placeholderImageView.isHidden = true
         recognizeTextButton.isHidden = true
     }
 
@@ -149,7 +147,6 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         currentItemId = object.uuid
         fileType = object.fileType
         isLocalItem = object.isLocalItem
-        placeholderImageView.isHidden = true
         recognizeTextButton.isHidden = true
         
         if fileType == .video || fileType == .image {
@@ -266,17 +263,14 @@ extension PhotoVideoDetailCell: ImageScrollViewDelegate {
             recognizeTextButton.isHidden = true
             setPlaceholder()
         } else {
-            placeholderImageView.isHidden = true
             imageScrollView.isHidden = !(fileType == .video || fileType == .image)
             recognizeTextButton.isHidden = fileType != .image || isLocalItem || !isRecognizeTextEnabled
         }
     }
     
     private func setPlaceholder() {
-        placeholderImageView.image = WrapperedItemUtil.privateSharePlaceholderImage(fileType: fileType)
         imageScrollView.isHidden = true
         webView.isHidden = true
-        placeholderImageView.isHidden = false
         delegate?.itemPlaceholderFinished()
     }
 }

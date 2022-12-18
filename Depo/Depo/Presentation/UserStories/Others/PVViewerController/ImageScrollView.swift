@@ -53,7 +53,6 @@ final class ImageScrollView: UIScrollView {
         delegate = self
         
         imageView.frame = bounds
-//        imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         imageView.isUserInteractionEnabled = true
         addSubview(imageView)
         imageView.addGestureRecognizer(doubleTapGesture)
