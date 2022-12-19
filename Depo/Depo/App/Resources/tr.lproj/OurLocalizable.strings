@@ -448,7 +448,7 @@
 "We have created a collage from your photos!" = "Senin için bir kolaj oluşturduk";
 "Save Collage" = "Kolajı Kaydet";
 "View" = "Görüntüle";
-"Album Card" = "Album Kartı";
+"Album Card" = "Albüm Kartı";
 "We have created an album for you." = "Senin için bir albüm oluşturduk";
 "Save Album" = "Albümü Kaydet";
 "Movie" = "Video";
@@ -2052,7 +2052,7 @@ then {11,99 TRY/Month}*/
 "title_paycell_friends" = "Paket Satın Alanlar (%d Kişi)";
 "paycell_share_message" = "lifebox Marka Elçisi Programına dahil oldum. Programa özel lifebox 6 aylık 250GB Premium paketine aşağıdaki linke tıklarak indirimli fiyattan sahip olabilirsin. Fırsatı kaçırma 😊";
 "beeline_cancel_TC" = "Lifebox aboneliğinizi Beeline uygulamasından iptal edebilir veya yönetebilirsiniz.";
-"foryou_throwback" = "Anıların";
+"foryou_throwback" = "Anılar";
 "foryou_myalbums" = "Albümlerim";
 "foryou_myanimations" = "Animasyonlarım";
 "foryou_collages" = "Kolajlar";
@@ -2062,7 +2062,7 @@ then {11,99 TRY/Month}*/
 "foryou_no_photopick_warn" = "Henüz PhotoPick kullanmadın.";
 "foryou_no_story_warn" = "Şu an aktif bir hikaye yok.";
 "foryou_try_photopick" = "Photopick'i dene";
-"foryou_see_all" = "Tümünü gör";
+"foryou_see_all" = "Tümünü Gör";
 
 /*Facelift*/
 "tabbar_foryou" = "Senin İçin";
@@ -2076,4 +2076,4 @@ then {11,99 TRY/Month}*/
 "empty_gallery_no_video" = "Henüz hiç video eklenmemiş";
 "empty_gallery_no_sync" = "lifebox'ınızda henüz hiçbir fotoğraf yedeklenmemiş";
 "empty_gallery_no_unsync" = "lifebox'ınızda yedeklenmemiş hiçbir dosya yok";
-"subscription_offer_cancel_button" = "İptal et";
+"subscription_offer_cancel_button" = "İptal Et";

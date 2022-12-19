@@ -419,7 +419,7 @@
 "Change cover photo" = "Change Cover Photo";
 "Photo uploaded" = "Photo uploaded";
 "Please select a language option" = "Please select a language option";
-"My Stories" = "My Stories";
+"My Stories" = "Stories";
 "People" = "People";
 "Things" = "Things";
 "Places" = "Places";
@@ -1597,10 +1597,10 @@
 "contact_phase2_backup_contacts_button" = "Back up Now";
 "contact_phase2_small_card_backup_message" = "Your last backup was on ";
 "contact_phase2_small_card_backup_button" = "See Backup";
-"contact_phase2_small_card_duplicates_message" = "You can edit your phone contact list by clearing the duplicate entries on your phone";
+"contact_phase2_small_card_duplicates_message" = "You can edit your phone contact list by clearing the duplicate entries on your phone.";
 "contact_phase2_small_card_duplicates_button" = "Delete Duplicates on iPhone";
 "contact_phase2_big_card_backup_message" = "Back up your contacts in your lifebox safely!";
-"contact_phase2_big_card_contacts" = "contacts";
+"contact_phase2_big_card_contacts" = "Contacts";
 "contact_phase2_big_card_see_contacts_button" = "See Contacts";
 "contact_phase2_big_card_autobackup_format" = "Auto Backup: %@";
 "contact_phase2_backup_progress_title" = "Back up Contacts";
