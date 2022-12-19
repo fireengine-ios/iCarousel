@@ -136,7 +136,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         navigationItem.title = "\(count) \(TextConstants.accessibilitySelected)"
         
         if count == 0 {
-            bottomBarPresenter?.dismiss(animated: true)
+            stopSelection()
         } else {
             bottomBarPresenter?.show(animated: true, onView: view)
         }
