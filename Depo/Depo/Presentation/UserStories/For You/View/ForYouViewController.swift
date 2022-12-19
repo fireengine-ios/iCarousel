@@ -95,7 +95,7 @@ extension ForYouViewController: ForYouViewInput {
     
     func didGetUpdateData() {
         guard let currentSection = output.currentSection else { return }
-        updateTableView(for: currentSection)
+        //updateTableView(for: currentSection) // Satır çalışıtrsa kaydedilen kartın thumbnail ini siliyor. Update e gerek yok.
     }
     
     func saveCardFailed(section: ForYouSections) {

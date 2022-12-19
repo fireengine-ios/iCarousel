@@ -319,7 +319,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             }
         }) { [weak self] (errorResponse) in
             DispatchQueue.main.async {
-                self?.output.failedUpdate(error: errorResponse)
+                //self?.output.failedUpdate(error: errorResponse) İşlem tekrar başlatıldığı için kullanıcıya hatayı göstermeye gerek yok kararı alındı.
                 self?.output.updatePeople(items: [])
                     completion?()
             }

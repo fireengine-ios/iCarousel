@@ -7,12 +7,9 @@
 //
 
 enum SettingsTypes: Int {
-    case invitation
-    case paycell
     case autoUpload
     case periodicContactSync
     case faceImage
-    case connectAccounts
     case permissions
     case myActivities
     case passcode
@@ -22,12 +19,9 @@ enum SettingsTypes: Int {
     
     var text: String {
         switch self {
-        case .invitation: return TextConstants.settingsItemInvitation
-        case .paycell: return localized(.paycellCampaignTitle)
         case .autoUpload: return TextConstants.settingsViewCellAutoUpload
         case .periodicContactSync: return TextConstants.settingsViewCellContactsSync
         case .faceImage: return TextConstants.settingsViewCellFaceAndImageGrouping
-        case .connectAccounts: return TextConstants.settingsViewCellConnectedAccounts
         case .permissions: return TextConstants.settingsViewCellPermissions
         case .myActivities: return TextConstants.settingsViewCellActivityTimline
         case .passcode: return TextConstants.settingsViewCellLoginSettings
@@ -65,23 +59,9 @@ enum SettingsTypes: Int {
                                           isChatbotShown: Bool,
                                           isPaycellShown: Bool) {
         var cells: [SettingsTypes] = []
-        
-        if isInvitationShown {
-            cells.append(SettingsTypes.invitation)
-        }
-        
-        if isPaycellShown {
-            cells.append(SettingsTypes.paycell)
-        }
-        
+
         cells.append(contentsOf: SettingsTypes.defaultSectionOneTypes)
         
-        var accountTypes = [SettingsTypes.connectAccounts]
-        if hasPermissions {
-            accountTypes.append(SettingsTypes.permissions)
-        }
-        
-        cells.append(contentsOf: accountTypes)
         cells.append(contentsOf: SettingsTypes.defaultSectionTwoTypes)
         
         if ((Device.locale == "tr" || Device.locale == "en") && !RouteRequests.isBillo) {
