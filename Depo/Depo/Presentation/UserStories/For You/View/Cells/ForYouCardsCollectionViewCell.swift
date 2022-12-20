@@ -227,6 +227,13 @@ class ForYouCardsCollectionViewCell: UICollectionViewCell {
                 let videoCount = albumItem.videoCount ?? 0
                 setupAlbumDescriptionWith(albumName: albumName, photosCount: imageCount + videoCount)
             }
+        } else if currentView == .animationCards {
+            let searchItem = SearchItemResponse(withJSON: object)
+            let item = WrapData(remote: searchItem)
+            item.syncStatus = .synced
+            item.isLocalItem = false
+            cardThumbnailImage.loadImageIncludingGif(with: item)
+            self.item = item
         } else {
             let searchItem = SearchItemResponse(withJSON: object)
             let item = WrapData(remote: searchItem)
