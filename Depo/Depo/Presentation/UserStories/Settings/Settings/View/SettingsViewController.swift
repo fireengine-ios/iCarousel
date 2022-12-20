@@ -285,12 +285,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - SettingsViewInput
 extension SettingsViewController: SettingsViewInput {
 
-    func prepareCellsData(isPermissionShown: Bool, isInvitationShown: Bool, isChatbotShown: Bool, isPaycellShown: Bool) {
+    func prepareCellsData(isChatbotShown: Bool) {
         self.isChatbotShown = isChatbotShown
-        cellTypes = SettingsTypes.prepareTypes(hasPermissions: isPermissionShown,
-                                               isInvitationShown: isInvitationShown,
-                                               isChatbotShown: isChatbotShown,
-                                               isPaycellShown: isPaycellShown)
+        cellTypes = SettingsTypes.prepareTypes(isChatbotShown: isChatbotShown)
         self.setupTableViewFooter()
     }
     
