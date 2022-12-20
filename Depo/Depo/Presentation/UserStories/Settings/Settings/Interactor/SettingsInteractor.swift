@@ -20,8 +20,6 @@ final class SettingsInteractor: SettingsInteractorInput {
     
     private let analyticsManager: AnalyticsService = factory.resolve()
     
-    private var isNeedShowPermissions: Bool?
-
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
     }
@@ -41,7 +39,7 @@ final class SettingsInteractor: SettingsInteractorInput {
     }
     
     func getCellsData() {
-        checkNeedShowPermissions()
+        populateDataForCells()
     }
 
     func onLogout() {
@@ -99,7 +97,6 @@ final class SettingsInteractor: SettingsInteractorInput {
         SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] accountInfo in
             self?.userInfoResponse = accountInfo
             self?.getUserStatus()
-            self?.populateDataForCells()
         }, fail: { [weak self] errorResponse in
             self?.output.didFailToObtainUserStatus(errorMessage: errorResponse.errorDescription ?? TextConstants.errorServer)
             
@@ -131,39 +128,8 @@ final class SettingsInteractor: SettingsInteractorInput {
         }
     }
     
-    private func checkNeedShowPermissions() {
-        guard isNeedShowPermissions == nil else {
-            populateDataForCells()
-            return
-        }
-        
-        output.asyncOperationStarted()
-        accountService.getPermissionsAllowanceInfo { [weak self] response in
-            DispatchQueue.main.async {
-                switch response {
-                case .success(let permissions):
-                    
-                    self?.isNeedShowPermissions = permissions.contains(where: { $0.isAllowed == true })
-                    self?.populateDataForCells()
-
-                case .failed(let error):
-                    debugPrint("get Permissions error \(error.localizedDescription)")
-                }
-                
-                self?.output.asyncOperationStoped()
-            }
-        }
-    }
-    
     func populateDataForCells() {
-        let isPermissionShown = self.isNeedShowPermissions ?? false
-        let isInvitationShown = self.userInfoResponse?.showInvitation ?? false
         let isChatMenuEnabled = self.isChatMenuEnabled
-        let isPaycellShown    = self.userInfoResponse?.showPaycell ?? false
-
-        output.cellsDataForSettings(isPermissionShown: isPermissionShown,
-                                    isInvitationShown: isInvitationShown,
-                                    isChatbotShown: isChatMenuEnabled,
-                                    isPaycellShown: isPaycellShown)
+        output.cellsDataForSettings(isChatbotShown: isChatMenuEnabled)
     }
 }
