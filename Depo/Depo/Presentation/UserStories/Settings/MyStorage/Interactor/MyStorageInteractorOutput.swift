@@ -8,7 +8,6 @@
 
 protocol MyStorageInteractorOutput: AnyObject {
     
-    func successedPackages(accountTypeString: String)
     func successedPackages(allOffers: [PackageModelResponse])
     func successed(tokenForOffer: String)
     func successed(accountInfo: AccountInfoResponse)
