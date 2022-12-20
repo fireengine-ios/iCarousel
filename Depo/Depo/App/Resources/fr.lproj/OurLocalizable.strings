@@ -2305,11 +2305,11 @@ Please check I have understood the intended command here*/
 
 /*Fuzzy*/
 "ETK_KVKK_Izin_Politikasi" = "Politique d'autorisation";
-"kvkk_firms_link" = "";
-"kvkk_commercial_info_link" = "";
-"syncing" = "";
-"downloading" = "";
-"ETK_KVKK_Izin_Politikası" = "";
+"kvkk_firms_link" = "Lifecell Bulut Çözümleri A.Ş., Lifecell Dijital Servisler ve Çözümler A.Ş et les Sociétés du Groupe";
+"kvkk_commercial_info_link" = "Politique d'autorisation";
+"syncing" = "Synchronisation";
+"downloading" = "Téléchargement";
+"ETK_KVKK_Izin_Politikası" = "Politique d'autorisation";
 
 /*Free for {3 months}
 then {11,99 TRY/Month}*/
@@ -2348,13 +2348,13 @@ then {11,99 TRY/Month}*/
 /*Facelift*/
 "tabbar_foryou" = "Pour Toi";
 "tabbar_discover" = "Découvrir";
-"change_pass_mail_or_phone" = "";
-"mystorage_become_premium" = "";
+"change_pass_mail_or_phone" = "E-mail ou Numéro de Téléphone";
+"mystorage_become_premium" = "Pour plus de fonctionnalités, devenez membre Premium";
 "we_are_creating_your_story_title" = "Nous préparons votre histoire.";
 "we_are_creating_your_story_desc" = "Lorsqu'il est prêt, vous pouvez y accéder à partir de l'album Vidéos.";
 "trash_bin" = "Corbeille";
 "empty_gallery_no_photo" = "Vous n'avez pas encore de photos";
-"empty_gallery_no_video" = "";
-"empty_gallery_no_sync" = "";
-"empty_gallery_no_unsync" = "";
-"subscription_offer_cancel_button" = "";
+"empty_gallery_no_video" = "Vous n'avez pas encore de vidéos dans votre lifebox";
+"empty_gallery_no_sync" = "Vous n'avez pas encore de photos dans votre lifebox";
+"empty_gallery_no_unsync" = "Il n'y a aucun fichier non mis à jour dans votre lifebox";
+"subscription_offer_cancel_button" = "Annuler";

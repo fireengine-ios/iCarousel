@@ -2043,11 +2043,11 @@
 
 /*Fuzzy*/
 "ETK_KVKK_Izin_Politikasi" = "Politika e Lejes";
-"kvkk_firms_link" = "";
-"kvkk_commercial_info_link" = "";
-"syncing" = "";
-"downloading" = "";
-"ETK_KVKK_Izin_Politikası" = "";
+"kvkk_firms_link" = "Lifecell Bulut Çözümleri A.Ş., Lifecell Dijital Servisler ve Çözümler A.Ş dhe Kompanitë e Grupit";
+"kvkk_commercial_info_link" = "Politika e Lejes";
+"syncing" = "Po sinkronizohet";
+"downloading" = "Po shkarkohet";
+"ETK_KVKK_Izin_Politikası" = "Politika e Lejes";
 
 /*Free for {3 months}
 then {11,99 TRY/Month}*/
@@ -2086,13 +2086,13 @@ then {11,99 TRY/Month}*/
 /*Facelift*/
 "tabbar_foryou" = "Per Ty";
 "tabbar_discover" = "Zbuloni";
-"change_pass_mail_or_phone" = "";
-"mystorage_become_premium" = "";
+"change_pass_mail_or_phone" = "E-mail ose Numër Telefoni";
+"mystorage_become_premium" = "Për më shumë veçori, bëhuni anëtar Premium";
 "we_are_creating_your_story_title" = "Ne po përgatisim historinë tuaj.";
 "we_are_creating_your_story_desc" = "Pasi të ketë mbaruar, mund ta aksesoni atë nga Video Album.";
 "trash_bin" = "Kosh Plehrash";
 "empty_gallery_no_photo" = "Nuk keni ende asnjë foto";
-"empty_gallery_no_video" = "";
-"empty_gallery_no_sync" = "";
-"empty_gallery_no_unsync" = "";
-"subscription_offer_cancel_button" = "";
+"empty_gallery_no_video" = "Nuk ke ende asnjë video në lifebox-in tënd";
+"empty_gallery_no_sync" = "Nuk keni ende asnjë fotografi në lifebox -in tuaj";
+"empty_gallery_no_unsync" = "Nuk ka skedarë të pa përditësuar në lifebox-in tuaj";
+"subscription_offer_cancel_button" = "Anulo";

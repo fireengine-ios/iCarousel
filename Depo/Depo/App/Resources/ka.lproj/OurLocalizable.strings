@@ -2050,4 +2050,4 @@ then {11,99 TRY/Month}*/
 "empty_gallery_no_video" = "You don’t have any videos in your lifebox yet.";
 "empty_gallery_no_sync" = "You don’t have any photos in your lifebox yet.";
 "empty_gallery_no_unsync" = "empty_gallery_no_unsync";
-"subscription_offer_cancel_button" = "";
+"subscription_offer_cancel_button" = "გაუქმება";

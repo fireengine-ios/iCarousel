@@ -211,6 +211,10 @@ extension ForYouTableViewCell: UICollectionViewDataSource {
             let item = throwbackData[indexPath.row]
             cell.configure(with: item)
             return cell
+        case .animations:
+            let item = wrapData[indexPath.row]
+            cell.configure(with: item)
+            return cell
         default:
             let item = wrapData[indexPath.row]
             cell.configure(with: item, currentView: currentView ?? .people)

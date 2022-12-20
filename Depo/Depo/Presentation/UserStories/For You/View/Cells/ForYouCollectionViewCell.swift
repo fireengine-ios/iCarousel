@@ -11,7 +11,7 @@ import SDWebImage
 
 class ForYouCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet private weak var thumbnailImage: UIImageView! {
+    @IBOutlet private weak var thumbnailImage: LoadingImageView! {
         willSet {
             newValue.contentMode = .scaleAspectFill
             newValue.layer.cornerRadius = 5
@@ -29,5 +29,10 @@ class ForYouCollectionViewCell: UICollectionViewCell {
     
     func configure(with data: InstapickAnalyze) {
         thumbnailImage.sd_setImage(with: data.fileInfo?.metadata?.mediumUrl, completed: nil)
+    }
+    
+    func configure(with data: WrapData) {
+        thumbnailImage.loadImageIncludingGif(with: data)
+        
     }
 }

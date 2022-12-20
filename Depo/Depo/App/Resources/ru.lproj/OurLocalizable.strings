@@ -2014,11 +2014,11 @@
 
 /*Fuzzy*/
 "ETK_KVKK_Izin_Politikasi" = "Политика Разрешений";
-"kvkk_firms_link" = "";
-"kvkk_commercial_info_link" = "";
-"syncing" = "";
-"downloading" = "";
-"ETK_KVKK_Izin_Politikası" = "";
+"kvkk_firms_link" = "Lifecell Bulut Çözümleri A.Ş., Lifecell Dijital Servisler ve Çözümler A.Ş и Компании Группы";
+"kvkk_commercial_info_link" = "Политика Разрешений";
+"syncing" = "Идет Синхронизация";
+"downloading" = "Идет Загрузка";
+"ETK_KVKK_Izin_Politikası" = "Политика Разрешений";
 
 /*Free for {3 months}
 then {11,99 TRY/Month}*/
@@ -2057,13 +2057,13 @@ then {11,99 TRY/Month}*/
 /*Facelift*/
 "tabbar_foryou" = "Для Тебя";
 "tabbar_discover" = "Откройте для себя";
-"change_pass_mail_or_phone" = "";
-"mystorage_become_premium" = "";
+"change_pass_mail_or_phone" = "Адрес Электронной Почты или Номер Телефона";
+"mystorage_become_premium" = "Для больших возможностей станьте Premium-участником";
 "we_are_creating_your_story_title" = "Мы готовим вашу историю.";
 "we_are_creating_your_story_desc" = "Когда будет готово, то вы сможете получить доступ из альбома Видео.";
 "trash_bin" = "Корзина";
 "empty_gallery_no_photo" = "У вас пока нет фотографий.";
-"empty_gallery_no_video" = "";
-"empty_gallery_no_sync" = "";
-"empty_gallery_no_unsync" = "";
-"subscription_offer_cancel_button" = "";
+"empty_gallery_no_video" = "В вашем lifebox пока нет ни одного видео";
+"empty_gallery_no_sync" = "В вашем lifebox пока нет фотографий";
+"empty_gallery_no_unsync" = "В вашем lifebox нет не обновленных файлов";
+"subscription_offer_cancel_button" = "Отмена";
