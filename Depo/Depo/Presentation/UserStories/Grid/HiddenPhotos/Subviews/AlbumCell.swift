@@ -21,8 +21,13 @@ final class AlbumCell: BaseCollectionViewCell {
     
     @IBOutlet private weak var thumbnail: LoadingImageView! {
         willSet {
-            newValue.backgroundColor = UIColor.lightGray.lighter(by: 20.0)
+            newValue.backgroundColor = AppColor.background.color
             newValue.contentMode = .scaleAspectFill
+        }
+    }
+    @IBOutlet weak var emptyImage: UIImageView! {
+        willSet {
+            newValue.isHidden = true
         }
     }
     
@@ -50,7 +55,13 @@ final class AlbumCell: BaseCollectionViewCell {
     func setup(with item: BaseDataSourceItem) {
         if let album = item as? AlbumItem {
             titleLabel.text = album.name ?? ""
-            thumbnail.loadImage(with: album.preview, smooth: false)
+            
+            if album.preview?.albums != nil {
+                thumbnail.loadImage(with: album.preview, smooth: false)
+            } else {
+                emptyImage.isHidden = false
+            }
+            
         } else if let item = item as? Item {
             titleLabel.text = item.name ?? ""
             thumbnail.loadImage(with: item, smooth: false)

@@ -3,6 +3,16 @@
     {
       "filename" : "iconAlbum.pdf",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "iconAlbumDark.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {
