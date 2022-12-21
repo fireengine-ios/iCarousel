@@ -66,6 +66,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
             if let index = selectedIndex {
                 output.setSelectedItemIndex(selectedIndex: index)
             }
+            if oldValue != selectedIndex {
+                updateFileInfo()
+            }
         }
     }
     
@@ -215,6 +218,14 @@ final class PhotoVideoDetailViewController: BaseViewController {
         setupNavigationBar()
         setupTitle()
         
+        if isPublicSharedItem {
+           updateFileInfo()
+       } else {
+           output.getFIRStatus { [weak self] in
+               self?.updateFileInfo()
+           }
+       }
+        
         guard let index = selectedIndex else  {
             return
         }
@@ -247,6 +258,13 @@ final class PhotoVideoDetailViewController: BaseViewController {
     private func setupTitle() {
         setNavigationTitle(title: selectedItem?.name ?? "")
     }
+    
+    private func updateFileInfo() {
+           guard let selectedItem = selectedItem else { return }
+           bottomDetailView?.setObject(selectedItem) {
+               self.output.getPersonsForSelectedPhoto(completion: nil)
+           }
+       }
     
     func onShowSelectedItem(at index: Int, from items: [Item]) {
         //update collection on first launch or on change selectedItem
@@ -605,7 +623,7 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
         if visibleIndexes.contains(indexToChange) {
             output.updateBars()
             setupNavigationBar()
-            //updateFileInfo()
+            updateFileInfo()
             collectionView.reloadItems(at: [IndexPath(item: indexToChange, section: 0)])
         }
     }
