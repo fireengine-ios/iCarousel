@@ -94,6 +94,12 @@ final class AllFilesSegmentedController: SegmentedController, HeaderContainingVi
             setupSelectedController(viewControllers[selectedIndex])
         }
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        switchAllFilesCategory(to: 6)
+        selectedCellIndexPath = []
+        collectionView.reloadData()
+    }
 }
 
 //MARK: -UICollectionViewDataSource
