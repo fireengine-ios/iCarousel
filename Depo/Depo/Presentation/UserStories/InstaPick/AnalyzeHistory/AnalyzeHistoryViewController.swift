@@ -124,6 +124,11 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         updateNavBarItems()
     }
     
+    private func startSelection() {
+        displayManager.applyConfiguration(.selection)
+        updateNavBarItems()
+    }
+    
     private func stopSelection() {
         setTitle(withString: TextConstants.analyzeHistoryTitle)
         dataSource.cancelSelection()
@@ -215,7 +220,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             case .select:
                 action = UIAlertAction(title: TextConstants.actionSheetSelect, style: .default, handler: { _ in
                     self.dataSource.startSelection()
-                    self.startSelection(with: 0)
+                    self.startSelection()
                 })
             default:
                 action = nil

@@ -301,6 +301,7 @@ class PaycellCampaignViewController: BaseViewController {
     
     private func setupDetail(campaign: PaycellDetailResponse) {
         let hexColor = AppColor.campaignContentLabel.color.toHexString()
+        campagingDetail = campaign
         detailDescriptionLabel.attributedText = campaign.value.content.convertHtmlToAttributedStringWithCSS(font: .appFont(.medium, size: 12), csscolor: hexColor, lineheight: 5, csstextalign: "left")
     }
 }
