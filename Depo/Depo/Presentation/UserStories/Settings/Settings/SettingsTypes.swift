@@ -35,15 +35,11 @@ enum SettingsTypes: Int {
     static let defaultSectionTwoTypes = [myActivities, passcode]
     static var defaultSectionThreeTypes = [helpAndSupport]
     
-    static func prepareTypes(hasPermissions: Bool, isInvitationShown: Bool, isChatbotShown: Bool, isPaycellShown: Bool) -> [[SettingsTypes]] {
+    static func prepareTypes(isChatbotShown: Bool) -> [[SettingsTypes]] {
         var result = [[SettingsTypes]]()
         
         addPackagesSection(to: &result)
-        addDefaultSection(to: &result,
-                          hasPermissions: hasPermissions,
-                          isInvitationShown: isInvitationShown,
-                          isChatbotShown: isChatbotShown,
-                          isPaycellShown: isPaycellShown)
+        addDefaultSection(to: &result, isChatbotShown: isChatbotShown)
         return result
     }
     
@@ -54,15 +50,13 @@ enum SettingsTypes: Int {
     }
     
     private static func addDefaultSection(to result: inout [[SettingsTypes]],
-                                          hasPermissions: Bool,
-                                          isInvitationShown: Bool,
-                                          isChatbotShown: Bool,
-                                          isPaycellShown: Bool) {
+                                          isChatbotShown: Bool) {
         var cells: [SettingsTypes] = []
 
         cells.append(contentsOf: SettingsTypes.defaultSectionOneTypes)
         
         cells.append(contentsOf: SettingsTypes.defaultSectionTwoTypes)
+        cells.append(.permissions)
         
         if ((Device.locale == "tr" || Device.locale == "en") && !RouteRequests.isBillo) {
             if isChatbotShown && !defaultSectionThreeTypes.contains(chatbot) {

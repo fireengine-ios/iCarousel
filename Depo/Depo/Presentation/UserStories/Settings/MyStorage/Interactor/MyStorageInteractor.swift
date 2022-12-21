@@ -21,19 +21,6 @@ final class MyStorageInteractor {
     private let accountService: AccountServicePrl = AccountService()
     private let offersService: OffersService = OffersServiceIml()
     private let packageService = PackageService()
-    
-    private func getInfoForAppleProducts(offers: [SubscriptionPlanBaseResponse]) {
-        packageService.getInfoForAppleProducts(offers: offers, isActivePurchases: true, success: { [weak self] in
-            DispatchQueue.toMain {
-                self?.output.successed(allOffers: offers)
-            }
-            }, fail: { [weak self] error in
-                DispatchQueue.toMain {
-                    self?.output.successed(allOffers: offers)
-                    self?.output.failed(with: error.description)
-                }
-        })
-    }
 }
 
 //MARK: - MyStorageInteractorInput
@@ -131,7 +118,6 @@ extension MyStorageInteractor: MyStorageInteractorInput {
         })
     }
     
-    
     func getResendToken(for offer: PackageModelResponse) {
         offersService.initOffer(offer: offer,
             success: { [weak self] response in
@@ -154,7 +140,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
         })
     }
     
-    func getAvailableOffers(with accountType: AccountType) {
+    func getAvailableOffers() {
         accountService.availableOffers(affiliate: self.affiliate) { [weak self] (result) in
             switch result {
             case .success(let response):
@@ -167,6 +153,27 @@ extension MyStorageInteractor: MyStorageInteractorInput {
                 }
             }
         }
+    }
+    
+    func getAllOffers() {
+        subscriptionsService.activeSubscriptions(
+            success: { [weak self] response in
+                guard let subscriptionsResponse = response as? ActiveSubscriptionResponse else {
+                    let error = CustomErrors.serverError("An error occured while getting active subscription")
+                    DispatchQueue.toMain {
+                        self?.output.failed(with: error.localizedDescription)
+                    }
+                    return
+                }
+                SingletonStorage.shared.activeUserSubscription = subscriptionsResponse
+                
+                let offersList = subscriptionsResponse.list
+                self?.output.successed(allOffers: offersList)
+            }, fail: { [weak self] errorResponse in
+                DispatchQueue.toMain {
+                    self?.output.failed(with: errorResponse)
+                }
+        })
     }
     
     func convertToSubscriptionPlan(offers: [PackageModelResponse], accountType: AccountType) -> [SubscriptionPlan]  {
@@ -182,22 +189,6 @@ extension MyStorageInteractor: MyStorageInteractorInput {
             DispatchQueue.main.async {
                 self?.output.failed(with: error.description)
             }
-        })
-    }
-    
-    func getAccountTypePackages() {
-        SingletonStorage.shared.getAccountInfoForUser(
-            success: { [weak self] response in
-                guard let accountType = response.accountType else {
-                    return
-                }
-                DispatchQueue.main.async {
-                    self?.output.successedPackages(accountTypeString: accountType)
-                }
-            }, fail: { [weak self] error in
-                DispatchQueue.main.async {
-                    self?.output.failed(with: error.localizedDescription)
-                }
         })
     }
     
@@ -265,29 +256,6 @@ extension MyStorageInteractor: MyStorageInteractorInput {
         return packageService.getAccountType(for: accountType, offers: offers)
     }
     
-    func getAllOffers() {
-        subscriptionsService.activeSubscriptions(
-            success: { [weak self] response in
-                guard let subscriptionsResponse = response as? ActiveSubscriptionResponse else {
-                    let error = CustomErrors.serverError("An error occured while getting active subscription")
-                    DispatchQueue.toMain {
-                        self?.output.failed(with: error.localizedDescription)
-                    }
-                    return
-                }
-                SingletonStorage.shared.activeUserSubscription = subscriptionsResponse
-                
-                let offersList = subscriptionsResponse.list
-                
-                self?.getInfoForAppleProducts(offers: offersList)
-
-            }, fail: { [weak self] errorResponse in
-                DispatchQueue.toMain {
-                    self?.output.failed(with: errorResponse)
-                }
-        })
-    }
-    
     func restorePurchases() {
         guard !sendReciept() else {
             output.stopActivity()
@@ -297,9 +265,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
         iapManager.restorePurchases { [weak self] result in
             switch result {
             case .success:
-//                let offers = productIds.map { OfferApple(productId: $0) } ///Backend dont need this for now
                 self?.validateRestorePurchase(offersApple: [])
-                
             case .fail(let error):
                 DispatchQueue.main.async {
                     self?.output.failed(with: ErrorResponse.error(error))

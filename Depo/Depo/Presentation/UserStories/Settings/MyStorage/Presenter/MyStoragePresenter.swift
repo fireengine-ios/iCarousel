@@ -59,7 +59,6 @@ final class MyStoragePresenter {
         
         startActivity()
         interactor.getAllOffers()
-        interactor.getAvailableOffers(with: accountType)
     }
     
     //MARK: - UtilityMethods
@@ -83,7 +82,6 @@ extension MyStoragePresenter: MyStorageViewOutput {
 
         startActivity()
         interactor.getAccountType()
-        interactor.getAccountTypePackages()
     }
     
     func viewWillAppear() {
@@ -259,13 +257,6 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
             optInVC?.showError(TextConstants.promocodeInvalid)
         }
     }
-    
-    
-    func successedPackages(accountTypeString: String) {
-        accountType = interactor.getAccountTypePackages(with: accountTypeString, offers: []) ?? .all
-        view?.showInAppPolicy()
-        interactor.getAvailableOffers(with: accountType)
-    }
 
     func successedPackages(allOffers: [PackageModelResponse]) {
         accountType = interactor.getAccountTypePackages(with: accountType.rawValue, offers: allOffers)  ?? .all
@@ -283,18 +274,11 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     }
     
     func successed(accountInfo: AccountInfoResponse) {
-        ///https://jira.turkcell.com.tr/browse/FE-1642
-        ///iOS: Packages - Adding refresh button on My Storage page for all type of users
-        ///description in this task incorrent (title of this task correct)
+        view?.startActivityIndicator()
+        view?.showInAppPolicy()
+        interactor.getAvailableOffers()
         
-//        if let accountTypeString = accountInfo.accountType {
-//            accountType = interactor.getAccountType(with: accountTypeString, offers: allOffers) ?? .all
-//        }
-        
-//        if accountType == .all {
         view?.showRestoreButton()
-//        }
-        
         interactor.getAllOffers()
     }
     
@@ -341,15 +325,6 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
         } else {
             failed(with: error.description)
         }
-    }
-    
-    func successed(allOffers: [PackageModelResponse]) {
-        accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)  ?? .all
-        let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
-        availableOffers = filterPackagesByQuota(offers: offers)
-        
-        view?.stopActivityIndicator()
-        view?.reloadData()
     }
     
     func successed(tokenForOffer: String) {
