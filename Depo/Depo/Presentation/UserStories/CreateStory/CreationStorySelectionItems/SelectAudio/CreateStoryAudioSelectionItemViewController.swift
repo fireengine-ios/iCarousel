@@ -154,6 +154,13 @@ extension CreateStoryAudioSelectionItemViewController {
         CreateStoryMusicService().allItems(success: { [weak self] items in
             self?.showEmtyView(array: items)
             self?.itemsArray = items
+            
+            for (ind, el) in items.enumerated() {
+                if self?.photoStory?.music?.name == el.name {
+                    self?.selectedIndexForMusic = ind
+                }
+            }
+            
             self?.setSelectedItem()
             self?.hideSpinner()
         }) {
