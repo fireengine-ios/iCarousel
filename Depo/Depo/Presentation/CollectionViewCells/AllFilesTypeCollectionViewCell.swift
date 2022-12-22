@@ -62,7 +62,9 @@ enum AllFilesType: CaseIterable {
             return AppColor.filesFavoriteTab.color
         case .sharedByMe, .sharedWithMe:
             return AppColor.filesSharedTab.color
-        case .allFiles, .documentsAndMusic, .trashBin:
+        case .trashBin:
+            return AppColor.filesDocumentTab.color
+        case .allFiles, .documentsAndMusic:
             return nil
         }
     }

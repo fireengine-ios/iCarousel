@@ -143,10 +143,13 @@ extension AllFilesSegmentedController: UICollectionViewDelegate {
                 }
             }
         } else if !selectedCellIndexPath.contains(indexPath) {
-            if indexPath.row == AllFilesType.allCases.firstIndex(of: .favorites) ||
+            if indexPath.row == AllFilesType.allCases.firstIndex(of: .trashBin) ||
+                indexPath.row == AllFilesType.allCases.firstIndex(of: .favorites) ||
                 indexPath.row == AllFilesType.allCases.firstIndex(of: .sharedWithMe) ||
+                selectedCellIndexPath.contains(where: {$0.row == AllFilesType.allCases.firstIndex(of: .trashBin)}) ||
                 selectedCellIndexPath.contains(where: {$0.row == AllFilesType.allCases.firstIndex(of: .favorites)}) ||
                 selectedCellIndexPath.contains(where: {$0.row == AllFilesType.allCases.firstIndex(of: .sharedWithMe)}) {
+                
                 selectedCellIndexPath = [indexPath]
                 switchAllFilesCategory(to: indexPath.row)
             } else {
