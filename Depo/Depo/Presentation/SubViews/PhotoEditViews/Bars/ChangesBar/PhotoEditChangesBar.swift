@@ -26,7 +26,7 @@ final class PhotoEditChangesBar: UIView, NibInit {
         willSet {
             newValue.textColor = .white
             newValue.textAlignment = .center
-            newValue.font = .TurkcellSaturaMedFont(size: 16)
+            newValue.font = .appFont(.medium, size: 16)
         }
     }
     
