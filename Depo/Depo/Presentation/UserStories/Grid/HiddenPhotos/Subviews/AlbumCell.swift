@@ -56,7 +56,12 @@ final class AlbumCell: BaseCollectionViewCell {
         if let album = item as? AlbumItem {
             titleLabel.text = album.name ?? ""
             
-            if album.preview?.albums != nil {
+            guard let preview = album.preview else {
+                emptyImage.isHidden = false
+                return
+            }
+            
+            if preview.hasPreviewUrl {
                 thumbnail.loadImage(with: album.preview, smooth: false)
             } else {
                 emptyImage.isHidden = false
@@ -79,5 +84,6 @@ final class AlbumCell: BaseCollectionViewCell {
     func cancelImageLoading() {
         thumbnail.cancelLoadRequest()
         thumbnail.image = nil
+        emptyImage.isHidden = true
     }
 }
