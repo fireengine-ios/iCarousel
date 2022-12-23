@@ -253,6 +253,7 @@ extension ForYouTableViewCell: UICollectionViewDelegateFlowLayout {
             delegate?.navigateToItemPreview(item: item, items: wrapData, currentSection: currentView)
         case .throwback:
             let item = throwbackData[indexPath.row]
+            debugLog("tbcard \(indexPath.row) \(item.name)")
             delegate?.navigateToThrowbackDetail(item: item)
         default:
             return
