@@ -57,7 +57,7 @@ class ForYouCardsCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var shareButton: UIButton! {
         willSet {
             newValue.setTitleColor(AppColor.label.color, for: .normal)
-            newValue.setTitle("Share", for: .normal)
+            newValue.setTitle(TextConstants.tabBarShareLabel, for: .normal)
             newValue.titleLabel?.font = .appFont(.medium, size: 12)
         }
     }
