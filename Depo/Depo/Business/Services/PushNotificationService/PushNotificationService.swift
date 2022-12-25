@@ -244,7 +244,7 @@ final class PushNotificationService {
         case .silent: break
         case .albumDetail: openAlbumDetail()
         case .saveToMyLifebox: openSaveToMyLifebox()
-
+        case .brandAmbassador: openBrandAmbassador()
         }
         
         
@@ -628,5 +628,11 @@ private extension PushNotificationService {
         if tokenStorage.accessToken == nil {
             clear()
         }
+    }
+    
+    func openBrandAmbassador() {
+        let root = RouterVC()
+        let payCell = root.paycellCampaign()
+        root.pushViewController(viewController: payCell)
     }
 }
