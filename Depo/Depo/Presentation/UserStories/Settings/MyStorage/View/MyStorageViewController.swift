@@ -286,7 +286,9 @@ extension MyStorageViewController: SubscriptionOfferViewDelegate {
         
         switch(storageOfferType) {
         case.packageOffer:
-            let plan = output.availableOffers[planIndex]
+            guard let plan = output?.availableOffers[planIndex] else {
+                return
+            }
             presentPaymentPopUp(plan: plan, planIndex: planIndex)
         case.subscriptionPlan:
   
