@@ -8,10 +8,11 @@
 
 protocol MyStorageInteractorInput {
     
-    func getAvailableOffers()
+    func getAvailableOffers(with accountType: AccountType)
     func convertToSubscriptionPlan(offers: [PackageModelResponse], accountType: AccountType) -> [SubscriptionPlan]
     
     func getAccountTypePackages(with accountType: String, offers: [Any]) -> AccountType?
+    func getAccountTypePackages()
     func getToken(for offer: PackageModelResponse)
     func getResendToken(for offer: PackageModelResponse)
     func verifyOffer(_ offer: PackageModelResponse?, planIndex: Int, token: String, otp: String)

@@ -280,6 +280,10 @@ extension MyStorageViewController: MyStorageViewInput {
 extension MyStorageViewController: SubscriptionOfferViewDelegate {
     func didPressSubscriptionPlanButton(planIndex: Int, storageOfferType: StorageOfferType) {
         
+        if planIndex < 0  {
+            return
+        }
+        
         switch(storageOfferType) {
         case.packageOffer:
             let plan = output.availableOffers[planIndex]
