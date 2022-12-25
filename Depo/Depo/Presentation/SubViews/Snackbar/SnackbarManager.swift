@@ -31,17 +31,6 @@ enum SnackbarType {
     case critical
     case action
     
-    var numberOfLinesLimit: Int {
-        switch self {
-        case .nonCritical:
-            return 2
-        case .critical:
-            return 3
-        case .action:
-            return 3
-        }
-    }
-    
     var duration: TTGSnackbarDuration {
         switch self {
         case .nonCritical:

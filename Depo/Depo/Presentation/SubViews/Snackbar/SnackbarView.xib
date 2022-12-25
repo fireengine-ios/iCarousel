@@ -61,6 +61,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="actionButton" destination="xgp-bm-G26" id="mGt-gt-ZXQ"/>
+                <outlet property="actionButtonWidth" destination="o7V-nr-GdZ" id="dcY-XK-AZx"/>
                 <outlet property="contentView" destination="f9Z-Bb-ZUc" id="Itm-dC-mXP"/>
                 <outlet property="titleLabel" destination="e8A-hs-l3W" id="Vl0-8u-ozd"/>
             </connections>

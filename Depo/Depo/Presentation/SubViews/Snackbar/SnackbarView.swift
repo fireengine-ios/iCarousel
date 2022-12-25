@@ -23,7 +23,7 @@ final class SnackbarView: UIView, NibInit {
             newValue.text = ""
             newValue.font = .appFont(.regular, size: 14)
             newValue.textColor = .white
-            newValue.lineBreakMode = .byTruncatingTail
+            newValue.numberOfLines = 0
         }
     }
     
@@ -38,6 +38,7 @@ final class SnackbarView: UIView, NibInit {
             newValue.isHidden = true
         }
     }
+    @IBOutlet weak var actionButtonWidth: NSLayoutConstraint!
     
     static let shared = SnackbarView()
     
@@ -50,13 +51,14 @@ final class SnackbarView: UIView, NibInit {
     func with(type: SnackbarType, message: String, actionTitle: String?, axis: NSLayoutConstraint.Axis, action: VoidHandler?) -> SnackbarView {
         let view = SnackbarView.initFromNib()
         
-        view.titleLabel.numberOfLines = type.numberOfLinesLimit
         view.titleLabel.text = message
+        view.actionButtonWidth.constant = 0
         
         if let actionTitle = actionTitle {
             view.actionButton.setTitle(actionTitle, for: .normal)
             view.action = action
             view.actionButton.isHidden = false
+            view.actionButtonWidth.constant = 140
         }
 
         return view
