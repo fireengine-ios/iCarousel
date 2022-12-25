@@ -261,7 +261,22 @@ class RouterVC: NSObject {
     }
     
     func popToAnalizeStory() {
-        tabBarController?.selectedIndex = 1
+        guard let tabBarVC = tabBarController else {
+            return
+        }
+        
+        tabBarVC.dismiss(animated: true)
+        
+        let index = TabScreenIndex.forYou.rawValue
+        
+        guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index] else {
+            assertionFailure("This index is non existent 😵")
+            return
+        }
+        
+        tabBarVC.tabBar.selectedItem = newSelectedItem
+        tabBarVC.selectedIndex = index
+        
         tabBarController?.navigationController?.popToRootViewController(animated: true)
     }
     
