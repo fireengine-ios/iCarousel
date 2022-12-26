@@ -221,10 +221,6 @@ class PaycellCampaignViewController: BaseViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         earnedMoneyView.layer.borderColor = AppColor.campaignBorder.cgColor
-        
-        guard let campagingDetail = campagingDetail else { return }
-        self.showCampaignDetail(with: campagingDetail.value)
-
     }
     
     //MARK: -Helpers
