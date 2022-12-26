@@ -59,6 +59,7 @@ final class MyStoragePresenter {
         
         startActivity()
         interactor.getAllOffers()
+        interactor.getAvailableOffers(with: accountType)
     }
     
     //MARK: - UtilityMethods
@@ -82,6 +83,7 @@ extension MyStoragePresenter: MyStorageViewOutput {
 
         startActivity()
         interactor.getAccountType()
+        interactor.getAccountTypePackages()
     }
     
     func viewWillAppear() {
@@ -247,6 +249,12 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
         }
     }
     
+    func successedPackages(accountTypeString: String) {
+        accountType = interactor.getAccountTypePackages(with: accountTypeString, offers: []) ?? .all
+        view?.showInAppPolicy()
+        interactor.getAvailableOffers(with: accountType)
+    }
+    
     func failedVerifyOffer() {
         optInVC?.stopLoading()
         optInVC?.clearCode()
@@ -274,10 +282,6 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     }
     
     func successed(accountInfo: AccountInfoResponse) {
-        view?.startActivityIndicator()
-        view?.showInAppPolicy()
-        interactor.getAvailableOffers()
-        
         view?.showRestoreButton()
         interactor.getAllOffers()
     }
@@ -325,6 +329,15 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
         } else {
             failed(with: error.description)
         }
+    }
+    
+    func successed(allOffers: [PackageModelResponse]) {
+        accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)  ?? .all
+        let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
+        availableOffers = filterPackagesByQuota(offers: offers)
+        
+        view?.stopActivityIndicator()
+        view?.reloadData()
     }
     
     func successed(tokenForOffer: String) {
