@@ -14,7 +14,19 @@ class BaseViewController: ViewController {
     var floatingButtonsArray = [FloatingButtonsType]()
     var parentUUID: String = ""
     var segmentImage: SegmentedImage?
-    
+
+    var customTabBarController: TabBarViewController? {
+        var parent = self.parent
+        while parent != nil {
+            if let tabBarController = parent as? TabBarViewController {
+                return tabBarController
+            }
+            parent = parent?.parent
+        }
+
+        return nil
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,17 +42,11 @@ class BaseViewController: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        //showTabBarIfNeeded()
+        customTabBarController?.setBottomBarsHidden(!needToShowTabBar)
+        navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: "", style: .plain, target: nil, action: nil)
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        showTabBarIfNeeded()
-        RouterVC().setBackgroundColor(color: getBackgroundColor())
-    }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -67,7 +73,7 @@ class BaseViewController: ViewController {
     @objc func hideKeyboard() {
         keyboardHeight = 0
     }
-    
+
     func searchActiveTextField(view: UIView) -> UITextField? {
         if let textField = view as? UITextField {
             if textField.isFirstResponder {
@@ -82,21 +88,58 @@ class BaseViewController: ViewController {
         }
         return nil
     }
-    
+
     func showTabBarIfNeeded() {
-        if isNeedToShowTabBar() {
-            NotificationCenter.default.post(name: .showTabBar, object: nil)
-        } else {
-            NotificationCenter.default.post(name: .hideTabBar, object: nil)
-        }
+        customTabBarController?.setBottomBarsHidden(isNeedToShowTabBar())
     }
-    
+
     func isNeedToShowTabBar() -> Bool {
         return needToShowTabBar
     }
-    
-    func getBackgroundColor() -> UIColor {
-        return AppColor.primaryBackground.color ?? .white
+
+    // MARK: - Header Actions
+
+    func setDefaultNavigationHeaderActions() {
+        headerContainingViewController?.setHeaderLeftItems([
+            NavigationHeaderButton(type: .settings, target: self, action: #selector(showSettings))
+        ])
+        headerContainingViewController?.setHeaderRightItems([
+            NavigationHeaderButton(type: .search, target: self, action: #selector(showSearch)),
+            NavigationHeaderButton(type: .plus, target: self, action: #selector(showPlusButtonMenu))
+        ])
+    }
+
+    @objc private func showSettings() {
+        let router = RouterVC()
+        let controller: UIViewController?
+
+        if Device.isIpad {
+            controller = router.settingsIpad
+        } else {
+            controller = router.settings
+        }
+
+        if let controller = controller {
+            router.pushViewController(viewController: controller)
+        }
+    }
+
+    @objc private func showSearch() {
+        let router = RouterVC()
+        let controller = router.searchView(navigationController: navigationController)
+        router.pushViewController(viewController: controller)
+    }
+
+    @objc private func showPlusButtonMenu() {
+        let menuItems = floatingButtonsArray.map { buttonType in
+            AlertFilesAction(title: buttonType.title, icon: buttonType.image) { [weak self] in
+                self?.customTabBarController?.handleAction(buttonType.action)
+            }
+        }
+
+        let menu = AlertFilesActionsViewController()
+        menu.configure(with: menuItems)
+        menu.presentAsDrawer()
     }
 }
 

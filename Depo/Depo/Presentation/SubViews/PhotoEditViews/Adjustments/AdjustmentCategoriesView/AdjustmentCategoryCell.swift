@@ -14,11 +14,15 @@ final class AdjustmentCategoryCell: UICollectionViewCell {
         willSet {
             newValue.textColor = .white
             newValue.textAlignment = .center
-            newValue.font = Device.isIpad ? .TurkcellSaturaMedFont(size: 14) : .TurkcellSaturaMedFont(size: 12)
+            newValue.font = Device.isIpad ? .appFont(.regular, size: 14) : .appFont(.regular, size: 12)
         }
     }
     
-    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var imageView: UIImageView! {
+        willSet {
+            newValue.tintColor = .white
+        }
+    }
     
     @IBOutlet private weak var imageSide: NSLayoutConstraint!
     @IBOutlet private weak var topOffset: NSLayoutConstraint!
@@ -48,11 +52,11 @@ final class AdjustmentCategoryCell: UICollectionViewCell {
     func setup(with title: String, image: UIImage?) {
         titleLabel.text = title
         imageView.image = image
-        imageView.highlightedImage = image?.withRenderingMode(.alwaysTemplate).mask(with: .lrTealish)
+        imageView.highlightedImage = image?.withRenderingMode(.alwaysTemplate).mask(with: AppColor.tabBarSelect.color)
     }
     
     private func updateStyle() {
         imageView.isHighlighted = isHighlighted
-        titleLabel.textColor = isHighlighted ? .lrTealish : .white
+        titleLabel.textColor = isHighlighted ? AppColor.tabBarSelect.color : .white
     }
 }

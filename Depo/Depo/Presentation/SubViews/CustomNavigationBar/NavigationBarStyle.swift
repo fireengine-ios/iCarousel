@@ -7,15 +7,55 @@
 //
 
 import Foundation
+import UIKit
 
 enum NavigationBarStyle {
+    case `default`
     case black
-    case clear
-    
-    var backgroundImage: UIImage? {
+}
+
+extension NavigationBarStyle {
+    var isTranslucent: Bool {
+        false
+    }
+
+    var barTintColor: UIColor {
         switch self {
-        case .black: return UIImage(named: "NavigatonBarBlackBacground")
-        case .clear: return UIImage()
+        case .default:
+            return color(.navigationBarBackground)
+        case .black:
+            return color(.navigationBarBackgroundBlack)
         }
+    }
+
+    var titleColor: UIColor {
+        switch self {
+        case .default:
+            return color(.navigationBarTitle)
+        case .black:
+            return color(.navigationBarTitleBlack)
+        }
+    }
+
+    var titleFont: UIFont {
+        return UIFont.appFont(.medium, size: 16, relativeTo: .title1)
+    }
+
+    var tintColor: UIColor {
+        switch self {
+        case .default:
+            return color(.navigationBarIcons)
+
+        case .black:
+            return color(.navigationBarIconsBlack)
+        }
+    }
+
+    var backIndicatorImage: UIImage? { NavigationBarImage.back.image }
+
+    var backIndicatorTransitionMaskImage: UIImage? { backIndicatorImage }
+
+    var backButtonTitlePositionAdjustment: UIOffset {
+        UIOffset(horizontal: 0, vertical: -0.5)
     }
 }

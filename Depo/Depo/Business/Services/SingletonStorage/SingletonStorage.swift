@@ -67,6 +67,27 @@ class SingletonStorage {
         activeUserSubscription = nil
     }
     
+    func emailVerifyIfNeeded(completion: @escaping BoolHandler) {
+        SingletonStorage.shared.getAccountInfoForUser(success: { accountInfo in
+            completion(accountInfo.emailVerified ?? false)
+        }, fail: { error in
+            debugPrint("getAccountInfo \(error.description)")
+            completion(false)
+        })
+    }
+    
+    func securityInfoIfNeeded(completion: @escaping BoolHandler) {
+        SingletonStorage.shared.getAccountInfoForUser(success: { accountInfo in
+            if accountInfo.hasRecoveryMail != true && accountInfo.hasSecurityQuestionInfo != true {
+                completion(true)
+            }
+        }, fail: { error in
+            debugPrint("getAccountInfo \(error.description)")
+            completion(false)
+        })
+    }
+
+    
     func getAccountInfoForUser(forceReload: Bool = false, success:@escaping (AccountInfoResponse) -> Void, fail: @escaping FailResponse ) {
         if let info = accountInfo, !forceReload {
             success(info)

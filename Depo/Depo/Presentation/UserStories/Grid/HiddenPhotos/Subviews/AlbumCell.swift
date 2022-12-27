@@ -13,16 +13,21 @@ final class AlbumCell: BaseCollectionViewCell {
     @IBOutlet private var thumbnailsContainer: UIView! {
         willSet {
             newValue.backgroundColor = .white
-            newValue.layer.borderWidth = 1.0
+            newValue.layer.borderWidth = 0.5
             newValue.layer.masksToBounds = true
-            newValue.layer.borderColor = ColorConstants.blueColor.cgColor
+            newValue.layer.borderColor = AppColor.tint.cgColor
         }
     }
     
     @IBOutlet private weak var thumbnail: LoadingImageView! {
         willSet {
-            newValue.backgroundColor = UIColor.lightGray.lighter(by: 20.0)
+            newValue.backgroundColor = AppColor.background.color
             newValue.contentMode = .scaleAspectFill
+        }
+    }
+    @IBOutlet weak var emptyImage: UIImageView! {
+        willSet {
+            newValue.isHidden = true
         }
     }
     
@@ -30,7 +35,7 @@ final class AlbumCell: BaseCollectionViewCell {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = " "
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 14)
+            newValue.font = .appFont(.regular, size: 16)
             newValue.textColor = ColorConstants.darkText
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
@@ -39,7 +44,7 @@ final class AlbumCell: BaseCollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.backgroundColor = .lrSkinTone
+        contentView.backgroundColor =  AppColor.background.color
     }
     
     override func prepareForReuse() {
@@ -50,7 +55,18 @@ final class AlbumCell: BaseCollectionViewCell {
     func setup(with item: BaseDataSourceItem) {
         if let album = item as? AlbumItem {
             titleLabel.text = album.name ?? ""
-            thumbnail.loadImage(with: album.preview, smooth: false)
+            
+            guard let preview = album.preview else {
+                emptyImage.isHidden = false
+                return
+            }
+            
+            if preview.hasPreviewUrl {
+                thumbnail.loadImage(with: album.preview, smooth: false)
+            } else {
+                emptyImage.isHidden = false
+            }
+            
         } else if let item = item as? Item {
             titleLabel.text = item.name ?? ""
             thumbnail.loadImage(with: item, smooth: false)
@@ -62,11 +78,12 @@ final class AlbumCell: BaseCollectionViewCell {
 
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         selectionIcon.isHidden = !isSelectionActive
-        selectionIcon.image = UIImage(named: isSelected ? "selected" : "notSelected")
+        selectionIcon.image = isSelected ? Image.iconSelectFills.image : Image.iconSelectEmpty.image
     }
     
     func cancelImageLoading() {
         thumbnail.cancelLoadRequest()
         thumbnail.image = nil
+        emptyImage.isHidden = true
     }
 }

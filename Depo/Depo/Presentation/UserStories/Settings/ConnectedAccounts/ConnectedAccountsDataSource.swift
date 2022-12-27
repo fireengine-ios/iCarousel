@@ -11,7 +11,6 @@ import Foundation
 
 final class Section {
     enum SocialAccount: Int {
-        case spotify
         case instagram
         case facebook
         case dropbox
@@ -50,8 +49,7 @@ final class ConnectedAccountsDataSource: NSObject {
     weak var view: SocialConnectionCellDelegate?
     weak var appleGoogleDelegate: AppleGoogleAccountConnectionCellDelegate?
     
-    private var tableSections = [Section(account: .spotify, state: .shrinked),
-                                 Section(account: .instagram, state: .shrinked),
+    private var tableSections = [Section(account: .instagram, state: .shrinked),
                                  Section(account: .facebook, state: .shrinked),
                                  Section(account: .dropbox, state: .shrinked)]
     
@@ -96,8 +94,6 @@ extension ConnectedAccountsDataSource: UITableViewDataSource {
             cellId = CellsIdConstants.facebookAccountConnectionCell
         case (.dropbox, .shrinked):
             cellId = CellsIdConstants.dropboxAccountConnectionCell
-        case (.spotify, .shrinked):
-            cellId = CellsIdConstants.spotifyAccountConnectionCell
         case (.appleGoogle, .shrinked):
             cellId = CellsIdConstants.appleGoogleAccountConnectionCell
             

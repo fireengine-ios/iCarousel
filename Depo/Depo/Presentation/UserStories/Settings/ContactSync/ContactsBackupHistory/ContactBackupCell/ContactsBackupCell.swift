@@ -23,14 +23,25 @@ final class ContactsBackupCell: UITableViewCell, ContactsBackupCellProtocol {
     
     @IBOutlet private weak var selectButton: ExtendedTapAreaButton! {
         willSet {
-            newValue.setImage(UIImage(named: "notSelected"), for: .normal)
-            newValue.setImage(UIImage(named: "selected_by_point"), for: .highlighted)
-            newValue.setImage(UIImage(named: "selected_by_point"), for: .selected)
+            newValue.setImage(Image.iconRadioButtonUnselect.image, for: .normal)
+            newValue.setImage(Image.iconRadioButtonSelectBlue.image, for: .highlighted)
+            newValue.setImage(Image.iconRadioButtonSelectBlue.image, for: .selected)
             newValue.tintColor = AppColor.darkBlueAndTealish.color
         }
     }
-    @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var detailLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel! {
+        willSet {
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.medium, size: 14)
+        }
+    }
+    
+    @IBOutlet private weak var detailLabel: UILabel!{
+        willSet {
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.light, size: 14)
+        }
+    }
     
     weak var delegate: ContactsBackupCellDelegate?
     

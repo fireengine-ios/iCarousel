@@ -23,11 +23,15 @@ class SearchViewInitializer {
             availableSortTypes: [],
             defaultSortType: .TimeNewOld,
             availableFilter: false,
-            showGridListButton: true
+            showGridListButton: true,
+            showMoreButton: false
         )
         
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
-                                               style: .default, tintColor: nil)
+                                               style: .default,
+                                               tintColor: AppColor.tint.color,
+                                               unselectedItemTintColor: AppColor.label.color,
+                                               barTintColor: AppColor.background.color)
         
         configurator.configure(viewController: viewController,
                                remoteServices: RemoteSearchService(requestSize: 100),

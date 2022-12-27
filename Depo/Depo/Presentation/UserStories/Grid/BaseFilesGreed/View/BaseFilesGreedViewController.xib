@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,11 +18,11 @@
             <connections>
                 <outlet property="collectionView" destination="0Sm-wn-Msc" id="6uf-wF-aXI"/>
                 <outlet property="floatingHeaderContainerHeightConstraint" destination="J3A-WS-4mi" id="c9c-o0-s47"/>
+                <outlet property="headerStackView" destination="acy-kT-cr5" id="6Ie-82-uaS"/>
                 <outlet property="noFilesImage" destination="qz2-SP-6oQ" id="rwb-kw-oSL"/>
                 <outlet property="noFilesLabel" destination="fdq-Cf-39W" id="gmp-PY-CFM"/>
                 <outlet property="noFilesTopLabel" destination="0lC-K4-1ac" id="TJd-tm-6eI"/>
                 <outlet property="noFilesView" destination="ZI3-Dh-bXS" id="Tf2-p8-qvW"/>
-                <outlet property="noFilesViewCenterOffsetConstraint" destination="ecm-g2-fmI" id="Fcz-05-QYh"/>
                 <outlet property="scrollIndicator" destination="e3K-s6-bzd" id="6Fp-Yf-Hid"/>
                 <outlet property="startCreatingFilesButton" destination="UTy-IA-Avr" id="4gU-xN-7wR"/>
                 <outlet property="topBarContainer" destination="Stl-Nh-W5a" id="rEa-AX-y5Q"/>
@@ -65,46 +65,62 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZI3-Dh-bXS">
-                    <rect key="frame" x="16" y="266.66666666666669" width="382" height="207"/>
+                    <rect key="frame" x="16" y="176.66666666666663" width="382" height="239"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdq-Cf-39W">
-                            <rect key="frame" x="8" y="157" width="366" height="0.0"/>
+                            <rect key="frame" x="8" y="154.00000000000003" width="366" height="0.0"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTy-IA-Avr" customClass="BlueButtonWithNoFilesWhiteText" customModule="Billo" customModuleProvider="target">
-                            <rect key="frame" x="96" y="168" width="190" height="39"/>
+                            <rect key="frame" x="28" y="194.00000000000003" width="326" height="45"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="39" id="03I-TC-x2h"/>
-                                <constraint firstAttribute="width" constant="190" id="YLS-oM-nxu">
-                                    <variation key="widthClass=regular" constant="258"/>
-                                </constraint>
+                                <constraint firstAttribute="height" constant="45" id="03I-TC-x2h"/>
+                                <constraint firstAttribute="width" constant="326" id="pUd-hQ-hMP"/>
                             </constraints>
                             <inset key="contentEdgeInsets" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
                             <state key="normal" title="button"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="pUd-hQ-hMP"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=regular">
+                                <mask key="constraints">
+                                    <include reference="pUd-hQ-hMP"/>
+                                </mask>
+                            </variation>
                             <connections>
                                 <action selector="onStartCreatingFilesButton" destination="-1" eventType="touchUpInside" id="gVy-bU-Rnz"/>
                             </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qz2-SP-6oQ">
-                            <rect key="frame" x="143" y="45" width="96" height="96"/>
+                            <rect key="frame" x="134" y="0.0" width="114" height="114"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="96" id="vQg-yh-HbG"/>
-                                <constraint firstAttribute="width" constant="96" id="yin-c6-zcV"/>
+                                <constraint firstAttribute="width" constant="114" id="NaH-IT-V72"/>
+                                <constraint firstAttribute="height" constant="114" id="hKi-DQ-lbT"/>
                             </constraints>
                         </imageView>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="qz2-SP-6oQ" firstAttribute="centerX" secondItem="ZI3-Dh-bXS" secondAttribute="centerX" id="6A0-hR-1ae"/>
-                        <constraint firstItem="UTy-IA-Avr" firstAttribute="top" secondItem="fdq-Cf-39W" secondAttribute="bottom" constant="11" id="9ks-nj-hts"/>
+                        <constraint firstItem="UTy-IA-Avr" firstAttribute="top" secondItem="fdq-Cf-39W" secondAttribute="bottom" constant="40" id="9ks-nj-hts"/>
                         <constraint firstAttribute="bottom" secondItem="UTy-IA-Avr" secondAttribute="bottom" id="KV4-aB-0vn"/>
                         <constraint firstItem="fdq-Cf-39W" firstAttribute="leading" secondItem="ZI3-Dh-bXS" secondAttribute="leading" constant="8" id="QSi-hF-074"/>
-                        <constraint firstItem="fdq-Cf-39W" firstAttribute="top" secondItem="qz2-SP-6oQ" secondAttribute="bottom" constant="16" id="SPi-rc-70a"/>
+                        <constraint firstItem="qz2-SP-6oQ" firstAttribute="top" secondItem="ZI3-Dh-bXS" secondAttribute="top" id="Qh5-5E-ZMH"/>
+                        <constraint firstItem="fdq-Cf-39W" firstAttribute="top" secondItem="qz2-SP-6oQ" secondAttribute="bottom" constant="40" id="TU1-3b-brR"/>
                         <constraint firstAttribute="trailing" secondItem="fdq-Cf-39W" secondAttribute="trailing" constant="8" id="dtr-Zd-aRq"/>
-                        <constraint firstItem="qz2-SP-6oQ" firstAttribute="top" secondItem="ZI3-Dh-bXS" secondAttribute="top" constant="45" id="dz2-C0-o9S"/>
+                        <constraint firstItem="qz2-SP-6oQ" firstAttribute="centerX" secondItem="ZI3-Dh-bXS" secondAttribute="centerX" id="fok-0q-HXD"/>
                         <constraint firstItem="UTy-IA-Avr" firstAttribute="centerX" secondItem="ZI3-Dh-bXS" secondAttribute="centerX" id="gSt-4w-qVr"/>
+                        <constraint firstAttribute="trailing" secondItem="UTy-IA-Avr" secondAttribute="trailing" constant="28" id="gkl-g0-byM"/>
+                        <constraint firstItem="UTy-IA-Avr" firstAttribute="leading" secondItem="ZI3-Dh-bXS" secondAttribute="leading" constant="28" id="n8X-WM-A7C"/>
                     </constraints>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <mask key="constraints">
+                            <exclude reference="gkl-g0-byM"/>
+                            <exclude reference="n8X-WM-A7C"/>
+                        </mask>
+                    </variation>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="acy-kT-cr5">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
@@ -139,9 +155,9 @@
                 <constraint firstAttribute="trailing" secondItem="0Sm-wn-Msc" secondAttribute="trailing" id="dLF-Ta-wrF">
                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                 </constraint>
-                <constraint firstItem="ZI3-Dh-bXS" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="1.07" id="ecm-g2-fmI"/>
                 <constraint firstAttribute="trailing" secondItem="ZI3-Dh-bXS" secondAttribute="trailing" constant="16" id="fRH-8S-qhb"/>
                 <constraint firstAttribute="trailing" secondItem="0lC-K4-1ac" secondAttribute="trailing" constant="16" id="hq9-pl-y0n"/>
+                <constraint firstItem="ZI3-Dh-bXS" firstAttribute="centerY" secondItem="THw-xy-ykx" secondAttribute="centerY" constant="-50" id="p67-eu-evr"/>
                 <constraint firstItem="0Sm-wn-Msc" firstAttribute="top" secondItem="acy-kT-cr5" secondAttribute="bottom" id="t0N-2A-ZnV"/>
                 <constraint firstItem="e3K-s6-bzd" firstAttribute="top" secondItem="0Sm-wn-Msc" secondAttribute="top" id="wQN-PB-XI0"/>
                 <constraint firstItem="acy-kT-cr5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="wsG-gx-aXa"/>

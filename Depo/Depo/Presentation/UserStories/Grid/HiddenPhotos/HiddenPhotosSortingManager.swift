@@ -21,7 +21,8 @@ final class HiddenPhotosSortingManager {
         availableSortTypes: sortTypes,
         defaultSortType: .TimeNewOld,
         availableFilter: false,
-        showGridListButton: false
+        showGridListButton: false,
+        showMoreButton: false
     )
     
     private weak var delegate: HiddenPhotosSortingManagerDelegate?
@@ -53,6 +54,8 @@ final class HiddenPhotosSortingManager {
 }
 
 extension HiddenPhotosSortingManager: GridListTopBarDelegate {
+    func onMoreButton() { }
+    
     func filterChanged(filter: MoreActionsConfig.MoreActionsFileType) { }
     
     func sortingRuleChanged(rule: MoreActionsConfig.SortRullesType) {

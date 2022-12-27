@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,14 +21,14 @@
             <rect key="frame" x="0.0" y="0.0" width="399" height="204"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8TD-PF-9RX">
-                    <rect key="frame" x="28" y="23" width="343" height="140.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8TD-PF-9RX" userLabel="TopMessageLabel">
+                    <rect key="frame" x="16" y="23" width="367" height="140.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBN-MQ-Oqk">
-                    <rect key="frame" x="23" y="183.5" width="353" height="20.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBN-MQ-Oqk" userLabel="DetailsLabel">
+                    <rect key="frame" x="16" y="183.5" width="367" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -37,14 +37,14 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="UBN-MQ-Oqk" secondAttribute="trailing" priority="750" constant="23" id="3NM-rj-vAK"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="UBN-MQ-Oqk" secondAttribute="trailing" priority="750" constant="16" id="3NM-rj-vAK" userLabel="Safe Area.trailing = DetailsLabel.trailing + 16 @750"/>
                 <constraint firstItem="8TD-PF-9RX" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="Cag-ca-CwE"/>
-                <constraint firstItem="8TD-PF-9RX" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" priority="750" constant="28" id="L7h-cP-LAO"/>
+                <constraint firstItem="8TD-PF-9RX" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" priority="750" constant="16" id="L7h-cP-LAO" userLabel="TopMessageLabel.leading = Safe Area.leading + 16 @750"/>
                 <constraint firstItem="UBN-MQ-Oqk" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="TCb-Cw-iF5"/>
                 <constraint firstItem="UBN-MQ-Oqk" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.55" id="b5C-DE-onX"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="8TD-PF-9RX" secondAttribute="trailing" priority="750" constant="28" id="cv6-b8-Wc0"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="8TD-PF-9RX" secondAttribute="trailing" priority="750" constant="16" id="cv6-b8-Wc0" userLabel="Safe Area.trailing = TopMessageLabel.trailing + 16 @750"/>
                 <constraint firstItem="UBN-MQ-Oqk" firstAttribute="top" secondItem="8TD-PF-9RX" secondAttribute="bottom" constant="20" id="iMr-qZ-dxp"/>
-                <constraint firstItem="UBN-MQ-Oqk" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" priority="750" constant="23" id="iXl-e4-dkM"/>
+                <constraint firstItem="UBN-MQ-Oqk" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" priority="750" constant="16" id="iXl-e4-dkM" userLabel="DetailsLabel.leading = Safe Area.leading + 16"/>
                 <constraint firstItem="8TD-PF-9RX" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="23" id="pr9-7E-Hhd"/>
                 <constraint firstItem="8TD-PF-9RX" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.55" id="sfn-tR-eEb"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="UBN-MQ-Oqk" secondAttribute="bottom" id="zxc-iQ-JVa"/>

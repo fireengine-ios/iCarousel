@@ -93,6 +93,8 @@ final class PhotoEditViewController: ViewController, NibInit {
         setInitialState()
         presentedCallback?()
         analytics.trackFilterScreen()
+
+        statusBarStyle = .lightContent
     }
     
     func saveImageComplete(saveAsCopy: Bool) {
@@ -182,7 +184,7 @@ extension PhotoEditViewController: PhotoEditNavbarDelegate {
             self.analytics.trackClickEvent(.discard)
             self.finishedEditing?(self, .canceled)
         })
-        present(popup, animated: true)
+        popup.open()
     }
     
     func onSavePhoto() {
@@ -252,7 +254,7 @@ extension PhotoEditViewController: PhotoEditNavbarDelegate {
                 self.finishedEditing?(self, .savedAs(image: image))
             }
         })
-        present(popup, animated: true)
+        popup.open()
     }
     
     private func saveWithModifyOriginal() {
@@ -268,7 +270,7 @@ extension PhotoEditViewController: PhotoEditNavbarDelegate {
                 self.finishedEditing?(self, .saved(image: image))
             }
         }
-        present(popup, animated: true)
+        popup.open()
     }
 
     private func saveAsCopyWithStickers() {
@@ -284,7 +286,7 @@ extension PhotoEditViewController: PhotoEditNavbarDelegate {
             guard let self = self else { return }
             self.finishedEditing?(self, .savedAsWithStickers(imageView: self.uiManager.imageScrollView.imageView))
         })
-        present(popup, animated: true)
+        popup.open()
     }
     
     private func prepareOriginalImage(completion: @escaping ValueHandler<UIImage>) {

@@ -18,7 +18,7 @@ final class CreateStoryAudioItemCell: UITableViewCell {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.textGrayColor
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            newValue.font = .appFont(.medium, size: 14)
         }
     }
     
@@ -69,27 +69,23 @@ final class CreateStoryAudioItemCell: UITableViewCell {
     
     func setSelected(selected: Bool) {
         if selected {
-            selectButton.setTitleColor(ColorConstants.choosenSelectedButtonColor, for: .normal)
-            selectButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 21)
-            selectButton.setTitle(TextConstants.createStoryAudioSelectedItem, for: .normal)
+            selectButton.setImage(Image.iconRadioButtonSelectBlue.image, for: .normal)
         } else {
-            selectButton.setTitleColor(ColorConstants.blueColor, for: .normal)
-            selectButton.titleLabel?.font = UIFont.TurkcellSaturaMedFont(size: 18)
-            selectButton.setTitle(TextConstants.createStoryAudioSelectItem, for: .normal)
+            selectButton.setImage(Image.iconAddSelect.image, for: .normal)
         }
     }
     
     func setPlaying(playing: Bool) {
         if playing {
-            let image = UIImage(named: "creationStoryItemPause")
+            let image = Image.iconPauseRed.image
             playButton.setImage(image, for: .normal)
             playButton.accessibilityLabel = TextConstants.accessibilityPause
-            titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
+            titleLabel.font = .appFont(.medium, size: 14)
         } else {
-            let image = UIImage(named: "creationStroryItemPlay")
+            let image = Image.iconPlayRed.image
             playButton.setImage(image, for: .normal)
             playButton.accessibilityLabel = TextConstants.accessibilityPlay
-            titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            titleLabel.font = .appFont(.medium, size: 14)
         }
     }
     

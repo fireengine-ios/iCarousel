@@ -85,7 +85,7 @@ final class LoadingImageView: UIImageView {
             let newCornerView = UIView()
             newCornerView.translatesAutoresizingMaskIntoConstraints = false
             newCornerView.backgroundColor = UIColor.clear
-            newCornerView.layer.borderColor = AppColor.darkBlueAndTealish.color?.cgColor
+            newCornerView.layer.borderColor = AppColor.tint.color.cgColor
             newCornerView.layer.borderWidth = 2
             cornerView = newCornerView
         }
@@ -177,9 +177,15 @@ final class LoadingImageView: UIImageView {
         
         self.path = object.patchToPreview
         
-        url = filesDataSource.getImageData(item: object, completeData: { [weak self] data in
-            self?.finishLoading(data: data, animated: smooth)
-        })
+        if object.mimeType == "image/gif", object.mimeType != nil {
+            url = filesDataSource.getImageDataForRemoteGif(item: object, completeData: { [weak self] data in
+                self?.finishLoading(data: data, animated: smooth)
+            })
+        } else {
+            url = filesDataSource.getImageData(item: object, completeData: { [weak self] data in
+                self?.finishLoading(data: data, animated: smooth)
+            })
+        }
     }
     
     func loadImage(with path: PathForItem, smooth: Bool = false) {

@@ -63,7 +63,6 @@ final class SpotifyAuthViewController: BaseViewController {
     }
     
     private func setupNavigation() {
-        navigationBarWithGradientStyle()
         setTitle(withString: TextConstants.importFromSpotifyTitle)
         
         let cancelButton = UIBarButtonItem(title: TextConstants.cancel, target: self, selector: #selector(spotifyAuthCancel))

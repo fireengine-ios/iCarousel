@@ -29,7 +29,6 @@ final class LeavePremiumViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationBarWithGradientStyle()
     }
     
     // MARK: Utility methods

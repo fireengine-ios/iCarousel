@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -26,61 +27,84 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="161"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l37-C5-b8Y">
+                        <rect key="frame" x="8" y="48" width="304" height="105"/>
+                        <subviews>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rk1-er-xBy">
+                                <rect key="frame" x="239" y="8" width="51" height="31"/>
+                                <connections>
+                                    <action selector="googleSwitchToggled:" destination="KGk-i7-Jjw" eventType="valueChanged" id="lVp-Ch-OhJ"/>
+                                </connections>
+                            </switch>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="nsu-1C-FM6">
+                                <rect key="frame" x="12" y="15" width="75.5" height="24"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="googleLogo" translatesAutoresizingMaskIntoConstraints="NO" id="8nC-B9-TSX">
+                                        <rect key="frame" x="0.0" y="0.0" width="23" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="BJ6-DG-nUQ"/>
+                                            <constraint firstAttribute="width" constant="23" id="GfE-bd-xyd"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Lk-6h-hLy">
+                                        <rect key="frame" x="31" y="0.0" width="44.5" height="24"/>
+                                        <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="18"/>
+                                        <color key="textColor" name="darkText"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="Lww-3J-u5k"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="npr-AE-me6">
+                                <rect key="frame" x="10" y="69" width="79.5" height="21"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconTabAppleCopy" translatesAutoresizingMaskIntoConstraints="NO" id="YXW-DS-mTk">
+                                        <rect key="frame" x="0.0" y="0.0" width="25" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="D5T-uu-1pn"/>
+                                            <constraint firstAttribute="width" constant="25" id="WzW-9p-ggi"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fhD-gt-7Bt">
+                                        <rect key="frame" x="35" y="0.0" width="44.5" height="24"/>
+                                        <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="18"/>
+                                        <color key="textColor" name="darkText"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="eGz-DN-7T8"/>
+                                </constraints>
+                            </stackView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oL1-Zn-emG">
+                                <rect key="frame" x="239" y="64" width="51" height="31"/>
+                                <connections>
+                                    <action selector="appleSwitchToggled:" destination="KGk-i7-Jjw" eventType="valueChanged" id="Cgi-ZV-z4X"/>
+                                </connections>
+                            </switch>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="oL1-Zn-emG" secondAttribute="bottom" constant="10" id="01k-eH-wMx"/>
+                            <constraint firstItem="oL1-Zn-emG" firstAttribute="top" secondItem="rk1-er-xBy" secondAttribute="bottom" constant="25" id="3n9-FW-xjU"/>
+                            <constraint firstItem="npr-AE-me6" firstAttribute="leading" secondItem="l37-C5-b8Y" secondAttribute="leading" constant="10" id="50U-bS-OZg"/>
+                            <constraint firstItem="npr-AE-me6" firstAttribute="top" secondItem="nsu-1C-FM6" secondAttribute="bottom" constant="30" id="5OW-NK-YhM"/>
+                            <constraint firstItem="nsu-1C-FM6" firstAttribute="leading" secondItem="l37-C5-b8Y" secondAttribute="leading" constant="12" id="Hxm-FD-Q2w"/>
+                            <constraint firstAttribute="trailing" secondItem="oL1-Zn-emG" secondAttribute="trailing" constant="16" id="ISz-6m-EjK"/>
+                            <constraint firstItem="rk1-er-xBy" firstAttribute="top" secondItem="l37-C5-b8Y" secondAttribute="top" constant="8" id="NqZ-4A-Hai"/>
+                            <constraint firstItem="nsu-1C-FM6" firstAttribute="top" secondItem="l37-C5-b8Y" secondAttribute="top" constant="15" id="SBR-tb-BqV"/>
+                            <constraint firstAttribute="bottom" secondItem="npr-AE-me6" secondAttribute="bottom" constant="15" id="geN-Xe-T2C"/>
+                            <constraint firstAttribute="trailing" secondItem="rk1-er-xBy" secondAttribute="trailing" constant="16" id="vne-E2-ko8"/>
+                        </constraints>
+                    </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="LTp-7L-DRq">
-                        <rect key="frame" x="18" y="18" width="284" height="18"/>
+                        <rect key="frame" x="16" y="16" width="288" height="24"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="mSP-SS-yDd">
-                                <rect key="frame" x="0.0" y="0.0" width="284" height="18"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="18" id="c9z-VA-kbY"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="0.0" width="288" height="24"/>
                                 <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="18"/>
-                                <color key="textColor" name="darkText"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                    </stackView>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nsu-1C-FM6">
-                        <rect key="frame" x="20" y="54" width="225" height="24"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="googleLogo" translatesAutoresizingMaskIntoConstraints="NO" id="8nC-B9-TSX">
-                                <rect key="frame" x="0.0" y="0.0" width="20" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="GfP-J9-SNK"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Lk-6h-hLy">
-                                <rect key="frame" x="30" y="0.0" width="195" height="24"/>
-                                <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="18"/>
-                                <color key="textColor" name="darkText"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                    </stackView>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rk1-er-xBy">
-                        <rect key="frame" x="253" y="50.5" width="51" height="31"/>
-                        <connections>
-                            <action selector="googleSwitchToggled:" destination="KGk-i7-Jjw" eventType="valueChanged" id="lVp-Ch-OhJ"/>
-                        </connections>
-                    </switch>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oL1-Zn-emG">
-                        <rect key="frame" x="253" y="95" width="51" height="31"/>
-                        <connections>
-                            <action selector="appleSwitchToggled:" destination="KGk-i7-Jjw" eventType="valueChanged" id="Cgi-ZV-z4X"/>
-                        </connections>
-                    </switch>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="npr-AE-me6">
-                        <rect key="frame" x="20" y="100" width="225" height="21"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appleLogo" translatesAutoresizingMaskIntoConstraints="NO" id="YXW-DS-mTk">
-                                <rect key="frame" x="0.0" y="0.0" width="20" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="afE-dF-kyM"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fhD-gt-7Bt">
-                                <rect key="frame" x="30" y="0.0" width="195" height="21"/>
-                                <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="18"/>
                                 <color key="textColor" name="darkText"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -89,20 +113,13 @@
                 </subviews>
                 <color key="backgroundColor" name="primaryBackground"/>
                 <constraints>
-                    <constraint firstItem="npr-AE-me6" firstAttribute="top" secondItem="nsu-1C-FM6" secondAttribute="bottom" constant="22" id="0x4-zZ-Fph"/>
-                    <constraint firstAttribute="trailing" secondItem="LTp-7L-DRq" secondAttribute="trailing" constant="18" id="6hh-6w-qSm"/>
-                    <constraint firstItem="LTp-7L-DRq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="BSm-pP-Oug"/>
-                    <constraint firstItem="rk1-er-xBy" firstAttribute="centerY" secondItem="nsu-1C-FM6" secondAttribute="centerY" id="FKg-py-zBV"/>
-                    <constraint firstAttribute="bottom" secondItem="npr-AE-me6" secondAttribute="bottom" constant="40" id="H8f-kE-gDn"/>
-                    <constraint firstAttribute="trailing" secondItem="oL1-Zn-emG" secondAttribute="trailing" constant="18" id="V9P-ab-lnz"/>
-                    <constraint firstAttribute="trailing" secondItem="npr-AE-me6" secondAttribute="trailing" constant="75" id="XLL-xq-NeB"/>
-                    <constraint firstItem="nsu-1C-FM6" firstAttribute="top" secondItem="LTp-7L-DRq" secondAttribute="bottom" constant="18" id="b4V-RR-oiE"/>
-                    <constraint firstItem="nsu-1C-FM6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="fL2-jo-OwU"/>
-                    <constraint firstAttribute="trailing" secondItem="rk1-er-xBy" secondAttribute="trailing" constant="18" id="kSk-Si-cJN"/>
-                    <constraint firstItem="oL1-Zn-emG" firstAttribute="centerY" secondItem="npr-AE-me6" secondAttribute="centerY" id="uuq-xW-tdy"/>
-                    <constraint firstItem="LTp-7L-DRq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="xZZ-JW-v07"/>
-                    <constraint firstItem="npr-AE-me6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="yAh-t6-vnG"/>
-                    <constraint firstAttribute="trailing" secondItem="nsu-1C-FM6" secondAttribute="trailing" constant="75" id="z2G-id-9MN"/>
+                    <constraint firstAttribute="trailing" secondItem="l37-C5-b8Y" secondAttribute="trailing" constant="8" id="42A-6K-fiQ"/>
+                    <constraint firstItem="l37-C5-b8Y" firstAttribute="top" secondItem="LTp-7L-DRq" secondAttribute="bottom" constant="8" id="6qR-Wt-TN9"/>
+                    <constraint firstAttribute="trailing" secondItem="LTp-7L-DRq" secondAttribute="trailing" constant="16" id="7BP-Zf-3uI"/>
+                    <constraint firstItem="LTp-7L-DRq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="JAY-5O-cNP"/>
+                    <constraint firstItem="LTp-7L-DRq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="lKy-ob-SSV"/>
+                    <constraint firstAttribute="bottom" secondItem="l37-C5-b8Y" secondAttribute="bottom" constant="8" id="qlg-4Y-HgW"/>
+                    <constraint firstItem="l37-C5-b8Y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="sCM-dX-pHE"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -111,21 +128,25 @@
                 <outlet property="appleLabel" destination="fhD-gt-7Bt" id="Lig-40-QS5"/>
                 <outlet property="appleLogo" destination="YXW-DS-mTk" id="cCa-OV-JJR"/>
                 <outlet property="appleSwitch" destination="oL1-Zn-emG" id="mhT-KZ-lkd"/>
+                <outlet property="bgView" destination="l37-C5-b8Y" id="sa8-Wc-CwI"/>
                 <outlet property="googleLabel" destination="2Lk-6h-hLy" id="eLe-Sa-Ufg"/>
                 <outlet property="googleSwitch" destination="rk1-er-xBy" id="iOB-yX-7EG"/>
                 <outlet property="titleLabel" destination="mSP-SS-yDd" id="xzk-1D-ZKy"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="181.47321428571428"/>
+            <point key="canvasLocation" x="137.68115942028987" y="181.13839285714286"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="appleLogo" width="15" height="19"/>
         <image name="googleLogo" width="23" height="24"/>
+        <image name="iconTabAppleCopy" width="24" height="24"/>
         <namedColor name="darkText">
             <color red="0.30199998617172241" green="0.30199998617172241" blue="0.30199998617172241" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

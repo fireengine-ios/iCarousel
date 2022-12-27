@@ -48,6 +48,8 @@ protocol BaseFilesGreedViewOutput {
     
     func searchPressed(output: UIViewController?)
     
+    func openCreateNewStory(output: UIViewController?)
+    
     func moveBack()
     
     func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType, fieldType: FieldValue)
@@ -61,4 +63,8 @@ protocol BaseFilesGreedViewOutput {
     func openPrivateShareFiles()
     
     func openPrivateSharedItem(entity: BaseDataSourceItem, sharedEnteties: [BaseDataSourceItem])
+    
+    func openCreateNewAlbum()
+    
+    func openUpload()
 }

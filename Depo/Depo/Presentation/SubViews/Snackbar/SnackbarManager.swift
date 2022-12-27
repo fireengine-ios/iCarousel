@@ -31,17 +31,6 @@ enum SnackbarType {
     case critical
     case action
     
-    var numberOfLinesLimit: Int {
-        switch self {
-        case .nonCritical:
-            return 2
-        case .critical:
-            return 3
-        case .action:
-            return 3
-        }
-    }
-    
     var duration: TTGSnackbarDuration {
         switch self {
         case .nonCritical:
@@ -134,7 +123,7 @@ final class SnackbarManager {
             handler?()
         }
 
-        let contentView = SnackbarView.with(type: type,
+        let contentView = SnackbarView.shared.with(type: type,
                                             message: message,
                                             actionTitle: action?.localizedTitle,
                                             axis: axis,
@@ -150,10 +139,11 @@ final class SnackbarManager {
         
         let snackbar = TTGSnackbar(customContentView: contentView, duration: duration)
         snackbar.animationType = .fadeInFadeOut
-        snackbar.backgroundColor = ColorConstants.snackbarGray
+        snackbar.backgroundColor = AppColor.tint.color
         snackbar.shouldActivateLeftAndRightMarginOnCustomContentView = true
         snackbar.leftMargin = offset
         snackbar.rightMargin = offset
+        snackbar.cornerRadius = 16
         snackbar.layer.zPosition = 1000 //need for display over the presented controllers
         return snackbar
     }
@@ -164,8 +154,9 @@ final class SnackbarManager {
 private extension SnackbarManager {
     
     private func setupObserving() {
-        NotificationCenter.default.addObserver(self,  selector: #selector(hideTabBar), name: .hideTabBar, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showTabBar), name: .showTabBar, object: nil)
+//        NotificationCenter.default.addObserver(self,  selector: #selector(hideTabBar), name: .hideTabBar, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(showTabBar), name: .showTabBar, object: nil)
+        // TODO: Facelift: snackbars
     }
 
     @objc private func showTabBar() {
@@ -185,9 +176,9 @@ private extension SnackbarManager {
         if router.defaultTopController is PhotoVideoDetailViewController {
             bottomMargin = 80
         } else if let isHiddenTabbar = isHiddenTabbar ?? router.tabBarController?.tabBar.isHidden {
-            bottomMargin = isHiddenTabbar ? 16 : 80
+            bottomMargin = isHiddenTabbar ? 0 : 0
         } else {
-            bottomMargin = 16
+            bottomMargin = 0
         }
         
         if snackbar.bottomMargin != bottomMargin {

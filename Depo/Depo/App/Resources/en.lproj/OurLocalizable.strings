@@ -419,7 +419,7 @@
 "Change cover photo" = "Change Cover Photo";
 "Photo uploaded" = "Photo uploaded";
 "Please select a language option" = "Please select a language option";
-"My Stories" = "My Stories";
+"My Stories" = "Stories";
 "People" = "People";
 "Things" = "Things";
 "Places" = "Places";
@@ -564,7 +564,7 @@
 "dropboxLastUpdatedFile" = "Last updated on %@ - %d file";
 "dropboxLastUpdatedFiles" = "Last updated on %@ - %d files";
 "PackagesPolicyHeader" = "Auto-renewable subscription nature of the in-app purchase:";
-"PackagesPolicyText" = "Subsriptions are renewed on a monthly basis\nPayment will be charged to iTunes Account at confirmation of purchase \nSubscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period \nAccount will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen. \nSubscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase \nAny unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable \nPrivacy Notice: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik\nTerms of Use:";
+"PackagesPolicyText" = "Subscriptions are renewed on a monthly basis\nPayment will be charged to iTunes Account at confirmation of purchase \nSubscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period \nAccount will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen. \nSubscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase \nAny unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable \nPrivacy Notice: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik\nTerms of Use:";
 "Missing Dates" = "Missing Dates";
 "You have successfully registered, please log in with your credentials" = "You have successfully registered, please log in with your credentials.";
 "Animation" = "Animation";
@@ -1498,7 +1498,7 @@
 "ubsent_contacts_in_lifebox" = "There is no any contact in your lifebox";
 "auto_sync_albums_description" = "You can choose which albums to sync automatically.";
 "tabbar_item_home_label" = "Home";
-"tabbar_item_gallery_label" = "Gallery";
+"tabbar_item_gallery_label" = "Photos";
 "tabbar_item_contacts_label" = "Contacts";
 "tabbar_item_all_files_label" = "All Files";
 "see_features" = "Show features";
@@ -1597,10 +1597,10 @@
 "contact_phase2_backup_contacts_button" = "Back up Now";
 "contact_phase2_small_card_backup_message" = "Your last backup was on ";
 "contact_phase2_small_card_backup_button" = "See Backup";
-"contact_phase2_small_card_duplicates_message" = "You can edit your phone contact list by clearing the duplicate entries on your phone";
+"contact_phase2_small_card_duplicates_message" = "You can edit your phone contact list by clearing the duplicate entries on your phone.";
 "contact_phase2_small_card_duplicates_button" = "Delete Duplicates on iPhone";
 "contact_phase2_big_card_backup_message" = "Back up your contacts in your lifebox safely!";
-"contact_phase2_big_card_contacts" = "contacts";
+"contact_phase2_big_card_contacts" = "Contacts";
 "contact_phase2_big_card_see_contacts_button" = "See Contacts";
 "contact_phase2_big_card_autobackup_format" = "Auto Backup: %@";
 "contact_phase2_backup_progress_title" = "Back up Contacts";
@@ -1899,7 +1899,7 @@
 /*Accessibility*/
 "play_captcha" = "Play captcha";
 "refresh_captcha" = "Refresh captcha";
-"container_shared_files" = "Shared by me";
+"container_shared_files" = "Shared By Me";
 "container_document" = "Document";
 "container_music" = "Music";
 "container_favourite" = "Favourite";
@@ -2014,7 +2014,7 @@
 "save_to_my_lifebox_full_storage_body" = "You can free up space on this iPhone by managing your storage in Settings.";
 "places_map_title" = "Map";
 "map_location_detail_header" = "Photos at this Location";
-"beeline_feature_cancel_TC" = "";
+"beeline_feature_cancel_TC" = "You can cancel or manage your lifebox subscription from the Beeline application. ";
 "security_popup_body" = "Please enter at least 1 field to recover your account easily when you forgot your password";
 "security_popup_header" = "Set Your Recovery E-mail or Security Question";
 "save_to_my_billo" = "Save to My Billo";
@@ -2050,8 +2050,8 @@
 
 /*Fuzzy*/
 "ETK_KVKK_Izin_Politikasi" = "Permission Policy";
-"kvkk_firms_link" = "";
-"kvkk_commercial_info_link" = "";
+"kvkk_firms_link" = "Lifecell Bulut Çözümleri A.Ş., Lifecell Dijital Servisler ve Çözümler A.Ş and Group Companies";
+"kvkk_commercial_info_link" = "Permission Policy";
 "syncing" = "Syncing";
 "downloading" = "Downloading";
 "ETK_KVKK_Izin_Politikası" = "Permission Policy";
@@ -2079,5 +2079,39 @@ then {11,99 TRY/Month}*/
 "paycell_share_message" = "I joined the lifebox Brand Ambassador Program. You can have the program-specific lifebox 6-month 250GB Premium package for discounted price by clicking the link below. Don't miss it 😊";
 
 /*Fuzzy*/
-"beeline_cancel_TC" = "You can cancel or manage your lifebox subscription from the Beeline Application.";
-"paycell_share_message " = "You have been sent 5GB of lifebox storage, click to redeem";
+"beeline_cancel_TC" = "You can cancel or manage your lifebox subscription from the Beeline application.";
+"foryou_throwback" = "Throwback";
+"foryou_myalbums" = "My Albums";
+"foryou_myanimations" = "My Animations";
+
+/*Fuzzy*/
+"foryou_collages" = "Collages";
+
+/*Fuzzy*/
+"foryou_my_collages" = "My Collages";
+"foryou_animations" = "Animations";
+
+/*Fuzzy*/
+"foryou_no_album_warn" = "You haven't created an album yet.";
+
+/*Fuzzy*/
+"foryou_no_photopick_warn" = "You haven't used PhotoPick yet.";
+
+/*Fuzzy*/
+"foryou_no_story_warn" = "No active stories currently.";
+"foryou_try_photopick" = "Try PhotoPick";
+"foryou_see_all" = "See All";
+
+/*Facelift*/
+"tabbar_foryou" = "For You";
+"tabbar_discover" = "Discover";
+"change_pass_mail_or_phone" = "E-mail or Phone number";
+"mystorage_become_premium" = "To unlock more features, become a Premium member.";
+"we_are_creating_your_story_title" = "We are preparing your story.";
+"we_are_creating_your_story_desc" = "Once it is done, you can access it from Videos Album.";
+"trash_bin" = "Trash Bin";
+"empty_gallery_no_photo" = "You don’t have any photos or videos in your lifebox yet.";
+"empty_gallery_no_video" = "You don’t have any videos in your lifebox yet.";
+"empty_gallery_no_sync" = "You don’t have any photos in your lifebox yet.";
+"empty_gallery_no_unsync" = "All of your files are updated to lifebox.";
+"subscription_offer_cancel_button" = "Cancel";

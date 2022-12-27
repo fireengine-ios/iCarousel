@@ -9,7 +9,6 @@
 import Foundation
 
 extension String {
-    
     func htmlAttributedForPrivacyPolicy(using font: UIFont) -> NSMutableAttributedString? {
         
         let boldFontAttribute = [NSAttributedString.Key.font: UIFont.TurkcellSaturaBolFont(size: 28)]
@@ -32,7 +31,7 @@ extension String {
                                                      documentAttributes: nil)
             
             let range: NSRange = text.mutableString.range(of: TextConstants.privacyPolicyHeadLine, options: .caseInsensitive)
-            text.addAttribute(.foregroundColor, value: AppColor.blackColor.color ?? .black, range: NSRange(location: 0, length: text.length))
+            text.addAttribute(.foregroundColor, value: AppColor.blackColor.color, range: NSRange(location: 0, length: text.length))
             text.addAttributes(boldFontAttribute, range: range)
             return text
         } catch {
@@ -74,7 +73,6 @@ extension Optional where Wrapped == String {
 }
 
 //MARK: - path extension related
-
 extension String {
     
     func getPathExtension() -> String? {
@@ -100,5 +98,47 @@ extension String {
 extension String {
     var digits: String {
         return components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+    }
+    
+    var firstLine: String {
+        return components(separatedBy: .newlines).first ?? ""
+    }
+    
+    var removeFirstLine: String {
+        var element = components(separatedBy: .newlines)
+        element.removeFirst()
+        return element.joined()
+    }
+}
+
+extension String {
+    private var convertHtmlToNSAttributedString: NSAttributedString? {
+        guard let data = data(using: .utf8) else {
+            return nil
+        }
+        do {
+            return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
+        }
+        catch {
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+
+    public func convertHtmlToAttributedStringWithCSS(font: UIFont?, csscolor: String, lineheight: Int, csstextalign: String) -> NSAttributedString? {
+        guard let font = font else {
+            return convertHtmlToNSAttributedString
+        }
+        let modifiedString = "<style>body{font-family: '\(font.fontName)'; font-size:\(font.pointSize)px; color: \(csscolor); line-height: \(lineheight)px; text-align: \(csstextalign); }</style>\(self)"
+        guard let data = modifiedString.data(using: .utf8) else {
+            return nil
+        }
+        do {
+            return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
+        }
+        catch {
+            print(error)
+            return nil
+        }
     }
 }

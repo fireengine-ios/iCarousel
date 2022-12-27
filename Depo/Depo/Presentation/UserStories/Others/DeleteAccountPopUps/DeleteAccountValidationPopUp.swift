@@ -20,12 +20,12 @@ final class DeleteAccountValidationPopUp: UIViewController {
     @IBOutlet weak var scrollViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var popUpView: UIView! {
         willSet {
-            newValue.layer.cornerRadius = 4
+            newValue.layer.cornerRadius = 16
 
             newValue.layer.shadowOffset = .zero
             newValue.layer.shadowOpacity = 0.5
             newValue.layer.shadowRadius = 4
-            newValue.layer.shadowColor = AppColor.cellShadow.color?.cgColor
+            newValue.layer.shadowColor = AppColor.cellShadow.color.cgColor
         }
     }
 
@@ -33,8 +33,8 @@ final class DeleteAccountValidationPopUp: UIViewController {
         willSet {
             newValue.numberOfLines = 0
             newValue.textAlignment = .center
-            newValue.textColor = ColorConstants.darkText
-            newValue.font = UIFont.TurkcellSaturaFont(size: 18)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 14.0)
 
             newValue.text = localized(.deleteAccountSecondPopupMessage)
         }
@@ -42,7 +42,7 @@ final class DeleteAccountValidationPopUp: UIViewController {
 
     @IBOutlet weak var phoneNumberInput: ProfileTextEnterView! {
         willSet {
-            newValue.titleLabel.text = localized(.deleteAccountGSMInput)
+            newValue.titleLabel.text = "  " + localized(.deleteAccountGSMInput) + "  "
             newValue.textField.isEnabled = false
             newValue.textField.textColor = ColorConstants.textDisabled
         }
@@ -50,11 +50,13 @@ final class DeleteAccountValidationPopUp: UIViewController {
 
     @IBOutlet weak var passwordInputView: ProfileTextEnterView! {
         willSet {
-            newValue.titleLabel.text = localized(.deleteAccountPasswordInput)
+            newValue.titleLabel.text = "  " + localized(.deleteAccountPasswordInput) + "  "
             newValue.textField.isSecureTextEntry = true
             newValue.textField.textContentType = .password
             newValue.subtitleLabel.text = localized(.deleteAccountPasswordError)
+            newValue.subtitleLabel.textColor = AppColor.profileInfoOrange.color
             newValue.textField.delegate = self
+            newValue.textField.placeholder = TextConstants.enterYourPassword
             newValue.textField.returnKeyType = .done
 
             newValue.textField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
@@ -71,23 +73,14 @@ final class DeleteAccountValidationPopUp: UIViewController {
         }
     }
     
-    @IBOutlet weak var cancelButton: UIButton! {
+    @IBOutlet weak var cancelButton: WhiteButton! {
         willSet {
-            newValue.setTitleColor(AppColor.marineTwoAndTealish.color, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
-            newValue.layer.cornerRadius = 25
-            newValue.layer.borderWidth = 1
-            newValue.layer.borderColor = AppColor.marineTwoAndTealish.color?.cgColor
             newValue.setTitle(localized(.deleteAccountCancelButton), for: .normal)
         }
     }
 
-    @IBOutlet weak var confirmButton: UIButton! {
+    @IBOutlet weak var confirmButton: DarkBlueButton! {
         willSet {
-            newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.backgroundColor = AppColor.marineTwoAndTealish.color
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
-            newValue.layer.cornerRadius = 25
             newValue.setTitle(localized(.deleteAccountContinueButton), for: .normal)
         }
     }

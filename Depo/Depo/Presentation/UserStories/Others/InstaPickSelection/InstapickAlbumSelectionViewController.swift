@@ -6,25 +6,15 @@ protocol InstapickAlbumSelectionDelegate: AnyObject {
 
 final class InstapickAlbumSelectionViewController: UIViewController, ErrorPresenter {
     
+    private lazy var noFilesView = PhotoSelectionNoFilesView.initFromNib()
+    
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         
-        collectionView.backgroundView = emptyMessageLabel
-        emptyMessageLabel.frame = collectionView.bounds
+        collectionView.backgroundView = noFilesView
+        noFilesView.frame = collectionView.bounds
         return collectionView
-    }()
-    
-    private let emptyMessageLabel: InsetsLabel = {
-        let label = InsetsLabel()
-        label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.textColor = ColorConstants.textGrayColor
-        label.font = UIFont.TurkcellSaturaRegFont(size: 14)
-        label.text = TextConstants.loading
-        label.insets = UIEdgeInsets(top: 5, left: 30, bottom: 5, right: 30)
-        return label
     }()
     
     private let albumService = AlbumService(requestSize: 100)
@@ -52,6 +42,8 @@ final class InstapickAlbumSelectionViewController: UIViewController, ErrorPresen
         
         configure()
         loadAlbums()
+        
+        noFilesView.noPhotos.image = Image.iconPickNoAlbums.image
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -76,8 +68,8 @@ final class InstapickAlbumSelectionViewController: UIViewController, ErrorPresen
             refresher.endRefreshing()
         }
         
-        emptyMessageLabel.text = TextConstants.loading
-        collectionView.backgroundView = emptyMessageLabel
+        noFilesView.text = TextConstants.loading
+        collectionView.backgroundView = noFilesView
         
         albumService.allAlbums(sortBy: .date, sortOrder: .desc, success: { [weak self] albums in
             guard let `self` = self else { return }
@@ -86,7 +78,7 @@ final class InstapickAlbumSelectionViewController: UIViewController, ErrorPresen
                 self.dataSource.reload(with: albums)
                 
                 if albums.isEmpty {
-                    self.emptyMessageLabel.text = TextConstants.thereAreNoAlbums
+                    self.noFilesView.text = TextConstants.thereAreNoAlbums
                 } else {
                     self.collectionView.backgroundView = nil
                 }

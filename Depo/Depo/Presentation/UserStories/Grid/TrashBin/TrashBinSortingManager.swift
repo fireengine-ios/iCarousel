@@ -11,6 +11,8 @@ import Foundation
 protocol TrashBinSortingManagerDelegate: AnyObject {
     func sortingRuleChanged(rule: SortedRules)
     func viewTypeChanged(viewType: MoreActionsConfig.ViewType)
+    func onMoreButton(sender: Any)
+    func filterChanged(filter: MoreActionsConfig.MoreActionsFileType)
 }
 
 final class TrashBinSortingManager {
@@ -54,7 +56,13 @@ final class TrashBinSortingManager {
 }
 
 extension TrashBinSortingManager: GridListTopBarDelegate {
-    func filterChanged(filter: MoreActionsConfig.MoreActionsFileType) { }
+    func onMoreButton() {
+        delegate?.onMoreButton(sender: self)
+    }
+    
+    func filterChanged(filter: MoreActionsConfig.MoreActionsFileType) {
+        delegate?.filterChanged(filter: filter)
+    }
     
     func sortingRuleChanged(rule: MoreActionsConfig.SortRullesType) {
         delegate?.sortingRuleChanged(rule: rule.sortedRulesConveted)

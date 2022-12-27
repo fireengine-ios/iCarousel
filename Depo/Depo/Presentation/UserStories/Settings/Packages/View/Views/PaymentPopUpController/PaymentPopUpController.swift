@@ -41,7 +41,7 @@ final class PaymentPopUpController: UIViewController {
                 newValue.addArrangedSubview(paymentTypeView)
             }
             
-            newValue.addSubviewWith(backgroundColor: AppColor.secondaryBackground.color ?? ColorConstants.whiteColor,
+            newValue.addSubviewWith(backgroundColor: AppColor.secondaryBackground.color,
                                     cornerRadius: cornerRadius)
             
             /// to see background view with cornerRadius
@@ -51,7 +51,7 @@ final class PaymentPopUpController: UIViewController {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.textColor = AppColor.darkBlueAndTealish.color
+            newValue.textColor = AppColor.darkBlue.color
             newValue.textAlignment = .center
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 48)
             newValue.text = paymentModel?.name

@@ -59,9 +59,6 @@ final class TwoFactorAuthenticationDesigner: NSObject {
     @IBOutlet private weak var sendButton: UIButton! {
         willSet {
             newValue.setTitle(TextConstants.feedbackViewSendButton, for: .normal)
-            newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.backgroundColor = UIColor.lrTealish
             newValue.isOpaque = true
         }
     }

@@ -48,7 +48,7 @@ final class TBMatikPhotoView: UIView, NibInit {
     @IBOutlet private weak var imageView: UIImageView! {
         willSet {
             newValue.layer.masksToBounds = true
-            newValue.layer.cornerRadius = 4
+            newValue.layer.cornerRadius = 14
         }
     }
     
@@ -119,7 +119,7 @@ final class TBMatikPhotoView: UIView, NibInit {
 
         if let image = image {
             imageView.contentMode = image.size.width < image.size.height ? .scaleAspectFill : .scaleAspectFit
-            imageView.image = image
+            imageView.image = image.withRoundedCorners(radius: 14.0)
             
             UIView.animate(withDuration: NumericConstants.setImageAnimationDuration) {
                 self.imageView.alpha = 1

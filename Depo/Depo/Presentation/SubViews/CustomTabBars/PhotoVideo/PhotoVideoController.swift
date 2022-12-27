@@ -9,9 +9,6 @@
 import UIKit
 import MobileCoreServices
 
-// TODO: todos in file
-// TODO: clear code -
-
 typealias IndexPathCallback = (_ path: IndexPath?) -> Void
 
 final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildController {
@@ -23,9 +20,9 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             collectionView.longPressDelegate = self
         }
     }
-    
-    var isPhoto = true
-    
+
+    var contentTypes: [PhotoVideoController.ContentType] = [.photos, .videos]
+
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreedCollectionDataSource)
     
     private lazy var progressQueue = DispatchQueue(label: DispatchQueueLabels.photoVideoUploadProgress, attributes: .concurrent)
@@ -46,14 +43,15 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     private var resentlyUploadedObjectUUIDs = SynchronizedSet<String>()
     
-    private lazy var navBarManager = SegmentedChildNavBarManager(delegate: self)
     private lazy var collectionViewManager = PhotoVideoCollectionViewManager(collectionView: self.collectionView, delegate: self)
+    private lazy var pinchManager = PhotoVideoPinchManager(collectionView: self.collectionView)
     private lazy var threeDotMenuManager = PhotoVideoThreeDotMenuManager(delegate: self)
     private lazy var bottomBarManager = PhotoVideoBottomBarManager(delegate: self)
     private lazy var dataSource = PhotoVideoDataSource(collectionView: self.collectionView, delegate: self)
     private lazy var analyticsManager: AnalyticsService = factory.resolve()
     private lazy var scrollDirectionManager = ScrollDirectionManager()
     private lazy var instaPickRoutingService = InstaPickRoutingService()
+    private lazy var storageVars: StorageVars = factory.resolve()
 
     private lazy var assetsFileCacheManager = AssetFileCacheManager()
     
@@ -67,6 +65,13 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     private var canShowDetail = true
     
+    private var isSelectionObject = 0
+    
+    private var category: QuickScrollCategory = .photosAndVideos
+    private var fileTypes: [FileType] = [.image, .video]
+    
+    private var viewType: ElementTypes = .galleryAll
+    
     // MARK: - life cycle
     
     override func viewDidLoad() {
@@ -75,16 +80,33 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         bottomBarManager.setup()
         collectionViewManager.setup()
         collectionViewManager.collectionViewLayout.delegate = dataSource
-        navBarManager.setDefaultMode()
-        homePageNavigationBarStyle()
-        
+        collectionViewManager.collectionViewLayout.pinsSectionHeadersToLayoutGuide = headerContainingViewController?.originalSafeAreaLayoutGuide
+        pinchManager.setup()
+
+        navigationBarHidden = true
         needToShowTabBar = true
         floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory, .createAlbum])
         ItemOperationManager.default.startUpdateView(view: self)
-        
+
         scrollBarManager.addScrollBar(to: collectionView, delegate: self)
         performFetch()
         collectionView.addInteraction(UIDropInteraction(delegate: self))
+
+        setDefaultNavigationHeaderActions()
+        headerContainingViewController?.isHeaderBehindContent = false
+        headerContainingViewController?.statusBarBackgroundViewStyle = .plain(color: .background)
+        
+        // Handle parsed deeplink if any
+        PushNotificationService.shared.openActionScreen()
+        // handle a token pending action if any
+        PushNotificationService.shared.assignAndOpenPendingActionIfAny()
+        
+        
+        //handle public shared items save operation after login
+        if let publicTokenToSave = storageVars.publicSharedItemsToken {
+            savePublicSharedItems(with: publicTokenToSave)
+            storageVars.publicSharedItemsToken = nil
+        }
     }
     
     deinit {
@@ -93,11 +115,11 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.trackPhotoVideoScreen(isPhoto: isPhoto)
+
+        // TODO: Facelift - Analytics event for new gallery screen
+//        self.trackPhotoVideoScreen(isPhoto: isPhoto)
         
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
-        collectionViewManager.setScrolliblePopUpView(isActive: true)
         scrollBarManager.startTimerToHideScrollBar()
         
         ///trigger Range API for update new items which are uploaded by other clients
@@ -107,7 +129,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        self.setupNavigationBar(editingMode: false)
 
         dataSource.getSelectedObjects(at: collectionViewManager.selectedIndexes) { [weak self] selectedItems in
             guard let self = self else {
@@ -115,7 +136,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             }
             
             if !selectedItems.isEmpty {
-                self.setupNavigationBar(editingMode: true)
                 self.updateSelectedItemsCount()
                 self.updateBarsForSelectedObjects()
             }
@@ -127,11 +147,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         super.viewWillDisappear(animated)
         
         stopEditingMode()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        collectionViewManager.setScrolliblePopUpView(isActive: false)
     }
 
     override func didMove(toParent parent: UIViewController?) {
@@ -146,10 +161,9 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     // MARK: - setup
     
     private func performFetch() {
-        dataSource.setupOriginalPredicates(isPhotos: isPhoto) { [weak self] in
+        dataSource.setupOriginalPredicates(fileTypes: fileTypes) { [weak self] in
             DispatchQueue.main.async {
                 self?.fetchAndReload()
-                self?.collectionViewManager.reloadAlbumsSlider()
 
                 // The very first viewWillAppear will return zero for collectionView.indexPathsForVisibleItems
                 // We need to call updateDB() after the initial db fetch
@@ -180,7 +194,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         dataSource.isSelectingMode = true
         deselectAllCells()
 
-        setupNavigationBar(editingMode: true)
+        isSelectionObject = 0
         updateSelectedItemsCount()
         updateBarsForSelectedObjects()
     }
@@ -189,7 +203,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         dataSource.isSelectingMode = false
         deselectAllCells()
         bottomBarManager.hide()
-        setupNavigationBar(editingMode: false)
+        CardsManager.default.stopOperationWith(type: .itemSelection)
     }
     
 
@@ -200,28 +214,16 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         }
     }
 
-    
-    private func setupNavigationBar(editingMode: Bool) {
-        /// don't let vc to change navBar if vc is not visible at this moment
-        guard viewIfLoaded?.window != nil else {
-            return
-        }
-        
-        /// be sure to configure navbar items after setup navigation bar
-        if editingMode {
-            navigationBarWithGradientStyle()
-            navBarManager.setSelectionMode()
-        } else {
-            homePageNavigationBarStyle()
-            navBarManager.setDefaultMode()
-        }
-    }
-    
     // MARK: - helpers
     
     private func updateSelectedItemsCount() {
         let selectedIndexesCount = collectionViewManager.selectedIndexes.count
+        isSelectionObject += 1
         self.setTitle("\(selectedIndexesCount) \(TextConstants.accessibilitySelected)")
+        if selectedIndexesCount == 0 && self.isSelectionObject > 1 {
+            stopEditingMode()
+            self.isSelectionObject = 0
+        }
     }
     
     private func updateBarsForSelectedObjects() {
@@ -231,17 +233,21 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
                 return
             }
             self.bottomBarManager.update(for: selectedObjects)
+            CardsManager.default.startOperationWith(type: .itemSelection, itemCount: selectedObjects.count)
             
             if selectedIndexes.count == 0 {
-                self.navBarManager.threeDotsButton.isEnabled = false
+//                self.navBarManager.threeDotsButton.isEnabled = false
+                CardsManager.default.stopOperationWith(type: .itemSelection)
                 self.bottomBarManager.hide()
             } else {
-                if self.isPhoto {
-                    self.navBarManager.threeDotsButton.isEnabled = true
-                } else {
-                    let hasRemote = selectedObjects.first { !$0.isLocalItem } != nil
-                    self.navBarManager.threeDotsButton.isEnabled = hasRemote
-                }
+
+                // TODO: Facelift - selection
+//                if self.isPhoto {
+//                    self.navBarManager.threeDotsButton.isEnabled = true
+//                } else {
+//                    let hasRemote = selectedObjects.first { !$0.isLocalItem } != nil
+//                    self.navBarManager.threeDotsButton.isEnabled = hasRemote
+//                }
                 self.bottomBarManager.show()
             }
         }
@@ -253,7 +259,8 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         }
         
         canShowDetail = false
-        trackClickOnPhotoOrVideo(isPhoto: isPhoto)
+        // TODO: Facelift. Analytics
+//        trackClickOnPhotoOrVideo(isPhoto: isPhoto)
 
         dataSource.getWrapedFetchedObjects { [weak self] items in
             self?.dataSource.getObject(at: indexPath) { [weak self] object in
@@ -299,7 +306,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         guard !collectionView.isQuickSelecting else {
             return
         }
-        
+
         updateBarsForSelectedObjects()
     }
     
@@ -339,6 +346,26 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             self?.scrollBarManager.scrollBar.setText(title)
         }
     }
+    
+    private func savePublicSharedItems(with publicTokenToSave: String) {
+        PublicSharedItemsService().savePublicSharedItems(publicToken: publicTokenToSave) { value in
+            SnackbarManager.shared.show(type: .action, message: localized(.publicShareSaveSuccess))
+            self.router.openTabBarItem(index: .documents, segmentIndex: 0)
+            ItemOperationManager.default.publicShareItemsAdded()
+        } fail: { error in
+            if error.errorDescription == PublicShareSaveErrorStatus.notRequiredSpace.rawValue {
+                self.router.showFullQuotaPopUp()
+                return
+            }
+            let message = PublicShareSaveErrorStatus.allCases.first(where: {$0.rawValue == error.errorDescription})?.description
+            SnackbarManager.shared.show(type: .action, message: message ?? localized(.publicShareSaveError))
+            self.router.openTabBarItem(index: .documents, segmentIndex: 0)
+        }
+    }
+}
+
+extension PhotoVideoController: HeaderContainingViewControllerChild {
+    var scrollViewForHeaderTracking: UIScrollView? { collectionView }
 }
 
 extension PhotoVideoController: QuickSelectCollectionViewDelegate {
@@ -430,10 +457,8 @@ extension PhotoVideoController: UIScrollViewDelegate {
                         endId = bottomAPIInfo.id
                     }
                     
-                    let category: QuickScrollCategory = self.isPhoto ? .photos : .videos
-                    debugLog("RangeAPI category \(category)")
-                    let fileType: FileType = self.isPhoto ? .image : .video
-                    self.quickScrollService.requestListOfDateRange(startDate: topAPIInfo.date, endDate: bottomAPIInfo.date, startID: startId, endID: endId, category: category, pageSize: RequestSizeConstant.quickScrollRangeApiPageSize) { response in
+                    debugLog("RangeAPI category \(self.category)")
+                    self.quickScrollService.requestListOfDateRange(startDate: topAPIInfo.date, endDate: bottomAPIInfo.date, startID: startId, endID: endId, category: self.category, pageSize: RequestSizeConstant.quickScrollRangeApiPageSize) { response in
                         debugLog("RangeAPI response recieved")
                         switch response {
                         case .success(let quckScrollResponse):
@@ -441,7 +466,7 @@ extension PhotoVideoController: UIScrollViewDelegate {
                             debugLog("RangeAPI response count \(quckScrollResponse.size) \(quckScrollResponse.files.count)")
                             debugLog("RangeAPI first date \(quckScrollResponse.files.first?.metaDate) last date \(quckScrollResponse.files.last?.metaDate)")
                             self.dispatchQueue.async {
-                                MediaItemOperationsService.shared.updateRemoteItems(remoteItems: quckScrollResponse.files, fileType: fileType, topInfo: topAPIInfo, bottomInfo: bottomAPIInfo, completion: {
+                                MediaItemOperationsService.shared.updateRemoteItems(remoteItems: quckScrollResponse.files, fileTypes: self.fileTypes, topInfo: topAPIInfo, bottomInfo: bottomAPIInfo, completion: {
                                     debugLog("RangeAPI DB UPDATED")
                                     debugPrint("appended and updated")
                                 })
@@ -634,7 +659,8 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
                 let warningPopup = WarningPopupController.popup(type: .photoPrintRedirection(photos: itemsToPrint)) {
                     self.stopEditingMode()
                 }
-                self.present(warningPopup, animated: false)
+
+                UIApplication.topController()?.present(warningPopup, animated: false)
             }
         }
         
@@ -643,40 +669,13 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
     func changePeopleThumbnail() {}
 }
 
-// MARK: - SegmentedChildNavBarManagerDelegate
-extension PhotoVideoController: SegmentedChildNavBarManagerDelegate {
-    
-    func onCancelSelectionButton() {
-        stopEditingMode()
-    }
-    
-    func onThreeDotsButton() {
-        dataSource.getSelectedObjects (at: collectionViewManager.selectedIndexes) { [weak self] selectedObjects in
-            guard let self = self else {
-                return
-            }
-            self.threeDotMenuManager.showActions(for: selectedObjects, isSelectingMode: self.dataSource.isSelectingMode, isPhoto: self.isPhoto, sender: self.navBarManager.threeDotsButton)
-        }
-        
-    }
-    
-    func onSearchButton() {
-        showSearchScreen()
-    }
-    
-    func openUploadPhotos() {
-        showUploadScreen()
-    }
-}
-
 // MARK: - PhotoVideoCollectionViewManagerDelegate
 /// using: PhotoVideoCollectionViewManager(collectionView: self.collectionView, delegate: self)
 extension PhotoVideoController: PhotoVideoCollectionViewManagerDelegate {
-    func refreshData(refresher: UIRefreshControl) {
-        collectionViewManager.reloadAlbumsSlider()
-        refresher.endRefreshing()
+    func openUploadPhotos() {
+        showUploadScreen()
     }
-    
+
     func openAutoSyncSettings() {
         router.pushViewController(viewController: router.autoUpload)
     }
@@ -707,18 +706,14 @@ extension PhotoVideoController: PhotoVideoCollectionViewManagerDelegate {
         }
         
         collectionViewManager.viewType = type
-        
-        dataSource.changeSourceFilter(type: type, isPhotos: isPhoto) { [weak self] in
+
+        dataSource.changeSourceFilter(type: type, fileTypes: contentTypes.mappedToFileTypes()) { [weak self] in
             DispatchQueue.main.async {
                 self?.fetchAndReload()
             }
         }
     }
 }
-
-//extension PhotoVideoController: SegmentedControllerDelegate {
-//}
-
 
 // MARK: - ItemOperationManagerViewProtocol
 /// using: ItemOperationManager.default.startUpdateView(view:
@@ -933,21 +928,38 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
             self.updateDB()
         }
     }
-}
-
-extension PhotoVideoController {
-    static func initPhotoFromNib() -> PhotoVideoController {
-        let photoController = PhotoVideoController.initFromNib()
-        photoController.isPhoto = true
-        photoController.title = TextConstants.topBarPhotosFilter
-        return photoController
+    
+    func elementTypeChanged(type: ElementTypes) {
+        self.viewType = type
+        
+        switch type {
+        case .galleryAll:
+//            category = .photosAndVideos
+//            fileTypes = [.image, .video]
+//            collectionViewManager.viewType = .all
+//            performFetch()
+            changeViewType(to: .all)
+        case .galleryPhotos:
+            category = .photos
+            fileTypes = [.image]
+            collectionViewManager.viewType = .all
+            performFetch()
+        case .galleryVideos:
+            category = .videos
+            fileTypes = [.video]
+            collectionViewManager.viewType = .all
+            performFetch()
+        case .gallerySync:
+            changeViewType(to: .synced)
+        case .galleryUnsync:
+            changeViewType(to: .unsynced)
+        default:
+            return
+        }
     }
     
-    static func initVideoFromNib() -> PhotoVideoController {
-        let videoController = PhotoVideoController.initFromNib()
-        videoController.isPhoto = false
-        videoController.title = TextConstants.topBarVideosFilter
-        return videoController
+    func stopItemSelection() {
+        stopEditingMode()
     }
 }
 
@@ -973,17 +985,93 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
     }
     
     func fetchPredicateCreated() { }
-    
-    func contentDidChange(_ fetchedObjects: [MediaItem]) {
-        scrollBarManager.updateYearsView(with: fetchedObjects,
-                                         cellHeight: collectionViewManager.collectionViewLayout.itemSize.height,
-                                         numberOfColumns: Int(collectionViewManager.collectionViewLayout.columns))
-        
-        collectionViewManager.showEmptyDataViewIfNeeded(isShow: fetchedObjects.isEmpty)
+
+    func contentDidChange(sections: [NSFetchedResultsSectionInfo], fetchedObjects: [MediaItem]) {
+        updateYearsView(with: sections)
+        collectionViewManager.showEmptyDataViewIfNeeded(isShow: fetchedObjects.isEmpty, type: viewType)
     }
     
     func convertFetchedObjectsInProgress() {
         showSpinner()
+    }
+    
+    func getCalculatedHeightNew(for section: Int) -> CGFloat {
+        let numberOfItemsInSection = collectionView.numberOfItems(inSection: section)
+        
+        guard numberOfItemsInSection > 0 else {
+            return .zero
+        }
+        
+        let headerFrame = collectionViewManager.collectionViewLayout.layoutAttributesForSupplementaryView(
+            ofKind: UICollectionView.elementKindSectionHeader,
+            at: IndexPath(item: 0, section: section)
+        )?.frame ?? .zero
+        
+        let firstItemIndex = 0
+        let fisrtItemFrame =  collectionViewManager.collectionViewLayout.layoutAttributesForItem(at: IndexPath(item: firstItemIndex, section: section))?.frame ?? .zero
+
+        let lastItemIndex = numberOfItemsInSection - 1
+        let lastItemFrame =  collectionViewManager.collectionViewLayout.layoutAttributesForItem(at: IndexPath(item: lastItemIndex, section: section))?.frame ?? .zero
+
+        let sectionHeightWithoutHeader = lastItemFrame.maxY - fisrtItemFrame.minY
+        
+        return max(0, sectionHeightWithoutHeader + headerFrame.height)
+    }
+
+    private func updateYearsView(with sections: [NSFetchedResultsSectionInfo]) {
+        let dates = getDates(of: sections)
+
+        let collectionViewVisibleHeight = collectionView.frame.inset(by: collectionView.adjustedContentInset).height
+
+        var yearHeightMap: YearHeightMap = [:]
+        for (index, date) in dates.enumerated() {
+            //let height = collectionViewManager.collectionViewLayout.getCalculatedHeight(for: index)
+            let height = getCalculatedHeightNew(for: index)
+            let year = date?.getYear()
+            yearHeightMap[year] = yearHeightMap[year, default: 0] + height
+
+            if index == 0 {
+                yearHeightMap[year] = yearHeightMap[year]! + collectionViewVisibleHeight
+            }
+        }
+
+        let yearsSorted: [YearHeightTuple] = yearHeightMap.keys
+            .sorted { year1, year2 in
+                let year1 = year1 ?? Int.min
+                let year2 = year2 ?? Int.min
+                return year1 > year2
+            }
+            .map { year in
+                (year, yearHeightMap[year, default: 0])
+            }
+
+        scrollBarManager.updateYearsView(with: yearsSorted)
+    }
+
+
+    private func getDates(of sections: [NSFetchedResultsSectionInfo]) -> [Date?] {
+        sections
+            .map { section in
+                let mediaItem = section.objects?.first as? MediaItem
+                return mediaItem?.sortingDate as? Date
+            }
+    }
+
+    func threeDotsButtonTapped(_ button: UIButton?) {
+        if collectionViewManager.selectedIndexes.isEmpty {
+            stopEditingMode()
+        }
+
+        dataSource.getSelectedObjects(at: collectionViewManager.selectedIndexes) { [weak self] selectedObjects in
+            guard let self = self else {
+                return
+            }
+            self.threeDotMenuManager.showActions(
+                for: selectedObjects,
+                isSelectingMode: self.dataSource.isSelectingMode,
+                sender: button
+            )
+        }
     }
 }
 

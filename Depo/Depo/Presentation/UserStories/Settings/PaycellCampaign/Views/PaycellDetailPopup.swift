@@ -104,7 +104,7 @@ class PaycellDetailPopup: BasePopUpController, NibInit {
         }
         
         guard let model = model else {  return }
-        let hexColor = AppColor.blackColor.color?.toHexString() ?? "#000000"
+        let hexColor = AppColor.blackColor.color.toHexString() ?? "#000000"
         let htmlString = String().prepareHtmlString(with: model.content, hexColor: hexColor)
         webView.loadHTMLString(htmlString, baseURL: nil)
         

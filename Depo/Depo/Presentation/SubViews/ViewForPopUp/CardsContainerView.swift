@@ -118,7 +118,7 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
         let footerHeight = tableView.tableFooterView?.frame.height ?? 0
         var h: CGFloat = headerHeight + footerHeight
         for view in viewsArray {
-            h = h + view.frame.size.height + 2 * CardsContainerView.indent
+            h = h + view.frame.size.height + 1 * CardsContainerView.indent
         }
         return h
     }
@@ -135,7 +135,7 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let view = viewsArray[indexPath.row]
-        return view.frame.size.height + 2 * CardsContainerView.indent
+        return view.frame.size.height + CardsContainerView.indent
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -181,15 +181,6 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
         return true
     }
     
-    private func checkIsNeedShowPopUpFor(operationType: OperationType) -> Bool {
-        switch operationType {
-        case .prepareToAutoSync:
-            return viewsByType[.sync] == nil
-        default:
-            return true
-        }
-    }
-    
     func getViewForOperation(operation: OperationType) -> BaseCardView {
         return CardsManager.cardViewForOperaion(type: operation)
     }
@@ -198,11 +189,11 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
         ///DO NOT DELETE. This delegate method used in BaseCollectionViewDataSource
     }
     
-    func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?) {
-        startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
+    func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?, itemCount: Int?) {
+        startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations, itemCount: itemCount)
     }
     
-    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?) {
+    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?, itemCount: Int?) {
         ///TODO: remove 'type == .instaPick' after (because of lines 227-229)
         if type == .premium || type == .instaPick {
             /// not let some cards appear anywhere else than in HomePage
@@ -212,16 +203,12 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
         if !checkIsThisIsPermittedType(type: type) {
             return
         }
-        
-        if !checkIsNeedShowPopUpFor(operationType: type) {
-            return
-        }
-        
+
         if viewsByType[type] == nil {
             
             let view = getViewForOperation(operation: type)
             
-            if type.isContained(in: [.sync, .upload, .prepareToAutoSync, .sharedWithMeUpload]) {
+            if type.isContained(in: [.sync, .upload, .sharedWithMeUpload]) {
                 view.shouldScrollToTop = true
             }
             
@@ -241,7 +228,7 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
         
     }
     
-    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int ) {
+    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int, itemCount: Int?) {
         if let view = viewsByType[type] {
             if let popUp = view as? ProgressCard {
                 popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
@@ -250,7 +237,7 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
                 }
             }
         } else {
-            startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
+            startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations, itemCount: itemCount)
         }
     }
     

@@ -73,7 +73,7 @@ final class BecomePremiumView: UIView, NibInit {
         button.setTitleColor(AppColor.marineTwoAndWhite.color, for: .normal)
         button.insets = UIEdgeInsets(topBottom: 0, rightLeft: 12)
         button.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
-        button.setBackgroundColor(AppColor.secondaryBackground.color ?? .white, for: .normal)
+        button.setBackgroundColor(AppColor.secondaryBackground.color, for: .normal)
         
         button.layer.borderColor = ColorConstants.darkTintGray.cgColor
         button.layer.borderWidth = 2
@@ -132,7 +132,7 @@ final class BecomePremiumView: UIView, NibInit {
             }
             
             let view = SubscriptionOfferView.initFromNib()
-            view.configure(with: offer, delegate: self, index: index, style: .short)
+            view.configure(with: offer, delegate: self, index: index, style: .full)
             contentView.addArrangedSubview(view)
             
             view.translatesAutoresizingMaskIntoConstraints = false
@@ -179,7 +179,7 @@ final class BecomePremiumView: UIView, NibInit {
 //MARK: - SubscriptionOfferViewDelegate
 
 extension BecomePremiumView: SubscriptionOfferViewDelegate {
-    func didPressSubscriptionPlanButton(planIndex: Int) {
+    func didPressSubscriptionPlanButton(planIndex: Int, storageOfferType: StorageOfferType) {
         guard let offer = plans[safe: planIndex] else {
             return
         }

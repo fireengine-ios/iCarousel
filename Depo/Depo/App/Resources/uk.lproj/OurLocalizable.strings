@@ -2002,11 +2002,11 @@
 
 /*Fuzzy*/
 "ETK_KVKK_Izin_Politikasi" = "Політика Дозволів";
-"kvkk_firms_link" = "";
-"kvkk_commercial_info_link" = "";
-"syncing" = "";
-"downloading" = "";
-"ETK_KVKK_Izin_Politikası" = "";
+"kvkk_firms_link" = "Lifecell Bulut Çözümleri A.Ş., Lifecell Dijital Servisler ve Çözümler A.Ş та Компанії Групи";
+"kvkk_commercial_info_link" = "Політика Дозволів";
+"syncing" = "Синхронізується";
+"downloading" = "Завантажується";
+"ETK_KVKK_Izin_Politikası" = "Політика Дозволів";
 
 /*Free for {3 months}
 then {11,99 TRY/Month}*/
@@ -2030,4 +2030,28 @@ then {11,99 TRY/Month}*/
 "title_paycell_friends" = "Люди, Які Купили Пакет (%d Осіб)";
 "paycell_share_message" = "Я приєднався до Програми Амбасадорів Бренда lifebox. Ви можете отримати 6-місячний Преміум пакет lifebox об'ємом 250 ГБ за зниженою ціною, перейшовши за посиланням нижче. Не проґавте можливість 😊";
 "beeline_cancel_TC" = "Ви можете скасувати або керувати підпискою lifebox із програми Beeline.";
-"paycell_share_message " = "";
+"foryou_throwback" = "Спогади";
+"foryou_myalbums" = "Мої Альбоми";
+"foryou_myanimations" = "Мої Анімації";
+"foryou_collages" = "Колажі";
+"foryou_my_collages" = "Мої Колажі";
+"foryou_animations" = "Анімації";
+"foryou_no_album_warn" = "Ви ще не створили альбом.";
+"foryou_no_photopick_warn" = "Ви ще не використовували PhotoPick.";
+"foryou_no_story_warn" = "Зараз немає активних історій.";
+"foryou_try_photopick" = "Спробуйте PhotoPick";
+"foryou_see_all" = "Показати все";
+
+/*Facelift*/
+"tabbar_foryou" = "Для Вас";
+"tabbar_discover" = "Відкрийте для себе";
+"change_pass_mail_or_phone" = "Адреса Електронної Пошти або Номер Телефону";
+"mystorage_become_premium" = "Для більших можливостей станьте Premium-учасником";
+"we_are_creating_your_story_title" = "Готуємо Вашу історію.";
+"we_are_creating_your_story_desc" = "Коли буде готово, ви зможете отримати доступ з альбому Відео.";
+"trash_bin" = "Корзина";
+"empty_gallery_no_photo" = "У вас ще немає фотографій";
+"empty_gallery_no_video" = "У вашому lifebox поки немає жодного відео";
+"empty_gallery_no_sync" = "У вашому lifebox поки що немає фотографій";
+"empty_gallery_no_unsync" = "У вашому lifebox немає неоновлених файлів";
+"subscription_offer_cancel_button" = "Скасувати";

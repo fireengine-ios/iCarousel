@@ -29,6 +29,10 @@ extension CreateStoryPreviewPresenter: CreateStoryPreviewViewOutput {
         interactor.viewIsReady()
     }
     
+    func getStoryName() -> String {
+        return interactor.getStoryName()
+    }
+    
     func onSaveStory() {
         startAsyncOperation()
         interactor.onSaveStory()
@@ -36,11 +40,27 @@ extension CreateStoryPreviewPresenter: CreateStoryPreviewViewOutput {
     
     func storyCreated() {
         asyncOperationSuccess()
-        
-        SnackbarManager.shared.show(type: .critical, message: TextConstants.createStoryPopUpMessage, action: .ok) { [weak self] in
-            self?.prepareToDismiss()
-            self?.router.goToMain()
+
+        let words = TextConstants.createStoryPopUpMessage.components(separatedBy: ".")
+        let title = words[0]
+        var message = ""
+        if words.count > 1 {
+            message = words[1]
         }
+        
+        let controller = PopUpController.with(
+            title: title,
+            message: message,
+            image: .clock,
+            buttonTitle: TextConstants.ok,
+            action: { [weak self] vc in
+                vc.close {
+                    self?.prepareToDismiss()
+                    self?.router.goToMain()
+                }
+            })
+
+        controller.open()
     }
     
     func storyCreatedWithError() {

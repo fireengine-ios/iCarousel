@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,10 +11,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="BHT-bW-h3z" customClass="InstapickAnalyzeHistoryPhotoCell" customModule="Billo" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="80" height="108"/>
+            <rect key="frame" x="0.0" y="0.0" width="85" height="108"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                <rect key="frame" x="0.0" y="0.0" width="80" height="108"/>
+                <rect key="frame" x="0.0" y="0.0" width="85" height="108"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iYj-XS-Dle">
@@ -58,8 +58,8 @@
                             <constraint firstItem="31d-Ca-RAG" firstAttribute="centerX" secondItem="YM8-Sf-HUz" secondAttribute="centerX" id="ibU-Tl-KOD"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jvr-NL-CY6">
-                        <rect key="frame" x="53.5" y="56.5" width="26.5" height="26.5"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jvr-NL-CY6" userLabel="RankLabel">
+                        <rect key="frame" x="58.5" y="58.5" width="26.5" height="26.5"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ns-CX-Fi0">
                                 <rect key="frame" x="1" y="1" width="24" height="24"/>
@@ -89,7 +89,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vHc-GA-Ynd">
-                        <rect key="frame" x="0.0" y="92" width="80" height="16"/>
+                        <rect key="frame" x="0.0" y="92" width="85" height="16"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="16" id="4wQ-aL-cz9"/>
                         </constraints>
@@ -101,8 +101,8 @@
             </view>
             <viewLayoutGuide key="safeArea" id="4fK-SD-seF"/>
             <constraints>
-                <constraint firstItem="Jvr-NL-CY6" firstAttribute="trailing" secondItem="iYj-XS-Dle" secondAttribute="trailing" id="4RA-Sg-ZZK"/>
-                <constraint firstItem="Jvr-NL-CY6" firstAttribute="bottom" secondItem="iYj-XS-Dle" secondAttribute="bottom" constant="3" id="9Pm-VC-rHG"/>
+                <constraint firstItem="Jvr-NL-CY6" firstAttribute="trailing" secondItem="iYj-XS-Dle" secondAttribute="trailing" constant="5" id="4RA-Sg-ZZK"/>
+                <constraint firstItem="Jvr-NL-CY6" firstAttribute="bottom" secondItem="iYj-XS-Dle" secondAttribute="bottom" constant="5" id="9Pm-VC-rHG"/>
                 <constraint firstItem="xZQ-cj-yoX" firstAttribute="centerX" secondItem="iYj-XS-Dle" secondAttribute="centerX" id="Lk7-c0-lnZ"/>
                 <constraint firstItem="YM8-Sf-HUz" firstAttribute="leading" secondItem="iYj-XS-Dle" secondAttribute="leading" id="OdT-UG-Hxk"/>
                 <constraint firstItem="vHc-GA-Ynd" firstAttribute="leading" secondItem="BHT-bW-h3z" secondAttribute="leading" id="QYc-4f-Cvh"/>
@@ -110,7 +110,6 @@
                 <constraint firstItem="xZQ-cj-yoX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iYj-XS-Dle" secondAttribute="leading" constant="8" id="Uuv-RU-Qm3"/>
                 <constraint firstItem="Jvr-NL-CY6" firstAttribute="width" secondItem="iYj-XS-Dle" secondAttribute="width" multiplier="1:3" id="ZsN-AG-Hyy"/>
                 <constraint firstItem="Jvr-NL-CY6" firstAttribute="height" secondItem="iYj-XS-Dle" secondAttribute="height" multiplier="1:3" id="cQg-yZ-CE2"/>
-                <constraint firstAttribute="trailing" secondItem="iYj-XS-Dle" secondAttribute="trailing" id="ifc-re-azs"/>
                 <constraint firstItem="xZQ-cj-yoX" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iYj-XS-Dle" secondAttribute="top" id="jnK-iX-Ek7"/>
                 <constraint firstItem="vHc-GA-Ynd" firstAttribute="top" secondItem="iYj-XS-Dle" secondAttribute="bottom" constant="12" id="jpz-dB-akc"/>
                 <constraint firstItem="YM8-Sf-HUz" firstAttribute="bottom" secondItem="iYj-XS-Dle" secondAttribute="bottom" id="kH5-MH-xw9"/>
@@ -121,7 +120,7 @@
                 <constraint firstAttribute="trailing" secondItem="vHc-GA-Ynd" secondAttribute="trailing" id="yvi-Pn-kYV"/>
                 <constraint firstItem="YM8-Sf-HUz" firstAttribute="height" secondItem="iYj-XS-Dle" secondAttribute="height" multiplier="1:3" id="znL-Vh-aUf"/>
             </constraints>
-            <size key="customSize" width="118" height="102"/>
+            <size key="customSize" width="123" height="102"/>
             <connections>
                 <outlet property="countLabel" destination="vHc-GA-Ynd" id="AFy-b9-EfY"/>
                 <outlet property="imageView" destination="iYj-XS-Dle" id="cMo-UH-feK"/>
@@ -134,7 +133,7 @@
                 <outlet property="selectionImageView" destination="31d-Ca-RAG" id="H3I-Vx-yZ9"/>
                 <outlet property="selectionImageWidth" destination="wnb-Kh-v0i" id="5AV-hM-fjZ"/>
             </connections>
-            <point key="canvasLocation" x="-272" y="0.89955022488755632"/>
+            <point key="canvasLocation" x="-268" y="0.89955022488755632"/>
         </collectionViewCell>
     </objects>
 </document>

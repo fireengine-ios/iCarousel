@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,7 +11,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GridListTopBar" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="centerYConstraint" destination="ZD4-gp-yMM" id="ae1-Xx-5QO"/>
-                <outlet property="gridListButton" destination="2hB-ca-1KW" id="HEf-Ig-rtV"/>
+                <outlet property="gridListButton" destination="pnm-iL-2WL" id="X7K-lb-zIZ"/>
+                <outlet property="middleLabel" destination="F7x-BT-auO" id="DaU-3H-OnQ"/>
+                <outlet property="moreButton" destination="2hB-ca-1KW" id="K7E-al-5mO"/>
                 <outlet property="segmentFilter" destination="wal-TA-Zbe" id="hOT-Cp-UMb"/>
                 <outlet property="sortByButton" destination="R7m-go-R4c" id="FSg-j0-lRy"/>
                 <outlet property="view" destination="iN0-l3-epB" id="SLP-fb-T29"/>
@@ -23,13 +25,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R7m-go-R4c">
-                    <rect key="frame" x="10" y="11" width="68" height="43"/>
+                    <rect key="frame" x="16" y="6" width="72" height="43"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="68" id="Dzb-Wi-FeT"/>
                         <constraint firstAttribute="height" constant="43" id="xi5-cC-uuT"/>
                     </constraints>
                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
-                    <state key="normal" title="Sort By" image="TriangleCopy3">
+                    <state key="normal" title="Sort By" image="iconArrowDownSmall">
                         <color key="titleColor" name="charcoalGrey"/>
                     </state>
                     <connections>
@@ -37,7 +39,7 @@
                     </connections>
                 </button>
                 <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wal-TA-Zbe">
-                    <rect key="frame" x="103.5" y="18" width="160" height="30"/>
+                    <rect key="frame" x="103.5" y="13" width="160" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="999" constant="160" id="uCC-uM-FL8"/>
                         <constraint firstAttribute="height" constant="29" id="uSO-n1-fxn"/>
@@ -47,28 +49,63 @@
                         <segment title="Second"/>
                     </segments>
                 </segmentedControl>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2hB-ca-1KW">
-                    <rect key="frame" x="321" y="14.5" width="36" height="36"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cCH-zD-zC4">
+                    <rect key="frame" x="0.0" y="54" width="367" height="1"/>
+                    <color key="backgroundColor" name="filesSeperator"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="36" id="73N-Rs-kra"/>
-                        <constraint firstAttribute="width" constant="36" id="TDf-0W-O3l"/>
+                        <constraint firstAttribute="height" constant="1" id="lOx-N3-hA3"/>
                     </constraints>
-                    <state key="normal" image="TopBarGrid"/>
-                    <state key="selected" image="TopBarList"/>
-                    <connections>
-                        <action selector="gridListAction:" destination="-1" eventType="touchUpInside" id="bi1-0X-PA5"/>
-                    </connections>
-                </button>
+                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="uV1-Ni-QO4">
+                    <rect key="frame" x="275" y="9.5" width="76" height="36"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pnm-iL-2WL">
+                            <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="36" id="ZE5-Tf-hXb"/>
+                                <constraint firstAttribute="width" constant="36" id="ZJN-F5-n8K"/>
+                            </constraints>
+                            <state key="normal" image="iconViewGrid"/>
+                            <state key="selected" image="iconViewList"/>
+                            <connections>
+                                <action selector="gridListAction:" destination="-1" eventType="touchUpInside" id="CJv-Ks-f8g"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2hB-ca-1KW">
+                            <rect key="frame" x="40" y="0.0" width="36" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="36" id="73N-Rs-kra"/>
+                                <constraint firstAttribute="width" constant="36" id="TDf-0W-O3l"/>
+                            </constraints>
+                            <state key="normal" image="iconKebabBorder"/>
+                            <state key="selected" image="iconViewList"/>
+                            <connections>
+                                <action selector="onMoreButton:" destination="-1" eventType="touchUpInside" id="5yD-zf-Fyh"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F7x-BT-auO">
+                    <rect key="frame" x="183.5" y="27.5" width="0.0" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
-                <constraint firstItem="2hB-ca-1KW" firstAttribute="centerY" secondItem="R7m-go-R4c" secondAttribute="centerY" id="CG9-nI-DEH"/>
-                <constraint firstItem="R7m-go-R4c" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="5" id="ZD4-gp-yMM"/>
+                <constraint firstItem="F7x-BT-auO" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="6Hp-L8-cJu"/>
+                <constraint firstItem="cCH-zD-zC4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8B6-Q6-iEr"/>
+                <constraint firstAttribute="trailing" secondItem="uV1-Ni-QO4" secondAttribute="trailing" constant="16" id="DPX-NF-xYp"/>
+                <constraint firstAttribute="bottom" secondItem="cCH-zD-zC4" secondAttribute="bottom" id="Dee-CA-aI2"/>
+                <constraint firstItem="uV1-Ni-QO4" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="TsD-Bx-9MK"/>
+                <constraint firstItem="R7m-go-R4c" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ZD4-gp-yMM"/>
                 <constraint firstItem="wal-TA-Zbe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="R7m-go-R4c" secondAttribute="trailing" constant="8" id="ZWt-3B-set"/>
-                <constraint firstItem="R7m-go-R4c" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="hsT-5L-dXY"/>
+                <constraint firstItem="R7m-go-R4c" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="hsT-5L-dXY"/>
                 <constraint firstItem="wal-TA-Zbe" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="lWj-2g-ibL"/>
                 <constraint firstItem="wal-TA-Zbe" firstAttribute="centerY" secondItem="R7m-go-R4c" secondAttribute="centerY" id="p6X-9N-zV0"/>
-                <constraint firstAttribute="trailing" secondItem="2hB-ca-1KW" secondAttribute="trailing" constant="10" id="z7H-O7-FVO"/>
+                <constraint firstItem="F7x-BT-auO" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="p8O-wQ-FyJ"/>
+                <constraint firstAttribute="trailing" secondItem="cCH-zD-zC4" secondAttribute="trailing" id="r06-zc-XFF"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
@@ -78,11 +115,15 @@
         </view>
     </objects>
     <resources>
-        <image name="TopBarGrid" width="14" height="14"/>
-        <image name="TopBarList" width="14" height="14"/>
-        <image name="TriangleCopy3" width="7" height="5"/>
+        <image name="iconArrowDownSmall" width="24" height="24"/>
+        <image name="iconKebabBorder" width="24" height="24"/>
+        <image name="iconViewGrid" width="24" height="24"/>
+        <image name="iconViewList" width="24" height="24"/>
         <namedColor name="charcoalGrey">
             <color red="0.2199999988079071" green="0.23100000619888306" blue="0.25499999523162842" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="filesSeperator">
+            <color red="0.92156862745098034" green="0.92549019607843142" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

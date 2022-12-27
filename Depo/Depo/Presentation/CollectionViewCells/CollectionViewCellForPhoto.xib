@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewCellForPhoto" id="gTV-IL-0wX" customClass="CollectionViewCellForPhoto" customModule="lifebox" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewCellForPhoto" id="gTV-IL-0wX" customClass="CollectionViewCellForPhoto" customModule="Billo" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5O8-XL-IfE">
+                        <rect key="frame" x="33" y="33" width="24" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="24" id="0Wf-QG-E51"/>
+                            <constraint firstAttribute="height" constant="24" id="PkO-gx-XZQ"/>
+                        </constraints>
+                    </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2VJ-2A-pkc">
                         <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                     </imageView>
@@ -33,16 +38,16 @@
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0of-UX-nI8">
-                        <rect key="frame" x="63" y="5" width="22" height="22"/>
+                        <rect key="frame" x="58" y="8" width="24" height="24"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="22" id="UtN-S5-F0O"/>
-                            <constraint firstAttribute="height" constant="22" id="l11-0Q-Alb"/>
+                            <constraint firstAttribute="width" constant="24" id="UtN-S5-F0O"/>
+                            <constraint firstAttribute="height" constant="24" id="l11-0Q-Alb"/>
                         </constraints>
                     </imageView>
                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="qHk-K2-jJ1">
                         <rect key="frame" x="35" y="35" width="20" height="20"/>
                     </activityIndicatorView>
-                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favoriteStar" translatesAutoresizingMaskIntoConstraints="NO" id="kwv-1p-nO6">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconFavoriteStar" translatesAutoresizingMaskIntoConstraints="NO" id="kwv-1p-nO6">
                         <rect key="frame" x="6" y="8" width="13" height="12"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="13" id="vBy-RM-UEE"/>
@@ -63,17 +68,19 @@
                 <constraint firstItem="kwv-1p-nO6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="6" id="3HP-DR-B2Y"/>
                 <constraint firstAttribute="trailing" secondItem="Lqt-0c-t0J" secondAttribute="trailing" id="8uz-yU-7hi"/>
                 <constraint firstItem="Lqt-0c-t0J" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="EHS-nI-eXc"/>
-                <constraint firstItem="0of-UX-nI8" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="Gyk-ZW-aZt"/>
+                <constraint firstItem="0of-UX-nI8" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="Gyk-ZW-aZt"/>
                 <constraint firstAttribute="trailing" secondItem="2VJ-2A-pkc" secondAttribute="trailing" id="JQl-7s-hpC"/>
                 <constraint firstItem="2VJ-2A-pkc" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="KUi-UH-YCM"/>
                 <constraint firstAttribute="bottom" secondItem="Lqt-0c-t0J" secondAttribute="bottom" id="LXu-mP-530"/>
                 <constraint firstAttribute="trailing" secondItem="IQc-XA-IIn" secondAttribute="trailing" constant="8" id="MZb-aF-pIR"/>
                 <constraint firstItem="qHk-K2-jJ1" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="NdH-rX-Hm8"/>
-                <constraint firstAttribute="trailing" secondItem="0of-UX-nI8" secondAttribute="trailing" constant="5" id="PfD-53-IAa"/>
+                <constraint firstAttribute="trailing" secondItem="0of-UX-nI8" secondAttribute="trailing" constant="8" id="PfD-53-IAa"/>
                 <constraint firstItem="kwv-1p-nO6" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="Pzt-C4-zdu"/>
                 <constraint firstItem="Lqt-0c-t0J" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="RlI-z4-WD1"/>
+                <constraint firstItem="5O8-XL-IfE" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Sua-Fi-XdZ"/>
                 <constraint firstAttribute="bottom" secondItem="XJs-Ot-0Kd" secondAttribute="bottom" constant="2" id="Zey-ez-MkW"/>
                 <constraint firstAttribute="bottom" secondItem="2VJ-2A-pkc" secondAttribute="bottom" id="bcu-La-YZE"/>
+                <constraint firstItem="5O8-XL-IfE" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="eAJ-Jw-Cfm"/>
                 <constraint firstAttribute="bottom" secondItem="IQc-XA-IIn" secondAttribute="bottom" constant="8" id="ivt-zk-vgW"/>
                 <constraint firstItem="2VJ-2A-pkc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="mJT-yZ-qWv"/>
                 <constraint firstItem="XJs-Ot-0Kd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="zeB-aX-9yy"/>
@@ -84,6 +91,7 @@
                 <outlet property="cloudStatusImage" destination="IQc-XA-IIn" id="Bsx-gf-1p3"/>
                 <outlet property="favoriteIcon" destination="kwv-1p-nO6" id="yqs-WY-gDH"/>
                 <outlet property="imageView" destination="2VJ-2A-pkc" id="DSz-RE-Xol"/>
+                <outlet property="placeholderImage" destination="5O8-XL-IfE" id="nvK-OW-MD7"/>
                 <outlet property="progressView" destination="XJs-Ot-0Kd" id="nir-k5-cnD"/>
                 <outlet property="selectionImageView" destination="0of-UX-nI8" id="qwk-PN-ZFc"/>
                 <outlet property="selectionView" destination="Lqt-0c-t0J" id="4Af-9D-QkW"/>
@@ -92,6 +100,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="favoriteStar" width="13" height="12"/>
+        <image name="iconFavoriteStar" width="28" height="28"/>
     </resources>
 </document>

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad12_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,14 +23,14 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kEE-p6-0hz" customClass="DismissKeyboardScrollView" customModule="Billo" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="49" width="414" height="763"/>
+                    <rect key="frame" x="0.0" y="49" width="1024" height="763"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fFh-DE-Z2K">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="729"/>
+                            <rect key="frame" x="0.0" y="0.0" width="1024" height="729"/>
                         </stackView>
                     </subviews>
                     <constraints>
@@ -40,33 +41,57 @@
                     </constraints>
                 </scrollView>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2mQ-Dg-Efm">
-                    <rect key="frame" x="0.0" y="116" width="414" height="662"/>
+                    <rect key="frame" x="0.0" y="96" width="1024" height="1166"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ui7-rz-0Ps">
-                    <rect key="frame" x="0.0" y="778" width="414" height="118"/>
+                    <rect key="frame" x="0.0" y="1262" width="1024" height="104"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r31-rU-1Pz" customClass="RoundedButton" customModule="Billo" customModuleProvider="target">
-                            <rect key="frame" x="117" y="20" width="180" height="44"/>
+                            <rect key="frame" x="314" y="16" width="396" height="45"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="44" id="Bmy-hy-drH"/>
-                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="HGc-id-OBt"/>
+                                <constraint firstAttribute="height" constant="45" id="Bmy-hy-drH"/>
+                                <constraint firstAttribute="width" constant="396" id="aXI-iq-ZwF"/>
                             </constraints>
                             <state key="normal" title="Share"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="aXI-iq-ZwF"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=regular">
+                                <mask key="constraints">
+                                    <include reference="aXI-iq-ZwF"/>
+                                </mask>
+                            </variation>
                             <connections>
                                 <action selector="onShareTapped:" destination="-1" eventType="touchUpInside" id="Irz-bF-lJj"/>
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" name="background"/>
                     <constraints>
+                        <constraint firstItem="r31-rU-1Pz" firstAttribute="leading" secondItem="ui7-rz-0Ps" secondAttribute="leading" constant="16" id="5pM-eO-baq"/>
+                        <constraint firstAttribute="trailing" secondItem="r31-rU-1Pz" secondAttribute="trailing" constant="16" id="AVQ-cb-lAR"/>
                         <constraint firstItem="r31-rU-1Pz" firstAttribute="centerX" secondItem="ui7-rz-0Ps" secondAttribute="centerX" id="fYB-YU-4AK"/>
-                        <constraint firstItem="r31-rU-1Pz" firstAttribute="top" secondItem="ui7-rz-0Ps" secondAttribute="top" constant="20" id="z1H-5H-RgQ"/>
+                        <constraint firstItem="r31-rU-1Pz" firstAttribute="top" secondItem="ui7-rz-0Ps" secondAttribute="top" constant="16" id="z1H-5H-RgQ"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="fYB-YU-4AK"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <mask key="constraints">
+                            <exclude reference="5pM-eO-baq"/>
+                            <exclude reference="AVQ-cb-lAR"/>
+                            <include reference="fYB-YU-4AK"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" name="background"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2mQ-Dg-Efm" secondAttribute="trailing" id="ADc-im-Fxp"/>
                 <constraint firstItem="2mQ-Dg-Efm" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="72" id="BSe-jp-cqI"/>
@@ -86,6 +111,9 @@
         </view>
     </objects>
     <resources>
+        <namedColor name="background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

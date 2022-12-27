@@ -24,29 +24,29 @@ final class PrivateShareContactCell: UITableViewCell {
     @IBOutlet private weak var initialsLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.font = .TurkcellSaturaDemFont(size: 18)
-            newValue.textColor = .white
+            newValue.font = .appFont(.medium, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
             newValue.textAlignment = .center
         }
     }
     
     @IBOutlet private weak var nameLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaMedFont(size: 16)
-            newValue.textColor = .lrBrownishGrey
+            newValue.font = .appFont(.medium, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
     
     @IBOutlet private weak var usernameLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaFont(size: 18)
-            newValue.textColor = .black
+            newValue.font = .appFont(.light, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
     
     @IBOutlet private weak var roleButton: UIButton! {
         willSet {
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 18)
+            newValue.titleLabel?.font = .appFont(.regular, size: 14)
             newValue.forceImageToRightSide()
             newValue.imageEdgeInsets.left = -10
         }
@@ -74,15 +74,15 @@ final class PrivateShareContactCell: UITableViewCell {
         
         func setupInitials() {
             if contact.initials.isEmpty {
-                avatarImageView.image = UIImage(named: "contact_placeholder")
+                avatarImageView.image = Image.iconProfileCircle.image
             } else {
                 initialsLabel.text = contact.initials
-                avatarImageView.backgroundColor = contact.color(for: index)
+                avatarImageView.backgroundColor = AppColor.filesSeperator.color
             }
         }
         
         if let url = contact.subject?.picture?.byTrimmingQuery {
-            avatarImageView.image = UIImage(named: "contact_placeholder")
+            avatarImageView.image = Image.iconProfileCircle.image
             imageDownloder.getImageByTrimming(url: url) { [weak self] image in
                 if image == nil {
                     setupInitials()
@@ -101,9 +101,9 @@ final class PrivateShareContactCell: UITableViewCell {
             roleButton.tintColor = .lrGreyish
             roleButton.isUserInteractionEnabled = false
         case .editor, .viewer, .varying:
-            roleButton.setTitleColor(.lrTealishFour, for: .normal)
-            roleButton.tintColor = .lrTealishFour
-            roleButton.setImage(UIImage(named: "arrow_right"), for: .normal)
+            roleButton.setTitleColor(AppColor.filesLabel.color, for: .normal)
+            roleButton.tintColor = AppColor.filesLabel.color
+            roleButton.setImage(Image.iconArrowDownSmall.image, for: .normal)
             roleButton.isUserInteractionEnabled = true
         }
     }

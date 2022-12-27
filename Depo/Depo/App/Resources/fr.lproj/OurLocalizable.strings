@@ -2305,11 +2305,11 @@ Please check I have understood the intended command here*/
 
 /*Fuzzy*/
 "ETK_KVKK_Izin_Politikasi" = "Politique d'autorisation";
-"kvkk_firms_link" = "";
-"kvkk_commercial_info_link" = "";
-"syncing" = "";
-"downloading" = "";
-"ETK_KVKK_Izin_Politikası" = "";
+"kvkk_firms_link" = "Lifecell Bulut Çözümleri A.Ş., Lifecell Dijital Servisler ve Çözümler A.Ş et les Sociétés du Groupe";
+"kvkk_commercial_info_link" = "Politique d'autorisation";
+"syncing" = "Synchronisation";
+"downloading" = "Téléchargement";
+"ETK_KVKK_Izin_Politikası" = "Politique d'autorisation";
 
 /*Free for {3 months}
 then {11,99 TRY/Month}*/
@@ -2333,4 +2333,28 @@ then {11,99 TRY/Month}*/
 "title_paycell_friends" = "Personnes Ayant Acheté le Forfait (%d personnes)";
 "paycell_share_message" = "J'ai rejoint le Programme d'Ambassadeur de Marque lifebox. Vous pouvez avoir le forfait Premium lifebox spécifique au programme de 6 mois de 250 Go à prix réduit, en cliquant sur le lien ci-dessous. Ne le manquez pas 😊";
 "beeline_cancel_TC" = "Vous pouvez annuler ou gérer votre abonnement à lifebox depuis l'application  Beeline.";
-"paycell_share_message " = "";
+"foryou_throwback" = "Souvenirs";
+"foryou_myalbums" = "Mes Albums";
+"foryou_myanimations" = "Mes Animations";
+"foryou_collages" = "Collages";
+"foryou_my_collages" = "Mes Collages";
+"foryou_animations" = "Animations";
+"foryou_no_album_warn" = "Vous n'avez pas encore créé d'album.";
+"foryou_no_photopick_warn" = "Vous n'avez pas encore utilisé PhotoPick.";
+"foryou_no_story_warn" = "Il n'y a actuellement aucune histoire active.";
+"foryou_try_photopick" = "Essayez Photo Pick";
+"foryou_see_all" = "Voir tout";
+
+/*Facelift*/
+"tabbar_foryou" = "Pour Toi";
+"tabbar_discover" = "Découvrir";
+"change_pass_mail_or_phone" = "E-mail ou Numéro de Téléphone";
+"mystorage_become_premium" = "Pour plus de fonctionnalités, devenez membre Premium";
+"we_are_creating_your_story_title" = "Nous préparons votre histoire.";
+"we_are_creating_your_story_desc" = "Lorsqu'il est prêt, vous pouvez y accéder à partir de l'album Vidéos.";
+"trash_bin" = "Corbeille";
+"empty_gallery_no_photo" = "Vous n'avez pas encore de photos";
+"empty_gallery_no_video" = "Vous n'avez pas encore de vidéos dans votre lifebox";
+"empty_gallery_no_sync" = "Vous n'avez pas encore de photos dans votre lifebox";
+"empty_gallery_no_unsync" = "Il n'y a aucun fichier non mis à jour dans votre lifebox";
+"subscription_offer_cancel_button" = "Annuler";

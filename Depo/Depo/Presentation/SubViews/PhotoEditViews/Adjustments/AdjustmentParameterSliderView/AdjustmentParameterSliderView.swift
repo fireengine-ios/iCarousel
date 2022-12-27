@@ -24,7 +24,7 @@ final class AdjustmentParameterSliderView: UIView, NibInit {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.font = Device.isIpad ? .TurkcellSaturaRegFont(size: 16) : .TurkcellSaturaMedFont(size: 12)
+            newValue.font = Device.isIpad ? .appFont(.medium, size: 14) : .appFont(.medium, size: 12)
             newValue.textColor = .white
         }
     }
@@ -32,7 +32,7 @@ final class AdjustmentParameterSliderView: UIView, NibInit {
     @IBOutlet private weak var valueLabel: UILabel! {
         willSet {
             newValue.textAlignment = .right
-            newValue.font = Device.isIpad ? .TurkcellSaturaRegFont(size: 16) : .TurkcellSaturaMedFont(size: 12)
+            newValue.font = Device.isIpad ? .appFont(.medium, size: 16) : .appFont(.medium, size: 14)
             newValue.textColor = .white
         }
     }

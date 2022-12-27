@@ -179,8 +179,7 @@ final class PushNotificationService {
         switch action {
         case .main, .home: openMain()
         case .syncSettings, .widgetAutoSyncDisabled: openSyncSettings()
-        case .floatingMenu: openFloatingMenu()
-        case .packages, .widgetQuota: openPackages()
+        case .packages, .widgetQuota: openMyStorage()
         case .photos, .widgetSyncInProgress, .widgetUnsyncedFiles, .widgetFIRLess3People, .widgetFIRStandart: openPhotos()
         case .videos: openVideos()
         case .albums: openAlbums()
@@ -201,7 +200,7 @@ final class PushNotificationService {
         case .socialMedia: openSocialMedia()
         case .faq: openFaq()
         case .passcode: openPasscode()
-        case .loginSettings: openLoginSettings()
+        case .loginSettings: openPasscode()
         case .faceImageRecognition, .widgetFIRDisabled: openFaceImageRecognition()
         case .people, .widgetFIR: openPeople()
         case .things: openThings()
@@ -245,7 +244,7 @@ final class PushNotificationService {
         case .silent: break
         case .albumDetail: openAlbumDetail()
         case .saveToMyLifebox: openSaveToMyLifebox()
-
+        case .brandAmbassador: openBrandAmbassador()
         }
         
         
@@ -307,41 +306,6 @@ final class PushNotificationService {
             }
         }
     }
-    
-    private func openTabBarItem(index: TabScreenIndex, segmentIndex: Int? = nil) {
-        guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
-            return
-        }
-        
-        if tabBarVC.selectedIndex != index.rawValue {
-            switch index {
-            case .home:
-                guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
-                    assertionFailure("This index is non existent 😵")
-                    return
-                }
-                tabBarVC.tabBar.selectedItem = newSelectedItem
-                tabBarVC.selectedIndex = index.rawValue
-            case .contactsSync, .documents://because their index is more then two. And we have one offset for button selection but when we point to array index we need - 1 for those items where index > 2.
-                guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
-                    assertionFailure("This index is non existent 😵")
-                    return
-                }
-                tabBarVC.tabBar.selectedItem = newSelectedItem
-                tabBarVC.selectedIndex = index.rawValue - 1
-            
-                if let segmentIndex = segmentIndex, let segmentedController = tabBarVC.currentViewController as? SegmentedController  {
-                    segmentedController.loadViewIfNeeded()
-                    segmentedController.switchSegment(to: segmentIndex)
-                }
-                
-            case .gallery:
-                tabBarVC.showPhotoScreen()
-            }
-        } else {
-            tabBarVC.popToRootCurrentNavigationController(animated: true)
-        }
-    }
 }
 
 //MARK: - Actions
@@ -356,34 +320,24 @@ private extension PushNotificationService {
     }
 
     func openMain() {
-        openTabBarItem(index: .home)
+        router.openTabBarItem(index: .gallery)
     }
 
     func openSyncSettings() {
         pushTo(router.autoUpload)
     }
 
-    func openFloatingMenu() {
-        guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
-            return
-        }
-
-        tabBarVC.showRainbowIfNeed()
-    }
-
     func openPackages() {
-        let affiliate = storageVars.value(forDeepLinkParameter: .affiliate) as? String
-        let refererToken = storageVars.value(forDeepLinkParameter: .paycellToken) as? String
-        let viewController = router.packages(affiliate: affiliate, refererToken: refererToken)
+        let viewController = router.myStorage(usageStorage: nil)
         pushTo(viewController)
     }
 
     func openPhotos() {
-        openTabBarItem(index: .gallery)
+        router.openTabBarItem(index: .gallery)
     }
 
     func openVideos() {
-//        openTabBarItem(index: .videosScreenIndex)
+        router.openTabBarItem(index: .gallery)
     }
 
     func openAlbums() {
@@ -395,27 +349,27 @@ private extension PushNotificationService {
     }
 
     func openAllFiles() {
-        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.allFiles.rawValue)
+        router.openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.allFiles.rawValue)
     }
 
     func openDocuments() {
-        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.documents.rawValue)
+        router.openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.documents.rawValue)
     }
 
     func openMusic() {
-        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.music.rawValue)
+        router.openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.music.rawValue)
     }
 
     func openFavorites() {
-        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.favorites.rawValue)
+        router.openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.favorites.rawValue)
     }
 
     func openTrashBin() {
-        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.trashBin.rawValue)
+        router.openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.trashBin.rawValue)
     }
 
     func openContactSync() {
-        openTabBarItem(index: .contactsSync)
+        router.openTabBarItem(index: .contactsSync)
     }
 
     func openPeriodicContactSync() {
@@ -464,12 +418,6 @@ private extension PushNotificationService {
     func openPasscode() {
         let isTurkcellAccount = SingletonStorage.shared.accountInfo?.accountType == "TURKCELL"
         pushTo(router.passcodeSettings(isTurkcell: isTurkcellAccount, inNeedOfMail: false))
-    }
-
-    func openLoginSettings() {
-        let isTurkcell = SingletonStorage.shared.accountInfo?.accountType == AccountType.turkcell.rawValue
-        let controller = router.turkcellSecurity(isTurkcell: isTurkcell)
-        pushTo(controller)
     }
 
     func openFaceImageRecognition() {
@@ -528,7 +476,10 @@ private extension PushNotificationService {
     }
 
     func openMyStorage() {
-        pushTo(router.myStorage(usageStorage: nil))
+        let affiliate = storageVars.value(forDeepLinkParameter: .affiliate) as? String
+        let refererToken = storageVars.value(forDeepLinkParameter: .paycellToken) as? String
+        let viewController = router.myStorage(usageStorage: nil, affiliate: affiliate, refererToken: refererToken)
+        pushTo(viewController)
     }
 
     func openBecomePremium() {
@@ -595,11 +546,11 @@ private extension PushNotificationService {
     }
 
     func openSharedWithMe() {
-        openSharedController(type: .withMe)
+        router.openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.share.rawValue, shareType: .sharedWithMe)
     }
 
     func openShareByMe() {
-        openSharedController(type: .byMe)
+        router.openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.share.rawValue, shareType: .sharedByMe)
     }
 
     func openInvitation() {
@@ -677,5 +628,11 @@ private extension PushNotificationService {
         if tokenStorage.accessToken == nil {
             clear()
         }
+    }
+    
+    func openBrandAmbassador() {
+        let root = RouterVC()
+        let payCell = root.paycellCampaign()
+        root.pushViewController(viewController: payCell)
     }
 }

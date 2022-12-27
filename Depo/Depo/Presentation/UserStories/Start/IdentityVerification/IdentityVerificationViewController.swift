@@ -35,10 +35,10 @@ final class IdentityVerificationViewController: BaseViewController {
     @IBOutlet private weak var continueButton: WhiteButtonWithRoundedCorner! {
         willSet {
             newValue.setTitle(localized(.resetPasswordContinueButton), for: .normal)
-            newValue.setTitleColor(ColorConstants.whiteColor, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.setBackgroundColor(UIColor.lrTealishTwo.withAlphaComponent(0.5), for: .disabled)
-            newValue.setBackgroundColor(UIColor.lrTealishTwo, for: .normal)
+            newValue.setTitleColor(.white, for: .normal)
+            newValue.titleLabel?.font = .appFont(.medium, size: 16)
+            newValue.setBackgroundColor(AppColor.forgetPassButtonDisable.color, for: .disabled)
+            newValue.setBackgroundColor(AppColor.forgetPassButtonNormal.color, for: .normal)
         }
     }
 
@@ -88,13 +88,13 @@ final class IdentityVerificationViewController: BaseViewController {
         let buttonTitle = TextConstants.ok
 
         let popup = PopUpController.with(title: nil, message: message,
-                                         image: .success, buttonTitle: buttonTitle) { [weak self] popup in
+                                         image: .custom(Image.forgetPassPopupLock.image), buttonTitle: buttonTitle) { [weak self] popup in
             popup.close()
             self?.trackEmailSentEvent(isRecoveryEmail: isRecoveryEmail)
             self?.navigationController?.popViewController(animated: true)
         }
 
-        present(popup, animated: true)
+        popup.open()
     }
 
     private func navigateToOTP(phoneNumber: String) {
@@ -137,11 +137,11 @@ extension IdentityVerificationViewController: ResetPasswordServiceDelegate {
 
 private extension IdentityVerificationViewController {
     func setupHeader() {
-        titleLabel.textColor = .lrTealishTwo
-        titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
+        titleLabel.textColor = AppColor.forgetPassText.color
+        titleLabel.font = .appFont(.medium, size: 14)
 
-        descriptionLabel.textColor = ColorConstants.textGrayColor
-        descriptionLabel.font = UIFont.TurkcellSaturaFont(size: 18)
+        descriptionLabel.textColor = AppColor.forgetPassText.color
+        descriptionLabel.font = .appFont(.regular, size: 16)
 
         setupTitleAndDescription()
 

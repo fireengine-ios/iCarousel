@@ -2000,11 +2000,11 @@
 
 /*Fuzzy*/
 "ETK_KVKK_Izin_Politikasi" = "Politica de Permisiuni";
-"kvkk_firms_link" = "";
-"kvkk_commercial_info_link" = "";
-"syncing" = "";
-"downloading" = "";
-"ETK_KVKK_Izin_Politikası" = "";
+"kvkk_firms_link" = "Lifecell Bulut Çözümleri A.Ş., Lifecell Dijital Servisler ve Çözümler A.Ş şi Companiile Grupului";
+"kvkk_commercial_info_link" = "Politica de Permisiuni";
+"syncing" = "Sincronizare";
+"downloading" = "Descărcarea";
+"ETK_KVKK_Izin_Politikası" = "Politica de Permisiuni";
 
 /*Free for {3 months}
 then {11,99 TRY/Month}*/
@@ -2028,4 +2028,28 @@ then {11,99 TRY/Month}*/
 "title_paycell_friends" = "Persoane Care Au Cumpărat Pachetul (%d Persoane)";
 "paycell_share_message" = "M-am alăturat Programului de Ambasador al Mărcii lifebox. Puteți obține un pachet lifebox Premium de 6 luni de 250 GB la un preț redus făcând clic pe linkul de mai jos. Nu rata ocazia 😊";
 "beeline_cancel_TC" = "Vă puteți anula sau gestiona abonamentul lifebox din aplicația Beeline.";
-"paycell_share_message " = "";
+"foryou_throwback" = "Amintirile";
+"foryou_myalbums" = "Albumele Mele";
+"foryou_myanimations" = "Animațiile Mele";
+"foryou_collages" = "Colaje";
+"foryou_my_collages" = "Colajele Mele";
+"foryou_animations" = "Animații";
+"foryou_no_album_warn" = "Nu ai creat încă un album.";
+"foryou_no_photopick_warn" = "Nu ați folosit încă PhotoPick.";
+"foryou_no_story_warn" = "Nu există povești active momentan.";
+"foryou_try_photopick" = "Încercați PhotoPick";
+"foryou_see_all" = "Vezı Toate";
+
+/*Facelift*/
+"tabbar_foryou" = "Pentru Voi";
+"tabbar_discover" = "Descoperi";
+"change_pass_mail_or_phone" = "E-mail sau Număr de Telefon";
+"mystorage_become_premium" = "Pentru mai multe funcții, deveniți membru Premium";
+"we_are_creating_your_story_title" = "Vă pregătim povestea.";
+"we_are_creating_your_story_desc" = "Îl poți găsi în albumul Videoclipuri atunci când este gata.";
+"trash_bin" = "Coș de Gunoi";
+"empty_gallery_no_photo" = "Nu aveți încă nicio fotografie";
+"empty_gallery_no_video" = "Încă nu ai niciun videoclip în lifebox";
+"empty_gallery_no_sync" = "Încă nu aveți fotografii în lifebox";
+"empty_gallery_no_unsync" = "Toate fișierele tale sunt actualizate în lifebox";
+"subscription_offer_cancel_button" = "Anulare";

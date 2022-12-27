@@ -23,12 +23,18 @@ final class FunNavBar: UIView {
         case empty
     }
     
-    @IBOutlet private weak var closeButton: UIButton!
+    @IBOutlet private weak var closeButton: UIButton! {
+        willSet {
+            newValue.tintColor = .white
+            newValue.setImage(Image.iconCancelBorder.image.withRenderingMode(.alwaysTemplate), for: .normal)
+        }
+    }
+    
     @IBOutlet private weak var saveButton: UIButton! {
         willSet {
             newValue.setTitle(TextConstants.save, for: .normal)
             newValue.setTitleColor(.white, for: .normal)
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: Device.isIpad ? 20 : 16)
+            newValue.titleLabel?.font = .appFont(.medium, size: Device.isIpad ? 20 : 16)
         }
     }
     @IBOutlet private weak var undoButton: UIButton!

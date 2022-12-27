@@ -13,18 +13,18 @@ final class AutoSyncSwitcherTableViewCell: AutoSyncTableViewCell {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.textColor = AppColor.blackColor.color
-            newValue.font = .TurkcellSaturaDemFont(size: 18)
+            newValue.font = .appFont(.regular, size: 16)
         }
     }
     
     @IBOutlet private weak var subTitleLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaBolFont(size: 14)
+            newValue.font = .appFont(.regular, size: 14)
         }
     }
     
     @IBOutlet private weak var iconImageView: UIImageView!
-    @IBOutlet weak var switcher: CustomSwitch!
+    @IBOutlet weak var switcher: GradientSwitch!
     
     private weak var delegate: AutoSyncCellDelegate?
     private var model: AutoSyncHeaderModel?
@@ -44,6 +44,8 @@ final class AutoSyncSwitcherTableViewCell: AutoSyncTableViewCell {
         
         titleLabel.text = model.headerType.title
         switcher.isOn = model.isSelected
+        
+        contentView.backgroundColor = AppColor.secondaryBackground.color
     }
 
     func didSelect() { }

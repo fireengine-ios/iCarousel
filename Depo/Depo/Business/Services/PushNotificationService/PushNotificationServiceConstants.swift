@@ -9,7 +9,6 @@
 enum PushNotificationAction: String {
     case main = "main"
     case syncSettings = "sync_settings"
-    case floatingMenu = "floating_menu"
     case packages = "packages"
     case photos = "photos_videos"
     case videos = "videos"
@@ -78,6 +77,7 @@ enum PushNotificationAction: String {
     case chatbot = "chatbot"
     case verifyEmail = "verify_email"
     case verifyRecoveryEmail = "verify_recovery_email"
+    case brandAmbassador = "markaelcisi"
 
     var fromWidget: Bool {
         isContained(in: [.widgetLogout,

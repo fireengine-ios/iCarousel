@@ -108,6 +108,20 @@ final class CoreDataStack_ios10: CoreDataStack {
         let loadingHandler = { [weak self] in
             self?.container.viewContext.automaticallyMergesChangesFromParent = true
             
+            //COREDATA içeriğini görmek için
+//            let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
+//                    //request.predicate = NSPredicate(format: "age = %@", "12")
+//                    request.returnsObjectsAsFaults = false
+//                    do {
+//                        let result = try self?.container.viewContext.fetch(request)
+//                        for data in result! {
+//                            print("idValue : \(data.value(forKey: "idValue") as! Int) \(data.value(forKey: "localFileID") as? String)")
+//                      }
+//
+//                    } catch {
+//
+//                        print("Failed")
+//                    }
             self?.container.viewContext.perform {
                 do {
                     try self?.container.viewContext.save()

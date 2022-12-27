@@ -39,8 +39,8 @@ final class FileInfoPeopleView: UIView, NibInit, FileInfoPeopleViewProtocol {
     @IBOutlet private weak var peopleTitleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.myStreamPeopleTitle
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 14)
-            newValue.textColor = AppColor.marineTwoAndTealish.color
+            newValue.font = .appFont(.regular, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
 
@@ -49,9 +49,8 @@ final class FileInfoPeopleView: UIView, NibInit, FileInfoPeopleViewProtocol {
     @IBOutlet private weak var enableFIRStackView: UIStackView!
     @IBOutlet private weak var enableFIRTextLabel: UILabel! {
         willSet {
-            newValue.text = TextConstants.fileInfoPeople
-            newValue.font = .TurkcellSaturaFont(size: 18)
-            newValue.textColor = ColorConstants.closeIconButtonColor
+            newValue.font = .appFont(.light, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
     
@@ -59,8 +58,8 @@ final class FileInfoPeopleView: UIView, NibInit, FileInfoPeopleViewProtocol {
         willSet {
             newValue.setTitleColor(.white, for: UIControl.State())
             newValue.insets = UIEdgeInsets(topBottom: 0, rightLeft: 12)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
-            newValue.backgroundColor = AppColor.marineTwoAndTealish.color
+            newValue.titleLabel?.font = .appFont(.bold, size: 16)
+            newValue.backgroundColor = AppColor.button.color
             newValue.setTitle(TextConstants.passcodeEnable, for: UIControl.State())
             newValue.adjustsFontSizeToFitWidth()
         }
@@ -70,7 +69,7 @@ final class FileInfoPeopleView: UIView, NibInit, FileInfoPeopleViewProtocol {
     
     @IBOutlet private weak var premiumTextLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaFont(size: 18)
+            newValue.font = .appFont(.regular, size: 18)
             newValue.textColor = ColorConstants.closeIconButtonColor
         }
     }
@@ -78,7 +77,7 @@ final class FileInfoPeopleView: UIView, NibInit, FileInfoPeopleViewProtocol {
     @IBOutlet private weak var premiumButton: GradientPremiumButton! {
         willSet {
             newValue.setTitle(TextConstants.becomePremium, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 15)
+            newValue.titleLabel?.font = .appFont(.bold, size: 15)
         }
     }
     

@@ -19,8 +19,8 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
     
     @IBOutlet private weak var connectedAs: UILabel! {
         didSet {
-            connectedAs.font = UIFont.TurkcellSaturaMedFont(size: 16.0)
-            connectedAs.textColor = AppColor.marineTwoAndWhite.color
+            connectedAs.font = .appFont(.medium, size: 16)
+            connectedAs.textColor = AppColor.label.color
             connectedAs.text = TextConstants.youAreConnected
         }
     }
@@ -29,12 +29,17 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
         didSet {
             let attributes: [NSAttributedString.Key : Any] = [
                 .font               : UIFont.TurkcellSaturaBolFont(size: 16),
-                .foregroundColor    : UIColor.lrTealishTwo
+                .foregroundColor    : AppColor.darkBlueAndTealish.color
             ]
+            
+            
             
             let attributeString = NSMutableAttributedString(string: TextConstants.removeConnection,
                                                             attributes: attributes)
             removeConnectionButton.setAttributedTitle(attributeString, for: .normal)
+            
+            removeConnectionButton.titleLabel?.font = .appFont(.medium, size: 14)
+            removeConnectionButton.titleLabel?.textColor = AppColor.darkBlueAndTealish.color
             
             let lineView = UIView()
             lineView.backgroundColor = removeConnectionButton.titleLabel?.textColor
@@ -86,7 +91,8 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
             section.mediator.disconnect()
         })
         
-        UIApplication.topController()?.present(warningPopup, animated: true, completion: nil)
+        warningPopup.open()
+
     }
     
     private func warningTexts() -> (title: String, message: String) {
@@ -104,9 +110,9 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
         case .dropbox:
             return (TextConstants.dropboxRemoveConnectionWarning,
                     TextConstants.dropboxRemoveConnectionWarningMessage)
-        case .spotify:
-            return (TextConstants.spotifyRemoveConnectionWarning,
-                    TextConstants.spotifyRemoveConnectionWarningMessage)
+//        case .spotify:
+//            return (TextConstants.spotifyRemoveConnectionWarning,
+//                    TextConstants.spotifyRemoveConnectionWarningMessage)
         case .appleGoogle:
             return (" "," ")
         }

@@ -30,10 +30,11 @@ extension ContactSyncControllerProtocol {
 
 final class ContactSyncViewController: BaseViewController, NibInit {
     
+    @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var contentView: UIView!
     
     private var tabBarIsVisible = false
-    
+
     private lazy var noBackupView: ContactSyncNoBackupView = {
         let view = ContactSyncNoBackupView.initFromNib()
         view.delegate = self
@@ -71,14 +72,18 @@ final class ContactSyncViewController: BaseViewController, NibInit {
         
         trackScreen()
         floatingButtonsArray = [.takePhoto, .upload, .createAStory, .newFolder]
-        
+
         if tabBarIsVisible {
             needToShowTabBar = true
         }
-        
+
+        setDefaultNavigationHeaderActions()
+        headerContainingViewController?.isHeaderBehindContent = false
+
         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
             self?.updateBackupStatus()
         }
+        updateBackupStatus()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,7 +91,6 @@ final class ContactSyncViewController: BaseViewController, NibInit {
         
         setupNavBar()
         contactSyncHelper.delegate = self
-        updateBackupStatus()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -110,12 +114,7 @@ final class ContactSyncViewController: BaseViewController, NibInit {
     //MARK:- Private
     
     private func setupNavBar() {
-        if tabBarIsVisible {
-            homePageNavigationBarStyle()
-        } else {
-            navigationBarWithGradientStyle()
-            setTitle(withString: TextConstants.backUpMyContacts)
-        }
+        setTitle(withString: TextConstants.backUpMyContacts)
     }
     
     private func updateBackupStatus() {
@@ -140,6 +139,13 @@ final class ContactSyncViewController: BaseViewController, NibInit {
 }
 
 //MARK:- protocols extensions
+
+extension ContactSyncViewController: HeaderContainingViewControllerChild {
+    var scrollViewForHeaderTracking: UIScrollView? {
+        return scrollView
+    }
+}
+
 
 extension ContactSyncViewController: ContactSyncAnalyzeProgressViewDelegate {
     func cancelAnalyze() {

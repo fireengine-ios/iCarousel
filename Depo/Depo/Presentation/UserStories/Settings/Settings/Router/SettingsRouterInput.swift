@@ -43,9 +43,7 @@ protocol SettingsRouterInput {
     func openPasscode(handler: @escaping VoidHandler)
 
     func goToConnectedToNetworkFailed()
-    
-    func goTurkcellSecurity(isTurkcell: Bool)
-    
+        
     func showMailUpdatePopUp(delegate: MailVerificationViewControllerDelegate?)
     
     func showError(errorMessage: String)
@@ -53,6 +51,8 @@ protocol SettingsRouterInput {
     func presentAlertSheet(alertController: UIAlertController)
 
     func goToChatbot()
+    
+    func goToPackages()
 
     func goToDarkMode()
     

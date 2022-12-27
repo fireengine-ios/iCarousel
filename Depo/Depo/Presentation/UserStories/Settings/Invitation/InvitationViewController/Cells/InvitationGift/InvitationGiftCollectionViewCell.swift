@@ -10,26 +10,50 @@ import UIKit
 
 class InvitationGiftCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var giftNameLabel: UILabel!
-    @IBOutlet weak var typeLabel: UILabel!
-    @IBOutlet weak var expirationDateLabel: UILabel!
-    @IBOutlet weak var giftBGView: UIView!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        setupView()
+    @IBOutlet weak var giftNameLabel: UILabel! {
+        willSet {
+            newValue.textColor = AppColor.campaignLightLabel.color
+            newValue.font = .appFont(.bold, size: 14)
+        }
     }
-
-    private func setupView() {
-        giftBGView.layer.borderWidth = 1.0
-        giftBGView.layer.borderColor = ColorConstants.snackbarGray.cgColor
+    
+    @IBOutlet weak var typeLabel: UILabel! {
+        willSet {
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 12)
+        }
     }
-
+    
+    @IBOutlet weak var expirationDateLabel: UILabel! {
+        willSet {
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 12)
+        }
+    }
+    
+    @IBOutlet weak var dataLabel: UILabel! {
+        willSet {
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 12)
+        }
+    }
+    
+    @IBOutlet weak var giftBGView: UIView! {
+        willSet {
+            newValue.layer.cornerRadius = 8
+            newValue.layer.borderWidth = 1
+            newValue.layer.borderColor = AppColor.campaignBorder.cgColor
+        }
+    }
+    
     func configureCell(subscriptionPlan: SubscriptionPlan) {
         giftNameLabel.text = subscriptionPlan.name
         typeLabel.text = makePlanTypeText(plan: subscriptionPlan)
-        expirationDateLabel.text = subscriptionPlan.date
+        expirationDateLabel.text = "\(String(subscriptionPlan.date.split(separator: ":")[0])):"
+        print("aaaaa -\(subscriptionPlan.date)-")
+        let date: String = String(subscriptionPlan.date.split(separator: ":")[1])
+        let index = date.index(date.startIndex, offsetBy: 1)
+        dataLabel.text = String(date.suffix(from: index))
     }
 
     private func makePlanTypeText(plan: SubscriptionPlan) -> String {
@@ -47,3 +71,4 @@ class InvitationGiftCollectionViewCell: UICollectionViewCell {
         }
     }
 }
+

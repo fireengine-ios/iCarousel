@@ -51,7 +51,6 @@ final class OverlayStickerViewController: UIViewController {
         view.backgroundColor = .black
         stickersContainerView.backgroundColor = ColorConstants.photoEditBackgroundColor
         safeAreaBottomView.backgroundColor = ColorConstants.photoEditBackgroundColor
-        statusBarColor = .black
         
         funNavBar.state = .initial
         funNavBar.delegate = self
@@ -168,7 +167,7 @@ final class OverlayStickerViewController: UIViewController {
                                                         UIApplication.shared.openSettings()
                                                     }
             })
-            UIApplication.topController()?.present(controller, animated: false, completion: nil)
+            controller.open()
         }
     }
 
@@ -234,7 +233,7 @@ final class OverlayStickerViewController: UIViewController {
                                                 confirmation()
                                             }
                                          })
-        router.presentViewController(controller: popup)
+        popup.open()
     }
 }
 

@@ -1,7 +1,7 @@
 import UIKit
 
 /// used KeyboardLayoutConstraint as bottom scrollView constraint
-final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit {
+final class ChangePasswordController: BaseViewController, KeyboardHandler, NibInit {
     
     // MARK: - Properties
     
@@ -13,7 +13,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     
     @IBOutlet private weak var passwordsStackView: UIStackView! {
         willSet {
-            newValue.spacing = 18
+            newValue.spacing = 22
             newValue.axis = .vertical
             newValue.alignment = .fill
             newValue.distribution = .fill
@@ -21,35 +21,23 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
             newValue.isOpaque = true
             
             newValue.addArrangedSubview(oldPasswordView)
-            newValue.addArrangedSubview(newPasswordView)
-            newValue.addArrangedSubview(repeatPasswordView)
+            newValue.addArrangedSubview(validationSet)
         }
     }
     
     @IBOutlet private weak var captchaView: CaptchaView!
     
-    private let oldPasswordView: PasswordView = {
-        let view = PasswordView.initFromNib()
+    private lazy var oldPasswordView: ProfilePasswordEnterView = {
+        let view = ProfilePasswordEnterView()
         view.titleLabel.text = TextConstants.oldPassword
-        view.passwordTextField.placeholder = TextConstants.enterYourOldPassword
-        view.passwordTextField.returnKeyType = .next
+        view.textField.placeholder = TextConstants.enterYourOldPassword
+        view.textField.returnKeyType = .next
         return view
     }()
     
-    private let newPasswordView: PasswordView = {
-        let view = PasswordView.initFromNib()
-        view.titleLabel.text = TextConstants.newPassword
-        view.passwordTextField.placeholder = TextConstants.enterYourNewPassword
-        view.passwordTextField.returnKeyType = .next
-        view.isNeedToShowRules = true
-        return view
-    }()
-    
-    private let repeatPasswordView: PasswordView = {
-        let view = PasswordView.initFromNib()
-        view.titleLabel.text = TextConstants.repeatPassword
-        view.passwordTextField.placeholder = TextConstants.enterYourRepeatPassword
-        view.passwordTextField.returnKeyType = .next
+    private lazy var validationSet: PasswordValidationSetView = {
+        let view = PasswordValidationSetView()
+        
         return view
     }()
     
@@ -57,6 +45,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     private lazy var authenticationService = AuthenticationService()
     private lazy var router = RouterVC()
     private var showErrorColorInNewPasswordView = false
+    private var doneButton: UIBarButtonItem?
     
     // MARK: - View methods
     
@@ -86,23 +75,24 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     }
     
     private func initialViewSetup() {
-        oldPasswordView.passwordTextField.delegate = self
-        newPasswordView.passwordTextField.delegate = self
-        repeatPasswordView.passwordTextField.delegate = self
+        oldPasswordView.textField.delegate = self
         captchaView.captchaAnswerTextField.delegate = self
+        validationSet.delegate = self
         
         addTapGestureToHideKeyboard()
         
-        let doneButton = UIBarButtonItem(title: TextConstants.accessibilityDone,
-                                         font: UIFont.TurkcellSaturaDemFont(size: 19),
-                                         tintColor: .white,
-                                         accessibilityLabel: TextConstants.accessibilityDone,
-                                         style: .plain,
-                                         target: self,
-                                         selector: #selector(onDoneButton))
+        doneButton = UIBarButtonItem(title: TextConstants.accessibilityDone,
+                                     font: UIFont.TurkcellSaturaDemFont(size: 19),
+                                     tintColor: .white,
+                                     accessibilityLabel: TextConstants.accessibilityDone,
+                                     style: .plain,
+                                     target: self,
+                                     selector: #selector(onDoneButton))
+        doneButton?.isEnabled = false
         navigationItem.rightBarButtonItem = doneButton
     }
     
+
     @objc private func onDoneButton(_ button: UIBarButtonItem) {
         updatePassword()
     }
@@ -119,9 +109,9 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     private func updatePassword() {
         
         guard
-            let oldPassword = oldPasswordView.passwordTextField.text,
-            let newPassword = newPasswordView.passwordTextField.text,
-            let repeatPassword = repeatPasswordView.passwordTextField.text,
+            let oldPassword = oldPasswordView.textField.text,
+            let newPassword = validationSet.newPasswordView.textField.text,
+            let repeatPassword = validationSet.rePasswordView.textField.text,
             let captchaAnswer = captchaView.captchaAnswerTextField.text
         else {
             assertionFailure("all fields should not be nil")
@@ -182,7 +172,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     }
     
     private func loginIfCan(with login: String) {
-        guard let newPassword = newPasswordView.passwordTextField.text else {
+        guard let newPassword = validationSet.newPasswordView.textField.text else {
             assertionFailure("all fields should not be nil")
             return
         }
@@ -222,7 +212,8 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
                                                 AppConfigurator.logout()
                                             }
         })
-        router.presentViewController(controller: popupVC)
+        popupVC.open()
+
     }
     
     private func showSuccessPopup() {
@@ -260,25 +251,25 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
             showErrorColorInNewPasswordView = true
             
             /// important check to show error only once
-            if newPasswordView.passwordTextField.isFirstResponder {
+            if validationSet.newPasswordView.textField.isFirstResponder {
                 updateNewPasswordView()
             }
             
-            newPasswordView.showTextAnimated(text: errorText)
-            newPasswordView.passwordTextField.becomeFirstResponder()
-            scrollToView(newPasswordView)
+            validationSet.newPasswordView.showSubtitleTextAnimated(text: errorText)
+            validationSet.newPasswordView.textField.becomeFirstResponder()
+            scrollToView(validationSet.newPasswordView)
             
         case .invalidOldPassword,
              .oldPasswordIsEmpty:
-            oldPasswordView.showTextAnimated(text: errorText)
-            oldPasswordView.passwordTextField.becomeFirstResponder()
+            oldPasswordView.showSubtitleTextAnimated(text: errorText)
+            oldPasswordView.textField.becomeFirstResponder()
             scrollToView(oldPasswordView)
             
         case .notMatchNewAndRepeatPassword,
              .repeatPasswordIsEmpty:
-            repeatPasswordView.showTextAnimated(text: errorText)
-            repeatPasswordView.passwordTextField.becomeFirstResponder()
-            scrollToView(repeatPasswordView)
+            validationSet.rePasswordView.showSubtitleTextAnimated(text: errorText)
+            validationSet.rePasswordView.textField.becomeFirstResponder()
+            scrollToView(validationSet.rePasswordView)
             
         case .special, .unknown,
              .invalidToken,
@@ -295,11 +286,18 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     }
 }
 
+// MARK: - PasswordValidationSetDelegate
+extension ChangePasswordController: PasswordValidationSetDelegate {
+    func validateNewPassword(with flag: Bool) {
+        doneButton?.isEnabled = flag
+    }
+}
+
 // MARK: - UITextFieldDelegate
 extension ChangePasswordController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         switch textField {
-        case newPasswordView.passwordTextField:
+        case validationSet.newPasswordView.textField:
             updateNewPasswordView()
         default:
             break
@@ -308,21 +306,21 @@ extension ChangePasswordController: UITextFieldDelegate {
     
     private func updateNewPasswordView() {
         if showErrorColorInNewPasswordView {
-            newPasswordView.errorLabel.textColor = ColorConstants.textOrange
+            //newPasswordView.errorLabel.textColor = ColorConstants.textOrange
             /// we need to show error with color just once
             showErrorColorInNewPasswordView = false
         }
-        newPasswordView.showErrorLabelAnimated()
+        validationSet.newPasswordView.showSubtitleAnimated()
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField {
-        case newPasswordView.passwordTextField:
-            newPasswordView.hideErrorLabelAnimated()
-        case oldPasswordView.passwordTextField:
-            oldPasswordView.hideErrorLabelAnimated()
-        case repeatPasswordView.passwordTextField:
-            repeatPasswordView.hideErrorLabelAnimated()
+        case validationSet.newPasswordView.textField:
+            validationSet.newPasswordView.hideSubtitleAnimated()
+        case oldPasswordView.textField:
+            oldPasswordView.hideSubtitleAnimated()
+        case validationSet.rePasswordView.textField:
+            validationSet.rePasswordView.hideSubtitleAnimated()
         case captchaView.captchaAnswerTextField:
             captchaView.hideErrorAnimated()
         default:
@@ -332,11 +330,11 @@ extension ChangePasswordController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
-        case oldPasswordView.passwordTextField:
-            newPasswordView.passwordTextField.becomeFirstResponder()
-        case newPasswordView.passwordTextField:
-            repeatPasswordView.passwordTextField.becomeFirstResponder()
-        case repeatPasswordView.passwordTextField:
+        case oldPasswordView.textField:
+            validationSet.newPasswordView.textField.becomeFirstResponder()
+        case validationSet.newPasswordView.textField:
+            validationSet.rePasswordView.textField.becomeFirstResponder()
+        case validationSet.rePasswordView.textField:
             captchaView.captchaAnswerTextField.becomeFirstResponder()
         case captchaView.captchaAnswerTextField:
             updatePassword()

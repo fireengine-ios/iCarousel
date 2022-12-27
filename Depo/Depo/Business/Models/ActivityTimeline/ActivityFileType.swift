@@ -37,48 +37,48 @@ extension ActivityFileType {
     var image: UIImage {
         switch self {
         case .image:
-            return #imageLiteral(resourceName: "fileIconPhoto")
+            return Image.iconFilePhoto.image
         case .video:
-            return #imageLiteral(resourceName: "fileIconVideo")
+            return Image.iconFileVideo.image
         case .document:
-            return #imageLiteral(resourceName: "fileIconUnknown")
+            return Image.iconFileEmpty.image
         case .audio:
-            return #imageLiteral(resourceName: "fileIconAudio")
+            return Image.iconFileAudio.image
         case .directory:
-            return #imageLiteral(resourceName: "fileIconFolder")
+            return Image.iconFolder.image
         case .other:
-            return #imageLiteral(resourceName: "fileIconUnknown")
+            return Image.iconFileEmpty.image
         case .album:
-            return #imageLiteral(resourceName: "fileIconPhoto")
+            return Image.iconFilePhoto.image
         case .text:
-            return #imageLiteral(resourceName: "fileIconTxt")
+            return Image.iconFileTxt.image
         case .text2:
-            return #imageLiteral(resourceName: "fileIconTxt")
+            return Image.iconFileTxt.image
             
         case .rar:
-            return #imageLiteral(resourceName: "fileIconRar")
+            return Image.iconFileRar.image
         case .rarx:
-            return #imageLiteral(resourceName: "fileIconRar")
+            return Image.iconFileRar.image
         case .document2:
-            return #imageLiteral(resourceName: "fileIconTxt")
+            return Image.iconFileTxt.image
         case .pdf:
-            return #imageLiteral(resourceName: "fileIconPdf")
+            return Image.iconFilePdf.image
         case .doc:
-            return #imageLiteral(resourceName: "fileIconDoc")
+            return Image.iconFileDoc.image
         case .docx:
-            return #imageLiteral(resourceName: "fileIconDoc")
+            return Image.iconFileDoc.image
         case .xls:
-            return #imageLiteral(resourceName: "fileIconXls")
+            return Image.iconFileXls.image
         case .xlsx:
-            return #imageLiteral(resourceName: "fileIconXls")
+            return Image.iconFileXls.image
         case .ppt:
-            return #imageLiteral(resourceName: "fileIconPpt")
+            return Image.iconFilePpt.image
         case .pptx:
-            return #imageLiteral(resourceName: "fileIconPpt")
+            return Image.iconFilePpt.image
         case .dir:
-            return #imageLiteral(resourceName: "fileIconFolder")
+            return Image.iconFolder.image
         case .zip:
-            return #imageLiteral(resourceName: "fileIconZip")
+            return Image.iconFileZip.image
         }
     }
 }

@@ -15,7 +15,8 @@ final class MusicViewController: BaseFilesGreedViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        spotifyStatusView.delegate = self
+//        FACELIFT: Spotify is removed
+//        spotifyStatusView.delegate = self
     }
     
     override func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String, needHideTopBar: Bool) {

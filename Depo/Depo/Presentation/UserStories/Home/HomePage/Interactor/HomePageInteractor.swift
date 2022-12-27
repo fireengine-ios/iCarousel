@@ -40,11 +40,6 @@ final class HomePageInteractor: HomePageInteractorInput {
         FreeAppSpace.session.checkFreeUpSpace()
         setupAutoSyncTriggering()
 
-        // Handle parsed deeplink if any
-        PushNotificationService.shared.openActionScreen()
-        // handle a token pending action if any
-        PushNotificationService.shared.assignAndOpenPendingActionIfAny()
-
         getQuotaInfo()
         getAccountInfo()
         getPremiumCardInfo(loadStatus: .reloadAll)

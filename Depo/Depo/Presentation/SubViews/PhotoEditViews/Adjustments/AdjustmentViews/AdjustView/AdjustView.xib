@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -48,7 +48,7 @@
                         <constraint firstAttribute="width" constant="44" id="KAH-Lw-ng2"/>
                         <constraint firstAttribute="width" secondItem="cgx-m3-Q6G" secondAttribute="height" multiplier="1:1" id="fPf-7G-Eep"/>
                     </constraints>
-                    <state key="normal" image="photo_edit_resize"/>
+                    <state key="normal" image="iconSize"/>
                     <connections>
                         <action selector="onLeftButtonTapped:" destination="iz6-KA-1la" eventType="touchUpInside" id="s1z-bS-yTi"/>
                     </connections>
@@ -59,12 +59,13 @@
                         <constraint firstAttribute="width" secondItem="CrV-2P-1R7" secondAttribute="height" multiplier="1:1" id="IZZ-nL-8Xx"/>
                         <constraint firstAttribute="width" constant="44" id="R0e-ud-HOn"/>
                     </constraints>
-                    <state key="normal" image="photo_edit_rotate"/>
+                    <state key="normal" image="iconRotate"/>
                     <connections>
                         <action selector="onRightButtonTapped:" destination="iz6-KA-1la" eventType="touchUpInside" id="sBC-rH-iZI"/>
                     </connections>
                 </button>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="H5M-Oy-Hjk"/>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="CrV-2P-1R7" firstAttribute="leading" secondItem="mvn-X4-JpP" secondAttribute="trailing" constant="5" id="EG3-uE-uPN"/>
@@ -83,7 +84,6 @@
                 <constraint firstAttribute="bottom" secondItem="mvn-X4-JpP" secondAttribute="bottom" constant="16" id="vgS-ZI-eN2"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="H5M-Oy-Hjk"/>
             <connections>
                 <outlet property="bottomConstraint" destination="vgS-ZI-eN2" id="UFO-9B-7Ch"/>
                 <outlet property="currentValueLabel" destination="wdQ-f4-tlq" id="Kz4-M8-gAV"/>
@@ -100,7 +100,7 @@
         </view>
     </objects>
     <resources>
-        <image name="photo_edit_resize" width="20" height="20"/>
-        <image name="photo_edit_rotate" width="20" height="20"/>
+        <image name="iconRotate" width="24" height="24"/>
+        <image name="iconSize" width="24" height="24"/>
     </resources>
 </document>

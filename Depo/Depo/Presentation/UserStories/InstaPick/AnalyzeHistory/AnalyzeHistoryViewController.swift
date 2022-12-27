@@ -13,7 +13,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     @IBOutlet private var designer: AnalyzeHistoryDesigner!
     @IBOutlet private var displayManager: AnalyzeHistoryDisplayManager!
     @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet private weak var newAnalysisButton: BlueButtonWithMediumWhiteText!
+    @IBOutlet private weak var newAnalysisButton: DarkBlueButton!
     @IBOutlet private weak var newAnalysisView: UIView!
     
     private lazy var activityManager = ActivityIndicatorManager()
@@ -65,8 +65,6 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         
         reloadCards()
         
-        backButtonForNavigationItem(title: TextConstants.backTitle)
-        navigationBarWithGradientStyle()
         editingTabBar?.view.layoutIfNeeded()
     }
     
@@ -126,6 +124,11 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         updateNavBarItems()
     }
     
+    private func startSelection() {
+        displayManager.applyConfiguration(.selection)
+        updateNavBarItems()
+    }
+    
     private func stopSelection() {
         setTitle(withString: TextConstants.analyzeHistoryTitle)
         dataSource.cancelSelection()
@@ -138,7 +141,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         navigationItem.title = "\(count) \(TextConstants.accessibilitySelected)"
         
         if count == 0 {
-            bottomBarPresenter?.dismiss(animated: true)
+            stopSelection()
         } else {
             bottomBarPresenter?.show(animated: true, onView: view)
         }
@@ -171,7 +174,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                 if controller is InstapickPopUpController, let vc = self?.router.createRootNavigationControllerWithModalStyle(controller: controller) {
                     self?.router.presentViewController(controller: vc)
                 } else if let vc = self?.router.createRootNavigationController(controller: controller) {
-                    self?.router.presentViewController(controller: vc)
+                    self?.router.presentViewController(controller: vc)                    
                 } else {
                     assertionFailure("Unexpected controller")
                 }
@@ -190,7 +193,8 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                                             }
                                          })
             
-            present(popup, animated: true)
+            popup.open()
+            
         }
     }
     
@@ -216,7 +220,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             case .select:
                 action = UIAlertAction(title: TextConstants.actionSheetSelect, style: .default, handler: { _ in
                     self.dataSource.startSelection()
-                    self.startSelection(with: 0)
+                    self.startSelection()
                 })
             default:
                 action = nil
@@ -375,7 +379,8 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                                               secondAction: { vc in
                                                 vc.close(completion: okHandler)
         })
-        router.presentViewController(controller: controller)
+        controller.open()
+
     }
     
     private func deleteSelectedAnalyzes() {

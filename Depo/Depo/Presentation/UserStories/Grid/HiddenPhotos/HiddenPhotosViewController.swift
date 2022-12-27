@@ -53,9 +53,7 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
         super.viewWillAppear(animated)
         
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .hiddenBin))
-        
-        navigationBarWithGradientStyle()
-        
+                
         //need to fix crash on show bottom bar
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
     }
@@ -150,12 +148,10 @@ extension HiddenPhotosViewController {
     }
     
     private func updateBarsForSelectedObjects(count: Int) {
-        navbarManager.changeSelectionItems(count: count)
-
         if count == 0 {
-            bottomBarManager.hide()
-            collectionView.contentInset.bottom = 0
+            stopSelectionState()
         } else {
+            navbarManager.changeSelectionItems(count: count)
             bottomBarManager.show()
             collectionView.contentInset.bottom = bottomBarManager.editingTabBar?.editingBar.bounds.height ?? 0
         }

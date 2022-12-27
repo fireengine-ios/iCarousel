@@ -64,7 +64,6 @@ final class PrivateShareContactsViewController: BaseViewController, NibInit {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationBarWithGradientStyle()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -101,7 +100,7 @@ final class PrivateShareContactsViewController: BaseViewController, NibInit {
                                                 self?.endShare()
                                             }
                                          })
-        router.presentViewController(controller: popup)
+        popup.open()
     }
     
     private func endShare() {

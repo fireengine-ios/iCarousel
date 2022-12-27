@@ -13,46 +13,28 @@ final class MyStorageViewController: BaseViewController {
     //MARK: Properties
     var output: MyStorageViewOutput!
     private lazy var activityManager = ActivityIndicatorManager()
-    
-    //MARK: IBOutlet
-    @IBOutlet private weak var menuTableView: ResizableTableView! {
+
+    @IBOutlet weak var menuTableView: ResizableTableView! {
         willSet {
-            newValue.rowHeight = 51
+            newValue.rowHeight = 65
             let nib = UINib(nibName: String(describing: PackagesTableViewCell.self), bundle: nil)
             let identifier = String(describing: PackagesTableViewCell.self)
             newValue.register(nib, forCellReuseIdentifier: identifier)
+            newValue.separatorStyle = .none
             newValue.isScrollEnabled = false
+            
+            newValue.layer.cornerRadius = 16
+            newValue.layer.borderColor = AppColor.settingsPackagesCell.cgColor
+            newValue.layer.borderWidth = 1
+            newValue.backgroundColor = AppColor.settingsPackagesCell.color
+            setupShadow(view: newValue)
         }
     }
     
-    @IBOutlet private weak var descriptionLabel: UILabel! {
-        willSet {
-            newValue.textColor = ColorConstants.switcherGrayColor
-            newValue.font = UIFont.TurkcellSaturaFont(size: 16)
-            newValue.backgroundColor = .clear
-            newValue.numberOfLines = 0
-            newValue.text = TextConstants.myPackagesDescription
-        }
-    }
     
-    @IBOutlet private weak var packagesStackView: UIStackView! {
-        willSet {
-            newValue.spacing = 16
-        }
-    }
-
     @IBOutlet private weak var scrollView: ControlContainableScrollView! {
         willSet {
             newValue.delaysContentTouches = false
-        }
-    }
-    
-    @IBOutlet private weak var packagesLabel: UILabel! {
-        willSet {
-            newValue.adjustsFontSizeToFitWidth()
-            newValue.text = TextConstants.packagesIHave
-            newValue.textColor = ColorConstants.darkText
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
         }
     }
         
@@ -63,25 +45,96 @@ final class MyStorageViewController: BaseViewController {
             newValue.clipsToBounds = true
             newValue.adjustsFontSizeToFitWidth()
             newValue.insets = UIEdgeInsets(topBottom: 8, rightLeft: 12)
+            newValue.setTitleColor(AppColor.darkLabel.color, for: .normal)
+            newValue.setBackgroundColor(AppColor.purchaseButton.color, for: .normal)
             newValue.setTitle(TextConstants.restorePurchasesButton, for: .normal)
-            newValue.setTitleColor(.lrBrownishGrey, for: .normal)
-            newValue.setBackgroundColor(AppColor.secondaryBackground.color ?? .white, for: UIControl.State())
-            newValue.titleLabel?.font = .TurkcellSaturaBolFont(size: 16)
-            newValue.layer.borderWidth = 1
-            newValue.layer.borderColor = UIColor.lrTealishTwo.cgColor
         }
     }
     
-    @IBOutlet weak var cardStackView: UIStackView!
+    @IBOutlet private weak var packagesStackView: UIStackView! {
+        willSet {
+            newValue.spacing = 24
+        }
+    }
+    
+    @IBOutlet weak var cardsStackView: UIStackView!
+    
+    lazy var myPackages: UIStackView = {
+        let view = UIStackView()
+        view.spacing = 16
+        view.axis = .vertical
+        view.alignment = .fill
+        view.distribution = .fill
+        
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 16
+        view.layer.borderColor = AppColor.settingsMyPackages.cgColor
+        view.backgroundColor = AppColor.settingsMyPackages.color
+        return view
+    }()
+    
+    lazy var packages: UIStackView = {
+        let view = UIStackView()
+        view.spacing = 16
+        view.axis = .vertical
+        view.alignment = .fill
+        view.distribution = .fill
+        
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 16
+        view.layer.borderColor = AppColor.settingsPackages.cgColor
+        view.backgroundColor = AppColor.settingsPackages.color
+        return view
+    }()
+    
+    lazy var packagesTitleLabel: UILabel = {
+       let view = UILabel()
+        view.textColor = AppColor.settingsRestoreTextColor.color
+        view.text = TextConstants.packageSectionTitle
+        view.font = .appFont(.medium, size: 14)
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    lazy var myPackagesTitleLabel: UILabel = {
+       let view = UILabel()
+        view.textColor = ColorConstants.darkText
+        view.text = TextConstants.myPackages
+        view.font = .appFont(.medium, size: 14)
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    private lazy var policyStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.alignment = .fill
+        view.distribution = .fill
+        return view
+    }()
+    
+    private lazy var policyView = SubscriptionsPolicyView()
+    private lazy var bannerView = PackagesBannerBuyPremiumView()
     
     private var menuViewModels = [ControlPackageType]()
+    @IBOutlet weak var restoreButtonTopSpacing: NSLayoutConstraint!
     
     // MARK: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupStackView()
         setup()
         output.viewDidLoad()
+        
+        menuTableView.delegate = self
+        menuTableView.dataSource = self
+        bannerView.delegate = self
+        
+        setupCardStackView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        output.viewWillAppear()
     }
     
     // MARK: Utility Methods (private)
@@ -89,41 +142,117 @@ final class MyStorageViewController: BaseViewController {
         setTitle(withString: output.title)
         self.view.backgroundColor = ColorConstants.fileGreedCellColorSecondary
         
-        menuTableView.delegate = self
-        menuTableView.dataSource = self
-        
         activityManager.delegate = self
         automaticallyAdjustsScrollViewInsets = false
+        setupLayout()
+        addPremiumBanner()
     }
+    
+    
+    private func setupLayout() {
+        packagesStackView.addArrangedSubview(myPackages)
+        packagesStackView.addArrangedSubview(packages)
+        packagesStackView.addArrangedSubview(policyStackView)
+        policyStackView.addArrangedSubview(policyView)
+    }
+    
+    private func addPremiumBanner() {
+        guard !AuthoritySingleton.shared.accountType.isPremium else { return }
         
+        view.addSubview(bannerView)
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        bannerView.topAnchor.constraint(equalTo: view.topAnchor).activate()
+        bannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
+        bannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
+        bannerView.heightAnchor.constraint(equalToConstant: 137).activate()
+        
+        restoreButtonTopSpacing.constant += 60.0
+    }
+
     @IBAction private func restorePurhases() {
         startActivityIndicator()
         output.restorePurchasesPressed()
+    }
+    
+    private func setupShadow(view: UIView) {
+        let shadowColor = UIColor(red: 126 / 255, green: 129 / 255, blue: 133 / 255, alpha:0.4)
+        view.layer.shadowColor = shadowColor.cgColor
+        view.layer.shadowOffset = CGSize(width: 0, height: -2)
+        view.layer.shadowOpacity = 1
+        view.layer.shadowRadius = 16
+        view.layer.masksToBounds = false
     }
 }
 
 // MARK: - MyStorageViewInput
 extension MyStorageViewController: MyStorageViewInput {
+    
     func reloadPackages() {
-        packagesStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        myPackages.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        let outerTopView = UIView()
+        outerTopView.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        myPackages.addArrangedSubview(outerTopView)
+        
+        myPackages.addArrangedSubview(myPackagesTitleLabel)
         for offer in output.displayableOffers.enumerated() {
             let view = SubscriptionOfferView.initFromNib()
             let packageOffer = PackageOffer(quotaNumber: .zero, offers: [offer.element])
             view.configure(with: packageOffer, delegate: self, index: offer.offset, needHidePurchaseInfo: false)
             view.setNeedsLayout()
             view.layoutIfNeeded()
-            packagesStackView.addArrangedSubview(view)
+            
+            myPackages.addArrangedSubview(view)
+            
+            view.leadingAnchor.constraint(equalTo: myPackages.leadingAnchor,
+                                          constant: 16).isActive = true
+            view.trailingAnchor.constraint(equalTo: myPackages.trailingAnchor,
+                                           constant: -16).isActive = true
         }
+        let outerBottomView = UIView()
+        outerBottomView.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        myPackages.addArrangedSubview(outerBottomView)
+    }
+    
+    func reloadData() {
+        packages.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        let outerTopView = UIView()
+        outerTopView.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        packages.addArrangedSubview(outerTopView)
+        
+        packages.addArrangedSubview(packagesTitleLabel)
+        for offer in output.availableOffers.enumerated() {
+            let view = SubscriptionOfferView.initFromNib()
+            view.configure(with: offer.element, delegate: self, index: offer.offset)
+            view.setNeedsLayout()
+            view.layoutIfNeeded()
+            packages.addArrangedSubview(view)
+            
+            view.leadingAnchor.constraint(equalTo: packages.leadingAnchor,
+                                          constant: 16).isActive = true
+            view.trailingAnchor.constraint(equalTo: packages.trailingAnchor,
+                                           constant: -16).isActive = true
+        }
+        
+        let outerBottomView = UIView()
+        outerBottomView.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        packages.addArrangedSubview(outerBottomView)
     }
     
     func showRestoreButton() {
         restorePurchasesButton.isEnabled = true
         restorePurchasesButton.isHidden = false
     }
+
     
-    func setupStackView() {
+    func showInAppPolicy() {
+        policyStackView.addArrangedSubview(policyView)
+    }
+    
+    func setupCardStackView() {
         menuViewModels.removeAll()
-        for view in cardStackView.arrangedSubviews {
+        for view in cardsStackView.arrangedSubviews {
             view.removeFromSuperview()
         }
         
@@ -131,7 +260,7 @@ extension MyStorageViewController: MyStorageViewInput {
         let isPremiumUser = AuthoritySingleton.shared.accountType.isPremium
         let type: ControlPackageType.AccountType = isPremiumUser ? .premium : (isMiddleUser ? .middle : .standard)
         addNewCard(type: .accountType(type))
-        self.menuTableView.reloadData()
+        menuTableView.reloadData()
     }
     
     private func addNewCard(type: ControlPackageType) {
@@ -140,7 +269,7 @@ extension MyStorageViewController: MyStorageViewInput {
             card.configure(with: type)
             
             output.configureCard(card)
-            cardStackView.addArrangedSubview(card)
+            cardsStackView.addArrangedSubview(card)
         } else {
             menuViewModels.append(type)
         }
@@ -149,22 +278,118 @@ extension MyStorageViewController: MyStorageViewInput {
 
 // MARK: - SubscriptionOfferViewDelegate
 extension MyStorageViewController: SubscriptionOfferViewDelegate {
-    func didPressSubscriptionPlanButton(planIndex: Int) {
-        guard let plan = output?.displayableOffers[planIndex] else {
+    func didPressSubscriptionPlanButton(planIndex: Int, storageOfferType: StorageOfferType) {
+        
+        if planIndex < 0  {
             return
         }
-        output?.didPressOn(plan: plan, planIndex: planIndex)
+        
+        switch(storageOfferType) {
+        case.packageOffer:
+            guard let plan = output?.availableOffers[planIndex] else {
+                return
+            }
+            presentPaymentPopUp(plan: plan, planIndex: planIndex)
+        case.subscriptionPlan:
+  
+            guard let plan = output?.displayableOffers[planIndex] else {
+                return
+            }
+            output?.didPressOn(plan: plan, planIndex: planIndex)
+        }
     }
-}
+    
+    private func presentPaymentPopUp(plan: PackageOffer, planIndex: Int) {
+        guard let offer = plan.offers.first else {
+            assertionFailure()
+            return
+        }
+        
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackageClick(packageName: offer.name))
+        
+        let paymentMethods: [PaymentMethod] = plan.offers.compactMap { offer in
+            if let model = offer.model as? PackageModelResponse {
+                return createPaymentMethod(
+                    model: model,
+                    priceString: offer.price,
+                    introPriceString: offer.introductoryPrice,
+                    offer: plan,
+                    planIndex: planIndex
+                )
+            } else {
+                return nil
+            }
+        }
+        
+        let titles = createTitlesForPopUp(offer: offer)
+        let showableMethods = prepareShowableMethods(with: paymentMethods)
 
-// MARK: - ActivityIndicator
-extension MyStorageViewController: ActivityIndicator {
-    func startActivityIndicator() {
-        activityManager.start()
+        let paymentModel = PaymentModel(name: titles.title, subtitle: titles.subtitle, types: showableMethods)
+        let popup = PaymentPopUpController.controllerWith(paymentModel)
+        present(popup, animated: false, completion: nil)
     }
 
-    func stopActivityIndicator() {
-        activityManager.stop()
+    private func prepareShowableMethods(with methods: [PaymentMethod]) -> [PaymentMethod] {
+        var showableMethods: [PaymentMethod] = []
+
+        let paycellMethods = methods.filter {$0.type == .paycell}.min { $0.price < $1.price }
+        let appStoreMethods = methods.filter {$0.type == .appStore}.min { $0.price < $1.price }
+        let slcmMethods = methods.filter {$0.type == .slcm}.min { $0.price < $1.price }
+
+        showableMethods.append(paycellMethods)
+        showableMethods.append(appStoreMethods)
+        showableMethods.append(slcmMethods)
+
+        return showableMethods.sorted { $0.price < $1.price }
+    }
+    
+    private func createPaymentMethod(
+        model: PackageModelResponse,
+        priceString: String,
+        introPriceString: String?,
+        offer: PackageOffer,
+        planIndex: Int
+    ) -> PaymentMethod? {
+        guard let name = model.name, let type = model.type, let price = model.price else {
+            return nil
+        }
+        
+        let paymentType = type.paymentType
+        return PaymentMethod(
+            name: name,
+            price: price,
+            priceLabel: priceString,
+            introPriceLabel: introPriceString,
+            type: paymentType
+        ) { [weak self] in
+            guard let subscriptionPlan = self?.getChoosenSubscriptionPlan(availableOffers: offer, packageType: type) else {
+                assertionFailure()
+                return
+            }
+            
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackageChannelClick(channelType: paymentType, packageName: subscriptionPlan.name))
+            
+            let analyticsService: AnalyticsService = factory.resolve()
+            
+            let eventLabel: GAEventLabel = .paymentType(paymentType.quotaPaymentType(quota: subscriptionPlan.name))
+            analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                                eventActions: .clickQuotaPurchase,
+                                                eventLabel: eventLabel)
+            
+            self?.output.didPressOnOffers(plan: subscriptionPlan, planIndex: planIndex)
+        }
+    }
+    
+    private func getChoosenSubscriptionPlan(availableOffers: PackageOffer, packageType: PackageContentType) -> SubscriptionPlan?  {
+        return availableOffers.offers.first(where: { ($0.model as? PackageModelResponse)?.type == packageType })
+    }
+    
+    private func createTitlesForPopUp(offer: SubscriptionPlan) -> (title: String, subtitle: String) {
+        if offer.addonType == .featureOnly {
+            return (title: TextConstants.lifeboxPremium, subtitle: TextConstants.feature)
+        } else {
+            return (title: offer.name, subtitle: TextConstants.storage)
+        }
     }
 }
 
@@ -189,6 +414,10 @@ extension MyStorageViewController: UITableViewDelegate {
         
         let cell = cell as? PackagesTableViewCell
         cell?.configure(type: item)
+        
+        cell?.layer.cornerRadius = 16
+        cell?.contentView.backgroundColor = AppColor.settingsBackground.color
+        cell?.backgroundColor = AppColor.settingsBackground.color
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -196,5 +425,28 @@ extension MyStorageViewController: UITableViewDelegate {
             return
         }
         (output as? PackageInfoViewDelegate)?.onSeeDetailsTap(with: type)
+    }
+}
+
+// MARK: - ActivityIndicator
+extension MyStorageViewController: ActivityIndicator {
+    func startActivityIndicator() {
+        activityManager.start()
+    }
+
+    func stopActivityIndicator() {
+        activityManager.stop()
+    }
+}
+
+// MARK: - BuyPremiumBannerDelegate
+extension MyStorageViewController: BuyPremiumBannerDelegate {
+    func buyPremium() {
+        output.showPremiumProcess()
+    }
+    
+    func hideBanner() {
+        bannerView.isHidden = true
+        restoreButtonTopSpacing.constant = 16
     }
 }

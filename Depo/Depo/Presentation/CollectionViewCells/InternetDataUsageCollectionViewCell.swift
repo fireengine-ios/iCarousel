@@ -13,8 +13,8 @@ class InternetDataUsageCollectionViewCell: UICollectionViewCell {
     //MARK: Outlets
     @IBOutlet weak var progressView: RoundedProgressView! {
         didSet {
-            progressView.progressTintColor = UIColor.lrTealish
-            progressView.trackTintColor = UIColor.lrTealish.withAlphaComponent(0.25)
+            progressView.progressTintColor = AppColor.tint.color
+            progressView.trackTintColor = AppColor.tint.color.withAlphaComponent(0.25)
         }
     }
     
@@ -22,8 +22,8 @@ class InternetDataUsageCollectionViewCell: UICollectionViewCell {
         didSet {
             nameLabel.text = ""
             nameLabel.numberOfLines = 0
-            nameLabel.font = UIFont.TurkcellSaturaMedFont(size: 18)
-            nameLabel.textColor = UIColor.lrTealish
+            nameLabel.font = .appFont(.medium, size: 12)
+            nameLabel.textColor = AppColor.tint.color
         }
     }
     
@@ -37,8 +37,8 @@ class InternetDataUsageCollectionViewCell: UICollectionViewCell {
         didSet {
             usedPercentageLabel.text = ""
             usedPercentageLabel.numberOfLines = 0
-            usedPercentageLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
-            usedPercentageLabel.textColor = UIColor.lrTealish
+            usedPercentageLabel.font = .appFont(.regular, size: 12)
+            usedPercentageLabel.textColor = AppColor.tint.color
         }
     }
     
@@ -46,8 +46,8 @@ class InternetDataUsageCollectionViewCell: UICollectionViewCell {
         didSet {
             renewDateLabel.text = ""
             renewDateLabel.numberOfLines = 0
-            renewDateLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
-            renewDateLabel.textColor = ColorConstants.textGrayColor
+            renewDateLabel.font = .appFont(.medium, size: 12)
+            renewDateLabel.textColor = AppColor.tint.color
         }
     }
     
@@ -74,7 +74,7 @@ class InternetDataUsageCollectionViewCell: UICollectionViewCell {
         ///in some cells this label collapsed, lines below fix this
         let textHeight: CGFloat = 25
         let maxNameLabelWidth = self.frame.width - String(format: TextConstants.usagePercentage, usedVolume)
-            .width(for: textHeight, font: UIFont.TurkcellSaturaDemFont(size: 16))
+            .width(for: textHeight, font: UIFont.appFont(.medium, size: 12))
         nameLabel.preferredMaxLayoutWidth = maxNameLabelWidth
         
         let usageInfo = String(format: TextConstants.packageSpaceDetails,
@@ -84,10 +84,10 @@ class InternetDataUsageCollectionViewCell: UICollectionViewCell {
         ///In design(https://zpl.io/aNPYeWk) volume values are bold but we don't have well done logic for both (RTL and LTR) languages
         let attributedString = NSAttributedString(string: usageInfo,
                                                   attributes: [
-            .font               : UIFont.TurkcellSaturaRegFont(size: 18),
-            .foregroundColor    : UIColor(white: 84.0 / 255.0, alpha: 1.0),
-            .kern               : 0.0
-        ])
+                                                    .font               : UIFont.appFont(.medium, size: 12),
+                                                    .foregroundColor    : UIColor(white: 84.0 / 255.0, alpha: 1.0),
+                                                    .kern               : 0.0
+                                                  ])
         
         usageDetailLabel.attributedText = attributedString
     }

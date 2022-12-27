@@ -11,8 +11,7 @@ import UIKit
 class BottomSelectionTabBarModuleInitializer: NSObject {
 
     var presenter: BottomSelectionTabBarPresenter?
-    var viewController: BottomSelectionTabBarViewController?
-    
+
     func setupModule(config: EditingBarConfig, sourceView: UIView? = nil,
                      settablePresenter: BottomSelectionTabBarPresenter?) -> BottomSelectionTabBarViewController {
         presenter = settablePresenter
@@ -21,10 +20,19 @@ class BottomSelectionTabBarModuleInitializer: NSObject {
         let interactor = BottomSelectionTabBarInteractor()
         let router = BottomSelectionTabBarRouter()
         configurator.configureModuleForViewInput(viewInput: bottomTabBatVC, presenter: presenter, interactor: interactor, router: router, config: config)
-        viewController = bottomTabBatVC
         return bottomTabBatVC
     }
-    
+
+    func setupDrawerVariantModule(config: EditingBarConfig, settablePresenter: BottomSelectionTabBarPresenter?) -> BottomSelectionTabBarDrawerViewController {
+        presenter = settablePresenter
+        let bottomTabBatVC = BottomSelectionTabBarDrawerViewController.initFromNib()
+        let configurator = BottomSelectionTabBarModuleConfigurator()
+        let interactor = BottomSelectionTabBarInteractor()
+        let router = BottomSelectionTabBarRouter()
+        configurator.configureModuleForViewInput(viewInput: bottomTabBatVC, presenter: presenter, interactor: interactor, router: router, config: config)
+        return bottomTabBatVC
+    }
+
     func setupMusicModule(config: EditingBarConfig, sourceView: UIView? = nil,
                      settablePresenter: BottomSelectionTabBarPresenter?) -> BottomSelectionTabBarViewController {
         presenter = settablePresenter
@@ -33,7 +41,6 @@ class BottomSelectionTabBarModuleInitializer: NSObject {
         let interactor = BottomSelectionMusicTabBarInteractor()
         let router = BottomSelectionMusicTabBarRouter()
         configurator.configureModuleForViewInput(viewInput: bottomTabBatVC, presenter: presenter, interactor: interactor, router: router, config: config)
-        viewController = bottomTabBatVC
         return bottomTabBatVC
     }
 }

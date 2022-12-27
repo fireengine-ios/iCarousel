@@ -23,7 +23,7 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
 
         super.viewIsReady(collectionView: collectionView)
         
-        NotificationCenter.default.post(name: .showPlusTabBar, object: nil)
+        //NotificationCenter.default.post(name: .showPlusTabBar, object: nil)
     }
 
     override func viewWillAppear() {
@@ -52,7 +52,7 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
     
     override func getCellSizeForGreed() -> CGSize {
         if dataSource is AlbumsDataSourceForCollectionView {
-            let sizeCell: CGFloat = (UIScreen.main.bounds.width - NumericConstants.amountInsetForAlbum) / 4
+            let sizeCell: CGFloat = (UIScreen.main.bounds.width - NumericConstants.amountInsetForAlbum) / 3
 
             return CGSize(width: sizeCell, height: sizeCell + NumericConstants.heightTextAlbumCell)
         } else {
@@ -124,9 +124,6 @@ extension AlbumsPresenter: AlbumDetailModuleOutput {
     
     func onAlbumRemoved() {
         reloadData()
-        if let router = router as? AlbumsRouter {
-            router.back()
-        }
     }
     
     func onAlbumDeleted() {

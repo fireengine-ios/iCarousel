@@ -201,7 +201,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             moduleOutput?.previewSearchResultsHide()
         } else {
             let vc = PopUpController.with(title: TextConstants.warning, message: TextConstants.theFileIsNotSupported, image: .error, buttonTitle: TextConstants.ok)
-            UIApplication.topController()?.present(vc, animated: false, completion: nil)
+            
+            vc.open()
         }
     }
     
@@ -230,6 +231,22 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPhoneGreedInset * 2 - NumericConstants.iPhoneGreedHorizontalSpace * (NumericConstants.numerCellInDocumentLineOnIphone - 1)) / NumericConstants.numerCellInDocumentLineOnIphone
         }
         return CGSize(width: cellWidth, height: cellWidth)
+    }
+    
+    func getCellSizeForFaceImage(type: FaceImageType?) -> CGSize {
+        var cellWidth: CGFloat = 180
+        
+        if (Device.isIpad) {
+            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPadGreedInset * 2 - NumericConstants.iPadGreedHorizontalSpace * (NumericConstants.numerCellInLineOnIpad - 1)) / NumericConstants.numerCellInLineOnIpad
+        } else {
+            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPhoneGreedInset * 2 - NumericConstants.iPhoneGreedHorizontalSpace * (NumericConstants.numerCellInLineOnIphone - 1)) / NumericConstants.numerCellInLineOnIphone
+        }
+        
+        if type == .people {
+            cellWidth = cellWidth - (Device.isIpad ? (NumericConstants.numerCellInLineOnIpad - 1)*2 : (NumericConstants.numerCellInLineOnIphone - 1)*2)
+        }
+        
+        return CGSize(width: cellWidth, height: cellWidth + 48)
     }
     
     func onLongPressInCell() {

@@ -8,11 +8,9 @@
 
 import UIKit
 
-
 protocol PeriodicContactsSyncSettingsOptionViewDelegate: AnyObject {
     func didSelect(option: PeriodicContactsSyncOption)
 }
-
 
 final class PeriodicContactsSyncSettingsOptionView: UIView {
     weak var delegate: PeriodicContactsSyncSettingsOptionViewDelegate?
@@ -20,7 +18,13 @@ final class PeriodicContactsSyncSettingsOptionView: UIView {
     private let times: [PeriodicContactsSyncOption] = [.daily, .weekly, .monthly]
     
     
-    @IBOutlet private weak var button: UIButton!
+    @IBOutlet private weak var button: UIButton! {
+        didSet {
+            button.titleLabel?.font = .appFont(.medium, size: 14)
+            button.setTitleColor(AppColor.label.color, for: .normal)
+        }
+    }
+    
     @IBOutlet private weak var checkboxImageView: UIImageView! {
         didSet {
             checkboxImageView.image = checkMarkImage
@@ -28,11 +32,12 @@ final class PeriodicContactsSyncSettingsOptionView: UIView {
         }
     }
     
-    private let checkMarkImage = UIImage(named: "checkmark")
-    
+    private let checkMarkImage = Image.iconCheckBlue.image
     
     private var option: PeriodicContactsSyncOption = .daily {
-        willSet { button.setTitle(newValue.localizedText, for: .normal) }
+        willSet {
+            button.setTitle(newValue.localizedText, for: .normal)
+        }
     }
     
     private var isSelected: Bool = false {
@@ -46,45 +51,26 @@ final class PeriodicContactsSyncSettingsOptionView: UIView {
         }
     }
     
-    
     // MARK: - Public
-    
     func setup(with option: PeriodicContactsSyncOption, isSelected: Bool) {
         self.option = option
         self.isSelected = isSelected
     }
     
-    func setColors() {
-        let textColor = ColorConstants.textGrayColor
-        button.setTitleColor(textColor, for: .normal)
-        checkboxImageView.tintColor = ColorConstants.textGrayColor
-        
-        if times.contains(option),
-            isSelected {
-            button.setTitleColor(.lrTealishTwo, for: .normal)
-            checkboxImageView.tintColor = .lrTealishTwo
-        }
-    }
-    
     
     // MARK: - Private
-    
     private func setCheckmark(selected: Bool) {
         UIView.animate(withDuration: NumericConstants.fastAnimationDuration) {
             self.checkboxImageView.alpha = selected ? 1.0 : 0.0
         }
     }
     
-    
     // MARK: - Actions
-    
     @IBAction private func buttonTapped() {
         isSelected = true
         
         if times.contains(option) {
-            button.setTitleColor(.lrTealishTwo, for: .normal)
-            checkboxImageView.tintColor = .lrTealishTwo
+            button.setTitleColor(AppColor.label.color, for: .normal)
         }
     }
-    
 }

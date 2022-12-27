@@ -26,24 +26,7 @@ class RouterVC: NSObject {
     var tabBarController: TabBarViewController? {
         return rootViewController as? TabBarViewController
     }
-    
-    func getFloatingButtonsArray() -> [FloatingButtonsType] {
-        let nController = navigationController
-        let viewController = nController?.viewControllers.last
         
-        if let segmentedVC = viewController as? SegmentedController,
-            let vc = segmentedVC.currentController as? BaseViewController
-        {
-            return vc.floatingButtonsArray
-        }
-        
-        if let baseViewController = viewController as? BaseViewController {
-            return baseViewController.floatingButtonsArray
-        }
-        
-        return [FloatingButtonsType]()
-    }
-    
     func getParentUUID() -> String {
         //TODO: get rid of getParentUUID
         if topNavigationController?.viewControllers.first is PhotoVideoDetailViewController,
@@ -159,11 +142,7 @@ class RouterVC: NSObject {
         }
     }
     
-    func pushViewController(viewController: UIViewController, animated: Bool = true) {
-        if let viewController = viewController as? BaseViewController, !viewController.needToShowTabBar {
-            NotificationCenter.default.post(name: .hideTabBar, object: nil)
-        }
-        
+    func pushViewController(viewController: UIViewController, animated: Bool = true) {        
         if let navController = topNavigationController {
             navController.pushViewController(viewController, animated: animated)
         } else {
@@ -171,46 +150,19 @@ class RouterVC: NSObject {
         }
     
         viewController.navigationController?.isNavigationBarHidden = false
-        
-        if let tabBarViewController = tabBarController, let baseView = viewController as? BaseViewController {
-            tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
-        }
     }
     
     func pushViewControllerAndRemoveCurrentOnCompletion(_ viewController: UIViewController) {
-        if let viewController = viewController as? BaseViewController, !viewController.needToShowTabBar {
-            NotificationCenter.default.post(name: .hideTabBar, object: nil)
-        }
-        
         navigationController?.pushViewControllerAndRemoveCurrentOnCompletion(viewController)
         viewController.navigationController?.isNavigationBarHidden = false
-        
-        if let tabBarViewController = tabBarController, let baseView = viewController as? BaseViewController {
-            tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
-        }
-        
     }
     
     func pushSeveralControllers(_ viewControllers: [UIViewController], animated: Bool = true) {
-        if let viewController = viewControllers.last as? BaseViewController, !viewController.needToShowTabBar {
-            NotificationCenter.default.post(name: .hideTabBar, object: nil)
-        }
-        
         var viewControllersStack = navigationController?.viewControllers ?? []
         viewControllersStack.append(contentsOf: viewControllers)
 
         navigationController?.setViewControllers(viewControllersStack, animated: animated)
         viewControllers.last?.navigationController?.setNavigationBarHidden(false, animated: false)
-
-        if let tabBarViewController = tabBarController, let baseView = viewControllers.last as? BaseViewController {
-            tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
-        }
-    }
-    
-    func setBackgroundColor(color: UIColor) {
-        if let tabBarViewController = tabBarController {
-            tabBarViewController.setBGColor(color: color)
-        }
     }
     
     func pushViewControllerWithoutAnimation(viewController: UIViewController) {
@@ -308,6 +260,26 @@ class RouterVC: NSObject {
         }
     }
     
+    func popToAnalizeStory() {
+        guard let tabBarVC = tabBarController else {
+            return
+        }
+        
+        tabBarVC.dismiss(animated: true)
+        
+        let index = TabScreenIndex.forYou.rawValue
+        
+        guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index] else {
+            assertionFailure("This index is non existent 😵")
+            return
+        }
+        
+        tabBarVC.tabBar.selectedItem = newSelectedItem
+        tabBarVC.selectedIndex = index
+        
+        tabBarController?.navigationController?.popToRootViewController(animated: true)
+    }
+    
     func popTwoFactorAuth() {
         guard let viewControllers = navigationController?.viewControllers else {
             assertionFailure("nav bar is missing!")
@@ -345,18 +317,20 @@ class RouterVC: NSObject {
         controller.checkModalPresentationStyle()
         
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
-        if let lastViewController = getViewControllerForPresent() {
-            if controller.popoverPresentationController?.sourceView == nil,
-                controller.popoverPresentationController?.barButtonItem == nil {
-                controller.popoverPresentationController?.sourceView = lastViewController.view
-            }
-            lastViewController.present(controller, animated: animated, completion: {
-                completion?()
-            })
-        } else {
+
+        guard let topViewController = UIApplication.topController() else {
             assertionFailure("top vc: \(String(describing: UIApplication.topController()))")
-            UIApplication.topController()?.present(controller, animated: animated, completion: completion)
+            return
         }
+
+        // TODO: Facelift, double check this is needed
+        if controller.modalPresentationStyle == .popover,
+           controller.popoverPresentationController?.sourceView == nil,
+           controller.popoverPresentationController?.barButtonItem == nil {
+            controller.popoverPresentationController?.sourceView = topViewController.view
+        }
+
+        topViewController.present(controller, animated: animated, completion: completion)
     }
         
     func showSpiner() {
@@ -532,28 +506,17 @@ class RouterVC: NSObject {
     
     // MARK: SynchronyseSettings
     
-    var synchronyseScreen: UIViewController {
-        return AutoSyncModuleInitializer.initializeViewController()
+    func synchronyseScreen(fromSettings: Bool = false, fromRegister: Bool = false) -> UIViewController {
+        return AutoSyncModuleInitializer.initializeViewController(fromSettings: fromSettings, fromRegister: fromRegister)
     }
-    
-    
-    // MARK: Capcha
-    
-    var capcha: CaptchaViewController? {
-        return CaptchaViewController.initFromXib()
-    }
-    
     
     // MARK: TabBar
-    
     var tabBarScreen: UIViewController? {
-        let controller = TabBarViewController(nibName: "TabBarView", bundle: nil)
-        return controller
+        return TabBarViewController()
     }
     
-    
     // MARK: Home Page
-    var homePageScreen: UIViewController? {
+    var homePageScreen: HeaderContainingViewController.ChildViewController {
         if (!SingletonStorage.shared.isAppraterInited) {
             AppRater.sharedInstance().daysUntilPrompt = 5
             AppRater.sharedInstance().launchesUntilPrompt = 10
@@ -564,17 +527,21 @@ class RouterVC: NSObject {
             SingletonStorage.shared.isAppraterInited = true
         }
         
-        let controller = HomePageModuleInitializer.initializeViewController(with: "HomePage")
-        return controller
+        return HomePageModuleInitializer.initializeViewController(with: "HomePage")
+    }
+
+    func gallery() -> PhotoVideoController {
+        return PhotoVideoController.initFromNib()
     }
     
-    func segmentedMedia() -> PhotoVideoSegmentedController {
-        let photos = PhotoVideoController.initPhotoFromNib()
-        let videos = PhotoVideoController.initVideoFromNib()
-        
-        return PhotoVideoSegmentedController.initPhotoVideoSegmentedControllerWith([photos, videos]) 
+    func forYou() -> HeaderContainingViewController.ChildViewController {
+        return ForYouInitilizer.initializeViewController(with: "ForYou")
     }
     
+    func discover() -> HeaderContainingViewController.ChildViewController {
+        return DiscoverInitilizer.initializeViewController(with: "Discover")
+    }
+
     // MARK: Music
     
     var musics: UIViewController? {
@@ -599,7 +566,7 @@ class RouterVC: NSObject {
         return controller
     }
     
-    var trashBin: UIViewController? {
+    var trashBin: UIViewController {
         let controller = trashBinController()
         controller.segmentImage = .trashBin
         return controller
@@ -611,12 +578,17 @@ class RouterVC: NSObject {
         return controller
     }
     
-    var segmentedFiles: UIViewController? {
-        guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles, let trashBin = trashBin else {
+    var documentsAndMusic: UIViewController? {
+        let controller = BaseFilesGreedModuleInitializer.initializeDocumentsAndMusicViewController(with: "BaseFilesGreedViewController")
+        return controller
+    }
+    
+    var segmentedFiles: HeaderContainingViewController.ChildViewController {
+        guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles, let documentsAndMusic = documentsAndMusic else {
             assertionFailure()
-            return SegmentedController()
+            return AllFilesSegmentedController()
         }
-        let controllers = [allFiles, shareByMeSegment, documents, musics, favorites, trashBin]
+        let controllers = [documents, musics, favorites, sharedWithMe, trashBin, shareByMeSegment, allFiles, documentsAndMusic]
         return AllFilesSegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
     }
     
@@ -886,6 +858,20 @@ class RouterVC: NSObject {
         return controller
     }
     
+    // MARK: Collage list
+    
+    func collageListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
+        let controller = CollageInitializer.initializeCollageController(with: "BaseFilesGreedViewController", moduleOutput: moduleOutput)
+        return controller
+    }
+    
+    // MARK: Animation list
+    
+    func animationListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
+        let controller = AnimationsInitializer.initializeAnimationController(with: "BaseFilesGreedViewController", moduleOutput: moduleOutput)
+        return controller
+    }
+    
     // MARK: Stories list
     
     func storiesListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
@@ -997,13 +983,7 @@ class RouterVC: NSObject {
     // MARK: Terms and policy
     
     var termsAndPolicy: UIViewController? {
-        return TermsAndPolicyViewController.initFromNib()
-    }
-    
-    // MARK: Turkcell Security
-    
-    func turkcellSecurity(isTurkcell: Bool) -> UIViewController {
-        return LoginSettingsModuleInitializer.viewController(isTurkcell: isTurkcell)
+        return UIViewController()
     }
 
     // MARK: Invitation
@@ -1020,12 +1000,6 @@ class RouterVC: NSObject {
 
     var chatbot: UIViewController {
         return ChatbotViewController()
-    }
-
-    // MARK: Chatbot
-
-    var darkMode: UIViewController {
-        return DarkModeInitializer.initializeViewController()
     }
 
     // MARK: Auto Upload
@@ -1122,8 +1096,8 @@ class RouterVC: NSObject {
     }
     // MARK: - Packages
     
-    func packages(quotaInfo: QuotaInfoResponse? = nil, affiliate: String? = nil, refererToken: String? = nil) -> PackagesViewController {
-        return PackagesModuleInitializer.viewController(quotaInfo: quotaInfo, affiliate: affiliate, refererToken: refererToken)
+    func packages(quotaInfo: QuotaInfoResponse? = nil) -> PackagesViewController {
+        return PackagesModuleInitializer.viewController(quotaInfo: quotaInfo)
     }
 
     // MARK: - Passcode
@@ -1149,8 +1123,8 @@ class RouterVC: NSObject {
 
     //MARK: - My Storage
     
-    func myStorage(usageStorage: UsageResponse?) -> MyStorageViewController {
-        let controller = MyStorageModuleInitializer.initializeMyStorageController(usage: usageStorage)
+    func myStorage(usageStorage: UsageResponse?, affiliate: String? = nil, refererToken: String? = nil) -> MyStorageViewController {
+        let controller = MyStorageModuleInitializer.initializeMyStorageController(usage: usageStorage, affiliate: affiliate, refererToken: refererToken)
         return controller
     }
     
@@ -1179,7 +1153,14 @@ class RouterVC: NSObject {
     }
     
     func createStory(items: [Item]) -> UIViewController {
-        return CreateStoryViewController(images: items)
+        
+        let story = PhotoStory(name: "")
+        story.storyPhotos = items
+        
+        let router = RouterVC()
+        let controller = router.audioSelection(forStory: story)
+        controller.fromPhotoSelection = true  
+        return controller
     }
     
     func twoFactorChallenge(otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel) -> UIViewController {
@@ -1313,15 +1294,6 @@ class RouterVC: NSObject {
         
         tabBarVC.dismiss(animated: true)
         
-        func switchToTrashBin() {
-            guard let segmentedController = tabBarVC.currentViewController as? SegmentedController else {
-                return
-            }
-            
-            segmentedController.loadViewIfNeeded()
-            segmentedController.switchSegment(to: DocumentsScreenSegmentIndex.trashBin.rawValue)
-        }
-        
         let index = TabScreenIndex.documents.rawValue
         if tabBarVC.selectedIndex == index {
             switchToTrashBin()
@@ -1330,10 +1302,19 @@ class RouterVC: NSObject {
                 assertionFailure("This index is non existent 😵")
                 return
             }
+            
             tabBarVC.tabBar.selectedItem = newSelectedItem
-            tabBarVC.selectedIndex = index - 1
+            tabBarVC.selectedIndex = index
+            
             switchToTrashBin()
         }
+    }
+        
+    func switchToTrashBin() {
+        let segmentedController = (tabBarController?.customNavigationControllers[TabScreenIndex.documents.rawValue].viewControllers.first as? HeaderContainingViewController)?.childViewController as? AllFilesSegmentedController
+
+        segmentedController?.loadViewIfNeeded()
+        segmentedController?.switchAllFilesCategory(to: DocumentsScreenSegmentIndex.trashBin.rawValue)
     }
     
     func privateShare(items: [WrapData]) -> UIViewController {
@@ -1357,48 +1338,51 @@ class RouterVC: NSObject {
         defaultTopController?.present(popup, animated: true)
     }
     
-    func openTabBarItem(index: TabScreenIndex, segmentIndex: Int? = nil) {
+    func openTabBarItem(index: TabScreenIndex, segmentIndex: Int? = nil, shareType: SharedItemsSegment? = nil) {
         guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
             return
         }
         
         if tabBarVC.selectedIndex != index.rawValue {
             switch index {
-            case .home:
+            case .forYou:
                 guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
                     assertionFailure("This index is non existent 😵")
                     return
                 }
                 tabBarVC.tabBar.selectedItem = newSelectedItem
                 tabBarVC.selectedIndex = index.rawValue
-            case .contactsSync, .documents://because their index is more then two. And we have one offset for button selection but when we point to array index we need - 1 for those items where index > 2.
+            case .contactsSync, .documents:
                 guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
                     assertionFailure("This index is non existent 😵")
                     return
                 }
                 tabBarVC.tabBar.selectedItem = newSelectedItem
-                tabBarVC.selectedIndex = index.rawValue - 1
+                tabBarVC.selectedIndex = index.rawValue
             
-                if let segmentIndex = segmentIndex, let segmentedController = tabBarVC.currentViewController as? SegmentedController  {
-                    segmentedController.loadViewIfNeeded()
-                    segmentedController.switchSegment(to: segmentIndex)
+                if let segmentIndex = segmentIndex {
+                    ItemOperationManager.default.allFilesSectionChange(to: segmentIndex, shareType: shareType)
                 }
-                
             case .gallery:
                 tabBarVC.showPhotoScreen()
+            case .discover:
+                guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
+                    assertionFailure("This index is non existent 😵")
+                    return
+                }
+                tabBarVC.tabBar.selectedItem = newSelectedItem
+                tabBarVC.selectedIndex = index.rawValue
+                //break
             }
         } else {
             tabBarVC.popToRootCurrentNavigationController(animated: true)
         }
     }
     
-    var securityInfoPopup: SecurityInfoPopup {
-        let controller = SecurityInfoPopup()
-        
-        controller.modalPresentationStyle = .overFullScreen
-        controller.modalTransitionStyle = .crossDissolve
-        
-        return controller
+    func securityInfoViewController(fromSettings: Bool = false) {
+        let controller = SecurityInfoViewController()
+        controller.fromSettings = fromSettings
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     var loginWithGooglePopup: LoginWithGooglePopup {
@@ -1481,6 +1465,16 @@ class RouterVC: NSObject {
         
         return controller
     }
+    
+    func bottomInfoBanner(text: String) -> BottomInfoBanner {
+        let controller = BottomInfoBanner(infoText: text)
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        
+        return controller
+    }
+    
     
     func paycellDetailPopup(with model: PaycellDetailModel, type: PaycellDetailType) -> PaycellDetailPopup {
         let controller = PaycellDetailPopup()

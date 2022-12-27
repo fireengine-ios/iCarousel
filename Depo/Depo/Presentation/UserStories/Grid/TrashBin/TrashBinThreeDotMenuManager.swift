@@ -24,7 +24,7 @@ final class TrashBinThreeDotMenuManager {
         self.delegate = delegate
     }
     
-    func showActions(isSelectingMode: Bool, sender: UIBarButtonItem) {
+    func showActions(isSelectingMode: Bool, sender: Any) {
         if isSelectingMode {
             showAlertSheet(with: ElementTypes.trashState, item: nil, sender: sender)
         } else {

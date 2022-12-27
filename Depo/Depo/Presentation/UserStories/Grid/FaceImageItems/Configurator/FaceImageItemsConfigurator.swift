@@ -49,7 +49,7 @@ final class FaceImageItemsConfigurator {
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print, .addToAlbum, .removeFromAlbum],
                                                style: .default, tintColor: nil)
         let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
-        let botvarBarVC = bottomBarVCmodule.setupModule(config: bottomBarConfig, settablePresenter: BottomSelectionTabBarPresenter())
+        let botvarBarVC = bottomBarVCmodule.setupDrawerVariantModule(config: bottomBarConfig, settablePresenter: BottomSelectionTabBarPresenter())
         viewController.editingTabBar = botvarBarVC
         presenter.bottomBarPresenter = bottomBarVCmodule.presenter
         bottomBarVCmodule.presenter?.basePassingPresenter = presenter

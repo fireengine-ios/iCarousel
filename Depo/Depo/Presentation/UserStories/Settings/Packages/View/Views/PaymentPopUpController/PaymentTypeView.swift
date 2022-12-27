@@ -30,7 +30,7 @@ final class PaymentTypeView: UIView, NibInit {
     }
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.textColor = UIColor.lrTealish
+            newValue.textColor = AppColor.darkBlue.color
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
         }
     }

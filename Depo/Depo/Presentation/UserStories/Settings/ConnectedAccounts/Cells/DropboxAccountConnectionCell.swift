@@ -24,16 +24,27 @@ final class DropboxAccountConnectionCell: UITableViewCell, SocialConnectionCell 
         }
     }
     
+    @IBOutlet weak var bgView: UIView! {
+        willSet {
+            newValue.layer.masksToBounds = false
+            newValue.layer.cornerRadius = 15
+            newValue.layer.shadowOpacity = 0.2
+            newValue.layer.shadowColor = UIColor.gray.cgColor
+            newValue.layer.shadowOffset = CGSize(width: 0, height: 0)
+        }
+    }
+    
     @IBOutlet private weak var icon: UIImageView! {
         didSet {
             icon.contentMode = .center
-            icon.image = UIImage(named:"dropbox")
+            icon.image = UIImage(named:"iconTabDropboxBlue")
         }
     }
     
     @IBOutlet private weak var customText: UILabel! {
         didSet {
-            customText.font = UIFont.TurkcellSaturaRegFont(size: 18.0)
+            customText.font = .appFont(.regular, size: 14)
+            customText.textColor = AppColor.label.color
             customText.text = TextConstants.importFromDB
             customText.adjustsFontSizeToFitWidth()
         }
@@ -47,12 +58,6 @@ final class DropboxAccountConnectionCell: UITableViewCell, SocialConnectionCell 
         }
     }
     
-    @IBOutlet private weak var rotatingImage: RotatingImageView! {
-        didSet {
-            rotatingImage.isHidden = true
-        }
-    }
-    
     @IBOutlet private weak var importButton: UIButton!
     
     
@@ -63,8 +68,6 @@ final class DropboxAccountConnectionCell: UITableViewCell, SocialConnectionCell 
         updateAccessbilityTraits(isEnabled: true)
 
         setup()
-        
-        rotatingImage.resumeAnimations()
         
         presenter.viewIsReady()
     }
@@ -139,8 +142,6 @@ extension DropboxAccountConnectionCell: ImportFromDropboxViewInput {
     func startDropboxStatus() {
         importButton.isEnabled = false
         updateAccessbilityTraits(isEnabled: false)
-        rotatingImage.isHidden = false
-        rotatingImage.startInfinityRotate360Degrees(duration: 2)
         progress.text = String(format: TextConstants.importFiles, String(0))
     }
     
@@ -151,8 +152,6 @@ extension DropboxAccountConnectionCell: ImportFromDropboxViewInput {
     func stopDropboxStatus(lastUpdateMessage: String) {
         importButton.isEnabled = true
         updateAccessbilityTraits(isEnabled: true)
-        rotatingImage.isHidden = true
-        rotatingImage.stopInfinityRotate360Degrees()
         progress.text = lastUpdateMessage
     }
     

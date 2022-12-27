@@ -45,14 +45,8 @@ class PasscodeEnterViewController: ViewController, NibInit {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
-        ///to show correct navBar we needs to call "make up" method inside class
-        #if MAIN_APP
-        navigationBarWithGradientStyle()
-        #endif
-        
         setTitle(withString: navigationTitle)
+        navigationItem.backButtonTitle = ""
     }
 
     func becomeResponder() {

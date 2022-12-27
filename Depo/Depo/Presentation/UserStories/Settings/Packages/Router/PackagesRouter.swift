@@ -13,11 +13,6 @@ class PackagesRouter {
 
 // MARK: PackagesRouterInput
 extension PackagesRouter: PackagesRouterInput {
-
-    func openTermsOfUse() {
-        router.pushViewController(viewController: router.termsOfUseScreen)
-    }
-
     func openMyStorage(usageStorage: UsageResponse?) {
         let viewController = router.myStorage(usageStorage: usageStorage)
         router.pushViewController(viewController: viewController)
@@ -36,43 +31,7 @@ extension PackagesRouter: PackagesRouterInput {
         router.pushViewController(viewController: viewController)
     }
     
-    func showSuccessPurchasedPopUp(with delegate: PackagesPresenter) {
-        self.delegate = delegate
-        let successPopUp = PopUpController.with(title: TextConstants.success,
-                                                message: TextConstants.successfullyPurchased,
-                                                image: .success,
-                                                buttonTitle: TextConstants.ok,
-                                                action: { [weak self] vc in
-                                                    vc.close(completion: {
-                                                        guard let `self` = self, let delegate = self.delegate else { return }
-                                                        //dismiss optIn
-                                                        self.router.popViewController()
-                                                        //dismiss premium
-                                                        self.router.popViewController()
-                                                        delegate.refreshPackages()
-                                                    })
-        })
-        router.presentViewController(controller: successPopUp)
-    }
-    
-    func closePaymentPopUpController(closeAction: @escaping VoidHandler) {
-        if let paymentPopUpController = router.defaultTopController as? PaymentPopUpController {
-            paymentPopUpController.close(completion: closeAction)
-        } else {
-            assertionFailure("there is no PaymentPopUpController. check requirements or logic")
-            UIApplication.topController()?.dismiss(animated: true, completion: closeAction)
-        }
-    }
-    
-    func showPaycellProcess(with cpcmOfferId: Int) {
-        let controller = PaycellViewController.create(with: cpcmOfferId) { result in
-            switch result {
-            case .success():
-                UIApplication.showSuccessAlert(message: TextConstants.successfullyPurchased)
-            case .failed(_):
-                UIApplication.showErrorAlert(message: TextConstants.errorUnknown)
-            }
-        }
-        router.pushViewController(viewController: controller)
+    func goToConnectedAccounts() {
+        router.pushViewController(viewController: router.connectedAccounts!)
     }
 }

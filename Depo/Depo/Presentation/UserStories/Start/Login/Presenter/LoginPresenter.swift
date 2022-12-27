@@ -63,15 +63,10 @@ class LoginPresenter: BasePresenter {
     }
     
     private func openAutoSyncIfNeeded() {
-        view.showSpinner()
-        autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
-            self?.view.hideSpinner()
-            
-            if needToOpenAutoSync {
-                self?.router.goToSyncSettingsView()
-            }
-        }) { [weak self] error in
-            self?.view.hideSpinner()
+        /// You can use according to flow.
+        // SingletonStorage.shared.securityInfoIfNeeded
+        DispatchQueue.toMain { [weak self] in
+            self?.router.goToSyncSettingsView()
         }
     }
     

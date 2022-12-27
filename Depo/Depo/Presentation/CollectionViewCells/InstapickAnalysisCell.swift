@@ -34,13 +34,13 @@ final class InstapickAnalysisCell: UICollectionViewCell {
     @IBOutlet private weak var borderView: UIView! {
         willSet {
             newValue.clipsToBounds = true
-            newValue.layer.cornerRadius = 5
+            newValue.layer.cornerRadius = 8
         }
     }
     
     @IBOutlet private weak var shadowView: UIView! {
         willSet {
-            newValue.layer.cornerRadius = 5
+            newValue.layer.cornerRadius = 8
             newValue.layer.shadowColor = UIColor.black.cgColor
             newValue.layer.shadowRadius = 5
             newValue.layer.shadowOpacity = 0.3
@@ -52,13 +52,13 @@ final class InstapickAnalysisCell: UICollectionViewCell {
         willSet {
             newValue.text = TextConstants.analyzeHistoryAnalyzeLeft
             newValue.textColor = ColorConstants.textGrayColor
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            newValue.font = .appFont(.medium, size: 16)
         }
     }
     @IBOutlet weak var countLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.textGrayColor
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 18)
+            newValue.font = .appFont(.medium, size: 16)
             newValue.textAlignment = .right
         }
     }
@@ -67,25 +67,23 @@ final class InstapickAnalysisCell: UICollectionViewCell {
     
     @IBOutlet private weak var purchaseButton: InsetsButton! {
         willSet {
-            newValue.insets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
             newValue.setTitle(TextConstants.instaPickButtonNoAnalysis, for: .normal)
             newValue.setTitleColor(.white, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
-            newValue.backgroundColor = .clear
-            newValue.clipsToBounds = true
-            newValue.layer.cornerRadius = newValue.bounds.height * 0.5
-            newValue.layer.borderColor = UIColor.white.cgColor
-            newValue.layer.borderWidth = 1
+            newValue.titleLabel?.font = .appFont(.medium, size: 16)
         }
     }
     
-    @IBOutlet private weak var seeDetailsView: UIView!
+    @IBOutlet private weak var seeDetailsView: UIView! {
+        willSet {
+            newValue.layer.cornerRadius = 8
+        }
+    }
     
     @IBOutlet private weak var seeDetailsButton: UIButton! {
         willSet {
             newValue.setTitle(TextConstants.analyzeHistorySeeDetails, for: .normal)
-            newValue.setTitleColor(UIColor.lrTealishTwo, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
+            newValue.setTitleColor(AppColor.button.color, for: .normal)
+            newValue.titleLabel?.font = .appFont(.medium, size: 12)
         }
     }
     
@@ -120,13 +118,13 @@ final class InstapickAnalysisCell: UICollectionViewCell {
         switch state {
         case .noOldAnalysis, .canNewAnalysis:
             countLabel.textColor = ColorConstants.textGrayColor
-            purchaseView.isHidden = true
-            seeDetailsView.isHidden = false
+            purchaseView.isHidden = false
+            seeDetailsView.isHidden = true
 
         case .needPurchase:
             countLabel.textColor = ColorConstants.darkRed
-            purchaseView.isHidden = false
-            seeDetailsView.isHidden = true
+            purchaseView.isHidden = true
+            seeDetailsView.isHidden = false
         }
     }
     

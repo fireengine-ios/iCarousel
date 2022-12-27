@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 typealias  ContainsAction = (_ sender: UIBarButtonItem) -> Void
@@ -28,22 +29,29 @@ class NavigationBarList {
     let gift: UIBarButtonItem
 
     let newAlbum: UIBarButtonItem
+    
+    let plus: UIBarButtonItem
 
     init() {
         settings = UIBarButtonItem(image: UIImage(named: TextConstants.cogBtnImgName),
                                    style: .plain,
                                    target: nil,
                                    action: nil)
-        
         settings.accessibilityLabel = TextConstants.accessibilitySettings
         
-        search = UIBarButtonItem(image: UIImage(named: TextConstants.searchBtnImgName),
+        plus = UIBarButtonItem(image: NavigationBarImage.headerActionPlus.image.withRenderingMode(.alwaysOriginal),
                                  style: .plain,
                                  target: nil,
-                                 action: nil )
+                                 action: nil)
+        plus.accessibilityLabel = TextConstants.accessibilityPlus
+        
+        search = UIBarButtonItem(image: NavigationBarImage.headerActionSearch.image.withRenderingMode(.alwaysOriginal),
+                                 style: .plain,
+                                 target: nil,
+                                 action: nil)
         search.accessibilityLabel = TextConstants.accessibilitySearch
 
-        more = UIBarButtonItem(image: UIImage(named: TextConstants.moreBtnImgName),
+        more = UIBarButtonItem(image: Image.iconKebabBorder.image,
                                style: .plain,
                                target: nil,
                                action: nil)
@@ -55,9 +63,10 @@ class NavigationBarList {
                                  action: nil)
         delete.accessibilityLabel = TextConstants.accessibilityDelete
         
-        showHide = UIBarButtonItem.init(title: TextConstants.showHideBtnTitleName,
-                                        target: nil,
-                                        selector: nil)
+        showHide = UIBarButtonItem(image: Image.iconHideSee.image,
+                                   style: .plain,
+                                   target: nil,
+                                   action: nil)
         showHide.accessibilityLabel = TextConstants.accessibilityshowHide
         
         done = UIBarButtonItem(title: TextConstants.faceImageDone,
@@ -79,11 +88,10 @@ class NavigationBarList {
                                style: .plain,
                                target: nil,
                                action: nil)
-        newAlbum.setBackgroundImage(UIImage(named: TextConstants.newAlbumBtnImgName), for: .normal, barMetrics: .default)
+        newAlbum.setBackgroundImage(NavigationBarImage.headerActionPlus.image, for: .normal, barMetrics: .default)
         newAlbum.accessibilityLabel = TextConstants.createAlbum
-        
-        
-        // upload 
+
+        // upload
         // create
         // add
         // edit
@@ -112,10 +120,19 @@ class NavigationBarConfigurator {
     var rightItems: [UIBarButtonItem]? {
         return self.right?.compactMap { $0.navItem }
     }
-    
+
+    var leftItems: [UIBarButtonItem]? {
+        return self.left?.compactMap { $0.navItem }
+    }
+
     func configure(right: [NavBarWithAction]?, left: [NavBarWithAction]?) {
         self.right = right
         self.right?.forEach {
+            setActionAndTarget(navBarAction: $0)
+        }
+
+        self.left = left
+        self.left?.forEach {
             setActionAndTarget(navBarAction: $0)
         }
     }
@@ -138,12 +155,11 @@ class NavigationBarConfigurator {
     
     @objc func baseAction(sender: UIBarButtonItem) {
 
-        var list: [NavBarWithAction]?
-        list = right
-        
-        if let btn = list?.filter({ $0.navItem == sender }) {
-            btn.first?.action(sender)
+        if let button = right?.first(where: { $0.navItem == sender }) {
+            button.action(sender)
         }
-
+        else if let button = left?.first(where: { $0.navItem == sender }) {
+            button.action(sender)
+        }
     }
 }

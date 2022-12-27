@@ -36,4 +36,10 @@ class TitleView: UIView {
         subTitleLabel?.text = title
     }
 
+    #if MAIN_APP
+    func updateColors(for style: NavigationBarStyle) {
+        titleLabel.textColor = style.titleColor
+        subTitleLabel.textColor = style.titleColor
+    }
+    #endif
 }

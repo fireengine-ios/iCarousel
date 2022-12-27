@@ -13,22 +13,20 @@ final class AutoSyncViewController: BaseViewController, NibInit {
     
     @IBOutlet private weak var tableView: UITableView!
     
-    @IBOutlet private weak var startButton: RoundedInsetsButton! {
+    @IBOutlet private weak var startButton: DarkBlueButton! {
         willSet {
             newValue.setTitle(TextConstants.autoSyncStartUsingLifebox, for: .normal)
-            newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.titleLabel?.font = ApplicationPalette.bigRoundButtonFont
-            newValue.backgroundColor = UIColor.lrTealish
             newValue.isOpaque = true
         }
     }
     
     private lazy var storageVars: StorageVars = factory.resolve()
-    private lazy var dataSource = AutoSyncDataSource(tableView: tableView, delegate: self)
+    private lazy var dataSource = AutoSyncDataSource(tableView: tableView, delegate: self, delegateContact: self)
+    private lazy var activityManager = ActivityIndicatorManager()
     
     var fromSettings: Bool = false
     private var onStartUsingButtonTapped = false
-
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -42,11 +40,10 @@ final class AutoSyncViewController: BaseViewController, NibInit {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         dataSource.isFromSettings = fromSettings
         
         if fromSettings {
-            navigationBarWithGradientStyle()
             startButton.isHidden = true
         } else {
             navigationItem.hidesBackButton = true
@@ -76,31 +73,45 @@ final class AutoSyncViewController: BaseViewController, NibInit {
         
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = TextConstants.autoSyncFromSettingsTitle
-        titleLabel.textColor = ColorConstants.textGrayColor
-        titleLabel.lineBreakMode = .byWordWrapping
-        titleLabel.numberOfLines = 0
-        if Device.isIpad {
-            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 22)
-            titleLabel.textAlignment = .center
-        } else {
-            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
-            titleLabel.textAlignment = .left
+        var text = TextConstants.autoSyncFromSettingsTitle as NSString
+        if !text.components(separatedBy: ".").isEmpty {
+            text = text.components(separatedBy: ".")[0] as NSString
         }
         
-        view.addSubview(titleLabel)
-        titleLabel.pinToSuperviewEdges(offset: 20)
+        if text.contains(" \n\n") {
+            let attributedString = NSMutableAttributedString(string: text as String,
+                                                             attributes: [.font: UIFont.appFont(.medium, size: 14.0),
+                                                                          .foregroundColor: AppColor.label.color])
+            
+            let range = text.range(of: " \n\n")
+            let startRange = (text as NSString).range(of: " \n\n")
+            let endRange = NSRange(location: range.location + range.length, length: text.length - range.location - range.length)
+            
+            attributedString.addAttribute(.font, value: UIFont.appFont(.medium, size: 14.0), range: startRange )
+            attributedString.addAttribute(.font, value: UIFont.appFont(.medium, size: 12.0), range: endRange )
+            titleLabel.attributedText = attributedString
+        } else {
+            titleLabel.text = "\(text)."
+            titleLabel.font = .appFont(.medium, size: 14)
+        }
+        
 
+        
+        titleLabel.textColor = AppColor.label.color
+        titleLabel.lineBreakMode = .byWordWrapping
+        titleLabel.numberOfLines = 0
+        
+        view.addSubview(titleLabel)
+        titleLabel.pinToSuperviewEdges(offset: 8)
+        
         let size = view.sizeToFit(width: tableView.bounds.width)
         view.frame.size = size
-    
+        
+        view.backgroundColor = .clear
+        
         tableView.tableHeaderView = view
     }
     
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
-
     // MARK: buttons actions
     
     @IBAction func onStartUsingButton() {
@@ -109,13 +120,32 @@ final class AutoSyncViewController: BaseViewController, NibInit {
         storageVars.isAutoSyncSet = true
         output.change(settings: dataSource.autoSyncSetting, albums: dataSource.autoSyncAlbums)
     }
-
 }
 
 // MARK: - AutoSyncViewInput
 
 extension AutoSyncViewController: AutoSyncViewInput {
-
+    
+    func forceDisableAutoSyncContact() {
+        dataSource.forceDisableAutoSyncContact()
+    }
+    
+    func createAutoSyncSettings() -> PeriodicContactsSyncSettings {
+        dataSource.createAutoSyncSettings()
+    }
+    
+    
+    func startActivityIndicator() {
+        activityManager.start()
+    }
+    
+    func stopActivityIndicator() {
+        activityManager.stop()
+    }
+    
+    func showCells(from syncSettings: PeriodicContactsSyncSettings) {
+        dataSource.showCells(from: syncSettings)
+    }
     
     func setupInitialState() {
     }
@@ -123,14 +153,14 @@ extension AutoSyncViewController: AutoSyncViewInput {
     func prepaire(syncSettings: AutoSyncSettings, albums: [AutoSyncAlbum]) {
         dataSource.setupModels(with: syncSettings, albums: albums)
     }
-        
+    
     func disableAutoSync() {
         dataSource.forceDisableAutoSync()
         if !fromSettings {
             output.save(settings: dataSource.autoSyncSetting, albums: dataSource.autoSyncAlbums)
         }
     }
-
+    
     func checkPermissionsSuccessed() {
         dataSource.checkPermissionsSuccessed()
     }
@@ -145,12 +175,12 @@ extension AutoSyncViewController: AutoSyncViewInput {
                                                   message: TextConstants.locationServiceDisable,
                                                   image: .error,
                                                   buttonTitle: TextConstants.ok) { (vc) in
-                                                    vc.close {
-                                                        completion()
-                                                    }
+                vc.close {
+                    completion()
+                }
             }
             DispatchQueue.toMain {
-                self.present(controller, animated: true, completion: nil)
+                controller.open()
             }
             return
         }
@@ -159,19 +189,19 @@ extension AutoSyncViewController: AutoSyncViewInput {
     
     private func showAccessAlert(message: String) {
         debugLog("AutoSyncViewController showAccessAlert")
-    
+        
         let controller = PopUpController.with(title: TextConstants.cameraAccessAlertTitle,
                                               message: message,
                                               image: .none,
                                               firstButtonTitle: TextConstants.cameraAccessAlertNo,
                                               secondButtonTitle: TextConstants.cameraAccessAlertGoToSettings,
                                               secondAction: { vc in
-                                                vc.close {
-                                                    UIApplication.shared.openSettings()
-                                                }
+            vc.close {
+                UIApplication.shared.openSettings()
+            }
         })
         DispatchQueue.toMain {
-           self.present(controller, animated: true, completion: nil)
+            controller.open()
         }
     }
 }
@@ -182,9 +212,15 @@ extension AutoSyncViewController: AutoSyncDataSourceDelegate {
     func checkForEnableAutoSync() {
         output.checkPermissions()
     }
-
+    
     func didChangeSettingsOption(settings: AutoSyncSetting) {
         output.didChangeSettingsOption(settings: settings)
     }
 }
- 
+
+extension AutoSyncViewController: PeriodicContactSyncDataSourceDelegate {
+    func onValueChanged() {
+        output.onValueChangeContact()
+    }
+}
+

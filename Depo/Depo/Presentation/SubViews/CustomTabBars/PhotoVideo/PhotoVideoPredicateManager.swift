@@ -6,14 +6,13 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
+import Foundation
+
 
 typealias PredicateCallback = (_ predicate: NSPredicate) -> Void
 
 final class PhotoVideoPredicateManager {
-    
-    private var filtrationPredicate: NSPredicate?
-    private var duplicationPredicate: NSPredicate?
-        
+
     private lazy var hiddenPredicate: NSPredicate = {
         let hiddenStatusValue = ItemStatus.hidden.valueForCoreDataMapping()
 
@@ -26,70 +25,44 @@ final class PhotoVideoPredicateManager {
                                                                   relatedRemotesHasUnhidden])
     }()
     
-    private var lastCompoundedPredicate: NSPredicate?
-    
-    func getMainCompoundedPredicate(isPhotos: Bool, createdPredicateCallback: @escaping PredicateCallback) {
-        
-        if let unwrapedLastCompundedPredicate = lastCompoundedPredicate {
-            createdPredicateCallback(unwrapedLastCompundedPredicate)
-            return
-        }
-        
-        let filtrationPredicateTmp = getFiltrationPredicate(isPhotos: isPhotos)
-        
-        getDuplicationPredicate(isPhotos: isPhotos) { [weak self] createdDuplicationPredicate in
-            guard let self = self else {
-                assertionFailure("Unexpected PhotoVideoPredicateManager == nil")
-                return
-            }
-            let compoundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [filtrationPredicateTmp, createdDuplicationPredicate, self.hiddenPredicate])
-            self.lastCompoundedPredicate = compoundedPredicate
-            
-            createdPredicateCallback(compoundedPredicate)
-            
-        }
+
+    func getMainCompoundedPredicate(fileTypes: [FileType]) -> NSPredicate {
+        return NSCompoundPredicate(andPredicateWithSubpredicates: [
+            getFiltrationPredicate(fileTypes: fileTypes),
+            getDuplicationPredicate(),
+            hiddenPredicate
+        ])
     }
     
-    func getDuplicationPredicate(isPhotos: Bool, createdPredicateCallback: @escaping PredicateCallback) {
-        
-        if let unwrapedDuplicationPredicate = duplicationPredicate {
-            createdPredicateCallback(unwrapedDuplicationPredicate)
-            return
-        }
-        ///This Predicate based on assumption that all remotes were downloaded before all locals are
-        let duplicationPredicateTmp = NSPredicate(format: "(\(MediaItem.PropertyNameKey.isLocalItemValue) = true AND (\(MediaItem.PropertyNameKey.hasMissingDateRemotes) = true || \(MediaItem.PropertyNameKey.relatedRemotes).@count = 0)) OR \(MediaItem.PropertyNameKey.isLocalItemValue) = false")
-        duplicationPredicate = duplicationPredicateTmp
-        createdPredicateCallback(duplicationPredicateTmp)
+    func getDuplicationPredicate() -> NSPredicate {
+        // This Predicate based on assumption that all remotes were downloaded before all locals are
+        return NSCompoundPredicate(orPredicateWithSubpredicates: [
+            NSCompoundPredicate(andPredicateWithSubpredicates: [
+                NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = true"),
+                NSPredicate(format: "\(MediaItem.PropertyNameKey.hasMissingDateRemotes) = true || \(MediaItem.PropertyNameKey.relatedRemotes).@count = 0"),
+            ]),
+            NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = false")
+        ])
     }
 
-    func getSyncPredicate(isPhotos: Bool) -> NSPredicate {
+    func getSyncPredicate(fileTypes: [FileType]) -> NSPredicate {
         let hiddenStatusValue = ItemStatus.hidden.valueForCoreDataMapping()
         
-        let unhidden = NSPredicate(format:"(\(MediaItem.PropertyNameKey.isLocalItemValue) = false AND \(MediaItem.PropertyNameKey.status) != %ui)", hiddenStatusValue)
+        let unhidden = NSPredicate(format: "(\(MediaItem.PropertyNameKey.isLocalItemValue) = false AND \(MediaItem.PropertyNameKey.status) != %ui)", hiddenStatusValue)
         
-        return NSCompoundPredicate(andPredicateWithSubpredicates: [getFiltrationPredicate(isPhotos: isPhotos), unhidden])
+        return NSCompoundPredicate(andPredicateWithSubpredicates: [getFiltrationPredicate(fileTypes: fileTypes), unhidden])
     }
     
-    func getUnsyncPredicate(isPhotos: Bool) -> NSPredicate {
+    func getUnsyncPredicate(fileTypes: [FileType]) -> NSPredicate {
         let localWithoutRemotes = NSPredicate(format:"(\(MediaItem.PropertyNameKey.isLocalItemValue) = true AND \(MediaItem.PropertyNameKey.relatedRemotes).@count = 0)")
-        return NSCompoundPredicate(andPredicateWithSubpredicates: [getFiltrationPredicate(isPhotos: isPhotos), localWithoutRemotes])
+        return NSCompoundPredicate(andPredicateWithSubpredicates: [getFiltrationPredicate(fileTypes: fileTypes), localWithoutRemotes])
     }
     
-    private func getFiltrationPredicate(isPhotos: Bool) -> NSPredicate {
-        guard let unwrapedFiltrationPredicate = filtrationPredicate else {
-            let type: FileType = isPhotos ? .image : .video
-            return NSPredicate(format: "\(MediaItem.PropertyNameKey.fileTypeValue) = \(type.valueForCoreDataMapping()) AND \(MediaItem.PropertyNameKey.isAvailable) = true")
-        }
-        return unwrapedFiltrationPredicate
+    private func getFiltrationPredicate(fileTypes: [FileType]) -> NSPredicate {
+        let rawFileTypes = fileTypes.map { $0.valueForCoreDataMapping() }
+        return NSCompoundPredicate(andPredicateWithSubpredicates: [
+            NSPredicate(format: "\(MediaItem.PropertyNameKey.fileTypeValue) IN %@", rawFileTypes),
+            NSPredicate(format: "\(MediaItem.PropertyNameKey.isAvailable) = true")
+        ])
     }
-    
-    private func getCompoundedPredicate() -> NSPredicate? {
-        /// OR we can do callback and call individual predicates untill tey are finished
-        guard let unwrapedFiltrationPredicate = filtrationPredicate,
-            let unwrapedDuplicationPredicate = duplicationPredicate else {
-                return nil
-        }
-        return NSCompoundPredicate(andPredicateWithSubpredicates: [unwrapedFiltrationPredicate, unwrapedDuplicationPredicate])
-    }
-    
 }

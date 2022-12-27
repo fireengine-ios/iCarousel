@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class TermsAndPolicyViewController: BaseViewController, NibInit {
+class TermsAndPolicyViewController: UIView, NibInit {
     
     @IBOutlet weak var tableView: UITableView!
     private var listOfItems = [TextConstants.termsOfUseCell, TextConstants.privacyPolicyCell]
@@ -16,10 +16,9 @@ final class TermsAndPolicyViewController: BaseViewController, NibInit {
     private let router = RouterVC()
     private let eulaService = EulaService()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func awakeFromNib() {
+        super.awakeFromNib()
         setupTableView()
-        setTitle(withString: TextConstants.settingsViewCellPrivacyAndTerms)
     }
     
     private func setupTableView() {
@@ -46,7 +45,8 @@ extension TermsAndPolicyViewController: UITableViewDataSource {
         }
         cell.selectionStyle = .none
         let item = listOfItems[indexPath.row]
-        cell.setTextForLabel(titleText: item, needShowSeparator: indexPath.row == listOfItems.count - 1)
+        cell.setTextForLabel(titleText: item, needShowSeparator: indexPath.row == listOfItems.count - 1,
+                             background: AppColor.background.color)
         
         return cell
     }

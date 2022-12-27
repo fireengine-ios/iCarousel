@@ -7,6 +7,7 @@
 //
 
 protocol MyStorageRouterInput {
+    func showPremiumProcess()
     func showCancelOfferAlert(with text: String)
     func showCancelOfferApple()
     func showSubTurkcellOpenAlert(with text: String)
@@ -14,4 +15,8 @@ protocol MyStorageRouterInput {
     func openLeavePremium(type: LeavePremiumType)
     
     func display(error: String)
+    func openTermsOfUse()
+    func showSuccessPurchasedPopUp(with delegate: MyStoragePresenter)
+    func showPaycellProcess(with cpcmOfferId: Int)
+    func closePaymentPopUpController(closeAction: @escaping VoidHandler)
 }

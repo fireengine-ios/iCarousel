@@ -5,7 +5,10 @@
 //  Created by Aleksandr on 9/15/17.
 //  Copyright © 2017 com.igones. All rights reserved.
 //
-typealias AlertActionsCallback = (_ actions: [UIAlertAction]) -> Void
+
+import UIKit
+
+typealias AlertActionsCallback = ([AlertFilesAction]) -> Void
 
 class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActionsSheetModuleInput {
     
@@ -62,10 +65,11 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
     }
     
     func showSpecifiedAlertSheet(with item: BaseDataSourceItem, status: ItemStatus, presentedBy sender: Any?, onSourceView sourceView: UIView?, viewController: UIViewController? = nil) {
-        let headerAction = UIAlertAction(title: item.name ?? "file", style: .default, handler: {_ in
-            
-        })
-        headerAction.isEnabled = false
+        // TODO: Facelift, file name & info in menu header
+//        let headerAction = UIAlertAction(title: item.name ?? "file", style: .default, handler: {_ in
+//
+//        })
+//        headerAction.isEnabled = false
         
         let types = ElementTypes.specifiedMoreActionTypes(for: status, item: item)
         
@@ -80,13 +84,13 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             
             constractActions(with: types, for: [album]) { [weak self] actions in
                 DispatchQueue.main.async { [weak self] in
-                    self?.presentAlertSheet(with: [headerAction] + actions, presentedBy: sender, viewController: viewController)
+                    self?.presentAlertSheet(with: /*[headerAction] +*/ actions, presentedBy: sender, viewController: viewController)
                 }
             }
         } else if item is Item || status == .trashed {
             constractActions(with: types, for: [item]) { [weak self] actions in
                 DispatchQueue.main.async { [weak self] in
-                    self?.presentAlertSheet(with: [headerAction] + actions, presentedBy: sender, viewController: viewController)
+                    self?.presentAlertSheet(with: /*[headerAction] +*/ actions, presentedBy: sender, viewController: viewController)
                 }
             }
         }
@@ -228,7 +232,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
     private func constractActions(with types: [ElementTypes],
                                   for items: [BaseDataSourceItem]?, sender: Any? = nil,
                                   actionsCallback: @escaping AlertActionsCallback) {
-        
+
         var filteredTypes = types
         if !PrintService.isEnabled {
             filteredTypes = types.filter({ $0 != .print }) //FE-2439 - Removing Print Option for Turkish (TR) language
@@ -249,7 +253,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 return
             }
             actionsCallback(filteredTypes.map { type in
-                var action: UIAlertAction
+                var action: AlertFilesAction
                 switch type {
                 case .info,
                      .edit,
@@ -293,26 +297,35 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                      .endSharing,
                      .leaveSharing,
                      .moveToTrashShared,
-                     .makePersonThumbnail:
-                    
-                    action = UIAlertAction(title: type.actionTitle(), style: .default, handler: { [weak self] _ in
+                     .makePersonThumbnail,
+                     .shareOriginal,
+                     .shareLink,
+                     .sharePrivate,
+                     .galleryAll,
+                     .galleryPhotos,
+                     .galleryVideos,
+                     .gallerySync,
+                     .galleryUnsync:
+
+                    //
+                    action = AlertFilesAction(title: type.actionTitle()) { [weak self] in
                         self?.handleAction(type: type, items: currentItems)
-                    })
+                    }
 
                 case .hide:
-                    action = UIAlertAction(title: type.actionTitle(fileType: currentItems.first?.fileType), style: .default, handler: { [weak self] _ in
+                    action = AlertFilesAction(title: type.actionTitle(fileType: currentItems.first?.fileType)) { [weak self] in
                         self?.handleAction(type: type, items: currentItems)
-                    })
+                    }
                     
                 case .smash:
-                    action = UIAlertAction(title: type.actionTitle(), style: .default, handler: { _ in
+                    action = AlertFilesAction(title: type.actionTitle()) {
                         self.handleAction(type: type, items: currentItems, sender: sender)
-                    })
+                    }
 
                 case .share:
-                    action = UIAlertAction(title: type.actionTitle(), style: .default, handler: { _ in
+                    action = AlertFilesAction(title: type.actionTitle()) {
                         self.handleAction(type: type, items: currentItems, sender: sender)
-                    })
+                    }
 
                 case .deleteDeviceOriginal:
                     if let itemsArray = items as? [Item] {
@@ -320,18 +333,20 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                             !$0.isLocalItem
                         })
                         
-                        action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
+                        action = AlertFilesAction(title: TextConstants.actionSheetDeleteDeviceOriginal) {
                             self.didSelectDeleteDeviceOriginal(serverObjects: serverObjects)
-                        })
+                        }
                         
                     } else {
-                        action = UIAlertAction(title: type.actionTitle(), style: .default, handler: { _ in
+                        action = AlertFilesAction(title: type.actionTitle()) {
                             self.handleAction(type: .deleteDeviceOriginal, items: currentItems)
-                        })
+                        }
                     }
                 case .sync, .syncInProgress, .undetermend:
-                    action = UIAlertAction()
+                    action = AlertFilesAction()
                 }
+
+                action.icon = type.icon
                 return action
             })
         }
@@ -350,52 +365,13 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             }
         }
     }
-    
-    private func presentAlertSheet(with actions: [UIAlertAction], presentedBy sender: Any?, onSourceView sourceView: UIView? = nil, viewController: UIViewController? = nil) {
-        let vc: UIViewController
-        
-        if let unwrapedVC = viewController {
-            vc = unwrapedVC
-            
-        } else {
-            guard let rootVC = RouterVC().getViewControllerForPresent() else {
-                return
-            }
-            vc = rootVC
+
+    private func presentAlertSheet(with actions: [AlertFilesAction], presentedBy sender: Any?, onSourceView sourceView: UIView? = nil, viewController: UIViewController? = nil) {
+        if !actions.isEmpty {
+            let actionsViewController = AlertFilesActionsViewController()
+            actionsViewController.configure(with: actions)
+            actionsViewController.presentAsDrawer()
         }
-        
-        
-        let cancellAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel, handler: { _ in
-            
-        })
-        let actionsWithCancell = actions + [cancellAction]
-        
-        let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actionsWithCancell.forEach({ actionSheetVC.addAction($0) })
-        actionSheetVC.view.tintColor = AppColor.blackColor.color
-        
-        actionSheetVC.popoverPresentationController?.sourceView = vc.view
-        
-        if let pressedBarButton = sender as? UIButton {
-            var sourceRectFrame = pressedBarButton.convert(pressedBarButton.frame, to: vc.view)
-            if sourceRectFrame.origin.x > vc.view.bounds.width {
-                sourceRectFrame = CGRect(origin: CGPoint(x: pressedBarButton.frame.origin.x, y: pressedBarButton.frame.origin.y + 20), size: pressedBarButton.frame.size)
-            }
-            
-            actionSheetVC.popoverPresentationController?.sourceRect = sourceRectFrame
-        } else if let _ = sender as? UIBarButtonItem {
-            //FIXME: use actionSheetVC.popoverPresentationController?.barButtonItem instead
-            if vc.navigationController?.navigationBar.isTranslucent == true {
-                var frame = rightButtonBox
-                frame.origin.y = 44
-                actionSheetVC.popoverPresentationController?.sourceRect = frame
-            } else {
-                actionSheetVC.popoverPresentationController?.sourceRect = rightButtonBox
-            }
-            
-            actionSheetVC.popoverPresentationController?.permittedArrowDirections = .up 
-        }
-        vc.present(actionSheetVC, animated: true, completion: {})
     }
     
     private func getSourceRect(sender: Any?, controller: ViewController?) -> CGRect {
@@ -479,7 +455,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             interactor.unhide(items: items)
             
         case .restore:
-            interactor.restore(items: items)
+            interactor.restore(items: items, completion: {
+                debugPrint("Restore is done")
+            })
             
         case .move:
             interactor.move(item: items, toPath: "")
@@ -585,7 +563,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         case .delete:
             let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
             if items.count <= allowedNumberLimit {
-                interactor.delete(items: items)
+                interactor.delete(items: items) {
+                    debugPrint("Restore is Done")
+                }
             } else {
                 let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
                 UIApplication.showErrorAlert(message: text)
@@ -631,6 +611,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
                 UIApplication.showErrorAlert(message: text)
             }
+        case .shareOriginal, .shareLink, .sharePrivate:
+            interactor.handleShareAction(type: type, sourceRect: self.getSourceRect(sender: sender, controller: nil), items: items)
+        case .galleryAll, .gallerySync, .galleryUnsync, .galleryVideos, .galleryPhotos:
+            ItemOperationManager.default.elementTypeChanged(type: type)
             
         default:
             break

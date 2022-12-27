@@ -45,14 +45,15 @@ extension PremiumRouter: PremiumRouterInput {
                     self?.router.popViewController()
                 }
         })
-        router.presentViewController(controller: popUp)
+        
+        popUp.open()
     }
     
     func showNoDetailsAlert(with message: String) {
-        let vc = DarkPopUpController.with(title: TextConstants.offersInfo,
-                                          message: message,
+        let vc = PopUpController.with(title: TextConstants.offersInfo,
+                                      message: message, image: .none,
                                           buttonTitle: TextConstants.ok)
-        router.presentViewController(controller: vc)
+        vc.open()
     }
     
     func showPromocodInvalideAlert(for vc: UIViewController?) {
@@ -60,7 +61,7 @@ extension PremiumRouter: PremiumRouterInput {
                                                    message: TextConstants.promocodeInvalid,
                                                    image: .error,
                                                    buttonTitle: TextConstants.ok)
-        vc?.present(popUpController, animated: false, completion: nil)
+        popUpController.open()
     }
     
     func purchaseSuccessed(with delegate: FaceImageItemsModuleOutput?) {
@@ -77,7 +78,8 @@ extension PremiumRouter: PremiumRouterInput {
                                                         delegate?.didReloadData()
                                                     })
         })
-        router.presentViewController(controller: successPopUp)
+        
+        successPopUp.open()
     }
     
     func openLink(with url: URL) {
@@ -107,6 +109,6 @@ extension PremiumRouter: PremiumRouterInput {
     }
     
     func showAllPackages() {
-        router.pushViewController(viewController: router.packages())
+        router.pushViewController(viewController: router.myStorage(usageStorage: nil))
     }
 }

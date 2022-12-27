@@ -347,7 +347,7 @@ class FileService: BaseRequestService {
                                                         UIApplication.shared.openSettings()
                                                     }
             })
-            UIApplication.topController()?.present(controller, animated: false, completion: nil)
+            controller.open()
         }
     }
     

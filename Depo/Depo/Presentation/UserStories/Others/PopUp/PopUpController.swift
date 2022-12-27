@@ -20,46 +20,43 @@ typealias PopUpButtonHandler = (_: PopUpController) -> Void
 final class PopUpController: BasePopUpController {
     
     //MARK: IBOutlet
-    @IBOutlet private weak var containerView: UIView! {
-        didSet {
-            containerView.layer.cornerRadius = 5
-            
-            containerView.layer.shadowColor = UIColor.black.cgColor
-            containerView.layer.shadowRadius = 10
-            containerView.layer.shadowOpacity = 0.5
-            containerView.layer.shadowOffset = .zero
-        }
-    }
-    
-    @IBOutlet private weak var buttonsView: UIView! {
-        didSet {
-            buttonsView.layer.cornerRadius = 5
-            buttonsView.layer.masksToBounds = true
-        }
-    }
+
+    @IBOutlet weak var firstImageView: UIImageView!
+    @IBOutlet weak var secondIconImageView: UIImageView!
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
-            titleLabel.textColor = AppColor.marineTwoAndWhite.color
-            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 20)
+            titleLabel.font = .appFont(.medium, size: 20)
         }
     }
     
     @IBOutlet private weak var messageLabel: UILabel! {
         didSet {
-            messageLabel.textColor = AppColor.popupGray.color
-            messageLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
+            messageLabel.textColor = AppColor.popUpMessage.color
+            messageLabel.font = .appFont(.regular, size: 16)
         }
     }
     
-    @IBOutlet private weak var firstButton: InsetsButton!
-    @IBOutlet private weak var secondButton: InsetsButton!
-    @IBOutlet private weak var singleButton: InsetsButton!
+    @IBOutlet weak var textField: QuickDismissPlaceholderTextField!{
+        willSet {
+            newValue.textColor = AppColor.borderColor.color
+            newValue.font = .appFont(.regular, size: 14.0)
+            newValue.backgroundColor = AppColor.primaryBackground.color
+            newValue.borderStyle = .none
+            newValue.layer.cornerRadius = 8
+            newValue.layer.borderWidth = 1
+            newValue.layer.borderColor = AppColor.borderColor.cgColor
+            newValue.setLeftPaddingPoints(16)
+            newValue.setRightPaddingPoints(10)
+            newValue.isOpaque = true
+            newValue.quickDismissPlaceholder = TextConstants.name
+            newValue.returnKeyType = .next
+        }
+    }
     
-    @IBOutlet private weak var darkView: UIView!
-    @IBOutlet weak var firstImageView: UIImageView!
-    @IBOutlet weak var secondIconImageView: UIImageView!
-    
+    @IBOutlet private weak var firstButton: WhiteButton!
+    @IBOutlet private weak var secondButton: DarkBlueButton!
+
     @IBOutlet weak var noneImageConstraint: NSLayoutConstraint!
     
     //MARK: Properties
@@ -69,23 +66,20 @@ final class PopUpController: BasePopUpController {
     private var alertTitle: String?
     private var alertMessage: String?
     private var attributedAlertMessage: NSAttributedString?
+    private var alertTextField: Bool = true
     
     private var firstButtonTitle = ""
     private var secondButtonTitle = ""
-    private var singleButtonTitle = ""
-    
+
     private var firstUrl: URL?
     private var secondUrl: URL?
     
     lazy var firstAction: PopUpButtonHandler = { vc in
         vc.hideSpinnerIncludeNavigationBar()
-        vc.close()
+        vc.dismiss(animated: true)
     }
     lazy var secondAction: PopUpButtonHandler = { vc in
-        vc.close()
-    }
-    lazy var singleAction: PopUpButtonHandler = { vc in
-        vc.close()
+        vc.dismiss(animated: true)
     }
     
     //MARK: Life cycle
@@ -99,28 +93,26 @@ final class PopUpController: BasePopUpController {
     private func setupView() {
         setupButtonState()
         setupPopUpImage()
-        
-        contentView = containerView
-        
+        setupTitleColor()
+
         titleLabel.text = alertTitle
         if let attributedMessage = attributedAlertMessage {
             messageLabel.attributedText = attributedMessage
-            
         } else {
             messageLabel.text = alertMessage
         }
+        
+        textField.isHidden = alertTextField
     }
     
     private func setupButtonState() {
         switch buttonState {
         case .single:
-            setup(singleButton)
-            singleButton.setTitle(singleButtonTitle, for: .normal)
+            setup(firstButton)
+            firstButton.setTitle(firstButtonTitle, for: .normal)
             
-            firstButton.isHidden = true
-            secondButton.isHidden = true
-            singleButton.isHidden = false
-            
+            firstButton.isHidden = false
+            secondButton.removeFromSuperview()
         case .twin:
             setup(firstButton)
             setup(secondButton)
@@ -129,7 +121,6 @@ final class PopUpController: BasePopUpController {
             
             firstButton.isHidden = false
             secondButton.isHidden = false
-            singleButton.isHidden = true
         }
     }
     
@@ -151,16 +142,22 @@ final class PopUpController: BasePopUpController {
             secondIconImageView.isHidden = false
         }
     }
+
+    private func setupTitleColor() {
+        switch popUpImage {
+        case .error:
+            titleLabel.textColor = AppColor.popUpTitleError.color
+        default:
+            titleLabel.textColor = AppColor.popUpTitle.color
+        }
+    }
     
     private func setup(_ button: InsetsButton) {
         button.isExclusiveTouch = true
-        button.setTitleColor(ColorConstants.blueColor, for: .normal)
-        button.setTitleColor(ColorConstants.blueColor.darker(by: 30), for: .highlighted)
-        button.setBackgroundColor(ColorConstants.blueColor, for: .highlighted)
-        button.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
-        button.layer.borderColor = AppColor.blueAndGray.color?.cgColor
-        button.layer.borderWidth = 1
+        button.titleLabel?.font = .appFont(.medium, size: 18)
+
         button.adjustsFontSizeToFitWidth()
+        button.clipsToBounds = true
         
         let inset: CGFloat = 2
         button.insets = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
@@ -174,10 +171,6 @@ final class PopUpController: BasePopUpController {
     @IBAction func actionSecondButton(_ sender: UIButton) {
         secondAction(self)
     }
-    
-    @IBAction func actionSingleButton(_ sender: UIButton) {
-        singleAction(self)
-    }
 }
 
 // MARK: - Init
@@ -186,35 +179,44 @@ extension PopUpController {
         return with(title: TextConstants.errorAlert, message: errorMessage, image: .error, buttonTitle: TextConstants.ok)
     }
     
-    static func with(title: String?, message: String?, image: PopUpImage, buttonTitle: String, action: PopUpButtonHandler? = nil) -> PopUpController {
+    static func with(title: String?, message: String?, image: PopUpImage, buttonTitle: String, action: PopUpButtonHandler? = nil, showTextField: Bool = false) -> PopUpController {
         
-        let vc = controllerWith(title: title, message: message, image: image)
+        let vc = controllerWith(title: title, message: message, image: image, showTextField: showTextField)
         vc.buttonState = .single
         
         if let action = action {
-            vc.singleAction = action
+            vc.firstAction = action
         }
-        vc.singleButtonTitle = buttonTitle
+        vc.firstButtonTitle = buttonTitle
         
         return vc
     }
     
-    static func with(title: String?, attributedMessage: NSAttributedString?, image: PopUpImage, buttonTitle: String, action: PopUpButtonHandler? = nil) -> PopUpController {
+    static func with(title: String?, attributedMessage: NSAttributedString?, image: PopUpImage, buttonTitle: String, action: PopUpButtonHandler? = nil, showTextField: Bool = false) -> PopUpController {
         
-        let vc = controllerWith(title: title, attributedMessage: attributedMessage, image: image)
+        let vc = controllerWith(title: title, attributedMessage: attributedMessage, image: image, showTextField: showTextField)
         vc.buttonState = .single
         
         if let action = action {
-            vc.singleAction = action
+            vc.firstAction = action
         }
-        vc.singleButtonTitle = buttonTitle
-        
+        vc.firstButtonTitle = buttonTitle
+
         return vc
     }
     
-    static func with(title: String?, message: String?, image: PopUpImage, firstButtonTitle: String, secondButtonTitle: String, firstUrl: URL? = nil, secondUrl: URL? = nil, firstAction: PopUpButtonHandler? = nil, secondAction: PopUpButtonHandler? = nil) -> PopUpController {
+    static func with(title: String?,
+                     message: String?,
+                     image: PopUpImage,
+                     firstButtonTitle: String,
+                     secondButtonTitle: String,
+                     firstUrl: URL? = nil,
+                     secondUrl: URL? = nil,
+                     firstAction: PopUpButtonHandler? = nil,
+                     secondAction: PopUpButtonHandler? = nil,
+                     showTextField: Bool = false) -> PopUpController {
         
-        let vc = controllerWith(title: title, message: message, image: image, firstUrl: firstUrl, secondUrl: secondUrl)
+        let vc = controllerWith(title: title, message: message, image: image, firstUrl: firstUrl, secondUrl: secondUrl, showTextField: showTextField)
         vc.buttonState = .twin
         
         if let firstAction = firstAction {
@@ -230,9 +232,18 @@ extension PopUpController {
         return vc
     }
     
-    static func with(title: String?, attributedMessage: NSAttributedString?, image: PopUpImage, firstButtonTitle: String, secondButtonTitle: String, firstUrl: URL? = nil, secondUrl: URL? = nil, firstAction: PopUpButtonHandler? = nil, secondAction: PopUpButtonHandler? = nil) -> PopUpController {
+    static func with(title: String?,
+                     attributedMessage: NSAttributedString?,
+                     image: PopUpImage,
+                     firstButtonTitle: String,
+                     secondButtonTitle: String,
+                     firstUrl: URL? = nil,
+                     secondUrl: URL? = nil,
+                     firstAction: PopUpButtonHandler? = nil,
+                     secondAction: PopUpButtonHandler? = nil,
+                     showTextField: Bool = false) -> PopUpController {
         
-        let vc = controllerWith(title: title, attributedMessage: attributedMessage, image: image, firstUrl: firstUrl, secondUrl: secondUrl)
+        let vc = controllerWith(title: title, attributedMessage: attributedMessage, image: image, firstUrl: firstUrl, secondUrl: secondUrl, showTextField: showTextField)
         vc.buttonState = .twin
         
         if let firstAction = firstAction {
@@ -248,7 +259,12 @@ extension PopUpController {
         return vc
     }
     
-    private static func controllerWith(title: String?, attributedMessage: NSAttributedString?, image: PopUpImage, firstUrl: URL? = nil, secondUrl: URL? = nil) -> PopUpController {
+    private static func controllerWith(title: String?,
+                                       attributedMessage: NSAttributedString?,
+                                       image: PopUpImage,
+                                       firstUrl: URL? = nil,
+                                       secondUrl: URL? = nil,
+                                       showTextField: Bool = false) -> PopUpController {
         let vc = PopUpController(nibName: "PopUpController", bundle: nil)
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overFullScreen
@@ -258,12 +274,13 @@ extension PopUpController {
         vc.popUpImage = image
         vc.firstUrl = firstUrl
         vc.secondUrl = secondUrl
+        vc.alertTextField = !showTextField
         
         return vc
     }
     
     
-    private static func controllerWith(title: String?, message: String?, image: PopUpImage, firstUrl: URL? = nil, secondUrl: URL? = nil) -> PopUpController {
+    private static func controllerWith(title: String?, message: String?, image: PopUpImage, firstUrl: URL? = nil, secondUrl: URL? = nil, showTextField: Bool = false) -> PopUpController {
         let vc = PopUpController(nibName: "PopUpController", bundle: nil)
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overFullScreen
@@ -273,6 +290,7 @@ extension PopUpController {
         vc.popUpImage = image
         vc.firstUrl = firstUrl
         vc.secondUrl = secondUrl
+        vc.alertTextField = !showTextField
         
         return vc
     }

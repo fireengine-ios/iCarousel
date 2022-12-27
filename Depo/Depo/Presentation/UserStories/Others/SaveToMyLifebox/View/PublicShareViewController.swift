@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PublicShareViewController: BaseViewController, ControlTabBarProtocol {
+class PublicShareViewController: BaseViewController {
     
     //MARK: -IBOutlets
     @IBOutlet private weak var tableView: UITableView!
@@ -46,17 +46,12 @@ class PublicShareViewController: BaseViewController, ControlTabBarProtocol {
         output.viewIsReady()
         isLoading = true
         actionView.delegate = self
+        needToShowTabBar = false
         
         if isRootFolder {
             output.getPublicSharedItemsCount()
             output.trackScreen()
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        hideTabBar()
-        navigationBarWithGradientStyle()
     }
     
     //MARK: -Helpers
@@ -70,11 +65,8 @@ class PublicShareViewController: BaseViewController, ControlTabBarProtocol {
     
     private func configureUI() {
         setTitle(withString: mainTitle ?? "")
-        navigationBarWithGradientStyle(isHidden: false, hideLogo: true)
         if isRootFolder == true {
-            navigationItem.leftBarButtonItem = UIBarButtonItem(title: TextConstants.cancel,
-                                                               target: self,
-                                                               selector: #selector(onCancelTapped))
+           setTitle(withString: localized(.publicShareSaveTitle))
         }
 
         view.addSubview(actionView)
@@ -155,7 +147,7 @@ extension PublicShareViewController: PublicShareViewInput {
         dismissDownloadAlert {
             let vc = PopUpController.with(title: TextConstants.success, message: TextConstants.popUpDownloadComplete, image: .success, buttonTitle: TextConstants.ok)
             DispatchQueue.main.async {
-                self.present(vc, animated: false, completion: nil)
+                vc.open()
             }
         }
     }
@@ -164,7 +156,7 @@ extension PublicShareViewController: PublicShareViewInput {
         dismissDownloadAlert {
             let vc = PopUpController.with(title: TextConstants.errorAlert, message: localized(.publicShareDownloadErrorMessage), image: .error, buttonTitle: TextConstants.ok)
             DispatchQueue.main.async {
-                self.present(vc, animated: false, completion: nil)
+                vc.open()
             }
         }
     }

@@ -13,20 +13,25 @@ final class PeopleCollectionViewCell: UICollectionViewCell {
     @IBOutlet private var thumbnailsContainer: UIView! {
         willSet {
             newValue.backgroundColor = .white
+            newValue.layer.cornerRadius = newValue.frame.height * 0.5
+            newValue.layer.borderColor = AppColor.filesSharedTabSeperator.cgColor
+            newValue.layer.borderWidth = 2
         }
     }
     
     @IBOutlet private weak var thumbnail: LoadingImageView! {
         willSet {
             newValue.backgroundColor = UIColor.lightGray.lighter(by: 20.0)
-            newValue.contentMode = .scaleAspectFill
+            newValue.layer.borderColor = UIColor.white.cgColor
+            newValue.layer.borderWidth = 2
+            newValue.layer.cornerRadius = newValue.frame.height * 0.5
         }
     }
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 14)
-            newValue.textColor = ColorConstants.darkText
+            newValue.font = .appFont(.medium, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
             newValue.lineBreakMode = .byWordWrapping
             newValue.numberOfLines = 0
         }
@@ -45,5 +50,15 @@ final class PeopleCollectionViewCell: UICollectionViewCell {
     func cancelImageLoading() {
         thumbnail.cancelLoadRequest()
         thumbnail.image = nil
+    }
+    
+    func configure(with item: WrapData) {
+        titleLabel.text = item.name
+        switch item.patchToPreview {
+        case.remoteUrl(let url):
+            thumbnail.loadImageData(with: url, animated: true)
+        default:
+            return
+        }
     }
 }

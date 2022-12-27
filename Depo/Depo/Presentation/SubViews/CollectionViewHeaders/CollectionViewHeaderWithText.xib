@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="TxV-Qy-iwW" customClass="CollectionViewHeaderWithText" customModule="lifebox" customModuleProvider="target">
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewHeaderWithText" id="TxV-Qy-iwW" customClass="CollectionViewHeaderWithText" customModule="Billo" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -23,13 +21,13 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="iJg-YF-QNY"/>
             <constraints>
                 <constraint firstItem="iJg-YF-QNY" firstAttribute="trailing" secondItem="bCl-Pg-TDr" secondAttribute="trailing" constant="8" id="0Rj-cv-6tU"/>
                 <constraint firstItem="bCl-Pg-TDr" firstAttribute="leading" secondItem="iJg-YF-QNY" secondAttribute="leading" constant="8" id="1MQ-ya-5Ve"/>
                 <constraint firstItem="iJg-YF-QNY" firstAttribute="bottom" secondItem="bCl-Pg-TDr" secondAttribute="bottom" id="Kn6-Kq-tCh"/>
                 <constraint firstItem="bCl-Pg-TDr" firstAttribute="top" secondItem="iJg-YF-QNY" secondAttribute="top" id="ZIt-fH-Jqz"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="iJg-YF-QNY"/>
             <connections>
                 <outlet property="titleLabel" destination="bCl-Pg-TDr" id="oyp-sV-Osu"/>
             </connections>

@@ -12,8 +12,8 @@ class PageForLanding: UIViewController {
     
     @IBOutlet weak var titleLabel : UILabel! {
         didSet {
-            titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 31.5)
-            titleLabel.textColor = ColorConstants.whiteColor
+            titleLabel.font = .appFont(.bold, size: 26)
+            titleLabel.textColor = AppColor.landingTitle.color
             titleLabel.text = "Welcome! Let’s get started!"
             titleLabel.adjustsFontSizeToFitWidth()
         }
@@ -21,14 +21,12 @@ class PageForLanding: UIViewController {
     
     @IBOutlet weak var subTitleLabel : UILabel! {
         didSet {
-            subTitleLabel.font = UIFont.TurkcellSaturaItaFont(size: 15.4)
-            subTitleLabel.textColor = ColorConstants.whiteColor
+            subTitleLabel.font = .appFont(.medium, size: 14)
+            subTitleLabel.textColor = AppColor.landingSubtitle.color
             subTitleLabel.text = "You can access everything about lifebox from home page. Start using your lifebox with our suggestions. You can swipe the cards that you don't like."
         }
     }
     
-    @IBOutlet weak var bgImage: UIImageView!
-    @IBOutlet weak var bgImageSmall: UIImageView!
     @IBOutlet weak var imageView: UIImageView!
 
     override func viewDidLoad() {
@@ -37,27 +35,15 @@ class PageForLanding: UIViewController {
     }
     
     func configurateForIndex(index: Int) {
-        titleLabel.text = getTitleForIndex(index: index)
+        titleLabel.text = getTitleForIndex(index: index).replacingOccurrences(of: "\n", with: "")
         subTitleLabel.text = getSubTitleForIndex(index: index)
         
-        var localizationPrefix = ""
+        var localizationPrefix = "EN"
         if Device.supportedLocale == "tr" {
             localizationPrefix = "TR"
         }
         
-        let bgImageName = String(format: "LandingBG%d", index)
-        if index == 0 {
-            bgImage.image = UIImage(named: bgImageName)
-            bgImageSmall.image = nil
-        } else {
-            bgImage.image = nil
-            bgImageSmall.image = UIImage(named: bgImageName)
-            bgImageSmall.contentMode = .scaleAspectFill
-            titleLabel.textColor = ColorConstants.blackForLanding
-            subTitleLabel.textColor = ColorConstants.blackForLanding
-        }
-        
-        let imageName = String(format: "LandingImage%@%d", localizationPrefix, index)
+        let imageName = String(format: "landing%@%d", localizationPrefix, index + 1)
         imageView.image = UIImage(named: imageName)
     }
     

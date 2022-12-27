@@ -9,9 +9,8 @@
 class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelectionTabBarModuleInput, BottomSelectionTabBarViewOutput, BottomSelectionTabBarInteractorOutput {
     
     weak var view: BottomSelectionTabBarViewInput!
-//    var interactor: BottomSelectionTabBarInteractorInput!
     var router: BottomSelectionTabBarRouterInput!
-    
+
     let middleTabBarRect = CGRect(x: Device.winSize.width / 2 - 5, y: Device.winSize.height - 49, width: 10, height: 50)
     
     func viewIsReady() {
@@ -23,57 +22,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     }
     
     func setupConfig(withConfig config: EditingBarConfig) {
-        var itemTupple = [PreDetermendType]()
-        for type in config.elementsConfig {
-            switch type {
-            case .hide:
-                itemTupple.append(EditinglBar.PreDetermendTypes.hide)
-            case .unhide:
-                itemTupple.append(EditinglBar.PreDetermendTypes.unhide)
-            case .smash:
-                itemTupple.append(EditinglBar.PreDetermendTypes.smash)
-            case .delete:
-                itemTupple.append(EditinglBar.PreDetermendTypes.delete)
-            case .download:
-                itemTupple.append(EditinglBar.PreDetermendTypes.download)
-            case .downloadDocument:
-                itemTupple.append(EditinglBar.PreDetermendTypes.downloadDocument)
-            case .edit:
-                itemTupple.append(EditinglBar.PreDetermendTypes.edit)
-            case .info:
-                itemTupple.append(EditinglBar.PreDetermendTypes.info)
-            case .move:
-                itemTupple.append(EditinglBar.PreDetermendTypes.move)
-            case .share:
-                itemTupple.append(EditinglBar.PreDetermendTypes.share)
-            case .sync:
-                itemTupple.append(EditinglBar.PreDetermendTypes.sync)
-            case .syncInProgress:
-                itemTupple.append(EditinglBar.PreDetermendTypes.syncInProgress)
-            case .removeFromAlbum:
-                itemTupple.append(EditinglBar.PreDetermendTypes.removeFromAlbum)
-            case .removeFromFaceImageAlbum:
-                itemTupple.append(EditinglBar.PreDetermendTypes.removeFromFaceImageAlbum)
-            case .addToAlbum:
-                itemTupple.append(EditinglBar.PreDetermendTypes.addToAlbum)
-            case .makeAlbumCover:
-                itemTupple.append(EditinglBar.PreDetermendTypes.makeCover)
-            case .print:
-                itemTupple.append(EditinglBar.PreDetermendTypes.print)
-            case .removeAlbum:
-                itemTupple.append(EditinglBar.PreDetermendTypes.removeAlbum)
-            case .moveToTrash:
-                itemTupple.append(EditinglBar.PreDetermendTypes.delete)
-            case .restore:
-                itemTupple.append(EditinglBar.PreDetermendTypes.restore)
-            case .moveToTrashShared:
-                itemTupple.append(EditinglBar.PreDetermendTypes.delete)
-            default:
-                break
-            }
-        }
-
-        view.setupBar(tintColor: config.tintColor, style: config.style, items: itemTupple)
+        view.setupBar(with: config)
     }
 
     func setupTabBarWith(items: [BaseDataSourceItem], originalConfig: EditingBarConfig) {
@@ -194,14 +143,18 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                 if selectedItems.count <= allowedNumberLimit {
-                    self.interactor.delete(items: selectedItems)
+                    self.interactor.delete(items: selectedItems) {
+                        debugPrint("Restore is Done")
+                    }
                 } else {
                     let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
                 }
             case .restore:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .restore))
-                self.interactor.restore(items: selectedItems)
+                self.interactor.restore(items: selectedItems, completion: {
+                    debugPrint("Restore is done")
+                })
             case .download:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .download))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
@@ -276,44 +229,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         }
     }
 
-    func showAlertSheet(withTypes types: [ElementTypes], presentedBy sender: Any?, onSourceView sourceView: UIView?) {
-        constractActions(withTypes: types, forItem: nil) { [weak self] actions in
-            self?.presentAlertSheet(withActions: actions, presentedBy: sender)
-        }
-    }
-    
-    func showAlertSheet(withItems items: [BaseDataSourceItem], presentedBy sender: Any?, onSourceView sourceView: UIView?) {
-        if items.count == 0 {//TODO: FOR NOW
-            return
-        }
-        guard let items = items as? [Item] else {
-            return
-        }
-        constractActions(withTypes: adjastActionTypes(forItems: items), forItem: nil) { [weak self] actions in
-            self?.presentAlertSheet(withActions: actions, presentedBy: sender)
-        }
-    }
-    
-    func showSpecifiedAlertSheet(withItem item: BaseDataSourceItem, presentedBy sender: Any?, onSourceView sourceView: UIView?) {
-        
-        let headerAction = UIAlertAction(title: item.name ?? "file", style: .default, handler: {_ in
-            
-        })
-        headerAction.isEnabled = false
-        
-        var types: [ElementTypes] = [.info, .share, .move]
-        
-        guard let item = item as? Item else {
-            return
-        }
-        types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-        types.append(.moveToTrash)
-        
-        constractActions(withTypes: types, forItem: [item]) { [weak self] actions in
-            self?.presentAlertSheet(withActions: [headerAction] + actions, presentedBy: sender)
-        }
-    }
-    
     private func adjastActionTypes(forItems items: [Item]) -> [ElementTypes] {
         var actionTypes: [ElementTypes] = []
         if items.count == 1, let item = items.first {
@@ -366,205 +281,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         }
         return actionTypes
     }
-
-    private func constractActions(withTypes types: [ElementTypes], forItem items: [Item]?,
-                                  actionsCallback: @escaping AlertActionsCallback) {
-        
-        var filteredTypes = types
-        if !PrintService.isEnabled {
-            filteredTypes = types.filter({ $0 != .print }) //FE-2439 - Removing Print Option for Turkish (TR) language
-        }
-        
-        basePassingPresenter?.getSelectedItems { [weak self] selectedItems in
-            guard let self = self else {
-                return
-            }
-            var tempoItems = items
-            if tempoItems == nil {
-                guard let wrappedArray = selectedItems as? [Item] else {
-                    actionsCallback([])
-                    return
-                }
-                tempoItems = wrappedArray
-            }
-            
-            guard let currentItems = tempoItems else {
-                actionsCallback([])
-                return
-            }
-            
-            actionsCallback(filteredTypes.map {
-                var action: UIAlertAction
-                switch $0 {
-                case .info:
-                    action = UIAlertAction(title: TextConstants.actionSheetInfo, style: .default, handler: { _ in
-                        self.router.onInfo(object: currentItems.first!)
-                        self.view.unselectAll()
-                    })
-                    
-                case .edit:
-                    action = UIAlertAction(title: TextConstants.actionSheetEdit, style: .default, handler: { _ in
-                        RouterVC().tabBarVC?.showSpinner()
-                        self.interactor.edit(item: currentItems, completion: {
-                            RouterVC().tabBarVC?.hideSpinner()
-                        })
-                    })
-                case .download:
-                    action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
-                        self.interactor.download(item: currentItems)
-                    })
-                case .downloadDocument:
-                    action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
-                        self.interactor.downloadDocument(items: currentItems)
-                    })
-                case .delete:
-                    action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
-                        self.interactor.delete(items: currentItems)
-                    })
-                case .hide:
-                    action = UIAlertAction(title: TextConstants.actionSheetHide, style: .default, handler: { _ in
-                        self.interactor.hide(items: currentItems)
-                    })
-                case .smash:
-                    //Currently there is no task for smash from action sheet.
-                    assertionFailure("In order to use smash please implement this function")
-                    action = UIAlertAction()
-                case .restore:
-                    action = UIAlertAction(title: TextConstants.actionSheetRestore, style: .default, handler: { _ in
-                        self.interactor.restore(items: currentItems)
-                    })
-                case .move:
-                    action = UIAlertAction(title: TextConstants.actionSheetMove, style: .default, handler: { _ in
-                        self.interactor.move(item: currentItems, toPath: "")
-                    })
-                case .share:
-                    action = UIAlertAction(title: TextConstants.actionSheetShare, style: .default, handler: { _ in
-                        self.interactor.share(item: currentItems, sourceRect: self.middleTabBarRect)
-                    })
-                //Photos and albumbs
-                case .photos:
-                    action = UIAlertAction(title: TextConstants.actionSheetPhotos, style: .default, handler: { _ in
-                        self.interactor.photos(items: currentItems)
-                    })
-                case .addToAlbum:
-                    action = UIAlertAction(title: TextConstants.actionSheetAddToAlbum, style: .default, handler: { _ in
-                        self.interactor.addToAlbum(items: currentItems)
-                    })
-                case .albumDetails:
-                    action = UIAlertAction(title: TextConstants.actionSheetAlbumDetails, style: .default, handler: { _ in
-                        self.interactor.albumDetails(items: currentItems)
-                    })
-                case .shareAlbum:
-                    action = UIAlertAction(title: TextConstants.actionSheetShare, style: .default, handler: { _ in
-                        self.interactor.shareAlbum(items: currentItems)
-                    })
-                case .makeAlbumCover:
-                    action = UIAlertAction(title: TextConstants.actionSheetMakeAlbumCover, style: .default, handler: { _ in
-                        self.interactor.makeAlbumCover(items: currentItems)
-                    })
-                case .removeFromAlbum:
-                    action = UIAlertAction(title: TextConstants.actionSheetRemoveFromAlbum, style: .default, handler: { _ in
-                        self.interactor.removeFromAlbum(items: currentItems)
-                    })
-                case .backUp:
-                    action = UIAlertAction(title: TextConstants.actionSheetBackUp, style: .default, handler: { _ in
-                        self.interactor.backUp(items: currentItems)
-                    })
-                case .copy:
-                    action = UIAlertAction(title: TextConstants.actionSheetCopy, style: .default, handler: { _ in
-                        self.interactor.copy(item: currentItems, toPath: "")
-                    })
-                case .createStory:
-                    action = UIAlertAction(title: TextConstants.actionSheetCreateStory, style: .default, handler: { _ in
-                        self.interactor.createStory(items: currentItems)
-                    })
-                case .iCloudDrive:
-                    action = UIAlertAction(title: TextConstants.actionSheetiCloudDrive, style: .default, handler: { _ in
-                        self.interactor.iCloudDrive(items: currentItems)
-                    })
-                case .lifeBox:
-                    action = UIAlertAction(title: TextConstants.actionSheetLifeBox, style: .default, handler: { _ in
-                        self.interactor.lifeBox(items: currentItems)
-                    })
-                case .more:
-                    action = UIAlertAction(title: TextConstants.actionSheetMore, style: .default, handler: { _ in
-                        self.interactor.more(items: currentItems)
-                    })
-                case .musicDetails:
-                    action = UIAlertAction(title: TextConstants.actionSheetMusicDetails, style: .default, handler: { _ in
-                        self.interactor.musicDetails(items: currentItems)
-                    })
-                case .addToPlaylist:
-                    action = UIAlertAction(title: TextConstants.actionSheetAddToPlaylist, style: .default, handler: { _ in
-                        self.interactor.addToPlaylist(items: currentItems)
-                    })
-                case .addToCmeraRoll:
-                    action = UIAlertAction(title: TextConstants.actionSheetDownloadToCameraRoll, style: .default, handler: { _ in
-                        self.interactor.downloadToCmeraRoll(items: currentItems)
-                    })
-                case .addToFavorites:
-                    action = UIAlertAction(title: TextConstants.actionSheetAddToFavorites, style: .default, handler: { _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .addToFavorites))
-                        self.interactor.addToFavorites(items: currentItems)
-                    })
-                case .removeFromFavorites:
-                    action = UIAlertAction(title: TextConstants.actionSheetRemoveFavorites, style: .default, handler: { _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .removeFromFavorites))
-                        self.interactor.removeFromFavorites(items: currentItems)
-                    })
-                case .documentDetails:
-                    action = UIAlertAction(title: TextConstants.actionSheetDocumentDetails, style: .default, handler: { _ in
-                        self.interactor.documentDetails(items: currentItems)
-                    })
-                    
-                case .select:
-                    action = UIAlertAction(title: TextConstants.actionSheetSelect, style: .default, handler: { _ in
-                        //                    self.interactor.//TODO: select and select all pass to grid's presenter
-                    })
-                case .selectAll:
-                    action = UIAlertAction(title: TextConstants.actionSheetSelectAll, style: .default, handler: { _ in
-                        //                    self.interactor.selectAll(items: <#T##[Item]#>)??? //TODO: select and select all pass to grid's presenter
-                    })
-                case .print:
-                    action = UIAlertAction(title: TextConstants.tabBarPrintLabel, style: .default, handler: { _ in
-                        //TODO: will be implemented in the next package
-                    })
-                    
-                default:
-                    assertionFailure("👆PLEASE add your new type into switch in constractActions( method in BottomSelectionTabBarPresenter class👆")
-                    action = UIAlertAction(title: "TEST", style: .default, handler: nil)
-                }
-                return action
-            })
-        }
-        
-    }
-    
-    private func presentAlertSheet(withActions actions: [UIAlertAction], presentedBy sender: Any?, onSourceView sourceView: UIView? = nil) {
-        let routerVC = RouterVC()
-        guard let rootVC = routerVC.rootViewController else {
-            return
-        }
-        let cancellAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel, handler: { _ in
-            
-        })
-        let actionsWithCancell: [UIAlertAction] = actions + [cancellAction]
-        
-        let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actionsWithCancell.forEach({ actionSheetVC.addAction($0) })
-
-        actionSheetVC.popoverPresentationController?.sourceView = rootVC.view
-
-        if let pressedBarButton = sender as? UIButton {
-            var sourceRectFrame = pressedBarButton.convert(pressedBarButton.frame, to: rootVC.view)
-            if sourceRectFrame.origin.x > rootVC.view.bounds.size.width {
-                sourceRectFrame = CGRect(origin: CGPoint(x: pressedBarButton.frame.origin.x, y: pressedBarButton.frame.origin.y + 20), size: pressedBarButton.frame.size)
-            }
-            
-            actionSheetVC.popoverPresentationController?.sourceRect = sourceRectFrame
-        }
-        rootVC.present(actionSheetVC, animated: true, completion: {})
-    }
     
     func setupTabBarWith(config: EditingBarConfig) {
         guard var bottomBarInteractor = interactor as? BottomSelectionTabBarInteractorInput else {
@@ -581,6 +297,9 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     // MARK: - Interactor output
     
     override func operationFinished(type: ElementTypes) {
+        let topVC = UIApplication.topController()
+        show(animated: true, onView: topVC?.view)
+        dismiss(animated: false)
         completeAsyncOperationEnableScreen()
         view.unselectAll()
         basePassingPresenter?.operationFinished(withType: type, response: nil)
@@ -596,6 +315,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     override func operationStarted(type: ElementTypes) {
         startAsyncOperationDisableScreen()
         basePassingPresenter?.stopModeSelected()
+        dismiss(animated: true)
     }
     
     func selectFolder(_ selectFolder: SelectFolderViewController) {

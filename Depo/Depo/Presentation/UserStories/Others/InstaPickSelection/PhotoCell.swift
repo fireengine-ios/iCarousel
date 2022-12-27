@@ -8,8 +8,8 @@ final class PhotoCell: UICollectionViewCell {
         static let edgeInset: CGFloat = 6
         static let selectionBorderWidth: CGFloat = 3
         
-        static let checkmarkFillImage = UIImage(named: "selected")
-        static let checkmarkEmptyImage = UIImage(named: "notSelected")
+        static let checkmarkFillImage = Image.iconSelectFills.image
+        static let checkmarkEmptyImage = Image.iconSelectEmpty.image
     }
     
     private let imageView: UIImageView = {
@@ -31,7 +31,7 @@ final class PhotoCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.isHidden = true
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: "favoriteStar")
+        imageView.image = Image.iconFavoriteStar.image
         return imageView
     }()
     
@@ -58,7 +58,8 @@ final class PhotoCell: UICollectionViewCell {
         addSubview(selectionImageView)
         addSubview(favouriteImageView)
         
-        layer.borderColor = AppColor.darkBlueAndTealish.color?.cgColor
+        layer.borderColor = AppColor.tint.color.cgColor
+        layer .borderWidth = 3
         
         // TODO: setup accessibility
         //favoriteImageView.accessibilityLabel = TextConstants.accessibilityFavorite

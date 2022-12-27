@@ -11,6 +11,7 @@ import Foundation
 protocol PasscodeSettingsViewInput: AnyObject {
     func setup(state: PasscodeSettingsViewState, animated: Bool)
     func presentMailVerification()
+    func updatedTwoFactorAuth(isEnabled: Bool)
 }
 
 protocol PasscodeSettingsViewOutput: AnyObject {
@@ -20,6 +21,7 @@ protocol PasscodeSettingsViewOutput: AnyObject {
     func turnOffPasscode()
     func setPasscode()
     func mailVerified()
+    func updatedTwoFactorAuth(isEnabled: Bool)
     
     var isPasscodeEmpty: Bool { get }
     var biometricsStatus: BiometricsStatus { get }

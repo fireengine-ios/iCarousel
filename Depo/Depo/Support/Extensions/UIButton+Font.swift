@@ -20,8 +20,8 @@ extension UIButton {
 
 //MARK: - VerticalLayout
 
-extension UIButton {    
-    func centerVertically(padding: CGFloat = 6.0) {
+extension UIButton {
+    func centerVertically(padding: CGFloat = 6.0, topPadding: CGFloat = 0.0) {
         guard
             let imageViewSize = self.imageView?.frame.size,
             let titleLabelSize = self.titleLabel?.frame.size else {
@@ -31,7 +31,7 @@ extension UIButton {
         let totalHeight = imageViewSize.height + titleLabelSize.height + padding
         
         self.imageEdgeInsets = UIEdgeInsets(
-            top: -(totalHeight - imageViewSize.height),
+            top: -(totalHeight - imageViewSize.height - topPadding),
             left: 0.0,
             bottom: 0.0,
             right: -titleLabelSize.width

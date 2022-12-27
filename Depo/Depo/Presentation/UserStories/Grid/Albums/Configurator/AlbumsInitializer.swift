@@ -16,14 +16,16 @@ class AlbumsModuleInitializer: NSObject {
 
     class func initializeAlbumsController(with nibName: String, moduleOutput: LBAlbumLikePreviewSliderModuleInput?) -> BaseFilesGreedChildrenViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
-        viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory, .createAlbum])
         
         viewController.cardsContainerView.addPermittedPopUpViewTypes(types: [.sync, .upload])
         viewController.cardsContainerView.isEnable = true
+        viewController.isAlbumList = true
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download] + ElementTypes.activeState,
-                                               style: .default, tintColor: nil)
+                                               style: .default, tintColor: AppColor.tint.color,
+                                               unselectedItemTintColor: AppColor.label.color,
+                                               barTintColor: AppColor.drawerBackground.color)
         
         let presenter = AlbumsPresenter()
         
@@ -41,7 +43,7 @@ class AlbumsModuleInitializer: NSObject {
             availableSortTypes: albumsSortTypes,
             defaultSortType: .TimeNewOld,
             availableFilter: false,
-            showGridListButton: true
+            showGridListButton: false
         )
         
         

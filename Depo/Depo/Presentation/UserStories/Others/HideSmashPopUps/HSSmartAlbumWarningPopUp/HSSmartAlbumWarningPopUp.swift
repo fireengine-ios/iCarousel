@@ -18,17 +18,19 @@ final class HSSmartAlbumWarningPopUp: BasePopUpController {
 
     @IBOutlet private weak var popUpView: UIView! {
         willSet {
-            newValue.layer.cornerRadius = 5
-            newValue.layer.shadowRadius = 5
+            newValue.layer.cornerRadius = 15
+            newValue.layer.shadowRadius = 15
             newValue.layer.shadowOpacity = 0.5
             newValue.layer.shadowColor = UIColor.black.cgColor
             newValue.layer.shadowOffset = .zero
+            newValue.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         }
     }
 
     @IBOutlet private weak var darkView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.backgroundViewColor
+            newValue.backgroundColor = UIColor.clear
+            newValue.layer.cornerRadius = 15
         }
     }
 
@@ -42,17 +44,17 @@ final class HSSmartAlbumWarningPopUp: BasePopUpController {
 
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 18)
-            newValue.textColor = AppColor.marineTwoAndWhite.color
             newValue.textAlignment = .center
+            newValue.font = .appFont(.medium, size: 16)
+            newValue.textColor = AppColor.label.color
             newValue.numberOfLines = 0
         }
     }
 
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaFont(size: 18)
-            newValue.textColor = AppColor.darkTextAndLightGray.color
+            newValue.font = .appFont(.regular, size: 16)
+            newValue.textColor = AppColor.label.color
             newValue.textAlignment = .center
             newValue.numberOfLines = 0
         }
@@ -66,8 +68,8 @@ final class HSSmartAlbumWarningPopUp: BasePopUpController {
     @IBOutlet private weak var doNotShowAgainLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.hideSuccessedAlertDoNotShowAgain
-            newValue.font = UIFont.TurkcellSaturaFont(size: 16)
-            newValue.textColor = UIColor.lrBrownishGrey
+            newValue.font = .appFont(.regular, size: 16)
+            newValue.textColor = AppColor.label.color
         }
     }
 
@@ -75,30 +77,31 @@ final class HSSmartAlbumWarningPopUp: BasePopUpController {
         willSet {
             newValue.adjustsImageWhenHighlighted = false
 
-            let normalCheckbox = UIImage(named: "checkBoxNotSelected")
+            let normalCheckbox = Image.iconSelectEmpty.image
             newValue.setImage(normalCheckbox, for: .normal)
 
-            let selectedCheckbox = UIImage(named: "checkbox_active")
+            let selectedCheckbox = Image.iconSelectCheck.image
             newValue.setImage(selectedCheckbox, for: .selected)
         }
     }
 
-    @IBOutlet private weak var premiumButton: GradientPremiumButton! {
+    @IBOutlet weak var premiumButton: HideInsetsRoundedButton! {
         willSet {
             newValue.setTitle(TextConstants.becomePremium, for: .normal)
-
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
+            newValue.setTitleColor(UIColor.white, for: .normal)
+            newValue.titleLabel?.font = .appFont(.medium, size: 16)
+            newValue.backgroundColor = AppColor.darkBlueColor.color
         }
     }
+    
+    
 
-    @IBOutlet private weak var functionButton: RoundedInsetsButton! {
+    @IBOutlet private weak var functionButton: HideInsetsRoundedButton! {
         willSet {
-            newValue.titleEdgeInsets = UIEdgeInsets(top: 6, left: 14, bottom: 6, right: 14)
+            newValue.setTitle(TextConstants.hideSuccessedAlertViewPeopleAlbum, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.backgroundColor = UIColor.lrTealishTwo
-
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaFont(size: 18)
-            newValue.adjustsFontSizeToFitWidth()
+            newValue.titleLabel?.font = .appFont(.medium, size: 16)
+            newValue.backgroundColor = AppColor.darkBlueColor.color
         }
     }
 

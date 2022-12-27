@@ -12,8 +12,8 @@ final class QuestionCell: UITableViewCell {
 
     @IBOutlet private weak var questionLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaFont(size: 18)
-            newValue.textColor = ColorConstants.textGrayColor
+            newValue.font = .appFont(.regular, size: 12.0)
+            newValue.textColor = AppColor.label.color
         }
     }
 

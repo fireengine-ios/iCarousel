@@ -12,31 +12,51 @@ protocol EmptyDataViewDelegate: AnyObject {
     func didButtonTapped()
 }
 
-private extension GalleryViewType {
+private extension ElementTypes {
     
     var emptyViewMessage: String {
         switch self {
-        case .all, .synced:
-            return TextConstants.photosVideosViewNoPhotoTitleText
-        case .unsynced:
-            return TextConstants.photosVideosEmptyNoUnsyncPhotosTitle
+        case .galleryAll:
+            //return "Henüz hiç fotoğraf eklenmemiş"
+            return localized(.emptyGalleryNoPhoto)
+        case .gallerySync:
+            //return "Tüm ögelerin Unsync olmuş durumda"
+            return localized(.emptyGalleryNoSync)
+        case .galleryUnsync:
+            //return "Tüm dosyaların yedekli"
+            return localized(.emptyGalleryNoUnsync)
+        case .galleryVideos:
+            //return "Henüz hiç video eklenmemiş"
+            return localized(.emptyGalleryNoVideo)
+        case .galleryPhotos:
+            //return "Henüz hiç fotoğraf eklenmemiş"
+            return localized(.emptyGalleryNoPhoto)
+        default:
+            return ""
         }
     }
     
     var emptyViewActionTitle: String? {
         switch self {
-        case .all, .synced:
+        case .galleryAll:
             return TextConstants.photosVideosViewNoPhotoButtonText
-        case .unsynced:
-            return nil
+        default: return nil
         }
     }
     
     var emptyViewImage: UIImage? {
         switch self {
-        case .all, .synced:
-            return UIImage(named: "ImageNoPhotos")
-        case .unsynced:
+        case .galleryAll:
+            return Image.popupNoMemories.image
+        case .gallerySync:
+            return Image.popupUnsync.image
+        case .galleryUnsync:
+            return Image.popupSuccessful.image
+        case .galleryVideos:
+            return Image.popupNoVideo.image
+        case .galleryPhotos:
+            return Image.popupNoMemories.image
+        default:
             return nil
         }
     }
@@ -47,24 +67,20 @@ final class EmptyDataView: UIView, NibInit {
     
     @IBOutlet private weak var messageLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.textGrayColor
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 14)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.medium, size: 16)
         }
     }
     
     @IBOutlet private weak var iconImageView: UIImageView!
     
-    @IBOutlet private weak var actionButton: UIButton!
+    @IBOutlet private weak var actionButton: DarkBlueButton!
     
-    func configure(title: String, image: UIImage?, actionTitle: String? = nil) {
-        messageLabel.text = title
-        iconImageView.image = image
-        actionButton.setTitle(actionTitle, for: .normal)
-        actionButton.isHidden = actionTitle == nil
-    }
-    
-    func configure(viewType: GalleryViewType) {
-        configure(title: viewType.emptyViewMessage, image: viewType.emptyViewImage, actionTitle: viewType.emptyViewActionTitle)
+    func configure(viewType: ElementTypes) {
+        messageLabel.text = viewType.emptyViewMessage
+        iconImageView.image = viewType.emptyViewImage
+        actionButton.setTitle(viewType.emptyViewActionTitle ?? "", for: .normal)
+        actionButton.isHidden = viewType.emptyViewActionTitle == nil
     }
     
     @IBAction private func onActionButton(_ sender: UIButton) {

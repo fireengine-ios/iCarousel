@@ -47,6 +47,8 @@ class VisualMusicPlayerViewController: ViewController, VisualMusicPlayerViewInpu
     }
     
     var status: ItemStatus = .active
+
+    override var preferredNavigationBarStyle: NavigationBarStyle { .black }
     
     // MARK: - Lifecycle
     
@@ -60,7 +62,10 @@ class VisualMusicPlayerViewController: ViewController, VisualMusicPlayerViewInpu
         currentDuration = player.duration
         musicName.text = player.currentMusicName
         artistName.text = player.currentArtist
-        
+
+        statusBarStyle = .lightContent
+        playbackSlider.minimumTrackTintColor = .white
+        playbackSlider.setThumbImage(Image.iconPlayThumb.image, for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,13 +74,8 @@ class VisualMusicPlayerViewController: ViewController, VisualMusicPlayerViewInpu
         editingTabBar?.view.layoutIfNeeded()
         
         output.viewIsReady(view: bottomView, alert: alert)
-        hidenNavigationBarStyle()
     }
-    
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
-    
+        
     private func setupCarousel() {
         carouselView.type = .custom
         carouselView.delegate = self
@@ -103,6 +103,7 @@ class VisualMusicPlayerViewController: ViewController, VisualMusicPlayerViewInpu
     @IBAction func actionPlayButton(_ sender: UIButton) {
         player.togglePlayPause()
     }
+    
     @IBAction func actionNextButton(_ sender: UIButton) {
         let nextIndex = player.playNext()
         if nextIndex >= 0 {
@@ -124,10 +125,12 @@ class VisualMusicPlayerViewController: ViewController, VisualMusicPlayerViewInpu
     @IBAction func playbackSliderDidEndChanging(_ sender: UISlider) {
         player.seek(to: sender.value)
     }
+    
     @IBAction func playbackSliderDidChanged(_ sender: UISlider) {
         passedTimeLabel.text = sender.value.minutesSecondsString
         leftTimeLabel.text = (sender.value - currentDuration).minutesSecondsString
     }
+    
     @IBAction func cancelAction(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -189,7 +192,7 @@ extension VisualMusicPlayerViewController: iCarouselDataSource, iCarouselDelegat
         
         let itemView = UIImageView(frame: CGRect(x: 0, y: 0, width: carouselItemFrameWidth, height: carouselItemFrameWidth))
         itemView.contentMode = .scaleAspectFit
-        let image = UIImage(named: "headphone1")
+        let image = Image.iconMusicPlayerNoImage.image
         
         if let url = player.list[index].metaData?.mediumUrl {
             itemView.sd_setImage(with: url, placeholderImage: image)

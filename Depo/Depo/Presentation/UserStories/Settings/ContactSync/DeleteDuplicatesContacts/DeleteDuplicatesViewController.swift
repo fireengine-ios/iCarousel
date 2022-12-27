@@ -37,7 +37,6 @@ final class DeleteDuplicatesViewController: BaseViewController {
         
         trackScreen()
         
-        backButtonForNavigationItem(title: TextConstants.backTitle)
         setTitle(withString: TextConstants.deleteDuplicatesTitle)
         
         showRelatedView()
@@ -45,7 +44,6 @@ final class DeleteDuplicatesViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
         contactSyncHelper.delegate = self
     }
     

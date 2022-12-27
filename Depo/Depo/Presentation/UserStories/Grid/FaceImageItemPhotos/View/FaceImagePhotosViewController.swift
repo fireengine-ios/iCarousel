@@ -16,18 +16,13 @@ final class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController 
     
     @IBOutlet private(set) weak var contentView: UIView!
     
-    private let albumsSliderHeight: CGFloat = 140
-    private let headerImageHeight: CGFloat = 190
-    
+    private let albumsSliderHeight: CGFloat = 200
     private var albumsSlider: LBAlbumLikePreviewSliderViewController?
     private var headerView = UIView()
-    private var headerImage = LoadingImageView()
     private var gradientHeaderLayer: CALayer?
-    private var countPhotosLabel = UILabel()
     private var albumsHeightConstraint: NSLayoutConstraint?
-    private var headerImageHeightConstraint: NSLayoutConstraint?
-    private var hideButton: UIButton!
-    
+    private var tapGesture: UITapGestureRecognizer?
+
     var delegate: FaceImagePhotosViewControllerDelegate?
     
     // MARK: - UIViewController lifecycle
@@ -35,18 +30,22 @@ final class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         updateHeaderPosition()
-        gradientHeaderLayer?.frame = headerImage.bounds
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         configureTitleNavigationBar()
+        navigationItem.rightBarButtonItem = nil
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+        super.viewWillDisappear(animated)
         delegate?.viewWillDisappear()
+        
+        if let tapGesture = tapGesture {
+            navigationController?.navigationBar.removeGestureRecognizer(tapGesture)
+        }
     }
     
     // MARK: - BaseFilesGreedViewController
@@ -61,12 +60,18 @@ final class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController 
         configureFaceImageItemsPhotoActions()
         
         configureNavBarWithTouch()
+        navigationItem.rightBarButtonItem = nil
     }
     
     override func changeSortingRepresentation(sortType type: SortedRules) {
         super.changeSortingRepresentation(sortType: type)
 
         configureNavBarWithTouch()
+    }
+    
+    override func startSelection(with numberOfItems: Int) {
+        super.startSelection(with: numberOfItems)
+        navigationItem.rightBarButtonItem = nil
     }
     
     @objc func addNameAction() {
@@ -98,34 +103,15 @@ final class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController 
         headerView.bottomAnchor.constraint(equalTo: collectionView.topAnchor).isActive = true
         headerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         headerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
-        createHeaderImage()
-        headerView.addSubview(headerImage)
-        headerImage.translatesAutoresizingMaskIntoConstraints = false
-        headerImage.topAnchor.constraint(equalTo: headerView.topAnchor).isActive = true
-        headerImage.leftAnchor.constraint(equalTo: headerView.leftAnchor).isActive = true
-        headerImage.rightAnchor.constraint(equalTo: headerView.rightAnchor).isActive = true
-        headerImageHeightConstraint = headerImage.heightAnchor.constraint(equalToConstant: headerImageHeight)
-        headerImageHeightConstraint?.isActive = true
-
         headerView.setNeedsLayout()
         headerView.layoutIfNeeded()
-        gradientHeaderLayer = headerImage.addGradientLayer(colors: [.clear, ColorConstants.textGrayColor])
-        
-        countPhotosLabel.backgroundColor = UIColor.clear
-        countPhotosLabel.textColor = UIColor.white
-        countPhotosLabel.font = UIFont.TurkcellSaturaDemFont(size: 17.0)
-        countPhotosLabel.translatesAutoresizingMaskIntoConstraints = false
-        headerView.addSubview(countPhotosLabel)
-        countPhotosLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
-        countPhotosLabel.bottomAnchor.constraint(equalTo: headerImage.bottomAnchor, constant: -16).isActive = true
         
         if status == .active, let peopleItem = item as? PeopleItem {
             createAlbumsSliderWith(peopleItem: peopleItem)
             if let albumsView = albumsSlider?.view {
                 albumsView.translatesAutoresizingMaskIntoConstraints = false
                 headerView.addSubview(albumsView)
-                headerImage.bottomAnchor.constraint(equalTo: albumsView.topAnchor).isActive = true
+                albumsView.topAnchor.constraint(equalTo: headerView.topAnchor).isActive = true
                 albumsView.leftAnchor.constraint(equalTo: headerView.leftAnchor).isActive = true
                 albumsView.rightAnchor.constraint(equalTo: headerView.rightAnchor).isActive = true
                 albumsView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
@@ -133,26 +119,6 @@ final class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController 
                 albumsHeightConstraint = albumsView.heightAnchor.constraint(equalToConstant: 0)
                 albumsHeightConstraint?.isActive = true
             }
-        } else {
-            headerImage.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
-        }
-        
-        if status == .active {
-            let frame = CGRect(origin: .zero, size: CGSize(width: 35, height: 35))
-            hideButton = UIButton(frame: frame)
-            hideButton.layer.shadowColor = UIColor.black.cgColor
-            hideButton.layer.shadowOpacity = 0.5
-            hideButton.layer.shadowOffset = .zero
-            hideButton.layer.shadowRadius = 5
-            hideButton.layer.shadowPath = UIBezierPath(rect: frame).cgPath
-            hideButton.setImage(UIImage(named: "hiddenAlbum"), for: .normal)
-            headerView.addSubview(hideButton)
-            hideButton.translatesAutoresizingMaskIntoConstraints = false
-            headerImage.bottomAnchor.constraint(equalTo: hideButton.bottomAnchor, constant: 25).isActive = true
-            headerView.rightAnchor.constraint(equalTo: hideButton.rightAnchor, constant: 14).isActive = true
-            hideButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
-            hideButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
-            hideButton.addTarget(self, action: #selector(hideAlbum), for: .touchUpInside)
         }
     }
     
@@ -169,29 +135,23 @@ final class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController 
         }
     }
     
-    private func createHeaderImage() {
-        headerImage = LoadingImageView()
-        headerImage.translatesAutoresizingMaskIntoConstraints = false
-        headerImage.contentMode = .scaleAspectFill
-        headerImage.clipsToBounds = true
-    }
-    
     private func updateHeaderPosition() {
-        if let albumHeight = albumsHeightConstraint?.constant,
-            let headerImageHeight = headerImageHeightConstraint?.constant {
-            collectionView.contentInset.top = albumHeight + headerImageHeight
+        if let albumHeight = albumsHeightConstraint?.constant {
+            collectionView.contentInset.top = albumHeight
             
             // correct display header image when loading smart albums after photos
-            if collectionView.contentOffset.y == -headerImageHeight {
+            if collectionView.contentOffset.y == 0 {
                 collectionView.setContentOffset(CGPoint(x: 0, y: -collectionView.contentInset.top), animated: false)
             }
         } else {
-            collectionView.contentInset.top = headerImageHeight
+            collectionView.contentInset.top = 0
         }
     }
     
     private func configureNavBarWithTouch() {
-        setTitle(withString: mainTitle, andSubTitle: output.getCurrentSortRule().descriptionForTitle)
+        DispatchQueue.main.async {
+            self.setTitle(withString: self.mainTitle, andSubTitle: "")
+        }
         
         if let output = output as? FaceImagePhotosViewOutput,
             let type = output.faceImageType(), type == .people {
@@ -200,8 +160,10 @@ final class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController 
     }
     
     private func addNavBarTouch() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.addNameAction))
-        navigationItem.titleView?.addGestureRecognizer(tap)
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.addNameAction))
+        if let tapGesture = tapGesture {
+            self.navigationController?.navigationBar.addGestureRecognizer(tapGesture)
+        }
     }
     
 }
@@ -216,9 +178,7 @@ extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
         configureNavBarWithTouch()
     }
     
-    func setHeaderImage(with path: PathForItem) {
-        headerImage.loadImage(with: path)
-    }
+    func setHeaderImage(with path: PathForItem) {}
     
     func setupHeader(with item: Item, status: ItemStatus?) {
         setupHeaderView(with: item, status: status)
@@ -235,7 +195,9 @@ extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
     }
         
     func setCountImage(_ count: String) {
-        countPhotosLabel.text = count
+        if let output = output as? FaceImagePhotosViewOutput {
+            output.setCountLabel(with: count)
+        }
     }
     
     func reloadSlider() {

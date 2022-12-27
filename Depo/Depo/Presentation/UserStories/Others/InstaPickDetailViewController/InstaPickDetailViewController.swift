@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol {
+final class InstaPickDetailViewController: BaseViewController {
     
     private enum PhotoViewType: String {
         case bigView = "bigView"
@@ -38,15 +38,34 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
     @IBOutlet private weak var analysisLeftLabel: UILabel!
     @IBOutlet private weak var hashTagsLabel: UILabel!
     @IBOutlet private weak var copyToClipboardButton: UIButton!
-    @IBOutlet private weak var shareButton: BlueButtonWithMediumWhiteText!
+    @IBOutlet private weak var shareButton: DarkBlueButton!
     
-    @IBOutlet private weak var darkView: UIView!
-    @IBOutlet private weak var containerView: UIView!
+    @IBOutlet weak var hashtagShadowView: UIView! {
+        willSet {
+            newValue.layer.cornerRadius = 16
+            newValue.layer.shadowOffset = .zero
+            newValue.layer.shadowOpacity = 0.2
+            newValue.layer.shadowRadius = 16
+            newValue.layer.shadowColor = UIColor.black.withAlphaComponent(0.2).cgColor
+            newValue.clipsToBounds = true
+        }
+    }
+    @IBOutlet private weak var containerView: UIView! {
+        willSet {
+            newValue.layer.cornerRadius = 16
+            newValue.clipsToBounds = true
+            newValue.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        }
+    }
+    
     @IBOutlet private weak var smallPhotosStackView: UIStackView!
-    @IBOutlet private weak var smallPhotosContainerView: UIView!
-    @IBOutlet private weak var photosStackView: UIStackView!
     
-    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var collectionView: UICollectionView! {
+        willSet {
+            newValue.layer.cornerRadius = 16
+            newValue.clipsToBounds = true
+        }
+    }
     
     @IBOutlet var instaPickPhotoViews: [InstaPickPhotoView]!
 
@@ -54,8 +73,7 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
     private var dataSource = InstaPickHashtagCollectionViewDataSource()
     private var isShown = false
     private var selectedPhoto: InstapickAnalyze?
-    private var isShowTabBar = true
-    
+
     private var analyzes: [InstapickAnalyze] = []
     private var analyzesCount: InstapickAnalyzesCount?
     
@@ -74,18 +92,12 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
         super.viewWillAppear(animated)
         open()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        showTabBarIfNeeded()
-    }
-    
+
     //MARK: - Utility Methods(public)
     func configure(with models: [InstapickAnalyze], analyzesCount: InstapickAnalyzesCount, isShowTabBar: Bool) {
         analyzes = models
         self.analyzesCount = analyzesCount
-        self.isShowTabBar = isShowTabBar
+        needToShowTabBar = isShowTabBar
     }
     
     //MARK: - Utility Methods(private)
@@ -99,24 +111,18 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
     
     private func open() {
         if isShown {
-            self.statusBarColor = .clear
             return
         }
         isShown = true
-        containerView.transform = NumericConstants.scaleTransform
         view.alpha = 0
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.view.alpha = 1
-            self.darkView.alpha = 1
-            self.containerView.transform = .identity
         }
     }
     
     private func close() {
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.view.alpha = 0
-            self.darkView.alpha = 0
-            self.containerView.transform = NumericConstants.scaleTransform
         }) { _ in
             self.dismiss(animated: false, completion: nil)
         }
@@ -124,9 +130,7 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
     
     private func setup() {
         activityManager.delegate = self
-        containerView.layer.cornerRadius = NumericConstants.instaPickDetailsPopUpCornerRadius
-        collectionView.layer.cornerRadius = NumericConstants.instaPickHashtagCellShadowRadius
-        
+
         prepareToAppear()
         setupPhotoViews()
         setupCollectionView()
@@ -152,10 +156,6 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
                 view.isHidden = true
             }
         }
-        
-        if maxIndex == 0 {
-            smallPhotosContainerView.isHidden = true
-        }
     }
     
     private func setupCollectionView() {
@@ -169,20 +169,17 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
     private func setupFonts() {
         let isIPad = Device.isIpad
         
-        topLabel.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 38 : 28)
-        topLabel.textColor = AppColor.marineTwoAndWhite.color
+        topLabel.font = .appFont(.medium, size: isIPad ? 30 : 20)
+        topLabel.textColor = AppColor.label.color
         
-        analysisLeftLabel.font = UIFont.TurkcellSaturaDemFont(size: isIPad ? 24 : 18)
-        analysisLeftLabel.textColor = ColorConstants.textGrayColor
+        analysisLeftLabel.font = .appFont(.medium, size: isIPad ? 26 : 16)
+        analysisLeftLabel.textColor = AppColor.label.color
         
-        hashTagsLabel.font = UIFont.TurkcellSaturaDemFont(size: isIPad ? 24 : 18)
+        hashTagsLabel.font = .appFont(.medium, size: isIPad ? 26 : 16)
         hashTagsLabel.textColor = AppColor.marineTwoAndWhite.color
         
-        copyToClipboardButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 19 : 14)
-        copyToClipboardButton.setTitleColor(UIColor.lrTealishTwo, for: .normal)
-        
-        shareButton.setBackgroundColor(AppColor.secondaryBackground.color ?? .white, for: .disabled)
-        shareButton.setTitleColor(ColorConstants.darkBlueColor.lighter(by: 40.0), for: .disabled)
+        copyToClipboardButton.titleLabel?.font = .appFont(.medium, size: isIPad ? 26 : 16)
+        copyToClipboardButton.setTitleColor(AppColor.tint.color, for: .normal)
     }
 
     private func setupTexts() {
@@ -221,7 +218,7 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
         ///if left count is 0 we seek ":"(not 0 because of RTL language) and draw in red
         if analyzesCount.left == 0, let location = text.firstIndex(of: ":"), !analyzesCount.isFree {
             let attributedString = NSMutableAttributedString(string: text, attributes: [
-                .font : UIFont.TurkcellSaturaDemFont(size: Device.isIpad ? 24 : 18),
+                .font : UIFont.appFont(.medium, size: Device.isIpad ? 26 : 16),
                 .foregroundColor : ColorConstants.textGrayColor,
                 .kern : 0.29
                 ])
@@ -298,10 +295,6 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
         UIApplication.showErrorAlert(message: message)
     }
     
-    private func showTabBarIfNeeded() {
-        isShowTabBar ? showTabBar() : hideTabBar()
-    }
-    
     //MARK: - Actions
     @IBAction private func onCopyToClipboardTap(_ sender: Any) {
         let clipboardString = dataSource.hashtags.joined()
@@ -319,7 +312,7 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
         
         let shareButtonRect = self.shareButton.convert(self.shareButton.bounds, to: self.view)
 
-        let rect = CGRect(x: shareButtonRect.midX, y: shareButtonRect.minY - 10, width: 10, height: 50)
+        let rect = CGRect(x: shareButtonRect.midX, y: shareButtonRect.minY - 10, width: 10, height: 0)
         
         startActivityIndicator()
         let downloader = FilesDownloader()

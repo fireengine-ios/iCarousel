@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol SegmentedChildController: AnyObject {
     func setTitle(_ title: String)
@@ -55,8 +56,7 @@ class SegmentedController: BaseViewController, NibInit {
     }
     
     @IBOutlet private weak var containerView: UIView!
-    
-    @IBOutlet private weak var segmentedControlContainer: UIView!
+    @IBOutlet weak var segmentedControlContainer: UIView!
     @IBOutlet private weak var segmentedControl: UISegmentedControl! {
         willSet {
             newValue.tintColor = ColorConstants.darkBlueColor
@@ -72,8 +72,8 @@ class SegmentedController: BaseViewController, NibInit {
         return viewControllers[safe: segmentedControl.selectedSegmentIndex] ?? UIViewController()
     }
     
-    private(set) var selectedIndex = 0
-    var startIndex = 0
+    var selectedIndex = AllFilesType.allCases.firstIndex(of: .allFiles)!
+    var startIndex = AllFilesType.allCases.firstIndex(of: .allFiles)!
     
     //    weak var delegate: SegmentedControllerDelegate?
     
@@ -137,13 +137,6 @@ class SegmentedController: BaseViewController, NibInit {
         }
     }
     
-    func switchSegment(to index: Int) {
-        if segmentedControl.numberOfSegments > index, segmentedControl.selectedSegmentIndex != index {
-            segmentedControl.selectedSegmentIndex = index
-            segmentDidChange(segmentedControl)
-        }
-    }
-    
     @IBAction private func segmentDidChange(_ sender: UISegmentedControl) {
         let newIndex = sender.selectedSegmentIndex
         guard newIndex < viewControllers.count else {
@@ -162,11 +155,19 @@ class SegmentedController: BaseViewController, NibInit {
         setupSelectedController(viewControllers[selectedIndex])
     }
     
+    func switchSegment(to index: Int) {
+        if segmentedControl.numberOfSegments > index, segmentedControl.selectedSegmentIndex != index {
+            segmentedControl.selectedSegmentIndex = index
+            segmentDidChange(segmentedControl)
+        }
+    }
+    
     func canSwitchSegment(from oldIndex: Int, to newIndex: Int) -> Bool {
         return true
     }
     
-    private func setupSelectedController(_ controller: BaseViewController) {
+    func setupSelectedController(_ controller: BaseViewController) {
+        controller.navigationBarHidden = self.navigationBarHidden
         add(childController: controller)
         floatingButtonsArray = controller.floatingButtonsArray
     }
@@ -199,4 +200,3 @@ extension UIViewController {
         removeFromParent()
     }
 }
-

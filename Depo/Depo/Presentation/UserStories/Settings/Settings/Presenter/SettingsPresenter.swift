@@ -58,7 +58,6 @@ extension SettingsPresenter: SettingsViewOutput {
 
     func viewIsReady() {
         interactor.trackScreen()
-        interactor.populateDataForCells()
     }
     
     func viewWillBecomeActive() {
@@ -70,19 +69,20 @@ extension SettingsPresenter: SettingsViewOutput {
     }
     
     func onLogout() {
-        let controller = PopUpController.with(title: TextConstants.settingsViewLogoutCheckMessage,
-                                              message: nil,
-                                              image: .none,
+        let controller = PopUpController.with(title: TextConstants.settingsViewCellLogout,
+                                              message: TextConstants.settingsViewLogoutCheckMessage,
+                                              image: .logout,
                                               firstButtonTitle: TextConstants.cancel,
                                               secondButtonTitle: TextConstants.ok,
                                               secondAction: { [weak self] vc in
-                                                vc.close { [weak self] in
-                                                    self?.startAsyncOperation()
-                                                    self?.interactor.checkConnectedToNetwork()
-                                                }
+            vc.close { [weak self] in
+                self?.startAsyncOperation()
+                self?.interactor.checkConnectedToNetwork()
+            }
         })
         
-        UIApplication.topController()?.present(controller, animated: false, completion: nil)
+        controller.open()
+
     }
     
     func goToConnectedAccounts() {
@@ -154,7 +154,9 @@ extension SettingsPresenter: SettingsViewOutput {
     }
     
     func goTurkcellSecurity() {
-        isMailVereficationRequired ? router.showMailUpdatePopUp(delegate: self) : router.goTurkcellSecurity(isTurkcell: isTurkCellUser)
+        if isMailVereficationRequired {
+            router.showMailUpdatePopUp(delegate: self)
+        }
     }
     
     func goToMyProfile(userInfo: AccountInfoResponse) {
@@ -173,13 +175,20 @@ extension SettingsPresenter: SettingsViewOutput {
         router.goToDarkMode()
     }
     
+    func goToChatbot() {
+        router.goToChatbot()
+    }
+    
+    func goToPackages() {
+        router.goToPackages()
+    }
 }
 
 // MARK: - SettingsInteractorOutput
 extension SettingsPresenter: SettingsInteractorOutput {
     
-    func cellsDataForSettings(isPermissionShown: Bool, isInvitationShown: Bool, isChatbotShown: Bool, isPaycellShown: Bool) {
-        view.prepareCellsData(isPermissionShown: isPermissionShown, isInvitationShown: isInvitationShown, isChatbotShown: isChatbotShown, isPaycellShown: isPaycellShown)
+    func cellsDataForSettings(isChatbotShown: Bool) {
+        view.prepareCellsData(isChatbotShown: isChatbotShown)
     }
     
     func goToOnboarding() {
@@ -220,11 +229,6 @@ extension SettingsPresenter: SettingsInteractorOutput {
         asyncOperationSuccess()
         router.showError(errorMessage: errorMessage)
     }
-
-    func goToChatbot() {
-        router.goToChatbot()
-    }
-    
 }
 
 // MARK: - SettingsModuleInput

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad12_9" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -26,16 +26,16 @@
             <rect key="frame" x="0.0" y="0.0" width="374" height="36"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backupPremiumIcon" translatesAutoresizingMaskIntoConstraints="NO" id="85o-3m-St8">
-                    <rect key="frame" x="113" y="0.0" width="36" height="36"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unedited_dot" translatesAutoresizingMaskIntoConstraints="NO" id="85o-3m-St8">
+                    <rect key="frame" x="123" y="20" width="16" height="16"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="35" id="5du-W3-reG"/>
+                        <constraint firstAttribute="width" constant="6" id="5du-W3-reG" userLabel="width = 6"/>
                         <constraint firstAttribute="width" secondItem="85o-3m-St8" secondAttribute="height" multiplier="1:1" id="6ws-Vw-rMv"/>
-                        <constraint firstAttribute="height" constant="35" id="eFR-tV-JqY"/>
+                        <constraint firstAttribute="height" constant="6" id="eFR-tV-JqY" userLabel="height = 6"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remove Duplicate Contacts from Your Phone Directory" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K1o-5r-GMn">
-                    <rect key="frame" x="165" y="0.0" width="179" height="36"/>
+                    <rect key="frame" x="155" y="20" width="189" height="16"/>
                     <fontDescription key="fontDescription" name="TurkcellSaturaMed" family="TurkcellSaturaMed" pointSize="15"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -69,7 +69,7 @@
         </view>
     </objects>
     <resources>
-        <image name="backupPremiumIcon" width="35" height="35"/>
+        <image name="unedited_dot" width="7" height="7"/>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

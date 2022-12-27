@@ -17,6 +17,7 @@ protocol BaseFilesGreedRouterInput {
     func showBack()
     
     func showSearchScreen(output: UIViewController?)
+    func openCreateNewStory(output: UIViewController?)
 
     func showUpload()
     
@@ -25,6 +26,10 @@ protocol BaseFilesGreedRouterInput {
     func openSharedFilesController()
     
     func back(to vc: UIViewController?)
+    
+    func openCreateNewAlbum()
+    
+    func openUpload()
 }
 
 extension BaseFilesGreedRouterInput {

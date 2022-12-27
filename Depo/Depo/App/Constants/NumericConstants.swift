@@ -129,7 +129,7 @@ struct NumericConstants {
     static let packageSumInset: CGFloat = 15
     static let heightForPackageCell: CGFloat = 255
     
-    static let premiumViewHeight: CGFloat = 508
+    static let premiumViewHeight: CGFloat = 200
     static let plusPremiumViewHeightForTurkcell: CGFloat = 30
     
     static let instaPickSelectionSegmentedTransparentGradientViewHeight: CGFloat = 130
@@ -162,7 +162,7 @@ struct NumericConstants {
     static let maxStringLengthForUserProfile = 255
     
     static let profileStackViewHiddenSubtitleSpacing: CGFloat = 8
-    static let profileStackViewShowSubtitleSpacing: CGFloat = 2
+    static let profileStackViewShowSubtitleSpacing: CGFloat = 4
     static let firstResponderBottomOffset: CGFloat = 50
     
     static let createStoryImagesCountLimit: Int = 20

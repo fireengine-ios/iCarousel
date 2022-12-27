@@ -92,8 +92,6 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
     
     private func checkIsNeedShowCardFor(operationType: OperationType) -> Bool {
         switch operationType {
-        case .prepareToAutoSync:
-            return viewsByType[.sync] == nil
         case .premium:
             return !cards.contains(where: { $0 is PremiumInfoCard })
         default:
@@ -305,11 +303,11 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
 //MARK: CardsManagerViewProtocol
 extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
     
-    func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?) {
-        startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
+    func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?, itemCount: Int?) {
+        startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations, itemCount: itemCount)
     }
     
-    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?) {
+    func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?, itemCount: Int?) {
         if !checkIsThisIsPermittedType(type: type), type != .premium {
             return
         }
@@ -429,7 +427,7 @@ extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
 //        }
     }
     
-    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int) {
+    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int, itemCount: Int?) {
         guard isViewActive else {
             return
         }
@@ -441,7 +439,7 @@ extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
             }
             
         } else {
-            startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
+            startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations, itemCount: itemCount)
         }
     }
     

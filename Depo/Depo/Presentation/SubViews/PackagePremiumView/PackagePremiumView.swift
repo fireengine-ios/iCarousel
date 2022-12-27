@@ -35,7 +35,7 @@ final class PackagePremiumView: UIView, NibInit {
         becomePremiumButton.titleEdgeInsets = UIEdgeInsets(top: 6, left: 17, bottom: 6, right: 17)
         becomePremiumButton.setTitle(TextConstants.becomePremiumMember, for: .normal)
 
-        crownImage.image = UIImage(named: "crownSmall")
+        crownImage.image = Image.iconPremium.image
     }
 
     private func configurate() {

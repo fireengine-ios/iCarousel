@@ -12,4 +12,8 @@ protocol AutoSyncViewOutput {
     func save(settings: AutoSyncSettings, albums: [AutoSyncAlbum])
     func checkPermissions()
     func didChangeSettingsOption(settings: AutoSyncSetting)
+    
+    // Contact
+    func saveSettings()
+    func onValueChangeContact()
 }

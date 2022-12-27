@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,33 +34,40 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             <subviews>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="332" placeholderIntrinsicHeight="403.5" translatesAutoresizingMaskIntoConstraints="NO" id="G3J-Ji-kDu">
-                                    <rect key="frame" x="41.5" y="210.5" width="331" height="475.5"/>
+                                    <rect key="frame" x="20.5" y="450.5" width="373" height="445.5"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="99W-56-jEX">
-                                            <rect key="frame" x="24" y="30" width="283" height="20.5"/>
+                                            <rect key="frame" x="24" y="40" width="325" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HlE-OV-oeP">
-                                            <rect key="frame" x="24" y="70.5" width="283" height="257"/>
+                                            <rect key="frame" x="24" y="80.5" width="325" height="257"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bl6-ud-jW1" customClass="ProfileTextEnterView" customModule="Billo" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="283" height="129"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="325" height="129"/>
                                                 </view>
                                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="283" placeholderIntrinsicHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="XKf-uJ-ouw" customClass="ProfileTextEnterView" customModule="Billo" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="137" width="283" height="40"/>
+                                                    <rect key="frame" x="0.0" y="137" width="325" height="40"/>
                                                 </view>
                                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="72" translatesAutoresizingMaskIntoConstraints="NO" id="ZM5-SP-A8p" customClass="CaptchaView" customModule="Billo" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="185" width="283" height="72"/>
+                                                    <rect key="frame" x="0.0" y="185" width="325" height="72"/>
                                                 </view>
                                             </subviews>
                                         </stackView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="r9A-zr-b2X">
-                                            <rect key="frame" x="24" y="343.5" width="283" height="116"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="r9A-zr-b2X">
+                                            <rect key="frame" x="24" y="353.5" width="325" height="50"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E6b-in-2H1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="283" height="50"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVL-98-gtl" customClass="DarkBlueButton" customModule="Billo" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="154.5" height="50"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <action selector="confirmButtonTapped" destination="-1" eventType="touchUpInside" id="uRW-HY-gP8"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E6b-in-2H1" customClass="WhiteButton" customModule="Billo" customModuleProvider="target">
+                                                    <rect key="frame" x="170.5" y="0.0" width="154.5" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="Xhl-HM-yRB"/>
                                                     </constraints>
@@ -69,24 +76,17 @@
                                                         <action selector="cancelButtonTapped" destination="-1" eventType="touchUpInside" id="j3e-NA-A8V"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVL-98-gtl">
-                                                    <rect key="frame" x="0.0" y="66" width="283" height="50"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <connections>
-                                                        <action selector="confirmButtonTapped" destination="-1" eventType="touchUpInside" id="uRW-HY-gP8"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                         </stackView>
                                     </subviews>
                                     <color key="backgroundColor" name="secondaryBackground"/>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="r9A-zr-b2X" secondAttribute="bottom" constant="16" id="0Dv-Wm-nWZ"/>
+                                        <constraint firstAttribute="bottom" secondItem="r9A-zr-b2X" secondAttribute="bottom" constant="42" id="0Dv-Wm-nWZ"/>
                                         <constraint firstAttribute="trailing" secondItem="99W-56-jEX" secondAttribute="trailing" constant="24" id="BmF-Sz-hPH"/>
                                         <constraint firstItem="r9A-zr-b2X" firstAttribute="centerX" secondItem="G3J-Ji-kDu" secondAttribute="centerX" id="HZi-XH-aSi"/>
                                         <constraint firstItem="r9A-zr-b2X" firstAttribute="top" secondItem="HlE-OV-oeP" secondAttribute="bottom" constant="16" id="PhT-J1-aem"/>
                                         <constraint firstItem="HlE-OV-oeP" firstAttribute="top" secondItem="99W-56-jEX" secondAttribute="bottom" constant="20" id="Re0-YR-uQX"/>
-                                        <constraint firstItem="99W-56-jEX" firstAttribute="top" secondItem="G3J-Ji-kDu" secondAttribute="top" constant="30" id="VTH-ss-UwM"/>
+                                        <constraint firstItem="99W-56-jEX" firstAttribute="top" secondItem="G3J-Ji-kDu" secondAttribute="top" constant="40" id="VTH-ss-UwM"/>
                                         <constraint firstItem="HlE-OV-oeP" firstAttribute="leading" secondItem="G3J-Ji-kDu" secondAttribute="leading" constant="24" id="WZf-2y-1mT"/>
                                         <constraint firstItem="HlE-OV-oeP" firstAttribute="centerX" secondItem="G3J-Ji-kDu" secondAttribute="centerX" id="Y0D-ts-0jv"/>
                                         <constraint firstItem="99W-56-jEX" firstAttribute="leading" secondItem="G3J-Ji-kDu" secondAttribute="leading" constant="24" id="b6i-5b-rFW"/>
@@ -96,11 +96,10 @@
                                 </view>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="G3J-Ji-kDu" firstAttribute="centerY" secondItem="SKi-Ro-6jk" secondAttribute="centerY" priority="999" id="Nhd-fB-mOa"/>
-                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="G3J-Ji-kDu" secondAttribute="bottom" constant="16" id="fpY-Zf-kDM"/>
+                                <constraint firstAttribute="bottom" secondItem="G3J-Ji-kDu" secondAttribute="bottom" id="fpY-Zf-kDM"/>
                                 <constraint firstItem="G3J-Ji-kDu" firstAttribute="centerX" secondItem="SKi-Ro-6jk" secondAttribute="centerX" priority="999" id="h8W-Ko-BeD"/>
                                 <constraint firstItem="G3J-Ji-kDu" firstAttribute="top" relation="greaterThanOrEqual" secondItem="SKi-Ro-6jk" secondAttribute="top" constant="16" id="rDB-Vy-zrM"/>
-                                <constraint firstItem="G3J-Ji-kDu" firstAttribute="width" secondItem="SKi-Ro-6jk" secondAttribute="width" multiplier="0.8" id="ygu-Uq-x1T"/>
+                                <constraint firstItem="G3J-Ji-kDu" firstAttribute="width" secondItem="SKi-Ro-6jk" secondAttribute="width" multiplier="0.9" id="ygu-Uq-x1T"/>
                             </constraints>
                         </view>
                     </subviews>

@@ -22,6 +22,12 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
     @IBOutlet private var optionSeparators: [UIView]!
     @IBOutlet private weak var separatorView: UIView!
     
+    @IBOutlet weak var switchContainer: UIView! {
+        willSet {
+            newValue.backgroundColor = AppColor.secondaryBackground.color
+        }
+    }
+    
     private let options: [PeriodicContactsSyncOption] = [.daily, .weekly, .monthly]
     
     private var model: PeriodContactsSyncModel?
@@ -43,8 +49,8 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
         super.awakeFromNib()
         backgroundColor = .clear
         
-        titleLabel.textColor = ColorConstants.textGrayColor
-        titleLabel.font = .TurkcellSaturaDemFont(size: 18)
+        titleLabel.textColor = AppColor.label.color
+        titleLabel.font = .appFont(.regular, size: 14)
         
         ///iPad, iOS < 10, prevent white color
         ///https://stackoverflow.com/questions/27551291/uitableview-backgroundcolor-always-white-on-ipad
@@ -58,11 +64,6 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
         
         titleLabel.text = model.titleString
         switcher.isSelected = model.isSelected
-        
-        for view in optionsViews {
-            view.setColors()
-        }
-        
         optionsStackView.isHidden = !model.isSelected
         separatorView.isHidden = !model.isSelected
         periodicContactSyncSetting = setting
@@ -72,7 +73,6 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
         for (option, view) in zip(options, optionsViews) {
             view.setup(with: option, isSelected: periodicContactSyncSetting.option == option)
             view.delegate = self
-            view.setColors()
         }
         
         optionsStackView.isHidden = !switcher.isOn
@@ -88,7 +88,6 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
         optionsStackView.isHidden = !switcher.isOn
         separatorView.isHidden = !switcher.isOn
     }
-    
 }
 
 // MARK: - AutoSyncSettingsOptionViewDelegate

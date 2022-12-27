@@ -32,7 +32,7 @@ final class PrivateShareRoleCheckmarkView: UIView, NibInit {
     @IBOutlet private weak var checkmarkImageView: UIImageView! {
         willSet {
             if let image = UIImage(named: "checkmark")?.withRenderingMode(.alwaysTemplate) {
-                newValue.image = image.mask(with: AppColor.marineFourAndWhite.color ?? ColorConstants.marineFour)
+                newValue.image = image.mask(with: AppColor.marineFourAndWhite.color)
             }
         }
     }

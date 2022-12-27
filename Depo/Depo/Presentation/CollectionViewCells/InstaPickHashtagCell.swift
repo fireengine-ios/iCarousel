@@ -15,23 +15,26 @@ protocol InstaPickHashtagCellDelegate: AnyObject {
 final class InstaPickHashtagCell: UICollectionViewCell {
 
     @IBOutlet private weak var shadowView: UIView!
-    @IBOutlet private weak var hashtagLabel: UILabel!
+    @IBOutlet private weak var hashtagLabel: UILabel! {
+        willSet {
+            newValue.font = .appFont(.light, size: 14)
+            newValue.textColor = AppColor.label.color
+            newValue.adjustsFontSizeToFitWidth = true
+        }
+    }
     
     private weak var delegate: InstaPickHashtagCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         setup()
     }
     
     private func setup() {
-        hashtagLabel.font = UIFont.TurkcellSaturaMedFont(size: 14)
-        hashtagLabel.textColor = ColorConstants.darkText
-        
         shadowView.layer.cornerRadius = NumericConstants.instaPickHashtagCellCornerRadius
+        shadowView.backgroundColor = AppColor.separator.color
         
-        shadowView.layer.borderColor = ColorConstants.darkBorder.withAlphaComponent(NumericConstants.instaPickHashtagCellBorderColorAlpha).cgColor
+        shadowView.layer.borderColor =  ColorConstants.darkBorder.withAlphaComponent(NumericConstants.instaPickHashtagCellBorderColorAlpha).cgColor
         shadowView.layer.borderWidth = NumericConstants.instaPickHashtagCellBorderWidth
         
         shadowView.layer.shadowColor = UIColor.black.withAlphaComponent(NumericConstants.instaPickHashtagCellShadowColorAlpha).cgColor
@@ -42,6 +45,7 @@ final class InstaPickHashtagCell: UICollectionViewCell {
     
     func configure(with hashtag: String, delegate: InstaPickHashtagCellDelegate) {
         hashtagLabel.text = hashtag
+        hashtagLabel.setContentCompressionResistancePriority(UILayoutPriority.required, for: .vertical)
         self.delegate = delegate
     }
 

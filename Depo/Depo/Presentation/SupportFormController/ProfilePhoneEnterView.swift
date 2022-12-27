@@ -5,9 +5,31 @@ import UIKit
 /// down arrow setup as codeTextField.rightView
 final class ProfilePhoneEnterView: UIView, FromNib {
     
+    private let underlineLayer = CALayer()
+    private let phoneBorderLayer = CALayer()
+    private let underlineWidth: CGFloat = 1.0
+
+    var underlineColor = AppColor.borderColor.color {
+        didSet {
+            underlineLayer.backgroundColor = underlineColor.cgColor
+        }
+    }
+    
+    @IBOutlet private weak var codeTextFieldBackView: UIView! {
+        willSet {
+            newValue.backgroundColor = .clear
+        }
+    }
+    
+    @IBOutlet private weak var phoneTextFieldBackView: UIView!  {
+        willSet {
+            newValue.backgroundColor = .clear
+        }
+    }
+    
     @IBOutlet public weak var stackView: UIStackView! {
         willSet {
-            newValue.spacing = 2
+            newValue.spacing = 0
             newValue.axis = .vertical
             newValue.alignment = .fill
             newValue.distribution = .fill
@@ -19,29 +41,38 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     @IBOutlet public weak var titleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.profilePhoneNumberTitle
-            newValue.textColor = UIColor.lrTealish
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 18)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.light, size: 14.0)
             newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
+        }
+    }
+    @IBOutlet weak var subtitleContent: UIView! {
+        willSet {
+            
+            newValue.isOpaque = true
+            newValue.isHidden = true
+            newValue.backgroundColor = .clear
+            newValue.layer.cornerRadius = 8
+            newValue.layer.borderWidth = 1
+            newValue.layer.borderColor = AppColor.profileInfoOrange.cgColor
         }
     }
     
     @IBOutlet public weak var subtitleLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.textOrange
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
-            newValue.backgroundColor = AppColor.primaryBackground.color
-            newValue.isOpaque = true
-            newValue.isHidden = true
+            newValue.textColor = AppColor.profileInfoOrange.color
+            newValue.font = .appFont(.regular, size: 14.0)
+            newValue.numberOfLines = 0
         }
     }
     
     @IBOutlet public weak var codeTextField: UnderlineTextField! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            newValue.textColor = textFieldColor
+            newValue.textColor = AppColor.borderColor.color
+            newValue.font = .appFont(.regular, size: 14.0)
             newValue.borderStyle = .none
-            newValue.backgroundColor = AppColor.primaryBackground.color
+            newValue.backgroundColor = .clear
             newValue.isOpaque = true
             
             /// removes suggestions bar above keyboard
@@ -53,13 +84,9 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             newValue.enablesReturnKeyAutomatically = true
             newValue.smartQuotesType = .no
             newValue.smartDashesType = .no
-
-            let image = UIImage(named: "ic_arrow_down")
-            let imageView = UIImageView(image: image)
-            newValue.rightView = imageView
-            newValue.rightViewMode = .always
             
-            newValue.underlineColor = AppColor.itemSeperator.color ?? ColorConstants.profileGrayColor
+            newValue.rightViewMode = .always
+            newValue.underlineColor = AppColor.primaryBackground.color
             
             /// true from IB by default
             newValue.adjustsFontSizeToFitWidth = false
@@ -68,10 +95,10 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             
             /// empty for simulator
             newValue.text = telephonyService.callingCountryCode()
-
-            #if targetEnvironment(simulator)
+            
+#if targetEnvironment(simulator)
             newValue.text = "+375"
-            #endif
+#endif
             
             let phoneCodeInputView = PhoneCodeInputView()
             phoneCodeInputView.setValuePickerView(with: telephonyService.callingCountryCode())
@@ -90,12 +117,15 @@ final class ProfilePhoneEnterView: UIView, FromNib {
         }
     }
     
+    
+    @IBOutlet public weak var arrowImageView: UIImageView!
+    
     @IBOutlet public weak var numberTextField: QuickDismissPlaceholderTextField! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            newValue.textColor = textFieldColor
+            newValue.textColor = AppColor.borderColor.color
+            newValue.font = .appFont(.regular, size: 14.0)
             newValue.borderStyle = .none
-            newValue.backgroundColor = AppColor.primaryBackground.color
+            newValue.backgroundColor = .clear
             newValue.isOpaque = true
             newValue.quickDismissPlaceholder = TextConstants.profilePhoneNumberPlaceholder
             
@@ -112,7 +142,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             /// true from IB by default
             newValue.adjustsFontSizeToFitWidth = false
             newValue.keyboardType = .numberPad
-            newValue.underlineColor = AppColor.itemSeperator.color ?? ColorConstants.profileGrayColor
+            newValue.underlineColor = AppColor.primaryBackground.color
             
             newValue.addToolBarWithButton(title: TextConstants.nextTitle,
                                           target: self,
@@ -137,7 +167,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             numberTextField.textColor = newValue ? textFieldColor : ColorConstants.textDisabled
         }
     }
-
+    
     var onCodeChanged: (() -> Void)?
     
     private let textFieldColor = AppColor.blackColor.color
@@ -148,17 +178,65 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
+        setupUnderline()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
+        setupUnderline()
+        
     }
     
     private func setup() {
         setupFromNib()
+        setupSubtitleLabelLayout()
     }
     
+    private func setupUnderline() {
+        codeTextFieldBackView.layer.insertSublayer(underlineLayer, at: 1)
+        phoneTextFieldBackView.layer.insertSublayer(phoneBorderLayer, at: 1)
+    }
+    
+    private func setupSubtitleLabelLayout() {
+        subtitleContent.topAnchor.constraint(equalTo: contentView.bottomAnchor,
+                                             constant: -10).isActive = true
+        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        subtitleLabel.leadingAnchor.constraint(equalTo: subtitleContent.leadingAnchor, constant: 10).isActive = true
+        subtitleLabel.trailingAnchor.constraint(equalTo: subtitleContent.trailingAnchor, constant: -10).isActive = true
+        subtitleLabel.bottomAnchor.constraint(equalTo: subtitleContent.bottomAnchor, constant: -10).isActive = true
+        subtitleLabel.topAnchor.constraint(equalTo: subtitleContent.topAnchor, constant: 20).isActive = true
+        stackView.sendSubviewToBack(subtitleContent)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        underlineLayer.frame = CGRect(x: 0,
+                                      y: 0,
+                                      width: codeTextFieldBackView.frame.width,
+                                      height: 56);
+        
+        phoneBorderLayer.frame = CGRect(x: 0,
+                                        y: 0,
+                                        width: phoneTextFieldBackView.frame.width,
+                                        height: 56);
+        
+        underlineLayer.borderWidth = 1.0
+        underlineLayer.borderColor = underlineColor.cgColor
+        underlineLayer.backgroundColor = UIColor.clear.cgColor
+        underlineLayer.cornerRadius = 8
+        
+        phoneBorderLayer.borderWidth = underlineLayer.borderWidth
+        phoneBorderLayer.borderColor = underlineLayer.borderColor
+        phoneBorderLayer.backgroundColor = underlineLayer.backgroundColor
+        phoneBorderLayer.cornerRadius = underlineLayer.cornerRadius
+        
+        self.bringSubviewToFront(codeTextField)
+        self.bringSubviewToFront(numberTextField)
+        self.bringSubviewToFront(titleLabel)
+        
+    }
     
     @objc private func nextAfterCode() {
         numberTextField.becomeFirstResponder()
@@ -169,24 +247,24 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     }
     
     func showSubtitleAnimated() {
-        guard subtitleLabel.isHidden else {
+        guard subtitleContent.isHidden else {
             return
         }
-        stackView.spacing = NumericConstants.profileStackViewShowSubtitleSpacing
+        arrowImageView.image = Image.iconArrowDownSmall.image
         UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.subtitleLabel.isHidden = false
+            self.subtitleContent.isHidden = false
             /// https://stackoverflow.com/a/46412621/5893286
             self.layoutIfNeeded()
         }
     }
     
     func hideSubtitleAnimated() {
-        guard !subtitleLabel.isHidden else {
+        guard !subtitleContent.isHidden else {
             return
         }
-        stackView.spacing = NumericConstants.profileStackViewHiddenSubtitleSpacing
+        arrowImageView.image = Image.iconArrowDown.image
         UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.subtitleLabel.isHidden = true
+            self.subtitleContent.isHidden = true
             /// https://stackoverflow.com/a/46412621/5893286
             self.layoutIfNeeded()
         }

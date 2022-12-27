@@ -19,13 +19,23 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput 
     weak var view: AutoSyncViewInput!
     var interactor: AutoSyncInteractorInput!
     var router: AutoSyncRouterInput!
-    
+        
     var fromSettings = false
 
+    func saveSettings() {
+        interactor.onSaveContact(settings: view.createAutoSyncSettings())
+    }
+    
     func viewIsReady() {
         interactor.trackScreen(fromSettings: fromSettings)
         startAsyncOperationDisableScreen()
         interactor.prepareCellModels()
+        
+//        dataSourceContact.setup(table: tableView)
+//        dataSourceContact.delegate = self
+        
+        startAsyncOperationDisableScreen()
+        interactor.prepareCellModelsContact()
     }
     
     func change(settings: AutoSyncSettings, albums: [AutoSyncAlbum]) {
@@ -48,16 +58,48 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput 
     }
         
     //MARK : BasePresenter
-    
     override func outputView() -> Waiting? {
         return view as? Waiting
     }
     
+    func onValueChangeContact() {
+        onValueChanged()
+    }
+    
+}
+
+extension AutoSyncPresenter: PeriodicContactSyncDataSourceDelegate {
+    func onValueChanged() {
+        interactor.checkPermissionContact()
+    }
 }
 
 //MARK: - AutoSyncInteractorOutput
 
 extension AutoSyncPresenter: AutoSyncInteractorOutput {
+    func operationFinished() {
+        view?.stopActivityIndicator()
+    }
+    
+    func showError(error: String) {
+        UIApplication.showErrorAlert(message: error)
+    }
+    
+    func prepaire(syncSettings: PeriodicContactsSyncSettings) {
+        completeAsyncOperationEnableScreen()
+        
+        view.showCells(from: syncSettings)
+    }
+    
+    func permissionSuccess() {
+        interactor.onSaveContact(settings: view.createAutoSyncSettings())
+    }
+    
+    func permissionFail() {
+        view.forceDisableAutoSyncContact()
+        router.showContactsSettingsPopUp()
+    }
+    
     func prepaire(syncSettings: AutoSyncSettings, albums: [AutoSyncAlbum]) {
         completeAsyncOperationEnableScreen()
         view.prepaire(syncSettings: syncSettings, albums: albums)

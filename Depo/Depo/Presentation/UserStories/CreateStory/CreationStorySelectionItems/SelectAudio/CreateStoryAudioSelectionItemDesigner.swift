@@ -10,14 +10,6 @@ import UIKit
 
 final class CreateStoryAudioSelectionItemDesigner: NSObject {
     
-    @IBOutlet weak var segmentedControl: UISegmentedControl! {
-        willSet {
-            newValue.setTitle(TextConstants.createStoryAudioMusics, forSegmentAt: 0)
-            newValue.setTitle(TextConstants.createStoryAudioYourUploads, forSegmentAt: 1)
-            newValue.tintColor = ColorConstants.darkBlueColor
-        }
-    }
-    
     @IBOutlet private weak var emtyListView: UIView! {
         willSet {
             newValue.isHidden = true
@@ -26,9 +18,10 @@ final class CreateStoryAudioSelectionItemDesigner: NSObject {
     
     @IBOutlet private weak var emtyListLabel: UILabel! {
         willSet{
-            newValue.textColor = ColorConstants.textGrayColor
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 14)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.medium, size: 16)
             newValue.text = TextConstants.audioViewNoAudioTitleText
+            newValue.numberOfLines = 0
         }
     }
     

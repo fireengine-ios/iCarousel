@@ -40,18 +40,27 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     enum Constants {
         static let leftOffset: CGFloat = 32
         static let rightOffset: CGFloat = 32
-        static let itemSpacing: CGFloat = 0.62
-        static let itemScaleFactor: CGFloat = 0.3
+        static let itemSpacing: CGFloat = 0.7
+        static let itemScaleFactor: CGFloat = 0.6
     }
     
     // MARK: - IBOutlets
     
     @IBOutlet private weak var backgroundImageView: UIImageView!
-    
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
+            newValue.text = String(format: TextConstants.tbMaticPhotosTitle, " ")
+            newValue.font = .appFont(.medium, size: 16)
+            newValue.textColor = .white
+            newValue.textAlignment = .center
+            newValue.numberOfLines = 2
+        }
+    }
+    
+    @IBOutlet private weak var dateLabel: UILabel! {
+        willSet {
             newValue.text = ""
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 22)
+            newValue.font = .appFont(.bold, size: 14)
             newValue.textColor = .white
             newValue.textAlignment = .center
             newValue.numberOfLines = 2
@@ -59,7 +68,6 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     }
     
     @IBOutlet private weak var carousel: iCarousel!
-    
     @IBOutlet private weak var topConstraint: NSLayoutConstraint! {
         willSet {
             if Device.operationSystemVersionLessThen(11) {
@@ -70,18 +78,9 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     
     @IBOutlet private weak var closeButton: UIButton!
     @IBOutlet private weak var timelineButton: TimelineButton!
-    
-    @IBOutlet private weak var shareButton: RoundedInsetsButton! {
+    @IBOutlet private weak var shareButton: DarkBlueButton! {
         willSet {
             newValue.setTitle(TextConstants.tbMaticPhotosShare, for: .normal)
-            newValue.setTitleColor(AppColor.blueGreenAndWhite.color, for: .normal)
-            newValue.setTitleColor((AppColor.blueGreenAndWhite.color ?? ColorConstants.blueGreen).withAlphaComponent(0.5), for: .disabled)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            
-            newValue.setBackgroundColor(AppColor.whiteAndLrTealish.color ?? .white, for: .normal)
-            newValue.setBackgroundColor((AppColor.whiteAndLrTealish.color ?? .white).withAlphaComponent(0.5), for: .disabled)
-            newValue.setBackgroundColor((AppColor.whiteAndLrTealish.color ?? .white).darker(by: 30), for: .highlighted)
-            
             newValue.isEnabled = false
         }
     }
@@ -167,7 +166,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     }
     
     private func configure() {
-        backgroundImageView.backgroundColor = ColorConstants.tbMatikBlurColor
+        backgroundImageView.backgroundColor = AppColor.tbtBlurBackground.color
         backgroundImageView.contentMode = .scaleAspectFill
         
         setupCarousel()
@@ -228,7 +227,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
             dateString = ""
         }
         
-        titleLabel.text = String(format: TextConstants.tbMaticPhotosTitle, dateString)
+        dateLabel.text = dateString
     }
     
     // MARK: - Actions
@@ -257,9 +256,9 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     
     private func updateBackground(with image: UIImage?) {
         DispatchQueue.global().async { [weak self] in
-            guard let blurImage = image?.applyBlur(radius: 20,
-                                                   tintColor: ColorConstants.tbMatikBlurColor.withAlphaComponent(0.6),
-                                                   saturationDeltaFactor: 1.8) else {
+            guard let blurImage = image?.applyBlur(radius: 5,
+                                                   tintColor: AppColor.tbtBlurBackground.color,
+                                                   saturationDeltaFactor: 1.0) else {
                 return
             }
             
@@ -317,7 +316,7 @@ extension TBMatikPhotosViewController: iCarouselDelegate {
     func carousel(_ carousel: iCarousel, itemTransformForOffset offset: CGFloat, baseTransform transform: CATransform3D) -> CATransform3D {
         let clampedOffset = max(-1, min(1, offset))
         let x = (clampedOffset * 0.5 + offset * Constants.itemSpacing) * carousel.itemWidth
-        let z = fabs(clampedOffset) * -carousel.itemWidth * Constants.itemScaleFactor
+        let z = abs(clampedOffset) * -carousel.itemWidth * Constants.itemScaleFactor
         return CATransform3DTranslate(transform, x, 0, z)
     }
     

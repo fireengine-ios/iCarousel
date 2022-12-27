@@ -17,7 +17,7 @@ final class SliderView: UIView {
         slider.isStatefulAPIEnabled = true
         slider.isThumbHollowAtStart = false
         slider.setThumbColor(.white, for: .normal)
-        slider.setTrackFillColor(.lrTealishTwo, for: .normal)
+        slider.setTrackFillColor(AppColor.tint.color, for: .normal)
         slider.setTrackBackgroundColor(ColorConstants.photoEditSliderColor, for: .normal)
         slider.addTarget(self, action: #selector(didTouchUpInside(_:)), for: .touchUpInside)
         slider.addTarget(self, action: #selector(didChangeSliderValue(_:)), for: .valueChanged)

@@ -27,7 +27,9 @@ class UserProfileRouter: UserProfileRouterInput {
     }
 
     func presentDeleteAccountFirstPopUp(confirmed: @escaping DeleteAccountPopUp.ProceedTappedHandler) {
+        
         let popup = DeleteAccountPopUp.with(type: .firstConfirmation, onProceedTapped: confirmed)
+        
         router.presentViewController(controller: popup)
     }
 

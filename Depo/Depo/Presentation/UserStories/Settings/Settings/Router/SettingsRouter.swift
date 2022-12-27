@@ -66,7 +66,7 @@ class SettingsRouter: SettingsRouterInput {
     }
     
     func goToPackages() {
-        router.pushViewController(viewController: router.packages())
+        router.pushViewController(viewController: router.myStorage(usageStorage: nil))
     }
     
     func goToPremium() {
@@ -99,11 +99,6 @@ class SettingsRouter: SettingsRouterInput {
         UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
     }
     
-    func goTurkcellSecurity(isTurkcell: Bool) {
-        let viewController = router.turkcellSecurity(isTurkcell: isTurkcell)
-        router.pushViewController(viewController: viewController)
-    }
-    
     func showMailUpdatePopUp(delegate: MailVerificationViewControllerDelegate?) {
         let mailController = MailVerificationViewController()
         mailController.actionDelegate = delegate
@@ -125,7 +120,5 @@ class SettingsRouter: SettingsRouterInput {
     }
 
     func goToDarkMode() {
-        router.pushViewController(viewController: router.darkMode)
     }
-    
 }

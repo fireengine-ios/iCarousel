@@ -25,30 +25,17 @@ class PublicSharedItemsActionView: UIView, NibInit {
         }
     }
     
-    @IBOutlet weak var saveToMyLifeboxButton: UIButton! {
+    @IBOutlet weak var saveToMyLifeboxButton: DarkBlueButton! {
         willSet {
             newValue.setTitle(localized(.publicShareSaveTitle), for:.normal)
-            newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.setTitleColor(UIColor.white.darker(by: 30), for: .highlighted)
-            newValue.layer.cornerRadius = 24
-            newValue.backgroundColor = AppColor.darkBlueAndTealish.color
-            newValue.adjustsFontSizeToFitWidth()
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
         }
     }
     
-    @IBOutlet weak var downloadButton: UIButton! {
+    @IBOutlet weak var downloadButton: WhiteButton! {
         willSet {
             newValue.setTitle("   \(localized(.publicShareDownloadTitle))", for:.normal)
-            newValue.setImage(UIImage(named: "download"), for: .normal)
-            newValue.setTitleColor(ColorConstants.darkBlueColor, for: .normal)
-            newValue.setTitleColor(ColorConstants.darkBlueColor.darker(by: 30), for: .highlighted)
-            newValue.layer.cornerRadius = 24
-            newValue.layer.borderColor = ColorConstants.navy.cgColor
-            newValue.layer.borderWidth = 1
-            newValue.backgroundColor = UIColor.white
+            newValue.setImage(Image.iconDownload.image.withRenderingMode(.alwaysOriginal), for: .normal)
             newValue.adjustsFontSizeToFitWidth()
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
         }
     }
     

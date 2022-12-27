@@ -14,7 +14,7 @@ protocol RegistrationViewDelegate: AnyObject {
     func showCaptcha()
 }
 
-final class RegistrationViewController: ViewController {
+final class RegistrationViewController: BaseViewController {
 
     //MARK: IBOutlets
     @IBOutlet private weak var shadowView: UIView! {
@@ -25,13 +25,16 @@ final class RegistrationViewController: ViewController {
     
     @IBOutlet private weak var nextButton: RoundedInsetsButton! {
         willSet {
-            newValue.setBackgroundColor(UIColor.lrTealish, for: .normal)
-            newValue.setBackgroundColor(AppColor.inactiveButtonColor.color ?? ColorConstants.lighterGray, for: .disabled)
-            newValue.setTitleColor(ColorConstants.whiteColor, for: .normal)
-            newValue.setTitleColor(AppColor.textPlaceholderColor.color ?? ColorConstants.lightGrayColor, for: .disabled)
-            newValue.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
+            newValue.setBackgroundColor(AppColor.registerNextButtonNormal.color, for: .normal)
+            newValue.setBackgroundColor(AppColor.secondaryButton.color, for: .disabled)
+            newValue.setTitleColor(.white, for: .normal)
+            newValue.setTitleColor(AppColor.registerNextButtonNormalTextColor.color, for: .disabled)
+            newValue.titleLabel?.font = UIFont.appFont(.medium, size: 16)
             newValue.setTitle(TextConstants.registrationNextButtonText, for: .normal)
             newValue.isOpaque = true
+            newValue.layer.cornerRadius = 23
+            newValue.layer.borderWidth = 1
+            newValue.layer.borderColor = AppColor.registerNextButtonNormal.cgColor
         }
     }
     
@@ -46,7 +49,7 @@ final class RegistrationViewController: ViewController {
     
     @IBOutlet private weak var stackView: UIStackView! {
         willSet {
-            newValue.spacing = 16
+            newValue.spacing = 24   
             newValue.alignment = .fill
             newValue.axis = .vertical
             newValue.distribution = .fill
@@ -80,7 +83,6 @@ final class RegistrationViewController: ViewController {
     }
     
     //MARK: Vars
-    
     private let keyboard = Typist.shared
     var output: RegistrationViewOutput!
     private let updateScrollDelay: DispatchTime = .now() + 0.3
@@ -89,16 +91,6 @@ final class RegistrationViewController: ViewController {
     var appleGoogleUser: AppleGoogleUser?
     
     ///Fields (in right order)
-    private let phoneEnterView: ProfilePhoneEnterView = {
-        let newValue = ProfilePhoneEnterView()
-        newValue.numberTextField.enablesReturnKeyAutomatically = true
-
-        newValue.numberTextField.quickDismissPlaceholder = TextConstants.profilePhoneNumberPlaceholder
-        newValue.titleLabel.text = TextConstants.registrationCellTitleGSMNumber
-        
-        return newValue
-    }()
-    
     private let emailEnterView: ProfileTextEnterView = {
         let newValue = ProfileTextEnterView()
         newValue.textField.keyboardType = .emailAddress
@@ -109,6 +101,16 @@ final class RegistrationViewController: ViewController {
         
         newValue.titleLabel.text = TextConstants.registrationCellTitleEmail
         
+        return newValue
+    }()
+    
+    private let phoneEnterView: ProfilePhoneEnterView = {
+        let newValue = ProfilePhoneEnterView()
+        newValue.numberTextField.enablesReturnKeyAutomatically = true
+
+        newValue.numberTextField.quickDismissPlaceholder = TextConstants.profilePhoneNumberPlaceholder
+        newValue.titleLabel.text = TextConstants.registrationCellTitleGSMNumber
+        newValue.isEditState = true
         return newValue
     }()
     
@@ -200,8 +202,9 @@ final class RegistrationViewController: ViewController {
 
     }
     
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        nextButton.setBackgroundColor(AppColor.secondaryButton.color, for: .disabled)
     }
     
     //MARK: Utility Methods (private)
@@ -213,17 +216,14 @@ final class RegistrationViewController: ViewController {
     }
     
     private func setupNavBar() {
-        navigationBarWithGradientStyle()
-        backButtonForNavigationItem(title: TextConstants.backTitle)
         setNavigationTitle(title: TextConstants.registerTitle)
         setNavigationRightBarButton(title: TextConstants.loginFAQButton, target: self, action: #selector(handleFaqButtonTap))
     }
 
     private func setupStackView() {
         prepareFields()
-
-        stackView.addArrangedSubview(phoneEnterView)
         stackView.addArrangedSubview(emailEnterView)
+        stackView.addArrangedSubview(phoneEnterView)
         stackView.addArrangedSubview(passwordEnterView)
         setupValidationStackView()
         stackView.addArrangedSubview(validationStackView)

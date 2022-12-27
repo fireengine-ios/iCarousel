@@ -43,6 +43,10 @@ final class PremiumHeaderView: UIView {
                    titleEdgeInsets: UIEdgeInsets) {
         titleLabel.text = title
 
+        if description.isEmpty && ((price?.isEmpty) != nil) {
+            subtitleLabel.isHidden = true
+        }
+        
         subtitleLabel.attributedText = getAttributeText(with: description, price: price)
         
         premiumHeaderImageView.isHidden = isHiddenTitleImageView ?? false
@@ -55,9 +59,7 @@ final class PremiumHeaderView: UIView {
     
     // MARK: Utility methods(Private)
     private func setup() {        
-        setupDesign()
-        
-        premiumHeaderImageView.image = UIImage(named: "crownPremiumIcon")
+        setupDesign()        
         premiumButton.setTitle(TextConstants.becomePremiumMember, for: .normal)
     }
     
@@ -73,13 +75,13 @@ final class PremiumHeaderView: UIView {
     }
     
     private func setupDesign() {
-        titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
-        titleLabel.textColor = ColorConstants.darkText
+        titleLabel.font = .appFont(.regular, size: 16)
+        titleLabel.textColor = AppColor.label.color
         
-        subtitleLabel.font = UIFont.TurkcellSaturaFont(size: 20)
-        subtitleLabel.textColor = ColorConstants.darkText
+        subtitleLabel.font = .appFont(.regular, size: 16)
+        subtitleLabel.textColor = AppColor.label.color
 
-        premiumButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
+        premiumButton.titleLabel?.font = .appFont(.medium, size: 16)
     }
     
     private func getAttributeText(with text: String, price: String?) -> NSMutableAttributedString {

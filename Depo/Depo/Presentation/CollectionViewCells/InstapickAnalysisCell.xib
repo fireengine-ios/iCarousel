@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -61,14 +61,11 @@
                                     <constraint firstItem="lLY-5t-pQZ" firstAttribute="centerY" secondItem="o0x-VH-YtA" secondAttribute="centerY" id="mvF-jX-x6J"/>
                                 </constraints>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ou2-nv-3dC">
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ou2-nv-3dC">
                                 <rect key="frame" x="0.0" y="48.5" width="355" height="47.5"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="free_view_background" translatesAutoresizingMaskIntoConstraints="NO" id="CyV-g1-kUy">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundPhotoPickBar" translatesAutoresizingMaskIntoConstraints="NO" id="CyV-g1-kUy">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="47.5"/>
-                                    </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="purchase_stars_likes" translatesAutoresizingMaskIntoConstraints="NO" id="YxO-dX-tYH">
-                                        <rect key="frame" x="228" y="5.5" width="127" height="41"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wvx-Gp-ddV" customClass="InsetsButton" customModule="Billo" customModuleProvider="target">
                                         <rect key="frame" x="14" y="12" width="72" height="24"/>
@@ -86,10 +83,8 @@
                                     <constraint firstAttribute="trailing" secondItem="CyV-g1-kUy" secondAttribute="trailing" id="4xl-Cu-nF8"/>
                                     <constraint firstItem="CyV-g1-kUy" firstAttribute="leading" secondItem="ou2-nv-3dC" secondAttribute="leading" id="Bu1-a3-8wv"/>
                                     <constraint firstItem="Wvx-Gp-ddV" firstAttribute="leading" secondItem="ou2-nv-3dC" secondAttribute="leading" constant="14" id="IGc-z5-ouU"/>
-                                    <constraint firstAttribute="trailing" secondItem="YxO-dX-tYH" secondAttribute="trailing" id="NNX-kh-E4Q"/>
                                     <constraint firstItem="CyV-g1-kUy" firstAttribute="top" secondItem="ou2-nv-3dC" secondAttribute="top" id="OEj-wb-yU5"/>
                                     <constraint firstItem="Wvx-Gp-ddV" firstAttribute="centerY" secondItem="ou2-nv-3dC" secondAttribute="centerY" id="VhN-gm-DPt"/>
-                                    <constraint firstAttribute="bottom" secondItem="YxO-dX-tYH" secondAttribute="bottom" constant="1" id="cFa-he-p5Y"/>
                                     <constraint firstAttribute="bottom" secondItem="CyV-g1-kUy" secondAttribute="bottom" id="cef-gJ-nPd"/>
                                 </constraints>
                             </view>
@@ -145,8 +140,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="free_view_background" width="355" height="65"/>
-        <image name="purchase_stars_likes" width="127" height="41"/>
+        <image name="backgroundPhotoPickBar" width="343" height="56"/>
         <namedColor name="itemSeperator">
             <color red="0.91699999570846558" green="0.91699999570846558" blue="0.91699999570846558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

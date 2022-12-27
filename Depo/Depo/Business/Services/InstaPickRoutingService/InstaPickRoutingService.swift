@@ -134,10 +134,10 @@ final class InstaPickRoutingService {
             return
         }
         
-        if let vc = InstapickPopUpController.with(instaNickname: instaNickname) {
-            vc.delegate = self
-            successHandler(vc)
-        }
+        let vc = InstapickPopUpController()
+        vc.delegate = self
+        vc.isInstaExist = instaNickname == nil ? false : true
+        successHandler(vc)
     }
     
     private func didOpenInstaPickSelectionSegmented() {
@@ -172,9 +172,8 @@ final class InstaPickRoutingService {
                                             }
                                          })
         
-        let router = RouterVC()
         successHandler(popup)
-        router.presentViewController(controller: popup)
+        popup.open()
     }
     
     private func onPurchase() {

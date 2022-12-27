@@ -25,6 +25,8 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     
     @IBOutlet weak var progressView: UIProgressView!
     
+    @IBOutlet weak var placeholderImage: UIImageView!
+    
     static let borderW: CGFloat = 3
     
     private let visualEffectBlur = UIVisualEffectView(effect: UIBlurEffect(style: .light))
@@ -37,7 +39,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         selectionView.layer.borderWidth = CollectionViewCellForPhoto.borderW
-        selectionView.layer.borderColor = AppColor.darkBlueAndTealish.color?.cgColor
+        selectionView.layer.borderColor = AppColor.tint.cgColor
         selectionView.alpha = 0
         
         progressView.tintColor = ColorConstants.blueColor
@@ -66,7 +68,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         }
 
         if wrappered.isLocalItem && wrappered.fileSize < NumericConstants.fourGigabytes {
-            cloudStatusImage.image = UIImage(named: "objectNotInCloud")
+            cloudStatusImage.image = Image.iconSyncStatusNotSynced.image
         } else {
             cloudStatusImage.image = UIImage()
         }
@@ -86,7 +88,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     
     override func updating() {
         super.updating()
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = AppColor.cellBackground.color
     }
     
     override func setImage(image: UIImage?, animated: Bool) {
@@ -146,7 +148,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
 
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         selectionImageView.isHidden = !isSelectionActive
-        selectionImageView.image = UIImage(named: isSelected ? "selected" : "notSelected")
+        selectionImageView.image = isSelected ? Image.iconCheckmarkSelected.image : Image.iconCheckmarkNotSelected.image
         
         let selection = isSelectionActive && isSelected
         UIView.animate(withDuration: NumericConstants.animationDuration) { 
@@ -154,7 +156,14 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         }
         
     }
-
+    
+    override func setPlaceholderImage(fileType: FileType) {
+        if fileType == .image {
+            placeholderImage.image = Image.iconPhotosPlaceholder.image
+        } else if fileType == .video {
+            placeholderImage.image = Image.iconVideosPlaceholder.image
+        }
+    }
     
     class func getCellSise() -> CGSize {
         return CGSize(width: 90.0, height: 90.0)
@@ -173,7 +182,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         DispatchQueue.main.async {
             self.visualEffectBlur.isHidden = true
             self.progressView.isHidden = true
-            self.cloudStatusImage.image = UIImage(named: "objectInCloud")
+            self.cloudStatusImage.image = Image.iconSyncStatusSynced.image
         }
     }
     

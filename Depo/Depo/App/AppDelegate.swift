@@ -21,6 +21,7 @@ import FirebaseDynamicLinks
 import GoogleSignIn
 import AGConnectCore
 import AGConnectAppLinking
+import Netmera
 
 // the global reference to logging mechanism to be available in all files
 let log: XCGLogger = {
@@ -89,6 +90,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     @available(iOS 13.0, *)
     private lazy var backgroundSyncService = BackgroundSyncService.shared
     private lazy var storageVars: StorageVars = factory.resolve()
+    
+    lazy var deeplinkCoordinator: DeeplinkCoordinatorProtocol = {
+        return DeeplinkCoordinator(handlers: [
+            BrandAmbassadorDeeplinkHandler(root: RouterVC()),
+        ])
+    }()
 
     var window: UIWindow?
     var watchdog: Watchdog?
@@ -178,7 +185,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AnalyticsPermissionNetmeraEvent.sendNotificationPermissionNetmeraEvents()
         }
         UNUserNotificationCenter.current().delegate = self
-        AnalyticsService.startNetmera()
+        //AnalyticsService.startNetmera()
+        NetmeraService.startNetmera()
         debugLog("AppDelegate setupPushNotifications setuped")
     }
     
@@ -206,6 +214,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if PushNotificationService.shared.assignDeepLink(innerLink: urlHost, options: url.queryParameters) {
                 PushNotificationService.shared.openActionScreen()
             }
+        }
+        
+        if deeplinkCoordinator.handleURL(url) {
+            return true
         }
         
         if ApplicationDelegate.shared.application(app, open: url, options: options) {

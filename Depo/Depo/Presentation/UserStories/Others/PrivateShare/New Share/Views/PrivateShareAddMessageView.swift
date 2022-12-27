@@ -13,8 +13,8 @@ final class PrivateShareAddMessageView: UIView, NibInit {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.privateShareStartPageAddMessageTitle
-            newValue.font = .TurkcellSaturaBolFont(size: 16)
-            newValue.textColor = AppColor.marineTwoAndWhite.color
+            newValue.font = UIFont.appFont(.medium, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
     
@@ -22,7 +22,7 @@ final class PrivateShareAddMessageView: UIView, NibInit {
         willSet {
             newValue.text = ""
             newValue.placeholder = TextConstants.privateShareStartPageMessagePlaceholder
-            newValue.font = .TurkcellSaturaFont(size: 18)
+            newValue.font = UIFont.appFont(.regular, size: 14)
             newValue.contentInset = .zero
             newValue.isScrollEnabled = false
             newValue.inputAccessoryView = toolbar
@@ -33,7 +33,7 @@ final class PrivateShareAddMessageView: UIView, NibInit {
     @IBOutlet private weak var counterLabel: UILabel! {
         willSet {
             newValue.text = "0/\(messageLengthLimit)"
-            newValue.textColor = UIColor.black.withAlphaComponent(0.3)
+            newValue.textColor = AppColor.filesLabel.color
             newValue.font = .TurkcellSaturaDemFont(size: 16)
         }
     }
@@ -54,7 +54,7 @@ final class PrivateShareAddMessageView: UIView, NibInit {
         let done = UIBarButtonItem(barButtonSystemItem: .done,
                                    target: self,
                                    action: #selector(hideKeyboard))
-        done.tintColor = UIColor.lrTealish
+        done.tintColor = AppColor.button.color
         
         toolbar.setItems([flex, done], animated: false)
         return toolbar

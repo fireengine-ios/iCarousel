@@ -28,6 +28,16 @@ class LBAlbumLikePreviewSliderRouter {
         router.pushViewControllertoTableViewNavBar(viewController: controller)
     }
     
+    private func goToCollageListView(_ moduleOutput: LBAlbumLikePreviewSliderModuleInput?) {
+        let controller = router.collageListController(moduleOutput: moduleOutput)
+        router.pushViewControllertoTableViewNavBar(viewController: controller)
+    }
+    
+    private func goToAnimationListView(_ moduleOutput: LBAlbumLikePreviewSliderModuleInput?) {
+        let controller = router.animationListController(moduleOutput: moduleOutput)
+        router.pushViewControllertoTableViewNavBar(viewController: controller)
+    }
+    
     private func goToPeopleListView(_ moduleOutput: LBAlbumLikePreviewSliderModuleInput?) {
         let controller = router.peopleListController(moduleOutput: moduleOutput)
         router.pushViewControllertoTableViewNavBar(viewController: controller)
@@ -67,6 +77,8 @@ extension LBAlbumLikePreviewSliderRouter: LBAlbumLikePreviewSliderRouterInput {
         switch type {
         case .albums: goToAlbumListView(moduleOutput)
         case .story: goToStoryListView(moduleOutput)
+        case .collage: goToCollageListView(moduleOutput)
+        case .animation: goToAnimationListView(moduleOutput)
         case .people: goToPeopleListView(moduleOutput)
         case .things: goToThingListView(moduleOutput)
         case .places: goToPlaceListView(moduleOutput)

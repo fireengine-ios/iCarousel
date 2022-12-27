@@ -26,18 +26,19 @@ class VerificationMethodTableViewCell: UITableViewCell {
 
 private extension VerificationMethodTableViewCell {
     func setupButton() {
-        radioButton.setImage(UIImage(named: "emtyRectangle"), for: .normal)
-        radioButton.setImage(UIImage(named: "selectedRectangle"), for: .selected)
+        radioButton.setBackgroundColor(.clear, for: .normal)
+        radioButton.setImage(Image.iconRadioButtonUnselect.image, for: .normal)
+        radioButton.setImage(Image.iconRadioButtonSelect.image, for: .selected)
 
         // selection is handled by tableView
         radioButton.isUserInteractionEnabled = false
     }
 
     func setupLabels() {
-        methodNameLabel.textColor = ColorConstants.duplicatesGray
-        methodNameLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
+        methodNameLabel.textColor = AppColor.forgetPassText.color
+        methodNameLabel.font = .appFont(.medium, size: 14)
 
-        contentLabel.textColor = ColorConstants.duplicatesGray
-        contentLabel.font = UIFont.TurkcellSaturaMedFont(size: 16)
+        contentLabel.textColor = AppColor.forgetPassText.color
+        contentLabel.font = .appFont(.regular, size: 12)
     }
 }

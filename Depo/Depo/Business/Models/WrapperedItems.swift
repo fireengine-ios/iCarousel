@@ -66,46 +66,6 @@ enum ApplicationType: String {
     case ppt = "ppt"
     case pptx = "pptx"
     case usdz = "usdz"
-    
-//    func bigIconImage() -> UIImage? {
-//        switch self {
-//        case .rar, .zip:
-//            return #imageLiteral(resourceName: "fileBigIconAchive")
-//        case .doc:
-//            return #imageLiteral(resourceName: "fileBigIconDoc")
-//        case .txt:
-//            return #imageLiteral(resourceName: "fileBigIconTxt")
-//        case .xls:
-//            return #imageLiteral(resourceName: "fileBigIconXls")
-//        case .pdf:
-//            return #imageLiteral(resourceName: "fileBigIconPdf")
-//        case .ppt:
-//            return #imageLiteral(resourceName: "fileBigIconPpt")
-//        default:
-//            return nil
-//        }
-//    }
-//    
-//    func smallIconImage() -> UIImage? {
-//        switch self {
-//        case .rar:
-//            return #imageLiteral(resourceName: "fileIconRar")
-//        case .zip:
-//            return #imageLiteral(resourceName: "fileIconZip")
-//        case .doc:
-//            return #imageLiteral(resourceName: "fileIconDoc")
-//        case .txt:
-//            return #imageLiteral(resourceName: "fileIconTxt")
-//        case .xls:
-//            return #imageLiteral(resourceName: "fileIconXls")
-//        case .pdf:
-//            return #imageLiteral(resourceName: "fileIconPdf")
-//        case .ppt:
-//            return #imageLiteral(resourceName: "fileIconPpt")
-//        default:
-//            return #imageLiteral(resourceName: "fileIconUnknown")
-//        }
-//    }
 }
 
 enum FileType: Hashable, Equatable {
@@ -121,21 +81,18 @@ enum FileType: Hashable, Equatable {
     case faceImage(FaceImageType)
     case faceImageAlbum(FaceImageType)
     case imageAndVideo
+    case documentsAndMusic
 
     
     var convertedToSearchFieldValue: FieldValue {
         
         switch self {
-//        case unknown:
-//        case folder:
         case .image:
             return .image
         case .video:
             return .video
         case .audio:
             return .audio
-        
-            
         case .photoAlbum:
             return .albums
         case .musicPlayList:
@@ -146,10 +103,11 @@ enum FileType: Hashable, Equatable {
             return .document //FIXME: temporary documents
         case .imageAndVideo:
             return .imageAndVideo
+        case .documentsAndMusic:
+            return .documentsAndMusic
         default:
             return .all
         }
-        
     }
     
     var convertedToPHMediaType: PHAssetMediaType {

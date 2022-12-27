@@ -93,7 +93,7 @@ final class FullQuotaWarningPopUp: BasePopUpController {
     
     @IBOutlet private weak var closeButton: UIButton! {
         willSet {
-            let image = UIImage(named: "grayCloseButton")
+            let image = Image.iconCancelUnborder.image
             newValue.setImage(image, for: .normal)
             newValue.contentEdgeInsets = UIEdgeInsets(topBottom: 8, rightLeft: 8)
             newValue.accessibilityLabel = TextConstants.accessibilityClose
@@ -129,7 +129,7 @@ final class FullQuotaWarningPopUp: BasePopUpController {
     @IBOutlet private weak var expandQuotaButton: RoundedInsetsButton!  {
         willSet {
             newValue.setTitle(popUpType.expandQuotaButton, for: .normal)
-            newValue.setBackgroundColor(AppColor.darkBlueAndTealish.color ?? ColorConstants.darkBlueColor, for: .normal)
+            newValue.setBackgroundColor(AppColor.darkBlueAndTealish.color, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.insets = UIEdgeInsets(topBottom: 5, rightLeft: 30)
@@ -140,7 +140,7 @@ final class FullQuotaWarningPopUp: BasePopUpController {
         willSet {
             newValue.setTitle(popUpType.deleteFilesButton, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 22)
-            newValue.setTitleColor(AppColor.darkBlueAndTealish.color ?? ColorConstants.darkBlueColor, for: .normal)
+            newValue.setTitleColor(AppColor.darkBlueAndTealish.color, for: .normal)
         }
     }
     

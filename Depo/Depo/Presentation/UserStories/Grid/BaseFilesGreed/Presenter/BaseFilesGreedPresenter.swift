@@ -159,6 +159,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             service is PlacesItemsService ||
             service is PeopleItemsService {
             router.showUpload()
+        } else if service is DocumentService {
+            view.showUploadFolder(with: .uploadDocuments)
+        } else if service is MusicService {
+            view.showUploadFolder(with: .uploadMusic)
         }
         
         getContent()
@@ -324,8 +328,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func stopSelectionWhenDisappear() {
-        dataSource.setSelectionState(selectionState: false)
-        view.stopSelection()
+        if dataSource.isSelectionStateActive {
+            dataSource.setSelectionState(selectionState: false)
+            view.stopSelection()
+        }
     }
     
     @objc func updateThreeDots() {
@@ -370,7 +376,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         } else {
             let vc = PopUpController.with(title: TextConstants.warning, message: TextConstants.theFileIsNotSupported,
                                           image: .error, buttonTitle: TextConstants.ok)
-            UIApplication.topController()?.present(vc, animated: false, completion: nil)
+            vc.open()
+
         }
     }
     
@@ -417,6 +424,22 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         return CGSize(width: cellWidth, height: cellWidth)
     }
     
+    func getCellSizeForFaceImage(type: FaceImageType?) -> CGSize {
+        var cellWidth: CGFloat = 180
+        
+        if (Device.isIpad) {
+            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPadGreedInset * 2 - NumericConstants.iPadGreedHorizontalSpace * (NumericConstants.numerCellInLineOnIpad - 1)) / NumericConstants.numerCellInLineOnIpad
+        } else {
+            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPhoneGreedInset * 2 - NumericConstants.iPhoneGreedHorizontalSpace * (NumericConstants.numerCellInLineOnIphone - 1)) / NumericConstants.numerCellInLineOnIphone
+        }
+        
+        if type == .people {
+            cellWidth = cellWidth - (Device.isIpad ? (NumericConstants.numerCellInLineOnIpad - 1)*2 : (NumericConstants.numerCellInLineOnIphone - 1)*2)
+        }
+        
+        return CGSize(width: cellWidth, height: cellWidth + 48)
+    }
+    
     func onLongPressInCell() {
         startEditing()
     }
@@ -441,7 +464,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
 
     func didDelete(items: [BaseDataSourceItem]) {
-        updateNoFilesView()
         updateThreeDotsButton()
     }
     
@@ -557,16 +579,15 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
 
         if (selectedItemsCount == 0) {
             debugLog("BaseFilesGreedPresenter onChangeSelectedItemsCount selectedItemsCount == 0")
-
-            dismissBottomBar(animated: true)
+            
+            stopEditing()
         } else {
             debugLog("BaseFilesGreedPresenter onChangeSelectedItemsCount selectedItemsCount != 0")
 
             showBottomBar(animated: true, onView: nil)
+            view.setThreeDotsMenu(active: canShow3DotsButton())
+            self.view.selectedItemsCountChange(with: selectedItemsCount)
         }
-        
-        view.setThreeDotsMenu(active: canShow3DotsButton())
-        self.view.selectedItemsCountChange(with: selectedItemsCount)
     }
     
     func showBottomBar(animated: Bool, onView: UIView?) {
@@ -764,6 +785,17 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         router.showSearchScreen(output: output)
     }
     
+    func openCreateNewStory(output: UIViewController?) {
+        router.openCreateNewStory(output: output)
+    }
+    
+    func openCreateNewAlbum() {
+        router.openCreateNewAlbum()
+    }
+    
+    func openUpload() {
+        router.openUpload()
+    }
     
     // MARK: - View outbut/ TopBar/UnderNavBarBar Delegates
     

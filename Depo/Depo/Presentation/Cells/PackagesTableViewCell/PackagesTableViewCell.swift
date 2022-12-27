@@ -10,10 +10,10 @@ import UIKit
 
 class PackagesTableViewCell: UITableViewCell {
     
-    @IBOutlet private weak var titleLabel: UILabel! {
+    @IBOutlet weak var titleLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.textColor = UIColor.lrBrownishGrey
+            newValue.font = .appFont(.regular, size: 14)
+            newValue.textColor = AppColor.label.color
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
         }
@@ -21,8 +21,8 @@ class PackagesTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 16)
-            newValue.textColor = UIColor.lrLightBrownishGrey
+            newValue.font = .appFont(.regular, size: 14)
+            newValue.textColor = AppColor.billoGrayAndWhite.color
             newValue.textAlignment = .right
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
@@ -55,10 +55,24 @@ class PackagesTableViewCell: UITableViewCell {
             let percentageString = percentage.rounded(.toNearestOrAwayFromZero)
             let usage = String(format: TextConstants.usagePercentage, percentageString)
             descriptionLabel.text = usage
+            
+        case .connectedAccounts:
+            titleLabel.text = TextConstants.settingsViewCellConnectedAccounts
+            descriptionLabel.text = ""
 
         case .accountType(let type):
             titleLabel.text = type.text
             descriptionLabel.isHidden = true
+            
+            switch type {
+            case.premium:
+                infoImageView.isHidden = false
+                infoImageView.image = Image.iconPremium.image
+            case .standard:
+                infoImageView.isHidden = true
+            case .middle:
+                infoImageView.isHidden = true
+            }
         }
         
         let titleLeadingConstraint: CGFloat = infoImageView.isHidden ? 16 : 48

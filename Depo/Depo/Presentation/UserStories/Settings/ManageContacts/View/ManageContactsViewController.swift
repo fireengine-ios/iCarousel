@@ -24,7 +24,6 @@ class ManageContactsViewController: BaseViewController, ManageContactsViewInput 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        backButtonForNavigationItem(title: TextConstants.backTitle)
         setTitle(withString: TextConstants.manageContacts)
 
         tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
@@ -35,7 +34,6 @@ class ManageContactsViewController: BaseViewController, ManageContactsViewInput 
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
     }
     
     private func configureSearchBar() {

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ForYouCardsCollectionViewCell" customModule="Billo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="252" height="339"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="252" height="339"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rIn-WZ-ukg">
+                        <rect key="frame" x="8" y="8" width="236" height="323"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="978-8C-iOb">
+                                <rect key="frame" x="8" y="12" width="188" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="4in-36-1o9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Far-r9-Iqz">
+                                <rect key="frame" x="204" y="8" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="dys-BZ-fPP"/>
+                                    <constraint firstAttribute="height" constant="24" id="gLK-hY-smz"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button" image="iconCancelBorder"/>
+                                <buttonConfiguration key="configuration" style="plain" image="iconCancelBorder"/>
+                                <connections>
+                                    <action selector="onCloseCard:" destination="gTV-IL-0wX" eventType="touchUpInside" id="tFU-2O-uSx"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="aTZ-ct-7cE">
+                                <rect key="frame" x="8" y="40" width="220" height="275"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XvH-tV-bsO">
+                                        <rect key="frame" x="0.0" y="0.0" width="220" height="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="68W-ZR-Ga0">
+                                        <rect key="frame" x="0.0" y="25" width="220" height="220"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EuR-ig-b5T" customClass="LoadingImageView" customModule="Billo" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="220" height="220"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="EuR-ig-b5T" secondAttribute="height" multiplier="1:1" id="NIu-aV-OWi"/>
+                                                    <constraint firstAttribute="height" constant="220" id="rjP-bX-d9e"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dzy-lz-z7q">
+                                                <rect key="frame" x="0.0" y="0.0" width="220" height="220"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onShowDetail:" destination="gTV-IL-0wX" eventType="touchUpInside" id="odc-8i-SeE"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="Dzy-lz-z7q" secondAttribute="trailing" id="0ei-K5-R9Q"/>
+                                            <constraint firstItem="EuR-ig-b5T" firstAttribute="leading" secondItem="68W-ZR-Ga0" secondAttribute="leading" id="9rX-GB-r6A"/>
+                                            <constraint firstAttribute="bottom" secondItem="Dzy-lz-z7q" secondAttribute="bottom" id="FVH-XM-RGL"/>
+                                            <constraint firstItem="Dzy-lz-z7q" firstAttribute="leading" secondItem="68W-ZR-Ga0" secondAttribute="leading" id="HBM-es-JfB"/>
+                                            <constraint firstAttribute="bottom" secondItem="EuR-ig-b5T" secondAttribute="bottom" id="Tqd-eU-TZQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="EuR-ig-b5T" secondAttribute="trailing" id="cpG-yX-MVL"/>
+                                            <constraint firstItem="Dzy-lz-z7q" firstAttribute="top" secondItem="68W-ZR-Ga0" secondAttribute="top" id="eHx-Qr-VDQ"/>
+                                            <constraint firstItem="EuR-ig-b5T" firstAttribute="top" secondItem="68W-ZR-Ga0" secondAttribute="top" id="kTG-mf-guv"/>
+                                        </constraints>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Chc-ua-G4h">
+                                        <rect key="frame" x="0.0" y="255" width="220" height="20"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m3c-8j-Dfg">
+                                                <rect key="frame" x="0.0" y="0.0" width="110" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="BQ6-h4-Nn0"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Button"/>
+                                                <connections>
+                                                    <action selector="onLeftButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="UAn-Bv-JP9"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bdk-Xi-PGi">
+                                                <rect key="frame" x="110" y="0.0" width="110" height="20"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Button"/>
+                                                <connections>
+                                                    <action selector="onShareButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="uJV-IK-29K"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="978-8C-iOb" firstAttribute="leading" secondItem="rIn-WZ-ukg" secondAttribute="leading" constant="8" id="88y-Wg-xKx"/>
+                            <constraint firstItem="978-8C-iOb" firstAttribute="top" secondItem="rIn-WZ-ukg" secondAttribute="top" constant="12" id="DoQ-Jh-9W0"/>
+                            <constraint firstItem="aTZ-ct-7cE" firstAttribute="leading" secondItem="rIn-WZ-ukg" secondAttribute="leading" constant="8" id="EeE-dH-5lW"/>
+                            <constraint firstItem="Far-r9-Iqz" firstAttribute="leading" secondItem="978-8C-iOb" secondAttribute="trailing" constant="8" id="Gno-lp-c6S"/>
+                            <constraint firstAttribute="trailing" secondItem="Far-r9-Iqz" secondAttribute="trailing" constant="8" id="M24-aG-QD6"/>
+                            <constraint firstItem="Far-r9-Iqz" firstAttribute="top" secondItem="rIn-WZ-ukg" secondAttribute="top" constant="8" id="aa6-Bv-JUM"/>
+                            <constraint firstAttribute="bottom" secondItem="aTZ-ct-7cE" secondAttribute="bottom" constant="8" id="cHf-Il-Xak"/>
+                            <constraint firstAttribute="trailing" secondItem="aTZ-ct-7cE" secondAttribute="trailing" constant="8" id="fwj-2s-3qn"/>
+                            <constraint firstItem="aTZ-ct-7cE" firstAttribute="top" secondItem="978-8C-iOb" secondAttribute="bottom" constant="8" id="pvx-WM-8An"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="rIn-WZ-ukg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="G9O-EW-O0U"/>
+                <constraint firstItem="rIn-WZ-ukg" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="N7e-mc-Eow"/>
+                <constraint firstAttribute="bottom" secondItem="rIn-WZ-ukg" secondAttribute="bottom" constant="8" id="udc-JI-yNQ"/>
+                <constraint firstAttribute="trailing" secondItem="rIn-WZ-ukg" secondAttribute="trailing" constant="8" id="vVN-eQ-7gi"/>
+            </constraints>
+            <size key="customSize" width="252" height="339"/>
+            <connections>
+                <outlet property="bgView" destination="rIn-WZ-ukg" id="VyC-No-v6o"/>
+                <outlet property="cardDescriptionLabel" destination="XvH-tV-bsO" id="3TN-E5-bFO"/>
+                <outlet property="cardThumbnailImage" destination="EuR-ig-b5T" id="38O-ZK-1LT"/>
+                <outlet property="cardTitleLabel" destination="978-8C-iOb" id="jxb-Ml-aaF"/>
+                <outlet property="closeButton" destination="Far-r9-Iqz" id="98B-2k-kpk"/>
+                <outlet property="leftButton" destination="m3c-8j-Dfg" id="5oE-Ed-uw0"/>
+                <outlet property="shareButton" destination="bdk-Xi-PGi" id="lhz-Sb-p0F"/>
+                <outlet property="thumbnailView" destination="68W-ZR-Ga0" id="pzT-I6-g9h"/>
+            </connections>
+            <point key="canvasLocation" x="321.73913043478262" y="215.95982142857142"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="iconCancelBorder" width="24" height="24"/>
+    </resources>
+</document>

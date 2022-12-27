@@ -86,7 +86,10 @@ class BasePresenter: NSObject, BaseAsyncOperationInteractorOutput {
     
     private func showMessage(errorMessage: String?) {
         if let message = errorMessage {
-            UIApplication.showErrorAlert(message: message)
+            UIApplication.showCustomAlert(title: TextConstants.errorAlert,
+                                          message: message,
+                                          image: .custom(Image.forgetPassPopupLock.image),
+                                          buttonTitle: TextConstants.ok)
         }
     }
 }

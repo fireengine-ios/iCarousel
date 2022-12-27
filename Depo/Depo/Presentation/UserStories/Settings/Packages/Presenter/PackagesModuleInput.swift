@@ -6,6 +6,4 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol PackagesModuleInput: AnyObject {
-
-}
+protocol PackagesModuleInput: AnyObject { }

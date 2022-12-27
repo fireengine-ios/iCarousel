@@ -22,11 +22,10 @@ class BlueButtonWithWhiteText: WhiteButtonWithRoundedCorner {
     override func configurate() {
         super.configurate()
         
-        setBackgroundColor(AppColor.darkBlueAndTealish.color ?? ColorConstants.darkBlueColor, for: .normal)
-        setBackgroundColor(AppColor.darkBlueAndTealish.color?.lighter(by: 30.0) ??
-                            ColorConstants.darkBlueColor.lighter(by: 30.0), for: .disabled)
-        setTitleColor(ColorConstants.whiteColor, for: .normal)
-        setTitleColor(ColorConstants.lightGrayColor, for: .disabled)
+        setBackgroundColor(AppColor.button.color, for: .normal)
+        setBackgroundColor(AppColor.button.color.lighter(by: 30.0), for: .disabled)
+        setTitleColor(.white, for: .normal)
+        setTitleColor(.white, for: .disabled)
     }
 }
 

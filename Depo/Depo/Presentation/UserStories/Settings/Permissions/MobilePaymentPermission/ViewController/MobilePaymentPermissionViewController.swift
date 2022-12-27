@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class MobilePaymentPermissionViewController: ViewController, NibInit, ControlTabBarProtocol {
+final class MobilePaymentPermissionViewController: BaseViewController, NibInit {
     
     weak var delegate: MobilePaymentPermissionProtocol?
     var urlString: String?
@@ -26,6 +26,7 @@ final class MobilePaymentPermissionViewController: ViewController, NibInit, Cont
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        needToShowTabBar = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,9 +36,7 @@ final class MobilePaymentPermissionViewController: ViewController, NibInit, Cont
     }
     
     private func setupNavigation() {
-        hideTabBar()
-        navigationBarWithGradientStyle()
-        let backButton = UIBarButtonItem(title: TextConstants.backTitle, target: self, selector: #selector(backTapped))
+        let backButton = UIBarButtonItem(title: "", target: self, selector: #selector(backTapped))
         navigationItem.leftBarButtonItem = backButton
     }
     

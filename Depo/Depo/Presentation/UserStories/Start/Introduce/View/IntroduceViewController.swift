@@ -12,7 +12,7 @@ import GoogleSignIn
 import FirebaseCore
 import AuthenticationServices
 
-class IntroduceViewController: ViewController {
+class IntroduceViewController: BaseViewController {
 
     // MARK: Properties
     private lazy var appleGoogleService = AppleGoogleLoginService()
@@ -20,13 +20,13 @@ class IntroduceViewController: ViewController {
     var user: AppleGoogleUser?
     
     // MARK: IBOutlets
-    @IBOutlet private weak var welcomeViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var welcomeViewTopConstraint: NSLayoutConstraint!
     @IBOutlet private weak var startUsingLifeBoxButton: RoundedInsetsButton! {
         willSet {
             newValue.setTitle(TextConstants.itroViewGoToRegisterButtonText, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
-            newValue.backgroundColor = AppColor.marineTwoAndTealish.color
-            newValue.setTitleColor(.white, for: .normal)
+            newValue.titleLabel?.font = UIFont.appFont(.medium, size: 14.0)
+            newValue.backgroundColor = .clear
+            newValue.setTitleColor(AppColor.label.color, for: .normal)
             newValue.insets = UIEdgeInsets(topBottom: 0, rightLeft: 12)
             newValue.adjustsFontSizeToFitWidth()
         }
@@ -35,9 +35,9 @@ class IntroduceViewController: ViewController {
     @IBOutlet private weak var haveAccountButton: RoundedInsetsButton! {
         willSet {
             newValue.setTitle(TextConstants.introViewGoToLoginButtonText, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
-            newValue.backgroundColor = .white
-            newValue.setTitleColor(ColorConstants.marineTwo, for: .normal)
+            newValue.titleLabel?.font = UIFont.appFont(.medium, size: 16.0)
+            newValue.backgroundColor = ColorConstants.darkBlueColor
+            newValue.setTitleColor(ColorConstants.whiteColor, for: .normal)
             newValue.insets = UIEdgeInsets(topBottom: 0, rightLeft: 12)
             newValue.adjustsFontSizeToFitWidth()
         }
@@ -54,17 +54,30 @@ class IntroduceViewController: ViewController {
     @IBOutlet private weak var orLabel: UILabel! {
         willSet {
             newValue.text = localized(.onboardingButtonOr)
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 15)
-            newValue.textColor = .white
+            newValue.font = UIFont.appFont(.regular, size: 15.0)
+            newValue.textColor = AppColor.label.color
         }
     }
     
+    @IBOutlet weak var logoTitleLabel: UILabel! {
+        willSet {
+            newValue.font = .appFont(.medium, size: 20)
+            newValue.textColor = AppColor.label.color
+            newValue.text = TextConstants.NotLocalized.appNameLowercased
+            newValue.textAlignment = .center
+        }
+    }
+    
+    
     @IBOutlet private weak var signInWithGoogleButton: RoundedInsetsButton! {
         willSet {
+            newValue.layer.borderWidth = 1.0
+            newValue.layer.borderColor = AppColor.label.cgColor
+            newValue.layer.cornerRadius = newValue.frame.height * 0.5
             newValue.setTitle(localized(.connectWithGoogle), for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
+            newValue.titleLabel?.font = .appFont(.regular, size: 14)
             newValue.backgroundColor = .white
-            newValue.setTitleColor(ColorConstants.billoGray, for: .normal)
+            newValue.setTitleColor(AppColor.appleGoogleLoginLabel.color, for: .normal)
             newValue.adjustsFontSizeToFitWidth()
             newValue.setImage(UIImage(named: "googleLogo"), for: .normal)
             newValue.moveImageLeftTextCenter()
@@ -73,10 +86,13 @@ class IntroduceViewController: ViewController {
     
     @IBOutlet weak var signInWithAppleButton: RoundedInsetsButton! {
         willSet {
+            newValue.layer.borderWidth = 1.0
+            newValue.layer.borderColor = AppColor.label.cgColor
+            newValue.layer.cornerRadius = newValue.frame.height * 0.5
             newValue.setTitle(localized(.connectWithApple), for: .normal)
-            newValue.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            newValue.titleLabel?.font = .appFont(.regular, size: 14)
             newValue.backgroundColor = .white
-            newValue.setTitleColor(UIColor.black, for: .normal)
+            newValue.setTitleColor(AppColor.appleGoogleLoginLabel.color, for: .normal)
             newValue.adjustsFontSizeToFitWidth()
             newValue.setImage(UIImage(named: "appleLogo"), for: .normal)
             newValue.moveImageLeftTextCenter()
@@ -92,22 +108,30 @@ class IntroduceViewController: ViewController {
     @IBOutlet private weak var welcomeTopLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: Device.isIpad ? 28 : 22)
-            newValue.textColor = ColorConstants.whiteColor
+            newValue.font = .appFont(.medium, size: 20)
+            newValue.textColor = AppColor.label.color
             newValue.minimumScaleFactor = 0.5
             newValue.adjustsFontSizeToFitWidth = true
             newValue.text = TextConstants.welcome1Info
+            newValue.textAlignment = .center
         }
     }
     
     @IBOutlet private weak var welcomeBottomLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: Device.isIpad ? 24 : 16)
-            newValue.textColor = ColorConstants.whiteColor
+            newValue.font = .appFont(.regular, size: 15.0)
+            newValue.textColor = AppColor.label.color
             newValue.minimumScaleFactor = 0.5
             newValue.adjustsFontSizeToFitWidth = true
             newValue.text = TextConstants.welcome1SubInfo
+            newValue.textAlignment = .center
+        }
+    }
+    
+    @IBOutlet private weak var gradientView: UIView! {
+        willSet {
+            newValue.alpha = 0.15
         }
     }
     
@@ -116,7 +140,7 @@ class IntroduceViewController: ViewController {
         super.viewDidLoad()
         if #available(iOS 14.0, *) {
             WidgetCenter.shared.reloadAllTimelines()
-        } 
+        }
 
         configurateView()
         output.viewIsReady()
@@ -128,11 +152,13 @@ class IntroduceViewController: ViewController {
             name: .firebaseRemoteConfigInitialFetchComplete,
             object: nil
         )
+
     }
     
     func configurateView() {
-        hidenNavigationBarStyle()
-        backButtonForNavigationItem(title: TextConstants.backTitle)
+        navigationBarHidden = true
+        gradientView.addGradient(firstColor: AppColor.landingGradientStart.cgColor,
+                                 secondColor: AppColor.landingGradientFinish.cgColor)
     }
     
     @objc private func handleRemoteConfig() {
@@ -142,25 +168,27 @@ class IntroduceViewController: ViewController {
             orLabel.isHidden = true
             return
         }
-        
+
         signInWithAppleButton.isHidden = !FirebaseRemoteConfig.shared.appleLoginEnabled
         signInWithGoogleButton.isHidden = !FirebaseRemoteConfig.shared.googleLoginEnabled
-        
+
         if signInWithAppleButton.isHidden {
             signInWithGoogleButton.isHidden = true
         }
-        
+
         orLabel.isHidden = signInWithAppleButton.isHidden && signInWithGoogleButton.isHidden
-        
+
         if !signInWithAppleButton.isHidden && !signInWithGoogleButton.isHidden {
             if Device.isIphoneSmall {
-                welcomeViewHeightConstraint.constant = 174
+                welcomeViewTopConstraint.constant = 30
             }
         }
     }
-
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        gradientView.addGradient(firstColor: AppColor.landingGradientStart.cgColor,
+                                 secondColor: AppColor.landingGradientFinish.cgColor)
     }
     
     // MARK: Actions

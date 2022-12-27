@@ -7,27 +7,63 @@
 //
 
 import UIKit
+import SwiftUI
 
 protocol InstaPickPhotoViewDelegate: AnyObject {
     func didTapOnImage(_ model: InstapickAnalyze?)
 }
 
 class InstaPickPhotoView: UIView, NibInit {
-
-    private let imageView = UIImageView()
-    private let containerView = RadialGradientableView()
+    
+    lazy var pickedLabel: UILabel = {
+        let view = UILabel()
+        view.textColor = .white
+        view.textAlignment = .center
+        return view
+    }()
+    
+    lazy var pickedView: UIView = {
+        let view = UIView(frame: CGRect(x: -5, y: -5, width: 80, height: 30))
+        view.layer.masksToBounds = true
+         return view
+     }()
+    
+    lazy var rateLabel: UILabel = {
+        let view = UILabel()
+        view.textColor = .white
+        view.textAlignment = .center
+        return view
+    }()
+    
+    lazy var rateView: UIView = {
+        let view = UIView(frame: CGRect(x: -5, y: -5, width: 32, height: 32))
+        view.layer.masksToBounds = true
+         return view
+     }()
+    
+    lazy var selectedImageContainer: UIView = {
+        let view = UIView(frame: CGRect(x: 5, y: 5, width: 165, height: 165))
+        view.layer.masksToBounds = true
+         return view
+     }()
+    
+    lazy var imageView: UIImageView = {
+       let view = UIImageView()
+        view.layer.masksToBounds = true
+        view.contentMode = .scaleAspectFill
+        return view
+    }()
+    
+    lazy var containerView: UIView = {
+        let view = UIView()
+         return view
+     }()
     
     private let pictureNotFoundStackView = UIStackView()
     
-    private let pickedLabel = UILabel()
-    let rateLabel = UILabel()
-    
-    let rateView = RadialGradientableView()
-    let pickedView = RadialGradientableView()
     
     var rateViewCenterYConstraint: NSLayoutConstraint!
     var imageViewHeightConstraint: NSLayoutConstraint!
-    var pickedViewCenterXConstraint: NSLayoutConstraint!
     
     var model: InstapickAnalyze?
     private weak var delegate: InstaPickPhotoViewDelegate?
@@ -44,24 +80,11 @@ class InstaPickPhotoView: UIView, NibInit {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        setupCornerRadius()
     }
     
     private func setup() {
         addGestureRecognizer(tapGesture)
         
-        containerView.layer.masksToBounds = true
-        
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.masksToBounds = true
-        
-        rateView.layer.masksToBounds = true
-        rateLabel.textAlignment = .center
-        
-        pickedView.layer.masksToBounds = true
-        pickedLabel.textAlignment = .center
-        
-        setupCornerRadius()
         setupLabelsDesign(isIPad: Device.isIpad)
         configurePictureNotFound(fontSize: 16, imageWidth: 30, spacing: 8)
     }
@@ -71,76 +94,24 @@ class InstaPickPhotoView: UIView, NibInit {
         addSubview(containerView)
         
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        containerView.widthAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true
+        containerView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         containerView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         containerView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         containerView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
         
-        addSubview(imageView)
-        
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        imageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor).isActive = true
-        imageViewHeightConstraint = imageView.heightAnchor.constraint(equalTo: heightAnchor)
-        
-        rateView.addSubview(rateLabel)
-        
-        rateView.translatesAutoresizingMaskIntoConstraints = false
-        rateLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        rateLabel.centerXAnchor.constraint(equalTo: rateView.centerXAnchor).isActive = true
-        rateLabel.centerYAnchor.constraint(equalTo: rateView.centerYAnchor).isActive = true
-        rateLabel.heightAnchor.constraint(equalTo: rateView.heightAnchor).isActive = true
-        rateLabel.widthAnchor.constraint(equalTo: rateLabel.heightAnchor).isActive = true
-
-        addSubview(rateView)
-
-        rateView.widthAnchor.constraint(equalTo: rateView.heightAnchor).isActive = true
-        rateView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor).isActive = true
-        rateViewCenterYConstraint = rateView.centerYAnchor.constraint(equalTo: centerYAnchor)
-
-        pickedView.addSubview(pickedLabel)
-
-        pickedView.translatesAutoresizingMaskIntoConstraints = false
-        pickedLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        pickedLabel.centerXAnchor.constraint(equalTo: pickedView.centerXAnchor).isActive = true
-        pickedLabel.centerYAnchor.constraint(equalTo: pickedView.centerYAnchor).isActive = true
-        pickedLabel.heightAnchor.constraint(equalTo: pickedView.heightAnchor).isActive = true
-        pickedLabel.widthAnchor.constraint(equalTo: pickedView.widthAnchor).isActive = true
-
-        addSubview(pickedView)
-        
-        pickedView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        pickedViewCenterXConstraint = pickedView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor)
-        
-        addSubview(pictureNotFoundStackView)
-        
+        imageView.addSubview(pictureNotFoundStackView)
         pictureNotFoundStackView.translatesAutoresizingMaskIntoConstraints = false
-        
         pictureNotFoundStackView.widthAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 0.8, constant: 0).isActive = true
         pictureNotFoundStackView.topAnchor.constraint(greaterThanOrEqualTo: imageView.topAnchor).isActive = true
         pictureNotFoundStackView.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
         pictureNotFoundStackView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
     }
     
-    private func setupCornerRadius() {
-        containerView.layer.cornerRadius = bounds.height * 0.5
-        
-        rateView.layer.cornerRadius = rateView.bounds.height * 0.5
-        
-        imageView.layer.cornerRadius = imageView.bounds.height * 0.5
-        
-        pickedView.layer.cornerRadius = pickedView.bounds.height * 0.5
-    }
     
     func setupLabelsDesign(isIPad: Bool) {
         rateLabel.textColor = .white
         
-        pickedLabel.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 20 : 14)
+        pickedLabel.font = .appFont(.regular, size: isIPad ? 18 : 12)
         pickedLabel.textColor = .white
         pickedLabel.text = TextConstants.instaPickPickedLabel
     }
@@ -157,7 +128,7 @@ class InstaPickPhotoView: UIView, NibInit {
 
         let pictureNotFoundLabel = UILabel()
 
-        pictureNotFoundLabel.font           = UIFont.TurkcellSaturaDemFont(size: fontSize)
+        pictureNotFoundLabel.font           = UIFont.appFont(.regular, size: fontSize)
 
         pictureNotFoundLabel.text           = TextConstants.instaPickPictureNotFoundLabel
         pictureNotFoundLabel.textColor      = ColorConstants.darkBlueColor
@@ -226,16 +197,12 @@ class InstaPickPhotoView: UIView, NibInit {
         if model.isPicked {
             pickedView.isHidden = isNeedHidePickedView(hasSmallPhotos: smallPhotosCount > 0)
             
-            rateView.isNeedGradient = true
-            containerView.isNeedGradient = true
         } else {
             pickedView.isHidden = true
-            
-            rateView.isNeedGradient = false
-            rateView.backgroundColor = UIColor.lrTealish
-            
-            containerView.isNeedGradient = false
-            containerView.backgroundColor = UIColor.lrTealish
+//
+//            rateView.backgroundColor = AppColor.button.color
+//
+//            containerView.backgroundColor = AppColor.button.color
         }
     }
     

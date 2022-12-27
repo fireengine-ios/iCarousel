@@ -14,39 +14,16 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
 
     var output: CreateStoryPreviewViewOutput!
     
-    @IBOutlet private weak var previewImageView: UIImageView!
-    @IBOutlet private weak var viewForPlayer: UIView!
+    @IBOutlet private weak var viewForPlayer: CustomAVPlayerLayer!
     
     var previewURLString: String? {
         didSet {
-            guard let previewURLString = previewURLString,
-            let sourceURL = URL(string: previewURLString)else {
+            guard let previewURLString = previewURLString else {
                 return
             }
-            playerController?.player = nil
-            playerController?.removeFromParent()
-            playerController = nil
-            player?.pause()
-            player = nil
             
-            let plauerItem = AVPlayerItem(url: sourceURL)
-            
-            player = AVPlayer(playerItem: plauerItem)
-            
-            let imageGenerator = AVAssetImageGenerator(asset: plauerItem.asset)
-            let time = CMTimeMake(value: 1, timescale: 1)
-            if let imageRef = try? imageGenerator.copyCGImage(at: time, actualTime: nil) {
-                let thumbnail = UIImage(cgImage: imageRef)
-                previewImageView.image = thumbnail
-            }
+            viewForPlayer.setAVPlayerURL(url: previewURLString)
         }
-    }
-    
-    var player: AVPlayer?
-    var playerController: FixedAVPlayerViewController?
-    
-    override func getBackgroundColor() -> UIColor {
-        return viewForPlayer.backgroundColor ?? UIColor.black
     }
     
     override func viewDidLoad() {
@@ -61,43 +38,21 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
     }
     
     private func setupNavigation() {
-        blackNavigationBarStyle()
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(didEnterBackground),
-                                               name: UIApplication.didEnterBackgroundNotification,
-                                               object: nil)
-        
-        navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: TextConstants.backTitle,
-                                                             style: .plain,
-                                                             target: nil,
-                                                             action: nil)
-        navBar?.topItem?.backBarButtonItem?.tintColor = .white
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "",
+                                                           style: .plain,
+                                                           target: nil,
+                                                           action: nil)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: TextConstants.createStorySave,
                                                             target: self,
                                                             selector: #selector(onSaveButton))
+        
+        title = output.getStoryName()
     }
-    
-    func playVideoByURLString(urlSting: String?) {
-        playerController = FixedAVPlayerViewController()
-        playerController?.player = player
-        self.present(playerController!, animated: true) { [weak self] in
-            self?.playerController?.player!.play()
-        }
-    }
-    
+
     @objc private func onSaveButton() {
         output.onSaveStory()
         navigationItem.rightBarButtonItem?.isEnabled = false
-    }
-    
-    @objc private func didEnterBackground() {
-        player?.pause()
-    }
-    
-    @IBAction private func onPlayButton() {
-        playVideoByURLString(urlSting: previewURLString)
     }
 }
 
@@ -112,6 +67,5 @@ extension CreateStoryPreviewViewController: CreateStoryPreviewViewInput {
     }
     
     func prepareToDismiss() {
-        navigationBarWithGradientStyle()
     }
 }

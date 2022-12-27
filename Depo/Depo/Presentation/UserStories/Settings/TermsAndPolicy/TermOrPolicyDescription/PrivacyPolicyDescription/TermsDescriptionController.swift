@@ -9,7 +9,7 @@
 
 import UIKit
 
-final class TermsDescriptionController: UIViewController {
+final class TermsDescriptionController: BaseViewController {
     
     private var textToPresent: String = ""
    
@@ -50,8 +50,6 @@ final class TermsDescriptionController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationBarWithGradientStyle()
-        backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
     private func setupLayout() {

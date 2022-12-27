@@ -33,7 +33,7 @@ class DarkModeViewController: BaseViewController {
 
     private lazy var darkModeSwitchView: UIView = {
         let darkModeSwitchView = DarkModeOptionsView.initFromNib()
-        darkModeSwitchView.delegate = self
+//        darkModeSwitchView.delegate = self
         return darkModeSwitchView
     }()
 
@@ -42,27 +42,10 @@ class DarkModeViewController: BaseViewController {
         stackView.addArrangedSubview(darkModeSwitchView)
         view.addSubview(stackView)
 
-        stackView.topAnchor.constraint(equalTo: view.topAnchor).activate()
-        stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
-        stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
-        stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).activate()
+        stackView.topAnchor.constraint(equalTo: view.safeTopAnchor).activate()
+        stackView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor).activate()
+        stackView.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor).activate()
+        stackView.bottomAnchor.constraint(equalTo: view.safeBottomAnchor).activate()
     }
 }
 
-//MARK: -DarkModeOptionsViewDelegate
-extension DarkModeViewController: DarkModeOptionsViewDelegate {
-    func appearanceDidSelected(with option: DarkModeOption) {
-        if #available(iOS 13.0, *) {
-            switch option {
-            case .dark:
-                storageVars.isDarkModeEnabled = true
-            case .light:
-                storageVars.isDarkModeEnabled = false
-            case .defaultOption:
-                storageVars.isDarkModeEnabled = nil
-            }
-            let appDelegate = UIApplication.shared.delegate as? AppDelegate
-            appDelegate?.overrideApplicationThemeStyle()
-        }
-    }
-}

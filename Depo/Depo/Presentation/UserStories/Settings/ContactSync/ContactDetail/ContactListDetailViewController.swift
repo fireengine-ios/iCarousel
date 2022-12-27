@@ -27,7 +27,6 @@ final class ContactListDetailViewController: BaseViewController, NibInit {
         super.viewDidLoad()
 
         setTitle(withString: TextConstants.contactDetailNavBarTitle)
-        backButtonForNavigationItem(title: TextConstants.backTitle)
         
         setupTableView()
         setupData()
@@ -49,10 +48,6 @@ final class ContactListDetailViewController: BaseViewController, NibInit {
         
         let header = ContactDetailHeader.initFromNib()
         header.configure(with: contact)
-        
-        let size = header.sizeToFit(width: tableView.bounds.width)
-        header.frame.size = size
-        
         tableView.tableHeaderView = header
     }
     

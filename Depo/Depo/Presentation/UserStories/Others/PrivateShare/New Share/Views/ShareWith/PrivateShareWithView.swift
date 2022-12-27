@@ -25,8 +25,8 @@ final class PrivateShareWithView: UIView, NibInit {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.privateShareStartPageSharedWithTitle
-            newValue.font = .TurkcellSaturaBolFont(size: 16)
-            newValue.textColor = AppColor.marineTwoAndWhite.color
+            newValue.font = UIFont.appFont(.medium, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
     

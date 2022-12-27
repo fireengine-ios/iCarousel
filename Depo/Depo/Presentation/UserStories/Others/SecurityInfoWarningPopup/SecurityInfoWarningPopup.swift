@@ -65,7 +65,7 @@ final class SecurityInfoWarningPopup: BasePopUpController, NibInit {
             newValue.setTitleColor(AppColor.marineTwoAndTealish.color, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
             newValue.layer.borderWidth = 1
-            newValue.layer.borderColor = AppColor.marineTwoAndTealish.color?.cgColor
+            newValue.layer.borderColor = AppColor.marineTwoAndTealish.cgColor
         }
     }
     

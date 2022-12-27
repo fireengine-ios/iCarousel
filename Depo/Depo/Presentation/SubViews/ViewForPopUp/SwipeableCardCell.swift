@@ -51,19 +51,19 @@ class SwipeableCardCell: UITableViewCell {
                 }
             }
             
-            subView.layer.cornerRadius = BaseCardView.baseViewCornerRadius
+            subView.layer.cornerRadius = 15
             subView.clipsToBounds = true
             
             let layer = CALayer()
             layer.frame = CGRect(x: CardsContainerView.indent, y: CardsContainerView.indent, width: frame.size.width - 2 * CardsContainerView.indent, height: subView.frame.size.height)
             
-            layer.shadowColor = UIColor.lightGray.cgColor
-            layer.shadowOpacity = 1
-            layer.shadowOffset = CGSize.zero
-            layer.shadowRadius = 3
-            layer.shadowPath = UIBezierPath(rect: CGRect(x: 0, y: 0, width: layer.frame.size.width, height: layer.frame.size.height)).cgPath
-            layer.shouldRasterize = true
-            layer.cornerRadius = BaseCardView.baseViewCornerRadius
+//            layer.shadowColor = UIColor.lightGray.cgColor
+//            layer.shadowOpacity = 1
+//            layer.shadowOffset = CGSize.zero
+//            layer.shadowRadius = 0
+//            layer.shadowPath = UIBezierPath(rect: CGRect(x: 0, y: 0, width: layer.frame.size.width, height: layer.frame.size.height)).cgPath
+//            layer.shouldRasterize = true
+//            layer.cornerRadius = 15
             
             contentView.layer.addSublayer(layer)
         }

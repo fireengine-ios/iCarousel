@@ -9,22 +9,7 @@
 import UIKit
 
 class HomePageModuleInitializer: NSObject {
-
-    //Connect with object on storyboard
-    @IBOutlet weak var homepageViewController: HomePageViewController!
-
-    override func awakeFromNib() {
-
-        let configurator = HomePageModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: homepageViewController)
-    }
-    
-    func conf() {
-        let configurator = HomePageModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: homepageViewController)
-    }
-
-    class func initializeViewController(with nibName: String) -> UIViewController {
+    class func initializeViewController(with nibName: String) -> HeaderContainingViewController.ChildViewController {
         let viewController = HomePageViewController(nibName: nibName, bundle: nil)
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory, .newFolder])
         viewController.homePageDataSource.addNotPermittedCardViewTypes(types: [.prepareQuickScroll, .sharedWithMeUpload])

@@ -25,7 +25,6 @@ struct RouteRequests {
     }
     
     // MARK: Environment
-    
     static var currentServerEnvironment = ServerEnvironment.production
     private static let applicationTarget = TextConstants.NotLocalized.appName
     
@@ -49,9 +48,11 @@ struct RouteRequests {
         
     static let baseContactsUrl: URL = baseContactsUrlShort +/ "ttyapi/"
     
+    static let drawCampaignUrl = "https://www.turkcell.com.tr/kampanyalar/diger-kampanyalarimiz/lifebox-kontratli-paket-al-lifeboxi-kullan-iphone-kazan"
+    
     static let baseContactsUrlShort: URL = {
         switch currentServerEnvironment {
-        case .test: return URL(string: "https://contactsynctest.turkcell.com.tr/")!
+        case .test: return URL(string: "https://adepodev-contactsync.turkcell.com.tr/")!
         case .preProduction: return URL(string: "https://adepotest-contactsync.turkcell.com.tr/")!
         case .production: return URL(string: "https://contactsync.turkcell.com.tr/")!
         }
@@ -509,6 +510,15 @@ struct RouteRequests {
     static let paycellConsent = baseUrl +/ "paycell/consent"
     static let paycellGain = baseUrl +/ "paycell/gain"
     static let paycellAcceptedFriends = "paycell/sold?pageNumber=%d&pageSize=%d"
-
+    
+    // MARK: - For You
+    static let forYouCollages = baseUrl +/ "foryou/collages"
+    static let forYouAnimations = baseUrl +/ "foryou/animations"
+    static let forYouStories = baseUrl +/ "foryou/stories"
+    static let forYouCollageCards = baseUrl +/ "foryou/collages/generated"
+    static let forYouAlbumCards = baseUrl +/ "foryou/albums/generated"
+    static let forYouAnimationCards = baseUrl +/ "foryou/animations/generated"
+    static let forYouThrowback = baseUrl +/ "foryou/years-ago"
+    static let forYouThrowbackDetail = "foryou/years-ago/%d"
     
 }

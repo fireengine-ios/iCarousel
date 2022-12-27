@@ -13,6 +13,7 @@ enum ControlPackageType {
     case usage(percentage: CGFloat)
     case myStorage(ControlPackageType.AccountType?)
     case accountType(ControlPackageType.AccountType)
+    case connectedAccounts
     
     enum AccountType {
         case standard
@@ -103,14 +104,18 @@ final class PackageInfoView: UIView, NibInit {
         case .accountType(let type):
             titleLabel.text = type.text
             detailLabel.isHidden = true
+            
+        case .connectedAccounts:
+            titleLabel.text = TextConstants.settingsViewCellConnectedAccounts
+            detailLabel.isHidden = true
         }
     }
 
     //MARK: Utility methods(private)
     private func setupDesign() {
-        titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
-        seeDetailsLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
-        detailLabel.font = UIFont.TurkcellSaturaMedFont(size: 16)
+        titleLabel.font = .appFont(.regular, size: 14)
+        seeDetailsLabel.font = .appFont(.regular, size: 14)
+        detailLabel.font = .appFont(.regular, size: 14)
 
         titleLabel.textColor = ColorConstants.textGrayColor
         seeDetailsLabel.textColor = ColorConstants.blueColor

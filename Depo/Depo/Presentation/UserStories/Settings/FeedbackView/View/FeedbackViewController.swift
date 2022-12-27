@@ -68,7 +68,6 @@ final class FeedbackViewController: ViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        navigationBarWithGradientStyle()
         bottomConstraint.constant = (view.frame.height - alertView.frame.height) * 0.5
         view.layoutIfNeeded()
         animateView()
@@ -178,8 +177,8 @@ final class FeedbackViewController: ViewController {
     // MARK: IBActions
     
     func getImageForCheckbox(isSelected: Bool) -> UIImage {
-        let imageName = isSelected ? "roundSelectedCheckBox" : "roundEmptyCheckBox"
-        return UIImage(named: imageName)!.withRenderingMode(.alwaysTemplate)
+        let imageType = isSelected ? Image.iconRadioButtonSelectBlue : Image.iconRadioButtonUnselect
+        return imageType.image.withRenderingMode(.alwaysTemplate)
     }
     
     @IBAction func onCloseButton() {

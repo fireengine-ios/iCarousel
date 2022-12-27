@@ -23,7 +23,6 @@ class AcceptedInvitationViewController: BaseViewController {
     var hasMore = true
 
     private var acceptedList: [InvitationRegisteredAccount] = []
-    private var accountBGColors: [UIColor] = []
     private var invitationType: InvitationType = .reference
     
     convenience init(invitationType: InvitationType) {
@@ -60,7 +59,6 @@ class AcceptedInvitationViewController: BaseViewController {
             case .success(let response):
                 self?.hasMore = response.hasMore
                 self?.acceptedList.append(contentsOf: response.accounts)
-                self?.accountBGColors = AccountConstants.shared.generateBGColors(numberOfItems: self?.acceptedList.count ?? 0)
                 self?.acceptedCollectionView.reloadData()
             case .failed(let error):
                 print("invitation Accepted response error = \(error.description)")
@@ -80,7 +78,6 @@ class AcceptedInvitationViewController: BaseViewController {
             case .success(let response):
                 self?.hasMore = response.hasMore
                 self?.acceptedList.append(contentsOf: response.accounts)
-                self?.accountBGColors = AccountConstants.shared.generateBGColors(numberOfItems: self?.acceptedList.count ?? 0)
                 self?.acceptedCollectionView.reloadData()
             case .failed(let error):
                 print("Paycell Accepted response error = \(error.description)")
@@ -107,9 +104,8 @@ extension AcceptedInvitationViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let acceptedPeople = self.acceptedList[indexPath.item]
-        let bgColor = self.accountBGColors[indexPath.item]
         let cell = collectionView.dequeue(cell: AcceptedPeopleCollectionViewCell.self, for: indexPath)
-        cell.configureCell(invitationRegisteredAccount: acceptedPeople, bgColor: bgColor)
+        cell.configureCell(invitationRegisteredAccount: acceptedPeople)
         return cell
     }
 

@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="TurkcellSaturaDem.ttf">
-            <string>TurkcellSaturaDem</string>
-        </array>
         <array key="Turkcell_Satura_Regular.ttf">
             <string>TurkcellSatura</string>
         </array>
@@ -26,96 +24,101 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="223"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instagram" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDv-b5-eXE">
-                        <rect key="frame" x="16" y="20" width="288" height="18"/>
-                        <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="18"/>
-                        <color key="textColor" name="darkText"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="BzA-ir-xxQ">
-                        <rect key="frame" x="16" y="56" width="288" height="31"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LN8-46-uQc">
+                        <rect key="frame" x="8" y="8" width="304" height="205"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagram" translatesAutoresizingMaskIntoConstraints="NO" id="Qsc-us-Nea">
-                                <rect key="frame" x="0.0" y="0.0" width="31" height="31"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="67" translatesAutoresizingMaskIntoConstraints="NO" id="BzA-ir-xxQ">
+                                <rect key="frame" x="12" y="16" width="276" height="31"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagram" translatesAutoresizingMaskIntoConstraints="NO" id="Qsc-us-Nea">
+                                        <rect key="frame" x="0.0" y="0.0" width="31" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Qsc-us-Nea" secondAttribute="height" multiplier="1:1" id="fBR-sm-GUb"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="InstaPick" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQZ-8w-2wI">
+                                        <rect key="frame" x="39" y="0.0" width="180" height="31"/>
+                                        <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="18"/>
+                                        <color key="textColor" name="darkText"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qaR-Xw-oTj">
+                                        <rect key="frame" x="227" y="0.0" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="instaPickSwitchValueChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="dlE-Lc-bYY"/>
+                                        </connections>
+                                    </switch>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="Qsc-us-Nea" secondAttribute="height" multiplier="1:1" id="fBR-sm-GUb"/>
+                                    <constraint firstItem="YQZ-8w-2wI" firstAttribute="leading" secondItem="Qsc-us-Nea" secondAttribute="trailing" constant="8" id="Hhj-XB-wxj"/>
+                                    <constraint firstItem="qaR-Xw-oTj" firstAttribute="leading" secondItem="YQZ-8w-2wI" secondAttribute="trailing" constant="8" id="KrK-dC-5VD"/>
+                                    <constraint firstItem="YQZ-8w-2wI" firstAttribute="top" secondItem="BzA-ir-xxQ" secondAttribute="top" id="NT8-a6-Bl1"/>
+                                    <constraint firstAttribute="bottom" secondItem="YQZ-8w-2wI" secondAttribute="bottom" id="kdJ-ER-szu"/>
                                 </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="InstaPick" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQZ-8w-2wI">
-                                <rect key="frame" x="44" y="0.0" width="182" height="31"/>
-                                <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="18"/>
-                                <color key="textColor" name="darkText"/>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" placeholderIntrinsicWidth="42" placeholderIntrinsicHeight="21" text="jkgkjhgkjhgkjhg" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4w-Mo-nUP">
+                                <rect key="frame" x="16" y="55" width="280" height="62"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qaR-Xw-oTj">
-                                <rect key="frame" x="239" y="0.0" width="51" height="31"/>
-                                <connections>
-                                    <action selector="instaPickSwitchValueChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="dlE-Lc-bYY"/>
-                                </connections>
-                            </switch>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="RmB-Ne-re5">
+                                <rect key="frame" x="12" y="152" width="280" height="31"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagram" translatesAutoresizingMaskIntoConstraints="NO" id="py1-23-qvm">
+                                        <rect key="frame" x="0.0" y="0.0" width="31" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="py1-23-qvm" secondAttribute="height" multiplier="1:1" id="1kD-PH-ydq"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Import From Instagram" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agT-6Z-UrP">
+                                        <rect key="frame" x="39" y="0.0" width="185" height="31"/>
+                                        <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="18"/>
+                                        <color key="textColor" name="darkText"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0T7-qd-OSF">
+                                        <rect key="frame" x="231" y="0.0" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="importSwitchValueChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="cHm-PP-69t"/>
+                                        </connections>
+                                    </switch>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="0T7-qd-OSF" firstAttribute="leading" secondItem="agT-6Z-UrP" secondAttribute="trailing" constant="8" id="0E7-13-Z0u"/>
+                                    <constraint firstItem="agT-6Z-UrP" firstAttribute="leading" secondItem="py1-23-qvm" secondAttribute="trailing" constant="8" id="Evm-kp-l9g"/>
+                                    <constraint firstItem="agT-6Z-UrP" firstAttribute="top" secondItem="RmB-Ne-re5" secondAttribute="top" id="Phk-kg-CTV"/>
+                                    <constraint firstAttribute="bottom" secondItem="agT-6Z-UrP" secondAttribute="bottom" id="SYU-Nf-BQd"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
-                    </stackView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" placeholderIntrinsicWidth="42" placeholderIntrinsicHeight="21" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4w-Mo-nUP">
-                        <rect key="frame" x="18" y="101" width="286" height="25"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l9X-Th-pcM">
-                        <rect key="frame" x="14" y="142" width="306" height="1"/>
-                        <color key="backgroundColor" name="itemSeperator"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="1" id="uf3-vX-moz"/>
+                            <constraint firstItem="BzA-ir-xxQ" firstAttribute="leading" secondItem="LN8-46-uQc" secondAttribute="leading" constant="12" id="2MC-Kf-QAF"/>
+                            <constraint firstItem="RmB-Ne-re5" firstAttribute="leading" secondItem="LN8-46-uQc" secondAttribute="leading" constant="12" id="4RE-d1-q8T"/>
+                            <constraint firstItem="RmB-Ne-re5" firstAttribute="top" secondItem="D4w-Mo-nUP" secondAttribute="bottom" constant="35" id="99p-sw-9kn"/>
+                            <constraint firstAttribute="trailing" secondItem="D4w-Mo-nUP" secondAttribute="trailing" constant="8" id="PZA-3F-C3w"/>
+                            <constraint firstItem="D4w-Mo-nUP" firstAttribute="top" secondItem="BzA-ir-xxQ" secondAttribute="bottom" constant="8" symbolic="YES" id="VeP-OJ-zFe"/>
+                            <constraint firstAttribute="trailing" secondItem="RmB-Ne-re5" secondAttribute="trailing" constant="12" id="WvK-Ux-pjX"/>
+                            <constraint firstAttribute="trailing" secondItem="BzA-ir-xxQ" secondAttribute="trailing" constant="16" id="h4j-8a-2lh"/>
+                            <constraint firstAttribute="bottom" secondItem="RmB-Ne-re5" secondAttribute="bottom" constant="22" id="o4k-sG-4Rm"/>
+                            <constraint firstItem="BzA-ir-xxQ" firstAttribute="top" secondItem="LN8-46-uQc" secondAttribute="top" constant="16" id="pGS-Bq-H5C"/>
+                            <constraint firstItem="D4w-Mo-nUP" firstAttribute="leading" secondItem="LN8-46-uQc" secondAttribute="leading" constant="16" id="sLY-jT-2s4"/>
                         </constraints>
                     </view>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="RmB-Ne-re5">
-                        <rect key="frame" x="16" y="167" width="288" height="28"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagram" translatesAutoresizingMaskIntoConstraints="NO" id="py1-23-qvm">
-                                <rect key="frame" x="0.0" y="0.0" width="28" height="28"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="py1-23-qvm" secondAttribute="height" multiplier="1:1" id="1kD-PH-ydq"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Import From Instagram" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agT-6Z-UrP">
-                                <rect key="frame" x="41" y="0.0" width="185" height="28"/>
-                                <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="18"/>
-                                <color key="textColor" name="darkText"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0T7-qd-OSF">
-                                <rect key="frame" x="239" y="0.0" width="51" height="28"/>
-                                <connections>
-                                    <action selector="importSwitchValueChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="cHm-PP-69t"/>
-                                </connections>
-                            </switch>
-                        </subviews>
-                    </stackView>
                 </subviews>
                 <color key="backgroundColor" name="primaryBackground"/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="RmB-Ne-re5" secondAttribute="bottom" constant="28" id="2Dv-ub-IaL"/>
-                    <constraint firstItem="l9X-Th-pcM" firstAttribute="top" secondItem="D4w-Mo-nUP" secondAttribute="bottom" constant="16" id="3yc-Cm-tAB"/>
-                    <constraint firstItem="D4w-Mo-nUP" firstAttribute="leading" secondItem="BzA-ir-xxQ" secondAttribute="leading" constant="2" id="58Y-Wz-gnG"/>
-                    <constraint firstItem="BzA-ir-xxQ" firstAttribute="top" secondItem="MDv-b5-eXE" secondAttribute="bottom" constant="18" id="7La-i4-kTy"/>
-                    <constraint firstAttribute="trailing" secondItem="MDv-b5-eXE" secondAttribute="trailing" constant="16" id="7jQ-Cw-GJV"/>
-                    <constraint firstItem="l9X-Th-pcM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="GYt-rH-4Ph"/>
-                    <constraint firstAttribute="trailing" secondItem="l9X-Th-pcM" secondAttribute="trailing" id="HZC-Kd-YTV"/>
-                    <constraint firstItem="MDv-b5-eXE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="ITS-ay-5v8"/>
-                    <constraint firstItem="RmB-Ne-re5" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="OTq-ep-XFO"/>
-                    <constraint firstItem="MDv-b5-eXE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Y8F-EN-Clu"/>
-                    <constraint firstItem="BzA-ir-xxQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="fMc-6A-vzH"/>
-                    <constraint firstItem="BzA-ir-xxQ" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="gqv-6v-pOL"/>
-                    <constraint firstItem="RmB-Ne-re5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="mlk-7n-Iky"/>
-                    <constraint firstItem="D4w-Mo-nUP" firstAttribute="trailing" secondItem="BzA-ir-xxQ" secondAttribute="trailing" id="oPf-Sr-0oX"/>
-                    <constraint firstItem="RmB-Ne-re5" firstAttribute="top" secondItem="l9X-Th-pcM" secondAttribute="bottom" constant="24" id="pSx-N0-K2A"/>
-                    <constraint firstItem="D4w-Mo-nUP" firstAttribute="top" secondItem="BzA-ir-xxQ" secondAttribute="bottom" constant="14" id="vEr-SQ-1RL"/>
+                    <constraint firstAttribute="trailing" secondItem="LN8-46-uQc" secondAttribute="trailing" constant="8" id="VwP-VN-ejh"/>
+                    <constraint firstItem="LN8-46-uQc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="h3d-jI-iGC"/>
+                    <constraint firstAttribute="bottom" secondItem="LN8-46-uQc" secondAttribute="bottom" constant="10" id="oij-F1-gYB"/>
+                    <constraint firstItem="LN8-46-uQc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="tci-vP-vV4"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" name="primaryBackground"/>
             <connections>
-                <outlet property="caption" destination="MDv-b5-eXE" id="CDt-44-Ux8"/>
+                <outlet property="bgView" destination="LN8-46-uQc" id="6sB-Ob-Zpb"/>
                 <outlet property="descriptionLabel" destination="D4w-Mo-nUP" id="Krc-T9-NJ8"/>
                 <outlet property="importFromInstagramIcon" destination="py1-23-qvm" id="bgp-HJ-PrB"/>
                 <outlet property="importFromInstagramText" destination="agT-6Z-UrP" id="jjn-QD-urY"/>
@@ -132,11 +135,11 @@
         <namedColor name="darkText">
             <color red="0.30199998617172241" green="0.30199998617172241" blue="0.30199998617172241" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="itemSeperator">
-            <color red="0.91699999570846558" green="0.91699999570846558" blue="0.91699999570846558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

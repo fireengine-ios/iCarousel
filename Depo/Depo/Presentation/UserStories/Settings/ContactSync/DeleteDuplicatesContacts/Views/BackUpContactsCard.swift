@@ -13,8 +13,8 @@ final class BackUpContactsCard: ContactSyncBaseCardView, NibInit {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.deleteDuplicatesBackUpTitle
-            newValue.textColor = AppColor.navyAndWhite.color
-            newValue.font = .TurkcellSaturaDemFont(size: 18)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.medium, size: 16.0)
             newValue.adjustsFontSizeToFitWidth()
         }
     }
@@ -22,8 +22,8 @@ final class BackUpContactsCard: ContactSyncBaseCardView, NibInit {
     @IBOutlet private weak var messageLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.deleteDuplicatesBackUpMessage
-            newValue.textColor = .lrBrownishGrey
-            newValue.font = .TurkcellSaturaDemFont(size: 14)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 14.0)
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
         }
@@ -32,8 +32,8 @@ final class BackUpContactsCard: ContactSyncBaseCardView, NibInit {
     @IBOutlet private weak var backupButton: UIButton! {
         willSet {
             newValue.setTitle(TextConstants.deleteDuplicatesBackUpButton, for: .normal)
-            newValue.setTitleColor(.lrTealishTwo, for: .normal)
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 14)
+            newValue.setTitleColor(AppColor.label.color, for: .normal)
+            newValue.titleLabel?.font = .appFont(.medium, size: 14.0)
             newValue.adjustsFontSizeToFitWidth()
         }
     }

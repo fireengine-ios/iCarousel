@@ -21,19 +21,19 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
     var appleGoogleUser: AppleGoogleUser?
     var disconnectAppleGoogleLogin: Bool?
     
-    private let newPasswordView: PasswordView = {
-        let view = PasswordView.initFromNib()
+    private let newPasswordView: ProfilePasswordEnterView = {
+        let view = ProfilePasswordEnterView()
         view.titleLabel.text = TextConstants.registrationCellTitlePassword
-        view.passwordTextField.placeholder = TextConstants.enterYourNewPassword
-        view.passwordTextField.returnKeyType = .next
+        view.textField.placeholder = TextConstants.enterYourNewPassword
+        view.textField.returnKeyType = .next
         return view
     }()
     
-    private let repeatPasswordView: PasswordView = {
-        let view = PasswordView.initFromNib()
+    private let repeatPasswordView: ProfilePasswordEnterView = {
+        let view = ProfilePasswordEnterView()
         view.titleLabel.text = TextConstants.registrationCellTitleReEnterPassword
-        view.passwordTextField.placeholder = TextConstants.enterYourRepeatPassword
-        view.passwordTextField.returnKeyType = .next
+        view.textField.placeholder = TextConstants.enterYourRepeatPassword
+        view.textField.returnKeyType = .next
         return view
     }()
 
@@ -41,7 +41,7 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
     @IBOutlet private weak var captchaView: CaptchaView!
     @IBOutlet private weak var passwordsStackView: UIStackView! {
         willSet {
-            newValue.spacing = 18
+            newValue.spacing = 22
             newValue.axis = .vertical
             newValue.alignment = .fill
             newValue.distribution = .fill
@@ -58,7 +58,7 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
             newValue.text = localized(.settingsSetNewPassword)
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 20)
             newValue.numberOfLines = 0
-            newValue.textColor = AppColor.blackColor.color?.withAlphaComponent(0.9)
+            newValue.textColor = AppColor.blackColor.color.withAlphaComponent(0.9)
         }
     }
     
@@ -105,8 +105,8 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
     }
     
     private func initialViewSetup() {
-        newPasswordView.passwordTextField.delegate = self
-        repeatPasswordView.passwordTextField.delegate = self
+        newPasswordView.textField.delegate = self
+        repeatPasswordView.textField.delegate = self
         captchaView.captchaAnswerTextField.delegate = self
         
         addTapGestureToHideKeyboard()
@@ -137,7 +137,7 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
                                                 AppConfigurator.logout()
                                             }
         })
-        router.presentViewController(controller: popupVC)
+        popupVC.open()
     }
     
     private func actionOnUpdateOnError(_ error: UpdatePasswordErrors) {
@@ -163,12 +163,12 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
             showErrorColorInNewPasswordView = true
             
             /// important check to show error only once
-            if newPasswordView.passwordTextField.isFirstResponder {
+            if newPasswordView.textField.isFirstResponder {
                 updateNewPasswordView()
             }
             
-            newPasswordView.showTextAnimated(text: errorText)
-            newPasswordView.passwordTextField.becomeFirstResponder()
+            newPasswordView.showSubtitleTextAnimated(text: errorText)
+            newPasswordView.textField.becomeFirstResponder()
             
         case .invalidOldPassword,
              .oldPasswordIsEmpty:
@@ -176,8 +176,8 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
             
         case .notMatchNewAndRepeatPassword,
              .repeatPasswordIsEmpty:
-            repeatPasswordView.showTextAnimated(text: errorText)
-            repeatPasswordView.passwordTextField.becomeFirstResponder()
+            repeatPasswordView.showSubtitleTextAnimated(text: errorText)
+            repeatPasswordView.textField.becomeFirstResponder()
             
         case .special, .unknown,
              .invalidToken,
@@ -193,7 +193,7 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
 extension PasswordEnterPopup: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         switch textField {
-        case newPasswordView.passwordTextField:
+        case newPasswordView.textField:
             updateNewPasswordView()
         default:
             break
@@ -202,19 +202,18 @@ extension PasswordEnterPopup: UITextFieldDelegate {
     
     private func updateNewPasswordView() {
         if showErrorColorInNewPasswordView {
-            newPasswordView.errorLabel.textColor = ColorConstants.textOrange
             /// we need to show error with color just once
             showErrorColorInNewPasswordView = false
         }
-        newPasswordView.showErrorLabelAnimated()
+        newPasswordView.showSubtitleAnimated()
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField {
-        case newPasswordView.passwordTextField:
-            newPasswordView.hideErrorLabelAnimated()
-        case repeatPasswordView.passwordTextField:
-            repeatPasswordView.hideErrorLabelAnimated()
+        case newPasswordView.textField:
+            newPasswordView.hideSubtitleAnimated()
+        case repeatPasswordView.textField:
+            repeatPasswordView.hideSubtitleAnimated()
         case captchaView.captchaAnswerTextField:
             captchaView.hideErrorAnimated()
         default:
@@ -224,9 +223,9 @@ extension PasswordEnterPopup: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
-        case newPasswordView.passwordTextField:
-            repeatPasswordView.passwordTextField.becomeFirstResponder()
-        case repeatPasswordView.passwordTextField:
+        case newPasswordView.textField:
+            repeatPasswordView.textField.becomeFirstResponder()
+        case repeatPasswordView.textField:
             captchaView.captchaAnswerTextField.becomeFirstResponder()
         case captchaView.captchaAnswerTextField:
             updatePassword()
@@ -242,8 +241,8 @@ extension PasswordEnterPopup: UITextFieldDelegate {
 extension PasswordEnterPopup {
     private func updatePassword() {
         
-        guard let newPassword = newPasswordView.passwordTextField.text,
-              let repeatPassword = repeatPasswordView.passwordTextField.text,
+        guard let newPassword = newPasswordView.textField.text,
+              let repeatPassword = repeatPasswordView.textField.text,
               let captchaAnswer = captchaView.captchaAnswerTextField.text
         else {
             assertionFailure("all fields should not be nil")
@@ -298,7 +297,7 @@ extension PasswordEnterPopup {
     }
     
     private func loginIfCan(with login: String) {
-        guard let newPassword = newPasswordView.passwordTextField.text else {
+        guard let newPassword = newPasswordView.textField.text else {
             assertionFailure("all fields should not be nil")
             return
         }

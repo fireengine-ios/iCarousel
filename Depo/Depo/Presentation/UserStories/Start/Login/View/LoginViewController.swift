@@ -10,12 +10,12 @@ import UIKit
 import Typist
 import WidgetKit
 
-final class LoginViewController: ViewController {
+final class LoginViewController: BaseViewController {
 
     //MARK: IBOutlets
     @IBOutlet private weak var alertsStackView: UIStackView! {
         willSet {
-            newValue.spacing = 16
+            newValue.spacing = 0
             newValue.alignment = .fill
             newValue.axis = .vertical
             newValue.distribution = .fill
@@ -28,6 +28,8 @@ final class LoginViewController: ViewController {
             newValue.alignment = .fill
             newValue.axis = .vertical
             newValue.distribution = .fill
+            newValue.isOpaque = true
+            newValue.backgroundColor = AppColor.primaryBackground.color
         }
     }
 
@@ -52,10 +54,10 @@ final class LoginViewController: ViewController {
     
     @IBOutlet private weak var rememberMeButton: UIButton! {
         willSet {
-            let normalImage = UIImage(named: "checkBoxNotSelected")
+            let normalImage = Image.iconSelectEmpty.image
             newValue.setImage(normalImage, for: .normal)
             
-            let selectedImage = UIImage(named: "checkbox_active")
+            let selectedImage = Image.iconSelectCheck.image
             newValue.setImage(selectedImage, for: .selected)
         }
     }
@@ -64,8 +66,8 @@ final class LoginViewController: ViewController {
         willSet {
             newValue.setTitle(TextConstants.loginTitle, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.backgroundColor = UIColor.lrTealish
+            newValue.titleLabel?.font = UIFont.appFont(.medium, size: 16.0)
+            newValue.backgroundColor = ColorConstants.darkBlueColor
             newValue.isOpaque = true
         }
     }
@@ -73,9 +75,9 @@ final class LoginViewController: ViewController {
     @IBOutlet private weak var forgotPasswordButton: UIButton! {
         willSet {
             let attributes: [NSAttributedString.Key : Any] = [
-                .foregroundColor : UIColor.lrTealish,
+                .foregroundColor : AppColor.label.color,
                 .underlineStyle : NSUnderlineStyle.single.rawValue,
-                .font : UIFont.TurkcellSaturaDemFont(size: 16)
+                .font : UIFont.appFont(.regular, size: 14.0)
             ]
             
             let attributedTitle = NSAttributedString(string: TextConstants.loginCantLoginButtonTitle,
@@ -92,16 +94,16 @@ final class LoginViewController: ViewController {
             newValue.textField.autocorrectionType = .no
             newValue.textField.quickDismissPlaceholder = TextConstants.loginEmailOrPhonePlaceholder
             newValue.titleLabel.text = TextConstants.loginCellTitleEmail
+            newValue.textField.textColor = AppColor.label.color
         }
     }
     
     @IBOutlet private weak var passwordEnterView: ProfilePasswordEnterView! {
         willSet {
             newValue.textField.enablesReturnKeyAutomatically = true
-
             newValue.textField.quickDismissPlaceholder = TextConstants.loginPasswordPlaceholder
-
             newValue.titleLabel.text = TextConstants.loginCellTitlePassword
+            newValue.textField.textColor = AppColor.label.color
         }
     }
     
@@ -116,12 +118,19 @@ final class LoginViewController: ViewController {
     @IBOutlet private weak var errorView: ErrorBannerView! {
         willSet {
             newValue.isHidden = true
+            newValue.backgroundColor = .clear
+            newValue.layer.cornerRadius = 8
+            newValue.layer.borderWidth = 1
+            newValue.layer.borderColor = AppColor.profileInfoOrange.cgColor
         }
     }
     
     @IBOutlet private weak var bannerView: SupportFormBannerView! {
         willSet {
             newValue.isHidden = true
+            newValue.layer.cornerRadius = 8
+            newValue.layer.borderColor = AppColor.borderColor.cgColor
+            newValue.backgroundColor = AppColor.loginAlertView.color
             newValue.delegate = self
             newValue.screenType = .login
         }
@@ -133,9 +142,6 @@ final class LoginViewController: ViewController {
     var appleGoogleUser: AppleGoogleUser?
     
     //MARK: - Life cycle
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -145,12 +151,17 @@ final class LoginViewController: ViewController {
         output.viewIsReady()
         
         #if DEBUG
-        loginEnterView.textField.text = "mavokij291@4tmail.com"//"qwerty@my.com"// "test3@test.test"//"test2@test.test"//"testasdasdMail@notRealMail.yep"
+        loginEnterView.textField.text = "yilmaz@test.com"//"qwerty@my.com"// "test3@test.test"//"test2@test.test"//"testasdasdMail@notRealMail.yep"
 
-        passwordEnterView.textField.text = "Alp071202+"// "zxcvbn"//".FsddQ646"
+        passwordEnterView.textField.text = "408090Ylz."// "zxcvbn"//".FsddQ646"
         #endif
         
         setGoogleUserIfNeeded()
+        
+        errorView.translatesAutoresizingMaskIntoConstraints = false
+        errorView.topAnchor.constraint(equalTo: bannerView.bottomAnchor, constant: -10).activate()
+        //errorView.heightAnchor.constraint(equalToConstant: 46).activate()
+        alertsStackView.sendSubviewToBack(errorView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -210,10 +221,8 @@ final class LoginViewController: ViewController {
     }
     
     private func setupNavBar() {
-        navigationBarWithGradientStyle()
         
         setNavigationTitle(title: TextConstants.loginTitle)
-        backButtonForNavigationItem(title: TextConstants.backTitle)
         setNavigationRightBarButton(title: TextConstants.loginFAQButton, target: self, action: #selector(handleFaqButtonTap))
     }
     
@@ -339,7 +348,8 @@ extension LoginViewController: UITextFieldDelegate {
                     output.startedEnteringPhoneNumber(withPlus: true)
                     return false
                 } else if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil {
-                    output.startedEnteringPhoneNumber(withPlus: false)
+                    /// Later on, according to condition, we may add this statement again!
+                    //output.startedEnteringPhoneNumber(withPlus: false)
                 }
             }
             

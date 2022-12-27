@@ -48,24 +48,34 @@ final class FacebookAccountConnectionCell: UITableViewCell, SocialConnectionCell
             importSwitch.setOn(isImportOn, animated: true)
         }
     }
-    
-    @IBOutlet private weak var caption: UILabel! {
-        didSet {
-            caption.font = UIFont.TurkcellSaturaDemFont(size: 18.0)
-            caption.text = TextConstants.facebook
+    @IBOutlet weak var bgView: UIView! {
+        willSet {
+            newValue.layer.masksToBounds = false
+            newValue.layer.cornerRadius = 15
+            newValue.layer.shadowOpacity = 0.2
+            newValue.layer.shadowColor = UIColor.gray.cgColor
+            newValue.layer.shadowOffset = CGSize(width: 0, height: 0)
         }
     }
+    
+//    @IBOutlet private weak var caption: UILabel! {
+//        didSet {
+//            caption.font = UIFont.TurkcellSaturaDemFont(size: 18.0)
+//            caption.text = TextConstants.facebook
+//        }
+//    }
     
     @IBOutlet private weak var icon: UIImageView! {
         didSet {
             icon.contentMode = .center
-            icon.image = UIImage(named:"facebook")
+            icon.image = UIImage(named: "iconTabFacebookBlue")
         }
     }
     
     @IBOutlet private weak var customText: UILabel! {
         didSet {
-            customText.font = UIFont.TurkcellSaturaRegFont(size: 18.0)
+            customText.font = .appFont(.regular, size: 14)
+            customText.textColor = AppColor.label.color
             customText.text = TextConstants.importFromFB
             customText.adjustsFontSizeToFitWidth()
         }
@@ -73,6 +83,8 @@ final class FacebookAccountConnectionCell: UITableViewCell, SocialConnectionCell
     
     @IBOutlet private weak var importSwitch: UISwitch! {
         didSet {
+            importSwitch.transform = CGAffineTransform(scaleX: 0.9, y: 0.8)
+            importSwitch.onTintColor = AppColor.toggleOn.color
             importSwitch.setOn(isImportOn, animated: false)
         }
     }

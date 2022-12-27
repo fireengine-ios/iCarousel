@@ -26,9 +26,6 @@ final class ForgotPasswordViewController: ViewController {
     fileprivate let keyboard = Typist.shared
 
     // MARK: Life cycle
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +43,6 @@ final class ForgotPasswordViewController: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -79,25 +75,26 @@ final class ForgotPasswordViewController: ViewController {
     }
 
     private func setupInfoTitle() {
-        infoTitle.textColor = AppColor.blackColor.color
+        infoTitle.textColor = AppColor.forgetPassText.color
         if Device.isIpad {
-            infoTitle.font = UIFont.TurkcellSaturaBolFont(size: 20)
+            infoTitle.font = .appFont(.medium, size: 20)
             infoTitle.textAlignment = .center
         } else {
-            infoTitle.font = UIFont.TurkcellSaturaBolFont(size: 15)
+            infoTitle.font = .appFont(.medium, size: 15)
             infoTitle.textAlignment = .left
         }
     }
     
     private func setupInputTitle() {
         let titleLabel = loginEnterView.titleLabel
-        titleLabel.textColor = .lrTealishTwo
+        loginEnterView.textField.text = ""
+        titleLabel.textColor = AppColor.forgetPassText.color
 
         if Device.isIpad {
-            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 24)
+            titleLabel.font = .appFont(.light, size: 20)
             titleLabel.textAlignment = .center
         } else {
-            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            titleLabel.font = .appFont(.light, size: 15)
             titleLabel.textAlignment = .left
         }
     }
@@ -105,13 +102,13 @@ final class ForgotPasswordViewController: ViewController {
     private func setupInputField() {
         let textField = loginEnterView.textField
 
-        var font = UIFont.TurkcellSaturaRegFont(size: 18)
+        var font: UIFont = .appFont(.light, size: 15)
         
         if Device.isIpad {
-            font = UIFont.TurkcellSaturaRegFont(size: 24)
+            font = .appFont(.light, size: 20)
         }
 
-        textField.textColor = AppColor.blackColor.color
+        textField.textColor = AppColor.forgetPassText.color
         textField.font = font
         textField.enablesReturnKeyAutomatically = true
         textField.autocapitalizationType = .none
@@ -125,10 +122,10 @@ final class ForgotPasswordViewController: ViewController {
     
     private func setupButton() {
         sendPasswordButton.setTitle(localized(.resetPasswordButtonTitle), for: .normal)
-        sendPasswordButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        sendPasswordButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-        sendPasswordButton.setBackgroundColor(UIColor.lrTealishTwo.withAlphaComponent(0.5), for: .disabled)
-        sendPasswordButton.setBackgroundColor(UIColor.lrTealishTwo, for: .normal)
+        sendPasswordButton.setTitleColor(.white, for: .normal)
+        sendPasswordButton.titleLabel?.font = .appFont(.medium, size: 16)
+        sendPasswordButton.setBackgroundColor(AppColor.forgetPassButtonDisable.color, for: .disabled)
+        sendPasswordButton.setBackgroundColor(AppColor.forgetPassButtonNormal.color, for: .normal)
 
         updateButtonState()
     }
@@ -245,7 +242,8 @@ extension ForgotPasswordViewController: UITextFieldDelegate {
                     output.startedEnteringPhoneNumber(withPlus: true)
                     return false
                 } else if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil {
-                    output.startedEnteringPhoneNumber(withPlus: false)
+                    /// Later on, according to condition, we may add this statement again!
+                    //output.startedEnteringPhoneNumber(withPlus: false)
                 }
             }
 

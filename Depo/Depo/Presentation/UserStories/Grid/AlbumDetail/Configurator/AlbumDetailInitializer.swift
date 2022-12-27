@@ -11,6 +11,7 @@ import UIKit
 enum UniversalViewType {
     case bottomBar
     case actionSheet
+    case actionSheetWithoutChangeCover
     case selectionMode
 }
 
@@ -25,7 +26,8 @@ class AlbumDetailModuleInitializer: NSObject {
         let viewController = AlbumDetailViewController(nibName: nibName, bundle: nil)
         viewController.album = album
         viewController.status = status
-        viewController.needToShowTabBar = !status.isContained(in: [.hidden, .trashed])
+        // TODO: Facelift: fix when implementing plus button
+//        viewController.needToShowTabBar = !status.isContained(in: [.hidden, .trashed])
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .uploadFromLifebox])
         viewController.cardsContainerView.addPermittedPopUpViewTypes(types: [.sync, .upload])
         viewController.cardsContainerView.isEnable = true
@@ -56,7 +58,14 @@ class AlbumDetailModuleInitializer: NSObject {
             showGridListButton: false
         )
 
-        let alertFilesActionsTypes = ElementTypes.albumElementsConfig(for: status, viewType: .actionSheet)
+        let isDisplay = UserDefaults.standard.bool(forKey: "recommendedAlbumDisplayIsActive")
+        var alertFilesActionsTypes = ElementTypes.albumElementsConfig(for: status, viewType: .actionSheet)
+        if  isDisplay {
+            alertFilesActionsTypes = ElementTypes.albumElementsConfig(for: status, viewType: .actionSheetWithoutChangeCover)
+            UserDefaults.standard.set(false, forKey: "recommendedAlbumDisplayIsActive")
+        }
+        
+        
         let selectionModeTypes = ElementTypes.albumElementsConfig(for: status, viewType: .selectionMode)
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: alertFilesActionsTypes,
                                                                    selectionModeTypes: selectionModeTypes)

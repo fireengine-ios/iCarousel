@@ -23,7 +23,7 @@ final class ImageTextHighlightView: UIView {
     }
 
     private func commonInit() {
-        backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        backgroundColor = AppColor.tint.color.withAlphaComponent(0.4)
         isUserInteractionEnabled = false
         // Hack to make highlight view below grabber views
         layer.zPosition = -1

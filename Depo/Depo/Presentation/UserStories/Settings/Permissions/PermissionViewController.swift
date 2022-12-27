@@ -11,8 +11,14 @@ protocol MobilePaymentPermissionProtocol: AnyObject {
     func backTapped(url: String)
 }
 
-final class PermissionViewController: ViewController, ControlTabBarProtocol {
+final class PermissionViewController: BaseViewController {
     private let accountService = AccountService()
+    
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
     
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -58,6 +64,11 @@ final class PermissionViewController: ViewController, ControlTabBarProtocol {
         return permissionView
     }()
     
+    private lazy var termsAndPolicy: UIView = {
+        let permissionView = TermsAndPolicyViewController.initFromNib()
+        return permissionView
+    }()
+    
     //MARK: - View Lifecycle
     
     override func viewDidLoad() {
@@ -66,27 +77,28 @@ final class PermissionViewController: ViewController, ControlTabBarProtocol {
         setupLayout()
         checkPermissionState()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
-        hideTabBar()
-    }
-    
+        
     private func setupScreen() {
         view.clipsToBounds = true
         view.backgroundColor = AppColor.primaryBackground.color
         
         setTitle(withString: TextConstants.settingsViewCellPermissions)
-        navigationController?.navigationItem.title = TextConstants.backTitle
     }
     
     private func setupLayout() {
-        view.addSubview(stackView)
+        view.addSubview(scrollView)
         
-        stackView.topAnchor.constraint(equalTo: view.topAnchor).activate()
-        stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
-        stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor).activate()
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).activate()
+        
+        scrollView.addSubview(stackView)
+        stackView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
     }
     
     private func checkPermissionState() {
@@ -102,6 +114,7 @@ final class PermissionViewController: ViewController, ControlTabBarProtocol {
                     self?.setupPermissionViewFromResult(result, type: .globalPermission)
                     self?.setupPermissionViewFromResult(result, type: .mobilePayment)
                     self?.setupPermissionViewFromResult(result, type: .kvkk)
+                    self?.stackView.addArrangedSubview(self?.termsAndPolicy ?? UIView())
                 case .failed(let error):
                     UIApplication.showErrorAlert(message: error.description)
                 }
@@ -185,7 +198,7 @@ extension PermissionViewController: PermissionViewDelegate {
         let attribute = [NSAttributedString.Key.font : UIFont.TurkcellSaturaDemFont(size: 16), NSAttributedString.Key.strokeColor : ColorConstants.marineTwo]
         attributeMessage.addAttributes(attribute, range: range)
         let popup = PopUpController.with(title: TextConstants.mobilePaymentClosePopupTitleLabel, attributedMessage: attributeMessage, image: .none, buttonTitle: TextConstants.ok)
-        UIApplication.topController()?.present(popup, animated: false, completion: nil)
+        popup.open()
     }
 }
 

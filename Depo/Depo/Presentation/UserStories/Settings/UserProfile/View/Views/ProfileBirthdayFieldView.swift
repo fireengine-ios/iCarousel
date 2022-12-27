@@ -13,7 +13,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let dayLayer: CALayer = {
         let newValue = CALayer()
         
-        newValue.backgroundColor = AppColor.itemSeperator.color?.cgColor
+        newValue.backgroundColor = AppColor.borderColor.color.cgColor
         
         return newValue
     }()
@@ -21,7 +21,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let monthLayer: CALayer = {
         let newValue = CALayer()
         
-        newValue.backgroundColor = AppColor.itemSeperator.color?.cgColor
+        newValue.backgroundColor = AppColor.borderColor.color.cgColor
         
         return newValue
     }()
@@ -29,7 +29,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let yearLayer: CALayer = {
         let newValue = CALayer()
         
-        newValue.backgroundColor = AppColor.itemSeperator.color?.cgColor
+        newValue.backgroundColor = AppColor.borderColor.color.cgColor
         
         return newValue
     }()
@@ -37,8 +37,8 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let monthTextField: UITextField = {
         let newValue = UITextField()
         
-        newValue.textColor = AppColor.blackColor.color
-        newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+        newValue.textColor = AppColor.borderColor.color
+        newValue.font = .appFont(.regular, size: 14.0)
         newValue.tintColor = UIColor.clear
         newValue.isUserInteractionEnabled = false
         
@@ -48,31 +48,50 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let yearTextField: UITextField = {
         let newValue = UITextField()
         
-        newValue.textColor = AppColor.blackColor.color
-        newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+        newValue.textColor = AppColor.borderColor.color
+        newValue.font = .appFont(.regular, size: 14.0)
         newValue.tintColor = UIColor.clear
         newValue.isUserInteractionEnabled = false
 
         return newValue
     }()
     
+    
+    private let monthSlashLabel : UILabel = {
+        let newValue = UILabel()
+        newValue.text = "/  "
+        newValue.textColor = AppColor.borderColor.color
+        newValue.font = .appFont(.regular, size: 14.0)
+        newValue.tintColor = UIColor.clear
+        return newValue
+    }()
+    
+    private let yearSlashLabel : UILabel = {
+        let newValue = UILabel()
+        newValue.text = "/  "
+        newValue.textColor = AppColor.borderColor.color
+        newValue.font = .appFont(.regular, size: 14.0)
+        newValue.tintColor = UIColor.clear
+        return newValue
+    }()
+    
     private let fourDigitsUnderlineWidth: CGFloat = 60
-    private let twoDigitsUnderlineWidth: CGFloat = 30
-    private let underlineOffset: CGFloat = 16
+    private let twoDigitsUnderlineWidth: CGFloat = 20
+    private let underlineOffset: CGFloat = 2
     
     private lazy var dateFormatter: DateFormatter = {
         let newValue = DateFormatter()
         
-        newValue.dateFormat = "dd MM yyyy"
+        newValue.dateFormat = "dd / MM / yyyy"
 
         return newValue
     }()
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        dayLayer.backgroundColor = AppColor.itemSeperator.color?.cgColor
-        monthLayer.backgroundColor = AppColor.itemSeperator.color?.cgColor
-        yearLayer.backgroundColor = AppColor.itemSeperator.color?.cgColor
+        dayLayer.backgroundColor = AppColor.itemSeperator.color.cgColor
+        monthLayer.backgroundColor = AppColor.itemSeperator.color.cgColor
+        yearLayer.backgroundColor = AppColor.itemSeperator.color.cgColor
     }
     
     override var editableText: String? {
@@ -89,7 +108,11 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
             }
             
             let numbers = newValue.components(separatedBy: " ")
-            if numbers.count == 3 {
+            if numbers.count == 5 {
+                textField.text = numbers[0]
+                monthTextField.text = numbers[2]
+                yearTextField.text = numbers[4]
+            } else if numbers.count == 3 {
                 textField.text = numbers[0]
                 monthTextField.text = numbers[1]
                 yearTextField.text = numbers[2]
@@ -107,7 +130,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
         datePicker.datePickerMode = .date
         datePicker.isOpaque = true
 
-        if let minDate = dateFormatter.date(from: "01 01 1900") {
+        if let minDate = dateFormatter.date(from: "01 / 01 / 1900") {
             datePicker.minimumDate = minDate
         }
         
@@ -163,21 +186,30 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
         underlineLayer.addSublayer(monthLayer)
         underlineLayer.addSublayer(yearLayer)
         
+        textFieldStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
+        textFieldStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 14).isActive = true
+        textFieldStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
+        
         let twoDigitsTextFieldWidth = twoDigitsUnderlineWidth + underlineOffset
+        
+        /// day
         textField.widthAnchor.constraint(equalToConstant: twoDigitsTextFieldWidth).isActive = true
+        textField.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
-        addSubview(monthTextField)
+        /// month
+        textFieldStackView.addArrangedSubview(monthSlashLabel)
         textFieldStackView.addArrangedSubview(monthTextField)
-        
         monthTextField.translatesAutoresizingMaskIntoConstraints = false
         monthTextField.widthAnchor.constraint(equalToConstant: twoDigitsTextFieldWidth).isActive = true
+        monthTextField.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
-        addSubview(yearTextField)
+        /// year
+        textFieldStackView.addArrangedSubview(yearSlashLabel)
         textFieldStackView.addArrangedSubview(yearTextField)
-        
         yearTextField.translatesAutoresizingMaskIntoConstraints = false
         yearTextField.widthAnchor.constraint(equalToConstant: fourDigitsUnderlineWidth).isActive = true
-        
+        yearTextField.heightAnchor.constraint(equalToConstant: 20).isActive = true
+
         ///need to fill stackView
         textFieldStackView.addArrangedSubview(UIView())
     }

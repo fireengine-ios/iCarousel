@@ -12,33 +12,15 @@ class ErrorBannerView: UIView {
 
     private let messageLabel: UILabel = {
         let newValue = UILabel()
-        
         newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
         newValue.textColor = ColorConstants.textOrange
         newValue.lineBreakMode = .byWordWrapping
         newValue.numberOfLines = 0
         newValue.text = ""
         newValue.isOpaque = true
-        
         return newValue
     }()
-    
-    @IBInspectable var shouldShowUnderlineLayer = true {
-        didSet {
-            updateUnderlineLayerVisibility()
-        }
-    }
-    
-    private let underlineLayer: CALayer = {
-        let newValue = CALayer()
         
-        newValue.backgroundColor = AppColor.itemSeperator.color?.cgColor
-        
-        return newValue
-    }()
-    
-    private let underlineWidth: CGFloat = 1.0
-    
     var message: String? {
         didSet {
             messageLabel.text = message
@@ -47,45 +29,24 @@ class ErrorBannerView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        setup()
+        initialSetup()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        setup()
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        initialSetup()
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        underlineLayer.frame = CGRect(x: 0.0,
-                                      y: frame.size.height - underlineWidth,
-                                      width: frame.width,
-                                      height: underlineWidth);
-        updateUnderlineLayerVisibility()
     }
     
-    private func setup() {
-        layer.addSublayer(underlineLayer)
+    private func initialSetup() {
         addSubview(messageLabel)
-        
-        messageLabel.text = ""
-        
-        setupLayout()
-    }
-    
-    private func setupLayout() {
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        messageLabel.topAnchor.constraint(equalTo: topAnchor).activate()
-        messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor).activate()
-        messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor).activate()
-        messageLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).activate()
-    }
-    
-    private func updateUnderlineLayerVisibility() {
-        underlineLayer.isHidden = !shouldShowUnderlineLayer
+        messageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20).activate()
+        messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).activate()
+        messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).activate()
+        messageLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).activate()
     }
 }

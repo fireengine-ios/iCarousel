@@ -18,12 +18,12 @@ class PhoneVerificationRouter: PhoneVerificationRouterInput {
     }
     
     func goAutoSync() {
-        router.pushViewController(viewController: router.synchronyseScreen)
+        router.pushViewController(viewController: router.synchronyseScreen(fromRegister: true))
     }
     
     func presentErrorPopUp(with message: String) {
         let controller = PopUpController.with(title: TextConstants.checkPhoneAlertTitle, message: message, image: .error, buttonTitle: TextConstants.ok)
-        router.presentViewController(controller: controller)
+        controller.open()
     }
     
     func showRedirectToSplash() {
@@ -35,8 +35,8 @@ class PhoneVerificationRouter: PhoneVerificationRouterInput {
                 self?.goToSplash()
             })
         })
-   
-        router.presentViewController(controller: popUp)
+        popUp.open()
+
     }
     
     func popToLoginWithPopUp(title: String?, message: String, image: PopUpImage, onClose: VoidHandler?) {
@@ -50,7 +50,7 @@ class PhoneVerificationRouter: PhoneVerificationRouterInput {
             }
         }
         
-        router.presentViewController(controller: popUp)
+        popUp.open()
     }
     
     func showAccountStatePopUp(image: PopUpImage,

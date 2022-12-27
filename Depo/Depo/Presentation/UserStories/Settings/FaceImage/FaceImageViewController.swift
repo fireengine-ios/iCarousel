@@ -28,20 +28,38 @@ final class FaceImageViewController: ViewController, NibInit {
         super.viewDidLoad()
         
         setTitle(withString: TextConstants.faceAndImageGrouping)
-        navigationController?.navigationItem.title = TextConstants.backTitle
         
         activityManager.delegate = self
         trackScreen()
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         displayManager.applyConfiguration(authorityStorage.accountType.isPremium ? .initialPremium : .initialStandart) 
 
-        navigationBarWithGradientStyle()
         checkFaceImageAndFacebokIsAllowed()
     }
+    
+    //will fix shadows when changing interfacestyle in viewController
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        designer.faceImageBackView.addRoundedShadows(cornerRadius: 16,
+                                                     shadowColor: AppColor.viewShadowLight.cgColor,
+                                                     opacity: 0.8, radius: 6.0)
+        designer.faceImageBackView.backgroundColor = AppColor.secondaryBackground.color
+        
+        designer.facebookImageBackView.addRoundedShadows(cornerRadius: 16,
+                                                         shadowColor: AppColor.viewShadowLight.cgColor,
+                                                         opacity: 0.8, radius: 6.0)
+        designer.facebookImageBackView.backgroundColor = AppColor.secondaryBackground.color
+
+        
+      }
+    
     
     @IBAction private func faceImageSwitchValueChanged(_ sender: UISwitch) {
         isShowFaceImageWaitAlert = true
@@ -97,7 +115,8 @@ final class FaceImageViewController: ViewController, NibInit {
     }
     
     private func showFaceImageWaitAlert() {
-        SnackbarManager.shared.show(type: .critical, message: TextConstants.faceImageWaitAlbum, action: .ok)
+        let router = RouterVC()
+        router.presentViewController(controller: router.bottomInfoBanner(text: TextConstants.faceImageWaitAlbum))
     }
     
     // MARK: - face image
@@ -109,6 +128,7 @@ final class FaceImageViewController: ViewController, NibInit {
                 case .success(let result):
                     NotificationCenter.default.post(name: .changeFaceImageStatus, object: self)
                     self?.sendAnaliticsForFaceImageAllowed(isAllowed: result.isFaceImageAllowed == true)
+                    ItemOperationManager.default.faceImageChanged(to: result.isFaceImageAllowed == true)
                     
                     if result.isFaceImageAllowed == true {
                         if self?.authorityStorage.faceRecognition == false {

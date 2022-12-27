@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -21,18 +22,15 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AjX-a0-H7G">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="AjX-a0-H7G">
+                    <rect key="frame" x="8" y="0.0" width="359" height="667"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GuY-4m-Vk6" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
-                    <rect key="frame" x="59" y="597" width="257" height="54"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GuY-4m-Vk6" customClass="DarkBlueButton" customModule="Billo" customModuleProvider="target">
+                    <rect key="frame" x="28" y="597" width="319" height="54"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="N31-4K-tau">
                             <variation key="widthClass=regular" constant="64"/>
-                        </constraint>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="257" id="sJS-li-Jit">
-                            <variation key="widthClass=regular" constant="332"/>
                         </constraint>
                     </constraints>
                     <state key="normal" title="Button"/>
@@ -45,11 +43,13 @@
             <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="AjX-a0-H7G" secondAttribute="bottom" id="8BU-rK-Vg4"/>
-                <constraint firstItem="AjX-a0-H7G" firstAttribute="trailing" secondItem="0B0-De-1Rs" secondAttribute="trailing" id="Lte-ag-1eP"/>
-                <constraint firstItem="AjX-a0-H7G" firstAttribute="top" secondItem="Pva-tI-ifo" secondAttribute="top" id="OaD-I0-PhM"/>
+                <constraint firstAttribute="trailing" secondItem="AjX-a0-H7G" secondAttribute="trailing" constant="8" id="Lte-ag-1eP"/>
+                <constraint firstItem="AjX-a0-H7G" firstAttribute="top" secondItem="0B0-De-1Rs" secondAttribute="top" id="OaD-I0-PhM"/>
                 <constraint firstItem="0B0-De-1Rs" firstAttribute="bottom" secondItem="GuY-4m-Vk6" secondAttribute="bottom" constant="16" id="SCw-2f-v2F"/>
-                <constraint firstItem="AjX-a0-H7G" firstAttribute="leading" secondItem="0B0-De-1Rs" secondAttribute="leading" id="cXB-Mn-FsP"/>
+                <constraint firstItem="GuY-4m-Vk6" firstAttribute="leading" secondItem="0B0-De-1Rs" secondAttribute="leading" constant="28" id="UZs-SH-TMD"/>
+                <constraint firstItem="AjX-a0-H7G" firstAttribute="leading" secondItem="Pva-tI-ifo" secondAttribute="leading" constant="8" id="cXB-Mn-FsP"/>
                 <constraint firstItem="GuY-4m-Vk6" firstAttribute="centerX" secondItem="Pva-tI-ifo" secondAttribute="centerX" id="fRf-cI-Iga"/>
+                <constraint firstItem="0B0-De-1Rs" firstAttribute="trailing" secondItem="GuY-4m-Vk6" secondAttribute="trailing" constant="28" id="iyV-qQ-j0d"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
@@ -60,5 +60,8 @@
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

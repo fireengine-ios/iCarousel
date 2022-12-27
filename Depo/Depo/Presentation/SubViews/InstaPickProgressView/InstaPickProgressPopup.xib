@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,6 +22,7 @@
                 <outlet property="bottomCaption" destination="vB8-dd-TD0" id="BVe-TK-LtL"/>
                 <outlet property="bottomConstraint" destination="r6p-JE-ARS" id="Kyb-z7-fq8"/>
                 <outlet property="circularLoader" destination="SIH-wk-0Wm" id="AUn-Oa-wmE"/>
+                <outlet property="contentView" destination="gOh-bg-eJT" id="veV-SR-evU"/>
                 <outlet property="leadingConstraint" destination="Ste-GB-OYL" id="2On-nF-xrT"/>
                 <outlet property="topCaption" destination="KtI-Qi-HYB" id="zKH-Bl-eRx"/>
                 <outlet property="topConstraint" destination="X1w-nV-UL6" id="wbq-oK-Z2g"/>
@@ -34,30 +35,30 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gOh-bg-eJT">
-                    <rect key="frame" x="16" y="16" width="343" height="627"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gOh-bg-eJT" userLabel="ContentView">
+                    <rect key="frame" x="12" y="16" width="351" height="651"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make sure to pick your best photos and reach more people!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="KtI-Qi-HYB">
-                            <rect key="frame" x="32" y="32" width="279" height="98"/>
+                            <rect key="frame" x="32" y="32" width="287" height="143"/>
                             <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="28"/>
                             <color key="textColor" name="marineTwoAndWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enjoy your time while we analyze your photos!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="vB8-dd-TD0">
-                            <rect key="frame" x="32" y="481" width="279" height="42"/>
+                            <rect key="frame" x="32" y="476" width="287" height="36"/>
                             <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="18"/>
                             <color key="textColor" name="marineTwoAndWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u1J-iq-dUr">
-                            <rect key="frame" x="318" y="8" width="17" height="22"/>
-                            <state key="normal" image="grayCloseButton"/>
+                            <rect key="frame" x="311" y="16" width="24" height="24"/>
+                            <state key="normal" image="iconCancelUnborder"/>
                             <connections>
                                 <action selector="close:" destination="-1" eventType="touchUpInside" id="7Rd-wE-C34"/>
                             </connections>
                         </button>
-                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="255" placeholderIntrinsicHeight="255" translatesAutoresizingMaskIntoConstraints="NO" id="SIH-wk-0Wm" customClass="InstaPickCircularLoader" customModule="Billo" customModuleProvider="target">
-                            <rect key="frame" x="44" y="186" width="255" height="255"/>
+                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="255" placeholderIntrinsicHeight="255" translatesAutoresizingMaskIntoConstraints="NO" id="SIH-wk-0Wm" customClass="InstaPickLineLoader" customModule="Billo" customModuleProvider="target">
+                            <rect key="frame" x="65" y="215" width="221" height="221"/>
                             <color key="backgroundColor" name="secondaryBackground"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="SIH-wk-0Wm" secondAttribute="height" multiplier="1:1" id="Di9-gE-vyT"/>
@@ -70,15 +71,15 @@
                         <constraint firstItem="KtI-Qi-HYB" firstAttribute="leading" secondItem="gOh-bg-eJT" secondAttribute="leading" constant="32" id="DRY-aH-x7r"/>
                         <constraint firstItem="vB8-dd-TD0" firstAttribute="trailing" secondItem="KtI-Qi-HYB" secondAttribute="trailing" id="EIl-Rx-4OT"/>
                         <constraint firstItem="SIH-wk-0Wm" firstAttribute="centerY" secondItem="gOh-bg-eJT" secondAttribute="centerY" id="KLa-6W-7i4"/>
-                        <constraint firstAttribute="trailing" secondItem="u1J-iq-dUr" secondAttribute="trailing" constant="8" id="Qxn-O1-AZL"/>
-                        <constraint firstItem="u1J-iq-dUr" firstAttribute="top" secondItem="gOh-bg-eJT" secondAttribute="top" constant="8" id="ROe-7o-eA3"/>
+                        <constraint firstAttribute="trailing" secondItem="u1J-iq-dUr" secondAttribute="trailing" constant="16" id="Qxn-O1-AZL"/>
+                        <constraint firstItem="u1J-iq-dUr" firstAttribute="top" secondItem="gOh-bg-eJT" secondAttribute="top" constant="16" id="ROe-7o-eA3"/>
                         <constraint firstItem="vB8-dd-TD0" firstAttribute="leading" secondItem="KtI-Qi-HYB" secondAttribute="leading" id="SXZ-q4-HcB"/>
                         <constraint firstAttribute="trailing" secondItem="KtI-Qi-HYB" secondAttribute="trailing" constant="32" id="T2g-lw-LR3"/>
                         <constraint firstItem="KtI-Qi-HYB" firstAttribute="top" secondItem="gOh-bg-eJT" secondAttribute="top" constant="32" id="T4s-mp-u1d"/>
                         <constraint firstItem="SIH-wk-0Wm" firstAttribute="centerX" secondItem="gOh-bg-eJT" secondAttribute="centerX" id="U7I-yK-f6D"/>
-                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SIH-wk-0Wm" secondAttribute="trailing" constant="16" id="Yqn-pP-bGV"/>
-                        <constraint firstItem="SIH-wk-0Wm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gOh-bg-eJT" secondAttribute="leading" constant="16" id="Zpb-E8-0gd"/>
-                        <constraint firstItem="SIH-wk-0Wm" firstAttribute="top" relation="greaterThanOrEqual" secondItem="KtI-Qi-HYB" secondAttribute="bottom" constant="8" id="vJd-uK-KfT"/>
+                        <constraint firstAttribute="trailing" secondItem="SIH-wk-0Wm" secondAttribute="trailing" constant="65" id="Yqn-pP-bGV"/>
+                        <constraint firstItem="SIH-wk-0Wm" firstAttribute="leading" secondItem="gOh-bg-eJT" secondAttribute="leading" constant="65" id="Zpb-E8-0gd"/>
+                        <constraint firstItem="SIH-wk-0Wm" firstAttribute="top" secondItem="KtI-Qi-HYB" secondAttribute="bottom" constant="40" id="vJd-uK-KfT"/>
                         <constraint firstItem="vB8-dd-TD0" firstAttribute="top" secondItem="SIH-wk-0Wm" secondAttribute="bottom" constant="40" id="vbL-M9-Zxo"/>
                     </constraints>
                 </view>
@@ -86,16 +87,16 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.5" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="gOh-bg-eJT" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="Ste-GB-OYL"/>
+                <constraint firstItem="gOh-bg-eJT" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="12" id="Ste-GB-OYL"/>
                 <constraint firstItem="gOh-bg-eJT" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="X1w-nV-UL6"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="gOh-bg-eJT" secondAttribute="bottom" constant="24" id="r6p-JE-ARS"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="gOh-bg-eJT" secondAttribute="trailing" constant="16" id="z6E-VL-Wlh"/>
+                <constraint firstAttribute="bottom" secondItem="gOh-bg-eJT" secondAttribute="bottom" id="r6p-JE-ARS"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="gOh-bg-eJT" secondAttribute="trailing" constant="12" id="z6E-VL-Wlh"/>
             </constraints>
             <point key="canvasLocation" x="294.53125" y="226.17187499999997"/>
         </view>
     </objects>
     <resources>
-        <image name="grayCloseButton" width="17" height="17"/>
+        <image name="iconCancelUnborder" width="24" height="24"/>
         <namedColor name="marineTwoAndWhite">
             <color red="0.024000000208616257" green="0.17299999296665192" blue="0.2630000114440918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

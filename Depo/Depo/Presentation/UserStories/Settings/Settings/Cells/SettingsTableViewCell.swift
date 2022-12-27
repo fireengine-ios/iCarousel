@@ -17,28 +17,27 @@ class SettingsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.backgroundColor = AppColor.secondaryBackground.color
+        titleLabel.textColor = AppColor.label.color
+        titleLabel.font = .appFont(.regular, size: 14)
         
-        titleLabel.textColor = ColorConstants.textGrayColor
-        titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         //let bgView = UIView()
-        if (selected) {
-            titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
+        
+        if Device.isIpad, selected {
             backgroundColor = ColorConstants.selectedCellBlueColor
-        } else {
-            titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            backgroundColor = AppColor.primaryBackground.color
         }
         //backgroundView = bgView
         // Configure the view for the selected state
     }
     
-    func setTextForLabel(titleText: String, needShowSeparator: Bool) {
+    func setTextForLabel(titleText: String, needShowSeparator: Bool, background: UIColor? = nil) {
         titleLabel.text = titleText
         separatorView.isHidden = !needShowSeparator
+        self.backgroundColor = background ?? AppColor.secondaryBackground.color
     }
     
 }

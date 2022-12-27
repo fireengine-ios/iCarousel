@@ -10,6 +10,7 @@ import UIKit
 
 final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildController {
 
+    @IBOutlet weak var headerStackView: UIStackView!
     @IBOutlet private weak var sortPanelContainer: UIView!
     @IBOutlet private weak var collectionView: UICollectionView!
     private let emptyView = EmptyView.view(with: .trashBin)
@@ -26,6 +27,12 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     
     weak var photoVideoDetailModule: PhotoVideoDetailModuleInput? //no need for stong reference, since we need it till ViewController is alive
     
+    private lazy var countView: GridListCountView  = {
+        let view = GridListCountView.initFromNib()
+        view.delegate = self
+        return view
+    }()
+    
     //MARK: - View lifecycle
     
     deinit {
@@ -34,7 +41,10 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        initTrashBin()
+    }
+    
+    private func initTrashBin() {
         needToShowTabBar = true
         ItemOperationManager.default.startUpdateView(view: self)
         sortingManager.addBarView(to: sortPanelContainer)
@@ -54,11 +64,6 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
         
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .trashBin))
         
-        if dataSource.isSelectionStateActive {
-            navigationBarWithGradientStyle()
-        } else {
-            homePageNavigationBarStyle()
-        }
         navbarManager.setupNavBarButtons(animated: false)
         
         //need to fix crash on show bottom bar
@@ -68,6 +73,7 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         stopSelectionState()
+        countView.removeFromSuperview()
     }
     
     override func willMove(toParent parent: UIViewController?) {
@@ -82,6 +88,27 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
             
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.TrashBinScreen())
         }
+    }
+    
+    func configureCountView(isShown: Bool) {
+        countView.removeFromSuperview()
+        
+        if isShown {
+            headerStackView.addArrangedSubview(countView)
+        }
+    }
+    
+    func setCountView(selectedItemsCount: Int) {
+        countView.setCountLabel(with: selectedItemsCount)
+    }
+    
+    func selectedItemsCountChange(with count: Int) {
+        let title = String(count) + " " + TextConstants.accessibilitySelected
+        setTitle(withString: title)
+        let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
+        navigationItem.title = title
+         
+        setCountView(selectedItemsCount: count)
     }
     
     private func setupRefreshControl() {
@@ -143,36 +170,51 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     }
 }
 
+extension TrashBinViewController: GridListCountViewDelegate {
+    func cancelSelection() {
+        configureCountView(isShown: false)
+        bottomBarManager.hide()
+        collectionView.contentInset.bottom = 0
+        stopSelectionState()
+    }
+}
+
 // MARK: - Selection State Methods
 
 extension TrashBinViewController {
     private func startSelectionState() {
         navigationItem.hidesBackButton = true
-        navbarManager.setSelectionState()
-        navigationBarWithGradientStyle()
-        sortingManager.isActive = false
+        //sortingManager.isActive = false
+        /// Necessary, if you want to hide or show sortPanelContainer
+        //navbarManager.setSelectionState()
     }
     
     private func stopSelectionState() {
-        navigationItem.hidesBackButton = false
-        dataSource.cancelSelection()
-        navbarManager.setDefaultState(sortType: dataSource.sortedRule)
-        homePageNavigationBarStyle()
         bottomBarManager.hide()
         collectionView.contentInset.bottom = 0
-        updateMoreButton()
-        sortingManager.isActive = true
+        configureCountView(isShown: false)
+        navigationItem.hidesBackButton = false
+        dataSource.cancelSelection()
+//        navbarManager.setDefaultState(sortType: dataSource.sortedRule)
+//        updateMoreButton()
+        
+        /// Necessary, if you want to hide or show sortPanelContainer
+        //sortingManager.isActive = true
     }
     
     private func updateBarsForSelectedObjects(count: Int) {
-        navbarManager.changeSelectionItems(count: count)
+//        navbarManager.changeSelectionItems(count: count)
 
         if count == 0 {
-            bottomBarManager.hide()
-            collectionView.contentInset.bottom = 0
+
+            stopSelectionState()
+            
         } else {
+            startSelectionState()
             bottomBarManager.show()
-            collectionView.contentInset.bottom = bottomBarManager.editingTabBar?.editingBar.bounds.height ?? 0
+            collectionView.contentInset.bottom = 40
+            selectedItemsCountChange(with: count)
+            configureCountView(isShown: true)
         }
     }
     
@@ -221,6 +263,14 @@ extension TrashBinViewController: TrashBinDataSourceDelegate {
 //MARK: - TrashBinSortingManagerDelegate
 
 extension TrashBinViewController: TrashBinSortingManagerDelegate {
+    func onMoreButton(sender: Any) {
+        threeDotsManager.showActions(isSelectingMode: dataSource.isSelectionStateActive, sender: self)
+    }
+    
+    func filterChanged(filter: MoreActionsConfig.MoreActionsFileType) {
+        
+    }
+    
     func sortingRuleChanged(rule: SortedRules) {
         dataSource.sortedRule = rule
         interactor.sortedRule = rule
@@ -273,13 +323,17 @@ extension TrashBinViewController: TrashBinBottomBarManagerDelegate {
     func onBottomBarDelete() {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
         let selectedItems = dataSource.allSelectedItems
-        interactor.delete(items: selectedItems)
+        interactor.delete(items: selectedItems) { [weak self] in
+            self?.stopSelectionState()
+        }
     }
     
     func onBottomBarRestore() {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .restore))
         let selectedItems = dataSource.allSelectedItems
-        interactor.restore(items: selectedItems)
+        interactor.restore(items: selectedItems) { [weak self] in
+            self?.stopSelectionState()
+        }
     }
 }
 
@@ -316,7 +370,9 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
             selectedItems = dataSource.allSelectedItems
         }
         
-        interactor.restore(items: selectedItems)
+        interactor.restore(items: selectedItems) {
+            debugPrint("Restore is Done")
+        }
     }
     
     func onThreeDotsManagerDelete(item: Item?) {
@@ -328,7 +384,9 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
             selectedItems = dataSource.allSelectedItems
         }
         
-        interactor.delete(items: selectedItems)
+        interactor.delete(items: selectedItems) {
+            debugPrint("Delete is Done")
+        }
     }
     
     func onThreeDotsManagerInfo(item: Item?) {

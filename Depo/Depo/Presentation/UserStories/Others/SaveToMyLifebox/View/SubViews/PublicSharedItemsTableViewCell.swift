@@ -13,8 +13,8 @@ class PublicSharedItemsTableViewCell: UITableViewCell {
     
     @IBOutlet weak private var nameLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaFont(size: 19)
-            newValue.textColor = ColorConstants.textGrayColor
+            newValue.font = .appFont(.regular, size: 14)
+            newValue.textColor = AppColor.label.color
         }
     }
     @IBOutlet weak private var fileImageView: UIImageView!

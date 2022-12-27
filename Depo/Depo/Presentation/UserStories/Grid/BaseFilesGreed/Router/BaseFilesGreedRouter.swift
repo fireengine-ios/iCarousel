@@ -94,6 +94,11 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
         router.pushViewController(viewController: controller)
     }
     
+    func openCreateNewStory(output: UIViewController?) {
+        let controller = router.createStory(navTitle: TextConstants.createStory)
+        router.pushViewController(viewController: controller)
+    }
+    
     func showUpload() {
         let controller = router.uploadPhotos()
         let navigation = NavigationController(rootViewController: controller)
@@ -104,5 +109,17 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
     func openNeededInstaPick(viewController: UIViewController) {
         let vc = router.createRootNavigationControllerWithModalStyle(controller: viewController)
         router.presentViewController(controller: vc)
+    }
+    
+    func openCreateNewAlbum() {
+        let controller = router.createNewAlbum()
+        let nController = NavigationController(rootViewController: controller)
+        router.presentViewController(controller: nController)
+    }
+    
+    func openUpload() {
+        let controller = router.uploadPhotos()
+        let nController = NavigationController(rootViewController: controller)
+        router.presentViewController(controller: nController)
     }
 }

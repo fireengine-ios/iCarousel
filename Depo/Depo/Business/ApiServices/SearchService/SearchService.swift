@@ -59,37 +59,46 @@ enum FieldValue: CustomStringConvertible {
     case favorite
     case cropy
     case story
+    case collage
+    case animation
     case all
+    case documentsAndMusic
     
     var description: String {
         switch self {
-        case .audio         : return "audio"
-        case .playLists     : return "playList"
-        case .image         : return "image"
-        case .video         : return "video"
-        case .albums        : return "album/photo"
-        case .imageAndVideo : return "image%20OR%20video"
-        case .document      : return "application%20OR%20text%20NOT%20directory"
-        case .favorite      : return "true"
-        case .cropy         : return "true"
-        case .story         : return "true"
-        case .all           : return ""
+        case .audio             : return "audio"
+        case .playLists         : return "playList"
+        case .image             : return "image"
+        case .video             : return "video"
+        case .albums            : return "album/photo"
+        case .imageAndVideo     : return "image%20OR%20video"
+        case .document          : return "application%20OR%20text%20NOT%20directory"
+        case .favorite          : return "true"
+        case .cropy             : return "true"
+        case .story             : return "true"
+        case .collage           : return "true"
+        case .animation         : return "true"
+        case .all               : return ""
+        case .documentsAndMusic : return "audio%20OR%20application%20OR%20text%20NOT%20directory"
         }
     }
     
     var rawValue: String {
         switch self {
-        case .audio         : return "musics"
-        case .playLists     : return "playList"
-        case .image         : return "images"
-        case .albums        : return "album"
-        case .video         : return "videos"
-        case .imageAndVideo : return "photos_and_videos"
-        case .document      : return "documents"
-        case .favorite      : return "true"
-        case .cropy         : return "true"
-        case .story         : return "true"
-        case .all           : return ""
+        case .audio             : return "musics"
+        case .playLists         : return "playList"
+        case .image             : return "images"
+        case .albums            : return "album"
+        case .video             : return "videos"
+        case .imageAndVideo     : return "photos_and_videos"
+        case .document          : return "documents"
+        case .favorite          : return "true"
+        case .cropy             : return "true"
+        case .story             : return "true"
+        case .collage           : return "true"
+        case .animation         : return "true"
+        case .all               : return ""
+        case .documentsAndMusic : return ""
         }
     }
 }
@@ -100,6 +109,8 @@ enum SearchContentType: CustomStringConvertible {
     case favorite
     case album
     case story
+    case collage
+    case animation
     
     var description: String {
         switch self {
@@ -108,6 +119,8 @@ enum SearchContentType: CustomStringConvertible {
         case .favorite     : return "metadata.X-Object-Meta-Favourite"
         case .album        : return "album/photo"
         case .story        : return "metadata.Video-Slideshow"
+        case .collage      : return "content_type"
+        case .animation      : return "content_type"
         }
     }
 }
@@ -151,7 +164,6 @@ class SearchByFieldParameters: BaseRequestParametrs, Equatable {
             let notHiddenParameter = "&showHidden=false"
             searchWithParam = searchWithParam.appending(notHiddenParameter)
         }
-        
         return URL(string: searchWithParam, relativeTo: super.patch)!
     }
 }

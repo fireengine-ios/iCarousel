@@ -14,13 +14,11 @@ class CollectionViewHeaderWithText: UICollectionReusableView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        configurateView()
     }
     
-    func configurateView() {
-        titleLabel.text = TextConstants.createStoryPhotosHeaderTitle
-        titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        titleLabel.textColor = ColorConstants.lightText
+    func configure(with text: String) {
+        titleLabel.text = text
+        titleLabel.font = .appFont(.medium, size: 14)
+        titleLabel.textColor = AppColor.label.color
     }
 }

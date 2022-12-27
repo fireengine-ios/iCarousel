@@ -12,7 +12,13 @@ final class DeleteDuplicatesHeader: UIView, NibInit {
     
     @IBOutlet private weak var contentView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.toolbarTintColor
+            newValue.backgroundColor = AppColor.background.color
+        }
+    }
+    
+    @IBOutlet weak var imageView: UIImageView! {
+        willSet {
+            newValue.image = Image.iconBackupContactMain.image
         }
     }
     
@@ -21,18 +27,21 @@ final class DeleteDuplicatesHeader: UIView, NibInit {
             newValue.text = ""
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
+            newValue.font = .appFont(.regular, size: 14)
+            newValue.textColor = AppColor.label.color
         }
     }
     
     func setup(with count: Int) {
         let string = String(format: TextConstants.deleteDuplicatesTopLabel, count)
-        
-        let attributedString = NSMutableAttributedString(string: string, attributes: [.foregroundColor: ColorConstants.duplicatesGray,
-                                                                                      .font: UIFont.TurkcellSaturaMedFont(size: 20)])
+        let font = UIFont.appFont(.regular, size: 14)
+        let color = AppColor.label.color
+        let attributedString = NSMutableAttributedString(string: string, attributes: [.foregroundColor: color,
+                                                                                      .font: font])
         
         let range = (string as NSString).range(of: "\(count)")
-        attributedString.addAttributes([.font: UIFont.TurkcellSaturaBolFont(size: 20)], range: range)
+        attributedString.addAttributes([.font: font], range: range)
         
-        titleLabel.attributedText = attributedString
+        titleLabel.text = string
     }
 }

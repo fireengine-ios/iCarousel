@@ -70,23 +70,23 @@ enum Strings: String, Localizable {
 
 
     // MARK: - Delete Account
-    case deleteAccountButton             = "DELETE_ACC_BTN"
-    case deleteAccountDescription        = "DELETE_ACC_DESC"
-    case deleteAccountFirstPopupTitle    = "DELETE_ACC_FIRST_POP_UP_TITLE"
-    case deleteAccountFirstPopupMessage  = "DELETE_ACC_POP_UP_CONTENT_FIRST"
-    case deleteAccountSecondPopupMessage = "DELETE_ACC_POP_UP_CONTENT_SECOND"
-    case deleteAccountGSMInput           = "DELETE_ACC_INPUT_GSM"
-    case deleteAccountPasswordInput      = "DELETE_ACC_INPUT_PASS"
-    case deleteAccountPasswordError      = "DELETE_ACC_PASS_ERROR"
-    case deleteAccountThirdPopupTitle    = "DELETE_ACC_THIRD_POP_UP_TITLE"
-    case deleteAccountThirdPopupMessage  = "DELETE_ACC_POP_UP_CONTENT_THIRD"
-    case deleteAccountFinalPopupTitle    = "DELETE_ACC_FINAL_POP_UP_TITLE"
-    case deleteAccountFinalPopupMessage  = "DELETE_ACC_POP_UP_CONTENT_FINAL"
-    case deleteAccountDeleteButton       = "DELETE_ACC_POP_UP_BTN_DELETE"
-    case deleteAccountCancelButton       = "DELETE_ACC_POP_UP_BTN_CANCEL"
-    case deleteAccountContinueButton     = "DELETE_ACC_POP_UP_BTN_CONTINUE"
-    case deleteAccountConfirmButton      = "DELETE_ACC_POP_UP_BTN_CONFIRM"
-    case deleteAccountCloseButton        = "DELETE_ACC_POP_UP_BTN_CLOSE"
+    case deleteAccountButton              = "DELETE_ACC_BTN"
+    case deleteAccountDescription         = "DELETE_ACC_DESC"
+    case deleteAccountFirstPopupTitle     = "DELETE_ACC_FIRST_POP_UP_TITLE"
+    case deleteAccountFirstPopupMessage   = "DELETE_ACC_POP_UP_CONTENT_FIRST"
+    case deleteAccountSecondPopupMessage  = "DELETE_ACC_POP_UP_CONTENT_SECOND"
+    case deleteAccountGSMInput            = "DELETE_ACC_INPUT_GSM"
+    case deleteAccountPasswordInput       = "DELETE_ACC_INPUT_PASS"
+    case deleteAccountPasswordError       = "DELETE_ACC_PASS_ERROR"
+    case deleteAccountThirdPopupTitle     = "DELETE_ACC_THIRD_POP_UP_TITLE"
+    case deleteAccountThirdPopupMessage   = "DELETE_ACC_POP_UP_CONTENT_THIRD"
+    case deleteAccountFinalPopupTitle     = "DELETE_ACC_FINAL_POP_UP_TITLE"
+    case deleteAccountFinalPopupMessage   = "DELETE_ACC_POP_UP_CONTENT_FINAL"
+    case deleteAccountDeleteButton        = "DELETE_ACC_POP_UP_BTN_DELETE"
+    case deleteAccountCancelButton        = "DELETE_ACC_POP_UP_BTN_CANCEL"
+    case deleteAccountContinueButton      = "DELETE_ACC_POP_UP_BTN_CONTINUE"
+    case deleteAccountConfirmButton       = "DELETE_ACC_POP_UP_BTN_CONFIRM"
+    case deleteAccountCloseButton         = "DELETE_ACC_POP_UP_BTN_CLOSE"
 
     // MARK: - Change Album Cover
     case changeAlbumCoverSuccess  = "change_album_cover_snackbar_text"
@@ -173,6 +173,9 @@ enum Strings: String, Localizable {
     case kvkkFirmsLink     = "kvkk_firms_link"
     case kvkkHyperlinkText = "ETK_KVKK_Izin_Politikasi"
 
+    // MARK: - TabBarCards
+    case syncing = "syncing"
+    case downloading = "downloading"
     // MARK: - IAP Intro Offers
     case iapIntroOfferFreeTrial  = "iap_intro_offer_free_trial"
     case iapIntroOfferPayAsYouGo = "iap_intro_offer_pay_as_you_go"
@@ -187,5 +190,34 @@ enum Strings: String, Localizable {
     case paycellEarnedSubtitle      = "title_paycell_subtitle"
     case paycellAcceptedFriends     = "title_paycell_friends"
     case paycellShareMessage        = "paycell_share_message"
-
+    
+    // MARK: - All Files
+    case allFilesNoMusicButtonText    = "Start adding your music"
+    case allFilesNoDocumentButtonText = "Start adding your documents"
+    
+    // MARK: - Facelift
+    case forYouThrowbackTitle = "foryou_throwback"
+    case forYouMyAlbumsTitle = "foryou_myalbums"
+    case forYouAnimationsTitle = "foryou_animations"
+    case forYouMyAnimationsTitle = "foryou_myanimations"
+    case forYouCollagesTitle = "foryou_collages"
+    case forYouMyCollagesTitle = "foryou_my_collages"
+    case forYouEmptyAlbumsDesc = "foryou_no_album_warn"
+    case forYouEmptyPhotopickDesc = "foryou_no_photopick_warn"
+    case forYouEmptyPhotopickButton = "foryou_try_photopick"
+    case forYouEmptyStoryDesc = "foryou_no_story_warn"
+    case forYouSeeAll = "foryou_see_all"
+    case tabBarForYouTitle = "tabbar_foryou"
+    case tabBarDiscoverTitle = "tabbar_discover"
+    case changePasswordInputTitle = "change_pass_mail_or_phone"
+    case becomePremiumBannerDesc = "mystorage_become_premium"
+    
+    case trashBin = "trash_bin"
+    
+    case emptyGalleryNoPhoto = "empty_gallery_no_photo"
+    case emptyGalleryNoVideo = "empty_gallery_no_video"
+    case emptyGalleryNoSync = "empty_gallery_no_sync"
+    case emptyGalleryNoUnsync = "empty_gallery_no_unsync"
+    
+    case subscriptionOfferCancelButton = "subscription_offer_cancel_button"
 }

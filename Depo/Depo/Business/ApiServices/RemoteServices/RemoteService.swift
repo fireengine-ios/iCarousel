@@ -44,6 +44,10 @@ class RemoteItemsService {
                 contentType = .album
             case .story:
                 contentType = .story
+            case .collage:
+                contentType = .collage
+            case .animation:
+                contentType = .animation
             default:
                 contentType = .content_type
         }
@@ -254,6 +258,12 @@ class MusicService: RemoteItemsService {
     }
 }
 
+class DocumentsAndMusicService: RemoteItemsService {
+    init(requestSize: Int) {
+        super.init(requestSize: requestSize, fieldValue: .documentsAndMusic)
+    }
+}
+
 
 class PhotoAndVideoService: RemoteItemsService {
     
@@ -320,7 +330,7 @@ class StoryService: RemoteItemsService {
                 fail?()
                 return
             }
-
+            
             self?.currentPage += 1
             let list = resultResponse.list.compactMap { Item(remote: $0) }
             success?(list)
@@ -329,6 +339,18 @@ class StoryService: RemoteItemsService {
             errorResponse.showInternetErrorGlobal()
             fail?()
         })
+    }
+}
+
+class CollageService: RemoteItemsService {
+    init(requestSize: Int) {
+        super.init(requestSize: requestSize, fieldValue: .collage)
+    }
+}
+
+class AnimationService: RemoteItemsService {
+    init(requestSize: Int) {
+        super.init(requestSize: requestSize, fieldValue: .animation)
     }
 }
 

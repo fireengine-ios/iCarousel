@@ -63,6 +63,10 @@ protocol ItemOperationManagerViewProtocol: AnyObject {
     
     func didRenameItem(_ item: BaseDataSourceItem)
     
+    func didRenameAlbumItem(_ item: AlbumItem)
+    
+    func didRenamePeople()
+    
     func syncFinished()
     
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool
@@ -108,6 +112,13 @@ protocol ItemOperationManagerViewProtocol: AnyObject {
     func publicSharedItemsAdded()
     
     func appleGoogleLoginDisconnected(type: AppleGoogleUserType)
+    func elementTypeChanged(type: ElementTypes)
+    func faceImageRecogChaned(to isAllowed: Bool)
+    func stopItemSelection()
+    func tabBarDidChange()
+    func allFilesSectionChange(to index: Int, shareType: SharedItemsSegment?)
+    
+    func allCardsRemoved(for section: ForYouSections)
 }
 
 extension ItemOperationManagerViewProtocol {
@@ -169,6 +180,10 @@ extension ItemOperationManagerViewProtocol {
     
     func didRenameItem(_ item: BaseDataSourceItem) {}
     
+    func didRenameAlbumItem(_ item: AlbumItem) {}
+    
+    func didRenamePeople() {}
+    
     func syncFinished() {
         UIApplication.setIdleTimerDisabled(false)
     }
@@ -215,6 +230,13 @@ extension ItemOperationManagerViewProtocol {
     func publicSharedItemsAdded() {}
     
     func appleGoogleLoginDisconnected(type: AppleGoogleUserType) {}
+    func elementTypeChanged(type: ElementTypes) {}
+    func faceImageRecogChaned(to isAllowed: Bool) {}
+    func stopItemSelection() {}
+    func tabBarDidChange() {}
+    func allFilesSectionChange(to index: Int, shareType: SharedItemsSegment?) {}
+    
+    func allCardsRemoved(for section: ForYouSections) {}
 }
 
 
@@ -418,6 +440,18 @@ class ItemOperationManager: NSObject {
     func didRenameItem(_ item: BaseDataSourceItem) {
         DispatchQueue.main.async {
             self.views.invoke { $0.didRenameItem(item) }
+        }
+    }
+    
+    func didRenameAlbumItem(_ item: AlbumItem) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didRenameAlbumItem(item) }
+        }
+    }
+    
+    func didRenamePeople() {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didRenamePeople() }
         }
     }
     
@@ -631,4 +665,41 @@ class ItemOperationManager: NSObject {
             self.views.invoke { $0.appleGoogleLoginDisconnected(type: type) }
         }
     }
+    
+    func elementTypeChanged(type: ElementTypes) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.elementTypeChanged(type: type) }
+        }
+    }
+    
+    func faceImageChanged(to isAllowed: Bool) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.faceImageRecogChaned(to: isAllowed) }
+        }
+    }
+    
+    func stopItemSelection() {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.stopItemSelection()}
+        }
+    }
+    
+    func tabBarDidChange() {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.tabBarDidChange()}
+        }
+    }
+    
+    func allFilesSectionChange(to index: Int, shareType: SharedItemsSegment?) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.allFilesSectionChange(to: index, shareType: shareType)}
+        }
+    }
+    
+    func allCardsRemoved(for section: ForYouSections) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.allCardsRemoved(for: section)}
+        }
+    }
+
 }

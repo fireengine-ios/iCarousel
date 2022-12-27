@@ -2026,4 +2026,28 @@ then {11,99 TRY/Month}*/
 "title_paycell_friends" = "მომხმარებლები, რომლებმაც შეიძინეს პაკეტი (%d)";
 "paycell_share_message" = "შევუერთდი Lifebox Brand Ambassador პროგრამას. შეგიძლია მიიღო პროგრამის სპეციფიკური lifebox 6 თვიანი 250 GB Premium პაკეტი სპეციალურ ფასად ქვემოთ მოცემულ ბმულზე დაწკაპუნებით. არ გამოტოვო 😊";
 "beeline_cancel_TC" = "შეგიძლიათ მართოთ ან გააუქმოთ თქვენი Lifebox გამოწერა ბილაინის არხებიდან.";
-"paycell_share_message " = "შენ მიიღე 5 GB Lifebox მეხსიერება საჩუქრად, დააჭირე გასააქტიურებლად.";
+"foryou_throwback" = "Throwback";
+"foryou_myalbums" = "My Albums";
+"foryou_myanimations" = "My Animations";
+"foryou_collages" = "Collages";
+"foryou_my_collages" = "My Collages";
+"foryou_animations" = "Animations";
+"foryou_no_album_warn" = "You haven't created an album yet.";
+"foryou_no_photopick_warn" = "You haven't used PhotoPick yet.";
+"foryou_no_story_warn" = "No active stories currently.";
+"foryou_try_photopick" = "Try PhotoPick";
+"foryou_see_all" = "See All";
+
+/*Facelift*/
+"tabbar_foryou" = "For You";
+"tabbar_discover" = "Discover";
+"change_pass_mail_or_phone" = "E-mail or Phone number";
+"mystorage_become_premium" = "mystorage_become_premium";
+"we_are_creating_your_story_title" = "We are preparing your story.";
+"we_are_creating_your_story_desc" = "Once it is done, you can access it from Videos Album.";
+"trash_bin" = "Trash Bin";
+"empty_gallery_no_photo" = "You don’t have any photos or videos in your lifebox yet.";
+"empty_gallery_no_video" = "You don’t have any videos in your lifebox yet.";
+"empty_gallery_no_sync" = "You don’t have any photos in your lifebox yet.";
+"empty_gallery_no_unsync" = "empty_gallery_no_unsync";
+"subscription_offer_cancel_button" = "გაუქმება";

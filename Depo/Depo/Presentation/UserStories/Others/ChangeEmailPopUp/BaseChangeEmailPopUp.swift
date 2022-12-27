@@ -23,23 +23,9 @@ class BaseChangeEmailPopUp: UIViewController {
     
     @IBOutlet private weak var mainLabel: UILabel! {
         willSet {
-            let text = TextConstants.changeEmailPopUpTopTitle
-            let attributes: [NSAttributedString.Key : Any] = [
-                .font : UIFont.TurkcellSaturaFont(size: 18),
-                .foregroundColor : AppColor.blackColor.color,
-            ]
-            
-            let attributedString = NSMutableAttributedString(string: text, attributes: attributes)
-            
-            if let range = text.range(of: TextConstants.enterYourEmail) {
-                let nsRange = NSRange(range, in: text)
-                
-                let boldAttribute: [NSAttributedString.Key : Any] = [ .font : UIFont.TurkcellSaturaBolFont(size: 18) ]
-                
-                attributedString.addAttributes(boldAttribute, range: nsRange)
-            }
-            
-            newValue.attributedText = attributedString
+            newValue.text = TextConstants.changeEmailPopUpTopTitle
+            newValue.font = .appFont(.medium, size: 20)
+            newValue.textColor = AppColor.label.color
             newValue.numberOfLines = 0
         }
     }
@@ -52,12 +38,13 @@ class BaseChangeEmailPopUp: UIViewController {
     
     @IBOutlet private weak var contentView: UIView! {
         willSet {
-            newValue.layer.cornerRadius = 4
-            
-            newValue.layer.shadowOffset = .zero
+            newValue.backgroundColor = AppColor.secondaryBackground.color
+            newValue.layer.cornerRadius = 15
+            newValue.layer.shadowRadius = 15
             newValue.layer.shadowOpacity = 0.5
-            newValue.layer.shadowRadius = 4
             newValue.layer.shadowColor = UIColor.black.cgColor
+            newValue.layer.shadowOffset = .zero
+            newValue.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         }
     }
     
@@ -95,26 +82,15 @@ class BaseChangeEmailPopUp: UIViewController {
         }
     }
     
-    @IBOutlet private weak var cancelButton: WhiteButtonWithRoundedCorner! {
+    @IBOutlet private weak var cancelButton: WhiteButton! {
         willSet {
-            newValue.setBackgroundColor(AppColor.secondaryBackground.color ?? .white, for: .normal)
             newValue.setTitle(TextConstants.cancel, for: .normal)
-            newValue.setTitleColor(UIColor.lrTealish, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.layer.borderColor = UIColor.lrTealish.cgColor
-            newValue.layer.borderWidth = 1
-            newValue.isOpaque = true
         }
     }
     
-    @IBOutlet private weak var changeButton: RoundedInsetsButton! {
+    @IBOutlet private weak var changeButton: DarkBlueButton! {
         willSet {
             newValue.setTitle(TextConstants.change, for: .normal)
-            newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.setBackgroundColor(UIColor.lrTealish, for: .normal)
-            newValue.setBackgroundColor(UIColor.lrTealish.withAlphaComponent(0.5), for: .disabled)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.isOpaque = true
         }
     }
     

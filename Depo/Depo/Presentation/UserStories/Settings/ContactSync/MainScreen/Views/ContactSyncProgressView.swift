@@ -64,7 +64,7 @@ final class ContactSyncProgressView: UIView, NibInit, ContactOperationProgressVi
     @IBOutlet private weak var title: UILabel! {
         willSet {
             newValue.textAlignment = .center
-            newValue.font = .TurkcellSaturaDemFont(size: 24.0)
+            newValue.font = .appFont(.medium, size: 14.0)
             newValue.textColor = AppColor.marineTwoAndWhite.color
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
@@ -74,7 +74,7 @@ final class ContactSyncProgressView: UIView, NibInit, ContactOperationProgressVi
     @IBOutlet private weak var message: UILabel! {
         willSet {
             newValue.textAlignment = .center
-            newValue.font = .TurkcellSaturaFont(size: 16.0)
+            newValue.font = .appFont(.regular, size: 14.0)
             newValue.textColor = ColorConstants.lightGray
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
@@ -83,7 +83,7 @@ final class ContactSyncProgressView: UIView, NibInit, ContactOperationProgressVi
     @IBOutlet private weak var loader: CircleLoaderView! {
         willSet {
             newValue.resetProgress()
-            newValue.set(lineColor: ColorConstants.navy)
+            newValue.set(lineColor: AppColor.progressFront.color)
             newValue.set(lineBackgroundColor: ColorConstants.lighterGray)
         }
     }
