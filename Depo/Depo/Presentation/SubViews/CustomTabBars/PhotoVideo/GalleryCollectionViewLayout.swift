@@ -126,7 +126,8 @@ final class GalleryCollectionViewLayout: UICollectionViewLayout {
             var nextXStartBoundary: CGFloat?
             for index in 0..<collectionView.numberOfItems(inSection: section) {
                 let indexPath = IndexPath(item: index, section: section)
-                let columnSpan = CGFloat(columnSpanForItem(at: indexPath))
+                //let columnSpan = CGFloat(columnSpanForItem(at: indexPath))
+                let columnSpan = CGFloat(1.0)
                 let currentItemSize = itemSize * columnSpan + itemSpacing * (columnSpan - 1)
 
                 let attributes = GalleryCollectionViewLayoutAttributes(forCellWith: indexPath)

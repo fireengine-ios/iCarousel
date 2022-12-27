@@ -113,17 +113,17 @@ final class TabBarCardsContainer: UIView, CardsManagerViewProtocol {
             return
         }
         
-        let isShownPrepareQuickScroll: Bool = UserDefaults.standard.bool(forKey: "prepareQuickScrollProgressIsShown")
-        if type == .prepareQuickScroll && isShownPrepareQuickScroll {
-            return
-        }
-        UserDefaults.standard.set(true, forKey: "prepareQuickScrollProgressIsShown")
-        
-//        let isShownSyncing: Bool = UserDefaults.standard.bool(forKey: "sycningProgressIsShown")
-//        if type == .sync && isShownSyncing {
+//        let isShownPrepareQuickScroll: Bool = UserDefaults.standard.bool(forKey: "prepareQuickScrollProgressIsShown")
+//        if type == .prepareQuickScroll && isShownPrepareQuickScroll {
 //            return
 //        }
-//        UserDefaults.standard.set(true, forKey: "sycningProgressIsShown")
+//        UserDefaults.standard.set(true, forKey: "prepareQuickScrollProgressIsShown")
+//
+        let isShownSyncing: Bool = UserDefaults.standard.bool(forKey: "sycningProgressIsShown")
+        if type == .sync && isShownSyncing {
+            return
+        }
+        UserDefaults.standard.set(true, forKey: "sycningProgressIsShown")
 
         if let view = getViewForOperation(operation: type) {
             viewsByType[type] = view

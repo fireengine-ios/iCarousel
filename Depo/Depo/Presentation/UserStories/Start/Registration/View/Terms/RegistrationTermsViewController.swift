@@ -71,6 +71,7 @@ final class RegistrationTermsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTermsCheckbox()
+        setupEtkCheckbox()
         setupPrivacyPolicyTextView()
     }
     
