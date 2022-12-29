@@ -36,7 +36,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
     var editingTabBar: BottomSelectionTabBarViewController!
     var isPublicSharedItem = false
     private var needToScrollAfterRotation = true
-    private var isShowPhoto = true
 
     private var isFullScreen = false {
         didSet {
@@ -641,11 +640,6 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
         guard selectedIndex != nil else {
-            return
-        }
-        
-        guard !isShowPhoto || selectedIndex == 0 else {
-            isShowPhoto.toggle()
             return
         }
         
