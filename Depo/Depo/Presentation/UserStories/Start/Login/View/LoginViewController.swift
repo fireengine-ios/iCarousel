@@ -130,7 +130,7 @@ final class LoginViewController: BaseViewController {
             newValue.isHidden = true
             newValue.layer.cornerRadius = 8
             newValue.layer.borderColor = AppColor.borderColor.cgColor
-            newValue.backgroundColor = AppColor.loginAlertView.color
+            newValue.backgroundColor = AppColor.darkBlueColor.color
             newValue.delegate = self
             newValue.screenType = .login
         }
