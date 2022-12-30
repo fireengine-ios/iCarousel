@@ -57,8 +57,9 @@ final class ForYouRouter: ForYouRouterInput {
     func navigateToCreate(for view: ForYouSections) {
         switch view {
         case .albums:
-            let createAlbum = router.createNewAlbum()
-            router.pushViewController(viewController: createAlbum)
+            let controller = router.createNewAlbum()
+            let nController = NavigationController(rootViewController: controller)
+            router.presentViewController(controller: nController)
         case .photopick:
             let photopick = router.analyzesHistoryController()
             router.pushViewController(viewController: photopick)
