@@ -36,8 +36,8 @@ final class LoginWithGooglePopup: BasePopUpController, NibInit {
     
     @IBOutlet private weak var saveButton: UIButton! {
         willSet {
-            newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.setBackgroundColor(UIColor.lrTealish, for: .normal)
+            newValue.setTitleColor(AppColor.label.color, for: .normal)
+            newValue.setBackgroundColor(AppColor.darkBlue.color, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
             newValue.layer.cornerRadius = 25
             newValue.setTitle(TextConstants.nextTitle, for: .normal)
