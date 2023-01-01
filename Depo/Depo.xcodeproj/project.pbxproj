@@ -1094,6 +1094,10 @@
 		4BF7CF4C223103E2002DAF37 /* DropDownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BF7CF48223103E1002DAF37 /* DropDownTableViewCell.xib */; };
 		4BF7CF4E223103E2002DAF37 /* DropDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF7CF49223103E2002DAF37 /* DropDownTableViewCell.swift */; };
 		4BF7CF50223103E2002DAF37 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF7CF4A223103E2002DAF37 /* DropDownView.swift */; };
+		52501E1D29623BE40000376C /* SwiftTryCatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 52501E1C29623BE40000376C /* SwiftTryCatch.m */; settings = {COMPILER_FLAGS = "-fobjc-arc-exceptions"; }; };
+		52501E1E29623BE40000376C /* SwiftTryCatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 52501E1C29623BE40000376C /* SwiftTryCatch.m */; };
+		52501E1F29623BE40000376C /* SwiftTryCatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 52501E1C29623BE40000376C /* SwiftTryCatch.m */; };
+		52501E2029623BE40000376C /* SwiftTryCatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 52501E1C29623BE40000376C /* SwiftTryCatch.m */; };
 		527302E32940CFDC0061E754 /* DeeplinkHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527302E22940CFDC0061E754 /* DeeplinkHandlerProtocol.swift */; };
 		527302E42940CFDC0061E754 /* DeeplinkHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527302E22940CFDC0061E754 /* DeeplinkHandlerProtocol.swift */; };
 		527302E52940CFDC0061E754 /* DeeplinkHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527302E22940CFDC0061E754 /* DeeplinkHandlerProtocol.swift */; };
@@ -10185,6 +10189,8 @@
 		519FC5F5469BA37B42AA5339 /* Pods-BilloNotificationService.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BilloNotificationService.enterprise.xcconfig"; path = "Target Support Files/Pods-BilloNotificationService/Pods-BilloNotificationService.enterprise.xcconfig"; sourceTree = "<group>"; };
 		51B73FE0148359D56DBAC42C /* SplashViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashViewOutput.swift; sourceTree = "<group>"; };
 		522A5BBD8B55E5DF0DE0472B /* Pods-Billo.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billo.enterprise.xcconfig"; path = "Target Support Files/Pods-Billo/Pods-Billo.enterprise.xcconfig"; sourceTree = "<group>"; };
+		52501E1B29623BE40000376C /* SwiftTryCatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftTryCatch.h; sourceTree = "<group>"; };
+		52501E1C29623BE40000376C /* SwiftTryCatch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwiftTryCatch.m; sourceTree = "<group>"; };
 		527302E22940CFDC0061E754 /* DeeplinkHandlerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkHandlerProtocol.swift; sourceTree = "<group>"; };
 		527302E72940D0110061E754 /* DeeplinkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkCoordinator.swift; sourceTree = "<group>"; };
 		527302EC2940D1120061E754 /* BrandAmbassadorDeeplinkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandAmbassadorDeeplinkHandler.swift; sourceTree = "<group>"; };
@@ -12794,6 +12800,8 @@
 				0592FC321ACEC6740083A6C6 /* Depo-Enterprise.entitlements */,
 				05BB0EB31ACD91B100D90C98 /* Depo.entitlements */,
 				CE51B0051EF91596005DCEE0 /* Depo_LifeTech.entitlements */,
+				52501E1B29623BE40000376C /* SwiftTryCatch.h */,
+				52501E1C29623BE40000376C /* SwiftTryCatch.m */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -26728,6 +26736,7 @@
 				8C0E8F291FDEBDFF00789C91 /* SettingsInteractor.swift in Sources */,
 				07DB93CA2860F2DD00D5CACF /* IAPProductsFetcher.swift in Sources */,
 				8CD2B3B71FE7B43D00280547 /* WaitingForWiFiPopUp.swift in Sources */,
+				52501E1D29623BE40000376C /* SwiftTryCatch.m in Sources */,
 				8C0E8F2A1FDEBDFF00789C91 /* ImportPhotosRouter.swift in Sources */,
 				73DFEEC424E65D19009D925D /* ShareCardContentManager.swift in Sources */,
 				98B0480B259314750011DAEB /* DepoAdapter.m in Sources */,
@@ -28870,6 +28879,7 @@
 				CE784B6F22A685FB00662219 /* ImportPhotosViewInput.swift in Sources */,
 				CE784B7022A685FB00662219 /* MoreFilesActionsModuleInput.swift in Sources */,
 				9853CD4B2361BDD600E19BF7 /* LandingCollectionViewCell.swift in Sources */,
+				52501E1F29623BE40000376C /* SwiftTryCatch.m in Sources */,
 				984A8AC3252EF85A002FB400 /* FunChangesBar.swift in Sources */,
 				CE784B7122A685FB00662219 /* AnalyticsServiceConstants.swift in Sources */,
 				CE784B7222A685FB00662219 /* FaceImagePhotosViewController.swift in Sources */,
@@ -29668,6 +29678,7 @@
 				CF8B645B23CBC9D70021B021 /* FaceImagePhotosViewInput.swift in Sources */,
 				CF8B645C23CBC9D70021B021 /* AutoSyncInitializer.swift in Sources */,
 				CF8B645D23CBC9D70021B021 /* TermsOfUseInitializer.swift in Sources */,
+				52501E1E29623BE40000376C /* SwiftTryCatch.m in Sources */,
 				CF8B645E23CBC9D70021B021 /* ResizableCollectionView.swift in Sources */,
 				CF8B645F23CBC9D70021B021 /* HomePageRouter.swift in Sources */,
 				CF8B646223CBC9D70021B021 /* CollectionViewCellForPhoto.swift in Sources */,
@@ -32476,6 +32487,7 @@
 				98231A7424F3A23500FD16E2 /* CruzFilter.swift in Sources */,
 				B5DD3D7E250FA9EC00AFF934 /* VignetteShader.metal in Sources */,
 				3A9C2820265285A200EFADE9 /* AcceptedInvitationViewController.swift in Sources */,
+				52501E2029623BE40000376C /* SwiftTryCatch.m in Sources */,
 				CF8B6F1023CBCA280021B021 /* CollectionViewCellForFaceImageAddName.swift in Sources */,
 				98732B5F2461459300E9D5D2 /* APILogger.swift in Sources */,
 				CF8B6F1123CBCA280021B021 /* PeriodicContactSyncPresenter.swift in Sources */,
