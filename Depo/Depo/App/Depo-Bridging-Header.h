@@ -14,3 +14,4 @@
 #import <CommonCrypto/CommonCrypto.h>
 #import "UpdaterController.h"
 #import <SpotifyiOS/SpotifyiOS.h>
+#import "SwiftTryCatch.h"
