@@ -24,7 +24,7 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
     
     override func imageForNoFileImageView() -> UIImage {
         if remoteItems is PeopleItemsService {
-            return UIImage(named: "peopleNoPhotos")!
+            return UIImage(named: "contactPeople")!
         } else if remoteItems is ThingsItemsService {
             return UIImage(named: "thingsNoPhotos")!
         } else if remoteItems is PlacesItemsService {

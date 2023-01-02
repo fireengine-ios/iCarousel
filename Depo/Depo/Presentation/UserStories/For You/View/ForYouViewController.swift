@@ -32,6 +32,7 @@ final class ForYouViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         output.getUpdateData(for: .hidden)
+        self.tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {

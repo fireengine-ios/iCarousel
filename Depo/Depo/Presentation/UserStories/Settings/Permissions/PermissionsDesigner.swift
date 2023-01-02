@@ -26,7 +26,7 @@ final class PermissionsDesigner: NSObject {
             
             newValue.linkTextAttributes = [
                 .foregroundColor: AppColor.label.color,
-                .underlineColor: UIColor.lrTealishTwo,
+                .underlineColor: AppColor.darkBlue.color,
                 .underlineStyle: NSUnderlineStyle.single.rawValue
             ]
             

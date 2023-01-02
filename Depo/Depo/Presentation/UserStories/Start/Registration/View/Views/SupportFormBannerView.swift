@@ -24,11 +24,11 @@ enum SupportBannerViewType {
     var gradientColors: [CGColor] {
         switch self {
         case .support:
-            return [ColorConstants.alertBlueGradientStart.cgColor,
-                    ColorConstants.alertBlueGradientEnd.cgColor]
+            return [AppColor.darkBlueColor.color.cgColor,
+                    AppColor.darkBlueColor.color.cgColor]
         case .faq:
-            return [ColorConstants.alertOrangeAndBlueGradientStart.cgColor,
-                    ColorConstants.alertOrangeAndBlueGradientEnd.cgColor]
+            return [AppColor.darkBlueColor.color.cgColor,
+                    AppColor.darkBlueColor.color.cgColor]
         }
     }
 }
@@ -43,7 +43,7 @@ final class SupportFormBannerView: UIView, NibInit {
     
     @IBOutlet private weak var messageLabel: UILabel! {
         willSet {
-            newValue.textColor = AppColor.label.color
+            newValue.textColor = UIColor.white
         }
     }
     
@@ -82,7 +82,7 @@ final class SupportFormBannerView: UIView, NibInit {
         
         let doneButton = UIBarButtonItem.init(title: TextConstants.apply,
                                               font: UIFont.TurkcellSaturaFont(),
-                                              tintColor: ColorConstants.buttonTintColor,
+                                              tintColor: AppColor.label.color,
                                               accessibilityLabel: nil,
                                               style: .plain,
                                               target: self,
@@ -94,7 +94,7 @@ final class SupportFormBannerView: UIView, NibInit {
         
         let cancelButton = UIBarButtonItem.init(title: TextConstants.cancel,
                                                 font: UIFont.TurkcellSaturaFont(),
-                                                tintColor: ColorConstants.buttonTintColor,
+                                                tintColor: AppColor.label.color,
                                                 accessibilityLabel: nil,
                                                 style: .plain,
                                                 target: self,

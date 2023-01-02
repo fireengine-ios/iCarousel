@@ -27,7 +27,7 @@ class HelpAndSupportViewController: BaseViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = TextConstants.faqViewTitle
+        self.title = TextConstants.settingsViewCellHelp
         
         accountSerivce.faqUrl { [weak self] faqUrl in
             if let url = URL(string: faqUrl) {
