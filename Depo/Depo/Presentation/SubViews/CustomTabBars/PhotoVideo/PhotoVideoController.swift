@@ -1056,7 +1056,7 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
                 SwiftTryCatch.try {
                     item = section.objects?.first as? MediaItem
                 } catch: { error in
-                    
+                    print("getDates --->> section.objects \(String(describing: error?.description))")
                 } finally: {
                     
                 }
