@@ -494,7 +494,7 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
         case .notPremiumUser:
             showPopup(type: .premium)
         case .accessDenied:
-            showWarningPopup(type: .contactPermissionDenied)
+            showWarningPopup()
         case .emptyStoredContacts:
             showEmptyContactsPopup()
         case .emptyLifeboxContacts:
@@ -523,7 +523,7 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
             showRelatedView()
             
         case .accessDenied:
-            showWarningPopup(type: .contactPermissionDenied)
+            showWarningPopup()
             showRelatedView()
             
         case .depoError:
@@ -579,18 +579,24 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
         }
 
         let popupType = WarningPopupType.contactRestoreStorageLimit(proceed: proceed)
-        let warningPopUp = ContactSyncPopupFactory.createWarningPopup(type: popupType) { [weak self] in
+        let warningPopUp = WarningPopupController.popup(type: popupType, closeHandler: { [weak self] in
             if !proceedCalled {
                 self?.showRelatedView()
             }
-        }
-
+        })
+        
         self.present(warningPopUp, animated: false)
     }
     
-    func showWarningPopup(type: WarningPopupType) {
-        let popup = ContactSyncPopupFactory.createWarningPopup(type: type, handler: {})
-        RouterVC().presentViewController(controller: popup, animated: false)
+    func showWarningPopup() {
+        let popUp = PopUpController.withDark(title: TextConstants.warningPopupContactPermissionsTitle,
+                                 message: TextConstants.warningPopupContactPermissionsMessage,
+                                 image: .error, buttonTitle: TextConstants.warningPopupContactPermissionsStorageButton, action: { _ in
+            UIApplication.shared.openSettings()
+        })
+
+        popUp.open()
+
     }
     
     private func showEmptyContactsPopup() {
@@ -637,12 +643,6 @@ extension ContactSyncControllerProtocol {
         ContactSyncPopupFactory.openPopUp(type: type) { vc in
             vc.close(isFinalStep: false, completion: handler)
         }
-        
-//        let popup = ContactSyncPopupFactory.createPopup(type: type) { vc in
-//            vc.close(isFinalStep: false, completion: handler)
-//        }
-//
-//        present(popup, animated: true)
     }
     
     func showResultView(type: ContactsOperationType, result: ContactsOperationResult) {
