@@ -206,6 +206,9 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         guard let index = interactor.currentItemIndex else {
             return
         }
+        
+        guard index < interactor.allItems.count else { return }
+        
         let currentItem = interactor.allItems[index]
         selectedItemsCallback([currentItem])
 
