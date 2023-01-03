@@ -140,7 +140,7 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
                 setupBackHandler(toOriginal: false)
                 backHandler?()
             } else {
-                setupBackHandler(toOriginal: true)
+                router.back()
             }
         } else if let interactor = interactor as? FaceImagePhotosInteractorInput, backHandler == nil {
             interactor.loadItem(item)
