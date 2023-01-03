@@ -12777,6 +12777,7 @@
 		051E1DFD19CAC2F900FD1E03 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				52501E3129645DF70000376C /* ObjcFiles */,
 				527302E12940CFC10061E754 /* DeepLink */,
 				B549AA5124CF037900D39C44 /* ThirdParty */,
 				8C3930EA2100668300C1D82D /* googleAnalytics */,
@@ -12800,8 +12801,6 @@
 				0592FC321ACEC6740083A6C6 /* Depo-Enterprise.entitlements */,
 				05BB0EB31ACD91B100D90C98 /* Depo.entitlements */,
 				CE51B0051EF91596005DCEE0 /* Depo_LifeTech.entitlements */,
-				52501E1B29623BE40000376C /* SwiftTryCatch.h */,
-				52501E1C29623BE40000376C /* SwiftTryCatch.m */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -14488,6 +14487,15 @@
 				CC55EC0735060540CE5E23E4 /* FileInfoRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		52501E3129645DF70000376C /* ObjcFiles */ = {
+			isa = PBXGroup;
+			children = (
+				52501E1B29623BE40000376C /* SwiftTryCatch.h */,
+				52501E1C29623BE40000376C /* SwiftTryCatch.m */,
+			);
+			path = ObjcFiles;
 			sourceTree = "<group>";
 		};
 		527302E12940CFC10061E754 /* DeepLink */ = {
