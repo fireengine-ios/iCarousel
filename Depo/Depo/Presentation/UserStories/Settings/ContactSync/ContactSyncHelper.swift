@@ -591,8 +591,10 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
     func showWarningPopup() {
         let popUp = PopUpController.withDark(title: TextConstants.warningPopupContactPermissionsTitle,
                                  message: TextConstants.warningPopupContactPermissionsMessage,
-                                 image: .error, buttonTitle: TextConstants.warningPopupContactPermissionsStorageButton, action: { _ in
+                                 image: .error, buttonTitle: TextConstants.warningPopupContactPermissionsStorageButton, action: { vc in
             UIApplication.shared.openSettings()
+            
+            vc.close()
         })
 
         popUp.open()
