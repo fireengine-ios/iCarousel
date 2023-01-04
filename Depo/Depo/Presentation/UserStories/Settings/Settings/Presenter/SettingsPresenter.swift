@@ -62,6 +62,7 @@ extension SettingsPresenter: SettingsViewOutput {
     
     func viewWillBecomeActive() {
         interactor.fetchChatbotRemoteConfig()
+        interactor.fetchContactUsRemoteConfig()
         interactor.getCellsData()
         
         startAsyncOperation()
@@ -177,6 +178,10 @@ extension SettingsPresenter: SettingsViewOutput {
     
     func goToChatbot() {
         router.goToChatbot()
+    }
+    
+    func goToFeedback() {
+        router.goToFeedback()
     }
     
     func goToPackages() {

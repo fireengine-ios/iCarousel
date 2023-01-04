@@ -118,6 +118,10 @@ class SettingsRouter: SettingsRouterInput {
     func goToChatbot() {
         router.pushViewController(viewController: router.chatbot)
     }
+    
+    func goToFeedback() {
+        router.showFeedbackSubView()
+    }
 
     func goToDarkMode() {
     }
