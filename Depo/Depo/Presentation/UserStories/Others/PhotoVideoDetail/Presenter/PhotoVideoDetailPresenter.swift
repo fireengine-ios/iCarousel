@@ -206,6 +206,12 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         guard let index = interactor.currentItemIndex else {
             return
         }
+        
+        guard index < interactor.allItems.count else {
+            debugLog("CRASH CASE ---->>> index out of range")
+            return
+        }
+        
         let currentItem = interactor.allItems[index]
         selectedItemsCallback([currentItem])
 

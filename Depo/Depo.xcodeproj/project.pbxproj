@@ -12777,6 +12777,7 @@
 		051E1DFD19CAC2F900FD1E03 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				52501E3129645DF70000376C /* ObjcFiles */,
 				527302E12940CFC10061E754 /* DeepLink */,
 				B549AA5124CF037900D39C44 /* ThirdParty */,
 				8C3930EA2100668300C1D82D /* googleAnalytics */,
@@ -12800,8 +12801,6 @@
 				0592FC321ACEC6740083A6C6 /* Depo-Enterprise.entitlements */,
 				05BB0EB31ACD91B100D90C98 /* Depo.entitlements */,
 				CE51B0051EF91596005DCEE0 /* Depo_LifeTech.entitlements */,
-				52501E1B29623BE40000376C /* SwiftTryCatch.h */,
-				52501E1C29623BE40000376C /* SwiftTryCatch.m */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -14488,6 +14487,15 @@
 				CC55EC0735060540CE5E23E4 /* FileInfoRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		52501E3129645DF70000376C /* ObjcFiles */ = {
+			isa = PBXGroup;
+			children = (
+				52501E1B29623BE40000376C /* SwiftTryCatch.h */,
+				52501E1C29623BE40000376C /* SwiftTryCatch.m */,
+			);
+			path = ObjcFiles;
 			sourceTree = "<group>";
 		};
 		527302E12940CFC10061E754 /* DeepLink */ = {
@@ -19275,6 +19283,7 @@
 				F028C0D82789DD3E005CE6AF /* SaveToMyLifebox */,
 				9808B3082553DE94002B0032 /* PrivateShare */,
 				98185B9D248A707C0013929C /* WarningPopup */,
+				CECD4E4F1FDFD69E00978BE7 /* PopUp */,
 				17B9B0C223F1F70D00CAF5E1 /* FullQuotaWarningPopUp */,
 				89CCBEAE23A78C3500E95704 /* HideSmashPopUps */,
 				98F9C56C23584BA6008C5ECF /* CampaignDetailPage */,
@@ -19304,7 +19313,6 @@
 				120D20B58FE02EDFFDC3E5EF /* FileInfo */,
 				35466CD131154C1D21C7C31C /* PhotoVideoDetail */,
 				EFA74F9F1FBF378F00CF946E /* Print */,
-				CECD4E4F1FDFD69E00978BE7 /* PopUp */,
 				CE57DFAA1FDE66980065B688 /* DarkPopUp */,
 				CE3E4D09201B131600173045 /* PVViewerController */,
 				CEFFA8F121AFC21C00B34F36 /* SegmentedController */,
