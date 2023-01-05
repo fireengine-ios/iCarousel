@@ -110,7 +110,7 @@ final class FileInfoView: UIView, FromNib {
             fileInfoView.set(createdDate: createdDate)
         }
 
-        updateShareInfo()
+        //updateShareInfo()
         
         setupEditableState(for: object, projectId: object.projectId, permissions: nil)
         
@@ -186,10 +186,6 @@ final class FileInfoView: UIView, FromNib {
     
     func updateShareInfo() {
         guard object?.isLocalItem == false, let projectId = object?.projectId, let uuid = object?.uuid else {
-            return
-        }
-        
-        if let item = object as? Item, item.status != .active {
             return
         }
         

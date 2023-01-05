@@ -135,13 +135,13 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         if items.isEmpty {
             let flag = interactor.needShowNoFileView()
             view.setCollectionViewVisibilityStatus(visibilityStatus: flag)
-            view.setVisibleTabBar(!flag)
+            //view.setVisibleTabBar(!flag)
         } else {
             view.setCollectionViewVisibilityStatus(visibilityStatus: false)
 
             dataSource.appendCollectionView(items: items, pageNum: 0)//
 
-            view.setVisibleTabBar(true)
+            //view.setVisibleTabBar(false)
 
         }
         

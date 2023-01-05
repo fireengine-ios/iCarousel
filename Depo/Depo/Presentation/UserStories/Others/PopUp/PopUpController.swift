@@ -11,6 +11,7 @@ import UIKit
 //MARK: - PopUpButtonState
 enum PopUpButtonState {
     case single
+    case singleDark
     case twin
 }
 
@@ -113,6 +114,12 @@ final class PopUpController: BasePopUpController {
             
             firstButton.isHidden = false
             secondButton.removeFromSuperview()
+        case .singleDark:
+            setup(secondButton)
+            secondButton.setTitle(secondButtonTitle, for: .normal)
+            
+            firstButton.isHidden = true
+            secondButton.isHidden = false
         case .twin:
             setup(firstButton)
             setup(secondButton)
@@ -177,6 +184,19 @@ final class PopUpController: BasePopUpController {
 extension PopUpController {
     static func with(errorMessage: String) -> PopUpController {
         return with(title: TextConstants.errorAlert, message: errorMessage, image: .error, buttonTitle: TextConstants.ok)
+    }
+    
+    static func withDark(title: String?, message: String?, image: PopUpImage, buttonTitle: String, action: PopUpButtonHandler? = nil) -> PopUpController {
+        
+        let vc = controllerWith(title: title, message: message, image: image, showTextField: false)
+        vc.buttonState = .singleDark
+        
+        if let action = action {
+            vc.secondAction = action
+        }
+        vc.secondButtonTitle = buttonTitle
+        
+        return vc
     }
     
     static func with(title: String?, message: String?, image: PopUpImage, buttonTitle: String, action: PopUpButtonHandler? = nil, showTextField: Bool = false) -> PopUpController {

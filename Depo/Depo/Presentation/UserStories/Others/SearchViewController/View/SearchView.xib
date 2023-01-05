@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -109,7 +109,7 @@
                 <constraint firstItem="Xpp-j0-kcB" firstAttribute="leading" secondItem="AnL-pq-9wJ" secondAttribute="leading" id="4SK-YP-BE6"/>
                 <constraint firstAttribute="trailing" secondItem="XDt-9i-CGy" secondAttribute="trailing" id="DTz-09-CJw"/>
                 <constraint firstItem="yf5-b9-3WQ" firstAttribute="top" secondItem="AnL-pq-9wJ" secondAttribute="top" id="DjE-Bg-7R7"/>
-                <constraint firstItem="1hH-31-UT2" firstAttribute="bottom" secondItem="AnL-pq-9wJ" secondAttribute="bottom" id="E26-yq-Xgn"/>
+                <constraint firstItem="1hH-31-UT2" firstAttribute="bottom" secondItem="fez-f4-D1W" secondAttribute="bottom" id="E26-yq-Xgn"/>
                 <constraint firstAttribute="trailing" secondItem="KvD-De-0PR" secondAttribute="trailing" id="FD1-Rb-ahS"/>
                 <constraint firstItem="KvD-De-0PR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="FSj-p9-fuf"/>
                 <constraint firstItem="ve5-7k-qJd" firstAttribute="leading" secondItem="AnL-pq-9wJ" secondAttribute="leading" id="FpY-RE-XrX"/>
@@ -128,7 +128,7 @@
                 <constraint firstItem="1hH-31-UT2" firstAttribute="top" secondItem="XDt-9i-CGy" secondAttribute="bottom" id="cDj-PQ-lfP"/>
                 <constraint firstItem="1hH-31-UT2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eZb-ZN-nvb"/>
                 <constraint firstItem="fez-f4-D1W" firstAttribute="top" secondItem="AnL-pq-9wJ" secondAttribute="top" id="gJs-25-8yl"/>
-                <constraint firstItem="ve5-7k-qJd" firstAttribute="bottom" secondItem="AnL-pq-9wJ" secondAttribute="bottom" id="jzl-25-seU"/>
+                <constraint firstItem="ve5-7k-qJd" firstAttribute="bottom" secondItem="fez-f4-D1W" secondAttribute="bottom" id="jzl-25-seU"/>
                 <constraint firstItem="XDt-9i-CGy" firstAttribute="top" secondItem="AnL-pq-9wJ" secondAttribute="top" id="m24-BQ-qcq"/>
                 <constraint firstItem="fez-f4-D1W" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="oye-8J-bBB"/>
                 <constraint firstItem="Xpp-j0-kcB" firstAttribute="trailing" secondItem="AnL-pq-9wJ" secondAttribute="trailing" id="uFV-wZ-a1T"/>

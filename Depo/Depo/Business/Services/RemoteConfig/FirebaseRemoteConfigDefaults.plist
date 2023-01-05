@@ -10,6 +10,8 @@
 	<false/>
 	<key>chatbot_menu_enabled</key>
 	<false/>
+	<key>contact_us_enabled</key>
+	<false/>
 	<key>print_option_enabled_languages</key>
 	<string>tr</string>
 	<key>forgot_password_v2_enabled</key>

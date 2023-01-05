@@ -23,6 +23,7 @@ final class PermissionViewController: BaseViewController {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.spacing = 16
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -94,7 +95,7 @@ final class PermissionViewController: BaseViewController {
         scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).activate()
         
         scrollView.addSubview(stackView)
-        stackView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 12).isActive = true
         stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
@@ -195,7 +196,7 @@ extension PermissionViewController: PermissionViewDelegate {
         let plainMessage = TextConstants.mobilePaymentClosePopupDescriptionLabel
         let range = (plainMessage as NSString).range(of: TextConstants.mobilePaymentClosePopupDescriptionBoldRangeLabel)
         let attributeMessage = NSMutableAttributedString(string: plainMessage)
-        let attribute = [NSAttributedString.Key.font : UIFont.TurkcellSaturaDemFont(size: 16), NSAttributedString.Key.strokeColor : ColorConstants.marineTwo]
+        let attribute = [NSAttributedString.Key.font : UIFont.appFont(.regular, size: 14), NSAttributedString.Key.strokeColor : ColorConstants.marineTwo]
         attributeMessage.addAttributes(attribute, range: range)
         let popup = PopUpController.with(title: TextConstants.mobilePaymentClosePopupTitleLabel, attributedMessage: attributeMessage, image: .none, buttonTitle: TextConstants.ok)
         popup.open()

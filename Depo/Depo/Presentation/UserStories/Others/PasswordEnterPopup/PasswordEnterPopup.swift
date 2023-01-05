@@ -70,15 +70,15 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
     
     @IBOutlet private weak var seperatorView: UIView! {
         willSet {
-            newValue.backgroundColor = UIColor.lrTealishTwo
+            newValue.backgroundColor = AppColor.darkBlue.color
         }
     }
     
     @IBOutlet private weak var okButton: UIButton! {
         willSet {
             newValue.setTitle(TextConstants.ok, for: .normal)
-            newValue.setTitleColor(UIColor.lrTealishTwo, for: .normal)
-            newValue.setTitleColor(UIColor.lrTealishTwo, for: .highlighted)
+            newValue.setTitleColor(AppColor.darkBlue.color, for: .normal)
+            newValue.setTitleColor(AppColor.darkBlue.color, for: .highlighted)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
         }
     }

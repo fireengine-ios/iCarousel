@@ -40,7 +40,7 @@ final class TrashBinBottomBarManager {
         style: .default,
         tintColor: AppColor.tint.color,
         unselectedItemTintColor: AppColor.label.color,
-        barTintColor: AppColor.background.color)
+        barTintColor: AppColor.drawerBackground.color)
     
     var editingTabBar: BottomSelectionTabBarDrawerViewController?
     private let bottomBarPresenter = TrashBinBottomTabBarPresenter()

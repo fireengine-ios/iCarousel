@@ -105,7 +105,18 @@ final class PasscodeSettingsViewController: BaseViewController {
         }
     }
     
-    @IBOutlet weak var twoFactorAuthSwitchj: GradientSwitch!
+    //@IBOutlet weak var twoFactorAuthSwitchj: GradientSwitch!
+    @IBOutlet weak var twoFactorAuthSwitchj: UISwitch! {
+        willSet {
+            newValue.tintColor = ColorConstants.switcherGrayColor
+            newValue.layer.cornerRadius = 16
+            newValue.backgroundColor = ColorConstants.switcherGrayColor
+            
+            //newValue.let onImage = Image.gradientSwitch.image
+            newValue.onTintColor = AppColor.tabBarCardBackground.color
+        }
+        
+    }
     
     
     override func viewDidLoad() {

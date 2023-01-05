@@ -61,6 +61,8 @@ protocol SettingsViewOutput {
 
     func goToChatbot()
     
+    func goToFeedback()
+    
     func goToPackages()
     
     var isPasscodeEmpty: Bool { get }

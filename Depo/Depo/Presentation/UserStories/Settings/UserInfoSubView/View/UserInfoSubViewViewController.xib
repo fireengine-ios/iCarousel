@@ -68,11 +68,10 @@
                                 <constraint firstAttribute="height" constant="69" id="bec-K7-TNC"/>
                             </constraints>
                         </stackView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNZ-k6-nrG">
-                            <rect key="frame" x="335" y="33" width="24" height="24"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNZ-k6-nrG">
+                            <rect key="frame" x="159" y="0.0" width="200" height="100"/>
                             <constraints>
-                                <constraint firstAttribute="width" secondItem="NNZ-k6-nrG" secondAttribute="height" multiplier="1:1" id="uZj-QK-dxQ"/>
-                                <constraint firstAttribute="width" constant="24" id="yBO-QE-DeR"/>
+                                <constraint firstAttribute="width" constant="200" id="yBO-QE-DeR"/>
                             </constraints>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" image="iconArrowRightsmall"/>
@@ -83,15 +82,16 @@
                     </subviews>
                     <color key="backgroundColor" name="secondaryBackground"/>
                     <constraints>
-                        <constraint firstItem="kv9-ey-nzo" firstAttribute="trailing" secondItem="NNZ-k6-nrG" secondAttribute="leading" id="4U0-PR-GwN"/>
+                        <constraint firstAttribute="bottom" secondItem="NNZ-k6-nrG" secondAttribute="bottom" id="0kM-LH-vnc"/>
+                        <constraint firstAttribute="trailing" secondItem="kv9-ey-nzo" secondAttribute="trailing" constant="40" id="4U0-PR-GwN"/>
                         <constraint firstAttribute="trailing" secondItem="NNZ-k6-nrG" secondAttribute="trailing" constant="16" id="4lM-4Z-ApF"/>
                         <constraint firstItem="vQk-2j-n8e" firstAttribute="centerY" secondItem="nFg-hc-g8i" secondAttribute="centerY" id="DY6-4x-2BH"/>
                         <constraint firstItem="kv9-ey-nzo" firstAttribute="centerY" secondItem="vQk-2j-n8e" secondAttribute="centerY" id="NCO-Qd-BmR"/>
                         <constraint firstItem="Q7D-fc-XLm" firstAttribute="centerY" secondItem="vQk-2j-n8e" secondAttribute="centerY" id="O59-8q-Sks"/>
                         <constraint firstItem="Q7D-fc-XLm" firstAttribute="centerX" secondItem="vQk-2j-n8e" secondAttribute="centerX" id="RpE-K2-RYD"/>
                         <constraint firstItem="vQk-2j-n8e" firstAttribute="leading" secondItem="nFg-hc-g8i" secondAttribute="leading" constant="20" id="Yhs-DS-bNW"/>
+                        <constraint firstItem="NNZ-k6-nrG" firstAttribute="top" secondItem="nFg-hc-g8i" secondAttribute="top" id="koY-sy-sB8"/>
                         <constraint firstAttribute="bottom" secondItem="vQk-2j-n8e" secondAttribute="bottom" constant="20" id="lJ1-UO-baQ"/>
-                        <constraint firstItem="NNZ-k6-nrG" firstAttribute="centerY" secondItem="vQk-2j-n8e" secondAttribute="centerY" constant="-5" id="rfz-ch-ZDe"/>
                         <constraint firstItem="vQk-2j-n8e" firstAttribute="top" secondItem="nFg-hc-g8i" secondAttribute="top" constant="20" id="srj-GK-4jU"/>
                         <constraint firstItem="kv9-ey-nzo" firstAttribute="leading" secondItem="vQk-2j-n8e" secondAttribute="trailing" constant="20" id="xw3-q0-Xua"/>
                         <constraint firstAttribute="height" constant="100" id="zsu-JZ-AMj"/>

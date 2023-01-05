@@ -29,7 +29,7 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.textColor = AppColor.label.color
-            newValue.font = .appFont(.regular, size: 14)
+            newValue.font = .appFont(.regular, size: 16)
         }
     }
     
@@ -37,6 +37,12 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
         willSet {
             newValue.textColor = AppColor.label.color
             newValue.font = .appFont(.regular, size: 12)
+        }
+    }
+    @IBOutlet weak var switchContentView: UIView! {
+        willSet {
+            newValue.backgroundColor = AppColor.background.color
+            newValue.addRoundedShadows(cornerRadius: 16, shadowColor: AppColor.drawerShadow.cgColor, opacity: 0.3, radius: 4)
         }
     }
     
@@ -58,9 +64,7 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
-        backView.addRoundedShadows(cornerRadius: 16,
-                                   shadowColor: AppColor.viewShadowLight.cgColor,
-                                   opacity: 0.8, radius: 6.0)
+        backView.addRoundedShadows(cornerRadius: 16, shadowColor: AppColor.drawerShadow.cgColor, opacity: 0.3, radius: 4)
         backView.backgroundColor = AppColor.secondaryBackground.color
         
       }
@@ -92,7 +96,7 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
         case .etk:
             title = TextConstants.etkPermissionTitleLabel
             descriptionText = NSMutableAttributedString(string: TextConstants.etkPermissionDescription,
-                                                        attributes: [.font: UIFont.TurkcellSaturaFont(size: 16),
+                                                        attributes: [.font: UIFont.appFont(.regular, size: 14),
                                                                      .foregroundColor: AppColor.label.color])
         case .globalPermission:
             title = TextConstants.globalPermissionTitleLabel
@@ -116,7 +120,11 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
             
             
             let rangeLink = descriptionText.mutableString.range(of: localized(.kvkkHyperlinkText))
-            descriptionText.addAttributes([.link: TextConstants.NotLocalized.permissionsPolicyLink], range: rangeLink)
+            descriptionText.addAttributes([.link: TextConstants.NotLocalized.permissionsPolicyLink,
+                                           .font: UIFont.appFont(.regular, size: 14),
+                                           .foregroundColor: AppColor.tint.color,
+                                           .underlineColor: AppColor.tint.color,
+                                           .underlineStyle: NSUnderlineStyle.single.rawValue], range: rangeLink)
         }
         titleLabel.text = title ?? ""
         
@@ -135,6 +143,9 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
     func setup(attributedDescription: NSMutableAttributedString?, delegate: PermissionViewTextViewDelegate?) {
         if let attributedDescription = attributedDescription {
             descriptionView.attributedText = attributedDescription
+            descriptionView.linkTextAttributes = [.foregroundColor: AppColor.tint.color,
+                                                  .underlineColor: AppColor.tint.color,
+                                                  .underlineStyle: NSUnderlineStyle.single.rawValue]
         }
         descriptionView.backgroundColor = .clear
         descriptionView.delegate = self

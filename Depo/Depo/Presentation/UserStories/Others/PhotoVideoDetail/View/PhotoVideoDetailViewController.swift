@@ -36,7 +36,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
     var editingTabBar: BottomSelectionTabBarViewController!
     var isPublicSharedItem = false
     private var needToScrollAfterRotation = true
-    private var isShowPhoto = true
 
     private var isFullScreen = false {
         didSet {
@@ -644,11 +643,6 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
             return
         }
         
-        guard !isShowPhoto || selectedIndex == 0 else {
-            isShowPhoto.toggle()
-            return
-        }
-        
         guard let cell = cell as? PhotoVideoDetailCell else {
             return
         }
@@ -656,10 +650,10 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
         cell.delegate = self
         cell.isRecognizeTextEnabled = output.ocrEnabled
         cell.recognizeTextButton.alpha = isBottomViewOpen ? 0 : 1
-        let object = objects[indexPath.row]
+        let object = objects[indexPath.item]
         cell.setObject(object: object)
         
-        if indexPath.row == objects.count - 1 {
+        if indexPath.item == objects.count - 1 {
             output.willDisplayLastCell()
         }
         

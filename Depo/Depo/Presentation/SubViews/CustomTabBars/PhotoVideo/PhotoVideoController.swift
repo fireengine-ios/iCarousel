@@ -1051,9 +1051,16 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
 
     private func getDates(of sections: [NSFetchedResultsSectionInfo]) -> [Date?] {
         sections
-            .map { section in
-                let mediaItem = section.objects?.first as? MediaItem
-                return mediaItem?.sortingDate as? Date
+            .compactMap { section in
+                var item: MediaItem?
+                SwiftTryCatch.try {
+                    item = section.objects?.first as? MediaItem
+                } catch: { error in
+                    debugLog("CRASH CASE ---->>> section.objects \(String(describing: error?.description))")
+                } finally: {
+                    
+                }
+                return item?.sortingDate as? Date
             }
     }
 
