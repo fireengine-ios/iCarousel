@@ -54,7 +54,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         noFilesLabel.adjustsFontSizeToFitWidth()
         noFilesLabel.text = TextConstants.noFilesFoundInSearch
         topBarContainer.isHidden = true
-        
+        setVisibleTabBar(true)
         setupMusicBar()
         configureTableView()
         subscribeToNotifications()
@@ -77,6 +77,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        setVisibleTabBar(false)
         navigationController?.delegate = nil
     }
     
@@ -288,6 +289,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         searchBar.resignFirstResponder()
         searchBar.enableCancelButton()
         suggestTableView.isHidden = true
+        setVisibleTabBar(false)
     }
     
     // MARK: - SearchViewInput

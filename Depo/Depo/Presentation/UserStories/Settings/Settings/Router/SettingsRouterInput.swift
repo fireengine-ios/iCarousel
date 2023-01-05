@@ -52,6 +52,8 @@ protocol SettingsRouterInput {
 
     func goToChatbot()
     
+    func goToFeedback()
+    
     func goToPackages()
 
     func goToDarkMode()

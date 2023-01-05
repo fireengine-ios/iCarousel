@@ -18,6 +18,7 @@ private struct RemoteConfigKeys {
     static let signupSupportAttempts = "signup_support_form_treshold"
     static let printOptionEnabled = "print_option_enabled"
     static let chatbotMenuEnabled = "chatbot_menu_enabled"
+    static let contactUsEnabled = "contact_us_enabled"
     static let printOptionEnabledLanguages = "print_option_enabled_languages"
     static let forgotPasswordV2Enabled = "forgot_password_v2_enabled"
     static let googleLoginEnabled = "google_login_enabled"
@@ -112,6 +113,15 @@ final class FirebaseRemoteConfig {
             let chatMenuEnable = self.remoteConfig.configValue(forKey: fetchKey).boolValue
             debugLog("fetched \(chatMenuEnable) attempts for \(fetchKey)")
             completion(chatMenuEnable)
+        }
+    }
+    
+    func fetchContactUsMenuEnable(completion: @escaping ValueHandler<Bool>) {
+        let fetchKey = RemoteConfigKeys.contactUsEnabled
+        fetch(key: fetchKey) {
+            let contatcUsMenuEnable = self.remoteConfig.configValue(forKey: fetchKey).boolValue
+            debugLog("fetched \(contatcUsMenuEnable) attempts for \(fetchKey)")
+            completion(contatcUsMenuEnable)
         }
     }
 

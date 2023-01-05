@@ -26,6 +26,7 @@ final class SettingsInteractor: SettingsInteractorInput {
     
     private(set) var userInfoResponse: AccountInfoResponse?
     private var isChatMenuEnabled = false
+    private var isContactUsMenuEnabled = false
     
     var isTurkcellUser: Bool {
         return (userInfoResponse?.accountType == "TURKCELL")
@@ -111,6 +112,15 @@ final class SettingsInteractor: SettingsInteractorInput {
         }
         #endif
     }
+    
+    func fetchContactUsRemoteConfig() {
+        #if LIFEBOX
+        FirebaseRemoteConfig.shared.fetchContactUsMenuEnable { [weak self] in
+            self?.isContactUsMenuEnabled = $0
+            self?.populateDataForCells()
+        }
+        #endif
+    }
 
     private func getUserStatus() {
         accountService.permissions { [weak self] response in
@@ -130,6 +140,27 @@ final class SettingsInteractor: SettingsInteractorInput {
     
     func populateDataForCells() {
         let isChatMenuEnabled = self.isChatMenuEnabled
-        output.cellsDataForSettings(isChatbotShown: isChatMenuEnabled)
+        let isContactUsMenuEnabled = self.isContactUsMenuEnabled
+        
+        var showMenu: Bool = false
+        var showChatbotOrFeedback: Bool = false // true -> chatbot, false -> feedback
+        
+        if isChatMenuEnabled && isContactUsMenuEnabled {
+            showMenu = true
+            showChatbotOrFeedback = false
+        } else if !isChatMenuEnabled && !isContactUsMenuEnabled {
+            showMenu = true
+            showChatbotOrFeedback = false
+        } else if isChatMenuEnabled && !isContactUsMenuEnabled {
+            showMenu = true
+            showChatbotOrFeedback = true
+        } else if !isChatMenuEnabled && isContactUsMenuEnabled {
+            showMenu = true
+            showChatbotOrFeedback = false
+        }
+        UserDefaults.standard.set(showChatbotOrFeedback, forKey: "showChatbotOrFeedback")
+        output.cellsDataForSettings(isChatbotShown: showMenu)
+        
+        //output.cellsDataForSettings(isChatbotShown: isChatMenuEnabled)
     }
 }
