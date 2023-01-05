@@ -157,7 +157,7 @@
 "Complaint" = "Şikayet";
 "Suggestion" = "Öneri";
 "Feedback Form" = "Önerilerin veya şikayetlerin için lütfen bizimle iletişime geçin";
-"Thanks for leaving a comment!" = "Bize Ulaşin";
+"Thanks for leaving a comment!" = "Bize Ulaşın";
 "Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Lütfen aşağıdaki bilgileri silmeyiniz. Bu bilgiler problemin çözümünde kullanılacak.\nUygulama Sürümü: %@ \nMsisdn: %@ \nTaşıyıcı: %@ \nCihaz: %@ \nCihaz OS: %@ \nDil: %@ \nAğ Durumu: %@ \nPaketler: %@\nToplam depolama alanı: %lld \nKullanılan depolama alanı: %lld \nİsim: %@\nSoyisim: %@\nE-posta: %@\nKonu: %@";
 "Upload Photos" = "Fotoğrafları Yükle";
 "Add" = "Ekle";
@@ -541,7 +541,7 @@
 "Dropbox authorisation error" = "Dropbox yetki hatası";
 "dropboxLastUpdatedFile" = "Son güncelleme: %@ - %d dosya";
 "dropboxLastUpdatedFiles" = "Son güncelleme: %@ - %d dosya";
-"PackagesPolicyHeader" = "Uygulama içi satın alım için otomatik yenilebilir abonelik:";
+"PackagesPolicyHeader" = "Uygulama içi satın alım için otomatik yenilenebilir abonelik:";
 "PackagesPolicyText" = "Abonelikler aylık bazda yenilenmekte ve ödeme, satın alma onayından sonra iTunes hesabına faturalandırılmaktadır. \nOtomatik yenileme mevcut dönemin sona ermesinden en az 24 saat önce kapatılmazsa abonelik otomatik olarak yenilenir. \nHesap, mevcut dönemin sona ermesine 24 saat kala yenileme işlemi doğrultusunda ücretlendirilecektir. Ücretler uygulama içi satın alma ekranında gösterildiği gibi yansıtılacaktır.\nAbonelikler kullanıcı tarafından yönetilebilir ve otomatik yenileme, satın alma işleminden sonra kullanıcının Hesap Ayarlarına giderek kapatılabilir. \nGizlilik ve Güvenlik: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik\nKullanım Şartları:";
 "Missing Dates" = "Eksik günler";
 "You have successfully registered, please log in with your credentials" = "Başarılı bir şekilde kaydoldun, telefon numaran / e-posta adresin ve şifren ile giriş yapabilirsin.";
@@ -2050,7 +2050,7 @@ then {11,99 TRY/Month}*/
 "title_paycell_total" = "Hakedilen Paycell Bakiyesi";
 "title_paycell_subtitle" = "Paycell Bakiyesi";
 "title_paycell_friends" = "Paket Satın Alanlar (%d Kişi)";
-"paycell_share_message" = "lifebox Marka Elçisi Programına dahil oldum. Programa özel lifebox 6 aylık 250GB Premium paketine aşağıdaki linke tıklarak indirimli fiyattan sahip olabilirsin. Fırsatı kaçırma 😊";
+"paycell_share_message" = "lifebox Marka Elçisi Programına dahil oldum. Programa özel lifebox 6 aylık 250GB Premium paketine aşağıdaki linke tıklayarak indirimli fiyattan sahip olabilirsin. Fırsatı kaçırma 😊";
 "beeline_cancel_TC" = "Lifebox aboneliğinizi Beeline uygulamasından iptal edebilir veya yönetebilirsiniz.";
 "foryou_throwback" = "Anılar";
 "foryou_myalbums" = "Albümlerim";
@@ -2068,7 +2068,7 @@ then {11,99 TRY/Month}*/
 "tabbar_foryou" = "Senin İçin";
 "tabbar_discover" = "Keşfet";
 "change_pass_mail_or_phone" = "E-posta veya Telefon Numarası";
-"mystorage_become_premium" = "Premuim ol bir sürü özelliğe sahip ol";
+"mystorage_become_premium" = "Premium ol, bir sürü özelliğe sahip ol!";
 "we_are_creating_your_story_title" = "Hikayeni hazırlıyoruz.";
 "we_are_creating_your_story_desc" = "Hazır olduğunda Videolar albümünde bulabilirsin.";
 "trash_bin" = "Çöp Kutusu";

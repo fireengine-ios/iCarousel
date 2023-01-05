@@ -1329,7 +1329,7 @@ Please check I have understood the intended command here*/
 "contact_us_subject_12" = "Problème de connexion, lenteur, blocage";
 
 /*Settings page*/
-"Permissions" = "Permissions";
+"Permissions" = "Autorisations";
 "selected_items_limit_download" = "Vous ne pouvez pas télécharger plus de %d fichiers.";
 "selected_items_limit_delete" = "Vous ne pouvez pas supprimer plus de %d fichiers.";
 "login_settings_security_passcode_description" = "Vous pouvez recevoir votre mot de passe Turkcell en envoyant SIFRE au 2200. Si vous activez ce bouton, vous pouvez vous connecter à lifebox à l'aide du mot de passe Turkcell.";
