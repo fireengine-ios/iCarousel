@@ -28,8 +28,8 @@ final class MessageAndButtonPopup: BasePopUpController, NibInit {
     
     @IBOutlet private weak var actionButton: RoundedButton! {
         willSet {
-            newValue.setTitleColor(AppColor.label.color, for: .normal)
-            newValue.setBackgroundColor(AppColor.darkBlue.color, for: .normal)
+            newValue.setTitleColor(UIColor.white, for: .normal)
+            newValue.setBackgroundColor(AppColor.darkBlueColor.color, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
             newValue.layer.cornerRadius = 25
         }
