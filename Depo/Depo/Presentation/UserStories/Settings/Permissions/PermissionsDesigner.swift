@@ -19,7 +19,7 @@ final class PermissionsDesigner: NSObject {
         }
     }
     
-    @IBOutlet weak var descriptionView: UITextView! {
+    @IBOutlet weak var descriptionView: IntrinsicEmptiableTextView! {
         willSet {
             newValue.backgroundColor = AppColor.secondaryBackground.color
             newValue.isOpaque = true

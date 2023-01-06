@@ -49,9 +49,10 @@ extension DiscoverPresenter: DiscoverViewOutput {
             guard let details = $0.details?["thumbnail"],
                   let urlStr = details as? String,
                   !urlStr.isEmpty else { return false }
-            
+
             return true
         }
+        //cards
     }
     
     func navigate(for view: HomeCardTypes) {

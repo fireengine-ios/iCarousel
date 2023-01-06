@@ -77,8 +77,8 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
     @IBOutlet private weak var okButton: UIButton! {
         willSet {
             newValue.setTitle(TextConstants.ok, for: .normal)
-            newValue.setTitleColor(AppColor.darkBlue.color, for: .normal)
-            newValue.setTitleColor(AppColor.darkBlue.color, for: .highlighted)
+            newValue.setTitleColor(UIColor.white, for: .normal)
+            newValue.setBackgroundColor(AppColor.darkBlueColor.color, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
         }
     }
