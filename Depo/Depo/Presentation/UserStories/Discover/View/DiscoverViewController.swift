@@ -54,7 +54,7 @@ extension DiscoverViewController: DiscoverViewInput {
     func didFinishedAllRequests() {
         DispatchQueue.main.async {
             self.modelCards = self.output.getModelCards() as! [HomeCardResponse]
-            self.modelCards = self.modelCards.filter({$0.type == .paycell || $0.type == .invitation || $0.type == .drawCampaign || $0.type == .emptyStorage })
+            //self.modelCards = self.modelCards.filter({$0.type == .paycell || $0.type == .invitation || $0.type == .drawCampaign || $0.type == .emptyStorage })
             self.configureTableView()
             self.tableView.reloadData()
         }
