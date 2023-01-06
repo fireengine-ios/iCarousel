@@ -37,6 +37,7 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
         willSet {
             newValue.textColor = AppColor.label.color
             newValue.font = .appFont(.regular, size: 12)
+            newValue.isHidden = true
         }
     }
     @IBOutlet weak var switchContentView: UIView! {
