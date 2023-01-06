@@ -41,12 +41,12 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
     }
     @IBOutlet weak var switchContentView: UIView! {
         willSet {
-            newValue.backgroundColor = AppColor.background.color
+            newValue.backgroundColor = AppColor.secondaryBackground.color
             newValue.addRoundedShadows(cornerRadius: 16, shadowColor: AppColor.drawerShadow.cgColor, opacity: 0.3, radius: 4)
         }
     }
     
-    @IBOutlet private weak var descriptionView: UITextView!
+    @IBOutlet private weak var descriptionView: IntrinsicEmptiableTextView!
     @IBOutlet private weak var permissionSwitch: UISwitch!
     @IBOutlet private weak var backView: UIView!
     
@@ -147,7 +147,7 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
                                                   .underlineColor: AppColor.tint.color,
                                                   .underlineStyle: NSUnderlineStyle.single.rawValue]
         }
-        descriptionView.backgroundColor = .clear
+        descriptionView.backgroundColor = AppColor.secondaryBackground.color
         descriptionView.delegate = self
     }
     
