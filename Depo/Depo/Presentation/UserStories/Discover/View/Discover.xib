@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DiscoverViewController">
             <connections>
-                <outlet property="tableView" destination="Vb3-D8-GG8" id="WEh-Bs-cWJ"/>
+                <outlet property="collectionView" destination="gB2-Nq-wd5" id="YXQ-rm-0KB"/>
                 <outlet property="view" destination="iN0-l3-epB" id="1w2-rs-Int"/>
             </connections>
         </placeholder>
@@ -20,18 +20,19 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Vb3-D8-GG8">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="gB2-Nq-wd5">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                </tableView>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewLayout key="collectionViewLayout" id="tQw-mh-8Ie" customClass="DiscoverCollectionViewLayout" customModule="lifebox"/>
+                </collectionView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="Vb3-D8-GG8" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="BWU-Mu-Czi"/>
-                <constraint firstAttribute="bottom" secondItem="Vb3-D8-GG8" secondAttribute="bottom" id="Qy9-TL-Ss8"/>
-                <constraint firstItem="Vb3-D8-GG8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="SDY-zR-od5"/>
-                <constraint firstItem="Vb3-D8-GG8" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="iv0-ac-qhE"/>
+                <constraint firstItem="gB2-Nq-wd5" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="41F-Rx-apt"/>
+                <constraint firstItem="gB2-Nq-wd5" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="J94-Xo-BqV"/>
+                <constraint firstItem="gB2-Nq-wd5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="i1S-eG-84K"/>
+                <constraint firstAttribute="bottom" secondItem="gB2-Nq-wd5" secondAttribute="bottom" id="quM-7B-xEp"/>
             </constraints>
             <point key="canvasLocation" x="131.8840579710145" y="87.723214285714278"/>
         </view>
