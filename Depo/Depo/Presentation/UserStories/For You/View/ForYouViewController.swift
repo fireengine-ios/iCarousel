@@ -19,6 +19,8 @@ final class ForYouViewController: BaseViewController {
     //MARK: -IBOutlet
     @IBOutlet private weak var tableView: UITableView!
     
+    var refresher: UIRefreshControl?
+    
     //MARK: -Lifecyle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +30,24 @@ final class ForYouViewController: BaseViewController {
         configureTableView()
         output.checkFIRisAllowed()
         output.viewIsReady()
+        setupRefresher()
     }
+    
+    private func setupRefresher() {
+        refresher = UIRefreshControl()
+        refresher?.tintColor = AppColor.filesRefresher.color
+        refresher?.addTarget(self, action: #selector(fullReload), for: .valueChanged)
+        tableView.refreshControl = refresher
+    }
+    
+    @objc private func fullReload() {
+        output.viewIsReady()
+        stopRefresher()
+    }
+    
+    func stopRefresher() {
+        tableView.refreshControl?.endRefreshing()
+     }
     
     override func viewDidAppear(_ animated: Bool) {
         output.getUpdateData(for: .hidden)

@@ -56,9 +56,6 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
             if let printIndex = actionTypes.firstIndex(of: .print) {
                 actionTypes.remove(at: printIndex)
             }
-//            if fileTypes.contains(.video), let infoIndex = actionTypes.index(of: .info) {
-//                actionTypes.remove(at: infoIndex)
-//            }
             if fileTypes.contains(where: { $0.isDocumentPageItem || $0 == .audio }) {
                 if let downloadIndex = actionTypes.firstIndex(of: .download) {
                     actionTypes.remove(at: downloadIndex)
@@ -67,7 +64,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
             }
             barConfig = EditingBarConfig(elementsConfig: actionTypes,
                                          style: barConfig.style,
-                                         tintColor: barConfig.tintColor)
+                                         tintColor: barConfig.tintColor,
+                                         unselectedItemTintColor: barConfig.unselectedItemTintColor)
         }
         return barConfig
     }
