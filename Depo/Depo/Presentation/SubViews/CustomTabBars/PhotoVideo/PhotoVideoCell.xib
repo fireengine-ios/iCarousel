@@ -65,7 +65,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="20" placeholderIntrinsicHeight="16" translatesAutoresizingMaskIntoConstraints="NO" id="D6a-f1-mPS">
-                        <rect key="frame" x="162" y="145" width="20" height="16"/>
+                        <rect key="frame" x="146.5" y="129.5" width="35.5" height="31.5"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vz7-W6-1DU">
                         <rect key="frame" x="79" y="68.5" width="28" height="28"/>
@@ -101,11 +101,12 @@
                 <constraint firstAttribute="bottom" secondItem="Rtp-Ce-5Aw" secondAttribute="bottom" id="Z56-7g-0sw"/>
                 <constraint firstAttribute="leading" secondItem="b9W-7J-Q9j" secondAttribute="leading" id="aMh-VE-jPL"/>
                 <constraint firstItem="Rtp-Ce-5Aw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="aX9-hc-XVH"/>
+                <constraint firstItem="D6a-f1-mPS" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.19" id="cZV-xM-0SP"/>
                 <constraint firstAttribute="trailing" secondItem="ha8-dW-lGP" secondAttribute="trailing" id="ckG-Z0-t0q"/>
                 <constraint firstItem="2HJ-NZ-h8K" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="dQr-O3-JyM"/>
                 <constraint firstAttribute="bottom" secondItem="TmD-it-Oee" secondAttribute="bottom" id="eUQ-SA-MOR"/>
+                <constraint firstItem="D6a-f1-mPS" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.19" id="edJ-Gq-j5a"/>
                 <constraint firstAttribute="trailing" secondItem="D6a-f1-mPS" secondAttribute="trailing" constant="4" id="oEK-I6-YkZ"/>
-                <constraint firstItem="D6a-f1-mPS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Shs-Gd-W9e" secondAttribute="trailing" constant="8" id="swi-nb-PmJ"/>
                 <constraint firstAttribute="bottom" secondItem="D6a-f1-mPS" secondAttribute="bottom" constant="4" id="tKJ-md-iG7"/>
                 <constraint firstItem="Rtp-Ce-5Aw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="u4p-Bn-JXS"/>
                 <constraint firstAttribute="trailing" secondItem="5aj-uE-NFD" secondAttribute="trailing" constant="8" id="wdI-YV-Gup"/>
