@@ -116,8 +116,8 @@ final class MyStorageViewController: BaseViewController {
     private lazy var policyView = SubscriptionsPolicyView()
     private lazy var bannerView = PackagesBannerBuyPremiumView()
     
-    private var menuViewModels = [ControlPackageType]()
-    @IBOutlet weak var restoreButtonTopSpacing: NSLayoutConstraint!
+    private var menuViewModels = [ControlPackageType]()    
+    @IBOutlet weak var topSpacingHeight: NSLayoutConstraint!
     
     // MARK: View lifecycle
     override func viewDidLoad() {
@@ -157,7 +157,7 @@ final class MyStorageViewController: BaseViewController {
     }
     
     private func addPremiumBanner() {
-        guard !AuthoritySingleton.shared.accountType.isPremium else { return }
+        guard AuthoritySingleton.shared.accountType.isPremium else { return }
         
         view.addSubview(bannerView)
         bannerView.translatesAutoresizingMaskIntoConstraints = false
@@ -166,7 +166,7 @@ final class MyStorageViewController: BaseViewController {
         bannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
         bannerView.heightAnchor.constraint(equalToConstant: 137).activate()
         
-        restoreButtonTopSpacing.constant += 60.0
+        topSpacingHeight.constant += 142.0
     }
 
     @IBAction private func restorePurhases() {
@@ -447,6 +447,6 @@ extension MyStorageViewController: BuyPremiumBannerDelegate {
     
     func hideBanner() {
         bannerView.isHidden = true
-        restoreButtonTopSpacing.constant = 16
+        topSpacingHeight.constant = 12
     }
 }
