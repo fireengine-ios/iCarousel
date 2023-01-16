@@ -865,6 +865,13 @@ class RouterVC: NSObject {
         return controller
     }
     
+    // MARK: Favorite list
+    
+    func favoriteListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
+        let controller = FavoriteInitializer.initializeFavoriteController(with: "BaseFilesGreedViewController", moduleOutput: moduleOutput)
+        return controller
+    }
+    
     // MARK: Animation list
     
     func animationListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {

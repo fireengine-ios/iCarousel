@@ -248,7 +248,7 @@ extension ForYouTableViewCell: UICollectionViewDelegateFlowLayout {
         case .albums:
             let album = albumsData[indexPath.row]
             delegate?.naviateToAlbumDetail(album: album)
-        case .story, .animations, .collages, .hidden:
+        case .story, .animations, .collages, .hidden, .favorites:
             let item = wrapData[indexPath.row]
             delegate?.navigateToItemPreview(item: item, items: wrapData, currentSection: currentView)
         case .throwback:

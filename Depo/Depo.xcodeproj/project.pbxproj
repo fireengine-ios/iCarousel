@@ -1360,6 +1360,10 @@
 		89104BCA22CBA1B4005B3F58 /* PackagePremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A26E66B21A6E7D70033B797 /* PackagePremiumView.swift */; };
 		8915C325233B7D4A00EFC706 /* BasePopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A723390D69000083B7 /* BasePopUpController.swift */; };
 		8915C326233B7D4A00EFC706 /* BasePopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A723390D69000083B7 /* BasePopUpController.swift */; };
+		891CDE3B296EF11200E5CD3B /* FavoriteInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891CDE3A296EF11200E5CD3B /* FavoriteInitializer.swift */; };
+		891CDE3C296EF11200E5CD3B /* FavoriteInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891CDE3A296EF11200E5CD3B /* FavoriteInitializer.swift */; };
+		891CDE3D296EF11200E5CD3B /* FavoriteInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891CDE3A296EF11200E5CD3B /* FavoriteInitializer.swift */; };
+		891CDE3E296EF11200E5CD3B /* FavoriteInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891CDE3A296EF11200E5CD3B /* FavoriteInitializer.swift */; };
 		89256CE12926994900FAD38E /* DiscoverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89256CE02926994900FAD38E /* DiscoverTableViewCell.xib */; };
 		89256CE3292699B600FAD38E /* DiscoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89256CE2292699B600FAD38E /* DiscoverTableViewCell.swift */; };
 		892B014922DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B014722DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift */; };
@@ -1530,6 +1534,10 @@
 		89EA4F81240902C400A2C543 /* PackagesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89EA4F78240902C400A2C543 /* PackagesTableViewCell.xib */; };
 		89EA4F83240902C400A2C543 /* PackagesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89EA4F78240902C400A2C543 /* PackagesTableViewCell.xib */; };
 		89EA4F84240902C400A2C543 /* PackagesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89EA4F78240902C400A2C543 /* PackagesTableViewCell.xib */; };
+		89ECD6A4296FDE6500315A02 /* FavoriteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECD6A3296FDE6500315A02 /* FavoriteInteractor.swift */; };
+		89ECD6A5296FDE6500315A02 /* FavoriteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECD6A3296FDE6500315A02 /* FavoriteInteractor.swift */; };
+		89ECD6A6296FDE6500315A02 /* FavoriteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECD6A3296FDE6500315A02 /* FavoriteInteractor.swift */; };
+		89ECD6A7296FDE6500315A02 /* FavoriteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECD6A3296FDE6500315A02 /* FavoriteInteractor.swift */; };
 		8C017B762074B782002484E7 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
 		8C017B772074B795002484E7 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
 		8C0332982115F42D00E75EBC /* AnalyticsDimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0332962115F42D00E75EBC /* AnalyticsDimension.swift */; };
@@ -10615,6 +10623,7 @@
 		890F736E22EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseEmailVerificationPopUp.xib; sourceTree = "<group>"; };
 		890F737622EEFAFF00BA0020 /* BaseChangeEmailPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseChangeEmailPopUp.xib; sourceTree = "<group>"; };
 		890F737722EEFAFF00BA0020 /* BaseChangeEmailPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseChangeEmailPopUp.swift; sourceTree = "<group>"; };
+		891CDE3A296EF11200E5CD3B /* FavoriteInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteInitializer.swift; sourceTree = "<group>"; };
 		8921222D2303FFA400396ED0 /* EmailVerifiedPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerifiedPopUp.swift; sourceTree = "<group>"; };
 		89256CE02926994900FAD38E /* DiscoverTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscoverTableViewCell.xib; sourceTree = "<group>"; };
 		89256CE2292699B600FAD38E /* DiscoverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewCell.swift; sourceTree = "<group>"; };
@@ -10661,6 +10670,7 @@
 		89E51D5D22CA2ECA007A7DBC /* CreateStoryPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateStoryPopUp.xib; sourceTree = "<group>"; };
 		89EA4F77240902C400A2C543 /* PackagesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackagesTableViewCell.swift; sourceTree = "<group>"; };
 		89EA4F78240902C400A2C543 /* PackagesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PackagesTableViewCell.xib; sourceTree = "<group>"; };
+		89ECD6A3296FDE6500315A02 /* FavoriteInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteInteractor.swift; sourceTree = "<group>"; };
 		8A226C38114FC93E746DB9EF /* Pods-lifeBox_Business_Bundle.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lifeBox_Business_Bundle.appstore.xcconfig"; path = "Target Support Files/Pods-lifeBox_Business_Bundle/Pods-lifeBox_Business_Bundle.appstore.xcconfig"; sourceTree = "<group>"; };
 		8A4620DB4814DE9B2BF69415 /* SplashModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashModuleInput.swift; sourceTree = "<group>"; };
 		8ACB18A67C5CBB40E87DBA64 /* UploadFilesSelectionModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionModuleInput.swift; sourceTree = "<group>"; };
@@ -14692,6 +14702,7 @@
 				89959F072934B361000135DE /* CollageInitializer.swift */,
 				F036B15727623119005A2D7E /* SpotlightSearchHelper.swift */,
 				893269EA29361A26006305A0 /* AnimationsInitializer.swift */,
+				891CDE3A296EF11200E5CD3B /* FavoriteInitializer.swift */,
 			);
 			path = Configurator;
 			sourceTree = "<group>";
@@ -18413,6 +18424,7 @@
 				984F8E7C200CDEA200D9D595 /* StoriesInteractor.swift */,
 				89959F022934B00E000135DE /* CollageInteractor.swift */,
 				893269F329361AE7006305A0 /* AnimationInteractor.swift */,
+				89ECD6A3296FDE6500315A02 /* FavoriteInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -26064,6 +26076,7 @@
 				8CD2B3AD1FE7B2A500280547 /* PopUpService.swift in Sources */,
 				98792DE322FD5CD9000A77E5 /* SpotifyImportedPlaylistsNavbarManager.swift in Sources */,
 				8C0E8DB81FDEBDFF00789C91 /* GradientLoadingIndicator.swift in Sources */,
+				891CDE3B296EF11200E5CD3B /* FavoriteInitializer.swift in Sources */,
 				F09279A42886CA4400874ADD /* AlertFilesCancelView.swift in Sources */,
 				8C23F28F2286C93F00C5BF9E /* SingleThumbnailAlbumCell.swift in Sources */,
 				98B047AB259314740011DAEB /* Configuration.m in Sources */,
@@ -26628,6 +26641,7 @@
 				8C0B91BB2017104800A5BA81 /* URL+Path.swift in Sources */,
 				9862BC87255E899700D7945E /* FileInfoShareContactCell.swift in Sources */,
 				8C0E8EEF1FDEBDFF00789C91 /* PhotoVideoDetailInitializer.swift in Sources */,
+				89ECD6A4296FDE6500315A02 /* FavoriteInteractor.swift in Sources */,
 				03056AC223BA23C000F6D57A /* NetmeraService.swift in Sources */,
 				8980D91A29260E4F00817FF8 /* DiscoverViewController.swift in Sources */,
 				7C849212201CB979007C502A /* LatestUpladsCard.swift in Sources */,
@@ -28478,6 +28492,7 @@
 				CE784A5322A685FB00662219 /* RadialGradientableView.swift in Sources */,
 				98E4BA1223C7230D003A4631 /* TrashBinThreeDotMenuManager.swift in Sources */,
 				CE784A5422A685FB00662219 /* VisualMusicPlayerConfigurator.swift in Sources */,
+				89ECD6A6296FDE6500315A02 /* FavoriteInteractor.swift in Sources */,
 				CE784A5522A685FB00662219 /* ForgotPasswordViewInput.swift in Sources */,
 				07FBA21926E0BD5400ED4132 /* Strings.swift in Sources */,
 				CE784A5622A685FB00662219 /* ActivityTimelineTableBackView.swift in Sources */,
@@ -29273,6 +29288,7 @@
 				B5B01A7423FA7CB900B03426 /* ResumableUploadInfoService.swift in Sources */,
 				985D87F524D0237D004BCDFF /* PhotoEditViewFactory.swift in Sources */,
 				9868100D25080FCF0046483B /* PhotoEditAdjustManager.swift in Sources */,
+				891CDE3D296EF11200E5CD3B /* FavoriteInitializer.swift in Sources */,
 				8E26D9792306998B00D08123 /* MusicInteractor.swift in Sources */,
 				B59E1F7E25921F0000640DD1 /* ItemSyncOperation.swift in Sources */,
 				CE784C6B22A685FB00662219 /* FeedbackViewInteractorOutput.swift in Sources */,
@@ -29591,6 +29607,7 @@
 				07111F2626E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */,
 				CF8B641923CBC9D70021B021 /* CreateStoryResponse.swift in Sources */,
 				985E9BFE2493AFD6004D70BA /* UITextView+Extensions.swift in Sources */,
+				89ECD6A5296FDE6500315A02 /* FavoriteInteractor.swift in Sources */,
 				CF8B641A23CBC9D70021B021 /* UserProfileInteractor.swift in Sources */,
 				CF8B641B23CBC9D70021B021 /* HomePagePresenter.swift in Sources */,
 				CF8B641C23CBC9D70021B021 /* SearchViewInteractor.swift in Sources */,
@@ -30053,6 +30070,7 @@
 				CF8B656923CBC9D70021B021 /* TermsAndServicesViewController.swift in Sources */,
 				0768880E271D948F00833F43 /* TooltipViewController.swift in Sources */,
 				CF7B1E56256B3DD400BAF566 /* PrivateShareSliderFilesCollectionManager.swift in Sources */,
+				891CDE3C296EF11200E5CD3B /* FavoriteInitializer.swift in Sources */,
 				CF8B656A23CBC9D70021B021 /* BaseChangeEmailPopUp.swift in Sources */,
 				CF8B656B23CBC9D70021B021 /* InstagramAccountConnectionCell.swift in Sources */,
 				030207B023D1D32C00BF8006 /* NetmeraScreenEvents.swift in Sources */,
@@ -31290,6 +31308,7 @@
 				CF8B6B9D23CBCA280021B021 /* (null) in Sources */,
 				B59E1F8B25921F0000640DD1 /* VideoSyncService.swift in Sources */,
 				CF8B6B9E23CBCA280021B021 /* (null) in Sources */,
+				89ECD6A7296FDE6500315A02 /* FavoriteInteractor.swift in Sources */,
 				CF8B6B9F23CBCA280021B021 /* CreateStoryMusicEnterView.swift in Sources */,
 				CF8B6BA023CBCA280021B021 /* UIColor+Adjust.swift in Sources */,
 				98B04809259314750011DAEB /* SyncDB.m in Sources */,
@@ -32544,6 +32563,7 @@
 				CF71460824B597A800D83E60 /* ContactDetailCell.swift in Sources */,
 				CF8B6F2E23CBCA280021B021 /* URL+ContentType.swift in Sources */,
 				98231A5C24F3A23500FD16E2 /* AprilFilter.swift in Sources */,
+				891CDE3E296EF11200E5CD3B /* FavoriteInitializer.swift in Sources */,
 				CF8B6F2F23CBCA280021B021 /* SplashInteractor.swift in Sources */,
 				CF8B6F3023CBCA280021B021 /* MailVerificationViewController.swift in Sources */,
 				CF8B6F3123CBCA280021B021 /* SpotifyPlaylistCollectionViewCell.swift in Sources */,
