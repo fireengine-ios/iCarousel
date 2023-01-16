@@ -9,14 +9,21 @@
 class BottomSelectionTabBarInteractor: MoreFilesActionsInteractor, BottomSelectionTabBarInteractorInput {
     
     private var dataStorage: EditingBarConfig?
+    private let queue = DispatchQueue(label: "currentBarcongfig.queue")
     
     typealias FailResponse = (_ value: ErrorResponse) -> Void
     
     var currentBarcongfig: EditingBarConfig? {
         set {
-            dataStorage = newValue
+            queue.sync { [weak self] in
+                self?.dataStorage = newValue
+            }
         } get {
-            return dataStorage
+            var config: EditingBarConfig?
+            queue.sync {
+                config = self.dataStorage
+            }
+            return config
         }
     }
 }
