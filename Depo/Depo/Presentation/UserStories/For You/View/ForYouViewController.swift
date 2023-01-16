@@ -51,6 +51,7 @@ final class ForYouViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         output.getUpdateData(for: .hidden)
+        output.getUpdateData(for: .favorites)
         self.tableView.reloadData()
     }
     
