@@ -8,15 +8,15 @@
 
 class BottomSelectionTabBarInteractor: MoreFilesActionsInteractor, BottomSelectionTabBarInteractorInput {
     
-    let dataStorage = BottomSelectionTabBarDataStorage()
+    private var dataStorage: EditingBarConfig?
     
     typealias FailResponse = (_ value: ErrorResponse) -> Void
     
     var currentBarcongfig: EditingBarConfig? {
         set {
-            dataStorage.currentBarConfig = newValue
+            dataStorage = newValue
         } get {
-            return dataStorage.currentBarConfig
+            return dataStorage
         }
     }
 }
