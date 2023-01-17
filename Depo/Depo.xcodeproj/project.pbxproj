@@ -1949,7 +1949,6 @@
 		8C0E8E7E1FDEBDFF00789C91 /* ColumnsCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56131F7552A900F49DA1 /* ColumnsCollectionLayout.swift */; };
 		8C0E8E811FDEBDFF00789C91 /* AlertFilesActionsSheetInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C00971F1F6BDB1700FA069C /* AlertFilesActionsSheetInteractorOutput.swift */; };
 		8C0E8E831FDEBDFF00789C91 /* CollectionViewCellForVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6BDB81F0B88910066709E /* CollectionViewCellForVideo.swift */; };
-		8C0E8E841FDEBDFF00789C91 /* BottomSelectionTabBarDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8691F348B5C002AC795 /* BottomSelectionTabBarDataStorage.swift */; };
 		8C0E8E8B1FDEBDFF00789C91 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC51FD51E280013CCA0 /* UploadFromLifeBoxAllFilesPresenter.swift */; };
 		8C0E8E8D1FDEBDFF00789C91 /* DropboxParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE7471FCBE84100C23CBD /* DropboxParametrs.swift */; };
 		8C0E8E8F1FDEBDFF00789C91 /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE21FB585E800FCE6AB /* CustomErrors.swift */; };
@@ -4896,7 +4895,6 @@
 		CE784AC122A685FB00662219 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF7CF4A223103E2002DAF37 /* DropDownView.swift */; };
 		CE784AC222A685FB00662219 /* UnderlineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2734D205BF57B00E1AE9C /* UnderlineTextField.swift */; };
 		CE784AC322A685FB00662219 /* CollectionViewCellForVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6BDB81F0B88910066709E /* CollectionViewCellForVideo.swift */; };
-		CE784AC422A685FB00662219 /* BottomSelectionTabBarDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8691F348B5C002AC795 /* BottomSelectionTabBarDataStorage.swift */; };
 		CE784AC622A685FB00662219 /* FreeAppSpacePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6945D820039F4A00152344 /* FreeAppSpacePresenter.swift */; };
 		CE784AC722A685FB00662219 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC51FD51E280013CCA0 /* UploadFromLifeBoxAllFilesPresenter.swift */; };
 		CE784AC822A685FB00662219 /* DropboxParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE7471FCBE84100C23CBD /* DropboxParametrs.swift */; };
@@ -6587,7 +6585,6 @@
 		CF8B666623CBC9D70021B021 /* ColumnsCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56131F7552A900F49DA1 /* ColumnsCollectionLayout.swift */; };
 		CF8B666723CBC9D70021B021 /* AlertFilesActionsSheetInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C00971F1F6BDB1700FA069C /* AlertFilesActionsSheetInteractorOutput.swift */; };
 		CF8B666823CBC9D70021B021 /* CollectionViewCellForVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6BDB81F0B88910066709E /* CollectionViewCellForVideo.swift */; };
-		CF8B666923CBC9D70021B021 /* BottomSelectionTabBarDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8691F348B5C002AC795 /* BottomSelectionTabBarDataStorage.swift */; };
 		CF8B666A23CBC9D70021B021 /* ManageContactsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859299620060E93003F8AB3 /* ManageContactsInteractor.swift */; };
 		CF8B666B23CBC9D70021B021 /* StorageVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6442D2060E776009AFC12 /* StorageVars.swift */; };
 		CF8B666C23CBC9D70021B021 /* SocialAccountSectionMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */; };
@@ -8069,7 +8066,6 @@
 		CF8B6E4523CBCA280021B021 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF7CF4A223103E2002DAF37 /* DropDownView.swift */; };
 		CF8B6E4623CBCA280021B021 /* UnderlineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2734D205BF57B00E1AE9C /* UnderlineTextField.swift */; };
 		CF8B6E4723CBCA280021B021 /* CollectionViewCellForVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF6BDB81F0B88910066709E /* CollectionViewCellForVideo.swift */; };
-		CF8B6E4823CBCA280021B021 /* BottomSelectionTabBarDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8691F348B5C002AC795 /* BottomSelectionTabBarDataStorage.swift */; };
 		CF8B6E4923CBCA280021B021 /* PhotoVideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C20863D228D4B2E000BEDAD /* PhotoVideoController.swift */; };
 		CF8B6E4A23CBCA280021B021 /* FreeAppSpacePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6945D820039F4A00152344 /* FreeAppSpacePresenter.swift */; };
 		CF8B6E4B23CBCA280021B021 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC51FD51E280013CCA0 /* UploadFromLifeBoxAllFilesPresenter.swift */; };
@@ -10778,7 +10774,6 @@
 		8C6EF8651F348B5C002AC795 /* BottomSelectionTabBarInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSelectionTabBarInteractor.swift; sourceTree = "<group>"; };
 		8C6EF8661F348B5C002AC795 /* BottomSelectionTabBarInteractorInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSelectionTabBarInteractorInput.swift; sourceTree = "<group>"; };
 		8C6EF8671F348B5C002AC795 /* BottomSelectionTabBarInteractorOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSelectionTabBarInteractorOutput.swift; sourceTree = "<group>"; };
-		8C6EF8691F348B5C002AC795 /* BottomSelectionTabBarDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSelectionTabBarDataStorage.swift; sourceTree = "<group>"; };
 		8C6EF86B1F348B5C002AC795 /* BaseItemPassingProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseItemPassingProtocol.swift; sourceTree = "<group>"; };
 		8C6EF86C1F348B5C002AC795 /* BottomSelectionTabBarModuleInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSelectionTabBarModuleInput.swift; sourceTree = "<group>"; };
 		8C6EF86D1F348B5C002AC795 /* BottomSelectionTabBarPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSelectionTabBarPresenter.swift; sourceTree = "<group>"; };
@@ -16792,17 +16787,8 @@
 				8C6EF8651F348B5C002AC795 /* BottomSelectionTabBarInteractor.swift */,
 				8C6EF8661F348B5C002AC795 /* BottomSelectionTabBarInteractorInput.swift */,
 				8C6EF8671F348B5C002AC795 /* BottomSelectionTabBarInteractorOutput.swift */,
-				8C6EF8681F348B5C002AC795 /* Services */,
 			);
 			path = Interactor;
-			sourceTree = "<group>";
-		};
-		8C6EF8681F348B5C002AC795 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				8C6EF8691F348B5C002AC795 /* BottomSelectionTabBarDataStorage.swift */,
-			);
-			path = Services;
 			sourceTree = "<group>";
 		};
 		8C6EF86A1F348B5C002AC795 /* Presenter */ = {
@@ -26469,7 +26455,6 @@
 				8C0E8E7E1FDEBDFF00789C91 /* ColumnsCollectionLayout.swift in Sources */,
 				8C0E8E811FDEBDFF00789C91 /* AlertFilesActionsSheetInteractorOutput.swift in Sources */,
 				8C0E8E831FDEBDFF00789C91 /* CollectionViewCellForVideo.swift in Sources */,
-				8C0E8E841FDEBDFF00789C91 /* BottomSelectionTabBarDataStorage.swift in Sources */,
 				985786F223E01F8800D35DDA /* SettingFooterView.swift in Sources */,
 				8C0B91AC20170EBB00A5BA81 /* ManageContactsInteractor.swift in Sources */,
 				982319CF24F3A1E700FD16E2 /* AdjustmentCategoryCell.swift in Sources */,
@@ -28664,7 +28649,6 @@
 				A74ADA6823A3E3C9007DD192 /* CarouselPageView.swift in Sources */,
 				F02F6AAC269C56FC00A64ED8 /* ValidationRules.swift in Sources */,
 				CF71464F24B597A800D83E60 /* ContactSyncBaseCardView.swift in Sources */,
-				CE784AC422A685FB00662219 /* BottomSelectionTabBarDataStorage.swift in Sources */,
 				8C1E5BD222CB8B81008FDA02 /* PhotoVideoController.swift in Sources */,
 				0791818626F8B3B10067FB75 /* ResetPasswordServiceDelegate.swift in Sources */,
 				CE784AC622A685FB00662219 /* FreeAppSpacePresenter.swift in Sources */,
@@ -30422,7 +30406,6 @@
 				CF8B666723CBC9D70021B021 /* AlertFilesActionsSheetInteractorOutput.swift in Sources */,
 				730F8AC423CE32EB00798B61 /* OverlayStickerViewController.swift in Sources */,
 				CF8B666823CBC9D70021B021 /* CollectionViewCellForVideo.swift in Sources */,
-				CF8B666923CBC9D70021B021 /* BottomSelectionTabBarDataStorage.swift in Sources */,
 				CF71465F24B597A900D83E60 /* ContactSyncBigCardView.swift in Sources */,
 				CF8B666A23CBC9D70021B021 /* ManageContactsInteractor.swift in Sources */,
 				CF8B666B23CBC9D70021B021 /* StorageVars.swift in Sources */,
@@ -32239,7 +32222,6 @@
 				989686D024C969FF00171375 /* PHPhotoLibrary+Extensions.swift in Sources */,
 				CF8B6E4623CBCA280021B021 /* UnderlineTextField.swift in Sources */,
 				CF8B6E4723CBCA280021B021 /* CollectionViewCellForVideo.swift in Sources */,
-				CF8B6E4823CBCA280021B021 /* BottomSelectionTabBarDataStorage.swift in Sources */,
 				F02F6AAD269C56FC00A64ED8 /* ValidationRules.swift in Sources */,
 				CF71465024B597A800D83E60 /* ContactSyncBaseCardView.swift in Sources */,
 				CF8B6E4923CBCA280021B021 /* PhotoVideoController.swift in Sources */,

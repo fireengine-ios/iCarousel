@@ -127,6 +127,11 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
             return
         }
         
+        guard index < interactor.allItems.count else {
+            debugLog("CRASH CASE ---->>> index out of range")
+            return
+        }
+        
         let selectedItems = [interactor.allItems[index]]
         let allSelectedItemsTypes = selectedItems.map { $0.fileType }
         
