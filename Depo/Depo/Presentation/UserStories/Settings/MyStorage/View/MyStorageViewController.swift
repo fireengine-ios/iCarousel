@@ -157,7 +157,7 @@ final class MyStorageViewController: BaseViewController {
     }
     
     private func addPremiumBanner() {
-        guard AuthoritySingleton.shared.accountType.isPremium else { return }
+        guard !AuthoritySingleton.shared.accountType.isPremium else { return }
         
         view.addSubview(bannerView)
         bannerView.translatesAutoresizingMaskIntoConstraints = false
