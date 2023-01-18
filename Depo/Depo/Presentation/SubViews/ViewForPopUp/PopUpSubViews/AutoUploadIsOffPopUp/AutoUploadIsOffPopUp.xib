@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,77 +11,75 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="AutoUploadIsOffPopUp" customModule="Billo" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="300" height="94"/>
+            <rect key="frame" x="0.0" y="0.0" width="300" height="161"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SyncingPopUpImage" translatesAutoresizingMaskIntoConstraints="NO" id="Olb-Sa-Ujd">
-                    <rect key="frame" x="16" y="7" width="23" height="20"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="popupCloudBackup" translatesAutoresizingMaskIntoConstraints="NO" id="Olb-Sa-Ujd">
+                    <rect key="frame" x="16" y="12" width="30" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="23" id="pmR-rL-dZj"/>
-                        <constraint firstAttribute="height" constant="20" id="tpm-wJ-TxJ"/>
+                        <constraint firstAttribute="width" constant="30" id="pmR-rL-dZj"/>
+                        <constraint firstAttribute="height" constant="30" id="tpm-wJ-TxJ"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto Upload is off" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eea-6V-l1X">
-                    <rect key="frame" x="55" y="9" width="229" height="20.5"/>
+                    <rect key="frame" x="62" y="18" width="222" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nap-ZB-xd9">
-                    <rect key="frame" x="0.0" y="37" width="300" height="1"/>
+                    <rect key="frame" x="0.0" y="56.5" width="300" height="1"/>
                     <color key="backgroundColor" white="0.0" alpha="0.20406142979452055" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="NjN-LN-bU9"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R4F-J3-y81" customClass="CircleYellowButton" customModule="Billo" customModuleProvider="target">
-                    <rect key="frame" x="209" y="64" width="76" height="24"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="24" id="YSM-cm-PUm"/>
-                    </constraints>
-                    <state key="normal" title="Button" image="CogForButtons"/>
-                    <connections>
-                        <action selector="onSettingsButton" destination="i5M-Pr-FkT" eventType="touchUpInside" id="z8j-Vl-s3E"/>
-                    </connections>
-                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Go to setting to auto sync." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="llh-MA-kwD">
-                    <rect key="frame" x="27" y="46" width="258" height="16"/>
+                    <rect key="frame" x="16" y="73.5" width="268" height="42"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="FoX-d7-GlP"/>
+                        <constraint firstAttribute="height" constant="42" id="vMt-ui-qVH"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0PF-OT-gKU">
+                    <rect key="frame" x="16" y="131.5" width="46" height="30"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="onSettingsButton:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="Pbq-ad-dgp"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" name="secondaryBackground"/>
             <constraints>
+                <constraint firstItem="llh-MA-kwD" firstAttribute="top" secondItem="Nap-ZB-xd9" secondAttribute="bottom" constant="16" id="1UU-K6-YHm"/>
                 <constraint firstAttribute="trailing" secondItem="Eea-6V-l1X" secondAttribute="trailing" constant="16" id="1jc-iL-teg"/>
-                <constraint firstItem="Nap-ZB-xd9" firstAttribute="top" secondItem="Eea-6V-l1X" secondAttribute="bottom" constant="7.5" id="4Zl-L4-Kln"/>
+                <constraint firstItem="Nap-ZB-xd9" firstAttribute="top" secondItem="Eea-6V-l1X" secondAttribute="bottom" constant="18" id="4Zl-L4-Kln"/>
                 <constraint firstItem="Eea-6V-l1X" firstAttribute="leading" secondItem="Olb-Sa-Ujd" secondAttribute="trailing" constant="16" id="8pg-6P-gHD"/>
-                <constraint firstItem="Olb-Sa-Ujd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="7" id="EgZ-RV-zUS"/>
-                <constraint firstItem="R4F-J3-y81" firstAttribute="top" secondItem="llh-MA-kwD" secondAttribute="bottom" constant="2" id="HF2-Q6-b9g"/>
-                <constraint firstAttribute="trailing" secondItem="R4F-J3-y81" secondAttribute="trailing" constant="15" id="IJM-g4-I3j"/>
+                <constraint firstItem="Olb-Sa-Ujd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="12" id="EgZ-RV-zUS"/>
+                <constraint firstItem="llh-MA-kwD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="Eme-YT-oHq"/>
                 <constraint firstItem="Nap-ZB-xd9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NDc-uP-ru9"/>
+                <constraint firstItem="0PF-OT-gKU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="XzD-fi-kl1"/>
                 <constraint firstAttribute="trailing" secondItem="Nap-ZB-xd9" secondAttribute="trailing" id="bKO-gY-RZH"/>
-                <constraint firstItem="llh-MA-kwD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="27" id="eV1-k2-zZ0"/>
                 <constraint firstItem="Olb-Sa-Ujd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="qTz-ku-s8r"/>
-                <constraint firstItem="llh-MA-kwD" firstAttribute="top" secondItem="Nap-ZB-xd9" secondAttribute="bottom" constant="8" id="qXP-oI-WAw"/>
-                <constraint firstAttribute="trailing" secondItem="llh-MA-kwD" secondAttribute="trailing" constant="15" id="sMu-Dl-T4o"/>
-                <constraint firstItem="Eea-6V-l1X" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="9" id="t4s-fZ-dt0"/>
+                <constraint firstItem="0PF-OT-gKU" firstAttribute="top" secondItem="llh-MA-kwD" secondAttribute="bottom" constant="16" id="rIh-KN-9K1"/>
+                <constraint firstItem="Eea-6V-l1X" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="18" id="t4s-fZ-dt0"/>
+                <constraint firstAttribute="trailing" secondItem="llh-MA-kwD" secondAttribute="trailing" constant="16" id="vpq-At-gFS"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="settingsButton" destination="R4F-J3-y81" id="CQl-hs-ieD"/>
+                <outlet property="line" destination="Nap-ZB-xd9" id="zRJ-VE-P85"/>
+                <outlet property="settingsButton" destination="0PF-OT-gKU" id="j0a-dh-sWY"/>
                 <outlet property="subTitleLabel" destination="llh-MA-kwD" id="xnK-GV-2Sf"/>
                 <outlet property="titleText" destination="Eea-6V-l1X" id="9v2-GY-INP"/>
             </connections>
-            <point key="canvasLocation" x="26" y="52"/>
+            <point key="canvasLocation" x="25.600000000000001" y="80.50974512743629"/>
         </view>
     </objects>
     <resources>
-        <image name="CogForButtons" width="22" height="22"/>
-        <image name="SyncingPopUpImage" width="23" height="20"/>
+        <image name="popupCloudBackup" width="32" height="32"/>
         <namedColor name="secondaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -24,7 +24,7 @@ class DiscoverCollectionViewLayout: UICollectionViewLayout {
     private var cache = [UICollectionViewLayoutAttributes]()
     private var insertItems = [UICollectionViewUpdateItem]()
 
-    private var cellPadding: CGFloat = 6.0
+    private var cellPadding: CGFloat = 8.0
     private var contentHeight: CGFloat = 0.0
     
     private var contentWidth: CGFloat {
@@ -83,7 +83,7 @@ class DiscoverCollectionViewLayout: UICollectionViewLayout {
                 let height = cellHeight + paddings
 
                 let frame = CGRect(x: xOffset[column], y: yOffset[column], width: columnWidth, height: height)
-                    .insetBy(dx: cellPadding, dy: cellPadding)
+                    .insetBy(dx: cellPadding * 2, dy: cellPadding)
 
                 let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
                 attributes.zIndex = item

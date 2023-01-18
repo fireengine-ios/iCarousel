@@ -11,23 +11,36 @@ import UIKit
 final class AutoUploadIsOffPopUp: BaseCardView {
     
     @IBOutlet weak var titleText: UILabel!
-    @IBOutlet weak var settingsButton: CircleYellowButton!
     @IBOutlet weak var subTitleLabel: UILabel!
-
+    @IBOutlet weak var line: UIView!
+    @IBOutlet weak var settingsButton: UIButton! {
+        willSet {
+            newValue.contentHorizontalAlignment = .left
+            newValue.sizeToFit()
+            newValue.titleLabel?.font = .appFont(.bold, size: 14)
+        }
+    }
+    
     override func configurateView() {
         super.configurateView()
         
         canSwipe = false
         
         titleText.text = TextConstants.autoUploaOffPopUpTitleText
-        titleText.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        titleText.textColor = ColorConstants.textGrayColor
+        titleText.font = .appFont(.medium, size: 16)
+        titleText.textColor = AppColor.label.color
+        
+        line.backgroundColor = AppColor.discoverCardLine.color
         
         subTitleLabel.text = TextConstants.autoUploaOffPopUpSubTitleText
-        subTitleLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
-        subTitleLabel.textColor = ColorConstants.blueColor
+        subTitleLabel.font = .appFont(.medium, size: 16)
+        subTitleLabel.textColor = AppColor.label.color
+        subTitleLabel.numberOfLines = 2
         
-        settingsButton?.setTitle(TextConstants.autoUploaOffSettings, for: .normal)
+        settingsButton.setTitle(TextConstants.autoUploaOffSettings, for: .normal)
+        settingsButton.titleLabel?.font = .appFont(.bold, size: 22)
+        settingsButton.setTitleColor(AppColor.settingsButtonColor.color, for: .normal)
+        
     }
     
     override func viewDeletedBySwipe() {
@@ -39,7 +52,7 @@ final class AutoUploadIsOffPopUp: BaseCardView {
         PopUpService.shared.resetLoginCountForUploadOffPopUp()
     }
     
-    @IBAction func onSettingsButton() {
+    @IBAction func onSettingsButton(_ sender: Any) {
         let router = RouterVC()
         router.pushViewController(viewController: router.autoUpload)
     }

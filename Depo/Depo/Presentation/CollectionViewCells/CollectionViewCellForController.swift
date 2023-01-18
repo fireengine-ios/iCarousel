@@ -15,19 +15,19 @@ class CollectionViewCellForController: BaseCollectionViewCellWithSwipe {
             isSwipeEnable = baseView.canSwipe
         }
         
-        controllersView.layer.cornerRadius = 5
+        controllersView.layer.cornerRadius = 15
         controllersView.clipsToBounds = true
         
         let layer = CALayer()
         layer.frame = contentView.layer.frame
         
         layer.shadowColor = AppColor.cellShadow.color.cgColor
-        layer.shadowOpacity = 1
+        layer.shadowOpacity = 0.5
         layer.shadowOffset = CGSize.zero
-        layer.shadowRadius = 3
+        layer.shadowRadius = 6
         layer.shadowPath = UIBezierPath(rect: layer.bounds).cgPath
         layer.shouldRasterize = true
-        layer.cornerRadius = 5
+        layer.cornerRadius = 15
         
         DispatchQueue.main.async {
             self.contentView.layer.addSublayer(layer)
