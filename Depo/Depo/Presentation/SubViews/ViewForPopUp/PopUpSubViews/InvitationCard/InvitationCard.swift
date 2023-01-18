@@ -24,6 +24,22 @@ final class InvitationCard: BaseCardView {
         
         let title = viewType == .invitation ? TextConstants.homeInvitationCardButtn : localized(.paycellCampaignTitle)
         bottomButton.setTitle(title, for: .normal)
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        invitationImageView.isUserInteractionEnabled = true
+        invitationImageView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        let router = RouterVC()
+        if viewType == .invitation {
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .invitation, eventLabel: .homePageCard(.letsSee))
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.HomepageCard(cardName: NetmeraEventValues.HomePageCardEventValue.invitation.text, action: NetmeraEventValues.HomePageCardEventValue.detail.text))
+
+            let controller = router.invitationController()
+            router.pushViewController(viewController: controller)
+        } 
     }
 
     override func configurateView() {
