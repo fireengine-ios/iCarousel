@@ -55,7 +55,8 @@ final class InvitationCard: BaseCardView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        let height = containerStackView.frame.size.height
+        //let height = containerStackView.frame.size.height DESIGN WITH BUTTON
+        let height = invitationImageView.frame.size.height //DESIGN WITHOUT BUTTON
         if calculatedH != height {
             calculatedH = height
             layoutIfNeeded()
