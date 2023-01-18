@@ -39,7 +39,9 @@ final class InvitationCard: BaseCardView {
 
             let controller = router.invitationController()
             router.pushViewController(viewController: controller)
-        } 
+        } else if viewType == .paycell {
+            router.pushViewController(viewController: router.paycell)
+        }
     }
 
     override func configurateView() {
