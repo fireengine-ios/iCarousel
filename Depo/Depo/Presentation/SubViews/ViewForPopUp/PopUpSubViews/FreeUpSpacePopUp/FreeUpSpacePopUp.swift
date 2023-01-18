@@ -13,7 +13,13 @@ final class FreeUpSpacePopUp: BaseCardView {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var bigTitleLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var freeAppSpaceButton: CircleYellowButton!
+    @IBOutlet weak var freeAppSpaceButton: UIButton! {
+        willSet {
+            newValue.contentHorizontalAlignment = .left
+            newValue.sizeToFit()
+            newValue.titleLabel?.font = .appFont(.bold, size: 14)
+        }
+    }
     
     private var operation: OperationType?
     private lazy var freeUpSpace = FreeAppSpace.session
@@ -23,17 +29,10 @@ final class FreeUpSpacePopUp: BaseCardView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupRecognizer()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupRecognizer()
-    }
-    
-    private func setupRecognizer() {
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(onFreeAppSpaceButton))
-        addGestureRecognizer(recognizer)
     }
     
     override func layoutSubviews() {
@@ -46,16 +45,34 @@ final class FreeUpSpacePopUp: BaseCardView {
         }
     }
     
+    @IBAction func onTapFreeAppSpaceButton(_ sender: Any) {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .freeUpSpace))
+        
+        switch freeUpSpace.state {
+        case .initial, .processing:
+            showPopup(message: TextConstants.freeUpSpaceInProgress)
+        case .finished:
+            if freeUpSpace.isEmptyDuplicates {
+                showPopup(message: TextConstants.freeUpSpaceNoDuplicates)
+            } else {
+                router.showFreeAppSpace()
+            }
+        }
+    }
+    
     override func configurateView() {
         super.configurateView()
+
+        titleLabel.font = .appFont(.medium, size: 16)
+        titleLabel.textColor = AppColor.label.color
         
-        titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        titleLabel.textColor = ColorConstants.textGrayColor
-        
-        bigTitleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        bigTitleLabel.textColor = ColorConstants.textGrayColor
+        bigTitleLabel.font = .appFont(.medium, size: 16)
+        bigTitleLabel.textColor = AppColor.label.color
+        bigTitleLabel.numberOfLines = 2
         
         freeAppSpaceButton.setTitle(TextConstants.freeAppSpacePopUpButtonTitle, for: .normal)
+        freeAppSpaceButton.titleLabel?.font = .appFont(.bold, size: 22)
+        freeAppSpaceButton.setTitleColor(AppColor.settingsButtonColor.color, for: .normal)
     }
     
     override func viewDeletedBySwipe() {
@@ -73,7 +90,7 @@ final class FreeUpSpacePopUp: BaseCardView {
         switch viewType {
         case .freeAppSpace:
             titleLabel.text = TextConstants.freeAppSpacePopUpTextNormal
-            bigTitleLabel.isHidden = true
+            bigTitleLabel.isHidden = false
             titleLabel.isHidden = false
             imageView.isHidden = false
         default:
@@ -87,20 +104,7 @@ final class FreeUpSpacePopUp: BaseCardView {
         deleteCard()
     }
     
-    @IBAction func onFreeAppSpaceButton() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .freeUpSpace))
-        
-        switch freeUpSpace.state {
-        case .initial, .processing:
-            showPopup(message: TextConstants.freeUpSpaceInProgress)
-        case .finished:
-            if freeUpSpace.isEmptyDuplicates {
-                showPopup(message: TextConstants.freeUpSpaceNoDuplicates)
-            } else {
-                router.showFreeAppSpace()
-            }
-        }
-    }
+    
     
     private func showPopup(message: String) {
         let vc = PopUpController.with(title: TextConstants.freeUpSpaceAlertTitle,
