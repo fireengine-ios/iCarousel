@@ -41,6 +41,9 @@ final class InvitationCard: BaseCardView {
             router.pushViewController(viewController: controller)
         } else if viewType == .paycell {
             router.pushViewController(viewController: router.paycell)
+        } else if viewType == .drawCampaign {
+            let url = URL(string: RouteRequests.drawCampaignUrl)
+            UIApplication.shared.open(url!)
         }
     }
 
