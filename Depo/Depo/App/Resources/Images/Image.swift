@@ -196,6 +196,7 @@ enum Image: String, AppImage {
     /// Discover
     case popupCloudBackup
     case launchCampaign
+    case divorceCardPlay
     
     /// Introduce
     case circleIntoduce

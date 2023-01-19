@@ -26,7 +26,7 @@ final class DocumentAlbumCardDesigner: NSObject {
     
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
-            newValue.font = .appFont(.light, size: 16)
+            newValue.font = .appFont(.light, size: 14)
             newValue.textColor = AppColor.label.color
             newValue.numberOfLines = 0
         }

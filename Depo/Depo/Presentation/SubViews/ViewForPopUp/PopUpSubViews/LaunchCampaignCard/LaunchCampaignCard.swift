@@ -49,8 +49,6 @@ final class LaunchCampaignCard: BaseCardView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        let imageViewFrame = self.imageView.frame
-        self.campaignImageView.frame = CGRect(x: imageViewFrame.maxX - 25.0, y: imageViewFrame.maxY - 70.0, width: 50, height: 50)
         loadImage()
     }
     
