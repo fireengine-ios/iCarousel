@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,16 +33,16 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="53D-mT-qdc">
-                    <rect key="frame" x="8" y="82" width="359" height="359"/>
+                    <rect key="frame" x="14" y="82" width="347" height="347"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0My-I7-oH7">
-                            <rect key="frame" x="1" y="1" width="357" height="357"/>
+                            <rect key="frame" x="1" y="1" width="345" height="345"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q8L-Bp-NgS" customClass="LoadingImageView" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="357" height="357"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="345" height="345"/>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dnp-Zi-YRh">
-                                    <rect key="frame" x="0.0" y="0.0" width="357" height="357"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="345" height="345"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
                                     </userDefinedRuntimeAttributes>
@@ -64,7 +64,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.2666666667" green="0.80392156859999997" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" name="settingsButtonColor"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="0My-I7-oH7" secondAttribute="trailing" constant="1" id="Dku-FZ-eG8"/>
                         <constraint firstItem="0My-I7-oH7" firstAttribute="leading" secondItem="53D-mT-qdc" secondAttribute="leading" constant="1" id="k4k-7m-aqs"/>
@@ -73,18 +73,8 @@
                         <constraint firstItem="0My-I7-oH7" firstAttribute="top" secondItem="53D-mT-qdc" secondAttribute="top" constant="1" id="sV6-09-Eoc"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gsg-xT-146">
-                    <rect key="frame" x="0.0" y="451" width="375" height="1"/>
-                    <color key="backgroundColor" name="itemSeperator"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="1" id="eQH-cZ-Fcr"/>
-                    </constraints>
-                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Zl-cS-Vds">
-                    <rect key="frame" x="14" y="452" width="46" height="44"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="44" id="Qm2-hP-zkq"/>
-                    </constraints>
+                    <rect key="frame" x="14" y="437" width="46" height="30"/>
                     <state key="normal" title="Button"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
@@ -94,12 +84,8 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SuT-ut-vPx">
-                    <rect key="frame" x="342" y="0.0" width="33" height="33"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="33" id="0lv-tm-wpE"/>
-                        <constraint firstAttribute="width" constant="33" id="DG0-Ai-ccB"/>
-                    </constraints>
-                    <state key="normal" image="CloseCardIcon"/>
+                    <rect key="frame" x="337" y="15" width="24" height="24"/>
+                    <state key="normal" image="iconCancelBorder"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
                     </userDefinedRuntimeAttributes>
@@ -108,7 +94,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlK-kk-NOo">
-                    <rect key="frame" x="258.5" y="459" width="46" height="30"/>
+                    <rect key="frame" x="315" y="437" width="46" height="30"/>
                     <state key="normal" title="Button"/>
                     <connections>
                         <action selector="shareButtonTapped:" destination="nPL-YN-sbK" eventType="touchUpInside" id="Frj-6K-TmY"/>
@@ -118,25 +104,19 @@
             <color key="backgroundColor" name="secondaryBackground"/>
             <constraints>
                 <constraint firstItem="Y6l-AY-WpA" firstAttribute="leading" secondItem="nPL-YN-sbK" secondAttribute="leading" constant="14" id="2q4-5B-3Cc"/>
-                <constraint firstItem="gsg-xT-146" firstAttribute="leading" secondItem="nPL-YN-sbK" secondAttribute="leading" id="4gF-eN-3GD"/>
-                <constraint firstItem="PlK-kk-NOo" firstAttribute="width" secondItem="4Zl-cS-Vds" secondAttribute="width" id="7dO-R5-RDT"/>
-                <constraint firstItem="4Zl-cS-Vds" firstAttribute="leading" secondItem="nPL-YN-sbK" secondAttribute="leading" constant="14" id="7ug-GE-qVA"/>
-                <constraint firstItem="53D-mT-qdc" firstAttribute="leading" secondItem="nPL-YN-sbK" secondAttribute="leading" constant="8" id="E8s-cz-aoz"/>
+                <constraint firstItem="53D-mT-qdc" firstAttribute="leading" secondItem="nPL-YN-sbK" secondAttribute="leading" constant="14" id="E8s-cz-aoz"/>
                 <constraint firstItem="bNu-b0-weG" firstAttribute="top" secondItem="nPL-YN-sbK" secondAttribute="top" constant="15" id="ExO-Qs-i8P"/>
                 <constraint firstItem="53D-mT-qdc" firstAttribute="top" secondItem="Y6l-AY-WpA" secondAttribute="bottom" constant="10" id="JYT-f1-WLK"/>
-                <constraint firstAttribute="trailing" secondItem="53D-mT-qdc" secondAttribute="trailing" constant="8" id="L1I-fP-LHm"/>
-                <constraint firstItem="PlK-kk-NOo" firstAttribute="centerY" secondItem="4Zl-cS-Vds" secondAttribute="centerY" id="MMq-WZ-c8r"/>
-                <constraint firstItem="SuT-ut-vPx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bNu-b0-weG" secondAttribute="trailing" constant="15" id="NdG-dW-0Qu"/>
+                <constraint firstAttribute="trailing" secondItem="53D-mT-qdc" secondAttribute="trailing" constant="14" id="L1I-fP-LHm"/>
+                <constraint firstItem="4Zl-cS-Vds" firstAttribute="leading" secondItem="nPL-YN-sbK" secondAttribute="leading" constant="14" id="ME9-un-Vd2"/>
                 <constraint firstAttribute="trailing" secondItem="Y6l-AY-WpA" secondAttribute="trailing" constant="14" id="See-BI-kfg"/>
-                <constraint firstItem="4Zl-cS-Vds" firstAttribute="top" secondItem="gsg-xT-146" secondAttribute="bottom" id="TEa-f6-9TB"/>
-                <constraint firstAttribute="trailing" secondItem="gsg-xT-146" secondAttribute="trailing" id="TWJ-KQ-saV"/>
-                <constraint firstItem="gsg-xT-146" firstAttribute="top" secondItem="53D-mT-qdc" secondAttribute="bottom" constant="10" id="X9K-im-YO4"/>
-                <constraint firstItem="PlK-kk-NOo" firstAttribute="height" secondItem="4Zl-cS-Vds" secondAttribute="height" multiplier="0.681818" id="a3q-uL-Oo2"/>
-                <constraint firstAttribute="trailing" secondItem="SuT-ut-vPx" secondAttribute="trailing" id="bNM-IR-H3m"/>
+                <constraint firstItem="4Zl-cS-Vds" firstAttribute="top" secondItem="53D-mT-qdc" secondAttribute="bottom" constant="8" id="diI-An-RbL"/>
+                <constraint firstItem="SuT-ut-vPx" firstAttribute="top" secondItem="nPL-YN-sbK" secondAttribute="top" constant="15" id="gcN-lf-9vX"/>
+                <constraint firstItem="PlK-kk-NOo" firstAttribute="top" secondItem="53D-mT-qdc" secondAttribute="bottom" constant="8" id="hA2-ZS-Tsy"/>
                 <constraint firstItem="Y6l-AY-WpA" firstAttribute="top" secondItem="bNu-b0-weG" secondAttribute="bottom" constant="15" id="hDf-DV-2DT"/>
                 <constraint firstItem="53D-mT-qdc" firstAttribute="centerX" secondItem="nPL-YN-sbK" secondAttribute="centerX" id="jhx-bw-mOt"/>
-                <constraint firstItem="PlK-kk-NOo" firstAttribute="centerX" secondItem="nPL-YN-sbK" secondAttribute="centerX" multiplier="1.5" id="k9d-sa-k11"/>
-                <constraint firstItem="SuT-ut-vPx" firstAttribute="top" secondItem="nPL-YN-sbK" secondAttribute="top" id="kUv-xO-9wN"/>
+                <constraint firstAttribute="trailing" secondItem="PlK-kk-NOo" secondAttribute="trailing" constant="14" id="ubU-cA-THK"/>
+                <constraint firstAttribute="trailing" secondItem="SuT-ut-vPx" secondAttribute="trailing" constant="14" id="vsh-9n-ijX"/>
                 <constraint firstItem="bNu-b0-weG" firstAttribute="leading" secondItem="nPL-YN-sbK" secondAttribute="leading" constant="14" id="vxc-87-xCF"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -152,12 +132,12 @@
         </view>
     </objects>
     <resources>
-        <image name="CloseCardIcon" width="14" height="14"/>
-        <namedColor name="itemSeperator">
-            <color red="0.91699999570846558" green="0.91699999570846558" blue="0.91699999570846558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
+        <image name="iconCancelBorder" width="24" height="24"/>
         <namedColor name="secondaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="settingsButtonColor">
+            <color red="0.0" green="0.4823529411764706" blue="0.6705882352941176" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
