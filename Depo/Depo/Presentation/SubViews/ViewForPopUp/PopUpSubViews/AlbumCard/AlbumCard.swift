@@ -13,22 +13,23 @@ final class AlbumCard: BaseCardView {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
-            titleLabel.textColor = ColorConstants.darkText
-            titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
+            titleLabel.font = .appFont(.medium, size: 16)
+            titleLabel.textColor = AppColor.label.color
             titleLabel.text = TextConstants.homeAlbumCardTitle
         }
     }
     
     @IBOutlet private weak var subTitleLabel: UILabel! {
         didSet {
-            subTitleLabel.textColor = ColorConstants.textGrayColor
-            subTitleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            subTitleLabel.font = .appFont(.regular, size: 12)
+            subTitleLabel.textColor = AppColor.label.color
             subTitleLabel.text = TextConstants.homeAlbumCardSubTitle
         }
     }
     
     @IBOutlet private weak var descriptionLabel: UILabel! {
         didSet {
+            descriptionLabel.isHidden = true
             descriptionLabel.textColor = ColorConstants.textGrayColor
             descriptionLabel.font = UIFont.TurkcellSaturaDemFont(size: 14)
         }
@@ -36,16 +37,16 @@ final class AlbumCard: BaseCardView {
     
     @IBOutlet private weak var bottomButton: UIButton! {
         didSet {
-            bottomButton.setTitleColor(ColorConstants.blueColor, for: .normal)
-            bottomButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
+            bottomButton.titleLabel?.font = .appFont(.medium, size: 14)
+            bottomButton.setTitleColor(AppColor.label.color, for: .normal)
             bottomButton.setTitle(TextConstants.homeAlbumCardBottomButtonSaveAlbum, for: .normal)
         }
     }
     
     @IBOutlet private weak var shareButton: UIButton!  {
         didSet {
-            shareButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
-            shareButton.setTitleColor(ColorConstants.blueColor, for: .normal)
+            shareButton.titleLabel?.font = .appFont(.medium, size: 14)
+            shareButton.setTitleColor(AppColor.label.color, for: .normal)
             shareButton.setTitle(TextConstants.tabBarShareLabel, for: .normal)
         }
     }
