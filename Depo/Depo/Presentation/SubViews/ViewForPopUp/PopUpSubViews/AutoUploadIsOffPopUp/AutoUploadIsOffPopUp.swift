@@ -38,7 +38,7 @@ final class AutoUploadIsOffPopUp: BaseCardView {
         subTitleLabel.numberOfLines = 2
         
         settingsButton.setTitle(TextConstants.autoUploaOffSettings, for: .normal)
-        settingsButton.titleLabel?.font = .appFont(.bold, size: 22)
+        settingsButton.titleLabel?.font = .appFont(.bold, size: 14)
         settingsButton.setTitleColor(AppColor.settingsButtonColor.color, for: .normal)
         
     }

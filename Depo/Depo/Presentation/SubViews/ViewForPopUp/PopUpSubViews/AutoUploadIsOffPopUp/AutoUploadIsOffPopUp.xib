@@ -44,7 +44,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0PF-OT-gKU">
-                    <rect key="frame" x="16" y="131.5" width="46" height="30"/>
+                    <rect key="frame" x="16" y="129.5" width="46" height="30"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal" title="Button"/>
                     <connections>
@@ -64,7 +64,7 @@
                 <constraint firstItem="0PF-OT-gKU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="XzD-fi-kl1"/>
                 <constraint firstAttribute="trailing" secondItem="Nap-ZB-xd9" secondAttribute="trailing" id="bKO-gY-RZH"/>
                 <constraint firstItem="Olb-Sa-Ujd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="qTz-ku-s8r"/>
-                <constraint firstItem="0PF-OT-gKU" firstAttribute="top" secondItem="llh-MA-kwD" secondAttribute="bottom" constant="16" id="rIh-KN-9K1"/>
+                <constraint firstItem="0PF-OT-gKU" firstAttribute="top" secondItem="llh-MA-kwD" secondAttribute="bottom" constant="14" id="rIh-KN-9K1"/>
                 <constraint firstItem="Eea-6V-l1X" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="18" id="t4s-fZ-dt0"/>
                 <constraint firstAttribute="trailing" secondItem="llh-MA-kwD" secondAttribute="trailing" constant="16" id="vpq-At-gFS"/>
             </constraints>

@@ -71,7 +71,7 @@ final class FreeUpSpacePopUp: BaseCardView {
         bigTitleLabel.numberOfLines = 2
         
         freeAppSpaceButton.setTitle(TextConstants.freeAppSpacePopUpButtonTitle, for: .normal)
-        freeAppSpaceButton.titleLabel?.font = .appFont(.bold, size: 22)
+        freeAppSpaceButton.titleLabel?.font = .appFont(.bold, size: 14)
         freeAppSpaceButton.setTitleColor(AppColor.settingsButtonColor.color, for: .normal)
     }
     

@@ -55,7 +55,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tCv-r8-d7f">
-                    <rect key="frame" x="16" y="135" width="46" height="30"/>
+                    <rect key="frame" x="16" y="133" width="46" height="30"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal" title="Button"/>
                     <connections>
@@ -67,7 +67,7 @@
             <constraints>
                 <constraint firstItem="eNd-Lf-Xnb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="1ni-Lb-dCu"/>
                 <constraint firstAttribute="trailing" secondItem="yZg-TM-xac" secondAttribute="trailing" id="2Fl-as-TT3"/>
-                <constraint firstItem="tCv-r8-d7f" firstAttribute="top" secondItem="eNd-Lf-Xnb" secondAttribute="bottom" constant="16" id="7cW-iq-jJv"/>
+                <constraint firstItem="tCv-r8-d7f" firstAttribute="top" secondItem="eNd-Lf-Xnb" secondAttribute="bottom" constant="14" id="7cW-iq-jJv"/>
                 <constraint firstAttribute="trailing" secondItem="5bF-UL-a8f" secondAttribute="trailing" constant="16" id="J29-XO-5FQ"/>
                 <constraint firstAttribute="trailing" secondItem="dyj-bv-ETM" secondAttribute="trailing" id="SrQ-pC-x2g"/>
                 <constraint firstItem="15l-Sg-8pX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="ThG-9r-CSs"/>
