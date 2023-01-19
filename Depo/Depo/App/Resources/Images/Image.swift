@@ -195,6 +195,7 @@ enum Image: String, AppImage {
     
     /// Discover
     case popupCloudBackup
+    case launchCampaign
     
     /// Introduce
     case circleIntoduce
