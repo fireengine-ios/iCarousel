@@ -22,8 +22,8 @@ final class TBMatikCard: BaseCardView {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaFont(size: 18)
-            newValue.textColor = ColorConstants.whiteColor
+            newValue.font = .appFont(.regular, size: 16)
+            newValue.textColor = AppColor.label.color
             newValue.numberOfLines = 0
             newValue.text = TextConstants.tbMatiHomeCardTitle
         }
@@ -31,17 +31,16 @@ final class TBMatikCard: BaseCardView {
     
     @IBOutlet private weak var dateLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaRegFont(size: 14)
-            newValue.numberOfLines = 0
-            newValue.textColor = ColorConstants.whiteColor
+            newValue.font = .appFont(.medium, size: 14)
+            newValue.textColor = AppColor.label.color
             newValue.text = " "
         }
     }
     
     @IBOutlet private weak var actionButton: UIButton! {
         willSet {
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
-            newValue.setTitleColor(ColorConstants.blueColor, for: .normal)
+            newValue.titleLabel?.font = .appFont(.bold, size: 14)
+            newValue.setTitleColor(AppColor.settingsButtonColor.color, for: .normal)
             newValue.setTitle(TextConstants.tbMatiHomeCardButtonTitle, for: .normal)
         }
     }
