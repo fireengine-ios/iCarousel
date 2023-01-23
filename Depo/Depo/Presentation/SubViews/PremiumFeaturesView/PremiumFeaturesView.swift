@@ -107,10 +107,12 @@ final class PremiumFeaturesView: UIView {
                                  y: 0,
                                  width: NumericConstants.imageViewSizeForPremiumFeaturesView,
                                  height: NumericConstants.imageViewSizeForPremiumFeaturesView)
+        imageView.isHidden = true
         descriptionLabel.frame = .zero
         descriptionLabel.numberOfLines = 0
-        descriptionLabel.font = UIFont.TurkcellSaturaMedFont(size: 14)
-        descriptionLabel.textColor = ColorConstants.darkText
+        descriptionLabel.font = .appFont(.medium, size: 14)
+        descriptionLabel.textColor = AppColor.settingsButtonColor.color
+        descriptionLabel.textAlignment = .center
 
         imageView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -121,8 +123,14 @@ final class PremiumFeaturesView: UIView {
         
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        //with Image
+//        descriptionLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+//        descriptionLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 7).isActive = true
+//        descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        
+        //withoutImage
         descriptionLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        descriptionLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 7).isActive = true
+        descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 
         changeFrame()
