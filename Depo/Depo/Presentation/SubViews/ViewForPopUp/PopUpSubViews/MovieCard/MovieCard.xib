@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -75,12 +75,8 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VnS-FV-3Q3">
-                    <rect key="frame" x="342" y="0.0" width="33" height="33"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="33" id="ONZ-Ac-UJc"/>
-                        <constraint firstAttribute="width" constant="33" id="cZz-DB-T7j"/>
-                    </constraints>
-                    <state key="normal" image="CloseCardIcon"/>
+                    <rect key="frame" x="337" y="15" width="24" height="24"/>
+                    <state key="normal" image="iconCancelBorder"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
                     </userDefinedRuntimeAttributes>
@@ -121,17 +117,16 @@
                 <constraint firstItem="azH-1I-wjv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="0zn-wQ-dlJ"/>
                 <constraint firstAttribute="trailing" secondItem="DLi-Pt-MfC" secondAttribute="trailing" constant="15" id="1LD-48-fKx"/>
                 <constraint firstItem="ksf-kX-8de" firstAttribute="width" secondItem="rlz-xc-VD9" secondAttribute="width" id="DiX-3W-Z9V"/>
-                <constraint firstItem="VnS-FV-3Q3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="FLS-Dd-hgU"/>
-                <constraint firstItem="VnS-FV-3Q3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Frz-GX-WIh" secondAttribute="trailing" constant="15" id="JCU-kt-jua"/>
                 <constraint firstItem="ksf-kX-8de" firstAttribute="centerY" secondItem="rlz-xc-VD9" secondAttribute="centerY" id="NmF-BY-2i8"/>
                 <constraint firstItem="Frz-GX-WIh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="OYp-yI-nnV"/>
+                <constraint firstItem="VnS-FV-3Q3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="OpY-4d-GbS"/>
                 <constraint firstItem="ksf-kX-8de" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" multiplier="1.5" id="PbT-Hr-iJk"/>
                 <constraint firstItem="rlz-xc-VD9" firstAttribute="top" secondItem="79I-Lx-Apf" secondAttribute="bottom" id="TP7-Gw-z0n"/>
                 <constraint firstItem="azH-1I-wjv" firstAttribute="top" secondItem="DLi-Pt-MfC" secondAttribute="bottom" constant="7" id="VTO-U8-5Km"/>
                 <constraint firstItem="ksf-kX-8de" firstAttribute="height" secondItem="rlz-xc-VD9" secondAttribute="height" multiplier="0.681818" id="cGS-ey-zK3"/>
                 <constraint firstItem="rlz-xc-VD9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="cp4-gJ-lYy"/>
+                <constraint firstAttribute="trailing" secondItem="VnS-FV-3Q3" secondAttribute="trailing" constant="14" id="fi0-bO-gq8"/>
                 <constraint firstItem="Frz-GX-WIh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="mk5-gZ-zUu"/>
-                <constraint firstAttribute="trailing" secondItem="VnS-FV-3Q3" secondAttribute="trailing" id="mq2-qq-6dW"/>
                 <constraint firstAttribute="trailing" secondItem="azH-1I-wjv" secondAttribute="trailing" constant="14" id="u1s-U6-Q83"/>
                 <constraint firstItem="DLi-Pt-MfC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="u5D-bx-Ahg"/>
                 <constraint firstItem="DLi-Pt-MfC" firstAttribute="top" secondItem="Frz-GX-WIh" secondAttribute="bottom" constant="15" id="ugH-XR-2gm"/>
@@ -153,8 +148,8 @@
         </view>
     </objects>
     <resources>
-        <image name="CloseCardIcon" width="14" height="14"/>
         <image name="PlayVideoCardIcon" width="30" height="30"/>
+        <image name="iconCancelBorder" width="24" height="24"/>
         <namedColor name="secondaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
