@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,21 +21,14 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IjD-Y9-jpH" customClass="RadialGradientableView" customModule="Billo" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="136"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lbu-Gd-J8h">
-                                    <rect key="frame" x="304" y="8" width="110" height="77"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="110" id="biy-GF-D6U"/>
-                                        <constraint firstAttribute="height" constant="77" id="fjD-Rh-XEl"/>
-                                    </constraints>
-                                </imageView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="lYl-LZ-HIN">
-                                    <rect key="frame" x="13" y="14" width="90" height="110"/>
+                                    <rect key="frame" x="14" y="14" width="386" height="110"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqC-MG-Xrj">
-                                            <rect key="frame" x="0.0" y="0.0" width="90" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="386" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RY4-W8-xzQ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="386" height="50"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -50,10 +43,10 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y4O-GF-9o9">
-                                            <rect key="frame" x="0.0" y="60" width="90" height="50"/>
+                                            <rect key="frame" x="0.0" y="60" width="386" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byb-pm-ZWi">
-                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="386" height="50"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -74,11 +67,8 @@
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="lYl-LZ-HIN" secondAttribute="bottom" constant="12" id="1LA-PI-AtU"/>
                                 <constraint firstItem="lYl-LZ-HIN" firstAttribute="top" secondItem="IjD-Y9-jpH" secondAttribute="top" constant="14" id="63b-Dh-Xcf"/>
-                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Lbu-Gd-J8h" secondAttribute="bottom" id="Suq-pK-96f"/>
-                                <constraint firstItem="lYl-LZ-HIN" firstAttribute="leading" secondItem="IjD-Y9-jpH" secondAttribute="leading" constant="13" id="iw1-0R-twj"/>
-                                <constraint firstAttribute="trailing" secondItem="Lbu-Gd-J8h" secondAttribute="trailing" id="jY4-NM-tjy"/>
-                                <constraint firstItem="Lbu-Gd-J8h" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lYl-LZ-HIN" secondAttribute="trailing" constant="8" id="nx4-78-z0E"/>
-                                <constraint firstItem="Lbu-Gd-J8h" firstAttribute="top" secondItem="IjD-Y9-jpH" secondAttribute="top" constant="8" id="z4D-IJ-Xc1"/>
+                                <constraint firstAttribute="trailing" secondItem="lYl-LZ-HIN" secondAttribute="trailing" constant="14" id="Puh-a5-GJA"/>
+                                <constraint firstItem="lYl-LZ-HIN" firstAttribute="leading" secondItem="IjD-Y9-jpH" secondAttribute="leading" constant="14" id="iw1-0R-twj"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xZH-RR-F4x">
@@ -100,6 +90,10 @@
                                         <action selector="onBottomButtonTap:" destination="976-Lr-wiL" eventType="touchUpInside" id="f1D-E1-Du7"/>
                                     </connections>
                                 </button>
+                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lbu-Gd-J8h">
+                                    <rect key="frame" x="366" y="8" width="34" height="22"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" name="secondaryBackground"/>
                             <constraints>
@@ -115,12 +109,8 @@
                     </subviews>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aLx-bk-6LK">
-                    <rect key="frame" x="381" y="0.0" width="33" height="33"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="33" id="nZP-Kd-eBM"/>
-                        <constraint firstAttribute="height" constant="33" id="sNg-Ui-zF3"/>
-                    </constraints>
-                    <state key="normal" image="CloseCardIconWhite"/>
+                    <rect key="frame" x="376" y="15" width="24" height="24"/>
+                    <state key="normal" image="iconCancelBorder"/>
                     <connections>
                         <action selector="onCloseTap:" destination="976-Lr-wiL" eventType="touchUpInside" id="DzF-1e-lUg"/>
                     </connections>
@@ -129,11 +119,11 @@
             <viewLayoutGuide key="safeArea" id="Fhy-Rz-zex"/>
             <color key="backgroundColor" name="secondaryBackground"/>
             <constraints>
+                <constraint firstItem="aLx-bk-6LK" firstAttribute="top" secondItem="976-Lr-wiL" secondAttribute="top" constant="15" id="5Xb-ck-IjS"/>
                 <constraint firstItem="17H-S8-FI5" firstAttribute="top" secondItem="976-Lr-wiL" secondAttribute="top" id="F2C-4y-q5u"/>
-                <constraint firstItem="Fhy-Rz-zex" firstAttribute="trailing" secondItem="aLx-bk-6LK" secondAttribute="trailing" id="LW6-pB-svR"/>
                 <constraint firstItem="17H-S8-FI5" firstAttribute="trailing" secondItem="976-Lr-wiL" secondAttribute="trailing" id="PzT-u1-5QD"/>
+                <constraint firstAttribute="trailing" secondItem="aLx-bk-6LK" secondAttribute="trailing" constant="14" id="mGH-o3-KRb"/>
                 <constraint firstItem="17H-S8-FI5" firstAttribute="leading" secondItem="976-Lr-wiL" secondAttribute="leading" id="sIb-fb-qN3"/>
-                <constraint firstItem="aLx-bk-6LK" firstAttribute="top" secondItem="976-Lr-wiL" secondAttribute="top" id="vgy-mM-34s"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
@@ -150,7 +140,7 @@
         </view>
     </objects>
     <resources>
-        <image name="CloseCardIconWhite" width="14" height="14"/>
+        <image name="iconCancelBorder" width="24" height="24"/>
         <namedColor name="secondaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

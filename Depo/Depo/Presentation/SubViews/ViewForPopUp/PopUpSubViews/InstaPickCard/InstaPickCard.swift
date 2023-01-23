@@ -69,10 +69,10 @@ final class InstaPickCard: BaseCardView {
         
         canSwipe = true
 
-        detailLabel.font = UIFont.TurkcellSaturaDemFont(size: 14)
+        detailLabel.font = .appFont(.light, size: 14)
         
-        bottomButton.setTitleColor(UIColor.lrTealish, for: .normal)
-        bottomButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
+        bottomButton.setTitleColor(AppColor.settingsButtonColor.color, for: .normal)
+        bottomButton.titleLabel?.font = .appFont(.bold, size: 14)
     }
     
     override func layoutSubviews() {
@@ -90,63 +90,76 @@ final class InstaPickCard: BaseCardView {
         guard let type = cardType else { return }
         switch type {
         case .usedBefore:
-            setupTitleLabel(with: TextConstants.instaPickUsedBeforeTitleLabel, textColor: ColorConstants.darkText)
+            setupTitleLabel(with: TextConstants.instaPickUsedBeforeTitleLabel, textColor: AppColor.label.color, textFont: .appFont(.medium, size: 16))
             
             gradientView.isNeedGradient = false
             dividerLineView.isHidden = false
             
-            closeButton.setImage(UIImage(named: "CloseCardIcon"), for: .normal)
+            //closeButton.setImage(UIImage(named: "iconCancelBorder"), for: .normal)
+            closeButton.setImage(Image.iconCancelBorder.image.withRenderingMode(.alwaysTemplate), for: .normal)
+            closeButton.tintColor = AppColor.label.color
+            closeButton.accessibilityLabel = TextConstants.accessibilityClose
             
-            detailLabel.textColor = ColorConstants.darkText
+            detailLabel.textColor = AppColor.label.color
             detailLabel.text = TextConstants.instaPickUsedBeforeDetailLabel
             
             bottomButton.setTitle(TextConstants.instaPickButtonHasAnalysis, for: .normal)
             
             imageView.image = InstaPick.usedBeforeIcon
+            imageView.isHidden = true
             
         case .noUsedBefore:
-            setupTitleLabel(with: TextConstants.instaPickNoUsedBeforeTitleLabel, textColor: UIColor.white)
+            setupTitleLabel(with: TextConstants.instaPickNoUsedBeforeTitleLabel, textColor: AppColor.label.color, textFont: .appFont(.medium, size: 16))
             
             gradientView.isNeedGradient = true
             dividerLineView.isHidden = true
 
-            closeButton.setImage(UIImage(named: "CloseCardIconWhite"), for: .normal)
+            closeButton.setImage(Image.iconCancelBorder.image.withRenderingMode(.alwaysTemplate), for: .normal)
+            closeButton.tintColor = AppColor.label.color
+            closeButton.accessibilityLabel = TextConstants.accessibilityClose
 
-            detailLabel.textColor = UIColor.white
+            detailLabel.textColor = AppColor.label.color
             detailLabel.text = TextConstants.instaPickNoUsedBeforeDetailLabel
             
             bottomButton.setTitle(TextConstants.instaPickButtonHasAnalysis, for: .normal)
             
             imageView.image = InstaPick.defaultIcon
+            imageView.isHidden = true
             
         case .noAnalysis:
-            setupTitleLabel(with: TextConstants.instaPickNoAnalysisTitleLabel, textColor: UIColor.white)
+            setupTitleLabel(with: TextConstants.instaPickNoAnalysisTitleLabel, textColor: AppColor.label.color, textFont: .appFont(.medium, size: 16))
             
             gradientView.isNeedGradient = true
             dividerLineView.isHidden = true
 
-            closeButton.setImage(UIImage(named: "CloseCardIconWhite"), for: .normal)
+            closeButton.setImage(Image.iconCancelBorder.image.withRenderingMode(.alwaysTemplate), for: .normal)
+            closeButton.tintColor = AppColor.label.color
+            closeButton.accessibilityLabel = TextConstants.accessibilityClose
 
-            detailLabel.textColor = UIColor.white
+            detailLabel.textColor = AppColor.label.color
             detailLabel.text = TextConstants.instaPickNoAnalysisDetailLabel
             
             bottomButton.setTitle(TextConstants.instaPickButtonNoAnalysis, for: .normal)
             
             imageView.image = InstaPick.defaultIcon
+            imageView.isHidden = true
         case .trial:
-            setupTitleLabel(with: TextConstants.instaPickFreeTrialTitleLabel, textColor: UIColor.white)
+            setupTitleLabel(with: TextConstants.instaPickFreeTrialTitleLabel, textColor: AppColor.label.color, textFont: .appFont(.medium, size: 16))
             
             gradientView.isNeedGradient = true
             dividerLineView.isHidden = true
             
-            closeButton.setImage(UIImage(named: "CloseCardIconWhite"), for: .normal)
+            closeButton.setImage(Image.iconCancelBorder.image.withRenderingMode(.alwaysTemplate), for: .normal)
+            closeButton.tintColor = AppColor.label.color
+            closeButton.accessibilityLabel = TextConstants.accessibilityClose
             
-            detailLabel.textColor = UIColor.white
+            detailLabel.textColor = AppColor.label.color
             detailLabel.text = TextConstants.instaPickFreeTrialDetailLabel
             
             bottomButton.setTitle(TextConstants.instaPickButtonHasAnalysis, for: .normal)
             
             imageView.image = InstaPick.defaultIcon
+            imageView.isHidden = true
         }
     }
     
@@ -175,15 +188,15 @@ final class InstaPickCard: BaseCardView {
     }
     
     //MARK: - Utility Methods(private)
-    private func setupTitleLabel(with text: String, textColor: UIColor) {
+    private func setupTitleLabel(with text: String, textColor: UIColor, textFont: UIFont) {
         let attributedString = NSMutableAttributedString(string: text, attributes: [
-            .font : UIFont.TurkcellSaturaBolFont(size: 18),
+            .font : textFont,
             .foregroundColor : textColor,
             .kern: 0.29
             ])
         
         let range = NSString(string: text).range(of: InstaPick.regFontText, options: String.CompareOptions.caseInsensitive)
-        attributedString.addAttribute(.font, value: UIFont.TurkcellSaturaRegFont(size: 18),
+        attributedString.addAttribute(.font, value: textFont,
                                       range: range)
         titleLabel.attributedText = attributedString
     }
