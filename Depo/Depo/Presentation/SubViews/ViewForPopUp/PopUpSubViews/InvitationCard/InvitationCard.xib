@@ -35,6 +35,13 @@
                                         <action selector="playButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="WzS-tl-qsT"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaR-zG-3fQ">
+                                    <rect key="frame" x="317" y="15" width="24" height="24"/>
+                                    <state key="normal" image="iconCancelBorder"/>
+                                    <connections>
+                                        <action selector="actionCloseButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="NkM-Dj-beC"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" name="secondaryBackground"/>
                             <constraints>
@@ -44,7 +51,9 @@
                                 <constraint firstAttribute="bottom" secondItem="Zad-oz-xgP" secondAttribute="bottom" id="ArU-iq-Iz1"/>
                                 <constraint firstItem="xU4-Pq-0Qe" firstAttribute="top" secondItem="VtS-We-40h" secondAttribute="top" id="Jaq-rE-Q3d"/>
                                 <constraint firstItem="xU4-Pq-0Qe" firstAttribute="leading" secondItem="VtS-We-40h" secondAttribute="leading" id="L8o-gC-069"/>
+                                <constraint firstAttribute="trailing" secondItem="eaR-zG-3fQ" secondAttribute="trailing" constant="14" id="hbX-TU-NLI"/>
                                 <constraint firstAttribute="trailing" secondItem="Zad-oz-xgP" secondAttribute="trailing" id="mQN-vV-eO5"/>
+                                <constraint firstItem="eaR-zG-3fQ" firstAttribute="top" secondItem="VtS-We-40h" secondAttribute="top" constant="15" id="wyC-2d-Rhp"/>
                                 <constraint firstItem="Zad-oz-xgP" firstAttribute="leading" secondItem="VtS-We-40h" secondAttribute="leading" id="xhV-Lp-Jzb"/>
                             </constraints>
                         </view>
@@ -78,26 +87,13 @@
                         <constraint firstAttribute="trailing" secondItem="4f5-Dm-keP" secondAttribute="trailing" id="vfZ-45-diU"/>
                     </constraints>
                 </stackView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaR-zG-3fQ">
-                    <rect key="frame" x="310" y="0.0" width="45" height="49"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="45" id="QVZ-iH-wNi"/>
-                        <constraint firstAttribute="height" constant="49" id="lt4-e8-ANB"/>
-                    </constraints>
-                    <state key="normal" image="CloseCardIcon"/>
-                    <connections>
-                        <action selector="actionCloseButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="NkM-Dj-beC"/>
-                    </connections>
-                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" name="secondaryBackground"/>
             <constraints>
                 <constraint firstItem="bvM-Xr-vqS" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="7zy-zm-nPO"/>
-                <constraint firstItem="eaR-zG-3fQ" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="DFF-nD-jbd"/>
                 <constraint firstItem="bvM-Xr-vqS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="MzU-p5-AK3"/>
                 <constraint firstItem="bvM-Xr-vqS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Ted-8T-dqW"/>
-                <constraint firstItem="eaR-zG-3fQ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oPP-hu-K3p"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
@@ -107,12 +103,12 @@
                 <outlet property="invitationImageView" destination="Zad-oz-xgP" id="fPY-Hu-sNg"/>
                 <outlet property="playButton" destination="xU4-Pq-0Qe" id="1uZ-iz-5gv"/>
             </connections>
-            <point key="canvasLocation" x="-2572" y="-572"/>
+            <point key="canvasLocation" x="-2573.1884057971015" y="-572.20982142857144"/>
         </view>
     </objects>
     <resources>
-        <image name="CloseCardIcon" width="14" height="14"/>
         <image name="PlayVideoCardIcon" width="30" height="30"/>
+        <image name="iconCancelBorder" width="24" height="24"/>
         <namedColor name="secondaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

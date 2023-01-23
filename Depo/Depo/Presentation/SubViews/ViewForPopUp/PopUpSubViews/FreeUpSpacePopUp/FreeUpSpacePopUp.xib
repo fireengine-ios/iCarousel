@@ -37,12 +37,8 @@
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dyj-bv-ETM">
-                    <rect key="frame" x="342" y="0.0" width="33" height="33"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="33" id="BoL-XX-aiA"/>
-                        <constraint firstAttribute="height" constant="33" id="aaA-1I-BTK"/>
-                    </constraints>
-                    <state key="normal" image="CloseCardIcon"/>
+                    <rect key="frame" x="337" y="15" width="24" height="24"/>
+                    <state key="normal" image="iconCancelBorder"/>
                     <connections>
                         <action selector="onCancelButton" destination="iN0-l3-epB" eventType="touchUpInside" id="QGc-l1-3VH"/>
                     </connections>
@@ -67,17 +63,17 @@
             <constraints>
                 <constraint firstItem="eNd-Lf-Xnb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="1ni-Lb-dCu"/>
                 <constraint firstAttribute="trailing" secondItem="yZg-TM-xac" secondAttribute="trailing" id="2Fl-as-TT3"/>
+                <constraint firstItem="dyj-bv-ETM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="2i7-iE-pD7"/>
                 <constraint firstItem="tCv-r8-d7f" firstAttribute="top" secondItem="eNd-Lf-Xnb" secondAttribute="bottom" constant="14" id="7cW-iq-jJv"/>
                 <constraint firstAttribute="trailing" secondItem="5bF-UL-a8f" secondAttribute="trailing" constant="16" id="J29-XO-5FQ"/>
-                <constraint firstAttribute="trailing" secondItem="dyj-bv-ETM" secondAttribute="trailing" id="SrQ-pC-x2g"/>
                 <constraint firstItem="15l-Sg-8pX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="ThG-9r-CSs"/>
+                <constraint firstAttribute="trailing" secondItem="dyj-bv-ETM" secondAttribute="trailing" constant="14" id="WPO-ci-3LK"/>
                 <constraint firstItem="tCv-r8-d7f" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="YeC-jR-fds"/>
                 <constraint firstAttribute="trailing" secondItem="eNd-Lf-Xnb" secondAttribute="trailing" constant="16" id="ZF2-tX-7f9"/>
                 <constraint firstItem="yZg-TM-xac" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="bo0-4i-guN"/>
                 <constraint firstItem="5bF-UL-a8f" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="18" id="jHG-bq-q81"/>
                 <constraint firstItem="15l-Sg-8pX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="lGm-hA-542"/>
                 <constraint firstItem="eNd-Lf-Xnb" firstAttribute="top" secondItem="yZg-TM-xac" secondAttribute="bottom" constant="16" id="nUR-Sv-gYa"/>
-                <constraint firstItem="dyj-bv-ETM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="veY-O2-kJV"/>
                 <constraint firstItem="5bF-UL-a8f" firstAttribute="leading" secondItem="15l-Sg-8pX" secondAttribute="trailing" constant="16" id="vyH-PK-G4V"/>
                 <constraint firstItem="yZg-TM-xac" firstAttribute="top" secondItem="15l-Sg-8pX" secondAttribute="bottom" constant="18" id="ydc-vA-Oaj"/>
             </constraints>
@@ -93,7 +89,7 @@
         </view>
     </objects>
     <resources>
-        <image name="CloseCardIcon" width="14" height="14"/>
+        <image name="iconCancelBorder" width="24" height="24"/>
         <image name="popupCloudBackup" width="32" height="32"/>
         <namedColor name="secondaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
