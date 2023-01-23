@@ -46,8 +46,7 @@ final class PremiumInfoCard: BaseCardView {
     func configurateWithType(viewType: OperationType) {
         if viewType == .premium {
 
-            //let isPremium = AuthoritySingleton.shared.accountType.isPremium
-            let isPremium = true
+            let isPremium = AuthoritySingleton.shared.accountType.isPremium
             self.isPremium = isPremium
             
             viewFeaturesView.translatesAutoresizingMaskIntoConstraints = false
