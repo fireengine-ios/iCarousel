@@ -13,6 +13,9 @@ class BaseCardView: UIView, NibInit {
     @IBOutlet weak var whiteView: UIView?
     @IBOutlet weak var closeButton: UIButton! {
         willSet {
+            newValue.setTitle("", for: .normal)
+            newValue.setImage(Image.iconCancelBorder.image.withRenderingMode(.alwaysTemplate), for: .normal)
+            newValue.tintColor = AppColor.label.color
             newValue.accessibilityLabel = TextConstants.accessibilityClose
         }
     }

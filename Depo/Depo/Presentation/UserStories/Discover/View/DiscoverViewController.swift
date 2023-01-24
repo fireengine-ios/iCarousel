@@ -6,93 +6,359 @@
 //  Copyright © 2022 LifeTech. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 final class DiscoverViewController: BaseViewController {
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
     var output: DiscoverViewOutput!
+    var navBarConfigurator = NavigationBarConfigurator()
+    var isNeedShowSpotlight = true
+    let discoverDataSource = DiscoverCollectionViewDataSource()
+    private var refreshControl = UIRefreshControl()
     private lazy var shareCardContentManager = ShareCardContentManager(delegate: self)
-    var modelPlaces = [WrapData]()
-    var modelCards = [HomeCardResponse]()
-
+    
+    private var discoverIsActiveAndVisible: Bool {
+        var result = false
+        if let topController = navigationController?.topViewController, topController == self {
+            result = true
+        }
+        return result
+    }
+    private var isGiftButtonEnabled = false
+    
+    deinit {
+        CardsManager.default.removeViewForNotification(view: discoverDataSource)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         debugLog("Discover viewDidLoad")
-
-        configureUI()
+        needToShowTabBar = true
+        navigationBarHidden = true
+        discoverDataSource.configurateWith(collectionView: collectionView, viewController: self, delegate: self)
+        CardsManager.default.addViewForNotification(view: discoverDataSource)
+        configurateRefreshControl()
+        showSpinner()
+        setDefaultNavigationHeaderActions()
         output.viewIsReady()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //output.getUpdateData()
-    }
-    
-    private func configureUI() {
-        navigationBarHidden = true
-        needToShowTabBar = true
-        setDefaultNavigationHeaderActions()
-        headerContainingViewController?.isHeaderBehindContent = false
-    }
-    
-    private func configureTableView() {
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(nibCell: DiscoverTableViewCell.self)
-    }
-    
-}
-extension DiscoverViewController: DiscoverViewInput {
-    func didGetUpdateData() {
-        print("xxxxxx")
-    }
-    
-    func didFinishedAllRequests() {
-        DispatchQueue.main.async {
-            self.modelCards = self.output.getModelCards() as! [HomeCardResponse]
-            //self.modelCards = self.modelCards.filter({$0.type == .paycell || $0.type == .invitation || $0.type == .drawCampaign || $0.type == .emptyStorage })
-            self.configureTableView()
-            self.tableView.reloadData()
+        
+        updateNavigationItemsState(state: true)
+        if let searchController = navigationController?.topViewController as? SearchViewController {
+            searchController.dismissController(animated: false)
         }
+        output.viewWillAppear()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        debugLog("Discover viewDidAppear")
+        discoverDataSource.isViewActive = true
+        CardsManager.default.updateAllProgressesInCardsForView(view: discoverDataSource)
+        if discoverIsActiveAndVisible {
+            configureNavBarActions()
+        }
+        if isNeedShowSpotlight {
+            requestShowSpotlight()
+        } else {
+            isNeedShowSpotlight = true
+        }
+        output.viewIsReadyForPopUps()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        discoverDataSource.isViewActive = false
+        hideSpotlightIfNeeded()
+    }
+    
+    func updateNavigationItemsState(state: Bool) {
+        guard let items = navigationItem.rightBarButtonItems else {
+            return
+        }
+        for item in items {
+            item.isEnabled = state
+        }
+    }
+
+    //MARK: Search
+    func configureNavBarActions() {
+        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] _ in
+            self?.updateNavigationItemsState(state: false)
+            self?.output.showSearch(output: self)
+        })
+        let setting = NavBarWithAction(navItem: NavigationBarList().settings, action: { [weak self] _ in
+            self?.updateNavigationItemsState(state: false)
+            self?.output.showSettings()
+        })
+        navBarConfigurator.configure(right: [search, setting], left: [])
+        if isGiftButtonEnabled {
+            let gift = NavBarWithAction(navItem: NavigationBarList().gift, action: { [weak self] _ in
+                self?.output.giftButtonPressed()
+            })
+            navBarConfigurator.append(rightButton: gift, leftButton: nil)
+        }
+        navigationItem.leftBarButtonItems = navBarConfigurator.leftItems
+        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+    }
+    
+    @objc func reloadData() {
+        showSpinner()
+        refreshControl.endRefreshing()
+        output.needRefresh()
+    }
+    
+    //MARK: Utility Methods(private)
+    private func configurateRefreshControl() {
+        refreshControl.tintColor = ColorConstants.whiteColor
+        refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
+        collectionView.addSubview(refreshControl)
+    }
+    
+    private func hideSpotlightIfNeeded() {
+        if let spotlight = presentedViewController as? SpotlightViewController {
+            spotlight.dismiss(animated: true, completion: nil)
+        }
+    }
+}
+
+extension DiscoverViewController: HeaderContainingViewControllerChild {
+    var scrollViewForHeaderTracking: UIScrollView? {
+        return collectionView
+    }
+}
+
+extension DiscoverViewController: DiscoverCollectionViewDataSourceDelegate {
+    
+    //MARK: CardsShareButtonDelegate
+    
+    func share(item: BaseDataSourceItem, type: CardShareType) {
+        shareCardContentManager.presentSharingMenu(item: item, type: type)
+    }
+    
+    //MARK: DiscoverCollectionViewDataSourceDelegate
+    func onCellHasBeenRemovedWith(controller: UIViewController) { }
+    
+    func numberOfColumns() -> Int {
+        return Device.isIpad ? 2 : 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
+        return GraceBannerView.getHeight()
+    }
+    
+    // MARK: UICollectionViewDelegate
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "GraceBannerView", for: indexPath)
+            if let headerView = headerView as? GraceBannerView {
+                headerView.delegate = self
+            }
+            return headerView
+        default:
+            assert(false, "Unexpected element kind")
+            return UICollectionReusableView()
+        }
+    }
+    
+    func didReloadCollectionView(_ collectionView: UICollectionView) {
+        requestShowSpotlight()
+    }
+    
+    // MARK: - DiscoverCollectionViewDataSourceDelegate Private Utility Methods
+    
+    private func requestShowSpotlight() {
+        var cardTypes: [SpotlightType] = [.homePageIcon, .homePageGeneral]
+        cardTypes.append(contentsOf: discoverDataSource.cards.compactMap { SpotlightType(cardView: $0) })
+        output.requestShowSpotlight(for: cardTypes)
+    }
+}
+
+extension DiscoverViewController: DiscoverViewInput {
+    
+    func showSnackBarWithMessage(message: String) {
+        SnackbarManager.shared.show(type: .action, message: message)
     }
     
     func stopRefresh() {
         hideSpinner()
     }
-}
-
-extension DiscoverViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return modelCards.count
+    
+    func startSpinner() {
+        showSpinner()
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeue(reusable: DiscoverTableViewCell.self, for: indexPath)
-        cell.configure(with: modelCards[indexPath.row])
-        return cell
+    //MARK: Spotlight
+    func needShowSpotlight(type: SpotlightType) {
+        guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
+            return
+        }
+        
+        frameForSpotlight(type: type, controller: tabBarVC) { [weak self] frame in
+            guard
+                let navVC = tabBarVC.activeNavigationController,
+                navVC.topViewController is DiscoverViewController,
+                frame != .zero
+            else {
+                return
+            }
+            
+            let controller = SpotlightViewController.with(rect: frame, message: type.title) { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                
+                self.output.shownSpotlight(type: type)
+                self.output.closedSpotlight(type: type)
+            }
+            
+            tabBarVC.present(controller, animated: true)
+        }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        output.navigate(for: modelCards[indexPath.row].type ?? .paycell)
+    func showGiftBox() {
+        isGiftButtonEnabled = true
+        configureNavBarActions()
+    }
+    
+    func hideGiftBox() {
+        isGiftButtonEnabled = false
+        configureNavBarActions()
+    }
+    
+    func closePermissionPopUp() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    // MARK: - DiscoverViewInput Private Utility Methods
+    
+    private func frameForSpotlight(type: SpotlightType, controller: TabBarViewController, completion: @escaping (_ frame: CGRect) -> ()) {
+        var frame: CGRect = .zero
+        
+        switch type {
+        case .homePageIcon:
+            let frameBounds = controller.frameForTabAtIndex(index: 0)
+            frame = controller.tabBar.convert(frameBounds, to: controller.contentView)
+            if !Device.operationSystemVersionLessThen(11) {
+                frame.origin.y -= UIApplication.shared.statusBarFrame.height
+            }
+            completion(frame)
+            
+        case .homePageGeneral:
+            guard let premiumCardFrame = discoverDataSource.cards.first?.frame else {
+                assertionFailure("premiumCard should be presented")
+                completion(.zero)
+                return
+            }
+            
+            let verticalSpace: CGFloat = 20
+            let navBarHeight: CGFloat = 44
+            
+            frame = CGRect(x: 0,
+                           y: premiumCardFrame.height + navBarHeight + verticalSpace,
+                           width: premiumCardFrame.width,
+                           height: collectionView.frame.height - premiumCardFrame.height - verticalSpace)
+            
+            completion(frame)
+            
+        case .movieCard, .albumCard, .collageCard, .filterCard, .animationCard:
+            cellCoordinates(cellType: type.cellType, to: controller.contentView, completion: completion)
+            
+        }
+    }
+    
+    // MARK: - DiscoverViewInput Private Utility Methods
+    
+    private func cellCoordinates<T: BaseCardView>(cellType: T.Type, to: UIView, completion: @escaping (_ frame: CGRect) -> ()) {
+        for (row, popupView) in discoverDataSource.cards.enumerated() {
+            if type(of: popupView) == cellType {
+                let indexPath = IndexPath(row: row, section: 0)
+                let indexPathsVisibleCells = collectionView.indexPathsForVisibleItems.sorted { first, second -> Bool in
+                    return first < second
+                }
+                
+                if indexPathsVisibleCells.contains(indexPath) {
+                    if indexPath == indexPathsVisibleCells.first {
+                        collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+                    } else {
+                        collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
+                    }
+                    
+                    var frame = popupView.convert(popupView.bounds, to: to)
+                    frame.origin.y = max(0, frame.origin.y)
+                    frame.size.height = popupView.spotlightHeight()
+                    completion(frame)
+                } else {
+                    guard let layout = collectionView.collectionViewLayout as? DiscoverCollectionViewLayout else {
+                        completion(.zero)
+                        return
+                    }
+                    
+                    CATransaction.flush()
+                    
+                    let offset = layout.frameFor(indexPath: indexPath).origin.y
+                    
+                    let isLastCell = indexPath.row == discoverDataSource.cards.count - 1
+                    
+                    UIView.animate(withDuration: 0.1, animations: {
+                        if isLastCell {
+                            self.collectionView.scrollToBottom(animated: false)
+                        } else {
+                            self.collectionView.setContentOffset(CGPoint(x: 0, y: offset - 50), animated: false)
+                        }
+                    }, completion: { _ in
+                        var frame = popupView.convert(popupView.bounds, to: to)
+                        frame.origin.y = max(0, frame.origin.y)
+                        frame.size.height = popupView.spotlightHeight()
+                        completion(frame)
+                        
+                    })
+                }
+                return
+            }
+        }
+        
+        completion (.zero)
     }
 }
 
-extension DiscoverViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.view.frame.size.height / 4.63
+extension DiscoverViewController: HomeViewTopViewActions {
+    
+    func allFilesButtonGotPressed() {
+        output.allFilesPressed()
     }
+    
+    func createAStoryButtonGotPressed() {
+        output.createStory()
+    }
+    
+    func favoritesButtonGotPressed() {
+        output.favoritesPressed()
+    }
+    
+    func syncContactsButtonGotPressed() {
+        output.onSyncContacts()
+    }
+}
+
+// MARK: - SearchModuleOutput
+extension DiscoverViewController: SearchModuleOutput {
+    
+    func cancelSearch() { }
+    
+    func previewSearchResultsHide() { }
     
 }
 
-
-
-extension DiscoverViewController: HeaderContainingViewControllerChild {
-    var scrollViewForHeaderTracking: UIScrollView? { tableView }
-}
 
 extension DiscoverViewController: ShareCardContentManagerDelegate {
     func shareOperationStarted() {
@@ -103,3 +369,11 @@ extension DiscoverViewController: ShareCardContentManagerDelegate {
         hideSpinner()
     }
 }
+
+extension DiscoverViewController: GraceBannerViewDelegate {
+    func closeButtonTapped() {
+        discoverDataSource.shouldHideGraceBanner = true
+        collectionView.reloadData()
+    }
+}
+

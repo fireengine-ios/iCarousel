@@ -13,32 +13,32 @@ final class MovieCard: BaseCardView {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
-            titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
-            titleLabel.textColor = ColorConstants.darkText
+            titleLabel.font = .appFont(.medium, size: 16)
+            titleLabel.textColor = AppColor.label.color
             titleLabel.text = TextConstants.homeMovieCardTitle
         }
     }
     
     @IBOutlet private weak var subTitleLabel: UILabel! {
         didSet {
-            subTitleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            subTitleLabel.textColor = ColorConstants.textGrayColor
+            subTitleLabel.font = .appFont(.medium, size: 14)
+            subTitleLabel.textColor = AppColor.label.color
             subTitleLabel.text = TextConstants.homeMovieCardSubTitle
         }
     }
     
     @IBOutlet private weak var bottomButton: UIButton! {
         didSet {
-            bottomButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
-            bottomButton.setTitleColor(ColorConstants.blueColor, for: .normal)
+            bottomButton.titleLabel?.font = .appFont(.bold, size: 14)
+            bottomButton.setTitleColor(AppColor.settingsButtonColor.color, for: .normal)
             bottomButton.setTitle(TextConstants.homeMovieCardSaveButton, for: .normal)
         }
     }
     
     @IBOutlet private weak var shareButton: UIButton!  {
         didSet {
-            shareButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
-            shareButton.setTitleColor(ColorConstants.blueColor, for: .normal)
+            shareButton.titleLabel?.font = .appFont(.bold, size: 14)
+            shareButton.setTitleColor(AppColor.settingsButtonColor.color, for: .normal)
             shareButton.setTitle(TextConstants.tabBarShareLabel, for: .normal)
         }
     }
@@ -46,7 +46,7 @@ final class MovieCard: BaseCardView {
     @IBOutlet private weak var durationLabel: UILabel! {
         didSet {
             durationLabel.textColor = ColorConstants.whiteColor
-            durationLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
+            durationLabel.font = .appFont(.medium, size: 14)
         }
     }
     

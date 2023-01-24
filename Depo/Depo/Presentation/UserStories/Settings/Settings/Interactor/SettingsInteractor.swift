@@ -142,7 +142,7 @@ final class SettingsInteractor: SettingsInteractorInput {
         let isChatMenuEnabled = self.isChatMenuEnabled
         let isContactUsMenuEnabled = self.isContactUsMenuEnabled
         
-        var showMenu: Bool = false
+        var showMenu: Bool = true
         var showChatbotOrFeedback: Bool = false // true -> chatbot, false -> feedback
         
         if isChatMenuEnabled && isContactUsMenuEnabled {

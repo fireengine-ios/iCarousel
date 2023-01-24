@@ -1399,12 +1399,6 @@
 		893DCFE0292B861B00271379 /* DiscoverInitilizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92629261D7400817FF8 /* DiscoverInitilizer.swift */; };
 		893DCFE4292B861D00271379 /* DiscoverInitilizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92629261D7400817FF8 /* DiscoverInitilizer.swift */; };
 		893DCFE5292B861E00271379 /* DiscoverInitilizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92629261D7400817FF8 /* DiscoverInitilizer.swift */; };
-		893DCFE6292B865000271379 /* DiscoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89256CE2292699B600FAD38E /* DiscoverTableViewCell.swift */; };
-		893DCFE7292B865200271379 /* DiscoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89256CE2292699B600FAD38E /* DiscoverTableViewCell.swift */; };
-		893DCFE8292B865400271379 /* DiscoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89256CE2292699B600FAD38E /* DiscoverTableViewCell.swift */; };
-		893DCFE9292B865C00271379 /* DiscoverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89256CE02926994900FAD38E /* DiscoverTableViewCell.xib */; };
-		893DCFEA292B865E00271379 /* DiscoverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89256CE02926994900FAD38E /* DiscoverTableViewCell.xib */; };
-		893DCFEB292B865F00271379 /* DiscoverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89256CE02926994900FAD38E /* DiscoverTableViewCell.xib */; };
 		893DCFEC292B866800271379 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D91929260E4F00817FF8 /* DiscoverViewController.swift */; };
 		893DCFED292B866B00271379 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D91929260E4F00817FF8 /* DiscoverViewController.swift */; };
 		893DCFEE292B866B00271379 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D91929260E4F00817FF8 /* DiscoverViewController.swift */; };
@@ -1438,6 +1432,8 @@
 		893DD00A292B870800271379 /* DiscoverConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92829261DA300817FF8 /* DiscoverConfigurator.swift */; };
 		893DD00B292B870A00271379 /* DiscoverConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92829261DA300817FF8 /* DiscoverConfigurator.swift */; };
 		893DD00C292B870B00271379 /* DiscoverConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92829261DA300817FF8 /* DiscoverConfigurator.swift */; };
+		893F45F0296D631F006FFECA /* DiscoverCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893F45EF296D631F006FFECA /* DiscoverCollectionViewLayout.swift */; };
+		893F45F2296D6332006FFECA /* DiscoverCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893F45F1296D6332006FFECA /* DiscoverCollectionViewDataSource.swift */; };
 		896133A42338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */; };
 		896133A52338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */; };
 		897B8F3A2338B7400028C690 /* HomePagePopUpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */; };
@@ -10621,8 +10617,6 @@
 		890F737722EEFAFF00BA0020 /* BaseChangeEmailPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseChangeEmailPopUp.swift; sourceTree = "<group>"; };
 		891CDE3A296EF11200E5CD3B /* FavoriteInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteInitializer.swift; sourceTree = "<group>"; };
 		8921222D2303FFA400396ED0 /* EmailVerifiedPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerifiedPopUp.swift; sourceTree = "<group>"; };
-		89256CE02926994900FAD38E /* DiscoverTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscoverTableViewCell.xib; sourceTree = "<group>"; };
-		89256CE2292699B600FAD38E /* DiscoverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewCell.swift; sourceTree = "<group>"; };
 		892B014722DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorChallengeConfigurator.swift; sourceTree = "<group>"; };
 		892B014B22DF160700BCECBC /* TwoFactorChallengeInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorChallengeInitializer.swift; sourceTree = "<group>"; };
 		892B015022DF168F00BCECBC /* TwoFactorChallengePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorChallengePresenter.swift; sourceTree = "<group>"; };
@@ -10635,6 +10629,8 @@
 		893472AC172AD231AE3CCC5B /* Pods_LifeboxWidgetExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxWidgetExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8934DD6C23069599006B0998 /* EmailVerifiedPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmailVerifiedPopUp.xib; sourceTree = "<group>"; };
 		8938AE862930C264004970F2 /* DeleteListSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteListSectionHeader.swift; sourceTree = "<group>"; };
+		893F45EF296D631F006FFECA /* DiscoverCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewLayout.swift; sourceTree = "<group>"; };
+		893F45F1296D6332006FFECA /* DiscoverCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePagePopUpOperation.swift; sourceTree = "<group>"; };
 		896133A723390D69000083B7 /* BasePopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePopUpController.swift; sourceTree = "<group>"; };
 		897B8F382338B73F0028C690 /* HomePagePopUpsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePagePopUpsService.swift; sourceTree = "<group>"; };
@@ -16293,15 +16289,6 @@
 			path = TwoFactorChallenge;
 			sourceTree = "<group>";
 		};
-		89256CDC2926985B00FAD38E /* DiscoverCard */ = {
-			isa = PBXGroup;
-			children = (
-				89256CE02926994900FAD38E /* DiscoverTableViewCell.xib */,
-				89256CE2292699B600FAD38E /* DiscoverTableViewCell.swift */,
-			);
-			path = DiscoverCard;
-			sourceTree = "<group>";
-		};
 		892B014622DF155700BCECBC /* Configurator */ = {
 			isa = PBXGroup;
 			children = (
@@ -16336,6 +16323,15 @@
 			path = HideSmashPopUpFactories;
 			sourceTree = "<group>";
 		};
+		893F45EB296D62F2006FFECA /* CollectionViewDataSource */ = {
+			isa = PBXGroup;
+			children = (
+				893F45F1296D6332006FFECA /* DiscoverCollectionViewDataSource.swift */,
+				893F45EF296D631F006FFECA /* DiscoverCollectionViewLayout.swift */,
+			);
+			path = CollectionViewDataSource;
+			sourceTree = "<group>";
+		};
 		896133A623390D4F000083B7 /* BasePopUpController */ = {
 			isa = PBXGroup;
 			children = (
@@ -16356,6 +16352,7 @@
 		8980D91229260C1B00817FF8 /* Discover */ = {
 			isa = PBXGroup;
 			children = (
+				893F45EB296D62F2006FFECA /* CollectionViewDataSource */,
 				8980D91829260E1800817FF8 /* View */,
 				8980D91F29261A9600817FF8 /* Presenter */,
 				8980D92329261AA100817FF8 /* Interactor */,
@@ -16368,7 +16365,6 @@
 		8980D91829260E1800817FF8 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8980D9432926329C00817FF8 /* Cell */,
 				8980D91529260C9800817FF8 /* Discover.xib */,
 				8980D91929260E4F00817FF8 /* DiscoverViewController.swift */,
 				8980D92E29261FBD00817FF8 /* DiscoverViewInput.swift */,
@@ -16412,14 +16408,6 @@
 				8980D92629261D7400817FF8 /* DiscoverInitilizer.swift */,
 			);
 			path = Configurator;
-			sourceTree = "<group>";
-		};
-		8980D9432926329C00817FF8 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				89256CDC2926985B00FAD38E /* DiscoverCard */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		898B557D23ABB41B00E30472 /* HSCompletionPopUp */ = {
@@ -22971,7 +22959,6 @@
 				CF703F4A24E3CC57005EFFFD /* (null) in Resources */,
 				F064FB2F278B209500B461D0 /* PublicSharedItemsTableViewCell.xib in Resources */,
 				98DBC04D2410FB1900926F40 /* AutoSyncHeaderTableViewCell.xib in Resources */,
-				89256CE12926994900FAD38E /* DiscoverTableViewCell.xib in Resources */,
 				8C0E90581FDEBDFF00789C91 /* SwipeableCardCell.xib in Resources */,
 				8CF6A9C4207C8CF9007DEF71 /* CollectionViewSpinnerFooter.xib in Resources */,
 				A253D62A21A210690049AC15 /* PremiumViewController.xib in Resources */,
@@ -23246,7 +23233,6 @@
 				CE784CDD22A685FB00662219 /* SettingsTableViewCell.xib in Resources */,
 				F0CF8AA52891688800428058 /* ForYouFaceImageTableViewCell.xib in Resources */,
 				98231A0224F3A1E700FD16E2 /* PhotoEditChangesBar.xib in Resources */,
-				893DCFEA292B865E00271379 /* DiscoverTableViewCell.xib in Resources */,
 				CE784CE422A685FB00662219 /* BottomSelectionTabBarViewController.xib in Resources */,
 				CE784CE622A685FB00662219 /* EmailEnterController.xib in Resources */,
 				8E7659892333745A00D728A5 /* CredsUpdateCheckPopUp.xib in Resources */,
@@ -23636,7 +23622,6 @@
 				9862BC8E255E899800D7945E /* FileInfoShareContactCell.xib in Resources */,
 				9808B7C82567EB10001DEF2E /* PrivateShareAccessListHeader.xib in Resources */,
 				F0571EFC288C1D3000A0D6AC /* ForYouCollectionViewCell.xib in Resources */,
-				893DCFE9292B865C00271379 /* DiscoverTableViewCell.xib in Resources */,
 				3A9C284026529C3900EFADE9 /* InvitationCampaignDetailView.xib in Resources */,
 				CF8B68D223CBC9D70021B021 /* LeavePremiumViewController.xib in Resources */,
 				CF8B68D323CBC9D70021B021 /* FreeAppSpaceViewCotroller.xib in Resources */,
@@ -24035,7 +24020,6 @@
 				F0CF8AA62891688800428058 /* ForYouFaceImageTableViewCell.xib in Resources */,
 				CF8B709C23CBCA280021B021 /* EmailEnterController.xib in Resources */,
 				9808B7D72567EB10001DEF2E /* PrivateShareAccessListCell.xib in Resources */,
-				893DCFEB292B865F00271379 /* DiscoverTableViewCell.xib in Resources */,
 				CF8B709D23CBCA280021B021 /* CredsUpdateCheckPopUp.xib in Resources */,
 				CF8B709E23CBCA280021B021 /* CollectionViewSpinnerFooter.xib in Resources */,
 				9808B3F325540D6C002B0032 /* PrivateShareSuggestionsView.xib in Resources */,
@@ -25806,7 +25790,6 @@
 				4A0AC15D20874B9600032CC7 /* PeriodicContactSyncInteractorOutput.swift in Sources */,
 				0711887027F6EBDE00F512A1 /* AppImage.swift in Sources */,
 				98231A0524F3A1E700FD16E2 /* SliderView.swift in Sources */,
-				89256CE3292699B600FAD38E /* DiscoverTableViewCell.swift in Sources */,
 				B56FBB292122C4BA004F4A59 /* TermsOfUseRouterInput.swift in Sources */,
 				893269EB29361A26006305A0 /* AnimationsInitializer.swift in Sources */,
 				8CEE8D26214A473200150996 /* FaceImageDesigner.swift in Sources */,
@@ -26682,6 +26665,7 @@
 				8C0E8F0C1FDEBDFF00789C91 /* UserProfileViewInput.swift in Sources */,
 				3A58C4932636A73500570811 /* InvitationCard.swift in Sources */,
 				8C86111522BCF31E00108958 /* EULAResponse.swift in Sources */,
+				893F45F0296D631F006FFECA /* DiscoverCollectionViewLayout.swift in Sources */,
 				922C24FE224A7E6400FD00D9 /* CircleProgressView.swift in Sources */,
 				F0620420290D9D9C00A03F06 /* ForYouGradientCollectionViewCell.swift in Sources */,
 				F028C10A2789F250005CE6AF /* PublicShareViewInput.swift in Sources */,
@@ -26951,6 +26935,7 @@
 				8C208658228D4B2E000BEDAD /* PhotoVideoThreeDotMenuManager.swift in Sources */,
 				8C0E8F7B1FDEBDFF00789C91 /* SelectNamePresenter.swift in Sources */,
 				C62239A6204972F40043ED44 /* FaceImageItemsInteractorOutput.swift in Sources */,
+				893F45F2296D6332006FFECA /* DiscoverCollectionViewDataSource.swift in Sources */,
 				CF7B1E55256B3DD400BAF566 /* PrivateShareSliderFilesCollectionManager.swift in Sources */,
 				987E21822360380100D45AEA /* CampaingnInfoView.swift in Sources */,
 				8C0E8F7C1FDEBDFF00789C91 /* BaseCardView.swift in Sources */,
@@ -28909,7 +28894,6 @@
 				89DCC5CF2403A99900488F1F /* SubscriptionOfferView.swift in Sources */,
 				072468322855CC9E0079B07E /* DrawerPresentationController.swift in Sources */,
 				CE784B8222A685FB00662219 /* SettingsPresenter.swift in Sources */,
-				893DCFE7292B865200271379 /* DiscoverTableViewCell.swift in Sources */,
 				49E952A22400013E00E2ABCD /* MobilePaymentPermissionViewController.swift in Sources */,
 				CE784B8322A685FB00662219 /* SettingsInteractorInput.swift in Sources */,
 				98231A7324F3A23500FD16E2 /* CruzFilter.swift in Sources */,
@@ -29609,7 +29593,6 @@
 				CF703F4624E3CC4A005EFFFD /* (null) in Sources */,
 				CF8B642323CBC9D70021B021 /* InstaPickSelectionSegmentedController.swift in Sources */,
 				98B04774259314740011DAEB /* UpdateServerIntegration.m in Sources */,
-				893DCFE6292B865000271379 /* DiscoverTableViewCell.swift in Sources */,
 				CF71470D24B597AA00D83E60 /* ContactListHeader.swift in Sources */,
 				982319EE24F3A1E700FD16E2 /* PhotoEditTabbar.swift in Sources */,
 				CF8B642423CBC9D70021B021 /* InstaPickCircularLoader.swift in Sources */,
@@ -31194,7 +31177,6 @@
 				CF8B6B5723CBCA280021B021 /* CampaignService.swift in Sources */,
 				CF8B6B5823CBCA280021B021 /* ProfilePhoneEnterView.swift in Sources */,
 				CF8B6B5923CBCA280021B021 /* TermsOfUseInteractor.swift in Sources */,
-				893DCFE8292B865400271379 /* DiscoverTableViewCell.swift in Sources */,
 				CF8B6B5A23CBCA280021B021 /* ProfileFieldView.swift in Sources */,
 				CF8B6B5B23CBCA280021B021 /* WaitingForWiFiPopUp.swift in Sources */,
 				CF8B6B5C23CBCA280021B021 /* Constants.swift in Sources */,

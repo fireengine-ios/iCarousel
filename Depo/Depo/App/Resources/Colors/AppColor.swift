@@ -221,6 +221,8 @@ enum AppColor {
     case viewShadowLight
     case borderLightGray
     case tbMatikBlurColor
+    case discoverCardLine
+    case settingsButtonColor
     
 
     var color: UIColor {

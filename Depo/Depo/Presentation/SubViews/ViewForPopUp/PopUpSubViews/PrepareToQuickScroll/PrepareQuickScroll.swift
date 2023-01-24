@@ -13,8 +13,8 @@ final class PrepareQuickScroll: BaseCardView {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
-            titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            titleLabel.textColor = ColorConstants.textGrayColor
+            titleLabel.font = .appFont(.medium, size: 16)
+            titleLabel.textColor = AppColor.label.color
             titleLabel.text = TextConstants.prepareQuickScroll
         }
     }
@@ -28,7 +28,7 @@ final class PrepareQuickScroll: BaseCardView {
     
     @IBOutlet private weak var progressView: UIProgressView! {
         didSet {
-            progressView.progressTintColor = ColorConstants.blueColor
+            progressView.progressTintColor = AppColor.settingsButtonColor.color
             progressView.progress = 0
         }
     }

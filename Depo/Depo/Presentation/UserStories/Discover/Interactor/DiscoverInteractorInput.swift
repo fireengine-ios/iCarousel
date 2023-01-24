@@ -9,5 +9,13 @@
 import Foundation
 
 protocol DiscoverInteractorInput {
+    var homeCardsLoaded: Bool { get }
     func viewIsReady()
+    func needRefresh()
+    func trackScreen()
+    func trackGiftTapped()
+    func updateLocalUserDetail()
+    func getPermissionAllowanceInfo(type: PermissionType)
+    func updateMobilePaymentPermissionFeedback()
+    func changePermissionsAllowed(type: PermissionType, isApproved: Bool)
 }

@@ -421,7 +421,7 @@ class CardsManager: NSObject {
             cardView = popup
         case .drawCampaign:
             let popup = InvitationCard.initFromNib()
-            popup.configurateWithType(viewType: .paycell)
+            popup.configurateWithType(viewType: .drawCampaign)
             cardView = popup
         }
         

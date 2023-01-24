@@ -12,8 +12,8 @@ final class DocumentAlbumCardDesigner: NSObject {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 18)
-            newValue.textColor = ColorConstants.darkText
+            newValue.font = .appFont(.medium, size: 16)
+            newValue.textColor = AppColor.label.color
             newValue.text = TextConstants.documentsAlbumCardTitleLabel
         }
     }
@@ -26,30 +26,24 @@ final class DocumentAlbumCardDesigner: NSObject {
     
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            newValue.textColor = ColorConstants.textGrayColor
+            newValue.font = .appFont(.light, size: 14)
+            newValue.textColor = AppColor.label.color
             newValue.numberOfLines = 0
-        }
-    }
-    
-    @IBOutlet private weak var separatorView: UIView! {
-        willSet {
-            newValue.backgroundColor = ColorConstants.placeholderGrayColor
         }
     }
     
     @IBOutlet private weak var hideDocumentsButton: UIButton! {
         willSet {
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
-            newValue.setTitleColor(ColorConstants.blueColor, for: .normal)
+            newValue.titleLabel?.font = .appFont(.bold, size: 14)
+            newValue.setTitleColor(AppColor.settingsButtonColor.color, for: .normal)
             newValue.setTitle(TextConstants.documentsAlbumCardHideButton, for: .normal)
         }
     }
     
     @IBOutlet private weak var viewDocumentsButton: UIButton! {
         willSet {
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
-            newValue.setTitleColor(ColorConstants.blueColor, for: .normal)
+            newValue.titleLabel?.font = .appFont(.bold, size: 14)
+            newValue.setTitleColor(AppColor.settingsButtonColor.color, for: .normal)
             newValue.setTitle(TextConstants.documentsAlbumCardViewButton, for: .normal)
         }
     }

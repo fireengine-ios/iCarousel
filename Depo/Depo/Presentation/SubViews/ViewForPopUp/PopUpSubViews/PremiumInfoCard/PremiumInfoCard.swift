@@ -10,6 +10,12 @@ import UIKit
 
 final class PremiumInfoCard: BaseCardView {
 
+    @IBOutlet weak var viewFeaturesView: UIView! {
+        willSet {
+            newValue.layer.cornerRadius = 16
+        }
+    }
+    @IBOutlet weak var viewLine: UIView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var messageLabel: UILabel!
     @IBOutlet private weak var crownImage: UIImageView!
@@ -24,17 +30,17 @@ final class PremiumInfoCard: BaseCardView {
         
         canSwipe = false
         
-        titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
-        titleLabel.textColor = ColorConstants.darkText
+        titleLabel.font = .appFont(.medium, size: 16)
+        titleLabel.textColor = AppColor.label.color
 
-        messageLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
-        messageLabel.textColor = ColorConstants.textGrayColor
+        messageLabel.font = .appFont(.bold, size: 14)
+        messageLabel.textColor = AppColor.label.color
 
         becomePremiumButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
         becomePremiumButton.titleEdgeInsets = UIEdgeInsets(top: 6, left: 17, bottom: 6, right: 17)
         becomePremiumButton.setTitle(TextConstants.becomePremiumMember, for: .normal)
 
-        crownImage.image = UIImage(named: "crownSmall")
+        crownImage.image = UIImage(named: "iconPremium")
     }
     
     func configurateWithType(viewType: OperationType) {
@@ -43,7 +49,14 @@ final class PremiumInfoCard: BaseCardView {
             let isPremium = AuthoritySingleton.shared.accountType.isPremium
             self.isPremium = isPremium
             
-            buttonContentView.isHidden = isPremium
+            viewFeaturesView.translatesAutoresizingMaskIntoConstraints = false
+            if isPremium {
+                viewFeaturesView.heightAnchor.constraint(equalToConstant: 110).isActive = true
+            } else {
+                viewFeaturesView.heightAnchor.constraint(equalToConstant: 152).isActive = true
+            }
+            
+            becomePremiumButton.isHidden = isPremium
             crownImage.isHidden = isPremium
 
             messageLabel.text = isPremium ? TextConstants.premiumBannerMessage : TextConstants.standardBannerMessage
@@ -64,8 +77,9 @@ final class PremiumInfoCard: BaseCardView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        let bottomSpace : CGFloat = 21.0
-        let h = contentStackView.frame.origin.y + contentStackView.frame.size.height + bottomSpace
+        let bottomSpace : CGFloat = 16.0
+        //let h = contentStackView.frame.origin.y + contentStackView.frame.size.height + bottomSpace
+        let h = viewFeaturesView.frame.maxY + bottomSpace
         if calculatedH != h {
             calculatedH = h
         }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,7 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CollageCard" customModule="Billo" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="428"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="418"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NMh-tk-T45">
@@ -33,16 +33,16 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Aa-5D-Dec">
-                    <rect key="frame" x="8" y="72" width="304" height="304"/>
+                    <rect key="frame" x="14" y="72" width="292" height="292"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5br-PK-Szq">
-                            <rect key="frame" x="1" y="1" width="302" height="302"/>
+                            <rect key="frame" x="1" y="1" width="290" height="290"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t6A-N4-vMD" customClass="LoadingImageView" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="302" height="302"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="290" height="290"/>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zgU-kh-xnk">
-                                    <rect key="frame" x="0.0" y="0.0" width="302" height="302"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="290" height="290"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
                                     </userDefinedRuntimeAttributes>
@@ -64,7 +64,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.26666666666666666" green="0.80392156862745101" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" name="settingsButtonColor"/>
                     <constraints>
                         <constraint firstItem="5br-PK-Szq" firstAttribute="leading" secondItem="0Aa-5D-Dec" secondAttribute="leading" constant="1" id="LA4-Wn-XJy"/>
                         <constraint firstItem="5br-PK-Szq" firstAttribute="top" secondItem="0Aa-5D-Dec" secondAttribute="top" constant="1" id="TIJ-U7-taD"/>
@@ -73,18 +73,15 @@
                         <constraint firstAttribute="width" secondItem="0Aa-5D-Dec" secondAttribute="height" multiplier="1:1" id="vhg-Ow-0ql"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9vI-Uy-atF">
-                    <rect key="frame" x="0.0" y="383" width="320" height="1"/>
-                    <color key="backgroundColor" white="0.80080837673611116" alpha="0.5038527397260274" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="1" id="Hv5-A2-zh7"/>
-                    </constraints>
-                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j0a-up-wkh">
+                    <rect key="frame" x="260" y="372" width="46" height="30"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="shareButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="5dG-6E-msW"/>
+                    </connections>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BtN-La-yOR">
-                    <rect key="frame" x="14" y="384" width="46" height="44"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="44" id="ao5-Tc-6Q3"/>
-                    </constraints>
+                    <rect key="frame" x="14" y="372" width="46" height="30"/>
                     <state key="normal" title="Button"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
@@ -94,12 +91,8 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3zB-Fq-XrF">
-                    <rect key="frame" x="287" y="0.0" width="33" height="33"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="33" id="LRr-87-anB"/>
-                        <constraint firstAttribute="width" constant="33" id="gtm-72-gi1"/>
-                    </constraints>
-                    <state key="normal" image="CloseCardIcon"/>
+                    <rect key="frame" x="282" y="15" width="24" height="24"/>
+                    <state key="normal" image="iconCancelBorder"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
                     </userDefinedRuntimeAttributes>
@@ -107,37 +100,24 @@
                         <action selector="actionCloseButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="DRB-H5-NRa"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j0a-up-wkh">
-                    <rect key="frame" x="217" y="391" width="46" height="30"/>
-                    <state key="normal" title="Button"/>
-                    <connections>
-                        <action selector="shareButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="5dG-6E-msW"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" name="secondaryBackground"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="j0a-up-wkh" secondAttribute="trailing" constant="14" id="0hE-zf-kiZ"/>
                 <constraint firstItem="eZq-QK-VUa" firstAttribute="top" secondItem="NMh-tk-T45" secondAttribute="bottom" constant="10" id="31f-sq-QQe"/>
                 <constraint firstItem="NMh-tk-T45" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="8Ru-rA-FBi"/>
+                <constraint firstItem="j0a-up-wkh" firstAttribute="top" secondItem="0Aa-5D-Dec" secondAttribute="bottom" constant="8" id="Aev-P0-iVw"/>
                 <constraint firstItem="NMh-tk-T45" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="BrP-rc-nch"/>
                 <constraint firstItem="eZq-QK-VUa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="H1d-zg-P3h"/>
-                <constraint firstItem="j0a-up-wkh" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" multiplier="1.5" id="JzO-WP-kYM"/>
-                <constraint firstAttribute="trailing" secondItem="3zB-Fq-XrF" secondAttribute="trailing" id="KhL-n9-uaw"/>
+                <constraint firstAttribute="trailing" secondItem="3zB-Fq-XrF" secondAttribute="trailing" constant="14" id="HAT-hf-wBI"/>
                 <constraint firstItem="0Aa-5D-Dec" firstAttribute="top" secondItem="eZq-QK-VUa" secondAttribute="bottom" constant="5" id="MXB-f3-HBY"/>
-                <constraint firstItem="3zB-Fq-XrF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="MYT-jv-6xZ"/>
-                <constraint firstItem="j0a-up-wkh" firstAttribute="centerY" secondItem="BtN-La-yOR" secondAttribute="centerY" id="QKA-Nq-QYg"/>
-                <constraint firstItem="BtN-La-yOR" firstAttribute="top" secondItem="9vI-Uy-atF" secondAttribute="bottom" id="WN9-pw-lZI"/>
-                <constraint firstAttribute="trailing" secondItem="9vI-Uy-atF" secondAttribute="trailing" id="bje-kq-C03"/>
-                <constraint firstItem="9vI-Uy-atF" firstAttribute="top" secondItem="0Aa-5D-Dec" secondAttribute="bottom" constant="7" id="d1U-0t-0Vz"/>
-                <constraint firstItem="9vI-Uy-atF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dR0-cF-hdG"/>
-                <constraint firstItem="BtN-La-yOR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="i9Q-Od-hV6"/>
-                <constraint firstItem="j0a-up-wkh" firstAttribute="width" secondItem="BtN-La-yOR" secondAttribute="width" id="iIB-Pq-12a"/>
-                <constraint firstAttribute="trailing" secondItem="0Aa-5D-Dec" secondAttribute="trailing" constant="8" id="nRe-Ng-mPn"/>
-                <constraint firstItem="3zB-Fq-XrF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="NMh-tk-T45" secondAttribute="trailing" constant="15" id="oLL-28-59i"/>
-                <constraint firstItem="j0a-up-wkh" firstAttribute="height" secondItem="BtN-La-yOR" secondAttribute="height" multiplier="0.681818" id="prQ-nm-QLl"/>
+                <constraint firstItem="3zB-Fq-XrF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="Vau-ru-RNO"/>
+                <constraint firstItem="BtN-La-yOR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="itl-fk-pwJ"/>
+                <constraint firstAttribute="trailing" secondItem="0Aa-5D-Dec" secondAttribute="trailing" constant="14" id="nRe-Ng-mPn"/>
                 <constraint firstItem="0Aa-5D-Dec" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="tam-Dc-puI"/>
                 <constraint firstAttribute="trailing" secondItem="eZq-QK-VUa" secondAttribute="trailing" constant="14" id="u3v-VB-s04"/>
-                <constraint firstItem="0Aa-5D-Dec" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="wT2-IK-F30"/>
+                <constraint firstItem="BtN-La-yOR" firstAttribute="top" secondItem="0Aa-5D-Dec" secondAttribute="bottom" constant="8" id="vUe-p4-lxP"/>
+                <constraint firstItem="0Aa-5D-Dec" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="wT2-IK-F30"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
@@ -149,13 +129,16 @@
                 <outlet property="subTitleLabel" destination="eZq-QK-VUa" id="Ruy-mj-fVD"/>
                 <outlet property="titleLabel" destination="NMh-tk-T45" id="6KJ-zO-TpF"/>
             </connections>
-            <point key="canvasLocation" x="-136" y="-233"/>
+            <point key="canvasLocation" x="-136" y="-238.38080959520241"/>
         </view>
     </objects>
     <resources>
-        <image name="CloseCardIcon" width="14" height="14"/>
+        <image name="iconCancelBorder" width="24" height="24"/>
         <namedColor name="secondaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="settingsButtonColor">
+            <color red="0.0" green="0.4823529411764706" blue="0.6705882352941176" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

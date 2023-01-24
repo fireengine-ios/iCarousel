@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,24 +20,18 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LatestUploadsCardIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Qor-Oa-tkt">
-                    <rect key="frame" x="15" y="52" width="24" height="24"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="24" id="mSD-NQ-02v"/>
-                        <constraint firstAttribute="height" constant="24" id="snK-jX-lTy"/>
-                    </constraints>
-                </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Im-XG-pi5">
-                    <rect key="frame" x="47" y="53" width="313" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Im-XG-pi5">
+                    <rect key="frame" x="281" y="0.0" width="78" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="nrt-8t-az2">
-                    <rect key="frame" x="47" y="85" width="313" height="85"/>
+                    <rect key="frame" x="8" y="52" width="359" height="120"/>
                     <color key="backgroundColor" name="secondaryBackground"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="85" id="uBS-l6-9l0"/>
+                        <constraint firstAttribute="height" constant="120" id="uBS-l6-9l0"/>
                     </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xIY-LR-gss">
                         <size key="itemSize" width="50" height="50"/>
@@ -50,22 +44,15 @@
                         <outlet property="delegate" destination="iN0-l3-epB" id="fMT-ec-eGV"/>
                     </connections>
                 </collectionView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="crt-Qk-vhL">
-                    <rect key="frame" x="0.0" y="181" width="375" height="1"/>
-                    <color key="backgroundColor" white="0.80422634548611116" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="1" id="Vd2-Jt-HE0"/>
-                    </constraints>
-                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jAy-jU-c4N">
-                    <rect key="frame" x="16" y="189" width="46" height="30"/>
+                    <rect key="frame" x="14" y="188" width="46" height="30"/>
                     <state key="normal" title="Button"/>
                     <connections>
                         <action selector="onViewRecentActivitiesButton" destination="iN0-l3-epB" eventType="touchUpInside" id="fnr-4c-N7V"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ny-KE-Jvv">
-                    <rect key="frame" x="87" y="189" width="46" height="30"/>
+                    <rect key="frame" x="315" y="188" width="46" height="30"/>
                     <state key="normal" title="Button"/>
                     <connections>
                         <action selector="onViewAllPhotosButton" destination="iN0-l3-epB" eventType="touchUpInside" id="Gzk-jO-vmS"/>
@@ -74,26 +61,15 @@
             </subviews>
             <color key="backgroundColor" name="secondaryBackground"/>
             <constraints>
-                <constraint firstItem="3Im-XG-pi5" firstAttribute="top" secondItem="JNP-wR-JQc" secondAttribute="bottom" constant="17" id="0qd-vP-Qnd"/>
-                <constraint firstAttribute="trailing" secondItem="3Im-XG-pi5" secondAttribute="trailing" constant="15" id="E9o-K0-dqC"/>
-                <constraint firstItem="Qor-Oa-tkt" firstAttribute="top" secondItem="JNP-wR-JQc" secondAttribute="bottom" constant="16" id="J6o-nm-pQT"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0Ny-KE-Jvv" secondAttribute="trailing" constant="8" id="J9J-lq-eS5"/>
-                <constraint firstAttribute="bottom" secondItem="jAy-jU-c4N" secondAttribute="bottom" constant="7" id="NTI-hW-x8l"/>
-                <constraint firstAttribute="trailing" secondItem="nrt-8t-az2" secondAttribute="trailing" constant="15" id="NcV-LJ-gC4"/>
-                <constraint firstItem="nrt-8t-az2" firstAttribute="top" secondItem="3Im-XG-pi5" secondAttribute="bottom" constant="11" id="RW5-3q-3l7"/>
+                <constraint firstItem="0Ny-KE-Jvv" firstAttribute="top" secondItem="nrt-8t-az2" secondAttribute="bottom" constant="16" id="1Xk-eF-BXy"/>
+                <constraint firstItem="jAy-jU-c4N" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="3RB-hU-80k"/>
+                <constraint firstItem="nrt-8t-az2" firstAttribute="top" secondItem="JNP-wR-JQc" secondAttribute="bottom" constant="16" id="JkV-ap-K5s"/>
+                <constraint firstItem="jAy-jU-c4N" firstAttribute="top" secondItem="nrt-8t-az2" secondAttribute="bottom" constant="16" id="Lmo-I0-X6m"/>
+                <constraint firstAttribute="trailing" secondItem="nrt-8t-az2" secondAttribute="trailing" constant="8" id="NcV-LJ-gC4"/>
                 <constraint firstItem="JNP-wR-JQc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="RvQ-1P-7Kc"/>
-                <constraint firstItem="nrt-8t-az2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="47" id="SfV-PB-o4V"/>
-                <constraint firstItem="3Im-XG-pi5" firstAttribute="leading" secondItem="Qor-Oa-tkt" secondAttribute="trailing" constant="8" id="U22-Fg-jHf"/>
-                <constraint firstItem="jAy-jU-c4N" firstAttribute="top" secondItem="crt-Qk-vhL" secondAttribute="bottom" constant="7" id="Z0U-vO-VKq"/>
-                <constraint firstItem="jAy-jU-c4N" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="aBK-ML-cpC"/>
-                <constraint firstItem="Qor-Oa-tkt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="dd1-4Q-19f"/>
-                <constraint firstItem="0Ny-KE-Jvv" firstAttribute="leading" secondItem="jAy-jU-c4N" secondAttribute="trailing" constant="25" id="fcg-YY-QP8"/>
+                <constraint firstItem="nrt-8t-az2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="SfV-PB-o4V"/>
+                <constraint firstAttribute="trailing" secondItem="0Ny-KE-Jvv" secondAttribute="trailing" constant="14" id="Y9L-FT-5sl"/>
                 <constraint firstItem="JNP-wR-JQc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="gON-I2-ucr"/>
-                <constraint firstAttribute="trailing" secondItem="crt-Qk-vhL" secondAttribute="trailing" id="ko5-BM-2MP"/>
-                <constraint firstAttribute="bottom" secondItem="crt-Qk-vhL" secondAttribute="bottom" constant="44" id="q3f-St-lKE"/>
-                <constraint firstItem="crt-Qk-vhL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="scQ-o2-0zl"/>
-                <constraint firstAttribute="bottom" secondItem="0Ny-KE-Jvv" secondAttribute="bottom" constant="7" id="skw-Dw-rYG"/>
-                <constraint firstItem="0Ny-KE-Jvv" firstAttribute="top" secondItem="crt-Qk-vhL" secondAttribute="bottom" constant="7" id="v81-uR-shQ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
@@ -104,11 +80,10 @@
                 <outlet property="viewAllPhotosButton" destination="0Ny-KE-Jvv" id="Xy5-gg-bzg"/>
                 <outlet property="viewRecentActivitiesButton" destination="jAy-jU-c4N" id="MY0-Ne-azY"/>
             </connections>
-            <point key="canvasLocation" x="26.5" y="-143"/>
+            <point key="canvasLocation" x="26.399999999999999" y="-143.02848575712144"/>
         </view>
     </objects>
     <resources>
-        <image name="LatestUploadsCardIcon" width="26" height="26"/>
         <namedColor name="secondaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
