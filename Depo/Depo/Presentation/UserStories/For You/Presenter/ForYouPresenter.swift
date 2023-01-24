@@ -23,6 +23,7 @@ final class ForYouPresenter: BasePresenter, ForYouModuleInput {
     private lazy var animationsData: [WrapData] = []
     private lazy var collagesData: [WrapData] = []
     private lazy var hiddenData: [WrapData] = []
+    private lazy var favoriteData: [WrapData] = []
     private lazy var collageCardsData: [HomeCardResponse] = []
     private lazy var albumCardsData: [HomeCardResponse] = []
     private lazy var animationCardsData: [HomeCardResponse] = []
@@ -108,6 +109,8 @@ extension ForYouPresenter: ForYouViewOutput {
             return hiddenData.isEmpty ? 0 : 190
         case .photopick:
             return 190
+        case .favorites:
+            return favoriteData.isEmpty ? 0 : 190
         }
     }
     
@@ -125,6 +128,8 @@ extension ForYouPresenter: ForYouViewOutput {
             return placesData
         case .albums:
             return albumsData
+        case .favorites:
+            return favoriteData
         case .story:
             return storyData
         case .animations:
@@ -221,6 +226,10 @@ extension ForYouPresenter: ForYouInteractorOutput {
     
     func getHidden(data: [WrapData]) {
         self.hiddenData = data
+    }
+    
+    func getFavorites(data: [WrapData]) {
+        self.favoriteData = data
     }
     
     func getCollages(data: [WrapData]) {

@@ -1302,7 +1302,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             if let url = url {
                 cell_.setImage(with: url)
             } else {
-                cell_.setPlaceholderImage(fileType: wraped.fileType)
+                if wraped.status.isContained(in: [.uploaded, .transcoding, .transcodingFailed]),
+                   let downloadUrl = wraped.tmpDownloadUrl
+                {
+                    cell_.setImage(with: downloadUrl)
+                } else {
+                    cell_.setPlaceholderImage(fileType: wraped.fileType)
+                }
             }
         }
         

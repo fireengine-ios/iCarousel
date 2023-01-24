@@ -101,6 +101,11 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     return
             }
             
+            guard index < types.count else {
+                debugLog("CRASH CASE ---->>> index out of range")
+                return
+            }
+            
             let type = types[index]
             
             switch type {

@@ -129,7 +129,7 @@ extension FileInfoInteractor: FileInfoInteractorInput {
             case .success(let info):
                 sharingInfo = info
             case .failed(let error):
-                UIApplication.showErrorAlert(message: error.description)
+                debugLog("RESPONSE CASE getSharingInfo \(error.description)")
             }
             group.leave()
         }

@@ -39,7 +39,7 @@ class BottomSelectionTabBarModuleConfigurator {
         presenter.view = viewController
         presenter.router = router
 
-        interactor.dataStorage.currentBarConfig = config
+        interactor.currentBarcongfig = config
         interactor.output = presenter
 
         presenter.interactor = interactor
@@ -62,7 +62,7 @@ class BottomSelectionTabBarModuleConfigurator {
         presenter.view = viewController
         presenter.router = router
 
-        interactor.dataStorage.currentBarConfig = config
+        interactor.currentBarcongfig = config
         interactor.output = presenter
 
         presenter.interactor = interactor

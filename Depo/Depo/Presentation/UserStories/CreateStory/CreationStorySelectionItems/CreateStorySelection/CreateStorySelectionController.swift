@@ -68,6 +68,8 @@ final class CreateStorySelectionController: BaseViewController {
                                                             target: self,
                                                             selector: #selector(openStorySetup))
         
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font: UIFont.appFont(.regular, size: 17),                                  .foregroundColor: AppColor.label.color], for: UIControl.State.normal)
+                
         navigationItem.rightBarButtonItem?.isEnabled = selectedItems.count == 0 ? false : true
         
         navigationController?.navigationBar.tintColor = AppColor.label.color

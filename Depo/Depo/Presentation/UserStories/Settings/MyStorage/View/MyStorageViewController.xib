@@ -14,9 +14,9 @@
                 <outlet property="cardsStackView" destination="cQG-OZ-8DS" id="Stt-ln-bzy"/>
                 <outlet property="menuTableView" destination="sJL-4c-3eP" id="Rn6-3l-Xly"/>
                 <outlet property="packagesStackView" destination="u5R-GY-RpU" id="N5z-g2-R9x"/>
-                <outlet property="restoreButtonTopSpacing" destination="2eQ-5o-aVN" id="KNW-ko-E12"/>
                 <outlet property="restorePurchasesButton" destination="35h-M2-DXI" id="2AP-Px-PGP"/>
                 <outlet property="scrollView" destination="R22-lb-Fq7" id="5oX-dQ-saW"/>
+                <outlet property="topSpacingHeight" destination="2wV-4X-hhM" id="BbU-rA-n6r"/>
                 <outlet property="view" destination="KIa-OX-vsV" id="05D-zH-H7R"/>
             </connections>
         </placeholder>
