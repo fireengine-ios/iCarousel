@@ -132,16 +132,17 @@ class ProfileTextEnterView: UIView {
     private func createTitleView() -> UIView {
         let view = UIStackView()
         view.axis = .horizontal
-        view.spacing = 4
+        view.spacing = 0
         view.alignment = .fill
         view.distribution = .fill
         
         view.backgroundColor = AppColor.background.color
         
-        view.addArrangedSubview(UIView.getSpacing(width: 5, height: 24))
+        view.addArrangedSubview(UIView.getSpacing(width: 9, height: 24))
         view.addArrangedSubview(titleLabel)
+        view.addArrangedSubview(UIView.getSpacing(width: 4, height: 24))
         view.addArrangedSubview(infoButton)
-        view.addArrangedSubview(UIView.getSpacing(width: 5, height: 24))
+        view.addArrangedSubview(UIView.getSpacing(width: 9, height: 24))
         
         infoButton.widthAnchor.constraint(equalToConstant: 24).isActive = true
         infoButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
