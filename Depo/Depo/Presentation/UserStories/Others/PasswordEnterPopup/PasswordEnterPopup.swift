@@ -21,21 +21,28 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
     var appleGoogleUser: AppleGoogleUser?
     var disconnectAppleGoogleLogin: Bool?
     
-    private let newPasswordView: ProfilePasswordEnterView = {
-        let view = ProfilePasswordEnterView()
-        view.titleLabel.text = TextConstants.registrationCellTitlePassword
-        view.textField.placeholder = TextConstants.enterYourNewPassword
-        view.textField.returnKeyType = .next
-        return view
-    }()
+    @IBOutlet weak var container: UIView! {
+        willSet {
+            newValue.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+            newValue.addRoundedShadows(cornerRadius: 16, shadowColor: AppColor.drawerShadow.cgColor, opacity: 0.5, radius: 24, offset: CGSize(width: 0, height: 6))
+        }
+    }
     
-    private let repeatPasswordView: ProfilePasswordEnterView = {
-        let view = ProfilePasswordEnterView()
-        view.titleLabel.text = TextConstants.registrationCellTitleReEnterPassword
-        view.textField.placeholder = TextConstants.enterYourRepeatPassword
-        view.textField.returnKeyType = .next
-        return view
-    }()
+    @IBOutlet weak var newPasswordView: ProfilePasswordEnterView! {
+        willSet {
+            newValue.titleLabel.text = TextConstants.registrationCellTitlePassword
+            newValue.textField.placeholder = TextConstants.enterYourNewPassword
+            newValue.textField.returnKeyType = .next
+        }
+    }
+    
+    @IBOutlet weak var repeatPasswordView: ProfilePasswordEnterView! {
+        willSet {
+            newValue.titleLabel.text = TextConstants.registrationCellTitleReEnterPassword
+            newValue.textField.placeholder = TextConstants.enterYourRepeatPassword
+            newValue.textField.returnKeyType = .next
+        }
+    }
 
     //MARK: -IBOutlets
     @IBOutlet private weak var captchaView: CaptchaView!
@@ -45,41 +52,26 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
             newValue.axis = .vertical
             newValue.alignment = .fill
             newValue.distribution = .fill
-            newValue.backgroundColor = AppColor.primaryBackground.color
+            newValue.backgroundColor = AppColor.background.color
             newValue.isOpaque = true
-            
-            newValue.addArrangedSubview(newPasswordView)
-            newValue.addArrangedSubview(repeatPasswordView)
         }
     }
     
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
             newValue.text = localized(.settingsSetNewPassword)
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 20)
+            newValue.font = .appFont(.medium, size: 20)
             newValue.numberOfLines = 0
-            newValue.textColor = AppColor.blackColor.color.withAlphaComponent(0.9)
+            newValue.textColor = AppColor.label.color
         }
     }
     
-    @IBOutlet private weak var popupView: UIView! {
-        willSet {
-            newValue.layer.cornerRadius = 5
-        }
-    }
-    
-    @IBOutlet private weak var seperatorView: UIView! {
-        willSet {
-            newValue.backgroundColor = AppColor.darkBlue.color
-        }
-    }
-    
-    @IBOutlet private weak var okButton: UIButton! {
+    @IBOutlet private weak var okButton: RoundedButton! {
         willSet {
             newValue.setTitle(TextConstants.ok, for: .normal)
+            newValue.layer.cornerRadius = 25
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.setBackgroundColor(AppColor.darkBlueColor.color, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
         }
     }
     
@@ -87,7 +79,7 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = AppColor.popUpBackground.color
+        view.backgroundColor = .black.withAlphaComponent(0.6)
         initialViewSetup()
    }
     
