@@ -104,6 +104,7 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
         addTapGestureToHideKeyboard()
         IQKeyboardManager.shared.enabledDistanceHandlingClasses.append(PasswordEnterPopup.self)
         IQKeyboardManager.shared.enableAutoToolbar = true
+        IQKeyboardManager.shared.toolbarTintColor = AppColor.button.color
     }
     
     private func showError(_ errorResponse: Error) {
@@ -197,7 +198,6 @@ extension PasswordEnterPopup: UITextFieldDelegate {
             /// we need to show error with color just once
             showErrorColorInNewPasswordView = false
         }
-        newPasswordView.showSubtitleAnimated()
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
