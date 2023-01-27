@@ -178,7 +178,7 @@
 "Photos & Videos" = "ფოტო & ვიდეო";
 "Home" = "სახლი";
 "Choose a destination folder" = "აირჩიე დანიშნულების საქაღალდე";
-"Ok" = "Ok";
+"Ok" = "კაი";
 "Need to select folder" = "უნდა აირჩიო საქაღალდე";
 "Back" = "უკან";
 "Fail while uploading from LifeBox" = "ატვირთვა ლაიფბოქსიდან წარუმატებელია";
@@ -613,7 +613,7 @@
 "LifeboxSmallPopUpTitle" = "შენი ლაიფბოქსის მახსოვრობა თითქმის სავსეა!";
 "LifeboxSmallPopUpSubTitle" = "მოდი ვნახოთ გაუმჯობესების ვარიანტები!";
 "LifeboxSmallPopUpCheckBoxTex" = "არასდროს აღარ მაჩვენო";
-"LifeboxSmallPopUpFirstButtonText" = "OK";
+"LifeboxSmallPopUpFirstButtonText" = "კაი";
 "LifeboxSmallPopUpSecondButtonText" = "გააუმჯობესე";
 "has_remained_lifebox_usage" = "%@-დან %@ დარჩა (მხოლოდ lifebox გამოყენებისთვის)";
 "Renewal Date: %@" = "განახლების თარიღი: %@";

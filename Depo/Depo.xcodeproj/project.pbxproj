@@ -1364,8 +1364,6 @@
 		891CDE3C296EF11200E5CD3B /* FavoriteInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891CDE3A296EF11200E5CD3B /* FavoriteInitializer.swift */; };
 		891CDE3D296EF11200E5CD3B /* FavoriteInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891CDE3A296EF11200E5CD3B /* FavoriteInitializer.swift */; };
 		891CDE3E296EF11200E5CD3B /* FavoriteInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891CDE3A296EF11200E5CD3B /* FavoriteInitializer.swift */; };
-		89256CE12926994900FAD38E /* DiscoverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89256CE02926994900FAD38E /* DiscoverTableViewCell.xib */; };
-		89256CE3292699B600FAD38E /* DiscoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89256CE2292699B600FAD38E /* DiscoverTableViewCell.swift */; };
 		892B014922DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B014722DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift */; };
 		892B014A22DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B014722DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift */; };
 		892B014D22DF160700BCECBC /* TwoFactorChallengeInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B014B22DF160700BCECBC /* TwoFactorChallengeInitializer.swift */; };
@@ -1396,6 +1394,12 @@
 		8938AE882930C264004970F2 /* DeleteListSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938AE862930C264004970F2 /* DeleteListSectionHeader.swift */; };
 		8938AE892930C264004970F2 /* DeleteListSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938AE862930C264004970F2 /* DeleteListSectionHeader.swift */; };
 		8938AE8A2930C264004970F2 /* DeleteListSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938AE862930C264004970F2 /* DeleteListSectionHeader.swift */; };
+		893998192983A19300C1BB31 /* DiscoverCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893F45F1296D6332006FFECA /* DiscoverCollectionViewDataSource.swift */; };
+		8939981A2983A19500C1BB31 /* DiscoverCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893F45F1296D6332006FFECA /* DiscoverCollectionViewDataSource.swift */; };
+		8939981B2983A19700C1BB31 /* DiscoverCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893F45F1296D6332006FFECA /* DiscoverCollectionViewDataSource.swift */; };
+		8939981C2983A19B00C1BB31 /* DiscoverCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893F45EF296D631F006FFECA /* DiscoverCollectionViewLayout.swift */; };
+		8939981D2983A19E00C1BB31 /* DiscoverCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893F45EF296D631F006FFECA /* DiscoverCollectionViewLayout.swift */; };
+		8939981E2983A19F00C1BB31 /* DiscoverCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893F45EF296D631F006FFECA /* DiscoverCollectionViewLayout.swift */; };
 		893DCFE0292B861B00271379 /* DiscoverInitilizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92629261D7400817FF8 /* DiscoverInitilizer.swift */; };
 		893DCFE4292B861D00271379 /* DiscoverInitilizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92629261D7400817FF8 /* DiscoverInitilizer.swift */; };
 		893DCFE5292B861E00271379 /* DiscoverInitilizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92629261D7400817FF8 /* DiscoverInitilizer.swift */; };
@@ -27926,6 +27930,7 @@
 				9862BC8A255E899800D7945E /* FileInfoShareContactCell.swift in Sources */,
 				CE7848EE22A685FB00662219 /* TermsOfUseRouterInput.swift in Sources */,
 				8C1E5BEC22CB8D1C008FDA02 /* QuickScrollService.swift in Sources */,
+				8939981A2983A19500C1BB31 /* DiscoverCollectionViewDataSource.swift in Sources */,
 				B557674A22E99F9F00C86E2F /* QuickSelectCollectionView.swift in Sources */,
 				CE7848F022A685FB00662219 /* HelpAndSupportConfigurator.swift in Sources */,
 				B560CC40255BB6DA00199EA2 /* PrivateShareSharedFilesCollectionManager.swift in Sources */,
@@ -28732,6 +28737,7 @@
 				CE784B0522A685FB00662219 /* BaseFilesGreedRouter.swift in Sources */,
 				B55EFD21256538CF00E11D9C /* PrivateShareSharedWithThreeDotsManager.swift in Sources */,
 				CE784B0622A685FB00662219 /* BaseFilesGreedConfigurator.swift in Sources */,
+				8939981D2983A19E00C1BB31 /* DiscoverCollectionViewLayout.swift in Sources */,
 				CE784B0722A685FB00662219 /* ActionsMenuTableViewCell.swift in Sources */,
 				89E51D4822CA1111007A7DBC /* CreateStoryPreviewRouterInput.swift in Sources */,
 				9823196624F3A1E600FD16E2 /* PreparedFiltersView.swift in Sources */,
@@ -30457,6 +30463,7 @@
 				CF8B66A023CBC9D70021B021 /* FreeAppSpaceInteractor.swift in Sources */,
 				CF8B66A123CBC9D70021B021 /* AppResponsivenessService.swift in Sources */,
 				0780AB2A27916820000760D9 /* ImageTextSelectionInteraction.swift in Sources */,
+				893998192983A19300C1BB31 /* DiscoverCollectionViewDataSource.swift in Sources */,
 				CF8B66A223CBC9D70021B021 /* TextInsetsLabel.swift in Sources */,
 				CF8B66A323CBC9D70021B021 /* ActionsMenuTableViewCell.swift in Sources */,
 				CF8B66A423CBC9D70021B021 /* BaseFilesGreedInitializer.swift in Sources */,
@@ -30753,6 +30760,7 @@
 				98435B7A23F52D0900FADE6B /* PhotoVideoDetailModuleOuput.swift in Sources */,
 				CF8B678023CBC9D70021B021 /* SplashConfigurator.swift in Sources */,
 				CF8B678123CBC9D70021B021 /* UsageInfoRouterInput.swift in Sources */,
+				8939981C2983A19B00C1BB31 /* DiscoverCollectionViewLayout.swift in Sources */,
 				0780AB6527916846000760D9 /* TextRecognitionProcessor.swift in Sources */,
 				CF8B678223CBC9D70021B021 /* CreateStoryPreviewRouter.swift in Sources */,
 				CF8B678323CBC9D70021B021 /* SplashInitializer.swift in Sources */,
@@ -32640,6 +32648,7 @@
 				CF8B6F8423CBCA280021B021 /* UploadFilesSelectionInteractor.swift in Sources */,
 				CF8B6F8523CBCA280021B021 /* FirstResponder.swift in Sources */,
 				CF8B6F8623CBCA280021B021 /* PasscodeSettingsRouterInput.swift in Sources */,
+				8939981E2983A19F00C1BB31 /* DiscoverCollectionViewLayout.swift in Sources */,
 				CF8B6F8723CBCA280021B021 /* PasscodeSettingsConfigurator.swift in Sources */,
 				CF8B6F8823CBCA280021B021 /* UploadFilesSelectionRouterInput.swift in Sources */,
 				B55C973225593E4000623C5C /* PrivateShareLocalContactCell.swift in Sources */,
@@ -32802,6 +32811,7 @@
 				CF8B6FF823CBCA280021B021 /* AlbumDetailRouter.swift in Sources */,
 				CF8B6FFA23CBCA280021B021 /* AlbumDetailInitializer.swift in Sources */,
 				0305A2F223D5C15D004D1EC7 /* HiddenPhotosViewController.swift in Sources */,
+				8939981B2983A19700C1BB31 /* DiscoverCollectionViewDataSource.swift in Sources */,
 				98B04841259314750011DAEB /* ContactUtil.m in Sources */,
 				CF8B6FFB23CBCA280021B021 /* PaymentPopUpController.swift in Sources */,
 				CF8B6FFC23CBCA280021B021 /* TextEnterController.swift in Sources */,
@@ -35590,7 +35600,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Depo/App/Depo-AppStore.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 18;
@@ -35629,7 +35639,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo;
 				PRODUCT_NAME = lifebox_friendly;
 				PROVISIONING_PROFILE = "747cf355-57c7-4d05-ae4a-3c51cc5d7147";
-				PROVISIONING_PROFILE_SPECIFIER = "Akilli Depo Extension";
+				PROVISIONING_PROFILE_SPECIFIER = "akillidepo Extension";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "APPSTORE MAIN_APP DEBUG_BUNDLE_ENABLED";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
