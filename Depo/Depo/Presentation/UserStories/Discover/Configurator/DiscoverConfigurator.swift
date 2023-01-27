@@ -19,14 +19,14 @@ class DiscoverConfigurator {
         let router = DiscoverRouter()
 
         let presenter = DiscoverPresenter()
-        presenter.view = viewController as? DiscoverViewInput
+        presenter.view = viewController
         presenter.router = router
         router.presenter = presenter
         
         let interactor = DiscoverInteractor()
-        interactor.output = presenter as? DiscoverInteractorOutput
+        interactor.output = presenter
 
-        presenter.interactor = interactor as? DiscoverInteractorInput
-        viewController.output = presenter as? DiscoverViewOutput
+        presenter.interactor = interactor
+        viewController.output = presenter
     }
 }
