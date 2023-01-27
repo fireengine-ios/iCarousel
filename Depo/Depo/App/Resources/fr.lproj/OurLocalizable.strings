@@ -1757,7 +1757,7 @@ Please check I have understood the intended command here*/
 "tabbar_item_home_label" = "Page d'accueil";
 "tabbar_item_gallery_label" = "Galerie";
 "tabbar_item_contacts_label" = "Contacts";
-"tabbar_item_all_files_label" = "Tous les dossiers";
+"tabbar_item_all_files_label" = "Dossiers";
 "see_features" = "Afficher les Fonctionnalités";
 "middle_user_package_description" = "+ 15 Analyse PhotoPick";
 "features_only_package_addon_type" = "Fonctionnalités Premium";
