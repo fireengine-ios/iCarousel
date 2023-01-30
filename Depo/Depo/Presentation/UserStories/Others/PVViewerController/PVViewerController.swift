@@ -41,9 +41,7 @@ final class PVViewerController: BaseViewController, NibInit {
         
         imageScrollView.contentInsetAdjustmentBehavior = .never
          
-        navigationItem.leftBarButtonItem = BackButtonItem { [weak self] in
-            self?.hideView()
-        }
+        navigationItem.leftBarButtonItem = getBackButtonItem()
     }
     
     override func viewDidLayoutSubviews() {
@@ -73,7 +71,7 @@ final class PVViewerController: BaseViewController, NibInit {
     
     private var isFullScreen = false {
         didSet {
-            navigationController?.setNavigationBarHidden(isFullScreen, animated: false)
+            setNavigationBar(with: isFullScreen)
             setStatusBarHiddenForLandscapeIfNeed(isFullScreen)            
         }
     } 
@@ -82,6 +80,16 @@ final class PVViewerController: BaseViewController, NibInit {
         super.viewWillTransition(to: size, with: coordinator)
         
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
+    }
+    
+    private func setNavigationBar(with isFullScreen: Bool) {
+        navigationItem.leftBarButtonItem = isFullScreen ? nil : getBackButtonItem()
+    }
+    
+    private func getBackButtonItem() -> BackButtonItem {
+        BackButtonItem { [weak self] in
+            self?.hideView()
+        }
     }
     
     private func setupImageView() {
