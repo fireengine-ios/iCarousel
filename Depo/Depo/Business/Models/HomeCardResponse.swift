@@ -33,33 +33,33 @@ final class HomeCardResponse : Equatable {
             return .freeAppSpaceCloudWarning
         case .latestUploads:
             return .latestUploads
-        case .movie:
-            return .movieCard
-        case .collage:
-            return .collage
-        case .stylizedPhoto:
-            return .stylizedPhoto
+//        case .movie:
+//            return .movieCard
+//        case .collage:
+//            return .collage
+//        case .stylizedPhoto:
+//            return .stylizedPhoto
         case .contactBackup:
             if ContactBackupOld.isContactInfoObjectEmpty(object: details) {
                 return .contactBacupEmpty
             }
             return .contactBacupOld
-        case .album:
-            return .albumCard
+//        case .album:
+//            return .albumCard
         case .autoSyncWatingForWifi:
             return .waitingForWiFi
         case .autoSyncOff:
             return .autoUploadIsOff
         case .freeUpSpace:
             return .freeAppSpace
-        case .animation:
-            return .animationCard
+//        case .animation:
+//            return .animationCard
         case .launchCampaign:
             return .launchCampaign
         case .instaPick:
             return .instaPick
-        case .tbMatik:
-            return .tbMatik
+//        case .tbMatik:
+//            return .tbMatik
         case .campaign:
             return .campaignCard
         case .promotion:
@@ -70,8 +70,8 @@ final class HomeCardResponse : Equatable {
             return .invitation
         case .thingsDocument:
             return .documents
-        case .photoPrint:
-            return .photoPrint
+//        case .photoPrint:
+//            return .photoPrint
         case .paycell:
             return .paycell
         case .drawCampaign:
@@ -91,12 +91,12 @@ extension HomeCardResponse: Map {
         saved = json["saved"].boolValue
         actionable = json["actionable"].boolValue
         
-        if type == .tbMatik {
-            details = json["fileList"]
-        } else {
-            details = json["details"]
-        }
-        
+//        if type == .tbMatik {
+//            details = json["fileList"]
+//        } else {
+//            details = json["details"]
+//        }
+        details = json["details"]
         if type == .thingsDocument {
             fileList = json["fileList"].array
         }
@@ -107,25 +107,26 @@ enum HomeCardTypes: String {
     case emptyStorage = "EMPTY_STORAGE"
     case storageAlert = "STORAGE_ALERT"
     case latestUploads = "LATEST_UPLOADS"
-    case movie = "MOVIE"
-    case collage = "COLLAGE"
-    case stylizedPhoto = "STYLIZED_PHOTO"
+    //case movie = "MOVIE"
+    //case collage = "COLLAGE"
+    //case stylizedPhoto = "STYLIZED_PHOTO"
     case contactBackup = "CONTACT_BACKUP"
-    case album = "ALBUM"
+    //case album = "ALBUM"
     case autoSyncWatingForWifi = "AUTO_SYNC_WAITING_FOR_WIFI"
     case autoSyncOff = "AUTO_SYNC_OFF"
     case freeUpSpace = "FREE_UP_SPACE"
     //case rating = "RATING"
-    case animation = "ANIMATION"
+    //case animation = "ANIMATION"
     case launchCampaign = "LAUNCH_CAMPAIGN"
     case instaPick = "INSTAGRAM_LIKE"
-    case tbMatik = "TBMATIC"
+    //case tbMatik = "TBMATIC"
     case campaign = "CAMPAIGN"
     case promotion = "PROMOTION"
     case divorce = "DIVORCE"
     case invitation = "INVITATION"
     case thingsDocument = "THINGS_DOCUMENT"
-    case photoPrint = "PHOTOPRINT"
+    //case photoPrint = "PHOTOPRINT"
     case paycell = "PAYCELL"
     case drawCampaign = "DRAW_CAMPAIGN"
 }
+
