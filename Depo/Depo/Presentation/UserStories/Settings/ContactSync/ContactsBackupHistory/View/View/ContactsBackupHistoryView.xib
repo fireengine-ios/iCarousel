@@ -59,9 +59,9 @@
                     <rect key="frame" x="0.0" y="734" width="414" height="128"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KkS-f9-9cl" customClass="RoundedButton" customModule="Billo" customModuleProvider="target">
-                            <rect key="frame" x="107" y="64" width="200" height="32"/>
+                            <rect key="frame" x="82" y="64" width="250" height="32"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="200" id="MtL-c8-Gvz"/>
+                                <constraint firstAttribute="width" constant="250" id="MtL-c8-Gvz"/>
                                 <constraint firstAttribute="height" constant="32" id="v82-8p-yt3"/>
                             </constraints>
                             <state key="normal" title="Delete Backup"/>
@@ -70,7 +70,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sjW-n9-wer" customClass="RoundedButton" customModule="Billo" customModuleProvider="target">
-                            <rect key="frame" x="107" y="8" width="200" height="32"/>
+                            <rect key="frame" x="82" y="8" width="250" height="32"/>
                             <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="16"/>
                             <state key="normal" title="Restore Backup">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
