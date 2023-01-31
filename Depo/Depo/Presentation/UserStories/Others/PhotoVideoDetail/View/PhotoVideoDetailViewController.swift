@@ -158,6 +158,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         super.viewDidAppear(animated)
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
         passThroughView?.enableGestures()
+        configureNavigationBarStyle()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -71,6 +71,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private var fileTypes: [FileType] = [.image, .video]
     
     private var viewType: ElementTypes = .galleryAll
+    var refresher: UIRefreshControl?
     
     // MARK: - life cycle
     
@@ -107,7 +108,25 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             savePublicSharedItems(with: publicTokenToSave)
             storageVars.publicSharedItemsToken = nil
         }
+        
+        setupRefresher()
     }
+
+    private func setupRefresher() {
+        refresher = UIRefreshControl()
+        refresher?.tintColor = AppColor.filesRefresher.color
+        refresher?.addTarget(self, action: #selector(fullReload), for: .valueChanged)
+        collectionView.refreshControl = refresher
+    }
+
+    @objc private func fullReload() {
+        fetchAndReload()
+        stopRefresher()
+    }
+
+    func stopRefresher() {
+        collectionView.refreshControl?.endRefreshing()
+     }
     
     deinit {
         ItemOperationManager.default.stopUpdateView(view: self)

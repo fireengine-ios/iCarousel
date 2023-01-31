@@ -99,7 +99,7 @@ final class TabBarConfigurator {
             router.forYou(),
             syncContactsVC,
             router.segmentedFiles,
-            router.discover()
+            router.homePageScreen
             
         ]
         return list.map {

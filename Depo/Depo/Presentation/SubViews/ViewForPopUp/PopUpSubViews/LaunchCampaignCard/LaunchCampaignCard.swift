@@ -10,24 +10,18 @@ import UIKit
 
 final class LaunchCampaignCard: BaseCardView {
     
-    @IBOutlet private weak var titleView: UIView! {
-        willSet {
-            newValue.backgroundColor = UIColor.lrTealish
-        }
-    }
-    
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 18)
-            newValue.textColor = UIColor.white
+            newValue.font = .appFont(.medium, size: 16)
+            newValue.textColor = AppColor.label.color
             newValue.text = TextConstants.launchCampaignCardTitle
         }
     }
     
     @IBOutlet private weak var messageLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 16)
-            newValue.textColor = AppColor.marineTwoAndWhite.color
+            newValue.font = .appFont(.light, size: 14)
+            newValue.textColor = AppColor.label.color
             newValue.text = TextConstants.launchCampaignCardMessage
         }
     }
@@ -36,11 +30,13 @@ final class LaunchCampaignCard: BaseCardView {
     @IBOutlet private weak var actionButton: UIButton! {
         willSet {
             newValue.setTitle(TextConstants.launchCampaignCardDetail, for: .normal)
-            newValue.setTitleColor(UIColor.lrTealishTwo, for: .normal)
-            newValue.setTitleColor(UIColor.lrTealishTwo.darker(), for: .highlighted)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
+            newValue.setTitleColor(AppColor.settingsButtonColor.color, for: .normal)
+            newValue.setTitleColor(AppColor.settingsButtonColor.color, for: .highlighted)
+            newValue.titleLabel?.font = .appFont(.bold, size: 14)
         }
     }
+    
+    @IBOutlet weak var campaignImageView: UIImageView!
     
     override func set(object: HomeCardResponse?) {
         super.set(object: object)
@@ -53,7 +49,6 @@ final class LaunchCampaignCard: BaseCardView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         loadImage()
     }
     
@@ -64,6 +59,7 @@ final class LaunchCampaignCard: BaseCardView {
             }
             DispatchQueue.toMain {
                 self?.imageView.image = UIImage(data: data)
+                self?.campaignImageView.frame = CGRect(x: (self?.imageView.frame.maxY)! - 25.0, y: (self?.imageView.frame.maxY)! - 70.0, width: 50, height: 50)
             }
         }.resume()
     }
@@ -76,7 +72,7 @@ final class LaunchCampaignCard: BaseCardView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        let bottomSpace: CGFloat = 0.0
+        let bottomSpace: CGFloat = 16.0
         let h = actionButton.frame.origin.y + actionButton.frame.height + bottomSpace
         if calculatedH != h {
             calculatedH = h

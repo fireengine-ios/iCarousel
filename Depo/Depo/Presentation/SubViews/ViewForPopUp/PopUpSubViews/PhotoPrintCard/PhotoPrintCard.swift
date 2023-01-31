@@ -21,11 +21,11 @@ final class PhotoPrintCard: BaseCardView {
     override func configurateView() {
         super.configurateView()
 
-        bottomButton.setTitleColor(UIColor.lrTealish, for: .normal)
-        bottomButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
+        bottomButton.setTitleColor(AppColor.settingsButtonColor.color, for: .normal)
+        bottomButton.titleLabel?.font = .appFont(.bold, size: 14)
 
         bottomButton.setTitle(TextConstants.homePhotoPrintCardButton, for: .normal)
-        bottomButton.setTitleColor(ColorConstants.blueColor, for: .normal)
+        bottomButton.setTitleColor(AppColor.settingsButtonColor.color, for: .normal)
         bottomButton.adjustsFontSizeToFitWidth()
     }
 

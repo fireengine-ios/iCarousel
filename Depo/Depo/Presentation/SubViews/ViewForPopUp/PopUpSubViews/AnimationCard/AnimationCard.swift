@@ -13,32 +13,32 @@ class AnimationCard: BaseCardView {
 
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
-            titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
-            titleLabel.textColor = ColorConstants.darkText
+            titleLabel.font = .appFont(.medium, size: 16)
+            titleLabel.textColor = AppColor.label.color
             titleLabel.text = TextConstants.homeAnimationCardTitle
         }
     }
     
     @IBOutlet private weak var subTitleLabel: UILabel! {
         didSet {
-            subTitleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            subTitleLabel.textColor = ColorConstants.textGrayColor
+            subTitleLabel.font = .appFont(.regular, size: 12)
+            subTitleLabel.textColor = AppColor.label.color
             subTitleLabel.text = TextConstants.homeAnimationCardSubTitle
         }
     }
     
     @IBOutlet private weak var bottomButton: UIButton! {
         didSet {
-            bottomButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
-            bottomButton.setTitleColor(ColorConstants.blueColor, for: .normal)
+            bottomButton.titleLabel?.font = .appFont(.medium, size: 14)
+            bottomButton.setTitleColor(AppColor.label.color, for: .normal)
             bottomButton.setTitle(TextConstants.homeAnimationCardButtonSaveCollage, for: .normal)
         }
     }
     
     @IBOutlet private weak var shareButton: UIButton!  {
         didSet {
-            shareButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
-            shareButton.setTitleColor(ColorConstants.blueColor, for: .normal)
+            shareButton.titleLabel?.font = .appFont(.medium, size: 14)
+            shareButton.setTitleColor(AppColor.label.color, for: .normal)
             shareButton.setTitle(TextConstants.tabBarShareLabel, for: .normal)
         }
     }

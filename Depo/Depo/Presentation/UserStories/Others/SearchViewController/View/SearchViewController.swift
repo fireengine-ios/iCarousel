@@ -158,6 +158,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         searchBar.showsCancelButton = true
         searchBar.backgroundImage = UIImage(color: ColorConstants.searchBarColor)
         searchBar.tintColor = AppColor.marineTwoAndWhite.color
+        searchBar.cancelButton?.setTitle(TextConstants.cancel, for: .normal)
         searchBar.delegate = self
         searchBar.setImage(UIImage(named: TextConstants.searchIcon), for: .search, state: .normal)
 
@@ -180,6 +181,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
             button.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 17)
             button.isEnabled = true
             button.adjustsFontSizeToFitWidth()
+            button.setTitle(TextConstants.cancel, for: .normal)
         }
         
         setupNavigationBarForSelectionState(state: false)
@@ -579,7 +581,6 @@ private class SearchTitleView: UIView {
     convenience init(searchBar: UISearchBar) {
         self.init()
         translatesAutoresizingMaskIntoConstraints = false
-
         addSubview(searchBar)
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

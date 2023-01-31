@@ -348,6 +348,12 @@ class CollageService: RemoteItemsService {
     }
 }
 
+class FavoriteService: RemoteItemsService {
+    init(requestSize: Int) {
+        super.init(requestSize: requestSize, fieldValue: .favorite)
+    }
+}
+
 class AnimationService: RemoteItemsService {
     init(requestSize: Int) {
         super.init(requestSize: requestSize, fieldValue: .animation)

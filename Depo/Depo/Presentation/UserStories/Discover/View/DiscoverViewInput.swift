@@ -8,7 +8,12 @@
 
 import Foundation
 
-protocol DiscoverViewInput: AnyObject, Waiting {
-    func didFinishedAllRequests()
+protocol DiscoverViewInput: AnyObject, CurrentNavController {
     func stopRefresh()
+    func startSpinner()
+    func needShowSpotlight(type: SpotlightType)
+    func showGiftBox()
+    func hideGiftBox()
+    func closePermissionPopUp()    
+    func showSnackBarWithMessage(message: String)
 }

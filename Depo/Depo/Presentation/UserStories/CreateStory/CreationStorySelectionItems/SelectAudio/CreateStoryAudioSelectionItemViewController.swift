@@ -96,6 +96,8 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
                                                             target: self,
                                                             selector: #selector(onAddButton))
         
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font: UIFont.appFont(.regular, size: 17),                                  .foregroundColor: AppColor.label.color], for: UIControl.State.normal)
+        
         navigationController?.navigationBar.tintColor = AppColor.label.color
     }
     

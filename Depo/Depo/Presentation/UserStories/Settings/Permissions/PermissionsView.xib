@@ -30,7 +30,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="346" height="65"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eH-pQ-DLc" userLabel="Title Label">
-                                            <rect key="frame" x="16" y="22" width="44.5" height="21"/>
+                                            <rect key="frame" x="16" y="22" width="255" height="21"/>
                                             <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -50,6 +50,7 @@
                                         <constraint firstAttribute="trailing" secondItem="XhQ-9N-Hd4" secondAttribute="trailing" constant="16" id="8fW-eB-z1Y"/>
                                         <constraint firstItem="XhQ-9N-Hd4" firstAttribute="centerY" secondItem="D8w-cS-76U" secondAttribute="centerY" id="gq6-17-vPT"/>
                                         <constraint firstAttribute="height" constant="65" id="lxm-WI-bje"/>
+                                        <constraint firstItem="XhQ-9N-Hd4" firstAttribute="leading" secondItem="4eH-pQ-DLc" secondAttribute="trailing" constant="10" id="mmm-5r-kb5"/>
                                         <constraint firstItem="4eH-pQ-DLc" firstAttribute="centerY" secondItem="D8w-cS-76U" secondAttribute="centerY" id="mox-1a-CNS"/>
                                         <constraint firstItem="4eH-pQ-DLc" firstAttribute="leading" secondItem="D8w-cS-76U" secondAttribute="leading" constant="16" id="zME-h0-i1n"/>
                                     </constraints>

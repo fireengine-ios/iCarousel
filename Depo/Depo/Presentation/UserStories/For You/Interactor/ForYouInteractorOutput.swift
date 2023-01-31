@@ -20,6 +20,7 @@ protocol ForYouInteractorOutput: AnyObject {
     func getStories(data: [WrapData])
     func getAnimations(data: [WrapData])
     func getHidden(data: [WrapData])
+    func getFavorites(data: [WrapData])
     func getCollages(data: [WrapData])
     func getAlbums(data: [AlbumItem])
     func getPhotopicks(data: [InstapickAnalyze])

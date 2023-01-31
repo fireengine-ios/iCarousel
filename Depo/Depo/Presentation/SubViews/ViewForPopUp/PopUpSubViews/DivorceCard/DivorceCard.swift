@@ -10,7 +10,8 @@ import UIKit
 
 final class DivorceCard: BaseCardView {
     
-    @IBOutlet private weak var containerStackView: UIStackView!
+    @IBOutlet weak var playImageView: UIImageView!
+    @IBOutlet weak var viewRect: UIView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var bottomButton: UIButton!
     @IBOutlet private weak var playButton: UIButton!
@@ -25,25 +26,26 @@ final class DivorceCard: BaseCardView {
         backgroundColor = AppColor.secondaryBackground.color
         canSwipe = false
         
-        titleLabel.font = UIFont.TurkcellSaturaFont(size: 18)
-        titleLabel.textColor = ColorConstants.darkText
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(playVideo(tapGestureRecognizer:)))
+        playImageView.isUserInteractionEnabled = true
+        playImageView.addGestureRecognizer(tapGestureRecognizer)
+        
+        titleLabel.font = .appFont(.light, size: 14)
+        titleLabel.textColor = AppColor.label.color
         titleLabel.text = TextConstants.homeDivorceCardTitle
         
-        bottomButton.setTitleColor(UIColor.lrTealish, for: .normal)
-        bottomButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
+        bottomButton.setTitleColor(AppColor.settingsButtonColor.color, for: .normal)
+        bottomButton.titleLabel?.font = .appFont(.bold, size: 14)
         
         bottomButton.setTitle(TextConstants.homeLatestUploadsCardAllPhotosButtn, for: .normal)
-        bottomButton.setTitleColor(ColorConstants.blueColor, for: .normal)
+        bottomButton.setTitleColor(AppColor.settingsButtonColor.color, for: .normal)
         bottomButton.adjustsFontSizeToFitWidth()
-        
-        dividerLineView.isHidden = false
-        
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let height = containerStackView.frame.size.height
+        let height = viewRect.frame.size.height
         if calculatedH != height {
             calculatedH = height
             layoutIfNeeded()
@@ -81,6 +83,28 @@ final class DivorceCard: BaseCardView {
     @IBAction private func onBottomButtonTap(_ sender: Any) {
         NotificationCenter.default.post(name: .photosScreen, object: nil, userInfo: nil)
     }
+    
+    @objc func playVideo(tapGestureRecognizer: UITapGestureRecognizer){
+        guard let videoUrl = videoUrl else {
+            assertionFailure()
+            return
+        }
+        
+        analyticsService.trackCustomGAEvent(eventCategory: .videoAnalytics, eventActions: .startVideo, eventLabel: .divorceButtonVideo)
+        
+        let player = AVPlayer(url: videoUrl)
+        
+        let playerController = FixedAVPlayerViewController()
+        playerController.player = player
+        
+        let nController = NavigationController(rootViewController: playerController)
+        nController.navigationBar.isHidden = true
+        
+        RouterVC().presentViewController(controller: nController, animated: true) {
+            player.play()
+        }
+    }
+    
     @IBAction private func playButtonTap(_ sender: Any) {
         
         guard let videoUrl = videoUrl else {

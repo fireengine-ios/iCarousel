@@ -44,6 +44,9 @@ final class ForYouRouter: ForYouRouterInput {
         case .animations:
             let animation = router.animationListController()
             router.pushViewController(viewController: animation)
+        case .favorites:
+            let favorites = router.favoriteListController()
+            router.pushViewController(viewController: favorites)
         default:
             break
         }

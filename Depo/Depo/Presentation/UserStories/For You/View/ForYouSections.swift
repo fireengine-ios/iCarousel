@@ -19,6 +19,7 @@ enum ForYouSections: CaseIterable {
     case animations
     case albumCards
     case albums
+    case favorites
     case places
     case story
     case photopick
@@ -33,6 +34,7 @@ enum ForYouSections: CaseIterable {
         case .things: return TextConstants.myStreamThingsTitle
         case .places: return TextConstants.myStreamPlacesTitle
         case .albums: return localized(.forYouMyAlbumsTitle)
+        case .favorites: return TextConstants.containerFavourite
         case .photopick: return TextConstants.myStreamInstaPickTitle
         case .story: return TextConstants.myStreamStoriesTitle
         case .animations: return localized(.forYouMyAnimationsTitle)

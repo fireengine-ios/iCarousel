@@ -24,6 +24,27 @@ final class InvitationCard: BaseCardView {
         
         let title = viewType == .invitation ? TextConstants.homeInvitationCardButtn : localized(.paycellCampaignTitle)
         bottomButton.setTitle(title, for: .normal)
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        invitationImageView.isUserInteractionEnabled = true
+        invitationImageView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        let router = RouterVC()
+        if viewType == .invitation {
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .invitation, eventLabel: .homePageCard(.letsSee))
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.HomepageCard(cardName: NetmeraEventValues.HomePageCardEventValue.invitation.text, action: NetmeraEventValues.HomePageCardEventValue.detail.text))
+
+            let controller = router.invitationController()
+            router.pushViewController(viewController: controller)
+        } else if viewType == .paycell {
+            router.pushViewController(viewController: router.paycell)
+        } else if viewType == .drawCampaign {
+            let url = URL(string: RouteRequests.drawCampaignUrl)
+            UIApplication.shared.open(url!)
+        }
     }
 
     override func configurateView() {
@@ -37,7 +58,8 @@ final class InvitationCard: BaseCardView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        let height = containerStackView.frame.size.height
+        //let height = containerStackView.frame.size.height DESIGN WITH BUTTON
+        let height = invitationImageView.frame.size.height //DESIGN WITHOUT BUTTON
         if calculatedH != height {
             calculatedH = height
             layoutIfNeeded()

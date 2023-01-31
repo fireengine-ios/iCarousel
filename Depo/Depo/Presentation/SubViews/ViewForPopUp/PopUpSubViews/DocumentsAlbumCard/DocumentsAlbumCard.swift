@@ -10,7 +10,7 @@ import UIKit
 
 final class DocumentsAlbumCard: BaseCardView {
     
-    @IBOutlet private weak var contentStackView: UIStackView!
+    @IBOutlet weak var viewRect: UIView!
     @IBOutlet private weak var imagesStackView: UIStackView!
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var viewDocumentButton: UIButton!
@@ -46,7 +46,7 @@ final class DocumentsAlbumCard: BaseCardView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let height = contentStackView.frame.size.height
+        let height = viewRect.frame.size.height
         if calculatedH != height {
             calculatedH = height
             layoutIfNeeded()
@@ -90,12 +90,12 @@ final class DocumentsAlbumCard: BaseCardView {
         
         let countView = UIView()
         countView.layer.borderWidth = 1
-        countView.layer.borderColor = ColorConstants.blueColor.cgColor
+        countView.layer.borderColor = AppColor.settingsButtonColor.color.cgColor
         
         let label = UILabel()
         label.font = UIFont.TurkcellSaturaBolFont(size: 30)
         label.text = "+ \(numberOfItems - fileList.count)"
-        label.textColor = ColorConstants.blueColor
+        label.textColor = AppColor.settingsButtonColor.color
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         

@@ -8,27 +8,81 @@
 
 import Foundation
 
-final class DiscoverPresenter: BasePresenter, DiscoverModuleInput {
+final class DiscoverPresenter: DiscoverModuleInput {
+    
     weak var view: DiscoverViewInput!
     var interactor: DiscoverInteractorInput!
     var router: DiscoverRouterInput!
-    private lazy var placesData: [WrapData] = []
-    private var cards: [HomeCardResponse] = []
+   
+    private enum DispatchGroupReason: CaseIterable {
+        case waitAccountInfoResponse        ///calls didObtainAccountInfo OR didObtainAccountInfoError
+        case waitPermissionAllowanceResponse ///calls didObtainPermissionAllowance OR nothing
+        case waitAccountPermissionsResponse ///regardless response always calls fillCollectionView
+        case waitQuotaInfoResponse          ///regardless response always calls didObtainQuotaInfo
+        case waitTillViewDidAppear          ///calls viewIsReadyForPopUps
+    }
     
-    func viewIsReady() {
-        interactor.viewIsReady()
-        view.showSpinner()
+    private let spotlightManager = SpotlightManager.shared
+    private var cards: [HomeCardResponse] = []
+    private(set) var allFilesViewType = MoreActionsConfig.ViewType.Grid
+    private(set) var allFilesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
+    private(set) var favoritesViewType = MoreActionsConfig.ViewType.Grid
+    private(set) var favoritesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
+    private var loadCollectionView = false
+    private var isShowPopupQuota = false
+    private var isFirstAppear = true
+    private var presentPopUpsGroup: DispatchGroup?
+    private var dispatchGroupReasons = [DispatchGroupReason]()
+    
+    private func decreaseDispatchGroupValue(for reason: DispatchGroupReason) {
+        guard let index = dispatchGroupReasons.firstIndex(of: reason) else {
+            return
+        }
+        dispatchGroupReasons.remove(at: index)
+        presentPopUpsGroup?.leave()
     }
 }
 
+// MARK: - BaseFilesGreedModuleOutput
+extension DiscoverPresenter: BaseFilesGreedModuleOutput {
+    
+    func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType, fieldType: FieldValue) {
+        if fieldType == .all {
+            self.allFilesViewType = type
+            self.allFilesSortType = sortedType
+        } else if fieldType == .favorite {
+            self.favoritesViewType = type
+            self.favoritesSortType = sortedType
+        }
+    }
+}
+
+// MARK: - DiscoverInteractorOutput
 extension DiscoverPresenter: DiscoverInteractorOutput {
-    func didFinishedAllRequests() {
-        view.hideSpinner()
-        view.didFinishedAllRequests()
+    func publicShareSaveStorageFail() {
+        router.presentFullQuotaPopup()
     }
     
-    func didObtainHomeCards(_ cards: [HomeCardResponse]) {
-        self.cards = cards
+    func publicShareSaveFail(message: String) {
+        view.showSnackBarWithMessage(message: message)
+        router.openTabBarItem(index: .documents, segmentIndex: 0)
+    }
+    
+    func publicShareSaveSuccess() {
+        view.showSnackBarWithMessage(message: localized(.publicShareSaveSuccess))
+        router.openTabBarItem(index: .documents, segmentIndex: 0)
+    }
+    
+    func showSnackBarWith(message: String) {
+        view.showSnackBarWithMessage(message: message)
+    }
+
+    func showSpinner() {
+        view.startSpinner()
+    }
+    
+    func hideSpinner() {
+        view.stopRefresh()
     }
     
     func stopRefresh() {
@@ -39,23 +93,259 @@ extension DiscoverPresenter: DiscoverInteractorOutput {
         if isNeedStopRefresh {
             stopRefresh()
         }
+        router.showError(errorMessage: text)
+    }
+    
+    func didObtainHomeCards(_ cards: [HomeCardResponse]) {
+        self.cards = cards
+    }
+    
+    func fillCollectionView(isReloadAll: Bool) {
+        if !AuthoritySingleton.shared.isBannerShowedForPremium {
+            CardsManager.default.startPremiumCard()
+        }
+        
+        AuthoritySingleton.shared.hideBannerForSecondLogin()
+        
+        if cards.isEmpty {
+            if !isReloadAll {
+                stopRefresh()
+            }
+            return
+        }
+        
+        if isReloadAll {
+            CardsManager.default.startOperatonsForCardsResponses(cardsResponses: cards)
+        } else {
+            //to hide spinner when refresh only premium card
+            stopRefresh()
+        }
+        decreaseDispatchGroupValue(for: .waitAccountPermissionsResponse)
+    }
+    
+    func didObtainQuotaInfo(usagePercentage: Float) {
+        let storageVars: StorageVars = factory.resolve()
+        let fullOfQuotaPopUpType: LargeFullOfQuotaPopUpType?
+        
+        if usagePercentage < 0.8 {
+            fullOfQuotaPopUpType = nil
+            
+            ///if user's quota is below %80 percent , we change it to false to show next extend quota
+            storageVars.largeFullOfQuotaPopUpShownBetween80And99 = false
+            
+        } else if 0.8 <= usagePercentage && usagePercentage <= 0.99 && !storageVars.largeFullOfQuotaPopUpShownBetween80And99 {
+            fullOfQuotaPopUpType = .LargeFullOfQuotaPopUpTypeBetween80And99(usagePercentage)
+            storageVars.largeFullOfQuotaPopUpShownBetween80And99 = true
+            
+        } else if usagePercentage >= 1.0 && storageVars.largeFullOfQuotaPopUpShowType100 && !storageVars.largeFullOfQuotaPopUpCheckBox  {
+            let userPremium = storageVars.largeFullOfQuotaUserPremium;
+            fullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType100(userPremium)
+            storageVars.largeFullOfQuotaPopUpShowType100 = false
+        } else {
+            fullOfQuotaPopUpType = nil
+        }
+        
+        if let type = fullOfQuotaPopUpType {
+            router.presentFullOfQuotaPopUp(with: type)
+        }
+        
+        decreaseDispatchGroupValue(for: .waitQuotaInfoResponse)
+    }
+    
+    func didObtainAccountInfo(accountInfo: AccountInfoResponse) {
+        verifyEmailIfNeeded(with: accountInfo)
+        verifyRecoveryEmailIfNeeded(with: accountInfo)
+        credsCheckUpdateIfNeeded(with: accountInfo)
+        checkMobilePaymentPermission(with: accountInfo)
+        decreaseDispatchGroupValue(for: .waitAccountInfoResponse)
+        addSecurityInfoIfNeeded(with: accountInfo)
+    }
+    
+    func didObtainAccountInfoError(with text: String) {
+        didObtainError(with: text, isNeedStopRefresh: false)
+    }
+    
+    func didObtainInstaPickStatus(status: InstapickAnalyzesCount) {
+        CardsManager.default.configureInstaPick(with: status)
+    }
+    
+    func showGiftBox() {
+        view.showGiftBox()
+    }
+    
+    func hideGiftBox() {
+        view.hideGiftBox()
+    }
+    
+    func didObtainPermissionAllowance(response: SettingsPermissionsResponse) {
+        decreaseDispatchGroupValue(for: .waitPermissionAllowanceResponse)
+        guard let eulaURL = response.eulaURL else {
+            // do nothing
+            return
+        }
+        shouldPermissionPopupAppear(response: response) ? router.presentMobilePaymentPermissionPopUp(url: eulaURL, isFirstAppear: true) : ()
+    }
+    
+    func showSuccessMobilePaymentPopup() {
+        router.presentSuccessMobilePaymentPopUp()
+    }
+    
+    // MARK: - DiscoverInteractorOutput Private Utility Methods
+    
+    private func prepareDispatchGroup() {
+        presentPopUpsGroup = DispatchGroup()
+        
+        dispatchGroupReasons = DispatchGroupReason.allCases
+        dispatchGroupReasons.forEach { _ in
+            presentPopUpsGroup?.enter()
+        }
+        
+        presentPopUpsGroup?.notify(queue: DispatchQueue.main) { [weak self] in
+            self?.presentPopUpsGroup = nil
+            self?.router.presentPopUps()
+        }
+    }
+    
+    private func verifyEmailIfNeeded(with accountInfo: AccountInfoResponse) {
+        guard accountInfo.emailVerified == false else {
+            return
+        }
+        
+        router.presentEmailVerificationPopUp()
+    }
+
+    private func verifyRecoveryEmailIfNeeded(with accountInfo: AccountInfoResponse) {
+        guard accountInfo.recoveryEmail != nil, accountInfo.recoveryEmailVerified == false else {
+            return
+        }
+
+        router.presentRecoveryEmailVerificationPopUp()
+    }
+    
+    private func credsCheckUpdateIfNeeded(with accountInfo: AccountInfoResponse) {
+        guard accountInfo.isUpdateInformationRequired == true else {
+            return
+        }
+        
+        let email = accountInfo.email ?? ""
+        let fullPhoneNumber = accountInfo.fullPhoneNumber
+        let message = "\(email)\n\(fullPhoneNumber)"
+        
+        router.presentCredsUpdateCkeckPopUp(message: message, userInfo: accountInfo)
+    }
+    
+    private func checkMobilePaymentPermission(with accountInfo: AccountInfoResponse) {
+        guard accountInfo.isUpdateMobilePaymentPermissionRequired == true else {
+            decreaseDispatchGroupValue(for: .waitPermissionAllowanceResponse)
+            return
+        }
+        interactor.getPermissionAllowanceInfo(type: .mobilePayment)
+    }
+    
+    private func shouldPermissionPopupAppear(response: SettingsPermissionsResponse) -> Bool {
+        guard
+            let isAllowed = response.isAllowed,
+            let isApproved = response.isApproved,
+            let isEulaApproved = response.isApproved,
+            isAllowed,
+            !isApproved || (isApproved && !isEulaApproved)
+        else {
+            return false
+        }
+        return true
+    }
+    
+    private func addSecurityInfoIfNeeded(with accountInfo: AccountInfoResponse) {
+        if accountInfo.hasRecoveryMail != true && accountInfo.hasSecurityQuestionInfo != true {
+            let storageVars: StorageVars = factory.resolve()
+            if !storageVars.isUserFirstLoggedIn {
+                router.presentSecurityInfoViewController()
+            } else {
+                storageVars.isUserFirstLoggedIn = false
+            }
+        }
     }
 }
 
 extension DiscoverPresenter: DiscoverViewOutput {
     
-    func getModelCards() -> Any? {
-        cards.filter{
-            guard let details = $0.details?["thumbnail"],
-                  let urlStr = details as? String,
-                  !urlStr.isEmpty else { return false }
-
-            return true
-        }
-        //cards
+    func viewIsReady() {
+        prepareDispatchGroup()
+        interactor.viewIsReady()
     }
     
-    func navigate(for view: HomeCardTypes) {
-        router.navigate(for: view)
+    func viewWillAppear() {
+        spotlightManager.delegate = self
+        if !isFirstAppear {
+            view.startSpinner()
+            interactor.updateLocalUserDetail()
+        }
+        interactor.trackScreen()
     }
+    
+    func viewIsReadyForPopUps() {
+        if isFirstAppear {
+            isFirstAppear = false
+            decreaseDispatchGroupValue(for: .waitTillViewDidAppear)
+        }
+        HomePagePopUpsService.shared.continueAfterPushIfNeeded()
+    }
+    
+    func showSettings() {
+        router.moveToSettingsScreen()
+    }
+    
+    func showSearch(output: UIViewController?) {
+        router.moveToSearchScreen(output: output)
+    }
+    
+    func onSyncContacts() {
+        router.moveToSyncContacts()
+    }
+    
+    func allFilesPressed() {
+        router.moveToAllFilesPage()
+    }
+    
+    func favoritesPressed() {
+        router.moveToFavouritsFilesPage()
+    }
+    
+    func createStory() {
+        router.moveToCreationStory()
+    }
+    
+    func needRefresh() {
+        cards.removeAll()
+        interactor.needRefresh()
+    }
+    
+    func shownSpotlight(type: SpotlightType) {
+        spotlightManager.shownSpotlight(type: type)
+    }
+    
+    func closedSpotlight(type: SpotlightType) {
+        spotlightManager.closedSpotlight(type: type)
+    }
+        
+    func requestShowSpotlight(for types: [SpotlightType]) {
+        spotlightManager.requestShowSpotlight(for: types)
+    }
+    
+    func giftButtonPressed() {
+        interactor.trackGiftTapped()
+        router.openCampaignDetails()
+    }
+    
+}
+
+//MARK: - SpotlightManagerDelegate
+extension DiscoverPresenter: SpotlightManagerDelegate {
+    
+    func needShowSpotlight(type: SpotlightType) {
+        if interactor.homeCardsLoaded {
+            view.needShowSpotlight(type: type)
+        }
+    }
+    
 }

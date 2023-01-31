@@ -120,15 +120,29 @@ class ForYouCardsCollectionViewCell: UICollectionViewCell {
     @IBAction private func onShowDetail(_ sender: UIButton) {
         guard let currentView = currentView else { return }
 
-        switch currentView {
-        case .albumCards:
-            displayAlbum()
-        case .collageCards:
-            displayCollage()
-        case .animationCards:
-            displayAnimation()
-        default:
-            return
+        switch cardType {
+        case .save:
+            switch currentView {
+            case .albumCards:
+                displayAlbum()
+            case .collageCards:
+                displayCollage()
+            case .animationCards:
+                displayAnimation()
+            default:
+                return
+            }
+        case .display:
+            switch currentView {
+            case .albumCards:
+                displayAlbum()
+            case .collageCards:
+                showSavedCollage()
+            case .animationCards:
+                showSavedAnimation()
+            default:
+                break
+            }
         }
     }
     

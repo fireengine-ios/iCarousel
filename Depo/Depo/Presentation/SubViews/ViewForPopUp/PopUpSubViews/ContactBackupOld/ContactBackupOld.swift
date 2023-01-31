@@ -27,22 +27,22 @@ class ContactBackupOld: BaseCardView {
     override func configurateView() {
         super.configurateView()
         
-        headerLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
-        headerLabel?.textColor = ColorConstants.darkText
+        headerLabel?.font = .appFont(.medium, size: 16)
+        headerLabel?.textColor = AppColor.label.color
         headerLabel?.text = TextConstants.homePageContactBacupHeader
         
-        titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        titleLabel?.textColor = ColorConstants.textGrayColor
+        titleLabel?.font = .appFont(.medium, size: 14)
+        titleLabel?.textColor = AppColor.label.color
         
-        subTitle?.font = UIFont.TurkcellSaturaRegFont(size: 12)
-        subTitle?.textColor = ColorConstants.textGrayColor
+        subTitle?.font = .appFont(.light, size: 14)
+        subTitle?.textColor = AppColor.label.color
         
-        bacupButton?.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
-        bacupButton?.setTitleColor(ColorConstants.blueColor, for: .normal)
+        bacupButton?.titleLabel?.font = .appFont(.bold, size: 14)
+        bacupButton?.setTitleColor(AppColor.settingsButtonColor.color, for: .normal)
         bacupButton?.setTitle(TextConstants.homePageContactBacupButton, for: .normal)
         
-        lastUpdateLabel?.font = UIFont.TurkcellSaturaRegFont(size: 14)
-        lastUpdateLabel?.textColor = ColorConstants.darkBorder
+        lastUpdateLabel?.font = .appFont(.light, size: 14)
+        lastUpdateLabel?.textColor = AppColor.label.color
     }
     
     override func set(object: HomeCardResponse?) {
@@ -98,7 +98,7 @@ class ContactBackupOld: BaseCardView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        let bottomSpace : CGFloat = 0.0
+        let bottomSpace : CGFloat = 12.0
         let h = bacupButton.frame.origin.y + bacupButton.frame.size.height + bottomSpace
         if calculatedH != h{
             calculatedH = h
