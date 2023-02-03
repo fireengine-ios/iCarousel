@@ -36,7 +36,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
     var editingTabBar: BottomSelectionTabBarViewController!
     var isPublicSharedItem = false
     private var needToScrollAfterRotation = true
-    var videoExtension: String = ""
 
     private var isFullScreen = false {
         didSet {
@@ -749,19 +748,23 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
             }
             
         case .remoteUrl(_):
-            videoExtension = file.uploadContentType.components(separatedBy: "/").last ?? "mp4"
             if file.status.isContained(in: [.uploaded, .transcoding, .transcodingFailed]),
                let tmpDownloadUrl = file.tmpDownloadUrl {
-                startDownload(with: tmpDownloadUrl)
+                let videoExtension = file.uploadContentType.components(separatedBy: "/").last ?? "mp4"
+                let playerItem = CachingPlayerItem(url: tmpDownloadUrl, customFileExtension: videoExtension)
+                callPlayAction(with: playerItem)
             } else {
-                debugLog("about to play remote video item")
-                DispatchQueue.global(qos: .default).async { [weak self] in
-                    let playerItem = AVPlayerItem(url: url)
-                    debugLog("playerItem created \(playerItem.asset.isPlayable)")
-                    DispatchQueue.main.async {
-                        self?.play(item: playerItem)
-                    }
-                }
+                let playerItem = AVPlayerItem(url: url)
+                callPlayAction(with: playerItem)
+            }
+        }
+    }
+    
+    private func callPlayAction(with playerItem: AVPlayerItem) {
+        DispatchQueue.global(qos: .default).async { [weak self] in
+            debugLog("playerItem created \(playerItem.asset.isPlayable)")
+            DispatchQueue.main.async {
+                self?.play(item: playerItem)
             }
         }
     }
@@ -791,60 +794,6 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
                 cell?.addTextSelectionInteraction(data)
             }
         }
-    }
-}
-
-extension PhotoVideoDetailViewController: URLSessionDownloadDelegate {
-    func startDownload(with videoUrl: URL) {
-        let operationQueue = OperationQueue()
-        let session = URLSession(configuration: .default, delegate: self, delegateQueue: operationQueue)
-        let downloadTask = session.downloadTask(with: videoUrl)
-        downloadTask.resume()
-    }
-    
-    // MARK: protocol stub for download completion tracking
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-        do {
-            let downloadedData = try Data(contentsOf: location)
-            
-            DispatchQueue.main.async(execute: { [weak self] in
-                print("Download in progress: transfer completion OK!")
-                
-                let documentDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as NSString
-                let destinationPath = documentDirectoryPath.appendingPathComponent("downloadedVideo.\(self?.videoExtension ?? "mp4")")
-                
-                print("Download in progress: downloadedVideo.\(self?.videoExtension ?? "mp4")")
-                
-                let pdfFileURL = URL(fileURLWithPath: destinationPath)
-                
-                if FileManager.default.fileExists(atPath: pdfFileURL.path) {
-                    try? FileManager.default.removeItem(at: pdfFileURL)
-                }
-                
-                FileManager.default.createFile(atPath: pdfFileURL.path,
-                                               contents: downloadedData,
-                                               attributes: nil)
-                
-                if FileManager.default.fileExists(atPath: pdfFileURL.path) {
-                    print("Download in progress: pdfFileURL present!") // Confirm that the file is here!
-                    print("Download in progress: Downloaded Data: \(pdfFileURL.path)")
-                    
-                    let playerItem = AVPlayerItem(url: pdfFileURL)
-                    print("Download in progress: playerItem created \(playerItem.asset.isPlayable)")
-                    DispatchQueue.main.async {
-                        self?.play(item: playerItem)
-                    }
-                }
-            })
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-    
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-        let progress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
-        
-        print("Download in progress: " + " - " + "\(progress * 100)".components(separatedBy: ".")[0] + "%")
     }
 }
 
