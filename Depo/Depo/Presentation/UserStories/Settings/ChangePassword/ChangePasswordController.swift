@@ -259,6 +259,7 @@ final class ChangePasswordController: BaseViewController, KeyboardHandler, NibIn
             validationSet.newPasswordView.showSubtitleTextAnimated(text: errorText)
             validationSet.newPasswordView.textField.becomeFirstResponder()
             scrollToView(validationSet.newPasswordView)
+            showError(error)
             
         case .invalidOldPassword,
              .oldPasswordIsEmpty:
