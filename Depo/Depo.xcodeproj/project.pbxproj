@@ -1098,6 +1098,10 @@
 		52501E1E29623BE40000376C /* SwiftTryCatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 52501E1C29623BE40000376C /* SwiftTryCatch.m */; };
 		52501E1F29623BE40000376C /* SwiftTryCatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 52501E1C29623BE40000376C /* SwiftTryCatch.m */; };
 		52501E2029623BE40000376C /* SwiftTryCatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 52501E1C29623BE40000376C /* SwiftTryCatch.m */; };
+		52501E5B298CA1270000376C /* CachingPlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52501E5A298CA1270000376C /* CachingPlayerItem.swift */; };
+		52501E5C298CA1270000376C /* CachingPlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52501E5A298CA1270000376C /* CachingPlayerItem.swift */; };
+		52501E5D298CA1270000376C /* CachingPlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52501E5A298CA1270000376C /* CachingPlayerItem.swift */; };
+		52501E5E298CA1270000376C /* CachingPlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52501E5A298CA1270000376C /* CachingPlayerItem.swift */; };
 		527302E32940CFDC0061E754 /* DeeplinkHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527302E22940CFDC0061E754 /* DeeplinkHandlerProtocol.swift */; };
 		527302E42940CFDC0061E754 /* DeeplinkHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527302E22940CFDC0061E754 /* DeeplinkHandlerProtocol.swift */; };
 		527302E52940CFDC0061E754 /* DeeplinkHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527302E22940CFDC0061E754 /* DeeplinkHandlerProtocol.swift */; };
@@ -10195,6 +10199,7 @@
 		522A5BBD8B55E5DF0DE0472B /* Pods-Billo.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billo.enterprise.xcconfig"; path = "Target Support Files/Pods-Billo/Pods-Billo.enterprise.xcconfig"; sourceTree = "<group>"; };
 		52501E1B29623BE40000376C /* SwiftTryCatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftTryCatch.h; sourceTree = "<group>"; };
 		52501E1C29623BE40000376C /* SwiftTryCatch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwiftTryCatch.m; sourceTree = "<group>"; };
+		52501E5A298CA1270000376C /* CachingPlayerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingPlayerItem.swift; sourceTree = "<group>"; };
 		527302E22940CFDC0061E754 /* DeeplinkHandlerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkHandlerProtocol.swift; sourceTree = "<group>"; };
 		527302E72940D0110061E754 /* DeeplinkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkCoordinator.swift; sourceTree = "<group>"; };
 		527302EC2940D1120061E754 /* BrandAmbassadorDeeplinkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandAmbassadorDeeplinkHandler.swift; sourceTree = "<group>"; };
@@ -14501,6 +14506,14 @@
 				52501E1C29623BE40000376C /* SwiftTryCatch.m */,
 			);
 			path = ObjcFiles;
+			sourceTree = "<group>";
+		};
+		52501E56298CA10D0000376C /* CachingPlayerItem */ = {
+			isa = PBXGroup;
+			children = (
+				52501E5A298CA1270000376C /* CachingPlayerItem.swift */,
+			);
+			path = CachingPlayerItem;
 			sourceTree = "<group>";
 		};
 		527302E12940CFC10061E754 /* DeepLink */ = {
@@ -19648,6 +19661,7 @@
 		CE2BA7CA1FC7077500AA3EBE /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				52501E56298CA10D0000376C /* CachingPlayerItem */,
 				8C208686228D5386000BEDAD /* QuickScrollService */,
 				CEAD6BDD1F94EF320085FF30 /* Factory.swift */,
 				CE58FAFF20444524007F3F54 /* SharedFactory.swift */,
@@ -25527,6 +25541,7 @@
 				CE1458D02045734900812544 /* Alamofire+Validate.swift in Sources */,
 				730F8AB423CDA43D00798B61 /* UIView + CALayerBorder.swift in Sources */,
 				7C529689203EFE9D00BF3FBE /* SyncedBlock.swift in Sources */,
+				52501E5B298CA1270000376C /* CachingPlayerItem.swift in Sources */,
 				8C0E8C871FDEBDFF00789C91 /* UIImageView.swift in Sources */,
 				F062042A290DA72300A03F06 /* ForYouBlurCollectionViewCell.swift in Sources */,
 				B5C7C580211C699F006E94DB /* AugmentedRealityController.swift in Sources */,
@@ -28414,6 +28429,7 @@
 				CE784A2B22A685FB00662219 /* TurkcellUpdaterService.swift in Sources */,
 				CE784A2C22A685FB00662219 /* PhoneVerificationViewController.swift in Sources */,
 				CE784A2D22A685FB00662219 /* AnalyticsPackageProductObject.swift in Sources */,
+				52501E5D298CA1270000376C /* CachingPlayerItem.swift in Sources */,
 				B585741524BDD90100A71EAD /* AnimatedCircularLoader.swift in Sources */,
 				CE784A2E22A685FB00662219 /* PhoneVerificationModuleInput.swift in Sources */,
 				07DB93B12860AF5400D5CACF /* ReceiptParser.swift in Sources */,
@@ -29493,6 +29509,7 @@
 				CF8B63D723CBC9D70021B021 /* ActivityTimelineTimeCell.swift in Sources */,
 				077EEFAB26E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift in Sources */,
 				CF8B63D823CBC9D70021B021 /* PaycellViewController.swift in Sources */,
+				52501E5C298CA1270000376C /* CachingPlayerItem.swift in Sources */,
 				CF8B63D923CBC9D70021B021 /* FaceImageAddNamePresenter.swift in Sources */,
 				CF8B63DA23CBC9D70021B021 /* ItemOperationManager.swift in Sources */,
 				CF8B63DB23CBC9D70021B021 /* MusicBar.swift in Sources */,
@@ -32127,6 +32144,7 @@
 				CF8B6E0723CBCA280021B021 /* PeriodicContactSyncConfigurator.swift in Sources */,
 				CF8B6E0823CBCA280021B021 /* ForgotPasswordRouter.swift in Sources */,
 				CF8B6E0923CBCA280021B021 /* ProgressCard.swift in Sources */,
+				52501E5E298CA1270000376C /* CachingPlayerItem.swift in Sources */,
 				CF8B6E0A23CBCA280021B021 /* ForgotPasswordConfigurator.swift in Sources */,
 				CF8B6E0B23CBCA280021B021 /* ForgotPasswordInitializer.swift in Sources */,
 				CF7146F224B597A900D83E60 /* ContactListDataSource.swift in Sources */,
