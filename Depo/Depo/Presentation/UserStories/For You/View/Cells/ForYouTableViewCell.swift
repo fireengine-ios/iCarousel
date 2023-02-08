@@ -79,6 +79,7 @@ final class ForYouTableViewCell: UITableViewCell {
         self.currentView = currentView
         titleLabel.text = currentView.title
         seeAllButton.isHidden = false
+        tbActionStatus = true
         hideSpinner()
         
         switch currentView {
