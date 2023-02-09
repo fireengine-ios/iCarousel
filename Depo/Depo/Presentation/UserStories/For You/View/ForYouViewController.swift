@@ -158,8 +158,8 @@ extension ForYouViewController: UITableViewDelegate {
 
 //MARK: -ForYouTableViewCellDelegate
 extension ForYouViewController: ForYouTableViewCellDelegate {
-    func navigateToThrowbackDetail(item: ThrowbackData) {
-        output.navigateToThrowbackDetail(item: item)
+    func navigateToThrowbackDetail(item: ThrowbackData, completion: @escaping VoidHandler) {
+        output.navigateToThrowbackDetail(item: item, completion: completion)
     }
     
     func navigateToItemPreview(item: WrapData, items: [WrapData], currentSection: ForYouSections) {
