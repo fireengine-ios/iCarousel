@@ -89,6 +89,7 @@ final class FreeUpSpacePopUp: BaseCardView {
         
         switch viewType {
         case .freeAppSpace:
+            bigTitleLabel.text = TextConstants.freeUpSpaceBigTitle
             titleLabel.text = TextConstants.freeAppSpacePopUpTextNormal
             bigTitleLabel.isHidden = false
             titleLabel.isHidden = false

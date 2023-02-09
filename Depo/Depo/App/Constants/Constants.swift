@@ -830,6 +830,7 @@ struct TextConstants {
     static let freeUpSpaceAlertTitle = localized("free_up_space_alert_title")
     static let freeUpSpaceNoDuplicates = localized("free_up_space_no_duplicates")
     static let freeUpSpaceInProgress = localized("free_up_space_in_progress")
+    static let freeUpSpaceBigTitle = localized("free_up_space_title")
     static let networkTypeWiFi = localized("Wi-Fi")
     static let mobileData = localized("Mobile Data")
     static let autoUploaOffPopUpTitleText = localized("Auto Upload is off.")

@@ -74,9 +74,9 @@ extension ForYouPresenter: ForYouViewOutput {
         router.navigateToItemPreview(item: item, items: items)
     }
     
-    func navigateToThrowbackDetail(item: ThrowbackData) {
+    func navigateToThrowbackDetail(item: ThrowbackData, completion: @escaping VoidHandler) {
         self.currentSection = .throwback
-        interactor.getThrowbackDetails(with: item)
+        interactor.getThrowbackDetails(with: item, completion: completion)
     }
     
     func getHeightForRow(at view: ForYouSections) -> Int {

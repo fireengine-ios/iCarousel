@@ -362,6 +362,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
                 return
             }
             let title = date.getDateInTextForCollectionViewHeader()
+            
             self?.scrollBarManager.scrollBar.setText(title)
         }
     }

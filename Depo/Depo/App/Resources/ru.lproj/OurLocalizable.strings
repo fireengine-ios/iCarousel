@@ -2067,3 +2067,7 @@ then {11,99 TRY/Month}*/
 "empty_gallery_no_sync" = "В вашем lifebox пока нет фотографий";
 "empty_gallery_no_unsync" = "В вашем lifebox нет не обновленных файлов";
 "subscription_offer_cancel_button" = "Отмена";
+"paycell_share_message " = "";
+"ksaldalks" = "";
+"free_up_space_title" = "Место на устройстве почти заполнено!";
+"notification_menu_item" = "Уведомления";

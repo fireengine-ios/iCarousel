@@ -172,6 +172,12 @@ class SegmentedController: BaseViewController, NibInit {
         floatingButtonsArray = controller.floatingButtonsArray
     }
     
+    func setupSelectedController(_ controller: BaseViewController, index: Int) {
+        controller.navigationBarHidden = self.navigationBarHidden
+        add(childController: controller)
+        floatingButtonsArray = [FloatingButtonsType.uploadDocumentsAndMusic]
+    }
+    
     private func add(childController: UIViewController) {
         addChild(childController)
         childController.view.frame = containerView.bounds

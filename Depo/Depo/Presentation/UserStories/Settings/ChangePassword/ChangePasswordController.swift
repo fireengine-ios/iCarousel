@@ -188,7 +188,8 @@ final class ChangePasswordController: BaseViewController, KeyboardHandler, NibIn
             self?.hideSpinnerIncludeNavigationBar()
             }, fail: { [weak self] errorResponse  in
                 if errorResponse.description.contains("Captcha required") {
-                    self?.showLogoutPopup()
+                    /// It may be needed later, depending on the situation.
+                    //self?.showLogoutPopup()
                     self?.hideSpinnerIncludeNavigationBar()
                 } else {
                     self?.showError(errorResponse)
@@ -258,6 +259,7 @@ final class ChangePasswordController: BaseViewController, KeyboardHandler, NibIn
             validationSet.newPasswordView.showSubtitleTextAnimated(text: errorText)
             validationSet.newPasswordView.textField.becomeFirstResponder()
             scrollToView(validationSet.newPasswordView)
+            showError(error)
             
         case .invalidOldPassword,
              .oldPasswordIsEmpty:

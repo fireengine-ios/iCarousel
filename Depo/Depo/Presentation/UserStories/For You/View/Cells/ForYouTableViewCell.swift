@@ -15,7 +15,7 @@ protocol ForYouTableViewCellDelegate: AnyObject {
     func navigateToItemDetail(item: WrapData, faceImageType: FaceImageType?, currentSection: ForYouSections)
     func naviateToAlbumDetail(album: AlbumItem)
     func navigateToItemPreview(item: WrapData, items: [WrapData], currentSection: ForYouSections)
-    func navigateToThrowbackDetail(item: ThrowbackData)
+    func navigateToThrowbackDetail(item: ThrowbackData, completion: @escaping VoidHandler)
     
     func displayAlbum(item: AlbumItem)
     func displayAnimation(item: WrapData)
@@ -59,6 +59,7 @@ final class ForYouTableViewCell: UITableViewCell {
     private var cardsData: [HomeCardResponse] = []
     private var throwbackData: [ThrowbackData] = []
     private var currentView: ForYouSections?
+    private var tbActionStatus = true
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -78,6 +79,7 @@ final class ForYouTableViewCell: UITableViewCell {
         self.currentView = currentView
         titleLabel.text = currentView.title
         seeAllButton.isHidden = false
+        tbActionStatus = true
         hideSpinner()
         
         switch currentView {
@@ -252,9 +254,14 @@ extension ForYouTableViewCell: UICollectionViewDelegateFlowLayout {
             let item = wrapData[indexPath.row]
             delegate?.navigateToItemPreview(item: item, items: wrapData, currentSection: currentView)
         case .throwback:
+            guard tbActionStatus else { return }
+            tbActionStatus.toggle()
+            
             let item = throwbackData[indexPath.row]
             debugLog("tbcard \(indexPath.row)")
-            delegate?.navigateToThrowbackDetail(item: item)
+            delegate?.navigateToThrowbackDetail(item: item) { [weak self] in
+                self?.tbActionStatus.toggle()
+            }
         default:
             return
         }

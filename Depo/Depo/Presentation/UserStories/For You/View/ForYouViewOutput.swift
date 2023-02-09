@@ -17,7 +17,7 @@ protocol ForYouViewOutput: AnyObject {
     func navigateToItemDetail(item: WrapData, faceImageType: FaceImageType?, currentSection: ForYouSections)
     func navigateToAlbumDetail(album: AlbumItem)
     func navigateToItemPreview(item: WrapData, items: [WrapData], currentSection: ForYouSections)
-    func navigateToThrowbackDetail(item: ThrowbackData)
+    func navigateToThrowbackDetail(item: ThrowbackData, completion: @escaping VoidHandler)
     func getHeightForRow(at view: ForYouSections) -> Int
     func getModel(for view: ForYouSections) -> Any?
     func getUpdateData(for section: ForYouSections?)

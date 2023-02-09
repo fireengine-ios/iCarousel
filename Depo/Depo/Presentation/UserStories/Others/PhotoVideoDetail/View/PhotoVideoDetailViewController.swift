@@ -748,13 +748,23 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
             }
             
         case .remoteUrl(_):
-            debugLog("about to play remote video item")
-            DispatchQueue.global(qos: .default).async { [weak self] in
+            if file.status.isContained(in: [.uploaded, .transcoding, .transcodingFailed]),
+               let tmpDownloadUrl = file.tmpDownloadUrl {
+                let videoExtension = file.uploadContentType.components(separatedBy: "/").last ?? "mp4"
+                let playerItem = CachingPlayerItem(url: tmpDownloadUrl, customFileExtension: videoExtension)
+                callPlayAction(with: playerItem)
+            } else {
                 let playerItem = AVPlayerItem(url: url)
-                debugLog("playerItem created \(playerItem.asset.isPlayable)")
-                DispatchQueue.main.async {
-                    self?.play(item: playerItem)
-                }
+                callPlayAction(with: playerItem)
+            }
+        }
+    }
+    
+    private func callPlayAction(with playerItem: AVPlayerItem) {
+        DispatchQueue.global(qos: .default).async { [weak self] in
+            debugLog("playerItem created \(playerItem.asset.isPlayable)")
+            DispatchQueue.main.async {
+                self?.play(item: playerItem)
             }
         }
     }

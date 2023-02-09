@@ -209,8 +209,6 @@ final class CaptchaView: UIView, FromNib {
                                             eventActions: .captcha,
                                             eventLabel: .captcha(.voiceClick))
         
-        generateCaptchaUUID()
-        
         captchaService.getCaptcha(uuid: currentCaptchaUUID, type: .audio, sucess: { [weak self] response in
             if let captchaResponse = response as? CaptchaResponse,
                 let _ = captchaResponse.type,

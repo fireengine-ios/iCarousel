@@ -410,7 +410,7 @@ extension ForYouInteractor: ForYouInteractorInput {
         }
     }
     
-    func getThrowbackDetails(with item: ThrowbackData) {
+    func getThrowbackDetails(with item: ThrowbackData, completion: @escaping VoidHandler) {
         debugLog("ForYou throwbackDetails")
         guard let id = item.id else { return }
 
@@ -421,6 +421,7 @@ extension ForYouInteractor: ForYouInteractorInput {
             case .failed(_):
                 self.output.throwbackDetailFailed()
             }
+            completion()
         }
     }
 }

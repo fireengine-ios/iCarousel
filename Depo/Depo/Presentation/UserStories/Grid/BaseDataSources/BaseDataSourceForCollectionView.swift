@@ -1302,7 +1302,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             if let url = url {
                 cell_.setImage(with: url)
             } else {
-                if wraped.status.isContained(in: [.uploaded, .transcoding, .transcodingFailed]),
+                if  wraped.fileType != .video,
+                    wraped.status.isContained(in: [.uploaded, .transcoding, .transcodingFailed]),
                    let downloadUrl = wraped.tmpDownloadUrl
                 {
                     cell_.setImage(with: downloadUrl)
