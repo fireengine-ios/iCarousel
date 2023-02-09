@@ -439,6 +439,13 @@ extension TabBarViewController: TabBarActionHandler {
             }
             
             externalFileUploadService.showViewController(router: router, externalFileType: .audio)
+            
+        case .uploadDocumentsAndMusic:
+            guard !checkReadOnlyPermission() else {
+                return
+            }
+            
+            externalFileUploadService.showViewController(router: router, externalFileType: .documentsandaudio)
                 
         case .createAlbum:
             let controller = router.createNewAlbum()

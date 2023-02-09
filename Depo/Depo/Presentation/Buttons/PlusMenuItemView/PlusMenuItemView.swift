@@ -20,6 +20,7 @@ enum FloatingButtonsType {
     case uploadFiles
     case uploadDocuments
     case uploadMusic
+    case uploadDocumentsAndMusic
     
     var title: String {
         switch self {
@@ -41,6 +42,8 @@ enum FloatingButtonsType {
             return TextConstants.createAlbum
         case .importFromSpotify:
             return TextConstants.importFromSpotifyBtn
+        case .uploadDocumentsAndMusic:
+            return TextConstants.uploadFiles
         }
     }
     
@@ -52,7 +55,8 @@ enum FloatingButtonsType {
              .uploadDocuments,
              .uploadMusic,
              .uploadFromLifebox,
-             .uploadFromLifeboxFavorites:
+             .uploadFromLifeboxFavorites,
+             .uploadDocumentsAndMusic:
             return Image.iconFileUpload.image
         case .upload:
             return Image.iconUploadPhoto.image
@@ -89,6 +93,8 @@ enum FloatingButtonsType {
             return .createAlbum
         case .importFromSpotify:
             return .importFromSpotify
+        case .uploadDocumentsAndMusic:
+            return .uploadDocumentsAndMusic
         }
     }
 }

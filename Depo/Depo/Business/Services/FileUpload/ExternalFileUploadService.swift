@@ -15,6 +15,7 @@ enum ExternalFileType {
     case any
     case documents
     case audio
+    case documentsandaudio
     
     var allowedUTITypes: [String] {
         switch self {
@@ -26,6 +27,9 @@ enum ExternalFileType {
                 
             case .audio:
                 return [kUTTypeAudio] as [String]
+            
+            case .documentsandaudio:
+                return [kUTTypeCompositeContent, kUTTypeText, kUTTypeArchive, kUTTypeAudio] as [String]
         }
     }
 }
