@@ -110,6 +110,12 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         }
         
         setupRefresher()
+        
+        print("aaaaaaaaaaax1")
+        if !(SingletonStorage.shared.accountInfo?.recoveryEmailVerified ?? true) {
+            print("aaaaaaaaaaax")
+            presentRecoveryEmailVerificationPopUp()
+        }
     }
 
     private func setupRefresher() {
@@ -545,6 +551,13 @@ extension PhotoVideoController: UIScrollViewDelegate {
         let lastIndexPath = IndexPath(row: lastRowNumber, section: lastSectionNumber)
         
         return indexPath == lastIndexPath
+    }
+    
+    func presentRecoveryEmailVerificationPopUp() {
+        let popup = RouterVC().verifyRecoveryEmailPopUp
+        popup.alwaysShowsLaterButton = true
+        //popup.delegate = self
+        present(popup, animated: true)
     }
     
 }
