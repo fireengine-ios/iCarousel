@@ -1452,7 +1452,7 @@
 "tabbar_item_home_label" = "მთავარი";
 "tabbar_item_gallery_label" = "გალერეა";
 "tabbar_item_contacts_label" = "კონტაქტები";
-"tabbar_item_all_files_label" = "ყველა ფაილი";
+"tabbar_item_all_files_label" = "ფაილები";
 "see_features" = "მახასიათებლების ჩვენება";
 "middle_user_package_description" = "+ 15 PhotoPick ანალიზი (მიიღეთ მეტი მოწონება Instagram-ზე)";
 "features_only_package_addon_type" = "Premium მახასიათებლები";
@@ -2051,3 +2051,7 @@ then {11,99 TRY/Month}*/
 "empty_gallery_no_sync" = "ჯერ არ გაქვს ფოტოები lifebox-ში.";
 "empty_gallery_no_unsync" = "ყველა ფაილი განახლებულია";
 "subscription_offer_cancel_button" = "გაუქმება";
+"paycell_share_message " = "შენ გაქვს 5GB lifebox მეხსიერება, დააჭირე რომ გამოისყიდო";
+"ksaldalks" = "-";
+"free_up_space_title" = "მეხსიერება არაა საკმარისი";
+"notification_menu_item" = "";
