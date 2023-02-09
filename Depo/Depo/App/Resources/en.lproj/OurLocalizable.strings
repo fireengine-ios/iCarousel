@@ -2115,3 +2115,9 @@ then {11,99 TRY/Month}*/
 "empty_gallery_no_sync" = "You don’t have any photos in your lifebox yet.";
 "empty_gallery_no_unsync" = "All of your files are updated to lifebox.";
 "subscription_offer_cancel_button" = "Cancel";
+
+/*Fuzzy*/
+"paycell_share_message " = "You have been sent 5GB of lifebox storage, click to redeem";
+"ksaldalks" = "";
+"free_up_space_title" = "Device space is almost full";
+"notification_menu_item" = "Notifications";
