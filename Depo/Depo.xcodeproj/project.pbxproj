@@ -1187,6 +1187,14 @@
 		52BF679728FFE05300D8D4E6 /* PasswordValidationSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF679528FFE05300D8D4E6 /* PasswordValidationSetView.swift */; };
 		52BF679828FFE05300D8D4E6 /* PasswordValidationSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF679528FFE05300D8D4E6 /* PasswordValidationSetView.swift */; };
 		52BF679928FFE05300D8D4E6 /* PasswordValidationSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF679528FFE05300D8D4E6 /* PasswordValidationSetView.swift */; };
+		52C1BB932996770C00D9FB09 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C1BB922996770C00D9FB09 /* NotificationTableViewCell.swift */; };
+		52C1BB942996770C00D9FB09 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C1BB922996770C00D9FB09 /* NotificationTableViewCell.swift */; };
+		52C1BB952996770C00D9FB09 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C1BB922996770C00D9FB09 /* NotificationTableViewCell.swift */; };
+		52C1BB962996770C00D9FB09 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C1BB922996770C00D9FB09 /* NotificationTableViewCell.swift */; };
+		52C1BB99299678AB00D9FB09 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C1BB98299678AB00D9FB09 /* NotificationModel.swift */; };
+		52C1BB9A299678AB00D9FB09 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C1BB98299678AB00D9FB09 /* NotificationModel.swift */; };
+		52C1BB9B299678AB00D9FB09 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C1BB98299678AB00D9FB09 /* NotificationModel.swift */; };
+		52C1BB9C299678AB00D9FB09 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C1BB98299678AB00D9FB09 /* NotificationModel.swift */; };
 		52E0994528C1ECCB004AE4EC /* PackagesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56091F7552A900F49DA1 /* PackagesPresenter.swift */; };
 		52E0994628C1ECCC004AE4EC /* PackagesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56091F7552A900F49DA1 /* PackagesPresenter.swift */; };
 		52E0994728C1ECD0004AE4EC /* PackagesInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56061F7552A900F49DA1 /* PackagesInteractorOutput.swift */; };
@@ -10270,6 +10278,8 @@
 		52A5E03C29252B4300670B0C /* CustomAVPlayerLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAVPlayerLayer.swift; sourceTree = "<group>"; };
 		52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackagesBannerBuyPremiumView.swift; sourceTree = "<group>"; };
 		52BF679528FFE05300D8D4E6 /* PasswordValidationSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidationSetView.swift; sourceTree = "<group>"; };
+		52C1BB922996770C00D9FB09 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		52C1BB98299678AB00D9FB09 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		536B87BE9C6EA2601A4F42F3 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		5376886D3258645ED3B6E003 /* Pods-TC_Depo_LifeTech.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TC_Depo_LifeTech.debug.xcconfig"; path = "Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech.debug.xcconfig"; sourceTree = "<group>"; };
 		54C522C58BC4B88E39F9443C /* Pods_LifeboxFileProvider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxFileProvider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -14579,6 +14589,7 @@
 		52501E6529951C320000376C /* Notification */ = {
 			isa = PBXGroup;
 			children = (
+				52C1BB972996788B00D9FB09 /* Models */,
 				52501E6629951C490000376C /* Configurator */,
 				52501E6729951C540000376C /* Interactor */,
 				52501E6829951C640000376C /* Presenter */,
@@ -14628,6 +14639,7 @@
 		52501E6A29951C7C0000376C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				52C1BB8E299676B600D9FB09 /* Cells */,
 				52501E7029952A190000376C /* NotificationViewInput.swift */,
 				52501E7529952A2D0000376C /* NotificationViewOutput.swift */,
 				52501E6B299528360000376C /* NotificationViewController.swift */,
@@ -14684,6 +14696,22 @@
 				52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */,
 			);
 			path = SnackBarHeaderTwoLineView;
+			sourceTree = "<group>";
+		};
+		52C1BB8E299676B600D9FB09 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				52C1BB922996770C00D9FB09 /* NotificationTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		52C1BB972996788B00D9FB09 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				52C1BB98299678AB00D9FB09 /* NotificationModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		5525BBEDE21BEBBAE72FED00 /* Router */ = {
@@ -26461,6 +26489,7 @@
 				8C0E8E271FDEBDFF00789C91 /* ForgotPasswordInteractorInput.swift in Sources */,
 				8C0E8E281FDEBDFF00789C91 /* ForgotPasswordInteractorOutput.swift in Sources */,
 				0303ED8A23BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift in Sources */,
+				52C1BB932996770C00D9FB09 /* NotificationTableViewCell.swift in Sources */,
 				B586A5AA21EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */,
 				8C0E8E291FDEBDFF00789C91 /* AutoSyncViewOutput.swift in Sources */,
 				89E51D5022CA111F007A7DBC /* CreateStoryPreviewModuleInput.swift in Sources */,
@@ -27028,6 +27057,7 @@
 				8C0E8F651FDEBDFF00789C91 /* UploadFilesSelectionInteractorOutput.swift in Sources */,
 				98792DD022FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift in Sources */,
 				8C0E8F661FDEBDFF00789C91 /* ResizableTableView.swift in Sources */,
+				52C1BB99299678AB00D9FB09 /* NotificationModel.swift in Sources */,
 				CE00B24E2202FB4300A5A696 /* PhotoSelectionController.swift in Sources */,
 				B5B01A7123FA7CB900B03426 /* ResumableUploadInfoService.swift in Sources */,
 				9808B44725540E7B002B0032 /* PrivateShareSuggestionItemView.swift in Sources */,
@@ -27963,6 +27993,7 @@
 				CE78489922A685FB00662219 /* LoginViewOutput.swift in Sources */,
 				CE78489A22A685FB00662219 /* FixedAVPlayerViewController.swift in Sources */,
 				CE78489B22A685FB00662219 /* SettingsTableViewCell.swift in Sources */,
+				52C1BB9B299678AB00D9FB09 /* NotificationModel.swift in Sources */,
 				CE78489C22A685FB00662219 /* HelpAndSupportModuleInput.swift in Sources */,
 				CE78489D22A685FB00662219 /* BaseFilesGreedChildrenViewController.swift in Sources */,
 				CE78489F22A685FB00662219 /* CustomSwitch.swift in Sources */,
@@ -29237,6 +29268,7 @@
 				CE784BF222A685FB00662219 /* UploadFilesSelectionRouter.swift in Sources */,
 				CE784BF322A685FB00662219 /* BackButtonActions.swift in Sources */,
 				CE784BF422A685FB00662219 /* UploadFilesSelectionInitializer.swift in Sources */,
+				52C1BB952996770C00D9FB09 /* NotificationTableViewCell.swift in Sources */,
 				CE784BF522A685FB00662219 /* PremiumViewInput.swift in Sources */,
 				CE784BF622A685FB00662219 /* SelectFolderViewController.swift in Sources */,
 				89959F052934B00F000135DE /* CollageInteractor.swift in Sources */,
@@ -29932,6 +29964,7 @@
 				CF8B64A523CBC9D70021B021 /* UploadFromLifeBoxInteractor.swift in Sources */,
 				52A5E023291C17F900670B0C /* CustomSegmentedView.swift in Sources */,
 				CF8B64A623CBC9D70021B021 /* UIApplication+topController.swift in Sources */,
+				52C1BB9A299678AB00D9FB09 /* NotificationModel.swift in Sources */,
 				174F99E7243D448900986C8B /* ControlContainableScrollView.swift in Sources */,
 				CF8B64A723CBC9D70021B021 /* VisualMusicPlayerViewOutput.swift in Sources */,
 				CF8B64A823CBC9D70021B021 /* MyStorageInteractorInput.swift in Sources */,
@@ -30395,6 +30428,7 @@
 				B57BC178252C89640083B5CD /* PHAsset+FetchAll.swift in Sources */,
 				CF8B65ED23CBC9D70021B021 /* PhoneVerificationConfigurator.swift in Sources */,
 				CF8B65EE23CBC9D70021B021 /* PhoneVerificationInitializer.swift in Sources */,
+				52C1BB942996770C00D9FB09 /* NotificationTableViewCell.swift in Sources */,
 				CF8B65EF23CBC9D70021B021 /* PeriodicContactSyncSettingsTableViewCell.swift in Sources */,
 				CF8B65F023CBC9D70021B021 /* MusicConfigurator.swift in Sources */,
 				CF8B65F123CBC9D70021B021 /* HelpAndSupportViewController.swift in Sources */,
@@ -32551,6 +32585,7 @@
 				CF8B6EB523CBCA280021B021 /* PhotoVideoDetailInteractorInput.swift in Sources */,
 				3A54C6ED264968DF00C2C8BD /* InvitationApiResponses.swift in Sources */,
 				CF8B6EB623CBCA280021B021 /* MediaItem+CoreDataClass.swift in Sources */,
+				52C1BB9C299678AB00D9FB09 /* NotificationModel.swift in Sources */,
 				074B23F6269CC4AE007529DB /* PhotoEditAnalytics.swift in Sources */,
 				CF8B6EB723CBCA280021B021 /* HelpAndSupportInteractor.swift in Sources */,
 				7326801924855248007E2CDF /* ExtandedTapAreaButton.swift in Sources */,
@@ -32701,6 +32736,7 @@
 				CF8B6F2523CBCA280021B021 /* GeneralFilesFiltration.swift in Sources */,
 				CF8B6F2623CBCA280021B021 /* SearchViewInteractorOutput.swift in Sources */,
 				CF8B6F2723CBCA280021B021 /* ThresholdBlockService.swift in Sources */,
+				52C1BB962996770C00D9FB09 /* NotificationTableViewCell.swift in Sources */,
 				F013FA91280591DF004B9BB8 /* SecurityInfoWarningPopup.swift in Sources */,
 				893DCFF1292B867400271379 /* DiscoverViewInput.swift in Sources */,
 				07585D65280D7E69001B8E8D /* PhotoVideoController+ContentType.swift in Sources */,
