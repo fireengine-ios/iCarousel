@@ -111,9 +111,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         
         setupRefresher()
         
-        print("aaaaaaaaaaax1")
         if !(SingletonStorage.shared.accountInfo?.recoveryEmailVerified ?? true) {
-            print("aaaaaaaaaaax")
             presentRecoveryEmailVerificationPopUp()
         }
     }
