@@ -188,8 +188,7 @@ final class ChangePasswordController: BaseViewController, KeyboardHandler, NibIn
             self?.hideSpinnerIncludeNavigationBar()
             }, fail: { [weak self] errorResponse  in
                 if errorResponse.description.contains("Captcha required") {
-                    /// It may be needed later, depending on the situation.
-                    //self?.showLogoutPopup()
+                    self?.showLogoutPopup()
                     self?.hideSpinnerIncludeNavigationBar()
                 } else {
                     self?.showError(errorResponse)
@@ -208,9 +207,12 @@ final class ChangePasswordController: BaseViewController, KeyboardHandler, NibIn
                                            message: nil,
                                            image: .success,
                                            buttonTitle: TextConstants.ok,
-                                           action: { vc in
+                                           action: { [weak self] vc in
                                             vc.close {
-                                                AppConfigurator.logout()
+                                                /// It may be needed later, depending on the situation.
+                                                //AppConfigurator.logout()
+                                
+                                                self?.router.popViewController()
                                             }
         })
         popupVC.open()
