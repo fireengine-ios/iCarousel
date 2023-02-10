@@ -2054,4 +2054,4 @@ then {11,99 TRY/Month}*/
 "paycell_share_message " = "შენ გაქვს 5GB lifebox მეხსიერება, დააჭირე რომ გამოისყიდო";
 "ksaldalks" = "-";
 "free_up_space_title" = "მეხსიერება არაა საკმარისი";
-"notification_menu_item" = "";
+"notification_menu_item" = "შეტყობინებები";
