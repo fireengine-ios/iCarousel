@@ -20,6 +20,7 @@ final class NotificationViewController: BaseViewController {
     private lazy var tableView: UITableView = {
         let view = UITableView(frame: .zero, style: .grouped)
         view.register(NotificationTableViewCell.self, forCellReuseIdentifier: "NotificationTableViewCell")
+        view.separatorStyle = .none
         return view
     }()
     
@@ -154,7 +155,7 @@ extension NotificationViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.configure(model: NotificationModel(title: "yilmaz", description: "edis"))
+        cell.configure(model: NotificationModel(title: "Storage", description: "Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp.."), readMode: true)
         
         return cell
     }
