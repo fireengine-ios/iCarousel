@@ -16,7 +16,7 @@ class StoriesInitializer: NSObject {
     
     class func initializeStoriesController(with nibName: String, moduleOutput: LBAlbumLikePreviewSliderModuleInput?) -> BaseFilesGreedChildrenViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
-        viewController.floatingButtonsArray.append(contentsOf: [.createAStory])
+        viewController.forYouControllerSection = .story
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .moveToTrash],
                                                style: .default, tintColor: AppColor.tint.color,

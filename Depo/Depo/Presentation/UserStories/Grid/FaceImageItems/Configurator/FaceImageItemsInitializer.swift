@@ -13,7 +13,7 @@ final class FaceImageItemsInitializer: NSObject {
     class func initializePeopleController(with nibName: String, moduleOutput: LBAlbumLikePreviewSliderModuleInput?) -> UIViewController {
         let viewController = FaceImageItemsViewController(nibName: nibName, bundle: nil)
         viewController.isCanChangeVisibility = true
-    
+        viewController.forYouControllerSection = .people
         let configurator = FaceImageItemsConfigurator()
         
         configurator.configure(viewController: viewController, remoteServices: PeopleItemsService(requestSize: RequestSizeConstant.faceImageItemsRequestSize), title: TextConstants.myStreamPeopleTitle, moduleOutput: moduleOutput)
@@ -23,7 +23,7 @@ final class FaceImageItemsInitializer: NSObject {
     
     class func initializeThingsController(with nibName: String, moduleOutput: LBAlbumLikePreviewSliderModuleInput?) -> UIViewController {
         let viewController = FaceImageItemsViewController(nibName: nibName, bundle: nil)
-        
+        viewController.forYouControllerSection = .things
         let configurator = FaceImageItemsConfigurator()
         
         configurator.configure(viewController: viewController, remoteServices: ThingsItemsService(requestSize: RequestSizeConstant.faceImageItemsRequestSize), title: TextConstants.myStreamThingsTitle, moduleOutput: moduleOutput)
@@ -33,7 +33,7 @@ final class FaceImageItemsInitializer: NSObject {
     
     class func initializePlacesController(with nibName: String, moduleOutput: LBAlbumLikePreviewSliderModuleInput?) -> UIViewController {
         let viewController = FaceImageItemsViewController(nibName: nibName, bundle: nil)
-        
+        viewController.forYouControllerSection = .places
         let configurator = FaceImageItemsConfigurator()
         
         configurator.configure(viewController: viewController, remoteServices: PlacesItemsService(requestSize: RequestSizeConstant.faceImageItemsRequestSize), title: TextConstants.myStreamPlacesTitle, moduleOutput: moduleOutput)

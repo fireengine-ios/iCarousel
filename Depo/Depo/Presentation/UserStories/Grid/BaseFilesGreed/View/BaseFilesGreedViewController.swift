@@ -28,11 +28,9 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     var subTitle: String = ""
     
-    var isAlbumList: Bool = false
-    
     var plusButtonType = String()
     
-    var isControllerCollageAnimations: Bool = false
+    var forYouControllerSection: ForYouSections?
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -168,6 +166,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     // MARK: - SearchBarButtonPressed
     
+    
+    
     func configureNavBarActions(isSelecting: Bool = false) {
         let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] _ in
             self?.output.searchPressed(output: self)
@@ -186,20 +186,21 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         })
         
         var rightActions: [NavBarWithAction] = []
-        if isAlbumList {
-            rightActions.append(newAlbum)
-        } else {
-            rightActions.append(newStory)
-        }
         
         if plusButtonType == "Folder" {
             rightActions.removeAll()
             rightActions.append(upload)
         }
         
-        if isControllerCollageAnimations {
+        switch forYouControllerSection {
+        case .collages, .animations, .places, .hidden, .things, .favorites:
             rightActions.removeAll()
-            rightActions.append(upload)
+        case .albums:
+            rightActions.append(newAlbum)
+        case .story:
+            rightActions.append(newStory)
+        default:
+            rightActions.removeAll()
         }
         
         search.navItem.imageInsets.left = 28
