@@ -11,4 +11,7 @@ import Foundation
 protocol NotificationViewOutput {
     func viewIsReady()
     func viewWillAppear()
+    
+    func notificationsCount() -> Int
+    func getNotification(at index: Int) -> NotificationServiceResponse
 }

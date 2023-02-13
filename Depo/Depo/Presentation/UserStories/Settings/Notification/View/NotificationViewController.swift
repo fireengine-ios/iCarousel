@@ -18,7 +18,7 @@ final class NotificationViewController: BaseViewController {
     var output: NotificationViewOutput!
     
     private lazy var tableView: UITableView = {
-        let view = UITableView(frame: .zero, style: .grouped)
+        let view = UITableView()
         view.register(NotificationTableViewCell.self, forCellReuseIdentifier: "NotificationTableViewCell")
         view.separatorStyle = .none
         return view
@@ -140,14 +140,16 @@ final class NotificationViewController: BaseViewController {
 
 // MARK: NotificationViewInput
 extension NotificationViewController: NotificationViewInput {
-
+    func reloadTableView() {
+        tableView.reloadData()
+    }
 }
 
 // MARK: - UITableViewDataSource
 extension NotificationViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return output.notificationsCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -155,7 +157,7 @@ extension NotificationViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.configure(model: NotificationModel(title: "Storage", description: "Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp.."), readMode: true)
+        cell.configure(model: output.getNotification(at: indexPath.row), readMode: true)
         
         return cell
     }

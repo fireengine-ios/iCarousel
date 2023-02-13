@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class NotificationTableViewCell: UITableViewCell {
     
@@ -32,8 +33,10 @@ class NotificationTableViewCell: UITableViewCell {
     
     private lazy var infoImageView: UIImageView = {
         let view = UIImageView()
-        
-        view.image = Image.iconFileDocBig.image
+        view.contentMode = .scaleAspectFit
+        view.clipsToBounds = true
+        view.image = Image.iconFilePhotoBig.image
+        view.layer.cornerRadius = 6
         
         return view
     }()
@@ -73,7 +76,7 @@ class NotificationTableViewCell: UITableViewCell {
         containerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).activate()
         containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6).activate()
         containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).activate()
-        //containerView.heightAnchor.constraint(equalToConstant: 76).activate()
+        containerView.heightAnchor.constraint(greaterThanOrEqualToConstant: 76).activate()
         
         /// infoImageView Layout
         containerView.addSubview(infoImageView)
@@ -95,6 +98,7 @@ class NotificationTableViewCell: UITableViewCell {
         titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8).activate()
         titleLabel.leadingAnchor.constraint(equalTo: infoImageView.trailingAnchor, constant: 16).activate()
         titleLabel.trailingAnchor.constraint(equalTo: checkBox.leadingAnchor, constant: -16).activate()
+        titleLabel.heightAnchor.constraint(equalToConstant: 24).activate()
         
         containerView.addSubview(descriptionLabel)
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -104,10 +108,11 @@ class NotificationTableViewCell: UITableViewCell {
         descriptionLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16).activate()
     }
     
-    func configure(model: NotificationModel, readMode: Bool) {
+    func configure(model: NotificationServiceResponse, readMode: Bool) {
         titleLabel.text = model.title
-        descriptionLabel.text = model.description
-        
+        descriptionLabel.text = model.body
+        //infoImageView.sd_setImage(with: URL(string: model.largeThumbnail ?? "")!)
+        infoImageView.sd_setImage(with: URL(string: "https://avatars.githubusercontent.com/u/15719990?s=400&u=766c3d645df09b0c562e71affd899b296aa1d59b&v=4")!)
         
         descriptionLabel.numberOfLines = 2
         checkBox.isHidden = !readMode

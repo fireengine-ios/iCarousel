@@ -9,5 +9,7 @@
 import Foundation
 
 protocol NotificationInteractorInput {
-    
+    func viewIsReady()
+    func viewWillAppear()
+
 }
