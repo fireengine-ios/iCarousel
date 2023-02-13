@@ -446,6 +446,10 @@ extension TabBarViewController: TabBarActionHandler {
             }
             
             externalFileUploadService.showViewController(router: router, externalFileType: .documentsandaudio)
+            
+        case .photopick:
+            let photopick = router.analyzesHistoryController()
+            router.pushViewController(viewController: photopick)
                 
         case .createAlbum:
             let controller = router.createNewAlbum()

@@ -668,6 +668,8 @@ enum GAEventLabel {
                 return "Import From Spotify"
             case .uploadDocumentsAndMusic:
                 return "Upload Documents And Music"
+            case .photopick:
+                return "Photopick"
             }
         case .shareViaLink:
             return "Share via Link"
