@@ -49,12 +49,6 @@ final class ForYouViewController: BaseViewController {
         tableView.refreshControl?.endRefreshing()
      }
     
-    override func viewDidAppear(_ animated: Bool) {
-        output.getUpdateData(for: .hidden)
-        output.getUpdateData(for: .favorites)
-        self.tableView.reloadData()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let currentSection = output.currentSection else { return }
@@ -116,7 +110,7 @@ extension ForYouViewController: ForYouViewInput {
     
     func didGetUpdateData() {
         guard let currentSection = output.currentSection else { return }
-        //updateTableView(for: currentSection) // Satır çalışıtrsa kaydedilen kartın thumbnail ini siliyor. Update e gerek yok.
+        updateTableView(for: currentSection)
     }
     
     func saveCardFailed(section: ForYouSections) {
