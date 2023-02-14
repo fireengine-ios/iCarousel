@@ -158,7 +158,7 @@ extension NotificationViewController: UITableViewDataSource {
         }
         
         cell.configure(model: output.getNotification(at: indexPath.row), readMode: true)
-        
+        cell.selectionStyle = .none
         return cell
     }
 }
@@ -168,5 +168,10 @@ extension NotificationViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        guard let cell = tableView.cellForRow(at: indexPath) as? NotificationTableViewCell else { return }
+    
+        cell.toggleCellBodyLine()
+        
+        tableView.reloadData()
     }
 }

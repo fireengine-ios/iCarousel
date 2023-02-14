@@ -26,7 +26,7 @@ class NotificationTableViewCell: UITableViewCell {
         view.font = .appFont(.regular, size: 12)
         view.textColor = AppColor.billoGrayAndWhite.color
         view.textAlignment = .left
-        view.numberOfLines = 0
+        view.numberOfLines = 2
         view.lineBreakMode = .byWordWrapping
         return view
     }()
@@ -110,13 +110,17 @@ class NotificationTableViewCell: UITableViewCell {
     
     func configure(model: NotificationServiceResponse, readMode: Bool) {
         titleLabel.text = model.title
-        descriptionLabel.text = model.body
+        descriptionLabel.text = "Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp.."
         //infoImageView.sd_setImage(with: URL(string: model.largeThumbnail ?? "")!)
         infoImageView.sd_setImage(with: URL(string: "https://avatars.githubusercontent.com/u/15719990?s=400&u=766c3d645df09b0c562e71affd899b296aa1d59b&v=4")!)
         
-        descriptionLabel.numberOfLines = 2
         checkBox.isHidden = !readMode
         checkBox.setImage(Image.iconSelectCheck.image, for: .normal)
         // containerView.layer.borderColor = ...
+    }
+    
+    func toggleCellBodyLine() {
+        let toggleLine = descriptionLabel.numberOfLines == 2 ? 0 : 2
+        descriptionLabel.numberOfLines = toggleLine
     }
 }
