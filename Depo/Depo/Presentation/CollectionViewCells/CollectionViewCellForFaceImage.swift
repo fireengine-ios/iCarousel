@@ -111,11 +111,27 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
         imageView.backgroundColor = ColorConstants.fileGreedCellColor
     }
     
+    func setImageRecover(with url: URL) {
+        imageView.contentMode = .scaleAspectFill
+        imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) { [weak self] image, error, cacheType, url in
+            guard error == nil else {
+                print("SD_WebImage_setImage error: \(error!.description)")
+                return
+            }
+            
+            self?.setImage(image: image, animated: true)
+        }
+        
+        isAlreadyConfigured = true
+        imageView.backgroundColor = ColorConstants.fileGreedCellColor
+    }
+    
     override func setImage(with url: URL) {
         imageView.contentMode = .scaleAspectFill
         imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) { [weak self] image, error, cacheType, url in
             guard error == nil else {
                 print("SD_WebImage_setImage error: \(error!.description)")
+                self?.setImageRecover(with: url!)
                 return
             }
             
