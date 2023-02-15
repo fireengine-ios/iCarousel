@@ -106,13 +106,34 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         isAlreadyConfigured = true
     }
     
+    func setImageRecover(with url: URL) {
+        let cacheKey = url.byTrimmingQuery
+        cellImageManager = CellImageManager.instance(by: cacheKey)
+        //uuid = cellImageManager?.uniqueId
+        let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, shouldBeBlurred, uniqueId in
+            DispatchQueue.toMain {
+                guard let image = image else {
+                    return
+                }
+                
+                self?.setImage(image: image, animated: false)
+            }
+        }
+        
+        cellImageManager?.loadImage(thumbnailUrl: nil, url: url, isOwner: true, completionBlock: imageSetBlock)
+        
+        isAlreadyConfigured = true
+        
+    }
+    
     override func setImage(with url: URL) {
         let cacheKey = url.byTrimmingQuery
         cellImageManager = CellImageManager.instance(by: cacheKey)
         uuid = cellImageManager?.uniqueId
         let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, shouldBeBlurred, uniqueId in
             DispatchQueue.toMain {
-                guard let image = image, let uuid = self?.uuid, uuid == uniqueId else {
+                guard let image = image else {
+                    self?.setImageRecover(with: url)
                     return
                 }
                 

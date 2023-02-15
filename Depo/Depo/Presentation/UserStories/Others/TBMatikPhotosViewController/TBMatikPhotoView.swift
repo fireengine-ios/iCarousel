@@ -65,7 +65,6 @@ final class TBMatikPhotoView: UIView, NibInit {
     var setImageHandler: VoidHandler?
     
     private var cellImageManager: CellImageManager?
-    private var uuid: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -85,32 +84,49 @@ final class TBMatikPhotoView: UIView, NibInit {
         }
     }
     
-    private func loadImage(with url: URL?) {
+    private func loadImageRecover(with url: URL?) {
         guard let url = url else {
             setImage(nil)
             return
         }
-        
         let cacheKey = url.byTrimmingQuery
         cellImageManager = CellImageManager.instance(by: cacheKey)
-        uuid = cellImageManager?.uniqueId
-        
         loadingIndicator.startAnimating()
-        
         let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, shouldBeBlurred, uniqueId in
             guard let self = self else {
                 return
             }
-            
             DispatchQueue.main.async {
-                guard let image = image, self.uuid == uniqueId else {
+                guard let image = image else {
                     self.setImage(nil)
                     return
                 }
                 self.setImage(image)
             }
         }
-        
+        cellImageManager?.loadImage(thumbnailUrl: nil, url: url, isOwner: true, completionBlock: imageSetBlock)
+    }
+    
+    private func loadImage(with url: URL?) {
+        guard let url = url else {
+            setImage(nil)
+            return
+        }
+        let cacheKey = url.byTrimmingQuery
+        cellImageManager = CellImageManager.instance(by: cacheKey)
+        loadingIndicator.startAnimating()
+        let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, shouldBeBlurred, uniqueId in
+            guard let self = self else {
+                return
+            }
+            DispatchQueue.main.async {
+                guard let image = image else {
+                    self.loadImageRecover(with: url)
+                    return
+                }
+                self.setImage(image)
+            }
+        }
         cellImageManager?.loadImage(thumbnailUrl: nil, url: url, isOwner: true, completionBlock: imageSetBlock)
     }
 
