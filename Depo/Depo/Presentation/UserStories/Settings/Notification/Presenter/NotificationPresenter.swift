@@ -35,6 +35,10 @@ extension NotificationPresenter: NotificationViewOutput {
     func getNotification(at index: Int) -> NotificationServiceResponse {
         notifications[index]
     }
+    
+    func deleteNotification(at index: Int) {
+        notifications.remove(at: index)
+    }
 }
 
 // MARK: PackagesInteractorOutput

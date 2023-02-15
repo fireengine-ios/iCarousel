@@ -57,14 +57,49 @@ class NotificationTableViewCell: UITableViewCell {
         return view
     }()
     
+    var deleteHandler: (() -> Void)?
+    private let panGestureRecognizer = UIPanGestureRecognizer()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setLayout()
+        setupGestureRecognizers()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setLayout()
+        setupGestureRecognizers()
+    }
+    
+    private func setupGestureRecognizers() {
+        panGestureRecognizer.addTarget(self, action: #selector(handlePanGesture(_:)))
+        addGestureRecognizer(panGestureRecognizer)
+    }
+    
+    @objc private func handlePanGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
+        let translation = gestureRecognizer.translation(in: self)
+        
+        switch gestureRecognizer.state {
+        case .changed:
+            // Prevent it from sliding to the right
+            guard translation.x < 0 else { return }
+            
+            transform = CGAffineTransform(translationX: translation.x , y: 0)
+        case .ended:
+            if translation.x < -bounds.size.width / 2 {
+                deleteHandler?()
+                UIView.animate(withDuration: 0.2) {
+                    self.transform = .identity
+                }
+            } else {
+                UIView.animate(withDuration: 0.2) {
+                    self.transform = .identity
+                }
+            }
+        default:
+            break
+        }
     }
     
     private func setLayout() {

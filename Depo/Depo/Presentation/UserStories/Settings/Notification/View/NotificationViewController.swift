@@ -159,55 +159,17 @@ extension NotificationViewController: UITableViewDataSource {
         
         cell.configure(model: output.getNotification(at: indexPath.row), readMode: true)
         cell.selectionStyle = .none
+        cell.deleteHandler = { [weak self] in
+            print("Yilmaz edis: \(indexPath.item) - \(tableView.indexPath(for: cell)) ")
+            
+            let row = tableView.indexPath(for: cell)
+            self?.output.deleteNotification(at: row?.row ?? 0)
+            let indexPath = IndexPath(item: row?.row ?? 0, section: 0)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
         return cell
     }
 }
 
 // MARK: - UITableViewDelegate
-extension NotificationViewController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {}
-    
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView, completionHandler) in
-            //  print("index path of delete: \(indexPath)")
-            
-            completionHandler(true)
-        }
-        
-        delete.title = ""
-        delete.image = Image.iconDelete.image
-        delete.backgroundColor = AppColor.discoverCardLine.color
-        
-        let swipeAction = UISwipeActionsConfiguration(actions: [delete])
-        swipeAction.performsFirstActionWithFullSwipe = false // This is the line which disables full swipe
-        
-        return swipeAction
-    }
-    
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView, completionHandler) in
-            //  print("index path of delete: \(indexPath)")
-            
-            completionHandler(true)
-        }
-        let edit = UIContextualAction(style: .normal, title: "Edit") { [weak self] (action, sourceView, completionHandler)  in
-            
-            completionHandler(true)
-        }
-        delete.title = ""
-        delete.image = Image.iconDelete.image
-        
-        edit.title = ""
-        edit.image = Image.iconEdit.image
-        
-        let swipeAction = UISwipeActionsConfiguration(actions: [delete,edit])
-        swipeAction.performsFirstActionWithFullSwipe = false // This is the line which disables full swipe
-        return swipeAction
-    }
-    
-}
+extension NotificationViewController: UITableViewDelegate {}
