@@ -26,7 +26,7 @@ class NotificationTableViewCell: UITableViewCell {
         view.font = .appFont(.regular, size: 12)
         view.textColor = AppColor.billoGrayAndWhite.color
         view.textAlignment = .left
-        view.numberOfLines = 2
+        view.numberOfLines = 0
         view.lineBreakMode = .byWordWrapping
         return view
     }()
@@ -117,10 +117,5 @@ class NotificationTableViewCell: UITableViewCell {
         checkBox.isHidden = !readMode
         checkBox.setImage(Image.iconSelectCheck.image, for: .normal)
         // containerView.layer.borderColor = ...
-    }
-    
-    func toggleCellBodyLine() {
-        let toggleLine = descriptionLabel.numberOfLines == 2 ? 0 : 2
-        descriptionLabel.numberOfLines = toggleLine
     }
 }

@@ -165,18 +165,7 @@ extension NotificationViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension NotificationViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-//        guard let cell = tableView.cellForRow(at: indexPath) as? NotificationTableViewCell else { return }
-//    
-//        cell.toggleCellBodyLine()
-//        
-//        tableView.reloadData()
-    }
-    
-    
-    
+
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
