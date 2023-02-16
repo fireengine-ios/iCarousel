@@ -95,6 +95,11 @@ final class AllFilesSegmentedController: SegmentedController, HeaderContainingVi
                 setupSelectedController(viewControllers[selectedIndex], index: selectedIndex)
                 return
             }
+            if index == 3 || index == 4 { //index = 3 Shared && index = 4 TrashBin
+                setDefaultNavigationHeaderActionsWithoutPlusButton()
+            } else {
+                setDefaultNavigationHeaderActions()
+            }
             setupSelectedController(viewControllers[selectedIndex])
         }
     }
