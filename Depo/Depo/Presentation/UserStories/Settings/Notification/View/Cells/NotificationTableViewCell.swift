@@ -52,7 +52,17 @@ class NotificationTableViewCell: UITableViewCell {
     private lazy var containerView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 16
+        view.backgroundColor = .white
         view.layer.borderColor = AppColor.tint.cgColor
+        view.layer.borderWidth = 2
+        return view
+    }()
+    
+    private lazy var underContainerView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 16
+        view.backgroundColor = AppColor.discoverCardLine.color
+        view.layer.borderColor = AppColor.discoverCardLine.cgColor
         view.layer.borderWidth = 2
         return view
     }()
@@ -73,28 +83,43 @@ class NotificationTableViewCell: UITableViewCell {
     }
     
     private func setupGestureRecognizers() {
+        
         panGestureRecognizer.addTarget(self, action: #selector(handlePanGesture(_:)))
-        addGestureRecognizer(panGestureRecognizer)
+        panGestureRecognizer.delegate = self
+        contentView.addGestureRecognizer(panGestureRecognizer)
+    }
+    
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if (gestureRecognizer.isKind(of: UIPanGestureRecognizer.self)) {
+            let t = (gestureRecognizer as! UIPanGestureRecognizer).translation(in: contentView)
+            let verticalness = abs(t.y)
+            if (verticalness > 0) {
+                print("ignore vertical motion in the pan ...")
+                print("the event engine will >pass on the gesture< to the scroll view")
+                return false
+            }
+        }
+        return true
     }
     
     @objc private func handlePanGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
-        let translation = gestureRecognizer.translation(in: self)
+        let translation = gestureRecognizer.translation(in: containerView)
         
         switch gestureRecognizer.state {
         case .changed:
             // Prevent it from sliding to the right
             guard translation.x < 0 else { return }
             
-            transform = CGAffineTransform(translationX: translation.x , y: 0)
+            containerView.transform = CGAffineTransform(translationX: translation.x , y: 0)
         case .ended:
-            if translation.x < -bounds.size.width / 2 {
+            if translation.x < -containerView.bounds.size.width / 2 {
                 deleteHandler?()
                 UIView.animate(withDuration: 0.2) {
-                    self.transform = .identity
+                    self.containerView.transform = .identity
                 }
             } else {
                 UIView.animate(withDuration: 0.2) {
-                    self.transform = .identity
+                    self.containerView.transform = .identity
                 }
             }
         default:
@@ -103,6 +128,14 @@ class NotificationTableViewCell: UITableViewCell {
     }
     
     private func setLayout() {
+        
+        addSubview(underContainerView)
+        underContainerView.translatesAutoresizingMaskIntoConstraints = false
+        underContainerView.topAnchor.constraint(equalTo: topAnchor, constant: 6).activate()
+        underContainerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).activate()
+        underContainerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6).activate()
+        underContainerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).activate()
+        underContainerView.heightAnchor.constraint(greaterThanOrEqualToConstant: 76).activate()
         
         /// Container Layout
         addSubview(containerView)
@@ -144,8 +177,8 @@ class NotificationTableViewCell: UITableViewCell {
     }
     
     func configure(model: NotificationServiceResponse, readMode: Bool) {
-        titleLabel.text = model.title
-        descriptionLabel.text = "Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp.."
+        titleLabel.text = "yilmaz"
+        descriptionLabel.text = "Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet"
         //infoImageView.sd_setImage(with: URL(string: model.largeThumbnail ?? "")!)
         infoImageView.sd_setImage(with: URL(string: "https://avatars.githubusercontent.com/u/15719990?s=400&u=766c3d645df09b0c562e71affd899b296aa1d59b&v=4")!)
         
