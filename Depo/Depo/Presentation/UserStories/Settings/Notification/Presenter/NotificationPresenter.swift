@@ -46,7 +46,16 @@ extension NotificationPresenter: NotificationInteractorOutput {
     func success(with notifications: [NotificationServiceResponse]) {
         view?.stopActivityIndicator()
         
-        self.notifications = notifications
+        // self.notifications = notifications
+        
+        for i in 0...20 {
+            let item = NotificationServiceResponse()
+            item.title = "\(i) - Yilmaz Edis"
+            item.body =  "Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet"
+            item.smallThumbnail = "https://avatars.githubusercontent.com/u/15719990?s=400&u=766c3d645df09b0c562e71affd899b296aa1d59b&v=4"
+            self.notifications.append(item)
+        }
+        
         view?.reloadTableView()
     }
 

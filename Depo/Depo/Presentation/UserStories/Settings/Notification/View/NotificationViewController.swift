@@ -149,7 +149,7 @@ extension NotificationViewController: NotificationViewInput {
 extension NotificationViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return output.notificationsCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -157,16 +157,14 @@ extension NotificationViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.configure(model: .init(), readMode: true)
+        cell.configure(model: output.getNotification(at: indexPath.row), readMode: true)
         cell.selectionStyle = .none
-//        cell.deleteHandler = { [weak self] in
-//            print("Yilmaz edis: \(indexPath.item) - \(tableView.indexPath(for: cell)) ")
-//            
-//            let row = tableView.indexPath(for: cell)
-//            self?.output.deleteNotification(at: row?.row ?? 0)
-//            let indexPath = IndexPath(item: row?.row ?? 0, section: 0)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//        }
+        cell.deleteHandler = { [weak self] in
+            let row = tableView.indexPath(for: cell)
+            self?.output.deleteNotification(at: row?.row ?? 0)
+            let indexPath = IndexPath(item: row?.row ?? 0, section: 0)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
         return cell
     }
 }

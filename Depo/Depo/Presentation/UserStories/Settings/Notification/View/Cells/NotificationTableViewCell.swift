@@ -67,6 +67,13 @@ class NotificationTableViewCell: UITableViewCell {
         return view
     }()
     
+    private lazy var deleteImageView: UIImageView = {
+        let view = UIImageView()
+        view.image = Image.iconCancelBorder.image.withRenderingMode(.alwaysTemplate)
+        view.tintColor = .white
+        return view
+    }()
+    
     var deleteHandler: (() -> Void)?
     private let panGestureRecognizer = UIPanGestureRecognizer()
     
@@ -128,7 +135,7 @@ class NotificationTableViewCell: UITableViewCell {
     }
     
     private func setLayout() {
-        
+        /// underContainerView Layout
         addSubview(underContainerView)
         underContainerView.translatesAutoresizingMaskIntoConstraints = false
         underContainerView.topAnchor.constraint(equalTo: topAnchor, constant: 6).activate()
@@ -136,6 +143,13 @@ class NotificationTableViewCell: UITableViewCell {
         underContainerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6).activate()
         underContainerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).activate()
         underContainerView.heightAnchor.constraint(greaterThanOrEqualToConstant: 76).activate()
+        
+        underContainerView.addSubview(deleteImageView)
+        deleteImageView.translatesAutoresizingMaskIntoConstraints = false
+        deleteImageView.centerYAnchor.constraint(equalTo: underContainerView.centerYAnchor, constant: 0).activate()
+        deleteImageView.trailingAnchor.constraint(equalTo: underContainerView.trailingAnchor, constant: -9).activate()
+        deleteImageView.widthAnchor.constraint(equalToConstant: 24).activate()
+        deleteImageView.heightAnchor.constraint(equalToConstant: 24).activate()
         
         /// Container Layout
         addSubview(containerView)
@@ -177,10 +191,9 @@ class NotificationTableViewCell: UITableViewCell {
     }
     
     func configure(model: NotificationServiceResponse, readMode: Bool) {
-        titleLabel.text = "yilmaz"
-        descriptionLabel.text = "Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet"
-        //infoImageView.sd_setImage(with: URL(string: model.largeThumbnail ?? "")!)
-        infoImageView.sd_setImage(with: URL(string: "https://avatars.githubusercontent.com/u/15719990?s=400&u=766c3d645df09b0c562e71affd899b296aa1d59b&v=4")!)
+        titleLabel.text = model.title
+        descriptionLabel.text = model.body
+        infoImageView.sd_setImage(with: URL(string: model.smallThumbnail ?? "")!)
         
         checkBox.isHidden = !readMode
         checkBox.setImage(Image.iconSelectCheck.image, for: .normal)
