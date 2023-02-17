@@ -77,18 +77,18 @@ final class TBMatikPhotoView: UIView, NibInit {
         imageView.alpha = 0
         cellImageManager?.cancelImageLoading()
         
-        if let preview = item?.patchToPreview, case let .remoteUrl(url) = preview {
+        if let preview = item?.patchToPreview,
+            case let .remoteUrl(url) = preview,
+            let url = url {
+            loadImage(with: url)
+        } else if let url = item?.tmpDownloadUrl {
             loadImage(with: url)
         } else {
             setImage(nil)
         }
     }
     
-    private func loadImageRecover(with url: URL?) {
-        guard let url = url else {
-            setImage(nil)
-            return
-        }
+    private func loadImageRecover(with url: URL) {
         let cacheKey = url.byTrimmingQuery
         cellImageManager = CellImageManager.instance(by: cacheKey)
         loadingIndicator.startAnimating()
@@ -107,11 +107,7 @@ final class TBMatikPhotoView: UIView, NibInit {
         cellImageManager?.loadImage(thumbnailUrl: nil, url: url, isOwner: true, completionBlock: imageSetBlock)
     }
     
-    private func loadImage(with url: URL?) {
-        guard let url = url else {
-            setImage(nil)
-            return
-        }
+    private func loadImage(with url: URL) {
         let cacheKey = url.byTrimmingQuery
         cellImageManager = CellImageManager.instance(by: cacheKey)
         loadingIndicator.startAnimating()
