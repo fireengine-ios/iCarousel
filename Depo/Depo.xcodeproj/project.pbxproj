@@ -1211,6 +1211,10 @@
 		52EDD1B4299A778700D549FC /* NotificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1B2299A778700D549FC /* NotificationResponse.swift */; };
 		52EDD1B5299A778700D549FC /* NotificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1B2299A778700D549FC /* NotificationResponse.swift */; };
 		52EDD1B6299A778700D549FC /* NotificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1B2299A778700D549FC /* NotificationResponse.swift */; };
+		52EDD1C3299EC6A900D549FC /* NotificationThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1C2299EC6A900D549FC /* NotificationThreeDotMenuManager.swift */; };
+		52EDD1C4299EC6A900D549FC /* NotificationThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1C2299EC6A900D549FC /* NotificationThreeDotMenuManager.swift */; };
+		52EDD1C5299EC6A900D549FC /* NotificationThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1C2299EC6A900D549FC /* NotificationThreeDotMenuManager.swift */; };
+		52EDD1C6299EC6A900D549FC /* NotificationThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1C2299EC6A900D549FC /* NotificationThreeDotMenuManager.swift */; };
 		52F78BA228D9E005001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
 		52F78BA628D9E036001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
 		52F78BA728D9E036001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
@@ -10290,6 +10294,7 @@
 		52EDD1A8299A68F800D549FC /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		52EDD1AD299A6A7C00D549FC /* NotificationParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationParameters.swift; sourceTree = "<group>"; };
 		52EDD1B2299A778700D549FC /* NotificationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationResponse.swift; sourceTree = "<group>"; };
+		52EDD1C2299EC6A900D549FC /* NotificationThreeDotMenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationThreeDotMenuManager.swift; sourceTree = "<group>"; };
 		536B87BE9C6EA2601A4F42F3 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		5376886D3258645ED3B6E003 /* Pods-TC_Depo_LifeTech.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TC_Depo_LifeTech.debug.xcconfig"; path = "Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech.debug.xcconfig"; sourceTree = "<group>"; };
 		54C522C58BC4B88E39F9443C /* Pods_LifeboxFileProvider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxFileProvider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -14648,6 +14653,7 @@
 		52501E6A29951C7C0000376C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				52EDD1C1299EC67300D549FC /* Misc */,
 				52C1BB8E299676B600D9FB09 /* Cells */,
 				52501E7029952A190000376C /* NotificationViewInput.swift */,
 				52501E7529952A2D0000376C /* NotificationViewOutput.swift */,
@@ -14723,6 +14729,14 @@
 				52EDD1B2299A778700D549FC /* NotificationResponse.swift */,
 			);
 			path = NotificationService;
+			sourceTree = "<group>";
+		};
+		52EDD1C1299EC67300D549FC /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				52EDD1C2299EC6A900D549FC /* NotificationThreeDotMenuManager.swift */,
+			);
+			path = Misc;
 			sourceTree = "<group>";
 		};
 		5525BBEDE21BEBBAE72FED00 /* Router */ = {
@@ -26502,6 +26516,7 @@
 				8C0E8E271FDEBDFF00789C91 /* ForgotPasswordInteractorInput.swift in Sources */,
 				8C0E8E281FDEBDFF00789C91 /* ForgotPasswordInteractorOutput.swift in Sources */,
 				0303ED8A23BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift in Sources */,
+				52EDD1C3299EC6A900D549FC /* NotificationThreeDotMenuManager.swift in Sources */,
 				52C1BB932996770C00D9FB09 /* NotificationTableViewCell.swift in Sources */,
 				B586A5AA21EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */,
 				8C0E8E291FDEBDFF00789C91 /* AutoSyncViewOutput.swift in Sources */,
@@ -28934,6 +28949,7 @@
 				CE784B0122A685FB00662219 /* LeavePremiumRouter.swift in Sources */,
 				CF01729823D00B9F00C0B0DE /* NetmeraCustomUser.swift in Sources */,
 				98A86D8A23A7C8BC00438225 /* EmptyView.swift in Sources */,
+				52EDD1C5299EC6A900D549FC /* NotificationThreeDotMenuManager.swift in Sources */,
 				077EEFAC26E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift in Sources */,
 				CE784B0222A685FB00662219 /* CircleButton.swift in Sources */,
 				0762029D269B842E00D4FB2C /* OverlayStickerSelectorViewController.swift in Sources */,
@@ -29692,6 +29708,7 @@
 				CF8B63CE23CBC9D70021B021 /* AnimationFlowManager.swift in Sources */,
 				CF8B63CF23CBC9D70021B021 /* EmptyDataView.swift in Sources */,
 				CF8B63D023CBC9D70021B021 /* Alamofire+Validate.swift in Sources */,
+				52EDD1C4299EC6A900D549FC /* NotificationThreeDotMenuManager.swift in Sources */,
 				CF8B63D123CBC9D70021B021 /* SyncedBlock.swift in Sources */,
 				CF8B63D223CBC9D70021B021 /* UIImageView.swift in Sources */,
 				CF8B63D323CBC9D70021B021 /* AugmentedRealityController.swift in Sources */,
@@ -32727,6 +32744,7 @@
 				CF8B6F1023CBCA280021B021 /* CollectionViewCellForFaceImageAddName.swift in Sources */,
 				98732B5F2461459300E9D5D2 /* APILogger.swift in Sources */,
 				CF8B6F1123CBCA280021B021 /* PeriodicContactSyncPresenter.swift in Sources */,
+				52EDD1C6299EC6A900D549FC /* NotificationThreeDotMenuManager.swift in Sources */,
 				CF8B6F1223CBCA280021B021 /* SettingsInteractor.swift in Sources */,
 				CF8B6F1323CBCA280021B021 /* PremiumListView.swift in Sources */,
 				CF8B6F1423CBCA280021B021 /* ImportPhotosRouter.swift in Sources */,

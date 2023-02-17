@@ -31,6 +31,8 @@ final class NotificationViewController: BaseViewController {
                                selector: #selector(onCancelSelectionButton))
     }()
     
+    private lazy var threeDotMenuManager = NotificationThreeDotMenuManager(delegate: self)
+    
     private var displayManager: NotificationDisplayConfiguration = .initial
     
     private var navBarConfigurator = NavigationBarConfigurator()
@@ -88,49 +90,10 @@ final class NotificationViewController: BaseViewController {
     }
     
     private func onMorePressed(_ sender: Any) {
-//        if !dataSource.isSelectionStateActive {
-//            showAlertSheet(with: [.select], sender: sender)
-//        }
-        
-        showAlertSheet(with: [.select], sender: sender)
-    }
-    
-    private func showAlertSheet(with types: [ElementTypes], sender: Any?) {
-        let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        types.forEach { type in
-            var action: UIAlertAction?
-            switch type {
-            case .select:
-                action = UIAlertAction(title: TextConstants.actionSheetSelect, style: .default, handler: { _ in
-//                    self.dataSource.startSelection()
-//                    self.startSelection()
-                })
-            default:
-                action = nil
-            }
-            
-            if let action = action {
-                actionSheetVC.addAction(action)
-            }
-        }
-        
-        let cancelAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel)
-        actionSheetVC.addAction(cancelAction)
-        
-        actionSheetVC.view.tintColor = AppColor.blackColor.color
-        actionSheetVC.popoverPresentationController?.sourceView = view
-        
-        if let pressedBarButton = sender as? UIButton {
-            var sourceRectFrame = pressedBarButton.convert(pressedBarButton.frame, to: view)
-            if sourceRectFrame.origin.x > view.bounds.width {
-                sourceRectFrame = CGRect(origin: CGPoint(x: pressedBarButton.frame.origin.x, y: pressedBarButton.frame.origin.y + 20), size: pressedBarButton.frame.size)
-            }
-            actionSheetVC.popoverPresentationController?.sourceRect = sourceRectFrame
-        } else if let item = sender as? UIBarButtonItem {
-            actionSheetVC.popoverPresentationController?.barButtonItem = item
-            actionSheetVC.popoverPresentationController?.permittedArrowDirections = .up
-        }
-        present(actionSheetVC, animated: true)
+
+        threeDotMenuManager.showActions(
+            sender: sender
+        )
     }
     
     @objc private func onCancelSelectionButton(_ sender: Any) {
@@ -171,3 +134,51 @@ extension NotificationViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension NotificationViewController: UITableViewDelegate {}
+
+extension NotificationViewController: BaseItemInputPassingProtocol {
+    func operationFinished(withType type: ElementTypes, response: Any?) {
+        
+    }
+    
+    func operationFailed(withType type: ElementTypes) {
+        
+    }
+    
+    func selectModeSelected() {
+        
+    }
+    
+    func selectAllModeSelected() {
+        
+    }
+    
+    func deSelectAll() {
+        
+    }
+    
+    func stopModeSelected() {
+        
+    }
+    
+    func printSelected() {
+        
+    }
+    
+    func changeCover() {
+        
+    }
+    
+    func changePeopleThumbnail() {
+        
+    }
+    
+    func openInstaPick() {
+    
+    }
+    
+    func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
+        
+    }
+    
+    
+}

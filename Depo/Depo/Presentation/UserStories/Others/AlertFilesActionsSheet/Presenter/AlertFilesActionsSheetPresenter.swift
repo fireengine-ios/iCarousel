@@ -106,6 +106,14 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         }
     }
     
+    func showNotification(with types: [ElementTypes], presentedBy sender: Any?, onSourceView sourceView: UIView?, viewController: UIViewController?) {
+        constractNotificationAction(with: types) { [weak self] actions in
+            DispatchQueue.main.async { [weak self] in
+                self?.presentAlertSheet(with: actions, presentedBy: sender, viewController: viewController)
+            }
+        }
+    }
+    
     func show(with types: [ElementTypes], for items: [WrapData], presentedBy sender: Any?, onSourceView sourceView: UIView?, viewController: UIViewController?) {
         constractActions(with: types, for: items) { [weak self] actions in
             DispatchQueue.main.async { [weak self] in
@@ -229,6 +237,27 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         }
     }
     
+    private func constractNotificationAction(with types: [ElementTypes], sender: Any? = nil,
+                                 actionsCallback: @escaping AlertActionsCallback) {
+        actionsCallback(types.map { type in
+            var action: AlertFilesAction
+            switch type {
+            case .deleteAll:
+                action = AlertFilesAction(title: type.actionTitle(), icon: type.icon) { [weak self] in
+                    self?.handleNotificationAction(type: type)
+                }
+            case .selectMode:
+                action = AlertFilesAction(title: type.actionTitle(), icon: type.icon) { [weak self] in
+                    self?.handleNotificationAction(type: type)
+                }
+            default:
+                action = AlertFilesAction()
+                break
+            }
+            return action
+        })
+    }
+    
     private func constractActions(with types: [ElementTypes],
                                   for items: [BaseDataSourceItem]?, sender: Any? = nil,
                                   actionsCallback: @escaping AlertActionsCallback) {
@@ -344,6 +373,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     }
                 case .sync, .syncInProgress, .undetermend:
                     action = AlertFilesAction()
+                default:
+                    action = AlertFilesAction()
+                    break
                 }
 
                 action.icon = type.icon
@@ -402,6 +434,19 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             }
         }
         return newSourceRect
+    }
+    
+    func handleNotificationAction(type: ElementTypes) {
+        trackNetmeraAction(type: type)
+        
+        switch type {
+        case .deleteAll:
+            print("Yilmaz Edis:")
+        case .selectMode:
+            print("Yilmaz Edis:")
+        default:
+            break
+        }
     }
     
     func handleAction(type: ElementTypes, items: [BaseDataSourceItem], sender: Any? = nil) {

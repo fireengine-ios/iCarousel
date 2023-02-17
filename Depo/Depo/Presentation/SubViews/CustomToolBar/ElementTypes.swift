@@ -52,6 +52,8 @@ enum ElementTypes {
     //all files/select
     case select
     case selectAll
+    case selectMode
+    case deleteAll
     case deSelectAll
     //doc viewing
     case documentDetails
@@ -597,6 +599,10 @@ enum ElementTypes {
             return TextConstants.actionSheetSelect
         case .selectAll:
             return TextConstants.actionSheetSelectAll
+        case .selectMode:
+            return "Select Mode"
+        case .deleteAll:
+            return localized(.deleteAll)
         case .deSelectAll:
             return TextConstants.actionSheetDeSelectAll
         case .print:
@@ -719,6 +725,10 @@ enum ElementTypes {
         case .select:
             return ""
         case .selectAll:
+            return ""
+        case .selectMode:
+            return ""
+        case .deleteAll:
             return ""
         case .deSelectAll:
             return ""
@@ -846,6 +856,10 @@ enum ElementTypes {
             return Image.iconSelect.image
         case .selectAll:
             return nil
+        case .selectMode:
+            return Image.iconSelect.image
+        case .deleteAll:
+            return Image.iconTabDelete.image
         case .deSelectAll:
             return nil
         case .documentDetails:
