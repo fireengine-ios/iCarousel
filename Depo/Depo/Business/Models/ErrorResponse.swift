@@ -99,6 +99,19 @@ extension ErrorResponse: LocalizedError {
         }
     }
     
+    var errorDescriptionLog: String? {
+        switch self {
+        case .failResponse(_):
+            return TextConstants.errorServer
+        case .string(let errorString):
+            return errorString
+        case .error(let recivedError):
+            return recivedError.description
+        case .httpCode(let code):
+            return String(code)
+        }
+    }
+    
     var isNetworkError: Bool {
         if case let ErrorResponse.error(error) = self {
             return error.isNetworkError
