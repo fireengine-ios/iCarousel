@@ -187,11 +187,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         
         var rightActions: [NavBarWithAction] = []
         
-        if plusButtonType == "Folder" {
-            rightActions.removeAll()
-            rightActions.append(upload)
-        }
-        
         switch forYouControllerSection {
         case .collages, .animations, .places, .hidden, .things, .favorites:
             rightActions.removeAll()
@@ -201,6 +196,34 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             rightActions.append(newStory)
         default:
             rightActions.removeAll()
+        }
+        
+        if plusButtonType == "Folder" {
+            //rightActions.append(upload)
+            let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] _ in
+                self?.output.searchPressed(output: self)
+            })
+            
+            let more = NavBarWithAction(navItem: NavigationBarList().newAlbum, action: { [weak self] _ in
+                let menuItems = self?.floatingButtonsArray.map { buttonType in
+                    AlertFilesAction(title: buttonType.title, icon: buttonType.image) { [weak self] in
+                        self?.customTabBarController?.handleAction(buttonType.action)
+                    }
+                }
+                
+                let menu = AlertFilesActionsViewController()
+                menu.configure(with: menuItems ?? [])
+                menu.presentAsDrawer()
+            })
+            
+            let rightActions: [NavBarWithAction] = [more, search]
+            search.navItem.imageInsets.left = 28
+            navBarConfigurator.configure(right: isSelecting ? [] : rightActions, left: [])
+            
+            let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
+            navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+            navigationItem.title = ""
+            return
         }
         
         search.navItem.imageInsets.left = 28
