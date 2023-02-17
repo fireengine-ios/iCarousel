@@ -91,15 +91,15 @@ final class AllFilesSegmentedController: SegmentedController, HeaderContainingVi
             selectedIndex = index
             sharedSegmentsView.isHidden = (index != AllFilesType.allCases.firstIndex(of: .sharedWithMe)) && (index != AllFilesType.allCases.firstIndex(of: .sharedByMe))
             children.forEach { $0.removeFromParentVC() }
-//            if index == 7 {
-//                setupSelectedController(viewControllers[selectedIndex], index: selectedIndex)
-//                return
-//            }
-//            if index == 3 || index == 4 { //index = 3 Shared && index = 4 TrashBin
-//                setDefaultNavigationHeaderActionsWithoutPlusButton()
-//            } else {
-//                setDefaultNavigationHeaderActions()
-//            }
+            if index == 7 {
+                setupSelectedController(viewControllers[selectedIndex], index: selectedIndex)
+                return
+            }
+            if index == 3 || index == 4 { //index = 3 Shared && index = 4 TrashBin
+                setDefaultNavigationHeaderActionsWithoutPlusButton()
+            } else {
+                setDefaultNavigationHeaderActions()
+            }
             setupSelectedController(viewControllers[selectedIndex])
         }
     }
