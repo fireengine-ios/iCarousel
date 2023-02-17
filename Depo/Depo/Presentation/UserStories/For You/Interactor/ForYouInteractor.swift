@@ -37,6 +37,7 @@ final class ForYouInteractor {
             self?.output.getThings(data: (response.list.map({ ThingsItem(response: $0) })))
         }, fail: { error in
             self.group.leave()
+            debugLog("ForYou Error getThings: \(error.errorCode)-\(String(describing: error.errorDescriptionLog))")
             error.showInternetErrorGlobal()
         })
     }
@@ -54,7 +55,7 @@ final class ForYouInteractor {
             self?.output.getPlaces(data: (response.list.map({ PlacesItem(response: $0) })))
         }, fail: { error in
             self.group.leave()
-            
+            debugLog("ForYou Error getPlaces: \(error.errorCode)-\(String(describing: error.errorDescriptionLog))")
             error.showInternetErrorGlobal()
         })
     }
@@ -72,6 +73,7 @@ final class ForYouInteractor {
             self?.output.getPeople(data: (response.list.map({ PeopleItem(response: $0) })))
         }, fail: { error in
             self.group.leave()
+            debugLog("ForYou Error getPeople: \(error.errorCode)-\(String(describing: error.errorDescriptionLog))")
             error.showInternetErrorGlobal()
         })
     }
@@ -97,6 +99,7 @@ final class ForYouInteractor {
             
         }, fail: { errorResponse in
             self.group.leave()
+            debugLog("ForYou Error getAlbums: \(errorResponse.errorCode)-\(String(describing: errorResponse.errorDescriptionLog))")
             errorResponse.showInternetErrorGlobal()
         })
     }
@@ -125,6 +128,7 @@ final class ForYouInteractor {
             
         }, fail: { errorResponse in
             self.group.leave()
+            debugLog("ForYou Error getFavorites: \(errorResponse.errorCode)-\(String(describing: errorResponse.errorDescriptionLog))")
             errorResponse.showInternetErrorGlobal()
         })
     }
@@ -139,7 +143,8 @@ final class ForYouInteractor {
             switch result {
             case .success(let history):
                 self?.output.getPhotopicks(data: history)
-            case .failed(_):
+            case .failed(let error):
+                debugLog("ForYou Error getInstapickThumbnails: \(error.errorCode)-\(String(describing: error.description))")
                 break
             }
         }
@@ -155,7 +160,8 @@ final class ForYouInteractor {
             switch result {
             case .success(let response):
                 self?.output.getThrowbacks(data: response)
-            case .failed(_):
+            case .failed(let error):
+                debugLog("ForYou Error getThrowbacks: \(error.errorCode)-\(String(describing: error.description))")
                 break
             }
         }
@@ -171,7 +177,8 @@ final class ForYouInteractor {
             switch result {
             case .success(let response):
                 self?.output.getStories(data: response.fileList)
-            case .failed:
+            case .failed(let error):
+                debugLog("ForYou Error getStories: \(error.errorCode)-\(String(describing: error.description))")
                 break
             }
         }
@@ -187,7 +194,8 @@ final class ForYouInteractor {
             switch result {
             case .success(let response):
                 self?.output.getAnimations(data: response.fileList)
-            case .failed:
+            case .failed(let error):
+                debugLog("ForYou Error getAnimations: \(error.errorCode)-\(String(describing: error.description))")
                 break
             }
         }
@@ -203,7 +211,8 @@ final class ForYouInteractor {
             switch result {
             case .success(let response):
                 self?.output.getCollages(data: response.fileList)
-            case .failed:
+            case .failed(let error):
+                debugLog("ForYou Error getCollages: \(error.errorCode)-\(String(describing: error.description))")
                 break
             }
         }
@@ -219,7 +228,8 @@ final class ForYouInteractor {
             switch result {
             case .success(let response):
                 self?.output.getCollageCards(data: response)
-            case .failed:
+            case .failed(let error):
+                debugLog("ForYou Error getCollageCards: \(error.errorCode)-\(String(describing: error.description))")
                 break
             }
         }
@@ -235,7 +245,8 @@ final class ForYouInteractor {
             switch result {
             case .success(let response):
                 self?.output.getAlbumCards(data: response)
-            case .failed:
+            case .failed(let error):
+                debugLog("ForYou Error getAlbumCards: \(error.errorCode)-\(String(describing: error.description))")
                 break
             }
         }
@@ -251,7 +262,8 @@ final class ForYouInteractor {
             switch result {
             case .success(let response):
                 self?.output.getAnimationCards(data: response)
-            case .failed:
+            case .failed(let error):
+                debugLog("ForYou Error getAnimationCards: \(error.errorCode)-\(String(describing: error.description))")
                 break
             }
         }
@@ -266,7 +278,8 @@ final class ForYouInteractor {
             switch result {
             case .success(let response):
                 self?.output.getHidden(data: response.fileList)
-            case .failed:
+            case .failed(let error):
+                debugLog("ForYou Error getHiddens: \(error.errorCode)-\(String(describing: error.description))")
                 break
             }
         }
