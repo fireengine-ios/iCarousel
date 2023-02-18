@@ -65,6 +65,25 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         }
     }
     
+    func setupNotificationTabBarWith(items: [NotificationServiceResponse], originalConfig: EditingBarConfig) {
+        let selectAllIndex = originalConfig.elementsConfig.firstIndex(of: .selectAll)
+        let deleteAllIndex = originalConfig.elementsConfig.firstIndex(of: .deleteAll)
+        
+        let validIndexes = [selectAllIndex, deleteAllIndex].compactMap { $0 }
+        
+        guard !validIndexes.isEmpty else {
+            return
+        }
+        
+        view.disableItems(at: validIndexes)
+        
+        guard !items.isEmpty else {
+            return
+        }
+
+        view.enableItems(at: validIndexes)
+    }
+    
     override func dismiss(animated: Bool) {
         view.hideBar(animated: animated)
     }
@@ -109,6 +128,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             let type = types[index]
             
             switch type {
+            case .deleteAll:
+                print("yilmaz edis:")
+            case .selectAll:
+                print("yilmaz edis:")
             case .hide:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .hide))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits

@@ -1215,6 +1215,14 @@
 		52EDD1C4299EC6A900D549FC /* NotificationThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1C2299EC6A900D549FC /* NotificationThreeDotMenuManager.swift */; };
 		52EDD1C5299EC6A900D549FC /* NotificationThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1C2299EC6A900D549FC /* NotificationThreeDotMenuManager.swift */; };
 		52EDD1C6299EC6A900D549FC /* NotificationThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1C2299EC6A900D549FC /* NotificationThreeDotMenuManager.swift */; };
+		52EDD1CC29A0292100D549FC /* NotificationBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1CB29A0292100D549FC /* NotificationBottomBarManager.swift */; };
+		52EDD1CD29A0292100D549FC /* NotificationBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1CB29A0292100D549FC /* NotificationBottomBarManager.swift */; };
+		52EDD1CE29A0292100D549FC /* NotificationBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1CB29A0292100D549FC /* NotificationBottomBarManager.swift */; };
+		52EDD1CF29A0292100D549FC /* NotificationBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1CB29A0292100D549FC /* NotificationBottomBarManager.swift */; };
+		52EDD1D429A04CE100D549FC /* QuickSelectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1D329A04CE100D549FC /* QuickSelectTableView.swift */; };
+		52EDD1D529A04CE100D549FC /* QuickSelectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1D329A04CE100D549FC /* QuickSelectTableView.swift */; };
+		52EDD1D629A04CE100D549FC /* QuickSelectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1D329A04CE100D549FC /* QuickSelectTableView.swift */; };
+		52EDD1D729A04CE100D549FC /* QuickSelectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1D329A04CE100D549FC /* QuickSelectTableView.swift */; };
 		52F78BA228D9E005001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
 		52F78BA628D9E036001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
 		52F78BA728D9E036001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
@@ -10295,6 +10303,8 @@
 		52EDD1AD299A6A7C00D549FC /* NotificationParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationParameters.swift; sourceTree = "<group>"; };
 		52EDD1B2299A778700D549FC /* NotificationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationResponse.swift; sourceTree = "<group>"; };
 		52EDD1C2299EC6A900D549FC /* NotificationThreeDotMenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationThreeDotMenuManager.swift; sourceTree = "<group>"; };
+		52EDD1CB29A0292100D549FC /* NotificationBottomBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationBottomBarManager.swift; sourceTree = "<group>"; };
+		52EDD1D329A04CE100D549FC /* QuickSelectTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSelectTableView.swift; sourceTree = "<group>"; };
 		536B87BE9C6EA2601A4F42F3 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		5376886D3258645ED3B6E003 /* Pods-TC_Depo_LifeTech.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TC_Depo_LifeTech.debug.xcconfig"; path = "Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech.debug.xcconfig"; sourceTree = "<group>"; };
 		54C522C58BC4B88E39F9443C /* Pods_LifeboxFileProvider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxFileProvider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -14735,6 +14745,8 @@
 			isa = PBXGroup;
 			children = (
 				52EDD1C2299EC6A900D549FC /* NotificationThreeDotMenuManager.swift */,
+				52EDD1CB29A0292100D549FC /* NotificationBottomBarManager.swift */,
+				52EDD1D329A04CE100D549FC /* QuickSelectTableView.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -25907,6 +25919,7 @@
 				8C0E8CF61FDEBDFF00789C91 /* AccountResponse.swift in Sources */,
 				8C0E8CF71FDEBDFF00789C91 /* CollectionViewCellForAudio.swift in Sources */,
 				989BDE5F22F47B1E001DDEB2 /* SpotifyPlaylistViewController.swift in Sources */,
+				52EDD1CC29A0292100D549FC /* NotificationBottomBarManager.swift in Sources */,
 				8C0E8CF81FDEBDFF00789C91 /* KeyboardLayoutConstraint.swift in Sources */,
 				C62239B8204976F20043ED44 /* FaceImagePhotosViewInput.swift in Sources */,
 				8C0E8CF91FDEBDFF00789C91 /* AutoSyncInitializer.swift in Sources */,
@@ -26613,6 +26626,7 @@
 				8C0E8E651FDEBDFF00789C91 /* DropboxResponse.swift in Sources */,
 				9808B7DF2567EB10001DEF2E /* PrivateShareAccessListHeader.swift in Sources */,
 				92004B5221AD100100582C45 /* MyStorageModuleConfigurator.swift in Sources */,
+				52EDD1D429A04CE100D549FC /* QuickSelectTableView.swift in Sources */,
 				076BD1C527BC0998004609E3 /* MapSearchRouterInput.swift in Sources */,
 				4AAF28B820205454007B43BA /* FaceImageItemsConfigurator.swift in Sources */,
 				8C0E8E681FDEBDFF00789C91 /* FileService.swift in Sources */,
@@ -28101,6 +28115,7 @@
 				89DAB3E123AB513700D4337D /* HSCompletionPopUp.swift in Sources */,
 				CE7848D322A685FB00662219 /* PopUpController.swift in Sources */,
 				98BE78B824517E4300B8864F /* SnackbarView.swift in Sources */,
+				52EDD1D629A04CE100D549FC /* QuickSelectTableView.swift in Sources */,
 				89E51D5922CA112E007A7DBC /* CreateStoryPreviewInteractor.swift in Sources */,
 				98E4BA0323C72181003A4631 /* TrashBinInteractor.swift in Sources */,
 				CE7848D422A685FB00662219 /* ErrorResponse.swift in Sources */,
@@ -28214,6 +28229,7 @@
 				CE78491B22A685FB00662219 /* LatestUpladsCard.swift in Sources */,
 				CE78491C22A685FB00662219 /* BlueButtonWithWhiteText.swift in Sources */,
 				CE78491D22A685FB00662219 /* CollectionViewSpinnerFooter.swift in Sources */,
+				52EDD1CE29A0292100D549FC /* NotificationBottomBarManager.swift in Sources */,
 				CE78491E22A685FB00662219 /* ResponseParser.swift in Sources */,
 				98B04830259314750011DAEB /* Utils.m in Sources */,
 				CE78491F22A685FB00662219 /* MyStorageViewInput.swift in Sources */,
@@ -30410,6 +30426,7 @@
 				CF8B65C923CBC9D70021B021 /* SplitIpadViewContoller.swift in Sources */,
 				CF8B65CA23CBC9D70021B021 /* InstagramService.swift in Sources */,
 				CF8B65CB23CBC9D70021B021 /* LocationManager.swift in Sources */,
+				52EDD1CD29A0292100D549FC /* NotificationBottomBarManager.swift in Sources */,
 				CF8B65CC23CBC9D70021B021 /* ContactBackupOld.swift in Sources */,
 				0305A34123D5C55D004D1EC7 /* TrashBinInteractor.swift in Sources */,
 				CF8B65CD23CBC9D70021B021 /* ImageDownloadOperation.swift in Sources */,
@@ -30769,6 +30786,7 @@
 				CF8B66D023CBC9D70021B021 /* PhotoVideoDetailInteractorInput.swift in Sources */,
 				07E846A027C10AC100B3AFA5 /* ItemGroupAnnotation.swift in Sources */,
 				CF8B66D223CBC9D70021B021 /* AuthenticationServiceResponseError.swift in Sources */,
+				52EDD1D529A04CE100D549FC /* QuickSelectTableView.swift in Sources */,
 				98B04814259314750011DAEB /* SyncStatus.m in Sources */,
 				CF8B66D323CBC9D70021B021 /* MediaItem+CoreDataClass.swift in Sources */,
 				CF8B66D423CBC9D70021B021 /* TermsOfUsePresenter.swift in Sources */,
@@ -31741,6 +31759,7 @@
 				3A0CCF312642D20E002E811D /* InvitationGiftCollectionViewCell.swift in Sources */,
 				CF8B6C3C23CBCA280021B021 /* BaseCollectionViewCellWithSwipe.swift in Sources */,
 				CF8B6C3D23CBCA280021B021 /* CardsContainerView.swift in Sources */,
+				52EDD1D729A04CE100D549FC /* QuickSelectTableView.swift in Sources */,
 				CF8B6C3E23CBCA280021B021 /* InstagramParametrs.swift in Sources */,
 				B59E1F8525921F0000640DD1 /* PhotoSyncService.swift in Sources */,
 				CF8B6C4023CBCA280021B021 /* ManageContactsConfigurator.swift in Sources */,
@@ -32567,6 +32586,7 @@
 				CF8B6E8C23CBCA280021B021 /* BaseFilesGreedRouter.swift in Sources */,
 				077EEFAD26E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift in Sources */,
 				52A5E025291C17F900670B0C /* CustomSegmentedView.swift in Sources */,
+				52EDD1CF29A0292100D549FC /* NotificationBottomBarManager.swift in Sources */,
 				CF8B6E8D23CBCA280021B021 /* BaseFilesGreedConfigurator.swift in Sources */,
 				0762029F269B842F00D4FB2C /* OverlayStickerSelectorViewController.swift in Sources */,
 				CF8B6E8E23CBCA280021B021 /* ActionsMenuTableViewCell.swift in Sources */,

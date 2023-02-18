@@ -17,10 +17,12 @@ enum NotificationDisplayConfiguration {
 final class NotificationViewController: BaseViewController {
     var output: NotificationViewOutput!
     
-    private lazy var tableView: UITableView = {
-        let view = UITableView()
+    private lazy var tableView: QuickSelectTableView = {
+        let view = QuickSelectTableView()
         view.register(NotificationTableViewCell.self, forCellReuseIdentifier: "NotificationTableViewCell")
         view.separatorStyle = .none
+        view.longPressDelegate = self
+        view.allowsMultipleSelectionDuringEditing = true
         return view
     }()
     
@@ -32,11 +34,18 @@ final class NotificationViewController: BaseViewController {
     }()
     
     private lazy var threeDotMenuManager = NotificationThreeDotMenuManager(delegate: self)
+    private lazy var bottomBarManager = NotificationBottomBarManager(delegate: self)
     
     private var displayManager: NotificationDisplayConfiguration = .initial
     
     private var navBarConfigurator = NavigationBarConfigurator()
     private var navBarRightItems: [UIBarButtonItem]?
+    private var isSelectingMode: Bool = false
+    private var canShowDetail = true
+    private var isSelectionObject: Int = 0
+    private var selectedIndexes: [IndexPath] {
+        return tableView.indexPathsForSelectedRows ?? []
+    }
     
     // MARK: - View lifecycle
     override func viewDidLoad() {
@@ -51,6 +60,7 @@ final class NotificationViewController: BaseViewController {
         
         output.viewIsReady()
         
+        bottomBarManager.setup()
         displayManager = .initial
         configureNavBarActions()
         updateNavBarItems()
@@ -59,6 +69,7 @@ final class NotificationViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         output.viewWillAppear()
+        bottomBarManager.editingTabBar?.view.layoutIfNeeded()
     }
     
     override func viewDidLayoutSubviews() {
@@ -90,7 +101,6 @@ final class NotificationViewController: BaseViewController {
     }
     
     private func onMorePressed(_ sender: Any) {
-
         threeDotMenuManager.showActions(
             sender: sender
         )
@@ -98,6 +108,60 @@ final class NotificationViewController: BaseViewController {
     
     @objc private func onCancelSelectionButton(_ sender: Any) {
         //stopSelection()
+    }
+    
+    private func startEditingMode(at indexPath: IndexPath?) {
+        guard !isSelectingMode else {
+            return
+        }
+        isSelectingMode = true
+        deselectAllCells()
+
+        isSelectionObject = 0
+        updateSelectedItemsCount()
+        updateBarsForSelectedObjects()
+    }
+    
+    private func stopEditingMode() {
+        isSelectingMode = false
+        deselectAllCells()
+        bottomBarManager.hide()
+    }
+    
+    private func updateBarsForSelectedObjects() {
+        let rows = selectedIndexes.map { $0.row }
+        let selectedNotifications = output.getNotifications(at: rows)
+        
+        bottomBarManager.update(for: selectedNotifications)
+        
+        if selectedIndexes.count == 0 {
+            bottomBarManager.hide()
+        } else {
+            bottomBarManager.show()
+        }
+    }
+    
+    private func updateSelectedItemsCount() {
+        let selectedIndexesCount = selectedIndexes.count
+        isSelectionObject += 1
+        //setTitle(withString: "\(selectedIndexesCount) \(TextConstants.accessibilitySelected)")
+        if selectedIndexesCount == 0 && isSelectionObject > 1 {
+            stopEditingMode()
+            isSelectionObject = 0
+        }
+    }
+    
+    private func deselectAllCells() {
+        deselectAll()
+        tableView.visibleCells.forEach { cell in
+            (cell as? NotificationTableViewCell)?.updateSelection(isSelectionMode: isSelectingMode, animated: false)
+        }
+    }
+    
+    func deselectAll() {
+        selectedIndexes.forEach { indexPath in
+            tableView.deselectRow(at: indexPath, animated: false)
+        }
     }
 }
 
@@ -122,18 +186,118 @@ extension NotificationViewController: UITableViewDataSource {
         
         cell.configure(model: output.getNotification(at: indexPath.row), readMode: true)
         cell.selectionStyle = .none
+        cell.updateSelection(isSelectionMode: isSelectingMode, animated: true)
         cell.deleteHandler = { [weak self] in
-            let row = tableView.indexPath(for: cell)
-            self?.output.deleteNotification(at: row?.row ?? 0)
-            let indexPath = IndexPath(item: row?.row ?? 0, section: 0)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            self?.deleteNotification(tableView: tableView, cell: cell)
         }
         return cell
+    }
+    
+    private func deleteNotification(tableView: UITableView, cell: NotificationTableViewCell) {
+        let row = tableView.indexPath(for: cell)
+        output.deleteNotification(at: row?.row ?? 0)
+        let indexPath = IndexPath(item: row?.row ?? 0, section: 0)
+        tableView.deleteRows(at: [indexPath], with: .fade)
     }
 }
 
 // MARK: - UITableViewDelegate
-extension NotificationViewController: UITableViewDelegate {}
+extension NotificationViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? NotificationTableViewCell else {
+            return
+        }
+        
+        cell.updateSelection(isSelectionMode: isSelectingMode, animated: false)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? NotificationTableViewCell else {
+            return
+        }
+        if isSelectingMode {
+            updateSelection(cell: cell)
+        } else {
+            showDetail(at: indexPath)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? NotificationTableViewCell else {
+            return
+        }
+        
+        if isSelectingMode {
+            updateSelection(cell: cell)
+        }
+    }
+    
+    private func updateSelection(cell: NotificationTableViewCell) {
+        cell.updateSelection(isSelectionMode: isSelectingMode, animated: false)
+        updateSelectedItemsCount()
+        
+        ///fix bottom bar update scrolling freeze on dragging
+        guard !tableView.isQuickSelecting else {
+            return
+        }
+
+        updateBarsForSelectedObjects()
+    }
+    
+    private func showDetail(at indexPath: IndexPath) {
+        guard canShowDetail else {
+            return
+        }
+        
+        canShowDetail = false
+        // TODO: Facelift. Analytics
+//        trackClickOnPhotoOrVideo(isPhoto: isPhoto)
+
+//        dataSource.getWrapedFetchedObjects { [weak self] items in
+//            self?.dataSource.getObject(at: indexPath) { [weak self] object in
+//                guard let self = self else {
+//                    return
+//                }
+//
+//                guard let currentMediaItem = object,
+//                let currentObject = items.first(where: {$0.uuid == currentMediaItem.uuid}) else {
+//                    self.canShowDetail = true
+//                    self.hideSpinner()
+//                    return
+//                }
+//
+//                DispatchQueue.toMain {
+//                    self.hideSpinner()
+//                    let detailModule = self.router.filesDetailModule(fileObject: currentObject,
+//                                                                items: items,
+//                                                                status: .active,
+//                                                                canLoadMoreItems: false,
+//                                                                moduleOutput: nil)
+//
+//                    let nController = NavigationController(rootViewController: detailModule.controller)
+//                    self.router.presentViewController(controller: nController)
+//                    self.canShowDetail = true
+//                }
+//            }
+//        }
+    }
+}
+
+extension NotificationViewController: QuickSelectTableViewDelegate {
+    func didLongPress(at indexPath: IndexPath?) {
+        if !isSelectingMode {
+            startEditingMode(at: indexPath)
+        }
+    }
+    
+    func didEndLongPress(at indexPath: IndexPath?) {
+        if isSelectingMode {
+            self.updateSelectedItemsCount()
+            self.updateBarsForSelectedObjects()
+        }
+    }
+}
 
 extension NotificationViewController: BaseItemInputPassingProtocol {
     func operationFinished(withType type: ElementTypes, response: Any?) {
@@ -144,8 +308,12 @@ extension NotificationViewController: BaseItemInputPassingProtocol {
         
     }
     
+    func stopModeSelected() {
+        stopEditingMode()
+    }
+    
     func selectModeSelected() {
-        
+        startEditingMode(at: nil)
     }
     
     func selectAllModeSelected() {
@@ -153,10 +321,6 @@ extension NotificationViewController: BaseItemInputPassingProtocol {
     }
     
     func deSelectAll() {
-        
-    }
-    
-    func stopModeSelected() {
         
     }
     
@@ -177,8 +341,6 @@ extension NotificationViewController: BaseItemInputPassingProtocol {
     }
     
     func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
-        
+        selectedItemsCallback([])
     }
-    
-    
 }

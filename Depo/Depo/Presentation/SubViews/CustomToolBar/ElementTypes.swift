@@ -725,11 +725,11 @@ enum ElementTypes {
         case .select:
             return ""
         case .selectAll:
-            return ""
+            return "Select All"
         case .selectMode:
             return ""
         case .deleteAll:
-            return ""
+            return "Delete All"
         case .deSelectAll:
             return ""
         case .documentDetails:
@@ -855,11 +855,11 @@ enum ElementTypes {
         case .select:
             return Image.iconSelect.image
         case .selectAll:
-            return nil
+            return Image.iconSelect.image
         case .selectMode:
             return Image.iconSelect.image
         case .deleteAll:
-            return Image.iconTabDelete.image
+            return Image.iconDelete.image
         case .deSelectAll:
             return nil
         case .documentDetails:

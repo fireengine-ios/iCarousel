@@ -41,8 +41,8 @@ class NotificationTableViewCell: UITableViewCell {
         return view
     }()
     
-    private lazy var checkBox: UIButton = {
-        let view = UIButton()
+    private lazy var checkBox: UIImageView = {
+        let view = UIImageView()
         
         view.isHidden = true
         
@@ -194,9 +194,23 @@ class NotificationTableViewCell: UITableViewCell {
         titleLabel.text = model.title
         descriptionLabel.text = model.body
         infoImageView.sd_setImage(with: URL(string: model.smallThumbnail ?? "")!)
+    }
+}
+
+extension NotificationTableViewCell {
+    func updateSelection(isSelectionMode: Bool, animated: Bool) {
+        checkBox.isHidden = !isSelectionMode
+        let selectionStateImage = isSelected ? Image.iconCheckmarkSelected : Image.iconCheckmarkNotSelected
+        checkBox.image = selectionStateImage.image
         
-        checkBox.isHidden = !readMode
-        checkBox.setImage(Image.iconSelectCheck.image, for: .normal)
-        // containerView.layer.borderColor = ...
+        // i will add if border needs.
+//        let selection = isSelectionMode && isSelected
+//        if animated {
+//            UIView.animate(withDuration: NumericConstants.animationDuration) {
+//                self.selectionStateView.alpha = selection ? 1 : 0
+//            }
+//        } else {
+//            selectionStateView.alpha = selection ? 1 : 0
+//        }
     }
 }
