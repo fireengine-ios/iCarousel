@@ -29,6 +29,13 @@ protocol BaseItemInputPassingProtocol: AnyObject {
     func openInstaPick()
     
     func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems)
+    
+    func deleteAll()
+}
+
+// To make it optional
+extension BaseItemInputPassingProtocol {
+    func deleteAll() {}
 }
 
 protocol BaseItemOuputPassingProtocol: AnyObject {

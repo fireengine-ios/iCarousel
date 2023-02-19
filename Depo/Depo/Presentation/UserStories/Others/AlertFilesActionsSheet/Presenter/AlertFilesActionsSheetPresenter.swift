@@ -441,9 +441,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         
         switch type {
         case .deleteAll:
-            print("Yilmaz Edis:")
+            basePassingPresenter?.deleteAll()
         case .selectMode:
-            print("Yilmaz Edis:")
+            basePassingPresenter?.selectModeSelected()
         default:
             break
         }

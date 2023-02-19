@@ -129,9 +129,9 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             
             switch type {
             case .deleteAll:
-                print("yilmaz edis:")
+                self.basePassingPresenter?.deleteAll()
             case .selectAll:
-                print("yilmaz edis:")
+                self.basePassingPresenter?.selectAllModeSelected()
             case .hide:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .hide))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits

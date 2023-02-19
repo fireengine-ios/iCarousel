@@ -41,7 +41,6 @@ final class NotificationViewController: BaseViewController {
     private var navBarConfigurator = NavigationBarConfigurator()
     private var navBarRightItems: [UIBarButtonItem]?
     private var isSelectingMode: Bool = false
-    private var canShowDetail = true
     private var isSelectionObject: Int = 0
     private var selectedIndexes: [IndexPath] {
         return tableView.indexPathsForSelectedRows ?? []
@@ -186,7 +185,6 @@ extension NotificationViewController: UITableViewDataSource {
         
         cell.configure(model: output.getNotification(at: indexPath.row), readMode: true)
         cell.selectionStyle = .none
-        cell.updateSelection(isSelectionMode: isSelectingMode, animated: true)
         cell.deleteHandler = { [weak self] in
             self?.deleteNotification(tableView: tableView, cell: cell)
         }
@@ -218,8 +216,6 @@ extension NotificationViewController: UITableViewDelegate {
         }
         if isSelectingMode {
             updateSelection(cell: cell)
-        } else {
-            showDetail(at: indexPath)
         }
     }
     
@@ -243,44 +239,6 @@ extension NotificationViewController: UITableViewDelegate {
         }
 
         updateBarsForSelectedObjects()
-    }
-    
-    private func showDetail(at indexPath: IndexPath) {
-        guard canShowDetail else {
-            return
-        }
-        
-        canShowDetail = false
-        // TODO: Facelift. Analytics
-//        trackClickOnPhotoOrVideo(isPhoto: isPhoto)
-
-//        dataSource.getWrapedFetchedObjects { [weak self] items in
-//            self?.dataSource.getObject(at: indexPath) { [weak self] object in
-//                guard let self = self else {
-//                    return
-//                }
-//
-//                guard let currentMediaItem = object,
-//                let currentObject = items.first(where: {$0.uuid == currentMediaItem.uuid}) else {
-//                    self.canShowDetail = true
-//                    self.hideSpinner()
-//                    return
-//                }
-//
-//                DispatchQueue.toMain {
-//                    self.hideSpinner()
-//                    let detailModule = self.router.filesDetailModule(fileObject: currentObject,
-//                                                                items: items,
-//                                                                status: .active,
-//                                                                canLoadMoreItems: false,
-//                                                                moduleOutput: nil)
-//
-//                    let nController = NavigationController(rootViewController: detailModule.controller)
-//                    self.router.presentViewController(controller: nController)
-//                    self.canShowDetail = true
-//                }
-//            }
-//        }
     }
 }
 
@@ -312,12 +270,17 @@ extension NotificationViewController: BaseItemInputPassingProtocol {
         stopEditingMode()
     }
     
+    func deleteAll() {
+        print("yilmaz edis: Delete All")
+    }
+    
     func selectModeSelected() {
         startEditingMode(at: nil)
+        print("yilmaz edis: Select Mode")
     }
     
     func selectAllModeSelected() {
-        
+        print("yilmaz edis: Select Mode and Select All")
     }
     
     func deSelectAll() {
