@@ -63,8 +63,8 @@ class FavoriteInteractor: BaseFilesGreedInteractor {
     }
     
     override func trackScreen() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.StoriesScreen())
-        analyticsManager.logScreen(screen: .myStories)
-        analyticsManager.trackDimentionsEveryClickGA(screen: .myStories)
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.FavoritesScreen())
+        analyticsManager.logScreen(screen: .favorites)
+        analyticsManager.trackDimentionsEveryClickGA(screen: .favorites)
     }
 }
