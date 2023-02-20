@@ -156,6 +156,10 @@ enum AnalyticsAppScreens {
     
     case saveToMyLifebox
     
+    //ForYou
+    case myCollages
+    case myAnimations
+    
     var name: String {
         switch self {
         ///authorization
@@ -423,6 +427,11 @@ enum AnalyticsAppScreens {
             return "OTP – Reset Password"
         case .saveToMyLifebox:
             return "Save to My lifebox"
+        //ForYou
+        case .myCollages:
+            return "Collages"
+        case .myAnimations:
+            return "Animations"
         }
     }
 }
