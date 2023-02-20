@@ -26,6 +26,12 @@ final class NotificationViewController: BaseViewController {
         return view
     }()
     
+    private lazy var bottomBarCard: SimpleBottomBarCard = {
+        let view = SimpleBottomBarCard()
+        view.delegate = self
+        return view
+    }()
+    
     private lazy var cancelSelectionButton: UIBarButtonItem = {
         return UIBarButtonItem(title: TextConstants.cancelSelectionButtonTitle,
                                font: .TurkcellSaturaDemFont(size: 19.0),
@@ -63,6 +69,7 @@ final class NotificationViewController: BaseViewController {
         displayManager = .initial
         configureNavBarActions()
         updateNavBarItems()
+        bottomBarCard.setLayout(with: view)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,13 +113,18 @@ final class NotificationViewController: BaseViewController {
     }
     
     @objc private func onCancelSelectionButton(_ sender: Any) {
-        //stopSelection()
+        stopEditingMode()
     }
     
     private func startEditingMode(at indexPath: IndexPath?) {
         guard !isSelectingMode else {
             return
         }
+        
+        /// Back button case
+        displayManager = .selection
+        updateNavBarItems()
+        
         isSelectingMode = true
         deselectAllCells()
 
@@ -122,9 +134,15 @@ final class NotificationViewController: BaseViewController {
     }
     
     private func stopEditingMode() {
+        
+        /// Back button case
+        displayManager = .initial
+        updateNavBarItems()
+        
         isSelectingMode = false
         deselectAllCells()
         bottomBarManager.hide()
+        bottomBarCard.isHidden = true
     }
     
     private func updateBarsForSelectedObjects() {
@@ -132,9 +150,12 @@ final class NotificationViewController: BaseViewController {
         let selectedNotifications = output.getNotifications(at: rows)
         
         bottomBarManager.update(for: selectedNotifications)
+        bottomBarCard.isHidden = false
+        bottomBarCard.setCount(with: rows.count)
         
         if selectedIndexes.count == 0 {
             bottomBarManager.hide()
+            bottomBarCard.isHidden = true
         } else {
             bottomBarManager.show()
         }
@@ -254,6 +275,12 @@ extension NotificationViewController: QuickSelectTableViewDelegate {
             self.updateSelectedItemsCount()
             self.updateBarsForSelectedObjects()
         }
+    }
+}
+
+extension NotificationViewController: SimpleBottomBarCardDelegate {
+    func cancelButtonAction() {
+        stopEditingMode()
     }
 }
 

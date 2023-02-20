@@ -1223,6 +1223,10 @@
 		52EDD1D529A04CE100D549FC /* QuickSelectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1D329A04CE100D549FC /* QuickSelectTableView.swift */; };
 		52EDD1D629A04CE100D549FC /* QuickSelectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1D329A04CE100D549FC /* QuickSelectTableView.swift */; };
 		52EDD1D729A04CE100D549FC /* QuickSelectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1D329A04CE100D549FC /* QuickSelectTableView.swift */; };
+		52EDD1D929A3A06000D549FC /* SimpleBottomBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1D829A3A06000D549FC /* SimpleBottomBarCard.swift */; };
+		52EDD1DA29A3A06000D549FC /* SimpleBottomBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1D829A3A06000D549FC /* SimpleBottomBarCard.swift */; };
+		52EDD1DB29A3A06000D549FC /* SimpleBottomBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1D829A3A06000D549FC /* SimpleBottomBarCard.swift */; };
+		52EDD1DC29A3A06000D549FC /* SimpleBottomBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1D829A3A06000D549FC /* SimpleBottomBarCard.swift */; };
 		52F78BA228D9E005001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
 		52F78BA628D9E036001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
 		52F78BA728D9E036001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
@@ -10305,6 +10309,7 @@
 		52EDD1C2299EC6A900D549FC /* NotificationThreeDotMenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationThreeDotMenuManager.swift; sourceTree = "<group>"; };
 		52EDD1CB29A0292100D549FC /* NotificationBottomBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationBottomBarManager.swift; sourceTree = "<group>"; };
 		52EDD1D329A04CE100D549FC /* QuickSelectTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSelectTableView.swift; sourceTree = "<group>"; };
+		52EDD1D829A3A06000D549FC /* SimpleBottomBarCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBottomBarCard.swift; sourceTree = "<group>"; };
 		536B87BE9C6EA2601A4F42F3 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		5376886D3258645ED3B6E003 /* Pods-TC_Depo_LifeTech.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TC_Depo_LifeTech.debug.xcconfig"; path = "Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech.debug.xcconfig"; sourceTree = "<group>"; };
 		54C522C58BC4B88E39F9443C /* Pods_LifeboxFileProvider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxFileProvider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -14746,6 +14751,7 @@
 			children = (
 				52EDD1C2299EC6A900D549FC /* NotificationThreeDotMenuManager.swift */,
 				52EDD1CB29A0292100D549FC /* NotificationBottomBarManager.swift */,
+				52EDD1D829A3A06000D549FC /* SimpleBottomBarCard.swift */,
 				52EDD1D329A04CE100D549FC /* QuickSelectTableView.swift */,
 			);
 			path = Misc;
@@ -26708,6 +26714,7 @@
 				B55F92EE2562546D00F54F2F /* PrivateShareSharedFilesBottomBarManager.swift in Sources */,
 				8C0E8EB61FDEBDFF00789C91 /* BaseFilesGreedPresenter.swift in Sources */,
 				F0571EF7288C1D3000A0D6AC /* ForYouCollectionViewCell.swift in Sources */,
+				52EDD1D929A3A06000D549FC /* SimpleBottomBarCard.swift in Sources */,
 				8C0E8EB71FDEBDFF00789C91 /* BaseFilesGreedInteractorInput.swift in Sources */,
 				8C0E8EB81FDEBDFF00789C91 /* BaseFilesGreedInteractorOutput.swift in Sources */,
 				F028C1192789F3B4005CE6AF /* PublicShareInteractorInput.swift in Sources */,
@@ -28408,6 +28415,7 @@
 				CE78498C22A685FB00662219 /* BottomSelectionTabBarRouter.swift in Sources */,
 				CE78498D22A685FB00662219 /* PasswordCell.swift in Sources */,
 				CE78498E22A685FB00662219 /* PremiumInitializer.swift in Sources */,
+				52EDD1DB29A3A06000D549FC /* SimpleBottomBarCard.swift in Sources */,
 				893269F629361AE7006305A0 /* AnimationInteractor.swift in Sources */,
 				0303ED8C23BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift in Sources */,
 				CE78498F22A685FB00662219 /* RegistrationViewInput.swift in Sources */,
@@ -30013,6 +30021,7 @@
 				CF8B64A423CBC9D70021B021 /* FilesDataSource.swift in Sources */,
 				CF8B64A523CBC9D70021B021 /* UploadFromLifeBoxInteractor.swift in Sources */,
 				52A5E023291C17F900670B0C /* CustomSegmentedView.swift in Sources */,
+				52EDD1DA29A3A06000D549FC /* SimpleBottomBarCard.swift in Sources */,
 				CF8B64A623CBC9D70021B021 /* UIApplication+topController.swift in Sources */,
 				174F99E7243D448900986C8B /* ControlContainableScrollView.swift in Sources */,
 				CF8B64A723CBC9D70021B021 /* VisualMusicPlayerViewOutput.swift in Sources */,
@@ -31722,6 +31731,7 @@
 				CF8B6C1C23CBCA280021B021 /* AutoSyncDataStorage.swift in Sources */,
 				F02F6AA3269C16C000A64ED8 /* PasswordRulesView.swift in Sources */,
 				CF8B6C1D23CBCA280021B021 /* PrintInitializer.swift in Sources */,
+				52EDD1DC29A3A06000D549FC /* SimpleBottomBarCard.swift in Sources */,
 				CF8B6C1E23CBCA280021B021 /* UserProfileInitializer.swift in Sources */,
 				07D0593126F9B24D005315E2 /* ResetPasswordOTPInteractor.swift in Sources */,
 				CF8B6C2023CBCA280021B021 /* BaseCellModel.swift in Sources */,
