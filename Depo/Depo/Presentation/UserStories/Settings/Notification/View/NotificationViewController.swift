@@ -32,6 +32,11 @@ final class NotificationViewController: BaseViewController {
         return view
     }()
     
+    private lazy var emptyView: NotificationEmptyView = {
+        let view = NotificationEmptyView()
+        return view
+    }()
+    
     private lazy var cancelSelectionButton: UIBarButtonItem = {
         return UIBarButtonItem(title: TextConstants.cancelSelectionButtonTitle,
                                font: .TurkcellSaturaDemFont(size: 19.0),
@@ -70,6 +75,7 @@ final class NotificationViewController: BaseViewController {
         configureNavBarActions()
         updateNavBarItems()
         bottomBarCard.setLayout(with: view)
+        emptyView.setLayout(with: view)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -189,6 +195,10 @@ final class NotificationViewController: BaseViewController {
 extension NotificationViewController: NotificationViewInput {
     func reloadTableView() {
         tableView.reloadData()
+    }
+    
+    func setEmptyView(as hidden: Bool) {
+        emptyView.isHidden = hidden
     }
 }
 

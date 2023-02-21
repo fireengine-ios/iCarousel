@@ -13,7 +13,11 @@ class NotificationPresenter {
     var interactor: NotificationInteractorInput!
     var router: NotificationRouterInput!
     
-    private var notifications: [NotificationServiceResponse] = []
+    private var notifications: [NotificationServiceResponse] = [] {
+        didSet {
+            view?.setEmptyView(as: !notifications.isEmpty)
+        }
+    }
 }
 
 // MARK: PackagesViewOutput

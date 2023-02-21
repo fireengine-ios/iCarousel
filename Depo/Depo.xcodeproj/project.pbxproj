@@ -1227,6 +1227,10 @@
 		52EDD1DA29A3A06000D549FC /* SimpleBottomBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1D829A3A06000D549FC /* SimpleBottomBarCard.swift */; };
 		52EDD1DB29A3A06000D549FC /* SimpleBottomBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1D829A3A06000D549FC /* SimpleBottomBarCard.swift */; };
 		52EDD1DC29A3A06000D549FC /* SimpleBottomBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1D829A3A06000D549FC /* SimpleBottomBarCard.swift */; };
+		52EDD1DE29A502D100D549FC /* NotificationEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1DD29A502D100D549FC /* NotificationEmptyView.swift */; };
+		52EDD1DF29A502D100D549FC /* NotificationEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1DD29A502D100D549FC /* NotificationEmptyView.swift */; };
+		52EDD1E029A502D100D549FC /* NotificationEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1DD29A502D100D549FC /* NotificationEmptyView.swift */; };
+		52EDD1E129A502D100D549FC /* NotificationEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1DD29A502D100D549FC /* NotificationEmptyView.swift */; };
 		52F78BA228D9E005001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
 		52F78BA628D9E036001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
 		52F78BA728D9E036001C5D95 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
@@ -10310,6 +10314,7 @@
 		52EDD1CB29A0292100D549FC /* NotificationBottomBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationBottomBarManager.swift; sourceTree = "<group>"; };
 		52EDD1D329A04CE100D549FC /* QuickSelectTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSelectTableView.swift; sourceTree = "<group>"; };
 		52EDD1D829A3A06000D549FC /* SimpleBottomBarCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBottomBarCard.swift; sourceTree = "<group>"; };
+		52EDD1DD29A502D100D549FC /* NotificationEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationEmptyView.swift; sourceTree = "<group>"; };
 		536B87BE9C6EA2601A4F42F3 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		5376886D3258645ED3B6E003 /* Pods-TC_Depo_LifeTech.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TC_Depo_LifeTech.debug.xcconfig"; path = "Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech.debug.xcconfig"; sourceTree = "<group>"; };
 		54C522C58BC4B88E39F9443C /* Pods_LifeboxFileProvider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxFileProvider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -14753,6 +14758,7 @@
 				52EDD1CB29A0292100D549FC /* NotificationBottomBarManager.swift */,
 				52EDD1D829A3A06000D549FC /* SimpleBottomBarCard.swift */,
 				52EDD1D329A04CE100D549FC /* QuickSelectTableView.swift */,
+				52EDD1DD29A502D100D549FC /* NotificationEmptyView.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -27356,6 +27362,7 @@
 				8C0E8FC31FDEBDFF00789C91 /* ActivityTimelineInteractorInput.swift in Sources */,
 				8C0E8FC41FDEBDFF00789C91 /* ActivityTimelineInteractorOutput.swift in Sources */,
 				8C0E8FC51FDEBDFF00789C91 /* ActivityTimelineInteractor.swift in Sources */,
+				52EDD1DE29A502D100D549FC /* NotificationEmptyView.swift in Sources */,
 				8C0E8FC61FDEBDFF00789C91 /* ActivityTimelineRouterInput.swift in Sources */,
 				4ADE0873202D90CE0095346F /* FaceImageAddNameRouterInput.swift in Sources */,
 				735766E523AE1B34008589E9 /* StickerCollectionViewCell.swift in Sources */,
@@ -29404,6 +29411,7 @@
 				CE784C2622A685FB00662219 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,
 				B5450209255A863C004DBD41 /* PrivateShareSharedFilesViewController.swift in Sources */,
 				07A6C48C26E5EC8300B5442B /* ProfileEmailFieldView.swift in Sources */,
+				52EDD1E029A502D100D549FC /* NotificationEmptyView.swift in Sources */,
 				98B047C0259314740011DAEB /* AppRater.m in Sources */,
 				CE784C2722A685FB00662219 /* ManageContactsRouter.swift in Sources */,
 				98231AA924F3A23500FD16E2 /* MetropolisFilter.swift in Sources */,
@@ -31006,6 +31014,7 @@
 				CF8B676F23CBC9D70021B021 /* SplashInteractor.swift in Sources */,
 				CF8B677023CBC9D70021B021 /* XCGLogger+Extension.swift in Sources */,
 				B59E1F8225921F0000640DD1 /* PhotoSyncService.swift in Sources */,
+				52EDD1DF29A502D100D549FC /* NotificationEmptyView.swift in Sources */,
 				CF8B677123CBC9D70021B021 /* NotificationName+Extensions.swift in Sources */,
 				CF8B677223CBC9D70021B021 /* MailVerificationViewController.swift in Sources */,
 				CF8B677423CBC9D70021B021 /* SplashRouterInput.swift in Sources */,
@@ -31507,6 +31516,7 @@
 				CF8B6B8223CBCA280021B021 /* CollectionViewCellDataProtocol.swift in Sources */,
 				0711887327F6EBDE00F512A1 /* AppImage.swift in Sources */,
 				CF8B6B8323CBCA280021B021 /* HomePageInitializer.swift in Sources */,
+				52EDD1E129A502D100D549FC /* NotificationEmptyView.swift in Sources */,
 				CF8B6B8423CBCA280021B021 /* UploadFromLifeBoxInteractorIO.swift in Sources */,
 				CF8B6B8523CBCA280021B021 /* SeacrhViewRouter.swift in Sources */,
 				CF8B6B8623CBCA280021B021 /* AutoSyncRoutingService.swift in Sources */,
