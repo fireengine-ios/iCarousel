@@ -91,6 +91,7 @@ final class PhotoVideoDataSource: NSObject {
     
     func scrollToItem(_ item: Item) {
         if lastUpdateFetchedObjects == nil {
+            debugLog("TBCard Error PhotoVideoDataSoruce row94 \(String(describing: lastUpdateFetchedObjects))")
             tbMatikItem = item
         } else {
             scroll(to: item)
@@ -99,12 +100,15 @@ final class PhotoVideoDataSource: NSObject {
     
     private func scroll(to item: Item) {
         getIndexPathForObject(uuid: item.uuid) { [weak self] indexPath in
+            debugLog("TBCard Error PhotoVideoDataSoruce row103 \(String(describing: indexPath))")
             guard let self = self else {
+                debugLog("TBCard Error PhotoVideoDataSoruce row105 \(item.uuid) \(String(describing: indexPath))")
                 return
             }
             
             self.tbMatikItem = nil
             if let indexPath = indexPath {
+                debugLog("TBCard Error PhotoVideoDataSoruce row111 \(String(describing: indexPath))")
                 self.collectionView?.scrollToItem(at: indexPath, at: .centeredVertically, animated: false)
             }
         }
