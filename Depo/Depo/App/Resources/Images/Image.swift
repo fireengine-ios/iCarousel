@@ -52,6 +52,7 @@ enum Image: String, AppImage {
     case iconMove
     case iconAlbum
     case iconUnstar
+    case iconErrorRed
     /// Actions/Function Menu
     case iconFilter
     case iconGif

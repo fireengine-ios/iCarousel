@@ -27,6 +27,8 @@ enum AppColor {
     case tabBarCardProgressTrack
 
     // MARK: General
+    case warning
+    case readState
     case background
     case secondaryBackground
     case tertiaryBackground
