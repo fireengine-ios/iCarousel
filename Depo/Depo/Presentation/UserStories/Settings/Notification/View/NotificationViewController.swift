@@ -189,6 +189,15 @@ final class NotificationViewController: BaseViewController {
             tableView.deselectRow(at: indexPath, animated: false)
         }
     }
+    
+    private func selectAllCells() {
+        for section in 0..<tableView.numberOfSections {
+            for row in 0..<tableView.numberOfRows(inSection: section) {
+                let indexPath = IndexPath(row: row, section: section)
+                tableView.selectOneRow(isSelected: isSelectingMode, indexPath: indexPath)
+            }
+        }
+    }
 }
 
 // MARK: NotificationViewInput
@@ -313,11 +322,10 @@ extension NotificationViewController: BaseItemInputPassingProtocol {
     
     func selectModeSelected() {
         startEditingMode(at: nil)
-        print("yilmaz edis: Select Mode")
     }
     
     func selectAllModeSelected() {
-        print("yilmaz edis: Select Mode and Select All")
+        selectAllCells()
     }
     
     func deSelectAll() {
