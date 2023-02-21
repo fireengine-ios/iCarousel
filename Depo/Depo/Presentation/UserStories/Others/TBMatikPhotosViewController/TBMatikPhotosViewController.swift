@@ -108,8 +108,10 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     
     private var currentItem: Item? {
         if let uuid = uuids[safe: carousel.currentItemIndex] {
+            debugLog("TBCard Error TBMaticPhotosViewController row111 \(String(describing: carousel.currentItemIndex))")
             return items[uuid]
         } else {
+            debugLog("TBCard Error TBMaticPhotosViewController row114 \(String(describing: uuids[safe: carousel.currentItemIndex]))")
             assertionFailure("uuids not setuped")
             return nil
         }
@@ -246,6 +248,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         
         guard let item = currentItem,
             let tabbarController = RouterVC().tabBarController else {
+            debugLog("TBCard Error TBMatikPhotosViewController \(currentItem?.uuid)")
             assertionFailure()
             return
         }
