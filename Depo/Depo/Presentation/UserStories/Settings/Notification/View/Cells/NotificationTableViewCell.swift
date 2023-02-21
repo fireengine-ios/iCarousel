@@ -81,6 +81,7 @@ class NotificationTableViewCell: UITableViewCell {
     }()
     
     private var warningCase = false
+    private var canSwipe = true
     var deleteHandler: (() -> Void)?
     private let panGestureRecognizer = UIPanGestureRecognizer()
     
@@ -117,8 +118,12 @@ class NotificationTableViewCell: UITableViewCell {
     }
     
     @objc private func handlePanGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
-        let translation = gestureRecognizer.translation(in: containerView)
         
+        /// Cause, I dont want to swipe cell while in select mode
+        guard canSwipe else { return }
+        
+        let translation = gestureRecognizer.translation(in: containerView)
+    
         switch gestureRecognizer.state {
         case .changed:
             // Prevent it from sliding to the right
@@ -237,7 +242,7 @@ class NotificationTableViewCell: UITableViewCell {
 extension NotificationTableViewCell {
     func updateSelection(isSelectionMode: Bool, animated: Bool) {
         checkBox.isHidden = !isSelectionMode
-        
+        canSwipe = !isSelectionMode
         warningImageView.isHidden = !isSelectionMode ? !warningCase : true
        
         let selectionStateImage = isSelected ? Image.iconCheckmarkSelected : Image.iconCheckmarkNotSelected
