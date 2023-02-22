@@ -107,8 +107,9 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     }()
     
     private var currentItem: Item? {
-        if let uuid = uuids[safe: carousel.currentItemIndex] {
-            debugLog("TBCard Error TBMaticPhotosViewController row111 \(String(describing: carousel.currentItemIndex))")
+        if let uuid = uuids[safe: selectedIndex] {
+            debugLog("TBCard Error TBMaticPhotosViewController selectedIndex row111 \(String(describing: selectedIndex))")
+            debugLog("TBCard Error TBMaticPhotosViewController currentItemIndex row111 \(String(describing: carousel.currentItemIndex))")
             return items[uuid]
         } else {
             debugLog("TBCard Error TBMaticPhotosViewController row114 \(String(describing: uuids[safe: carousel.currentItemIndex]))")
@@ -215,7 +216,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     
     private func reloadData() {
         carousel.reloadData()
-        carousel.scrollToItem(at: selectedIndex, animated: false)
+        carousel.scrollToItem(at: 0, animated: false)
         carousel.isHidden = false
         updateTitle()
     }
@@ -331,6 +332,10 @@ extension TBMatikPhotosViewController: iCarouselDelegate {
         if let currentView = carousel.currentItemView as? TBMatikPhotoView {
             updateButtonsState(for: currentView)
             updateBackground(with: currentView.image)
+        }
+        
+        if self.carousel == carousel {
+            selectedIndex = carousel.currentItemIndex;
         }
     }
 }
