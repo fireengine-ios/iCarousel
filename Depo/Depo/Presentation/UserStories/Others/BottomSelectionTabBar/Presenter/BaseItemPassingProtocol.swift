@@ -30,12 +30,12 @@ protocol BaseItemInputPassingProtocol: AnyObject {
     
     func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems)
     
-    func deleteAll()
+    func delete(all: Bool)
 }
 
 // To make it optional
 extension BaseItemInputPassingProtocol {
-    func deleteAll() {}
+    func delete(all: Bool) {}
 }
 
 protocol BaseItemOuputPassingProtocol: AnyObject {

@@ -129,7 +129,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             
             switch type {
             case .deleteAll:
-                self.basePassingPresenter?.deleteAll()
+                self.basePassingPresenter?.delete(all: false)
             case .selectAll:
                 self.basePassingPresenter?.selectAllModeSelected()
             case .hide:

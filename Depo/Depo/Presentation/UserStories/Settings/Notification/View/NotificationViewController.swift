@@ -188,13 +188,42 @@ final class NotificationViewController: BaseViewController {
         }
     }
     
+    private func deleteSelectedCells() {
+        let rows = selectedIndexes.map { $0.row }
+        output.deleteAllNotification(at: rows)
+        tableView.deleteRows(at: selectedIndexes, with: .fade)
+        updateSelectedItemsCount()
+        updateBarsForSelectedObjects()
+    }
+    
+    private func deleteAllCells() {
+        output.deleteAllNotification()
+        tableView.deleteRows(at: iterateAllCells(), with: .fade)
+        updateSelectedItemsCount()
+        updateBarsForSelectedObjects()
+    }
+    
+    private func deleteNotification(row: IndexPath) {
+        output.deleteNotification(at: row.row )
+        let indexPath = IndexPath(item: row.row , section: 0)
+        tableView.deleteRows(at: [indexPath], with: .fade)
+    }
+    
     private func selectAllCells() {
+        iterateAllCells().forEach { indexPath in
+            tableView.selectOneRow(isSelected: isSelectingMode, indexPath: indexPath)
+        }
+    }
+    
+    private func iterateAllCells() -> [IndexPath] {
+        var indexPaths: [IndexPath] = []
         for section in 0..<tableView.numberOfSections {
             for row in 0..<tableView.numberOfRows(inSection: section) {
                 let indexPath = IndexPath(row: row, section: section)
-                tableView.selectOneRow(isSelected: isSelectingMode, indexPath: indexPath)
+                indexPaths.append(indexPath)
             }
         }
+        return indexPaths
     }
 }
 
@@ -224,16 +253,10 @@ extension NotificationViewController: UITableViewDataSource {
         cell.configure(model: output.getNotification(at: indexPath.row), readMode: true)
         cell.selectionStyle = .none
         cell.deleteHandler = { [weak self] in
-            self?.deleteNotification(tableView: tableView, cell: cell)
+            guard let row = tableView.indexPath(for: cell) else { return }
+            self?.deleteNotification(row: row)
         }
         return cell
-    }
-    
-    private func deleteNotification(tableView: UITableView, cell: NotificationTableViewCell) {
-        let row = tableView.indexPath(for: cell)
-        output.deleteNotification(at: row?.row ?? 0)
-        let indexPath = IndexPath(item: row?.row ?? 0, section: 0)
-        tableView.deleteRows(at: [indexPath], with: .fade)
     }
 }
 
@@ -314,8 +337,12 @@ extension NotificationViewController: BaseItemInputPassingProtocol {
         stopEditingMode()
     }
     
-    func deleteAll() {
-        print("yilmaz edis: Delete All")
+    func delete(all: Bool) {
+        if all {
+            deleteAllCells()
+        } else {
+            deleteSelectedCells()
+        }
     }
     
     func selectModeSelected() {

@@ -47,6 +47,16 @@ extension NotificationPresenter: NotificationViewOutput {
     func deleteNotification(at index: Int) {
         notifications.remove(at: index)
     }
+    
+    func deleteAllNotification() {
+        notifications.removeAll()
+    }
+    
+    func deleteAllNotification(at indicesToRemove: [Int]) {
+        for index in indicesToRemove.sorted(by: >) {
+            notifications.remove(at: index)
+        }
+    }
 }
 
 // MARK: PackagesInteractorOutput
@@ -56,7 +66,7 @@ extension NotificationPresenter: NotificationInteractorOutput {
         
         // self.notifications = notifications
         
-        for i in 0...notifications.count {
+        for i in 0...notifications.count * 10 {
             let item = NotificationServiceResponse()
             item.title = "\(i) - Yilmaz Edis"
             item.body =  "Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet"

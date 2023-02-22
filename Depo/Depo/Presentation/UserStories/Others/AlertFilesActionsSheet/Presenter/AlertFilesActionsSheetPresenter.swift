@@ -441,7 +441,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         
         switch type {
         case .deleteAll:
-            basePassingPresenter?.deleteAll()
+            basePassingPresenter?.delete(all: true)
         case .selectMode:
             basePassingPresenter?.selectModeSelected()
         default:

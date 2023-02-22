@@ -15,5 +15,7 @@ protocol NotificationViewOutput {
     func notificationsCount() -> Int
     func getNotification(at index: Int) -> NotificationServiceResponse
     func deleteNotification(at index: Int)
+    func deleteAllNotification(at indicesToRemove: [Int])
+    func deleteAllNotification()
     func getNotifications(at indexs: [Int]) -> [NotificationServiceResponse]
 }
