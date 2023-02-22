@@ -32,8 +32,8 @@ final class NotificationBottomBarManager {
         self.editingTabBar = botvarBarVC
     }
     
-    func update(for items: [NotificationServiceResponse]) {
-        bottomBarPresenter.setupNotificationTabBarWith(items: items, originalConfig: photoVideoBottomBarConfig)
+    func update(for status: Bool) {
+        bottomBarPresenter.setupNotificationTabBarWith(status: status, originalConfig: photoVideoBottomBarConfig)
     }
     
     func show() {

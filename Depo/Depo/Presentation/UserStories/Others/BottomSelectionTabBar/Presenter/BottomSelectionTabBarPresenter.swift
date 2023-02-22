@@ -65,7 +65,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         }
     }
     
-    func setupNotificationTabBarWith(items: [NotificationServiceResponse], originalConfig: EditingBarConfig) {
+    func setupNotificationTabBarWith(status: Bool, originalConfig: EditingBarConfig) {
         let selectAllIndex = originalConfig.elementsConfig.firstIndex(of: .selectAll)
         let deleteAllIndex = originalConfig.elementsConfig.firstIndex(of: .deleteAll)
         
@@ -77,7 +77,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         
         view.disableItems(at: validIndexes)
         
-        guard !items.isEmpty else {
+        guard status else {
             return
         }
 

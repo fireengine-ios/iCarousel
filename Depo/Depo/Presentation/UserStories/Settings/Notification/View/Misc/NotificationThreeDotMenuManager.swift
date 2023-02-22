@@ -19,13 +19,6 @@ final class NotificationThreeDotMenuManager {
     init(delegate: BaseItemInputPassingProtocol) {
         self.delegate = delegate
     }
-
-//    func showActions(for items: [WrapData], isSelectingMode: Bool, sender: Any?) {
-//        self.alert.show(with: [.selectMode,
-//                               .deleteAll],
-//                        for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
-//    }
-    
     
     func showActions(sender: Any?) {
         self.alert.showNotification(with: [.selectMode,
