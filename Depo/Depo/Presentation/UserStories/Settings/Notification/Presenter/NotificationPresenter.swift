@@ -18,6 +18,9 @@ class NotificationPresenter {
             view?.setEmptyView(as: !notifications.isEmpty)
         }
     }
+    
+    var onlyRead: Bool = true
+    var onlyShowAlerts: Bool = true
 }
 
 // MARK: PackagesViewOutput

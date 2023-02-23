@@ -54,6 +54,10 @@ enum ElementTypes {
     case selectAll
     case selectMode
     case deleteAll
+    case onlyReadOn
+    case onlyReadOff
+    case onlyShowAlertsOn
+    case onlyShowAlertsOff
     case deSelectAll
     //doc viewing
     case documentDetails
@@ -601,6 +605,14 @@ enum ElementTypes {
             return TextConstants.actionSheetSelectAll
         case .selectMode:
             return "Select Mode"
+        case .onlyReadOn:
+            return "Only Read"
+        case .onlyReadOff:
+            return "Only Read"
+        case .onlyShowAlertsOn:
+            return "Only Show Alerts"
+        case .onlyShowAlertsOff:
+            return "Only Show Alerts"
         case .deleteAll:
             return localized(.deleteAll)
         case .deSelectAll:
@@ -730,6 +742,14 @@ enum ElementTypes {
             return ""
         case .deleteAll:
             return "Delete All"
+        case .onlyReadOn:
+            return ""
+        case .onlyReadOff:
+            return ""
+        case .onlyShowAlertsOn:
+            return ""
+        case .onlyShowAlertsOff:
+            return ""
         case .deSelectAll:
             return ""
         case .documentDetails:
@@ -859,6 +879,14 @@ enum ElementTypes {
         case .selectMode:
             return Image.iconSelect.image
         case .deleteAll:
+            return Image.iconDelete.image
+        case .onlyReadOn:
+            return Image.iconSelect.image
+        case .onlyReadOff:
+            return Image.iconDelete.image
+        case .onlyShowAlertsOn:
+            return Image.iconSelect.image
+        case .onlyShowAlertsOff:
             return Image.iconDelete.image
         case .deSelectAll:
             return nil

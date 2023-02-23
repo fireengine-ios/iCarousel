@@ -18,4 +18,7 @@ protocol NotificationViewOutput {
     func deleteAllNotification(at indicesToRemove: [Int])
     func deleteAllNotification()
     func getNotifications(at indexs: [Int]) -> [NotificationServiceResponse]
+    
+    var onlyRead: Bool { get set }
+    var onlyShowAlerts: Bool { get set }
 }

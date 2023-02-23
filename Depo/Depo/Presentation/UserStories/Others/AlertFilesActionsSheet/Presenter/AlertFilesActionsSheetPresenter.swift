@@ -242,14 +242,11 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         actionsCallback(types.map { type in
             var action: AlertFilesAction
             switch type {
-            case .deleteAll:
+            case .deleteAll, .selectMode, .onlyReadOn, .onlyReadOff, .onlyShowAlertsOn, .onlyShowAlertsOff:
                 action = AlertFilesAction(title: type.actionTitle(), icon: type.icon) { [weak self] in
                     self?.handleNotificationAction(type: type)
                 }
-            case .selectMode:
-                action = AlertFilesAction(title: type.actionTitle(), icon: type.icon) { [weak self] in
-                    self?.handleNotificationAction(type: type)
-                }
+                
             default:
                 action = AlertFilesAction()
                 break
@@ -444,6 +441,14 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             basePassingPresenter?.delete(all: true)
         case .selectMode:
             basePassingPresenter?.selectModeSelected()
+        case .onlyReadOn:
+            basePassingPresenter?.showOnly(withType: .onlyReadOn)
+        case .onlyReadOff:
+            basePassingPresenter?.showOnly(withType: .onlyReadOff)
+        case .onlyShowAlertsOn:
+            basePassingPresenter?.showOnly(withType: .onlyShowAlertsOn)
+        case .onlyShowAlertsOff:
+            basePassingPresenter?.showOnly(withType: .onlyShowAlertsOff)
         default:
             break
         }

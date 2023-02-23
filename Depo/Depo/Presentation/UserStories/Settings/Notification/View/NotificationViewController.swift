@@ -113,9 +113,9 @@ final class NotificationViewController: BaseViewController {
     }
     
     private func onMorePressed(_ sender: Any) {
-        threeDotMenuManager.showActions(
-            sender: sender
-        )
+        threeDotMenuManager.showActions(sender: sender,
+                                        onlyRead: output.onlyRead,
+                                        onlyShowAlerts: output.onlyShowAlerts)
     }
     
     @objc private func onCancelSelectionButton(_ sender: Any) {
@@ -351,6 +351,33 @@ extension NotificationViewController: BaseItemInputPassingProtocol {
     
     func selectAllModeSelected() {
         selectAllCells()
+    }
+    
+    func showOnly(withType type: ElementTypes) {
+        switch type {
+        case .onlyReadOn:
+            print("yilmaz: onlyReadOn")
+            
+            
+            output.onlyRead.toggle()
+        case .onlyReadOff:
+            print("yilmaz: onlyReadOff")
+            
+            
+            output.onlyRead.toggle()
+        case .onlyShowAlertsOn:
+            print("yilmaz: onlyShowAlertsOn")
+            
+            
+            output.onlyShowAlerts.toggle()
+        case .onlyShowAlertsOff:
+            print("yilmaz: onlyShowAlertsOff")
+            
+            
+            output.onlyShowAlerts.toggle()
+        default:
+            break
+        }
     }
     
     func deSelectAll() {
