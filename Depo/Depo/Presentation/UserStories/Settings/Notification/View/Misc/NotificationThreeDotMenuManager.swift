@@ -23,7 +23,7 @@ final class NotificationThreeDotMenuManager {
     func showActions(sender: Any?, onlyRead: Bool, onlyShowAlerts: Bool) {
         self.alert.showNotification(with: [.selectMode,
                                            .deleteAll,
-                                           onlyRead ? .onlyReadOn : .onlyReadOff,
+                                           onlyRead ? .onlyUnreadOn : .onlyUnreadOff,
                                            onlyShowAlerts ? .onlyShowAlertsOn : .onlyShowAlertsOff], presentedBy: sender, onSourceView: nil, viewController: nil)
     }
 }

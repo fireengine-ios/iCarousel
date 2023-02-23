@@ -355,12 +355,12 @@ extension NotificationViewController: BaseItemInputPassingProtocol {
     
     func showOnly(withType type: ElementTypes) {
         switch type {
-        case .onlyReadOn:
+        case .onlyUnreadOn:
             print("yilmaz: onlyReadOn")
             
             
             output.onlyRead.toggle()
-        case .onlyReadOff:
+        case .onlyUnreadOff:
             print("yilmaz: onlyReadOff")
             
             

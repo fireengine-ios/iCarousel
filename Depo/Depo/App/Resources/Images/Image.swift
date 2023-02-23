@@ -114,6 +114,9 @@ enum Image: String, AppImage {
     case iconPickNoAlbums
     case iconPickNoFavorites
     case iconPickNoPhotos
+    ///Switch
+    case iconSwitchToggleOn
+    case iconSwitchToggleOff
     
     ///  Files Tab
     case iconFileAudio

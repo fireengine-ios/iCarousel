@@ -2360,5 +2360,13 @@ then {11,99 TRY/Month}*/
 "subscription_offer_cancel_button" = "Annuler";
 "paycell_share_message " = "";
 "ksaldalks" = "";
+
+/*Fuzzy*/
 "free_up_space_title" = "L'espace sur votre appareil est presque plein!";
+
+/*Fuzzy*/
 "notification_menu_item" = "Notifications";
+"notification_buttom_sheet_select_mode" = "";
+"notification_buttom_sheet_only_unread" = "";
+"notification_buttom_sheet_show_alerts" = "";
+"notifications_no_notification" = "";

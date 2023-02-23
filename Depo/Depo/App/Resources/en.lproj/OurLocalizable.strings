@@ -1902,7 +1902,7 @@
 "container_shared_files" = "Shared By Me";
 "container_document" = "Document";
 "container_music" = "Music";
-"container_favourite" = "Favourite";
+"container_favourite" = "Favourites";
 "container_trashed" = "Trash Bin";
 
 /*Chatbot*/
@@ -2119,5 +2119,13 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "paycell_share_message " = "You have been sent 5GB of lifebox storage, click to redeem";
 "ksaldalks" = "";
+
+/*Fuzzy*/
 "free_up_space_title" = "Device space is almost full";
+
+/*Fuzzy*/
 "notification_menu_item" = "Notifications";
+"notification_buttom_sheet_select_mode" = "";
+"notification_buttom_sheet_only_unread" = "";
+"notification_buttom_sheet_show_alerts" = "";
+"notifications_no_notification" = "";

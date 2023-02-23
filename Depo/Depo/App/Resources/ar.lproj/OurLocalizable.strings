@@ -2067,5 +2067,13 @@ then {11,99 TRY/Month}*/
 "subscription_offer_cancel_button" = "إلغاء الأمر";
 "paycell_share_message " = "";
 "ksaldalks" = "";
+
+/*Fuzzy*/
 "free_up_space_title" = "المساحة الموجودة على جهازك ممتلئة تقريبًا!";
-"notification_menu_item" = "الإخطارات";
+
+/*Fuzzy*/
+"notification_menu_item" = "إشعارات";
+"notification_buttom_sheet_select_mode" = "";
+"notification_buttom_sheet_only_unread" = "";
+"notification_buttom_sheet_show_alerts" = "";
+"notifications_no_notification" = "";

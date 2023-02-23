@@ -54,8 +54,8 @@ enum ElementTypes {
     case selectAll
     case selectMode
     case deleteAll
-    case onlyReadOn
-    case onlyReadOff
+    case onlyUnreadOn
+    case onlyUnreadOff
     case onlyShowAlertsOn
     case onlyShowAlertsOff
     case deSelectAll
@@ -605,10 +605,10 @@ enum ElementTypes {
             return TextConstants.actionSheetSelectAll
         case .selectMode:
             return "Select Mode"
-        case .onlyReadOn:
-            return "Only Read"
-        case .onlyReadOff:
-            return "Only Read"
+        case .onlyUnreadOn:
+            return "Only Unread"
+        case .onlyUnreadOff:
+            return "Only Unread"
         case .onlyShowAlertsOn:
             return "Only Show Alerts"
         case .onlyShowAlertsOff:
@@ -737,14 +737,14 @@ enum ElementTypes {
         case .select:
             return ""
         case .selectAll:
-            return "Select All"
+            return TextConstants.actionSheetSelectAll
         case .selectMode:
             return ""
         case .deleteAll:
-            return "Delete All"
-        case .onlyReadOn:
+            return localized(.deleteAll)
+        case .onlyUnreadOn:
             return ""
-        case .onlyReadOff:
+        case .onlyUnreadOff:
             return ""
         case .onlyShowAlertsOn:
             return ""
@@ -880,14 +880,14 @@ enum ElementTypes {
             return Image.iconSelect.image
         case .deleteAll:
             return Image.iconDelete.image
-        case .onlyReadOn:
-            return Image.iconSelect.image
-        case .onlyReadOff:
-            return Image.iconDelete.image
+        case .onlyUnreadOn:
+            return Image.iconSwitchToggleOn.image
+        case .onlyUnreadOff:
+            return Image.iconSwitchToggleOff.image
         case .onlyShowAlertsOn:
-            return Image.iconSelect.image
+            return Image.iconSwitchToggleOn.image
         case .onlyShowAlertsOff:
-            return Image.iconDelete.image
+            return Image.iconSwitchToggleOff.image
         case .deSelectAll:
             return nil
         case .documentDetails:

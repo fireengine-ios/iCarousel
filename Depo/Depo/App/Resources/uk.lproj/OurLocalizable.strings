@@ -2057,5 +2057,13 @@ then {11,99 TRY/Month}*/
 "subscription_offer_cancel_button" = "Скасувати";
 "paycell_share_message " = "";
 "ksaldalks" = "";
+
+/*Fuzzy*/
 "free_up_space_title" = "Місце на пристрої майже заповнене!";
+
+/*Fuzzy*/
 "notification_menu_item" = "Сповіщення";
+"notification_buttom_sheet_select_mode" = "";
+"notification_buttom_sheet_only_unread" = "";
+"notification_buttom_sheet_show_alerts" = "";
+"notifications_no_notification" = "";
