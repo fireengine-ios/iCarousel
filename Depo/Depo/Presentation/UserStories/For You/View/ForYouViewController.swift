@@ -51,8 +51,21 @@ final class ForYouViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        guard let currentSection = output.currentSection else { return }
+        guard let currentSection = output.currentSection else {
+            output.getUpdateData(for: ForYouSections.hidden)
+            output.getUpdateData(for: ForYouSections.favorites)
+            return
+        }
         output.getUpdateData(for: currentSection)
+        if currentSection == .albums {
+            tableView.reloadData()
+        }
+        if currentSection == .things {
+            tableView.reloadData()
+        }
+        if currentSection == .places {
+            tableView.reloadData()
+        }
     }
     
     deinit {
@@ -109,7 +122,11 @@ extension ForYouViewController: ForYouViewInput {
     }
     
     func didGetUpdateData() {
-        guard let currentSection = output.currentSection else { return }
+        guard let currentSection = output.currentSection else {
+            updateTableView(for: .hidden)
+            updateTableView(for: .favorites)
+            return
+        }
         updateTableView(for: currentSection)
     }
     
@@ -118,7 +135,13 @@ extension ForYouViewController: ForYouViewInput {
     }
     
     func saveCardSuccess(section: ForYouSections) {
-        output.getUpdateData(for: section)
+        if section == .collageCards {
+            output.getUpdateData(for: .collages)
+        } else if section == .animationCards {
+            output.getUpdateData(for: .animations)
+        } else if section == .albumCards {
+            output.getUpdateData(for: .albums)
+        }
     }
 }
 
