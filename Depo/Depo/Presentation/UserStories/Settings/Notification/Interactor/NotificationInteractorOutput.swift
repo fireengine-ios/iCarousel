@@ -8,5 +8,6 @@
 
 protocol NotificationInteractorOutput: AnyObject {
     func success(with notifications: [NotificationServiceResponse])
-    func fail()
+    func success(on type: String)
+    func fail(errorResponse: ErrorResponse)
 }

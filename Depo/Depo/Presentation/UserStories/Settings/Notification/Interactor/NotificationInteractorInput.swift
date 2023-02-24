@@ -12,4 +12,6 @@ protocol NotificationInteractorInput {
     func viewIsReady()
     func viewWillAppear()
 
+    func delete(with idList: [Int])
+    func read(with id: String)
 }

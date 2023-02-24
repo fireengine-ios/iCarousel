@@ -20,8 +20,10 @@ struct NotificationJsonKey {
     static let language = "language"
     static let button1Text = "button1Text"
     static let button1Action = "button1Action"
+    static let button1Url = "button1Url"
     static let button2Text = "button2Text"
     static let button2Action = "button2Action"
+    static let button2Url = "button2Url"
     static let readCondition = "readCondition"
     static let communicationNotificationId = "communicationNotificationId"
     static let closable = "closable"
@@ -40,8 +42,10 @@ final class NotificationServiceResponse: ObjectRequestResponse, Map {
     var language: String? // not null
     var button1Text: String?
     var button1Action: String?
+    var button1Url: String?
     var button2Text: String?
     var button2Action: String?
+    var button2Url: String?
     var readCondition: String? // not null
     var communicationNotificationId: Int? // not null
     var closable: Bool? // not null

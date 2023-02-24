@@ -19,8 +19,8 @@ class NotificationPresenter {
         }
     }
     
-    var onlyRead: Bool = true
-    var onlyShowAlerts: Bool = true
+    var onlyRead: Bool = false
+    var onlyShowAlerts: Bool = false
 }
 
 // MARK: PackagesViewOutput
@@ -48,40 +48,66 @@ extension NotificationPresenter: NotificationViewOutput {
     }
     
     func deleteNotification(at index: Int) {
+        // first delete remote
+        delete(with: [index])
         notifications.remove(at: index)
     }
     
     func deleteAllNotification() {
+        // first delete remote
+        delete(with: Array(0..<notifications.count))
         notifications.removeAll()
     }
     
     func deleteAllNotification(at indicesToRemove: [Int]) {
+        // first delete remote
+        delete(with: indicesToRemove)
         for index in indicesToRemove.sorted(by: >) {
             notifications.remove(at: index)
         }
+    }
+    
+    func delete(with rows: [Int]) {
+        var idList = [Int]()
+        
+        rows.forEach { index in
+            idList.append(notifications[index].communicationNotificationId)
+        }
+        print("yilmaz: \(idList) \(notifications.count)")
+        interactor.delete(with: idList)
+    }
+    
+    func read(with id: String) {
+        interactor.read(with: id)
     }
 }
 
 // MARK: PackagesInteractorOutput
 extension NotificationPresenter: NotificationInteractorOutput {
+    
     func success(with notifications: [NotificationServiceResponse]) {
         view?.stopActivityIndicator()
         
-        // self.notifications = notifications
+        self.notifications = notifications
         
-        for i in 0...notifications.count * 10 {
-            let item = NotificationServiceResponse()
-            item.title = "\(i) - Yilmaz Edis"
-            item.body =  "Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet"
-            item.smallThumbnail = "https://avatars.githubusercontent.com/u/15719990?s=400&u=766c3d645df09b0c562e71affd899b296aa1d59b&v=4"
-            self.notifications.append(item)
-        }
-        
+//        for i in 0...notifications.count {
+//            let item = NotificationServiceResponse()
+//            item.title = "\(i) - \(String(describing: notifications[safe: 0]?.title))"
+//            item.body =  "Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet"
+//            item.smallThumbnail = "https://avatars.githubusercontent.com/u/15719990?s=400&u=766c3d645df09b0c562e71affd899b296aa1d59b&v=4"
+//            item.communicationNotificationId = notifications[safe: 0]?.communicationNotificationId
+//            self.notifications.append(item)
+//        }
+        print("yilmaz: All notifications \(notifications.count)")
         view?.reloadTableView()
     }
-
     
-    func fail() {
+    func success(on type: String) {
+        view?.stopActivityIndicator()
+        print("yilmaz: \(type)")
+    }
+    
+    func fail(errorResponse: ErrorResponse) {
         view?.stopActivityIndicator()
     }
     

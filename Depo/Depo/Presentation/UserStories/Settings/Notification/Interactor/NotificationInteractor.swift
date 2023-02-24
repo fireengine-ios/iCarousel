@@ -25,7 +25,7 @@ extension NotificationInteractor: NotificationInteractorInput {
                 }
             }, fail: { [weak self] errorResponse in
                 DispatchQueue.main.async {
-                    self?.output.fail()
+                    self?.output.fail(errorResponse: errorResponse)
                 }
         })
         
@@ -35,4 +35,32 @@ extension NotificationInteractor: NotificationInteractorInput {
         //output.success()
     }
 
+    func delete(with idList: [Int]) {
+        service.delete(
+            with: idList,
+            success: { [weak self] _ in
+                DispatchQueue.main.async {
+                    self?.output.success(on: #function)
+                }
+            }, fail: { [weak self] errorResponse in
+                DispatchQueue.main.async {
+                    self?.output.fail(errorResponse: errorResponse)
+                }
+        })
+        
+    }
+    
+    func read(with id: String) {
+        service.read(with: id,
+            success: { [weak self] _ in
+                DispatchQueue.main.async {
+                    self?.output.success(on: #function)
+                }
+            }, fail: { [weak self] errorResponse in
+                DispatchQueue.main.async {
+                    self?.output.fail(errorResponse: errorResponse)
+                }
+        })
+        
+    }
 }
