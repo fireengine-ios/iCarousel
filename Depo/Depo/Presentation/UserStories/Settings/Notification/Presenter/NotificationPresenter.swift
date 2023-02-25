@@ -88,16 +88,13 @@ extension NotificationPresenter: NotificationInteractorOutput {
     func success(with notifications: [NotificationServiceResponse]) {
         view?.stopActivityIndicator()
         
-        self.notifications = notifications
+        //self.notifications = notifications
         
-//        for i in 0...notifications.count {
-//            let item = NotificationServiceResponse()
-//            item.title = "\(i) - \(String(describing: notifications[safe: 0]?.title))"
-//            item.body =  "Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp..Lorem ıpsum dolor sit amet"
-//            item.smallThumbnail = "https://avatars.githubusercontent.com/u/15719990?s=400&u=766c3d645df09b0c562e71affd899b296aa1d59b&v=4"
-//            item.communicationNotificationId = notifications[safe: 0]?.communicationNotificationId
-//            self.notifications.append(item)
-//        }
+        for el in notifications {
+            el.status = Int.random(in: 0...1) == 0 ? "UNREAD" : "READ"
+            el.priority = Int.random(in: 0...1) == 0 ? 1 : 2
+            self.notifications.append(el)
+        }
         print("yilmaz: All notifications \(notifications.count)")
         view?.reloadTableView()
     }

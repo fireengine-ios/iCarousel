@@ -214,8 +214,8 @@ class NotificationTableViewCell: UITableViewCell {
         descriptionLabel.text = model.body
         cardImageView.sd_setImage(with: URL(string: model.smallThumbnail ?? "")!)
         
-        // model.priority == 1 ? setAsWarning() : setAsNormal()
-        setAsNormal()
+        model.priority == 1 ? setAsWarning() :
+        model.status == "UNREAD" ? setAsNormal() : setAsRead()
     }
     
     private func setAsWarning() {
@@ -247,15 +247,5 @@ extension NotificationTableViewCell {
        
         let selectionStateImage = isSelected ? Image.iconCheckmarkSelected : Image.iconCheckmarkNotSelected
         checkBox.image = selectionStateImage.image
-        
-        // i will add if border needs.
-//        let selection = isSelectionMode && isSelected
-//        if animated {
-//            UIView.animate(withDuration: NumericConstants.animationDuration) {
-//                self.selectionStateView.alpha = selection ? 1 : 0
-//            }
-//        } else {
-//            selectionStateView.alpha = selection ? 1 : 0
-//        }
     }
 }

@@ -11,6 +11,7 @@ import Foundation
 struct NotificationJsonKey {
     static let notificationType = "notificationType"
     static let url = "url"
+    static let status = "status"
     static let title = "title"
     static let body = "body"
     static let image = "image"
@@ -33,6 +34,7 @@ final class NotificationServiceResponse: ObjectRequestResponse, Map {
     
     var notificationType: String? // not null
     var url: String?
+    var status: String?
     var title: String? // not null
     var body: String?
     var image: String?
@@ -53,6 +55,7 @@ final class NotificationServiceResponse: ObjectRequestResponse, Map {
     override func mapping() {
         notificationType = json?[NotificationJsonKey.notificationType].string
         url = json?[NotificationJsonKey.url].string
+        status = json?[NotificationJsonKey.status].string
         title = json?[NotificationJsonKey.title].string
         body = json?[NotificationJsonKey.body].string
         image = json?[NotificationJsonKey.image].string
@@ -62,8 +65,10 @@ final class NotificationServiceResponse: ObjectRequestResponse, Map {
         language = json?[NotificationJsonKey.language].string
         button1Text = json?[NotificationJsonKey.button1Text].string
         button1Action = json?[NotificationJsonKey.button1Action].string
+        button1Url = json?[NotificationJsonKey.button1Url].string
         button2Text = json?[NotificationJsonKey.button2Text].string
         button2Action = json?[NotificationJsonKey.button2Action].string
+        button2Url = json?[NotificationJsonKey.button2Url].string
         readCondition = json?[NotificationJsonKey.readCondition].string
         communicationNotificationId = json?[NotificationJsonKey.communicationNotificationId].int
         closable = json?[NotificationJsonKey.closable].bool
