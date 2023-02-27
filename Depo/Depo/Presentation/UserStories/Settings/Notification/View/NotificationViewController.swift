@@ -357,24 +357,24 @@ extension NotificationViewController: BaseItemInputPassingProtocol {
         switch type {
         case .onlyUnreadOn:
             print("yilmaz: onlyReadOn")
-            
-            
             output.onlyRead.toggle()
+            output.onlyShowAlerts ? output.showOnlyWarning() : output.showAll()
+            
         case .onlyUnreadOff:
             print("yilmaz: onlyReadOff")
-            
-            
             output.onlyRead.toggle()
+            output.onlyShowAlerts ? output.showOnlyWarningAndUnread() : output.showOnlyUnread()
+            
         case .onlyShowAlertsOn:
             print("yilmaz: onlyShowAlertsOn")
-            
-            
             output.onlyShowAlerts.toggle()
+            output.onlyRead ? output.showOnlyUnread() : output.showAll()
+            
         case .onlyShowAlertsOff:
             print("yilmaz: onlyShowAlertsOff")
-            
-            
             output.onlyShowAlerts.toggle()
+            output.onlyRead ? output.showOnlyWarningAndUnread() : output.showOnlyWarning()
+            
         default:
             break
         }

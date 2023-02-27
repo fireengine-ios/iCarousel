@@ -214,28 +214,50 @@ class NotificationTableViewCell: UITableViewCell {
         descriptionLabel.text = model.body
         cardImageView.sd_setImage(with: URL(string: model.smallThumbnail ?? "")!)
         
-        model.priority == 1 ? setAsWarning() :
-        model.status == "UNREAD" ? setAsNormal() : setAsRead()
+        if model.priority == 1, model.status == "UNREAD" {
+            setAsWarning()
+        } else if model.status == "UNREAD" {
+            setAsNormal()
+        } else if model.priority == 1 {
+            setAsReadForWarning()
+        } else {
+            setAsReadForNormal()
+        }
     }
     
     private func setAsWarning() {
         titleLabel.textColor = AppColor.warning.color
         containerView.layer.borderColor = AppColor.warning.cgColor
+        
         warningCase = true
         warningImageView.isHidden = false
+        warningImageView.image = Image.iconErrorRed.image.withRenderingMode(.alwaysOriginal)
     }
     
     private func setAsNormal() {
         titleLabel.textColor = AppColor.label.color
         containerView.layer.borderColor = AppColor.tint.cgColor
+        warningCase = false
         warningImageView.isHidden = true
     }
     
-    private func setAsRead() {
+    private func setAsReadForNormal() {
         titleLabel.textColor = AppColor.readState.color
         containerView.layer.borderColor = AppColor.readState.cgColor
         descriptionLabel.textColor = AppColor.readState.color
+        warningCase = false
         warningImageView.isHidden = true
+    }
+    
+    private func setAsReadForWarning() {
+        titleLabel.textColor = AppColor.warning.color.withAlphaComponent(0.5)
+        containerView.layer.borderColor = AppColor.warning.withAlphaComponent(0.5).cgColor
+        descriptionLabel.textColor = AppColor.readState.color
+        
+        warningCase = true
+        warningImageView.image = Image.iconErrorRed.image.withRenderingMode(.alwaysTemplate)
+        warningImageView.tintColor = AppColor.warning.color.withAlphaComponent(0.5)
+        warningImageView.isHidden = false
     }
 }
 

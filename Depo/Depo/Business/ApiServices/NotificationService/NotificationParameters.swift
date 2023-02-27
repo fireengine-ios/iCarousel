@@ -10,7 +10,7 @@ import Foundation
 
 struct NotificationPath {
     static let accountBase = "notification/communication"
-    static let fetch = accountBase + "/fetch"
+    static let fetch = accountBase + "/fetch?language=tr"
     static let read = accountBase + "/read"
     static let delete = accountBase
 }
