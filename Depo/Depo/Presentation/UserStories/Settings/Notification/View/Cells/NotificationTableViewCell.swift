@@ -25,7 +25,6 @@ class NotificationTableViewCell: UITableViewCell {
     private lazy var descriptionLabel: UILabel = {
         let view = UILabel()
         view.font = .appFont(.regular, size: 12)
-        view.textColor = AppColor.billoGrayAndWhite.color
         view.textAlignment = .left
         view.numberOfLines = 0
         view.lineBreakMode = .byWordWrapping
@@ -211,7 +210,14 @@ class NotificationTableViewCell: UITableViewCell {
     
     func configure(model: NotificationServiceResponse, readMode: Bool) {
         titleLabel.text = model.title
-        descriptionLabel.text = model.body
+        
+        let htmlString = """
+        <h1 style="color: red;">Hello, World!</h1>
+        <p style="color: blue;">This is an <strong>example</strong> of a paragraph with <em>bold</em> and <u>underlined</u> text.</p>
+        <img src="https://flagcdn.com/w80/tr.png">
+        """
+        
+        descriptionLabel.attributedText = convertHtml(from: htmlString)
         cardImageView.sd_setImage(with: URL(string: model.smallThumbnail ?? "")!)
         
         if model.priority == 1, model.status == "UNREAD" {
@@ -237,6 +243,7 @@ class NotificationTableViewCell: UITableViewCell {
     private func setAsNormal() {
         titleLabel.textColor = AppColor.label.color
         containerView.layer.borderColor = AppColor.tint.cgColor
+        
         warningCase = false
         warningImageView.isHidden = true
     }
@@ -244,7 +251,7 @@ class NotificationTableViewCell: UITableViewCell {
     private func setAsReadForNormal() {
         titleLabel.textColor = AppColor.readState.color
         containerView.layer.borderColor = AppColor.readState.cgColor
-        descriptionLabel.textColor = AppColor.readState.color
+
         warningCase = false
         warningImageView.isHidden = true
     }
@@ -252,12 +259,28 @@ class NotificationTableViewCell: UITableViewCell {
     private func setAsReadForWarning() {
         titleLabel.textColor = AppColor.warning.color.withAlphaComponent(0.5)
         containerView.layer.borderColor = AppColor.warning.withAlphaComponent(0.5).cgColor
-        descriptionLabel.textColor = AppColor.readState.color
         
         warningCase = true
         warningImageView.image = Image.iconErrorRed.image.withRenderingMode(.alwaysTemplate)
         warningImageView.tintColor = AppColor.warning.color.withAlphaComponent(0.5)
         warningImageView.isHidden = false
+    }
+}
+
+extension NotificationTableViewCell {
+    private func convertHtml(from htmlString: String) -> NSAttributedString  {
+        if let data = htmlString.data(using: .utf8) {
+          let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+          ]
+          if let attributedString = try? NSAttributedString(data: data, options: options, documentAttributes: nil) {
+
+            // Assign attributed string to attribute of your choice
+            return attributedString
+          }
+        }
+        return NSAttributedString(string: "")
     }
 }
 
