@@ -74,6 +74,11 @@ final class ForYouTableViewCell: UITableViewCell {
         
         if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+            
+            if currentView == .collageCards {
+                flowLayout.minimumInteritemSpacing = 0
+                flowLayout.minimumLineSpacing = 0
+            }
         }
         
         self.currentView = currentView
@@ -108,6 +113,11 @@ final class ForYouTableViewCell: UITableViewCell {
     private func configureTableView() {
         if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+            
+            if currentView == .collageCards {
+                flowLayout.minimumInteritemSpacing = 0
+                flowLayout.minimumLineSpacing = 0
+            }
         }
         collectionView.dataSource = self
         collectionView.delegate = self
