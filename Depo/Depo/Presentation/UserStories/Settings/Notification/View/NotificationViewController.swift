@@ -149,6 +149,8 @@ final class NotificationViewController: BaseViewController {
         deselectAllCells()
         bottomBarManager.hide()
         bottomBarCard.isHidden = true
+        
+        print(FirebaseRemoteConfig.shared.notificationReadTime)
     }
     
     private func updateBarsForSelectedObjects() {

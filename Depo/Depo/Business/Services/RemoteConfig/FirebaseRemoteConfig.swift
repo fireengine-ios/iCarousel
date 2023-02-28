@@ -24,6 +24,7 @@ private struct RemoteConfigKeys {
     static let googleLoginEnabled = "google_login_enabled"
     static let appleLoginEnabled = "apple_login_enabled"
     static let ocrEnabled = "ocr_enabled"
+    static let notificationReadTime = "notification_unread_to_read_time"
 }
 
 final class FirebaseRemoteConfig {
@@ -65,6 +66,11 @@ final class FirebaseRemoteConfig {
     var googleLoginEnabled: Bool {
         let key = RemoteConfigKeys.googleLoginEnabled
         return remoteConfig.configValue(forKey: key).boolValue
+    }
+    
+    var notificationReadTime: Int {
+        let key = RemoteConfigKeys.notificationReadTime
+        return remoteConfig.configValue(forKey: key).numberValue.intValue
     }
     
     var appleLoginEnabled: Bool {

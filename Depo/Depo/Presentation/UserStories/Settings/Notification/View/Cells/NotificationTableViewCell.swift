@@ -234,15 +234,17 @@ class NotificationTableViewCell: UITableViewCell {
     private func setAsWarning() {
         titleLabel.textColor = AppColor.warning.color
         containerView.layer.borderColor = AppColor.warning.cgColor
+        descriptionLabel.alpha = 1
         
+        warningImageView.alpha = 1
         warningCase = true
         warningImageView.isHidden = false
-        warningImageView.image = Image.iconErrorRed.image.withRenderingMode(.alwaysOriginal)
     }
     
     private func setAsNormal() {
         titleLabel.textColor = AppColor.label.color
         containerView.layer.borderColor = AppColor.tint.cgColor
+        descriptionLabel.alpha = 1
         
         warningCase = false
         warningImageView.isHidden = true
@@ -251,6 +253,7 @@ class NotificationTableViewCell: UITableViewCell {
     private func setAsReadForNormal() {
         titleLabel.textColor = AppColor.readState.color
         containerView.layer.borderColor = AppColor.readState.cgColor
+        descriptionLabel.alpha = 0.5
 
         warningCase = false
         warningImageView.isHidden = true
@@ -259,10 +262,10 @@ class NotificationTableViewCell: UITableViewCell {
     private func setAsReadForWarning() {
         titleLabel.textColor = AppColor.warning.color.withAlphaComponent(0.5)
         containerView.layer.borderColor = AppColor.warning.withAlphaComponent(0.5).cgColor
+        descriptionLabel.alpha = 0.5
         
         warningCase = true
-        warningImageView.image = Image.iconErrorRed.image.withRenderingMode(.alwaysTemplate)
-        warningImageView.tintColor = AppColor.warning.color.withAlphaComponent(0.5)
+        warningImageView.alpha = 0.5
         warningImageView.isHidden = false
     }
 }
