@@ -154,10 +154,9 @@ final class NotificationViewController: BaseViewController {
     }
     
     private func updateBarsForSelectedObjects() {
-        let rows = selectedIndexes.map { $0.row }
-        bottomBarManager.update(for: !rows.isEmpty)
+        bottomBarManager.update(for: !selectedIndexes.isEmpty, isSelectedAll: selectedIndexes.count == output.notificationsCount())
         bottomBarCard.isHidden = false
-        bottomBarCard.setCount(with: rows.count)
+        bottomBarCard.setCount(with: selectedIndexes.count)
         
         if selectedIndexes.count == 0 {
             bottomBarManager.hide()

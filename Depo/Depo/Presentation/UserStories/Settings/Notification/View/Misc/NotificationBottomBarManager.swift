@@ -8,7 +8,15 @@
 
 final class NotificationBottomBarManager {
     
-    private let photoVideoBottomBarConfig = EditingBarConfig(
+    private var config1 = EditingBarConfig(
+        elementsConfig:  [.selectAll, .delete],
+        style: .default,
+        tintColor: AppColor.tint.color,
+        unselectedItemTintColor: AppColor.label.color,
+        barTintColor: AppColor.secondaryBackground.color
+    )
+    
+    private var config2 = EditingBarConfig(
         elementsConfig:  [.selectAll, .deleteAll],
         style: .default,
         tintColor: AppColor.tint.color,
@@ -28,12 +36,12 @@ final class NotificationBottomBarManager {
     func setup() {
         let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
         bottomBarPresenter.basePassingPresenter = delegate
-        let botvarBarVC = bottomBarVCmodule.setupDrawerVariantModule(config: photoVideoBottomBarConfig, settablePresenter: bottomBarPresenter)
+        let botvarBarVC = bottomBarVCmodule.setupDrawerVariantModule(config: config2, settablePresenter: bottomBarPresenter)
         self.editingTabBar = botvarBarVC
     }
     
-    func update(for status: Bool) {
-        bottomBarPresenter.setupNotificationTabBarWith(status: status, originalConfig: photoVideoBottomBarConfig)
+    func update(for status: Bool, isSelectedAll: Bool) {
+        bottomBarPresenter.setupNotificationTabBarWith(status: status, originalConfig: isSelectedAll ? config2 : config1)
     }
     
     func show() {

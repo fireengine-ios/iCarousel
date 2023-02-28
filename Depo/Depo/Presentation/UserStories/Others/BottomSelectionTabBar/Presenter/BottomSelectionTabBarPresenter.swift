@@ -82,6 +82,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         }
 
         view.enableItems(at: validIndexes)
+        view.setupBar(with: originalConfig)
     }
     
     override func dismiss(animated: Bool) {
