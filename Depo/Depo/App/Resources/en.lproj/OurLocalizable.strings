@@ -2125,7 +2125,7 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "notification_menu_item" = "Notifications";
-"notification_buttom_sheet_select_mode" = "";
-"notification_buttom_sheet_only_unread" = "";
-"notification_buttom_sheet_show_alerts" = "";
-"notifications_no_notification" = "";
+"notification_buttom_sheet_select_mode" = "Select Mode";
+"notification_buttom_sheet_only_unread" = "Only unread";
+"notification_buttom_sheet_show_alerts" = "Only show alerts";
+"notifications_no_notification" = "No new notification";

@@ -16,7 +16,7 @@ class NotificationEmptyView: UIView {
         view.textColor = AppColor.label.color
         view.textAlignment = .center
         view.numberOfLines = 0
-        view.text = "Henüz bildirimin yok."
+        view.text = localized(.notificationsNoNotification)
         view.lineBreakMode = .byWordWrapping
         return view
     }()

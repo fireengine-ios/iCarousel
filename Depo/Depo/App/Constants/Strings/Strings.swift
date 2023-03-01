@@ -223,5 +223,11 @@ enum Strings: String, Localizable {
     case emptyGalleryNoUnsync = "empty_gallery_no_unsync"
     
     case subscriptionOfferCancelButton = "subscription_offer_cancel_button"
+    
     case deleteAll = "Delete all"
+    case selectMode = "notification_buttom_sheet_select_mode"
+    case onlyUnread = "notification_buttom_sheet_only_unread"
+    case onlyAlert = "notification_buttom_sheet_show_alerts"
+    
+    case notificationsNoNotification = "notifications_no_notification"
 }

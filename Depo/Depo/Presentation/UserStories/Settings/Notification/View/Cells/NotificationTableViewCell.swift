@@ -108,8 +108,8 @@ class NotificationTableViewCell: UITableViewCell {
             let t = (gestureRecognizer as! UIPanGestureRecognizer).translation(in: contentView)
             let verticalness = abs(t.y)
             if (verticalness > 0) {
-                print("ignore vertical motion in the pan ...")
-                print("the event engine will >pass on the gesture< to the scroll view")
+                debugLog("ignore vertical motion in the pan ...")
+                debugLog("the event engine will >pass on the gesture< to the scroll view")
                 return false
             }
         }

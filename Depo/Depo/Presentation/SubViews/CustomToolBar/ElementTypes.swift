@@ -604,15 +604,15 @@ enum ElementTypes {
         case .selectAll:
             return TextConstants.actionSheetSelectAll
         case .selectMode:
-            return "Select Mode"
+            return localized(.selectMode)
         case .onlyUnreadOn:
-            return "Only Unread"
+            return localized(.onlyUnread)
         case .onlyUnreadOff:
-            return "Only Unread"
+            return localized(.onlyUnread)
         case .onlyShowAlertsOn:
-            return "Only Show Alerts"
+            return localized(.onlyAlert)
         case .onlyShowAlertsOff:
-            return "Only Show Alerts"
+            return localized(.onlyAlert)
         case .deleteAll:
             return localized(.deleteAll)
         case .deSelectAll:
