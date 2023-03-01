@@ -86,7 +86,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
 
         navigationBarHidden = true
         needToShowTabBar = true
-        floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory, .createAlbum])
+        floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAlbum])
         ItemOperationManager.default.startUpdateView(view: self)
 
         scrollBarManager.addScrollBar(to: collectionView, delegate: self)

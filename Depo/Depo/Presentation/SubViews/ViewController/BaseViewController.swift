@@ -108,6 +108,16 @@ class BaseViewController: ViewController {
             NavigationHeaderButton(type: .plus, target: self, action: #selector(showPlusButtonMenu))
         ])
     }
+    
+    func setDefaultNavigationHeaderActionsWithoutPlusButton() {
+        headerContainingViewController?.setHeaderLeftItems([
+            NavigationHeaderButton(type: .settings, target: self, action: #selector(showSettings))
+        ])
+        headerContainingViewController?.setHeaderRightItems([
+            NavigationHeaderButton(type: .search, target: self, action: #selector(showSearch))
+            
+        ])
+    }
 
     @objc private func showSettings() {
         let router = RouterVC()
