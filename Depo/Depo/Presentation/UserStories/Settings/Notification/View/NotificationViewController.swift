@@ -127,12 +127,12 @@ final class NotificationViewController: BaseViewController {
             return
         }
         
+        isSelectingMode = true
+        deselectAllCells()
+        
         /// Back button case
         displayManager = .selection
         updateNavBarItems()
-        
-        isSelectingMode = true
-        deselectAllCells()
 
         isSelectionObject = 0
         updateSelectedItemsCount()
@@ -158,7 +158,7 @@ final class NotificationViewController: BaseViewController {
         bottomBarCard.isHidden = false
         bottomBarCard.setCount(with: selectedIndexes.count)
         
-        if selectedIndexes.count == 0 {
+        if !isSelectingMode {
             bottomBarManager.hide()
             bottomBarCard.isHidden = true
         } else {
@@ -183,7 +183,7 @@ final class NotificationViewController: BaseViewController {
         }
     }
     
-    func deselectAll() {
+    private func deselectAll() {
         selectedIndexes.forEach { indexPath in
             tableView.deselectRow(at: indexPath, animated: false)
         }
@@ -357,22 +357,18 @@ extension NotificationViewController: BaseItemInputPassingProtocol {
     func showOnly(withType type: ElementTypes) {
         switch type {
         case .onlyUnreadOn:
-            print("yilmaz: onlyReadOn")
             output.onlyRead.toggle()
             output.onlyShowAlerts ? output.showOnlyWarning() : output.showAll()
             
         case .onlyUnreadOff:
-            print("yilmaz: onlyReadOff")
             output.onlyRead.toggle()
             output.onlyShowAlerts ? output.showOnlyWarningAndUnread() : output.showOnlyUnread()
             
         case .onlyShowAlertsOn:
-            print("yilmaz: onlyShowAlertsOn")
             output.onlyShowAlerts.toggle()
             output.onlyRead ? output.showOnlyUnread() : output.showAll()
             
         case .onlyShowAlertsOff:
-            print("yilmaz: onlyShowAlertsOff")
             output.onlyShowAlerts.toggle()
             output.onlyRead ? output.showOnlyWarningAndUnread() : output.showOnlyWarning()
             
