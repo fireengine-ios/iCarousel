@@ -225,7 +225,7 @@ final class QuickSelectTableView: UITableView {
     
     func selectOneRow(isSelected: Bool, indexPath: IndexPath) {
         if isSelected {
-            selectRow(at: indexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
+            selectRow(at: indexPath, animated: false, scrollPosition: UITableView.ScrollPosition.middle)
             delegate?.tableView?(self, didSelectRowAt: indexPath)
         }
     }
