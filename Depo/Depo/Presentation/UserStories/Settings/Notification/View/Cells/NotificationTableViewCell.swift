@@ -220,6 +220,10 @@ class NotificationTableViewCell: UITableViewCell {
         descriptionLabel.attributedText = convertHtml(from: htmlString)
         cardImageView.sd_setImage(with: URL(string: model.smallThumbnail ?? "")!)
         
+        updateStatus(model: model)
+    }
+    
+    func updateStatus(model: NotificationServiceResponse) {
         if model.priority == 1, model.status == "UNREAD" {
             setAsWarning()
         } else if model.status == "UNREAD" {

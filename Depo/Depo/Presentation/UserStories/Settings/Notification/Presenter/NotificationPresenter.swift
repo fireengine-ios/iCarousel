@@ -150,13 +150,14 @@ extension NotificationPresenter: NotificationInteractorOutput {
         
         for (index, el) in notifications.enumerated() {
             el.title! += " \(index)"
-            el.status = Int.random(in: 0...1) == 0 ? "UNREAD" : "READ"
+            el.status = "UNREAD"
             el.priority = Int.random(in: 0...1) == 0 ? 1 : 2
             self.notificationsForDisplay.append(el)
             self.notifications.append(el)
         }
         print("yilmaz: All notifications \(notifications.count)")
         view?.reloadTableView()
+        view?.reloadTimer()
     }
     
     func success(on type: String) {

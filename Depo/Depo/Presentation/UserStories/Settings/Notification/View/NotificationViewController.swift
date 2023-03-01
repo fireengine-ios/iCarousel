@@ -57,6 +57,10 @@ final class NotificationViewController: BaseViewController {
         return tableView.indexPathsForSelectedRows ?? []
     }
     
+    var updatedCells = Set<Int>()
+    
+    var timer: Timer?
+    
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +86,21 @@ final class NotificationViewController: BaseViewController {
         super.viewWillAppear(animated)
         output.viewWillAppear()
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // start a timer to update cells every 3 seconds
+        timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(updateCells), userInfo: nil, repeats: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // invalidate the timer when the view disappears
+        timer?.invalidate()
+        timer = nil
     }
     
     override func viewDidLayoutSubviews() {
@@ -228,6 +247,34 @@ final class NotificationViewController: BaseViewController {
     }
 }
 
+// MARK: - UIScrollViewDelegate methods
+extension NotificationViewController {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // restart the timer when the user scrolls the table view
+        if updatedCells.count < output.notificationsCount() {
+            restartTimer()
+        }
+    }
+}
+
+// MARK: - Timer methods
+extension NotificationViewController {
+    private func restartTimer() {
+        // I just wanted to make algorith clear, therefore I invoke restartTimer like that
+        startTimer()
+    }
+    
+    private func stopTimer() {
+        timer?.invalidate()
+        timer = Timer()
+    }
+    
+    private func startTimer() {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(updateCells), userInfo: nil, repeats: true)
+    }
+}
+
 // MARK: NotificationViewInput
 extension NotificationViewController: NotificationViewInput {
     func reloadTableView() {
@@ -236,6 +283,10 @@ extension NotificationViewController: NotificationViewInput {
     
     func setEmptyView(as hidden: Bool) {
         emptyView.isHidden = hidden
+    }
+    
+    func reloadTimer() {
+        startTimer()
     }
 }
 
@@ -270,6 +321,32 @@ extension NotificationViewController: UITableViewDelegate {
         }
         
         cell.updateSelection(isSelectionMode: isSelectingMode, animated: false)
+    }
+    
+    @objc func updateCells() {
+        // stop the timer if there are no more cells to update
+        if updatedCells.count == output.notificationsCount() {
+            stopTimer()
+        }
+        
+        // get the currently visible cell indexes
+        guard let visibleIndexPaths = tableView.indexPathsForVisibleRows?.compactMap({$0.row}) else { return }
+        
+        let differenceCells = updatedCells.symmetricDifference(visibleIndexPaths)
+        
+        differenceCells.forEach { el in
+            let indexPath = IndexPath(row: el, section: 0)
+            
+            guard let cell = tableView.cellForRow(at: indexPath) as? NotificationTableViewCell else {
+                return
+            }
+            let model = output.getNotification(at: indexPath.row)
+            model.status = "READ"
+            cell.updateStatus(model: model)
+            output.read(with: model.communicationNotificationId?.description ?? "")
+            
+            updatedCells.insert(el)
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -360,17 +437,27 @@ extension NotificationViewController: BaseItemInputPassingProtocol {
             output.onlyRead.toggle()
             output.onlyShowAlerts ? output.showOnlyWarning() : output.showAll()
             
+            if !output.onlyRead && !output.onlyShowAlerts {
+                startTimer()
+            }
+            
         case .onlyUnreadOff:
             output.onlyRead.toggle()
             output.onlyShowAlerts ? output.showOnlyWarningAndUnread() : output.showOnlyUnread()
+            stopTimer()
             
         case .onlyShowAlertsOn:
             output.onlyShowAlerts.toggle()
             output.onlyRead ? output.showOnlyUnread() : output.showAll()
             
+            if !output.onlyRead && !output.onlyShowAlerts {
+                startTimer()
+            }
+            
         case .onlyShowAlertsOff:
             output.onlyShowAlerts.toggle()
             output.onlyRead ? output.showOnlyWarningAndUnread() : output.showOnlyWarning()
+            stopTimer()
             
         default:
             break
