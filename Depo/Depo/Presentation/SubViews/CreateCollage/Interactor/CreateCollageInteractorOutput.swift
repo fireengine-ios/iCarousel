@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+protocol CreateCollageInteractorOutput: AnyObject {
+    func getCollageTemplate(data: [CollageTemplate])
+    func didFinishedAllRequests()
+}

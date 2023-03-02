@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+protocol CreateCollageInteractorInput {
+    func viewIsReady()
+}
+
