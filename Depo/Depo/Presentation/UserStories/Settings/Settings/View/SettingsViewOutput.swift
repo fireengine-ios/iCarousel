@@ -65,6 +65,8 @@ protocol SettingsViewOutput {
     
     func goToPackages()
     
+    func goToNotification()
+    
     var isPasscodeEmpty: Bool { get }
     
     var isPremiumUser: Bool { get }

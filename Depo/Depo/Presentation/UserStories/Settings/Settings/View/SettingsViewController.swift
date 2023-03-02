@@ -36,7 +36,10 @@ protocol SettingsDelegate: AnyObject {
     func goToDarkMode()
     
     func goToPackages()
+    
     func goToPaycellCampaign()
+    
+    func goToNotification()
 }
 
 final class SettingsViewController: BaseViewController {
@@ -154,6 +157,10 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         return getConfiguredCell(indexPath: indexPath)
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return .leastNormalMagnitude
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.scrollRectToVisible(tableView.rectForRow(at: indexPath), animated: true)
         if !Device.isIpad {
@@ -229,6 +236,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 delegate.goToPackages()
             } else {
                 output.goToPackages()
+            }
+        case .notification:
+            if let delegate = settingsDelegate {
+                delegate.goToNotification()
+            } else {
+                output.goToNotification()
             }
         }
     }

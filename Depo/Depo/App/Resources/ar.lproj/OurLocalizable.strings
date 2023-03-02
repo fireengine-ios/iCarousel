@@ -2069,3 +2069,13 @@ then {11,99 TRY/Month}*/
 "ksaldalks" = "";
 "free_up_space_title" = "المساحة الموجودة على جهازك ممتلئة تقريبًا!";
 "notification_menu_item" = "إشعارات";
+
+/*Fuzzy*/
+"free_up_space_title" = "المساحة الموجودة على جهازك ممتلئة تقريبًا!";
+
+/*Fuzzy*/
+"notification_menu_item" = "إشعارات";
+"notification_buttom_sheet_select_mode" = "";
+"notification_buttom_sheet_only_unread" = "";
+"notification_buttom_sheet_show_alerts" = "";
+"notifications_no_notification" = "";

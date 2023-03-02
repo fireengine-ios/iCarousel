@@ -191,6 +191,9 @@ enum Strings: String, Localizable {
     case paycellAcceptedFriends     = "title_paycell_friends"
     case paycellShareMessage        = "paycell_share_message"
     
+    // MARK: - Setting Menu Items
+    case notificationMenuItem       = "notification_menu_item"
+    
     // MARK: - All Files
     case allFilesNoMusicButtonText    = "Start adding your music"
     case allFilesNoDocumentButtonText = "Start adding your documents"
@@ -220,4 +223,11 @@ enum Strings: String, Localizable {
     case emptyGalleryNoUnsync = "empty_gallery_no_unsync"
     
     case subscriptionOfferCancelButton = "subscription_offer_cancel_button"
+    
+    case deleteAll = "Delete all"
+    case selectMode = "notification_buttom_sheet_select_mode"
+    case onlyUnread = "notification_buttom_sheet_only_unread"
+    case onlyAlert = "notification_buttom_sheet_show_alerts"
+    
+    case notificationsNoNotification = "notifications_no_notification"
 }

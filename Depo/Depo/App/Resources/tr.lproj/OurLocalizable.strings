@@ -2081,3 +2081,13 @@ then {11,99 TRY/Month}*/
 "ksaldalks" = "";
 "free_up_space_title" = "Alanın dolmak üzere!";
 "notification_menu_item" = "Bildirimler";
+
+/*Fuzzy*/
+"free_up_space_title" = "Alanın dolmak üzere!";
+
+/*Fuzzy*/
+"notification_menu_item" = "Bildirimler";
+"notification_buttom_sheet_select_mode" = "Seç";
+"notification_buttom_sheet_only_unread" = "Sadece okunmamışlar";
+"notification_buttom_sheet_show_alerts" = "Sadece uyarıları göster";
+"notifications_no_notification" = "Henüz bildirimin yok";

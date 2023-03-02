@@ -2362,3 +2362,13 @@ then {11,99 TRY/Month}*/
 "ksaldalks" = "";
 "free_up_space_title" = "L'espace sur votre appareil est presque plein!";
 "notification_menu_item" = "Notifications";
+
+/*Fuzzy*/
+"free_up_space_title" = "L'espace sur votre appareil est presque plein!";
+
+/*Fuzzy*/
+"notification_menu_item" = "Notifications";
+"notification_buttom_sheet_select_mode" = "";
+"notification_buttom_sheet_only_unread" = "";
+"notification_buttom_sheet_show_alerts" = "";
+"notifications_no_notification" = "";

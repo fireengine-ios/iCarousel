@@ -56,8 +56,8 @@ class AlertFilesActionView: UIView, NibInit {
 
     func configure(with action: AlertFilesAction, showsBottomSeparator: Bool) {
         currentAction = action
-
-        imageView.image = action.icon?.withRenderingMode(.alwaysTemplate)
+        
+        imageView.image = action.isTemplate ? action.icon?.withRenderingMode(.alwaysTemplate) : action.icon
         label.text = action.title
         separatorView.isHidden = !showsBottomSeparator
     }

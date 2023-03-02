@@ -52,6 +52,12 @@ enum ElementTypes {
     //all files/select
     case select
     case selectAll
+    case selectMode
+    case deleteAll
+    case onlyUnreadOn
+    case onlyUnreadOff
+    case onlyShowAlertsOn
+    case onlyShowAlertsOff
     case deSelectAll
     //doc viewing
     case documentDetails
@@ -597,6 +603,18 @@ enum ElementTypes {
             return TextConstants.actionSheetSelect
         case .selectAll:
             return TextConstants.actionSheetSelectAll
+        case .selectMode:
+            return localized(.selectMode)
+        case .onlyUnreadOn:
+            return localized(.onlyUnread)
+        case .onlyUnreadOff:
+            return localized(.onlyUnread)
+        case .onlyShowAlertsOn:
+            return localized(.onlyAlert)
+        case .onlyShowAlertsOff:
+            return localized(.onlyAlert)
+        case .deleteAll:
+            return localized(.deleteAll)
         case .deSelectAll:
             return TextConstants.actionSheetDeSelectAll
         case .print:
@@ -719,6 +737,18 @@ enum ElementTypes {
         case .select:
             return ""
         case .selectAll:
+            return TextConstants.actionSheetSelectAll
+        case .selectMode:
+            return ""
+        case .deleteAll:
+            return localized(.deleteAll)
+        case .onlyUnreadOn:
+            return ""
+        case .onlyUnreadOff:
+            return ""
+        case .onlyShowAlertsOn:
+            return ""
+        case .onlyShowAlertsOff:
             return ""
         case .deSelectAll:
             return ""
@@ -845,7 +875,19 @@ enum ElementTypes {
         case .select:
             return Image.iconSelect.image
         case .selectAll:
-            return nil
+            return Image.iconSelect.image
+        case .selectMode:
+            return Image.iconSelect.image
+        case .deleteAll:
+            return Image.iconDelete.image
+        case .onlyUnreadOn:
+            return Image.iconSwitchToggleOn.image
+        case .onlyUnreadOff:
+            return Image.iconSwitchToggleOff.image
+        case .onlyShowAlertsOn:
+            return Image.iconSwitchToggleOn.image
+        case .onlyShowAlertsOff:
+            return Image.iconSwitchToggleOff.image
         case .deSelectAll:
             return nil
         case .documentDetails:

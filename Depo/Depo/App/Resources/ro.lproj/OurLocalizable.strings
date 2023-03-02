@@ -2057,3 +2057,13 @@ then {11,99 TRY/Month}*/
 "ksaldalks" = "";
 "free_up_space_title" = "Spațiul de pe dispozitiv este aproape plin!";
 "notification_menu_item" = "Notificări";
+
+/*Fuzzy*/
+"free_up_space_title" = "Spațiul de pe dispozitiv este aproape plin!";
+
+/*Fuzzy*/
+"notification_menu_item" = "Notificări";
+"notification_buttom_sheet_select_mode" = "";
+"notification_buttom_sheet_only_unread" = "";
+"notification_buttom_sheet_show_alerts" = "";
+"notifications_no_notification" = "";

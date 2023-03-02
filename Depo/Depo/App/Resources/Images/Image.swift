@@ -52,6 +52,7 @@ enum Image: String, AppImage {
     case iconMove
     case iconAlbum
     case iconUnstar
+    case iconErrorRed
     /// Actions/Function Menu
     case iconFilter
     case iconGif
@@ -65,6 +66,7 @@ enum Image: String, AppImage {
     case iconMix
     case iconRotate
     case iconOcr
+    case iconDeletePlain
     /// Action/Small
     case iconRadioButtonSelect
     case iconRadioButtonUnselect
@@ -112,6 +114,9 @@ enum Image: String, AppImage {
     case iconPickNoAlbums
     case iconPickNoFavorites
     case iconPickNoPhotos
+    ///Switch
+    case iconSwitchToggleOn
+    case iconSwitchToggleOff
     
     ///  Files Tab
     case iconFileAudio

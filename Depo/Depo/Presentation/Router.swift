@@ -1106,6 +1106,11 @@ class RouterVC: NSObject {
     func packages(quotaInfo: QuotaInfoResponse? = nil) -> PackagesViewController {
         return PackagesModuleInitializer.viewController(quotaInfo: quotaInfo)
     }
+    
+    // MARK: - Notification
+    func notification() -> NotificationViewController {
+        return NotificationModuleInitializer.initializeViewController()
+    }
 
     // MARK: - Passcode
     

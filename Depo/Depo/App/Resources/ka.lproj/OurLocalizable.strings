@@ -2055,3 +2055,13 @@ then {11,99 TRY/Month}*/
 "ksaldalks" = "-";
 "free_up_space_title" = "მეხსიერება არაა საკმარისი";
 "notification_menu_item" = "შეტყობინებები";
+
+/*Fuzzy*/
+"free_up_space_title" = "მეხსიერება არაა საკმარისი";
+
+/*Fuzzy*/
+"notification_menu_item" = "შეტყობინებები";
+"notification_buttom_sheet_select_mode" = "notification_buttom_sheet_select_mode";
+"notification_buttom_sheet_only_unread" = "\nnotification_buttom_sheet_only_unread";
+"notification_buttom_sheet_show_alerts" = "notification_buttom_sheet_show_alerts";
+"notifications_no_notification" = "notifications_no_notification";

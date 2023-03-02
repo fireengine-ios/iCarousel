@@ -1902,7 +1902,7 @@
 "container_shared_files" = "Shared By Me";
 "container_document" = "Document";
 "container_music" = "Music";
-"container_favourite" = "Favourite";
+"container_favourite" = "Favourites";
 "container_trashed" = "Trash Bin";
 
 /*Chatbot*/
@@ -2121,3 +2121,13 @@ then {11,99 TRY/Month}*/
 "ksaldalks" = "";
 "free_up_space_title" = "Device space is almost full";
 "notification_menu_item" = "Notifications";
+
+/*Fuzzy*/
+"free_up_space_title" = "Device space is almost full";
+
+/*Fuzzy*/
+"notification_menu_item" = "Notifications";
+"notification_buttom_sheet_select_mode" = "Select Mode";
+"notification_buttom_sheet_only_unread" = "Only unread";
+"notification_buttom_sheet_show_alerts" = "Only show alerts";
+"notifications_no_notification" = "No new notification";
