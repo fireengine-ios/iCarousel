@@ -13216,6 +13216,7 @@
 		07C6D4D6284B457800502C28 /* TabBarCards */ = {
 			isa = PBXGroup;
 			children = (
+				52EDD1D829A3A06000D549FC /* SimpleBottomBarCard.swift */,
 				07C6D4D7284B458B00502C28 /* Cards */,
 				07C6D4C92848D80500502C28 /* TabBarCardsContainer.swift */,
 				07C6D4D1284B43D100502C28 /* BaseTabBarCard.swift */,
@@ -14756,8 +14757,6 @@
 			children = (
 				52EDD1C2299EC6A900D549FC /* NotificationThreeDotMenuManager.swift */,
 				52EDD1CB29A0292100D549FC /* NotificationBottomBarManager.swift */,
-				52EDD1D829A3A06000D549FC /* SimpleBottomBarCard.swift */,
-				52EDD1D329A04CE100D549FC /* QuickSelectTableView.swift */,
 				52EDD1DD29A502D100D549FC /* NotificationEmptyView.swift */,
 			);
 			path = Misc;
@@ -16865,7 +16864,6 @@
 		8C20862D228D4B2E000BEDAD /* PhotoVideo */ = {
 			isa = PBXGroup;
 			children = (
-				B557674622E99F8500C86E2F /* QuickSelect */,
 				8C20862E228D4B2E000BEDAD /* PhotoVideoScrollBarManager.swift */,
 				8C20862F228D4B2E000BEDAD /* ScrollBarView.swift */,
 				071E7B6B2832438C00A5DD24 /* GalleryCollectionGridSize.swift */,
@@ -19164,6 +19162,7 @@
 		B557674622E99F8500C86E2F /* QuickSelect */ = {
 			isa = PBXGroup;
 			children = (
+				52EDD1D329A04CE100D549FC /* QuickSelectTableView.swift */,
 				B557674722E99F9F00C86E2F /* QuickSelectCollectionView.swift */,
 				B557674B22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift */,
 			);
@@ -20866,6 +20865,7 @@
 		CEAE3FE71EFD517300A405B2 /* CustomTabBars */ = {
 			isa = PBXGroup;
 			children = (
+				B557674622E99F8500C86E2F /* QuickSelect */,
 				8C20862D228D4B2E000BEDAD /* PhotoVideo */,
 				CEAE3FE91EFD517300A405B2 /* TabBarViewController.xib */,
 				CEAE3FEA1EFD517300A405B2 /* TabBarViewController.swift */,
