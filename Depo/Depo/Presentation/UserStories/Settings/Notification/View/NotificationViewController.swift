@@ -166,8 +166,6 @@ final class NotificationViewController: BaseViewController {
         deselectAllCells()
         bottomBarManager.hide()
         bottomBarCard.isHidden = true
-        
-        print(FirebaseRemoteConfig.shared.notificationReadTime)
     }
     
     private func updateBarsForSelectedObjects() {
@@ -271,7 +269,12 @@ extension NotificationViewController {
     
     private func startTimer() {
         timer?.invalidate()
-        timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(updateCells), userInfo: nil, repeats: true)
+        var timeInterval = TimeInterval(FirebaseRemoteConfig.shared.notificationReadTime)
+        if timeInterval == 0 {
+            timeInterval = 3
+        }
+        timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self,
+                                     selector: #selector(updateCells), userInfo: nil, repeats: true)
     }
 }
 

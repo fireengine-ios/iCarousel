@@ -113,7 +113,6 @@ extension NotificationPresenter: NotificationViewOutput {
     }
     
     private func delete(with idList: [Int]) {
-        print("yilmaz: \(idList) \(notificationsForDisplay.count)")
         interactor.delete(with: idList)
     }
     
@@ -190,14 +189,12 @@ extension NotificationPresenter: NotificationInteractorOutput {
             self.notificationsForDisplay.append(el)
             self.notifications.append(el)
         }
-        print("yilmaz: All notifications \(notifications.count)")
         view?.reloadTableView()
         view?.reloadTimer()
     }
     
     func success(on type: String) {
         view?.stopActivityIndicator()
-        print("yilmaz: \(type)")
     }
     
     func fail(errorResponse: ErrorResponse) {

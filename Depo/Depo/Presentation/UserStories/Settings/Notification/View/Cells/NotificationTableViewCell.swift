@@ -210,14 +210,7 @@ class NotificationTableViewCell: UITableViewCell {
     
     func configure(model: NotificationServiceResponse, readMode: Bool) {
         titleLabel.text = model.title
-        
-        let htmlString = """
-        <h1 style="color: red;">Hello, World!</h1>
-        <p style="color: blue;">This is an <strong>example</strong> of a paragraph with <em>bold</em> and <u>underlined</u> text.</p>
-        <img src="https://flagcdn.com/w80/tr.png">
-        """
-        
-        descriptionLabel.attributedText = convertHtml(from: htmlString)
+        descriptionLabel.attributedText = convertHtml(from: model.body ?? "")
         cardImageView.sd_setImage(with: URL(string: model.smallThumbnail ?? "")!)
         
         updateStatus(model: model)
@@ -276,7 +269,7 @@ class NotificationTableViewCell: UITableViewCell {
 
 extension NotificationTableViewCell {
     private func convertHtml(from htmlString: String) -> NSAttributedString  {
-        if let data = htmlString.data(using: .utf8) {
+        if let data = htmlString.data(using: String.Encoding.unicode, allowLossyConversion: true) {
           let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
             .documentType: NSAttributedString.DocumentType.html,
             .characterEncoding: String.Encoding.utf8.rawValue
