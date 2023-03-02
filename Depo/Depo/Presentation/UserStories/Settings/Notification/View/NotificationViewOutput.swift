@@ -25,6 +25,11 @@ protocol NotificationViewOutput {
     func showOnlyWarningAndUnread()
     func showAll()
     
+    func deleteUpdatedCells(with index: Int)
+    func insertUpdatedCells(member: Int)
+    func updatedCellsCount() -> Int
+    func updatedCellsDiff(_ other: [Int]) -> Set<Int>
+    
     func read(with id: String)
     
     var onlyRead: Bool { get set }

@@ -23,6 +23,9 @@ class NotificationPresenter {
     
     var onlyRead: Bool = false
     var onlyShowAlerts: Bool = false
+    
+    private var updatedCells = Set<Int>()
+    private let mutex = DispatchSemaphore(value: 1)
 }
 
 // MARK: PackagesViewOutput
@@ -131,12 +134,44 @@ extension NotificationPresenter: NotificationViewOutput {
         
         for index in indexes.sorted(by: >) {
             notifications.remove(at: index)
+            
+            // it is about read state.
+            deleteUpdatedCells(with: index)
         }
+    }
+    
+    func deleteUpdatedCells(with index: Int) {
+        mutex.wait()
+        updatedCells.remove(index)
+        mutex.signal()
+    }
+    
+    func insertUpdatedCells(member: Int) {
+        mutex.wait()
+        updatedCells.insert(member)
+        mutex.signal()
+    }
+    
+    func updatedCellsCount() -> Int {
+        var count = 0
+        mutex.wait()
+        count = updatedCells.count
+        mutex.signal()
+        return count
+    }
+    
+    func updatedCellsDiff(_ other: [Int]) -> Set<Int> {
+        var diff = Set<Int>()
+        mutex.wait()
+        diff = updatedCells.symmetricDifference(other)
+        mutex.signal()
+        return diff
     }
     
     func read(with id: String) {
         interactor.read(with: id)
     }
+
 }
 
 // MARK: PackagesInteractorOutput

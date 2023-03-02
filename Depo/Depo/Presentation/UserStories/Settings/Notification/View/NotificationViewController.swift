@@ -57,8 +57,6 @@ final class NotificationViewController: BaseViewController {
         return tableView.indexPathsForSelectedRows ?? []
     }
     
-    var updatedCells = Set<Int>()
-    
     var timer: Timer?
     
     // MARK: - View lifecycle
@@ -251,7 +249,9 @@ final class NotificationViewController: BaseViewController {
 extension NotificationViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // restart the timer when the user scrolls the table view
-        if updatedCells.count < output.notificationsCount() {
+        
+        if !output.onlyRead && !output.onlyShowAlerts,
+            output.updatedCellsCount() < output.notificationsCount() {
             restartTimer()
         }
     }
@@ -325,14 +325,14 @@ extension NotificationViewController: UITableViewDelegate {
     
     @objc func updateCells() {
         // stop the timer if there are no more cells to update
-        if updatedCells.count == output.notificationsCount() {
+        if output.updatedCellsCount() == output.notificationsCount() {
             stopTimer()
         }
         
         // get the currently visible cell indexes
         guard let visibleIndexPaths = tableView.indexPathsForVisibleRows?.compactMap({$0.row}) else { return }
         
-        let differenceCells = updatedCells.symmetricDifference(visibleIndexPaths)
+        let differenceCells = output.updatedCellsDiff(visibleIndexPaths)
         
         differenceCells.forEach { el in
             let indexPath = IndexPath(row: el, section: 0)
@@ -345,7 +345,7 @@ extension NotificationViewController: UITableViewDelegate {
             cell.updateStatus(model: model)
             output.read(with: model.communicationNotificationId?.description ?? "")
             
-            updatedCells.insert(el)
+            output.insertUpdatedCells(member: el)
         }
     }
     
