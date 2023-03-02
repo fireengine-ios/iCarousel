@@ -178,9 +178,13 @@ extension NotificationPresenter: NotificationInteractorOutput {
     func success(with notifications: [NotificationServiceResponse]) {
         view?.stopActivityIndicator()
 
-        for el in notifications {
+        for (index, el) in notifications.enumerated() {
             self.notificationsForDisplay.append(el)
             self.notifications.append(el)
+            
+            if el.status == "READ" {
+                self.updatedCells.insert(index)
+            }
         }
         view?.reloadTableView()
         view?.reloadTimer()
