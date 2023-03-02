@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+protocol CreateCollageModuleInput: AnyObject {
+    func viewIsReady()
+}
