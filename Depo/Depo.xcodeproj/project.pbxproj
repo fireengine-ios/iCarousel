@@ -15447,6 +15447,7 @@
 		7C032B851EEFFC1A006532C8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				89F0953829B0B4D500F74E7E /* CreateCollage */,
 				07C6D4DD284B4B5700502C28 /* IndeterminateProgressView */,
 				F00D7DDD2851C6A30004E619 /* SharedItemsSegmentView */,
 				074E6F1D27C67651003DDB93 /* Map */,
@@ -16690,6 +16691,61 @@
 				89EA4F77240902C400A2C543 /* PackagesTableViewCell.swift */,
 			);
 			path = PackagesTableViewCell;
+			sourceTree = "<group>";
+		};
+		89F0953829B0B4D500F74E7E /* CreateCollage */ = {
+			isa = PBXGroup;
+			children = (
+				89F0953929B0B53700F74E7E /* View */,
+				89F0953B29B0B5A600F74E7E /* Presenter */,
+				89F0953C29B0B5B300F74E7E /* Interactor */,
+				89F0953D29B0B5BB00F74E7E /* Router */,
+				89F0953E29B0B5CB00F74E7E /* Configurator */,
+			);
+			path = CreateCollage;
+			sourceTree = "<group>";
+		};
+		89F0953929B0B53700F74E7E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				89F0953A29B0B54900F74E7E /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		89F0953A29B0B54900F74E7E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		89F0953B29B0B5A600F74E7E /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		89F0953C29B0B5B300F74E7E /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		89F0953D29B0B5BB00F74E7E /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		89F0953E29B0B5CB00F74E7E /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Configurator;
 			sourceTree = "<group>";
 		};
 		8C0097071F6BD8AA00FA069C /* MoreFilesActions */ = {
