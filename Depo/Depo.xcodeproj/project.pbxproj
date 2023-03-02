@@ -1626,6 +1626,10 @@
 		89ECD6A5296FDE6500315A02 /* FavoriteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECD6A3296FDE6500315A02 /* FavoriteInteractor.swift */; };
 		89ECD6A6296FDE6500315A02 /* FavoriteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECD6A3296FDE6500315A02 /* FavoriteInteractor.swift */; };
 		89ECD6A7296FDE6500315A02 /* FavoriteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECD6A3296FDE6500315A02 /* FavoriteInteractor.swift */; };
+		89F0953129B0B3E000F74E7E /* CollageTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0953029B0B3E000F74E7E /* CollageTemplate.swift */; };
+		89F0953229B0B3E000F74E7E /* CollageTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0953029B0B3E000F74E7E /* CollageTemplate.swift */; };
+		89F0953329B0B3E000F74E7E /* CollageTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0953029B0B3E000F74E7E /* CollageTemplate.swift */; };
+		89F0953429B0B3E000F74E7E /* CollageTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0953029B0B3E000F74E7E /* CollageTemplate.swift */; };
 		8C017B762074B782002484E7 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
 		8C017B772074B795002484E7 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
 		8C0332982115F42D00E75EBC /* AnalyticsDimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0332962115F42D00E75EBC /* AnalyticsDimension.swift */; };
@@ -10777,6 +10781,7 @@
 		89EA4F77240902C400A2C543 /* PackagesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackagesTableViewCell.swift; sourceTree = "<group>"; };
 		89EA4F78240902C400A2C543 /* PackagesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PackagesTableViewCell.xib; sourceTree = "<group>"; };
 		89ECD6A3296FDE6500315A02 /* FavoriteInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteInteractor.swift; sourceTree = "<group>"; };
+		89F0953029B0B3E000F74E7E /* CollageTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollageTemplate.swift; sourceTree = "<group>"; };
 		8A226C38114FC93E746DB9EF /* Pods-lifeBox_Business_Bundle.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lifeBox_Business_Bundle.appstore.xcconfig"; path = "Target Support Files/Pods-lifeBox_Business_Bundle/Pods-lifeBox_Business_Bundle.appstore.xcconfig"; sourceTree = "<group>"; };
 		8A4620DB4814DE9B2BF69415 /* SplashModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashModuleInput.swift; sourceTree = "<group>"; };
 		8ACB18A67C5CBB40E87DBA64 /* UploadFilesSelectionModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionModuleInput.swift; sourceTree = "<group>"; };
@@ -15739,6 +15744,7 @@
 				73B623DA23BF625C00839C47 /* SmashStickerResponse.swift */,
 				73E6715A23EBFE53000C4AF7 /* PrivacyPolicyResponse.swift */,
 				0765B82C269EE7430030429C /* APIResponse.swift */,
+				89F0953029B0B3E000F74E7E /* CollageTemplate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -26667,6 +26673,7 @@
 				8C0E8E7E1FDEBDFF00789C91 /* ColumnsCollectionLayout.swift in Sources */,
 				8C0E8E811FDEBDFF00789C91 /* AlertFilesActionsSheetInteractorOutput.swift in Sources */,
 				8C0E8E831FDEBDFF00789C91 /* CollectionViewCellForVideo.swift in Sources */,
+				89F0953129B0B3E000F74E7E /* CollageTemplate.swift in Sources */,
 				985786F223E01F8800D35DDA /* SettingFooterView.swift in Sources */,
 				8C0B91AC20170EBB00A5BA81 /* ManageContactsInteractor.swift in Sources */,
 				982319CF24F3A1E700FD16E2 /* AdjustmentCategoryCell.swift in Sources */,
@@ -28936,6 +28943,7 @@
 				CE784AE322A685FB00662219 /* InstaPickHashtagCollectionViewDataSource.swift in Sources */,
 				0765B82A269EE6F50030429C /* PhotopickCampaignResponse.swift in Sources */,
 				CE784AE422A685FB00662219 /* FaceImagePhotosInitializer.swift in Sources */,
+				89F0953329B0B3E000F74E7E /* CollageTemplate.swift in Sources */,
 				0334575523C714C100FB6386 /* NetmeraScreenEvents.swift in Sources */,
 				CE784AE522A685FB00662219 /* BaseFilesGreedViewInput.swift in Sources */,
 				0780AB6227916846000760D9 /* TextRecognitionService.swift in Sources */,
@@ -30038,6 +30046,7 @@
 				076BD1B727BC0958004609E3 /* MapSearchPresenter.swift in Sources */,
 				CF8B64AA23CBC9D70021B021 /* LocalAlbumPresenter.swift in Sources */,
 				CF8B64AB23CBC9D70021B021 /* TBMatikPhotosViewController.swift in Sources */,
+				89F0953229B0B3E000F74E7E /* CollageTemplate.swift in Sources */,
 				CF8B64AC23CBC9D70021B021 /* SegmentedController.swift in Sources */,
 				98B047B4259314740011DAEB /* Message.m in Sources */,
 				07C6D4E0284B4B7300502C28 /* IndeterminateProgressView.swift in Sources */,
@@ -32545,6 +32554,7 @@
 				CF8B6E5D23CBCA280021B021 /* CreateStoryAudioSelectionItemViewController.swift in Sources */,
 				CF8B6E5E23CBCA280021B021 /* BaseRequestService.swift in Sources */,
 				893DCFF4292B868000271379 /* DiscoverViewOutput.swift in Sources */,
+				89F0953429B0B3E000F74E7E /* CollageTemplate.swift in Sources */,
 				CF8B6E5F23CBCA280021B021 /* InstaPickCard.swift in Sources */,
 				F09279A22886823500874ADD /* GridListCountView.swift in Sources */,
 				CF8B6E6023CBCA280021B021 /* FaceImageAddNameDataSource.swift in Sources */,
