@@ -1111,6 +1111,10 @@ class RouterVC: NSObject {
     func notification() -> NotificationViewController {
         return NotificationModuleInitializer.initializeViewController()
     }
+    
+    func createCollage() -> CreateCollageViewController {
+        return CreateCollageInitilizer.initializeViewController()
+    }
 
     // MARK: - Passcode
     
