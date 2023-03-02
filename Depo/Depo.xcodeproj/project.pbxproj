@@ -1630,6 +1630,42 @@
 		89F0953229B0B3E000F74E7E /* CollageTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0953029B0B3E000F74E7E /* CollageTemplate.swift */; };
 		89F0953329B0B3E000F74E7E /* CollageTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0953029B0B3E000F74E7E /* CollageTemplate.swift */; };
 		89F0953429B0B3E000F74E7E /* CollageTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0953029B0B3E000F74E7E /* CollageTemplate.swift */; };
+		89F0954029B0B67400F74E7E /* CreateCollagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0953F29B0B67400F74E7E /* CreateCollagePresenter.swift */; };
+		89F0954129B0B67400F74E7E /* CreateCollagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0953F29B0B67400F74E7E /* CreateCollagePresenter.swift */; };
+		89F0954229B0B67400F74E7E /* CreateCollagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0953F29B0B67400F74E7E /* CreateCollagePresenter.swift */; };
+		89F0954329B0B67400F74E7E /* CreateCollagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0953F29B0B67400F74E7E /* CreateCollagePresenter.swift */; };
+		89F0954529B0B68B00F74E7E /* CreateCollageModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0954429B0B68B00F74E7E /* CreateCollageModuleInput.swift */; };
+		89F0954629B0B68B00F74E7E /* CreateCollageModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0954429B0B68B00F74E7E /* CreateCollageModuleInput.swift */; };
+		89F0954729B0B68B00F74E7E /* CreateCollageModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0954429B0B68B00F74E7E /* CreateCollageModuleInput.swift */; };
+		89F0954829B0B68B00F74E7E /* CreateCollageModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0954429B0B68B00F74E7E /* CreateCollageModuleInput.swift */; };
+		89F0954A29B0B69D00F74E7E /* CreateCollageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0954929B0B69D00F74E7E /* CreateCollageInteractor.swift */; };
+		89F0954B29B0B69D00F74E7E /* CreateCollageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0954929B0B69D00F74E7E /* CreateCollageInteractor.swift */; };
+		89F0954C29B0B69D00F74E7E /* CreateCollageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0954929B0B69D00F74E7E /* CreateCollageInteractor.swift */; };
+		89F0954D29B0B69D00F74E7E /* CreateCollageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0954929B0B69D00F74E7E /* CreateCollageInteractor.swift */; };
+		89F0954F29B0B6B500F74E7E /* CreateCollageInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0954E29B0B6B500F74E7E /* CreateCollageInteractorInput.swift */; };
+		89F0955029B0B6B500F74E7E /* CreateCollageInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0954E29B0B6B500F74E7E /* CreateCollageInteractorInput.swift */; };
+		89F0955129B0B6B500F74E7E /* CreateCollageInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0954E29B0B6B500F74E7E /* CreateCollageInteractorInput.swift */; };
+		89F0955229B0B6B500F74E7E /* CreateCollageInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0954E29B0B6B500F74E7E /* CreateCollageInteractorInput.swift */; };
+		89F0955429B0B6C500F74E7E /* CreateCollageInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0955329B0B6C500F74E7E /* CreateCollageInteractorOutput.swift */; };
+		89F0955529B0B6C500F74E7E /* CreateCollageInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0955329B0B6C500F74E7E /* CreateCollageInteractorOutput.swift */; };
+		89F0955629B0B6C500F74E7E /* CreateCollageInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0955329B0B6C500F74E7E /* CreateCollageInteractorOutput.swift */; };
+		89F0955729B0B6C500F74E7E /* CreateCollageInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0955329B0B6C500F74E7E /* CreateCollageInteractorOutput.swift */; };
+		89F0955929B0B6DB00F74E7E /* CreateCollageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0955829B0B6DB00F74E7E /* CreateCollageRouter.swift */; };
+		89F0955A29B0B6DB00F74E7E /* CreateCollageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0955829B0B6DB00F74E7E /* CreateCollageRouter.swift */; };
+		89F0955B29B0B6DB00F74E7E /* CreateCollageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0955829B0B6DB00F74E7E /* CreateCollageRouter.swift */; };
+		89F0955C29B0B6DB00F74E7E /* CreateCollageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0955829B0B6DB00F74E7E /* CreateCollageRouter.swift */; };
+		89F0955E29B0B6E900F74E7E /* CreateCollageRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0955D29B0B6E900F74E7E /* CreateCollageRouterInput.swift */; };
+		89F0955F29B0B6E900F74E7E /* CreateCollageRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0955D29B0B6E900F74E7E /* CreateCollageRouterInput.swift */; };
+		89F0956029B0B6E900F74E7E /* CreateCollageRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0955D29B0B6E900F74E7E /* CreateCollageRouterInput.swift */; };
+		89F0956129B0B6E900F74E7E /* CreateCollageRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0955D29B0B6E900F74E7E /* CreateCollageRouterInput.swift */; };
+		89F0956329B0B6FA00F74E7E /* CreateCollageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0956229B0B6FA00F74E7E /* CreateCollageConfigurator.swift */; };
+		89F0956429B0B6FA00F74E7E /* CreateCollageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0956229B0B6FA00F74E7E /* CreateCollageConfigurator.swift */; };
+		89F0956529B0B6FA00F74E7E /* CreateCollageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0956229B0B6FA00F74E7E /* CreateCollageConfigurator.swift */; };
+		89F0956629B0B6FA00F74E7E /* CreateCollageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0956229B0B6FA00F74E7E /* CreateCollageConfigurator.swift */; };
+		89F0956829B0B70A00F74E7E /* CreateCollageInitilizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0956729B0B70A00F74E7E /* CreateCollageInitilizer.swift */; };
+		89F0956929B0B70A00F74E7E /* CreateCollageInitilizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0956729B0B70A00F74E7E /* CreateCollageInitilizer.swift */; };
+		89F0956A29B0B70A00F74E7E /* CreateCollageInitilizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0956729B0B70A00F74E7E /* CreateCollageInitilizer.swift */; };
+		89F0956B29B0B70A00F74E7E /* CreateCollageInitilizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0956729B0B70A00F74E7E /* CreateCollageInitilizer.swift */; };
 		8C017B762074B782002484E7 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
 		8C017B772074B795002484E7 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
 		8C0332982115F42D00E75EBC /* AnalyticsDimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0332962115F42D00E75EBC /* AnalyticsDimension.swift */; };
@@ -10782,6 +10818,15 @@
 		89EA4F78240902C400A2C543 /* PackagesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PackagesTableViewCell.xib; sourceTree = "<group>"; };
 		89ECD6A3296FDE6500315A02 /* FavoriteInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteInteractor.swift; sourceTree = "<group>"; };
 		89F0953029B0B3E000F74E7E /* CollageTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollageTemplate.swift; sourceTree = "<group>"; };
+		89F0953F29B0B67400F74E7E /* CreateCollagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollagePresenter.swift; sourceTree = "<group>"; };
+		89F0954429B0B68B00F74E7E /* CreateCollageModuleInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageModuleInput.swift; sourceTree = "<group>"; };
+		89F0954929B0B69D00F74E7E /* CreateCollageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageInteractor.swift; sourceTree = "<group>"; };
+		89F0954E29B0B6B500F74E7E /* CreateCollageInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageInteractorInput.swift; sourceTree = "<group>"; };
+		89F0955329B0B6C500F74E7E /* CreateCollageInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageInteractorOutput.swift; sourceTree = "<group>"; };
+		89F0955829B0B6DB00F74E7E /* CreateCollageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageRouter.swift; sourceTree = "<group>"; };
+		89F0955D29B0B6E900F74E7E /* CreateCollageRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageRouterInput.swift; sourceTree = "<group>"; };
+		89F0956229B0B6FA00F74E7E /* CreateCollageConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageConfigurator.swift; sourceTree = "<group>"; };
+		89F0956729B0B70A00F74E7E /* CreateCollageInitilizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageInitilizer.swift; sourceTree = "<group>"; };
 		8A226C38114FC93E746DB9EF /* Pods-lifeBox_Business_Bundle.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lifeBox_Business_Bundle.appstore.xcconfig"; path = "Target Support Files/Pods-lifeBox_Business_Bundle/Pods-lifeBox_Business_Bundle.appstore.xcconfig"; sourceTree = "<group>"; };
 		8A4620DB4814DE9B2BF69415 /* SplashModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashModuleInput.swift; sourceTree = "<group>"; };
 		8ACB18A67C5CBB40E87DBA64 /* UploadFilesSelectionModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionModuleInput.swift; sourceTree = "<group>"; };
@@ -16723,6 +16768,8 @@
 		89F0953B29B0B5A600F74E7E /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				89F0953F29B0B67400F74E7E /* CreateCollagePresenter.swift */,
+				89F0954429B0B68B00F74E7E /* CreateCollageModuleInput.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -16730,6 +16777,9 @@
 		89F0953C29B0B5B300F74E7E /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				89F0954929B0B69D00F74E7E /* CreateCollageInteractor.swift */,
+				89F0954E29B0B6B500F74E7E /* CreateCollageInteractorInput.swift */,
+				89F0955329B0B6C500F74E7E /* CreateCollageInteractorOutput.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -16737,6 +16787,8 @@
 		89F0953D29B0B5BB00F74E7E /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				89F0955829B0B6DB00F74E7E /* CreateCollageRouter.swift */,
+				89F0955D29B0B6E900F74E7E /* CreateCollageRouterInput.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -16744,6 +16796,8 @@
 		89F0953E29B0B5CB00F74E7E /* Configurator */ = {
 			isa = PBXGroup;
 			children = (
+				89F0956229B0B6FA00F74E7E /* CreateCollageConfigurator.swift */,
+				89F0956729B0B70A00F74E7E /* CreateCollageInitilizer.swift */,
 			);
 			path = Configurator;
 			sourceTree = "<group>";
@@ -25939,6 +25993,7 @@
 				8C0E8CDD1FDEBDFF00789C91 /* AutoSyncModuleInput.swift in Sources */,
 				C62239AC204973270043ED44 /* FaceImageChangeCoverInitializer.swift in Sources */,
 				B5BBBE9B24FCF0B100A719CB /* PhotoEditSaveService.swift in Sources */,
+				89F0954A29B0B69D00F74E7E /* CreateCollageInteractor.swift in Sources */,
 				CE23A0F3205FF5250048267D /* ErrorPresenter.swift in Sources */,
 				737A2E9B2338989B0014258A /* SetSecurityQuestionViewController.swift in Sources */,
 				8C0E8CDF1FDEBDFF00789C91 /* AutoSyncInteractorOutput.swift in Sources */,
@@ -26016,6 +26071,7 @@
 				B5ECA57025063E0C00C290BA /* CIImage+CGConvert.swift in Sources */,
 				C62239A82049731B0043ED44 /* FaceImageChangeCoverInteractor.swift in Sources */,
 				8C0E8D031FDEBDFF00789C91 /* ProgressCardProtocol.swift in Sources */,
+				89F0956829B0B70A00F74E7E /* CreateCollageInitilizer.swift in Sources */,
 				9809317823952CAC00ECFEF8 /* SmartAlbumsManager.swift in Sources */,
 				07AA667B26FDED36009D4FB1 /* ResetPasswordViewController.swift in Sources */,
 				CE58FB0720444BFF007F3F54 /* ColorConstants.swift in Sources */,
@@ -26179,6 +26235,7 @@
 				8C0E8D5A1FDEBDFF00789C91 /* IntroduceSubView.swift in Sources */,
 				8C0E8D5C1FDEBDFF00789C91 /* LoginInteractorOutput.swift in Sources */,
 				8C0E8D5D1FDEBDFF00789C91 /* UsageInfoInitializer.swift in Sources */,
+				89F0955E29B0B6E900F74E7E /* CreateCollageRouterInput.swift in Sources */,
 				B59E1F8725921F0000640DD1 /* VideoSyncService.swift in Sources */,
 				8C0E8D611FDEBDFF00789C91 /* PhoneVerificationDataStorage.swift in Sources */,
 				8C0E8D621FDEBDFF00789C91 /* AlertFilesActionsSheetModuleInput.swift in Sources */,
@@ -26579,6 +26636,7 @@
 				8C0E8E1D1FDEBDFF00789C91 /* ForgotPasswordViewController.swift in Sources */,
 				8C0E8E1E1FDEBDFF00789C91 /* ForgotPasswordModuleInput.swift in Sources */,
 				8C0E8E1F1FDEBDFF00789C91 /* EditingBarConfig.swift in Sources */,
+				89F0955429B0B6C500F74E7E /* CreateCollageInteractorOutput.swift in Sources */,
 				076BD1B627BC0958004609E3 /* MapSearchPresenter.swift in Sources */,
 				985FFAE6255C1ED2001AA845 /* FileNameView.swift in Sources */,
 				7C203554201F4F8F00D84727 /* LatestUploadCardCell.swift in Sources */,
@@ -26596,6 +26654,7 @@
 				7CEE271C209B537500EF6C79 /* LandingPageViewController.swift in Sources */,
 				98A86D5B23A239B900438225 /* AlbumsSliderDataSource.swift in Sources */,
 				8C0E8E241FDEBDFF00789C91 /* ForgotPasswordPresenter.swift in Sources */,
+				89F0956329B0B6FA00F74E7E /* CreateCollageConfigurator.swift in Sources */,
 				8C0E8E251FDEBDFF00789C91 /* ActivityTimelineFileCell.swift in Sources */,
 				07407D562796CB570082FF8D /* EmailVerificationConfigurator.swift in Sources */,
 				8C9EA14020B593E600FED3A2 /* DeviceExtension.swift in Sources */,
@@ -27018,6 +27077,7 @@
 				73A1833E235855AA0095719F /* CampaignCard.swift in Sources */,
 				0791817926F88B7B0067FB75 /* IdentityVerificationMethod.swift in Sources */,
 				8C0E8F281FDEBDFF00789C91 /* SettingsInteractorOutput.swift in Sources */,
+				89F0954529B0B68B00F74E7E /* CreateCollageModuleInput.swift in Sources */,
 				7CD7C2A420189C6C009F6D3D /* StorageCard.swift in Sources */,
 				8C0E8F291FDEBDFF00789C91 /* SettingsInteractor.swift in Sources */,
 				07DB93CA2860F2DD00D5CACF /* IAPProductsFetcher.swift in Sources */,
@@ -27087,6 +27147,7 @@
 				8C0E8F401FDEBDFF00789C91 /* UploadService.swift in Sources */,
 				8C0E8F411FDEBDFF00789C91 /* AlertFilesActionsSheetConfigurator.swift in Sources */,
 				9808B7CD2567EB10001DEF2E /* PrivateShareAccessListCell.swift in Sources */,
+				89F0954F29B0B6B500F74E7E /* CreateCollageInteractorInput.swift in Sources */,
 				4A6DBE8B21A6F92C0003D1B4 /* PremiumHeaderView.swift in Sources */,
 				52501E9929952BEE0000376C /* NotificationInteractorInput.swift in Sources */,
 				8C0B91BC2017106C00A5BA81 /* StoriesInitializer.swift in Sources */,
@@ -27277,6 +27338,7 @@
 				8C0B91A220170E7B00A5BA81 /* ManageContactTableViewCell.swift in Sources */,
 				98DD03F72542E635006DE0BD /* UIImageEffects.swift in Sources */,
 				0731E8BF263182A800883566 /* RegistrationTermsInfoViewController.swift in Sources */,
+				89F0954029B0B67400F74E7E /* CreateCollagePresenter.swift in Sources */,
 				9816172F2578B9A9009F1C31 /* FirebaseAnalyticsScreens.swift in Sources */,
 				52501E8F29952B1E0000376C /* NotificationRouter.swift in Sources */,
 				07E7A65D28585D9C005BBD4C /* DrawerAnimationController.swift in Sources */,
@@ -27402,6 +27464,7 @@
 				F095725728A1205700D1D0DD /* PaycellCampaignModel.swift in Sources */,
 				8C0E8FB81FDEBDFF00789C91 /* FeedbackViewInteractorOutput.swift in Sources */,
 				8C0E8FB91FDEBDFF00789C91 /* FeedbackViewInteractor.swift in Sources */,
+				89F0955929B0B6DB00F74E7E /* CreateCollageRouter.swift in Sources */,
 				8C0E8FBA1FDEBDFF00789C91 /* FeedbackViewRouterInput.swift in Sources */,
 				8C0E8FBB1FDEBDFF00789C91 /* FeedbackViewRouter.swift in Sources */,
 				92004B5B21AD136400582C45 /* MyStorageViewInput.swift in Sources */,
@@ -28441,6 +28504,7 @@
 				CE78497322A685FB00662219 /* SearchService.swift in Sources */,
 				CE78497422A685FB00662219 /* MediaItemsMetaData+CoreDataClass.swift in Sources */,
 				89104BCA22CBA1B4005B3F58 /* PackagePremiumView.swift in Sources */,
+				89F0954C29B0B69D00F74E7E /* CreateCollageInteractor.swift in Sources */,
 				CE78497522A685FB00662219 /* AutoSyncInteractorInput.swift in Sources */,
 				981616FF2578B97D009F1C31 /* FirebaseAnalyticsEvents.swift in Sources */,
 				3A6D27D126400AD000A7BBE2 /* InvitationViewController.swift in Sources */,
@@ -28487,6 +28551,7 @@
 				CE78498E22A685FB00662219 /* PremiumInitializer.swift in Sources */,
 				52EDD1DB29A3A06000D549FC /* SimpleBottomBarCard.swift in Sources */,
 				893269F629361AE7006305A0 /* AnimationInteractor.swift in Sources */,
+				89F0955629B0B6C500F74E7E /* CreateCollageInteractorOutput.swift in Sources */,
 				0303ED8C23BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift in Sources */,
 				CE78498F22A685FB00662219 /* RegistrationViewInput.swift in Sources */,
 				CF7146A924B597A900D83E60 /* ContactBackupHistoryPopupFactory.swift in Sources */,
@@ -28590,12 +28655,14 @@
 				F028C1112789F266005CE6AF /* PublicShareViewOutput.swift in Sources */,
 				0309F94023D57F3C001DB5FA /* NetmeraEvents.swift in Sources */,
 				737A2E9C2338989B0014258A /* SetSecurityQuestionViewController.swift in Sources */,
+				89F0955129B0B6B500F74E7E /* CreateCollageInteractorInput.swift in Sources */,
 				CE7849D822A685FB00662219 /* TermsAndServicesPresenter.swift in Sources */,
 				CE7849D922A685FB00662219 /* TermsAndServicesInteractorInput.swift in Sources */,
 				CE7849DA22A685FB00662219 /* MyStorageInteractor.swift in Sources */,
 				CE7849DB22A685FB00662219 /* TermsAndServicesInteractorOutput.swift in Sources */,
 				8C1E5BED22CB8D22008FDA02 /* QuickScrollItems.swift in Sources */,
 				985FFAE9255C1ED2001AA845 /* FileNameView.swift in Sources */,
+				89F0954729B0B68B00F74E7E /* CreateCollageModuleInput.swift in Sources */,
 				F0F5E1BA272162A2003AC6AF /* FileDescriptionView.swift in Sources */,
 				981616DE2578B803009F1C31 /* PrivateShareAnalytics.swift in Sources */,
 				8C1E5BD822CB8BD1008FDA02 /* TextInsetsLabel.swift in Sources */,
@@ -28938,6 +29005,7 @@
 				CE784ABB22A685FB00662219 /* UIImage+Size.swift in Sources */,
 				CE784ABC22A685FB00662219 /* ViewSortStorage.swift in Sources */,
 				CE784ABD22A685FB00662219 /* FaceImageItemsInteractor.swift in Sources */,
+				89F0956529B0B6FA00F74E7E /* CreateCollageConfigurator.swift in Sources */,
 				CE784ABE22A685FB00662219 /* PremiumInteractor.swift in Sources */,
 				0779A7A426EF38C3002BA915 /* ProductSubscriptionPeriodFormatter.swift in Sources */,
 				527302EA2940D0110061E754 /* DeeplinkCoordinator.swift in Sources */,
@@ -29068,6 +29136,7 @@
 				07407D632796CF760082FF8D /* EmailVerificationPresenter.swift in Sources */,
 				CE784B0F22A685FB00662219 /* Dictionary.swift in Sources */,
 				F0571EF9288C1D3000A0D6AC /* ForYouCollectionViewCell.swift in Sources */,
+				89F0956A29B0B70A00F74E7E /* CreateCollageInitilizer.swift in Sources */,
 				CE784B1022A685FB00662219 /* UsageInfoInteractor.swift in Sources */,
 				CE784B1122A685FB00662219 /* WormholePoster.swift in Sources */,
 				CE784B1322A685FB00662219 /* LocalAlbumCollectionViewCell.swift in Sources */,
@@ -29112,6 +29181,7 @@
 				CE784B2F22A685FB00662219 /* PhotoVideoDetailInteractorInput.swift in Sources */,
 				CE784B3022A685FB00662219 /* MediaItem+CoreDataClass.swift in Sources */,
 				893DCFE4292B861D00271379 /* DiscoverInitilizer.swift in Sources */,
+				89F0956029B0B6E900F74E7E /* CreateCollageRouterInput.swift in Sources */,
 				CE784B3222A685FB00662219 /* HelpAndSupportInteractor.swift in Sources */,
 				CE784B3322A685FB00662219 /* BottomSelectionTabBarConfigurator.swift in Sources */,
 				CE784B3522A685FB00662219 /* BackgroundTaskService.swift in Sources */,
@@ -29307,6 +29377,7 @@
 				07B5EBBF285089DA00D3D242 /* ProgressTabBarCard.swift in Sources */,
 				CE784BB722A685FB00662219 /* FileInfoViewController.swift in Sources */,
 				CE784BB822A685FB00662219 /* FileInfoModuleInput.swift in Sources */,
+				89F0954229B0B67400F74E7E /* CreateCollagePresenter.swift in Sources */,
 				CE784BB922A685FB00662219 /* InsetsButton.swift in Sources */,
 				CE784BBA22A685FB00662219 /* BottomSelectionTabBarRouterInput.swift in Sources */,
 				98231A6724F3A23500FD16E2 /* HaanFilter.swift in Sources */,
@@ -29430,6 +29501,7 @@
 				98B04800259314750011DAEB /* SyncRecord.m in Sources */,
 				8C86111C22BCFDF200108958 /* PermissionsView.swift in Sources */,
 				B5BF438E2514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */,
+				89F0955B29B0B6DB00F74E7E /* CreateCollageRouter.swift in Sources */,
 				CE784C0C22A685FB00662219 /* ProfileTextPickerView.swift in Sources */,
 				CE784C0D22A685FB00662219 /* SelectNameInteractorInput.swift in Sources */,
 				B5BBBE9E24FCF0B100A719CB /* PhotoEditSaveService.swift in Sources */,
@@ -29787,9 +29859,11 @@
 				07DB93AC2860AF5400D5CACF /* ASN1ContainerBuilder.swift in Sources */,
 				CF8B63C523CBC9D70021B021 /* ContactBackupEmpty.swift in Sources */,
 				F00610E7289DBF3100911048 /* PaycellCampaignViewController.swift in Sources */,
+				89F0956429B0B6FA00F74E7E /* CreateCollageConfigurator.swift in Sources */,
 				CF7146B324B597A900D83E60 /* ContactsBackupCell.swift in Sources */,
 				CF8B63C623CBC9D70021B021 /* SKProduct+Localized.swift in Sources */,
 				98B04B18259316E40011DAEB /* Notifications.swift in Sources */,
+				89F0955029B0B6B500F74E7E /* CreateCollageInteractorInput.swift in Sources */,
 				CF8B63C723CBC9D70021B021 /* PopUpController.swift in Sources */,
 				985786F323E01F8800D35DDA /* SettingFooterView.swift in Sources */,
 				CF8B63C823CBC9D70021B021 /* PasscodeSettingsInteractorIO.swift in Sources */,
@@ -29801,6 +29875,7 @@
 				CF8B63CB23CBC9D70021B021 /* FaceImageItemsRouterInput.swift in Sources */,
 				CF8B63CC23CBC9D70021B021 /* UploadOperation.swift in Sources */,
 				CF8B63CD23CBC9D70021B021 /* FaceImageChangeCoverViewController.swift in Sources */,
+				89F0955A29B0B6DB00F74E7E /* CreateCollageRouter.swift in Sources */,
 				CF8B63CE23CBC9D70021B021 /* AnimationFlowManager.swift in Sources */,
 				CF8B63CF23CBC9D70021B021 /* EmptyDataView.swift in Sources */,
 				CF8B63D023CBC9D70021B021 /* Alamofire+Validate.swift in Sources */,
@@ -29993,6 +30068,7 @@
 				CF8B645623CBC9D70021B021 /* WidgetService.swift in Sources */,
 				07DB93C62860B46900D5CACF /* IAPIntroEligibilityStatus.swift in Sources */,
 				98B0480C259314750011DAEB /* DepoAdapter.m in Sources */,
+				89F0955529B0B6C500F74E7E /* CreateCollageInteractorOutput.swift in Sources */,
 				CF8B645723CBC9D70021B021 /* AccountResponse.swift in Sources */,
 				893DCFFB292B869200271379 /* DiscoverInteractor.swift in Sources */,
 				CF8B645823CBC9D70021B021 /* CollectionViewCellForAudio.swift in Sources */,
@@ -30041,6 +30117,7 @@
 				CF8B647C23CBC9D70021B021 /* ErrorResponse.swift in Sources */,
 				0305A34B23D5C59A004D1EC7 /* HSSmartAlbumWarningPopUp.swift in Sources */,
 				0305A2F123D5C15B004D1EC7 /* HiddenPhotosViewController.swift in Sources */,
+				89F0954B29B0B69D00F74E7E /* CreateCollageInteractor.swift in Sources */,
 				CF8B647D23CBC9D70021B021 /* PeriodicContactSyncInitializer.swift in Sources */,
 				CF8B647E23CBC9D70021B021 /* CALayer+Animation.swift in Sources */,
 				982319FA24F3A1E700FD16E2 /* PhotoEditChangesBar.swift in Sources */,
@@ -30273,6 +30350,7 @@
 				CF8B652123CBC9D70021B021 /* SpotifyRoutingService.swift in Sources */,
 				CF8B652223CBC9D70021B021 /* RangeAPIInfo.swift in Sources */,
 				CF8B652523CBC9D70021B021 /* RegistrationUserInfoModel.swift in Sources */,
+				89F0954129B0B67400F74E7E /* CreateCollagePresenter.swift in Sources */,
 				07DB93B82860AF5400D5CACF /* ArraySlice_UInt8+Extensions.swift in Sources */,
 				CF8B652623CBC9D70021B021 /* AutoSyncPresenter.swift in Sources */,
 				CF8B652723CBC9D70021B021 /* HomePageViewInput.swift in Sources */,
@@ -30407,6 +30485,7 @@
 				CF8B658023CBC9D70021B021 /* LeavePremiumInteractorInput.swift in Sources */,
 				CF8B658123CBC9D70021B021 /* TermsAndServicesRouterInput.swift in Sources */,
 				52EDD1AF299A6A7C00D549FC /* NotificationParameters.swift in Sources */,
+				89F0955F29B0B6E900F74E7E /* CreateCollageRouterInput.swift in Sources */,
 				CF8B658223CBC9D70021B021 /* RingView.swift in Sources */,
 				CF8B658323CBC9D70021B021 /* TermsAndServicesRouter.swift in Sources */,
 				CF8B658423CBC9D70021B021 /* TermsAndServicesConfigurator.swift in Sources */,
@@ -30886,6 +30965,7 @@
 				CF8B66DC23CBC9D70021B021 /* RequestService.swift in Sources */,
 				98B04DCE25931FD50011DAEB /* SettingsTypes.swift in Sources */,
 				CF8B66DD23CBC9D70021B021 /* InstapickAnalyzeHistoryPhotoCell.swift in Sources */,
+				89F0956929B0B70A00F74E7E /* CreateCollageInitilizer.swift in Sources */,
 				98B0486C259314750011DAEB /* SyncSettings.m in Sources */,
 				CF8B66DE23CBC9D70021B021 /* PhotoVideoDetailInteractor.swift in Sources */,
 				CF8B66DF23CBC9D70021B021 /* FaceImagePhotosModuleOutput.swift in Sources */,
@@ -31104,6 +31184,7 @@
 				CF8B678223CBC9D70021B021 /* CreateStoryPreviewRouter.swift in Sources */,
 				CF8B678323CBC9D70021B021 /* SplashInitializer.swift in Sources */,
 				CF8B678423CBC9D70021B021 /* LeavePremiumRouter.swift in Sources */,
+				89F0954629B0B68B00F74E7E /* CreateCollageModuleInput.swift in Sources */,
 				07D4212A274E4D0800061EA2 /* FileLocationView.swift in Sources */,
 				73E6715D23EBFE53000C4AF7 /* PrivacyPolicyResponse.swift in Sources */,
 				CF8B678523CBC9D70021B021 /* CollectionViewCellForFaceImageAddName.swift in Sources */,
@@ -31707,6 +31788,7 @@
 				CF8B6BD723CBCA280021B021 /* ServerValueError.swift in Sources */,
 				B51D959D24D00E4300FA2EA0 /* AdjustmentManager.swift in Sources */,
 				982319FD24F3A1E700FD16E2 /* PhotoEditChangesBar.swift in Sources */,
+				89F0954829B0B68B00F74E7E /* CreateCollageModuleInput.swift in Sources */,
 				CF8B6BD823CBCA280021B021 /* HomePageModuleInput.swift in Sources */,
 				981617332578B9A9009F1C31 /* FirebaseAnalyticsScreens.swift in Sources */,
 				CF8B6BD923CBCA280021B021 /* AnalyticsService.swift in Sources */,
@@ -32170,6 +32252,7 @@
 				077D1DA0280568CD001C6E72 /* AppFont.swift in Sources */,
 				CF8B6D2923CBCA280021B021 /* RegistrationRouterInput.swift in Sources */,
 				CF8B6D2A23CBCA280021B021 /* StorageVars.swift in Sources */,
+				89F0956629B0B6FA00F74E7E /* CreateCollageConfigurator.swift in Sources */,
 				98B04D9625931F330011DAEB /* TabBarConfigurator.swift in Sources */,
 				CF8B6D2B23CBCA280021B021 /* RegistrationRouter.swift in Sources */,
 				F00D7DE22851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */,
@@ -32213,6 +32296,7 @@
 				0305A32B23D5C41B004D1EC7 /* SmashStickerResponse.swift in Sources */,
 				CF8B6D4B23CBCA280021B021 /* MyStorageInteractor.swift in Sources */,
 				89959F0B2934B361000135DE /* CollageInitializer.swift in Sources */,
+				89F0955229B0B6B500F74E7E /* CreateCollageInteractorInput.swift in Sources */,
 				CF8B6D4C23CBCA280021B021 /* TermsAndServicesInteractorOutput.swift in Sources */,
 				CF8B6D4D23CBCA280021B021 /* QuickScrollItems.swift in Sources */,
 				CF8B6D4E23CBCA280021B021 /* TextInsetsLabel.swift in Sources */,
@@ -32805,6 +32889,7 @@
 				CF8B6EF223CBCA280021B021 /* HelpAndSupportViewInput.swift in Sources */,
 				076BD19B27BBBD3A004609E3 /* MapSearchConfigurator.swift in Sources */,
 				174F99EA243D448900986C8B /* ControlContainableScrollView.swift in Sources */,
+				89F0955C29B0B6DB00F74E7E /* CreateCollageRouter.swift in Sources */,
 				0302079B23D1D2F400BF8006 /* NetmeraEventValues.swift in Sources */,
 				CF8B6EF523CBCA280021B021 /* MyStorageInteractorOutput.swift in Sources */,
 				CF8B6EF623CBCA280021B021 /* PrintInteractorInput.swift in Sources */,
@@ -32956,6 +33041,7 @@
 				CF8B6F5823CBCA280021B021 /* SecurityQuestionView.swift in Sources */,
 				CF8B6F5923CBCA280021B021 /* FileInfoInteractorOutput.swift in Sources */,
 				CF8B6F5A23CBCA280021B021 /* FileInfoInteractor.swift in Sources */,
+				89F0956129B0B6E900F74E7E /* CreateCollageRouterInput.swift in Sources */,
 				CFA9D4352559EB4200C8F25D /* PrivateShareApiResponses.swift in Sources */,
 				CF8B6F5B23CBCA280021B021 /* SearchViewRouterInput.swift in Sources */,
 				CF8B6F5C23CBCA280021B021 /* FileInfoRouterInput.swift in Sources */,
@@ -32967,6 +33053,7 @@
 				CF8B6F6223CBCA280021B021 /* UsageInfoRouter.swift in Sources */,
 				CF8B6F6323CBCA280021B021 /* AppConfigurator.swift in Sources */,
 				CF8B6F6423CBCA280021B021 /* InstaPickRoutingService.swift in Sources */,
+				89F0954329B0B67400F74E7E /* CreateCollagePresenter.swift in Sources */,
 				CF8B6F6523CBCA280021B021 /* ActionSheetPredetermendConfigs.swift in Sources */,
 				CF8B6F6623CBCA280021B021 /* BackButton.swift in Sources */,
 				B560CCFE255D316D00199EA2 /* WrapDataSorting.swift in Sources */,
@@ -32984,6 +33071,7 @@
 				CF7146BC24B597A900D83E60 /* DeleteDuplicatesViewController.swift in Sources */,
 				CF8B6F7223CBCA280021B021 /* UploadFilesSelectionViewInput.swift in Sources */,
 				982706F62548470400810BB5 /* SynchronizedSet.swift in Sources */,
+				89F0955729B0B6C500F74E7E /* CreateCollageInteractorOutput.swift in Sources */,
 				CF8B6F7323CBCA280021B021 /* UploadFilesSelectionViewOutput.swift in Sources */,
 				CF8B6F7423CBCA280021B021 /* SubscriptionPlanBaseResponse.swift in Sources */,
 				CF8B6F7523CBCA280021B021 /* UploadFilesSelectionViewController.swift in Sources */,
@@ -33148,6 +33236,7 @@
 				CF8B6FE523CBCA280021B021 /* AlbumsRouter.swift in Sources */,
 				CF8B6FE623CBCA280021B021 /* UICollectionView+Extensions.swift in Sources */,
 				CF8B6FE723CBCA280021B021 /* AlbumsInitializer.swift in Sources */,
+				89F0956B29B0B70A00F74E7E /* CreateCollageInitilizer.swift in Sources */,
 				CF8B6FE823CBCA280021B021 /* AlbumDetailViewController.swift in Sources */,
 				F081F9C92779138F0064D25C /* DragAndDropItemType.swift in Sources */,
 				CF8B6FE923CBCA280021B021 /* FreeAppSpaceRouter.swift in Sources */,
@@ -33222,6 +33311,7 @@
 				CF8B701C23CBCA280021B021 /* FaceImageViewController.swift in Sources */,
 				CF8B701D23CBCA280021B021 /* FeedbackViewInitializer.swift in Sources */,
 				CF8B701E23CBCA280021B021 /* Text+Size.swift in Sources */,
+				89F0954D29B0B69D00F74E7E /* CreateCollageInteractor.swift in Sources */,
 				CF8B701F23CBCA280021B021 /* SuggestionTableViewCell.swift in Sources */,
 				07C6D4D5284B43D100502C28 /* BaseTabBarCard.swift in Sources */,
 				CF8B702023CBCA280021B021 /* ActivityTimelineViewInput.swift in Sources */,
