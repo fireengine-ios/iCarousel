@@ -170,7 +170,6 @@ extension NotificationPresenter: NotificationViewOutput {
     func read(with id: String) {
         interactor.read(with: id)
     }
-
 }
 
 // MARK: PackagesInteractorOutput
@@ -178,14 +177,8 @@ extension NotificationPresenter: NotificationInteractorOutput {
     
     func success(with notifications: [NotificationServiceResponse]) {
         view?.stopActivityIndicator()
-        
-        //self.notifications = notifications
-        //self.notifications = notifications
-        
-        for (index, el) in notifications.enumerated() {
-            el.title! += " \(index)"
-            el.status = "UNREAD"
-            el.priority = Int.random(in: 0...1) == 0 ? 1 : 2
+
+        for el in notifications {
             self.notificationsForDisplay.append(el)
             self.notifications.append(el)
         }
