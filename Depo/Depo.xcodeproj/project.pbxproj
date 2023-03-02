@@ -1666,6 +1666,22 @@
 		89F0956929B0B70A00F74E7E /* CreateCollageInitilizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0956729B0B70A00F74E7E /* CreateCollageInitilizer.swift */; };
 		89F0956A29B0B70A00F74E7E /* CreateCollageInitilizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0956729B0B70A00F74E7E /* CreateCollageInitilizer.swift */; };
 		89F0956B29B0B70A00F74E7E /* CreateCollageInitilizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0956729B0B70A00F74E7E /* CreateCollageInitilizer.swift */; };
+		89F0957229B0BE5300F74E7E /* CreateCollageViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0957129B0BE5300F74E7E /* CreateCollageViewInput.swift */; };
+		89F0957329B0BE5300F74E7E /* CreateCollageViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0957129B0BE5300F74E7E /* CreateCollageViewInput.swift */; };
+		89F0957429B0BE5300F74E7E /* CreateCollageViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0957129B0BE5300F74E7E /* CreateCollageViewInput.swift */; };
+		89F0957529B0BE5300F74E7E /* CreateCollageViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0957129B0BE5300F74E7E /* CreateCollageViewInput.swift */; };
+		89F0957729B0BED800F74E7E /* CreateCollageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0957629B0BED800F74E7E /* CreateCollageViewController.swift */; };
+		89F0957829B0BED800F74E7E /* CreateCollageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0957629B0BED800F74E7E /* CreateCollageViewController.swift */; };
+		89F0957929B0BED800F74E7E /* CreateCollageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0957629B0BED800F74E7E /* CreateCollageViewController.swift */; };
+		89F0957A29B0BED800F74E7E /* CreateCollageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0957629B0BED800F74E7E /* CreateCollageViewController.swift */; };
+		89F0957C29B0BEFC00F74E7E /* CreateCollage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89F0957B29B0BEFC00F74E7E /* CreateCollage.xib */; };
+		89F0957D29B0BEFC00F74E7E /* CreateCollage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89F0957B29B0BEFC00F74E7E /* CreateCollage.xib */; };
+		89F0957E29B0BEFC00F74E7E /* CreateCollage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89F0957B29B0BEFC00F74E7E /* CreateCollage.xib */; };
+		89F0957F29B0BEFC00F74E7E /* CreateCollage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89F0957B29B0BEFC00F74E7E /* CreateCollage.xib */; };
+		89F0958229B0C0B200F74E7E /* CreateCollageViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0958129B0C0B200F74E7E /* CreateCollageViewOutput.swift */; };
+		89F0958329B0C0B200F74E7E /* CreateCollageViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0958129B0C0B200F74E7E /* CreateCollageViewOutput.swift */; };
+		89F0958429B0C0B200F74E7E /* CreateCollageViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0958129B0C0B200F74E7E /* CreateCollageViewOutput.swift */; };
+		89F0958529B0C0B200F74E7E /* CreateCollageViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0958129B0C0B200F74E7E /* CreateCollageViewOutput.swift */; };
 		8C017B762074B782002484E7 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
 		8C017B772074B795002484E7 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
 		8C0332982115F42D00E75EBC /* AnalyticsDimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0332962115F42D00E75EBC /* AnalyticsDimension.swift */; };
@@ -10827,6 +10843,10 @@
 		89F0955D29B0B6E900F74E7E /* CreateCollageRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageRouterInput.swift; sourceTree = "<group>"; };
 		89F0956229B0B6FA00F74E7E /* CreateCollageConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageConfigurator.swift; sourceTree = "<group>"; };
 		89F0956729B0B70A00F74E7E /* CreateCollageInitilizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageInitilizer.swift; sourceTree = "<group>"; };
+		89F0957129B0BE5300F74E7E /* CreateCollageViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageViewInput.swift; sourceTree = "<group>"; };
+		89F0957629B0BED800F74E7E /* CreateCollageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageViewController.swift; sourceTree = "<group>"; };
+		89F0957B29B0BEFC00F74E7E /* CreateCollage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateCollage.xib; sourceTree = "<group>"; };
+		89F0958129B0C0B200F74E7E /* CreateCollageViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageViewOutput.swift; sourceTree = "<group>"; };
 		8A226C38114FC93E746DB9EF /* Pods-lifeBox_Business_Bundle.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lifeBox_Business_Bundle.appstore.xcconfig"; path = "Target Support Files/Pods-lifeBox_Business_Bundle/Pods-lifeBox_Business_Bundle.appstore.xcconfig"; sourceTree = "<group>"; };
 		8A4620DB4814DE9B2BF69415 /* SplashModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashModuleInput.swift; sourceTree = "<group>"; };
 		8ACB18A67C5CBB40E87DBA64 /* UploadFilesSelectionModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionModuleInput.swift; sourceTree = "<group>"; };
@@ -16754,6 +16774,10 @@
 			isa = PBXGroup;
 			children = (
 				89F0953A29B0B54900F74E7E /* Cell */,
+				89F0957129B0BE5300F74E7E /* CreateCollageViewInput.swift */,
+				89F0957629B0BED800F74E7E /* CreateCollageViewController.swift */,
+				89F0958129B0C0B200F74E7E /* CreateCollageViewOutput.swift */,
+				89F0957B29B0BEFC00F74E7E /* CreateCollage.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -23218,6 +23242,7 @@
 				8C0E90441FDEBDFF00789C91 /* BasicCollectionMultiFileCell.xib in Resources */,
 				CF0482ED256BDA5B007DAA79 /* SharedFilesCollectionSliderView.xib in Resources */,
 				98B047C3259314740011DAEB /* AppRater.bundle in Resources */,
+				89F0957C29B0BEFC00F74E7E /* CreateCollage.xib in Resources */,
 				73FE520022CF5EC300270448 /* CreateStoryAudioItemCell.xib in Resources */,
 				8C8711721FDFF47800F66396 /* DarkPopUpController.xib in Resources */,
 				07E7A6952859FC0C005BBD4C /* AlertFilesActionView.xib in Resources */,
@@ -23739,6 +23764,7 @@
 				98A86D6123A2415D00438225 /* AlbumsSliderCell.xib in Resources */,
 				CF71468B24B597A900D83E60 /* ContactSyncAnalyzeProgressView.xib in Resources */,
 				076BD1DB27BC14FF004609E3 /* MapSearchViewController.xib in Resources */,
+				89F0957E29B0BEFC00F74E7E /* CreateCollage.xib in Resources */,
 				CE784DFB22A685FB00662219 /* CollectionViewCellForPhoto.xib in Resources */,
 				CE784DFC22A685FB00662219 /* TurkcellSaturaDemIta.ttf in Resources */,
 				CF71460D24B597A800D83E60 /* ContactDetailHeader.xib in Resources */,
@@ -23924,6 +23950,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF8B68A923CBC9D70021B021 /* InfoPlist.strings in Resources */,
+				89F0957D29B0BEFC00F74E7E /* CreateCollage.xib in Resources */,
 				CF8B68AA23CBC9D70021B021 /* HomeViewTopView.xib in Resources */,
 				CF8B68AC23CBC9D70021B021 /* InstapickAnalyzeHistoryPhotoCell.xib in Resources */,
 				CF8B68AD23CBC9D70021B021 /* SpotifyAccountConnectionCell.xib in Resources */,
@@ -24526,6 +24553,7 @@
 				3A134C6A2645535700CFC736 /* InvitedPeopleCollectionViewCell.xib in Resources */,
 				CF8B71C723CBCA280021B021 /* CreateStoryPreviewViewController.xib in Resources */,
 				076BD1DC27BC14FF004609E3 /* MapSearchViewController.xib in Resources */,
+				89F0957F29B0BEFC00F74E7E /* CreateCollage.xib in Resources */,
 				0731E89F263181EF00883566 /* RegistrationTermsViewController.xib in Resources */,
 				B55C97102559353800623C5C /* PrivateShareLocalSuggestionsViewController.xib in Resources */,
 				CF8B71C823CBCA280021B021 /* SpotifyImportViewController.xib in Resources */,
@@ -26407,6 +26435,7 @@
 				8C0E8DBE1FDEBDFF00789C91 /* RegistrationRouter.swift in Sources */,
 				0762029A269B842C00D4FB2C /* OverlayStickerSelectorDataSource.swift in Sources */,
 				F0E0A4802897F38500528B39 /* ForYouEmptyCellView.swift in Sources */,
+				89F0957729B0BED800F74E7E /* CreateCollageViewController.swift in Sources */,
 				52A5E014291A465D00670B0C /* SnackBarHeaderTwoLineView.swift in Sources */,
 				8C0E8DBF1FDEBDFF00789C91 /* SpringLabel.swift in Sources */,
 				8C0E8DC01FDEBDFF00789C91 /* BottomSelectionTabBarViewInput.swift in Sources */,
@@ -26817,6 +26846,7 @@
 				8C0E8EAE1FDEBDFF00789C91 /* BaseFilesGreedViewInput.swift in Sources */,
 				170EB21222783E9D008588C1 /* QuickDismissPlaceholderTextField.swift in Sources */,
 				07C50C4C28102E3C009617B9 /* NavigationHeaderButton.swift in Sources */,
+				89F0957229B0BE5300F74E7E /* CreateCollageViewInput.swift in Sources */,
 				8CD84C441FDEC570005CD3B8 /* AlbumDetailModuleOutput.swift in Sources */,
 				988BA1832559245F0086E4BE /* PrivateShareAddMessageView.swift in Sources */,
 				8C0E8EAF1FDEBDFF00789C91 /* BaseFilesGreedViewOutput.swift in Sources */,
@@ -26894,6 +26924,7 @@
 				984A515821E87A50004525F5 /* AnalyzeHistoryDisplayManager.swift in Sources */,
 				4ADE0888202DCFF50095346F /* FaceImagePhotosViewOutput.swift in Sources */,
 				B56FBB382122C956004F4A59 /* TermsOfUseModuleInput.swift in Sources */,
+				89F0958229B0C0B200F74E7E /* CreateCollageViewOutput.swift in Sources */,
 				0762028E269B83F400D4FB2C /* GifToMP4Formatter.swift in Sources */,
 				8C0E8ED21FDEBDFF00789C91 /* BottomSelectionTabBarModuleInput.swift in Sources */,
 				8C0B91912013221400A5BA81 /* CustomProgressHUD.swift in Sources */,
@@ -28996,6 +29027,7 @@
 				CE784AB622A685FB00662219 /* ColumnsCollectionLayout.swift in Sources */,
 				F0571EC6288AE6CE00A0D6AC /* ForYouInteractor.swift in Sources */,
 				CE784AB722A685FB00662219 /* AlertFilesActionsSheetInteractorOutput.swift in Sources */,
+				89F0957929B0BED800F74E7E /* CreateCollageViewController.swift in Sources */,
 				CE784AB822A685FB00662219 /* ServerMessageError.swift in Sources */,
 				8C286C4B232134090061EA20 /* SpotifyAccountConnectionCell.swift in Sources */,
 				CF7B1E78256B3E1700BAF566 /* SharedFilesCollectionSlider.swift in Sources */,
@@ -29310,6 +29342,7 @@
 				F0C447382848DFFA00129228 /* UIView+Extensions.swift in Sources */,
 				CE784B8F22A685FB00662219 /* NavigationBarStyle.swift in Sources */,
 				F0743DBC28B428FA00CC1F24 /* AppColor.swift in Sources */,
+				89F0958429B0C0B200F74E7E /* CreateCollageViewOutput.swift in Sources */,
 				CE784B9022A685FB00662219 /* SettingsInitializer.swift in Sources */,
 				CE784B9122A685FB00662219 /* AlertFilesActionsSheetInitialConfig.swift in Sources */,
 				CE784B9222A685FB00662219 /* SplashViewInput.swift in Sources */,
@@ -29351,6 +29384,7 @@
 				CE784BA822A685FB00662219 /* PhoneCodeInputView.swift in Sources */,
 				CE784BA922A685FB00662219 /* SplashConfigurator.swift in Sources */,
 				CE784BAA22A685FB00662219 /* FacebookAccountConnectionCell.swift in Sources */,
+				89F0957429B0BE5300F74E7E /* CreateCollageViewInput.swift in Sources */,
 				F00610E8289DBF3100911048 /* PaycellCampaignViewController.swift in Sources */,
 				CE784BAB22A685FB00662219 /* UsageInfoRouterInput.swift in Sources */,
 				CE784BAC22A685FB00662219 /* SplashInitializer.swift in Sources */,
@@ -30065,6 +30099,7 @@
 				CF8B645323CBC9D70021B021 /* BottomSelectionTabBarInteractorOutput.swift in Sources */,
 				CF8B645423CBC9D70021B021 /* AppDelegate.swift in Sources */,
 				CF8B645523CBC9D70021B021 /* CollectionViewCellForController.swift in Sources */,
+				89F0957829B0BED800F74E7E /* CreateCollageViewController.swift in Sources */,
 				CF8B645623CBC9D70021B021 /* WidgetService.swift in Sources */,
 				07DB93C62860B46900D5CACF /* IAPIntroEligibilityStatus.swift in Sources */,
 				98B0480C259314750011DAEB /* DepoAdapter.m in Sources */,
@@ -30994,6 +31029,7 @@
 				CF8B66EF23CBC9D70021B021 /* UserInfoSubViewViewController.swift in Sources */,
 				CF8B66F023CBC9D70021B021 /* UserInfoSubViewModuleInput.swift in Sources */,
 				981617872578BA3D009F1C31 /* FirebaseAnalyticsLabels.swift in Sources */,
+				89F0958329B0C0B200F74E7E /* CreateCollageViewOutput.swift in Sources */,
 				CF8B66F123CBC9D70021B021 /* MoreFilesActionsInteractor.swift in Sources */,
 				0780AB4627916820000760D9 /* ImageTextSelectionView.swift in Sources */,
 				CF8B66F223CBC9D70021B021 /* BaseDataSourceItem.swift in Sources */,
@@ -31018,6 +31054,7 @@
 				CF8B66FF23CBC9D70021B021 /* OfferParameters.swift in Sources */,
 				CF8B670023CBC9D70021B021 /* SegmentedControl.swift in Sources */,
 				F013FA8F280591DF004B9BB8 /* SecurityInfoWarningPopup.swift in Sources */,
+				89F0957329B0BE5300F74E7E /* CreateCollageViewInput.swift in Sources */,
 				0305A30023D5C2A1004D1EC7 /* OverlayStickerViewControllerDataSource.swift in Sources */,
 				CF8B670123CBC9D70021B021 /* LeavePremiumInteractor.swift in Sources */,
 				CF8B670223CBC9D70021B021 /* BasePresentor.swift in Sources */,
@@ -31864,6 +31901,7 @@
 				CF8B6C0C23CBCA280021B021 /* CollectionViewCellForPhoto.swift in Sources */,
 				CF8B6C0D23CBCA280021B021 /* FaceImageChangeCoverInitializer.swift in Sources */,
 				CF8B6C0E23CBCA280021B021 /* TwoFactorChallengeInteractor.swift in Sources */,
+				89F0957A29B0BED800F74E7E /* CreateCollageViewController.swift in Sources */,
 				CF8B6C0F23CBCA280021B021 /* SpotifyImportedTracksViewController.swift in Sources */,
 				CF8B6C1023CBCA280021B021 /* RecentSearchesService.swift in Sources */,
 				CF8B6C1123CBCA280021B021 /* LeavePremiumInteractor.swift in Sources */,
@@ -32718,6 +32756,7 @@
 				CF8B6E6F23CBCA280021B021 /* SubscriptionPlan.swift in Sources */,
 				CF8B6E7023CBCA280021B021 /* BaseFilesGreedViewController.swift in Sources */,
 				CF8B6E7123CBCA280021B021 /* ImportFromDropboxInteractor.swift in Sources */,
+				89F0958529B0C0B200F74E7E /* CreateCollageViewOutput.swift in Sources */,
 				CF8B6E7223CBCA280021B021 /* MusicPresenter.swift in Sources */,
 				CF8B6E7323CBCA280021B021 /* BaseFilesGreedModuleInput.swift in Sources */,
 				030207AD23D1D32700BF8006 /* NetmeraScreenEvents.swift in Sources */,
@@ -33053,6 +33092,7 @@
 				CF8B6F6223CBCA280021B021 /* UsageInfoRouter.swift in Sources */,
 				CF8B6F6323CBCA280021B021 /* AppConfigurator.swift in Sources */,
 				CF8B6F6423CBCA280021B021 /* InstaPickRoutingService.swift in Sources */,
+				89F0957529B0BE5300F74E7E /* CreateCollageViewInput.swift in Sources */,
 				89F0954329B0B67400F74E7E /* CreateCollagePresenter.swift in Sources */,
 				CF8B6F6523CBCA280021B021 /* ActionSheetPredetermendConfigs.swift in Sources */,
 				CF8B6F6623CBCA280021B021 /* BackButton.swift in Sources */,
