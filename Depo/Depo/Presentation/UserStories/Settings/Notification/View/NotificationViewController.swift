@@ -86,19 +86,11 @@ final class NotificationViewController: BaseViewController {
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // start a timer to update cells every 3 seconds
-        timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(updateCells), userInfo: nil, repeats: true)
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         // invalidate the timer when the view disappears
-        timer?.invalidate()
-        timer = nil
+        stopTimer()
     }
     
     override func viewDidLayoutSubviews() {
