@@ -5,44 +5,102 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewSimpleHeaderWithText" id="U6b-Vx-4bR" customClass="CollectionViewSimpleHeaderWithText" customModule="Billo" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="94"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q94-GH-gZn">
-                    <rect key="frame" x="15" y="0.0" width="42" height="52"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qzk-gC-1nq">
-                    <rect key="frame" x="274" y="11" width="30" height="30"/>
-                    <color key="tintColor" name="label"/>
-                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="270-S9-ILh">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="94"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Bu-I0-CnQ" userLabel="Grace Banner">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GlY-Db-06I">
+                                    <rect key="frame" x="16" y="16" width="248" height="12"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zyz-5W-py2">
+                                    <rect key="frame" x="280" y="16" width="24" height="24"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="24" id="Lph-rf-6od"/>
+                                        <constraint firstAttribute="height" constant="24" id="ciS-RB-cDJ"/>
+                                    </constraints>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" image="closeButton"/>
+                                    <connections>
+                                        <action selector="graceBannerClose:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="10s-0t-DAg"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="1" green="0.7843137255" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="zyz-5W-py2" secondAttribute="trailing" constant="16" id="B37-MK-lya"/>
+                                <constraint firstItem="zyz-5W-py2" firstAttribute="top" secondItem="0Bu-I0-CnQ" secondAttribute="top" constant="16" id="IwA-b7-8bz"/>
+                                <constraint firstItem="GlY-Db-06I" firstAttribute="top" secondItem="0Bu-I0-CnQ" secondAttribute="top" constant="16" id="RUM-aT-iUd"/>
+                                <constraint firstAttribute="bottom" secondItem="GlY-Db-06I" secondAttribute="bottom" constant="16" id="kDJ-cr-mNF"/>
+                                <constraint firstItem="GlY-Db-06I" firstAttribute="leading" secondItem="0Bu-I0-CnQ" secondAttribute="leading" constant="16" id="kbC-Vu-iVj"/>
+                                <constraint firstItem="zyz-5W-py2" firstAttribute="leading" secondItem="GlY-Db-06I" secondAttribute="trailing" constant="16" id="rZm-eR-fuR"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mTp-hv-oYi" userLabel="Section">
+                            <rect key="frame" x="0.0" y="44" width="320" height="50"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q94-GH-gZn">
+                                    <rect key="frame" x="16" y="0.0" width="41.5" height="50"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qzk-gC-1nq">
+                                    <rect key="frame" x="274" y="0.0" width="30" height="50"/>
+                                    <color key="tintColor" name="label"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="Qzk-gC-1nq" secondAttribute="bottom" id="5KM-Qe-wxf"/>
+                                <constraint firstAttribute="height" constant="50" id="Uzn-gK-UH3"/>
+                                <constraint firstItem="q94-GH-gZn" firstAttribute="leading" secondItem="mTp-hv-oYi" secondAttribute="leading" constant="16" id="ceX-P3-auT"/>
+                                <constraint firstItem="q94-GH-gZn" firstAttribute="top" secondItem="mTp-hv-oYi" secondAttribute="top" id="d8C-3Q-HzW"/>
+                                <constraint firstItem="Qzk-gC-1nq" firstAttribute="top" secondItem="mTp-hv-oYi" secondAttribute="top" id="eh9-iS-pmK"/>
+                                <constraint firstAttribute="trailing" secondItem="Qzk-gC-1nq" secondAttribute="trailing" constant="16" id="wbZ-nI-mdM"/>
+                                <constraint firstAttribute="bottom" secondItem="q94-GH-gZn" secondAttribute="bottom" id="xWi-aa-tjN"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                </stackView>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="q94-GH-gZn" secondAttribute="bottom" id="KWW-gf-GkR"/>
-                <constraint firstItem="q94-GH-gZn" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="Urn-IY-BaU"/>
-                <constraint firstItem="Qzk-gC-1nq" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="jb2-hM-TPJ"/>
-                <constraint firstItem="q94-GH-gZn" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="15" id="wuW-et-ROy"/>
-                <constraint firstAttribute="trailing" secondItem="Qzk-gC-1nq" secondAttribute="trailing" constant="16" id="zsB-Oz-cFF"/>
+                <constraint firstItem="270-S9-ILh" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="a8P-Mu-SWg"/>
+                <constraint firstAttribute="bottom" secondItem="270-S9-ILh" secondAttribute="bottom" id="bEf-tc-OBo"/>
+                <constraint firstAttribute="trailing" secondItem="270-S9-ILh" secondAttribute="trailing" id="rAb-Oi-ASk"/>
+                <constraint firstItem="270-S9-ILh" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="x3y-TI-OmO"/>
             </constraints>
             <connections>
+                <outlet property="graceBanner" destination="0Bu-I0-CnQ" id="sHd-Ch-8E9"/>
+                <outlet property="graceBannerLabel" destination="GlY-Db-06I" id="cxh-F3-YQh"/>
                 <outlet property="menuButton" destination="Qzk-gC-1nq" id="wIg-dV-KwJ"/>
                 <outlet property="titleLabel" destination="q94-GH-gZn" id="mzh-YU-Goe"/>
             </connections>
-            <point key="canvasLocation" x="33.600000000000001" y="100.74962518740631"/>
+            <point key="canvasLocation" x="33.600000000000001" y="119.64017991004499"/>
         </collectionReusableView>
     </objects>
     <resources>
+        <image name="closeButton" width="15" height="15"/>
         <namedColor name="label">
-            <color red="0.019607843137254902" green="0.17647058823529413" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.18823529411764706" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

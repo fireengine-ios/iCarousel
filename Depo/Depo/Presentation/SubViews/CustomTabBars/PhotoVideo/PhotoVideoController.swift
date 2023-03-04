@@ -628,6 +628,15 @@ extension PhotoVideoController: UICollectionViewDelegate {
             return
         }
         
+        if indexPath.section == 0 {
+            print("yilmaz: \(indexPath.section)")
+            view.graceBanner.isHidden = !collectionViewManager.collectionViewLayout.graceBannerState
+            view.closeAction = { [weak self] in
+                self?.collectionViewManager.collectionViewLayout.graceBannerState = false
+                self?.collectionView.reloadData()
+            }
+        }
+        
         dataSource.getObject(at: indexPath) { object in
             if let mediaItem = object {
                 view.setup(with: mediaItem)

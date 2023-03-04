@@ -35,12 +35,35 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
             newValue.accessibilityIdentifier = Constants.titleLabelAccessibilityId
         }
     }
-
+    @IBOutlet weak var graceBannerLabel: UILabel! {
+        willSet {
+            newValue.text = localized(.graceBannerText)
+            newValue.font = .appFont(.regular, size: 14)
+            newValue.textColor = AppColor.label.color
+            newValue.numberOfLines = 0
+        }
+    }
+    
+    @IBOutlet weak var graceBanner: UIView! {
+        willSet {
+            newValue.isHidden = true
+        }
+    }
+    
+    var closeAction: VoidHandler?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = AppColor.background.color
     }
-
+    
+    @IBAction func graceBannerClose(_ sender: Any) {
+        graceBanner.isHidden = true
+        //graceBanner.removeFromSuperview()
+        closeAction?()
+        layoutIfNeeded()
+    }
+    
     func setup(with object: MediaItem) {
         let title: String
         if object.monthValue != nil, let date = object.sortingDate as Date? {

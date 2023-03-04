@@ -36,6 +36,8 @@ final class GalleryCollectionViewLayout: UICollectionViewLayout {
     var columns: CGFloat {
         CGFloat(gridSize.rawValue)
     }
+    
+    var graceBannerState: Bool = true
 
     private let itemSpacing: CGFloat = 1
     private var cache: [IndexPath: GalleryCollectionViewLayoutAttributes] = [:]
@@ -116,7 +118,7 @@ final class GalleryCollectionViewLayout: UICollectionViewLayout {
             )
             headerAttributes.zIndex = 1000
             headerCache[section] = headerAttributes
-            headerAttributes.frame = CGRect(x: 0, y: yOffset, width: contentWidth, height: 50)
+            headerAttributes.frame = CGRect(x: 0, y: yOffset, width: contentWidth, height: section == 0 && graceBannerState ? 130 : 50)
             contentHeight = max(headerAttributes.frame.maxY, contentHeight)
             yOffset = headerAttributes.frame.maxY
 
