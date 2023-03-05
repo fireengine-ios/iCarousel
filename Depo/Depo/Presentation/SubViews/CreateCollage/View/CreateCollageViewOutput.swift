@@ -10,4 +10,9 @@ import Foundation
 
 protocol CreateCollageViewOutput: AnyObject {
     func viewIsReady()
+    func getCollageTemplate(for collageSection: CollageTemplateSections) -> CollageTemplate
+    func getSectionsCountAndName() -> [Int]
+    func getSectionsCollageTemplateData(shapeCount: Int) -> CollageTemplate
+    func onSeeAllButton(for section: CollageTemplateSections)
+    func naviateToCollageTemplateDetail(collageTemplate: CollageTemplateElement)
 }
