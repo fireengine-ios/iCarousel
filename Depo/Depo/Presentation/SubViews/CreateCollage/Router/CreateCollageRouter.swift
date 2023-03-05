@@ -9,14 +9,12 @@
 import Foundation
 
 final class CreateCollageRouter: CreateCollageRouterInput {
-    func navigateToSeeAll(for view: ForYouSections) {
-        print("12121212")
-    }
-    
-    func displayItem(item: WrapData) {
-        print("qweqeqwe")
-    }
     
     private let router = RouterVC()
     weak var presenter: CreateCollagePresenter!
+    
+    func navigateToAlbumDetail(collageTemplate: CollageTemplateElement) {
+        let controller = router.createCollageSelectPhotos(collageTemplate: collageTemplate)
+        router.pushViewController(viewController: controller, animated: false)
+    }
 }

@@ -9,6 +9,5 @@
 import Foundation
 
 protocol CreateCollageRouterInput {
-    func navigateToSeeAll(for view: ForYouSections)
-    func displayItem(item: WrapData)
+    func navigateToAlbumDetail(collageTemplate: CollageTemplateElement)
 }

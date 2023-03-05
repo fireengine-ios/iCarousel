@@ -1115,6 +1115,10 @@ class RouterVC: NSObject {
     func createCollage() -> CreateCollageViewController {
         return CreateCollageInitilizer.initializeViewController()
     }
+    
+    func createCollageSelectPhotos(collageTemplate: CollageTemplateElement) -> CreateCollagePhotoSelectionController {
+        return CreateCollagePhotoSelectionController(collageTemplate: collageTemplate)
+    }
 
     // MARK: - Passcode
     

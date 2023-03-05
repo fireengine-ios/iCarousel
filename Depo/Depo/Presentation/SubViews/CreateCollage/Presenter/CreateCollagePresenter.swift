@@ -58,7 +58,7 @@ extension CreateCollagePresenter: CreateCollageViewOutput {
     }
     
     func naviateToCollageTemplateDetail(collageTemplate: CollageTemplateElement) {
-        print("aaaaaaa \(collageTemplate)")
+        router.navigateToAlbumDetail(collageTemplate: collageTemplate)
     }
 }
 
