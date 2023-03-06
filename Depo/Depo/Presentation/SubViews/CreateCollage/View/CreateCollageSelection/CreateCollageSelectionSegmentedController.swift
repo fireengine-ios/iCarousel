@@ -13,29 +13,15 @@ protocol CreateCollageSelectionSegmentedControllerDelegate {
     func selectionStateDidChange(_ selectionState: CreateCollagePhotoSelectionState)
     func didSelectItem(_ selectedItem: SearchItemResponse)
     func didDeselectItem(_ deselectItem: SearchItemResponse)
+    func allDeselectItem(selectedCount: Int)
 }
 
 final class CreateCollageSelectionSegmentedController: BaseViewController, ErrorPresenter {
+
+    var selectedItems = [SearchItemResponse]()
     
-    // MARK: properties
-    
-    /// not private bcz protocol requirement
-    var selectedItems = [SearchItemResponse]() {
-        didSet {
-            vcView.analyzeButton.isHidden = selectedItems.isEmpty
-        }
-    }
-    
-    /// not private bcz protocol requirement
     var selectionState = CreateCollagePhotoSelectionState.selecting {
         didSet {
-            switch selectionState {
-            case .selecting:
-                vcView.analyzesLeftLabel.isHidden = true
-            case .ended:
-                vcView.analyzesLeftLabel.isHidden = false
-            }
-            
             delegates.invoke { delegate in
                 delegate.selectionStateDidChange(selectionState)
             }
@@ -45,8 +31,7 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
     private let selectionControllerPageSize = Device.isIpad ? 200 : 100
     private var currentSelectingCount = 0
     private let selectingLimit = 5
-    private var selectablePhoto: Int = 0
-    
+    private var selectablePhotoCount: Int = 0
     private var segmentedViewControllers: [UIViewController] = []
     private var delegates = MulticastDelegate<CreateCollageSelectionSegmentedControllerDelegate>()
     private var collageTemplate: CollageTemplateElement?
@@ -73,7 +58,7 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
     
     init(collageTemplate: CollageTemplateElement) {
         self.collageTemplate = collageTemplate
-        selectablePhoto = collageTemplate.shapeCount
+        selectablePhotoCount = collageTemplate.shapeCount
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -82,15 +67,12 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
     }
     
     private func setup() {
-        navigationItem.title = String(format: "Select Photo", 0)
+        //navigationItem.title = String(format: "Select Photo", 0)
         navigationItem.leftBarButtonItem = closeSelfButton
     }
     
     override func loadView() {
-        let formatedAnalyzesLeft = TextConstants.instapickSelectionAnalyzesLeftMax
-        self.view = CreateCollageSelectionSegmentedView(buttonText: TextConstants.analyzeWithInstapick,
-                                                    maxReachedText: String(format: formatedAnalyzesLeft, selectingLimit),
-                                                    needShowSegmentedControll: true)
+        self.view = CreateCollageSelectionSegmentedView()
     }
     
     private lazy var vcView: CreateCollageSelectionSegmentedView = {
@@ -98,21 +80,16 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
             return view
         } else {
             assertionFailure("override func loadView")
-            let formatedAnalyzesLeft = TextConstants.instapickSelectionAnalyzesLeftMax
-            return CreateCollageSelectionSegmentedView(buttonText: TextConstants.analyzeWithInstapick,
-                                                   maxReachedText: String(format: formatedAnalyzesLeft, selectingLimit),
-                                                   needShowSegmentedControll: true)
+            return CreateCollageSelectionSegmentedView()
         }
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        vcView.selectedTextLabel.text = "0 - 4 Selected"
-        
+        updateTitle()
         setupScreenWithSelectingLimit(selectingLimit)
         trackScreen()
-        vcView.analyzeButton.addTarget(self, action: #selector(analyzeWithInstapick), for: .touchUpInside)
+        vcView.actionButton.addTarget(self, action: #selector(actionButtonTap), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -127,11 +104,7 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
         analyticsService.trackDimentionsEveryClickGA(screen: .photoPickPhotoSelection)
     }
     
-    /// one time called
     private func setupScreenWithSelectingLimit(_ selectingLimit: Int) {
-        let formatedAnalyzesLeft = TextConstants.instapickSelectionAnalyzesLeftMax
-        vcView.analyzesLeftLabel.text = String(format: formatedAnalyzesLeft, selectingLimit)
-        
         let allPhotosDataSource = CreateCollageAllPhotosSelectionDataSource(pageSize: selectionControllerPageSize)
         let allPhotosVC = CreateCollagePhotoSelectionController(title: TextConstants.actionSheetPhotos,
                                                    selectingLimit: selectingLimit,
@@ -146,7 +119,6 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
         
         segmentedViewControllers = [allPhotosVC, albumsVC, favoritePhotosVC]
         
-        /// we should not add "delegates.add(albumsVC)" bcz it is not selection controller
         delegates.add(allPhotosVC)
         delegates.add(favoritePhotosVC)
         
@@ -158,11 +130,9 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
     
     private func setupSegmentedControl() {
         assert(!segmentedViewControllers.isEmpty, "should not be empty")
-        
         for (index, controller) in segmentedViewControllers.enumerated() {
             vcView.segmentedControl.insertSegment(withTitle: controller.title ?? "", tag: index, width: 112)
         }
-        
         vcView.segmentedControl.renderSegmentButtons(segment: 0)
         vcView.segmentedControl.action = controllerDidChange
     }
@@ -175,38 +145,18 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
         navigationController?.popViewController(animated: true)
     }
     
-    @objc private func analyzeWithInstapick() {
-        guard !selectedItems.isEmpty else {
-            return
+    @objc private func actionButtonTap() {
+        if selectedItems.count > 0 &&  selectedItems.count != selectablePhotoCount{
+            allDeselectItems()
+            selectedItems.removeAll()
+            updateTitle()
         }
-        
-        dismiss(animated: true, completion: {
-            self.presentInstaPickProgressPopUp()
-        })
-    }
-    
-    private func presentInstaPickProgressPopUp() {
-        let imagesUrls = self.selectedItems.compactMap({ $0.metadata?.mediumUrl })
-        let ids = self.selectedItems.compactMap({ $0.uuid })
-        
-        let topTexts = [TextConstants.instaPickAnalyzingText_0,
-                        TextConstants.instaPickAnalyzingText_1,
-                        TextConstants.instaPickAnalyzingText_2,
-                        TextConstants.instaPickAnalyzingText_3,
-                        TextConstants.instaPickAnalyzingText_4]
-        
-        let bottomText = TextConstants.instaPickAnalyzingBottomText
-        if let currentController = UIApplication.topController() {
-            let controller = InstaPickProgressPopup.createPopup(with: imagesUrls, topTexts: topTexts, bottomText: bottomText)
-            
-            if let tabBarController = currentController as? TabBarViewController,
-               let controlerAfterDismissProgressPopUp = tabBarController.currentViewController as? InstaPickProgressPopupDelegate {
-                controller.delegate = controlerAfterDismissProgressPopUp
-                currentController.present(controller, animated: true, completion: nil)
-                controller.startAnalyze(ids: ids)
-            } else {
-                assertionFailure()
-            }
+        if selectedItems.count == selectablePhotoCount {
+            dismiss(animated: true, completion: {
+                print("Collage Screen")
+                let imagesUrls = self.selectedItems.compactMap({ $0.metadata?.mediumUrl })
+                let ids = self.selectedItems.compactMap({ $0.uuid })
+            })
         }
     }
     
@@ -215,14 +165,12 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
             assertionFailure()
             return
         }
-        
         children.forEach { $0.removeFromParentVC() }
         add(childController: segmentedViewControllers[selectedIndex])
         updateLeftBarButtonItem(selectedIndex: selectedIndex)
     }
 
     private func updateLeftBarButtonItem(selectedIndex: Int) {
-        /// optimized for reading, not performance
         let isAlbumsTabOpened = (selectedIndex == albumsTabIndex)
         let isAnyAlbumOpened = (segmentedViewControllers[albumsTabIndex] != albumsVC)
         
@@ -241,7 +189,6 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
         childController.didMove(toParent: self)
     }
     
-    
     @objc private func onCloseAlbum() {
         replaceControllerAtAlbumsTab(with: albumsVC)
     }
@@ -257,17 +204,13 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
 extension CreateCollageSelectionSegmentedController: CreateCollagePhotoSelectionControllerDelegate {
     
     func selectionController(_ controller: CreateCollagePhotoSelectionController, didSelectItem item: SearchItemResponse) {
-        
         delegates.invoke { delegate in
             delegate.didSelectItem(item)
         }
-        
         selectedItems.append(item)
         updateTitle()
-        
         let selectedCount = selectedItems.count
-        let isReachedLimit = (selectedCount == selectingLimit)
-        
+        let isReachedLimit = (selectedCount == selectablePhotoCount)
         if isReachedLimit {
             selectionState = .ended
         } else {
@@ -276,28 +219,36 @@ extension CreateCollageSelectionSegmentedController: CreateCollagePhotoSelection
     }
     
     func selectionController(_ controller: CreateCollagePhotoSelectionController, didDeselectItem item: SearchItemResponse) {
-        
         delegates.invoke { delegate in
             delegate.didDeselectItem(item)
         }
-        
-        /// not working "selectedItems.remove(item)"
         for index in (0..<selectedItems.count).reversed() where selectedItems[index] == item {
             selectedItems.remove(at: index)
         }
-        
         selectionState = .selecting
         updateTitle()
     }
     
+    private func allDeselectItems() {
+        delegates.invoke { delegate in
+            delegate.allDeselectItem(selectedCount: selectedItems.count)
+        }
+    }
+    
     private func updateTitle() {
-        navigationItem.title = String(format: TextConstants.instapickSelectionPhotosSelected, selectedItems.count)
+        vcView.selectedTextLabel.text = "\(selectedItems.count) - \(selectablePhotoCount) Selected"
+        if selectedItems.count == selectablePhotoCount {
+            vcView.actionButton.setTitle(TextConstants.ok, for: .normal)
+            selectionState = .ended
+        } else {
+            vcView.actionButton.setTitle(TextConstants.cancel, for: .normal)
+            selectionState = .selecting
+        }
     }
 }
 
 // MARK: - InstapickAlbumSelectionDelegate
 extension CreateCollageSelectionSegmentedController: CreateCollageAlbumSelectionDelegate {
-    
     func onSelectAlbum(_ album: AlbumItem) {
         let dataSource = CreateCollageAlbumPhotosSelectionDataSource(pageSize: selectionControllerPageSize, albumUuid: album.uuid)
         let albumSelectionVC = CreateCollagePhotoSelectionController(title: album.name ?? "",

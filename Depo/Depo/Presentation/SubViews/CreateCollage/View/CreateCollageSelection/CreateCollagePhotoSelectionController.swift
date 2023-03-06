@@ -21,7 +21,6 @@ enum CreateCollagePhotoSelectionState {
     case ended
 }
 
-// TODO: accessibility
 final class CreateCollagePhotoSelectionController: UIViewController, ErrorPresenter {
     
     private weak var delegate: CreateCollagePhotoSelectionControllerDelegate?
@@ -99,7 +98,6 @@ final class CreateCollagePhotoSelectionController: UIViewController, ErrorPresen
     /// will never be called
     required init?(coder aDecoder: NSCoder) {
         assertionFailure()
-        /// set any PhotoSelectionDataSourceProtocol
         self.dataSource = CreateCollageAllPhotosSelectionDataSource(pageSize: 100)
         super.init(coder: aDecoder)
     }
@@ -110,10 +108,7 @@ final class CreateCollagePhotoSelectionController: UIViewController, ErrorPresen
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.addSubview(collectionView)
-        
-        /// will call loadMore() also in reachability.whenReachable
         loadMore()
         loadingMoreFooterView?.startSpinner()
         reachabilityService.delegates.add(self)
@@ -149,7 +144,6 @@ final class CreateCollagePhotoSelectionController: UIViewController, ErrorPresen
         }
         
         isLoadingMore = true
-        /// to update footer spinner
         updateLoadingMoreFooterViewLayout()
         
         self.dataSource.getNext { [weak self] result in
@@ -171,8 +165,6 @@ final class CreateCollagePhotoSelectionController: UIViewController, ErrorPresen
                     
                     self?.displayNoFilesView = self?.photos.isEmpty ?? false
                     
-                    /// call after "self.photos.append(contentsOf: newPhotos)"
-                    /// and "self.collectionView.insertItems"
                     self?.updateSelectedCellsIfNeed(for: newPhotos)
                     
                     self?.isLoadingMore = false
@@ -194,7 +186,6 @@ final class CreateCollagePhotoSelectionController: UIViewController, ErrorPresen
         }
     }
     
-    /// to update footer view by func referenceSizeForFooterInSection
     private func updateLoadingMoreFooterViewLayout() {
         self.collectionView.performBatchUpdates({
             self.collectionView.collectionViewLayout.invalidateLayout()
@@ -203,9 +194,6 @@ final class CreateCollagePhotoSelectionController: UIViewController, ErrorPresen
     
     private func hideFooterSpinner() {
         updateLoadingMoreFooterViewLayout()
-        
-        /// just in case stop animation.
-        /// don't forget to start animation if need (for pullToRefresh)
         self.loadingMoreFooterView?.stopSpinner()
     }
     
@@ -219,10 +207,7 @@ extension CreateCollagePhotoSelectionController {
             assertionFailure()
             return
         }
-        
-        /// subtracting bcz newPhotos are appended in self.photos
         let startIndex = self.photos.count - newPhotos.count
-        
         for item in delegate.selectedItems {
             for (index, photo) in newPhotos.enumerated() {
                 
@@ -235,18 +220,14 @@ extension CreateCollagePhotoSelectionController {
         }
     }
     
-    /// without sending notification to the delegate
     private func selectCell(at indexPath: IndexPath) {
         let selectedCount = collectionView.indexPathsForSelectedItems?.count ?? 0
         let isReachedLimit = (selectedCount == selectingLimit)
         
         if isReachedLimit {
-            /// update all cells
             localSelectionState = .ended
             updateVisibleCellsForSelectionState()
-            
         } else {
-            /// update one cell
             localSelectionState = .selecting
             updateCellForSelectionState(at: indexPath)
         }
@@ -258,11 +239,8 @@ extension CreateCollagePhotoSelectionController {
         let isDeselectFromLimit = (selectedCount == selectingLimit - 1)
         
         if isDeselectFromLimit {
-            /// update all cells
             updateVisibleCellsForSelectionState()
-            
         } else {
-            /// update one cell
             updateCellForSelectionState(at: indexPath)
         }
     }
@@ -287,15 +265,12 @@ extension CreateCollagePhotoSelectionController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        /// this code in willDisplay will cause empty cells
         let isLastCell = (indexPath.row == photos.count - 1)
         if !isLoadingMoreFinished, !isLoadingMore, isLastCell {
             DispatchQueue.toMain {
                 self.loadMore()
             }
         }
-        
         return collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
     }
     
@@ -374,7 +349,6 @@ extension CreateCollagePhotoSelectionController: UICollectionViewDelegateFlowLay
 extension CreateCollagePhotoSelectionController: CreateCollageSelectionSegmentedControllerDelegate {
     
     func didSelectItem(_ selectedItem: SearchItemResponse) {
-        /// controller can be created but not added as child so view will not be loaded yet
         guard isViewLoaded else {
             return
         }
@@ -398,6 +372,16 @@ extension CreateCollagePhotoSelectionController: CreateCollageSelectionSegmented
                 collectionView.deselectItem(at: indexPath, animated: false)
                 updateCellForSelectionState(at: indexPath)
                 break
+            }
+        }
+    }
+    
+    func allDeselectItem(selectedCount: Int) {
+        if selectedCount > 0 {
+            for (index,photo) in photos.enumerated() {
+                let indexPath = IndexPath(item: index, section: photosSectionIndex)
+                collectionView.deselectItem(at: indexPath, animated: false)
+                updateCellForSelectionState(at: indexPath)
             }
         }
     }
@@ -427,7 +411,6 @@ extension CreateCollagePhotoSelectionController: ReachabilityServiceDelegate {
                     return
             }
             let item = self.photos[indexPath.row]
-            //cell.update(for: selectionState)
             cell.setup(by: item)
         }
     }

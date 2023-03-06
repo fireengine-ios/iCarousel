@@ -1701,6 +1701,27 @@
 		89F99F7429B5BDB400F99CB5 /* CreateCollageAlbumSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F7329B5BDB400F99CB5 /* CreateCollageAlbumSelectionViewController.swift */; };
 		89F99F7629B5BE2A00F99CB5 /* CreateCollageAlbumSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F7529B5BE2A00F99CB5 /* CreateCollageAlbumSelectionDataSource.swift */; };
 		89F99F7829B5C07800F99CB5 /* CreateCollagePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F7729B5C07800F99CB5 /* CreateCollagePhotoCell.swift */; };
+		89F99F7929B5F62700F99CB5 /* CreateCollageSelectionSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F6929B5B9A600F99CB5 /* CreateCollageSelectionSegmentedView.swift */; };
+		89F99F7A29B5F62800F99CB5 /* CreateCollageSelectionSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F6929B5B9A600F99CB5 /* CreateCollageSelectionSegmentedView.swift */; };
+		89F99F7B29B5F62800F99CB5 /* CreateCollageSelectionSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F6929B5B9A600F99CB5 /* CreateCollageSelectionSegmentedView.swift */; };
+		89F99F7C29B5F62D00F99CB5 /* CreateCollageSelectionSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F6B29B5B9F400F99CB5 /* CreateCollageSelectionSegmentedController.swift */; };
+		89F99F7D29B5F62E00F99CB5 /* CreateCollageSelectionSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F6B29B5B9F400F99CB5 /* CreateCollageSelectionSegmentedController.swift */; };
+		89F99F7E29B5F62F00F99CB5 /* CreateCollageSelectionSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F6B29B5B9F400F99CB5 /* CreateCollageSelectionSegmentedController.swift */; };
+		89F99F7F29B5F63A00F99CB5 /* CreateCollagePhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F6D29B5BB7000F99CB5 /* CreateCollagePhotoSelectionController.swift */; };
+		89F99F8029B5F63B00F99CB5 /* CreateCollagePhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F6D29B5BB7000F99CB5 /* CreateCollagePhotoSelectionController.swift */; };
+		89F99F8129B5F63C00F99CB5 /* CreateCollagePhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F6D29B5BB7000F99CB5 /* CreateCollagePhotoSelectionController.swift */; };
+		89F99F8229B5F64000F99CB5 /* CreateCollagePhotoSelectionDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F6F29B5BD1F00F99CB5 /* CreateCollagePhotoSelectionDataSourceProtocol.swift */; };
+		89F99F8329B5F64200F99CB5 /* CreateCollagePhotoSelectionDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F6F29B5BD1F00F99CB5 /* CreateCollagePhotoSelectionDataSourceProtocol.swift */; };
+		89F99F8429B5F64400F99CB5 /* CreateCollagePhotoSelectionDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F6F29B5BD1F00F99CB5 /* CreateCollagePhotoSelectionDataSourceProtocol.swift */; };
+		89F99F8529B5F64700F99CB5 /* CreateCollageAlbumSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F7329B5BDB400F99CB5 /* CreateCollageAlbumSelectionViewController.swift */; };
+		89F99F8629B5F64900F99CB5 /* CreateCollageAlbumSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F7329B5BDB400F99CB5 /* CreateCollageAlbumSelectionViewController.swift */; };
+		89F99F8729B5F64900F99CB5 /* CreateCollageAlbumSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F7329B5BDB400F99CB5 /* CreateCollageAlbumSelectionViewController.swift */; };
+		89F99F8829B5F64E00F99CB5 /* CreateCollageAlbumSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F7529B5BE2A00F99CB5 /* CreateCollageAlbumSelectionDataSource.swift */; };
+		89F99F8929B5F65000F99CB5 /* CreateCollageAlbumSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F7529B5BE2A00F99CB5 /* CreateCollageAlbumSelectionDataSource.swift */; };
+		89F99F8A29B5F65100F99CB5 /* CreateCollageAlbumSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F7529B5BE2A00F99CB5 /* CreateCollageAlbumSelectionDataSource.swift */; };
+		89F99F8B29B5F65800F99CB5 /* CreateCollagePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F7729B5C07800F99CB5 /* CreateCollagePhotoCell.swift */; };
+		89F99F8C29B5F65900F99CB5 /* CreateCollagePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F7729B5C07800F99CB5 /* CreateCollagePhotoCell.swift */; };
+		89F99F8D29B5F65900F99CB5 /* CreateCollagePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F7729B5C07800F99CB5 /* CreateCollagePhotoCell.swift */; };
 		8C017B762074B782002484E7 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
 		8C017B772074B795002484E7 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
 		8C0332982115F42D00E75EBC /* AnalyticsDimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0332962115F42D00E75EBC /* AnalyticsDimension.swift */; };
@@ -28517,6 +28538,7 @@
 				CE78493C22A685FB00662219 /* PhoneVerificationDataStorage.swift in Sources */,
 				985B0C5A2412A0C400C0342C /* AutoSyncDataSource.swift in Sources */,
 				CE78493D22A685FB00662219 /* FaceImagePhotosConfigurator.swift in Sources */,
+				89F99F8929B5F65000F99CB5 /* CreateCollageAlbumSelectionDataSource.swift in Sources */,
 				98231A8524F3A23500FD16E2 /* OldManFilter.swift in Sources */,
 				CE78493E22A685FB00662219 /* AlertFilesActionsSheetModuleInput.swift in Sources */,
 				CE78493F22A685FB00662219 /* PreventCollectionView.swift in Sources */,
@@ -28585,6 +28607,7 @@
 				CE78496F22A685FB00662219 /* WrapperedItems.swift in Sources */,
 				CE78497022A685FB00662219 /* HomeCardsService.swift in Sources */,
 				52501E9129952B1E0000376C /* NotificationRouter.swift in Sources */,
+				89F99F8C29B5F65900F99CB5 /* CreateCollagePhotoCell.swift in Sources */,
 				98C19F532485097900527D76 /* ContactSyncApiService.swift in Sources */,
 				CE78497122A685FB00662219 /* FileForDownload.swift in Sources */,
 				4BE126912304351900BFE06F /* ServerErrors.swift in Sources */,
@@ -28980,6 +29003,7 @@
 				CE784A6E22A685FB00662219 /* ForgotPasswordInteractor.swift in Sources */,
 				B54E09D4233252D100C3AB94 /* PaycellViewController.swift in Sources */,
 				CE784A6F22A685FB00662219 /* OffersService.swift in Sources */,
+				89F99F8029B5F63B00F99CB5 /* CreateCollagePhotoSelectionController.swift in Sources */,
 				CE784A7022A685FB00662219 /* LocalMediaStorage.swift in Sources */,
 				077A4E5A271FF707008B78E7 /* DeleteAccountValidationPopUp.swift in Sources */,
 				CE784A7122A685FB00662219 /* FaceImageChangeCoverPresenter.swift in Sources */,
@@ -29195,6 +29219,7 @@
 				CE784AFD22A685FB00662219 /* BaseFilesGreedInteractor.swift in Sources */,
 				F0CDA6962775187F0026C1C4 /* DragAndDropHelper.swift in Sources */,
 				A771D4CC23DEFD8D00EA78BF /* AnalyticsPermissionNetmeraEvent.swift in Sources */,
+				89F99F8629B5F64900F99CB5 /* CreateCollageAlbumSelectionViewController.swift in Sources */,
 				8C1E5BD022CB8A1A008FDA02 /* NSPersistentStoreCoordinator+Extensions.swift in Sources */,
 				CE784AFF22A685FB00662219 /* CardsManagerViewProtocol.swift in Sources */,
 				CE784B0022A685FB00662219 /* BaseFilesGreedRouterInput.swift in Sources */,
@@ -29303,6 +29328,7 @@
 				CE784B4922A685FB00662219 /* UserInfoSubViewInteractorInput.swift in Sources */,
 				07407D5E2796CD4A0082FF8D /* EmailVerificationInteractor.swift in Sources */,
 				CE784B4B22A685FB00662219 /* ManageContactsInitializer.swift in Sources */,
+				89F99F8329B5F64200F99CB5 /* CreateCollagePhotoSelectionDataSourceProtocol.swift in Sources */,
 				CE784B4C22A685FB00662219 /* UserInfoSubViewInteractorOutput.swift in Sources */,
 				CE784B4D22A685FB00662219 /* UserInfoSubViewInteractor.swift in Sources */,
 				CE784B4E22A685FB00662219 /* UserInfoSubViewRouterInput.swift in Sources */,
@@ -29447,6 +29473,7 @@
 				CE784BAC22A685FB00662219 /* SplashInitializer.swift in Sources */,
 				0724682E2855CC9E0079B07E /* DrawerTransitioningDelegate.swift in Sources */,
 				985786F523E01F8800D35DDA /* SettingFooterView.swift in Sources */,
+				89F99F7D29B5F62E00F99CB5 /* CreateCollageSelectionSegmentedController.swift in Sources */,
 				3A9C283B26529C2900EFADE9 /* InvitationCampaignDetailView.swift in Sources */,
 				CE784BAD22A685FB00662219 /* CellImageManager.swift in Sources */,
 				CE784BAE22A685FB00662219 /* UISearchBar+Cancel.swift in Sources */,
@@ -29820,6 +29847,7 @@
 				CE784C9722A685FB00662219 /* OTPViewRouter.swift in Sources */,
 				98B047F0259314750011DAEB /* AnalyzeStatus.m in Sources */,
 				0791817B26F88B7B0067FB75 /* IdentityVerificationMethod.swift in Sources */,
+				89F99F7A29B5F62800F99CB5 /* CreateCollageSelectionSegmentedView.swift in Sources */,
 				CE784C9822A685FB00662219 /* OTPViewRouterInput.swift in Sources */,
 				98B04858259314750011DAEB /* AbstractHelper.m in Sources */,
 				0780AB5227916834000760D9 /* RemoteTextRecognitionModels.swift in Sources */,
@@ -30092,6 +30120,7 @@
 				CF8B642123CBC9D70021B021 /* PrintInteractorOutput.swift in Sources */,
 				CF8B642223CBC9D70021B021 /* MoreActionsConfig.swift in Sources */,
 				CF703F4624E3CC4A005EFFFD /* (null) in Sources */,
+				89F99F8829B5F64E00F99CB5 /* CreateCollageAlbumSelectionDataSource.swift in Sources */,
 				CF8B642323CBC9D70021B021 /* InstaPickSelectionSegmentedController.swift in Sources */,
 				98B04774259314740011DAEB /* UpdateServerIntegration.m in Sources */,
 				CF71470D24B597AA00D83E60 /* ContactListHeader.swift in Sources */,
@@ -30231,6 +30260,7 @@
 				985E6951255A6045006F6CD7 /* PrivateShareUserRoleViewController.swift in Sources */,
 				CF7146A124B597A900D83E60 /* ContactsBackupHistoryView.swift in Sources */,
 				CF8B648923CBC9D70021B021 /* Mail.swift in Sources */,
+				89F99F8B29B5F65800F99CB5 /* CreateCollagePhotoCell.swift in Sources */,
 				CF8B648A23CBC9D70021B021 /* InfinityRotater.swift in Sources */,
 				98B047EC259314750011DAEB /* AnalyzeStatus.m in Sources */,
 				076BD1C627BC0998004609E3 /* MapSearchRouterInput.swift in Sources */,
@@ -30371,6 +30401,7 @@
 				9808B3102553DEBD002B0032 /* PrivateShareViewController.swift in Sources */,
 				CF8B64EE23CBC9D70021B021 /* LoginInitializer.swift in Sources */,
 				CF8B64EF23CBC9D70021B021 /* Factory.swift in Sources */,
+				89F99F7929B5F62700F99CB5 /* CreateCollageSelectionSegmentedView.swift in Sources */,
 				CF8B64F023CBC9D70021B021 /* PeriodicContactSyncViewOutput.swift in Sources */,
 				CF8B64F123CBC9D70021B021 /* UploadFromLifeBoxRouterInput.swift in Sources */,
 				CF8B64F223CBC9D70021B021 /* HelpAndSupportInteractorOutput.swift in Sources */,
@@ -30706,6 +30737,7 @@
 				07407D522796C5BD0082FF8D /* EmailVerificationInitializer.swift in Sources */,
 				CF8B65D723CBC9D70021B021 /* PhoneVerificationViewOutput.swift in Sources */,
 				CF8B65D823CBC9D70021B021 /* PhoneVerificationViewController.swift in Sources */,
+				89F99F8229B5F64000F99CB5 /* CreateCollagePhotoSelectionDataSourceProtocol.swift in Sources */,
 				CF38A8042575314E0000994F /* PrivateShareWithContactView.swift in Sources */,
 				CF8B65D923CBC9D70021B021 /* PhoneVerificationModuleInput.swift in Sources */,
 				981617302578B9A9009F1C31 /* FirebaseAnalyticsScreens.swift in Sources */,
@@ -31223,6 +31255,7 @@
 				0780AB6127916846000760D9 /* TextRecognitionService.swift in Sources */,
 				CF8B675823CBC9D70021B021 /* InstaPickPhotoView.swift in Sources */,
 				985E6978255A61FB006F6CD7 /* PrivateShareRoleCheckmarkView.swift in Sources */,
+				89F99F7C29B5F62D00F99CB5 /* CreateCollageSelectionSegmentedController.swift in Sources */,
 				CF8B675923CBC9D70021B021 /* SettingsInitializer.swift in Sources */,
 				CF8B675A23CBC9D70021B021 /* AlertFilesActionsSheetInitialConfig.swift in Sources */,
 				98725E9F258B29FD0061E7F6 /* AllFilesSegmentedController.swift in Sources */,
@@ -31417,6 +31450,7 @@
 				CF8B67DC23CBC9D70021B021 /* PrintViewOutput.swift in Sources */,
 				CF8B67DD23CBC9D70021B021 /* LaunchCampaignCard.swift in Sources */,
 				CF8B67DE23CBC9D70021B021 /* PackagesViewInput.swift in Sources */,
+				89F99F7F29B5F63A00F99CB5 /* CreateCollagePhotoSelectionController.swift in Sources */,
 				CF8B67DF23CBC9D70021B021 /* SelectNameViewOutput.swift in Sources */,
 				CF8B67E123CBC9D70021B021 /* SelectNameViewController.swift in Sources */,
 				CF8B67E223CBC9D70021B021 /* SelectNameModuleInput.swift in Sources */,
@@ -31458,6 +31492,7 @@
 				CF8B67FA23CBC9D70021B021 /* SelectNameInitializer.swift in Sources */,
 				F0BF840B27A7E802000F7F4E /* PublicShareSaveErrorStatus.swift in Sources */,
 				9823195E24F3A1E600FD16E2 /* PreparedFilterSliderView.swift in Sources */,
+				89F99F8529B5F64700F99CB5 /* CreateCollageAlbumSelectionViewController.swift in Sources */,
 				CF8B67FB23CBC9D70021B021 /* FaceImageItemsInteractorInput.swift in Sources */,
 				CF8B67FC23CBC9D70021B021 /* FacebookAccountConnectionCell.swift in Sources */,
 				CF8B67FD23CBC9D70021B021 /* LBAlbumLikePreviewSliderViewInput.swift in Sources */,
@@ -31744,6 +31779,7 @@
 				CF8B6B7223CBCA280021B021 /* ChangePasswordController.swift in Sources */,
 				982319DF24F3A1E700FD16E2 /* AdjustmentCategoriesView.swift in Sources */,
 				CF8B6B7323CBCA280021B021 /* EditinglBar.swift in Sources */,
+				89F99F8A29B5F65100F99CB5 /* CreateCollageAlbumSelectionDataSource.swift in Sources */,
 				CF8B6B7423CBCA280021B021 /* NotificationName+Extensions.swift in Sources */,
 				CF8B6B7523CBCA280021B021 /* AugmentedRealityController.swift in Sources */,
 				98AC4800252DFC05003EB6C5 /* FunTabBar.swift in Sources */,
@@ -31833,6 +31869,7 @@
 				CF8B6BAD23CBCA280021B021 /* ContactSyncResponse.swift in Sources */,
 				CF8B6BAE23CBCA280021B021 /* WidgetService.swift in Sources */,
 				CF8B6BAF23CBCA280021B021 /* TabBarViewController.swift in Sources */,
+				89F99F8129B5F63C00F99CB5 /* CreateCollagePhotoSelectionController.swift in Sources */,
 				982319C124F3A1E700FD16E2 /* AdjustmentParameterSliderView.swift in Sources */,
 				CF8B6BB023CBCA280021B021 /* LeavePremiumInteractorInput.swift in Sources */,
 				071E7B6F2832438C00A5DD24 /* GalleryCollectionGridSize.swift in Sources */,
@@ -32502,6 +32539,7 @@
 				CF8B6D9123CBCA280021B021 /* AccountService.swift in Sources */,
 				CF8B6D9223CBCA280021B021 /* TermsOfUseViewInput.swift in Sources */,
 				CF8B6D9323CBCA280021B021 /* GridListTopBarSortingTableView.swift in Sources */,
+				89F99F8429B5F64400F99CB5 /* CreateCollagePhotoSelectionDataSourceProtocol.swift in Sources */,
 				CF8B6D9423CBCA280021B021 /* PHAssetCollection.swift in Sources */,
 				CF8B6D9523CBCA280021B021 /* HomePageInteractor.swift in Sources */,
 				3A9C281726525FF900EFADE9 /* AccountConstants.swift in Sources */,
@@ -32560,6 +32598,7 @@
 				CF8B6DBC23CBCA280021B021 /* WKWebView+Extensions.swift in Sources */,
 				07D42134274E4D0800061EA2 /* ItemAnnotationView.swift in Sources */,
 				CF8B6DBD23CBCA280021B021 /* PhoneVerificationInteractor.swift in Sources */,
+				89F99F7B29B5F62800F99CB5 /* CreateCollageSelectionSegmentedView.swift in Sources */,
 				CF8B6DBE23CBCA280021B021 /* RoundedProgressView.swift in Sources */,
 				CF8B6DBF23CBCA280021B021 /* PushNotificationServiceConstants.swift in Sources */,
 				CF8B6DC023CBCA280021B021 /* FaceImagePhotosRouterInput.swift in Sources */,
@@ -32809,6 +32848,7 @@
 				CF8B6E6523CBCA280021B021 /* PackageModelResponse.swift in Sources */,
 				F0743DBD28B428FA00CC1F24 /* AppColor.swift in Sources */,
 				734CA117244D64000076F6A7 /* DocumentsAlbumCard.swift in Sources */,
+				89F99F7E29B5F62F00F99CB5 /* CreateCollageSelectionSegmentedController.swift in Sources */,
 				CF8B6E6623CBCA280021B021 /* MovieCard.swift in Sources */,
 				CF8B6E6723CBCA280021B021 /* FBResponses.swift in Sources */,
 				CF8B6E6823CBCA280021B021 /* InstaPickHashtagCollectionViewDataSource.swift in Sources */,
@@ -32963,6 +33003,7 @@
 				CF8B6EDC23CBCA280021B021 /* UploadHelpers.swift in Sources */,
 				CF8B6EDD23CBCA280021B021 /* UserProfileRouterInput.swift in Sources */,
 				07567DA82721DFBC00557BCF /* DeleteAccountPopUp.swift in Sources */,
+				89F99F8729B5F64900F99CB5 /* CreateCollageAlbumSelectionViewController.swift in Sources */,
 				CF8B6EE123CBCA280021B021 /* FBService.swift in Sources */,
 				CF7146B624B597A900D83E60 /* ContactsBackupCell.swift in Sources */,
 				CF8B6EE223CBCA280021B021 /* PasscodeSettingsInitializer.swift in Sources */,
@@ -33306,6 +33347,7 @@
 				CF8B6FCB23CBCA280021B021 /* PackageInfoView.swift in Sources */,
 				CF8B6FCC23CBCA280021B021 /* FreeAppSpaceInteractor.swift in Sources */,
 				CF8B6FCD23CBCA280021B021 /* HelpAndSupportInitializer.swift in Sources */,
+				89F99F8D29B5F65900F99CB5 /* CreateCollagePhotoCell.swift in Sources */,
 				CF8B6FCE23CBCA280021B021 /* TwoFactorAuthErrorResponse.swift in Sources */,
 				893DCFE5292B861E00271379 /* DiscoverInitilizer.swift in Sources */,
 				CF8B6FCF23CBCA280021B021 /* SegmentedControl.swift in Sources */,
