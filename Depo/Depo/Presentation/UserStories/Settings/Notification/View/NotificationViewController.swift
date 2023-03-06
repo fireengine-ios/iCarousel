@@ -34,6 +34,7 @@ final class NotificationViewController: BaseViewController {
     
     private lazy var emptyView: NotificationEmptyView = {
         let view = NotificationEmptyView()
+        view.isHidden = true
         return view
     }()
     
@@ -42,6 +43,14 @@ final class NotificationViewController: BaseViewController {
                                font: .TurkcellSaturaDemFont(size: 19.0),
                                target: self,
                                selector: #selector(onCancelSelectionButton))
+    }()
+    
+    private lazy var more: NavBarWithAction = {
+        let view = NavBarWithAction(navItem: NavigationBarList().more) { [weak self] item in
+            self?.onMorePressed(item)
+        }
+        view.navItem.isEnabled = false
+        return view
     }()
     
     private lazy var threeDotMenuManager = NotificationThreeDotMenuManager(delegate: self)
@@ -113,11 +122,7 @@ final class NotificationViewController: BaseViewController {
     }
     
     private func configureNavBarActions() {
-        let more = NavBarWithAction(navItem: NavigationBarList().more) { [weak self] item in
-            self?.onMorePressed(item)
-        }
-        let rightActions: [NavBarWithAction] = [more]
-        navBarConfigurator.configure(right: rightActions, left: [])
+        navBarConfigurator.configure(right: [more], left: [])
         navBarRightItems = navBarConfigurator.rightItems
     }
     
@@ -278,6 +283,10 @@ extension NotificationViewController: NotificationViewInput {
     
     func setEmptyView(as hidden: Bool) {
         emptyView.isHidden = hidden
+        
+        if !output.onlyRead && !output.onlyShowAlerts {
+            more.navItem.isEnabled = hidden
+        }
     }
     
     func reloadTimer() {
