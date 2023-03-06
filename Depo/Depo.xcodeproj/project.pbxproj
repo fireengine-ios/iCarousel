@@ -1694,14 +1694,13 @@
 		89F0958329B0C0B200F74E7E /* CreateCollageViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0958129B0C0B200F74E7E /* CreateCollageViewOutput.swift */; };
 		89F0958429B0C0B200F74E7E /* CreateCollageViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0958129B0C0B200F74E7E /* CreateCollageViewOutput.swift */; };
 		89F0958529B0C0B200F74E7E /* CreateCollageViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0958129B0C0B200F74E7E /* CreateCollageViewOutput.swift */; };
-		89F9207F29B4EC7B0012BB6B /* CreateCollagePhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F9207E29B4EC7B0012BB6B /* CreateCollagePhotoSelectionController.swift */; };
-		89F9208029B4EC7B0012BB6B /* CreateCollagePhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F9207E29B4EC7B0012BB6B /* CreateCollagePhotoSelectionController.swift */; };
-		89F9208129B4EC7B0012BB6B /* CreateCollagePhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F9207E29B4EC7B0012BB6B /* CreateCollagePhotoSelectionController.swift */; };
-		89F9208229B4EC7B0012BB6B /* CreateCollagePhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F9207E29B4EC7B0012BB6B /* CreateCollagePhotoSelectionController.swift */; };
-		89F9208429B4EC9B0012BB6B /* CreateCollagePhotoSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89F9208329B4EC9B0012BB6B /* CreateCollagePhotoSelection.xib */; };
-		89F9208529B4EC9B0012BB6B /* CreateCollagePhotoSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89F9208329B4EC9B0012BB6B /* CreateCollagePhotoSelection.xib */; };
-		89F9208629B4EC9B0012BB6B /* CreateCollagePhotoSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89F9208329B4EC9B0012BB6B /* CreateCollagePhotoSelection.xib */; };
-		89F9208729B4EC9B0012BB6B /* CreateCollagePhotoSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89F9208329B4EC9B0012BB6B /* CreateCollagePhotoSelection.xib */; };
+		89F99F6A29B5B9A600F99CB5 /* CreateCollageSelectionSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F6929B5B9A600F99CB5 /* CreateCollageSelectionSegmentedView.swift */; };
+		89F99F6C29B5B9F400F99CB5 /* CreateCollageSelectionSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F6B29B5B9F400F99CB5 /* CreateCollageSelectionSegmentedController.swift */; };
+		89F99F6E29B5BB7000F99CB5 /* CreateCollagePhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F6D29B5BB7000F99CB5 /* CreateCollagePhotoSelectionController.swift */; };
+		89F99F7029B5BD1F00F99CB5 /* CreateCollagePhotoSelectionDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F6F29B5BD1F00F99CB5 /* CreateCollagePhotoSelectionDataSourceProtocol.swift */; };
+		89F99F7429B5BDB400F99CB5 /* CreateCollageAlbumSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F7329B5BDB400F99CB5 /* CreateCollageAlbumSelectionViewController.swift */; };
+		89F99F7629B5BE2A00F99CB5 /* CreateCollageAlbumSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F7529B5BE2A00F99CB5 /* CreateCollageAlbumSelectionDataSource.swift */; };
+		89F99F7829B5C07800F99CB5 /* CreateCollagePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F7729B5C07800F99CB5 /* CreateCollagePhotoCell.swift */; };
 		8C017B762074B782002484E7 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
 		8C017B772074B795002484E7 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
 		8C0332982115F42D00E75EBC /* AnalyticsDimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0332962115F42D00E75EBC /* AnalyticsDimension.swift */; };
@@ -10870,8 +10869,13 @@
 		89F0957629B0BED800F74E7E /* CreateCollageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageViewController.swift; sourceTree = "<group>"; };
 		89F0957B29B0BEFC00F74E7E /* CreateCollage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateCollage.xib; sourceTree = "<group>"; };
 		89F0958129B0C0B200F74E7E /* CreateCollageViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageViewOutput.swift; sourceTree = "<group>"; };
-		89F9207E29B4EC7B0012BB6B /* CreateCollagePhotoSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollagePhotoSelectionController.swift; sourceTree = "<group>"; };
-		89F9208329B4EC9B0012BB6B /* CreateCollagePhotoSelection.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateCollagePhotoSelection.xib; sourceTree = "<group>"; };
+		89F99F6929B5B9A600F99CB5 /* CreateCollageSelectionSegmentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageSelectionSegmentedView.swift; sourceTree = "<group>"; };
+		89F99F6B29B5B9F400F99CB5 /* CreateCollageSelectionSegmentedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageSelectionSegmentedController.swift; sourceTree = "<group>"; };
+		89F99F6D29B5BB7000F99CB5 /* CreateCollagePhotoSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollagePhotoSelectionController.swift; sourceTree = "<group>"; };
+		89F99F6F29B5BD1F00F99CB5 /* CreateCollagePhotoSelectionDataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollagePhotoSelectionDataSourceProtocol.swift; sourceTree = "<group>"; };
+		89F99F7329B5BDB400F99CB5 /* CreateCollageAlbumSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageAlbumSelectionViewController.swift; sourceTree = "<group>"; };
+		89F99F7529B5BE2A00F99CB5 /* CreateCollageAlbumSelectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageAlbumSelectionDataSource.swift; sourceTree = "<group>"; };
+		89F99F7729B5C07800F99CB5 /* CreateCollagePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollagePhotoCell.swift; sourceTree = "<group>"; };
 		8A226C38114FC93E746DB9EF /* Pods-lifeBox_Business_Bundle.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lifeBox_Business_Bundle.appstore.xcconfig"; path = "Target Support Files/Pods-lifeBox_Business_Bundle/Pods-lifeBox_Business_Bundle.appstore.xcconfig"; sourceTree = "<group>"; };
 		8A4620DB4814DE9B2BF69415 /* SplashModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashModuleInput.swift; sourceTree = "<group>"; };
 		8ACB18A67C5CBB40E87DBA64 /* UploadFilesSelectionModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionModuleInput.swift; sourceTree = "<group>"; };
@@ -16798,7 +16802,7 @@
 		89F0953929B0B53700F74E7E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				89F9207D29B4EC220012BB6B /* CreateCollagePhotoSelection */,
+				89F99F6529B5B95500F99CB5 /* CreateCollageSelection */,
 				89F0953A29B0B54900F74E7E /* Cell */,
 				8937904529B327E100DD6903 /* CollageTemplateSections.swift */,
 				89F0957129B0BE5300F74E7E /* CreateCollageViewInput.swift */,
@@ -16855,13 +16859,18 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
-		89F9207D29B4EC220012BB6B /* CreateCollagePhotoSelection */ = {
+		89F99F6529B5B95500F99CB5 /* CreateCollageSelection */ = {
 			isa = PBXGroup;
 			children = (
-				89F9207E29B4EC7B0012BB6B /* CreateCollagePhotoSelectionController.swift */,
-				89F9208329B4EC9B0012BB6B /* CreateCollagePhotoSelection.xib */,
+				89F99F6929B5B9A600F99CB5 /* CreateCollageSelectionSegmentedView.swift */,
+				89F99F6B29B5B9F400F99CB5 /* CreateCollageSelectionSegmentedController.swift */,
+				89F99F6D29B5BB7000F99CB5 /* CreateCollagePhotoSelectionController.swift */,
+				89F99F6F29B5BD1F00F99CB5 /* CreateCollagePhotoSelectionDataSourceProtocol.swift */,
+				89F99F7329B5BDB400F99CB5 /* CreateCollageAlbumSelectionViewController.swift */,
+				89F99F7529B5BE2A00F99CB5 /* CreateCollageAlbumSelectionDataSource.swift */,
+				89F99F7729B5C07800F99CB5 /* CreateCollagePhotoCell.swift */,
 			);
-			path = CreateCollagePhotoSelection;
+			path = CreateCollageSelection;
 			sourceTree = "<group>";
 		};
 		8C0097071F6BD8AA00FA069C /* MoreFilesActions */ = {
@@ -23351,7 +23360,6 @@
 				735766E923AE1B34008589E9 /* StickerCollectionViewCell.xib in Resources */,
 				B5B6B1542170A01E00463260 /* PrepareQuickScroll.xib in Resources */,
 				B5AB5B6D21F9B029003AABB4 /* FacebookAccountConnectionCell.xib in Resources */,
-				89F9208429B4EC9B0012BB6B /* CreateCollagePhotoSelection.xib in Resources */,
 				CF703F4A24E3CC57005EFFFD /* (null) in Resources */,
 				F064FB2F278B209500B461D0 /* PublicSharedItemsTableViewCell.xib in Resources */,
 				98DBC04D2410FB1900926F40 /* AutoSyncHeaderTableViewCell.xib in Resources */,
@@ -23874,7 +23882,6 @@
 				989BDE4B22F47B1E001DDEB2 /* SpotifyAuthViewController.xib in Resources */,
 				CE784E5D22A685FB00662219 /* AlbumCard.xib in Resources */,
 				98231A2024F3A1E700FD16E2 /* SelectionMenuCell.xib in Resources */,
-				89F9208629B4EC9B0012BB6B /* CreateCollagePhotoSelection.xib in Resources */,
 				CF71465B24B597A800D83E60 /* ContactSyncSmallCardView.xib in Resources */,
 				CF71464324B597A800D83E60 /* ContactSyncProgressView.xib in Resources */,
 				0708C78C2677261100680ED6 /* PhotoPrintCard.xib in Resources */,
@@ -24102,7 +24109,6 @@
 				07567DAA2721DFBC00557BCF /* DeleteAccountPopUp.xib in Resources */,
 				B55C970D2559353800623C5C /* PrivateShareLocalSuggestionsViewController.xib in Resources */,
 				CF71469B24B597A900D83E60 /* ContactsBackupHistoryView.xib in Resources */,
-				89F9208529B4EC9B0012BB6B /* CreateCollagePhotoSelection.xib in Resources */,
 				07A8779C26D392A000D7BC03 /* Colors.xcassets in Resources */,
 				F0D2976827F783060082C768 /* MessageAndButtonPopup.xib in Resources */,
 				CF8B697423CBC9D70021B021 /* FreeUpSpacePopUp.xib in Resources */,
@@ -24665,7 +24671,6 @@
 				9823197F24F3A1E700FD16E2 /* AdjustView.xib in Resources */,
 				CF8B723523CBCA280021B021 /* PermissionsView.xib in Resources */,
 				9808B7CB2567EB10001DEF2E /* PrivateShareAccessListHeader.xib in Resources */,
-				89F9208729B4EC9B0012BB6B /* CreateCollagePhotoSelection.xib in Resources */,
 				98231A0324F3A1E700FD16E2 /* PhotoEditChangesBar.xib in Resources */,
 				CF8B723C23CBCA280021B021 /* SwipeableCardCell.xib in Resources */,
 				CF8B723F23CBCA280021B021 /* UserInfoSubViewViewController.xib in Resources */,
@@ -25914,6 +25919,7 @@
 				8C0E8C801FDEBDFF00789C91 /* PasscodeSettingsInteractorIO.swift in Sources */,
 				0766316727CE951500AB4BC2 /* MapLocationDetailService.swift in Sources */,
 				8C0E8C811FDEBDFF00789C91 /* UsageInfoPresenter.swift in Sources */,
+				89F99F7829B5C07800F99CB5 /* CreateCollagePhotoCell.swift in Sources */,
 				8C0E8C841FDEBDFF00789C91 /* PasscodeEnterViewController.swift in Sources */,
 				077D1DB52805B921001C6E72 /* NavigationHeaderView.swift in Sources */,
 				C62239B32049738F0043ED44 /* FaceImageItemsRouterInput.swift in Sources */,
@@ -26258,7 +26264,6 @@
 				8CE20071207CD12900EF3483 /* ServerMessageError.swift in Sources */,
 				CF1BF0ED256E25A200C11E63 /* AllFilesViewController.swift in Sources */,
 				7C4F60A32019D0340033C58F /* CollageCard.swift in Sources */,
-				89F9207F29B4EC7B0012BB6B /* CreateCollagePhotoSelectionController.swift in Sources */,
 				8C0E8D3E1FDEBDFF00789C91 /* CollectionViewSimpleHeaderWithText.swift in Sources */,
 				98BBF0D625024D610038A31E /* PhotoEditImageScrollView.swift in Sources */,
 				984A8ADD252EF95C002FB400 /* FunNavBar.swift in Sources */,
@@ -26450,6 +26455,7 @@
 				CE00B257220334E400A5A696 /* BackButtonActions.swift in Sources */,
 				98231A8224F3A23500FD16E2 /* OldManFilter.swift in Sources */,
 				8C0E8DB31FDEBDFF00789C91 /* ArrayDataSourceForCollectionView.swift in Sources */,
+				89F99F7029B5BD1F00F99CB5 /* CreateCollagePhotoSelectionDataSourceProtocol.swift in Sources */,
 				927E508621E8AADA00E44CC0 /* InstaPickCard.swift in Sources */,
 				8C0E8DB51FDEBDFF00789C91 /* ImportPhotosInteractorOutput.swift in Sources */,
 				8C0E8DB61FDEBDFF00789C91 /* LoginPhoneMailCell.swift in Sources */,
@@ -26474,6 +26480,7 @@
 				8C0E8DBC1FDEBDFF00789C91 /* BottomSelectionTabBarInteractor.swift in Sources */,
 				CE23A0F4205FF5290048267D /* SavingAttemptsCounterByUnigueUserID.swift in Sources */,
 				4ADE0882202DC8370095346F /* FaceImageItemsModuleOutput.swift in Sources */,
+				89F99F7429B5BDB400F99CB5 /* CreateCollageAlbumSelectionViewController.swift in Sources */,
 				8C0E8DBD1FDEBDFF00789C91 /* RegistrationRouterInput.swift in Sources */,
 				73D723ED231D08CF006AE835 /* PaymentModels.swift in Sources */,
 				8C0E8DBE1FDEBDFF00789C91 /* RegistrationRouter.swift in Sources */,
@@ -26741,6 +26748,7 @@
 				B586A5AA21EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */,
 				8C0E8E291FDEBDFF00789C91 /* AutoSyncViewOutput.swift in Sources */,
 				89E51D5022CA111F007A7DBC /* CreateStoryPreviewModuleInput.swift in Sources */,
+				89F99F7629B5BE2A00F99CB5 /* CreateCollageAlbumSelectionDataSource.swift in Sources */,
 				076BD1CF27BC12E3004609E3 /* MapSearchViewInput.swift in Sources */,
 				8C0E8E2A1FDEBDFF00789C91 /* ImportFromInstagramInteractor.swift in Sources */,
 				8980D9382926204B00817FF8 /* DiscoverRouter.swift in Sources */,
@@ -26918,6 +26926,7 @@
 				8C0E8EB61FDEBDFF00789C91 /* BaseFilesGreedPresenter.swift in Sources */,
 				F0571EF7288C1D3000A0D6AC /* ForYouCollectionViewCell.swift in Sources */,
 				52EDD1D929A3A06000D549FC /* SimpleBottomBarCard.swift in Sources */,
+				89F99F6E29B5BB7000F99CB5 /* CreateCollagePhotoSelectionController.swift in Sources */,
 				8C0E8EB71FDEBDFF00789C91 /* BaseFilesGreedInteractorInput.swift in Sources */,
 				8C0E8EB81FDEBDFF00789C91 /* BaseFilesGreedInteractorOutput.swift in Sources */,
 				F028C1192789F3B4005CE6AF /* PublicShareInteractorInput.swift in Sources */,
@@ -27251,6 +27260,7 @@
 				8C0E8F481FDEBDFF00789C91 /* FileInfoViewOutput.swift in Sources */,
 				8CD84C471FDEC68A005CD3B8 /* UploadFilesSelectionDataSource.swift in Sources */,
 				98C19F502485097800527D76 /* ContactSyncApiService.swift in Sources */,
+				89F99F6A29B5B9A600F99CB5 /* CreateCollageSelectionSegmentedView.swift in Sources */,
 				984A512C21E72C18004525F5 /* AnalyzeHistoryViewController.swift in Sources */,
 				8C0E8F491FDEBDFF00789C91 /* FileInfoViewController.swift in Sources */,
 				98B047DB259314750011DAEB /* Contact.m in Sources */,
@@ -27350,6 +27360,7 @@
 				A217E44A21A5B0D00084AA37 /* LeavePremiumConfigurator.swift in Sources */,
 				897A154529B1C8FF0085A3EA /* CreateCollageTableViewCell.swift in Sources */,
 				8C0E8F731FDEBDFF00789C91 /* VisualMusicPlayerInteractor.swift in Sources */,
+				89F99F6C29B5B9F400F99CB5 /* CreateCollageSelectionSegmentedController.swift in Sources */,
 				8C0E8F741FDEBDFF00789C91 /* SelectNameViewInput.swift in Sources */,
 				8C06AC252008AB85003D8E05 /* FreeAppSpaceInitializer.swift in Sources */,
 				7CFCD1D520C15865001BDDC4 /* UILabel+Font.swift in Sources */,
@@ -28250,7 +28261,6 @@
 				F0571EBC288AE6AE00A0D6AC /* ForYouConfigurator.swift in Sources */,
 				CE78489622A685FB00662219 /* HomePageViewController.swift in Sources */,
 				CE78489722A685FB00662219 /* ThingsServiceResponse.swift in Sources */,
-				89F9208129B4EC7B0012BB6B /* CreateCollagePhotoSelectionController.swift in Sources */,
 				CE78489822A685FB00662219 /* InstapickAnalyzesCount.swift in Sources */,
 				CE78489922A685FB00662219 /* LoginViewOutput.swift in Sources */,
 				CE78489A22A685FB00662219 /* FixedAVPlayerViewController.swift in Sources */,
@@ -31637,7 +31647,6 @@
 				CF8B687923CBC9D70021B021 /* OTPViewModuleInput.swift in Sources */,
 				CF8B687A23CBC9D70021B021 /* CampaignContestInfoView.swift in Sources */,
 				0780AB222791681F000760D9 /* RecognizedLine.swift in Sources */,
-				89F9208029B4EC7B0012BB6B /* CreateCollagePhotoSelectionController.swift in Sources */,
 				CF8B687B23CBC9D70021B021 /* CollectionViewHeaderWithText.swift in Sources */,
 				CF8B687C23CBC9D70021B021 /* OTPViewInteractor.swift in Sources */,
 				98231A0624F3A1E700FD16E2 /* SliderView.swift in Sources */,
@@ -33036,7 +33045,6 @@
 				CF8B6F1323CBCA280021B021 /* PremiumListView.swift in Sources */,
 				CF8B6F1423CBCA280021B021 /* ImportPhotosRouter.swift in Sources */,
 				B549B6D024CF099500D39C44 /* Adjustment.swift in Sources */,
-				89F9208229B4EC7B0012BB6B /* CreateCollagePhotoSelectionController.swift in Sources */,
 				CF8B6F1523CBCA280021B021 /* AlbumsDataSourceForCollectionView.swift in Sources */,
 				CF8B6F1623CBCA280021B021 /* SettingsRouterInput.swift in Sources */,
 				CF8B6F1723CBCA280021B021 /* CreateStoryPreviewConfigurator.swift in Sources */,

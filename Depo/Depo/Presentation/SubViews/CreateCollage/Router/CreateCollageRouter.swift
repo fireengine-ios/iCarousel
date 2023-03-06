@@ -14,7 +14,7 @@ final class CreateCollageRouter: CreateCollageRouterInput {
     weak var presenter: CreateCollagePresenter!
     
     func navigateToAlbumDetail(collageTemplate: CollageTemplateElement) {
-        let controller = router.createCollageSelectPhotos(collageTemplate: collageTemplate)
-        router.pushViewController(viewController: controller, animated: false)
+        let vc = router.createCollageSelectPhotos(collageTemplate: collageTemplate)
+        router.pushViewController(viewController: vc, animated: false)
     }
 }

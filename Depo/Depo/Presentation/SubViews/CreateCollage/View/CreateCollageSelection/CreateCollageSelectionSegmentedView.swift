@@ -1,0 +1,177 @@
+//
+//  CreateCollageSelectionSegmentedView.swift
+//  Lifebox
+//
+//  Created by Ozan Salman on 6.03.2023.
+//  Copyright © 2023 LifeTech. All rights reserved.
+//
+
+import UIKit
+
+final class CreateCollageSelectionSegmentedView: UIView {
+    
+    private let topView = UIView()
+    let containerView = UIView()
+    private let transparentGradientView = TransparentGradientView(style: .vertical,
+                                                                  mainColor: AppColor.primaryBackground.color)
+    
+    lazy var segmentedControl: CustomSegmentedView = {
+        let segmentedControl = CustomSegmentedView()
+        return segmentedControl
+    }()
+    
+    let analyzeButton: DarkBlueButton = {
+        let button = DarkBlueButton()
+        button.setTitle(TextConstants.analyzeWithInstapick, for: .normal)
+        button.adjustsFontSizeToFitWidth()
+        button.isHidden = true
+        return button
+    }()
+    
+    let analyzesLeftLabel: InsetsLabel = {
+        let label = InsetsLabel()
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.textColor = AppColor.marineTwoAndWhite.color
+        label.font = UIFont.TurkcellSaturaBolFont(size: 16)
+        label.backgroundColor = ColorConstants.fileGreedCellColor.withAlphaComponent(0.9)
+        let edgeInset: CGFloat = Device.isIpad ? 90 : 15
+        label.insets = UIEdgeInsets(top: 5, left: edgeInset, bottom: 5, right: edgeInset)
+        label.layer.cornerRadius = 3
+        label.layer.masksToBounds = true
+        label.isHidden = true
+        return label
+    }()
+    
+    let subViewForInfo: UIView = {
+        let view = UIView()
+        view.backgroundColor = AppColor.settingsButtonColor.color
+        view.layer.cornerRadius = 20
+        view.layer.masksToBounds = true
+        view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        return view
+    }()
+    
+    let selectedTextLabel: UILabel = {
+       let label = UILabel()
+        label.font = .appFont(.regular, size: 12)
+        label.textColor = AppColor.premiumGradientLabel.color
+        return label
+    }()
+    
+    let actionButton: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.font = .appFont(.regular, size: 14)
+        button.setTitle(TextConstants.cancel, for: .normal)
+        button.setTitleColor(AppColor.premiumGradientLabel.color, for: .normal)
+        return button
+    }()
+    
+    private let buttonText: String
+    private let maxReachedText: String
+    private let needShowSegmentedControll: Bool
+
+    init(buttonText: String, maxReachedText: String, needShowSegmentedControll: Bool) {
+        self.buttonText = buttonText
+        self.maxReachedText = maxReachedText
+        self.needShowSegmentedControll = needShowSegmentedControll
+        
+        super.init(frame: .zero)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        assertionFailure()
+
+        self.buttonText = ""
+        self.maxReachedText = ""
+        self.needShowSegmentedControll = false
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        backgroundColor = AppColor.primaryBackground.color
+        topView.backgroundColor = AppColor.primaryBackground.color
+        containerView.backgroundColor = AppColor.primaryBackground.color
+        setupLayout()
+        
+        analyzeButton.setTitle(buttonText, for: .normal)
+        analyzesLeftLabel.text = maxReachedText
+    }
+    
+    private func setupLayout() {
+        let view = self
+        view.addSubview(topView)
+        topView.addSubview(segmentedControl)
+        view.addSubview(containerView)
+        view.addSubview(transparentGradientView)
+        view.addSubview(analyzeButton)
+        view.addSubview(analyzesLeftLabel)
+        view.addSubview(subViewForInfo)
+        subViewForInfo.addSubview(selectedTextLabel)
+        subViewForInfo.addSubview(actionButton)
+        
+        let edgeOffset: CGFloat = Device.isIpad ? 40 : 12
+        let transparentGradientViewHeight = NumericConstants.instaPickSelectionSegmentedTransparentGradientViewHeight
+        
+        topView.translatesAutoresizingMaskIntoConstraints = false
+        topView.topAnchor.constraint(equalTo: view.topAnchor).activate()
+        topView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: edgeOffset).activate()
+        topView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -edgeOffset).activate()
+        topView.heightAnchor.constraint(equalToConstant: 56).activate()
+        
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        segmentedControl.leadingAnchor.constraint(equalTo: topView.leadingAnchor).activate()
+        segmentedControl.trailingAnchor.constraint(equalTo: topView.trailingAnchor).activate()
+        segmentedControl.centerYAnchor.constraint(equalTo: topView.centerYAnchor).activate()
+        segmentedControl.heightAnchor.constraint(equalToConstant: 40).activate()
+        
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        let topAnchor = needShowSegmentedControll ? topView.bottomAnchor : view.topAnchor
+        containerView.topAnchor.constraint(equalTo: topAnchor).activate()
+        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
+        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
+        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).activate()
+        
+        transparentGradientView.translatesAutoresizingMaskIntoConstraints = false
+        transparentGradientView.bottomAnchor.constraint(equalTo: view.bottomAnchor).activate()
+        transparentGradientView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
+        transparentGradientView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
+        transparentGradientView.heightAnchor.constraint(equalToConstant: transparentGradientViewHeight).activate()
+        
+        analyzeButton.translatesAutoresizingMaskIntoConstraints = false
+        analyzeButton.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 10).activate()
+        analyzeButton.centerYAnchor.constraint(equalTo: transparentGradientView.centerYAnchor).activate()
+        analyzeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).activate()
+        analyzeButton.heightAnchor.constraint(equalToConstant: 54).activate()
+        analyzeButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 206).activate()
+        
+        subViewForInfo.translatesAutoresizingMaskIntoConstraints = false
+        subViewForInfo.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).activate()
+        subViewForInfo.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).activate()
+        subViewForInfo.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).activate()
+        subViewForInfo.heightAnchor.constraint(equalToConstant: 90).activate()
+        
+        selectedTextLabel.translatesAutoresizingMaskIntoConstraints = false
+        selectedTextLabel.leadingAnchor.constraint(equalTo: subViewForInfo.leadingAnchor, constant: 20).activate()
+        selectedTextLabel.topAnchor.constraint(equalTo: subViewForInfo.topAnchor, constant: 20).activate()
+        selectedTextLabel.heightAnchor.constraint(equalToConstant: 20).activate()
+        
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
+        actionButton.trailingAnchor.constraint(equalTo: subViewForInfo.trailingAnchor, constant: -20).activate()
+        actionButton.topAnchor.constraint(equalTo: subViewForInfo.topAnchor, constant: 20).activate()
+        actionButton.heightAnchor.constraint(equalToConstant: 20).activate()
+
+        analyzesLeftLabel.translatesAutoresizingMaskIntoConstraints = false
+        analyzesLeftLabel.bottomAnchor.constraint(equalTo: transparentGradientView.topAnchor,
+                                                  constant: Device.isIpad ? -20 : 0).activate()
+        if Device.isIpad {
+            analyzesLeftLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).activate()
+        } else {
+            analyzesLeftLabel.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: 14).activate()
+            analyzesLeftLabel.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: -14).activate()
+        }
+    }
+}
