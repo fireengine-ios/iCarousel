@@ -629,18 +629,25 @@ extension PhotoVideoController: UICollectionViewDelegate {
         }
         
         if indexPath.section == 0 {
-            print("yilmaz: \(indexPath.section)")
-            view.graceBanner.isHidden = !collectionViewManager.collectionViewLayout.graceBannerState
-            view.closeAction = { [weak self] in
-                self?.collectionViewManager.collectionViewLayout.graceBannerState = false
-                self?.collectionView.reloadData()
-            }
+            setGraceBanner(view: view)
         }
         
         dataSource.getObject(at: indexPath) { object in
             if let mediaItem = object {
                 view.setup(with: mediaItem)
             }
+        }
+    }
+    
+    private func setGraceBanner(view: CollectionViewSimpleHeaderWithText) {
+        let graceBannerState = SingletonStorage.shared.subscriptionsContainGracePeriod && collectionViewManager.collectionViewLayout.graceBannerState
+        
+        collectionViewManager.collectionViewLayout.graceBannerState = graceBannerState
+        collectionViewManager.collectionViewLayout.graceBannerHeight = view.getHightOfGraceBanner()
+        view.graceBanner.isHidden = !graceBannerState
+        view.closeAction = { [weak self] in
+            self?.collectionViewManager.collectionViewLayout.graceBannerState = false
+            self?.collectionView.reloadData()
         }
     }
 }

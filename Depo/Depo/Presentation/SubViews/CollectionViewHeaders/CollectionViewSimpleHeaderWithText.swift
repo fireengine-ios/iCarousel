@@ -77,6 +77,16 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
     func setText(text: String?) {
         titleLabel.text = text
     }
+    
+    func getHightOfGraceBanner() -> CGFloat {
+        // Subsract leadind and trailings
+        let width = UIScreen.main.bounds.width - 48
+        
+        // this is better than string extension hight
+        let height = graceBannerLabel.systemLayoutSizeFitting(CGSize(width: width, height: UIView.layoutFittingCompressedSize.height), withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel).height
+        // Plus top and bottom constraint
+        return height + 32
+    }
 
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
