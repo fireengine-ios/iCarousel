@@ -35,12 +35,35 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
             newValue.accessibilityIdentifier = Constants.titleLabelAccessibilityId
         }
     }
-
+    @IBOutlet weak var graceBannerLabel: UILabel! {
+        willSet {
+            newValue.text = localized(.graceBannerText)
+            newValue.font = .appFont(.regular, size: 14)
+            newValue.textColor = AppColor.label.color
+            newValue.numberOfLines = 0
+        }
+    }
+    
+    @IBOutlet weak var graceBanner: UIView! {
+        willSet {
+            newValue.isHidden = true
+        }
+    }
+    
+    var closeAction: VoidHandler?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = AppColor.background.color
     }
-
+    
+    @IBAction func graceBannerClose(_ sender: Any) {
+        graceBanner.isHidden = true
+        //graceBanner.removeFromSuperview()
+        closeAction?()
+        layoutIfNeeded()
+    }
+    
     func setup(with object: MediaItem) {
         let title: String
         if object.monthValue != nil, let date = object.sortingDate as Date? {
@@ -53,6 +76,16 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
 
     func setText(text: String?) {
         titleLabel.text = text
+    }
+    
+    func getHightOfGraceBanner() -> CGFloat {
+        // Subsract leadind and trailings
+        let width = UIScreen.main.bounds.width - 48
+        
+        // this is better than string extension hight
+        let height = graceBannerLabel.systemLayoutSizeFitting(CGSize(width: width, height: UIView.layoutFittingCompressedSize.height), withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel).height
+        // Plus top and bottom constraint
+        return height + 32
     }
 
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
