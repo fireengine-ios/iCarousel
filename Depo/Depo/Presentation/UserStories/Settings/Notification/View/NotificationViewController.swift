@@ -16,6 +16,7 @@ enum NotificationDisplayConfiguration {
 
 final class NotificationViewController: BaseViewController {
     var output: NotificationViewOutput!
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     private lazy var tableView: QuickSelectTableView = {
         let view = QuickSelectTableView()
@@ -426,9 +427,17 @@ extension NotificationViewController: BaseItemInputPassingProtocol {
     
     func delete(all: Bool) {
         if all {
-            deleteAllCells()
+            showAllDeletePopUp { [weak self] in
+                self?.deleteAllCells()
+            }
         } else {
-            deleteSelectedCells()
+            if selectedIndexes.count == output.notificationsCount() {
+                showAllDeletePopUp { [weak self] in
+                    self?.deleteSelectedCells()
+                }
+            } else {
+                deleteSelectedCells()
+            }
         }
     }
     
@@ -495,5 +504,37 @@ extension NotificationViewController: BaseItemInputPassingProtocol {
     
     func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
         selectedItemsCallback([])
+    }
+    
+    func showAllDeletePopUp(_ onOk: @escaping VoidHandler) {
+        let cancelHandler: PopUpButtonHandler = { [weak self] vc in
+            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .delete, label: .cancel)
+            vc.close()
+        }
+        
+        let okHandler: PopUpButtonHandler = { [weak self] vc in
+            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .delete, label: .ok)
+            vc.close {
+                onOk()
+            }
+        }
+        
+        trackScreen(.fileOperationConfirmPopup(.delete))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeletePermanentlyConfirmPopUp())
+        
+        let popup = PopUpController.with(title: TextConstants.deleteConfirmationPopupTitle,
+                                         message: TextConstants.deleteItemsConfirmationPopupText,
+                                         image: .delete,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.ok,
+                                         firstAction: cancelHandler,
+                                         secondAction: okHandler)
+        
+        popup.open()
+    }
+    
+    private func trackScreen(_ screen: AnalyticsAppScreens) {
+        analyticsService.logScreen(screen: screen)
+        analyticsService.trackDimentionsEveryClickGA(screen: screen)
     }
 }
