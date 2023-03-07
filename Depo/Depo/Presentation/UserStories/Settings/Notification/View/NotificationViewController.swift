@@ -151,6 +151,9 @@ final class NotificationViewController: BaseViewController {
         isSelectionObject = 0
         updateSelectedItemsCount()
         updateBarsForSelectedObjects()
+        
+        // BottomSheet height
+        tableView.contentInset.bottom = 110
     }
     
     private func stopEditingMode() {
@@ -163,6 +166,7 @@ final class NotificationViewController: BaseViewController {
         deselectAllCells()
         bottomBarManager.hide()
         bottomBarCard.isHidden = true
+        tableView.contentInset.bottom = 0
     }
     
     private func updateBarsForSelectedObjects() {
