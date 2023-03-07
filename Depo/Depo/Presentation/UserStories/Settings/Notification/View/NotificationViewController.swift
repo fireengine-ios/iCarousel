@@ -351,6 +351,7 @@ extension NotificationViewController: UITableViewDelegate {
             let model = output.getNotification(at: indexPath.row)
             model.status = "READ"
             cell.updateStatus(model: model)
+            cell.updateSelection(isSelectionMode: isSelectingMode, animated: false)
             output.read(with: model.communicationNotificationId?.description ?? "")
             
             output.insertUpdatedCells(member: el)
