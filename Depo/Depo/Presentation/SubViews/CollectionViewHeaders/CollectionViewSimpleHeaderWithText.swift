@@ -39,7 +39,7 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
         willSet {
             newValue.text = localized(.graceBannerText)
             newValue.font = .appFont(.regular, size: 14)
-            newValue.textColor = AppColor.label.color
+            newValue.textColor = AppColor.labelSingle.color
             newValue.numberOfLines = 0
         }
     }
