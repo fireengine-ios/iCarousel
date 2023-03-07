@@ -16,6 +16,7 @@ enum NotificationDisplayConfiguration {
 
 final class NotificationViewController: BaseViewController {
     var output: NotificationViewOutput!
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     private lazy var tableView: QuickSelectTableView = {
         let view = QuickSelectTableView()
@@ -34,6 +35,7 @@ final class NotificationViewController: BaseViewController {
     
     private lazy var emptyView: NotificationEmptyView = {
         let view = NotificationEmptyView()
+        view.isHidden = true
         return view
     }()
     
@@ -42,6 +44,14 @@ final class NotificationViewController: BaseViewController {
                                font: .TurkcellSaturaDemFont(size: 19.0),
                                target: self,
                                selector: #selector(onCancelSelectionButton))
+    }()
+    
+    private lazy var more: NavBarWithAction = {
+        let view = NavBarWithAction(navItem: NavigationBarList().more) { [weak self] item in
+            self?.onMorePressed(item)
+        }
+        view.navItem.isEnabled = false
+        return view
     }()
     
     private lazy var threeDotMenuManager = NotificationThreeDotMenuManager(delegate: self)
@@ -113,11 +123,7 @@ final class NotificationViewController: BaseViewController {
     }
     
     private func configureNavBarActions() {
-        let more = NavBarWithAction(navItem: NavigationBarList().more) { [weak self] item in
-            self?.onMorePressed(item)
-        }
-        let rightActions: [NavBarWithAction] = [more]
-        navBarConfigurator.configure(right: rightActions, left: [])
+        navBarConfigurator.configure(right: [more], left: [])
         navBarRightItems = navBarConfigurator.rightItems
     }
     
@@ -146,6 +152,9 @@ final class NotificationViewController: BaseViewController {
         isSelectionObject = 0
         updateSelectedItemsCount()
         updateBarsForSelectedObjects()
+        
+        // BottomSheet height
+        tableView.contentInset.bottom = 110
     }
     
     private func stopEditingMode() {
@@ -158,6 +167,7 @@ final class NotificationViewController: BaseViewController {
         deselectAllCells()
         bottomBarManager.hide()
         bottomBarCard.isHidden = true
+        tableView.contentInset.bottom = 0
     }
     
     private func updateBarsForSelectedObjects() {
@@ -278,6 +288,10 @@ extension NotificationViewController: NotificationViewInput {
     
     func setEmptyView(as hidden: Bool) {
         emptyView.isHidden = hidden
+        
+        if !output.onlyRead && !output.onlyShowAlerts {
+            more.navItem.isEnabled = hidden
+        }
     }
     
     func reloadTimer() {
@@ -338,6 +352,7 @@ extension NotificationViewController: UITableViewDelegate {
             let model = output.getNotification(at: indexPath.row)
             model.status = "READ"
             cell.updateStatus(model: model)
+            cell.updateSelection(isSelectionMode: isSelectingMode, animated: false)
             output.read(with: model.communicationNotificationId?.description ?? "")
             
             output.insertUpdatedCells(member: el)
@@ -412,9 +427,17 @@ extension NotificationViewController: BaseItemInputPassingProtocol {
     
     func delete(all: Bool) {
         if all {
-            deleteAllCells()
+            showAllDeletePopUp { [weak self] in
+                self?.deleteAllCells()
+            }
         } else {
-            deleteSelectedCells()
+            if selectedIndexes.count == output.notificationsCount() {
+                showAllDeletePopUp { [weak self] in
+                    self?.deleteSelectedCells()
+                }
+            } else {
+                deleteSelectedCells()
+            }
         }
     }
     
@@ -481,5 +504,37 @@ extension NotificationViewController: BaseItemInputPassingProtocol {
     
     func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
         selectedItemsCallback([])
+    }
+    
+    func showAllDeletePopUp(_ onOk: @escaping VoidHandler) {
+        let cancelHandler: PopUpButtonHandler = { [weak self] vc in
+            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .delete, label: .cancel)
+            vc.close()
+        }
+        
+        let okHandler: PopUpButtonHandler = { [weak self] vc in
+            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .delete, label: .ok)
+            vc.close {
+                onOk()
+            }
+        }
+        
+        trackScreen(.fileOperationConfirmPopup(.delete))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeletePermanentlyConfirmPopUp())
+        
+        let popup = PopUpController.with(title: TextConstants.deleteConfirmationPopupTitle,
+                                         message: TextConstants.deleteItemsConfirmationPopupText,
+                                         image: .delete,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.ok,
+                                         firstAction: cancelHandler,
+                                         secondAction: okHandler)
+        
+        popup.open()
+    }
+    
+    private func trackScreen(_ screen: AnalyticsAppScreens) {
+        analyticsService.logScreen(screen: screen)
+        analyticsService.trackDimentionsEveryClickGA(screen: screen)
     }
 }

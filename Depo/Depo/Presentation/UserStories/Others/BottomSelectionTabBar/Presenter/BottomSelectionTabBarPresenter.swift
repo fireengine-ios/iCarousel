@@ -67,13 +67,19 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     
     func setupNotificationTabBarWith(status: Bool, originalConfig: EditingBarConfig) {
         let selectAllIndex = originalConfig.elementsConfig.firstIndex(of: .selectAll)
-        let deleteAllIndex = originalConfig.elementsConfig.firstIndex(of: .delete)
+        let deleteIndex = originalConfig.elementsConfig.firstIndex(of: .delete)
         
-        let validIndexes = [selectAllIndex, deleteAllIndex].compactMap { $0 }
-        let unValidIndexes = [deleteAllIndex].compactMap { $0 }
+        let deleteAllIndex = originalConfig.elementsConfig.firstIndex(of: .deleteAll)
         
-        guard !validIndexes.isEmpty else {
-            return
+        var validIndexes = [selectAllIndex, deleteIndex].compactMap { $0 }
+        var unValidIndexes = [deleteIndex].compactMap { $0 }
+        
+        view.setupBar(with: originalConfig)
+        
+        if let indexDelete = deleteAllIndex, let indexSelect = selectAllIndex {
+            validIndexes.removeFirst()
+            validIndexes.append(indexDelete)
+            unValidIndexes.append(indexSelect)
         }
         
         view.disableItems(at: unValidIndexes)
@@ -83,7 +89,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         }
 
         view.enableItems(at: validIndexes)
-        view.setupBar(with: originalConfig)
     }
     
     override func dismiss(animated: Bool) {

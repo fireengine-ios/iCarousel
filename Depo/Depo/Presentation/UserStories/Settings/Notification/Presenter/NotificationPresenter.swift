@@ -177,6 +177,12 @@ extension NotificationPresenter: NotificationInteractorOutput {
     
     func success(with notifications: [NotificationServiceResponse]) {
         view?.stopActivityIndicator()
+        
+        if notifications.isEmpty {
+            self.notificationsForDisplay = []
+            self.notifications = []
+            return
+        }
 
         for (index, el) in notifications.enumerated() {
             self.notificationsForDisplay.append(el)

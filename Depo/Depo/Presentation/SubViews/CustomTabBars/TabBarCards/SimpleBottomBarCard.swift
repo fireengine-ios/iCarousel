@@ -57,7 +57,7 @@ class SimpleBottomBarCard: UIView {
     }
     
     func setCount(with count: Int) {
-        countLabel.text = "\(count) \( count == 0 ? "" : TextConstants.accessibilitySelected)"
+        countLabel.text = "\(count == 0 ? "" : String(count) + " " + TextConstants.accessibilitySelected)"
     }
     
     func setLayout(with parent: UIView) {

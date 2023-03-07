@@ -39,7 +39,7 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
         willSet {
             newValue.text = localized(.graceBannerText)
             newValue.font = .appFont(.regular, size: 14)
-            newValue.textColor = AppColor.label.color
+            newValue.textColor = AppColor.labelSingle.color
             newValue.numberOfLines = 0
         }
     }
@@ -58,10 +58,11 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
     }
     
     @IBAction func graceBannerClose(_ sender: Any) {
-        graceBanner.isHidden = true
-        //graceBanner.removeFromSuperview()
-        closeAction?()
-        layoutIfNeeded()
+        UIView.animate(withDuration: 1.0) { [weak self] in
+            self?.graceBanner.isHidden = true
+            self?.closeAction?()
+            self?.layoutIfNeeded()
+        }
     }
     
     func setup(with object: MediaItem) {
@@ -83,7 +84,10 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
         let width = UIScreen.main.bounds.width - 48
         
         // this is better than string extension hight
-        let height = graceBannerLabel.systemLayoutSizeFitting(CGSize(width: width, height: UIView.layoutFittingCompressedSize.height), withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel).height
+        let height = graceBannerLabel.systemLayoutSizeFitting(CGSize(width: width,
+                                                                     height: UIView.layoutFittingCompressedSize.height),
+                                                              withHorizontalFittingPriority: .required,
+                                                              verticalFittingPriority: .fittingSizeLevel).height
         // Plus top and bottom constraint
         return height + 32
     }

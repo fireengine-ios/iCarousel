@@ -1094,6 +1094,10 @@
 		4BF7CF4C223103E2002DAF37 /* DropDownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BF7CF48223103E1002DAF37 /* DropDownTableViewCell.xib */; };
 		4BF7CF4E223103E2002DAF37 /* DropDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF7CF49223103E2002DAF37 /* DropDownTableViewCell.swift */; };
 		4BF7CF50223103E2002DAF37 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF7CF4A223103E2002DAF37 /* DropDownView.swift */; };
+		52499E2129B755CA00266BA6 /* NSMutableAttributedString+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52499E2029B755CA00266BA6 /* NSMutableAttributedString+Ext.swift */; };
+		52499E2229B755CA00266BA6 /* NSMutableAttributedString+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52499E2029B755CA00266BA6 /* NSMutableAttributedString+Ext.swift */; };
+		52499E2329B755CA00266BA6 /* NSMutableAttributedString+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52499E2029B755CA00266BA6 /* NSMutableAttributedString+Ext.swift */; };
+		52499E2429B755CA00266BA6 /* NSMutableAttributedString+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52499E2029B755CA00266BA6 /* NSMutableAttributedString+Ext.swift */; };
 		52501E1D29623BE40000376C /* SwiftTryCatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 52501E1C29623BE40000376C /* SwiftTryCatch.m */; settings = {COMPILER_FLAGS = "-fobjc-arc-exceptions"; }; };
 		52501E1E29623BE40000376C /* SwiftTryCatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 52501E1C29623BE40000376C /* SwiftTryCatch.m */; };
 		52501E1F29623BE40000376C /* SwiftTryCatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 52501E1C29623BE40000376C /* SwiftTryCatch.m */; };
@@ -10281,6 +10285,7 @@
 		519FC5F5469BA37B42AA5339 /* Pods-BilloNotificationService.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BilloNotificationService.enterprise.xcconfig"; path = "Target Support Files/Pods-BilloNotificationService/Pods-BilloNotificationService.enterprise.xcconfig"; sourceTree = "<group>"; };
 		51B73FE0148359D56DBAC42C /* SplashViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashViewOutput.swift; sourceTree = "<group>"; };
 		522A5BBD8B55E5DF0DE0472B /* Pods-Billo.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billo.enterprise.xcconfig"; path = "Target Support Files/Pods-Billo/Pods-Billo.enterprise.xcconfig"; sourceTree = "<group>"; };
+		52499E2029B755CA00266BA6 /* NSMutableAttributedString+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Ext.swift"; sourceTree = "<group>"; };
 		52501E1B29623BE40000376C /* SwiftTryCatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftTryCatch.h; sourceTree = "<group>"; };
 		52501E1C29623BE40000376C /* SwiftTryCatch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwiftTryCatch.m; sourceTree = "<group>"; };
 		52501E5A298CA1270000376C /* CachingPlayerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingPlayerItem.swift; sourceTree = "<group>"; };
@@ -15999,6 +16004,7 @@
 				CED6442D2060E776009AFC12 /* StorageVars.swift */,
 				98DD03F52542E634006DE0BD /* UIImageEffects.swift */,
 				F01244D8283AEC6000835B4E /* JWTTokenDecoder.swift */,
+				52499E2029B755CA00266BA6 /* NSMutableAttributedString+Ext.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -27190,6 +27196,7 @@
 				B5711E0020C13F4300E72A9D /* String+ShareActivity.swift in Sources */,
 				8C0E8F841FDEBDFF00789C91 /* SelectNameRouter.swift in Sources */,
 				07DB93C52860B46900D5CACF /* IAPIntroEligibilityStatus.swift in Sources */,
+				52499E2129B755CA00266BA6 /* NSMutableAttributedString+Ext.swift in Sources */,
 				CF71460424B597A800D83E60 /* ContactDetailCell.swift in Sources */,
 				B50B4A6A220C27C20056FC86 /* SocialAccountRemoveConnectionCell.swift in Sources */,
 				8CD2B3B11FE7B3BD00280547 /* UIButton+Color.swift in Sources */,
@@ -29280,6 +29287,7 @@
 				CE784BCE22A685FB00662219 /* InstaPickRoutingService.swift in Sources */,
 				CE784BCF22A685FB00662219 /* ActionSheetPredetermendConfigs.swift in Sources */,
 				B560CCFD255D316D00199EA2 /* WrapDataSorting.swift in Sources */,
+				52499E2329B755CA00266BA6 /* NSMutableAttributedString+Ext.swift in Sources */,
 				CE784BD022A685FB00662219 /* BackButton.swift in Sources */,
 				03056AC423BA23C000F6D57A /* NetmeraService.swift in Sources */,
 				CE784BD122A685FB00662219 /* FileInfoConfigurator.swift in Sources */,
@@ -31251,6 +31259,7 @@
 				CF8B681023CBC9D70021B021 /* SpotifyCollectionViewDataSource.swift in Sources */,
 				CF8B681123CBC9D70021B021 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,
 				CF8B681223CBC9D70021B021 /* TwoFactorAuthenticationCell.swift in Sources */,
+				52499E2229B755CA00266BA6 /* NSMutableAttributedString+Ext.swift in Sources */,
 				F04E5C2627EB2DBD00CAAEB5 /* AppleGoogleUser.swift in Sources */,
 				CF8B681323CBC9D70021B021 /* LeavePremiumRouterInput.swift in Sources */,
 				0305A35E23D5C64D004D1EC7 /* CarouselPagerReusableViewController.swift in Sources */,
@@ -31637,6 +31646,7 @@
 				CF8B6BD423CBCA280021B021 /* IntroduceViewController.swift in Sources */,
 				CF8B6BD523CBCA280021B021 /* PermissionType.swift in Sources */,
 				CF703F4924E3CC4E005EFFFD /* (null) in Sources */,
+				52499E2429B755CA00266BA6 /* NSMutableAttributedString+Ext.swift in Sources */,
 				9808B7D12567EB10001DEF2E /* PrivateShareAccessListCell.swift in Sources */,
 				CF8B6BD623CBCA280021B021 /* MoreActionsConfig.swift in Sources */,
 				CF8B6BD723CBCA280021B021 /* ServerValueError.swift in Sources */,
