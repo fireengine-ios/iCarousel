@@ -24,6 +24,7 @@ class NotificationTableViewCell: UITableViewCell {
     
     private lazy var descriptionLabel: UILabel = {
         let view = UILabel()
+        view.textColor = AppColor.label.color
         view.font = .appFont(.regular, size: 12)
         view.textAlignment = .left
         view.numberOfLines = 0
@@ -57,7 +58,7 @@ class NotificationTableViewCell: UITableViewCell {
     private lazy var containerView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 16
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor.background.color
         view.layer.borderColor = AppColor.tint.cgColor
         view.layer.borderWidth = 2
         return view
@@ -274,8 +275,9 @@ extension NotificationTableViewCell {
             .documentType: NSAttributedString.DocumentType.html,
             .characterEncoding: String.Encoding.utf8.rawValue
           ]
-          if let attributedString = try? NSAttributedString(data: data, options: options, documentAttributes: nil) {
-
+          if let attributedString = try? NSMutableAttributedString(data: data, options: options, documentAttributes: nil) {
+            
+              attributedString.setBaseColor(baseColor: AppColor.label.color)
             // Assign attributed string to attribute of your choice
             return attributedString
           }
