@@ -73,6 +73,8 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private var viewType: ElementTypes = .galleryAll
     var refresher: UIRefreshControl?
     
+    private let service = NotificationService()
+    
     // MARK: - life cycle
     
     override func viewDidLoad() {
@@ -138,6 +140,8 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        fetchNotification()
 
         // TODO: Facelift - Analytics event for new gallery screen
 //        self.trackPhotoVideoScreen(isPhoto: isPhoto)
@@ -163,7 +167,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
                 self.updateBarsForSelectedObjects()
             }
         }
-        
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -1129,6 +1132,20 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
     }
 }
 
+extension PhotoVideoController {
+    func fetchNotification() {
+        service.fetch(
+            success: { [weak self] response in
+                guard let notification = response as? NotificationResponse else { return }
+                DispatchQueue.main.async {
+                    let count = notification.list.map({$0.status == "UNREAD"}).count
+                    self?.settingsNavButton.setnotificationCount(with: count)
+                }
+            }, fail: { [weak self] errorResponse in
+                self?.settingsNavButton.setnotificationCount(with: 0)
+        })
+    }
+}
 
 extension PhotoVideoController: UIDropInteractionDelegate {
     func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {

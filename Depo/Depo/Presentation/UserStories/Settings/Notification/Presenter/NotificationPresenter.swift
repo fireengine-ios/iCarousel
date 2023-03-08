@@ -178,13 +178,20 @@ extension NotificationPresenter: NotificationInteractorOutput {
     func success(with notifications: [NotificationServiceResponse]) {
         view?.stopActivityIndicator()
         
-        if notifications.isEmpty {
+        let inAppNotification = notifications.compactMap ({ el -> NotificationServiceResponse? in
+            if el.notificationType == "IN_APP" {
+                return el
+            }
+            return nil
+        })
+        
+        if inAppNotification.isEmpty {
             self.notificationsForDisplay = []
             self.notifications = []
             return
         }
 
-        for (index, el) in notifications.enumerated() {
+        for (index, el) in inAppNotification.enumerated() {
             self.notificationsForDisplay.append(el)
             self.notifications.append(el)
             
@@ -202,6 +209,8 @@ extension NotificationPresenter: NotificationInteractorOutput {
     
     func fail(errorResponse: ErrorResponse) {
         view?.stopActivityIndicator()
+        self.notificationsForDisplay = []
+        self.notifications = []
     }
     
 }
