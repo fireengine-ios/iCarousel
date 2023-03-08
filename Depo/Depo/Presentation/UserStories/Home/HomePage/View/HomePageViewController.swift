@@ -164,7 +164,6 @@ extension HomePageViewController: HeaderContainingViewControllerChild {
 
 // MARK: - HomeCollectionViewDataSourceDelegate
 extension HomePageViewController: HomeCollectionViewDataSourceDelegate {
-    
     //MARK: CardsShareButtonDelegate
     
     func share(item: BaseDataSourceItem, type: CardShareType) {
@@ -176,25 +175,6 @@ extension HomePageViewController: HomeCollectionViewDataSourceDelegate {
     
     func numberOfColumns() -> Int {
         return Device.isIpad ? 2 : 1
-    }
-    
-    func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
-        return GraceBannerView.getHeight()
-    }
-    
-    // MARK: UICollectionViewDelegate
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-        case UICollectionView.elementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "GraceBannerView", for: indexPath)
-            if let headerView = headerView as? GraceBannerView {
-                headerView.delegate = self
-            }
-            return headerView
-        default:
-            assert(false, "Unexpected element kind")
-            return UICollectionReusableView()
-        }
     }
     
     func didReloadCollectionView(_ collectionView: UICollectionView) {
@@ -397,12 +377,5 @@ extension HomePageViewController: ShareCardContentManagerDelegate {
     
     func shareOperationFinished() {
         hideSpinner()
-    }
-}
-
-extension HomePageViewController: GraceBannerViewDelegate {
-    func closeButtonTapped() {
-        homePageDataSource.shouldHideGraceBanner = true
-        collectionView.reloadData()
     }
 }

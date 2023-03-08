@@ -8,6 +8,11 @@
 
 import UIKit
 
+class NotificationCountHolder {
+    var count = 0
+    static let shared = NotificationCountHolder()
+}
+
 class BaseViewController: ViewController {
     var keyboardHeight: CGFloat = 0
     var needToShowTabBar: Bool = false
@@ -15,7 +20,8 @@ class BaseViewController: ViewController {
     var parentUUID: String = ""
     var segmentImage: SegmentedImage?
     
-    var settingsNavButton = NavigationHeaderButton()
+    private var settingsNavButton = NavigationHeaderButton()
+    private let service = NotificationService()
 
     var customTabBarController: TabBarViewController? {
         var parent = self.parent
@@ -47,6 +53,9 @@ class BaseViewController: ViewController {
         customTabBarController?.setBottomBarsHidden(!needToShowTabBar)
         navigationItem.backBarButtonItem = UIBarButtonItem(
             title: "", style: .plain, target: nil, action: nil)
+        
+        
+        settingsNavButton.setnotificationCount(with: NotificationCountHolder.shared.count)
     }
 
     deinit {
@@ -173,6 +182,23 @@ extension BaseViewController: UIViewControllerTransitioningDelegate {
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return pushPopAnimatorForPresentation(presenting: false)
+    }
+}
+
+extension BaseViewController {
+    func fetchNotificationCount() {
+        service.fetch(
+            success: { [weak self] response in
+                guard let notification = response as? NotificationResponse else { return }
+                DispatchQueue.main.async {
+                    let count = notification.list.map({$0.status == "UNREAD" && $0.notificationType == "IN_APP"}).filter({$0}).count
+                    NotificationCountHolder.shared.count = count
+                    self?.settingsNavButton.setnotificationCount(with: count)
+                }
+            }, fail: { [weak self] errorResponse in
+                NotificationCountHolder.shared.count = 0
+                self?.settingsNavButton.setnotificationCount(with: 0)
+        })
     }
 }
 
