@@ -1570,6 +1570,7 @@
 		89CC89F623AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CC89F123AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift */; };
 		89CC89F823AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89CC89F223AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib */; };
 		89CC89FA23AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89CC89F223AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib */; };
+		89CDEBAA29B7122A00870B14 /* CreateCollagePreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CDEBA929B7122A00870B14 /* CreateCollagePreviewController.swift */; };
 		89D1EBEB23EC3BF000092031 /* UIApplication+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D1EBE923EC3BF000092031 /* UIApplication+Display.swift */; };
 		89D1EBEC23EC3BF000092031 /* UIApplication+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D1EBE923EC3BF000092031 /* UIApplication+Display.swift */; };
 		89D1EBEE23EC3BF000092031 /* UIApplication+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D1EBE923EC3BF000092031 /* UIApplication+Display.swift */; };
@@ -10864,6 +10865,7 @@
 		89959F072934B361000135DE /* CollageInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollageInitializer.swift; sourceTree = "<group>"; };
 		89CC89F123AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSSmartAlbumWarningPopUp.swift; sourceTree = "<group>"; };
 		89CC89F223AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSSmartAlbumWarningPopUp.xib; sourceTree = "<group>"; };
+		89CDEBA929B7122A00870B14 /* CreateCollagePreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollagePreviewController.swift; sourceTree = "<group>"; };
 		89D1EBE923EC3BF000092031 /* UIApplication+Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Display.swift"; sourceTree = "<group>"; };
 		89DA5D0123ACF635000FA31D /* SmartAlbumWarningPopUpsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartAlbumWarningPopUpsFactory.swift; sourceTree = "<group>"; };
 		89DAB3D823AB513600D4337D /* HSCompletionPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HSCompletionPopUp.xib; sourceTree = "<group>"; };
@@ -16772,6 +16774,14 @@
 			path = HideSmashPopUps;
 			sourceTree = "<group>";
 		};
+		89CDEBA529B711ED00870B14 /* CreateCollagePreview */ = {
+			isa = PBXGroup;
+			children = (
+				89CDEBA929B7122A00870B14 /* CreateCollagePreviewController.swift */,
+			);
+			path = CreateCollagePreview;
+			sourceTree = "<group>";
+		};
 		89DCC5D72403AC1600488F1F /* SubscriptionFeaturesView */ = {
 			isa = PBXGroup;
 			children = (
@@ -16823,6 +16833,7 @@
 		89F0953929B0B53700F74E7E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				89CDEBA529B711ED00870B14 /* CreateCollagePreview */,
 				89F99F6529B5B95500F99CB5 /* CreateCollageSelection */,
 				89F0953A29B0B54900F74E7E /* Cell */,
 				8937904529B327E100DD6903 /* CollageTemplateSections.swift */,
@@ -26905,6 +26916,7 @@
 				8C0E8E8F1FDEBDFF00789C91 /* CustomErrors.swift in Sources */,
 				07C6D4EA284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.swift in Sources */,
 				8C0E8E921FDEBDFF00789C91 /* CircleYellowButton.swift in Sources */,
+				89CDEBAA29B7122A00870B14 /* CreateCollagePreviewController.swift in Sources */,
 				4A56D5B0202AF51D003A4624 /* FaceImageAddNameViewController.swift in Sources */,
 				07FA029427DD38AD0006E56D /* ChangeEmailPopUp.swift in Sources */,
 				4A0AC1512087378F00032CC7 /* PeriodicContactSyncInteractorInput.swift in Sources */,

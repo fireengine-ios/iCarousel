@@ -35,6 +35,7 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
     private var segmentedViewControllers: [UIViewController] = []
     private var delegates = MulticastDelegate<CreateCollageSelectionSegmentedControllerDelegate>()
     private var collageTemplate: CollageTemplateElement?
+    let router = RouterVC()
     
     private lazy var albumsTabIndex: Int = {
         if let index = segmentedViewControllers.firstIndex(of: albumsVC) {
@@ -156,6 +157,8 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
                 print("Collage Screen")
                 let imagesUrls = self.selectedItems.compactMap({ $0.metadata?.mediumUrl })
                 let ids = self.selectedItems.compactMap({ $0.uuid })
+                let vc = self.router.createCollagePreview(collageTemplate: self.collageTemplate!, selectedItems: self.selectedItems)
+                self.router.pushViewController(viewController: vc, animated: false)
             })
         }
     }

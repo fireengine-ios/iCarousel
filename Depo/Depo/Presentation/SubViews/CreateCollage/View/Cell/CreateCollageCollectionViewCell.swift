@@ -28,7 +28,6 @@ class CreateCollageCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(collageTemplateModel: CollageTemplateElement) {
-        //thumbnailImage.image = UIImage(named: "AppIcon")
         thumbnailImage.sd_setImage(with: URL(string: collageTemplateModel.smallThumbnailImagePath))
     }
 }
