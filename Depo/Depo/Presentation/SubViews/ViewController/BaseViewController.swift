@@ -14,6 +14,8 @@ class BaseViewController: ViewController {
     var floatingButtonsArray = [FloatingButtonsType]()
     var parentUUID: String = ""
     var segmentImage: SegmentedImage?
+    
+    var settingsNavButton = NavigationHeaderButton()
 
     var customTabBarController: TabBarViewController? {
         var parent = self.parent
@@ -100,8 +102,9 @@ class BaseViewController: ViewController {
     // MARK: - Header Actions
 
     func setDefaultNavigationHeaderActions() {
+        settingsNavButton = NavigationHeaderButton(type: .settings, target: self, action: #selector(showSettings))
         headerContainingViewController?.setHeaderLeftItems([
-            NavigationHeaderButton(type: .settings, target: self, action: #selector(showSettings))
+            settingsNavButton
         ])
         headerContainingViewController?.setHeaderRightItems([
             NavigationHeaderButton(type: .search, target: self, action: #selector(showSearch)),
@@ -110,8 +113,9 @@ class BaseViewController: ViewController {
     }
     
     func setDefaultNavigationHeaderActionsWithoutPlusButton() {
+        settingsNavButton = NavigationHeaderButton(type: .settings, target: self, action: #selector(showSettings))
         headerContainingViewController?.setHeaderLeftItems([
-            NavigationHeaderButton(type: .settings, target: self, action: #selector(showSettings))
+            settingsNavButton
         ])
         headerContainingViewController?.setHeaderRightItems([
             NavigationHeaderButton(type: .search, target: self, action: #selector(showSearch))
