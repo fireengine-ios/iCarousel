@@ -1138,7 +1138,7 @@ extension PhotoVideoController {
             success: { [weak self] response in
                 guard let notification = response as? NotificationResponse else { return }
                 DispatchQueue.main.async {
-                    let count = notification.list.map({$0.status == "UNREAD"}).count
+                    let count = notification.list.map({$0.status == "UNREAD" && $0.notificationType == "IN_APP"}).filter({$0}).count
                     self?.settingsNavButton.setnotificationCount(with: count)
                 }
             }, fail: { [weak self] errorResponse in

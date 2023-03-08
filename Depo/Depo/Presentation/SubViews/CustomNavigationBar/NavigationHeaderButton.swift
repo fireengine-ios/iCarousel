@@ -14,7 +14,6 @@ final class NavigationHeaderButton: UIButton {
         let view = UILabel()
         view.font = .appFont(.bold, size: 12)
         view.textColor = .white
-        view.isHidden = true
         return view
     }()
     
@@ -43,9 +42,9 @@ extension NavigationHeaderButton {
     
     private func addNotification() {
         let earingView = UIView()
-        
+        earingView.isHidden = true
         earingView.backgroundColor = AppColor.notification.color
-        earingView.layer.cornerRadius = 8
+        earingView.layer.cornerRadius = 9
         
         earingView.addSubview(notificationLabel)
         notificationLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -57,13 +56,15 @@ extension NavigationHeaderButton {
         earingView.translatesAutoresizingMaskIntoConstraints = false
         earingView.topAnchor.constraint(equalTo: topAnchor, constant: -6).activate()
         earingView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 10).activate()
-        earingView.heightAnchor.constraint(equalToConstant: 16).activate()
-        earingView.widthAnchor.constraint(equalToConstant: 16).activate()
+        earingView.heightAnchor.constraint(equalToConstant: 18).activate()
+        earingView.widthAnchor.constraint(equalToConstant: 18).activate()
     }
     
     func setnotificationCount(with number: Int) {
         notificationLabel.superview?.isHidden = number == 0 ? true : false
-        notificationLabel.text = String(number)
+        
+        let strNum = String(number)
+        notificationLabel.text = number > 9 ? "9+" : strNum
     }
     
     enum `Type` {
