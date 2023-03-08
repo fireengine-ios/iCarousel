@@ -15,7 +15,8 @@ class BaseViewController: ViewController {
     var parentUUID: String = ""
     var segmentImage: SegmentedImage?
     
-    var settingsNavButton = NavigationHeaderButton()
+    private var settingsNavButton = NavigationHeaderButton()
+    private let service = NotificationService()
 
     var customTabBarController: TabBarViewController? {
         var parent = self.parent
@@ -47,6 +48,8 @@ class BaseViewController: ViewController {
         customTabBarController?.setBottomBarsHidden(!needToShowTabBar)
         navigationItem.backBarButtonItem = UIBarButtonItem(
             title: "", style: .plain, target: nil, action: nil)
+        
+        fetchNotificationCount()
     }
 
     deinit {
@@ -173,6 +176,21 @@ extension BaseViewController: UIViewControllerTransitioningDelegate {
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return pushPopAnimatorForPresentation(presenting: false)
+    }
+}
+
+extension BaseViewController {
+    func fetchNotificationCount() {
+        service.fetch(
+            success: { [weak self] response in
+                guard let notification = response as? NotificationResponse else { return }
+                DispatchQueue.main.async {
+                    let count = notification.list.map({$0.status == "UNREAD" && $0.notificationType == "IN_APP"}).filter({$0}).count
+                    self?.settingsNavButton.setnotificationCount(with: count)
+                }
+            }, fail: { [weak self] errorResponse in
+                self?.settingsNavButton.setnotificationCount(with: 0)
+        })
     }
 }
 
