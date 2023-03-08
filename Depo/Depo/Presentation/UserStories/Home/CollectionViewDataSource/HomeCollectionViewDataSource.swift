@@ -11,8 +11,6 @@ import UIKit
 protocol HomeCollectionViewDataSourceDelegate: AnyObject {
     func onCellHasBeenRemovedWith(controller: UIViewController)
     func numberOfColumns() -> Int
-    func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView
     func didReloadCollectionView(_ collectionView: UICollectionView)
     func share(item: BaseDataSourceItem, type: CardShareType)
 }
@@ -28,7 +26,6 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
     
     private var notPermittedCardsViewTypes = Set<String>()
     
-    var shouldHideGraceBanner: Bool?
     var isEnable = true
     var isViewActive = false
     
@@ -55,8 +52,6 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
             layout.delegate = self
         }
         
-        let headerNib = UINib(nibName: "GraceBannerView", bundle: nil)
-        collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "GraceBannerView")
         let nibName = UINib(nibName: CollectionViewCellsIdsConstant.cellForController, bundle: nil)
         collectionView.register(nibName, forCellWithReuseIdentifier: CollectionViewCellsIdsConstant.cellForController)
     }
@@ -528,15 +523,6 @@ extension HomeCollectionViewDataSource: UICollectionViewDataSource,  UICollectio
         return 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let delegate = delegate else {
-            assert(false, "Unexpected element kind")
-            return UICollectionReusableView()
-        }
-        
-        return delegate.collectionView(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
-    }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellsIdsConstant.cellForController, for: indexPath)
         guard let baseCell = cell as? CollectionViewCellForController else {
@@ -570,6 +556,11 @@ extension HomeCollectionViewDataSource: UICollectionViewDataSource,  UICollectio
 
 //MARK UICollectionView Layout delegate
 extension HomeCollectionViewDataSource: CollectionViewLayoutDelegate {
+    
+    func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
+        return 0.1
+    }
+    
     func collectionView(collectionView: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
         guard let cardView = cards[safe: indexPath.row] else {
             return 40
@@ -580,14 +571,6 @@ extension HomeCollectionViewDataSource: CollectionViewLayoutDelegate {
         cardView.layoutIfNeeded()
         
         return cardView.calculatedH
-    }
-    
-    func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
-        if (SingletonStorage.shared.subscriptionsContainGracePeriod) && (shouldHideGraceBanner != true) {
-            return GraceBannerView.getHeight()
-        } else {
-            return 0.1
-        }
     }
 }
 

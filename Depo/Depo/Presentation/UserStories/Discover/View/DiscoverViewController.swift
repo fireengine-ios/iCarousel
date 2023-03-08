@@ -151,25 +151,6 @@ extension DiscoverViewController: DiscoverCollectionViewDataSourceDelegate {
         return Device.isIpad ? 2 : 1
     }
     
-    func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
-        return GraceBannerView.getHeight()
-    }
-    
-    // MARK: UICollectionViewDelegate
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-        case UICollectionView.elementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "GraceBannerView", for: indexPath)
-            if let headerView = headerView as? GraceBannerView {
-                headerView.delegate = self
-            }
-            return headerView
-        default:
-            assert(false, "Unexpected element kind")
-            return UICollectionReusableView()
-        }
-    }
-    
     func didReloadCollectionView(_ collectionView: UICollectionView) {
         requestShowSpotlight()
     }
@@ -367,13 +348,6 @@ extension DiscoverViewController: ShareCardContentManagerDelegate {
     
     func shareOperationFinished() {
         hideSpinner()
-    }
-}
-
-extension DiscoverViewController: GraceBannerViewDelegate {
-    func closeButtonTapped() {
-        discoverDataSource.shouldHideGraceBanner = true
-        collectionView.reloadData()
     }
 }
 
