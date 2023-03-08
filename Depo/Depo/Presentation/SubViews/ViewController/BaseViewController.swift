@@ -8,6 +8,11 @@
 
 import UIKit
 
+class NotificationCountHolder {
+    var count = 0
+    static let shared = NotificationCountHolder()
+}
+
 class BaseViewController: ViewController {
     var keyboardHeight: CGFloat = 0
     var needToShowTabBar: Bool = false
@@ -49,7 +54,8 @@ class BaseViewController: ViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(
             title: "", style: .plain, target: nil, action: nil)
         
-        fetchNotificationCount()
+        
+        settingsNavButton.setnotificationCount(with: NotificationCountHolder.shared.count)
     }
 
     deinit {
@@ -186,9 +192,11 @@ extension BaseViewController {
                 guard let notification = response as? NotificationResponse else { return }
                 DispatchQueue.main.async {
                     let count = notification.list.map({$0.status == "UNREAD" && $0.notificationType == "IN_APP"}).filter({$0}).count
+                    NotificationCountHolder.shared.count = count
                     self?.settingsNavButton.setnotificationCount(with: count)
                 }
             }, fail: { [weak self] errorResponse in
+                NotificationCountHolder.shared.count = 0
                 self?.settingsNavButton.setnotificationCount(with: 0)
         })
     }

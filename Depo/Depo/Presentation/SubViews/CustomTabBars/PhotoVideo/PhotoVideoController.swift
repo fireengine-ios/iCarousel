@@ -146,6 +146,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         
         ///trigger Range API for update new items which are uploaded by other clients
         updateDB()
+        fetchNotificationCount()
     }
     
     override func viewDidAppear(_ animated: Bool) {
