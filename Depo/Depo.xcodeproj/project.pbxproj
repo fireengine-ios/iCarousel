@@ -1566,6 +1566,7 @@
 		89959F092934B361000135DE /* CollageInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89959F072934B361000135DE /* CollageInitializer.swift */; };
 		89959F0A2934B361000135DE /* CollageInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89959F072934B361000135DE /* CollageInitializer.swift */; };
 		89959F0B2934B361000135DE /* CollageInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89959F072934B361000135DE /* CollageInitializer.swift */; };
+		89ABFDD029B9F34E000237A4 /* CreateCollageBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ABFDCF29B9F34D000237A4 /* CreateCollageBottomBarManager.swift */; };
 		89CC89F423AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CC89F123AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift */; };
 		89CC89F623AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CC89F123AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift */; };
 		89CC89F823AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89CC89F223AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib */; };
@@ -10863,6 +10864,7 @@
 		8980D941292621C200817FF8 /* DiscoverInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverInteractor.swift; sourceTree = "<group>"; };
 		89959F022934B00E000135DE /* CollageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollageInteractor.swift; sourceTree = "<group>"; };
 		89959F072934B361000135DE /* CollageInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollageInitializer.swift; sourceTree = "<group>"; };
+		89ABFDCF29B9F34D000237A4 /* CreateCollageBottomBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageBottomBarManager.swift; sourceTree = "<group>"; };
 		89CC89F123AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSSmartAlbumWarningPopUp.swift; sourceTree = "<group>"; };
 		89CC89F223AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSSmartAlbumWarningPopUp.xib; sourceTree = "<group>"; };
 		89CDEBA929B7122A00870B14 /* CreateCollagePreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollagePreviewController.swift; sourceTree = "<group>"; };
@@ -16778,6 +16780,7 @@
 			isa = PBXGroup;
 			children = (
 				89CDEBA929B7122A00870B14 /* CreateCollagePreviewController.swift */,
+				89ABFDCF29B9F34D000237A4 /* CreateCollageBottomBarManager.swift */,
 			);
 			path = CreateCollagePreview;
 			sourceTree = "<group>";
@@ -25964,6 +25967,7 @@
 				CE924569206D2E22000C7791 /* AnimationFlowManager.swift in Sources */,
 				8C208666228D4B61000BEDAD /* EmptyDataView.swift in Sources */,
 				CE1458D02045734900812544 /* Alamofire+Validate.swift in Sources */,
+				89ABFDD029B9F34E000237A4 /* CreateCollageBottomBarManager.swift in Sources */,
 				730F8AB423CDA43D00798B61 /* UIView + CALayerBorder.swift in Sources */,
 				7C529689203EFE9D00BF3FBE /* SyncedBlock.swift in Sources */,
 				52501E5B298CA1270000376C /* CachingPlayerItem.swift in Sources */,
