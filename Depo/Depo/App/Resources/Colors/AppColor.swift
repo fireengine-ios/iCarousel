@@ -109,6 +109,7 @@ enum AppColor {
     case tbtBlurBackground
     case tbtButton
     case collageThumbnailColor
+    case collageBorderColor
     
     // MARK: Contact
     case grayMain
