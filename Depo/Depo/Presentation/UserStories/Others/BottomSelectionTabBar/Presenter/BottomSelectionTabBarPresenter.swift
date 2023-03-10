@@ -253,6 +253,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 self.interactor.removeAlbums(items: selectedItems)
             case .moveToTrashShared:
                 self.interactor.moveToTrashShared(items: selectedItems)
+            case .collageChange:
+                self.basePassingPresenter?.changeCover()
             default:
                 break
             }
