@@ -14,7 +14,7 @@ final class InstaPickSelectionSegmentedController: BaseViewController, ErrorPres
     /// not private bcz protocol requirement
     var selectedItems = [SearchItemResponse]() {
         didSet {
-            vcView.analyzeButton.isHidden = selectedItems.isEmpty
+            vcView.analyzeButton.isHidden = selectedItems.count <= 1
         }
     }
     

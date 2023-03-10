@@ -89,7 +89,7 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
                                                               withHorizontalFittingPriority: .required,
                                                               verticalFittingPriority: .fittingSizeLevel).height
         // Plus top and bottom constraint
-        return height + 32
+        return height + 52
     }
 
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
