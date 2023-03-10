@@ -74,6 +74,10 @@ enum ElementTypes {
     case endSharing
     case leaveSharing
     case moveToTrashShared
+    //createCollage
+    case collageSave
+    case collageChange
+    case collageDelete
     
     case shareOriginal
     case shareLink
@@ -790,6 +794,12 @@ enum ElementTypes {
             return ""
         case .galleryUnsync:
             return ""
+        case .collageSave:
+            return TextConstants.save
+        case .collageDelete:
+            return TextConstants.actionSheetDelete
+        case .collageChange:
+            return TextConstants.change
         }
     }
 
@@ -928,6 +938,12 @@ enum ElementTypes {
             return Image.iconBackupCheck.image
         case .galleryUnsync:
             return Image.iconBackupUncheck.image
+        case .collageSave:
+            return Image.iconEdit.image
+        case .collageChange:
+            return Image.iconChangePhoto.image
+        case .collageDelete:
+            return Image.iconDeletePlain.image
         }
     }
 }
