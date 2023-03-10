@@ -1116,8 +1116,8 @@ class RouterVC: NSObject {
         return CreateCollageInitilizer.initializeViewController()
     }
     
-    func createCollageSelectPhotos(collageTemplate: CollageTemplateElement)  -> CreateCollageSelectionSegmentedController {
-        return CreateCollageSelectionSegmentedController(collageTemplate: collageTemplate)
+    func createCollageSelectPhotos(collageTemplate: CollageTemplateElement, items: [SearchItemResponse] = [], selectItemIndex: Int? = nil)  -> CreateCollageSelectionSegmentedController {
+        return CreateCollageSelectionSegmentedController(collageTemplate: collageTemplate, items: items, selectItemIndex: selectItemIndex)
     }
     
     func createCollagePreview(collageTemplate: CollageTemplateElement, selectedItems: [SearchItemResponse])  -> CreateCollagePreviewController {

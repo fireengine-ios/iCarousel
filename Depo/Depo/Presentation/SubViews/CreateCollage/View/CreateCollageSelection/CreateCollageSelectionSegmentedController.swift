@@ -16,9 +16,15 @@ protocol CreateCollageSelectionSegmentedControllerDelegate {
     func allDeselectItem(selectedCount: Int)
 }
 
+enum PhotoSelectType {
+    case newPhotoSelection
+    case changePhotoSelection
+}
+
 final class CreateCollageSelectionSegmentedController: BaseViewController, ErrorPresenter {
 
     var selectedItems = [SearchItemResponse]()
+    var selectedItemsDefault = [SearchItemResponse]()
     
     var selectionState = CreateCollagePhotoSelectionState.selecting {
         didSet {
@@ -28,6 +34,7 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
         }
     }
     
+    private var photoSelectType = PhotoSelectType.newPhotoSelection
     private let selectionControllerPageSize = Device.isIpad ? 200 : 100
     private var currentSelectingCount = 0
     private let selectingLimit = 5
@@ -35,7 +42,10 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
     private var segmentedViewControllers: [UIViewController] = []
     private var delegates = MulticastDelegate<CreateCollageSelectionSegmentedControllerDelegate>()
     private var collageTemplate: CollageTemplateElement?
-    let router = RouterVC()
+    private let router = RouterVC()
+    private var selectedItemFromCollagePreview: SearchItemResponse?
+    private var selectedItemIndexFromCollagePreview: Int = -1
+    private var totalSelectItemCount: Int = 0
     
     private lazy var albumsTabIndex: Int = {
         if let index = segmentedViewControllers.firstIndex(of: albumsVC) {
@@ -57,9 +67,19 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
                                                        target: self,
                                                        action: #selector(closeSelf))
     
-    init(collageTemplate: CollageTemplateElement) {
+    init(collageTemplate: CollageTemplateElement, items: [SearchItemResponse] = [], selectItemIndex: Int? = nil) {
         self.collageTemplate = collageTemplate
-        selectablePhotoCount = collageTemplate.shapeCount
+        if items.count > 0 {
+            self.selectedItemIndexFromCollagePreview = selectItemIndex ?? 0
+            self.selectedItems = [items[selectItemIndex ?? 0]]
+            self.selectedItemsDefault = items
+            selectablePhotoCount = 1
+            totalSelectItemCount = items.count
+            self.photoSelectType = .changePhotoSelection
+        } else {
+            selectablePhotoCount = collageTemplate.shapeCount
+            self.photoSelectType = .newPhotoSelection
+        }
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -68,7 +88,6 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
     }
     
     private func setup() {
-        //navigationItem.title = String(format: "Select Photo", 0)
         navigationItem.leftBarButtonItem = closeSelfButton
     }
     
@@ -147,16 +166,30 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
     }
     
     @objc private func actionButtonTap() {
-        if selectedItems.count > 0 &&  selectedItems.count != selectablePhotoCount{
-            allDeselectItems()
-            selectedItems.removeAll()
-            updateTitle()
-        }
-        if selectedItems.count == selectablePhotoCount {
-            dismiss(animated: true, completion: {
-                let vc = self.router.createCollagePreview(collageTemplate: self.collageTemplate!, selectedItems: self.selectedItems)
-                self.router.pushViewController(viewController: vc, animated: false)
-            })
+        switch photoSelectType {
+        case .newPhotoSelection:
+            if selectedItems.count > 0 &&  selectedItems.count != selectablePhotoCount{
+                allDeselectItems()
+                selectedItems.removeAll()
+                updateTitle()
+            }
+            if selectedItems.count == selectablePhotoCount {
+                dismiss(animated: true, completion: {
+                    let vc = self.router.createCollagePreview(collageTemplate: self.collageTemplate!, selectedItems: self.selectedItems)
+                    self.router.pushViewController(viewController: vc, animated: false)
+                })
+            }
+        case .changePhotoSelection:
+            if selectedItems.count > 0 &&  selectedItems.count != selectablePhotoCount{
+                allDeselectItems()
+                updateTitle()
+            }
+            if selectedItems.count == selectablePhotoCount {
+                dismiss(animated: true, completion: {
+                    let vc = self.router.createCollagePreview(collageTemplate: self.collageTemplate!, selectedItems: self.selectedItemsDefault)
+                    self.router.pushViewController(viewController: vc, animated: false)
+                })
+            }
         }
     }
     
@@ -204,10 +237,23 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
 extension CreateCollageSelectionSegmentedController: CreateCollagePhotoSelectionControllerDelegate {
     
     func selectionController(_ controller: CreateCollagePhotoSelectionController, didSelectItem item: SearchItemResponse) {
-        delegates.invoke { delegate in
-            delegate.didSelectItem(item)
+        
+        switch photoSelectType {
+        case .newPhotoSelection:
+            delegates.invoke { delegate in
+                delegate.didSelectItem(item)
+            }
+            selectedItems.append(item)
+        case .changePhotoSelection:
+            delegates.invoke { delegate in
+                delegate.didSelectItem(item)
+            }
+            selectedItems.removeAll()
+            selectedItems.append(item)
+            selectedItemsDefault.remove(at: selectedItemIndexFromCollagePreview)
+            selectedItemsDefault.insert(contentsOf: selectedItems, at: selectedItemIndexFromCollagePreview)
         }
-        selectedItems.append(item)
+        
         updateTitle()
         let selectedCount = selectedItems.count
         let isReachedLimit = (selectedCount == selectablePhotoCount)

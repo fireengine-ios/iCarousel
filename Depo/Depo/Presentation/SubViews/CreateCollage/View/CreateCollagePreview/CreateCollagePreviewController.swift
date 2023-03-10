@@ -37,11 +37,15 @@ final class CreateCollagePreviewController: BaseViewController {
     private var selectedItems = [SearchItemResponse]()
     private var collageTemplate: CollageTemplateElement?
     private lazy var bottomBarManager = CreateCollageBottomBarManager(delegate: self)
+    private var photoSelectType = PhotoSelectType.newPhotoSelection
     
     init(collageTemplate: CollageTemplateElement, selectedItems: [SearchItemResponse]) {
         self.collageTemplate = collageTemplate
         self.collagePhotoCount = collageTemplate.shapeCount
         self.selectedItems = selectedItems
+        if selectedItems.count > 0 {
+            photoSelectType = .changePhotoSelection
+        }
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -90,22 +94,26 @@ final class CreateCollagePreviewController: BaseViewController {
                 imageView.tag = i
                 imageView.isUserInteractionEnabled = true
                 
-                if selectedItems.count == 0 {
+                switch photoSelectType {
+                case .newPhotoSelection:
                     let tapImage = UITapGestureRecognizer(target: self, action: #selector(thumbnailImageTapped(_:)))
                     imageView.addGestureRecognizer(tapImage)
                     imageView.backgroundColor = AppColor.collageThumbnailColor.color
                     imageView.contentMode = .center
                     imageView.image = Image.iconAddUnselect.image
-                } else {
+                case .changePhotoSelection:
                     let longTapImage = UILongPressGestureRecognizer(target: self, action: #selector(actionImage(_:)))
                     imageView.addGestureRecognizer(longTapImage)
                     imageView.contentMode = .scaleToFill
                     let imageUrl = selectedItems[i].metadata?.mediumUrl
                     imageView.sd_setImage(with: imageUrl)
                 }
-                
                 contentView.addSubview(imageView)
             }
+        }
+        
+        if selectedItems.count > 0 {
+            containerView.layer.borderColor = AppColor.collageBorderColor.cgColor
         }
     }
     
@@ -134,6 +142,10 @@ final class CreateCollagePreviewController: BaseViewController {
         }
     }
     
+    func changeSelectedPhoto() {
+        let vc = router.createCollageSelectPhotos(collageTemplate: collageTemplate!, items: selectedItems, selectItemIndex: longPressedItem)
+        router.pushViewController(viewController: vc, animated: false)
+    }
     
 }
 
@@ -155,7 +167,6 @@ extension CreateCollagePreviewController {
         if selectedItems.count > 0 {
             bottomBarManager.show()
         }
-        
     }
 }
 
@@ -194,7 +205,7 @@ extension CreateCollagePreviewController: BaseItemInputPassingProtocol {
     }
     
     func changeCover() {
-        print("CHANGE")
+        changeSelectedPhoto()
     }
     
     func changePeopleThumbnail() {
