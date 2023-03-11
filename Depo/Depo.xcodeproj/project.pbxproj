@@ -1454,6 +1454,10 @@
 		89104BCA22CBA1B4005B3F58 /* PackagePremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A26E66B21A6E7D70033B797 /* PackagePremiumView.swift */; };
 		8915C325233B7D4A00EFC706 /* BasePopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A723390D69000083B7 /* BasePopUpController.swift */; };
 		8915C326233B7D4A00EFC706 /* BasePopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A723390D69000083B7 /* BasePopUpController.swift */; };
+		891C019429BCB64D003D5CA1 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891C019329BCB64D003D5CA1 /* StringConstants.swift */; };
+		891C019529BCB64D003D5CA1 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891C019329BCB64D003D5CA1 /* StringConstants.swift */; };
+		891C019629BCB64D003D5CA1 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891C019329BCB64D003D5CA1 /* StringConstants.swift */; };
+		891C019729BCB64D003D5CA1 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891C019329BCB64D003D5CA1 /* StringConstants.swift */; };
 		891CDE3B296EF11200E5CD3B /* FavoriteInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891CDE3A296EF11200E5CD3B /* FavoriteInitializer.swift */; };
 		891CDE3C296EF11200E5CD3B /* FavoriteInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891CDE3A296EF11200E5CD3B /* FavoriteInitializer.swift */; };
 		891CDE3D296EF11200E5CD3B /* FavoriteInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891CDE3A296EF11200E5CD3B /* FavoriteInitializer.swift */; };
@@ -10827,6 +10831,7 @@
 		890F736E22EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseEmailVerificationPopUp.xib; sourceTree = "<group>"; };
 		890F737622EEFAFF00BA0020 /* BaseChangeEmailPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseChangeEmailPopUp.xib; sourceTree = "<group>"; };
 		890F737722EEFAFF00BA0020 /* BaseChangeEmailPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseChangeEmailPopUp.swift; sourceTree = "<group>"; };
+		891C019329BCB64D003D5CA1 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
 		891CDE3A296EF11200E5CD3B /* FavoriteInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteInitializer.swift; sourceTree = "<group>"; };
 		8921222D2303FFA400396ED0 /* EmailVerifiedPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerifiedPopUp.swift; sourceTree = "<group>"; };
 		892B014722DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorChallengeConfigurator.swift; sourceTree = "<group>"; };
@@ -15559,6 +15564,7 @@
 				3A134C412645476500CFC736 /* ScreenConstants.swift */,
 				F0A091362812D970009EFF9E /* Credentials.swift */,
 				07FBA20026E0BB9900ED4132 /* Strings */,
+				891C019329BCB64D003D5CA1 /* StringConstants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -26291,6 +26297,7 @@
 				8C0E8D3B1FDEBDFF00789C91 /* ProtoInputTextCell.swift in Sources */,
 				CF71470C24B597AA00D83E60 /* ContactListHeader.swift in Sources */,
 				8C0E8D3C1FDEBDFF00789C91 /* RemoteSearchService.swift in Sources */,
+				891C019429BCB64D003D5CA1 /* StringConstants.swift in Sources */,
 				077D1D4F27FED891001C6E72 /* MainTabBar.swift in Sources */,
 				98F9C56F23584BDE008C5ECF /* CampaignDetailViewController.swift in Sources */,
 				73E6715C23EBFE53000C4AF7 /* PrivacyPolicyResponse.swift in Sources */,
@@ -29235,6 +29242,7 @@
 				CE784AFD22A685FB00662219 /* BaseFilesGreedInteractor.swift in Sources */,
 				F0CDA6962775187F0026C1C4 /* DragAndDropHelper.swift in Sources */,
 				A771D4CC23DEFD8D00EA78BF /* AnalyticsPermissionNetmeraEvent.swift in Sources */,
+				891C019629BCB64D003D5CA1 /* StringConstants.swift in Sources */,
 				89F99F8629B5F64900F99CB5 /* CreateCollageAlbumSelectionViewController.swift in Sources */,
 				8C1E5BD022CB8A1A008FDA02 /* NSPersistentStoreCoordinator+Extensions.swift in Sources */,
 				CE784AFF22A685FB00662219 /* CardsManagerViewProtocol.swift in Sources */,
@@ -30349,6 +30357,7 @@
 				CF8B64B923CBC9D70021B021 /* RemoteSearchService.swift in Sources */,
 				CF8B64BA23CBC9D70021B021 /* CampaignDetailViewController.swift in Sources */,
 				CF8B64BB23CBC9D70021B021 /* HomeCollectionViewDataSource.swift in Sources */,
+				891C019529BCB64D003D5CA1 /* StringConstants.swift in Sources */,
 				CF8B64BC23CBC9D70021B021 /* PermissionViewController.swift in Sources */,
 				CF8B64BD23CBC9D70021B021 /* ServerMessageError.swift in Sources */,
 				0762028F269B83F500D4FB2C /* OverlayAnimationService.swift in Sources */,
@@ -32773,6 +32782,7 @@
 				CF8B6E2923CBCA280021B021 /* FromNib.swift in Sources */,
 				CF8B6E2A23CBCA280021B021 /* PeriodicContactSyncSettingsOptionView.swift in Sources */,
 				CF8B6E2B23CBCA280021B021 /* PackagesViewOutput.swift in Sources */,
+				891C019729BCB64D003D5CA1 /* StringConstants.swift in Sources */,
 				CF8B6E2C23CBCA280021B021 /* SessionServiceExtension.swift in Sources */,
 				076BD1C327BC0983004609E3 /* MapSearchRouter.swift in Sources */,
 				98231A9224F3A23500FD16E2 /* AdeleFilter.swift in Sources */,

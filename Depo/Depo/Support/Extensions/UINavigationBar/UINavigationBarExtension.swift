@@ -26,4 +26,23 @@ extension UIViewController {
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: title, target: target, selector: action)
     }
+    
+    func setTextFieldInNavigationBar(withDelegate delegate: UITextFieldDelegate? = nil) {
+        let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
+        textField.font = .appFont(.medium, size: 16)
+        textField.textColor = AppColor.darkBlue.color
+        textField.textAlignment = .center
+        let collageName = StringConstants.collageName
+        if  collageName != "+New Collage" {
+            textField.text = collageName
+        } else {
+            textField.text = "+New Collage"
+        }
+        textField.delegate = delegate
+        navigationItem.titleView = textField
+    }
+
+    var navTextField: UITextField? {
+        return navigationItem.titleView as? UITextField
+    }
 }
