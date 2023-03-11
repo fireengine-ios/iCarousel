@@ -8,6 +8,7 @@
 
 import Foundation
 import SDWebImage
+import UIKit
 
 final class CreateCollagePreviewController: BaseViewController {
     
@@ -59,7 +60,7 @@ final class CreateCollagePreviewController: BaseViewController {
         
         bottomBarManager.setup()
         setLayout()
-        createImageView(collageTemplate: collageTemplate!, imageCount: selectedItems.count)
+        createImageView(collageTemplate: collageTemplate!)
         view.backgroundColor = .white
         setTitle(withString: "Create Collage")
     }
@@ -73,7 +74,7 @@ final class CreateCollagePreviewController: BaseViewController {
         bottomBarManager.hide()
     }
     
-    private func createImageView(collageTemplate: CollageTemplateElement, imageCount: Int) {
+    private func createImageView(collageTemplate: CollageTemplateElement) {
         let shapeDetails = collageTemplate.shapeDetails.sorted { $0.id < $1.id }
 
         for i in 0...shapeDetails.count - 1 {
@@ -126,25 +127,58 @@ final class CreateCollagePreviewController: BaseViewController {
         if sender.state == .began {
             let shapeDetails = collageTemplate?.shapeDetails.sorted { $0.id < $1.id }
             if sender.view?.tag == longPressedItem {
+                bottomBarManager.update(configType: .newPhotoSelection)
                 for i in 0...(shapeDetails?.count ?? 1) - 1 {
                     contentView.subviews[i].alpha = 1
                 }
             } else {
+                bottomBarManager.update(configType: .changePhotoSelection)
                 for i in 0...(shapeDetails?.count ?? 1) - 1 {
                     if sender.view?.tag != i {
                         contentView.subviews[i].alpha = 0.5
+                        contentView.subviews[i].layer.sublayers?.forEach { $0.removeFromSuperlayer()}
                     } else {
                         longPressedItem = sender.view?.tag ?? -1
                         contentView.subviews[i].alpha = 1
+                        contentView.subviews[i].layer.addSublayer(createBorder(view: contentView.subviews[i], borderWith: 2.0))
                     }
                 }
             }
         }
     }
     
-    func changeSelectedPhoto() {
+    private func saveCollage() {
+        print("SAVE COLLAGE")
+    }
+    
+    private func deleteCollage() {
+        containerView.subviews.forEach { $0.removeFromSuperview()}
+        photoSelectType = .newPhotoSelection
+        createImageView(collageTemplate: collageTemplate!)
+        bottomBarManager.update(configType: .newPhotoSelection)
+    }
+    
+    private func changeSelectedPhoto() {
         let vc = router.createCollageSelectPhotos(collageTemplate: collageTemplate!, items: selectedItems, selectItemIndex: longPressedItem)
         router.pushViewController(viewController: vc, animated: false)
+    }
+    
+    private func cancelCollage() {
+        contentView.subviews.forEach { values in
+            values.alpha = 1.0
+        }
+        bottomBarManager.update(configType: .newPhotoSelection)
+    }
+    
+    private func createBorder(view: UIView, borderWith: CGFloat) -> CALayer {
+        let borderLayer = CALayer()
+        let borderFrame = CGRect(x: -5, y: -5, width: view.frame.size.width + 10, height: view.frame.size.height + 10)
+        borderLayer.backgroundColor = UIColor.clear.cgColor
+        borderLayer.frame = borderFrame
+        borderLayer.cornerRadius = 5.0
+        borderLayer.borderWidth = borderWith
+        borderLayer.borderColor = AppColor.settingsButtonColor.cgColor
+        return borderLayer
     }
     
 }
@@ -162,7 +196,7 @@ extension CreateCollagePreviewController {
         
         contentView.frame = CGRect(x: xFrameStart, y: yFrameStart, width: viewWidth - rightSpace, height: (viewWidth - rightSpace) / yRatio)
         xRatioConstant = Double(collageTemplate?.imageWidth ?? 1) / Double(contentView.frame.size.width)
-        containerView.frame = CGRect(x: contentView.frame.origin.x - 6, y: contentView.frame.origin.y - 6, width: contentView.frame.size.width + 12, height: contentView.frame.size.height + 12)
+        containerView.frame = CGRect(x: contentView.frame.origin.x - 12, y: contentView.frame.origin.y - 12, width: contentView.frame.size.width + 24, height: contentView.frame.size.height + 24)
         
         if selectedItems.count > 0 {
             bottomBarManager.show()
@@ -171,52 +205,58 @@ extension CreateCollagePreviewController {
 }
 
 extension CreateCollagePreviewController: BaseItemInputPassingProtocol {
-    func operationFinished(withType type: ElementTypes, response: Any?) {
-        
-    }
-    
-    func operationFailed(withType type: ElementTypes) {
-        
-    }
-    
-    func stopModeSelected() {
-    }
-    
-    func delete(all: Bool) {
-        print("aaaaaaaaa")
-    }
-    
+    //COLLAGE SAVE
     func selectModeSelected() {
+        saveCollage()
     }
     
+    //COLLAGE DELETE
     func selectAllModeSelected() {
+        deleteCollage()
     }
     
-    func showOnly(withType type: ElementTypes) {
-        
-    }
-    
-    func deSelectAll() {
-        
-    }
-    
-    func printSelected() {
-        
-    }
-    
+    //COLLAGE CHANGE PHOTO
     func changeCover() {
         changeSelectedPhoto()
     }
     
+    //COLLAGE CANCEL
+    func printSelected() {
+        cancelCollage()
+    }
+    func operationFinished(withType type: ElementTypes, response: Any?) {
+    }
+    func operationFailed(withType type: ElementTypes) {
+    }
+    func stopModeSelected() {
+    }
+    func delete(all: Bool) {
+    }
+    func showOnly(withType type: ElementTypes) {
+    }
+    func deSelectAll() {
+    }
     func changePeopleThumbnail() {
-        
     }
     
     func openInstaPick() {
-    
     }
-    
     func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
         selectedItemsCallback([])
+    }
+}
+
+
+extension UIImage {
+    func imageWithInsets(insets: UIEdgeInsets) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(
+            CGSize(width: self.size.width + insets.left + insets.right,
+                   height: self.size.height + insets.top + insets.bottom), false, self.scale)
+        let _ = UIGraphicsGetCurrentContext()
+        let origin = CGPoint(x: insets.left, y: insets.top)
+        self.draw(at: origin)
+        let imageWithInsets = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return imageWithInsets
     }
 }
