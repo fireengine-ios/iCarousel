@@ -10,7 +10,7 @@ import Foundation
 
 final class CreateCollageBottomBarManager {
     
-    private var config1 = EditingBarConfig(
+    private var saveConfig = EditingBarConfig(
         elementsConfig:  [.collageSave, .collageDelete],
         style: .default,
         tintColor: AppColor.tint.color,
@@ -18,8 +18,8 @@ final class CreateCollageBottomBarManager {
         barTintColor: AppColor.secondaryBackground.color
     )
     
-    private var config2 = EditingBarConfig(
-        elementsConfig:  [.collageSave, .collageChange],
+    private var changeConfig = EditingBarConfig(
+        elementsConfig:  [.collageChange, .collageCancel],
         style: .default,
         tintColor: AppColor.tint.color,
         unselectedItemTintColor: AppColor.label.color,
@@ -38,12 +38,18 @@ final class CreateCollageBottomBarManager {
     func setup() {
         let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
         bottomBarPresenter.basePassingPresenter = delegate
-        let botvarBarVC = bottomBarVCmodule.setupDrawerVariantModule(config: config2, settablePresenter: bottomBarPresenter)
+        let botvarBarVC = bottomBarVCmodule.setupDrawerVariantModule(config: saveConfig, settablePresenter: bottomBarPresenter)
         self.editingTabBar = botvarBarVC
     }
     
-    func update(isSelectedAll: Bool) {
-        //bottomBarPresenter.setupCreateCollageTabBarWith(originalConfig: isSelectedAll ? config2 : config1)
+    func update(configType: PhotoSelectType) {
+        switch configType {
+        case .newPhotoSelection:
+            bottomBarPresenter.setupCreateCollageTabBarWith(originalConfig: saveConfig)
+        case .changePhotoSelection:
+            bottomBarPresenter.setupCreateCollageTabBarWith(originalConfig: changeConfig)
+        }
+        
     }
     
     func show() {
