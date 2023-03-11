@@ -10,7 +10,7 @@ import Foundation
 import SDWebImage
 import UIKit
 
-final class CreateCollagePreviewController: BaseViewController {
+final class CreateCollagePreviewController: BaseViewController, UITextFieldDelegate {
     
     let router = CreateCollageRouter()
     
@@ -62,7 +62,7 @@ final class CreateCollagePreviewController: BaseViewController {
         setLayout()
         createImageView(collageTemplate: collageTemplate!)
         view.backgroundColor = .white
-        setTitle(withString: "Create Collage")
+        setTextFieldInNavigationBar(withDelegate: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,6 +72,12 @@ final class CreateCollagePreviewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         bottomBarManager.hide()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        if navTextField?.text != "+New Collage" {
+            StringConstants.collageName = navTextField?.text ?? "+New Collage"
+        }
     }
     
     private func createImageView(collageTemplate: CollageTemplateElement) {
@@ -242,20 +248,5 @@ extension CreateCollagePreviewController: BaseItemInputPassingProtocol {
     }
     func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
         selectedItemsCallback([])
-    }
-}
-
-
-extension UIImage {
-    func imageWithInsets(insets: UIEdgeInsets) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(
-            CGSize(width: self.size.width + insets.left + insets.right,
-                   height: self.size.height + insets.top + insets.bottom), false, self.scale)
-        let _ = UIGraphicsGetCurrentContext()
-        let origin = CGPoint(x: insets.left, y: insets.top)
-        self.draw(at: origin)
-        let imageWithInsets = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return imageWithInsets
     }
 }
