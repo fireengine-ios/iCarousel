@@ -78,6 +78,7 @@ enum ElementTypes {
     case collageSave
     case collageChange
     case collageDelete
+    case collageCancel
     
     case shareOriginal
     case shareLink
@@ -800,6 +801,8 @@ enum ElementTypes {
             return TextConstants.actionSheetDelete
         case .collageChange:
             return TextConstants.change
+        case .collageCancel:
+            return TextConstants.cancel
         }
     }
 
@@ -944,6 +947,8 @@ enum ElementTypes {
             return Image.iconChangePhoto.image
         case .collageDelete:
             return Image.iconDeletePlain.image
+        case .collageCancel:
+            return Image.iconCancelBorder.image
         }
     }
 }
