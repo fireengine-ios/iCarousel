@@ -12,7 +12,7 @@ import UIKit
 
 final class CreateCollagePreviewController: BaseViewController {
     
-    let router = RouterVC()
+    let router = CreateCollageRouter()
     
     private lazy var containerView: UIView = {
         let view = UIView()
@@ -119,8 +119,7 @@ final class CreateCollagePreviewController: BaseViewController {
     }
     
     @objc func thumbnailImageTapped(_ sender:AnyObject) {
-        let vc = router.createCollageSelectPhotos(collageTemplate: collageTemplate!)
-        router.pushViewController(viewController: vc, animated: false)
+        router.openSelectPhotosWithNew(collageTemplate: collageTemplate!)
     }
     
     @objc func actionImage(_ sender: UIGestureRecognizer) {
@@ -159,13 +158,13 @@ final class CreateCollagePreviewController: BaseViewController {
     }
     
     private func changeSelectedPhoto() {
-        let vc = router.createCollageSelectPhotos(collageTemplate: collageTemplate!, items: selectedItems, selectItemIndex: longPressedItem)
-        router.pushViewController(viewController: vc, animated: false)
+        router.openSelectPhotosWithChange(collageTemplate: collageTemplate!, items: selectedItems, selectItemIndex: longPressedItem)
     }
     
     private func cancelCollage() {
         contentView.subviews.forEach { values in
             values.alpha = 1.0
+            values.layer.sublayers?.forEach { $0.removeFromSuperlayer()}
         }
         bottomBarManager.update(configType: .newPhotoSelection)
     }
