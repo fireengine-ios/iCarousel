@@ -110,6 +110,7 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
         setupScreenWithSelectingLimit(selectingLimit)
         trackScreen()
         vcView.actionButton.addTarget(self, action: #selector(actionButtonTap), for: .touchUpInside)
+        setTitle(withString: "Select Photo")
     }
     
     override func viewWillAppear(_ animated: Bool) {
