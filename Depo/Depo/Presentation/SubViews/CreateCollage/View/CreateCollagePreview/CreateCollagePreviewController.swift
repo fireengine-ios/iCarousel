@@ -65,6 +65,10 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
         setTextFieldInNavigationBar(withDelegate: self)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.imageViewLongPress(_:)), name: NSNotification.Name(rawValue: "ImageViewCollageLongPress"), object: nil)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
@@ -72,6 +76,7 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
     
     override func viewWillDisappear(_ animated: Bool) {
         bottomBarManager.hide()
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("ImageViewCollageLongPress"), object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -96,26 +101,30 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
                 let yStart = (yFirst / xRatioConstant)
 
                 let viewFrame = CGRect(x: xStart, y: yStart, width: imageWidth / xRatioConstant, height: imageHeight / xRatioConstant)
-                let imageView = UIImageView(frame: viewFrame)
                 
-                imageView.tag = i
-                imageView.isUserInteractionEnabled = true
                 
                 switch photoSelectType {
                 case .newPhotoSelection:
+                    let imageView = UIImageView(frame: viewFrame)
+                    imageView.tag = i
+                    imageView.isUserInteractionEnabled = true
                     let tapImage = UITapGestureRecognizer(target: self, action: #selector(thumbnailImageTapped(_:)))
                     imageView.addGestureRecognizer(tapImage)
                     imageView.backgroundColor = AppColor.collageThumbnailColor.color
                     imageView.contentMode = .center
                     imageView.image = Image.iconAddUnselect.image
+                    contentView.addSubview(imageView)
                 case .changePhotoSelection:
-                    let longTapImage = UILongPressGestureRecognizer(target: self, action: #selector(actionImage(_:)))
-                    imageView.addGestureRecognizer(longTapImage)
-                    imageView.contentMode = .scaleToFill
+                    let imageScrollView = ImageScrollViewCollage(frame: viewFrame)
+                    
+                    imageScrollView.imageViewTag = i
+                    
+                   
                     let imageUrl = selectedItems[i].metadata?.mediumUrl
-                    imageView.sd_setImage(with: imageUrl)
+                    imageScrollView.imageView.loadImageData(with: imageUrl)
+                    contentView.addSubview(imageScrollView)
                 }
-                contentView.addSubview(imageView)
+                
             }
         }
         
@@ -128,10 +137,10 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
         router.openSelectPhotosWithNew(collageTemplate: collageTemplate!)
     }
     
-    @objc func actionImage(_ sender: UIGestureRecognizer) {
-        if sender.state == .began {
+    @objc func imageViewLongPress(_ notification: NSNotification) {
+        if let imageViewTag = notification.userInfo?["tag"] as? Int {
             let shapeDetails = collageTemplate?.shapeDetails.sorted { $0.id < $1.id }
-            if sender.view?.tag == longPressedItem {
+            if imageViewTag == longPressedItem {
                 bottomBarManager.update(configType: .newPhotoSelection)
                 for i in 0...(shapeDetails?.count ?? 1) - 1 {
                     contentView.subviews[i].alpha = 1
@@ -139,13 +148,13 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
             } else {
                 bottomBarManager.update(configType: .changePhotoSelection)
                 for i in 0...(shapeDetails?.count ?? 1) - 1 {
-                    if sender.view?.tag != i {
-                        contentView.subviews[i].alpha = 0.5
-                        contentView.subviews[i].layer.sublayers?.forEach { $0.removeFromSuperlayer()}
+                    if imageViewTag != i {
+                        contentView.subviews[i].alpha = 0.3
+                        //contentView.subviews[i].layer.sublayers?.forEach { $0.removeFromSuperlayer()}
                     } else {
-                        longPressedItem = sender.view?.tag ?? -1
+                        longPressedItem = imageViewTag
                         contentView.subviews[i].alpha = 1
-                        contentView.subviews[i].layer.addSublayer(createBorder(view: contentView.subviews[i], borderWith: 2.0))
+                        //contentView.subviews[i].layer.addSublayer(createBorder(view: contentView.subviews[i], borderWith: 2.0))
                     }
                 }
             }
@@ -170,7 +179,7 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
     private func cancelCollage() {
         contentView.subviews.forEach { values in
             values.alpha = 1.0
-            values.layer.sublayers?.forEach { $0.removeFromSuperlayer()}
+            //values.layer.sublayers?.forEach { $0.removeFromSuperlayer()}
         }
         bottomBarManager.update(configType: .newPhotoSelection)
     }
@@ -229,24 +238,16 @@ extension CreateCollagePreviewController: BaseItemInputPassingProtocol {
     func printSelected() {
         cancelCollage()
     }
-    func operationFinished(withType type: ElementTypes, response: Any?) {
-    }
-    func operationFailed(withType type: ElementTypes) {
-    }
-    func stopModeSelected() {
-    }
-    func delete(all: Bool) {
-    }
-    func showOnly(withType type: ElementTypes) {
-    }
-    func deSelectAll() {
-    }
-    func changePeopleThumbnail() {
-    }
     
-    func openInstaPick() {
-    }
     func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
         selectedItemsCallback([])
     }
+    func operationFinished(withType type: ElementTypes, response: Any?) { }
+    func operationFailed(withType type: ElementTypes) { }
+    func stopModeSelected() { }
+    func delete(all: Bool) { }
+    func showOnly(withType type: ElementTypes) { }
+    func deSelectAll() { }
+    func changePeopleThumbnail() { }
+    func openInstaPick() { }
 }
