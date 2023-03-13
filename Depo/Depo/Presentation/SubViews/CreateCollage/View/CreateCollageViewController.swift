@@ -79,7 +79,7 @@ extension CreateCollageViewController: UITableViewDataSource {
         cell.configure(model: output.getSectionsCollageTemplateData(shapeCount: key), section: getSectionByKey(key: key))
         cell.delegate = self
         cell.selectionStyle = .none
-        cell.backgroundColor = .black
+        cell.backgroundColor = .white
         return cell
     }
 }

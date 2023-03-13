@@ -1571,6 +1571,10 @@
 		89959F0A2934B361000135DE /* CollageInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89959F072934B361000135DE /* CollageInitializer.swift */; };
 		89959F0B2934B361000135DE /* CollageInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89959F072934B361000135DE /* CollageInitializer.swift */; };
 		89ABFDD029B9F34E000237A4 /* CreateCollageBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ABFDCF29B9F34D000237A4 /* CreateCollageBottomBarManager.swift */; };
+		89B9D17B29BEFC2100C73307 /* CreateCollageDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B9D17A29BEFC2100C73307 /* CreateCollageDetailController.swift */; };
+		89B9D17C29BEFC2100C73307 /* CreateCollageDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B9D17A29BEFC2100C73307 /* CreateCollageDetailController.swift */; };
+		89B9D17D29BEFC2100C73307 /* CreateCollageDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B9D17A29BEFC2100C73307 /* CreateCollageDetailController.swift */; };
+		89B9D17E29BEFC2100C73307 /* CreateCollageDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B9D17A29BEFC2100C73307 /* CreateCollageDetailController.swift */; };
 		89CC89F423AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CC89F123AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift */; };
 		89CC89F623AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CC89F123AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift */; };
 		89CC89F823AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89CC89F223AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib */; };
@@ -10880,6 +10884,7 @@
 		89959F022934B00E000135DE /* CollageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollageInteractor.swift; sourceTree = "<group>"; };
 		89959F072934B361000135DE /* CollageInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollageInitializer.swift; sourceTree = "<group>"; };
 		89ABFDCF29B9F34D000237A4 /* CreateCollageBottomBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageBottomBarManager.swift; sourceTree = "<group>"; };
+		89B9D17A29BEFC2100C73307 /* CreateCollageDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageDetailController.swift; sourceTree = "<group>"; };
 		89CC89F123AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSSmartAlbumWarningPopUp.swift; sourceTree = "<group>"; };
 		89CC89F223AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSSmartAlbumWarningPopUp.xib; sourceTree = "<group>"; };
 		89CDEBA929B7122A00870B14 /* CreateCollagePreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollagePreviewController.swift; sourceTree = "<group>"; };
@@ -16862,6 +16867,7 @@
 				89F0957629B0BED800F74E7E /* CreateCollageViewController.swift */,
 				89F0958129B0C0B200F74E7E /* CreateCollageViewOutput.swift */,
 				89F0957B29B0BEFC00F74E7E /* CreateCollage.xib */,
+				89B9D17A29BEFC2100C73307 /* CreateCollageDetailController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -26845,6 +26851,7 @@
 				8C208642228D4B2E000BEDAD /* ScrollBarView.swift in Sources */,
 				8C0E8E3A1FDEBDFF00789C91 /* Equatable+Contains.swift in Sources */,
 				8C0E8E3C1FDEBDFF00789C91 /* UploadFromLifeBoxPhotosPresenter.swift in Sources */,
+				89B9D17B29BEFC2100C73307 /* CreateCollageDetailController.swift in Sources */,
 				8C0E8E3D1FDEBDFF00789C91 /* FBParametrs.swift in Sources */,
 				CF7D63D925A42FE4005C22F5 /* SharedFilesSliderCell.swift in Sources */,
 				4A9B38F5201F2D99009FC572 /* CollectionViewCellForFaceImage.swift in Sources */,
@@ -28339,6 +28346,7 @@
 				CE7848A722A685FB00662219 /* BottomSelectionTabBarInteractorOutput.swift in Sources */,
 				CE7848A822A685FB00662219 /* ManageContactsViewOutput.swift in Sources */,
 				3AA3D4ED268C454B00B7B1EF /* SilentPushApiService.swift in Sources */,
+				89B9D17D29BEFC2100C73307 /* CreateCollageDetailController.swift in Sources */,
 				CE7848AA22A685FB00662219 /* AppDelegate.swift in Sources */,
 				07AC65FB26EA1A2A00CF8AE3 /* UtilityAPIService.swift in Sources */,
 				CEFAF2E223210D22004A157C /* PhotoSelectionNoFilesView.swift in Sources */,
@@ -30465,6 +30473,7 @@
 				CF7146CB24B597A900D83E60 /* BackUpContactsCard.swift in Sources */,
 				CF8B64FE23CBC9D70021B021 /* AutoNextEditingRowPasser.swift in Sources */,
 				3A94D57D265E1E540097D233 /* AcceptedPeopleCollectionViewCell.swift in Sources */,
+				89B9D17C29BEFC2100C73307 /* CreateCollageDetailController.swift in Sources */,
 				CF8B64FF23CBC9D70021B021 /* FaceImagePhotosViewController.swift in Sources */,
 				CF8B650023CBC9D70021B021 /* CreateStoryPreviewRouterInput.swift in Sources */,
 				CF8B650123CBC9D70021B021 /* FloatingContainerVC.swift in Sources */,
@@ -32182,6 +32191,7 @@
 				CF8B6C7123CBCA280021B021 /* HomeViewTopView.swift in Sources */,
 				CF8B6C7223CBCA280021B021 /* NavBarConfugurator.swift in Sources */,
 				CF8B6C7323CBCA280021B021 /* NSManagedObject+Extensions.swift in Sources */,
+				89B9D17E29BEFC2100C73307 /* CreateCollageDetailController.swift in Sources */,
 				CF8B6C7523CBCA280021B021 /* ConnectWithInstaView.swift in Sources */,
 				49C978382403047E00943F67 /* MobilePaymentPermissionView.swift in Sources */,
 				B558279524FE91600039DD11 /* ObjectRequestResponse.swift in Sources */,

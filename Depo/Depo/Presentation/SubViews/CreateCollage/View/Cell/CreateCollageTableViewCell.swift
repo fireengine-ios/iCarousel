@@ -21,9 +21,6 @@ final class CreateCollageTableViewCell: UITableViewCell {
         let view = UIView()
         view.layer.cornerRadius = 16
         view.backgroundColor = .white
-        view.layer.borderColor = AppColor.tint.cgColor
-        view.layer.borderWidth = 2
-        view.backgroundColor = .green
         return view
     }()
 
@@ -52,7 +49,7 @@ final class CreateCollageTableViewCell: UITableViewCell {
         layout.scrollDirection = .horizontal
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.register(CreateCollageCollectionViewCell.self, forCellWithReuseIdentifier: "CreateCollageCollectionViewCell")
-        view.backgroundColor = .blue
+        view.backgroundColor = .white
         return view
     }()
     
@@ -125,10 +122,10 @@ extension CreateCollageTableViewCell {
     private func setLayout() {
         contentView.addSubview(containerView)
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6).activate()
-        containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8).activate()
-        containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6).activate()
-        containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8).activate()
+        containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 3).activate()
+        containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 4).activate()
+        containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -3).activate()
+        containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -4).activate()
         containerView.heightAnchor.constraint(greaterThanOrEqualToConstant: 200).activate()
         
         containerView.addSubview(titleLabel)

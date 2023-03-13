@@ -10,4 +10,5 @@ import Foundation
 
 protocol CreateCollageRouterInput {
     func navigateToCreateCollage(collageTemplate: CollageTemplateElement)
+    func navigateToSeeAll(collageTemplate: CollageTemplate)
 }
