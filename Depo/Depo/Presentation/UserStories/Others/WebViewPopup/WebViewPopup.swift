@@ -24,6 +24,12 @@ class WebViewPopup: BasePopUpController {
         return view
     }()
     
+    private lazy var closeButton: UIButton = {
+        let view = UIButton()
+        view.setImage(Image.iconCancelUnborder.image, for: .normal)
+        return view
+    }()
+    
     private lazy var webView: WKWebView = {
         let view = WKWebView()
         view.allowsBackForwardNavigationGestures = true
@@ -35,6 +41,15 @@ class WebViewPopup: BasePopUpController {
         super.viewDidLoad()
         
         setup()
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(closeOnTap))
+        view.addGestureRecognizer(recognizer)
+        
+        closeButton.addTarget(self, action: #selector(closeOnTap), for: .touchUpInside)
+    }
+    
+    @objc private func closeOnTap() {
+        close()
     }
     
     //MARK: Utility Method
@@ -54,6 +69,14 @@ class WebViewPopup: BasePopUpController {
         popUpView.addSubview(webView)
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.pinToSuperviewEdges()
+        
+        popUpView.addSubview(closeButton)
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.topAnchor.constraint(equalTo: popUpView.topAnchor, constant: 16).activate()
+        closeButton.trailingAnchor.constraint(equalTo: popUpView.trailingAnchor, constant: -16).activate()
+        closeButton.heightAnchor.constraint(equalToConstant: 24).activate()
+        closeButton.widthAnchor.constraint(equalToConstant: 24).activate()
+
     }
 }
 
