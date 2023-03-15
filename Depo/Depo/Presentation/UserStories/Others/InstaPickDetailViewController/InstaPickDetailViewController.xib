@@ -18,6 +18,8 @@
                 <outlet property="copyToClipboardButton" destination="5GN-cn-ujP" id="8qM-0X-e7J"/>
                 <outlet property="hashTagsLabel" destination="EU4-bu-mbr" id="69O-FJ-kjo"/>
                 <outlet property="hashtagShadowView" destination="ppL-32-kIs" id="TC9-hX-7bF"/>
+                <outlet property="leftButton" destination="7KG-4Z-wzW" id="ynT-aF-Ulh"/>
+                <outlet property="rightButton" destination="M8a-dX-BWE" id="YLv-2j-Fdq"/>
                 <outlet property="shareButton" destination="h6o-kD-Nrz" id="IZ8-t8-33s"/>
                 <outlet property="smallPhotosStackView" destination="jtO-kl-uZE" id="P0a-B5-REU"/>
                 <outlet property="topLabel" destination="IDk-eY-3Lm" id="hkp-a7-h9u"/>
@@ -27,6 +29,8 @@
                 <outletCollection property="instaPickPhotoViews" destination="iax-U1-9TV" collectionClass="NSMutableArray" id="6pX-Qn-lcu"/>
                 <outletCollection property="instaPickPhotoViews" destination="QD4-Gc-Iaq" collectionClass="NSMutableArray" id="6L1-Pn-fGt"/>
                 <outletCollection property="instaPickPhotoViews" destination="6H1-i6-G1u" collectionClass="NSMutableArray" id="FhM-xh-jNM"/>
+                <outletCollection property="instaPickPhotoViews" destination="Pzi-d4-wuC" collectionClass="NSMutableArray" id="cbv-Jc-DZh"/>
+                <outletCollection property="instaPickPhotoViews" destination="O1a-GS-PDM" collectionClass="NSMutableArray" id="tgm-mF-SMg"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -80,7 +84,7 @@
                                             </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jtO-kl-uZE">
-                                            <rect key="frame" x="99.5" y="193" width="152" height="32"/>
+                                            <rect key="frame" x="59.5" y="193" width="232" height="32"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" restorationIdentifier="smallOne" translatesAutoresizingMaskIntoConstraints="NO" id="6H1-i6-G1u" customClass="InstaPickSmallPhotoView" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
@@ -100,6 +104,14 @@
                                                 </view>
                                                 <view contentMode="scaleToFill" restorationIdentifier="smallFour" translatesAutoresizingMaskIntoConstraints="NO" id="iax-U1-9TV" customClass="InstaPickSmallPhotoView" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="120" y="0.0" width="32" height="32"/>
+                                                    <color key="backgroundColor" name="secondaryBackground"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" restorationIdentifier="smallFive" translatesAutoresizingMaskIntoConstraints="NO" id="Pzi-d4-wuC" customClass="InstaPickSmallPhotoView" customModule="Billo" customModuleProvider="target">
+                                                    <rect key="frame" x="160" y="0.0" width="32" height="32"/>
+                                                    <color key="backgroundColor" name="secondaryBackground"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" restorationIdentifier="smallSix" translatesAutoresizingMaskIntoConstraints="NO" id="O1a-GS-PDM" customClass="InstaPickSmallPhotoView" customModule="Billo" customModuleProvider="target">
+                                                    <rect key="frame" x="200" y="0.0" width="32" height="32"/>
                                                     <color key="backgroundColor" name="secondaryBackground"/>
                                                 </view>
                                             </subviews>
@@ -170,23 +182,57 @@
                                 <action selector="onShareTap:" destination="-1" eventType="touchUpInside" id="PCX-wd-uUc"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7KG-4Z-wzW" userLabel="LeftButton">
+                            <rect key="frame" x="25" y="269" width="24" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="6MN-qW-dyr"/>
+                                <constraint firstAttribute="width" constant="24" id="D10-KB-zSV"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="leftCircleArrow"/>
+                            <connections>
+                                <action selector="leftButtonAction:" destination="-1" eventType="touchUpInside" id="oVl-Vc-rdO"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M8a-dX-BWE" userLabel="RightButton">
+                            <rect key="frame" x="302" y="269" width="24" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="24" id="kEY-nn-mci"/>
+                                <constraint firstAttribute="height" constant="24" id="wAS-HZ-fj0"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="rightCircleArrow"/>
+                            <connections>
+                                <action selector="rightButtonAction:" destination="-1" eventType="touchUpInside" id="nGy-ST-hsH"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <accessibility key="accessibilityConfiguration">
+                        <bool key="isElement" value="YES"/>
+                    </accessibility>
                     <constraints>
+                        <constraint firstItem="7KG-4Z-wzW" firstAttribute="leading" secondItem="8IQ-Xh-On3" secondAttribute="leading" constant="25" id="0Ma-LO-SBE"/>
                         <constraint firstAttribute="bottom" secondItem="h6o-kD-Nrz" secondAttribute="bottom" constant="40" id="Auv-5p-ddo"/>
                         <constraint firstItem="8IQ-Xh-On3" firstAttribute="leading" secondItem="865-st-OA2" secondAttribute="leading" id="G8u-L5-40b"/>
                         <constraint firstItem="h6o-kD-Nrz" firstAttribute="top" secondItem="8IQ-Xh-On3" secondAttribute="bottom" constant="33" id="GPr-H9-uQz"/>
                         <constraint firstItem="8IQ-Xh-On3" firstAttribute="top" secondItem="865-st-OA2" secondAttribute="top" constant="40" id="H8D-Ha-ccQ"/>
                         <constraint firstItem="h6o-kD-Nrz" firstAttribute="leading" secondItem="865-st-OA2" secondAttribute="leading" constant="58" id="Nfx-2R-8xS"/>
                         <constraint firstItem="8IQ-Xh-On3" firstAttribute="trailing" secondItem="865-st-OA2" secondAttribute="trailing" id="Yc8-f3-ECL"/>
+                        <constraint firstItem="7KG-4Z-wzW" firstAttribute="centerY" secondItem="M8a-dX-BWE" secondAttribute="centerY" id="Z8X-wK-sT5"/>
                         <constraint firstAttribute="trailing" secondItem="pan-JD-bOc" secondAttribute="trailing" constant="16" id="ZMJ-Y6-HcG"/>
                         <constraint firstItem="pan-JD-bOc" firstAttribute="top" secondItem="865-st-OA2" secondAttribute="top" constant="16" id="hqZ-NM-EaX"/>
+                        <constraint firstItem="M8a-dX-BWE" firstAttribute="centerY" secondItem="jtO-kl-uZE" secondAttribute="centerY" id="jaY-gC-gv7"/>
                         <constraint firstAttribute="trailing" secondItem="h6o-kD-Nrz" secondAttribute="trailing" constant="58" id="poE-sQ-tF0"/>
+                        <constraint firstItem="M8a-dX-BWE" firstAttribute="trailing" secondItem="8IQ-Xh-On3" secondAttribute="trailing" constant="-25" id="zex-jX-hTO"/>
                     </constraints>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="lightContentOverlay"/>
+            <accessibility key="accessibilityConfiguration">
+                <bool key="isElement" value="YES"/>
+            </accessibility>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="865-st-OA2" secondAttribute="trailing" constant="12" id="Pvh-m6-Tp2"/>
                 <constraint firstItem="865-st-OA2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="cij-7i-tZe"/>
@@ -199,6 +245,8 @@
     </objects>
     <resources>
         <image name="iconCancelUnborder" width="24" height="24"/>
+        <image name="leftCircleArrow" width="24" height="24"/>
+        <image name="rightCircleArrow" width="24" height="24"/>
         <namedColor name="lightContentOverlay">
             <color red="0.0" green="0.0" blue="0.0" alpha="0.20000000298023224" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

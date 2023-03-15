@@ -74,6 +74,8 @@ enum Image: String, AppImage {
     case iconCheckBlue
     case iconArrowLeftSmall
     case iconArrowRightsmall
+    case leftCircleArrow
+    case rightCircleArrow
     /// Action/Header
     case iconKebabBorder
     case iconViewGrid
