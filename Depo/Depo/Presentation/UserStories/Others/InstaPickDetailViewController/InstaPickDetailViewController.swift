@@ -16,6 +16,8 @@ final class InstaPickDetailViewController: BaseViewController {
         case smallTwo = "smallTwo"
         case smallThree = "smallThree"
         case smallFour = "smallFour"
+        case smallFive = "smallFive"
+        case smallSix = "smallSix"
         
         var index: Int {
             switch self {
@@ -29,6 +31,10 @@ final class InstaPickDetailViewController: BaseViewController {
                 return 3
             case .smallFour:
                 return 4
+            case .smallFive:
+                return 5
+            case .smallSix:
+                return 6
             }
         }
     }
@@ -39,6 +45,10 @@ final class InstaPickDetailViewController: BaseViewController {
     @IBOutlet private weak var hashTagsLabel: UILabel!
     @IBOutlet private weak var copyToClipboardButton: UIButton!
     @IBOutlet private weak var shareButton: DarkBlueButton!
+    
+    
+    @IBOutlet weak var leftButton: UIButton!
+    @IBOutlet weak var rightButton: UIButton!
     
     @IBOutlet weak var hashtagShadowView: UIView! {
         willSet {
@@ -253,6 +263,9 @@ final class InstaPickDetailViewController: BaseViewController {
             dataSource.hashtags = topRatePhoto?.hashTags ?? []
             
             selectedPhoto = topRatePhoto
+            
+            leftButton.isHidden = analyzes.count < 6
+            rightButton.isHidden = leftButton.isHidden
         }
     }
     
@@ -296,6 +309,36 @@ final class InstaPickDetailViewController: BaseViewController {
     }
     
     //MARK: - Actions
+    
+    @IBAction func leftButtonAction(_ sender: UIButton) {
+        
+        rotateLeft(&analyzes, by: 1)
+        setupPhotoViews()
+    }
+    
+    
+    @IBAction func rightButtonAction(_ sender: UIButton) {
+        rotateRight(&analyzes, by: 1)
+        setupPhotoViews()
+    }
+    
+    // Define a function to rotate the array to the left
+    func rotateLeft<T>(_ array: inout [T], by rotation: Int) {
+        let amount = rotation % array.count
+        let slice = array[1...amount]
+        array.removeSubrange(1...amount)
+        array.append(contentsOf: slice)
+    }
+
+    // Define a function to rotate the array to the right
+    func rotateRight<T>(_ array: inout [T], by rotation: Int) {
+        let amount = rotation % array.count
+        let slice = array[(array.count - amount)..<array.count]
+        array.removeSubrange((array.count - amount)..<array.count)
+        array.insert(contentsOf: slice, at: 1)
+    }
+    
+    
     @IBAction private func onCopyToClipboardTap(_ sender: Any) {
         let clipboardString = dataSource.hashtags.joined()
         UIPasteboard.general.string = clipboardString

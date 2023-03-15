@@ -36,7 +36,7 @@ final class InstaPickSelectionSegmentedController: BaseViewController, ErrorPres
     
     private let selectionControllerPageSize = Device.isIpad ? 200 : 100
     private var currentSelectingCount = 0
-    private let selectingLimit = 5
+    private let selectingLimit = 15
     
     private var segmentedViewControllers: [UIViewController] = []
     private var delegates = MulticastDelegate<InstaPickSelectionSegmentedControllerDelegate>()

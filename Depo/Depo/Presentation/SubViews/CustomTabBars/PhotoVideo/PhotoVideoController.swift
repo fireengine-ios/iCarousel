@@ -115,11 +115,12 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             presentRecoveryEmailVerificationPopUp()
         }
         
-        let inAppPopup = WebViewPopup.with(url: "https://www.turkcell.com.tr")
-        inAppPopup.modalPresentationStyle = .overFullScreen
-        inAppPopup.modalTransitionStyle = .crossDissolve
-
-        UIApplication.topController()?.present(inAppPopup, animated: true, completion: nil)
+//        let inAppPopup = WebViewPopup.with(url: "https://www.turkcell.com.tr")
+        
+//        inAppPopup.modalPresentationStyle = .overFullScreen
+//        inAppPopup.modalTransitionStyle = .crossDissolve
+//
+//        UIApplication.topController()?.present(inAppPopup, animated: true, completion: nil)
     }
 
     private func setupRefresher() {
