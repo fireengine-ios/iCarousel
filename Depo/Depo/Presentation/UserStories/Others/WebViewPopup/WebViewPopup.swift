@@ -35,6 +35,8 @@ class WebViewPopup: BasePopUpController {
         view.allowsBackForwardNavigationGestures = true
         return view
     }()
+    
+    private var isUrl = false
 
     //MARK: Life cycle
     override func viewDidLoad() {
@@ -82,10 +84,7 @@ class WebViewPopup: BasePopUpController {
 
 //MARK: - Init
 extension WebViewPopup {
-    
-    static func with(url: String) -> WebViewPopup {
-        let controller = WebViewPopup()
-
+    private static func raiseWebView(controller: WebViewPopup, url: String) {
         // Create a new URL object with the URL you want to load
         let url = URL(string: url)!
 
@@ -94,6 +93,22 @@ extension WebViewPopup {
 
         // Load the URL request in the WKWebView
         controller.webView.load(request)
+    }
+    
+    private static func raiseHtml(controller: WebViewPopup, content: String) {
+        // will be developed after notification body is ready!
+    }
+    
+    static func with(content: String, id: Int, isUrl: Bool) -> WebViewPopup {
+        let controller = WebViewPopup()
+        
+        controller.isUrl = isUrl
+        
+        if isUrl {
+            raiseWebView(controller: controller, url: content)
+        } else {
+            raiseHtml(controller: controller, content: content)
+        }
 
         return controller
     }
