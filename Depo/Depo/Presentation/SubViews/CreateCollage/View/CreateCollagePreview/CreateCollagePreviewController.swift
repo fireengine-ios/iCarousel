@@ -12,8 +12,6 @@ import UIKit
 
 final class CreateCollagePreviewController: BaseViewController, UITextFieldDelegate {
     
-    let router = CreateCollageRouter()
-    
     private lazy var containerView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 16
@@ -29,6 +27,7 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
         return view
     }()
     
+    let router = CreateCollageRouter()
     private var longPressedItem: Int = -1
     private var collagePhotoCount: Int = 0
     private var xRatioConstant: Double = 0
@@ -39,6 +38,7 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
     private var collageTemplate: CollageTemplateElement?
     private lazy var bottomBarManager = CreateCollageBottomBarManager(delegate: self)
     private var photoSelectType = PhotoSelectType.newPhotoSelection
+    var panGesture  = UIPanGestureRecognizer()
     
     init(collageTemplate: CollageTemplateElement, selectedItems: [SearchItemResponse]) {
         self.collageTemplate = collageTemplate
@@ -90,19 +90,13 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
 
         for i in 0...shapeDetails.count - 1 {
             if shapeDetails[i].type == "RECTANGLE" {
-                
                 let imageWidth = Double(shapeDetails[i].shapeCoordinates[1].x) - Double(shapeDetails[i].shapeCoordinates[0].x)
                 let imageHeight = Double(shapeDetails[i].shapeCoordinates[2].y) - Double(shapeDetails[i].shapeCoordinates[1].y)
-                    
                 let xFirst = Double(shapeDetails[i].shapeCoordinates[0].x)
                 let yFirst = Double(shapeDetails[i].shapeCoordinates[0].y)
-                
                 let xStart = (xFirst / xRatioConstant)
                 let yStart = (yFirst / xRatioConstant)
-
                 let viewFrame = CGRect(x: xStart, y: yStart, width: imageWidth / xRatioConstant, height: imageHeight / xRatioConstant)
-                
-                
                 switch photoSelectType {
                 case .newPhotoSelection:
                     let imageView = UIImageView(frame: viewFrame)
@@ -116,15 +110,37 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
                     contentView.addSubview(imageView)
                 case .changePhotoSelection:
                     let imageScrollView = ImageScrollViewCollage(frame: viewFrame)
-                    
                     imageScrollView.imageViewTag = i
-                    
-                   
                     let imageUrl = selectedItems[i].metadata?.mediumUrl
                     imageScrollView.imageView.loadImageData(with: imageUrl)
                     contentView.addSubview(imageScrollView)
                 }
-                
+            } else if shapeDetails[i].type == "CIRCLE" {
+                let imageWidth = Double(shapeDetails[i].shapeCoordinates[0].radius ?? 0)
+                let imageHeight = imageWidth
+                let xFirst = Double(shapeDetails[i].shapeCoordinates[0].x)
+                let yFirst = Double(shapeDetails[i].shapeCoordinates[0].y)
+                let xStart = (xFirst / xRatioConstant)
+                let yStart = (yFirst / xRatioConstant)
+                let viewFrame = CGRect(x: xStart, y: yStart, width: imageWidth, height: imageHeight)
+                switch photoSelectType {
+                case .newPhotoSelection:
+                    let imageView = UIImageView(frame: viewFrame)
+                    imageView.tag = i
+                    imageView.isUserInteractionEnabled = true
+                    let tapImage = UITapGestureRecognizer(target: self, action: #selector(thumbnailImageTapped(_:)))
+                    imageView.addGestureRecognizer(tapImage)
+                    imageView.backgroundColor = AppColor.collageThumbnailColor.color
+                    imageView.contentMode = .center
+                    imageView.image = Image.iconAddUnselect.image
+                    contentView.addSubview(imageView)
+                case .changePhotoSelection:
+                    let imageScrollView = ImageScrollViewCollage(frame: viewFrame)
+                    imageScrollView.imageViewTag = i
+                    let imageUrl = selectedItems[i].metadata?.mediumUrl
+                    imageScrollView.imageView.loadImageData(with: imageUrl)
+                    contentView.addSubview(imageScrollView)
+                }
             }
         }
         

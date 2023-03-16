@@ -24,6 +24,7 @@ struct CollageTemplateElement: Codable {
     // MARK: - ShapeCoordinate
     struct ShapeCoordinate: Codable {
         let x, y: Int
+        let radius: Int?
     }
 }
 
