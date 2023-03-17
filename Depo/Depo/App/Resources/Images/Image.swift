@@ -92,6 +92,7 @@ enum Image: String, AppImage {
     case iconSelectCheck
     case iconSelectEmpty
     case iconSelectFills
+    case iconCircleCancel
     /// Action/Music
     case iconPauseRed
     case iconPlayRed

@@ -19,14 +19,13 @@ class WebViewPopup: BasePopUpController {
         view.layer.shadowOpacity = 0.5
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOffset = .zero
-        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         view.clipsToBounds = true
         return view
     }()
     
     private lazy var closeButton: UIButton = {
         let view = UIButton()
-        view.setImage(Image.iconCancelUnborder.image, for: .normal)
+        view.setImage(Image.iconCircleCancel.image, for: .normal)
         return view
     }()
     
@@ -63,10 +62,11 @@ class WebViewPopup: BasePopUpController {
         
         view.addSubview(popUpView)
         popUpView.translatesAutoresizingMaskIntoConstraints = false
-        popUpView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).activate()
+        
+        popUpView.topAnchor.constraint(equalTo: view.topAnchor, constant: 80).activate()
+        popUpView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80).activate()
         popUpView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).activate()
         popUpView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).activate()
-        popUpView.heightAnchor.constraint(equalToConstant: 300).activate()
         
         popUpView.addSubview(webView)
         webView.translatesAutoresizingMaskIntoConstraints = false
