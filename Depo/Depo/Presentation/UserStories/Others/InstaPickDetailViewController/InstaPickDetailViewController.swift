@@ -67,9 +67,8 @@ final class InstaPickDetailViewController: BaseViewController {
             newValue.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         }
     }
-    
-    @IBOutlet private weak var smallPhotosStackView: UIStackView!
-    
+    @IBOutlet weak var smallPhotosCollectionView: UICollectionView!
+        
     @IBOutlet private weak var collectionView: UICollectionView! {
         willSet {
             newValue.layer.cornerRadius = 16
@@ -81,6 +80,7 @@ final class InstaPickDetailViewController: BaseViewController {
 
     //MARK: Vars
     private var dataSource = InstaPickHashtagCollectionViewDataSource()
+    private var smallPhotoDataSource = InstaPickSmallPhotoCollectionViewDataSource()
     private var isShown = false
     private var selectedPhoto: InstapickAnalyze?
 
@@ -161,7 +161,7 @@ final class InstaPickDetailViewController: BaseViewController {
             if let id = view.restorationIdentifier, let type = PhotoViewType(rawValue: id), type.index <= maxIndex {
                 let analyze = analyzes[type.index]
                 
-                view.configureImageView(with: analyze, delegate: self, smallPhotosCount: maxIndex)
+                view.configureImageView(with: analyze)
             } else {
                 view.isHidden = true
             }
@@ -172,8 +172,14 @@ final class InstaPickDetailViewController: BaseViewController {
         collectionView.collectionViewLayout = dataSource
         collectionView.delegate = dataSource
         collectionView.dataSource = dataSource
-        
         collectionView.register(nibCell: InstaPickHashtagCell.self)
+        
+        smallPhotoDataSource.delegate = self
+        smallPhotosCollectionView.showsHorizontalScrollIndicator = false
+        smallPhotosCollectionView.collectionViewLayout = smallPhotoDataSource
+        smallPhotosCollectionView.delegate = smallPhotoDataSource
+        smallPhotosCollectionView.dataSource = smallPhotoDataSource
+        smallPhotosCollectionView.register(nibCell: InstaPickSmallPhotoCell.self)
     }
     
     private func setupFonts() {
@@ -262,6 +268,8 @@ final class InstaPickDetailViewController: BaseViewController {
             
             dataSource.hashtags = topRatePhoto?.hashTags ?? []
             
+            smallPhotoDataSource.smallPhotos = Array(analyzes.dropFirst())
+            
             selectedPhoto = topRatePhoto
             
             leftButton.isHidden = analyzes.count < 6
@@ -281,6 +289,9 @@ final class InstaPickDetailViewController: BaseViewController {
         setupPhotoViews()
         
         dataSource.hashtags = model.hashTags
+        smallPhotoDataSource.smallPhotos = Array(analyzes.dropFirst())
+        
+        smallPhotosCollectionView.reloadData()
         collectionView.reloadData()
         
         configureShareButton(isEnabled: model.fileInfo?.uuid != nil)
@@ -308,36 +319,32 @@ final class InstaPickDetailViewController: BaseViewController {
         UIApplication.showErrorAlert(message: message)
     }
     
+    
+    
     //MARK: - Actions
     
     @IBAction func leftButtonAction(_ sender: UIButton) {
+        smallPhotoDataSource.currentIndex -= 1
         
-        rotateLeft(&analyzes, by: 1)
-        setupPhotoViews()
+        if smallPhotoDataSource.currentIndex < 0 {
+            smallPhotoDataSource.currentIndex = 0
+        }
+        
+        let nextIndexPath = IndexPath(item: smallPhotoDataSource.currentIndex, section: 0)
+        smallPhotosCollectionView.scrollToItem(at: nextIndexPath, at: .centeredHorizontally, animated: true)
     }
     
     
     @IBAction func rightButtonAction(_ sender: UIButton) {
-        rotateRight(&analyzes, by: 1)
-        setupPhotoViews()
+        smallPhotoDataSource.currentIndex += 1
+        
+        if smallPhotoDataSource.currentIndex >= smallPhotoDataSource.smallPhotos.count {
+            smallPhotoDataSource.currentIndex = smallPhotoDataSource.smallPhotos.count - 1
+        }
+        
+        let nextIndexPath = IndexPath(item: smallPhotoDataSource.currentIndex, section: 0)
+        smallPhotosCollectionView.scrollToItem(at: nextIndexPath, at: .centeredHorizontally, animated: true)
     }
-    
-    // Define a function to rotate the array to the left
-    func rotateLeft<T>(_ array: inout [T], by rotation: Int) {
-        let amount = rotation % array.count
-        let slice = array[1...amount]
-        array.removeSubrange(1...amount)
-        array.append(contentsOf: slice)
-    }
-
-    // Define a function to rotate the array to the right
-    func rotateRight<T>(_ array: inout [T], by rotation: Int) {
-        let amount = rotation % array.count
-        let slice = array[(array.count - amount)..<array.count]
-        array.removeSubrange((array.count - amount)..<array.count)
-        array.insert(contentsOf: slice, at: 1)
-    }
-    
     
     @IBAction private func onCopyToClipboardTap(_ sender: Any) {
         let clipboardString = dataSource.hashtags.joined()

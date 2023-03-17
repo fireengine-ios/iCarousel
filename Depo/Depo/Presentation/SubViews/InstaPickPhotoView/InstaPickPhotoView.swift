@@ -7,11 +7,6 @@
 //
 
 import UIKit
-import SwiftUI
-
-protocol InstaPickPhotoViewDelegate: AnyObject {
-    func didTapOnImage(_ model: InstapickAnalyze?)
-}
 
 class InstaPickPhotoView: UIView, NibInit {
     
@@ -61,14 +56,7 @@ class InstaPickPhotoView: UIView, NibInit {
     
     private let pictureNotFoundStackView = UIStackView()
     
-    
-    var rateViewCenterYConstraint: NSLayoutConstraint!
-    var imageViewHeightConstraint: NSLayoutConstraint!
-    
     var model: InstapickAnalyze?
-    private weak var delegate: InstaPickPhotoViewDelegate?
-
-    private lazy var tapGesture = UITapGestureRecognizer(target: self, action: #selector(onImageTap))
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -83,14 +71,11 @@ class InstaPickPhotoView: UIView, NibInit {
     }
     
     private func setup() {
-        addGestureRecognizer(tapGesture)
-        
         setupLabelsDesign(isIPad: Device.isIpad)
         configurePictureNotFound(fontSize: 16, imageWidth: 30, spacing: 8)
     }
 
     func setupLayout(isIPad: Bool) {
-        
         addSubview(containerView)
         
         containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -106,7 +91,6 @@ class InstaPickPhotoView: UIView, NibInit {
         pictureNotFoundStackView.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
         pictureNotFoundStackView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
     }
-    
     
     func setupLabelsDesign(isIPad: Bool) {
         rateLabel.textColor = .white
@@ -148,18 +132,12 @@ class InstaPickPhotoView: UIView, NibInit {
     }
     
     //MARK: - Utility methods(public)
-    func configureImageView(with model: InstapickAnalyze,
-                            delegate: InstaPickPhotoViewDelegate? = nil,
-                            smallPhotosCount: Int) {
+    func configureImageView(with model: InstapickAnalyze) {
         if let oldModel = self.model, let oldId = oldModel.fileInfo?.uuid, let newId = model.fileInfo?.uuid {
             ///logic for reuse this method on tap at small image (not pass if model same and reconfigure if thay are different)
             if oldId == newId {
                 return
             }
-        }
-        
-        if delegate != nil {
-            self.delegate = delegate
         }
         
         self.model = model
@@ -194,16 +172,7 @@ class InstaPickPhotoView: UIView, NibInit {
             }, completion: nil)
         })
         
-        if model.isPicked {
-            pickedView.isHidden = isNeedHidePickedView(hasSmallPhotos: smallPhotosCount > 0)
-            
-        } else {
-            pickedView.isHidden = true
-//
-//            rateView.backgroundColor = AppColor.button.color
-//
-//            containerView.backgroundColor = AppColor.button.color
-        }
+        pickedView.isHidden = !model.isPicked
     }
     
     func getImage() -> UIImage? {
@@ -217,10 +186,5 @@ class InstaPickPhotoView: UIView, NibInit {
     
     func isNeedHidePickedView(hasSmallPhotos: Bool) -> Bool {
         return true
-    }
-    
-    //MARK: Action
-    @objc func onImageTap() {
-        delegate?.didTapOnImage(model)
     }
 }

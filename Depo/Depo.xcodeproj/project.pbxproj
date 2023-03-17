@@ -1207,6 +1207,18 @@
 		52E6815B29BF417E0023DADB /* WebViewPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E6815929BF417E0023DADB /* WebViewPopup.swift */; };
 		52E6815C29BF417E0023DADB /* WebViewPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E6815929BF417E0023DADB /* WebViewPopup.swift */; };
 		52E6815D29BF417E0023DADB /* WebViewPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E6815929BF417E0023DADB /* WebViewPopup.swift */; };
+		52E6816029C33D9A0023DADB /* InstaPickSmallPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E6815F29C33D9A0023DADB /* InstaPickSmallPhotoCell.swift */; };
+		52E6816129C33D9A0023DADB /* InstaPickSmallPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E6815F29C33D9A0023DADB /* InstaPickSmallPhotoCell.swift */; };
+		52E6816229C33D9A0023DADB /* InstaPickSmallPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E6815F29C33D9A0023DADB /* InstaPickSmallPhotoCell.swift */; };
+		52E6816329C33D9A0023DADB /* InstaPickSmallPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E6815F29C33D9A0023DADB /* InstaPickSmallPhotoCell.swift */; };
+		52E6816E29C33E200023DADB /* InstaPickSmallPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52E6816D29C33E200023DADB /* InstaPickSmallPhotoCell.xib */; };
+		52E6816F29C33E200023DADB /* InstaPickSmallPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52E6816D29C33E200023DADB /* InstaPickSmallPhotoCell.xib */; };
+		52E6817029C33E200023DADB /* InstaPickSmallPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52E6816D29C33E200023DADB /* InstaPickSmallPhotoCell.xib */; };
+		52E6817129C33E200023DADB /* InstaPickSmallPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52E6816D29C33E200023DADB /* InstaPickSmallPhotoCell.xib */; };
+		52E6817329C33F7F0023DADB /* InstaPickSmallPhotoCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E6817229C33F7F0023DADB /* InstaPickSmallPhotoCollectionViewDataSource.swift */; };
+		52E6817429C33F7F0023DADB /* InstaPickSmallPhotoCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E6817229C33F7F0023DADB /* InstaPickSmallPhotoCollectionViewDataSource.swift */; };
+		52E6817529C33F7F0023DADB /* InstaPickSmallPhotoCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E6817229C33F7F0023DADB /* InstaPickSmallPhotoCollectionViewDataSource.swift */; };
+		52E6817629C33F800023DADB /* InstaPickSmallPhotoCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E6817229C33F7F0023DADB /* InstaPickSmallPhotoCollectionViewDataSource.swift */; };
 		52EDD1A9299A68F800D549FC /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1A8299A68F800D549FC /* NotificationService.swift */; };
 		52EDD1AA299A68F800D549FC /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1A8299A68F800D549FC /* NotificationService.swift */; };
 		52EDD1AB299A68F800D549FC /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD1A8299A68F800D549FC /* NotificationService.swift */; };
@@ -10317,6 +10329,9 @@
 		52BF679528FFE05300D8D4E6 /* PasswordValidationSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidationSetView.swift; sourceTree = "<group>"; };
 		52C1BB922996770C00D9FB09 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		52E6815929BF417E0023DADB /* WebViewPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPopup.swift; sourceTree = "<group>"; };
+		52E6815F29C33D9A0023DADB /* InstaPickSmallPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickSmallPhotoCell.swift; sourceTree = "<group>"; };
+		52E6816D29C33E200023DADB /* InstaPickSmallPhotoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstaPickSmallPhotoCell.xib; sourceTree = "<group>"; };
+		52E6817229C33F7F0023DADB /* InstaPickSmallPhotoCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickSmallPhotoCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		52EDD1A8299A68F800D549FC /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		52EDD1AD299A6A7C00D549FC /* NotificationParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationParameters.swift; sourceTree = "<group>"; };
 		52EDD1B2299A778700D549FC /* NotificationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationResponse.swift; sourceTree = "<group>"; };
@@ -14760,6 +14775,16 @@
 			path = WebViewPopup;
 			sourceTree = "<group>";
 		};
+		52E6816729C33DEB0023DADB /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				52E6815F29C33D9A0023DADB /* InstaPickSmallPhotoCell.swift */,
+				52E6816D29C33E200023DADB /* InstaPickSmallPhotoCell.xib */,
+				52E6817229C33F7F0023DADB /* InstaPickSmallPhotoCollectionViewDataSource.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		52EDD1A4299A68B600D549FC /* NotificationService */ = {
 			isa = PBXGroup;
 			children = (
@@ -17526,6 +17551,7 @@
 		9219B18721ECA21800098021 /* InstaPickDetailViewController */ = {
 			isa = PBXGroup;
 			children = (
+				52E6816729C33DEB0023DADB /* Cells */,
 				9219B18821ECA25800098021 /* InstaPickDetailViewController.swift */,
 				9219B18921ECA25800098021 /* InstaPickDetailViewController.xib */,
 				921FF09921EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift */,
@@ -23234,6 +23260,7 @@
 				98BE78A924517E4300B8864F /* SnackbarView.xib in Resources */,
 				B5601AD823506349002E1D1E /* InitializingViewController.xib in Resources */,
 				8C49817423165B13007015CF /* TermsCheckboxTextView.xib in Resources */,
+				52E6816E29C33E200023DADB /* InstaPickSmallPhotoCell.xib in Resources */,
 				CF71473024B597AA00D83E60 /* ContactSyncScheduleCard.xib in Resources */,
 				07C75A11281A786400B028F0 /* GT-America-LC-Standard-Black.ttf in Resources */,
 				985E6956255A6045006F6CD7 /* PrivateShareUserRoleViewController.xib in Resources */,
@@ -23755,6 +23782,7 @@
 				CE784EA422A685FB00662219 /* PasswordCell.xib in Resources */,
 				CE784EA622A685FB00662219 /* BaseCollectionViewCellWithSwipe.xib in Resources */,
 				9823197224F3A1E600FD16E2 /* PreparedFilterCell.xib in Resources */,
+				52E6817029C33E200023DADB /* InstaPickSmallPhotoCell.xib in Resources */,
 				737A2EC92338F44E0014258A /* QuestionCell.xib in Resources */,
 				98A86D8F23A8BD3600438225 /* AlbumCell.xib in Resources */,
 				CE784EAA22A685FB00662219 /* MovieCard.xib in Resources */,
@@ -23860,6 +23888,7 @@
 				F0571EFC288C1D3000A0D6AC /* ForYouCollectionViewCell.xib in Resources */,
 				3A9C284026529C3900EFADE9 /* InvitationCampaignDetailView.xib in Resources */,
 				CF8B68D223CBC9D70021B021 /* LeavePremiumViewController.xib in Resources */,
+				52E6816F29C33E200023DADB /* InstaPickSmallPhotoCell.xib in Resources */,
 				CF8B68D323CBC9D70021B021 /* FreeAppSpaceViewCotroller.xib in Resources */,
 				CF8B68D823CBC9D70021B021 /* PVViewerController.xib in Resources */,
 				F028C0FC2789E022005CE6AF /* PublicShareViewController.xib in Resources */,
@@ -24542,6 +24571,7 @@
 				CF8B727D23CBCA280021B021 /* MovieCard.xib in Resources */,
 				CF8B727E23CBCA280021B021 /* AnalyzeHistoryEmptyCell.xib in Resources */,
 				CF8B728123CBCA280021B021 /* ForgotPasswordViewController.xib in Resources */,
+				52E6817129C33E200023DADB /* InstaPickSmallPhotoCell.xib in Resources */,
 				0305A34E23D5C5A1004D1EC7 /* HSSmartAlbumWarningPopUp.xib in Resources */,
 				CF8B728423CBCA280021B021 /* SettingsViewController.xib in Resources */,
 				0305A30823D5C2D9004D1EC7 /* StickerCollectionViewCell.xib in Resources */,
@@ -26144,6 +26174,7 @@
 				52501E7129952A190000376C /* NotificationViewInput.swift in Sources */,
 				980488D521EDC983004DB091 /* AnalyzeHistoryTabBarPresenter.swift in Sources */,
 				CF7146A624B597A900D83E60 /* ContactBackupHistoryPopupFactory.swift in Sources */,
+				52E6817329C33F7F0023DADB /* InstaPickSmallPhotoCollectionViewDataSource.swift in Sources */,
 				8C0E8D651FDEBDFF00789C91 /* BaseDataSourceForCollectionView.swift in Sources */,
 				8C0E8D661FDEBDFF00789C91 /* AutoSyncViewController.swift in Sources */,
 				9853CD242361BD5600E19BF7 /* BorderDotsPageControl.swift in Sources */,
@@ -26782,6 +26813,7 @@
 				CF7146A024B597A900D83E60 /* ContactsBackupHistoryView.swift in Sources */,
 				8C0E8ECD1FDEBDFF00789C91 /* LocalAlbumCollectionViewCell.swift in Sources */,
 				8C0E8ECE1FDEBDFF00789C91 /* AlbumItem.swift in Sources */,
+				52E6816029C33D9A0023DADB /* InstaPickSmallPhotoCell.swift in Sources */,
 				CF71469424B597A900D83E60 /* ContactsBackupHistoryController.swift in Sources */,
 				8C0E8ECF1FDEBDFF00789C91 /* UserProfileRouter.swift in Sources */,
 				8C0E8ED01FDEBDFF00789C91 /* SelectionImageView.swift in Sources */,
@@ -27897,6 +27929,7 @@
 				982319DE24F3A1E700FD16E2 /* AdjustmentCategoriesView.swift in Sources */,
 				CE78482B22A685FB00662219 /* EditinglBar.swift in Sources */,
 				CE78482C22A685FB00662219 /* NotificationName+Extensions.swift in Sources */,
+				52E6817529C33F7F0023DADB /* InstaPickSmallPhotoCollectionViewDataSource.swift in Sources */,
 				CE78482D22A685FB00662219 /* AugmentedRealityController.swift in Sources */,
 				98AC47FF252DFC05003EB6C5 /* FunTabBar.swift in Sources */,
 				98792DD122FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift in Sources */,
@@ -29374,6 +29407,7 @@
 				CE784C0022A685FB00662219 /* AccountParameters.swift in Sources */,
 				CE784C0122A685FB00662219 /* PrintViewOutput.swift in Sources */,
 				CE784C0222A685FB00662219 /* UIBarButtonItem+Extensions.swift in Sources */,
+				52E6816229C33D9A0023DADB /* InstaPickSmallPhotoCell.swift in Sources */,
 				CE784C0322A685FB00662219 /* PackagesViewInput.swift in Sources */,
 				CE784C0422A685FB00662219 /* SelectNameViewOutput.swift in Sources */,
 				CE784C0522A685FB00662219 /* SelectNameViewController.swift in Sources */,
@@ -30669,6 +30703,7 @@
 				982319BE24F3A1E700FD16E2 /* AdjustmentParameterSliderView.swift in Sources */,
 				CF8B665723CBC9D70021B021 /* AlertFilesActionsSheetPresenter.swift in Sources */,
 				CF8B665823CBC9D70021B021 /* InstagramAuthViewController.swift in Sources */,
+				52E6816129C33D9A0023DADB /* InstaPickSmallPhotoCell.swift in Sources */,
 				CF8B665923CBC9D70021B021 /* FromNib.swift in Sources */,
 				CF8B665A23CBC9D70021B021 /* InstapickAnalyze.swift in Sources */,
 				CF8B665B23CBC9D70021B021 /* KeychainSwift+Optional.swift in Sources */,
@@ -31217,6 +31252,7 @@
 				CF8B67EB23CBC9D70021B021 /* SelectNameInteractorOutput.swift in Sources */,
 				CF8B67EC23CBC9D70021B021 /* SelectNameInteractor.swift in Sources */,
 				CF8B67ED23CBC9D70021B021 /* AppMigrator.swift in Sources */,
+				52E6817429C33F7F0023DADB /* InstaPickSmallPhotoCollectionViewDataSource.swift in Sources */,
 				9842FB882563D25700B07606 /* PrivateShareContactsViewController.swift in Sources */,
 				B501EF302421FF6100DEA9B4 /* LocalAlbumsCache.swift in Sources */,
 				CF8B67EE23CBC9D70021B021 /* SelectNameRouterInput.swift in Sources */,
@@ -32083,6 +32119,7 @@
 				CF8B6D0323CBCA280021B021 /* HelpAndSupportRouter.swift in Sources */,
 				985E6954255A6045006F6CD7 /* PrivateShareUserRoleViewController.swift in Sources */,
 				CF8B6D0423CBCA280021B021 /* PremiumRouter.swift in Sources */,
+				52E6817629C33F800023DADB /* InstaPickSmallPhotoCollectionViewDataSource.swift in Sources */,
 				CF8B6D0523CBCA280021B021 /* MediaItemOperationsService.swift in Sources */,
 				07DB93BE2860AF5400D5CACF /* ReceiptParsingError.swift in Sources */,
 				CF8B6D0623CBCA280021B021 /* InstaPickHashtagCell.swift in Sources */,
@@ -32241,6 +32278,7 @@
 				CF8B6D7A23CBCA280021B021 /* LaunchCampaignCard.swift in Sources */,
 				CF8B6D7B23CBCA280021B021 /* IntroduceConfigurator.swift in Sources */,
 				CF8B6D7C23CBCA280021B021 /* DarkPopUpController.swift in Sources */,
+				52E6816329C33D9A0023DADB /* InstaPickSmallPhotoCell.swift in Sources */,
 				CF8B6D7D23CBCA280021B021 /* PasscodeStorage.swift in Sources */,
 				98B047A1259314740011DAEB /* UIAlertViewCustom.m in Sources */,
 				CF8B6D7E23CBCA280021B021 /* PeriodicContactSyncViewInput.swift in Sources */,
