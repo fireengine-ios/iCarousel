@@ -8,9 +8,9 @@
 
 import UIKit
 
-class NotificationCountHolder {
+class NotificationHolder {
     var count = 0
-    static let shared = NotificationCountHolder()
+    static let shared = NotificationHolder()
 }
 
 class BaseViewController: ViewController {
@@ -55,7 +55,7 @@ class BaseViewController: ViewController {
             title: "", style: .plain, target: nil, action: nil)
         
         
-        settingsNavButton.setnotificationCount(with: NotificationCountHolder.shared.count)
+        settingsNavButton.setnotificationCount(with: NotificationHolder.shared.count)
     }
 
     deinit {
@@ -186,17 +186,36 @@ extension BaseViewController: UIViewControllerTransitioningDelegate {
 }
 
 extension BaseViewController {
+    func fetchNotificationPopup(completion: @escaping (_ content: String, _ id: Int, _ isUrl: Bool) -> Void) {
+        service.fetch(
+            success: { response in
+                guard let notification = response as? NotificationResponse else { return }
+                DispatchQueue.main.async {
+                    let popup = notification.list.filter({$0.notificationType == "POP_UP"}).sorted { one, two in
+                        one.priority ?? 0 < two.priority ?? 0
+                    }
+                    
+                    if let url = popup.first?.url, let id = popup.first?.communicationNotificationId {
+                        completion(url, id, true)
+                    } else if let body = popup.first?.body, let id = popup.first?.communicationNotificationId {
+                        completion(body, id, false)
+                    }
+                }
+            }, fail: { errorResponse in
+        })
+    }
+    
     func fetchNotificationCount() {
         service.fetch(
             success: { [weak self] response in
                 guard let notification = response as? NotificationResponse else { return }
                 DispatchQueue.main.async {
                     let count = notification.list.map({$0.status == "UNREAD" && $0.notificationType == "IN_APP"}).filter({$0}).count
-                    NotificationCountHolder.shared.count = count
+                    NotificationHolder.shared.count = count
                     self?.settingsNavButton.setnotificationCount(with: count)
                 }
             }, fail: { [weak self] errorResponse in
-                NotificationCountHolder.shared.count = 0
+                NotificationHolder.shared.count = 0
                 self?.settingsNavButton.setnotificationCount(with: 0)
         })
     }

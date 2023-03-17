@@ -19,14 +19,13 @@ class WebViewPopup: BasePopUpController {
         view.layer.shadowOpacity = 0.5
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOffset = .zero
-        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         view.clipsToBounds = true
         return view
     }()
     
     private lazy var closeButton: UIButton = {
         let view = UIButton()
-        view.setImage(Image.iconCancelUnborder.image, for: .normal)
+        view.setImage(Image.iconCircleCancel.image, for: .normal)
         return view
     }()
     
@@ -35,6 +34,8 @@ class WebViewPopup: BasePopUpController {
         view.allowsBackForwardNavigationGestures = true
         return view
     }()
+    
+    private var isUrl = false
 
     //MARK: Life cycle
     override func viewDidLoad() {
@@ -61,10 +62,11 @@ class WebViewPopup: BasePopUpController {
         
         view.addSubview(popUpView)
         popUpView.translatesAutoresizingMaskIntoConstraints = false
-        popUpView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).activate()
+        
+        popUpView.topAnchor.constraint(equalTo: view.topAnchor, constant: 80).activate()
+        popUpView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80).activate()
         popUpView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).activate()
         popUpView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).activate()
-        popUpView.heightAnchor.constraint(equalToConstant: 300).activate()
         
         popUpView.addSubview(webView)
         webView.translatesAutoresizingMaskIntoConstraints = false
@@ -82,10 +84,7 @@ class WebViewPopup: BasePopUpController {
 
 //MARK: - Init
 extension WebViewPopup {
-    
-    static func with(url: String) -> WebViewPopup {
-        let controller = WebViewPopup()
-
+    private static func raiseWebView(controller: WebViewPopup, url: String) {
         // Create a new URL object with the URL you want to load
         let url = URL(string: url)!
 
@@ -94,6 +93,22 @@ extension WebViewPopup {
 
         // Load the URL request in the WKWebView
         controller.webView.load(request)
+    }
+    
+    private static func raiseHtml(controller: WebViewPopup, content: String) {
+        // will be developed after notification body is ready!
+    }
+    
+    static func with(content: String, id: Int, isUrl: Bool) -> WebViewPopup {
+        let controller = WebViewPopup()
+        
+        controller.isUrl = isUrl
+        
+        if isUrl {
+            raiseWebView(controller: controller, url: content)
+        } else {
+            raiseHtml(controller: controller, content: content)
+        }
 
         return controller
     }
