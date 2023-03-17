@@ -23,6 +23,8 @@ class InstaPickSmallPhotoCollectionViewDataSource: UICollectionViewFlowLayout {
         super.init()
         
         scrollDirection = .horizontal
+        minimumLineSpacing = 0
+        minimumInteritemSpacing = 0
     }
     
     required init?(coder: NSCoder) {
@@ -43,7 +45,7 @@ class InstaPickSmallPhotoCollectionViewDataSource: UICollectionViewFlowLayout {
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        currentIndex = Int(abs(scrollView.contentOffset.x) / CGFloat((41 + 8 / 2)))
+        currentIndex = Int(abs(scrollView.contentOffset.x) / CGFloat(41))
     }
 }
 
