@@ -9,36 +9,6 @@
 import UIKit
 
 final class InstaPickDetailViewController: BaseViewController {
-    
-    private enum PhotoViewType: String {
-        case bigView = "bigView"
-        case smallOne = "smallOne"
-        case smallTwo = "smallTwo"
-        case smallThree = "smallThree"
-        case smallFour = "smallFour"
-        case smallFive = "smallFive"
-        case smallSix = "smallSix"
-        
-        var index: Int {
-            switch self {
-            case .bigView:
-                return 0
-            case .smallOne:
-                return 1
-            case .smallTwo:
-                return 2
-            case .smallThree:
-                return 3
-            case .smallFour:
-                return 4
-            case .smallFive:
-                return 5
-            case .smallSix:
-                return 6
-            }
-        }
-    }
-    
     //MARK: IBOutlet
     @IBOutlet private weak var topLabel: UILabel!
     @IBOutlet private weak var analysisLeftLabel: UILabel!
@@ -76,8 +46,8 @@ final class InstaPickDetailViewController: BaseViewController {
         }
     }
     
-    @IBOutlet var instaPickPhotoViews: [InstaPickPhotoView]!
-
+    @IBOutlet weak var instaPickPhotoViews: InstaPickBigPhotoView!
+    
     //MARK: Vars
     private var dataSource = InstaPickHashtagCollectionViewDataSource()
     private var smallPhotoDataSource = InstaPickSmallPhotoCollectionViewDataSource()
@@ -154,18 +124,8 @@ final class InstaPickDetailViewController: BaseViewController {
             showErrorWith(message: error.localizedDescription)
             return
         }
-        
-        let maxIndex = analyzes.count - 1
-        
-        for view in instaPickPhotoViews {
-            if let id = view.restorationIdentifier, let type = PhotoViewType(rawValue: id), type.index <= maxIndex {
-                let analyze = analyzes[type.index]
-                
-                view.configureImageView(with: analyze)
-            } else {
-                view.isHidden = true
-            }
-        }
+            
+        instaPickPhotoViews.configureImageView(with: analyzes[0])
     }
     
     private func setupCollectionView() {
@@ -299,30 +259,11 @@ final class InstaPickDetailViewController: BaseViewController {
         selectedPhoto = model
     }
     
-    private func openImage() {
-        guard
-            let selectedPhoto = selectedPhoto, selectedPhoto.fileInfo?.uuid != nil,
-            let view = instaPickPhotoViews.first(where: { $0.restorationIdentifier == PhotoViewType.bigView.rawValue }),
-            let image = view.getImage(),
-            image.size != .zero
-        else {
-            ///if selected photo was deleted/nil/zero size
-            return
-        }
-
-        let vc = PVViewerController.with(image: image)
-        let nController = NavigationController(rootViewController: vc)
-        present(nController, animated: true, completion: nil) ///routerVC not work
-    }
-    
     private func showErrorWith(message: String) {
         UIApplication.showErrorAlert(message: message)
     }
     
-    
-    
     //MARK: - Actions
-    
     @IBAction func leftButtonAction(_ sender: UIButton) {
         smallPhotoDataSource.currentIndex -= 1
         
@@ -405,11 +346,7 @@ extension InstaPickDetailViewController: InstaPickPhotoViewDelegate {
             return
         }
         
-        if let selectedPhoto = selectedPhoto, model == selectedPhoto {
-            openImage()
-        } else {
-            setNewSelectedPhoto(with: model)
-        }
+        setNewSelectedPhoto(with: model)
     }
 }
 

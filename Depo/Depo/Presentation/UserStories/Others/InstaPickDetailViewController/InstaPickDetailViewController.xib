@@ -18,13 +18,13 @@
                 <outlet property="copyToClipboardButton" destination="5GN-cn-ujP" id="8qM-0X-e7J"/>
                 <outlet property="hashTagsLabel" destination="EU4-bu-mbr" id="69O-FJ-kjo"/>
                 <outlet property="hashtagShadowView" destination="ppL-32-kIs" id="TC9-hX-7bF"/>
+                <outlet property="instaPickPhotoViews" destination="Ynk-f5-yeT" id="LZn-VJ-gdn"/>
                 <outlet property="leftButton" destination="7KG-4Z-wzW" id="ynT-aF-Ulh"/>
                 <outlet property="rightButton" destination="M8a-dX-BWE" id="YLv-2j-Fdq"/>
                 <outlet property="shareButton" destination="h6o-kD-Nrz" id="IZ8-t8-33s"/>
                 <outlet property="smallPhotosCollectionView" destination="NYf-dS-Rd1" id="0y8-74-dyR"/>
                 <outlet property="topLabel" destination="IDk-eY-3Lm" id="hkp-a7-h9u"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outletCollection property="instaPickPhotoViews" destination="Ynk-f5-yeT" collectionClass="NSMutableArray" id="2Xd-D5-sZ0"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
