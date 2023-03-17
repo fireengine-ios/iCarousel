@@ -14778,11 +14778,137 @@
 		52E6816729C33DEB0023DADB /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				52E6815F29C33D9A0023DADB /* InstaPickSmallPhotoCell.swift */,
-				52E6816D29C33E200023DADB /* InstaPickSmallPhotoCell.xib */,
-				52E6817229C33F7F0023DADB /* InstaPickSmallPhotoCollectionViewDataSource.swift */,
+				52E6818129C49E940023DADB /* Campaign */,
+				52E6818029C49E7C0023DADB /* Free */,
+				52E6817F29C49E630023DADB /* Analysis */,
+				52E6817E29C49E2F0023DADB /* AnalyzeHistoryPhoto */,
+				52E6817D29C49E120023DADB /* Hashtag */,
+				52E6817829C49D710023DADB /* SmallPhoto */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		52E6817829C49D710023DADB /* SmallPhoto */ = {
+			isa = PBXGroup;
+			children = (
+				52E6815F29C33D9A0023DADB /* InstaPickSmallPhotoCell.swift */,
+				52E6816D29C33E200023DADB /* InstaPickSmallPhotoCell.xib */,
+			);
+			path = SmallPhoto;
+			sourceTree = "<group>";
+		};
+		52E6817D29C49E120023DADB /* Hashtag */ = {
+			isa = PBXGroup;
+			children = (
+				9219B19821ECB7B900098021 /* InstaPickHashtagCell.swift */,
+				9219B19921ECB7B900098021 /* InstaPickHashtagCell.xib */,
+			);
+			path = Hashtag;
+			sourceTree = "<group>";
+		};
+		52E6817E29C49E2F0023DADB /* AnalyzeHistoryPhoto */ = {
+			isa = PBXGroup;
+			children = (
+				984A514321E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift */,
+				984A514621E747C6004525F5 /* InstapickAnalyzeHistoryPhotoCell.xib */,
+			);
+			path = AnalyzeHistoryPhoto;
+			sourceTree = "<group>";
+		};
+		52E6817F29C49E630023DADB /* Analysis */ = {
+			isa = PBXGroup;
+			children = (
+				984A515921E88D28004525F5 /* InstapickAnalysisCell.swift */,
+				984A515C21E88D64004525F5 /* InstapickAnalysisCell.xib */,
+			);
+			path = Analysis;
+			sourceTree = "<group>";
+		};
+		52E6818029C49E7C0023DADB /* Free */ = {
+			isa = PBXGroup;
+			children = (
+				9849B5B521FF49400059F9A9 /* InstapickFreeCell.swift */,
+				9849B5B821FF49630059F9A9 /* InstapickFreeCell.xib */,
+			);
+			path = Free;
+			sourceTree = "<group>";
+		};
+		52E6818129C49E940023DADB /* Campaign */ = {
+			isa = PBXGroup;
+			children = (
+				CE1966DA2359B8A700599638 /* InstapickCampaignCell.swift */,
+				CE1966DB2359B8A700599638 /* InstapickCampaignCell.xib */,
+			);
+			path = Campaign;
+			sourceTree = "<group>";
+		};
+		52E6818229C4A0BF0023DADB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */,
+				52E6818329C4A1B40023DADB /* NoFiles */,
+				9219B18E21ECA7FA00098021 /* InstaPickPhotoView */,
+				B522E92121E8CAEC00C4958E /* InstaPickProgressView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		52E6818329C4A1B40023DADB /* NoFiles */ = {
+			isa = PBXGroup;
+			children = (
+				CEFAF2DF23210D22004A157C /* PhotoSelectionNoFilesView.swift */,
+				CEFAF31823213C67004A157C /* PhotoSelectionNoFilesView.xib */,
+			);
+			path = NoFiles;
+			sourceTree = "<group>";
+		};
+		52E6818429C4A2360023DADB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				52E6818829C4A3030023DADB /* PhotoSelection */,
+				52E6818729C4A2E30023DADB /* InstaPickSelectionSegmented */,
+				52E6818629C4A2990023DADB /* InstapickAlbumSelection */,
+				52E6818529C4A2530023DADB /* InstaPickDetail */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		52E6818529C4A2530023DADB /* InstaPickDetail */ = {
+			isa = PBXGroup;
+			children = (
+				9219B18921ECA25800098021 /* InstaPickDetailViewController.xib */,
+				9219B18821ECA25800098021 /* InstaPickDetailViewController.swift */,
+				52E6817229C33F7F0023DADB /* InstaPickSmallPhotoCollectionViewDataSource.swift */,
+				921FF09921EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift */,
+			);
+			path = InstaPickDetail;
+			sourceTree = "<group>";
+		};
+		52E6818629C4A2990023DADB /* InstapickAlbumSelection */ = {
+			isa = PBXGroup;
+			children = (
+				CE00B24B2202FB1400A5A696 /* InstapickAlbumSelectionViewController.swift */,
+				CE00B2502202FBCE00A5A696 /* InstapickAlbumSelectionDataSource.swift */,
+			);
+			path = InstapickAlbumSelection;
+			sourceTree = "<group>";
+		};
+		52E6818729C4A2E30023DADB /* InstaPickSelectionSegmented */ = {
+			isa = PBXGroup;
+			children = (
+				CE00B27A220424C800A5A696 /* InstaPickSelectionSegmentedView.swift */,
+				C4D9C03121EDC6DB00693D94 /* InstaPickSelectionSegmentedController.swift */,
+			);
+			path = InstaPickSelectionSegmented;
+			sourceTree = "<group>";
+		};
+		52E6818829C4A3030023DADB /* PhotoSelection */ = {
+			isa = PBXGroup;
+			children = (
+				CE00B24721F5A79400A5A696 /* PhotoSelectionController.swift */,
+				CE00B2782204249C00A5A696 /* PhotoSelectionDataSourceProtocol.swift */,
+			);
+			path = PhotoSelection;
 			sourceTree = "<group>";
 		};
 		52EDD1A4299A68B600D549FC /* NotificationService */ = {
@@ -15500,8 +15626,6 @@
 				A705E3C123A21638005E8274 /* CarouselPagerHeaderView */,
 				9845489422FBFF4000D7F29C /* SpotifyStatusView */,
 				8C26008522919AAC0063E913 /* SecurityCodeTextField */,
-				9219B18E21ECA7FA00098021 /* InstaPickPhotoView */,
-				B522E92121E8CAEC00C4958E /* InstaPickProgressView */,
 				A2EF976921ECC3E600EC7DE7 /* ConnectWithInstaView */,
 				925B96D421E79BAF00B39415 /* RadialGradientableView */,
 				9240C04821B80520005E710C /* PremiumFooterView */,
@@ -17551,10 +17675,10 @@
 		9219B18721ECA21800098021 /* InstaPickDetailViewController */ = {
 			isa = PBXGroup;
 			children = (
+				52E6818429C4A2360023DADB /* Controllers */,
+				52E6818229C4A0BF0023DADB /* Views */,
+				A20BA8BA21E9E8A900C6FFBC /* InstapickPopUp */,
 				52E6816729C33DEB0023DADB /* Cells */,
-				9219B18821ECA25800098021 /* InstaPickDetailViewController.swift */,
-				9219B18921ECA25800098021 /* InstaPickDetailViewController.xib */,
-				921FF09921EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift */,
 			);
 			path = InstaPickDetailViewController;
 			sourceTree = "<group>";
@@ -19536,9 +19660,7 @@
 				890F736C22EEFA3E00BA0020 /* VerifyEmailPopUp */,
 				890F737522EEFAFF00BA0020 /* ChangeEmailPopUp */,
 				8E1FB4FF233366C000C8C40D /* CredsUpdateCheck */,
-				CE00B27C2204261700A5A696 /* InstaPickSelection */,
 				9219B18721ECA21800098021 /* InstaPickDetailViewController */,
-				A20BA8BA21E9E8A900C6FFBC /* InstapickPopUp */,
 				A217E42421A5AF3E0084AA37 /* LeavePremiumViewController */,
 				A20798FB219F12BB00AD5037 /* PremiumViewController */,
 				B5C7C57D211C6958006E94DB /* AugmentedReality */,
@@ -19610,23 +19732,6 @@
 				9991BD4E3939E69007211781 /* OTPViewInitializer.swift */,
 			);
 			path = Configurator;
-			sourceTree = "<group>";
-		};
-		CE00B27C2204261700A5A696 /* InstaPickSelection */ = {
-			isa = PBXGroup;
-			children = (
-				CE00B27A220424C800A5A696 /* InstaPickSelectionSegmentedView.swift */,
-				C4D9C03121EDC6DB00693D94 /* InstaPickSelectionSegmentedController.swift */,
-				CE00B24721F5A79400A5A696 /* PhotoSelectionController.swift */,
-				CE00B2782204249C00A5A696 /* PhotoSelectionDataSourceProtocol.swift */,
-				CE00B24B2202FB1400A5A696 /* InstapickAlbumSelectionViewController.swift */,
-				CE00B2502202FBCE00A5A696 /* InstapickAlbumSelectionDataSource.swift */,
-				CE00B24921F5A7B000A5A696 /* PhotoCell.swift */,
-				C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */,
-				CEFAF2DF23210D22004A157C /* PhotoSelectionNoFilesView.swift */,
-				CEFAF31823213C67004A157C /* PhotoSelectionNoFilesView.xib */,
-			);
-			path = InstaPickSelection;
 			sourceTree = "<group>";
 		};
 		CE0808AD234720F000F1944F /* TBMatikCard */ = {
@@ -20830,6 +20935,7 @@
 		CEAE3FCB1EFD500B00A405B2 /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				CE00B24921F5A7B000A5A696 /* PhotoCell.swift */,
 				7CAB66DC1F0CFB85005B26F1 /* CollectionViewCellDataProtocol.swift */,
 				7CFBB6DA1F28A40F009C32D5 /* BaseCollectionViewCell.swift */,
 				7CED0B0E1F21ECDE0016CE0C /* BasicCollectionMultiFileCell.swift */,
@@ -20860,16 +20966,6 @@
 				4A9B38F3201F2D99009FC572 /* CollectionViewCellForFaceImage.xib */,
 				4A56D5C6202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.swift */,
 				4A56D5C7202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.xib */,
-				9219B19821ECB7B900098021 /* InstaPickHashtagCell.swift */,
-				9219B19921ECB7B900098021 /* InstaPickHashtagCell.xib */,
-				984A514321E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift */,
-				984A514621E747C6004525F5 /* InstapickAnalyzeHistoryPhotoCell.xib */,
-				984A515921E88D28004525F5 /* InstapickAnalysisCell.swift */,
-				984A515C21E88D64004525F5 /* InstapickAnalysisCell.xib */,
-				9849B5B521FF49400059F9A9 /* InstapickFreeCell.swift */,
-				9849B5B821FF49630059F9A9 /* InstapickFreeCell.xib */,
-				CE1966DA2359B8A700599638 /* InstapickCampaignCell.swift */,
-				CE1966DB2359B8A700599638 /* InstapickCampaignCell.xib */,
 				9216F57722493127008339F5 /* InternetDataUsageCollectionViewCell.swift */,
 				9216F57822493127008339F5 /* InternetDataUsageCollectionViewCell.xib */,
 				CEEFB8D72361C64500200A7F /* AnalyzeHistoryEmptyCell.swift */,
