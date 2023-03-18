@@ -39,6 +39,8 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
     private lazy var bottomBarManager = CreateCollageBottomBarManager(delegate: self)
     private var photoSelectType = PhotoSelectType.newPhotoSelection
     var panGesture  = UIPanGestureRecognizer()
+    var draggedTag = Int()
+    var draggedImage = UIImage()
     
     init(collageTemplate: CollageTemplateElement, selectedItems: [SearchItemResponse]) {
         self.collageTemplate = collageTemplate
@@ -111,8 +113,22 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
                 case .changePhotoSelection:
                     let imageScrollView = ImageScrollViewCollage(frame: viewFrame)
                     imageScrollView.imageViewTag = i
+                    imageScrollView.tag = i
                     let imageUrl = selectedItems[i].metadata?.mediumUrl
                     imageScrollView.imageView.loadImageData(with: imageUrl)
+                    
+                    let dragInteraction = UIDragInteraction(delegate: self)
+                    dragInteraction.isEnabled = true
+                    imageScrollView.addInteraction(dragInteraction)
+
+                    let dropInteraction = UIDropInteraction(delegate: self)
+                    imageScrollView.addInteraction(dropInteraction)
+                    
+                    
+                    
+                    
+                    
+                    
                     contentView.addSubview(imageScrollView)
                 }
             } else if shapeDetails[i].type == "CIRCLE" {
@@ -266,4 +282,66 @@ extension CreateCollagePreviewController: BaseItemInputPassingProtocol {
     func deSelectAll() { }
     func changePeopleThumbnail() { }
     func openInstaPick() { }
+}
+
+
+extension CreateCollagePreviewController: UIDragInteractionDelegate {
+
+    func dragInteraction(_ interaction: UIDragInteraction, itemsForBeginning session: UIDragSession) -> [UIDragItem] {
+        var image = UIImage()
+        
+        for index in 0...contentView.subviews.count - 1 {
+            if contentView.subviews[index].tag == interaction.view?.tag {
+                let imageView = contentView.subviews[index] as! ImageScrollViewCollage
+                image  = imageView.imageView.image!
+                draggedTag = index
+            }
+        }
+        let item = UIDragItem(itemProvider: NSItemProvider(object: image))
+        item.localObject = image
+        return [item]
+    }
+
+}
+
+extension CreateCollagePreviewController: UIDropInteractionDelegate {
+
+    func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
+        return session.canLoadObjects(ofClass: UIImage.self) && session.items.count == 1
+    }
+
+    func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
+        let dropLocation = session.location(in: view)
+        var operation: UIDropOperation = .cancel
+        
+        for index in 0...contentView.subviews.count - 1 {
+            if contentView.subviews[index].tag == interaction.view?.tag {
+                let imageView = contentView.subviews[index] as! ImageScrollViewCollage
+                if imageView.frame.contains(dropLocation) {
+                    operation = session.localDragSession == nil ? .copy : .move
+                    draggedImage = imageView.imageView.image!
+                } else {
+                    operation = .cancel
+                }
+            }
+        }
+        return UIDropProposal(operation: operation)
+    }
+
+    func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
+        session.loadObjects(ofClass: UIImage.self) { imageItems in
+            guard let images = imageItems as? [UIImage] else { return }
+            for index in 0...self.contentView.subviews.count - 1 {
+                if self.contentView.subviews[index].tag == interaction.view?.tag {
+                    let imageView = self.contentView.subviews[index] as! ImageScrollViewCollage
+                    imageView.imageView.image = images.first
+                }
+                if self.contentView.subviews[index].tag == self.draggedTag {
+                    let imageView = self.contentView.subviews[index] as! ImageScrollViewCollage
+                    imageView.imageView.image = self.draggedImage
+                }
+            }
+        }
+    }
+
 }
