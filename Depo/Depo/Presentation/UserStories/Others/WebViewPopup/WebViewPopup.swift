@@ -35,21 +35,23 @@ class WebViewPopup: BasePopUpController {
         return view
     }()
     
+    private var id: Int = 0
     private var isUrl = false
-
+    private let service = NotificationService()
+    
     //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setup()
-        
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(closeOnTap))
-        view.addGestureRecognizer(recognizer)
-        
         closeButton.addTarget(self, action: #selector(closeOnTap), for: .touchUpInside)
     }
     
     @objc private func closeOnTap() {
+        service.delete(with: [id]) { value in
+            debugLog("WebViewPopup - Close - Success")
+        } fail: { value in
+            debugLog("WebViewPopup - Close - Fail")
+        }
         close()
     }
     
@@ -78,7 +80,6 @@ class WebViewPopup: BasePopUpController {
         closeButton.trailingAnchor.constraint(equalTo: popUpView.trailingAnchor, constant: -16).activate()
         closeButton.heightAnchor.constraint(equalToConstant: 24).activate()
         closeButton.widthAnchor.constraint(equalToConstant: 24).activate()
-
     }
 }
 
@@ -103,6 +104,7 @@ extension WebViewPopup {
         let controller = WebViewPopup()
         
         controller.isUrl = isUrl
+        controller.id = id
         
         if isUrl {
             raiseWebView(controller: controller, url: content)
