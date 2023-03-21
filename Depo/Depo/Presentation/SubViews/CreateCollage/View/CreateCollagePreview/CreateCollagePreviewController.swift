@@ -43,6 +43,8 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
     var lastRotation: CGFloat = 0
     var lastScale: CGFloat = 1
     
+    let uploadService = UploadService()
+    
     init(collageTemplate: CollageTemplateElement, selectedItems: [SearchItemResponse]) {
         self.collageTemplate = collageTemplate
         self.collagePhotoCount = collageTemplate.shapeCount
@@ -194,14 +196,31 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
     }
     
     private func saveCollage() {
-        print("SAVE COLLAGE")
+//        let imageView = UIImageView(frame: CGRect(x: 20, y: containerView.frame.maxY + 20, width: contentView.frame.size.width, height: contentView.frame.size.height))
+//        view.addSubview(imageView)
+//        imageView.image = takeScreenshot(of: contentView)
+//
+//        let image: UIImage = takeScreenshot(of: contentView)
+//        var name: String = "aaaasd"
+//
+//        var imageData = image.jpegData(compressionQuality: 0.9)!
+//
+//        let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
+//        let wrapData = WrapData(imageData: imageData, isLocal: true)
+//
+//        
+//        wrapData.collage = true
+//        wrapData.name = name
+//        wrapData.patchToPreview = PathForItem.remoteUrl(url)
+//
+//        UploadService.default.uploadFileList(items: [wrapData], uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, success: {}, fail: {value in }, returnedUploadOperation: { _ in })
     }
     
     private func deleteCollage() {
         containerView.subviews.forEach { $0.removeFromSuperview()}
         photoSelectType = .newPhotoSelection
         createImageView(collageTemplate: collageTemplate!)
-        bottomBarManager.update(configType: .newPhotoSelection)
+        bottomBarManager.hide()
     }
     
     private func changeSelectedPhoto() {
@@ -225,6 +244,19 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
         borderLayer.borderWidth = borderWith
         borderLayer.borderColor = AppColor.settingsButtonColor.cgColor
         return borderLayer
+    }
+    
+    func takeScreenshot(of view: UIView) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(
+            CGSize(width: view.bounds.width, height: view.bounds.height),
+            false,
+            2
+        )
+        
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let screenshot = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return screenshot
     }
     
 }
@@ -392,4 +424,49 @@ extension CreateCollagePreviewController: UIDropInteractionDelegate {
         }
     }
 
+}
+
+
+extension UIApplication {
+
+    func getKeyWindow() -> UIWindow? {
+        if #available(iOS 13, *) {
+            return windows.first { $0.isKeyWindow }
+        } else {
+            return keyWindow
+        }
+    }
+
+    func makeSnapshot() -> UIImage? { return getKeyWindow()?.layer.makeSnapshot() }
+}
+
+
+extension CALayer {
+    func makeSnapshot() -> UIImage? {
+        let scale = UIScreen.main.scale
+        UIGraphicsBeginImageContextWithOptions(frame.size, false, scale)
+        defer { UIGraphicsEndImageContext() }
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        render(in: context)
+        let screenshot = UIGraphicsGetImageFromCurrentImageContext()
+        return screenshot
+    }
+}
+
+extension UIView {
+    func makeSnapshot() -> UIImage? {
+        if #available(iOS 10.0, *) {
+            let renderer = UIGraphicsImageRenderer(size: frame.size)
+            return renderer.image { _ in drawHierarchy(in: bounds, afterScreenUpdates: true) }
+        } else {
+            return layer.makeSnapshot()
+        }
+    }
+}
+
+extension UIImage {
+    convenience init?(snapshotOf view: UIView) {
+        guard let image = view.makeSnapshot(), let cgImage = image.cgImage else { return nil }
+        self.init(cgImage: cgImage, scale: image.scale, orientation: image.imageOrientation)
+    }
 }
