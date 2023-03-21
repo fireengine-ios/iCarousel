@@ -29,10 +29,7 @@ final class CreateCollageDetailController: BaseViewController {
         super.viewDidLoad()
         debugLog("CreateCollage viewDidLoad")
         
-        
-        
-        
-        setTitle(withString: "See All")
+        setTitle(withString: localized(.createCollageSelectCollage))
         view.backgroundColor = .white
         collectionViewConfigure()
     }
