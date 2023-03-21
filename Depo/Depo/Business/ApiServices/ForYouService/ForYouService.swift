@@ -113,4 +113,15 @@ final class ForYouService: BaseRequestService {
             }
             .task
     }
+    
+    func forYouCollageTemplate(handler: @escaping (ResponseResult<CollageTemplate>) -> Void) -> URLSessionTask? {
+            debugLog("forYouCollageTemplate")
+            
+            return SessionManager
+                .customDefault
+                .request(RouteRequests.collageTemplate)
+                .customValidate()
+                .responseObject(handler)
+                .task
+        }
 }

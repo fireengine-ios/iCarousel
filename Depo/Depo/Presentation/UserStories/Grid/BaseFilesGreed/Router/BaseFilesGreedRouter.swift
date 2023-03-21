@@ -122,4 +122,9 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
         let nController = NavigationController(rootViewController: controller)
         router.presentViewController(controller: nController)
     }
+    
+    func createCollage() {
+        let vc = router.createCollage()
+        router.pushViewController(viewController: vc)
+    }
 }

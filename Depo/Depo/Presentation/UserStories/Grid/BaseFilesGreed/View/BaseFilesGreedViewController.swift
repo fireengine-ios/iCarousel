@@ -185,10 +185,16 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             self?.output.openUpload()
         })
         
+        let createCollage = NavBarWithAction(navItem: NavigationBarList().plus, action: { [weak self] _ in
+            self?.output.createCollage()
+        })
+
         var rightActions: [NavBarWithAction] = []
         
         switch forYouControllerSection {
-        case .collages, .animations, .places, .hidden, .things, .favorites:
+        case .collages:
+            rightActions.append(createCollage)
+        case .animations, .places, .hidden, .things, .favorites:
             rightActions.removeAll()
         case .albums:
             rightActions.append(newAlbum)

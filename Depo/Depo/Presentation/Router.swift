@@ -1111,6 +1111,30 @@ class RouterVC: NSObject {
     func notification() -> NotificationViewController {
         return NotificationModuleInitializer.initializeViewController()
     }
+    
+    // MARK: - Create Collage Template
+    
+    func createCollage() -> CreateCollageViewController {
+        return CreateCollageInitilizer.initializeViewController()
+    }
+    
+    // MARK: - Create Collage Select Photos
+    
+    func createCollageSelectPhotos(collageTemplate: CollageTemplateElement, items: [SearchItemResponse] = [], selectItemIndex: Int? = nil)  -> CreateCollageSelectionSegmentedController {
+        return CreateCollageSelectionSegmentedController(collageTemplate: collageTemplate, items: items, selectItemIndex: selectItemIndex)
+    }
+    
+    // MARK: - Create Collage Preview
+    
+    func createCollagePreview(collageTemplate: CollageTemplateElement, selectedItems: [SearchItemResponse])  -> CreateCollagePreviewController {
+        return CreateCollagePreviewController(collageTemplate: collageTemplate, selectedItems: selectedItems)
+    }
+    
+    // MARK: - Create Collage See All
+
+    func createCollageNavigateToSeeAll(collageTemplate: CollageTemplate)  -> CreateCollageDetailController {
+        return CreateCollageDetailController(collageTemplate: collageTemplate)
+    }
 
     // MARK: - Passcode
     

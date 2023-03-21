@@ -91,6 +91,14 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         view.enableItems(at: validIndexes)
     }
     
+    func setupCreateCollageTabBarWith(originalConfig: EditingBarConfig) {
+        
+        var bottomBarInteractor = interactor as? BottomSelectionTabBarInteractorInput
+        bottomBarInteractor?.currentBarcongfig = originalConfig
+        
+        view.setupBar(with: originalConfig)
+    }
+    
     override func dismiss(animated: Bool) {
         view.hideBar(animated: animated)
     }
@@ -258,6 +266,14 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 self.interactor.removeAlbums(items: selectedItems)
             case .moveToTrashShared:
                 self.interactor.moveToTrashShared(items: selectedItems)
+            case .collageSave:
+                self.basePassingPresenter?.selectModeSelected()
+            case .collageDelete:
+                self.basePassingPresenter?.selectAllModeSelected()
+            case .collageChange:
+                self.basePassingPresenter?.changeCover()
+            case .collageCancel:
+                self.basePassingPresenter?.printSelected()
             default:
                 break
             }
