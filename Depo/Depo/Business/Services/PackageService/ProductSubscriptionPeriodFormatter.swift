@@ -11,6 +11,9 @@ import StoreKit
 
 @available(iOS 11.2, *)
 final class ProductSubscriptionPeriodFormatter {
+    
+    static let shared = ProductSubscriptionPeriodFormatter()
+    
     private let dateComponentFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
         formatter.maximumUnitCount = 1

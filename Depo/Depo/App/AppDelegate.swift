@@ -87,9 +87,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var player: MediaPlayer = factory.resolve()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-    @available(iOS 13.0, *)
-    private lazy var backgroundSyncService = BackgroundSyncService.shared
     private lazy var storageVars: StorageVars = factory.resolve()
+
+    @available(iOS 13.0, *)
+    var backgroundSyncService: BackgroundSyncService {
+        get {
+            return BackgroundSyncService.shared
+        }
+    }
     
     lazy var deeplinkCoordinator: DeeplinkCoordinatorProtocol = {
         return DeeplinkCoordinator(handlers: [

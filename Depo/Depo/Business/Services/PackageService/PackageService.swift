@@ -14,12 +14,20 @@ final class PackageService {
     private let iapManager = IAPManager.shared
 
     @available(iOS 12.0, *)
-    private lazy var iapIntroEligibilityChecker = IAPIntroPriceEligibilityChecker()
+    private var iapIntroEligibilityChecker: IAPIntroPriceEligibilityChecker {
+        get {
+            return IAPIntroPriceEligibilityChecker.shared
+        }
+    }
 
     private lazy var introOfferEligibilityStatusByProductId: [String: IAPIntroEligibilityStatus] = [:]
 
     @available(iOS 11.2, *)
-    private lazy var iapSubscriptionPeriodFormatter = ProductSubscriptionPeriodFormatter()
+    private var iapSubscriptionPeriodFormatter: ProductSubscriptionPeriodFormatter {
+        get {
+            return ProductSubscriptionPeriodFormatter.shared
+        }
+    }
 
     
     //MARK: Utility Methods(public)
