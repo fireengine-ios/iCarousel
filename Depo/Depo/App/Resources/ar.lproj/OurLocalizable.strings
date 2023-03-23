@@ -2067,15 +2067,48 @@ then {11,99 TRY/Month}*/
 "subscription_offer_cancel_button" = "إلغاء الأمر";
 "paycell_share_message " = "";
 "ksaldalks" = "";
-"free_up_space_title" = "المساحة الموجودة على جهازك ممتلئة تقريبًا!";
-"notification_menu_item" = "إشعارات";
 
 /*Fuzzy*/
 "free_up_space_title" = "المساحة الموجودة على جهازك ممتلئة تقريبًا!";
 
 /*Fuzzy*/
 "notification_menu_item" = "إشعارات";
-"notification_buttom_sheet_select_mode" = "";
-"notification_buttom_sheet_only_unread" = "";
-"notification_buttom_sheet_show_alerts" = "";
-"notifications_no_notification" = "";
+"notification_buttom_sheet_select_mode" = "اختار";
+"notification_buttom_sheet_only_unread" = "غير مقروءة فقط";
+"notification_buttom_sheet_show_alerts" = "عرض التنبيهات فقط";
+"notifications_no_notification" = "ليس لديك أي إخطار بعد";
+"Create_Word" = "";
+"Create_Cell" = "";
+"Create_Slide" = "";
+"Create_Document_Popup" = "";
+"Create_Document_Create_Button" = "";
+"Create_Document_Cancel_Button" = "";
+"Office_Filter_Document" = "";
+"Office_Filter_SpreedSheet" = "";
+"Office_Filter_Presentation" = "";
+"Office_Filter_All" = "";
+"Office_Filter_PDF" = "";
+
+/*Fotoğraf Seçin*/
+"create_collage_select_photo" = "";
+
+/*+New Collage*/
+"create_collage_preview_main" = "";
+
+/*2'li Kolajlar*/
+"create_collage_dual" = "";
+"create_collage_triple" = "";
+"create_collage_quad" = "";
+"create_collage_multiple" = "";
+"create_collage_all" = "";
+"create_collage_select_collage" = "";
+"create_collage_info_label" = "";
+
+/*Fotoğraf Seçin*/
+"create_collage_select_photo" = "";
+
+/*+New Collage*/
+"create_collage_preview_main" = "";
+
+/*2'li Kolajlar*/
+"create_collage_dual" = "";

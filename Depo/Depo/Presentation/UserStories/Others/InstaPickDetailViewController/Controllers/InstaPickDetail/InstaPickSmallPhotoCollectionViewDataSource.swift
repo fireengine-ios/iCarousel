@@ -10,6 +10,7 @@ import UIKit
 
 protocol InstaPickPhotoViewDelegate: AnyObject {
     func didTapOnImage(_ model: InstapickAnalyze?)
+    func currentIndexWithScroll(index: Int)
 }
 
 class InstaPickSmallPhotoCollectionViewDataSource: UICollectionViewFlowLayout {
@@ -45,7 +46,9 @@ class InstaPickSmallPhotoCollectionViewDataSource: UICollectionViewFlowLayout {
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        currentIndex = Int(abs(scrollView.contentOffset.x) / CGFloat(41))
+        print("yilmaz: \(abs(scrollView.contentOffset.x)) - \(Int(abs(scrollView.contentOffset.x) / CGFloat(20)))")
+        currentIndex = Int(abs(scrollView.contentOffset.x) / CGFloat(20))
+        delegate?.currentIndexWithScroll(index: currentIndex)
     }
 }
 

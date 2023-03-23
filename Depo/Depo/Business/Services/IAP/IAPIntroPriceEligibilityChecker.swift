@@ -11,6 +11,8 @@ import StoreKit
 
 @available(iOS 12.0, *)
 struct IAPIntroPriceEligibilityChecker {
+    
+    static let shared = IAPIntroPriceEligibilityChecker()
 
     typealias ReceiveIntroEligibilityBlock = ([String: IAPIntroEligibilityStatus], Error?) -> Void
 
