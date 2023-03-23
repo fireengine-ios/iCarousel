@@ -33,10 +33,10 @@ extension UIViewController {
         textField.textColor = AppColor.darkBlue.color
         textField.textAlignment = .center
         let collageName = StringConstants.collageName
-        if  collageName != "+New Collage" {
+        if  collageName != localized(.createCollagePreviewMainTitle) {
             textField.text = collageName
         } else {
-            textField.text = "+New Collage"
+            textField.text = localized(.createCollagePreviewMainTitle) //"+New Collage"
         }
         textField.delegate = delegate
         navigationItem.titleView = textField

@@ -27,6 +27,22 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
         return view
     }()
     
+    private lazy var infoImage: UIImageView = {
+        let view = UIImageView()
+        view.image = Image.iconInfo.image
+        view.isHidden = true
+        return view
+    }()
+    
+    private lazy var infoLabel: UILabel = {
+        let view = UILabel()
+        view.text = localized(.createCollageInfoLabel)
+        view.textColor = AppColor.darkBlueColor.color
+        view.font = .appFont(.medium, size: 12)
+        view.isHidden = true
+        return view
+    }()
+    
     let router = CreateCollageRouter()
     private var longPressedItem: Int = -1
     private var collagePhotoCount: Int = 0
@@ -68,6 +84,18 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
         createImageView(collageTemplate: collageTemplate!)
         view.backgroundColor = .white
         setTextFieldInNavigationBar(withDelegate: self)
+        isHiddenControl()
+    }
+    
+    private func isHiddenControl() {
+        switch photoSelectType {
+        case .newPhotoSelection:
+            infoImage.isHidden = true
+            infoLabel.isHidden = true
+        case .changePhotoSelection:
+            infoImage.isHidden = false
+            infoLabel.isHidden = false
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -163,7 +191,8 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
         imageView.sd_setImage(with: imageUrl)
         imageView.frame = CGRect(x: 0, y: 0, width: scrollView.frame.size.width, height: scrollView.frame.size.height)
         imageView.tag = index
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         imageView.isUserInteractionEnabled = true
         scrollView.addSubview(imageView)
         scrollView.contentSize = imageView.frame.size
@@ -196,24 +225,23 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
     }
     
     private func saveCollage() {
-//        let imageView = UIImageView(frame: CGRect(x: 20, y: containerView.frame.maxY + 20, width: contentView.frame.size.width, height: contentView.frame.size.height))
-//        view.addSubview(imageView)
-//        imageView.image = takeScreenshot(of: contentView)
-//
-//        let image: UIImage = takeScreenshot(of: contentView)
-//        var name: String = "aaaasd"
-//
-//        var imageData = image.jpegData(compressionQuality: 0.9)!
-//
-//        let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
-//        let wrapData = WrapData(imageData: imageData, isLocal: true)
-//
-//        
-//        wrapData.collage = true
-//        wrapData.name = name
-//        wrapData.patchToPreview = PathForItem.remoteUrl(url)
-//
-//        UploadService.default.uploadFileList(items: [wrapData], uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, success: {}, fail: {value in }, returnedUploadOperation: { _ in })
+        let image: UIImage = takeScreenshot(of: contentView)
+        let name: String = StringConstants.collageName
+        let imageData = image.jpegData(compressionQuality: 0.9)!
+        let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
+        let wrapData = WrapData(imageData: imageData, isLocal: true)
+        
+        wrapData.name = name
+        wrapData.patchToPreview = PathForItem.remoteUrl(url)
+
+        showSpinner()
+        UploadService.default.uploadFileList(items: [wrapData], uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, isCollage: true, success: {
+            DispatchQueue.main.async {
+                self.hideSpinner()
+                self.router.openForYou()
+            }
+        }, fail: {value in }, returnedUploadOperation: { _ in })
+        
     }
     
     private func deleteCollage() {
@@ -237,7 +265,7 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
     
     private func createBorder(view: UIView, borderWith: CGFloat) -> CALayer {
         let borderLayer = CALayer()
-        let borderFrame = CGRect(x: -5, y: -5, width: view.frame.size.width + 10, height: view.frame.size.height + 10)
+        let borderFrame = CGRect(x: view.frame.minX - 5.0, y: view.frame.minY - 5.0, width: view.frame.size.width + 10, height: view.frame.size.height + 10)
         borderLayer.backgroundColor = UIColor.clear.cgColor
         borderLayer.frame = borderFrame
         borderLayer.cornerRadius = 5.0
@@ -302,7 +330,7 @@ extension CreateCollagePreviewController: UIGestureRecognizerDelegate {
                 } else {
                     longPressedItem = sender.view?.tag ?? 0
                     contentView.subviews[i].subviews[0].alpha = 1
-                    contentView.subviews[i].subviews[0].layer.addSublayer(createBorder(view: contentView.subviews[i].subviews[0], borderWith: 2.0))
+                    //contentView.subviews[i].subviews[0].layer.addSublayer(createBorder(view: contentView.subviews[i].subviews[0], borderWith: 2.0))
                 }
             }
         }
@@ -313,6 +341,8 @@ extension CreateCollagePreviewController {
     private func setLayout() {
         view.addSubview(containerView)
         view.addSubview(contentView)
+        view.addSubview(infoImage)
+        view.addSubview(infoLabel)
         
         let viewWidth = view.frame.size.width
         let collageWidth = collageTemplate?.imageWidth
@@ -323,6 +353,9 @@ extension CreateCollagePreviewController {
         contentView.frame = CGRect(x: xFrameStart, y: yFrameStart, width: viewWidth - rightSpace, height: (viewWidth - rightSpace) / yRatio)
         xRatioConstant = Double(collageTemplate?.imageWidth ?? 1) / Double(contentView.frame.size.width)
         containerView.frame = CGRect(x: contentView.frame.origin.x - 12, y: contentView.frame.origin.y - 12, width: contentView.frame.size.width + 24, height: contentView.frame.size.height + 24)
+        
+        infoImage.frame = CGRect(x: containerView.frame.minX, y: containerView.frame.maxY + 20, width: 20, height: 20)
+        infoLabel.frame = CGRect(x: infoImage.frame.maxX + 5, y: containerView.frame.maxY + 20, width: containerView.frame.maxX, height: 20)
         
         if selectedItems.count > 0 {
             bottomBarManager.show()
@@ -377,6 +410,7 @@ extension CreateCollagePreviewController: UIDragInteractionDelegate {
                 draggedTag = index
             }
         }
+        
         let item = UIDragItem(itemProvider: NSItemProvider(object: image))
         item.localObject = image
         return [item]
@@ -397,7 +431,8 @@ extension CreateCollagePreviewController: UIDropInteractionDelegate {
         for index in 0...contentView.subviews.count - 1 {
             if contentView.subviews[index].subviews[0].tag == interaction.view?.tag {
                 let imageView = contentView.subviews[index].subviews[0] as! UIImageView
-                if imageView.frame.contains(dropLocation) {
+                let scrollView = contentView.subviews[index] as! UIScrollView
+                if scrollView.frame.contains(dropLocation) {
                     operation = session.localDragSession == nil ? .copy : .move
                     draggedImage = imageView.image!
                 } else {

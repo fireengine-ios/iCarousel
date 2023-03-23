@@ -92,7 +92,7 @@ final class UploadService: BaseRequestService {
         }
     }
     
-    func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, isFromCamera: Bool = false, projectId: String? = nil, success: @escaping FileOperationSucces, fail: @escaping FailResponse, returnedUploadOperation: @escaping ([UploadOperation]?) -> Void) {
+    func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, isFromCamera: Bool = false, projectId: String? = nil, isCollage: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse, returnedUploadOperation: @escaping ([UploadOperation]?) -> Void) {
         debugLog("UploadService uploadFileList")
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
@@ -160,7 +160,7 @@ final class UploadService: BaseRequestService {
             default:
                  self.analyticsService.trackDimentionsEveryClickGA(screen: .upload, downloadsMetrics: nil, uploadsMetrics: items.count)
                  
-                 self.uploadFileList(items: filteredItems, uploadType: uploadType, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, projectId: projectId, success: { [weak self] in
+                self.uploadFileList(items: filteredItems, uploadType: uploadType, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, projectId: projectId, isCollage: isCollage, success: { [weak self] in
                     self?.stopTracking()
                     self?.clearCounters(uploadType: uploadType)
                     self?.hideIfNeededCard(for: uploadType)
@@ -414,7 +414,7 @@ final class UploadService: BaseRequestService {
 //        }
     }
     
-    private func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, projectId: String? = nil, success: @escaping FileOperationSucces, fail: @escaping FailResponse, returnedOprations: @escaping ([UploadOperation]?) -> Void) {
+    private func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, projectId: String? = nil, isCollage: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse, returnedOprations: @escaping ([UploadOperation]?) -> Void) {
         
         // filter all items which md5's are not in the uploadOperations
         let itemsToUpload = items.filter { item -> Bool in
@@ -450,7 +450,7 @@ final class UploadService: BaseRequestService {
         self.logSyncSettings(state: "StartUploadFileList")
         
         let operations: [UploadOperation] = itemsToUpload.compactMap {
-            let operation = UploadOperation(item: $0, uploadType: uploadType, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, projectId: projectId, handler: { [weak self] finishedOperation, error in
+            let operation = UploadOperation(item: $0, uploadType: uploadType, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, projectId: projectId, isCollage: isCollage, handler: { [weak self] finishedOperation, error in
                 self?.dispatchQueue.async { [weak self] in
                     guard let `self` = self else {
                         returnedOprations(nil)

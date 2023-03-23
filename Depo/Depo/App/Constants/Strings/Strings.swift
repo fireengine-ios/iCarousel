@@ -230,4 +230,16 @@ enum Strings: String, Localizable {
     case onlyAlert = "notification_buttom_sheet_show_alerts"
     
     case notificationsNoNotification = "notifications_no_notification"
+    
+    // MARK: - Create Collage
+    
+    case createCollageSelectPhotoMainTitle = "create_collage_select_photo"
+    case createCollagePreviewMainTitle = "create_collage_preview_main"
+    case createCollageDualCollage = "create_collage_dual"
+    case createCollageTripleCollage = "create_collage_triple"
+    case createCollageQuadCollage = "create_collage_quad"
+    case createCollageMultipleCollage = "create_collage_multiple"
+    case createCollageAllCollage = "create_collage_all"
+    case createCollageSelectCollage = "create_collage_select_collage"
+    case createCollageInfoLabel = "create_collage_info_label"
 }

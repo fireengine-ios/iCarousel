@@ -18,21 +18,21 @@ enum CollageTemplateSections: CaseIterable {
     
     var title: String {
         switch self {
-        case .dual: return "ikili Kolaj"
-        case .triple: return "üçlü Kolaj"
-        case .quad: return "dörtlü Kolaj"
-        case .multiple: return "çoklu Kolaj"
-        case .all: return "Tümü"
+        case .dual: return localized(.createCollageDualCollage)
+        case .triple: return localized(.createCollageTripleCollage)
+        case .quad: return localized(.createCollageQuadCollage)
+        case .multiple: return localized(.createCollageMultipleCollage)
+        case .all: return localized(.createCollageAllCollage)
         }
     }
     
     var seeAllTitle: String {
         switch self {
-        case .dual: return "See All 2"
-        case .triple: return "See All 3"
-        case .quad: return "See All 4"
-        case .multiple: return "See All 5"
-        case .all: return "See All"
+        case .dual: return localized(.forYouSeeAll)
+        case .triple: return localized(.forYouSeeAll)
+        case .quad: return localized(.forYouSeeAll)
+        case .multiple: return localized(.forYouSeeAll)
+        case .all: return localized(.forYouSeeAll)
         }
     }
     

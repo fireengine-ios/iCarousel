@@ -59,6 +59,10 @@ extension ForYouPresenter: ForYouViewOutput {
         router.navigateToCreate(for: view)
     }
     
+    func navigateToCreateCollage() {
+        router.navigateToCreateCollage()
+    }
+    
     func navigateToItemDetail(item: WrapData, faceImageType: FaceImageType?, currentSection: ForYouSections) {
         self.currentSection = currentSection
         interactor.loadItem(item, faceImageType: faceImageType)

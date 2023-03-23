@@ -32,4 +32,8 @@ final class CreateCollageRouter: CreateCollageRouterInput {
         let vc = router.createCollageSelectPhotos(collageTemplate: collageTemplate, items: items, selectItemIndex: selectItemIndex)
         router.pushViewController(viewController: vc, animated: false)
     }
+    
+    func openForYou() {
+        router.createCollageToForyou()
+    }
 }

@@ -189,6 +189,7 @@ enum Image: String, AppImage {
     case forYouPeople
     case popupProfileScan
     case popupLoading
+    case createCollageThumbnail
     
     /// Settings
     case gradientSwitch
