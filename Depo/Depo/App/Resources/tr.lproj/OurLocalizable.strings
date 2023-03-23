@@ -2089,13 +2089,6 @@ then {11,99 TRY/Month}*/
 "notification_buttom_sheet_only_unread" = "Sadece okunmamışlar";
 "notification_buttom_sheet_show_alerts" = "Sadece uyarıları göster";
 "notifications_no_notification" = "Henüz bildirimin yok";
-
-/*Create Collage*/
-"create_collage_select_photo" = "Fotoğraf Seçin";
-"create_collage_preview_main" = "+New Collage";
-"create_collage_dual" = "2'li Kolajlar";
-"create_collage_triple" = "3'li Kolajlar";
-"create_collage_quad" = "4'li Kolajlar";
 "Create_Word" = "Word Oluştur";
 "Create_Cell" = "Çalışma Tablosu Oluştur";
 "Create_Slide" = "Sunum Oluştur";
@@ -2117,6 +2110,12 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "Office_Filter_All" = "Tümü";
 "Office_Filter_PDF" = "Pdf";
+"create_collage_triple" = "3'lü Kolajlar";
+"create_collage_quad" = "4'lü Kolajlar";
+"create_collage_multiple" = "Çoklu Kolajlar";
+"create_collage_all" = "Tüm Kolajlar";
+"create_collage_select_collage" = "Kolaj Seçin";
+"create_collage_info_label" = "Düzenlemek için herhangi bir fotoğrafa dokunun";
 
 /*Fotoğraf Seçin*/
 "create_collage_select_photo" = "Fotoğraf Seçin";
@@ -2126,18 +2125,3 @@ then {11,99 TRY/Month}*/
 
 /*2'li Kolajlar*/
 "create_collage_dual" = "2'li Kolajlar";
-"create_collage_triple" = "3'lü Kolajlar";
-"create_collage_quad" = "4'lü Kolajlar";
-"create_collage_multiple" = "Çoklu Kolajlar";
-"create_collage_all" = "Tüm Kolajlar";
-"create_collage_select_collage" = "Kolaj Seçin";
-"create_collage_info_label" = "Düzenlemek için herhangi bir fotoğrafa dokunun";
-
-/*Fotoğraf Seçin*/
-"create_collage_select_photo" = "";
-
-/*+New Collage*/
-"create_collage_preview_main" = "";
-
-/*2'li Kolajlar*/
-"create_collage_dual" = "";
