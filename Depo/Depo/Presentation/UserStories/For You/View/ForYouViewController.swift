@@ -175,6 +175,10 @@ extension ForYouViewController: UITableViewDelegate {
 
 //MARK: -ForYouTableViewCellDelegate
 extension ForYouViewController: ForYouTableViewCellDelegate {
+    func navigateToCreateCollage() {
+        output.navigateToCreateCollage()
+    }
+    
     func navigateToThrowbackDetail(item: ThrowbackData, completion: @escaping VoidHandler) {
         output.navigateToThrowbackDetail(item: item, completion: completion)
     }

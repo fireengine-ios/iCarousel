@@ -16,6 +16,7 @@ protocol ForYouRouterInput {
     func navigateToAlbumDetail(album: AlbumItem)
     func navigateToItemPreview(item: WrapData, items: [WrapData])
     func navigateToThrowbackDetail(item: ThrowbackDetailsData)
+    func navigateToCreateCollage()
     
     func displayAlbum(item: AlbumItem)
     func displayItem(item: WrapData)

@@ -225,22 +225,23 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
     }
     
     private func saveCollage() {
-        let imageView = UIImageView(frame: CGRect(x: 20, y: containerView.frame.maxY + 20, width: contentView.frame.size.width, height: contentView.frame.size.height))
-        view.addSubview(imageView)
-        imageView.image = takeScreenshot(of: contentView)
-
         let image: UIImage = takeScreenshot(of: contentView)
-        var name: String = "aaaasd"
-
-        var imageData = image.jpegData(compressionQuality: 0.9)!
-
+        let name: String = StringConstants.collageName
+        let imageData = image.jpegData(compressionQuality: 0.9)!
         let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
         let wrapData = WrapData(imageData: imageData, isLocal: true)
         
         wrapData.name = name
         wrapData.patchToPreview = PathForItem.remoteUrl(url)
 
-        UploadService.default.uploadFileList(items: [wrapData], uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, isCollage: true, success: {}, fail: {value in }, returnedUploadOperation: { _ in })
+        showSpinner()
+        UploadService.default.uploadFileList(items: [wrapData], uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, isCollage: true, success: {
+            DispatchQueue.main.async {
+                self.hideSpinner()
+                self.router.openForYou()
+            }
+        }, fail: {value in }, returnedUploadOperation: { _ in })
+        
     }
     
     private func deleteCollage() {

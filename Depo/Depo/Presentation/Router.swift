@@ -280,6 +280,26 @@ class RouterVC: NSObject {
         tabBarController?.navigationController?.popToRootViewController(animated: true)
     }
     
+    func createCollageToForyou() {
+        guard let tabBarVC = tabBarController else {
+            return
+        }
+        
+        tabBarVC.dismiss(animated: true)
+        
+        let index = TabScreenIndex.forYou.rawValue
+        
+        guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index] else {
+            assertionFailure("This index is non existent 😵")
+            return
+        }
+        
+        tabBarVC.tabBar.selectedItem = newSelectedItem
+        tabBarVC.selectedIndex = index
+        
+        tabBarController?.navigationController?.popToRootViewController(animated: true)
+    }
+    
     func popTwoFactorAuth() {
         guard let viewControllers = navigationController?.viewControllers else {
             assertionFailure("nav bar is missing!")
@@ -1375,7 +1395,7 @@ class RouterVC: NSObject {
     }
     
     func openTabBarItem(index: TabScreenIndex, segmentIndex: Int? = nil, shareType: SharedItemsSegment? = nil) {
-        guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
+        guard let tabBarVC = tabBarController  else {
             return
         }
         
