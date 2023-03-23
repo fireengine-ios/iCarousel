@@ -2090,15 +2090,6 @@ then {11,99 TRY/Month}*/
 "Office_Filter_Presentation" = "";
 "Office_Filter_All" = "";
 "Office_Filter_PDF" = "";
-
-/*Fotoğraf Seçin*/
-"create_collage_select_photo" = "";
-
-/*+New Collage*/
-"create_collage_preview_main" = "";
-
-/*2'li Kolajlar*/
-"create_collage_dual" = "";
 "create_collage_triple" = "";
 "create_collage_quad" = "";
 "create_collage_multiple" = "";
