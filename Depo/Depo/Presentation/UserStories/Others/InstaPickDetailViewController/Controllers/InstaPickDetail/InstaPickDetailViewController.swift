@@ -232,6 +232,7 @@ final class InstaPickDetailViewController: BaseViewController {
             
             selectedPhoto = topRatePhoto
             
+            leftButton.isEnabled = false
             leftButton.isHidden = analyzes.count < 6
             rightButton.isHidden = leftButton.isHidden
         }
@@ -267,24 +268,33 @@ final class InstaPickDetailViewController: BaseViewController {
     @IBAction func leftButtonAction(_ sender: UIButton) {
         smallPhotoDataSource.currentIndex -= 1
         
-        if smallPhotoDataSource.currentIndex < 0 {
+        if smallPhotoDataSource.currentIndex <= 0 {
             smallPhotoDataSource.currentIndex = 0
+            leftButton.isEnabled = false
+        } else {
+            rightButton.isEnabled = true
+            if let _ = smallPhotosCollectionView.cellForItem(at: IndexPath(item: smallPhotoDataSource.currentIndex, section: 0)) {
+                let nextIndexPath = IndexPath(item: smallPhotoDataSource.currentIndex, section: 0)
+                smallPhotosCollectionView.scrollToItem(at: nextIndexPath, at: .centeredHorizontally, animated: true)
+            }
         }
-        
-        let nextIndexPath = IndexPath(item: smallPhotoDataSource.currentIndex, section: 0)
-        smallPhotosCollectionView.scrollToItem(at: nextIndexPath, at: .centeredHorizontally, animated: true)
     }
-    
     
     @IBAction func rightButtonAction(_ sender: UIButton) {
         smallPhotoDataSource.currentIndex += 1
         
         if smallPhotoDataSource.currentIndex >= smallPhotoDataSource.smallPhotos.count {
             smallPhotoDataSource.currentIndex = smallPhotoDataSource.smallPhotos.count - 1
+            rightButton.isEnabled = false
+        } else {
+            leftButton.isEnabled = true
+            if let _ = smallPhotosCollectionView.cellForItem(at: IndexPath(item: smallPhotoDataSource.currentIndex, section: 0)) {
+                let nextIndexPath = IndexPath(item: smallPhotoDataSource.currentIndex, section: 0)
+                smallPhotosCollectionView.scrollToItem(at: nextIndexPath, at: .centeredHorizontally, animated: true)
+            } else {
+                smallPhotoDataSource.currentIndex = smallPhotoDataSource.smallPhotos.count - 1
+            }
         }
-        
-        let nextIndexPath = IndexPath(item: smallPhotoDataSource.currentIndex, section: 0)
-        smallPhotosCollectionView.scrollToItem(at: nextIndexPath, at: .centeredHorizontally, animated: true)
     }
     
     @IBAction private func onCopyToClipboardTap(_ sender: Any) {
@@ -341,6 +351,20 @@ final class InstaPickDetailViewController: BaseViewController {
 }
 
 extension InstaPickDetailViewController: InstaPickPhotoViewDelegate {
+    func currentIndexWithScroll(index: Int) {
+        if index <= 1 {
+            leftButton.isEnabled = false
+            rightButton.isEnabled = true
+        } else if index >= smallPhotoDataSource.smallPhotos.count {
+            smallPhotoDataSource.currentIndex = smallPhotoDataSource.smallPhotos.count - 1
+            leftButton.isEnabled = true
+            rightButton.isEnabled = false
+        } else {
+            leftButton.isEnabled = true
+            rightButton.isEnabled = true
+        }
+    }
+    
     func didTapOnImage(_ model: InstapickAnalyze?) {
         guard let model = model else {
             return
