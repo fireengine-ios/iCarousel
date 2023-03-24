@@ -2118,7 +2118,6 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "paycell_share_message " = "You have been sent 5GB of lifebox storage, click to redeem";
-"ksaldalks" = "";
 
 /*Fuzzy*/
 "free_up_space_title" = "Device space is almost full";

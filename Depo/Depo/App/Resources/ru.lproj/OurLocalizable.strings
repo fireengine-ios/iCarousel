@@ -2068,7 +2068,6 @@ then {11,99 TRY/Month}*/
 "empty_gallery_no_unsync" = "В вашем lifebox нет не обновленных файлов";
 "subscription_offer_cancel_button" = "Отмена";
 "paycell_share_message " = "";
-"ksaldalks" = "";
 
 /*Fuzzy*/
 "free_up_space_title" = "Место на устройстве почти заполнено!";
