@@ -14,6 +14,7 @@ final class CreateCollageViewController: BaseViewController {
     private lazy var tableView: UITableView = {
         let view = UITableView()
         view.register(CreateCollageTableViewCell.self, forCellReuseIdentifier: "CreateCollageTableViewCell")
+        view.backgroundColor = AppColor.background.color
         view.separatorStyle = .none
         return view
     }()
@@ -79,7 +80,7 @@ extension CreateCollageViewController: UITableViewDataSource {
         cell.configure(model: output.getSectionsCollageTemplateData(shapeCount: key), section: getSectionByKey(key: key))
         cell.delegate = self
         cell.selectionStyle = .none
-        cell.backgroundColor = .white
+        cell.backgroundColor = AppColor.background.color
         return cell
     }
 }
