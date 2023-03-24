@@ -37,7 +37,7 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
     private lazy var infoLabel: UILabel = {
         let view = UILabel()
         view.text = localized(.createCollageInfoLabel)
-        view.textColor = AppColor.darkBlueColor.color
+        view.textColor = AppColor.label.color
         view.font = .appFont(.medium, size: 12)
         view.isHidden = true
         return view
@@ -82,7 +82,7 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
         bottomBarManager.setup()
         setLayout()
         createImageView(collageTemplate: collageTemplate!)
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor.background.color
         setTextFieldInNavigationBar(withDelegate: self)
         isHiddenControl()
     }

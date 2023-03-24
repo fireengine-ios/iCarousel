@@ -30,7 +30,7 @@ final class CreateCollageDetailController: BaseViewController {
         debugLog("CreateCollage viewDidLoad")
         
         setTitle(withString: localized(.createCollageSelectCollage))
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor.background.color
         collectionViewConfigure()
     }
     
@@ -41,12 +41,12 @@ final class CreateCollageDetailController: BaseViewController {
     private func collectionViewConfigure() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        let cellWidth = (view.frame.size.width - 40) / 3
+        let cellWidth = (view.frame.size.width - 50) / 3
         layout.itemSize = CGSize(width: cellWidth, height: cellWidth)
         let collectionViewFrame = CGRect(x: self.view.frame.origin.x + 10 , y: self.view.frame.origin.y + 10, width: self.view.frame.size.width - 20, height: self.view.frame.size.height - 20)
         collectionView = UICollectionView(frame: collectionViewFrame, collectionViewLayout: layout)
         collectionView?.register(CreateCollageCollectionViewCell.self, forCellWithReuseIdentifier: "CreateCollageCollectionViewCell")
-        collectionView?.backgroundColor = .white
+        collectionView?.backgroundColor = AppColor.background.color
         collectionView?.dataSource = self
         collectionView?.delegate = self
         view.addSubview(collectionView ?? UICollectionView())

@@ -283,7 +283,13 @@ extension CreateCollageSelectionSegmentedController: CreateCollagePhotoSelection
     }
     
     private func updateTitle() {
-        vcView.selectedTextLabel.text = "\(selectedItems.count) - \(selectablePhotoCount) Selected"
+        if selectedItems.count == 0 {
+            vcView.actionButton.isHidden = true
+            vcView.selectedTextLabel.text = "\(selectedItems.count) - \(selectablePhotoCount) \(TextConstants.accessibilitySelected)"
+            return
+        }
+        vcView.actionButton.isHidden = false
+        vcView.selectedTextLabel.text = "\(selectedItems.count) - \(selectablePhotoCount) \(TextConstants.accessibilitySelected)"
         if selectedItems.count == selectablePhotoCount {
             vcView.actionButton.setTitle(TextConstants.ok, for: .normal)
             selectionState = .ended

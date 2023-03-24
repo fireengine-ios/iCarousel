@@ -20,7 +20,7 @@ final class CreateCollageTableViewCell: UITableViewCell {
     private lazy var containerView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 16
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor.background.color
         return view
     }()
 
@@ -49,7 +49,7 @@ final class CreateCollageTableViewCell: UITableViewCell {
         layout.scrollDirection = .horizontal
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.register(CreateCollageCollectionViewCell.self, forCellWithReuseIdentifier: "CreateCollageCollectionViewCell")
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor.background.color
         return view
     }()
     
@@ -120,6 +120,7 @@ extension CreateCollageTableViewCell: UICollectionViewDelegateFlowLayout {
 
 extension CreateCollageTableViewCell {
     private func setLayout() {
+        contentView.backgroundColor = AppColor.background.color
         contentView.addSubview(containerView)
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 3).activate()
