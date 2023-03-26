@@ -85,6 +85,7 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
         view.backgroundColor = AppColor.background.color
         setTextFieldInNavigationBar(withDelegate: self)
         isHiddenControl()
+        keyboardDoneButton()
     }
     
     private func isHiddenControl() {
@@ -334,6 +335,18 @@ extension CreateCollagePreviewController: UIGestureRecognizerDelegate {
                 }
             }
         }
+    }
+    
+    private func keyboardDoneButton() {
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.doneClicked))
+        toolBar.setItems([doneButton], animated: false)
+        navTextField?.inputAccessoryView = toolBar
+    }
+    
+    @objc private func doneClicked() {
+        navTextField?.endEditing(true)
     }
 }
 
