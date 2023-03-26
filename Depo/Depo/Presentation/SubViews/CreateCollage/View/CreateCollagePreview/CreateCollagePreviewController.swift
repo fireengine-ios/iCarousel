@@ -257,8 +257,8 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
     
     private func cancelCollage() {
         contentView.subviews.forEach { values in
-            values.alpha = 1.0
-            values.layer.sublayers?.forEach { $0.removeFromSuperlayer()}
+            values.subviews[0].alpha = 1.0
+        //    values.layer.sublayers?.forEach { $0.removeFromSuperlayer()}
         }
         bottomBarManager.update(configType: .newPhotoSelection)
     }
