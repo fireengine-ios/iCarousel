@@ -670,6 +670,8 @@ enum GAEventLabel {
                 return "Upload Documents And Music"
             case .photopick:
                 return "Photopick"
+            case .createCollage:
+                return "Create Collage"
             }
         case .shareViaLink:
             return "Share via Link"
