@@ -57,7 +57,6 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
     var draggedTag = Int()
     var draggedImage = UIImage()
     var lastRotation: CGFloat = 0
-    var lastScale: CGFloat = 1
     
     let uploadService = UploadService()
     
@@ -295,11 +294,17 @@ extension CreateCollagePreviewController: UIGestureRecognizerDelegate {
         guard let view = sender.view else { return }
         view.transform = view.transform.scaledBy(x: sender.scale, y: sender.scale)
         sender.scale = 1
-        lastScale = sender.scale
+        
+        let defaultFrame = contentView.subviews[sender.view!.tag].frame
         
         if sender.state == .ended {
             let imageView = contentView.subviews[sender.view!.tag].subviews[0] as! UIImageView
             let scrollView = contentView.subviews[sender.view!.tag] as! UIScrollView
+            
+            if defaultFrame.width >= imageView.frame.size.width || defaultFrame.height >= imageView.frame.size.height {
+                imageView.frame = defaultFrame
+            }
+            
             let x = imageView.frame.origin.x
             let y = imageView.frame.origin.y
             scrollView.contentInset = UIEdgeInsets(top: -y, left: -x, bottom: -y, right: -x)
