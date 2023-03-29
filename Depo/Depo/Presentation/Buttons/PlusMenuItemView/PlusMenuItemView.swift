@@ -49,7 +49,7 @@ enum FloatingButtonsType {
         case .photopick:
             return TextConstants.myStreamInstaPickTitle
         case .createCollage:
-            return "Kolaj Oluştur"
+            return localized(.createCollageLabel)
         }
     }
     
