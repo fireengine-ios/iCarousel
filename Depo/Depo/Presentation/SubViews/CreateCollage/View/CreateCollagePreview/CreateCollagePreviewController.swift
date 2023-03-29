@@ -57,7 +57,6 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
     var draggedTag = Int()
     var draggedImage = UIImage()
     var lastRotation: CGFloat = 0
-    var lastScale: CGFloat = 1
     
     let uploadService = UploadService()
     
@@ -85,6 +84,7 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
         view.backgroundColor = AppColor.background.color
         setTextFieldInNavigationBar(withDelegate: self)
         isHiddenControl()
+        keyboardDoneButton()
     }
     
     private func isHiddenControl() {
@@ -257,8 +257,8 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
     
     private func cancelCollage() {
         contentView.subviews.forEach { values in
-            values.alpha = 1.0
-            values.layer.sublayers?.forEach { $0.removeFromSuperlayer()}
+            values.subviews[0].alpha = 1.0
+        //    values.layer.sublayers?.forEach { $0.removeFromSuperlayer()}
         }
         bottomBarManager.update(configType: .newPhotoSelection)
     }
@@ -294,11 +294,17 @@ extension CreateCollagePreviewController: UIGestureRecognizerDelegate {
         guard let view = sender.view else { return }
         view.transform = view.transform.scaledBy(x: sender.scale, y: sender.scale)
         sender.scale = 1
-        lastScale = sender.scale
+        
+        let defaultFrame = contentView.subviews[sender.view!.tag].frame
         
         if sender.state == .ended {
             let imageView = contentView.subviews[sender.view!.tag].subviews[0] as! UIImageView
             let scrollView = contentView.subviews[sender.view!.tag] as! UIScrollView
+            
+            if defaultFrame.width >= imageView.frame.size.width || defaultFrame.height >= imageView.frame.size.height {
+                imageView.frame = defaultFrame
+            }
+            
             let x = imageView.frame.origin.x
             let y = imageView.frame.origin.y
             scrollView.contentInset = UIEdgeInsets(top: -y, left: -x, bottom: -y, right: -x)
@@ -334,6 +340,18 @@ extension CreateCollagePreviewController: UIGestureRecognizerDelegate {
                 }
             }
         }
+    }
+    
+    private func keyboardDoneButton() {
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.doneClicked))
+        toolBar.setItems([doneButton], animated: false)
+        navTextField?.inputAccessoryView = toolBar
+    }
+    
+    @objc private func doneClicked() {
+        navTextField?.endEditing(true)
     }
 }
 

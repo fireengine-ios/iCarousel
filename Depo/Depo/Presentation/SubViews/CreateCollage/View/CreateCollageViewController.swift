@@ -25,7 +25,7 @@ final class CreateCollageViewController: BaseViewController {
         super.viewDidLoad()
         debugLog("CreateCollage viewDidLoad")
         
-        setTitle(withString: "Create Collage")
+        setTitle(withString: localized(.createCollageLabel))
         view.backgroundColor = ColorConstants.fileGreedCellColorSecondary
         configureTableView()
         output.viewIsReady()

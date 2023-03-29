@@ -182,7 +182,7 @@ extension ForYouTableViewCell: UICollectionViewDataSource {
         case .throwback:
             return throwbackData.count
         case .collages:
-            return wrapData.count + 1
+            return wrapData.count
         default:
             return wrapData.count
         }
@@ -231,14 +231,9 @@ extension ForYouTableViewCell: UICollectionViewDataSource {
             cell.configure(with: item)
             return cell
         case .collages:
-            if indexPath.row < wrapData.count {
-                let item = wrapData[indexPath.row]
-                cell.configure(with: item, currentView: currentView ?? .people)
-                return cell
-            } else {
-                cell.configureWithLocalImage()
-                return cell
-            }
+            let item = wrapData[indexPath.row]
+            cell.configure(with: item, currentView: currentView ?? .people)
+            return cell
         default:
             let item = wrapData[indexPath.row]
             cell.configure(with: item, currentView: currentView ?? .people)
@@ -276,13 +271,8 @@ extension ForYouTableViewCell: UICollectionViewDelegateFlowLayout {
             let item = wrapData[indexPath.row]
             delegate?.navigateToItemPreview(item: item, items: wrapData, currentSection: currentView)
         case .collages:
-            if indexPath.row < wrapData.count {
-                let item = wrapData[indexPath.row]
-                delegate?.navigateToItemPreview(item: item, items: wrapData, currentSection: currentView)
-            } else {
-                delegate?.navigateToCreateCollage()
-            }
-                
+            let item = wrapData[indexPath.row]
+            delegate?.navigateToItemPreview(item: item, items: wrapData, currentSection: currentView)
         case .throwback:
             guard tbActionStatus else { return }
             tbActionStatus.toggle()

@@ -50,6 +50,7 @@ final class CreateCollageTableViewCell: UITableViewCell {
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.register(CreateCollageCollectionViewCell.self, forCellWithReuseIdentifier: "CreateCollageCollectionViewCell")
         view.backgroundColor = AppColor.background.color
+        view.showsHorizontalScrollIndicator = false
         return view
     }()
     

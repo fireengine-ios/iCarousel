@@ -2073,18 +2073,19 @@ then {11,99 TRY/Month}*/
 "Office_Filter_Presentation" = "Office_Filter_Presentation";
 "Office_Filter_All" = "Office_Filter_All";
 "Office_Filter_PDF" = "Office_Filter_PDF";
-"create_collage_triple" = "";
-"create_collage_quad" = "";
-"create_collage_multiple" = "";
-"create_collage_all" = "";
-"create_collage_select_collage" = "";
-"create_collage_info_label" = "";
+"create_collage_triple" = "შექმნა_კოლაჟი_სამმაგი";
+"create_collage_quad" = "შექმნა_კოლაჟი_ოთხმაგი";
+"create_collage_multiple" = "შექმნა_კოლაჟი_მრავალჯერადი";
+"create_collage_all" = "შექმნა_კოლაჟი_ყველა";
+"create_collage_select_collage" = "შექმენი კოლაჟი_მონიშნე კოლაჟი";
+"create_collage_info_label" = "შექმენი კოლაჟი ინფორმაციის ეტიკეტი";
 
 /*Fotoğraf Seçin*/
-"create_collage_select_photo" = "";
+"create_collage_select_photo" = "შექმენი კოლაჟი მონიშნე ფოტო";
 
 /*+New Collage*/
-"create_collage_preview_main" = "";
+"create_collage_preview_main" = "შექმენი კოლაჟი-გადახედე_მთავარს";
 
 /*2'li Kolajlar*/
-"create_collage_dual" = "";
+"create_collage_dual" = "შექმნა_კოლაჟი_ორმაგი";
+"create_collage" = "";
