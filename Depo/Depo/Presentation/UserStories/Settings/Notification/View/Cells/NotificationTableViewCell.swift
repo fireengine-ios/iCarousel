@@ -24,8 +24,8 @@ class NotificationTableViewCell: UITableViewCell {
     
     private lazy var descriptionLabel: UILabel = {
         let view = UILabel()
-        view.textColor = AppColor.textButton.color
-        view.font = .appFont(.medium, size: 14)
+        view.textColor = AppColor.label.color
+        view.font = .appFont(.regular, size: 12)
         view.textAlignment = .right
         view.numberOfLines = 1
         view.lineBreakMode = .byWordWrapping
@@ -34,8 +34,8 @@ class NotificationTableViewCell: UITableViewCell {
     
     private lazy var createDateLabel: UILabel = {
         let view = UILabel()
-        view.textColor = AppColor.label.color
-        view.font = .appFont(.regular, size: 12)
+        view.textColor = AppColor.textButton.color
+        view.font = .appFont(.medium, size: 14)
         view.textAlignment = .left
         view.numberOfLines = 0
         view.lineBreakMode = .byWordWrapping
@@ -261,6 +261,7 @@ class NotificationTableViewCell: UITableViewCell {
         titleLabel.textColor = AppColor.warning.color
         containerView.layer.borderColor = AppColor.warning.cgColor
         descriptionLabel.alpha = 1
+        createDateLabel.alpha = 1
         
         warningImageView.alpha = 1
         warningCase = true
@@ -271,6 +272,7 @@ class NotificationTableViewCell: UITableViewCell {
         titleLabel.textColor = AppColor.label.color
         containerView.layer.borderColor = AppColor.tint.cgColor
         descriptionLabel.alpha = 1
+        createDateLabel.alpha = 1
         
         warningCase = false
         warningImageView.isHidden = true
@@ -280,6 +282,7 @@ class NotificationTableViewCell: UITableViewCell {
         titleLabel.textColor = AppColor.readState.color
         containerView.layer.borderColor = AppColor.readState.cgColor
         descriptionLabel.alpha = 0.5
+        createDateLabel.alpha = 0.5
 
         warningCase = false
         warningImageView.isHidden = true
@@ -289,6 +292,7 @@ class NotificationTableViewCell: UITableViewCell {
         titleLabel.textColor = AppColor.warning.color.withAlphaComponent(0.5)
         containerView.layer.borderColor = AppColor.warning.withAlphaComponent(0.5).cgColor
         descriptionLabel.alpha = 0.5
+        createDateLabel.alpha = 0.5
         
         warningCase = true
         warningImageView.alpha = 0.5
