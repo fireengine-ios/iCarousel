@@ -43,6 +43,12 @@ class WebViewPopup: BasePopUpController {
     }()
     
     // MARK: - Html
+    
+    private lazy var bodyScrollView: UIScrollView = {
+        let view = UIScrollView()
+        return view
+    }()
+    
     private lazy var bodyLabel: UILabel = {
         let view = UILabel()
         view.textColor = AppColor.textButton.color
@@ -136,9 +142,38 @@ class WebViewPopup: BasePopUpController {
         popUpView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).activate()
         popUpView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).activate()
         
-        popUpView.addSubview(bodyLabel)
+        let height = getHightOfLabel()
+        if height > UIScreen.main.bounds.height - 160 {
+            bodyScrollView.isScrollEnabled = true
+            popUpView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height - 160).activate()
+        } else {
+            bodyScrollView.isScrollEnabled = false
+            popUpView.heightAnchor.constraint(equalToConstant: height).activate()
+        }
+        
+        let contentView = UIView()
+        popUpView.addSubview(bodyScrollView)
+        bodyScrollView.addSubview(contentView)
+        
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        bodyScrollView.translatesAutoresizingMaskIntoConstraints = false
+        
+        bodyScrollView.centerXAnchor.constraint(equalTo: popUpView.centerXAnchor).isActive = true
+        bodyScrollView.widthAnchor.constraint(equalTo: popUpView.widthAnchor).isActive = true
+        bodyScrollView.topAnchor.constraint(equalTo: popUpView.topAnchor).isActive = true
+        bodyScrollView.bottomAnchor.constraint(equalTo: popUpView.bottomAnchor).isActive = true
+        contentView.centerXAnchor.constraint(equalTo: bodyScrollView.centerXAnchor).isActive = true
+        contentView.widthAnchor.constraint(equalTo: bodyScrollView.widthAnchor).isActive = true
+        contentView.topAnchor.constraint(equalTo: bodyScrollView.topAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: bodyScrollView.bottomAnchor).isActive = true
+
+        contentView.addSubview(bodyLabel)
         bodyLabel.translatesAutoresizingMaskIntoConstraints = false
-        bodyLabel.pinToSuperviewEdges(offset: 16)
+        
+        bodyLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        bodyLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
+        bodyLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 7/8).isActive = true
+        bodyLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16).isActive = true
     }
     
     private func setForStringLayout() {
@@ -182,6 +217,19 @@ class WebViewPopup: BasePopUpController {
         } fail: { value in
             debugLog("WebViewPopup - Close - Fail")
         }
+    }
+    
+    private func getHightOfLabel() -> CGFloat {
+        // Subsract leadind and trailings
+        let width = UIScreen.main.bounds.width - 24
+        
+        // this is better than string extension hight
+        let height = bodyLabel.systemLayoutSizeFitting(CGSize(width: width,
+                                                                     height: UIView.layoutFittingCompressedSize.height),
+                                                              withHorizontalFittingPriority: .required,
+                                                              verticalFittingPriority: .fittingSizeLevel).height
+        // Plus top and bottom constraint
+        return height + 32
     }
 }
 
