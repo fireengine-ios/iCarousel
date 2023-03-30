@@ -23,6 +23,9 @@ enum FloatingButtonsType {
     case uploadDocumentsAndMusic
     case photopick
     case createCollage
+    case createWord
+    case createExcel
+    case createPowerPoint
     
     var title: String {
         switch self {
@@ -50,6 +53,12 @@ enum FloatingButtonsType {
             return TextConstants.myStreamInstaPickTitle
         case .createCollage:
             return localized(.createCollageLabel)
+        case .createWord:
+            return localized(.createWord)
+        case .createExcel:
+            return localized(.createExcel)
+        case .createPowerPoint:
+            return localized(.createPowerPoint)
         }
     }
     
@@ -76,6 +85,12 @@ enum FloatingButtonsType {
             return Image.iconEffect.image
         case .createCollage:
             return Image.iconEffect.image
+        case .createWord:
+            return Image.iconFileDocNew.image
+        case .createExcel:
+            return Image.iconFileXlsNew.image
+        case .createPowerPoint:
+            return Image.iconFilePptNew.image
         }
     }
     
@@ -109,6 +124,12 @@ enum FloatingButtonsType {
             return .photopick
         case .createCollage:
             return .createCollage
+        case .createWord:
+            return .createWord
+        case .createExcel:
+            return .createExcel
+        case .createPowerPoint:
+            return .createPowerPoint
         }
     }
 }

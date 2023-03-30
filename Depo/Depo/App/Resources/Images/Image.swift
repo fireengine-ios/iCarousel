@@ -135,6 +135,9 @@ enum Image: String, AppImage {
     case iconFileZip
     case iconFolder
     case iconMusic
+    case iconFileDocNew
+    case iconFileXlsNew
+    case iconFilePptNew
     
     case iconFileAudioBig
     case iconFileDocBig
