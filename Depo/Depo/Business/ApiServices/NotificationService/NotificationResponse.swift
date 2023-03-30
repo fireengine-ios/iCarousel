@@ -28,29 +28,31 @@ struct NotificationJsonKey {
     static let readCondition = "readCondition"
     static let communicationNotificationId = "communicationNotificationId"
     static let closable = "closable"
+    static let createdDate = "createdDate"
 }
 
 final class NotificationServiceResponse: ObjectRequestResponse, Map {
     
-    var notificationType: String? // not null
+    var notificationType: String?
     var url: String?
     var status: String?
-    var title: String? // not null
+    var title: String?
     var body: String?
     var image: String?
     var smallThumbnail: String?
     var largeThumbnail: String?
-    var priority: Int? // not null
-    var language: String? // not null
+    var priority: Int?
+    var language: String?
     var button1Text: String?
     var button1Action: String?
     var button1Url: String?
     var button2Text: String?
     var button2Action: String?
     var button2Url: String?
-    var readCondition: String? // not null
-    var communicationNotificationId: Int? // not null
-    var closable: Bool? // not null
+    var readCondition: String?
+    var communicationNotificationId: Int?
+    var closable: Bool?
+    var createdDate: UInt64?
     
     override func mapping() {
         notificationType = json?[NotificationJsonKey.notificationType].string
@@ -72,6 +74,7 @@ final class NotificationServiceResponse: ObjectRequestResponse, Map {
         readCondition = json?[NotificationJsonKey.readCondition].string
         communicationNotificationId = json?[NotificationJsonKey.communicationNotificationId].int
         closable = json?[NotificationJsonKey.closable].bool
+        createdDate = json?[NotificationJsonKey.createdDate].uInt64
     }
 }
 

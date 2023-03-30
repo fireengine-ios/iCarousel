@@ -17,11 +17,18 @@ class NotificationInteractor {
 extension NotificationInteractor: NotificationInteractorInput {
     
     func viewIsReady() {
-        service.fetch(
+        service.fetch(type: .inapp,
             success: { [weak self] response in
                 guard let notification = response as? NotificationResponse else { return }
+                let ascendingOrder = notification.list.sorted { one, two in
+            
+                    let dateOne = Date(timeIntervalSince1970: TimeInterval(one.createdDate ?? 0) / 1000)
+                    let dateTwo = Date(timeIntervalSince1970: TimeInterval(two.createdDate ?? 0) / 1000)
+                    
+                    return dateOne > dateTwo
+                }
                 DispatchQueue.main.async {
-                    self?.output.success(with: notification.list)
+                    self?.output.success(with: ascendingOrder)
                 }
             }, fail: { [weak self] errorResponse in
                 DispatchQueue.main.async {

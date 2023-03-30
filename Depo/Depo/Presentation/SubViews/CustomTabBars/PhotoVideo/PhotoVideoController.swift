@@ -119,8 +119,8 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
     
     private func canNotificationPopupRaiseUp() {
-        fetchNotificationPopup { content, id, isUrl in
-            let inAppPopup = WebViewPopup.with(content: content, id: id, isUrl: isUrl)
+        fetchNotificationPopup { content in
+            let inAppPopup = WebViewPopup.with(content: content)
             
             inAppPopup.modalPresentationStyle = .overFullScreen
             inAppPopup.modalTransitionStyle = .crossDissolve

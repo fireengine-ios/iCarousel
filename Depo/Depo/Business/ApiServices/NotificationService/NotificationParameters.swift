@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum NotificationType: String {
+    case popup = "POP_UP"
+    case inapp = "IN_APP"
+}
+
 struct NotificationPath {
     static let accountBase = "notification/communication"
     static let fetch = accountBase + "/fetch"
@@ -15,13 +20,21 @@ struct NotificationPath {
     static let delete = accountBase
 }
 
-class NotificationFetchParameters: BaseRequestParametrs {
+final class NotificationFetchParameters: BaseRequestParametrs {
+    
+    var type: String
+    let language: String = Locale.current.languageCode ?? ""
+    
+    init(type: NotificationType) {
+        self.type = type.rawValue
+    }
+    
     override var patch: URL {
-        return URL(string: NotificationPath.fetch, relativeTo: super.patch)!
+        return URL(string: NotificationPath.fetch + "?language=\(language)&type=\(type)", relativeTo: super.patch)!
     }
 }
 
-class NotificationDeleteParameters: BaseRequestParametrs {
+final class NotificationDeleteParameters: BaseRequestParametrs {
     
     var idList: [Int] = []
         
@@ -38,7 +51,7 @@ class NotificationDeleteParameters: BaseRequestParametrs {
     }
 }
 
-class NotificationReadParameters: BaseRequestParametrs {
+final class NotificationReadParameters: BaseRequestParametrs {
     
     let id: String
     
