@@ -501,6 +501,12 @@ extension TabBarViewController: TabBarActionHandler {
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .spotifyImport))
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .importSpotify)
             spotifyRoutingService.connectToSpotify(isSettingCell: false, completion: nil)
+        case .createWord:
+            print("createWord")
+        case .createExcel:
+            print("createExcel")
+        case .createPowerPoint:
+            print("createPowerPoint")
         }
         
     }

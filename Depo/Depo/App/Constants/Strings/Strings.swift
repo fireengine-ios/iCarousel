@@ -243,4 +243,9 @@ enum Strings: String, Localizable {
     case createCollageInfoLabel = "create_collage_info_label"
     case createCollageLabel = "create_collage"
     case createCollageInfoLabelNew = "collage_create_info"
+    
+    // MARK: - Only Office
+    case createWord = "Create_Word"
+    case createExcel = "Create_Cell"
+    case createPowerPoint = "Create_Slide"
 }
