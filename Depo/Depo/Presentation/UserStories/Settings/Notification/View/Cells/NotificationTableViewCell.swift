@@ -24,6 +24,16 @@ class NotificationTableViewCell: UITableViewCell {
     
     private lazy var descriptionLabel: UILabel = {
         let view = UILabel()
+        view.textColor = AppColor.textButton.color
+        view.font = .appFont(.medium, size: 14)
+        view.textAlignment = .right
+        view.numberOfLines = 1
+        view.lineBreakMode = .byWordWrapping
+        return view
+    }()
+    
+    private lazy var createDateLabel: UILabel = {
+        let view = UILabel()
         view.textColor = AppColor.label.color
         view.font = .appFont(.regular, size: 12)
         view.textAlignment = .left
@@ -205,16 +215,34 @@ class NotificationTableViewCell: UITableViewCell {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).activate()
         descriptionLabel.leadingAnchor.constraint(equalTo: cardImageView.trailingAnchor, constant: 16).activate()
-        descriptionLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8).activate()
+        descriptionLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -40).activate()
         descriptionLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16).activate()
+        
+        containerView.addSubview(createDateLabel)
+        createDateLabel.translatesAutoresizingMaskIntoConstraints = false
+        createDateLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8).activate()
+        createDateLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16).activate()
     }
     
     func configure(model: NotificationServiceResponse, readMode: Bool) {
         titleLabel.text = model.title
-        descriptionLabel.attributedText = convertHtml(from: model.body ?? "")
+        descriptionLabel.attributedText = (model.body ?? "").getAsHtml
         cardImageView.sd_setImage(with: URL(string: model.smallThumbnail ?? "")!)
+        createDateLabel.text = dateConverter(epochTimeInMilliseconds: model.createdDate ?? 0)
         
         updateStatus(model: model)
+    }
+    
+    func dateConverter(epochTimeInMilliseconds: UInt64) -> String {
+        let epochTimeInSeconds = TimeInterval(epochTimeInMilliseconds) / 1000
+        let date = Date(timeIntervalSince1970: epochTimeInSeconds)
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale.current
+        dateFormatter.dateStyle = .short
+        dateFormatter.dateFormat = "d.M.yyyy"
+        
+        return dateFormatter.string(from: date)
     }
     
     func updateStatus(model: NotificationServiceResponse) {
@@ -265,25 +293,6 @@ class NotificationTableViewCell: UITableViewCell {
         warningCase = true
         warningImageView.alpha = 0.5
         warningImageView.isHidden = false
-    }
-}
-
-extension NotificationTableViewCell {
-    private func convertHtml(from htmlString: String) -> NSAttributedString  {
-        if let data = htmlString.data(using: String.Encoding.unicode, allowLossyConversion: true) {
-          let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
-            .documentType: NSAttributedString.DocumentType.html,
-            .characterEncoding: String.Encoding.utf8.rawValue
-          ]
-          if let attributedString = try? NSMutableAttributedString(data: data, options: options, documentAttributes: nil) {
-            
-              attributedString.setBaseColor(baseColor: AppColor.label.color)
-              attributedString.setBaseFont(baseFont: .appFont(.regular, size: 12))
-            // Assign attributed string to attribute of your choice
-            return attributedString
-          }
-        }
-        return NSAttributedString(string: "")
     }
 }
 

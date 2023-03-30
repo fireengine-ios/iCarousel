@@ -9,8 +9,8 @@
 import Foundation
 
 final class NotificationService: BaseRequestService {
-    func fetch(success: SuccessResponse?, fail: @escaping FailResponse) {
-        let param = NotificationFetchParameters()
+    func fetch(type: NotificationType, success: SuccessResponse?, fail: @escaping FailResponse) {
+        let param = NotificationFetchParameters(type: type)
         let handler = BaseResponseHandler<NotificationResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }

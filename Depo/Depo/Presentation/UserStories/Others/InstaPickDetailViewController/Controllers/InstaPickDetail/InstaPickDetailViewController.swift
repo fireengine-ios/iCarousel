@@ -232,7 +232,7 @@ final class InstaPickDetailViewController: BaseViewController {
             
             selectedPhoto = topRatePhoto
             
-            leftButton.isEnabled = false
+            leftButton.isHidden = true
             leftButton.isHidden = analyzes.count < 6
             rightButton.isHidden = leftButton.isHidden
         }
@@ -270,9 +270,9 @@ final class InstaPickDetailViewController: BaseViewController {
         
         if smallPhotoDataSource.currentIndex <= 0 {
             smallPhotoDataSource.currentIndex = 0
-            leftButton.isEnabled = false
+            leftButton.isHidden = true
         } else {
-            rightButton.isEnabled = true
+            rightButton.isHidden = false
             if let _ = smallPhotosCollectionView.cellForItem(at: IndexPath(item: smallPhotoDataSource.currentIndex, section: 0)) {
                 let nextIndexPath = IndexPath(item: smallPhotoDataSource.currentIndex, section: 0)
                 smallPhotosCollectionView.scrollToItem(at: nextIndexPath, at: .centeredHorizontally, animated: true)
@@ -285,9 +285,9 @@ final class InstaPickDetailViewController: BaseViewController {
         
         if smallPhotoDataSource.currentIndex >= smallPhotoDataSource.smallPhotos.count {
             smallPhotoDataSource.currentIndex = smallPhotoDataSource.smallPhotos.count - 1
-            rightButton.isEnabled = false
+            rightButton.isHidden = true
         } else {
-            leftButton.isEnabled = true
+            leftButton.isHidden = false
             if let _ = smallPhotosCollectionView.cellForItem(at: IndexPath(item: smallPhotoDataSource.currentIndex, section: 0)) {
                 let nextIndexPath = IndexPath(item: smallPhotoDataSource.currentIndex, section: 0)
                 smallPhotosCollectionView.scrollToItem(at: nextIndexPath, at: .centeredHorizontally, animated: true)
@@ -353,15 +353,15 @@ final class InstaPickDetailViewController: BaseViewController {
 extension InstaPickDetailViewController: InstaPickPhotoViewDelegate {
     func currentIndexWithScroll(index: Int) {
         if index <= 1 {
-            leftButton.isEnabled = false
-            rightButton.isEnabled = true
+            leftButton.isHidden = true
+            rightButton.isHidden = false
         } else if index >= smallPhotoDataSource.smallPhotos.count {
             smallPhotoDataSource.currentIndex = smallPhotoDataSource.smallPhotos.count - 1
-            leftButton.isEnabled = true
-            rightButton.isEnabled = false
+            leftButton.isHidden = false
+            rightButton.isHidden = true
         } else {
-            leftButton.isEnabled = true
-            rightButton.isEnabled = true
+            leftButton.isHidden = false
+            rightButton.isHidden = false
         }
     }
     

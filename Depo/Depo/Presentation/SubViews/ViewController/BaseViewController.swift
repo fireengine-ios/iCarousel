@@ -10,6 +10,7 @@ import UIKit
 
 class NotificationHolder {
     var count = 0
+    var popupStatus = true
     static let shared = NotificationHolder()
 }
 
@@ -186,19 +187,30 @@ extension BaseViewController: UIViewControllerTransitioningDelegate {
 }
 
 extension BaseViewController {
-    func fetchNotificationPopup(completion: @escaping (_ content: String, _ id: Int, _ isUrl: Bool) -> Void) {
-        service.fetch(
+    func fetchNotificationPopup(completion: @escaping (_ response: NotificationServiceResponse) -> Void) {
+        
+        // To make sure it won't be called more than one
+        guard NotificationHolder.shared.popupStatus else { return }
+        NotificationHolder.shared.popupStatus.toggle()
+        
+        service.fetch(type: .popup,
             success: { response in
                 guard let notification = response as? NotificationResponse else { return }
                 DispatchQueue.main.async {
-                    let popup = notification.list.filter({$0.notificationType == "POP_UP"}).sorted { one, two in
+                    
+                    let popupP = notification.list.sorted { one, two in
+                        let dateOne = Date(timeIntervalSince1970: TimeInterval(one.createdDate ?? 0) / 1000)
+                        let dateTwo = Date(timeIntervalSince1970: TimeInterval(two.createdDate ?? 0) / 1000)
+                        
+                        return dateOne > dateTwo
+                    }
+                    
+                    let popup = popupP.sorted { one, two in
                         one.priority ?? 0 < two.priority ?? 0
                     }
                     
-                    if let url = popup.first?.url, let id = popup.first?.communicationNotificationId {
-                        completion(url, id, true)
-                    } else if let body = popup.first?.body, let id = popup.first?.communicationNotificationId {
-                        completion(body, id, false)
+                    if let content = popup.first {
+                        completion(content)
                     }
                 }
             }, fail: { errorResponse in
@@ -206,11 +218,11 @@ extension BaseViewController {
     }
     
     func fetchNotificationCount() {
-        service.fetch(
+        service.fetch(type: .inapp,
             success: { [weak self] response in
                 guard let notification = response as? NotificationResponse else { return }
                 DispatchQueue.main.async {
-                    let count = notification.list.map({$0.status == "UNREAD" && $0.notificationType == "IN_APP"}).filter({$0}).count
+                    let count = notification.list.map({$0.status == "UNREAD"}).filter({$0}).count
                     NotificationHolder.shared.count = count
                     self?.settingsNavButton.setnotificationCount(with: count)
                 }
