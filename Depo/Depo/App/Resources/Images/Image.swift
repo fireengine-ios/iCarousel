@@ -187,6 +187,9 @@ enum Image: String, AppImage {
     case popupUnHide
     case popupRestore
     case popupLogout
+    case popupDoc
+    case popupExcel
+    case popupPowerPoint
     
     /// For You
     case forYouPeople

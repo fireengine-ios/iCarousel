@@ -1604,6 +1604,14 @@
 		89D1EBEC23EC3BF000092031 /* UIApplication+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D1EBE923EC3BF000092031 /* UIApplication+Display.swift */; };
 		89D1EBEE23EC3BF000092031 /* UIApplication+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D1EBE923EC3BF000092031 /* UIApplication+Display.swift */; };
 		89D1EBEF23EC3BF000092031 /* UIApplication+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D1EBE923EC3BF000092031 /* UIApplication+Display.swift */; };
+		89D2D4CB29D5A52100AC772B /* OnlyOfficePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89D2D4CA29D5A52100AC772B /* OnlyOfficePopup.xib */; };
+		89D2D4CD29D5A52E00AC772B /* OnlyOfficePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D2D4CC29D5A52E00AC772B /* OnlyOfficePopup.swift */; };
+		89D2D4CE29D5A53200AC772B /* OnlyOfficePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D2D4CC29D5A52E00AC772B /* OnlyOfficePopup.swift */; };
+		89D2D4CF29D5A53300AC772B /* OnlyOfficePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D2D4CC29D5A52E00AC772B /* OnlyOfficePopup.swift */; };
+		89D2D4D029D5A53300AC772B /* OnlyOfficePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D2D4CC29D5A52E00AC772B /* OnlyOfficePopup.swift */; };
+		89D2D4D129D5A53F00AC772B /* OnlyOfficePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89D2D4CA29D5A52100AC772B /* OnlyOfficePopup.xib */; };
+		89D2D4D229D5A54000AC772B /* OnlyOfficePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89D2D4CA29D5A52100AC772B /* OnlyOfficePopup.xib */; };
+		89D2D4D329D5A54100AC772B /* OnlyOfficePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89D2D4CA29D5A52100AC772B /* OnlyOfficePopup.xib */; };
 		89DA5D0323ACF635000FA31D /* SmartAlbumWarningPopUpsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DA5D0123ACF635000FA31D /* SmartAlbumWarningPopUpsFactory.swift */; };
 		89DA5D0523ACF635000FA31D /* SmartAlbumWarningPopUpsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DA5D0123ACF635000FA31D /* SmartAlbumWarningPopUpsFactory.swift */; };
 		89DAB3DB23AB513700D4337D /* HSCompletionPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89DAB3D823AB513600D4337D /* HSCompletionPopUp.xib */; };
@@ -10914,6 +10922,8 @@
 		89CC89F223AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSSmartAlbumWarningPopUp.xib; sourceTree = "<group>"; };
 		89CDEBA929B7122A00870B14 /* CreateCollagePreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollagePreviewController.swift; sourceTree = "<group>"; };
 		89D1EBE923EC3BF000092031 /* UIApplication+Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Display.swift"; sourceTree = "<group>"; };
+		89D2D4CA29D5A52100AC772B /* OnlyOfficePopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnlyOfficePopup.xib; sourceTree = "<group>"; };
+		89D2D4CC29D5A52E00AC772B /* OnlyOfficePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyOfficePopup.swift; sourceTree = "<group>"; };
 		89DA5D0123ACF635000FA31D /* SmartAlbumWarningPopUpsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartAlbumWarningPopUpsFactory.swift; sourceTree = "<group>"; };
 		89DAB3D823AB513600D4337D /* HSCompletionPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HSCompletionPopUp.xib; sourceTree = "<group>"; };
 		89DAB3D923AB513700D4337D /* HSCompletionPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSCompletionPopUp.swift; sourceTree = "<group>"; };
@@ -16975,6 +16985,15 @@
 			path = CreateCollagePreview;
 			sourceTree = "<group>";
 		};
+		89D2D4C929D5A44A00AC772B /* OnlyOfficePopUp */ = {
+			isa = PBXGroup;
+			children = (
+				89D2D4CA29D5A52100AC772B /* OnlyOfficePopup.xib */,
+				89D2D4CC29D5A52E00AC772B /* OnlyOfficePopup.swift */,
+			);
+			path = OnlyOfficePopUp;
+			sourceTree = "<group>";
+		};
 		89DCC5D72403AC1600488F1F /* SubscriptionFeaturesView */ = {
 			isa = PBXGroup;
 			children = (
@@ -19882,6 +19901,7 @@
 		C206234150DD1B9E1424D61C /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				89D2D4C929D5A44A00AC772B /* OnlyOfficePopUp */,
 				52E6815529BF41070023DADB /* WebViewPopup */,
 				52A5E026291CD47000670B0C /* SnackBarHeaderTwoLineView */,
 				52A5E01D291C17E200670B0C /* CustomSegmentedView */,
@@ -23301,6 +23321,7 @@
 				F0B1A50928D1EC00006EB2DC /* SelectionTabBarCard.xib in Resources */,
 				8C0E90011FDEBDFF00789C91 /* SettingsTableViewCell.xib in Resources */,
 				89E51D6222CA2ECA007A7DBC /* CreateStoryPopUp.xib in Resources */,
+				89D2D4CB29D5A52100AC772B /* OnlyOfficePopup.xib in Resources */,
 				9845489822FBFF4100D7F29C /* SpotifyStatusView.xib in Resources */,
 				07C75A29281A786400B028F0 /* GT-America-LC-Standard-Regular.ttf in Resources */,
 				4A9B3912201F5EC5009FC572 /* FaceImageItemsViewController.xib in Resources */,
@@ -23824,6 +23845,7 @@
 				F0B1A50B28D1EC00006EB2DC /* SelectionTabBarCard.xib in Resources */,
 				8E3B6B502462E44C00BCB052 /* FileInfoView.xib in Resources */,
 				F00610ED289DBF4D00911048 /* PaycellCampaignViewController.xib in Resources */,
+				89D2D4D229D5A54000AC772B /* OnlyOfficePopup.xib in Resources */,
 				CE784CD222A685FB00662219 /* OptInController.xib in Resources */,
 				CE784CD322A685FB00662219 /* FaceImageChangeCoverViewController.xib in Resources */,
 				98C298542302B15300C9811E /* SpotifyCancelImportPopup.xib in Resources */,
@@ -24221,6 +24243,7 @@
 				CF8B68C923CBC9D70021B021 /* FaceImageItemsViewController.xib in Resources */,
 				CF8B68CB23CBC9D70021B021 /* BaseChangeEmailPopUp.xib in Resources */,
 				CF8B68CD23CBC9D70021B021 /* FaceImageAddNameViewController.xib in Resources */,
+				89D2D4D129D5A53F00AC772B /* OnlyOfficePopup.xib in Resources */,
 				F0571E9D288AE31700A0D6AC /* ForYou.xib in Resources */,
 				0305A31023D5C315004D1EC7 /* EmptyView.xib in Resources */,
 				CF8B68CF23CBC9D70021B021 /* PremiumView.xib in Resources */,
@@ -24615,6 +24638,7 @@
 				8E3B6B512462E44D00BCB052 /* FileInfoView.xib in Resources */,
 				F00610EE289DBF4D00911048 /* PaycellCampaignViewController.xib in Resources */,
 				CF8B708723CBCA280021B021 /* OptInController.xib in Resources */,
+				89D2D4D329D5A54100AC772B /* OnlyOfficePopup.xib in Resources */,
 				CF8B708823CBCA280021B021 /* FaceImageChangeCoverViewController.xib in Resources */,
 				CF8B708923CBCA280021B021 /* SpotifyCancelImportPopup.xib in Resources */,
 				0711888E27FA9E7900F512A1 /* NavigationBar.xcassets in Resources */,
@@ -27651,6 +27675,7 @@
 				B5B6B1522170A01E00463260 /* PrepareQuickScroll.swift in Sources */,
 				B56B97B5212EE4EB00732C2B /* AugmentedRealityFileProvider.swift in Sources */,
 				7CD92DC22076027D00010BFA /* iOSDevCenters+GIF.swift in Sources */,
+				89D2D4CD29D5A52E00AC772B /* OnlyOfficePopup.swift in Sources */,
 				B55EFD1E256538CF00E11D9C /* PrivateShareSharedWithThreeDotsManager.swift in Sources */,
 				A217E43221A5B0300084AA37 /* LeavePremiumViewOutput.swift in Sources */,
 				F01C14CC28FB47C200F5D380 /* ForYouCardsCollectionViewCell.swift in Sources */,
@@ -28391,6 +28416,7 @@
 				98A86D5823A238E700438225 /* AlbumsSliderCell.swift in Sources */,
 				982319C024F3A1E700FD16E2 /* AdjustmentParameterSliderView.swift in Sources */,
 				071E7B6E2832438C00A5DD24 /* GalleryCollectionGridSize.swift in Sources */,
+				89D2D4CF29D5A53300AC772B /* OnlyOfficePopup.swift in Sources */,
 				CE78485F22A685FB00662219 /* AppMigrator.swift in Sources */,
 				CE78486122A685FB00662219 /* ContactBackupEmpty.swift in Sources */,
 				CE78486222A685FB00662219 /* KeyboardHandler.swift in Sources */,
@@ -30914,6 +30940,7 @@
 				CF7146A724B597A900D83E60 /* ContactBackupHistoryPopupFactory.swift in Sources */,
 				07915DCE27F5B32000807EAB /* NavigationBarStyling.swift in Sources */,
 				CF8B65C623CBC9D70021B021 /* QuickScrollItems.swift in Sources */,
+				89D2D4CE29D5A53200AC772B /* OnlyOfficePopup.swift in Sources */,
 				0305A32523D5C3B5004D1EC7 /* HiddenPhotosBottomBarManager.swift in Sources */,
 				CF8B65C723CBC9D70021B021 /* URL+Video.swift in Sources */,
 				CF8B65C823CBC9D70021B021 /* PhoneVerificationViewInput.swift in Sources */,
@@ -32816,6 +32843,7 @@
 				07D42134274E4D0800061EA2 /* ItemAnnotationView.swift in Sources */,
 				CF8B6DBD23CBCA280021B021 /* PhoneVerificationInteractor.swift in Sources */,
 				89F99F7B29B5F62800F99CB5 /* CreateCollageSelectionSegmentedView.swift in Sources */,
+				89D2D4D029D5A53300AC772B /* OnlyOfficePopup.swift in Sources */,
 				CF8B6DBE23CBCA280021B021 /* RoundedProgressView.swift in Sources */,
 				CF8B6DBF23CBCA280021B021 /* PushNotificationServiceConstants.swift in Sources */,
 				CF8B6DC023CBCA280021B021 /* FaceImagePhotosRouterInput.swift in Sources */,
@@ -34455,6 +34483,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_USE_INTEGRATED_DRIVER = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -34516,6 +34545,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "RELEASE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
+				SWIFT_USE_INTEGRATED_DRIVER = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -34576,6 +34606,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "APPSTORE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
+				SWIFT_USE_INTEGRATED_DRIVER = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -34637,6 +34668,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "ENTERPRISE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
+				SWIFT_USE_INTEGRATED_DRIVER = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;

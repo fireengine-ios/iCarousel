@@ -501,11 +501,14 @@ extension TabBarViewController: TabBarActionHandler {
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .importSpotify)
             spotifyRoutingService.connectToSpotify(isSettingCell: false, completion: nil)
         case .createWord:
-            print("createWord")
+            let vc = OnlyOfficePopup.with(fileType: .createWord)
+            vc.open()
         case .createExcel:
-            print("createExcel")
+            let vc = OnlyOfficePopup.with(fileType: .createExcel)
+            vc.open()
         case .createPowerPoint:
-            print("createPowerPoint")
+            let vc = OnlyOfficePopup.with(fileType: .createPowerPoint)
+            vc.open()
         }
         
     }
