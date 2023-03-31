@@ -264,6 +264,8 @@ extension WebViewPopup {
     
     static func with(content: NotificationServiceResponse) -> WebViewPopup {
         let controller = WebViewPopup()
+        
+        controller.id = content.communicationNotificationId ?? 0
                 
         if let url = content.url {
             raiseWebView(controller: controller, url: url)

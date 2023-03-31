@@ -232,9 +232,9 @@ final class InstaPickDetailViewController: BaseViewController {
             
             selectedPhoto = topRatePhoto
             
-            leftButton.isHidden = true
             leftButton.isHidden = analyzes.count < 6
             rightButton.isHidden = leftButton.isHidden
+            leftButton.isHidden = true
         }
     }
     

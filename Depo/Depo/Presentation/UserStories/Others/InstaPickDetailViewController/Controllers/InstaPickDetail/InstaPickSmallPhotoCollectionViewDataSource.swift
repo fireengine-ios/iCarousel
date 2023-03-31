@@ -46,7 +46,7 @@ class InstaPickSmallPhotoCollectionViewDataSource: UICollectionViewFlowLayout {
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        currentIndex = Int(abs(scrollView.contentOffset.x) / CGFloat(20))
+        currentIndex = Int(abs(scrollView.contentOffset.x) / CGFloat(21))
         delegate?.currentIndexWithScroll(index: currentIndex)
     }
 }
