@@ -248,4 +248,5 @@ enum Strings: String, Localizable {
     case createWord = "Create_Word"
     case createExcel = "Create_Cell"
     case createPowerPoint = "Create_Slide"
+    case createDocumentPopup = "Create_Document_Popup"
 }
