@@ -34,6 +34,17 @@ enum OnlyOfficeType {
             return Image.popupPowerPoint.image
         }
     }
+    
+    var documentType: String {
+        switch self {
+        case .createWord:
+            return "WORD"
+        case .createExcel:
+            return "CELL"
+        case .createPowerPoint:
+            return "SLIDE"
+        }
+    }
 }
 
 typealias OnlyOfficePopupButtonHandler = (_: OnlyOfficePopup) -> Void
@@ -99,6 +110,8 @@ final class OnlyOfficePopup: BasePopUpController {
     
     private var extLabelText: String = ""
     private var imageViewImage: UIImage = Image.iconFileDocNew.image
+    private var selectedDocumentType: String = "WORD"
+    private let onlyOfficeService = OnlyOfficeService()
     
     lazy var cancelAction: OnlyOfficePopupButtonHandler = { vc in
         vc.dismiss(animated: true)
@@ -118,27 +131,37 @@ final class OnlyOfficePopup: BasePopUpController {
     private func selectedFileType(fileType: OnlyOfficeType) {
         imageViewImage = fileType.popupImage!
         extLabelText = fileType.popupExtTitle
+        selectedDocumentType = fileType.documentType
     }
     
     //MARK: IBAction
     @IBAction func actionCancelButton(_ sender: UIButton) {
-        print("aaaaaaaaaa cancel")
+        dismiss(animated: true)
     }
-    
+   
     @IBAction func actionOkButton(_ sender: UIButton) {
         if textField.text != "" {
-            print("aaaaaaaaaa ok")
+            onlyOfficeService.create(
+                fileName: textField.text ?? "",
+                documentType: selectedDocumentType,
+                success: { [weak self] response in
+                    let serviceResult = response as? OnlyOfficeResponse
+                    DispatchQueue.main.async {
+                        self?.dismiss(animated: true)
+                    }
+                }, fail: { [weak self] errorResponse in
+                    DispatchQueue.main.async {
+                        
+                    }
+            })
         }        
     }
 }
 
 // MARK: - Init
 extension OnlyOfficePopup {
-    
     static func with(fileType: OnlyOfficeType) -> OnlyOfficePopup {
-        
         let vc = controllerWith(fileType: fileType)
-        
         return vc
     }
     
