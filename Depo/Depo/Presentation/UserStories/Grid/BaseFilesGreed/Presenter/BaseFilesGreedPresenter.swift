@@ -220,7 +220,20 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         
     }
     
+    func onlyOfficeCreateFile(fileName: String, documentType: String) {
+        startAsyncOperation()
+        interactor.onlyOfficeCreateFile(fileName: fileName, documentType: documentType)
+    }
+    
     // MARK: - Request OUTPUT
+    func createFileSuccess(fileUuid: String) {
+        onReloadData()
+    }
+    
+    func createFileFail(errorResponse: ErrorResponse) {
+        print("aaaaaaaaaaa \(errorResponse)")
+    }
+    
     func getContentWithFail(errorString: String?) {
         view?.stopRefresher()
         dataSource.isPaginationDidEnd = false
