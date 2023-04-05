@@ -139,21 +139,13 @@ final class OnlyOfficePopup: BasePopUpController {
         dismiss(animated: true)
     }
    
-    @IBAction func actionOkButton(_ sender: UIButton) {
+    @IBAction func actionOkButton(_ sender: UIButton)  {
         if textField.text != "" {
-            onlyOfficeService.create(
-                fileName: textField.text ?? "",
-                documentType: selectedDocumentType,
-                success: { [weak self] response in
-                    let serviceResult = response as? OnlyOfficeResponse
-                    DispatchQueue.main.async {
-                        self?.dismiss(animated: true)
-                    }
-                }, fail: { [weak self] errorResponse in
-                    DispatchQueue.main.async {
-                        
-                    }
-            })
+            let router = RouterVC()
+            let segmentedController = (router.tabBarController?.customNavigationControllers[TabScreenIndex.documents.rawValue].viewControllers.first as? HeaderContainingViewController)?.childViewController as? AllFilesSegmentedController
+            let vc = segmentedController?.viewControllers[0] as? BaseFilesGreedViewController
+            vc?.createFile(fileName: textField.text ?? "", documentType: selectedDocumentType)
+            dismiss(animated: true)
         }        
     }
 }
