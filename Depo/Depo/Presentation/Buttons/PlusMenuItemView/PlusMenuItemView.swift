@@ -75,7 +75,7 @@ enum FloatingButtonsType {
         case .photopick:
             return Image.iconEffect.image
         case .createCollage:
-            return Image.iconEffect.image
+            return Image.iconCollage.image
         }
     }
     
