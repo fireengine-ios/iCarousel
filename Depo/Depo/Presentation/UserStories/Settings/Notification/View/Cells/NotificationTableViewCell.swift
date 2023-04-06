@@ -46,7 +46,6 @@ class NotificationTableViewCell: UITableViewCell {
         let view = UIImageView()
         view.contentMode = .scaleAspectFit
         view.clipsToBounds = true
-        view.image = Image.iconFilePhotoBig.image
         view.layer.cornerRadius = 6
         
         return view
@@ -226,9 +225,18 @@ class NotificationTableViewCell: UITableViewCell {
     
     func configure(model: NotificationServiceResponse, readMode: Bool) {
         titleLabel.text = model.title
-        descriptionLabel.attributedText = (model.body ?? "").getAsHtml
-        cardImageView.sd_setImage(with: URL(string: model.smallThumbnail ?? "")!)
-        createDateLabel.text = dateConverter(epochTimeInMilliseconds: model.createdDate ?? 0)
+        if let body = model.body {
+            descriptionLabel.attributedText = body.getAsHtml
+        }
+        
+        if let thumbnail = model.smallThumbnail,
+           let url = URL(string: thumbnail) {
+            cardImageView.sd_setImage(with: url)
+        }
+        
+        if let createdDate = model.createdDate {
+            createDateLabel.text = dateConverter(epochTimeInMilliseconds: createdDate)
+        }
         
         updateStatus(model: model)
     }
