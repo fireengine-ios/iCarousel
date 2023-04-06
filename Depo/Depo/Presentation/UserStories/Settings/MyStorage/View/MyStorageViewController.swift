@@ -128,13 +128,14 @@ final class MyStorageViewController: BaseViewController {
         menuTableView.delegate = self
         menuTableView.dataSource = self
         bannerView.delegate = self
-        
+        bannerView.isHidden = true
         setupCardStackView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         output.viewWillAppear()
+        checkIfPremiumBannerValid()
     }
     
     // MARK: Utility Methods (private)
@@ -143,7 +144,7 @@ final class MyStorageViewController: BaseViewController {
         self.view.backgroundColor = ColorConstants.fileGreedCellColorSecondary
         
         activityManager.delegate = self
-        automaticallyAdjustsScrollViewInsets = false
+        scrollView.contentInsetAdjustmentBehavior = .never
         setupLayout()
         addPremiumBanner()
     }
@@ -157,16 +158,12 @@ final class MyStorageViewController: BaseViewController {
     }
     
     private func addPremiumBanner() {
-        guard !AuthoritySingleton.shared.accountType.isPremium else { return }
-        
         view.addSubview(bannerView)
         bannerView.translatesAutoresizingMaskIntoConstraints = false
         bannerView.topAnchor.constraint(equalTo: view.topAnchor).activate()
         bannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
         bannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
         bannerView.heightAnchor.constraint(equalToConstant: 137).activate()
-        
-        topSpacingHeight.constant += 142.0
     }
 
     @IBAction private func restorePurhases() {
@@ -186,6 +183,13 @@ final class MyStorageViewController: BaseViewController {
 
 // MARK: - MyStorageViewInput
 extension MyStorageViewController: MyStorageViewInput {
+    func checkIfPremiumBannerValid() {
+        guard !AuthoritySingleton.shared.accountType.isPremium else {
+            hideBanner()
+            return
+        }
+        showBanner()
+    }
     
     func reloadPackages() {
         myPackages.arrangedSubviews.forEach { $0.removeFromSuperview() }
@@ -245,7 +249,6 @@ extension MyStorageViewController: MyStorageViewInput {
         restorePurchasesButton.isHidden = false
     }
 
-    
     func showInAppPolicy() {
         policyStackView.addArrangedSubview(policyView)
     }
@@ -448,5 +451,10 @@ extension MyStorageViewController: BuyPremiumBannerDelegate {
     func hideBanner() {
         bannerView.isHidden = true
         topSpacingHeight.constant = 12
+    }
+    
+    func showBanner() {
+        bannerView.isHidden = false
+        topSpacingHeight.constant = 154.0
     }
 }
