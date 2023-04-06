@@ -229,7 +229,7 @@ class LoginInteractor: LoginInteractorInput {
             guard let self = self else {
                 return
             }
-            
+            debugLog("login isRememberMe authificate \(self.rememberMe)")
             self.tokenStorage.isRememberMe = self.rememberMe
             self.output?.showTwoFactorAuthViewController(response: response)
         })
@@ -303,7 +303,7 @@ class LoginInteractor: LoginInteractorInput {
                 }
                 
                 self.accountService.updateBrandType()
-                
+                debugLog("login isRememberMe silentlogin \(self.rememberMe)")
                 self.tokenStorage.isRememberMe = self.rememberMe
                 self.output?.succesLogin()
             }
@@ -351,6 +351,7 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     func rememberMe(state: Bool) {
+        debugLog("login isRememberMe rememberMe var \(state)")
         rememberMe = state
     }
     

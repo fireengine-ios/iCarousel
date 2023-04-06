@@ -663,6 +663,7 @@ final class UploadService: BaseRequestService {
     }
     
     func cancelOperations() {
+        debugLog("SYNC: Cancel Operations")
         uploadOperations.forEach { $0.cancel() }
         uploadOperations.removeAll()
         

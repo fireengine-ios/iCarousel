@@ -209,6 +209,7 @@ class SyncServiceManager {
     
     //start to sync
     private func start(photo: Bool, video: Bool, newItems: Bool) {
+        debugLog("SYNC: START -> photo: \(photo) video: \(video)")
         if photo || video {
             operationQueue.cancelAllOperations()
             
