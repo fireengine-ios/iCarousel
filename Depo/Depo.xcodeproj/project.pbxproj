@@ -1594,6 +1594,14 @@
 		89959F092934B361000135DE /* CollageInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89959F072934B361000135DE /* CollageInitializer.swift */; };
 		89959F0A2934B361000135DE /* CollageInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89959F072934B361000135DE /* CollageInitializer.swift */; };
 		89959F0B2934B361000135DE /* CollageInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89959F072934B361000135DE /* CollageInitializer.swift */; };
+		899B314829DEA35F000EDF0A /* OnlyOfficeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899B314729DEA35F000EDF0A /* OnlyOfficeViewController.swift */; };
+		899B314929DEA35F000EDF0A /* OnlyOfficeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899B314729DEA35F000EDF0A /* OnlyOfficeViewController.swift */; };
+		899B314A29DEA35F000EDF0A /* OnlyOfficeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899B314729DEA35F000EDF0A /* OnlyOfficeViewController.swift */; };
+		899B314B29DEA35F000EDF0A /* OnlyOfficeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899B314729DEA35F000EDF0A /* OnlyOfficeViewController.swift */; };
+		899B315029DEA496000EDF0A /* OnlyOfficeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 899B314F29DEA496000EDF0A /* OnlyOfficeViewController.xib */; };
+		899B315129DEA496000EDF0A /* OnlyOfficeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 899B314F29DEA496000EDF0A /* OnlyOfficeViewController.xib */; };
+		899B315229DEA496000EDF0A /* OnlyOfficeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 899B314F29DEA496000EDF0A /* OnlyOfficeViewController.xib */; };
+		899B315329DEA496000EDF0A /* OnlyOfficeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 899B314F29DEA496000EDF0A /* OnlyOfficeViewController.xib */; };
 		89ABFDD029B9F34E000237A4 /* CreateCollageBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ABFDCF29B9F34D000237A4 /* CreateCollageBottomBarManager.swift */; };
 		89B9D17B29BEFC2100C73307 /* CreateCollageDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B9D17A29BEFC2100C73307 /* CreateCollageDetailController.swift */; };
 		89B9D17C29BEFC2100C73307 /* CreateCollageDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B9D17A29BEFC2100C73307 /* CreateCollageDetailController.swift */; };
@@ -10933,6 +10941,8 @@
 		8980D941292621C200817FF8 /* DiscoverInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverInteractor.swift; sourceTree = "<group>"; };
 		89959F022934B00E000135DE /* CollageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollageInteractor.swift; sourceTree = "<group>"; };
 		89959F072934B361000135DE /* CollageInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollageInitializer.swift; sourceTree = "<group>"; };
+		899B314729DEA35F000EDF0A /* OnlyOfficeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyOfficeViewController.swift; sourceTree = "<group>"; };
+		899B314F29DEA496000EDF0A /* OnlyOfficeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnlyOfficeViewController.xib; sourceTree = "<group>"; };
 		89ABFDCF29B9F34D000237A4 /* CreateCollageBottomBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageBottomBarManager.swift; sourceTree = "<group>"; };
 		89B9D17A29BEFC2100C73307 /* CreateCollageDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageDetailController.swift; sourceTree = "<group>"; };
 		89CB2BC929D6E4CB000A15CB /* OnlyOfficeParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyOfficeParameters.swift; sourceTree = "<group>"; };
@@ -22199,6 +22209,8 @@
 				08BC2716CA43EB44D104F6F6 /* BaseFilesGreedViewOutput.swift */,
 				F43F31D403CF3A25954AE0EF /* BaseFilesGreedViewController.swift */,
 				7C3A74321F04DDD300124DF5 /* BaseFilesGreedViewController.xib */,
+				899B314729DEA35F000EDF0A /* OnlyOfficeViewController.swift */,
+				899B314F29DEA496000EDF0A /* OnlyOfficeViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -23385,6 +23397,7 @@
 				8C0E90051FDEBDFF00789C91 /* AutoSyncSwitcherTableViewCell.xib in Resources */,
 				9808B3EF25540D6C002B0032 /* PrivateShareSuggestionsView.xib in Resources */,
 				9808B7C72567EB10001DEF2E /* PrivateShareAccessListHeader.xib in Resources */,
+				899B315029DEA496000EDF0A /* OnlyOfficeViewController.xib in Resources */,
 				F0C4472E2848C85F00129228 /* AllFilesTypeCollectionViewCell.xib in Resources */,
 				8C0B91BF201710F300A5BA81 /* TitleView.xib in Resources */,
 				9823197524F3A1E600FD16E2 /* PreparedFiltersView.xib in Resources */,
@@ -23909,6 +23922,7 @@
 				CF7D63E225A42FE4005C22F5 /* SharedFilesSliderCell.xib in Resources */,
 				CE634AF8230EAAA700CED18C /* PaymentPopUpController.xib in Resources */,
 				4B857865233908B400F378AB /* SubjectDetailsViewController.xib in Resources */,
+				899B315229DEA496000EDF0A /* OnlyOfficeViewController.xib in Resources */,
 				CF7146AF24B597A900D83E60 /* ContactsBackupCell.xib in Resources */,
 				CE784CFA22A685FB00662219 /* LBAlbumLikePreviewSliderViewController.xib in Resources */,
 				CE1966E12359BA4900599638 /* InstapickCampaignCell.xib in Resources */,
@@ -24599,6 +24613,7 @@
 				CF8B6AE123CBC9D70021B021 /* BaseCollectionViewCellWithSwipe.xib in Resources */,
 				F039B5FA279DE4A0000EBAA7 /* GraceBannerView.xib in Resources */,
 				CF8B6AE223CBC9D70021B021 /* SecurityQuestionView.xib in Resources */,
+				899B315129DEA496000EDF0A /* OnlyOfficeViewController.xib in Resources */,
 				CF8B6AE423CBC9D70021B021 /* ForgotPasswordViewController.xib in Resources */,
 				CF8B6AE523CBC9D70021B021 /* TBMatikCard.xib in Resources */,
 				CF8B6AE623CBC9D70021B021 /* SettingsViewController.xib in Resources */,
@@ -24702,6 +24717,7 @@
 				CF8B70AF23CBCA280021B021 /* PaymentPopUpController.xib in Resources */,
 				CF8B70B023CBCA280021B021 /* SubjectDetailsViewController.xib in Resources */,
 				CF7146B024B597A900D83E60 /* ContactsBackupCell.xib in Resources */,
+				899B315329DEA496000EDF0A /* OnlyOfficeViewController.xib in Resources */,
 				CF8B70B323CBCA280021B021 /* LBAlbumLikePreviewSliderViewController.xib in Resources */,
 				0305A31123D5C316004D1EC7 /* EmptyView.xib in Resources */,
 				CF8B70B623CBCA280021B021 /* InstapickCampaignCell.xib in Resources */,
@@ -27262,6 +27278,7 @@
 				4BF3A69822B38C590082130F /* PermissionsView.swift in Sources */,
 				8C286C4A232134080061EA20 /* SpotifyAccountConnectionCell.swift in Sources */,
 				8C0E8ED71FDEBDFF00789C91 /* CollectionViewStoryReorderView.swift in Sources */,
+				899B314829DEA35F000EDF0A /* OnlyOfficeViewController.swift in Sources */,
 				CE3435EA224A5A8B00AFAABB /* WebViewController.swift in Sources */,
 				92004B6D21AD199100582C45 /* MyStorageInteractorOutput.swift in Sources */,
 				CED4B02E2018594700D06CA9 /* HomeCardResponse.swift in Sources */,
@@ -28677,6 +28694,7 @@
 				CE7848F722A685FB00662219 /* UIApplication+topController.swift in Sources */,
 				F0620422290D9D9C00A03F06 /* ForYouGradientCollectionViewCell.swift in Sources */,
 				CF38A86B2575325F0000994F /* PrivateShareDurationCell.swift in Sources */,
+				899B314A29DEA35F000EDF0A /* OnlyOfficeViewController.swift in Sources */,
 				CE7848F822A685FB00662219 /* VisualMusicPlayerViewOutput.swift in Sources */,
 				730A998422D740130037ABA9 /* TwoFactorAuthenticationCell.swift in Sources */,
 				17FBD51D23FB2C6200979F39 /* DivorceActionService.swift in Sources */,
@@ -30754,6 +30772,7 @@
 				CF8B652623CBC9D70021B021 /* AutoSyncPresenter.swift in Sources */,
 				CF8B652723CBC9D70021B021 /* HomePageViewInput.swift in Sources */,
 				0305A32C23D5C41C004D1EC7 /* SmashStickerResponse.swift in Sources */,
+				899B314929DEA35F000EDF0A /* OnlyOfficeViewController.swift in Sources */,
 				9808B44825540E7B002B0032 /* PrivateShareSuggestionItemView.swift in Sources */,
 				CF8B652823CBC9D70021B021 /* LeavePremiumPresenter.swift in Sources */,
 				CF8B652923CBC9D70021B021 /* IntroduceModel.swift in Sources */,
@@ -32255,6 +32274,7 @@
 				CF8B6BF423CBCA280021B021 /* MediaItemsAlbum+CoreDataClass.swift in Sources */,
 				988EE4FA25820B6500CEB348 /* MenuItemsFabric.swift in Sources */,
 				CF8B6BF523CBCA280021B021 /* FaceImageChangeCoverRouter.swift in Sources */,
+				899B314B29DEA35F000EDF0A /* OnlyOfficeViewController.swift in Sources */,
 				075568412666488900AAA047 /* FileInfoThumbView.swift in Sources */,
 				F028C10D2789F250005CE6AF /* PublicShareViewInput.swift in Sources */,
 				CF8B6BF623CBCA280021B021 /* AutoSyncModel.swift in Sources */,
