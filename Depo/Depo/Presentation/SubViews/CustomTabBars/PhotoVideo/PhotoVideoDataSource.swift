@@ -468,7 +468,6 @@ final class PhotoVideoDataSource: NSObject {
 // MARK: - UICollectionViewDataSource
 extension PhotoVideoDataSource: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "sortingDate != nil") //for missing days not showing
         return fetchedResultsController.sections?.count ?? 0
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

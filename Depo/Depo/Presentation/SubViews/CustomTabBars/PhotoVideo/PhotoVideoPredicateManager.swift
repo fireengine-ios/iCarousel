@@ -40,6 +40,7 @@ final class PhotoVideoPredicateManager {
             NSCompoundPredicate(andPredicateWithSubpredicates: [
                 NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = true"),
                 NSPredicate(format: "\(MediaItem.PropertyNameKey.hasMissingDateRemotes) = true || \(MediaItem.PropertyNameKey.relatedRemotes).@count = 0"),
+                NSPredicate(format: "\(MediaItem.PropertyNameKey.sortingDate) != nil"),
             ]),
             NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = false")
         ])
@@ -48,13 +49,13 @@ final class PhotoVideoPredicateManager {
     func getSyncPredicate(fileTypes: [FileType]) -> NSPredicate {
         let hiddenStatusValue = ItemStatus.hidden.valueForCoreDataMapping()
         
-        let unhidden = NSPredicate(format: "(\(MediaItem.PropertyNameKey.isLocalItemValue) = false AND \(MediaItem.PropertyNameKey.status) != %ui)", hiddenStatusValue)
+        let unhidden = NSPredicate(format: "(\(MediaItem.PropertyNameKey.sortingDate) != nil AND \(MediaItem.PropertyNameKey.isLocalItemValue) = false AND \(MediaItem.PropertyNameKey.status) != %ui)", hiddenStatusValue)
         
         return NSCompoundPredicate(andPredicateWithSubpredicates: [getFiltrationPredicate(fileTypes: fileTypes), unhidden])
     }
     
     func getUnsyncPredicate(fileTypes: [FileType]) -> NSPredicate {
-        let localWithoutRemotes = NSPredicate(format:"(\(MediaItem.PropertyNameKey.isLocalItemValue) = true AND \(MediaItem.PropertyNameKey.relatedRemotes).@count = 0)")
+        let localWithoutRemotes = NSPredicate(format:"(\(MediaItem.PropertyNameKey.sortingDate) != nil AND \(MediaItem.PropertyNameKey.isLocalItemValue) = true AND \(MediaItem.PropertyNameKey.relatedRemotes).@count = 0)")
         return NSCompoundPredicate(andPredicateWithSubpredicates: [getFiltrationPredicate(fileTypes: fileTypes), localWithoutRemotes])
     }
     
@@ -62,7 +63,8 @@ final class PhotoVideoPredicateManager {
         let rawFileTypes = fileTypes.map { $0.valueForCoreDataMapping() }
         return NSCompoundPredicate(andPredicateWithSubpredicates: [
             NSPredicate(format: "\(MediaItem.PropertyNameKey.fileTypeValue) IN %@", rawFileTypes),
-            NSPredicate(format: "\(MediaItem.PropertyNameKey.isAvailable) = true")
+            NSPredicate(format: "\(MediaItem.PropertyNameKey.isAvailable) = true"),
+            NSPredicate(format: "\(MediaItem.PropertyNameKey.sortingDate) != nil"),
         ])
     }
 }
