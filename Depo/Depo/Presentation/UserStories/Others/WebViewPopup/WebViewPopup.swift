@@ -49,13 +49,15 @@ class WebViewPopup: BasePopUpController {
         return view
     }()
     
-    private lazy var bodyLabel: UILabel = {
-        let view = UILabel()
+    private lazy var bodyLabel: UITextView = {
+        let view = UITextView()
         view.textColor = AppColor.textButton.color
         view.font = .appFont(.regular, size: 16)
         view.textAlignment = .natural
-        view.numberOfLines = 0
-        view.lineBreakMode = .byWordWrapping
+        view.dataDetectorTypes = .all
+        view.isEditable = false
+        view.isSelectable = true
+        view.isScrollEnabled = false
         return view
     }()
     
