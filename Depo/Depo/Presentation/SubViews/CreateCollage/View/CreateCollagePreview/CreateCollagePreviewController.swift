@@ -332,6 +332,7 @@ extension CreateCollagePreviewController: UIGestureRecognizerDelegate {
             for i in 0...(shapeDetails?.count ?? 1) - 1 {
                 contentView.subviews[i].subviews[0].alpha = 1
             }
+            longPressedItem = -1
         } else {
             bottomBarManager.update(configType: .changePhotoSelection)
             for i in 0...(shapeDetails?.count ?? 1) - 1 {
