@@ -141,6 +141,8 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
                     imageView.backgroundColor = AppColor.collageThumbnailColor.color
                     imageView.contentMode = .center
                     imageView.image = Image.iconAddUnselect.image
+                    imageView.layer.borderWidth = 1.0
+                    imageView.layer.borderColor = AppColor.darkBackground.cgColor
                     contentView.addSubview(imageView)
                 case .changePhotoSelection:
                     let scrollView = UIScrollView()
@@ -168,6 +170,8 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
                     imageView.image = Image.iconAddUnselect.image
                     imageView.layer.cornerRadius = imageView.frame.size.width / 2
                     imageView.clipsToBounds = true
+                    imageView.layer.borderWidth = 1.0
+                    imageView.layer.borderColor = AppColor.darkBackground.cgColor
                     contentView.addSubview(imageView)
                 case .changePhotoSelection:
                     let scrollView = UIScrollView()
