@@ -10,7 +10,7 @@ import Foundation
 import SDWebImage
 import UIKit
 
-final class CreateCollagePreviewController: BaseViewController, UITextFieldDelegate, UIScrollViewDelegate  {
+final class CreateCollagePreviewController: BaseViewController, UIScrollViewDelegate  {
     
     private lazy var containerView: UIView = {
         let view = UIView()
@@ -42,6 +42,11 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
         view.isHidden = true
         return view
     }()
+    
+    private lazy var okRightButton = UIBarButtonItem(image: Image.iconSelectCheck.image,
+                                                     style: .plain,
+                                                     target: self,
+                                                     action: #selector(okRightButtonAction))
     
     let router = CreateCollageRouter()
     private var longPressedItem: Int = -1
@@ -109,7 +114,7 @@ final class CreateCollagePreviewController: BaseViewController, UITextFieldDeleg
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        if navTextField?.text != "+New Collage" {
+        if navTextField?.text != localized(.createCollagePreviewMainTitle) {
             StringConstants.collageName = navTextField?.text ?? "+New Collage"
         }
     }
@@ -352,6 +357,43 @@ extension CreateCollagePreviewController: UIGestureRecognizerDelegate {
     
     @objc private func doneClicked() {
         navTextField?.endEditing(true)
+    }
+    
+    @objc private func okRightButtonAction() {
+        doneClicked()
+    }
+    
+}
+
+extension CreateCollagePreviewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField.text == localized(.createCollagePreviewMainTitle) {
+            textField.text = ""
+        }
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if textField.text?.count ?? 0 == 0 {
+            navigationItem.rightBarButtonItem = nil
+        } else {
+            navigationItem.rightBarButtonItem = okRightButton
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        if textField.text?.count == 0 {
+            textField.text = localized(.createCollagePreviewMainTitle)
+            navigationItem.rightBarButtonItem = nil
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        doneClicked()
+        if textField.text?.count == 0 {
+            textField.text = localized(.createCollagePreviewMainTitle)
+            navigationItem.rightBarButtonItem = nil
+        }
+        return true
     }
 }
 

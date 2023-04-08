@@ -9,5 +9,5 @@
 import Foundation
 
 struct StringConstants {
-    static var collageName: String = "+New Collage"
+    static var collageName: String = localized(.createCollagePreviewMainTitle)
 }
