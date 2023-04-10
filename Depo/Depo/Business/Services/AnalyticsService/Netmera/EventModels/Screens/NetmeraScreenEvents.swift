@@ -82,13 +82,13 @@ extension NetmeraEvents.Screens {
     
     final class CollagesScreen: NetmeraScreenEventTemplate {
         override var key: String {
-            return "cidhk"
+            return "bzilm"
         }
     }
     
     final class AnimationsScreen: NetmeraScreenEventTemplate {
         override var key: String {
-            return "qsnqb"
+            return "ljfxs"
         }
     }
     
