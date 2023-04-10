@@ -60,7 +60,6 @@ final class MyStoragePresenter {
         startActivity()
         interactor.getAllOffers()
         interactor.getAvailableOffers(with: accountType)
-        view?.checkIfPremiumBannerValid()
     }
     
     //MARK: - UtilityMethods

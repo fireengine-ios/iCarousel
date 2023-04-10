@@ -49,13 +49,15 @@ class WebViewPopup: BasePopUpController {
         return view
     }()
     
-    private lazy var bodyLabel: UILabel = {
-        let view = UILabel()
+    private lazy var bodyLabel: UITextView = {
+        let view = UITextView()
         view.textColor = AppColor.textButton.color
         view.font = .appFont(.regular, size: 16)
         view.textAlignment = .natural
-        view.numberOfLines = 0
-        view.lineBreakMode = .byWordWrapping
+        view.dataDetectorTypes = .all
+        view.isEditable = false
+        view.isSelectable = true
+        view.isScrollEnabled = false
         return view
     }()
     
@@ -178,13 +180,22 @@ class WebViewPopup: BasePopUpController {
     
     private func setForStringLayout() {
         popUpView.bottomAnchor.constraint(equalTo: view.bottomAnchor).activate()
-        popUpView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).activate()
-        popUpView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).activate()
+        popUpView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8).activate()
+        popUpView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8).activate()
         
         popUpView.addSubview(titleLabel)
-        popUpView.addSubview(bodyLabel)
+        popUpView.addSubview(bodyScrollView)
         popUpView.addSubview(cardImageView)
         popUpView.addSubview(okButton)
+        
+        let height = getHightOfLabel()
+        if height > 400 {
+            bodyScrollView.isScrollEnabled = true
+            bodyScrollView.heightAnchor.constraint(equalToConstant: 400).activate()
+        } else {
+            bodyScrollView.isScrollEnabled = false
+            bodyScrollView.heightAnchor.constraint(equalToConstant: height).activate()
+        }
         
         cardImageView.translatesAutoresizingMaskIntoConstraints = false
         cardImageView.topAnchor.constraint(equalTo: popUpView.topAnchor, constant: 16).activate()
@@ -196,13 +207,32 @@ class WebViewPopup: BasePopUpController {
         titleLabel.topAnchor.constraint(equalTo: cardImageView.bottomAnchor, constant: 12).activate()
         titleLabel.centerXAnchor.constraint(equalTo: popUpView.centerXAnchor).activate()
         
+        ///
+        let contentView = UIView()
+        bodyScrollView.addSubview(contentView)
+        
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        bodyScrollView.translatesAutoresizingMaskIntoConstraints = false
+        
+        bodyScrollView.centerXAnchor.constraint(equalTo: popUpView.centerXAnchor).isActive = true
+        bodyScrollView.widthAnchor.constraint(equalTo: popUpView.widthAnchor).isActive = true
+        bodyScrollView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16).isActive = true
+        contentView.centerXAnchor.constraint(equalTo: bodyScrollView.centerXAnchor).isActive = true
+        contentView.widthAnchor.constraint(equalTo: bodyScrollView.widthAnchor).isActive = true
+        contentView.topAnchor.constraint(equalTo: bodyScrollView.topAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: bodyScrollView.bottomAnchor).isActive = true
+
+        contentView.addSubview(bodyLabel)
         bodyLabel.translatesAutoresizingMaskIntoConstraints = false
-        bodyLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12).activate()
-        bodyLabel.leadingAnchor.constraint(equalTo: popUpView.leadingAnchor, constant: 16).activate()
-        bodyLabel.trailingAnchor.constraint(equalTo: popUpView.trailingAnchor, constant: -16).activate()
+        
+        bodyLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        bodyLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
+        bodyLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 7/8).isActive = true
+        bodyLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16).isActive = true
+        ///
         
         okButton.translatesAutoresizingMaskIntoConstraints = false
-        okButton.topAnchor.constraint(equalTo: bodyLabel.bottomAnchor, constant: 16).activate()
+        okButton.topAnchor.constraint(equalTo: bodyScrollView.bottomAnchor, constant: 16).activate()
         okButton.bottomAnchor.constraint(equalTo: popUpView.bottomAnchor, constant: -30).activate()
         okButton.leadingAnchor.constraint(equalTo: popUpView.leadingAnchor, constant: 75).activate()
         okButton.trailingAnchor.constraint(equalTo: popUpView.trailingAnchor, constant: -75).activate()
