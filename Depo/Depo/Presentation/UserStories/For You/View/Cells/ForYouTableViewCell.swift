@@ -75,11 +75,6 @@ final class ForYouTableViewCell: UITableViewCell {
         
         if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-            
-            if currentView == .collageCards {
-                flowLayout.minimumInteritemSpacing = 0
-                flowLayout.minimumLineSpacing = 0
-            }
         }
         
         self.currentView = currentView
@@ -103,6 +98,10 @@ final class ForYouTableViewCell: UITableViewCell {
             self.throwbackData = model as? [ThrowbackData] ?? []
             seeAllButton.isHidden = true
             showEmptyDataViewIfNeeded(isShow: false)
+        case .collages:            
+            self.wrapData = model as? [WrapData] ?? []
+            wrapData.append(additionalWrapData())
+            showEmptyDataViewIfNeeded(isShow: wrapData.isEmpty)
         default:
             self.wrapData = model as? [WrapData] ?? []
             showEmptyDataViewIfNeeded(isShow: wrapData.isEmpty)
@@ -114,12 +113,8 @@ final class ForYouTableViewCell: UITableViewCell {
     private func configureTableView() {
         if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-            
-            if currentView == .collageCards {
-                flowLayout.minimumInteritemSpacing = 0
-                flowLayout.minimumLineSpacing = 0
-            }
         }
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(nibCell: ForYouCollectionViewCell.self)
@@ -188,6 +183,18 @@ extension ForYouTableViewCell: UICollectionViewDataSource {
         }
     }
     
+    private func additionalWrapData() -> WrapData {
+        let image: UIImage = Image.createCollageThumbnail.image
+        let name: String = "thumbnailCollage"
+        let imageData = image.jpegData(compressionQuality: 0.9)!
+        let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
+        let wrapData = WrapData(imageData: imageData, isLocal: true)
+        
+        wrapData.name = name
+        wrapData.patchToPreview = PathForItem.remoteUrl(url)
+        return wrapData
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeue(cell: ForYouCollectionViewCell.self, for: indexPath)
         switch currentView {
@@ -232,7 +239,11 @@ extension ForYouTableViewCell: UICollectionViewDataSource {
             return cell
         case .collages:
             let item = wrapData[indexPath.row]
-            cell.configure(with: item, currentView: currentView ?? .people)
+            if indexPath.row == wrapData.count - 1 {
+                cell.setImage(image: Image.createCollageThumbnail.image, animated: false)
+            } else {
+                cell.configure(with: item)
+            }
             return cell
         default:
             let item = wrapData[indexPath.row]
@@ -272,7 +283,12 @@ extension ForYouTableViewCell: UICollectionViewDelegateFlowLayout {
             delegate?.navigateToItemPreview(item: item, items: wrapData, currentSection: currentView)
         case .collages:
             let item = wrapData[indexPath.row]
-            delegate?.navigateToItemPreview(item: item, items: wrapData, currentSection: currentView)
+            if indexPath.row == wrapData.count - 1 {
+                delegate?.navigateToCreateCollage()
+            } else {
+                delegate?.navigateToItemPreview(item: item, items: wrapData, currentSection: currentView)
+            }
+            
         case .throwback:
             guard tbActionStatus else { return }
             tbActionStatus.toggle()

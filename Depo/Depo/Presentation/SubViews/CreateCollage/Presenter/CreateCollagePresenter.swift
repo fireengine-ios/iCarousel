@@ -57,7 +57,7 @@ extension CreateCollagePresenter: CreateCollageViewOutput {
     }
     
     func naviateToCollageTemplateDetail(collageTemplate: CollageTemplateElement) {
-        StringConstants.collageName = "+New Collage"
+        StringConstants.collageName = localized(.createCollagePreviewMainTitle)
         router.navigateToCreateCollage(collageTemplate: collageTemplate)
     }
 }

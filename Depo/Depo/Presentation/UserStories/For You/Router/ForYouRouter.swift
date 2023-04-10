@@ -103,8 +103,8 @@ final class ForYouRouter: ForYouRouterInput {
     }
     
     func navigateToCreateCollage() {
-        let vc = router.createCollage()
-        self.router.presentViewController(controller: vc)
+        let createCollage = router.createCollage()
+        router.pushViewController(viewController: createCollage)
     }
     
     func displayAlbum(item: AlbumItem) {
