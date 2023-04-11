@@ -379,6 +379,7 @@ extension CreateCollagePreviewController: UIGestureRecognizerDelegate {
     }
     
     @objc private func doneClicked() {
+        StringConstants.collageName = navTextField?.text ?? ""
         navTextField?.endEditing(true)
     }
     
