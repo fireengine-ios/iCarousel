@@ -11,8 +11,6 @@ import UIKit
 protocol DiscoverCollectionViewDataSourceDelegate: AnyObject {
     func onCellHasBeenRemovedWith(controller: UIViewController)
     func numberOfColumns() -> Int
-    func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView
     func didReloadCollectionView(_ collectionView: UICollectionView)
     func share(item: BaseDataSourceItem, type: CardShareType)
 }
@@ -52,8 +50,6 @@ final class DiscoverCollectionViewDataSource: NSObject, BaseCollectionViewCellWi
             layout.delegate = self
         }
         
-        let headerNib = UINib(nibName: "GraceBannerView", bundle: nil)
-        collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "GraceBannerView")
         let nibName = UINib(nibName: CollectionViewCellsIdsConstant.cellForController, bundle: nil)
         collectionView.register(nibName, forCellWithReuseIdentifier: CollectionViewCellsIdsConstant.cellForController)
     }
@@ -403,15 +399,6 @@ extension DiscoverCollectionViewDataSource: UICollectionViewDataSource,  UIColle
         return 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let delegate = delegate else {
-            assert(false, "Unexpected element kind")
-            return UICollectionReusableView()
-        }
-        
-        return delegate.collectionView(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
-    }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellsIdsConstant.cellForController, for: indexPath)
         guard let baseCell = cell as? CollectionViewCellForController else {
@@ -455,11 +442,7 @@ extension DiscoverCollectionViewDataSource: CollectionViewDataSourceDelegate {
     }
     
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
-        if (SingletonStorage.shared.subscriptionsContainGracePeriod) && (shouldHideGraceBanner != true) {
-            return GraceBannerView.getHeight()
-        } else {
-            return 0.1
-        }
+        return 0.1
     }
 }
 

@@ -20,6 +20,7 @@ class FavoriteInitializer: NSObject {
         viewController.floatingButtonsArray.append(contentsOf: [.uploadFiles, .uploadFromLifeboxFavorites])
         viewController.cardsContainerView.addPermittedPopUpViewTypes(types: [.upload, .download])
         viewController.cardsContainerView.isEnable = true
+        viewController.forYouControllerSection = .favorites
         viewController.isFavorites = true
         
         let configurator = BaseFilesGreedModuleConfigurator()

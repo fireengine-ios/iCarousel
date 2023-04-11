@@ -446,6 +446,14 @@ extension TabBarViewController: TabBarActionHandler {
             }
             
             externalFileUploadService.showViewController(router: router, externalFileType: .documentsandaudio)
+            
+        case .photopick:
+            let photopick = router.analyzesHistoryController()
+            router.pushViewController(viewController: photopick)
+            
+        case .createCollage:
+            let createCollage = router.createCollage()
+            router.pushViewController(viewController: createCollage)
                 
         case .createAlbum:
             let controller = router.createNewAlbum()
@@ -493,6 +501,7 @@ extension TabBarViewController: TabBarActionHandler {
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .importSpotify)
             spotifyRoutingService.connectToSpotify(isSettingCell: false, completion: nil)
         }
+        
     }
     
     private func checkReadOnlyPermission() -> Bool {

@@ -41,13 +41,14 @@ final class MyStoragePresenter {
     
     private var allOffers: [SubscriptionPlanBaseResponse] = []
     private(set) var displayableOffers: [SubscriptionPlan] = []
-    var availableOffers: [PackageOffer] = []
+    var availableOffers: [SubscriptionPlan] = []
 
     init(title: String) {
         self.title = title
     }
     
     private func refreshPage() {
+        interactor.getUserAuthority()
         allOffers = []
         displayableOffers = []
         availableOffers = []
@@ -269,16 +270,10 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     func successedPackages(allOffers: [PackageModelResponse]) {
         accountType = interactor.getAccountTypePackages(with: accountType.rawValue, offers: allOffers)  ?? .all
         let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
-        availableOffers = filterPackagesByQuota(offers: offers)
+        availableOffers = offers
         
         view?.stopActivityIndicator()
         view?.reloadData()
-    }
-    
-    func filterPackagesByQuota(offers: [SubscriptionPlan]) -> [PackageOffer] {
-        return Dictionary(grouping: offers, by: { $0.quota })
-            .compactMap { PackageOffer(quotaNumber: $0.key, offers: $0.value) }
-            .sorted(by: { $0.quotaNumber < $1.quotaNumber })
     }
     
     func successed(accountInfo: AccountInfoResponse) {
@@ -318,6 +313,7 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     }
 
     func successedGotUserAuthority() {
+        view?.checkIfPremiumBannerValid()
         view?.stopActivityIndicator()
     }
     
@@ -334,7 +330,7 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     func successed(allOffers: [PackageModelResponse]) {
         accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)  ?? .all
         let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
-        availableOffers = filterPackagesByQuota(offers: offers)
+        availableOffers = offers
         
         view?.stopActivityIndicator()
         view?.reloadData()

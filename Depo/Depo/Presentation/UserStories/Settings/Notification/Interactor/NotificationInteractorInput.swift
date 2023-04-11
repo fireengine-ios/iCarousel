@@ -1,0 +1,17 @@
+//
+//  NotificationInteractorInput.swift
+//  Depo
+//
+//  Created by yilmaz edis on 9.02.2023.
+//  Copyright © 2023 LifeTech. All rights reserved.
+//
+
+import Foundation
+
+protocol NotificationInteractorInput {
+    func viewIsReady()
+    func viewWillAppear()
+
+    func delete(with idList: [Int])
+    func read(with id: String)
+}

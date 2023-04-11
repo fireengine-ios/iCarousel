@@ -30,6 +30,10 @@ class ForYouCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    func configureWithLocalImage() {
+        thumbnailImage.image = Image.createCollageThumbnail.image
+    }
+    
     func setImage(image: UIImage?, animated: Bool) {
         thumbnailImage.contentMode = .scaleAspectFill
         if animated {

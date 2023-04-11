@@ -52,6 +52,12 @@ enum ElementTypes {
     //all files/select
     case select
     case selectAll
+    case selectMode
+    case deleteAll
+    case onlyUnreadOn
+    case onlyUnreadOff
+    case onlyShowAlertsOn
+    case onlyShowAlertsOff
     case deSelectAll
     //doc viewing
     case documentDetails
@@ -68,6 +74,11 @@ enum ElementTypes {
     case endSharing
     case leaveSharing
     case moveToTrashShared
+    //createCollage
+    case collageSave
+    case collageChange
+    case collageDelete
+    case collageCancel
     
     case shareOriginal
     case shareLink
@@ -597,6 +608,18 @@ enum ElementTypes {
             return TextConstants.actionSheetSelect
         case .selectAll:
             return TextConstants.actionSheetSelectAll
+        case .selectMode:
+            return localized(.selectMode)
+        case .onlyUnreadOn:
+            return localized(.onlyUnread)
+        case .onlyUnreadOff:
+            return localized(.onlyUnread)
+        case .onlyShowAlertsOn:
+            return localized(.onlyAlert)
+        case .onlyShowAlertsOff:
+            return localized(.onlyAlert)
+        case .deleteAll:
+            return localized(.deleteAll)
         case .deSelectAll:
             return TextConstants.actionSheetDeSelectAll
         case .print:
@@ -719,6 +742,18 @@ enum ElementTypes {
         case .select:
             return ""
         case .selectAll:
+            return TextConstants.actionSheetSelectAll
+        case .selectMode:
+            return ""
+        case .deleteAll:
+            return localized(.deleteAll)
+        case .onlyUnreadOn:
+            return ""
+        case .onlyUnreadOff:
+            return ""
+        case .onlyShowAlertsOn:
+            return ""
+        case .onlyShowAlertsOff:
             return ""
         case .deSelectAll:
             return ""
@@ -760,6 +795,14 @@ enum ElementTypes {
             return ""
         case .galleryUnsync:
             return ""
+        case .collageSave:
+            return TextConstants.save
+        case .collageDelete:
+            return TextConstants.actionSheetDelete
+        case .collageChange:
+            return TextConstants.change
+        case .collageCancel:
+            return TextConstants.cancel
         }
     }
 
@@ -845,7 +888,19 @@ enum ElementTypes {
         case .select:
             return Image.iconSelect.image
         case .selectAll:
-            return nil
+            return Image.iconSelect.image
+        case .selectMode:
+            return Image.iconSelect.image
+        case .deleteAll:
+            return Image.iconDelete.image
+        case .onlyUnreadOn:
+            return Image.iconSwitchToggleOn.image
+        case .onlyUnreadOff:
+            return Image.iconSwitchToggleOff.image
+        case .onlyShowAlertsOn:
+            return Image.iconSwitchToggleOn.image
+        case .onlyShowAlertsOff:
+            return Image.iconSwitchToggleOff.image
         case .deSelectAll:
             return nil
         case .documentDetails:
@@ -886,6 +941,14 @@ enum ElementTypes {
             return Image.iconBackupCheck.image
         case .galleryUnsync:
             return Image.iconBackupUncheck.image
+        case .collageSave:
+            return Image.iconEdit.image
+        case .collageChange:
+            return Image.iconChangePhoto.image
+        case .collageDelete:
+            return Image.iconDeletePlain.image
+        case .collageCancel:
+            return Image.iconCancelBorder.image
         }
     }
 }

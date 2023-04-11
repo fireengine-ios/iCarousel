@@ -102,6 +102,11 @@ final class ForYouRouter: ForYouRouterInput {
         self.router.presentViewController(controller: vc)
     }
     
+    func navigateToCreateCollage() {
+        let createCollage = router.createCollage()
+        router.pushViewController(viewController: createCollage)
+    }
+    
     func displayAlbum(item: AlbumItem) {
         UserDefaults.standard.set(true, forKey: "recommendedAlbumDisplayIsActive")
         let albumVC = router.albumDetailController(album: item, type: .List, status: .active, moduleOutput: nil)

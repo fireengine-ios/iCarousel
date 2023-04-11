@@ -67,4 +67,6 @@ protocol BaseFilesGreedViewOutput {
     func openCreateNewAlbum()
     
     func openUpload()
+    
+    func createCollage()
 }

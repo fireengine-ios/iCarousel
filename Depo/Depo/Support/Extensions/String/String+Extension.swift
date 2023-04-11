@@ -64,6 +64,29 @@ extension String {
     var nonEmptyString: String? {
         self.isEmpty ? nil : self
     }
+    
+    var isHTMLString: Bool {
+        let htmlTagRegex = try! NSRegularExpression(pattern: "<[^>]+>")
+        let range = NSRange(location: 0, length: self.utf16.count)
+        return htmlTagRegex.firstMatch(in: self, range: range) != nil
+    }
+    
+    var getAsHtml: NSAttributedString  {
+        if let data = self.data(using: String.Encoding.unicode, allowLossyConversion: true) {
+          let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+          ]
+          if let attributedString = try? NSMutableAttributedString(data: data, options: options, documentAttributes: nil) {
+            
+              attributedString.setBaseColor(baseColor: AppColor.label.color)
+              attributedString.setBaseFont(baseFont: .appFont(.regular, size: 12))
+            // Assign attributed string to attribute of your choice
+            return attributedString
+          }
+        }
+        return NSAttributedString(string: "")
+    }
 }
 
 extension Optional where Wrapped == String {

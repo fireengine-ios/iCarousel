@@ -280,6 +280,26 @@ class RouterVC: NSObject {
         tabBarController?.navigationController?.popToRootViewController(animated: true)
     }
     
+    func createCollageToForyou() {
+        guard let tabBarVC = tabBarController else {
+            return
+        }
+        
+        tabBarVC.dismiss(animated: true)
+        
+        let index = TabScreenIndex.forYou.rawValue
+        
+        guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index] else {
+            assertionFailure("This index is non existent 😵")
+            return
+        }
+        
+        tabBarVC.tabBar.selectedItem = newSelectedItem
+        tabBarVC.selectedIndex = index
+        
+        tabBarController?.navigationController?.popToRootViewController(animated: true)
+    }
+    
     func popTwoFactorAuth() {
         guard let viewControllers = navigationController?.viewControllers else {
             assertionFailure("nav bar is missing!")
@@ -1106,6 +1126,35 @@ class RouterVC: NSObject {
     func packages(quotaInfo: QuotaInfoResponse? = nil) -> PackagesViewController {
         return PackagesModuleInitializer.viewController(quotaInfo: quotaInfo)
     }
+    
+    // MARK: - Notification
+    func notification() -> NotificationViewController {
+        return NotificationModuleInitializer.initializeViewController()
+    }
+    
+    // MARK: - Create Collage Template
+    
+    func createCollage() -> CreateCollageViewController {
+        return CreateCollageInitilizer.initializeViewController()
+    }
+    
+    // MARK: - Create Collage Select Photos
+    
+    func createCollageSelectPhotos(collageTemplate: CollageTemplateElement, items: [SearchItemResponse] = [], selectItemIndex: Int? = nil)  -> CreateCollageSelectionSegmentedController {
+        return CreateCollageSelectionSegmentedController(collageTemplate: collageTemplate, items: items, selectItemIndex: selectItemIndex)
+    }
+    
+    // MARK: - Create Collage Preview
+    
+    func createCollagePreview(collageTemplate: CollageTemplateElement, selectedItems: [SearchItemResponse])  -> CreateCollagePreviewController {
+        return CreateCollagePreviewController(collageTemplate: collageTemplate, selectedItems: selectedItems)
+    }
+    
+    // MARK: - Create Collage See All
+
+    func createCollageNavigateToSeeAll(collageTemplate: CollageTemplate)  -> CreateCollageDetailController {
+        return CreateCollageDetailController(collageTemplate: collageTemplate)
+    }
 
     // MARK: - Passcode
     
@@ -1346,7 +1395,7 @@ class RouterVC: NSObject {
     }
     
     func openTabBarItem(index: TabScreenIndex, segmentIndex: Int? = nil, shareType: SharedItemsSegment? = nil) {
-        guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
+        guard let tabBarVC = tabBarController  else {
             return
         }
         

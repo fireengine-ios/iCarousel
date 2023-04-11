@@ -28,11 +28,9 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     var subTitle: String = ""
     
-    var isAlbumList: Bool = false
-    
     var plusButtonType = String()
     
-    var isControllerCollageAnimations: Bool = false
+    var forYouControllerSection: ForYouSections?
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -168,6 +166,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     // MARK: - SearchBarButtonPressed
     
+    
+    
     func configureNavBarActions(isSelecting: Bool = false) {
         let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] _ in
             self?.output.searchPressed(output: self)
@@ -185,21 +185,52 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             self?.output.openUpload()
         })
         
+        let createCollage = NavBarWithAction(navItem: NavigationBarList().plus, action: { [weak self] _ in
+            self?.output.createCollage()
+        })
+
         var rightActions: [NavBarWithAction] = []
-        if isAlbumList {
+        
+        switch forYouControllerSection {
+        case .collages:
+            //rightActions.append(createCollage)
+            rightActions.removeAll()
+        case .animations, .places, .hidden, .things, .favorites:
+            rightActions.removeAll()
+        case .albums:
             rightActions.append(newAlbum)
-        } else {
+        case .story:
             rightActions.append(newStory)
+        default:
+            rightActions.removeAll()
         }
         
         if plusButtonType == "Folder" {
-            rightActions.removeAll()
-            rightActions.append(upload)
-        }
-        
-        if isControllerCollageAnimations {
-            rightActions.removeAll()
-            rightActions.append(upload)
+            //rightActions.append(upload)
+            let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] _ in
+                self?.output.searchPressed(output: self)
+            })
+            
+            let more = NavBarWithAction(navItem: NavigationBarList().newAlbum, action: { [weak self] _ in
+                let menuItems = self?.floatingButtonsArray.map { buttonType in
+                    AlertFilesAction(title: buttonType.title, icon: buttonType.image) { [weak self] in
+                        self?.customTabBarController?.handleAction(buttonType.action)
+                    }
+                }
+                
+                let menu = AlertFilesActionsViewController()
+                menu.configure(with: menuItems ?? [])
+                menu.presentAsDrawer()
+            })
+            
+            let rightActions: [NavBarWithAction] = [more, search]
+            search.navItem.imageInsets.left = 28
+            navBarConfigurator.configure(right: isSelecting ? [] : rightActions, left: [])
+            
+            let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
+            navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+            navigationItem.title = ""
+            return
         }
         
         search.navItem.imageInsets.left = 28

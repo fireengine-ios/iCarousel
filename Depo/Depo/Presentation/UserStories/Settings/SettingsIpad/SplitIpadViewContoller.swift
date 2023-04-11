@@ -142,4 +142,10 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
             configurateWithControllers(leftViewController: left, controllers: [RouterVC().paycell])
         }
     }
+    
+    func goToNotification() {
+        if let left = leftController {
+            configurateWithControllers(leftViewController: left, controllers: [RouterVC().notification()])
+        }
+    }
 }

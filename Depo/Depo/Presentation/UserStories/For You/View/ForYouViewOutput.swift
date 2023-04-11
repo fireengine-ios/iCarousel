@@ -21,6 +21,7 @@ protocol ForYouViewOutput: AnyObject {
     func getHeightForRow(at view: ForYouSections) -> Int
     func getModel(for view: ForYouSections) -> Any?
     func getUpdateData(for section: ForYouSections?)
+    func navigateToCreateCollage()
     
     func onCloseCard(data: HomeCardResponse, section: ForYouSections)
     func displayAlbum(item: AlbumItem)

@@ -8,12 +8,21 @@
 
 import UIKit
 
+class NotificationHolder {
+    var count = 0
+    var popupStatus = true
+    static let shared = NotificationHolder()
+}
+
 class BaseViewController: ViewController {
     var keyboardHeight: CGFloat = 0
     var needToShowTabBar: Bool = false
     var floatingButtonsArray = [FloatingButtonsType]()
     var parentUUID: String = ""
     var segmentImage: SegmentedImage?
+    
+    private var settingsNavButton = NavigationHeaderButton()
+    private let service = NotificationService()
 
     var customTabBarController: TabBarViewController? {
         var parent = self.parent
@@ -45,6 +54,9 @@ class BaseViewController: ViewController {
         customTabBarController?.setBottomBarsHidden(!needToShowTabBar)
         navigationItem.backBarButtonItem = UIBarButtonItem(
             title: "", style: .plain, target: nil, action: nil)
+        
+        
+        settingsNavButton.setnotificationCount(with: NotificationHolder.shared.count)
     }
 
     deinit {
@@ -100,12 +112,24 @@ class BaseViewController: ViewController {
     // MARK: - Header Actions
 
     func setDefaultNavigationHeaderActions() {
+        settingsNavButton = NavigationHeaderButton(type: .settings, target: self, action: #selector(showSettings))
         headerContainingViewController?.setHeaderLeftItems([
-            NavigationHeaderButton(type: .settings, target: self, action: #selector(showSettings))
+            settingsNavButton
         ])
         headerContainingViewController?.setHeaderRightItems([
             NavigationHeaderButton(type: .search, target: self, action: #selector(showSearch)),
             NavigationHeaderButton(type: .plus, target: self, action: #selector(showPlusButtonMenu))
+        ])
+    }
+    
+    func setDefaultNavigationHeaderActionsWithoutPlusButton() {
+        settingsNavButton = NavigationHeaderButton(type: .settings, target: self, action: #selector(showSettings))
+        headerContainingViewController?.setHeaderLeftItems([
+            settingsNavButton
+        ])
+        headerContainingViewController?.setHeaderRightItems([
+            NavigationHeaderButton(type: .search, target: self, action: #selector(showSearch))
+            
         ])
     }
 
@@ -159,6 +183,53 @@ extension BaseViewController: UIViewControllerTransitioningDelegate {
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return pushPopAnimatorForPresentation(presenting: false)
+    }
+}
+
+extension BaseViewController {
+    func fetchNotificationPopup(completion: @escaping (_ response: NotificationServiceResponse) -> Void) {
+        
+        // To make sure it won't be called more than one
+        guard NotificationHolder.shared.popupStatus else { return }
+        NotificationHolder.shared.popupStatus.toggle()
+        
+        service.fetch(type: .popup,
+            success: { response in
+                guard let notification = response as? NotificationResponse else { return }
+                DispatchQueue.main.async {
+                    
+                    let popupP = notification.list.sorted { one, two in
+                        let dateOne = Date(timeIntervalSince1970: TimeInterval(one.createdDate ?? 0) / 1000)
+                        let dateTwo = Date(timeIntervalSince1970: TimeInterval(two.createdDate ?? 0) / 1000)
+                        
+                        return dateOne > dateTwo
+                    }
+                    
+                    let popup = popupP.sorted { one, two in
+                        one.priority ?? 0 < two.priority ?? 0
+                    }
+                    
+                    if let content = popup.first {
+                        completion(content)
+                    }
+                }
+            }, fail: { errorResponse in
+        })
+    }
+    
+    func fetchNotificationCount() {
+        service.fetch(type: .inapp,
+            success: { [weak self] response in
+                guard let notification = response as? NotificationResponse else { return }
+                DispatchQueue.main.async {
+                    let count = notification.list.map({$0.status == "UNREAD"}).filter({$0}).count
+                    NotificationHolder.shared.count = count
+                    self?.settingsNavButton.setnotificationCount(with: count)
+                }
+            }, fail: { [weak self] errorResponse in
+                NotificationHolder.shared.count = 0
+                self?.settingsNavButton.setnotificationCount(with: 0)
+        })
     }
 }
 

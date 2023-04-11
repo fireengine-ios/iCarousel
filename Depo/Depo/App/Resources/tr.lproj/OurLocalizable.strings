@@ -1421,7 +1421,7 @@
 "delete_dublicate_package_description" = "+ Telefonundaki Tekrarlayan Kontakları Silme";
 "premium_user_package_description" = "+ Sınırsız PhotoPick Analizi";
 "bundle_package_addon_type" = "Saklama Alanı + Premium";
-"storage_only_package_addon_type" = "Sadece Saklama Alanı";
+"storage_only_package_addon_type" = "Saklama Alanı";
 "settings_userinfo_name_surname" = "Ad Soyad";
 "settings_userinfo_email" = "E-posta";
 "settings_userinfo_phone" = "Telefon Numarası";
@@ -2078,6 +2078,50 @@ then {11,99 TRY/Month}*/
 "empty_gallery_no_unsync" = "lifebox'ınızda yedeklenmemiş hiçbir dosya yok";
 "subscription_offer_cancel_button" = "İptal Et";
 "paycell_share_message " = "";
-"ksaldalks" = "";
+
+/*Fuzzy*/
 "free_up_space_title" = "Alanın dolmak üzere!";
+
+/*Fuzzy*/
 "notification_menu_item" = "Bildirimler";
+"notification_buttom_sheet_select_mode" = "Seç";
+"notification_buttom_sheet_only_unread" = "Sadece okunmamışlar";
+"notification_buttom_sheet_show_alerts" = "Sadece uyarıları göster";
+"notifications_no_notification" = "Henüz bildirimin yok";
+"Create_Word" = "Word Oluştur";
+"Create_Cell" = "Çalışma Tablosu Oluştur";
+"Create_Slide" = "Sunum Oluştur";
+"Create_Document_Popup" = "Doküman Oluştur";
+
+/*Fuzzy*/
+"Create_Document_Create_Button" = "Oluştur";
+"Create_Document_Cancel_Button" = "Vazgeç";
+
+/*Fuzzy*/
+"Office_Filter_Document" = "Doküman";
+
+/*Fuzzy*/
+"Office_Filter_SpreedSheet" = "Çalışma Tablosu";
+
+/*Fuzzy*/
+"Office_Filter_Presentation" = "Sunum";
+
+/*Fuzzy*/
+"Office_Filter_All" = "Tümü";
+"Office_Filter_PDF" = "Pdf";
+"create_collage_triple" = "3'lü Kolajlar";
+"create_collage_quad" = "4'lü Kolajlar";
+"create_collage_multiple" = "Çoklu Kolajlar";
+"create_collage_all" = "Tüm Kolajlar";
+"create_collage_select_collage" = "Kolaj Seçin";
+"create_collage_info_label" = "Düzenlemek için herhangi bir fotoğrafa dokunun";
+
+/*Fotoğraf Seçin*/
+"create_collage_select_photo" = "Fotoğraf Seçin";
+
+/*+New Collage*/
+"create_collage_preview_main" = "+Yeni Kolaj";
+
+/*2'li Kolajlar*/
+"create_collage_dual" = "2'li Kolajlar";
+"create_collage" = "Kolaj oluştur";

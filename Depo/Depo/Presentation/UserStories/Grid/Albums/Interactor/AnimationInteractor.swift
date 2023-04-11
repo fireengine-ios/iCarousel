@@ -33,8 +33,8 @@ class AnimationInteractor: BaseFilesGreedInteractor {
     }
     
     override func trackScreen() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.StoriesScreen())
-        analyticsManager.logScreen(screen: .myStories)
-        analyticsManager.trackDimentionsEveryClickGA(screen: .myStories)
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.AnimationsScreen())
+        analyticsManager.logScreen(screen: .myAnimations)
+        analyticsManager.trackDimentionsEveryClickGA(screen: .myAnimations)
     }
 }

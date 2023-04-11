@@ -1902,7 +1902,7 @@
 "container_shared_files" = "Shared By Me";
 "container_document" = "Document";
 "container_music" = "Music";
-"container_favourite" = "Favourite";
+"container_favourite" = "Favourites";
 "container_trashed" = "Trash Bin";
 
 /*Chatbot*/
@@ -2118,6 +2118,40 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "paycell_share_message " = "You have been sent 5GB of lifebox storage, click to redeem";
-"ksaldalks" = "";
+
+/*Fuzzy*/
 "free_up_space_title" = "Device space is almost full";
+
+/*Fuzzy*/
 "notification_menu_item" = "Notifications";
+"notification_buttom_sheet_select_mode" = "Select Mode";
+"notification_buttom_sheet_only_unread" = "Only unread";
+"notification_buttom_sheet_show_alerts" = "Only show alerts";
+"notifications_no_notification" = "No new notification";
+"Create_Word" = "";
+"Create_Cell" = "";
+"Create_Slide" = "";
+"Create_Document_Popup" = "";
+"Create_Document_Create_Button" = "";
+"Create_Document_Cancel_Button" = "";
+"Office_Filter_Document" = "";
+"Office_Filter_SpreedSheet" = "";
+"Office_Filter_Presentation" = "";
+"Office_Filter_All" = "";
+"Office_Filter_PDF" = "";
+"create_collage_triple" = "";
+"create_collage_quad" = "";
+"create_collage_multiple" = "";
+"create_collage_all" = "";
+"create_collage_select_collage" = "";
+"create_collage_info_label" = "";
+
+/*Fotoğraf Seçin*/
+"create_collage_select_photo" = "";
+
+/*+New Collage*/
+"create_collage_preview_main" = "";
+
+/*2'li Kolajlar*/
+"create_collage_dual" = "";
+"create_collage" = "Create Collage";

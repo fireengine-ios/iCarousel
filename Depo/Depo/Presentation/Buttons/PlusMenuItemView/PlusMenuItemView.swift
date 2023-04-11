@@ -21,6 +21,8 @@ enum FloatingButtonsType {
     case uploadDocuments
     case uploadMusic
     case uploadDocumentsAndMusic
+    case photopick
+    case createCollage
     
     var title: String {
         switch self {
@@ -44,6 +46,10 @@ enum FloatingButtonsType {
             return TextConstants.importFromSpotifyBtn
         case .uploadDocumentsAndMusic:
             return TextConstants.uploadFiles
+        case .photopick:
+            return TextConstants.myStreamInstaPickTitle
+        case .createCollage:
+            return localized(.createCollageLabel)
         }
     }
     
@@ -66,6 +72,10 @@ enum FloatingButtonsType {
             return Image.iconFolderCreate.image
         case .importFromSpotify:
             return UIImage(named: "ImportFromSpotify")
+        case .photopick:
+            return Image.iconEffect.image
+        case .createCollage:
+            return Image.iconCollage.image
         }
     }
     
@@ -95,6 +105,10 @@ enum FloatingButtonsType {
             return .importFromSpotify
         case .uploadDocumentsAndMusic:
             return .uploadDocumentsAndMusic
+        case .photopick:
+            return .photopick
+        case .createCollage:
+            return .createCollage
         }
     }
 }

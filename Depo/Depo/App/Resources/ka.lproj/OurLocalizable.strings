@@ -13,22 +13,22 @@
 "Please enter your promo code" = "გთხოვ, მიუთითო პაკეტის აქტივაციის კოდი";
 "This package activation code is invalid" = "ეს პაკეტის აქტივაციის კოდი არავალიდურია";
 "Enter your promo code" = "მიუთითე პაკეტის აქტივაციის კოდი";
-"Lifebox campaign" = "ლაიფბოქსის კამპანია";
+"Lifebox campaign" = "lifebox კამპანია";
 "Success" = "წარმატება";
 "Apply" = "გამოიყენე";
 "Invalid passcode. %@ attempts left. Please try again" = "არავალიდური პასკოდი. %@ მცდელობა დაგრჩა. თავიდან სცადე";
 "Touch ID" = "Touch ID";
 "Face ID" = "Face ID";
 "Enable" = "აქტივაცია";
-"Please activate %@ from your device settings to use this feature" = "გთოხვ გაააქტიურე %@ შენი მოწყობილობის პარამეტრებიდან ამ ფუნქციის გამოსაყენებლად";
-"To enter passcode" = "შეიყვანე ლაიფბოქსის პასკოდი";
-"Set a Passcode" = "დააყენე ლაიფბოქსის პასკოდი";
+"Please activate %@ from your device settings to use this feature" = "გაააქტიურე %@ შენი მოწყობილობის პარამეტრებიდან ამ ფუნქციის გამოსაყენებლად";
+"To enter passcode" = "შეიყვანე lifebox პასკოდი";
+"Set a Passcode" = "დააყენე lifebox პასკოდი";
 "Passcodes don't match, please try again" = "პასდოკები არ ემთხვევა, თავიდან სცადე";
 "You successfully set your passcode" = "შენ წარმატებით დააყენე პასკოდი";
 "Passcode is changed successfully" = "პასკოდი წარმატებით შეიცვალა";
-"Please repeate your new lifebox passcode" = "გთხოვ, თავიდან ჩაწერე შენი ლაიფბოქსის ახალი პასკოდი";
-"Please enter your lifebox passcode" = "გთოხვ შეიყვანო პასკოდი";
-"lifebox Passcode" = "ლაიფბოქსის პასკოდი";
+"Please repeate your new lifebox passcode" = "გთხოვ, თავიდან ჩაწერე შენი lifebox-ის ახალი პასკოდი";
+"Please enter your lifebox passcode" = "შეიყვანე პასკოდი";
+"lifebox Passcode" = "lifebox-ის პასკოდი";
 "Change Passcode" = "შეცვალე პასკოდი";
 "Passcode" = "პასკოდი";
 "The package activation code is not active" = "პაკეტის აქტივაციის კოდი არ არის აქტიური";
@@ -50,7 +50,7 @@
 "It is not allowed that the password consists of all the same characters." = "შენს პაროლს აქვს მიყოლებითი ციფრები ან ასოები.  შეეცადე შეარჩიო პაროლი არათანმიმდევრული ასოებისა და ციფრებისგან, 6-დან 16 სიმბოლომდე.";
 "It is not allowed that the password consists of consecutive characters." = "შენს პაროლს აქვს მიყოლებითი ციფრები ან ასოები.  შეეცადე შეარჩიო პაროლი არათანმიმდევრული ასოებისა და ციფრებისგან, 6-დან 16 სიმბოლომდე.";
 "Password is invalid" = "პაროლი არასწორია";
-"Phone number is in an invalid format." = "ტელეფონის ნომრის ფორმატი არავალიდურია.";
+"Phone number is in an invalid format." = "ნომრის ფორმატი არავალიდურია.";
 "Indicates that a user with the given e-mail address already exists and login will be  allowed after e-mail address validation." = "ამ მეილის მქონე მომხმარებელი უკვე არსებობს და შესვლა შეეძლება მეილის ვალიდაციის შემდეგ.";
 "This e-mail address is already registered. Please enter another e-mail address." = "ეს მეილი უკვე რეგისტრირებულია. გთხოვ სხვა მისამართი სცადო.";
 "E-mail address is in an invalid format." = "მეილის მისამართის ფორმატი არავალიდურია.";
@@ -58,7 +58,7 @@
 "Indicates that the password parameter is sent blank." = "პაროლის გრაფა ცარიელია.";
 "Indicates that the e-mail parameter is sent blank." = "მეილის გრაფა ცარიელია.";
 "Enter the verification code\nsent to your number %@" = "შეიყვანე ვერიფიკაციის კოდი ნომრიდან %@";
-"Resend" = "ახლისდან";
+"Resend" = "გადაგზავნა";
 "Next" = "შემდეგი";
 "%.2f %@ / month" = "%.2f %@ / თვე";
 "Settings" = "პარამეტრები";
@@ -1411,7 +1411,7 @@
 "delete_dublicate_package_description" = "+ წაშალე დუბლიკატი კონტაქტები შენი ტელეფონიდან";
 "premium_user_package_description" = "+ შეუზღუდავი PhotoPick ანალიზი";
 "bundle_package_addon_type" = "შენახვა +  Premium-ი";
-"storage_only_package_addon_type" = "მხოლოდ შენახვა";
+"storage_only_package_addon_type" = "საცავი";
 "settings_userinfo_name_surname" = "სახელი გვარი";
 "settings_userinfo_email" = "მეილი";
 "settings_userinfo_phone" = "ტელეფონის ნომერი";
@@ -1964,7 +1964,7 @@
 "save_to_my_lifebox_full_storage_body" = "შენ შეგიძლია ადგილის გათავისუფლება, მეხსიერების ";
 "places_map_title" = "რუკა";
 "map_location_detail_header" = "ფოტოები ამ ლოკაციაზე ";
-"beeline_feature_cancel_TC" = "შეგიძლიათ მართოთ ან გააუქმოთ თქვენი Lifebox გამოწერა ბილაინის არხებიდან.";
+"beeline_feature_cancel_TC" = "შეგიძლია მართო ან გააუქმო შენი Lifebox გამოწერა სელფის აპლიკაციიდან.";
 "security_popup_body" = "გთხოვ შეიყვანო სულ მცირე 1 აღდგენითი ანგარიში, რათა მარტივად შეხვიდე სისტემაში თუ პაროლი დაგავიწყდა";
 "security_popup_header" = "დააყენე აღდგენის მეილი ან უსაფრთხოების კითხვა";
 "save_to_my_billo" = "შეინახე My Billo-ში";
@@ -2025,7 +2025,7 @@ then {11,99 TRY/Month}*/
 "title_paycell_subtitle" = "Paycell გადატვირთვა";
 "title_paycell_friends" = "მომხმარებლები, რომლებმაც შეიძინეს პაკეტი (%d)";
 "paycell_share_message" = "შევუერთდი Lifebox Brand Ambassador პროგრამას. შეგიძლია მიიღო პროგრამის სპეციფიკური lifebox 6 თვიანი 250 GB Premium პაკეტი სპეციალურ ფასად ქვემოთ მოცემულ ბმულზე დაწკაპუნებით. არ გამოტოვო 😊";
-"beeline_cancel_TC" = "შეგიძლიათ მართოთ ან გააუქმოთ თქვენი Lifebox გამოწერა ბილაინის არხებიდან.";
+"beeline_cancel_TC" = "შეგიძლია მართო ან გააუქმო შენი Lifebox გამოწერა სელფის აპლიკაციიდან.";
 "foryou_throwback" = "დაბრუნება";
 "foryou_myalbums" = "ჩემი ალბომები";
 "foryou_myanimations" = "ჩემი ანიმაციები";
@@ -2052,6 +2052,40 @@ then {11,99 TRY/Month}*/
 "empty_gallery_no_unsync" = "ყველა ფაილი განახლებულია";
 "subscription_offer_cancel_button" = "გაუქმება";
 "paycell_share_message " = "შენ გაქვს 5GB lifebox მეხსიერება, დააჭირე რომ გამოისყიდო";
-"ksaldalks" = "-";
+
+/*Fuzzy*/
 "free_up_space_title" = "მეხსიერება არაა საკმარისი";
+
+/*Fuzzy*/
 "notification_menu_item" = "შეტყობინებები";
+"notification_buttom_sheet_select_mode" = "notification_buttom_sheet_select_mode";
+"notification_buttom_sheet_only_unread" = "\nnotification_buttom_sheet_only_unread";
+"notification_buttom_sheet_show_alerts" = "notification_buttom_sheet_show_alerts";
+"notifications_no_notification" = "notifications_no_notification";
+"Create_Word" = "Create_Word";
+"Create_Cell" = "\nCreate_Cell";
+"Create_Slide" = "შექმენი სლაიდი";
+"Create_Document_Popup" = "Create_Document_Popup";
+"Create_Document_Create_Button" = "Create_Document_Create_Button";
+"Create_Document_Cancel_Button" = "Create_Document_Cancel_Button";
+"Office_Filter_Document" = "Office_Filter_Document";
+"Office_Filter_SpreedSheet" = "Office_Filter_SpreedSheet";
+"Office_Filter_Presentation" = "Office_Filter_Presentation";
+"Office_Filter_All" = "Office_Filter_All";
+"Office_Filter_PDF" = "Office_Filter_PDF";
+"create_collage_triple" = "შექმნა_კოლაჟი_სამმაგი";
+"create_collage_quad" = "შექმნა_კოლაჟი_ოთხმაგი";
+"create_collage_multiple" = "შექმნა_კოლაჟი_მრავალჯერადი";
+"create_collage_all" = "შექმნა_კოლაჟი_ყველა";
+"create_collage_select_collage" = "შექმენი კოლაჟი_მონიშნე კოლაჟი";
+"create_collage_info_label" = "შექმენი კოლაჟი ინფორმაციის ეტიკეტი";
+
+/*Fotoğraf Seçin*/
+"create_collage_select_photo" = "შექმენი კოლაჟი მონიშნე ფოტო";
+
+/*+New Collage*/
+"create_collage_preview_main" = "შექმენი კოლაჟი-გადახედე_მთავარს";
+
+/*2'li Kolajlar*/
+"create_collage_dual" = "შექმნა_კოლაჟი_ორმაგი";
+"create_collage" = "შექმენი კოლაჟი";

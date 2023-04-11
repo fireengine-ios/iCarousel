@@ -25,6 +25,7 @@ class SimpleUpload: UploadRequestParametrs {
     private let uploadTo: MetaSpesialFolder
     private let destitantionURL: URL
     private let isFavorite: Bool
+    private let isCollage: Bool
     
     let rootFolder: String
     let uploadType: UploadType?
@@ -63,11 +64,11 @@ class SimpleUpload: UploadRequestParametrs {
     
     let tmpUUID: String
     
-    static func with(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?) -> SimpleUpload {
-        return SimpleUpload(item: item, destitantion: destitantion, uploadStategy: uploadStategy, uploadTo: uploadTo, rootFolder: rootFolder, isFavorite: isFavorite, uploadType: uploadType)
+    static func with(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?, isCollage: Bool) -> SimpleUpload {
+        return SimpleUpload(item: item, destitantion: destitantion, uploadStategy: uploadStategy, uploadTo: uploadTo, rootFolder: rootFolder, isFavorite: isFavorite, uploadType: uploadType, isCollage: isCollage)
     }
     
-    private init(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?) {
+    private init(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?, isCollage: Bool) {
         
         self.item = item
         self.uploadType = uploadType
@@ -76,6 +77,7 @@ class SimpleUpload: UploadRequestParametrs {
         self.uploadTo = uploadTo
         self.destitantionURL = destitantion
         self.isFavorite = isFavorite
+        self.isCollage = isCollage
         
         switch uploadType {
             case .save:
@@ -114,6 +116,13 @@ class SimpleUpload: UploadRequestParametrs {
         let name = item.name ?? tmpUUID
         let fixed = name.precomposedStringWithCanonicalMapping
         let encodedName = fixed.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? name
+        
+        var createCollageHeader = "createCollageHeader"
+        if isCollage {
+            createCollageHeader = "COLLAGES"
+        } else {
+            createCollageHeader = uploadTo.rawValue
+        }
 
         header = header + [
             HeaderConstant.connectionType        : connectionStatus,
@@ -126,7 +135,7 @@ class SimpleUpload: UploadRequestParametrs {
             HeaderConstant.XObjectMetaFileName   : encodedName,
             HeaderConstant.XObjectMetaFavorites  : isFavorite ? "true" : "false",
             HeaderConstant.XObjectMetaParentUuid : rootFolder,
-            HeaderConstant.XObjectMetaSpecialFolder : uploadTo.rawValue,
+            HeaderConstant.XObjectMetaSpecialFolder : createCollageHeader,
             HeaderConstant.Expect                : "100-continue",
             HeaderConstant.XObjectMetaDeviceType : Device.deviceType,
             HeaderConstant.XObjectMetaIosMetadataHash : item.asset?.localIdentifier ?? "",

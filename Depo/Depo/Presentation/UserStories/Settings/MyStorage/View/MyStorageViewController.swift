@@ -128,7 +128,7 @@ final class MyStorageViewController: BaseViewController {
         menuTableView.delegate = self
         menuTableView.dataSource = self
         bannerView.delegate = self
-        
+        bannerView.isHidden = true
         setupCardStackView()
     }
     
@@ -143,7 +143,7 @@ final class MyStorageViewController: BaseViewController {
         self.view.backgroundColor = ColorConstants.fileGreedCellColorSecondary
         
         activityManager.delegate = self
-        automaticallyAdjustsScrollViewInsets = false
+        scrollView.contentInsetAdjustmentBehavior = .never
         setupLayout()
         addPremiumBanner()
     }
@@ -157,16 +157,12 @@ final class MyStorageViewController: BaseViewController {
     }
     
     private func addPremiumBanner() {
-        guard !AuthoritySingleton.shared.accountType.isPremium else { return }
-        
         view.addSubview(bannerView)
         bannerView.translatesAutoresizingMaskIntoConstraints = false
         bannerView.topAnchor.constraint(equalTo: view.topAnchor).activate()
         bannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
         bannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
         bannerView.heightAnchor.constraint(equalToConstant: 137).activate()
-        
-        topSpacingHeight.constant += 142.0
     }
 
     @IBAction private func restorePurhases() {
@@ -186,6 +182,13 @@ final class MyStorageViewController: BaseViewController {
 
 // MARK: - MyStorageViewInput
 extension MyStorageViewController: MyStorageViewInput {
+    func checkIfPremiumBannerValid() {
+        guard !AuthoritySingleton.shared.accountType.isPremium else {
+            hideBanner()
+            return
+        }
+        showBanner()
+    }
     
     func reloadPackages() {
         myPackages.arrangedSubviews.forEach { $0.removeFromSuperview() }
@@ -198,7 +201,10 @@ extension MyStorageViewController: MyStorageViewInput {
         for offer in output.displayableOffers.enumerated() {
             let view = SubscriptionOfferView.initFromNib()
             let packageOffer = PackageOffer(quotaNumber: .zero, offers: [offer.element])
-            view.configure(with: packageOffer, delegate: self, index: offer.offset, needHidePurchaseInfo: false)
+            
+            guard let element = packageOffer.offers.first else { continue }
+            
+            view.configure(with: element, delegate: self, index: offer.offset, needHidePurchaseInfo: false)
             view.setNeedsLayout()
             view.layoutIfNeeded()
             
@@ -220,9 +226,10 @@ extension MyStorageViewController: MyStorageViewInput {
         let outerTopView = UIView()
         outerTopView.heightAnchor.constraint(equalToConstant: 16).isActive = true
         packages.addArrangedSubview(outerTopView)
-        
+                
         packages.addArrangedSubview(packagesTitleLabel)
         for offer in output.availableOffers.enumerated() {
+            
             let view = SubscriptionOfferView.initFromNib()
             view.configure(with: offer.element, delegate: self, index: offer.offset)
             view.setNeedsLayout()
@@ -245,7 +252,6 @@ extension MyStorageViewController: MyStorageViewInput {
         restorePurchasesButton.isHidden = false
     }
 
-    
     func showInAppPolicy() {
         policyStackView.addArrangedSubview(policyView)
     }
@@ -289,7 +295,10 @@ extension MyStorageViewController: SubscriptionOfferViewDelegate {
             guard let plan = output?.availableOffers[planIndex] else {
                 return
             }
-            presentPaymentPopUp(plan: plan, planIndex: planIndex)
+            
+            let packageOffer = PackageOffer(quotaNumber: plan.quota, offers: [plan])
+            
+            presentPaymentPopUp(plan: packageOffer, planIndex: planIndex)
         case.subscriptionPlan:
   
             guard let plan = output?.displayableOffers[planIndex] else {
@@ -448,5 +457,10 @@ extension MyStorageViewController: BuyPremiumBannerDelegate {
     func hideBanner() {
         bannerView.isHidden = true
         topSpacingHeight.constant = 12
+    }
+    
+    func showBanner() {
+        bannerView.isHidden = false
+        topSpacingHeight.constant = 154.0
     }
 }

@@ -797,6 +797,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         router.openUpload()
     }
     
+    func createCollage() {
+        router.createCollage()
+    }
+    
     // MARK: - View outbut/ TopBar/UnderNavBarBar Delegates
     
     func viewAppearanceChangedTopBar(asGrid: Bool) {

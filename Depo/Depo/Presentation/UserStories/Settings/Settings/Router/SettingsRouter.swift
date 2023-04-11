@@ -69,6 +69,11 @@ class SettingsRouter: SettingsRouterInput {
         router.pushViewController(viewController: router.myStorage(usageStorage: nil))
     }
     
+    func goToNotification() {
+        let vc = router.notification()
+        router.pushViewController(viewController: vc)
+    }
+    
     func goToPremium() {
         router.pushViewController(viewController: router.premium())
     }

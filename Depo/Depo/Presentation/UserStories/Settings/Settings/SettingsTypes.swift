@@ -16,6 +16,7 @@ enum SettingsTypes: Int {
     case helpAndSupport
     case chatbot
     case packages
+    case notification
     
     var text: String {
         switch self {
@@ -28,6 +29,7 @@ enum SettingsTypes: Int {
         case .helpAndSupport: return TextConstants.settingsViewCellHelp
         case .chatbot: return TextConstants.chatbotMenuTitle
         case .packages: return TextConstants.packages
+        case .notification: return localized(.notificationMenuItem)
         }
     }
     
@@ -37,10 +39,16 @@ enum SettingsTypes: Int {
     
     static func prepareTypes(isChatbotShown: Bool) -> [[SettingsTypes]] {
         var result = [[SettingsTypes]]()
-        
+        addNotification(to: &result)
         addPackagesSection(to: &result)
         addDefaultSection(to: &result, isChatbotShown: isChatbotShown)
         return result
+    }
+    
+    private static func addNotification(to result: inout [[SettingsTypes]]) {
+        var cells: [SettingsTypes] = []
+        cells.append(SettingsTypes.notification)
+        result.append(cells)
     }
     
     private static func addPackagesSection(to result: inout [[SettingsTypes]]) {

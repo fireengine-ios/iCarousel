@@ -1413,7 +1413,7 @@
 "delete_dublicate_package_description" = "+ Видалення повторних контактів на телефоні";
 "premium_user_package_description" = "+ Необмежений аналіз PhotoPick";
 "bundle_package_addon_type" = "Місце для зберігання + Преміум (Premium)";
-"storage_only_package_addon_type" = "Тільки для зберігання";
+"storage_only_package_addon_type" = "Сховище";
 "settings_userinfo_name_surname" = "Ім'я та прізвище";
 "settings_userinfo_email" = "Адреса електронної пошти";
 "settings_userinfo_phone" = "Номер телефону";
@@ -2056,6 +2056,40 @@ then {11,99 TRY/Month}*/
 "empty_gallery_no_unsync" = "У вашому lifebox немає неоновлених файлів";
 "subscription_offer_cancel_button" = "Скасувати";
 "paycell_share_message " = "";
-"ksaldalks" = "";
+
+/*Fuzzy*/
 "free_up_space_title" = "Місце на пристрої майже заповнене!";
+
+/*Fuzzy*/
 "notification_menu_item" = "Сповіщення";
+"notification_buttom_sheet_select_mode" = "Виберіть";
+"notification_buttom_sheet_only_unread" = "Тільки непрочитані";
+"notification_buttom_sheet_show_alerts" = "Показувати лише оповіщення";
+"notifications_no_notification" = "У вас немає нових повідомлень";
+"Create_Word" = "";
+"Create_Cell" = "";
+"Create_Slide" = "";
+"Create_Document_Popup" = "";
+"Create_Document_Create_Button" = "";
+"Create_Document_Cancel_Button" = "";
+"Office_Filter_Document" = "";
+"Office_Filter_SpreedSheet" = "";
+"Office_Filter_Presentation" = "";
+"Office_Filter_All" = "";
+"Office_Filter_PDF" = "";
+"create_collage_triple" = "";
+"create_collage_quad" = "";
+"create_collage_multiple" = "";
+"create_collage_all" = "";
+"create_collage_select_collage" = "";
+"create_collage_info_label" = "";
+
+/*Fotoğraf Seçin*/
+"create_collage_select_photo" = "";
+
+/*+New Collage*/
+"create_collage_preview_main" = "";
+
+/*2'li Kolajlar*/
+"create_collage_dual" = "";
+"create_collage" = "Створити Колаж";

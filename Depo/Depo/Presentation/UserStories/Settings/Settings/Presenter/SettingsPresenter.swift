@@ -187,6 +187,10 @@ extension SettingsPresenter: SettingsViewOutput {
     func goToPackages() {
         router.goToPackages()
     }
+    
+    func goToNotification() {
+        router.goToNotification()
+    }
 }
 
 // MARK: - SettingsInteractorOutput

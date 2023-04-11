@@ -16,8 +16,7 @@ class AnimationsInitializer: NSObject {
     
     class func initializeAnimationController(with nibName: String, moduleOutput: LBAlbumLikePreviewSliderModuleInput?) -> BaseFilesGreedChildrenViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
-        viewController.floatingButtonsArray.append(contentsOf: [.upload])
-        viewController.isControllerCollageAnimations = true
+        viewController.forYouControllerSection = .animations
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .moveToTrash],
                                                style: .default, tintColor: AppColor.tint.color,

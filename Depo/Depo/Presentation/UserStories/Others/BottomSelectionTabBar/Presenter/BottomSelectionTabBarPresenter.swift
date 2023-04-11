@@ -65,6 +65,40 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         }
     }
     
+    func setupNotificationTabBarWith(status: Bool, originalConfig: EditingBarConfig) {
+        let selectAllIndex = originalConfig.elementsConfig.firstIndex(of: .selectAll)
+        let deleteIndex = originalConfig.elementsConfig.firstIndex(of: .delete)
+        
+        let deleteAllIndex = originalConfig.elementsConfig.firstIndex(of: .deleteAll)
+        
+        var validIndexes = [selectAllIndex, deleteIndex].compactMap { $0 }
+        var unValidIndexes = [deleteIndex].compactMap { $0 }
+        
+        view.setupBar(with: originalConfig)
+        
+        if let indexDelete = deleteAllIndex, let indexSelect = selectAllIndex {
+            validIndexes.removeFirst()
+            validIndexes.append(indexDelete)
+            unValidIndexes.append(indexSelect)
+        }
+        
+        view.disableItems(at: unValidIndexes)
+        
+        guard status else {
+            return
+        }
+
+        view.enableItems(at: validIndexes)
+    }
+    
+    func setupCreateCollageTabBarWith(originalConfig: EditingBarConfig) {
+        
+        var bottomBarInteractor = interactor as? BottomSelectionTabBarInteractorInput
+        bottomBarInteractor?.currentBarcongfig = originalConfig
+        
+        view.setupBar(with: originalConfig)
+    }
+    
     override func dismiss(animated: Bool) {
         view.hideBar(animated: animated)
     }
@@ -109,6 +143,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             let type = types[index]
             
             switch type {
+            case .deleteAll:
+                self.basePassingPresenter?.delete(all: false)
+            case .selectAll:
+                self.basePassingPresenter?.selectAllModeSelected()
             case .hide:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .hide))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
@@ -228,6 +266,14 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 self.interactor.removeAlbums(items: selectedItems)
             case .moveToTrashShared:
                 self.interactor.moveToTrashShared(items: selectedItems)
+            case .collageSave:
+                self.basePassingPresenter?.selectModeSelected()
+            case .collageDelete:
+                self.basePassingPresenter?.selectAllModeSelected()
+            case .collageChange:
+                self.basePassingPresenter?.changeCover()
+            case .collageCancel:
+                self.basePassingPresenter?.printSelected()
             default:
                 break
             }

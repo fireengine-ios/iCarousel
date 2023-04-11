@@ -30,6 +30,8 @@ protocol BaseFilesGreedRouterInput {
     func openCreateNewAlbum()
     
     func openUpload()
+    
+    func createCollage()
 }
 
 extension BaseFilesGreedRouterInput {

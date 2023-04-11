@@ -245,6 +245,7 @@ final class PushNotificationService {
         case .albumDetail: openAlbumDetail()
         case .saveToMyLifebox: openSaveToMyLifebox()
         case .brandAmbassador: openBrandAmbassador()
+        case .foryou: openForyou()
         }
         
         
@@ -634,5 +635,10 @@ private extension PushNotificationService {
         let root = RouterVC()
         let payCell = root.paycellCampaign()
         root.pushViewController(viewController: payCell)
+    }
+    
+    func openForyou() {
+        let root = RouterVC()
+        root.openTabBarItem(index: .forYou)
     }
 }

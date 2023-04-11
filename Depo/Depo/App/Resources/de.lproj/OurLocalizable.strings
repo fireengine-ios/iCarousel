@@ -1411,7 +1411,7 @@
 "delete_dublicate_package_description" = "+ Sich wiederholende Kontakte auf dem Telefon löschen";
 "premium_user_package_description" = "+ Unbegrenzte PhotoPick Analyse";
 "bundle_package_addon_type" = "Speicherplatz + Premium";
-"storage_only_package_addon_type" = "Nur Speicherplatz";
+"storage_only_package_addon_type" = "Speicherort";
 "settings_userinfo_name_surname" = "Vorname – Nachname";
 "settings_userinfo_email" = "E-Mail";
 "settings_userinfo_phone" = "Telefonnummer";
@@ -2054,6 +2054,40 @@ then {11,99 TRY/Month}*/
 "empty_gallery_no_unsync" = "Es gibt keine unaktualisierten Dateien in Ihrer lifebox";
 "subscription_offer_cancel_button" = "Stornieren";
 "paycell_share_message " = "";
-"ksaldalks" = "";
+
+/*Fuzzy*/
 "free_up_space_title" = "Der Gerätespeicher ist fast voll!";
+
+/*Fuzzy*/
 "notification_menu_item" = "Benachrichtigungen";
+"notification_buttom_sheet_select_mode" = "Auswählen";
+"notification_buttom_sheet_only_unread" = "Nur ungelesen";
+"notification_buttom_sheet_show_alerts" = "Nur Benachrichtigungen anzeigen";
+"notifications_no_notification" = "Keine neue Benachrichtigung";
+"Create_Word" = "";
+"Create_Cell" = "";
+"Create_Slide" = "";
+"Create_Document_Popup" = "";
+"Create_Document_Create_Button" = "";
+"Create_Document_Cancel_Button" = "";
+"Office_Filter_Document" = "";
+"Office_Filter_SpreedSheet" = "";
+"Office_Filter_Presentation" = "";
+"Office_Filter_All" = "";
+"Office_Filter_PDF" = "";
+"create_collage_triple" = "";
+"create_collage_quad" = "";
+"create_collage_multiple" = "";
+"create_collage_all" = "";
+"create_collage_select_collage" = "";
+"create_collage_info_label" = "";
+
+/*Fotoğraf Seçin*/
+"create_collage_select_photo" = "";
+
+/*+New Collage*/
+"create_collage_preview_main" = "";
+
+/*2'li Kolajlar*/
+"create_collage_dual" = "";
+"create_collage" = "Collage Erstellen";

@@ -27,6 +27,8 @@ enum AppColor {
     case tabBarCardProgressTrack
 
     // MARK: General
+    case warning
+    case readState
     case background
     case secondaryBackground
     case tertiaryBackground
@@ -42,6 +44,8 @@ enum AppColor {
     case darkBackground
     case secondaryTint
     case purchaseButton
+    case notification
+    case textButton
 
     case loginShadowBlue
     case darkContentOverlay
@@ -106,6 +110,9 @@ enum AppColor {
     case forYouFaceImageBackground
     case tbtBlurBackground
     case tbtButton
+    case collageThumbnailColor
+    case collageBorderColor
+    case collageCellBorder
     
     // MARK: Contact
     case grayMain
