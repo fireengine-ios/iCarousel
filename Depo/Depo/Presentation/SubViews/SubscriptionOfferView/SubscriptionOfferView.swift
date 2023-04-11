@@ -157,13 +157,10 @@ final class SubscriptionOfferView: UIView, NibInit {
         featureView.index = index
     }
     
-    func configure(with offer: PackageOffer,
+    func configure(with plan: SubscriptionPlan,
                    delegate: SubscriptionOfferViewDelegate,
                    index: Int,
                    needHidePurchaseInfo: Bool = true) {
-        guard let plan = offer.offers.first else {
-            return
-        }
         
         configure(with: plan, delegate: delegate, index: index, style: .full, needHidePurchaseInfo: needHidePurchaseInfo)
         // It is already set to SubscriptionPlan so no need to reset in configure with SubscriptionPlan plan
@@ -175,9 +172,6 @@ final class SubscriptionOfferView: UIView, NibInit {
         if plan.type == SubscriptionPlanType.default {
             featureView.storageOfferType = .packageOffer
         }
-
-        
-        //featureView.storageOfferType = .packageOffer
     }
     
     private func makePackageFeature(plan: SubscriptionPlan) -> NSAttributedString? {

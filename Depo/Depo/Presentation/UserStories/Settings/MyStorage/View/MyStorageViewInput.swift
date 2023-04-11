@@ -12,4 +12,6 @@ protocol MyStorageViewInput: AnyObject, ActivityIndicator {
     
     func reloadData()
     func showInAppPolicy()
+    
+    func checkIfPremiumBannerValid()
 }
