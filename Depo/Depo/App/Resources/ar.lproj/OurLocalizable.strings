@@ -1423,7 +1423,7 @@
 "delete_dublicate_package_description" = "+ لاتمسح جهات الاتصال المتكررة والمتواجدة بهاتفك";
 "premium_user_package_description" = "+ تحليل الصور فوتو بيك الغير محدود";
 "bundle_package_addon_type" = "مساحة التخزين+بريميوم";
-"storage_only_package_addon_type" = "مساحة التخزين فقط";
+"storage_only_package_addon_type" = "مساحة التخزين";
 "settings_userinfo_name_surname" = "الاسم اللقب";
 "settings_userinfo_email" = "البريد الإلكتروني";
 "settings_userinfo_phone" = "رقم الهاتف";
@@ -2102,4 +2102,4 @@ then {11,99 TRY/Month}*/
 
 /*2'li Kolajlar*/
 "create_collage_dual" = "";
-"create_collage" = "";
+"create_collage" = "قم بإنشاء مجمعة";

@@ -1453,7 +1453,7 @@
 "delete_dublicate_package_description" = "+ Eliminación de los Contactos Repetitivos en Teléfono";
 "premium_user_package_description" = "+ Análisis PhotoPick Ilimitado";
 "bundle_package_addon_type" = "Área de almacenamiento+ Premium";
-"storage_only_package_addon_type" = "Sólo área de almacenamiento";
+"storage_only_package_addon_type" = "Área de almacenamiento.";
 "settings_userinfo_name_surname" = "Nombre y Apellido";
 "settings_userinfo_email" = "Correo Electrónico";
 "settings_userinfo_phone" = "Número de Teléfono";
@@ -2132,4 +2132,4 @@ then {11,99 TRY/Month}*/
 
 /*2'li Kolajlar*/
 "create_collage_dual" = "";
-"create_collage" = "";
+"create_collage" = "Crear Collage";

@@ -1716,7 +1716,7 @@ Please check I have understood the intended command here*/
 "delete_dublicate_package_description" = "+ Suppression De Contacts Répétés Dans Votre Répertoire Téléphonique";
 "premium_user_package_description" = "+ Analyse Illimitée De Photopick";
 "bundle_package_addon_type" = "Espace De Stockage + Premium";
-"storage_only_package_addon_type" = "Espace De Stockage Uniquement";
+"storage_only_package_addon_type" = "Stockage";
 "settings_userinfo_name_surname" = "Prénom et Nom";
 "settings_userinfo_email" = "E-mail";
 "settings_userinfo_phone" = "Numéro de Téléphone";
@@ -2395,4 +2395,4 @@ then {11,99 TRY/Month}*/
 
 /*2'li Kolajlar*/
 "create_collage_dual" = "";
-"create_collage" = "";
+"create_collage" = "Créer un Collage";

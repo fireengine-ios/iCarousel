@@ -1413,7 +1413,7 @@
 "delete_dublicate_package_description" = "+ Видалення повторних контактів на телефоні";
 "premium_user_package_description" = "+ Необмежений аналіз PhotoPick";
 "bundle_package_addon_type" = "Місце для зберігання + Преміум (Premium)";
-"storage_only_package_addon_type" = "Тільки для зберігання";
+"storage_only_package_addon_type" = "Сховище";
 "settings_userinfo_name_surname" = "Ім'я та прізвище";
 "settings_userinfo_email" = "Адреса електронної пошти";
 "settings_userinfo_phone" = "Номер телефону";
@@ -2092,4 +2092,4 @@ then {11,99 TRY/Month}*/
 
 /*2'li Kolajlar*/
 "create_collage_dual" = "";
-"create_collage" = "";
+"create_collage" = "Створити Колаж";

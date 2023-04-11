@@ -1425,7 +1425,7 @@
 "delete_dublicate_package_description" = "+ Удаление Повторяющихся Контактов в Справочнике";
 "premium_user_package_description" = "+ Неограниченный Анализ Photopick";
 "bundle_package_addon_type" = "Место для хранения + Premium";
-"storage_only_package_addon_type" = "Только Место Для Хранения";
+"storage_only_package_addon_type" = "Хранилище";
 "settings_userinfo_name_surname" = "Имя Фамилия";
 "settings_userinfo_email" = "Адрес электронной почты";
 "settings_userinfo_phone" = "Номер Телефона";
@@ -2104,4 +2104,4 @@ then {11,99 TRY/Month}*/
 
 /*2'li Kolajlar*/
 "create_collage_dual" = "";
-"create_collage" = "";
+"create_collage" = "Создать Коллаж";

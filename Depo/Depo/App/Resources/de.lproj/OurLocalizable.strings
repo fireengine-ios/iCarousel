@@ -1411,7 +1411,7 @@
 "delete_dublicate_package_description" = "+ Sich wiederholende Kontakte auf dem Telefon löschen";
 "premium_user_package_description" = "+ Unbegrenzte PhotoPick Analyse";
 "bundle_package_addon_type" = "Speicherplatz + Premium";
-"storage_only_package_addon_type" = "Nur Speicherplatz";
+"storage_only_package_addon_type" = "Speicherort";
 "settings_userinfo_name_surname" = "Vorname – Nachname";
 "settings_userinfo_email" = "E-Mail";
 "settings_userinfo_phone" = "Telefonnummer";
@@ -2090,4 +2090,4 @@ then {11,99 TRY/Month}*/
 
 /*2'li Kolajlar*/
 "create_collage_dual" = "";
-"create_collage" = "";
+"create_collage" = "Collage Erstellen";

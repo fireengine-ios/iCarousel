@@ -1454,7 +1454,7 @@
 "delete_dublicate_package_description" = "+Fshirja e kontakteve të përsëritura në Telefonin tënd";
 "premium_user_package_description" = "+ Analiza e Pafund ‘’PhotoPick’’";
 "bundle_package_addon_type" = "Hapësira e ruajtjes + Premium";
-"storage_only_package_addon_type" = "Vetëm  hapësira e ruajtjes";
+"storage_only_package_addon_type" = "Arkiva";
 "settings_userinfo_name_surname" = "Emri - Mbiemri";
 "settings_userinfo_email" = "E-Mail";
 "settings_userinfo_phone" = "Numri i telefonit";
@@ -2133,4 +2133,4 @@ then {11,99 TRY/Month}*/
 
 /*2'li Kolajlar*/
 "create_collage_dual" = "";
-"create_collage" = "";
+"create_collage" = "Krijo Kolazh";
