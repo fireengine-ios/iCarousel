@@ -1421,7 +1421,7 @@
 "delete_dublicate_package_description" = "+ Telefonundaki Tekrarlayan Kontakları Silme";
 "premium_user_package_description" = "+ Sınırsız PhotoPick Analizi";
 "bundle_package_addon_type" = "Saklama Alanı + Premium";
-"storage_only_package_addon_type" = "Sadece Saklama Alanı";
+"storage_only_package_addon_type" = "Saklama Alanı";
 "settings_userinfo_name_surname" = "Ad Soyad";
 "settings_userinfo_email" = "E-posta";
 "settings_userinfo_phone" = "Telefon Numarası";
