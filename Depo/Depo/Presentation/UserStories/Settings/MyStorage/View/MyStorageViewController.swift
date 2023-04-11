@@ -135,7 +135,6 @@ final class MyStorageViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         output.viewWillAppear()
-        checkIfPremiumBannerValid()
     }
     
     // MARK: Utility Methods (private)
@@ -216,8 +215,6 @@ extension MyStorageViewController: MyStorageViewInput {
         let outerBottomView = UIView()
         outerBottomView.heightAnchor.constraint(equalToConstant: 16).isActive = true
         myPackages.addArrangedSubview(outerBottomView)
-        
-        checkIfPremiumBannerValid()
     }
     
     func reloadData() {
@@ -244,8 +241,6 @@ extension MyStorageViewController: MyStorageViewInput {
         let outerBottomView = UIView()
         outerBottomView.heightAnchor.constraint(equalToConstant: 16).isActive = true
         packages.addArrangedSubview(outerBottomView)
-        
-        checkIfPremiumBannerValid()
     }
     
     func showRestoreButton() {

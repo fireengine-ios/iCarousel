@@ -48,6 +48,7 @@ final class MyStoragePresenter {
     }
     
     private func refreshPage() {
+        interactor.getUserAuthority()
         allOffers = []
         displayableOffers = []
         availableOffers = []
@@ -318,6 +319,7 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     }
 
     func successedGotUserAuthority() {
+        view?.checkIfPremiumBannerValid()
         view?.stopActivityIndicator()
     }
     
