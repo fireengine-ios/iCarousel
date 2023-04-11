@@ -201,7 +201,10 @@ extension MyStorageViewController: MyStorageViewInput {
         for offer in output.displayableOffers.enumerated() {
             let view = SubscriptionOfferView.initFromNib()
             let packageOffer = PackageOffer(quotaNumber: .zero, offers: [offer.element])
-            view.configure(with: packageOffer, delegate: self, index: offer.offset, needHidePurchaseInfo: false)
+            
+            guard let element = packageOffer.offers.first else { continue }
+            
+            view.configure(with: element, delegate: self, index: offer.offset, needHidePurchaseInfo: false)
             view.setNeedsLayout()
             view.layoutIfNeeded()
             
@@ -223,9 +226,10 @@ extension MyStorageViewController: MyStorageViewInput {
         let outerTopView = UIView()
         outerTopView.heightAnchor.constraint(equalToConstant: 16).isActive = true
         packages.addArrangedSubview(outerTopView)
-        
+                
         packages.addArrangedSubview(packagesTitleLabel)
         for offer in output.availableOffers.enumerated() {
+            
             let view = SubscriptionOfferView.initFromNib()
             view.configure(with: offer.element, delegate: self, index: offer.offset)
             view.setNeedsLayout()
@@ -291,7 +295,10 @@ extension MyStorageViewController: SubscriptionOfferViewDelegate {
             guard let plan = output?.availableOffers[planIndex] else {
                 return
             }
-            presentPaymentPopUp(plan: plan, planIndex: planIndex)
+            
+            let packageOffer = PackageOffer(quotaNumber: plan.quota, offers: [plan])
+            
+            presentPaymentPopUp(plan: packageOffer, planIndex: planIndex)
         case.subscriptionPlan:
   
             guard let plan = output?.displayableOffers[planIndex] else {
