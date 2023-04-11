@@ -62,6 +62,7 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
     var draggedTag = Int()
     var draggedImage = UIImage()
     var lastRotation: CGFloat = 0
+    private var contentviewBackGroundImage = UIImage()
     
     let uploadService = UploadService()
     
@@ -85,11 +86,22 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
         
         bottomBarManager.setup()
         setLayout()
-        createImageView(collageTemplate: collageTemplate!)
         view.backgroundColor = AppColor.background.color
         setTextFieldInNavigationBar(withDelegate: self)
         isHiddenControl()
         keyboardDoneButton()
+        
+        let imagePathUrl = URL(string: collageTemplate!.collageImagePath)!
+        SDWebImageDownloader.shared().downloadImage(with: imagePathUrl) { [weak self] image, _, _, _ in
+            let pathImage = image!
+            let scaledImageSize = CGSize(width: (self?.contentView.frame.width)!, height: (self?.contentView.frame.height)!)
+            let renderer = UIGraphicsImageRenderer(size: scaledImageSize)
+            let scaledImage = renderer.image { _ in
+                image!.draw(in: CGRect(origin: .zero, size: scaledImageSize))
+            }
+            self?.contentviewBackGroundImage = scaledImage
+            self?.createImageView(collageTemplate: (self?.collageTemplate!)!)
+        }
     }
     
     private func isHiddenControl() {
@@ -143,6 +155,7 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
                     imageView.image = Image.iconAddUnselect.image
                     imageView.layer.borderWidth = 1.0
                     imageView.layer.borderColor = AppColor.darkBackground.cgColor
+                    contentView.backgroundColor = UIColor(patternImage: contentviewBackGroundImage)
                     contentView.addSubview(imageView)
                 case .changePhotoSelection:
                     let scrollView = UIScrollView()
@@ -172,6 +185,7 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
                     imageView.clipsToBounds = true
                     imageView.layer.borderWidth = 1.0
                     imageView.layer.borderColor = AppColor.darkBackground.cgColor
+                    contentView.backgroundColor = UIColor(patternImage: contentviewBackGroundImage)
                     contentView.addSubview(imageView)
                 case .changePhotoSelection:
                     let scrollView = UIScrollView()
@@ -197,7 +211,11 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
         contentView.addSubview(scrollView)
         
         let imageUrl = selectedItems[index].metadata?.mediumUrl
-        imageView.sd_setImage(with: imageUrl)
+        imageView.sd_setImage(with: imageUrl) { (image, error, cache, url) in
+            if self.selectedItems.count - 1 == index {
+                self.contentView.backgroundColor = UIColor(patternImage: self.contentviewBackGroundImage)
+            }
+        }
         imageView.frame = CGRect(x: 0, y: 0, width: scrollView.frame.size.width, height: scrollView.frame.size.height)
         imageView.tag = index
         imageView.contentMode = .scaleAspectFill
