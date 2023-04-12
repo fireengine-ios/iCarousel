@@ -242,7 +242,8 @@ final class PackageService {
                 date: getOfferDate(for: offer),
                 store: getOfferStore(for: offer),
                 packageStatus: getPackageStatus(for: offer),
-                gracePeriodEndDate: getGracePeriodEndDate(for: offer)
+                gracePeriodEndDate: getGracePeriodEndDate(for: offer),
+                period: getPeriod(for: offer)
             )
         }
     }
@@ -323,7 +324,8 @@ final class PackageService {
                                       date: String = "",
                                       store: String = "",
                                       packageStatus: String? = nil,
-                                      gracePeriodEndDate: String = "") -> SubscriptionPlan {
+                                      gracePeriodEndDate: String = "",
+                                      period: String?) -> SubscriptionPlan {
         return SubscriptionPlan(name: name,
                                 price: price,
                                 introductoryPrice: introductoryPrice,
@@ -337,7 +339,8 @@ final class PackageService {
                                 date: date,
                                 store: store,
                                 packageStatus: packageStatus,
-                                gracePeriodEndDate: gracePeriodEndDate)
+                                gracePeriodEndDate: gracePeriodEndDate,
+                                period: period)
     }
     
     private func localizedOfferPeriod(_ offerPeriod: String) -> String {
@@ -637,4 +640,17 @@ final class PackageService {
             return ""
         }
     }
+    
+    private func getPeriod(for offer: Any) -> String {
+        if let offer = offer as? PackageModelResponse {
+            if let gracePeriodEndDate = offer.period {
+                return gracePeriodEndDate
+            } else {
+                return ""
+            }
+        } else {
+            return ""
+        }
+    }
+
 }

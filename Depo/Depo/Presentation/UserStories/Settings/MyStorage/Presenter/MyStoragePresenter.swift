@@ -270,10 +270,21 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     func successedPackages(allOffers: [PackageModelResponse]) {
         accountType = interactor.getAccountTypePackages(with: accountType.rawValue, offers: allOffers)  ?? .all
         let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
-        availableOffers = offers
         
+        sortAvailableOffers(offers: offers)
+                
         view?.stopActivityIndicator()
         view?.reloadData()
+    }
+    
+    private func sortAvailableOffers(offers: [SubscriptionPlan]) {
+        availableOffers = offers.sorted(by: { $0.quota < $1.quota })
+        
+        for i in stride(from: 0, to: availableOffers.count - 1, by: 2) {
+            if availableOffers[i].period == "YEAR" {
+                availableOffers.swapAt(i, i + 1)
+            }
+        }
     }
     
     func successed(accountInfo: AccountInfoResponse) {
@@ -330,7 +341,8 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     func successed(allOffers: [PackageModelResponse]) {
         accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)  ?? .all
         let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
-        availableOffers = offers
+        
+        sortAvailableOffers(offers: offers)
         
         view?.stopActivityIndicator()
         view?.reloadData()
