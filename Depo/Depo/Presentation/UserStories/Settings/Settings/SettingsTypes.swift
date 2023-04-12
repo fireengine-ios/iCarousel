@@ -39,7 +39,7 @@ enum SettingsTypes: Int {
     
     static func prepareTypes(isChatbotShown: Bool) -> [[SettingsTypes]] {
         var result = [[SettingsTypes]]()
-        addNotification(to: &result)
+        //addNotification(to: &result)
         addPackagesSection(to: &result)
         addDefaultSection(to: &result, isChatbotShown: isChatbotShown)
         return result
