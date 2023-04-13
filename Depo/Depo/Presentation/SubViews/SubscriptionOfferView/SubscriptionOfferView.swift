@@ -153,6 +153,10 @@ final class SubscriptionOfferView: UIView, NibInit {
         
         updateDesign(with: plan, style: style)
         
+        if featureView.purchaseButton.titleLabel?.text != localized(.subscriptionOfferCancelButton) {
+            featureView.purchaseButton.isHidden = false
+        }
+        
         featureView.delegate = delegate
         featureView.index = index
     }
