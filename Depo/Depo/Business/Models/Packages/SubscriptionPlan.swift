@@ -61,6 +61,7 @@ final class SubscriptionPlan {
     let packageStatus: String?
     let gracePeriodEndDate: String
     let introductoryPrice: String?
+    let period: String?
 
     init(name: String,
          price: String,
@@ -75,7 +76,8 @@ final class SubscriptionPlan {
          date: String,
          store: String,
          packageStatus: String?,
-         gracePeriodEndDate: String) {
+         gracePeriodEndDate: String,
+         period: String?) {
         self.name = name
         self.price = price
         self.introductoryPrice = introductoryPrice
@@ -90,6 +92,7 @@ final class SubscriptionPlan {
         self.store = store
         self.packageStatus = packageStatus
         self.gracePeriodEndDate = gracePeriodEndDate
+        self.period = period
     }
     
     ///FE-990 2.5TB SLCM (Turkcell) quota package cancel text
