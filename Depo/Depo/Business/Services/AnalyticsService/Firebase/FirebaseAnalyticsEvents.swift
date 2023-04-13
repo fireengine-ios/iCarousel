@@ -25,6 +25,10 @@ enum AnalyticsEvent {
     case purchaseTurkcellPremium
     case purchaseTurkcell250Freemium
     case purchaseTurkcell500Advertising
+    case purchaseTurkcell100Year
+    case purchaseTurkcell500Year
+    case purchaseTurkcell250Year
+    case purchaseTurkcell2500Year
 
     case purchaseNonTurkcell50
     case purchaseNonTurkcell100
@@ -35,6 +39,10 @@ enum AnalyticsEvent {
     case purchaseNonTurkcellPremium
     case purchaseNonTurkcell250Freemium
     case purchaseNonTurkcell500Advertising
+    case purchaseNonTurkcell100Year
+    case purchaseNonTurkcell500Year
+    case purchaseNonTurkcell250Year
+    case purchaseNonTurkcell2500Year
 
     case importDropbox
     case importFacebook
@@ -109,6 +117,10 @@ enum AnalyticsEvent {
             case .purchaseTurkcellPremium: return "qexub9"
             case .purchaseTurkcell250Freemium: return "4jqolr"
             case .purchaseTurkcell500Advertising: return "74kbth"
+            case .purchaseTurkcell100Year: return "6f6za8"
+            case .purchaseTurkcell250Year: return "b7ier3"
+            case .purchaseTurkcell500Year: return "tlx6gd"
+            case .purchaseTurkcell2500Year: return "5owvgp"
                 
             case .purchaseNonTurkcell50: return "q3ivog"
             case .purchaseNonTurkcell100: return "lbrusf"
@@ -119,6 +131,10 @@ enum AnalyticsEvent {
             case .purchaseNonTurkcellPremium: return "9pyt2d"
             case .purchaseNonTurkcell250Freemium: return "4jqolr"
             case .purchaseNonTurkcell500Advertising: return "74kbth"
+            case .purchaseNonTurkcell100Year: return "6f6za8"
+            case .purchaseNonTurkcell250Year: return "b7ier3"
+            case .purchaseNonTurkcell500Year: return "tlx6gd"
+            case .purchaseNonTurkcell2500Year: return "5owvgp"
                 
             case .importDropbox: return "tdvlrq"
             case .importFacebook: return "y5dz5j"
@@ -177,6 +193,22 @@ enum AnalyticsEvent {
         case .createStory: return "CREATE_STORY"
         case .photopickClick: return "PHOTOPICK_CLICK"
         case .photopick: return "PHOTOPICK"
+        case .purchaseTurkcell100Year:
+            return ""
+        case .purchaseTurkcell500Year:
+            return ""
+        case .purchaseTurkcell250Year:
+            return ""
+        case .purchaseTurkcell2500Year:
+            return ""
+        case .purchaseNonTurkcell100Year:
+            return ""
+        case .purchaseNonTurkcell500Year:
+            return ""
+        case .purchaseNonTurkcell250Year:
+            return ""
+        case .purchaseNonTurkcell2500Year:
+            return ""
         }
     }
 }
