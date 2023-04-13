@@ -34,7 +34,7 @@
 			<array>
 				<string>db-422fptod5dlxrn8</string>
 				<string>akillidepo</string>
-				<string>fb737574591351760</string>
+				<string>fb531658366898592</string>
 				<string>lifeboxapp
 </string>
 			</array>
@@ -43,7 +43,7 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAppID</key>
-	<string>737574591351760</string>
+	<string>531658366898592</string>
 	<key>FacebookDisplayName</key>
 	<string>lifebox</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
