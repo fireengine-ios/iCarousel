@@ -141,38 +141,41 @@ class InstaPickPhotoView: UIView, NibInit {
         }
         
         self.model = model
-
         rateLabel.text = String(model.rank)
-        
         pictureNotFoundStackView.isHidden = true
-        imageView.sd_setImage(with: getPhotoUrl(), completed: { [weak self] (image, _, _, _) in
-            guard let `self` = self else {
-                return
-            }
-            
-            let imageToAttach: UIImage?
-            let imageViewBackgroundColor: UIColor
-            let isPictureExist = (image != nil)
-            
-            if image == nil {
-                imageToAttach = UIImage(named: "instaPickImageNotFound")
-                imageViewBackgroundColor = .white
-            } else {
-                imageToAttach = image
-                imageViewBackgroundColor = .clear
-            }
-            
-            UIView.transition(with: self.imageView,
-                              duration: NumericConstants.instaPickImageViewTransitionDuration,
-                              options: .transitionCrossDissolve,
-                              animations: {
-                                self.imageView.backgroundColor = imageViewBackgroundColor
-                                self.imageView.image = imageToAttach
-                                self.pictureNotFoundStackView.isHidden = isPictureExist
-            }, completion: nil)
-        })
+        
+        guard let url = getPhotoUrl() else { return }
+        
+        let cache = InstaPickImageServiceAdapter(api: imageView, url: url).retry(5)
+        cache.loadItems(completion: handleImageService)
         
         pickedView.isHidden = !model.isPicked
+    }
+    
+    private func handleImageService(_ result: Result<UIImage, Error>) {
+        var imageToAttach: UIImage?
+        let imageViewBackgroundColor: UIColor
+        var isPictureExist = true
+        
+        switch result {
+        case .success(let image):
+            imageToAttach = image
+            imageViewBackgroundColor = .clear
+        case .failure(_):
+            imageToAttach = UIImage(named: "instaPickImageNotFound")!
+            imageViewBackgroundColor = .white
+            isPictureExist = false
+        }
+        
+        UIView.transition(with: imageView,
+                          duration: NumericConstants.instaPickImageViewTransitionDuration,
+                          options: .transitionCrossDissolve,
+                          animations: { [weak self] in
+            
+            self?.imageView.backgroundColor = imageViewBackgroundColor
+            self?.imageView.image = imageToAttach
+            self?.pictureNotFoundStackView.isHidden = isPictureExist
+        }, completion: nil)
     }
     
     func getImage() -> UIImage? {
