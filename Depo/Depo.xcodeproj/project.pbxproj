@@ -1166,6 +1166,10 @@
 		527302EE2940D1120061E754 /* BrandAmbassadorDeeplinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527302EC2940D1120061E754 /* BrandAmbassadorDeeplinkHandler.swift */; };
 		527302EF2940D1120061E754 /* BrandAmbassadorDeeplinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527302EC2940D1120061E754 /* BrandAmbassadorDeeplinkHandler.swift */; };
 		527302F02940D1120061E754 /* BrandAmbassadorDeeplinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527302EC2940D1120061E754 /* BrandAmbassadorDeeplinkHandler.swift */; };
+		5282AAF029E930900014FBCF /* ImageRetryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5282AAEF29E930900014FBCF /* ImageRetryService.swift */; };
+		5282AAF129E930900014FBCF /* ImageRetryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5282AAEF29E930900014FBCF /* ImageRetryService.swift */; };
+		5282AAF229E930900014FBCF /* ImageRetryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5282AAEF29E930900014FBCF /* ImageRetryService.swift */; };
+		5282AAF329E930900014FBCF /* ImageRetryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5282AAEF29E930900014FBCF /* ImageRetryService.swift */; };
 		52A5E00A2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
 		52A5E00B2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
 		52A5E00C2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
@@ -10436,6 +10440,7 @@
 		527302E22940CFDC0061E754 /* DeeplinkHandlerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkHandlerProtocol.swift; sourceTree = "<group>"; };
 		527302E72940D0110061E754 /* DeeplinkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkCoordinator.swift; sourceTree = "<group>"; };
 		527302EC2940D1120061E754 /* BrandAmbassadorDeeplinkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandAmbassadorDeeplinkHandler.swift; sourceTree = "<group>"; };
+		5282AAEF29E930900014FBCF /* ImageRetryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRetryService.swift; sourceTree = "<group>"; };
 		52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStorySelectionView.swift; sourceTree = "<group>"; };
 		52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBarHeaderTwoLineView.swift; sourceTree = "<group>"; };
 		52A5E021291C17F900670B0C /* CustomSegmentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedView.swift; sourceTree = "<group>"; };
@@ -17932,6 +17937,7 @@
 		9219B18E21ECA7FA00098021 /* InstaPickPhotoView */ = {
 			isa = PBXGroup;
 			children = (
+				5282AAEF29E930900014FBCF /* ImageRetryService.swift */,
 				921E7C332201CB9F00341F75 /* InstaPickPhotoView.swift */,
 				921E7C362201EAAA00341F75 /* InstaPickBigPhotoView.swift */,
 				921E7C392201ED8B00341F75 /* InstaPickSmallPhotoView.swift */,
@@ -27233,6 +27239,7 @@
 				B56FBB2C2122C78C004F4A59 /* TermsOfUsePresenter.swift in Sources */,
 				98B0487B259314750011DAEB /* ContactDevice.m in Sources */,
 				8C0E8EE71FDEBDFF00789C91 /* HelpAndSupportInteractor.swift in Sources */,
+				5282AAF029E930900014FBCF /* ImageRetryService.swift in Sources */,
 				73D723F1231D092E006AE835 /* UIStackView+Extensions.swift in Sources */,
 				8C017B762074B782002484E7 /* Keys.swift in Sources */,
 				8C0E8EE81FDEBDFF00789C91 /* BottomSelectionTabBarConfigurator.swift in Sources */,
@@ -29739,6 +29746,7 @@
 				CE784BD222A685FB00662219 /* LeavePremiumViewOutput.swift in Sources */,
 				CE784BD322A685FB00662219 /* FileInfoInitializer.swift in Sources */,
 				CE784BD422A685FB00662219 /* UsageInfoViewInput.swift in Sources */,
+				5282AAF229E930900014FBCF /* ImageRetryService.swift in Sources */,
 				CE784BD522A685FB00662219 /* FaceImageItemsRouterInput.swift in Sources */,
 				07DB939D2860AF5400D5CACF /* AppleReceipt.swift in Sources */,
 				9864296A22F834F10039811C /* SpotifyResponse.swift in Sources */,
@@ -31084,6 +31092,7 @@
 				CF8B663A23CBC9D70021B021 /* CreateStoryPhotoSelectionController.swift in Sources */,
 				CF8B663B23CBC9D70021B021 /* InstaPickDetailViewController.swift in Sources */,
 				730F8ABB23CDD58900798B61 /* MigrationModel_1_3.xcmappingmodel in Sources */,
+				5282AAF129E930900014FBCF /* ImageRetryService.swift in Sources */,
 				CF8B663C23CBC9D70021B021 /* TwoFactorChallengeInteractor.swift in Sources */,
 				98231A4724F3A23500FD16E2 /* WhisperFilter.swift in Sources */,
 				CF8B663D23CBC9D70021B021 /* Alamofire+Response.swift in Sources */,
@@ -32974,6 +32983,7 @@
 				CF8B6E2823CBCA280021B021 /* EULAResponse.swift in Sources */,
 				CF8B6E2923CBCA280021B021 /* FromNib.swift in Sources */,
 				CF8B6E2A23CBCA280021B021 /* PeriodicContactSyncSettingsOptionView.swift in Sources */,
+				5282AAF329E930900014FBCF /* ImageRetryService.swift in Sources */,
 				CF8B6E2B23CBCA280021B021 /* PackagesViewOutput.swift in Sources */,
 				891C019729BCB64D003D5CA1 /* StringConstants.swift in Sources */,
 				CF8B6E2C23CBCA280021B021 /* SessionServiceExtension.swift in Sources */,
