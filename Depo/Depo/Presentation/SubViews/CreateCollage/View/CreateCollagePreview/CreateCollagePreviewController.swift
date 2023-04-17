@@ -142,7 +142,7 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
                 let yFirst = Double(shapeDetails[i].shapeCoordinates[0].y)
                 let xStart = (xFirst / xRatioConstant)
                 let yStart = (yFirst / xRatioConstant)
-                let viewFrame = CGRect(x: xStart, y: yStart, width: imageWidth / xRatioConstant, height: imageHeight / xRatioConstant)
+                let viewFrame = CGRect(x: xStart, y: yStart, width: (imageWidth / xRatioConstant) + 1, height: (imageHeight / xRatioConstant) + 1)
                 switch photoSelectType {
                 case .newPhotoSelection:
                     let imageView = UIImageView(frame: viewFrame)
