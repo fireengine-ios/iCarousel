@@ -1431,7 +1431,7 @@ extension MoreFilesActionsInteractor {
             DispatchQueue.main.async {
                 self.output?.operationFinished(type: elementType)
                 self.router.hideSpiner()
-                
+                NotificationCenter.default.post(name: .foryouGetUpdateData, object: nil)
                 // handle hide popups in HideActionService
                 guard elementType != .hide else {
                     return
