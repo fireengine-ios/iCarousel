@@ -618,7 +618,7 @@ class AuthenticationService: BaseRequestService {
             debugLog("starting logout")
             self.passcodeStorage.clearPasscode()
             self.biometricsManager.isEnabled = false
-            self.tokenStorage.clearTokens()
+            self.tokenStorage.clearTokens(calledMethod: "logout")
             self.cancellAllRequests()
             
             ItemOperationManager.default.clear()

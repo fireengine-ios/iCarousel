@@ -25,7 +25,7 @@ final class ShareWormholeListener {
             guard let `self` = self else {
                 return
             }
-            self.tokenStorage.clearTokens()
+            self.tokenStorage.clearTokens(calledMethod: "listenLogout")
             self.passcodeStorage.clearPasscode()
             self.biometricsManager.isEnabled = false
             self.logoutHandler?()
