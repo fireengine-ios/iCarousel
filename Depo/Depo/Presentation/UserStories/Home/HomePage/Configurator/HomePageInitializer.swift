@@ -11,7 +11,7 @@ import UIKit
 class HomePageModuleInitializer: NSObject {
     class func initializeViewController(with nibName: String) -> HeaderContainingViewController.ChildViewController {
         let viewController = HomePageViewController(nibName: nibName, bundle: nil)
-        viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory, .newFolder])
+        viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory])
         viewController.homePageDataSource.addNotPermittedCardViewTypes(types: [.prepareQuickScroll, .sharedWithMeUpload])
         let configurator = HomePageModuleConfigurator()
         configurator.configureModuleForViewInput(viewInput: viewController)

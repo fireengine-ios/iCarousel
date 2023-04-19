@@ -15,7 +15,7 @@ class DiscoverInitilizer: NSObject {
         let viewController = DiscoverViewController(nibName: nibName, bundle: nil)
         let configurator = DiscoverConfigurator()
         configurator.configureModuleForViewInput(viewInput: viewController)
-        viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory, .newFolder])
-        return viewController 
+        viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory])
+        return viewController
     }
 }

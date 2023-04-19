@@ -12,8 +12,6 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
 
     class func initializePhotoVideosViewController(with nibName: String, albumUUID: String, sortedRule: SortedRules = .timeUp) -> UIViewController {
         let viewController = UploadFromLifeBoxViewController(nibName: nibName, bundle: nil)
-        //viewController.needShowTabBar = true
-        //viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonNewFolder, .floatingButtonUploadFromLifebox])
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [],
                                                style: .default, tintColor: nil)
@@ -36,8 +34,6 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
     class func initializeFilesForFolderViewController(with nibName: String, destinationFolderUUID: String, outputFolderUUID: String = "", sortRule: SortedRules, type: MoreActionsConfig.ViewType) -> UIViewController {
         let viewController = UploadFromLifeBoxViewController(nibName: nibName, bundle: nil)
         viewController.parentUUID = destinationFolderUUID
-        //viewController.needShowTabBar = true
-        //viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonNewFolder, .floatingButtonUploadFromLifebox])
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [],
                                                style: .default, tintColor: nil)
@@ -75,8 +71,6 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
     class func initializeUploadFromLifeBoxFavoritesController(destinationFolderUUID: String, outputFolderUUID: String = "", sortRule: SortedRules, isPhotoVideoOnly: Bool) -> UIViewController {
         let viewController = UploadFromLifeBoxViewController(nibName: "BaseFilesGreedViewController", bundle: nil)
         viewController.parentUUID = destinationFolderUUID
-        //viewController.needShowTabBar = true
-        //viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonNewFolder, .floatingButtonUploadFromLifebox])
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [],
                                                style: .default, tintColor: nil)
