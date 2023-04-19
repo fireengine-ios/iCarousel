@@ -34,7 +34,7 @@ final class FileProviderExtension: NSFileProviderExtension {
     
     func listenMessageAboutLogout() {
         fileProviderWormholeListener.listenDidLogout { [weak self] in
-            self?.tokenStorage.clearTokens()
+            self?.tokenStorage.clearTokens(calledMethod: "listenMessageAboutLogout")
             /// On some devices (Iphone 6 plus 11.2, Iphone 6s plus 11.2), the NSFileProviderEnumerator protocol methods were not called when logging into the application from the background, the signalEnumerator method provokes a call to the protocol methods.
             NSFileProviderManager.default.signalEnumerator(for: NSFileProviderItemIdentifier.rootContainer) { _ in }
         }

@@ -39,16 +39,18 @@ class NavigationBarList {
                                    action: nil)
         settings.accessibilityLabel = TextConstants.accessibilitySettings
         
-        plus = UIBarButtonItem(image: NavigationBarImage.headerActionPlus.image.withRenderingMode(.alwaysOriginal),
+        plus = UIBarButtonItem(image: UIImage(),
                                  style: .plain,
                                  target: nil,
                                  action: nil)
+        plus.setBackgroundImage(NavigationBarImage.headerActionPlus.image, for: .normal, barMetrics: .default)
         plus.accessibilityLabel = TextConstants.accessibilityPlus
         
-        search = UIBarButtonItem(image: NavigationBarImage.headerActionSearch.image.withRenderingMode(.alwaysOriginal),
+        search = UIBarButtonItem(image: UIImage(),
                                  style: .plain,
                                  target: nil,
                                  action: nil)
+        search.setBackgroundImage(NavigationBarImage.headerActionSearch.image, for: .normal, barMetrics: .default)
         search.accessibilityLabel = TextConstants.accessibilitySearch
 
         more = UIBarButtonItem(image: Image.iconKebabBorder.image,

@@ -14,5 +14,5 @@ protocol TokenStorage: AnyObject {
     var refreshToken: String? { get set }
     var isRememberMe: Bool { get set }
     var isClearTokens: Bool { get set }
-    func clearTokens()
+    func clearTokens(calledMethod: String)
 }

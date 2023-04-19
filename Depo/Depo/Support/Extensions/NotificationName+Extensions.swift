@@ -19,4 +19,5 @@ extension Notification.Name {
     public static let localAlbumStatusDidChange = Notification.Name("localAlbumStatusDidChange")
     public static let deinitPlayer = Notification.Name("deinitPlayer")
     public static let reusePlayer = Notification.Name("reusePlayer")
+    public static let foryouGetUpdateData = Notification.Name("foryouGetUpdateData")
 }

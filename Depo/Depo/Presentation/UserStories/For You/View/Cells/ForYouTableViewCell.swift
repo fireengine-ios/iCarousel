@@ -187,11 +187,9 @@ extension ForYouTableViewCell: UICollectionViewDataSource {
         let image: UIImage = Image.createCollageThumbnail.image
         let name: String = "thumbnailCollage"
         let imageData = image.jpegData(compressionQuality: 0.9)!
-        let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
         let wrapData = WrapData(imageData: imageData, isLocal: true)
         
         wrapData.name = name
-        wrapData.patchToPreview = PathForItem.remoteUrl(url)
         return wrapData
     }
     
@@ -239,11 +237,7 @@ extension ForYouTableViewCell: UICollectionViewDataSource {
             return cell
         case .collages:
             let item = wrapData[indexPath.row]
-            if indexPath.row == wrapData.count - 1 {
-                cell.setImage(image: Image.createCollageThumbnail.image, animated: false)
-            } else {
-                cell.configure(with: item)
-            }
+            cell.configureForCollage(with: item)
             return cell
         default:
             let item = wrapData[indexPath.row]

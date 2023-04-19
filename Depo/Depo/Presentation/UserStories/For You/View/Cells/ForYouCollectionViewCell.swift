@@ -30,8 +30,17 @@ class ForYouCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configureWithLocalImage() {
-        thumbnailImage.image = Image.createCollageThumbnail.image
+    func configureForCollage(with wrapData: WrapData) {
+        if wrapData.tmpDownloadUrl != nil {
+            switch wrapData.patchToPreview {
+            case .remoteUrl(let url):
+                setImage(with: url!)
+            default:
+                break
+            }
+        } else {
+            thumbnailImage.image = Image.createCollageThumbnail.image
+        }
     }
     
     func setImage(image: UIImage?, animated: Bool) {
