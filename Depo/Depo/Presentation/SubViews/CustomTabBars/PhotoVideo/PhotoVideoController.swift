@@ -355,11 +355,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         analyticsManager.trackDimentionsEveryClickGA(screen: isPhoto ? .photos : .videos)
     }
     
-    private func showSearchScreen() {
-        let controller = router.searchView(navigationController: navigationController)
-        router.pushViewController(viewController: controller)
-    }
-    
     private func updateScrollBarTextIfNeed() {
         guard scrollBarManager.scrollBar.isDragging else {
             return
