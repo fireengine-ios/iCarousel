@@ -9,9 +9,14 @@
 import UIKit
 
 extension UIApplication {
+    func openSubscriptions() {
+        UIApplication.shared.openSafely(URL(string: "https://apps.apple.com/account/subscriptions"))
+    }
+    
     func openSettings() {
         UIApplication.shared.openSafely(URL(string: UIApplication.openSettingsURLString))
     }
+    
     func openAppstore() {
         UIApplication.shared.openSafely(URL(string: "itms-apps://itunes.apple.com/app/id\(Device.applicationId)"))
     }
