@@ -32,7 +32,7 @@ extension MyStorageRouter: MyStorageRouterInput {
 
         let okAction = UIAlertAction(title: TextConstants.offersOk, style: .cancel, handler: nil)
         let settingsAction = UIAlertAction(title: TextConstants.offersSettings, style: .default) { _ in
-            UIApplication.shared.openSettings()
+            UIApplication.shared.openSubscriptions()
         }
         
         alertVC.addAction(settingsAction)
