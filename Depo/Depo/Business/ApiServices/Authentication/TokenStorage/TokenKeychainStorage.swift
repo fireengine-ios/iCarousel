@@ -9,7 +9,6 @@
 import UIKit
 import KeychainSwift
 import WidgetKit
-import XCGLogger
 
 final class TokenKeychainStorage: TokenStorage {
     
@@ -19,7 +18,6 @@ final class TokenKeychainStorage: TokenStorage {
     private let isClearTokensKey = "isClearTokensKey"
     
     private let keychain = KeychainSwift()
-    private let degubLogService = DebugLogService()
     
     private (set) var savedAccessToken: String?
     var accessToken: String? {
@@ -70,44 +68,9 @@ final class TokenKeychainStorage: TokenStorage {
     }
     
     func clearTokens(calledMethod: String) {
-        debugLog("EXTRA LOG Clear Tokens : \(calledMethod)")
+        //debugLog("EXTRA LOG Clear Tokens : \(calledMethod)")
         accessToken = nil
         refreshToken = nil
         isRememberMe = false
-    }
-    
-    let log: XCGLogger = {
-        let log = XCGLogger(identifier: XCGLogger.homeWidgetLoggerIdentifier, includeDefaultDestinations: false)
-        
-        let logPath = Device.documentsFolderUrl(withComponent: XCGLogger.homeWidgetLogFileName)
-        
-        let autoRotatingFileDestination = AutoRotatingFileDestination(owner: log,
-                                                                      writeToFile: logPath,
-                                                                      identifier: XCGLogger.homeWidgetLoggerIdentifier,
-                                                                      shouldAppend: true,
-                                                                      appendMarker: XCGLogger.homeWidgetAppendMarker,
-                                                                      attributes: [.protectionKey : FileProtectionType.completeUntilFirstUserAuthentication],
-                                                                      maxFileSize: NumericConstants.logMaxSize,
-                                                                      maxTimeInterval: NumericConstants.logDuration,
-                                                                      archiveSuffixDateFormatter: nil)
-        autoRotatingFileDestination.outputLevel = .debug
-        autoRotatingFileDestination.showLogIdentifier = true
-        autoRotatingFileDestination.showFunctionName = true
-        autoRotatingFileDestination.showThreadName = true
-        autoRotatingFileDestination.showLevel = true
-        autoRotatingFileDestination.showFileName = true
-        autoRotatingFileDestination.showLineNumber = true
-        autoRotatingFileDestination.showDate = true
-        autoRotatingFileDestination.logQueue = XCGLogger.logQueue
-        
-        log.add(destination: autoRotatingFileDestination)
-        
-        log.logAppDetails()
-        
-        return log
-    }()
-
-    func debugLog(_ string: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
-        log.debug(string, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
 }
