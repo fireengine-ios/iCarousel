@@ -278,8 +278,7 @@ extension WebViewPopup {
     
     private static func raiseString(controller: WebViewPopup, content: NotificationServiceResponse) {
         guard let body = content.body,
-              let title = content.title,
-              let imageUrl = content.image else { return }
+              let title = content.title else { return }
         
         if body.isHTMLString {
             controller.type = .html
@@ -288,7 +287,11 @@ extension WebViewPopup {
             controller.type = .string
             controller.bodyLabel.text = body
             controller.titleLabel.text = title
-            controller.cardImageView.sd_setImage(with: URL(string: imageUrl)!)
+            
+            if let imageUrl = content.image ?? content.smallThumbnail ?? content.largeThumbnail,
+                let url = URL(string: imageUrl) {
+                controller.cardImageView.sd_setImage(with: url)
+            }
         }
     }
     
