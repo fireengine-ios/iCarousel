@@ -21,9 +21,7 @@ class ForYouCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with wrapData: WrapData, currentView: ForYouSections) {
-        if case .remoteUrl(let url) = wrapData.patchToPreview, let url = url {
-            setImage(with: url)
-        } else if let url = wrapData.tmpDownloadUrl ?? wrapData.metaData?.smalURl {
+        if let url = wrapData.getAnyValidRemoteUrl {
             setImage(with: url)
         }
     }

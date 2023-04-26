@@ -616,6 +616,17 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
     }
     
+    var getAnyValidRemoteUrl: URL? {
+        if case .remoteUrl(let url) = patchToPreview, let url = url {
+            return url
+        }
+        
+        return [metaData?.smalURl,
+                metaData?.mediumUrl,
+                metaData?.largeUrl,
+                tmpDownloadUrl].compactMap({$0}).first
+    }
+    
     var uploadContentType: String {
         if let contentType = mimeType {
             return contentType
