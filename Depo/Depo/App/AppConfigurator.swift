@@ -85,7 +85,7 @@ final class AppConfigurator {
         if tokenStorage.isClearTokens {
             debugLog("clearTokensIfNeed")
             tokenStorage.isClearTokens = false
-            tokenStorage.clearTokens(calledMethod: "clearTokensIfNeed")
+            tokenStorage.clearTokens()
         }
     }
     

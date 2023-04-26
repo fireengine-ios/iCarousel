@@ -53,7 +53,7 @@ final class WidgetServerService {
         if WidgetService.shared.isAppFirstLaunch == true {
             DebugLogService.debugLog("WIDGET: checkFirstLaunch isAppFirstLaunch true, clearing tokens")
             WidgetService.shared.isAppFirstLaunch = false
-            tokenStorage.clearTokens(calledMethod: "checkFirstLaunch")
+            tokenStorage.clearTokens()
         }
     }
 

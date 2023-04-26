@@ -100,7 +100,7 @@ final class ForYouTableViewCell: UITableViewCell {
             showEmptyDataViewIfNeeded(isShow: false)
         case .collages:            
             self.wrapData = model as? [WrapData] ?? []
-            wrapData.append(additionalWrapData())
+            //wrapData.append(additionalWrapData())
             showEmptyDataViewIfNeeded(isShow: wrapData.isEmpty)
         default:
             self.wrapData = model as? [WrapData] ?? []
