@@ -67,8 +67,7 @@ final class TokenKeychainStorage: TokenStorage {
         savedAccessToken = accessToken
     }
     
-    func clearTokens(calledMethod: String) {
-        //debugLog("EXTRA LOG Clear Tokens : \(calledMethod)")
+    func clearTokens() {
         accessToken = nil
         refreshToken = nil
         isRememberMe = false
