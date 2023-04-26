@@ -66,7 +66,8 @@ enum SettingsTypes: Int {
         cells.append(contentsOf: SettingsTypes.defaultSectionTwoTypes)
         cells.append(.permissions)
         
-        if ((Device.locale == "tr" || Device.locale == "en") && !RouteRequests.isBillo) {
+        //if ((Device.locale == "tr" || Device.locale == "en") && !RouteRequests.isBillo) {
+        if (!RouteRequests.isBillo) {
             if isChatbotShown && !defaultSectionThreeTypes.contains(chatbot) {
                 SettingsTypes.defaultSectionThreeTypes.insert(chatbot, at: 1)
             } else if !isChatbotShown && defaultSectionThreeTypes.contains(chatbot){
