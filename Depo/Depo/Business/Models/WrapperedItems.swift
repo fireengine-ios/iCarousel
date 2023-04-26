@@ -617,7 +617,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     }
     
     var getAnyValidRemoteUrl: URL? {
-        if case .remoteUrl(let url) = patchToPreview, let url = url {
+        if case .remoteUrl(let url) = patchToPreview {
             return url
         }
         
