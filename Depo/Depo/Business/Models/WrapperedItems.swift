@@ -624,6 +624,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         return [metaData?.smalURl,
                 metaData?.mediumUrl,
                 metaData?.largeUrl,
+                metaData?.videoPreviewURL,
                 tmpDownloadUrl].compactMap({$0}).first
     }
     
