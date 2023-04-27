@@ -1454,7 +1454,7 @@
 "delete_dublicate_package_description" = "+Fshirja e kontakteve të përsëritura në Telefonin tënd";
 "premium_user_package_description" = "+ Analiza e Pafund ‘’PhotoPick’’";
 "bundle_package_addon_type" = "Hapësira e ruajtjes + Premium";
-"storage_only_package_addon_type" = "Vetëm  hapësira e ruajtjes";
+"storage_only_package_addon_type" = "Arkiva";
 "settings_userinfo_name_surname" = "Emri - Mbiemri";
 "settings_userinfo_email" = "E-Mail";
 "settings_userinfo_phone" = "Numri i telefonit";
@@ -2007,7 +2007,7 @@
 "save_to_my_lifebox_full_storage_body" = "Mund të lironi hapësirë në këtë iPhone duke menaxhuar zonën tuaj të ruajtjes te Cilësimet.";
 "places_map_title" = "Harta";
 "map_location_detail_header" = "Fotografitë Në Këtë Vendndodhje";
-"beeline_feature_cancel_TC" = "Beeline";
+"beeline_feature_cancel_TC" = "Cellfie";
 "security_popup_body" = "Ju lutemi vendosni të paktën 1 fushë në mënyrë që të mund të rikuperoni lehtësisht llogarinë tuaj në rast se harroni fjalëkalimin tuaj";
 "security_popup_header" = "Vendosni E-mailin tuaj të Rimëkëmbjes ose Pyetjen e Sigurisë";
 "save_to_my_billo" = "Ruaj Në Billo";
@@ -2070,7 +2070,9 @@ then {11,99 TRY/Month}*/
 "title_paycell_subtitle" = "Bilanci i Paycell";
 "title_paycell_friends" = "Blerësit e Paketave (%d Persona)";
 "paycell_share_message" = "Unë iu bashkua Programit të Ambasadorit të Markës lifebox. Mund të merrni një paketë Premium lifebox 6-mujore 250 GB me çmim të reduktuar duke klikuar në lidhjen më poshtë. Mos e humbisni rastin 😊";
-"beeline_cancel_TC" = "Ju mund të anuloni ose menaxhoni abonimin tuaj të lifebox nga aplikacioni Beeline.";
+
+/*Fuzzy*/
+"beeline_cancel_TC" = "Ju mund të anuloni ose menaxhoni abonimin tuaj të lifebox nga aplikacioni Cellfie.";
 "foryou_throwback" = "Kujtimet e Tua";
 "foryou_myalbums" = "Albumet e Mia";
 "foryou_myanimations" = "Animacionet e Mia";
@@ -2133,4 +2135,4 @@ then {11,99 TRY/Month}*/
 
 /*2'li Kolajlar*/
 "create_collage_dual" = "";
-"create_collage" = "";
+"create_collage" = "Krijo Kolazh";

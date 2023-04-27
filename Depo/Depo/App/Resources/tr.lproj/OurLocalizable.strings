@@ -1421,25 +1421,25 @@
 "delete_dublicate_package_description" = "+ Telefonundaki Tekrarlayan Kontakları Silme";
 "premium_user_package_description" = "+ Sınırsız PhotoPick Analizi";
 "bundle_package_addon_type" = "Saklama Alanı + Premium";
-"storage_only_package_addon_type" = "Sadece Saklama Alanı";
+"storage_only_package_addon_type" = "Saklama Alanı";
 "settings_userinfo_name_surname" = "Ad Soyad";
 "settings_userinfo_email" = "E-posta";
 "settings_userinfo_phone" = "Telefon Numarası";
 "settings_action_sheet_profile_details" = "Profil detayları";
 "settings_action_sheet_edit_profile_photo" = "Profil fotoğrafını güncelle";
-"original_сopy_package_description" = "+ Orjinal Kalitede Saklama";
+"original_сopy_package_description" = "+ Orijinal Kalitede Saklama";
 "become_premium_navbar_title" = "Sana Özel Teklifimiz!";
 "become_premium_header_default_title" = "Sana özel bir teklifimiz var!";
-"become_premium_header_default_subtitle" = "Anılarını orjinal kalitede yedeklemer ister misin? Belki de fotoğraflarını ve rehberini organize etmek için yardıma ihtiyacın var. Premium abone ol, lifebox hayatını kolaylaştırsın. Premium özellikleri ve sana özel tekliflerimizi incele.";
+"become_premium_header_default_subtitle" = "Anılarını orijinal kalitede yedeklemek ister misin? Belki de fotoğraflarını ve rehberini organize etmek için yardıma ihtiyacın var. Premium abone ol, lifebox hayatını kolaylaştırsın. Premium özellikleri ve sana özel tekliflerimizi incele.";
 "become_premium_header_people_title" = "Sana özel bir teklifimiz var!";
-"become_premium_header_people_subtitle" = "Anılarını orjinal kalitede yedeklemer ister misin? Belki de fotoğraflarını ve rehberini organize etmek için yardıma ihtiyacın var. Premium abone ol, lifebox hayatını kolaylaştırsın. Premium özellikleri ve sana özel tekliflerimizi incele.";
+"become_premium_header_people_subtitle" = "Anılarını orijinal kalitede yedeklemek ister misin? Belki de fotoğraflarını ve rehberini organize etmek için yardıma ihtiyacın var. Premium abone ol, lifebox hayatını kolaylaştırsın. Premium özellikleri ve sana özel tekliflerimizi incele.";
 "become_premium_header_places_title" = "Sana özel bir teklifimiz var!";
-"become_premium_header_places_subtitle" = "Anılarını orjinal kalitede yedeklemer ister misin? Belki de fotoğraflarını ve rehberini organize etmek için yardıma ihtiyacın var. Premium abone ol, lifebox hayatını kolaylaştırsın. Premium özellikleri ve sana özel tekliflerimizi incele.";
+"become_premium_header_places_subtitle" = "Anılarını orijinal kalitede yedeklemek ister misin? Belki de fotoğraflarını ve rehberini organize etmek için yardıma ihtiyacın var. Premium abone ol, lifebox hayatını kolaylaştırsın. Premium özellikleri ve sana özel tekliflerimizi incele.";
 "become_premium_header_things_title" = "Sana özel bir teklifimiz var!";
-"become_premium_header_things_subtitle" = "Anılarını orjinal kalitede yedeklemer ister misin? Belki de fotoğraflarını ve rehberini organize etmek için yardıma ihtiyacın var. Premium abone ol, lifebox hayatını kolaylaştırsın. Premium özellikleri ve sana özel tekliflerimizi incele.";
+"become_premium_header_things_subtitle" = "Anılarını orijinal kalitede yedeklemek ister misin? Belki de fotoğraflarını ve rehberini organize etmek için yardıma ihtiyacın var. Premium abone ol, lifebox hayatını kolaylaştırsın. Premium özellikleri ve sana özel tekliflerimizi incele.";
 "become_premium_header_contact_sync_title" = "Sana özel bir teklifimiz var!";
-"become_premium_header_contact_sync_subtitle" = "Anılarını orjinal kalitede yedeklemer ister misin? Belki de fotoğraflarını ve rehberini organize etmek için yardıma ihtiyacın var. Premium abone ol, lifebox hayatını kolaylaştırsın. Premium özellikleri ve sana özel tekliflerimizi incele.";
-"become_premium_description" = "Orjinal Kalitede Saklama\nSınırsız Yüz&Nesne&Yer Tanıma\nTelefondaki Tekrarlayan Kontakları Silme\nSınırsız PhotoPick Analiz";
+"become_premium_header_contact_sync_subtitle" = "Anılarını orijinal kalitede yedeklemek ister misin? Belki de fotoğraflarını ve rehberini organize etmek için yardıma ihtiyacın var. Premium abone ol, lifebox hayatını kolaylaştırsın. Premium özellikleri ve sana özel tekliflerimizi incele.";
+"become_premium_description" = "Orijinal Kalitede Saklama\nSınırsız Yüz&Nesne&Yer Tanıma\nTelefondaki Tekrarlayan Kontakları Silme\nSınırsız PhotoPick Analiz";
 "become_premium_or_text" = "VEYA ek saklama alanı alarak Premium üyeliğe ÜCRETSİZ sahip ol!";
 "become_premium_see_all_packages" = "Tüm Abonelikleri İncele";
 "dialog_header_contact_sync_vcf_file_upload_error" = "lifebox saklama alanı limitine ulaştın!";
@@ -1986,7 +1986,7 @@
 "save_to_my_lifebox_full_storage_body" = "Saklama alanınızı Ayarlar'da yöneterek bu iPhone'da yer açabilirsiniz.";
 "places_map_title" = "Harita";
 "map_location_detail_header" = "Bu Konumdaki Fotoğraflar";
-"beeline_feature_cancel_TC" = "Beeline";
+"beeline_feature_cancel_TC" = "Cellfie";
 "security_popup_body" = "Şifreni unutman halinde hesabını kolayca kurtarabilmek için lütfen en az 1 alanı gir";
 "security_popup_header" = "Kurtarma E-postanı ya da Güvenlik Sorunu Belirle";
 "save_to_my_billo" = "Billo'ya Kaydet";
@@ -2051,7 +2051,9 @@ then {11,99 TRY/Month}*/
 "title_paycell_subtitle" = "Paycell Bakiyesi";
 "title_paycell_friends" = "Paket Satın Alanlar (%d Kişi)";
 "paycell_share_message" = "lifebox Marka Elçisi Programına dahil oldum. Programa özel lifebox 6 aylık 250GB Premium paketine aşağıdaki linke tıklayarak indirimli fiyattan sahip olabilirsin. Fırsatı kaçırma 😊";
-"beeline_cancel_TC" = "Lifebox aboneliğinizi Beeline uygulamasından iptal edebilir veya yönetebilirsiniz.";
+
+/*Fuzzy*/
+"beeline_cancel_TC" = "Lifebox aboneliğinizi Cellfie uygulamasından iptal edebilir veya yönetebilirsiniz.";
 "foryou_throwback" = "Anılar";
 "foryou_myalbums" = "Albümlerim";
 "foryou_myanimations" = "Animasyonlarım";

@@ -1411,7 +1411,7 @@
 "delete_dublicate_package_description" = "+ Șterge Contactele Repetate Din Agenda Telefonică";
 "premium_user_package_description" = "+ Analiză Nelimitată PhotoPick";
 "bundle_package_addon_type" = "Spațiu de Stocare + Premium";
-"storage_only_package_addon_type" = "Numai Spațiu de Stocare";
+"storage_only_package_addon_type" = "Spațiu de stocare";
 "settings_userinfo_name_surname" = "Prenume Nume";
 "settings_userinfo_email" = "E-mail";
 "settings_userinfo_phone" = "Numărul de Telefon";
@@ -1964,7 +1964,7 @@
 "save_to_my_lifebox_full_storage_body" = "Puteți elibera spațiu pe acest iPhone gestionând zona de stocare în Setări.";
 "places_map_title" = "Hartă";
 "map_location_detail_header" = "Fotografii în Acest Loc";
-"beeline_feature_cancel_TC" = "Beeline";
+"beeline_feature_cancel_TC" = "Cellfie";
 "security_popup_body" = "Introduceți cel puțin 1 câmp pentru a vă recupera contul cu ușurință atunci când ați uitat parola";
 "security_popup_header" = "Setați E-Mailul de Recuperare sau Întrebarea de Securitate";
 "save_to_my_billo" = "Salvați în Billo";
@@ -2027,7 +2027,9 @@ then {11,99 TRY/Month}*/
 "title_paycell_subtitle" = "Soldul Paysell";
 "title_paycell_friends" = "Persoane Care Au Cumpărat Pachetul (%d Persoane)";
 "paycell_share_message" = "M-am alăturat Programului de Ambasador al Mărcii lifebox. Puteți obține un pachet lifebox Premium de 6 luni de 250 GB la un preț redus făcând clic pe linkul de mai jos. Nu rata ocazia 😊";
-"beeline_cancel_TC" = "Vă puteți anula sau gestiona abonamentul lifebox din aplicația Beeline.";
+
+/*Fuzzy*/
+"beeline_cancel_TC" = "Vă puteți anula sau gestiona abonamentul lifebox din aplicația Cellfie.";
 "foryou_throwback" = "Amintirile";
 "foryou_myalbums" = "Albumele Mele";
 "foryou_myanimations" = "Animațiile Mele";
@@ -2090,4 +2092,4 @@ then {11,99 TRY/Month}*/
 
 /*2'li Kolajlar*/
 "create_collage_dual" = "";
-"create_collage" = "";
+"create_collage" = "Creați Colaj";

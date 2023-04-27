@@ -1411,7 +1411,7 @@
 "delete_dublicate_package_description" = "+ Sich wiederholende Kontakte auf dem Telefon löschen";
 "premium_user_package_description" = "+ Unbegrenzte PhotoPick Analyse";
 "bundle_package_addon_type" = "Speicherplatz + Premium";
-"storage_only_package_addon_type" = "Nur Speicherplatz";
+"storage_only_package_addon_type" = "Speicherort";
 "settings_userinfo_name_surname" = "Vorname – Nachname";
 "settings_userinfo_email" = "E-Mail";
 "settings_userinfo_phone" = "Telefonnummer";
@@ -1964,7 +1964,7 @@
 "save_to_my_lifebox_full_storage_body" = "Sie können Speicherplatz auf diesem iPhone freigeben, indem Sie Ihren Speicherplatz in den Einstellungen verwalten.";
 "places_map_title" = "Karte";
 "map_location_detail_header" = "Fotos an Diesem Standort";
-"beeline_feature_cancel_TC" = "Beeline";
+"beeline_feature_cancel_TC" = "Cellfie";
 "security_popup_body" = "Bitte geben Sie mindestens 1 Feld ein, um Ihr Konto einfach wiederherzustellen, wenn Sie Ihr Passwort vergessen haben";
 "security_popup_header" = "Legen Sie Ihre Wiederherstellungs-E-Mail oder Sicherheitsfrage fest";
 "save_to_my_billo" = "In Mein Billo Speichern";
@@ -2027,7 +2027,9 @@ then {11,99 TRY/Month}*/
 "title_paycell_subtitle" = "Paycell-Guthaben";
 "title_paycell_friends" = "Paketkäufer (%d Personen)";
 "paycell_share_message" = "Ich bin dem lifebox Brand Ambassador Program beigetreten. Sie können das programmspezifische lifebox 6-Monats-250-GB Premium-Paket zu einem ermäßigten Preis erwerben, indem Sie auf den folgenden Link klicken. Verpassen Sie es nicht 😊";
-"beeline_cancel_TC" = "Sie können Ihr Abonnement von lifebox über die Beeline-App kündigen oder verwalten.";
+
+/*Fuzzy*/
+"beeline_cancel_TC" = "Sie können Ihr Abonnement von lifebox über die Cellfie-App kündigen oder verwalten.";
 "foryou_throwback" = "Rückblick";
 "foryou_myalbums" = "Meine Alben";
 "foryou_myanimations" = "Meine Animationen";
@@ -2090,4 +2092,4 @@ then {11,99 TRY/Month}*/
 
 /*2'li Kolajlar*/
 "create_collage_dual" = "";
-"create_collage" = "";
+"create_collage" = "Collage Erstellen";
