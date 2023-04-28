@@ -131,11 +131,27 @@ final class SubscriptionOfferView: UIView, NibInit {
         func combined(_ price: String, _ period: String) -> String {
             [price, period].joined(separator: "/")
         }
+        
         return String(
             format: localized(.iapIntroOfferFreeTrial),
             discountTotalPeriod,
             combined(price, period)
         )
+    }
+    
+    func localizedOfferPeriod(_ offerPeriod: String) -> String {
+        if offerPeriod.contains("year") {
+            return TextConstants.packagePeriodYear
+        } else if offerPeriod.contains("sixmonth") {
+            return String(format: TextConstants.packagePeriodXMonth, 6)
+        } else if offerPeriod.contains("month") {
+            return TextConstants.packagePeriodMonth
+        } else if offerPeriod.contains("week") {
+            return TextConstants.packagePeriodWeek
+        } else if offerPeriod.contains("day") {
+            return TextConstants.packagePeriodDay
+        }
+        return offerPeriod
     }
     
     func configure(with plan: SubscriptionPlan,
@@ -154,7 +170,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         } else {
             if let model = plan.model as? PackageModelResponse, model.inAppPurchaseId == "v1_100GB_month" {
                 let period = plan.period ?? ""
-                priceLabel.text = formattedStringPrice(discountTotalPeriod: "2 \(period)", price: "\(model.price ?? 0)", period: period)
+                priceLabel.text = formattedStringPrice(discountTotalPeriod: "2 \(localizedOfferPeriod(period.lowercased()))", price: "\(model.price ?? 0)", period: localizedOfferPeriod(period.lowercased()))
                 priceLabel.font = priceIntroFont
                 priceLabel.textAlignment = .center
             } else {
