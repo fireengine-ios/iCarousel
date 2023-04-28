@@ -127,6 +127,17 @@ final class SubscriptionOfferView: UIView, NibInit {
         }
     }
     
+    private func formattedStringPrice(discountTotalPeriod: String, price: String, period: String) -> String {
+        func combined(_ price: String, _ period: String) -> String {
+            [price, period].joined(separator: "/")
+        }
+        return String(
+            format: localized(.iapIntroOfferFreeTrial),
+            discountTotalPeriod,
+            combined(price, period)
+        )
+    }
+    
     func configure(with plan: SubscriptionPlan,
                    delegate: SubscriptionOfferViewDelegate,
                    index: Int,
@@ -141,7 +152,14 @@ final class SubscriptionOfferView: UIView, NibInit {
             priceLabel.font = priceIntroFont
             priceLabel.textAlignment = .center
         } else {
-            priceLabel.text = plan.price
+            if let model = plan.model as? PackageModelResponse, model.inAppPurchaseId == "v1_100GB_month" {
+                let period = plan.period ?? ""
+                priceLabel.text = formattedStringPrice(discountTotalPeriod: "2 \(period)", price: "\(model.price ?? 0)", period: period)
+                priceLabel.font = priceIntroFont
+                priceLabel.textAlignment = .center
+            } else {
+                priceLabel.text = plan.price
+            }
         }
         featureView.purchaseButton.isHidden = hasIntroPrice
         detailsView.isHidden = needHidePurchaseInfo
