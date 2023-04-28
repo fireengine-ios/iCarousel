@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-class ForYouCollectionViewCell: UICollectionViewCell {
+final class ForYouCollectionViewCell: UICollectionViewCell {
     
     private var cellImageManager: CellImageManager?
     
@@ -26,11 +26,7 @@ class ForYouCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configureWithLocalImage() {
-        thumbnailImage.image = Image.createCollageThumbnail.image
-    }
-    
-    func setImage(image: UIImage?, animated: Bool) {
+    private func setImage(image: UIImage?, animated: Bool) {
         thumbnailImage.contentMode = .scaleAspectFill
         if animated {
             thumbnailImage.layer.opacity = NumericConstants.numberCellDefaultOpacity
@@ -44,7 +40,7 @@ class ForYouCollectionViewCell: UICollectionViewCell {
     }
     
     
-    func setImageRecover(with url: URL) {
+    private func setImageRecover(with url: URL) {
         let cacheKey = url.byTrimmingQuery
         cellImageManager = CellImageManager.instance(by: cacheKey)
         let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, shouldBeBlurred, uniqueId in
@@ -58,7 +54,7 @@ class ForYouCollectionViewCell: UICollectionViewCell {
         cellImageManager?.loadImage(thumbnailUrl: nil, url: url, isOwner: true, completionBlock: imageSetBlock)
     }
     
-    func setImage(with url: URL) {
+    private func setImage(with url: URL) {
         let cacheKey = url.byTrimmingQuery
         cellImageManager = CellImageManager.instance(by: cacheKey)
         let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, shouldBeBlurred, uniqueId in

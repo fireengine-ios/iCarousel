@@ -99,7 +99,7 @@ class WebViewPopup: BasePopUpController {
     }
     
     @objc private func closeOnTap() {
-        sendDelete()
+        sendRead()
         close()
     }
     
@@ -241,8 +241,8 @@ class WebViewPopup: BasePopUpController {
         closeButton.isHidden = true
     }
     
-    private func sendDelete() {
-        service.delete(with: [id]) { value in
+    private func sendRead() {
+        service.read(with: String(id)) { value in
             debugLog("WebViewPopup - Close - Success")
         } fail: { value in
             debugLog("WebViewPopup - Close - Fail")
