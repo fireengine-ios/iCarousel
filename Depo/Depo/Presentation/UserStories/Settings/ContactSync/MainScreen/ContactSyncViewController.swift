@@ -71,7 +71,7 @@ final class ContactSyncViewController: BaseViewController, NibInit {
         super.viewDidLoad()
         
         trackScreen()
-        floatingButtonsArray = [.takePhoto, .upload, .createAStory, .newFolder]
+        floatingButtonsArray = [.takePhoto, .upload, .createAStory]
 
         if tabBarIsVisible {
             needToShowTabBar = true

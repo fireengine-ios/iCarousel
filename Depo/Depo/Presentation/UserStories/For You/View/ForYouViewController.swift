@@ -31,6 +31,12 @@ final class ForYouViewController: BaseViewController {
         output.checkFIRisAllowed()
         output.viewIsReady()
         setupRefresher()
+        NotificationCenter.default.addObserver(self,selector: #selector(getUpdateDataHiddenFav),name: .foryouGetUpdateData, object: nil)
+    }
+    
+    @objc func getUpdateDataHiddenFav(){
+        output.getUpdateData(for: ForYouSections.hidden)
+        output.getUpdateData(for: ForYouSections.favorites)
     }
     
     private func setupRefresher() {
@@ -52,8 +58,6 @@ final class ForYouViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let currentSection = output.currentSection else {
-            output.getUpdateData(for: ForYouSections.hidden)
-            output.getUpdateData(for: ForYouSections.favorites)
             return
         }
         output.getUpdateData(for: currentSection)

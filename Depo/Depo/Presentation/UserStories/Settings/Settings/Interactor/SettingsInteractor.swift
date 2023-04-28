@@ -158,7 +158,13 @@ final class SettingsInteractor: SettingsInteractorInput {
             showMenu = true
             showChatbotOrFeedback = false
         }
-        UserDefaults.standard.set(showChatbotOrFeedback, forKey: "showChatbotOrFeedback")
+        
+        if Device.locale == "tr" || Device.locale == "en" {
+            UserDefaults.standard.set(showChatbotOrFeedback, forKey: "showChatbotOrFeedback")
+        } else {
+            UserDefaults.standard.set(false, forKey: "showChatbotOrFeedback")
+        }
+        
         output.cellsDataForSettings(isChatbotShown: showMenu)
         
         //output.cellsDataForSettings(isChatbotShown: isChatMenuEnabled)

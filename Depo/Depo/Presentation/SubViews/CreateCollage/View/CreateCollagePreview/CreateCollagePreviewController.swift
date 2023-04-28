@@ -62,6 +62,13 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
     var draggedTag = Int()
     var draggedImage = UIImage()
     var lastRotation: CGFloat = 0
+    private var contentviewBackGroundImage = UIImage()
+    private var viewFrames = [CGRect]()
+    private var defaultW = Double()
+    private var defaultH = Double()
+    private var beforeMinPinch = 0
+    private var afterMinPinch = 0
+    private var scrollViewViewFrame = [CGRect]()
     
     let uploadService = UploadService()
     
@@ -85,11 +92,21 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
         
         bottomBarManager.setup()
         setLayout()
-        createImageView(collageTemplate: collageTemplate!)
         view.backgroundColor = AppColor.background.color
         setTextFieldInNavigationBar(withDelegate: self)
         isHiddenControl()
         keyboardDoneButton()
+        
+        let imagePathUrl = URL(string: collageTemplate!.collageImagePath)!
+        SDWebImageDownloader.shared().downloadImage(with: imagePathUrl) { [weak self] image, _, _, _ in
+            let scaledImageSize = CGSize(width: (self?.contentView.frame.width)!, height: (self?.contentView.frame.height)!)
+            let renderer = UIGraphicsImageRenderer(size: scaledImageSize)
+            let scaledImage = renderer.image { _ in
+                image!.draw(in: CGRect(origin: .zero, size: scaledImageSize))
+            }
+            self?.contentviewBackGroundImage = scaledImage
+            self?.createImageView(collageTemplate: (self?.collageTemplate!)!)
+        }
     }
     
     private func isHiddenControl() {
@@ -121,7 +138,7 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
     
     private func createImageView(collageTemplate: CollageTemplateElement) {
         let shapeDetails = collageTemplate.shapeDetails.sorted { $0.id < $1.id }
-
+        viewFrames.removeAll()
         for i in 0...shapeDetails.count - 1 {
             if shapeDetails[i].type == "RECTANGLE" {
                 let imageWidth = Double(shapeDetails[i].shapeCoordinates[1].x) - Double(shapeDetails[i].shapeCoordinates[0].x)
@@ -130,7 +147,8 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
                 let yFirst = Double(shapeDetails[i].shapeCoordinates[0].y)
                 let xStart = (xFirst / xRatioConstant)
                 let yStart = (yFirst / xRatioConstant)
-                let viewFrame = CGRect(x: xStart, y: yStart, width: imageWidth / xRatioConstant, height: imageHeight / xRatioConstant)
+                let viewFrame = CGRect(x: xStart, y: yStart, width: (imageWidth / xRatioConstant) + 1, height: (imageHeight / xRatioConstant) + 1)
+                viewFrames.append(viewFrame)
                 switch photoSelectType {
                 case .newPhotoSelection:
                     let imageView = UIImageView(frame: viewFrame)
@@ -143,6 +161,7 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
                     imageView.image = Image.iconAddUnselect.image
                     imageView.layer.borderWidth = 1.0
                     imageView.layer.borderColor = AppColor.darkBackground.cgColor
+                    contentView.backgroundColor = UIColor(patternImage: contentviewBackGroundImage)
                     contentView.addSubview(imageView)
                 case .changePhotoSelection:
                     let scrollView = UIScrollView()
@@ -172,6 +191,7 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
                     imageView.clipsToBounds = true
                     imageView.layer.borderWidth = 1.0
                     imageView.layer.borderColor = AppColor.darkBackground.cgColor
+                    contentView.backgroundColor = UIColor(patternImage: contentviewBackGroundImage)
                     contentView.addSubview(imageView)
                 case .changePhotoSelection:
                     let scrollView = UIScrollView()
@@ -191,46 +211,59 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
     }
     
     private func createImageThumbnail(scrollView: UIScrollView, imageView: UIImageView, viewFrame: CGRect, index: Int, shapeType: String) {
+        scrollViewViewFrame.append(viewFrame)
         scrollView.frame = viewFrame
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
         contentView.addSubview(scrollView)
         
         let imageUrl = selectedItems[index].metadata?.mediumUrl
-        imageView.sd_setImage(with: imageUrl)
-        imageView.frame = CGRect(x: 0, y: 0, width: scrollView.frame.size.width, height: scrollView.frame.size.height)
-        imageView.tag = index
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.isUserInteractionEnabled = true
-        scrollView.addSubview(imageView)
-        scrollView.contentSize = imageView.frame.size
-        
-        if shapeType == "CIRCLE" {
-            scrollView.layer.cornerRadius = scrollView.frame.size.width / 2
-            scrollView.clipsToBounds = true
-            imageView.layer.cornerRadius = imageView.frame.size.width / 2
+        imageView.sd_setImage(with: imageUrl) { (image, error, cache, url) in
+            if self.selectedItems.count - 1 == index {
+                self.contentView.backgroundColor = UIColor(patternImage: self.contentviewBackGroundImage)
+            }
+            
+            imageView.frame = CGRect(x: 0, y: 0, width: image?.size.width ?? 0, height: image?.size.height ?? 0)
+            imageView.tag = index
+            imageView.contentMode = .scaleAspectFill
             imageView.clipsToBounds = true
+            imageView.isUserInteractionEnabled = true
+            scrollView.addSubview(imageView)
+            scrollView.contentSize = imageView.image?.size ?? CGSize(width: 0, height: 0)
+            self.viewFrames.append(imageView.frame)
+            
+            if shapeType == "CIRCLE" {
+                scrollView.layer.cornerRadius = scrollView.frame.size.width / 2
+                scrollView.clipsToBounds = true
+                imageView.layer.cornerRadius = imageView.frame.size.width / 2
+                imageView.clipsToBounds = true
+            }
+            
+            let centerOffsetX = (scrollView.contentSize.width - scrollView.frame.size.width) / 2
+            let centerOffsetY = (scrollView.contentSize.height - scrollView.frame.size.height) / 2
+            let centerPoint = CGPoint(x: centerOffsetX, y: centerOffsetY)
+            scrollView.setContentOffset(centerPoint, animated: true)
+            
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapped(_:)))
+            tapGesture.delegate = self
+            imageView.addGestureRecognizer(tapGesture)
+
+            let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinch(_:)))
+            pinchGesture.delegate = self
+            imageView.addGestureRecognizer(pinchGesture)
+
+            let rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(self.rotate(_:)))
+            rotationGesture.delegate = self
+            imageView.addGestureRecognizer(rotationGesture)
+            
+            let dragInteraction = UIDragInteraction(delegate: self)
+            dragInteraction.isEnabled = true
+            imageView.addInteraction(dragInteraction)
+
+            let dropInteraction = UIDropInteraction(delegate: self)
+            imageView.addInteraction(dropInteraction)
         }
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapped(_:)))
-        tapGesture.delegate = self
-        imageView.addGestureRecognizer(tapGesture)
-
-        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinch(_:)))
-        pinchGesture.delegate = self
-        imageView.addGestureRecognizer(pinchGesture)
-
-        let rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(rotate(_:)))
-        rotationGesture.delegate = self
-        imageView.addGestureRecognizer(rotationGesture)
-        
-        let dragInteraction = UIDragInteraction(delegate: self)
-        dragInteraction.isEnabled = true
-        imageView.addInteraction(dragInteraction)
-
-        let dropInteraction = UIDropInteraction(delegate: self)
-        imageView.addInteraction(dropInteraction)
     }
     
     private func saveCollage() {
@@ -299,24 +332,71 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
 }
 
 extension CreateCollagePreviewController: UIGestureRecognizerDelegate {
+    func setRatio(imageView: UIImageView, viewFrame: CGRect) -> CGRect {
+        var returnFrame: CGRect = imageView.frame
+        let imageViewWidth = imageView.frame.width
+        let imageViewHeight = imageView.frame.height
+        
+        if viewFrame.width >= viewFrame.height {
+            if imageViewWidth <= viewFrame.width {
+                let aspectRatio = viewFrame.width / imageViewWidth
+                returnFrame = CGRect(x: 0, y: 0, width: viewFrame.width, height: imageViewHeight * aspectRatio)
+                defaultW = returnFrame.width
+                defaultH = returnFrame.height
+                beforeMinPinch = 1
+            }
+        } else {
+            if imageViewHeight <= viewFrame.height {
+                let aspectRatio = viewFrame.height / imageViewHeight
+                returnFrame = CGRect(x: 0, y: 0, width: imageViewWidth * aspectRatio, height: viewFrame.height)
+                defaultW = returnFrame.width
+                defaultH = returnFrame.height
+                beforeMinPinch = 1
+            }
+        }
+        
+        return returnFrame
+    }
+    
     @objc func pinch(_ sender: UIPinchGestureRecognizer) {
         guard let view = sender.view else { return }
         view.transform = view.transform.scaledBy(x: sender.scale, y: sender.scale)
         sender.scale = 1
         
-        let defaultFrame = contentView.subviews[sender.view!.tag].frame
-        
         if sender.state == .ended {
             let imageView = contentView.subviews[sender.view!.tag].subviews[0] as! UIImageView
             let scrollView = contentView.subviews[sender.view!.tag] as! UIScrollView
             
-            if defaultFrame.width >= imageView.frame.size.width || defaultFrame.height >= imageView.frame.size.height {
-                imageView.frame = defaultFrame
-            }
+            imageView.frame = setRatio(imageView: imageView, viewFrame: scrollViewViewFrame[sender.view!.tag])
             
             let x = imageView.frame.origin.x
             let y = imageView.frame.origin.y
-            scrollView.contentInset = UIEdgeInsets(top: -y, left: -x, bottom: -y, right: -x)
+            let scrollContentSizeWidth = scrollView.contentSize.width
+            let scrollContentSizeHeight = scrollView.contentSize.height
+            let imageWidth = imageView.frame.width
+            let imageHeight = imageView.frame.height
+            let bottom = scrollContentSizeHeight - imageHeight
+            let right = scrollContentSizeWidth - imageWidth
+            var bottom1 = Double()
+            var right1 = Double()
+            
+            if beforeMinPinch == 0 && afterMinPinch == 0 {
+                scrollView.contentInset = UIEdgeInsets(top: -y, left: -x, bottom: -y, right: -x)
+                return
+            }
+            
+            if beforeMinPinch == 1 {
+                scrollView.contentInset = UIEdgeInsets(top: -y, left: -x, bottom: -bottom, right: -right)
+                beforeMinPinch = 0
+                afterMinPinch = 1
+                return
+            }
+            
+            if beforeMinPinch == 0 && afterMinPinch == 1 {
+                bottom1 = scrollContentSizeHeight - defaultH
+                right1 = scrollContentSizeWidth - defaultW
+                scrollView.contentInset = UIEdgeInsets(top: -y, left: -x, bottom: -y - bottom1, right: -x - right1)
+            }
         }
     }
 
@@ -361,6 +441,7 @@ extension CreateCollagePreviewController: UIGestureRecognizerDelegate {
     }
     
     @objc private func doneClicked() {
+        StringConstants.collageName = navTextField?.text ?? ""
         navTextField?.endEditing(true)
     }
     
@@ -399,6 +480,15 @@ extension CreateCollagePreviewController: UITextFieldDelegate {
             navigationItem.rightBarButtonItem = nil
         }
         return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentCharacterCount = textField.text?.count ?? 0
+        if range.length + range.location > currentCharacterCount {
+            return false
+        }
+        let newLength = currentCharacterCount + string.count - range.length
+        return newLength <= 20
     }
 }
 
