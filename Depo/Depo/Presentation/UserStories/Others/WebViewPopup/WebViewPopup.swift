@@ -248,7 +248,6 @@ class WebViewPopup: BasePopUpController {
             debugLog("WebViewPopup - Close - Fail")
         }
     }
-    
     private func getHightOfLabel() -> CGFloat {
         // Subsract leadind and trailings
         let width = UIScreen.main.bounds.width - 24
