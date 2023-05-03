@@ -127,6 +127,33 @@ final class SubscriptionOfferView: UIView, NibInit {
         }
     }
     
+    private func formattedStringPrice(discountTotalPeriod: String, price: String, period: String) -> String {
+        func combined(_ price: String, _ period: String) -> String {
+            [price, period].joined(separator: "/")
+        }
+        
+        return String(
+            format: localized(.iapIntroOfferFreeTrial),
+            discountTotalPeriod,
+            combined(price, period)
+        )
+    }
+    
+    func localizedOfferPeriod(_ offerPeriod: String) -> String {
+        if offerPeriod.contains("year") {
+            return TextConstants.packagePeriodYear
+        } else if offerPeriod.contains("sixmonth") {
+            return String(format: TextConstants.packagePeriodXMonth, 6)
+        } else if offerPeriod.contains("month") {
+            return TextConstants.packagePeriodMonth
+        } else if offerPeriod.contains("week") {
+            return TextConstants.packagePeriodWeek
+        } else if offerPeriod.contains("day") {
+            return TextConstants.packagePeriodDay
+        }
+        return offerPeriod
+    }
+    
     func configure(with plan: SubscriptionPlan,
                    delegate: SubscriptionOfferViewDelegate,
                    index: Int,
@@ -141,7 +168,14 @@ final class SubscriptionOfferView: UIView, NibInit {
             priceLabel.font = priceIntroFont
             priceLabel.textAlignment = .center
         } else {
-            priceLabel.text = plan.price
+            if let model = plan.model as? PackageModelResponse, model.inAppPurchaseId == "v1_100GB_month" {
+                let period = plan.period ?? ""
+                priceLabel.text = formattedStringPrice(discountTotalPeriod: "2 \(localizedOfferPeriod(period.lowercased()))", price: "\(model.price ?? 0)", period: localizedOfferPeriod(period.lowercased()))
+                priceLabel.font = priceIntroFont
+                priceLabel.textAlignment = .center
+            } else {
+                priceLabel.text = plan.price
+            }
         }
         featureView.purchaseButton.isHidden = hasIntroPrice
         detailsView.isHidden = needHidePurchaseInfo
@@ -152,6 +186,10 @@ final class SubscriptionOfferView: UIView, NibInit {
         }
         
         updateDesign(with: plan, style: style)
+        
+        if featureView.purchaseButton.titleLabel?.text != localized(.subscriptionOfferCancelButton) {
+            featureView.purchaseButton.isHidden = false
+        }
         
         featureView.delegate = delegate
         featureView.index = index

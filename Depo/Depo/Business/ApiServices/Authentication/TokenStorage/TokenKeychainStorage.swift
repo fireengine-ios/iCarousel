@@ -54,7 +54,7 @@ final class TokenKeychainStorage: TokenStorage {
     }
     
     var isRememberMe: Bool {
-        get { return keychain.getBool(isRememberMeKey) ?? false }
+        get { return keychain.getBool(isRememberMeKey) ?? true }
         set { keychain.set(newValue, forKey: isRememberMeKey, withAccess: .accessibleAfterFirstUnlock) }
     }
     

@@ -15,7 +15,7 @@ final class CreateCollageBottomBarManager {
         style: .default,
         tintColor: AppColor.tint.color,
         unselectedItemTintColor: AppColor.label.color,
-        barTintColor: AppColor.secondaryBackground.color
+        barTintColor: AppColor.drawerBackground.color
     )
     
     private var changeConfig = EditingBarConfig(
@@ -23,7 +23,7 @@ final class CreateCollageBottomBarManager {
         style: .default,
         tintColor: AppColor.tint.color,
         unselectedItemTintColor: AppColor.label.color,
-        barTintColor: AppColor.secondaryBackground.color
+        barTintColor: AppColor.drawerBackground.color
     )
     
     var editingTabBar: BottomSelectionTabBarDrawerViewController?

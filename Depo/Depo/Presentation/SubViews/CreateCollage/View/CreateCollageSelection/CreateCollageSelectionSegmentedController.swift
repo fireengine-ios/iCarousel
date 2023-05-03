@@ -37,7 +37,7 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
     private var photoSelectType = PhotoSelectType.newPhotoSelection
     private let selectionControllerPageSize = Device.isIpad ? 200 : 100
     private var currentSelectingCount = 0
-    private let selectingLimit = 5
+    private let selectingLimit = 20
     private var selectablePhotoCount: Int = 0
     private var segmentedViewControllers: [UIViewController] = []
     private var delegates = MulticastDelegate<CreateCollageSelectionSegmentedControllerDelegate>()
@@ -45,7 +45,6 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
     private let router = RouterVC()
     private var selectedItemFromCollagePreview: SearchItemResponse?
     private var selectedItemIndexFromCollagePreview: Int = -1
-    private var totalSelectItemCount: Int = 0
     
     private lazy var albumsTabIndex: Int = {
         if let index = segmentedViewControllers.firstIndex(of: albumsVC) {
@@ -70,11 +69,14 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
     init(collageTemplate: CollageTemplateElement, items: [SearchItemResponse] = [], selectItemIndex: Int? = nil) {
         self.collageTemplate = collageTemplate
         if items.count > 0 {
+//            self.selectedItemIndexFromCollagePreview = selectItemIndex ?? 0
+//            self.selectedItems = [items[selectItemIndex ?? 0]]
+//            self.selectedItemsDefault = items
+            
             self.selectedItemIndexFromCollagePreview = selectItemIndex ?? 0
-            self.selectedItems = [items[selectItemIndex ?? 0]]
             self.selectedItemsDefault = items
+            
             selectablePhotoCount = 1
-            totalSelectItemCount = items.count
             self.photoSelectType = .changePhotoSelection
         } else {
             selectablePhotoCount = collageTemplate.shapeCount
@@ -185,12 +187,10 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
                 allDeselectItems()
                 updateTitle()
             }
-            if selectedItems.count == selectablePhotoCount {
-                dismiss(animated: true, completion: {
-                    let vc = self.router.createCollagePreview(collageTemplate: self.collageTemplate!, selectedItems: self.selectedItemsDefault)
-                    self.router.pushViewController(viewController: vc, animated: false)
-                })
-            }
+            dismiss(animated: true, completion: {
+                let vc = self.router.createCollagePreview(collageTemplate: self.collageTemplate!, selectedItems: self.selectedItemsDefault)
+                self.router.pushViewController(viewController: vc, animated: false)
+            })
         }
     }
     
@@ -249,7 +249,7 @@ extension CreateCollageSelectionSegmentedController: CreateCollagePhotoSelection
             delegates.invoke { delegate in
                 delegate.didSelectItem(item)
             }
-            selectedItems.removeAll()
+            //selectedItems.removeAll()
             selectedItems.append(item)
             selectedItemsDefault.remove(at: selectedItemIndexFromCollagePreview)
             selectedItemsDefault.insert(contentsOf: selectedItems, at: selectedItemIndexFromCollagePreview)
@@ -283,19 +283,32 @@ extension CreateCollageSelectionSegmentedController: CreateCollagePhotoSelection
     }
     
     private func updateTitle() {
-        if selectedItems.count == 0 {
-            vcView.actionButton.isHidden = true
+        switch photoSelectType {
+        case .newPhotoSelection:
+            if selectedItems.count == 0 {
+                vcView.actionButton.isHidden = true
+                vcView.selectedTextLabel.text = "\(selectedItems.count) - \(selectablePhotoCount) \(TextConstants.accessibilitySelected)"
+                return
+            }
+            vcView.actionButton.isHidden = false
             vcView.selectedTextLabel.text = "\(selectedItems.count) - \(selectablePhotoCount) \(TextConstants.accessibilitySelected)"
-            return
-        }
-        vcView.actionButton.isHidden = false
-        vcView.selectedTextLabel.text = "\(selectedItems.count) - \(selectablePhotoCount) \(TextConstants.accessibilitySelected)"
-        if selectedItems.count == selectablePhotoCount {
-            vcView.actionButton.setTitle(TextConstants.ok, for: .normal)
-            selectionState = .ended
-        } else {
-            vcView.actionButton.setTitle(TextConstants.cancel, for: .normal)
-            selectionState = .selecting
+            if selectedItems.count == selectablePhotoCount {
+                vcView.actionButton.setTitle(TextConstants.ok, for: .normal)
+                selectionState = .ended
+            } else {
+                vcView.actionButton.setTitle(TextConstants.cancel, for: .normal)
+                selectionState = .selecting
+            }
+        case .changePhotoSelection:
+            vcView.actionButton.isHidden = false
+            vcView.selectedTextLabel.text = "\(selectedItems.count) - \(selectablePhotoCount) \(TextConstants.accessibilitySelected)"
+            if selectedItems.count == selectablePhotoCount {
+                vcView.actionButton.setTitle(TextConstants.ok, for: .normal)
+                selectionState = .ended
+            } else {
+                vcView.actionButton.setTitle(TextConstants.cancel, for: .normal)
+                selectionState = .selecting
+            }
         }
     }
 }

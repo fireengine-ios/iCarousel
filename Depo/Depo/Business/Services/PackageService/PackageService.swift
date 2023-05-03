@@ -276,35 +276,61 @@ final class PackageService {
             return false
         }
         
+        func offerPeriod(for offer: Any) -> String {
+            var period: String?
+            if let offer = offer as? PackageModelResponse, let periodName = offer.period {
+                period = periodName
+            }
+            return period ?? ""
+        }
+        
         var event: AnalyticsEvent?
         
         let isTurkcellOffer = offer is PackageModelResponse
-        if let name = getOfferName(for: offer) {
-            if getOfferPremiumPurchaseStatus(for: offer) {
-                event = isTurkcellOffer ? .purchaseTurkcellPremium : .purchaseNonTurkcellPremium
-                
-            } else if name.contains("500") {
-                event = isTurkcellOffer ? .purchaseTurkcell500 : .purchaseNonTurkcell500
-            } else if name.contains("100") {
-                event = isTurkcellOffer ? .purchaseTurkcell100 : .purchaseNonTurkcell100
-                
-            } else if name.contains("250") {
-                if isSixMonthOffer(offer) {
-                    event = isTurkcellOffer ? .purchaseTurkcell250_SixMonth : .purchaseNonTurkcell250_SixMonth
-                } else if hasIntroductoryPrice(offer) {
-                    event = isTurkcellOffer ? .purchaseTurkcell250Freemium : .purchaseNonTurkcell250Freemium
-                } else {
-                    event = isTurkcellOffer ? .purchaseTurkcell250 : .purchaseNonTurkcell250
+        if offerPeriod(for: offer) == "MONTH" || offerPeriod(for: offer) == "SIXMONTH" {
+            if let name = getOfferName(for: offer) {
+                if getOfferPremiumPurchaseStatus(for: offer) {
+                    event = isTurkcellOffer ? .purchaseTurkcellPremium : .purchaseNonTurkcellPremium
+                    
+                } else if name.contains("500") {
+                    event = isTurkcellOffer ? .purchaseTurkcell500 : .purchaseNonTurkcell500
+                } else if name.contains("100") {
+                    event = isTurkcellOffer ? .purchaseTurkcell100 : .purchaseNonTurkcell100
+                    
+                } else if name.contains("250") {
+                    if isSixMonthOffer(offer) {
+                        event = isTurkcellOffer ? .purchaseTurkcell250_SixMonth : .purchaseNonTurkcell250_SixMonth
+                    } else if hasIntroductoryPrice(offer) {
+                        event = isTurkcellOffer ? .purchaseTurkcell250Freemium : .purchaseNonTurkcell250Freemium
+                    } else {
+                        event = isTurkcellOffer ? .purchaseTurkcell250 : .purchaseNonTurkcell250
+                    }
+                    
+                } else if name.contains("50") {
+                    event = isTurkcellOffer ? .purchaseTurkcell50 : .purchaseNonTurkcell50
+                    
+                } else if name.contains("2.5") || name.contains("2,5") {
+                    event = isTurkcellOffer ? .purchaseTurkcell2500 : .purchaseNonTurkcell2500
+                    
+                } else if name.contains("digital advertising package") {
+                    event = isTurkcellOffer ? .purchaseTurkcell500Advertising : .purchaseNonTurkcell500Advertising
                 }
-
-            } else if name.contains("50") {
-                event = isTurkcellOffer ? .purchaseTurkcell50 : .purchaseNonTurkcell50
-                
-            } else if name.contains("2.5") || name.contains("2,5") {
-                event = isTurkcellOffer ? .purchaseTurkcell2500 : .purchaseNonTurkcell2500
-                
-            } else if name.contains("digital advertising package") {
-                event = isTurkcellOffer ? .purchaseTurkcell500Advertising : .purchaseNonTurkcell500Advertising
+            }
+        } else if offerPeriod(for: offer) == "YEAR" {
+            if let name = getOfferName(for: offer) {
+                if getOfferPremiumPurchaseStatus(for: offer) {
+                    event = isTurkcellOffer ? .purchaseTurkcellPremium : .purchaseNonTurkcellPremium
+                } else if name.contains("500") {
+                    event = isTurkcellOffer ? .purchaseTurkcell500Year : .purchaseNonTurkcell500Year
+                }  else if name.contains("250") {
+                    event = isTurkcellOffer ? .purchaseTurkcell250Year : .purchaseNonTurkcell250Year
+                } else if name.contains("100") {
+                    event = isTurkcellOffer ? .purchaseTurkcell100Year : .purchaseNonTurkcell100Year
+                } else if name.contains("2.5") || name.contains("2,5") {
+                    event = isTurkcellOffer ? .purchaseTurkcell2500Year : .purchaseNonTurkcell2500Year
+                } else if name.contains("digital advertising package") {
+                    event = isTurkcellOffer ? .purchaseTurkcell500Advertising : .purchaseNonTurkcell500Advertising
+                }
             }
         }
         return event
