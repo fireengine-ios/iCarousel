@@ -10,7 +10,7 @@ import UIKit
 
 extension UIApplication {
     func openSubscriptions() {
-        UIApplication.shared.openSafely(URL(string: "https://apps.apple.com/account/subscriptions"))
+        UIApplication.shared.openSafely(URL(string: "itms-apps://apps.apple.com/account/subscriptions"))
     }
     
     func openSettings() {

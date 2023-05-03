@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-class ForYouCollectionViewCell: UICollectionViewCell {
+final class ForYouCollectionViewCell: UICollectionViewCell {
     
     private var cellImageManager: CellImageManager?
     
@@ -21,29 +21,12 @@ class ForYouCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with wrapData: WrapData, currentView: ForYouSections) {
-        switch wrapData.patchToPreview {
-        case .remoteUrl(let url):
-            //thumbnailImage.sd_setImage(with: url, completed: nil)
-            setImage(with: url!)
-        default:
-            break
+        if let url = wrapData.getAnyValidRemoteUrl {
+            setImage(with: url)
         }
     }
     
-    func configureForCollage(with wrapData: WrapData) {
-        if wrapData.tmpDownloadUrl != nil {
-            switch wrapData.patchToPreview {
-            case .remoteUrl(let url):
-                setImage(with: url!)
-            default:
-                break
-            }
-        } else {
-            thumbnailImage.image = Image.createCollageThumbnail.image
-        }
-    }
-    
-    func setImage(image: UIImage?, animated: Bool) {
+    private func setImage(image: UIImage?, animated: Bool) {
         thumbnailImage.contentMode = .scaleAspectFill
         if animated {
             thumbnailImage.layer.opacity = NumericConstants.numberCellDefaultOpacity
@@ -57,7 +40,7 @@ class ForYouCollectionViewCell: UICollectionViewCell {
     }
     
     
-    func setImageRecover(with url: URL) {
+    private func setImageRecover(with url: URL) {
         let cacheKey = url.byTrimmingQuery
         cellImageManager = CellImageManager.instance(by: cacheKey)
         let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, shouldBeBlurred, uniqueId in
@@ -71,7 +54,7 @@ class ForYouCollectionViewCell: UICollectionViewCell {
         cellImageManager?.loadImage(thumbnailUrl: nil, url: url, isOwner: true, completionBlock: imageSetBlock)
     }
     
-    func setImage(with url: URL) {
+    private func setImage(with url: URL) {
         let cacheKey = url.byTrimmingQuery
         cellImageManager = CellImageManager.instance(by: cacheKey)
         let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, shouldBeBlurred, uniqueId in

@@ -2006,7 +2006,7 @@
 "save_to_my_lifebox_full_storage_body" = "Puede liberar espacio en este iPhone administrando su área de almacenamiento en Configuración.";
 "places_map_title" = "Mapa";
 "map_location_detail_header" = "Fotos en Esta Ubicación";
-"beeline_feature_cancel_TC" = "Beeline";
+"beeline_feature_cancel_TC" = "Cellfie";
 "security_popup_body" = "Ingrese al menos 1 campo para recuperar su cuenta fácilmente cuando olvidó su contraseña";
 "security_popup_header" = "Configure su Correo electrónico de Recuperación o Pregunta de Seguridad";
 "save_to_my_billo" = "Guardar en Billo";
@@ -2069,7 +2069,9 @@ then {11,99 TRY/Month}*/
 "title_paycell_subtitle" = "Saldo de Paycell";
 "title_paycell_friends" = "Personas que Compraron el Paquete (%d Personas)";
 "paycell_share_message" = "Me uní al Programa de Embajadores de la Marca lifebox. Puede obtener el paquete Premium lifebox de 6 meses y 250 GB específico del programa a un precio con descuento, haciendo clic en el enlace a continuación. No te lo pierdas 😊";
-"beeline_cancel_TC" = "Puedes cancelar o gestionar tu suscripción a lifebox desde la aplicación Beeline.";
+
+/*Fuzzy*/
+"beeline_cancel_TC" = "Puedes cancelar o gestionar tu suscripción a lifebox desde la aplicación Cellfie.";
 "foryou_throwback" = "Memorias";
 "foryou_myalbums" = "Mis Álbumes";
 "foryou_myanimations" = "Mis Animaciones";

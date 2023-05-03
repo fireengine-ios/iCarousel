@@ -1986,7 +1986,7 @@
 "save_to_my_lifebox_full_storage_body" = "Saklama alanınızı Ayarlar'da yöneterek bu iPhone'da yer açabilirsiniz.";
 "places_map_title" = "Harita";
 "map_location_detail_header" = "Bu Konumdaki Fotoğraflar";
-"beeline_feature_cancel_TC" = "Beeline";
+"beeline_feature_cancel_TC" = "Cellfie";
 "security_popup_body" = "Şifreni unutman halinde hesabını kolayca kurtarabilmek için lütfen en az 1 alanı gir";
 "security_popup_header" = "Kurtarma E-postanı ya da Güvenlik Sorunu Belirle";
 "save_to_my_billo" = "Billo'ya Kaydet";
@@ -2051,7 +2051,9 @@ then {11,99 TRY/Month}*/
 "title_paycell_subtitle" = "Paycell Bakiyesi";
 "title_paycell_friends" = "Paket Satın Alanlar (%d Kişi)";
 "paycell_share_message" = "lifebox Marka Elçisi Programına dahil oldum. Programa özel lifebox 6 aylık 250GB Premium paketine aşağıdaki linke tıklayarak indirimli fiyattan sahip olabilirsin. Fırsatı kaçırma 😊";
-"beeline_cancel_TC" = "Lifebox aboneliğinizi Beeline uygulamasından iptal edebilir veya yönetebilirsiniz.";
+
+/*Fuzzy*/
+"beeline_cancel_TC" = "Lifebox aboneliğinizi Cellfie uygulamasından iptal edebilir veya yönetebilirsiniz.";
 "foryou_throwback" = "Anılar";
 "foryou_myalbums" = "Albümlerim";
 "foryou_myanimations" = "Animasyonlarım";
