@@ -193,8 +193,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         
         switch forYouControllerSection {
         case .collages:
-            //rightActions.append(createCollage)
-            rightActions.removeAll()
+            rightActions.append(createCollage)
         case .animations, .places, .hidden, .things, .favorites:
             rightActions.removeAll()
         case .albums:
