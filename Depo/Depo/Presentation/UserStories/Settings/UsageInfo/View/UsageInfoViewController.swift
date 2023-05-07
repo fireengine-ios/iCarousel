@@ -115,6 +115,24 @@ final class UsageInfoViewController: ViewController {
         }
     }
     
+    @IBOutlet weak var toggleButton: UIButton! {
+        willSet {
+            newValue.titleLabel?.font = .appFont(.medium, size: 14)
+
+            // normal
+            newValue.setTitle(TextConstants.launchCampaignCardDetail, for: .normal)
+            newValue.setTitleColor(AppColor.label.color, for: .normal)
+            newValue.setImage(Image.iconArrowDownSmall.image, for: .normal)
+            
+            // selected
+            newValue.setTitle(TextConstants.launchCampaignCardDetail, for: .selected)
+            newValue.setTitleColor(AppColor.label.color, for: .selected)
+            newValue.setImage(Image.iconArrowUpSmall.image, for: .selected)
+            
+            newValue.forceImageToRightSide()
+        }
+    }
+    
     //MARK: Vars
     private var internetDataUsages: [InternetDataUsage] = [] {
         didSet {
@@ -155,6 +173,10 @@ final class UsageInfoViewController: ViewController {
         collectionView.register(nibCell: InternetDataUsageCollectionViewCell.self)
     }
 
+    @IBAction func toggleButtonAction(_ sender: UIButton) {
+        sender.isSelected.toggle()
+    }
+    
     private func setupDesign() {
         myDataUsageLabel.isHidden = true
         collectionView.isHidden = true
@@ -232,7 +254,7 @@ extension UsageInfoViewController: UsageInfoViewInput {
                                withAnimation: false)
         
         let percentage = (usagePercentage  * 100).rounded(.toNearestOrAwayFromZero)
-        usagePercentageLabel.text = String(format: TextConstants.usagePercentageTwoLines, percentage)
+        usagePercentageLabelAttribute(with: percentage)
 
         self.internetDataUsages = usage.internetDataUsage
         calculateHeightForCollectionView(with: self.internetDataUsages)
@@ -241,6 +263,35 @@ extension UsageInfoViewController: UsageInfoViewInput {
         circleProgressView.layoutIfNeeded()
         
         collectionView.reloadData()
+    }
+    
+    private func usagePercentageLabelAttribute(with percentage: CGFloat) {
+        let string = String(format: TextConstants.usagePercentageTwoLines, percentage)
+        
+        // string is like "%20\nused"
+        let separated = string.components(separatedBy: "\n")
+        guard let used = separated.last else { return }
+        var number = separated[0]
+        guard let first = number.popLast() else { return }
+        
+        let attributedString = NSMutableAttributedString(string: string)
+
+        // Set font and size for "%" character
+        let percentRange = (string as NSString).range(of: first.description)
+        attributedString.addAttribute(.font, value: UIFont.appFont(.light, size: 20), range: percentRange)
+        attributedString.addAttribute(.foregroundColor, value: AppColor.progressFront.color, range: percentRange)
+
+        // Set font and size for float part
+        let floatRange = (string as NSString).range(of: number)
+        attributedString.addAttribute(.font, value: UIFont.appFont(.bold, size: 24), range: floatRange)
+        attributedString.addAttribute(.foregroundColor, value: AppColor.progressFront.color, range: floatRange)
+
+        // Set font and size for "used" string
+        let usedRange = (string as NSString).range(of: used)
+        attributedString.addAttribute(.font, value: UIFont.appFont(.regular, size: 20), range: usedRange)
+        attributedString.addAttribute(.foregroundColor, value: AppColor.progressFront.color, range: usedRange)
+        
+        usagePercentageLabel.attributedText = attributedString
     }
     
     func display(error: ErrorResponse) {

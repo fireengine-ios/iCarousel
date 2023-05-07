@@ -12,6 +12,9 @@ class CircleProgressView: UIView {
 
     private let backgroundCircleLayer = CAShapeLayer()
     private let foregroundCircleLayer = CAShapeLayer()
+    private let gradient = CAGradientLayer()
+    
+    private let circleLayer = CAShapeLayer()
     
     //MARK: - @IBInspectable
     
@@ -30,7 +33,6 @@ class CircleProgressView: UIView {
     
     @IBInspectable var progressRatio: CGFloat = 0.5 {
         didSet {
-            print("RATIO: \(progressRatio)")
             let optimisedValue = min(max(progressRatio, 0.0), 1.0)
             if progressRatio != optimisedValue {
                 progressRatio = optimisedValue
@@ -72,6 +74,7 @@ class CircleProgressView: UIView {
         
         setupBackgroundCircle()
         setupForegroundCircle()
+        setupCircle()
     }
     
     //MARK: - Utility Methods(public)
@@ -105,8 +108,26 @@ class CircleProgressView: UIView {
         layer.insertSublayer(backgroundCircleLayer, at: 0)
     }
     
+    private func setupCircle() {
+        circleLayer.removeFromSuperlayer()
+        
+        let arcCenter = CGPoint(x: bounds.width * 0.5, y: 4)
+        let startAngle = -CGFloat.pi * 0.5 ///top point
+        let endAngle = 2 * CGFloat.pi + startAngle
+        let path = UIBezierPath(arcCenter: arcCenter, radius: 2, startAngle: startAngle, endAngle: endAngle, clockwise: true)
+        circleLayer.path = path.cgPath
+        circleLayer.lineWidth = backWidth
+        circleLayer.fillColor = UIColor.white.cgColor
+        circleLayer.strokeColor = backColor.cgColor
+        
+        layer.addSublayer(circleLayer)
+    }
+    
     private func setupForegroundCircle() {
-        foregroundCircleLayer.removeFromSuperlayer()
+        gradient.removeFromSuperlayer()
+        
+        layer.cornerRadius = bounds.size.height / 2.0
+        clipsToBounds = true
         
         let arcCenter = CGPoint(x: bounds.width * 0.5, y: bounds.height * 0.5)
         let startAngle = -CGFloat.pi * 0.5 ///top point
@@ -119,6 +140,13 @@ class CircleProgressView: UIView {
         foregroundCircleLayer.strokeColor = progressColor.cgColor
         foregroundCircleLayer.strokeEnd = progressRatio
         
-        layer.addSublayer(foregroundCircleLayer)
+        gradient.frame = bounds
+        gradient.colors = [AppColor.progressFront.cgColor, UIColor.white.cgColor]
+        gradient.startPoint = CGPoint(x: 0, y: 0)
+        gradient.endPoint = CGPoint(x: 1, y: 1)
+        
+        gradient.mask = foregroundCircleLayer
+        //Finally add the gradient layer to out View
+        layer.addSublayer(gradient)
     }
 }
