@@ -111,7 +111,7 @@ class CircleProgressView: UIView {
     private func setupCircle() {
         circleLayer.removeFromSuperlayer()
         
-        let arcCenter = CGPoint(x: bounds.width * 0.5, y: 4)
+        let arcCenter = CGPoint(x: bounds.width * 0.5, y: 4.5)
         let startAngle = -CGFloat.pi * 0.5 ///top point
         let endAngle = 2 * CGFloat.pi + startAngle
         let path = UIBezierPath(arcCenter: arcCenter, radius: 2, startAngle: startAngle, endAngle: endAngle, clockwise: true)

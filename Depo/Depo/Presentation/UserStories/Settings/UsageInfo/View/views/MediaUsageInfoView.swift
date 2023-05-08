@@ -74,12 +74,10 @@ final class MediaUsageInfoView: UIView {
         volumeIcon.translatesAutoresizingMaskIntoConstraints = false
         
         volumeIcon.topAnchor.constraint(equalTo: topAnchor).activate()
-        volumeIcon.heightAnchor.constraint(equalToConstant: 24).activate()
-        volumeIcon.widthAnchor.constraint(equalToConstant: 24).activate()
         volumeIcon.centerXAnchor.constraint(equalTo: centerXAnchor).activate()
         
         volumeLabel.topAnchor.constraint(equalTo: volumeIcon.bottomAnchor, constant: 4).isActive = true
-        volumeLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 2).isActive = true
+        volumeLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         volumeLabel.centerXAnchor.constraint(equalTo: centerXAnchor).activate()
     }
     

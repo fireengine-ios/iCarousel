@@ -153,7 +153,7 @@ struct NumericConstants {
     static let usageInfoCardShadowRadius: CGFloat = 8
     static let usageInfoCardShadowOpacity: Float = 0.5
     
-    static let usageInfoProgressWidth: CGFloat = 8
+    static let usageInfoProgressWidth: CGFloat = 10
     
     static let usageInfoCollectionViewCellsOffset: CGFloat = 0
 

@@ -24,6 +24,7 @@
                 <outlet property="toggleButton" destination="hl9-kr-qKX" id="urL-E4-FRE"/>
                 <outlet property="upgradeButton" destination="g4Z-ml-26Z" id="2Wp-R9-fP0"/>
                 <outlet property="usagePercentageLabel" destination="MM4-r5-G8O" id="fT3-bj-qyr"/>
+                <outlet property="usageViewHight" destination="9Lz-Th-sNu" id="8nf-bc-M6F"/>
                 <outlet property="videoUsageInfoView" destination="bjV-2A-Z1m" id="usm-vG-zp8"/>
                 <outlet property="view" destination="KVi-YJ-nHo" id="Iow-IJ-jYk"/>
                 <outlet property="wholeStorageDetailLabel" destination="HAY-h1-IHk" id="LyH-7L-227"/>
@@ -38,32 +39,31 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jfO-Wo-Vhr" userLabel="containerView">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="504.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="534.5"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="86a-vy-LJt" userLabel="Panel">
-                                    <rect key="frame" x="8" y="24" width="304" height="246"/>
+                                    <rect key="frame" x="8" y="24" width="304" height="276"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="w5g-F2-lD5">
-                                            <rect key="frame" x="0.0" y="181" width="304" height="50"/>
+                                        <stackView opaque="NO" tag="123" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="w5g-F2-lD5">
+                                            <rect key="frame" x="0.0" y="176" width="304" height="90"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FSU-TI-g9H" customClass="MediaUsageInfoView" customModule="Billo" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="90"/>
                                                     <color key="backgroundColor" name="secondaryBackground"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" priority="750" constant="40" id="9Lz-Th-sNu"/>
-                                                        <constraint firstAttribute="width" priority="750" constant="80" id="cca-cB-1fw"/>
+                                                        <constraint firstAttribute="height" constant="90" id="9Lz-Th-sNu"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bjV-2A-Z1m" customClass="MediaUsageInfoView" customModule="Billo" customModuleProvider="target">
-                                                    <rect key="frame" x="78" y="0.0" width="70" height="50"/>
+                                                    <rect key="frame" x="78" y="0.0" width="70" height="90"/>
                                                     <color key="backgroundColor" name="secondaryBackground"/>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="au8-zM-4sd" customClass="MediaUsageInfoView" customModule="Billo" customModuleProvider="target">
-                                                    <rect key="frame" x="156" y="0.0" width="70" height="50"/>
+                                                    <rect key="frame" x="156" y="0.0" width="70" height="90"/>
                                                     <color key="backgroundColor" name="secondaryBackground"/>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bH7-o8-65T" customClass="MediaUsageInfoView" customModule="Billo" customModuleProvider="target">
-                                                    <rect key="frame" x="234" y="0.0" width="70" height="50"/>
+                                                    <rect key="frame" x="234" y="0.0" width="70" height="90"/>
                                                     <color key="backgroundColor" name="secondaryBackground"/>
                                                 </view>
                                             </subviews>
@@ -118,7 +118,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hl9-kr-qKX" userLabel="ToggleButton">
-                                            <rect key="frame" x="188" y="127" width="100" height="38"/>
+                                            <rect key="frame" x="188" y="126" width="100" height="38"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <buttonConfiguration key="configuration" style="plain" image="iconArrowDownDisable" title="Details"/>
@@ -138,23 +138,23 @@
                                         <constraint firstItem="HAY-h1-IHk" firstAttribute="top" secondItem="g4Z-ml-26Z" secondAttribute="bottom" constant="28" id="USz-zK-iNb"/>
                                         <constraint firstAttribute="trailing" secondItem="HAY-h1-IHk" secondAttribute="trailing" constant="16" id="btC-3n-MNU"/>
                                         <constraint firstItem="zCd-tG-iD6" firstAttribute="top" secondItem="86a-vy-LJt" secondAttribute="top" constant="22" id="ezP-3y-A9l"/>
-                                        <constraint firstAttribute="bottom" secondItem="w5g-F2-lD5" secondAttribute="bottom" constant="15" id="hz7-Tf-Fiq"/>
-                                        <constraint firstItem="w5g-F2-lD5" firstAttribute="top" secondItem="233-zS-mG1" secondAttribute="bottom" constant="25" id="khH-vu-dwC"/>
+                                        <constraint firstAttribute="bottom" secondItem="w5g-F2-lD5" secondAttribute="bottom" constant="10" id="hz7-Tf-Fiq"/>
+                                        <constraint firstItem="w5g-F2-lD5" firstAttribute="top" secondItem="233-zS-mG1" secondAttribute="bottom" constant="20" id="khH-vu-dwC"/>
                                         <constraint firstAttribute="trailing" secondItem="hl9-kr-qKX" secondAttribute="trailing" constant="16" id="qV1-Bm-yW5"/>
-                                        <constraint firstItem="w5g-F2-lD5" firstAttribute="top" secondItem="hl9-kr-qKX" secondAttribute="bottom" constant="16" id="tq4-1Y-HiO"/>
+                                        <constraint firstItem="w5g-F2-lD5" firstAttribute="top" secondItem="hl9-kr-qKX" secondAttribute="bottom" constant="12" id="tq4-1Y-HiO"/>
                                         <constraint firstAttribute="trailing" secondItem="w5g-F2-lD5" secondAttribute="trailing" id="xed-fA-IMT"/>
                                         <constraint firstItem="233-zS-mG1" firstAttribute="leading" secondItem="86a-vy-LJt" secondAttribute="leading" constant="26" id="yZA-M8-esb"/>
                                         <constraint firstItem="233-zS-mG1" firstAttribute="top" secondItem="zCd-tG-iD6" secondAttribute="bottom" constant="34" id="zSB-qH-A4J"/>
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ch-Rq-Ujd">
-                                    <rect key="frame" x="139.5" y="294" width="41.5" height="20.5"/>
+                                    <rect key="frame" x="139.5" y="324" width="41.5" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="yOR-rn-7FZ">
-                                    <rect key="frame" x="20" y="338.5" width="280" height="120"/>
+                                    <rect key="frame" x="20" y="368.5" width="280" height="120"/>
                                     <color key="backgroundColor" name="primaryBackground"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="120" id="dfX-9x-QIo"/>
@@ -167,7 +167,7 @@
                                     </collectionViewFlowLayout>
                                 </collectionView>
                                 <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="UtI-JC-Ius">
-                                    <rect key="frame" x="102" y="476.5" width="116.5" height="10"/>
+                                    <rect key="frame" x="102" y="506.5" width="116.5" height="10"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="10" id="k0T-xl-QZJ"/>
                                     </constraints>

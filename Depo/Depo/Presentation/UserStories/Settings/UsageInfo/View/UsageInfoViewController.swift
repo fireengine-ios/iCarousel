@@ -46,7 +46,7 @@ final class UsageInfoViewController: ViewController {
     
     @IBOutlet private weak var circleProgressView: CircleProgressView! {
         didSet {
-            circleProgressView.backWidth = NumericConstants.usageInfoProgressWidth / 2
+            circleProgressView.backWidth = NumericConstants.usageInfoProgressWidth / 5
             circleProgressView.progressWidth = NumericConstants.usageInfoProgressWidth
             circleProgressView.progressRatio = 0.0
             circleProgressView.progressColor = AppColor.snackbarBackground.color
@@ -71,8 +71,6 @@ final class UsageInfoViewController: ViewController {
             let zero = Int64(0).bytesString
             wholeStorageDetailLabel.text = String(format: TextConstants.usedAndLeftSpace, zero, zero)
             wholeStorageDetailLabel.numberOfLines = 0
-            wholeStorageDetailLabel.textColor = AppColor.snackbarBackground.color
-            wholeStorageDetailLabel.font = .appFont(.medium, size: 18)
         }
     }
     
@@ -105,6 +103,8 @@ final class UsageInfoViewController: ViewController {
     
     @IBOutlet weak var collectionViewHeightAnchor: NSLayoutConstraint!
     
+    @IBOutlet weak var usageViewHight: NSLayoutConstraint!
+    
     @IBOutlet private weak var pageControl: UIPageControl! {
         didSet {
             pageControl.currentPage = 0
@@ -117,19 +117,18 @@ final class UsageInfoViewController: ViewController {
     
     @IBOutlet weak var toggleButton: UIButton! {
         willSet {
-            newValue.titleLabel?.font = .appFont(.medium, size: 14)
-
             // normal
             newValue.setTitle(TextConstants.launchCampaignCardDetail, for: .normal)
             newValue.setTitleColor(AppColor.label.color, for: .normal)
-            newValue.setImage(Image.iconArrowDownSmall.image, for: .normal)
+            newValue.setImage(Image.iconArrowUpSmall.image, for: .normal)
             
             // selected
             newValue.setTitle(TextConstants.launchCampaignCardDetail, for: .selected)
             newValue.setTitleColor(AppColor.label.color, for: .selected)
-            newValue.setImage(Image.iconArrowUpSmall.image, for: .selected)
+            newValue.setImage(Image.iconArrowDownSmall.image, for: .selected)
             
             newValue.forceImageToRightSide()
+            newValue.titleLabel?.font = .appFont(.medium, size: 14)
         }
     }
     
@@ -175,6 +174,25 @@ final class UsageInfoViewController: ViewController {
 
     @IBAction func toggleButtonAction(_ sender: UIButton) {
         sender.isSelected.toggle()
+        
+        guard let viewToAnimate = cardView.subviews.first(where: { $0.tag == 123 }) else {
+            return
+        }
+                
+        if sender.isSelected {
+            usageViewHight.constant = 0
+            UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                viewToAnimate.isHidden = true
+                self.view.layoutIfNeeded()
+            })
+            
+        } else {
+            usageViewHight.constant = 90
+            UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                viewToAnimate.isHidden = false
+                self.view.layoutIfNeeded()
+            })
+        }
     }
     
     private func setupDesign() {
@@ -245,9 +263,7 @@ extension UsageInfoViewController: UsageInfoViewInput {
             return
         }
         
-        wholeStorageDetailLabel.text = String(format: TextConstants.usedAndLeftSpace,
-                                    usedBytes.bytesString,
-                                    quotaBytes.bytesString)
+        wholeStorageDetailLabelAttribute(usedBytes: usedBytes.bytesString, quotaBytes: quotaBytes.bytesString)
         
         let usagePercentage = CGFloat(usedBytes) / CGFloat(quotaBytes)
         circleProgressView.set(progress: usagePercentage,
@@ -263,6 +279,25 @@ extension UsageInfoViewController: UsageInfoViewInput {
         circleProgressView.layoutIfNeeded()
         
         collectionView.reloadData()
+    }
+    
+    private func wholeStorageDetailLabelAttribute(usedBytes: String, quotaBytes: String) {
+        let bytesStr = "\(usedBytes)/ \(quotaBytes)"
+        
+        let attributedString = NSMutableAttributedString(string: bytesStr)
+        
+        // Set font and size for usedBytes
+        let usedBytesRange = (bytesStr as NSString).range(of: usedBytes)
+        attributedString.addAttribute(.font, value: UIFont.appFont(.regular, size: 14), range: usedBytesRange)
+        attributedString.addAttribute(.foregroundColor, value: AppColor.label.color, range: usedBytesRange)
+        
+        
+        // Set font and size for quotaBytes
+        let quotaBytesRange = (bytesStr as NSString).range(of: quotaBytes)
+        attributedString.addAttribute(.font, value: UIFont.appFont(.medium, size: 18), range: quotaBytesRange)
+        attributedString.addAttribute(.foregroundColor, value: AppColor.label.color, range: quotaBytesRange)
+        
+        wholeStorageDetailLabel.attributedText = attributedString
     }
     
     private func usagePercentageLabelAttribute(with percentage: CGFloat) {
