@@ -10,7 +10,6 @@ import Foundation
 
 protocol PackagesRouterInput {
     func openMyStorage(usageStorage: UsageResponse?)
-    func openUsage()
     func openUserProfile(userInfo: AccountInfoResponse, isTurkcellUser: Bool)
     func goToConnectedAccounts()
 }

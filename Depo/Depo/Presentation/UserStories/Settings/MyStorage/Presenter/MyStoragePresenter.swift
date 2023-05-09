@@ -411,7 +411,7 @@ extension MyStoragePresenter: PackageInfoViewDelegate {
 
     func onSeeDetailsTap(with type: ControlPackageType) {
         switch type {
-        case .usage, .myStorage, .myProfile, .connectedAccounts:
+        case .myStorage, .myProfile, .connectedAccounts:
             assertionFailure()
         case .accountType(let type):
             router.openLeavePremium(type: type.leavePremiumType)
