@@ -10,7 +10,6 @@ import UIKit
 
 enum ControlPackageType {
     case myProfile
-    case usage(percentage: CGFloat)
     case myStorage(ControlPackageType.AccountType?)
     case accountType(ControlPackageType.AccountType)
     case connectedAccounts
@@ -85,16 +84,6 @@ final class PackageInfoView: UIView, NibInit {
         case .myProfile:
             titleLabel.text = TextConstants.myProfile
             detailLabel.isHidden = true
-            
-        case .usage(percentage: let percentage):
-            titleLabel.text = TextConstants.usage
-            if percentage != 0 {
-                detailLabel.isHidden = false
-                detailLabel.text = String(format: TextConstants.usagePercentage,
-                                          percentage.rounded(.toNearestOrAwayFromZero))
-            } else {
-                detailLabel.isHidden = true
-            }
 
         case .myStorage(let accountType):
             titleLabel.text = TextConstants.myPackages

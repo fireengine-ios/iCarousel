@@ -49,13 +49,7 @@ class PackagesTableViewCell: UITableViewCell {
             titleLabel.text = TextConstants.myPackages
             descriptionLabel.text = type?.text
             infoImageView.isHidden = !(SingletonStorage.shared.subscriptionsContainGracePeriod)
-            
-        case .usage(percentage: let percentage):
-            titleLabel.text = TextConstants.usage
-            let percentageString = percentage.rounded(.toNearestOrAwayFromZero)
-            let usage = String(format: TextConstants.usagePercentage, percentageString)
-            descriptionLabel.text = usage
-            
+    
         case .connectedAccounts:
             titleLabel.text = TextConstants.settingsViewCellConnectedAccounts
             descriptionLabel.text = ""

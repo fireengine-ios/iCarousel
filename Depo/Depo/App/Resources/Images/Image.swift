@@ -150,6 +150,9 @@ enum Image: String, AppImage {
     case iconFolderBig
     case iconMusicBig
     
+    case iconMusicWhite
+    case iconFileEmptyWhite
+    
     case iconFavoriteStar
     case iconMoreActions
     case iconSharePeople
