@@ -32,12 +32,6 @@ final class UsageInfoViewController: ViewController {
             cardTitleLabel.textColor = AppColor.label.color
         }
     }
-    
-    @IBOutlet private weak var cardDividerView: UIView! {
-        didSet {
-            cardDividerView.backgroundColor = AppColor.itemSeperator.color
-        }
-    }
 
     @IBOutlet private weak var photoUsageInfoView: MediaUsageInfoView!
     @IBOutlet private weak var videoUsageInfoView: MediaUsageInfoView!
@@ -98,6 +92,18 @@ final class UsageInfoViewController: ViewController {
             if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
                 layout.scrollDirection = .horizontal
             }
+        }
+    }
+    @IBOutlet weak var internetUsageView: UIView! {
+        willSet {
+            newValue.backgroundColor = AppColor.secondaryBackground.color
+            newValue.layer.cornerRadius = NumericConstants.usageInfoCardCornerRadius
+            newValue.layer.shadowRadius = NumericConstants.usageInfoCardShadowRadius
+            newValue.layer.shadowOpacity = NumericConstants.usageInfoCardShadowOpacity
+            newValue.layer.shadowOffset = .zero
+            newValue.layer.shadowColor = UIColor.black
+                .withAlphaComponent(0.2)
+                .cgColor
         }
     }
     
