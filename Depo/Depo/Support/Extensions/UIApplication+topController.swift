@@ -90,4 +90,16 @@ extension UIApplication {
             vc.open()
         }
     }
+    
+    static func showSuccessAlertForFreeAppSpace(message: String, closed: (() -> Void)? = nil) {
+        let vc = PopUpController.with(title: TextConstants.success, message: message, image: .success, buttonTitle: TextConstants.ok) { vc in
+            vc.close {
+                NotificationCenter.default.post(name: .freeAppSpaceToBackScreen, object: nil)
+                closed?()
+            }
+        }
+        DispatchQueue.toMain {
+            vc.open()
+        }
+    }
 }
