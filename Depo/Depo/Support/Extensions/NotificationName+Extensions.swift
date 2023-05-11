@@ -20,4 +20,5 @@ extension Notification.Name {
     public static let deinitPlayer = Notification.Name("deinitPlayer")
     public static let reusePlayer = Notification.Name("reusePlayer")
     public static let foryouGetUpdateData = Notification.Name("foryouGetUpdateData")
+    public static let freeAppSpaceToBackScreen = Notification.Name("freeAppSpaceToBackScreen")
 }
