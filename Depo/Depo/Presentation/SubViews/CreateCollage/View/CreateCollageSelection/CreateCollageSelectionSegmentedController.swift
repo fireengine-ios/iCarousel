@@ -25,6 +25,7 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
 
     var selectedItems = [SearchItemResponse]()
     var selectedItemsDefault = [SearchItemResponse]()
+    var selectedItemsChangePhoto = [SearchItemResponse]()
     
     var selectionState = CreateCollagePhotoSelectionState.selecting {
         didSet {
@@ -188,8 +189,10 @@ final class CreateCollageSelectionSegmentedController: BaseViewController, Error
                 updateTitle()
             }
             dismiss(animated: true, completion: {
-                let vc = self.router.createCollagePreview(collageTemplate: self.collageTemplate!, selectedItems: self.selectedItemsDefault)
-                self.router.pushViewController(viewController: vc, animated: false)
+//                let vc = self.router.createCollagePreview(collageTemplate: self.collageTemplate!, selectedItems: self.selectedItemsDefault)
+//                self.router.popToViewController(vc)
+                CreateCollageConstants.selectedChangePhotoItems = self.selectedItemsChangePhoto
+                self.router.popViewController()
             })
         }
     }
@@ -250,9 +253,10 @@ extension CreateCollageSelectionSegmentedController: CreateCollagePhotoSelection
                 delegate.didSelectItem(item)
             }
             //selectedItems.removeAll()
+            selectedItemsChangePhoto.append(item)
             selectedItems.append(item)
-            selectedItemsDefault.remove(at: selectedItemIndexFromCollagePreview)
-            selectedItemsDefault.insert(contentsOf: selectedItems, at: selectedItemIndexFromCollagePreview)
+//            selectedItemsDefault.remove(at: selectedItemIndexFromCollagePreview)
+//            selectedItemsDefault.insert(contentsOf: selectedItems, at: selectedItemIndexFromCollagePreview)
         }
         
         updateTitle()

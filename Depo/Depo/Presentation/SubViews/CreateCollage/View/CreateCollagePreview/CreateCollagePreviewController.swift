@@ -69,6 +69,8 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
     private var beforeMinPinch = 0
     private var afterMinPinch = 0
     private var scrollViewViewFrame = [CGRect]()
+    private var changePhotoAdd: Bool = false
+    private var selectedChangePhotoIndex: Int = 0
     
     let uploadService = UploadService()
     
@@ -76,9 +78,6 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
         self.collageTemplate = collageTemplate
         self.collagePhotoCount = collageTemplate.shapeCount
         self.selectedItems = selectedItems
-        if selectedItems.count > 0 {
-            photoSelectType = .changePhotoSelection
-        }
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -96,7 +95,7 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
         setTextFieldInNavigationBar(withDelegate: self)
         isHiddenControl()
         keyboardDoneButton()
-        
+        showSpinner()
         let imagePathUrl = URL(string: collageTemplate!.collageImagePath)!
         SDWebImageDownloader.shared().downloadImage(with: imagePathUrl) { [weak self] image, _, _, _ in
             let scaledImageSize = CGSize(width: (self?.contentView.frame.width)!, height: (self?.contentView.frame.height)!)
@@ -106,6 +105,25 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
             }
             self?.contentviewBackGroundImage = scaledImage
             self?.createImageView(collageTemplate: (self?.collageTemplate!)!)
+            self?.hideSpinner()
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        switch photoSelectType {
+        case .newPhotoSelection:
+            print("aaaaaaaaaaaaaaaaa1")
+        case .changePhotoSelection:
+            showSpinner()
+            bottomBarManager.show()
+            bottomBarManager.update(configType: .newPhotoSelection)
+            let shapeDetails = collageTemplate?.shapeDetails.sorted { $0.id < $1.id }
+            for i in 0...(shapeDetails?.count ?? 1) - 1 {
+                contentView.subviews[i].subviews[0].alpha = 1
+            }
+            changePhotoAdd = true
+            selectedItems = CreateCollageConstants.selectedChangePhotoItems
+            createImageView(collageTemplate: collageTemplate!)
         }
     }
     
@@ -139,6 +157,11 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
     private func createImageView(collageTemplate: CollageTemplateElement) {
         let shapeDetails = collageTemplate.shapeDetails.sorted { $0.id < $1.id }
         viewFrames.removeAll()
+        
+        if selectedItems.count > 0 {
+            photoSelectType = .changePhotoSelection
+        }
+        
         for i in 0...shapeDetails.count - 1 {
             if shapeDetails[i].type == "RECTANGLE" {
                 let imageWidth = Double(shapeDetails[i].shapeCoordinates[1].x) - Double(shapeDetails[i].shapeCoordinates[0].x)
@@ -166,7 +189,15 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
                 case .changePhotoSelection:
                     let scrollView = UIScrollView()
                     let imageView = UIImageView()
-                    createImageThumbnail(scrollView: scrollView, imageView: imageView, viewFrame: viewFrame, index: i, shapeType: shapeDetails[i].type)
+                    if !changePhotoAdd {
+                        createImageThumbnail(scrollView: scrollView, imageView: imageView, viewFrame: viewFrame, index: i, shapeType: shapeDetails[i].type)
+                    } else {
+                        let imageViewChange = contentView.subviews[selectedChangePhotoIndex].subviews[0] as! UIImageView
+                        let imageUrl = selectedItems[0].metadata?.mediumUrl
+                        imageViewChange.sd_setImage(with: imageUrl) { [weak self] _,_,_,_ in
+                            self?.hideSpinner()
+                        }
+                    }
                 }
             } else if shapeDetails[i].type == "CIRCLE" {
                 let radius = Double(shapeDetails[i].shapeCoordinates[0].radius ?? 0) / xRatioConstant
@@ -196,7 +227,15 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
                 case .changePhotoSelection:
                     let scrollView = UIScrollView()
                     let imageView = UIImageView()
-                    createImageThumbnail(scrollView: scrollView, imageView: imageView, viewFrame: viewFrame, index: i, shapeType: shapeDetails[i].type)
+                    if !changePhotoAdd {
+                        createImageThumbnail(scrollView: scrollView, imageView: imageView, viewFrame: viewFrame, index: i, shapeType: shapeDetails[i].type)
+                    } else {
+                        let imageViewChange = contentView.subviews[selectedChangePhotoIndex].subviews[0] as! UIImageView
+                        let imageUrl = selectedItems[0].metadata?.mediumUrl
+                        imageViewChange.sd_setImage(with: imageUrl) {_,_,_,_ in
+                            self.hideSpinner()
+                        }
+                    }
                 }
             }
         }
@@ -218,9 +257,10 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
         contentView.addSubview(scrollView)
         
         let imageUrl = selectedItems[index].metadata?.mediumUrl
-        imageView.sd_setImage(with: imageUrl) { (image, error, cache, url) in
-            if self.selectedItems.count - 1 == index {
-                self.contentView.backgroundColor = UIColor(patternImage: self.contentviewBackGroundImage)
+        imageView.sd_setImage(with: imageUrl) { [weak self] (image, error, cache, url) in
+            if (self?.selectedItems.count ?? 1) - 1 == index {
+                self?.contentView.backgroundColor = UIColor(patternImage: self!.contentviewBackGroundImage)
+                self?.hideSpinner()
             }
             
             imageView.frame = CGRect(x: 0, y: 0, width: image?.size.width ?? 0, height: image?.size.height ?? 0)
@@ -230,7 +270,7 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
             imageView.isUserInteractionEnabled = true
             scrollView.addSubview(imageView)
             scrollView.contentSize = imageView.image?.size ?? CGSize(width: 0, height: 0)
-            self.viewFrames.append(imageView.frame)
+            self?.viewFrames.append(imageView.frame)
             
             if shapeType == "CIRCLE" {
                 scrollView.layer.cornerRadius = scrollView.frame.size.width / 2
@@ -244,23 +284,23 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
             let centerPoint = CGPoint(x: centerOffsetX, y: centerOffsetY)
             scrollView.setContentOffset(centerPoint, animated: true)
             
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapped(_:)))
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self?.tapped(_:)))
             tapGesture.delegate = self
             imageView.addGestureRecognizer(tapGesture)
 
-            let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinch(_:)))
+            let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self?.pinch(_:)))
             pinchGesture.delegate = self
             imageView.addGestureRecognizer(pinchGesture)
 
-            let rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(self.rotate(_:)))
+            let rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(self?.rotate(_:)))
             rotationGesture.delegate = self
             imageView.addGestureRecognizer(rotationGesture)
             
-            let dragInteraction = UIDragInteraction(delegate: self)
+            let dragInteraction = UIDragInteraction(delegate: self!)
             dragInteraction.isEnabled = true
             imageView.addInteraction(dragInteraction)
 
-            let dropInteraction = UIDropInteraction(delegate: self)
+            let dropInteraction = UIDropInteraction(delegate: self!)
             imageView.addInteraction(dropInteraction)
         }
         
@@ -294,6 +334,7 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
     }
     
     private func changeSelectedPhoto() {
+        photoSelectType = .changePhotoSelection
         router.openSelectPhotosWithChange(collageTemplate: collageTemplate!, items: selectedItems, selectItemIndex: longPressedItem)
     }
     
@@ -302,6 +343,7 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
             values.subviews[0].alpha = 1.0
         //    values.layer.sublayers?.forEach { $0.removeFromSuperlayer()}
         }
+        photoSelectType = .newPhotoSelection
         bottomBarManager.update(configType: .newPhotoSelection)
     }
     
@@ -412,18 +454,21 @@ extension CreateCollagePreviewController: UIGestureRecognizerDelegate {
     @objc func tapped(_ sender: UIRotationGestureRecognizer) {
         let shapeDetails = collageTemplate?.shapeDetails.sorted { $0.id < $1.id }
         if sender.view?.tag == longPressedItem {
+            photoSelectType = .newPhotoSelection
             bottomBarManager.update(configType: .newPhotoSelection)
             for i in 0...(shapeDetails?.count ?? 1) - 1 {
                 contentView.subviews[i].subviews[0].alpha = 1
             }
             longPressedItem = -1
         } else {
+            photoSelectType = .changePhotoSelection
             bottomBarManager.update(configType: .changePhotoSelection)
             for i in 0...(shapeDetails?.count ?? 1) - 1 {
                 if sender.view?.tag != i {
                     contentView.subviews[i].subviews[0].alpha = 0.3
                     //contentView.subviews[i].layer.sublayers?.forEach { $0.removeFromSuperlayer()}
                 } else {
+                    selectedChangePhotoIndex = i
                     longPressedItem = sender.view?.tag ?? 0
                     contentView.subviews[i].subviews[0].alpha = 1
                     //contentView.subviews[i].subviews[0].layer.addSublayer(createBorder(view: contentView.subviews[i].subviews[0], borderWith: 2.0))
