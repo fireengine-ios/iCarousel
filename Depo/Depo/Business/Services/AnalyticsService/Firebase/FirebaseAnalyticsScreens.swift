@@ -159,6 +159,8 @@ enum AnalyticsAppScreens {
     //ForYou
     case myCollages
     case myAnimations
+    case createCollage
+    case saveCollage
     
     var name: String {
         switch self {
@@ -432,6 +434,10 @@ enum AnalyticsAppScreens {
             return "Collages"
         case .myAnimations:
             return "Animations"
+        case .createCollage:
+            return "CreateCollage"
+        case .saveCollage:
+            return "SaveCollage"
         }
     }
 }

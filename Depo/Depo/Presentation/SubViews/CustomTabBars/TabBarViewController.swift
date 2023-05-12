@@ -452,6 +452,8 @@ extension TabBarViewController: TabBarActionHandler {
             router.pushViewController(viewController: photopick)
             
         case .createCollage:
+            analyticsService.logScreen(screen: .createCollage)
+            analyticsService.trackDimentionsEveryClickGA(screen: .createCollage)
             let createCollage = router.createCollage()
             router.pushViewController(viewController: createCollage)
                 

@@ -71,6 +71,7 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
     private var scrollViewViewFrame = [CGRect]()
     private var changePhotoAdd: Bool = false
     private var selectedChangePhotoIndex: Int = 0
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     let uploadService = UploadService()
     
@@ -319,6 +320,8 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
         showSpinner()
         UploadService.default.uploadFileList(items: [wrapData], uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, isCollage: true, success: {
             DispatchQueue.main.async {
+                self.analyticsService.logScreen(screen: .saveCollage)
+                self.analyticsService.trackDimentionsEveryClickGA(screen: .saveCollage)
                 self.hideSpinner()
                 self.router.openForYou()
             }
