@@ -9,6 +9,7 @@
 class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
 
     lazy var player: MediaPlayer = factory.resolve()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     weak var view: BaseFilesGreedViewController!
     weak var presenter: BaseFilesGreedPresenter!
     private let router = RouterVC()
@@ -124,6 +125,8 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
     }
     
     func createCollage() {
+        analyticsService.logScreen(screen: .createCollage)
+        analyticsService.trackDimentionsEveryClickGA(screen: .createCollage)
         let vc = router.createCollage()
         router.pushViewController(viewController: vc)
     }
