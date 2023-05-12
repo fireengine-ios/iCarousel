@@ -271,7 +271,8 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
         accountType = interactor.getAccountTypePackages(with: accountType.rawValue, offers: allOffers)  ?? .all
         let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
         
-        sortAvailableOffers(offers: offers)
+        availableOffers = offers
+        //sortAvailableOffers(offers: offers)
                 
         view?.stopActivityIndicator()
         view?.reloadData()
@@ -341,8 +342,8 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     func successed(allOffers: [PackageModelResponse]) {
         accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)  ?? .all
         let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
-        
-        sortAvailableOffers(offers: offers)
+        availableOffers = offers
+        //sortAvailableOffers(offers: offers)
         
         view?.stopActivityIndicator()
         view?.reloadData()

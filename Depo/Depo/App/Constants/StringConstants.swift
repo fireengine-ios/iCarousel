@@ -10,4 +10,9 @@ import Foundation
 
 struct StringConstants {
     static var collageName: String = localized(.createCollagePreviewMainTitle)
+    static var createCollageSelectPhotoType = PhotoSelectType.newPhotoSelection //New -> new select photo, Change-> change selected photo
+}
+
+struct CreateCollageConstants {
+    static var selectedChangePhotoItems = [SearchItemResponse]()
 }
