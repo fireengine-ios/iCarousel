@@ -30,7 +30,6 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
     private lazy var infoImage: UIImageView = {
         let view = UIImageView()
         view.image = Image.iconInfo.image
-        view.isHidden = true
         return view
     }()
     
@@ -39,7 +38,6 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
         view.text = localized(.createCollageInfoLabel)
         view.textColor = AppColor.label.color
         view.font = .appFont(.medium, size: 12)
-        view.isHidden = true
         return view
     }()
     
@@ -125,17 +123,16 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
             changePhotoAdd = true
             selectedItems = CreateCollageConstants.selectedChangePhotoItems
             createImageView(collageTemplate: collageTemplate!)
+            isHiddenControl()
         }
     }
     
     private func isHiddenControl() {
         switch photoSelectType {
         case .newPhotoSelection:
-            infoImage.isHidden = true
-            infoLabel.isHidden = true
+            infoLabel.text = localized(.createCollageInfoLabelNew)
         case .changePhotoSelection:
-            infoImage.isHidden = false
-            infoLabel.isHidden = false
+            infoLabel.text = localized(.createCollageInfoLabel)
         }
     }
     
@@ -261,6 +258,7 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
         imageView.sd_setImage(with: imageUrl) { [weak self] (image, error, cache, url) in
             if (self?.selectedItems.count ?? 1) - 1 == index {
                 self?.contentView.backgroundColor = UIColor(patternImage: self!.contentviewBackGroundImage)
+                self?.infoLabel.text = localized(.createCollageInfoLabel)
                 self?.hideSpinner()
             }
             

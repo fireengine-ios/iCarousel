@@ -2087,11 +2087,12 @@ then {11,99 TRY/Month}*/
 "create_collage_info_label" = "";
 
 /*Fotoğraf Seçin*/
-"create_collage_select_photo" = "";
+"create_collage_select_photo" = "Вибрати Фотографії";
 
 /*+New Collage*/
-"create_collage_preview_main" = "";
+"create_collage_preview_main" = "+Створити Колаж";
 
 /*2'li Kolajlar*/
-"create_collage_dual" = "";
+"create_collage_dual" = "Колаж із 2 частин";
 "create_collage" = "Створити Колаж";
+"collage_create_info" = "Натисніть плюс, щоб створити колаж";

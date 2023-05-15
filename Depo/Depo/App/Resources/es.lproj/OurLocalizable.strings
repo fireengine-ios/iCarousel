@@ -2127,11 +2127,12 @@ then {11,99 TRY/Month}*/
 "create_collage_info_label" = "";
 
 /*Fotoğraf Seçin*/
-"create_collage_select_photo" = "";
+"create_collage_select_photo" = "Seleccionar Fotos";
 
 /*+New Collage*/
-"create_collage_preview_main" = "";
+"create_collage_preview_main" = "+Crear un Collage";
 
 /*2'li Kolajlar*/
-"create_collage_dual" = "";
+"create_collage_dual" = "Collage de 2";
 "create_collage" = "Crear Collage";
+"collage_create_info" = "Haga clic en más para crear un collage";

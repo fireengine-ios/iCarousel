@@ -2043,7 +2043,7 @@ then {11,99 TRY/Month}*/
 /*Facelift*/
 "tabbar_foryou" = "შენთვის";
 "tabbar_discover" = "აღმოაჩინე";
-"change_pass_mail_or_phone" = "E-mail-ი ან მობილურის ნომერი";
+"change_pass_mail_or_phone" = "ელ-ფოსტა ან მობილურის ნომერი";
 "mystorage_become_premium" = "მეტი ფუნქციის გამოსაყენებლად, გახდი პრემიუმი.";
 "we_are_creating_your_story_title" = "გიმზადებთ story-ს.";
 "we_are_creating_your_story_desc" = "რომ დასრულდება, გექნება წვდომა ვიდეო ალბომიდან.";
@@ -2083,11 +2083,12 @@ then {11,99 TRY/Month}*/
 "create_collage_info_label" = "შექმენი კოლაჟი ინფორმაციის ეტიკეტი";
 
 /*Fotoğraf Seçin*/
-"create_collage_select_photo" = "შექმენი კოლაჟი მონიშნე ფოტო";
+"create_collage_select_photo" = "აირჩიე ფოტოები";
 
 /*+New Collage*/
-"create_collage_preview_main" = "შექმენი კოლაჟი-გადახედე_მთავარს";
+"create_collage_preview_main" = "+შექმენი კოლაჟი";
 
 /*2'li Kolajlar*/
-"create_collage_dual" = "შექმნა_კოლაჟი_ორმაგი";
+"create_collage_dual" = "კოლაჟი 2";
 "create_collage" = "შექმენი კოლაჟი";
+"collage_create_info" = "დააჭირე + კოლაჟის შესაქმნელად";
