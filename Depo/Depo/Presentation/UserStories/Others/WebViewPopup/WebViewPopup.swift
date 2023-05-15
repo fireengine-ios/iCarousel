@@ -166,8 +166,8 @@ class WebViewPopup: BasePopUpController {
         bodyScrollView.bottomAnchor.constraint(equalTo: popUpView.bottomAnchor).isActive = true
         contentView.centerXAnchor.constraint(equalTo: bodyScrollView.centerXAnchor).isActive = true
         contentView.widthAnchor.constraint(equalTo: bodyScrollView.widthAnchor).isActive = true
-        contentView.topAnchor.constraint(equalTo: bodyScrollView.topAnchor).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: bodyScrollView.bottomAnchor).isActive = true
+        contentView.topAnchor.constraint(equalTo: bodyScrollView.topAnchor, constant: 15).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: bodyScrollView.bottomAnchor, constant: -20).isActive = true
 
         contentView.addSubview(bodyLabel)
         bodyLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -258,7 +258,7 @@ class WebViewPopup: BasePopUpController {
                                                               withHorizontalFittingPriority: .required,
                                                               verticalFittingPriority: .fittingSizeLevel).height
         // Plus top and bottom constraint
-        return height + 32
+        return height + 67
     }
 }
 

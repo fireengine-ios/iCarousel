@@ -144,6 +144,7 @@ final class UsageInfoViewController: ViewController {
             let isNeedHide = internetDataUsages.count == 0
             myDataUsageLabel.isHidden = isNeedHide
             collectionView.isHidden = isNeedHide
+            internetUsageView.isHidden = isNeedHide
         }
     }
     
