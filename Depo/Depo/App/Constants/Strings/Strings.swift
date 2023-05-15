@@ -243,4 +243,5 @@ enum Strings: String, Localizable {
     case createCollageSelectCollage = "create_collage_select_collage"
     case createCollageInfoLabel = "create_collage_info_label"
     case createCollageLabel = "create_collage"
+    case createCollageInfoLabelNew = "collage_create_info"
 }

@@ -34,6 +34,6 @@ final class CreateCollageRouter: CreateCollageRouterInput {
     }
     
     func openForYou() {
-        router.createCollageToForyou()
+        router.openTabBarItem(index: .forYou)
     }
 }
