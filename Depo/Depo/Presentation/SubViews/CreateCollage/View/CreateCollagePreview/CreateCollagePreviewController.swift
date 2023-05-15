@@ -113,7 +113,7 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
     override func viewDidAppear(_ animated: Bool) {
         switch photoSelectType {
         case .newPhotoSelection:
-            print("aaaaaaaaaaaaaaaaa1")
+            print("newPhotoSelection")
         case .changePhotoSelection:
             showSpinner()
             bottomBarManager.show()
@@ -308,30 +308,32 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
     }
     
     private func saveCollage() {
-        let image: UIImage = takeScreenshot(of: contentView)
-        let name: String = StringConstants.collageName
-        let imageData = image.jpegData(compressionQuality: 0.9)!
-        let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
-        let wrapData = WrapData(imageData: imageData, isLocal: true)
-        
-        wrapData.name = name
-        wrapData.patchToPreview = PathForItem.remoteUrl(url)
-
-        showSpinner()
-        UploadService.default.uploadFileList(items: [wrapData], uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, isCollage: true, success: {
-            DispatchQueue.main.async {
-                self.analyticsService.logScreen(screen: .saveCollage)
-                self.analyticsService.trackDimentionsEveryClickGA(screen: .saveCollage)
-                self.hideSpinner()
-                self.router.openForYou()
-            }
-        }, fail: {value in }, returnedUploadOperation: { _ in })
-        
+//        let image: UIImage = takeScreenshot(of: contentView)
+//        let name: String = StringConstants.collageName
+//        let imageData = image.jpegData(compressionQuality: 0.9)!
+//        let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
+//        let wrapData = WrapData(imageData: imageData, isLocal: true)
+//
+//        wrapData.name = name
+//        wrapData.patchToPreview = PathForItem.remoteUrl(url)
+//
+//        showSpinner()
+//        UploadService.default.uploadFileList(items: [wrapData], uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, isCollage: true, success: {
+//            DispatchQueue.main.async {
+//                self.analyticsService.logScreen(screen: .saveCollage)
+//                self.analyticsService.trackDimentionsEveryClickGA(screen: .saveCollage)
+//                self.hideSpinner()
+//                self.router.openForYou()
+//            }
+//        }, fail: {value in }, returnedUploadOperation: { _ in })
+        let r = RouterVC()
+        Generate
     }
     
     private func deleteCollage() {
         containerView.subviews.forEach { $0.removeFromSuperview()}
         photoSelectType = .newPhotoSelection
+        selectedItems.removeAll()
         createImageView(collageTemplate: collageTemplate!)
         bottomBarManager.hide()
     }
@@ -412,7 +414,29 @@ extension CreateCollagePreviewController: UIGestureRecognizerDelegate {
             let imageView = contentView.subviews[sender.view!.tag].subviews[0] as! UIImageView
             let scrollView = contentView.subviews[sender.view!.tag] as! UIScrollView
             
-            imageView.frame = setRatio(imageView: imageView, viewFrame: scrollViewViewFrame[sender.view!.tag])
+            let viewFrame = scrollViewViewFrame[sender.view!.tag]
+            let imageViewWidth = imageView.frame.width
+            let imageViewHeight = imageView.frame.height
+
+            if viewFrame.width >= viewFrame.height {
+                if imageViewWidth <= viewFrame.width {
+                    imageView.transform = .identity
+                    let aspectRatio = viewFrame.width / imageViewWidth
+                    imageView.frame = CGRect(x: 0, y: 0, width: viewFrame.width, height: imageViewHeight * aspectRatio)
+                    defaultW = imageView.frame.width
+                    defaultH = imageView.frame.height
+                    beforeMinPinch = 1
+                }
+            } else {
+                if imageViewHeight <= viewFrame.height {
+                    imageView.transform = .identity
+                    let aspectRatio = viewFrame.height / imageViewHeight
+                    imageView.frame = CGRect(x: 0, y: 0, width: imageViewWidth * aspectRatio, height: viewFrame.height)
+                    defaultW = imageView.frame.width
+                    defaultH = imageView.frame.height
+                    beforeMinPinch = 1
+                }
+            }
             
             let x = imageView.frame.origin.x
             let y = imageView.frame.origin.y
@@ -452,6 +476,14 @@ extension CreateCollagePreviewController: UIGestureRecognizerDelegate {
         }
         view.transform = view.transform.rotated(by: sender.rotation - lastRotation)
         lastRotation = sender.rotation
+        
+        if sender.state == .ended {
+            let imageView = contentView.subviews[sender.view!.tag].subviews[0] as! UIImageView
+            let scrollView = contentView.subviews[sender.view!.tag] as! UIScrollView
+            let x = imageView.frame.origin.x
+            let y = imageView.frame.origin.y
+            scrollView.contentInset = UIEdgeInsets(top: -y, left: -x, bottom: -y, right: -x)
+        }
     }
     
     @objc func tapped(_ sender: UIRotationGestureRecognizer) {
