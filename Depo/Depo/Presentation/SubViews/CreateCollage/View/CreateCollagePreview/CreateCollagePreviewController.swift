@@ -308,26 +308,24 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
     }
     
     private func saveCollage() {
-//        let image: UIImage = takeScreenshot(of: contentView)
-//        let name: String = StringConstants.collageName
-//        let imageData = image.jpegData(compressionQuality: 0.9)!
-//        let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
-//        let wrapData = WrapData(imageData: imageData, isLocal: true)
-//
-//        wrapData.name = name
-//        wrapData.patchToPreview = PathForItem.remoteUrl(url)
-//
-//        showSpinner()
-//        UploadService.default.uploadFileList(items: [wrapData], uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, isCollage: true, success: {
-//            DispatchQueue.main.async {
-//                self.analyticsService.logScreen(screen: .saveCollage)
-//                self.analyticsService.trackDimentionsEveryClickGA(screen: .saveCollage)
-//                self.hideSpinner()
-//                self.router.openForYou()
-//            }
-//        }, fail: {value in }, returnedUploadOperation: { _ in })
-        let r = RouterVC()
-        Generate
+        let image: UIImage = takeScreenshot(of: contentView)
+        let name: String = StringConstants.collageName
+        let imageData = image.jpegData(compressionQuality: 0.9)!
+        let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
+        let wrapData = WrapData(imageData: imageData, isLocal: true)
+
+        wrapData.name = name
+        wrapData.patchToPreview = PathForItem.remoteUrl(url)
+
+        showSpinner()
+        UploadService.default.uploadFileList(items: [wrapData], uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, isCollage: true, success: {
+            DispatchQueue.main.async {
+                self.analyticsService.logScreen(screen: .saveCollage)
+                self.analyticsService.trackDimentionsEveryClickGA(screen: .saveCollage)
+                self.hideSpinner()
+                self.router.openForYou()
+            }
+        }, fail: {value in }, returnedUploadOperation: { _ in })
     }
     
     private func deleteCollage() {
