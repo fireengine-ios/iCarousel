@@ -82,12 +82,14 @@ final class FullQuotaWarningPopUp: BasePopUpController {
 
     //MARK: IBOutlets
     @IBOutlet private weak var popUpView: UIView! {
-        willSet {
-            newValue.layer.cornerRadius = 5
-            newValue.layer.shadowRadius = 5
+        willSet {            
+            newValue.backgroundColor = AppColor.secondaryBackground.color
+            newValue.layer.cornerRadius = 15
+            newValue.layer.shadowRadius = 15
             newValue.layer.shadowOpacity = 0.5
             newValue.layer.shadowColor = UIColor.black.cgColor
             newValue.layer.shadowOffset = .zero
+            newValue.clipsToBounds = true
         }
     }
     
@@ -109,7 +111,7 @@ final class FullQuotaWarningPopUp: BasePopUpController {
     @IBOutlet private weak var titleLable: UILabel! {
         willSet {
             newValue.text = popUpType.title
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 20)
+            newValue.font = .appFont(.medium, size: 20)
             newValue.textColor = UIColor.lrPeach
             newValue.textAlignment = .center
             newValue.numberOfLines = 0
@@ -119,28 +121,24 @@ final class FullQuotaWarningPopUp: BasePopUpController {
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
             newValue.text = popUpType.description
-            newValue.textColor = ColorConstants.darkGrayTransperentColor
-            newValue.font = UIFont.TurkcellSaturaFont(size: 16)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 14)
             newValue.textAlignment = .center
             newValue.numberOfLines = 0
         }
     }
     
-    @IBOutlet private weak var expandQuotaButton: RoundedInsetsButton!  {
+    @IBOutlet private weak var expandQuotaButton: DarkBlueButton!  {
         willSet {
             newValue.setTitle(popUpType.expandQuotaButton, for: .normal)
-            newValue.setBackgroundColor(AppColor.darkBlueAndTealish.color, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
-            newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.insets = UIEdgeInsets(topBottom: 5, rightLeft: 30)
         }
     }
     
     @IBOutlet private weak var deleteFilesButton: UIButton! {
         willSet {
             newValue.setTitle(popUpType.deleteFilesButton, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 22)
-            newValue.setTitleColor(AppColor.darkBlueAndTealish.color, for: .normal)
+            newValue.titleLabel?.font = .appFont(.medium, size: 16)
+            newValue.setTitleColor(AppColor.darkBlue.color, for: .normal)
         }
     }
     
