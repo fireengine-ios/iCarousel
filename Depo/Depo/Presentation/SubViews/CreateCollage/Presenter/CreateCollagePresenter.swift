@@ -53,7 +53,7 @@ extension CreateCollagePresenter: CreateCollageViewOutput {
     }
     
     func onSeeAllButton(for section: CollageTemplateSections) {
-        router.navigateToSeeAll(collageTemplate: getCollageTemplate(for: section))
+        router.navigateToSeeAll(collageTemplate: getCollageTemplate(for: section), section: section)
     }
     
     func naviateToCollageTemplateDetail(collageTemplate: CollageTemplateElement) {

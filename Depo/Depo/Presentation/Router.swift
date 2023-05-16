@@ -1152,8 +1152,8 @@ class RouterVC: NSObject {
     
     // MARK: - Create Collage See All
 
-    func createCollageNavigateToSeeAll(collageTemplate: CollageTemplate)  -> CreateCollageDetailController {
-        return CreateCollageDetailController(collageTemplate: collageTemplate)
+    func createCollageNavigateToSeeAll(collageTemplate: CollageTemplate, section: CollageTemplateSections)  -> CreateCollageDetailController {
+        return CreateCollageDetailController(collageTemplate: collageTemplate, section: section)
     }
 
     // MARK: - Passcode
