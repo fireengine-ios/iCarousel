@@ -312,7 +312,7 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
         let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
         let wrapData = WrapData(imageData: imageData, isLocal: true)
 
-        wrapData.name = name
+        wrapData.name = "\(name).jpg"
         wrapData.patchToPreview = PathForItem.remoteUrl(url)
 
         showSpinner()
