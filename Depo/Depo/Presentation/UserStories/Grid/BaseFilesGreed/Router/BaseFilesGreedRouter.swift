@@ -125,8 +125,7 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
     }
     
     func createCollage() {
-        analyticsService.logScreen(screen: .createCollage)
-        analyticsService.trackDimentionsEveryClickGA(screen: .createCollage)
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .createCollage)
         let vc = router.createCollage()
         router.pushViewController(viewController: vc)
     }

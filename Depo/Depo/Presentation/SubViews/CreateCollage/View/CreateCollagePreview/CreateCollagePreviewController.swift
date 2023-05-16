@@ -312,14 +312,13 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
         let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
         let wrapData = WrapData(imageData: imageData, isLocal: true)
 
-        wrapData.name = name
+        wrapData.name = "\(name).jpg"
         wrapData.patchToPreview = PathForItem.remoteUrl(url)
 
         showSpinner()
         UploadService.default.uploadFileList(items: [wrapData], uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, isCollage: true, success: {
             DispatchQueue.main.async {
-                self.analyticsService.logScreen(screen: .saveCollage)
-                self.analyticsService.trackDimentionsEveryClickGA(screen: .saveCollage)
+                self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .saveCollage)
                 self.hideSpinner()
                 self.router.openForYou()
             }
@@ -681,10 +680,12 @@ extension CreateCollagePreviewController: UIDropInteractionDelegate {
                 if self.contentView.subviews[index].subviews[0].tag == interaction.view?.tag {
                     let imageView = self.contentView.subviews[index].subviews[0] as! UIImageView
                     imageView.image = images.first
+                    imageView.transform = .identity
                 }
                 if self.contentView.subviews[index].subviews[0].tag == self.draggedTag {
                     let imageView = self.contentView.subviews[index].subviews[0] as! UIImageView
                     imageView.image = self.draggedImage
+                    imageView.transform = .identity
                 }
             }
         }

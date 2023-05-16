@@ -12,12 +12,14 @@ import UIKit
 final class CreateCollageDetailController: BaseViewController {
     
     private var collageTemplate: CollageTemplate?
+    private var collageSection: CollageTemplateSections?
     var collectionView: UICollectionView?
     weak var delegate: CreateCollageTableViewCellDelegate?
     var output: CreateCollageViewOutput!
     
-    init(collageTemplate: CollageTemplate) {
+    init(collageTemplate: CollageTemplate, section: CollageTemplateSections) {
         self.collageTemplate = collageTemplate
+        self.collageSection = section
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -29,7 +31,7 @@ final class CreateCollageDetailController: BaseViewController {
         super.viewDidLoad()
         debugLog("CreateCollage viewDidLoad")
         
-        setTitle(withString: localized(.createCollageSelectCollage))
+        setTitle(withString: collageSection?.title ?? "")
         view.backgroundColor = AppColor.background.color
         collectionViewConfigure()
     }

@@ -77,7 +77,8 @@ extension CreateCollageViewController: UITableViewDataSource {
         }
         
         let key = output.getSectionsCountAndName()[indexPath.row]
-        cell.configure(model: output.getSectionsCollageTemplateData(shapeCount: key), section: getSectionByKey(key: key))
+        let section = getSectionByKey(key: key)
+        cell.configure(model: output.getCollageTemplate(for: section), section: section)
         cell.delegate = self
         cell.selectionStyle = .none
         cell.backgroundColor = AppColor.background.color
