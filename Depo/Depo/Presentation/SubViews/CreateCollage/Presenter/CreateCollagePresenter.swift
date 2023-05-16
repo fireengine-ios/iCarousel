@@ -58,7 +58,9 @@ extension CreateCollagePresenter: CreateCollageViewOutput {
         case .quad:
             return collageTemplateData?.filter { $0.shapeCount == 4 } ?? []
         case .multiple:
-            return collageTemplateData?.filter { $0.shapeCount > 4 } ?? []
+            return collageTemplateData?.filter { $0.shapeCount > 4 }.sorted(by: { first, second -> Bool in
+                return first.shapeCount < second.shapeCount
+            }) ?? []
         case .all:
             return collageTemplateData ?? []
         }
