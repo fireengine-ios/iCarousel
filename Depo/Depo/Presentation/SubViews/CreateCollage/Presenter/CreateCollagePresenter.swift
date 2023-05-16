@@ -26,10 +26,22 @@ extension CreateCollagePresenter: CreateCollageViewOutput {
     
     func getSectionsCountAndName() -> [Int] {
         var keys = [Int]()
+        var keysReturn = [Int]()
         let data = Dictionary(grouping: self.collageTemplateData ?? [], by: { $0.shapeCount })
         for (key, _) in data {
             keys.append(key)
         }
+        keysReturn = keys.sorted()
+        keys.removeAll()
+        for values in keysReturn {
+            if values < 5 {
+                keys.append(values)
+            } else {
+                keys.append(values)
+                break
+            }
+        }
+        
         return keys.sorted()
     }
     
