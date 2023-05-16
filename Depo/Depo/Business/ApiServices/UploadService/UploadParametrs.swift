@@ -116,13 +116,6 @@ class SimpleUpload: UploadRequestParametrs {
         let name = item.name ?? tmpUUID
         let fixed = name.precomposedStringWithCanonicalMapping
         let encodedName = fixed.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? name
-        
-        var createCollageHeader = "createCollageHeader"
-        if isCollage {
-            createCollageHeader = "COLLAGES"
-        } else {
-            createCollageHeader = uploadTo.rawValue
-        }
 
         header = header + [
             HeaderConstant.connectionType        : connectionStatus,
@@ -131,16 +124,21 @@ class SimpleUpload: UploadRequestParametrs {
             HeaderConstant.ContentType           : item.uploadContentType,
             HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,
             HeaderConstant.objecMetaDevice       : Device.deviceId ?? "",
-//            HeaderConstant.XMetaRecentServerHash : "s",
             HeaderConstant.XObjectMetaFileName   : encodedName,
             HeaderConstant.XObjectMetaFavorites  : isFavorite ? "true" : "false",
             HeaderConstant.XObjectMetaParentUuid : rootFolder,
-            HeaderConstant.XObjectMetaSpecialFolder : createCollageHeader,
+            HeaderConstant.XObjectMetaSpecialFolder : uploadTo.rawValue,
             HeaderConstant.Expect                : "100-continue",
             HeaderConstant.XObjectMetaDeviceType : Device.deviceType,
             HeaderConstant.XObjectMetaIosMetadataHash : item.asset?.localIdentifier ?? "",
             HeaderConstant.ContentLength         : "\(fileSize)"
         ]
+        
+        if isCollage {
+            header = header + [
+                HeaderConstant.XObjectMetaFolderLabel: "COLLAGES"
+            ]
+        }
 
         if let creationDate = item.asset?.creationDate {
             let milliseconds = Int64(creationDate.timeIntervalSince1970) * 1000
