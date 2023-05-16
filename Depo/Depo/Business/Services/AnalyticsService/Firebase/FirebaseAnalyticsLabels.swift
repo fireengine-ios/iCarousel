@@ -525,6 +525,9 @@ enum GAEventLabel {
     
     case saveToMyLifebox
 
+    case createCollage
+    case saveCollage
+    
     var text: String {
         switch self {
         case .empty:
@@ -781,6 +784,10 @@ enum GAEventLabel {
             return "Impression"
         case .saveToMyLifebox:
             return "save to mylifebox"
+        case .createCollage:
+            return "CreateCollage"
+        case .saveCollage:
+            return "SaveCollage"
         }
     }
     

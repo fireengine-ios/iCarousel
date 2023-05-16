@@ -104,8 +104,7 @@ final class ForYouRouter: ForYouRouterInput {
     }
     
     func navigateToCreateCollage() {
-        analyticsService.logScreen(screen: .createCollage)
-        analyticsService.trackDimentionsEveryClickGA(screen: .createCollage)
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .createCollage)
         let createCollage = router.createCollage()
         router.pushViewController(viewController: createCollage)
     }
