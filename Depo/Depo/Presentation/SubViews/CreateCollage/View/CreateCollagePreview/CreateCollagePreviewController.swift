@@ -681,10 +681,12 @@ extension CreateCollagePreviewController: UIDropInteractionDelegate {
                 if self.contentView.subviews[index].subviews[0].tag == interaction.view?.tag {
                     let imageView = self.contentView.subviews[index].subviews[0] as! UIImageView
                     imageView.image = images.first
+                    imageView.transform = .identity
                 }
                 if self.contentView.subviews[index].subviews[0].tag == self.draggedTag {
                     let imageView = self.contentView.subviews[index].subviews[0] as! UIImageView
                     imageView.image = self.draggedImage
+                    imageView.transform = .identity
                 }
             }
         }
