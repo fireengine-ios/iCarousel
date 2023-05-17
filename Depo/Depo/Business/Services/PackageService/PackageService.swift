@@ -280,6 +280,13 @@ final class PackageService {
             var period: String?
             if let offer = offer as? PackageModelResponse, let periodName = offer.period {
                 period = periodName
+            } else if let offer = offer as? SKProduct, #available(iOS 11.2, *) {
+                if offer.subscriptionPeriod?.unit == .month {
+                    period = "MONTH"
+                }
+                if offer.subscriptionPeriod?.unit == .year {
+                    period = "YEAR"
+                }
             }
             return period ?? ""
         }
