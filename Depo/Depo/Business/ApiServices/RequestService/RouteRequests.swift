@@ -512,9 +512,9 @@ struct RouteRequests {
     static let paycellAcceptedFriends = "paycell/sold?pageNumber=%d&pageSize=%d"
     
     // MARK: - For You
-    static let forYouCollages = baseUrl +/ "v2/foryou/collages"
-    static let forYouAnimations = baseUrl +/ "v2/foryou/animations"
-    static let forYouStories = baseUrl +/ "v2/foryou/stories"
+    static let forYouCollages = baseUrl +/ "foryou/collages"
+    static let forYouAnimations = baseUrl +/ "foryou/animations"
+    static let forYouStories = baseUrl +/ "foryou/stories"
     static let forYouCollageCards = baseUrl +/ "foryou/collages/generated"
     static let forYouAlbumCards = baseUrl +/ "foryou/albums/generated"
     static let forYouAnimationCards = baseUrl +/ "foryou/animations/generated"

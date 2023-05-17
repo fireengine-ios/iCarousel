@@ -96,15 +96,23 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
         keyboardDoneButton()
         showSpinner()
         let imagePathUrl = URL(string: collageTemplate!.collageImagePath)!
-        SDWebImageDownloader.shared().downloadImage(with: imagePathUrl) { [weak self] image, _, _, _ in
-            let scaledImageSize = CGSize(width: (self?.contentView.frame.width)!, height: (self?.contentView.frame.height)!)
-            let renderer = UIGraphicsImageRenderer(size: scaledImageSize)
-            let scaledImage = renderer.image { _ in
-                image!.draw(in: CGRect(origin: .zero, size: scaledImageSize))
+        SDWebImageDownloader.shared().downloadImage(with: imagePathUrl) { [weak self] image, data, error, finished in
+            if error != nil  {
+                self?.hideSpinner()
+                UIApplication.showErrorAlert(message: error?.localizedDescription ?? "", closed: {
+                    let router = RouterVC()
+                    router.popViewController()
+                })
+            } else {
+                let scaledImageSize = CGSize(width: (self?.contentView.frame.width)!, height: (self?.contentView.frame.height)!)
+                let renderer = UIGraphicsImageRenderer(size: scaledImageSize)
+                let scaledImage = renderer.image { _ in
+                    image!.draw(in: CGRect(origin: .zero, size: scaledImageSize))
+                }
+                self?.contentviewBackGroundImage = scaledImage
+                self?.createImageView(collageTemplate: (self?.collageTemplate!)!)
+                self?.hideSpinner()
             }
-            self?.contentviewBackGroundImage = scaledImage
-            self?.createImageView(collageTemplate: (self?.collageTemplate!)!)
-            self?.hideSpinner()
         }
     }
     
