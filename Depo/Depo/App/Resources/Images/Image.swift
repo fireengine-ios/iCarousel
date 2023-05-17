@@ -194,6 +194,7 @@ enum Image: String, AppImage {
     case popupLoading
     case createCollageThumbnail
     case iconCollage
+    case collageThumbnail
     
     /// Settings
     case gradientSwitch

@@ -20,6 +20,24 @@ final class ForYouCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    @IBOutlet weak var thumbnailIcon: UIImageView! {
+        willSet {
+            newValue.isHidden = true
+            newValue.contentMode = .scaleAspectFill
+            newValue.image = Image.iconCollage.image
+        }
+    }
+    
+    @IBOutlet weak var thumbnailLabel: UILabel! {
+        willSet {
+            newValue.isHidden = true
+            newValue.text = localized(.createCollageLabel)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.medium, size: 14)
+            newValue.numberOfLines = 2
+        }
+    }
+    
     func configure(with wrapData: WrapData, currentView: ForYouSections) {
         switch wrapData.patchToPreview {
         case .remoteUrl(let url):
@@ -34,12 +52,16 @@ final class ForYouCollectionViewCell: UICollectionViewCell {
         if wrapData.tmpDownloadUrl != nil {
             switch wrapData.patchToPreview {
             case .remoteUrl(let url):
+                thumbnailIcon.isHidden = true
+                thumbnailLabel.isHidden = true
                 setImage(with: url!)
             default:
                 break
             }
         } else {
-            thumbnailImage.image = Image.createCollageThumbnail.image
+            thumbnailIcon.isHidden = false
+            thumbnailLabel.isHidden = false
+            thumbnailImage.image = Image.collageThumbnail.image
         }
     }
     
