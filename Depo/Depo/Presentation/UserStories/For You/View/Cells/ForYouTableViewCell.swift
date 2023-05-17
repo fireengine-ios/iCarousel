@@ -237,7 +237,7 @@ extension ForYouTableViewCell: UICollectionViewDataSource {
             return cell
         case .collages:
             let item = wrapData[indexPath.row]
-            cell.configure(with: item)
+            cell.configureForCollage(with: item)
             return cell
         default:
             let item = wrapData[indexPath.row]

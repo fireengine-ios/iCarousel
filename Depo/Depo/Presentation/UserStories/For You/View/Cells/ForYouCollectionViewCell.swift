@@ -21,8 +21,25 @@ final class ForYouCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with wrapData: WrapData, currentView: ForYouSections) {
-        if let url = wrapData.getAnyValidRemoteUrl {
-            setImage(with: url)
+        switch wrapData.patchToPreview {
+        case .remoteUrl(let url):
+            //thumbnailImage.sd_setImage(with: url, completed: nil)
+            setImage(with: url!)
+        default:
+            break
+        }
+    }
+    
+    func configureForCollage(with wrapData: WrapData) {
+        if wrapData.tmpDownloadUrl != nil {
+            switch wrapData.patchToPreview {
+            case .remoteUrl(let url):
+                setImage(with: url!)
+            default:
+                break
+            }
+        } else {
+            thumbnailImage.image = Image.createCollageThumbnail.image
         }
     }
     
