@@ -185,7 +185,9 @@ extension MyStoragePresenter: MyStorageViewOutput {
         model.type?.purchaseActions(slcm: { [weak self] in
             self?.buy(offer: model, planIndex: planIndex)
         }, apple: { [weak self] in
+            UserDefaults.standard.set(true, forKey: "PurchaseOrFirst") //purchase is true
             self?.view?.startActivityIndicator()
+            self?.view?.startPurchase()
             self?.interactor.activate(offer: model, planIndex: planIndex)
         }, paycell: { [weak self] in
             guard let offerId = model.cpcmOfferId else {
@@ -236,6 +238,14 @@ extension MyStoragePresenter: MyStorageViewOutput {
 
 //MARK: - MyStorageInteractorOutput
 extension MyStoragePresenter: MyStorageInteractorOutput {
+    
+    func startPurchase() {
+        view?.startPurchase()
+    }
+    
+    func stopPurchase() {
+        view?.stopPurchase()
+    }
     
     func purchaseCancelled() {
         view?.stopActivityIndicator()
@@ -367,7 +377,7 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     }
     
     func refreshPackages() {
-        stopActivity()
+        //stopActivity()
         refreshPage()
     }
     

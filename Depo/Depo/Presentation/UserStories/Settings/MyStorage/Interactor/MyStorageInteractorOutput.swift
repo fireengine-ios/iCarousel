@@ -25,6 +25,9 @@ protocol MyStorageInteractorOutput: AnyObject {
     func stopActivity()
     func startActivity()
     
+    func startPurchase()
+    func stopPurchase()
+    
     func purchaseCancelled()
     func successedGotUserAuthority()
 }

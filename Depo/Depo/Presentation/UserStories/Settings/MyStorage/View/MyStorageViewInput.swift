@@ -14,4 +14,7 @@ protocol MyStorageViewInput: AnyObject, ActivityIndicator {
     func showInAppPolicy()
     
     func checkIfPremiumBannerValid()
+    
+    func startPurchase()
+    func stopPurchase()
 }
