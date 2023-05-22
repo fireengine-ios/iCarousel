@@ -2091,12 +2091,11 @@ then {11,99 TRY/Month}*/
 "Office_Filter_Presentation" = "";
 "Office_Filter_All" = "";
 "Office_Filter_PDF" = "";
-"create_collage_triple" = "";
-"create_collage_quad" = "";
-"create_collage_multiple" = "";
+"create_collage_triple" = "Коллаж из 3 частей";
+"create_collage_quad" = "Коллаж из 4 частей";
+"create_collage_multiple" = "Мульти-Коллаж";
 "create_collage_all" = "";
-"create_collage_select_collage" = "";
-"create_collage_info_label" = "";
+"create_collage_info_label" = "Коснитесь любой фотографии для редактирования";
 
 /*Fotoğraf Seçin*/
 "create_collage_select_photo" = "Выбрать Фотографии";

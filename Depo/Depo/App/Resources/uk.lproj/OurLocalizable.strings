@@ -2079,12 +2079,11 @@ then {11,99 TRY/Month}*/
 "Office_Filter_Presentation" = "";
 "Office_Filter_All" = "";
 "Office_Filter_PDF" = "";
-"create_collage_triple" = "";
-"create_collage_quad" = "";
-"create_collage_multiple" = "";
+"create_collage_triple" = "Колаж із 3 частин";
+"create_collage_quad" = "Колаж із 4 частин";
+"create_collage_multiple" = "Мульти-Колаж";
 "create_collage_all" = "";
-"create_collage_select_collage" = "";
-"create_collage_info_label" = "";
+"create_collage_info_label" = "Торкніться будь-якої фотографії для редагування";
 
 /*Fotoğraf Seçin*/
 "create_collage_select_photo" = "Вибрати Фотографії";
