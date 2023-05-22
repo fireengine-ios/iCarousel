@@ -2115,7 +2115,6 @@ then {11,99 TRY/Month}*/
 "create_collage_quad" = "4'lü Kolajlar";
 "create_collage_multiple" = "Çoklu Kolajlar";
 "create_collage_all" = "Tüm Kolajlar";
-"create_collage_select_collage" = "Kolaj Seçin";
 "create_collage_info_label" = "Düzenlemek için herhangi bir fotoğrafa dokunun";
 
 /*Fotoğraf Seçin*/

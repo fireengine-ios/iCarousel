@@ -76,6 +76,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .success, channelType: .appStore, packageName: offer.displayName ?? ""))
                 self.validatePurchase(productId: identifier)
             case .canceled:
+                self.output.stopPurchase()
                 self.analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .paymentErrors, eventLabel: .paymentError("transaction canceled"))
                 self.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .failure)
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .failure, channelType: .appStore, packageName: offer.displayName ?? ""))
@@ -83,6 +84,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
                     self.output?.purchaseCancelled()
                 }
             case .error(let error):
+                self.output.stopPurchase()
                 self.analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .paymentErrors, eventLabel: .paymentError("\(error.description)"))
                 self.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .failure)
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .failure, channelType: .appStore, packageName: offer.displayName ?? ""))

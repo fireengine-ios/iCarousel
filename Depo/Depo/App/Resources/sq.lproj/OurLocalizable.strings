@@ -2120,12 +2120,11 @@ then {11,99 TRY/Month}*/
 "Office_Filter_Presentation" = "";
 "Office_Filter_All" = "";
 "Office_Filter_PDF" = "";
-"create_collage_triple" = "";
-"create_collage_quad" = "";
-"create_collage_multiple" = "";
+"create_collage_triple" = "Kolazh me 3 pjesë";
+"create_collage_quad" = "Kolazh me 4 pjesë";
+"create_collage_multiple" = "Kolazh i Shumëfishtë";
 "create_collage_all" = "";
-"create_collage_select_collage" = "";
-"create_collage_info_label" = "";
+"create_collage_info_label" = "Prekni çdo foto për të redaktuar";
 
 /*Fotoğraf Seçin*/
 "create_collage_select_photo" = "Zgjidhni Photos";

@@ -2089,12 +2089,11 @@ then {11,99 TRY/Month}*/
 "Office_Filter_Presentation" = "";
 "Office_Filter_All" = "";
 "Office_Filter_PDF" = "";
-"create_collage_triple" = "";
-"create_collage_quad" = "";
-"create_collage_multiple" = "";
+"create_collage_triple" = "3 أجزاء الكولاج";
+"create_collage_quad" = "4 جزء الكولاج";
+"create_collage_multiple" = "متعدد الكولاج";
 "create_collage_all" = "";
-"create_collage_select_collage" = "";
-"create_collage_info_label" = "";
+"create_collage_info_label" = "المس أي صورة لتحريرها";
 
 /*Fotoğraf Seçin*/
 "create_collage_select_photo" = "حدد الصور";

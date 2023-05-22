@@ -2139,12 +2139,11 @@ then {11,99 TRY/Month}*/
 "Office_Filter_Presentation" = "";
 "Office_Filter_All" = "";
 "Office_Filter_PDF" = "";
-"create_collage_triple" = "";
-"create_collage_quad" = "";
-"create_collage_multiple" = "";
+"create_collage_triple" = "Collage of 3";
+"create_collage_quad" = "Collage of 4";
+"create_collage_multiple" = "Collage of Multiple";
 "create_collage_all" = "";
-"create_collage_select_collage" = "";
-"create_collage_info_label" = "";
+"create_collage_info_label" = "Touch any photo to edit";
 
 /*Fotoğraf Seçin*/
 "create_collage_select_photo" = "Select Photos";

@@ -2075,11 +2075,10 @@ then {11,99 TRY/Month}*/
 "Office_Filter_Presentation" = "Office_Filter_Presentation";
 "Office_Filter_All" = "Office_Filter_All";
 "Office_Filter_PDF" = "Office_Filter_PDF";
-"create_collage_triple" = "შექმნა_კოლაჟი_სამმაგი";
-"create_collage_quad" = "შექმნა_კოლაჟი_ოთხმაგი";
-"create_collage_multiple" = "შექმნა_კოლაჟი_მრავალჯერადი";
+"create_collage_triple" = "კოლაჟი 3";
+"create_collage_quad" = "კოლაჟი 4";
+"create_collage_multiple" = "მრავალჯერადი კოლაჟი";
 "create_collage_all" = "შექმნა_კოლაჟი_ყველა";
-"create_collage_select_collage" = "შექმენი კოლაჟი_მონიშნე კოლაჟი";
 "create_collage_info_label" = "შექმენი კოლაჟი ინფორმაციის ეტიკეტი";
 
 /*Fotoğraf Seçin*/

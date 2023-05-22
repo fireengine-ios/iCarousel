@@ -32,7 +32,7 @@ final class ForYouTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var collectionView: UICollectionView! {
         willSet {
-            newValue.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
+            newValue.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 20)
         }
     }
     
