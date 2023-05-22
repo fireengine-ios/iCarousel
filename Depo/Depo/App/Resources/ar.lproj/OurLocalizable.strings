@@ -2039,7 +2039,9 @@ then {11,99 TRY/Month}*/
 "title_paycell_subtitle" = "رصيد Paycell";
 "title_paycell_friends" = "الأشخاص الذين اشتروا الحزمة ( %d من الأشخاص)";
 "paycell_share_message" = "انضممت إلى برنامج سفير العلامة التجارية lifebox. يمكنك الحصول على حزمة lifebox الخاصة بالبرنامج لمدة 6 أشهر 250 جيجابايت Premium بسعر مخفض بالنقر فوق الرابط أدناه. لا تفوت الفرصة 😊";
-"beeline_cancel_TC" = "يمكنك إلغاء أو إدارة اشتراكك في lifebox من Beeline التطبيق.";
+
+/*Fuzzy*/
+"beeline_cancel_TC" = "يمكنك إلغاء أو إدارة اشتراكك في lifebox من Cellfie التطبيق.";
 "foryou_throwback" = "ذكريات";
 "foryou_myalbums" = "ألبوماتي";
 "foryou_myanimations" = "الرسوم المتحركة الخاصة بي";
@@ -2087,19 +2089,19 @@ then {11,99 TRY/Month}*/
 "Office_Filter_Presentation" = "";
 "Office_Filter_All" = "";
 "Office_Filter_PDF" = "";
-"create_collage_triple" = "";
-"create_collage_quad" = "";
-"create_collage_multiple" = "";
+"create_collage_triple" = "3 أجزاء الكولاج";
+"create_collage_quad" = "4 جزء الكولاج";
+"create_collage_multiple" = "متعدد الكولاج";
 "create_collage_all" = "";
-"create_collage_select_collage" = "";
-"create_collage_info_label" = "";
+"create_collage_info_label" = "المس أي صورة لتحريرها";
 
 /*Fotoğraf Seçin*/
-"create_collage_select_photo" = "";
+"create_collage_select_photo" = "حدد الصور";
 
 /*+New Collage*/
-"create_collage_preview_main" = "";
+"create_collage_preview_main" = "+قم بإنشاء مجمعة";
 
 /*2'li Kolajlar*/
-"create_collage_dual" = "";
+"create_collage_dual" = "2 جزء الكولاج";
 "create_collage" = "قم بإنشاء مجمعة";
+"collage_create_info" = "انقر فوق علامة الجمع لإنشاء مجمعة";

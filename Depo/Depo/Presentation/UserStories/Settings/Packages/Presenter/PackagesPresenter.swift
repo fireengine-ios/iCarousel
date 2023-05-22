@@ -69,8 +69,6 @@ extension PackagesPresenter: PackagesInteractorOutput {
 extension PackagesPresenter: PackageInfoViewDelegate {
     func onSeeDetailsTap(with type: ControlPackageType) {
         switch type {
-        case .usage:
-            router.openUsage()
         case .myStorage:
             let usage = UsageResponse()
             usage.usedBytes = quotaInfo?.bytesUsed

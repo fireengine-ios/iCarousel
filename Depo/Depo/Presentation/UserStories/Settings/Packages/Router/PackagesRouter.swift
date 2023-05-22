@@ -18,14 +18,6 @@ extension PackagesRouter: PackagesRouterInput {
         router.pushViewController(viewController: viewController)
     }
     
-    func openUsage() {
-        guard let userInfo = router.usageInfo else {
-            assertionFailure()
-            return
-        }
-        router.pushViewController(viewController: userInfo)
-    }
-    
     func openUserProfile(userInfo: AccountInfoResponse, isTurkcellUser: Bool) {
         let viewController = router.userProfile(userInfo: userInfo, isTurkcellUser: isTurkcellUser)
         router.pushViewController(viewController: viewController)

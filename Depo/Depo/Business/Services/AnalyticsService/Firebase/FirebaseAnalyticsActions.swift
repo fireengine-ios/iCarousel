@@ -138,6 +138,9 @@ enum GAEventAction {
     case deleteMyAccountStep3
     
     case saveToMyLifebox
+    
+    case createCollage
+    case saveCollage
 
     var text: String {
         switch self {
@@ -374,6 +377,10 @@ enum GAEventAction {
             return "Delete My Account Step3"
         case .saveToMyLifebox:
             return "save to my lifebox"
+        case .createCollage:
+            return "CreateCollage"
+        case .saveCollage:
+            return "SaveCollage"
         }
     }
 }

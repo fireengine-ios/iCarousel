@@ -240,7 +240,7 @@ enum Strings: String, Localizable {
     case createCollageQuadCollage = "create_collage_quad"
     case createCollageMultipleCollage = "create_collage_multiple"
     case createCollageAllCollage = "create_collage_all"
-    case createCollageSelectCollage = "create_collage_select_collage"
     case createCollageInfoLabel = "create_collage_info_label"
     case createCollageLabel = "create_collage"
+    case createCollageInfoLabelNew = "collage_create_info"
 }

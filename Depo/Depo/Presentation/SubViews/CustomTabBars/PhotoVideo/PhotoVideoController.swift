@@ -115,7 +115,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             presentRecoveryEmailVerificationPopUp()
         }
         
-        //canNotificationPopupRaiseUp()
+        canNotificationPopupRaiseUp()
     }
     
     private func canNotificationPopupRaiseUp() {

@@ -178,7 +178,7 @@ final class NetmeraService {
         case .production:
             return "3PJRHrXDiqakWjtB7quX9jhybzZjSWI4tfk7QNeg9wF6ZWP9p5QxPQ"
         case .preProduction, .test:
-            return "3PJRHrXDiqaHdWlOTW4MnUDu8tlYjCgK6o44lliopDflmfFCDisfwg"
+            return "3PJRHrXDiqa-pwWScAq1P8Kdy36nFr6GtZJwBnfqCpCxnST7-scT_Q"
         }
 
         #elseif LIFEDRIVE

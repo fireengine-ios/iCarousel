@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-class ForYouCollectionViewCell: UICollectionViewCell {
+final class ForYouCollectionViewCell: UICollectionViewCell {
     
     private var cellImageManager: CellImageManager?
     
@@ -17,6 +17,24 @@ class ForYouCollectionViewCell: UICollectionViewCell {
         willSet {
             newValue.contentMode = .scaleAspectFill
             newValue.layer.cornerRadius = 5
+        }
+    }
+    
+    @IBOutlet weak var thumbnailIcon: UIImageView! {
+        willSet {
+            newValue.isHidden = true
+            newValue.contentMode = .scaleAspectFill
+            newValue.image = Image.iconCollage.image
+        }
+    }
+    
+    @IBOutlet weak var thumbnailLabel: UILabel! {
+        willSet {
+            newValue.isHidden = true
+            newValue.text = localized(.createCollageLabel)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.medium, size: 14)
+            newValue.numberOfLines = 2
         }
     }
     
@@ -34,16 +52,20 @@ class ForYouCollectionViewCell: UICollectionViewCell {
         if wrapData.tmpDownloadUrl != nil {
             switch wrapData.patchToPreview {
             case .remoteUrl(let url):
+                thumbnailIcon.isHidden = true
+                thumbnailLabel.isHidden = true
                 setImage(with: url!)
             default:
                 break
             }
         } else {
-            thumbnailImage.image = Image.createCollageThumbnail.image
+            thumbnailIcon.isHidden = false
+            thumbnailLabel.isHidden = false
+            thumbnailImage.image = Image.collageThumbnail.image
         }
     }
     
-    func setImage(image: UIImage?, animated: Bool) {
+    private func setImage(image: UIImage?, animated: Bool) {
         thumbnailImage.contentMode = .scaleAspectFill
         if animated {
             thumbnailImage.layer.opacity = NumericConstants.numberCellDefaultOpacity
@@ -57,7 +79,7 @@ class ForYouCollectionViewCell: UICollectionViewCell {
     }
     
     
-    func setImageRecover(with url: URL) {
+    private func setImageRecover(with url: URL) {
         let cacheKey = url.byTrimmingQuery
         cellImageManager = CellImageManager.instance(by: cacheKey)
         let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, shouldBeBlurred, uniqueId in
@@ -71,7 +93,7 @@ class ForYouCollectionViewCell: UICollectionViewCell {
         cellImageManager?.loadImage(thumbnailUrl: nil, url: url, isOwner: true, completionBlock: imageSetBlock)
     }
     
-    func setImage(with url: URL) {
+    private func setImage(with url: URL) {
         let cacheKey = url.byTrimmingQuery
         cellImageManager = CellImageManager.instance(by: cacheKey)
         let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, shouldBeBlurred, uniqueId in

@@ -13,8 +13,8 @@ final class CreateCollageRouter: CreateCollageRouterInput {
     private let router = RouterVC()
     weak var presenter: CreateCollagePresenter!
     
-    func navigateToSeeAll(collageTemplate: CollageTemplate) {
-        let vc = router.createCollageNavigateToSeeAll(collageTemplate: collageTemplate)
+    func navigateToSeeAll(collageTemplate: CollageTemplate, section: CollageTemplateSections) {
+        let vc = router.createCollageNavigateToSeeAll(collageTemplate: collageTemplate, section: section)
         router.pushViewController(viewController: vc, animated: false)
     }
     
@@ -34,6 +34,6 @@ final class CreateCollageRouter: CreateCollageRouterInput {
     }
     
     func openForYou() {
-        router.createCollageToForyou()
+        router.openTabBarItem(index: .forYou)
     }
 }

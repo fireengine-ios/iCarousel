@@ -26,10 +26,22 @@ extension CreateCollagePresenter: CreateCollageViewOutput {
     
     func getSectionsCountAndName() -> [Int] {
         var keys = [Int]()
+        var keysReturn = [Int]()
         let data = Dictionary(grouping: self.collageTemplateData ?? [], by: { $0.shapeCount })
         for (key, _) in data {
             keys.append(key)
         }
+        keysReturn = keys.sorted()
+        keys.removeAll()
+        for values in keysReturn {
+            if values < 5 {
+                keys.append(values)
+            } else {
+                keys.append(values)
+                break
+            }
+        }
+        
         return keys.sorted()
     }
     
@@ -46,14 +58,16 @@ extension CreateCollagePresenter: CreateCollageViewOutput {
         case .quad:
             return collageTemplateData?.filter { $0.shapeCount == 4 } ?? []
         case .multiple:
-            return collageTemplateData?.filter { $0.shapeCount > 4 } ?? []
+            return collageTemplateData?.filter { $0.shapeCount > 4 }.sorted(by: { first, second -> Bool in
+                return first.shapeCount < second.shapeCount
+            }) ?? []
         case .all:
             return collageTemplateData ?? []
         }
     }
     
     func onSeeAllButton(for section: CollageTemplateSections) {
-        router.navigateToSeeAll(collageTemplate: getCollageTemplate(for: section))
+        router.navigateToSeeAll(collageTemplate: getCollageTemplate(for: section), section: section)
     }
     
     func naviateToCollageTemplateDetail(collageTemplate: CollageTemplateElement) {

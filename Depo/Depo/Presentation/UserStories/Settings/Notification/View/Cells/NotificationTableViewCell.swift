@@ -229,7 +229,7 @@ class NotificationTableViewCell: UITableViewCell {
             descriptionLabel.attributedText = body.getAsHtml
         }
         
-        if let thumbnail = model.smallThumbnail,
+        if let thumbnail = model.image ?? model.smallThumbnail ?? model.largeThumbnail,
            let url = URL(string: thumbnail) {
             cardImageView.sd_setImage(with: url)
         }

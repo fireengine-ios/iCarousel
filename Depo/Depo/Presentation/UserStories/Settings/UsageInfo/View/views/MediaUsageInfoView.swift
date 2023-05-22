@@ -28,11 +28,23 @@ final class MediaUsageInfoView: UIView {
                 return TextConstants.usageInfoDocuments
             }
         }
+        
+        var icon: UIImage {
+            switch self {
+            case .photo:
+                return Image.iconGalleryPhoto.image
+            case .video:
+                return Image.iconVideo.image
+            case .music:
+                return Image.iconMusicWhite.image
+            case .docs:
+                return Image.iconFileEmptyWhite.image
+            }
+        }
     }
     
-    private let countLabel = UILabel()
     private let volumeLabel = UILabel()
-    private static let distance: CGFloat = 2
+    private let volumeIcon = UIImageView()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,8 +54,8 @@ final class MediaUsageInfoView: UIView {
     
     //MARK: Utility Methods(Private)
     private func setup() {
-        self.addSubview(countLabel)
-        self.addSubview(volumeLabel)
+        addSubview(volumeLabel)
+        addSubview(volumeIcon)
         
         setupDesign()
         setupConstraints()
@@ -51,33 +63,34 @@ final class MediaUsageInfoView: UIView {
     
     private func setupDesign() {
         volumeLabel.text = ""
-        volumeLabel.textAlignment = .right
+        volumeLabel.textAlignment = .center
         volumeLabel.textColor = AppColor.label.color
-        volumeLabel.font = .appFont(.medium, size: 14)
-        
-        countLabel.text = ""
-        countLabel.textAlignment = .right
-        countLabel.textColor = AppColor.label.color
-        countLabel.font = .appFont(.regular, size: 14)
+        volumeLabel.font = .appFont(.regular, size: 15)
+        volumeLabel.numberOfLines = 0
     }
     
     private func setupConstraints() {
-        countLabel.translatesAutoresizingMaskIntoConstraints = false
         volumeLabel.translatesAutoresizingMaskIntoConstraints = false
+        volumeIcon.translatesAutoresizingMaskIntoConstraints = false
         
-        volumeLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        volumeLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        volumeIcon.topAnchor.constraint(equalTo: topAnchor).activate()
+        volumeIcon.centerXAnchor.constraint(equalTo: centerXAnchor).activate()
         
-        volumeLabel.bottomAnchor.constraint(equalTo: countLabel.topAnchor,
-                                            constant: MediaUsageInfoView.distance).isActive = true
-        
-        countLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        countLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        volumeLabel.topAnchor.constraint(equalTo: volumeIcon.bottomAnchor, constant: 4).isActive = true
+        volumeLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        volumeLabel.centerXAnchor.constraint(equalTo: centerXAnchor).activate()
     }
     
     //MARK: Utility Methods(Public)
     func configure(type: MediaType, count: Int?, volume: Int64?) {
-        volumeLabel.text = volume?.bytesString
-        countLabel.text = String(format: type.formatString, count ?? 0)
+        
+        let countType = String(format: type.formatString, count ?? 0).components(separatedBy: " ")
+        
+        guard let countStr = countType.first,
+              let typeStr = countType.last,
+              let volume = volume else { return }
+        
+        volumeLabel.text = countStr + "\n" + typeStr + "\n" + volume.bytesString
+        volumeIcon.image = type.icon
     }
 }

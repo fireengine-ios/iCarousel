@@ -66,12 +66,18 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
     func onItemDeleted(count: Int) {
         if count > 0 {
             let text = String(format: TextConstants.freeAppSpaceAlertSuccesTitle, count)
-            UIApplication.showSuccessAlert(message: text)
+            asyncOperationSuccess()
+            NotificationCenter.default.addObserver(self,selector: #selector(toBackPage),name: .freeAppSpaceToBackScreen, object: nil)
+            UIApplication.showSuccessAlertForFreeAppSpace(message: text)
         }
         
         if let view = view as? BaseFilesGreedViewController {
             view.requestStopped()
         }
+    }
+    
+    @objc func toBackPage() {
+        goBack()
     }
     
      override func moreActionsPressed(sender: Any) {

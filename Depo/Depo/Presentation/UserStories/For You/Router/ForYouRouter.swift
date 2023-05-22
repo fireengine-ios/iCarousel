@@ -12,6 +12,7 @@ final class ForYouRouter: ForYouRouterInput {
     private let router = RouterVC()
     weak var presenter: ForYouPresenter!
     private lazy var instaPickRoutingService = InstaPickRoutingService()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     func navigateToSeeAll(for view: ForYouSections) {
         switch view {
@@ -103,6 +104,7 @@ final class ForYouRouter: ForYouRouterInput {
     }
     
     func navigateToCreateCollage() {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .createCollage)
         let createCollage = router.createCollage()
         router.pushViewController(viewController: createCollage)
     }

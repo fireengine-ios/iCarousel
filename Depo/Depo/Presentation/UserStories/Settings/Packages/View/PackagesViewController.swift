@@ -27,9 +27,10 @@ final class PackagesViewController: BaseViewController {
         }
     }
     
+    @IBOutlet weak var usageView: UIView!
     @IBOutlet weak private var cardsStackView: UIStackView!
 
-    private var menuViewModels: [ControlPackageType] = [.myProfile, .usage(percentage: 0), .connectedAccounts]
+    private var menuViewModels: [ControlPackageType] = [.myProfile, .connectedAccounts]
     
     // MARK: - View lifecycle
     override func viewDidLoad() {
@@ -42,11 +43,27 @@ final class PackagesViewController: BaseViewController {
         cardsTableView.dataSource = self
         self.view.backgroundColor = ColorConstants.fileGreedCellColorSecondary
         output.viewIsReady()
+        
+        applyUsageView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         output.viewWillAppear()
+    }
+    
+    private func applyUsageView() {
+        let router = RouterVC()
+        
+        guard let child = router.usageInfo else { return }
+        
+        addChild(child)
+        usageView.addSubview(child.view)
+        
+        child.view.translatesAutoresizingMaskIntoConstraints = false
+        child.view.pinToSuperviewEdges()
+        
+        child.didMove(toParent: self)
     }
 }
 
@@ -58,9 +75,6 @@ extension PackagesViewController: PackagesViewInput {
         
         ///my profile card
         addNewCard(type: .myProfile)
-        
-        ///my usage card
-        addNewCard(type: .usage(percentage: percentage))
         
         //connectedAccountsCard
         addNewCard(type: .connectedAccounts)

@@ -99,7 +99,7 @@ class WebViewPopup: BasePopUpController {
     }
     
     @objc private func closeOnTap() {
-        sendDelete()
+        sendRead()
         close()
     }
     
@@ -166,8 +166,8 @@ class WebViewPopup: BasePopUpController {
         bodyScrollView.bottomAnchor.constraint(equalTo: popUpView.bottomAnchor).isActive = true
         contentView.centerXAnchor.constraint(equalTo: bodyScrollView.centerXAnchor).isActive = true
         contentView.widthAnchor.constraint(equalTo: bodyScrollView.widthAnchor).isActive = true
-        contentView.topAnchor.constraint(equalTo: bodyScrollView.topAnchor).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: bodyScrollView.bottomAnchor).isActive = true
+        contentView.topAnchor.constraint(equalTo: bodyScrollView.topAnchor, constant: 15).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: bodyScrollView.bottomAnchor, constant: -20).isActive = true
 
         contentView.addSubview(bodyLabel)
         bodyLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -241,14 +241,13 @@ class WebViewPopup: BasePopUpController {
         closeButton.isHidden = true
     }
     
-    private func sendDelete() {
-        service.delete(with: [id]) { value in
+    private func sendRead() {
+        service.read(with: String(id)) { value in
             debugLog("WebViewPopup - Close - Success")
         } fail: { value in
             debugLog("WebViewPopup - Close - Fail")
         }
     }
-    
     private func getHightOfLabel() -> CGFloat {
         // Subsract leadind and trailings
         let width = UIScreen.main.bounds.width - 24
@@ -259,7 +258,7 @@ class WebViewPopup: BasePopUpController {
                                                               withHorizontalFittingPriority: .required,
                                                               verticalFittingPriority: .fittingSizeLevel).height
         // Plus top and bottom constraint
-        return height + 32
+        return height + 67
     }
 }
 
@@ -278,8 +277,7 @@ extension WebViewPopup {
     
     private static func raiseString(controller: WebViewPopup, content: NotificationServiceResponse) {
         guard let body = content.body,
-              let title = content.title,
-              let imageUrl = content.image else { return }
+              let title = content.title else { return }
         
         if body.isHTMLString {
             controller.type = .html
@@ -288,7 +286,11 @@ extension WebViewPopup {
             controller.type = .string
             controller.bodyLabel.text = body
             controller.titleLabel.text = title
-            controller.cardImageView.sd_setImage(with: URL(string: imageUrl)!)
+            
+            if let imageUrl = content.image ?? content.smallThumbnail ?? content.largeThumbnail,
+                let url = URL(string: imageUrl) {
+                controller.cardImageView.sd_setImage(with: url)
+            }
         }
     }
     

@@ -32,7 +32,7 @@ final class ForYouTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var collectionView: UICollectionView! {
         willSet {
-            newValue.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
+            newValue.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 20)
         }
     }
     
@@ -100,7 +100,7 @@ final class ForYouTableViewCell: UITableViewCell {
             showEmptyDataViewIfNeeded(isShow: false)
         case .collages:            
             self.wrapData = model as? [WrapData] ?? []
-            //wrapData.append(additionalWrapData())
+            wrapData.append(additionalWrapData())
             showEmptyDataViewIfNeeded(isShow: wrapData.isEmpty)
         default:
             self.wrapData = model as? [WrapData] ?? []

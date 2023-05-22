@@ -1964,7 +1964,7 @@
 "save_to_my_lifebox_full_storage_body" = "Sie können Speicherplatz auf diesem iPhone freigeben, indem Sie Ihren Speicherplatz in den Einstellungen verwalten.";
 "places_map_title" = "Karte";
 "map_location_detail_header" = "Fotos an Diesem Standort";
-"beeline_feature_cancel_TC" = "Beeline";
+"beeline_feature_cancel_TC" = "Cellfie";
 "security_popup_body" = "Bitte geben Sie mindestens 1 Feld ein, um Ihr Konto einfach wiederherzustellen, wenn Sie Ihr Passwort vergessen haben";
 "security_popup_header" = "Legen Sie Ihre Wiederherstellungs-E-Mail oder Sicherheitsfrage fest";
 "save_to_my_billo" = "In Mein Billo Speichern";
@@ -2027,7 +2027,9 @@ then {11,99 TRY/Month}*/
 "title_paycell_subtitle" = "Paycell-Guthaben";
 "title_paycell_friends" = "Paketkäufer (%d Personen)";
 "paycell_share_message" = "Ich bin dem lifebox Brand Ambassador Program beigetreten. Sie können das programmspezifische lifebox 6-Monats-250-GB Premium-Paket zu einem ermäßigten Preis erwerben, indem Sie auf den folgenden Link klicken. Verpassen Sie es nicht 😊";
-"beeline_cancel_TC" = "Sie können Ihr Abonnement von lifebox über die Beeline-App kündigen oder verwalten.";
+
+/*Fuzzy*/
+"beeline_cancel_TC" = "Sie können Ihr Abonnement von lifebox über die Cellfie-App kündigen oder verwalten.";
 "foryou_throwback" = "Rückblick";
 "foryou_myalbums" = "Meine Alben";
 "foryou_myanimations" = "Meine Animationen";
@@ -2075,19 +2077,19 @@ then {11,99 TRY/Month}*/
 "Office_Filter_Presentation" = "";
 "Office_Filter_All" = "";
 "Office_Filter_PDF" = "";
-"create_collage_triple" = "";
-"create_collage_quad" = "";
-"create_collage_multiple" = "";
+"create_collage_triple" = "Kollage von 3";
+"create_collage_quad" = "Kollage von 4";
+"create_collage_multiple" = "Collage von Multiple";
 "create_collage_all" = "";
-"create_collage_select_collage" = "";
-"create_collage_info_label" = "";
+"create_collage_info_label" = "Berühren Sie ein beliebiges Foto, um es zu bearbeiten";
 
 /*Fotoğraf Seçin*/
-"create_collage_select_photo" = "";
+"create_collage_select_photo" = "Wähle Fotos aus";
 
 /*+New Collage*/
-"create_collage_preview_main" = "";
+"create_collage_preview_main" = "+Erstellen Sie eine Collage";
 
 /*2'li Kolajlar*/
-"create_collage_dual" = "";
+"create_collage_dual" = "Kollage von 2";
 "create_collage" = "Collage Erstellen";
+"collage_create_info" = "Klicken Sie auf Plus, um eine Collage zu erstellen";

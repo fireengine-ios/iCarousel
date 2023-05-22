@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,6 +15,7 @@
                 <outlet property="cardsStackView" destination="FWc-7v-dob" id="uZx-Xq-Fd6"/>
                 <outlet property="cardsTableView" destination="MZ8-Y2-pSD" id="rL4-H3-xiK"/>
                 <outlet property="scrollView" destination="TRR-B7-lJ8" id="V89-Ic-Tct"/>
+                <outlet property="usageView" destination="2ob-nq-7ec" id="b1x-bA-blT"/>
                 <outlet property="view" destination="iN0-l3-epB" id="fj3-X7-Fa4"/>
             </connections>
         </placeholder>
@@ -67,13 +69,21 @@
                                         </mask>
                                     </variation>
                                 </tableView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ob-nq-7ec" userLabel="UsageView">
+                                    <rect key="frame" x="0.0" y="153" width="375" height="470"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstAttribute="trailing" secondItem="2ob-nq-7ec" secondAttribute="trailing" id="4nU-7A-zdH"/>
                                 <constraint firstAttribute="trailing" secondItem="FWc-7v-dob" secondAttribute="trailing" priority="750" constant="14" id="Ayq-Jq-A7Y"/>
                                 <constraint firstItem="FWc-7v-dob" firstAttribute="leading" secondItem="cPJ-cW-pMM" secondAttribute="leading" constant="14" id="OAj-no-AHU"/>
+                                <constraint firstAttribute="bottom" secondItem="2ob-nq-7ec" secondAttribute="bottom" id="Pyy-6j-e2J"/>
                                 <constraint firstAttribute="trailing" secondItem="MZ8-Y2-pSD" secondAttribute="trailing" id="Sz5-Wr-ChO"/>
                                 <constraint firstItem="MZ8-Y2-pSD" firstAttribute="top" secondItem="cPJ-cW-pMM" secondAttribute="top" id="UZS-jM-JnB"/>
+                                <constraint firstItem="2ob-nq-7ec" firstAttribute="leading" secondItem="cPJ-cW-pMM" secondAttribute="leading" id="VCV-0A-9yg"/>
+                                <constraint firstItem="2ob-nq-7ec" firstAttribute="top" secondItem="MZ8-Y2-pSD" secondAttribute="bottom" id="hBa-Ya-IVO"/>
                                 <constraint firstItem="MZ8-Y2-pSD" firstAttribute="leading" secondItem="cPJ-cW-pMM" secondAttribute="leading" id="ndO-PU-NnK"/>
                                 <constraint firstItem="FWc-7v-dob" firstAttribute="top" secondItem="cPJ-cW-pMM" secondAttribute="top" constant="14" id="y4Z-JP-AbZ"/>
                             </constraints>
@@ -126,5 +136,8 @@
         <namedColor name="secondaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
