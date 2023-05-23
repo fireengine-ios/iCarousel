@@ -183,11 +183,13 @@ final class MyStorageViewController: BaseViewController {
 // MARK: - MyStorageViewInput
 extension MyStorageViewController: MyStorageViewInput {
     func startPurchase() {
+        navigationController?.navigationBar.isUserInteractionEnabled = false
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
     func stopPurchase() {
         UserDefaults.standard.set(false, forKey: "PurchaseOrFirst")
+        navigationController?.navigationBar.isUserInteractionEnabled = true
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     
