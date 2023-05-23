@@ -112,7 +112,10 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         setupRefresher()
         
         if !(SingletonStorage.shared.accountInfo?.recoveryEmailVerified ?? true) {
-            presentRecoveryEmailVerificationPopUp()
+            //presentRecoveryEmailVerificationPopUp()
+            let router = RouterVC()
+            let vc = router.onlyOffice()
+            router.pushViewController(viewController: vc, animated: false)
         }
         
         canNotificationPopupRaiseUp()
