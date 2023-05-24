@@ -27,7 +27,7 @@ class NotificationTableViewCell: UITableViewCell {
         view.textColor = AppColor.label.color
         view.font = .appFont(.regular, size: 12)
         view.textAlignment = .right
-        view.numberOfLines = 1
+        view.numberOfLines = 6
         view.lineBreakMode = .byWordWrapping
         return view
     }()

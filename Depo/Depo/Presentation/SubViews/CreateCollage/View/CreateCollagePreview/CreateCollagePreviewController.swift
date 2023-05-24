@@ -260,6 +260,7 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
         scrollView.frame = viewFrame
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.tag = index
         contentView.addSubview(scrollView)
         
         let imageUrl = selectedItems[index].metadata?.mediumUrl
@@ -645,10 +646,10 @@ extension CreateCollagePreviewController: UIDragInteractionDelegate {
             if contentView.subviews[index].subviews[0].tag == interaction.view?.tag {
                 let imageView = contentView.subviews[index].subviews[0] as! UIImageView
                 image  = imageView.image!
-                draggedTag = index
+                //draggedTag = index
             }
         }
-        
+        draggedTag = interaction.view?.tag ?? 0
         let item = UIDragItem(itemProvider: NSItemProvider(object: image))
         item.localObject = image
         return [item]
@@ -684,18 +685,42 @@ extension CreateCollagePreviewController: UIDropInteractionDelegate {
     func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
         session.loadObjects(ofClass: UIImage.self) { imageItems in
             guard let images = imageItems as? [UIImage] else { return }
-            for index in 0...self.contentView.subviews.count - 1 {
-                if self.contentView.subviews[index].subviews[0].tag == interaction.view?.tag {
-                    let imageView = self.contentView.subviews[index].subviews[0] as! UIImageView
-                    imageView.image = images.first
-                    imageView.transform = .identity
-                }
-                if self.contentView.subviews[index].subviews[0].tag == self.draggedTag {
-                    let imageView = self.contentView.subviews[index].subviews[0] as! UIImageView
-                    imageView.image = self.draggedImage
-                    imageView.transform = .identity
+            
+            let draggedIndex = self.draggedTag
+            let droppedIndex = interaction.view!.tag
+            
+            for view in self.contentView.subviews {
+                if view.tag == draggedIndex || view.tag == droppedIndex {
+                    view.removeFromSuperview()
                 }
             }
+            
+            self.selectedItems.swapAt(draggedIndex, droppedIndex)
+            
+            let shapeDetails = self.collageTemplate!.shapeDetails.sorted { $0.id < $1.id }
+            let scrollView = UIScrollView()
+            let imageView = UIImageView()
+
+            self.createImageThumbnail(scrollView: scrollView, imageView: imageView, viewFrame: self.scrollViewViewFrame[draggedIndex], index: draggedIndex, shapeType: shapeDetails[draggedIndex].type)
+
+            let scrollView1 = UIScrollView()
+            let imageView1 = UIImageView()
+
+            self.createImageThumbnail(scrollView: scrollView1, imageView: imageView1, viewFrame: self.scrollViewViewFrame[droppedIndex], index: droppedIndex, shapeType: shapeDetails[droppedIndex].type)
+            
+            //Normal drag drop
+//            for index in 0...self.contentView.subviews.count - 1 {
+//                if self.contentView.subviews[index].subviews[0].tag == interaction.view?.tag {
+//                    let imageView = self.contentView.subviews[index].subviews[0] as! UIImageView
+//                    imageView.image = images.first
+//                    imageView.transform = .identity
+//                }
+//                if self.contentView.subviews[index].subviews[0].tag == self.draggedTag {
+//                    let imageView = self.contentView.subviews[index].subviews[0] as! UIImageView
+//                    imageView.image = self.draggedImage
+//                    imageView.transform = .identity
+//                }
+//            }
         }
     }
 
