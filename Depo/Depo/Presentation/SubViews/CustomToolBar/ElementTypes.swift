@@ -914,7 +914,7 @@ enum ElementTypes {
         case .makeAlbumCover:
             return Image.iconChangePhoto.image
         case .makePersonThumbnail:
-            return nil
+            return Image.iconChangePerson.image
         case .albumDetails:
             return Image.iconInfo.image
         case .instaPick:
