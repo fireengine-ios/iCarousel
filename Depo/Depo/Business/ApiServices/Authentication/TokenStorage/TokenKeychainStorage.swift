@@ -53,9 +53,14 @@ final class TokenKeychainStorage: TokenStorage {
         }
     }
     
+//    var isRememberMe: Bool {
+//        get { return keychain.getBool(isRememberMeKey) ?? true }
+//        set { keychain.set(newValue, forKey: isRememberMeKey, withAccess: .accessibleAfterFirstUnlock) }
+//    }
+    
     var isRememberMe: Bool {
-        get { return keychain.getBool(isRememberMeKey) ?? true }
-        set { keychain.set(newValue, forKey: isRememberMeKey, withAccess: .accessibleAfterFirstUnlock) }
+        get { return UserDefaults.standard.bool(forKey: "isRememberMeUD") }
+        set { UserDefaults.standard.set(newValue, forKey: "isRememberMeUD") }
     }
     
     var isClearTokens: Bool {
