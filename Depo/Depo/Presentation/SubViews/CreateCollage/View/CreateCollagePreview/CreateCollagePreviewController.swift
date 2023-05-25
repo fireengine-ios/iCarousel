@@ -288,22 +288,8 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
                 imageView.clipsToBounds = true
             }
             
-            let imageViewWidth = imageView.frame.width
-            let imageViewHeight = imageView.frame.height
-
-            if viewFrame.width >= viewFrame.height {
-                if imageViewWidth >= viewFrame.width {
-                    imageView.transform = .identity
-                    let aspectRatio = viewFrame.width / imageViewWidth
-                    imageView.frame = CGRect(x: 0, y: 0, width: viewFrame.width, height: imageViewHeight * aspectRatio)
-                }
-            } else {
-                if imageViewHeight >= viewFrame.height {
-                    imageView.transform = .identity
-                    let aspectRatio = viewFrame.height / imageViewHeight
-                    imageView.frame = CGRect(x: 0, y: 0, width: imageViewWidth * aspectRatio, height: viewFrame.height)
-                }
-            }
+            imageView.frame = self?.setAspectRatio(viewFrame: viewFrame, imageWidth: imageView.frame.width, imageHeight: imageView.frame.height) ?? CGRect(x: 0, y: 0, width: 0, height: 0)
+            
             scrollView.contentSize = imageView.frame.size
             
             let centerOffsetX = (scrollView.contentSize.width - scrollView.frame.size.width) / 2
@@ -319,9 +305,9 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
             pinchGesture.delegate = self
             imageView.addGestureRecognizer(pinchGesture)
 
-            let rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(self?.rotate(_:)))
-            rotationGesture.delegate = self
-            imageView.addGestureRecognizer(rotationGesture)
+//            let rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(self?.rotate(_:)))
+//            rotationGesture.delegate = self
+//            imageView.addGestureRecognizer(rotationGesture)
             
             let dragInteraction = UIDragInteraction(delegate: self!)
             dragInteraction.isEnabled = true
@@ -331,6 +317,18 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
             imageView.addInteraction(dropInteraction)
         }
         
+    }
+    
+    private func setAspectRatio(viewFrame: CGRect, imageWidth: CGFloat, imageHeight: CGFloat) -> CGRect {
+        var returnFrame: CGRect = CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight)
+        let aspectRatio1 = viewFrame.width / imageWidth
+        let aspectRatio2 = viewFrame.height / imageHeight
+        if aspectRatio1 >= aspectRatio2 {
+            returnFrame = CGRect(x: 0, y: 0, width: imageWidth * aspectRatio1, height: imageHeight * aspectRatio1)
+        } else {
+            returnFrame = CGRect(x: 0, y: 0, width: imageWidth * aspectRatio2, height: imageHeight * aspectRatio2)
+        }
+        return returnFrame
     }
     
     private func saveCollage() {
@@ -492,22 +490,22 @@ extension CreateCollagePreviewController: UIGestureRecognizerDelegate {
         }
     }
 
-    @objc func rotate(_ sender: UIRotationGestureRecognizer) {
-        guard let view = sender.view else { return }
-        if sender.state == .began {
-            sender.rotation = lastRotation
-        }
-        view.transform = view.transform.rotated(by: sender.rotation - lastRotation)
-        lastRotation = sender.rotation
-        
-        if sender.state == .ended {
-            let imageView = contentView.subviews[sender.view!.tag].subviews[0] as! UIImageView
-            let scrollView = contentView.subviews[sender.view!.tag] as! UIScrollView
-            let x = imageView.frame.origin.x
-            let y = imageView.frame.origin.y
-            scrollView.contentInset = UIEdgeInsets(top: -y, left: -x, bottom: -y, right: -x)
-        }
-    }
+//    @objc func rotate(_ sender: UIRotationGestureRecognizer) {
+//        guard let view = sender.view else { return }
+//        if sender.state == .began {
+//            sender.rotation = lastRotation
+//        }
+//        view.transform = view.transform.rotated(by: sender.rotation - lastRotation)
+//        lastRotation = sender.rotation
+//
+//        if sender.state == .ended {
+//            let imageView = contentView.subviews[sender.view!.tag].subviews[0] as! UIImageView
+//            let scrollView = contentView.subviews[sender.view!.tag] as! UIScrollView
+//            let x = imageView.frame.origin.x
+//            let y = imageView.frame.origin.y
+//            scrollView.contentInset = UIEdgeInsets(top: -y, left: -x, bottom: -y, right: -x)
+//        }
+//    }
     
     @objc func tapped(_ sender: UIRotationGestureRecognizer) {
         let shapeDetails = collageTemplate?.shapeDetails.sorted { $0.id < $1.id }
@@ -712,22 +710,11 @@ extension CreateCollagePreviewController: UIDropInteractionDelegate {
                     imageView.transform = .identity
                     imageView.image = images.first
                     
-                    let imageViewWidth = imageView.frame.width
-                    let imageViewHeight = imageView.frame.height
+                    let imageViewWidth = imageView.image!.size.width
+                    let imageViewHeight = imageView.image!.size.height
                     let viewFrame = self.scrollViewViewFrame[index]
-                    if viewFrame.width >= viewFrame.height {
-                        if imageViewWidth >= viewFrame.width {
-                            imageView.transform = .identity
-                            let aspectRatio = viewFrame.width / imageViewWidth
-                            imageView.frame = CGRect(x: 0, y: 0, width: viewFrame.width, height: imageViewHeight * aspectRatio)
-                        }
-                    } else {
-                        if imageViewHeight >= viewFrame.height {
-                            imageView.transform = .identity
-                            let aspectRatio = viewFrame.height / imageViewHeight
-                            imageView.frame = CGRect(x: 0, y: 0, width: imageViewWidth * aspectRatio, height: viewFrame.height)
-                        }
-                    }
+                    imageView.frame = self.setAspectRatio(viewFrame: viewFrame, imageWidth: imageViewWidth, imageHeight: imageViewHeight)
+                    
                     scrollView.contentSize = imageView.frame.size
                     
                     let x = imageView.frame.origin.x
@@ -740,22 +727,10 @@ extension CreateCollagePreviewController: UIDropInteractionDelegate {
                     imageView.transform = .identity
                     imageView.image = self.draggedImage
                     
-                    let imageViewWidth = imageView.frame.width
-                    let imageViewHeight = imageView.frame.height
+                    let imageViewWidth = imageView.image!.size.width
+                    let imageViewHeight = imageView.image!.size.height
                     let viewFrame = self.scrollViewViewFrame[index]
-                    if viewFrame.width >= viewFrame.height {
-                        if imageViewWidth >= viewFrame.width {
-                            imageView.transform = .identity
-                            let aspectRatio = viewFrame.width / imageViewWidth
-                            imageView.frame = CGRect(x: 0, y: 0, width: viewFrame.width, height: imageViewHeight * aspectRatio)
-                        }
-                    } else {
-                        if imageViewHeight >= viewFrame.height {
-                            imageView.transform = .identity
-                            let aspectRatio = viewFrame.height / imageViewHeight
-                            imageView.frame = CGRect(x: 0, y: 0, width: imageViewWidth * aspectRatio, height: viewFrame.height)
-                        }
-                    }
+                    imageView.frame = self.setAspectRatio(viewFrame: viewFrame, imageWidth: imageViewWidth, imageHeight: imageViewHeight)
                     scrollView.contentSize = imageView.frame.size
                     
                     let x = imageView.frame.origin.x
