@@ -53,14 +53,25 @@ final class TokenKeychainStorage: TokenStorage {
         }
     }
     
+    ///for rememberMe save in keychain -> this mode  in BackGround processing will be logout. Because .accessibleAfterFirstUnlock
 //    var isRememberMe: Bool {
 //        get { return keychain.getBool(isRememberMeKey) ?? true }
 //        set { keychain.set(newValue, forKey: isRememberMeKey, withAccess: .accessibleAfterFirstUnlock) }
 //    }
     
+    //for rememberMe save in userdefaults
     var isRememberMe: Bool {
-        get { return UserDefaults.standard.bool(forKey: "isRememberMeUD") }
-        set { UserDefaults.standard.set(newValue, forKey: "isRememberMeUD") }
+        get {
+            var isRememberMeUD = UserDefaults.standard.bool(forKey: "isRememberMeUD")
+            if !isRememberMeUD {
+                isRememberMeUD = keychain.getBool(isRememberMeKey) ?? true
+            }
+            return isRememberMeUD
+        }
+        set {
+            keychain.set(newValue, forKey: isRememberMeKey, withAccess: .accessibleAfterFirstUnlock)
+            UserDefaults.standard.set(newValue, forKey: "isRememberMeUD")
+        }
     }
     
     var isClearTokens: Bool {
