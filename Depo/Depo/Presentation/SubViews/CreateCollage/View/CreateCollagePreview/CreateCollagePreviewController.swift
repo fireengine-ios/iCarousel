@@ -333,11 +333,16 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
     
     private func saveCollage() {
         let image: UIImage = takeScreenshot(of: contentView)
-        let name: String = StringConstants.collageName
+        var name: String = StringConstants.collageName
         let imageData = image.jpegData(compressionQuality: 0.9)!
         let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
         let wrapData = WrapData(imageData: imageData, isLocal: true)
 
+        if name == localized(.createCollagePreviewMainTitle) {
+            let date = Date().createCurrentDateNonChar() + "" + Date().createCurrentHour()
+            name = date
+        }
+        
         wrapData.name = "\(name).jpg"
         wrapData.patchToPreview = PathForItem.remoteUrl(url)
 
