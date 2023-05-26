@@ -87,6 +87,11 @@ extension Date: Components {
         return date
     }
     
+    func createCurrentDateNonChar() -> String {
+        let date = getDateInFormat(format: "yyyyMMdd")
+        return date
+    }
+    
     func createCurrentHour() -> String {
         let hour = getDateInFormat(format: "HHmm")
         return hour

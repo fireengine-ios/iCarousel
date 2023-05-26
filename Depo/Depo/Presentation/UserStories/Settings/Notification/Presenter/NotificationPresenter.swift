@@ -209,8 +209,8 @@ extension NotificationPresenter: NotificationInteractorOutput {
     
     func fail(errorResponse: ErrorResponse) {
         view?.stopActivityIndicator()
-        self.notificationsForDisplay = []
-        self.notifications = []
+//        self.notificationsForDisplay = []
+//        self.notifications = []
     }
     
 }
