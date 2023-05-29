@@ -79,8 +79,8 @@ extension String {
           ]
           if let attributedString = try? NSMutableAttributedString(data: data, options: options, documentAttributes: nil) {
             
-              attributedString.setBaseColor(baseColor: AppColor.label.color)
-              attributedString.setBaseFont(baseFont: .appFont(.regular, size: 12))
+//              attributedString.setBaseColor(baseColor: AppColor.label.color)
+//              attributedString.setBaseFont(baseFont: .appFont(.regular, size: 12))
             // Assign attributed string to attribute of your choice
             return attributedString
           }
