@@ -25,7 +25,7 @@ final class CreateCollageInteractor {
             case .success(let response):
                 self?.output.getCollageTemplate(data: response)
             case .failed(let error):
-                debugLog("ForYou Error getCollageTemplate: \(error.errorCode)-\(String(describing: error.description))")
+                debugLog("ForYou Error getCollageTemplate")
                 break
             }
         }
