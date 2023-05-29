@@ -163,6 +163,7 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
     private func createImageView(collageTemplate: CollageTemplateElement) {
         let shapeDetails = collageTemplate.shapeDetails.sorted { $0.id < $1.id }
         viewFrames.removeAll()
+        scrollViewViewFrame.removeAll()
         
         if selectedItems.count > 0 {
             photoSelectType = .changePhotoSelection
@@ -177,6 +178,7 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
                 let xStart = (xFirst / xRatioConstant)
                 let yStart = (yFirst / xRatioConstant)
                 let viewFrame = CGRect(x: xStart, y: yStart, width: (imageWidth / xRatioConstant) + 1, height: (imageHeight / xRatioConstant) + 1)
+                scrollViewViewFrame.append(viewFrame)
                 viewFrames.append(viewFrame)
                 switch photoSelectType {
                 case .newPhotoSelection:
@@ -214,6 +216,8 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
                 let xStart = (xFirst / xRatioConstant) - (radius)
                 let yStart = (yFirst / xRatioConstant) - (radius)
                 let viewFrame = CGRect(x: xStart, y: yStart, width: imageWidth, height: imageHeight)
+                scrollViewViewFrame.append(viewFrame)
+                viewFrames.append(viewFrame)
                 switch photoSelectType {
                 case .newPhotoSelection:
                     let imageView = UIImageView(frame: viewFrame)
@@ -256,7 +260,6 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
     }
     
     private func createImageThumbnail(scrollView: UIScrollView, imageView: UIImageView, viewFrame: CGRect, index: Int, shapeType: String) {
-        scrollViewViewFrame.append(viewFrame)
         scrollView.frame = viewFrame
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
@@ -277,8 +280,6 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
             imageView.clipsToBounds = true
             imageView.isUserInteractionEnabled = true
             scrollView.addSubview(imageView)
-            scrollView.contentSize = imageView.image?.size ?? CGSize(width: 0, height: 0)
-            self?.viewFrames.append(imageView.frame)
             
             if shapeType == "CIRCLE" {
                 scrollView.layer.cornerRadius = scrollView.frame.size.width / 2
@@ -286,6 +287,10 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
                 imageView.layer.cornerRadius = imageView.frame.size.width / 2
                 imageView.clipsToBounds = true
             }
+            
+            imageView.frame = self?.setAspectRatio(viewFrame: viewFrame, imageWidth: imageView.frame.width, imageHeight: imageView.frame.height) ?? CGRect(x: 0, y: 0, width: 0, height: 0)
+            
+            scrollView.contentSize = imageView.frame.size
             
             let centerOffsetX = (scrollView.contentSize.width - scrollView.frame.size.width) / 2
             let centerOffsetY = (scrollView.contentSize.height - scrollView.frame.size.height) / 2
@@ -300,9 +305,9 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
             pinchGesture.delegate = self
             imageView.addGestureRecognizer(pinchGesture)
 
-            let rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(self?.rotate(_:)))
-            rotationGesture.delegate = self
-            imageView.addGestureRecognizer(rotationGesture)
+//            let rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(self?.rotate(_:)))
+//            rotationGesture.delegate = self
+//            imageView.addGestureRecognizer(rotationGesture)
             
             let dragInteraction = UIDragInteraction(delegate: self!)
             dragInteraction.isEnabled = true
@@ -314,13 +319,30 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
         
     }
     
+    private func setAspectRatio(viewFrame: CGRect, imageWidth: CGFloat, imageHeight: CGFloat) -> CGRect {
+        var returnFrame: CGRect = CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight)
+        let aspectRatio1 = viewFrame.width / imageWidth
+        let aspectRatio2 = viewFrame.height / imageHeight
+        if aspectRatio1 >= aspectRatio2 {
+            returnFrame = CGRect(x: 0, y: 0, width: imageWidth * aspectRatio1, height: imageHeight * aspectRatio1)
+        } else {
+            returnFrame = CGRect(x: 0, y: 0, width: imageWidth * aspectRatio2, height: imageHeight * aspectRatio2)
+        }
+        return returnFrame
+    }
+    
     private func saveCollage() {
         let image: UIImage = takeScreenshot(of: contentView)
-        let name: String = StringConstants.collageName
+        var name: String = StringConstants.collageName
         let imageData = image.jpegData(compressionQuality: 0.9)!
         let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
         let wrapData = WrapData(imageData: imageData, isLocal: true)
 
+        if name == localized(.createCollagePreviewMainTitle) {
+            let date = Date().createCurrentDateNonChar() + "" + Date().createCurrentHour()
+            name = date
+        }
+        
         wrapData.name = "\(name).jpg"
         wrapData.patchToPreview = PathForItem.remoteUrl(url)
 
@@ -473,22 +495,22 @@ extension CreateCollagePreviewController: UIGestureRecognizerDelegate {
         }
     }
 
-    @objc func rotate(_ sender: UIRotationGestureRecognizer) {
-        guard let view = sender.view else { return }
-        if sender.state == .began {
-            sender.rotation = lastRotation
-        }
-        view.transform = view.transform.rotated(by: sender.rotation - lastRotation)
-        lastRotation = sender.rotation
-        
-        if sender.state == .ended {
-            let imageView = contentView.subviews[sender.view!.tag].subviews[0] as! UIImageView
-            let scrollView = contentView.subviews[sender.view!.tag] as! UIScrollView
-            let x = imageView.frame.origin.x
-            let y = imageView.frame.origin.y
-            scrollView.contentInset = UIEdgeInsets(top: -y, left: -x, bottom: -y, right: -x)
-        }
-    }
+//    @objc func rotate(_ sender: UIRotationGestureRecognizer) {
+//        guard let view = sender.view else { return }
+//        if sender.state == .began {
+//            sender.rotation = lastRotation
+//        }
+//        view.transform = view.transform.rotated(by: sender.rotation - lastRotation)
+//        lastRotation = sender.rotation
+//
+//        if sender.state == .ended {
+//            let imageView = contentView.subviews[sender.view!.tag].subviews[0] as! UIImageView
+//            let scrollView = contentView.subviews[sender.view!.tag] as! UIScrollView
+//            let x = imageView.frame.origin.x
+//            let y = imageView.frame.origin.y
+//            scrollView.contentInset = UIEdgeInsets(top: -y, left: -x, bottom: -y, right: -x)
+//        }
+//    }
     
     @objc func tapped(_ sender: UIRotationGestureRecognizer) {
         let shapeDetails = collageTemplate?.shapeDetails.sorted { $0.id < $1.id }
@@ -686,41 +708,41 @@ extension CreateCollagePreviewController: UIDropInteractionDelegate {
         session.loadObjects(ofClass: UIImage.self) { imageItems in
             guard let images = imageItems as? [UIImage] else { return }
             
-            let draggedIndex = self.draggedTag
-            let droppedIndex = interaction.view!.tag
-            
-            for view in self.contentView.subviews {
-                if view.tag == draggedIndex || view.tag == droppedIndex {
-                    view.removeFromSuperview()
+            for index in 0...self.contentView.subviews.count - 1 {
+                if self.contentView.subviews[index].subviews[0].tag == interaction.view?.tag {
+                    let imageView = self.contentView.subviews[index].subviews[0] as! UIImageView
+                    let scrollView = self.contentView.subviews[index] as! UIScrollView
+                    imageView.transform = .identity
+                    imageView.image = images.first
+                    
+                    let imageViewWidth = imageView.image!.size.width
+                    let imageViewHeight = imageView.image!.size.height
+                    let viewFrame = self.scrollViewViewFrame[index]
+                    imageView.frame = self.setAspectRatio(viewFrame: viewFrame, imageWidth: imageViewWidth, imageHeight: imageViewHeight)
+                    
+                    scrollView.contentSize = imageView.frame.size
+                    
+                    let x = imageView.frame.origin.x
+                    let y = imageView.frame.origin.y
+                    scrollView.contentInset = UIEdgeInsets(top: -y, left: -x, bottom: -y, right: -x)
+                }
+                if self.contentView.subviews[index].subviews[0].tag == self.draggedTag {
+                    let imageView = self.contentView.subviews[index].subviews[0] as! UIImageView
+                    let scrollView = self.contentView.subviews[index] as! UIScrollView
+                    imageView.transform = .identity
+                    imageView.image = self.draggedImage
+                    
+                    let imageViewWidth = imageView.image!.size.width
+                    let imageViewHeight = imageView.image!.size.height
+                    let viewFrame = self.scrollViewViewFrame[index]
+                    imageView.frame = self.setAspectRatio(viewFrame: viewFrame, imageWidth: imageViewWidth, imageHeight: imageViewHeight)
+                    scrollView.contentSize = imageView.frame.size
+                    
+                    let x = imageView.frame.origin.x
+                    let y = imageView.frame.origin.y
+                    scrollView.contentInset = UIEdgeInsets(top: -y, left: -x, bottom: -y, right: -x)
                 }
             }
-            
-            self.selectedItems.swapAt(draggedIndex, droppedIndex)
-            
-            let shapeDetails = self.collageTemplate!.shapeDetails.sorted { $0.id < $1.id }
-            let scrollView = UIScrollView()
-            let imageView = UIImageView()
-
-            self.createImageThumbnail(scrollView: scrollView, imageView: imageView, viewFrame: self.scrollViewViewFrame[draggedIndex], index: draggedIndex, shapeType: shapeDetails[draggedIndex].type)
-
-            let scrollView1 = UIScrollView()
-            let imageView1 = UIImageView()
-
-            self.createImageThumbnail(scrollView: scrollView1, imageView: imageView1, viewFrame: self.scrollViewViewFrame[droppedIndex], index: droppedIndex, shapeType: shapeDetails[droppedIndex].type)
-            
-            //Normal drag drop
-//            for index in 0...self.contentView.subviews.count - 1 {
-//                if self.contentView.subviews[index].subviews[0].tag == interaction.view?.tag {
-//                    let imageView = self.contentView.subviews[index].subviews[0] as! UIImageView
-//                    imageView.image = images.first
-//                    imageView.transform = .identity
-//                }
-//                if self.contentView.subviews[index].subviews[0].tag == self.draggedTag {
-//                    let imageView = self.contentView.subviews[index].subviews[0] as! UIImageView
-//                    imageView.image = self.draggedImage
-//                    imageView.transform = .identity
-//                }
-//            }
         }
     }
 
@@ -770,3 +792,5 @@ extension UIImage {
         self.init(cgImage: cgImage, scale: image.scale, orientation: image.imageOrientation)
     }
 }
+
+
