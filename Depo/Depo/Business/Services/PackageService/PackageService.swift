@@ -520,7 +520,12 @@ final class PackageService {
         } else if addonType == .middleOnly {
             name = TextConstants.middleFeaturePackageName
         } else {
-            name = getOfferQuota(for: offer)?.bytesString ?? (getOfferDisplayName(for: offer) ?? "")
+            if getOfferQuota(for: offer) == 0 { /// if quota == 0 name = displayname (For feature packages)
+                name = getOfferDisplayName(for: offer) ?? ""
+            } else {
+                name = getOfferQuota(for: offer)?.bytesString ?? (getOfferDisplayName(for: offer) ?? "")
+            }
+            
         }
         let prefix = ((getOfferType(for: offer) == .default) && (addonType != .featureOnly)) ? "+" : ""
         return prefix + name
