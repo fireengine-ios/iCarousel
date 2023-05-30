@@ -306,7 +306,7 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
         self.allOffers = allOffers.filter {
             /// hide apple offers if apple server don't sent offer info
             if let appleId = $0.subscriptionPlanInAppPurchaseId, IAPManager.shared.product(for: appleId) == nil {
-                return false
+                return true /// if true  -> available in apple packages it is listed, if false not listed
             } else {
                 return true
             }
