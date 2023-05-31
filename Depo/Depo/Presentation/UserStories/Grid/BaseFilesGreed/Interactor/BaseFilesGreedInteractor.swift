@@ -139,7 +139,7 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
             success: { [weak self] response in
                 let serviceResult = response as? OnlyOfficeResponse
                 DispatchQueue.main.async {
-                    self?.output.createFileSuccess(fileUuid: serviceResult?.fileUuid ?? "")
+                    self?.output.createFileSuccess(fileUuid: serviceResult?.fileUuid ?? "", fileName: fileName)
                 }
             }, fail: { [weak self] errorResponse in
                 DispatchQueue.main.async {

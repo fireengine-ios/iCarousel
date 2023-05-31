@@ -13,19 +13,30 @@ final class OnlyOfficeViewController: BaseViewController {
     
     @IBOutlet weak var onlyOfficeWebView: WKWebView!
     private let tokenStorage: TokenStorage = factory.resolve()
+    private var fileUuid: String = ""
+    private var fileName: String = ""
+    private let baseUrl = RouteRequests.onlyOfficeGetFile
     
+    init(fileUuid: String, fileName: String) {
+        self.fileName = fileName
+        self.fileUuid = fileUuid
+        super.init(nibName: nil, bundle: nil)
+    }
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTitle(withString: "testWord.docx")
+        setTitle(withString: fileName)
         onlyOfficeWebView.navigationDelegate = self
         configureWebView()
     }
     
     private func configureWebView() {
         
-        var request = URLRequest(url: URL(string:"https://adepodev.turkcell.com.tr/api/office/files/4eaf8131-ffbc-4f24-867f-f4e4e9c2e9d1")!)
+        var request = URLRequest(url: URL(string: "\(baseUrl)/\(fileUuid)")!)
         request.allHTTPHeaderFields = self.authification()
         self.onlyOfficeWebView.load(request)
     }
@@ -46,9 +57,6 @@ final class OnlyOfficeViewController: BaseViewController {
 
 extension OnlyOfficeViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        print("aaaaaaaaaaaaaaaa \(navigationAction.request.url)")
-        print("aaaaaaaaaaaaaaaa \(navigationAction.request)")
         decisionHandler(.allow)
-
     }
 }

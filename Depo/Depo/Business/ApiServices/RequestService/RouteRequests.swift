@@ -521,4 +521,7 @@ struct RouteRequests {
     static let forYouThrowback = baseUrl +/ "foryou/years-ago"
     static let forYouThrowbackDetail = "foryou/years-ago/%d"
     static let collageTemplate = baseUrl +/ "template/collages"
+    
+    // MARK: -OnlyOffice
+    static let onlyOfficeGetFile = baseUrl +/ "office/files"
 }

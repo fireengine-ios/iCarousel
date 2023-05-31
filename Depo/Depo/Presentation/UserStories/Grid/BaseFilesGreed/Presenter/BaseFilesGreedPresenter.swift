@@ -226,12 +226,13 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     // MARK: - Request OUTPUT
-    func createFileSuccess(fileUuid: String) {
+    func createFileSuccess(fileUuid: String, fileName: String) {
+        openOnlyOffice(fileUuid: fileUuid, fileName: fileName)
         onReloadData()
     }
     
     func createFileFail(errorResponse: ErrorResponse) {
-        print("aaaaaaaaaaa \(errorResponse)")
+        asyncOperationFail(errorMessage: errorResponse.description)
     }
     
     func getContentWithFail(errorString: String?) {
@@ -812,6 +813,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func createCollage() {
         router.createCollage()
+    }
+    
+    func openOnlyOffice(fileUuid: String, fileName: String) {
+        router.openOnlyOffice(fileUuid: fileUuid, fileName: fileName)
     }
     
     // MARK: - View outbut/ TopBar/UnderNavBarBar Delegates
