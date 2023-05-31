@@ -24,7 +24,7 @@ protocol BaseFilesGreedInteractorOutput: BaseAsyncOperationInteractorOutput {
     
     var filters: [GeneralFilesFiltrationType] { get set }
     
-    func createFileSuccess(fileUuid: String)
+    func createFileSuccess(fileUuid: String, fileName: String)
     
     func createFileFail(errorResponse: ErrorResponse)
     

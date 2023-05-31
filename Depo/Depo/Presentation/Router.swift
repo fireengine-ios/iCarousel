@@ -1129,8 +1129,8 @@ class RouterVC: NSObject {
     
     // MARK: - OnlyOffice
     
-    func onlyOffice()  -> OnlyOfficeViewController {
-        return OnlyOfficeViewController()
+    func onlyOffice(fileUuid: String, fileName: String)  -> OnlyOfficeViewController {
+        return OnlyOfficeViewController(fileUuid: fileUuid, fileName: fileName)
     }
     
     // MARK: - Notification
