@@ -32,7 +32,7 @@ final class ForYouCollectionViewCell: UICollectionViewCell {
         willSet {
             newValue.isHidden = true
             newValue.text = localized(.createCollageLabel)
-            newValue.textColor = AppColor.label.color
+            newValue.textColor = AppColor.darkLabel.color
             newValue.font = .appFont(.medium, size: 14)
             newValue.numberOfLines = 2
         }
