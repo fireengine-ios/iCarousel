@@ -24,7 +24,7 @@ class NotificationTableViewCell: UITableViewCell {
     
     private lazy var descriptionLabel: UILabel = {
         let view = UILabel()
-        view.textColor = AppColor.label.color
+        view.textColor = AppColor.textButton.color
         view.font = .appFont(.regular, size: 12)
         view.textAlignment = .right
         view.numberOfLines = 6
@@ -226,7 +226,15 @@ class NotificationTableViewCell: UITableViewCell {
     func configure(model: NotificationServiceResponse, readMode: Bool) {
         titleLabel.text = model.title
         if let body = model.body {
-            descriptionLabel.attributedText = body.getAsHtml
+            if #available(iOS 12.0, *) {
+                if traitCollection.userInterfaceStyle == .light {
+                    descriptionLabel.attributedText = body.getAsHtml
+                } else {
+                    descriptionLabel.attributedText = body.getAsHtmldarkMode
+                }
+            } else {
+                descriptionLabel.attributedText = body.getAsHtml
+            }
         }
         
         if let thumbnail = model.image ?? model.smallThumbnail ?? model.largeThumbnail,

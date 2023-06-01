@@ -87,6 +87,23 @@ extension String {
         }
         return NSAttributedString(string: "")
     }
+    
+    var getAsHtmldarkMode: NSAttributedString  {
+        if let data = self.data(using: String.Encoding.unicode, allowLossyConversion: true) {
+          let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+          ]
+          if let attributedString = try? NSMutableAttributedString(data: data, options: options, documentAttributes: nil) {
+            
+              attributedString.setBaseColor(baseColor: AppColor.label.color)
+              attributedString.setBaseFont(baseFont: .appFont(.regular, size: 12))
+            // Assign attributed string to attribute of your choice
+            return attributedString
+          }
+        }
+        return NSAttributedString(string: "")
+    }
 }
 
 extension Optional where Wrapped == String {
