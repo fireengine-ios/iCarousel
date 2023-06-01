@@ -19,7 +19,7 @@ class WebViewPopup: BasePopUpController {
     
     private lazy var popUpView: UIView! = {
         let view = UIView()
-        view.backgroundColor = AppColor.secondaryBackground.color
+        view.backgroundColor = AppColor.collageThumbnailColor.color
         view.layer.cornerRadius = 15
         view.layer.shadowRadius = 15
         view.layer.shadowOpacity = 0.5
@@ -126,6 +126,8 @@ class WebViewPopup: BasePopUpController {
         closeButton.trailingAnchor.constraint(equalTo: popUpView.trailingAnchor, constant: -16).activate()
         closeButton.heightAnchor.constraint(equalToConstant: 24).activate()
         closeButton.widthAnchor.constraint(equalToConstant: 24).activate()
+        
+        bodyLabel.backgroundColor = AppColor.collageThumbnailColor.color
     }
     
     private func setForWebViewLayout() {
