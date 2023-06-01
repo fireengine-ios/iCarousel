@@ -201,9 +201,12 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
                         createImageThumbnail(scrollView: scrollView, imageView: imageView, viewFrame: viewFrame, index: i, shapeType: shapeDetails[i].type)
                     } else {
                         let imageViewChange = contentView.subviews[selectedChangePhotoIndex].subviews[0] as! UIImageView
-                        let imageUrl = selectedItems[0].metadata?.mediumUrl
-                        imageViewChange.sd_setImage(with: imageUrl) { [weak self] _,_,_,_ in
-                            self?.hideSpinner()
+                        if let imageUrl = selectedItems[0].metadata?.mediumUrl {
+                            imageViewChange.sd_setImage(with: imageUrl) { [weak self] _,_,_,_ in
+                                self?.hideSpinner()
+                            }
+                        } else {
+                            hideSpinner()
                         }
                     }
                 }
@@ -241,9 +244,12 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
                         createImageThumbnail(scrollView: scrollView, imageView: imageView, viewFrame: viewFrame, index: i, shapeType: shapeDetails[i].type)
                     } else {
                         let imageViewChange = contentView.subviews[selectedChangePhotoIndex].subviews[0] as! UIImageView
-                        let imageUrl = selectedItems[0].metadata?.mediumUrl
-                        imageViewChange.sd_setImage(with: imageUrl) {_,_,_,_ in
-                            self.hideSpinner()
+                        if let imageUrl = selectedItems[0].metadata?.mediumUrl {
+                            imageViewChange.sd_setImage(with: imageUrl) { [weak self] _,_,_,_ in
+                                self?.hideSpinner()
+                            }
+                        } else {
+                            hideSpinner()
                         }
                     }
                 }
