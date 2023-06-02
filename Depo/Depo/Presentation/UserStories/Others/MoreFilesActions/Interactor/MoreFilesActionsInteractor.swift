@@ -74,7 +74,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private lazy var smashActionService: SmashActionServiceProtocol = SmashActionService()
     private lazy var photoEditImageDownloader = PhotoEditImageDownloader()
     private lazy var privateShareAnalytics = PrivateShareAnalytics()
-    
+    private lazy var onlyOfficeService = OnlyOfficeService()
     
     typealias FailResponse = (_ value: ErrorResponse) -> Void
     
@@ -1407,6 +1407,26 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         default:
             break
         }
+    }
+    
+    func officeFilterAll() {
+        print("officeFilterAll")
+    }
+    
+    func officeFilterPdf() {
+        print("officeFilterPdf")
+    }
+    
+    func officeFilterWord() {
+        print("officeFilterWord")
+    }
+    
+    func officeFilterCell() {
+        print("officeFilterCell")
+    }
+    
+    func officeFilterSlide() {
+        print("officeFilterSlide")
     }
 }
 

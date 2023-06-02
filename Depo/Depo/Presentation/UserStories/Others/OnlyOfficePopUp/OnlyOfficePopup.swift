@@ -8,6 +8,29 @@
 
 import Foundation
 
+enum OnlyOfficeFilterType {
+    case all
+    case pdf
+    case word
+    case cell
+    case slide
+    
+    var filterType: String {
+        switch self {
+        case .all:
+            return "ALL"
+        case .pdf:
+            return "PDF"
+        case .word:
+            return "WORD"
+        case .cell:
+            return "CELL"
+        case .slide:
+            return "SLIDE"
+        }
+    }
+}
+
 enum OnlyOfficeType {
     case createWord
     case createExcel

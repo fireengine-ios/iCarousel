@@ -73,7 +73,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                fileFilters: [.fileType(.allDocs)],
                                bottomBarConfig: bottomBarConfig,
                                topBarConfig: gridListTopBarConfig,
-                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
+                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .officeFilterAll, .officeFilterPdf, .officeFilterWord, .officeFilterCell, .officeFilterSlide],
                                                                                      selectionModeTypes: []))
         viewController.mainTitle = ""
         viewController.title = TextConstants.documents

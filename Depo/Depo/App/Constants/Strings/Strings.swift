@@ -249,4 +249,10 @@ enum Strings: String, Localizable {
     case createExcel = "Create_Cell"
     case createPowerPoint = "Create_Slide"
     case createDocumentPopup = "Create_Document_Popup"
+    
+    case officeFilterAll = "Office_Filter_All"
+    case officeFilterPdf = "Office_Filter_PDF"
+    case officeFilterWord = "Office_Filter_Document"
+    case officeFilterCell = "Office_Filter_SpreedSheet"
+    case officeFilterSlide = "Office_Filter_Presentation"
 }

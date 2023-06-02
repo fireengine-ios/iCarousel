@@ -90,6 +90,13 @@ enum ElementTypes {
     case gallerySync
     case galleryUnsync
     
+    //onlyOffice
+    case officeFilterAll
+    case officeFilterPdf
+    case officeFilterWord
+    case officeFilterCell
+    case officeFilterSlide
+    
     static var trashState: [ElementTypes] = [.restore, .delete]
     static var hiddenState: [ElementTypes] = [.unhide, .moveToTrash]
     static var activeState: [ElementTypes] = [.hide, .moveToTrash]
@@ -660,6 +667,16 @@ enum ElementTypes {
             return TextConstants.galleryFilterActionSheetSynced
         case .galleryUnsync:
             return TextConstants.galleryFilterActionSheetUnsynced
+        case .officeFilterAll:
+            return localized(.officeFilterAll)
+        case .officeFilterPdf:
+            return localized(.officeFilterPdf)
+        case .officeFilterWord:
+            return localized(.officeFilterWord)
+        case .officeFilterCell:
+            return localized(.officeFilterCell)
+        case .officeFilterSlide:
+            return localized(.officeFilterSlide)
         default:
             return ""
         }
@@ -803,6 +820,16 @@ enum ElementTypes {
             return TextConstants.change
         case .collageCancel:
             return TextConstants.cancel
+        case .officeFilterAll:
+            return ""
+        case .officeFilterPdf:
+            return ""
+        case .officeFilterWord:
+            return ""
+        case .officeFilterCell:
+            return ""
+        case .officeFilterSlide:
+            return ""
         }
     }
 
@@ -949,6 +976,16 @@ enum ElementTypes {
             return Image.iconDeletePlain.image
         case .collageCancel:
             return Image.iconCancelBorder.image
+        case .officeFilterAll:
+            return Image.iconFileAllNew.image
+        case .officeFilterPdf:
+            return Image.iconFilePdfNew.image
+        case .officeFilterWord:
+            return Image.iconFileDocNew.image
+        case .officeFilterCell:
+            return Image.iconFileXlsNew.image
+        case .officeFilterSlide:
+            return Image.iconFilePptNew.image
         }
     }
 }
