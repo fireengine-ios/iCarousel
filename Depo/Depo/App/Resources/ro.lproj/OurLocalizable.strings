@@ -2093,3 +2093,6 @@ then {11,99 TRY/Month}*/
 "create_collage_dual" = "Colaj de 2";
 "create_collage" = "Creați Colaj";
 "collage_create_info" = "Faceți clic pe plus pentru a crea un colaj";
+"create_collage_select_collage" = "";
+"office_filter_not_found" = "";
+"Office_Filter_Not_Found" = "";

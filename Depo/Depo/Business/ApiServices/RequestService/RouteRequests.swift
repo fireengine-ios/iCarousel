@@ -309,8 +309,8 @@ struct RouteRequests {
         
         enum Shared {
             private static let baseShares = share.absoluteString
-            static let withMe = baseShares + "?sharedWith=me&size=%d&page=%d&sortBy=%@&sortOrder=%@&objectType=FILE"
-            static let byMe = baseShares + "?sharedBy=me&size=%d&page=%d&sortBy=%@&sortOrder=%@&objectType=FILE"
+            static let withMe = baseShares + "?sharedWith=me&size=%d&page=%d&sortBy=%@&sortOrder=%@&objectType=FILE%@"
+            static let byMe = baseShares + "?sharedBy=me&size=%d&page=%d&sortBy=%@&sortOrder=%@&objectType=FILE%@"
             //"https://run.mocky.io/v3/8d9274fb-3149-452b-9d7f-ef8b1ea20195"//
         }
     }
@@ -524,4 +524,5 @@ struct RouteRequests {
     
     // MARK: -OnlyOffice
     static let onlyOfficeGetFile = baseUrl +/ "office/files"
+    static let onlyOfficeFilterDocument = "search/byDocumentType?parentFolderUuid=%@&page=%@&size=%@&sortBy=%@&sortOrder=%@&documentType=%@"
 }

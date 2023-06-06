@@ -151,14 +151,14 @@ final class PrivateShareFileInfoManager {
         operationQueue.addOperation(operation)
     }
     
-    func reload(completion: @escaping ValueHandler<Bool>) {
+    func reload(documentType: OnlyOfficeFilterType? = .all, completion: @escaping ValueHandler<Bool>) {
         queue.sync {
             operationQueue.cancelAllOperations()
             
             selectedItems.removeAll()
             pagesLoaded = 0
             
-            let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] (loadedItems, isFinished) in
+            let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder, documentType: documentType) { [weak self] (loadedItems, isFinished) in
                 
                 guard let self = self, isFinished else {
                     completion(false)
@@ -350,12 +350,13 @@ final class GetSharedItemsOperation: Operation {
     private let sortBy: SortType
     private let sortOrder: SortOrder
     private let completion: ValueHandler<(([WrapData], Bool))>
+    private let documentType: OnlyOfficeFilterType
     
     private var task: URLSessionTask?
     private var loadedItems = [WrapData]()
     private var isRequestFinished = false
     
-    init(service: PrivateShareApiService, type: PrivateShareType, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, completion: @escaping ValueHandler<([WrapData], Bool)>) {
+    init(service: PrivateShareApiService, type: PrivateShareType, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, documentType: OnlyOfficeFilterType? = .all, completion: @escaping ValueHandler<([WrapData], Bool)>) {
         self.type = type
         self.privateShareAPIService = service
         self.completion = completion
@@ -363,6 +364,7 @@ final class GetSharedItemsOperation: Operation {
         self.size = size
         self.sortBy = sortBy
         self.sortOrder = sortOrder
+        self.documentType = documentType ?? .all
     }
     
     override func cancel() {
@@ -403,10 +405,10 @@ final class GetSharedItemsOperation: Operation {
     private func loadPage(completion : @escaping ResponseArrayHandler<SharedFileInfo>) {
         switch type {
             case .byMe:
-                task = privateShareAPIService.getSharedByMe(size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, handler: completion)
+                task = privateShareAPIService.getSharedByMe(size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, documentType: documentType, handler: completion)
                 
             case .withMe:
-                task = privateShareAPIService.getSharedWithMe(size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, handler: completion)
+                task = privateShareAPIService.getSharedWithMe(size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, documentType: documentType, handler: completion)
                 
             case .innerFolder(_, let folder):
                 task = privateShareAPIService.getFiles(projectId: folder.projectId, folderUUID: folder.uuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder) { response in

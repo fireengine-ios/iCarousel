@@ -2093,3 +2093,6 @@ then {11,99 TRY/Month}*/
 "create_collage_dual" = "Kollage von 2";
 "create_collage" = "Collage Erstellen";
 "collage_create_info" = "Klicken Sie auf Plus, um eine Collage zu erstellen";
+"create_collage_select_collage" = "";
+"office_filter_not_found" = "";
+"Office_Filter_Not_Found" = "";

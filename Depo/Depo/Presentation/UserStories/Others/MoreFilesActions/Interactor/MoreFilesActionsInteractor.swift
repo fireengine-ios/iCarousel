@@ -1409,24 +1409,30 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
     }
     
-    func officeFilterAll() {
-        print("officeFilterAll")
+    func officeFilterByType(documentType: OnlyOfficeFilterType) {
+        switch documentType {
+        case .all:
+            output?.onlyOfficeFilterSuccess(documentType: documentType, items: [])
+        default:
+            officeFilter(documentType: documentType)
+        }
     }
     
-    func officeFilterPdf() {
-        print("officeFilterPdf")
-    }
-    
-    func officeFilterWord() {
-        print("officeFilterWord")
-    }
-    
-    func officeFilterCell() {
-        print("officeFilterCell")
-    }
-    
-    func officeFilterSlide() {
-        print("officeFilterSlide")
+    func officeFilter(documentType: OnlyOfficeFilterType) {
+        output?.startAsyncOperation()
+        onlyOfficeService.filterDocument(documentType: documentType, success: { [weak self] response in
+            let resultResponse = (response as? SearchResponse)?.list
+            DispatchQueue.main.async {
+                let list = resultResponse?.compactMap { WrapData(remote: $0) }
+                self?.output?.asyncOperationSuccess()
+                self?.output?.onlyOfficeFilterSuccess(documentType: documentType, items: list ?? [])
+            }
+        }, fail: { errorResponse in
+            DispatchQueue.main.async {
+                debugLog("OnlyOffice Fail \(errorResponse.description)")
+                UIApplication.showErrorAlert(message: errorResponse.description)
+            }
+        })
     }
 }
 

@@ -2136,3 +2136,6 @@ then {11,99 TRY/Month}*/
 "create_collage_dual" = "Kolazh me 2 pjesë";
 "create_collage" = "Krijo Kolazh";
 "collage_create_info" = "Klikoni në plus për të krijuar një kolazh";
+"create_collage_select_collage" = "";
+"office_filter_not_found" = "";
+"Office_Filter_Not_Found" = "";

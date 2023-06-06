@@ -32,12 +32,15 @@ protocol BaseItemInputPassingProtocol: AnyObject {
     
     func delete(all: Bool)
     func showOnly(withType type: ElementTypes)
+    
+    func onlyOfficeFilterSuccess(documentType: OnlyOfficeFilterType, items: [WrapData])
 }
 
 // To make it optional
 extension BaseItemInputPassingProtocol {
     func delete(all: Bool) {}
     func showOnly(withType type: ElementTypes) {}
+    func onlyOfficeFilterSuccess(documentType: OnlyOfficeFilterType, items: [WrapData]) {}
 }
 
 protocol BaseItemOuputPassingProtocol: AnyObject {

@@ -100,13 +100,5 @@ protocol MoreFilesActionsInteractorInput {
     
     func handleShareAction(type: ElementTypes, sourceRect: CGRect?, items: [BaseDataSourceItem])
     
-    func officeFilterAll()
-    
-    func officeFilterPdf()
-    
-    func officeFilterWord()
-    
-    func officeFilterCell()
-    
-    func officeFilterSlide()
+    func officeFilterByType(documentType: OnlyOfficeFilterType)
 }

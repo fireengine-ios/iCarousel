@@ -12,6 +12,10 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
     
     // MARK: - Interactor output
     
+    func onlyOfficeFilterSuccess(documentType: OnlyOfficeFilterType, items: [WrapData]) {
+        basePassingPresenter?.onlyOfficeFilterSuccess(documentType: documentType, items: items)
+    }
+    
     func operationFinished(type: ElementTypes) {
         completeAsyncOperationEnableScreen()
         basePassingPresenter?.operationFinished(withType: type, response: nil)

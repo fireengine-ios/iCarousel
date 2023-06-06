@@ -2091,3 +2091,6 @@ then {11,99 TRY/Month}*/
 "create_collage_dual" = "კოლაჟი 2";
 "create_collage" = "შექმენი კოლაჟი";
 "collage_create_info" = "დააჭირე + კოლაჟის შესაქმნელად";
+"create_collage_select_collage" = "შექმენი_კოლაჟი_აარჩიე_კოლაჟი";
+"office_filter_not_found" = "";
+"Office_Filter_Not_Found" = "";

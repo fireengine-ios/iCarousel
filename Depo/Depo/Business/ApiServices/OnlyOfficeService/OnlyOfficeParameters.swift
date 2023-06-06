@@ -35,3 +35,35 @@ class OnlyOfficeCreateFileParameters: BaseRequestParametrs {
         return URL(string: path, relativeTo: super.patch)!
     }
 }
+
+class OnlyOfficeDocumentFilterParameters: BaseRequestParametrs {
+    
+    let parentFolderUuid: String
+    let documentType: OnlyOfficeFilterType
+    let sortBy: SearchContentType
+    let sortOrder: SortOrder
+    let page: Int
+    let size: Int
+    
+    init(parentFolderUuid: String, page: Int, size: Int, sortBy: SearchContentType, sortOrder: SortOrder, documentType: OnlyOfficeFilterType) {
+        self.parentFolderUuid = parentFolderUuid
+        self.documentType = documentType
+        self.sortBy = sortBy
+        self.sortOrder = sortOrder
+        self.page = page
+        self.size = size
+    }
+    
+    override var patch: URL {
+        let filterGetParam = String(format: RouteRequests.onlyOfficeFilterDocument,
+                                    parentFolderUuid,
+                                    page.description,
+                                    size.description,
+                                    sortBy.description,
+                                    sortOrder.description,
+                                    documentType.filterType)
+        
+        return URL(string: filterGetParam, relativeTo: super.patch)!
+    }
+    
+}

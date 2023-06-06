@@ -2107,3 +2107,6 @@ then {11,99 TRY/Month}*/
 "create_collage_dual" = "Коллаж из 2 частей";
 "create_collage" = "Создать Коллаж";
 "collage_create_info" = "Нажмите плюс, чтобы создать коллаж";
+"create_collage_select_collage" = "";
+"office_filter_not_found" = "";
+"Office_Filter_Not_Found" = "";
