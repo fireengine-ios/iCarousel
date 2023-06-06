@@ -17,10 +17,12 @@ protocol MoreFilesActionsInteractorOutput: BaseAsyncOperationInteractorOutput {
     func successPopupClosed()
     func successPopupWillAppear()
     func stopSelectionMode()
+    func onlyOfficeFilterSuccess(documentType: OnlyOfficeFilterType, items: [WrapData])
 }
 extension MoreFilesActionsInteractorOutput {
     func showOutOfSpaceAlert(failedType type: ElementTypes) {}
     func successPopupClosed() {}
     func successPopupWillAppear() {}
     func stopSelectionMode() {}
+    func onlyOfficeFilterSuccess(documentType: OnlyOfficeFilterType, items: [WrapData]) {}
 }

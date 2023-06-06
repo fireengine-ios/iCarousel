@@ -1716,7 +1716,7 @@ Please check I have understood the intended command here*/
 "delete_dublicate_package_description" = "+ Suppression De Contacts Répétés Dans Votre Répertoire Téléphonique";
 "premium_user_package_description" = "+ Analyse Illimitée De Photopick";
 "bundle_package_addon_type" = "Espace De Stockage + Premium";
-"storage_only_package_addon_type" = "Espace De Stockage Uniquement";
+"storage_only_package_addon_type" = "Stockage";
 "settings_userinfo_name_surname" = "Prénom et Nom";
 "settings_userinfo_email" = "E-mail";
 "settings_userinfo_phone" = "Numéro de Téléphone";
@@ -2269,7 +2269,7 @@ Please check I have understood the intended command here*/
 "save_to_my_lifebox_full_storage_body" = "Vous pouvez libérer de l'espace sur cet iPhone en gérant votre espace de stockage dans Paramètres.";
 "places_map_title" = "Carte";
 "map_location_detail_header" = "Photos à Cet Endroit";
-"beeline_feature_cancel_TC" = "Beeline";
+"beeline_feature_cancel_TC" = "Cellfie";
 "security_popup_body" = "Veuillez saisir au moins 1 champ pour récupérer facilement votre compte lorsque vous avez oublié votre mot de passe";
 "security_popup_header" = "Définissez votre E-mail de Récupération ou Votre Question de Sécurité";
 "save_to_my_billo" = "Enregistrer dans Billo";
@@ -2332,7 +2332,9 @@ then {11,99 TRY/Month}*/
 "title_paycell_subtitle" = "Solde Paycell";
 "title_paycell_friends" = "Personnes Ayant Acheté le Forfait (%d personnes)";
 "paycell_share_message" = "J'ai rejoint le Programme d'Ambassadeur de Marque lifebox. Vous pouvez avoir le forfait Premium lifebox spécifique au programme de 6 mois de 250 Go à prix réduit, en cliquant sur le lien ci-dessous. Ne le manquez pas 😊";
-"beeline_cancel_TC" = "Vous pouvez annuler ou gérer votre abonnement à lifebox depuis l'application  Beeline.";
+
+/*Fuzzy*/
+"beeline_cancel_TC" = "Vous pouvez annuler ou gérer votre abonnement à lifebox depuis l'application  Cellfie.";
 "foryou_throwback" = "Souvenirs";
 "foryou_myalbums" = "Mes Albums";
 "foryou_myanimations" = "Mes Animations";
@@ -2380,19 +2382,22 @@ then {11,99 TRY/Month}*/
 "Office_Filter_Presentation" = "";
 "Office_Filter_All" = "";
 "Office_Filter_PDF" = "";
-"create_collage_triple" = "";
-"create_collage_quad" = "";
-"create_collage_multiple" = "";
+"create_collage_triple" = "Collage de 3";
+"create_collage_quad" = "Collage de 4";
+"create_collage_multiple" = "Collage de Multiples";
 "create_collage_all" = "";
-"create_collage_select_collage" = "";
-"create_collage_info_label" = "";
+"create_collage_info_label" = "Touchez n'importe quelle photo pour la modifier";
 
 /*Fotoğraf Seçin*/
-"create_collage_select_photo" = "";
+"create_collage_select_photo" = "Sélectionnez Photos";
 
 /*+New Collage*/
-"create_collage_preview_main" = "";
+"create_collage_preview_main" = "+Créer un Collage";
 
 /*2'li Kolajlar*/
-"create_collage_dual" = "";
-"create_collage" = "";
+"create_collage_dual" = "Collage de 2";
+"create_collage" = "Créer un Collage";
+"collage_create_info" = "Cliquez sur plus pour créer un collage";
+"create_collage_select_collage" = "";
+"office_filter_not_found" = "";
+"Office_Filter_Not_Found" = "";

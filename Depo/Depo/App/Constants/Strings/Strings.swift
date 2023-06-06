@@ -255,4 +255,5 @@ enum Strings: String, Localizable {
     case officeFilterWord = "Office_Filter_Document"
     case officeFilterCell = "Office_Filter_SpreedSheet"
     case officeFilterSlide = "Office_Filter_Presentation"
+    case officeFilterNotFound = "office_filter_not_found"
 }

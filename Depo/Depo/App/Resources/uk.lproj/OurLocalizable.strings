@@ -1413,7 +1413,7 @@
 "delete_dublicate_package_description" = "+ Видалення повторних контактів на телефоні";
 "premium_user_package_description" = "+ Необмежений аналіз PhotoPick";
 "bundle_package_addon_type" = "Місце для зберігання + Преміум (Premium)";
-"storage_only_package_addon_type" = "Тільки для зберігання";
+"storage_only_package_addon_type" = "Сховище";
 "settings_userinfo_name_surname" = "Ім'я та прізвище";
 "settings_userinfo_email" = "Адреса електронної пошти";
 "settings_userinfo_phone" = "Номер телефону";
@@ -1966,7 +1966,7 @@
 "save_to_my_lifebox_full_storage_body" = "Ви можете звільнити місце на цьому iPhone, керуючи зберіганням у Налаштуваннях.";
 "places_map_title" = "Мапа";
 "map_location_detail_header" = "Фотографії в Цьому Місці";
-"beeline_feature_cancel_TC" = "Beeline";
+"beeline_feature_cancel_TC" = "Cellfie";
 "security_popup_body" = "Будь ласка, введіть принаймні 1 поле, щоб легко відновити свій обліковий запис, якщо ви забули свій пароль";
 "security_popup_header" = "Вкажіть адресу Електронної Пошти Відновлення або Секретне Питання";
 "save_to_my_billo" = "Зберегти в Billo";
@@ -2029,7 +2029,9 @@ then {11,99 TRY/Month}*/
 "title_paycell_subtitle" = "Баланс Paycell";
 "title_paycell_friends" = "Люди, Які Купили Пакет (%d Осіб)";
 "paycell_share_message" = "Я приєднався до Програми Амбасадорів Бренда lifebox. Ви можете отримати 6-місячний Преміум пакет lifebox об'ємом 250 ГБ за зниженою ціною, перейшовши за посиланням нижче. Не проґавте можливість 😊";
-"beeline_cancel_TC" = "Ви можете скасувати або керувати підпискою lifebox із програми Beeline.";
+
+/*Fuzzy*/
+"beeline_cancel_TC" = "Ви можете скасувати або керувати підпискою lifebox із програми Cellfie.";
 "foryou_throwback" = "Спогади";
 "foryou_myalbums" = "Мої Альбоми";
 "foryou_myanimations" = "Мої Анімації";
@@ -2077,19 +2079,22 @@ then {11,99 TRY/Month}*/
 "Office_Filter_Presentation" = "";
 "Office_Filter_All" = "";
 "Office_Filter_PDF" = "";
-"create_collage_triple" = "";
-"create_collage_quad" = "";
-"create_collage_multiple" = "";
+"create_collage_triple" = "Колаж із 3 частин";
+"create_collage_quad" = "Колаж із 4 частин";
+"create_collage_multiple" = "Мульти-Колаж";
 "create_collage_all" = "";
-"create_collage_select_collage" = "";
-"create_collage_info_label" = "";
+"create_collage_info_label" = "Торкніться будь-якої фотографії для редагування";
 
 /*Fotoğraf Seçin*/
-"create_collage_select_photo" = "";
+"create_collage_select_photo" = "Вибрати Фотографії";
 
 /*+New Collage*/
-"create_collage_preview_main" = "";
+"create_collage_preview_main" = "+Створити Колаж";
 
 /*2'li Kolajlar*/
-"create_collage_dual" = "";
-"create_collage" = "";
+"create_collage_dual" = "Колаж із 2 частин";
+"create_collage" = "Створити Колаж";
+"collage_create_info" = "Натисніть плюс, щоб створити колаж";
+"create_collage_select_collage" = "";
+"office_filter_not_found" = "";
+"Office_Filter_Not_Found" = "";

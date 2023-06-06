@@ -154,6 +154,16 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         collectionView?.refreshControl = refresher
     }
     
+    func filterOfficeReload(documentType: OnlyOfficeFilterType) {
+        fileInfoManager.reload(documentType: documentType, completion: { [weak self] shouldReload in
+            if shouldReload {
+                self?.changeSelection(isActive: false)
+                self?.reloadCollection()
+            }
+            
+        })
+    }
+    
     @objc
     private func fullReload() {
         fileInfoManager.reload { [weak self] shouldReload in

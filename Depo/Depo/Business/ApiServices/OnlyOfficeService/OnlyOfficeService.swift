@@ -15,4 +15,13 @@ final class OnlyOfficeService: BaseRequestService {
         let handler = BaseResponseHandler<OnlyOfficeResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: param, handler: handler)
     }
+    
+    func filterDocument(parentFolderUuid: String? = "", page: Int? = 0, size: Int? = 100, sortBy: SearchContentType? = .content_type, sortOrder: SortOrder? = .asc, documentType: OnlyOfficeFilterType, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
+        debugLog("OnlyOfficeService filter")
+        
+        let param = OnlyOfficeDocumentFilterParameters(parentFolderUuid: parentFolderUuid!, page: page!, size: size!, sortBy: sortBy!, sortOrder: sortOrder!, documentType: documentType)
+        let handler = BaseResponseHandler<SearchResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executeGetRequest(param: param, handler: handler)
+    }
+
 }

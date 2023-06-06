@@ -235,6 +235,20 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         asyncOperationFail(errorMessage: errorResponse.description)
     }
     
+    func onlyOfficeFilterSuccess(documentType: OnlyOfficeFilterType, items: [WrapData]) {
+        if documentType == .all {
+            onReloadData()
+        } else {
+            if items.count > 0 {
+                dataSource.dropData()
+                getContentWithSuccess(items: items)
+            } else {
+                let message = String(format: localized(.officeFilterNotFound), documentType.description)
+                SnackbarManager.shared.show(type: .action, message: message)
+            }
+        }
+    }
+    
     func getContentWithFail(errorString: String?) {
         view?.stopRefresher()
         dataSource.isPaginationDidEnd = false

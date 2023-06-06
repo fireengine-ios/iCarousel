@@ -675,19 +675,19 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             ItemOperationManager.default.elementTypeChanged(type: type)
             
         case .officeFilterAll:
-            interactor.officeFilterAll()
+            interactor.officeFilterByType(documentType: .all)
             
         case .officeFilterPdf:
-            interactor.officeFilterPdf()
+            interactor.officeFilterByType(documentType: .pdf)
             
         case .officeFilterWord:
-            interactor.officeFilterWord()
+            interactor.officeFilterByType(documentType: .word)
             
         case .officeFilterCell:
-            interactor.officeFilterCell()
+            interactor.officeFilterByType(documentType: .cell)
             
         case .officeFilterSlide:
-            interactor.officeFilterSlide()
+            interactor.officeFilterByType(documentType: .slide)
             
         default:
             break

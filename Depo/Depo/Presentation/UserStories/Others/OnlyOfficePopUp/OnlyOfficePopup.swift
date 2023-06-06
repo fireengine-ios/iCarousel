@@ -29,6 +29,21 @@ enum OnlyOfficeFilterType {
             return "SLIDE"
         }
     }
+    
+    var description: String {
+        switch self {
+        case .all:
+            return "Tümü"
+        case .pdf:
+            return "Pdf"
+        case .word:
+            return "Döküman"
+        case .cell:
+            return "Çalışma Tablosu"
+        case .slide:
+            return "Sunum"
+        }
+    }
 }
 
 enum OnlyOfficeType {

@@ -210,6 +210,15 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
             headerStackView.addArrangedSubview(countView)
         }
     }
+    
+    func onlyOfficeGetFilter(documentType: OnlyOfficeFilterType) {
+        if collectionManager.selectedItems().count > 0 {
+            collectionManager.filterOfficeReload(documentType: documentType)
+        } else {
+            let message = String(format: localized(.officeFilterNotFound), documentType.description)
+            SnackbarManager.shared.show(type: .action, message: message)
+        }
+    }
 }
 
 
@@ -360,6 +369,10 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
 
 
 extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
+    
+    func onlyOfficeFilterSuccess(documentType: OnlyOfficeFilterType, items: [WrapData]) {
+        onlyOfficeGetFilter(documentType: documentType)
+    }
     
     func selectModeSelected() {
         collectionManager.startSelection()

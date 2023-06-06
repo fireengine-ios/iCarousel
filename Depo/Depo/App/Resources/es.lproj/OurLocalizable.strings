@@ -1453,7 +1453,7 @@
 "delete_dublicate_package_description" = "+ Eliminación de los Contactos Repetitivos en Teléfono";
 "premium_user_package_description" = "+ Análisis PhotoPick Ilimitado";
 "bundle_package_addon_type" = "Área de almacenamiento+ Premium";
-"storage_only_package_addon_type" = "Sólo área de almacenamiento";
+"storage_only_package_addon_type" = "Área de almacenamiento.";
 "settings_userinfo_name_surname" = "Nombre y Apellido";
 "settings_userinfo_email" = "Correo Electrónico";
 "settings_userinfo_phone" = "Número de Teléfono";
@@ -2006,7 +2006,7 @@
 "save_to_my_lifebox_full_storage_body" = "Puede liberar espacio en este iPhone administrando su área de almacenamiento en Configuración.";
 "places_map_title" = "Mapa";
 "map_location_detail_header" = "Fotos en Esta Ubicación";
-"beeline_feature_cancel_TC" = "Beeline";
+"beeline_feature_cancel_TC" = "Cellfie";
 "security_popup_body" = "Ingrese al menos 1 campo para recuperar su cuenta fácilmente cuando olvidó su contraseña";
 "security_popup_header" = "Configure su Correo electrónico de Recuperación o Pregunta de Seguridad";
 "save_to_my_billo" = "Guardar en Billo";
@@ -2069,7 +2069,9 @@ then {11,99 TRY/Month}*/
 "title_paycell_subtitle" = "Saldo de Paycell";
 "title_paycell_friends" = "Personas que Compraron el Paquete (%d Personas)";
 "paycell_share_message" = "Me uní al Programa de Embajadores de la Marca lifebox. Puede obtener el paquete Premium lifebox de 6 meses y 250 GB específico del programa a un precio con descuento, haciendo clic en el enlace a continuación. No te lo pierdas 😊";
-"beeline_cancel_TC" = "Puedes cancelar o gestionar tu suscripción a lifebox desde la aplicación Beeline.";
+
+/*Fuzzy*/
+"beeline_cancel_TC" = "Puedes cancelar o gestionar tu suscripción a lifebox desde la aplicación Cellfie.";
 "foryou_throwback" = "Memorias";
 "foryou_myalbums" = "Mis Álbumes";
 "foryou_myanimations" = "Mis Animaciones";
@@ -2117,19 +2119,22 @@ then {11,99 TRY/Month}*/
 "Office_Filter_Presentation" = "";
 "Office_Filter_All" = "";
 "Office_Filter_PDF" = "";
-"create_collage_triple" = "";
-"create_collage_quad" = "";
-"create_collage_multiple" = "";
+"create_collage_triple" = "Collage de 3";
+"create_collage_quad" = "Collage de 4";
+"create_collage_multiple" = "Collage de Múltiples";
 "create_collage_all" = "";
-"create_collage_select_collage" = "";
-"create_collage_info_label" = "";
+"create_collage_info_label" = "Toque cualquier foto para editar";
 
 /*Fotoğraf Seçin*/
-"create_collage_select_photo" = "";
+"create_collage_select_photo" = "Seleccionar Fotos";
 
 /*+New Collage*/
-"create_collage_preview_main" = "";
+"create_collage_preview_main" = "+Crear un Collage";
 
 /*2'li Kolajlar*/
-"create_collage_dual" = "";
-"create_collage" = "";
+"create_collage_dual" = "Collage de 2";
+"create_collage" = "Crear Collage";
+"collage_create_info" = "Haga clic en más para crear un collage";
+"create_collage_select_collage" = "";
+"office_filter_not_found" = "";
+"Office_Filter_Not_Found" = "";
