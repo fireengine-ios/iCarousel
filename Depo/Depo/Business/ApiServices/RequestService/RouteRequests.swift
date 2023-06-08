@@ -525,4 +525,5 @@ struct RouteRequests {
     // MARK: -OnlyOffice
     static let onlyOfficeGetFile = baseUrl +/ "office/files"
     static let onlyOfficeFilterDocument = "search/byDocumentType?parentFolderUuid=%@&page=%@&size=%@&sortBy=%@&sortOrder=%@&documentType=%@"
+    static let onlyOfficeSharedByMeFolderFilter = baseUrl.absoluteString + "v2/files/%@?language=en&page=%d&size=%d&sortBy=%@&sortOrder=%@&documentType=%@&parentFolderUuid=%@"
 }

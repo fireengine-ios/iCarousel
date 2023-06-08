@@ -114,6 +114,7 @@ final class PrivateShareFileInfoManager {
     private(set) var sortedItems = SynchronizedArray<WrapData>()
     private(set) var selectedItems = SynchronizedSet<WrapData>()
     private(set) var splittedItems = SynchronizedArray<[WrapData]>()
+    private(set) var itemsCount: Int = 0
     
     private var tempLoaded = [WrapData]()
     
@@ -157,7 +158,7 @@ final class PrivateShareFileInfoManager {
             
             selectedItems.removeAll()
             pagesLoaded = 0
-            
+            self.itemsCount = 0
             let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder, documentType: documentType) { [weak self] (loadedItems, isFinished) in
                 
                 guard let self = self, isFinished else {
@@ -172,7 +173,7 @@ final class PrivateShareFileInfoManager {
                 }
                 
                 self.pagesLoaded += 1
-                
+                self.itemsCount = loadedItems.count
                 let sorted = self.sorted(items: loadedItems)
                 self.sortedItems.replace(with: sorted, completion: nil)
                 
@@ -411,7 +412,7 @@ final class GetSharedItemsOperation: Operation {
                 task = privateShareAPIService.getSharedWithMe(size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, documentType: documentType, handler: completion)
                 
             case .innerFolder(_, let folder):
-                task = privateShareAPIService.getFiles(projectId: folder.projectId, folderUUID: folder.uuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder) { response in
+                task = privateShareAPIService.getFiles(projectId: folder.projectId, folderUUID: folder.uuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, documentType: documentType) { response in
                     switch response {
                         case .success(let fileSystem):
                             completion(.success(fileSystem.fileList))

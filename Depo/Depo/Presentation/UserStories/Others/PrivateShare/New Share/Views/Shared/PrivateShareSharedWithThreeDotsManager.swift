@@ -31,7 +31,7 @@ final class PrivateShareSharedWithThreeDotsManager {
                 
             case .innerFolder:
                 //TODO:
-                alert.show(with: [.select], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
+            alert.show(with: [.select, .officeFilterAll, .officeFilterPdf, .officeFilterWord, .officeFilterCell, .officeFilterSlide], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
         }
     }
     
