@@ -212,12 +212,12 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     }
     
     func onlyOfficeGetFilter(documentType: OnlyOfficeFilterType) {
-        if collectionManager.selectedItems().count > 0 {
-            collectionManager.filterOfficeReload(documentType: documentType)
-        } else {
-            let message = String(format: localized(.officeFilterNotFound), documentType.description)
-            SnackbarManager.shared.show(type: .action, message: message)
-        }
+        collectionManager.filterOfficeReload(documentType: documentType, completion: {
+            if self.collectionManager.itemsCount == 0 {
+                let message = String(format: localized(.officeFilterNotFound), documentType.description)
+                SnackbarManager.shared.show(type: .action, message: message)
+            }
+        })
     }
 }
 

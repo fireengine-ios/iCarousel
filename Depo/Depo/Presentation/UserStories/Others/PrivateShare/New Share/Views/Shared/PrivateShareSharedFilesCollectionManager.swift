@@ -49,6 +49,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     private(set) var currentCollectionViewType: MoreActionsConfig.ViewType = .List
     private(set) var isSelecting = false
     private(set) var isCollectionEmpty = true
+    private(set) var itemsCount = 0
     
     private lazy var mediaPlayer: MediaPlayer = factory.resolve()
 
@@ -154,13 +155,18 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         collectionView?.refreshControl = refresher
     }
     
-    func filterOfficeReload(documentType: OnlyOfficeFilterType) {
+    func filterOfficeReload(documentType: OnlyOfficeFilterType, completion: @escaping VoidHandler) {
         fileInfoManager.reload(documentType: documentType, completion: { [weak self] shouldReload in
             if shouldReload {
                 self?.changeSelection(isActive: false)
-                self?.reloadCollection()
+                self?.itemsCount = self?.fileInfoManager.itemsCount ?? 0
+                if self?.itemsCount ?? 0 > 0 {
+                    self?.reloadCollection()
+                }
+                DispatchQueue.main.async {
+                    completion()
+                }
             }
-            
         })
     }
     
