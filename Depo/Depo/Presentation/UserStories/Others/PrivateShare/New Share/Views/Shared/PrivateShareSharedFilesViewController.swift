@@ -215,7 +215,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         collectionManager.filterOfficeReload(documentType: documentType, completion: {
             if self.collectionManager.itemsCount == 0 {
                 let message = String(format: localized(.officeFilterNotFound), documentType.description)
-                SnackbarManager.shared.show(type: .action, message: message)
+                SnackbarManager.shared.show(type: .nonCritical, message: message)
             }
         })
     }

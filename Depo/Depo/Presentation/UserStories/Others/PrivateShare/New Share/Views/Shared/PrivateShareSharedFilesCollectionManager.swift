@@ -376,9 +376,18 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
             }
             
         } else {
-            let items = fileInfoManager.sortedItems.getArray().filter({ !($0.isFolder ?? false) })
-            openPreview(for: item, with: items)
+            if item.fileType.isDocument {
+                openOnlyOffice(fileUuid: item.uuid, fileName: item.name ?? "")
+            } else {
+                let items = fileInfoManager.sortedItems.getArray().filter({ !($0.isFolder ?? false) })
+                openPreview(for: item, with: items)
+            }
         }
+    }
+    
+    func openOnlyOffice(fileUuid: String, fileName: String) {
+        let vc = router.onlyOffice(fileUuid: fileUuid, fileName: fileName)
+        router.pushViewController(viewController: vc, animated: false)
     }
     
     private func showAudioPlayer(with item: WrapData) {
