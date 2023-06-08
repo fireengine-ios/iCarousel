@@ -87,7 +87,8 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         
         setCardsContainer(isActive: true)
         bottomBarManager.updateLayout()
-        collectionManager.reload(type: .onViewAppear)
+        //collectionManager.reload(type: .onViewAppear)
+        self.collectionManager.filterOfficeReload(documentType: self.collectionManager.lastSelectDocumentType, completion: {})
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -212,10 +213,15 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     }
     
     func onlyOfficeGetFilter(documentType: OnlyOfficeFilterType) {
-        collectionManager.filterOfficeReload(documentType: documentType, completion: {
+        collectionManager.filterOfficeReload(documentType: documentType, completion: { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
             if self.collectionManager.itemsCount == 0 {
                 let message = String(format: localized(.officeFilterNotFound), documentType.description)
                 SnackbarManager.shared.show(type: .nonCritical, message: message)
+                self.collectionManager.filterOfficeReload(documentType: self.collectionManager.lastSelectDocumentType, completion: {})
             }
         })
     }

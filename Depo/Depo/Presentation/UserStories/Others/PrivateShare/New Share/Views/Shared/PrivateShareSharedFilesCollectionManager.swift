@@ -50,6 +50,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     private(set) var isSelecting = false
     private(set) var isCollectionEmpty = true
     private(set) var itemsCount = 0
+    private(set) var lastSelectDocumentType: OnlyOfficeFilterType = .all
     
     private lazy var mediaPlayer: MediaPlayer = factory.resolve()
 
@@ -161,6 +162,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
                 self?.changeSelection(isActive: false)
                 self?.itemsCount = self?.fileInfoManager.itemsCount ?? 0
                 if self?.itemsCount ?? 0 > 0 {
+                    self?.lastSelectDocumentType = documentType
                     self?.reloadCollection()
                 }
                 DispatchQueue.main.async {
