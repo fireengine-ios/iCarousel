@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,7 +19,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OptInController" customModule="Billo" customModuleProvider="target">
             <connections>
-                <outlet property="bottomTimerConstraint" destination="MFF-iG-yKj" id="vZz-dG-dfw"/>
                 <outlet property="errorLabel" destination="bPL-kc-zIb" id="RmU-Zc-2X5"/>
                 <outlet property="firstSecurityCodeTextField" destination="65g-mO-kbV" id="PMp-IU-a86"/>
                 <outlet property="infoTitle" destination="mka-ez-sxo" id="U43-yN-Q2J"/>
@@ -37,37 +36,43 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="804"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lk3-xr-W1F">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="770"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="aSF-6O-aqT">
-                            <rect key="frame" x="40" y="35" width="334" height="57"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="aSF-6O-aqT">
+                            <rect key="frame" x="16" y="35" width="382" height="55"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify Your Phone Number" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGG-wE-D77">
-                                    <rect key="frame" x="70" y="0.0" width="194.5" height="21.5"/>
+                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify Your Phone Number" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGG-wE-D77">
+                                    <rect key="frame" x="0.0" y="0.0" width="382" height="21.5"/>
                                     <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="19"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the verification code" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mka-ez-sxo">
-                                    <rect key="frame" x="76.5" y="35.5" width="181" height="21.5"/>
+                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the verification code" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mka-ez-sxo">
+                                    <rect key="frame" x="0.0" y="33.5" width="382" height="21.5"/>
                                     <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="19"/>
                                     <color key="textColor" red="1" green="0.94117647059999998" blue="0.58431372550000005" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                         </stackView>
+                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLT-WU-fTZ" customClass="SmartTimerLabel" customModule="Billo" customModuleProvider="target">
+                            <rect key="frame" x="175" y="114" width="64" height="45.5"/>
+                            <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="40"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="rSg-mH-2dh">
-                            <rect key="frame" x="87" y="128" width="240" height="50"/>
+                            <rect key="frame" x="57" y="175.5" width="300" height="46"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="65g-mO-kbV" customClass="SecurityCodeTextField" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="30" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="40" height="46"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="50" id="cd0-ly-9NI"/>
-                                        <constraint firstAttribute="width" constant="30" id="tUX-Ad-6qD"/>
+                                        <constraint firstAttribute="height" constant="46" id="cd0-ly-9NI"/>
+                                        <constraint firstAttribute="width" constant="40" id="tUX-Ad-6qD"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -76,7 +81,7 @@
                                     </connections>
                                 </textField>
                                 <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xgk-JU-ejZ" customClass="SecurityCodeTextField" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="42" y="0.0" width="30" height="50"/>
+                                    <rect key="frame" x="52" y="0.0" width="40" height="46"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                     <connections>
@@ -84,7 +89,7 @@
                                     </connections>
                                 </textField>
                                 <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P4g-ji-t68" customClass="SecurityCodeTextField" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="84" y="0.0" width="30" height="50"/>
+                                    <rect key="frame" x="104" y="0.0" width="40" height="46"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                     <connections>
@@ -92,7 +97,7 @@
                                     </connections>
                                 </textField>
                                 <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vog-YO-3D0" customClass="SecurityCodeTextField" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="126" y="0.0" width="30" height="50"/>
+                                    <rect key="frame" x="156" y="0.0" width="40" height="46"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                     <connections>
@@ -100,7 +105,7 @@
                                     </connections>
                                 </textField>
                                 <textField opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ya2-vh-eoh" customClass="SecurityCodeTextField" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="168" y="0.0" width="30" height="50"/>
+                                    <rect key="frame" x="208" y="0.0" width="40" height="46"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                     <connections>
@@ -108,7 +113,7 @@
                                     </connections>
                                 </textField>
                                 <textField opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hTc-6J-8w5" customClass="SecurityCodeTextField" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="210" y="0.0" width="30" height="50"/>
+                                    <rect key="frame" x="260" y="0.0" width="40" height="46"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                     <connections>
@@ -118,54 +123,39 @@
                             </subviews>
                         </stackView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PmZ-10-YKt">
-                            <rect key="frame" x="87" y="128" width="240" height="50"/>
+                            <rect key="frame" x="57" y="175.5" width="300" height="46"/>
                         </button>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPL-kc-zIb">
-                            <rect key="frame" x="38" y="198" width="338" height="20.5"/>
+                            <rect key="frame" x="186.5" y="233.5" width="41.5" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mTW-7e-VLA" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
-                            <rect key="frame" x="93" y="242.5" width="228" height="44"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="44" id="vsW-dt-Ckd"/>
-                            </constraints>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mTW-7e-VLA">
+                            <rect key="frame" x="184" y="270" width="46" height="30"/>
                             <state key="normal" title="Button"/>
                             <connections>
                                 <action selector="actionResendButton:" destination="-1" eventType="touchUpInside" id="MtI-uD-ClX"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLT-WU-fTZ" customClass="SmartTimerLabel" customModule="Billo" customModuleProvider="target">
-                            <rect key="frame" x="175" y="708.5" width="64" height="45.5"/>
-                            <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="40"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                     </subviews>
                     <color key="backgroundColor" name="primaryBackground"/>
                     <constraints>
-                        <constraint firstItem="bPL-kc-zIb" firstAttribute="leading" secondItem="lk3-xr-W1F" secondAttribute="leading" constant="38" id="4P0-kJ-31J"/>
-                        <constraint firstItem="wLT-WU-fTZ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="mTW-7e-VLA" secondAttribute="bottom" constant="4" id="63C-Vg-hL1"/>
-                        <constraint firstItem="aSF-6O-aqT" firstAttribute="leading" secondItem="lk3-xr-W1F" secondAttribute="leading" constant="40" id="FOd-gf-NBa"/>
-                        <constraint firstItem="rSg-mH-2dh" firstAttribute="top" secondItem="aSF-6O-aqT" secondAttribute="bottom" constant="36" id="GPT-LI-0Pt"/>
-                        <constraint firstItem="wLT-WU-fTZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lk3-xr-W1F" secondAttribute="leading" constant="16" id="JYY-tg-iJl"/>
+                        <constraint firstItem="rSg-mH-2dh" firstAttribute="top" secondItem="wLT-WU-fTZ" secondAttribute="bottom" constant="16" id="1Cf-yg-K1P"/>
+                        <constraint firstItem="mTW-7e-VLA" firstAttribute="top" secondItem="bPL-kc-zIb" secondAttribute="bottom" constant="16" id="7Oh-d3-f8F"/>
+                        <constraint firstItem="bPL-kc-zIb" firstAttribute="centerX" secondItem="lk3-xr-W1F" secondAttribute="centerX" id="Cax-7o-crl"/>
+                        <constraint firstItem="aSF-6O-aqT" firstAttribute="leading" secondItem="lk3-xr-W1F" secondAttribute="leading" constant="16" id="FOd-gf-NBa"/>
+                        <constraint firstItem="mTW-7e-VLA" firstAttribute="centerX" secondItem="lk3-xr-W1F" secondAttribute="centerX" id="HKb-vw-jZL"/>
                         <constraint firstItem="rSg-mH-2dh" firstAttribute="centerX" secondItem="lk3-xr-W1F" secondAttribute="centerX" id="JzR-4K-jQ2"/>
-                        <constraint firstItem="mTW-7e-VLA" firstAttribute="centerX" secondItem="bPL-kc-zIb" secondAttribute="centerX" id="K4Z-Hd-3m5"/>
-                        <constraint firstAttribute="bottom" secondItem="wLT-WU-fTZ" secondAttribute="bottom" constant="20" id="MFF-iG-yKj"/>
-                        <constraint firstItem="mTW-7e-VLA" firstAttribute="width" secondItem="lk3-xr-W1F" secondAttribute="width" multiplier="0.55" id="Pr0-YG-Iyh"/>
                         <constraint firstItem="aSF-6O-aqT" firstAttribute="top" secondItem="lk3-xr-W1F" secondAttribute="top" constant="35" id="R6Y-I1-quI"/>
-                        <constraint firstItem="bPL-kc-zIb" firstAttribute="centerX" secondItem="rSg-mH-2dh" secondAttribute="centerX" id="SDW-M3-LfF"/>
-                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wLT-WU-fTZ" secondAttribute="trailing" constant="16" id="TOk-VP-IDc"/>
-                        <constraint firstAttribute="trailing" secondItem="aSF-6O-aqT" secondAttribute="trailing" constant="40" id="W0m-e3-QmW"/>
-                        <constraint firstItem="bPL-kc-zIb" firstAttribute="top" secondItem="rSg-mH-2dh" secondAttribute="bottom" constant="20" id="bQ7-Pz-dr0"/>
-                        <constraint firstItem="mTW-7e-VLA" firstAttribute="top" secondItem="bPL-kc-zIb" secondAttribute="bottom" constant="24" id="eLG-XD-Z7I"/>
+                        <constraint firstItem="wLT-WU-fTZ" firstAttribute="centerX" secondItem="lk3-xr-W1F" secondAttribute="centerX" id="Upk-Vg-TtO"/>
+                        <constraint firstAttribute="trailing" secondItem="aSF-6O-aqT" secondAttribute="trailing" constant="16" id="W0m-e3-QmW"/>
                         <constraint firstItem="PmZ-10-YKt" firstAttribute="width" secondItem="rSg-mH-2dh" secondAttribute="width" id="fyd-ic-udF"/>
-                        <constraint firstAttribute="trailing" secondItem="bPL-kc-zIb" secondAttribute="trailing" constant="38" id="gFg-SW-KQM"/>
                         <constraint firstItem="PmZ-10-YKt" firstAttribute="centerY" secondItem="rSg-mH-2dh" secondAttribute="centerY" id="lOZ-cp-kH5"/>
                         <constraint firstItem="PmZ-10-YKt" firstAttribute="height" secondItem="rSg-mH-2dh" secondAttribute="height" id="ldd-O0-exk"/>
-                        <constraint firstItem="wLT-WU-fTZ" firstAttribute="centerX" secondItem="lk3-xr-W1F" secondAttribute="centerX" id="qOJ-gY-u6G"/>
                         <constraint firstItem="PmZ-10-YKt" firstAttribute="centerX" secondItem="rSg-mH-2dh" secondAttribute="centerX" id="rrD-cW-UBV"/>
+                        <constraint firstItem="bPL-kc-zIb" firstAttribute="top" secondItem="rSg-mH-2dh" secondAttribute="bottom" constant="12" id="vIG-E7-Snj"/>
+                        <constraint firstItem="wLT-WU-fTZ" firstAttribute="top" secondItem="aSF-6O-aqT" secondAttribute="bottom" constant="24" id="vrt-RB-lcq"/>
                     </constraints>
                 </view>
             </subviews>
