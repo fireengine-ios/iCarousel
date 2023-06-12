@@ -243,4 +243,17 @@ enum Strings: String, Localizable {
     case createCollageInfoLabel = "create_collage_info_label"
     case createCollageLabel = "create_collage"
     case createCollageInfoLabelNew = "collage_create_info"
+    
+    // MARK: - Only Office
+    case createWord = "Create_Word"
+    case createExcel = "Create_Cell"
+    case createPowerPoint = "Create_Slide"
+    case createDocumentPopup = "Create_Document_Popup"
+    
+    case officeFilterAll = "Office_Filter_All"
+    case officeFilterPdf = "Office_Filter_PDF"
+    case officeFilterWord = "Office_Filter_Document"
+    case officeFilterCell = "Office_Filter_SpreedSheet"
+    case officeFilterSlide = "Office_Filter_Presentation"
+    case officeFilterNotFound = "office_filter_not_found"
 }

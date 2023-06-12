@@ -220,7 +220,35 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         
     }
     
+    func onlyOfficeCreateFile(fileName: String, documentType: String) {
+        startAsyncOperation()
+        interactor.onlyOfficeCreateFile(fileName: fileName, documentType: documentType)
+    }
+    
     // MARK: - Request OUTPUT
+    func createFileSuccess(fileUuid: String, fileName: String) {
+        openOnlyOffice(fileUuid: fileUuid, fileName: fileName)
+        onReloadData()
+    }
+    
+    func createFileFail(errorResponse: ErrorResponse) {
+        asyncOperationFail(errorMessage: errorResponse.description)
+    }
+    
+    func onlyOfficeFilterSuccess(documentType: OnlyOfficeFilterType, items: [WrapData]) {
+        if documentType == .all {
+            onReloadData()
+        } else {
+            if items.count > 0 {
+                dataSource.dropData()
+                getContentWithSuccess(items: items)
+            } else {
+                let message = String(format: localized(.officeFilterNotFound), documentType.description)
+                SnackbarManager.shared.show(type: .action, message: message)
+            }
+        }
+    }
+    
     func getContentWithFail(errorString: String?) {
         view?.stopRefresher()
         dataSource.isPaginationDidEnd = false
@@ -799,6 +827,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func createCollage() {
         router.createCollage()
+    }
+    
+    func openOnlyOffice(fileUuid: String, fileName: String) {
+        router.openOnlyOffice(fileUuid: fileUuid, fileName: fileName)
     }
     
     // MARK: - View outbut/ TopBar/UnderNavBarBar Delegates

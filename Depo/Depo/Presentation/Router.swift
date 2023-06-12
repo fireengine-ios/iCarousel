@@ -1127,6 +1127,12 @@ class RouterVC: NSObject {
         return PackagesModuleInitializer.viewController(quotaInfo: quotaInfo)
     }
     
+    // MARK: - OnlyOffice
+    
+    func onlyOffice(fileUuid: String, fileName: String)  -> OnlyOfficeViewController {
+        return OnlyOfficeViewController(fileUuid: fileUuid, fileName: fileName)
+    }
+    
     // MARK: - Notification
     func notification() -> NotificationViewController {
         return NotificationModuleInitializer.initializeViewController()

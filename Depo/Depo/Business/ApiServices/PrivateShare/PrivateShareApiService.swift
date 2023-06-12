@@ -13,13 +13,13 @@ protocol PrivateShareApiService {
     func getSuggestions(handler: @escaping ResponseArrayHandler<SuggestedApiContact>) -> URLSessionTask?
     
     @discardableResult
-    func getSharedByMe(size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask?
+    func getSharedByMe(size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, documentType: OnlyOfficeFilterType, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask?
     
     @discardableResult
-    func getSharedWithMe(size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask?
+    func getSharedWithMe(size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, documentType: OnlyOfficeFilterType, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask?
     
     @discardableResult
-    func getFiles(projectId: String, folderUUID: String, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseHandler<FileSystem>) -> URLSessionTask?
+    func getFiles(projectId: String, folderUUID: String, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, documentType: OnlyOfficeFilterType, handler: @escaping ResponseHandler<FileSystem>) -> URLSessionTask?
     
     @discardableResult
     func privateShare(object: PrivateShareObject, handler: @escaping ResponseVoid) -> URLSessionTask?
@@ -74,8 +74,14 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     }
     
     @discardableResult
-    func getSharedByMe(size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask? {
-        let url = String(format: RouteRequests.PrivateShare.Shared.byMe, size, page, sortBy.description, sortOrder.description)
+    func getSharedByMe(size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, documentType: OnlyOfficeFilterType, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask? {
+        var url: String = ""
+        if documentType == .all {
+            url = String(format: RouteRequests.PrivateShare.Shared.byMe, size, page, sortBy.description, sortOrder.description, "")
+        } else {
+            let urlExtension: String = "&documentType=\(documentType.filterType)"
+            url = String(format: RouteRequests.PrivateShare.Shared.byMe, size, page, sortBy.description, sortOrder.description, urlExtension)
+        }
         
         return SessionManager
             .customDefault
@@ -86,8 +92,14 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     }
     
     @discardableResult
-    func getSharedWithMe(size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask? {
-        let url = String(format: RouteRequests.PrivateShare.Shared.withMe, size, page, sortBy.description, sortOrder.description)
+    func getSharedWithMe(size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, documentType: OnlyOfficeFilterType, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask? {
+        var url: String = ""
+        if documentType == .all {
+            url = String(format: RouteRequests.PrivateShare.Shared.withMe, size, page, sortBy.description, sortOrder.description, "")
+        } else {
+            let urlExtension: String = "&documentType=\(documentType.filterType)"
+            url = String(format: RouteRequests.PrivateShare.Shared.withMe, size, page, sortBy.description, sortOrder.description, urlExtension)
+        }
         
         return SessionManager
             .customDefault
@@ -98,8 +110,13 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     }
     
     @discardableResult
-    func getFiles(projectId: String, folderUUID: String, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseHandler<FileSystem>) -> URLSessionTask? {
-        let url = String(format: RouteRequests.FileSystem.Version_2.filesFromFolder, projectId, size, page, sortBy.description, sortOrder.description, folderUUID)
+    func getFiles(projectId: String, folderUUID: String, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, documentType: OnlyOfficeFilterType, handler: @escaping ResponseHandler<FileSystem>) -> URLSessionTask? {
+        var url: String = ""
+        if documentType == .all {
+            url = String(format: RouteRequests.FileSystem.Version_2.filesFromFolder, projectId, size, page, sortBy.description, sortOrder.description, folderUUID)
+        } else {
+            url = String(format: RouteRequests.onlyOfficeSharedByMeFolderFilter, projectId, page, size, sortBy.description, sortOrder.description, documentType.filterType, folderUUID)
+        } 
         
         return SessionManager
             .customDefault

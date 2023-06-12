@@ -2095,3 +2095,6 @@ then {11,99 TRY/Month}*/
 "create_collage_dual" = "Колаж із 2 частин";
 "create_collage" = "Створити Колаж";
 "collage_create_info" = "Натисніть плюс, щоб створити колаж";
+"create_collage_select_collage" = "";
+"office_filter_not_found" = "";
+"Office_Filter_Not_Found" = "";

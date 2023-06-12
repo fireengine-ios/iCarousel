@@ -99,4 +99,6 @@ protocol MoreFilesActionsInteractorInput {
     func handleShare(type: ShareTypes, sourceRect: CGRect?, items: [BaseDataSourceItem])
     
     func handleShareAction(type: ElementTypes, sourceRect: CGRect?, items: [BaseDataSourceItem])
+    
+    func officeFilterByType(documentType: OnlyOfficeFilterType)
 }

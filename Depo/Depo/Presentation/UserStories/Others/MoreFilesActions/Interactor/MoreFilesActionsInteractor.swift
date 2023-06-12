@@ -74,7 +74,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private lazy var smashActionService: SmashActionServiceProtocol = SmashActionService()
     private lazy var photoEditImageDownloader = PhotoEditImageDownloader()
     private lazy var privateShareAnalytics = PrivateShareAnalytics()
-    
+    private lazy var onlyOfficeService = OnlyOfficeService()
     
     typealias FailResponse = (_ value: ErrorResponse) -> Void
     
@@ -1407,6 +1407,32 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         default:
             break
         }
+    }
+    
+    func officeFilterByType(documentType: OnlyOfficeFilterType) {
+        switch documentType {
+        case .all:
+            output?.onlyOfficeFilterSuccess(documentType: documentType, items: [])
+        default:
+            officeFilter(documentType: documentType)
+        }
+    }
+    
+    func officeFilter(documentType: OnlyOfficeFilterType) {
+        output?.startAsyncOperation()
+        onlyOfficeService.filterDocument(documentType: documentType, success: { [weak self] response in
+            let resultResponse = (response as? SearchResponse)?.list
+            DispatchQueue.main.async {
+                let list = resultResponse?.compactMap { WrapData(remote: $0) }
+                self?.output?.asyncOperationSuccess()
+                self?.output?.onlyOfficeFilterSuccess(documentType: documentType, items: list ?? [])
+            }
+        }, fail: { errorResponse in
+            DispatchQueue.main.async {
+                debugLog("OnlyOffice Fail \(errorResponse.description)")
+                UIApplication.showErrorAlert(message: errorResponse.description)
+            }
+        })
     }
 }
 

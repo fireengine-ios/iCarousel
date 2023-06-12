@@ -24,7 +24,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     class func initializeDocumentsViewController(with nibName: String) -> UIViewController {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
-        viewController.floatingButtonsArray.append(contentsOf: [.uploadDocuments])
+        viewController.floatingButtonsArray.append(contentsOf: [.uploadDocuments, .createWord, .createExcel, .createPowerPoint])
         viewController.cardsContainerView.isEnable = true
         viewController.cardsContainerView.addPermittedPopUpViewTypes(types: [.upload, .download])
         viewController.segmentImage = .documents
@@ -46,7 +46,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                fileFilters: [.fileType(.allDocs)],
                                bottomBarConfig: bottomBarConfig,
                                topBarConfig: gridListTopBarConfig,
-                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
+                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .officeFilterAll, .officeFilterPdf, .officeFilterWord, .officeFilterCell, .officeFilterSlide],
                                                                                      selectionModeTypes: []))
         viewController.mainTitle = ""
         viewController.title = TextConstants.documents

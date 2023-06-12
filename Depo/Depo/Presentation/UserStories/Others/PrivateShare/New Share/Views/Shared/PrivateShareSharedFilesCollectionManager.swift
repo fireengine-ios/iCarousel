@@ -49,6 +49,8 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     private(set) var currentCollectionViewType: MoreActionsConfig.ViewType = .List
     private(set) var isSelecting = false
     private(set) var isCollectionEmpty = true
+    private(set) var itemsCount = 0
+    private(set) var lastSelectDocumentType: OnlyOfficeFilterType = .all
     
     private lazy var mediaPlayer: MediaPlayer = factory.resolve()
 
@@ -152,6 +154,22 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         refresher.tintColor = AppColor.filesRefresher.color
         refresher.addTarget(self, action: #selector(fullReload), for: .valueChanged)
         collectionView?.refreshControl = refresher
+    }
+    
+    func filterOfficeReload(documentType: OnlyOfficeFilterType, completion: @escaping VoidHandler) {
+        fileInfoManager.reload(documentType: documentType, completion: { [weak self] shouldReload in
+            if shouldReload {
+                self?.changeSelection(isActive: false)
+                self?.itemsCount = self?.fileInfoManager.itemsCount ?? 0
+                if self?.itemsCount ?? 0 > 0 {
+                    self?.lastSelectDocumentType = documentType
+                    self?.reloadCollection()
+                }
+                DispatchQueue.main.async {
+                    completion()
+                }
+            }
+        })
     }
     
     @objc
@@ -360,9 +378,18 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
             }
             
         } else {
-            let items = fileInfoManager.sortedItems.getArray().filter({ !($0.isFolder ?? false) })
-            openPreview(for: item, with: items)
+            if item.fileType.isDocument {
+                openOnlyOffice(fileUuid: item.uuid, fileName: item.name ?? "")
+            } else {
+                let items = fileInfoManager.sortedItems.getArray().filter({ !($0.isFolder ?? false) })
+                openPreview(for: item, with: items)
+            }
         }
+    }
+    
+    func openOnlyOffice(fileUuid: String, fileName: String) {
+        let vc = router.onlyOffice(fileUuid: fileUuid, fileName: fileName)
+        router.pushViewController(viewController: vc, animated: false)
     }
     
     private func showAudioPlayer(with item: WrapData) {

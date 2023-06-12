@@ -581,6 +581,10 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     func showUploadFolder(with action: TabBarViewController.Action) {
         self.customTabBarController?.handleAction(action)
     }
+    
+    func createFile(fileName: String, documentType: String) {
+        output.onlyOfficeCreateFile(fileName: fileName, documentType: documentType)
+    }
 }
 
 // MARK: - ScrollViewIndicator

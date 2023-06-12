@@ -61,6 +61,7 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
             router.presentViewController(controller: controller)
             
         default:
+            /* ///for open to preview screen
             let detailModule = router.filesDetailModule(fileObject: wrapperedItem,
                                                         items: wrapperedArray,
                                                         status: view.status,
@@ -69,7 +70,11 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
 
             presenter.photoVideoDetailModule = detailModule.moduleInput
             let nController = NavigationController(rootViewController: detailModule.controller)
-            router.presentViewController(controller: nController)
+            router.presentViewController(controller: nController)*/
+            
+            /// for open to onlyoffice screen
+            openOnlyOffice(fileUuid: selectedItem.uuid, fileName: selectedItem.name ?? "")
+            
         }
     }
     
@@ -128,5 +133,10 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .createCollage)
         let vc = router.createCollage()
         router.pushViewController(viewController: vc)
+    }
+    
+    func openOnlyOffice(fileUuid: String, fileName: String) {
+        let vc = router.onlyOffice(fileUuid: fileUuid, fileName: fileName)
+        router.pushViewController(viewController: vc, animated: false)
     }
 }

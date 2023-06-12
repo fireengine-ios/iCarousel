@@ -135,6 +135,11 @@ enum Image: String, AppImage {
     case iconFileZip
     case iconFolder
     case iconMusic
+    case iconFileAllNew
+    case iconFilePdfNew
+    case iconFileDocNew
+    case iconFileXlsNew
+    case iconFilePptNew
     
     case iconFileAudioBig
     case iconFileDocBig
@@ -187,6 +192,9 @@ enum Image: String, AppImage {
     case popupUnHide
     case popupRestore
     case popupLogout
+    case popupDoc
+    case popupExcel
+    case popupPowerPoint
     
     /// For You
     case forYouPeople
