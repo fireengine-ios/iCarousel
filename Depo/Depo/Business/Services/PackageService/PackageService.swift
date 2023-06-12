@@ -340,6 +340,12 @@ final class PackageService {
                 }
             }
         }
+        
+        if let offer = offer as? PackageModelResponse,
+            let adjustId = offer.adjustId {
+            AnalyticsEvent.purchaseToken = adjustId
+        }
+        
         return event
     }
     

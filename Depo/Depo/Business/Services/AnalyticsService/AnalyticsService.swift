@@ -102,7 +102,7 @@ final class AnalyticsService: NSObject {
     }
 
     private func logPurchase(event: AnalyticsEvent, price: Double, currency: String) {
-        logAdjustEvent(name: event.token, price: price, currency: currency)
+        logAdjustEvent(name: AnalyticsEvent.purchaseToken, price: price, currency: currency)
         //Facebook has automatic tracking in-app purchases. If this function is enabled in the web settings, then there will be duplicates
         AppEvents.logPurchase(
             price,
