@@ -39,12 +39,8 @@ final class ForYouCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with wrapData: WrapData, currentView: ForYouSections) {
-        switch wrapData.patchToPreview {
-        case .remoteUrl(let url):
-            //thumbnailImage.sd_setImage(with: url, completed: nil)
-            setImage(with: url!)
-        default:
-            break
+        if let url = wrapData.getAnyValidRemoteUrl {
+            setImage(with: url)
         }
     }
     
