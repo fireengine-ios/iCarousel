@@ -200,7 +200,6 @@ enum Image: String, AppImage {
     case forYouPeople
     case popupProfileScan
     case popupLoading
-    case iconCollage
     case createCollageThumbnail
     case iconCollage
     case collageThumbnail
