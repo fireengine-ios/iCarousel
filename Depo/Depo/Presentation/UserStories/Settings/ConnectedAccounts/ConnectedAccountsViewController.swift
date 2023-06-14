@@ -48,7 +48,6 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
     
     private func setupTableView() {
         tableView.dataSource = dataSource
-//        tableView.delegate = self
         
         tableView.tableFooterView = UIView()
         tableView.estimatedRowHeight = 124.0

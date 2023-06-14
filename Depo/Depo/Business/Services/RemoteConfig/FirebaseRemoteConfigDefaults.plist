@@ -22,5 +22,11 @@
 	<false/>
 	<key>ocr_enabled</key>
 	<false/>
+	<key>lifebox_instagram_enable</key>
+	<false/>
+	<key>lifebox_facebook_enable</key>
+	<false/>
+	<key>lifebox_dropbox_enable</key>
+	<false/>
 </dict>
 </plist>

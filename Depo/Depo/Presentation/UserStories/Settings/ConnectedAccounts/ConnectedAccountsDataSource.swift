@@ -49,13 +49,28 @@ final class ConnectedAccountsDataSource: NSObject {
     weak var view: SocialConnectionCellDelegate?
     weak var appleGoogleDelegate: AppleGoogleAccountConnectionCellDelegate?
     
-    private var tableSections = [Section(account: .instagram, state: .shrinked),
-                                 Section(account: .facebook, state: .shrinked),
-                                 Section(account: .dropbox, state: .shrinked)]
+    private var tableSections = [Section]()
     
     override init() {
+        super.init()
+        self.socialAccountsEnable()
         if #available(iOS 13.0, *) {
             tableSections.append(Section(account: .appleGoogle, state: .shrinked))
+        }
+    }
+    
+    private func socialAccountsEnable() {
+        let instagramEnable = FirebaseRemoteConfig.shared.fetchInstagramMenuEnable
+        let facebookEnable = FirebaseRemoteConfig.shared.fetchFacebookMenuEnable
+        let dropboxEnable = FirebaseRemoteConfig.shared.fetchDropboxMenuEnable
+        if instagramEnable {
+            tableSections.append(Section(account: .instagram, state: .shrinked))
+        }
+        if facebookEnable {
+            tableSections.append(Section(account: .facebook, state: .shrinked))
+        }
+        if dropboxEnable {
+            tableSections.append(Section(account: .dropbox, state: .shrinked))
         }
     }
 }
