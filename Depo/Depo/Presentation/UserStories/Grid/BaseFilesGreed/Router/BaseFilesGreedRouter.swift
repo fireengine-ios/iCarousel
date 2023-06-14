@@ -60,6 +60,17 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
             let controller = router.augumentRealityDetailViewController(fileObject: wrapperedItem)
             router.presentViewController(controller: controller)
             
+        case .application(.pdf):
+            let detailModule = router.filesDetailModule(fileObject: wrapperedItem,
+                                                        items: wrapperedArray,
+                                                        status: view.status,
+                                                        canLoadMoreItems: true,
+                                                        moduleOutput: moduleOutput as? PhotoVideoDetailModuleOutput)
+
+            presenter.photoVideoDetailModule = detailModule.moduleInput
+            let nController = NavigationController(rootViewController: detailModule.controller)
+            router.presentViewController(controller: nController)
+            
         default:
             /* ///for open to preview screen
             let detailModule = router.filesDetailModule(fileObject: wrapperedItem,
