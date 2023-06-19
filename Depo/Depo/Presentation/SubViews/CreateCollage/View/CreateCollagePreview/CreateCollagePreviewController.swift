@@ -353,6 +353,7 @@ final class CreateCollagePreviewController: BaseViewController, UIScrollViewDele
         wrapData.patchToPreview = PathForItem.remoteUrl(url)
 
         showSpinner()
+        bottomBarManager.hide()
         UploadService.default.uploadFileList(items: [wrapData], uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, isCollage: true, success: {
             DispatchQueue.main.async {
                 self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .saveCollage)

@@ -378,7 +378,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
             }
             
         } else {
-            if item.fileType.isDocument {
+            if item.fileType.isDocument && !item.fileType.isPdfDocument {
                 openOnlyOffice(fileUuid: item.uuid, fileName: item.name ?? "")
             } else {
                 let items = fileInfoManager.sortedItems.getArray().filter({ !($0.isFolder ?? false) })

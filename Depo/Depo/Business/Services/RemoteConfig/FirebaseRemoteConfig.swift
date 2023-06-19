@@ -25,6 +25,9 @@ private struct RemoteConfigKeys {
     static let appleLoginEnabled = "apple_login_enabled"
     static let ocrEnabled = "ocr_enabled"
     static let notificationReadTime = "notification_unread_to_read_time"
+    static let lifeboxInstagramEnable = "lifebox_instagram_enable"
+    static let lifeboxFacebookEnable = "lifebox_facebook_enable"
+    static let lifeboxDropboxEnable = "lifebox_dropbox_enable"
 }
 
 final class FirebaseRemoteConfig {
@@ -80,6 +83,19 @@ final class FirebaseRemoteConfig {
 
     var ocrEnabled: Bool {
         let key = RemoteConfigKeys.ocrEnabled
+        return remoteConfig.configValue(forKey: key).boolValue
+    }
+    
+    var fetchInstagramMenuEnable: Bool {
+        let key = RemoteConfigKeys.lifeboxInstagramEnable
+        return remoteConfig.configValue(forKey: key).boolValue
+    }
+    var fetchFacebookMenuEnable: Bool {
+        let key = RemoteConfigKeys.lifeboxFacebookEnable
+        return remoteConfig.configValue(forKey: key).boolValue
+    }
+    var fetchDropboxMenuEnable: Bool {
+        let key = RemoteConfigKeys.lifeboxDropboxEnable
         return remoteConfig.configValue(forKey: key).boolValue
     }
     

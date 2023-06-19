@@ -130,6 +130,13 @@ enum FileType: Hashable, Equatable {
         return applicationType.isContained(in: [.doc, .txt, .html, .xls, .pdf, .ppt, .pptx, .usdz])
     }
     
+    var isPdfDocument: Bool {
+        guard case let FileType.application(applicationType) = self else {
+            return false
+        }
+        return applicationType.isContained(in: [.pdf])
+    }
+    
     var isDocumentPageItem: Bool {
         switch self {
         case .application(_):
