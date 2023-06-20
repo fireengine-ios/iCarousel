@@ -36529,10 +36529,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Depo/App/Depo-AppStore.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = 693N5K66ZJ;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 693N5K66ZJ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -36568,6 +36569,7 @@
 				PRODUCT_NAME = lifebox_friendly;
 				PROVISIONING_PROFILE = "747cf355-57c7-4d05-ae4a-3c51cc5d7147";
 				PROVISIONING_PROFILE_SPECIFIER = "akillidepo Extension";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "akillidepo Extension";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "APPSTORE MAIN_APP DEBUG_BUNDLE_ENABLED";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";

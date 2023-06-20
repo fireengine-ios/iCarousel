@@ -71,8 +71,11 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
             let nController = NavigationController(rootViewController: detailModule.controller)
             router.presentViewController(controller: nController)
             
+        case .application(.doc), .application(.ppt), .application(.pptx), .application(.xls):
+            openOnlyOffice(fileUuid: selectedItem.uuid, fileName: selectedItem.name ?? "")
+            
         default:
-            /* ///for open to preview screen
+             ///for open to preview screen
             let detailModule = router.filesDetailModule(fileObject: wrapperedItem,
                                                         items: wrapperedArray,
                                                         status: view.status,
@@ -81,11 +84,7 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
 
             presenter.photoVideoDetailModule = detailModule.moduleInput
             let nController = NavigationController(rootViewController: detailModule.controller)
-            router.presentViewController(controller: nController)*/
-            
-            /// for open to onlyoffice screen
-            openOnlyOffice(fileUuid: selectedItem.uuid, fileName: selectedItem.name ?? "")
-            
+            router.presentViewController(controller: nController)
         }
     }
     
