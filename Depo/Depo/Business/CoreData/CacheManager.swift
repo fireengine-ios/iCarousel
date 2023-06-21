@@ -27,7 +27,7 @@ final class CacheManager {
     private lazy var coreDataStack: CoreDataStack = factory.resolve()
     private lazy var logoutCleaner: LogoutDBCleaner = factory.resolve()
     
-    private static let pageSize: Int = 500
+    private static let pageSize: Int = FirebaseRemoteConfig.shared.fetchPreparePageSizeLimit //500
     private let photoVideoService = PhotoAndVideoService(requestSize: CacheManager.pageSize,
                                                          type: .imageAndVideo)
 

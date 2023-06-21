@@ -28,6 +28,7 @@ private struct RemoteConfigKeys {
     static let lifeboxInstagramEnable = "lifebox_instagram_enable"
     static let lifeboxFacebookEnable = "lifebox_facebook_enable"
     static let lifeboxDropboxEnable = "lifebox_dropbox_enable"
+    static let preparePageSizeLimit = "prepare_page_size_limit"
 }
 
 final class FirebaseRemoteConfig {
@@ -97,6 +98,11 @@ final class FirebaseRemoteConfig {
     var fetchDropboxMenuEnable: Bool {
         let key = RemoteConfigKeys.lifeboxDropboxEnable
         return remoteConfig.configValue(forKey: key).boolValue
+    }
+    
+    var fetchPreparePageSizeLimit: Int {
+        let key = RemoteConfigKeys.preparePageSizeLimit
+        return remoteConfig.configValue(forKey: key).numberValue.intValue
     }
     
     func fetchAttemptsBeforeSupportOnLogin(completion: @escaping ValueHandler<Int>) {
