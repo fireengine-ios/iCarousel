@@ -34509,6 +34509,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 693N5K66ZJ;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 693N5K66ZJ;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -34548,6 +34549,7 @@
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "be80acf2-5982-42ee-b336-8cb2367342ec";
 				PROVISIONING_PROFILE_SPECIFIER = "Lifebox iOS App";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "akillidepo Extension";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
@@ -35273,6 +35275,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 693N5K66ZJ;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 693N5K66ZJ;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -35283,6 +35286,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.pushimage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Lifebox iOS Notification Service Extension";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "akillidepo push image";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "NotificationService/NotificationService-Bridging-Header.h";
@@ -35540,6 +35544,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 693N5K66ZJ;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 693N5K66ZJ;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -35559,6 +35564,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b4c90355-f149-4574-9699-754432dedc4a";
 				PROVISIONING_PROFILE_SPECIFIER = "Lifebox iOS File Provider Extension";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "akillidepo IOS11 files";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -35713,6 +35719,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 693N5K66ZJ;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 693N5K66ZJ;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -35732,6 +35739,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5b7534af-e91e-45f0-863c-4ef32654c718";
 				PROVISIONING_PROFILE_SPECIFIER = "Lifebox iOS File Provider UI Extension";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "akillidepo IOS11 files UI";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -35886,6 +35894,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 693N5K66ZJ;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 693N5K66ZJ;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -35905,6 +35914,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8b7e0199-968b-4d57-b6f3-356e454a654b";
 				PROVISIONING_PROFILE_SPECIFIER = "Lifebox iOS Share Extension";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "akillidepo share extension";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -35969,11 +35979,12 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "LifeboxShared/LifeboxShared-appstore.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 693N5K66ZJ;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 693N5K66ZJ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -35992,6 +36003,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "21d4297a-f50d-47a2-ab5b-6be0516ea80b";
 				PROVISIONING_PROFILE_SPECIFIER = "akillidepo share extension";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "akillidepo share extension";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -36414,6 +36426,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = 693N5K66ZJ;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 693N5K66ZJ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -36450,6 +36463,7 @@
 				PRODUCT_NAME = lifebox_friendly;
 				PROVISIONING_PROFILE = "be80acf2-5982-42ee-b336-8cb2367342ec";
 				PROVISIONING_PROFILE_SPECIFIER = "Lifebox iOS App";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "akillidepo Extension";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
