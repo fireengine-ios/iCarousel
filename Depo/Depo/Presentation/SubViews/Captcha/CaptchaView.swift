@@ -9,7 +9,6 @@ final class CaptchaView: UIView, FromNib {
     
     @IBOutlet private weak var captchaImageView: UIImageView! {
         willSet {
-            newValue.contentMode = .scaleAspectFit
             newValue.backgroundColor = ColorConstants.profileGrayColor
         }
     }

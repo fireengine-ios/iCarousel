@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -44,10 +44,7 @@
                                             <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                                         </view>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kWg-Vf-Rlr">
-                                            <rect key="frame" x="27" y="8" width="262" height="64"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="kWg-Vf-Rlr" secondAttribute="height" multiplier="180:44" id="t2o-1Z-qKf"/>
-                                            </constraints>
+                                            <rect key="frame" x="0.0" y="0.0" width="316" height="80"/>
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e7k-Vf-1iy">
                                             <rect key="frame" x="316" y="4" width="34" height="36"/>
@@ -69,19 +66,20 @@
                                     <color key="backgroundColor" name="primaryBackground"/>
                                     <constraints>
                                         <constraint firstItem="F9F-BL-tyJ" firstAttribute="leading" secondItem="3h7-gb-EgQ" secondAttribute="leading" id="1hp-Vs-hF3"/>
+                                        <constraint firstItem="e7k-Vf-1iy" firstAttribute="leading" secondItem="kWg-Vf-Rlr" secondAttribute="trailing" id="2SN-Cg-zO7"/>
                                         <constraint firstItem="Hbt-Eu-EcI" firstAttribute="leading" secondItem="e7k-Vf-1iy" secondAttribute="leading" id="5Di-aJ-01d"/>
                                         <constraint firstItem="e7k-Vf-1iy" firstAttribute="top" secondItem="3h7-gb-EgQ" secondAttribute="top" constant="4" id="72k-CN-A4m"/>
                                         <constraint firstAttribute="height" constant="80" id="8Pz-Tv-sW7"/>
                                         <constraint firstItem="Hbt-Eu-EcI" firstAttribute="top" secondItem="e7k-Vf-1iy" secondAttribute="bottom" constant="4" id="8VD-xQ-Q84"/>
                                         <constraint firstAttribute="bottom" secondItem="Hbt-Eu-EcI" secondAttribute="bottom" id="9BD-p2-Jyd"/>
+                                        <constraint firstAttribute="bottom" secondItem="kWg-Vf-Rlr" secondAttribute="bottom" id="BZW-2J-5ti"/>
+                                        <constraint firstItem="kWg-Vf-Rlr" firstAttribute="top" secondItem="3h7-gb-EgQ" secondAttribute="top" id="IiI-ri-OcZ"/>
                                         <constraint firstItem="F9F-BL-tyJ" firstAttribute="top" secondItem="3h7-gb-EgQ" secondAttribute="top" id="Q3I-Yd-IQ9"/>
-                                        <constraint firstItem="kWg-Vf-Rlr" firstAttribute="centerX" secondItem="F9F-BL-tyJ" secondAttribute="centerX" id="Z1Z-F6-psY"/>
                                         <constraint firstAttribute="trailing" secondItem="Hbt-Eu-EcI" secondAttribute="trailing" constant="8" id="Z7z-Rx-e42"/>
                                         <constraint firstItem="Hbt-Eu-EcI" firstAttribute="leading" secondItem="F9F-BL-tyJ" secondAttribute="trailing" id="bMu-eK-x0D"/>
+                                        <constraint firstItem="kWg-Vf-Rlr" firstAttribute="leading" secondItem="3h7-gb-EgQ" secondAttribute="leading" id="bjs-si-bhs"/>
                                         <constraint firstAttribute="trailing" secondItem="e7k-Vf-1iy" secondAttribute="trailing" constant="8" id="dcv-k0-deg"/>
                                         <constraint firstItem="Hbt-Eu-EcI" firstAttribute="height" secondItem="e7k-Vf-1iy" secondAttribute="height" multiplier="1:1" id="eCd-2d-jUc"/>
-                                        <constraint firstItem="kWg-Vf-Rlr" firstAttribute="centerY" secondItem="3h7-gb-EgQ" secondAttribute="centerY" id="fCh-f5-VNo"/>
-                                        <constraint firstItem="kWg-Vf-Rlr" firstAttribute="height" secondItem="F9F-BL-tyJ" secondAttribute="height" multiplier="0.8" id="sRy-cO-u8q"/>
                                         <constraint firstAttribute="bottom" secondItem="F9F-BL-tyJ" secondAttribute="bottom" id="tmH-Sd-gPg"/>
                                     </constraints>
                                 </view>
