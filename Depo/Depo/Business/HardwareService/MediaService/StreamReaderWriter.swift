@@ -18,7 +18,7 @@ final class StreamReaderWriter {
             let copyOutput = OutputStream(url: toURL, append: false),
             let fileInput = InputStream(url: fromURL)
         else {
-            completion(ResponseResult.failed(CustomErrors.unknown))
+            //completion(ResponseResult.failed(CustomErrors.unknown))
             return
         }
         
