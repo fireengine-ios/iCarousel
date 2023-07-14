@@ -125,7 +125,7 @@ class DeleteAccountPopUp: UIViewController {
             titleLabel.textColor = AppColor.label.color
 
         case .success:
-            iconView.image = UIImage(named: "successImage")?.withRenderingMode(.alwaysTemplate)
+            iconView.image = Image.popupSuccessful.image
             iconView.tintColor = ColorConstants.aquaMarineTwo
             titleLabel.textColor = AppColor.label.color
         }
