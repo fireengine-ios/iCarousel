@@ -27,6 +27,8 @@ final class DrawerViewController: UIViewController {
     var showsDrawerIndicator = true
     let drawerIndicatorView = UIView()
     let contentContainerView = ResizableScrollView()
+    private var keyboardHeight = CGFloat()
+    private var popUpBottomSpaceConstant: CGFloat = 40.0
 
     var drawerPresentationController: DrawerPresentationController? {
         presentationController as? DrawerPresentationController
@@ -41,6 +43,20 @@ final class DrawerViewController: UIViewController {
         setupDrawerIndicator()
         setupContainerView()
         setupContentView()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(asd1), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(asd2), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func asd1(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            keyboardHeight = keyboardSize.height
+            view.frame.origin.y -= keyboardHeight - popUpBottomSpaceConstant
+        }
+    }
+
+    @objc func asd2(notification: NSNotification) {
+        view.frame.origin.y += keyboardHeight + popUpBottomSpaceConstant
     }
 
     func layoutDrawerContentViewBeforePresenting() {
