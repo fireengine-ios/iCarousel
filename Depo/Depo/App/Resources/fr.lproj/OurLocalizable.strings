@@ -2400,4 +2400,5 @@ then {11,99 TRY/Month}*/
 "collage_create_info" = "Cliquez sur plus pour créer un collage";
 "create_collage_select_collage" = "";
 "office_filter_not_found" = "";
+"contact_us_complaint_cellfie" = "Merci de nous avoir contacté. Votre demande a été transmise à Cellfie Mobile pour examen. Nous partagerons avec eux toutes les informations nécessaires que vous fournissez, telles que des informations sur votre appareil, des informations sur l'utilisation de lifebox, des informations de contact et des informations personnelles pour enquêter sur le problème. Les photos/vidéos et autres contenus que vous téléchargez sur lifebox ne seront pas partagés avec Cellfire Mobile.";
 "Office_Filter_Not_Found" = "";

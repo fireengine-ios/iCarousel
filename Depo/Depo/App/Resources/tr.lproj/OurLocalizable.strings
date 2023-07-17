@@ -2090,7 +2090,7 @@ then {11,99 TRY/Month}*/
 "notification_buttom_sheet_only_unread" = "Sadece okunmamışlar";
 "notification_buttom_sheet_show_alerts" = "Sadece uyarıları göster";
 "notifications_no_notification" = "Henüz bildirimin yok";
-"Create_Word" = "Word Oluştur";
+"Create_Word" = "Doküman Oluştur";
 "Create_Cell" = "Çalışma Tablosu Oluştur";
 "Create_Slide" = "Sunum Oluştur";
 "Create_Document_Popup" = "Doküman Oluştur";
@@ -2131,4 +2131,5 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "office_filter_not_found" = "Filtrelemeye çalıştığınız dosya (%@) bulunamadı.";
+"contact_us_complaint_cellfie" = "Bizimle iletişime geçtiğiniz için teşekkürler. Talebiniz incelenmek üzere Cellfie Mobile'a iletildi. Sorunu incelemek için cihazınızla ilgili bilgiler, lifebox kullanım bilgileri, iletişim bilgileri ve kişisel bilgiler gibi sağladığınız tüm gerekli bilgileri onlarla paylaşacağız. lifebox'a yüklediğiniz fotoğraflar/videolar ve diğer içerikler Cellfie Mobile ile paylaşılmayacaktır.";
 "Office_Filter_Not_Found" = "";

@@ -2107,4 +2107,5 @@ then {11,99 TRY/Month}*/
 "collage_create_info" = "انقر فوق علامة الجمع لإنشاء مجمعة";
 "create_collage_select_collage" = "";
 "office_filter_not_found" = "";
+"contact_us_complaint_cellfie" = "شكرا على الاتصال بنا. تمت إعادة توجيه طلبك إلىCellfie Mobile للمراجعة. سنشارك معهم أي معلومات ضرورية تقدمها ، مثل معلومات حول جهازك ، ومعلومات استخدام lifebox ، ومعلومات الاتصال ، والمعلومات الشخصية للتحقيق في المشكلة. لن تتم مشاركة الصور/مقاطع الفيديو والمحتويات الأخرى التي تقوم بتحميلها إلى lifebox مع Cellfie Mobile.";
 "Office_Filter_Not_Found" = "";
