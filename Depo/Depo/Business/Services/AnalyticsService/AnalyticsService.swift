@@ -64,13 +64,19 @@ final class AnalyticsService: NSObject {
     private func configureFireBase() {
         var filePath: String?
         
-        #if ENTERPRISE
-            filePath = Bundle.main.path(forResource: "GoogleService-Info-ent", ofType: "plist")
-        #elseif APPSTORE
-            filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
-        #else
+//        #if ENTERPRISE
+//            filePath = Bundle.main.path(forResource: "GoogleService-Info-ent", ofType: "plist")
+//        #elseif APPSTORE
+//            filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
+//        #else
+//            filePath = Bundle.main.path(forResource: "GoogleService-Info-test", ofType: "plist")
+//        #endif
+        
+        if RouteRequests.currentServerEnvironment == .test {
             filePath = Bundle.main.path(forResource: "GoogleService-Info-test", ofType: "plist")
-        #endif
+        } else if RouteRequests.currentServerEnvironment == .production {
+            filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
+        }
         
         guard let filePathUnwraped = filePath,
             let options = FirebaseOptions(contentsOfFile: filePathUnwraped) else {
