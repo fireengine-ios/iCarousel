@@ -7,12 +7,7 @@ protocol CaptchaViewErrorDelegate: AnyObject {
 
 final class CaptchaView: UIView, FromNib {
     
-    @IBOutlet private weak var captchaImageView: UIImageView! {
-        willSet {
-            newValue.backgroundColor = ColorConstants.profileGrayColor
-        }
-    }
-    
+    @IBOutlet private weak var captchaImageView: UIImageView!
     @IBOutlet private weak var soundCaptchaButton: UIButton! {
         willSet {
             newValue.isExclusiveTouch = true
