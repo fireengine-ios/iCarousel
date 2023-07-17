@@ -74,7 +74,7 @@ final class AnalyticsService: NSObject {
         
         if RouteRequests.currentServerEnvironment == .test {
             filePath = Bundle.main.path(forResource: "GoogleService-Info-test", ofType: "plist")
-        } else if RouteRequests.currentServerEnvironment == .production {
+        } else  {
             filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
         }
         
