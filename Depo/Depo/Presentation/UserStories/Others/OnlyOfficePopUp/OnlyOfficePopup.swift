@@ -54,11 +54,11 @@ enum OnlyOfficeType {
     var popupExtTitle: String {
         switch self {
         case .createWord:
-            return ".doc"
+            return ".docx"
         case .createExcel:
-            return ".xls"
+            return ".xlsx"
         case .createPowerPoint:
-            return ".ppt"
+            return ".pptx"
         }
     }
     
