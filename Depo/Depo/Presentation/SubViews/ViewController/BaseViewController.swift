@@ -198,7 +198,7 @@ extension BaseViewController {
                 guard let notification = response as? NotificationResponse else { return }
                 DispatchQueue.main.async {
                     
-                    let filtered = notification.list.filter({$0.status == "UNREAD"})
+                    let filtered = notification.list
                     
                     let popupP = filtered.sorted { one, two in
                         let dateOne = Date(timeIntervalSince1970: TimeInterval(one.createdDate ?? 0) / 1000)
