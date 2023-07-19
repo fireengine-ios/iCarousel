@@ -32,6 +32,10 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
             fullnameStackView.backgroundColor = AppColor.primaryBackground.color
             fullnameStackView.isOpaque = true
             
+//            if  {
+                newValue.addArrangedSubview(descView)
+//            }
+            
             newValue.addArrangedSubview(fullnameStackView)
             newValue.addArrangedSubview(emailView)
             newValue.addArrangedSubview(phoneView)
@@ -46,6 +50,10 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
             newValue.setTitle(TextConstants.feedbackViewSendButton, for: .normal)
         }
     }
+    private let descView: DescriptionView = {
+       let newValue = DescriptionView()
+        return newValue
+    }()
     
     private let nameView: ProfileTextEnterView = {
         let newValue = ProfileTextEnterView()
@@ -129,6 +137,7 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
         addTapGestureToHideKeyboard()
         setupTextFields()
         setupConfigIfNeed()
+        setupDescView()
     }
     
     private func setupTextFields() {
@@ -141,6 +150,15 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
         
         subjectView.responderOnNext = problemView.textField
     }
+    
+    func setupDescView() {
+        let code = CoreTelephonyService().callingCountryCode()
+        if code == "+995" || code == "995" {
+            return self.descView.descriptionLabel.text = localized(.contactUsComplaintCellfie)
+        }
+        self.descView.descriptionLabel.text = ""
+    }
+    
     
     func setupConfigIfNeed() {
         guard let config = config else {

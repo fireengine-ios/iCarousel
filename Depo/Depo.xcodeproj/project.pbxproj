@@ -899,6 +899,14 @@
 		17FBD51B23FB2C6200979F39 /* DivorceActionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FBD51823FB2C6200979F39 /* DivorceActionService.swift */; };
 		17FBD51D23FB2C6200979F39 /* DivorceActionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FBD51823FB2C6200979F39 /* DivorceActionService.swift */; };
 		17FBD51E23FB2C6200979F39 /* DivorceActionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FBD51823FB2C6200979F39 /* DivorceActionService.swift */; };
+		18D094922A66BF2300E8CB94 /* DescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D094912A66BF2200E8CB94 /* DescriptionView.xib */; };
+		18D094932A66BF2300E8CB94 /* DescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D094912A66BF2200E8CB94 /* DescriptionView.xib */; };
+		18D094942A66BF2300E8CB94 /* DescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D094912A66BF2200E8CB94 /* DescriptionView.xib */; };
+		18D094952A66BF2300E8CB94 /* DescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D094912A66BF2200E8CB94 /* DescriptionView.xib */; };
+		18D0949A2A66C01800E8CB94 /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D094992A66C01800E8CB94 /* DescriptionView.swift */; };
+		18D0949B2A66C01800E8CB94 /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D094992A66C01800E8CB94 /* DescriptionView.swift */; };
+		18D0949C2A66C01800E8CB94 /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D094992A66C01800E8CB94 /* DescriptionView.swift */; };
+		18D0949D2A66C01800E8CB94 /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D094992A66C01800E8CB94 /* DescriptionView.swift */; };
 		3A0B4211266E040000FD8F3C /* InvitationParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0B420F266E040000FD8F3C /* InvitationParameters.swift */; };
 		3A0B4212266E040000FD8F3C /* InvitationParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0B420F266E040000FD8F3C /* InvitationParameters.swift */; };
 		3A0B4214266E040000FD8F3C /* InvitationParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0B420F266E040000FD8F3C /* InvitationParameters.swift */; };
@@ -10220,6 +10228,8 @@
 		17CD85B123ACDA40004CFF7E /* HSCompetionPopUpsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSCompetionPopUpsFactory.swift; sourceTree = "<group>"; };
 		17E9B7112250AF6C00C0FE70 /* MediaUsageInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaUsageInfoView.swift; sourceTree = "<group>"; };
 		17FBD51823FB2C6200979F39 /* DivorceActionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivorceActionService.swift; sourceTree = "<group>"; };
+		18D094912A66BF2200E8CB94 /* DescriptionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DescriptionView.xib; sourceTree = "<group>"; };
+		18D094992A66C01800E8CB94 /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
 		18DAC5814C97C46739AA9C97 /* Pods-LifeTech-LifeboxWidgetExtension.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech-LifeboxWidgetExtension.appstore.xcconfig"; path = "Target Support Files/Pods-LifeTech-LifeboxWidgetExtension/Pods-LifeTech-LifeboxWidgetExtension.appstore.xcconfig"; sourceTree = "<group>"; };
 		194FFE25625A80F2C0B29404 /* Pods_LifeboxShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1973A5BB3216D20AA2C127C5 /* OTPViewRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewRouter.swift; sourceTree = "<group>"; };
@@ -13664,6 +13674,8 @@
 				17589F712276336700A5DB37 /* SupportFormController.swift */,
 				CE7040AC22EB180B00124073 /* SupportFormPrefilledController.swift */,
 				CE7040AD22EB180C00124073 /* SupportFormPrefilledController.xib */,
+				18D094912A66BF2200E8CB94 /* DescriptionView.xib */,
+				18D094992A66C01800E8CB94 /* DescriptionView.swift */,
 			);
 			name = SupportFormController;
 			path = ../../SupportFormController;
@@ -23356,6 +23368,7 @@
 				B50B4A6C220C27C20056FC86 /* SocialAccountRemoveConnectionCell.xib in Resources */,
 				3A9C2822265285A200EFADE9 /* AcceptedInvitationViewController.xib in Resources */,
 				A2EF976C21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib in Resources */,
+				18D094922A66BF2300E8CB94 /* DescriptionView.xib in Resources */,
 				8C0E90101FDEBDFF00789C91 /* SplashViewController.xib in Resources */,
 				988BA1C52559248C0086E4BE /* PrivateShareDurationView.xib in Resources */,
 				B5AB2F092204356400E3AF23 /* InstaPickSmartAlbumCell.xib in Resources */,
@@ -23879,6 +23892,7 @@
 				CE784D1222A685FB00662219 /* DropDownTableViewCell.xib in Resources */,
 				9853CD452361BDCA00E19BF7 /* InitializingViewController.xib in Resources */,
 				CE784D1522A685FB00662219 /* CollectionViewHeaderWithText.xib in Resources */,
+				18D094942A66BF2300E8CB94 /* DescriptionView.xib in Resources */,
 				F0571E9E288AE31700A0D6AC /* ForYou.xib in Resources */,
 				CE784D1722A685FB00662219 /* PhotoVideoDetailCell.xib in Resources */,
 				CE784D1822A685FB00662219 /* HomePage.xib in Resources */,
@@ -24482,6 +24496,7 @@
 				07C75A2E281A786400B028F0 /* GT-America-LC-Standard-Light.ttf in Resources */,
 				CF8B6A7F23CBC9D70021B021 /* AnalyzeHistoryEmptyCell.xib in Resources */,
 				CF8B6A8323CBC9D70021B021 /* TwoFactorAuthenticationViewController.xib in Resources */,
+				18D094932A66BF2300E8CB94 /* DescriptionView.xib in Resources */,
 				CF8B6A8423CBC9D70021B021 /* PrepareQuickScroll.xib in Resources */,
 				CF8B6A8C23CBC9D70021B021 /* FacebookAccountConnectionCell.xib in Resources */,
 				07AA668026FDED36009D4FB1 /* ResetPasswordViewController.xib in Resources */,
@@ -24670,6 +24685,7 @@
 				CF8B70D123CBCA280021B021 /* CollectionViewHeaderWithText.xib in Resources */,
 				CF8B70D223CBCA280021B021 /* PhotoVideoDetailCell.xib in Resources */,
 				CF8B70D323CBCA280021B021 /* HomePage.xib in Resources */,
+				18D094952A66BF2300E8CB94 /* DescriptionView.xib in Resources */,
 				F0571E9F288AE31700A0D6AC /* ForYou.xib in Resources */,
 				CF8B70D423CBCA280021B021 /* AutoSyncSettingsTableViewCell.xib in Resources */,
 				CF8B70D523CBCA280021B021 /* TermsAndServicesScreen.xib in Resources */,
@@ -27798,6 +27814,7 @@
 				8C0E8FC41FDEBDFF00789C91 /* ActivityTimelineInteractorOutput.swift in Sources */,
 				8C0E8FC51FDEBDFF00789C91 /* ActivityTimelineInteractor.swift in Sources */,
 				52EDD1DE29A502D100D549FC /* NotificationEmptyView.swift in Sources */,
+				18D0949A2A66C01800E8CB94 /* DescriptionView.swift in Sources */,
 				8C0E8FC61FDEBDFF00789C91 /* ActivityTimelineRouterInput.swift in Sources */,
 				4ADE0873202D90CE0095346F /* FaceImageAddNameRouterInput.swift in Sources */,
 				735766E523AE1B34008589E9 /* StickerCollectionViewCell.swift in Sources */,
@@ -29716,6 +29733,7 @@
 				CE784BBF22A685FB00662219 /* SuggestionTableSectionHeader.swift in Sources */,
 				CE784BC022A685FB00662219 /* (null) in Sources */,
 				98231A0E24F3A1E700FD16E2 /* SelectionMenuController.swift in Sources */,
+				18D0949C2A66C01800E8CB94 /* DescriptionView.swift in Sources */,
 				CE784BC222A685FB00662219 /* InstapickAnalyze.swift in Sources */,
 				CE784BC322A685FB00662219 /* AuthorityType.swift in Sources */,
 				B51805F0234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */,
@@ -30834,6 +30852,7 @@
 				CF8B658623CBC9D70021B021 /* TermsAndServicesInitializer.swift in Sources */,
 				CF8B658723CBC9D70021B021 /* PreventCollectionView.swift in Sources */,
 				CF8B658823CBC9D70021B021 /* IntroduceViewInput.swift in Sources */,
+				18D0949B2A66C01800E8CB94 /* DescriptionView.swift in Sources */,
 				CF8B658923CBC9D70021B021 /* IntroduceViewOutput.swift in Sources */,
 				0305A31723D5C364004D1EC7 /* AlbumCell.swift in Sources */,
 				CF8B658A23CBC9D70021B021 /* IntroduceViewController.swift in Sources */,
@@ -33522,6 +33541,7 @@
 				98B04801259314750011DAEB /* SyncRecord.m in Sources */,
 				CF8B6FA823CBCA280021B021 /* SelectNameInteractorInput.swift in Sources */,
 				52501E6F299528360000376C /* NotificationViewController.swift in Sources */,
+				18D0949D2A66C01800E8CB94 /* DescriptionView.swift in Sources */,
 				CF8B6FA923CBCA280021B021 /* ImageScrollView.swift in Sources */,
 				B5BF438F2514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */,
 				CF8B6FAA23CBCA280021B021 /* TermsDescriptionController.swift in Sources */,

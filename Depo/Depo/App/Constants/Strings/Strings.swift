@@ -243,4 +243,8 @@ enum Strings: String, Localizable {
     case createCollageInfoLabel = "create_collage_info_label"
     case createCollageLabel = "create_collage"
     case createCollageInfoLabelNew = "collage_create_info"
+    
+    // MARK: - Contact Us
+    
+    case contactUsComplaintCellfie = "contact_us_complaint_cellfie"
 }
