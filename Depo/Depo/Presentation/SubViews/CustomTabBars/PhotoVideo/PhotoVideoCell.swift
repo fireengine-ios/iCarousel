@@ -174,10 +174,15 @@ final class PhotoVideoCell: UICollectionViewCell {
             setImage(smalUrl: URL(string: smallURL), mediumUrl: URL(string: mediumURL))
         } else {
             /// nothing to show (missing dates)
-            uuid = nil
+            /// if transcoding fails photos, the thumbnail come blank.
+//            uuid = nil
+//            cellId = ""
+//            thumbnailImageView.image = nil
+//            isBlurred = false
+            
+            //It shows transcoding fails photos. If it is not done this way, the thumbnail come blank.
             cellId = ""
-            thumbnailImageView.image = nil
-            isBlurred = false
+            setImage(smalUrl: mediaItem.wrapedObject.tmpDownloadUrl, mediumUrl: mediaItem.wrapedObject.tmpDownloadUrl)
         }
     }
     

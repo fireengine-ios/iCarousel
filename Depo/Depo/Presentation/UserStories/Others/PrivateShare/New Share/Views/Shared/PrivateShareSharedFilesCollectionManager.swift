@@ -53,6 +53,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     private(set) var lastSelectDocumentType: OnlyOfficeFilterType = .all
     
     private lazy var mediaPlayer: MediaPlayer = factory.resolve()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
 
     var shareType: PrivateShareType = .byMe
 
@@ -379,12 +380,27 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
             
         } else {
             if item.fileType.isDocument && !item.fileType.isPdfDocument {
+                let selectedEvent = eventType(fileType: item.fileType)
+                self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .plusAction(selectedEvent))
                 openOnlyOffice(fileUuid: item.uuid, fileName: item.name ?? "")
             } else {
                 let items = fileInfoManager.sortedItems.getArray().filter({ !($0.isFolder ?? false) })
                 openPreview(for: item, with: items)
             }
         }
+    }
+    
+    private func eventType(fileType: FileType) -> TabBarViewController.Action {
+        if fileType == .application(.doc) {
+            return .createWord
+        }
+        if fileType == .application(.xls) {
+            return .createExcel
+        }
+        if fileType == .application(.ppt) || fileType == .application(.pptx) {
+            return .createPowerPoint
+        }
+        return .createWord
     }
     
     func openOnlyOffice(fileUuid: String, fileName: String) {

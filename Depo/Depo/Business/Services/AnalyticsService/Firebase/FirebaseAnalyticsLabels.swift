@@ -676,11 +676,11 @@ enum GAEventLabel {
             case .createCollage:
                 return "Create Collage"
             case .createWord:
-                return "Create Word"
+                return "Word"
             case .createExcel:
-                return "Create Excel"
+                return "Cell"
             case .createPowerPoint:
-                return "Create PowerPoint"
+                return "Slide"
             }
         case .shareViaLink:
             return "Share via Link"
