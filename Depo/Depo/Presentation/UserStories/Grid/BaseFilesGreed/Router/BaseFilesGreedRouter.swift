@@ -72,6 +72,8 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
             router.presentViewController(controller: nController)
             
         case .application(.doc), .application(.ppt), .application(.pptx), .application(.xls):
+            let selectedEvent = eventType(fileType: selectedItem.fileType)
+            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .plusAction(selectedEvent))
             openOnlyOffice(fileUuid: selectedItem.uuid, fileName: selectedItem.name ?? "")
             
         default:
@@ -86,6 +88,19 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
             let nController = NavigationController(rootViewController: detailModule.controller)
             router.presentViewController(controller: nController)
         }
+    }
+    
+    private func eventType(fileType: FileType) -> TabBarViewController.Action {
+        if fileType == .application(.doc) {
+            return .createWord
+        }
+        if fileType == .application(.xls) {
+            return .createExcel
+        }
+        if fileType == .application(.ppt) || fileType == .application(.pptx) {
+            return .createPowerPoint
+        }
+        return .createWord
     }
     
     func showPrint(items: [BaseDataSourceItem]) {

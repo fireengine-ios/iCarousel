@@ -149,7 +149,9 @@ final class OnlyOfficePopup: BasePopUpController {
     private var extLabelText: String = ""
     private var imageViewImage: UIImage = Image.iconFileDocNew.image
     private var selectedDocumentType: String = "WORD"
+    private var selectedEvent: TabBarViewController.Action = .createWord
     private let onlyOfficeService = OnlyOfficeService()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     lazy var cancelAction: OnlyOfficePopupButtonHandler = { vc in
         vc.dismiss(animated: true)
@@ -172,6 +174,19 @@ final class OnlyOfficePopup: BasePopUpController {
         selectedDocumentType = fileType.documentType
     }
     
+    private func selectedEventFileType(fileType: OnlyOfficeType) -> TabBarViewController.Action {
+        if fileType == .createWord {
+            return .createWord
+        }
+        if fileType == .createExcel {
+            return .createExcel
+        }
+        if fileType == .createPowerPoint {
+            return .createPowerPoint
+        }
+        return .createWord
+    }
+    
     //MARK: IBAction
     @IBAction func actionCancelButton(_ sender: UIButton) {
         dismiss(animated: true)
@@ -183,6 +198,7 @@ final class OnlyOfficePopup: BasePopUpController {
             let segmentedController = (router.tabBarController?.customNavigationControllers[TabScreenIndex.documents.rawValue].viewControllers.first as? HeaderContainingViewController)?.childViewController as? AllFilesSegmentedController
             let vc = segmentedController?.viewControllers[0] as? BaseFilesGreedViewController
             vc?.createFile(fileName: textField.text ?? "", documentType: selectedDocumentType)
+            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .plusAction(selectedEvent))
             dismiss(animated: true)
         }        
     }
@@ -200,6 +216,7 @@ extension OnlyOfficePopup {
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overFullScreen
         vc.selectedFileType(fileType: fileType)
+        vc.selectedEvent = vc.selectedEventFileType(fileType: fileType)
         
         return vc
     }
