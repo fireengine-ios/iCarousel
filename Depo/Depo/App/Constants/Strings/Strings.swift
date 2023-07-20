@@ -256,4 +256,7 @@ enum Strings: String, Localizable {
     case officeFilterCell = "Office_Filter_SpreedSheet"
     case officeFilterSlide = "Office_Filter_Presentation"
     case officeFilterNotFound = "office_filter_not_found"
+    // MARK: - Contact Us
+    
+    case contactUsComplaintCellfie = "contact_us_complaint_cellfie"
 }

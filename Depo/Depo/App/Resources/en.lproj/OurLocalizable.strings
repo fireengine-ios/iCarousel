@@ -2159,3 +2159,4 @@ then {11,99 TRY/Month}*/
 "office_filter_not_found" = "The file (%@) you are trying to filter could not be found.";
 "contact_us_complaint_cellfie" = "Thanks for contacting us. Your request has been forwarded to Cellfie Mobile for review. We will share with them any necessary information you provide, such as information about your device, lifebox usage information, contact information, and personal information to investigate the issue. Photos/videos and other content you upload to lifebox will not be shared with Cellfie Mobile.";
 "Office_Filter_Not_Found" = "";
+"new_print" = "";
