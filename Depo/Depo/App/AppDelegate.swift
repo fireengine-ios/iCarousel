@@ -572,7 +572,7 @@ extension AppDelegate {
                     }
 
                     
-                    if userActivity.userInfo?.count != 0 && PushNotificationService.shared.assignDeepLink(innerLink: host, options: userActivity.userInfo) {
+                    if PushNotificationService.shared.assignDeepLink(innerLink: host, options: userActivity.userInfo) {
                         debugLog("Should open Action Screen")
                         PushNotificationService.shared.openActionScreen()
                     }
