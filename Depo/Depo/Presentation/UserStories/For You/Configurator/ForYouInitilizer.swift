@@ -13,7 +13,7 @@ class ForYouInitilizer: NSObject {
         let viewController = ForYouViewController(nibName: nibName, bundle: nil)
         let configurator = ForYouConfigurator()
         configurator.configureModuleForViewInput(viewInput: viewController)
-        viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory, .createAlbum, .photopick, .createCollage])
+        viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory, .createAlbum, .photopick, .createCollage, .photoPrint])
         return viewController
     }
 }

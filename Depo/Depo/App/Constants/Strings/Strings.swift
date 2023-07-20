@@ -259,4 +259,5 @@ enum Strings: String, Localizable {
     // MARK: - Contact Us
     
     case contactUsComplaintCellfie = "contact_us_complaint_cellfie"
+    case photoPrint = "new_print"
 }

@@ -510,6 +510,8 @@ extension TabBarViewController: TabBarActionHandler {
         case .createPowerPoint:
             let vc = OnlyOfficePopup.with(fileType: .createPowerPoint)
             vc.open()
+        case .photoPrint:
+            print("PhotoPrint VC")
         }
         
     }

@@ -26,6 +26,7 @@ enum FloatingButtonsType {
     case createWord
     case createExcel
     case createPowerPoint
+    case photoPrint
     
     var title: String {
         switch self {
@@ -59,6 +60,8 @@ enum FloatingButtonsType {
             return localized(.createExcel)
         case .createPowerPoint:
             return localized(.createPowerPoint)
+        case .photoPrint:
+            return localized(.photoPrint)
         }
     }
     
@@ -91,6 +94,8 @@ enum FloatingButtonsType {
             return Image.iconFileXlsNew.image
         case .createPowerPoint:
             return Image.iconFilePptNew.image
+        case .photoPrint:
+            return Image.iconPrint.image
         }
     }
     
@@ -130,6 +135,8 @@ enum FloatingButtonsType {
             return .createExcel
         case .createPowerPoint:
             return .createPowerPoint
+        case .photoPrint:
+            return .photoPrint
         }
     }
 }
