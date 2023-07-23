@@ -72,6 +72,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     private var viewType: ElementTypes = .galleryAll
     var refresher: UIRefreshControl?
+    private let accountInfo = SingletonStorage.shared.accountInfo
     
     // MARK: - life cycle
     
@@ -111,10 +112,17 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         
         setupRefresher()
         
-        if !(SingletonStorage.shared.accountInfo?.recoveryEmailVerified ?? true) {
-            presentRecoveryEmailVerificationPopUp()
+        if !storageVars.isUserFirstLoggedIn {
+            if accountInfo?.hasRecoveryMail == false && accountInfo?.hasSecurityQuestionInfo == false {
+                RouterVC().securityInfoViewController(fromHomeScreen: true)
+            } else if accountInfo?.hasRecoveryMail == true && accountInfo?.hasSecurityQuestionInfo == false {
+                if accountInfo?.recoveryEmailVerified == false {
+                    presentRecoveryEmailVerificationPopUp()
+                }
+            }
         }
-        
+
+        storageVars.isUserFirstLoggedIn = false
         canNotificationPopupRaiseUp()
     }
     
@@ -560,7 +568,6 @@ extension PhotoVideoController: UIScrollViewDelegate {
     
     func presentRecoveryEmailVerificationPopUp() {
         let popup = RouterVC().verifyRecoveryEmailPopUp
-        popup.alwaysShowsLaterButton = true
         //popup.delegate = self
         present(popup, animated: true)
     }

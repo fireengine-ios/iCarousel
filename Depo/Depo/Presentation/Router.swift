@@ -1441,9 +1441,10 @@ class RouterVC: NSObject {
         }
     }
     
-    func securityInfoViewController(fromSettings: Bool = false) {
+    func securityInfoViewController(fromSettings: Bool = false, fromHomeScreen: Bool = false) {
         let controller = SecurityInfoViewController()
         controller.fromSettings = fromSettings
+        controller.fromHomeScreen = fromHomeScreen
         navigationController?.pushViewController(controller, animated: true)
     }
     

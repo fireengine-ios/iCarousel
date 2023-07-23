@@ -97,6 +97,7 @@ final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHan
                                                         action: #selector(closeSelf))
     
     var fromSettings: Bool = true
+    var fromHomeScreen: Bool = true
     
     //MARK: -Lifecycle
     override func viewDidLoad() {
@@ -132,7 +133,10 @@ final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHan
     }
     
     @objc private func closeSelf() {
-        if !fromSettings {
+        
+        if fromHomeScreen {
+            navigationController?.popViewController(animated: true)
+        } else if !fromSettings {
             goToTabbarScreen()
         } else {
             dismiss(animated: true)
