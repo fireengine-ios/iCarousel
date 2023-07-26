@@ -51,6 +51,8 @@ final class AnalyticsService: NSObject {
 
         adjustConfig?.delegate = self
         Adjust.appDidLaunch(adjustConfig)
+        
+        adjustConfig?.logLevel = ADJLogLevelVerbose
     }
     
     private func addAdjustSessionParameters() {
