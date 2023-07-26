@@ -73,7 +73,7 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
             
         case .application(.doc), .application(.ppt), .application(.pptx), .application(.xls):
             let selectedEvent = eventType(fileType: selectedItem.fileType)
-            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .plusAction(selectedEvent))
+            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .plusAction(selectedEvent))
             openOnlyOffice(fileUuid: selectedItem.uuid, fileName: selectedItem.name ?? "")
             
         default:

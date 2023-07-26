@@ -307,12 +307,17 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         cell.canShowSharedIcon = false
         cell.setSelection(isSelectionActive: isSelecting, isSelected: isSelectedCell)
         cell.configureWithWrapper(wrappedObj: item)
-          
-        if case PathForItem.remoteUrl(let url) = item.patchToPreview {
-            if let url = url {
-                cell.setImage(with: url)
-            } else {
-                cell.setPlaceholderImage(fileType: item.fileType)
+        
+        if item.fileType.isDocument {
+            cell.setPlaceholderImage(fileType: item.fileType)
+        } else {
+            
+            if case PathForItem.remoteUrl(let url) = item.patchToPreview {
+                if let url = url {
+                    cell.setImage(with: url)
+                } else {
+                    cell.setPlaceholderImage(fileType: item.fileType)
+                }
             }
         }
     }
@@ -382,7 +387,8 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
             if item.fileType.isDocument && !item.fileType.isPdfDocument {
                 let selectedEvent = eventType(fileType: item.fileType)
                 self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .plusAction(selectedEvent))
-                openOnlyOffice(fileUuid: item.uuid, fileName: item.name ?? "")
+                let fileUuid = "\(item.projectId ?? "")/\(item.uuid)"
+                openOnlyOffice(fileUuid: fileUuid, fileName: item.name ?? "")
             } else {
                 let items = fileInfoManager.sortedItems.getArray().filter({ !($0.isFolder ?? false) })
                 openPreview(for: item, with: items)

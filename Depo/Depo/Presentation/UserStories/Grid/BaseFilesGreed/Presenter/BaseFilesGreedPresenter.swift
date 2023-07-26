@@ -227,8 +227,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     // MARK: - Request OUTPUT
     func createFileSuccess(fileUuid: String, fileName: String) {
+        asyncOperationSuccess()
+        StringConstants.onlyOfficeCreateFile = true
         openOnlyOffice(fileUuid: fileUuid, fileName: fileName)
-        onReloadData()
     }
     
     func createFileFail(errorResponse: ErrorResponse) {

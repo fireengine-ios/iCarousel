@@ -111,6 +111,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         scrollIndicator?.changeHiddenState(to: true, animated: false)
         
         output.viewIsReady(collectionView: collectionView)
+        NotificationCenter.default.addObserver(self,selector: #selector(loadData),name: .createOnlyOfficeDocumentsReloadData, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -120,6 +121,11 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         
         if mainTitle != "" {
             subTitle = output.getSortTypeString()
+        }
+        
+        if !StringConstants.onlyOfficeDocumentsFilter && segmentImage == .documents {
+            loadData()
+            StringConstants.onlyOfficeDocumentsFilter = true
         }
         
         output.viewWillAppear()

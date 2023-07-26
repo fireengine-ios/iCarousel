@@ -34,6 +34,13 @@ final class OnlyOfficeViewController: BaseViewController {
         configureWebView()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        if StringConstants.onlyOfficeCreateFile {
+            StringConstants.onlyOfficeCreateFile = false
+            NotificationCenter.default.post(name: .createOnlyOfficeDocumentsReloadData, object: nil)
+        }
+    }
+    
     private func configureWebView() {
         
         var request = URLRequest(url: URL(string: "\(baseUrl)/\(fileUuid)")!)
