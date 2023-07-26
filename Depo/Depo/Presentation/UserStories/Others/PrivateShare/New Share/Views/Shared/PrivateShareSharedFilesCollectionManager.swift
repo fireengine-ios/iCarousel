@@ -382,7 +382,8 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
             if item.fileType.isDocument && !item.fileType.isPdfDocument {
                 let selectedEvent = eventType(fileType: item.fileType)
                 self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .plusAction(selectedEvent))
-                openOnlyOffice(fileUuid: item.uuid, fileName: item.name ?? "")
+                let fileUuid = "\(item.projectId ?? "")/\(item.uuid)"
+                openOnlyOffice(fileUuid: fileUuid, fileName: item.name ?? "")
             } else {
                 let items = fileInfoManager.sortedItems.getArray().filter({ !($0.isFolder ?? false) })
                 openPreview(for: item, with: items)
