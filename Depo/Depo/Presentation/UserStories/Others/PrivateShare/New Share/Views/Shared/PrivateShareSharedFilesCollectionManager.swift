@@ -307,12 +307,17 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         cell.canShowSharedIcon = false
         cell.setSelection(isSelectionActive: isSelecting, isSelected: isSelectedCell)
         cell.configureWithWrapper(wrappedObj: item)
-          
-        if case PathForItem.remoteUrl(let url) = item.patchToPreview {
-            if let url = url {
-                cell.setImage(with: url)
-            } else {
-                cell.setPlaceholderImage(fileType: item.fileType)
+        
+        if item.fileType.isDocument {
+            cell.setPlaceholderImage(fileType: item.fileType)
+        } else {
+            
+            if case PathForItem.remoteUrl(let url) = item.patchToPreview {
+                if let url = url {
+                    cell.setImage(with: url)
+                } else {
+                    cell.setPlaceholderImage(fileType: item.fileType)
+                }
             }
         }
     }
