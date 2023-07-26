@@ -123,6 +123,11 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             subTitle = output.getSortTypeString()
         }
         
+        if !StringConstants.onlyOfficeDocumentsFilter && segmentImage == .documents {
+            loadData()
+            StringConstants.onlyOfficeDocumentsFilter = true
+        }
+        
         output.viewWillAppear()
         
         if let searchController = navigationController?.topViewController as? SearchViewController {

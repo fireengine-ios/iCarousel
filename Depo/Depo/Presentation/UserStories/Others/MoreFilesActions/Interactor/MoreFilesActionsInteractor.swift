@@ -1412,8 +1412,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     func officeFilterByType(documentType: OnlyOfficeFilterType) {
         switch documentType {
         case .all:
+            StringConstants.onlyOfficeDocumentsFilter = true
             output?.onlyOfficeFilterSuccess(documentType: documentType, items: [])
         default:
+            StringConstants.onlyOfficeDocumentsFilter = false
             officeFilter(documentType: documentType)
         }
     }
