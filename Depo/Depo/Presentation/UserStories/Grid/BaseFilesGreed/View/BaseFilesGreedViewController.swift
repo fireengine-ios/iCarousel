@@ -588,8 +588,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         self.customTabBarController?.handleAction(action)
     }
     
-    func createFile(fileName: String, documentType: String) {
-        output.onlyOfficeCreateFile(fileName: fileName, documentType: documentType)
+    func createFile(fileName: String, documentType: String, parentFolderUuid: String) {
+        output.onlyOfficeCreateFile(fileName: fileName, documentType: documentType, parentFolderUuid: parentFolderUuid)
     }
 }
 

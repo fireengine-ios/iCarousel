@@ -502,13 +502,13 @@ extension TabBarViewController: TabBarActionHandler {
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .importSpotify)
             spotifyRoutingService.connectToSpotify(isSettingCell: false, completion: nil)
         case .createWord:
-            let vc = OnlyOfficePopup.with(fileType: .createWord)
+            let vc = OnlyOfficePopup.with(fileType: .createWord, parentFolderUuid: router.getParentUUID())
             vc.open()
         case .createExcel:
-            let vc = OnlyOfficePopup.with(fileType: .createExcel)
+            let vc = OnlyOfficePopup.with(fileType: .createExcel, parentFolderUuid: router.getParentUUID())
             vc.open()
         case .createPowerPoint:
-            let vc = OnlyOfficePopup.with(fileType: .createPowerPoint)
+            let vc = OnlyOfficePopup.with(fileType: .createPowerPoint, parentFolderUuid: router.getParentUUID())
             vc.open()
         }
         

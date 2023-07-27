@@ -9,9 +9,9 @@
 import Foundation
 
 final class OnlyOfficeService: BaseRequestService {
-    func create(fileName: String, documentType: String, success: SuccessResponse?, fail: @escaping FailResponse) {
+    func create(fileName: String, documentType: String, parentFolderUuid: String, success: SuccessResponse?, fail: @escaping FailResponse) {
         debugLog("OnlyOfficeService createFile")
-        let param = OnlyOfficeCreateFileParameters(fileName: fileName, documentType: documentType)
+        let param = OnlyOfficeCreateFileParameters(fileName: fileName, documentType: documentType, parentFolderUuid: parentFolderUuid)
         let handler = BaseResponseHandler<OnlyOfficeResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: param, handler: handler)
     }
