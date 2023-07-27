@@ -12,6 +12,7 @@ protocol SegmentedChildNavBarManagerDelegate: SegmentedChildController {
     func onCancelSelectionButton()
     func onThreeDotsButton()
     func onSearchButton()
+    func onPlusButton()
 }
 
 final class SegmentedChildNavBarManager {
@@ -30,30 +31,38 @@ final class SegmentedChildNavBarManager {
         action: #selector(onThreeDotsButton))
     
     private lazy var searchButton = UIBarButtonItem(
-        image: Images.search,
+        image: UIImage(),
         style: .plain,
         target: self,
         action: #selector(onSearchButton))
     
+    private lazy var plusButton = UIBarButtonItem(
+        image: UIImage(),
+        style: .plain,
+        target: self,
+        action: #selector(onPlusButton))
+    
     private weak var delegate: SegmentedChildNavBarManagerDelegate?
     
     init(delegate: SegmentedChildNavBarManagerDelegate?) {
+        plusButton.setBackgroundImage(NavigationBarImage.headerActionPlus.image, for: .normal, barMetrics: .default)
+        searchButton.setBackgroundImage(NavigationBarImage.headerActionSearch.image, for: .normal, barMetrics: .default)
         self.delegate = delegate
     }
     
     func setSelectionMode() {
         delegate?.setLeftBarButtonItems([cancelSelectionButton], animated: true)
-        delegate?.setRightBarButtonItems([threeDotsButton], animated: false)
+        delegate?.setRightBarButtonItems([], animated: false)
     }
     
     func setDefaultMode(title: String = "", isThreeDotsEnabled: Bool = true) {
         delegate?.setTitle(title)
-        delegate?.setRightBarButtonItems([threeDotsButton, searchButton], animated: false)
+        delegate?.setRightBarButtonItems([plusButton, searchButton], animated: false)
         delegate?.setLeftBarButtonItems(nil, animated: true)
-        threeDotsButton.isEnabled = isThreeDotsEnabled
+        
     }
     
-    func setDefaultModeWithoutThreeDot(title: String = "") {
+    func setDefaultModeWithoutPlusButton(title: String = "") {
         delegate?.setTitle(title)
         delegate?.setRightBarButtonItems([searchButton], animated: false)
         delegate?.setLeftBarButtonItems(nil, animated: true)
@@ -69,5 +78,9 @@ final class SegmentedChildNavBarManager {
     
     @objc private func onSearchButton() {
         delegate?.onSearchButton()
+    }
+    
+    @objc private func onPlusButton() {
+        delegate?.onPlusButton()
     }
 }

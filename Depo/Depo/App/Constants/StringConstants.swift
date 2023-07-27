@@ -13,6 +13,7 @@ struct StringConstants {
     static var createCollageSelectPhotoType = PhotoSelectType.newPhotoSelection //New -> new select photo, Change-> change selected photo
     static var onlyOfficeCreateFile: Bool = false
     static var onlyOfficeDocumentsFilter: Bool = true
+    static var onlyOfficeCreateFileBySharedFolderUuid: String = ""
 }
 
 struct CreateCollageConstants {

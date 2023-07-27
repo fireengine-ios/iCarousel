@@ -204,6 +204,18 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         }
     }
     
+    private func showPlusButton() {
+        let menuItems = floatingButtonsArray.map { buttonType in
+            AlertFilesAction(title: buttonType.title, icon: buttonType.image) { [weak self] in
+                self?.customTabBarController?.handleAction(buttonType.action)
+            }
+        }
+
+        let menu = AlertFilesActionsViewController()
+        menu.configure(with: menuItems)
+        menu.presentAsDrawer()
+    }
+    
     func configureCountView(isShown: Bool) {
         countView.removeFromSuperview()
         
@@ -335,16 +347,16 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             
             /// be sure to configure navbar items after setup navigation bar
             let isSelectionAllowed = self.shareType.isSelectionAllowed
+            let isShowPlusMenu = self.shareType.showPlusMenu
             
             if editingMode, isSelectionAllowed {
                 self.navBarManager.setSelectionMode()
             } else {
-                if !isSelectionAllowed {
-                    self.navBarManager.setDefaultModeWithoutThreeDot(title: self.title ?? "")
+                if !isShowPlusMenu {
+                    self.navBarManager.setDefaultModeWithoutPlusButton(title: self.title ?? "")
                 } else {
                     //to don't change the state of the 3dots button
-                    let isThreeDotsEnabled = self.navBarManager.threeDotsButton.isEnabled
-                    self.navBarManager.setDefaultMode(title: self.title ?? "", isThreeDotsEnabled: isThreeDotsEnabled)
+                    self.navBarManager.setDefaultMode(title: self.title ?? "")
                 }
             }
         }
@@ -364,6 +376,10 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
     
     func onSearchButton() {
         showSearchScreen()
+    }
+    
+    func onPlusButton() {
+        showPlusButton()
     }
     
     //MARK: Helpers

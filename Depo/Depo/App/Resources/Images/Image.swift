@@ -234,5 +234,5 @@ enum Image: String, AppImage {
     case iconPhotosPlaceholder
     case iconVideosPlaceholder
     case iconStoryGroup
-
+    case plus
 }

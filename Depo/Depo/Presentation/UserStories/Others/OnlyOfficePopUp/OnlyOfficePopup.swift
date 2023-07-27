@@ -201,7 +201,7 @@ final class OnlyOfficePopup: BasePopUpController {
             let vc = segmentedController?.viewControllers[0] as? BaseFilesGreedViewController
             vc?.createFile(fileName: textField.text ?? "", documentType: selectedDocumentType, parentFolderUuid: parentFolderUuid)
             self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .plusAction(selectedEvent))
-            
+            StringConstants.onlyOfficeCreateFileBySharedFolderUuid = ""
             dismiss(animated: true)
         }        
     }

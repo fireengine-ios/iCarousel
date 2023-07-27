@@ -100,6 +100,9 @@ final class AllFilesSegmentedController: SegmentedController, HeaderContainingVi
             } else {
                 setDefaultNavigationHeaderActions()
             }
+            if index == AllFilesType.allCases.firstIndex(of: .sharedByMe) {
+                setDefaultNavigationHeaderActionsWithoutPlusButton()
+            }
             setupSelectedController(viewControllers[selectedIndex])
         }
     }
