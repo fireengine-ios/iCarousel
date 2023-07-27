@@ -87,8 +87,15 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         
         setCardsContainer(isActive: true)
         bottomBarManager.updateLayout()
-        //collectionManager.reload(type: .onViewAppear)
-        self.collectionManager.filterOfficeReload(documentType: self.collectionManager.lastSelectDocumentType, completion: {})
+        
+        if !StringConstants.onlyOfficeDocumentsFilter {
+            collectionManager.reload(type: .full)
+            if shareType == .byMe {
+                StringConstants.onlyOfficeDocumentsFilter = true
+            }
+        }
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

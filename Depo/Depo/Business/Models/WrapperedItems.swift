@@ -66,6 +66,7 @@ enum ApplicationType: String {
     case ppt = "ppt"
     case pptx = "pptx"
     case usdz = "usdz"
+    case csv = "csv"
 }
 
 enum FileType: Hashable, Equatable {
