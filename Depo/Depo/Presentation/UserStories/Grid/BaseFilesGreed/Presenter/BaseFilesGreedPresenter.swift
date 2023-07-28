@@ -229,7 +229,18 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func createFileSuccess(fileUuid: String, fileName: String, parentFolderUuid: String) {
         asyncOperationSuccess()
         StringConstants.onlyOfficeCreateFile = true
-        openOnlyOffice(fileUuid: fileUuid, fileName: fileName)
+        openOnlyOffice(fileUuid: getFileUuid(fileUuid: fileUuid), fileName: fileName)
+        StringConstants.onlyOfficeCreateFileBySharedFolderUuid = ""
+        StringConstants.onlyOfficeCreateFileProjectId = ""
+    }
+    
+    private func getFileUuid(fileUuid: String) -> String {
+        let projectId = StringConstants.onlyOfficeCreateFileProjectId
+        if projectId != "" {
+            return "\(projectId)/\(fileUuid)"
+        } else {
+            return fileUuid
+        }
     }
     
     func createFileFail(errorResponse: ErrorResponse) {
@@ -403,6 +414,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles,
                                   type: type, sortType: sortedType, moduleOutput: self)
         } else {
+            print("aaaaaaaaaaaaaaaa")
             let vc = PopUpController.with(title: TextConstants.warning, message: TextConstants.theFileIsNotSupported,
                                           image: .error, buttonTitle: TextConstants.ok)
             vc.open()

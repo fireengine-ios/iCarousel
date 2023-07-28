@@ -95,7 +95,9 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
             }
         }
         
-        
+        if shareType != .byMe && shareType != .withMe {
+            collectionManager.reload(type: .full)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -33,7 +33,16 @@ class OnlyOfficeCreateFileParameters: BaseRequestParametrs {
     
     override var patch: URL {
         let path: String = String(format: OnlyOfficePath.createFile)
-        return URL(string: path, relativeTo: super.patch)!
+        return URL(string: getPath(path: path), relativeTo: super.patch)!
+    }
+    
+    private func getPath(path: String) -> String {
+        let projectId: String = StringConstants.onlyOfficeCreateFileProjectId
+        if projectId == "" {
+            return path
+        } else {
+            return "\(path)/\(projectId)"
+        }
     }
 }
 

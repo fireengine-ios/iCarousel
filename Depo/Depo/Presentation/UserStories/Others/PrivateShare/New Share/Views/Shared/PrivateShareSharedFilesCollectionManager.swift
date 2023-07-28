@@ -381,6 +381,8 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
             if let projectId = item.projectId, let name = item.name, let permissions = item.privateSharePermission  {
                 let sharedFolder = PrivateSharedFolderItem(projectId: projectId, uuid: item.uuid, name: name, permissions: permissions)
                 openFolder(with: sharedFolder)
+                StringConstants.onlyOfficeCreateFileBySharedFolderUuid = item.uuid
+                StringConstants.onlyOfficeCreateFileProjectId = item.projectId ?? ""
             }
             
         } else {

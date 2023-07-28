@@ -83,6 +83,17 @@ enum OnlyOfficeType {
             return "SLIDE"
         }
     }
+    
+    var title: String {
+        switch self {
+        case .createWord:
+            return localized(.createWord)
+        case .createExcel:
+            return localized(.createExcel)
+        case .createPowerPoint:
+            return localized(.createPowerPoint)
+        }
+    }
 }
 
 typealias OnlyOfficePopupButtonHandler = (_: OnlyOfficePopup) -> Void
@@ -113,6 +124,8 @@ final class OnlyOfficePopup: BasePopUpController {
             textField.layer.borderColor = AppColor.settingsButtonColor.cgColor
             textField.setLeftPaddingPoints(5)
             textField.setRightPaddingPoints(5)
+            textField.delegate = self
+            textField.addTarget(self, action: #selector(textFieldChanged(_:)), for: .editingChanged);
         }
     }
     
@@ -138,14 +151,15 @@ final class OnlyOfficePopup: BasePopUpController {
             newValue.setTitle(TextConstants.selectNameNextButtonFolder, for: .normal)
             newValue.titleLabel?.font = .appFont(.medium, size: 16)
             newValue.setTitleColor(.white, for: .normal)
-            newValue.backgroundColor = AppColor.darkBlueColor.color
+            newValue.backgroundColor = AppColor.borderLightGray.color
             newValue.layer.cornerRadius = newValue.frame.size.height * 0.5
             newValue.clipsToBounds = true
             newValue.layer.borderWidth = 1.0
-            newValue.layer.borderColor = AppColor.darkBlueColor.cgColor
+            newValue.layer.borderColor = AppColor.borderLightGray.cgColor
         }
     }
     
+    private var titleLabelText: String = ""
     private var extLabelText: String = ""
     private var imageViewImage: UIImage = Image.iconFileDocNew.image
     private var selectedDocumentType: String = "WORD"
@@ -165,11 +179,13 @@ final class OnlyOfficePopup: BasePopUpController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        titleLabel.text = titleLabelText
         extLabel.text = extLabelText
         imageView.image = imageViewImage
     }
     
     private func selectedFileType(fileType: OnlyOfficeType, parentFolderUuid: String) {
+        titleLabelText = fileType.title
         imageViewImage = fileType.popupImage!
         extLabelText = fileType.popupExtTitle
         selectedDocumentType = fileType.documentType
@@ -201,9 +217,19 @@ final class OnlyOfficePopup: BasePopUpController {
             let vc = segmentedController?.viewControllers[0] as? BaseFilesGreedViewController
             vc?.createFile(fileName: textField.text ?? "", documentType: selectedDocumentType, parentFolderUuid: parentFolderUuid)
             self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .plusAction(selectedEvent))
-            StringConstants.onlyOfficeCreateFileBySharedFolderUuid = ""
             dismiss(animated: true)
         }        
+    }
+    
+    @objc func textFieldChanged(_ textField: UITextField) {
+        if let text = textField.text, text.isEmpty {
+            okButton.backgroundColor = AppColor.borderLightGray.color
+            okButton.backgroundColor = AppColor.borderLightGray.color
+        } else {
+            textField.text = textField.text?.trimmingCharacters(in: .whitespaces)
+            okButton.backgroundColor = AppColor.darkBlueColor.color
+            okButton.backgroundColor = AppColor.darkBlueColor.color
+        }
     }
 }
 
@@ -224,3 +250,13 @@ extension OnlyOfficePopup {
         return vc
     }
 }
+
+extension OnlyOfficePopup: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let maxLength = 20
+        let currentString = (self.textField.text ?? "") as NSString
+        let newString = currentString.replacingCharacters(in: range, with: string)
+        return newString.count <= maxLength
+    }
+}
+
