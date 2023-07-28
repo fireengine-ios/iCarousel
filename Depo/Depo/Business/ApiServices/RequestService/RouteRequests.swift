@@ -253,7 +253,7 @@ struct RouteRequests {
                                               "https://mylifebox.com/faq/?lang=%@"
             
         case .test: return isBillo ? "https://dev.mylifebox.com/faq/?lang=%@" :
-                                     "https://mylifebox.com/faq/?lang=%@"
+                                     "https://adepodev.turkcell.com.tr/faq/?lang=%@"
         }
     }
 
