@@ -16,11 +16,12 @@ class OnlyOfficeCreateFileParameters: BaseRequestParametrs {
     
     let fileName: String
     let documentType: String
-    let parentFolderUuid: String = ""
+    let parentFolderUuid: String
     
-    init(fileName: String, documentType: String) {
+    init(fileName: String, documentType: String, parentFolderUuid: String) {
         self.fileName = fileName
         self.documentType = documentType
+        self.parentFolderUuid = parentFolderUuid
     }
     
     override var requestParametrs: Any {

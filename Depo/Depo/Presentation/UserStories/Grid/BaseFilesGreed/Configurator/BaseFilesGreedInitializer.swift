@@ -160,7 +160,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     class func initializeFilesFromFolderViewController(with nibName: String, folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, status: ItemStatus, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         if status == .active {
-            viewController.floatingButtonsArray.append(contentsOf: [.upload, .uploadFiles, .newFolder])
+            viewController.floatingButtonsArray.append(contentsOf: [.upload, .uploadFiles, .newFolder, .createWord, .createExcel, .createPowerPoint])
         }
         viewController.cardsContainerView.addPermittedPopUpViewTypes(types: [.sync, .upload, .download])
         viewController.cardsContainerView.isEnable = true

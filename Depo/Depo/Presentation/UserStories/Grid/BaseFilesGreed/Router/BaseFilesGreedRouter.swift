@@ -71,7 +71,7 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
             let nController = NavigationController(rootViewController: detailModule.controller)
             router.presentViewController(controller: nController)
             
-        case .application(.doc), .application(.ppt), .application(.pptx), .application(.xls):
+        case .application(.doc), .application(.ppt), .application(.pptx), .application(.xls), .application(.csv):
             let selectedEvent = eventType(fileType: selectedItem.fileType)
             self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .plusAction(selectedEvent))
             openOnlyOffice(fileUuid: selectedItem.uuid, fileName: selectedItem.name ?? "")

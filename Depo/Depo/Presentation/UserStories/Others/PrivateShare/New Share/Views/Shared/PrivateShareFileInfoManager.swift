@@ -62,11 +62,11 @@ indirect enum PrivateShareType: Equatable {
     private func floatingButtonTypes(innerFolderVeryRootType: PrivateShareType, permissions: [PrivateSharePermission]) -> [FloatingButtonsType] {
         switch innerFolderVeryRootType {
             case .byMe:
-                return [.newFolder, .upload, .uploadFiles]
+            return [.createWord, .createExcel, .createPowerPoint]
                 
             case .withMe:
                 if permissions.contains(.create) {
-                    return [.newFolder, .upload, .uploadFiles]
+                    return [.createWord, .createExcel, .createPowerPoint]
                 }
                 return []
                 
@@ -83,6 +83,25 @@ indirect enum PrivateShareType: Equatable {
                 
             case .innerFolder(type: let rootType, _):
                 return veryRootType(for: rootType)
+        }
+    }
+    
+    var showPlusMenu: Bool {
+        let typeAndRoot = (self, veryRootType(for: self))
+        
+        switch typeAndRoot {
+            case (.byMe, _):
+                return false
+                
+            case (.withMe, _):
+                return false
+                
+            case (.innerFolder(_, let folder), _):
+                let permissions = folder.permissions.granted ?? []
+                if permissions.contains(.create) {
+                    return true
+                }
+                return false
         }
     }
 }

@@ -149,6 +149,7 @@ final class OnlyOfficePopup: BasePopUpController {
     private var extLabelText: String = ""
     private var imageViewImage: UIImage = Image.iconFileDocNew.image
     private var selectedDocumentType: String = "WORD"
+    private var parentFolderUuid: String = ""
     private var selectedEvent: TabBarViewController.Action = .createWord
     private let onlyOfficeService = OnlyOfficeService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
@@ -168,10 +169,11 @@ final class OnlyOfficePopup: BasePopUpController {
         imageView.image = imageViewImage
     }
     
-    private func selectedFileType(fileType: OnlyOfficeType) {
+    private func selectedFileType(fileType: OnlyOfficeType, parentFolderUuid: String) {
         imageViewImage = fileType.popupImage!
         extLabelText = fileType.popupExtTitle
         selectedDocumentType = fileType.documentType
+        self.parentFolderUuid = parentFolderUuid
     }
     
     private func selectedEventFileType(fileType: OnlyOfficeType) -> TabBarViewController.Action {
@@ -197,8 +199,9 @@ final class OnlyOfficePopup: BasePopUpController {
             let router = RouterVC()
             let segmentedController = (router.tabBarController?.customNavigationControllers[TabScreenIndex.documents.rawValue].viewControllers.first as? HeaderContainingViewController)?.childViewController as? AllFilesSegmentedController
             let vc = segmentedController?.viewControllers[0] as? BaseFilesGreedViewController
-            vc?.createFile(fileName: textField.text ?? "", documentType: selectedDocumentType)
+            vc?.createFile(fileName: textField.text ?? "", documentType: selectedDocumentType, parentFolderUuid: parentFolderUuid)
             self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .plusAction(selectedEvent))
+            StringConstants.onlyOfficeCreateFileBySharedFolderUuid = ""
             dismiss(animated: true)
         }        
     }
@@ -206,16 +209,16 @@ final class OnlyOfficePopup: BasePopUpController {
 
 // MARK: - Init
 extension OnlyOfficePopup {
-    static func with(fileType: OnlyOfficeType) -> OnlyOfficePopup {
-        let vc = controllerWith(fileType: fileType)
+    static func with(fileType: OnlyOfficeType, parentFolderUuid: String) -> OnlyOfficePopup {
+        let vc = controllerWith(fileType: fileType, parentFolderUuid: parentFolderUuid)
         return vc
     }
     
-    private static func controllerWith(fileType: OnlyOfficeType) -> OnlyOfficePopup {
+    private static func controllerWith(fileType: OnlyOfficeType, parentFolderUuid: String) -> OnlyOfficePopup {
         let vc = OnlyOfficePopup(nibName: "OnlyOfficePopup", bundle: nil)
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overFullScreen
-        vc.selectedFileType(fileType: fileType)
+        vc.selectedFileType(fileType: fileType, parentFolderUuid: parentFolderUuid)
         vc.selectedEvent = vc.selectedEventFileType(fileType: fileType)
         
         return vc

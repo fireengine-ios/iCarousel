@@ -220,13 +220,13 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         
     }
     
-    func onlyOfficeCreateFile(fileName: String, documentType: String) {
+    func onlyOfficeCreateFile(fileName: String, documentType: String, parentFolderUuid: String) {
         startAsyncOperation()
-        interactor.onlyOfficeCreateFile(fileName: fileName, documentType: documentType)
+        interactor.onlyOfficeCreateFile(fileName: fileName, documentType: documentType, parentFolderUuid: parentFolderUuid)
     }
     
     // MARK: - Request OUTPUT
-    func createFileSuccess(fileUuid: String, fileName: String) {
+    func createFileSuccess(fileUuid: String, fileName: String, parentFolderUuid: String) {
         asyncOperationSuccess()
         StringConstants.onlyOfficeCreateFile = true
         openOnlyOffice(fileUuid: fileUuid, fileName: fileName)
