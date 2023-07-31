@@ -136,7 +136,11 @@ final class PackageService {
               let product = iapManager.product(for: productId) else {
             return nil
         }
-
+        
+        if product.introductoryPrice == nil {
+            return getPromotionalPrice(for: offer, isPurchasedOffer: isPurchasedOffer)
+        }
+        
         // Make sure it has an intro offer
         guard let introductoryPrice = product.introductoryPrice else {
             return nil
@@ -157,6 +161,24 @@ final class PackageService {
         }
 
         return formattedIntroductoryOfferText(from: introductoryPrice, product: product)
+    }
+    
+    func getPromotionalPrice(for offer: Any, isPurchasedOffer: Bool) -> String? {
+        guard #available(iOS 12.2, *) else {
+            return nil
+        }
+
+        // get SKProduct
+        guard let productId = getAppleIds(for: [offer]).first,
+              let product = iapManager.product(for: productId) else {
+            return nil
+        }
+        
+        guard let promotionalPrice = product.discounts.first else {
+            return nil
+        }
+        
+        return formattedIntroductoryOfferText(from: promotionalPrice, product: product)
     }
 
     private func receiptHasActiveSubscriptionPurchasedWithIntroPrice(productId: String) throws -> Bool {
