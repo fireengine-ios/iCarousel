@@ -56,6 +56,7 @@ enum AnalyticsEvent {
     case photopickClick
     case photopick
     
+    static var purchaseToken: String = ""
     
     var token: String {
         #if LIFEDRIVE

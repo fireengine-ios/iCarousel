@@ -87,7 +87,17 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         
         setCardsContainer(isActive: true)
         bottomBarManager.updateLayout()
-        collectionManager.reload(type: .onViewAppear)
+        
+        if !StringConstants.onlyOfficeDocumentsFilter {
+            collectionManager.reload(type: .full)
+            if shareType == .byMe {
+                StringConstants.onlyOfficeDocumentsFilter = true
+            }
+        }
+        
+        if shareType != .byMe && shareType != .withMe {
+            collectionManager.reload(type: .full)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -203,12 +213,38 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         }
     }
     
+    private func showPlusButton() {
+        let menuItems = floatingButtonsArray.map { buttonType in
+            AlertFilesAction(title: buttonType.title, icon: buttonType.image) { [weak self] in
+                self?.customTabBarController?.handleAction(buttonType.action)
+            }
+        }
+
+        let menu = AlertFilesActionsViewController()
+        menu.configure(with: menuItems)
+        menu.presentAsDrawer()
+    }
+    
     func configureCountView(isShown: Bool) {
         countView.removeFromSuperview()
         
         if isShown {
             headerStackView.addArrangedSubview(countView)
         }
+    }
+    
+    func onlyOfficeGetFilter(documentType: OnlyOfficeFilterType) {
+        collectionManager.filterOfficeReload(documentType: documentType, completion: { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            if self.collectionManager.itemsCount == 0 {
+                let message = String(format: localized(.officeFilterNotFound), documentType.description)
+                SnackbarManager.shared.show(type: .nonCritical, message: message)
+                self.collectionManager.filterOfficeReload(documentType: self.collectionManager.lastSelectDocumentType, completion: {})
+            }
+        })
     }
 }
 
@@ -320,16 +356,16 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             
             /// be sure to configure navbar items after setup navigation bar
             let isSelectionAllowed = self.shareType.isSelectionAllowed
+            let isShowPlusMenu = self.shareType.showPlusMenu
             
             if editingMode, isSelectionAllowed {
                 self.navBarManager.setSelectionMode()
             } else {
-                if !isSelectionAllowed {
-                    self.navBarManager.setDefaultModeWithoutThreeDot(title: self.title ?? "")
+                if !isShowPlusMenu {
+                    self.navBarManager.setDefaultModeWithoutPlusButton(title: self.title ?? "")
                 } else {
                     //to don't change the state of the 3dots button
-                    let isThreeDotsEnabled = self.navBarManager.threeDotsButton.isEnabled
-                    self.navBarManager.setDefaultMode(title: self.title ?? "", isThreeDotsEnabled: isThreeDotsEnabled)
+                    self.navBarManager.setDefaultMode(title: self.title ?? "")
                 }
             }
         }
@@ -351,6 +387,10 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
         showSearchScreen()
     }
     
+    func onPlusButton() {
+        showPlusButton()
+    }
+    
     //MARK: Helpers
     private func showSearchScreen() {
         let controller = router.searchView(navigationController: navigationController)
@@ -360,6 +400,10 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
 
 
 extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
+    
+    func onlyOfficeFilterSuccess(documentType: OnlyOfficeFilterType, items: [WrapData]) {
+        onlyOfficeGetFilter(documentType: documentType)
+    }
     
     func selectModeSelected() {
         collectionManager.startSelection()

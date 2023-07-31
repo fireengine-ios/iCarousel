@@ -334,7 +334,12 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                      .galleryPhotos,
                      .galleryVideos,
                      .gallerySync,
-                     .galleryUnsync:
+                     .galleryUnsync,
+                     .officeFilterAll,
+                     .officeFilterPdf,
+                     .officeFilterWord,
+                     .officeFilterCell,
+                     .officeFilterSlide:
 
                     //
                     action = AlertFilesAction(title: type.actionTitle()) { [weak self] in
@@ -668,6 +673,21 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             interactor.handleShareAction(type: type, sourceRect: self.getSourceRect(sender: sender, controller: nil), items: items)
         case .galleryAll, .gallerySync, .galleryUnsync, .galleryVideos, .galleryPhotos:
             ItemOperationManager.default.elementTypeChanged(type: type)
+            
+        case .officeFilterAll:
+            interactor.officeFilterByType(documentType: .all)
+            
+        case .officeFilterPdf:
+            interactor.officeFilterByType(documentType: .pdf)
+            
+        case .officeFilterWord:
+            interactor.officeFilterByType(documentType: .word)
+            
+        case .officeFilterCell:
+            interactor.officeFilterByType(documentType: .cell)
+            
+        case .officeFilterSlide:
+            interactor.officeFilterByType(documentType: .slide)
             
         default:
             break

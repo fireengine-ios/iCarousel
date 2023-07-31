@@ -32,6 +32,8 @@ protocol BaseFilesGreedRouterInput {
     func openUpload()
     
     func createCollage()
+    
+    func openOnlyOffice(fileUuid: String, fileName: String)
 }
 
 extension BaseFilesGreedRouterInput {

@@ -51,6 +51,8 @@ final class AnalyticsService: NSObject {
 
         adjustConfig?.delegate = self
         Adjust.appDidLaunch(adjustConfig)
+        
+        adjustConfig?.logLevel = ADJLogLevelVerbose
     }
     
     private func addAdjustSessionParameters() {
@@ -64,13 +66,19 @@ final class AnalyticsService: NSObject {
     private func configureFireBase() {
         var filePath: String?
         
-        #if ENTERPRISE
-            filePath = Bundle.main.path(forResource: "GoogleService-Info-ent", ofType: "plist")
-        #elseif APPSTORE
-            filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
-        #else
+//        #if ENTERPRISE
+//            filePath = Bundle.main.path(forResource: "GoogleService-Info-ent", ofType: "plist")
+//        #elseif APPSTORE
+//            filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
+//        #else
+//            filePath = Bundle.main.path(forResource: "GoogleService-Info-test", ofType: "plist")
+//        #endif
+        
+        if RouteRequests.currentServerEnvironment == .test {
             filePath = Bundle.main.path(forResource: "GoogleService-Info-test", ofType: "plist")
-        #endif
+        } else  {
+            filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
+        }
         
         guard let filePathUnwraped = filePath,
             let options = FirebaseOptions(contentsOfFile: filePathUnwraped) else {
@@ -102,7 +110,7 @@ final class AnalyticsService: NSObject {
     }
 
     private func logPurchase(event: AnalyticsEvent, price: Double, currency: String) {
-        logAdjustEvent(name: event.token, price: price, currency: currency)
+        logAdjustEvent(name: AnalyticsEvent.purchaseToken, price: price, currency: currency)
         //Facebook has automatic tracking in-app purchases. If this function is enabled in the web settings, then there will be duplicates
         AppEvents.logPurchase(
             price,

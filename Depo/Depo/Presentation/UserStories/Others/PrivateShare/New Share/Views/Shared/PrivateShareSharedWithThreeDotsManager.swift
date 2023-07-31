@@ -24,14 +24,14 @@ final class PrivateShareSharedWithThreeDotsManager {
     func showActions(for privateShareType: PrivateShareType, sender: Any?) {
         switch privateShareType {
             case .byMe:
-                alert.show(with: [.select], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
+            alert.show(with: [.select, .officeFilterAll, .officeFilterPdf, .officeFilterWord, .officeFilterCell, .officeFilterSlide], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
                 
             case .withMe:
-                return
+            alert.show(with: [.select, .officeFilterAll, .officeFilterPdf, .officeFilterWord, .officeFilterCell, .officeFilterSlide], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
                 
             case .innerFolder:
                 //TODO:
-                alert.show(with: [.select], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
+            alert.show(with: [.select, .officeFilterAll, .officeFilterPdf, .officeFilterWord, .officeFilterCell, .officeFilterSlide], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
         }
     }
     

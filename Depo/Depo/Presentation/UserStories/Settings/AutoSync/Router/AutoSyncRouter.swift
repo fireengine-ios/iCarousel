@@ -19,7 +19,7 @@ class AutoSyncRouter: AutoSyncRouterInput {
 //                return
 //            }
             
-            self?.verifyEmailIfNeeded()
+//            self?.verifyEmailIfNeeded()
         }
     }
     

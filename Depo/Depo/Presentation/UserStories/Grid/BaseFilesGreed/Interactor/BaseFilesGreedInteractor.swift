@@ -12,6 +12,8 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
 
     var remoteItems: RemoteItemsService
     
+    private let onlyOfficeService = OnlyOfficeService()
+    
     var folder: Item?
     
     var parent: BaseDataSourceItem?
@@ -128,6 +130,23 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                     self.nextItems(sortBy: sortBy, sortOrder: sortOrder, newFieldValue: newFieldValue)
                 }
         }, newFieldValue: newFieldValue)
+    }
+    
+    func onlyOfficeCreateFile(fileName: String, documentType: String, parentFolderUuid: String) {
+        onlyOfficeService.create(
+            fileName: fileName,
+            documentType: documentType,
+            parentFolderUuid: parentFolderUuid,
+            success: { [weak self] response in
+                let serviceResult = response as? OnlyOfficeResponse
+                DispatchQueue.main.async {
+                    self?.output.createFileSuccess(fileUuid: serviceResult?.fileUuid ?? "", fileName: fileName, parentFolderUuid: parentFolderUuid)
+                }
+            }, fail: { [weak self] errorResponse in
+                DispatchQueue.main.async {
+                    self?.output.createFileFail(errorResponse: errorResponse)
+                }
+        })
     }
     
     func canShowNoFilesView() -> Bool {

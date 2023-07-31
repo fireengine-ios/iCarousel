@@ -66,6 +66,7 @@ enum ApplicationType: String {
     case ppt = "ppt"
     case pptx = "pptx"
     case usdz = "usdz"
+    case csv = "csv"
 }
 
 enum FileType: Hashable, Equatable {
@@ -128,6 +129,13 @@ enum FileType: Hashable, Equatable {
             return false
         }
         return applicationType.isContained(in: [.doc, .txt, .html, .xls, .pdf, .ppt, .pptx, .usdz])
+    }
+    
+    var isPdfDocument: Bool {
+        guard case let FileType.application(applicationType) = self else {
+            return false
+        }
+        return applicationType.isContained(in: [.pdf])
     }
     
     var isDocumentPageItem: Bool {

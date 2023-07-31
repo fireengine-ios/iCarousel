@@ -253,7 +253,7 @@ struct RouteRequests {
                                               "https://mylifebox.com/faq/?lang=%@"
             
         case .test: return isBillo ? "https://dev.mylifebox.com/faq/?lang=%@" :
-                                     "https://mylifebox.com/faq/?lang=%@"
+                                     "https://adepodev.turkcell.com.tr/faq/?lang=%@"
         }
     }
 
@@ -309,8 +309,8 @@ struct RouteRequests {
         
         enum Shared {
             private static let baseShares = share.absoluteString
-            static let withMe = baseShares + "?sharedWith=me&size=%d&page=%d&sortBy=%@&sortOrder=%@&objectType=FILE"
-            static let byMe = baseShares + "?sharedBy=me&size=%d&page=%d&sortBy=%@&sortOrder=%@&objectType=FILE"
+            static let withMe = baseShares + "?sharedWith=me&size=%d&page=%d&sortBy=%@&sortOrder=%@&objectType=FILE%@"
+            static let byMe = baseShares + "?sharedBy=me&size=%d&page=%d&sortBy=%@&sortOrder=%@&objectType=FILE%@"
             //"https://run.mocky.io/v3/8d9274fb-3149-452b-9d7f-ef8b1ea20195"//
         }
     }
@@ -512,13 +512,18 @@ struct RouteRequests {
     static let paycellAcceptedFriends = "paycell/sold?pageNumber=%d&pageSize=%d"
     
     // MARK: - For You
-    static let forYouCollages = baseUrl +/ "foryou/collages"
-    static let forYouAnimations = baseUrl +/ "foryou/animations"
-    static let forYouStories = baseUrl +/ "foryou/stories"
+    static let forYouCollages = baseUrl +/ "v2/foryou/collages"
+    static let forYouAnimations = baseUrl +/ "v2/foryou/animations"
+    static let forYouStories = baseUrl +/ "v2/foryou/stories"
     static let forYouCollageCards = baseUrl +/ "foryou/collages/generated"
     static let forYouAlbumCards = baseUrl +/ "foryou/albums/generated"
     static let forYouAnimationCards = baseUrl +/ "foryou/animations/generated"
     static let forYouThrowback = baseUrl +/ "foryou/years-ago"
     static let forYouThrowbackDetail = "foryou/years-ago/%d"
     static let collageTemplate = baseUrl +/ "template/collages"
+    
+    // MARK: -OnlyOffice
+    static let onlyOfficeGetFile = baseUrl +/ "office/files"
+    static let onlyOfficeFilterDocument = "search/byDocumentType?parentFolderUuid=%@&page=%@&size=%@&sortBy=%@&sortOrder=%@&documentType=%@"
+    static let onlyOfficeSharedByMeFolderFilter = baseUrl.absoluteString + "v2/files/%@?language=en&page=%d&size=%d&sortBy=%@&sortOrder=%@&documentType=%@&parentFolderUuid=%@"
 }

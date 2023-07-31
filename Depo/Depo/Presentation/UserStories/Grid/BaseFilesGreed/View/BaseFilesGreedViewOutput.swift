@@ -7,7 +7,7 @@
 //
 
 protocol BaseFilesGreedViewOutput {
-
+    
     func viewIsReady(collectionView: UICollectionView)
     
     func onReloadData()
@@ -33,9 +33,9 @@ protocol BaseFilesGreedViewOutput {
     func viewWillDisappear()
     
     func viewWillAppear()
-
+    
     func onNextButton()
-
+    
     func getSortTypeString() -> String
     
     func viewAppearanceChangedTopBar(asGrid: Bool)
@@ -69,4 +69,7 @@ protocol BaseFilesGreedViewOutput {
     func openUpload()
     
     func createCollage()
+    
+    func onlyOfficeCreateFile(fileName: String, documentType: String, parentFolderUuid: String)
+    
 }

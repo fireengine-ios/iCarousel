@@ -54,4 +54,6 @@ protocol BaseFilesGreedInteractorInput {
     
     var requestPageNum: Int {get}
     
+    func onlyOfficeCreateFile(fileName: String, documentType: String, parentFolderUuid: String)
+    
 }

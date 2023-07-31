@@ -1127,6 +1127,12 @@ class RouterVC: NSObject {
         return PackagesModuleInitializer.viewController(quotaInfo: quotaInfo)
     }
     
+    // MARK: - OnlyOffice
+    
+    func onlyOffice(fileUuid: String, fileName: String)  -> OnlyOfficeViewController {
+        return OnlyOfficeViewController(fileUuid: fileUuid, fileName: fileName)
+    }
+    
     // MARK: - Notification
     func notification() -> NotificationViewController {
         return NotificationModuleInitializer.initializeViewController()
@@ -1435,9 +1441,10 @@ class RouterVC: NSObject {
         }
     }
     
-    func securityInfoViewController(fromSettings: Bool = false) {
+    func securityInfoViewController(fromSettings: Bool = false, fromHomeScreen: Bool = false) {
         let controller = SecurityInfoViewController()
         controller.fromSettings = fromSettings
+        controller.fromHomeScreen = fromHomeScreen
         navigationController?.pushViewController(controller, animated: true)
     }
     

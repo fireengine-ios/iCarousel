@@ -47,7 +47,7 @@ final class CaptchaSignUpRequrementService {
     
     public func getCaptchaRequrement(isSignUp: Bool = false, handler: @escaping ResponseBool) {
         guard let requestURL = URL(string: RouteRequests.captchaRequired, relativeTo: RouteRequests.baseUrl) else {
-            handler(ResponseResult.failed(CustomErrors.unknown))
+            //handler(ResponseResult.failed(CustomErrors.unknown))
             return
         }
         let parameters = isSignUp ? ["channel" : "SIGN_UP"] : nil

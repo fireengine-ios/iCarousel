@@ -501,8 +501,25 @@ extension TabBarViewController: TabBarActionHandler {
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .spotifyImport))
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .importSpotify)
             spotifyRoutingService.connectToSpotify(isSettingCell: false, completion: nil)
+        case .createWord:
+            let vc = OnlyOfficePopup.with(fileType: .createWord, parentFolderUuid: onlyOfficeCreateFileFolderUuid())
+            vc.open()
+        case .createExcel:
+            let vc = OnlyOfficePopup.with(fileType: .createExcel, parentFolderUuid: onlyOfficeCreateFileFolderUuid())
+            vc.open()
+        case .createPowerPoint:
+            let vc = OnlyOfficePopup.with(fileType: .createPowerPoint, parentFolderUuid: onlyOfficeCreateFileFolderUuid())
+            vc.open()
         }
         
+    }
+    
+    private func onlyOfficeCreateFileFolderUuid() -> String {
+        if StringConstants.onlyOfficeCreateFileBySharedFolderUuid == "" {
+            return router.getParentUUID()
+        } else {
+            return StringConstants.onlyOfficeCreateFileBySharedFolderUuid
+        }
     }
     
     private func checkReadOnlyPermission() -> Bool {

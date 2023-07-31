@@ -95,7 +95,12 @@ final class InstaPickRoutingService {
         } else if let hasPermission = instagramLikePermission, hasPermission {
             didOpenInstaPickSelectionSegmented()
         } else {
-            didOpenInstaPickPopUp(instaNickname: instagramNickname)
+            let instagramConfig = FirebaseRemoteConfig.shared.fetchInstagramMenuEnable
+            if instagramConfig {
+                didOpenInstaPickPopUp(instaNickname: instagramNickname)
+            } else {
+                didOpenInstaPickSelectionSegmented()
+            }
         }
     }
     

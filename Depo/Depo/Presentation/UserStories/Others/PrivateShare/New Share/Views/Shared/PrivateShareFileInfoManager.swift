@@ -62,11 +62,11 @@ indirect enum PrivateShareType: Equatable {
     private func floatingButtonTypes(innerFolderVeryRootType: PrivateShareType, permissions: [PrivateSharePermission]) -> [FloatingButtonsType] {
         switch innerFolderVeryRootType {
             case .byMe:
-                return [.newFolder, .upload, .uploadFiles]
+            return [.createWord, .createExcel, .createPowerPoint]
                 
             case .withMe:
                 if permissions.contains(.create) {
-                    return [.newFolder, .upload, .uploadFiles]
+                    return [.createWord, .createExcel, .createPowerPoint]
                 }
                 return []
                 
@@ -83,6 +83,25 @@ indirect enum PrivateShareType: Equatable {
                 
             case .innerFolder(type: let rootType, _):
                 return veryRootType(for: rootType)
+        }
+    }
+    
+    var showPlusMenu: Bool {
+        let typeAndRoot = (self, veryRootType(for: self))
+        
+        switch typeAndRoot {
+            case (.byMe, _):
+                return false
+                
+            case (.withMe, _):
+                return false
+                
+            case (.innerFolder(_, let folder), _):
+                let permissions = folder.permissions.granted ?? []
+                if permissions.contains(.create) {
+                    return true
+                }
+                return false
         }
     }
 }
@@ -114,6 +133,7 @@ final class PrivateShareFileInfoManager {
     private(set) var sortedItems = SynchronizedArray<WrapData>()
     private(set) var selectedItems = SynchronizedSet<WrapData>()
     private(set) var splittedItems = SynchronizedArray<[WrapData]>()
+    private(set) var itemsCount: Int = 0
     
     private var tempLoaded = [WrapData]()
     
@@ -151,14 +171,14 @@ final class PrivateShareFileInfoManager {
         operationQueue.addOperation(operation)
     }
     
-    func reload(completion: @escaping ValueHandler<Bool>) {
+    func reload(documentType: OnlyOfficeFilterType? = .all, completion: @escaping ValueHandler<Bool>) {
         queue.sync {
             operationQueue.cancelAllOperations()
             
             selectedItems.removeAll()
             pagesLoaded = 0
-            
-            let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] (loadedItems, isFinished) in
+            self.itemsCount = 0
+            let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder, documentType: documentType) { [weak self] (loadedItems, isFinished) in
                 
                 guard let self = self, isFinished else {
                     completion(false)
@@ -172,7 +192,7 @@ final class PrivateShareFileInfoManager {
                 }
                 
                 self.pagesLoaded += 1
-                
+                self.itemsCount = loadedItems.count
                 let sorted = self.sorted(items: loadedItems)
                 self.sortedItems.replace(with: sorted, completion: nil)
                 
@@ -350,12 +370,13 @@ final class GetSharedItemsOperation: Operation {
     private let sortBy: SortType
     private let sortOrder: SortOrder
     private let completion: ValueHandler<(([WrapData], Bool))>
+    private let documentType: OnlyOfficeFilterType
     
     private var task: URLSessionTask?
     private var loadedItems = [WrapData]()
     private var isRequestFinished = false
     
-    init(service: PrivateShareApiService, type: PrivateShareType, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, completion: @escaping ValueHandler<([WrapData], Bool)>) {
+    init(service: PrivateShareApiService, type: PrivateShareType, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, documentType: OnlyOfficeFilterType? = .all, completion: @escaping ValueHandler<([WrapData], Bool)>) {
         self.type = type
         self.privateShareAPIService = service
         self.completion = completion
@@ -363,6 +384,7 @@ final class GetSharedItemsOperation: Operation {
         self.size = size
         self.sortBy = sortBy
         self.sortOrder = sortOrder
+        self.documentType = documentType ?? .all
     }
     
     override func cancel() {
@@ -403,13 +425,13 @@ final class GetSharedItemsOperation: Operation {
     private func loadPage(completion : @escaping ResponseArrayHandler<SharedFileInfo>) {
         switch type {
             case .byMe:
-                task = privateShareAPIService.getSharedByMe(size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, handler: completion)
+                task = privateShareAPIService.getSharedByMe(size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, documentType: documentType, handler: completion)
                 
             case .withMe:
-                task = privateShareAPIService.getSharedWithMe(size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, handler: completion)
+                task = privateShareAPIService.getSharedWithMe(size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, documentType: documentType, handler: completion)
                 
             case .innerFolder(_, let folder):
-                task = privateShareAPIService.getFiles(projectId: folder.projectId, folderUUID: folder.uuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder) { response in
+                task = privateShareAPIService.getFiles(projectId: folder.projectId, folderUUID: folder.uuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, documentType: documentType) { response in
                     switch response {
                         case .success(let fileSystem):
                             completion(.success(fileSystem.fileList))

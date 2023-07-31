@@ -60,7 +60,24 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
             let controller = router.augumentRealityDetailViewController(fileObject: wrapperedItem)
             router.presentViewController(controller: controller)
             
+        case .application(.pdf):
+            let detailModule = router.filesDetailModule(fileObject: wrapperedItem,
+                                                        items: wrapperedArray,
+                                                        status: view.status,
+                                                        canLoadMoreItems: true,
+                                                        moduleOutput: moduleOutput as? PhotoVideoDetailModuleOutput)
+
+            presenter.photoVideoDetailModule = detailModule.moduleInput
+            let nController = NavigationController(rootViewController: detailModule.controller)
+            router.presentViewController(controller: nController)
+            
+        case .application(.doc), .application(.ppt), .application(.pptx), .application(.xls), .application(.csv):
+            let selectedEvent = eventType(fileType: selectedItem.fileType)
+            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .plusAction(selectedEvent))
+            openOnlyOffice(fileUuid: selectedItem.uuid, fileName: selectedItem.name ?? "")
+            
         default:
+             ///for open to preview screen
             let detailModule = router.filesDetailModule(fileObject: wrapperedItem,
                                                         items: wrapperedArray,
                                                         status: view.status,
@@ -71,6 +88,19 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
             let nController = NavigationController(rootViewController: detailModule.controller)
             router.presentViewController(controller: nController)
         }
+    }
+    
+    private func eventType(fileType: FileType) -> TabBarViewController.Action {
+        if fileType == .application(.doc) {
+            return .createWord
+        }
+        if fileType == .application(.xls) {
+            return .createExcel
+        }
+        if fileType == .application(.ppt) || fileType == .application(.pptx) {
+            return .createPowerPoint
+        }
+        return .createWord
     }
     
     func showPrint(items: [BaseDataSourceItem]) {
@@ -128,5 +158,10 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .createCollage)
         let vc = router.createCollage()
         router.pushViewController(viewController: vc)
+    }
+    
+    func openOnlyOffice(fileUuid: String, fileName: String) {
+        let vc = router.onlyOffice(fileUuid: fileUuid, fileName: fileName)
+        router.pushViewController(viewController: vc, animated: false)
     }
 }

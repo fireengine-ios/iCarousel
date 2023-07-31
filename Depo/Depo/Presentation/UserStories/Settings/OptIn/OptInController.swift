@@ -41,12 +41,12 @@ final class OptInController: ViewController, NibInit {
     
     @IBOutlet private var codeTextFields: [SecurityCodeTextField]!
     
-    @IBOutlet private weak var resendCodeButton: RoundedInsetsButton! {
+    @IBOutlet private weak var resendCodeButton: UIButton! {
         willSet {
             newValue.setTitle(TextConstants.resendCode, for: .normal)
-            newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.backgroundColor = UIColor.lrTealish
+            newValue.setTitleColor(AppColor.blackAndWhite.color, for: .normal)
+            newValue.titleLabel?.font = .appFont(.medium, size: 14)
+            newValue.backgroundColor = .clear
             newValue.isOpaque = true
         }
     }
@@ -91,6 +91,7 @@ final class OptInController: ViewController, NibInit {
     func clearCode() {
         codeTextFields.forEach({
             $0.text = ""
+            $0.layer.borderColor = AppColor.forgetPassCodeClose.cgColor
         })
         currentSecurityCode = ""
     }
@@ -165,18 +166,18 @@ final class OptInController: ViewController, NibInit {
             setNavigationTitle(title: TextConstants.enterSecurityCode)
         }
         
-        mainTitle.font = UIFont.TurkcellSaturaRegFont(size: 35)
-        mainTitle.textColor = AppColor.blackAndLrTealish.color
+        mainTitle.font = .appFont(.medium, size: 14)
+        mainTitle.textColor = AppColor.blackAndWhite.color
         mainTitle.text = TextConstants.enterSecurityCode
         
-        infoTitle.font = UIFont.TurkcellSaturaMedFont(size: 15)
-        infoTitle.textColor = ColorConstants.blueGrey
+        infoTitle.font = .appFont(.regular, size: 15)
+        infoTitle.textColor = AppColor.blackAndWhite.color
         
-        timerLabel.font = UIFont.TurkcellSaturaRegFont(size: 35)
-        timerLabel.textColor = ColorConstants.cloudyBlue
+        timerLabel.font = .appFont(.medium, size: 14)
+        timerLabel.textColor = ColorConstants.textOrange
         
         errorLabel.textColor = ColorConstants.textOrange
-        errorLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
+        errorLabel.font = .appFont(.regular, size: 15)
     }
     
     private func setupButtonsInitialState() {
@@ -212,12 +213,14 @@ final class OptInController: ViewController, NibInit {
             let previosTag = sender.tag - 1
             if let nextResponder = codeTextFields[safe: previosTag] {
                 /// For autoFill one time password
+                nextResponder.layer.borderColor = AppColor.forgetPassCodeClose.cgColor
                 if previosTag <= 0 {
                     nextResponder.text = ""
                 }
                 nextResponder.becomeFirstResponder()
             }
         } else {
+            codeTextFields[safe: sender.tag]?.layer.borderColor = AppColor.tint.cgColor
             let nextTag = sender.tag + 1
             if let nextResponder = codeTextFields[safe: nextTag] {
                 nextResponder.becomeFirstResponder()

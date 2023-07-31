@@ -24,7 +24,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     class func initializeDocumentsViewController(with nibName: String) -> UIViewController {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
-        viewController.floatingButtonsArray.append(contentsOf: [.uploadDocuments])
+        viewController.floatingButtonsArray.append(contentsOf: [.uploadDocuments, .createWord, .createExcel, .createPowerPoint])
         viewController.cardsContainerView.isEnable = true
         viewController.cardsContainerView.addPermittedPopUpViewTypes(types: [.upload, .download])
         viewController.segmentImage = .documents
@@ -46,7 +46,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                fileFilters: [.fileType(.allDocs)],
                                bottomBarConfig: bottomBarConfig,
                                topBarConfig: gridListTopBarConfig,
-                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
+                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .officeFilterAll, .officeFilterPdf, .officeFilterWord, .officeFilterCell, .officeFilterSlide],
                                                                                      selectionModeTypes: []))
         viewController.mainTitle = ""
         viewController.title = TextConstants.documents
@@ -160,7 +160,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     class func initializeFilesFromFolderViewController(with nibName: String, folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, status: ItemStatus, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         if status == .active {
-            viewController.floatingButtonsArray.append(contentsOf: [.upload, .uploadFiles, .newFolder])
+            viewController.floatingButtonsArray.append(contentsOf: [.upload, .uploadFiles, .newFolder, .createWord, .createExcel, .createPowerPoint])
         }
         viewController.cardsContainerView.addPermittedPopUpViewTypes(types: [.sync, .upload, .download])
         viewController.cardsContainerView.isEnable = true

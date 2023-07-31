@@ -33,7 +33,7 @@ final class PrivateShareSliderFilesCollectionManager {
     
     func checkSharedWithMe(callBack: @escaping ResponseVoid) {
 
-        shareApiService.getSharedWithMe(size: numberOfDisplayedSharedItems + 1, page: 0, sortBy: .lastModifiedDate, sortOrder: .asc) { [weak self] sharedFilesResult in
+        shareApiService.getSharedWithMe(size: numberOfDisplayedSharedItems + 1, page: 0, sortBy: .lastModifiedDate, sortOrder: .asc, documentType: .all) { [weak self] sharedFilesResult in
             guard let self = self else {
                 callBack(.failed(CustomErrors.text("no self instance")))
                 return

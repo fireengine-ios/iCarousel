@@ -675,6 +675,12 @@ enum GAEventLabel {
                 return "Photopick"
             case .createCollage:
                 return "Create Collage"
+            case .createWord:
+                return "Word"
+            case .createExcel:
+                return "Cell"
+            case .createPowerPoint:
+                return "Slide"
             }
         case .shareViaLink:
             return "Share via Link"

@@ -49,8 +49,11 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     private(set) var currentCollectionViewType: MoreActionsConfig.ViewType = .List
     private(set) var isSelecting = false
     private(set) var isCollectionEmpty = true
+    private(set) var itemsCount = 0
+    private(set) var lastSelectDocumentType: OnlyOfficeFilterType = .all
     
     private lazy var mediaPlayer: MediaPlayer = factory.resolve()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
 
     var shareType: PrivateShareType = .byMe
 
@@ -152,6 +155,22 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         refresher.tintColor = AppColor.filesRefresher.color
         refresher.addTarget(self, action: #selector(fullReload), for: .valueChanged)
         collectionView?.refreshControl = refresher
+    }
+    
+    func filterOfficeReload(documentType: OnlyOfficeFilterType, completion: @escaping VoidHandler) {
+        fileInfoManager.reload(documentType: documentType, completion: { [weak self] shouldReload in
+            if shouldReload {
+                self?.changeSelection(isActive: false)
+                self?.itemsCount = self?.fileInfoManager.itemsCount ?? 0
+                if self?.itemsCount ?? 0 > 0 {
+                    self?.lastSelectDocumentType = documentType
+                    self?.reloadCollection()
+                }
+                DispatchQueue.main.async {
+                    completion()
+                }
+            }
+        })
     }
     
     @objc
@@ -288,12 +307,17 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         cell.canShowSharedIcon = false
         cell.setSelection(isSelectionActive: isSelecting, isSelected: isSelectedCell)
         cell.configureWithWrapper(wrappedObj: item)
-          
-        if case PathForItem.remoteUrl(let url) = item.patchToPreview {
-            if let url = url {
-                cell.setImage(with: url)
-            } else {
-                cell.setPlaceholderImage(fileType: item.fileType)
+        
+        if item.fileType.isDocument {
+            cell.setPlaceholderImage(fileType: item.fileType)
+        } else {
+            
+            if case PathForItem.remoteUrl(let url) = item.patchToPreview {
+                if let url = url {
+                    cell.setImage(with: url)
+                } else {
+                    cell.setPlaceholderImage(fileType: item.fileType)
+                }
             }
         }
     }
@@ -357,12 +381,39 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
             if let projectId = item.projectId, let name = item.name, let permissions = item.privateSharePermission  {
                 let sharedFolder = PrivateSharedFolderItem(projectId: projectId, uuid: item.uuid, name: name, permissions: permissions)
                 openFolder(with: sharedFolder)
+                StringConstants.onlyOfficeCreateFileBySharedFolderUuid = item.uuid
+                StringConstants.onlyOfficeCreateFileProjectId = item.projectId ?? ""
             }
             
         } else {
-            let items = fileInfoManager.sortedItems.getArray().filter({ !($0.isFolder ?? false) })
-            openPreview(for: item, with: items)
+            if item.fileType.isDocument && !item.fileType.isPdfDocument {
+                let selectedEvent = eventType(fileType: item.fileType)
+                self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .plusAction(selectedEvent))
+                let fileUuid = "\(item.projectId ?? "")/\(item.uuid)"
+                openOnlyOffice(fileUuid: fileUuid, fileName: item.name ?? "")
+            } else {
+                let items = fileInfoManager.sortedItems.getArray().filter({ !($0.isFolder ?? false) })
+                openPreview(for: item, with: items)
+            }
         }
+    }
+    
+    private func eventType(fileType: FileType) -> TabBarViewController.Action {
+        if fileType == .application(.doc) {
+            return .createWord
+        }
+        if fileType == .application(.xls) {
+            return .createExcel
+        }
+        if fileType == .application(.ppt) || fileType == .application(.pptx) {
+            return .createPowerPoint
+        }
+        return .createWord
+    }
+    
+    func openOnlyOffice(fileUuid: String, fileName: String) {
+        let vc = router.onlyOffice(fileUuid: fileUuid, fileName: fileName)
+        router.pushViewController(viewController: vc, animated: false)
     }
     
     private func showAudioPlayer(with item: WrapData) {

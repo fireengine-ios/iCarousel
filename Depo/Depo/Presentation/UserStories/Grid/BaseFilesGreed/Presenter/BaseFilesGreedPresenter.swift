@@ -220,7 +220,47 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         
     }
     
+    func onlyOfficeCreateFile(fileName: String, documentType: String, parentFolderUuid: String) {
+        startAsyncOperation()
+        interactor.onlyOfficeCreateFile(fileName: fileName, documentType: documentType, parentFolderUuid: parentFolderUuid)
+    }
+    
     // MARK: - Request OUTPUT
+    func createFileSuccess(fileUuid: String, fileName: String, parentFolderUuid: String) {
+        asyncOperationSuccess()
+        StringConstants.onlyOfficeCreateFile = true
+        openOnlyOffice(fileUuid: getFileUuid(fileUuid: fileUuid), fileName: fileName)
+        StringConstants.onlyOfficeCreateFileBySharedFolderUuid = ""
+        StringConstants.onlyOfficeCreateFileProjectId = ""
+    }
+    
+    private func getFileUuid(fileUuid: String) -> String {
+        let projectId = StringConstants.onlyOfficeCreateFileProjectId
+        if projectId != "" {
+            return "\(projectId)/\(fileUuid)"
+        } else {
+            return fileUuid
+        }
+    }
+    
+    func createFileFail(errorResponse: ErrorResponse) {
+        asyncOperationFail(errorMessage: errorResponse.description)
+    }
+    
+    func onlyOfficeFilterSuccess(documentType: OnlyOfficeFilterType, items: [WrapData]) {
+        if documentType == .all {
+            onReloadData()
+        } else {
+            if items.count > 0 {
+                dataSource.dropData()
+                getContentWithSuccess(items: items)
+            } else {
+                let message = String(format: localized(.officeFilterNotFound), documentType.description)
+                SnackbarManager.shared.show(type: .action, message: message)
+            }
+        }
+    }
+    
     func getContentWithFail(errorString: String?) {
         view?.stopRefresher()
         dataSource.isPaginationDidEnd = false
@@ -374,6 +414,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles,
                                   type: type, sortType: sortedType, moduleOutput: self)
         } else {
+            print("aaaaaaaaaaaaaaaa")
             let vc = PopUpController.with(title: TextConstants.warning, message: TextConstants.theFileIsNotSupported,
                                           image: .error, buttonTitle: TextConstants.ok)
             vc.open()
@@ -799,6 +840,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func createCollage() {
         router.createCollage()
+    }
+    
+    func openOnlyOffice(fileUuid: String, fileName: String) {
+        router.openOnlyOffice(fileUuid: fileUuid, fileName: fileName)
     }
     
     // MARK: - View outbut/ TopBar/UnderNavBarBar Delegates

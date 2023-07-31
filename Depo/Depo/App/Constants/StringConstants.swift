@@ -11,6 +11,10 @@ import Foundation
 struct StringConstants {
     static var collageName: String = localized(.createCollagePreviewMainTitle)
     static var createCollageSelectPhotoType = PhotoSelectType.newPhotoSelection //New -> new select photo, Change-> change selected photo
+    static var onlyOfficeCreateFile: Bool = false
+    static var onlyOfficeDocumentsFilter: Bool = true
+    static var onlyOfficeCreateFileBySharedFolderUuid: String = ""
+    static var onlyOfficeCreateFileProjectId: String = ""
 }
 
 struct CreateCollageConstants {
