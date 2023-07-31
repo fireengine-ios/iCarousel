@@ -226,9 +226,15 @@ final class OnlyOfficePopup: BasePopUpController {
             okButton.backgroundColor = AppColor.borderLightGray.color
             okButton.backgroundColor = AppColor.borderLightGray.color
         } else {
-            textField.text = textField.text?.trimmingCharacters(in: .whitespaces)
-            okButton.backgroundColor = AppColor.darkBlueColor.color
-            okButton.backgroundColor = AppColor.darkBlueColor.color
+            if textField.text?.first == " " {
+                textField.text = textField.text?.trimmingCharacters(in: .whitespaces)
+                okButton.backgroundColor = AppColor.borderLightGray.color
+                okButton.backgroundColor = AppColor.borderLightGray.color
+            } else {
+                textField.text = textField.text?.trimmingCharacters(in: .whitespaces)
+                okButton.backgroundColor = AppColor.darkBlueColor.color
+                okButton.backgroundColor = AppColor.darkBlueColor.color
+            }
         }
     }
 }
