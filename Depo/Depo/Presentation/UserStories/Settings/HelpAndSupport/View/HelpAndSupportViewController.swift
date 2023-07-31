@@ -11,7 +11,7 @@ import WebKit
 
 class HelpAndSupportViewController: BaseViewController, WKNavigationDelegate {
     
-    private let accountSerivce = AccountService()
+    private let accountService = AccountService()
     
     private var webView: WKWebView!
     
@@ -29,7 +29,7 @@ class HelpAndSupportViewController: BaseViewController, WKNavigationDelegate {
         
         self.title = TextConstants.settingsViewCellHelp
         
-        accountSerivce.faqUrl { [weak self] faqUrl in
+        accountService.faqUrl { [weak self] faqUrl in
             if let url = URL(string: faqUrl) {
                 let request = URLRequest(url: url)
                 DispatchQueue.toMain {

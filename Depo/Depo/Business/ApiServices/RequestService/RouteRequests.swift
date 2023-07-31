@@ -247,13 +247,13 @@ struct RouteRequests {
     static var faqContentUrl: String {
         switch currentServerEnvironment {
         case .production: return isBillo ? "https://mybilloapp.com/faq/?lang=%@)" :
-                                           "https://mylifebox.com/faq/?lang=%@"
+                                           "https://mylifebox.com/%@/faq.html"
             
         case .preProduction: return isBillo ? "https://prp.mylifebox.com/faq/?lang=%@" :
-                                              "https://mylifebox.com/faq/?lang=%@"
+                                              "https://mylifebox.com/%@/faq.html"
             
         case .test: return isBillo ? "https://dev.mylifebox.com/faq/?lang=%@" :
-                                     "https://adepodev.turkcell.com.tr/faq/?lang=%@"
+                                     "https://mylifebox.com/%@/faq.html"
         }
     }
 
