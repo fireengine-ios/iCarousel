@@ -22,6 +22,17 @@ class BottomSelectionTabBarModuleInitializer: NSObject {
         configurator.configureModuleForViewInput(viewInput: bottomTabBatVC, presenter: presenter, interactor: interactor, router: router, config: config)
         return bottomTabBatVC
     }
+    
+    func setupModulePhotoPick(config: EditingBarConfig, sourceView: UIView? = nil,
+                     settablePresenter: BottomSelectionTabBarPresenter?) -> BottomSelectionTabBarDrawerViewController {
+        presenter = settablePresenter
+        let bottomTabBatVC = BottomSelectionTabBarDrawerViewController.initFromNib()
+        let configurator = BottomSelectionTabBarModuleConfigurator()
+        let interactor = BottomSelectionTabBarInteractor()
+        let router = BottomSelectionTabBarRouter()
+        configurator.configureModuleForViewInput(viewInput: bottomTabBatVC, presenter: presenter, interactor: interactor, router: router, config: config)
+        return bottomTabBatVC
+    }
 
     func setupDrawerVariantModule(config: EditingBarConfig, settablePresenter: BottomSelectionTabBarPresenter?) -> BottomSelectionTabBarDrawerViewController {
         presenter = settablePresenter
