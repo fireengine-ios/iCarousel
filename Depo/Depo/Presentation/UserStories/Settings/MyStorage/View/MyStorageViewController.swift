@@ -333,7 +333,12 @@ extension MyStorageViewController: SubscriptionOfferViewDelegate {
             }
             
             let packageOffer = PackageOffer(quotaNumber: plan.quota, offers: [plan])
-            
+           
+            if let model = plan.model as? PackageModelResponse,
+                    let adjustId = model.adjustId {
+                    AnalyticsEvent.purchaseToken = adjustId
+                 
+            }
             presentPaymentPopUp(plan: packageOffer, planIndex: planIndex)
         case.subscriptionPlan:
   
