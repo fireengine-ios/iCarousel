@@ -184,6 +184,10 @@ final class OnlyOfficePopup: BasePopUpController {
         imageView.image = imageViewImage
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        StringConstants.onlyOfficeBottomBar = false
+    }
+    
     private func selectedFileType(fileType: OnlyOfficeType, parentFolderUuid: String) {
         titleLabelText = fileType.title
         imageViewImage = fileType.popupImage!
@@ -242,6 +246,7 @@ final class OnlyOfficePopup: BasePopUpController {
 // MARK: - Init
 extension OnlyOfficePopup {
     static func with(fileType: OnlyOfficeType, parentFolderUuid: String) -> OnlyOfficePopup {
+        StringConstants.onlyOfficeBottomBar = true
         let vc = controllerWith(fileType: fileType, parentFolderUuid: parentFolderUuid)
         return vc
     }
