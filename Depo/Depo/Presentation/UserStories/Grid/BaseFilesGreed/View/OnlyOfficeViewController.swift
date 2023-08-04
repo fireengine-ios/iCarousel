@@ -12,7 +12,7 @@ import WebKit
 final class OnlyOfficeViewController: BaseViewController {
     
     @IBOutlet weak var onlyOfficeWebView: WKWebView!
-    private let tokenStorage: TokenStorage = factory.resolve()
+    private let service = OnlyOfficeService()
     private var fileUuid: String = ""
     private var fileName: String = ""
     private let baseUrl = RouteRequests.onlyOfficeGetFile
@@ -42,23 +42,19 @@ final class OnlyOfficeViewController: BaseViewController {
     }
     
     private func configureWebView() {
-        
-        var request = URLRequest(url: URL(string: "\(baseUrl)/\(fileUuid)")!)
-        request.allHTTPHeaderFields = self.authification()
-        self.onlyOfficeWebView.load(request)
+        getFileHtml()
     }
     
-    func base() -> RequestHeaderParametrs {
-        return [ HeaderConstant.Accept      : "text/html",
-                 HeaderConstant.ContentType : HeaderConstant.ApplicationJsonUtf8]
-    }
-    
-    func authification() -> RequestHeaderParametrs {
-        var result = base()
-        if let accessToken = tokenStorage.accessToken {
-            result = result + [HeaderConstant.AuthToken: accessToken]
+    private func getFileHtml() {
+        let fileUrl = "\(baseUrl)/\(fileUuid)"
+        service.getOnlyOfficeFileHtml(fileUrl: fileUrl) { [weak self] result in
+            switch result {
+            case .success(let string):
+                self?.onlyOfficeWebView.loadHTMLString(string, baseURL: URL(string: RouteRequests.baseShortUrlString))
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.description)
+            }
         }
-        return result
     }
 }
 

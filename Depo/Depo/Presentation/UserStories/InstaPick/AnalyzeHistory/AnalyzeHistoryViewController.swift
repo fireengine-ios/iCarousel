@@ -37,7 +37,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     }()
     private var navBarRightItems: [UIBarButtonItem]?
     
-    private var editingTabBar: BottomSelectionTabBarViewController?
+    private var editingTabBar: BottomSelectionTabBarDrawerViewController?
     private var bottomBarPresenter: BottomSelectionTabBarModuleInput?
     private var bottomBarSettablePresenter = AnalyzeHistoryTabBarPresenter()
     private let editingElements: [ElementTypes] = [.delete]
@@ -110,9 +110,13 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     }
     
     private func configureBottomTabBar() {
-        let bottomBarConfig = EditingBarConfig(elementsConfig: editingElements, style: .default, tintColor: nil)
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.delete],
+                                               style: .default,
+                                               tintColor: AppColor.tint.color,
+                                               unselectedItemTintColor: AppColor.label.color,
+                                               barTintColor: AppColor.drawerBackground.color)
         let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
-        let botvarBarVC = bottomBarVCmodule.setupModule(config: bottomBarConfig, settablePresenter: bottomBarSettablePresenter)
+        let botvarBarVC = bottomBarVCmodule.setupModulePhotoPick(config: bottomBarConfig, settablePresenter: bottomBarSettablePresenter)
         editingTabBar = botvarBarVC
         bottomBarPresenter = bottomBarVCmodule.presenter
         bottomBarSettablePresenter.setup(with: editingElements, delegate: self)

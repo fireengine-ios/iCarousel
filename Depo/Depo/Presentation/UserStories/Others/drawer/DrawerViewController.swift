@@ -28,7 +28,7 @@ final class DrawerViewController: UIViewController {
     let drawerIndicatorView = UIView()
     let contentContainerView = ResizableScrollView()
     private var keyboardHeight = CGFloat()
-    private var popUpBottomSpaceConstant: CGFloat = 40.0
+    private var popUpBottomSpaceConstant: CGFloat = 0.0
 
     var drawerPresentationController: DrawerPresentationController? {
         presentationController as? DrawerPresentationController
@@ -36,6 +36,12 @@ final class DrawerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if StringConstants.onlyOfficeBottomBar {
+            popUpBottomSpaceConstant = 40.0
+        } else {
+            popUpBottomSpaceConstant = 0.0
+        }
 
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         view.addRoundedShadows(cornerRadius: 16, shadowColor: AppColor.drawerShadow.cgColor, opacity: 0.5, radius: 24, offset: CGSize(width: 0, height: 6))
@@ -44,18 +50,18 @@ final class DrawerViewController: UIViewController {
         setupContainerView()
         setupContentView()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(asd1), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(asd2), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(openKeyboardAction), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(closeKeyboardAction), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    @objc func asd1(notification: NSNotification) {
+    @objc func openKeyboardAction(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             keyboardHeight = keyboardSize.height
             view.frame.origin.y -= keyboardHeight - popUpBottomSpaceConstant
         }
     }
 
-    @objc func asd2(notification: NSNotification) {
+    @objc func closeKeyboardAction(notification: NSNotification) {
         view.frame.origin.y += keyboardHeight + popUpBottomSpaceConstant
     }
 

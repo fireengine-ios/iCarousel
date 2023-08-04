@@ -15,6 +15,7 @@ struct StringConstants {
     static var onlyOfficeDocumentsFilter: Bool = true
     static var onlyOfficeCreateFileBySharedFolderUuid: String = ""
     static var onlyOfficeCreateFileProjectId: String = ""
+    static var onlyOfficeBottomBar: Bool = false
 }
 
 struct CreateCollageConstants {
