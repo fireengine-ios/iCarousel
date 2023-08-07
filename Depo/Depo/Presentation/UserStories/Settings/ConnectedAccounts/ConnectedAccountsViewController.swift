@@ -150,10 +150,40 @@ extension ConnectedAccountsViewController: SocialConnectionCellDelegate {
         /// DispatchQueue.toMain invokes too fast
         DispatchQueue.main.async {
             if section.set(expanded: true) {
-                let indexPath = IndexPath(row: Section.ExpandState.expanded.rawValue, section: section.account.rawValue)
+                let indexPath = IndexPath(row: Section.ExpandState.expanded.rawValue, section: self.socialAccountsEnable(section: section))
                 self.tableView.insertRows(at: [indexPath], with: .fade)
             }
         }
+    }
+    
+    private func socialAccountsEnable(section: Section) -> Int {
+        var newSection = [Section.SocialAccount]()
+        var sectionValue: Int = 0
+        let instagramEnable = FirebaseRemoteConfig.shared.fetchInstagramMenuEnable
+        let facebookEnable = FirebaseRemoteConfig.shared.fetchFacebookMenuEnable
+        let dropboxEnable = FirebaseRemoteConfig.shared.fetchDropboxMenuEnable
+        if instagramEnable {
+            newSection.append(.instagram)
+        }
+        if facebookEnable {
+            newSection.append(.facebook)
+        }
+        if dropboxEnable {
+            newSection.append(.dropbox)
+        }
+        newSection.append(.appleGoogle)
+        
+        switch section.account {
+        case .instagram:
+            sectionValue = newSection.firstIndex(of: .instagram) ?? 0
+        case .facebook:
+            sectionValue = newSection.firstIndex(of: .facebook) ?? 0
+        case .dropbox:
+            sectionValue = newSection.firstIndex(of: .dropbox) ?? 0
+        case .appleGoogle:
+            sectionValue = newSection.firstIndex(of: .appleGoogle) ?? 0
+        }
+        return sectionValue
     }
     
     func didDisconnectSuccessfully(section: Section) {
