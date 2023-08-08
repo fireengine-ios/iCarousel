@@ -31,11 +31,7 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
             fullnameStackView.distribution = .fillEqually
             fullnameStackView.backgroundColor = AppColor.primaryBackground.color
             fullnameStackView.isOpaque = true
-            
-//            if  {
-                //newValue.addArrangedSubview(descView)
-//            }
-            
+            newValue.addArrangedSubview(descView)
             newValue.addArrangedSubview(fullnameStackView)
             newValue.addArrangedSubview(emailView)
             newValue.addArrangedSubview(phoneView)
@@ -137,7 +133,7 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
         addTapGestureToHideKeyboard()
         setupTextFields()
         setupConfigIfNeed()
-        //setupDescView()
+        setupDescView()
     }
     
     private func setupTextFields() {
@@ -152,7 +148,7 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
     }
     
     func setupDescView() {
-        let code = CoreTelephonyService().callingCountryCode()
+        let code = SingletonStorage.shared.accountInfo?.countryCode
         if code == "+995" || code == "995" {
             return self.descView.descriptionLabel.text = localized(.contactUsComplaintCellfie)
         }
