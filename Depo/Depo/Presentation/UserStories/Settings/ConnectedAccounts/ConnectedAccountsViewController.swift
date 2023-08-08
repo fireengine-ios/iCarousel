@@ -156,6 +156,15 @@ extension ConnectedAccountsViewController: SocialConnectionCellDelegate {
         }
     }
     
+    func didDisconnectSuccessfully(section: Section) {
+        DispatchQueue.main.async {
+            if section.set(expanded: false) {
+                let indexPath = IndexPath(row: Section.ExpandState.expanded.rawValue, section: self.socialAccountsEnable(section: section))
+                self.tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        }
+    }
+    
     private func socialAccountsEnable(section: Section) -> Int {
         var newSection = [Section.SocialAccount]()
         var sectionValue: Int = 0
@@ -184,16 +193,6 @@ extension ConnectedAccountsViewController: SocialConnectionCellDelegate {
             sectionValue = newSection.firstIndex(of: .appleGoogle) ?? 0
         }
         return sectionValue
-    }
-    
-    func didDisconnectSuccessfully(section: Section) {
-        DispatchQueue.main.async {
-            if section.set(expanded: false) {
-                let indexPath = IndexPath(row: Section.ExpandState.expanded.rawValue,
-                                          section: section.account.rawValue)
-                self.tableView.deleteRows(at: [indexPath], with: .fade)
-            }
-        }
     }
     
     func showError(message: String) {
