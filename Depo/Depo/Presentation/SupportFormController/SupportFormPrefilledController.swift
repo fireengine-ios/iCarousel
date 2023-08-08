@@ -33,7 +33,7 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
             fullnameStackView.isOpaque = true
             
 //            if  {
-                newValue.addArrangedSubview(descView)
+                //newValue.addArrangedSubview(descView)
 //            }
             
             newValue.addArrangedSubview(fullnameStackView)
@@ -137,7 +137,7 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
         addTapGestureToHideKeyboard()
         setupTextFields()
         setupConfigIfNeed()
-        setupDescView()
+        //setupDescView()
     }
     
     private func setupTextFields() {
