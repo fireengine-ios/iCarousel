@@ -246,6 +246,7 @@ final class PushNotificationService {
         case .saveToMyLifebox: openSaveToMyLifebox()
         case .brandAmbassador: openBrandAmbassador()
         case .foryou: openForyou()
+        case .discover: openDiscover()
         }
         
         
@@ -640,5 +641,11 @@ private extension PushNotificationService {
     func openForyou() {
         let root = RouterVC()
         root.openTabBarItem(index: .forYou)
+    }
+    
+    func openDiscover() {
+         let root = RouterVC()
+        root.openTabBarItem(index: .discover)
+        
     }
 }
