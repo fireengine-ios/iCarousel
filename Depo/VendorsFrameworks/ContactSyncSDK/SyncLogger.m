@@ -13,6 +13,7 @@
 @interface SyncLogger ()
 @property (strong) NSURL *fileURL;
 @property (strong) NSFileHandle *fileHandle;
+@property (strong) NSString *uniqueString;
 @end
 
 @implementation SyncLogger
@@ -25,7 +26,9 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd-HH-mm-ss"];
     
-    NSString *fileName = [NSString stringWithFormat:@"%@-%@-%@.txt", prefix, [dateFormatter stringFromDate:[NSDate date]], [[NSProcessInfo processInfo] globallyUniqueString]];
+    self.uniqueString = NSUUID.UUID.UUIDString;
+    
+    NSString *fileName = [NSString stringWithFormat:@"%@-%@-%@.txt", prefix, [dateFormatter stringFromDate:[NSDate date]], _uniqueString];
     self.fileURL = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:fileName]];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
