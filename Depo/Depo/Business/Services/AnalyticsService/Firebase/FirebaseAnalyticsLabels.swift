@@ -681,6 +681,8 @@ enum GAEventLabel {
                 return "Cell"
             case .createPowerPoint:
                 return "Slide"
+            case .photoPrint:
+                return "PhotoPrint"
             }
         case .shareViaLink:
             return "Share via Link"
