@@ -2136,3 +2136,22 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "new_print" = "Yeni Baskı Oluştur";
+"print_info_popup_title" = "5 Adet Fotoğraf Seç";
+"print_info_popup_subtitle" = "Bu ay bastırmak için maximum 5 fotoğraf seç ve hemen evine gelsin.";
+"print_info_popup_checkbox" = "Bu uyarıyı bir daha gösterme.";
+
+/*Fuzzy*/
+"print_select_photo_button" = "Fotoğraf Seç";
+"print_select_photo_screen" = "Fotoğraf Seç";
+"print_select_photo_screen_bar" = "Baskı için seçilenler";
+
+/*Fuzzy*/
+"print_continue_button" = "Devam Et";
+"print_missing_photo_popup_title" = "Baskıya %d adet fotoğraf gönderiyorsun";
+"print_missing_photo_popup_subtitle" = "%d adet fotoğraf gönderme hakkın daha var. Devam etmen durumunda bu ay içerisinde kalan %d adet fotoğrafı gönderemezsin";
+
+/*Fuzzy*/
+"create_cell_popup" = "Çalışma Tablosu Oluştur";
+
+/*Fuzzy*/
+"create_slide_popup" = "Sunum Oluştur";

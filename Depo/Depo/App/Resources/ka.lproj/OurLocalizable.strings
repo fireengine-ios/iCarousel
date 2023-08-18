@@ -2096,3 +2096,14 @@ then {11,99 TRY/Month}*/
 "contact_us_complaint_cellfie" = "გმადლობთ, რომ დაგვიკავშირდით. მოთხოვნა განსახილველად გადაეცა სელფი მობაილს . საკითხის დასამუშავებლად,მათ გავუზიარებთ შენს მიერ მოწოდებულ ყველა საჭირო ინფორმაციას, როგორიცაა ინფორმაცია შენს მოწყობილობაზე, Lifebox-ის გამოყენების ინფორმაცია, საკონტაქტო დეტალები და პერსონალური ინფორმაცია. ფოტოები/ვიდეოები და სხვა კონტენტი, რომელსაც ატვირთავ Lifebox-ში, არ იქნება გაზიარებული სელფი მობაილთან.";
 "Office_Filter_Not_Found" = "";
 "new_print" = "";
+"print_info_popup_title" = "";
+"print_info_popup_subtitle" = "";
+"print_info_popup_checkbox" = "";
+"print_select_photo_button" = "";
+"print_select_photo_screen" = "";
+"print_select_photo_screen_bar" = "";
+"print_continue_button" = "";
+"print_missing_photo_popup_title" = "";
+"print_missing_photo_popup_subtitle" = "";
+"create_cell_popup" = "";
+"create_slide_popup" = "";

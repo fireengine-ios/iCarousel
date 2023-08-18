@@ -511,7 +511,8 @@ extension TabBarViewController: TabBarActionHandler {
             let vc = OnlyOfficePopup.with(fileType: .createPowerPoint)
             vc.open()
         case .photoPrint:
-            print("PhotoPrint VC")
+            let vc = router.photoPrintSelectPhotos()
+            router.pushViewController(viewController: vc, animated: false)
         }
         
     }

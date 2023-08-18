@@ -230,6 +230,7 @@ enum AppColor {
     case tbMatikBlurColor
     case discoverCardLine
     case settingsButtonColor
+    case tealBlue
     
 
     var color: UIColor {

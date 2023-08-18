@@ -260,4 +260,15 @@ enum Strings: String, Localizable {
     
     case contactUsComplaintCellfie = "contact_us_complaint_cellfie"
     case photoPrint = "new_print"
+    
+    // MARK: - Photo Print
+    case printInfoPopUpTitle = "print_info_popup_title"
+    case printInfoPopUpSubtitle = "print_info_popup_subtitle"
+    case printInfoPopupCheckBox = "print_info_popup_checkbox"
+    case printSelectPhotoButton = "print_select_photo_button"
+    case printSelectPhotoScreen = "print_select_photo_screen"
+    case printSelectPhotoScreenBar = "print_select_photo_screen_bar"
+    case printContinueButton = "print_continue_button"
+    case printMissingPhotoPopupTitle = "print_missing_photo_popup_title"
+    case printMissingPhotoPopupSubtitle = "print_missing_photo_popup_subtitle"
 }
