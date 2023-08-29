@@ -2155,3 +2155,28 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "create_slide_popup" = "Sunum Oluştur";
+"kktc_restore_info" = "Kuzey Kıbrıs Turkcell  müşterileri 50GB lifebox paketi için LIFEBOX 50GB, lifebox 500GB paketi için LIFEBOX 500GB ve lifebox 2.5TB paketi için LIFEBOX 2.5TB yazarak 3030’a gönderip üyeliklerini hattına başlatabilirler.";
+"edit_printphoto_info_label" = "Düzenlemek için fotoğrafa dokunun";
+
+/*Fuzzy*/
+"print_edit_photo_page_name" = "Fotoğraf Düzenle";
+
+/*Fuzzy*/
+"print_photo_bad_quality_info" = "Seçtiğin fotoğraf %d MB'tan küçüktür. Baskı kalitesinde kayıp oluşturacaktır.";
+
+/*Fuzzy*/
+"print_photo_bad_quality_continue" = "Seçili fotoğraf ile devam et.";
+
+/*Fuzzy*/
+"print_photo_bad_quality_new" = "Farklı bir fotoğraf seç.";
+"no_print_package_info" = "Bu özellik var olan paketlerinizde mevcut değildir.";
+"print_package_question" = "Baskı paketini incelemek ister misin?";
+"print_package_view" = "Paketi İncele";
+"printed_photo_card_title" = "Baskı Paketim";
+"printed_photo_card_info" = "Her ay 5 adet fotoğrafını bastır.";
+"printed_photo_card_body" = "Fotoğraflarını bastır.";
+"printed_photo_card_body_no_right" = "Fotoğraf baskılama hakkını kullandın.";
+"printed_photo_card_info_no_right" = "%d tarihi itibariyle tekrar baskı oluşturabilirsin.";
+
+/*Fuzzy*/
+"printed_package_view" = "Baskı paketlerimi gör.";
