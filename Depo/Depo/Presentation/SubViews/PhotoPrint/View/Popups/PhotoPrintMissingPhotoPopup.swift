@@ -70,6 +70,7 @@ final class PhotoPrintMissingPhotoPopup: BasePopUpController {
 
     private var selectedPhotoCount: Int = 0
     private var unSelectedPhotoCount: Int = 0
+    private let router = RouterVC()
     
     //MARK: Life cycle
     override func viewDidLoad() {
@@ -84,7 +85,10 @@ final class PhotoPrintMissingPhotoPopup: BasePopUpController {
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
-        print("aaaaaaaaaaaaaaaaaa nextButtonTapped")
+        dismiss(animated: false, completion: {
+            let vc = self.router.photoPrintViewController()
+            self.router.pushViewController(viewController: vc)
+        })
     }
     
     @IBAction func selectPhotoTapped(_ sender: Any) {

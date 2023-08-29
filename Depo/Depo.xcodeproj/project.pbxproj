@@ -1566,6 +1566,54 @@
 		893DD00C292B870B00271379 /* DiscoverConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980D92829261DA300817FF8 /* DiscoverConfigurator.swift */; };
 		893F45F0296D631F006FFECA /* DiscoverCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893F45EF296D631F006FFECA /* DiscoverCollectionViewLayout.swift */; };
 		893F45F2296D6332006FFECA /* DiscoverCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893F45F1296D6332006FFECA /* DiscoverCollectionViewDataSource.swift */; };
+		894F71642A9499160037FE89 /* PhotoPrintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71632A9499160037FE89 /* PhotoPrintViewController.swift */; };
+		894F71652A9499160037FE89 /* PhotoPrintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71632A9499160037FE89 /* PhotoPrintViewController.swift */; };
+		894F71662A9499160037FE89 /* PhotoPrintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71632A9499160037FE89 /* PhotoPrintViewController.swift */; };
+		894F71672A9499160037FE89 /* PhotoPrintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71632A9499160037FE89 /* PhotoPrintViewController.swift */; };
+		894F71692A9499540037FE89 /* PhotoPrintViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71682A9499540037FE89 /* PhotoPrintViewInput.swift */; };
+		894F716A2A9499540037FE89 /* PhotoPrintViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71682A9499540037FE89 /* PhotoPrintViewInput.swift */; };
+		894F716B2A9499540037FE89 /* PhotoPrintViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71682A9499540037FE89 /* PhotoPrintViewInput.swift */; };
+		894F716C2A9499540037FE89 /* PhotoPrintViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71682A9499540037FE89 /* PhotoPrintViewInput.swift */; };
+		894F716E2A9499620037FE89 /* PhotoPrintViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F716D2A9499620037FE89 /* PhotoPrintViewOutput.swift */; };
+		894F716F2A9499620037FE89 /* PhotoPrintViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F716D2A9499620037FE89 /* PhotoPrintViewOutput.swift */; };
+		894F71702A9499620037FE89 /* PhotoPrintViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F716D2A9499620037FE89 /* PhotoPrintViewOutput.swift */; };
+		894F71712A9499620037FE89 /* PhotoPrintViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F716D2A9499620037FE89 /* PhotoPrintViewOutput.swift */; };
+		894F71732A9499B80037FE89 /* PhotoPrintPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71722A9499B80037FE89 /* PhotoPrintPresenter.swift */; };
+		894F71742A9499B80037FE89 /* PhotoPrintPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71722A9499B80037FE89 /* PhotoPrintPresenter.swift */; };
+		894F71752A9499B80037FE89 /* PhotoPrintPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71722A9499B80037FE89 /* PhotoPrintPresenter.swift */; };
+		894F71762A9499B80037FE89 /* PhotoPrintPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71722A9499B80037FE89 /* PhotoPrintPresenter.swift */; };
+		894F71782A9499EB0037FE89 /* PhotoPrintModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71772A9499EB0037FE89 /* PhotoPrintModuleInput.swift */; };
+		894F71792A9499EB0037FE89 /* PhotoPrintModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71772A9499EB0037FE89 /* PhotoPrintModuleInput.swift */; };
+		894F717A2A9499EB0037FE89 /* PhotoPrintModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71772A9499EB0037FE89 /* PhotoPrintModuleInput.swift */; };
+		894F717B2A9499EB0037FE89 /* PhotoPrintModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71772A9499EB0037FE89 /* PhotoPrintModuleInput.swift */; };
+		894F717D2A949B310037FE89 /* PhotoPrintRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F717C2A949B310037FE89 /* PhotoPrintRouter.swift */; };
+		894F717E2A949B310037FE89 /* PhotoPrintRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F717C2A949B310037FE89 /* PhotoPrintRouter.swift */; };
+		894F717F2A949B310037FE89 /* PhotoPrintRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F717C2A949B310037FE89 /* PhotoPrintRouter.swift */; };
+		894F71802A949B310037FE89 /* PhotoPrintRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F717C2A949B310037FE89 /* PhotoPrintRouter.swift */; };
+		894F71822A949B430037FE89 /* PhotoPrintRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71812A949B430037FE89 /* PhotoPrintRouterInput.swift */; };
+		894F71832A949B430037FE89 /* PhotoPrintRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71812A949B430037FE89 /* PhotoPrintRouterInput.swift */; };
+		894F71842A949B430037FE89 /* PhotoPrintRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71812A949B430037FE89 /* PhotoPrintRouterInput.swift */; };
+		894F71852A949B430037FE89 /* PhotoPrintRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71812A949B430037FE89 /* PhotoPrintRouterInput.swift */; };
+		894F71872A949B8A0037FE89 /* PhotoPrintInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71862A949B8A0037FE89 /* PhotoPrintInteractor.swift */; };
+		894F71882A949B8A0037FE89 /* PhotoPrintInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71862A949B8A0037FE89 /* PhotoPrintInteractor.swift */; };
+		894F71892A949B8A0037FE89 /* PhotoPrintInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71862A949B8A0037FE89 /* PhotoPrintInteractor.swift */; };
+		894F718A2A949B8A0037FE89 /* PhotoPrintInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71862A949B8A0037FE89 /* PhotoPrintInteractor.swift */; };
+		894F718C2A949BA30037FE89 /* PhotoPrintInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F718B2A949BA30037FE89 /* PhotoPrintInteractorInput.swift */; };
+		894F718D2A949BA30037FE89 /* PhotoPrintInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F718B2A949BA30037FE89 /* PhotoPrintInteractorInput.swift */; };
+		894F718E2A949BA30037FE89 /* PhotoPrintInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F718B2A949BA30037FE89 /* PhotoPrintInteractorInput.swift */; };
+		894F718F2A949BA30037FE89 /* PhotoPrintInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F718B2A949BA30037FE89 /* PhotoPrintInteractorInput.swift */; };
+		894F71912A949BB50037FE89 /* PhotoPrintInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71902A949BB50037FE89 /* PhotoPrintInteractorOutput.swift */; };
+		894F71922A949BB50037FE89 /* PhotoPrintInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71902A949BB50037FE89 /* PhotoPrintInteractorOutput.swift */; };
+		894F71932A949BB50037FE89 /* PhotoPrintInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71902A949BB50037FE89 /* PhotoPrintInteractorOutput.swift */; };
+		894F71942A949BB50037FE89 /* PhotoPrintInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71902A949BB50037FE89 /* PhotoPrintInteractorOutput.swift */; };
+		894F71962A949D960037FE89 /* PhotoPrintConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71952A949D960037FE89 /* PhotoPrintConfigurator.swift */; };
+		894F71972A949D960037FE89 /* PhotoPrintConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71952A949D960037FE89 /* PhotoPrintConfigurator.swift */; };
+		894F71982A949D960037FE89 /* PhotoPrintConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71952A949D960037FE89 /* PhotoPrintConfigurator.swift */; };
+		894F71992A949D960037FE89 /* PhotoPrintConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F71952A949D960037FE89 /* PhotoPrintConfigurator.swift */; };
+		894F719B2A94A4F80037FE89 /* PhotoPrintInitilizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F719A2A94A4F80037FE89 /* PhotoPrintInitilizer.swift */; };
+		894F719C2A94A4F80037FE89 /* PhotoPrintInitilizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F719A2A94A4F80037FE89 /* PhotoPrintInitilizer.swift */; };
+		894F719D2A94A4F80037FE89 /* PhotoPrintInitilizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F719A2A94A4F80037FE89 /* PhotoPrintInitilizer.swift */; };
+		894F719E2A94A4F80037FE89 /* PhotoPrintInitilizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F719A2A94A4F80037FE89 /* PhotoPrintInitilizer.swift */; };
 		896133A42338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */; };
 		896133A52338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */; };
 		897A154529B1C8FF0085A3EA /* CreateCollageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897A154429B1C8FF0085A3EA /* CreateCollageTableViewCell.swift */; };
@@ -10975,6 +11023,18 @@
 		8938AE862930C264004970F2 /* DeleteListSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteListSectionHeader.swift; sourceTree = "<group>"; };
 		893F45EF296D631F006FFECA /* DiscoverCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewLayout.swift; sourceTree = "<group>"; };
 		893F45F1296D6332006FFECA /* DiscoverCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		894F71632A9499160037FE89 /* PhotoPrintViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintViewController.swift; sourceTree = "<group>"; };
+		894F71682A9499540037FE89 /* PhotoPrintViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintViewInput.swift; sourceTree = "<group>"; };
+		894F716D2A9499620037FE89 /* PhotoPrintViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintViewOutput.swift; sourceTree = "<group>"; };
+		894F71722A9499B80037FE89 /* PhotoPrintPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintPresenter.swift; sourceTree = "<group>"; };
+		894F71772A9499EB0037FE89 /* PhotoPrintModuleInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintModuleInput.swift; sourceTree = "<group>"; };
+		894F717C2A949B310037FE89 /* PhotoPrintRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintRouter.swift; sourceTree = "<group>"; };
+		894F71812A949B430037FE89 /* PhotoPrintRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintRouterInput.swift; sourceTree = "<group>"; };
+		894F71862A949B8A0037FE89 /* PhotoPrintInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintInteractor.swift; sourceTree = "<group>"; };
+		894F718B2A949BA30037FE89 /* PhotoPrintInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintInteractorInput.swift; sourceTree = "<group>"; };
+		894F71902A949BB50037FE89 /* PhotoPrintInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintInteractorOutput.swift; sourceTree = "<group>"; };
+		894F71952A949D960037FE89 /* PhotoPrintConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintConfigurator.swift; sourceTree = "<group>"; };
+		894F719A2A94A4F80037FE89 /* PhotoPrintInitilizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintInitilizer.swift; sourceTree = "<group>"; };
 		896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePagePopUpOperation.swift; sourceTree = "<group>"; };
 		896133A723390D69000083B7 /* BasePopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePopUpController.swift; sourceTree = "<group>"; };
 		897A154429B1C8FF0085A3EA /* CreateCollageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageTableViewCell.swift; sourceTree = "<group>"; };
@@ -17070,6 +17130,8 @@
 		8991B4912A6E69BF00B94A2D /* Configurator */ = {
 			isa = PBXGroup;
 			children = (
+				894F71952A949D960037FE89 /* PhotoPrintConfigurator.swift */,
+				894F719A2A94A4F80037FE89 /* PhotoPrintInitilizer.swift */,
 			);
 			path = Configurator;
 			sourceTree = "<group>";
@@ -17077,6 +17139,8 @@
 		8991B4922A6E69C700B94A2D /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				894F717C2A949B310037FE89 /* PhotoPrintRouter.swift */,
+				894F71812A949B430037FE89 /* PhotoPrintRouterInput.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -17084,6 +17148,9 @@
 		8991B4932A6E69C900B94A2D /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				894F71862A949B8A0037FE89 /* PhotoPrintInteractor.swift */,
+				894F718B2A949BA30037FE89 /* PhotoPrintInteractorInput.swift */,
+				894F71902A949BB50037FE89 /* PhotoPrintInteractorOutput.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -17091,6 +17158,8 @@
 		8991B4942A6E69CB00B94A2D /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				894F71722A9499B80037FE89 /* PhotoPrintPresenter.swift */,
+				894F71772A9499EB0037FE89 /* PhotoPrintModuleInput.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -17100,6 +17169,9 @@
 			children = (
 				89C0AD452A8E3A520014D674 /* Popups */,
 				8991B4962A6E6A7500B94A2D /* PhotoPrintSelection */,
+				894F71632A9499160037FE89 /* PhotoPrintViewController.swift */,
+				894F71682A9499540037FE89 /* PhotoPrintViewInput.swift */,
+				894F716D2A9499620037FE89 /* PhotoPrintViewOutput.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -26316,6 +26388,7 @@
 				17052DEF2270B44700674D62 /* ProfileBirthdayFieldView.swift in Sources */,
 				B57D854623DAD11E0057B5D6 /* MigrationModel_3_4.xcmappingmodel in Sources */,
 				8C0B91B320170F5B00A5BA81 /* ContactSyncParametrs.swift in Sources */,
+				894F718C2A949BA30037FE89 /* PhotoPrintInteractorInput.swift in Sources */,
 				8C20867C228D5012000BEDAD /* CacheManager.swift in Sources */,
 				3A134C602645535700CFC736 /* InvitedPeopleCollectionViewCell.swift in Sources */,
 				8C0E8C701FDEBDFF00789C91 /* ValidationResults.swift in Sources */,
@@ -26410,6 +26483,7 @@
 				8C0E8C9D1FDEBDFF00789C91 /* SeacrhViewRouter.swift in Sources */,
 				8C0E8C9F1FDEBDFF00789C91 /* ValidationService.swift in Sources */,
 				076BD1E427BC332A004609E3 /* MapMediaGroup.swift in Sources */,
+				894F71822A949B430037FE89 /* PhotoPrintRouterInput.swift in Sources */,
 				985D87F224D0237D004BCDFF /* PhotoEditViewFactory.swift in Sources */,
 				8C208650228D4B2E000BEDAD /* PhotoVideoBottomBarManager.swift in Sources */,
 				8C0E8CA11FDEBDFF00789C91 /* SearchViewInteractorInput.swift in Sources */,
@@ -26582,6 +26656,7 @@
 				C62239A82049731B0043ED44 /* FaceImageChangeCoverInteractor.swift in Sources */,
 				8C0E8D031FDEBDFF00789C91 /* ProgressCardProtocol.swift in Sources */,
 				89F0956829B0B70A00F74E7E /* CreateCollageInitilizer.swift in Sources */,
+				894F71642A9499160037FE89 /* PhotoPrintViewController.swift in Sources */,
 				9809317823952CAC00ECFEF8 /* SmartAlbumsManager.swift in Sources */,
 				07AA667B26FDED36009D4FB1 /* ResetPasswordViewController.swift in Sources */,
 				CE58FB0720444BFF007F3F54 /* ColorConstants.swift in Sources */,
@@ -26595,6 +26670,7 @@
 				076BD1C027BC0983004609E3 /* MapSearchRouter.swift in Sources */,
 				8C0E8D081FDEBDFF00789C91 /* SearchViewInput.swift in Sources */,
 				8C0E8D091FDEBDFF00789C91 /* HelpAndSupportRouterInput.swift in Sources */,
+				894F717D2A949B310037FE89 /* PhotoPrintRouter.swift in Sources */,
 				98BCD712224A615A0090C13D /* SmartAlbumCell.swift in Sources */,
 				8C8711711FDFF47000F66396 /* DarkPopUpController.swift in Sources */,
 				8C0E8D0A1FDEBDFF00789C91 /* AutoSyncDataStorage.swift in Sources */,
@@ -26605,6 +26681,7 @@
 				8C0E8D111FDEBDFF00789C91 /* LocalAlbumInteractor.swift in Sources */,
 				8C0E8D131FDEBDFF00789C91 /* ImportPhotosPresenter.swift in Sources */,
 				98B04793259314740011DAEB /* UpdateCheck.m in Sources */,
+				894F716E2A9499620037FE89 /* PhotoPrintViewOutput.swift in Sources */,
 				8C0E8D141FDEBDFF00789C91 /* ErrorResponse.swift in Sources */,
 				4A0AC1452087374300032CC7 /* PeriodicContactSyncInitializer.swift in Sources */,
 				07407D612796CF750082FF8D /* EmailVerificationPresenter.swift in Sources */,
@@ -26674,6 +26751,7 @@
 				F0D2975C27F6E1E40082C768 /* AppleGoogleLoginService.swift in Sources */,
 				981642FE233CE2D40070F8B9 /* TBMatikPhotosViewController.swift in Sources */,
 				F0CDA6942775187F0026C1C4 /* DragAndDropHelper.swift in Sources */,
+				894F71782A9499EB0037FE89 /* PhotoPrintModuleInput.swift in Sources */,
 				CEFFA8F221AFC27900B34F36 /* SegmentedController.swift in Sources */,
 				8C0E8D321FDEBDFF00789C91 /* CollectionSortingRules.swift in Sources */,
 				89CB2BCF29D6EE9F000A15CB /* OnlyOfficeResponse.swift in Sources */,
@@ -26920,12 +26998,14 @@
 				8C0E8DB91FDEBDFF00789C91 /* VisualMusicPlayerPresenter.swift in Sources */,
 				8C0E8DBA1FDEBDFF00789C91 /* AuthenticationServiceResponse.swift in Sources */,
 				8C0E8DBB1FDEBDFF00789C91 /* RegistrationInteractor.swift in Sources */,
+				894F71692A9499540037FE89 /* PhotoPrintViewInput.swift in Sources */,
 				8C0E8DBC1FDEBDFF00789C91 /* BottomSelectionTabBarInteractor.swift in Sources */,
 				CE23A0F4205FF5290048267D /* SavingAttemptsCounterByUnigueUserID.swift in Sources */,
 				4ADE0882202DC8370095346F /* FaceImageItemsModuleOutput.swift in Sources */,
 				89F99F7429B5BDB400F99CB5 /* CreateCollageAlbumSelectionViewController.swift in Sources */,
 				8C0E8DBD1FDEBDFF00789C91 /* RegistrationRouterInput.swift in Sources */,
 				73D723ED231D08CF006AE835 /* PaymentModels.swift in Sources */,
+				894F71962A949D960037FE89 /* PhotoPrintConfigurator.swift in Sources */,
 				8C0E8DBE1FDEBDFF00789C91 /* RegistrationRouter.swift in Sources */,
 				0762029A269B842C00D4FB2C /* OverlayStickerSelectorDataSource.swift in Sources */,
 				F0E0A4802897F38500528B39 /* ForYouEmptyCellView.swift in Sources */,
@@ -27312,6 +27392,7 @@
 				737685E323704BF300ED6BD6 /* PhotoVideoSegmentedController.swift in Sources */,
 				8C0E8E791FDEBDFF00789C91 /* PrintViewController.swift in Sources */,
 				8C0E8E7C1FDEBDFF00789C91 /* GridListTopBarConfig.swift in Sources */,
+				894F71912A949BB50037FE89 /* PhotoPrintInteractorOutput.swift in Sources */,
 				982319DB24F3A1E700FD16E2 /* AdjustmentCategoriesView.swift in Sources */,
 				3A94D57C265E1E540097D233 /* AcceptedPeopleCollectionViewCell.swift in Sources */,
 				8C0E8E7E1FDEBDFF00789C91 /* ColumnsCollectionLayout.swift in Sources */,
@@ -27774,6 +27855,7 @@
 				B51D959924D00E4300FA2EA0 /* AdjustmentManager.swift in Sources */,
 				8C0E8F651FDEBDFF00789C91 /* UploadFilesSelectionInteractorOutput.swift in Sources */,
 				98792DD022FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift in Sources */,
+				894F71872A949B8A0037FE89 /* PhotoPrintInteractor.swift in Sources */,
 				8C0E8F661FDEBDFF00789C91 /* ResizableTableView.swift in Sources */,
 				CE00B24E2202FB4300A5A696 /* PhotoSelectionController.swift in Sources */,
 				B5B01A7123FA7CB900B03426 /* ResumableUploadInfoService.swift in Sources */,
@@ -27993,6 +28075,7 @@
 				8C0E8FB41FDEBDFF00789C91 /* UploadFromLifeBoxRouter.swift in Sources */,
 				98231A6A24F3A23500FD16E2 /* FilterManager.swift in Sources */,
 				8C0E8FB51FDEBDFF00789C91 /* BaseViewController.swift in Sources */,
+				894F71732A9499B80037FE89 /* PhotoPrintPresenter.swift in Sources */,
 				F0C447362848DFFA00129228 /* UIView+Extensions.swift in Sources */,
 				8C06AC272008AB91003D8E05 /* FreeAppSpacePresenter.swift in Sources */,
 				98B0484B259314750011DAEB /* CNContactUnified.m in Sources */,
@@ -28067,6 +28150,7 @@
 				CF7146F424B597A900D83E60 /* ContactListViewController.swift in Sources */,
 				F0571EBA288AE6AE00A0D6AC /* ForYouConfigurator.swift in Sources */,
 				07C6D4DF284B4B7300502C28 /* IndeterminateProgressView.swift in Sources */,
+				894F719B2A94A4F80037FE89 /* PhotoPrintInitilizer.swift in Sources */,
 				989BDE4422F47B1E001DDEB2 /* SpotifyPlaylistCollectionViewCell.swift in Sources */,
 				8C208679228D4FF1000BEDAD /* NSManagedObject+Extensions.swift in Sources */,
 				07DB938F2860AF5400D5CACF /* ASN1Container.swift in Sources */,
@@ -28794,6 +28878,7 @@
 				CE7848CB22A685FB00662219 /* BaseCellModel.swift in Sources */,
 				CE7848CC22A685FB00662219 /* FaceImagePhotosInteractorOutput.swift in Sources */,
 				CE7848CD22A685FB00662219 /* MappingError.swift in Sources */,
+				894F71702A9499620037FE89 /* PhotoPrintViewOutput.swift in Sources */,
 				CE7848CE22A685FB00662219 /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */,
 				F0571EDF288AE73600A0D6AC /* ForYouPresenter.swift in Sources */,
 				B571FC8F23AE1B3800398B48 /* CoreDataMigrationVersion.swift in Sources */,
@@ -29308,6 +29393,7 @@
 				896133A52338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */,
 				9808B3122553DEBD002B0032 /* PrivateShareViewController.swift in Sources */,
 				F0D2976427F782DE0082C768 /* MessageAndButtonPopup.swift in Sources */,
+				894F71752A9499B80037FE89 /* PhotoPrintPresenter.swift in Sources */,
 				CE784A0F22A685FB00662219 /* UINavigationBarExtension.swift in Sources */,
 				98A86D4B23A2200100438225 /* HiddenPhotosViewController.swift in Sources */,
 				CE784A1022A685FB00662219 /* UsageInfoViewOutput.swift in Sources */,
@@ -29328,6 +29414,7 @@
 				8C1E5BD922CB8C02008FDA02 /* PhotoVideoPredicateManager.swift in Sources */,
 				89DA5D0523ACF635000FA31D /* SmartAlbumWarningPopUpsFactory.swift in Sources */,
 				CE784A1D22A685FB00662219 /* SplitIpadViewContoller.swift in Sources */,
+				894F71842A949B430037FE89 /* PhotoPrintRouterInput.swift in Sources */,
 				3A54C6E5264968C800C2C8BD /* InvitationApiService.swift in Sources */,
 				CE784A1E22A685FB00662219 /* InstagramService.swift in Sources */,
 				CE784A1F22A685FB00662219 /* LocationManager.swift in Sources */,
@@ -29381,9 +29468,11 @@
 				CE784A4522A685FB00662219 /* FaceImagePhotosRouterInput.swift in Sources */,
 				CE784A4622A685FB00662219 /* PrintInteractor.swift in Sources */,
 				893DD008292B870300271379 /* DiscoverRouterInput.swift in Sources */,
+				894F717A2A9499EB0037FE89 /* PhotoPrintModuleInput.swift in Sources */,
 				CE784A4722A685FB00662219 /* PhoneVerificationRouterInput.swift in Sources */,
 				CF71466724B597A900D83E60 /* ContactSyncAnalyzeProgressView.swift in Sources */,
 				CE784A4922A685FB00662219 /* PhoneVerificationRouter.swift in Sources */,
+				894F71982A949D960037FE89 /* PhotoPrintConfigurator.swift in Sources */,
 				076BD1CC27BC09BF004609E3 /* MKMapView+ZoomLevel.swift in Sources */,
 				3A134C632645535700CFC736 /* InvitedPeopleCollectionViewCell.swift in Sources */,
 				CE784A4A22A685FB00662219 /* FaceImageChangeCoverInteractorOutput.swift in Sources */,
@@ -29748,6 +29837,7 @@
 				893DCFE4292B861D00271379 /* DiscoverInitilizer.swift in Sources */,
 				89F0956029B0B6E900F74E7E /* CreateCollageRouterInput.swift in Sources */,
 				CE784B3222A685FB00662219 /* HelpAndSupportInteractor.swift in Sources */,
+				894F71932A949BB50037FE89 /* PhotoPrintInteractorOutput.swift in Sources */,
 				CE784B3322A685FB00662219 /* BottomSelectionTabBarConfigurator.swift in Sources */,
 				CE784B3522A685FB00662219 /* BackgroundTaskService.swift in Sources */,
 				CF7146E524B597A900D83E60 /* DeleteDuplicatesHeader.swift in Sources */,
@@ -30052,6 +30142,7 @@
 				9823199624F3A1E700FD16E2 /* AdjustmentsView.swift in Sources */,
 				CE784BFA22A685FB00662219 /* MyStorageInteractorInput.swift in Sources */,
 				CE784BFB22A685FB00662219 /* SelectFolderInitializer.swift in Sources */,
+				894F718E2A949BA30037FE89 /* PhotoPrintInteractorInput.swift in Sources */,
 				CE784BFC22A685FB00662219 /* FreeUpSpacePopUp.swift in Sources */,
 				CE784BFD22A685FB00662219 /* VisualMusicPlayerInteractor.swift in Sources */,
 				CE784BFE22A685FB00662219 /* BaseFilesGreedModuleOutput.swift in Sources */,
@@ -30138,6 +30229,7 @@
 				985D87E824D0156B004BCDFF /* PhotoEditViewController.swift in Sources */,
 				73E41D9622DDAFD100B036F4 /* TwoFactorAuthErrorResponse.swift in Sources */,
 				4BAF259322F8475100979F19 /* SegmentedControl.swift in Sources */,
+				894F719D2A94A4F80037FE89 /* PhotoPrintInitilizer.swift in Sources */,
 				CE784C2E22A685FB00662219 /* LBAlbumLikePreviewSliderRouterInput.swift in Sources */,
 				CE784C2F22A685FB00662219 /* PrepareQuickScroll.swift in Sources */,
 				52A5E016291A465D00670B0C /* SnackBarHeaderTwoLineView.swift in Sources */,
@@ -30183,6 +30275,7 @@
 				98C2984C2302B12900C9811E /* SpotifyCancelImportPopup.swift in Sources */,
 				B5632011254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */,
 				0765B82F269EE7430030429C /* APIResponse.swift in Sources */,
+				894F71662A9499160037FE89 /* PhotoPrintViewController.swift in Sources */,
 				CF71474524B597AA00D83E60 /* ContactSyncHelper.swift in Sources */,
 				CE784C4722A685FB00662219 /* ViewController.swift in Sources */,
 				CE784C4822A685FB00662219 /* AlbumDetailPresenter.swift in Sources */,
@@ -30251,6 +30344,7 @@
 				CE784C7422A685FB00662219 /* SuggestionTableViewCell.swift in Sources */,
 				CE784C7522A685FB00662219 /* ActivityTimelineViewInput.swift in Sources */,
 				CE784C7622A685FB00662219 /* ActivityTimelineViewOutput.swift in Sources */,
+				894F716B2A9499540037FE89 /* PhotoPrintViewInput.swift in Sources */,
 				F0571ED0288AE6F000A0D6AC /* ForYouInteractorOutput.swift in Sources */,
 				CF71473F24B597AA00D83E60 /* ContactSyncPopupFactory.swift in Sources */,
 				9809317C23952CAC00ECFEF8 /* PeopleAlbumsManager.swift in Sources */,
@@ -30271,6 +30365,7 @@
 				8C1E5BDC22CB8C0D008FDA02 /* PhotoVideoThreeDotMenuManager.swift in Sources */,
 				CE784C7F22A685FB00662219 /* CollageCard.swift in Sources */,
 				CE784C8022A685FB00662219 /* ActivityTimelineRouterInput.swift in Sources */,
+				894F71892A949B8A0037FE89 /* PhotoPrintInteractor.swift in Sources */,
 				98231AA324F3A23500FD16E2 /* RiseFilter.swift in Sources */,
 				CE784C8122A685FB00662219 /* ProfileTextEnterView.swift in Sources */,
 				893DD00B292B870A00271379 /* DiscoverConfigurator.swift in Sources */,
@@ -30282,6 +30377,7 @@
 				CE784C8622A685FB00662219 /* ManageContactsModuleOutput.swift in Sources */,
 				0780AB4727916820000760D9 /* ImageTextSelectionView.swift in Sources */,
 				CE784C8722A685FB00662219 /* ActivityTimelineConfigurator.swift in Sources */,
+				894F717F2A949B310037FE89 /* PhotoPrintRouter.swift in Sources */,
 				B55C97092559353800623C5C /* PrivateShareLocalSuggestionsViewController.swift in Sources */,
 				CE784C8822A685FB00662219 /* ActivityTimelineInitializer.swift in Sources */,
 				076BD1D127BC12E3004609E3 /* MapSearchViewInput.swift in Sources */,
@@ -30689,6 +30785,7 @@
 				07D42132274E4D0800061EA2 /* ItemAnnotationView.swift in Sources */,
 				CF8B647123CBC9D70021B021 /* HelpAndSupportRouterInput.swift in Sources */,
 				CF8B647223CBC9D70021B021 /* SmartAlbumCell.swift in Sources */,
+				894F71972A949D960037FE89 /* PhotoPrintConfigurator.swift in Sources */,
 				CF8B647323CBC9D70021B021 /* DarkPopUpController.swift in Sources */,
 				CF8B647423CBC9D70021B021 /* AutoSyncDataStorage.swift in Sources */,
 				0766316827CE951500AB4BC2 /* MapLocationDetailService.swift in Sources */,
@@ -30748,6 +30845,7 @@
 				CF8B649C23CBC9D70021B021 /* CardsContainerView.swift in Sources */,
 				CF8B649D23CBC9D70021B021 /* TermsDescriptionController.swift in Sources */,
 				CF38A86D257532620000994F /* PrivateShareDurationCell.swift in Sources */,
+				894F71742A9499B80037FE89 /* PhotoPrintPresenter.swift in Sources */,
 				F01244DA283AEC6000835B4E /* JWTTokenDecoder.swift in Sources */,
 				CF8B649E23CBC9D70021B021 /* InstagramParametrs.swift in Sources */,
 				CF8B649F23CBC9D70021B021 /* CameraService.swift in Sources */,
@@ -31074,6 +31172,7 @@
 				CF8B657B23CBC9D70021B021 /* TermsAndServicesInteractorOutput.swift in Sources */,
 				CF8B657C23CBC9D70021B021 /* TermsAndServicesInteractor.swift in Sources */,
 				CF8B657D23CBC9D70021B021 /* FaceImagePhotosRouter.swift in Sources */,
+				894F719C2A94A4F80037FE89 /* PhotoPrintInitilizer.swift in Sources */,
 				98B0478C259314740011DAEB /* Controller.m in Sources */,
 				CF8B657E23CBC9D70021B021 /* UploadFromLifeBoxViewIO.swift in Sources */,
 				CF8B657F23CBC9D70021B021 /* TermsAndServicesDataStorage.swift in Sources */,
@@ -31350,6 +31449,7 @@
 				CF8B663A23CBC9D70021B021 /* CreateStoryPhotoSelectionController.swift in Sources */,
 				CF8B663B23CBC9D70021B021 /* InstaPickDetailViewController.swift in Sources */,
 				730F8ABB23CDD58900798B61 /* MigrationModel_1_3.xcmappingmodel in Sources */,
+				894F718D2A949BA30037FE89 /* PhotoPrintInteractorInput.swift in Sources */,
 				5282AAF129E930900014FBCF /* ImageRetryService.swift in Sources */,
 				CF8B663C23CBC9D70021B021 /* TwoFactorChallengeInteractor.swift in Sources */,
 				98231A4724F3A23500FD16E2 /* WhisperFilter.swift in Sources */,
@@ -31369,6 +31469,7 @@
 				3A54C6EA264968DF00C2C8BD /* InvitationApiResponses.swift in Sources */,
 				CF8B664623CBC9D70021B021 /* UserProfileConfigurator.swift in Sources */,
 				CF8B664723CBC9D70021B021 /* ManageContactsModuleInput.swift in Sources */,
+				894F71792A9499EB0037FE89 /* PhotoPrintModuleInput.swift in Sources */,
 				CF8B664823CBC9D70021B021 /* LocalAlbumConfigurator.swift in Sources */,
 				98DBC0482410FB1900926F40 /* AutoSyncHeaderTableViewCell.swift in Sources */,
 				CF8B664923CBC9D70021B021 /* BasePopUpController.swift in Sources */,
@@ -31586,6 +31687,7 @@
 				07C50C4D28102E3C009617B9 /* NavigationHeaderButton.swift in Sources */,
 				CF8B66E523CBC9D70021B021 /* TwoFactorChallengeInitializer.swift in Sources */,
 				CF8B66E623CBC9D70021B021 /* URL+Path.swift in Sources */,
+				894F71922A949BB50037FE89 /* PhotoPrintInteractorOutput.swift in Sources */,
 				CF8B66E723CBC9D70021B021 /* PhotoVideoDetailInitializer.swift in Sources */,
 				0791818526F8B3B10067FB75 /* ResetPasswordServiceDelegate.swift in Sources */,
 				CF8B66E823CBC9D70021B021 /* LatestUpladsCard.swift in Sources */,
@@ -31615,6 +31717,7 @@
 				CF8B66FA23CBC9D70021B021 /* UserInfoSubViewConfigurator.swift in Sources */,
 				CF8B66FB23CBC9D70021B021 /* UserInfoSubViewInitializer.swift in Sources */,
 				CF8B66FC23CBC9D70021B021 /* VisualMusicPlayerRouterInput.swift in Sources */,
+				894F716A2A9499540037FE89 /* PhotoPrintViewInput.swift in Sources */,
 				CF8B66FD23CBC9D70021B021 /* PremiumFeaturesView.swift in Sources */,
 				078130A52808215F00E09172 /* HeaderContainingViewControllerChild.swift in Sources */,
 				F013FA6D27FF2804004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift in Sources */,
@@ -31657,6 +31760,7 @@
 				B585741324BDD90100A71EAD /* AnimatedCircularLoader.swift in Sources */,
 				CF8B671E23CBC9D70021B021 /* ProfileTextPickerView.swift in Sources */,
 				CF71458E24B4D02A00D83E60 /* OverlayStickerDownloadManager.swift in Sources */,
+				894F71882A949B8A0037FE89 /* PhotoPrintInteractor.swift in Sources */,
 				CF8B672123CBC9D70021B021 /* PrintModuleConfigurator.swift in Sources */,
 				CF8B672223CBC9D70021B021 /* MyStorageViewOutput.swift in Sources */,
 				CF8B672323CBC9D70021B021 /* RadialGradientableView.swift in Sources */,
@@ -31687,6 +31791,7 @@
 				CF8B673723CBC9D70021B021 /* ScrollDirectionManager.swift in Sources */,
 				CF8B673A23CBC9D70021B021 /* CampaignIntroView.swift in Sources */,
 				077D1D9D280568CD001C6E72 /* AppFont.swift in Sources */,
+				894F716F2A9499620037FE89 /* PhotoPrintViewOutput.swift in Sources */,
 				98B0477C259314740011DAEB /* UpdaterController.m in Sources */,
 				CF8B673C23CBC9D70021B021 /* SettingsViewInput.swift in Sources */,
 				CF8B673D23CBC9D70021B021 /* DropboxService.swift in Sources */,
@@ -31823,6 +31928,7 @@
 				CF8B679B23CBC9D70021B021 /* SearchViewRouterInput.swift in Sources */,
 				CF8B679C23CBC9D70021B021 /* FileInfoRouterInput.swift in Sources */,
 				CF8B679D23CBC9D70021B021 /* Double+Extensions.swift in Sources */,
+				894F71652A9499160037FE89 /* PhotoPrintViewController.swift in Sources */,
 				98B0487C259314750011DAEB /* ContactDevice.m in Sources */,
 				CF8B679E23CBC9D70021B021 /* SpotifySortingManager.swift in Sources */,
 				B59E1F8825921F0000640DD1 /* VideoSyncService.swift in Sources */,
@@ -32135,6 +32241,7 @@
 				07B5EBB8285089C000D3D242 /* ProgressTabBarCard.swift in Sources */,
 				CF8B686623CBC9D70021B021 /* ActivityTimelineModuleInput.swift in Sources */,
 				CF8B686723CBC9D70021B021 /* ActivityTimelinePresenter.swift in Sources */,
+				894F717E2A949B310037FE89 /* PhotoPrintRouter.swift in Sources */,
 				CF8B686823CBC9D70021B021 /* ActivityTimelineInteractorInput.swift in Sources */,
 				CF8B686A23CBC9D70021B021 /* ActivityTimelineInteractorOutput.swift in Sources */,
 				52EDD1AA299A68F800D549FC /* NotificationService.swift in Sources */,
@@ -32158,6 +32265,7 @@
 				982319D024F3A1E700FD16E2 /* AdjustmentCategoryCell.swift in Sources */,
 				CF8B687523CBC9D70021B021 /* UploadParametrs.swift in Sources */,
 				CF8B687623CBC9D70021B021 /* ImportFromDropboxPresenter.swift in Sources */,
+				894F71832A949B430037FE89 /* PhotoPrintRouterInput.swift in Sources */,
 				F0743DB828B428FA00CC1F24 /* AppColor.swift in Sources */,
 				CF01729623D00B9F00C0B0DE /* NetmeraCustomUser.swift in Sources */,
 				CF8B687723CBC9D70021B021 /* Alamofire+Request.swift in Sources */,
@@ -32595,11 +32703,13 @@
 				17FBD51E23FB2C6200979F39 /* DivorceActionService.swift in Sources */,
 				98B04799259314740011DAEB /* UpdateCheck.m in Sources */,
 				CF8B6C5B23CBCA280021B021 /* CollectionSortingRules.swift in Sources */,
+				894F71672A9499160037FE89 /* PhotoPrintViewController.swift in Sources */,
 				CF8B6C5D23CBCA280021B021 /* MusicViewController.swift in Sources */,
 				07E8469D27C104C400B3AFA5 /* ItemGroupAnnotationView.swift in Sources */,
 				CF8B6C5E23CBCA280021B021 /* SegmentedController.swift in Sources */,
 				CF8B6C5F23CBCA280021B021 /* TBMatikPhotosViewController.swift in Sources */,
 				CF8B6C6023CBCA280021B021 /* BottomSelectionTabBarPresenter.swift in Sources */,
+				894F71942A949BB50037FE89 /* PhotoPrintInteractorOutput.swift in Sources */,
 				CF8B6C6123CBCA280021B021 /* FaceImageChangeCoverViewController.swift in Sources */,
 				07E7A6942859FC0C005BBD4C /* AlertFilesActionView.swift in Sources */,
 				B59E1F7925921F0000640DD1 /* SyncServiceManager.swift in Sources */,
@@ -32646,6 +32756,7 @@
 				07C50C4F28102E3C009617B9 /* NavigationHeaderButton.swift in Sources */,
 				CF8B6C7F23CBCA280021B021 /* ResponseParser.swift in Sources */,
 				CF8B6C8023CBCA280021B021 /* MyStorageViewInput.swift in Sources */,
+				894F717B2A9499EB0037FE89 /* PhotoPrintModuleInput.swift in Sources */,
 				CF8B6C8123CBCA280021B021 /* String+Int.swift in Sources */,
 				9808B39C2553EE4E002B0032 /* PrivateShareSelectPeopleView.swift in Sources */,
 				07C759E92819369200B028F0 /* Image.swift in Sources */,
@@ -32793,6 +32904,7 @@
 				52501E7929952A2D0000376C /* NotificationViewOutput.swift in Sources */,
 				CF8B6CE323CBCA280021B021 /* ResponseResult.swift in Sources */,
 				CF8B6CE423CBCA280021B021 /* TBMatikCard.swift in Sources */,
+				894F71802A949B310037FE89 /* PhotoPrintRouter.swift in Sources */,
 				CF8B6CE523CBCA280021B021 /* FreeAppSpaceInitializer.swift in Sources */,
 				982319EB24F3A1E700FD16E2 /* PhotoEditNavbar.swift in Sources */,
 				CF8B6CE623CBCA280021B021 /* CoreTelephonyService.swift in Sources */,
@@ -32849,6 +32961,7 @@
 				CF8B6D0A23CBCA280021B021 /* AugmentedRealityFileProvider.swift in Sources */,
 				CF8B6D0B23CBCA280021B021 /* StoriesInteractor.swift in Sources */,
 				CF8B6D0D23CBCA280021B021 /* FaceImageItemsDataSource.swift in Sources */,
+				894F718F2A949BA30037FE89 /* PhotoPrintInteractorInput.swift in Sources */,
 				CF8B6D0E23CBCA280021B021 /* RegistrationModuleInput.swift in Sources */,
 				07CCBF7C26FC7254002322B0 /* ValidateSecurityQuestionViewController.swift in Sources */,
 				CF8B6D0F23CBCA280021B021 /* PremiumInfoCard.swift in Sources */,
@@ -32878,6 +32991,7 @@
 				CF8B6D2223CBCA280021B021 /* VisualMusicPlayerPresenter.swift in Sources */,
 				CF8B6D2323CBCA280021B021 /* IntrinsicTextView.swift in Sources */,
 				CF8B6D2423CBCA280021B021 /* SpotifyStatusView.swift in Sources */,
+				894F719E2A94A4F80037FE89 /* PhotoPrintInitilizer.swift in Sources */,
 				CF8B6D2523CBCA280021B021 /* AuthenticationServiceResponse.swift in Sources */,
 				98231A9E24F3A23500FD16E2 /* ClarendonFilter.swift in Sources */,
 				07D0594226F9BE83005315E2 /* ResetPasswordOTPConfigurator.swift in Sources */,
@@ -33436,6 +33550,7 @@
 				B5D42C28254C00B7002E4997 /* DocumentDownloadOperation.swift in Sources */,
 				CF8B6E9E23CBCA280021B021 /* PeriodContactsSyncModel.swift in Sources */,
 				CF8B6E9F23CBCA280021B021 /* InstaPickCampaignService.swift in Sources */,
+				894F716C2A9499540037FE89 /* PhotoPrintViewInput.swift in Sources */,
 				CF8B6EA023CBCA280021B021 /* PhotoVideoSegmentedController.swift in Sources */,
 				CF71461A24B597A800D83E60 /* ContactDetailHeader.swift in Sources */,
 				CF8B6EA223CBCA280021B021 /* BottomSelectionTabBarModuleInput.swift in Sources */,
@@ -33528,6 +33643,7 @@
 				0309F94123D57F3C001DB5FA /* NetmeraEvents.swift in Sources */,
 				CF8B6EEE23CBCA280021B021 /* ConnectedAccountsViewController.swift in Sources */,
 				F028C1172789F342005CE6AF /* PublicShareModuleInput.swift in Sources */,
+				894F71852A949B430037FE89 /* PhotoPrintRouterInput.swift in Sources */,
 				07C6D4CD2848D80500502C28 /* TabBarCardsContainer.swift in Sources */,
 				0305A32923D5C3BF004D1EC7 /* HiddenPhotosThreeDotMenuManager.swift in Sources */,
 				0780AB6727916846000760D9 /* TextRecognitionProcessor.swift in Sources */,
@@ -33716,6 +33832,7 @@
 				CF8B6F6923CBCA280021B021 /* LeavePremiumViewOutput.swift in Sources */,
 				CF8B6F6A23CBCA280021B021 /* FileInfoInitializer.swift in Sources */,
 				CF8B6F6B23CBCA280021B021 /* UsageInfoViewInput.swift in Sources */,
+				894F718A2A949B8A0037FE89 /* PhotoPrintInteractor.swift in Sources */,
 				CF8B6F6C23CBCA280021B021 /* FaceImageItemsRouterInput.swift in Sources */,
 				CF8B6F6E23CBCA280021B021 /* SpotifyResponse.swift in Sources */,
 				CF8B6F7023CBCA280021B021 /* PeriodicContactsSyncSettingsModel.swift in Sources */,
@@ -33780,6 +33897,7 @@
 				CF8B6F9B23CBCA280021B021 /* UIBarButtonItem+Extensions.swift in Sources */,
 				CF8B6F9C23CBCA280021B021 /* PackagesViewInput.swift in Sources */,
 				CF8B6F9D23CBCA280021B021 /* SelectNameViewOutput.swift in Sources */,
+				894F71762A9499B80037FE89 /* PhotoPrintPresenter.swift in Sources */,
 				076BD19627BBBD30004609E3 /* MapSearchInitializer.swift in Sources */,
 				0305A33223D5C477004D1EC7 /* SmashService.swift in Sources */,
 				CF8B6F9E23CBCA280021B021 /* SelectNameViewController.swift in Sources */,
@@ -33830,6 +33948,7 @@
 				CF8B6FBA23CBCA280021B021 /* InstaPickSmallPhotoView.swift in Sources */,
 				CF01729923D00B9F00C0B0DE /* NetmeraCustomUser.swift in Sources */,
 				9862BC50255E832C00D7945E /* FileInfoShareView.swift in Sources */,
+				894F71992A949D960037FE89 /* PhotoPrintConfigurator.swift in Sources */,
 				CF71471C24B597AA00D83E60 /* ContactListSectionHeader.swift in Sources */,
 				CF8B6FBB23CBCA280021B021 /* PhotoVideoScrollBarManager.swift in Sources */,
 				F028C1262789F43B005CE6AF /* PublicShareRouterInput.swift in Sources */,
@@ -33868,6 +33987,7 @@
 				CF8B6FD423CBCA280021B021 /* MoreFilesActionsInteractorInput.swift in Sources */,
 				CF8B6FD523CBCA280021B021 /* LBAlbumLikePreviewSliderConfigurator.swift in Sources */,
 				CF8B6FD623CBCA280021B021 /* URL+Video.swift in Sources */,
+				894F71712A9499620037FE89 /* PhotoPrintViewOutput.swift in Sources */,
 				CF8B6FD723CBCA280021B021 /* GalleryCollectionViewLayout.swift in Sources */,
 				F0571EA4288AE33700A0D6AC /* ForYouViewController.swift in Sources */,
 				CF8B6FD823CBCA280021B021 /* PremiumService.swift in Sources */,
