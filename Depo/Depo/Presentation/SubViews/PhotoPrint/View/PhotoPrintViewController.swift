@@ -180,16 +180,7 @@ final class PhotoPrintViewController: BaseViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        for index in 0..<selectedPhotos.count - 1 {
-            let stackView = contentView.subviews[0].subviews[index]
-            let separator = UILabel(frame: CGRect(x: 0, y: stackView.frame.maxY + 30.0, width: view.frame.size.width, height: 1))
-            separator.backgroundColor = AppColor.borderLightGray.color
-            contentView.addSubview(separator)
-        }
-        let stackView = contentView.subviews[0].subviews[selectedPhotos.count - 1]
-        let separator = UILabel(frame: CGRect(x: 0, y: stackView.frame.maxY + 30.0, width: view.frame.size.width, height: 1))
-        separator.backgroundColor = AppColor.borderLightGray.color
-        contentView.addSubview(separator)
+        addSeparatorToContentView()
     }
     
     @objc func addButtonTapped(sender: UIButton) {
@@ -213,8 +204,34 @@ final class PhotoPrintViewController: BaseViewController {
         if count > minCount {
             countLabel?.text = String((count) - 1)
         }
+        
         if count == 1 {
-            print("silmek istediğinizden emin misiniz")
+            
+            let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
+                                                  message: "Fotoğraf kaldırılacak ve düzenlemeler kaybedilecektir",
+                                                  image: .delete,
+                                                  firstButtonTitle: TextConstants.cancel,
+                                                  secondButtonTitle: TextConstants.ok,
+                                                  secondAction: { vc in
+                vc.close(completion: {
+                    if self.selectedPhotos.count > 1 {
+                        let imageView = self.getView(tag: sender.tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as? UIImageView
+                        if self.getImageSize(image: (imageView?.image)!) < CGFloat(self.badQuailtySize) {
+                            self.lowQualityPhotosCount -= 1
+                        }
+                        let view = self.stackMainView.arrangedSubviews[sender.tag]
+                        self.stackMainView.removeArrangedSubview(view)
+                        self.view.removeFromSuperview()
+                        self.selectedPhotos.remove(at: sender.tag)
+                        self.showSpinner()
+                        self.setViewTag()
+                    } else {
+                        print("aaaaaaa geri dön")
+                    }
+                })
+            })
+            
+            controller.open()
         }
         addRemoveContentContainerView(isAdd: totalPhotoCount() != 5, photoCount: totalPhotoCount())
         nextButtonEnabled()
@@ -337,6 +354,52 @@ final class PhotoPrintViewController: BaseViewController {
             nextButton.isUserInteractionEnabled = false
         }
     }
+    
+    func setViewTag() {
+        for index in 0..<selectedPhotos.count {
+            getView(tag: index, layerName: Subviews.countTitleLabel.layerName).tag = index
+            getView(tag: index, layerName: Subviews.titleLabel.layerName).tag = index
+            getView(tag: index, layerName: Subviews.addDeleteContainer.layerName).tag = index
+            getView(tag: index, layerName: Subviews.addDeleteContainer.layerName).subviews[0].tag = index
+            getView(tag: index, layerName: Subviews.addDeleteContainer.layerName).subviews[1].tag = index
+            getView(tag: index, layerName: Subviews.addDeleteContainer.layerName).subviews[2].tag = index
+            getView(tag: index, layerName: Subviews.rotateButton.layerName).tag = index
+            getView(tag: index, layerName: Subviews.imageContainerView.layerName).tag = index
+            getView(tag: index, layerName: Subviews.imageContainerView.layerName).subviews[0].tag = index
+            getView(tag: index, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0].tag = index
+            getView(tag: index, layerName: Subviews.infoIcon.layerName).tag = index
+            getView(tag: index, layerName: Subviews.infoLabel.layerName).tag = index
+            getView(tag: index, layerName: Subviews.checkButton.layerName).tag = index
+            getView(tag: index, layerName: Subviews.checkLabel.layerName).tag = index
+            getView(tag: index, layerName: Subviews.newPhotoIcon.layerName).tag = index
+            getView(tag: index, layerName: Subviews.newPhotoLabel.layerName).tag = index
+            getView(tag: index, layerName: Subviews.contentContainerView.layerName).tag = index
+        }
+        
+        for view in contentView.subviews {
+            if view is UILabel {
+                view.removeFromSuperview()
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.addSeparatorToContentView()
+            self.hideSpinner()
+        }
+    }
+    
+    private func addSeparatorToContentView() {
+        for index in 0..<selectedPhotos.count - 1 {
+            let stackView = contentView.subviews[0].subviews[index]
+            let separator = UILabel(frame: CGRect(x: 0, y: stackView.frame.maxY + 30.0, width: view.frame.size.width, height: 1))
+            separator.backgroundColor = AppColor.borderLightGray.color
+            contentView.addSubview(separator)
+        }
+        let stackView = contentView.subviews[0].subviews[selectedPhotos.count - 1]
+        let separator = UILabel(frame: CGRect(x: 0, y: stackView.frame.maxY + 30.0, width: view.frame.size.width, height: 1))
+        separator.backgroundColor = AppColor.borderLightGray.color
+        contentView.addSubview(separator)
+    }
 }
 
 extension PhotoPrintViewController: UIGestureRecognizerDelegate {
@@ -454,11 +517,11 @@ extension PhotoPrintViewController {
             contentContainerView.addSubview(contentCheckLabel)
             contentCheckLabel.topAnchor.constraint(equalTo: contentContainerView.topAnchor).isActive = true
             contentCheckLabel.leadingAnchor.constraint(equalTo: contentCheckButton.trailingAnchor, constant: 8).isActive = true
-            contentCheckLabel.trailingAnchor.constraint(equalTo: contentContainerView.trailingAnchor).isActive = true
+            contentCheckLabel.trailingAnchor.constraint(equalTo: contentContainerView.trailingAnchor, constant: -24).isActive = true
             
             contentCheckButton.setImage(Image.iconPrintSelectEmpty.image, for: .normal)
             photoCount < 5 ? contentCheckButton.setImage(Image.iconPrintSelectEmpty.image, for: .normal) : contentCheckButton.setImage(Image.iconPrintInfoRed.image, for: .normal)
-            contentCheckLabel.text = photoCount < 5 ? String(format: localized(.morePhotoRight), maxSelectablePhoto - selectedPhotos.count) : String(format: localized(.noMorePhotoRight), maxSelectablePhoto)
+            contentCheckLabel.text = photoCount < 5 ? String(format: localized(.morePhotoRight), maxSelectablePhoto - photoCount) : String(format: localized(.noMorePhotoRight), maxSelectablePhoto)
             contentCheckLabel.textColor = photoCount < 5 ? AppColor.label.color : AppColor.forgetPassTextRed.color
             contentViewIsHaveCheckBox = true
             stackMainView.setCustomSpacing(16, after: stackMainView.subviews[selectedPhotos.count])
