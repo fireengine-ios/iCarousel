@@ -116,9 +116,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         }
         
         canNotificationPopupRaiseUp()
-        
-        let vc = router.photoPrintSelectPhotos()
-        router.pushViewController(viewController: vc, animated: false)
     }
     
     private func canNotificationPopupRaiseUp() {

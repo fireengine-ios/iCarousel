@@ -153,12 +153,13 @@ final class PhotoPrintSelectionSegmentedController: BaseViewController, ErrorPre
         switch photoSelectType {
         case .newPhotoSelection:
             if selectedItems.count > 0 &&  selectedItems.count != selectablePhotoCount{
-                let vc = PhotoPrintMissingPhotoPopup.with(selectedPhotoCount: selectedItems.count)
+                let vc = PhotoPrintMissingPhotoPopup.with(selectedPhotoCount: selectedItems.count, selectedPhotos: selectedItems)
                 vc.openWithBlur()
             }
             if selectedItems.count == selectablePhotoCount {
                 dismiss(animated: true, completion: {
-                    // go to photo print preview controller
+                    let vc = self.router.photoPrintViewController(selectedPhotos: self.selectedItems)
+                    self.router.pushViewController(viewController: vc)
                 })
             }
         case .changePhotoSelection:

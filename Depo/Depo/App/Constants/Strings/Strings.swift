@@ -286,4 +286,6 @@ enum Strings: String, Localizable {
     case printedPhotoCardBodyNoRight = "printed_photo_card_body_no_right"
     case printedPhotoCardInfoNoRight = "printed_photo_card_info_no_right"
     case printedPackageView = "printed_package_view"
+    case morePhotoRight = "more_photo_right"
+    case noMorePhotoRight = "no_more_photo_right"
 }

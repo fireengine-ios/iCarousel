@@ -68,6 +68,7 @@ final class PhotoPrintMissingPhotoPopup: BasePopUpController {
         }
     }
 
+    private var selectedPhotos = [SearchItemResponse]()
     private var selectedPhotoCount: Int = 0
     private var unSelectedPhotoCount: Int = 0
     private let router = RouterVC()
@@ -86,7 +87,7 @@ final class PhotoPrintMissingPhotoPopup: BasePopUpController {
     
     @IBAction func nextButtonTapped(_ sender: Any) {
         dismiss(animated: false, completion: {
-            let vc = self.router.photoPrintViewController()
+            let vc = self.router.photoPrintViewController(selectedPhotos: self.selectedPhotos)
             self.router.pushViewController(viewController: vc)
         })
     }
@@ -99,27 +100,27 @@ final class PhotoPrintMissingPhotoPopup: BasePopUpController {
         dismiss(animated: true)
     }
     
-    private func photoCount(selectedPhotoCount: Int) {
+    private func photoCount(selectedPhotoCount: Int, selectedPhotos: [SearchItemResponse]) {
         let selectablePhotoCount: Int = NumericConstants.photoPrintSelectablePhoto
         self.selectedPhotoCount = selectedPhotoCount
         self.unSelectedPhotoCount = selectablePhotoCount - selectedPhotoCount
-        
+        self.selectedPhotos = selectedPhotos
     }
     
 }
 
 // MARK: - Init
 extension PhotoPrintMissingPhotoPopup {
-    static func with(selectedPhotoCount: Int) -> PhotoPrintMissingPhotoPopup {
-        let vc = controllerWith(selectedPhotoCount: selectedPhotoCount)
+    static func with(selectedPhotoCount: Int, selectedPhotos: [SearchItemResponse]) -> PhotoPrintMissingPhotoPopup {
+        let vc = controllerWith(selectedPhotoCount: selectedPhotoCount, selectedPhotos: selectedPhotos)
         return vc
     }
     
-    private static func controllerWith(selectedPhotoCount: Int) -> PhotoPrintMissingPhotoPopup {
+    private static func controllerWith(selectedPhotoCount: Int, selectedPhotos: [SearchItemResponse]) -> PhotoPrintMissingPhotoPopup {
         let vc = PhotoPrintMissingPhotoPopup(nibName: "PhotoPrintMissingPhotoPopup", bundle: nil)
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overFullScreen
-        vc.photoCount(selectedPhotoCount: selectedPhotoCount)
+        vc.photoCount(selectedPhotoCount: selectedPhotoCount, selectedPhotos: selectedPhotos)
         return vc
     }
 }

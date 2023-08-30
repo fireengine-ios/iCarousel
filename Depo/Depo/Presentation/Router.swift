@@ -1164,8 +1164,8 @@ class RouterVC: NSObject {
     
     // MARK: - PhotoPrint Template
     
-    func photoPrintViewController() -> PhotoPrintViewController {
-        return PhotoPrintInitilizer.initializeViewController()
+    func photoPrintViewController(selectedPhotos: [SearchItemResponse]) -> PhotoPrintViewController {
+        return PhotoPrintInitilizer.initializeViewController(selectedPhotos: selectedPhotos)
     }
     
     func photoPrintSelectPhotos()  -> PhotoPrintSelectionSegmentedController {

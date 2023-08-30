@@ -52,12 +52,6 @@ enum Subviews {
     }
 }
 
-struct animal {
-    var name: String
-    var image: UIImage
-}
-
-
 final class PhotoPrintViewController: BaseViewController {
     
     private var containerScrollView: UIScrollView = {
@@ -120,14 +114,8 @@ final class PhotoPrintViewController: BaseViewController {
         return view
     }()
     
-    var animals = [animal(name: "Horse", image: UIImage(named: "createCollageThumbnail")!),
-                   animal(name: "Camel", image: UIImage(named: "createCollageThumbnail")!),
-                   animal(name: "Horse", image: UIImage(named: "createCollageThumbnail")!),
-                   animal(name: "Cow", image: UIImage(named: "createCollageThumbnail")!),
-                   //animal(name: "Horse", image: UIImage(named: "createCollageThumbnail")!)
-                   ]
     private var lowQualityPhotosCount: Int = 0
-    private var maxCount: Int = 5
+    private var maxSelectablePhoto: Int = 5
     private var badQuailtySize: Int = 3
     private var contentViewIsHaveCheckBox: Bool = false
     private var isContentCheckBoxChecked: Bool = false
@@ -139,6 +127,15 @@ final class PhotoPrintViewController: BaseViewController {
     private var selectedPhotos = [SearchItemResponse]()
     var output: PhotoPrintViewOutput!
     
+    init(selectedPhotos: [SearchItemResponse]) {
+        self.selectedPhotos = selectedPhotos
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         debugLog("PhotoPrintViewController viewDidLoad")
@@ -147,28 +144,49 @@ final class PhotoPrintViewController: BaseViewController {
         view.backgroundColor = AppColor.background.color
         setLayout()
         
-        for i in 0..<animals.count {
-            let view = createView(animal: animals[i], index: i)
+        for index in 0..<selectedPhotos.count {
+            let view = createView(selectedPhotos: selectedPhotos[index], index: index)
             stackMainView.addArrangedSubview(view)
-            setHidden(image: animals[i].image, tag: i)
-            setImageReplace(tag: i, image: animals[i].image)
             view.leadingAnchor.constraint(equalTo: stackMainView.leadingAnchor, constant: 0).isActive = true
         }
         
-        stackMainView.setCustomSpacing(32, after: stackMainView.subviews[animals.count - 1])
+        for index in 0..<selectedPhotos.count {
+            showSpinner()
+            let imageUrl = selectedPhotos[index].metadata?.largeUrl
+            let imageView = getView(tag: index, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as! UIImageView
+            imageView.sd_setImage(with: imageUrl) { [weak self] (image, error, cache, url) in
+                if error != nil {
+                    self?.hideSpinner()
+                    UIApplication.showErrorAlert(message: error?.localizedDescription ?? "", closed: {
+                        let router = RouterVC()
+                        router.popViewController()
+                    })
+                } else {
+                    self?.setHidden(image: image!, tag: index)
+                    self?.setImageReplace(tag: index, image: image!)
+                    self?.imageSizeArray.append(image!.size)
+                    if (self?.selectedPhotos.count ?? 1) - 1 == index {
+                        self?.nextButtonEnabled()
+                        self?.hideSpinner()
+                    }
+                }
+            }
+        }
+        
+        stackMainView.setCustomSpacing(32, after: stackMainView.subviews[selectedPhotos.count - 1])
         setLayoutSecondary()
-        nextButtonEnabled()
+        
         addRemoveContentContainerView(isAdd: totalPhotoCount() != 5, photoCount: totalPhotoCount())
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        for i in 0..<animals.count - 1 {
-            let stackView = contentView.subviews[0].subviews[i]
+        for index in 0..<selectedPhotos.count - 1 {
+            let stackView = contentView.subviews[0].subviews[index]
             let separator = UILabel(frame: CGRect(x: 0, y: stackView.frame.maxY + 30.0, width: view.frame.size.width, height: 1))
             separator.backgroundColor = AppColor.borderLightGray.color
             contentView.addSubview(separator)
         }
-        let stackView = contentView.subviews[0].subviews[animals.count - 1]
+        let stackView = contentView.subviews[0].subviews[selectedPhotos.count - 1]
         let separator = UILabel(frame: CGRect(x: 0, y: stackView.frame.maxY + 30.0, width: view.frame.size.width, height: 1))
         separator.backgroundColor = AppColor.borderLightGray.color
         contentView.addSubview(separator)
@@ -179,7 +197,7 @@ final class PhotoPrintViewController: BaseViewController {
         let countLabel = view.subviews[1] as? UILabel
 
         let count = Int(countLabel?.text ?? "0") ?? 0
-        if count < maxCount {
+        if count < maxSelectablePhoto {
             countLabel?.text = String((count) + 1)
         }
         addRemoveContentContainerView(isAdd: totalPhotoCount() != 5, photoCount: totalPhotoCount())
@@ -260,7 +278,7 @@ final class PhotoPrintViewController: BaseViewController {
         let newPhotoIcon = getView(tag: tag, layerName: Subviews.newPhotoIcon.layerName)
         let newPhotoLabel = getView(tag: tag, layerName: Subviews.newPhotoLabel.layerName)
         
-        if getImageSize(image: image) < 0.2 {
+        if getImageSize(image: image) < CGFloat(badQuailtySize) {
             lowQualityPhotosCount += 1
             (infoLabel as? UILabel)?.text = String(format: localized(.printPhotoBadQualityInfo), badQuailtySize)
             (infoLabel as? UILabel)?.textColor = AppColor.forgetPassTextRed.color
@@ -297,7 +315,7 @@ final class PhotoPrintViewController: BaseViewController {
     
     private func totalPhotoCount() -> Int {
         var photoCount: Int = 0
-        for(index, _) in animals.enumerated() {
+        for(index, _) in selectedPhotos.enumerated() {
             let countLabel = getView(tag: index, layerName: Subviews.addDeleteContainer.layerName).subviews[1] as? UILabel
             photoCount += Int(countLabel?.text ?? "0") ?? 0
         }
@@ -362,8 +380,8 @@ extension PhotoPrintViewController: UIGestureRecognizerDelegate {
             let scrollContentSizeHeight = scrollView.contentSize.height
             let imageWidth = imageView.frame.width
             let imageHeight = imageView.frame.height
-            let bottom = scrollContentSizeHeight - imageHeight
-            let right = scrollContentSizeWidth - imageWidth
+            let _ = scrollContentSizeHeight - imageHeight
+            let _ = scrollContentSizeWidth - imageWidth
             var bottom1 = Double()
             var right1 = Double()
             
@@ -440,10 +458,10 @@ extension PhotoPrintViewController {
             
             contentCheckButton.setImage(Image.iconPrintSelectEmpty.image, for: .normal)
             photoCount < 5 ? contentCheckButton.setImage(Image.iconPrintSelectEmpty.image, for: .normal) : contentCheckButton.setImage(Image.iconPrintInfoRed.image, for: .normal)
-            contentCheckLabel.text = photoCount < 5 ? "2 fotoğraf gönderme hakkın daha var, Devam etmek istediğine emin misin?" : "5’ten fazla fotoğraf seçtin. Devam edebilmek için azaltın."
+            contentCheckLabel.text = photoCount < 5 ? String(format: localized(.morePhotoRight), maxSelectablePhoto - selectedPhotos.count) : String(format: localized(.noMorePhotoRight), maxSelectablePhoto)
             contentCheckLabel.textColor = photoCount < 5 ? AppColor.label.color : AppColor.forgetPassTextRed.color
             contentViewIsHaveCheckBox = true
-            stackMainView.setCustomSpacing(16, after: stackMainView.subviews[animals.count])
+            stackMainView.setCustomSpacing(16, after: stackMainView.subviews[selectedPhotos.count])
         } else {
             contentViewIsHaveCheckBox = false
             isContentCheckBoxChecked = false
@@ -458,7 +476,7 @@ extension PhotoPrintViewController {
 }
 
 extension PhotoPrintViewController {
-    func createView(animal: animal, index: Int) -> UIView {
+    func createView(selectedPhotos: SearchItemResponse, index: Int) -> UIView {
         
         lazy var containerView: UIView = {
             let view = UIView()
@@ -494,7 +512,7 @@ extension PhotoPrintViewController {
             view.textAlignment = .left
             view.lineBreakMode = .byWordWrapping
             view.backgroundColor = AppColor.background.color
-            view.text = animal.name
+            view.text = selectedPhotos.name
             view.layer.name = Subviews.titleLabel.layerName
             view.tag = index
             return view
@@ -578,11 +596,9 @@ extension PhotoPrintViewController {
             pinchGesture.delegate = self
             view.addGestureRecognizer(pinchGesture)
             view.layer.cornerRadius = 8
-            view.image = animal.image
             view.contentMode = .scaleAspectFit
             view.layer.name = "printImageView"
             view.tag = index
-            imageSizeArray.append(view.image!.size)
             return view
         }()
         
@@ -742,6 +758,7 @@ extension PhotoPrintViewController {
         infoLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10).isActive = false
         infoLabel.leadingAnchor.constraint(equalTo: infoIcon.trailingAnchor, constant: 8).isActive = true
         infoLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16).isActive = true
+        infoLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 20).isActive = true
         
         containerView.addSubview(checkButton)
         checkButton.translatesAutoresizingMaskIntoConstraints = false

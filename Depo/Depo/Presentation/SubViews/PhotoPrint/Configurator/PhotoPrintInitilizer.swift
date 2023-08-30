@@ -10,8 +10,8 @@ import Foundation
 
 class PhotoPrintInitilizer: NSObject {
     
-    class func initializeViewController() -> PhotoPrintViewController {
-        let viewController = PhotoPrintViewController()
+    class func initializeViewController(selectedPhotos: [SearchItemResponse]) -> PhotoPrintViewController {
+        let viewController = PhotoPrintViewController(selectedPhotos: selectedPhotos)
         let configurator = PhotoPrintConfigurator()
         configurator.configure(viewController: viewController)
         return viewController

@@ -2180,3 +2180,5 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "printed_package_view" = "Baskı paketlerimi gör.";
+"more_photo_right" = "%d fotoğraf gönderme hakkın daha var. Devam etmek istediğine emin misin?";
+"no_more_photo_right" = "%d’ten fazla fotoğraf seçtin. Devam edebilmek için azaltın.";
