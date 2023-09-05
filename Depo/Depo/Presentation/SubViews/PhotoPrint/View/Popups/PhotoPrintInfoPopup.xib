@@ -21,7 +21,7 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" misplaced="YES" id="Wn2-bc-Ygi">
+        <view contentMode="scaleToFill" id="Wn2-bc-Ygi">
             <rect key="frame" x="0.0" y="0.0" width="532" height="335"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -103,10 +103,10 @@
                 <constraint firstItem="SOi-oH-daY" firstAttribute="top" secondItem="CDt-gc-d5A" secondAttribute="bottom" constant="24" id="dgK-eO-N0G"/>
                 <constraint firstItem="wBh-cU-q5u" firstAttribute="trailing" secondItem="CDt-gc-d5A" secondAttribute="trailing" constant="20" id="dgN-4k-d1f"/>
                 <constraint firstItem="Aft-xQ-cAy" firstAttribute="top" secondItem="Wn2-bc-Ygi" secondAttribute="top" constant="16" id="gEh-p4-rdO"/>
-                <constraint firstItem="SOi-oH-daY" firstAttribute="bottom" secondItem="wBh-cU-q5u" secondAttribute="bottom" id="kKA-lK-dq3"/>
                 <constraint firstItem="wBh-cU-q5u" firstAttribute="trailing" secondItem="Xzp-jD-wEu" secondAttribute="trailing" constant="20" id="kQO-JL-v2v"/>
                 <constraint firstItem="CDt-gc-d5A" firstAttribute="leading" secondItem="wBh-cU-q5u" secondAttribute="leading" constant="20" id="mzh-aG-f2D"/>
                 <constraint firstItem="SOi-oH-daY" firstAttribute="centerX" secondItem="wBh-cU-q5u" secondAttribute="centerX" id="oDM-HM-cWf"/>
+                <constraint firstAttribute="bottom" secondItem="SOi-oH-daY" secondAttribute="bottom" constant="25" id="wiA-8M-Mgw"/>
                 <constraint firstItem="wBh-cU-q5u" firstAttribute="trailing" secondItem="Vxy-D6-RgW" secondAttribute="trailing" constant="28" id="z8r-4g-wWr"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
