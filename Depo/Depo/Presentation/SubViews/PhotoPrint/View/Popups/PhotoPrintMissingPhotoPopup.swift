@@ -39,6 +39,8 @@ final class PhotoPrintMissingPhotoPopup: BasePopUpController {
             newValue.textColor = AppColor.label.color
             newValue.text = localized(.printMissingPhotoPopupSubtitle)
             newValue.numberOfLines = 3
+            newValue.sizeToFit()
+            newValue.adjustsFontSizeToFitWidth = true
         }
     }
     
