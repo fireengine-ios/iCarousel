@@ -21,6 +21,7 @@ enum Subviews {
     case newPhotoIcon
     case newPhotoLabel
     case contentContainerView
+    case containerView
     
     var layerName: String {
         switch self {
@@ -48,6 +49,8 @@ enum Subviews {
             return "newPhotoLabel"
         case .contentContainerView:
             return "contentContainerView"
+        case .containerView:
+            return "containerView"
         }
     }
 }
@@ -125,6 +128,9 @@ final class PhotoPrintViewController: BaseViewController {
     private var afterMinPinch = 0
     private var imageSizeArray = [CGSize]()
     private var selectedPhotos = [SearchItemResponse]()
+    private var photoSelectType = PrintPhotoSelectType.newPhotoSelection
+    private var selectedPhotoIndex: Int = 0
+    private let router = PhotoPrintRouter()
     var output: PhotoPrintViewOutput!
     
     init(selectedPhotos: [SearchItemResponse]) {
@@ -175,15 +181,42 @@ final class PhotoPrintViewController: BaseViewController {
         
         stackMainView.setCustomSpacing(32, after: stackMainView.subviews[selectedPhotos.count - 1])
         setLayoutSecondary()
-        
         addRemoveContentContainerView(isAdd: totalPhotoCount() != 5, photoCount: totalPhotoCount())
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        addSeparatorToContentView()
+        
+        switch photoSelectType {
+        case .newPhotoSelection:
+            setViewTag()
+        case .changePhotoSelection:
+            showSpinner()
+            let newSelectedPhotos = PhotoPrintConstants.selectedChangePhotoItems 
+            let imageView = getView(tag: selectedPhotoIndex, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as? UIImageView
+            
+            let imageUrl = newSelectedPhotos[0].metadata?.largeUrl
+            imageView?.sd_setImage(with: imageUrl) { [weak self] (image, error, cache, url) in
+                if error != nil {
+                    self?.hideSpinner()
+                    UIApplication.showErrorAlert(message: error?.localizedDescription ?? "", closed: {
+                        
+                    })
+                } else {
+                    self?.setHidden(image: image!, tag: self!.selectedPhotoIndex)
+                    self?.setImageReplace(tag: self!.selectedPhotoIndex, image: image!)
+                    self?.imageSizeArray.insert(image!.size, at: self!.selectedPhotoIndex)
+                    self?.nextButtonEnabled()
+                    self?.setViewTag()
+                    print("aaaaaaa \(self?.totalPhotoCount())")
+                    self?.addRemoveContentContainerView(isAdd: self?.totalPhotoCount() != 5, photoCount: (self?.totalPhotoCount())!)
+                    self?.nextButtonEnabled()
+                }
+            }
+        }
+        
     }
     
-    @objc func addButtonTapped(sender: UIButton) {
+    @objc private func addButtonTapped(sender: UIButton) {
         let view = getView(tag: sender.tag, layerName: Subviews.addDeleteContainer.layerName)
         let countLabel = view.subviews[1] as? UILabel
 
@@ -195,7 +228,7 @@ final class PhotoPrintViewController: BaseViewController {
         nextButtonEnabled()
     }
     
-    @objc func deleteButtonTapped(sender: UIButton) {
+    @objc private func deleteButtonTapped(sender: UIButton) {
         let minCount = 1
         let view = getView(tag: sender.tag, layerName: Subviews.addDeleteContainer.layerName)
         let countLabel = view.subviews[1] as? UILabel
@@ -216,13 +249,12 @@ final class PhotoPrintViewController: BaseViewController {
                 vc.close(completion: {
                     if self.selectedPhotos.count > 1 {
                         let imageView = self.getView(tag: sender.tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as? UIImageView
-                        if self.getImageSize(image: (imageView?.image)!) < CGFloat(self.badQuailtySize) {
-                            self.lowQualityPhotosCount -= 1
-                        }
-                        let view = self.stackMainView.arrangedSubviews[sender.tag]
-                        self.stackMainView.removeArrangedSubview(view)
-                        self.view.removeFromSuperview()
+                        self.setLowQualityPhotosCount(image: (imageView?.image)!)
+                        let viewInStack = self.stackMainView.arrangedSubviews[sender.tag]
+                        self.stackMainView.removeArrangedSubview(viewInStack)
+                        viewInStack.removeFromSuperview()
                         self.selectedPhotos.remove(at: sender.tag)
+                        self.imageSizeArray.remove(at: sender.tag)
                         self.showSpinner()
                         self.setViewTag()
                     } else {
@@ -237,7 +269,7 @@ final class PhotoPrintViewController: BaseViewController {
         nextButtonEnabled()
     }
     
-    @objc func checkButtonTapped(sender: UIButton) {
+    @objc private func checkButtonTapped(sender: UIButton) {
         sender.isSelected = !sender.isSelected
         let view = getView(tag: sender.tag, layerName: Subviews.checkButton.layerName)
         let button = view as? UIButton
@@ -246,7 +278,7 @@ final class PhotoPrintViewController: BaseViewController {
         nextButtonEnabled()
     }
     
-    @objc func rotateButtonTapped(sender: UIButton) {
+    @objc private func rotateButtonTapped(sender: UIButton) {
         sender.isSelected = !sender.isSelected
         let portraitHeightConstant = (view.frame.width) / 0.664
         let landscapeHeightConstant = (view.frame.width) / 1.506
@@ -257,18 +289,27 @@ final class PhotoPrintViewController: BaseViewController {
         }
     }
     
-    @objc func contentCheckButtonTapped(sender: UIButton) {
+    @objc private func newPhotoSelectTapped(_ sender: AnyObject) {
+        photoSelectType = .changePhotoSelection
+        selectedPhotoIndex = sender.view!.tag
+        let imageView = getView(tag: sender.view!.tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as! UIImageView
+        setLowQualityPhotosCount(image: imageView.image!)
+        imageSizeArray.remove(at: sender.view!.tag)
+        router.openSelectPhotosWithChange(selectedPhotos: selectedPhotos)
+    }
+    
+    @objc private func contentCheckButtonTapped(sender: UIButton) {
         sender.isSelected = !sender.isSelected
         sender.isSelected ? contentCheckButton.setImage(Image.iconPrintSelectBlue.image, for: .normal) : contentCheckButton.setImage(Image.iconPrintSelectEmpty.image, for: .normal)
         isContentCheckBoxChecked = sender.isSelected
         nextButtonEnabled()
     }
     
-    @objc func nextButtonTapped(sender: UIButton) {
+    @objc private func nextButtonTapped(sender: UIButton) {
         print(totalPhotoCount())
     }
     
-    func setImageReplace(tag: Int, image: UIImage) {
+    private func setImageReplace(tag: Int, image: UIImage) {
         let isPortrait = getIsPortraitOrLandscape(image: image)
         let portraitHeightConstant = (view.frame.width) / 0.664
         let landscapeHeightConstant = (view.frame.width) / 1.506
@@ -279,7 +320,7 @@ final class PhotoPrintViewController: BaseViewController {
         }
     }
     
-    func getIsPortraitOrLandscape(image: UIImage) -> Bool {
+    private func getIsPortraitOrLandscape(image: UIImage) -> Bool {
         if image.size.width < image.size.height {
             return true
         }
@@ -306,6 +347,9 @@ final class PhotoPrintViewController: BaseViewController {
             newPhotoIcon.isHidden = false
             newPhotoLabel.isHidden = false
         } else {
+            (infoLabel as? UILabel)?.text = localized(.printEditPhotoPageName)
+            (infoLabel as? UILabel)?.textColor = AppColor.darkBlue.color
+            (infoIcon as? UIImageView)?.image = Image.iconInfo.image
             infoLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10).isActive = true
             checkButton.isHidden = true
             checkLabel.isHidden = true
@@ -320,7 +364,7 @@ final class PhotoPrintViewController: BaseViewController {
         return Double(imageSize) / 1000.0 / 1000.0
     }
     
-    func getView(tag: Int, layerName: String) -> UIView {
+    private func getView(tag: Int, layerName: String) -> UIView {
         let view = stackMainView.arrangedSubviews[tag].subviews
         for (_, element) in view.enumerated() {
             if element.layer.name == layerName {
@@ -332,9 +376,12 @@ final class PhotoPrintViewController: BaseViewController {
     
     private func totalPhotoCount() -> Int {
         var photoCount: Int = 0
-        for(index, _) in selectedPhotos.enumerated() {
-            let countLabel = getView(tag: index, layerName: Subviews.addDeleteContainer.layerName).subviews[1] as? UILabel
-            photoCount += Int(countLabel?.text ?? "0") ?? 0
+        let subView = stackMainView.arrangedSubviews
+        for (index, element) in subView.enumerated() {
+            if element.layer.name == Subviews.containerView.layerName {
+                let countLabel = getView(tag: index, layerName: Subviews.addDeleteContainer.layerName).subviews[1] as? UILabel
+                photoCount += Int(countLabel?.text ?? "0") ?? 0
+            }
         }
         return photoCount
     }
@@ -355,7 +402,13 @@ final class PhotoPrintViewController: BaseViewController {
         }
     }
     
-    func setViewTag() {
+    private func setLowQualityPhotosCount(image: UIImage) {
+        if self.getImageSize(image: image) < CGFloat(self.badQuailtySize) {
+            self.lowQualityPhotosCount -= 1
+        }
+    }
+    
+    private func setViewTag() {
         for index in 0..<selectedPhotos.count {
             getView(tag: index, layerName: Subviews.countTitleLabel.layerName).tag = index
             getView(tag: index, layerName: Subviews.titleLabel.layerName).tag = index
@@ -403,7 +456,7 @@ final class PhotoPrintViewController: BaseViewController {
 }
 
 extension PhotoPrintViewController: UIGestureRecognizerDelegate {
-    @objc func pinch(_ sender: UIPinchGestureRecognizer) {
+    @objc private func pinch(_ sender: UIPinchGestureRecognizer) {
         guard let view = sender.view else { return }
         view.transform = view.transform.scaledBy(x: sender.scale, y: sender.scale)
         sender.scale = 1
@@ -667,7 +720,7 @@ extension PhotoPrintViewController {
         
         lazy var infoIcon: UIImageView = {
             let view = UIImageView()
-            view.image = UIImage(named: "iconInfo")
+            view.image = Image.iconInfo.image
             view.layer.name = Subviews.infoIcon.layerName
             view.tag = index
             return view
@@ -721,6 +774,9 @@ extension PhotoPrintViewController {
         
         lazy var newPhotoLabel: UILabel = {
             let view = UILabel()
+            view.isUserInteractionEnabled = true
+            let tapImage = UITapGestureRecognizer(target: self, action: #selector(newPhotoSelectTapped(_:)))
+            view.addGestureRecognizer(tapImage)
             view.text = localized(.printPhotoBadQualityNew)
             view.textColor = AppColor.tealBlue.color
             view.font = .appFont(.bold, size: 14)

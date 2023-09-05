@@ -16,6 +16,11 @@ protocol PhotoPrintSelectionSegmentedControllerDelegate {
     func allDeselectItem(selectedCount: Int)
 }
 
+enum PrintPhotoSelectType {
+    case newPhotoSelection
+    case changePhotoSelection
+}
+
 final class PhotoPrintSelectionSegmentedController: BaseViewController, ErrorPresenter {
 
     var selectedItems = [SearchItemResponse]()
@@ -30,7 +35,7 @@ final class PhotoPrintSelectionSegmentedController: BaseViewController, ErrorPre
         }
     }
     
-    private var photoSelectType = PhotoSelectType.newPhotoSelection
+    private var photoSelectType = PrintPhotoSelectType.newPhotoSelection
     private let selectionControllerPageSize = Device.isIpad ? 200 : 100
     private var currentSelectingCount = 0
     private let selectingLimit = 20
@@ -62,7 +67,15 @@ final class PhotoPrintSelectionSegmentedController: BaseViewController, ErrorPre
                                                        target: self,
                                                        action: #selector(closeSelf))
     
-    init() {
+    init(selectedPhotos: [SearchItemResponse] = [], selectedPhotoIndex: Int? = nil) {
+        if selectedPhotos.count > 0 {
+            self.selectedItemIndexFromCollagePreview = selectedPhotoIndex ?? 0
+            self.selectedItemsDefault = selectedPhotos
+            selectablePhotoCount = 1
+            self.photoSelectType = .changePhotoSelection
+        } else {
+            self.photoSelectType = .newPhotoSelection
+        }
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -168,8 +181,6 @@ final class PhotoPrintSelectionSegmentedController: BaseViewController, ErrorPre
                 updateTitle()
             }
             dismiss(animated: true, completion: {
-//                let vc = self.router.PhotoPrintPreview(collageTemplate: self.collageTemplate!, selectedItems: self.selectedItemsDefault)
-//                self.router.popToViewController(vc)
                 PhotoPrintConstants.selectedChangePhotoItems = self.selectedItemsChangePhoto
                 self.router.popViewController()
             })
@@ -275,19 +286,16 @@ extension PhotoPrintSelectionSegmentedController: PhotoPrintPhotoSelectionContro
             }
             vcView.selectedTextLabel.text = "\(selectedItems.count)/\(selectablePhotoCount)"
             updateBottomTabbarLayout(value: true)
-            if selectedItems.count == selectablePhotoCount {
-                selectionState = .ended
-            } else {
-                selectionState = .selecting
-            }
+            selectionState = selectedItems.count == selectablePhotoCount ? .ended : .selecting
         case .changePhotoSelection:
-            vcView.actionButton.isHidden = false
-            vcView.selectedTextLabel.text = "\(selectedItems.count)/\(selectablePhotoCount)"
-            if selectedItems.count == selectablePhotoCount {
-                selectionState = .ended
-            } else {
-                selectionState = .selecting
+            if selectedItems.count == 0 {
+                updateBottomTabbarLayout(value: false)
+                vcView.selectedTextLabel.text = "\(selectedItems.count)/\(selectablePhotoCount)"
+                return
             }
+            vcView.selectedTextLabel.text = "\(selectedItems.count)/\(selectablePhotoCount)"
+            updateBottomTabbarLayout(value: true)
+            selectionState = selectedItems.count == selectablePhotoCount ? .ended : .selecting
         }
     }
     
