@@ -24,7 +24,7 @@ final class PhotoPrintSelectionSegmentedView: UIView {
     
     let subViewForInfo: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor.background.color
         view.layer.cornerRadius = 20
         view.layer.masksToBounds = true
         view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
@@ -42,7 +42,7 @@ final class PhotoPrintSelectionSegmentedView: UIView {
        let label = UILabel()
         label.font = .appFont(.regular, size: 16)
         label.text = "Albüm için seçilenler"
-        label.textColor = AppColor.blackColor.color
+        label.textColor = AppColor.label.color
         return label
     }()
     
