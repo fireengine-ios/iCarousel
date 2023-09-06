@@ -109,11 +109,12 @@ final class PhotoPrintPhotoSelectionController: UIViewController, ErrorPresenter
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(collectionView)
+        print("aaaaaaaaaaa")
         loadMore()
         loadingMoreFooterView?.startSpinner()
         reachabilityService.delegates.add(self)
         let isShowing = UserDefaults.standard.bool(forKey: "photoPrintNotShowingPopup")
-        if !isShowing {
+        if !isShowing, title == TextConstants.actionSheetPhotos {
             let vc = PhotoPrintInfoPopup.with()
             vc.openWithBlur()
         }
