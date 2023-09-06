@@ -262,6 +262,7 @@ enum Strings: String, Localizable {
     case photoPrint = "new_print"
     
     // MARK: - Photo Print
+    case selectedForPrint = "selected_for_print"
     case printInfoPopUpTitle = "print_info_popup_title"
     case printInfoPopUpSubtitle = "print_info_popup_subtitle"
     case printInfoPopupCheckBox = "print_info_popup_checkbox"

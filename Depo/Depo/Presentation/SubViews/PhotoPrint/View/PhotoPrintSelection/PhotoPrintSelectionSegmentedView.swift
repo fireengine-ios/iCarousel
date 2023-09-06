@@ -41,7 +41,7 @@ final class PhotoPrintSelectionSegmentedView: UIView {
     let constLabel: UILabel = {
        let label = UILabel()
         label.font = .appFont(.regular, size: 16)
-        label.text = "Albüm için seçilenler"
+        label.text = localized(.selectedForPrint)
         label.textColor = AppColor.label.color
         return label
     }()

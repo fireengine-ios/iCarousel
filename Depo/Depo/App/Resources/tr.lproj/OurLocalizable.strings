@@ -2184,3 +2184,4 @@ then {11,99 TRY/Month}*/
 "no_more_photo_right" = "%d’ten fazla fotoğraf seçtin. Devam edebilmek için azaltın.";
 "timeline_header" = "2023’un en güzel anıları";
 "timeline_description" = "Bu senenin en güzel anılarını senin için derledik. Hemen keşfet.";
+"selected_for_print" = "Baskı için seçilenler";
