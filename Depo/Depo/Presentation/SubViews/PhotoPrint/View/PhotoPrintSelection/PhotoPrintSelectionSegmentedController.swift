@@ -170,7 +170,7 @@ final class PhotoPrintSelectionSegmentedController: BaseViewController, ErrorPre
                 vc.openWithBlur()
             }
             if selectedItems.count == selectablePhotoCount {
-                dismiss(animated: true, completion: {
+                dismiss(animated: false, completion: {
                     let vc = self.router.photoPrintViewController(selectedPhotos: self.selectedItems)
                     self.router.pushViewController(viewController: vc)
                 })
