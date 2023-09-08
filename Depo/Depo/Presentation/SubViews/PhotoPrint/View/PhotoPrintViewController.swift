@@ -286,6 +286,7 @@ final class PhotoPrintViewController: BaseViewController {
         if let constraint = (view.constraints.filter{$0.firstAttribute == .height}.first) {
             constraint.constant = sender.isSelected ? portraitHeightConstant : landscapeHeightConstant
         }
+        setViewTag()
     }
     
     @objc private func newPhotoSelectTapped(_ sender: AnyObject) {
