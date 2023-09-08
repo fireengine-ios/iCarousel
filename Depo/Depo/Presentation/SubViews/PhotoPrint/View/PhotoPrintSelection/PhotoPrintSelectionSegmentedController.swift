@@ -46,6 +46,7 @@ final class PhotoPrintSelectionSegmentedController: BaseViewController, ErrorPre
     private let router = RouterVC()
     private var selectedItemFromCollagePreview: SearchItemResponse?
     private var selectedItemIndexFromCollagePreview: Int = -1
+    private var popupShowing: Bool? = true
     
     private lazy var albumsTabIndex: Int = {
         if let index = segmentedViewControllers.firstIndex(of: albumsVC) {
@@ -67,12 +68,13 @@ final class PhotoPrintSelectionSegmentedController: BaseViewController, ErrorPre
                                                        target: self,
                                                        action: #selector(closeSelf))
     
-    init(selectedPhotos: [SearchItemResponse] = [], selectedPhotoIndex: Int? = nil) {
+    init(selectedPhotos: [SearchItemResponse] = [], selectedPhotoIndex: Int? = nil, popupShowing: Bool? = nil) {
         if selectedPhotos.count > 0 {
             self.selectedItemIndexFromCollagePreview = selectedPhotoIndex ?? 0
             self.selectedItemsDefault = selectedPhotos
             selectablePhotoCount = 1
             self.photoSelectType = .changePhotoSelection
+            self.popupShowing = popupShowing
         } else {
             self.photoSelectType = .newPhotoSelection
         }
@@ -126,13 +128,15 @@ final class PhotoPrintSelectionSegmentedController: BaseViewController, ErrorPre
         let allPhotosVC = PhotoPrintPhotoSelectionController(title: TextConstants.actionSheetPhotos,
                                                    selectingLimit: selectingLimit,
                                                    delegate: self,
-                                                   dataSource: allPhotosDataSource)
+                                                   dataSource: allPhotosDataSource,
+                                                   popupShowing: popupShowing)
         
         let favoriteDataSource = PhotoPrintFavoritePhotosSelectionDataSource(pageSize: selectionControllerPageSize)
         let favoritePhotosVC = PhotoPrintPhotoSelectionController(title: TextConstants.homeButtonFavorites,
                                                         selectingLimit: selectingLimit,
                                                         delegate: self,
-                                                        dataSource: favoriteDataSource)
+                                                        dataSource: favoriteDataSource,
+                                                                  popupShowing: false)
         
         segmentedViewControllers = [allPhotosVC, albumsVC, favoritePhotosVC]
         
@@ -319,7 +323,8 @@ extension PhotoPrintSelectionSegmentedController: PhotoPrintAlbumSelectionDelega
         let albumSelectionVC = PhotoPrintPhotoSelectionController(title: album.name ?? "",
                                                            selectingLimit: selectingLimit,
                                                            delegate: self,
-                                                           dataSource: dataSource)
+                                                           dataSource: dataSource,
+                                                           popupShowing: false)
         delegates.add(albumSelectionVC)
         replaceControllerAtAlbumsTab(with: albumSelectionVC)
     }

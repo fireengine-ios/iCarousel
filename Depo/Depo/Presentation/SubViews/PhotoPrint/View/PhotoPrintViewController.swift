@@ -295,7 +295,7 @@ final class PhotoPrintViewController: BaseViewController {
         let imageView = getView(tag: sender.view!.tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as! UIImageView
         setLowQualityPhotosCount(image: imageView.image!)
         imageSizeArray.remove(at: sender.view!.tag)
-        router.openSelectPhotosWithChange(selectedPhotos: selectedPhotos)
+        router.openSelectPhotosWithChange(selectedPhotos: selectedPhotos, popupShowing: false)
     }
     
     @objc private func contentCheckButtonTapped(sender: UIButton) {

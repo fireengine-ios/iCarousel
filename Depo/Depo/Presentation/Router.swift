@@ -1168,8 +1168,8 @@ class RouterVC: NSObject {
         return PhotoPrintInitilizer.initializeViewController(selectedPhotos: selectedPhotos)
     }
     
-    func photoPrintSelectPhotos(selectedPhotos: [SearchItemResponse] = [])  -> PhotoPrintSelectionSegmentedController {
-        return PhotoPrintSelectionSegmentedController(selectedPhotos: selectedPhotos)
+    func photoPrintSelectPhotos(selectedPhotos: [SearchItemResponse] = [], popupShowing: Bool? = nil)  -> PhotoPrintSelectionSegmentedController {
+        return PhotoPrintSelectionSegmentedController(selectedPhotos: selectedPhotos, popupShowing: popupShowing ?? false)
     }
 
     // MARK: - Passcode

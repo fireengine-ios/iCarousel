@@ -13,8 +13,8 @@ final class PhotoPrintRouter: PhotoPrintRouterInput {
     private let router = RouterVC()
     weak var presenter: PhotoPrintPresenter!
     
-    func openSelectPhotosWithChange(selectedPhotos: [SearchItemResponse]) {
-        let vc = router.photoPrintSelectPhotos(selectedPhotos: selectedPhotos)
+    func openSelectPhotosWithChange(selectedPhotos: [SearchItemResponse], popupShowing: Bool? = nil) {
+        let vc = router.photoPrintSelectPhotos(selectedPhotos: selectedPhotos, popupShowing: popupShowing)
         router.pushViewController(viewController: vc, animated: false)
     }
 }

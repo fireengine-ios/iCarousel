@@ -42,6 +42,8 @@ final class PhotoPrintPhotoSelectionController: UIViewController, ErrorPresenter
     
     private let reachabilityService = ReachabilityService.shared
     
+    private var popupShowing: Bool? = true
+    
     private lazy var noFilesView = PhotoSelectionNoFilesView.initFromNib()
     private var displayNoFilesView:Bool {
         get {
@@ -87,12 +89,13 @@ final class PhotoPrintPhotoSelectionController: UIViewController, ErrorPresenter
         return collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionFooter, at: IndexPath(item: 0, section: photosSectionIndex)) as? PhotoPrintCollectionSpinnerFooter
     }()
     
-    init(title: String, selectingLimit: Int, delegate: PhotoPrintPhotoSelectionControllerDelegate?, dataSource: PhotoPrintPhotoSelectionDataSourceProtocol) {
+    init(title: String, selectingLimit: Int, delegate: PhotoPrintPhotoSelectionControllerDelegate?, dataSource: PhotoPrintPhotoSelectionDataSourceProtocol, popupShowing: Bool? = nil) {
         self.dataSource = dataSource
         self.selectingLimit = selectingLimit
         self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
         self.title = title
+        self.popupShowing = popupShowing
     }
     
     /// will never be called
@@ -109,12 +112,11 @@ final class PhotoPrintPhotoSelectionController: UIViewController, ErrorPresenter
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(collectionView)
-        print("aaaaaaaaaaa")
         loadMore()
         loadingMoreFooterView?.startSpinner()
         reachabilityService.delegates.add(self)
         let isShowing = UserDefaults.standard.bool(forKey: "photoPrintNotShowingPopup")
-        if !isShowing, title == TextConstants.actionSheetPhotos {
+        if !isShowing, popupShowing ?? false {
             let vc = PhotoPrintInfoPopup.with()
             vc.openWithBlur()
         }
