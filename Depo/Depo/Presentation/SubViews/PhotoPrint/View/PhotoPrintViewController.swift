@@ -146,7 +146,7 @@ final class PhotoPrintViewController: BaseViewController {
         super.viewDidLoad()
         debugLog("PhotoPrintViewController viewDidLoad")
         
-        setTitle(withString: localized(.createCollageLabel))
+        setTitle(withString: localized(.printEditPhotoPageName))
         view.backgroundColor = AppColor.background.color
         setLayout()
         
@@ -207,7 +207,6 @@ final class PhotoPrintViewController: BaseViewController {
                     self?.imageSizeArray.insert(image!.size, at: self!.selectedPhotoIndex)
                     self?.nextButtonEnabled()
                     self?.setViewTag()
-                    print("aaaaaaa \(self?.totalPhotoCount())")
                     self?.addRemoveContentContainerView(isAdd: self?.totalPhotoCount() != 5, photoCount: (self?.totalPhotoCount())!)
                     self?.nextButtonEnabled()
                 }
