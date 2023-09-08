@@ -238,31 +238,19 @@ final class PhotoPrintViewController: BaseViewController {
         }
         
         if count == 1 {
-            
-            let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
-                                                  message: "Fotoğraf kaldırılacak ve düzenlemeler kaybedilecektir",
-                                                  image: .delete,
-                                                  firstButtonTitle: TextConstants.cancel,
-                                                  secondButtonTitle: TextConstants.ok,
-                                                  secondAction: { vc in
-                vc.close(completion: {
-                    if self.selectedPhotos.count > 1 {
-                        let imageView = self.getView(tag: sender.tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as? UIImageView
-                        self.setLowQualityPhotosCount(image: (imageView?.image)!)
-                        let viewInStack = self.stackMainView.arrangedSubviews[sender.tag]
-                        self.stackMainView.removeArrangedSubview(viewInStack)
-                        viewInStack.removeFromSuperview()
-                        self.selectedPhotos.remove(at: sender.tag)
-                        self.imageSizeArray.remove(at: sender.tag)
-                        self.showSpinner()
-                        self.setViewTag()
-                    } else {
-                        print("aaaaaaa geri dön")
-                    }
-                })
-            })
-            
-            controller.open()
+            if self.selectedPhotos.count > 1 {
+                let imageView = self.getView(tag: sender.tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as? UIImageView
+                self.setLowQualityPhotosCount(image: (imageView?.image)!)
+                let viewInStack = self.stackMainView.arrangedSubviews[sender.tag]
+                self.stackMainView.removeArrangedSubview(viewInStack)
+                viewInStack.removeFromSuperview()
+                self.selectedPhotos.remove(at: sender.tag)
+                self.imageSizeArray.remove(at: sender.tag)
+                self.showSpinner()
+                self.setViewTag()
+            } else {
+                self.navigationController?.popViewController(animated: true)
+            }
         }
         addRemoveContentContainerView(isAdd: totalPhotoCount() != 5, photoCount: totalPhotoCount())
         nextButtonEnabled()
