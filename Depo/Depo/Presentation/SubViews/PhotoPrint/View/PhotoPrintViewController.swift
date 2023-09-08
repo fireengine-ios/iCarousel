@@ -252,8 +252,8 @@ final class PhotoPrintViewController: BaseViewController {
                 self.navigationController?.popViewController(animated: true)
             }
         }
-        addRemoveContentContainerView(isAdd: totalPhotoCount() != 5, photoCount: totalPhotoCount())
         nextButtonEnabled()
+        addRemoveContentContainerView(isAdd: totalPhotoCount() != 5, photoCount: totalPhotoCount())
     }
     
     @objc private func checkButtonTapped(sender: UIButton) {
@@ -391,7 +391,7 @@ final class PhotoPrintViewController: BaseViewController {
     }
     
     private func setLowQualityPhotosCount(image: UIImage) {
-        if self.getImageSize(image: image) < CGFloat(self.badQuailtySize) {
+        if self.getImageSize(image: image) < CGFloat(self.badQuailtySize), lowQualityPhotosCount > 0 {
             self.lowQualityPhotosCount -= 1
         }
     }
@@ -560,6 +560,8 @@ extension PhotoPrintViewController {
             contentCheckLabel.leadingAnchor.constraint(equalTo: contentCheckButton.trailingAnchor, constant: 8).isActive = true
             contentCheckLabel.trailingAnchor.constraint(equalTo: contentContainerView.trailingAnchor, constant: -24).isActive = true
             
+            nextButton.backgroundColor = AppColor.borderLightGray.color
+            nextButton.isUserInteractionEnabled = false
             contentCheckButton.setImage(Image.iconPrintSelectEmpty.image, for: .normal)
             photoCount < 5 ? contentCheckButton.setImage(Image.iconPrintSelectEmpty.image, for: .normal) : contentCheckButton.setImage(Image.iconPrintInfoRed.image, for: .normal)
             contentCheckLabel.text = photoCount < 5 ? String(format: localized(.morePhotoRight), maxSelectablePhoto - photoCount) : String(format: localized(.noMorePhotoRight), maxSelectablePhoto)
