@@ -708,13 +708,19 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
                 return
             }
             let itemsToPrint = selectedObjects.filter { !$0.isLocalItem && $0.fileType == .image }
+            var printSelectedPhotos = [SearchItemResponse]()
+            
+            for value in itemsToPrint {
+                var item = SearchItemResponse()
+                item.name = value.name
+                item.metadata = value.metaData
+                item.tempDownloadURL = value.tmpDownloadUrl
+                printSelectedPhotos.append(item)
+            }
             
             if !itemsToPrint.isEmpty {
-                let warningPopup = WarningPopupController.popup(type: .photoPrintRedirection(photos: itemsToPrint)) {
-                    self.stopEditingMode()
-                }
-
-                UIApplication.topController()?.present(warningPopup, animated: false)
+                let vc = router.photoPrintViewController(selectedPhotos: printSelectedPhotos)
+                router.pushViewController(viewController: vc, animated: false)
             }
         }
         
