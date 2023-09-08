@@ -609,13 +609,14 @@ extension PhotoPrintViewController {
             view.font = .appFont(.medium, size: 12)
             view.numberOfLines = 1
             view.textAlignment = .center
-            view.backgroundColor = .white
+            view.backgroundColor = AppColor.background.color
             view.layer.borderWidth = 2
             view.layer.cornerRadius = 8
             view.layer.borderColor = AppColor.label.cgColor
             view.layer.masksToBounds = true
             view.text = String(index+1)
             view.layer.name = Subviews.countTitleLabel.layerName
+            view.textColor = AppColor.label.color
             view.tag = index
             return view
         }()
