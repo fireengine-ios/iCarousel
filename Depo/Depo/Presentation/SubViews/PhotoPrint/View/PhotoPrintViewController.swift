@@ -119,7 +119,7 @@ final class PhotoPrintViewController: BaseViewController {
     
     private var lowQualityPhotosCount: Int = 0
     private var maxSelectablePhoto: Int = 5
-    private var badQuailtySize: Int = 3
+    private var badQuailtySize: Double = 3
     private var contentViewIsHaveCheckBox: Bool = false
     private var isContentCheckBoxChecked: Bool = false
     private var defaultW = Double()
@@ -146,6 +146,7 @@ final class PhotoPrintViewController: BaseViewController {
         super.viewDidLoad()
         debugLog("PhotoPrintViewController viewDidLoad")
         
+        badQuailtySize = Double(FirebaseRemoteConfig.shared.printPhotoQualityMinMB) ?? 1
         setTitle(withString: localized(.printEditPhotoPageName))
         view.backgroundColor = AppColor.background.color
         setLayout()
@@ -326,7 +327,7 @@ final class PhotoPrintViewController: BaseViewController {
         
         if getImageSize(image: image) < CGFloat(badQuailtySize) {
             lowQualityPhotosCount += 1
-            (infoLabel as? UILabel)?.text = String(format: localized(.printPhotoBadQualityInfo), badQuailtySize)
+            (infoLabel as? UILabel)?.text = String(format: localized(.printPhotoBadQualityInfo), Int(badQuailtySize))
             (infoLabel as? UILabel)?.textColor = AppColor.forgetPassTextRed.color
             (infoIcon as? UIImageView)?.image = Image.iconPrintInfoRed.image
             infoLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10).isActive = false
