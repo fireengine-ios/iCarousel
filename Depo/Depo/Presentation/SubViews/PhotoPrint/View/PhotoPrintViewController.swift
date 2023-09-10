@@ -219,13 +219,15 @@ final class PhotoPrintViewController: BaseViewController {
     @objc private func addButtonTapped(sender: UIButton) {
         let view = getView(tag: sender.tag, layerName: Subviews.addDeleteContainer.layerName)
         let countLabel = view.subviews[1] as? UILabel
-
-        let count = Int(countLabel?.text ?? "0") ?? 0
-        if count < maxSelectablePhoto {
-            countLabel?.text = String((count) + 1)
+        
+        if totalPhotoCount() < maxSelectablePhoto {
+            let count = Int(countLabel?.text ?? "0") ?? 0
+            if count < maxSelectablePhoto {
+                countLabel?.text = String((count) + 1)
+            }
+            addRemoveContentContainerView(isAdd: totalPhotoCount() != 5, photoCount: totalPhotoCount())
+            nextButtonEnabled()
         }
-        addRemoveContentContainerView(isAdd: totalPhotoCount() != 5, photoCount: totalPhotoCount())
-        nextButtonEnabled()
     }
     
     @objc private func deleteButtonTapped(sender: UIButton) {
@@ -455,7 +457,7 @@ extension PhotoPrintViewController: UIGestureRecognizerDelegate {
             let scrollView = getView(tag: sender.view?.tag ?? 0, layerName: Subviews.imageContainerView.layerName).subviews[0] as! UIScrollView
             let imageView = getView(tag: sender.view?.tag ?? 0, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as! UIImageView
             
-            imageContainerView.layer.borderColor = AppColor.tealBlue.cgColor
+            imageContainerView.layer.borderColor = AppColor.forgetPassTextGreen.cgColor
             
             let viewFrame = scrollView.frame
             let imageViewWidth = imageView.frame.width
@@ -682,7 +684,7 @@ extension PhotoPrintViewController {
             view.backgroundColor = AppColor.background.color
             view.layer.borderWidth = 3
             view.layer.cornerRadius = 16
-            view.layer.borderColor = AppColor.forgetPassTextGreen.cgColor
+            view.layer.borderColor = AppColor.tealBlue.cgColor
             view.layer.name = Subviews.imageContainerView.layerName
             return view
         }()
