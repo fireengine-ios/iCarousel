@@ -719,8 +719,8 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
             }
             
             if !itemsToPrint.isEmpty {
-                let vc = router.photoPrintViewController(selectedPhotos: printSelectedPhotos)
-                router.pushViewController(viewController: vc, animated: false)
+                let vc = self.router.photoPrintViewController(selectedPhotos: printSelectedPhotos)
+                self.router.pushViewController(viewController: vc, animated: false)
             }
         }
         
