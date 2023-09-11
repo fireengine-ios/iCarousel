@@ -87,7 +87,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     class func initializeAllFilesViewController(with nibName: String, moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController {
         let viewController = AllFilesViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
-        viewController.floatingButtonsArray.append(contentsOf: [.upload, .uploadFiles, .newFolder])
+        viewController.floatingButtonsArray.append(contentsOf: [.upload, .uploadFiles, .newFolder, .createWord, .createExcel, .createPowerPoint])
         viewController.cardsContainerView.addPermittedPopUpViewTypes(types: [.sync, .upload, .download])
         viewController.cardsContainerView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()
