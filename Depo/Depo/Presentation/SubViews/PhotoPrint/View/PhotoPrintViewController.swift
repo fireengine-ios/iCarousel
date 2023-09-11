@@ -194,6 +194,12 @@ final class PhotoPrintViewController: BaseViewController {
             showSpinner()
             let newSelectedPhotos = PhotoPrintConstants.selectedChangePhotoItems 
             let imageView = getView(tag: selectedPhotoIndex, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as? UIImageView
+            let imageContainerView = getView(tag: selectedPhotoIndex, layerName: Subviews.imageContainerView.layerName)
+            
+            if newSelectedPhotos.isEmpty {
+                hideSpinner()
+                return
+            }
             
             let imageUrl = newSelectedPhotos[0].metadata?.largeUrl
             imageView?.sd_setImage(with: imageUrl) { [weak self] (image, error, cache, url) in
@@ -328,6 +334,7 @@ final class PhotoPrintViewController: BaseViewController {
         let checkLabel = getView(tag: tag, layerName: Subviews.checkLabel.layerName)
         let newPhotoIcon = getView(tag: tag, layerName: Subviews.newPhotoIcon.layerName)
         let newPhotoLabel = getView(tag: tag, layerName: Subviews.newPhotoLabel.layerName)
+        let imageContainerView = getView(tag: tag, layerName: Subviews.imageContainerView.layerName)
         
         if getImageSize(image: image) < CGFloat(badQuailtySize) {
             lowQualityPhotosCount += 1
@@ -339,10 +346,12 @@ final class PhotoPrintViewController: BaseViewController {
             checkLabel.isHidden = false
             newPhotoIcon.isHidden = false
             newPhotoLabel.isHidden = false
+            (imageContainerView as? UIView)?.layer.borderColor = AppColor.forgetPassTextRed.cgColor
         } else {
             (infoLabel as? UILabel)?.text = localized(.printEditPhotoPageName)
             (infoLabel as? UILabel)?.textColor = AppColor.darkBlue.color
             (infoIcon as? UIImageView)?.image = Image.iconInfo.image
+            (imageContainerView as? UIView)?.layer.borderColor = AppColor.tealBlue.cgColor
             infoLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10).isActive = true
             checkButton.isHidden = true
             checkLabel.isHidden = true
@@ -459,7 +468,9 @@ extension PhotoPrintViewController: UIGestureRecognizerDelegate {
             let scrollView = getView(tag: sender.view?.tag ?? 0, layerName: Subviews.imageContainerView.layerName).subviews[0] as! UIScrollView
             let imageView = getView(tag: sender.view?.tag ?? 0, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as! UIImageView
             
-            imageContainerView.layer.borderColor = AppColor.forgetPassTextGreen.cgColor
+            if self.getImageSize(image: imageView.image!) > CGFloat(self.badQuailtySize) {
+                imageContainerView.layer.borderColor = AppColor.forgetPassTextGreen.cgColor
+            }
             
             let viewFrame = scrollView.frame
             let imageViewWidth = imageView.frame.width
