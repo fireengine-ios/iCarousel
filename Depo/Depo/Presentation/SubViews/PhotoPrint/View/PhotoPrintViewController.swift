@@ -119,7 +119,7 @@ final class PhotoPrintViewController: BaseViewController {
     
     private var lowQualityPhotosCount: Int = 0
     private var maxSelectablePhoto: Int = 5
-    private var badQuailtySize: Double = 3
+    private var badQuailtySize: Double = 1
     private var contentViewIsHaveCheckBox: Bool = false
     private var isContentCheckBoxChecked: Bool = false
     private var defaultW = Double()
@@ -146,7 +146,7 @@ final class PhotoPrintViewController: BaseViewController {
         super.viewDidLoad()
         debugLog("PhotoPrintViewController viewDidLoad")
         
-        badQuailtySize = Double(FirebaseRemoteConfig.shared.printPhotoQualityMinMB) ?? 1
+        
         setTitle(withString: localized(.printEditPhotoPageName))
         view.backgroundColor = AppColor.background.color
         setLayout()
@@ -186,7 +186,7 @@ final class PhotoPrintViewController: BaseViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
+        badQuailtySize = Double(FirebaseRemoteConfig.shared.printPhotoQualityMinMB) ?? 1
         switch photoSelectType {
         case .newPhotoSelection:
             setViewTag()
@@ -264,6 +264,8 @@ final class PhotoPrintViewController: BaseViewController {
         let view = getView(tag: sender.tag, layerName: Subviews.checkButton.layerName)
         let button = view as? UIButton
         sender.isSelected ? button?.setImage(Image.iconPrintSelectBlue.image, for: .normal) : button?.setImage(Image.iconPrintSelectEmpty.image, for: .normal)
+        let newPhotosButton = getView(tag: sender.tag, layerName: Subviews.newPhotoLabel.layerName)
+        newPhotosButton.isUserInteractionEnabled = !sender.isSelected
         lowQualityPhotosCount = sender.isSelected ? lowQualityPhotosCount - 1 : lowQualityPhotosCount + 1
         nextButtonEnabled()
     }
