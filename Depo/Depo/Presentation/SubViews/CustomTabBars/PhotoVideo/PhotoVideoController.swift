@@ -1133,11 +1133,25 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
             guard let self = self else {
                 return
             }
-            self.threeDotMenuManager.showActions(
-                for: selectedObjects,
-                isSelectingMode: self.dataSource.isSelectingMode,
-                sender: button
-            )
+            
+            let itemsToPrint = selectedObjects.filter { !$0.isLocalItem && $0.fileType == .image }
+            if itemsToPrint.count <= NumericConstants.photoPrintSelectablePhoto {
+                self.threeDotMenuManager.showActions(
+                    for: selectedObjects,
+                    isSelectingMode: self.dataSource.isSelectingMode,
+                    isPrintShow: true,
+                    sender: button
+                )
+            } else {
+                self.threeDotMenuManager.showActions(
+                    for: selectedObjects,
+                    isSelectingMode: self.dataSource.isSelectingMode,
+                    isPrintShow: false,
+                    sender: button
+                )
+            }
+            
+            
         }
     }
 }
