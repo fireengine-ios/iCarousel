@@ -715,6 +715,7 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
                 item.name = value.name
                 item.metadata = value.metaData
                 item.tempDownloadURL = value.tmpDownloadUrl
+                item.bytes = value.fileSize
                 printSelectedPhotos.append(item)
             }
             

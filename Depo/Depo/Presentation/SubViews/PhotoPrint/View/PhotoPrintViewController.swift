@@ -249,7 +249,7 @@ final class PhotoPrintViewController: BaseViewController {
         if count == 1 {
             if self.selectedPhotos.count > 1 {
                 let imageView = self.getView(tag: sender.tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as? UIImageView
-                self.setLowQualityPhotosCount(image: (imageView?.image)!)
+                self.setLowQualityPhotosCount(photoIndex: sender.tag)
                 let viewInStack = self.stackMainView.arrangedSubviews[sender.tag]
                 self.stackMainView.removeArrangedSubview(viewInStack)
                 viewInStack.removeFromSuperview()
@@ -292,7 +292,7 @@ final class PhotoPrintViewController: BaseViewController {
         photoSelectType = .changePhotoSelection
         selectedPhotoIndex = sender.view!.tag
         let imageView = getView(tag: sender.view!.tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as! UIImageView
-        setLowQualityPhotosCount(image: imageView.image!)
+        setLowQualityPhotosCount(photoIndex: selectedPhotoIndex)
         imageSizeArray.remove(at: sender.view!.tag)
         router.openSelectPhotosWithChange(selectedPhotos: selectedPhotos, popupShowing: false)
     }
@@ -336,7 +336,7 @@ final class PhotoPrintViewController: BaseViewController {
         let newPhotoLabel = getView(tag: tag, layerName: Subviews.newPhotoLabel.layerName)
         let imageContainerView = getView(tag: tag, layerName: Subviews.imageContainerView.layerName)
         
-        if getImageSize(image: image) < CGFloat(badQuailtySize) {
+        if !isImageSizeControl(selectedPhotosIndex: tag) {
             lowQualityPhotosCount += 1
             (infoLabel as? UILabel)?.text = String(format: localized(.printPhotoBadQualityInfo), Int(badQuailtySize))
             (infoLabel as? UILabel)?.textColor = AppColor.forgetPassTextRed.color
@@ -360,10 +360,11 @@ final class PhotoPrintViewController: BaseViewController {
         }
     }
     
-    private func getImageSize(image: UIImage) -> Double {
-        let imgData = NSData(data: image.pngData()!)
-        let imageSize: Int = imgData.count
-        return Double(imageSize) / 1000.0 / 1000.0
+    private func isImageSizeControl(selectedPhotosIndex: Int) -> Bool {
+        guard let photoSize = selectedPhotos[selectedPhotosIndex].bytes else { return false }
+        var control: Bool = false
+        control = Double(photoSize) / 1024 / 1024 > CGFloat(badQuailtySize) ? true : false
+        return control
     }
     
     private func getView(tag: Int, layerName: String) -> UIView {
@@ -404,8 +405,8 @@ final class PhotoPrintViewController: BaseViewController {
         }
     }
     
-    private func setLowQualityPhotosCount(image: UIImage) {
-        if self.getImageSize(image: image) < CGFloat(self.badQuailtySize), lowQualityPhotosCount > 0 {
+    private func setLowQualityPhotosCount(photoIndex: Int) {
+        if !isImageSizeControl(selectedPhotosIndex: photoIndex), lowQualityPhotosCount > 0 {
             self.lowQualityPhotosCount -= 1
         }
     }
@@ -462,13 +463,14 @@ extension PhotoPrintViewController: UIGestureRecognizerDelegate {
         guard let view = sender.view else { return }
         view.transform = view.transform.scaledBy(x: sender.scale, y: sender.scale)
         sender.scale = 1
+        let tag = sender.view?.tag ?? 0
         
         if sender.state == .ended {
-            let imageContainerView = getView(tag: sender.view?.tag ?? 0, layerName: Subviews.imageContainerView.layerName) as! UIView
-            let scrollView = getView(tag: sender.view?.tag ?? 0, layerName: Subviews.imageContainerView.layerName).subviews[0] as! UIScrollView
-            let imageView = getView(tag: sender.view?.tag ?? 0, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as! UIImageView
+            let imageContainerView = getView(tag: tag, layerName: Subviews.imageContainerView.layerName) as! UIView
+            let scrollView = getView(tag: tag, layerName: Subviews.imageContainerView.layerName).subviews[0] as! UIScrollView
+            let imageView = getView(tag: tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as! UIImageView
             
-            if self.getImageSize(image: imageView.image!) > CGFloat(self.badQuailtySize) {
+            if isImageSizeControl(selectedPhotosIndex: tag) {
                 imageContainerView.layer.borderColor = AppColor.forgetPassTextGreen.cgColor
             }
             
@@ -602,7 +604,7 @@ extension PhotoPrintViewController: UIScrollViewDelegate {
         let imageView = getView(tag: scrollView.tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as? UIImageView
         let imageContainerView = getView(tag: scrollView.tag, layerName: Subviews.imageContainerView.layerName)
         
-        if self.getImageSize(image: (imageView?.image)!) > CGFloat(self.badQuailtySize) {
+        if isImageSizeControl(selectedPhotosIndex: scrollView.tag) {
             imageContainerView.layer.borderColor = AppColor.forgetPassTextGreen.cgColor
         }
     }
