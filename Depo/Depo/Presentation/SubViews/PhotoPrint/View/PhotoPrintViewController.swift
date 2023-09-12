@@ -803,12 +803,7 @@ extension PhotoPrintViewController {
         countTitleLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
         countTitleLabel.widthAnchor.constraint(equalToConstant: 24).isActive = true
         
-        containerView.addSubview(titleLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.topAnchor.constraint(equalTo: countTitleLabel.topAnchor).isActive = true
-        titleLabel.bottomAnchor.constraint(equalTo: countTitleLabel.bottomAnchor).isActive = true
-        titleLabel.leadingAnchor.constraint(equalTo: countTitleLabel.trailingAnchor, constant: 8).isActive = true
-        titleLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        
         
         containerView.addSubview(addDeleteContainer)
         addDeleteContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -847,6 +842,14 @@ extension PhotoPrintViewController {
         rotateButton.trailingAnchor.constraint(equalTo: addDeleteContainer.leadingAnchor, constant: -16).isActive = true
         rotateButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
         rotateButton.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        
+        containerView.addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.topAnchor.constraint(equalTo: countTitleLabel.topAnchor).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo: countTitleLabel.bottomAnchor).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: countTitleLabel.trailingAnchor, constant: 8).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: rotateButton.leadingAnchor, constant: -8).isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
         
         let heightConstant = (view.frame.width) / 1.506
         
