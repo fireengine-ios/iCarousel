@@ -597,6 +597,17 @@ extension PhotoPrintViewController {
     }
 }
 
+extension PhotoPrintViewController: UIScrollViewDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        let imageView = getView(tag: scrollView.tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as? UIImageView
+        let imageContainerView = getView(tag: scrollView.tag, layerName: Subviews.imageContainerView.layerName)
+        
+        if self.getImageSize(image: (imageView?.image)!) > CGFloat(self.badQuailtySize) {
+            imageContainerView.layer.borderColor = AppColor.forgetPassTextGreen.cgColor
+        }
+    }
+}
+
 extension PhotoPrintViewController {
     func createView(selectedPhotos: SearchItemResponse, index: Int) -> UIView {
         
@@ -709,6 +720,7 @@ extension PhotoPrintViewController {
             view.showsHorizontalScrollIndicator = false
             view.layer.name = "printScrollView"
             view.tag = index
+            view.delegate = self
             return view
         }()
         
