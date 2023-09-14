@@ -243,5 +243,7 @@ enum Image: String, AppImage {
     case iconPrintSelectBlue
     case iconPrintSelectPhoto
     case iconPrintInfoRed
+    case iconPrintPopup
+    case popupErrorOrange
 
 }

@@ -103,7 +103,7 @@ final class PhotoPrintMissingPhotoPopup: BasePopUpController {
     }
     
     private func photoCount(selectedPhotoCount: Int, selectedPhotos: [SearchItemResponse]) {
-        let selectablePhotoCount: Int = NumericConstants.photoPrintSelectablePhoto
+        let selectablePhotoCount: Int = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
         self.selectedPhotoCount = selectedPhotoCount
         self.unSelectedPhotoCount = selectablePhotoCount - selectedPhotoCount
         self.selectedPhotos = selectedPhotos

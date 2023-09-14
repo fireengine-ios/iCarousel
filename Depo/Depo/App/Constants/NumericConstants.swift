@@ -183,8 +183,6 @@ struct NumericConstants {
     
     static let saveToMyLifeboxCellHeight: CGFloat = 62
     static let saveToMyLifeboxActionViewHeight: CGFloat = 140
-    
-    static let photoPrintSelectablePhoto: Int = 5
 }
 
 struct RequestSizeConstant {

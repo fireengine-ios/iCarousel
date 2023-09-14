@@ -39,7 +39,7 @@ final class PhotoPrintSelectionSegmentedController: BaseViewController, ErrorPre
     private let selectionControllerPageSize = Device.isIpad ? 200 : 100
     private var currentSelectingCount = 0
     private let selectingLimit = 20
-    private var selectablePhotoCount: Int = NumericConstants.photoPrintSelectablePhoto
+    private var selectablePhotoCount: Int = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
     private var segmentedViewControllers: [UIViewController] = []
     private var delegates = MulticastDelegate<PhotoPrintSelectionSegmentedControllerDelegate>()
     private var collageTemplate: CollageTemplateElement?

@@ -707,11 +707,27 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
             guard let self = self else {
                 return
             }
+            
+            let isHavePrintPackage = SingletonStorage.shared.accountInfo?.photoPrintPackage ?? false
+            let sendRemaining = SingletonStorage.shared.accountInfo?.photoPrintSendRemaining ?? 0
+            
+            if !isHavePrintPackage {
+                let vc = PhotoPrintNoPackagePopup.with()
+                vc.open()
+                return
+            }
+            
+            if sendRemaining == 0 {
+                let vc = PhotoPrintNoRightPopup.with()
+                vc.open()
+                return
+            }
+            
             let itemsToPrint = selectedObjects.filter { !$0.isLocalItem && $0.fileType == .image }
             var printSelectedPhotos = [SearchItemResponse]()
             
             for value in itemsToPrint {
-                var item = SearchItemResponse()
+                let item = SearchItemResponse()
                 item.name = value.name
                 item.metadata = value.metaData
                 item.tempDownloadURL = value.tmpDownloadUrl
@@ -1136,7 +1152,10 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
             }
             
             let itemsToPrint = selectedObjects.filter { !$0.isLocalItem && $0.fileType == .image }
-            if itemsToPrint.count <= NumericConstants.photoPrintSelectablePhoto {
+            let isUserFromTurkey = SingletonStorage.shared.accountInfo?.isUserFromTurkey ?? false
+            let maxSelection = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
+            
+            if itemsToPrint.count <= maxSelection, isUserFromTurkey {
                 self.threeDotMenuManager.showActions(
                     for: selectedObjects,
                     isSelectingMode: self.dataSource.isSelectingMode,

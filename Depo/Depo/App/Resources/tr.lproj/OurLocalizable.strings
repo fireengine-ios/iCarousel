@@ -2187,3 +2187,5 @@ then {11,99 TRY/Month}*/
 "selected_for_print" = "Baskı için seçilenler";
 "print_cancel_popup_question" = "İptal etmek isteğine emin misin?";
 "print_cancel_popup_info" = "Basılı albüm için seçtiğin tüm fotoğraf düzenlemelerin silinecektir. Yeniden fotoğraf seçmen ve yeniden düzenlemen gereklidir.";
+"no_right_print_popup_title" = "Baskı Hakkını Kullandın";
+"no_right_print_popup_info" = "Paketin dahilindeki fotoğraf baskı hakkını kullandın. Paketin yenilendiğinde fotoğraflarını tekrar baskıya gönderebilirsin.";

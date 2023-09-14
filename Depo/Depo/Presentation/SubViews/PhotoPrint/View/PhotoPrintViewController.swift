@@ -118,7 +118,7 @@ final class PhotoPrintViewController: BaseViewController {
     }()
     
     private var lowQualityPhotosCount: Int = 0
-    private var maxSelectablePhoto: Int = NumericConstants.photoPrintSelectablePhoto
+    private var maxSelectablePhoto: Int = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
     private var badQuailtySize: Double = 1
     private var contentViewIsHaveCheckBox: Bool = false
     private var isContentCheckBoxChecked: Bool = false

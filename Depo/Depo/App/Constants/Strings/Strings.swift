@@ -289,4 +289,6 @@ enum Strings: String, Localizable {
     case printedPackageView = "printed_package_view"
     case morePhotoRight = "more_photo_right"
     case noMorePhotoRight = "no_more_photo_right"
+    case noRightPrintPopupTitle = "no_right_print_popup_title";
+    case noRightPrintPopupInfo = "no_right_print_popup_info"
 }

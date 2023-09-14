@@ -2129,3 +2129,5 @@ then {11,99 TRY/Month}*/
 "selected_for_print" = "";
 "print_cancel_popup_question" = "";
 "print_cancel_popup_info" = "";
+"no_right_print_popup_title" = "";
+"no_right_print_popup_info" = "";
