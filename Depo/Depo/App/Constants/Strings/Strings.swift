@@ -291,4 +291,6 @@ enum Strings: String, Localizable {
     case noMorePhotoRight = "no_more_photo_right"
     case noRightPrintPopupTitle = "no_right_print_popup_title";
     case noRightPrintPopupInfo = "no_right_print_popup_info"
+    case printCancelPopupQuestion = "print_cancel_popup_question"
+    case printCancelPopupInfo = "print_cancel_popup_info"
 }

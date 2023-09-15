@@ -16,7 +16,7 @@ extension NSNotification.Name {
 private struct RemoteConfigKeys {
     static let loginSupportAttempts = "login_support_form_treshold"
     static let signupSupportAttempts = "signup_support_form_treshold"
-    static let printOptionEnabled = "print_option_enabled"
+    static let printOptionEnabled = "new_photoprint_option_enable"
     static let chatbotMenuEnabled = "chatbot_menu_enabled"
     static let contactUsEnabled = "contact_us_enabled"
     static let printOptionEnabledLanguages = "print_option_enabled_languages"

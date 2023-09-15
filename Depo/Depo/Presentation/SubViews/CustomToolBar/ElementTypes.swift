@@ -143,16 +143,7 @@ enum ElementTypes {
                     result = [.share, .download]
                     
                     if item.fileType == .image {
-
                         result.append(.edit)
-
-                        if PrintService.isEnabled {
-                            result.append(.print) //FE-2439 - Removing Print Option for Turkish (TR) language
-                        }
-                        // moved to three dots menu
-//                        if item.name?.isPathExtensionGif() == false {
-//                            result.append(.smash)
-//                        }
                     }
 
                 default:
@@ -204,9 +195,6 @@ enum ElementTypes {
                 
             case .selectionMode:
                 result = [.createStory, .addToFavorites, .removeFromFavorites]
-                if PrintService.isEnabled {
-                    result.append(.print) //FE-2439 - Removing Print Option for Turkish (TR) language
-                }
                 result.append(.removeFromAlbum)
             }
         }
@@ -259,9 +247,6 @@ enum ElementTypes {
                 
             default:
                 result = [.createStory]
-                if PrintService.isEnabled {
-                    result.append(.print) //FE-2439 - Removing Print Option for Turkish (TR) language
-                }
                 result.append(.removeFromFaceImageAlbum)
             }
         case .actionSheetWithoutChangeCover:
@@ -630,7 +615,7 @@ enum ElementTypes {
         case .deSelectAll:
             return TextConstants.actionSheetDeSelectAll
         case .print:
-            return TextConstants.tabBarPrintLabel
+            return localized(.photoPrint)
         case .smash:
             return TextConstants.tabBarSmashLabel
         case .rename:
@@ -737,7 +722,7 @@ enum ElementTypes {
         case .removeFromFaceImageAlbum:
             return TextConstants.tabBarRemoveLabel
         case .print:
-            return TextConstants.tabBarPrintLabel
+            return localized(.photoPrint)
         case .changeCoverPhoto:
             return ""
         case .changePeopleThumbnail:

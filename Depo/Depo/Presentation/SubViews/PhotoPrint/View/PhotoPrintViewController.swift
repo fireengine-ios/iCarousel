@@ -117,6 +117,11 @@ final class PhotoPrintViewController: BaseViewController {
         return view
     }()
     
+    private lazy var closeSelfButton = UIBarButtonItem(image: NavigationBarImage.back.image,
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(closeSelf))
+    
     private var lowQualityPhotosCount: Int = 0
     private var maxSelectablePhoto: Int = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
     private var badQuailtySize: Double = 1
@@ -130,6 +135,7 @@ final class PhotoPrintViewController: BaseViewController {
     private var selectedPhotos = [SearchItemResponse]()
     private var photoSelectType = PrintPhotoSelectType.newPhotoSelection
     private var selectedPhotoIndex: Int = 0
+    private var isHaveEditedPhotos: Bool = false
     private let router = PhotoPrintRouter()
     var output: PhotoPrintViewOutput!
     
@@ -146,6 +152,8 @@ final class PhotoPrintViewController: BaseViewController {
         super.viewDidLoad()
         debugLog("PhotoPrintViewController viewDidLoad")
         
+        navigationItem.leftBarButtonItem = closeSelfButton
+        NotificationCenter.default.addObserver(self,selector: #selector(navigationBackFromPopup),name: .navigationBack, object: nil)
         
         setTitle(withString: localized(.printEditPhotoPageName))
         view.backgroundColor = AppColor.background.color
@@ -221,6 +229,20 @@ final class PhotoPrintViewController: BaseViewController {
         }
         
     }
+    
+    @objc private func closeSelf() {
+        if isHaveEditedPhotos {
+            let vc = PhotoPrintCancelPopup.with()
+            vc.openWithBlur()
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    @objc func navigationBackFromPopup(){
+        navigationController?.popViewController(animated: true)
+    }
+    
     
     @objc private func addButtonTapped(sender: UIButton) {
         let view = getView(tag: sender.tag, layerName: Subviews.addDeleteContainer.layerName)
@@ -466,6 +488,7 @@ extension PhotoPrintViewController: UIGestureRecognizerDelegate {
         let tag = sender.view?.tag ?? 0
         
         if sender.state == .ended {
+            isHaveEditedPhotos = true
             let imageContainerView = getView(tag: tag, layerName: Subviews.imageContainerView.layerName) as! UIView
             let scrollView = getView(tag: tag, layerName: Subviews.imageContainerView.layerName).subviews[0] as! UIScrollView
             let imageView = getView(tag: tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as! UIImageView
@@ -603,6 +626,7 @@ extension PhotoPrintViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         let imageView = getView(tag: scrollView.tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as? UIImageView
         let imageContainerView = getView(tag: scrollView.tag, layerName: Subviews.imageContainerView.layerName)
+        isHaveEditedPhotos = true
         
         if isImageSizeControl(selectedPhotosIndex: scrollView.tag) {
             imageContainerView.layer.borderColor = AppColor.forgetPassTextGreen.cgColor
