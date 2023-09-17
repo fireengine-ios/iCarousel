@@ -141,7 +141,7 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
             newValue.clipsToBounds = true
             newValue.layer.borderWidth = 1.0
             newValue.layer.borderColor = AppColor.switcherGrayColor.cgColor
-            newValue.isUserInteractionEnabled = true
+            newValue.isUserInteractionEnabled = false
         }
     }
     
@@ -190,15 +190,22 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
     }
     
     @objc private func cityViewTapped() {
+        cityView.textField.text = localized(.selectCityDistrict)
+        cityView.textField.textColor = AppColor.darkBlueColor.color
         tappedView = .city
         tableViewConfig(withView: cityView)
         tableView.reloadData()
     }
     
     @objc private func districtViewTapped() {
+        if districtList?.count == nil {
+            return
+        }
+        districtView.textField.textColor = AppColor.darkBlueColor.color
         tappedView = .district
         tableViewConfig(withView: districtView)
         tableView.reloadData()
+        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .bottom, animated: false)
     }
     
     private func tableViewConfig(withView: UIView) {
@@ -267,6 +274,8 @@ extension PhotoPrintAddAdressPopup: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath)
+        cell.textLabel!.textColor = AppColor.darkBlueColor.color
+        cell.textLabel!.font = .appFont(.regular, size: 14)
         if tappedView == .city {
             cell.textLabel!.text = cityList?[indexPath.row].name ?? ""
         } else {
@@ -279,10 +288,12 @@ extension PhotoPrintAddAdressPopup: UITableViewDelegate, UITableViewDataSource {
         if tappedView == .city {
             selectedCityId = cityList?[indexPath.row].id ?? 0
             cityView.textField.text = cityList?[indexPath.row].name ?? ""
+            cityView.textField.textColor = AppColor.borderColor.color
             districtView.textField.text = localized(.selectCityDistrict)
             getDistrict(id: cityList?[indexPath.row].id ?? 1)
         } else {
             selectedDistrictId = cityList?[indexPath.row].id ?? 0
+            districtView.textField.textColor = AppColor.borderColor.color
             districtView.textField.text = districtList?[indexPath.row].name ?? ""
         }
         
