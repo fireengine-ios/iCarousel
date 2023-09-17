@@ -2132,7 +2132,7 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "office_filter_not_found" = "Filtrelemeye çalıştığınız dosya (%@) bulunamadı.";
 "contact_us_complaint_cellfie" = "Bizimle iletişime geçtiğiniz için teşekkürler. Talebiniz incelenmek üzere Cellfie Mobile'a iletildi. Sorunu incelemek için cihazınızla ilgili bilgiler, lifebox kullanım bilgileri, iletişim bilgileri ve kişisel bilgiler gibi sağladığınız tüm gerekli bilgileri onlarla paylaşacağız. lifebox'a yüklediğiniz fotoğraflar/videolar ve diğer içerikler Cellfie Mobile ile paylaşılmayacaktır.";
-"Office_Filter_Not_Found" = "";
+"Office_Filter_Not_Found" = "Filtrelemeye çalıştığınız dosya (%@) bulunamadı.";
 
 /*Fuzzy*/
 "new_print" = "Yeni Baskı Oluştur";
@@ -2189,3 +2189,27 @@ then {11,99 TRY/Month}*/
 "print_cancel_popup_info" = "Basılı albüm için seçtiğin tüm fotoğraf düzenlemelerin silinecektir. Yeniden fotoğraf seçmen ve yeniden düzenlemen gereklidir.";
 "no_right_print_popup_title" = "Baskı Hakkını Kullandın";
 "no_right_print_popup_info" = "Paketin dahilindeki fotoğraf baskı hakkını kullandın. Paketin yenilendiğinde fotoğraflarını tekrar baskıya gönderebilirsin.";
+"send_print_button" = "Baskıya Gönder";
+"add_address" = "Adres Ekle";
+"send_print_popup_title" = "Seçtiğin Fotoğraflar Baskıya Hazır";
+
+/*Fuzzy*/
+"send_print_popup_address" = "Fotoğrafların basılı olarak; \"%d\" adresine gönderilecektir";
+"send_print_popup_info" = "Baskıya gönderilmesi durumunda bu işlem iptal edilemez.";
+"address_title" = "Adres Başlığı";
+"address_city" = "İl";
+"address_district" = "İlçe";
+"address_neighbourhood" = "Mahalle";
+"address_street" = "Cadde/Sokak";
+"address_building_no" = "Bina No";
+"address_apartment_no" = "Daire No";
+"address_postacode" = "Posta Kodu";
+"add_saved_my_address" = "Kayıtlı adreslerime ekle.";
+"save_address" = "Adresi Kaydet";
+"update_address" = "Adres Güncelle";
+"use_address" = "Adresi Kullan";
+"change_address" = "Adres Değiştir";
+"sent_print_info_popup_title" = "Siparişin Oluşturuldu";
+"sent_print_info_popup_body" = "Siparişin hazırlanıyor. Sipariş takibini sipariş detayından yapabilirsin.\n";
+"address_title_placeholder" = "Örnek; Evim, İş Yerim vb.";
+"select_city_district" = "Seçiniz";

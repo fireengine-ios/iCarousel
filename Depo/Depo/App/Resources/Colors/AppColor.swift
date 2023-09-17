@@ -231,6 +231,7 @@ enum AppColor {
     case discoverCardLine
     case settingsButtonColor
     case tealBlue
+    case switcherGrayColor
     
 
     var color: UIColor {
