@@ -57,6 +57,7 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
             newValue.textField.setLeftPaddingPoints(25)
             newValue.textField.autocorrectionType = .no
             newValue.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+            newValue.textField.delegate = self
         }
     }
     
@@ -67,6 +68,7 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
             newValue.textField.setLeftPaddingPoints(25)
             newValue.textField.autocorrectionType = .no
             newValue.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+            newValue.textField.delegate = self
         }
     }
 
@@ -108,6 +110,7 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
             newValue.textField.setLeftPaddingPoints(25)
             newValue.textField.autocorrectionType = .no
             newValue.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+            newValue.textField.delegate = self
         }
     }
     
@@ -117,6 +120,7 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
             newValue.textField.setLeftPaddingPoints(25)
             newValue.textField.autocorrectionType = .no
             newValue.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+            newValue.textField.delegate = self
         }
     }
     
@@ -126,6 +130,7 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
             newValue.textField.setLeftPaddingPoints(25)
             newValue.textField.autocorrectionType = .no
             newValue.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+            newValue.textField.delegate = self
         }
     }
     
@@ -135,6 +140,7 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
             newValue.textField.setLeftPaddingPoints(25)
             newValue.textField.autocorrectionType = .no
             newValue.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+            newValue.textField.delegate = self
         }
     }
     
@@ -186,7 +192,7 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
     private var selectedCityId = Int()
     private var selectedDistrictId = Int()
     private var isAddressSave = Bool()
-    private var checkButtonIsChecked: Bool = true
+    private var checkButtonIsChecked: Bool = false
     private var tappedView: TappedView = .city
     private var localAddress: LocalAddress?
     
@@ -278,7 +284,7 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
             apartmentNoView.textField.text = address?.apartmentNumber
             postaCodeView.textField.text = String(describing: address?.postalCode ?? 0)
             enableButton(isEnable: true)
-            checkButton.isSelected = true
+            checkButton.isSelected = false
         } else {
             isAddressSave = true
         }
@@ -360,10 +366,35 @@ extension PhotoPrintAddAdressPopup {
 
 extension PhotoPrintAddAdressPopup: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let allowedCharacters = CharacterSet.decimalDigits
-        let characterSet = CharacterSet(charactersIn: string)
-        return allowedCharacters.isSuperset(of: characterSet)
+        if textField == postaCodeView.textField {
+            let currentCharacterCount = textField.text?.count ?? 0
+            if range.length + range.location > currentCharacterCount {
+                return false
+            }
+            let newLength = currentCharacterCount + string.count - range.length
+            
+            let allowedCharacters = CharacterSet.decimalDigits
+            let characterSet = CharacterSet(charactersIn: string)
+            return newLength <= 3 && allowedCharacters.isSuperset(of: characterSet)
+        } else if textField == adressTitleView.textField || textField == neighbourhoodView.textField || textField == streetView.textField || textField == nameView.textField {
+            let currentCharacterCount = textField.text?.count ?? 0
+            if range.length + range.location > currentCharacterCount {
+                return false
+            }
+            let newLength = currentCharacterCount + string.count - range.length
+            return newLength <= 4
+        } else if textField == buildingNoView.textField || textField == apartmentNoView.textField {
+            let currentCharacterCount = textField.text?.count ?? 0
+            if range.length + range.location > currentCharacterCount {
+                return false
+            }
+            let newLength = currentCharacterCount + string.count - range.length
+            return newLength <= 5
+        }
+        return false
     }
+    
+    
 }
 
 extension PhotoPrintAddAdressPopup: UITableViewDelegate, UITableViewDataSource {
@@ -463,7 +494,8 @@ extension PhotoPrintAddAdressPopup {
                 self?.hideSpinner()
                 self?.setLocalAddress(address: response)
                 self?.dismiss(animated: false, completion: {
-                    NotificationCenter.default.post(name: .addressBack, object: nil, userInfo: ["address": response])
+                    let vc = PhotoPrintSendPopup.with(address: response)
+                    vc.openWithBlur()
                 })
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.localizedDescription)
@@ -481,7 +513,8 @@ extension PhotoPrintAddAdressPopup {
                 self?.hideSpinner()
                 self?.setLocalAddress(address: response)
                 self?.dismiss(animated: false, completion: {
-                    NotificationCenter.default.post(name: .addressBack, object: nil, userInfo: ["address": response])
+                    let vc = PhotoPrintSendPopup.with(address: response)
+                    vc.openWithBlur()
                 })
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.localizedDescription)

@@ -120,8 +120,11 @@ final class PhotoPrintSendPopup: BasePopUpController {
     }
     
     @objc private func changeAddressTapped() {
-        let vc = PhotoPrintAddAdressPopup.with(address: address)
-        vc.openWithBlur()
+        dismiss(animated: false, completion: {
+            let vc = PhotoPrintAddAdressPopup.with(address: self.address)
+            vc.openWithBlur()
+        })
+        
     }
     
     private func enableSendButton(isEnable: Bool) {
@@ -132,7 +135,7 @@ final class PhotoPrintSendPopup: BasePopUpController {
             
             cancelButton.backgroundColor = .white
             cancelButton.layer.borderColor = AppColor.darkBlueColor.cgColor
-            cancelButton.isUserInteractionEnabled = false
+            cancelButton.isUserInteractionEnabled = true
             cancelButton.setTitleColor(AppColor.darkBlueColor.color, for: .normal)
         } else {
             sendButton.backgroundColor = AppColor.borderLightGray.color
@@ -141,8 +144,8 @@ final class PhotoPrintSendPopup: BasePopUpController {
             
             cancelButton.backgroundColor = AppColor.borderLightGray.color
             cancelButton.layer.borderColor = AppColor.borderLightGray.cgColor
-            cancelButton.isUserInteractionEnabled = false
-            cancelButton.setTitleColor(AppColor.darkBlueColor.color, for: .normal)
+            cancelButton.isUserInteractionEnabled = true
+            cancelButton.setTitleColor(.white, for: .normal)
         }
     }
     
