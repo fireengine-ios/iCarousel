@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 final class PhotoPrintService: BaseRequestService {
     
@@ -40,4 +41,75 @@ final class PhotoPrintService: BaseRequestService {
             .responseObject(handler)
             .task
     }
+    
+    @discardableResult
+    func photoPrintMyAddress(handler: @escaping (ResponseResult<[AddressResponse]>) -> Void) -> URLSessionTask? {
+        debugLog("photoPrintMyAdress")
+        
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.myAddress)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
+    
+    @discardableResult
+    func photoPrintAddAddress(addressName: String, recipientName: String, recipientNeighbourhood: String, recipientStreet: String, recipientBuildingNumber: String, recipientApartmentNumber: String, recipientCityId: Int, recipientDistrictId: Int, postalCode: Int, saveStatus: Bool, handler: @escaping ResponseHandler<AddressResponse>) -> URLSessionTask? {
+        debugLog("photoPrintAddAdress")
+        
+        let parameters: [String: Any] = ["addressName": addressName,
+                                   "recipientName" : recipientName,
+                                   "recipientNeighbourhood" : recipientNeighbourhood,
+                                   "recipientStreet" : recipientStreet,
+                                   "recipientBuildingNumber" : recipientBuildingNumber,
+                                   "recipientApartmentNumber" : recipientApartmentNumber,
+                                   "recipientCity" : recipientCityId,
+                                   "recipientDistrict" : recipientDistrictId,
+                                   "postalCode" : postalCode,
+                                   "saveStatus" : saveStatus]
+        
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.addAddress,
+                     method: .post,
+                     parameters: parameters,
+                     encoding: JSONEncoding.default)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
+    
+    @discardableResult
+    func photoPrintUpdateAddress(id: Int, addressName: String, recipientName: String, recipientNeighbourhood: String, recipientStreet: String, recipientBuildingNumber: String, recipientApartmentNumber: String, recipientCityId: Int, recipientDistrictId: Int, postalCode: Int, saveStatus: Bool, handler: @escaping ResponseHandler<AddressResponse>) -> URLSessionTask? {
+        debugLog("photoPrintUpdateAdress")
+        
+        let path = String(format: RouteRequests.updateAdress, id)
+        guard let url = URL(string: path, relativeTo: RouteRequests.baseUrl) else {
+            assertionFailure()
+           return nil
+        }
+        
+        let parameters: [String: Any] = ["addressName": addressName,
+                                   "recipientName" : recipientName,
+                                   "recipientNeighbourhood" : recipientNeighbourhood,
+                                   "recipientStreet" : recipientStreet,
+                                   "recipientBuildingNumber" : recipientBuildingNumber,
+                                   "recipientApartmentNumber" : recipientApartmentNumber,
+                                   "recipientCity" : recipientCityId,
+                                   "recipientDistrict" : recipientDistrictId,
+                                   "postalCode" : postalCode,
+                                   "saveStatus" : saveStatus]
+        
+        return SessionManager
+            .customDefault
+            .request(url,
+                     method: .put,
+                     parameters: parameters,
+                     encoding: JSONEncoding.default)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
+    
 }

@@ -14,4 +14,5 @@ extension NSNotification.Name {
     static let videoScreen = Notification.Name(rawValue: "VideoScreenOn")
     static let updateThreeDots = Notification.Name(rawValue: "UpdateThreeDots")
     static let navigationBack = Notification.Name(rawValue: "NavigationBack")
+    static let addressBack = Notification.Name(rawValue: "AddressBack")
 }

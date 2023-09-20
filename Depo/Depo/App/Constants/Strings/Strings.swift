@@ -315,4 +315,5 @@ enum Strings: String, Localizable {
     case sentPrintInfoPopupBody = "sent_print_info_popup_body"
     case addressTitlePlaceholder = "address_title_placeholder"
     case selectCityDistrict = "select_city_district"
+    case sendPrintPopupNoAddress = "send_print_popup_no_address"
 }

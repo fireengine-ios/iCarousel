@@ -20,6 +20,7 @@
                 <outlet property="districtView" destination="CZT-W7-NBy" id="GpM-pN-dTq"/>
                 <outlet property="exitImageView" destination="Kt3-vT-itr" id="8Vg-eM-CdU"/>
                 <outlet property="lineLabel" destination="OAv-VA-YIc" id="aEj-d5-vdX"/>
+                <outlet property="nameView" destination="4QZ-yE-ARZ" id="zw3-wy-UHg"/>
                 <outlet property="neighbourhoodView" destination="8zU-hg-PdS" id="OI3-St-jkM"/>
                 <outlet property="postaCodeView" destination="W6t-5C-pch" id="t34-ld-gqf"/>
                 <outlet property="saveAdressButton" destination="xvg-Be-fsD" id="ZVI-EI-jWV"/>
@@ -37,7 +38,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="393" height="839"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n4e-Zg-cAP">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="831"/>
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="855"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JQX-qX-D0F">
                                     <rect key="frame" x="176" y="16" width="41.333333333333343" height="24"/>
@@ -63,42 +64,42 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vrt-pa-sBI" customClass="ProfileTextEnterView" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="12" y="86" width="369" height="56"/>
+                                    <rect key="frame" x="12" y="170" width="369" height="56"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="56" id="UkZ-kr-ve7"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AK7-sk-9PY" customClass="ProfileTextEnterView" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="12" y="170" width="369" height="56"/>
+                                    <rect key="frame" x="12" y="254" width="369" height="56"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="56" id="XzH-XG-zDt"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CZT-W7-NBy" customClass="ProfileTextEnterView" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="12" y="254" width="369" height="56"/>
+                                    <rect key="frame" x="12" y="338" width="369" height="56"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="56" id="Ruv-an-hbm"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8zU-hg-PdS" customClass="ProfileTextEnterView" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="12" y="338" width="369" height="56"/>
+                                    <rect key="frame" x="12" y="422" width="369" height="56"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="56" id="1dH-9l-4NK"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MDE-G7-hid" customClass="ProfileTextEnterView" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="12" y="422" width="369" height="56"/>
+                                    <rect key="frame" x="12" y="506" width="369" height="56"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="56" id="uwL-7t-oRL"/>
                                     </constraints>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hkX-0m-d9W">
-                                    <rect key="frame" x="12" y="506" width="369" height="60"/>
+                                    <rect key="frame" x="12" y="590" width="369" height="60"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QY9-5X-FSf" customClass="ProfileTextEnterView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="119.66666666666667" height="60"/>
@@ -118,7 +119,7 @@
                                     </constraints>
                                 </stackView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gt0-ca-b2B">
-                                    <rect key="frame" x="46" y="594" width="335" height="24"/>
+                                    <rect key="frame" x="46" y="678" width="335" height="24"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="24" id="w1c-yy-tA0"/>
                                     </constraints>
@@ -127,7 +128,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xvg-Be-fsD">
-                                    <rect key="frame" x="12" y="646" width="369" height="45"/>
+                                    <rect key="frame" x="12" y="730" width="369" height="45"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="45" id="2xX-u0-Jws"/>
                                     </constraints>
@@ -138,7 +139,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLl-RN-d1U">
-                                    <rect key="frame" x="12" y="594" width="24" height="24"/>
+                                    <rect key="frame" x="12" y="678" width="24" height="24"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="24" id="2dO-Db-UMR"/>
                                         <constraint firstAttribute="width" constant="24" id="qyN-9Z-lDP"/>
@@ -148,8 +149,17 @@
                                         <action selector="checkButtonTapped:" destination="-1" eventType="touchUpInside" id="w7A-2g-1gA"/>
                                     </connections>
                                 </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4QZ-yE-ARZ" customClass="ProfileTextEnterView" customModule="Billo" customModuleProvider="target">
+                                    <rect key="frame" x="12" y="86" width="369" height="56"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="56" id="825-jq-YNz"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <constraints>
+                                <constraint firstAttribute="bottom" secondItem="xvg-Be-fsD" secondAttribute="bottom" constant="80" id="3Nv-0z-n1z"/>
+                                <constraint firstItem="vrt-pa-sBI" firstAttribute="top" secondItem="4QZ-yE-ARZ" secondAttribute="bottom" constant="28" id="5PQ-wJ-GIQ"/>
                                 <constraint firstItem="Gt0-ca-b2B" firstAttribute="top" secondItem="hkX-0m-d9W" secondAttribute="bottom" constant="28" id="6g4-qr-8VP"/>
                                 <constraint firstItem="OAv-VA-YIc" firstAttribute="top" secondItem="JQX-qX-D0F" secondAttribute="bottom" constant="16" id="6wA-p4-ySF"/>
                                 <constraint firstItem="AK7-sk-9PY" firstAttribute="top" secondItem="vrt-pa-sBI" secondAttribute="bottom" constant="28" id="87Y-s3-z2q"/>
@@ -166,18 +176,19 @@
                                 <constraint firstItem="CZT-W7-NBy" firstAttribute="leading" secondItem="n4e-Zg-cAP" secondAttribute="leading" constant="12" id="NXU-JR-b5D"/>
                                 <constraint firstItem="JQX-qX-D0F" firstAttribute="top" secondItem="n4e-Zg-cAP" secondAttribute="top" constant="16" id="Scg-a4-9Ag"/>
                                 <constraint firstAttribute="trailing" secondItem="hkX-0m-d9W" secondAttribute="trailing" constant="12" id="UhW-SK-Pib"/>
+                                <constraint firstAttribute="trailing" secondItem="4QZ-yE-ARZ" secondAttribute="trailing" constant="12" id="VM6-Ce-xJa"/>
                                 <constraint firstAttribute="trailing" secondItem="xvg-Be-fsD" secondAttribute="trailing" constant="12" id="VXP-L8-ayp"/>
                                 <constraint firstAttribute="trailing" secondItem="AK7-sk-9PY" secondAttribute="trailing" constant="12" id="Vsw-dV-E0n"/>
                                 <constraint firstItem="JQX-qX-D0F" firstAttribute="centerX" secondItem="n4e-Zg-cAP" secondAttribute="centerX" id="X6f-7v-4Cz"/>
-                                <constraint firstItem="vrt-pa-sBI" firstAttribute="top" secondItem="OAv-VA-YIc" secondAttribute="bottom" constant="28" id="ZXq-y8-YI7"/>
+                                <constraint firstItem="4QZ-yE-ARZ" firstAttribute="top" secondItem="OAv-VA-YIc" secondAttribute="bottom" constant="28" id="XEP-1X-ATy"/>
                                 <constraint firstAttribute="trailing" secondItem="vrt-pa-sBI" secondAttribute="trailing" constant="12" id="i0l-4B-ubp"/>
                                 <constraint firstItem="OAv-VA-YIc" firstAttribute="leading" secondItem="n4e-Zg-cAP" secondAttribute="leading" id="i1m-xx-Wof"/>
-                                <constraint firstAttribute="bottom" secondItem="xvg-Be-fsD" secondAttribute="bottom" constant="140" id="kZK-go-uta"/>
                                 <constraint firstItem="xvg-Be-fsD" firstAttribute="top" secondItem="Gt0-ca-b2B" secondAttribute="bottom" constant="28" id="lZl-GQ-ZXE"/>
                                 <constraint firstItem="xvg-Be-fsD" firstAttribute="leading" secondItem="n4e-Zg-cAP" secondAttribute="leading" constant="12" id="mOo-WG-e3u"/>
                                 <constraint firstAttribute="trailing" secondItem="OAv-VA-YIc" secondAttribute="trailing" id="mZh-au-rgK"/>
                                 <constraint firstItem="Kt3-vT-itr" firstAttribute="top" secondItem="n4e-Zg-cAP" secondAttribute="top" constant="16" id="nsJ-ex-nih"/>
                                 <constraint firstAttribute="trailing" secondItem="CZT-W7-NBy" secondAttribute="trailing" constant="12" id="qMC-Id-fxq"/>
+                                <constraint firstItem="4QZ-yE-ARZ" firstAttribute="leading" secondItem="n4e-Zg-cAP" secondAttribute="leading" constant="12" id="sZ6-xA-PPm"/>
                                 <constraint firstAttribute="trailing" secondItem="Gt0-ca-b2B" secondAttribute="trailing" constant="12" id="szG-gv-pgs"/>
                                 <constraint firstItem="fLl-RN-d1U" firstAttribute="leading" secondItem="n4e-Zg-cAP" secondAttribute="leading" constant="12" id="tbG-mu-FS7"/>
                                 <constraint firstAttribute="trailing" secondItem="MDE-G7-hid" secondAttribute="trailing" constant="12" id="uQN-yU-Iqt"/>

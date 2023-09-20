@@ -10,6 +10,8 @@ import Foundation
 
 final class PhotoPrintInteractor {
     weak var output: PhotoPrintInteractorOutput!
+    private let service = PhotoPrintService()
+    private var address: [AddressResponse]?
 }
 
 extension PhotoPrintInteractor: PhotoPrintInteractorInput {

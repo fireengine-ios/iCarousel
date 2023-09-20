@@ -26,7 +26,6 @@ extension PhotoPrintPresenter: PhotoPrintViewOutput {
 }
 
 extension PhotoPrintPresenter: PhotoPrintInteractorOutput {
-    
     func didFinishedAllRequests() {
         view.hideSpinner()
         view.didFinishedAllRequests()

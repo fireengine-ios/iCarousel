@@ -8,6 +8,21 @@
 
 import Foundation
 
+struct LocalAddress: Encodable {
+    let id: Int
+    let addressName: String
+    let nameSurname: String
+    let cityId: Int
+    let city: String
+    let districtId: Int
+    let district: String
+    let neighbourhood: String
+    let street: String
+    let buildNo: String
+    let apartmentNo: String
+    let postalCode: Int
+}
+
 enum TappedView {
     case city
     case district
@@ -35,12 +50,23 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
         }
     }
     
+    @IBOutlet weak var nameView: ProfileTextEnterView! {
+        willSet {
+            newValue.titleLabel.text = TextConstants.settingsUserInfoNameSurname
+            newValue.textField.quickDismissPlaceholder = TextConstants.userProfileNameAndSurNameSubTitle
+            newValue.textField.setLeftPaddingPoints(25)
+            newValue.textField.autocorrectionType = .no
+            newValue.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        }
+    }
+    
     @IBOutlet weak var adressTitleView: ProfileTextEnterView! {
         willSet {
             newValue.titleLabel.text = localized(.addressTitle)
             newValue.textField.quickDismissPlaceholder = localized(.addressTitlePlaceholder)
             newValue.textField.setLeftPaddingPoints(25)
             newValue.textField.autocorrectionType = .no
+            newValue.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         }
     }
 
@@ -81,6 +107,7 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
             newValue.titleLabel.text = localized(.addressNeighbourhood)
             newValue.textField.setLeftPaddingPoints(25)
             newValue.textField.autocorrectionType = .no
+            newValue.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         }
     }
     
@@ -89,6 +116,7 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
             newValue.titleLabel.text = localized(.addressStreet)
             newValue.textField.setLeftPaddingPoints(25)
             newValue.textField.autocorrectionType = .no
+            newValue.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         }
     }
     
@@ -97,6 +125,7 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
             newValue.titleLabel.text = localized(.addressBuildingNo)
             newValue.textField.setLeftPaddingPoints(25)
             newValue.textField.autocorrectionType = .no
+            newValue.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         }
     }
     
@@ -105,6 +134,7 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
             newValue.titleLabel.text = localized(.addressApartmentNo)
             newValue.textField.setLeftPaddingPoints(25)
             newValue.textField.autocorrectionType = .no
+            newValue.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         }
     }
     
@@ -113,6 +143,8 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
             newValue.titleLabel.text = localized(.addressPostacode)
             newValue.textField.setLeftPaddingPoints(25)
             newValue.textField.autocorrectionType = .no
+            newValue.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+            newValue.textField.delegate = self
         }
     }
     
@@ -136,23 +168,27 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
             newValue.setTitle(localized(.saveAddress), for: .normal)
             newValue.titleLabel?.font = .appFont(.medium, size: 16)
             newValue.setTitleColor(.white, for: .normal)
-            newValue.backgroundColor = AppColor.switcherGrayColor.color
+            newValue.backgroundColor = AppColor.borderLightGray.color
             newValue.layer.cornerRadius = newValue.frame.size.height * 0.5
             newValue.clipsToBounds = true
             newValue.layer.borderWidth = 1.0
-            newValue.layer.borderColor = AppColor.switcherGrayColor.cgColor
-            newValue.isUserInteractionEnabled = false
+            newValue.layer.borderColor = AppColor.borderLightGray.cgColor
+            newValue.isUserInteractionEnabled = true
         }
     }
     
     private let service = PhotoPrintService()
     private var cityList: [CityResponse]?
     private var districtList: [DistrictResponse]?
+    private var address: AddressResponse?
     private var tableView: UITableView!
     private let tableContainerView = UIView()
     private var selectedCityId = Int()
     private var selectedDistrictId = Int()
+    private var isAddressSave = Bool()
+    private var checkButtonIsChecked: Bool = true
     private var tappedView: TappedView = .city
+    private var localAddress: LocalAddress?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -160,17 +196,29 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
         configureTableView()
         setTapped()
         getCity()
+        setTextFromAddress(address: address)
     }
     
     @IBAction func checkButtonTapped(_ sender: Any) {
         (sender as! UIButton).isSelected = !(sender as! UIButton).isSelected
-        tableContainerView.isHidden = true
-        tableView.isHidden = true
-        enableButton(isEnable: true)
+        checkButtonIsChecked = (sender as! UIButton).isSelected
+        checkButtonIsChecked ? checkButton.setImage(Image.iconSelectFills.image, for: .normal) : checkButton.setImage(Image.iconSelectEmpty.image, for: .normal)
     }
     
     @IBAction func saveAdressButtonTapped(_ sender: Any) {
-        
+        if isAddressSave {
+            checkButtonIsChecked ? addAddressFunc(saveStatus: true) : addAddressFunc(saveStatus: false)
+        } else {
+            checkButtonIsChecked ? updateAddressFunc(saveStatus: true) : updateAddressFunc(saveStatus: false)
+        }
+    }
+    
+    private func addAddressFunc(saveStatus: Bool) {
+        addAdress(addressName: adressTitleView.textField.text ?? "", recipientName: nameView.textField.text ?? "", recipientNeighbourhood: neighbourhoodView.textField.text ?? "", recipientStreet: streetView.textField.text ?? "", recipientBuildingNumber: buildingNoView.textField.text ?? "", recipientApartmentNumber: apartmentNoView    .textField.text ?? "", recipientCityId: selectedCityId, recipientDistrictId: selectedDistrictId, postalCode: Int(postaCodeView.textField.text ?? "") ?? 0, saveStatus: saveStatus)
+    }
+    
+    private func updateAddressFunc(saveStatus: Bool) {
+        updateAddress(id: address?.id ?? 0, addressName: adressTitleView.textField.text ?? "", recipientName: nameView.textField.text ?? "", recipientNeighbourhood: neighbourhoodView.textField.text ?? "", recipientStreet: streetView.textField.text ?? "", recipientBuildingNumber: buildingNoView.textField.text ?? "", recipientApartmentNumber: apartmentNoView.textField.text ?? "", recipientCityId: selectedCityId, recipientDistrictId: selectedDistrictId, postalCode: Int(postaCodeView.textField.text ?? "") ?? 0, saveStatus: saveStatus)
     }
     
     @objc private func dismissPopup() {
@@ -183,8 +231,8 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
             saveAdressButton.layer.borderColor = AppColor.darkBlueColor.cgColor
             saveAdressButton.isUserInteractionEnabled = true
         } else {
-            saveAdressButton.backgroundColor = AppColor.switcherGrayColor.color
-            saveAdressButton.layer.borderColor = AppColor.switcherGrayColor.cgColor
+            saveAdressButton.backgroundColor = AppColor.borderLightGray.color
+            saveAdressButton.layer.borderColor = AppColor.borderLightGray.cgColor
             saveAdressButton.isUserInteractionEnabled = false
         }
     }
@@ -212,6 +260,54 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
         tableContainerView.isHidden = false
         tableView.isHidden = false
         tableContainerView.frame = CGRect(x: 12, y: withView.frame.maxY, width: view.frame.width - 48, height: 240)
+    }
+    
+    private func setTextFromAddress(address: AddressResponse?) {
+        if address != nil {
+            isAddressSave = false
+            getDistrict(id: address?.addressCity.id ?? 1)
+            selectedCityId = address?.addressCity.id ?? 1
+            selectedDistrictId = address?.addressDistrict.id ?? 1
+            nameView.textField.text = address?.recipientName
+            adressTitleView.textField.text = address?.name
+            cityView.textField.text = address?.addressCity.name
+            districtView.textField.text = address?.addressDistrict.name
+            neighbourhoodView.textField.text = address?.neighbourhood
+            streetView.textField.text = address?.street
+            buildingNoView.textField.text = address?.buildingNumber
+            apartmentNoView.textField.text = address?.apartmentNumber
+            postaCodeView.textField.text = String(describing: address?.postalCode ?? 0)
+            enableButton(isEnable: true)
+            checkButton.isSelected = true
+        } else {
+            isAddressSave = true
+        }
+    }
+    
+    private func isTextFieldEmpty() {
+        var result: Bool = true
+        let view1 = view.subviews[0].subviews[0].subviews
+        for (_, element) in view1.enumerated() {
+            if element is ProfileTextEnterView {
+                let enterView = element as! ProfileTextEnterView
+                if enterView.textField.text?.count ?? 0 == 0 || enterView.textField.text == localized(.selectCityDistrict) {
+                    result = false
+                }
+            }
+            if element is UIStackView {
+                for(_, subElement) in element.subviews.enumerated() {
+                    let enterView = subElement as! ProfileTextEnterView
+                    if enterView.textField.text?.count ?? 0 == 0 {
+                        result = false
+                    }
+                }
+            }
+        }
+        result ? enableButton(isEnable: true) : enableButton(isEnable: false)
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        isTextFieldEmpty()
     }
     
     private func configureTableView() {
@@ -248,17 +344,25 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
 }
 
 extension PhotoPrintAddAdressPopup {
-    static func with() -> PhotoPrintAddAdressPopup {
-        let vc = controllerWith()
+    static func with(address: AddressResponse?) -> PhotoPrintAddAdressPopup {
+        let vc = controllerWith(address: address)
         return vc
     }
     
-    private static func controllerWith() -> PhotoPrintAddAdressPopup {
+    private static func controllerWith(address: AddressResponse?) -> PhotoPrintAddAdressPopup {
         let vc = PhotoPrintAddAdressPopup(nibName: "PhotoPrintAddAdressPopup", bundle: nil)
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overFullScreen
-        
+        vc.address = address
         return vc
+    }
+}
+
+extension PhotoPrintAddAdressPopup: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let allowedCharacters = CharacterSet.decimalDigits
+        let characterSet = CharacterSet(charactersIn: string)
+        return allowedCharacters.isSuperset(of: characterSet)
     }
 }
 
@@ -291,10 +395,12 @@ extension PhotoPrintAddAdressPopup: UITableViewDelegate, UITableViewDataSource {
             cityView.textField.textColor = AppColor.borderColor.color
             districtView.textField.text = localized(.selectCityDistrict)
             getDistrict(id: cityList?[indexPath.row].id ?? 1)
+            isTextFieldEmpty()
         } else {
-            selectedDistrictId = cityList?[indexPath.row].id ?? 0
+            selectedDistrictId = districtList?[indexPath.row].id ?? 0
             districtView.textField.textColor = AppColor.borderColor.color
             districtView.textField.text = districtList?[indexPath.row].name ?? ""
+            isTextFieldEmpty()
         }
         
         tableContainerView.isHidden = true
@@ -348,4 +454,45 @@ extension PhotoPrintAddAdressPopup {
             }
         }
     }
+    
+    private func addAdress(addressName: String, recipientName: String, recipientNeighbourhood: String, recipientStreet: String, recipientBuildingNumber: String, recipientApartmentNumber: String, recipientCityId: Int, recipientDistrictId: Int, postalCode: Int, saveStatus: Bool) {
+        showSpinner()
+        service.photoPrintAddAddress(addressName: addressName, recipientName: recipientName, recipientNeighbourhood: recipientNeighbourhood, recipientStreet: recipientStreet, recipientBuildingNumber: recipientBuildingNumber, recipientApartmentNumber: recipientApartmentNumber, recipientCityId: recipientCityId, recipientDistrictId: recipientDistrictId, postalCode: postalCode, saveStatus: saveStatus) { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.hideSpinner()
+                self?.setLocalAddress(address: response)
+                self?.dismiss(animated: false, completion: {
+                    NotificationCenter.default.post(name: .addressBack, object: nil, userInfo: ["address": response])
+                })
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.localizedDescription)
+                self?.hideSpinner()
+                break
+            }
+        }
+    }
+    
+    private func updateAddress(id: Int, addressName: String, recipientName: String, recipientNeighbourhood: String, recipientStreet: String, recipientBuildingNumber: String, recipientApartmentNumber: String, recipientCityId: Int, recipientDistrictId: Int, postalCode: Int, saveStatus: Bool) {
+        showSpinner()
+        service.photoPrintUpdateAddress(id: id, addressName: addressName, recipientName: recipientName, recipientNeighbourhood: recipientNeighbourhood, recipientStreet: recipientStreet, recipientBuildingNumber: recipientBuildingNumber, recipientApartmentNumber: recipientApartmentNumber, recipientCityId: recipientCityId, recipientDistrictId: recipientDistrictId, postalCode: postalCode, saveStatus: saveStatus) { [weak self] result in
+            switch result {               
+            case .success(let response):
+                self?.hideSpinner()
+                self?.setLocalAddress(address: response)
+                self?.dismiss(animated: false, completion: {
+                    NotificationCenter.default.post(name: .addressBack, object: nil, userInfo: ["address": response])
+                })
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.localizedDescription)
+                self?.hideSpinner()
+                break
+            }
+        }
+    }
+    
+    private func setLocalAddress(address: AddressResponse) {
+        localAddress = LocalAddress(id: address.id,addressName: address.name, nameSurname: address.recipientName, cityId: address.addressCity.id, city: address.addressCity.name, districtId: address.addressDistrict.id, district: address.addressDistrict.name, neighbourhood: address.neighbourhood, street: address.street, buildNo: address.buildingNumber, apartmentNo: address.apartmentNumber, postalCode: address.postalCode)
+    }
+    
 }

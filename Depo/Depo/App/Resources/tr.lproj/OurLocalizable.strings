@@ -2194,7 +2194,7 @@ then {11,99 TRY/Month}*/
 "send_print_popup_title" = "Seçtiğin Fotoğraflar Baskıya Hazır";
 
 /*Fuzzy*/
-"send_print_popup_address" = "Fotoğrafların basılı olarak; \"%d\" adresine gönderilecektir";
+"send_print_popup_address" = "Fotoğrafların basılı olarak; \"%@ Mahallesi %@ Sokak No:%@ Daire:%@ %@/%@, %d\" adresine gönderilecektir.";
 "send_print_popup_info" = "Baskıya gönderilmesi durumunda bu işlem iptal edilemez.";
 "address_title" = "Adres Başlığı";
 "address_city" = "İl";
@@ -2213,3 +2213,5 @@ then {11,99 TRY/Month}*/
 "sent_print_info_popup_body" = "Siparişin hazırlanıyor. Sipariş takibini sipariş detayından yapabilirsin.\n";
 "address_title_placeholder" = "Örnek; Evim, İş Yerim vb.";
 "select_city_district" = "Seçiniz";
+"send_print_popup_no_address" = "Kayıtlı adresiniz bulunmamaktadır.";
+"grace_banner_text_paycell" = "lifebox paketinin yenilenmesi icin Paycell kart bakiyeni ve elektronik ticarete acik oldugunu kontrol edin. Farklı bir kredi kartı ile ya da uygulama üzerinden paket satınalabilirsiniz.";

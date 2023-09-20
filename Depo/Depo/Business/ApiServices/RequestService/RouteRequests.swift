@@ -530,4 +530,7 @@ struct RouteRequests {
     //MARK: -PhotoPrint
     static let city = baseUrl +/ "v1/address/cities"
     static let district = "v1/address/district/%d"
+    static let myAddress = baseUrl +/ "v1/address"
+    static let addAddress = baseUrl +/ "v1/address"
+    static let updateAdress = "v1/address/%d"
 }

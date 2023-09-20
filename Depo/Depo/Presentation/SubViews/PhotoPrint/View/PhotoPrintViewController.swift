@@ -202,7 +202,6 @@ final class PhotoPrintViewController: BaseViewController {
             showSpinner()
             let newSelectedPhotos = PhotoPrintConstants.selectedChangePhotoItems 
             let imageView = getView(tag: selectedPhotoIndex, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as? UIImageView
-            let imageContainerView = getView(tag: selectedPhotoIndex, layerName: Subviews.imageContainerView.layerName)
             
             if newSelectedPhotos.isEmpty {
                 hideSpinner()
@@ -270,7 +269,6 @@ final class PhotoPrintViewController: BaseViewController {
         
         if count == 1 {
             if self.selectedPhotos.count > 1 {
-                let imageView = self.getView(tag: sender.tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as? UIImageView
                 self.setLowQualityPhotosCount(photoIndex: sender.tag)
                 let viewInStack = self.stackMainView.arrangedSubviews[sender.tag]
                 self.stackMainView.removeArrangedSubview(viewInStack)
@@ -313,7 +311,6 @@ final class PhotoPrintViewController: BaseViewController {
     @objc private func newPhotoSelectTapped(_ sender: AnyObject) {
         photoSelectType = .changePhotoSelection
         selectedPhotoIndex = sender.view!.tag
-        let imageView = getView(tag: sender.view!.tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as! UIImageView
         setLowQualityPhotosCount(photoIndex: selectedPhotoIndex)
         imageSizeArray.remove(at: sender.view!.tag)
         router.openSelectPhotosWithChange(selectedPhotos: selectedPhotos, popupShowing: false)
@@ -327,7 +324,19 @@ final class PhotoPrintViewController: BaseViewController {
     }
     
     @objc private func nextButtonTapped(sender: UIButton) {
-        print(totalPhotoCount())
+        showSpinner()
+        let service = PhotoPrintService()
+        service.photoPrintMyAddress() { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.hideSpinner()
+                let vc = PhotoPrintSendPopup.with(address: response.first)
+                vc.openWithBlur()
+            case .failed(_):
+                self?.hideSpinner()
+                break
+            }
+        }
     }
     
     private func setImageReplace(tag: Int, image: UIImage) {
@@ -336,6 +345,8 @@ final class PhotoPrintViewController: BaseViewController {
         let landscapeHeightConstant = (view.frame.width) / 1.506
         
         let view = getView(tag: tag, layerName: Subviews.imageContainerView.layerName)
+        let rotateButton = getView(tag: tag, layerName: Subviews.rotateButton.layerName)
+        (rotateButton as? UIButton)?.isSelected = isPortrait ? true : false
         if let constraint = (view.constraints.filter{$0.firstAttribute == .height}.first) {
             constraint.constant = isPortrait ? portraitHeightConstant : landscapeHeightConstant
         }
@@ -624,7 +635,6 @@ extension PhotoPrintViewController {
 
 extension PhotoPrintViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        let imageView = getView(tag: scrollView.tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as? UIImageView
         let imageContainerView = getView(tag: scrollView.tag, layerName: Subviews.imageContainerView.layerName)
         isHaveEditedPhotos = true
         

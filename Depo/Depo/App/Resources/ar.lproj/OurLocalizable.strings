@@ -2136,8 +2136,8 @@ then {11,99 TRY/Month}*/
 "printed_photo_card_body_no_right" = "لقد استخدمت بالفعل حقك في طباعة الصور.";
 "printed_photo_card_info_no_right" = "يمكنك إعادة طبع اعتبارا من %d التاريخ.";
 "printed_package_view" = "عرض حزم الطباعة الخاصة بي";
-"more_photo_right" = "لقد اخترت أكثر من %d الصور. تقليل للمتابعة.";
-"no_more_photo_right" = "كنت قد حصلت على أكثر من %d تقديم الصور. هل أنت متأكد أنك تريد الاستمرار";
+"more_photo_right" = "كنت قد حصلت على أكثر من %d تقديم الصور. هل أنت متأكد أنك تريد الاستمرار?";
+"no_more_photo_right" = "لقد اخترت أكثر من %d الصور. تقليل للمتابعة.";
 "timeline_header" = "أفضل ذكريات 2023";
 "timeline_description" = "قمنا بتجميع أفضل ذكريات هذا العام من أجلك. تحقق منهم الآن!";
 "selected_for_print" = "مختارة للطباعة";
@@ -2167,3 +2167,5 @@ then {11,99 TRY/Month}*/
 "sent_print_info_popup_body" = "";
 "address_title_placeholder" = "";
 "select_city_district" = "";
+"send_print_popup_no_address" = "";
+"grace_banner_text_paycell" = "";
