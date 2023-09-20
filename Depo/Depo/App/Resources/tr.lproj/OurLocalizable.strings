@@ -2132,7 +2132,87 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "office_filter_not_found" = "Filtrelemeye çalıştığınız dosya (%@) bulunamadı.";
 "contact_us_complaint_cellfie" = "Bizimle iletişime geçtiğiniz için teşekkürler. Talebiniz incelenmek üzere Cellfie Mobile'a iletildi. Sorunu incelemek için cihazınızla ilgili bilgiler, lifebox kullanım bilgileri, iletişim bilgileri ve kişisel bilgiler gibi sağladığınız tüm gerekli bilgileri onlarla paylaşacağız. lifebox'a yüklediğiniz fotoğraflar/videolar ve diğer içerikler Cellfie Mobile ile paylaşılmayacaktır.";
-"Office_Filter_Not_Found" = "";
+"Office_Filter_Not_Found" = "Filtrelemeye çalıştığınız dosya (%@) bulunamadı.";
 
 /*Fuzzy*/
 "new_print" = "Yeni Baskı Oluştur";
+"print_info_popup_title" = "5 Adet Fotoğraf Seç";
+"print_info_popup_subtitle" = "Bu ay bastırmak için maximum 5 fotoğraf seç ve hemen evine gelsin.";
+"print_info_popup_checkbox" = "Bu uyarıyı bir daha gösterme.";
+
+/*Fuzzy*/
+"print_select_photo_button" = "Fotoğraf Seç";
+"print_select_photo_screen" = "Fotoğraf Seç";
+"print_select_photo_screen_bar" = "Baskı için seçilenler";
+
+/*Fuzzy*/
+"print_continue_button" = "Devam Et";
+"print_missing_photo_popup_title" = "Baskıya %d adet fotoğraf gönderiyorsun";
+"print_missing_photo_popup_subtitle" = "%d adet fotoğraf gönderme hakkın daha var. Devam etmen durumunda bu ay içerisinde kalan %d adet fotoğrafı gönderemezsin";
+
+/*Fuzzy*/
+"create_cell_popup" = "Çalışma Tablosu Oluştur";
+
+/*Fuzzy*/
+"create_slide_popup" = "Sunum Oluştur";
+"kktc_restore_info" = "Kuzey Kıbrıs Turkcell  müşterileri 50GB lifebox paketi için LIFEBOX 50GB, lifebox 500GB paketi için LIFEBOX 500GB ve lifebox 2.5TB paketi için LIFEBOX 2.5TB yazarak 3030’a gönderip üyeliklerini hattına başlatabilirler.";
+"edit_printphoto_info_label" = "Düzenlemek için fotoğrafa dokunun";
+
+/*Fuzzy*/
+"print_edit_photo_page_name" = "Fotoğraf Düzenle";
+
+/*Fuzzy*/
+"print_photo_bad_quality_info" = "Seçtiğin fotoğraf %d MB'tan küçüktür. Baskı kalitesinde kayıp oluşturacaktır.";
+
+/*Fuzzy*/
+"print_photo_bad_quality_continue" = "Seçili fotoğraf ile devam et.";
+
+/*Fuzzy*/
+"print_photo_bad_quality_new" = "Farklı bir fotoğraf seç.";
+"no_print_package_info" = "Bu özellik var olan paketlerinizde mevcut değildir.";
+"print_package_question" = "Baskı paketini incelemek ister misin?";
+"print_package_view" = "Paketi İncele";
+"printed_photo_card_title" = "Baskı Paketim";
+"printed_photo_card_info" = "Her ay 5 adet fotoğrafını bastır.";
+"printed_photo_card_body" = "Fotoğraflarını bastır.";
+"printed_photo_card_body_no_right" = "Fotoğraf baskılama hakkını kullandın.";
+"printed_photo_card_info_no_right" = "%d tarihi itibariyle tekrar baskı oluşturabilirsin.";
+
+/*Fuzzy*/
+"printed_package_view" = "Baskı paketlerimi gör.";
+"more_photo_right" = "%d fotoğraf gönderme hakkın daha var. Devam etmek istediğine emin misin?";
+"no_more_photo_right" = "%d’ten fazla fotoğraf seçtin. Devam edebilmek için azaltın.";
+"timeline_header" = "2023’un en güzel anıları";
+"timeline_description" = "Bu senenin en güzel anılarını senin için derledik. Hemen keşfet.";
+"selected_for_print" = "Baskı için seçilenler";
+"print_cancel_popup_question" = "İptal etmek isteğine emin misin?";
+"print_cancel_popup_info" = "Basılı albüm için seçtiğin tüm fotoğraf düzenlemelerin silinecektir. Yeniden fotoğraf seçmen ve yeniden düzenlemen gereklidir.";
+"no_right_print_popup_title" = "Baskı Hakkını Kullandın";
+"no_right_print_popup_info" = "Paketin dahilindeki fotoğraf baskı hakkını kullandın. Paketin yenilendiğinde fotoğraflarını tekrar baskıya gönderebilirsin.";
+"send_print_button" = "Baskıya Gönder";
+"add_address" = "Adres Ekle";
+"send_print_popup_title" = "Seçtiğin Fotoğraflar Baskıya Hazır";
+
+/*Fuzzy*/
+"send_print_popup_address" = "Fotoğrafların basılı olarak; \"%@ Mahallesi %@ Sokak No:%@ Daire:%@ %@/%@, %d\" adresine gönderilecektir.";
+"send_print_popup_info" = "Baskıya gönderilmesi durumunda bu işlem iptal edilemez.";
+"address_title" = "Adres Başlığı";
+"address_city" = "İl";
+"address_district" = "İlçe";
+"address_neighbourhood" = "Mahalle";
+"address_street" = "Cadde/Sokak";
+"address_building_no" = "Bina No";
+"address_apartment_no" = "Daire No";
+"address_postacode" = "Posta Kodu";
+"add_saved_my_address" = "Kayıtlı adreslerime ekle.";
+"save_address" = "Adresi Kaydet";
+"update_address" = "Adres Güncelle";
+"use_address" = "Adresi Kullan";
+"change_address" = "Adres Değiştir";
+"sent_print_info_popup_title" = "Siparişin Oluşturuldu";
+"sent_print_info_popup_body" = "Siparişin hazırlanıyor. Sipariş takibini sipariş detayından yapabilirsin.\n";
+"address_title_placeholder" = "Örnek; Evim, İş Yerim vb.";
+"select_city_district" = "Seçiniz";
+"send_print_popup_no_address" = "Kayıtlı adresiniz bulunmamaktadır.";
+"grace_banner_text_paycell" = "lifebox paketinin yenilenmesi icin Paycell kart bakiyeni ve elektronik ticarete acik oldugunu kontrol edin. Farklı bir kredi kartı ile ya da uygulama üzerinden paket satınalabilirsiniz.";
+"toast_message_delete_notification" = "Bu işlem seçilen dosya adetine göre zaman alabilir.";

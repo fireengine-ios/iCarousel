@@ -844,6 +844,7 @@ struct TextConstants {
     static let hideSuccessPopupButtonTitle = localized("hide_success_popup_button_title")
     static let hideSingleAlbumSuccessPopupMessage = localized("hide_single_album_success_popup_message")
     static let hideAlbumsSuccessPopupMessage = localized("hide_albums_success_popup_message")
+    static let toastMessageDeleteNotification = localized("toast_message_delete_notification")
 
     // MARK: - ActionSheet
     static let actionSheetDeleteDeviceOriginal = localized("Delete Device Original")
