@@ -49,6 +49,9 @@ final class DrawerViewController: UIViewController {
     }
     
     @objc func asd1(notification: NSNotification) {
+        if contentViewController.nibName == "PhotoPrintAddAdressPopup" {
+            return
+        }
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             keyboardHeight = keyboardSize.height
             view.frame.origin.y -= keyboardHeight - popUpBottomSpaceConstant
@@ -56,6 +59,9 @@ final class DrawerViewController: UIViewController {
     }
 
     @objc func asd2(notification: NSNotification) {
+        if contentViewController.nibName == "PhotoPrintAddAdressPopup" {
+            return
+        }
         view.frame.origin.y += keyboardHeight + popUpBottomSpaceConstant
     }
 
