@@ -1162,6 +1162,13 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
                     isPrintShow: true,
                     sender: button
                 )
+            } else if maxSelection == 0, isUserFromTurkey {
+                self.threeDotMenuManager.showActions(
+                    for: selectedObjects,
+                    isSelectingMode: self.dataSource.isSelectingMode,
+                    isPrintShow: true,
+                    sender: button
+                )
             } else {
                 self.threeDotMenuManager.showActions(
                     for: selectedObjects,
