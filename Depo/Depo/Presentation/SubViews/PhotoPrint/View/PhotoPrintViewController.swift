@@ -151,7 +151,7 @@ final class PhotoPrintViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         debugLog("PhotoPrintViewController viewDidLoad")
-        
+        print("aaaaaaaaaaa 1 \(selectedPhotos.first?.name)")
         navigationItem.leftBarButtonItem = closeSelfButton
         NotificationCenter.default.addObserver(self,selector: #selector(navigationBackFromPopup),name: .navigationBack, object: nil)
         
@@ -194,6 +194,7 @@ final class PhotoPrintViewController: BaseViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        print("aaaaaaaaaaa 2 \(selectedPhotos.first?.name)")
         badQuailtySize = Double(FirebaseRemoteConfig.shared.printPhotoQualityMinMB) ?? 1
         switch photoSelectType {
         case .newPhotoSelection:
@@ -394,7 +395,19 @@ final class PhotoPrintViewController: BaseViewController {
     }
     
     private func isImageSizeControl(selectedPhotosIndex: Int) -> Bool {
-        guard let photoSize = selectedPhotos[selectedPhotosIndex].bytes else { return false }
+        var selectedPhotosForControl = [SearchItemResponse]()
+        switch photoSelectType {
+        case .newPhotoSelection:
+            selectedPhotosForControl = selectedPhotos
+        case .changePhotoSelection:
+            if PhotoPrintConstants.selectedChangePhotoItems.isEmpty {
+                selectedPhotosForControl = selectedPhotos
+            } else {
+                selectedPhotosForControl = PhotoPrintConstants.selectedChangePhotoItems
+            }
+        }
+        
+        guard let photoSize = selectedPhotosForControl[selectedPhotosIndex].bytes else { return false }
         var control: Bool = false
         control = Double(photoSize) / 1024 / 1024 > CGFloat(badQuailtySize) ? true : false
         return control
