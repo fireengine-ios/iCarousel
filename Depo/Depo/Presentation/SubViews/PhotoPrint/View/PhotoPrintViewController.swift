@@ -122,7 +122,6 @@ final class PhotoPrintViewController: BaseViewController {
                                                         target: self,
                                                         action: #selector(closeSelf))
     
-    private var lowQualityPhotosCount: Int = 0
     private var maxSelectablePhoto: Int = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
     private var badQuailtySize: Double = 1
     private var contentViewIsHaveCheckBox: Bool = false
@@ -151,7 +150,6 @@ final class PhotoPrintViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         debugLog("PhotoPrintViewController viewDidLoad")
-        print("aaaaaaaaaaa 1 \(selectedPhotos.first?.name)")
         navigationItem.leftBarButtonItem = closeSelfButton
         NotificationCenter.default.addObserver(self,selector: #selector(navigationBackFromPopup),name: .navigationBack, object: nil)
         
@@ -190,11 +188,10 @@ final class PhotoPrintViewController: BaseViewController {
         
         stackMainView.setCustomSpacing(32, after: stackMainView.subviews[selectedPhotos.count - 1])
         setLayoutSecondary()
-        addRemoveContentContainerView(isAdd: totalPhotoCount() != 5, photoCount: totalPhotoCount())
+        addRemoveContentContainerView(isAdd: totalPhotoCount() != maxSelectablePhoto, photoCount: totalPhotoCount())
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print("aaaaaaaaaaa 2 \(selectedPhotos.first?.name)")
         badQuailtySize = Double(FirebaseRemoteConfig.shared.printPhotoQualityMinMB) ?? 1
         switch photoSelectType {
         case .newPhotoSelection:
@@ -222,7 +219,7 @@ final class PhotoPrintViewController: BaseViewController {
                     self?.imageSizeArray.insert(image!.size, at: self!.selectedPhotoIndex)
                     self?.nextButtonEnabled()
                     self?.setViewTag()
-                    self?.addRemoveContentContainerView(isAdd: self?.totalPhotoCount() != 5, photoCount: (self?.totalPhotoCount())!)
+                    self?.addRemoveContentContainerView(isAdd: self?.totalPhotoCount() != self?.maxSelectablePhoto, photoCount: (self?.totalPhotoCount())!)
                     self?.nextButtonEnabled()
                 }
             }
@@ -253,7 +250,7 @@ final class PhotoPrintViewController: BaseViewController {
             if count < maxSelectablePhoto {
                 countLabel?.text = String((count) + 1)
             }
-            addRemoveContentContainerView(isAdd: totalPhotoCount() != 5, photoCount: totalPhotoCount())
+            addRemoveContentContainerView(isAdd: totalPhotoCount() != maxSelectablePhoto, photoCount: totalPhotoCount())
             nextButtonEnabled()
         }
     }
@@ -270,7 +267,6 @@ final class PhotoPrintViewController: BaseViewController {
         
         if count == 1 {
             if self.selectedPhotos.count > 1 {
-                self.setLowQualityPhotosCount(photoIndex: sender.tag)
                 let viewInStack = self.stackMainView.arrangedSubviews[sender.tag]
                 self.stackMainView.removeArrangedSubview(viewInStack)
                 viewInStack.removeFromSuperview()
@@ -278,12 +274,14 @@ final class PhotoPrintViewController: BaseViewController {
                 self.imageSizeArray.remove(at: sender.tag)
                 self.showSpinner()
                 self.setViewTag()
+                isContentCheckBoxChecked = false
+                contentCheckButton.isSelected = isContentCheckBoxChecked
             } else {
                 self.navigationController?.popViewController(animated: true)
             }
         }
         nextButtonEnabled()
-        addRemoveContentContainerView(isAdd: totalPhotoCount() != 5, photoCount: totalPhotoCount())
+        addRemoveContentContainerView(isAdd: totalPhotoCount() != maxSelectablePhoto, photoCount: totalPhotoCount())
     }
     
     @objc private func checkButtonTapped(sender: UIButton) {
@@ -293,7 +291,6 @@ final class PhotoPrintViewController: BaseViewController {
         sender.isSelected ? button?.setImage(Image.iconPrintSelectBlue.image, for: .normal) : button?.setImage(Image.iconPrintSelectEmpty.image, for: .normal)
         let newPhotosButton = getView(tag: sender.tag, layerName: Subviews.newPhotoLabel.layerName)
         newPhotosButton.isUserInteractionEnabled = !sender.isSelected
-        lowQualityPhotosCount = sender.isSelected ? lowQualityPhotosCount - 1 : lowQualityPhotosCount + 1
         nextButtonEnabled()
     }
     
@@ -311,8 +308,9 @@ final class PhotoPrintViewController: BaseViewController {
     
     @objc private func newPhotoSelectTapped(_ sender: AnyObject) {
         photoSelectType = .changePhotoSelection
+        isContentCheckBoxChecked = false
+        contentCheckButton.isSelected = isContentCheckBoxChecked
         selectedPhotoIndex = sender.view!.tag
-        setLowQualityPhotosCount(photoIndex: selectedPhotoIndex)
         imageSizeArray.remove(at: sender.view!.tag)
         router.openSelectPhotosWithChange(selectedPhotos: selectedPhotos, popupShowing: false)
     }
@@ -371,7 +369,6 @@ final class PhotoPrintViewController: BaseViewController {
         let imageContainerView = getView(tag: tag, layerName: Subviews.imageContainerView.layerName)
         
         if !isImageSizeControl(selectedPhotosIndex: tag) {
-            lowQualityPhotosCount += 1
             (infoLabel as? UILabel)?.text = String(format: localized(.printPhotoBadQualityInfo), Int(badQuailtySize))
             (infoLabel as? UILabel)?.textColor = AppColor.forgetPassTextRed.color
             (infoIcon as? UIImageView)?.image = Image.iconPrintInfoRed.image
@@ -396,6 +393,7 @@ final class PhotoPrintViewController: BaseViewController {
     
     private func isImageSizeControl(selectedPhotosIndex: Int) -> Bool {
         var selectedPhotosForControl = [SearchItemResponse]()
+        var itemIndex: Int = selectedPhotosIndex
         switch photoSelectType {
         case .newPhotoSelection:
             selectedPhotosForControl = selectedPhotos
@@ -404,10 +402,11 @@ final class PhotoPrintViewController: BaseViewController {
                 selectedPhotosForControl = selectedPhotos
             } else {
                 selectedPhotosForControl = PhotoPrintConstants.selectedChangePhotoItems
+                itemIndex = 0
             }
         }
         
-        guard let photoSize = selectedPhotosForControl[selectedPhotosIndex].bytes else { return false }
+        guard let photoSize = selectedPhotosForControl[itemIndex].bytes else { return false }
         var control: Bool = false
         control = Double(photoSize) / 1024 / 1024 > CGFloat(badQuailtySize) ? true : false
         return control
@@ -436,25 +435,38 @@ final class PhotoPrintViewController: BaseViewController {
     }
     
     private func nextButtonEnabled() {
-        if lowQualityPhotosCount > 0 {
+        if !getLowQualityPhotosCount() {
             nextButton.backgroundColor = AppColor.borderLightGray.color
             nextButton.isUserInteractionEnabled = false
-        } else if lowQualityPhotosCount == 0 && !contentViewIsHaveCheckBox {
-            nextButton.backgroundColor = AppColor.darkBlueColor.color
-            nextButton.isUserInteractionEnabled = true
-        } else if lowQualityPhotosCount == 0 && contentViewIsHaveCheckBox && isContentCheckBoxChecked {
-            nextButton.backgroundColor = AppColor.darkBlueColor.color
-            nextButton.isUserInteractionEnabled = true
-        } else if lowQualityPhotosCount == 0 && contentViewIsHaveCheckBox && !isContentCheckBoxChecked {
-            nextButton.backgroundColor = AppColor.borderLightGray.color
-            nextButton.isUserInteractionEnabled = false
+        } else {
+            if !contentViewIsHaveCheckBox {
+                nextButton.backgroundColor = AppColor.darkBlueColor.color
+                nextButton.isUserInteractionEnabled = true
+            } else if contentViewIsHaveCheckBox && isContentCheckBoxChecked {
+                nextButton.backgroundColor = AppColor.darkBlueColor.color
+                nextButton.isUserInteractionEnabled = true
+            } else if contentViewIsHaveCheckBox && !isContentCheckBoxChecked {
+                nextButton.backgroundColor = AppColor.borderLightGray.color
+                nextButton.isUserInteractionEnabled = false
+            } else if !contentViewIsHaveCheckBox && !isContentCheckBoxChecked {
+                nextButton.backgroundColor = AppColor.darkBlueColor.color
+                nextButton.isUserInteractionEnabled = true
+            }
         }
     }
     
-    private func setLowQualityPhotosCount(photoIndex: Int) {
-        if !isImageSizeControl(selectedPhotosIndex: photoIndex), lowQualityPhotosCount > 0 {
-            self.lowQualityPhotosCount -= 1
+    private func getLowQualityPhotosCount() -> Bool {
+        var isHaveLowQuality: Bool = true
+        let subView = stackMainView.arrangedSubviews
+        for (index, element) in subView.enumerated() {
+            if element.layer.name == Subviews.containerView.layerName {
+                let checkButton = getView(tag: index, layerName: Subviews.checkButton.layerName) as? UIButton
+                if checkButton?.isHidden == false && checkButton?.isSelected == false {
+                    isHaveLowQuality = false
+                }
+            }
         }
+        return isHaveLowQuality
     }
     
     private func setViewTag() {
@@ -628,9 +640,9 @@ extension PhotoPrintViewController {
             nextButton.backgroundColor = AppColor.borderLightGray.color
             nextButton.isUserInteractionEnabled = false
             contentCheckButton.setImage(Image.iconPrintSelectEmpty.image, for: .normal)
-            photoCount < 5 ? contentCheckButton.setImage(Image.iconPrintSelectEmpty.image, for: .normal) : contentCheckButton.setImage(Image.iconPrintInfoRed.image, for: .normal)
-            contentCheckLabel.text = photoCount < 5 ? String(format: localized(.morePhotoRight), maxSelectablePhoto - photoCount) : String(format: localized(.noMorePhotoRight), maxSelectablePhoto)
-            contentCheckLabel.textColor = photoCount < 5 ? AppColor.label.color : AppColor.forgetPassTextRed.color
+            photoCount < maxSelectablePhoto ? contentCheckButton.setImage(Image.iconPrintSelectEmpty.image, for: .normal) : contentCheckButton.setImage(Image.iconPrintInfoRed.image, for: .normal)
+            contentCheckLabel.text = photoCount < maxSelectablePhoto ? String(format: localized(.morePhotoRight), maxSelectablePhoto - photoCount) : String(format: localized(.noMorePhotoRight), maxSelectablePhoto)
+            contentCheckLabel.textColor = photoCount < maxSelectablePhoto ? AppColor.label.color : AppColor.forgetPassTextRed.color
             contentViewIsHaveCheckBox = true
             stackMainView.setCustomSpacing(16, after: stackMainView.subviews[selectedPhotos.count])
         } else {
