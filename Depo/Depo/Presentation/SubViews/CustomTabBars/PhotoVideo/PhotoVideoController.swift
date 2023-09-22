@@ -710,6 +710,7 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
             
             let isHavePrintPackage = SingletonStorage.shared.accountInfo?.photoPrintPackage ?? false
             let sendRemaining = SingletonStorage.shared.accountInfo?.photoPrintSendRemaining ?? 0
+            let maxSelection = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
             
             if !isHavePrintPackage {
                 let vc = PhotoPrintNoPackagePopup.with()
@@ -736,8 +737,13 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
             }
             
             if !itemsToPrint.isEmpty {
-                let vc = PhotoPrintMissingPhotoPopup.with(selectedPhotoCount: printSelectedPhotos.count, selectedPhotos: printSelectedPhotos)
-                vc.openWithBlur()
+                if itemsToPrint.count == maxSelection {
+                    let vc = self.router.photoPrintViewController(selectedPhotos: printSelectedPhotos)
+                    self.router.pushViewController(viewController: vc)
+                } else {
+                    let vc = PhotoPrintMissingPhotoPopup.with(selectedPhotoCount: printSelectedPhotos.count, selectedPhotos: printSelectedPhotos)
+                    vc.openWithBlur()
+                }
             }
         }
         
