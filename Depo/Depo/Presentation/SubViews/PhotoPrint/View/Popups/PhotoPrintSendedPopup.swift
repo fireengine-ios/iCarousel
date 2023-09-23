@@ -26,9 +26,8 @@ final class PhotoPrintSendedPopup: BasePopUpController {
     
     @IBOutlet weak var imageView: UIImageView! {
         willSet {
-            newValue.contentMode = .scaleAspectFill
             newValue.layer.cornerRadius = 8
-            
+            newValue.contentMode = .center
         }
     }
     
@@ -84,7 +83,10 @@ final class PhotoPrintSendedPopup: BasePopUpController {
     }
     
     @objc private func dismissPopup() {
-        dismiss(animated: true)
+        dismiss(animated: false, completion: {
+            let router = RouterVC()
+            router.openTabBarItem(index: .forYou)
+        })
     }
 }
 

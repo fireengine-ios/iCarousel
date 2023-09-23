@@ -113,12 +113,32 @@ final class PhotoPrintSendPopup: BasePopUpController {
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
-//        dismiss(animated: false, completion: {
-//            print("aaaaaaaaaaaa \(self.editedImages)")
-//            let vc = PhotoPrintSendedPopup.with(address: self.address, editedImages: self.editedImages)
-//            vc.openWithBlur()
-//        })
-        
+        updateUserInfo()
+    }
+    
+    private func updateUserInfo() {
+        showSpinner()
+        let accountService = AccountService()
+        accountService.info(success: { [weak self] response in
+            guard let response = response as? AccountInfoResponse else {
+                assertionFailure()
+                return
+            }
+            DispatchQueue.toMain {
+                SingletonStorage.shared.accountInfo = response
+                let sendRemaining = SingletonStorage.shared.accountInfo?.photoPrintSendRemaining ?? 0
+                if sendRemaining == 0 {
+                    self?.hideSpinner()
+                    let vc = PhotoPrintNoRightPopup.with()
+                    vc.open()
+                } else {
+                    self?.sendEditedImages()
+                }
+            }
+        }) { error in }
+    }
+    
+    private func sendEditedImages() {
         var sendData = [WrapData]()
         for image in editedImages {
             let imageData = image.jpegData(compressionQuality: 1.0)!
@@ -128,15 +148,13 @@ final class PhotoPrintSendPopup: BasePopUpController {
             sendData.append(wrapData)
         }
         
-        showSpinner()
-        UploadService.default.uploadFileList(items: sendData, uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, isPhotoPrint: true, success: {
-            DispatchQueue.main.async {
-                
-            }
-        }, fail: {value in }, returnedUploadOperation: { [weak self] values in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-                self?.setSendedPhotosFileUuid(returnOperation: values ?? [])
-            }
+        UploadService.default.uploadFileList(items: sendData, uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, isPhotoPrint: true,
+                                             success: { },
+                                             fail: {value in },
+                                             returnedUploadOperation: { [weak self] values in
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                                                    self?.setSendedPhotosFileUuid(returnOperation: values ?? [])
+                                                }
             
         })
     }
@@ -146,7 +164,10 @@ final class PhotoPrintSendPopup: BasePopUpController {
         for value in returnOperation {
             fileUuidList.append(value.inputItem.uuid)
         }
-        
+        createOrder(fileUuidList: fileUuidList)
+    }
+    
+    private func createOrder(fileUuidList: [String]) {
         let service = PhotoPrintService()
         service.photoPrintCreateOrder(addressId: address?.id ?? 0, fileUuidList: fileUuidList) { [weak self] result in
             switch result {

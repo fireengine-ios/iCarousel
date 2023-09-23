@@ -144,7 +144,7 @@ class AccountInfoResponse: ObjectRequestResponse {
         hasRecoveryMail = json?[AccountJSONConstants.hasRecoveryMail].bool
         showPaycell = json?[AccountJSONConstants.showPaycell].bool
         photoPrintPackage = json?[AccountJSONConstants.photoPrintPackage].bool
-        photoPrintSendRemaining = json?[AccountJSONConstants.photoPrintPackage].int
+        photoPrintSendRemaining = json?[AccountJSONConstants.photoPrintSendRemaining].int
         photoPrintMaxSelection = json?[AccountJSONConstants.photoPrintMaxSelection].int
     }
 }
