@@ -174,6 +174,7 @@ final class PhotoPrintSendPopup: BasePopUpController {
             case .success(_):
                 self?.hideSpinner()
                 self?.dismiss(animated: false, completion: {
+                    self?.updateAccountInfoForPhotoPrint()
                     let vc = PhotoPrintSendedPopup.with(address: self?.address, editedImages: self?.editedImages)
                     vc.openWithBlur()
                 })
@@ -182,6 +183,13 @@ final class PhotoPrintSendPopup: BasePopUpController {
                 break
             }
         }
+    }
+    
+    private func updateAccountInfoForPhotoPrint() {
+        let sendRemaining = SingletonStorage.shared.accountInfo?.photoPrintSendRemaining ?? 0
+        let maxSelection = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
+        SingletonStorage.shared.accountInfo?.photoPrintSendRemaining = sendRemaining > 0 ? sendRemaining - 1 : 0
+        SingletonStorage.shared.accountInfo?.photoPrintMaxSelection = (maxSelection - editedImages.count) >= 0 ? maxSelection - editedImages.count : 0
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
