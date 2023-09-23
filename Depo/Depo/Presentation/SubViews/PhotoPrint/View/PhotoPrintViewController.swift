@@ -135,6 +135,7 @@ final class PhotoPrintViewController: BaseViewController {
     private var photoSelectType = PrintPhotoSelectType.newPhotoSelection
     private var selectedPhotoIndex: Int = 0
     private var isHaveEditedPhotos: Bool = false
+    private var editedImages = [UIImage]()
     private let router = PhotoPrintRouter()
     var output: PhotoPrintViewOutput!
     
@@ -166,7 +167,7 @@ final class PhotoPrintViewController: BaseViewController {
         for index in 0..<selectedPhotos.count {
             showSpinner()
             let imageUrl = selectedPhotos[index].metadata?.largeUrl
-            let imageView = getView(tag: index, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as! UIImageView
+            let imageView = getView(tag: index, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0].subviews[0] as! UIImageView
             imageView.sd_setImage(with: imageUrl) { [weak self] (image, error, cache, url) in
                 if error != nil {
                     self?.hideSpinner()
@@ -199,7 +200,7 @@ final class PhotoPrintViewController: BaseViewController {
         case .changePhotoSelection:
             showSpinner()
             let newSelectedPhotos = PhotoPrintConstants.selectedChangePhotoItems 
-            let imageView = getView(tag: selectedPhotoIndex, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as? UIImageView
+            let imageView = getView(tag: selectedPhotoIndex, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0].subviews[0] as? UIImageView
             
             if newSelectedPhotos.isEmpty {
                 hideSpinner()
@@ -329,13 +330,26 @@ final class PhotoPrintViewController: BaseViewController {
             switch result {
             case .success(let response):
                 self?.hideSpinner()
-                let vc = PhotoPrintSendPopup.with(address: response.first)
+                let vc = PhotoPrintSendPopup.with(address: response.first, editedImages: self?.getEditedImages() ?? [])
                 vc.openWithBlur()
             case .failed(_):
                 self?.hideSpinner()
                 break
             }
         }
+    }
+    
+    private func getEditedImages() -> [UIImage] {
+        editedImages.removeAll()
+        let subView = stackMainView.arrangedSubviews
+        for (index, element) in subView.enumerated() {
+            if element.layer.name == Subviews.containerView.layerName {
+                let contentView = getView(tag: index, layerName: Subviews.imageContainerView.layerName).subviews[0]
+                let image: UIImage = takeScreenshot(of: contentView)
+                editedImages.append(image)
+            }
+        }
+        return editedImages
     }
     
     private func setImageReplace(tag: Int, image: UIImage) {
@@ -481,6 +495,7 @@ final class PhotoPrintViewController: BaseViewController {
             getView(tag: index, layerName: Subviews.imageContainerView.layerName).tag = index
             getView(tag: index, layerName: Subviews.imageContainerView.layerName).subviews[0].tag = index
             getView(tag: index, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0].tag = index
+            getView(tag: index, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0].subviews[0].tag = index
             getView(tag: index, layerName: Subviews.infoIcon.layerName).tag = index
             getView(tag: index, layerName: Subviews.infoLabel.layerName).tag = index
             getView(tag: index, layerName: Subviews.checkButton.layerName).tag = index
@@ -526,8 +541,8 @@ extension PhotoPrintViewController: UIGestureRecognizerDelegate {
         if sender.state == .ended {
             isHaveEditedPhotos = true
             let imageContainerView = getView(tag: tag, layerName: Subviews.imageContainerView.layerName) as! UIView
-            let scrollView = getView(tag: tag, layerName: Subviews.imageContainerView.layerName).subviews[0] as! UIScrollView
-            let imageView = getView(tag: tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as! UIImageView
+            let scrollView = getView(tag: tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as! UIScrollView
+            let imageView = getView(tag: tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0].subviews[0] as! UIImageView
             
             if isImageSizeControl(selectedPhotosIndex: tag) {
                 imageContainerView.layer.borderColor = AppColor.forgetPassTextGreen.cgColor
@@ -656,6 +671,19 @@ extension PhotoPrintViewController {
             contentCheckLabel.removeFromSuperview()
         }
     }
+    
+    func takeScreenshot(of view: UIView) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(
+            CGSize(width: view.frame.width, height: view.frame.height),
+            false,
+            2
+        )
+        
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let screenshot = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return screenshot
+    }
 }
 
 extension PhotoPrintViewController: UIScrollViewDelegate {
@@ -771,6 +799,13 @@ extension PhotoPrintViewController {
             view.layer.cornerRadius = 16
             view.layer.borderColor = AppColor.tealBlue.cgColor
             view.layer.name = Subviews.imageContainerView.layerName
+            return view
+        }()
+        
+        lazy var imageContentView: UIView = {
+            let view = UIView()
+            view.layer.name = "imageContentView"
+            view.tag = index
             return view
         }()
         
@@ -933,12 +968,19 @@ extension PhotoPrintViewController {
         imageContainerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16).isActive = true
         imageContainerView.heightAnchor.constraint(equalToConstant: heightConstant).isActive = true
         
-        imageContainerView.addSubview(printScrollView)
+        imageContainerView.addSubview(imageContentView)
+        imageContentView.translatesAutoresizingMaskIntoConstraints = false
+        imageContentView.topAnchor.constraint(equalTo: imageContainerView.topAnchor, constant: 10).isActive = true
+        imageContentView.bottomAnchor.constraint(equalTo: imageContainerView.bottomAnchor, constant: -10).isActive = true
+        imageContentView.leadingAnchor.constraint(equalTo: imageContainerView.leadingAnchor, constant: 10).isActive = true
+        imageContentView.trailingAnchor.constraint(equalTo: imageContainerView.trailingAnchor, constant: -10).isActive = true
+        
+        imageContentView.addSubview(printScrollView)
         printScrollView.translatesAutoresizingMaskIntoConstraints = false
-        printScrollView.topAnchor.constraint(equalTo: imageContainerView.topAnchor, constant: 10).isActive = true
-        printScrollView.bottomAnchor.constraint(equalTo: imageContainerView.bottomAnchor, constant: -10).isActive = true
-        printScrollView.leadingAnchor.constraint(equalTo: imageContainerView.leadingAnchor, constant: 10).isActive = true
-        printScrollView.trailingAnchor.constraint(equalTo: imageContainerView.trailingAnchor, constant: -10).isActive = true
+        printScrollView.topAnchor.constraint(equalTo: imageContentView.topAnchor, constant: -2).isActive = true
+        printScrollView.bottomAnchor.constraint(equalTo: imageContentView.bottomAnchor, constant: 2).isActive = true
+        printScrollView.leadingAnchor.constraint(equalTo: imageContentView.leadingAnchor, constant: -2).isActive = true
+        printScrollView.trailingAnchor.constraint(equalTo: imageContentView.trailingAnchor, constant: 2).isActive = true
         
         printScrollView.addSubview(printImageView)
         printImageView.translatesAutoresizingMaskIntoConstraints = false

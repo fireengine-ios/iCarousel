@@ -2462,3 +2462,5 @@ then {11,99 TRY/Month}*/
 "select_city_district" = "";
 "send_print_popup_no_address" = "";
 "grace_banner_text_paycell" = "";
+"toast_message_delete_notification" = "Ce processus peut prendre du temps en fonction du nombre de fichiers sélectionnés.";
+"order_approved" = "";

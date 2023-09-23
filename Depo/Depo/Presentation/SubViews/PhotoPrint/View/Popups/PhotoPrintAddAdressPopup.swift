@@ -375,21 +375,21 @@ extension PhotoPrintAddAdressPopup: UITextFieldDelegate {
             
             let allowedCharacters = CharacterSet.decimalDigits
             let characterSet = CharacterSet(charactersIn: string)
-            return newLength <= 3 && allowedCharacters.isSuperset(of: characterSet)
+            return newLength <= 5 && allowedCharacters.isSuperset(of: characterSet)
         } else if textField == adressTitleView.textField || textField == neighbourhoodView.textField || textField == streetView.textField || textField == nameView.textField {
             let currentCharacterCount = textField.text?.count ?? 0
             if range.length + range.location > currentCharacterCount {
                 return false
             }
             let newLength = currentCharacterCount + string.count - range.length
-            return newLength <= 4
+            return newLength <= 100
         } else if textField == buildingNoView.textField || textField == apartmentNoView.textField {
             let currentCharacterCount = textField.text?.count ?? 0
             if range.length + range.location > currentCharacterCount {
                 return false
             }
             let newLength = currentCharacterCount + string.count - range.length
-            return newLength <= 5
+            return newLength <= 10
         }
         return false
     }

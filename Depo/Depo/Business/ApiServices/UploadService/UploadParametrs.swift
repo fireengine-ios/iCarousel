@@ -26,6 +26,7 @@ class SimpleUpload: UploadRequestParametrs {
     private let destitantionURL: URL
     private let isFavorite: Bool
     private let isCollage: Bool
+    private let isPhotoPrint: Bool
     
     let rootFolder: String
     let uploadType: UploadType?
@@ -64,11 +65,11 @@ class SimpleUpload: UploadRequestParametrs {
     
     let tmpUUID: String
     
-    static func with(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?, isCollage: Bool) -> SimpleUpload {
-        return SimpleUpload(item: item, destitantion: destitantion, uploadStategy: uploadStategy, uploadTo: uploadTo, rootFolder: rootFolder, isFavorite: isFavorite, uploadType: uploadType, isCollage: isCollage)
+    static func with(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?, isCollage: Bool, isPhotoPrint: Bool) -> SimpleUpload {
+        return SimpleUpload(item: item, destitantion: destitantion, uploadStategy: uploadStategy, uploadTo: uploadTo, rootFolder: rootFolder, isFavorite: isFavorite, uploadType: uploadType, isCollage: isCollage, isPhotoPrint: isPhotoPrint)
     }
     
-    private init(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?, isCollage: Bool) {
+    private init(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?, isCollage: Bool, isPhotoPrint: Bool) {
         
         self.item = item
         self.uploadType = uploadType
@@ -78,6 +79,7 @@ class SimpleUpload: UploadRequestParametrs {
         self.destitantionURL = destitantion
         self.isFavorite = isFavorite
         self.isCollage = isCollage
+        self.isPhotoPrint = isPhotoPrint
         
         switch uploadType {
             case .save:
@@ -137,6 +139,12 @@ class SimpleUpload: UploadRequestParametrs {
         if isCollage {
             header = header + [
                 HeaderConstant.XObjectMetaFolderLabel: "COLLAGES"
+            ]
+        }
+        
+        if isPhotoPrint {
+            header = header + [
+                HeaderConstant.XObjectMetaFolderLabel: "PRINTED-PHOTOS"
             ]
         }
 

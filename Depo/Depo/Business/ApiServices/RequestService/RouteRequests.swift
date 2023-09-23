@@ -533,4 +533,5 @@ struct RouteRequests {
     static let myAddress = baseUrl +/ "v1/address"
     static let addAddress = baseUrl +/ "v1/address"
     static let updateAdress = "v1/address/%d"
+    static let createOrder = baseUrl +/ "v1/photo-print/order"
 }

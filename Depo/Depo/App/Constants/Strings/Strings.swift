@@ -316,4 +316,5 @@ enum Strings: String, Localizable {
     case addressTitlePlaceholder = "address_title_placeholder"
     case selectCityDistrict = "select_city_district"
     case sendPrintPopupNoAddress = "send_print_popup_no_address"
+    case orderApproved = "order_approved"
 }

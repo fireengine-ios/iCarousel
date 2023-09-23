@@ -246,4 +246,5 @@ enum Image: String, AppImage {
     case iconPrintPopup
     case popupErrorOrange
     case iconPrintInfoOrange
+    case iconCheckGreen
 }

@@ -80,6 +80,7 @@ final class PhotoPrintSendPopup: BasePopUpController {
     }
     
     private var address: AddressResponse?
+    private var editedImages = [UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,7 +113,54 @@ final class PhotoPrintSendPopup: BasePopUpController {
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
+//        dismiss(animated: false, completion: {
+//            print("aaaaaaaaaaaa \(self.editedImages)")
+//            let vc = PhotoPrintSendedPopup.with(address: self.address, editedImages: self.editedImages)
+//            vc.openWithBlur()
+//        })
         
+        var sendData = [WrapData]()
+        for image in editedImages {
+            let imageData = image.jpegData(compressionQuality: 1.0)!
+            let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
+            let wrapData = WrapData(imageData: imageData, isLocal: true)
+            wrapData.patchToPreview = PathForItem.remoteUrl(url)
+            sendData.append(wrapData)
+        }
+        
+        showSpinner()
+        UploadService.default.uploadFileList(items: sendData, uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, isPhotoPrint: true, success: {
+            DispatchQueue.main.async {
+                
+            }
+        }, fail: {value in }, returnedUploadOperation: { [weak self] values in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                self?.setSendedPhotosFileUuid(returnOperation: values ?? [])
+            }
+            
+        })
+    }
+    
+    private func setSendedPhotosFileUuid(returnOperation: [UploadOperation]) {
+        var fileUuidList = [String]()
+        for value in returnOperation {
+            fileUuidList.append(value.inputItem.uuid)
+        }
+        
+        let service = PhotoPrintService()
+        service.photoPrintCreateOrder(addressId: address?.id ?? 0, fileUuidList: fileUuidList) { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.hideSpinner()
+                self?.dismiss(animated: false, completion: {
+                    let vc = PhotoPrintSendedPopup.with(address: self?.address, editedImages: self?.editedImages)
+                    vc.openWithBlur()
+                })
+            case .failed(_):
+                self?.hideSpinner()
+                break
+            }
+        }
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
@@ -164,16 +212,17 @@ final class PhotoPrintSendPopup: BasePopUpController {
 }
 
 extension PhotoPrintSendPopup {
-    static func with(address: AddressResponse?) -> PhotoPrintSendPopup {
-        let vc = controllerWith(address: address)
+    static func with(address: AddressResponse?, editedImages: [UIImage]? = []) -> PhotoPrintSendPopup {
+        let vc = controllerWith(address: address, editedImages: editedImages)
         return vc
     }
     
-    private static func controllerWith(address: AddressResponse?) -> PhotoPrintSendPopup {
+    private static func controllerWith(address: AddressResponse?, editedImages: [UIImage]? = []) -> PhotoPrintSendPopup {
         let vc = PhotoPrintSendPopup(nibName: "PhotoPrintSendPopup", bundle: nil)
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overFullScreen
         vc.setAddressText(address: address)
+        vc.editedImages = editedImages ?? []
         return vc
     }
 }

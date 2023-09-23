@@ -2219,3 +2219,5 @@ then {11,99 TRY/Month}*/
 "select_city_district" = "";
 "send_print_popup_no_address" = "";
 "grace_banner_text_paycell" = "";
+"toast_message_delete_notification" = "This process may take time depending on the number of files selected.";
+"order_approved" = "";

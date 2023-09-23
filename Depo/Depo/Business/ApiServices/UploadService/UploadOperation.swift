@@ -61,12 +61,13 @@ final class UploadOperation: Operation {
         }
     }
     private var isCollage: Bool = false
+    private var isPhotoPrint: Bool = false
     
     private lazy var storageVars: StorageVars = factory.resolve()
     
     //MARK: - Init
     
-    init(item: WrapData, uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, projectId: String? = nil, isCollage: Bool = false, handler: @escaping UploadOperationHandler) {
+    init(item: WrapData, uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, projectId: String? = nil, isCollage: Bool = false, isPhotoPrint: Bool = false, handler: @escaping UploadOperationHandler) {
         self.inputItem = item
         self.uploadType = uploadType
         self.uploadTo = uploadTo
@@ -78,6 +79,7 @@ final class UploadOperation: Operation {
         self.isFavorites = isFavorites
         self.isPhotoAlbum = isFromAlbum
         self.isCollage = isCollage
+        self.isPhotoPrint = isPhotoPrint
         
         if uploadType != .sharedWithMe {
             if item.fileType.isContained(in: [.video]), resumableInfoService.isResumableUploadAllowed(with: item.fileSize.intValue) {
@@ -482,7 +484,8 @@ final class UploadOperation: Operation {
                                                rootFolder: self.folder,
                                                isFavorite: self.isFavorites,
                                                uploadType: self.uploadType,
-                                               isCollage: self.isCollage)
+                                               isCollage: self.isCollage,
+                                               isPhotoPrint: self.isPhotoPrint)
             }
             
             success(parameters)
