@@ -247,13 +247,13 @@ struct RouteRequests {
     static var faqContentUrl: String {
         switch currentServerEnvironment {
         case .production: return isBillo ? "https://mybilloapp.com/faq/?lang=%@)" :
-                                           "https://mylifebox.com/%@/faq.html"
+            "https://mylifebox.com/%@/faq/index.html"
             
         case .preProduction: return isBillo ? "https://prp.mylifebox.com/faq/?lang=%@" :
-                                              "https://mylifebox.com/%@/faq.html"
+            "https://mylifebox.com/%@/faq/index.html"
             
         case .test: return isBillo ? "https://dev.mylifebox.com/faq/?lang=%@" :
-                                     "https://mylifebox.com/%@/faq.html"
+                   "https://adepodev.turkcell.com.tr/%@/faq/index.html"
         }
     }
 
@@ -339,6 +339,7 @@ struct RouteRequests {
     
     struct HomeCards {
         static let all = baseUrl +/ "assistant/v1"
+        static let newHomeCard = "homepage-cards"
         static func card(with id: Int) -> URL {
             return all +/ String(id)
         }
