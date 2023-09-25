@@ -148,7 +148,7 @@ extension HideActionService {
     private func hidePhotos(_ items: [Item]) {
         player.remove(listItems: items)
         analytics.trackFileOperationGAEvent(operationType: .hide, items: items)
-        SnackbarManager.shared.show(type: .nonCritical, message: "Talebiniz alınmıştır")
+        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.toastMessageDeleteNotification)
         fileService.hide(items: items, success: { [weak self] in
             DispatchQueue.main.async {
                 self?.onSuccess()
@@ -163,7 +163,7 @@ extension HideActionService {
 
     private func hideAlbums(_ albums: [AlbumItem]) {
         analytics.trackAlbumOperationGAEvent(operationType: .hide, albums: albums)
-        SnackbarManager.shared.show(type: .nonCritical, message: "Talebiniz alınmıştır")
+        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.toastMessageDeleteNotification)
         fileService.hide(albums: albums, success: { [weak self] in
             DispatchQueue.main.async {
                 self?.onSuccess()
