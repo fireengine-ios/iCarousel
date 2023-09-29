@@ -24,7 +24,7 @@ final class PhotoPrintSendPopup: BasePopUpController {
             newValue.text = localized(.sendPrintPopupAddress)
             newValue.font = .appFont(.regular, size: 16)
             newValue.textColor = AppColor.label.color
-            newValue.numberOfLines = 4
+            newValue.numberOfLines = 5
         }
     }
     

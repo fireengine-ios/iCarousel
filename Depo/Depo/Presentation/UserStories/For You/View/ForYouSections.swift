@@ -24,6 +24,7 @@ enum ForYouSections: CaseIterable {
     case story
     case photopick
     case things
+    case printedPhotos
     case hidden
     
     var title: String {
@@ -43,6 +44,7 @@ enum ForYouSections: CaseIterable {
         case .hidden: return TextConstants.smartAlbumHidden
         case .animationCards: return localized(.forYouAnimationsTitle)
         case .albumCards: return TextConstants.myStreamAlbumsTitle
+        case .printedPhotos: return localized(.printedPhotoCardTitle)
         }
     }
     

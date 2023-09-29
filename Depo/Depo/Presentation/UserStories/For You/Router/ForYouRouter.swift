@@ -48,6 +48,9 @@ final class ForYouRouter: ForYouRouterInput {
         case .favorites:
             let favorites = router.favoriteListController()
             router.pushViewController(viewController: favorites)
+        case .printedPhotos:
+            let photoPrint = router.photoPrintForYouViewController()
+            router.pushViewController(viewController: photoPrint)
         default:
             break
         }

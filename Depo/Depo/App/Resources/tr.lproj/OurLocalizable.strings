@@ -2216,4 +2216,32 @@ then {11,99 TRY/Month}*/
 "send_print_popup_no_address" = "Kayıtlı adresiniz bulunmamaktadır.";
 "grace_banner_text_paycell" = "lifebox paketinin yenilenmesi icin Paycell kart bakiyeni ve elektronik ticarete acik oldugunu kontrol edin. Farklı bir kredi kartı ile ya da uygulama üzerinden paket satınalabilirsiniz.";
 "toast_message_delete_notification" = "Bu işlem seçilen dosya adetine göre zaman alabilir.";
-"order_approved" = "Siparişin Onaylandı";
+"order_approved" = "Siparişin Alındı";
+"print_card_title" = "Sana Özel Baskı Paketi";
+"print_card_body" = "Her ay 5 fotoğraf baskılama +50GB saklama alanı hediye";
+"order_in_progress" = "Siparişin Hazırlanıyor";
+
+/*Fuzzy*/
+"order_delivered_cargo" = "Siparişin Kargoya Verildi";
+"order_delivered" = "Siparişin Teslim Edildi";
+"order_undelivered" = "Siparişin Teslim Edilemedi";
+"grace_banner_paycell_text" = "";
+"order_detail_popup_name" = "Baskı Sipariş Takip";
+
+/*Fuzzy*/
+"print_order_number" = "Sipariş No: %@";
+"print_cargo_number" = "Kargo Teslimat No: %@";
+
+/*Fuzzy*/
+"print_cargo_name" = "Kargo Firma Adı: %@";
+"order_approved_detail" = "Baskı siparişiniz hazırlanmak üzere siparişi alınmıştır.";
+"order_in_progress_detail" = "Baskı siparişiniz hazırlanma aşamasına geçmiştir.";
+"order_delivered_cargo_detail" = "Baskı siparişiniz teslim edilmesi için kargoya verildi.";
+"order_delivered_detail" = "Baskı siparişiniz teslim edildi.";
+"order_undelivered_detail" = "Baskı siparişiniz teslim edilemedi.";
+"print_receipt_name" = "Ad Soyad";
+"print_receipt_name_placeholder" = "Adı ve Soyadı";
+
+/*Fuzzy*/
+"min_posta_code" = "\"Posta Kodu 10000'den küçük olamaz.\"";
+"errorcode_5111" = "";

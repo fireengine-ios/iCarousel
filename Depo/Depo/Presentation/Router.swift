@@ -1171,6 +1171,10 @@ class RouterVC: NSObject {
     func photoPrintSelectPhotos(selectedPhotos: [SearchItemResponse] = [], popupShowing: Bool? = nil)  -> PhotoPrintSelectionSegmentedController {
         return PhotoPrintSelectionSegmentedController(selectedPhotos: selectedPhotos, popupShowing: popupShowing ?? false)
     }
+    
+    func photoPrintForYouViewController(item: [GetOrderResponse] = []) -> PhotoPrintForYouViewController {
+        return PhotoPrintForYouViewController(item: item)
+    }
 
     // MARK: - Passcode
     

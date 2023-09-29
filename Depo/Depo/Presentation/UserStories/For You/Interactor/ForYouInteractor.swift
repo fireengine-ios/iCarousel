@@ -284,6 +284,22 @@ final class ForYouInteractor {
             }
         }
     }
+    
+    private func getPrintedPhotos() {
+        debugLog("ForYou getPrintedPhotos")
+        group.enter()
+
+        service.forYouPrintedPhotos() { [weak self] result in
+            self?.group.leave()
+            switch result {
+            case .success(let response):
+                self?.output.getPrintedPhotos(data: response)
+            case .failed(let error):
+                debugLog("ForYou Error getPrintedPhotos: \(error.description)-\(String(describing: error.description))")
+                break
+            }
+        }
+    }
 }
 
 extension ForYouInteractor: ForYouInteractorInput {
@@ -302,6 +318,7 @@ extension ForYouInteractor: ForYouInteractorInput {
         getHiddens()
         getAnimationCards()
         getAlbumCards()
+        getPrintedPhotos()
         
         group.notify(queue: .main) {
             self.output?.didFinishedAllRequests()
@@ -382,6 +399,8 @@ extension ForYouInteractor: ForYouInteractorInput {
             getHiddens()
         case .favorites:
             getFavorites()
+        case .printedPhotos:
+            getPrintedPhotos()
         }
         
         group.notify(queue: .main) {
