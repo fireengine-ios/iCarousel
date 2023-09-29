@@ -20,7 +20,7 @@ final class PhotoPrintStatusPopup: BasePopUpController {
         willSet {
             newValue.font = .appFont(.medium, size: 16)
             newValue.textColor = AppColor.label.color
-            newValue.text = localized(.addAddress)
+            newValue.text = localized(.orderDetailPopupName)
         }
     }
     

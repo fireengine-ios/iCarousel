@@ -113,6 +113,7 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
             newValue.setTitle("", for: .normal)
             newValue.setImage(Image.iconCancelBorder.image.withRenderingMode(.alwaysTemplate), for: .normal)
             newValue.tintColor = AppColor.label.color
+            newValue.isHidden = true
         }
     }
     
@@ -128,12 +129,15 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
     func configure(with item: GetOrderResponse) {
         printedPhotosData = item
         let status = getStatus(status: item.status)
+        bgView.layer.borderWidth = 1
         bgView.layer.borderColor = status.titleLabelColor.cgColor
         cardTitleLabel.text = dateConverter(epochTimeInMilliseconds: item.createdDate)
+        closeButton.isHidden = true
         statusLabel.text = status.titleText
         statusLabel.textColor = status.titleLabelColor
         statusImageView.isHidden = status.statusImageIsHidden
         statusImageView.image = status.statusImage
+        thumbnailPlusImage.isHidden = true
         let infoData = item.affiliateOrderDetails[0]
         guard let url = URL(string: infoData.fileInfo.tempDownloadURL) else {
             return
@@ -142,6 +146,7 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
     }
     
     func configureWithOutData() {
+        printedPhotosData = nil
         let myTime = Date()
         let format = DateFormatter()
         format.dateFormat = "MMMM"
