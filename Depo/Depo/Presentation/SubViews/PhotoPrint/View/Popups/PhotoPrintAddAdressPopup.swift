@@ -262,7 +262,7 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
         if tableContainerView.isHidden {
             setTextArrowImage(view: cityView, status: true)
             cityView.textField.text = localized(.selectCityDistrict)
-            cityView.textField.textColor = AppColor.darkBlueColor.color
+            cityView.textField.textColor = AppColor.borderColor.color
             tappedView = .city
             tableViewConfig(withView: cityView)
             tableView.reloadData()
@@ -280,7 +280,7 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
         }
         if tableContainerView.isHidden {
             setTextArrowImage(view: districtView, status: true)
-            districtView.textField.textColor = AppColor.darkBlueColor.color
+            districtView.textField.textColor = AppColor.borderColor.color
             tappedView = .district
             tableViewConfig(withView: districtView)
             tableView.reloadData()
@@ -315,6 +315,8 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
             postaCodeView.textField.text = String(describing: address?.postalCode ?? 0)
             enableButton(isEnable: true)
             checkButton.isSelected = false
+            cityView.textField.textColor = AppColor.borderColor.color
+            districtView.textField.textColor = AppColor.borderColor.color
         } else {
             isAddressSave = true
         }
@@ -449,7 +451,7 @@ extension PhotoPrintAddAdressPopup: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath)
-        cell.textLabel!.textColor = AppColor.darkBlueColor.color
+        cell.textLabel!.textColor = AppColor.borderColor.color
         cell.textLabel!.font = .appFont(.regular, size: 14)
         if tappedView == .city {
             cell.textLabel!.text = cityList?[indexPath.row].name ?? ""
