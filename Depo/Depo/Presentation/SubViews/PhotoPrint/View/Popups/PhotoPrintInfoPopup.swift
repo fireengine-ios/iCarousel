@@ -28,7 +28,6 @@ final class PhotoPrintInfoPopup: BasePopUpController {
         willSet {
             newValue.font = .appFont(.medium, size: 20)
             newValue.textColor = AppColor.forgetPassTimer.color
-            newValue.text = localized(.printInfoPopUpTitle)
         }
     }
     
@@ -36,7 +35,6 @@ final class PhotoPrintInfoPopup: BasePopUpController {
         willSet {
             newValue.font = .appFont(.regular, size: 16)
             newValue.textColor = AppColor.label.color
-            newValue.text = localized(.printInfoPopUpSubtitle)
             newValue.numberOfLines = 2
         }
     }
@@ -77,6 +75,10 @@ final class PhotoPrintInfoPopup: BasePopUpController {
         exitImageView.isUserInteractionEnabled = true
         let tapImage = UITapGestureRecognizer(target: self, action: #selector(dismissPopup))
         exitImageView.addGestureRecognizer(tapImage)
+        
+        let maxSelection = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
+        titleLabel.text = String(format: localized(.printInfoPopUpTitle), maxSelection)
+        descriptionLabel.text = String(format: localized(.printInfoPopUpSubtitle), maxSelection)
     }
     
     @IBAction func checkBoxButtonTapped(_ sender: Any) {

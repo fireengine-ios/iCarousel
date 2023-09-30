@@ -2191,3 +2191,15 @@ then {11,99 TRY/Month}*/
 "print_receipt_name_placeholder" = "";
 "min_posta_code" = "";
 "errorcode_5111" = "";
+"address_not_found" = "";
+"address_city_not_found" = "";
+"address_district_not_found" = "";
+"address_book_not_found" = "";
+"address_book_max_limit" = "";
+"print_page_name" = "";
+"foryou_print_title" = "";
+"foryou_print_body" = "";
+"print_package_title" = "";
+"print_package_detail" = "";
+"print_package" = "";
+"print_package_info" = "";

@@ -2160,8 +2160,8 @@ then {11,99 TRY/Month}*/
 "contact_us_complaint_cellfie" = "Thanks for contacting us. Your request has been forwarded to Cellfie Mobile for review. We will share with them any necessary information you provide, such as information about your device, lifebox usage information, contact information, and personal information to investigate the issue. Photos/videos and other content you upload to lifebox will not be shared with Cellfie Mobile.";
 "Office_Filter_Not_Found" = "The file you tried to filter (%@) was not found.";
 "new_print" = "Create New Print";
-"print_info_popup_title" = "Select 5 Photos";
-"print_info_popup_subtitle" = "Choose up to 5 photos to print this month and have them delivered to your house.";
+"print_info_popup_title" = "Select %d Photos";
+"print_info_popup_subtitle" = "Choose up to %d photos to print this month and have them delivered to your house.";
 "print_info_popup_checkbox" = "Don't show this warning again.";
 "print_select_photo_button" = "Select Photo";
 "print_select_photo_screen" = "Select Photo";
@@ -2241,3 +2241,15 @@ then {11,99 TRY/Month}*/
 "print_receipt_name_placeholder" = "";
 "min_posta_code" = "";
 "errorcode_5111" = "";
+"address_not_found" = "";
+"address_city_not_found" = "";
+"address_district_not_found" = "";
+"address_book_not_found" = "";
+"address_book_max_limit" = "";
+"print_page_name" = "";
+"foryou_print_title" = "";
+"foryou_print_body" = "";
+"print_package_title" = "";
+"print_package_detail" = "";
+"print_package" = "";
+"print_package_info" = "";

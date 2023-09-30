@@ -2136,8 +2136,8 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "new_print" = "Yeni Baskı Oluştur";
-"print_info_popup_title" = "5 Adet Fotoğraf Seç";
-"print_info_popup_subtitle" = "Bu ay bastırmak için maximum 5 fotoğraf seç ve hemen evine gelsin.";
+"print_info_popup_title" = "%d Adet Fotoğraf Seç";
+"print_info_popup_subtitle" = "Bu ay bastırmak için maximum %d fotoğraf seç ve hemen evine gelsin.";
 "print_info_popup_checkbox" = "Bu uyarıyı bir daha gösterme.";
 
 /*Fuzzy*/
@@ -2194,7 +2194,7 @@ then {11,99 TRY/Month}*/
 "send_print_popup_title" = "Seçtiğin Fotoğraflar Baskıya Hazır";
 
 /*Fuzzy*/
-"send_print_popup_address" = "Fotoğrafların basılı olarak; \"%@ Mahallesi %@ Sokak No:%@ Daire:%@ %@/%@, %d\" adresine gönderilecektir.";
+"send_print_popup_address" = "Fotoğrafların basılı olarak; \"%@ Mahallesi %@ Sokak No:%@ Daire:%@ %@/%@, %d\" adresine ücretsiz gönderilecektir.";
 "send_print_popup_info" = "Baskıya gönderilmesi durumunda bu işlem iptal edilemez.";
 "address_title" = "Adres Başlığı";
 "address_city" = "İl";
@@ -2245,3 +2245,17 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "min_posta_code" = "\"Posta Kodu 10000'den küçük olamaz.\"";
 "errorcode_5111" = "";
+"address_not_found" = "Adres bulunamadı.";
+
+/*Fuzzy*/
+"address_city_not_found" = "İl bulunamadı.";
+"address_district_not_found" = "İlçe bulunamadı.";
+"address_book_not_found" = "Adres Defteri bulunamadı.";
+"address_book_max_limit" = "Daha fazla adres ekleyemezsin.";
+"print_page_name" = "Baskı Paketim";
+"foryou_print_title" = "Fotoğraflarını Bastır";
+"foryou_print_body" = "Her ay %d adet fotoğrafını bastır.";
+"print_package_title" = "";
+"print_package_detail" = "5 Adet 10x15 Fotoğraf Baskısı";
+"print_package" = "Baskı Paketi";
+"print_package_info" = "Fotoğraf Baskısı + Saklama Alanı";

@@ -2141,8 +2141,8 @@ then {11,99 TRY/Month}*/
 "contact_us_complaint_cellfie" = "Faleminderit që na kontaktuat. Kërkesa juaj është përcjellë Në Cellfie Mobile për shqyrtim. Ne do të ndajmë me ta çdo informacion të nevojshëm që ju jepni, të tilla si informacion në lidhje me pajisjen tuaj, informacionin e përdorimit të lifebox, informacionin e kontaktit dhe informacionin personal për të hetuar çështjen. Fotografitë/videot dhe përmbajtjet e tjera që ngarkoni në lifebox nuk do të ndahen me Cellfire Mobile.";
 "Office_Filter_Not_Found" = "Skedari që u përpoqët të filtroni (%@) nuk u gjet.";
 "new_print" = "Krijoni Printim Të Ri";
-"print_info_popup_title" = "Zgjidhni 5 Foto";
-"print_info_popup_subtitle" = "Zgjidhni një maksimum prej 5 fotografish për të shtypur këtë muaj dhe lërini ato të vijnë menjëherë në shtëpinë tuaj.";
+"print_info_popup_title" = "Zgjidhni %d Foto";
+"print_info_popup_subtitle" = "Zgjidhni një maksimum prej %d fotografish për të shtypur këtë muaj dhe lërini ato të vijnë menjëherë në shtëpinë tuaj.";
 "print_info_popup_checkbox" = "Mos e tregoni më këtë paralajmërim.";
 "print_select_photo_button" = "Zgjidhni Foton";
 "print_select_photo_screen" = "Zgjidhni Foton";
@@ -2222,3 +2222,15 @@ then {11,99 TRY/Month}*/
 "print_receipt_name_placeholder" = "";
 "min_posta_code" = "";
 "errorcode_5111" = "";
+"address_not_found" = "";
+"address_city_not_found" = "";
+"address_district_not_found" = "";
+"address_book_not_found" = "";
+"address_book_max_limit" = "";
+"print_page_name" = "";
+"foryou_print_title" = "";
+"foryou_print_body" = "";
+"print_package_title" = "";
+"print_package_detail" = "";
+"print_package" = "";
+"print_package_info" = "";
