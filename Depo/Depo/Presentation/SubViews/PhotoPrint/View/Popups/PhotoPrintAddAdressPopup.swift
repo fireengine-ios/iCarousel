@@ -246,7 +246,10 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
     }
     
     @objc private func dismissPopup() {
-        dismiss(animated: true)
+        self.dismiss(animated: false, completion: {
+            let vc = PhotoPrintSendPopup.with(address: self.address)
+            vc.openWithBlur()
+        })
     }
     
     private func enableButton(isEnable: Bool) {
