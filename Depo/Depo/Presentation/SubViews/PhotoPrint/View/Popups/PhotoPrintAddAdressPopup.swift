@@ -203,6 +203,21 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
         setTapped()
         getCity()
         setTextFromAddress(address: address)
+        hideKeyboardWhenTappedAround()
+    }
+    
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+        
+    @objc func dismissKeyboard() {
+        tableContainerView.isHidden = true
+        isTextFieldEmpty()
+        setTextArrowImage(view: cityView, status: false)
+        setTextArrowImage(view: districtView, status: false)
+        view.endEditing(true)
     }
     
     @IBAction func checkButtonTapped(_ sender: Any) {
@@ -244,22 +259,37 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
     }
     
     @objc private func cityViewTapped() {
-        cityView.textField.text = localized(.selectCityDistrict)
-        cityView.textField.textColor = AppColor.darkBlueColor.color
-        tappedView = .city
-        tableViewConfig(withView: cityView)
-        tableView.reloadData()
+        if tableContainerView.isHidden {
+            setTextArrowImage(view: cityView, status: true)
+            cityView.textField.text = localized(.selectCityDistrict)
+            cityView.textField.textColor = AppColor.darkBlueColor.color
+            tappedView = .city
+            tableViewConfig(withView: cityView)
+            tableView.reloadData()
+        } else {
+            tableContainerView.isHidden = true
+            isTextFieldEmpty()
+            setTextArrowImage(view: cityView, status: false)
+        }
+        
     }
     
     @objc private func districtViewTapped() {
         if districtList?.count == nil {
             return
         }
-        districtView.textField.textColor = AppColor.darkBlueColor.color
-        tappedView = .district
-        tableViewConfig(withView: districtView)
-        tableView.reloadData()
-        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .bottom, animated: false)
+        if tableContainerView.isHidden {
+            setTextArrowImage(view: districtView, status: true)
+            districtView.textField.textColor = AppColor.darkBlueColor.color
+            tappedView = .district
+            tableViewConfig(withView: districtView)
+            tableView.reloadData()
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .bottom, animated: false)
+        } else {
+            tableContainerView.isHidden = true
+            isTextFieldEmpty()
+            setTextArrowImage(view: districtView, status: false)
+        }
     }
     
     private func tableViewConfig(withView: UIView) {
@@ -347,6 +377,16 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
         tableContainerView.layer.addSublayer(rightBorder)
         tableContainerView.layer.addSublayer(bottomBorder)
     }
+    
+    private func setTextArrowImage(view: ProfileTextEnterView, status: Bool) {
+        if status {
+            let rightImageView = view.textField.rightView?.subviews[0] as? UIImageView
+            rightImageView?.image = Image.iconArrowUpSmall.image
+        } else {
+            let rightImageView = view.textField.rightView?.subviews[0] as? UIImageView
+            rightImageView?.image = Image.iconArrowDownSmall.image
+        }
+    }
 }
 
 extension PhotoPrintAddAdressPopup {
@@ -427,11 +467,13 @@ extension PhotoPrintAddAdressPopup: UITableViewDelegate, UITableViewDataSource {
             districtView.textField.text = localized(.selectCityDistrict)
             getDistrict(id: cityList?[indexPath.row].id ?? 1)
             isTextFieldEmpty()
+            setTextArrowImage(view: cityView, status: false)
         } else {
             selectedDistrictId = districtList?[indexPath.row].id ?? 0
             districtView.textField.textColor = AppColor.borderColor.color
             districtView.textField.text = districtList?[indexPath.row].name ?? ""
             isTextFieldEmpty()
+            setTextArrowImage(view: districtView, status: false)
         }
         
         tableContainerView.isHidden = true
