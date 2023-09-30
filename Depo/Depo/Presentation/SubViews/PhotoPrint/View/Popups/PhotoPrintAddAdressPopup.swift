@@ -199,6 +199,9 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
         configureTableView()
         setTapped()
         getCity()
@@ -295,7 +298,7 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
     private func tableViewConfig(withView: UIView) {
         tableContainerView.isHidden = false
         tableView.isHidden = false
-        tableContainerView.frame = CGRect(x: 12, y: withView.frame.maxY, width: view.frame.width - 48, height: 240)
+        tableContainerView.frame = CGRect(x: 12, y: withView.frame.maxY, width: withView.frame.width, height: 240)
     }
     
     private func setTextFromAddress(address: AddressResponse?) {
@@ -350,7 +353,7 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
     
     private func configureTableView() {
         view.addSubview(tableContainerView)
-        tableContainerView.frame = CGRect(x: 12, y: cityView.frame.maxY, width: view.frame.width - 48, height: 240)
+        tableContainerView.frame = CGRect(x: 12, y: cityView.frame.maxY, width: cityView.frame.width, height: 240)
         
         tableView = UITableView(frame: CGRect(x: 0, y: 0, width: tableContainerView.frame.width, height: tableContainerView.frame.height))
 

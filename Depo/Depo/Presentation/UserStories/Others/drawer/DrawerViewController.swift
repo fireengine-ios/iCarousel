@@ -46,6 +46,9 @@ final class DrawerViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(asd1), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(asd2), name: UIResponder.keyboardWillHideNotification, object: nil)
+        if contentViewController.nibName == "PhotoPrintAddAdressPopup" {
+            contentContainerView.showsVerticalScrollIndicator = false
+        }
     }
     
     @objc func asd1(notification: NSNotification) {
