@@ -171,7 +171,7 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
     
     @IBOutlet weak var saveAdressButton: UIButton! {
         willSet {
-            newValue.setTitle(localized(.saveAddress), for: .normal)
+            newValue.setTitle(localized(.useAddress), for: .normal)
             newValue.titleLabel?.font = .appFont(.medium, size: 16)
             newValue.setTitleColor(.white, for: .normal)
             newValue.backgroundColor = AppColor.borderLightGray.color
@@ -320,8 +320,12 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
             checkButton.isSelected = false
             cityView.textField.textColor = AppColor.borderColor.color
             districtView.textField.textColor = AppColor.borderColor.color
+            saveAdressButton.setTitle(localized(.updateAddress), for: .normal)
+            titleLabel.text = localized(.updateAddress)
         } else {
             isAddressSave = true
+            saveAdressButton.setTitle(localized(.useAddress), for: .normal)
+            titleLabel.text = localized(.addAddress)
         }
     }
     
