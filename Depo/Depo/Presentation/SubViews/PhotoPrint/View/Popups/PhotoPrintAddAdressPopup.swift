@@ -52,8 +52,8 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
     
     @IBOutlet weak var nameView: ProfileTextEnterView! {
         willSet {
-            newValue.titleLabel.text = TextConstants.settingsUserInfoNameSurname
-            newValue.textField.quickDismissPlaceholder = TextConstants.userProfileNameAndSurNameSubTitle
+            newValue.titleLabel.text = localized(.printReceiptNme)
+            newValue.textField.quickDismissPlaceholder = localized(.printReceiptNamePlaceholder)
             newValue.textField.setLeftPaddingPoints(25)
             newValue.textField.autocorrectionType = .no
             newValue.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
