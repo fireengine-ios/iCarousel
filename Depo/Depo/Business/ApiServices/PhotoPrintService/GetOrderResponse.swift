@@ -12,20 +12,25 @@ import Foundation
 struct GetOrderResponse: Codable {
     let id: Int
     let affiliateOrderDetails: [AffiliateOrderDetail]
-    let requestID, recipientName, recipientMsisdn, recipientAddress: String
-    let recipientDistrict, recipientCity, itemOrderNumber: String
-    let itemOrderDate: Int
-    let itemLastStatusUpdateDate: Int?
-    let itemQuantity: Int
-    let affiliateType, affiliateSubType, status: String
-    let deliveredDate: Int
+    let requestID: String
+    let recipientName: String
+    let recipientMsisdn: String
+    let recipientAddress: String
+    let recipientDistrict: String
+    let recipientCity: String
+    let itemOrderDate, itemQuantity: Int
+    let affiliateType: String
+    let affiliateSubType: String
+    let status: String
+    let createdDate, lastModifiedDate: Int
+    let itemOrderNumber: String?
+    let itemLastStatusUpdateDate, deliveredDate: Int?
     let cargoFirmName, cargoTrackingNumber: String?
-    let createdDate: Int
 
     enum CodingKeys: String, CodingKey {
         case id, affiliateOrderDetails
         case requestID = "requestId"
-        case recipientName, recipientMsisdn, recipientAddress, recipientDistrict, recipientCity, itemOrderNumber, itemOrderDate, itemLastStatusUpdateDate, itemQuantity, affiliateType, affiliateSubType, status, deliveredDate, cargoFirmName, cargoTrackingNumber, createdDate
+        case recipientName, recipientMsisdn, recipientAddress, recipientDistrict, recipientCity, itemOrderDate, itemQuantity, affiliateType, affiliateSubType, status, createdDate, lastModifiedDate, itemOrderNumber, itemLastStatusUpdateDate, deliveredDate, cargoFirmName, cargoTrackingNumber
     }
 }
 
@@ -80,14 +85,10 @@ struct Metadata: Codable {
 
 // MARK: - Encode/decode helpers
 
-class JSONNull: Codable, Hashable {
+class JSONNull: Codable {
 
     public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
         return true
-    }
-
-    public var hashValue: Int {
-        return 0
     }
 
     public init() {}

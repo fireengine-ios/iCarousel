@@ -117,7 +117,7 @@ final class PhotoPrintStatusPopup: BasePopUpController {
         dateLabel.text = dateConverter(epochTimeInMilliseconds: item?.createdDate ?? 0, type: 1)
         statusLabel.text = status.titleText
         infoLabel.text = status.detailText
-        createDateLabel.text = dateConverter(epochTimeInMilliseconds: item?.itemLastStatusUpdateDate ?? 0, type: 2)
+        createDateLabel.text = dateConverter(epochTimeInMilliseconds: item?.lastModifiedDate ?? 0, type: 2)
         orderNoLabel.text = String(format: localized(.printOrderNumber), item?.requestID ?? "")
         
         statusLabel.textColor = status.titleLabelColor
