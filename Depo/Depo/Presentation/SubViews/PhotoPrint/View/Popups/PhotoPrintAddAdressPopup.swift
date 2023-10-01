@@ -226,6 +226,7 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
     @IBAction func checkButtonTapped(_ sender: Any) {
         (sender as! UIButton).isSelected = !(sender as! UIButton).isSelected
         checkButtonIsChecked = (sender as! UIButton).isSelected
+        print("aaaaaaaaaaa \(checkButtonIsChecked)")
         checkButtonIsChecked ? checkButton.setImage(Image.iconSelectFills.image, for: .normal) : checkButton.setImage(Image.iconSelectEmpty.image, for: .normal)
     }
     
@@ -320,7 +321,8 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
             apartmentNoView.textField.text = address?.apartmentNumber
             postaCodeView.textField.text = String(describing: address?.postalCode ?? 0)
             enableButton(isEnable: true)
-            checkButton.isSelected = false
+            checkButton.isSelected = true
+            checkButtonIsChecked = true
             cityView.textField.textColor = AppColor.borderColor.color
             districtView.textField.textColor = AppColor.borderColor.color
             saveAdressButton.setTitle(localized(.updateAddress), for: .normal)
