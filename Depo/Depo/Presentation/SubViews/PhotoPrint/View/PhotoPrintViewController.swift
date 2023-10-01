@@ -153,6 +153,7 @@ final class PhotoPrintViewController: BaseViewController {
         debugLog("PhotoPrintViewController viewDidLoad")
         navigationItem.leftBarButtonItem = closeSelfButton
         NotificationCenter.default.addObserver(self,selector: #selector(navigationBackFromPopup),name: .navigationBack, object: nil)
+        badQuailtySize = Double(FirebaseRemoteConfig.shared.printPhotoQualityMinMB) ?? 1
         
         setTitle(withString: localized(.printEditPhotoPageName))
         view.backgroundColor = AppColor.background.color
@@ -222,6 +223,7 @@ final class PhotoPrintViewController: BaseViewController {
                     self?.setViewTag()
                     self?.addRemoveContentContainerView(isAdd: self?.totalPhotoCount() != self?.maxSelectablePhoto, photoCount: (self?.totalPhotoCount())!)
                     self?.nextButtonEnabled()
+                    self?.hideSpinner()
                 }
             }
         }
@@ -273,7 +275,6 @@ final class PhotoPrintViewController: BaseViewController {
                 viewInStack.removeFromSuperview()
                 self.selectedPhotos.remove(at: sender.tag)
                 self.imageSizeArray.remove(at: sender.tag)
-                self.showSpinner()
                 self.setViewTag()
                 isContentCheckBoxChecked = false
                 contentCheckButton.isSelected = isContentCheckBoxChecked
@@ -503,17 +504,6 @@ final class PhotoPrintViewController: BaseViewController {
             getView(tag: index, layerName: Subviews.newPhotoIcon.layerName).tag = index
             getView(tag: index, layerName: Subviews.newPhotoLabel.layerName).tag = index
             getView(tag: index, layerName: Subviews.contentContainerView.layerName).tag = index
-        }
-        
-        for view in contentView.subviews {
-            if view is UILabel {
-                view.removeFromSuperview()
-            }
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.addSeparatorToContentView()
-            self.hideSpinner()
         }
     }
     
@@ -904,6 +894,12 @@ extension PhotoPrintViewController {
             return view
         }()
         
+        lazy var seperatorLabel: UILabel = {
+            let view = UILabel()
+            view.backgroundColor = AppColor.borderLightGray.color
+            return view
+        }()
+        
         containerView.addSubview(countTitleLabel)
         countTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         countTitleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 0).isActive = true
@@ -1032,6 +1028,13 @@ extension PhotoPrintViewController {
         newPhotoLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10).isActive = true
         newPhotoLabel.leadingAnchor.constraint(equalTo: newPhotoIcon.trailingAnchor, constant: 8).isActive = true
         newPhotoLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16).isActive = true
+        
+        containerView.addSubview(seperatorLabel)
+        seperatorLabel.translatesAutoresizingMaskIntoConstraints = false
+        seperatorLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 15).isActive = true
+        seperatorLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: -8).isActive = true
+        seperatorLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 8).isActive = true
+        seperatorLabel.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
         return containerView
     }
