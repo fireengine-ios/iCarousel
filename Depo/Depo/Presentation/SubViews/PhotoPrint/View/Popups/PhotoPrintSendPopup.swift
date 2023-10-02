@@ -25,6 +25,7 @@ final class PhotoPrintSendPopup: BasePopUpController {
             newValue.font = .appFont(.regular, size: 16)
             newValue.textColor = AppColor.label.color
             newValue.numberOfLines = 5
+            newValue.adjustsFontSizeToFitWidth()
         }
     }
     
