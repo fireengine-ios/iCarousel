@@ -76,6 +76,8 @@ final class HomeCardResponse : Equatable {
             return .paycell
         case .drawCampaign:
             return .drawCampaign
+        case .photoPrint:
+            return .photoPrint
         }
     }
 }
@@ -125,7 +127,7 @@ enum HomeCardTypes: String {
     case divorce = "DIVORCE"
     case invitation = "INVITATION"
     case thingsDocument = "THINGS_DOCUMENT"
-    //case photoPrint = "PHOTOPRINT"
+    case photoPrint = "PRINT"
     case paycell = "PAYCELL"
     case drawCampaign = "DRAW_CAMPAIGN"
 }
