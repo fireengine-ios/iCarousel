@@ -34,7 +34,7 @@ final class PhotoPrintSendedPopup: BasePopUpController {
     @IBOutlet weak var dateLabel: UILabel! {
         willSet {
             newValue.font = .appFont(.medium, size: 12)
-            newValue.textColor = AppColor.label.color
+            newValue.textColor = AppColor.background.color
         }
     }
     
@@ -49,7 +49,7 @@ final class PhotoPrintSendedPopup: BasePopUpController {
     @IBOutlet weak var infoLabel: UILabel! {
         willSet {
             newValue.font = .appFont(.medium, size: 20)
-            newValue.textColor = AppColor.darkBlueColor.color
+            newValue.textColor = AppColor.darkBlue.color
             newValue.numberOfLines = 2
             newValue.text = localized(.sentPrintInfoPopupTitle)
         }
