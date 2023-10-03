@@ -75,9 +75,19 @@ final class PhotoPrintForYouViewController: BaseViewController {
     }
     
     private func onPlusPressed(_ sender: Any) {
-        let router = RouterVC()
-        let vc = router.photoPrintSelectPhotos(popupShowing: true)
-        router.pushViewController(viewController: vc, animated: false)
+        let isHavePrintPackage = SingletonStorage.shared.accountInfo?.photoPrintPackage ?? false
+        let sendRemaining = SingletonStorage.shared.accountInfo?.photoPrintSendRemaining ?? 0
+        if !isHavePrintPackage {
+            let vc = PhotoPrintNoPackagePopup.with()
+            vc.open()
+        } else if sendRemaining == 0 {
+            let vc = PhotoPrintNoRightPopup.with()
+            vc.open()
+        } else {
+            let router = RouterVC()
+            let vc = router.photoPrintSelectPhotos(popupShowing: true)
+            router.pushViewController(viewController: vc, animated: false)
+        }
     }
     
 }
