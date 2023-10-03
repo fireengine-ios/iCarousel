@@ -226,7 +226,6 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
     @IBAction func checkButtonTapped(_ sender: Any) {
         (sender as! UIButton).isSelected = !(sender as! UIButton).isSelected
         checkButtonIsChecked = (sender as! UIButton).isSelected
-        print("aaaaaaaaaaa \(checkButtonIsChecked)")
         checkButtonIsChecked ? checkButton.setImage(Image.iconSelectFills.image, for: .normal) : checkButton.setImage(Image.iconSelectEmpty.image, for: .normal)
     }
     

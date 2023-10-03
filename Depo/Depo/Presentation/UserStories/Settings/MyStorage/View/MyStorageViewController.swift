@@ -246,7 +246,6 @@ extension MyStorageViewController: MyStorageViewInput {
     
     func reloadData() {
         let purchaseState = UserDefaults.standard.bool(forKey: "PurchaseOrFirst")
-        print("aaaaaaaaaaaaaa \(purchaseState)")
         if purchaseState {
             startActivityIndicator()
         }

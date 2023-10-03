@@ -16,6 +16,7 @@ final class SubscriptionFeaturesView: UIView {
         case features(_ features: [AuthorityType])
         case middleFeatures
         case premiumOnly
+        case photoPrint
     }
     
     private lazy var stackView: UIStackView = {
@@ -122,6 +123,9 @@ final class SubscriptionFeaturesView: UIView {
             showButton.isSelected.toggle()
             addFeatures([TextConstants.featureStandardFeatures])
             addFeatures(features.map({ $0.description }), isPremium: true)
+            
+        case .photoPrint:
+            break
         }
     }
     
@@ -188,6 +192,15 @@ final class SubscriptionFeaturesView: UIView {
             case .recommended(features: let features):
                 addFeatures([TextConstants.featureStandardFeatures])
                 addFeatures(features.map({ $0.description }), isPremium: true)
+            case .photoPrint:
+                let redactedFeatures = [localized(.printPackageDetail),
+                                        TextConstants.featureHighQualityPicture,
+                                        TextConstants.featureImageRecognition,
+                                        TextConstants.featurePhotopick,
+                                        TextConstants.featureDeleteDuplicationContacts,
+                                        TextConstants.featureStorageOnlyAdditional1,
+                                        TextConstants.featureStorageOnlyAdditional2]
+                addFeatures(redactedFeatures, isPremium: false)
             }
         } else {
             hideFeatures()

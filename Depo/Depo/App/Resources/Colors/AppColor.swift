@@ -190,6 +190,8 @@ enum AppColor {
     
     // MARK: PHOTO PRINT
     case printPopupGray
+    case PrintFirstColor
+    case PrintSecondColor
 
     //TODO: Facelift: Uncomment below
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - FACELIFT - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
