@@ -99,11 +99,21 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    @IBOutlet weak var thumbnailPlusLabel: UILabel! {
+        willSet {
+            newValue.textColor = AppColor.printPopupGray.color
+            newValue.font = .appFont(.medium, size: 12)
+            newValue.numberOfLines = 2
+            newValue.text = localized(.photoPrint)
+            newValue.isHidden = true
+        }
+    }
+    
     @IBOutlet weak var statusImageView: UIImageView!
     
     @IBOutlet weak var statusLabel: UILabel! {
         willSet {
-            newValue.textColor = AppColor.label.color
+            newValue.textColor = AppColor.tealBlue.color
             newValue.font = .appFont(.regular, size: 12)
         }
     }
@@ -118,6 +128,7 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
     }
     
     private var printedPhotosData: GetOrderResponse?
+    private let maxSelectablePhoto = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
     
     @IBAction private func onCloseCard(_ sender: UIButton) {
         
@@ -138,6 +149,7 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
         statusImageView.isHidden = status.statusImageIsHidden
         statusImageView.image = status.statusImage
         thumbnailPlusImage.isHidden = true
+        thumbnailPlusLabel.isHidden = true
         let infoData = item.affiliateOrderDetails[0]
         guard let url = URL(string: infoData.fileInfo.tempDownloadURL) else {
             return
@@ -151,13 +163,15 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
         let format = DateFormatter()
         format.dateFormat = "MMMM"
         bgView.layer.borderWidth = 0
-        cardTitleLabel.text = format.string(from: myTime)
+        //cardTitleLabel.text = format.string(from: myTime)
+        cardTitleLabel.text = localized(.foryouPrintTitle)
         closeButton.isHidden = true
-        statusLabel.text = "Her ay 5 adet fotoğrafını ücretsiz bastır."
-        statusLabel.textColor = AppColor.darkBlueColor.color
+        statusLabel.text = String(format: localized(.foryouPrintBody), maxSelectablePhoto)
+        statusLabel.textColor = AppColor.tealBlue.color
         cardThumbnailImage.image = Image.collageThumbnail.image
         cardThumbnailImage.contentMode = .scaleToFill
         thumbnailPlusImage.isHidden = false
+        thumbnailPlusLabel.isHidden = false
         statusImageView.isHidden = true
         
     }
