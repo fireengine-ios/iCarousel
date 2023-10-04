@@ -194,7 +194,7 @@ final class SubscriptionOfferView: UIView, NibInit {
             typeLabel.isHidden = true
         }
         
-        if let model = plan.model as? PackageModelResponse, model.displayName?.contains("Print") ?? false {
+        if plan.addonType == .photoPrint {
             topNameLabel.isHidden = false
             topNameLabel.text = localized(.printPackage)
         } else {
@@ -270,7 +270,7 @@ final class SubscriptionOfferView: UIView, NibInit {
     
     private func makeFeatures(plan: SubscriptionPlan) -> SubscriptionFeaturesView.Features {
         let features = plan.features
-        if let model = plan.model as? PackageModelResponse, model.displayName?.contains("Print") ?? false {
+        if plan.addonType == .photoPrint {
             return .photoPrint
         } else if plan.isRecommended {
             return .recommended(features: features)

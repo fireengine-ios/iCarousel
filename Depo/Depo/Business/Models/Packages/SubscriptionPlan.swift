@@ -26,16 +26,14 @@ final class SubscriptionPlan {
                 isFeaturePack = package.isFeaturePack ?? false
                 hasAttachedFeature = package.hasAttachedFeature ?? false
                 isMiddleUser = getMiddleAuthority(authorities: package.authorities)
+                isPrintPackage = package.displayName?.contains("Print") ?? false
             } else if let plan = model as? SubscriptionPlanBaseResponse {
                 isFeaturePack = plan.subscriptionPlanIsFeaturePack ?? false
                 hasAttachedFeature = plan.subscriptionPlanHasAttachedFeature ?? false
                 isMiddleUser = getMiddleAuthority(authorities: plan.subscriptionPlanAuthorities)
+                isPrintPackage = plan.subscriptionPlanDescription?.contains("Print") ?? false
             } else {
                 return nil
-            }
-            
-            if let package = model as? PackageModelResponse {
-                isPrintPackage = package.displayName?.contains("Print") ?? false
             }
             
             if isPrintPackage ?? false {

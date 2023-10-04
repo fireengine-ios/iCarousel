@@ -279,6 +279,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
                 }
                 SingletonStorage.shared.activeUserSubscription = subscriptionsResponse
                 let offersList = subscriptionsResponse.list
+                
                 self?.output.successed(allOffers: offersList)
                 self?.getInfoForAppleProducts(offers: offersList)
             }, fail: { [weak self] errorResponse in
