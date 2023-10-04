@@ -649,6 +649,7 @@ extension PhotoPrintViewController {
             contentCheckLabel.text = photoCount < maxSelectablePhoto ? String(format: localized(.morePhotoRight), maxSelectablePhoto - photoCount) : String(format: localized(.noMorePhotoRight), maxSelectablePhoto)
             contentCheckLabel.textColor = photoCount < maxSelectablePhoto ? AppColor.label.color : AppColor.forgetPassTextRed.color
             contentViewIsHaveCheckBox = true
+            isContentCheckBoxChecked = false
             stackMainView.setCustomSpacing(16, after: stackMainView.subviews[selectedPhotos.count])
         } else {
             contentViewIsHaveCheckBox = false
