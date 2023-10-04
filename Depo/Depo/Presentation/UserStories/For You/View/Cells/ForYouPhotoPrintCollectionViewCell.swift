@@ -129,6 +129,7 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
     
     private var printedPhotosData: GetOrderResponse?
     private let sendRemaining = SingletonStorage.shared.accountInfo?.photoPrintSendRemaining ?? 0
+    private let maxSelection = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
     
     @IBAction private func onCloseCard(_ sender: UIButton) {
         
@@ -146,6 +147,7 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
         closeButton.isHidden = true
         statusLabel.text = status.titleText
         statusLabel.textColor = status.titleLabelColor
+        statusLabel.isHidden = false
         statusImageView.isHidden = status.statusImageIsHidden
         statusImageView.image = status.statusImage
         thumbnailPlusImage.isHidden = true
@@ -166,7 +168,12 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
         //cardTitleLabel.text = format.string(from: myTime)
         cardTitleLabel.text = localized(.foryouPrintTitle)
         closeButton.isHidden = true
-        statusLabel.text = String(format: localized(.foryouPrintBody), sendRemaining)
+        if sendRemaining > 0 {
+            statusLabel.isHidden = false
+            statusLabel.text = String(format: localized(.foryouPrintBody), maxSelection)
+        } else {
+            statusLabel.isHidden = true
+        }
         statusLabel.textColor = AppColor.tealBlue.color
         cardThumbnailImage.image = Image.collageThumbnail.image
         cardThumbnailImage.contentMode = .scaleToFill
