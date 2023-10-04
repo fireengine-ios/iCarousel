@@ -34,7 +34,7 @@ final class PhotoPrintSendedPopup: BasePopUpController {
     @IBOutlet weak var dateLabel: UILabel! {
         willSet {
             newValue.font = .appFont(.medium, size: 12)
-            newValue.textColor = AppColor.background.color
+            newValue.textColor = AppColor.navigationBarBackgroundBlack.color
         }
     }
     
