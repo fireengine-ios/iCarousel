@@ -48,7 +48,7 @@ final class PhotoPrintStatusPopup: BasePopUpController {
     @IBOutlet weak var dateLabel: UILabel! {
         willSet {
             newValue.font = .appFont(.medium, size: 12)
-            newValue.textColor = AppColor.label.color
+            newValue.textColor = AppColor.navigationBarBackgroundBlack.color
         }
     }
     
