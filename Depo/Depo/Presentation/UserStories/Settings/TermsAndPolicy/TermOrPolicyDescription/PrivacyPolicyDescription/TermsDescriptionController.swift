@@ -28,9 +28,6 @@ final class TermsDescriptionController: BaseViewController {
         textView.font = UIFont.TurkcellSaturaRegFont(size: 15)
         textView.textColor = AppColor.blackColor.color
         textView.backgroundColor = AppColor.primaryBackground.color
-        
-//        let edgeInset: CGFloat = 16
-//        textView.contentInset = UIEdgeInsets(top: edgeInset, left: 0, bottom: edgeInset, right: 0)
         return textView
     }()
     
@@ -44,7 +41,13 @@ final class TermsDescriptionController: BaseViewController {
         view.backgroundColor = AppColor.primaryBackground.color
         setupLayout()
         if textToPresent.isEmpty {
-            setTitle(withString: "Katılım Koşulları")
+            let navbarTitle = UILabel()
+            navbarTitle.text = "lifebox'lılar kazanıyor çekiliş kampanyası detayları"
+            navbarTitle.font = .appFont(.medium, size: 14)
+            navbarTitle.minimumScaleFactor = 0.5
+            navbarTitle.adjustsFontSizeToFitWidth = true
+            navigationItem.titleView = navbarTitle
+            
             textView.font = .appFont(.light, size: 14)
             textView.text = milliPiyangoText()
             textView.textAlignment = .justified

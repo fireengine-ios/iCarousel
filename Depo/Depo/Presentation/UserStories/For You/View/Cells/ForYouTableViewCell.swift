@@ -32,7 +32,7 @@ final class ForYouTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var collectionView: UICollectionView! {
         willSet {
-            newValue.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 20)
+            newValue.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 60)
         }
     }
     
@@ -109,6 +109,13 @@ final class ForYouTableViewCell: UITableViewCell {
         default:
             self.wrapData = model as? [WrapData] ?? []
             showEmptyDataViewIfNeeded(isShow: wrapData.isEmpty)
+        }
+        
+        switch currentView {
+        case .printedPhotos:
+            collectionView.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 60)
+        default:
+            collectionView.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 20)
         }
         
         collectionView.reloadData()
