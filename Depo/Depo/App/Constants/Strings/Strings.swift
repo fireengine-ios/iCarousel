@@ -337,7 +337,6 @@ enum Strings: String, Localizable {
     case printReceiptNme = "print_receipt_name"
     case printReceiptNamePlaceholder = "print_receipt_name_placeholder"
     case minPostaCode = "min_posta_code"
-    case errorcode5111 = "errorcode_5111"
     case addressNotFound = "address_not_found"
     case addressCityNotFound = "address_city_not_found"
     case addressDistrictNotFound = "address_district_not_found"

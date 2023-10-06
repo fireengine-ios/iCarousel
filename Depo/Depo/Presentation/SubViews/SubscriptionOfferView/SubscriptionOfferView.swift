@@ -196,7 +196,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         
         if plan.addonType == .photoPrint {
             topNameLabel.isHidden = false
-            topNameLabel.text = localized(.printPackage)
+            topNameLabel.text = localized(.printPackageTitle)
         } else {
             topNameLabel.isHidden = true
         }
@@ -363,7 +363,7 @@ final class SubscriptionOfferView: UIView, NibInit {
     
     private func updateBorderViewForPrint() {
         recommendationLabel.isHidden = false
-        recommendationLabel.text = localized(.printPackage)
+        recommendationLabel.text = localized(.printPackageTitle)
         plateView.layer.cornerRadius = 16
         plateView.clipsToBounds = true
         plateView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
