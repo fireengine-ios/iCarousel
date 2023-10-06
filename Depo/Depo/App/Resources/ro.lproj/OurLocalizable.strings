@@ -2199,3 +2199,8 @@ then {11,99 TRY/Month}*/
 "order_file_not_found" = "";
 "order_uuid_list_empty" = "";
 "download_url_not_found" = "";
+"print_package_not_found" = "";
+"print_limit_exceeded_error" = "";
+"print_file_limit_exceeded_error" = "";
+"order_not_delivered" = "";
+"order_not_delivered_detail" = "";

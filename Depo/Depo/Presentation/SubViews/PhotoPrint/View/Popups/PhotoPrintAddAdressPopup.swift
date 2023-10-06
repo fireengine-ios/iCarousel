@@ -519,7 +519,9 @@ extension PhotoPrintAddAdressPopup {
                 self?.cityList = response
                 self?.tableView.reloadData()
                 self?.hideSpinner()
-            case .failed(_):
+            case .failed(let error):
+                let errorMessage = ServerValueError(value: error.localizedDescription, code: error.errorCode).errorDescription ?? ""
+                UIApplication.showErrorAlert(message: errorMessage)
                 self?.hideSpinner()
                 break
             }
@@ -534,7 +536,9 @@ extension PhotoPrintAddAdressPopup {
                 self?.districtList = response
                 self?.tableView.reloadData()
                 self?.hideSpinner()
-            case .failed(_):
+            case .failed(let error):
+                let errorMessage = ServerValueError(value: error.localizedDescription, code: error.errorCode).errorDescription ?? ""
+                UIApplication.showErrorAlert(message: errorMessage)
                 self?.hideSpinner()
                 break
             }
@@ -553,7 +557,8 @@ extension PhotoPrintAddAdressPopup {
                     vc.openWithBlur()
                 })
             case .failed(let error):
-                UIApplication.showErrorAlert(message: error.localizedDescription)
+                let errorMessage = ServerValueError(value: error.localizedDescription, code: error.errorCode).errorDescription ?? ""
+                UIApplication.showErrorAlert(message: errorMessage)
                 self?.hideSpinner()
                 break
             }
@@ -572,7 +577,8 @@ extension PhotoPrintAddAdressPopup {
                     vc.openWithBlur()
                 })
             case .failed(let error):
-                UIApplication.showErrorAlert(message: error.localizedDescription)
+                let errorMessage = ServerValueError(value: error.localizedDescription, code: error.errorCode).errorDescription ?? ""
+                UIApplication.showErrorAlert(message: errorMessage)
                 self?.hideSpinner()
                 break
             }

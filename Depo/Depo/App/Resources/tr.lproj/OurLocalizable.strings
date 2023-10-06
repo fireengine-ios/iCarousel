@@ -2183,7 +2183,7 @@ then {11,99 TRY/Month}*/
 "more_photo_right" = "%d fotoğraf gönderme hakkın daha var. Devam etmek istediğine emin misin?";
 "no_more_photo_right" = "%d’ten fazla fotoğraf seçtin. Devam edebilmek için azaltın.";
 "timeline_header" = "2023’un en güzel anıları";
-"timeline_description" = "Bu senenin en güzel anılarını senin için derledik. Hemen keşfet.";
+"timeline_description" = "{timeline_year} yılının en güzel anılarını senin için derledik. Hemen keşfet.";
 "selected_for_print" = "Baskı için seçilenler";
 "print_cancel_popup_question" = "İptal etmek isteğine emin misin?";
 "print_cancel_popup_info" = "Basılı albüm için seçtiğin tüm fotoğraf düzenlemelerin silinecektir. Yeniden fotoğraf seçmen ve yeniden düzenlemen gereklidir.";
@@ -2267,3 +2267,8 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "order_uuid_list_empty" = "Sipariş fotoğraf listesi boş.";
 "download_url_not_found" = "Fotoğraf indirmek için url bulunamadı.";
+"print_package_not_found" = "Baskı Paketi bulunamadı.";
+"print_limit_exceeded_error" = "Fotoğraf baskı limiti aşıldı.";
+"print_file_limit_exceeded_error" = "Fotoğraf limiti aşıldı.";
+"order_not_delivered" = "Siparişin Baskıya Teslim Edilemedi";
+"order_not_delivered_detail" = "Siparişin teknik nedenlerden dolayı baskıya teslim edilemedi. Lütfen tekrar yeni baskı gönderiniz.";

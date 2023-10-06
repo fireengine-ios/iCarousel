@@ -153,7 +153,7 @@ final class PhotoPrintSendPopup: BasePopUpController {
                                              success: { },
                                              fail: {value in },
                                              returnedUploadOperation: { [weak self] values in
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                                     self?.setSendedPhotosFileUuid(returnOperation: values ?? [])
                                                 }
             
@@ -179,7 +179,9 @@ final class PhotoPrintSendPopup: BasePopUpController {
                     let vc = PhotoPrintSendedPopup.with(address: self?.address, editedImages: self?.editedImages)
                     vc.openWithBlur()
                 })
-            case .failed(_):
+            case .failed(let error):
+                let errorMessage = ServerValueError(value: error.localizedDescription, code: error.errorCode).errorDescription ?? ""
+                UIApplication.showErrorAlert(message: errorMessage)
                 self?.hideSpinner()
                 break
             }
