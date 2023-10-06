@@ -187,6 +187,8 @@ extension PhotoPrintStatusPopup {
             return .unDelivered
         } else if status == "DELIVERED_CARGO" {
             return .deliveredCargo
+        } else if status == "ORDER_NOT_DELIVERED" {
+            return .orderNotDelivered
         }
         return .newOrder
     }

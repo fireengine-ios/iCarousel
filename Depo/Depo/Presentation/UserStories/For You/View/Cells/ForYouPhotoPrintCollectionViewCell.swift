@@ -14,6 +14,7 @@ enum OrderStatus {
     case delivered
     case unDelivered
     case deliveredCargo
+    case orderNotDelivered
     
     var titleText: String {
         switch self {
@@ -22,6 +23,7 @@ enum OrderStatus {
         case .delivered: return localized(.orderDelivered)
         case .unDelivered: return localized(.orderUndelivered)
         case .deliveredCargo: return localized(.orderDeliveredCargo)
+        case .orderNotDelivered: return localized(.orderNotDelivered)
         }
     }
     
@@ -32,6 +34,7 @@ enum OrderStatus {
         case .delivered: return localized(.orderDeliveredDetail)
         case .unDelivered: return localized(.orderUndeliveredDetail)
         case .deliveredCargo: return localized(.orderDeliveredCargoDetail)
+        case .orderNotDelivered: return localized(.orderNotDeliveredDetail)
         }
     }
     
@@ -49,6 +52,7 @@ enum OrderStatus {
         case .delivered: return false
         case .unDelivered: return true
         case .deliveredCargo: return false
+        case .orderNotDelivered: return false
         }
     }
     
@@ -59,6 +63,7 @@ enum OrderStatus {
         case .delivered: return Image.iconCheckGreen.image
         case .unDelivered: return UIImage()
         case .deliveredCargo: return Image.iconDelivery.image
+        case .orderNotDelivered: return UIImage()
         }
     }
     
@@ -229,6 +234,8 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
             return .unDelivered
         } else if status == "DELIVERED_CARGO" {
             return .deliveredCargo
+        } else if status == "ORDER_NOT_DELIVERED" {
+            return .orderNotDelivered
         }
         return .newOrder
     }
