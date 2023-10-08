@@ -511,7 +511,18 @@ extension TabBarViewController: TabBarActionHandler {
             let vc = OnlyOfficePopup.with(fileType: .createPowerPoint, parentFolderUuid: onlyOfficeCreateFileFolderUuid())
             vc.open()
         case .photoPrint:
-            print("PhotoPrint VC")
+            let isHavePrintPackage = SingletonStorage.shared.accountInfo?.photoPrintPackage ?? false
+            let sendRemaining = SingletonStorage.shared.accountInfo?.photoPrintSendRemaining ?? 0
+            if !isHavePrintPackage {
+                let vc = PhotoPrintNoPackagePopup.with()
+                vc.open()
+            } else if sendRemaining == 0 {
+                let vc = PhotoPrintNoRightPopup.with()
+                vc.open()
+            } else {
+                let vc = router.photoPrintSelectPhotos(popupShowing: true)
+                router.pushViewController(viewController: vc, animated: false)
+            }
         }
         
     }

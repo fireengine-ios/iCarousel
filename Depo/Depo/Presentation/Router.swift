@@ -1161,6 +1161,20 @@ class RouterVC: NSObject {
     func createCollageNavigateToSeeAll(collageTemplate: CollageTemplate, section: CollageTemplateSections)  -> CreateCollageDetailController {
         return CreateCollageDetailController(collageTemplate: collageTemplate, section: section)
     }
+    
+    // MARK: - PhotoPrint Template
+    
+    func photoPrintViewController(selectedPhotos: [SearchItemResponse]) -> PhotoPrintViewController {
+        return PhotoPrintInitilizer.initializeViewController(selectedPhotos: selectedPhotos)
+    }
+    
+    func photoPrintSelectPhotos(selectedPhotos: [SearchItemResponse] = [], popupShowing: Bool? = nil)  -> PhotoPrintSelectionSegmentedController {
+        return PhotoPrintSelectionSegmentedController(selectedPhotos: selectedPhotos, popupShowing: popupShowing ?? false)
+    }
+    
+    func photoPrintForYouViewController(item: [GetOrderResponse] = []) -> PhotoPrintForYouViewController {
+        return PhotoPrintForYouViewController(item: item)
+    }
 
     // MARK: - Passcode
     

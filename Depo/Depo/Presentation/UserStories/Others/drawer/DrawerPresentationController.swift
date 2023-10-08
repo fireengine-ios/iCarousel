@@ -112,7 +112,7 @@ class DrawerPresentationController: UIPresentationController, UIGestureRecognize
     private func animateDimViewPresentation() {
         dimView?.alpha = 0
         presentedViewController.transitionCoordinator?.animate { _ in
-            self.dimView?.alpha = 1
+            self.dimView?.alpha = 0.90
         }
     }
 

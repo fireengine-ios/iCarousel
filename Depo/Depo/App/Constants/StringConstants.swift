@@ -21,3 +21,7 @@ struct StringConstants {
 struct CreateCollageConstants {
     static var selectedChangePhotoItems = [SearchItemResponse]()
 }
+
+struct PhotoPrintConstants {
+    static var selectedChangePhotoItems = [SearchItemResponse]()
+}

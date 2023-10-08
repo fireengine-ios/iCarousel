@@ -95,6 +95,15 @@ final class SubscriptionOfferView: UIView, NibInit {
             newValue.isLayoutMarginsRelativeArrangement = true
         }
     }
+    @IBOutlet weak var topNameLabel: UILabel! {
+        willSet {
+            newValue.font = .appFont(.medium, size: 14)
+            newValue.textColor = AppColor.marineTwoAndWhite.color
+            newValue.adjustsFontSizeToFitWidth = true
+            newValue.lineBreakMode = .byWordWrapping
+            newValue.text = "1ee"
+        }
+    }
     
     @IBOutlet private weak var graceDateLabel: UILabel! {
         willSet {
@@ -178,6 +187,13 @@ final class SubscriptionOfferView: UIView, NibInit {
             typeLabel.isHidden = true
         }
         
+        if plan.addonType == .photoPrint {
+            topNameLabel.isHidden = false
+            topNameLabel.text = localized(.printPackageTitle)
+        } else {
+            topNameLabel.isHidden = true
+        }
+        
         updateDesign(with: plan, style: style)
         
         if featureView.purchaseButton.titleLabel?.text != localized(.subscriptionOfferCancelButton) {
@@ -240,12 +256,16 @@ final class SubscriptionOfferView: UIView, NibInit {
             return TextConstants.featuresOnlyAddonType
         case .middleOnly:
             return TextConstants.middleFeaturesOnlyAddonType
+        case .photoPrint:
+            return localized(.printPackageInfo)
         }
     }
     
     private func makeFeatures(plan: SubscriptionPlan) -> SubscriptionFeaturesView.Features {
         let features = plan.features
-        if plan.isRecommended {
+        if plan.addonType == .photoPrint {
+            return .photoPrint
+        } else if plan.isRecommended {
             return .recommended(features: features)
         } else if features.isEmpty {
             return .storageOnly
@@ -260,8 +280,14 @@ final class SubscriptionOfferView: UIView, NibInit {
         
         updateDetails(plan: plan)
         updateFeaturesView(features: makeFeatures(plan: plan), style: style)
-        updateBorderView(isRecommended: plan.isRecommended)
         updateGracePeriodView(plan: plan)
+        let model = plan.model as? PackageModelResponse
+        if model?.displayName?.contains("Print") ?? false {
+            updateBorderViewForPrint()
+        } else {
+            updateBorderView(isRecommended: plan.isRecommended)
+        }
+        
     }
     
     private func updateButton(button: RoundedInsetsButton, plan: SubscriptionPlan, style: Style) {
@@ -316,6 +342,7 @@ final class SubscriptionOfferView: UIView, NibInit {
     
     private func updateBorderView(isRecommended: Bool) {
         recommendationLabel.isHidden = !isRecommended
+        recommendationLabel.text = TextConstants.weRecommend
         if isRecommended {
             plateView.layer.cornerRadius = 16
             plateView.clipsToBounds = true
@@ -327,6 +354,18 @@ final class SubscriptionOfferView: UIView, NibInit {
         }
     }
     
+    private func updateBorderViewForPrint() {
+        recommendationLabel.isHidden = false
+        recommendationLabel.text = localized(.printPackageTitle)
+        plateView.layer.cornerRadius = 16
+        plateView.clipsToBounds = true
+        plateView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        
+        let gradient = gradientBorderViewForPrint(view: topStackView)
+        topStackView.clipsToBounds = true
+        topStackView.layer.insertSublayer(gradient, at: 0)
+    }
+    
     private func gradientBorderView(view: UIView) -> CAGradientLayer {
         let gradient = CAGradientLayer()
         gradient.type = .axial
@@ -335,6 +374,19 @@ final class SubscriptionOfferView: UIView, NibInit {
             AppColor.SettingsPackagesRecommendedTwo.cgColor,
             AppColor.SettingsPackagesRecommendedThree.cgColor,
             AppColor.SettingsPackagesRecommendedFour.cgColor
+        ]
+        gradient.frame = view.bounds
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradient.endPoint = CGPoint(x: 0.6, y: 0.6)
+        return gradient
+    }
+    
+    private func gradientBorderViewForPrint(view: UIView) -> CAGradientLayer {
+        let gradient = CAGradientLayer()
+        gradient.type = .axial
+        gradient.colors = [
+            AppColor.PrintFirstColor.cgColor,
+            AppColor.PrintSecondColor.cgColor,
         ]
         gradient.frame = view.bounds
         gradient.startPoint = CGPoint(x: 0.0, y: 0.0)

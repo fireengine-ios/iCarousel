@@ -66,6 +66,8 @@ class InvitationGiftCollectionViewCell: UICollectionViewCell {
             return TextConstants.featuresOnlyAddonType
         case .middleOnly:
             return TextConstants.middleFeaturesOnlyAddonType
+        case . photoPrint:
+            return localized(.printPackageInfo)
         case .none:
             return ""
         }

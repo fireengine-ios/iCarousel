@@ -527,4 +527,13 @@ struct RouteRequests {
     static let onlyOfficeGetFile = baseUrl +/ "office/files"
     static let onlyOfficeFilterDocument = "search/byDocumentType?parentFolderUuid=%@&page=%@&size=%@&sortBy=%@&sortOrder=%@&documentType=%@"
     static let onlyOfficeSharedByMeFolderFilter = baseUrl.absoluteString + "v2/files/%@?language=en&page=%d&size=%d&sortBy=%@&sortOrder=%@&documentType=%@&parentFolderUuid=%@"
+    
+    //MARK: -PhotoPrint
+    static let city = baseUrl +/ "v1/address/cities"
+    static let district = "v1/address/district/%d"
+    static let myAddress = baseUrl +/ "v1/address"
+    static let addAddress = baseUrl +/ "v1/address"
+    static let updateAdress = "v1/address/%d"
+    static let createOrder = baseUrl +/ "v1/photo-print/order"
+    static let getOrder = baseUrl +/ "v1/photo-print/order"
 }
