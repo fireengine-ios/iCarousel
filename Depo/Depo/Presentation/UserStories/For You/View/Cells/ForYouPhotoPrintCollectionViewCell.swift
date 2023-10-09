@@ -41,6 +41,7 @@ enum OrderStatus {
     var titleLabelColor: UIColor {
         switch self {
         case .delivered: return AppColor.forgetPassTextGreen.color
+        case .orderNotDelivered: return AppColor.forgetPassTextRed.color
         default: return AppColor.tealBlue.color
         }
     }

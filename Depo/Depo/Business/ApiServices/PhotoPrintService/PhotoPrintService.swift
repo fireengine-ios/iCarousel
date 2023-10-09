@@ -113,7 +113,7 @@ final class PhotoPrintService: BaseRequestService {
     }
     
     @discardableResult
-    func photoPrintCreateOrder(addressId: Int, fileUuidList: [String], handler: @escaping ResponseHandler<CreateOrderResponse>) -> URLSessionTask? {
+    func photoPrintCreateOrder(addressId: Int, fileUuidList: [String], handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("photoPrintCreateOrder")
         
         let parameters: [String: Any] = ["addressId": addressId,
@@ -126,7 +126,7 @@ final class PhotoPrintService: BaseRequestService {
                      parameters: parameters,
                      encoding: JSONEncoding.default)
             .customValidate()
-            .responseObject(handler)
+            .responseVoid(handler)
             .task
     }
     
