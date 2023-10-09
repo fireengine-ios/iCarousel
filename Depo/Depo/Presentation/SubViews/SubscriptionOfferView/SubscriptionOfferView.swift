@@ -189,7 +189,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         
         if plan.addonType == .photoPrint {
             topNameLabel.isHidden = false
-            topNameLabel.text = localized(.printPackageTitle)
+            topNameLabel.text = localized(.printPageName)
         } else {
             topNameLabel.isHidden = true
         }

@@ -153,11 +153,8 @@ final class PhotoPrintSendPopup: BasePopUpController {
                                              success: { },
                                              fail: {value in },
                                              returnedUploadOperation: { [weak self] values in
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-                                                    self?.setSendedPhotosFileUuid(returnOperation: values ?? [])
-                                                }
-            
-        })
+                                                self?.setSendedPhotosFileUuid(returnOperation: values ?? [])
+                                             })
     }
     
     private func setSendedPhotosFileUuid(returnOperation: [UploadOperation]) {
