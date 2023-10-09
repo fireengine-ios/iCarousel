@@ -114,9 +114,9 @@ class LoginPresenter: BasePresenter {
         
         router.showAccountStatePopUp(image: .custom(image),
                                      title: title,
-                                     titleDesign: .partly(parts: [title : titleFullAttributes]),
+                                     titleDesign: .full(attributes: [:]),
                                      message: message,
-                                     messageDesign: .partly(parts: [message : messageFullAttributes]),
+                                     messageDesign: .full(attributes: [:]),
                                      buttonTitle: TextConstants.ok,
                                      buttonAction: deletedAccountHandler)
     }
