@@ -53,7 +53,7 @@ enum OrderStatus {
         case .delivered: return false
         case .unDelivered: return true
         case .deliveredCargo: return false
-        case .orderNotDelivered: return false
+        case .orderNotDelivered: return true
         }
     }
     
