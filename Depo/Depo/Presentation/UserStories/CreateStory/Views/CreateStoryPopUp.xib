@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -26,11 +26,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NWh-P8-TQe" customClass="UIVisualEffectView">
-                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LPq-aJ-1dZ">
-                    <rect key="frame" x="40" y="333.5" width="334" height="239"/>
+                    <rect key="frame" x="40" y="335.5" width="334" height="239"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PLh-Gr-diz">
                             <rect key="frame" x="144.5" y="25" width="45" height="45"/>
@@ -82,8 +82,8 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="NWh-P8-TQe" secondAttribute="bottom" id="3Di-ku-yio"/>
-                <constraint firstItem="NWh-P8-TQe" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="G4Q-Wh-Vlw"/>
+                <constraint firstAttribute="bottom" secondItem="NWh-P8-TQe" secondAttribute="bottom" id="3Di-ku-yio"/>
+                <constraint firstItem="NWh-P8-TQe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="G4Q-Wh-Vlw"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NWh-P8-TQe" secondAttribute="trailing" id="Wby-jO-2Kt"/>
                 <constraint firstItem="NWh-P8-TQe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ZqB-d9-9Xe"/>
                 <constraint firstItem="LPq-aJ-1dZ" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="duf-b7-sju"/>
