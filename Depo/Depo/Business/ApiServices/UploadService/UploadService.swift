@@ -166,7 +166,8 @@ final class UploadService: BaseRequestService {
                     self?.clearCounters(uploadType: uploadType)
                     self?.hideIfNeededCard(for: uploadType)
                     ItemOperationManager.default.finishUploadFiles()
-                    UserDefaults.standard.set(self?.photoPrintUuidList, forKey: "PhotoPrintUploadFiles")    
+                    UserDefaults.standard.set(self?.photoPrintUuidList, forKey: "PhotoPrintUploadFiles")
+                    self?.photoPrintUuidList.removeAll()
                     success()
                     }, fail: { [weak self] errorResponse in
                         self?.stopTracking()
@@ -467,6 +468,7 @@ final class UploadService: BaseRequestService {
                             }
                             
                             if isPhotoPrint {
+                                self.photoPrintUuidList.removeAll()
                                 for value in itemsToUpload {
                                     self.photoPrintUuidList.append(value.uuid)
                                 }
