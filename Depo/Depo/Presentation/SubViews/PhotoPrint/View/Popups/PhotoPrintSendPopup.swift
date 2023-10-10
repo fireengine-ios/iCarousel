@@ -114,11 +114,13 @@ final class PhotoPrintSendPopup: BasePopUpController {
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
-        updateUserInfo()
+        updateUserInfo(isCheckBeforeSend: true)
     }
     
-    private func updateUserInfo() {
-        showSpinner()
+    private func updateUserInfo(isCheckBeforeSend: Bool) {
+        if isCheckBeforeSend {
+            showSpinner()
+        }
         let accountService = AccountService()
         accountService.info(success: { [weak self] response in
             guard let response = response as? AccountInfoResponse else {
@@ -127,13 +129,15 @@ final class PhotoPrintSendPopup: BasePopUpController {
             }
             DispatchQueue.toMain {
                 SingletonStorage.shared.accountInfo = response
-                let sendRemaining = SingletonStorage.shared.accountInfo?.photoPrintSendRemaining ?? 0
-                if sendRemaining == 0 {
-                    self?.hideSpinner()
-                    let vc = PhotoPrintNoRightPopup.with()
-                    vc.open()
-                } else {
-                    self?.sendEditedImages()
+                if isCheckBeforeSend {
+                    let sendRemaining = SingletonStorage.shared.accountInfo?.photoPrintSendRemaining ?? 0
+                    if sendRemaining == 0 {
+                        self?.hideSpinner()
+                        let vc = PhotoPrintNoRightPopup.with()
+                        vc.open()
+                    } else {
+                        self?.sendEditedImages()
+                    }
                 }
             }
         }) { error in }
@@ -170,7 +174,7 @@ final class PhotoPrintSendPopup: BasePopUpController {
             case .success(_):
                 self?.hideSpinner()
                 self?.dismiss(animated: false, completion: {
-                    self?.updateAccountInfoForPhotoPrint()
+                    self?.updateUserInfo(isCheckBeforeSend: false)
                     let vc = PhotoPrintSendedPopup.with(address: self?.address, editedImages: self?.editedImages)
                     vc.openWithBlur()
                 })
