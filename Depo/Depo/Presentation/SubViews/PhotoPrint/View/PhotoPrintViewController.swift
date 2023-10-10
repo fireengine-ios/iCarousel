@@ -850,7 +850,7 @@ extension PhotoPrintViewController {
             let view = UIButton()
             view.setImage(Image.iconPrintSelectEmpty.image, for: .normal)
             view.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
-            view.isHidden = false
+            view.isHidden = true
             view.layer.name = Subviews.checkButton.layerName
             view.tag = index
             return view

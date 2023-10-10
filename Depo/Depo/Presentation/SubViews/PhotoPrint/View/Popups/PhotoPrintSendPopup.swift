@@ -150,21 +150,17 @@ final class PhotoPrintSendPopup: BasePopUpController {
         }
         
         UploadService.default.uploadFileList(items: sendData, uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, isPhotoPrint: true,
-                                             success: { },
-                                             fail: {value in },
-                                             returnedUploadOperation: { [weak self] values in
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                                                    self?.setSendedPhotosFileUuid(returnOperation: values ?? [])
-                                                }
-                                             })
+                                             success: {
+                                                let uuidList = UserDefaults.standard.stringArray(forKey: "PhotoPrintUploadFiles")
+                                                self.setSendedPhotosFileUuid(fileList: uuidList ?? [])
+                                            },
+                                            fail: {_ in },
+                                            returnedUploadOperation: { _ in
+                                            })
     }
     
-    private func setSendedPhotosFileUuid(returnOperation: [UploadOperation]) {
-        var fileUuidList = [String]()
-        for value in returnOperation {
-            fileUuidList.append(value.inputItem.uuid)
-        }
-        createOrder(fileUuidList: fileUuidList)
+    private func setSendedPhotosFileUuid(fileList: [String]) {
+        createOrder(fileUuidList: fileList)
     }
     
     private func createOrder(fileUuidList: [String]) {

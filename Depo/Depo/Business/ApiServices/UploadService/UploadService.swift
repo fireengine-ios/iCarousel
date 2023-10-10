@@ -24,6 +24,7 @@ final class UploadService: BaseRequestService {
     private lazy var privateShareAnalytics = PrivateShareAnalytics()
     private lazy var autoSyncStorage = AutoSyncDataStorage()
     private lazy var reachabilityService = ReachabilityService.shared
+    private var photoPrintUuidList = [String]()
     
     private var allSyncOperationsCount: Int {
         return uploadOperations.filter({ $0.uploadType == .autoSync && !$0.isCancelled }).count + finishedSyncOperationsCount
@@ -165,6 +166,7 @@ final class UploadService: BaseRequestService {
                     self?.clearCounters(uploadType: uploadType)
                     self?.hideIfNeededCard(for: uploadType)
                     ItemOperationManager.default.finishUploadFiles()
+                    UserDefaults.standard.set(self?.photoPrintUuidList, forKey: "PhotoPrintUploadFiles")    
                     success()
                     }, fail: { [weak self] errorResponse in
                         self?.stopTracking()
@@ -462,6 +464,12 @@ final class UploadService: BaseRequestService {
                             
                             if uploadType == .sharedWithMe {
                                 self.trackUploadSharedWithMeItems(count: self.finishedSharedWithMeUploadOperationsCount)
+                            }
+                            
+                            if isPhotoPrint {
+                                for value in itemsToUpload {
+                                    self.photoPrintUuidList.append(value.uuid)
+                                }
                             }
                             
                             success()

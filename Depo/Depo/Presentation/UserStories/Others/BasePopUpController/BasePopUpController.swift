@@ -27,6 +27,8 @@ class BasePopUpController: UIViewController {
     func openWithBlur(_ completion : VoidHandler? = nil)  {
         
         presentAsDrawer(config: { drawer in
+            drawer.drawerPresentationController?.allowsDismissalWithPanGesture = false
+            drawer.drawerPresentationController?.allowsDismissalWithTapGesture = false
             drawer.showsDrawerIndicator = false
             drawer.drawerPresentationController?.allowsDismissalWithPanGesture = false
             drawer.drawerPresentationController?.dimmedViewStyle = .blurEffect(style: .dark)
