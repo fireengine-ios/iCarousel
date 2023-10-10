@@ -347,7 +347,11 @@ final class PhotoPrintViewController: BaseViewController {
             if element.layer.name == Subviews.containerView.layerName {
                 let contentView = getView(tag: index, layerName: Subviews.imageContainerView.layerName).subviews[0]
                 let image: UIImage = takeScreenshot(of: contentView)
-                editedImages.append(image)
+                let countLabel = getView(tag: index, layerName: Subviews.addDeleteContainer.layerName).subviews[1] as? UILabel
+                let count = Int(countLabel?.text ?? "0") ?? 0
+                for _ in 0...count - 1 {
+                    editedImages.append(image)
+                }
             }
         }
         return editedImages
