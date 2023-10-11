@@ -22,6 +22,7 @@ final class ForYouPresenter: BasePresenter, ForYouModuleInput {
     private lazy var storyData: [WrapData] = []
     private lazy var animationsData: [WrapData] = []
     private lazy var collagesData: [WrapData] = []
+    private lazy var printedPhotosData: [GetOrderResponse] = []
     private lazy var hiddenData: [WrapData] = []
     private lazy var favoriteData: [WrapData] = []
     private lazy var collageCardsData: [HomeCardResponse] = []
@@ -115,6 +116,14 @@ extension ForYouPresenter: ForYouViewOutput {
             return 190
         case .favorites:
             return favoriteData.isEmpty ? 0 : 190
+        case .printedPhotos:
+            let isHavePrintPackage = SingletonStorage.shared.accountInfo?.photoPrintPackage ?? false
+            if !isHavePrintPackage {
+                if printedPhotosData.isEmpty {
+                    return 0
+                }
+            }
+            return 370
         }
     }
     
@@ -150,6 +159,8 @@ extension ForYouPresenter: ForYouViewOutput {
             return animationCardsData
         case .albumCards:
             return albumCardsData
+        case .printedPhotos:
+            return printedPhotosData
         }
     }
     
@@ -238,6 +249,10 @@ extension ForYouPresenter: ForYouInteractorOutput {
     
     func getCollages(data: [WrapData]) {
         self.collagesData = data
+    }
+    
+    func getPrintedPhotos(data: [GetOrderResponse]) {
+        self.printedPhotosData = data
     }
     
     func getAlbums(data: [AlbumItem]) {

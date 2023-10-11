@@ -16,7 +16,7 @@ extension NSNotification.Name {
 private struct RemoteConfigKeys {
     static let loginSupportAttempts = "login_support_form_treshold"
     static let signupSupportAttempts = "signup_support_form_treshold"
-    static let printOptionEnabled = "print_option_enabled"
+    static let printOptionEnabled = "new_photoprint_option_enable"
     static let chatbotMenuEnabled = "chatbot_menu_enabled"
     static let contactUsEnabled = "contact_us_enabled"
     static let printOptionEnabledLanguages = "print_option_enabled_languages"
@@ -29,6 +29,7 @@ private struct RemoteConfigKeys {
     static let lifeboxFacebookEnable = "lifebox_facebook_enable"
     static let lifeboxDropboxEnable = "lifebox_dropbox_enable"
     static let preparePageSizeLimit = "prepare_page_size_limit"
+    static let printPhotoQualityMinMB = "Print_Photo_Quality_Min_MB"
 }
 
 final class FirebaseRemoteConfig {
@@ -103,6 +104,11 @@ final class FirebaseRemoteConfig {
     var fetchPreparePageSizeLimit: Int {
         let key = RemoteConfigKeys.preparePageSizeLimit
         return remoteConfig.configValue(forKey: key).numberValue.intValue
+    }
+    
+    var printPhotoQualityMinMB: String {
+        let key = RemoteConfigKeys.printPhotoQualityMinMB
+        return remoteConfig.configValue(forKey: key).stringValue ?? ""
     }
     
     func fetchAttemptsBeforeSupportOnLogin(completion: @escaping ValueHandler<Int>) {

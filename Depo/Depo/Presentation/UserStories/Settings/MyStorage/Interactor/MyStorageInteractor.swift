@@ -119,6 +119,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
                     WidgetCenter.shared.reloadAllTimelines()
                 }
                 DispatchQueue.toMain {
+                    self?.getAccountInfo()
                     self?.output.refreshPackages()
                 }
             } else {
@@ -278,6 +279,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
                 }
                 SingletonStorage.shared.activeUserSubscription = subscriptionsResponse
                 let offersList = subscriptionsResponse.list
+                
                 self?.output.successed(allOffers: offersList)
                 self?.getInfoForAppleProducts(offers: offersList)
             }, fail: { [weak self] errorResponse in
@@ -407,5 +409,17 @@ extension MyStorageInteractor: MyStorageInteractorInput {
                     self?.output.failedUsage(with: errorResponse)
                 }
         })
+    }
+    
+    private func getAccountInfo() {
+        accountService.info(success: { [weak self] response in
+            guard let response = response as? AccountInfoResponse else {
+                assertionFailure()
+                return
+            }
+            DispatchQueue.toMain {
+                SingletonStorage.shared.accountInfo = response
+            }
+        }) { error in }
     }
 }

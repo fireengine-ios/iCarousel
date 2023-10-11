@@ -52,9 +52,15 @@ final class DrawerViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(openKeyboardAction), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(closeKeyboardAction), name: UIResponder.keyboardWillHideNotification, object: nil)
+        if contentViewController.nibName == "PhotoPrintAddAdressPopup" {
+            contentContainerView.showsVerticalScrollIndicator = false
+        }
     }
     
     @objc func openKeyboardAction(notification: NSNotification) {
+        if contentViewController.nibName == "PhotoPrintAddAdressPopup" {
+            return
+        }
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             keyboardHeight = keyboardSize.height
             view.frame.origin.y -= keyboardHeight - popUpBottomSpaceConstant
@@ -62,6 +68,9 @@ final class DrawerViewController: UIViewController {
     }
 
     @objc func closeKeyboardAction(notification: NSNotification) {
+        if contentViewController.nibName == "PhotoPrintAddAdressPopup" {
+            return
+        }
         view.frame.origin.y += keyboardHeight + popUpBottomSpaceConstant
     }
 

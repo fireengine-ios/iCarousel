@@ -14,22 +14,30 @@ final class SubscriptionPlan {
         case middleOnly
         case storageOnly
         case featureOnly
+        case photoPrint
         
         static func make(model: Any) -> AddonType? {
             let isFeaturePack: Bool
             let hasAttachedFeature: Bool
             var isMiddleUser: Bool?
+            var isPrintPackage: Bool?
             
             if let package = model as? PackageModelResponse {
                 isFeaturePack = package.isFeaturePack ?? false
                 hasAttachedFeature = package.hasAttachedFeature ?? false
                 isMiddleUser = getMiddleAuthority(authorities: package.authorities)
+                isPrintPackage = package.displayName?.contains("Print") ?? false
             } else if let plan = model as? SubscriptionPlanBaseResponse {
                 isFeaturePack = plan.subscriptionPlanIsFeaturePack ?? false
                 hasAttachedFeature = plan.subscriptionPlanHasAttachedFeature ?? false
                 isMiddleUser = getMiddleAuthority(authorities: plan.subscriptionPlanAuthorities)
+                isPrintPackage = plan.subscriptionPlanDescription?.contains("Print") ?? false
             } else {
                 return nil
+            }
+            
+            if isPrintPackage ?? false {
+                return .photoPrint
             }
             
             if isFeaturePack {

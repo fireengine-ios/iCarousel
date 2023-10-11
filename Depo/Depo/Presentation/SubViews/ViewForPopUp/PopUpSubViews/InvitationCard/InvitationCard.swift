@@ -44,6 +44,9 @@ final class InvitationCard: BaseCardView {
         } else if viewType == .drawCampaign {
             let url = URL(string: RouteRequests.drawCampaignUrl)
             UIApplication.shared.open(url!)
+        } else if viewType == .milliPiyango {
+            let vc = TermsDescriptionController(text: "")
+            router.pushViewController(viewController: vc)
         }
     }
 

@@ -247,13 +247,13 @@ struct RouteRequests {
     static var faqContentUrl: String {
         switch currentServerEnvironment {
         case .production: return isBillo ? "https://mybilloapp.com/faq/?lang=%@)" :
-                                           "https://mylifebox.com/faq/?lang=%@"
+            "https://mylifebox.com/%@/faq/index.html"
             
         case .preProduction: return isBillo ? "https://prp.mylifebox.com/faq/?lang=%@" :
-                                              "https://mylifebox.com/faq/?lang=%@"
+            "https://mylifebox.com/%@/faq/index.html"
             
         case .test: return isBillo ? "https://dev.mylifebox.com/faq/?lang=%@" :
-                                     "https://adepodev.turkcell.com.tr/faq/?lang=%@"
+                   "https://adepodev.turkcell.com.tr/%@/faq/index.html"
         }
     }
 
@@ -339,6 +339,7 @@ struct RouteRequests {
     
     struct HomeCards {
         static let all = baseUrl +/ "assistant/v1"
+        static let newHomeCard = "homepage-cards"
         static func card(with id: Int) -> URL {
             return all +/ String(id)
         }
@@ -526,4 +527,13 @@ struct RouteRequests {
     static let onlyOfficeGetFile = baseUrl +/ "office/files"
     static let onlyOfficeFilterDocument = "search/byDocumentType?parentFolderUuid=%@&page=%@&size=%@&sortBy=%@&sortOrder=%@&documentType=%@"
     static let onlyOfficeSharedByMeFolderFilter = baseUrl.absoluteString + "v2/files/%@?language=en&page=%d&size=%d&sortBy=%@&sortOrder=%@&documentType=%@&parentFolderUuid=%@"
+    
+    //MARK: -PhotoPrint
+    static let city = baseUrl +/ "v1/address/cities"
+    static let district = "v1/address/district/%d"
+    static let myAddress = baseUrl +/ "v1/address"
+    static let addAddress = baseUrl +/ "v1/address"
+    static let updateAdress = "v1/address/%d"
+    static let createOrder = baseUrl +/ "v1/photo-print/order"
+    static let getOrder = baseUrl +/ "v1/photo-print/order"
 }

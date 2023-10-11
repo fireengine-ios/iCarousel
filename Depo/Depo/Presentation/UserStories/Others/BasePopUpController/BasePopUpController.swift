@@ -23,6 +23,17 @@ class BasePopUpController: UIViewController {
             
         }, completion: completion)
     }
+    
+    func openWithBlur(_ completion : VoidHandler? = nil)  {
+        
+        presentAsDrawer(config: { drawer in
+            drawer.drawerPresentationController?.allowsDismissalWithPanGesture = false
+            drawer.drawerPresentationController?.allowsDismissalWithTapGesture = false
+            drawer.showsDrawerIndicator = false
+            drawer.drawerPresentationController?.allowsDismissalWithPanGesture = false
+            drawer.drawerPresentationController?.dimmedViewStyle = .blurEffect(style: .dark)
+        }, completion: completion)
+    }
 
     ///isFinalStep is used for dismissCompletion performing
     ///set isFinalStep as false to skip dismissCompletion performing

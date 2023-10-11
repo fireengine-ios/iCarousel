@@ -187,6 +187,11 @@ enum AppColor {
     case landingTitle
     case landingButton
     case landingPageIndicator
+    
+    // MARK: PHOTO PRINT
+    case printPopupGray
+    case PrintFirstColor
+    case PrintSecondColor
 
     //TODO: Facelift: Uncomment below
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - FACELIFT - ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -230,6 +235,9 @@ enum AppColor {
     case tbMatikBlurColor
     case discoverCardLine
     case settingsButtonColor
+    case tealBlue
+    case switcherGrayColor
+    case profileGrayColor
     
 
     var color: UIColor {

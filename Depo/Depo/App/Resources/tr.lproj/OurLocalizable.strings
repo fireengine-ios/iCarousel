@@ -2132,7 +2132,148 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "office_filter_not_found" = "Filtrelemeye çalıştığınız dosya (%@) bulunamadı.";
 "contact_us_complaint_cellfie" = "Bizimle iletişime geçtiğiniz için teşekkürler. Talebiniz incelenmek üzere Cellfie Mobile'a iletildi. Sorunu incelemek için cihazınızla ilgili bilgiler, lifebox kullanım bilgileri, iletişim bilgileri ve kişisel bilgiler gibi sağladığınız tüm gerekli bilgileri onlarla paylaşacağız. lifebox'a yüklediğiniz fotoğraflar/videolar ve diğer içerikler Cellfie Mobile ile paylaşılmayacaktır.";
-"Office_Filter_Not_Found" = "";
+"Office_Filter_Not_Found" = "Filtrelemeye çalıştığınız dosya (%@) bulunamadı.";
 
 /*Fuzzy*/
 "new_print" = "Yeni Baskı Oluştur";
+"print_info_popup_title" = "5 Adet Fotoğraf Seç";
+"print_info_popup_subtitle" = "Bu ay bastırmak için maximum 5 fotoğraf seç ve hemen evine gelsin.";
+"print_info_popup_title" = "%d Adet Fotoğraf Seç";
+"print_info_popup_subtitle" = "Bu ay bastırmak için maximum %d fotoğraf seç ve hemen evine gelsin.";
+"print_info_popup_checkbox" = "Bu uyarıyı bir daha gösterme.";
+
+/*Fuzzy*/
+"print_select_photo_button" = "Fotoğraf Seç";
+"print_select_photo_screen" = "Fotoğraf Seç";
+"print_select_photo_screen_bar" = "Baskı için seçilenler";
+
+/*Fuzzy*/
+"print_continue_button" = "Devam Et";
+"print_missing_photo_popup_title" = "Baskıya %d adet fotoğraf gönderiyorsun";
+"print_missing_photo_popup_subtitle" = "%d adet fotoğraf gönderme hakkın daha var. Devam etmen durumunda bu ay içerisinde kalan %d adet fotoğrafı gönderemezsin";
+
+/*Fuzzy*/
+"create_cell_popup" = "Çalışma Tablosu Oluştur";
+
+/*Fuzzy*/
+"create_slide_popup" = "Sunum Oluştur";
+"kktc_restore_info" = "Kuzey Kıbrıs Turkcell  müşterileri 50GB lifebox paketi için LIFEBOX 50GB, lifebox 500GB paketi için LIFEBOX 500GB ve lifebox 2.5TB paketi için LIFEBOX 2.5TB yazarak 3030’a gönderip üyeliklerini hattına başlatabilirler.";
+"edit_printphoto_info_label" = "Düzenlemek için fotoğrafa dokunun";
+
+/*Fuzzy*/
+"print_edit_photo_page_name" = "Fotoğraf Düzenle";
+
+/*Fuzzy*/
+"print_photo_bad_quality_info" = "Seçtiğin fotoğraf %d MB'tan küçüktür. Baskı kalitesinde kayıp oluşturacaktır.";
+
+/*Fuzzy*/
+"print_photo_bad_quality_continue" = "Seçili fotoğraf ile devam et.";
+
+/*Fuzzy*/
+"print_photo_bad_quality_new" = "Farklı bir fotoğraf seç.";
+"no_print_package_info" = "Bu özellik var olan paketlerinizde mevcut değildir.";
+"print_package_question" = "Baskı paketini incelemek ister misin?";
+"print_package_view" = "Paketi İncele";
+"printed_photo_card_title" = "Baskı Paketim";
+"printed_photo_card_info" = "Her ay 5 adet fotoğrafını bastır.";
+"printed_photo_card_body" = "Fotoğraflarını bastır.";
+"printed_photo_card_body_no_right" = "Fotoğraf baskılama hakkını kullandın.";
+"printed_photo_card_info_no_right" = "%d tarihi itibariyle tekrar baskı oluşturabilirsin.";
+
+/*Fuzzy*/
+"printed_package_view" = "Baskı paketlerimi gör.";
+"more_photo_right" = "%d fotoğraf gönderme hakkın daha var. Devam etmek istediğine emin misin?";
+"no_more_photo_right" = "%d’ten fazla fotoğraf seçtin. Devam edebilmek için azaltın.";
+"timeline_header" = "2023’un en güzel anıları";
+"timeline_description" = "Bu senenin en güzel anılarını senin için derledik. Hemen keşfet.";
+"timeline_description" = "{timeline_year} yılının en güzel anılarını senin için derledik. Hemen keşfet.";
+"selected_for_print" = "Baskı için seçilenler";
+"print_cancel_popup_question" = "İptal etmek isteğine emin misin?";
+"print_cancel_popup_info" = "Basılı albüm için seçtiğin tüm fotoğraf düzenlemelerin silinecektir. Yeniden fotoğraf seçmen ve yeniden düzenlemen gereklidir.";
+"no_right_print_popup_title" = "Baskı Hakkını Kullandın";
+"no_right_print_popup_info" = "Paketin dahilindeki fotoğraf baskı hakkını kullandın. Paketin yenilendiğinde fotoğraflarını tekrar baskıya gönderebilirsin.";
+"send_print_button" = "Baskıya Gönder";
+"add_address" = "Adres Ekle";
+"send_print_popup_title" = "Seçtiğin Fotoğraflar Baskıya Hazır";
+
+/*Fuzzy*/
+"send_print_popup_address" = "Fotoğrafların basılı olarak; \"%@ Mahallesi %@ Sokak No:%@ Daire:%@ %@/%@, %d\" adresine gönderilecektir.";
+"send_print_popup_address" = "Fotoğrafların basılı olarak; \"%@ Mahallesi %@ Sokak No:%@ Daire:%@ %@/%@, %d\" adresine ücretsiz gönderilecektir.";
+"send_print_popup_info" = "Baskıya gönderilmesi durumunda bu işlem iptal edilemez.";
+"address_title" = "Adres Başlığı";
+"address_city" = "İl";
+"address_district" = "İlçe";
+"address_neighbourhood" = "Mahalle";
+"address_street" = "Cadde/Sokak";
+"address_building_no" = "Bina No";
+"address_apartment_no" = "Daire No";
+"address_postacode" = "Posta Kodu";
+"add_saved_my_address" = "Kayıtlı adreslerime ekle.";
+"save_address" = "Adresi Kaydet";
+"update_address" = "Adres Güncelle";
+"use_address" = "Adresi Kullan";
+"change_address" = "Adres Değiştir";
+"sent_print_info_popup_title" = "Siparişin Oluşturuldu";
+"sent_print_info_popup_title" = "Fotoğrafların Baskıya Gönderildi.";
+"sent_print_info_popup_body" = "Siparişin hazırlanıyor. Sipariş takibini sipariş detayından yapabilirsin.\n";
+"address_title_placeholder" = "Örnek; Evim, İş Yerim vb.";
+"select_city_district" = "Seçiniz";
+"send_print_popup_no_address" = "Kayıtlı adresiniz bulunmamaktadır.";
+"grace_banner_text_paycell" = "lifebox paketinin yenilenmesi icin Paycell kart bakiyeni ve elektronik ticarete acik oldugunu kontrol edin. Farklı bir kredi kartı ile ya da uygulama üzerinden paket satınalabilirsiniz.";
+"toast_message_delete_notification" = "Bu işlem seçilen dosya adetine göre zaman alabilir.";
+"order_approved" = "Siparişin Alındı";
+"print_card_title" = "Sana Özel Baskı Paketi";
+"print_card_body" = "Her ay 5 fotoğraf baskılama +50GB saklama alanı hediye";
+"order_in_progress" = "Siparişin Hazırlanıyor";
+
+/*Fuzzy*/
+"order_delivered_cargo" = "Siparişin Kargoya Verildi";
+"order_delivered" = "Siparişin Teslim Edildi";
+"order_undelivered" = "Siparişin Teslim Edilemedi";
+"grace_banner_paycell_text" = "lifebox paketinin yenilenmesi icin Paycell kart bakiyeni ve elektronik ticarete acik oldugunu kontrol edin. Farklı bir kredi kartı ile paket satın alabilirsiniz.";
+"order_detail_popup_name" = "Baskı Sipariş Takip";
+
+/*Fuzzy*/
+"print_order_number" = "Sipariş No: %@";
+"print_cargo_number" = "Kargo Teslimat No: %@";
+
+/*Fuzzy*/
+"print_cargo_name" = "Kargo Firma Adı: %@";
+"order_approved_detail" = "Baskı siparişiniz hazırlanmak üzere siparişi alınmıştır.";
+"order_in_progress_detail" = "Baskı siparişiniz hazırlanma aşamasına geçmiştir.";
+"order_delivered_cargo_detail" = "Baskı siparişiniz teslim edilmesi için kargoya verildi.";
+"order_delivered_detail" = "Baskı siparişiniz teslim edildi.";
+"order_undelivered_detail" = "Baskı siparişiniz teslim edilemedi.";
+"print_receipt_name" = "Ad Soyad";
+"print_receipt_name_placeholder" = "Adı ve Soyadı";
+
+/*Fuzzy*/
+"min_posta_code" = "\"Posta Kodu 10000'den küçük olamaz.\"";
+"address_not_found" = "Adres bulunamadı.";
+
+/*Fuzzy*/
+"address_city_not_found" = "İl bulunamadı.";
+"address_district_not_found" = "İlçe bulunamadı.";
+"address_book_not_found" = "Adres Defteri bulunamadı.";
+"address_book_max_limit" = "Daha fazla adres ekleyemezsin.";
+"print_page_name" = "Baskı Paketim";
+"foryou_print_title" = "Fotoğraflarını Bastır";
+"foryou_print_body" = "Her ay %d adet fotoğrafını bastır.";
+"print_package_title" = "En Yeni Paket";
+"print_package_detail" = "5 Adet 10x15 Fotoğraf Baskısı";
+"print_package" = "Baskı Paketi";
+"print_package_info" = "Fotoğraf Baskısı + Saklama Alanı";
+
+/*4 Ekim - 4 Aralık 2023 mi ... ampanya katilim koşulları*/
+"milli_piyango_katilim_kosullari_2023" = "lifebox'lılar kazanıyor çekiliş kampanyası detayları\n•\tBu kampanya Lifecell Bulut Çözümleri A.Ş.adına MPİ’nin 29.09.2023 tarih ve E- 58259698-255.01.02-44421sayılı izni ile Hedef Çekiliş tarafından düzenlenmektedir. \n•\tKampanya 04.10.2023 (saat 00:01) - 04.12.2023 (saat 23:59) tarihleri arasında Türkiye genelinde Lifecell Bulut Çözümleri A.Ş 'ye ait ait Lifebox Uygulaması kullanımını teşvik etmek amacı ile  iOS veya Androrid sistemli cihazlarına en güncel Lifebox uygulamasını ücretsiz indirerek uygulamaya yeni üye olan veya mevcut üyelere; 532 (ücretsiz) çağrı merkezi numarasını arayarak,  mylifebox.com(ücretsiz) internet sitesi üzerinden üzerinden, turkcell.com.tr(ücretsiz) internet sitesi üzerinden veya 2200 SMS hattına kısa mesaj atarak Lifebox aylık paket alımlarına 1 çekiliş hakkı, Lifebox yıllık paket alımlarına 2 çekiliş hakkı verilecektir. (Kampanya tüm GSM operatörlerinin bireysel hat sahibi olan Lifebox  bireysel üyelerine yönelik olup çekilişe katılmaya hak kazanmak için kampanya tarihleri arasında paketin aktif olması gerekmektedir.) \n•\tTalihliler, 13.12.2023 tarihinde Hedef Çekiliş ve Organizasyon Hizm. Ltd. Şti. (Toplantı Salonu)-Esentepe Mah. Kore Şehitleri Cad. No: 16/1 İç Kapı K8 Şişli/İstanbul adresinde saat 11:00’da noter huzurunda halka açık olarak yapılacak çekilişle belirlenecektir. \n•\tKampanya genelinde yapılacak olan çekilişle,1 kişiye 300.000,00 TL değerinde 1 çift kişilik Başka Türlü Macera Seyahat hediye çeki (Hediye çeki rezervasyon işlemlerinizi https://www.baskaturlumacera.com/siradaki-geziler/ linki üzerinden veya 90 212 251 9447 numara üzerinden ya da Bereketzade Mah. Büyük Hendek Cad. No:17/4 Beyoğlu-İstanbul adresinden işlemler gerçekleştirilebilir. Hediye çeki; tüm yurt dışı turlarında geçerlidir. Adlarına özel tanımlanacak olan Başka Türlü Macera Turizm Ltd. Şti üzerinden İstanbul Kalkışlı yurt dışı münferit uçak biletleri, tüm yurt dışı otel konaklamaları, Yurt dışı paket programları (otel, uçak, transfer şehir içi ve şehirlerarası, Profesyonel Türkçe Rehberlik Hizmetleri, Zorunlu Seyahat sağlık Sigortası, kahvaltı, öğle ve akşam yemekleri, yurt dışı çıkış harcı, vize ücretleri dahildir, pasaport ücreti talihliye aittir.) kategorilerinde kullanılabilecek hediye çeki verilecektir. 15.01.2024 – 22.08.2024 tarihleri arasında geçerlidir.), \n•\t1 kişiye 43.999,00 TL değerinde Apple Iphone 14 128 GB, \n•\t1 kişiye 26.658,76 TL değerinde Sony Playstation 5 PS5 Oyun Konsolu+2 Dualsence Kol , \n•\t1 kişiye 12.000,00 TL değerinde Tatilsepeti Kapadokya Seyahat Çeki (adlarına özel tanımlanacak olan, 444 44 20 çağrı merkezlerimiz üzerinden sadece Kapadokya kültür  Turları için kullanılmak üzere sınırlı 15.01.2024 – 22.08.2024 tarihleri arasında geçerli 12.000TL tutarında 1 çift kişilik hediye çeki),\n•\t1 kişiye 10.499,00 TL değerinde Apple Watch SE 44 MM ikramiyesi verilecektir. \n•\tİkramiye kazanan talihliler, 15.12.2023 tarihli Takvim Gazetesi’nde ilan edilecektir. Kampanya tüm GSM operatörlerinin bireysel tarifeli hat sahibi olan Lifebox bireysel uygulaması üyelerine yönelik olup çekilişe katılmaya hak kazanmak için kampanya tarihleri arasında paketin aktif olması gerekmektedir.532 çağrı merkezi araması ücretsizdir. Kampanya hat sahipleri için geçerli olup ikramiye tesliminde kazanan kişinin hat sahibi olduğu konusunda belge ibrazı zorunludur. Kısa mesaj ile Turkcell, Türk Telekom, Vodafone operatörlerinin tüm aboneleri, 2200 SMS göndererek Lifebox paket alımı yapabilir. Kısa mesaj ile başarılı ya da hatalı tüm alımlar KDV ve ÖİV dahil; Turkcell aboneleri için 1,99 TL, Türk Telekom aboneleri için 1,00 TL, Vodafone aboneleri için 0,65 TL olarak katılımcıya ücretlendirilir. Operatörlerin katılım mesajı birim fiyatlarında değişiklik hakkı saklıdır. Kampanya tarihleri arasında paket değişikliğine gidilmesi durumunda, son geçerli paketi üzerinden çekiliş hakkı verilecektir. Kampanya bitiş tarih ve saatinden itibarinden 48 saat içerisinde paket iptali yapılması halinde çekiliş hakkı iptal edilecektir. Tüm katılımlarda Ad-Soyad ve telefon no bilgilerinden herhangi birinin eksik olması halinde çekiliş hakkı verilmeyecektir. Katılımcının ikramiye kazanması durumunda adres bilgileri, eksik veya bilinmiyor ise gazetede yapılan ilan tebliğ için yeterli olacaktır. Seyahat çeki ikramiyesini talihliden başkası kullanamaz, nakde çevrilemez veya devredilemez. Bir kişi birden fazla ikramiye kazanamaz. Lifecell Bulut Çözümleri A.Ş. ve Hedef Çekiliş ve Organizasyon Hizmetleri LTD. ŞTİ. çalışanları ile 18 yaşından küçükler düzenlene piyango ve çekilişe katılamaz, katılmış ve kazanmış olsalar dahi ikramiyeleri verilemez. İkramiyeye konu olan eşya ve /veya hizmetin bedeli içinde bulunan KDV+ÖTV gibi vergiler dışındaki vergiler talihliler tarafından ödenecektir.";
+"order_not_found" = "Sipariş bulunamadı.";
+"order_file_not_found" = "Fotoğraf bulunamadı.";
+
+/*Fuzzy*/
+"order_uuid_list_empty" = "Sipariş fotoğraf listesi boş.";
+"download_url_not_found" = "Fotoğraf indirmek için url bulunamadı.";
+"print_package_not_found" = "Baskı Paketi bulunamadı.";
+"print_limit_exceeded_error" = "Fotoğraf baskı limiti aşıldı.";
+"print_file_limit_exceeded_error" = "Fotoğraf limiti aşıldı.";
+"order_not_delivered" = "Siparişin Baskıya Teslim Edilemedi";
+"order_not_delivered_detail" = "Siparişin teknik nedenlerden dolayı baskıya teslim edilemedi. Lütfen tekrar yeni baskı gönderiniz.";

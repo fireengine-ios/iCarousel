@@ -592,6 +592,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         
         let okHandler: PopUpButtonHandler = { [weak self] vc in
+            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.toastMessageDeleteNotification)
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .trash, label: .ok)
             self?.output?.operationStarted(type: .moveToTrash)
             vc.close { [weak self] in
@@ -677,6 +678,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         
         let okHandler: PopUpButtonHandler = { [weak self] vc in
+            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.toastMessageDeleteNotification)
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .unhide, label: .ok)
             self?.output?.operationStarted(type: .unhide)
             vc.close { [weak self] in
@@ -712,6 +714,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
 
         let okHandler: PopUpButtonHandler = { [weak self] vc in
+            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.toastMessageDeleteNotification)
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .restore, label: .ok)
             self?.output?.operationStarted(type: .restore)
             vc.close { [weak self] in
@@ -784,6 +787,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 return
             }
             
+            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.toastMessageDeleteNotification)
             let album = self.router.getParentUUID()
             
             self.output?.operationStarted(type: .removeFromFaceImageAlbum)
@@ -1123,6 +1127,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         
         let okHandler: PopUpButtonHandler = { [weak self] vc in
+            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.toastMessageDeleteNotification)
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .delete, label: .ok)
             self?.output?.operationStarted(type: .delete)
             vc.close { [weak self] in
@@ -1294,6 +1299,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         
         let okHandler: PopUpButtonHandler = { [weak self] vc in
+            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.toastMessageDeleteNotification)
             self?.output?.operationStarted(type: .emptyTrashBin)
             vc.close { [weak self] in
                 self?.deleteAllFromTrashBin()
@@ -1723,11 +1729,13 @@ extension MoreFilesActionsInteractor {
     }
     
     private func unhideSelectedItems(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
+        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.toastMessageDeleteNotification)
         analyticsService.trackFileOperationGAEvent(operationType: .unhide, items: items)
         fileService.unhide(items: items, success: success, fail: fail)
     }
     
     private func unhideAlbums(_ items: [AlbumItem], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
+        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.toastMessageDeleteNotification)
         analyticsService.trackAlbumOperationGAEvent(operationType: .unhide, albums: items)
         fileService.unhideAlbums(items, success: success, fail: fail)
     }
@@ -1912,6 +1920,7 @@ extension MoreFilesActionsInteractor {
     }
     
     private func putBackSelectedItems(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
+        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.toastMessageDeleteNotification)
         analyticsService.trackFileOperationGAEvent(operationType: .restore, items: items)
         fileService.putBack(items: items, success: { [weak self] in
             self?.removeItemsFromPlayer(items: items)
@@ -1920,11 +1929,13 @@ extension MoreFilesActionsInteractor {
     }
     
     private func putBackAlbums(_ items: [AlbumItem], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
+        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.toastMessageDeleteNotification)
         analyticsService.trackAlbumOperationGAEvent(operationType: .restore, albums: items)
         fileService.putBackAlbums(items, success: success, fail: fail)
     }
     
     private func putBackFIRAlbums(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
+        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.toastMessageDeleteNotification)
         if let items = items as? [PeopleItem] {
             analyticsService.trackFileOperationGAEvent(operationType: .restore, itemsType: .people, itemsCount: items.count)
             fileService.putBackPeople(items: items, success: success, fail: fail)

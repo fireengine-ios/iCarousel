@@ -115,13 +115,25 @@ final class ForYouService: BaseRequestService {
     }
     
     func forYouCollageTemplate(handler: @escaping (ResponseResult<CollageTemplate>) -> Void) -> URLSessionTask? {
-            debugLog("forYouCollageTemplate")
-            
-            return SessionManager
-                .customDefault
-                .request(RouteRequests.collageTemplate)
-                .customValidate()
-                .responseObject(handler)
-                .task
-        }
+        debugLog("forYouCollageTemplate")
+        
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.collageTemplate)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
+    
+    @discardableResult
+    func forYouPrintedPhotos(handler: @escaping (ResponseResult<[GetOrderResponse]>) -> Void) -> URLSessionTask? {
+        debugLog("forYouPrintedPhotos")
+        
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.getOrder)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
 }

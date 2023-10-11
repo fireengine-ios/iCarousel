@@ -54,6 +54,11 @@ struct AccountJSONConstants {
     static let showInvitation = "showInvitation"
     static let hasRecoveryMail = "hasRecoveryMailInfo"
     static let showPaycell = "showPaycell"
+    
+    
+    static let photoPrintPackage = "photoPrintPackage"
+    static let photoPrintSendRemaining = "photoPrintSendRemaining"
+    static let photoPrintMaxSelection = "photoPrintMaxSelection"
 }
 
 class AccountInfoResponse: ObjectRequestResponse {
@@ -88,6 +93,9 @@ class AccountInfoResponse: ObjectRequestResponse {
     var showInvitation: Bool?
     var hasRecoveryMail: Bool?
     var showPaycell: Bool?
+    var photoPrintPackage: Bool?
+    var photoPrintSendRemaining: Int?
+    var photoPrintMaxSelection: Int?
 
     var fullPhoneNumber: String {
         if let code = countryCode, let number = phoneNumber {
@@ -135,6 +143,9 @@ class AccountInfoResponse: ObjectRequestResponse {
         showInvitation = json?[AccountJSONConstants.showInvitation].bool
         hasRecoveryMail = json?[AccountJSONConstants.hasRecoveryMail].bool
         showPaycell = json?[AccountJSONConstants.showPaycell].bool
+        photoPrintPackage = json?[AccountJSONConstants.photoPrintPackage].bool
+        photoPrintSendRemaining = json?[AccountJSONConstants.photoPrintSendRemaining].int
+        photoPrintMaxSelection = json?[AccountJSONConstants.photoPrintMaxSelection].int
     }
 }
 

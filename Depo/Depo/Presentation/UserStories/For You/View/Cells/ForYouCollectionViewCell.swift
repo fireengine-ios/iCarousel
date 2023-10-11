@@ -47,10 +47,10 @@ final class ForYouCollectionViewCell: UICollectionViewCell {
     func configureForCollage(with wrapData: WrapData) {
         if wrapData.tmpDownloadUrl != nil {
             switch wrapData.patchToPreview {
-            case .remoteUrl(let url):
+            case .remoteUrl(_):
                 thumbnailIcon.isHidden = true
                 thumbnailLabel.isHidden = true
-                setImage(with: url!)
+                setImage(with: wrapData.tmpDownloadUrl!)
             default:
                 break
             }

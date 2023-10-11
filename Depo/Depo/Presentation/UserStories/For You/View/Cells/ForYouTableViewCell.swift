@@ -32,7 +32,7 @@ final class ForYouTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var collectionView: UICollectionView! {
         willSet {
-            newValue.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 20)
+            newValue.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 60)
         }
     }
     
@@ -55,6 +55,7 @@ final class ForYouTableViewCell: UITableViewCell {
     private var hud: MBProgressHUD?
     private let emptyDataView = ForYouEmptyCellView.initFromNib()
     private var wrapData: [WrapData] = []
+    private var printedPhotosData: [GetOrderResponse] = []
     private var albumsData: [AlbumItem] = []
     private var photopickData: [InstapickAnalyze] = []
     private var cardsData: [HomeCardResponse] = []
@@ -102,9 +103,19 @@ final class ForYouTableViewCell: UITableViewCell {
             self.wrapData = model as? [WrapData] ?? []
             wrapData.append(additionalWrapData())
             showEmptyDataViewIfNeeded(isShow: wrapData.isEmpty)
+        case .printedPhotos:
+            self.printedPhotosData = model as? [GetOrderResponse] ?? []
+            showEmptyDataViewIfNeeded(isShow: printedPhotosData.isEmpty)
         default:
             self.wrapData = model as? [WrapData] ?? []
             showEmptyDataViewIfNeeded(isShow: wrapData.isEmpty)
+        }
+        
+        switch currentView {
+        case .printedPhotos:
+            collectionView.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 60)
+        default:
+            collectionView.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 20)
         }
         
         collectionView.reloadData()
@@ -123,6 +134,7 @@ final class ForYouTableViewCell: UITableViewCell {
         collectionView.register(nibCell: ForYouGradientCollectionViewCell.self)
         collectionView.register(nibCell: ForYouBlurCollectionViewCell.self)
         collectionView.register(nibCell: ForYouThrowbackCollectionViewCell.self)
+        collectionView.register(nibCell: ForYouPhotoPrintCollectionViewCell.self)
     }
     
     private func addSpinner() {
@@ -178,6 +190,8 @@ extension ForYouTableViewCell: UICollectionViewDataSource {
             return throwbackData.count
         case .collages:
             return wrapData.count
+        case .printedPhotos:
+            return printedPhotosData.count + 1
         default:
             return wrapData.count
         }
@@ -239,6 +253,17 @@ extension ForYouTableViewCell: UICollectionViewDataSource {
             let item = wrapData[indexPath.row]
             cell.configureForCollage(with: item)
             return cell
+        case .printedPhotos:
+            if indexPath.row == printedPhotosData.count {
+                let cell = collectionView.dequeue(cell: ForYouPhotoPrintCollectionViewCell.self, for: indexPath)
+                cell.configureWithOutData()
+                return cell
+            } else {
+                let item = printedPhotosData[indexPath.row]
+                let cell = collectionView.dequeue(cell: ForYouPhotoPrintCollectionViewCell.self, for: indexPath)
+                cell.configure(with: item)
+                return cell
+            }
         default:
             let item = wrapData[indexPath.row]
             cell.configure(with: item, currentView: currentView ?? .people)

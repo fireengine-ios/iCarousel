@@ -14,6 +14,10 @@ class ForYouInitilizer: NSObject {
         let configurator = ForYouConfigurator()
         configurator.configureModuleForViewInput(viewInput: viewController)
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory, .createAlbum, .photopick, .createCollage])
+        var isUserFromTurkey = SingletonStorage.shared.accountInfo?.isUserFromTurkey ?? false
+        if isUserFromTurkey {
+            viewController.floatingButtonsArray.append(.photoPrint)
+        }
         return viewController
     }
 }

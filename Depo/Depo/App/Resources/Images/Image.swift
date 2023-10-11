@@ -235,4 +235,19 @@ enum Image: String, AppImage {
     case iconVideosPlaceholder
     case iconStoryGroup
     case plus
+    
+    /// Photo Print
+    case iconRotate1015
+    case iconPrintAdd
+    case iconPrintDelete
+    case iconPrintSelectEmpty
+    case iconPrintSelectBlue
+    case iconPrintSelectPhoto
+    case iconPrintInfoRed
+    case iconPrintPopup
+    case popupErrorOrange
+    case iconPrintInfoOrange
+    case iconCheckGreen
+    case iconDelivery
+    case iconAddUnselectPlus
 }
