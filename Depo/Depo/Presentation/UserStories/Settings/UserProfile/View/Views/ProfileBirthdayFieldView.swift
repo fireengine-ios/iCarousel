@@ -76,7 +76,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     }()
     
     private let fourDigitsUnderlineWidth: CGFloat = 60
-    private let twoDigitsUnderlineWidth: CGFloat = 20
+    private let twoDigitsUnderlineWidth: CGFloat = 22
     private let underlineOffset: CGFloat = 2
     
     private lazy var dateFormatter: DateFormatter = {

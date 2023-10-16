@@ -209,6 +209,7 @@ final class PhotoPrintViewController: BaseViewController {
             }
             
             let imageUrl = newSelectedPhotos[0].metadata?.largeUrl
+            let imageName = newSelectedPhotos[0].name
             imageView?.sd_setImage(with: imageUrl) { [weak self] (image, error, cache, url) in
                 if error != nil {
                     self?.hideSpinner()
@@ -224,6 +225,7 @@ final class PhotoPrintViewController: BaseViewController {
                     self?.addRemoveContentContainerView(isAdd: self?.totalPhotoCount() != self?.maxSelectablePhoto, photoCount: (self?.totalPhotoCount())!)
                     self?.nextButtonEnabled()
                     self?.hideSpinner()
+                    self?.setTitleLabel(tag: self!.selectedPhotoIndex, name: imageName ?? "")
                 }
             }
         }
@@ -284,6 +286,7 @@ final class PhotoPrintViewController: BaseViewController {
         }
         nextButtonEnabled()
         addRemoveContentContainerView(isAdd: totalPhotoCount() != maxSelectablePhoto, photoCount: totalPhotoCount())
+        setCountTitleLabel()
     }
     
     @objc private func checkButtonTapped(sender: UIButton) {
@@ -522,6 +525,22 @@ final class PhotoPrintViewController: BaseViewController {
         let separator = UILabel(frame: CGRect(x: 0, y: stackView.frame.maxY + 30.0, width: view.frame.size.width, height: 1))
         separator.backgroundColor = AppColor.borderLightGray.color
         contentView.addSubview(separator)
+    }
+    
+    private func setCountTitleLabel() {
+        let subView = stackMainView.arrangedSubviews
+        for (index, element) in subView.enumerated() {
+            if element.layer.name == Subviews.containerView.layerName {
+                let label = getView(tag: index, layerName: Subviews.countTitleLabel.layerName) as? UILabel
+                label?.text = String(index+1)
+            }
+        }
+    }
+    
+    private func setTitleLabel(tag: Int, name: String) {
+        let subView = stackMainView.arrangedSubviews
+        let label = getView(tag: tag, layerName: Subviews.titleLabel.layerName) as? UILabel
+        label?.text = name
     }
 }
 

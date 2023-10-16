@@ -230,10 +230,15 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
     }
     
     @IBAction func saveAdressButtonTapped(_ sender: Any) {
-        if isAddressSave {
-            checkButtonIsChecked ? addAddressFunc(saveStatus: true) : addAddressFunc(saveStatus: false)
+        if postaCodeView.textField.text?.count == 5 {
+            if isAddressSave {
+                checkButtonIsChecked ? addAddressFunc(saveStatus: true) : addAddressFunc(saveStatus: false)
+            } else {
+                checkButtonIsChecked ? updateAddressFunc(saveStatus: true) : updateAddressFunc(saveStatus: false)
+            }
         } else {
-            checkButtonIsChecked ? updateAddressFunc(saveStatus: true) : updateAddressFunc(saveStatus: false)
+            let errorMessage = localized(.minPostaCode)
+            UIApplication.showErrorAlert(message: errorMessage)
         }
     }
     
