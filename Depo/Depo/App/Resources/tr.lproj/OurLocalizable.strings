@@ -2136,8 +2136,6 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "new_print" = "Yeni Baskı Oluştur";
-"print_info_popup_title" = "5 Adet Fotoğraf Seç";
-"print_info_popup_subtitle" = "Bu ay bastırmak için maximum 5 fotoğraf seç ve hemen evine gelsin.";
 "print_info_popup_title" = "%d Adet Fotoğraf Seç";
 "print_info_popup_subtitle" = "Bu ay bastırmak için maximum %d fotoğraf seç ve hemen evine gelsin.";
 "print_info_popup_checkbox" = "Bu uyarıyı bir daha gösterme.";
@@ -2184,8 +2182,7 @@ then {11,99 TRY/Month}*/
 "printed_package_view" = "Baskı paketlerimi gör.";
 "more_photo_right" = "%d fotoğraf gönderme hakkın daha var. Devam etmek istediğine emin misin?";
 "no_more_photo_right" = "%d’ten fazla fotoğraf seçtin. Devam edebilmek için azaltın.";
-"timeline_header" = "2023’un en güzel anıları";
-"timeline_description" = "Bu senenin en güzel anılarını senin için derledik. Hemen keşfet.";
+"timeline_header" = "%d en güzel anıları";
 "timeline_description" = "{timeline_year} yılının en güzel anılarını senin için derledik. Hemen keşfet.";
 "selected_for_print" = "Baskı için seçilenler";
 "print_cancel_popup_question" = "İptal etmek isteğine emin misin?";
@@ -2197,7 +2194,6 @@ then {11,99 TRY/Month}*/
 "send_print_popup_title" = "Seçtiğin Fotoğraflar Baskıya Hazır";
 
 /*Fuzzy*/
-"send_print_popup_address" = "Fotoğrafların basılı olarak; \"%@ Mahallesi %@ Sokak No:%@ Daire:%@ %@/%@, %d\" adresine gönderilecektir.";
 "send_print_popup_address" = "Fotoğrafların basılı olarak; \"%@ Mahallesi %@ Sokak No:%@ Daire:%@ %@/%@, %d\" adresine ücretsiz gönderilecektir.";
 "send_print_popup_info" = "Baskıya gönderilmesi durumunda bu işlem iptal edilemez.";
 "address_title" = "Adres Başlığı";
@@ -2213,7 +2209,6 @@ then {11,99 TRY/Month}*/
 "update_address" = "Adres Güncelle";
 "use_address" = "Adresi Kullan";
 "change_address" = "Adres Değiştir";
-"sent_print_info_popup_title" = "Siparişin Oluşturuldu";
 "sent_print_info_popup_title" = "Fotoğrafların Baskıya Gönderildi.";
 "sent_print_info_popup_body" = "Siparişin hazırlanıyor. Sipariş takibini sipariş detayından yapabilirsin.\n";
 "address_title_placeholder" = "Örnek; Evim, İş Yerim vb.";
