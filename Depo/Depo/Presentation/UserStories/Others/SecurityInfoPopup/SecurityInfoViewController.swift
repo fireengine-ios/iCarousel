@@ -251,19 +251,20 @@ final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHan
     }
     
     private func showSecurityWarningPopup(errorMessage: String, warningType: SecurityPopupWarningType) {
-        dismiss(animated: true) {
-            let router = RouterVC()
-            let popup = router.securityInfoWarningPopup(errorMessage: errorMessage, warningType: warningType)
-            router.presentViewController(controller: popup)
+                let router = RouterVC()
+                router.popViewController()
+                let popup = router.securityInfoWarningPopup(errorMessage: errorMessage, warningType: warningType)
+                router.presentViewController(controller: popup)
+            }
         }
-    }
-}
+
+
 
 // MARK: - Presenter
 extension SecurityInfoViewController {
     private func questionWasSuccessfullyUpdated() {
+        RouterVC().popViewController()
         SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.userProfileSetSecretQuestionSuccess)
-        goToTabbarScreen()
         //dismiss(animated: true)
     }
     
