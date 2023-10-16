@@ -23,6 +23,7 @@ protocol ForYouInteractorOutput: AnyObject {
     func getFavorites(data: [WrapData])
     func getCollages(data: [WrapData])
     func getPrintedPhotos(data: [GetOrderResponse])
+    func getTimelineData(data: TimelineResponse)
     func getAlbums(data: [AlbumItem])
     func getPhotopicks(data: [InstapickAnalyze])
     func getCollageCards(data: [HomeCardResponse])

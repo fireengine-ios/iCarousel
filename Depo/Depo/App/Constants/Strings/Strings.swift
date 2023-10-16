@@ -214,6 +214,8 @@ enum Strings: String, Localizable {
     case tabBarDiscoverTitle = "tabbar_discover"
     case changePasswordInputTitle = "change_pass_mail_or_phone"
     case becomePremiumBannerDesc = "mystorage_become_premium"
+    case timelineHeader = "timeline_header"
+    case timelineDescription = "timeline_description"
     
     case trashBin = "trash_bin"
     

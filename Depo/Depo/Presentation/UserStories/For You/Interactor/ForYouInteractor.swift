@@ -300,10 +300,31 @@ final class ForYouInteractor {
             }
         }
     }
+    
+    private func getTimeline() {
+        debugLog("ForYou getTimeline")
+        group.enter()
+
+        service.forYouTimeline() { [weak self] result in
+            self?.group.leave()
+
+            switch result {
+            case .success(let response):
+                self?.output.getTimelineData(data: response)
+            case .failed(let error):
+                debugLog("ForYou Error getTimeline: \(error.errorCode)-\(String(describing: error.description))")
+                break
+            }
+        }
+    }
 }
 
 extension ForYouInteractor: ForYouInteractorInput {
     func viewIsReady() {
+        let timelineEnable = FirebaseRemoteConfig.shared.fetchTimelineEnabled
+        if timelineEnable {
+            getTimeline()
+        }
         getThrowbacks()
         getThings()
         getPlaces()
@@ -401,6 +422,8 @@ extension ForYouInteractor: ForYouInteractorInput {
             getFavorites()
         case .printedPhotos:
             getPrintedPhotos()
+        case .timeline:
+            getTimeline()
         }
         
         group.notify(queue: .main) {

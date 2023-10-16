@@ -90,6 +90,7 @@ final class ForYouViewController: BaseViewController {
         tableView.delegate = self
         tableView.register(nibCell: ForYouTableViewCell.self)
         tableView.register(nibCell: ForYouFaceImageTableViewCell.self)
+        tableView.register(nibCell: ForYouTimelineTableViewCell.self)
     }
     
     private func faceImagePermissionChanged(to isAllowed: Bool) {
@@ -156,17 +157,24 @@ extension ForYouViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if !isFIREnabled && indexPath.row == 0 {
+        let timelineEnable = FirebaseRemoteConfig.shared.fetchTimelineEnabled
+        if timelineEnable && indexPath.row == 0 {
+            let cell = tableView.dequeue(reusable: ForYouTimelineTableViewCell.self, for: indexPath)
+            let model = output.getModel(for: forYouSections[indexPath.row]) as? TimelineResponse
+            cell.configure(with: model)
+            cell.isHidden = model != nil ? false : true
+            return cell
+        } else if !isFIREnabled && indexPath.row == 1 {
             let cell = tableView.dequeue(reusable: ForYouFaceImageTableViewCell.self, for: indexPath)
             cell.delegate = self
             return cell
+        } else {
+            let cell = tableView.dequeue(reusable: ForYouTableViewCell.self, for: indexPath)
+            let model = output.getModel(for: forYouSections[indexPath.row])
+            cell.configure(with: model, currentView: forYouSections[indexPath.row])
+            cell.delegate = self
+            return cell
         }
-        
-        let cell = tableView.dequeue(reusable: ForYouTableViewCell.self, for: indexPath)
-        let model = output.getModel(for: forYouSections[indexPath.row])
-        cell.configure(with: model, currentView: forYouSections[indexPath.row])
-        cell.delegate = self
-        return cell
     }
 }
 

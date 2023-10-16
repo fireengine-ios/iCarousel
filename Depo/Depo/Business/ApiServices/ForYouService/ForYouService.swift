@@ -136,4 +136,16 @@ final class ForYouService: BaseRequestService {
             .responseObject(handler)
             .task
     }
+    
+    @discardableResult
+    func forYouTimeline(handler: @escaping (ResponseResult<TimelineResponse>) -> Void) -> URLSessionTask? {
+        debugLog("forYouTimeline")
+        
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.timeline)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
 }

@@ -30,6 +30,7 @@ private struct RemoteConfigKeys {
     static let lifeboxDropboxEnable = "lifebox_dropbox_enable"
     static let preparePageSizeLimit = "prepare_page_size_limit"
     static let printPhotoQualityMinMB = "Print_Photo_Quality_Min_MB"
+    static let timelineEnabled = "yilsonu_timeline_enabled"
 }
 
 final class FirebaseRemoteConfig {
@@ -109,6 +110,11 @@ final class FirebaseRemoteConfig {
     var printPhotoQualityMinMB: String {
         let key = RemoteConfigKeys.printPhotoQualityMinMB
         return remoteConfig.configValue(forKey: key).stringValue ?? ""
+    }
+    
+    var fetchTimelineEnabled: Bool {
+        let key = RemoteConfigKeys.timelineEnabled
+        return remoteConfig.configValue(forKey: key).boolValue
     }
     
     func fetchAttemptsBeforeSupportOnLogin(completion: @escaping ValueHandler<Int>) {
