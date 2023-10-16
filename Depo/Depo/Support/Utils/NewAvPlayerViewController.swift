@@ -1,0 +1,62 @@
+//
+//  NewAvPlayerViewController.swift
+//  Depo
+//
+//  Created by Ozan Salman on 11.10.2023.
+//  Copyright © 2023 LifeTech. All rights reserved.
+//
+
+import AVKit
+
+final class NewAvPlayerViewController: AVPlayerViewController {
+    
+    private lazy var more = UIBarButtonItem(image: Image.iconKebabBorder.image,
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(onMorePressed))
+    
+    private lazy var back = UIBarButtonItem(image: NavigationBarImage.back.image,
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(onBackPressed))
+    private var navBarRightItems: [UIBarButtonItem]?
+    private var navBarLeftItems: [UIBarButtonItem]?
+    private var navBarConfigurator = NavigationBarConfigurator()
+    
+    override var prefersStatusBarHidden: Bool {
+        return false
+    }
+    
+    override func viewDidLoad() {
+        view.backgroundColor = AppColor.darkBlue.color
+        configureNavBarActions()
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        view.subviews.first?.subviews[1].subviews[0].isHidden = true //x button hide
+        view.subviews.first?.subviews[1].subviews[5].isHidden = true //sound button hide
+    }
+    
+    private func configureNavBarActions() {
+        navigationItem.rightBarButtonItem = more
+        navigationItem.leftBarButtonItem = back
+        navigationItem.rightBarButtonItem?.tintColor = .white
+        navigationItem.leftBarButtonItem?.tintColor = .white
+        
+        let navbarTitle = UILabel()
+        navbarTitle.textColor = .white
+        navbarTitle.text = localized(.timelineHeader)
+        navbarTitle.font = .appFont(.medium, size: 16)
+        navbarTitle.minimumScaleFactor = 0.5
+        navbarTitle.adjustsFontSizeToFitWidth = true
+        navigationItem.titleView = navbarTitle
+    }
+    
+    @objc private func onMorePressed(_ sender: Any) {
+        
+    }
+    
+    @objc private func onBackPressed() {
+        dismiss(animated: false)
+    }
+}
