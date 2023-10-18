@@ -136,6 +136,8 @@ final class PhotoPrintViewController: BaseViewController {
     private var selectedPhotoIndex: Int = 0
     private var isHaveEditedPhotos: Bool = false
     private var editedImages = [UIImage]()
+    private var gettingImages = [UIImage]()
+    private var contentInsetLeftConts = [CGFloat]()
     private let router = PhotoPrintRouter()
     var output: PhotoPrintViewOutput!
     
@@ -180,9 +182,13 @@ final class PhotoPrintViewController: BaseViewController {
                     self?.setHidden(image: image!, tag: index)
                     self?.setImageReplace(tag: index, image: image!)
                     self?.imageSizeArray.append(image!.size)
+                    self?.gettingImages.append(image)
                     if (self?.selectedPhotos.count ?? 1) - 1 == index {
                         self?.nextButtonEnabled()
                         self?.hideSpinner()
+                    }
+                    DispatchQueue.main.async {
+                        self?.setImageViewDetail(tag: index, byCallMethod: "viewDidLoad")
                     }
                 }
             }
@@ -226,10 +232,45 @@ final class PhotoPrintViewController: BaseViewController {
                     self?.nextButtonEnabled()
                     self?.hideSpinner()
                     self?.setTitleLabel(tag: self!.selectedPhotoIndex, name: imageName ?? "")
+                    DispatchQueue.main.async {
+                        self?.setImageViewDetail(tag: self!.selectedPhotoIndex)
+                    }
                 }
             }
         }
+    }
+    
+    private func setImageViewDetail(tag: Int, byCallMethod: String = "") {
+        let containerView = getView(tag: tag, layerName: Subviews.imageContainerView.layerName) as! UIView
+        let scrollView = getView(tag: tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as! UIScrollView
+        let imageView = getView(tag: tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0].subviews[0] as! UIImageView
         
+        let w = containerView.frame.size.width
+        let h = containerView.frame.size.height
+        
+        if let constraint = (imageView.constraints.filter{$0.firstAttribute == .height}.first) {
+            constraint.constant = h
+        }
+        if let constraint = (imageView.constraints.filter{$0.firstAttribute == .width}.first) {
+            constraint.constant = w
+        }
+        
+        imageView.frame = setAspectRatio(viewFrame: containerView.frame, imageWidth: imageView.frame.width, imageHeight: imageView.frame.height)
+        
+        var x = CGFloat()
+        if scrollView.frame.height > scrollView.frame.width {
+            x = (imageView.frame.width - containerView.frame.width) / 2
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: x, bottom: 0, right: x)
+        } else {
+            x = (imageView.frame.height - containerView.frame.height) / 2
+            scrollView.contentInset = UIEdgeInsets(top: x, left: 0, bottom: x, right: 0)
+        }
+       
+        if byCallMethod != "" {
+            contentInsetLeftConts.append(x)
+        } else {
+            contentInsetLeftConts.insert(x, at: tag)
+        }
     }
     
     @objc private func closeSelf() {
@@ -277,6 +318,7 @@ final class PhotoPrintViewController: BaseViewController {
                 viewInStack.removeFromSuperview()
                 self.selectedPhotos.remove(at: sender.tag)
                 self.imageSizeArray.remove(at: sender.tag)
+                self.contentInsetLeftConts.remove(at: sender.tag)
                 self.setViewTag()
                 isContentCheckBoxChecked = false
                 contentCheckButton.isSelected = isContentCheckBoxChecked
@@ -308,7 +350,40 @@ final class PhotoPrintViewController: BaseViewController {
         if let constraint = (view.constraints.filter{$0.firstAttribute == .height}.first) {
             constraint.constant = sender.isSelected ? portraitHeightConstant : landscapeHeightConstant
         }
+        
+        showSpinner()
+        if let imageUrl = selectedPhotos[sender.tag].metadata?.largeUrl {
+            let imageView = getView(tag: sender.tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0].subviews[0] as! UIImageView
+            imageView.sd_setImage(with: imageUrl) { [weak self] (image, error, cache, url) in
+                if error != nil {
+                    self?.hideSpinner()
+                    UIApplication.showErrorAlert(message: error?.localizedDescription ?? "", closed: {
+                    })
+                } else {
+                    DispatchQueue.main.async {
+                        self?.hideSpinner()
+                        
+                        //self?.setImageReplace(tag: sender.tag, image: image!)
+                        self?.contentInsetLeftConts.remove(at: sender.tag)
+                        self?.setImageViewDetail(tag: sender.tag)
+                    }
+                }
+            }
+        }
         setViewTag()
+    }
+    
+    private func setAspectRatio(viewFrame: CGRect, imageWidth: CGFloat, imageHeight: CGFloat) -> CGRect {
+        var returnFrame: CGRect = CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight)
+        let aspectRatio1 = viewFrame.width / imageWidth
+        let aspectRatio2 = viewFrame.height / imageHeight
+        
+        if aspectRatio1 >= aspectRatio2 {
+            returnFrame = CGRect(x: 0, y: 0, width: imageWidth * aspectRatio1, height: imageHeight * aspectRatio1)
+        } else {
+            returnFrame = CGRect(x: 0, y: 0, width: imageWidth * aspectRatio2, height: imageHeight * aspectRatio2)
+        }
+        return returnFrame
     }
     
     @objc private func newPhotoSelectTapped(_ sender: AnyObject) {
@@ -317,6 +392,7 @@ final class PhotoPrintViewController: BaseViewController {
         contentCheckButton.isSelected = isContentCheckBoxChecked
         selectedPhotoIndex = sender.view!.tag
         imageSizeArray.remove(at: sender.view!.tag)
+        contentInsetLeftConts.remove(at: sender.view!.tag)
         router.openSelectPhotosWithChange(selectedPhotos: selectedPhotos, popupShowing: false)
     }
     
@@ -544,78 +620,6 @@ final class PhotoPrintViewController: BaseViewController {
     }
 }
 
-extension PhotoPrintViewController: UIGestureRecognizerDelegate {
-    @objc private func pinch(_ sender: UIPinchGestureRecognizer) {
-        guard let view = sender.view else { return }
-        view.transform = view.transform.scaledBy(x: sender.scale, y: sender.scale)
-        sender.scale = 1
-        let tag = sender.view?.tag ?? 0
-        
-        if sender.state == .ended {
-            isHaveEditedPhotos = true
-            let imageContainerView = getView(tag: tag, layerName: Subviews.imageContainerView.layerName) as! UIView
-            let scrollView = getView(tag: tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0] as! UIScrollView
-            let imageView = getView(tag: tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0].subviews[0] as! UIImageView
-            
-            if isImageSizeControl(selectedPhotosIndex: tag) {
-                imageContainerView.layer.borderColor = AppColor.forgetPassTextGreen.cgColor
-            }
-            
-            let viewFrame = scrollView.frame
-            let imageViewWidth = imageView.frame.width
-            let imageViewHeight = imageView.frame.height
-            
-            if viewFrame.width >= viewFrame.height {
-                if imageViewWidth <= viewFrame.width {
-                    imageView.transform = .identity
-                    imageView.frame = CGRect(x: 0, y: 0, width: imageSizeArray[sender.view?.tag ?? 0].width, height: imageSizeArray[sender.view?.tag ?? 0].height)
-                    defaultW = imageView.frame.width
-                    defaultH = imageView.frame.height
-                    beforeMinPinch = 1
-                }
-            } else {
-                if imageViewHeight <= viewFrame.height {
-                    imageView.transform = .identity
-                    imageView.frame = CGRect(x: 0, y: 0, width: imageSizeArray[sender.view?.tag ?? 0].width, height: imageSizeArray[sender.view?.tag ?? 0].height)
-                    defaultW = imageView.frame.width
-                    defaultH = imageView.frame.height
-                    beforeMinPinch = 1
-                }
-            }
-            
-            let x = imageView.frame.origin.x
-            let y = imageView.frame.origin.y
-            let scrollContentSizeWidth = scrollView.contentSize.width
-            let scrollContentSizeHeight = scrollView.contentSize.height
-            let imageWidth = imageView.frame.width
-            let imageHeight = imageView.frame.height
-            let _ = scrollContentSizeHeight - imageHeight
-            let _ = scrollContentSizeWidth - imageWidth
-            var bottom1 = Double()
-            var right1 = Double()
-            
-            
-            if beforeMinPinch == 0 && afterMinPinch == 0 {
-                scrollView.contentInset = UIEdgeInsets(top: -y, left: -x, bottom: -y, right: -x)
-                return
-            }
-            
-            if beforeMinPinch == 1 {
-                scrollView.contentInset = UIEdgeInsets(top: -y, left: -x, bottom: -y, right: -x)
-                beforeMinPinch = 0
-                afterMinPinch = 1
-                return
-            }
-            
-            if beforeMinPinch == 0 && afterMinPinch == 1 {
-                bottom1 = scrollContentSizeHeight - defaultH
-                right1 = scrollContentSizeWidth - defaultW
-                scrollView.contentInset = UIEdgeInsets(top: -y, left: -x, bottom: -y - bottom1, right: -x - right1)
-            }
-        }
-    }
-}
-
 extension PhotoPrintViewController {
     private func setLayout() {
         view.addSubview(containerScrollView)
@@ -707,6 +711,24 @@ extension PhotoPrintViewController: UIScrollViewDelegate {
         
         if isImageSizeControl(selectedPhotosIndex: scrollView.tag) {
             imageContainerView.layer.borderColor = AppColor.forgetPassTextGreen.cgColor
+        }
+    }
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        let imageView = getView(tag: scrollView.tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0].subviews[0] as! UIImageView
+        return imageView
+    }
+    
+    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+//        let x = contentInsetLeftConts[scrollView.tag]
+//        scrollView.contentInset = UIEdgeInsets(topBottom: 0, rightLeft: x * scale)
+        
+        if scrollView.frame.height > scrollView.frame.width {
+            let x = contentInsetLeftConts[scrollView.tag]
+            scrollView.contentInset = UIEdgeInsets(topBottom: 0, rightLeft: x * scale)
+        } else {
+            let x = contentInsetLeftConts[scrollView.tag]
+            scrollView.contentInset = UIEdgeInsets(topBottom: x * scale, rightLeft: 0)
         }
     }
 }
@@ -831,17 +853,16 @@ extension PhotoPrintViewController {
             view.layer.name = "printScrollView"
             view.tag = index
             view.delegate = self
+            view.minimumZoomScale = 1.0
+            view.maximumZoomScale = 4.0
             return view
         }()
         
         lazy var printImageView: UIImageView = {
             let view = UIImageView()
             view.isUserInteractionEnabled = true
-            let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinch(_:)))
-            pinchGesture.delegate = self
-            view.addGestureRecognizer(pinchGesture)
             view.layer.cornerRadius = 8
-            view.contentMode = .scaleAspectFit
+            view.contentMode = .scaleAspectFill
             view.layer.name = "printImageView"
             view.tag = index
             return view

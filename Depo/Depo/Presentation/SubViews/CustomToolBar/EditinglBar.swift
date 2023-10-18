@@ -13,7 +13,7 @@ typealias ImageNameToTitleTupple = (icon: UIImage?, title: String, accessibility
 
 class EditinglBar: UITabBar {
     
-    private let tabBarHeight: CGFloat = 49
+    private let tabBarHeight: CGFloat = 60
     
     private let originalY: CGFloat = -49
     private let originalX: CGFloat = 0

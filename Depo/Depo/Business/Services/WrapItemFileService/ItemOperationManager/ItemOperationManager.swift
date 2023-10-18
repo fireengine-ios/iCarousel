@@ -350,7 +350,7 @@ class ItemOperationManager: NSObject {
     func removeFileFromFavorites(items: [Item]) {
         DispatchQueue.main.async {
             self.views.invoke { $0.removeFileFromFavorites(items: items) }
-            self.views.invoke { $0.didMoveToTrashItems(items) }
+            
         }
     }
     
