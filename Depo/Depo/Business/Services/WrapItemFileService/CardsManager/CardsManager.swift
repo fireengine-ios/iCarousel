@@ -41,7 +41,7 @@ enum OperationType: String {
     case divorce                    = "DIVORCE"
     case invitation                 = "INVITATION"
     case documents                  = "THINGS_DOCUMENT"
-    case photoPrint                 = "PRINT"
+    case photoPrint                 = "PRINT1"
     case paycell                    = "PAYCELL"
     case drawCampaign               = "DRAW_CAMPAIGN"
     case milliPiyango               = "MILLIPIYANGO"
