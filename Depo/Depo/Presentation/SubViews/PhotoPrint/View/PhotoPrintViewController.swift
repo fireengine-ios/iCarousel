@@ -187,7 +187,7 @@ final class PhotoPrintViewController: BaseViewController {
                         self?.nextButtonEnabled()
                         self?.hideSpinner()
                     }
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                         self?.setImageViewDetail(tag: index, byCallMethod: "viewDidLoad")
                     }
                 }
@@ -360,10 +360,8 @@ final class PhotoPrintViewController: BaseViewController {
                     UIApplication.showErrorAlert(message: error?.localizedDescription ?? "", closed: {
                     })
                 } else {
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         self?.hideSpinner()
-                        
-                        //self?.setImageReplace(tag: sender.tag, image: image!)
                         self?.contentInsetLeftConts.remove(at: sender.tag)
                         self?.setImageViewDetail(tag: sender.tag)
                     }
