@@ -124,13 +124,14 @@ final class PhotoPrintViewController: BaseViewController {
     
     private var maxSelectablePhoto: Int = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
     private var badQuailtySize: Double = 1
+    private let portraitMargin = 6.5
+    private let landscapeMargin = 10.0
     private var contentViewIsHaveCheckBox: Bool = false
     private var isContentCheckBoxChecked: Bool = false
     private var defaultW = Double()
     private var defaultH = Double()
     private var beforeMinPinch = 0
     private var afterMinPinch = 0
-    private var imageSizeArray = [CGSize]()
     private var selectedPhotos = [SearchItemResponse]()
     private var photoSelectType = PrintPhotoSelectType.newPhotoSelection
     private var selectedPhotoIndex: Int = 0
@@ -184,7 +185,6 @@ final class PhotoPrintViewController: BaseViewController {
                 } else {
                     self?.setHidden(image: image!, tag: index)
                     self?.setImageReplace(tag: index, image: image!)
-                    self?.imageSizeArray.append(image!.size)
                     self?.gettingImages.append(image)
                     if (self?.selectedPhotos.count ?? 1) - 1 == index {
                         self?.nextButtonEnabled()
@@ -208,15 +208,15 @@ final class PhotoPrintViewController: BaseViewController {
         case .newPhotoSelection:
             setViewTag()
         case .changePhotoSelection:
-            showSpinner()
             let newSelectedPhotos = PhotoPrintConstants.selectedChangePhotoItems 
             let imageView = getView(tag: selectedPhotoIndex, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0].subviews[0] as? UIImageView
             
             if newSelectedPhotos.isEmpty {
-                hideSpinner()
+                setImageViewDetail(tag: selectedPhotoIndex)
                 return
             }
             
+            showSpinner()
             let imageUrl = newSelectedPhotos[0].metadata?.largeUrl
             let imageName = newSelectedPhotos[0].name
             imageView?.sd_setImage(with: imageUrl) { [weak self] (image, error, cache, url) in
@@ -228,7 +228,6 @@ final class PhotoPrintViewController: BaseViewController {
                 } else {
                     self?.setHidden(image: image!, tag: self!.selectedPhotoIndex)
                     self?.setImageReplace(tag: self!.selectedPhotoIndex, image: image!)
-                    self?.imageSizeArray.insert(image!.size, at: self!.selectedPhotoIndex)
                     self?.nextButtonEnabled()
                     self?.setViewTag()
                     self?.addRemoveContentContainerView(isAdd: self?.totalPhotoCount() != self?.maxSelectablePhoto, photoCount: (self?.totalPhotoCount())!)
@@ -322,7 +321,6 @@ final class PhotoPrintViewController: BaseViewController {
                 self.stackMainView.removeArrangedSubview(viewInStack)
                 viewInStack.removeFromSuperview()
                 self.selectedPhotos.remove(at: sender.tag)
-                self.imageSizeArray.remove(at: sender.tag)
                 self.contentInsetLeftConts.remove(at: sender.tag)
                 self.setViewTag()
                 isContentCheckBoxChecked = false
@@ -348,10 +346,11 @@ final class PhotoPrintViewController: BaseViewController {
     
     @objc private func rotateButtonTapped(sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        let portraitHeightConstant = (view.frame.width) / 0.664
-        let landscapeHeightConstant = (view.frame.width) / 1.506
-
         let view = getView(tag: sender.tag, layerName: Subviews.imageContainerView.layerName)
+        
+        let portraitHeightConstant = (view.frame.width - portraitMargin) * 1.500
+        let landscapeHeightConstant = (view.frame.width + landscapeMargin) / 3 * 2
+        
         if let constraint = (view.constraints.filter{$0.firstAttribute == .height}.first) {
             constraint.constant = sender.isSelected ? portraitHeightConstant : landscapeHeightConstant
         }
@@ -394,7 +393,6 @@ final class PhotoPrintViewController: BaseViewController {
         isContentCheckBoxChecked = false
         contentCheckButton.isSelected = isContentCheckBoxChecked
         selectedPhotoIndex = sender.view!.tag
-        imageSizeArray.remove(at: sender.view!.tag)
         contentInsetLeftConts.remove(at: sender.view!.tag)
         var photos = [SearchItemResponse]()
         photos.append(selectedPhotos[sender.view!.tag])
@@ -444,10 +442,11 @@ final class PhotoPrintViewController: BaseViewController {
     
     private func setImageReplace(tag: Int, image: UIImage) {
         let isPortrait = getIsPortraitOrLandscape(image: image)
-        let portraitHeightConstant = (view.frame.width) / 0.664
-        let landscapeHeightConstant = (view.frame.width) / 1.506
-        
         let view = getView(tag: tag, layerName: Subviews.imageContainerView.layerName)
+        
+        let portraitHeightConstant = (view.frame.width - portraitMargin) * 1.500
+        let landscapeHeightConstant = (view.frame.width + landscapeMargin) / 3 * 2
+        
         let rotateButton = getView(tag: tag, layerName: Subviews.rotateButton.layerName)
         (rotateButton as? UIButton)?.isSelected = isPortrait ? true : false
         if let constraint = (view.constraints.filter{$0.firstAttribute == .height}.first) {
@@ -1005,7 +1004,7 @@ extension PhotoPrintViewController {
         titleLabel.trailingAnchor.constraint(equalTo: rotateButton.leadingAnchor, constant: -8).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
         
-        let heightConstant = (view.frame.width) / 1.506
+        let heightConstant = (view.frame.width - 48) * 1.500
         
         containerView.addSubview(imageContainerView)
         imageContainerView.translatesAutoresizingMaskIntoConstraints = false

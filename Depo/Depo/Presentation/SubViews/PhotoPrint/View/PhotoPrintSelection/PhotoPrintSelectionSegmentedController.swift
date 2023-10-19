@@ -163,6 +163,7 @@ final class PhotoPrintSelectionSegmentedController: BaseViewController, ErrorPre
     }
     
     @objc private func closeSelf() {
+        PhotoPrintConstants.selectedChangePhotoItems = []
         navigationController?.popViewController(animated: true)
     }
     
