@@ -169,7 +169,10 @@ final class PhotoPrintViewController: BaseViewController {
         
         for index in 0..<selectedPhotos.count {
             showSpinner()
-            let imageUrl = selectedPhotos[index].metadata?.largeUrl
+            var imageUrl = selectedPhotos[index].metadata?.largeUrl
+            if imageUrl == nil {
+                imageUrl = selectedPhotos[index].tempDownloadURL
+            }
             let imageView = getView(tag: index, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0].subviews[0] as! UIImageView
             imageView.sd_setImage(with: imageUrl) { [weak self] (image, error, cache, url) in
                 if error != nil {
@@ -232,6 +235,8 @@ final class PhotoPrintViewController: BaseViewController {
                     self?.nextButtonEnabled()
                     self?.hideSpinner()
                     self?.setTitleLabel(tag: self!.selectedPhotoIndex, name: imageName ?? "")
+                    self?.selectedPhotos.remove(at: self?.selectedPhotoIndex ?? 0)
+                    self?.selectedPhotos.insert(newSelectedPhotos[0], at: self?.selectedPhotoIndex ?? 0)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                         self?.setImageViewDetail(tag: self!.selectedPhotoIndex)
                     }
