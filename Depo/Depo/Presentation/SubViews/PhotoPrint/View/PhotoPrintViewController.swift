@@ -232,7 +232,7 @@ final class PhotoPrintViewController: BaseViewController {
                     self?.nextButtonEnabled()
                     self?.hideSpinner()
                     self?.setTitleLabel(tag: self!.selectedPhotoIndex, name: imageName ?? "")
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                         self?.setImageViewDetail(tag: self!.selectedPhotoIndex)
                     }
                 }
@@ -718,15 +718,12 @@ extension PhotoPrintViewController: UIScrollViewDelegate {
     }
     
     func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-//        let x = contentInsetLeftConts[scrollView.tag]
-//        scrollView.contentInset = UIEdgeInsets(topBottom: 0, rightLeft: x * scale)
-        
         if scrollView.frame.height > scrollView.frame.width {
-            let x = contentInsetLeftConts[scrollView.tag]
-            scrollView.contentInset = UIEdgeInsets(topBottom: 0, rightLeft: x * scale)
+            let x = contentInsetLeftConts[safe: scrollView.tag]
+            scrollView.contentInset = UIEdgeInsets(topBottom: 0, rightLeft: (x ?? 1) * scale)
         } else {
-            let x = contentInsetLeftConts[scrollView.tag]
-            scrollView.contentInset = UIEdgeInsets(topBottom: x * scale, rightLeft: 0)
+            let x = contentInsetLeftConts[safe: scrollView.tag]
+            scrollView.contentInset = UIEdgeInsets(topBottom: (x ?? 1) * scale, rightLeft: 0)
         }
     }
 }
