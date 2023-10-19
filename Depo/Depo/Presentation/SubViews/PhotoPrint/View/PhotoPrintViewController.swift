@@ -396,6 +396,9 @@ final class PhotoPrintViewController: BaseViewController {
         selectedPhotoIndex = sender.view!.tag
         imageSizeArray.remove(at: sender.view!.tag)
         contentInsetLeftConts.remove(at: sender.view!.tag)
+        var photos = [SearchItemResponse]()
+        photos.append(selectedPhotos[sender.view!.tag])
+        PhotoPrintConstants.selectedChangePhotoItems = photos
         router.openSelectPhotosWithChange(selectedPhotos: selectedPhotos, popupShowing: false)
     }
     
@@ -712,7 +715,9 @@ extension PhotoPrintViewController: UIScrollViewDelegate {
         let imageContainerView = getView(tag: scrollView.tag, layerName: Subviews.imageContainerView.layerName)
         isHaveEditedPhotos = true
         
-        if isImageSizeControl(selectedPhotosIndex: scrollView.tag) {
+        if imageContainerView.layer.borderColor == AppColor.forgetPassTextRed.cgColor {
+            return
+        } else {
             imageContainerView.layer.borderColor = AppColor.forgetPassTextGreen.cgColor
         }
     }
