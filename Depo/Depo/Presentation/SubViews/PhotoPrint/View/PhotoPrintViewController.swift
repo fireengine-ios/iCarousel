@@ -429,7 +429,8 @@ final class PhotoPrintViewController: BaseViewController {
         for (index, element) in subView.enumerated() {
             if element.layer.name == Subviews.containerView.layerName {
                 let contentView = getView(tag: index, layerName: Subviews.imageContainerView.layerName).subviews[0]
-                let image: UIImage = takeScreenshot(of: contentView)
+                var image: UIImage = takeScreenshot(of: contentView)
+                image = resizedImage(CGSize(width: image.size.width * 2, height: image.size.height * 2), view: contentView)
                 let countLabel = getView(tag: index, layerName: Subviews.addDeleteContainer.layerName).subviews[1] as? UILabel
                 let count = Int(countLabel?.text ?? "0") ?? 0
                 for _ in 0...count - 1 {
@@ -706,6 +707,23 @@ extension PhotoPrintViewController {
         let screenshot = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return screenshot
+    }
+    
+    func resizedImage(_ size: CGSize, useScreenScale: Bool? = true, view: UIView) -> UIImage {
+        let format = UIGraphicsImageRendererFormat()
+        if useScreenScale == false {
+            format.scale = 1
+        }
+        
+        var renderer = UIGraphicsImageRenderer(bounds: view.bounds, format: format)
+        let img = renderer.image { rendererContext in
+            view.layer.render(in: rendererContext.cgContext)
+        }
+        
+        renderer = UIGraphicsImageRenderer(size: size, format: format)
+        return renderer.image { (context) in
+            img.draw(in: CGRect(origin: .zero, size: size))
+        }
     }
 }
 
