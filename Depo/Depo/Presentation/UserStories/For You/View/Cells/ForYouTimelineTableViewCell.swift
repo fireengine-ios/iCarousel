@@ -85,9 +85,11 @@ class ForYouTimelineTableViewCell: UITableViewCell {
     }
     
     private var videoUrl: URL?
+    private var timelineResponse: TimelineResponse?
     
     func configure(with item: TimelineResponse?) {
         saveButton.setTitle(item?.saved ?? false ? TextConstants.tabBarShareLabel : TextConstants.save, for: .normal)
+        self.timelineResponse = item
         
         var type: CardActionType = item?.saved ?? false ? .display : .save
         switch type {
@@ -119,7 +121,7 @@ class ForYouTimelineTableViewCell: UITableViewCell {
         
         let player = AVPlayer(url: videoUrl)
         
-        let playerController = NewAvPlayerViewController()
+        let playerController = NewAvPlayerViewController(item: timelineResponse)
         playerController.player = player
         
         let nController = NavigationController(rootViewController: playerController)

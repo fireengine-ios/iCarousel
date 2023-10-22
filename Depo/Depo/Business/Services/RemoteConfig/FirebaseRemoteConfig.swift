@@ -30,7 +30,7 @@ private struct RemoteConfigKeys {
     static let lifeboxDropboxEnable = "lifebox_dropbox_enable"
     static let preparePageSizeLimit = "prepare_page_size_limit"
     static let printPhotoQualityMinMB = "Print_Photo_Quality_Min_MB"
-    static let timelineEnabled = "yilsonu_timeline_enabled"
+    static let timelineEnabled = "yilsonu_timeline_enabled_client"
 }
 
 final class FirebaseRemoteConfig {

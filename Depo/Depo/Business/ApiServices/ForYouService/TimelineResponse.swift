@@ -17,26 +17,19 @@ struct TimelineResponse: Codable {
     
     // MARK: - Details
     struct Details: Codable {
-        let createdDate, lastModifiedDate, id: Int
-        let hash, name, uuid: String
-        let bytes: Int
-        let folder: Bool
-        let status: String
-        let tempDownloadURL: String
-        let contentType: String
-        let metadata: Metadata
-        let album: [JSONAny]
-        let location: Location
-        
-        enum CodingKeys: String, CodingKey {
-            case createdDate, lastModifiedDate, id, hash, name, uuid, bytes, folder, status, tempDownloadURL
-            case contentType = "content_type"
-            case metadata, album, location
-        }
-    }
-    
-    // MARK: - Location
-    struct Location: Codable {
+        let createdDate, lastModifiedDate: Int
+            let hash, name, uuid: String
+            let bytes: Int
+            let status: String
+            let tempDownloadURL: String
+            let contentType: String
+            let metadata: Metadata
+
+            enum CodingKeys: String, CodingKey {
+                case createdDate, lastModifiedDate, hash, name, uuid, bytes, status, tempDownloadURL
+                case contentType = "content_type"
+                case metadata
+            }
     }
     
     // MARK: - Metadata
@@ -46,9 +39,8 @@ struct TimelineResponse: Codable {
         let thumbnailSmall: String
         let imageHeight, imageWidth, duration: String
         let thumbnailMedium: String
-        let videoHLSPreview: String
         let imageDateTime: String
-        
+
         enum CodingKeys: String, CodingKey {
             case thumbnailLarge = "Thumbnail-Large"
             case videoPreview = "Video-Preview"
@@ -57,7 +49,6 @@ struct TimelineResponse: Codable {
             case imageWidth = "Image-Width"
             case duration = "Duration"
             case thumbnailMedium = "Thumbnail-Medium"
-            case videoHLSPreview = "Video-Hls-Preview"
             case imageDateTime = "Image-DateTime"
         }
     }

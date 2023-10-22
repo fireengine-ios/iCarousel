@@ -114,6 +114,16 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         }
     }
     
+    func showVideoPlayer(with types: [ElementTypes], for item: WrapData, presentedBy sender: Any?, onSourceView sourceView: UIView?, viewController: UIViewController?) {
+        var items = [WrapData]()
+        items.append(item)
+        constractPlayerAction(with: types, for: items) { [weak self] actions in
+            DispatchQueue.main.async { [weak self] in
+                self?.presentAlertSheet(with: actions, presentedBy: sender, viewController: viewController)
+            }
+        }
+    }
+    
     func show(with types: [ElementTypes], for items: [WrapData], presentedBy sender: Any?, onSourceView sourceView: UIView?, viewController: UIViewController?) {
         constractActions(with: types, for: items) { [weak self] actions in
             DispatchQueue.main.async { [weak self] in
@@ -249,6 +259,30 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             case .onlyUnreadOn, .onlyUnreadOff, .onlyShowAlertsOn, .onlyShowAlertsOff:
                 action = AlertFilesAction(title: type.actionTitle(), icon: type.icon, isTemplate: false) { [weak self] in
                     self?.handleNotificationAction(type: type)
+                }
+            default:
+                action = AlertFilesAction()
+                break
+            }
+            return action
+        })
+    }
+    
+    private func constractPlayerAction(with types: [ElementTypes], for items: [BaseDataSourceItem]?, sender: Any? = nil, actionsCallback: @escaping AlertActionsCallback) {
+        actionsCallback(types.map { type in
+            var action: AlertFilesAction
+            switch type {
+            case .download:
+                action = AlertFilesAction(title: type.actionTitle(), icon: type.icon) { [weak self] in
+                    self?.handleAction(type: type, items: items!)
+                }
+            case .share:
+                action = AlertFilesAction(title: type.actionTitle(), icon: type.icon, isTemplate: false) { [weak self] in
+                    print("aaaaaaaaaaa share")
+                }
+            case .delete:
+                action = AlertFilesAction(title: type.actionTitle(), icon: type.icon, isTemplate: false) { [weak self] in
+                    print("aaaaaaaaaaa delete")
                 }
             default:
                 action = AlertFilesAction()
