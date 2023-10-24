@@ -22,8 +22,12 @@ final class PlayerThreeDotMenuManager {
         self.delegate = delegate
     }
     
-    func showActions(sender: Any?, item: WrapData) {
-        let elementTypes: [ElementTypes] = [.download, .share, .delete]
+    func showActions(sender: Any?, item: WrapData, isSaved: Bool) {
+        var elementTypes: [ElementTypes] = [.download]
+        if isSaved {
+            elementTypes.append(.share)
+        }
+        elementTypes.append(.delete)
         alert.showVideoPlayer(with: elementTypes, for: item, presentedBy: sender, onSourceView: nil, viewController: nil)
     }
 }

@@ -148,4 +148,28 @@ final class ForYouService: BaseRequestService {
             .responseObject(handler)
             .task
     }
+    
+    @discardableResult
+    func forYouSaveTimelineCard(with id: Int, handler: @escaping ResponseVoid) -> URLSessionTask? {
+        let url = RouteRequests.saveDeleteTimeline(with: id)
+        
+        return SessionManager
+            .customDefault
+            .request(url, method: .post)
+            .customValidate()
+            .responseVoid(handler)
+            .task
+    }
+    
+    @discardableResult
+    func forYouDeleteTimelineCard(with id: Int, handler: @escaping ResponseVoid) -> URLSessionTask? {
+        let url = RouteRequests.saveDeleteTimeline(with: id)
+        
+        return SessionManager
+            .customDefault
+            .request(url, method: .delete)
+            .customValidate()
+            .responseVoid(handler)
+            .task
+    }
 }

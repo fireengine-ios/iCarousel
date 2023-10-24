@@ -31,6 +31,8 @@ protocol ForYouViewOutput: AnyObject {
     func showSavedAnimation(item: WrapData)
     func saveCard(data: HomeCardResponse, section: ForYouSections)
     func emptyCardData(for section: ForYouSections)
+    func saveTimelineCard(id: Int)
+    func setTimelineNil()
     
     var currentSection: ForYouSections? {get set}
 }

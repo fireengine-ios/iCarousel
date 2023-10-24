@@ -34,6 +34,15 @@ final class ForYouViewController: BaseViewController {
         NotificationCenter.default.addObserver(self,selector: #selector(getUpdateDataHiddenFav),name: .foryouGetUpdateData, object: nil)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        let isTimeline = UserDefaults.standard.bool(forKey: "TimelineVideoDelete")
+        if isTimeline {
+            updateTableView(for: .timeline)
+            UserDefaults.standard.set(false, forKey: "TimelineVideoDelete")
+        }
+    }
+    
     @objc func getUpdateDataHiddenFav(){
         output.getUpdateData(for: ForYouSections.hidden)
         output.getUpdateData(for: ForYouSections.favorites)
@@ -146,6 +155,8 @@ extension ForYouViewController: ForYouViewInput {
             output.getUpdateData(for: .animations)
         } else if section == .albumCards {
             output.getUpdateData(for: .albums)
+        } else if section == .timeline {
+            output.getUpdateData(for: .timeline)
         }
     }
 }
@@ -161,6 +172,7 @@ extension ForYouViewController: UITableViewDataSource {
         if timelineEnable && indexPath.row == 0 {
             let cell = tableView.dequeue(reusable: ForYouTimelineTableViewCell.self, for: indexPath)
             let model = output.getModel(for: forYouSections[indexPath.row]) as? TimelineResponse
+            cell.delegate = self
             cell.configure(with: model)
             cell.isHidden = model != nil ? false : true
             return cell
@@ -257,6 +269,22 @@ extension ForYouViewController: HeaderContainingViewControllerChild {
 extension ForYouViewController: ForYouFaceImageTableViewCellDelegae {
     func onFaceImageButton() {
         output.onFaceImageButton()
+    }
+}
+
+extension ForYouViewController: ForYouTimelineTableViewCellDelegate {
+    func saveTimelineCard(id: Int) {
+        output.currentSection = .timeline
+        output.saveTimelineCard(id: id)
+    }
+    
+    func setTimelineNil() {
+        output.setTimelineNil()
+        updateTableView(for: .timeline)
+    }
+    
+    func shareTimeline(item: BaseDataSourceItem, type: CardShareType) {
+        shareCardContentManager.presentSharingMenu(item: item, type: type)
     }
 }
 

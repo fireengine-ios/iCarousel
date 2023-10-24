@@ -41,4 +41,8 @@ protocol ForYouInteractorOutput: AnyObject {
     func saveCardFailedFullQuota(section: ForYouSections)
     func saveCardSuccess(data: HomeCardResponse, section: ForYouSections)
     func throwbackDetailFailed()
+    func saveTimelineCardSuccess(section: ForYouSections)
+    func saveTimelineCardFail(section: ForYouSections)
+    func deleteTimelineCardSuccess(section: ForYouSections)
+    func deleteTimelineCardFail(section: ForYouSections)
 }

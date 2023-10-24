@@ -117,7 +117,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
     func showVideoPlayer(with types: [ElementTypes], for item: WrapData, presentedBy sender: Any?, onSourceView sourceView: UIView?, viewController: UIViewController?) {
         var items = [WrapData]()
         items.append(item)
-        constractPlayerAction(with: types, for: items) { [weak self] actions in
+        constractPlayerAction(with: types, for: items, id: Int(item.id ?? 0)) { [weak self] actions in
             DispatchQueue.main.async { [weak self] in
                 self?.presentAlertSheet(with: actions, presentedBy: sender, viewController: viewController)
             }
@@ -268,7 +268,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         })
     }
     
-    private func constractPlayerAction(with types: [ElementTypes], for items: [BaseDataSourceItem]?, sender: Any? = nil, actionsCallback: @escaping AlertActionsCallback) {
+    private func constractPlayerAction(with types: [ElementTypes], for items: [BaseDataSourceItem]?, id: Int,  sender: Any? = nil, actionsCallback: @escaping AlertActionsCallback) {
         actionsCallback(types.map { type in
             var action: AlertFilesAction
             switch type {
@@ -278,11 +278,24 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 }
             case .share:
                 action = AlertFilesAction(title: type.actionTitle(), icon: type.icon, isTemplate: false) { [weak self] in
-                    print("aaaaaaaaaaa share")
+                    self?.basePassingPresenter?.timelineShare()
                 }
             case .delete:
                 action = AlertFilesAction(title: type.actionTitle(), icon: type.icon, isTemplate: false) { [weak self] in
-                    print("aaaaaaaaaaa delete")
+                    UserDefaults.standard.set(true, forKey: "TimelineVideoDelete")
+                    let controller = UIApplication.topController()
+                    let service = ForYouService()
+                    controller?.showSpinner()
+                    service.forYouDeleteTimelineCard(with: id, handler: { [weak self] result in
+                        switch result {
+                        case .success(_):
+                            controller?.hideSpinner()
+                            controller?.dismiss(animated: false)
+                        case .failed(let error):
+                            controller?.hideSpinner()
+                            UIApplication.showErrorAlert(message: error.localizedDescription)
+                        }
+                    })
                 }
             default:
                 action = AlertFilesAction()

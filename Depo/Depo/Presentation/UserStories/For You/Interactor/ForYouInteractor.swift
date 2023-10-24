@@ -479,4 +479,34 @@ extension ForYouInteractor: ForYouInteractorInput {
             completion()
         }
     }
+    
+    func saveTimelineCard(id: Int) {
+        debugLog("ForYou saveTimelineCard")
+        
+        service.forYouSaveTimelineCard(with: id, handler: { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.output.saveTimelineCardSuccess(section: .timeline)
+            case .failed(let error):
+                if error.isOutOfSpaceError {
+                    self?.output.saveCardFailedFullQuota(section: .timeline)
+                } else {
+                    self?.output.saveTimelineCardFail(section: .timeline)
+                }
+            }
+        })
+    }
+    
+    func deleteTimelineCard(id: Int) {
+        debugLog("ForYou saveTimelineCard")
+        
+        service.forYouDeleteTimelineCard(with: id, handler: { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.output.deleteTimelineCardSuccess(section: .timeline)
+            case .failed(let error):
+                self?.output.deleteTimelineCardFail(section: .timeline)
+            }
+        })
+    }
 }

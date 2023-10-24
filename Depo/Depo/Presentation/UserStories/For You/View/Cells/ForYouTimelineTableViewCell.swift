@@ -8,7 +8,15 @@
 
 import Foundation
 
+protocol ForYouTimelineTableViewCellDelegate: AnyObject {
+    func saveTimelineCard(id: Int)
+    func setTimelineNil()
+    func shareTimeline(item: BaseDataSourceItem, type: CardShareType)
+}
+
 class ForYouTimelineTableViewCell: UITableViewCell {
+    
+    weak var delegate: ForYouTimelineTableViewCellDelegate?
     
     @IBOutlet weak var bgView: UIView! {
         willSet {
@@ -86,12 +94,13 @@ class ForYouTimelineTableViewCell: UITableViewCell {
     
     private var videoUrl: URL?
     private var timelineResponse: TimelineResponse?
+    private var type: CardActionType = .display
     
     func configure(with item: TimelineResponse?) {
         saveButton.setTitle(item?.saved ?? false ? TextConstants.tabBarShareLabel : TextConstants.save, for: .normal)
         self.timelineResponse = item
         
-        var type: CardActionType = item?.saved ?? false ? .display : .save
+        type = item?.saved ?? false ? .display : .save
         switch type {
         case .display:
             saveButton.setTitle(TextConstants.homeLikeFilterViewPhoto, for: .normal)
@@ -114,11 +123,32 @@ class ForYouTimelineTableViewCell: UITableViewCell {
     }
     
     @objc private func imageTapped() {
+        showTimelineVideo()
+    }
+    
+    @objc private func closeImageTapped() {
+        delegate?.setTimelineNil()
+    }
+    
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        switch type {
+        case .display:
+            showTimelineVideo()
+        case .save:
+            delegate?.saveTimelineCard(id: timelineResponse?.id ?? 0)
+        }
+    }
+    
+    @IBAction func shareButtonTapped(_ sender: Any) {
+        let item = WrapData(timelineResponse: timelineResponse!)
+        delegate?.shareTimeline(item: item, type: .origin)
+    }
+    
+    private func showTimelineVideo() {
         guard let videoUrl = videoUrl else {
             assertionFailure()
             return
         }
-        
         let player = AVPlayer(url: videoUrl)
         
         let playerController = NewAvPlayerViewController(item: timelineResponse)
@@ -130,17 +160,5 @@ class ForYouTimelineTableViewCell: UITableViewCell {
         RouterVC().presentViewController(controller: nController, animated: true) {
             player.play()
         }
-    }
-    
-    @objc private func closeImageTapped() {
-        print("aaaaaaaaaa \(videoUrl)")
-    }
-    
-    @IBAction func saveButtonTapped(_ sender: Any) {
-        print("aaaaaaaaaa saveButtonTapped")
-    }
-    
-    @IBAction func shareButtonTapped(_ sender: Any) {
-        print("aaaaaaaaaa shareButtonTapped")
     }
 }

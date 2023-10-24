@@ -38,6 +38,20 @@ final class ForYouPresenter: BasePresenter, ForYouModuleInput {
 }
 
 extension ForYouPresenter: ForYouViewOutput {
+    func saveTimelineCard(id: Int) {
+        view.showSpinner()
+        interactor.saveTimelineCard(id: id)
+    }
+    
+    func setTimelineNil() {
+        timelineData = nil
+    }
+    
+    func saveTimelineCardSuccess(section: ForYouSections) {
+        view.hideSpinner()
+        view.saveCardSuccess(section: section)
+    }
+    
     func onSeeAllButton(for view: ForYouSections) {
         self.currentSection = view
         router.navigateToSeeAll(for: view)
@@ -299,6 +313,7 @@ extension ForYouPresenter: ForYouInteractorOutput {
     
     func closeCardSuccess(data: HomeCardResponse, section: ForYouSections) {
         view.hideSpinner()
+        view.saveCardSuccess(section: section)
     }
     
     func closeCardFailed() {
@@ -328,6 +343,22 @@ extension ForYouPresenter: ForYouInteractorOutput {
     }
     
     func throwbackDetailFailed() {
+        UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
+    }
+    
+    func saveTimelineCardFail(section: ForYouSections) {
+        view.hideSpinner()
+        UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
+    }
+    
+    func deleteTimelineCardSuccess(section: ForYouSections){
+        view.hideSpinner()
+        view.saveCardSuccess(section: section)
+        router.openForYou()
+    }
+    
+    func deleteTimelineCardFail(section: ForYouSections){
+        view.hideSpinner()
         UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
     }
 }

@@ -34,6 +34,7 @@ protocol BaseItemInputPassingProtocol: AnyObject {
     func showOnly(withType type: ElementTypes)
     
     func onlyOfficeFilterSuccess(documentType: OnlyOfficeFilterType, items: [WrapData])
+    func timelineShare()
 }
 
 // To make it optional
@@ -41,6 +42,7 @@ extension BaseItemInputPassingProtocol {
     func delete(all: Bool) {}
     func showOnly(withType type: ElementTypes) {}
     func onlyOfficeFilterSuccess(documentType: OnlyOfficeFilterType, items: [WrapData]) {}
+    func timelineShare() {}
 }
 
 protocol BaseItemOuputPassingProtocol: AnyObject {
