@@ -22,4 +22,5 @@ protocol ForYouRouterInput {
     func displayItem(item: WrapData)
     func showSavedItem(item: WrapData)
     func showFullQuota()
+    func openForYou()
 }

@@ -23,6 +23,7 @@ protocol ForYouInteractorOutput: AnyObject {
     func getFavorites(data: [WrapData])
     func getCollages(data: [WrapData])
     func getPrintedPhotos(data: [GetOrderResponse])
+    func getTimelineData(data: TimelineResponse)
     func getAlbums(data: [AlbumItem])
     func getPhotopicks(data: [InstapickAnalyze])
     func getCollageCards(data: [HomeCardResponse])
@@ -40,4 +41,8 @@ protocol ForYouInteractorOutput: AnyObject {
     func saveCardFailedFullQuota(section: ForYouSections)
     func saveCardSuccess(data: HomeCardResponse, section: ForYouSections)
     func throwbackDetailFailed()
+    func saveTimelineCardSuccess(section: ForYouSections)
+    func saveTimelineCardFail(section: ForYouSections)
+    func deleteTimelineCardSuccess(section: ForYouSections)
+    func deleteTimelineCardFail(section: ForYouSections)
 }

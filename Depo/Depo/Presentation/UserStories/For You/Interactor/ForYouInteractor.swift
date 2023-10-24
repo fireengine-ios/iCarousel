@@ -300,10 +300,31 @@ final class ForYouInteractor {
             }
         }
     }
+    
+    private func getTimeline() {
+        debugLog("ForYou getTimeline")
+        group.enter()
+
+        service.forYouTimeline() { [weak self] result in
+            self?.group.leave()
+
+            switch result {
+            case .success(let response):
+                self?.output.getTimelineData(data: response)
+            case .failed(let error):
+                debugLog("ForYou Error getTimeline: \(error.errorCode)-\(String(describing: error.description))")
+                break
+            }
+        }
+    }
 }
 
 extension ForYouInteractor: ForYouInteractorInput {
     func viewIsReady() {
+        let timelineEnable = FirebaseRemoteConfig.shared.fetchTimelineEnabled
+        if timelineEnable {
+            getTimeline()
+        }
         getThrowbacks()
         getThings()
         getPlaces()
@@ -401,6 +422,8 @@ extension ForYouInteractor: ForYouInteractorInput {
             getFavorites()
         case .printedPhotos:
             getPrintedPhotos()
+        case .timeline:
+            getTimeline()
         }
         
         group.notify(queue: .main) {
@@ -455,5 +478,35 @@ extension ForYouInteractor: ForYouInteractorInput {
             }
             completion()
         }
+    }
+    
+    func saveTimelineCard(id: Int) {
+        debugLog("ForYou saveTimelineCard")
+        
+        service.forYouSaveTimelineCard(with: id, handler: { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.output.saveTimelineCardSuccess(section: .timeline)
+            case .failed(let error):
+                if error.isOutOfSpaceError {
+                    self?.output.saveCardFailedFullQuota(section: .timeline)
+                } else {
+                    self?.output.saveTimelineCardFail(section: .timeline)
+                }
+            }
+        })
+    }
+    
+    func deleteTimelineCard(id: Int) {
+        debugLog("ForYou saveTimelineCard")
+        
+        service.forYouDeleteTimelineCard(with: id, handler: { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.output.deleteTimelineCardSuccess(section: .timeline)
+            case .failed(let error):
+                self?.output.deleteTimelineCardFail(section: .timeline)
+            }
+        })
     }
 }

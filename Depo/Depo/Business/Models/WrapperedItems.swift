@@ -83,6 +83,7 @@ enum FileType: Hashable, Equatable {
     case faceImageAlbum(FaceImageType)
     case imageAndVideo
     case documentsAndMusic
+    case timeline
 
     
     var convertedToSearchFieldValue: FieldValue {
@@ -106,6 +107,8 @@ enum FileType: Hashable, Equatable {
             return .imageAndVideo
         case .documentsAndMusic:
             return .documentsAndMusic
+        case .timeline:
+            return .timeline
         default:
             return .all
         }
@@ -119,6 +122,8 @@ enum FileType: Hashable, Equatable {
             return .video
         case .audio:
             return .audio
+        case .timeline:
+            return .video
         default:
             return .unknown
         }
@@ -179,6 +184,10 @@ enum FileType: Hashable, Equatable {
             }
             if (wrapType.hasPrefix("audio")) {
                 self = .audio
+                return
+            }
+            if (wrapType.hasPrefix("timeline")) {
+                self = .timeline
                 return
             }
             if (wrapType.hasPrefix("album")) {
@@ -407,6 +416,7 @@ enum FileType: Hashable, Equatable {
         case (.video, .video): return true
         case (.audio, .audio): return true
         case (.folder, .folder): return true
+        case (.timeline, .timeline): return true
         case (.application, .application):
             switch (lhs) {
             case .application(let lhsType):
@@ -713,6 +723,32 @@ class WrapData: BaseDataSourceItem, Wrappered {
     }
     
     //MARK:-
+    
+    init(timelineResponse: TimelineResponse) {
+        fileSize = 0
+        id = Int64(timelineResponse.id)
+        tmpDownloadUrl = URL(string: timelineResponse.details.tempDownloadURL)
+        metaData = BaseMetaData()
+        metaData?.videoPreviewURL = URL(string: timelineResponse.details.metadata.videoPreview)
+        metaData?.largeUrl = URL(string: timelineResponse.details.metadata.thumbnailLarge)
+        metaData?.smalURl = URL(string: timelineResponse.details.metadata.thumbnailSmall)
+        metaData?.mediumUrl = URL(string: timelineResponse.details.metadata.thumbnailMedium)
+        favorites = false
+        status = .unknown
+        metaData?.takenDate = Date()
+        
+        status = .unknown
+        patchToPreview = .remoteUrl(nil)
+        super.init()
+        //name = timelineResponse.details.name
+        name = "2023Özetin.mp4"
+        favorites = false
+        isLocalItem = false
+        uuid = timelineResponse.details.uuid
+        fileType = .timeline
+        projectId = SingletonStorage.shared.accountInfo?.projectID
+        mimeType = "video/mp4"
+    }
     
     init(musicForCreateStory: CreateStoryMusicItem) {
         id = musicForCreateStory.id

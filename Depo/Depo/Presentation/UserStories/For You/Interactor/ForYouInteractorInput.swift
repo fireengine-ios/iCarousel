@@ -16,5 +16,6 @@ protocol ForYouInteractorInput {
     func onCloseCard(data: HomeCardResponse, section: ForYouSections)
     func saveCard(data: HomeCardResponse, section: ForYouSections)
     func getThrowbackDetails(with item: ThrowbackData, completion: @escaping VoidHandler)
+    func saveTimelineCard(id: Int)
 }
 

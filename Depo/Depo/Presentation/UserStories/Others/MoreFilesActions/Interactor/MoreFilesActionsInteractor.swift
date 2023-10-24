@@ -924,6 +924,20 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Download(type: firstItem.fileType, count: item.count))
             }
             
+            if item.first?.fileType == .timeline {
+                let successAction = { [weak self] in
+                    if item.allSatisfy ({ !$0.isOwner }) {
+                        self?.privateShareAnalytics.sharedWithMe(action: .download, on: item.first)
+                    }
+                    self?.successAction(elementType: .download, relatedItems: item)()
+                }
+                
+                fileService.download(items: item, toPath: "",
+                                     success: successAction,
+                                     fail: failAction(elementType: .download))
+                return
+            }
+            
             //FIXME: transform all to BaseDataSourceItem
             if let item = item.first, item.fileType.isFaceImageAlbum || item.fileType.isFaceImageType {
                 downloadFaceImageAlbum(item: item)

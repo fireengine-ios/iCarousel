@@ -285,6 +285,15 @@ class WrapItemFileService: WrapItemFileOperations {
     }
     
     func download(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?) {
+        
+        if items.first?.fileType == .timeline {
+            let downloadItems = remoteWrapDataItems(files: items)
+            createDownloadUrls(for: downloadItems) { [weak self] in
+                self?.remoteFileService.download(items: downloadItems, success: success, fail: fail)
+            }
+            return
+        }
+        
         let downloadItems = remoteWrapDataItems(files: items)
         
         let itemsWithoutUrl = items.filter { $0.tmpDownloadUrl == nil || !$0.isOwner }

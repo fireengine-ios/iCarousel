@@ -531,6 +531,7 @@ class FileService: BaseRequestService {
                     switch downloadParam.contentType {
                         case .image : type = .image
                         case .video : type = .video
+                        case .timeline: type = .video
                         default     : break
                     }
                     

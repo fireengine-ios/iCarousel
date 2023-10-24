@@ -522,6 +522,10 @@ struct RouteRequests {
     static let forYouThrowback = baseUrl +/ "foryou/years-ago"
     static let forYouThrowbackDetail = "foryou/years-ago/%d"
     static let collageTemplate = baseUrl +/ "template/collages"
+    static let timeline = baseUrl +/ "foryou/timeline"
+    static func saveDeleteTimeline(with id: Int) -> URL {
+        return timeline +/ String(id)
+    }
     
     // MARK: -OnlyOffice
     static let onlyOfficeGetFile = baseUrl +/ "office/files"

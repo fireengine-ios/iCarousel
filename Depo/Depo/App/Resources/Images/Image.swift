@@ -203,6 +203,7 @@ enum Image: String, AppImage {
     case createCollageThumbnail
     case iconCollage
     case collageThumbnail
+    case iconConfetti
     
     /// Settings
     case gradientSwitch
