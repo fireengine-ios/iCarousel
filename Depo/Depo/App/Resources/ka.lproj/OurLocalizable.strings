@@ -2154,7 +2154,7 @@ then {11,99 TRY/Month}*/
 "address_title_placeholder" = "";
 "select_city_district" = "";
 "send_print_popup_no_address" = "";
-"grace_banner_text_paycell" = "";
+"grace_banner_text_paycell" = "lifebox პაკეტის გასაახლებლად, შეამოწმე შენი Paycell ბარათის ბალანსი,  ამ ბარათით ხელმისაწვდომია ელექტრონული კომერცია.  პაკეტი შეგიძლია შეიძინო სხვა საკრედიტო ბარათით ან აპლიკაციის საშუალებით.";
 "toast_message_delete_notification" = "ამ პროცესს შეიძლება დასჭირდეს დრო, დამოკიდებულია არჩეული ფაილების რაოდენობაზე.";
 "order_approved" = "";
 "print_card_title" = "";
@@ -2163,7 +2163,6 @@ then {11,99 TRY/Month}*/
 "order_delivered_cargo" = "";
 "order_delivered" = "";
 "order_undelivered" = "";
-"grace_banner_paycell_text" = "";
 "order_detail_popup_name" = "";
 "print_order_number" = "";
 "print_cargo_number" = "";
@@ -2200,3 +2199,5 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "";
 "order_not_delivered" = "";
 "order_not_delivered_detail" = "";
+"grace_banner_paycell_text" = "";
+"sync_page_offer_pop_up" = "";

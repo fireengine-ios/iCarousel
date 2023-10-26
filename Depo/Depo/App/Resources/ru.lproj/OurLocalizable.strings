@@ -2150,7 +2150,7 @@ then {11,99 TRY/Month}*/
 "send_print_button" = "Отправить на Печать";
 "add_address" = "Добавить Адрес";
 "send_print_popup_title" = "Выбранные Вами Фотографии Готовы к Печати";
-"send_print_popup_address" = "Распечатанные фотографии будут бесплатно отправлены по адресу \"%@ Квартал %@ Улица №:%@ Квартира:%@ %@/%@, %d\".";
+"send_print_popup_address" = "Распечатанные фотографии будут бесплатно отправлены по адресу \"%@ Квартал %@ №:%@ Квартира:%@ %@/%@, %d\".";
 "send_print_popup_info" = "После отправки на печать этот процесс нельзя отменить.";
 "address_title" = "Название Адреса";
 "address_city" = "Город";
@@ -2179,7 +2179,6 @@ then {11,99 TRY/Month}*/
 "order_delivered_cargo" = "Ваш Заказ Отправлен";
 "order_delivered" = "Ваш Заказ Доставлен";
 "order_undelivered" = "Не Удалось Доставить Ваш Заказ";
-"grace_banner_paycell_text" = "";
 "order_detail_popup_name" = "Отслеживание Заказа на Печать";
 "print_order_number" = "Номер Заказа: %@";
 "print_cargo_number" = "Номер Доставки Заказа: %@";
@@ -2218,3 +2217,5 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "Превышен лимит фотографий.";
 "order_not_delivered" = "Заказ не Удалось Передать на Печать";
 "order_not_delivered_detail" = "Ваш заказ не удалось передать на печать по техническим причинам. Пожалуйста, отправьте новый заказ на печать еще раз.";
+"grace_banner_paycell_text" = "";
+"sync_page_offer_pop_up" = "";

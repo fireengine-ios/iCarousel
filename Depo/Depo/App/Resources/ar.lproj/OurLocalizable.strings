@@ -2177,7 +2177,6 @@ then {11,99 TRY/Month}*/
 "order_delivered_cargo" = "تم إرسال طلبك";
 "order_delivered" = "تم تسليم طلبك";
 "order_undelivered" = "فشل في تسليم طلبك";
-"grace_banner_paycell_text" = "";
 "order_detail_popup_name" = "تتبع أمر الطباعة";
 "print_order_number" = "رقم الطلب: %@";
 "print_cargo_number" = "رقم تسليم الطلب: %@";
@@ -2216,3 +2215,5 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "تم تجاوز حد الصورة.";
 "order_not_delivered" = "لا يمكن تسليم الطلب للطباعة";
 "order_not_delivered_detail" = "لا يمكن تسليم طلبك للطباعة لأسباب فنية. الرجاء إرسال نسخة جديدة مرة أخرى.";
+"grace_banner_paycell_text" = "";
+"sync_page_offer_pop_up" = "";

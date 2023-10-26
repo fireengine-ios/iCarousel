@@ -2441,7 +2441,7 @@ then {11,99 TRY/Month}*/
 "send_print_button" = "Envoyer à l'impression";
 "add_address" = "Ajouter une Adresse";
 "send_print_popup_title" = "Les photos sélectionnées sont prêtes à être imprimées";
-"send_print_popup_address" = "Les photos imprimées seront envoyées gratuitement à l'adresse \"%@ Quarter %@ Rue No:%@ Appartement:%@ %@/%@, %d\".";
+"send_print_popup_address" = "Les photos imprimées seront envoyées gratuitement à l'adresse \"%@ Quarter %@ No:%@ Appartement:%@ %@/%@, %d\".";
 "send_print_popup_info" = "Il n'est pas possible d'annuler ce processus lorsqu'il est envoyé à l'impression.";
 "address_title" = "Adresse Titre";
 "address_city" = "Ville";
@@ -2470,7 +2470,6 @@ then {11,99 TRY/Month}*/
 "order_delivered_cargo" = "Votre commande a été envoyée";
 "order_delivered" = "Votre commande a été livrée";
 "order_undelivered" = "Votre commande n'a pas pu être livrée";
-"grace_banner_paycell_text" = "";
 "order_detail_popup_name" = "Suivi de la commande d'impression";
 "print_order_number" = "Numéro de commande : %@";
 "print_cargo_number" = "Numéro de livraison de la commande : %@";
@@ -2509,3 +2508,5 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "Limite de photos dépassée.";
 "order_not_delivered" = "La commande n'a pas pu être envoyée à l'impression";
 "order_not_delivered_detail" = "Votre commande n'a pas pu être envoyée à l'impression pour des raisons techniques. Veuillez envoyer une nouvelle impression.";
+"grace_banner_paycell_text" = "";
+"sync_page_offer_pop_up" = "";

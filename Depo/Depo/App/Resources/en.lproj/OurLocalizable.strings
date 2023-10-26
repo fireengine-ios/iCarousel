@@ -2198,7 +2198,7 @@ then {11,99 TRY/Month}*/
 "send_print_button" = "Send to Print";
 "add_address" = "Add Address";
 "send_print_popup_title" = "Your Selected Photos Are Ready For Printing";
-"send_print_popup_address" = "Printed photographs will be sent free of charge to the address \"%@ Quarter %@ Street No:%@ Apartment:%@ %@/%@, %d\".";
+"send_print_popup_address" = "Printed photographs will be sent free of charge to the address \"%@ Quarter %@ No:%@ Apartment:%@ %@/%@, %d\".";
 "send_print_popup_info" = "This process cannot be cancelled if it is sent for printing.";
 "address_title" = "Address Title";
 "address_city" = "City";
@@ -2227,7 +2227,6 @@ then {11,99 TRY/Month}*/
 "order_delivered_cargo" = "Your Order Delivered to Cargo";
 "order_delivered" = "Your Order Delivered";
 "order_undelivered" = "Your Order Could Not Be Delivered";
-"grace_banner_paycell_text" = "";
 "order_detail_popup_name" = "Print Order Tracking";
 "print_order_number" = "Order No: %@";
 "print_cargo_number" = "Cargo Delivery No: %@";
@@ -2266,3 +2265,5 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "Photo limit exceeded.";
 "order_not_delivered" = "Your order could not be delivered to print";
 "order_not_delivered_detail" = "Your order could not be delivered to print for technical reasons. Please send a new print again.";
+"grace_banner_paycell_text" = "";
+"sync_page_offer_pop_up" = "";
