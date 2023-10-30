@@ -28,7 +28,8 @@ class PhotoPrintSeeAllCollectionViewCell: UICollectionViewCell {
     
     func configure(urlString: String) {
         let url = URL(string: urlString)
-        thumbnailImage.contentMode = .scaleToFill
+        thumbnailImage.contentMode = .scaleAspectFill
+        thumbnailImage.clipsToBounds = true
         thumbnailImage.sd_setImage(with: url)
     }
 }
