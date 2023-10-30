@@ -105,6 +105,7 @@ final class PhotoPrintStatusPopup: BasePopUpController {
     }
     
     private var item: GetOrderResponse?
+    private var itemIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,9 +133,9 @@ final class PhotoPrintStatusPopup: BasePopUpController {
         }
         
 
-        guard let urlString = item?.affiliateOrderDetails.first?.fileInfo.tempDownloadURL else { return }
+        guard let urlString = item?.affiliateOrderDetails[itemIndex].fileInfo.tempDownloadURL else { return }
         let url = URL(string: urlString)
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
         imageView.sd_setImage(with: url)
     }
     
@@ -144,16 +145,17 @@ final class PhotoPrintStatusPopup: BasePopUpController {
 }
 
 extension PhotoPrintStatusPopup {
-    static func with(photoPrintData: GetOrderResponse) -> PhotoPrintStatusPopup {
-        let vc = controllerWith(photoPrintData: photoPrintData)
+    static func with(photoPrintData: GetOrderResponse, index: Int) -> PhotoPrintStatusPopup {
+        let vc = controllerWith(photoPrintData: photoPrintData, index: index)
         return vc
     }
     
-    private static func controllerWith(photoPrintData: GetOrderResponse?) -> PhotoPrintStatusPopup {
+    private static func controllerWith(photoPrintData: GetOrderResponse?, index: Int) -> PhotoPrintStatusPopup {
         let vc = PhotoPrintStatusPopup(nibName: "PhotoPrintStatusPopup", bundle: nil)
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overFullScreen
         vc.item = photoPrintData
+        vc.itemIndex = index
         return vc
     }
 }
