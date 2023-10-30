@@ -120,14 +120,15 @@ final class AutoSyncViewController: BaseViewController, NibInit {
         let isFirstLoginControl = UserDefaults.standard.bool(forKey: "isFirstLoginControl")
         
         if !isFirstLoginControl {
-            let popup = PopUpController.with(title: nil, message: localized(.syncPageOfferPopUp), image: .none, firstButtonTitle: TextConstants.noForUpgrade, secondButtonTitle: TextConstants.yesForUpgrade,
+            let popup = PopUpController.with(title: nil, message: localized(.syncPageOfferPopUp), image: .none, firstButtonTitle: TextConstants.noForUpgrade, secondButtonTitle: TextConstants.faceImageYes,
                 firstAction: { [weak self] vc in
                     self?.goToPhotosScreen()
                 },
                 secondAction: { vc in
                     self.dismiss(animated: false, completion: {
-                        let controller = self.router.premium()
                         DispatchQueue.toMain { [weak self] in
+                            self?.onStartUsingButtonTapped = true
+                            self?.storageVars.isAutoSyncSet = true
                             self?.router.pushViewController(viewController: (self?.router.myStorage(usageStorage: nil))!)
                         }
                     })
