@@ -137,7 +137,7 @@ extension PhotoPrintSeeAllTableViewCell: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = PhotoPrintStatusPopup.with(photoPrintData: photoPrintData!)
+        let vc = PhotoPrintStatusPopup.with(photoPrintData: photoPrintData!, index: indexPath.row)
         vc.open()
     }
 }

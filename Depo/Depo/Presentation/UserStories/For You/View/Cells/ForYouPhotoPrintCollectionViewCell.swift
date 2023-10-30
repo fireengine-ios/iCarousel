@@ -89,7 +89,7 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet private weak var cardThumbnailImage: LoadingImageView! {
         willSet {
-            newValue.contentMode = .center
+            newValue.contentMode = .scaleAspectFill
             newValue.layer.cornerRadius = 15
             newValue.isUserInteractionEnabled = true
             let tapImage = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
@@ -158,6 +158,7 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
         statusImageView.image = status.statusImage
         thumbnailPlusImage.isHidden = true
         thumbnailPlusLabel.isHidden = true
+        //cardThumbnailImage.contentMode = .scaleAspectFill
         let infoData = item.affiliateOrderDetails[0]
         guard let url = URL(string: infoData.fileInfo.tempDownloadURL) else {
             return
@@ -182,7 +183,7 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
         }
         statusLabel.textColor = AppColor.tealBlue.color
         cardThumbnailImage.image = Image.collageThumbnail.image
-        cardThumbnailImage.contentMode = .scaleToFill
+        cardThumbnailImage.contentMode = .scaleAspectFill
         thumbnailPlusImage.isHidden = false
         thumbnailPlusLabel.isHidden = false
         statusImageView.isHidden = true

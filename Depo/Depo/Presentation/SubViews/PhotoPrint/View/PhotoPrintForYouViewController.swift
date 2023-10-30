@@ -111,7 +111,7 @@ extension PhotoPrintForYouViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension PhotoPrintForYouViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = PhotoPrintStatusPopup.with(photoPrintData: (photoPrintData?[indexPath.row])!)
+        let vc = PhotoPrintStatusPopup.with(photoPrintData: (photoPrintData?[indexPath.row])!, index: 0)
         vc.open()
     }
 }
