@@ -108,6 +108,8 @@ final class ForYouTableViewCell: UITableViewCell {
             self.printedPhotosData = model as? [GetOrderResponse] ?? []
             if self.printedPhotosData.count > 0 {
                 showEmptyDataViewIfNeeded(isShow: printedPhotosData.isEmpty)
+            } else {
+                showEmptyDataViewIfNeeded(isShow: false)
             }
         default:
             self.wrapData = model as? [WrapData] ?? []

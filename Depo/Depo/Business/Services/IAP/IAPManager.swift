@@ -115,6 +115,15 @@ final class IAPManager: NSObject {
         return products.first(where: { $0.productIdentifier == productId })
     }
     
+    func productForPurchase(for productId: String) -> SKProduct? {
+            let currentProducts = offered
+            guard let products = currentProducts else {
+                return nil
+            }
+            
+            return products.first(where: { $0.productIdentifier == productId })
+        }
+    
     func setActivePurchasesState(_ isActivePurchases: Bool) {
         self.isActivePurchases = isActivePurchases
     }

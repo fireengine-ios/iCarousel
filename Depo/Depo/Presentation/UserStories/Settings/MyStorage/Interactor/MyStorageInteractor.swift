@@ -60,7 +60,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
     }
     
     func activate(offer: PackageModelResponse, planIndex: Int) {
-        guard let product = iapManager.product(for: offer.inAppPurchaseId ?? "") else {
+        guard let product = iapManager.productForPurchase(for: offer.inAppPurchaseId ?? "") else {
             let error = CustomErrors.serverError("An error occured while getting product with id - \(offer.inAppPurchaseId ?? "") from App Store")
             self.output.failed(with: error.localizedDescription)
             return

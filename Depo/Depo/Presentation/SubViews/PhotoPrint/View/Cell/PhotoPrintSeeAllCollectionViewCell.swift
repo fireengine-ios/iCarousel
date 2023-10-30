@@ -12,7 +12,7 @@ class PhotoPrintSeeAllCollectionViewCell: UICollectionViewCell {
     
     private lazy var thumbnailImage: UIImageView = {
         let view = UIImageView()
-        view.contentMode = .center
+        view.contentMode = .scaleToFill
         view.layer.cornerRadius = 5
         return view
     }()

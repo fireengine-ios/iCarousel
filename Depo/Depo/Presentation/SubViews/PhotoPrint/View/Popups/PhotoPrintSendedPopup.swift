@@ -27,7 +27,7 @@ final class PhotoPrintSendedPopup: BasePopUpController {
     @IBOutlet weak var imageView: UIImageView! {
         willSet {
             newValue.layer.cornerRadius = 8
-            newValue.contentMode = .center
+            newValue.contentMode = .scaleAspectFill
         }
     }
     
