@@ -2136,7 +2136,7 @@ then {11,99 TRY/Month}*/
 "send_print_button" = "Trimite la Imprimare";
 "add_address" = "Adăugați Adresa";
 "send_print_popup_title" = "Fotografiile selectate sunt pregătite pentru imprimare";
-"send_print_popup_address" = "Fotografiile imprimate vor fi trimise gratuit la adresa \"%@ Quarter %@ Street No:%@ Apartment:%@ %@/%@, %d\".";
+"send_print_popup_address" = "Fotografiile imprimate vor fi trimise gratuit la adresa \"%@ Quarter %@ No:%@ Apartment:%@ %@/%@, %d\".";
 "send_print_popup_info" = "Acest proces nu poate fi anulat dacă fotografiile sunt trimise pentru imprimare.";
 "address_title" = "Titlul Adresei";
 "address_city" = "Orașul";
@@ -2165,7 +2165,6 @@ then {11,99 TRY/Month}*/
 "order_delivered_cargo" = "Comanda dvs. a fost expediată";
 "order_delivered" = "Comanda dvs. este livrată";
 "order_undelivered" = "Comanda dvs. nu a putut fi livrată";
-"grace_banner_paycell_text" = "";
 "order_detail_popup_name" = "Urmărirea comenzii de imprimare";
 "print_order_number" = "Comandă №: %@";
 "print_cargo_number" = "Livrare marfă №: %@";
@@ -2204,3 +2203,5 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "Limita fotografiilor a fost depășită.";
 "order_not_delivered" = "Comanda nu a putut fi livrată la imprimare";
 "order_not_delivered_detail" = "Comanda dvs. nu a putut fi livrată la imprimare din motive tehnice. Vă rugăm să trimiteți din nou o nouă imprimare.";
+"grace_banner_paycell_text" = "";
+"sync_page_offer_pop_up" = "";

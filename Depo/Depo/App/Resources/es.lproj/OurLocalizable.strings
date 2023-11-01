@@ -2178,7 +2178,7 @@ then {11,99 TRY/Month}*/
 "send_print_button" = "Enviar a Imprimir";
 "add_address" = "Añadir Dirección";
 "send_print_popup_title" = "Sus fotos seleccionadas están listas para imprimir";
-"send_print_popup_address" = "Las fotografías impresas se enviarán gratuitamente a la dirección \"%@ Barrio %@ Calle No:%@ Apartamento:%@ %@/%@, %d\".";
+"send_print_popup_address" = "Las fotografías impresas se enviarán gratuitamente a la dirección \"%@ Barrio %@ No:%@ Apartamento:%@ %@/%@, %d\".";
 "send_print_popup_info" = "Una vez enviadas a imprimir, este proceso no se puede cancelar.";
 "address_title" = "Dirección Título";
 "address_city" = "Ciudad";
@@ -2207,7 +2207,6 @@ then {11,99 TRY/Month}*/
 "order_delivered_cargo" = "Su Pedido Enviado";
 "order_delivered" = "Su Pedido Entregado";
 "order_undelivered" = "Su pedido no se ha podido entregar";
-"grace_banner_paycell_text" = "";
 "order_detail_popup_name" = "Seguimiento del pedido de impresión";
 "print_order_number" = "Nº de pedido: %@";
 "print_cargo_number" = "Nº de entrega del pedido: %@";
@@ -2246,3 +2245,5 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "Límite de fotos excedido.";
 "order_not_delivered" = "El pedido no se ha podido imprimir";
 "order_not_delivered_detail" = "Tu pedido no se ha podido enviar a imprimir por motivos técnicos. Vuelva a enviar una nueva impresión.";
+"grace_banner_paycell_text" = "";
+"sync_page_offer_pop_up" = "";

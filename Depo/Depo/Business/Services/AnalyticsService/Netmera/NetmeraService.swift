@@ -271,7 +271,7 @@ extension NetmeraService {
             preparedUserField(activeSubscriptionNames)
         }, fail: { errorResponse in
             preparedUserField(activeSubscriptionNames)
-        })
+        },isLogin: true)
     }
     
     private static func prepareTurkcellLoginScurityFields(preparedUserField: @escaping (_ autoLogin: String, _ turkcellPassword: String)->Void) {
