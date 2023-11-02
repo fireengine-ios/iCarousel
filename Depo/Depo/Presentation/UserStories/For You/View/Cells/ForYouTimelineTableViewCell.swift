@@ -33,7 +33,7 @@ class ForYouTimelineTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel! {
         willSet {
-            newValue.text = localized(.timelineHeader)
+            newValue.text = String(format: localized(.timelineHeader), Int(Date().getYear()))
             newValue.textColor = AppColor.tealBlue.color
             newValue.font = .appFont(.medium, size: 12)
         }
@@ -50,9 +50,10 @@ class ForYouTimelineTableViewCell: UITableViewCell {
     
     @IBOutlet weak var descriptionLabel: UILabel! {
         willSet {
-            newValue.text = localized(.timelineDescription)
+            newValue.text = String(format: localized(.timelineDescription), Int(Date().getYear()))
             newValue.textColor = AppColor.darkBlue.color
             newValue.font = .appFont(.regular, size: 12)
+            newValue.numberOfLines = 2
         }
     }
     

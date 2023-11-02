@@ -113,6 +113,8 @@ enum AppColor {
     case collageThumbnailColor
     case collageBorderColor
     case collageCellBorder
+    case timelineTop
+    case timelineBottom
     
     // MARK: Contact
     case grayMain

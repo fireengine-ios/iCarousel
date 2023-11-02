@@ -96,4 +96,9 @@ extension Date: Components {
         let hour = getDateInFormat(format: "HHmm")
         return hour
     }
+    
+    func currentYear() -> String {
+        let year = getDateInFormat(format: "yyyy")
+        return year
+    }
 }

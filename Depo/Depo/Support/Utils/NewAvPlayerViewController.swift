@@ -41,13 +41,29 @@ final class NewAvPlayerViewController: AVPlayerViewController {
     }
     
     override func viewDidLoad() {
-        view.backgroundColor = AppColor.darkBlue.color
+        showSpinner()
         configureNavBarActions()
-        
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         view.subviews.first?.subviews[1].subviews[0].isHidden = true //x button hide
         view.subviews.first?.subviews[1].subviews[5].isHidden = true //sound button hide
+        view.backgroundColor = UIColor.black.withAlphaComponent(0)
+        addViewsToVideo()
+        hideSpinner()
+    }
+    
+    private func addViewsToVideo() {
+        let width = view.frame.width
+        let height = view.frame.height
+        let viewTop = UIView(frame: CGRect(x: 0, y: 0, width: width, height: height / 2))
+        let viewBottom = UIView(frame: CGRect(x: 0, y: height / 2, width: width, height: height / 2))
+        viewTop.backgroundColor = AppColor.timelineTop.color
+        viewBottom.backgroundColor = AppColor.timelineBottom.color
+        view.addSubview(viewTop)
+        view.addSubview(viewBottom)
+        view.sendSubviewToBack(viewTop)
+        view.sendSubviewToBack(viewBottom)
     }
     
     private func configureNavBarActions() {
@@ -58,7 +74,7 @@ final class NewAvPlayerViewController: AVPlayerViewController {
         
         let navbarTitle = UILabel()
         navbarTitle.textColor = .white
-        navbarTitle.text = localized(.timelineHeader)
+        navbarTitle.text = String(format: localized(.timelineHeader), Int(Date().getYear())) 
         navbarTitle.font = .appFont(.medium, size: 16)
         navbarTitle.minimumScaleFactor = 0.5
         navbarTitle.adjustsFontSizeToFitWidth = true
