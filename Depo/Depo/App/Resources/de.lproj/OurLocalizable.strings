@@ -2136,7 +2136,7 @@ then {11,99 TRY/Month}*/
 "send_print_button" = "Zum Drucken Senden";
 "add_address" = "Adresse Hinzufügen";
 "send_print_popup_title" = "Ihre ausgewählten Fotos sind bereit zum Drucken";
-"send_print_popup_address" = "Die gedruckten Fotos werden kostenlos an die Adresse \"%@ Viertel %@ Straße Nr:%@ Wohnung:%@ %@/%@, %d\" geschickt.";
+"send_print_popup_address" = "Die gedruckten Fotos werden kostenlos an die Adresse \"%@ Viertel %@ Nr:%@ Wohnung:%@ %@/%@, %d\" geschickt.";
 "send_print_popup_info" = "Dieser Vorgang kann nicht mehr rückgängig gemacht werden, sobald er zum Druck gesendet wurde.";
 "address_title" = "Adresse Titel";
 "address_city" = "Stadt";
@@ -2165,7 +2165,6 @@ then {11,99 TRY/Month}*/
 "order_delivered_cargo" = "Ihre Bestellung wurde versandt";
 "order_delivered" = "Ihre Bestellung wurde ausgeliefert";
 "order_undelivered" = "Ihre Bestellung konnte nicht zugestellt werden";
-"grace_banner_paycell_text" = "";
 "order_detail_popup_name" = "Auftragsverfolgung Drucken";
 "print_order_number" = "Bestellnummer: %@";
 "print_cargo_number" = "Bestellnummer für die Lieferung: %@";
@@ -2204,3 +2203,5 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "Das Limit für den Fotodruck wurde überschritten.";
 "order_not_delivered" = "Bestellung konnte nicht zum Druck übertragen werden";
 "order_not_delivered_detail" = "Ihre Bestellung konnte aus technischen Gründen nicht zum Druck übertragen werden. Bitte geben Sie einen neuen Druckauftrag auf.";
+"grace_banner_paycell_text" = "";
+"sync_page_offer_pop_up" = "";

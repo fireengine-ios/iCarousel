@@ -286,7 +286,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
                 DispatchQueue.toMain {
                     self?.output.failed(with: errorResponse)
                 }
-        })
+            }, isLogin: false)
     }
         
     

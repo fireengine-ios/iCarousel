@@ -10,6 +10,7 @@ import Foundation
 
 struct SubscriptionPath {
     static let activeSubscription = "account/activeSubscriptionList"
+    static let activeSubscriptionV2 = "account/activeSubscriptionList?includeSardisSubscriptions=false&includeSardisPrice=false"
 //    static let currentSubscription = "/api/account/currentSubscription" /// MAYBE WILL BE NEED
 //    static let cancelSubscription = "/api/account/cancelSubscription" /// MAYBE WILL BE NEED
 }
@@ -19,7 +20,11 @@ class ActiveSubscriptionParameters: BaseRequestParametrs {
         return URL(string: SubscriptionPath.activeSubscription, relativeTo: super.patch)!
     }
 }
-
+class ActiveSubscriptionV2Parameters: BaseRequestParametrs {
+    override var patch: URL {
+        return URL(string: SubscriptionPath.activeSubscriptionV2, relativeTo: super.patch)!
+    }
+}
 /// MAYBE WILL BE NEED
 //class CurrentSubscriptionParameters: BaseRequestParametrs {
 //    override var patch: URL {

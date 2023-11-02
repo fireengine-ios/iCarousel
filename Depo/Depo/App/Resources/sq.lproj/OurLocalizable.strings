@@ -2179,7 +2179,7 @@ then {11,99 TRY/Month}*/
 "send_print_button" = "Dërgo Për Të Shtypur";
 "add_address" = "Shtoni Adresën";
 "send_print_popup_title" = "Fotot Tuaja Të Zgjedhura Janë Gati Për Shtypje";
-"send_print_popup_address" = "Fotografitë e printuara do të dërgohen pa pagesë në adresën \"%@ Tremujori %@ Rruga Nr:%@ Apartament:%@ %@/%@, %d\".";
+"send_print_popup_address" = "Fotografitë e printuara do të dërgohen pa pagesë në adresën \"%@ Tremujori %@ Nr:%@ Apartament:%@ %@/%@, %d\".";
 "send_print_popup_info" = "Pasi të dërgohet në shtyp, ky proces nuk mund të anulohet.";
 "address_title" = "Titulli I Adresës";
 "address_city" = "Qyteti";
@@ -2208,7 +2208,6 @@ then {11,99 TRY/Month}*/
 "order_delivered_cargo" = "Porosia Juaj Është Dërguar";
 "order_delivered" = "Porosia Juaj Është Dorëzuar";
 "order_undelivered" = "Porosia Juaj Nuk Mund Të Dorëzohet";
-"grace_banner_paycell_text" = "";
 "order_detail_popup_name" = "Ndjekja E Një Porosie Të Shtypur";
 "print_order_number" = "Numri I Porosisë: %@";
 "print_cargo_number" = "Numri I Dorëzimit Të Porosisë: %@";
@@ -2247,3 +2246,5 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "Kufiri i fotografisë tejkaluar.";
 "order_not_delivered" = "Porosia nuk mund të dorëzohej për printim";
 "order_not_delivered_detail" = "Porosia juaj nuk mund të dorëzohej në printim për arsye teknike. Ju lutemi dërgoni përsëri një printim të ri.";
+"grace_banner_paycell_text" = "";
+"sync_page_offer_pop_up" = "";
