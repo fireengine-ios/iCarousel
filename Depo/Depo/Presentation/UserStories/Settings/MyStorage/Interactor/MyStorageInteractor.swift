@@ -288,6 +288,33 @@ extension MyStorageInteractor: MyStorageInteractorInput {
                 }
         })
     }
+    
+    func getActiveSubscriptionForBanner() {
+        subscriptionsService.activeSubscriptions(
+            success: { [weak self] response in
+                guard let subscriptionsResponse = response as? ActiveSubscriptionResponse else {
+                    return
+                }
+                let offersList = subscriptionsResponse.list
+                DispatchQueue.main.async {
+                    self?.output.getActiveSubscriptionForBanner(offers: offersList)
+                }
+            }, fail: { value in })
+    }
+    
+    func getAvailableOffersForBanner() {
+        accountService.availableOffersWithLanguage(affiliate: self.affiliate) { [weak self] (result) in
+            switch result {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    let convertedResponse = self?.convertToSubscriptionPlan(offers: response, accountType: .turkcell)
+                    self?.output.getAvailableOffersForBanner(offers: convertedResponse ?? [])
+                }
+            case .failed(_):
+                break
+            }
+        }
+    }
         
     
     func restorePurchases() {

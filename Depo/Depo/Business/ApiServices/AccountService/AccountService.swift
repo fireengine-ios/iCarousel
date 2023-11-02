@@ -17,6 +17,7 @@ protocol AccountServicePrl {
     func featurePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
     func newFeaturePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
     func availableOffers(affiliate: String?, handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
+    func availableOffersWithLanguage(affiliate: String?, handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
     func getFeatures(handler: @escaping (ResponseResult<FeaturesResponse>) -> Void)
     func autoSyncStatus(syncSettings : AutoSyncSettings? , handler: @escaping ResponseVoid)
     func getSettingsInfoPermissions(handler: @escaping (ResponseResult<SettingsInfoPermissionsResponse>) -> Void)
@@ -121,6 +122,27 @@ class AccountService: BaseRequestService, AccountServicePrl {
 
         sessionManager
             .request(RouteRequests.Account.Permissions.availableOffers, parameters: params)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    let offersArray = PackageModelResponse.array(from: data)
+                    handler(.success(offersArray))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+
+    }
+    
+    func availableOffersWithLanguage(affiliate: String?, handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void) {
+        var params: Parameters = [:]
+        if let affiliate = affiliate {
+            params["affiliate"] = affiliate
+        }
+        let url = String(format: RouteRequests.Account.Permissions.availableOffersWithLanguage, Device.locale)
+        sessionManager
+            .request(url, parameters: params)
             .customValidate()
             .responseData { response in
                 switch response.result {

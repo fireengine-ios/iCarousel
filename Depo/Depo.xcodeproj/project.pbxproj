@@ -1471,6 +1471,10 @@
 		890349C6298441D300747D1D /* DiscoverCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893F45EF296D631F006FFECA /* DiscoverCollectionViewLayout.swift */; };
 		890349C7298441D400747D1D /* DiscoverCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893F45EF296D631F006FFECA /* DiscoverCollectionViewLayout.swift */; };
 		890349C8298441D600747D1D /* DiscoverCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893F45EF296D631F006FFECA /* DiscoverCollectionViewLayout.swift */; };
+		890B5FBE2AF26BCD00A68968 /* HighlightedPackageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890B5FBD2AF26BCD00A68968 /* HighlightedPackageView.swift */; };
+		890B5FBF2AF26BCD00A68968 /* HighlightedPackageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890B5FBD2AF26BCD00A68968 /* HighlightedPackageView.swift */; };
+		890B5FC02AF26BCD00A68968 /* HighlightedPackageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890B5FBD2AF26BCD00A68968 /* HighlightedPackageView.swift */; };
+		890B5FC12AF26BCD00A68968 /* HighlightedPackageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890B5FBD2AF26BCD00A68968 /* HighlightedPackageView.swift */; };
 		890DDC582316B0D80022F7D2 /* TwoFactorChallengeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890DDC562316B0D70022F7D2 /* TwoFactorChallengeRouter.swift */; };
 		890DDC592316B0D80022F7D2 /* TwoFactorChallengeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890DDC562316B0D70022F7D2 /* TwoFactorChallengeRouter.swift */; };
 		890F737022EEFA3E00BA0020 /* VerifyEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */; };
@@ -11128,6 +11132,7 @@
 		8831E41C046C33B2DA7E6FFE /* SettingsViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsViewInput.swift; sourceTree = "<group>"; };
 		8865CA17ED69B6F3761308E1 /* Pods-LifeTech_BilloWidgetExtension.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_BilloWidgetExtension.enterprise.xcconfig"; path = "Target Support Files/Pods-LifeTech_BilloWidgetExtension/Pods-LifeTech_BilloWidgetExtension.enterprise.xcconfig"; sourceTree = "<group>"; };
 		88F2BB2471220C9297301750 /* Pods-LifeboxUnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxUnitTests.release.xcconfig"; path = "Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests.release.xcconfig"; sourceTree = "<group>"; };
+		890B5FBD2AF26BCD00A68968 /* HighlightedPackageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightedPackageView.swift; sourceTree = "<group>"; };
 		890DDC562316B0D70022F7D2 /* TwoFactorChallengeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TwoFactorChallengeRouter.swift; path = Depo/Presentation/UserStories/Start/TwoFactorChallenge/Router/TwoFactorChallengeRouter.swift; sourceTree = SOURCE_ROOT; };
 		890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyEmailPopUp.swift; sourceTree = "<group>"; };
 		890F736E22EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseEmailVerificationPopUp.xib; sourceTree = "<group>"; };
@@ -15208,6 +15213,7 @@
 			isa = PBXGroup;
 			children = (
 				52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */,
+				890B5FBD2AF26BCD00A68968 /* HighlightedPackageView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -27098,6 +27104,7 @@
 				989BDE4D22F47B1E001DDEB2 /* SpotifyOverwritePopup.swift in Sources */,
 				8C0E8D681FDEBDFF00789C91 /* AlertFilesActionsSheetInteractorInput.swift in Sources */,
 				89EA4F7A240902C400A2C543 /* PackagesTableViewCell.swift in Sources */,
+				890B5FBE2AF26BCD00A68968 /* HighlightedPackageView.swift in Sources */,
 				B5D42C24254C00B7002E4997 /* DocumentDownloadOperation.swift in Sources */,
 				07E7A6852859FBF5005BBD4C /* AlertFilesAction.swift in Sources */,
 				8C0E8D6C1FDEBDFF00789C91 /* PackagesConfigurator.swift in Sources */,
@@ -30610,6 +30617,7 @@
 				CE784C6522A685FB00662219 /* UploadFromLifeBoxRouter.swift in Sources */,
 				CE784C6622A685FB00662219 /* TabBarActionHandler.swift in Sources */,
 				CE784C6722A685FB00662219 /* BaseViewController.swift in Sources */,
+				890B5FC02AF26BCD00A68968 /* HighlightedPackageView.swift in Sources */,
 				CE784C6822A685FB00662219 /* FeedbackViewInteractorInput.swift in Sources */,
 				CE784C6922A685FB00662219 /* UIImage+Orientation.swift in Sources */,
 				B5B01A7423FA7CB900B03426 /* ResumableUploadInfoService.swift in Sources */,
@@ -31260,6 +31268,7 @@
 				CF8B64EF23CBC9D70021B021 /* Factory.swift in Sources */,
 				89F99F7929B5F62700F99CB5 /* CreateCollageSelectionSegmentedView.swift in Sources */,
 				CF8B64F023CBC9D70021B021 /* PeriodicContactSyncViewOutput.swift in Sources */,
+				890B5FBF2AF26BCD00A68968 /* HighlightedPackageView.swift in Sources */,
 				CF8B64F123CBC9D70021B021 /* UploadFromLifeBoxRouterInput.swift in Sources */,
 				CF8B64F223CBC9D70021B021 /* HelpAndSupportInteractorOutput.swift in Sources */,
 				89D1EBEC23EC3BF000092031 /* UIApplication+Display.swift in Sources */,
@@ -34228,6 +34237,7 @@
 				0305A33223D5C477004D1EC7 /* SmashService.swift in Sources */,
 				CF8B6F9E23CBCA280021B021 /* SelectNameViewController.swift in Sources */,
 				895BAB802AB480B100920DF9 /* DistrictResponse.swift in Sources */,
+				890B5FC12AF26BCD00A68968 /* HighlightedPackageView.swift in Sources */,
 				CF8B6F9F23CBCA280021B021 /* SelectNameModuleInput.swift in Sources */,
 				CF8B6FA023CBCA280021B021 /* SelectNamePresenter.swift in Sources */,
 				CF8B6FA123CBCA280021B021 /* PVViewerController.swift in Sources */,

@@ -42,6 +42,7 @@ final class MyStoragePresenter {
     private var allOffers: [SubscriptionPlanBaseResponse] = []
     private(set) var displayableOffers: [SubscriptionPlan] = []
     var availableOffers: [SubscriptionPlan] = []
+    private var highlightedPackage: PackageModelResponse?
 
     init(title: String) {
         self.title = title
@@ -85,6 +86,8 @@ extension MyStoragePresenter: MyStorageViewOutput {
         startActivity()
         interactor.getAccountType()
         interactor.getAccountTypePackages()
+        interactor.getActiveSubscriptionForBanner()
+        interactor.getAvailableOffersForBanner()
     }
     
     func viewWillAppear() {
@@ -287,6 +290,26 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
         view?.reloadData()
     }
     
+    private func isPaidPackage(item: [SubscriptionPlanBaseResponse]) -> Bool {
+        var isPriceForPayed: Bool = false
+        for value in item {
+            let price = value.subscriptionPlanPrice ?? 0
+            if price > 0 {
+                isPriceForPayed = true
+            }
+        }
+        return isPriceForPayed
+    }
+    
+    func getActiveSubscriptionForBanner(offers: [SubscriptionPlanBaseResponse]) {
+        let isPaidPackage = isPaidPackage(item: offers)
+        view?.getIsPaidPackage(isPaidPackage: isPaidPackage)
+    }
+    
+    func getAvailableOffersForBanner(offers: [SubscriptionPlan]) {
+        view?.getHighlightedPackage(offers: offers)
+    }
+    
     private func sortAvailableOffers(offers: [SubscriptionPlan]) {
         availableOffers = offers.sorted(by: { $0.quota < $1.quota })
         
@@ -334,8 +357,8 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     }
 
     func successedGotUserAuthority() {
-        view?.checkIfPremiumBannerValid()
-        view?.stopActivityIndicator()
+        //view?.checkIfPremiumBannerValid()
+        //view?.stopActivityIndicator()
     }
     
     
