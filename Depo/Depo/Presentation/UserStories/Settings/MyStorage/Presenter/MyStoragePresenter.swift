@@ -348,6 +348,12 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
         }
     }
     
+    func failAlreadySubscribed(with value: ValidateApplePurchaseAlreadySubscribedValue?) {
+        stopActivity()
+        let message = "\(value?.maskedEmail ?? "") \n\(value?.maskedMsisdn ?? "") \n\(TextConstants.validatePurchaseAlreadySubscribedText)"
+        router?.display(error: message)
+    }
+    
     func successed(allOffers: [PackageModelResponse]) {
         accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)  ?? .all
         let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)

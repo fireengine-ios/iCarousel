@@ -124,7 +124,11 @@ extension MyStorageInteractor: MyStorageInteractorInput {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self?.output.failedUsage(with: ErrorResponse.string(status.description))
+                    if status == .alreadySubscribed {
+                        self?.output.failAlreadySubscribed(with: response.alreadySubscriedValue)
+                    } else {
+                        self?.output.failedUsage(with: ErrorResponse.string(status.description))
+                    }
                 }
             }
             }, fail: { [weak self] errorResponse in
@@ -324,7 +328,11 @@ extension MyStorageInteractor: MyStorageInteractorInput {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self?.output.failed(with: ErrorResponse.string(status.description))
+                    if status == .alreadySubscribed {
+                        self?.output.failAlreadySubscribed(with: response.alreadySubscriedValue)
+                    } else {
+                        self?.output.failed(with: ErrorResponse.string(status.description))
+                    }
                 }
             }
             
@@ -352,7 +360,12 @@ extension MyStorageInteractor: MyStorageInteractorInput {
                 debugLog("validateRestorePurchaseFailed: \(status.description)")
                 
                 DispatchQueue.main.async {
-                    self?.output.failed(with: ErrorResponse.string(status.description))
+                    if status == .alreadySubscribed {
+                        self?.output.failAlreadySubscribed(with: response.alreadySubscriedValue)
+                    } else {
+                        self?.output.failed(with: ErrorResponse.string(status.description))
+
+                    }
                 }
             } else {
                 DispatchQueue.toMain {
