@@ -509,7 +509,7 @@
 "Successful purchase." = "نجحت عملية الشراء.";
 "Invalid purchase. AppStore does not verify purchase for the given parameters." = "شراء غير صالح. لم يتعرّف AppStore على الشراء المُعطّى بهذه المعلمات.";
 "A temporary error has occurred due to technical reasons." = "حدث خطأ مؤقت بسبب خلل تقني.";
-"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "إن الاشتراك المتعلق بهذا الشراء مُنشَّط من قبل باسم مستخدم آخر للايف بوكس. يرجى الانتباه إلى أن استعمال حسابات لايف بوكس مختلفة بعرّفات Apple/Google نفسها قد يسبب الوضع الحالي.";
+"validate_purchase_already_subscribed_text" = "إن الاشتراك المتعلق بهذا الشراء مُنشَّط من قبل باسم مستخدم آخر للايف بوكس. يرجى الانتباه إلى أن استعمال حسابات لايف بوكس مختلفة بعرّفات Apple/Google نفسها قد يسبب الوضع الحالي.";
 
 /*Please revise this sentence.*/
 "Shows that a response operation is done for the given receipt." = "..";

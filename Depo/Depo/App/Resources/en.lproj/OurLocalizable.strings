@@ -527,7 +527,7 @@
 "Successful purchase." = "Successful purchase.";
 "Invalid purchase. AppStore does not verify purchase for the given parameters." = "Invalid purchase. AppStore does not verify purchase for the given parameters.";
 "A temporary error has occurred due to technical reasons." = "A temporary error has occurred due to technical reasons.";
-"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation.";
+"validate_purchase_already_subscribed_text" = "Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation.";
 "Shows that a response operation is done for the given receipt." = "Shows that a response operation is done for the given receipt.";
 "Auto Upload is off." = "Auto Upload is off";
 "Photos and videos waiting to be synced" = "Photos and videos waiting to be synced";

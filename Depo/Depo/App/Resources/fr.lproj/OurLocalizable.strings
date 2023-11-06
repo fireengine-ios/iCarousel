@@ -636,7 +636,7 @@ English is correct. GSM may be confusing to the customer*/
 /*Fuzzy*/
 "Invalid purchase. AppStore does not verify purchase for the given parameters." = "Achat invalide. L'AppStore ne vérifie pas l'achat pour les paramètres donnés.";
 "A temporary error has occurred due to technical reasons." = "Une erreur temporaire est survenue pour des raisons techniques.";
-"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Le compte associé à cet achat est déjà activé pour un autre utilisateur de lifebox. L'utilisation de comptes différents avec la même ID Apple ou Google peut entraîner cette situation.";
+"validate_purchase_already_subscribed_text" = "Le compte associé à cet achat est déjà activé pour un autre utilisateur de lifebox. L'utilisation de comptes différents avec la même ID Apple ou Google peut entraîner cette situation.";
 
 /*Fuzzy*/
 "Shows that a response operation is done for the given receipt." = "Cela montre qu’une opération de réponse est effectuée pour le reçu donné.";

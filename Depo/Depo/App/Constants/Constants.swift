@@ -970,7 +970,7 @@ struct TextConstants {
     static let validatePurchaseSuccessText = localized("Successful purchase.")
     static let validatePurchaseInvalidText = localized("Invalid purchase. AppStore does not verify purchase for the given parameters.")
     static let validatePurchaseTemporaryErrorText = localized("A temporary error has occurred due to technical reasons.")
-    static let validatePurchaseAlreadySubscribedText = localized("Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation.")
+    static let validatePurchaseAlreadySubscribedText = localized("validate_purchase_already_subscribed_text")
     static let validatePurchaseRestoredText = localized("Shows that a response operation is done for the given receipt.")
     
     // MARK: - OTP

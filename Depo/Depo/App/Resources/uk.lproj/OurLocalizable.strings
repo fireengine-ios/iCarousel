@@ -499,7 +499,7 @@
 "Successful purchase." = "Успішна покупка.";
 "Invalid purchase. AppStore does not verify purchase for the given parameters." = "Недійсна покупка. AppStore не перевіряє покупку за заданими параметрами.";
 "A temporary error has occurred due to technical reasons." = "Тимчасова помилка сталася через технічні причини.";
-"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Підписка пов'язана з цією покупкою вже активована для іншого користувача lifebox. Зверніть увагу, що в цій ситуації можуть бути використані різні облікові записи lifebox з таким самим Apple або Google ID.";
+"validate_purchase_already_subscribed_text" = "Підписка пов'язана з цією покупкою вже активована для іншого користувача lifebox. Зверніть увагу, що в цій ситуації можуть бути використані різні облікові записи lifebox з таким самим Apple або Google ID.";
 "Shows that a response operation is done for the given receipt." = "Показує, що операція відповіді виконана для даної квитанції.";
 "Auto Upload is off." = "Автозавантаження вимкнено";
 "Photos and videos waiting to be synced" = "Фото та відео, які очікують на синхронізацію";
