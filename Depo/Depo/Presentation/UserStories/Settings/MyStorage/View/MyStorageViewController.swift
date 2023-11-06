@@ -235,7 +235,6 @@ extension MyStorageViewController: MyStorageViewInput {
             let model = value.model as? PackageModelResponse
             if model?.name == packageName {
                 highlightedPackageIndex = index
-                print("aaaaaaaaaaaa \(highlightedPackageIndex)")
             }
         }
         

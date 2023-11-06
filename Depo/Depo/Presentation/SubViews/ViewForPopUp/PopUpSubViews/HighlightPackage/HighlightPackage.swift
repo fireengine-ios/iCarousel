@@ -119,7 +119,8 @@ final class HighlightPackage: BaseCardView {
     }
     
     @IBAction func onPruchaseButtonTap(_ sender: Any) {
-        print("aaaaaaaaaaaa")
+        let router = RouterVC()
+        router.pushViewController(viewController: router.myStorage(usageStorage: nil, affiliate: "highlighted"))
     }
     
     
