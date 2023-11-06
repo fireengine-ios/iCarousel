@@ -1809,6 +1809,8 @@
 		89B359372AD67A77007920B7 /* ForYouTimelineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89B359352AD67A77007920B7 /* ForYouTimelineTableViewCell.xib */; };
 		89B359382AD67A77007920B7 /* ForYouTimelineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89B359352AD67A77007920B7 /* ForYouTimelineTableViewCell.xib */; };
 		89B359392AD67A77007920B7 /* ForYouTimelineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89B359352AD67A77007920B7 /* ForYouTimelineTableViewCell.xib */; };
+		89B40C872AF627C20033147B /* HighlightPackage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89B40C862AF627C20033147B /* HighlightPackage.xib */; };
+		89B40C892AF627D20033147B /* HighlightPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B40C882AF627D20033147B /* HighlightPackage.swift */; };
 		89B9D17B29BEFC2100C73307 /* CreateCollageDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B9D17A29BEFC2100C73307 /* CreateCollageDetailController.swift */; };
 		89B9D17C29BEFC2100C73307 /* CreateCollageDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B9D17A29BEFC2100C73307 /* CreateCollageDetailController.swift */; };
 		89B9D17D29BEFC2100C73307 /* CreateCollageDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B9D17A29BEFC2100C73307 /* CreateCollageDetailController.swift */; };
@@ -11228,6 +11230,8 @@
 		89ABFDCF29B9F34D000237A4 /* CreateCollageBottomBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageBottomBarManager.swift; sourceTree = "<group>"; };
 		89B359302AD67A5E007920B7 /* ForYouTimelineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouTimelineTableViewCell.swift; sourceTree = "<group>"; };
 		89B359352AD67A77007920B7 /* ForYouTimelineTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForYouTimelineTableViewCell.xib; sourceTree = "<group>"; };
+		89B40C862AF627C20033147B /* HighlightPackage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HighlightPackage.xib; sourceTree = "<group>"; };
+		89B40C882AF627D20033147B /* HighlightPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightPackage.swift; sourceTree = "<group>"; };
 		89B9D17A29BEFC2100C73307 /* CreateCollageDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageDetailController.swift; sourceTree = "<group>"; };
 		89C0AD592A8E6D420014D674 /* PhotoPrintInfoPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintInfoPopup.swift; sourceTree = "<group>"; };
 		89C0AD5F2A8E6DD20014D674 /* PhotoPrintInfoPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoPrintInfoPopup.xib; sourceTree = "<group>"; };
@@ -16975,6 +16979,7 @@
 		7CE825B81F823CAD00356AD2 /* PopUpSubViews */ = {
 			isa = PBXGroup;
 			children = (
+				89B40C822AF627890033147B /* HighlightPackage */,
 				0708C77C267725B000680ED6 /* PhotoPrintCard */,
 				3A58C48D2636A6DD00570811 /* InvitationCard */,
 				734CA110244D62F40076F6A7 /* DocumentsAlbumCard */,
@@ -17386,6 +17391,15 @@
 				8991B4BA2A6E6FBC00B94A2D /* PhotoPrintPhotoCell.swift */,
 			);
 			path = PhotoPrintSelection;
+			sourceTree = "<group>";
+		};
+		89B40C822AF627890033147B /* HighlightPackage */ = {
+			isa = PBXGroup;
+			children = (
+				89B40C862AF627C20033147B /* HighlightPackage.xib */,
+				89B40C882AF627D20033147B /* HighlightPackage.swift */,
+			);
+			path = HighlightPackage;
 			sourceTree = "<group>";
 		};
 		89C0AD452A8E3A520014D674 /* Popups */ = {
@@ -23850,6 +23864,7 @@
 				98A86D4E23A2208800438225 /* HiddenPhotosViewController.xib in Resources */,
 				894328052AB3063200778ED3 /* PhotoPrintNoRightPopup.xib in Resources */,
 				B50B4A6C220C27C20056FC86 /* SocialAccountRemoveConnectionCell.xib in Resources */,
+				89B40C872AF627C20033147B /* HighlightPackage.xib in Resources */,
 				3A9C2822265285A200EFADE9 /* AcceptedInvitationViewController.xib in Resources */,
 				89C0AD6E2A8F4F210014D674 /* PhotoPrintMissingPhotoPopup.xib in Resources */,
 				A2EF976C21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib in Resources */,
@@ -26753,6 +26768,7 @@
 				8C0E8CAA1FDEBDFF00789C91 /* SwipeableCardCell.swift in Sources */,
 				8C0E8CAB1FDEBDFF00789C91 /* LoginPresenter.swift in Sources */,
 				9823196324F3A1E600FD16E2 /* PreparedFiltersView.swift in Sources */,
+				89B40C892AF627D20033147B /* HighlightPackage.swift in Sources */,
 				B5AB2F072204356400E3AF23 /* InstaPickSmartAlbumCell.swift in Sources */,
 				8C0E8CAE1FDEBDFF00789C91 /* AutoSyncViewInput.swift in Sources */,
 				8C0E8CB01FDEBDFF00789C91 /* VisualMusicPlayerRouter.swift in Sources */,

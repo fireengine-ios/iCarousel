@@ -102,7 +102,7 @@ extension DiscoverPresenter: DiscoverInteractorOutput {
     
     func fillCollectionView(isReloadAll: Bool) {
         if !AuthoritySingleton.shared.isBannerShowedForPremium {
-            CardsManager.default.startPremiumCard()
+            //CardsManager.default.startPremiumCard()
         }
         
         AuthoritySingleton.shared.hideBannerForSecondLogin()

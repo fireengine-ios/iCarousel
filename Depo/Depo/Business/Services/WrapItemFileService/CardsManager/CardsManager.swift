@@ -64,6 +64,7 @@ class CardsManager: NSObject {
     private var progresForOperation = [OperationType: Progress]()
     private var homeCardsObjects = [HomeCardResponse]()
     private var deletedCards = Set<OperationType>()
+    var highlightedOffer: SubscriptionPlan?
     
     var cardsThatStartedByDevice: [OperationType] {
         return [.upload, .sync, .download, .sharedWithMeUpload, .prepareQuickScroll, .autoUploadIsOff, .waitingForWiFi, .freeAppSpace, .freeAppSpaceLocalWarning]
@@ -348,6 +349,7 @@ class CardsManager: NSObject {
     }
     
     class func cardViewForOperaion(type: OperationType) -> BaseCardView {
+        let storageVars: StorageVars = factory.resolve()
         let serverObject = CardsManager.default.serverOperationFor(type: type)
         let cardView: BaseCardView
         debugLog("cardViewForOperaion: type is \(type.rawValue)")
@@ -393,9 +395,15 @@ class CardsManager: NSObject {
         case .launchCampaign:
             cardView = LaunchCampaignCard.initFromNib()
         case .premium:
-            let popUp = PremiumInfoCard.initFromNib()
-            popUp.configurateWithType(viewType: .premium)
-            cardView = popUp
+            if !storageVars.discoverHighlightShows {
+                let popUp = PremiumInfoCard.initFromNib()
+                popUp.configurateWithType(viewType: .premium)
+                cardView = popUp
+            } else {
+                let popUp = HighlightPackage.initFromNib()
+                popUp.configurateWithType(item: CardsManager.default.highlightedOffer)
+                cardView = popUp
+            }
         case .instaPick:
             cardView = InstaPickCard.initFromNib()
         case .tbMatik:
