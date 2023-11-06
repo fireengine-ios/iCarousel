@@ -2183,7 +2183,7 @@ then {11,99 TRY/Month}*/
 "more_photo_right" = "%d fotoğraf gönderme hakkın daha var. Devam etmek istediğine emin misin?";
 "no_more_photo_right" = "%d’ten fazla fotoğraf seçtin. Devam edebilmek için azaltın.";
 "timeline_header" = "%d en güzel anıları";
-"timeline_description" = "{timeline_year} yılının en güzel anılarını senin için derledik. Hemen keşfet.";
+"timeline_description" = "%d yılının en güzel anılarını senin için derledik. Hemen keşfet.";
 "selected_for_print" = "Baskı için seçilenler";
 "print_cancel_popup_question" = "İptal etmek isteğine emin misin?";
 "print_cancel_popup_info" = "Basılı albüm için seçtiğin tüm fotoğraf düzenlemelerin silinecektir. Yeniden fotoğraf seçmen ve yeniden düzenlemen gereklidir.";
