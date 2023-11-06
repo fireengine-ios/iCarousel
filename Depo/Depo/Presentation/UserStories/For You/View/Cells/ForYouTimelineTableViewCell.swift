@@ -39,12 +39,11 @@ class ForYouTimelineTableViewCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var closeImageView: UIImageView! {
+    @IBOutlet weak var closeButton: UIButton! {
         willSet {
-            newValue.image = Image.iconCancelBorder.image
-            newValue.isUserInteractionEnabled = true
-            let tapImage = UITapGestureRecognizer(target: self, action: #selector(closeImageTapped))
-            newValue.addGestureRecognizer(tapImage)
+            newValue.setTitle("", for: .normal)
+            newValue.setImage(Image.iconCancelBorder.image.withRenderingMode(.alwaysTemplate), for: .normal)
+            newValue.tintColor = AppColor.label.color
         }
     }
     
@@ -127,9 +126,10 @@ class ForYouTimelineTableViewCell: UITableViewCell {
         showTimelineVideo()
     }
     
-    @objc private func closeImageTapped() {
+    @IBAction func closeButtonTap(_ sender: Any) {
         delegate?.setTimelineNil()
     }
+    
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         switch type {

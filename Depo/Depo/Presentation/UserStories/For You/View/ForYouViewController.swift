@@ -46,6 +46,8 @@ final class ForYouViewController: BaseViewController {
     @objc func getUpdateDataHiddenFav(){
         output.getUpdateData(for: ForYouSections.hidden)
         output.getUpdateData(for: ForYouSections.favorites)
+        output.getHeightForRow(at: ForYouSections.timeline)
+        fullReload()
     }
     
     private func setupRefresher() {

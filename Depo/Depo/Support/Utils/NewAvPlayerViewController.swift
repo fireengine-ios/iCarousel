@@ -46,9 +46,13 @@ final class NewAvPlayerViewController: AVPlayerViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        view.subviews.first?.subviews[1].subviews[0].isHidden = true //x button hide
-        view.subviews.first?.subviews[1].subviews[5].isHidden = true //sound button hide
-        view.backgroundColor = UIColor.black.withAlphaComponent(0)
+        if view.subviews.first?.subviews.count ?? 0 > 1 {
+            if view.subviews.first?.subviews[1].subviews.count ?? 0 > 4 {
+                view.subviews.first?.subviews[1].subviews[0].isHidden = true //x button hide
+                view.subviews.first?.subviews[1].subviews[5].isHidden = true //sound button hide
+                view.backgroundColor = UIColor.black.withAlphaComponent(0)
+            }
+        }
         addViewsToVideo()
         hideSpinner()
     }

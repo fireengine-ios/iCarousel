@@ -289,6 +289,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     service.forYouDeleteTimelineCard(with: id, handler: { [weak self] result in
                         switch result {
                         case .success(_):
+                            NotificationCenter.default.post(name: .foryouGetUpdateData, object: nil)
                             controller?.hideSpinner()
                             controller?.dismiss(animated: false)
                         case .failed(let error):
