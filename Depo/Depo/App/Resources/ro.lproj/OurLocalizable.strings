@@ -499,7 +499,7 @@
 "Successful purchase." = "Achiziție reușită.";
 "Invalid purchase. AppStore does not verify purchase for the given parameters." = "Achiziție nevalidată. AppStore nu verifică achiziția cu parametrii indicați.";
 "A temporary error has occurred due to technical reasons." = "Din motive tehnice a apărut o eroare temporară.";
-"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Abonamentul legat de această achiziție este deja activat pentru un alt utilizator lifebox. Rețineți că această situație poate apărea în cazul folosirii a diferitor conturi lifebox cu același Apple sau Google ID.";
+"validate_purchase_already_subscribed_text" = "Abonamentul legat de această achiziție este deja activat pentru un alt utilizator lifebox. Rețineți că această situație poate apărea în cazul folosirii a diferitor conturi lifebox cu același Apple sau Google ID.";
 "Shows that a response operation is done for the given receipt." = "Arată că operațiunea de răspuns pentru incasarea primită este gata ";
 "Auto Upload is off." = "Încărcarea Automată este deconectată.";
 "Photos and videos waiting to be synced" = "Fotografii și videoclipuri în așteptarea sincronizării";

@@ -505,7 +505,7 @@
 "Successful purchase." = "Satın alma işlemi başarılı";
 "Invalid purchase. AppStore does not verify purchase for the given parameters." = "Geçersiz satın alma. AppStore, verilen bilgiler doğrultusunda satın alım işlemini doğrulamıyor.";
 "A temporary error has occurred due to technical reasons." = "Teknik sebeplerden dolayı geçici bir hata meydana geldi.";
-"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Bu satın alıma ilişkin abonelik hali hazırda başka bir lifebox kullanıcısı için aktifleştirilmiş durumda. Farklı lifebox hesaplarının aynı Apple veya Google ID ile kullanılmasının bu tarz durumlara yol açabileceğini unutmayın.";
+"validate_purchase_already_subscribed_text" = "Bu satın alıma ilişkin abonelik hali hazırda başka bir lifebox kullanıcısı için aktifleştirilmiş durumda. Farklı lifebox hesaplarının aynı Apple veya Google ID ile kullanılmasının bu tarz durumlara yol açabileceğini unutmayın.";
 "Shows that a response operation is done for the given receipt." = "Belirtilen tarife için bir yanıt işleminin yapıldığını gösterir.";
 "Auto Upload is off." = "Otomatik yükleme kapalı.";
 "Photos and videos waiting to be synced" = "Fotoğraflar ve videolar yedeklenmeyi bekliyor.";

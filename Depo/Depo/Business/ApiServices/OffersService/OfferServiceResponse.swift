@@ -129,14 +129,24 @@ final class ValidateApplePurchaseResponse: ObjectRequestResponse {
     struct ValidateApplePurchaseConstants {
         static let status = "status"
         static let value = "value"
+        static let maskedEmail = "maskedEmail"
+        static let maskedMsisdn = "maskedMsisdn"
     }
     
     var status: ValidatePurchaseType?
     var value: String?
-    
+    var maskedEmail: String?
+    var maskedMsisdn: String?
+    var alreadySubscriedValue: ValidateApplePurchaseAlreadySubscribedValue?
+
     override func mapping() {
         if let statusString = json?[ValidateApplePurchaseConstants.status].string {
             status = ValidatePurchaseType(rawValue: statusString)
+            if status == .alreadySubscribed {
+                let maskedEmail = json?[ValidateApplePurchaseConstants.value][ValidateApplePurchaseConstants.maskedEmail].string
+                let maskedMsisdn = json?[ValidateApplePurchaseConstants.value][ValidateApplePurchaseConstants.maskedMsisdn].string
+                alreadySubscriedValue = ValidateApplePurchaseAlreadySubscribedValue(maskedEmail: maskedEmail ?? "", maskedMsisdn: maskedMsisdn ?? "")
+            }
         }
         value = json?[ValidateApplePurchaseConstants.value].string
     }
@@ -184,4 +194,9 @@ final class SubmitPromocodeResponse: ObjectRequestResponse {
     override func mapping() {
         error = json?.string
     }
+}
+
+struct ValidateApplePurchaseAlreadySubscribedValue {
+    var maskedEmail: String
+    var maskedMsisdn: String
 }

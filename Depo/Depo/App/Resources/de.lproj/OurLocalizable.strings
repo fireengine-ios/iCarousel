@@ -499,7 +499,7 @@
 "Successful purchase." = "Erfolgreicher Kauf";
 "Invalid purchase. AppStore does not verify purchase for the given parameters." = "Ungültiger Kauf AppStore überprüft den Kauf für die angegebenen Parameter nicht.";
 "A temporary error has occurred due to technical reasons." = "Aus technischen Gründen ist ein temporärer Fehler aufgetreten.";
-"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Abonnement, das mit diesem Kauf verbunden ist, ist bereits für einen anderen Lifebox-Benutzer aktiviert. Beachten Sie, dass die Verwendung von verschiedenen Lifebox-Konten mit derselben Apple- oder Google-ID zu dieser Situation führen kann.";
+"validate_purchase_already_subscribed_text" = "Abonnement, das mit diesem Kauf verbunden ist, ist bereits für einen anderen Lifebox-Benutzer aktiviert. Beachten Sie, dass die Verwendung von verschiedenen Lifebox-Konten mit derselben Apple- oder Google-ID zu dieser Situation führen kann.";
 "Shows that a response operation is done for the given receipt." = "Zeigt an, dass eine Antwortoperation für den angegebenen Beleg ausgeführt wird.";
 "Auto Upload is off." = "Der automatische Upload ist deaktiviert.";
 "Photos and videos waiting to be synced" = "Fotos und Videos warten auf die Synchronisierung";

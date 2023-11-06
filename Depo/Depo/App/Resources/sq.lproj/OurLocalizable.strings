@@ -505,7 +505,7 @@
 "Successful purchase." = "Blerje e suksesshme";
 "Invalid purchase. AppStore does not verify purchase for the given parameters." = "Blerje e pavlefshme. AppStore nuk e verifikon blerjen për parametrat e dhëna.";
 "A temporary error has occurred due to technical reasons." = "Një gabim i përkohshëm ka ndodhur për arsye teknike.";
-"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Abonimi i lidhur me këtë blerje është i aktivizuar për një përdorues tjetër lifebox. Merrni parasysh që përdorimi I llogarive të ndryshme lifebox me të njëjtin ID të Apple apo Google mund të krijojë këtë situatë.";
+"validate_purchase_already_subscribed_text" = "Abonimi i lidhur me këtë blerje është i aktivizuar për një përdorues tjetër lifebox. Merrni parasysh që përdorimi I llogarive të ndryshme lifebox me të njëjtin ID të Apple apo Google mund të krijojë këtë situatë.";
 "Shows that a response operation is done for the given receipt." = "Tregon se një operacion është ndërmarrë si përgjigje e faturës së dhënë.";
 "Auto Upload is off." = "Ngarkimi automatik është i çaktivizuar";
 "Photos and videos waiting to be synced" = "Fotot dhe videot në pritje për t'u sinkronizuar";
