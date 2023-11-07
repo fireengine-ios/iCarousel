@@ -134,7 +134,7 @@ extension HomePagePresenter: HomePageInteractorOutput {
         
         let isPremium = AuthoritySingleton.shared.accountType.isPremium
         let storageVars: StorageVars = factory.resolve()
-        if !isPaidPackage {
+        if isPaidPackage {
             if !isPremium  {
                 storageVars.discoverHighlightShows = false
             }

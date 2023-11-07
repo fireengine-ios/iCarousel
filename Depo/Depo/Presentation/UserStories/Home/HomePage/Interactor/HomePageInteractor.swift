@@ -323,7 +323,7 @@ final class HomePageInteractor: HomePageInteractorInput {
                     self?.bannerCallMethodCount += 1
                     self?.setBannerPremiumOrHighlighted()
                 }
-            }, fail: { value in })
+            }, fail: { value in }, isLogin: false)
     }
     
     func getAvailableOffersForBanner() {
