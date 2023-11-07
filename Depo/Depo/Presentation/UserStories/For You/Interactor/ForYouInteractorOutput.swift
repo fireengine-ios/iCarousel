@@ -24,6 +24,7 @@ protocol ForYouInteractorOutput: AnyObject {
     func getCollages(data: [WrapData])
     func getPrintedPhotos(data: [GetOrderResponse])
     func getTimelineData(data: TimelineResponse)
+    func setTimelineNilForError()
     func getAlbums(data: [AlbumItem])
     func getPhotopicks(data: [InstapickAnalyze])
     func getCollageCards(data: [HomeCardResponse])

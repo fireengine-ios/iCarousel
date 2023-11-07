@@ -278,6 +278,10 @@ extension ForYouPresenter: ForYouInteractorOutput {
         self.timelineData = data
     }
     
+    func setTimelineNilForError() {
+        self.timelineData = nil
+    }
+    
     func getAlbums(data: [AlbumItem]) {
         self.albumsData = data
     }
