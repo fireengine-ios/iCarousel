@@ -182,7 +182,11 @@ extension MyStorageInteractor: MyStorageInteractorInput {
     private func getInfoForAppleProducts(offers: [PackageModelResponse]) {
         packageService.getInfoForAppleProducts(offers: offers, success: { [weak self] in
             DispatchQueue.main.async {
-                self?.output.successedPackages(allOffers: offers)
+                if self?.affiliate == "highlighted" {
+                    self?.output.successedPackages(allOffers: offers.filter({ $0.highlighted == true }))
+                } else {
+                    self?.output.successedPackages(allOffers: offers)
+                }
             }
         }, fail: { [weak self] error in
             DispatchQueue.main.async {
@@ -291,6 +295,39 @@ extension MyStorageInteractor: MyStorageInteractorInput {
                     self?.output.failed(with: errorResponse)
                 }
             }, isLogin: false)
+    }
+    
+    func getActiveSubscriptionForBanner() {
+        if affiliate == "highlighted" {
+            return
+        }
+        subscriptionsService.activeSubscriptions(
+            success: { [weak self] response in
+                guard let subscriptionsResponse = response as? ActiveSubscriptionResponse else {
+                    return
+                }
+                let offersList = subscriptionsResponse.list
+                DispatchQueue.main.async {
+                    self?.output.getActiveSubscriptionForBanner(offers: offersList)
+                }
+            }, fail: { value in })
+    }
+    
+    func getAvailableOffersForBanner() {
+        if affiliate == "highlighted" {
+            return
+        }
+        accountService.availableOffersWithLanguage(affiliate: self.affiliate) { [weak self] (result) in
+            switch result {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    let convertedResponse = self?.convertToSubscriptionPlan(offers: response, accountType: .turkcell)
+                    self?.output.getAvailableOffersForBanner(offers: convertedResponse ?? [])
+                }
+            case .failed(_):
+                break
+            }
+        }
     }
         
     

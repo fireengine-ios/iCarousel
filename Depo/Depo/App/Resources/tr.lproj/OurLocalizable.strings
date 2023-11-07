@@ -2184,6 +2184,7 @@ then {11,99 TRY/Month}*/
 "no_more_photo_right" = "%d’ten fazla fotoğraf seçtin. Devam edebilmek için azaltın.";
 "timeline_header" = "%d en güzel anıları";
 "timeline_description" = "%d yılının en güzel anılarını senin için derledik. Hemen keşfet.";
+"timeline_description" = "{timeline_year} yılının en güzel anılarını senin için derledik. Hemen keşfet.";
 "selected_for_print" = "Baskı için seçilenler";
 "print_cancel_popup_question" = "İptal etmek isteğine emin misin?";
 "print_cancel_popup_info" = "Basılı albüm için seçtiğin tüm fotoğraf düzenlemelerin silinecektir. Yeniden fotoğraf seçmen ve yeniden düzenlemen gereklidir.";
@@ -2273,3 +2274,4 @@ then {11,99 TRY/Month}*/
 "order_not_delivered_detail" = "Siparişin teknik nedenlerden dolayı baskıya teslim edilemedi. Lütfen tekrar yeni baskı gönderiniz.";
 "grace_banner_paycell_text" = "";
 "sync_page_offer_pop_up" = "Sana özel avantajlı lifebox paketlerini keşfetmek için hemen tıkla!";
+"sync_page_offer_pop_up" = "Size özel tekliflerimizi görmek ister misiniz?";

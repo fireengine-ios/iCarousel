@@ -39,6 +39,8 @@ protocol StorageVars: AnyObject {
     var publicSharedItemsToken: String? {get set}
     var isAppFirstLaunchForPublicSharedItems: Bool? {get set}
     var isUserFirstLoggedIn: Bool { get set }
+    var discoverHighlightShows: Bool { get set }
+    var discoverHighlightIndex: Int { get set }
 
     func value(forDeepLinkParameter key: DeepLinkParameter) -> Any?
 }
@@ -278,6 +280,18 @@ final class UserDefaultsVars: StorageVars {
     var isUserFirstLoggedIn: Bool {
         get { return userDefaults.object(forKey: isUserFirstLoggedInKey) as? Bool ?? true }
         set { userDefaults.set(newValue, forKey: isUserFirstLoggedInKey) }
+    }
+    
+    private let discoverHighlightShowsKey = "discoverHighlightShowsKey"
+    var discoverHighlightShows: Bool {
+        get { return userDefaults.object(forKey: discoverHighlightShowsKey) as? Bool ?? true }
+        set { userDefaults.set(newValue, forKey: discoverHighlightShowsKey) }
+    }
+    
+    private let discoverHighlightIndexKey = "discoverHighlightIndexKey"
+    var discoverHighlightIndex: Int {
+        get { return userDefaults.object(forKey: discoverHighlightIndexKey) as? Int ?? 0 }
+        set { userDefaults.set(newValue, forKey: discoverHighlightIndexKey) }
     }
     
 }

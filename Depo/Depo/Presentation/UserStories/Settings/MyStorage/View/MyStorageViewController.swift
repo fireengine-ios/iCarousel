@@ -115,9 +115,14 @@ final class MyStorageViewController: BaseViewController {
     
     private lazy var policyView = SubscriptionsPolicyView()
     private lazy var bannerView = PackagesBannerBuyPremiumView()
+    private lazy var packageBannerView = HighlightedPackageView()
     
     private var menuViewModels = [ControlPackageType]()    
     @IBOutlet weak var topSpacingHeight: NSLayoutConstraint!
+    private var bannerCallMethodCount: Int = 0
+    private var isPaidPackage: Bool = false
+    private var highlightedPackage: SubscriptionPlan?
+    private var highlightedPackageIndex: Int = 0
     
     // MARK: View lifecycle
     override func viewDidLoad() {
@@ -129,6 +134,8 @@ final class MyStorageViewController: BaseViewController {
         menuTableView.dataSource = self
         bannerView.delegate = self
         bannerView.isHidden = true
+        packageBannerView.delegate = self
+        packageBannerView.isHidden = true
         setupCardStackView()
     }
     
@@ -163,6 +170,13 @@ final class MyStorageViewController: BaseViewController {
         bannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
         bannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
         bannerView.heightAnchor.constraint(equalToConstant: 137).activate()
+        
+        view.addSubview(packageBannerView)
+        packageBannerView.translatesAutoresizingMaskIntoConstraints = false
+        packageBannerView.topAnchor.constraint(equalTo: view.topAnchor).activate()
+        packageBannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
+        packageBannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
+        packageBannerView.heightAnchor.constraint(equalToConstant: 209).activate()
     }
 
     @IBAction private func restorePurhases() {
@@ -199,6 +213,56 @@ extension MyStorageViewController: MyStorageViewInput {
             return
         }
         showBanner()
+    }
+    
+    func getIsPaidPackage(isPaidPackage: Bool) {
+        self.isPaidPackage = isPaidPackage
+        bannerCallMethodCount += 1
+        setBannerPremiumOrHighlighted()
+    }
+    
+    func getHighlightedPackage(offers: [SubscriptionPlan]) {
+        var packageName: String = ""
+        for value in offers {
+            let model = value.model as? PackageModelResponse
+            if model?.highlighted == true {
+                highlightedPackage = value
+                packageName = model?.name ?? ""
+            }
+        }
+        
+        for(index, value) in offers.enumerated() {
+            let model = value.model as? PackageModelResponse
+            if model?.name == packageName {
+                highlightedPackageIndex = index
+            }
+        }
+        
+        bannerCallMethodCount += 1
+        setBannerPremiumOrHighlighted()
+    }
+    
+    private func setBannerPremiumOrHighlighted() {
+        if bannerCallMethodCount == 2 {
+            bannerCallMethodCount = 0
+            let isPremium = AuthoritySingleton.shared.accountType.isPremium
+            if isPaidPackage { // if true -> have paid package
+                if !isPremium  { // false premium değil
+                    showBanner()
+                }
+            } else {
+                if highlightedPackage == nil {
+                    return
+                }
+                packageBannerView.isHidden = false
+                topSpacingHeight.constant = 224.0
+                let model = highlightedPackage?.model as? PackageModelResponse
+                packageBannerView.promoLabel.text = model?.displayName
+                packageBannerView.quotaLabel.text = highlightedPackage?.name
+                packageBannerView.priceLabel.text = highlightedPackage?.price
+                packageBannerView.storageLabel.text = SubscriptionPlan.AddonType.makeTextByAddonType(addonType: highlightedPackage?.addonType ?? .storageOnly)
+            }
+        }
     }
     
     func reloadPackages() {
@@ -503,4 +567,24 @@ extension MyStorageViewController: BuyPremiumBannerDelegate {
         bannerView.isHidden = false
         topSpacingHeight.constant = 154.0
     }
+}
+
+// MARK: - HighlightedPackageBannerDelegate
+extension MyStorageViewController: HighlightedPackageBannerDelegate {
+    func buyHighlightedPackage() {
+        //didPressSubscriptionPlanButton(planIndex: highlightedPackageIndex, storageOfferType: .packageOffer)
+        guard let plan = highlightedPackage else {
+            return
+        }
+        
+        let packageOffer = PackageOffer(quotaNumber: plan.quota, offers: [plan])
+       
+        if let model = plan.model as? PackageModelResponse,
+                let adjustId = model.adjustId {
+                AnalyticsEvent.purchaseToken = adjustId
+             
+        }
+        presentPaymentPopUp(plan: packageOffer, planIndex: highlightedPackageIndex)
+    }
+    
 }
