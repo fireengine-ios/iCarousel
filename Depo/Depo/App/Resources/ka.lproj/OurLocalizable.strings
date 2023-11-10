@@ -499,7 +499,7 @@
 "Successful purchase." = "წარმატებული შენაძენი";
 "Invalid purchase. AppStore does not verify purchase for the given parameters." = "არასწორი შესყიდვა. AppStore არ ამოწმებს შესყიდვას მოცემული პარამეტრებისთვის.";
 "A temporary error has occurred due to technical reasons." = "დროებითი შეცდომა დაფიქსირდა ტექნიკური მიზეზების გამო";
-"validate_purchase_already_subscribed_text" = "ამ შენაძენთან დაკავშირებული გამოწერა უკვე გააქტიურებულია სხვა lifebox მომხმარებლისთვის. გაითვალისწინე, რომ სხვადასხვა lifebox ანგარიშების გამოყენებამ იგივე Apple ან Google ID-ით შეიძლება გამოიწვიოს ეს სიტუაცია.";
+"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "ამ შენაძენთან დაკავშირებული გამოწერა უკვე გააქტიურებულია სხვა lifebox მომხმარებლისთვის. გაითვალისწინე, რომ სხვადასხვა lifebox ანგარიშების გამოყენებამ იგივე Apple ან Google ID-ით შეიძლება გამოიწვიოს ეს სიტუაცია.";
 "Shows that a response operation is done for the given receipt." = "აჩვენებს, რომ პასუხის ოპერაცია შესრულებულია მოცემულ ქვითარზე.";
 "Auto Upload is off." = "ავტომატური ატვირთვა გამორთულია";
 "Photos and videos waiting to be synced" = "ფოტოები და ვიდეოები სინქრონიზაციის მოლოდინშია";
@@ -2201,3 +2201,9 @@ then {11,99 TRY/Month}*/
 "order_not_delivered_detail" = "";
 "grace_banner_paycell_text" = "";
 "sync_page_offer_pop_up" = "";
+"validate_purchase_already_subscribed_text" = "";
+"print_edit_cancel_popup_info" = "";
+"revert_to_original" = "";
+"save_changes" = "";
+"ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "";
+"ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "";

@@ -636,7 +636,7 @@ English is correct. GSM may be confusing to the customer*/
 /*Fuzzy*/
 "Invalid purchase. AppStore does not verify purchase for the given parameters." = "Achat invalide. L'AppStore ne vérifie pas l'achat pour les paramètres donnés.";
 "A temporary error has occurred due to technical reasons." = "Une erreur temporaire est survenue pour des raisons techniques.";
-"validate_purchase_already_subscribed_text" = "Le compte associé à cet achat est déjà activé pour un autre utilisateur de lifebox. L'utilisation de comptes différents avec la même ID Apple ou Google peut entraîner cette situation.";
+"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Le compte associé à cet achat est déjà activé pour un autre utilisateur de lifebox. L'utilisation de comptes différents avec la même ID Apple ou Google peut entraîner cette situation.";
 
 /*Fuzzy*/
 "Shows that a response operation is done for the given receipt." = "Cela montre qu’une opération de réponse est effectuée pour le reçu donné.";
@@ -2509,4 +2509,10 @@ then {11,99 TRY/Month}*/
 "order_not_delivered" = "La commande n'a pas pu être envoyée à l'impression";
 "order_not_delivered_detail" = "Votre commande n'a pas pu être envoyée à l'impression pour des raisons techniques. Veuillez envoyer une nouvelle impression.";
 "grace_banner_paycell_text" = "";
-"sync_page_offer_pop_up" = "";
+"sync_page_offer_pop_up" = "Cliquez maintenant pour découvrir les forfaits lifebox avantageux qui vous sont destinés!";
+"validate_purchase_already_subscribed_text" = "L'abonnement lié à cet achat est déjà activé sur le compte %@ avec l'adresse e-mail %@ pour un autre utilisateur lifebox. Notez que l'utilisation de différents comptes lifebox avec le même compte Apple/Google peut donner lieu à cette situation.";
+"print_edit_cancel_popup_info" = "Vos modifications de photos seront supprimées.";
+"revert_to_original" = "Revenir à l'original";
+"save_changes" = "Sauvegarder les Modifications";
+"ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "Pour changer de numéro de téléphone, vous devez d'abord annuler votre forfait lifebox, qui est inclus dans la facture de téléphone. Veuillez appeler le service clientèle de Turkcell.";
+"ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "Pour changer de numéro de téléphone, contactez d'abord votre opérateur et faites annuler vos forfaits.";

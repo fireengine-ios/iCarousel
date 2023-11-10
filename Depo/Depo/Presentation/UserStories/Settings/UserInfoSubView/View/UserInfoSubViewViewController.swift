@@ -13,12 +13,15 @@ protocol UserInfoSubViewViewControllerActionsDelegate: AnyObject {
     func changePhotoPressed(quotaInfo: QuotaInfoResponse?)
     func upgradeButtonPressed(quotaInfo: QuotaInfoResponse?)
     func premiumButtonPressed()
+    func freeUpCardRemoved()
 }
 
 final class UserInfoSubViewViewController: ViewController, NibInit {
 
     var output: UserInfoSubViewViewOutput!
     
+    @IBOutlet private weak var outerStackView: UIStackView!
+    @IBOutlet private weak var stackView: UIStackView!
     @IBOutlet private weak var userNameLabel: UILabel! {
         willSet {
             newValue.font = UIFont.appFont(.medium, size: 14.0)
@@ -45,7 +48,8 @@ final class UserInfoSubViewViewController: ViewController, NibInit {
                                    shadowColor: AppColor.viewShadowLight.cgColor,
                                    opacity: 0.8, radius: 6.0)
         headerBackView.backgroundColor = AppColor.secondaryBackground.color
-        
+        stackView.layer.cornerRadius = 16
+        stackView.backgroundColor = AppColor.secondaryBackground.color
     }
     
     
@@ -81,6 +85,7 @@ final class UserInfoSubViewViewController: ViewController, NibInit {
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        appendFreeUpSpace()
     }
 
     override func viewDidLayoutSubviews() {
@@ -89,7 +94,24 @@ final class UserInfoSubViewViewController: ViewController, NibInit {
         
         avatarImageView.layer.cornerRadius = avatarImageView.bounds.height * 0.5
     }
-    
+
+    private func appendFreeUpSpace() {
+        let view = FreeUpSpacePopUp.initFromNib()
+        view.configurateWithType(viewType: .freeAppSpace)
+        view.backgroundColor = .clear
+        view.popupDelegate = self
+        stackView.addArrangedSubview(view)
+    }
+}
+
+// MARK: FreeUpSpacePopupDelegate
+extension UserInfoSubViewViewController: FreeUpSpacePopupDelegate {
+    func removeCard() {
+        DispatchQueue.main.async {
+            self.stackView.isHidden = true
+            self.actionsDelegate?.freeUpCardRemoved()
+        }
+    }
 }
 
 // MARK: SettingsViewController Input

@@ -509,7 +509,7 @@
 "Successful purchase." = "نجحت عملية الشراء.";
 "Invalid purchase. AppStore does not verify purchase for the given parameters." = "شراء غير صالح. لم يتعرّف AppStore على الشراء المُعطّى بهذه المعلمات.";
 "A temporary error has occurred due to technical reasons." = "حدث خطأ مؤقت بسبب خلل تقني.";
-"validate_purchase_already_subscribed_text" = "إن الاشتراك المتعلق بهذا الشراء مُنشَّط من قبل باسم مستخدم آخر للايف بوكس. يرجى الانتباه إلى أن استعمال حسابات لايف بوكس مختلفة بعرّفات Apple/Google نفسها قد يسبب الوضع الحالي.";
+"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "إن الاشتراك المتعلق بهذا الشراء مُنشَّط من قبل باسم مستخدم آخر للايف بوكس. يرجى الانتباه إلى أن استعمال حسابات لايف بوكس مختلفة بعرّفات Apple/Google نفسها قد يسبب الوضع الحالي.";
 
 /*Please revise this sentence.*/
 "Shows that a response operation is done for the given receipt." = "..";
@@ -2216,4 +2216,10 @@ then {11,99 TRY/Month}*/
 "order_not_delivered" = "لا يمكن تسليم الطلب للطباعة";
 "order_not_delivered_detail" = "لا يمكن تسليم طلبك للطباعة لأسباب فنية. الرجاء إرسال نسخة جديدة مرة أخرى.";
 "grace_banner_paycell_text" = "";
-"sync_page_offer_pop_up" = "";
+"sync_page_offer_pop_up" = "انقر الآن لاكتشاف حزم lifebox المفيدة والمخصصة لك!";
+"validate_purchase_already_subscribed_text" = "تم تنشيط الاشتراك المرتبط بهذا الشراء بالفعل على الحساب %@ مع البريد الإلكتروني %@ لمستخدم lifebox آخر. لاحظ أن استخدام حسابات مختلفة lifebox مع نفس حساب Apple/Google قد يؤدي مع هذا الوضع.";
+"print_edit_cancel_popup_info" = "سيتم حذف تعديلات صورتك.";
+"revert_to_original" = "العودة إلى الأصل";
+"save_changes" = "احفظ التغييرات";
+"ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "لتغيير رقم هاتفك ، يجب عليك أولا إلغاء حزمة lifebox المضمنة في فاتورة الهاتف. يرجى الاتصال بخدمة العملاء Turkcell.";
+"ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "لتغيير رقم هاتفك ، اتصل أولا بالمشغل الخاص بك وقم بإلغاء الحزم الخاصة بك.";
