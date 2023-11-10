@@ -91,7 +91,7 @@ extension MyStoragePresenter: MyStorageViewOutput {
     }
     
     func viewWillAppear() {
-        view?.startActivityIndicator()
+        //view?.startActivityIndicator()
         interactor.getUserAuthority()
         interactor.refreshActivePurchasesState(false)
     }
