@@ -25,7 +25,6 @@ final class NewAvPlayerViewController: AVPlayerViewController {
     private var item: WrapData?
     private var navBarConfigurator = NavigationBarConfigurator()
     private lazy var threeDotMenuManager = PlayerThreeDotMenuManager(delegate: self)
-    private lazy var shareCardContentManager = ShareCardContentManager(delegate: self)
     
     override var prefersStatusBarHidden: Bool {
         return false
@@ -98,10 +97,6 @@ final class NewAvPlayerViewController: AVPlayerViewController {
 }
 
 extension NewAvPlayerViewController: BaseItemInputPassingProtocol {
-    func timelineShare() {
-        shareCardContentManager.presentSharingMenu(item: item!, type: .origin)
-    }
-    
     func operationFinished(withType type: ElementTypes, response: Any?) {
         print("aaaaaaaaa")
     }
@@ -148,15 +143,4 @@ extension NewAvPlayerViewController: BaseItemInputPassingProtocol {
     }
     
     
-}
-
-//MARK: -ShareCardContentManagerDelegate
-extension NewAvPlayerViewController: ShareCardContentManagerDelegate {
-    func shareOperationStarted() {
-        showSpinner()
-    }
-    
-    func shareOperationFinished() {
-        hideSpinner()
-    }
 }

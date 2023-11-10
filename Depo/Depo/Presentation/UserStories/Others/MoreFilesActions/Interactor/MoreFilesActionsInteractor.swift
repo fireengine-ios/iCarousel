@@ -36,6 +36,8 @@ enum ShareTypes {
         
         if items.contains(where: { $0.fileType == .folder}) {
             allowedTypes = [.link, .private]
+        } else if items.contains(where: { $0.fileType == .timeline}) {
+            allowedTypes = [.original, .link, .private]
         } else if items.contains(where: { return $0.fileType != .image && $0.fileType != .video && !$0.fileType.isDocumentPageItem && $0.fileType != .audio}) {
             allowedTypes = [.link]
         } else {
