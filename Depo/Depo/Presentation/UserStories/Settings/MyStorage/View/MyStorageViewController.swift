@@ -299,7 +299,7 @@ extension MyStorageViewController: MyStorageViewInput {
         outerBottomView.heightAnchor.constraint(equalToConstant: 16).isActive = true
         myPackages.addArrangedSubview(outerBottomView)
         if purchaseState {
-            let seconds = 30.0
+            let seconds = 1.0
             DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
                 self.stopActivityIndicator()
                 self.stopPurchase()
@@ -338,7 +338,7 @@ extension MyStorageViewController: MyStorageViewInput {
         outerBottomView.heightAnchor.constraint(equalToConstant: 16).isActive = true
         packages.addArrangedSubview(outerBottomView)
         if purchaseState {
-            let seconds = 30.0
+            let seconds = 1.0
             DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
                 self.stopActivityIndicator()
                 self.stopPurchase()

@@ -61,7 +61,7 @@ final class MyStoragePresenter {
         
         startActivity()
         interactor.getAllOffers()
-        interactor.getAvailableOffers(with: accountType)
+        //interactor.getAvailableOffers(with: accountType)
     }
     
     //MARK: - UtilityMethods
@@ -71,7 +71,7 @@ final class MyStoragePresenter {
         if let index = displayableOffers.firstIndex(where: { $0.type == .free }) {
             displayableOffers.swapAt(0, index)
         }
-        
+        interactor.getAvailableOffers(with: accountType)
         stopActivity()
         view?.reloadPackages()
     }
@@ -91,7 +91,7 @@ extension MyStoragePresenter: MyStorageViewOutput {
     }
     
     func viewWillAppear() {
-        view?.startActivityIndicator()
+        //view?.startActivityIndicator()
         interactor.getUserAuthority()
         interactor.refreshActivePurchasesState(false)
     }
@@ -266,7 +266,7 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     func successedPackages(accountTypeString: String) {
         accountType = interactor.getAccountTypePackages(with: accountTypeString, offers: []) ?? .all
         view?.showInAppPolicy()
-        interactor.getAvailableOffers(with: accountType)
+        //interactor.getAvailableOffers(with: accountType)
     }
     
     func failedVerifyOffer() {
