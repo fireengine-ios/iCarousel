@@ -505,7 +505,7 @@
 "Successful purchase." = "Satın alma işlemi başarılı";
 "Invalid purchase. AppStore does not verify purchase for the given parameters." = "Geçersiz satın alma. AppStore, verilen bilgiler doğrultusunda satın alım işlemini doğrulamıyor.";
 "A temporary error has occurred due to technical reasons." = "Teknik sebeplerden dolayı geçici bir hata meydana geldi.";
-"validate_purchase_already_subscribed_text" = "Bu satın alıma ilişkin abonelik hali hazırda başka bir lifebox kullanıcısı için aktifleştirilmiş durumda. Farklı lifebox hesaplarının aynı Apple veya Google ID ile kullanılmasının bu tarz durumlara yol açabileceğini unutmayın.";
+"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Bu satın alıma ilişkin abonelik hali hazırda başka bir lifebox kullanıcısı için aktifleştirilmiş durumda. Farklı lifebox hesaplarının aynı Apple veya Google ID ile kullanılmasının bu tarz durumlara yol açabileceğini unutmayın.";
 "Shows that a response operation is done for the given receipt." = "Belirtilen tarife için bir yanıt işleminin yapıldığını gösterir.";
 "Auto Upload is off." = "Otomatik yükleme kapalı.";
 "Photos and videos waiting to be synced" = "Fotoğraflar ve videolar yedeklenmeyi bekliyor.";
@@ -2275,3 +2275,9 @@ then {11,99 TRY/Month}*/
 "grace_banner_paycell_text" = "";
 "sync_page_offer_pop_up" = "Sana özel avantajlı lifebox paketlerini keşfetmek için hemen tıkla!";
 "sync_page_offer_pop_up" = "Size özel tekliflerimizi görmek ister misiniz?";
+"validate_purchase_already_subscribed_text" = "Kullanmakta olduğunuz Apple/Google hesabı ile satın alınmış paketler %@ kullanıcısı, %@email ile kullanımdadır. Aynı Apple/Google hesabıyla farklı lifebox hesaplarının kullanılmasının bu duruma yol açabileceğini unutmayın.";
+"print_edit_cancel_popup_info" = "Yapılan fotoğraf düzenlemelerin silinecektir.";
+"revert_to_original" = "Özgüne Dön";
+"save_changes" = "Değişiklikleri Kaydet";
+"ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "Telefon numaranızı değiştirebilmek için öncelikle ücreti telefon faturanıza dahil olan lifebox paketinizi iptal etmeniz gerekmektedir. Lütfen Turkcell müşteri hizmetlerini arayınız.";
+"ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "Telefon numaranızı değiştirmek için öncelikle operatörünüz ile iletişime geçerek paketlerinizin iptal edilmesini sağlayınız.";

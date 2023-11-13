@@ -523,7 +523,7 @@
 "Successful purchase." = "La compra se ha realizado exitosamente.";
 "Invalid purchase. AppStore does not verify purchase for the given parameters." = "Compra no válida. La  AppStore no puede verificar la compra con los parametros que se han brindado.";
 "A temporary error has occurred due to technical reasons." = "Se ha producido un error temporal debido a razones técnicas.";
-"validate_purchase_already_subscribed_text" = "La suscripción relacionada con esta compra ya está activada para otro usuario de Lifebox. Tenga en cuenta que usar diferentes cuentas de Lifebox con la misma identificación de Apple o Google podría provocar en esta situación.";
+"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "La suscripción relacionada con esta compra ya está activada para otro usuario de Lifebox. Tenga en cuenta que usar diferentes cuentas de Lifebox con la misma identificación de Apple o Google podría provocar en esta situación.";
 "Shows that a response operation is done for the given receipt." = "Muestra que se realiza una operación de respuesta para el recibo dado.";
 "Auto Upload is off." = "La carga automática está desactivada.";
 "Photos and videos waiting to be synced" = "Hay fotos y videos esperando ser sincronizados";
@@ -2246,4 +2246,10 @@ then {11,99 TRY/Month}*/
 "order_not_delivered" = "El pedido no se ha podido imprimir";
 "order_not_delivered_detail" = "Tu pedido no se ha podido enviar a imprimir por motivos técnicos. Vuelva a enviar una nueva impresión.";
 "grace_banner_paycell_text" = "";
-"sync_page_offer_pop_up" = "";
+"sync_page_offer_pop_up" = "¡Haz clic ahora para descubrir ventajosos paquetes lifebox especiales para ti!";
+"validate_purchase_already_subscribed_text" = "La suscripción relacionada con esta compra ya está activada en la cuenta %@ con email %@ para otro usuario de lifebox. Ten en cuenta que el uso de diferentes cuentas de lifebox con la misma cuenta de Apple/Google puede dar lugar a esta situación.";
+"print_edit_cancel_popup_info" = "Se eliminarán las ediciones de tus fotos.";
+"revert_to_original" = "Volver al Original";
+"save_changes" = "Guardar Cambios";
+"ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "Para cambiar tu número de teléfono, primero debes cancelar tu paquete lifebox, que está incluido en la factura telefónica. Por favor, llama al servicio de atención al cliente de Turkcell.";
+"ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "Para cambiar de número de teléfono, ponte primero en contacto con tu operador y haz que cancelen tus paquetes.";

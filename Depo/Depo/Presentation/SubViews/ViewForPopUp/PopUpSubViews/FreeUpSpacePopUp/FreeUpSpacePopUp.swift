@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol FreeUpSpacePopupDelegate: AnyObject {
+    func removeCard()
+}
+
+
 final class FreeUpSpacePopUp: BaseCardView {
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -24,6 +29,7 @@ final class FreeUpSpacePopUp: BaseCardView {
     private var operation: OperationType?
     private lazy var freeUpSpace = FreeAppSpace.session
     private lazy var router = RouterVC()
+    weak var popupDelegate: FreeUpSpacePopupDelegate?
     
     //MARK: - Init
     
@@ -102,7 +108,9 @@ final class FreeUpSpacePopUp: BaseCardView {
     // MARK: - Actions
     
     @IBAction func onCancelButton() {
+        popupDelegate?.removeCard()
         deleteCard()
+        
     }
     
     

@@ -505,7 +505,7 @@
 "Successful purchase." = "Blerje e suksesshme";
 "Invalid purchase. AppStore does not verify purchase for the given parameters." = "Blerje e pavlefshme. AppStore nuk e verifikon blerjen për parametrat e dhëna.";
 "A temporary error has occurred due to technical reasons." = "Një gabim i përkohshëm ka ndodhur për arsye teknike.";
-"validate_purchase_already_subscribed_text" = "Abonimi i lidhur me këtë blerje është i aktivizuar për një përdorues tjetër lifebox. Merrni parasysh që përdorimi I llogarive të ndryshme lifebox me të njëjtin ID të Apple apo Google mund të krijojë këtë situatë.";
+"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Abonimi i lidhur me këtë blerje është i aktivizuar për një përdorues tjetër lifebox. Merrni parasysh që përdorimi I llogarive të ndryshme lifebox me të njëjtin ID të Apple apo Google mund të krijojë këtë situatë.";
 "Shows that a response operation is done for the given receipt." = "Tregon se një operacion është ndërmarrë si përgjigje e faturës së dhënë.";
 "Auto Upload is off." = "Ngarkimi automatik është i çaktivizuar";
 "Photos and videos waiting to be synced" = "Fotot dhe videot në pritje për t'u sinkronizuar";
@@ -2247,4 +2247,10 @@ then {11,99 TRY/Month}*/
 "order_not_delivered" = "Porosia nuk mund të dorëzohej për printim";
 "order_not_delivered_detail" = "Porosia juaj nuk mund të dorëzohej në printim për arsye teknike. Ju lutemi dërgoni përsëri një printim të ri.";
 "grace_banner_paycell_text" = "";
-"sync_page_offer_pop_up" = "";
+"sync_page_offer_pop_up" = "Klikoni tani për të zbuluar paketa të favorshme lifebox të veçanta për ju!";
+"validate_purchase_already_subscribed_text" = "Abonimi në lidhje me këtë blerje është aktivizuar tashmë në llogarinë %@ me email %@ për një përdorues tjetër të lifebox. Vini re se përdorimi i llogarive të ndryshme lifebox me të njëjtën llogari Apple/Google mund të rezultojë me këtë situatë.";
+"print_edit_cancel_popup_info" = "Redaktimet tuaja të fotografisë do të fshihen.";
+"revert_to_original" = "Kthehu në Origjinal";
+"save_changes" = "Ruaj Ndryshimet";
+"ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "Për të ndryshuar numrin tuaj të telefonit, së pari duhet të anuloni paketën tuaj lifebox, e cila përfshihet në faturën e telefonit. Ju lutemi telefononi shërbimet e klientit Turkcell.";
+"ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "Për të ndryshuar numrin tuaj të telefonit, së pari kontaktoni operatorin tuaj dhe anuloni paketat tuaja.";

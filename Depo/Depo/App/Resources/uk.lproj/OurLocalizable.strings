@@ -499,7 +499,7 @@
 "Successful purchase." = "Успішна покупка.";
 "Invalid purchase. AppStore does not verify purchase for the given parameters." = "Недійсна покупка. AppStore не перевіряє покупку за заданими параметрами.";
 "A temporary error has occurred due to technical reasons." = "Тимчасова помилка сталася через технічні причини.";
-"validate_purchase_already_subscribed_text" = "Підписка пов'язана з цією покупкою вже активована для іншого користувача lifebox. Зверніть увагу, що в цій ситуації можуть бути використані різні облікові записи lifebox з таким самим Apple або Google ID.";
+"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Підписка пов'язана з цією покупкою вже активована для іншого користувача lifebox. Зверніть увагу, що в цій ситуації можуть бути використані різні облікові записи lifebox з таким самим Apple або Google ID.";
 "Shows that a response operation is done for the given receipt." = "Показує, що операція відповіді виконана для даної квитанції.";
 "Auto Upload is off." = "Автозавантаження вимкнено";
 "Photos and videos waiting to be synced" = "Фото та відео, які очікують на синхронізацію";
@@ -2206,4 +2206,10 @@ then {11,99 TRY/Month}*/
 "order_not_delivered" = "Замовлення не вдалося передати на друк";
 "order_not_delivered_detail" = "Ваше замовлення не вдалося передати на друк з технічних причин. Будь ласка, надішліть нове замовлення на друк ще раз.";
 "grace_banner_paycell_text" = "";
-"sync_page_offer_pop_up" = "";
+"sync_page_offer_pop_up" = "Натисніть зараз, щоб дізнатися про вигідні пакети lifebox, призначені спеціально для Вас!";
+"validate_purchase_already_subscribed_text" = "Підписка, пов'язана з цією покупкою, вже активована на акаунті %@ з електронною поштою %@ для іншого користувача lifebox. Зверніть увагу, що використання різних акаунтів lifebox з одним і тим же обліковим записом Apple/Google може призвести до такої ситуації.";
+"print_edit_cancel_popup_info" = "Редагування фотографій буде видалено.";
+"revert_to_original" = "Повернутися до Оригіналу";
+"save_changes" = "Зберегти Зміни";
+"ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "Для того, щоб змінити номер телефону, необхідно спочатку відключити пакет lifebox, який включено в рахунок за телефонний зв'язок. Будь ласка, зверніться до служби підтримки клієнтів Turkcell.";
+"ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "Щоб змінити номер телефону, необхідно спочатку звернутися до свого оператора і попросити анулювати ваші пакети.";

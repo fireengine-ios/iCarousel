@@ -501,7 +501,7 @@
 "Successful purchase." = "Успешно оплачено";
 "Invalid purchase. AppStore does not verify purchase for the given parameters." = "Недопустимая покупка. AppStore не проверяет покупку с предоставленными параметрами.";
 "A temporary error has occurred due to technical reasons." = "Возникла временная ошибка по техническим причинам.";
-"validate_purchase_already_subscribed_text" = "Подписка, привязанная к данной покупке, уже активирована для другого пользователя lifebox. Обращаем внимание, что использование различных учётных записей с одним и тем же Apple или Google ID, может привести к возникновению подобной ситуации.";
+"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Подписка, привязанная к данной покупке, уже активирована для другого пользователя lifebox. Обращаем внимание, что использование различных учётных записей с одним и тем же Apple или Google ID, может привести к возникновению подобной ситуации.";
 "Shows that a response operation is done for the given receipt." = "показывает, что для данной квитанции выполнена ответная операция.";
 "Auto Upload is off." = "Автозагрузка отключена";
 "Photos and videos waiting to be synced" = "Фото и видео ожидают синхронизации";
@@ -2218,4 +2218,10 @@ then {11,99 TRY/Month}*/
 "order_not_delivered" = "Заказ не Удалось Передать на Печать";
 "order_not_delivered_detail" = "Ваш заказ не удалось передать на печать по техническим причинам. Пожалуйста, отправьте новый заказ на печать еще раз.";
 "grace_banner_paycell_text" = "";
-"sync_page_offer_pop_up" = "";
+"sync_page_offer_pop_up" = "Нажмите прямо сейчас, чтобы узнать о выгодных пакетах lifebox, предназначенных специально для Вас!";
+"validate_purchase_already_subscribed_text" = "Подписка, связанная с этой покупкой, уже активирована на учетной записи %@ с электронной почтой %@ для другого пользователя lifebox. Обратите внимание, что использование различных учетных записей lifebox с одной и той же учетной записью Apple/Google может привести к подобной ситуации.";
+"print_edit_cancel_popup_info" = "Редактирование фотографий будет удалено.";
+"revert_to_original" = "Вернуться к Оригиналу";
+"save_changes" = "Сохранить Изменения";
+"ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "Чтобы сменить номер телефона, необходимо сначала отказаться от пакета lifebox, который подключен к счету за телефон. Пожалуйста, обратитесь в службу поддержки Turkcell.";
+"ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "Чтобы изменить номер телефона, необходимо сначала обратиться к своему оператору и попросить аннулировать ваши пакеты.";
