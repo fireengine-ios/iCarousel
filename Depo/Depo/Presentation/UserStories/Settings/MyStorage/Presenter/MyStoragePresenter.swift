@@ -72,7 +72,7 @@ final class MyStoragePresenter {
             displayableOffers.swapAt(0, index)
         }
         interactor.getAvailableOffers(with: accountType)
-        stopActivity()
+        //stopActivity()
         view?.reloadPackages()
     }
 }
