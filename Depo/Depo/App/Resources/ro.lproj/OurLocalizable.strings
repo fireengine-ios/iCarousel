@@ -499,7 +499,7 @@
 "Successful purchase." = "Achiziție reușită.";
 "Invalid purchase. AppStore does not verify purchase for the given parameters." = "Achiziție nevalidată. AppStore nu verifică achiziția cu parametrii indicați.";
 "A temporary error has occurred due to technical reasons." = "Din motive tehnice a apărut o eroare temporară.";
-"validate_purchase_already_subscribed_text" = "Abonamentul legat de această achiziție este deja activat pentru un alt utilizator lifebox. Rețineți că această situație poate apărea în cazul folosirii a diferitor conturi lifebox cu același Apple sau Google ID.";
+"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Abonamentul legat de această achiziție este deja activat pentru un alt utilizator lifebox. Rețineți că această situație poate apărea în cazul folosirii a diferitor conturi lifebox cu același Apple sau Google ID.";
 "Shows that a response operation is done for the given receipt." = "Arată că operațiunea de răspuns pentru incasarea primită este gata ";
 "Auto Upload is off." = "Încărcarea Automată este deconectată.";
 "Photos and videos waiting to be synced" = "Fotografii și videoclipuri în așteptarea sincronizării";
@@ -2204,4 +2204,10 @@ then {11,99 TRY/Month}*/
 "order_not_delivered" = "Comanda nu a putut fi livrată la imprimare";
 "order_not_delivered_detail" = "Comanda dvs. nu a putut fi livrată la imprimare din motive tehnice. Vă rugăm să trimiteți din nou o nouă imprimare.";
 "grace_banner_paycell_text" = "";
-"sync_page_offer_pop_up" = "";
+"sync_page_offer_pop_up" = "Dă click acum pentru a descoperi pachetele avantajoase lifebox speciale pentru tine!";
+"validate_purchase_already_subscribed_text" = "Abonamentul legat de această achiziție este deja activat în contul %@ cu adresa de e-mail %@ pentru un alt utilizator lifebox. Rețineți că utilizarea unor conturi lifebox diferite cu același cont Apple/Google poate duce la această situație.";
+"print_edit_cancel_popup_info" = "Editarea fotografiilor dvs. va fi ștearsă.";
+"revert_to_original" = "Reveniți la Original";
+"save_changes" = "Salvați Modificările";
+"ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "Pentru a vă schimba numărul de telefon, trebuie mai întâi să anulați pachetul lifebox, care este inclus în factura de telefonie. Vă rugăm să sunați la serviciile pentru clienți Turkcell.";
+"ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "Pentru a vă schimba numărul de telefon, contactați mai întâi operatorul dvs. și solicitați anularea pachetelor.";

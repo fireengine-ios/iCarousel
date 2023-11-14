@@ -373,7 +373,10 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     
     func failAlreadySubscribed(with value: ValidateApplePurchaseAlreadySubscribedValue?) {
         stopActivity()
-        let message = "\(value?.maskedEmail ?? "") \n\(value?.maskedMsisdn ?? "") \n\(TextConstants.validatePurchaseAlreadySubscribedText)"
+        guard let value = value else {
+            return
+        }
+        let message = String(format: TextConstants.validatePurchaseAlreadySubscribedText, value.maskedMsisdn, value.maskedEmail)
         router?.display(error: message)
     }
     
