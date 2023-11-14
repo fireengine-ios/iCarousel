@@ -106,7 +106,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="52L-OL-aNb">
                             <rect key="frame" x="0.0" y="208" width="375" height="327"/>
                             <constraints>
-                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="170" id="6jr-XS-ugh"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="120" id="6jr-XS-ugh"/>
                             </constraints>
                         </stackView>
                     </subviews>

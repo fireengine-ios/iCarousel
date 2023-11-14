@@ -2082,7 +2082,7 @@ then {11,99 TRY/Month}*/
 "paycell_share_message " = "";
 
 /*Fuzzy*/
-"free_up_space_title" = "Alanın dolmak üzere!";
+"free_up_space_title" = "Telefonunun hafızasında yer aç.";
 
 /*Fuzzy*/
 "notification_menu_item" = "Bildirimler";
