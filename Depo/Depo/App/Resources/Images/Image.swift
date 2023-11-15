@@ -190,6 +190,7 @@ enum Image: String, AppImage {
     case popupIconQuestion
     case popupHide
     case iconCancelUnborder
+    case iconCancelUnborderV2
     case popupUnHide
     case popupRestore
     case popupLogout
@@ -221,8 +222,8 @@ enum Image: String, AppImage {
     case popupCloudBackup
     case launchCampaign
     case divorceCardPlay
+    case freeUpCloudBackUp
     case iconBottomSheetConfetti
-    
     /// Introduce
     case circleIntoduce
     

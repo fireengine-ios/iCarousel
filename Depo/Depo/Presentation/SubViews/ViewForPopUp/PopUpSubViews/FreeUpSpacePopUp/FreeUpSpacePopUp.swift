@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 protocol FreeUpSpacePopupDelegate: AnyObject {
     func removeCard()
@@ -15,14 +16,16 @@ protocol FreeUpSpacePopupDelegate: AnyObject {
 
 final class FreeUpSpacePopUp: BaseCardView {
     
+    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var bigTitleLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var freeAppSpaceButton: UIButton! {
         willSet {
-            newValue.contentHorizontalAlignment = .left
+            newValue.contentHorizontalAlignment = .center
             newValue.sizeToFit()
-            newValue.titleLabel?.font = .appFont(.bold, size: 14)
+            newValue.titleLabel?.font = .appFont(.medium, size: 16)
+            
         }
     }
     
@@ -69,16 +72,18 @@ final class FreeUpSpacePopUp: BaseCardView {
     override func configurateView() {
         super.configurateView()
 
-        titleLabel.font = .appFont(.medium, size: 16)
-        titleLabel.textColor = AppColor.label.color
+        titleLabel.font = .appFont(.regular, size: 12)
+        titleLabel.textColor = UIColor.white
         
-        bigTitleLabel.font = .appFont(.medium, size: 16)
-        bigTitleLabel.textColor = AppColor.label.color
-        bigTitleLabel.numberOfLines = 2
+        bigTitleLabel.font = .appFont(.regular, size: 12)
+        bigTitleLabel.textColor = UIColor.white
+        bigTitleLabel.numberOfLines = 0
         
         freeAppSpaceButton.setTitle(TextConstants.freeAppSpacePopUpButtonTitle, for: .normal)
         freeAppSpaceButton.titleLabel?.font = .appFont(.bold, size: 14)
-        freeAppSpaceButton.setTitleColor(AppColor.settingsButtonColor.color, for: .normal)
+        freeAppSpaceButton.setTitleColor(UIColor.white, for: .normal)
+        cancelButton.setImage(Image.iconCancelUnborderV2.image, for: .normal)
+        
     }
     
     override func viewDeletedBySwipe() {

@@ -98,9 +98,10 @@ final class UserInfoSubViewViewController: ViewController, NibInit {
     private func appendFreeUpSpace() {
         let view = FreeUpSpacePopUp.initFromNib()
         view.configurateWithType(viewType: .freeAppSpace)
-        view.backgroundColor = .clear
+        view.backgroundColor = AppColor.tint.color
         view.popupDelegate = self
         stackView.addArrangedSubview(view)
+        view.layer.cornerRadius = 16.0
     }
 }
 
