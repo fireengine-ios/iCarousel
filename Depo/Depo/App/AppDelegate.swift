@@ -108,6 +108,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let coreDataStack: CoreDataStack = factory.resolve()
+        
+        if #available(iOS 10.0, *)
+        {
+            UNUserNotificationCenter.current().delegate = self
+        }
 
         startCoreDataSafeServices(with: application, options: launchOptions)
         

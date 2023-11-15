@@ -17,7 +17,7 @@ class RegistrationRouter: RegistrationRouterInput {
         let controller = PopUpController.with(
             title: TextConstants.registrationEmailPopupTitle,
             message: message,
-            image: .error,
+            image: .none,
             buttonTitle: TextConstants.ok,
             action: { vc in
                 vc.close {

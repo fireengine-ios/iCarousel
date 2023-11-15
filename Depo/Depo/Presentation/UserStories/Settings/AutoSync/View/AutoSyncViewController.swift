@@ -23,6 +23,7 @@ final class AutoSyncViewController: BaseViewController, NibInit {
     private lazy var storageVars: StorageVars = factory.resolve()
     private lazy var dataSource = AutoSyncDataSource(tableView: tableView, delegate: self, delegateContact: self)
     private lazy var activityManager = ActivityIndicatorManager()
+    private let router = RouterVC()
     
     var fromSettings: Bool = false
     private var onStartUsingButtonTapped = false
@@ -115,8 +116,32 @@ final class AutoSyncViewController: BaseViewController, NibInit {
     // MARK: buttons actions
     
     @IBAction func onStartUsingButton() {
-        onStartUsingButtonTapped = true
         
+        let isFirstLoginControl = UserDefaults.standard.bool(forKey: "isFirstLoginControl")
+        
+        if !isFirstLoginControl {
+            let popup = PopUpController.with(title: nil, message: localized(.syncPageOfferPopUp), image: .none, firstButtonTitle: TextConstants.noForUpgrade, secondButtonTitle: TextConstants.faceImageYes,
+                firstAction: { [weak self] vc in
+                    self?.goToPhotosScreen()
+                },
+                secondAction: { vc in
+                    self.dismiss(animated: false, completion: {
+                        DispatchQueue.toMain { [weak self] in
+                            self?.onStartUsingButtonTapped = true
+                            self?.storageVars.isAutoSyncSet = true
+                            self?.router.pushViewController(viewController: (self?.router.myStorage(usageStorage: nil))!)
+                        }
+                    })
+                })
+            popup.open()
+        } else {
+            goToPhotosScreen()
+        }
+        UserDefaults.standard.set(true, forKey: "isFirstLoginControl")
+    }
+    
+    private func goToPhotosScreen() {
+        onStartUsingButtonTapped = true
         storageVars.isAutoSyncSet = true
         output.change(settings: dataSource.autoSyncSetting, albums: dataSource.autoSyncAlbums)
     }

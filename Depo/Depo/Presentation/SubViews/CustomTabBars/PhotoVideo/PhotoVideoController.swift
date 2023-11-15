@@ -121,7 +121,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
                 }
             }
         }
-
+ 
         storageVars.isUserFirstLoggedIn = false
         canNotificationPopupRaiseUp()
     }

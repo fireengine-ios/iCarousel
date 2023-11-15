@@ -148,6 +148,7 @@ enum AppColor {
     case campaignBorder
     case campaignContentLabel
     case syncHeader
+    case highlightColor
     
     //ConnectedAccounts
     case toggleOn

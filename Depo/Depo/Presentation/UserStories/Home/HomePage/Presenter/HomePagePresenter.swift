@@ -108,7 +108,7 @@ extension HomePagePresenter: HomePageInteractorOutput {
     
     func fillCollectionView(isReloadAll: Bool) {
         if !AuthoritySingleton.shared.isBannerShowedForPremium {
-            CardsManager.default.startPremiumCard()
+            //CardsManager.default.startPremiumCard()
         }
         
         AuthoritySingleton.shared.hideBannerForSecondLogin()
@@ -128,6 +128,26 @@ extension HomePagePresenter: HomePageInteractorOutput {
         }
         
         decreaseDispatchGroupValue(for: .waitAccountPermissionsResponse)
+    }
+    
+    func fillCollectionViewForHighlighted(isPaidPackage: Bool, offers: SubscriptionPlan?, packageIndex: Int) {
+        
+        let isPremium = AuthoritySingleton.shared.accountType.isPremium
+        let storageVars: StorageVars = factory.resolve()
+        if isPaidPackage {
+            if !isPremium  {
+                storageVars.discoverHighlightShows = false
+            }
+        } else {
+            if offers == nil {
+                return
+            }
+            storageVars.discoverHighlightShows = true
+            storageVars.discoverHighlightIndex = packageIndex
+            CardsManager.default.highlightedOffer = offers
+        }
+        
+        CardsManager.default.startPremiumCard()
     }
     
     func didObtainQuotaInfo(usagePercentage: Float) {

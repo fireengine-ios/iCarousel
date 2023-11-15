@@ -19,7 +19,9 @@ final class HomePageInteractor: HomePageInteractorInput {
     private lazy var homeCardsService: HomeCardsService = factory.resolve()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var instapickService: InstapickService = factory.resolve()
+    private let subscriptionsService: SubscriptionsService = SubscriptionsServiceIml()
     private lazy var accountService = AccountService()
+    private let packageService = PackageService()
     private lazy var storageVars: StorageVars = factory.resolve()
 
     private let smartAlbumsManager: SmartAlbumsManager = factory.resolve()
@@ -28,6 +30,10 @@ final class HomePageInteractor: HomePageInteractorInput {
     private var isShowPopupAboutPremium = true
     private(set) var homeCardsLoaded = false
     private var isFirstAuthorityRequest = true
+    private var bannerCallMethodCount: Int = 0
+    private var isPaidPackage: Bool = false
+    private var highlightedPackage: SubscriptionPlan?
+    private var highlightedPackageIndex: Int = 0
     
     private func fillCollectionView(isReloadAll: Bool) {
         self.homeCardsLoaded = true
@@ -45,6 +51,9 @@ final class HomePageInteractor: HomePageInteractorInput {
         getPremiumCardInfo(loadStatus: .reloadAll)
         getAllCardsForHomePage()
         getCampaignStatus()
+        
+        getActiveSubscriptionForBanner()
+        getAvailableOffersForBanner()
         
         smartAlbumsManager.requestAllItems()
         
@@ -300,6 +309,74 @@ final class HomePageInteractor: HomePageInteractorInput {
             let message = PublicShareSaveErrorStatus.allCases.first(where: {$0.rawValue == error.errorDescription})?.description
             self.output.publicShareSaveFail(message: message ?? localized(.publicShareSaveError))
         }
+    }
+    
+    func getActiveSubscriptionForBanner() {
+        subscriptionsService.activeSubscriptions(
+            success: { [weak self] response in
+                guard let subscriptionsResponse = response as? ActiveSubscriptionResponse else {
+                    return
+                }
+                let offersList = subscriptionsResponse.list
+                DispatchQueue.main.async {
+                    self?.isPaidPackage = self?.isPaidPackage(item: offersList) ?? false
+                    self?.bannerCallMethodCount += 1
+                    self?.setBannerPremiumOrHighlighted()
+                }
+            }, fail: { value in }, isLogin: false)
+    }
+    
+    func getAvailableOffersForBanner() {
+        accountService.availableOffersWithLanguage(affiliate: "") { [weak self] (result) in
+            switch result {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    let convertedResponse = self?.packageService.convertToSubscriptionPlan(offers: response, accountType: .turkcell)
+                    self?.getHighlightedPackage(offers: convertedResponse ?? [])
+                }
+            case .failed(_):
+                break
+            }
+        }
+    }
+    
+    func getHighlightedPackage(offers: [SubscriptionPlan]) {
+        var packageName: String = ""
+        for value in offers {
+            let model = value.model as? PackageModelResponse
+            if model?.highlighted == true {
+                highlightedPackage = value
+                packageName = model?.name ?? ""
+            }
+        }
+        
+        for(index, value) in offers.enumerated() {
+            let model = value.model as? PackageModelResponse
+            if model?.name == packageName {
+                highlightedPackageIndex = index
+            }
+        }
+        
+        bannerCallMethodCount += 1
+        setBannerPremiumOrHighlighted()
+    }
+    
+    private func setBannerPremiumOrHighlighted() {
+        if bannerCallMethodCount == 2 {
+            bannerCallMethodCount = 0
+            output.fillCollectionViewForHighlighted(isPaidPackage: isPaidPackage, offers: highlightedPackage, packageIndex: highlightedPackageIndex)
+        }
+    }
+    
+    private func isPaidPackage(item: [SubscriptionPlanBaseResponse]) -> Bool {
+        var isPriceForPayed: Bool = false
+        for value in item {
+            let price = value.subscriptionPlanPrice ?? 0
+            if price > 0 {
+                isPriceForPayed = true
+            }
+        }
+        return isPriceForPayed
     }
 }
 

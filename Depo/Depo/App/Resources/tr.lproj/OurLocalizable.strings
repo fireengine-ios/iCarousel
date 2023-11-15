@@ -2273,6 +2273,7 @@ then {11,99 TRY/Month}*/
 "order_not_delivered_detail" = "Siparişin teknik nedenlerden dolayı baskıya teslim edilemedi. Lütfen tekrar yeni baskı gönderiniz.";
 "grace_banner_paycell_text" = "";
 "sync_page_offer_pop_up" = "Sana özel avantajlı lifebox paketlerini keşfetmek için hemen tıkla!";
+"sync_page_offer_pop_up" = "Size özel tekliflerimizi görmek ister misiniz?";
 "validate_purchase_already_subscribed_text" = "Kullanmakta olduğunuz Apple/Google hesabı ile satın alınmış paketler %@ kullanıcısı, %@email ile kullanımdadır. Aynı Apple/Google hesabıyla farklı lifebox hesaplarının kullanılmasının bu duruma yol açabileceğini unutmayın.";
 "print_edit_cancel_popup_info" = "Yapılan fotoğraf düzenlemelerin silinecektir.";
 "revert_to_original" = "Özgüne Dön";

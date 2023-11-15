@@ -31,4 +31,7 @@ protocol MyStorageInteractorOutput: AnyObject {
     
     func purchaseCancelled()
     func successedGotUserAuthority()
+    
+    func getActiveSubscriptionForBanner(offers: [SubscriptionPlanBaseResponse])
+    func getAvailableOffersForBanner(offers: [SubscriptionPlan])
 }

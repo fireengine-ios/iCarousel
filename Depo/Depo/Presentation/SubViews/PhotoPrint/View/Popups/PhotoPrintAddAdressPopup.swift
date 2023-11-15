@@ -195,6 +195,7 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
     private var checkButtonIsChecked: Bool = false
     private var tappedView: TappedView = .city
     private var localAddress: LocalAddress?
+    private var editedImages = [UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -252,7 +253,7 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
     
     @objc private func dismissPopup() {
         self.dismiss(animated: false, completion: {
-            let vc = PhotoPrintSendPopup.with(address: self.address)
+            let vc = PhotoPrintSendPopup.with(address: self.address, editedImages: self.editedImages)
             vc.openWithBlur()
         })
     }
@@ -408,16 +409,17 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
 }
 
 extension PhotoPrintAddAdressPopup {
-    static func with(address: AddressResponse?) -> PhotoPrintAddAdressPopup {
-        let vc = controllerWith(address: address)
+    static func with(address: AddressResponse?, editedImages: [UIImage]? = []) -> PhotoPrintAddAdressPopup {
+        let vc = controllerWith(address: address, editedImages: editedImages)
         return vc
     }
     
-    private static func controllerWith(address: AddressResponse?) -> PhotoPrintAddAdressPopup {
+    private static func controllerWith(address: AddressResponse?, editedImages: [UIImage]? = []) -> PhotoPrintAddAdressPopup {
         let vc = PhotoPrintAddAdressPopup(nibName: "PhotoPrintAddAdressPopup", bundle: nil)
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overFullScreen
         vc.address = address
+        vc.editedImages = editedImages ?? []
         return vc
     }
 }
@@ -558,7 +560,7 @@ extension PhotoPrintAddAdressPopup {
                 self?.hideSpinner()
                 self?.setLocalAddress(address: response)
                 self?.dismiss(animated: false, completion: {
-                    let vc = PhotoPrintSendPopup.with(address: response)
+                    let vc = PhotoPrintSendPopup.with(address: response, editedImages: self?.editedImages)
                     vc.openWithBlur()
                 })
             case .failed(let error):
@@ -578,7 +580,7 @@ extension PhotoPrintAddAdressPopup {
                 self?.hideSpinner()
                 self?.setLocalAddress(address: response)
                 self?.dismiss(animated: false, completion: {
-                    let vc = PhotoPrintSendPopup.with(address: response)
+                    let vc = PhotoPrintSendPopup.with(address: response, editedImages: self?.editedImages)
                     vc.openWithBlur()
                 })
             case .failed(let error):

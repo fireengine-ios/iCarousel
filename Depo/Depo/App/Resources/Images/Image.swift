@@ -223,6 +223,7 @@ enum Image: String, AppImage {
     case launchCampaign
     case divorceCardPlay
     case freeUpCloudBackUp
+    case iconBottomSheetConfetti
     /// Introduce
     case circleIntoduce
     

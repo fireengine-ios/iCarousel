@@ -312,6 +312,7 @@ final class ForYouInteractor {
             case .success(let response):
                 self?.output.getTimelineData(data: response)
             case .failed(let error):
+                self?.output.setTimelineNilForError()
                 debugLog("ForYou Error getTimeline: \(error.errorCode)-\(String(describing: error.description))")
                 break
             }

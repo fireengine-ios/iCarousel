@@ -1471,6 +1471,10 @@
 		890349C6298441D300747D1D /* DiscoverCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893F45EF296D631F006FFECA /* DiscoverCollectionViewLayout.swift */; };
 		890349C7298441D400747D1D /* DiscoverCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893F45EF296D631F006FFECA /* DiscoverCollectionViewLayout.swift */; };
 		890349C8298441D600747D1D /* DiscoverCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893F45EF296D631F006FFECA /* DiscoverCollectionViewLayout.swift */; };
+		890B5FBE2AF26BCD00A68968 /* HighlightedPackageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890B5FBD2AF26BCD00A68968 /* HighlightedPackageView.swift */; };
+		890B5FBF2AF26BCD00A68968 /* HighlightedPackageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890B5FBD2AF26BCD00A68968 /* HighlightedPackageView.swift */; };
+		890B5FC02AF26BCD00A68968 /* HighlightedPackageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890B5FBD2AF26BCD00A68968 /* HighlightedPackageView.swift */; };
+		890B5FC12AF26BCD00A68968 /* HighlightedPackageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890B5FBD2AF26BCD00A68968 /* HighlightedPackageView.swift */; };
 		890DDC582316B0D80022F7D2 /* TwoFactorChallengeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890DDC562316B0D70022F7D2 /* TwoFactorChallengeRouter.swift */; };
 		890DDC592316B0D80022F7D2 /* TwoFactorChallengeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890DDC562316B0D70022F7D2 /* TwoFactorChallengeRouter.swift */; };
 		890F737022EEFA3E00BA0020 /* VerifyEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */; };
@@ -1536,6 +1540,12 @@
 		8938AE882930C264004970F2 /* DeleteListSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938AE862930C264004970F2 /* DeleteListSectionHeader.swift */; };
 		8938AE892930C264004970F2 /* DeleteListSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938AE862930C264004970F2 /* DeleteListSectionHeader.swift */; };
 		8938AE8A2930C264004970F2 /* DeleteListSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938AE862930C264004970F2 /* DeleteListSectionHeader.swift */; };
+		893937E72AFA45110036BFEF /* HighlightPackage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89B40C862AF627C20033147B /* HighlightPackage.xib */; };
+		893937EB2AFA45130036BFEF /* HighlightPackage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89B40C862AF627C20033147B /* HighlightPackage.xib */; };
+		893937EC2AFA45130036BFEF /* HighlightPackage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89B40C862AF627C20033147B /* HighlightPackage.xib */; };
+		893937ED2AFA45170036BFEF /* HighlightPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B40C882AF627D20033147B /* HighlightPackage.swift */; };
+		893937EE2AFA45180036BFEF /* HighlightPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B40C882AF627D20033147B /* HighlightPackage.swift */; };
+		893937EF2AFA45180036BFEF /* HighlightPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B40C882AF627D20033147B /* HighlightPackage.swift */; };
 		8939937D2ADD4BCD00753702 /* PlayerThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8939937C2ADD4BCD00753702 /* PlayerThreeDotMenuManager.swift */; };
 		8939937E2ADD4BCD00753702 /* PlayerThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8939937C2ADD4BCD00753702 /* PlayerThreeDotMenuManager.swift */; };
 		8939937F2ADD4BCD00753702 /* PlayerThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8939937C2ADD4BCD00753702 /* PlayerThreeDotMenuManager.swift */; };
@@ -1805,6 +1815,8 @@
 		89B359372AD67A77007920B7 /* ForYouTimelineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89B359352AD67A77007920B7 /* ForYouTimelineTableViewCell.xib */; };
 		89B359382AD67A77007920B7 /* ForYouTimelineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89B359352AD67A77007920B7 /* ForYouTimelineTableViewCell.xib */; };
 		89B359392AD67A77007920B7 /* ForYouTimelineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89B359352AD67A77007920B7 /* ForYouTimelineTableViewCell.xib */; };
+		89B40C872AF627C20033147B /* HighlightPackage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89B40C862AF627C20033147B /* HighlightPackage.xib */; };
+		89B40C892AF627D20033147B /* HighlightPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B40C882AF627D20033147B /* HighlightPackage.swift */; };
 		89B9D17B29BEFC2100C73307 /* CreateCollageDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B9D17A29BEFC2100C73307 /* CreateCollageDetailController.swift */; };
 		89B9D17C29BEFC2100C73307 /* CreateCollageDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B9D17A29BEFC2100C73307 /* CreateCollageDetailController.swift */; };
 		89B9D17D29BEFC2100C73307 /* CreateCollageDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B9D17A29BEFC2100C73307 /* CreateCollageDetailController.swift */; };
@@ -11128,6 +11140,7 @@
 		8831E41C046C33B2DA7E6FFE /* SettingsViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsViewInput.swift; sourceTree = "<group>"; };
 		8865CA17ED69B6F3761308E1 /* Pods-LifeTech_BilloWidgetExtension.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_BilloWidgetExtension.enterprise.xcconfig"; path = "Target Support Files/Pods-LifeTech_BilloWidgetExtension/Pods-LifeTech_BilloWidgetExtension.enterprise.xcconfig"; sourceTree = "<group>"; };
 		88F2BB2471220C9297301750 /* Pods-LifeboxUnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxUnitTests.release.xcconfig"; path = "Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests.release.xcconfig"; sourceTree = "<group>"; };
+		890B5FBD2AF26BCD00A68968 /* HighlightedPackageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightedPackageView.swift; sourceTree = "<group>"; };
 		890DDC562316B0D70022F7D2 /* TwoFactorChallengeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TwoFactorChallengeRouter.swift; path = Depo/Presentation/UserStories/Start/TwoFactorChallenge/Router/TwoFactorChallengeRouter.swift; sourceTree = SOURCE_ROOT; };
 		890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyEmailPopUp.swift; sourceTree = "<group>"; };
 		890F736E22EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseEmailVerificationPopUp.xib; sourceTree = "<group>"; };
@@ -11223,6 +11236,8 @@
 		89ABFDCF29B9F34D000237A4 /* CreateCollageBottomBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageBottomBarManager.swift; sourceTree = "<group>"; };
 		89B359302AD67A5E007920B7 /* ForYouTimelineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouTimelineTableViewCell.swift; sourceTree = "<group>"; };
 		89B359352AD67A77007920B7 /* ForYouTimelineTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForYouTimelineTableViewCell.xib; sourceTree = "<group>"; };
+		89B40C862AF627C20033147B /* HighlightPackage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HighlightPackage.xib; sourceTree = "<group>"; };
+		89B40C882AF627D20033147B /* HighlightPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightPackage.swift; sourceTree = "<group>"; };
 		89B9D17A29BEFC2100C73307 /* CreateCollageDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageDetailController.swift; sourceTree = "<group>"; };
 		89C0AD592A8E6D420014D674 /* PhotoPrintInfoPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintInfoPopup.swift; sourceTree = "<group>"; };
 		89C0AD5F2A8E6DD20014D674 /* PhotoPrintInfoPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoPrintInfoPopup.xib; sourceTree = "<group>"; };
@@ -15208,6 +15223,7 @@
 			isa = PBXGroup;
 			children = (
 				52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */,
+				890B5FBD2AF26BCD00A68968 /* HighlightedPackageView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -16969,6 +16985,7 @@
 		7CE825B81F823CAD00356AD2 /* PopUpSubViews */ = {
 			isa = PBXGroup;
 			children = (
+				89B40C822AF627890033147B /* HighlightPackage */,
 				0708C77C267725B000680ED6 /* PhotoPrintCard */,
 				3A58C48D2636A6DD00570811 /* InvitationCard */,
 				734CA110244D62F40076F6A7 /* DocumentsAlbumCard */,
@@ -17380,6 +17397,15 @@
 				8991B4BA2A6E6FBC00B94A2D /* PhotoPrintPhotoCell.swift */,
 			);
 			path = PhotoPrintSelection;
+			sourceTree = "<group>";
+		};
+		89B40C822AF627890033147B /* HighlightPackage */ = {
+			isa = PBXGroup;
+			children = (
+				89B40C862AF627C20033147B /* HighlightPackage.xib */,
+				89B40C882AF627D20033147B /* HighlightPackage.swift */,
+			);
+			path = HighlightPackage;
 			sourceTree = "<group>";
 		};
 		89C0AD452A8E3A520014D674 /* Popups */ = {
@@ -23844,6 +23870,7 @@
 				98A86D4E23A2208800438225 /* HiddenPhotosViewController.xib in Resources */,
 				894328052AB3063200778ED3 /* PhotoPrintNoRightPopup.xib in Resources */,
 				B50B4A6C220C27C20056FC86 /* SocialAccountRemoveConnectionCell.xib in Resources */,
+				89B40C872AF627C20033147B /* HighlightPackage.xib in Resources */,
 				3A9C2822265285A200EFADE9 /* AcceptedInvitationViewController.xib in Resources */,
 				89C0AD6E2A8F4F210014D674 /* PhotoPrintMissingPhotoPopup.xib in Resources */,
 				A2EF976C21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib in Resources */,
@@ -24381,6 +24408,7 @@
 				89E51D6322CA2ECA007A7DBC /* CreateStoryPopUp.xib in Resources */,
 				894328072AB3063200778ED3 /* PhotoPrintNoRightPopup.xib in Resources */,
 				CE784D1222A685FB00662219 /* DropDownTableViewCell.xib in Resources */,
+				893937EB2AFA45130036BFEF /* HighlightPackage.xib in Resources */,
 				9853CD452361BDCA00E19BF7 /* InitializingViewController.xib in Resources */,
 				89C0AD702A8F4F210014D674 /* PhotoPrintMissingPhotoPopup.xib in Resources */,
 				CE784D1522A685FB00662219 /* CollectionViewHeaderWithText.xib in Resources */,
@@ -25102,6 +25130,7 @@
 				CF8B6B0823CBC9D70021B021 /* SetSecurityQuestionViewController.xib in Resources */,
 				98725F0D258B2C0B0061E7F6 /* AllFilesSegmentedController.xib in Resources */,
 				CF8B6B0D23CBC9D70021B021 /* MyStorageViewController.xib in Resources */,
+				893937E72AFA45110036BFEF /* HighlightPackage.xib in Resources */,
 				076BD1DA27BC14FF004609E3 /* MapSearchViewController.xib in Resources */,
 				B57F8F342587A73600799405 /* FirebaseRemoteConfigDefaults.plist in Resources */,
 				CF71462324B597A800D83E60 /* ContactListDetailViewController.xib in Resources */,
@@ -25200,6 +25229,7 @@
 				CF8B70CF23CBCA280021B021 /* InitializingViewController.xib in Resources */,
 				894328082AB3063200778ED3 /* PhotoPrintNoRightPopup.xib in Resources */,
 				CF8B70D123CBCA280021B021 /* CollectionViewHeaderWithText.xib in Resources */,
+				893937EC2AFA45130036BFEF /* HighlightPackage.xib in Resources */,
 				CF8B70D223CBCA280021B021 /* PhotoVideoDetailCell.xib in Resources */,
 				89C0AD712A8F4F210014D674 /* PhotoPrintMissingPhotoPopup.xib in Resources */,
 				CF8B70D323CBCA280021B021 /* HomePage.xib in Resources */,
@@ -26747,6 +26777,7 @@
 				8C0E8CAA1FDEBDFF00789C91 /* SwipeableCardCell.swift in Sources */,
 				8C0E8CAB1FDEBDFF00789C91 /* LoginPresenter.swift in Sources */,
 				9823196324F3A1E600FD16E2 /* PreparedFiltersView.swift in Sources */,
+				89B40C892AF627D20033147B /* HighlightPackage.swift in Sources */,
 				B5AB2F072204356400E3AF23 /* InstaPickSmartAlbumCell.swift in Sources */,
 				8C0E8CAE1FDEBDFF00789C91 /* AutoSyncViewInput.swift in Sources */,
 				8C0E8CB01FDEBDFF00789C91 /* VisualMusicPlayerRouter.swift in Sources */,
@@ -27098,6 +27129,7 @@
 				989BDE4D22F47B1E001DDEB2 /* SpotifyOverwritePopup.swift in Sources */,
 				8C0E8D681FDEBDFF00789C91 /* AlertFilesActionsSheetInteractorInput.swift in Sources */,
 				89EA4F7A240902C400A2C543 /* PackagesTableViewCell.swift in Sources */,
+				890B5FBE2AF26BCD00A68968 /* HighlightedPackageView.swift in Sources */,
 				B5D42C24254C00B7002E4997 /* DocumentDownloadOperation.swift in Sources */,
 				07E7A6852859FBF5005BBD4C /* AlertFilesAction.swift in Sources */,
 				8C0E8D6C1FDEBDFF00789C91 /* PackagesConfigurator.swift in Sources */,
@@ -29217,6 +29249,7 @@
 				CF38A86B2575325F0000994F /* PrivateShareDurationCell.swift in Sources */,
 				899B314A29DEA35F000EDF0A /* OnlyOfficeViewController.swift in Sources */,
 				CE7848F822A685FB00662219 /* VisualMusicPlayerViewOutput.swift in Sources */,
+				893937EE2AFA45180036BFEF /* HighlightPackage.swift in Sources */,
 				730A998422D740130037ABA9 /* TwoFactorAuthenticationCell.swift in Sources */,
 				17FBD51D23FB2C6200979F39 /* DivorceActionService.swift in Sources */,
 				98B04798259314740011DAEB /* UpdateCheck.m in Sources */,
@@ -30610,6 +30643,7 @@
 				CE784C6522A685FB00662219 /* UploadFromLifeBoxRouter.swift in Sources */,
 				CE784C6622A685FB00662219 /* TabBarActionHandler.swift in Sources */,
 				CE784C6722A685FB00662219 /* BaseViewController.swift in Sources */,
+				890B5FC02AF26BCD00A68968 /* HighlightedPackageView.swift in Sources */,
 				CE784C6822A685FB00662219 /* FeedbackViewInteractorInput.swift in Sources */,
 				CE784C6922A685FB00662219 /* UIImage+Orientation.swift in Sources */,
 				B5B01A7423FA7CB900B03426 /* ResumableUploadInfoService.swift in Sources */,
@@ -31260,6 +31294,7 @@
 				CF8B64EF23CBC9D70021B021 /* Factory.swift in Sources */,
 				89F99F7929B5F62700F99CB5 /* CreateCollageSelectionSegmentedView.swift in Sources */,
 				CF8B64F023CBC9D70021B021 /* PeriodicContactSyncViewOutput.swift in Sources */,
+				890B5FBF2AF26BCD00A68968 /* HighlightedPackageView.swift in Sources */,
 				CF8B64F123CBC9D70021B021 /* UploadFromLifeBoxRouterInput.swift in Sources */,
 				CF8B64F223CBC9D70021B021 /* HelpAndSupportInteractorOutput.swift in Sources */,
 				89D1EBEC23EC3BF000092031 /* UIApplication+Display.swift in Sources */,
@@ -32579,6 +32614,7 @@
 				894F71832A949B430037FE89 /* PhotoPrintRouterInput.swift in Sources */,
 				F0743DB828B428FA00CC1F24 /* AppColor.swift in Sources */,
 				CF01729623D00B9F00C0B0DE /* NetmeraCustomUser.swift in Sources */,
+				893937ED2AFA45170036BFEF /* HighlightPackage.swift in Sources */,
 				CF8B687723CBC9D70021B021 /* Alamofire+Request.swift in Sources */,
 				CF8B687823CBC9D70021B021 /* OTPViewPresenter.swift in Sources */,
 				F0C447372848DFFA00129228 /* UIView+Extensions.swift in Sources */,
@@ -34114,6 +34150,7 @@
 				CF8B6F4B23CBCA280021B021 /* BottomSelectionTabBarRouterInput.swift in Sources */,
 				CF8B6F4C23CBCA280021B021 /* InstapickAnalysisCell.swift in Sources */,
 				98231A6824F3A23500FD16E2 /* HaanFilter.swift in Sources */,
+				893937EF2AFA45180036BFEF /* HighlightPackage.swift in Sources */,
 				CF8B6F4D23CBCA280021B021 /* SpotifyCollectionViewDataSource.swift in Sources */,
 				07DB93A22860AF5400D5CACF /* InAppPurchaseBuilder.swift in Sources */,
 				CF71462C24B597A800D83E60 /* ContactSyncViewController.swift in Sources */,
@@ -34228,6 +34265,7 @@
 				0305A33223D5C477004D1EC7 /* SmashService.swift in Sources */,
 				CF8B6F9E23CBCA280021B021 /* SelectNameViewController.swift in Sources */,
 				895BAB802AB480B100920DF9 /* DistrictResponse.swift in Sources */,
+				890B5FC12AF26BCD00A68968 /* HighlightedPackageView.swift in Sources */,
 				CF8B6F9F23CBCA280021B021 /* SelectNameModuleInput.swift in Sources */,
 				CF8B6FA023CBCA280021B021 /* SelectNamePresenter.swift in Sources */,
 				CF8B6FA123CBCA280021B021 /* PVViewerController.swift in Sources */,

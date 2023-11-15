@@ -18,6 +18,8 @@ protocol HomePageInteractorOutput: AnyObject {
     
     func fillCollectionView(isReloadAll: Bool)
     
+    func fillCollectionViewForHighlighted(isPaidPackage: Bool, offers: SubscriptionPlan?, packageIndex: Int)
+    
     func didObtainQuotaInfo(usagePercentage: Float)
     
     func didObtainAccountInfo(accountInfo: AccountInfoResponse)

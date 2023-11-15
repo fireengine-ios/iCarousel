@@ -16,6 +16,21 @@ final class SubscriptionPlan {
         case featureOnly
         case photoPrint
         
+        static func makeTextByAddonType(addonType: AddonType) -> String {
+            switch addonType {
+            case .bundle:
+                return TextConstants.bundlePackageAddonType
+            case .storageOnly:
+                return TextConstants.storageOnlyPackageAddonType
+            case .featureOnly:
+                return TextConstants.featuresOnlyAddonType
+            case .middleOnly:
+                return TextConstants.middleFeaturesOnlyAddonType
+            case .photoPrint:
+                return localized(.printPackageInfo)
+            }
+        }
+        
         static func make(model: Any) -> AddonType? {
             let isFeaturePack: Bool
             let hasAttachedFeature: Bool

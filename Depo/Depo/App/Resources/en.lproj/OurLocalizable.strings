@@ -2267,6 +2267,7 @@ then {11,99 TRY/Month}*/
 "order_not_delivered_detail" = "Your order could not be delivered to print for technical reasons. Please send a new print again.";
 "grace_banner_paycell_text" = "";
 "sync_page_offer_pop_up" = "Click now to discover advantageous lifebox packages special for you!";
+"sync_page_offer_pop_up" = "";
 "validate_purchase_already_subscribed_text" = "Subscription related with this purchase is already activated on account %@ with email %@ for another lifebox user. Note that using different lifebox accounts with the same Apple/Google account might result with this situation.";
 "print_edit_cancel_popup_info" = "Your photo edits will be deleted.";
 "revert_to_original" = "Revert to Original";

@@ -277,8 +277,8 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     self?.handleAction(type: type, items: items!)
                 }
             case .share:
-                action = AlertFilesAction(title: type.actionTitle(), icon: type.icon, isTemplate: false) { [weak self] in
-                    self?.basePassingPresenter?.timelineShare()
+                action = AlertFilesAction(title: type.actionTitle(), icon: type.icon) {
+                    self.handleAction(type: type, items: items ?? [], sender: sender)
                 }
             case .delete:
                 action = AlertFilesAction(title: type.actionTitle(), icon: type.icon, isTemplate: false) { [weak self] in
