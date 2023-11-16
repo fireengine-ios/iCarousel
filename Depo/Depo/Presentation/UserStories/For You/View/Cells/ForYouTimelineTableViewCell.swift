@@ -33,7 +33,6 @@ class ForYouTimelineTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel! {
         willSet {
-            newValue.text = String(format: localized(.timelineHeader), Int(Date().getYear()))
             newValue.textColor = AppColor.tealBlue.color
             newValue.font = .appFont(.medium, size: 12)
         }
@@ -49,7 +48,6 @@ class ForYouTimelineTableViewCell: UITableViewCell {
     
     @IBOutlet weak var descriptionLabel: UILabel! {
         willSet {
-            newValue.text = String(format: localized(.timelineDescription), Int(Date().getYear()))
             newValue.textColor = AppColor.darkBlue.color
             newValue.font = .appFont(.regular, size: 12)
             newValue.numberOfLines = 2
@@ -96,9 +94,25 @@ class ForYouTimelineTableViewCell: UITableViewCell {
     private var timelineResponse: TimelineResponse?
     private var type: CardActionType = .display
     
+    func dateConverter(epochTimeInMilliseconds: UInt64) -> String {
+        let epochTimeInSeconds = TimeInterval(epochTimeInMilliseconds) / 1000
+        let date = Date(timeIntervalSince1970: epochTimeInSeconds)
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale.current
+        dateFormatter.dateStyle = .short
+        dateFormatter.dateFormat = "yyyy"
+        
+        return dateFormatter.string(from: date)
+    }
+    
     func configure(with item: TimelineResponse?) {
         saveButton.setTitle(item?.saved ?? false ? TextConstants.tabBarShareLabel : TextConstants.save, for: .normal)
         self.timelineResponse = item
+        
+        let year = dateConverter(epochTimeInMilliseconds: UInt64(item?.details.createdDate ?? 0))
+        titleLabel.text = String(format: localized(.timelineHeader), Int(year) ?? 0)
+        descriptionLabel.text = String(format: localized(.timelineDescription), Int(year) ?? 0)
         
         type = item?.saved ?? false ? .display : .save
         switch type {
