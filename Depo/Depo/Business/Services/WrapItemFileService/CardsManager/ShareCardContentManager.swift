@@ -52,6 +52,30 @@ final class ShareCardContentManager {
                 self?.shareViaLink(item: item)
             }
             controler.addAction(shareViaLinkAction)
+        } else if type == .videoOrigin {
+            
+            let privateAction = UIAlertAction(title: TextConstants.actionSheetSharePrivate, style: .default) { [weak self] _ in
+                self?.sync(items: [item], handler: {
+                    self?.sharePrivate(item: item)
+                }, fail: { errorResponse in
+                    UIApplication.showErrorAlert(message: errorResponse.description)
+                })
+            }
+            controler.addAction(privateAction)
+            
+            let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { [weak self] _ in
+                self?.sync(items: [item], handler: {
+                    self?.shareOrignalSize(item: item)
+                }, fail: { errorResponse in
+                    UIApplication.showErrorAlert(message: errorResponse.description)
+                })
+            }
+            controler.addAction(originalAction)
+            
+            let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] _ in
+                self?.shareViaLink(item: item)
+            }
+            controler.addAction(shareViaLinkAction)
         } else {
             
             let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] _ in
@@ -87,6 +111,17 @@ final class ShareCardContentManager {
             return
         }
         shareFiles(filesForDownload: [file], sourceRect: nil, shareType: .smallSize)
+    }
+    
+    private func sharePrivate(item: BaseDataSourceItem) {
+        guard let itemPrivate = item as? WrapData else {
+            return
+        }
+        var newData = [WrapData]()
+        newData.append(itemPrivate)
+        
+        let controller = router.privateShare(items: newData)
+        router.presentViewController(controller: controller)
     }
     
     private func shareOrignalSize(item: BaseDataSourceItem) {

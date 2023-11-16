@@ -142,7 +142,7 @@ class ForYouTimelineTableViewCell: UITableViewCell {
     
     @IBAction func shareButtonTapped(_ sender: Any) {
         let item = WrapData(timelineResponse: timelineResponse!)
-        delegate?.shareTimeline(item: item, type: .origin)
+        delegate?.shareTimeline(item: item, type: .videoOrigin)
     }
     
     private func showTimelineVideo() {

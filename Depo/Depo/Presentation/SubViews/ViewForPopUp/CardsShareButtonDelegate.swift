@@ -11,6 +11,7 @@ import Foundation
 enum CardShareType {
     case link
     case origin
+    case videoOrigin
     
     var isOrigin: Bool {
         return self == .origin
