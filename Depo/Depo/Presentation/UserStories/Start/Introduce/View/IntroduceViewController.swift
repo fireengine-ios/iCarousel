@@ -261,6 +261,11 @@ extension IntroduceViewController: IntroduceViewInput {
         popUp.delegate = self
         present(popUp, animated: true)
     }
+    
+    func signUpRequiredMessage() {
+        let popUp = PopUpController.with(title: nil, message: localized(.resetPasswordAccountNotFound), image: .logout, buttonTitle: TextConstants.ok)
+        popUp.open()
+    }
 }
 
 extension IntroduceViewController: LoginWithGooglePopupDelegate {
