@@ -80,11 +80,9 @@ final class FreeUpSpacePopUp: BaseCardView {
         bigTitleLabel.numberOfLines = 0
         
         freeAppSpaceButton.setTitle(TextConstants.freeAppSpacePopUpButtonTitle, for: .normal)
-        freeAppSpaceButton.titleLabel?.font = .appFont(.bold, size: 14)
-        freeAppSpaceButton.setTitleColor(UIColor.white, for: .normal)
         cancelButton.setImage(Image.iconCancelUnborderV2.image, for: .normal)
-        
-    }
+        freeAppSpaceButton.setTitleColor(.black, for: .normal)
+        }
     
     override func viewDeletedBySwipe() {
         onCancelButton()
