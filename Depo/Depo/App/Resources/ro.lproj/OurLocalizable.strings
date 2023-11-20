@@ -2126,7 +2126,9 @@ then {11,99 TRY/Month}*/
 "printed_package_view" = "Vizualizați Pachetele mele de imprimare.";
 "more_photo_right" = "Aveți mai mult de %d fotografii trimise. Sunteți sigur că doriți să continuați?";
 "no_more_photo_right" = "Ați selectat mai mult de %d fotografii. Reduceți pentru a continua.";
-"timeline_header" = "Les meilleurs souvenirs de %d";
+"timeline_header" = "Les Meilleurs Souvenirs De %d";
+
+/*Fuzzy*/
 "timeline_description" = "Nous avons compilé pour vous les meilleurs souvenirs de cette année. Découvrez-les dès maintenant!";
 "selected_for_print" = "Selectate pentru imprimare";
 "print_cancel_popup_question" = "Sunteți sigur că doriți să anulați?";
@@ -2211,3 +2213,4 @@ then {11,99 TRY/Month}*/
 "save_changes" = "Salvați Modificările";
 "ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "Pentru a vă schimba numărul de telefon, trebuie mai întâi să anulați pachetul lifebox, care este inclus în factura de telefonie. Vă rugăm să sunați la serviciile pentru clienți Turkcell.";
 "ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "Pentru a vă schimba numărul de telefon, contactați mai întâi operatorul dvs. și solicitați anularea pachetelor.";
+"free_up_space_title_settings" = "";
