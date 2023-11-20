@@ -2082,7 +2082,7 @@ then {11,99 TRY/Month}*/
 "paycell_share_message " = "";
 
 /*Fuzzy*/
-"free_up_space_title" = "Telefonunun hafızasında yer aç.";
+"free_up_space_title" = "Alanın dolmak üzere!";
 
 /*Fuzzy*/
 "notification_menu_item" = "Bildirimler";
@@ -2182,7 +2182,9 @@ then {11,99 TRY/Month}*/
 "printed_package_view" = "Baskı paketlerimi gör.";
 "more_photo_right" = "%d fotoğraf gönderme hakkın daha var. Devam etmek istediğine emin misin?";
 "no_more_photo_right" = "%d’ten fazla fotoğraf seçtin. Devam edebilmek için azaltın.";
-"timeline_header" = "%d en güzel anıları";
+"timeline_header" = "%d En Güzel Anıları";
+
+/*Fuzzy*/
 "timeline_description" = "%d yılının en güzel anılarını senin için derledik. Hemen keşfet.";
 "selected_for_print" = "Baskı için seçilenler";
 "print_cancel_popup_question" = "İptal etmek isteğine emin misin?";
@@ -2273,10 +2275,12 @@ then {11,99 TRY/Month}*/
 "order_not_delivered_detail" = "Siparişin teknik nedenlerden dolayı baskıya teslim edilemedi. Lütfen tekrar yeni baskı gönderiniz.";
 "grace_banner_paycell_text" = "";
 "sync_page_offer_pop_up" = "Sana özel avantajlı lifebox paketlerini keşfetmek için hemen tıkla!";
-"sync_page_offer_pop_up" = "Size özel tekliflerimizi görmek ister misiniz?";
 "validate_purchase_already_subscribed_text" = "Kullanmakta olduğunuz Apple/Google hesabı ile satın alınmış paketler %@ kullanıcısı, %@email ile kullanımdadır. Aynı Apple/Google hesabıyla farklı lifebox hesaplarının kullanılmasının bu duruma yol açabileceğini unutmayın.";
 "print_edit_cancel_popup_info" = "Yapılan fotoğraf düzenlemelerin silinecektir.";
 "revert_to_original" = "Özgüne Dön";
 "save_changes" = "Değişiklikleri Kaydet";
 "ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "Telefon numaranızı değiştirebilmek için öncelikle ücreti telefon faturanıza dahil olan lifebox paketinizi iptal etmeniz gerekmektedir. Lütfen Turkcell müşteri hizmetlerini arayınız.";
 "ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "Telefon numaranızı değiştirmek için öncelikle operatörünüz ile iletişime geçerek paketlerinizin iptal edilmesini sağlayınız.";
+
+/*Fuzzy*/
+"free_up_space_title_settings" = "Telefonunun hafizasında yer aç.";

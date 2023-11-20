@@ -2126,7 +2126,9 @@ then {11,99 TRY/Month}*/
 "printed_package_view" = "Meine Druckpakete anzeigen";
 "more_photo_right" = "Sie haben mehr als %d Fotos eingereicht. Sind Sie sicher, dass Sie fortfahren möchten?";
 "no_more_photo_right" = "Sie haben mehr als %d Fotos ausgewählt. Reduzieren Sie, um fortzufahren.";
-"timeline_header" = "Die besten Erinnerungen an das Jahr %d";
+"timeline_header" = "Die Besten Erinnerungen An Das Jahr %d";
+
+/*Fuzzy*/
 "timeline_description" = "Wir haben für Sie die besten Erinnerungen an dieses Jahr zusammengestellt. Schau sie dir jetzt an!";
 "selected_for_print" = "Zum Drucken ausgewählt";
 "print_cancel_popup_question" = "Sind Sie sicher, dass Sie abbrechen möchten?";
@@ -2211,3 +2213,4 @@ then {11,99 TRY/Month}*/
 "save_changes" = "Änderungen Speichern";
 "ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "Um Ihre Telefonnummer zu ändern, müssen Sie zunächst Ihr lifebox-Paket kündigen, das in der Telefonrechnung enthalten ist. Bitte wenden Sie sich an den Turkcell-Kundendienst.";
 "ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "Um Ihre Telefonnummer zu ändern, wenden Sie sich zunächst an Ihren Netzbetreiber und lassen Sie Ihre Pakete stornieren.";
+"free_up_space_title_settings" = "";
