@@ -17,6 +17,7 @@ enum NotificationDisplayConfiguration {
 final class NotificationViewController: BaseViewController {
     var output: NotificationViewOutput!
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    var urlString: String?
     
     private lazy var tableView: QuickSelectTableView = {
         let view = QuickSelectTableView()
@@ -297,6 +298,16 @@ extension NotificationViewController: NotificationViewInput {
     func reloadTimer() {
         startTimer()
     }
+    
+    func linkTapped() {
+        guard let urlstring = urlString else {
+            return
+        }
+        let viewController = WebViewController(urlString: urlstring)
+        RouterVC().pushViewController(viewController: viewController)
+        analyticsService.logScreen(screen: .eulaExplanation)
+    }
+
 }
 
 // MARK: - UITableViewDataSource

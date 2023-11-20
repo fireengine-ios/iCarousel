@@ -24,11 +24,15 @@ class NotificationTableViewCell: UITableViewCell {
     
     private lazy var descriptionLabel: UILabel = {
         let view = UILabel()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.linkTapped))
+
         view.textColor = AppColor.textButton.color
         view.font = .appFont(.regular, size: 12)
         view.textAlignment = .right
         view.numberOfLines = 6
         view.lineBreakMode = .byWordWrapping
+        view.isUserInteractionEnabled = true
+        view.addGestureRecognizer(tap)
         return view
     }()
     
@@ -314,6 +318,7 @@ class NotificationTableViewCell: UITableViewCell {
         warningImageView.alpha = 0.5
         warningImageView.isHidden = false
     }
+    weak var controller: NotificationViewInput?
 }
 
 extension NotificationTableViewCell {
@@ -324,5 +329,8 @@ extension NotificationTableViewCell {
        
         let selectionStateImage = isSelected ? Image.iconCheckmarkSelected : Image.iconCheckmarkNotSelected
         checkBox.image = selectionStateImage.image
+    }
+    @objc private func linkTapped() {
+        controller?.linkTapped()
     }
 }
