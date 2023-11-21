@@ -263,7 +263,7 @@ extension IntroduceViewController: IntroduceViewInput {
     }
     
     func signUpRequiredMessage() {
-        let popUp = PopUpController.with(title: nil, message: localized(.resetPasswordAccountNotFound), image: .logout, buttonTitle: TextConstants.ok)
+        let popUp = PopUpController.with(title: nil, message: TextConstants.forgotPasswordErrorNotRegisteredText, image: .logout, buttonTitle: TextConstants.ok)
         popUp.open()
     }
 }
