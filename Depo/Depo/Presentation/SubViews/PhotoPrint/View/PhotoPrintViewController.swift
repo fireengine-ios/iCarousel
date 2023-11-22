@@ -170,7 +170,7 @@ final class PhotoPrintViewController: BaseViewController {
         
         for index in 0..<selectedPhotos.count {
             showSpinner()
-            var imageUrl = selectedPhotos[index].metadata?.largeUrl
+            var imageUrl = selectedPhotos[index].tempDownloadURL
             if imageUrl == nil {
                 imageUrl = selectedPhotos[index].tempDownloadURL
             }
@@ -217,7 +217,7 @@ final class PhotoPrintViewController: BaseViewController {
             }
             
             showSpinner()
-            let imageUrl = newSelectedPhotos[0].metadata?.largeUrl
+            let imageUrl = newSelectedPhotos[0].tempDownloadURL
             let imageName = newSelectedPhotos[0].name
             imageView?.sd_setImage(with: imageUrl) { [weak self] (image, error, cache, url) in
                 if error != nil {
@@ -356,7 +356,7 @@ final class PhotoPrintViewController: BaseViewController {
         }
         
         showSpinner()
-        if let imageUrl = selectedPhotos[sender.tag].metadata?.largeUrl {
+        if let imageUrl = selectedPhotos[sender.tag].tempDownloadURL {
             let imageView = getView(tag: sender.tag, layerName: Subviews.imageContainerView.layerName).subviews[0].subviews[0].subviews[0] as! UIImageView
             imageView.sd_setImage(with: imageUrl) { [weak self] (image, error, cache, url) in
                 if error != nil {
@@ -430,7 +430,7 @@ final class PhotoPrintViewController: BaseViewController {
             if element.layer.name == Subviews.containerView.layerName {
                 let contentView = getView(tag: index, layerName: Subviews.imageContainerView.layerName).subviews[0]
                 var image: UIImage = takeScreenshot(of: contentView)
-                image = resizedImage(CGSize(width: image.size.width * 2, height: image.size.height * 2), view: contentView)
+                image = resizedImage(CGSize(width: image.size.width * 4, height: image.size.height * 4), view: contentView)
                 let countLabel = getView(tag: index, layerName: Subviews.addDeleteContainer.layerName).subviews[1] as? UILabel
                 let count = Int(countLabel?.text ?? "0") ?? 0
                 for _ in 0...count - 1 {
