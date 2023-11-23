@@ -23,11 +23,13 @@ final class PlayerThreeDotMenuManager {
     }
     
     func showActions(sender: Any?, item: WrapData, isSaved: Bool) {
-        var elementTypes: [ElementTypes] = [.download]
+        var elementTypes: [ElementTypes] = []
         if isSaved {
+            elementTypes.append(.download)
             elementTypes.append(.share)
+        } else {
+            elementTypes.append(.delete)
         }
-        elementTypes.append(.delete)
         alert.showVideoPlayer(with: elementTypes, for: item, presentedBy: sender, onSourceView: nil, viewController: nil)
     }
 }
