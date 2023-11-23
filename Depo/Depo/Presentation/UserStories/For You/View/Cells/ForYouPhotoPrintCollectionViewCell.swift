@@ -77,6 +77,7 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
             newValue.layer.borderWidth = 1
             newValue.layer.cornerRadius = 15
             newValue.layer.borderColor = AppColor.profileGrayColor.cgColor
+            newValue.addRoundedShadows(cornerRadius: 15, shadowColor: AppColor.drawerShadow.cgColor, opacity: 0.3, radius: 4)
         }
     }
     
@@ -158,7 +159,8 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
         statusImageView.image = status.statusImage
         thumbnailPlusImage.isHidden = true
         thumbnailPlusLabel.isHidden = true
-        //cardThumbnailImage.contentMode = .scaleAspectFill
+        cardThumbnailImage.contentMode = .scaleAspectFill
+        cardThumbnailImage.layer.cornerRadius = 15
         let infoData = item.affiliateOrderDetails[0]
         guard let url = URL(string: infoData.fileInfo.tempDownloadURL) else {
             return
@@ -183,7 +185,8 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
         }
         statusLabel.textColor = AppColor.tealBlue.color
         cardThumbnailImage.image = Image.collageThumbnail.image
-        cardThumbnailImage.contentMode = .scaleAspectFill
+        cardThumbnailImage.contentMode = .scaleAspectFit
+        cardThumbnailImage.layer.cornerRadius = 15
         thumbnailPlusImage.isHidden = false
         thumbnailPlusLabel.isHidden = false
         statusImageView.isHidden = true
