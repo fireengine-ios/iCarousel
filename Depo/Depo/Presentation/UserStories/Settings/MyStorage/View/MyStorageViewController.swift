@@ -266,11 +266,6 @@ extension MyStorageViewController: MyStorageViewInput {
     }
     
     func reloadPackages() {
-        
-        let purchaseState = UserDefaults.standard.bool(forKey: "PurchaseOrFirst")
-        if purchaseState {
-            startActivityIndicator()
-        }
         myPackages.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
         let outerTopView = UIView()
@@ -298,21 +293,9 @@ extension MyStorageViewController: MyStorageViewInput {
         let outerBottomView = UIView()
         outerBottomView.heightAnchor.constraint(equalToConstant: 16).isActive = true
         myPackages.addArrangedSubview(outerBottomView)
-        if purchaseState {
-            let seconds = 1.0
-            DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-                self.stopActivityIndicator()
-                self.stopPurchase()
-            }
-        }
-        
     }
     
     func reloadData() {
-        let purchaseState = UserDefaults.standard.bool(forKey: "PurchaseOrFirst")
-        if purchaseState {
-            startActivityIndicator()
-        }
         packages.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
         let outerTopView = UIView()
@@ -337,13 +320,8 @@ extension MyStorageViewController: MyStorageViewInput {
         let outerBottomView = UIView()
         outerBottomView.heightAnchor.constraint(equalToConstant: 16).isActive = true
         packages.addArrangedSubview(outerBottomView)
-        if purchaseState {
-            let seconds = 1.0
-            DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-                self.stopActivityIndicator()
-                self.stopPurchase()
-            }
-        }
+        stopActivityIndicator()
+        stopPurchase()
     }
     
     func showRestoreButton() {
