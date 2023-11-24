@@ -2427,11 +2427,13 @@ then {11,99 TRY/Month}*/
 "printed_photo_card_info" = "Faites imprimer 5 photos par mois.";
 "printed_photo_card_body" = "Faites imprimer vos photos.";
 "printed_photo_card_body_no_right" = "Vous avez utilisé vos droits d'impression de photos.";
-"printed_photo_card_info_no_right" = "Vous pouvez réimprimer à partir de la date %d.";
+"printed_photo_card_info_no_right" = "When your package is renewed, you can send your photos for printing again.";
 "printed_package_view" = "Voir mes forfaits d'impression.";
 "more_photo_right" = "Vous avez sélectionné plus de %d photos. Etes-vous sûr de vouloir continuer?";
 "no_more_photo_right" = "Vous avez sélectionné plus de %d photos. Réduisez pour continuer.";
-"timeline_header" = "Les meilleurs souvenirs de %d";
+"timeline_header" = "Les Meilleurs Souvenirs De %d";
+
+/*Fuzzy*/
 "timeline_description" = "Nous avons compilé pour vous les meilleurs souvenirs de cette année. Découvrez-les dès maintenant!";
 "selected_for_print" = "Sélectionnées pour l'impression";
 "print_cancel_popup_question" = "Êtes-vous sûr de vouloir annuler?";
@@ -2509,6 +2511,8 @@ then {11,99 TRY/Month}*/
 "order_not_delivered" = "La commande n'a pas pu être envoyée à l'impression";
 "order_not_delivered_detail" = "Votre commande n'a pas pu être envoyée à l'impression pour des raisons techniques. Veuillez envoyer une nouvelle impression.";
 "grace_banner_paycell_text" = "";
+
+/*Fuzzy*/
 "sync_page_offer_pop_up" = "Cliquez maintenant pour découvrir les forfaits lifebox avantageux qui vous sont destinés!";
 "validate_purchase_already_subscribed_text" = "L'abonnement lié à cet achat est déjà activé sur le compte %@ avec l'adresse e-mail %@ pour un autre utilisateur lifebox. Notez que l'utilisation de différents comptes lifebox avec le même compte Apple/Google peut donner lieu à cette situation.";
 "print_edit_cancel_popup_info" = "Vos modifications de photos seront supprimées.";
@@ -2516,3 +2520,6 @@ then {11,99 TRY/Month}*/
 "save_changes" = "Sauvegarder les Modifications";
 "ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "Pour changer de numéro de téléphone, vous devez d'abord annuler votre forfait lifebox, qui est inclus dans la facture de téléphone. Veuillez appeler le service clientèle de Turkcell.";
 "ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "Pour changer de numéro de téléphone, contactez d'abord votre opérateur et faites annuler vos forfaits.";
+
+/*Fuzzy*/
+"free_up_space_title_settings" = "Libérez de l'espace sur votre appareil.";

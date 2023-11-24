@@ -21,7 +21,7 @@
                         <rect key="frame" x="8" y="8" width="236" height="307"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQc-4w-Ey5">
-                                <rect key="frame" x="10" y="10" width="186" height="24"/>
+                                <rect key="frame" x="10" y="10" width="216" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="2dK-bZ-mhg"/>
                                 </constraints>
@@ -29,19 +29,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WFM-5h-s7s">
-                                <rect key="frame" x="204" y="8" width="24" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="KKW-BP-ajE"/>
-                                    <constraint firstAttribute="width" constant="24" id="tsp-xt-5tW"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Button" image="iconCancelBorder"/>
-                                <buttonConfiguration key="configuration" style="plain" image="iconCancelBorder"/>
-                                <connections>
-                                    <action selector="onCloseCard:" destination="IB2-05-xyp" eventType="touchUpInside" id="V7Y-yQ-q0x"/>
-                                </connections>
-                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nLG-8L-bPC" customClass="LoadingImageView" customModule="Billo" customModuleProvider="target">
                                 <rect key="frame" x="16" y="47" width="204" height="220"/>
                                 <constraints>
@@ -89,20 +76,18 @@
                             <constraint firstItem="cWf-A6-JzX" firstAttribute="top" secondItem="nLG-8L-bPC" secondAttribute="bottom" constant="12" id="4tn-MO-FRB"/>
                             <constraint firstItem="cWf-A6-JzX" firstAttribute="leading" secondItem="6tz-8y-gKG" secondAttribute="leading" constant="10" id="E1R-wW-Zhe"/>
                             <constraint firstAttribute="trailing" secondItem="nLG-8L-bPC" secondAttribute="trailing" constant="16" id="ECw-8a-2au"/>
-                            <constraint firstItem="WFM-5h-s7s" firstAttribute="leading" secondItem="pQc-4w-Ey5" secondAttribute="trailing" constant="8" id="JFX-cA-SZB"/>
                             <constraint firstAttribute="trailing" secondItem="thu-Fk-Yp3" secondAttribute="trailing" constant="20" id="NdU-zH-TOv"/>
                             <constraint firstItem="nLG-8L-bPC" firstAttribute="leading" secondItem="6tz-8y-gKG" secondAttribute="leading" constant="16" id="NjV-uT-89d"/>
                             <constraint firstItem="pQc-4w-Ey5" firstAttribute="leading" secondItem="6tz-8y-gKG" secondAttribute="leading" constant="10" id="PKW-Ql-YY3"/>
                             <constraint firstItem="Eh1-eJ-55P" firstAttribute="top" secondItem="pQc-4w-Ey5" secondAttribute="bottom" constant="88" id="Ut3-dx-V10"/>
                             <constraint firstItem="cWf-A6-JzX" firstAttribute="top" secondItem="Eh1-eJ-55P" secondAttribute="bottom" constant="87" id="VPX-2c-UOW"/>
-                            <constraint firstAttribute="trailing" secondItem="WFM-5h-s7s" secondAttribute="trailing" constant="8" id="WHA-3r-CcW"/>
-                            <constraint firstItem="WFM-5h-s7s" firstAttribute="top" secondItem="6tz-8y-gKG" secondAttribute="top" constant="8" id="YiO-XW-sMi"/>
                             <constraint firstItem="thu-Fk-Yp3" firstAttribute="top" secondItem="Eh1-eJ-55P" secondAttribute="bottom" constant="10" id="d5U-f6-QM8"/>
                             <constraint firstAttribute="bottom" secondItem="cWf-A6-JzX" secondAttribute="bottom" constant="8" id="llD-T6-Eit"/>
                             <constraint firstItem="pQc-4w-Ey5" firstAttribute="top" secondItem="6tz-8y-gKG" secondAttribute="top" constant="10" id="nga-nw-Kxl"/>
                             <constraint firstItem="Eh1-eJ-55P" firstAttribute="leading" secondItem="6tz-8y-gKG" secondAttribute="leading" constant="83" id="oQT-vc-MBS"/>
                             <constraint firstItem="thu-Fk-Yp3" firstAttribute="leading" secondItem="6tz-8y-gKG" secondAttribute="leading" constant="20" id="oTH-Aq-2al"/>
                             <constraint firstAttribute="trailing" secondItem="Eh1-eJ-55P" secondAttribute="trailing" constant="83" id="pQL-6A-M1s"/>
+                            <constraint firstAttribute="trailing" secondItem="pQc-4w-Ey5" secondAttribute="trailing" constant="10" id="wlG-VB-uZV"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -119,7 +104,6 @@
                 <outlet property="bgView" destination="6tz-8y-gKG" id="eRt-Qz-h5c"/>
                 <outlet property="cardThumbnailImage" destination="nLG-8L-bPC" id="lPf-st-5W9"/>
                 <outlet property="cardTitleLabel" destination="pQc-4w-Ey5" id="9co-IH-iQA"/>
-                <outlet property="closeButton" destination="WFM-5h-s7s" id="Ibv-Ro-4A1"/>
                 <outlet property="statusImageView" destination="EtJ-aY-2JW" id="h8U-78-97P"/>
                 <outlet property="statusLabel" destination="n2J-oX-Vyq" id="cdI-YR-gyP"/>
                 <outlet property="thumbnailPlusImage" destination="Eh1-eJ-55P" id="k4R-wk-lxy"/>
@@ -128,7 +112,4 @@
             <point key="canvasLocation" x="320.61068702290078" y="210.21126760563382"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="iconCancelBorder" width="24" height="24"/>
-    </resources>
 </document>

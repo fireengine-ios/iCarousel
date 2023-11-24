@@ -2164,11 +2164,13 @@ then {11,99 TRY/Month}*/
 "printed_photo_card_info" = "Imprime 5 fotos cada mes.";
 "printed_photo_card_body" = "Imprime tus fotos.";
 "printed_photo_card_body_no_right" = "Has usado tus derechos de impresión de fotos.";
-"printed_photo_card_info_no_right" = "Puede reimprimir a partir de la fecha %d.";
+"printed_photo_card_info_no_right" = "Cuando se renueve su paquete, puede enviar sus fotos para imprimir nuevamente.";
 "printed_package_view" = "Ver mis paquetes de impresión";
 "more_photo_right" = "Tienes %d más envío de fotos. ¿Está seguro de que desea continuar?";
 "no_more_photo_right" = "Has seleccionado más de %d fotos. Reduzca para continuar.";
 "timeline_header" = "Los mejores recuerdos de %d";
+
+/*Fuzzy*/
 "timeline_description" = "Hemos recopilado los mejores recuerdos de este año para ti. ¡Compruébalos ahora!";
 "selected_for_print" = "Seleccionado para impresión";
 "print_cancel_popup_question" = "¿Seguro que quieres cancelarlo?";
@@ -2246,6 +2248,8 @@ then {11,99 TRY/Month}*/
 "order_not_delivered" = "El pedido no se ha podido imprimir";
 "order_not_delivered_detail" = "Tu pedido no se ha podido enviar a imprimir por motivos técnicos. Vuelva a enviar una nueva impresión.";
 "grace_banner_paycell_text" = "";
+
+/*Fuzzy*/
 "sync_page_offer_pop_up" = "¡Haz clic ahora para descubrir ventajosos paquetes lifebox especiales para ti!";
 "validate_purchase_already_subscribed_text" = "La suscripción relacionada con esta compra ya está activada en la cuenta %@ con email %@ para otro usuario de lifebox. Ten en cuenta que el uso de diferentes cuentas de lifebox con la misma cuenta de Apple/Google puede dar lugar a esta situación.";
 "print_edit_cancel_popup_info" = "Se eliminarán las ediciones de tus fotos.";
@@ -2253,3 +2257,6 @@ then {11,99 TRY/Month}*/
 "save_changes" = "Guardar Cambios";
 "ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "Para cambiar tu número de teléfono, primero debes cancelar tu paquete lifebox, que está incluido en la factura telefónica. Por favor, llama al servicio de atención al cliente de Turkcell.";
 "ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "Para cambiar de número de teléfono, ponte primero en contacto con tu operador y haz que cancelen tus paquetes.";
+
+/*Fuzzy*/
+"free_up_space_title_settings" = "Libera espacio de memoria en tu teléfono.";

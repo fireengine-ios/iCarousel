@@ -254,4 +254,5 @@ enum Image: String, AppImage {
     case iconCheckGreen
     case iconDelivery
     case iconAddUnselectPlus
+    case iconNoRight
 }

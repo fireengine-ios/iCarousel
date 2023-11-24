@@ -2124,8 +2124,8 @@ then {11,99 TRY/Month}*/
 "printed_package_view" = "";
 "more_photo_right" = "";
 "no_more_photo_right" = "";
-"timeline_header" = "";
-"timeline_description" = "";
+"timeline_header" = "%d-ის საუკეთესო მოგონებები";
+"timeline_description" = "ჩვენ შევქმენით შენთვისის ამ წლის საუკეთესო მოგონებები. ნახე ისინი!";
 "selected_for_print" = "";
 "print_cancel_popup_question" = "";
 "print_cancel_popup_info" = "";
@@ -2207,3 +2207,6 @@ then {11,99 TRY/Month}*/
 "save_changes" = "";
 "ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "";
 "ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "";
+
+/*Fuzzy*/
+"free_up_space_title_settings" = "გაათავისუფლე სივრცე შენს მოწყობილობაში.";
