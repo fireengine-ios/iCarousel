@@ -2165,7 +2165,7 @@ then {11,99 TRY/Month}*/
 "printed_photo_card_info" = "Bëni 5 fotografi të shtypura çdo muaj.";
 "printed_photo_card_body" = "Printoni fotot tuaja.";
 "printed_photo_card_body_no_right" = "Ju keni përdorur të drejtat tuaja të printimit të fotografive.";
-"printed_photo_card_info_no_right" = "Kur paketa juaj të rinovohet, mund t'i dërgoni sërish fotot tuaja për printim.";
+"printed_photo_card_info_no_right" = "Kur paketa juaj të rinovohet, provo përsëri.";
 "printed_package_view" = "Shiko paketat e mia të printimit.";
 "more_photo_right" = "Ju keni më shumë se %d dorëzim fotografie. A jeni i sigurt që doni të vazhdoni?";
 "no_more_photo_right" = "Ju keni zgjedhur më shumë se fotot %d. Redukto për të vazhduar.";

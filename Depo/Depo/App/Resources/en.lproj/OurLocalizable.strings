@@ -2184,7 +2184,7 @@ then {11,99 TRY/Month}*/
 "printed_photo_card_info" = "Have 5 photos printed each month.";
 "printed_photo_card_body" = "Have your photos printed.";
 "printed_photo_card_body_no_right" = "You've used your photo printing rights.";
-"printed_photo_card_info_no_right" = "When your package is renewed, you can send your photos for printing again.";
+"printed_photo_card_info_no_right" = "When your package is renewed, try again.";
 "printed_package_view" = "View My Print Packages";
 "more_photo_right" = "You've got %d more photo submission. Are you sure you want to continue?";
 "no_more_photo_right" = "Has seleccionado más de %d fotos. Reduzca para continuar.";
