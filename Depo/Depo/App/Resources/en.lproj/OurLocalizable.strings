@@ -2184,7 +2184,7 @@ then {11,99 TRY/Month}*/
 "printed_photo_card_info" = "Have 5 photos printed each month.";
 "printed_photo_card_body" = "Have your photos printed.";
 "printed_photo_card_body_no_right" = "You've used your photo printing rights.";
-"printed_photo_card_info_no_right" = "You can reprint as of the %d date.";
+"printed_photo_card_info_no_right" = "When your package is renewed, you can send your photos for printing again.";
 "printed_package_view" = "View My Print Packages";
 "more_photo_right" = "You've got %d more photo submission. Are you sure you want to continue?";
 "no_more_photo_right" = "Has seleccionado más de %d fotos. Reduzca para continuar.";
@@ -2268,6 +2268,8 @@ then {11,99 TRY/Month}*/
 "order_not_delivered" = "Your order could not be delivered to print";
 "order_not_delivered_detail" = "Your order could not be delivered to print for technical reasons. Please send a new print again.";
 "grace_banner_paycell_text" = "";
+
+/*Fuzzy*/
 "sync_page_offer_pop_up" = "Click now to discover advantageous lifebox packages special for you!";
 "validate_purchase_already_subscribed_text" = "Subscription related with this purchase is already activated on account %@ with email %@ for another lifebox user. Note that using different lifebox accounts with the same Apple/Google account might result with this situation.";
 "print_edit_cancel_popup_info" = "Your photo edits will be deleted.";
@@ -2276,3 +2278,6 @@ then {11,99 TRY/Month}*/
 "ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "To change your phone number, you must first cancel your lifebox package, which is included in the phone bill. Please call Turkcell customer services.";
 "ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "To change your phone number, first contact your operator and have your packages canceled.";
 "free_up_space_title_settings" = "";
+
+/*Fuzzy*/
+"free_up_space_title_settings" = "Free up space on your device.";

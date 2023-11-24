@@ -2165,7 +2165,7 @@ then {11,99 TRY/Month}*/
 "printed_photo_card_info" = "Bëni 5 fotografi të shtypura çdo muaj.";
 "printed_photo_card_body" = "Printoni fotot tuaja.";
 "printed_photo_card_body_no_right" = "Ju keni përdorur të drejtat tuaja të printimit të fotografive.";
-"printed_photo_card_info_no_right" = "Ju mund të ribotoni që nga data %d.";
+"printed_photo_card_info_no_right" = "Kur paketa juaj të rinovohet, mund t'i dërgoni sërish fotot tuaja për printim.";
 "printed_package_view" = "Shiko paketat e mia të printimit.";
 "more_photo_right" = "Ju keni më shumë se %d dorëzim fotografie. A jeni i sigurt që doni të vazhdoni?";
 "no_more_photo_right" = "Ju keni zgjedhur më shumë se fotot %d. Redukto për të vazhduar.";
@@ -2249,6 +2249,8 @@ then {11,99 TRY/Month}*/
 "order_not_delivered" = "Porosia nuk mund të dorëzohej për printim";
 "order_not_delivered_detail" = "Porosia juaj nuk mund të dorëzohej në printim për arsye teknike. Ju lutemi dërgoni përsëri një printim të ri.";
 "grace_banner_paycell_text" = "";
+
+/*Fuzzy*/
 "sync_page_offer_pop_up" = "Klikoni tani për të zbuluar paketa të favorshme lifebox të veçanta për ju!";
 "validate_purchase_already_subscribed_text" = "Abonimi në lidhje me këtë blerje është aktivizuar tashmë në llogarinë %@ me email %@ për një përdorues tjetër të lifebox. Vini re se përdorimi i llogarive të ndryshme lifebox me të njëjtën llogari Apple/Google mund të rezultojë me këtë situatë.";
 "print_edit_cancel_popup_info" = "Redaktimet tuaja të fotografisë do të fshihen.";
@@ -2257,3 +2259,6 @@ then {11,99 TRY/Month}*/
 "ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "Për të ndryshuar numrin tuaj të telefonit, së pari duhet të anuloni paketën tuaj lifebox, e cila përfshihet në faturën e telefonit. Ju lutemi telefononi shërbimet e klientit Turkcell.";
 "ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "Për të ndryshuar numrin tuaj të telefonit, së pari kontaktoni operatorin tuaj dhe anuloni paketat tuaja.";
 "free_up_space_title_settings" = "";
+
+/*Fuzzy*/
+"free_up_space_title_settings" = "Lironi hapësirë në pajisjen tuaj.";

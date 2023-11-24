@@ -2122,7 +2122,7 @@ then {11,99 TRY/Month}*/
 "printed_photo_card_info" = "Lassen Sie jeden Monat 5 Fotos drucken.";
 "printed_photo_card_body" = "Lassen Sie Ihre Fotos drucken.";
 "printed_photo_card_body_no_right" = "Sie haben Ihr Recht auf Fotodruck genutzt.";
-"printed_photo_card_info_no_right" = "Sie können ab dem Datum %d nachdrucken.";
+"printed_photo_card_info_no_right" = "Wenn Ihr Paket erneuert wird, können Sie Ihre Fotos erneut zum Drucken einsenden.";
 "printed_package_view" = "Meine Druckpakete anzeigen";
 "more_photo_right" = "Sie haben mehr als %d Fotos eingereicht. Sind Sie sicher, dass Sie fortfahren möchten?";
 "no_more_photo_right" = "Sie haben mehr als %d Fotos ausgewählt. Reduzieren Sie, um fortzufahren.";
@@ -2206,6 +2206,8 @@ then {11,99 TRY/Month}*/
 "order_not_delivered" = "Bestellung konnte nicht zum Druck übertragen werden";
 "order_not_delivered_detail" = "Ihre Bestellung konnte aus technischen Gründen nicht zum Druck übertragen werden. Bitte geben Sie einen neuen Druckauftrag auf.";
 "grace_banner_paycell_text" = "";
+
+/*Fuzzy*/
 "sync_page_offer_pop_up" = "Klicken Sie jetzt, um die vorteilhaften lifebox-Pakete zu entdecken, die speziell für Sie bestimmt sind!";
 "validate_purchase_already_subscribed_text" = "Das mit diesem Kauf verbundene Abonnement ist bereits auf dem Konto %@ mit der E-Mail %@ für einen anderen lifebox-Benutzer aktiviert. Beachten Sie, dass die Verwendung verschiedener lifebox-Konten mit demselben Apple/Google-Konto zu dieser Situation führen kann.";
 "print_edit_cancel_popup_info" = "Ihre Fotobearbeitungen werden gelöscht.";
@@ -2214,3 +2216,6 @@ then {11,99 TRY/Month}*/
 "ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "Um Ihre Telefonnummer zu ändern, müssen Sie zunächst Ihr lifebox-Paket kündigen, das in der Telefonrechnung enthalten ist. Bitte wenden Sie sich an den Turkcell-Kundendienst.";
 "ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "Um Ihre Telefonnummer zu ändern, wenden Sie sich zunächst an Ihren Netzbetreiber und lassen Sie Ihre Pakete stornieren.";
 "free_up_space_title_settings" = "";
+
+/*Fuzzy*/
+"free_up_space_title_settings" = "Geben Sie Speicherplatz auf Ihrem Gerät frei.";

@@ -2134,7 +2134,7 @@ then {11,99 TRY/Month}*/
 "printed_photo_card_info" = "لديك 5 صور مطبوعة كل شهر.";
 "printed_photo_card_body" = "قم بطباعة صورك.";
 "printed_photo_card_body_no_right" = "لقد استخدمت بالفعل حقك في طباعة الصور.";
-"printed_photo_card_info_no_right" = "يمكنك إعادة طبع اعتبارا من %d التاريخ.";
+"printed_photo_card_info_no_right" = " عندما يتم تجديد الحزمة الخاصة بك ، يمكنك إرسال صورك للطباعة مرة أخرى.";
 "printed_package_view" = "عرض حزم الطباعة الخاصة بي";
 "more_photo_right" = "كنت قد حصلت على أكثر من %d تقديم الصور. هل أنت متأكد أنك تريد الاستمرار?";
 "no_more_photo_right" = "لقد اخترت أكثر من %d الصور. تقليل للمتابعة.";
@@ -2218,6 +2218,8 @@ then {11,99 TRY/Month}*/
 "order_not_delivered" = "لا يمكن تسليم الطلب للطباعة";
 "order_not_delivered_detail" = "لا يمكن تسليم طلبك للطباعة لأسباب فنية. الرجاء إرسال نسخة جديدة مرة أخرى.";
 "grace_banner_paycell_text" = "";
+
+/*Fuzzy*/
 "sync_page_offer_pop_up" = "انقر الآن لاكتشاف حزم lifebox المفيدة والمخصصة لك!";
 "validate_purchase_already_subscribed_text" = "تم تنشيط الاشتراك المرتبط بهذا الشراء بالفعل على الحساب %@ مع البريد الإلكتروني %@ لمستخدم lifebox آخر. لاحظ أن استخدام حسابات مختلفة lifebox مع نفس حساب Apple/Google قد يؤدي مع هذا الوضع.";
 "print_edit_cancel_popup_info" = "سيتم حذف تعديلات صورتك.";
@@ -2226,3 +2228,6 @@ then {11,99 TRY/Month}*/
 "ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "لتغيير رقم هاتفك ، يجب عليك أولا إلغاء حزمة lifebox المضمنة في فاتورة الهاتف. يرجى الاتصال بخدمة العملاء Turkcell.";
 "ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "لتغيير رقم هاتفك ، اتصل أولا بالمشغل الخاص بك وقم بإلغاء الحزم الخاصة بك.";
 "free_up_space_title_settings" = "";
+
+/*Fuzzy*/
+"free_up_space_title_settings" = "تحرير مساحة على جهازك.";

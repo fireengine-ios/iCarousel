@@ -2208,3 +2208,6 @@ then {11,99 TRY/Month}*/
 "ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "";
 "ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "";
 "free_up_space_title_settings" = "";
+
+/*Fuzzy*/
+"free_up_space_title_settings" = "გაათავისუფლე სივრცე შენს მოწყობილობაში.";
