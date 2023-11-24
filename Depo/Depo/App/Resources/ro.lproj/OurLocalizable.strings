@@ -2122,6 +2122,8 @@ then {11,99 TRY/Month}*/
 "printed_photo_card_info" = "Primiți 5 fotografii imprimate în fiecare lună.";
 "printed_photo_card_body" = "Imprimați-vă fotografiile.";
 "printed_photo_card_body_no_right" = "V-ați folosit drepturile de imprimare foto.";
+
+/*Fuzzy*/
 "printed_photo_card_info_no_right" = "Încercați din nou când pachetul este reînnoit.";
 "printed_package_view" = "Vizualizați Pachetele mele de imprimare.";
 "more_photo_right" = "Aveți mai mult de %d fotografii trimise. Sunteți sigur că doriți să continuați?";

@@ -2122,6 +2122,8 @@ then {11,99 TRY/Month}*/
 "printed_photo_card_info" = "Lassen Sie jeden Monat 5 Fotos drucken.";
 "printed_photo_card_body" = "Lassen Sie Ihre Fotos drucken.";
 "printed_photo_card_body_no_right" = "Sie haben Ihr Recht auf Fotodruck genutzt.";
+
+/*Fuzzy*/
 "printed_photo_card_info_no_right" = "Wenn Ihr Paket erneuert wird, versuchen sie es erneut.";
 "printed_package_view" = "Meine Druckpakete anzeigen";
 "more_photo_right" = "Sie haben mehr als %d Fotos eingereicht. Sind Sie sicher, dass Sie fortfahren möchten?";

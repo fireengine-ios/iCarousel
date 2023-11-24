@@ -2176,6 +2176,8 @@ then {11,99 TRY/Month}*/
 "printed_photo_card_info" = "Her ay 5 adet fotoğrafını bastır.";
 "printed_photo_card_body" = "Fotoğraflarını bastır.";
 "printed_photo_card_body_no_right" = "Fotoğraf baskılama hakkını kullandın.";
+
+/*Fuzzy*/
 "printed_photo_card_info_no_right" = "Paketin yenilendiğinde tekrar dene.";
 
 /*Fuzzy*/

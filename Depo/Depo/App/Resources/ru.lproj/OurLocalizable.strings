@@ -2136,6 +2136,8 @@ then {11,99 TRY/Month}*/
 "printed_photo_card_info" = "Печатать 5 фотографий каждый месяц.";
 "printed_photo_card_body" = "Распечатайте свои фотографии.";
 "printed_photo_card_body_no_right" = "Вы использовали свое право на печать фотографий.";
+
+/*Fuzzy*/
 "printed_photo_card_info_no_right" = "Когда пакет будет обновлен, Попробуйте еще раз.";
 "printed_package_view" = "Посмотреть мои пакеты печати.";
 "more_photo_right" = "У вас есть еще %d фотографий для отправки. Вы уверены, что хотите продолжить?";
