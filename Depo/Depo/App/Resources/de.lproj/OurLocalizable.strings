@@ -2122,12 +2122,16 @@ then {11,99 TRY/Month}*/
 "printed_photo_card_info" = "Lassen Sie jeden Monat 5 Fotos drucken.";
 "printed_photo_card_body" = "Lassen Sie Ihre Fotos drucken.";
 "printed_photo_card_body_no_right" = "Sie haben Ihr Recht auf Fotodruck genutzt.";
-"printed_photo_card_info_no_right" = "Sie können ab dem Datum %d nachdrucken.";
+
+/*Fuzzy*/
+"printed_photo_card_info_no_right" = "Wenn Ihr Paket erneuert wird, versuchen sie es erneut.";
 "printed_package_view" = "Meine Druckpakete anzeigen";
 "more_photo_right" = "Sie haben mehr als %d Fotos eingereicht. Sind Sie sicher, dass Sie fortfahren möchten?";
 "no_more_photo_right" = "Sie haben mehr als %d Fotos ausgewählt. Reduzieren Sie, um fortzufahren.";
-"timeline_header" = "Die besten Erinnerungen an das Jahr %d";
-"timeline_description" = "Wir haben für Sie die besten Erinnerungen an dieses Jahr zusammengestellt. Schau sie dir jetzt an!";
+"timeline_header" = "Die Besten Erinnerungen An Das Jahr 2023";
+
+/*Fuzzy*/
+"timeline_description" = "Wir haben für Sie die schönsten Momente des Jahres 2023 gesammelt. Entdecken Sie sie jetzt für sich selbst.";
 "selected_for_print" = "Zum Drucken ausgewählt";
 "print_cancel_popup_question" = "Sind Sie sicher, dass Sie abbrechen möchten?";
 "print_cancel_popup_info" = "Alle Fotobearbeitungen, die Sie für das gedruckte Album ausgewählt haben, werden gelöscht. Sie müssen die Fotos erneut auswählen und bearbeiten.";
@@ -2204,6 +2208,8 @@ then {11,99 TRY/Month}*/
 "order_not_delivered" = "Bestellung konnte nicht zum Druck übertragen werden";
 "order_not_delivered_detail" = "Ihre Bestellung konnte aus technischen Gründen nicht zum Druck übertragen werden. Bitte geben Sie einen neuen Druckauftrag auf.";
 "grace_banner_paycell_text" = "";
+
+/*Fuzzy*/
 "sync_page_offer_pop_up" = "Klicken Sie jetzt, um die vorteilhaften lifebox-Pakete zu entdecken, die speziell für Sie bestimmt sind!";
 "validate_purchase_already_subscribed_text" = "Das mit diesem Kauf verbundene Abonnement ist bereits auf dem Konto %@ mit der E-Mail %@ für einen anderen lifebox-Benutzer aktiviert. Beachten Sie, dass die Verwendung verschiedener lifebox-Konten mit demselben Apple/Google-Konto zu dieser Situation führen kann.";
 "print_edit_cancel_popup_info" = "Ihre Fotobearbeitungen werden gelöscht.";
@@ -2211,3 +2217,7 @@ then {11,99 TRY/Month}*/
 "save_changes" = "Änderungen Speichern";
 "ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "Um Ihre Telefonnummer zu ändern, müssen Sie zunächst Ihr lifebox-Paket kündigen, das in der Telefonrechnung enthalten ist. Bitte wenden Sie sich an den Turkcell-Kundendienst.";
 "ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "Um Ihre Telefonnummer zu ändern, wenden Sie sich zunächst an Ihren Netzbetreiber und lassen Sie Ihre Pakete stornieren.";
+
+/*Fuzzy*/
+"free_up_space_title_settings" = "Geben Sie Speicherplatz auf Ihrem Gerät frei.";
+"recommended" = "Empfohlen";

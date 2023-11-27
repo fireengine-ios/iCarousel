@@ -2122,12 +2122,16 @@ then {11,99 TRY/Month}*/
 "printed_photo_card_info" = "Primiți 5 fotografii imprimate în fiecare lună.";
 "printed_photo_card_body" = "Imprimați-vă fotografiile.";
 "printed_photo_card_body_no_right" = "V-ați folosit drepturile de imprimare foto.";
-"printed_photo_card_info_no_right" = "Puteți retipări începând cu data de %d.";
+
+/*Fuzzy*/
+"printed_photo_card_info_no_right" = "Încercați din nou când pachetul este reînnoit.";
 "printed_package_view" = "Vizualizați Pachetele mele de imprimare.";
 "more_photo_right" = "Aveți mai mult de %d fotografii trimise. Sunteți sigur că doriți să continuați?";
 "no_more_photo_right" = "Ați selectat mai mult de %d fotografii. Reduceți pentru a continua.";
-"timeline_header" = "Les meilleurs souvenirs de %d";
-"timeline_description" = "Nous avons compilé pour vous les meilleurs souvenirs de cette année. Découvrez-les dès maintenant!";
+"timeline_header" = "Les Meilleurs Souvenirs De 2023";
+
+/*Fuzzy*/
+"timeline_description" = "Am compilat pentru tine cele mai bune momente ale anului 2023. Descoperă-le pentru tine chiar acum.";
 "selected_for_print" = "Selectate pentru imprimare";
 "print_cancel_popup_question" = "Sunteți sigur că doriți să anulați?";
 "print_cancel_popup_info" = "Toate editările de fotografii pe care le-ați selectat pentru albumul tipărit vor fi șterse. Va trebui să selectați și să editați din nou fotografiile.";
@@ -2204,6 +2208,8 @@ then {11,99 TRY/Month}*/
 "order_not_delivered" = "Comanda nu a putut fi livrată la imprimare";
 "order_not_delivered_detail" = "Comanda dvs. nu a putut fi livrată la imprimare din motive tehnice. Vă rugăm să trimiteți din nou o nouă imprimare.";
 "grace_banner_paycell_text" = "";
+
+/*Fuzzy*/
 "sync_page_offer_pop_up" = "Dă click acum pentru a descoperi pachetele avantajoase lifebox speciale pentru tine!";
 "validate_purchase_already_subscribed_text" = "Abonamentul legat de această achiziție este deja activat în contul %@ cu adresa de e-mail %@ pentru un alt utilizator lifebox. Rețineți că utilizarea unor conturi lifebox diferite cu același cont Apple/Google poate duce la această situație.";
 "print_edit_cancel_popup_info" = "Editarea fotografiilor dvs. va fi ștearsă.";
@@ -2211,3 +2217,7 @@ then {11,99 TRY/Month}*/
 "save_changes" = "Salvați Modificările";
 "ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "Pentru a vă schimba numărul de telefon, trebuie mai întâi să anulați pachetul lifebox, care este inclus în factura de telefonie. Vă rugăm să sunați la serviciile pentru clienți Turkcell.";
 "ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "Pentru a vă schimba numărul de telefon, contactați mai întâi operatorul dvs. și solicitați anularea pachetelor.";
+
+/*Fuzzy*/
+"free_up_space_title_settings" = "Eliberați spațiu pe dispozitivul dumneavoastră.";
+"recommended" = "Recomandat";

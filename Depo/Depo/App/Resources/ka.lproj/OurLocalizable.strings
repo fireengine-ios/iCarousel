@@ -2124,8 +2124,8 @@ then {11,99 TRY/Month}*/
 "printed_package_view" = "";
 "more_photo_right" = "";
 "no_more_photo_right" = "";
-"timeline_header" = "";
-"timeline_description" = "";
+"timeline_header" = "2023-ის საუკეთესო მოგონებები";
+"timeline_description" = "ჩვენ შევადგინეთ თქვენთვის 2023 წლის საუკეთესო მოგონებები. ნახე ისინი!";
 "selected_for_print" = "";
 "print_cancel_popup_question" = "";
 "print_cancel_popup_info" = "";
@@ -2200,10 +2200,14 @@ then {11,99 TRY/Month}*/
 "order_not_delivered" = "";
 "order_not_delivered_detail" = "";
 "grace_banner_paycell_text" = "";
-"sync_page_offer_pop_up" = "";
-"validate_purchase_already_subscribed_text" = "";
+"sync_page_offer_pop_up" = "დააჭირე და აღმოაჩინე შენთვის ხელსაყრელი lifebox-ის პაკეტები!";
+"validate_purchase_already_subscribed_text" = "აღნიშნული გამოწერა უკვე აქტიურია %@ ანგარიშზე, ელ.ფოსტით %@ სხვა lifebox მომხმარებლისთვის. გაითვალისწინე, რომ lifebox-ის სხვადასხვა ანგარიშის გამოყენებამ, იმავე Apple/Google-ის ანგარიშით, შესაძლოა გამოიწვიოს ეს ვითარება.";
 "print_edit_cancel_popup_info" = "";
 "revert_to_original" = "";
 "save_changes" = "";
-"ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "";
-"ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "";
+"ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "შენი მობილური ნომრის შესაცვლელად, გააუქმე lifebox-ის პაკეტი, რომელსაც მოიცავს შენი ნომრის ანგარიში. გთხოვთ, დაუკავშირდე Turkcell-ის აბონენტთა მომსახურების სამსახურს.";
+"ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "იმისათვის, რომ შეცვალო შენი მობილურის ნომერი, დაუკავშირდი შენს მობილურ ოპერატორს და გააუქმე აქტიური პაკეტები.";
+
+/*Fuzzy*/
+"free_up_space_title_settings" = "გაათავისუფლე სივრცე შენს მოწყობილობაში.";
+"recommended" = "რეკომენდირებულია";
