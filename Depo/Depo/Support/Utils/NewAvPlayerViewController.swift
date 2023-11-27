@@ -77,7 +77,7 @@ final class NewAvPlayerViewController: AVPlayerViewController {
         
         let navbarTitle = UILabel()
         navbarTitle.textColor = .white
-        navbarTitle.text = String(format: localized(.timelineHeader), Int(Date().getYear())) 
+        navbarTitle.text = String(format: localized(.timelineHeader), 2023) 
         navbarTitle.font = .appFont(.medium, size: 16)
         navbarTitle.minimumScaleFactor = 0.5
         navbarTitle.adjustsFontSizeToFitWidth = true

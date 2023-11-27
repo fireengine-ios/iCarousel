@@ -111,8 +111,8 @@ class ForYouTimelineTableViewCell: UITableViewCell {
         self.timelineResponse = item
         
         let year = dateConverter(epochTimeInMilliseconds: UInt64(item?.details.createdDate ?? 0))
-        titleLabel.text = String(format: localized(.timelineHeader), Int(year) ?? 0)
-        descriptionLabel.text = String(format: localized(.timelineDescription), Int(year) ?? 0)
+        titleLabel.text = String(format: localized(.timelineHeader), 2023)
+        descriptionLabel.text = String(format: localized(.timelineDescription), 2023)
         
         type = item?.saved ?? false ? .display : .save
         switch type {
