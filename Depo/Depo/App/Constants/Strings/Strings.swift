@@ -363,4 +363,5 @@ enum Strings: String, Localizable {
     case orderNotDeliveredDetail = "order_not_delivered_detail"
     
     case syncPageOfferPopUp = "sync_page_offer_pop_up"
+    case higlightedPackageRecommended = "recommended"
 }

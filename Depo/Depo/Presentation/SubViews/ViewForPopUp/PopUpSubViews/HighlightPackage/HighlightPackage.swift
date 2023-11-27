@@ -31,7 +31,7 @@ final class HighlightPackage: BaseCardView {
     
     @IBOutlet weak var packageTitleName: UILabel! {
         willSet {
-            newValue.text = "Önerilen"
+            newValue.text = localized(.higlightedPackageRecommended)
             newValue.font = .appFont(.medium, size: 14)
         }
     }

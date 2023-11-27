@@ -2200,13 +2200,14 @@ then {11,99 TRY/Month}*/
 "order_not_delivered" = "";
 "order_not_delivered_detail" = "";
 "grace_banner_paycell_text" = "";
-"sync_page_offer_pop_up" = "";
+"sync_page_offer_pop_up" = "დააჭირე და აღმოაჩინე შენთვის ხელსაყრელი lifebox-ის პაკეტები!";
 "validate_purchase_already_subscribed_text" = "";
 "print_edit_cancel_popup_info" = "";
 "revert_to_original" = "";
 "save_changes" = "";
-"ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "";
-"ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "";
+"ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "შენი მობილური ნომრის შესაცვლელად, გააუქმე lifebox-ის პაკეტი, რომელსაც მოიცავს შენი ნომრის ანგარიში. გთხოვთ, დაუკავშირდე Turkcell-ის აბონენტთა მომსახურების სამსახურს.";
+"ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "იმისათვის, რომ შეცვალო შენი მობილურის ნომერი, დაუკავშირდი შენს მობილურ ოპერატორს და გააუქმე აქტიური პაკეტები.";
 
 /*Fuzzy*/
 "free_up_space_title_settings" = "გაათავისუფლე სივრცე შენს მოწყობილობაში.";
+"recommended" = "რეკომენდირებულია";
