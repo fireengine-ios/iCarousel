@@ -305,7 +305,6 @@ extension NotificationViewController: NotificationViewInput {
         }
         let viewController = WebViewController(urlString: urlstring)
         RouterVC().pushViewController(viewController: viewController)
-        analyticsService.logScreen(screen: .eulaExplanation)
     }
 
 }

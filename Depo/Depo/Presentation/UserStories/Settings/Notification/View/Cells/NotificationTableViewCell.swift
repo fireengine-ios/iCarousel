@@ -115,6 +115,7 @@ class NotificationTableViewCell: UITableViewCell {
         panGestureRecognizer.addTarget(self, action: #selector(handlePanGesture(_:)))
         panGestureRecognizer.delegate = self
         contentView.addGestureRecognizer(panGestureRecognizer)
+        contentView.isHidden = true
     }
     
     override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {

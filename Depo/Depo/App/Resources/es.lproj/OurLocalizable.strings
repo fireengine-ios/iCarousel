@@ -2174,6 +2174,10 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "timeline_description" = "Hemos recopilado los mejores recuerdos de este año para ti. ¡Compruébalos ahora!";
+"timeline_header" = "Los mejores recuerdos de 2023";
+
+/*Fuzzy*/
+"timeline_description" = "Hemos recopilado para ti los mejores momentos del año 2023. Descúbrelos ahora.";
 "selected_for_print" = "Seleccionado para impresión";
 "print_cancel_popup_question" = "¿Seguro que quieres cancelarlo?";
 "print_cancel_popup_info" = "Se borrarán todas las ediciones de fotos que hayas seleccionado para el álbum impreso. Tendrás que volver a seleccionar y editar las fotos.";

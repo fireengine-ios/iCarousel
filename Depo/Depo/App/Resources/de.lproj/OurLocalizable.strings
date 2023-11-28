@@ -2132,6 +2132,10 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "timeline_description" = "Wir haben für Sie die besten Erinnerungen an dieses Jahr zusammengestellt. Schau sie dir jetzt an!";
+"timeline_header" = "Die Besten Erinnerungen An Das Jahr 2023";
+
+/*Fuzzy*/
+"timeline_description" = "Wir haben für Sie die schönsten Momente des Jahres 2023 gesammelt. Entdecken Sie sie jetzt für sich selbst.";
 "selected_for_print" = "Zum Drucken ausgewählt";
 "print_cancel_popup_question" = "Sind Sie sicher, dass Sie abbrechen möchten?";
 "print_cancel_popup_info" = "Alle Fotobearbeitungen, die Sie für das gedruckte Album ausgewählt haben, werden gelöscht. Sie müssen die Fotos erneut auswählen und bearbeiten.";

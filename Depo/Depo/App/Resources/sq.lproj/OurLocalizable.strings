@@ -2175,6 +2175,10 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "timeline_description" = "Ne kemi përpiluar kujtimet më të mira të këtij viti për ju. Zbuloni ato tani!";
+"timeline_header" = "Kujtimet Më të Mira Të Vitit 2023";
+
+/*Fuzzy*/
+"timeline_description" = "Ne kemi përpiluar kujtimet më të mira të 2023 për ju. Zbuloni ato tani.";
 "selected_for_print" = "Zgjedhur për printim";
 "print_cancel_popup_question" = "A jeni i sigurt që doni të anuloni?";
 "print_cancel_popup_info" = "Të gjitha redaktimet e fotografive që keni zgjedhur për albumin e shtypur do të fshihen. Do t'ju duhet të zgjidhni dhe modifikoni përsëri fotot.";

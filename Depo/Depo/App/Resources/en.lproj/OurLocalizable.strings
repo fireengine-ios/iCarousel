@@ -2194,6 +2194,10 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "timeline_description" = "We have compiled the best memories of this year for you. Check them out now!";
+"timeline_header" = "The Best Memories of 2023";
+
+/*Fuzzy*/
+"timeline_description" = "We have compiled the best memories of 2023 for you. Check them out now!";
 "selected_for_print" = "Selected for printing";
 "print_cancel_popup_question" = "Are you sure you want to cancel?";
 "print_cancel_popup_info" = "All photo edits you have selected for the printed album will be deleted. You will need to select and edit photos again.";

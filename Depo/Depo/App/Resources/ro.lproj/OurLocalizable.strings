@@ -2132,6 +2132,10 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "timeline_description" = "Nous avons compilé pour vous les meilleurs souvenirs de cette année. Découvrez-les dès maintenant!";
+"timeline_header" = "Les Meilleurs Souvenirs De 2023";
+
+/*Fuzzy*/
+"timeline_description" = "Am compilat pentru tine cele mai bune momente ale anului 2023. Descoperă-le pentru tine chiar acum.";
 "selected_for_print" = "Selectate pentru imprimare";
 "print_cancel_popup_question" = "Sunteți sigur că doriți să anulați?";
 "print_cancel_popup_info" = "Toate editările de fotografii pe care le-ați selectat pentru albumul tipărit vor fi șterse. Va trebui să selectați și să editați din nou fotografiile.";
