@@ -1302,7 +1302,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 
                 
                 if let error = dict[PHImageErrorKey] as? NSError {
-                    printLog("IMAGE_LOCAL_ITEM: error \(error.domain) \(error.code) \(error.localizedFailureReason) \(error.description)")
+                    printLog("IMAGE_LOCAL_ITEM: error \(error.domain) \(error.code) \(String(describing: error.localizedFailureReason)) \(error.description)")
                     failCompletion()
                     return
                 }

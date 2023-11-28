@@ -358,7 +358,7 @@ extension SecurityInfoViewController: SecurityQuestionViewDelegate {
         getQuestions { [weak self] questions in
             guard let self = self else { return }
             let controller = SelectQuestionViewController.createController(questions: questions, delegate: self)
-            self.present(controller, animated: true)
+            self.navigationController?.pushViewController(controller, animated: true)
         }
     }
 }

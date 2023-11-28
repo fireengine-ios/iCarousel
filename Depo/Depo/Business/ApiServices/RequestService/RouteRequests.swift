@@ -25,7 +25,7 @@ struct RouteRequests {
     }
     
     // MARK: Environment
-    static var currentServerEnvironment = ServerEnvironment.production
+    static var currentServerEnvironment = ServerEnvironment.test
     private static let applicationTarget = TextConstants.NotLocalized.appName
     
     static let baseShortUrlString: String = {
@@ -389,6 +389,7 @@ struct RouteRequests {
             static let featurePacks = Account.accountApi +/ "feature-packs/IOS"
             static let featurePacksV2 = Account.accountApi +/ "feature-packs/v2/IOS"
             static let availableOffers = Account.accountApi +/ "available-offers/IOS"
+            static let availableOffersWithLanguage = Account.accountApi.absoluteString + "/available-offers/IOS?language=%@"
             static let features = baseUrl +/ "features"
             
             static let permissionsList = Account.accountApi +/ "permission/list"
@@ -522,6 +523,10 @@ struct RouteRequests {
     static let forYouThrowback = baseUrl +/ "foryou/years-ago"
     static let forYouThrowbackDetail = "foryou/years-ago/%d"
     static let collageTemplate = baseUrl +/ "template/collages"
+    static let timeline = baseUrl +/ "foryou/timeline"
+    static func saveDeleteTimeline(with id: Int) -> URL {
+        return timeline +/ String(id)
+    }
     
     // MARK: -OnlyOffice
     static let onlyOfficeGetFile = baseUrl +/ "office/files"

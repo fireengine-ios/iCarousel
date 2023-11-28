@@ -12,7 +12,7 @@ protocol SelectQuestionViewControllerDelegate {
     func didSelectQuestion(question: SecretQuestionsResponse?)
 }
 
-final class SelectQuestionViewController: UIViewController, NibInit  {
+final class SelectQuestionViewController: BaseViewController, NibInit  {
     
     private let cornerRadius: CGFloat = 8
     private let separatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -24,8 +24,6 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
     
     static func createController(questions: [SecretQuestionsResponse], delegate: SelectQuestionViewControllerDelegate) -> SelectQuestionViewController {
         let controller = SelectQuestionViewController()
-        controller.modalTransitionStyle = .crossDissolve
-        controller.modalPresentationStyle = .overFullScreen
         controller.questions = questions
         controller.delegate = delegate
         return controller
@@ -33,7 +31,7 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
     
     @IBOutlet private var backgroundView: UIView! {
         willSet {
-            newValue.backgroundColor = UIColor.clear
+            newValue.backgroundColor = UIColor.white
         }
     }
     
@@ -98,6 +96,7 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
 
         analyticsService.logScreen(screen: .securityQuestionSelect)
         analyticsService.trackDimentionsEveryClickGA(screen: .securityQuestionSelect)
+        setTitle(withString: TextConstants.userProfileSecretQuestion)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -111,25 +110,11 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
     }
     
     private func open() {
-        contentView.transform = NumericConstants.scaleTransform
-        contentView.isHidden = true
-        self.contentView.transform = .identity
-        self.contentView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0)
-        self.view.alpha = 1
-        self.contentView.isHidden = false
         cellsHeightConstraint.constant = CGFloat(questions.count) * 61.0
-        view.alpha = 0
-        
     }
     
     func close(completion: VoidHandler? = nil) {
-        self.view.alpha = 0
-        self.contentView.transform = NumericConstants.scaleTransform
-
-        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
-        }) { _ in
-            self.dismiss(animated: false, completion: completion)
-        }
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

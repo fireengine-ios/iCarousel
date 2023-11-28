@@ -113,6 +113,8 @@ enum AppColor {
     case collageThumbnailColor
     case collageBorderColor
     case collageCellBorder
+    case timelineTop
+    case timelineBottom
     
     // MARK: Contact
     case grayMain
@@ -146,6 +148,7 @@ enum AppColor {
     case campaignBorder
     case campaignContentLabel
     case syncHeader
+    case highlightColor
     
     //ConnectedAccounts
     case toggleOn

@@ -39,6 +39,8 @@ final class ForYouCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with wrapData: WrapData, currentView: ForYouSections) {
+        thumbnailIcon.isHidden = true
+        thumbnailLabel.isHidden = true
         if let url = wrapData.getAnyValidRemoteUrl {
             setImage(with: url)
         }
@@ -52,6 +54,9 @@ final class ForYouCollectionViewCell: UICollectionViewCell {
                 thumbnailLabel.isHidden = true
                 setImage(with: wrapData.tmpDownloadUrl!)
             default:
+                thumbnailIcon.isHidden = true
+                thumbnailLabel.isHidden = true
+
                 break
             }
         } else {
@@ -105,10 +110,16 @@ final class ForYouCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with data: InstapickAnalyze) {
+        thumbnailIcon.isHidden = true
+        thumbnailLabel.isHidden = true
+
         thumbnailImage.sd_setImage(with: data.fileInfo?.metadata?.mediumUrl, completed: nil)
     }
     
     func configure(with data: WrapData) {
+        thumbnailIcon.isHidden = true
+        thumbnailLabel.isHidden = true
+
         thumbnailImage.loadImageIncludingGif(with: data)
         
     }

@@ -200,7 +200,7 @@ final class PhotoPrintSendPopup: BasePopUpController {
     
     @objc private func changeAddressTapped() {
         dismiss(animated: false, completion: {
-            let vc = PhotoPrintAddAdressPopup.with(address: self.address)
+            let vc = PhotoPrintAddAdressPopup.with(address: self.address, editedImages: self.editedImages)
             vc.openWithBlur()
         })
         

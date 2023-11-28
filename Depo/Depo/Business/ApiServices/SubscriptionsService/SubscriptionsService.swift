@@ -9,7 +9,7 @@
 import Foundation
 
 protocol SubscriptionsService {
-    func activeSubscriptions(success: SuccessResponse?, fail: @escaping FailResponse)
+    func activeSubscriptions(success: SuccessResponse?, fail: @escaping FailResponse,isLogin: Bool?)
     
     /// MAYBE WILL BE NEED
     //func currentSubscription(success: SuccessResponse?, fail: @escaping FailResponse)
@@ -18,10 +18,10 @@ protocol SubscriptionsService {
 
 class SubscriptionsServiceIml: BaseRequestService, SubscriptionsService {
     
-    func activeSubscriptions(success: SuccessResponse?, fail: @escaping FailResponse) {
+    func activeSubscriptions(success: SuccessResponse?, fail: @escaping FailResponse, isLogin: Bool? = false) {
         debugLog("SubscriptionsServiceIml activeSubscriptions")
         
-        let param = ActiveSubscriptionParameters()
+        let param = isLogin ?? false ? ActiveSubscriptionV2Parameters() : ActiveSubscriptionParameters()
         let handler = BaseResponseHandler<ActiveSubscriptionResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }

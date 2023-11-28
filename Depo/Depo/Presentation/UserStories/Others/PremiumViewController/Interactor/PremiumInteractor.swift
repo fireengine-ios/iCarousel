@@ -170,7 +170,11 @@ extension PremiumInteractor: PremiumInteractorInput {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self?.output.failed(with: ErrorResponse.string(status.description))
+                    if status == .alreadySubscribed {
+                        self?.output.failAlreadySubscribed(with: response.alreadySubscriedValue)
+                    } else {
+                        self?.output.failed(with: ErrorResponse.string(status.description))
+                    }
                 }
             }
             }, fail: { [weak self] errorResponse in
@@ -205,7 +209,11 @@ extension PremiumInteractor: PremiumInteractorInput {
             if !(status == .restored || status == .success) {
                 debugLog("validateRestorePurchaseFailed: \(status.description)")
                 DispatchQueue.toMain {
-                    self?.output.failed(with: .string(status.description))
+                    if status == .alreadySubscribed {
+                        self?.output.failAlreadySubscribed(with: response.alreadySubscriedValue)
+                    } else {
+                        self?.output.failed(with: .string(status.description))
+                    }
                 }
             }
         }, fail: { [weak self] errorResponse in

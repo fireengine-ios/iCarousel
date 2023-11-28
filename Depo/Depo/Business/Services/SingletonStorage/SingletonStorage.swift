@@ -261,7 +261,8 @@ class SingletonStorage {
     
     func getActiveSubscriptionsList(success: @escaping (_ result: ActiveSubscriptionResponse) -> Void,
                                     fail: @escaping (ErrorResponse) -> Void,
-                                    foreceReload: Bool = false) {
+                                    foreceReload: Bool = false,
+                                    isLogin:Bool = false) {
         
         guard foreceReload || activeUserSubscription == nil,
             accountInfo != nil else {
@@ -279,7 +280,8 @@ class SingletonStorage {
                 success(subscriptionsResponse)
             }, fail: { errorResponse in
                 fail(errorResponse)
-        })
+               
+            }, isLogin: isLogin)
     }
     
     var activeUserSubscriptionList: [SubscriptionPlanBaseResponse] {

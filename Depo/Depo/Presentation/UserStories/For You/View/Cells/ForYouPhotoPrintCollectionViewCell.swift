@@ -77,6 +77,7 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
             newValue.layer.borderWidth = 1
             newValue.layer.cornerRadius = 15
             newValue.layer.borderColor = AppColor.profileGrayColor.cgColor
+            newValue.addRoundedShadows(cornerRadius: 15, shadowColor: AppColor.drawerShadow.cgColor, opacity: 0.3, radius: 4)
         }
     }
     
@@ -84,6 +85,8 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
         willSet {
             newValue.textColor = AppColor.label.color
             newValue.font = .appFont(.medium, size: 12)
+            newValue.numberOfLines = 0
+            newValue.lineBreakMode = .byWordWrapping
         }
     }
     
@@ -124,22 +127,9 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    @IBOutlet private weak var closeButton: UIButton! {
-        willSet {
-            newValue.setTitle("", for: .normal)
-            newValue.setImage(Image.iconCancelBorder.image.withRenderingMode(.alwaysTemplate), for: .normal)
-            newValue.tintColor = AppColor.label.color
-            newValue.isHidden = true
-        }
-    }
-    
     private var printedPhotosData: GetOrderResponse?
     private let sendRemaining = SingletonStorage.shared.accountInfo?.photoPrintSendRemaining ?? 0
     private let maxSelection = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
-    
-    @IBAction private func onCloseCard(_ sender: UIButton) {
-        
-    }
     
     @IBAction private func onShowDetail(_ sender: UIButton) {
     }
@@ -150,7 +140,6 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
         bgView.layer.borderWidth = 1
         bgView.layer.borderColor = status.titleLabelColor.cgColor
         cardTitleLabel.text = dateConverter(epochTimeInMilliseconds: item.createdDate)
-        closeButton.isHidden = true
         statusLabel.text = status.titleText
         statusLabel.textColor = status.titleLabelColor
         statusLabel.isHidden = false
@@ -158,32 +147,41 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
         statusImageView.image = status.statusImage
         thumbnailPlusImage.isHidden = true
         thumbnailPlusLabel.isHidden = true
-        //cardThumbnailImage.contentMode = .scaleAspectFill
+        cardThumbnailImage.contentMode = .scaleAspectFill
+        cardThumbnailImage.layer.cornerRadius = 15
         let infoData = item.affiliateOrderDetails[0]
-        guard let url = URL(string: infoData.fileInfo.tempDownloadURL) else {
+        guard let url = URL(string: infoData.fileInfo.metadata.thumbnailMedium) else {
             return
         }
         cardThumbnailImage.loadImageData(with: url, animated: false)
     }
     
     func configureWithOutData() {
-        printedPhotosData = nil
         let myTime = Date()
         let format = DateFormatter()
         format.dateFormat = "MMMM"
         bgView.layer.borderWidth = 0
-        //cardTitleLabel.text = format.string(from: myTime)
-        cardTitleLabel.text = localized(.foryouPrintTitle)
-        closeButton.isHidden = true
         if sendRemaining > 0 {
             statusLabel.isHidden = false
             statusLabel.text = String(format: localized(.foryouPrintBody), maxSelection)
+            cardTitleLabel.text = localized(.foryouPrintTitle)
+            thumbnailPlusLabel.text = localized(.photoPrint)
+            thumbnailPlusImage.image = Image.iconAddUnselectPlus.image
+        } else if sendRemaining == 0 || maxSelection == 0 {
+            statusLabel.isHidden = false
+            statusLabel.text = localized(.printedPhotoCardInfoNoRight)
+            cardTitleLabel.text = localized(.printedPhotoCardBodyNoRight)
+            thumbnailPlusLabel.text = localized(.forYouSeeAll)
+            thumbnailPlusImage.image = Image.iconNoRight.image
         } else {
             statusLabel.isHidden = true
+            thumbnailPlusLabel.text = localized(.photoPrint)
+            thumbnailPlusImage.image = Image.iconAddUnselectPlus.image
         }
         statusLabel.textColor = AppColor.tealBlue.color
         cardThumbnailImage.image = Image.collageThumbnail.image
-        cardThumbnailImage.contentMode = .scaleAspectFill
+        cardThumbnailImage.contentMode = .scaleAspectFit
+        cardThumbnailImage.layer.cornerRadius = 15
         thumbnailPlusImage.isHidden = false
         thumbnailPlusLabel.isHidden = false
         statusImageView.isHidden = true

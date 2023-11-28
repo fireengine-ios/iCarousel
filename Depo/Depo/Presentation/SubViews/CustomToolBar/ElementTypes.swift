@@ -832,7 +832,7 @@ enum ElementTypes {
         case .edit:
             return Image.iconEdit.image
         case .delete:
-            return UIImage(named: "DeleteShareButton")
+            return Image.iconDelete2.image
         case .emptyTrashBin:
             return Image.iconDelete.image
         case .deleteDeviceOriginal:

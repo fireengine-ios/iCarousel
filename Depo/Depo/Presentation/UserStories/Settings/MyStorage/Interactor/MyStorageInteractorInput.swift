@@ -31,4 +31,7 @@ protocol MyStorageInteractorInput {
     func activate(offer: PackageModelResponse, planIndex: Int)
     func getUserAuthority()
     func refreshActivePurchasesState(_ isActivePurchases: Bool)
+    
+    func getActiveSubscriptionForBanner()
+    func getAvailableOffersForBanner()
 }

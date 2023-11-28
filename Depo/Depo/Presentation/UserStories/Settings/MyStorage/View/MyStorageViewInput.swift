@@ -17,4 +17,7 @@ protocol MyStorageViewInput: AnyObject, ActivityIndicator {
     
     func startPurchase()
     func stopPurchase()
+    
+    func getIsPaidPackage(isPaidPackage: Bool)
+    func getHighlightedPackage(offers: [SubscriptionPlan])
 }

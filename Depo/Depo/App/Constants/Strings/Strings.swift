@@ -214,6 +214,8 @@ enum Strings: String, Localizable {
     case tabBarDiscoverTitle = "tabbar_discover"
     case changePasswordInputTitle = "change_pass_mail_or_phone"
     case becomePremiumBannerDesc = "mystorage_become_premium"
+    case timelineHeader = "timeline_header"
+    case timelineDescription = "timeline_description"
     
     case trashBin = "trash_bin"
     
@@ -359,4 +361,7 @@ enum Strings: String, Localizable {
     case printFileLimitExceededError = "print_file_limit_exceeded_error"
     case orderNotDelivered = "order_not_delivered"
     case orderNotDeliveredDetail = "order_not_delivered_detail"
+    
+    case syncPageOfferPopUp = "sync_page_offer_pop_up"
+    case higlightedPackageRecommended = "recommended"
 }

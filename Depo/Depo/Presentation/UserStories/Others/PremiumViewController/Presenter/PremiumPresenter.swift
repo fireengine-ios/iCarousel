@@ -311,6 +311,15 @@ extension PremiumPresenter: PremiumInteractorOutput {
         optInVC?.stopLoading()
         optInVC?.showError(errorMessage)
     }
+    
+    func failAlreadySubscribed(with value: ValidateApplePurchaseAlreadySubscribedValue?) {
+        view?.stopActivityIndicator()
+        guard let value = value else {
+            return
+        }
+        let message = String(format: TextConstants.validatePurchaseAlreadySubscribedText, value.maskedMsisdn, value.maskedEmail)
+        router.displayError(with: message)
+    }
 
     //MARK: finish purchase
     func purchaseFinished() {

@@ -21,7 +21,7 @@ protocol SettingsDelegate: AnyObject {
     
     func goToHelpAndSupport()
     
-    func goToTermsAndPolicy() 
+    func goToTermsAndPolicy()
         
     func goToActivityTimeline()
     
@@ -89,8 +89,20 @@ final class SettingsViewController: BaseViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
         setupTableViewSubview()
+
+        // Resize header view with dynamic size in UITableView
+        guard let headerView = tableView.tableHeaderView else {
+            return
+        }
+        let size = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        if headerView.frame.height != size.height {
+            tableView.tableHeaderView?.frame = CGRect(
+                origin: headerView.frame.origin,
+                size: size
+            )
+            tableView.layoutIfNeeded()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -111,8 +123,7 @@ final class SettingsViewController: BaseViewController {
             userInfoSubView.actionsDelegate = self
             tableView.tableHeaderView = header
             header?.backgroundColor = .clear
-            header?.heightAnchor.constraint(equalToConstant: 180).activate()
-            
+
             setupTableViewFooter()
             return
         }
@@ -413,6 +424,10 @@ extension SettingsViewController: UserInfoSubViewViewControllerActionsDelegate {
     func premiumButtonPressed() {
         output.goToPremium()
     }
+
+    func freeUpCardRemoved() {
+        viewDidLayoutSubviews()
+    }
 }
 
 // MARK: - photo picker delegatess
@@ -450,3 +465,4 @@ extension SettingsViewController: SettingFooterViewDelegate {
         output.onLogout()
     }
 }
+

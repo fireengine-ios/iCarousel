@@ -36,6 +36,8 @@ enum ShareTypes {
         
         if items.contains(where: { $0.fileType == .folder}) {
             allowedTypes = [.link, .private]
+        } else if items.contains(where: { $0.fileType == .timeline}) {
+            allowedTypes = [.original, .link, .private]
         } else if items.contains(where: { return $0.fileType != .image && $0.fileType != .video && !$0.fileType.isDocumentPageItem && $0.fileType != .audio}) {
             allowedTypes = [.link]
         } else {
@@ -922,6 +924,20 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             
             if let firstItem = item.first {
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Download(type: firstItem.fileType, count: item.count))
+            }
+            
+            if item.first?.fileType == .timeline {
+                let successAction = { [weak self] in
+                    if item.allSatisfy ({ !$0.isOwner }) {
+                        self?.privateShareAnalytics.sharedWithMe(action: .download, on: item.first)
+                    }
+                    self?.successAction(elementType: .download, relatedItems: item)()
+                }
+                
+                fileService.download(items: item, toPath: "",
+                                     success: successAction,
+                                     fail: failAction(elementType: .download))
+                return
             }
             
             //FIXME: transform all to BaseDataSourceItem

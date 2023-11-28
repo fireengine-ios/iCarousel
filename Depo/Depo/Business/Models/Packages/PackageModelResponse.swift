@@ -296,6 +296,7 @@ final class PackageModelResponse: Equatable {
         static let hasAttachedFeature = "hasAttachedFeature"
         static let isFeaturePack = "isFeaturePack"
         static let adjustId = "adjustId"
+        static let highlighted = "highlighted"
     }
     
     var name: String?
@@ -319,6 +320,7 @@ final class PackageModelResponse: Equatable {
     var hasAttachedFeature: Bool?
     var isFeaturePack: Bool?
     var adjustId: String?
+    var highlighted: Bool?
     
     var isStorageOnly: Bool {
         guard let isRecommended = isRecommended,
@@ -357,6 +359,7 @@ extension PackageModelResponse: Map {
         hasAttachedFeature = json[ResponseKeys.hasAttachedFeature].bool
         isFeaturePack = json[ResponseKeys.isFeaturePack].bool
         adjustId = json[ResponseKeys.adjustId].string
+        highlighted = json[ResponseKeys.highlighted].bool
         
         if let typeString = json[ResponseKeys.type].string {
             type = PackageContentType(rawValue: typeString)

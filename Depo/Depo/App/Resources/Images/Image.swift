@@ -28,6 +28,7 @@ enum Image: String, AppImage {
     case iconDownload
     case iconBackupBordered
     case iconDelete
+    case iconDelete2
     case iconFavorite
     case iconStory
     case iconPrint
@@ -189,6 +190,7 @@ enum Image: String, AppImage {
     case popupIconQuestion
     case popupHide
     case iconCancelUnborder
+    case iconCancelUnborderV2
     case popupUnHide
     case popupRestore
     case popupLogout
@@ -203,6 +205,7 @@ enum Image: String, AppImage {
     case createCollageThumbnail
     case iconCollage
     case collageThumbnail
+    case iconConfetti
     
     /// Settings
     case gradientSwitch
@@ -219,7 +222,8 @@ enum Image: String, AppImage {
     case popupCloudBackup
     case launchCampaign
     case divorceCardPlay
-    
+    case freeUpCloudBackUp
+    case iconBottomSheetConfetti
     /// Introduce
     case circleIntoduce
     
@@ -250,4 +254,5 @@ enum Image: String, AppImage {
     case iconCheckGreen
     case iconDelivery
     case iconAddUnselectPlus
+    case iconNoRight
 }

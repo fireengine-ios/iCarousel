@@ -14,6 +14,7 @@ protocol MyStorageInteractorOutput: AnyObject {
     func successed(accountInfo: AccountInfoResponse)
     func successed(allOffers: [SubscriptionPlanBaseResponse])
     func failedUsage(with error: ErrorResponse)
+    func failAlreadySubscribed(with value: ValidateApplePurchaseAlreadySubscribedValue?)
     func successed(tokenForResend: String)
     func successedVerifyOffer()
     func failedVerifyOffer()
@@ -30,4 +31,7 @@ protocol MyStorageInteractorOutput: AnyObject {
     
     func purchaseCancelled()
     func successedGotUserAuthority()
+    
+    func getActiveSubscriptionForBanner(offers: [SubscriptionPlanBaseResponse])
+    func getAvailableOffersForBanner(offers: [SubscriptionPlan])
 }

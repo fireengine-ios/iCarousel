@@ -23,6 +23,7 @@ protocol PremiumInteractorOutput: AnyObject {
 
     func failed(with error: ErrorResponse)
     func failedResendToken(with errorMessage: String)
+    func failAlreadySubscribed(with value: ValidateApplePurchaseAlreadySubscribedValue?)
     func switchToTextWithoutPrice(isError: Bool)
     func failedVerifyOffer()
 

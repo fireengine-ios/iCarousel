@@ -34,9 +34,20 @@ final class ForYouViewController: BaseViewController {
         NotificationCenter.default.addObserver(self,selector: #selector(getUpdateDataHiddenFav),name: .foryouGetUpdateData, object: nil)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        let isTimeline = UserDefaults.standard.bool(forKey: "TimelineVideoDelete")
+        if isTimeline {
+            updateTableView(for: .timeline)
+            UserDefaults.standard.set(false, forKey: "TimelineVideoDelete")
+        }
+    }
+    
     @objc func getUpdateDataHiddenFav(){
         output.getUpdateData(for: ForYouSections.hidden)
         output.getUpdateData(for: ForYouSections.favorites)
+        output.getHeightForRow(at: ForYouSections.timeline)
+        fullReload()
     }
     
     private func setupRefresher() {
@@ -90,6 +101,7 @@ final class ForYouViewController: BaseViewController {
         tableView.delegate = self
         tableView.register(nibCell: ForYouTableViewCell.self)
         tableView.register(nibCell: ForYouFaceImageTableViewCell.self)
+        tableView.register(nibCell: ForYouTimelineTableViewCell.self)
     }
     
     private func faceImagePermissionChanged(to isAllowed: Bool) {
@@ -145,6 +157,8 @@ extension ForYouViewController: ForYouViewInput {
             output.getUpdateData(for: .animations)
         } else if section == .albumCards {
             output.getUpdateData(for: .albums)
+        } else if section == .timeline {
+            output.getUpdateData(for: .timeline)
         }
     }
 }
@@ -156,17 +170,25 @@ extension ForYouViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if !isFIREnabled && indexPath.row == 0 {
+        let timelineEnable = FirebaseRemoteConfig.shared.fetchTimelineEnabled
+        if timelineEnable && indexPath.row == 0 {
+            let cell = tableView.dequeue(reusable: ForYouTimelineTableViewCell.self, for: indexPath)
+            let model = output.getModel(for: forYouSections[indexPath.row]) as? TimelineResponse
+            cell.delegate = self
+            cell.configure(with: model)
+            cell.isHidden = model != nil ? false : true
+            return cell
+        } else if !isFIREnabled && indexPath.row == 1 {
             let cell = tableView.dequeue(reusable: ForYouFaceImageTableViewCell.self, for: indexPath)
             cell.delegate = self
             return cell
+        } else {
+            let cell = tableView.dequeue(reusable: ForYouTableViewCell.self, for: indexPath)
+            let model = output.getModel(for: forYouSections[indexPath.row])
+            cell.configure(with: model, currentView: forYouSections[indexPath.row])
+            cell.delegate = self
+            return cell
         }
-        
-        let cell = tableView.dequeue(reusable: ForYouTableViewCell.self, for: indexPath)
-        let model = output.getModel(for: forYouSections[indexPath.row])
-        cell.configure(with: model, currentView: forYouSections[indexPath.row])
-        cell.delegate = self
-        return cell
     }
 }
 
@@ -249,6 +271,22 @@ extension ForYouViewController: HeaderContainingViewControllerChild {
 extension ForYouViewController: ForYouFaceImageTableViewCellDelegae {
     func onFaceImageButton() {
         output.onFaceImageButton()
+    }
+}
+
+extension ForYouViewController: ForYouTimelineTableViewCellDelegate {
+    func saveTimelineCard(id: Int) {
+        output.currentSection = .timeline
+        output.saveTimelineCard(id: id)
+    }
+    
+    func setTimelineNil() {
+        output.setTimelineNil()
+        updateTableView(for: .timeline)
+    }
+    
+    func shareTimeline(item: BaseDataSourceItem, type: CardShareType) {
+        shareCardContentManager.presentSharingMenu(item: item, type: type)
     }
 }
 

@@ -63,6 +63,7 @@ enum FieldValue: CustomStringConvertible {
     case animation
     case all
     case documentsAndMusic
+    case timeline
     
     var description: String {
         switch self {
@@ -80,6 +81,7 @@ enum FieldValue: CustomStringConvertible {
         case .animation         : return "true"
         case .all               : return ""
         case .documentsAndMusic : return "audio%20OR%20application%20OR%20text%20NOT%20directory"
+        case .timeline          : return "timeline"
         }
     }
     
@@ -99,6 +101,7 @@ enum FieldValue: CustomStringConvertible {
         case .animation         : return "true"
         case .all               : return ""
         case .documentsAndMusic : return ""
+        case .timeline          : return "timeline"
         }
     }
 }

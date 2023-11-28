@@ -1928,9 +1928,9 @@
 "profile_recovery_email_is_same_with_account_email" = "Recovery e-mail and profile e-mail can't be the same.";
 "forgotMyPassword_your_account_email" = "Your e-mail or phone number associated with your account";
 "forgotMyPassword_enter_your_account_email" = "Enter your e-mail or phone number associated with your account";
-"forgotMyPassword_instructions" = "To reset your password we will send a link to your e-mail associated with your account:";
+"forgotMyPassword_instructions" = "We need to find the account. Can you enter your account's email address or phone number with us to continue?";
 "forgotMyPassword_enter_valid_email" = "Please enter a valid e-mail or phone number";
-"forgotMyPassword_reset_button" = "Reset Password";
+"forgotMyPassword_reset_button" = "Continue";
 "forgotMyPassword_challange1_header" = "Please Select a Verification Method";
 "forgotMyPassword_challange1_body" = "To reset your password, which verification method would you like to continue with?";
 "forgotMyPassword_phone_number" = "Phone Number";
@@ -2161,7 +2161,7 @@ then {11,99 TRY/Month}*/
 "Office_Filter_Not_Found" = "The file you tried to filter (%@) was not found.";
 "new_print" = "Create New Print";
 "print_info_popup_title" = "Select %d Photos";
-"print_info_popup_subtitle" = "Choose up to %d photos to print this month and have them delivered to your house.";
+"print_info_popup_subtitle" = "Choose up to %d photos to print this month and have them delivered to your address for free.";
 "print_info_popup_checkbox" = "Don't show this warning again.";
 "print_select_photo_button" = "Select Photo";
 "print_select_photo_screen" = "Select Photo";
@@ -2184,12 +2184,20 @@ then {11,99 TRY/Month}*/
 "printed_photo_card_info" = "Have 5 photos printed each month.";
 "printed_photo_card_body" = "Have your photos printed.";
 "printed_photo_card_body_no_right" = "You've used your photo printing rights.";
-"printed_photo_card_info_no_right" = "You can reprint as of the %d date.";
+
+/*Fuzzy*/
+"printed_photo_card_info_no_right" = "When your package is renewed, try again.";
 "printed_package_view" = "View My Print Packages";
 "more_photo_right" = "You've got %d more photo submission. Are you sure you want to continue?";
 "no_more_photo_right" = "Has seleccionado más de %d fotos. Reduzca para continuar.";
-"timeline_header" = "The best memories of %d";
+"timeline_header" = "The Best Memories of %d";
+
+/*Fuzzy*/
 "timeline_description" = "We have compiled the best memories of this year for you. Check them out now!";
+"timeline_header" = "The Best Memories of 2023";
+
+/*Fuzzy*/
+"timeline_description" = "We have compiled the best memories of 2023 for you. Check them out now!";
 "selected_for_print" = "Selected for printing";
 "print_cancel_popup_question" = "Are you sure you want to cancel?";
 "print_cancel_popup_info" = "All photo edits you have selected for the printed album will be deleted. You will need to select and edit photos again.";
@@ -2198,7 +2206,7 @@ then {11,99 TRY/Month}*/
 "send_print_button" = "Send to Print";
 "add_address" = "Add Address";
 "send_print_popup_title" = "Your Selected Photos Are Ready For Printing";
-"send_print_popup_address" = "Printed photographs will be sent free of charge to the address \"%@ Quarter %@ Street No:%@ Apartment:%@ %@/%@, %d\".";
+"send_print_popup_address" = "Printed photographs will be sent free of charge to the address \"%@ Quarter %@ No:%@ Apartment:%@ %@/%@, %d\".";
 "send_print_popup_info" = "This process cannot be cancelled if it is sent for printing.";
 "address_title" = "Address Title";
 "address_city" = "City";
@@ -2227,7 +2235,6 @@ then {11,99 TRY/Month}*/
 "order_delivered_cargo" = "Your Order Delivered to Cargo";
 "order_delivered" = "Your Order Delivered";
 "order_undelivered" = "Your Order Could Not Be Delivered";
-"grace_banner_paycell_text" = "";
 "order_detail_popup_name" = "Print Order Tracking";
 "print_order_number" = "Order No: %@";
 "print_cargo_number" = "Cargo Delivery No: %@";
@@ -2266,3 +2273,18 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "Photo limit exceeded.";
 "order_not_delivered" = "Your order could not be delivered to print";
 "order_not_delivered_detail" = "Your order could not be delivered to print for technical reasons. Please send a new print again.";
+"grace_banner_paycell_text" = "";
+
+/*Fuzzy*/
+"sync_page_offer_pop_up" = "Click now to discover advantageous lifebox packages special for you!";
+"validate_purchase_already_subscribed_text" = "Subscription related with this purchase is already activated on account %@ with email %@ for another lifebox user. Note that using different lifebox accounts with the same Apple/Google account might result with this situation.";
+"print_edit_cancel_popup_info" = "Your photo edits will be deleted.";
+"revert_to_original" = "Revert to Original";
+"save_changes" = "";
+"ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "To change your phone number, you must first cancel your lifebox package, which is included in the phone bill. Please call Turkcell customer services.";
+"ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "To change your phone number, first contact your operator and have your packages canceled.";
+"free_up_space_title_settings" = "";
+
+/*Fuzzy*/
+"free_up_space_title_settings" = "Free up space on your device.";
+"recommended" = "Recommended";

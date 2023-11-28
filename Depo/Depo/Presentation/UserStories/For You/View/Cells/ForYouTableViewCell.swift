@@ -61,6 +61,7 @@ final class ForYouTableViewCell: UITableViewCell {
     private var cardsData: [HomeCardResponse] = []
     private var throwbackData: [ThrowbackData] = []
     private var currentView: ForYouSections?
+    private var timelineData: TimelineResponse?
     private var tbActionStatus = true
 
     override func awakeFromNib() {

@@ -42,6 +42,7 @@ final class MyStoragePresenter {
     private var allOffers: [SubscriptionPlanBaseResponse] = []
     private(set) var displayableOffers: [SubscriptionPlan] = []
     var availableOffers: [SubscriptionPlan] = []
+    private var highlightedPackage: PackageModelResponse?
 
     init(title: String) {
         self.title = title
@@ -60,7 +61,7 @@ final class MyStoragePresenter {
         
         startActivity()
         interactor.getAllOffers()
-        interactor.getAvailableOffers(with: accountType)
+        //interactor.getAvailableOffers(with: accountType)
     }
     
     //MARK: - UtilityMethods
@@ -70,8 +71,8 @@ final class MyStoragePresenter {
         if let index = displayableOffers.firstIndex(where: { $0.type == .free }) {
             displayableOffers.swapAt(0, index)
         }
-        
-        stopActivity()
+        interactor.getAvailableOffers(with: accountType)
+        //stopActivity()
         view?.reloadPackages()
     }
 }
@@ -85,10 +86,12 @@ extension MyStoragePresenter: MyStorageViewOutput {
         startActivity()
         interactor.getAccountType()
         interactor.getAccountTypePackages()
+        interactor.getActiveSubscriptionForBanner()
+        interactor.getAvailableOffersForBanner()
     }
     
     func viewWillAppear() {
-        view?.startActivityIndicator()
+        //view?.startActivityIndicator()
         interactor.getUserAuthority()
         interactor.refreshActivePurchasesState(false)
     }
@@ -263,7 +266,7 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     func successedPackages(accountTypeString: String) {
         accountType = interactor.getAccountTypePackages(with: accountTypeString, offers: []) ?? .all
         view?.showInAppPolicy()
-        interactor.getAvailableOffers(with: accountType)
+        //interactor.getAvailableOffers(with: accountType)
     }
     
     func failedVerifyOffer() {
@@ -285,6 +288,26 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
                 
         view?.stopActivityIndicator()
         view?.reloadData()
+    }
+    
+    private func isPaidPackage(item: [SubscriptionPlanBaseResponse]) -> Bool {
+        var isPriceForPayed: Bool = false
+        for value in item {
+            let price = value.subscriptionPlanPrice ?? 0
+            if price > 0 {
+                isPriceForPayed = true
+            }
+        }
+        return isPriceForPayed
+    }
+    
+    func getActiveSubscriptionForBanner(offers: [SubscriptionPlanBaseResponse]) {
+        let isPaidPackage = isPaidPackage(item: offers)
+        view?.getIsPaidPackage(isPaidPackage: isPaidPackage)
+    }
+    
+    func getAvailableOffersForBanner(offers: [SubscriptionPlan]) {
+        view?.getHighlightedPackage(offers: offers)
     }
     
     private func sortAvailableOffers(offers: [SubscriptionPlan]) {
@@ -334,8 +357,8 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     }
 
     func successedGotUserAuthority() {
-        view?.checkIfPremiumBannerValid()
-        view?.stopActivityIndicator()
+        //view?.checkIfPremiumBannerValid()
+        //view?.stopActivityIndicator()
     }
     
     
@@ -346,6 +369,15 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
         } else {
             failed(with: error.description)
         }
+    }
+    
+    func failAlreadySubscribed(with value: ValidateApplePurchaseAlreadySubscribedValue?) {
+        stopActivity()
+        guard let value = value else {
+            return
+        }
+        let message = String(format: TextConstants.validatePurchaseAlreadySubscribedText, value.maskedMsisdn, value.maskedEmail)
+        router?.display(error: message)
     }
     
     func successed(allOffers: [PackageModelResponse]) {

@@ -138,5 +138,9 @@ final class ForYouRouter: ForYouRouterInput {
     func showFullQuota() {
         router.showFullQuotaPopUp()
     }
+    
+    func openForYou() {
+        router.openTabBarItem(index: .forYou)
+    }
 }
 
