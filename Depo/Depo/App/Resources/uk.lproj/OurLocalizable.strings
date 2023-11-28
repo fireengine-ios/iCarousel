@@ -2124,7 +2124,9 @@ then {11,99 TRY/Month}*/
 "printed_photo_card_info" = "Друкуйте 5 фотографій щомісяця.";
 "printed_photo_card_body" = "Роздрукуйте свої фотографії.";
 "printed_photo_card_body_no_right" = "Ви використали свої права на друк фотографій.";
-"printed_photo_card_info_no_right" = "Коли ваш пакет буде поновлено, ви зможете знову надсилати фотографії на друк.";
+
+/*Fuzzy*/
+"printed_photo_card_info_no_right" = "Коли ваш пакет буде поновлено, спробуйте ще раз.";
 "printed_package_view" = "Переглянути мої пакети для друку.";
 "more_photo_right" = "Ви вибрали більше ніж %d фотографій. Ви впевнені, що хочете продовжити?";
 "no_more_photo_right" = "Ви вибрали більше %d фотографій. Зменшіть, щоб продовжити.";
@@ -2221,3 +2223,4 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "free_up_space_title_settings" = "Звільніть місце в пам'яті вашого телефону.";
+"recommended" = "Рекомендований";

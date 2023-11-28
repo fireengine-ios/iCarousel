@@ -1928,9 +1928,9 @@
 "profile_recovery_email_is_same_with_account_email" = "Recovery e-mail and profile e-mail can't be the same.";
 "forgotMyPassword_your_account_email" = "Your e-mail or phone number associated with your account";
 "forgotMyPassword_enter_your_account_email" = "Enter your e-mail or phone number associated with your account";
-"forgotMyPassword_instructions" = "To reset your password we will send a link to your e-mail associated with your account:";
+"forgotMyPassword_instructions" = "We need to find the account. Can you enter your account's email address or phone number with us to continue?";
 "forgotMyPassword_enter_valid_email" = "Please enter a valid e-mail or phone number";
-"forgotMyPassword_reset_button" = "Reset Password";
+"forgotMyPassword_reset_button" = "Continue";
 "forgotMyPassword_challange1_header" = "Please Select a Verification Method";
 "forgotMyPassword_challange1_body" = "To reset your password, which verification method would you like to continue with?";
 "forgotMyPassword_phone_number" = "Phone Number";
@@ -2184,7 +2184,9 @@ then {11,99 TRY/Month}*/
 "printed_photo_card_info" = "Have 5 photos printed each month.";
 "printed_photo_card_body" = "Have your photos printed.";
 "printed_photo_card_body_no_right" = "You've used your photo printing rights.";
-"printed_photo_card_info_no_right" = "When your package is renewed, you can send your photos for printing again.";
+
+/*Fuzzy*/
+"printed_photo_card_info_no_right" = "When your package is renewed, try again.";
 "printed_package_view" = "View My Print Packages";
 "more_photo_right" = "You've got %d more photo submission. Are you sure you want to continue?";
 "no_more_photo_right" = "Has seleccionado más de %d fotos. Reduzca para continuar.";
@@ -2281,3 +2283,4 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "free_up_space_title_settings" = "Free up space on your device.";
+"recommended" = "Recommended";

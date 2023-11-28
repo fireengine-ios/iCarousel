@@ -24,7 +24,7 @@ class HighlightedPackageView: UIView {
     
     lazy var titleLabel: UILabel = {
         let view = UILabel()
-        view.text = "Önerilen"
+        view.text = localized(.higlightedPackageRecommended)
         view.textColor = .white
         view.font = .appFont(.medium, size: 14)
         view.numberOfLines = 0
@@ -123,7 +123,7 @@ class HighlightedPackageView: UIView {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16).activate()
         titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).activate()
-        titleLabel.widthAnchor.constraint(equalToConstant: 100).activate()
+        titleLabel.widthAnchor.constraint(equalToConstant: 150).activate()
         titleLabel.heightAnchor.constraint(equalToConstant: 24).activate()
         
         addSubview(promoLabel)

@@ -124,8 +124,6 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
         willSet {
             newValue.textColor = AppColor.tealBlue.color
             newValue.font = .appFont(.regular, size: 12)
-            newValue.numberOfLines = 2
-            newValue.lineBreakMode = .byWordWrapping
         }
     }
     

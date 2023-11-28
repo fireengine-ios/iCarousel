@@ -1896,11 +1896,11 @@
 "profile_recovery_email_is_same_with_account_email" = "Kurtarma e-postası ile profil e-postası aynı olamaz.";
 "forgotMyPassword_your_account_email" = "Hesabına ait e-posta veya telefon numarası";
 "forgotMyPassword_enter_your_account_email" = "Hesabına ait e-postanı veya telefon numaranı gir";
-"forgotMyPassword_instructions" = "Şifreni sıfırlamak için hesabına ait e-posta adresine veya telefon numarasına şifre sıfırlama linki göndereceğiz:";
+"forgotMyPassword_instructions" = "Öncelikle hesabını bulmalıyız. Devam etmek için hesabına ait e-posta adresini veya telefon numarasını bizimle paylaşabilir misin?";
 "forgotMyPassword_enter_valid_email" = "Lütfen geçerli bir e-posta veya telefon numarası gir";
-"forgotMyPassword_reset_button" = "Şifre Sıfırla";
+"forgotMyPassword_reset_button" = "Devam Et";
 "forgotMyPassword_challange1_header" = "Doğrulama Yöntemini Seçin";
-"forgotMyPassword_challange1_body" = "Şifre yenileme akışına aşağıdaki doğrulama yöntemlerinden hangisi ile devam etmek istersin?";
+"forgotMyPassword_challange1_body" = "Şifre yenileme için aşağıdaki yöntemlerden hangisi ile devam etmek istersin?";
 "forgotMyPassword_phone_number" = "Telefon Numarası";
 "forgotMyPassword_mail" = "E-posta";
 "forgotMyPassword_recovery_mail" = "Kurtarma E-postası";
@@ -1908,7 +1908,7 @@
 "forgotMyPassword_continue" = "Devam Et";
 "forgotMyPassword_email_popup_message" = "Şifreni sıfırlaman için %@ e-posta adresine şifre sıfırlama linki gönderdik.";
 "forgotMyPassword_challange2_header" = "Doğrulama Yöntemini Seçin";
-"forgotMyPassword_challange2_body" = "Şifre yenileme akışına aşağıdaki doğrulama yöntemlerinden hangisi ile devam etmek istersin?";
+"forgotMyPassword_challange2_body" = "Güvenliğin için ikincil bir doğrulama yöntemine ihtiyaç bulunuyor. Şifre yenileme işlemine aşağıdaki yöntemlerden hangisi ile devam etmek istersin?";
 "masterpass_feature_package_cancel" = "Paketini iptal etmek için www.mylifebox.com adresini ziyaret edebilirsin.";
 "forgotMyPassword_password_complete" = "Tamam";
 "forgotMyPassword_reset_success_message" = "Şifre yenileme işleminiz başarıyla tamamlandı.";
@@ -2176,7 +2176,9 @@ then {11,99 TRY/Month}*/
 "printed_photo_card_info" = "Her ay 5 adet fotoğrafını bastır.";
 "printed_photo_card_body" = "Fotoğraflarını bastır.";
 "printed_photo_card_body_no_right" = "Fotoğraf baskılama hakkını kullandın.";
-"printed_photo_card_info_no_right" = "Paketin yenilendiğinde fotoğraflarını tekrar baskıya gönderebilirsin.";
+
+/*Fuzzy*/
+"printed_photo_card_info_no_right" = "Paketin yenilendiğinde tekrar dene.";
 
 /*Fuzzy*/
 "printed_package_view" = "Baskı paketlerimi gör.";
@@ -2286,3 +2288,4 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "free_up_space_title_settings" = "Telefonunun hafizasında yer aç.";
+"recommended" = "Önerilen";

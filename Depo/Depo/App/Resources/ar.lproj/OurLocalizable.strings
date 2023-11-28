@@ -2134,7 +2134,9 @@ then {11,99 TRY/Month}*/
 "printed_photo_card_info" = "لديك 5 صور مطبوعة كل شهر.";
 "printed_photo_card_body" = "قم بطباعة صورك.";
 "printed_photo_card_body_no_right" = "لقد استخدمت بالفعل حقك في طباعة الصور.";
-"printed_photo_card_info_no_right" = " عندما يتم تجديد الحزمة الخاصة بك ، يمكنك إرسال صورك للطباعة مرة أخرى.";
+
+/*Fuzzy*/
+"printed_photo_card_info_no_right" = " عندما يتم تجديد الحزمة الخاصة بك ،حاول ثانية.";
 "printed_package_view" = "عرض حزم الطباعة الخاصة بي";
 "more_photo_right" = "كنت قد حصلت على أكثر من %d تقديم الصور. هل أنت متأكد أنك تريد الاستمرار?";
 "no_more_photo_right" = "لقد اخترت أكثر من %d الصور. تقليل للمتابعة.";
@@ -2231,3 +2233,4 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "free_up_space_title_settings" = "تحرير مساحة على جهازك.";
+"recommended" = "الموصى بها";
