@@ -45,6 +45,7 @@ final class HighlightPackage: BaseCardView {
     @IBOutlet weak var packageContentView: UIView! {
         willSet {
             newValue.layer.cornerRadius = 16
+            newValue.backgroundColor = .white
         }
     }
     
