@@ -2140,10 +2140,6 @@ then {11,99 TRY/Month}*/
 "printed_package_view" = "عرض حزم الطباعة الخاصة بي";
 "more_photo_right" = "كنت قد حصلت على أكثر من %d تقديم الصور. هل أنت متأكد أنك تريد الاستمرار?";
 "no_more_photo_right" = "لقد اخترت أكثر من %d الصور. تقليل للمتابعة.";
-"timeline_header" = "أفضل ذكريات %d";
-
-/*Fuzzy*/
-"timeline_description" = "قمنا بتجميع أفضل ذكريات هذا العام من أجلك. تحقق منهم الآن!";
 "timeline_header" = "أفضل ذكريات 2023";
 
 /*Fuzzy*/
@@ -2233,8 +2229,8 @@ then {11,99 TRY/Month}*/
 "save_changes" = "احفظ التغييرات";
 "ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "لتغيير رقم هاتفك ، يجب عليك أولا إلغاء حزمة lifebox المضمنة في فاتورة الهاتف. يرجى الاتصال بخدمة العملاء Turkcell.";
 "ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "لتغيير رقم هاتفك ، اتصل أولا بالمشغل الخاص بك وقم بإلغاء الحزم الخاصة بك.";
-"free_up_space_title_settings" = "";
 
 /*Fuzzy*/
 "free_up_space_title_settings" = "تحرير مساحة على جهازك.";
 "recommended" = "الموصى بها";
+"dont_miss_opportunity" = "";

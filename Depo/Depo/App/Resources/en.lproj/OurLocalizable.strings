@@ -2190,10 +2190,6 @@ then {11,99 TRY/Month}*/
 "printed_package_view" = "View My Print Packages";
 "more_photo_right" = "You've got %d more photo submission. Are you sure you want to continue?";
 "no_more_photo_right" = "Has seleccionado más de %d fotos. Reduzca para continuar.";
-"timeline_header" = "The Best Memories of %d";
-
-/*Fuzzy*/
-"timeline_description" = "We have compiled the best memories of this year for you. Check them out now!";
 "timeline_header" = "The Best Memories of 2023";
 
 /*Fuzzy*/
@@ -2283,8 +2279,8 @@ then {11,99 TRY/Month}*/
 "save_changes" = "";
 "ACCOUNT_HAS_SLCM_SUBSCRIPTION" = "To change your phone number, you must first cancel your lifebox package, which is included in the phone bill. Please call Turkcell customer services.";
 "ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "To change your phone number, first contact your operator and have your packages canceled.";
-"free_up_space_title_settings" = "";
 
 /*Fuzzy*/
 "free_up_space_title_settings" = "Free up space on your device.";
 "recommended" = "Recommended";
+"dont_miss_opportunity" = "";
