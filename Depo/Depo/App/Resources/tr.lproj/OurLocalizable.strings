@@ -2184,10 +2184,6 @@ then {11,99 TRY/Month}*/
 "printed_package_view" = "Baskı paketlerimi gör.";
 "more_photo_right" = "%d fotoğraf gönderme hakkın daha var. Devam etmek istediğine emin misin?";
 "no_more_photo_right" = "%d’ten fazla fotoğraf seçtin. Devam edebilmek için azaltın.";
-"timeline_header" = "%d En Güzel Anıları";
-
-/*Fuzzy*/
-"timeline_description" = "%d yılının en güzel anılarını senin için derledik. Hemen keşfet.";
 "timeline_header" = "2023 En Güzel Anıları";
 
 /*Fuzzy*/
@@ -2293,3 +2289,4 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "free_up_space_title_settings" = "Telefonunun hafizasında yer aç.";
 "recommended" = "Önerilen";
+"dont_miss_opportunity" = "Fırsatı Kaçırma";
