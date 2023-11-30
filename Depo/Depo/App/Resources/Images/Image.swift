@@ -206,6 +206,7 @@ enum Image: String, AppImage {
     case iconCollage
     case collageThumbnail
     case iconConfetti
+    case iconPlayPoint
     
     /// Settings
     case gradientSwitch
