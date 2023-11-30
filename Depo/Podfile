@@ -127,10 +127,6 @@ end
 #  autosync_widget_pods
 #end
 
-target "LifeboxNotificationService" do
-  notification_pods
-end
-
 target 'LifeboxUnitTests' do
   lifebox_pods
 end
@@ -165,6 +161,10 @@ end
 
 target 'BilloNotificationService' do
   notification_pods
+end
+
+target 'LifeboxNotificationServiceExtension' do
+ pod "Netmera/NotificationServiceExtension"
 end
 
 post_install do |installer|
