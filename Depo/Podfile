@@ -25,7 +25,7 @@ def core_pods
   pod 'AGConnectCore'
   pod 'AGConnectAppLinking'
 
-  pod 'Netmera', '~> 3.8.4'
+  pod 'Netmera', '~> 3.16.0'
 
   pod 'SDWebImage', '~> 4'
   pod 'GoogleConversionTracking', '~> 3'
@@ -68,13 +68,13 @@ end
 
 def sharing_pods
   shared_pods
-  pod 'Netmera', '~> 3'
+  pod 'Netmera', '~> 3.16.0'
   pod 'MMWormhole', '~> 2.0.0'
 end
 
 def file_provider_pods
   shared_pods
-  pod 'Netmera', '~> 3'
+  pod 'Netmera', '~> 3.16.0'
   pod 'MMWormhole', '~> 2.0.0'
 end
 
@@ -88,7 +88,7 @@ def autosync_widget_pods
 end
 
 def notification_pods
-  pod 'Netmera', '~> 3'
+  pod 'Netmera', '~> 3.16.0'
   pod 'iCarousel', '~> 1'
 end
 
