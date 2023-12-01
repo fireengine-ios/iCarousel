@@ -87,7 +87,7 @@ enum FloatingButtonsType {
         case .photopick:
             return Image.iconEffect.image
         case .createCollage:
-            return Image.iconCollage.image
+            return Image.iconEffect.image
         case .createWord:
             return Image.iconFileDocNew.image
         case .createExcel:
