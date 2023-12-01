@@ -290,6 +290,16 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
         view?.reloadData()
     }
     
+    func successedPackagesForHighlighted(allOffers: [PackageModelResponse]) {
+        accountType = interactor.getAccountTypePackages(with: accountType.rawValue, offers: allOffers)  ?? .all
+        let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
+        
+        sortAvailableOffers(offers: offers)
+                
+        view?.stopActivityIndicator()
+        view?.reloadDataForHighlighted()
+    }
+    
     private func isPaidPackage(item: [SubscriptionPlanBaseResponse]) -> Bool {
         var isPriceForPayed: Bool = false
         for value in item {

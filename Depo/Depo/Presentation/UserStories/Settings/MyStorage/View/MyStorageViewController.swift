@@ -310,7 +310,6 @@ extension MyStorageViewController: MyStorageViewInput {
             let model = offer.element.model as! PackageModelResponse
             
             if model.inAppPurchaseId != modelHighlighted.inAppPurchaseId {
-                print("aaaaaaaaaaaaa 1 \(model.inAppPurchaseId)")
                 let view = SubscriptionOfferView.initFromNib()
                 view.configure(with: offer.element, delegate: self, index: offer.offset)
                 view.setNeedsLayout()
@@ -322,6 +321,35 @@ extension MyStorageViewController: MyStorageViewInput {
                 view.trailingAnchor.constraint(equalTo: packages.trailingAnchor,
                                                constant: -16).isActive = true
             }
+        }
+        
+        let outerBottomView = UIView()
+        outerBottomView.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        packages.addArrangedSubview(outerBottomView)
+        stopActivityIndicator()
+        stopPurchase()
+    }
+    
+    func reloadDataForHighlighted() {
+        packages.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        let outerTopView = UIView()
+        outerTopView.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        packages.addArrangedSubview(outerTopView)
+                
+        packages.addArrangedSubview(packagesTitleLabel)
+        
+        for offer in output.availableOffers.enumerated() {
+            let view = SubscriptionOfferView.initFromNib()
+            view.configure(with: offer.element, delegate: self, index: offer.offset)
+            view.setNeedsLayout()
+            view.layoutIfNeeded()
+            packages.addArrangedSubview(view)
+            
+            view.leadingAnchor.constraint(equalTo: packages.leadingAnchor,
+                                          constant: 16).isActive = true
+            view.trailingAnchor.constraint(equalTo: packages.trailingAnchor,
+                                           constant: -16).isActive = true
         }
         
         let outerBottomView = UIView()

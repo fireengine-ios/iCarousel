@@ -183,7 +183,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
         packageService.getInfoForAppleProducts(offers: offers, success: { [weak self] in
             DispatchQueue.main.async {
                 if self?.affiliate == "highlighted" {
-                    self?.output.successedPackages(allOffers: offers.filter({ $0.highlighted == true }))
+                    self?.output.successedPackagesForHighlighted(allOffers: offers.filter({ $0.highlighted == true }))
                 } else {
                     self?.output.successedPackages(allOffers: offers)
                 }
