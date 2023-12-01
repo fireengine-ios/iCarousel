@@ -303,18 +303,25 @@ extension MyStorageViewController: MyStorageViewInput {
         packages.addArrangedSubview(outerTopView)
                 
         packages.addArrangedSubview(packagesTitleLabel)
+        
+        let modelHighlighted = highlightedPackage?.model as! PackageModelResponse
+        
         for offer in output.availableOffers.enumerated() {
+            let model = offer.element.model as! PackageModelResponse
             
-            let view = SubscriptionOfferView.initFromNib()
-            view.configure(with: offer.element, delegate: self, index: offer.offset)
-            view.setNeedsLayout()
-            view.layoutIfNeeded()
-            packages.addArrangedSubview(view)
-            
-            view.leadingAnchor.constraint(equalTo: packages.leadingAnchor,
-                                          constant: 16).isActive = true
-            view.trailingAnchor.constraint(equalTo: packages.trailingAnchor,
-                                           constant: -16).isActive = true
+            if model.inAppPurchaseId != modelHighlighted.inAppPurchaseId {
+                print("aaaaaaaaaaaaa 1 \(model.inAppPurchaseId)")
+                let view = SubscriptionOfferView.initFromNib()
+                view.configure(with: offer.element, delegate: self, index: offer.offset)
+                view.setNeedsLayout()
+                view.layoutIfNeeded()
+                packages.addArrangedSubview(view)
+                
+                view.leadingAnchor.constraint(equalTo: packages.leadingAnchor,
+                                              constant: 16).isActive = true
+                view.trailingAnchor.constraint(equalTo: packages.trailingAnchor,
+                                               constant: -16).isActive = true
+            }
         }
         
         let outerBottomView = UIView()
