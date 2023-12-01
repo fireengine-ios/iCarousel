@@ -304,12 +304,12 @@ extension MyStorageViewController: MyStorageViewInput {
                 
         packages.addArrangedSubview(packagesTitleLabel)
         
-        let modelHighlighted = highlightedPackage?.model as! PackageModelResponse
+        let modelHighlighted = highlightedPackage?.model as? PackageModelResponse
         
         for offer in output.availableOffers.enumerated() {
             let model = offer.element.model as! PackageModelResponse
             
-            if model.inAppPurchaseId != modelHighlighted.inAppPurchaseId {
+            if model.inAppPurchaseId != modelHighlighted?.inAppPurchaseId {
                 let view = SubscriptionOfferView.initFromNib()
                 view.configure(with: offer.element, delegate: self, index: offer.offset)
                 view.setNeedsLayout()
