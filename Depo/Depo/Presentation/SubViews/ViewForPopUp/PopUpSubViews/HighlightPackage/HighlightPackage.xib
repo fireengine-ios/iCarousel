@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="M1f-r5-4fA" customClass="HighlightPackage" customModule="lifebox" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="M1f-r5-4fA" customClass="HighlightPackage" customModule="Billo" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="440" height="283"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -86,7 +86,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QiJ-vO-JwP" customClass="DarkBlueButton" customModule="lifebox" customModuleProvider="target">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QiJ-vO-JwP" customClass="DarkBlueButton" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="44" y="88" width="324" height="45"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="45" id="Gk8-tF-R2V"/>
@@ -125,7 +125,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" name="secondaryBackground"/>
                     <constraints>
                         <constraint firstItem="J31-eg-VnD" firstAttribute="top" secondItem="h8z-BO-g1J" secondAttribute="top" constant="15" id="4dz-b7-fx6"/>
                         <constraint firstItem="J31-eg-VnD" firstAttribute="leading" secondItem="h8z-BO-g1J" secondAttribute="leading" constant="14" id="7JK-1F-puW"/>

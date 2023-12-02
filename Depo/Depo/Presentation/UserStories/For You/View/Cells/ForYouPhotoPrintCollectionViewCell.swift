@@ -130,6 +130,7 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
     private var printedPhotosData: GetOrderResponse?
     private let sendRemaining = SingletonStorage.shared.accountInfo?.photoPrintSendRemaining ?? 0
     private let maxSelection = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
+    private var buttonDirectScreen: String = ""
     
     @IBAction private func onShowDetail(_ sender: UIButton) {
     }
@@ -157,6 +158,7 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
     }
     
     func configureWithOutData() {
+        printedPhotosData = nil
         let myTime = Date()
         let format = DateFormatter()
         format.dateFormat = "MMMM"
@@ -167,16 +169,19 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
             cardTitleLabel.text = localized(.foryouPrintTitle)
             thumbnailPlusLabel.text = localized(.photoPrint)
             thumbnailPlusImage.image = Image.iconAddUnselectPlus.image
+            buttonDirectScreen = "NewPrint"
         } else if sendRemaining == 0 || maxSelection == 0 {
             statusLabel.isHidden = false
             statusLabel.text = localized(.printedPhotoCardInfoNoRight)
             cardTitleLabel.text = localized(.printedPhotoCardBodyNoRight)
             thumbnailPlusLabel.text = localized(.forYouSeeAll)
             thumbnailPlusImage.image = Image.iconNoRight.image
+            buttonDirectScreen = "SeeAll"
         } else {
             statusLabel.isHidden = true
             thumbnailPlusLabel.text = localized(.photoPrint)
             thumbnailPlusImage.image = Image.iconAddUnselectPlus.image
+            buttonDirectScreen = "NewPrint"
         }
         statusLabel.textColor = AppColor.tealBlue.color
         cardThumbnailImage.image = Image.collageThumbnail.image
@@ -192,6 +197,13 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
         var data = [GetOrderResponse]()
         data.append(printedPhotosData)
         let router = RouterVC()
+        
+        if buttonDirectScreen == "SeeAll" {
+            let photoPrint = router.photoPrintForYouViewController()
+            router.pushViewController(viewController: photoPrint)
+            return
+        }
+        
         if data.count == 0 {
             let isHavePrintPackage = SingletonStorage.shared.accountInfo?.photoPrintPackage ?? false
             let sendRemaining = SingletonStorage.shared.accountInfo?.photoPrintSendRemaining ?? 0

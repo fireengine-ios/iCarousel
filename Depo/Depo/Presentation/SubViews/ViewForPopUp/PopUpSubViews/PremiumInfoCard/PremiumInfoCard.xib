@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OKN-HT-OhB">
-                    <rect key="frame" x="0.0" y="0.0" width="440" height="294"/>
+                    <rect key="frame" x="0.0" y="20" width="440" height="274"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKE-HD-zu9">
                             <rect key="frame" x="14" y="15" width="28.5" height="20.5"/>
@@ -46,7 +46,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zz7-3F-oqF">
-                            <rect key="frame" x="14" y="128.5" width="412" height="152"/>
+                            <rect key="frame" x="14" y="128.5" width="412" height="139"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconPremiumInfoCard" translatesAutoresizingMaskIntoConstraints="NO" id="aD8-bh-2B5">
                                     <rect key="frame" x="181" y="-25" width="50" height="50"/>
@@ -79,7 +79,7 @@
                                 <constraint firstItem="CKW-Jq-wJg" firstAttribute="leading" secondItem="Zz7-3F-oqF" secondAttribute="leading" constant="20" id="PVf-dY-QSK"/>
                                 <constraint firstAttribute="trailing" secondItem="w7g-A5-gEe" secondAttribute="trailing" constant="50" id="REc-oI-72K"/>
                                 <constraint firstItem="w7g-A5-gEe" firstAttribute="top" secondItem="CKW-Jq-wJg" secondAttribute="bottom" constant="12" id="a5l-pO-KAp"/>
-                                <constraint firstAttribute="height" constant="152" id="h3i-b6-SK8"/>
+                                <constraint firstAttribute="height" constant="139" id="h3i-b6-SK8"/>
                                 <constraint firstItem="w7g-A5-gEe" firstAttribute="leading" secondItem="Zz7-3F-oqF" secondAttribute="leading" constant="50" id="inC-Bh-mn2"/>
                                 <constraint firstItem="aD8-bh-2B5" firstAttribute="top" secondItem="Zz7-3F-oqF" secondAttribute="top" constant="-25" id="w3r-AD-noI"/>
                             </constraints>
@@ -89,6 +89,7 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="Bx2-7a-VAr" secondAttribute="trailing" id="2o3-40-611"/>
                         <constraint firstItem="cNI-OR-a4O" firstAttribute="leading" secondItem="OKN-HT-OhB" secondAttribute="leading" constant="14" id="Bm6-yW-y0C"/>
+                        <constraint firstAttribute="bottom" secondItem="Zz7-3F-oqF" secondAttribute="bottom" constant="6.5" id="DgT-Ee-ZZw"/>
                         <constraint firstItem="Bx2-7a-VAr" firstAttribute="leading" secondItem="OKN-HT-OhB" secondAttribute="leading" id="Dnv-eB-V2H"/>
                         <constraint firstItem="ZKE-HD-zu9" firstAttribute="leading" secondItem="OKN-HT-OhB" secondAttribute="leading" constant="14" id="F5e-KR-LKA"/>
                         <constraint firstItem="6FS-eQ-LQr" firstAttribute="leading" secondItem="ZKE-HD-zu9" secondAttribute="trailing" constant="16" id="KaU-ws-7mI"/>

@@ -284,7 +284,7 @@ final class UserDefaultsVars: StorageVars {
     
     private let discoverHighlightShowsKey = "discoverHighlightShowsKey"
     var discoverHighlightShows: Bool {
-        get { return userDefaults.object(forKey: discoverHighlightShowsKey) as? Bool ?? true }
+        get { return userDefaults.object(forKey: discoverHighlightShowsKey) as? Bool ?? false }
         set { userDefaults.set(newValue, forKey: discoverHighlightShowsKey) }
     }
     

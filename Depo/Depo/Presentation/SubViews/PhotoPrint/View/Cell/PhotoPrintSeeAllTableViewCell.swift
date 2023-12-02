@@ -111,7 +111,7 @@ extension PhotoPrintSeeAllTableViewCell: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoPrintSeeAllCollectionViewCell", for: indexPath) as? PhotoPrintSeeAllCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.configure(urlString: photoPrintData?.affiliateOrderDetails[indexPath.row].fileInfo.tempDownloadURL ?? "")
+        cell.configure(urlString: photoPrintData?.affiliateOrderDetails[indexPath.row].fileInfo.metadata.thumbnailMedium ?? "")
         return cell
     }
 }
