@@ -12,7 +12,7 @@ final class HighlightPackage: BaseCardView {
     
     @IBOutlet weak var titleLabel: UILabel! {
         willSet {
-            newValue.text = "Fırsatı Kaçırma"
+            newValue.text = localized(.dontMissOpportunity)
             newValue.font = .appFont(.medium, size: 16)
         }
     }

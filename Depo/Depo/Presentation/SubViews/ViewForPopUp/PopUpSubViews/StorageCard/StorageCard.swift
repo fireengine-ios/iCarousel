@@ -83,38 +83,42 @@ class StorageCard: BaseCardView {
         
         switch viewType {
         case .freeAppSpaceCloudWarning:
-            setGradient(colorTop: ColorConstants.orangeGradientStart, colorBottom: ColorConstants.orangeGradientEnd)
-            iconView.image = UIImage(named: "CardIconLamp")
-            
             titleLabel.text = TextConstants.homeStorageCardCloudTitle
+            titleLabel.font = .appFont(.medium, size: 16)
+            titleLabel.textColor = AppColor.label.color
             
             bottomButton.setTitle(TextConstants.homeStorageCardCloudBottomButtonTitle, for: .normal)
-            bottomButton.setTitleColor(ColorConstants.orangeGradientEnd, for: .normal)
+            bottomButton.titleLabel?.font = .appFont(.bold, size: 14)
+            bottomButton.setTitleColor(AppColor.settingsButtonColor.color, for: .normal)
             
             subTileLabel.text = ""
             
         case .emptyStorage:
-            setGradient(colorTop: ColorConstants.greenGradientStart, colorBottom: ColorConstants.greenGradientEnd)
-            iconView.image = UIImage(named: "CardIconFolder")
-            
             titleLabel.text = TextConstants.homeStorageCardEmptyTitle
+            titleLabel.font = .appFont(.medium, size: 16)
+            titleLabel.textColor = AppColor.label.color
             subTileLabel.text = TextConstants.homeStorageCardEmptySubTitle
+            subTileLabel.font = .appFont(.light, size: 14)
+            subTileLabel.textColor = AppColor.label.color
             
             bottomButton.setTitle(TextConstants.homeStorageCardEmptyBottomButtonTitle, for: .normal)
-            bottomButton.setTitleColor(ColorConstants.greenGradientEnd, for: .normal)
+            bottomButton.titleLabel?.font = .appFont(.bold, size: 14)
+            bottomButton.setTitleColor(AppColor.settingsButtonColor.color, for: .normal)
             
         case .freeAppSpaceLocalWarning:
-            setGradient(colorTop: ColorConstants.redGradientStart, colorBottom: ColorConstants.redGradientEnd)
-            iconView.image = UIImage(named: "CardIconLamp")
-            
             titleLabel.text = TextConstants.homeStorageCardLocalTitle
+            titleLabel.font = .appFont(.medium, size: 16)
+            titleLabel.textColor = AppColor.label.color
             let percentDouble = 1 - Device.getFreeDiskSpaceInPercent
             
             let percent = Int(round(percentDouble * 100))
             subTileLabel.text = String(format: TextConstants.homeStorageCardLocalSubTitle, percent)
+            subTileLabel.font = .appFont(.light, size: 14)
+            subTileLabel.textColor = AppColor.label.color
             
             bottomButton.setTitle(TextConstants.homeStorageCardLocalBottomButtonTitle, for: .normal)
-            bottomButton.setTitleColor(ColorConstants.redGradientEnd, for: .normal)
+            bottomButton.titleLabel?.font = .appFont(.bold, size: 14)
+            bottomButton.setTitleColor(AppColor.settingsButtonColor.color, for: .normal)
             
         default:
             break

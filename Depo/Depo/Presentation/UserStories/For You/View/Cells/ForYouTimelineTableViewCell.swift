@@ -83,7 +83,7 @@ class ForYouTimelineTableViewCell: UITableViewCell {
     
     @IBOutlet weak var playImageView: UIImageView! {
         willSet {
-            newValue.image = Image.iconPlay.image
+            newValue.image = Image.iconPlayPoint.image
             newValue.isUserInteractionEnabled = true
             let tapImage = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
             newValue.addGestureRecognizer(tapImage)
