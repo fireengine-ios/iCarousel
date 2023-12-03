@@ -1,4 +1,3 @@
-//
 //  NotificationTableViewCell.swift
 //  Depo
 //
@@ -22,17 +21,19 @@ class NotificationTableViewCell: UITableViewCell {
         return view
     }()
     
-    private lazy var descriptionLabel: UILabel = {
-        let view = UILabel()
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.linkTapped))
-
+    private lazy var descriptionTextView: UITextView = {
+        let view = UITextView()
         view.textColor = AppColor.textButton.color
         view.font = .appFont(.regular, size: 12)
         view.textAlignment = .right
-        view.numberOfLines = 6
-        view.lineBreakMode = .byWordWrapping
+        view.textContainer.maximumNumberOfLines = 6
+        view.textContainer.lineBreakMode = .byWordWrapping
+        view.isSelectable = true
+        view.dataDetectorTypes = .link
+        view.isEditable = false
+        view.sizeToFit()
+        view.isScrollEnabled = false
         view.isUserInteractionEnabled = true
-        view.addGestureRecognizer(tap)
         return view
     }()
     
@@ -116,6 +117,11 @@ class NotificationTableViewCell: UITableViewCell {
         panGestureRecognizer.delegate = self
         contentView.addGestureRecognizer(panGestureRecognizer)
         contentView.isHidden = true
+        
+        descriptionTextView.isUserInteractionEnabled = true
+        descriptionTextView.isSelectable = true
+        descriptionTextView.dataDetectorTypes = .link
+        descriptionTextView.isEditable = false
     }
     
     override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -215,12 +221,12 @@ class NotificationTableViewCell: UITableViewCell {
         titleLabel.trailingAnchor.constraint(equalTo: checkBox.leadingAnchor, constant: -16).activate()
         titleLabel.heightAnchor.constraint(equalToConstant: 24).activate()
         
-        containerView.addSubview(descriptionLabel)
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).activate()
-        descriptionLabel.leadingAnchor.constraint(equalTo: cardImageView.trailingAnchor, constant: 16).activate()
-        descriptionLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -40).activate()
-        descriptionLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16).activate()
+        containerView.addSubview(descriptionTextView)
+        descriptionTextView.translatesAutoresizingMaskIntoConstraints = false
+        descriptionTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).activate()
+        descriptionTextView.leadingAnchor.constraint(equalTo: cardImageView.trailingAnchor, constant: 16).activate()
+        descriptionTextView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -40).activate()
+        descriptionTextView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16).activate()
         
         containerView.addSubview(createDateLabel)
         createDateLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -233,12 +239,12 @@ class NotificationTableViewCell: UITableViewCell {
         if let body = model.body {
             if #available(iOS 12.0, *) {
                 if traitCollection.userInterfaceStyle == .light {
-                    descriptionLabel.attributedText = body.getAsHtml
+                    descriptionTextView.attributedText = body.getAsHtml
                 } else {
-                    descriptionLabel.attributedText = body.getAsHtmldarkMode
+                    descriptionTextView.attributedText = body.getAsHtmldarkMode
                 }
             } else {
-                descriptionLabel.attributedText = body.getAsHtml
+                descriptionTextView.attributedText = body.getAsHtml
             }
         }
         
@@ -281,7 +287,7 @@ class NotificationTableViewCell: UITableViewCell {
     private func setAsWarning() {
         titleLabel.textColor = AppColor.warning.color
         containerView.layer.borderColor = AppColor.warning.cgColor
-        descriptionLabel.alpha = 1
+        descriptionTextView.alpha = 1
         createDateLabel.alpha = 1
         
         warningImageView.alpha = 1
@@ -292,7 +298,7 @@ class NotificationTableViewCell: UITableViewCell {
     private func setAsNormal() {
         titleLabel.textColor = AppColor.label.color
         containerView.layer.borderColor = AppColor.tint.cgColor
-        descriptionLabel.alpha = 1
+        descriptionTextView.alpha = 1
         createDateLabel.alpha = 1
         
         warningCase = false
@@ -302,7 +308,7 @@ class NotificationTableViewCell: UITableViewCell {
     private func setAsReadForNormal() {
         titleLabel.textColor = AppColor.readState.color
         containerView.layer.borderColor = AppColor.readState.cgColor
-        descriptionLabel.alpha = 0.5
+        descriptionTextView.alpha = 0.5
         createDateLabel.alpha = 0.5
 
         warningCase = false
@@ -312,14 +318,14 @@ class NotificationTableViewCell: UITableViewCell {
     private func setAsReadForWarning() {
         titleLabel.textColor = AppColor.warning.color.withAlphaComponent(0.5)
         containerView.layer.borderColor = AppColor.warning.withAlphaComponent(0.5).cgColor
-        descriptionLabel.alpha = 0.5
+        descriptionTextView.alpha = 0.5
         createDateLabel.alpha = 0.5
         
         warningCase = true
         warningImageView.alpha = 0.5
         warningImageView.isHidden = false
     }
-    weak var controller: NotificationViewInput?
+    
 }
 
 extension NotificationTableViewCell {
@@ -331,7 +337,5 @@ extension NotificationTableViewCell {
         let selectionStateImage = isSelected ? Image.iconCheckmarkSelected : Image.iconCheckmarkNotSelected
         checkBox.image = selectionStateImage.image
     }
-    @objc private func linkTapped() {
-        controller?.linkTapped()
-    }
 }
+
