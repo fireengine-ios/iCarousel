@@ -376,7 +376,6 @@ class FavoriteService: RemoteItemsService {
                 return
             }
             
-            print("aaaaaaaaaaaaa \(self?.currentPage) - \(resultResponse.list.compactMap { Item(remote: $0) }.count)")
             let list = resultResponse.list
                 .filter({ $0.contentType == "image/jpeg" ||
                     $0.contentType == "image/png" ||

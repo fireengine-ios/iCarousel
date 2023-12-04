@@ -352,6 +352,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         updateThreeDotsButton()
     }
     
+    func tableDataRemoveAll() {
+        if let dataSourceForArray = dataSource as? ArrayDataSourceForCollectionView {
+            dataSourceForArray.tableDataMArray.removeAll()
+        }
+    }
+    
     func isArrayDataSource() -> Bool {
         return false
     }

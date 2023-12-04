@@ -128,6 +128,7 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
     }
     
     private var printedPhotosData: GetOrderResponse?
+    private let isPackage = SingletonStorage.shared.accountInfo?.photoPrintPackage ?? true
     private let sendRemaining = SingletonStorage.shared.accountInfo?.photoPrintSendRemaining ?? 0
     private let maxSelection = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
     private var buttonDirectScreen: String = ""
@@ -163,25 +164,34 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
         let format = DateFormatter()
         format.dateFormat = "MMMM"
         bgView.layer.borderWidth = 0
-        if sendRemaining > 0 {
+        if isPackage {
             statusLabel.isHidden = false
             statusLabel.text = String(format: localized(.foryouPrintBody), maxSelection)
             cardTitleLabel.text = localized(.foryouPrintTitle)
             thumbnailPlusLabel.text = localized(.photoPrint)
             thumbnailPlusImage.image = Image.iconAddUnselectPlus.image
             buttonDirectScreen = "NewPrint"
-        } else if sendRemaining == 0 || maxSelection == 0 {
-            statusLabel.isHidden = false
-            statusLabel.text = localized(.printedPhotoCardInfoNoRight)
-            cardTitleLabel.text = localized(.printedPhotoCardBodyNoRight)
-            thumbnailPlusLabel.text = localized(.forYouSeeAll)
-            thumbnailPlusImage.image = Image.iconNoRight.image
-            buttonDirectScreen = "SeeAll"
         } else {
-            statusLabel.isHidden = true
-            thumbnailPlusLabel.text = localized(.photoPrint)
-            thumbnailPlusImage.image = Image.iconAddUnselectPlus.image
-            buttonDirectScreen = "NewPrint"
+            if sendRemaining > 0 {
+                statusLabel.isHidden = false
+                statusLabel.text = String(format: localized(.foryouPrintBody), maxSelection)
+                cardTitleLabel.text = localized(.foryouPrintTitle)
+                thumbnailPlusLabel.text = localized(.photoPrint)
+                thumbnailPlusImage.image = Image.iconAddUnselectPlus.image
+                buttonDirectScreen = "NewPrint"
+            } else if sendRemaining == 0 || maxSelection == 0 {
+                statusLabel.isHidden = false
+                statusLabel.text = localized(.printedPhotoCardInfoNoRight)
+                cardTitleLabel.text = localized(.printedPhotoCardBodyNoRight)
+                thumbnailPlusLabel.text = localized(.forYouSeeAll)
+                thumbnailPlusImage.image = Image.iconNoRight.image
+                buttonDirectScreen = "SeeAll"
+            } else {
+                statusLabel.isHidden = true
+                thumbnailPlusLabel.text = localized(.photoPrint)
+                thumbnailPlusImage.image = Image.iconAddUnselectPlus.image
+                buttonDirectScreen = "NewPrint"
+            }
         }
         statusLabel.textColor = AppColor.tealBlue.color
         cardThumbnailImage.image = Image.collageThumbnail.image

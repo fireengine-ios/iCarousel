@@ -17,13 +17,13 @@ class FavoriteInteractor: BaseFilesGreedInteractor {
         guard let remote = remoteItems as? FavoriteService else {
             return
         }
-        
+        output.tableDataRemoveAll()
         remote.currentPage = 0
         nextItems(sortBy: sortBy.sortingRules, sortOrder: sortBy.sortOder, newFieldValue: .favorite)
     }
     
     override func nextItems(_ searchText: String! = nil, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {
-        debugLog("StoriesInteractor getAllItems")
+        debugLog("FavoriteInteractor getAllItems")
         
         guard let remote = remoteItems as? FavoriteService else {
             return
