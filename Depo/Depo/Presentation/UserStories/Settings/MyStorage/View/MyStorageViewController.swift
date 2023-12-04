@@ -11,9 +11,7 @@ import UIKit
 final class MyStorageViewController: BaseViewController {
     
     //MARK: Properties
-    var output: MyStorageViewOutput!
-    private lazy var activityManager = ActivityIndicatorManager()
-
+    
     @IBOutlet weak var menuTableView: ResizableTableView! {
         willSet {
             newValue.rowHeight = 65
@@ -113,9 +111,18 @@ final class MyStorageViewController: BaseViewController {
         return view
     }()
     
+    private lazy var closeSelfButton = UIBarButtonItem(image: NavigationBarImage.back.image,
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(closeSelf))
+    
+    var output: MyStorageViewOutput!
+    private lazy var activityManager = ActivityIndicatorManager()
     private lazy var policyView = SubscriptionsPolicyView()
     private lazy var bannerView = PackagesBannerBuyPremiumView()
     private lazy var packageBannerView = HighlightedPackageView()
+    private lazy var storageVars: StorageVars = factory.resolve()
+    private let router = RouterVC()
     
     private var menuViewModels = [ControlPackageType]()    
     @IBOutlet weak var topSpacingHeight: NSLayoutConstraint!
@@ -148,11 +155,26 @@ final class MyStorageViewController: BaseViewController {
     private func setup() {
         setTitle(withString: output.title)
         self.view.backgroundColor = ColorConstants.fileGreedCellColorSecondary
-        
+        navigationItem.leftBarButtonItem = closeSelfButton
         activityManager.delegate = self
         scrollView.contentInsetAdjustmentBehavior = .never
         setupLayout()
         addPremiumBanner()
+    }
+    
+    @objc private func closeSelf() {
+        let isFirstLogin = storageVars.highlightedIsFirstLogin
+        if isFirstLogin {
+            goToPhotosScreen()
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    func goToPhotosScreen() {
+        DispatchQueue.toMain { [weak self] in
+            self?.router.setNavigationController(controller: self?.router.tabBarScreen)
+        }
     }
     
     
