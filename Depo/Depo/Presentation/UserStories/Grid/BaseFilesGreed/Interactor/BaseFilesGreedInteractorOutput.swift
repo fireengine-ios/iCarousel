@@ -28,4 +28,6 @@ protocol BaseFilesGreedInteractorOutput: BaseAsyncOperationInteractorOutput {
     
     func createFileFail(errorResponse: ErrorResponse)
     
+    func getContentWithSuccessWithPaginiation(array: [[BaseDataSourceItem]])
+    
 }

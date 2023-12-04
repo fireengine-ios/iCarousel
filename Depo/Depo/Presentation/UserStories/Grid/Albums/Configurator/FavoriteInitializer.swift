@@ -38,7 +38,7 @@ class FavoriteInitializer: NSObject {
         let router = AlbumsRouter()
         router.presenter = presenter
         
-        let interactor = FavoriteInteractor(remoteItems: FavoriteService(requestSize: 140))
+        let interactor = FavoriteInteractor(remoteItems: FavoriteService(requestSize: 40))
         
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: .List,
