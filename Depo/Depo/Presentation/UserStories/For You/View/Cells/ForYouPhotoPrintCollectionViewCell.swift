@@ -160,37 +160,18 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
     
     func configureWithOutData() {
         printedPhotosData = nil
-        let myTime = Date()
         let format = DateFormatter()
         format.dateFormat = "MMMM"
         bgView.layer.borderWidth = 0
-        if isPackage {
-            statusLabel.isHidden = false
-            statusLabel.text = String(format: localized(.foryouPrintBody), maxSelection)
-            cardTitleLabel.text = localized(.foryouPrintTitle)
-            thumbnailPlusLabel.text = localized(.photoPrint)
-            thumbnailPlusImage.image = Image.iconAddUnselectPlus.image
-            buttonDirectScreen = "NewPrint"
+        if !isPackage {
+            showPlusCard()
         } else {
             if sendRemaining > 0 {
-                statusLabel.isHidden = false
-                statusLabel.text = String(format: localized(.foryouPrintBody), maxSelection)
-                cardTitleLabel.text = localized(.foryouPrintTitle)
-                thumbnailPlusLabel.text = localized(.photoPrint)
-                thumbnailPlusImage.image = Image.iconAddUnselectPlus.image
-                buttonDirectScreen = "NewPrint"
+                showPlusCard()
             } else if sendRemaining == 0 || maxSelection == 0 {
-                statusLabel.isHidden = false
-                statusLabel.text = localized(.printedPhotoCardInfoNoRight)
-                cardTitleLabel.text = localized(.printedPhotoCardBodyNoRight)
-                thumbnailPlusLabel.text = localized(.forYouSeeAll)
-                thumbnailPlusImage.image = Image.iconNoRight.image
-                buttonDirectScreen = "SeeAll"
+               showSeeAllCard()
             } else {
-                statusLabel.isHidden = true
-                thumbnailPlusLabel.text = localized(.photoPrint)
-                thumbnailPlusImage.image = Image.iconAddUnselectPlus.image
-                buttonDirectScreen = "NewPrint"
+                showPlusCard()
             }
         }
         statusLabel.textColor = AppColor.tealBlue.color
@@ -200,7 +181,24 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
         thumbnailPlusImage.isHidden = false
         thumbnailPlusLabel.isHidden = false
         statusImageView.isHidden = true
-        
+    }
+    
+    func showPlusCard() {
+        statusLabel.isHidden = false
+        statusLabel.text = String(format: localized(.foryouPrintBody), maxSelection)
+        cardTitleLabel.text = localized(.foryouPrintTitle)
+        thumbnailPlusLabel.text = localized(.photoPrint)
+        thumbnailPlusImage.image = Image.iconAddUnselectPlus.image
+        buttonDirectScreen = "NewPrint"
+    }
+    
+    func showSeeAllCard() {
+        statusLabel.isHidden = false
+        statusLabel.text = localized(.printedPhotoCardInfoNoRight)
+        cardTitleLabel.text = localized(.printedPhotoCardBodyNoRight)
+        thumbnailPlusLabel.text = localized(.forYouSeeAll)
+        thumbnailPlusImage.image = Image.iconNoRight.image
+        buttonDirectScreen = "SeeAll"
     }
     
     @objc private func imageTapped() {
