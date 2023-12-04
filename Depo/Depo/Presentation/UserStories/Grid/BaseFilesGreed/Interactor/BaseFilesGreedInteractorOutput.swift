@@ -30,4 +30,6 @@ protocol BaseFilesGreedInteractorOutput: BaseAsyncOperationInteractorOutput {
     
     func getContentWithSuccessWithPaginiation(array: [[BaseDataSourceItem]])
     
+    func tableDataRemoveAll()
+    
 }
