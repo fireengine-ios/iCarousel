@@ -352,6 +352,48 @@ class FavoriteService: RemoteItemsService {
     init(requestSize: Int) {
         super.init(requestSize: requestSize, fieldValue: .favorite)
     }
+    
+    func allFavorites(sortBy: SortType = .date, sortOrder: SortOrder = .desc, success: ListRemoteItems?, fail: FailRemoteItems?) {
+        currentPage = 0
+        nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail)
+    }
+    
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+        debugLog("StoryService nextItems")
+        
+        let searchParam = SearchByFieldParameters(fieldName: .favorite,
+                                                  fieldValue: .favorite,
+                                                  sortBy: sortBy,
+                                                  sortOrder: sortOrder,
+                                                  page: currentPage,
+                                                  size: requestSize,
+                                                  hidden: false)
+                
+        remote.searchByField(param: searchParam, success: { [weak self] response in
+            guard let resultResponse = response as? SearchResponse else {
+                debugLog("StoryService remote searchStories fail")
+                fail?()
+                return
+            }
+            
+            print("aaaaaaaaaaaaa \(self?.currentPage) - \(resultResponse.list.compactMap { Item(remote: $0) }.count)")
+            let list = resultResponse.list
+                .filter({ $0.contentType == "image/jpeg" ||
+                    $0.contentType == "image/png" ||
+                    $0.contentType == "image/heic" ||
+                    $0.contentType == "video/mp4" ||
+                    $0.contentType == "video/quicktime" })
+                .compactMap { Item(remote: $0) }
+            
+            //let list = resultResponse.list.compactMap { Item(remote: $0) }
+            self?.currentPage += 1
+            success?(list)
+
+        }, fail: { errorResponse in
+            errorResponse.showInternetErrorGlobal()
+            fail?()
+        })
+    }
 }
 
 class AnimationService: RemoteItemsService {
