@@ -165,13 +165,17 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
         bgView.layer.borderWidth = 0
         if !isPackage {
             showPlusCard()
+            statusLabel.text = String(format: localized(.foryouPrintBody), 5)
         } else {
             if sendRemaining > 0 {
                 showPlusCard()
+                statusLabel.text = String(format: localized(.foryouPrintBody), maxSelection)
             } else if sendRemaining == 0 || maxSelection == 0 {
-               showSeeAllCard()
+                showSeeAllCard()
+                statusLabel.text = localized(.printedPhotoCardInfoNoRight)
             } else {
                 showPlusCard()
+                statusLabel.text = String(format: localized(.foryouPrintBody), 5)
             }
         }
         statusLabel.textColor = AppColor.tealBlue.color
@@ -185,7 +189,6 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
     
     func showPlusCard() {
         statusLabel.isHidden = false
-        statusLabel.text = String(format: localized(.foryouPrintBody), maxSelection)
         cardTitleLabel.text = localized(.foryouPrintTitle)
         thumbnailPlusLabel.text = localized(.photoPrint)
         thumbnailPlusImage.image = Image.iconAddUnselectPlus.image
@@ -194,7 +197,6 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
     
     func showSeeAllCard() {
         statusLabel.isHidden = false
-        statusLabel.text = localized(.printedPhotoCardInfoNoRight)
         cardTitleLabel.text = localized(.printedPhotoCardBodyNoRight)
         thumbnailPlusLabel.text = localized(.forYouSeeAll)
         thumbnailPlusImage.image = Image.iconNoRight.image
