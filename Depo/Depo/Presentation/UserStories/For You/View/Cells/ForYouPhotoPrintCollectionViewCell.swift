@@ -159,13 +159,14 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
     }
     
     func configureWithOutData() {
+        let printMonthlyPhotoSize = FirebaseRemoteConfig.shared.printMonthlyPhotoSize
         printedPhotosData = nil
         let format = DateFormatter()
         format.dateFormat = "MMMM"
         bgView.layer.borderWidth = 0
         if !isPackage {
             showPlusCard()
-            statusLabel.text = String(format: localized(.foryouPrintBody), 5)
+            statusLabel.text = String(format: localized(.foryouPrintBody), printMonthlyPhotoSize) //printMonthlyPhotoSize remoteconfig
         } else {
             if sendRemaining > 0 {
                 showPlusCard()

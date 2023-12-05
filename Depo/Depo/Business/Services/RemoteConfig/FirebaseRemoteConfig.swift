@@ -31,6 +31,7 @@ private struct RemoteConfigKeys {
     static let preparePageSizeLimit = "prepare_page_size_limit"
     static let printPhotoQualityMinMB = "Print_Photo_Quality_Min_MB"
     static let timelineEnabled = "yilsonu_timeline_enabled_client"
+    static let printMonthlyPhotoSize = "print_monthly_photo_size"
 }
 
 final class FirebaseRemoteConfig {
@@ -53,6 +54,11 @@ final class FirebaseRemoteConfig {
     var printOptionEnabled: Bool {
         let key = RemoteConfigKeys.printOptionEnabled
         return remoteConfig.configValue(forKey: key).boolValue
+    }
+    
+    var printMonthlyPhotoSize: Int {
+        let key = RemoteConfigKeys.printMonthlyPhotoSize
+        return remoteConfig.configValue(forKey: key).numberValue.intValue
     }
 
     var printOptionEnabledLanguages: [String] {
