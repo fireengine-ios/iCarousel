@@ -451,7 +451,9 @@ extension FaceImageItemsPresenter: FaceImageItemsDataSourceDelegate {
             let source = faceImageType?.premiumType ?? .default
             router.openPremium(source: source, module: self)
         } else {
-            router.showNoDetailsAlert(with: alertText)
+            //router.showNoDetailsAlert(with: alertText)
+            let routerVC = RouterVC()
+            routerVC.pushViewController(viewController: routerVC.myStorage(usageStorage: nil))
         }
     }
 }

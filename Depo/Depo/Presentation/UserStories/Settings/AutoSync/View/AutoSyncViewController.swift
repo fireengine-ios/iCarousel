@@ -127,6 +127,7 @@ final class AutoSyncViewController: BaseViewController, NibInit {
                 secondAction: { vc in
                     self.dismiss(animated: false, completion: {
                         DispatchQueue.toMain { [weak self] in
+                            self?.storageVars.highlightedPopUpPackageBack = true
                             self?.onStartUsingButtonTapped = true
                             self?.storageVars.isAutoSyncSet = true
                             self?.router.pushViewController(viewController: (self?.router.myStorage(usageStorage: nil))!)
