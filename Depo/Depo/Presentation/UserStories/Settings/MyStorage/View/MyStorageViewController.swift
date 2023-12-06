@@ -163,8 +163,9 @@ final class MyStorageViewController: BaseViewController {
     }
     
     @objc private func closeSelf() {
-        let isFirstLogin = storageVars.highlightedIsFirstLogin
-        if isFirstLogin {
+        let fromHighligtedPopUp = storageVars.highlightedPopUpPackageBack
+        if fromHighligtedPopUp {
+            storageVars.highlightedPopUpPackageBack = false
             goToPhotosScreen()
         } else {
             navigationController?.popViewController(animated: true)
