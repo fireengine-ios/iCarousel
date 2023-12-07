@@ -199,7 +199,8 @@ final class SubscriptionFeaturesView: UIView {
                                         TextConstants.featurePhotopick,
                                         TextConstants.featureDeleteDuplicationContacts,
                                         TextConstants.featureStorageOnlyAdditional1,
-                                        TextConstants.featureStorageOnlyAdditional2]
+                                        TextConstants.featureStorageOnlyAdditional2,
+                                        localized(.printPackagePrintFirm)]
                 addFeatures(redactedFeatures, isPremium: false)
             }
         } else {
