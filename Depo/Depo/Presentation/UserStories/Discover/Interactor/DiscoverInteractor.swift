@@ -33,7 +33,7 @@ final class DiscoverInteractor: DiscoverInteractorInput {
 
     func viewIsReady() {
         homeCardsService.delegate = self
-        FreeAppSpace.session.showFreeUpSpaceCard()
+        //FreeAppSpace.session.showFreeUpSpaceCard()
         FreeAppSpace.session.checkFreeUpSpace()
         setupAutoSyncTriggering()
 
