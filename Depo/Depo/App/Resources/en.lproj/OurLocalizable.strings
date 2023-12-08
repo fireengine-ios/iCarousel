@@ -2108,7 +2108,7 @@ then {11,99 TRY/Month}*/
 "change_pass_mail_or_phone" = "E-mail or Phone number";
 "mystorage_become_premium" = "To unlock more features, become a Premium member.";
 "we_are_creating_your_story_title" = "We are preparing your story.";
-"we_are_creating_your_story_desc" = "Once it is done, you can access it from Videos Album.";
+"we_are_creating_your_story_desc" = "Once it is done, you can access it from Story Album.";
 "trash_bin" = "Trash Bin";
 "empty_gallery_no_photo" = "You don’t have any photos or videos in your lifebox yet.";
 "empty_gallery_no_video" = "You don’t have any videos in your lifebox yet.";
@@ -2284,3 +2284,4 @@ then {11,99 TRY/Month}*/
 "free_up_space_title_settings" = "Free up space on your device.";
 "recommended" = "Recommended";
 "dont_miss_opportunity" = "";
+"print_package_print_firm" = "Photos will be printed by a contracted printing company.";

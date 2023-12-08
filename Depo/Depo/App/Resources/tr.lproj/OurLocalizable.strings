@@ -2072,7 +2072,7 @@ then {11,99 TRY/Month}*/
 "change_pass_mail_or_phone" = "E-posta veya Telefon Numarası";
 "mystorage_become_premium" = "Premium ol, bir sürü özelliğe sahip ol!";
 "we_are_creating_your_story_title" = "Hikayeni hazırlıyoruz.";
-"we_are_creating_your_story_desc" = "Hazır olduğunda Videolar albümünde bulabilirsin.";
+"we_are_creating_your_story_desc" = "Hazır olduğunda Hikayeler albümünde bulabilirsin.";
 "trash_bin" = "Çöp Kutusu";
 "empty_gallery_no_photo" = "Henüz hiç fotoğraf eklenmemiş";
 "empty_gallery_no_video" = "Henüz hiç video eklenmemiş";
@@ -2290,3 +2290,4 @@ then {11,99 TRY/Month}*/
 "free_up_space_title_settings" = "Telefonunun hafizasında yer aç.";
 "recommended" = "Önerilen";
 "dont_miss_opportunity" = "Fırsatı Kaçırma";
+"print_package_print_firm" = "Fotoğraflar anlaşmalı baskı firması tarafından basılacaktır.";
