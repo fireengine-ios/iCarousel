@@ -349,6 +349,7 @@ enum Strings: String, Localizable {
     case foryouPrintBody = "foryou_print_body"
     case printPackageTitle = "print_package_title"
     case printPackageDetail = "print_package_detail"
+    case printPackagePrintFirm = "print_package_print_firm"
     case printPackage = "print_package"
     case printPackageInfo = "print_package_info"
     case milliPiyangoKatilimKosullari2023 = "milli_piyango_katilim_kosullari_2023"

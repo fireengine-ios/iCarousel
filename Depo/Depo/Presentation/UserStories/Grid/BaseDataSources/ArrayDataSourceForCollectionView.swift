@@ -23,6 +23,13 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
 //        allItems.append(array.first! as [WrapData])
     }
     
+    func configurateWithArrayAndPaginiation(array: [[BaseDataSourceItem]]) {
+        tableDataMArray.append(contentsOf: array)
+        collectionView?.isSpringLoaded = true
+        collectionView?.dropDelegate = self
+        collectionView?.reloadData()
+    }
+    
     override func dropData() {
         super.dropData()
         tableDataMArray.removeAll()

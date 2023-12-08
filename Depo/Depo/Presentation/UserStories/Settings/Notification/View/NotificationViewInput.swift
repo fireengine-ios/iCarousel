@@ -12,5 +12,5 @@ protocol NotificationViewInput: AnyObject, ActivityIndicator {
     func reloadTableView()
     func setEmptyView(as hidden: Bool)
     func reloadTimer()
-    func linkTapped()
+   
 }

@@ -128,6 +128,7 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
     }
     
     private var printedPhotosData: GetOrderResponse?
+    private let isPackage = SingletonStorage.shared.accountInfo?.photoPrintPackage ?? true
     private let sendRemaining = SingletonStorage.shared.accountInfo?.photoPrintSendRemaining ?? 0
     private let maxSelection = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
     private var buttonDirectScreen: String = ""
@@ -158,30 +159,25 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
     }
     
     func configureWithOutData() {
+        let printMonthlyPhotoSize = FirebaseRemoteConfig.shared.printMonthlyPhotoSize
         printedPhotosData = nil
-        let myTime = Date()
         let format = DateFormatter()
         format.dateFormat = "MMMM"
         bgView.layer.borderWidth = 0
-        if sendRemaining > 0 {
-            statusLabel.isHidden = false
-            statusLabel.text = String(format: localized(.foryouPrintBody), maxSelection)
-            cardTitleLabel.text = localized(.foryouPrintTitle)
-            thumbnailPlusLabel.text = localized(.photoPrint)
-            thumbnailPlusImage.image = Image.iconAddUnselectPlus.image
-            buttonDirectScreen = "NewPrint"
-        } else if sendRemaining == 0 || maxSelection == 0 {
-            statusLabel.isHidden = false
-            statusLabel.text = localized(.printedPhotoCardInfoNoRight)
-            cardTitleLabel.text = localized(.printedPhotoCardBodyNoRight)
-            thumbnailPlusLabel.text = localized(.forYouSeeAll)
-            thumbnailPlusImage.image = Image.iconNoRight.image
-            buttonDirectScreen = "SeeAll"
+        if !isPackage {
+            showPlusCard()
+            statusLabel.text = String(format: localized(.foryouPrintBody), printMonthlyPhotoSize) //printMonthlyPhotoSize remoteconfig
         } else {
-            statusLabel.isHidden = true
-            thumbnailPlusLabel.text = localized(.photoPrint)
-            thumbnailPlusImage.image = Image.iconAddUnselectPlus.image
-            buttonDirectScreen = "NewPrint"
+            if sendRemaining > 0 {
+                showPlusCard()
+                statusLabel.text = String(format: localized(.foryouPrintBody), maxSelection)
+            } else if sendRemaining == 0 || maxSelection == 0 {
+                showSeeAllCard()
+                statusLabel.text = localized(.printedPhotoCardInfoNoRight)
+            } else {
+                showPlusCard()
+                statusLabel.text = String(format: localized(.foryouPrintBody), 5)
+            }
         }
         statusLabel.textColor = AppColor.tealBlue.color
         cardThumbnailImage.image = Image.collageThumbnail.image
@@ -190,7 +186,22 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
         thumbnailPlusImage.isHidden = false
         thumbnailPlusLabel.isHidden = false
         statusImageView.isHidden = true
-        
+    }
+    
+    func showPlusCard() {
+        statusLabel.isHidden = false
+        cardTitleLabel.text = localized(.foryouPrintTitle)
+        thumbnailPlusLabel.text = localized(.photoPrint)
+        thumbnailPlusImage.image = Image.iconAddUnselectPlus.image
+        buttonDirectScreen = "NewPrint"
+    }
+    
+    func showSeeAllCard() {
+        statusLabel.isHidden = false
+        cardTitleLabel.text = localized(.printedPhotoCardBodyNoRight)
+        thumbnailPlusLabel.text = localized(.forYouSeeAll)
+        thumbnailPlusImage.image = Image.iconNoRight.image
+        buttonDirectScreen = "SeeAll"
     }
     
     @objc private func imageTapped() {

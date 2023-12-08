@@ -28,7 +28,7 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
 
     override func viewWillAppear() {
         super.viewWillAppear()
-        reloadData()
+        //reloadData()
     }
     
     override func viewWillDisappear() {

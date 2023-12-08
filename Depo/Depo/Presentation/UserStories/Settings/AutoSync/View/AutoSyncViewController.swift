@@ -117,7 +117,7 @@ final class AutoSyncViewController: BaseViewController, NibInit {
     
     @IBAction func onStartUsingButton() {
         
-        let isFirstLoginControl = UserDefaults.standard.bool(forKey: "isFirstLoginControl")
+        let isFirstLoginControl = storageVars.highlightedIsFirstLogin
         
         if !isFirstLoginControl {
             let popup = PopUpController.with(title: nil, message: localized(.syncPageOfferPopUp), image: .none, firstButtonTitle: TextConstants.noForUpgrade, secondButtonTitle: TextConstants.faceImageYes,
@@ -127,6 +127,7 @@ final class AutoSyncViewController: BaseViewController, NibInit {
                 secondAction: { vc in
                     self.dismiss(animated: false, completion: {
                         DispatchQueue.toMain { [weak self] in
+                            self?.storageVars.highlightedPopUpPackageBack = true
                             self?.onStartUsingButtonTapped = true
                             self?.storageVars.isAutoSyncSet = true
                             self?.router.pushViewController(viewController: (self?.router.myStorage(usageStorage: nil))!)
@@ -137,7 +138,7 @@ final class AutoSyncViewController: BaseViewController, NibInit {
         } else {
             goToPhotosScreen()
         }
-        UserDefaults.standard.set(true, forKey: "isFirstLoginControl")
+        storageVars.highlightedIsFirstLogin = true
     }
     
     private func goToPhotosScreen() {

@@ -299,13 +299,7 @@ extension NotificationViewController: NotificationViewInput {
         startTimer()
     }
     
-    func linkTapped() {
-        guard let urlstring = urlString else {
-            return
-        }
-        let viewController = WebViewController(urlString: urlstring)
-        RouterVC().pushViewController(viewController: viewController)
-    }
+
 
 }
 

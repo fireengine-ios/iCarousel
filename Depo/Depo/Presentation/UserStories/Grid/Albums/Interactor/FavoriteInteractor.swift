@@ -11,40 +11,37 @@ import UIKit
 class FavoriteInteractor: BaseFilesGreedInteractor {
     
     private lazy var service = ForYouService()
-    private lazy var favoriteService = SearchService()
-
+    
     override func getAllItems(sortBy: SortedRules) {
-        debugLog("CollageInteractor getAllItems")
         
-        getFavorites()
+        guard let remote = remoteItems as? FavoriteService else {
+            return
+        }
+        output.tableDataRemoveAll()
+        remote.currentPage = 0
+        nextItems(sortBy: sortBy.sortingRules, sortOrder: sortBy.sortOder, newFieldValue: .favorite)
     }
     
-    private func getFavorites(completion: (() -> Void)? = nil) {
-        debugLog("ForYou getFavorites")
+    override func nextItems(_ searchText: String! = nil, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {
+        debugLog("FavoriteInteractor getAllItems")
         
-        let serchParam = SearchByFieldParameters(fieldName: .favorite,
-                                                 fieldValue: .favorite,
-                                                 sortBy: .name,
-                                                 sortOrder: .desc,
-                                                 page: 0,
-                                                 size: 10)
+        guard let remote = remoteItems as? FavoriteService else {
+            return
+        }
         
-        favoriteService.searchByField(param: serchParam, success: { [weak self] response in
-            guard let resultResponse = response as? SearchResponse else {
-                return
-            }
-            
-            let list = resultResponse.list.filter({ $0.contentType == "image/jpeg" || $0.contentType == "image/png" || $0.contentType == "image/heic"
-                                                 || $0.contentType == "video/mp4" || $0.contentType == "video/quicktime" })
-            
-            //self?.output.getFavorites(data: list.map { WrapData(remote: $0) })
-            
-            var array = [[BaseDataSourceItem]]()
-            array.append(list.map { WrapData(remote: $0) })
-            self?.output.getContentWithSuccess(array: array)
-            
-        }, fail: { errorResponse in
-            errorResponse.showInternetErrorGlobal()
+        remote.nextItems(sortBy: sortBy, sortOrder: sortOrder, success: { [weak self] favorites in
+            DispatchQueue.main.async {
+                if favorites.isEmpty {
+                    self?.output.getContentWithSuccessEnd()
+                } else {
+                    var array = [[BaseDataSourceItem]]()
+                    array.append(favorites)
+                    self?.output.getContentWithSuccessWithPaginiation(array: array)
+                }
+            }}, fail: { [weak self] in
+                DispatchQueue.main.async {
+                    self?.output.asyncOperationFail(errorMessage: "fail")
+                }
         })
     }
     

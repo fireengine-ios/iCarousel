@@ -333,6 +333,31 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         updateThreeDotsButton()
     }
     
+    func getContentWithSuccessWithPaginiation(array: [[BaseDataSourceItem]]) {
+        debugLog("BaseFilesGreedPresenter getContentWithSuccess")
+
+        if (view == nil) {
+            return
+        }
+        debugPrint("???getContentWithSuccessEnd()")
+        asyncOperationSuccess()
+//        view.stopRefresher()
+        if let dataSourceForArray = dataSource as? ArrayDataSourceForCollectionView {
+
+            dataSourceForArray.configurateWithArrayAndPaginiation(array: array)
+        } else {
+            dataSource.reloadData()
+        }
+        updateNoFilesView()
+        updateThreeDotsButton()
+    }
+    
+    func tableDataRemoveAll() {
+        if let dataSourceForArray = dataSource as? ArrayDataSourceForCollectionView {
+            dataSourceForArray.tableDataMArray.removeAll()
+        }
+    }
+    
     func isArrayDataSource() -> Bool {
         return false
     }

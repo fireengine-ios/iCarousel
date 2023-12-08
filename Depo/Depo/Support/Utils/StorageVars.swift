@@ -41,6 +41,8 @@ protocol StorageVars: AnyObject {
     var isUserFirstLoggedIn: Bool { get set }
     var discoverHighlightShows: Bool { get set }
     var discoverHighlightIndex: Int { get set }
+    var highlightedIsFirstLogin: Bool { get set }
+    var highlightedPopUpPackageBack: Bool { get set }
 
     func value(forDeepLinkParameter key: DeepLinkParameter) -> Any?
 }
@@ -292,6 +294,18 @@ final class UserDefaultsVars: StorageVars {
     var discoverHighlightIndex: Int {
         get { return userDefaults.object(forKey: discoverHighlightIndexKey) as? Int ?? 0 }
         set { userDefaults.set(newValue, forKey: discoverHighlightIndexKey) }
+    }
+    
+    private let highlightedIsFirstLoginKey = "highlightedIsFirstLoginKey"
+    var highlightedIsFirstLogin: Bool {
+        get { return userDefaults.object(forKey: highlightedIsFirstLoginKey) as? Bool ?? false }
+        set { userDefaults.set(newValue, forKey: highlightedIsFirstLoginKey) }
+    }
+    
+    private let highlightedPopUpPackageBackKey = "highlightedPopUpPackageBackKey"
+    var highlightedPopUpPackageBack: Bool {
+        get { return userDefaults.object(forKey: highlightedPopUpPackageBackKey) as? Bool ?? false }
+        set { userDefaults.set(newValue, forKey: highlightedPopUpPackageBackKey) }
     }
     
 }

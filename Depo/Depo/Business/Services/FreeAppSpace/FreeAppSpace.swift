@@ -98,8 +98,10 @@ final class FreeAppSpace: NSObject {
 
     func updateFreeUpSpaceCard() {
         if !isEmptyDuplicates, Device.getFreeDiskSpaceInPercent < NumericConstants.freeAppSpaceLimit {
-            CardsManager.default.stopOperationWith(type: .freeAppSpace)
-            CardsManager.default.startOperationWith(type: .freeAppSpaceLocalWarning)
+//            CardsManager.default.stopOperationWith(type: .freeAppSpace)
+//            CardsManager.default.startOperationWith(type: .freeAppSpaceLocalWarning)
+            CardsManager.default.stopOperationWith(type: .freeAppSpaceLocalWarning)
+            CardsManager.default.startOperationWith(type: .freeAppSpace)
         } else {
             CardsManager.default.stopOperationWith(type: .freeAppSpaceLocalWarning)
             CardsManager.default.startOperationWith(type: .freeAppSpace)
