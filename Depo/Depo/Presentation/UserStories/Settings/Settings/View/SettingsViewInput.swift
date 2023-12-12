@@ -13,4 +13,5 @@ protocol SettingsViewInput: AnyObject {
     func profileInfoChanged()
     func profileWontChangeWith(error: Error)
     func updateStatusUser()
+    func didGetNotifications(_ notifications: [NotificationServiceResponse])
 }

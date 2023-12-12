@@ -14,6 +14,7 @@ final class SettingsInteractor: SettingsInteractorInput {
     
     private let authService = AuthenticationService()
     private let accountService = AccountService()
+    private let notifService = NotificationService()
     
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     private lazy var storageVars: StorageVars = factory.resolve()
@@ -168,5 +169,19 @@ final class SettingsInteractor: SettingsInteractorInput {
         output.cellsDataForSettings(isChatbotShown: showMenu)
         
         //output.cellsDataForSettings(isChatbotShown: isChatMenuEnabled)
+    }
+    
+    func fetchNotifications() {
+        notifService.fetch(type: .inapp,
+                           success: { [weak self] response in
+            guard let notification = response as? NotificationResponse else { return }
+            let notif = notification.list.filter({$0.status == "UNREAD"})
+            self?.output.notifSuccess(with: notif)
+        }, fail: { [weak self] errorResponse in
+            DispatchQueue.main.async {
+                self?.output.notifFailed(errorResponse: errorResponse)
+            }
+        })
+        
     }
 }

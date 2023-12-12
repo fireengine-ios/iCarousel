@@ -53,6 +53,7 @@ final class SettingsViewController: BaseViewController {
     
     private var isFromPhotoPicker = false
     private var isChatbotShown = false
+    private var unreadNotifications: [NotificationServiceResponse] = []
 
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     
@@ -286,6 +287,8 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         let array = cellTypes[indexPath.section]
         let cellType = array[indexPath.row]
         let text = cellType == .passcode ? String(format: cellType.text, biometricsManager.biometricsTitle) : cellType.text
+        let isNotif = cellType == .notification
+        cell.configureNotification(isHidden: !isNotif, notifCount: self.unreadNotifications.count)
         cell.setTextForLabel(titleText: text, needShowSeparator: indexPath.row != array.count - 1)
         return cell
     }
@@ -319,7 +322,11 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: - SettingsViewInput
 extension SettingsViewController: SettingsViewInput {
-
+    func didGetNotifications(_ notifications: [NotificationServiceResponse]) {
+        self.unreadNotifications = notifications
+        tableView.reloadData()
+    }
+    
     func prepareCellsData(isChatbotShown: Bool) {
         self.isChatbotShown = isChatbotShown
         cellTypes = SettingsTypes.prepareTypes(isChatbotShown: isChatbotShown)

@@ -23,4 +23,7 @@ protocol SettingsInteractorOutput: AnyObject {
     
     func didObtainUserStatus()
     func didFailToObtainUserStatus(errorMessage: String)
+    
+    func notifSuccess(with notifications: [NotificationServiceResponse])
+    func notifFailed(errorResponse: ErrorResponse)
 }
