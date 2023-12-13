@@ -286,7 +286,7 @@ extension SetSecurityQuestionViewController: SecurityQuestionViewDelegate {
                 return
             }
             let controller = SelectQuestionViewController.createController(questions: questions, delegate: self)
-            self.navigationController?.pushViewController(controller, animated: true)
+            self.present(controller, animated: true)
         }
     }
     
