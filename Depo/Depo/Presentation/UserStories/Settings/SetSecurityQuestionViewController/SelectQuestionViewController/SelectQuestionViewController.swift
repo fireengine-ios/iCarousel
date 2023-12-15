@@ -12,7 +12,7 @@ protocol SelectQuestionViewControllerDelegate {
     func didSelectQuestion(question: SecretQuestionsResponse?)
 }
 
-final class SelectQuestionViewController: BaseViewController, NibInit  {
+final class SelectQuestionViewController: UIViewController, NibInit  {
     
     private let cornerRadius: CGFloat = 8
     private let separatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -24,6 +24,8 @@ final class SelectQuestionViewController: BaseViewController, NibInit  {
     
     static func createController(questions: [SecretQuestionsResponse], delegate: SelectQuestionViewControllerDelegate) -> SelectQuestionViewController {
         let controller = SelectQuestionViewController()
+        controller.modalTransitionStyle = .crossDissolve
+        controller.modalPresentationStyle = .overFullScreen
         controller.questions = questions
         controller.delegate = delegate
         return controller
@@ -31,7 +33,7 @@ final class SelectQuestionViewController: BaseViewController, NibInit  {
     
     @IBOutlet private var backgroundView: UIView! {
         willSet {
-            newValue.backgroundColor = UIColor.white
+            newValue.backgroundColor = UIColor.clear
         }
     }
     
@@ -114,7 +116,13 @@ final class SelectQuestionViewController: BaseViewController, NibInit  {
     }
     
     func close(completion: VoidHandler? = nil) {
-        self.navigationController?.popViewController(animated: true)
+        self.view.alpha = 0
+        self.contentView.transform = NumericConstants.scaleTransform
+        
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+        }) { _ in
+            self.dismiss(animated: false, completion: completion)
+        }
     }
 }
 

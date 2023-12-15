@@ -420,6 +420,8 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     
     func refreshPackages() {
         //stopActivity()
+        interactor.getActiveSubscriptionForBanner()
+        interactor.getAvailableOffersForBanner()
         refreshPage()
     }
     
