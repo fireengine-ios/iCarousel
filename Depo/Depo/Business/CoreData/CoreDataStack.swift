@@ -110,18 +110,27 @@ final class CoreDataStack_ios10: CoreDataStack {
             
             //COREDATA içeriğini görmek için
 //            let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
-//                    //request.predicate = NSPredicate(format: "age = %@", "12")
-//                    request.returnsObjectsAsFaults = false
-//                    do {
-//                        let result = try self?.container.viewContext.fetch(request)
-//                        for data in result! {
-//                            print("idValue : \(data.value(forKey: "idValue") as! Int) \(data.value(forKey: "localFileID") as? String)")
-//                      }
-//
-//                    } catch {
-//
-//                        print("Failed")
-//                    }
+//            //request.predicate = NSPredicate(format: "age = %@", "12")
+//            request.returnsObjectsAsFaults = false
+//            do {
+//                let result = try self?.container.viewContext.fetch(request)
+//                
+//                for data in result! {
+//                    let idValue = data.value(forKey: "idValue") as! Int
+//                    let localFileId = data.value(forKey: "localFileID") as! String
+//                    let uuid = data.value(forKey: "uuid") as! String
+//                    let status = data.value(forKey: "status") as! Int
+//                    let syncStatusValue = data.value(forKey: "syncStatusValue") as! Int
+//                    let isLocalItemValue = data.value(forKey: "isLocalItemValue") as! Int
+//                    let name = data.value(forKey: "nameValue") as! String
+//                    print("idValue : \(idValue)-\(name)-\(uuid)-\(status)-\(syncStatusValue)-\(isLocalItemValue)")
+//                }
+//                
+//            } catch {
+//                
+//                print("Failed")
+//            }
+            
             self?.container.viewContext.perform {
                 do {
                     try self?.container.viewContext.save()

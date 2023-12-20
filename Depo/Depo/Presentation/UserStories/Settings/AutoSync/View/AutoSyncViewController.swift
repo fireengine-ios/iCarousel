@@ -56,6 +56,7 @@ final class AutoSyncViewController: BaseViewController, NibInit {
         super.viewWillDisappear(animated)
         
         if fromSettings {
+            dataSource.setSyncOperationForAutoSyncSwither()
             storageVars.isAutoSyncSet = true
             output.save(settings: dataSource.autoSyncSetting, albums: dataSource.autoSyncAlbums)
         }
@@ -116,7 +117,7 @@ final class AutoSyncViewController: BaseViewController, NibInit {
     // MARK: buttons actions
     
     @IBAction func onStartUsingButton() {
-        
+        dataSource.setSyncOperationForAutoSyncSwither()
         let isFirstLoginControl = storageVars.highlightedIsFirstLogin
         
         if !isFirstLoginControl {

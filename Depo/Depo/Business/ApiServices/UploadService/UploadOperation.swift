@@ -500,70 +500,55 @@ final class UploadOperation: Operation {
             return
         }
         
-        let uploadNotifParam = UploadNotify(parentUUID: parameters.rootFolder,
-                                            fileUUID: parameters.tmpUUID )
-        
         inputItem.syncStatus = .synced
         inputItem.setSyncStatusesAsSyncedForCurrentUser()
         
-        uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
-            self?.dispatchQueue.async { [weak self] in
-                guard let self = self else {
-                    return
-                }
-                
-                guard let response = baseurlResponse as? SearchItemResponse else {
-                    success()
-                    return
-                }
-                
-                self.outputItem = WrapData(remote: response)
-                self.addPhotoToTheAlbum(with: parameters, response: response)
-                self.outputItem?.tmpDownloadUrl = response.tempDownloadURL
-                self.outputItem?.metaData?.takenDate = self.inputItem.metaDate
-                self.outputItem?.metaData?.duration = self.inputItem.metaData?.duration ?? Double(0.0)
-                // set location info to PHAsset's location if if no info were returned from uploadNotify
-                if self.outputItem?.metaData?.latitude == nil {
-                    self.outputItem?.metaData?.latitude = self.inputItem.metaData?.latitude
-                    self.outputItem?.metaData?.longitude = self.inputItem.metaData?.longitude
-                }
-
-                
-                //TODO: remove this in the future
-                if let size = (parameters as? SimpleUpload)?.fileSize,
-                    let item = self.outputItem, size != item.fileSize {
-                    Crashlytics.crashlytics().record(error: CustomErrors.text("UPLOAD: finishUploading -> uploadNotify sizes arent equal"))
-                    debugLog("UPLOAD: finishUploading -> uploadNotify parSize \(size) newRemote size \(item.fileSize) param URL \(parameters.urlToLocalFile?.path ?? "nil")")
-                }
-                //--
-                
-                if self.uploadType == .save, let updatedRemote = self.outputItem {
-                    self.mediaItemsService.replaceItem(uuid: self.inputItem.uuid, with: updatedRemote) { [weak self] in
-                        self?.storageVars.lastUnsavedFileUUID = nil
-                        debugLog("_upload: item is updated \(self?.inputItem.name ?? "") ")
-                        success()
-                    }
-                    
-                } else {
-                    //case for upload photo from camera
-                    if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
-                        self.outputItem?.metaData?.mediumUrl = preview
-                    }
-                    if self.inputItem.fileType.isContained(in: [.image, .video]) {
-                        self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem) { [weak self] in
-                            self?.storageVars.lastUnsavedFileUUID = nil
-                            debugLog("_upload: sync status is updated for \(self?.inputItem.name ?? "") ")
-                            success()
-                        }
-                    } else {
-                        self.storageVars.lastUnsavedFileUUID = nil
-                        success()
-                    }
-                }
-                
-                debugLog("_upload: notified about remote \(self.outputItem?.uuid ?? "_EMPTY_") ")
+        dispatchQueue.async { [weak self] in
+            guard let self = self else {
+                return
             }
-        }, fail: fail)
+            
+            self.outputItem = self.inputItem
+            self.outputItem?.metaData?.takenDate = self.inputItem.metaDate
+            self.outputItem?.metaData?.duration = self.inputItem.metaData?.duration ?? Double(0.0)
+            if self.outputItem?.metaData?.latitude == nil {
+                self.outputItem?.metaData?.latitude = self.inputItem.metaData?.latitude
+                self.outputItem?.metaData?.longitude = self.inputItem.metaData?.longitude
+            }
+            self.outputItem?.uuid = parameters.tmpUUID
+            
+            //TODO: remove this in the future
+            if let size = (parameters as? SimpleUpload)?.fileSize,
+                let item = self.outputItem, size != item.fileSize {
+                Crashlytics.crashlytics().record(error: CustomErrors.text("UPLOAD: finishUploading -> uploadNotify sizes arent equal"))
+                debugLog("UPLOAD: finishUploading -> uploadNotify parSize \(size) newRemote size \(item.fileSize) param URL \(parameters.urlToLocalFile?.path ?? "nil")")
+            }
+            //--
+            
+            if self.uploadType == .save, let updatedRemote = self.outputItem {
+                self.mediaItemsService.replaceItem(uuid: self.inputItem.uuid, with: updatedRemote) { [weak self] in
+                    self?.storageVars.lastUnsavedFileUUID = nil
+                    debugLog("_upload: item is updated \(self?.inputItem.name ?? "") ")
+                    success()
+                }
+                
+            } else {
+                //case for upload photo from camera
+                if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
+                    self.outputItem?.metaData?.mediumUrl = preview
+                }
+                if self.inputItem.fileType.isContained(in: [.image, .video]) {
+                    self.storageVars.lastUnsavedFileUUID = nil
+                    debugLog("_upload: sync status is updated for \(self.inputItem.name ?? "") ")
+                    success()
+                } else {
+                    self.storageVars.lastUnsavedFileUUID = nil
+                    success()
+                }
+            }
+            
+            debugLog("_upload: notified about remote \(self.outputItem?.uuid ?? "_EMPTY_") ")
+        }
     }
     
     private func removeTemporaryFile(at localURL: URL?) {

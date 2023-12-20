@@ -32,6 +32,7 @@ final class AutoSyncDataSource: NSObject {
     }
     
     var isFromSettings = false
+    private var syncModel = AutoSyncModel(type: .header)
     
     private let tableViewAnimationType = UITableView.RowAnimation.top
     
@@ -207,6 +208,12 @@ extension AutoSyncDataSource: UITableViewDataSource, UITableViewDelegate {
                 assertionFailure()
                 return UITableViewCell()
             }
+
+            if ((cell as? AutoSyncSwitcherTableViewCell) != nil) {
+                if let autoSyncSwitchCell = cell as? AutoSyncSwitcherTableViewCell {
+                    autoSyncSwitchCell.isFromSetting = isFromSettings
+                }
+            }
             
             cell.selectionStyle = .none
             cell.setup(with: model, delegate: self)
@@ -313,11 +320,63 @@ extension AutoSyncDataSource: AutoSyncSettingsTableViewCellDelegate {
             tableView.reloadRows(at: [indexPath], with: .none)
         }, completion: nil)
     }
+    
+    func setSyncOperationForAutoSyncSwither() {
+        if let model = syncModel as? AutoSyncHeaderModel {
+            switch model.headerType {
+            case .autosync:
+                if model.isSelected {
+                    delegate?.checkForEnableAutoSync()
+                } else {
+                    disableAutoSync()
+                }
+            case .photo:
+                if model.isSelected {
+                    showSettings(type: .photo)
+                } else {
+                    hideSettings(type: .photo)
+                }
+            case .video:
+                if model.isSelected {
+                    showSettings(type: .video)
+                } else {
+                    hideSettings(type: .video)
+                }
+            case .albums:
+                if model.isSelected {
+                    showAlbums()
+                    tableView.reloadData()
+                } else {
+                    hideAlbums()
+                    tableView.reloadData()
+                }
+            }
+        } else if let model = syncModel as? AutoSyncAlbumModel {
+            if model.album.isMainAlbum {
+                updateAlbums(isSelected: model.isAllChecked)
+            } else {
+                if model.album.isSelected {
+                    selectedAlbums.append(model.album)
+                } else {
+                    selectedAlbums.remove(model.album)
+                }
+                updateMainAlbumCell()
+            }
+        }
+    }
 }
 
 //MARK: - AutoSyncCellDelegate
 
 extension AutoSyncDataSource: AutoSyncCellDelegate {
+    func didChangeSyncMethod(model: AutoSyncModel) {
+        guard let index = models.firstIndex(where: { $0 == model }) else {
+            return
+        }
+        syncModel = model
+        models[index] = model
+    }
+    
     func didChange(model: AutoSyncModel) {
         guard let index = models.firstIndex(where: { $0 == model }) else {
             return
