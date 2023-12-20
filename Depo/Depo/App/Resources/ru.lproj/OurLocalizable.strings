@@ -1932,7 +1932,6 @@
 "DELETE_ACC_POP_UP_BTN_CLOSE" = "Закрыть";
 
 /*Change album cover photo*/
-"change_album_cover
 "change_album_cover_snackbar_text" = "Обложка альбома успешно изменена.";
 "change_album_cover_error_text" = "Произошла ошибка при смене обложки.";
 "change_album_cover_set_photo" = "Использовать как обложку альбома";
