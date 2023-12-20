@@ -28,6 +28,7 @@ final class AutoSyncSwitcherTableViewCell: AutoSyncTableViewCell {
     
     private weak var delegate: AutoSyncCellDelegate?
     private var model: AutoSyncHeaderModel?
+    var isFromSetting: Bool = false
     
     //MARK: -
     
@@ -43,7 +44,14 @@ final class AutoSyncSwitcherTableViewCell: AutoSyncTableViewCell {
         }
         
         titleLabel.text = model.headerType.title
-        switcher.isOn = model.isSelected
+        
+        if isFromSetting {
+            switcher.isOn = model.isSelected
+        } else {
+            switcher.isOn = true
+        }
+        model.isSelected = switcher.isOn
+        delegate?.didChangeSyncMethod(model: model)
         
         contentView.backgroundColor = AppColor.secondaryBackground.color
     }
@@ -56,6 +64,6 @@ final class AutoSyncSwitcherTableViewCell: AutoSyncTableViewCell {
         }
         
         model.isSelected = switcher.isOn
-        delegate?.didChange(model: model)
+        delegate?.didChangeSyncMethod(model: model)
     }
 }

@@ -80,7 +80,7 @@ final class AutoSyncSettings : Equatable {
     var photoSetting = AutoSyncSetting(syncItemType: .photo, option: .wifiAndCellular)
     var videoSetting = AutoSyncSetting(syncItemType: .video, option: .wifiOnly)
     
-    var isAutoSyncOptionEnabled: Bool = true //auto sync switcher in settings is on/off
+    var isAutoSyncOptionEnabled: Bool = false //auto sync switcher in settings is on/off
     
     var isAutosyncSettingsApplied: Bool {
         return storageVars.isAutoSyncSet

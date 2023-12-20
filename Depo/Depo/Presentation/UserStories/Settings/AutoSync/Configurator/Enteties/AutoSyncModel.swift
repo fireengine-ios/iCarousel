@@ -12,6 +12,7 @@ typealias AutoSyncTableViewCell = UITableViewCell & AutoSyncSettingsCell
 
 protocol AutoSyncCellDelegate: AnyObject {
     func didChange(model: AutoSyncModel)
+    func didChangeSyncMethod(model: AutoSyncModel)
 }
 
 protocol AutoSyncSettingsCell {
