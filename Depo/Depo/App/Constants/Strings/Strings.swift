@@ -366,4 +366,5 @@ enum Strings: String, Localizable {
     case syncPageOfferPopUp = "sync_page_offer_pop_up"
     case higlightedPackageRecommended = "recommended"
     case dontMissOpportunity = "dont_miss_opportunity"
+    case syncInProgressDeleteIsNotAllowed = "sync_in_progress_delete_is_not_allowed"
 }

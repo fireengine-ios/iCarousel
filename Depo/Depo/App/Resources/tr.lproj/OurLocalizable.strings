@@ -2291,3 +2291,4 @@ then {11,99 TRY/Month}*/
 "recommended" = "Önerilen";
 "dont_miss_opportunity" = "Fırsatı Kaçırma";
 "print_package_print_firm" = "Fotoğraflar anlaşmalı baskı firması tarafından basılacaktır.";
+"sync_in_progress_delete_is_not_allowed" = "";
