@@ -485,7 +485,8 @@ final class UploadOperation: Operation {
                                                isFavorite: self.isFavorites,
                                                uploadType: self.uploadType,
                                                isCollage: self.isCollage,
-                                               isPhotoPrint: self.isPhotoPrint)
+                                               isPhotoPrint: self.isPhotoPrint,
+                                               isFromAlbum: self.isPhotoAlbum)
             }
             
             success(parameters)
