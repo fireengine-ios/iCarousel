@@ -45,6 +45,8 @@ class SettingsTableViewCell: UITableViewCell {
     func configureNotification(isHidden: Bool, notifCount: Int) {
         notificationImage.isHidden = isHidden || notifCount == 0
         notificationCount.isHidden = isHidden || notifCount == 0
-        notificationCount.text = "\(notifCount)"
+        
+        let strNum = String(notifCount)
+        notificationCount.text = notifCount > 9 ? "9+" : strNum
     }
 }
