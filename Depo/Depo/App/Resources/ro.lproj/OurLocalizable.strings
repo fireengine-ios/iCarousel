@@ -2223,3 +2223,4 @@ then {11,99 TRY/Month}*/
 "recommended" = "Recomandat";
 "dont_miss_opportunity" = "";
 "print_package_print_firm" = "Fotografiile vor fi tipărite de către compania de tipărire contractată.";
+"sync_in_progress_delete_is_not_allowed" = "";
