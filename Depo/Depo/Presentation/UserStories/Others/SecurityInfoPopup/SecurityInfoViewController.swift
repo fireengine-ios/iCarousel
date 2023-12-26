@@ -91,10 +91,10 @@ final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHan
         return view
     }()
     
-    private lazy var closeSelfButton = UIBarButtonItem(image: NavigationBarImage.back.image,
+    private lazy var closeSelfButton = UIBarButtonItem(image: nil,
                                                         style: .plain,
                                                         target: self,
-                                                        action: #selector(closeSelf))
+                                                        action: nil)
     
     
     
@@ -128,11 +128,7 @@ final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHan
         navigationItem.leftBarButtonItem = closeSelfButton
         
         title = TextConstants.userProfileSecretQuestion
-        if #available(iOS 16.0, *) {
-            closeSelfButton.isHidden = true
-        } else {
-            // Fallback on earlier versions
-        }
+        
     }
     
     private func setSaveButton(isActive: Bool) {
