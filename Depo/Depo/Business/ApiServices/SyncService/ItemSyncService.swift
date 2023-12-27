@@ -62,6 +62,7 @@ class ItemSyncServiceImpl: ItemSyncService {
         debugLog("ItemSyncServiceImpl start")
         
         guard CacheManager.shared.isCacheActualized else {
+            debugLog("ItemSyncService Autosync wont start while prepairing")
             return
         }
         
