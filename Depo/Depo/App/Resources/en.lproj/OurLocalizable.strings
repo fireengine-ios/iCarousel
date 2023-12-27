@@ -2286,3 +2286,8 @@ then {11,99 TRY/Month}*/
 "dont_miss_opportunity" = "";
 "print_package_print_firm" = "Photos will be printed by a contracted printing company.";
 "sync_in_progress_delete_is_not_allowed" = "";
+
+/*Fuzzy*/
+"connected_devices" = "Linked Devices";
+"scan_qr_code" = "Scan QR Code";
+"scan_qr_code_info" = "";

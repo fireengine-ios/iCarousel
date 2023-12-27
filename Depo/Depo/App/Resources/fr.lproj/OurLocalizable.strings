@@ -2529,3 +2529,6 @@ then {11,99 TRY/Month}*/
 "dont_miss_opportunity" = "";
 "print_package_print_firm" = "Les photos seront imprimées par une imprimerie sous contrat.";
 "sync_in_progress_delete_is_not_allowed" = "";
+"connected_devices" = "";
+"scan_qr_code" = "";
+"scan_qr_code_info" = "";

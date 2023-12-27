@@ -17,6 +17,7 @@ enum SettingsTypes: Int {
     case chatbot
     case packages
     case notification
+    case connectedDevice
     
     var text: String {
         switch self {
@@ -30,11 +31,12 @@ enum SettingsTypes: Int {
         case .chatbot: return TextConstants.chatbotMenuTitle
         case .packages: return TextConstants.packages
         case .notification: return localized(.notificationMenuItem)
+        case .connectedDevice: return localized(.connectedDevices)
         }
     }
     
     static let defaultSectionOneTypes = [autoUpload, faceImage]
-    static let defaultSectionTwoTypes = [myActivities, passcode]
+    static let defaultSectionTwoTypes = [myActivities, passcode, connectedDevice]
     static var defaultSectionThreeTypes = [helpAndSupport]
     
     static func prepareTypes(isChatbotShown: Bool) -> [[SettingsTypes]] {

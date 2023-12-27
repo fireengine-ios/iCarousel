@@ -67,6 +67,8 @@ protocol SettingsViewOutput {
     
     func goToNotification()
     
+    func goToConnectedDevice()
+    
     var isPasscodeEmpty: Bool { get }
     
     var isPremiumUser: Bool { get }

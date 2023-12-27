@@ -1496,6 +1496,18 @@
 		891CDE3C296EF11200E5CD3B /* FavoriteInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891CDE3A296EF11200E5CD3B /* FavoriteInitializer.swift */; };
 		891CDE3D296EF11200E5CD3B /* FavoriteInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891CDE3A296EF11200E5CD3B /* FavoriteInitializer.swift */; };
 		891CDE3E296EF11200E5CD3B /* FavoriteInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891CDE3A296EF11200E5CD3B /* FavoriteInitializer.swift */; };
+		892326732B3C2B960045EB9B /* ConnectedDeviceViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892326722B3C2B960045EB9B /* ConnectedDeviceViewInput.swift */; };
+		892326752B3C2BA10045EB9B /* ConnectedDeviceViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892326742B3C2BA10045EB9B /* ConnectedDeviceViewOutput.swift */; };
+		892326772B3C2BAC0045EB9B /* ConnectedDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892326762B3C2BAC0045EB9B /* ConnectedDeviceViewController.swift */; };
+		892326792B3C2BF10045EB9B /* ConnectedDevicePresenterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892326782B3C2BF10045EB9B /* ConnectedDevicePresenterInput.swift */; };
+		8923267B2B3C2BFF0045EB9B /* ConnectedDevicePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8923267A2B3C2BFF0045EB9B /* ConnectedDevicePresenter.swift */; };
+		8923267D2B3C2C140045EB9B /* ConnectedDeviceInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8923267C2B3C2C140045EB9B /* ConnectedDeviceInteractorInput.swift */; };
+		8923267F2B3C2C1F0045EB9B /* ConnectedDeviceInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8923267E2B3C2C1F0045EB9B /* ConnectedDeviceInteractorOutput.swift */; };
+		892326812B3C2C280045EB9B /* ConnectedDeviceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892326802B3C2C280045EB9B /* ConnectedDeviceInteractor.swift */; };
+		892326832B3C2C500045EB9B /* ConnectedDeviceRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892326822B3C2C500045EB9B /* ConnectedDeviceRouterInput.swift */; };
+		892326852B3C2C5A0045EB9B /* ConnectedDeviceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892326842B3C2C5A0045EB9B /* ConnectedDeviceRouter.swift */; };
+		892326872B3C2C730045EB9B /* ConnectedDeviceInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892326862B3C2C730045EB9B /* ConnectedDeviceInitializer.swift */; };
+		892326892B3C2C800045EB9B /* ConnectedDeviceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892326882B3C2C800045EB9B /* ConnectedDeviceConfigurator.swift */; };
 		8927892A2AB228230047D3E4 /* PhotoPrintNoPackagePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892789292AB228230047D3E4 /* PhotoPrintNoPackagePopup.swift */; };
 		8927892B2AB228230047D3E4 /* PhotoPrintNoPackagePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892789292AB228230047D3E4 /* PhotoPrintNoPackagePopup.swift */; };
 		8927892C2AB228230047D3E4 /* PhotoPrintNoPackagePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892789292AB228230047D3E4 /* PhotoPrintNoPackagePopup.swift */; };
@@ -11139,6 +11151,18 @@
 		891C019329BCB64D003D5CA1 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
 		891CDE3A296EF11200E5CD3B /* FavoriteInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteInitializer.swift; sourceTree = "<group>"; };
 		8921222D2303FFA400396ED0 /* EmailVerifiedPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerifiedPopUp.swift; sourceTree = "<group>"; };
+		892326722B3C2B960045EB9B /* ConnectedDeviceViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedDeviceViewInput.swift; sourceTree = "<group>"; };
+		892326742B3C2BA10045EB9B /* ConnectedDeviceViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedDeviceViewOutput.swift; sourceTree = "<group>"; };
+		892326762B3C2BAC0045EB9B /* ConnectedDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedDeviceViewController.swift; sourceTree = "<group>"; };
+		892326782B3C2BF10045EB9B /* ConnectedDevicePresenterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedDevicePresenterInput.swift; sourceTree = "<group>"; };
+		8923267A2B3C2BFF0045EB9B /* ConnectedDevicePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedDevicePresenter.swift; sourceTree = "<group>"; };
+		8923267C2B3C2C140045EB9B /* ConnectedDeviceInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedDeviceInteractorInput.swift; sourceTree = "<group>"; };
+		8923267E2B3C2C1F0045EB9B /* ConnectedDeviceInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedDeviceInteractorOutput.swift; sourceTree = "<group>"; };
+		892326802B3C2C280045EB9B /* ConnectedDeviceInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedDeviceInteractor.swift; sourceTree = "<group>"; };
+		892326822B3C2C500045EB9B /* ConnectedDeviceRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedDeviceRouterInput.swift; sourceTree = "<group>"; };
+		892326842B3C2C5A0045EB9B /* ConnectedDeviceRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedDeviceRouter.swift; sourceTree = "<group>"; };
+		892326862B3C2C730045EB9B /* ConnectedDeviceInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedDeviceInitializer.swift; sourceTree = "<group>"; };
+		892326882B3C2C800045EB9B /* ConnectedDeviceConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedDeviceConfigurator.swift; sourceTree = "<group>"; };
 		892789292AB228230047D3E4 /* PhotoPrintNoPackagePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintNoPackagePopup.swift; sourceTree = "<group>"; };
 		892789312AB228430047D3E4 /* PhotoPrintNoPackagePopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoPrintNoPackagePopup.xib; sourceTree = "<group>"; };
 		892B014722DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorChallengeConfigurator.swift; sourceTree = "<group>"; };
@@ -17165,6 +17189,65 @@
 			path = TwoFactorChallenge;
 			sourceTree = "<group>";
 		};
+		892326692B3C2B0B0045EB9B /* ConnectedDevice */ = {
+			isa = PBXGroup;
+			children = (
+				892326712B3C2B6F0045EB9B /* View */,
+				892326702B3C2B670045EB9B /* Presenter */,
+				8923266F2B3C2B5D0045EB9B /* Interactor */,
+				8923266E2B3C2B570045EB9B /* Router */,
+				8923266D2B3C2B4D0045EB9B /* Configurator */,
+			);
+			path = ConnectedDevice;
+			sourceTree = "<group>";
+		};
+		8923266D2B3C2B4D0045EB9B /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				892326862B3C2C730045EB9B /* ConnectedDeviceInitializer.swift */,
+				892326882B3C2C800045EB9B /* ConnectedDeviceConfigurator.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		8923266E2B3C2B570045EB9B /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				892326822B3C2C500045EB9B /* ConnectedDeviceRouterInput.swift */,
+				892326842B3C2C5A0045EB9B /* ConnectedDeviceRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		8923266F2B3C2B5D0045EB9B /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				8923267C2B3C2C140045EB9B /* ConnectedDeviceInteractorInput.swift */,
+				8923267E2B3C2C1F0045EB9B /* ConnectedDeviceInteractorOutput.swift */,
+				892326802B3C2C280045EB9B /* ConnectedDeviceInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		892326702B3C2B670045EB9B /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				892326782B3C2BF10045EB9B /* ConnectedDevicePresenterInput.swift */,
+				8923267A2B3C2BFF0045EB9B /* ConnectedDevicePresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		892326712B3C2B6F0045EB9B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				892326722B3C2B960045EB9B /* ConnectedDeviceViewInput.swift */,
+				892326742B3C2BA10045EB9B /* ConnectedDeviceViewOutput.swift */,
+				892326762B3C2BAC0045EB9B /* ConnectedDeviceViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		892B014622DF155700BCECBC /* Configurator */ = {
 			isa = PBXGroup;
 			children = (
@@ -21111,6 +21194,7 @@
 		CE3EB30D1FC7F512000B70D6 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				892326692B3C2B0B0045EB9B /* ConnectedDevice */,
 				F00610E1289DBF0A00911048 /* PaycellCampaign */,
 				3A0B421B266F7D5900FD8F3C /* Chatbot */,
 				3A6D27BF26400A7800A7BBE2 /* Invitation */,
@@ -26975,6 +27059,7 @@
 				8C0B91A620170EA800A5BA81 /* ManageContactsViewInput.swift in Sources */,
 				9808B40D25540E42002B0032 /* PrivateShareContactSuggestionView.swift in Sources */,
 				4A6DBE8721A6F9140003D1B4 /* PackagePremiumView.swift in Sources */,
+				892326812B3C2C280045EB9B /* ConnectedDeviceInteractor.swift in Sources */,
 				9809317523952CAC00ECFEF8 /* SmartAlbumsDataStorage.swift in Sources */,
 				8C0E8CEE1FDEBDFF00789C91 /* MediaItemsAlbum+CoreDataClass.swift in Sources */,
 				F0D2976227F782DE0082C768 /* MessageAndButtonPopup.swift in Sources */,
@@ -26994,6 +27079,7 @@
 				8C0E8CF91FDEBDFF00789C91 /* AutoSyncInitializer.swift in Sources */,
 				B56FBB202122C3D9004F4A59 /* TermsOfUseInitializer.swift in Sources */,
 				8C0E8CFC1FDEBDFF00789C91 /* ResizableCollectionView.swift in Sources */,
+				8923267F2B3C2C1F0045EB9B /* ConnectedDeviceInteractorOutput.swift in Sources */,
 				8C0E8CFD1FDEBDFF00789C91 /* HomePageRouter.swift in Sources */,
 				17B9B0C623F1F76900CAF5E1 /* FullQuotaWarningPopUp.swift in Sources */,
 				8C0E8CFF1FDEBDFF00789C91 /* CollectionViewCellForPhoto.swift in Sources */,
@@ -27072,6 +27158,7 @@
 				98B01C7A206BD04600DD78C7 /* AnalyticsServiceConstants.swift in Sources */,
 				CF7145EC24B597A800D83E60 /* ContactListDetailViewController.swift in Sources */,
 				8C0E8D1E1FDEBDFF00789C91 /* AlbumDetailResponse.swift in Sources */,
+				892326852B3C2C5A0045EB9B /* ConnectedDeviceRouter.swift in Sources */,
 				98E4BA1023C7230D003A4631 /* TrashBinThreeDotMenuManager.swift in Sources */,
 				8C0E8D201FDEBDFF00789C91 /* CountiesGSMCodeCompositor.swift in Sources */,
 				4A0AC15D20874B9600032CC7 /* PeriodicContactSyncInteractorOutput.swift in Sources */,
@@ -27099,6 +27186,7 @@
 				A771D4CA23DEFD8D00EA78BF /* AnalyticsPermissionNetmeraEvent.swift in Sources */,
 				8C0E8D291FDEBDFF00789C91 /* FilesDataSource.swift in Sources */,
 				8C0E8D2B1FDEBDFF00789C91 /* UploadFromLifeBoxInteractor.swift in Sources */,
+				892326772B3C2BAC0045EB9B /* ConnectedDeviceViewController.swift in Sources */,
 				8C0E8D2C1FDEBDFF00789C91 /* UIApplication+topController.swift in Sources */,
 				8C0E8D2D1FDEBDFF00789C91 /* VisualMusicPlayerViewOutput.swift in Sources */,
 				98922293240D0C0E004155A5 /* BecomePremiumView.swift in Sources */,
@@ -27203,6 +27291,7 @@
 				989BDE4D22F47B1E001DDEB2 /* SpotifyOverwritePopup.swift in Sources */,
 				8C0E8D681FDEBDFF00789C91 /* AlertFilesActionsSheetInteractorInput.swift in Sources */,
 				89EA4F7A240902C400A2C543 /* PackagesTableViewCell.swift in Sources */,
+				892326792B3C2BF10045EB9B /* ConnectedDevicePresenterInput.swift in Sources */,
 				890B5FBE2AF26BCD00A68968 /* HighlightedPackageView.swift in Sources */,
 				B5D42C24254C00B7002E4997 /* DocumentDownloadOperation.swift in Sources */,
 				07E7A6852859FBF5005BBD4C /* AlertFilesAction.swift in Sources */,
@@ -27247,6 +27336,7 @@
 				8C0E8D8C1FDEBDFF00789C91 /* WrapperedItems.swift in Sources */,
 				896133A42338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */,
 				CEF371AA20887848007AD36E /* BackButton.swift in Sources */,
+				892326892B3C2C800045EB9B /* ConnectedDeviceConfigurator.swift in Sources */,
 				8980D942292621C200817FF8 /* DiscoverInteractor.swift in Sources */,
 				CEBAB15C2094806C002824C6 /* InsetsButton.swift in Sources */,
 				8C0E8D8D1FDEBDFF00789C91 /* SearchService.swift in Sources */,
@@ -27578,6 +27668,7 @@
 				8C0E8E131FDEBDFF00789C91 /* PrintInteractor.swift in Sources */,
 				07407D512796C5BD0082FF8D /* EmailVerificationInitializer.swift in Sources */,
 				98B0483B259314750011DAEB /* ContactUtil.m in Sources */,
+				892326872B3C2C730045EB9B /* ConnectedDeviceInitializer.swift in Sources */,
 				8C0E8E141FDEBDFF00789C91 /* PhoneVerificationRouterInput.swift in Sources */,
 				98B04853259314750011DAEB /* AbstractHelper.m in Sources */,
 				8C0E8E151FDEBDFF00789C91 /* PhoneVerificationRouter.swift in Sources */,
@@ -28081,6 +28172,7 @@
 				CF71467C24B597A900D83E60 /* ContactSyncMainView.swift in Sources */,
 				92004B5E21AD14F400582C45 /* MyStorageRouterInput.swift in Sources */,
 				52A5E00A2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */,
+				8923267D2B3C2C140045EB9B /* ConnectedDeviceInteractorInput.swift in Sources */,
 				8C0E8F2D1FDEBDFF00789C91 /* SettingsConfigurator.swift in Sources */,
 				921E7C352201CB9F00341F75 /* InstaPickPhotoView.swift in Sources */,
 				F028D79A2719C0F000FF204D /* FileDescriptionView.swift in Sources */,
@@ -28172,6 +28264,7 @@
 				B527CF922420C66E00293E3E /* MediaItemsLocalAlbum+CoreDataProperties.swift in Sources */,
 				98B04B26259316FF0011DAEB /* PlusMenuItemView.swift in Sources */,
 				8C0E8F4B1FDEBDFF00789C91 /* BottomSelectionTabBarRouterInput.swift in Sources */,
+				892326732B3C2B960045EB9B /* ConnectedDeviceViewInput.swift in Sources */,
 				8C0E8F4C1FDEBDFF00789C91 /* FileInfoPresenter.swift in Sources */,
 				8C0E8F4D1FDEBDFF00789C91 /* FileInfoInteractorInput.swift in Sources */,
 				F028C1052789F1C7005CE6AF /* PublicShareRouter.swift in Sources */,
@@ -28187,6 +28280,7 @@
 				98792DDF22FD4D11000A77E5 /* SpotifySortingManager.swift in Sources */,
 				CF01729523D00B9F00C0B0DE /* NetmeraCustomUser.swift in Sources */,
 				8C0E8F531FDEBDFF00789C91 /* DocumentsGreedPresenter.swift in Sources */,
+				892326832B3C2C500045EB9B /* ConnectedDeviceRouterInput.swift in Sources */,
 				CE3E4D0E201B698F00173045 /* UIButton+Properties.swift in Sources */,
 				8C0E8F541FDEBDFF00789C91 /* FileInfoRouter.swift in Sources */,
 				F02F6AA9269C56FC00A64ED8 /* ValidationRules.swift in Sources */,
@@ -28198,6 +28292,7 @@
 				7C121F01208742A800AA585F /* TokenKeychainStorage.swift in Sources */,
 				8C0E8F561FDEBDFF00789C91 /* ActionSheetPredetermendConfigs.swift in Sources */,
 				8980D93E292620F700817FF8 /* DiscoverInteractorInput.swift in Sources */,
+				8923267B2B3C2BFF0045EB9B /* ConnectedDevicePresenter.swift in Sources */,
 				8C0E8F571FDEBDFF00789C91 /* FileInfoConfigurator.swift in Sources */,
 				CF71473C24B597AA00D83E60 /* ContactSyncPopupFactory.swift in Sources */,
 				8C0E8F581FDEBDFF00789C91 /* FileInfoInitializer.swift in Sources */,
@@ -28399,6 +28494,7 @@
 				8C0E8FA11FDEBDFF00789C91 /* AlbumDetailViewController.swift in Sources */,
 				8C0E8FA21FDEBDFF00789C91 /* SingletonStorage.swift in Sources */,
 				CE0596F420385E950083D6FC /* ImageFormat.swift in Sources */,
+				892326752B3C2BA10045EB9B /* ConnectedDeviceViewOutput.swift in Sources */,
 				03135F4723F3E0900088E8BB /* ApplicationStateHelper.swift in Sources */,
 				98EAC9432080CBFF00AAD5B6 /* ContactService.swift in Sources */,
 				07C6D4CA2848D80500502C28 /* TabBarCardsContainer.swift in Sources */,

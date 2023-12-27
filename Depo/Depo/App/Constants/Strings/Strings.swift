@@ -367,4 +367,8 @@ enum Strings: String, Localizable {
     case higlightedPackageRecommended = "recommended"
     case dontMissOpportunity = "dont_miss_opportunity"
     case syncInProgressDeleteIsNotAllowed = "sync_in_progress_delete_is_not_allowed"
+    
+    case connectedDevices = "connected_devices"
+    case scanQrCode = "scan_qr_code"
+    case scanQrCodeInfo = "scan_qr_code_info"
 }
