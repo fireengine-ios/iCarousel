@@ -38,8 +38,8 @@ final class ConnectedDeviceViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var viewWidth = view.frame.width
-        var viewHeight = view.frame.height
+        viewWidth = view.frame.width
+        viewHeight = view.frame.height
         
         setTitle(withString: localized(.scanQrCode))
         view.backgroundColor = ColorConstants.fileGreedCellColorSecondary
@@ -102,15 +102,14 @@ extension ConnectedDeviceViewController: AVCaptureMetadataOutputObjectsDelegate 
 
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         //previewLayer.frame = view.layer.bounds
-        previewLayer.frame = CGRect(x: 0, y: view.frame.minY + 60, width: viewWidth, height: viewHeight - 150)
+        previewLayer.frame = CGRect(x: 0, y: 60, width: viewWidth, height: viewHeight - 150)
         previewLayer.videoGravity = .resizeAspectFill
         previewLayer.backgroundColor = UIColor.black.withAlphaComponent(1).cgColor
         previewLayer.opacity = 0.7
         view.layer.addSublayer(previewLayer)
         
-        let width = view.frame.width
-        let height = view.frame.height
-        qrCodeView = QrReadView(frame: CGRect(x: 100, y: view.frame.minY + 160, width: viewWidth - 200, height: viewWidth - 200)) as UIView
+        qrCodeView = QrReadView(frame: CGRect(x: 100, y: 120, width: previewLayer.frame.width - 200, height: previewLayer.frame.width - 200)) as UIView
+        //qrCodeView = QrReadView(frame: CGRect(x: 100, y: 200, width: 300, height: 300)) as UIView
         qrCodeView.layer.opacity = 1
         qrCodeView.backgroundColor = UIColor.white.withAlphaComponent(0.1)
         view.addSubview(qrCodeView)
@@ -132,10 +131,13 @@ extension ConnectedDeviceViewController: AVCaptureMetadataOutputObjectsDelegate 
             
             let transformedMetadataObject = previewLayer.transformedMetadataObject(for: metadataObject)
             
-            if self.qrCodeView.frame.contains(transformedMetadataObject!.bounds) {
+            let asd = transformedMetadataObject!.bounds
+            
+            if self.qrCodeView.frame.contains(CGRect(x: asd.minX, y: asd.minY + 30.0, width: asd.width, height: asd.height)) {
                 AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
                 print("QR Code: \(stringValue)")
-                captureSession.stopRunning()
+                
+                //captureSession.stopRunning()
             }
         }
     }
