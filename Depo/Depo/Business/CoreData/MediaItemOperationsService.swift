@@ -284,11 +284,11 @@ final class MediaItemOperationsService {
                 assert(contextQueue == contextQueue2, "\(contextQueue) != \(contextQueue2)")
                 #endif
                 
-                if let newRemoteItem = newRemote {
-                    //all relation will be setuped inside
-                    _ = MediaItem(wrapData: newRemoteItem, context: context)
-                    debugLog("sync_status: remote \(newRemote?.name ?? "") is created")
-                }
+//                if let newRemoteItem = newRemote {
+//                    //all relation will be setuped inside
+//                    _ = MediaItem(wrapData: newRemoteItem, context: context)
+//                    debugLog("sync_status: remote \(newRemote?.name ?? "") is created")
+//                }
 
                 self.coreDataStack.saveDataForContext(context: context, saveAndWait: false, savedCallBack: completion)
             }

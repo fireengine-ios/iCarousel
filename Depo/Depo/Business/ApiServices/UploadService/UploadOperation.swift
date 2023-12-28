@@ -539,9 +539,11 @@ final class UploadOperation: Operation {
                     self.outputItem?.metaData?.mediumUrl = preview
                 }
                 if self.inputItem.fileType.isContained(in: [.image, .video]) {
-                    self.storageVars.lastUnsavedFileUUID = nil
-                    debugLog("_upload: sync status is updated for \(self.inputItem.name ?? "") ")
-                    success()
+                    self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem) { [weak self] in
+                        self?.storageVars.lastUnsavedFileUUID = nil
+                        debugLog("_upload: sync status is updated for \(self?.inputItem.name ?? "") ")
+                        success()
+                    }
                 } else {
                     self.storageVars.lastUnsavedFileUUID = nil
                     success()
