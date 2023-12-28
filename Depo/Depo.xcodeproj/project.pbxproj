@@ -1508,6 +1508,7 @@
 		892326852B3C2C5A0045EB9B /* ConnectedDeviceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892326842B3C2C5A0045EB9B /* ConnectedDeviceRouter.swift */; };
 		892326872B3C2C730045EB9B /* ConnectedDeviceInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892326862B3C2C730045EB9B /* ConnectedDeviceInitializer.swift */; };
 		892326892B3C2C800045EB9B /* ConnectedDeviceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892326882B3C2C800045EB9B /* ConnectedDeviceConfigurator.swift */; };
+		8923268B2B3C3E430045EB9B /* QrReadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8923268A2B3C3E430045EB9B /* QrReadView.swift */; };
 		8927892A2AB228230047D3E4 /* PhotoPrintNoPackagePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892789292AB228230047D3E4 /* PhotoPrintNoPackagePopup.swift */; };
 		8927892B2AB228230047D3E4 /* PhotoPrintNoPackagePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892789292AB228230047D3E4 /* PhotoPrintNoPackagePopup.swift */; };
 		8927892C2AB228230047D3E4 /* PhotoPrintNoPackagePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892789292AB228230047D3E4 /* PhotoPrintNoPackagePopup.swift */; };
@@ -11163,6 +11164,7 @@
 		892326842B3C2C5A0045EB9B /* ConnectedDeviceRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedDeviceRouter.swift; sourceTree = "<group>"; };
 		892326862B3C2C730045EB9B /* ConnectedDeviceInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedDeviceInitializer.swift; sourceTree = "<group>"; };
 		892326882B3C2C800045EB9B /* ConnectedDeviceConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedDeviceConfigurator.swift; sourceTree = "<group>"; };
+		8923268A2B3C3E430045EB9B /* QrReadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrReadView.swift; sourceTree = "<group>"; };
 		892789292AB228230047D3E4 /* PhotoPrintNoPackagePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintNoPackagePopup.swift; sourceTree = "<group>"; };
 		892789312AB228430047D3E4 /* PhotoPrintNoPackagePopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoPrintNoPackagePopup.xib; sourceTree = "<group>"; };
 		892B014722DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorChallengeConfigurator.swift; sourceTree = "<group>"; };
@@ -17244,6 +17246,7 @@
 				892326722B3C2B960045EB9B /* ConnectedDeviceViewInput.swift */,
 				892326742B3C2BA10045EB9B /* ConnectedDeviceViewOutput.swift */,
 				892326762B3C2BAC0045EB9B /* ConnectedDeviceViewController.swift */,
+				8923268A2B3C3E430045EB9B /* QrReadView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -27608,6 +27611,7 @@
 				8959FC402AB8349200E1556D /* AdressResponse.swift in Sources */,
 				8C06AC2B2008ABA3003D8E05 /* FreeAppSpaceRouter.swift in Sources */,
 				8C0E8DF81FDEBDFF00789C91 /* IntroduceInitializer.swift in Sources */,
+				8923268B2B3C3E430045EB9B /* QrReadView.swift in Sources */,
 				8930DDAE22C8C8C8003CE856 /* CreateStoryViewController.swift in Sources */,
 				8C0E8DF91FDEBDFF00789C91 /* ImportPhotosViewOutput.swift in Sources */,
 				8C0E8DFA1FDEBDFF00789C91 /* AccountService.swift in Sources */,

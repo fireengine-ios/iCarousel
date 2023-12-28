@@ -36,7 +36,7 @@ enum SettingsTypes: Int {
     }
     
     static let defaultSectionOneTypes = [autoUpload, faceImage]
-    static let defaultSectionTwoTypes = [myActivities, passcode, connectedDevice]
+    static let defaultSectionTwoTypes = [myActivities, passcode]
     static var defaultSectionThreeTypes = [helpAndSupport]
     
     static func prepareTypes(isChatbotShown: Bool) -> [[SettingsTypes]] {
@@ -67,6 +67,11 @@ enum SettingsTypes: Int {
         
         cells.append(contentsOf: SettingsTypes.defaultSectionTwoTypes)
         cells.append(.permissions)
+        
+        let displayConnectAccount = FirebaseRemoteConfig.shared.displayConnectAccount
+        if displayConnectAccount {
+            cells.append(.connectedDevice)
+        }
         
         //if ((Device.locale == "tr" || Device.locale == "en") && !RouteRequests.isBillo) {
         if (!RouteRequests.isBillo) {
