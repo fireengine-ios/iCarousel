@@ -104,11 +104,20 @@ final class AutoSyncDataSource: NSObject {
             return model
         }
         
-        if autoSyncSetting.isAutoSyncOptionEnabled {
-            enableAutoSync()
+        if isFromSettings {
+            if autoSyncSetting.isAutoSyncOptionEnabled {
+                enableAutoSync()
+            } else {
+                forceDisableAutoSync()
+            }
         } else {
-            forceDisableAutoSync()
+            if autoSyncSetting.isAutoSyncOptionEnabled {
+                enableAutoSync()
+            } else {
+                showHideAutosyncSettings(isShow: true)
+            }
         }
+        
     }
     
     func checkPermissionsSuccessed() {
@@ -239,8 +248,6 @@ extension AutoSyncDataSource: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let cornerRadius = 16
         var corners: UIRectCorner = []
-        print("aaaaaa \(indexPath.row) - \(indexPath.section)")
-        print("aaaaaa1 \(tableView.numberOfRows(inSection: indexPath.section))")
         if indexPath.row == 0 {
             corners.update(with: .topLeft)
             corners.update(with: .topRight)
@@ -369,12 +376,25 @@ extension AutoSyncDataSource: AutoSyncSettingsTableViewCellDelegate {
 //MARK: - AutoSyncCellDelegate
 
 extension AutoSyncDataSource: AutoSyncCellDelegate {
-    func didChangeSyncMethod(model: AutoSyncModel) {
+    func didChangeSyncMethod(model: AutoSyncModel, fromAfterLogin: Bool) {
         guard let index = models.firstIndex(where: { $0 == model }) else {
             return
         }
         syncModel = model
         models[index] = model
+        
+        if fromAfterLogin {
+            return
+        }
+        if let model = model as? AutoSyncHeaderModel {
+            if model.headerType == .autosync {
+                if model.isSelected {
+                    showHideAutosyncSettings(isShow: true)
+                } else {
+                    showHideAutosyncSettings(isShow: false)
+                }
+            }
+        }
     }
     
     func didChange(model: AutoSyncModel) {
@@ -627,6 +647,45 @@ extension AutoSyncDataSource {
         }
         
         return cell
+    }
+    
+    private func showHideAutosyncSettings(isShow: Bool) {
+        if isShow {
+            guard models.first(where: { ($0 as? AutoSyncHeaderModel)?.headerType == .photo }) == nil else {
+                return
+            }
+            
+            let settingModels = [AutoSyncHeaderModel(type: .photo, setting: autoSyncSetting.photoSetting, isSelected: false),
+                                 AutoSyncHeaderModel(type: .video, setting: autoSyncSetting.videoSetting, isSelected: false)]
+            
+            models.insert(contentsOf: settingModels, at: 1)
+            let indexPaths = (1...settingModels.count).map { IndexPath(row: $0, section: 0) }
+            
+            updateTableView({
+                tableView.insertRows(at: indexPaths, with: tableViewAnimationType)
+            }, completion: { [weak self] in
+                self?.updateAlbums(isSelected: nil)
+            })
+        } else {
+            guard models.first(where: { ($0 as? AutoSyncHeaderModel)?.headerType == .photo }) != nil else {
+                return
+            }
+            
+            guard let index = models.firstIndex(where: { ($0 as? AutoSyncHeaderModel)?.headerType == .albums }) else {
+                return
+            }
+            
+            let indexPaths = (1...index-1).reversed().map { i -> IndexPath in
+                models.remove(at: i)
+                return IndexPath(row: i, section: 0)
+            }
+        
+            updateTableView({
+                tableView.deleteRows(at: indexPaths, with: tableViewAnimationType)
+            }, completion: { [weak self] in
+                self?.updateAlbums(isSelected: nil)
+            })
+        }
     }
 }
 

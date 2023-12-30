@@ -45,13 +45,11 @@ final class AutoSyncSwitcherTableViewCell: AutoSyncTableViewCell {
         
         titleLabel.text = model.headerType.title
         
-        if isFromSetting {
-            switcher.isOn = model.isSelected
-        } else {
-            switcher.isOn = true
+        if !isFromSetting {
+            delegate?.didChangeSyncMethod(model: model, fromAfterLogin: true)
         }
-        model.isSelected = switcher.isOn
-        delegate?.didChangeSyncMethod(model: model)
+        
+        switcher.isOn = model.isSelected
         
         contentView.backgroundColor = AppColor.secondaryBackground.color
     }
@@ -64,6 +62,6 @@ final class AutoSyncSwitcherTableViewCell: AutoSyncTableViewCell {
         }
         
         model.isSelected = switcher.isOn
-        delegate?.didChangeSyncMethod(model: model)
+        delegate?.didChangeSyncMethod(model: model, fromAfterLogin: false)
     }
 }
