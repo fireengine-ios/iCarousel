@@ -517,6 +517,7 @@ final class UploadOperation: Operation {
                 self.outputItem?.metaData?.longitude = self.inputItem.metaData?.longitude
             }
             self.outputItem?.uuid = parameters.tmpUUID
+            self.outputItem?.isLocalItem = false
             
             //TODO: remove this in the future
             if let size = (parameters as? SimpleUpload)?.fileSize,
