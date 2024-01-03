@@ -8,5 +8,4 @@
 
 protocol IntroduceViewInput: AnyObject {
     func showGoogleLoginPopup(with user: AppleGoogleUser)
-    func signUpRequiredMessage()
 }

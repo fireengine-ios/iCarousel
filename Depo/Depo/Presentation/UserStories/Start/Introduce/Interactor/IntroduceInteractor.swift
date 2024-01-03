@@ -30,7 +30,7 @@ class IntroduceInteractor: IntroduceInteractorInput {
         authenticationService.appleGoogleLogin(user: SignInWithAppleGoogleParameters(user: user)) { json in
             if let errorCode = json["errorCode"] as? Int {
                 if errorCode == 4101 {
-                    self.output.signUpRequiredMessage() //if go to signup -> self.output.signUpRequired(for: user)
+                    self.output.signUpRequired(for: user)
                 } else if errorCode == 4102 {
                     self.output.passwordLoginRequired(for: user)
                 } else if errorCode == 4103 {
