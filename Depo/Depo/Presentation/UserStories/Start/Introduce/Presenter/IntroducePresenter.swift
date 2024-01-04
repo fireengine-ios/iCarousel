@@ -71,9 +71,4 @@ extension IntroducePresenter: IntroduceInteractorOutput {
         startAsyncOperation()
     }
     
-    func signUpRequiredMessage() {
-        asyncOperationSuccess()
-        view.signUpRequiredMessage()
-    }
-    
 }
