@@ -180,11 +180,6 @@ final class HomePageInteractor: HomePageInteractorInput {
             switch response {
             case .success(let result):
                 AuthoritySingleton.shared.refreshStatus(with: result)
-                
-                if self?.isFirstAuthorityRequest == true {
-                    AnalyticsService.updateUser()
-                    self?.isFirstAuthorityRequest = false
-                }
 
                 SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] response in
                     DispatchQueue.main.async {

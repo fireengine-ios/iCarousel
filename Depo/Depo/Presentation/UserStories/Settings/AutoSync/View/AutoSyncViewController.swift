@@ -120,6 +120,8 @@ final class AutoSyncViewController: BaseViewController, NibInit {
         dataSource.setSyncOperationForAutoSyncSwither()
         let isFirstLoginControl = storageVars.highlightedIsFirstLogin
         
+        NetmeraService.updateUser()
+        
         if !isFirstLoginControl {
             let popup = PopUpController.with(title: nil, message: localized(.syncPageOfferPopUp), image: .none, firstButtonTitle: TextConstants.noForUpgrade, secondButtonTitle: TextConstants.faceImageYes,
                 firstAction: { [weak self] vc in
