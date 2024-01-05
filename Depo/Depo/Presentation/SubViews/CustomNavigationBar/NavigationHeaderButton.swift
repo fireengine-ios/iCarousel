@@ -17,9 +17,12 @@ final class NavigationHeaderButton: UIButton {
         return view
     }()
     
+    private let singletonStorage = SingletonStorage.shared
+    
     convenience init(type: `Type`, target: Any? = nil, action: Selector? = nil) {
         self.init()
         setImage(type.image?.image, for: .normal)
+        setProfilePhotos(type: type)
         accessibilityIdentifier = type.accessibilityId
         accessibilityLabel = type.accessibilityLabel
         if let target = target, let action = action {
@@ -32,9 +35,20 @@ final class NavigationHeaderButton: UIButton {
     }
 
     override var intrinsicContentSize: CGSize {
-        CGSize(width: 28, height: 28)
+        CGSize(width: 36, height: 36)
     }
     
+    private func setProfilePhotos(type: `Type`) {
+        if type == .settings {
+            if singletonStorage.isSetProfilePhotoImage {
+                setImage(singletonStorage.profilePhotoImage.image, for: .normal)
+                layer.cornerRadius = 18
+                layer.borderWidth = 1
+                layer.borderColor = UIColor.black.cgColor
+                clipsToBounds = true
+            }
+        }
+    }
     
 }
 

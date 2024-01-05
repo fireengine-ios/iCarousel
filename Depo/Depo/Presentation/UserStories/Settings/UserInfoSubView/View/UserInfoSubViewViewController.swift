@@ -19,6 +19,7 @@ protocol UserInfoSubViewViewControllerActionsDelegate: AnyObject {
 final class UserInfoSubViewViewController: ViewController, NibInit {
 
     var output: UserInfoSubViewViewOutput!
+    private let singletonStorage = SingletonStorage.shared
     
     @IBOutlet private weak var outerStackView: UIStackView!
     @IBOutlet private weak var stackView: UIStackView!
@@ -124,6 +125,7 @@ extension UserInfoSubViewViewController {
     
     func updatePhoto(image: UIImage) {
         avatarImageView.image = image
+        setProfilePhoto(image: image)
         if let url = userInfo?.urlForPhoto {
             SDImageCache.shared().removeImage(forKey: url.absoluteString, withCompletion: nil)
         }
@@ -137,6 +139,11 @@ extension UserInfoSubViewViewController {
         output.loadingIndicatorDismissalRequired()
     }
     
+    func setProfilePhoto(image: UIImage) {
+        singletonStorage.isSetProfilePhotoImage = true
+        singletonStorage.profilePhotoImage.image = image
+        NotificationCenter.default.post(name: .setProfilePhoto, object: nil)
+    }
 }
 
 // MARK: Interface Builder Actions
@@ -186,7 +193,8 @@ extension UserInfoSubViewViewController: UserInfoSubViewViewInput {
         if
             let url = userInfo.urlForPhoto,
             !isPhotoLoaded {
-            avatarImageView.sd_setImage(with: url) { [weak self] _, _, _, _ in
+            avatarImageView.sd_setImage(with: url) { [weak self] image, _, _, _ in
+                self?.setProfilePhoto(image: image!)
                 self?.isPhotoLoaded = true
             }
         }

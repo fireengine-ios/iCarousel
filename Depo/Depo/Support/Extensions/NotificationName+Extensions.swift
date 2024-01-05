@@ -22,4 +22,5 @@ extension Notification.Name {
     public static let foryouGetUpdateData = Notification.Name("foryouGetUpdateData")
     public static let freeAppSpaceToBackScreen = Notification.Name("freeAppSpaceToBackScreen")
     public static let createOnlyOfficeDocumentsReloadData = Notification.Name("createOnlyOfficeDocumentsReloadData")
+    public static let setProfilePhoto =  Notification.Name("setProfilePhoto")
 }
