@@ -124,11 +124,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
  
         storageVars.isUserFirstLoggedIn = false
         canNotificationPopupRaiseUp()
-        NotificationCenter.default.addObserver(self,selector: #selector(setProfilePhoto),name: .setProfilePhoto, object: nil)
-    }
-    
-    @objc private func setProfilePhoto() {
-        setDefaultNavigationHeaderActions()
     }
     
     private func canNotificationPopupRaiseUp() {

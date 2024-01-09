@@ -194,7 +194,6 @@ extension UserInfoSubViewViewController: UserInfoSubViewViewInput {
             let url = userInfo.urlForPhoto,
             !isPhotoLoaded {
             avatarImageView.sd_setImage(with: url) { [weak self] image, _, _, _ in
-                self?.setProfilePhoto(image: image!)
                 self?.isPhotoLoaded = true
             }
         }
