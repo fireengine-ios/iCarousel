@@ -124,6 +124,12 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
  
         storageVars.isUserFirstLoggedIn = false
         canNotificationPopupRaiseUp()
+        setupAutoSyncTriggering()
+    }
+    
+    private func setupAutoSyncTriggering() {
+        SyncServiceManager.shared.setupAutosync()
+        SyncServiceManager.shared.update()
     }
     
     private func canNotificationPopupRaiseUp() {
