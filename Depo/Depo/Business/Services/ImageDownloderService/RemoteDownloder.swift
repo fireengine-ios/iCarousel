@@ -216,7 +216,7 @@ class ImageDownloder {
         }
         
         let operation = ImageDownloadOperation(url: trimmedUrl, queue: DispatchQueue.global(), isErrorLogEnabled: isErrorLogEnabled)
-        operation.outputBlock = { [weak self] _, data in
+        operation?.outputBlock = { [weak self] _, data in
             guard let self = self else {
                 completeImage(nil)
                 return
@@ -233,10 +233,10 @@ class ImageDownloder {
             completeImage(data)
         }
         
-        tokenList = tokenList + [trimmedUrl : operation]
+        tokenList[trimmedUrl] = operation
         
         DispatchQueue.toBackground {
-            operation.start()
+            operation?.start()
         }
     }
     
@@ -269,7 +269,7 @@ class ImageDownloder {
         }
         
         let operation = ImageDownloadOperation(url: trimmedUrl, queue: DispatchQueue.global(), isErrorLogEnabled: isErrorLogEnabled)
-        operation.outputBlock = { [weak self] image, _ in
+        operation?.outputBlock = { [weak self] image, _ in
             guard let self = self else {
                 completeImage(nil)
                 return
@@ -277,7 +277,7 @@ class ImageDownloder {
             
             self.tokenList[trimmedUrl] = nil
             
-            guard let image = image as? UIImage else {
+            guard let image = image else {
                 completeImage(nil)
                 return
             }
@@ -286,10 +286,10 @@ class ImageDownloder {
             completeImage(image)
         }
         
-        tokenList = tokenList + [trimmedUrl : operation]
+        tokenList[trimmedUrl] = operation
         
         DispatchQueue.toBackground {
-            operation.start()
+            operation?.start()
         }
     }
     

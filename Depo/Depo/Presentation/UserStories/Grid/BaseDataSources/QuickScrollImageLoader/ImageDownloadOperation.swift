@@ -17,20 +17,29 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
     
     private let semaphore = DispatchSemaphore(value: 0)
     private var url: URL?
-    ///It is possible that when we use Alamofire Request and then directly cancel task it might cause bug for Alamofire.
+    ///It is possible that when we use Alamofire Request and then directly cancel task it might causecurrentServerEnvironment bug for Alamofire.
     private var task: URLSessionTask?
     private let queue: DispatchQueue
     private let isErrorLogEnabled: Bool
     
-    init(url: URL?, queue: DispatchQueue, isErrorLogEnabled: Bool = false) {
-        self.url = url
+    init?(url: URL?, queue: DispatchQueue, isErrorLogEnabled: Bool = false) {
+        guard let safeUrl = url else {
+            print("Error: URL nil")
+            return nil
+        }
+        self.url = safeUrl
         self.queue = queue
         self.isErrorLogEnabled = isErrorLogEnabled
         super.init()
+        
     }
     
-    init(url: URL?, queue: DispatchQueue, completion: ImageDownloadOperationCallback?, isErrorLogEnabled: Bool = false) {
-        self.url = url
+    init?(url: URL?, queue: DispatchQueue, completion: ImageDownloadOperationCallback?, isErrorLogEnabled: Bool = false) {
+        guard let safeUrl = url else {
+            print("Error: URL nil")
+            return nil
+        }
+        self.url = safeUrl
         self.queue = queue
         self.outputBlock = completion
         self.isErrorLogEnabled = isErrorLogEnabled
