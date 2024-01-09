@@ -323,6 +323,10 @@ extension HomeCollectionViewDataSource: CardsManagerViewProtocol {
             let view = getViewForOperation(operation: type)
             
             if let card = view as? ProgressCard{
+                let progressOperation: [OperationType] = [.download, .upload, .sync]
+                if progressOperation.contains(type) {
+                    return
+                }
                 card.setProgress(allItems: allOperations, readyItems: completedOperations)
                 
                 if let item = object {

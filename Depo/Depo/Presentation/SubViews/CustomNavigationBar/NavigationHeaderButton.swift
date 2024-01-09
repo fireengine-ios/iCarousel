@@ -35,17 +35,16 @@ final class NavigationHeaderButton: UIButton {
     }
 
     override var intrinsicContentSize: CGSize {
-        CGSize(width: 36, height: 36)
+        CGSize(width: 28, height: 28)
     }
     
     private func setProfilePhotos(type: `Type`) {
         if type == .settings {
             if singletonStorage.isSetProfilePhotoImage {
                 setImage(singletonStorage.profilePhotoImage.image, for: .normal)
-                layer.cornerRadius = 18
-                layer.borderWidth = 1
-                layer.borderColor = UIColor.black.cgColor
-                clipsToBounds = true
+                imageView?.layer.borderWidth = 1
+                imageView?.layer.cornerRadius = 14
+                imageView?.layer.borderColor = UIColor.black.cgColor
             }
         }
     }

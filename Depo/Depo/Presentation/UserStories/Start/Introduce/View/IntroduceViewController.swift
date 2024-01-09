@@ -261,6 +261,23 @@ extension IntroduceViewController: IntroduceViewInput {
         popUp.delegate = self
         present(popUp, animated: true)
     }
+    
+    func signUpRequiredMessage(for user: AppleGoogleUser) {
+        let popUp = PopUpController.with(title: nil, message: TextConstants.loginScreenNeedSignUpError, image: .logout,                                 firstButtonTitle: TextConstants.registerTitle, secondButtonTitle:               TextConstants.cancel,
+                                         firstAction: { [weak self] vc in
+            DispatchQueue.toMain { [weak self] in
+                self?.dismiss(animated: false, completion: {
+                    self?.output.goToSignUpWithApple(for: user)
+                })
+            }
+        },
+                                         secondAction: { vc in
+            DispatchQueue.toMain { [weak self] in
+                self?.dismiss(animated: false)
+            }
+        })
+        popUp.open()
+    }
 }
 
 extension IntroduceViewController: LoginWithGooglePopupDelegate {

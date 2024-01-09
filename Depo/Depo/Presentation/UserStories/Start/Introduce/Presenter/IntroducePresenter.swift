@@ -42,6 +42,10 @@ class IntroducePresenter: BasePresenter, IntroduceModuleInput, IntroduceViewOutp
     func goToLogin(with user: AppleGoogleUser) {
         router.onGoToLoginWith(with: user)
     }
+    
+    func goToSignUpWithApple(for user: AppleGoogleUser) {
+        signUpRequired(for: user)
+    }
 }
 
 extension IntroducePresenter: IntroduceInteractorOutput {
@@ -69,6 +73,11 @@ extension IntroducePresenter: IntroduceInteractorOutput {
     
     func asyncOperationStarted() {
         startAsyncOperation()
+    }
+    
+    func signUpRequiredMessage(for user: AppleGoogleUser) {
+        asyncOperationSuccess()
+        view.signUpRequiredMessage(for: user)
     }
     
 }

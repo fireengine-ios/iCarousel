@@ -44,7 +44,6 @@ final class HomePageInteractor: HomePageInteractorInput {
         homeCardsService.delegate = self
         FreeAppSpace.session.showFreeUpSpaceCard()
         FreeAppSpace.session.checkFreeUpSpace()
-        setupAutoSyncTriggering()
 
         getQuotaInfo()
         getAccountInfo()
@@ -111,13 +110,6 @@ final class HomePageInteractor: HomePageInteractorInput {
         analyticsService.trackCustomGAEvent(eventCategory: .functions,
                                             eventActions: .quota,
                                             eventLabel: .quotaUsed(quotaUsed))
-    }
-    
-    //MARK: autosync triggering
-    
-    private func setupAutoSyncTriggering() {
-        SyncServiceManager.shared.setupAutosync()
-        SyncServiceManager.shared.update()
     }
     
     //MARK: private requests
