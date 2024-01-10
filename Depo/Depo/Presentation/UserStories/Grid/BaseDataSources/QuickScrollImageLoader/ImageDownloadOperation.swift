@@ -24,7 +24,7 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
     
     init?(url: URL?, queue: DispatchQueue, isErrorLogEnabled: Bool = false) {
         guard let safeUrl = url else {
-            print("Error: URL nil")
+            debugLog("Error ImageDownload Operation: URL nil")
             return nil
         }
         self.url = safeUrl
@@ -36,7 +36,7 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
     
     init?(url: URL?, queue: DispatchQueue, completion: ImageDownloadOperationCallback?, isErrorLogEnabled: Bool = false) {
         guard let safeUrl = url else {
-            print("Error: URL nil")
+            debugLog("Error ImageDownload Operation: URL nil")
             return nil
         }
         self.url = safeUrl
