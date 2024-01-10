@@ -175,7 +175,7 @@ final class CellImageManager {
             
             let downloadOperation = ImageDownloadOperation(url: url, queue: self.processingQueue, isErrorLogEnabled: true)
             //DEVELOP let downloadOperation = ImageDownloadOperation(url: url, queue: self.dispatchQueue)
-            downloadOperation.outputBlock = { [weak self] outputImage, _ in
+            downloadOperation?.outputBlock = { [weak self] outputImage, _ in
                 guard let self = self else {
                     return
                 }
@@ -187,6 +187,7 @@ final class CellImageManager {
                 self.completionBlock?(outputImage, false, false, self.uniqueId)
             }
             
+            guard let downloadOperation = downloadOperation else { return }
             self.start(operation: downloadOperation)
         }
         
@@ -204,7 +205,7 @@ final class CellImageManager {
         
         let downloadThumbnailOperation = ImageDownloadOperation(url: thumbnail, queue: self.processingQueue, isErrorLogEnabled: true)
         //DEVELOP let downloadThumbnailOperation = ImageDownloadOperation(url: thumbnail, queue: self.dispatchQueue)
-        downloadThumbnailOperation.outputBlock = { [weak self] outputImage, _ in
+        downloadThumbnailOperation?.outputBlock = { [weak self] outputImage, _ in
             guard let self = self, let outputImage = outputImage as? UIImage else {
                 downloadImage()
                 return
@@ -215,7 +216,8 @@ final class CellImageManager {
 
             downloadImage()
         }
-        downloadThumbnailOperation.queuePriority = .high
+        downloadThumbnailOperation?.queuePriority = .high
+        guard let downloadThumbnailOperation = downloadThumbnailOperation else { return }
         start(operation: downloadThumbnailOperation)
     }
     
