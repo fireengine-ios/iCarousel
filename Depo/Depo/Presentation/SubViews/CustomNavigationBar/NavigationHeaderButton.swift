@@ -45,6 +45,7 @@ final class NavigationHeaderButton: UIButton {
                 imageView?.layer.borderWidth = 1
                 imageView?.layer.cornerRadius = 14
                 imageView?.layer.borderColor = UIColor.black.cgColor
+                imageView?.contentMode = .scaleAspectFill
             }
         }
     }

@@ -30,6 +30,7 @@ class SingletonStorage {
     private let resumableUploadInfoService: ResumableUploadInfoService = factory.resolve()
     var profilePhotoImage = UIImageView()
     var isSetProfilePhotoImage: Bool = false
+    var signUpTypeForAppleGoogle: AppleGoogleUserType = .none
     
     private static let isEmailVerificationCodeSentKey = "isEmailVerificationCodeSentKeyFor\(SingletonStorage.shared.uniqueUserID)"
     var isEmailVerificationCodeSent: Bool {

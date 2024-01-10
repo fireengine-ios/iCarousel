@@ -17,4 +17,5 @@ struct AppleGoogleUser {
 enum AppleGoogleUserType {
     case apple
     case google
+    case none
 }

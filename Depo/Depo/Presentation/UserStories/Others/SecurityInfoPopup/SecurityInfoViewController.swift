@@ -161,7 +161,9 @@ final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHan
                   return
               }
         
-        let shouldButtonActive = (!secretAnswer.isEmpty && !captchaAnswer.isEmpty) || !recoveryEmail.isEmpty
+        let type = SingletonStorage.shared.signUpTypeForAppleGoogle
+        let shouldButtonActive = type == .apple ? (!secretAnswer.isEmpty && !captchaAnswer.isEmpty && !recoveryEmail.isEmpty) : (!secretAnswer.isEmpty && !captchaAnswer.isEmpty) || !recoveryEmail.isEmpty
+        
         setSaveButton(isActive: shouldButtonActive)
     }
     
@@ -223,6 +225,7 @@ final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHan
         myGroup.notify(queue: .main) {
             self.handleApiCalls()
         }
+        SingletonStorage.shared.signUpTypeForAppleGoogle = .none
     }
     
     private func handleApiCalls() {
