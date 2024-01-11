@@ -8,6 +8,7 @@
 
 import UIKit
 import MobileCoreServices
+import CoreData
 
 typealias IndexPathCallback = (_ path: IndexPath?) -> Void
 
@@ -1144,21 +1145,21 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
         scrollBarManager.updateYearsView(with: yearsSorted)
     }
 
-
-    private func getDates(of sections: [NSFetchedResultsSectionInfo]) -> [Date?] {
-        sections
-            .compactMap { section in
-                var item: MediaItem?
-                SwiftTryCatch.try {
-                    item = section.objects?.first as? MediaItem
-                } catch: { error in
-                    debugLog("CRASH CASE ---->>> section.objects \(String(describing: error?.description))")
-                } finally: {
-                    
+        private func getDates(of sections: [NSFetchedResultsSectionInfo]) -> [Date?] {
+            return sections.map { section in
+                guard let item = section.objects?.first as? MediaItem else {
+                    debugLog("Warning: First object in section is nil or not a MediaItem.")
+                    return nil
                 }
-                return item?.sortingDate as? Date
+    
+                guard let sortingDate = item.sortingDate as Date? else {
+                    debugLog("Warning: sortingDate is not a Date object.")
+                    return nil
+                }
+    
+                return sortingDate
             }
-    }
+        }
 
     func threeDotsButtonTapped(_ button: UIButton?) {
         if collectionViewManager.selectedIndexes.isEmpty {
