@@ -546,8 +546,6 @@ extension AutoSyncDataSource {
         
         let indexPaths = (index+1...models.count-1).map { IndexPath(row: $0, section: 0)}
         
-
-        
         updateTableView({
             tableView.insertRows(at: indexPaths, with: tableViewAnimationType)
         }, completion: nil)
