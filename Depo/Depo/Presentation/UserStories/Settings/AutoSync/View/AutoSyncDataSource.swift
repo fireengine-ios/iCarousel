@@ -107,8 +107,10 @@ final class AutoSyncDataSource: NSObject {
         
         if isFromSettings {
             if autoSyncSetting.isAutoSyncOptionEnabled {
+                isAutoSyncSwitchSelected = true
                 enableAutoSync()
             } else {
+                isAutoSyncSwitchSelected = false
                 forceDisableAutoSync()
             }
         } else {
