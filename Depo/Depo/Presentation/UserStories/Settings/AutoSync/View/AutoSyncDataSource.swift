@@ -33,6 +33,7 @@ final class AutoSyncDataSource: NSObject {
     
     var isFromSettings = false
     private var syncModel = AutoSyncModel(type: .header)
+    private var isAutoSyncSwitchSelected: Bool = false
     
     private let tableViewAnimationType = UITableView.RowAnimation.top
     
@@ -97,7 +98,7 @@ final class AutoSyncDataSource: NSObject {
         selectedAlbums = albums.filter { $0.isSelected }
         albumModels = albums.map { album -> AutoSyncAlbumModel in
             let model = AutoSyncAlbumModel(album: album)
-            model.isEnabled = autoSyncSetting.isAutoSyncOptionEnabled
+            model.isEnabled = isAutoSyncSwitchSelected
             if model.album.isMainAlbum {
                 model.isAllChecked = selectedAlbums.count == albums.count
             }
@@ -383,6 +384,10 @@ extension AutoSyncDataSource: AutoSyncCellDelegate {
         syncModel = model
         models[index] = model
         
+        if let model = model as? AutoSyncHeaderModel {
+            isAutoSyncSwitchSelected = model.isSelected
+        }
+        
         if fromAfterLogin {
             return
         }
@@ -569,7 +574,7 @@ extension AutoSyncDataSource {
     
     private func updateAlbums(isSelected: Bool?) {
         albumModels.forEach { model in
-            model.isEnabled = autoSyncSetting.isAutoSyncOptionEnabled
+            model.isEnabled = isAutoSyncSwitchSelected
             if let isSelected = isSelected, !model.album.isMainAlbum {
                 model.album.isSelected = isSelected
             }
@@ -580,7 +585,7 @@ extension AutoSyncDataSource {
                 return
             }
             
-            model.isEnabled = autoSyncSetting.isAutoSyncOptionEnabled
+            model.isEnabled = isAutoSyncSwitchSelected
             if let isSelected = isSelected, !model.album.isMainAlbum {
                 model.album.isSelected = isSelected
             }
