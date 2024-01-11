@@ -232,11 +232,21 @@ extension ConnectedAccountsViewController: AppleGoogleAccountConnectionCellDeleg
     func showPasswordRequiredPopup(type: AppleGoogleUserType) {
         self.appleGoogleUserType = type
         let message = type == .google ? localized(.googlePasswordRequired) : localized(.applePasswordRequired)
-        let popUp = RouterVC().messageAndButtonPopup(with: message,
-                                                     buttonTitle: TextConstants.nextTitle)
-        
-        popUp.delegate = self
-        present(popUp, animated: true)
+        let popUp = PopUpController.with(title: nil,
+                                         message: message,
+                                         image: .none,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.nextTitle,
+                                         firstAction: { [weak self] vc in
+                                            DispatchQueue.toMain { [weak self] in
+                                                self?.dismiss(animated: false)
+                                            }
+                                         }, secondAction: { vc in
+                                            DispatchQueue.toMain { [weak self] in
+                                                self?.onActionButton()
+                                            }
+                                         })
+        popUp.open()
     }
 
 }
