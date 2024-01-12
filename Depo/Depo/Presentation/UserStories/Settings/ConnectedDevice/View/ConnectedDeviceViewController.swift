@@ -28,7 +28,7 @@ final class ConnectedDeviceViewController: BaseViewController {
        let view = UILabel()
         view.text = localized(.scanQrCodeInfo)
         view.numberOfLines = 2
-        view.font = .appFont(.regular, size: 12)
+        view.font = .appFont(.medium, size: 14)
         view.textColor = AppColor.label.color
         view.textAlignment = .left
         return view
@@ -57,8 +57,8 @@ extension ConnectedDeviceViewController {
     private func pageSetup() {
         view.addSubview(iconImageView)
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
-        iconImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8).activate()
-        iconImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 8).activate()
+        iconImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).activate()
+        iconImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 16).activate()
         iconImageView.widthAnchor.constraint(equalToConstant: 20).activate()
         iconImageView.heightAnchor.constraint(equalToConstant: 20).activate()
         
@@ -66,7 +66,7 @@ extension ConnectedDeviceViewController {
         infoLabel.translatesAutoresizingMaskIntoConstraints = false
         infoLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 8).activate()
         infoLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 8).activate()
-        infoLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 8).activate()
+        infoLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 16).activate()
     }
 }
 
