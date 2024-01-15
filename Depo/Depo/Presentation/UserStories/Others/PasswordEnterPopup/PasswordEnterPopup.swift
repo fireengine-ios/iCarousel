@@ -118,6 +118,7 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
     private func showSuccessPopup() {
         SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.passwordChangedSuccessfully)
         dismiss(animated: true)
+        NotificationCenter.default.post(name: .startUpdateProfileFlow, object: nil)
     }
 
     private func showLogoutPopup() {
