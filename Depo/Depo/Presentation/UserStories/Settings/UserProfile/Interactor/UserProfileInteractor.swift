@@ -154,7 +154,11 @@ class UserProfileInteractor: UserProfileInteractorInput {
                 self?.userInfo?.email = email
                 self?.updateRecoveryEmailIfNeed(recoveryEmail: recoveryEmail, number: number, birthday: birthday, address: address)
             }, fail: { [weak self] error in
-                self?.fail(error: error.description)
+                if error.description == AppleGoogeLoginError.passwordRequired.rawValue {
+                    self?.getUpdatePasswordMethods()
+                } else {
+                    self?.fail(error: error.description)
+                }
             })
         } else {
             updateRecoveryEmailIfNeed(recoveryEmail: recoveryEmail, number: number, birthday: birthday, address: address)
