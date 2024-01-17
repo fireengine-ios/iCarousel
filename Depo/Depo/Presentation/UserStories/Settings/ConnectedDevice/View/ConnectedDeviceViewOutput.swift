@@ -9,5 +9,5 @@
 import Foundation
 
 protocol ConnectedDeviceViewOutput {
-    
+    func callReadQRCode(referenceToken: String)
 }

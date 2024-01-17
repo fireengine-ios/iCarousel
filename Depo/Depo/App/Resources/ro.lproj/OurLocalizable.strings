@@ -2223,7 +2223,8 @@ then {11,99 TRY/Month}*/
 "recommended" = "Recomandat";
 "dont_miss_opportunity" = "";
 "print_package_print_firm" = "Fotografiile vor fi tipărite de către compania de tipărire contractată.";
-"sync_in_progress_delete_is_not_allowed" = "";
+"sync_in_progress_delete_is_not_allowed" = "Fotografiile dvs. sunt în curs de pregătire, nu le puteți șterge în acest moment. Vă rugăm să încercați din nou mai târziu.";
 "connected_devices" = "";
 "scan_qr_code" = "";
 "scan_qr_code_info" = "";
+"qr_code_try_again" = "";

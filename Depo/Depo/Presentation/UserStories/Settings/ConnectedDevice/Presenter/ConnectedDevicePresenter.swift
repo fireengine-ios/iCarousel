@@ -16,9 +16,17 @@ class ConnectedDevicePresenter {
 }
 
 extension ConnectedDevicePresenter: ConnectedDeviceInteractorOutput {
+    func readQRCodeSuccess() {
+        view?.readQRCodeSuccess()
+    }
     
+    func readQRCodeFail() {
+        view?.readQRCodeFail()
+    }
 }
 
 extension ConnectedDevicePresenter: ConnectedDeviceViewOutput {
-    
+    func callReadQRCode(referenceToken: String) {
+        interactor.callReadQRCode(referenceToken: referenceToken)
+    }
 }

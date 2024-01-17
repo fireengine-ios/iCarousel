@@ -9,5 +9,6 @@
 import Foundation
 
 protocol ConnectedDeviceInteractorOutput {
-    
+    func readQRCodeSuccess()
+    func readQRCodeFail()
 }

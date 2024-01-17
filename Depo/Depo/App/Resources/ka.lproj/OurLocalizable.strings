@@ -2216,4 +2216,5 @@ then {11,99 TRY/Month}*/
 "sync_in_progress_delete_is_not_allowed" = "";
 "connected_devices" = "";
 "scan_qr_code" = "";
-"scan_qr_code_info" = "";
+"scan_qr_code_info" = "შენი ფოტოები მზადდება, ამჯერად ვერ წაშლი. გთხოვთ, სცადო მოგვიანებით.";
+"qr_code_try_again" = "";

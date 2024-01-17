@@ -371,4 +371,5 @@ enum Strings: String, Localizable {
     case connectedDevices = "connected_devices"
     case scanQrCode = "scan_qr_code"
     case scanQrCodeInfo = "scan_qr_code_info"
+    case qrCodeTryAgain = "qr_code_try_again"
 }
