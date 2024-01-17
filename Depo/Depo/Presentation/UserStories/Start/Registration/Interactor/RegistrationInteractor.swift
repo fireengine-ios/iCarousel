@@ -159,9 +159,9 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 
                 if let signUpType = userInfo.appleGoogleUser?.type {
                     if signUpType == .apple {
-                        SingletonStorage.shared.signUpTypeForAppleGoogle = .apple
+                        SingletonStorage.shared.signUpTypeForAppleGoogle = AppleGoogleUserType.apple.value
                     } else {
-                        SingletonStorage.shared.signUpTypeForAppleGoogle = .none
+                        SingletonStorage.shared.signUpTypeForAppleGoogle = AppleGoogleUserType.other.value
                     }
                 }
 
