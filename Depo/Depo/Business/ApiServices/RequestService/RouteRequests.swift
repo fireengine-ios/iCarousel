@@ -541,4 +541,7 @@ struct RouteRequests {
     static let updateAdress = "v1/address/%d"
     static let createOrder = baseUrl +/ "v1/photo-print/order"
     static let getOrder = baseUrl +/ "v1/photo-print/order"
+    
+    //MARK: -TOGG QR Code
+    static let readQrCode = baseUrl +/ "auth/qrcode/referenceToken"
 }
