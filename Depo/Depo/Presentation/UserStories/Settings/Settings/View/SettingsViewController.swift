@@ -40,6 +40,8 @@ protocol SettingsDelegate: AnyObject {
     func goToPaycellCampaign()
     
     func goToNotification()
+    
+    func goToConnectedDevice()
 }
 
 final class SettingsViewController: BaseViewController {
@@ -254,6 +256,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 delegate.goToNotification()
             } else {
                 output.goToNotification()
+            }
+        case .connectedDevice:
+            if let delegate = settingsDelegate {
+                delegate.goToConnectedDevice()
+            } else {
+                output.goToConnectedDevice()
             }
         }
     }

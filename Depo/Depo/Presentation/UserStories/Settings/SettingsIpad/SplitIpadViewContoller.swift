@@ -148,4 +148,10 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
             configurateWithControllers(leftViewController: left, controllers: [RouterVC().notification()])
         }
     }
+    
+    func goToConnectedDevice() {
+        if let left = leftController {
+            configurateWithControllers(leftViewController: left, controllers: [RouterVC().connectedDevice()])
+        }
+    }
 }

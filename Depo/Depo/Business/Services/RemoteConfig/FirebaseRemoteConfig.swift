@@ -32,6 +32,7 @@ private struct RemoteConfigKeys {
     static let printPhotoQualityMinMB = "Print_Photo_Quality_Min_MB"
     static let timelineEnabled = "yilsonu_timeline_enabled_client"
     static let printMonthlyPhotoSize = "print_monthly_photo_size"
+    static let displayConnectAccount = "display_connect_account"
 }
 
 final class FirebaseRemoteConfig {
@@ -49,6 +50,11 @@ final class FirebaseRemoteConfig {
         #endif
         remoteConfig.configSettings = settings
         remoteConfig.setDefaults(fromPlist: "FirebaseRemoteConfigDefaults")
+    }
+    
+    var displayConnectAccount: Bool {
+        let key = RemoteConfigKeys.displayConnectAccount
+        return remoteConfig.configValue(forKey: key).boolValue
     }
 
     var printOptionEnabled: Bool {

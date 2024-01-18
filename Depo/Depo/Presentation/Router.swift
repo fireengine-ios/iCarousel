@@ -1138,6 +1138,11 @@ class RouterVC: NSObject {
         return NotificationModuleInitializer.initializeViewController()
     }
     
+    // MARK: - Settings -> Connected Device
+    func connectedDevice() -> ConnectedDeviceViewController {
+        return ConnectedDeviceInitializer.initializeViewController()
+    }
+    
     // MARK: - Create Collage Template
     
     func createCollage() -> CreateCollageViewController {
