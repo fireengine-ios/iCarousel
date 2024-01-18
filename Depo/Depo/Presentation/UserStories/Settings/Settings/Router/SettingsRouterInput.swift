@@ -61,4 +61,6 @@ protocol SettingsRouterInput {
     func goToPaycellCampaing()
     
     func goToNotification()
+    
+    func goToConnectedDevice()
 }

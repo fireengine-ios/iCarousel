@@ -2235,4 +2235,8 @@ then {11,99 TRY/Month}*/
 "recommended" = "الموصى بها";
 "dont_miss_opportunity" = "";
 "print_package_print_firm" = "ستتم طباعة الصور من قبل شركة طباعة متعاقدة.";
-"sync_in_progress_delete_is_not_allowed" = "";
+"sync_in_progress_delete_is_not_allowed" = "صورك قيد الإعداد، لا يمكنك حذفها في الوقت الحالي. الرجاء معاودة المحاولة في وقت لاحق.";
+"connected_devices" = "";
+"scan_qr_code" = "";
+"scan_qr_code_info" = "";
+"qr_code_try_again" = "";

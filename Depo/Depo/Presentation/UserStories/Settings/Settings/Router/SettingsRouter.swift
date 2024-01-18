@@ -74,6 +74,11 @@ class SettingsRouter: SettingsRouterInput {
         router.pushViewController(viewController: vc)
     }
     
+    func goToConnectedDevice() {
+        let vc = router.connectedDevice()
+        router.pushViewController(viewController: vc)
+    }
+    
     func goToPremium() {
         router.pushViewController(viewController: router.premium())
     }
