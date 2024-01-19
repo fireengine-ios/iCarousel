@@ -1908,6 +1908,12 @@
 		89D1EBEC23EC3BF000092031 /* UIApplication+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D1EBE923EC3BF000092031 /* UIApplication+Display.swift */; };
 		89D1EBEE23EC3BF000092031 /* UIApplication+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D1EBE923EC3BF000092031 /* UIApplication+Display.swift */; };
 		89D1EBEF23EC3BF000092031 /* UIApplication+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D1EBE923EC3BF000092031 /* UIApplication+Display.swift */; };
+		89D27B172B5A58C30017E32A /* QRCodeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895A549E2B57B09300E2A275 /* QRCodeService.swift */; };
+		89D27B1B2B5A58C40017E32A /* QRCodeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895A549E2B57B09300E2A275 /* QRCodeService.swift */; };
+		89D27B1C2B5A58C40017E32A /* QRCodeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895A549E2B57B09300E2A275 /* QRCodeService.swift */; };
+		89D27B1D2B5A58DD0017E32A /* QRCodeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895A549C2B57B04B00E2A275 /* QRCodeResponse.swift */; };
+		89D27B1E2B5A58DE0017E32A /* QRCodeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895A549C2B57B04B00E2A275 /* QRCodeResponse.swift */; };
+		89D27B1F2B5A58DE0017E32A /* QRCodeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895A549C2B57B04B00E2A275 /* QRCodeResponse.swift */; };
 		89D2D4CB29D5A52100AC772B /* OnlyOfficePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89D2D4CA29D5A52100AC772B /* OnlyOfficePopup.xib */; };
 		89D2D4CD29D5A52E00AC772B /* OnlyOfficePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D2D4CC29D5A52E00AC772B /* OnlyOfficePopup.swift */; };
 		89D2D4CE29D5A53200AC772B /* OnlyOfficePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D2D4CC29D5A52E00AC772B /* OnlyOfficePopup.swift */; };
@@ -29633,6 +29639,7 @@
 				4BEC1144233E1BBD0020A578 /* SupportFormSubjectType.swift in Sources */,
 				B557674E22E99FCA00C86E2F /* QuickSelectGestureRecognizer.swift in Sources */,
 				CE78495622A685FB00662219 /* Factory.swift in Sources */,
+				89D27B1E2B5A58DE0017E32A /* QRCodeResponse.swift in Sources */,
 				CE78495822A685FB00662219 /* UploadFromLifeBoxRouterInput.swift in Sources */,
 				898B44262AC2AB9200D29F24 /* PhotoPrintForYouViewController.swift in Sources */,
 				9808B7DC2567EB10001DEF2E /* PrivateShateAccessListViewController.swift in Sources */,
@@ -30896,6 +30903,7 @@
 				CE784C7422A685FB00662219 /* SuggestionTableViewCell.swift in Sources */,
 				CE784C7522A685FB00662219 /* ActivityTimelineViewInput.swift in Sources */,
 				CE784C7622A685FB00662219 /* ActivityTimelineViewOutput.swift in Sources */,
+				89D27B1B2B5A58C40017E32A /* QRCodeService.swift in Sources */,
 				894F716B2A9499540037FE89 /* PhotoPrintViewInput.swift in Sources */,
 				F0571ED0288AE6F000A0D6AC /* ForYouInteractorOutput.swift in Sources */,
 				CF71473F24B597AA00D83E60 /* ContactSyncPopupFactory.swift in Sources */,
@@ -31252,6 +31260,7 @@
 				0780AB3227916820000760D9 /* CGPointDistance.swift in Sources */,
 				CF8B642A23CBC9D70021B021 /* PlanType.swift in Sources */,
 				CF8B642C23CBC9D70021B021 /* WormholePoster.swift in Sources */,
+				89D27B1D2B5A58DD0017E32A /* QRCodeResponse.swift in Sources */,
 				CF8B642D23CBC9D70021B021 /* UIScrollView+Scroll.swift in Sources */,
 				CF8B642E23CBC9D70021B021 /* SearchViewInitializer.swift in Sources */,
 				CF8B643023CBC9D70021B021 /* VisualMusicPlayerViewInput.swift in Sources */,
@@ -32191,6 +32200,7 @@
 				CF8B66B223CBC9D70021B021 /* FaceImagePhotosViewOutput.swift in Sources */,
 				CF8B66B323CBC9D70021B021 /* TermsOfUseModuleInput.swift in Sources */,
 				CF8B66B423CBC9D70021B021 /* BottomSelectionTabBarModuleInput.swift in Sources */,
+				89D27B172B5A58C30017E32A /* QRCodeService.swift in Sources */,
 				CF8B66B523CBC9D70021B021 /* CustomProgressHUD.swift in Sources */,
 				CF8B66B623CBC9D70021B021 /* FaceImageAddNameInteractorInput.swift in Sources */,
 				076BD1D527BC12EB004609E3 /* MapSearchViewOutput.swift in Sources */,
@@ -33090,6 +33100,7 @@
 				CF8B6BC123CBCA280021B021 /* FaceImageAddNameInteractorInput.swift in Sources */,
 				CF8B6BC223CBCA280021B021 /* InstagramResponses.swift in Sources */,
 				CF8B6BC323CBCA280021B021 /* HelpAndSupportPresenter.swift in Sources */,
+				89D27B1C2B5A58C40017E32A /* QRCodeService.swift in Sources */,
 				CF8B6BC423CBCA280021B021 /* CreateStoryResponse.swift in Sources */,
 				CF8B6BC523CBCA280021B021 /* SpotifyBottomBarManager.swift in Sources */,
 				CF8B6BC623CBCA280021B021 /* InstapickAnalyzeHistoryPhotoCell.swift in Sources */,
@@ -33109,6 +33120,7 @@
 				CF8B6BD023CBCA280021B021 /* CaptchaService.swift in Sources */,
 				CF8B6BD123CBCA280021B021 /* ImportPhotosInteractorInput.swift in Sources */,
 				F0571EC7288AE6CE00A0D6AC /* ForYouInteractor.swift in Sources */,
+				89D27B1F2B5A58DE0017E32A /* QRCodeResponse.swift in Sources */,
 				CF8B6BD223CBCA280021B021 /* AlbumSelectionPresenter.swift in Sources */,
 				CF8B6BD323CBCA280021B021 /* PrintInteractorOutput.swift in Sources */,
 				F0203394291817E7003508D1 /* ForYouThrowbackCollectionViewCell.swift in Sources */,
