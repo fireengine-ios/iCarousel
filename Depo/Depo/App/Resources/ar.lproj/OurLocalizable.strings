@@ -2240,3 +2240,12 @@ then {11,99 TRY/Month}*/
 "scan_qr_code" = "";
 "scan_qr_code_info" = "";
 "qr_code_try_again" = "";
+"connected_devices" = "قم بتوصيل الجهاز";
+"scan_qr_code" = "مسح رمز الاستجابة السريعة";
+"scan_qr_code_info" = "امسح رمز الاستجابة السريعة ضوئيًا على الجهاز الذي تريد الاتصال به.";
+"qr_code_try_again" = "فشل مسح رمز الاستجابة السريعة. يرجى المحاولة مرة أخرى.";
+"print" = "";
+"photo_max_selection_title" = "";
+"photo_max_selection_body" = "";
+"set_recovery_mail_success" = "";
+"set_recoverymail_securityquestion_success" = "";

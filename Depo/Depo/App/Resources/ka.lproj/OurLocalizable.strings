@@ -2218,3 +2218,9 @@ then {11,99 TRY/Month}*/
 "scan_qr_code" = "";
 "scan_qr_code_info" = "შენი ფოტოები მზადდება, ამჯერად ვერ წაშლი. გთხოვთ, სცადო მოგვიანებით.";
 "qr_code_try_again" = "";
+"qr_code_try_again" = "QR კოდის დასკანირება ვერ მოხერხდა. გთხოვთ, სცადო მოგვიანებით.";
+"print" = "";
+"photo_max_selection_title" = "";
+"photo_max_selection_body" = "";
+"set_recovery_mail_success" = "";
+"set_recoverymail_securityquestion_success" = "";

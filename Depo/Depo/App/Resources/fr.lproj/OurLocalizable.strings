@@ -2533,3 +2533,12 @@ then {11,99 TRY/Month}*/
 "scan_qr_code" = "";
 "scan_qr_code_info" = "";
 "qr_code_try_again" = "";
+"connected_devices" = "Connecter L'appareil";
+"scan_qr_code" = "Scanner le Code QR";
+"scan_qr_code_info" = "Scannez le code QR de l'appareil que vous souhaitez connecter.";
+"qr_code_try_again" = "Le scan du code QR a échoué. Veuillez réessayer.";
+"print" = "";
+"photo_max_selection_title" = "";
+"photo_max_selection_body" = "";
+"set_recovery_mail_success" = "";
+"set_recoverymail_securityquestion_success" = "";

@@ -372,4 +372,6 @@ enum Strings: String, Localizable {
     case scanQrCode = "scan_qr_code"
     case scanQrCodeInfo = "scan_qr_code_info"
     case qrCodeTryAgain = "qr_code_try_again"
+    case setRecoveryMailSuccess = "set_recovery_mail_success"
+    case setRecoveryMailSecurityQuestionSuccess = "set_recoverymail_securityquestion_success"
 }

@@ -2298,3 +2298,12 @@ then {11,99 TRY/Month}*/
 "scan_qr_code" = "QR Kodu Tara";
 "scan_qr_code_info" = "Bağlamak istediğiniz cihazınız üzerindeki QR kodu telefonunuzdan okutunuz.";
 "qr_code_try_again" = "QR kod tarama başarısız. Lütfen tekrar deneyiniz.";
+"print" = "Baskı";
+
+/*Fuzzy*/
+"photo_max_selection_title" = "%@ Adet Fotograf Baskıya Gönderebilirsin";
+
+/*Fuzzy*/
+"photo_max_selection_body" = "En fazla %@ adet fotoğraf baskıya gönderebilirsin.";
+"set_recovery_mail_success" = "Kurtarma mailiniz oluşturuldu.";
+"set_recoverymail_securityquestion_success" = "Kurtarma mailiniz ve güvenlik sorunuz oluşturuldu.";
