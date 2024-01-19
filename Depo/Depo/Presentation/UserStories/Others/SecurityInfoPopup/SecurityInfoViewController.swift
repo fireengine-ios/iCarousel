@@ -10,6 +10,12 @@ import Foundation
 import UIKit
 import Typist
 
+enum SecurityScreenEntryType {
+    case recoveryMail
+    case securityQuestion
+    case all
+}
+
 final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHandler {
 
     //MARK: -IBOutlets
@@ -230,20 +236,20 @@ final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHan
     
     private func handleApiCalls() {
         if securityQuestionOperation == nil && recoveryEmailOperation != nil {
-            recoveryEmailOperation?.isSuccess == true ? questionWasSuccessfullyUpdated()
+            recoveryEmailOperation?.isSuccess == true ? questionWasSuccessfullyUpdated(type: .recoveryMail)
             : UIApplication.showErrorAlert(message: recoveryEmailOperation?.errorMessage ?? "")
             return
         }
         
         if securityQuestionOperation != nil && recoveryEmailOperation == nil {
-            securityQuestionOperation?.isSuccess == true ? questionWasSuccessfullyUpdated()
+            securityQuestionOperation?.isSuccess == true ? questionWasSuccessfullyUpdated(type: .securityQuestion)
             : handleServerErrors(securityQuestionOperation?.errorMessage ?? .unknown)
             return
         }
         
         if securityQuestionOperation != nil && recoveryEmailOperation != nil {
             if securityQuestionOperation?.isSuccess == true && recoveryEmailOperation?.isSuccess == true {
-                questionWasSuccessfullyUpdated()
+                questionWasSuccessfullyUpdated(type: .all)
             } else if securityQuestionOperation?.isSuccess == true && recoveryEmailOperation?.isSuccess == false {
                 showSecurityWarningPopup(errorMessage: recoveryEmailOperation?.errorMessage ?? "",
                                          warningType: .email)
@@ -268,10 +274,22 @@ final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHan
 
 // MARK: - Presenter
 extension SecurityInfoViewController {
-    private func questionWasSuccessfullyUpdated() {
+    private func questionWasSuccessfullyUpdated(type: SecurityScreenEntryType) {
         RouterVC().popViewController()
-        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.userProfileSetSecretQuestionSuccess)
+        let message = successMessage(type: type)
+        SnackbarManager.shared.show(type: .nonCritical, message: message)
         //dismiss(animated: true)
+    }
+    
+    private func successMessage(type: SecurityScreenEntryType) -> String {
+        switch type {
+        case .securityQuestion:
+            return TextConstants.userProfileSetSecretQuestionSuccess
+        case .recoveryMail:
+            return localized(.setRecoveryMailSuccess)
+        case .all:
+            return localized(.setRecoveryMailSecurityQuestionSuccess)
+        }
     }
     
     private func handleServerErrors(_ error: SetSecretQuestionErrors) {

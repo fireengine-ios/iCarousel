@@ -367,4 +367,6 @@ enum Strings: String, Localizable {
     case higlightedPackageRecommended = "recommended"
     case dontMissOpportunity = "dont_miss_opportunity"
     case syncInProgressDeleteIsNotAllowed = "sync_in_progress_delete_is_not_allowed"
+    case setRecoveryMailSuccess = "set_recovery_mail_success"
+    case setRecoveryMailSecurityQuestionSuccess = "set_recoverymail_securityquestion_success"
 }

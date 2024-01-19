@@ -2223,4 +2223,13 @@ then {11,99 TRY/Month}*/
 "recommended" = "Empfohlen";
 "dont_miss_opportunity" = "";
 "print_package_print_firm" = "Der Druck der Fotos erfolgt durch eine beauftragte Druckerei.";
-"sync_in_progress_delete_is_not_allowed" = "";
+"sync_in_progress_delete_is_not_allowed" = "Ihre Fotos werden vorbereitet, Sie können sie derzeit nicht löschen. Bitte versuchen Sie es später erneut.";
+"connected_devices" = "Gerät Verbinden";
+"scan_qr_code" = "QR-Code Scannen";
+"scan_qr_code_info" = "Scannen Sie den QR-Code auf dem Gerät, das Sie verbinden möchten.";
+"qr_code_try_again" = "QR-Code-Scan fehlgeschlagen. Bitte versuchen Sie es erneut.";
+"print" = "";
+"photo_max_selection_title" = "";
+"photo_max_selection_body" = "";
+"set_recovery_mail_success" = "";
+"set_recoverymail_securityquestion_success" = "";
