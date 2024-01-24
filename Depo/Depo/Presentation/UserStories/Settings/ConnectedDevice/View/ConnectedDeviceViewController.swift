@@ -151,10 +151,10 @@ extension ConnectedDeviceViewController: AVCaptureMetadataOutputObjectsDelegate 
     }
     
     func successQRCodeForCamera(value: String) {
+        captureSession.stopRunning()
         AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
         showIndicator()
         self.output.callReadQRCode(referenceToken: value)
-        captureSession.stopRunning()
     }
     
 }
