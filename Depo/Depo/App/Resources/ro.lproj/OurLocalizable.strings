@@ -2224,10 +2224,6 @@ then {11,99 TRY/Month}*/
 "dont_miss_opportunity" = "";
 "print_package_print_firm" = "Fotografiile vor fi tipărite de către compania de tipărire contractată.";
 "sync_in_progress_delete_is_not_allowed" = "Fotografiile dvs. sunt în curs de pregătire, nu le puteți șterge în acest moment. Vă rugăm să încercați din nou mai târziu.";
-"connected_devices" = "";
-"scan_qr_code" = "";
-"scan_qr_code_info" = "";
-"qr_code_try_again" = "";
 "connected_devices" = "Conectarea Dispozitivului";
 "scan_qr_code" = "Scanați Codul QR";
 "scan_qr_code_info" = "Scanați codul QR de pe dispozitivul pe care doriți să îl conectați.";
@@ -2237,3 +2233,4 @@ then {11,99 TRY/Month}*/
 "photo_max_selection_body" = "";
 "set_recovery_mail_success" = "";
 "set_recoverymail_securityquestion_success" = "";
+"settings_set_password_apple_warning" = "";

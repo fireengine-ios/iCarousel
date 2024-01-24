@@ -2226,10 +2226,6 @@ then {11,99 TRY/Month}*/
 "dont_miss_opportunity" = "";
 "print_package_print_firm" = "Фотографії будуть надруковані поліграфічною компанією, з якою укладено договір.";
 "sync_in_progress_delete_is_not_allowed" = "Йде підготовка ваших фотографій, ви не можете видалити їх в даний момент. Будь ласка, повторіть спробу пізніше.";
-"connected_devices" = "";
-"scan_qr_code" = "";
-"scan_qr_code_info" = "";
-"qr_code_try_again" = "";
 "connected_devices" = "Підключити Пристрій";
 "scan_qr_code" = "Відскануйте QR-код";
 "scan_qr_code_info" = "Відскануйте QR-код на пристрої, який ви хочете підключити.";
@@ -2239,3 +2235,4 @@ then {11,99 TRY/Month}*/
 "photo_max_selection_body" = "";
 "set_recovery_mail_success" = "";
 "set_recoverymail_securityquestion_success" = "";
+"settings_set_password_apple_warning" = "";

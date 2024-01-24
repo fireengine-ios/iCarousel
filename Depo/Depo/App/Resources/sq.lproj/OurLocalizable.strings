@@ -2267,10 +2267,6 @@ then {11,99 TRY/Month}*/
 "dont_miss_opportunity" = "";
 "print_package_print_firm" = "Fotot do të printohen nga një kompani printimi e kontraktuar.";
 "sync_in_progress_delete_is_not_allowed" = "Fotot tuaja janë duke u përgatitur, nuk mund t'i fshini ato për momentin. Ju lutemi provoni përsëri më vonë.";
-"connected_devices" = "";
-"scan_qr_code" = "";
-"scan_qr_code_info" = "";
-"qr_code_try_again" = "";
 "connected_devices" = "Lidhni Pajisjen";
 "scan_qr_code" = "Skanoni Kodin QR";
 "scan_qr_code_info" = "Skanoni kodin QR në pajisjen që dëshironi të lidhni.";
@@ -2280,3 +2276,4 @@ then {11,99 TRY/Month}*/
 "photo_max_selection_body" = "";
 "set_recovery_mail_success" = "";
 "set_recoverymail_securityquestion_success" = "";
+"settings_set_password_apple_warning" = "";
