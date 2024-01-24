@@ -50,6 +50,8 @@ struct RouteRequests {
     
     static let drawCampaignUrl = "https://www.turkcell.com.tr/kampanyalar/diger-kampanyalarimiz/lifebox-kontratli-paket-al-lifeboxi-kullan-iphone-kazan"
     
+    static let biOgrenciUrl = "https://biogrenci.com/firsat/lifebox-100gb-saklama-alani-tum-ogrencilere-2-ay-ucretsiz"
+    
     static let baseContactsUrlShort: URL = {
         switch currentServerEnvironment {
         case .test: return URL(string: "https://adepodev-contactsync.turkcell.com.tr/")!
