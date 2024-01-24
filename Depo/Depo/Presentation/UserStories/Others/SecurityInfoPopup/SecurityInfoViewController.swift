@@ -168,7 +168,7 @@ final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHan
               }
         
         let type = SingletonStorage.shared.signUpTypeForAppleGoogle
-        let shouldButtonActive = type == AppleGoogleUserType.apple.value ? (!recoveryEmail.isEmpty && !captchaAnswer.isEmpty) : (!secretAnswer.isEmpty && !captchaAnswer.isEmpty) || !recoveryEmail.isEmpty
+        let shouldButtonActive = type == AppleGoogleUserType.apple.value ? (!recoveryEmail.isEmpty) : (!secretAnswer.isEmpty && !captchaAnswer.isEmpty) || !recoveryEmail.isEmpty
         
         setSaveButton(isActive: shouldButtonActive)
     }
