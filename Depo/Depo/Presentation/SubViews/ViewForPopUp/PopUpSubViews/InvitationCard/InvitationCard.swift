@@ -47,6 +47,9 @@ final class InvitationCard: BaseCardView {
         } else if viewType == .milliPiyango {
             let vc = TermsDescriptionController(text: "")
             router.pushViewController(viewController: vc)
+        } else if viewType == .biOgrenci {
+            let url = URL(string: RouteRequests.biOgrenciUrl)
+            UIApplication.shared.open(url!)
         }
     }
 
