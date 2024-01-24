@@ -22,9 +22,9 @@ final class PhotoVideoThreeDotMenuManager {
         self.delegate = delegate
     }
 
-    func showActions(for items: [WrapData], isSelectingMode: Bool, isPrintShow: Bool, sender: Any?) {
+    func showActions(for items: [WrapData], isSelectingMode: Bool, sender: Any?) {
         if isSelectingMode {
-            actionsForItems(items, isPrintShow: isPrintShow) { [weak self] types in
+            actionsForItems(items) { [weak self] types in
                 self?.alert.show(with: types, for: items, presentedBy: sender, onSourceView: nil, viewController: nil)
             }
 
@@ -38,7 +38,7 @@ final class PhotoVideoThreeDotMenuManager {
         }
     }
     
-    private func actionsForItems(_ items: [WrapData], isPrintShow: Bool, completion: @escaping ([ElementTypes]) -> Void) {
+    private func actionsForItems(_ items: [WrapData], completion: @escaping ([ElementTypes]) -> Void) {
         
         let remoteItems = items.filter { !$0.isLocalItem }
         let containsPhotos = items.contains { $0.fileType == .image }
@@ -76,10 +76,8 @@ final class PhotoVideoThreeDotMenuManager {
             
             ///FE-2455 Removing Print Option - Print option is displayed
             actionTypes.append(contentsOf: [.addToAlbum/*, .print*/])
-
-            if containsPhotos, PrintService.isEnabled, isPrintShow {
-                actionTypes.append(.print)
-            }
+            
+            actionTypes.append(.hide)
             
             /// remove .deleteDeviceOriginal if need
             MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: remoteItems) { duplicates in

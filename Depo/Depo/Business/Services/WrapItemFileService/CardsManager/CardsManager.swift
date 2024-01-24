@@ -45,6 +45,7 @@ enum OperationType: String {
     case paycell                    = "PAYCELL"
     case drawCampaign               = "DRAW_CAMPAIGN"
     case milliPiyango               = "MILLIPIYANGO"
+//    case biOgrenci                  = "BI_OGRENCI"
 }
 
 typealias BlockObject = VoidHandler
