@@ -2307,3 +2307,4 @@ then {11,99 TRY/Month}*/
 "photo_max_selection_body" = "En fazla %@ adet fotoğraf baskıya gönderebilirsin.";
 "set_recovery_mail_success" = "Kurtarma mailiniz oluşturuldu.";
 "set_recoverymail_securityquestion_success" = "Kurtarma mailiniz ve güvenlik sorunuz oluşturuldu.";
+"settings_set_password_apple_warning" = "Şifreni belirleyebilmek için öncelikle Apple Hesabın ile lifebox’a giriş yapmalısın.";

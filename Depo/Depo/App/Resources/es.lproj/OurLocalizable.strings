@@ -2266,10 +2266,6 @@ then {11,99 TRY/Month}*/
 "dont_miss_opportunity" = "";
 "print_package_print_firm" = "Las fotos serán impresas por una imprenta contratada.";
 "sync_in_progress_delete_is_not_allowed" = "Tus fotos están siendo preparadas, no puedes borrarlas en este momento. Vuelva a intentarlo más tarde.";
-"connected_devices" = "";
-"scan_qr_code" = "";
-"scan_qr_code_info" = "";
-"qr_code_try_again" = "";
 "connected_devices" = "Conectar Dispositivo";
 "scan_qr_code" = "Escanear Código QR";
 "scan_qr_code_info" = "Escanee el código QR del dispositivo que desea conectar.";
@@ -2279,3 +2275,4 @@ then {11,99 TRY/Month}*/
 "photo_max_selection_body" = "";
 "set_recovery_mail_success" = "";
 "set_recoverymail_securityquestion_success" = "";
+"settings_set_password_apple_warning" = "";

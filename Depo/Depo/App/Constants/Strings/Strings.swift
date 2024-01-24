@@ -374,4 +374,5 @@ enum Strings: String, Localizable {
     case qrCodeTryAgain = "qr_code_try_again"
     case setRecoveryMailSuccess = "set_recovery_mail_success"
     case setRecoveryMailSecurityQuestionSuccess = "set_recoverymail_securityquestion_success"
+    case settingsSetPasswordApppleWarning = "settings_set_password_apple_warning"
 }

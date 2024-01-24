@@ -628,7 +628,7 @@ extension UserProfileViewController: UserProfileViewInput {
             present(popup, animated: true)
         case .apple:
             let popUp = PopUpController.withDark(title: nil,
-                                             message: localized(.settingsChangePasswordAppleWarning),
+                                             message: localized(.settingsSetPasswordApppleWarning),
                                              image: .none,
                                              buttonTitle: TextConstants.nextTitle) { vc in
                                              vc.close {
