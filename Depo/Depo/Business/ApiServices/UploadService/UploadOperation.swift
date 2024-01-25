@@ -518,6 +518,7 @@ final class UploadOperation: Operation {
             }
             self.outputItem?.uuid = parameters.tmpUUID
             self.outputItem?.isLocalItem = false
+            self.outputItem?.status = .uploaded
             
             //TODO: remove this in the future
             if let size = (parameters as? SimpleUpload)?.fileSize,
