@@ -248,6 +248,11 @@ extension ConnectedAccountsViewController: AppleGoogleAccountConnectionCellDeleg
                                          })
         popUp.open()
     }
+    
+    func changeEmailRequiredPopup(type: AppleGoogleUserType) {
+        let navController = RouterVC().changeEmailPopupForAppleGoogleLoginDisconnect(disconnectAppleGoogleLogin: true)
+        RouterVC().presentViewController(controller: navController)
+    }
 
 }
 

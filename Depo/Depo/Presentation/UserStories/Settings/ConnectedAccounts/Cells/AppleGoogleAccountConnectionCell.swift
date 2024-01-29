@@ -13,6 +13,7 @@ protocol AppleGoogleAccountConnectionCellDelegate: AnyObject {
     func showPasswordRequiredPopup(type: AppleGoogleUserType)
     func appleGoogleDisconnectFailed(type: AppleGoogleUserType)
     func connectGoogleLogin(callback: @escaping (Bool) -> Void)
+    func changeEmailRequiredPopup(type: AppleGoogleUserType)
 }
 
 class AppleGoogleAccountConnectionCell: UITableViewCell {
@@ -185,6 +186,9 @@ extension AppleGoogleAccountConnectionCell {
                 self.appleSwitch.setOn(true, animated: false)
                 if error == .passwordRequired {
                     self.delegate?.showPasswordRequiredPopup(type: .apple)
+                }
+                if error == .emailChangeRequired {
+                    self.delegate?.changeEmailRequiredPopup(type: .apple)
                 }
             case .badRequest:
                 self.appleSwitch.setOn(true, animated: false)
