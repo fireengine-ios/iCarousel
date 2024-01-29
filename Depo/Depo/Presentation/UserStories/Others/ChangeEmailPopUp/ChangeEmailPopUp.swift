@@ -67,15 +67,21 @@ final class ChangeEmailPopUp: BaseChangeEmailPopUp {
         appleGoogleService.disconnectAppleGoogleLogin(type: type) { disconnect in
             switch disconnect {
             case .success:
-                self.stopActivityIndicator()
-                ItemOperationManager.default.appleGoogleLoginDisconnected(type: type)
-                self.backToVerificationPopup()
-            case .preconditionFailed, .badRequest:
+                self.successDisconnect(with: type)
+            case .preconditionFailed:
+                self.successDisconnect(with: type)
+            case .badRequest:
                 self.hideSpinnerIncludeNavigationBar()
                 UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater) {
                     self.dismiss(animated: true)
                 }
             }
         }
+    }
+    
+    private func successDisconnect(with type: AppleGoogleUserType) {
+        self.stopActivityIndicator()
+        ItemOperationManager.default.appleGoogleLoginDisconnected(type: type)
+        self.backToVerificationPopup()
     }
 }
