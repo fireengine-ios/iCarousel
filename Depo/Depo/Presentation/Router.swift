@@ -1283,6 +1283,16 @@ class RouterVC: NSObject {
 
         return controller
     }
+    
+    func changeEmailPopupForAppleGoogleLoginDisconnect(disconnectAppleGoogleLogin: Bool) -> ChangeEmailPopUp {
+        let controller = ChangeEmailPopUp()
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        controller.disconnectAppleGoogleLogin = disconnectAppleGoogleLogin
+        
+        return controller
+    }
 
 
     // MARK: - Spotify

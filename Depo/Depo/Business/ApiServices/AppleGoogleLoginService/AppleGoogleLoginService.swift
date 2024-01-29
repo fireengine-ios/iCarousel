@@ -18,6 +18,7 @@ enum AppleGoogeLoginError: String, CaseIterable {
     case passwordRequired      = "PASSWORD_REQUIRED"
     case emailDomainNotAllowed = "EMAIL_DOMAIN_IS_NOT_ALLOWED"
     case appleInvalidToken     = "APPLE_TOKEN_IS_INVALID"
+    case emailChangeRequired   = "EMAIL_CHANGE_REQUIRED"
     case unknown               = ""
     
     var errorMessage: String? {
@@ -32,6 +33,8 @@ enum AppleGoogeLoginError: String, CaseIterable {
             return ""
         case .emailDomainNotAllowed:
             return localized(.emailDomainNotAllowed)
+        case .emailChangeRequired:
+            return ""
         case .unknown:
             return TextConstants.temporaryErrorOccurredTryAgainLater
         }
