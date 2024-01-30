@@ -34,14 +34,14 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.distanceFilter = 100 //kCLDistanceFilterNone - any changes
         locationManager.pausesLocationUpdatesAutomatically = false
-        
     }
     
     func authorizationStatus(_ completion: @escaping (_ status: CLAuthorizationStatus) -> Void) {
-        if !CLLocationManager.locationServicesEnabled() {
-            completion(.restricted)
-            return
-        }
+        DispatchQueue.global().async {
+            if !CLLocationManager.locationServicesEnabled() {
+                completion(.restricted)
+                return
+            }}
         
         let currentStatus = CLLocationManager.authorizationStatus()
         if currentStatus == .notDetermined {
