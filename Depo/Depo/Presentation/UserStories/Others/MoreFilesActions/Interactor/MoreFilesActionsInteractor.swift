@@ -605,7 +605,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         if !CacheManager.shared.isCacheActualized {
             UIApplication.showCustomAlert(title: "",
                                           message: localized(.syncInProgressDeleteIsNotAllowed),
-                                          image: .custom(Image.popup_info.image),
+                                          image: .custom(Image.popupMemories.image),
                                           buttonTitle: TextConstants.ok)
             return
         }
