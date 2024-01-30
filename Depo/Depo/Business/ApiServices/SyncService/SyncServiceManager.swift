@@ -316,13 +316,14 @@ extension SyncServiceManager {
             return
         }
         
+        let intervalInSecondsBetweenAutoSyncItemsAppending = FirebaseRemoteConfig.shared.autosyncStartDuration
         let timeInterval = Date().timeIntervalSince(lastChangeTime)
         
-        if timeInterval > NumericConstants.intervalInSecondsBetweenAutoSyncItemsAppending {
+        if timeInterval > intervalInSecondsBetweenAutoSyncItemsAppending {
             checkReachabilityAndSettings(reachabilityChanged: false, newItems: true)
             newItemsToAppend.removeAll()
         } else {
-            let intervalToSyncAfter = Int(NumericConstants.intervalInSecondsBetweenAutoSyncItemsAppending - timeInterval)
+            let intervalToSyncAfter = Int(intervalInSecondsBetweenAutoSyncItemsAppending - timeInterval)
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(intervalToSyncAfter)) {
                 self.checkItemsToAppend()
             }

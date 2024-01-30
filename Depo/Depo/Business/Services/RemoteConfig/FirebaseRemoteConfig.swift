@@ -33,6 +33,7 @@ private struct RemoteConfigKeys {
     static let timelineEnabled = "yilsonu_timeline_enabled_client"
     static let printMonthlyPhotoSize = "print_monthly_photo_size"
     static let displayConnectAccount = "display_connect_account"
+    static let autosyncStartDuration = "autosync_start_duration"
 }
 
 final class FirebaseRemoteConfig {
@@ -50,6 +51,11 @@ final class FirebaseRemoteConfig {
         #endif
         remoteConfig.configSettings = settings
         remoteConfig.setDefaults(fromPlist: "FirebaseRemoteConfigDefaults")
+    }
+    
+    var autosyncStartDuration: Double {
+        let key = RemoteConfigKeys.autosyncStartDuration
+        return remoteConfig.configValue(forKey: key).numberValue.doubleValue
     }
     
     var displayConnectAccount: Bool {
