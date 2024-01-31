@@ -2224,4 +2224,15 @@ then {11,99 TRY/Month}*/
 "free_up_space_title_settings" = "Звільніть місце в пам'яті вашого телефону.";
 "recommended" = "Рекомендований";
 "dont_miss_opportunity" = "";
-"print_package_print_firm" = "";
+"print_package_print_firm" = "Фотографії будуть надруковані поліграфічною компанією, з якою укладено договір.";
+"sync_in_progress_delete_is_not_allowed" = "Йде підготовка ваших фотографій, ви не можете видалити їх в даний момент. Будь ласка, повторіть спробу пізніше.";
+"connected_devices" = "Підключити Пристрій";
+"scan_qr_code" = "Відскануйте QR-код";
+"scan_qr_code_info" = "Відскануйте QR-код на пристрої, який ви хочете підключити.";
+"qr_code_try_again" = "Не вдалося відсканувати QR-код. Будь ласка, спробуйте ще раз.";
+"print" = "";
+"photo_max_selection_title" = "";
+"photo_max_selection_body" = "";
+"set_recovery_mail_success" = "";
+"set_recoverymail_securityquestion_success" = "";
+"settings_set_password_apple_warning" = "";

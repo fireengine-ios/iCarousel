@@ -29,4 +29,5 @@ protocol SettingsInteractorInput {
     func populateDataForCells()
     func fetchChatbotRemoteConfig()
     func fetchContactUsRemoteConfig()
+    func fetchNotifications()
 }

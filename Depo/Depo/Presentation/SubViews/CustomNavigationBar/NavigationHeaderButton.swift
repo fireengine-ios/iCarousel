@@ -17,9 +17,15 @@ final class NavigationHeaderButton: UIButton {
         return view
     }()
     
+    private let singletonStorage = SingletonStorage.shared
+    private var topConstant: CGFloat = -2.0
+    private var trailingConstant: CGFloat = 4.0
+    private var heightWidthAnchor: CGFloat = 18.0
+    
     convenience init(type: `Type`, target: Any? = nil, action: Selector? = nil) {
         self.init()
         setImage(type.image?.image, for: .normal)
+        setProfilePhotos(type: type)
         accessibilityIdentifier = type.accessibilityId
         accessibilityLabel = type.accessibilityLabel
         if let target = target, let action = action {
@@ -32,19 +38,36 @@ final class NavigationHeaderButton: UIButton {
     }
 
     override var intrinsicContentSize: CGSize {
-        CGSize(width: 28, height: 28)
+        CGSize(width: 42, height: 42)
     }
     
+    private func setProfilePhotos(type: `Type`) {
+        if type == .settings {
+            if singletonStorage.isSetProfilePhotoImage {
+                setImage(singletonStorage.profilePhotoImage.image, for: .normal)
+                imageView?.layer.borderWidth = 1
+                imageView?.layer.cornerRadius = 21
+                imageView?.layer.borderColor = UIColor.black.cgColor
+                imageView?.contentMode = .scaleAspectFill
+            }
+        }
+    }
     
 }
 
 extension NavigationHeaderButton {
     
     private func addNotification() {
+        if singletonStorage.isSetProfilePhotoImage {
+            topConstant = -6
+            trailingConstant = 8
+            heightWidthAnchor = 20
+        }
+        
         let earingView = UIView()
         earingView.isHidden = true
         earingView.backgroundColor = AppColor.notification.color
-        earingView.layer.cornerRadius = 9
+        earingView.layer.cornerRadius = heightWidthAnchor / 2
         
         earingView.addSubview(notificationLabel)
         notificationLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -54,10 +77,10 @@ extension NavigationHeaderButton {
         
         addSubview(earingView)
         earingView.translatesAutoresizingMaskIntoConstraints = false
-        earingView.topAnchor.constraint(equalTo: topAnchor, constant: -6).activate()
-        earingView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 10).activate()
-        earingView.heightAnchor.constraint(equalToConstant: 18).activate()
-        earingView.widthAnchor.constraint(equalToConstant: 18).activate()
+        earingView.topAnchor.constraint(equalTo: topAnchor, constant: topConstant).activate()
+        earingView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: trailingConstant).activate()
+        earingView.heightAnchor.constraint(equalToConstant: heightWidthAnchor).activate()
+        earingView.widthAnchor.constraint(equalToConstant: heightWidthAnchor).activate()
     }
     
     func setnotificationCount(with number: Int) {

@@ -165,7 +165,7 @@ final class InstaPickRoutingService {
         
         let popup = PopUpController.with(title: TextConstants.analyzeHistoryPopupTitle,
                                          message: TextConstants.analyzeHistoryPopupMessage,
-                                         image: .custom(UIImage(named: "popup_info")),
+                                         image: .custom(UIImage(named: "popupMemories")),
                                          firstButtonTitle: TextConstants.cancel,
                                          secondButtonTitle: TextConstants.instaPickButtonNoAnalysis,
                                          firstAction: {  controller in

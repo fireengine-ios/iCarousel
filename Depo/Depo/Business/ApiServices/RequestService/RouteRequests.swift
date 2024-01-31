@@ -50,6 +50,8 @@ struct RouteRequests {
     
     static let drawCampaignUrl = "https://www.turkcell.com.tr/kampanyalar/diger-kampanyalarimiz/lifebox-kontratli-paket-al-lifeboxi-kullan-iphone-kazan"
     
+    static let biOgrenciUrl = "https://biogrenci.com/firsat/lifebox-100gb-saklama-alani-tum-ogrencilere-2-ay-ucretsiz"
+    
     static let baseContactsUrlShort: URL = {
         switch currentServerEnvironment {
         case .test: return URL(string: "https://adepodev-contactsync.turkcell.com.tr/")!
@@ -503,7 +505,7 @@ struct RouteRequests {
     // MARK: - Apple Login
     static let appleLogin = "auth/apple?rememberMe=true"
     static let appleLoginStatus = baseUrl +/ "apple/login/status"
-    static let appleLoginDisconnect = baseUrl +/ "apple/login/disconnect"
+    static let appleLoginDisconnect = baseUrl +/ "v2/apple/login/disconnect"
     static let appleLoginConnect = baseUrl +/ "apple/login/connect"
     
     // MARK: - Paycell Campaign
@@ -541,4 +543,7 @@ struct RouteRequests {
     static let updateAdress = "v1/address/%d"
     static let createOrder = baseUrl +/ "v1/photo-print/order"
     static let getOrder = baseUrl +/ "v1/photo-print/order"
+    
+    //MARK: -TOGG QR Code
+    static let readQrCode = baseUrl +/ "auth/qrcode/referenceToken"
 }

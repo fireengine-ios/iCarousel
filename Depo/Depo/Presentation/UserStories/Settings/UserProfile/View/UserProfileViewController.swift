@@ -189,6 +189,7 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
         //birthdayDetailView.textField.delegate = self
         
         output.viewIsReady()
+        NotificationCenter.default.addObserver(self,selector: #selector(onReadyButtonAction),name: .startUpdateProfileFlow, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -341,7 +342,7 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
             let controller = PopUpController.with(
                 title: TextConstants.registrationEmailPopupTitle,
                 message: message,
-                image: .error,
+                image: .none,
                 buttonTitle: TextConstants.ok,
                 action: { [weak self] vc in
                     vc.close { [weak self] in
@@ -626,10 +627,15 @@ extension UserProfileViewController: UserProfileViewInput {
             popup.delegate = self
             present(popup, animated: true)
         case .apple:
-            let popup = RouterVC().messageAndButtonPopup(with: localized(.settingsChangePasswordAppleWarning),
-                                                         buttonTitle: TextConstants.nextTitle)
-            popup.delegate = self
-            present(popup, animated: true)
+            let popUp = PopUpController.withDark(title: nil,
+                                             message: localized(.settingsSetPasswordApppleWarning),
+                                             image: .none,
+                                             buttonTitle: TextConstants.nextTitle) { vc in
+                                             vc.close {
+                                                 self.onActionButton()
+                                             }
+            }
+            popUp.open()
         case .appleGoogle:
             let popup = RouterVC().appleGoogleUpdatePasswordPopup()
             popup.delegate = self

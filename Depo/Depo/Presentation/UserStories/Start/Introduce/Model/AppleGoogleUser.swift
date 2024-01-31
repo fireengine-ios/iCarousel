@@ -17,4 +17,16 @@ struct AppleGoogleUser {
 enum AppleGoogleUserType {
     case apple
     case google
+    case other
+    
+    var value: String {
+        switch self {
+        case .apple:
+            return "apple"
+        case .google:
+            return "google"
+        case .other:
+            return "other"
+        }
+    }
 }

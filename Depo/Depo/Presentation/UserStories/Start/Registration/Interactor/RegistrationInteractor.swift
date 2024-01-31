@@ -156,6 +156,14 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 self.analyticsService.track(event: .signUp)
 
                 SingletonStorage.shared.isJustRegistered = true
+                
+                if let signUpType = userInfo.appleGoogleUser?.type {
+                    if signUpType == .apple {
+                        SingletonStorage.shared.signUpTypeForAppleGoogle = AppleGoogleUserType.apple.value
+                    } else {
+                        SingletonStorage.shared.signUpTypeForAppleGoogle = AppleGoogleUserType.other.value
+                    }
+                }
 
                 // Passing etkAuth and globalPermAuth to PhoneVerification
                 // LB-1008 never send false for etkAuth & kvkkAuth

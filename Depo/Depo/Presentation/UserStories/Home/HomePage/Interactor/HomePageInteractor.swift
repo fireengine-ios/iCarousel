@@ -42,9 +42,8 @@ final class HomePageInteractor: HomePageInteractorInput {
 
     func viewIsReady() {
         homeCardsService.delegate = self
-        //FreeAppSpace.session.showFreeUpSpaceCard()
+        FreeAppSpace.session.showFreeUpSpaceCard()
         FreeAppSpace.session.checkFreeUpSpace()
-        setupAutoSyncTriggering()
 
         getQuotaInfo()
         getAccountInfo()
@@ -113,13 +112,6 @@ final class HomePageInteractor: HomePageInteractorInput {
                                             eventLabel: .quotaUsed(quotaUsed))
     }
     
-    //MARK: autosync triggering
-    
-    private func setupAutoSyncTriggering() {
-        SyncServiceManager.shared.setupAutosync()
-        SyncServiceManager.shared.update()
-    }
-    
     //MARK: private requests
     private func getCampaignStatus() {
         campaignService.getPhotopickDetails { [weak self] result in
@@ -180,11 +172,6 @@ final class HomePageInteractor: HomePageInteractorInput {
             switch response {
             case .success(let result):
                 AuthoritySingleton.shared.refreshStatus(with: result)
-                
-                if self?.isFirstAuthorityRequest == true {
-                    AnalyticsService.updateUser()
-                    self?.isFirstAuthorityRequest = false
-                }
 
                 SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] response in
                     DispatchQueue.main.async {

@@ -10,6 +10,7 @@ import Foundation
 
 struct AccountPath {
     static let accountBase = "account/"
+    static let v2 = "v2/"
     
     static let info = accountBase + "info"
     static let quota = accountBase + "quotaInfo"
@@ -24,7 +25,9 @@ struct AccountPath {
     static let updateUserEmail = accountBase + "email"
     static let updateUserRecoveryEmail = accountBase + "updateRecoveryEmail"
     static let updatePhoneNumber = accountBase + "updatePhoneNumber"
+    static let updatePhoneNumberV2 = v2 + accountBase + "updatePhoneNumber"
     static let verifyPhoneNumber = accountBase + "verifyPhoneNumberToUpdate"
+    static let verifyPhoneNumberV2 = v2 + accountBase + "verifyPhoneNumberToUpdate"
     static let securitySettings = "auth/settings"
     static let faceImageAllowed = accountBase + "setting/faceImageAllowed"
     
@@ -106,7 +109,7 @@ class UserPhoneNumberParameters: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: AccountPath.updatePhoneNumber, relativeTo: super.patch)!
+        return URL(string: AccountPath.updatePhoneNumberV2, relativeTo: super.patch)!
     }
 }
 
@@ -128,7 +131,7 @@ class VerifyPhoneNumberParameter: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: AccountPath.verifyPhoneNumber, relativeTo: super.patch)!
+        return URL(string: AccountPath.verifyPhoneNumberV2, relativeTo: super.patch)!
     }
     
 }

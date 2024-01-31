@@ -56,6 +56,7 @@ final class AutoSyncViewController: BaseViewController, NibInit {
         super.viewWillDisappear(animated)
         
         if fromSettings {
+            dataSource.setSyncOperationForAutoSyncSwither()
             storageVars.isAutoSyncSet = true
             output.save(settings: dataSource.autoSyncSetting, albums: dataSource.autoSyncAlbums)
         }
@@ -116,8 +117,10 @@ final class AutoSyncViewController: BaseViewController, NibInit {
     // MARK: buttons actions
     
     @IBAction func onStartUsingButton() {
-        
+        dataSource.setSyncOperationForAutoSyncSwither()
         let isFirstLoginControl = storageVars.highlightedIsFirstLogin
+        
+        NetmeraService.updateUser()
         
         if !isFirstLoginControl {
             let popup = PopUpController.with(title: nil, message: localized(.syncPageOfferPopUp), image: .none, firstButtonTitle: TextConstants.noForUpgrade, secondButtonTitle: TextConstants.faceImageYes,

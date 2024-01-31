@@ -256,19 +256,43 @@ extension IntroduceViewController: ASAuthorizationControllerPresentationContextP
 
 extension IntroduceViewController: IntroduceViewInput {
     func showGoogleLoginPopup(with user: AppleGoogleUser) {
-        let popUp = RouterVC().loginWithGooglePopup
-        popUp.user = user
-        popUp.delegate = self
-        present(popUp, animated: true)
+        let description = user.type == .google ? localized(.googleUserExistBody) : localized(.appleUserExistBody)
+        let message = String(format: description, user.email)
+        let title = user.email
+        
+        let popUp = PopUpController.withDark(title: title,
+                                         message: message,
+                                         image: .none,
+                                         buttonTitle: TextConstants.nextTitle) { vc in
+                                         vc.close {
+                                             self.onNextButton()
+                                         }
+        }
+        popUp.open()
     }
     
-    func signUpRequiredMessage() {
-        let popUp = PopUpController.with(title: nil, message: TextConstants.forgotPasswordErrorNotRegisteredText, image: .logout, buttonTitle: TextConstants.ok)
+    func signUpRequiredMessage(for user: AppleGoogleUser) {
+        let popUp = PopUpController.with(title: nil,
+                                         message: TextConstants.loginScreenNeedSignUpError,
+                                         image: .logout,
+                                         firstButtonTitle: TextConstants.registerTitle,
+                                         secondButtonTitle:TextConstants.cancel,
+                                         firstAction: { [weak self] vc in
+                                            DispatchQueue.toMain { [weak self] in
+                                                self?.dismiss(animated: false, completion: {
+                                                    self?.output.goToSignUpWithApple(for: user)
+                                                })
+                                            }
+                                        }, secondAction: { vc in
+                                            DispatchQueue.toMain { [weak self] in
+                                                self?.dismiss(animated: false)
+                                            }
+                                        })
         popUp.open()
     }
 }
 
-extension IntroduceViewController: LoginWithGooglePopupDelegate {
+extension IntroduceViewController {
     func onNextButton() {
         dismiss(animated: true)
         guard let user = user else { return }

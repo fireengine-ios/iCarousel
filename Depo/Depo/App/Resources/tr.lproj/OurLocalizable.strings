@@ -2291,3 +2291,20 @@ then {11,99 TRY/Month}*/
 "recommended" = "Önerilen";
 "dont_miss_opportunity" = "Fırsatı Kaçırma";
 "print_package_print_firm" = "Fotoğraflar anlaşmalı baskı firması tarafından basılacaktır.";
+"sync_in_progress_delete_is_not_allowed" = "Fotoğraflarınız hazırlanıyor, şu anda silme işlemi yapamazsınız. Lütfen daha sonra tekrar deneyin.";
+
+/*Fuzzy*/
+"connected_devices" = "Cihaz Bağla";
+"scan_qr_code" = "QR Kodu Tara";
+"scan_qr_code_info" = "Bağlamak istediğiniz cihazınız üzerindeki QR kodu telefonunuzdan okutunuz.";
+"qr_code_try_again" = "QR kod tarama başarısız. Lütfen tekrar deneyiniz.";
+"print" = "Baskı";
+
+/*Fuzzy*/
+"photo_max_selection_title" = "%@ Fotoğraf Hakkın Bulunuyor";
+
+/*Fuzzy*/
+"photo_max_selection_body" = "En fazla %@ adet fotoğraf baskıya gönderebilirsin.";
+"set_recovery_mail_success" = "Kurtarma mailiniz oluşturuldu.";
+"set_recoverymail_securityquestion_success" = "Kurtarma mailiniz ve güvenlik sorunuz oluşturuldu.";
+"settings_set_password_apple_warning" = "Şifreni belirleyebilmek için öncelikle Apple Hesabın ile lifebox’a giriş yapmalısın.";

@@ -34,14 +34,14 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.distanceFilter = 100 //kCLDistanceFilterNone - any changes
         locationManager.pausesLocationUpdatesAutomatically = false
-        
     }
     
     func authorizationStatus(_ completion: @escaping (_ status: CLAuthorizationStatus) -> Void) {
-        if !CLLocationManager.locationServicesEnabled() {
-            completion(.restricted)
-            return
-        }
+        DispatchQueue.global().async {
+            if !CLLocationManager.locationServicesEnabled() {
+                completion(.restricted)
+                return
+            }}
         
         let currentStatus = CLLocationManager.authorizationStatus()
         if currentStatus == .notDetermined {
@@ -84,11 +84,13 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         debugLog("LocationManager startUpdateLocationInBackground")
         let settings = AutoSyncDataStorage().settings
         
-        guard settings.isAutoSyncEnabled,
-            CLLocationManager.locationServicesEnabled(),
-            CLLocationManager.authorizationStatus() == .authorizedAlways
-        else {
-            return
+        DispatchQueue.global().async {
+            guard settings.isAutoSyncEnabled,
+                CLLocationManager.locationServicesEnabled(),
+                CLLocationManager.authorizationStatus() == .authorizedAlways
+            else {
+                return
+            }
         }
         
         locationManager.allowsBackgroundLocationUpdates = true
@@ -101,17 +103,19 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         let settings = AutoSyncDataStorage().settings
         
         if settings.isAutoSyncEnabled {
-            if CLLocationManager.locationServicesEnabled() {
-                if CLLocationManager.authorizationStatus() == .notDetermined {
-                    passcodeStorage.systemCallOnScreen = true
-                    locationManager.requestAlwaysAuthorization()
-                } else {
-                    locationManager.allowsBackgroundLocationUpdates = true
-                    locationManager.startMonitoringSignificantLocationChanges()
-                }
-//             else {
-//                showIfNeedLocationPermissionAllert()
+            DispatchQueue.global().async {
+                if CLLocationManager.locationServicesEnabled() {
+                    if CLLocationManager.authorizationStatus() == .notDetermined {
+                        self.passcodeStorage.systemCallOnScreen = true
+                        self.locationManager.requestAlwaysAuthorization()
+                    } else {
+                        self.locationManager.allowsBackgroundLocationUpdates = true
+                        self.locationManager.startMonitoringSignificantLocationChanges()
+                    }
+    //             else {
+    //                showIfNeedLocationPermissionAllert()
 
+                }
             }
         }
     }

@@ -2213,3 +2213,14 @@ then {11,99 TRY/Month}*/
 "recommended" = "რეკომენდირებულია";
 "dont_miss_opportunity" = "";
 "print_package_print_firm" = "";
+"sync_in_progress_delete_is_not_allowed" = "";
+"connected_devices" = "";
+"scan_qr_code" = "";
+"scan_qr_code_info" = "შენი ფოტოები მზადდება, ამჯერად ვერ წაშლი. გთხოვთ, სცადო მოგვიანებით.";
+"qr_code_try_again" = "QR კოდის დასკანირება ვერ მოხერხდა. გთხოვთ, სცადო მოგვიანებით.";
+"print" = "";
+"photo_max_selection_title" = "";
+"photo_max_selection_body" = "";
+"set_recovery_mail_success" = "";
+"set_recoverymail_securityquestion_success" = "";
+"settings_set_password_apple_warning" = "";

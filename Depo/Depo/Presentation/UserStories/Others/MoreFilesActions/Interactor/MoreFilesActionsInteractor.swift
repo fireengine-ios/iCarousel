@@ -602,6 +602,14 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             }
         }
         
+        if !CacheManager.shared.isCacheActualized {
+            UIApplication.showCustomAlert(title: "",
+                                          message: localized(.syncInProgressDeleteIsNotAllowed),
+                                          image: .custom(Image.popupMemories.image),
+                                          buttonTitle: TextConstants.ok)
+            return
+        }
+        
         trackScreen(.fileOperationConfirmPopup(.trash))
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeleteConfirmPopUp())
         

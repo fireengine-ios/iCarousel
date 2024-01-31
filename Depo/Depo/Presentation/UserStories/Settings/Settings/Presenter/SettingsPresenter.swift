@@ -67,6 +67,7 @@ extension SettingsPresenter: SettingsViewOutput {
         
         startAsyncOperation()
         interactor.getUserInfo()
+        interactor.fetchNotifications()
     }
     
     func onLogout() {
@@ -191,10 +192,22 @@ extension SettingsPresenter: SettingsViewOutput {
     func goToNotification() {
         router.goToNotification()
     }
+    
+    func goToConnectedDevice() {
+        router.goToConnectedDevice()
+    }
 }
 
 // MARK: - SettingsInteractorOutput
 extension SettingsPresenter: SettingsInteractorOutput {
+    
+    func notifSuccess(with notifications: [NotificationServiceResponse]) {
+        view.didGetNotifications(notifications)
+    }
+    
+    func notifFailed(errorResponse: ErrorResponse) {
+        return
+    }
     
     func cellsDataForSettings(isChatbotShown: Bool) {
         view.prepareCellsData(isChatbotShown: isChatbotShown)

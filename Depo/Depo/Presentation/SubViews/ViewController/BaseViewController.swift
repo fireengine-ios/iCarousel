@@ -47,6 +47,15 @@ class BaseViewController: ViewController {
                                                selector: #selector(hideKeyboard),
                                                name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(setProfilePhoto),
+                                               name: .setProfilePhoto,
+                                               object: nil)
+    }
+    
+    @objc private func setProfilePhoto() {
+        setDefaultNavigationHeaderActions()
     }
     
     override func viewWillAppear(_ animated: Bool) {

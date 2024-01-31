@@ -12,6 +12,8 @@ class SettingsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var separatorView: UIView!
+    @IBOutlet weak var notificationImage: UIImageView!
+    @IBOutlet weak var notificationCount: UILabel!
     
 
     override func awakeFromNib() {
@@ -40,4 +42,11 @@ class SettingsTableViewCell: UITableViewCell {
         self.backgroundColor = background ?? AppColor.secondaryBackground.color
     }
     
+    func configureNotification(isHidden: Bool, notifCount: Int) {
+        notificationImage.isHidden = isHidden || notifCount == 0
+        notificationCount.isHidden = isHidden || notifCount == 0
+        
+        let strNum = String(notifCount)
+        notificationCount.text = notifCount > 9 ? "9+" : strNum
+    }
 }

@@ -14,5 +14,5 @@ protocol IntroduceInteractorOutput: AnyObject {
     func continueWithAppleGoogleFailed(with error: AppleGoogeLoginError)
     func showTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse)
     func asyncOperationStarted()
-    func signUpRequiredMessage()
+    func signUpRequiredMessage(for user: AppleGoogleUser)
 }

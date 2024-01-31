@@ -61,6 +61,8 @@ struct HeaderConstant {
     static let uploadType = "X-Object-Meta-Upload-Sync-Type"
     static let applicationLifecycleState = "X-Object-Meta-Upload-XG-Type"
     static let deviceUuid = "X-Device-Uuid"
+    
+    static let XObjectMetaAlbumUuid = "X-Object-Meta-Album-Uuid"
 }
 
 class RequestHeaders {

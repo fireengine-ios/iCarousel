@@ -225,6 +225,7 @@ enum Image: String, AppImage {
     case divorceCardPlay
     case freeUpCloudBackUp
     case iconBottomSheetConfetti
+    case popup_info
     /// Introduce
     case circleIntoduce
     

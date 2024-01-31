@@ -38,7 +38,7 @@ class BaseChangeEmailPopUp: UIViewController {
     
     @IBOutlet private weak var contentView: UIView! {
         willSet {
-            newValue.backgroundColor = AppColor.secondaryBackground.color
+            newValue.backgroundColor = AppColor.background.color
             newValue.layer.cornerRadius = 15
             newValue.layer.shadowRadius = 15
             newValue.layer.shadowOpacity = 0.5
@@ -53,9 +53,9 @@ class BaseChangeEmailPopUp: UIViewController {
             newValue.titleLabel.text = TextConstants.yourEmail
             newValue.titleLabel.textColor = ColorConstants.coolGrey
             newValue.titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
-            newValue.titleLabel.backgroundColor = AppColor.secondaryBackground.color
-            newValue.textField.backgroundColor = AppColor.secondaryBackground.color
-            newValue.stackView.backgroundColor = AppColor.secondaryBackground.color
+            newValue.titleLabel.backgroundColor = AppColor.background.color
+            newValue.textField.backgroundColor = AppColor.background.color
+            newValue.stackView.backgroundColor = AppColor.background.color
 
             newValue.textField.autocorrectionType = .no
             newValue.textField.autocapitalizationType = .none
@@ -70,9 +70,9 @@ class BaseChangeEmailPopUp: UIViewController {
             newValue.titleLabel.text = TextConstants.confirmYourEmail
             newValue.titleLabel.textColor = ColorConstants.coolGrey
             newValue.titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
-            newValue.titleLabel.backgroundColor = AppColor.secondaryBackground.color
-            newValue.textField.backgroundColor = AppColor.secondaryBackground.color
-            newValue.stackView.backgroundColor = AppColor.secondaryBackground.color
+            newValue.titleLabel.backgroundColor = AppColor.background.color
+            newValue.textField.backgroundColor = AppColor.background.color
+            newValue.stackView.backgroundColor = AppColor.background.color
             
             newValue.textField.autocorrectionType = .no
             newValue.textField.autocapitalizationType = .none

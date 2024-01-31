@@ -118,6 +118,13 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
     private func showSuccessPopup() {
         SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.passwordChangedSuccessfully)
         dismiss(animated: true)
+        NotificationCenter.default.post(name: .startUpdateProfileFlow, object: nil)
+    }
+    
+    private func showSuccessPopupForDisconnectStep() {
+        dismiss(animated: true)
+        let navController = RouterVC().changeEmailPopupForAppleGoogleLoginDisconnect(disconnectAppleGoogleLogin: true)
+        RouterVC().presentViewController(controller: navController)
     }
 
     private func showLogoutPopup() {
@@ -331,7 +338,13 @@ extension PasswordEnterPopup {
                 self.showSuccessPopup()
                 self.hideSpinnerIncludeNavigationBar()
                 ItemOperationManager.default.appleGoogleLoginDisconnected(type: type)
-            case .preconditionFailed, .badRequest:
+            case .preconditionFailed(let error):
+                if error == .emailChangeRequired {
+                    self.showSuccessPopupForDisconnectStep()
+                    self.hideSpinnerIncludeNavigationBar()
+                }
+            case .badRequest:
+                self.hideSpinnerIncludeNavigationBar()
                 UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater) {
                     self.dismiss(animated: true)
                 }

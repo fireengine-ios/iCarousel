@@ -62,8 +62,7 @@ final class CreateCollageAllPhotosSelectionDataSource: CreateCollagePhotoSelecti
                 filteredItems.append(contentsOf: items.filter {
                     guard
                         $0.metadata?.takenDate != nil,
-                        let name = $0.name,
-                        !name.isPathExtensionGif()
+                        let name = $0.name
                     else {
                         return false
                     }

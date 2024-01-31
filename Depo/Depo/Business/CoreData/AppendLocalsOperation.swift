@@ -65,6 +65,7 @@ final class AppendLocalsOperation: Operation {
     }
     
     private func saveLocalMediaItemsPaged(items: [PHAsset], completion: @escaping VoidHandler) {
+        debugLog("saveLocalMediaItemsPaged item count \(items.count)")
         guard !items.isEmpty, !isCancelled, LocalMediaStorage.default.photoLibraryIsAvailible() else {
             completion()
             return

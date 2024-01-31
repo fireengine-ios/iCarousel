@@ -26,10 +26,17 @@ class SingletonStorage {
     private var quotaRequestInFlight = false
     private var quotaPendingCallbacks: [UsagePercenatageCallback] = []
     var progressDelegates = MulticastDelegate<OperationProgressServiceDelegate>()
-    
     var isTwoFactorAuthEnabled: Bool?
-    
     private let resumableUploadInfoService: ResumableUploadInfoService = factory.resolve()
+    var profilePhotoImage = UIImageView()
+    var isSetProfilePhotoImage: Bool = false
+    
+    private static let signUpTypeForAppleGoogleKey = "signUpTypeForAppleGoogleKey"
+    var signUpTypeForAppleGoogle: String {
+        set { UserDefaults.standard.set(newValue, forKey: SingletonStorage.signUpTypeForAppleGoogleKey) }
+        get { return UserDefaults.standard.value(forKey: SingletonStorage.signUpTypeForAppleGoogleKey) as? String ?? AppleGoogleUserType.other.value }
+    }
+    
     
     private static let isEmailVerificationCodeSentKey = "isEmailVerificationCodeSentKeyFor\(SingletonStorage.shared.uniqueUserID)"
     var isEmailVerificationCodeSent: Bool {
@@ -86,7 +93,6 @@ class SingletonStorage {
             completion(false)
         })
     }
-
     
     func getAccountInfoForUser(forceReload: Bool = false, success:@escaping (AccountInfoResponse) -> Void, fail: @escaping FailResponse ) {
         if let info = accountInfo, !forceReload {
@@ -95,7 +101,7 @@ class SingletonStorage {
             AccountService().info(success: { [weak self] accountInfoResponse in
                 if let resp = accountInfoResponse as? AccountInfoResponse {
                     self?.accountInfo = resp
-                    
+                    self?.setProfilePhoto(url: resp.urlForPhoto)
                     self?.resumableUploadInfoService.updateInfo { [weak self] featuresInfo in
                         self?.featuresInfo = featuresInfo
                         ///remove user photo from cache on start application
@@ -116,6 +122,12 @@ class SingletonStorage {
                 }
             })
         }
+    }
+    
+    private func setProfilePhoto(url: URL?) {
+        let profilePhotoUrl = "defaultuser.png"
+        profilePhotoImage.sd_setImage(with: url)
+        isSetProfilePhotoImage = url?.lastPathComponent == profilePhotoUrl ? false : true
     }
     
     func getOverQuotaStatus(completion: @escaping VoidHandler) {

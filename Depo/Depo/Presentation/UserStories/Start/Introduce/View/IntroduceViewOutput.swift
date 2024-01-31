@@ -13,4 +13,5 @@ protocol IntroduceViewOutput {
     func pageChanged(page: Int)
     func onSignInWithAppleGoogle(with user: AppleGoogleUser)
     func goToLogin(with user: AppleGoogleUser)
+    func goToSignUpWithApple(for user: AppleGoogleUser)
 }

@@ -10,6 +10,12 @@ import Foundation
 import UIKit
 import Typist
 
+enum SecurityScreenEntryType {
+    case recoveryMail
+    case securityQuestion
+    case all
+}
+
 final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHandler {
 
     //MARK: -IBOutlets
@@ -91,10 +97,12 @@ final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHan
         return view
     }()
     
-    private lazy var closeSelfButton = UIBarButtonItem(image: NavigationBarImage.back.image,
+    private lazy var closeSelfButton = UIBarButtonItem(image: nil,
                                                         style: .plain,
                                                         target: self,
-                                                        action: #selector(closeSelf))
+                                                        action: nil)
+    
+    
     
     var fromSettings: Bool = true
     var fromHomeScreen: Bool = true
@@ -126,6 +134,7 @@ final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHan
         navigationItem.leftBarButtonItem = closeSelfButton
         
         title = TextConstants.userProfileSecretQuestion
+        
     }
     
     private func setSaveButton(isActive: Bool) {
@@ -158,7 +167,9 @@ final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHan
                   return
               }
         
-        let shouldButtonActive = (!secretAnswer.isEmpty && !captchaAnswer.isEmpty) || !recoveryEmail.isEmpty
+        let type = SingletonStorage.shared.signUpTypeForAppleGoogle
+        let shouldButtonActive = type == AppleGoogleUserType.apple.value ? (!recoveryEmail.isEmpty) : (!secretAnswer.isEmpty && !captchaAnswer.isEmpty) || !recoveryEmail.isEmpty
+        
         setSaveButton(isActive: shouldButtonActive)
     }
     
@@ -220,24 +231,25 @@ final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHan
         myGroup.notify(queue: .main) {
             self.handleApiCalls()
         }
+        SingletonStorage.shared.signUpTypeForAppleGoogle = AppleGoogleUserType.other.value
     }
     
     private func handleApiCalls() {
         if securityQuestionOperation == nil && recoveryEmailOperation != nil {
-            recoveryEmailOperation?.isSuccess == true ? questionWasSuccessfullyUpdated()
+            recoveryEmailOperation?.isSuccess == true ? questionWasSuccessfullyUpdated(type: .recoveryMail)
             : UIApplication.showErrorAlert(message: recoveryEmailOperation?.errorMessage ?? "")
             return
         }
         
         if securityQuestionOperation != nil && recoveryEmailOperation == nil {
-            securityQuestionOperation?.isSuccess == true ? questionWasSuccessfullyUpdated()
+            securityQuestionOperation?.isSuccess == true ? questionWasSuccessfullyUpdated(type: .securityQuestion)
             : handleServerErrors(securityQuestionOperation?.errorMessage ?? .unknown)
             return
         }
         
         if securityQuestionOperation != nil && recoveryEmailOperation != nil {
             if securityQuestionOperation?.isSuccess == true && recoveryEmailOperation?.isSuccess == true {
-                questionWasSuccessfullyUpdated()
+                questionWasSuccessfullyUpdated(type: .all)
             } else if securityQuestionOperation?.isSuccess == true && recoveryEmailOperation?.isSuccess == false {
                 showSecurityWarningPopup(errorMessage: recoveryEmailOperation?.errorMessage ?? "",
                                          warningType: .email)
@@ -262,10 +274,22 @@ final class SecurityInfoViewController: BaseViewController, NibInit, KeyboardHan
 
 // MARK: - Presenter
 extension SecurityInfoViewController {
-    private func questionWasSuccessfullyUpdated() {
+    private func questionWasSuccessfullyUpdated(type: SecurityScreenEntryType) {
         RouterVC().popViewController()
-        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.userProfileSetSecretQuestionSuccess)
+        let message = successMessage(type: type)
+        SnackbarManager.shared.show(type: .nonCritical, message: message)
         //dismiss(animated: true)
+    }
+    
+    private func successMessage(type: SecurityScreenEntryType) -> String {
+        switch type {
+        case .securityQuestion:
+            return TextConstants.userProfileSetSecretQuestionSuccess
+        case .recoveryMail:
+            return localized(.setRecoveryMailSuccess)
+        case .all:
+            return localized(.setRecoveryMailSecurityQuestionSuccess)
+        }
     }
     
     private func handleServerErrors(_ error: SetSecretQuestionErrors) {

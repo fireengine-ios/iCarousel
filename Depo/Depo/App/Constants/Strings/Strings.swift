@@ -366,4 +366,13 @@ enum Strings: String, Localizable {
     case syncPageOfferPopUp = "sync_page_offer_pop_up"
     case higlightedPackageRecommended = "recommended"
     case dontMissOpportunity = "dont_miss_opportunity"
+    case syncInProgressDeleteIsNotAllowed = "sync_in_progress_delete_is_not_allowed"
+    
+    case connectedDevices = "connected_devices"
+    case scanQrCode = "scan_qr_code"
+    case scanQrCodeInfo = "scan_qr_code_info"
+    case qrCodeTryAgain = "qr_code_try_again"
+    case setRecoveryMailSuccess = "set_recovery_mail_success"
+    case setRecoveryMailSecurityQuestionSuccess = "set_recoverymail_securityquestion_success"
+    case settingsSetPasswordApppleWarning = "settings_set_password_apple_warning"
 }

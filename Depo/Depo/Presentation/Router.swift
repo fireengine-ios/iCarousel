@@ -1138,6 +1138,11 @@ class RouterVC: NSObject {
         return NotificationModuleInitializer.initializeViewController()
     }
     
+    // MARK: - Settings -> Connected Device
+    func connectedDevice() -> ConnectedDeviceViewController {
+        return ConnectedDeviceInitializer.initializeViewController()
+    }
+    
     // MARK: - Create Collage Template
     
     func createCollage() -> CreateCollageViewController {
@@ -1276,6 +1281,16 @@ class RouterVC: NSObject {
         controller.modalTransitionStyle = .crossDissolve
         controller.modalPresentationStyle = .overFullScreen
 
+        return controller
+    }
+    
+    func changeEmailPopupForAppleGoogleLoginDisconnect(disconnectAppleGoogleLogin: Bool) -> ChangeEmailPopUp {
+        let controller = ChangeEmailPopUp()
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        controller.disconnectAppleGoogleLogin = disconnectAppleGoogleLogin
+        
         return controller
     }
 
