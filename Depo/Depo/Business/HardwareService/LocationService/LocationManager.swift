@@ -22,8 +22,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     private var requestAuthorizationStatusHandler: RequestAuthorizationStatusHandler?
     
-    
-    
     private override init() {
         super.init()
         configurateLocationManager()
