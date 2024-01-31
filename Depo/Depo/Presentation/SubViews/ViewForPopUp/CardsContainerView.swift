@@ -258,7 +258,9 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
     func stopOperationWithType(type: OperationType) {
         if let view = viewsByType[type] {
             viewsByType[type] = nil
-            deletePopUpSubView(popUp: view)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+                self.deletePopUpSubView(popUp: view)
+            })
         }
     }
     

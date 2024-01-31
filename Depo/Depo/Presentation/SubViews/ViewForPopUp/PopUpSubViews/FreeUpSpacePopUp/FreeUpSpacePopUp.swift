@@ -121,7 +121,7 @@ final class FreeUpSpacePopUp: BaseCardView {
     private func showPopup(message: String) {
         let vc = PopUpController.with(title: TextConstants.freeUpSpaceAlertTitle,
                                       message: message,
-                                      image: .custom(UIImage(named: "popup_info")),
+                                      image: .custom(UIImage(named: "popupMemories")),
                                       buttonTitle: TextConstants.ok)
         DispatchQueue.main.async {
             vc.open()
