@@ -1971,9 +1971,9 @@
 "security_popup_header" = "Вкажіть адресу Електронної Пошти Відновлення або Секретне Питання";
 "save_to_my_billo" = "Зберегти в Billo";
 "save_to_my_billo_download" = "Ви хочете завантажити файл Billo - %@ - %@.zip?";
-"on_boarding_btn_google_login" = "Увійти Через Google";
+"on_boarding_btn_google_login" = "Продовжити з Google";
 "on_boarding_or" = "або";
-"on_boarding_btn_apple_login" = "Увійти Через Apple";
+"on_boarding_btn_apple_login" = "Продовжити з Apple";
 "google_login_user_exists_body" = "Є обліковий запис lifebox, зареєстрований на адресу електронної пошти %@. Щоб зв'язати ідентифікатор входу Google з наявним обліковим записом lifebox, ви повинні спочатку ввести пароль lifebox.";
 "settings_googe_apple_connect" = "Параметри Входу";
 "settings_googe" = "Увійти з Обліковим Записом Google";
