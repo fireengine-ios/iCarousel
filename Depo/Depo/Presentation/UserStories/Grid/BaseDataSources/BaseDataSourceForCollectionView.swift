@@ -2048,7 +2048,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         if isLocalOnly(){
             return
         }
-        delegate?.needReloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+            self.delegate?.needReloadData()
+        })
+        
     }
     
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
