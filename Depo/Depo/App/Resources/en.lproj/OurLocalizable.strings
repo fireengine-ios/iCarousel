@@ -2019,9 +2019,9 @@
 "security_popup_header" = "Set Your Recovery E-mail or Security Question";
 "save_to_my_billo" = "Save to My Billo";
 "save_to_my_billo_download" = "Do you want to download billo - %@ - %@.zip file?";
-"on_boarding_btn_google_login" = "Sign in with Google";
+"on_boarding_btn_google_login" = "Continue with Google";
 "on_boarding_or" = "or";
-"on_boarding_btn_apple_login" = "Sign in with Apple";
+"on_boarding_btn_apple_login" = "Continue with Apple";
 "google_login_user_exists_body" = "An existing registered account is found with %@ e-mail, to connect Google Login ID with your existing lifebox account you must first enter your lifebox password.";
 "settings_googe_apple_connect" = "Login Options";
 "settings_googe" = "Login with Google ID";

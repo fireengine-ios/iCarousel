@@ -1991,9 +1991,9 @@
 "security_popup_header" = "Kurtarma E-postanı ya da Güvenlik Sorunu Belirle";
 "save_to_my_billo" = "Billo'ya Kaydet";
 "save_to_my_billo_download" = "Billo - %@ - %@.zip dosyasını indirmek mi istiyorsunuz?";
-"on_boarding_btn_google_login" = "Google Hesabı ile Giriş";
+"on_boarding_btn_google_login" = "Google Hesabı ile Devam Et";
 "on_boarding_or" = "veya";
-"on_boarding_btn_apple_login" = "Apple Hesabı ile Giriş";
+"on_boarding_btn_apple_login" = "Apple Hesabı ile Devam Et";
 "google_login_user_exists_body" = "%@ mail adresi ile kayıtlı bir lifebox hesabı bulunmaktadır. Google Hesabı ile Giriş yöntemini mevcut lifebox hesabına bağlamak için öncelikle lifebox şifreni girmelisin.";
 "settings_googe_apple_connect" = "Giriş Yöntemi";
 "settings_googe" = "Google Hesabı ile Giriş";

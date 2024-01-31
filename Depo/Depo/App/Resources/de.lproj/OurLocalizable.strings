@@ -1969,9 +1969,9 @@
 "security_popup_header" = "Legen Sie Ihre Wiederherstellungs-E-Mail oder Sicherheitsfrage fest";
 "save_to_my_billo" = "In Mein Billo Speichern";
 "save_to_my_billo_download" = "Möchten Sie Billo Datei herunterladen - %@ - %@.zip?";
-"on_boarding_btn_google_login" = "Anmeldung mit Google";
+"on_boarding_btn_google_login" = "Weiter mit Google";
 "on_boarding_or" = "oder";
-"on_boarding_btn_apple_login" = "Anmeldung mit Apple";
+"on_boarding_btn_apple_login" = "Weiter mit Apple";
 "google_login_user_exists_body" = "Unter der E-Mail-Adresse %@ ist ein lifebox-Konto registriert. Um Ihre Google-Login-ID mit einem bestehenden lifebox-Konto zu verknüpfen, müssen Sie zuerst Ihr lifebox-Passwort eingeben.";
 "settings_googe_apple_connect" = "Anmeldeoptionen";
 "settings_googe" = "Melden Sie sich mit der Google-ID an";

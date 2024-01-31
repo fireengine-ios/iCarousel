@@ -2274,9 +2274,9 @@ Please check I have understood the intended command here*/
 "security_popup_header" = "Définissez votre E-mail de Récupération ou Votre Question de Sécurité";
 "save_to_my_billo" = "Enregistrer dans Billo";
 "save_to_my_billo_download" = "Voulez-vous télécharger le fichier Billo - %@ - %@.zip?";
-"on_boarding_btn_google_login" = "Connectez-Vous Avec Google";
+"on_boarding_btn_google_login" = "Continuer avec Google";
 "on_boarding_or" = "ou alors";
-"on_boarding_btn_apple_login" = "Connectez-Vous Avec Apple";
+"on_boarding_btn_apple_login" = "Continuer avec Apple";
 "google_login_user_exists_body" = "Il existe un compte lifebox enregistré à l'adresse e-mail %@. Afin de lier votre identifiant de connexion Google à un compte lifebox existant, vous devez d'abord entrer votre mot de passe lifebox.";
 "settings_googe_apple_connect" = "Options de Connexion";
 "settings_googe" = "Connectez-Vous Avec Google";
