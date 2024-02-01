@@ -108,5 +108,4 @@ class BaseDataSourceItem: NSObject {
             self.syncStatuses.append(userId)
         }
     }
-    
 }

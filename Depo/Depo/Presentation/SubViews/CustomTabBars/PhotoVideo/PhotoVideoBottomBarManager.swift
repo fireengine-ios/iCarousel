@@ -11,7 +11,7 @@ import Foundation
 final class PhotoVideoBottomBarManager {
     
     private let photoVideoBottomBarConfig = EditingBarConfig(
-        elementsConfig:  [.share, .download, .sync, .hide, .moveToTrash],
+        elementsConfig:  [.share, .download, .sync, .print, .moveToTrash],
         style: .default,
         tintColor: AppColor.tint.color,
         unselectedItemTintColor: AppColor.label.color,
@@ -45,6 +45,4 @@ final class PhotoVideoBottomBarManager {
     func hide() {
         bottomBarPresenter.dismissWithNotification()
     }
-    
-    
 }

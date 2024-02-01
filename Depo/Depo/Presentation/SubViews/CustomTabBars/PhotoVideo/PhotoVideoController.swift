@@ -1165,40 +1165,16 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
         if collectionViewManager.selectedIndexes.isEmpty {
             stopEditingMode()
         }
-
+        
         dataSource.getSelectedObjects(at: collectionViewManager.selectedIndexes) { [weak self] selectedObjects in
             guard let self = self else {
                 return
             }
             
-            let itemsToPrint = selectedObjects.filter { !$0.isLocalItem && $0.fileType == .image }
-            let isUserFromTurkey = SingletonStorage.shared.accountInfo?.isUserFromTurkey ?? false
-            let maxSelection = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
-            
-            if itemsToPrint.count <= maxSelection, isUserFromTurkey {
-                self.threeDotMenuManager.showActions(
-                    for: selectedObjects,
-                    isSelectingMode: self.dataSource.isSelectingMode,
-                    isPrintShow: true,
-                    sender: button
-                )
-            } else if maxSelection == 0, isUserFromTurkey {
-                self.threeDotMenuManager.showActions(
-                    for: selectedObjects,
-                    isSelectingMode: self.dataSource.isSelectingMode,
-                    isPrintShow: true,
-                    sender: button
-                )
-            } else {
-                self.threeDotMenuManager.showActions(
-                    for: selectedObjects,
-                    isSelectingMode: self.dataSource.isSelectingMode,
-                    isPrintShow: false,
-                    sender: button
-                )
-            }
-            
-            
+            self.threeDotMenuManager.showActions(
+                for: selectedObjects,
+                isSelectingMode: self.dataSource.isSelectingMode,
+                sender: button)
         }
     }
 }

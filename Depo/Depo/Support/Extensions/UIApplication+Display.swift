@@ -10,10 +10,10 @@ import Foundation
 
 extension UIApplication {
     static func setIdleTimerDisabled(_ isDisabled: Bool) {
-        guard isDisabled != UIApplication.shared.isIdleTimerDisabled else {
-            return
-        }
         DispatchQueue.main.async {
+            guard isDisabled != UIApplication.shared.isIdleTimerDisabled else {
+                return
+            }
             UIApplication.shared.isIdleTimerDisabled = isDisabled
         }
     }

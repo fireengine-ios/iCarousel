@@ -19,6 +19,11 @@ class BottomSelectionTabBarRouter: BottomSelectionTabBarRouterInput {
         }
     }
     
+    func showPrintViewController(selectedPhotos: [SearchItemResponse]) {
+        let vc = router.photoPrintViewController(selectedPhotos: selectedPhotos)
+        self.router.pushViewController(viewController: vc, animated: false)
+     }
+    
     func addToAlbum(items: [BaseDataSourceItem]) {
         let controller = router.addPhotosToAlbum(photos: items)
         router.pushOnPresentedView(viewController: controller)
