@@ -170,8 +170,7 @@ extension ForYouViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let timelineEnable = FirebaseRemoteConfig.shared.fetchTimelineEnabled
-        if timelineEnable && indexPath.row == 0 {
+        if indexPath.row == 0 {
             let cell = tableView.dequeue(reusable: ForYouTimelineTableViewCell.self, for: indexPath)
             let model = output.getModel(for: forYouSections[indexPath.row]) as? TimelineResponse
             cell.delegate = self
