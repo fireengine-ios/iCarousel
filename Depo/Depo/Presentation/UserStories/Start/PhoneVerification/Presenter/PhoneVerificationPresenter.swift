@@ -173,13 +173,11 @@ class PhoneVerificationPresenter: BasePresenter, PhoneVerificationModuleInput, P
             .kern : 0
         ]
         
-        router.showAccountStatePopUp(image: .custom(image),
-                                     title: title,
-                                     titleDesign: .partly(parts: [title : titleFullAttributes]),
-                                     message: message,
-                                     messageDesign: .partly(parts: [message : messageFullAttributes]),
-                                     buttonTitle: TextConstants.ok,
-                                     buttonAction: deletedAccountHandler)
+        let popup = PopUpController.with(title: title,
+                                         message: message,
+                                         image: .none,
+                                         buttonTitle: TextConstants.ok)
+        popup.open()
     }
 
     

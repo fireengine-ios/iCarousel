@@ -112,13 +112,11 @@ class LoginPresenter: BasePresenter {
             .kern : 0
         ]
         
-        router.showAccountStatePopUp(image: .custom(image),
-                                     title: title,
-                                     titleDesign: .full(attributes: [:]),
-                                     message: message,
-                                     messageDesign: .full(attributes: [:]),
-                                     buttonTitle: TextConstants.ok,
-                                     buttonAction: deletedAccountHandler)
+        let popup = PopUpController.with(title: title,
+                                         message: message,
+                                         image: .none,
+                                         buttonTitle: TextConstants.ok)
+        popup.open()
     }
 
 }
