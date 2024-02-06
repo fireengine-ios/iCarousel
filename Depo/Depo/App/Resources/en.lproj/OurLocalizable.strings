@@ -2283,7 +2283,7 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "free_up_space_title_settings" = "Free up space on your device.";
 "recommended" = "Recommended";
-"dont_miss_opportunity" = "";
+"dont_miss_opportunity" = "Don't miss the opportunity";
 "print_package_print_firm" = "Photos will be printed by a contracted printing company.";
 "sync_in_progress_delete_is_not_allowed" = "Your photos are preparing, you can not delete them at this time. Please try again later.";
 
@@ -2293,8 +2293,13 @@ then {11,99 TRY/Month}*/
 "scan_qr_code_info" = "Scan the QR code on the device you want to connect";
 "qr_code_try_again" = "QR code scanning failed. Please try again.";
 "print" = "Print";
-"photo_max_selection_title" = "";
-"photo_max_selection_body" = "";
-"set_recovery_mail_success" = "";
-"set_recoverymail_securityquestion_success" = "";
-"settings_set_password_apple_warning" = "";
+"photo_max_selection_title" = "You Have %@ Photo Rights";
+"photo_max_selection_body" = "You can send a maximum of %@ photos for printing.";
+"set_recovery_mail_success" = "Your recovery email has been created.";
+"set_recoverymail_securityquestion_success" = "Your recovery email and security question have been created.";
+"settings_set_password_apple_warning" = "To set your password, you must log in to lifebox with your Apple Account.";
+"lifebox_resignup_warning" = "";
+"best_scene_discover_card_title" = "";
+"best_scene_discover_card_body" = "";
+"print_discover_card_title" = "";
+"print_discover_card_body" = "";
