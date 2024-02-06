@@ -20,6 +20,11 @@ final class AutoSyncViewController: BaseViewController, NibInit {
         }
     }
     
+    private lazy var closeSelfButton = UIBarButtonItem(image: NavigationBarImage.back.image,
+                                                       style: .plain,
+                                                       target: self,
+                                                       action: #selector(closeSelf))
+    
     private lazy var storageVars: StorageVars = factory.resolve()
     private lazy var dataSource = AutoSyncDataSource(tableView: tableView, delegate: self, delegateContact: self)
     private lazy var activityManager = ActivityIndicatorManager()
@@ -42,6 +47,7 @@ final class AutoSyncViewController: BaseViewController, NibInit {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        setup()
         dataSource.isFromSettings = fromSettings
         
         if fromSettings {
@@ -52,22 +58,34 @@ final class AutoSyncViewController: BaseViewController, NibInit {
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        if fromSettings {
-            dataSource.setSyncOperationForAutoSyncSwither()
-            storageVars.isAutoSyncSet = true
-            output.save(settings: dataSource.autoSyncSetting, albums: dataSource.autoSyncAlbums)
-        }
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         if tableView.tableHeaderView == nil {
             setupTableHeaderView()
         }
+    }
+    
+    private func setup() {
+        navigationItem.leftBarButtonItem = closeSelfButton
+    }
+    
+    @objc private func closeSelf() {
+        if fromSettings {
+            output.checkPermissionsForFromSettings(success: { [weak self] in
+                self?.dataSource.setSyncOperationForAutoSyncSwither()
+                self?.storageVars.isAutoSyncSet = true
+                self?.setSave()
+                self?.navigationController?.popViewController(animated: true)
+            })
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
+        
+    }
+    
+    private func setSave() {
+        output.save(settings: dataSource.autoSyncSetting, albums: dataSource.autoSyncAlbums)
     }
     
     private func setupTableHeaderView() {

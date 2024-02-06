@@ -2233,7 +2233,7 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "free_up_space_title_settings" = "تحرير مساحة على جهازك.";
 "recommended" = "الموصى بها";
-"dont_miss_opportunity" = "";
+"dont_miss_opportunity" = "لا تفوت الفرصة";
 "print_package_print_firm" = "ستتم طباعة الصور من قبل شركة طباعة متعاقدة.";
 "sync_in_progress_delete_is_not_allowed" = "صورك قيد الإعداد، لا يمكنك حذفها في الوقت الحالي. الرجاء معاودة المحاولة في وقت لاحق.";
 "connected_devices" = "قم بتوصيل الجهاز";
@@ -2243,6 +2243,11 @@ then {11,99 TRY/Month}*/
 "print" = "";
 "photo_max_selection_title" = "";
 "photo_max_selection_body" = "";
-"set_recovery_mail_success" = "";
-"set_recoverymail_securityquestion_success" = "";
-"settings_set_password_apple_warning" = "";
+"set_recovery_mail_success" = "تم إنشاء البريد الإلكتروني للاسترداد الخاص بك.";
+"set_recoverymail_securityquestion_success" = "تم إنشاء البريد الإلكتروني الخاص بالاسترداد وسؤال الأمان.";
+"settings_set_password_apple_warning" = "لتعيين كلمة المرور الخاصة بك، يجب عليك تسجيل الدخول إلى lifebox باستخدام حساب Apple الخاص بك.";
+"lifebox_resignup_warning" = "";
+"best_scene_discover_card_title" = "";
+"best_scene_discover_card_body" = "";
+"print_discover_card_title" = "";
+"print_discover_card_body" = "";

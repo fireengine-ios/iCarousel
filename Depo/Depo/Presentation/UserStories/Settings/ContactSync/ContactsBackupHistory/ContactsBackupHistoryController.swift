@@ -92,7 +92,9 @@ extension ContactsBackupHistoryController: ContactSyncControllerProtocol, Contac
         show(view: contactHistoryView, animated: true)
     }
     
-    func didFinishOperation(operationType: ContactsOperationType) { }
+    func didFinishOperation(operationType: ContactsOperationType) {
+        contactSyncHelper.prepare()
+    }
     
     func didUpdateBackupList() {
         reloadBackups()

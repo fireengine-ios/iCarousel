@@ -102,6 +102,17 @@ final class AutoSyncInteractor: AutoSyncInteractorInput {
         contactsService.setPeriodicForContactsSync(periodic: periodicBackUp)
     }
     
+    func checkPermissionsForFromSettings(success: @escaping () -> ()) {
+        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] photoAccessGranted, _ in
+            guard photoAccessGranted else {
+                return
+            }
+            self?.locationManager.authorizationStatus { status in
+                success()
+            }
+        }
+    }
+    
     func checkPermissions() {
         localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] photoAccessGranted, _ in
             guard photoAccessGranted else {

@@ -2221,7 +2221,7 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "free_up_space_title_settings" = "Geben Sie Speicherplatz auf Ihrem Gerät frei.";
 "recommended" = "Empfohlen";
-"dont_miss_opportunity" = "";
+"dont_miss_opportunity" = "Verpassen Sie nicht die Gelegenheit";
 "print_package_print_firm" = "Der Druck der Fotos erfolgt durch eine beauftragte Druckerei.";
 "sync_in_progress_delete_is_not_allowed" = "Ihre Fotos werden vorbereitet, Sie können sie derzeit nicht löschen. Bitte versuchen Sie es später erneut.";
 "connected_devices" = "Gerät Verbinden";
@@ -2231,6 +2231,11 @@ then {11,99 TRY/Month}*/
 "print" = "";
 "photo_max_selection_title" = "";
 "photo_max_selection_body" = "";
-"set_recovery_mail_success" = "";
-"set_recoverymail_securityquestion_success" = "";
-"settings_set_password_apple_warning" = "";
+"set_recovery_mail_success" = "Ihre Wiederherstellungs-E-Mail wurde erstellt.";
+"set_recoverymail_securityquestion_success" = "Ihre Wiederherstellungs-E-Mail und die geheime Frage wurden erstellt.";
+"settings_set_password_apple_warning" = "Sie müssen mit einem Apple-Konto bei lifebox angemeldet sein, um ein Kennwort festzulegen.";
+"lifebox_resignup_warning" = "";
+"best_scene_discover_card_title" = "";
+"best_scene_discover_card_body" = "";
+"print_discover_card_title" = "";
+"print_discover_card_body" = "";

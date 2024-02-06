@@ -132,6 +132,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         case .link:
             let needSync = items.contains(where: { $0.isLocalItem })
             if needSync {
+                output?.operationStarted(type: .share)
                 sync(items: sharingItems, action: { [weak self] in
                     self?.shareViaLink(sourceRect: sourceRect)
                 }, fail: { errorResponse in
@@ -142,6 +143,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 shareViaLink(sourceRect: sourceRect)
             }
         case .original:
+            output?.operationStarted(type: .share)
             sync(items: sharingItems, action: { [weak self] in
                 self?.shareOrignalSize(sourceRect: sourceRect)
                 }, fail: { errorResponse in
@@ -250,7 +252,11 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     activityVC.popoverPresentationController?.sourceRect = tempoRect
                 }
                 
-                self?.router.presentViewController(controller: activityVC)
+                if let controller = UIApplication.topController() as? PhotoVideoDetailViewController {
+                    self?.router.presentViewController(controller: activityVC)
+                } else {
+                    self?.router.presentViewControllerForShareOriginal(controller: activityVC)
+                }
             }
             }, fail: { [weak self] errorMessage in
                 self?.output?.operationFailed(type: .share, message: errorMessage)
@@ -1363,38 +1369,21 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             assertionFailure()
             return
         }
-        
         let successClosure = { [weak self] in
             debugLog("SyncToUse - Success closure")
             DispatchQueue.main.async {
-//                self?.output?.completeAsyncOperationEnableScreen()
                 action()
             }
         }
-        
         let failClosure: FailResponse = { [weak self] errorResponse in
             debugLog("SyncToUse - Fail closure")
             DispatchQueue.main.async {
-//                self?.output?.completeAsyncOperationEnableScreen()
-//                if errorResponse.errorDescription == TextConstants.canceledOperationTextError {
-//                    cancel()
-//                    return
-//                }
                 fail?(errorResponse)
             }
         }
         fileService.syncItemsIfNeeded(items, success: successClosure, fail: failClosure, syncOperations: { [weak self] syncOperations in
-//            let operations = syncOperations
-//            if operations != nil {
-//                self?.output?.startCancelableAsync {
-//                    UploadService.default.cancelSyncToUseOperations()
-//                    cancel()
-//                }
-//            } else {
-                debugLog("syncItemsIfNeeded count: \(syncOperations?.count ?? -1)")
-//            }
+            debugLog("syncItemsIfNeeded count: \(syncOperations?.count ?? -1)")
         })
-        
     }
     
     private func downloadFaceImageAlbum(item: Item) {

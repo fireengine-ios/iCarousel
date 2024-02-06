@@ -47,6 +47,21 @@ final class ConnectedDeviceViewController: BaseViewController {
         setupCamera()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if (captureSession?.isRunning == false) {
+            captureSession.startRunning()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if (captureSession?.isRunning == true) {
+            captureSession.stopRunning()
+        }
+    }
 }
 
 extension ConnectedDeviceViewController: ConnectedDeviceViewInput {
@@ -145,7 +160,12 @@ extension ConnectedDeviceViewController: AVCaptureMetadataOutputObjectsDelegate 
             let readFrame = transformedMetadataObject!.bounds
             
             if self.qrCodeView.frame.contains(CGRect(x: readFrame.minX, y: readFrame.minY + 40.0, width: readFrame.width, height: readFrame.height)) {
-                successQRCodeForCamera(value: stringValue)
+                DispatchQueue.main.async {
+                    self.captureSession.stopRunning()
+                    self.dismiss(animated: false, completion: nil)
+                    self.successQRCodeForCamera(value: stringValue)
+                }
+                
             }
         }
     }
