@@ -53,6 +53,10 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput 
         interactor.checkPermissions()
     }
     
+    func checkPermissionsForFromSettings(success: @escaping () -> ()) {
+        interactor.checkPermissionsForFromSettings(success: success)
+    }
+    
     func didChangeSettingsOption(settings: AutoSyncSetting) {
         interactor.trackSettings(settings, fromSettings: fromSettings)
     }
