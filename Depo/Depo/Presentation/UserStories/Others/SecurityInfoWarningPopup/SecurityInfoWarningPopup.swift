@@ -23,7 +23,7 @@ final class SecurityInfoWarningPopup: BasePopUpController, NibInit {
         willSet {
             newValue.text = localized(.securityPopupWarningHeader)
             newValue.font = UIFont.TurkcellSaturaMedFont(size: 20)
-            newValue.textColor = ColorConstants.textGrayColor
+            newValue.textColor = AppColor.label.color
             newValue.numberOfLines = 0
         }
     }
@@ -31,7 +31,7 @@ final class SecurityInfoWarningPopup: BasePopUpController, NibInit {
     @IBOutlet private weak var bodyLabel: UILabel! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaFont(size: 18)
-            newValue.textColor = ColorConstants.textGrayColor
+            newValue.textColor = AppColor.label.color
             newValue.numberOfLines = 0
         }
     }
@@ -48,7 +48,7 @@ final class SecurityInfoWarningPopup: BasePopUpController, NibInit {
         willSet {
             newValue.text = localized(.securityPopupWarningFooter)
             newValue.font = UIFont.TurkcellSaturaFont(size: 18)
-            newValue.textColor = ColorConstants.textGrayColor
+            newValue.textColor = AppColor.label.color
             newValue.numberOfLines = 0
         }
     }
@@ -59,21 +59,22 @@ final class SecurityInfoWarningPopup: BasePopUpController, NibInit {
         }
     }
     
-    @IBOutlet private weak var settingsButton: RoundedButton! {
+    @IBOutlet private weak var settingsButton: WhiteButton! {
         willSet {
             newValue.setTitle(localized(.securtiyPopupWarningSettingsButton), for: .normal)
-            newValue.setTitleColor(AppColor.marineTwoAndTealish.color, for: .normal)
+            newValue.setTitleColor(AppColor.label.color, for: .normal)
+           // newValue.backgroundColor = .white
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
             newValue.layer.borderWidth = 1
-            newValue.layer.borderColor = AppColor.marineTwoAndTealish.cgColor
+            newValue.layer.borderColor = AppColor.darkBlueColor.cgColor
         }
     }
     
-    @IBOutlet private weak var continueButton: RoundedButton! {
+    @IBOutlet private weak var continueButton: DarkBlueButton! {
         willSet {
             newValue.setTitle(localized(.securtiyPopupWarningContinueButton), for: .normal)
-            newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.backgroundColor = AppColor.marineTwoAndTealish.color
+            newValue.setTitleColor(.white, for: .normal)
+            newValue.backgroundColor = AppColor.darkBlueColor.color
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
         }
     }

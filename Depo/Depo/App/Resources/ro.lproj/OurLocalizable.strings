@@ -2221,7 +2221,7 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "free_up_space_title_settings" = "Eliberați spațiu pe dispozitivul dumneavoastră.";
 "recommended" = "Recomandat";
-"dont_miss_opportunity" = "";
+"dont_miss_opportunity" = "Nu Ratați Această Oportunitate";
 "print_package_print_firm" = "Fotografiile vor fi tipărite de către compania de tipărire contractată.";
 "sync_in_progress_delete_is_not_allowed" = "Fotografiile dvs. sunt în curs de pregătire, nu le puteți șterge în acest moment. Vă rugăm să încercați din nou mai târziu.";
 "connected_devices" = "Conectarea Dispozitivului";
@@ -2231,6 +2231,11 @@ then {11,99 TRY/Month}*/
 "print" = "";
 "photo_max_selection_title" = "";
 "photo_max_selection_body" = "";
-"set_recovery_mail_success" = "";
-"set_recoverymail_securityquestion_success" = "";
-"settings_set_password_apple_warning" = "";
+"set_recovery_mail_success" = "E-mailul dvs. de recuperare a fost creat.";
+"set_recoverymail_securityquestion_success" = "Au fost create e-mailul de recuperare și întrebarea secretă.";
+"settings_set_password_apple_warning" = "Trebuie să fiți conectat la lifebox cu un cont Apple pentru a seta o parolă.";
+"lifebox_resignup_warning" = "";
+"best_scene_discover_card_title" = "";
+"best_scene_discover_card_body" = "";
+"print_discover_card_title" = "";
+"print_discover_card_body" = "";

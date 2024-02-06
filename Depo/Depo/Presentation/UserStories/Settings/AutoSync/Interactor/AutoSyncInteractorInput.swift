@@ -19,6 +19,8 @@ protocol AutoSyncInteractorInput {
     
     func checkPermissions()
     
+    func checkPermissionsForFromSettings(success: @escaping () -> ())
+    
     // Contact
     func prepareCellModelsContact()
     func checkPermissionContact()

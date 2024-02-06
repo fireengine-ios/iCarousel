@@ -362,6 +362,8 @@ enum Strings: String, Localizable {
     case printFileLimitExceededError = "print_file_limit_exceeded_error"
     case orderNotDelivered = "order_not_delivered"
     case orderNotDeliveredDetail = "order_not_delivered_detail"
+    case printDiscoverCardTitle = "print_discover_card_title"
+    case printDiscoverCardBody = "print_discover_card_body"
     
     case syncPageOfferPopUp = "sync_page_offer_pop_up"
     case higlightedPackageRecommended = "recommended"

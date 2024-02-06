@@ -610,6 +610,9 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
     
     private func replaceUploaded(_ item: WrapData) {
         guard let indexToChange = objects.firstIndex(where: { $0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }) else {
+            setupNavigationBar()
+            output.updateBars()
+            updateFileInfo()
             return
         }
         

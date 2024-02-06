@@ -2264,7 +2264,7 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "free_up_space_title_settings" = "Lironi hapësirë në pajisjen tuaj.";
 "recommended" = "Rekomandohet";
-"dont_miss_opportunity" = "";
+"dont_miss_opportunity" = "Mos e Humbisni Rastin";
 "print_package_print_firm" = "Fotot do të printohen nga një kompani printimi e kontraktuar.";
 "sync_in_progress_delete_is_not_allowed" = "Fotot tuaja janë duke u përgatitur, nuk mund t'i fshini ato për momentin. Ju lutemi provoni përsëri më vonë.";
 "connected_devices" = "Lidhni Pajisjen";
@@ -2274,6 +2274,11 @@ then {11,99 TRY/Month}*/
 "print" = "";
 "photo_max_selection_title" = "";
 "photo_max_selection_body" = "";
-"set_recovery_mail_success" = "";
-"set_recoverymail_securityquestion_success" = "";
-"settings_set_password_apple_warning" = "";
+"set_recovery_mail_success" = "Email-i juaj i rikuperimit është krijuar.";
+"set_recoverymail_securityquestion_success" = "Email-i juaj i rikuperimit dhe pyetja e sigurisë janë krijuar.";
+"settings_set_password_apple_warning" = "Për të vendosur fjalëkalimin tuaj, duhet të identifikoheni në lifebox me llogarinë tuaj Apple.";
+"lifebox_resignup_warning" = "";
+"best_scene_discover_card_title" = "";
+"best_scene_discover_card_body" = "";
+"print_discover_card_title" = "";
+"print_discover_card_body" = "";

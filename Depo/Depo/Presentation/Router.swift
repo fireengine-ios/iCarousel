@@ -349,7 +349,25 @@ class RouterVC: NSObject {
            controller.popoverPresentationController?.barButtonItem == nil {
             controller.popoverPresentationController?.sourceView = topViewController.view
         }
+        topViewController.present(controller, animated: animated, completion: completion)
+    }
+    
+    func presentViewControllerForShareOriginal(controller: UIViewController, animated: Bool = true, completion: VoidHandler? = nil) {
+        controller.checkModalPresentationStyle()
+        
+        OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
 
+        guard let topViewController = tabBarController else {
+            assertionFailure("top vc: \(String(describing: UIApplication.topController()))")
+            return
+        }
+
+        // TODO: Facelift, double check this is needed
+        if controller.modalPresentationStyle == .popover,
+           controller.popoverPresentationController?.sourceView == nil,
+           controller.popoverPresentationController?.barButtonItem == nil {
+            controller.popoverPresentationController?.sourceView = topViewController.view
+        }
         topViewController.present(controller, animated: animated, completion: completion)
     }
         

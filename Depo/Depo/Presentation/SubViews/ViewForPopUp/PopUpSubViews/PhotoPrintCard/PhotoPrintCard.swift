@@ -15,7 +15,7 @@ final class PhotoPrintCard: BaseCardView {
         willSet {
             newValue.font = .appFont(.medium, size: 16)
             newValue.textColor = AppColor.label.color
-            newValue.text = "Photo Print Kampanyası"
+            newValue.text = localized(.printDiscoverCardTitle)
         }
     }
     
@@ -23,7 +23,7 @@ final class PhotoPrintCard: BaseCardView {
         willSet {
             newValue.font = .appFont(.light, size: 14)
             newValue.textColor = AppColor.label.color
-            newValue.text = "Sana özel paketi seçersen her ay 5 tane fotoğrafını bastırma şansı elde edeceksin"
+            newValue.text = localized(.printDiscoverCardBody)
         }
     }
     
@@ -35,7 +35,7 @@ final class PhotoPrintCard: BaseCardView {
     
     @IBOutlet private weak var actionButton: UIButton! {
         willSet {
-            newValue.setTitle("Paketi İncele", for: .normal)
+            newValue.setTitle(localized(.printPackageView), for: .normal)
             newValue.setTitleColor(AppColor.settingsButtonColor.color, for: .normal)
             newValue.setTitleColor(AppColor.settingsButtonColor.color, for: .highlighted)
             newValue.titleLabel?.font = .appFont(.bold, size: 14)

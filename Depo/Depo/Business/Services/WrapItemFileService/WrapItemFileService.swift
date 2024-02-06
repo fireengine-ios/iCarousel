@@ -248,7 +248,10 @@ class WrapItemFileService: WrapItemFileOperations {
     func syncItemsIfNeeded(_ items: [WrapData], success: @escaping FileOperationSucces, fail: @escaping FailResponse, syncOperations: @escaping ([UploadOperation]?) -> Void) {
         let localFiles = localWrapedData(files: items)
         guard localFiles.count > 0 else {
-            success()
+            WrapItemFileService.waitItemsDetails(for: items,
+                                                 maxAttempts: NumericConstants.maxDetailsLoadingAttempts,
+                                                 success: success,
+                                                 fail: fail)
             return
         }
         
@@ -458,7 +461,7 @@ class WrapItemFileService: WrapItemFileOperations {
                     itemToUpdate.status = item.status
                 }
             }
-            let isCompleted = items.contains(where: { $0.tmpDownloadUrl != nil || $0.status.isTranscoded })
+            let isCompleted = items.contains(where: { $0.tmpDownloadUrl != nil && $0.status.isTranscoded })
             /// old logic, now we consider its ok, neither if its active or tempo url online
             //!items.contains(where: { $0.status != .active})
             if isCompleted {
