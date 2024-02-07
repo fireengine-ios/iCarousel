@@ -540,6 +540,39 @@ extension AppDelegate {
     
     //MARK: Adjust
     
+    func adjustDeeplinkResponse(_ deeplink: URL?) -> Bool {
+           
+           guard let url = deeplink else {
+               return false
+           }
+           
+           Adjust.appWillOpen(url)
+           
+           if let oldURL = Adjust.convertUniversalLink(url, scheme: SharedConstants.applicationQueriesSchemeShort) {
+               debugLog("Adjust old path :\(oldURL.path)")
+               if let host = oldURL.host {
+                   debugLog("Adjust old host :\(host)")
+                   
+                   if host == PushNotificationAction.packages.rawValue {
+                       if let data = oldURL.queryParameters["affiliate"] as? String {
+                           let result = ["affiliate" : data]
+                           if PushNotificationService.shared.assignDeepLink(innerLink: host, options: result) {
+                               PushNotificationService.shared.openActionScreen()
+                           }
+                       }
+                   } else if PushNotificationService.shared.assignDeepLink(innerLink: host, options: userActivity?.userInfo) {
+                       debugLog("Should open Action Screen")
+                       PushNotificationService.shared.openActionScreen()
+                   } else if PushNotificationService.shared.assignDeepLink(innerLink: host, options: userActivity?.userInfo) {
+                       debugLog("Should open Action Screen")
+                       PushNotificationService.shared.openActionScreen()
+                   }
+               }
+           }
+           
+           return false
+       }
+    
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
 
         if userActivity.activityType == CSSearchableItemActionType {
