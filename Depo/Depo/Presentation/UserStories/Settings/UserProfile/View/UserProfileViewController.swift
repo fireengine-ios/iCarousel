@@ -168,6 +168,8 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
     private var isShortPhoneNumber = false
     private var updatePasswordMethod: UpdatePasswordMethods?
     
+    var newPhoneNumber: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -323,6 +325,8 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
         }
         
         let sendingPhoneNumber = isShortPhoneNumber ? phoneNumber : "\(phoneCode)\(phoneNumber)"
+        
+        self.newPhoneNumber = sendingPhoneNumber.replacingOccurrences(of: "+994", with: "")
 
         setIsLoading(true)
 
