@@ -115,7 +115,9 @@ class LoginPresenter: BasePresenter {
         let popup = PopUpController.with(title: title,
                                          message: message,
                                          image: .none,
-                                         buttonTitle: TextConstants.ok)
+                                         buttonTitle: TextConstants.ok) { vc in
+                                            vc.close(completion: deletedAccountHandler)
+                                         }
         popup.open()
     }
 
