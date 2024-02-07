@@ -18,16 +18,18 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
     private let separatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     private lazy var accountService = AccountService()
     private let analyticsService: AnalyticsService = factory.resolve()
+    private var fromInfoView: Bool = false
     var questions = [SecretQuestionsResponse]()
     
     var delegate: SelectQuestionViewControllerDelegate?
     
-    static func createController(questions: [SecretQuestionsResponse], delegate: SelectQuestionViewControllerDelegate) -> SelectQuestionViewController {
+    static func createController(questions: [SecretQuestionsResponse], delegate: SelectQuestionViewControllerDelegate, fromInfoView: Bool = false) -> SelectQuestionViewController {
         let controller = SelectQuestionViewController()
         controller.modalTransitionStyle = .crossDissolve
         controller.modalPresentationStyle = .overFullScreen
         controller.questions = questions
         controller.delegate = delegate
+        controller.fromInfoView = fromInfoView
         return controller
     }
     
@@ -42,7 +44,7 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
         willSet {
             newValue.textColor = AppColor.label.color
             newValue.font = .appFont(.light, size: 14.0)
-            newValue.text = "  " + TextConstants.userProfileSecretQuestion + "  "
+            newValue.text = ""
             newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
         }
@@ -99,6 +101,11 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
         analyticsService.logScreen(screen: .securityQuestionSelect)
         analyticsService.trackDimentionsEveryClickGA(screen: .securityQuestionSelect)
         setTitle(withString: TextConstants.userProfileSecretQuestion)
+        
+        if fromInfoView {
+            contentView.translatesAutoresizingMaskIntoConstraints = false
+            contentView.topAnchor.constraint(equalTo: view.topAnchor, constant: 400).activate()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
