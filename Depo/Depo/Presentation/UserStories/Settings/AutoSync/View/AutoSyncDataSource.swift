@@ -33,7 +33,7 @@ final class AutoSyncDataSource: NSObject {
     
     var isFromSettings = false
     private var syncModel = AutoSyncModel(type: .header)
-    private var isAutoSyncSwitchSelected: Bool = false
+    var isAutoSyncSwitchSelected: Bool = false
     
     private let tableViewAnimationType = UITableView.RowAnimation.top
     

@@ -135,6 +135,16 @@ final class AutoSyncViewController: BaseViewController, NibInit {
     // MARK: buttons actions
     
     @IBAction func onStartUsingButton() {
+        if dataSource.isAutoSyncSwitchSelected {
+            output.checkPermissionsForFromSettings(success: { [weak self] in
+                self?.startApp()
+            })
+        } else {
+            startApp()
+        }
+    }
+    
+    private func startApp() {
         dataSource.setSyncOperationForAutoSyncSwither()
         let isFirstLoginControl = storageVars.highlightedIsFirstLogin
         
