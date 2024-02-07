@@ -169,6 +169,7 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
     private var updatePasswordMethod: UpdatePasswordMethods?
     
     var newPhoneNumber: String = ""
+    var newPhoneCode: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -205,10 +206,16 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
             self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .myProfile, eventLabel: .back)
         }
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         output.viewDidAppear()
+        
+//        if newPhoneNumber.isEmpty {
+            phoneView.numberTextField.text = SingletonStorage.shared.accountInfo?.fullPhoneNumber
+//        } else {
+//            updateUserPhoneNumber(with: self.newPhoneNumber)
+//        }
     }
     
     func setupEditState(_ isEdit: Bool) {
@@ -326,7 +333,8 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
         
         let sendingPhoneNumber = isShortPhoneNumber ? phoneNumber : "\(phoneCode)\(phoneNumber)"
         
-        self.newPhoneNumber = sendingPhoneNumber.replacingOccurrences(of: "+994", with: "")
+        self.newPhoneCode = phoneCode
+        self.newPhoneNumber = sendingPhoneNumber.replacingOccurrences(of: phoneCode, with: "")
 
         setIsLoading(true)
 
@@ -377,6 +385,13 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
                                   changes: getChanges())
         }
     }
+    
+    func updateUserPhoneNumber(with newNumber: String) {
+        DispatchQueue.main.async { [weak self] in
+            self?.phoneView.numberTextField.text = newNumber
+        }
+    }
+
     
     private func set(title: String, for button: UIButton) {
         let attributedString = NSAttributedString(string: title,
