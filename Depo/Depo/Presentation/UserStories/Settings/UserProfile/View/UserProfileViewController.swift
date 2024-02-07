@@ -168,9 +168,6 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
     private var isShortPhoneNumber = false
     private var updatePasswordMethod: UpdatePasswordMethods?
     
-    var newPhoneNumber: String = ""
-    var newPhoneCode: String = ""
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -210,12 +207,13 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         output.viewDidAppear()
+
         
-//        if newPhoneNumber.isEmpty {
-            phoneView.numberTextField.text = SingletonStorage.shared.accountInfo?.fullPhoneNumber
-//        } else {
-//            updateUserPhoneNumber(with: self.newPhoneNumber)
-//        }
+        if let savedPhoneNumber = getPhoneNumberFromPersistentStorage() {
+            phoneView.numberTextField.text = savedPhoneNumber
+        } else {
+            phoneView.numberTextField.text = getPhoneNumber().replacingOccurrences(of: phoneView.codeTextField.text ?? "", with: "")
+        }
     }
     
     func setupEditState(_ isEdit: Bool) {
@@ -333,8 +331,7 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
         
         let sendingPhoneNumber = isShortPhoneNumber ? phoneNumber : "\(phoneCode)\(phoneNumber)"
         
-        self.newPhoneCode = phoneCode
-        self.newPhoneNumber = sendingPhoneNumber.replacingOccurrences(of: phoneCode, with: "")
+        savePhoneNumberToPersistentStorage(phoneNumber: sendingPhoneNumber.replacingOccurrences(of: phoneCode, with: ""))
 
         setIsLoading(true)
 
@@ -390,6 +387,14 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
         DispatchQueue.main.async { [weak self] in
             self?.phoneView.numberTextField.text = newNumber
         }
+    }
+    
+    func savePhoneNumberToPersistentStorage(phoneNumber: String) {
+        UserDefaults.standard.set(phoneNumber, forKey: "userPhoneNumber")
+    }
+
+    func getPhoneNumberFromPersistentStorage() -> String? {
+        return UserDefaults.standard.string(forKey: "userPhoneNumber")
     }
 
     
