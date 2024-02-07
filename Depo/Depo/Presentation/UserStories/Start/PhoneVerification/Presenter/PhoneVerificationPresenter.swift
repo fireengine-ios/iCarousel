@@ -173,10 +173,12 @@ class PhoneVerificationPresenter: BasePresenter, PhoneVerificationModuleInput, P
             .kern : 0
         ]
         
-        let popup = PopUpController.with(title: title,
-                                         message: message,
-                                         image: .none,
-                                         buttonTitle: TextConstants.ok)
+        let popup = PopUpController.withDark(title: title,
+                                             message: message,
+                                             image: .none,
+                                             buttonTitle: TextConstants.ok) { vc in
+                                                vc.close(completion: deletedAccountHandler)
+                                             }
         popup.open()
     }
 
