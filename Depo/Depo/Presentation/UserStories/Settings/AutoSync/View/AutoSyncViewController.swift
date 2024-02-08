@@ -153,26 +153,25 @@ final class AutoSyncViewController: BaseViewController, NibInit {
         if !isFirstLoginControl {
             let popup = PopUpController.with(title: nil, message: localized(.syncPageOfferPopUp), image: .none, firstButtonTitle: TextConstants.noForUpgrade, secondButtonTitle: TextConstants.faceImageYes,
                 firstAction: { [weak self] vc in
-                    self?.goToPhotosScreen()
+                    self?.setAutoSyncSetting()
                 },
                 secondAction: { vc in
                     self.dismiss(animated: false, completion: {
                         DispatchQueue.toMain { [weak self] in
                             self?.storageVars.highlightedPopUpPackageBack = true
-                            self?.onStartUsingButtonTapped = true
-                            self?.storageVars.isAutoSyncSet = true
+                            self?.setAutoSyncSetting()
                             self?.router.pushViewController(viewController: (self?.router.myStorage(usageStorage: nil))!)
                         }
                     })
                 })
             popup.open()
         } else {
-            goToPhotosScreen()
+            setAutoSyncSetting()
         }
         storageVars.highlightedIsFirstLogin = true
     }
     
-    private func goToPhotosScreen() {
+    private func setAutoSyncSetting() {
         onStartUsingButtonTapped = true
         storageVars.isAutoSyncSet = true
         output.change(settings: dataSource.autoSyncSetting, albums: dataSource.autoSyncAlbums)
