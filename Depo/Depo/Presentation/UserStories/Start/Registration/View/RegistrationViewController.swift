@@ -107,7 +107,6 @@ final class RegistrationViewController: BaseViewController {
     private let phoneEnterView: ProfilePhoneEnterView = {
         let newValue = ProfilePhoneEnterView()
         newValue.numberTextField.enablesReturnKeyAutomatically = true
-
         newValue.numberTextField.quickDismissPlaceholder = TextConstants.profilePhoneNumberPlaceholder
         newValue.titleLabel.text = TextConstants.registrationCellTitleGSMNumber
         newValue.isEditState = true
@@ -126,10 +125,8 @@ final class RegistrationViewController: BaseViewController {
     
     private let rePasswordEnterView: ProfilePasswordEnterView = {
         let newValue = ProfilePasswordEnterView()
-        
         newValue.textField.quickDismissPlaceholder = TextConstants.reenterYourPassword
         newValue.textField.enablesReturnKeyAutomatically = true
-        
         newValue.titleLabel.text = TextConstants.registrationCellTitleReEnterPassword
         
         return newValue
@@ -348,6 +345,11 @@ final class RegistrationViewController: BaseViewController {
     
     //MARK: Actions
     @objc func textFieldDidChange(_ textField: UITextField) {
+        if passwordEnterView.textField.text == rePasswordEnterView.textField.text {
+            rePasswordEnterView.hideSubtitleAnimated()
+        } else {
+            rePasswordEnterView.showSubtitleTextAnimated(text: TextConstants.registrationPasswordNotMatchError)
+        }
         if passwordEnterView.textField == textField {
             output.validatePassword(passwordEnterView.textField.text ?? "", repassword: nil)
         }
