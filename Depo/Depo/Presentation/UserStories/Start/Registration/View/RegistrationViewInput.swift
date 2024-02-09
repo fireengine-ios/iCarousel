@@ -31,4 +31,6 @@ protocol RegistrationViewInput: RegistrationViewDelegate, Waiting {
     func setupEtk(isShowEtk: Bool)
 
     func setNextButtonEnabled(_ isEnabled: Bool)
+    
+    func showGsmAlreadyExistsError()
 }

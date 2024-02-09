@@ -377,4 +377,5 @@ enum Strings: String, Localizable {
     case setRecoveryMailSuccess = "set_recovery_mail_success"
     case setRecoveryMailSecurityQuestionSuccess = "set_recoverymail_securityquestion_success"
     case settingsSetPasswordApppleWarning = "settings_set_password_apple_warning"
+    case lifeboxResignupWarning = "lifebox_resignup_warning"
 }

@@ -34,6 +34,7 @@ private struct RemoteConfigKeys {
     static let printMonthlyPhotoSize = "print_monthly_photo_size"
     static let displayConnectAccount = "display_connect_account"
     static let autosyncStartDuration = "autosync_start_duration"
+    static let resignupEnabled = "resignup_enabled"
 }
 
 final class FirebaseRemoteConfig {
@@ -52,6 +53,11 @@ final class FirebaseRemoteConfig {
         remoteConfig.configSettings = settings
         remoteConfig.setDefaults(fromPlist: "FirebaseRemoteConfigDefaults")
     }
+    
+    var resignupEnabled: Bool {
+          let key = RemoteConfigKeys.resignupEnabled
+          return remoteConfig.configValue(forKey: key).boolValue
+      }
     
     var autosyncStartDuration: Double {
         let key = RemoteConfigKeys.autosyncStartDuration

@@ -2308,8 +2308,8 @@ then {11,99 TRY/Month}*/
 "set_recovery_mail_success" = "Kurtarma mailiniz oluşturuldu.";
 "set_recoverymail_securityquestion_success" = "Kurtarma mailiniz ve güvenlik sorunuz oluşturuldu.";
 "settings_set_password_apple_warning" = "Şifreni belirleyebilmek için öncelikle Apple Hesabın ile lifebox’a giriş yapmalısın.";
-"lifebox_resignup_warning" = "Girmiş oldugunuz bilgilerle bir hesap bulunmaktadır. Devam etmek istediğinize emin misiniz?";
+"lifebox_resignup_warning" = "Girmiş oldugunuz bilgilere ait hesap bulunmaktadır. Devam etmeniz durumunda diğer hesaptan GSM numarası silinecektir. Hesabınıza sadece mail adresi ve şifreniz ile ulaşabileceksiniz. İşleme devam etmek istediğinize emin misiniz?";
 "best_scene_discover_card_title" = "Seri Fotoğraflar";
 "best_scene_discover_card_body" = "Seri fotoğraflarından en iyisini seç!";
 "print_discover_card_title" = "Baskı Paketi";
-"print_discover_card_body" = "Baskı paketi ile her ay en fazla 5 tane fotoğrafını bastır ve hemen ücretsiz adresine gelsin.";
+"print_discover_card_body" = "Baskı paketi ile her ay en fazla %@ tane fotoğrafını bastır ve hemen ücretsiz adresine gelsin.";

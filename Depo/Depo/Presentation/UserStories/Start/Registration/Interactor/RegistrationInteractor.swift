@@ -140,7 +140,13 @@ class RegistrationInteractor: RegistrationInteractorInput {
     func signUpUser(_ userInfo: RegistrationUserInfoModel, etkAuth: Bool?, globalPermAuth: Bool?) {
 
         ///sentOtp = false as a task requirements (FE-1055)
-        let signUpUser = SignUpUser(registrationUserInfo: userInfo, sentOtp: false, appleGoogleUser: userInfo.appleGoogleUser)
+        let resignupEnabled = FirebaseRemoteConfig.shared.resignupEnabled
+        
+        let shouldBypassError = UserDefaults.standard.bool(forKey: "hasBypassedGsmAlreadyExists")
+
+        let canProceedWithResignup = resignupEnabled && shouldBypassError
+        
+        let signUpUser = SignUpUser(registrationUserInfo: userInfo, sentOtp: false, appleGoogleUser: userInfo.appleGoogleUser, reSignUp: canProceedWithResignup)
         
         authenticationService.signUp(user: signUpUser) { [weak self] response in
             guard let self = self else {
@@ -193,6 +199,15 @@ class RegistrationInteractor: RegistrationInteractorInput {
                     
                     if signUpError.status == .emailDomainNotAllowed {
                         self.output.appleEmailDomainFailed()
+                    }
+                    
+                    if canProceedWithResignup {
+                        print("😍", signUpError.status)
+                        if signUpError.status == .gsmAlreadyExists {
+                            self.output.handleGsmAlreadyExistsError()
+                            return
+                        }
+                        
                     }
                 }
 

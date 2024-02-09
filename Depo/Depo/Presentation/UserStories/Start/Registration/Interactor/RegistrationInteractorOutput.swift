@@ -28,4 +28,6 @@ protocol RegistrationInteractorOutput: AnyObject {
     func showSupportView()
     
     func appleEmailDomainFailed()
+    
+    func handleGsmAlreadyExistsError()
 }

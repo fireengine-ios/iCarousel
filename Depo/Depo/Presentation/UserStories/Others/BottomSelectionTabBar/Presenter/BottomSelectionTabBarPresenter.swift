@@ -26,12 +26,13 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     }
 
     func setupTabBarWith(items: [BaseDataSourceItem], originalConfig: EditingBarConfig) {
+        let shareIndex = originalConfig.elementsConfig.firstIndex(of: .share)
         let downloadIndex = originalConfig.elementsConfig.firstIndex(of: .download)
         let syncIndex = originalConfig.elementsConfig.firstIndex(of: .sync)
         let moveToTrashIndex = originalConfig.elementsConfig.firstIndex(of: .moveToTrash)
         let hideIndex = originalConfig.elementsConfig.firstIndex(of: .hide)
         
-        let validIndexes = [downloadIndex, syncIndex, hideIndex, moveToTrashIndex].compactMap { $0 }
+        let validIndexes = [shareIndex, downloadIndex, syncIndex, hideIndex, moveToTrashIndex].compactMap { $0 }
         
         guard !validIndexes.isEmpty else {
             return
@@ -47,7 +48,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         let hasRemote = items.contains(where: { $0.isLocalItem != true })
 
         if hasRemote {
-            view.enableItems(at: [moveToTrashIndex, downloadIndex, hideIndex].compactMap { $0 })
+            view.enableItems(at: [shareIndex, moveToTrashIndex, downloadIndex, hideIndex].compactMap { $0 })
         }
         
         if hasLocal {

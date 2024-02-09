@@ -136,7 +136,7 @@ enum ElementTypes {
         default:
             if item.isLocalItem {
                 let inProgress = UploadService.default.isInQueue(item: item.uuid)
-                result = [.share, inProgress ? .syncInProgress : .sync, .info]
+                result = [inProgress ? .syncInProgress : .sync, .info]
             } else {
                 switch item.fileType {
                 case .image, .video:
