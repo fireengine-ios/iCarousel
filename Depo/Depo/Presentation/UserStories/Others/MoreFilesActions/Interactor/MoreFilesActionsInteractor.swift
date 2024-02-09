@@ -87,8 +87,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         
+        let localFiles = item.filter { !$0.isLocalItem }
+        
         sharingItems.removeAll()
-        sharingItems.append(contentsOf: item)
+        sharingItems.append(contentsOf: localFiles)
         
         selectShareType(sourceRect: sourceRect)
     }
