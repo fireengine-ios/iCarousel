@@ -39,6 +39,7 @@ struct LbRequestkeys {
     static let kvkkAuth = "kvkkAuth"
     static let googleToken = "googleToken"
     static let appleToken = "appleToken"
+    static let reSignUp = "resignup"
 }
 
 struct LbResponseKey {
