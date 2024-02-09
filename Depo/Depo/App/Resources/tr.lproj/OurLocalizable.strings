@@ -2308,3 +2308,4 @@ then {11,99 TRY/Month}*/
 "set_recovery_mail_success" = "Kurtarma mailiniz oluşturuldu.";
 "set_recoverymail_securityquestion_success" = "Kurtarma mailiniz ve güvenlik sorunuz oluşturuldu.";
 "settings_set_password_apple_warning" = "Şifreni belirleyebilmek için öncelikle Apple Hesabın ile lifebox’a giriş yapmalısın.";
+"lifebox_resignup_warning" = "Girmiş oldugunuz bilgilerle bir hesap bulunmaktadır. Devam etmek istediğinize emin misiniz?";

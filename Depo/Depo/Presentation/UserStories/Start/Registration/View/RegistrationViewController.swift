@@ -463,6 +463,29 @@ extension RegistrationViewController: RegistrationViewInput {
     func setNextButtonEnabled(_ isEnabled: Bool) {
         nextButton.isEnabled = isEnabled
     }
+    
+    func showGsmAlreadyExistsError() {
+        let popUp = PopUpController.with(title: nil,
+                                         message: localized(.lifeboxResignupWarning),
+                                         image: .error,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.nextTitle,
+                                         firstAction: { vc in
+            DispatchQueue.main.async {
+                vc.dismiss(animated: true, completion: nil)
+            }
+        }, secondAction: { vc in
+            DispatchQueue.main.async {
+                UserDefaults.standard.set(true, forKey: "hasBypassedGsmAlreadyExists")
+                vc.dismiss(animated: true, completion: {
+                    self.stopEditing()
+                    self.hideErrorBanner()
+                    self.output.nextButtonPressed()
+                })
+            }
+        })
+        popUp.open()
+    }
 }
 
 extension RegistrationViewController: RegistrationViewDelegate {

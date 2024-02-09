@@ -217,6 +217,11 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
         UIApplication.showErrorAlert(message: localized(.emailDomainNotAllowed))
         router.goBack()
     }
+    
+    func handleGsmAlreadyExistsError() {
+        completeAsyncOperationEnableScreen()
+        view.showGsmAlreadyExistsError()
+    }
 }
 
 extension RegistrationPresenter: CaptchaViewErrorDelegate {

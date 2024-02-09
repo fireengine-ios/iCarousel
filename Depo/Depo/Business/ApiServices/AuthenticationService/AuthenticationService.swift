@@ -95,6 +95,7 @@ class SignUpUser: BaseRequestParametrs {
     let sendOtp: Bool
     let captchaID: String?
     let captchaAnswer: String?
+    let resignup: Bool?
     let appleGoogleUser: AppleGoogleUser?
     var brandType: String {
         #if LIFEDRIVE 
@@ -112,7 +113,8 @@ class SignUpUser: BaseRequestParametrs {
             LbRequestkeys.language: Device.locale,
             LbRequestkeys.sendOtp: sendOtp,
             LbRequestkeys.brandType: brandType,
-            LbRequestkeys.passwordRuleSetVersion: NumericConstants.passwordRuleSetVersion
+            LbRequestkeys.passwordRuleSetVersion: NumericConstants.passwordRuleSetVersion,
+            LbRequestkeys.reSignUp: resignup
         ]
     }
 
@@ -129,7 +131,7 @@ class SignUpUser: BaseRequestParametrs {
     }
 
     init(phone: String, mail: String, password: String, sendOtp: Bool, captchaID: String? = nil, captchaAnswer: String? = nil,
-         appleGoogleUser: AppleGoogleUser? = nil) {
+         appleGoogleUser: AppleGoogleUser? = nil, reSignUp: Bool) {
         self.phone = phone
         self.mail = mail
         self.password = password
@@ -137,9 +139,10 @@ class SignUpUser: BaseRequestParametrs {
         self.captchaID = captchaID
         self.captchaAnswer = captchaAnswer
         self.appleGoogleUser = appleGoogleUser
+        self.resignup = reSignUp
     }
     
-    init(registrationUserInfo: RegistrationUserInfoModel, sentOtp: Bool, appleGoogleUser: AppleGoogleUser? = nil) {
+    init(registrationUserInfo: RegistrationUserInfoModel, sentOtp: Bool, appleGoogleUser: AppleGoogleUser? = nil, reSignUp: Bool) {
         self.phone = registrationUserInfo.phone
         self.mail = registrationUserInfo.mail
         self.password = registrationUserInfo.password
@@ -147,6 +150,7 @@ class SignUpUser: BaseRequestParametrs {
         self.captchaID = registrationUserInfo.captchaID
         self.captchaAnswer = registrationUserInfo.captchaAnswer
         self.appleGoogleUser = appleGoogleUser
+        self.resignup = reSignUp
     }
 }
 
