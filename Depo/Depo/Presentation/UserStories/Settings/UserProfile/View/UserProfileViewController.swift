@@ -203,10 +203,17 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
             self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .myProfile, eventLabel: .back)
         }
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         output.viewDidAppear()
+
+        
+        if let savedPhoneNumber = getPhoneNumberFromPersistentStorage() {
+            phoneView.numberTextField.text = savedPhoneNumber
+        } else {
+            phoneView.numberTextField.text = getPhoneNumber().replacingOccurrences(of: phoneView.codeTextField.text ?? "", with: "")
+        }
     }
     
     func setupEditState(_ isEdit: Bool) {
@@ -323,6 +330,8 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
         }
         
         let sendingPhoneNumber = isShortPhoneNumber ? phoneNumber : "\(phoneCode)\(phoneNumber)"
+        
+        savePhoneNumberToPersistentStorage(phoneNumber: sendingPhoneNumber.replacingOccurrences(of: phoneCode, with: ""))
 
         setIsLoading(true)
 
@@ -373,6 +382,21 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
                                   changes: getChanges())
         }
     }
+    
+    func updateUserPhoneNumber(with newNumber: String) {
+        DispatchQueue.main.async { [weak self] in
+            self?.phoneView.numberTextField.text = newNumber
+        }
+    }
+    
+    func savePhoneNumberToPersistentStorage(phoneNumber: String) {
+        UserDefaults.standard.set(phoneNumber, forKey: "userPhoneNumber")
+    }
+
+    func getPhoneNumberFromPersistentStorage() -> String? {
+        return UserDefaults.standard.string(forKey: "userPhoneNumber")
+    }
+
     
     private func set(title: String, for button: UIButton) {
         let attributedString = NSAttributedString(string: title,

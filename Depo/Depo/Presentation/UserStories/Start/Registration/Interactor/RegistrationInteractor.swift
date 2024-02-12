@@ -201,8 +201,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
                         self.output.appleEmailDomainFailed()
                     }
                     
-                    if canProceedWithResignup {
-                        print("😍", signUpError.status)
+                    if !canProceedWithResignup {
                         if signUpError.status == .gsmAlreadyExists {
                             self.output.handleGsmAlreadyExistsError()
                             return
