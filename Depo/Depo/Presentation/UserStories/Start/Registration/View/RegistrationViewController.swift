@@ -345,10 +345,12 @@ final class RegistrationViewController: BaseViewController {
     
     //MARK: Actions
     @objc func textFieldDidChange(_ textField: UITextField) {
-        if passwordEnterView.textField.text == rePasswordEnterView.textField.text {
-            rePasswordEnterView.hideSubtitleAnimated()
-        } else {
-            rePasswordEnterView.showSubtitleTextAnimated(text: TextConstants.registrationPasswordNotMatchError)
+        if rePasswordEnterView.textField.text != "" {
+            if passwordEnterView.textField.text == rePasswordEnterView.textField.text {
+                rePasswordEnterView.hideSubtitleAnimated()
+            } else {
+                rePasswordEnterView.showSubtitleTextAnimated(text: TextConstants.registrationPasswordNotMatchError)
+            }
         }
         if passwordEnterView.textField == textField {
             output.validatePassword(passwordEnterView.textField.text ?? "", repassword: nil)
