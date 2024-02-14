@@ -1,6 +1,7 @@
 // Jenkins Template version 1.1
 
 @Library('devops-common') _
+@Library('dssLibrary@master') 
 
 /***** Branch Config BEGIN ******/
 
@@ -13,6 +14,7 @@ isDev = branchName == "develop"
 echo "Branch Name: ${branchName}"
 
 isSkipApproval = branchName.startsWith("release/") || branchName == "develop" || branchName == "testflight"
+isSkipApprovalFirebase = branchName.startsWith("release/") || branchName == "testflight"
 isFriendlyBuild = !branchName.startsWith("release/")
 
 /***** Branch Config END ******/
@@ -23,6 +25,8 @@ agentName = 'devops-dss-js-ios-12' // The mac mini assigned to this project
 apps = [ 
      [
         name: 'lifebox',// name will be the base filename of the app
+        secAppName: '259876_LIFEBOX-APPL.ios',
+        secBranchName: 'develop',
         versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
         ictsContainerId: '743', // ICT Store
         prodTeamID: '693N5K66ZJ',
@@ -55,7 +59,7 @@ testFlightDeployers = "TCUSER" // To enable, uncomment submitters in approval st
 devTeamEmails = "ozan.salman@consultant.turkcell.com.tr;yilmaz.edis@consultant.turkcell.com.tr"
 
 xcodeParams = [
-        xcodeApp: '14.2',
+        xcodeApp: '15.0',
         workspaceFile: 'Depo/Depo'
 ]
 
@@ -63,12 +67,17 @@ def flavors = [
     test: [
         configuration: 'Enterprise',
         developmentTeamID: 'LA4DZFY7SY',
-        ipaExportMethod: 'enterprise'
+        ipaExportMethod: 'enterprise',
+        appIdentifier: '1:685338462870:ios:f883a91e0c9638610d50b7',
+        googlePlistPath: 'Depo/Depo/App/googleAnalytics/LifeboxPlists/Ent_iOS/GoogleService-Info-ent.plist'
     ],
     prod: [
         configuration: 'AppStore',
         //developmentTeamID: use app.prodTeamID
-        ipaExportMethod: 'app-store'
+        ipaExportMethod: 'app-store',
+        appIdentifier: '1:590528416223:ios:1c8ad5eaa35bec7a',
+        googlePlistPath: 'Depo/Depo/App/googleAnalytics/LifeboxPlists/Store_iOS/GoogleService-Info.plist'
+
     ]
 ]
 
@@ -273,6 +282,7 @@ pipeline {
 				// testBuild()
                             // runXcode(app, 'test')
                             // publishToArtifactory(app, 'test')
+                            // dssLibrary.deployDsymToFirebase(app.versionInfoPath, "build/dsym.zip")
                         }
                     }
                 }
@@ -363,10 +373,12 @@ pipeline {
            }
             steps {
                 script {
+                        def flavor = flavors["${branchName.startsWith("release/") ? 'test' : 'prod'}"] 
                     apps.each { app ->
-			// testBuild()
-                        runXcode(app, 'prod')
+			            // testBuild()
+                        runXcode(app, 'prod') // TODO Burakla yapılcak runXcode(flavor, flavorConfiguration, flavorIpaExportMethod, flavorDevelopmentTeamID, appName, xcodeTarget, xcodeSchema, xcodeName, workspaceFile) 
                         publishToArtifactory(app, 'prod')
+                        dssLibrary.deployDsymToFirebase("Depo/Pods", flavor.googlePlistPath, "build/dsym.zip")
                     }
                 }
             }
@@ -378,6 +390,82 @@ pipeline {
 				}
 			}
         }
+        stage('Fortify') {
+            when {
+                beforeAgent true
+                anyOf{
+                    environment name: 'BUILD_TARGET', value: 'Appstore'
+                    expression { isSkipApproval && (branchName.startsWith("release/") || branchName.startsWith("devops")) }
+                }
+            }
+            agent { label agentName }
+            options {
+                skipDefaultCheckout true
+            }
+            environment {
+                IOS_PASS = credentials('iosLoginPass2')
+           }
+            steps {
+                script {
+                    apps.each { app ->
+                        dssLibrary.fortifyIos("${app.secAppName}_${env.BRANCH_NAME}_${BUILD_NUMBER}", "${app.secAppName}", "${app.secBranchName}", "${env.WORKSPACE}", "${env.WORKSPACE}/Depo/Depo.xcworkspace", "${app.xcodeSchema ?: app.name}", "Xcode14.2.app") //TODO
+                    }
+                }
+            }
+        }
+        /*
+        stage('Approve Deploy to Firebase') {
+            options { timeout(time: 24, unit: 'HOURS') }
+            when { expression { !isSkipApprovalFirebase } }
+            steps {
+                script {
+                    try {
+                        if (!isDev) {
+                            input ok:'Yes', message:'Deploy to Firebase?' //, submitter: "${ictsDeployers}"
+                        }
+                        env.DEPLOY_TO = 'Firebase'
+                        echo "Deploy to Firebase is approved. Starting the deployment..."
+
+                    } catch(err) {
+                        echo err.toString()
+                    }
+                }
+            }
+        }
+        stage('Deploying to Firebase') {
+            when {
+                beforeAgent true
+                anyOf{
+                    environment name: 'DEPLOY_TO', value: 'Firebase'
+                    expression { isSkipApprovalFirebase }
+                }
+            }
+            environment {
+                FIREBASE_TOKEN = credentials("lifebox-firebase-${branchName.startsWith("release/") ? 'prod' : 'test'}-token-ios")
+                DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t HTTP"
+            }
+            agent { label agentName }
+            options {
+                skipDefaultCheckout true
+            }
+            steps {
+                script {
+                    sh "export FIREBASE_TOKEN=${FIREBASE_TOKEN}"
+                    def flavor = flavors["${branchName.startsWith("release/") ? 'prod' : 'test'}"] 
+                    apps.each { app ->
+                        dssLibrary.deployToFirebase(flavor.appIdentifier, "build/*.ipa") 
+                   }
+                }
+            }
+			post {
+				always {
+					script {
+						email.notifyStage(successRecipientList: devTeamEmails, failureRecipientList: devTeamEmails)
+					}
+				}
+			}
+        }
+        */
         stage('Approve Deploy to Testflight') {
             options { timeout(time: 24, unit: 'HOURS') }
             when {
@@ -448,3 +536,4 @@ pipeline {
         }
     }
 }
+
