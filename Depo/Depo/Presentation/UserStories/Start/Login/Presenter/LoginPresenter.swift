@@ -155,9 +155,9 @@ extension LoginPresenter: LoginViewOutput {
                                appleGoogleUser: appleGoogleUser)
     }
     
-    func onForgotPasswordTap() {
+    func onForgotPasswordTap(loginText: String) {
         isPresenting = true
-        router.goToForgotPassword()
+        router.goToForgotPassword(loginText: loginText)
     }
     
     func startedEnteringPhoneNumber(withPlus: Bool) {

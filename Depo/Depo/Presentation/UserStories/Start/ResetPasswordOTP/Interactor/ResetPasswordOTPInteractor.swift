@@ -19,12 +19,14 @@ protocol ResetPasswordOTPInteractorOutput: PhoneVerificationInteractorOutput {
 final class ResetPasswordOTPInteractor {
     private let analyticsService = AnalyticsService()
     private let resetPasswordService: ResetPasswordService
+    private var referenceToken: String = ""
     let phoneNumber: String
+    
 
     init(resetPasswordService: ResetPasswordService, phoneNumber: String) {
         self.resetPasswordService = resetPasswordService
         self.phoneNumber = phoneNumber
-
+        self.referenceToken = resetPasswordService.referenceToken ?? ""
         resetPasswordService.delegate = self
     }
 
@@ -65,8 +67,7 @@ final class ResetPasswordOTPInteractor {
 
     func verifyCode(code: String) {
         isVerifying = true
-
-        resetPasswordService.verifyOTP(code: code)
+        resetPasswordService.verifyOTP(referenceToken: referenceToken, code: code)
     }
 
     private func verifyCodeFailed(with error: Error) {
