@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias ResetPasswordResponse = APIResponse<ResetPassword>
+typealias ResetPasswordResponse = ResetPassword
 
 struct ResetPassword: Codable {
     let action: ContinuationAction?

@@ -457,12 +457,13 @@ class RouterVC: NSObject {
         return loginController
     }
     
-    var forgotPasswordScreen: UIViewController? {
-        let inicializer = ForgotPasswordModuleInitializer()
+    func forgotPasswordScreen(loginText: String) -> UIViewController {
+        let initializer = ForgotPasswordModuleInitializer()
         let controller = ForgotPasswordViewController(nibName: "ForgotPasswordViewController",
                                                       bundle: nil)
-        inicializer.forgotpasswordViewController = controller
-        inicializer.setupVC()
+        initializer.forgotpasswordViewController = controller
+        initializer.loginText = loginText
+        initializer.setupVC()
         return controller
     }
     

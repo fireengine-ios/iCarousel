@@ -16,7 +16,7 @@ protocol ResetPasswordServiceProtocol {
     func beginResetFlow(with params: ForgotPasswordV2)
     func proceedVerification(with method: IdentityVerificationMethod)
     func sendOTP()
-    func verifyOTP(code: String)
+    func verifyOTP(referenceToken: String, code: String)
     func validateSecurityQuestion(id: Int, answer: String)
     func reset(newPassword: String)
 }
@@ -28,15 +28,17 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
     weak var delegate: ResetPasswordServiceDelegate?
 
     private let sessionManager = SessionManager.sessionWithoutAuth
-    private var referenceToken: String?
+    private(set) var referenceToken: String?
+    private var action: ResetPassword.ContinuationAction = .withSMSVerification
+    private(set) var msisdn: String?
     private(set) var isInSecondChallenge: Bool = false
 
     func beginResetFlow(with params: ForgotPasswordV2) {
         callForgotMyPassword(params: params) { result in
             switch result {
             case let .success(response):
+                self.msisdn = params.msisdn
                 self.handleFirstResponse(response)
-
             case let .failure(error):
                 self.delegate?.resetPasswordService(self, receivedError: error)
             }
@@ -91,13 +93,12 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
         }
     }
 
-    func verifyOTP(code: String) {
-        guard let referenceToken = self.referenceToken else { return }
+    func verifyOTP(referenceToken: String, code: String) {
         callValidatePhoneNumber(referenceToken: referenceToken, otp: code) { result in
             switch result {
-            case .success:
-                self.checkStatusAfterPhoneVerification(referenceToken: referenceToken)
-
+            case .success(let response):
+                //self.checkStatusAfterPhoneVerification(referenceToken: referenceToken)
+                self.afterVeriyfOTP(response: response, referenceToken: referenceToken)
             case let .failure(error):
                 self.delegate?.resetPasswordService(self, receivedError: error)
             }
@@ -130,7 +131,22 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
 
     private func handleFirstResponse(_ response: ResetPasswordResponse) {
         referenceToken = response.referenceToken
-        delegate?.resetPasswordService(self, resetBeganWithMethods: response.methods)
+        action = response.action ?? .withAvailableMethods
+        //delegate?.resetPasswordService(self, resetBeganWithMethods: response.methods)
+        
+        switch response.action {
+        case .withEmailLinkVerification:
+            delegate?.successForgotMyPassWordWithMail()
+        case .withSMSVerification:
+            delegate?.receivedOTPVerification(response.methods)
+            //delegate?.resetPasswordService(self, resetBeganWithMethods: response.methods)
+        case .withAvailableMethods:
+            return
+        case .withRecoveryEmailLinkVerification:
+            return
+        case .none:
+            return
+        }
     }
 
     private func proceedWithEmail(referenceToken: String, completion: @escaping DefaultResponseCompletion<Void>) {
@@ -160,6 +176,10 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
                 self.delegate?.resetPasswordService(self, receivedError: error)
             }
         }
+    }
+    
+    private func afterVeriyfOTP(response: ResetPasswordResponse, referenceToken: String) {
+        self.delegate?.resetPasswordService(self, phoneVerified: response.methods)
     }
 }
 
@@ -216,10 +236,15 @@ private extension ResetPasswordService {
         executePostRequest(param: param, handler: handler)
     }
 
-    func callValidatePhoneNumber(referenceToken: String, otp: String, completion: @escaping DefaultResponseCompletion<Void>) {
-        let param = ValidatePhoneNumber(token: referenceToken, otp: otp)
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { _ in
-            completion(.success(()))
+    func callValidatePhoneNumber(referenceToken: String, otp: String, completion: @escaping DefaultResponseCompletion<ResetPasswordResponse>) {
+        let param = ValidatePhoneNumber(token: referenceToken, otp: otp, verificationMethod: "MSISDN")
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { legacyResponse in
+            do {
+                let response = try legacyResponse.decodedResponse(ResetPasswordResponse.self)
+                completion(.success(response))
+            } catch {
+                completion(.failure(error))
+            }
         } fail: { error in
             completion(.failure(error))
         }
@@ -367,11 +392,11 @@ struct ForgotPasswordV2: RequestParametrs {
     }
 
     var patch: URL {
-        return RouteRequests.ForgotMyPassword.link
+        return RouteRequests.ForgotMyPasswordV2.link
     }
 
     var header: RequestHeaderParametrs {
-        let headers = RequestHeaders.base() + RequestHeaders.deviceUuidHeader()
+        let headers = RequestHeaders.base()
         if let captcha = attachedCaptcha {
             return headers + captcha.header
         }
@@ -407,22 +432,24 @@ private struct ValidatePhoneNumber: RequestParametrs {
 
     let token: String
     let otp: String
+    let verificationMethod: String
 
     var requestParametrs: Any {
         let dict: [String: Any] = [
             LbRequestkeys.referenceToken: token,
-            LbRequestkeys.otp: otp
+            LbRequestkeys.otp: otp,
+            LbRequestkeys.verificationMethod: verificationMethod
         ]
 
         return dict
     }
 
     var patch: URL {
-        return RouteRequests.ForgotMyPassword.validatePhoneNumber
+        return RouteRequests.ForgotMyPasswordV2.validatePhoneNumber
     }
 
     var header: RequestHeaderParametrs {
-        return RequestHeaders.base() + RequestHeaders.deviceUuidHeader()
+        return RequestHeaders.base()
     }
 }
 
