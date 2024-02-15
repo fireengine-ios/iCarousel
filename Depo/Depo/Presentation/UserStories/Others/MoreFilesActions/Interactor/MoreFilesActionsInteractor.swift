@@ -256,6 +256,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 
                 if let controller = UIApplication.topController() as? PhotoVideoDetailViewController {
                     self?.router.presentViewController(controller: activityVC)
+                } else if let controller = UIApplication.topController() as? TBMatikPhotosViewController {
+                    self?.router.presentViewController(controller: activityVC)
                 } else {
                     self?.router.presentViewControllerForShareOriginal(controller: activityVC)
                 }
