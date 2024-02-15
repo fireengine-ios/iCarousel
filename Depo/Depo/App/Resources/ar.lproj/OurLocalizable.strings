@@ -2247,7 +2247,15 @@ then {11,99 TRY/Month}*/
 "set_recoverymail_securityquestion_success" = "تم إنشاء البريد الإلكتروني الخاص بالاسترداد وسؤال الأمان.";
 "settings_set_password_apple_warning" = "لتعيين كلمة المرور الخاصة بك، يجب عليك تسجيل الدخول إلى lifebox باستخدام حساب Apple الخاص بك.";
 "lifebox_resignup_warning" = "حساب للمعلومات التي أدخلتها موجود بالفعل. إذا تابعت، سيتم حذف رقم GSM من الحساب الآخر. لن تتمكن من الوصول إلى حسابك إلا باستخدام عنوان بريدك الإلكتروني وكلمة المرور. هل أنت متأكد من رغبتك في المتابعة؟";
-"best_scene_discover_card_title" = "سلسلة الصور";
+
+/*Fuzzy*/
+"best_scene_title" = "سلسلة الصور";
 "best_scene_discover_card_body" = "اختر الأفضل من سلسلة الصور!";
 "print_discover_card_title" = "طباعة الحزمة";
 "print_discover_card_body" = "اطبع ما يصل إلى 5 من صورك كل شهر مع باقة طباعة وأرسلها مباشرةً إلى عنوانك مجاناً.";
+"can_not_sent_otp_sms" = "";
+"invalid_refenrence_code" = "";
+"delete_for_selected" = "";
+"keep_everything" = "";
+"delete_info" = "";
+"best_scene_discover_card_title" = "";

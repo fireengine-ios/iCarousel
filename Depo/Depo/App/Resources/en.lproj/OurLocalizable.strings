@@ -2299,7 +2299,15 @@ then {11,99 TRY/Month}*/
 "set_recoverymail_securityquestion_success" = "Your recovery email and security question have been created.";
 "settings_set_password_apple_warning" = "To set your password, you must log in to lifebox with your Apple Account.";
 "lifebox_resignup_warning" = "There is an account for the information you entered. If you continue, the GSM number from the other account will be deleted. You will be able to access your account only with your e-mail address and password. Are you sure you want to continue?";
-"best_scene_discover_card_title" = "Series Photos";
+
+/*Fuzzy*/
+"best_scene_title" = "Series Photos";
 "best_scene_discover_card_body" = "Choose the best from the series photos!";
 "print_discover_card_title" = "Print Package";
 "print_discover_card_body" = "Print up to 5 photos each month with the printing package and have them delivered to your address free of charge.";
+"can_not_sent_otp_sms" = "";
+"invalid_refenrence_code" = "";
+"delete_for_selected" = "";
+"keep_everything" = "";
+"delete_info" = "";
+"best_scene_discover_card_title" = "Series Photos";

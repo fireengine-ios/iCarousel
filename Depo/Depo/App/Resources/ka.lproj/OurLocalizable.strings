@@ -135,7 +135,7 @@
 "Wi-Fi" = "Wi-Fi";
 "Free up space" = "გაათავისუფლე ადგილი";
 "Your device memory is almost full" = "შენი მოწყობილობის მახსოვრობა თითქმის სავსეა";
-"There are some duplicated items both in your device and lifebox" = "მოდი შევამოწმოთ დუბლირებული პუნქტები როგორც შენს მოწყობილობაში, ასევე lifebox-ში!";
+"There are some duplicated items both in your device and lifebox" = "მოდი შევამოწმოთ დუბლირებული ფაილები როგორც შენს მოწყობილობაში, ასევე lifebox-ში!";
 "Operation is complete" = "ქმედება წარმატებულია";
 "Download is complete" = "გადმოწერა დასრულდა";
 "Deleting is complete" = "წაშლა დასრულდა";
@@ -228,7 +228,7 @@
 "Date modified" = "შეცვლის თარიღი";
 "Duration" = "ხანგრძლივობა";
 "File size" = "ფაილის ზომა";
-"Items" = "ნივთები";
+"Items" = "ფაილები";
 "Folder size" = "საქაღალდის ზომა";
 "File Info" = "ფაილის ინფო";
 "File Name" = "ფაილის სახელი";
@@ -2225,7 +2225,13 @@ then {11,99 TRY/Month}*/
 "set_recoverymail_securityquestion_success" = "აღდგენის ელ.ფოსტა და უსაფრთხოების შეკითხვა შექმნილია";
 "settings_set_password_apple_warning" = "პაროლის დასაყენებლად უნდა შეხვიდე lifebox-ში შენი Apple-ის ანგარიშით";
 "lifebox_resignup_warning" = "";
-"best_scene_discover_card_title" = "";
+"best_scene_title" = "";
 "best_scene_discover_card_body" = "";
 "print_discover_card_title" = "";
 "print_discover_card_body" = "";
+"can_not_sent_otp_sms" = "";
+"invalid_refenrence_code" = "";
+"delete_for_selected" = "";
+"keep_everything" = "";
+"delete_info" = "";
+"best_scene_discover_card_title" = "";

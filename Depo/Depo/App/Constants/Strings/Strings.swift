@@ -378,4 +378,11 @@ enum Strings: String, Localizable {
     case setRecoveryMailSecurityQuestionSuccess = "set_recoverymail_securityquestion_success"
     case settingsSetPasswordApppleWarning = "settings_set_password_apple_warning"
     case lifeboxResignupWarning = "lifebox_resignup_warning"
+    
+    case canNotSentOtpSms = "can_not_sent_otp_sms"
+    case invalidRefenrenceCode = "invalid_refenrence_code"
+    case tooManyRequests = "too_many_requests"
+    case noAccountFound = "no_account_found"
+    case invalidOtp = "invalid_otp"
+    case twoFaTooManyRequestsErrorMessage = "two_fa_too_many_requests_error_message"
 }

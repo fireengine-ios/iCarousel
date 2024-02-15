@@ -137,6 +137,11 @@ struct RouteRequests {
         static let validateSecurityQuestion = baseUrl +/ "forgotMyPassword/validateSecurityQuestion"
         static let change = baseUrl +/ "forgotMyPassword/change"
     }
+    
+    enum ForgotMyPasswordV2 {
+        static let link = baseUrl +/ "v2/forgotMyPassword"
+        static let validatePhoneNumber = baseUrl +/ "v2/forgotMyPassword/verify"
+    }
 
     // MARK: EULA 
     static let eulaGet     = "eula/get/%@?brand=" + applicationTarget
