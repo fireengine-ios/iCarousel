@@ -15,4 +15,6 @@ protocol ForgotPasswordViewOutput {
     func startedEnteringPhoneNumber(withPlus: Bool)
 
     func resetPassword(withLogin login: String, enteredCaptcha: String, captchaUDID: String)
+    
+    func popBack()
 }

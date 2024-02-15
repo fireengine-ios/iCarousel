@@ -12,16 +12,17 @@ class ForgotPasswordModuleInitializer: NSObject {
 
     //Connect with object on storyboard
     @IBOutlet weak var forgotpasswordViewController: ForgotPasswordViewController!
+    var loginText: String = ""
 
     override func awakeFromNib() {
 
         let configurator = ForgotPasswordModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: forgotpasswordViewController)
+        configurator.configureModuleForViewInput(viewInput: forgotpasswordViewController, loginText: loginText)
     }
     
     func setupVC() {
         let configurator = ForgotPasswordModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: forgotpasswordViewController)
+        configurator.configureModuleForViewInput(viewInput: forgotpasswordViewController, loginText: loginText)
     }
 
 }

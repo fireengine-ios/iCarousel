@@ -16,6 +16,8 @@ protocol ForgotPasswordViewInput: AnyObject, Waiting {
 
     func enterPhoneCountryCode(countryCode: String)
     func insertPhoneCountryCode(countryCode: String) //at the begining of the field
+    
+    func successForgotMyPassWordWithMail()
 }
 
 struct ForgotPasswordTexts {

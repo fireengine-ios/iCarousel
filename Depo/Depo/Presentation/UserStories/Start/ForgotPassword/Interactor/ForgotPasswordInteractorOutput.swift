@@ -15,4 +15,7 @@ protocol ForgotPasswordInteractorOutput: AnyObject {
 
     func receivedVerificationMethods(_ methods: [IdentityVerificationMethod])
     func requestFailed(withError error: String)
+    
+    func successForgotMyPassWordWithMail()
+    func receivedOTPVerification(_ methods: [IdentityVerificationMethod])
 }

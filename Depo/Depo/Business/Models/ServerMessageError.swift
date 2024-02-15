@@ -26,6 +26,14 @@ final class ServerMessageError {
         static let privateShareMessageLimit = "Invalid sharing message"
         static let privateSharePhoneOrMailLimit = "Invalid sharing subject"
         static let privateShareNumberOfItemsLimit = "Max sharing item limit exceeded"
+        
+        static let canNotSentOTPSms = "CAN_NOT_SENT_OTP_SMS"
+        static let canNotChangePasswordForgotMyPassword = "CAN_NOT_CHANGE_PASSWORD"
+        static let invalidReferenceToken = "INVALID_REFERENCE_TOKEN"
+        static let tooManyRequests = "TOO_MANY_REQUESTS"
+        static let accountNotFound = "ACCOUNT_NOT_FOUND"
+        static let invalidOTP = "INVALID_OTP"
+        static let securityQuestionAnswerOrIdInvalid = "SECURITY_QUESTION_ANSWER_OR_ID_INVALID"
     }
 }
 extension ServerMessageError: LocalizedError {
@@ -47,6 +55,20 @@ extension ServerMessageError: LocalizedError {
             return TextConstants.privateSharePhoneOrMailLimit
         case ErrorKeys.privateShareNumberOfItemsLimit:
             return TextConstants.privateShareNumberOfItemsLimit
+        case ErrorKeys.canNotSentOTPSms:
+            return localized(.canNotSentOtpSms)
+        case ErrorKeys.canNotChangePasswordForgotMyPassword:
+            return localized(.resetPasswordCantChangePassword)
+        case ErrorKeys.invalidReferenceToken:
+            return localized(.invalidRefenrenceCode)
+        case ErrorKeys.tooManyRequests:
+            return localized(.tooManyRequests)
+        case ErrorKeys.accountNotFound:
+            return localized(.noAccountFound)
+        case ErrorKeys.invalidOTP:
+            return localized(.invalidOtp)
+        case ErrorKeys.securityQuestionAnswerOrIdInvalid:
+            return localized(.securityPopupSecurityQuestionWarning)
         default:
             return message
         }
