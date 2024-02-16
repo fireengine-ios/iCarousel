@@ -28,6 +28,7 @@ final class HomePageInteractor: HomePageInteractorInput {
     private let campaignService = CampaignServiceImpl()
 
     private var isShowPopupAboutPremium = true
+    private var isShowPopupDiscoverCard = true
     private(set) var homeCardsLoaded = false
     private var isFirstAuthorityRequest = true
     private var bannerCallMethodCount: Int = 0
@@ -48,6 +49,7 @@ final class HomePageInteractor: HomePageInteractorInput {
         getQuotaInfo()
         getAccountInfo()
         getPremiumCardInfo(loadStatus: .reloadAll)
+        getBestScene()
         getAllCardsForHomePage()
         getCampaignStatus()
         
@@ -68,11 +70,13 @@ final class HomePageInteractor: HomePageInteractorInput {
         
         getCampaignStatus()
         getPremiumCardInfo(loadStatus: .reloadAll)
+        getBestScene()
         getAllCardsForHomePage()
     }
 
     func updateLocalUserDetail() {
         getPremiumCardInfo(loadStatus: .reloadSingle)
+        getBestScene()
         getInstaPickInfo()
     }
     
@@ -201,6 +205,35 @@ final class HomePageInteractor: HomePageInteractorInput {
             }
         }
     }
+    
+    private var bestGroupTask: URLSessionTask?
+
+    private func getBestScene() {
+        bestGroupTask = homeCardsService.getBestGroup { [weak self] result in
+            guard let self = self else { return }
+            self.output.stopRefresh()
+            switch result {
+            case .success(let response):
+                
+                let discoverCards = response.map { burstGroup -> HomeCardResponse in
+                    let homeCard = HomeCardResponse()
+                    
+                    homeCard.id = burstGroup.id
+                    homeCard.type = .discoverCard
+                                        
+                    return homeCard
+                }
+                self.output.didObtainHomeCards(discoverCards)
+                self.fillCollectionView(isReloadAll: true)
+
+            case .failed(let error):
+                DispatchQueue.main.async {
+                    self.output.didObtainError(with: error.localizedDescription, isNeedStopRefresh: true)
+                }
+            }
+        }
+    }
+
     
     private func getInstaPickInfo() {
         instapickService.getAnalyzesCount { [weak self] result in

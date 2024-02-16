@@ -45,7 +45,8 @@ enum OperationType: String {
     case paycell                    = "PAYCELL"
     case drawCampaign               = "DRAW_CAMPAIGN"
     case milliPiyango               = "MILLIPIYANGO"
-    case biOgrenci                 = "BI_OGRENCI"
+    case biOgrenci                  = "BI_OGRENCI"
+    case discoverCard               = "DISCOVER_CARD"
 }
 
 typealias BlockObject = VoidHandler
@@ -441,6 +442,10 @@ class CardsManager: NSObject {
             let popup = InvitationCard.initFromNib()
             popup.configurateWithType(viewType: .biOgrenci)
             cardView = popup
+        case .discoverCard:
+            let popUp = DiscoverCard.initFromNib()
+            popUp.configurateWithType(viewType: .discoverCard)
+            cardView = popUp
         }
         
         /// seems like duplicated logic "set(object:".
