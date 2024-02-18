@@ -443,9 +443,9 @@ class CardsManager: NSObject {
             popup.configurateWithType(viewType: .biOgrenci)
             cardView = popup
         case .discoverCard:
-            let popUp = DiscoverCard.initFromNib()
-            popUp.configurateWithType(viewType: .discoverCard)
-            cardView = popUp
+            let popup = DiscoverCard.initFromNib()
+            popup.configurateWithType(viewType: .discoverCard)
+            cardView = popup
         }
         
         /// seems like duplicated logic "set(object:".
