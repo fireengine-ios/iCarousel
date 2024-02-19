@@ -100,6 +100,7 @@ enum ElementTypes {
     static var trashState: [ElementTypes] = [.restore, .delete]
     static var hiddenState: [ElementTypes] = [.unhide, .moveToTrash]
     static var activeState: [ElementTypes] = [.hide, .moveToTrash]
+    static var activeStatePeople: [ElementTypes] = [.print, .moveToTrash]
 
     static func detailsElementsConfig(for item: Item, status: ItemStatus, viewType: DetailViewType) -> [ElementTypes] {
         var result = [ElementTypes]()
@@ -215,7 +216,11 @@ enum ElementTypes {
                 result = ElementTypes.trashState
                 
             default:
-                result = [.share, .download, .addToAlbum] + ElementTypes.activeState
+                result = [.share, .download, .addToAlbum]
+                
+                if SingletonStorage.shared.accountInfo?.isUserFromTurkey == true {
+                    result =  [.share, .download, .addToAlbum] + ElementTypes.activeStatePeople
+                }
             }
             
         case .actionSheet:
@@ -248,6 +253,7 @@ enum ElementTypes {
             default:
                 result = [.createStory]
                 result.append(.removeFromFaceImageAlbum)
+                result.append(.hide)
             }
         case .actionSheetWithoutChangeCover:
             result = [.select]
