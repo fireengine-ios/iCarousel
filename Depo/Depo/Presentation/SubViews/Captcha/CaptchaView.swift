@@ -184,16 +184,6 @@ final class CaptchaView: UIView, FromNib {
             }
             }, fail: { [weak self] error in
                 UIApplication.showErrorAlert(message: TextConstants.tooManyRequests)
-                
-                /// When you open the LoginViewController, another request is made to the server, which will already show 503 error
-                let topController = UIApplication.topController()
-                if !((topController is LoginViewController) || (topController is RegistrationViewController)) {
-                    if !error.isServerUnderMaintenance {
-                        DispatchQueue.main.async {
-                            UIApplication.showErrorAlert(message: TextConstants.tooManyRequests)
-                        }
-                    }
-                }
         })
     }
     
