@@ -215,6 +215,8 @@ final class HomePageInteractor: HomePageInteractorInput {
             switch result {
             case .success(let response):
                 
+                print("⚠️", response)
+                
                 let discoverCards = response.map { burstGroup -> HomeCardResponse in
                     let homeCard = HomeCardResponse()
                     
@@ -223,8 +225,8 @@ final class HomePageInteractor: HomePageInteractorInput {
                                         
                     return homeCard
                 }
-                self.output.didObtainHomeCards(discoverCards)
-                self.fillCollectionView(isReloadAll: true)
+                
+                CardsManager.default.startOperationWith(type: .discoverCard)
 
             case .failed(let error):
                 DispatchQueue.main.async {
