@@ -10,7 +10,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     
     weak var view: BottomSelectionTabBarViewInput!
     var router: BottomSelectionTabBarRouterInput!
-
+    
     let middleTabBarRect = CGRect(x: Device.winSize.width / 2 - 5, y: Device.winSize.height - 49, width: 10, height: 50)
     
     func viewIsReady() {
@@ -261,7 +261,32 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             case .print:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .print))
                 self.interactor.trackEvent(elementType: .print)
-                self.router.showPrint(items: selectedItems)
+                
+                let isPackage = SingletonStorage.shared.accountInfo?.photoPrintPackage ?? true
+                let maxSelection = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
+                let sendRemaining = SingletonStorage.shared.accountInfo?.photoPrintSendRemaining ?? 0
+                
+                let wrapData = selectedItems as? [WrapData] ?? []
+                let searchItemResponse = wrapData.map { $0.toSearchItemResponse() }
+                
+                let selectedItemsCount = selectedItems.count
+                
+                guard isPackage else {
+                    let vc = PhotoPrintNoPackagePopup.with()
+                    vc.open()
+                    return
+                }
+                
+                if selectedItemsCount > maxSelection {
+                    let vc = PhotoPrintNoRightPopup.with()
+                    vc.open()
+                } else if sendRemaining == 0 {
+                    let vc = PhotoPrintNoRightPopup.with()
+                    vc.open()
+                } else {
+                    router.showPrintViewController(selectedPhotos: searchItemResponse)
+                }
+                
             case .removeAlbum:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
                 self.interactor.removeAlbums(items: selectedItems)

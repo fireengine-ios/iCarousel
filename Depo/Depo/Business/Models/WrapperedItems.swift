@@ -1432,3 +1432,25 @@ extension WrapData {
         return nil
     }
 }
+
+extension WrapData {
+    func toSearchItemResponse() -> SearchItemResponse {
+        let response = SearchItemResponse()
+
+        response.uuid = self.uuid
+        response.name = self.name
+        response.createdDate = self.creationDate
+        response.lastModifiedDate = self.lastModifiDate
+        response.bytes = self.fileSize
+        response.contentType = self.mimeType
+        response.folder = self.isFolder
+        response.status = self.status.rawValue
+        response.parent = self.parent
+        response.tempDownloadURL = self.tmpDownloadUrl
+        response.metadata = self.metaData
+        response.albums = self.albums
+
+        return response
+    }
+}
+
