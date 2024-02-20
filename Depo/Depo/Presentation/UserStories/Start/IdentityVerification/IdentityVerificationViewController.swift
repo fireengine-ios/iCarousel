@@ -104,9 +104,9 @@ final class IdentityVerificationViewController: BaseViewController {
         navigationController?.pushViewController(viewController, animated: true)
     }
 
-    private func navigateToSecurityQuestion(questionId: Int) {
+    private func navigateToSecurityQuestion() {
         let viewController = ValidateSecurityQuestionViewController(
-            resetPasswordService: resetPasswordService, questionId: questionId
+            resetPasswordService: resetPasswordService
         )
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -122,8 +122,8 @@ extension IdentityVerificationViewController: ResetPasswordServiceDelegate {
             showLinkSentToEmailPopupAndExit(email: email, isRecoveryEmail: true)
         case let .sms(phoneNumber):
             navigateToOTP(phoneNumber: phoneNumber)
-        case let .securityQuestion(id):
-            navigateToSecurityQuestion(questionId: id)
+        case .securityQuestion:
+            navigateToSecurityQuestion()
         case .unknown:
             break
         }

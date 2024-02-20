@@ -2249,7 +2249,15 @@ then {11,99 TRY/Month}*/
 "set_recoverymail_securityquestion_success" = "Ваша электронная почта для восстановления и секретный вопрос были созданы.";
 "settings_set_password_apple_warning" = "Чтобы установить пароль, необходимо войти в lifebox с помощью учетной записи Apple.";
 "lifebox_resignup_warning" = "Аккаунт для введенной вами информации уже существует. Если вы продолжите, номер GSM из другого аккаунта будет удален. Вы сможете получить доступ к своему аккаунту только с помощью адреса электронной почты и пароля. Вы уверены, что хотите продолжить?";
-"best_scene_discover_card_title" = "Серия Фотографий";
+
+/*Fuzzy*/
+"best_scene_title" = "Серия Фотографий";
 "best_scene_discover_card_body" = "Выберите лучшее из серии фотографий!";
 "print_discover_card_title" = "Пакет Печати";
 "print_discover_card_body" = "Печатайте до 5 фотографий каждый месяц с пакетом печати и получайте их бесплатно прямо на свой адрес.";
+"can_not_sent_otp_sms" = "";
+"invalid_refenrence_code" = "";
+"delete_for_selected" = "";
+"keep_everything" = "";
+"delete_info" = "";
+"best_scene_discover_card_title" = "";

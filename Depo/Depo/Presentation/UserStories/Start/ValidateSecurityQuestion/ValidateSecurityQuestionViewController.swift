@@ -11,15 +11,13 @@ import UIKit
 final class ValidateSecurityQuestionViewController: BaseViewController, KeyboardHandler {
     private let resetPasswordService: ResetPasswordService
     private let accountService: AccountService
-    private let questionId: Int
     private let analyticsService = AnalyticsService()
+    private var secretQuestionsResponse: [SecretQuestionsResponse]? = nil
+    private lazy var answer = SecretQuestionWithAnswer()
 
-    init(resetPasswordService: ResetPasswordService,
-         accountService: AccountService = AccountService(),
-         questionId: Int) {
+    init(resetPasswordService: ResetPasswordService, accountService: AccountService = AccountService()) {
         self.resetPasswordService = resetPasswordService
         self.accountService = accountService
-        self.questionId = questionId
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -52,7 +50,7 @@ final class ValidateSecurityQuestionViewController: BaseViewController, Keyboard
 
     private let questionView: SecurityQuestionView = {
         let view = SecurityQuestionView.initFromNib()
-        view.showsArrowButton = false
+        view.showsArrowButton = true
         return view
     }()
 
@@ -67,7 +65,7 @@ final class ValidateSecurityQuestionViewController: BaseViewController, Keyboard
     override func viewDidLoad() {
         super.viewDidLoad()
         title = localized(.resetPasswordTitle)
-
+        questionView.delegate = self
         populateQuestion()
 
         continueButton.isEnabled = false
@@ -94,10 +92,25 @@ final class ValidateSecurityQuestionViewController: BaseViewController, Keyboard
 
     @IBAction private func continueTapped() {
         guard let answer = answerView.textField.text else { return }
-
+        self.answer.questionAnswer = answer
         showSpinnerIncludeNavigationBar()
         resetPasswordService.delegate = self
-        resetPasswordService.validateSecurityQuestion(id: questionId, answer: answer)
+        resetPasswordService.validateSecurityQuestion(id: self.answer.questionId ?? 0, answer: answer)
+    }
+}
+
+extension ValidateSecurityQuestionViewController: SelectQuestionViewControllerDelegate {
+    func didSelectQuestion(question: SecretQuestionsResponse?) {
+        questionView.setQuestion(question: question?.text ?? "")
+        answer.questionId = question?.id
+        answer.question = question?.text
+    }
+}
+
+extension ValidateSecurityQuestionViewController: SecurityQuestionViewDelegate {
+    func selectSecurityQuestionTapped() {
+        let controller = SelectQuestionViewController.createController(questions: secretQuestionsResponse!, delegate: self, fromInfoView: false)
+        self.present(controller, animated: true)
     }
 }
 
@@ -144,22 +157,17 @@ extension ValidateSecurityQuestionViewController: UITextFieldDelegate {
 private extension ValidateSecurityQuestionViewController {
     func populateQuestion() {
         showSpinner()
-        getQuestionTitle { [weak self] title in
+        getQuestionTitle { [weak self] questions in
             self?.hideSpinner()
-            if let title = title {
-                self?.questionView.setQuestion(question: title)
-            } else {
-                self?.navigationController?.popViewController(animated: true)
-            }
         }
     }
 
     func getQuestionTitle(completion: @escaping (String?) -> Void) {
-        accountService.getListOfSecretQuestions { [questionId] result in
+        accountService.getListOfSecretQuestions { [weak self] result in
             switch result {
             case let .success(questions):
-                let question = questions.first { $0.id == questionId }
-                completion(question?.text)
+                self?.secretQuestionsResponse = questions
+                completion("")
             case let .failed(error):
                 debugLog("Failed to get question list. \(error)")
                 completion(nil)

@@ -21,6 +21,11 @@ class ForgotPasswordRouter: ForgotPasswordRouterInput {
         vc.open()
 
     }
+    
+    func receivedOTPVerification(service: ResetPasswordService, availableMethods: [IdentityVerificationMethod]) {
+        let viewController = ResetPasswordOTPModuleInitializer.viewController(resetPasswordService: service, phoneNumber: service.msisdn ?? "")
+        RouterVC().replaceTopViewControllerWithViewController(viewController)
+    }
 
     func proceedToIdentityVerification(service: ResetPasswordService,
                                        availableMethods: [IdentityVerificationMethod]) {
@@ -31,10 +36,7 @@ class ForgotPasswordRouter: ForgotPasswordRouterInput {
     
     func popBack() {//Goes to Login
         let router = RouterVC()
-        let navVC = router.navigationController//rootViewController
+        let navVC = router.navigationController
         navVC?.popViewController(animated: true)
-//        let navVC = UINavigationController(rootViewController: router.loginScreen!)
-//        navVC.navigationBar.isHidden = true
-//        router.setNavigationController(controller: navVC)
     }
 }

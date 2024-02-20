@@ -9,9 +9,9 @@
 class LoginRouter: LoginRouterInput {
     let router = RouterVC()
     
-    func goToForgotPassword() {
-        let forgotPassword = router.forgotPasswordScreen
-        router.pushViewController(viewController: forgotPassword!)
+    func goToForgotPassword(loginText: String) {
+        let forgotPassword = router.forgotPasswordScreen(loginText: loginText)
+        router.pushViewController(viewController: forgotPassword)
     }
     
     func goToHomePage() {

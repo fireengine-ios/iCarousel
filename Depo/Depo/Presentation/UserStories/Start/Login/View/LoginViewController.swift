@@ -291,7 +291,7 @@ final class LoginViewController: BaseViewController {
     }
     
     @IBAction func onForgotPasswordTap(_ sender: Any) {
-        output.onForgotPasswordTap()
+        output.onForgotPasswordTap(loginText: loginEnterView.textField.text ?? "")
     }
 }
 

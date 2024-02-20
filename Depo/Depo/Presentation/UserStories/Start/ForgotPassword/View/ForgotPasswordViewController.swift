@@ -14,16 +14,18 @@ final class ForgotPasswordViewController: ViewController {
     var output: ForgotPasswordViewOutput!
     
     @IBOutlet weak var scrollView: UIScrollView!
-    
     @IBOutlet weak var infoTitle: UILabel!
-   
+    @IBOutlet weak var infoImageView: UIImageView! {
+        willSet {
+            newValue.image = Image.forgetPassPopupLock.image
+        }
+    }
     @IBOutlet weak var loginEnterView: ProfileTextEnterView!
-
     @IBOutlet private weak var captchaView: CaptchaView!
-    
     @IBOutlet weak var sendPasswordButton: WhiteButtonWithRoundedCorner!
-
     fileprivate let keyboard = Typist.shared
+    
+    var loginEnterViewText: String = ""
 
     // MARK: Life cycle
     
@@ -87,7 +89,7 @@ final class ForgotPasswordViewController: ViewController {
     
     private func setupInputTitle() {
         let titleLabel = loginEnterView.titleLabel
-        loginEnterView.textField.text = ""
+        loginEnterView.textField.text = loginEnterViewText
         titleLabel.textColor = AppColor.forgetPassText.color
 
         if Device.isIpad {
@@ -268,6 +270,20 @@ extension ForgotPasswordViewController: ForgotPasswordViewInput {
     func showCapcha() {
         captchaView.updateCaptcha()
         updateButtonState()
+    }
+    
+    func successForgotMyPassWordWithMail() {
+        let message = String(format: localized(.resetPasswordEmailPopupMessage), loginEnterView.textField.text ?? "")
+        
+        let popUp = PopUpController.withDark(title: "E-Posta ile Doğrulama",
+                                         message: message,
+                                         image: .custom(Image.forgetPassPopupLock.image),
+                                         buttonTitle: TextConstants.ok) { vc in
+                                         vc.close {
+                                             self.output.popBack()
+                                         }
+        }
+        popUp.open()
     }
 
     func setTexts(_ texts: ForgotPasswordTexts) {

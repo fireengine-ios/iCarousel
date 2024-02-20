@@ -39,12 +39,7 @@ final class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
     }
 
     func sendForgotPasswordRequest(withLogin login: String, enteredCaptcha: String, captchaUDID: String) {
-        if isV2Enabled {
-            trackForgotAction()
-            callV2(login: login, enteredCaptcha: enteredCaptcha, captchaUDID: captchaUDID)
-        } else {
-            callV1(email: login, enteredCaptcha: enteredCaptcha, captchaUDID: captchaUDID)
-        }
+        callV2(login: login, enteredCaptcha: enteredCaptcha, captchaUDID: captchaUDID)
     }
 
     private func callV2(login: String, enteredCaptcha: String, captchaUDID: String) {
@@ -136,5 +131,13 @@ extension ForgotPasswordInteractor: ResetPasswordServiceDelegate {
 
     func resetPasswordService(_ service: ResetPasswordService, receivedError error: Error) {
         output.requestFailed(withError: error.localizedDescription)
+    }
+    
+    func successForgotMyPassWordWithMail() {
+        output.successForgotMyPassWordWithMail()
+    }
+    
+    func receivedOTPVerification(_ methods: [IdentityVerificationMethod]) {
+        output.receivedOTPVerification(methods)
     }
 }

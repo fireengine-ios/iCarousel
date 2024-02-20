@@ -19,7 +19,7 @@ protocol LoginViewOutput {
     func sendLoginAndPassword(login: String, password: String, appleGoogleUser: AppleGoogleUser?)
     func sendLoginAndPasswordWithCaptcha(login: String, password: String, captchaID: String, captchaAnswer: String, appleGoogleUser: AppleGoogleUser?)
     
-    func onForgotPasswordTap()
+    func onForgotPasswordTap(loginText: String)
     
     func startedEnteringPhoneNumber(withPlus: Bool)
     

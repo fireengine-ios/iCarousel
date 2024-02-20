@@ -2235,7 +2235,15 @@ then {11,99 TRY/Month}*/
 "set_recoverymail_securityquestion_success" = "Au fost create e-mailul de recuperare și întrebarea secretă.";
 "settings_set_password_apple_warning" = "Trebuie să fiți conectat la lifebox cu un cont Apple pentru a seta o parolă.";
 "lifebox_resignup_warning" = "Există deja un cont pentru informațiile pe care le-ați introdus. Dacă continuați, numărul GSM din celălalt cont va fi șters. Veți putea accesa contul dvs. doar cu adresa dvs. de e-mail și parola. Sunteți sigur că doriți să continuați?";
-"best_scene_discover_card_title" = "Serie de Fotografii";
+
+/*Fuzzy*/
+"best_scene_title" = "Serie de Fotografii";
 "best_scene_discover_card_body" = "Alegeți cea mai bună dintr-o serie de fotografii!";
 "print_discover_card_title" = "Pachet de Imprimare";
 "print_discover_card_body" = "Imprimați până la 5 din fotografiile dvs. în fiecare lună cu un pachet de imprimare și trimiteți-le gratuit direct la adresa dvs.";
+"can_not_sent_otp_sms" = "";
+"invalid_refenrence_code" = "";
+"delete_for_selected" = "";
+"keep_everything" = "";
+"delete_info" = "";
+"best_scene_discover_card_title" = "";
