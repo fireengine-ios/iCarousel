@@ -270,7 +270,7 @@ private extension ResetPasswordService {
 
     func callContinueWithEmail(referenceToken: String, completion: @escaping DefaultResponseCompletion<Void>) {
         let verificationMethod = VerificationMethod.eMail.methodString
-        let param = TokenInBody(token: referenceToken, verificationMethod: verificationMethod, url: RouteRequests.ForgotMyPasswordV2.continueWithEmail)
+        let param = TokenInBody(referenceToken: referenceToken, verificationMethod: verificationMethod)
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { _ in
             completion(.success(()))
         } fail: { error in
@@ -281,7 +281,7 @@ private extension ResetPasswordService {
 
     func callContinueWithRecoveryEmail(referenceToken: String, completion: @escaping DefaultResponseCompletion<Void>) {
         let verificationMethod = VerificationMethod.recoveryEMail.methodString
-        let param = TokenInBody(token: referenceToken, verificationMethod: verificationMethod, url: RouteRequests.ForgotMyPasswordV2.continueWithRecoveryEmail)
+        let param = TokenInBody(referenceToken: referenceToken, verificationMethod: verificationMethod)
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { _ in
             completion(.success(()))
         } fail: { error in
@@ -414,18 +414,19 @@ private struct TokenInBody: RequestParametrs {
         return NumericConstants.defaultTimeout
     }
 
-    let token: String
+    let referenceToken: String
     let verificationMethod: String
-    let url: URL
 
     var requestParametrs: Any {
         return [
-            LbRequestkeys.token: token,
+            LbRequestkeys.referenceToken: referenceToken,
             LbRequestkeys.verificationMethod: verificationMethod
         ]
     }
 
     var patch: URL {
+        let patch = String(format: RouteRequests.ForgotMyPasswordV2.continueWithEmailOrRecoveryEmail.absoluteString, "?", referenceToken)
+        let url = URL(string: patch) ?? RouteRequests.ForgotMyPasswordV2.continueWithEmailOrRecoveryEmail
         return url
     }
 

@@ -141,8 +141,7 @@ struct RouteRequests {
     enum ForgotMyPasswordV2 {
         static let link = baseUrl +/ "v2/forgotMyPassword"
         static let validatePhoneNumber = baseUrl +/ "v2/forgotMyPassword/verify"
-        static let continueWithEmail = baseUrl +/ "v2/forgotMyPassword"
-        static let continueWithRecoveryEmail = baseUrl +/ "v2/forgotMyPassword"
+        static let continueWithEmailOrRecoveryEmail = baseUrl +/ "v2/forgotMyPassword%@referenceToken=%@"
         static let validateSecurityQuestion = baseUrl +/ "v2/forgotMyPassword/verify"
     }
 
