@@ -257,4 +257,8 @@ enum Image: String, AppImage {
     case iconDelivery
     case iconAddUnselectPlus
     case iconNoRight
+    
+    /// Prepairing Loading View
+    case loadingCircle
+    case iconHeaderPreparing
 }

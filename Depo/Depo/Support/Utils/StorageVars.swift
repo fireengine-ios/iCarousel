@@ -99,6 +99,12 @@ final class UserDefaultsVars: StorageVars {
         return version
     }
     
+    private let isProcessPrepairingDoneKey = "isProcessDonePrepairing"
+    var isProcessPrepairingDone: Bool? {
+        get { return userDefaults.bool(forKey: isProcessPrepairingDoneKey) }
+        set { userDefaults.set(newValue, forKey: isProcessPrepairingDoneKey) }
+    }
+    
     private let currentAppVersionKey = "currentAppVersionKey"
     var currentAppVersion: String? {
         get { return userDefaults.string(forKey: currentAppVersionKey) }
