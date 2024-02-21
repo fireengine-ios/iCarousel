@@ -287,7 +287,7 @@ extension ForgotPasswordViewController: ForgotPasswordViewInput {
     }
 
     func setTexts(_ texts: ForgotPasswordTexts) {
-        infoTitle.text = texts.instructions
+        infoTitle.text = localized(.forgotMyPasswordInfo)
         loginEnterView.titleLabel.text = texts.emailInputTitle
 
         let font = loginEnterView.textField.font ?? UIFont()
