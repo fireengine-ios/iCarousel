@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 protocol DiscoverCardPopupDelegate: AnyObject {
     func removeDiscoverCard()
@@ -22,11 +23,25 @@ class DiscoverCard: BaseCardView {
     private var operation: OperationType?
     weak var popupDelegate: DiscoverCardPopupDelegate?
     
+    var imageUrls: [String] = []
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         setupCollectionView()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleBestSceneNotification(_:)), name: .didReceiveBestScene, object: nil)
     }
+    
+    @objc func handleBestSceneNotification(_ notification: Notification) {
+        if let imageUrls = notification.userInfo?["imageUrls"] as? [String] {
+            let urlsToShow = imageUrls.count > 5 ? Array(imageUrls.prefix(5)) : imageUrls
+            
+            self.imageUrls = urlsToShow
+            collectionView.reloadData()
+        }
+    }
+
     
     override func configurateView() {
         super.configurateView()
@@ -56,12 +71,11 @@ class DiscoverCard: BaseCardView {
     }
     
     private func setupCollectionView() {
-        
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(DiscoverCollectionViewCell.self, forCellWithReuseIdentifier: "DiscoverCollectionViewCell")
         collectionView.showsHorizontalScrollIndicator = false
-
+        
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 145, height: 145)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
@@ -69,22 +83,23 @@ class DiscoverCard: BaseCardView {
         layout.scrollDirection = .horizontal
         collectionView.collectionViewLayout = layout
     }
-
+    
 }
-
 
 extension DiscoverCard: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return imageUrls.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DiscoverCollectionViewCell", for: indexPath) as! DiscoverCollectionViewCell
         
-        cell.imageView.image = UIImage(named: "iphone")
-        cell.bottomShadowView.image = UIImage(named: "iphone")
-        cell.topShadowView.image = UIImage(named: "iphone")
+        if let url = URL(string: imageUrls[indexPath.row]) {
+            cell.imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
+            cell.bottomShadowView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
+            cell.topShadowView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
+        }
         
         return cell
     }
@@ -92,9 +107,5 @@ extension DiscoverCard: UICollectionViewDelegate, UICollectionViewDataSource, UI
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("😃")
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//
-//    }
     
 }

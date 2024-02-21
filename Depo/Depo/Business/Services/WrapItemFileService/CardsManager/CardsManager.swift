@@ -443,6 +443,11 @@ class CardsManager: NSObject {
             popup.configurateWithType(viewType: .biOgrenci)
             cardView = popup
         case .discoverCard:
+            
+//            if OperationType.paycell.rawValue == "PAYCELL" {
+//                
+//            }
+            
             let popup = DiscoverCard.initFromNib()
             popup.configurateWithType(viewType: .discoverCard)
             cardView = popup

@@ -11,18 +11,18 @@ import Foundation
 typealias BurstGroup = [BurstGroups]
 
 struct BurstGroups: Codable {
-    let id, groupDate: Int
+    let id, groupDate: Int?
     let coverPhoto: CoverPhoto
     
     // MARK: - CoverPhoto
     struct CoverPhoto: Codable {
-        let createdDate, lastModifiedDate, id: Int
-        let hash, name, uuid: String
-        let bytes: Int
-        let folder: Bool
+        let createdDate, lastModifiedDate, id: Int?
+        let hash, name, uuid: String?
+        let bytes: Int?
+        let folder: Bool?
         let status: Status
         let uploaderDeviceType: UploaderDeviceType
-        let tempDownloadURL: String
+        let tempDownloadURL: String?
         let contentType: ContentType
         let metadata: Metadata
         let album: [JSONAny]
@@ -41,12 +41,12 @@ struct BurstGroups: Codable {
         }
         // MARK: - Metadata
         struct Metadata: Codable {
-            let thumbnailLarge: String
-            let originalHash: String
-            let thumbnailSmall: String
-            let originalBytes, imageHeight, imageWidth: String
-            let thumbnailMedium: String
-            let imageOrientation, imageDateTime: String
+            let thumbnailLarge: String?
+            let originalHash: String?
+            let thumbnailSmall: String?
+            let originalBytes, imageHeight, imageWidth: String?
+            let thumbnailMedium: String?
+            let imageOrientation, imageDateTime: String?
             let xObjectMetaIosMetadataHash: String?
             enum CodingKeys: String, CodingKey {
                 case thumbnailLarge = "Thumbnail-Large"
