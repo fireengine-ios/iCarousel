@@ -2326,4 +2326,7 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "keep_everything" = "Tümünü Tut";
 "delete_info" = "Silmek istediğin fotoğrafları seç.";
-"best_scene_discover_card_title" = "";
+"best_scene_discover_card_title" = "Seri Fotoğraflar";
+"forgot_my_password_info" = "Şifre sıfırlama işlemine devam edebilmek için hesabına ait e-posta ya da telefon numarasını girin.\nGörseldeki doğrulama kodunu girin.\nArdından e-posta adresinize şifre sıfırlama linki ya da telefon numaranıza SMS ile kod gönderilecektir.";
+"best_photo" = "En İyi Fotoğrafın!";
+"security_question_invalid" = "Seçtiğiniz güvenlik sorusu veya cevabınız yanlış.";

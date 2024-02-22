@@ -54,7 +54,9 @@ final class ResetPasswordOTPInteractor {
         isVerifying = false
 
         attempts = 0
-        resetPasswordService.sendOTP()
+        //resetPasswordService.sendOTP()
+        remainingTimeInSeconds = 180
+        output.resendCodeRequestSucceeded()
     }
 
     private func resendCodeFailed(with error: Error) {

@@ -2260,4 +2260,7 @@ then {11,99 TRY/Month}*/
 "delete_for_selected" = "";
 "keep_everything" = "";
 "delete_info" = "";
-"best_scene_discover_card_title" = "";
+"best_scene_discover_card_title" = "Серия Фотографий";
+"forgot_my_password_info" = "";
+"best_photo" = "";
+"security_question_invalid" = "";

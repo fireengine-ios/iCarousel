@@ -385,4 +385,6 @@ enum Strings: String, Localizable {
     case noAccountFound = "no_account_found"
     case invalidOtp = "invalid_otp"
     case twoFaTooManyRequestsErrorMessage = "two_fa_too_many_requests_error_message"
+    case forgotMyPasswordInfo = "forgot_my_password_info"
+    case securityQuestionInvalid = "security_question_invalid"
 }

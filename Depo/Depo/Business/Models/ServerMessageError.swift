@@ -33,7 +33,8 @@ final class ServerMessageError {
         static let tooManyRequests = "TOO_MANY_REQUESTS"
         static let accountNotFound = "ACCOUNT_NOT_FOUND"
         static let invalidOTP = "INVALID_OTP"
-        static let securityQuestionAnswerOrIdInvalid = "SECURITY_QUESTION_ANSWER_OR_ID_INVALID"
+        static let securityQuestionInvalid = "SECURITY_QUESTION_ANSWER_OR_ID_INVALID"
+        static let tooManyInvalidAttempt = "TOO_MANY_INVALID_ATTEMPTS"
     }
 }
 extension ServerMessageError: LocalizedError {
@@ -67,8 +68,10 @@ extension ServerMessageError: LocalizedError {
             return localized(.noAccountFound)
         case ErrorKeys.invalidOTP:
             return localized(.invalidOtp)
-        case ErrorKeys.securityQuestionAnswerOrIdInvalid:
-            return localized(.securityPopupSecurityQuestionWarning)
+        case ErrorKeys.securityQuestionInvalid:
+            return localized(.securityQuestionInvalid)
+        case ErrorKeys.tooManyInvalidAttempt:
+            return TextConstants.tooManyInvalidAttempt
         default:
             return message
         }
