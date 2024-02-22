@@ -70,7 +70,8 @@ final class ForYouInteractor {
                 return
             }
             self?.group.leave()
-            self?.output.getPeople(data: (response.list.map({ PeopleItem(response: $0) })))
+            let filterResponse = response.list.filter({$0.visible == true})
+            self?.output.getPeople(data: (filterResponse.map({ PeopleItem(response: $0) })))
         }, fail: { error in
             self.group.leave()
             debugLog("ForYou Error getPeople: \(error.errorCode)-\(String(describing: error.errorDescriptionLog))")
