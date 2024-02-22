@@ -27,45 +27,42 @@ class DiscoverCard: BaseCardView {
         
     override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
     
     func setupCollectionView() {
-        collectionView?.delegate = self
-        collectionView?.dataSource = self
-        collectionView?.register(DiscoverCollectionViewCell.self, forCellWithReuseIdentifier: "DiscoverCollectionViewCell")
-        collectionView?.showsHorizontalScrollIndicator = false
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(DiscoverCollectionViewCell.self, forCellWithReuseIdentifier: "DiscoverCollectionViewCell")
+        collectionView.showsHorizontalScrollIndicator = false
         
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 145, height: 145)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         layout.minimumLineSpacing = 8
         layout.scrollDirection = .horizontal
-        collectionView?.collectionViewLayout = layout
+        collectionView.collectionViewLayout = layout
     }
     
     override func configurateView() {
         super.configurateView()
         
-        setupCollectionView()
+        titleLabel.text = localized(.bestscenediscovercardtitle)
+        descriptionLabel.text = localized(.bestscenediscovercardbody)
+        showAllPictureLabel.setTitle(localized(.forYouSeeAll), for: .normal)
     }
     
     func configurateWithType(viewType: OperationType) {
         if viewType == .discoverCard {
+            
             setupCollectionView()
+            collectionView.reloadData()
         }
     }
     
     func updateDiscoverCard(with imageUrls: [String]) {
         self.imageUrls = imageUrls.count > 5 ? Array(imageUrls.prefix(5)) : imageUrls
-        print(" ⚠️ Updated image URLs: \(self.imageUrls)")
-        
-        if let collectionView = collectionView {
-            collectionView.reloadData()
-        } else {
-            print("⚠️", "collection view is nil")
-        }
-        
+        print("⚠️ Updated image URLs: \(self.imageUrls)")
+        collectionView?.reloadData()
     }
     
     override func deleteCard() {
@@ -79,7 +76,6 @@ class DiscoverCard: BaseCardView {
     }
     
     @IBAction func showAllPicture(_ sender: Any) {
-        
     }
 }
 

@@ -2223,16 +2223,32 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "free_up_space_title_settings" = "Звільніть місце в пам'яті вашого телефону.";
 "recommended" = "Рекомендований";
-"dont_miss_opportunity" = "";
+"dont_miss_opportunity" = "Не Пропустіть Можливість";
 "print_package_print_firm" = "Фотографії будуть надруковані поліграфічною компанією, з якою укладено договір.";
 "sync_in_progress_delete_is_not_allowed" = "Йде підготовка ваших фотографій, ви не можете видалити їх в даний момент. Будь ласка, повторіть спробу пізніше.";
 "connected_devices" = "Підключити Пристрій";
 "scan_qr_code" = "Відскануйте QR-код";
 "scan_qr_code_info" = "Відскануйте QR-код на пристрої, який ви хочете підключити.";
 "qr_code_try_again" = "Не вдалося відсканувати QR-код. Будь ласка, спробуйте ще раз.";
-"print" = "";
-"photo_max_selection_title" = "";
-"photo_max_selection_body" = "";
-"set_recovery_mail_success" = "";
-"set_recoverymail_securityquestion_success" = "";
-"settings_set_password_apple_warning" = "";
+"print" = "Друкувати";
+"photo_max_selection_title" = "Ви Маєте Право на %@ Фотографій";
+"photo_max_selection_body" = "Ви можете відправити на друк не більше %@ фотографій.";
+"set_recovery_mail_success" = "Вашу електронну пошту для відновлення було створено.";
+"set_recoverymail_securityquestion_success" = "Вашу електронну пошту для відновлення та секретне запитання було створено.";
+"settings_set_password_apple_warning" = "Щоб встановити пароль, необхідно увійти в lifebox за допомогою облікового запису Apple.";
+"lifebox_resignup_warning" = "Акаунт для введеної вами інформації вже існує. Якщо ви продовжите, номер GSM з іншого акаунта буде видалено. Ви зможете отримати доступ до свого облікового запису тільки за допомогою адреси електронної пошти та пароля. Ви впевнені, що хочете продовжити?";
+
+/*Fuzzy*/
+"best_scene_title" = "Серія Фотографій";
+"best_scene_discover_card_body" = "Виберіть найкраще із серії фотографій!";
+"print_discover_card_title" = "Пакет Друку";
+"print_discover_card_body" = "Друкуйте до 5 фотографій щомісяця з пакетом друку та отримуйте їх безкоштовно прямо на свою адресу.";
+"can_not_sent_otp_sms" = "";
+"invalid_refenrence_code" = "";
+"delete_for_selected" = "";
+"keep_everything" = "";
+"delete_info" = "";
+"best_scene_discover_card_title" = "Серія Фотографій";
+"forgot_my_password_info" = "";
+"best_photo" = "";
+"security_question_invalid" = "";

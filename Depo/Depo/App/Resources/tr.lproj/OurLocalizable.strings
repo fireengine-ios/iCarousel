@@ -2308,3 +2308,25 @@ then {11,99 TRY/Month}*/
 "set_recovery_mail_success" = "Kurtarma mailiniz oluşturuldu.";
 "set_recoverymail_securityquestion_success" = "Kurtarma mailiniz ve güvenlik sorunuz oluşturuldu.";
 "settings_set_password_apple_warning" = "Şifreni belirleyebilmek için öncelikle Apple Hesabın ile lifebox’a giriş yapmalısın.";
+"lifebox_resignup_warning" = "Girmiş oldugunuz bilgilere ait hesap bulunmaktadır. Devam etmeniz durumunda diğer hesaptan GSM numarası silinecektir. Hesabınıza sadece mail adresi ve şifreniz ile ulaşabileceksiniz. İşleme devam etmek istediğinize emin misiniz?";
+
+/*Fuzzy*/
+"best_scene_title" = "Seri Fotoğraflar";
+"best_scene_discover_card_body" = "Seri fotoğraflarından en iyisini seç!";
+"print_discover_card_title" = "Baskı Paketi";
+"print_discover_card_body" = "Baskı paketi ile her ay en fazla 5 tane fotoğrafını bastır ve hemen ücretsiz adresine gelsin.";
+
+/*Fuzzy*/
+"can_not_sent_otp_sms" = "Şu anda doğrulama kodu için SMS gönderemiyoruz. Hesabına ait E-Posta ile işleme devam edebilirsin.";
+"invalid_refenrence_code" = "Referans kodu geçersizdir.";
+
+/*Fuzzy*/
+"delete_for_selected" = "Seçili Olanları Sil";
+
+/*Fuzzy*/
+"keep_everything" = "Tümünü Tut";
+"delete_info" = "Silmek istediğin fotoğrafları seç.";
+"best_scene_discover_card_title" = "Seri Fotoğraflar";
+"forgot_my_password_info" = "Şifre sıfırlama işlemine devam edebilmek için hesabına ait e-posta ya da telefon numarasını girin.\nGörseldeki doğrulama kodunu girin.\nArdından e-posta adresinize şifre sıfırlama linki ya da telefon numaranıza SMS ile kod gönderilecektir.";
+"best_photo" = "En İyi Fotoğrafın!";
+"security_question_invalid" = "Seçtiğiniz güvenlik sorusu veya cevabınız yanlış.";

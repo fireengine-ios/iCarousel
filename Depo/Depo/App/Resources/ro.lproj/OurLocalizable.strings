@@ -2221,16 +2221,32 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "free_up_space_title_settings" = "Eliberați spațiu pe dispozitivul dumneavoastră.";
 "recommended" = "Recomandat";
-"dont_miss_opportunity" = "";
+"dont_miss_opportunity" = "Nu Ratați Această Oportunitate";
 "print_package_print_firm" = "Fotografiile vor fi tipărite de către compania de tipărire contractată.";
 "sync_in_progress_delete_is_not_allowed" = "Fotografiile dvs. sunt în curs de pregătire, nu le puteți șterge în acest moment. Vă rugăm să încercați din nou mai târziu.";
 "connected_devices" = "Conectarea Dispozitivului";
 "scan_qr_code" = "Scanați Codul QR";
 "scan_qr_code_info" = "Scanați codul QR de pe dispozitivul pe care doriți să îl conectați.";
 "qr_code_try_again" = "Scanarea codului QR a eșuat. Vă rugăm să încercați din nou.";
-"print" = "";
-"photo_max_selection_title" = "";
-"photo_max_selection_body" = "";
-"set_recovery_mail_success" = "";
-"set_recoverymail_securityquestion_success" = "";
-"settings_set_password_apple_warning" = "";
+"print" = "Printare";
+"photo_max_selection_title" = "Aveți Dreptul la %@ Fotografii";
+"photo_max_selection_body" = "Aveți dreptul să trimiteți maximum %@ fotografii pentru imprimare.";
+"set_recovery_mail_success" = "E-mailul dvs. de recuperare a fost creat.";
+"set_recoverymail_securityquestion_success" = "Au fost create e-mailul de recuperare și întrebarea secretă.";
+"settings_set_password_apple_warning" = "Trebuie să fiți conectat la lifebox cu un cont Apple pentru a seta o parolă.";
+"lifebox_resignup_warning" = "Există deja un cont pentru informațiile pe care le-ați introdus. Dacă continuați, numărul GSM din celălalt cont va fi șters. Veți putea accesa contul dvs. doar cu adresa dvs. de e-mail și parola. Sunteți sigur că doriți să continuați?";
+
+/*Fuzzy*/
+"best_scene_title" = "Serie de Fotografii";
+"best_scene_discover_card_body" = "Alegeți cea mai bună dintr-o serie de fotografii!";
+"print_discover_card_title" = "Pachet de Imprimare";
+"print_discover_card_body" = "Imprimați până la 5 din fotografiile dvs. în fiecare lună cu un pachet de imprimare și trimiteți-le gratuit direct la adresa dvs.";
+"can_not_sent_otp_sms" = "";
+"invalid_refenrence_code" = "";
+"delete_for_selected" = "";
+"keep_everything" = "";
+"delete_info" = "";
+"best_scene_discover_card_title" = "Serie de Fotografii";
+"forgot_my_password_info" = "";
+"best_photo" = "";
+"security_question_invalid" = "";

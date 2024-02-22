@@ -2221,16 +2221,32 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "free_up_space_title_settings" = "Geben Sie Speicherplatz auf Ihrem Gerät frei.";
 "recommended" = "Empfohlen";
-"dont_miss_opportunity" = "";
+"dont_miss_opportunity" = "Verpassen Sie nicht die Gelegenheit";
 "print_package_print_firm" = "Der Druck der Fotos erfolgt durch eine beauftragte Druckerei.";
 "sync_in_progress_delete_is_not_allowed" = "Ihre Fotos werden vorbereitet, Sie können sie derzeit nicht löschen. Bitte versuchen Sie es später erneut.";
 "connected_devices" = "Gerät Verbinden";
 "scan_qr_code" = "QR-Code Scannen";
 "scan_qr_code_info" = "Scannen Sie den QR-Code auf dem Gerät, das Sie verbinden möchten.";
 "qr_code_try_again" = "QR-Code-Scan fehlgeschlagen. Bitte versuchen Sie es erneut.";
-"print" = "";
-"photo_max_selection_title" = "";
-"photo_max_selection_body" = "";
-"set_recovery_mail_success" = "";
-"set_recoverymail_securityquestion_success" = "";
-"settings_set_password_apple_warning" = "";
+"print" = "Drucken";
+"photo_max_selection_title" = "Sie haben das Recht auf %@ Fotos";
+"photo_max_selection_body" = "Sie können maximal %@ Fotos zum Drucken senden.";
+"set_recovery_mail_success" = "Ihre Wiederherstellungs-E-Mail wurde erstellt.";
+"set_recoverymail_securityquestion_success" = "Ihre Wiederherstellungs-E-Mail und die geheime Frage wurden erstellt.";
+"settings_set_password_apple_warning" = "Sie müssen mit einem Apple-Konto bei lifebox angemeldet sein, um ein Kennwort festzulegen.";
+"lifebox_resignup_warning" = "Es existiert bereits ein Konto mit den von Ihnen eingegebenen Informationen. Wenn Sie fortfahren, wird die GSM-Nummer des anderen Kontos gelöscht. Sie können dann nur mit Ihrer E-Mail-Adresse und Ihrem Passwort auf Ihr Konto zugreifen. Sind Sie sicher, dass Sie fortfahren möchten?";
+
+/*Fuzzy*/
+"best_scene_title" = "Fotoserien";
+"best_scene_discover_card_body" = "Wählen Sie das Beste aus einer Fotoserie aus!";
+"print_discover_card_title" = "Druck-Paket";
+"print_discover_card_body" = "Drucken Sie mit dem Druckpaket jeden Monat bis zu 5 Fotos und lassen Sie sie kostenlos an Ihre Adresse liefern.";
+"can_not_sent_otp_sms" = "";
+"invalid_refenrence_code" = "";
+"delete_for_selected" = "";
+"keep_everything" = "";
+"delete_info" = "";
+"best_scene_discover_card_title" = "Fotoserien";
+"forgot_my_password_info" = "";
+"best_photo" = "";
+"security_question_invalid" = "";

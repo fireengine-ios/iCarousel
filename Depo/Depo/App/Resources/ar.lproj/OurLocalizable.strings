@@ -2233,7 +2233,7 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "free_up_space_title_settings" = "تحرير مساحة على جهازك.";
 "recommended" = "الموصى بها";
-"dont_miss_opportunity" = "";
+"dont_miss_opportunity" = "لا تفوت الفرصة";
 "print_package_print_firm" = "ستتم طباعة الصور من قبل شركة طباعة متعاقدة.";
 "sync_in_progress_delete_is_not_allowed" = "صورك قيد الإعداد، لا يمكنك حذفها في الوقت الحالي. الرجاء معاودة المحاولة في وقت لاحق.";
 "connected_devices" = "قم بتوصيل الجهاز";
@@ -2241,8 +2241,24 @@ then {11,99 TRY/Month}*/
 "scan_qr_code_info" = "امسح رمز الاستجابة السريعة ضوئيًا على الجهاز الذي تريد الاتصال به.";
 "qr_code_try_again" = "فشل مسح رمز الاستجابة السريعة. يرجى المحاولة مرة أخرى.";
 "print" = "";
-"photo_max_selection_title" = "";
-"photo_max_selection_body" = "";
-"set_recovery_mail_success" = "";
-"set_recoverymail_securityquestion_success" = "";
-"settings_set_password_apple_warning" = "";
+"photo_max_selection_title" = "لديك الحق في %@ الصور";
+"photo_max_selection_body" = "يُسمح لك بإرسال %@ من الصور كحد أقصى لطباعتها.";
+"set_recovery_mail_success" = "تم إنشاء البريد الإلكتروني للاسترداد الخاص بك.";
+"set_recoverymail_securityquestion_success" = "تم إنشاء البريد الإلكتروني الخاص بالاسترداد وسؤال الأمان.";
+"settings_set_password_apple_warning" = "لتعيين كلمة المرور الخاصة بك، يجب عليك تسجيل الدخول إلى lifebox باستخدام حساب Apple الخاص بك.";
+"lifebox_resignup_warning" = "حساب للمعلومات التي أدخلتها موجود بالفعل. إذا تابعت، سيتم حذف رقم GSM من الحساب الآخر. لن تتمكن من الوصول إلى حسابك إلا باستخدام عنوان بريدك الإلكتروني وكلمة المرور. هل أنت متأكد من رغبتك في المتابعة؟";
+
+/*Fuzzy*/
+"best_scene_title" = "سلسلة الصور";
+"best_scene_discover_card_body" = "اختر الأفضل من سلسلة الصور!";
+"print_discover_card_title" = "طباعة الحزمة";
+"print_discover_card_body" = "اطبع ما يصل إلى 5 من صورك كل شهر مع باقة طباعة وأرسلها مباشرةً إلى عنوانك مجاناً.";
+"can_not_sent_otp_sms" = "";
+"invalid_refenrence_code" = "";
+"delete_for_selected" = "";
+"keep_everything" = "";
+"delete_info" = "";
+"best_scene_discover_card_title" = "سلسلة الصور";
+"forgot_my_password_info" = "";
+"best_photo" = "";
+"security_question_invalid" = "";
