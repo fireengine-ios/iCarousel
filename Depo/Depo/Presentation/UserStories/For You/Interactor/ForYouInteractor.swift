@@ -95,7 +95,7 @@ final class ForYouInteractor {
             }
             
             let list = resultResponse.list.compactMap { AlbumItem(remote: $0) }
-            self?.output.getAlbums(data: list)
+            self?.output.getAlbums(data: list.filter({ $0.preview?.id != nil }))
             self?.group.leave()
             
         }, fail: { errorResponse in
