@@ -29,6 +29,16 @@ class DiscoverCard: BaseCardView {
         super.awakeFromNib()
     }
     
+    @objc func updateImageUrls(notification: Notification) {
+        if let newImageUrls = notification.userInfo?["imageUrls"] as? [String] {
+            self.imageUrls = newImageUrls.count > 5 ? Array(newImageUrls.prefix(5)) : newImageUrls
+                self.collectionView.reloadData()
+        } else {
+            print("⚠️ Error: Did not receive image URLs")
+        }
+    }
+
+    
     func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -49,20 +59,15 @@ class DiscoverCard: BaseCardView {
         titleLabel.text = localized(.bestscenediscovercardtitle)
         descriptionLabel.text = localized(.bestscenediscovercardbody)
         showAllPictureLabel.setTitle(localized(.forYouSeeAll), for: .normal)
+        
+        setupCollectionView()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateImageUrls(notification:)), name: .didReceiveImageUrls, object: nil)
     }
     
     func configurateWithType(viewType: OperationType) {
         if viewType == .discoverCard {
-            
-            setupCollectionView()
-            collectionView.reloadData()
         }
-    }
-    
-    func updateDiscoverCard(with imageUrls: [String]) {
-        self.imageUrls = imageUrls.count > 5 ? Array(imageUrls.prefix(5)) : imageUrls
-        print("⚠️ Updated image URLs: \(self.imageUrls)")
-        collectionView?.reloadData()
     }
     
     override func deleteCard() {
@@ -76,6 +81,7 @@ class DiscoverCard: BaseCardView {
     }
     
     @IBAction func showAllPicture(_ sender: Any) {
+        
     }
 }
 
@@ -89,9 +95,9 @@ extension DiscoverCard: UICollectionViewDelegate, UICollectionViewDataSource, UI
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DiscoverCollectionViewCell", for: indexPath) as! DiscoverCollectionViewCell
         
         if let url = URL(string: imageUrls[indexPath.row]) {
-            cell.imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "iphone"))
-            cell.bottomShadowView.sd_setImage(with: url, placeholderImage: UIImage(named: "iphone"))
-            cell.topShadowView.sd_setImage(with: url, placeholderImage: UIImage(named: "iphone"))
+            cell.imageView.sd_setImage(with: url, placeholderImage: nil)
+            cell.bottomShadowView.sd_setImage(with: url, placeholderImage: nil)
+            cell.topShadowView.sd_setImage(with: url, placeholderImage: nil)
         }
         
         return cell

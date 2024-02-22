@@ -23,9 +23,7 @@ final class HomePagePresenter: HomePageModuleInput {
     private let spotlightManager = SpotlightManager.shared
     private var cards: [HomeCardResponse] = []
     private var bestSceneCards: [HomeCardResponse] = []
-    
-    var discoverCard = DiscoverCard()
-    
+        
     private(set) var allFilesViewType = MoreActionsConfig.ViewType.Grid
     private(set) var allFilesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
     
@@ -128,7 +126,7 @@ extension HomePagePresenter: HomePageInteractorOutput {
     }
     
     func didObtainImageUrls(_ imageUrls: [String]) {
-        discoverCard.updateDiscoverCard(with: imageUrls)
+        NotificationCenter.default.post(name: .didReceiveImageUrls, object: nil, userInfo: ["imageUrls": imageUrls])
     }
     
     func fillCollectionView(isReloadAll: Bool) {
@@ -407,5 +405,4 @@ extension HomePagePresenter: SpotlightManagerDelegate {
             view.needShowSpotlight(type: type)
         }  
     }
-    
 }
