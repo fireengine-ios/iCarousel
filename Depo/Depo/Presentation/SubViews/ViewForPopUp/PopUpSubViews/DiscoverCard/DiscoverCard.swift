@@ -24,34 +24,46 @@ class DiscoverCard: BaseCardView {
     weak var popupDelegate: DiscoverCardPopupDelegate?
     
     var imageUrls: [String] = []
-    
+        
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        setupCollectionView()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(handleBestSceneNotification(_:)), name: .didReceiveBestScene, object: nil)
     }
     
-    @objc func handleBestSceneNotification(_ notification: Notification) {
-        if let imageUrls = notification.userInfo?["imageUrls"] as? [String] {
-            let urlsToShow = imageUrls.count > 5 ? Array(imageUrls.prefix(5)) : imageUrls
-            
-            self.imageUrls = urlsToShow
-            collectionView.reloadData()
-        }
+    func setupCollectionView() {
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
+        collectionView?.register(DiscoverCollectionViewCell.self, forCellWithReuseIdentifier: "DiscoverCollectionViewCell")
+        collectionView?.showsHorizontalScrollIndicator = false
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 145, height: 145)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        layout.minimumLineSpacing = 8
+        layout.scrollDirection = .horizontal
+        collectionView?.collectionViewLayout = layout
     }
-
     
     override func configurateView() {
         super.configurateView()
         
+        setupCollectionView()
     }
     
     func configurateWithType(viewType: OperationType) {
-        
         if viewType == .discoverCard {
-            
+            setupCollectionView()
+        }
+    }
+    
+    func updateDiscoverCard(with imageUrls: [String]) {
+        self.imageUrls = imageUrls.count > 5 ? Array(imageUrls.prefix(5)) : imageUrls
+        print(" ⚠️ Updated image URLs: \(self.imageUrls)")
+        
+        if let collectionView = collectionView {
+            collectionView.reloadData()
+        } else {
+            print("⚠️", "collection view is nil")
         }
         
     }
@@ -69,21 +81,6 @@ class DiscoverCard: BaseCardView {
     @IBAction func showAllPicture(_ sender: Any) {
         
     }
-    
-    private func setupCollectionView() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(DiscoverCollectionViewCell.self, forCellWithReuseIdentifier: "DiscoverCollectionViewCell")
-        collectionView.showsHorizontalScrollIndicator = false
-        
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 145, height: 145)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        layout.minimumLineSpacing = 8
-        layout.scrollDirection = .horizontal
-        collectionView.collectionViewLayout = layout
-    }
-    
 }
 
 extension DiscoverCard: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -96,9 +93,9 @@ extension DiscoverCard: UICollectionViewDelegate, UICollectionViewDataSource, UI
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DiscoverCollectionViewCell", for: indexPath) as! DiscoverCollectionViewCell
         
         if let url = URL(string: imageUrls[indexPath.row]) {
-            cell.imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
-            cell.bottomShadowView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
-            cell.topShadowView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
+            cell.imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "iphone"))
+            cell.bottomShadowView.sd_setImage(with: url, placeholderImage: UIImage(named: "iphone"))
+            cell.topShadowView.sd_setImage(with: url, placeholderImage: UIImage(named: "iphone"))
         }
         
         return cell
@@ -107,5 +104,4 @@ extension DiscoverCard: UICollectionViewDelegate, UICollectionViewDataSource, UI
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("😃")
     }
-    
 }

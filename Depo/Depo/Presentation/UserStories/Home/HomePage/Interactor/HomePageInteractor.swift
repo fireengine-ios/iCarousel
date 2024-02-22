@@ -35,9 +35,7 @@ final class HomePageInteractor: HomePageInteractorInput {
     private var isPaidPackage: Bool = false
     private var highlightedPackage: SubscriptionPlan?
     private var highlightedPackageIndex: Int = 0
-    
-    var imageUrls: [String] = []
-    
+        
     private func fillCollectionView(isReloadAll: Bool) {
         self.homeCardsLoaded = true
         self.output.fillCollectionView(isReloadAll: isReloadAll)
@@ -217,21 +215,20 @@ final class HomePageInteractor: HomePageInteractorInput {
             switch result {
             case .success(let response):
                                 
-                let discoverCards = response.map { burstGroup -> HomeCardResponse in
+                _ = response.map { burstGroup -> HomeCardResponse in
                     let homeCard = HomeCardResponse()
                     
                     homeCard.id = burstGroup.id
                     homeCard.type = .discoverCard
                     
-                    self.imageUrls = response.map { $0.coverPhoto.metadata.thumbnailMedium }.compactMap { $0 }
+                    let imageUrls = response.map { $0.coverPhoto.metadata.thumbnailMedium }.compactMap { $0 }
+                    
+                    self.output.didObtainHomeCardsBestScene(homeCard)
+                    self.output.didObtainImageUrls(imageUrls)
                     
                     return homeCard
                 }
-                
-                CardsManager.default.startOperationWith(type: .discoverCard)
-                
-                NotificationCenter.default.post(name: .didReceiveBestScene, object: nil, userInfo: ["imageUrls": self.imageUrls])
-
+                               
             case .failed(let error):
                 DispatchQueue.main.async {
                     self.output.didObtainError(with: error.localizedDescription, isNeedStopRefresh: true)
@@ -424,8 +421,4 @@ extension HomePageInteractor: HomeCardsServiceImpDelegte {
     func hideSpinner() {
         output.hideSpinner()
     }
-}
-
-extension Notification.Name {
-    static let didReceiveBestScene = Notification.Name("didReceiveBestScene")
 }

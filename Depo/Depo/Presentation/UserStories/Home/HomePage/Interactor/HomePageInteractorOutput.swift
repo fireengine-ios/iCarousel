@@ -34,6 +34,10 @@ protocol HomePageInteractorOutput: AnyObject {
     
     func didObtainPermissionAllowance(response: SettingsPermissionsResponse)
     
+    func didObtainHomeCardsBestScene(_ bestSceneCard: HomeCardResponse)
+    
+    func didObtainImageUrls(_ imageUrls: [String])
+    
     func showSuccessMobilePaymentPopup()
     
     func showSpinner()

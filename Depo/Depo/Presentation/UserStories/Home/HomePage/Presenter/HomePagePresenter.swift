@@ -22,6 +22,9 @@ final class HomePagePresenter: HomePageModuleInput {
     
     private let spotlightManager = SpotlightManager.shared
     private var cards: [HomeCardResponse] = []
+    private var bestSceneCards: [HomeCardResponse] = []
+    
+    var discoverCard = DiscoverCard()
     
     private(set) var allFilesViewType = MoreActionsConfig.ViewType.Grid
     private(set) var allFilesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
@@ -104,6 +107,28 @@ extension HomePagePresenter: HomePageInteractorOutput {
     
     func didObtainHomeCards(_ cards: [HomeCardResponse]) {
         self.cards = cards
+        bestSceneCards.first?.order = Int.max
+        
+        let sortedCard = self.cards.sorted { $0.order < $1.order }
+        
+        if let paycellIndex = sortedCard.firstIndex(where: { $0.type == .paycell }) {
+            bestSceneCards.first?.order = paycellIndex + 1
+            self.cards.append(bestSceneCards.first)
+        } else if let contactBackupIndex = sortedCard.firstIndex(where: { $0.type == .contactBackup }) {
+            bestSceneCards.first?.order = contactBackupIndex
+            self.cards.append(bestSceneCards.first)
+        } else {
+            bestSceneCards.first?.order = 6
+            self.cards.append(bestSceneCards.first)
+        }
+    }
+    
+    func didObtainHomeCardsBestScene(_ bestSceneCard: HomeCardResponse) {
+        bestSceneCards = [bestSceneCard]
+    }
+    
+    func didObtainImageUrls(_ imageUrls: [String]) {
+        discoverCard.updateDiscoverCard(with: imageUrls)
     }
     
     func fillCollectionView(isReloadAll: Bool) {

@@ -131,6 +131,10 @@ class CardsManager: NSObject {
         homeCardsObjects.removeAll()
         homeCardsObjects.append(contentsOf: sortedArray)
         
+//        for card in cardsResponses {
+//            print("⛔️", card.order, card.type ?? "")
+//        }
+        
         /// to test launchCampaign
 //        let q = HomeCardResponse()
 //        q.type = .launchCampaign
