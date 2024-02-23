@@ -46,7 +46,7 @@ final class FreeUpSpacePopUp: BaseCardView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        let bottomSpace : CGFloat = 7.0
+        let bottomSpace : CGFloat = 25.0
         let h = freeAppSpaceButton.frame.origin.y + freeAppSpaceButton.frame.size.height + bottomSpace
         if calculatedH != h {
             calculatedH = h
