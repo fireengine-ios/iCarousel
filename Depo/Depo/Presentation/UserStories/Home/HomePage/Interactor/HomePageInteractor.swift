@@ -70,13 +70,11 @@ final class HomePageInteractor: HomePageInteractorInput {
         
         getCampaignStatus()
         getPremiumCardInfo(loadStatus: .reloadAll)
-        getBestScene()
         getAllCardsForHomePage()
     }
     
     func updateLocalUserDetail() {
         getPremiumCardInfo(loadStatus: .reloadSingle)
-        getBestScene()
         getInstaPickInfo()
     }
     
