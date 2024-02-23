@@ -308,4 +308,10 @@ final class UserDefaultsVars: StorageVars {
         set { userDefaults.set(newValue, forKey: highlightedPopUpPackageBackKey) }
     }
     
+    private let imageUrlsForBestSceneKey = "imageUrlsForBestSceneKey"
+      var imageUrlsForBestScene: [String] {
+        get { return userDefaults.object(forKey: imageUrlsForBestSceneKey) as? [String] ?? [] }
+        set { userDefaults.set(newValue, forKey: imageUrlsForBestSceneKey) }
+      }
+    
 }

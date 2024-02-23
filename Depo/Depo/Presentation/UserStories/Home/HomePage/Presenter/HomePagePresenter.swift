@@ -23,6 +23,7 @@ final class HomePagePresenter: HomePageModuleInput {
     private let spotlightManager = SpotlightManager.shared
     private var cards: [HomeCardResponse] = []
     private var bestSceneCards: [HomeCardResponse] = []
+    private let userDefaultsVars = UserDefaultsVars()
         
     private(set) var allFilesViewType = MoreActionsConfig.ViewType.Grid
     private(set) var allFilesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
@@ -121,13 +122,10 @@ extension HomePagePresenter: HomePageInteractorOutput {
         }
     }
     
-    func didObtainHomeCardsBestScene(_ bestSceneCard: HomeCardResponse) {
+    func didObtainHomeCardsBestScene(_ bestSceneCard: HomeCardResponse, imageUrls: [String]) {
         bestSceneCards = [bestSceneCard]
-    }
-    
-    func didObtainImageUrls(_ imageUrls: [String]) {
-        NotificationCenter.default.post(name: .didReceiveImageUrls, object: nil, userInfo: ["imageUrls": imageUrls])
-    }
+        userDefaultsVars.imageUrlsForBestScene = imageUrls
+      }
     
     func fillCollectionView(isReloadAll: Bool) {
         if !AuthoritySingleton.shared.isBannerShowedForPremium {
