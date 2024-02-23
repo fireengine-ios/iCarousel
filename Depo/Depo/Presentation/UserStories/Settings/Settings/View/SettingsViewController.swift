@@ -428,6 +428,10 @@ extension SettingsViewController: SettingsViewInput {
 
 // MARK: - UserInfoSubViewViewControllerActionsDelegate
 extension SettingsViewController: UserInfoSubViewViewControllerActionsDelegate {
+    func discoverCardRemoved() {
+        viewDidLayoutSubviews()
+    }
+    
     func changePhotoPressed(quotaInfo: QuotaInfoResponse?) {
         output.onChangeUserPhoto(quotaInfo: quotaInfo)
     }

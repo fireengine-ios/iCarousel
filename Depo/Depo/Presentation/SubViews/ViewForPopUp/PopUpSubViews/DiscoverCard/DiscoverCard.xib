@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="GT-America-LC-Standard-Black.ttf">
+            <string>GTAmericaLC-Bl</string>
+        </array>
+        <array key="GT-America-LC-Standard-Medium.ttf">
+            <string>GTAmericaLC-Md</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Aqf-iW-s0r" customClass="DiscoverCard" customModule="Billo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="359" height="354"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qvY-He-XIf">
+                    <rect key="frame" x="319" y="20" width="24" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="Zqi-EH-iYw"/>
+                        <constraint firstAttribute="width" constant="24" id="bQb-as-lMe"/>
+                    </constraints>
+                    <state key="normal" image="iconCancelUnborderV2"/>
+                    <connections>
+                        <action selector="deleteCardAction:" destination="Aqf-iW-s0r" eventType="touchUpInside" id="HoN-B9-fRV"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seri Fotoğraflar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q50-zj-Sfq">
+                    <rect key="frame" x="16.000000000000007" y="29" width="113.66666666666669" height="20.333333333333329"/>
+                    <fontDescription key="fontDescription" name="GTAmericaLC-Md" family="GT America LC" pointSize="16"/>
+                    <color key="textColor" red="0.18823529411764706" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zgG-Ex-9eQ">
+                    <rect key="frame" x="0.0" y="74.333333333333329" width="359" height="1"/>
+                    <color key="backgroundColor" red="0.49803921569999998" green="0.73725490199999999" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="Ryx-GN-B3f"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seri fotoğraflarından en iyisini seç!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQi-0t-pSC">
+                    <rect key="frame" x="16" y="91.333333333333329" width="327" height="35.333333333333329"/>
+                    <fontDescription key="fontDescription" name="GTAmericaLC-Bl" family="GT America LC" pointSize="14"/>
+                    <color key="textColor" red="0.18823529411764706" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="awZ-iK-HFW">
+                    <rect key="frame" x="0.0" y="135" width="359" height="162"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6TR-1b-Z2v">
+                        <size key="itemSize" width="128" height="160"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eMp-8L-cCl">
+                    <rect key="frame" x="16" y="305" width="94" height="34.333333333333314"/>
+                    <color key="tintColor" red="0.0" green="0.4823529411764706" blue="0.6705882352941176" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Tümünü Gör">
+                        <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="showAllPicture:" destination="Aqf-iW-s0r" eventType="touchUpInside" id="NiV-Ue-RPc"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="4eL-ld-hXs"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="qvY-He-XIf" secondAttribute="trailing" constant="16" id="01C-3Y-qrV"/>
+                <constraint firstItem="eMp-8L-cCl" firstAttribute="leading" secondItem="4eL-ld-hXs" secondAttribute="leading" constant="16" id="436-fW-m40"/>
+                <constraint firstItem="zgG-Ex-9eQ" firstAttribute="leading" secondItem="Aqf-iW-s0r" secondAttribute="leading" id="4UN-Bb-WlK"/>
+                <constraint firstItem="zgG-Ex-9eQ" firstAttribute="top" secondItem="q50-zj-Sfq" secondAttribute="bottom" constant="25" id="4rG-iN-Peq"/>
+                <constraint firstItem="q50-zj-Sfq" firstAttribute="top" secondItem="Aqf-iW-s0r" secondAttribute="top" constant="29" id="5i8-Al-vmn"/>
+                <constraint firstItem="4eL-ld-hXs" firstAttribute="trailing" secondItem="vQi-0t-pSC" secondAttribute="trailing" constant="16" id="G28-qL-uwt"/>
+                <constraint firstItem="awZ-iK-HFW" firstAttribute="height" secondItem="Aqf-iW-s0r" secondAttribute="height" multiplier="0.384181" constant="25.999925999999988" id="G8G-8e-yB3"/>
+                <constraint firstItem="q50-zj-Sfq" firstAttribute="leading" secondItem="Aqf-iW-s0r" secondAttribute="leading" constant="16" id="Jig-9X-wpM"/>
+                <constraint firstItem="eMp-8L-cCl" firstAttribute="height" secondItem="Aqf-iW-s0r" secondAttribute="height" multiplier="0.0969868" id="Lkt-q5-Mfz"/>
+                <constraint firstItem="awZ-iK-HFW" firstAttribute="top" secondItem="vQi-0t-pSC" secondAttribute="bottom" constant="8.3333333333333428" id="Q3G-Ae-T9T"/>
+                <constraint firstItem="vQi-0t-pSC" firstAttribute="leading" secondItem="4eL-ld-hXs" secondAttribute="leading" constant="16" id="QVa-WT-pYG"/>
+                <constraint firstItem="qvY-He-XIf" firstAttribute="top" secondItem="Aqf-iW-s0r" secondAttribute="top" constant="20" id="d9f-VQ-x8u"/>
+                <constraint firstItem="awZ-iK-HFW" firstAttribute="leading" secondItem="4eL-ld-hXs" secondAttribute="leading" id="fQv-L5-YTQ"/>
+                <constraint firstAttribute="trailing" secondItem="zgG-Ex-9eQ" secondAttribute="trailing" id="jIJ-X6-mzZ"/>
+                <constraint firstItem="eMp-8L-cCl" firstAttribute="top" secondItem="awZ-iK-HFW" secondAttribute="bottom" constant="8" id="kxW-Sx-oqq"/>
+                <constraint firstItem="q50-zj-Sfq" firstAttribute="height" secondItem="Aqf-iW-s0r" secondAttribute="height" multiplier="0.0574388" id="qm3-tS-1fo"/>
+                <constraint firstItem="4eL-ld-hXs" firstAttribute="trailing" secondItem="awZ-iK-HFW" secondAttribute="trailing" id="s22-sr-sSc"/>
+                <constraint firstItem="vQi-0t-pSC" firstAttribute="top" secondItem="zgG-Ex-9eQ" secondAttribute="bottom" constant="16" id="vK7-kd-3Ss"/>
+                <constraint firstItem="vQi-0t-pSC" firstAttribute="height" secondItem="Aqf-iW-s0r" secondAttribute="height" multiplier="0.0998117" id="wWI-73-aWR"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="collectionView" destination="awZ-iK-HFW" id="O3J-x2-LXY"/>
+                <outlet property="descriptionLabel" destination="vQi-0t-pSC" id="XbV-m2-xK1"/>
+                <outlet property="showAllPictureLabel" destination="eMp-8L-cCl" id="tiu-aO-CVE"/>
+                <outlet property="titleLabel" destination="q50-zj-Sfq" id="W2i-2j-kHH"/>
+            </connections>
+            <point key="canvasLocation" x="-208.3969465648855" y="-99.295774647887328"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="iconCancelUnborderV2" width="24" height="24"/>
+    </resources>
+</document>

@@ -352,6 +352,7 @@ struct RouteRequests {
         static func card(with id: Int) -> URL {
             return all +/ String(id)
         }
+        static let bestScene = baseUrl +/ "burstgroups/"
     }
 
     // MARK: - Print

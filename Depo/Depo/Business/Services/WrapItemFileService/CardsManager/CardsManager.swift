@@ -45,7 +45,8 @@ enum OperationType: String {
     case paycell                    = "PAYCELL"
     case drawCampaign               = "DRAW_CAMPAIGN"
     case milliPiyango               = "MILLIPIYANGO"
-    case biOgrenci                 = "BI_OGRENCI"
+    case biOgrenci                  = "BI_OGRENCI"
+    case discoverCard               = "BEST_SCENE_CARD"
 }
 
 typealias BlockObject = VoidHandler
@@ -129,6 +130,10 @@ class CardsManager: NSObject {
         }
         homeCardsObjects.removeAll()
         homeCardsObjects.append(contentsOf: sortedArray)
+        
+//        for card in cardsResponses {
+//            print("⛔️", card.order, card.type ?? "")
+//        }
         
         /// to test launchCampaign
 //        let q = HomeCardResponse()
@@ -440,6 +445,10 @@ class CardsManager: NSObject {
         case .biOgrenci:
             let popup = InvitationCard.initFromNib()
             popup.configurateWithType(viewType: .biOgrenci)
+            cardView = popup
+        case .discoverCard:
+            let popup = DiscoverCard.initFromNib()
+            popup.configurateWithType(viewType: .discoverCard)
             cardView = popup
         }
         

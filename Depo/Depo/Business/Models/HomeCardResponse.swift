@@ -80,6 +80,8 @@ final class HomeCardResponse : Equatable {
             return .milliPiyango
         case .biOgrenci:
             return .biOgrenci
+        case .discoverCard:
+            return .discoverCard
         }
     }
 }
@@ -134,5 +136,6 @@ enum HomeCardTypes: String {
     case drawCampaign = "DRAW_CAMPAIGN"
     case milliPiyango = "MILLIPIYANGO"
     case biOgrenci = "BI_OGRENCI"
+    case discoverCard = "BEST_SCENE_CARD"
 }
 

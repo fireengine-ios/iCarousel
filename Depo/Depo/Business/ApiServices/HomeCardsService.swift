@@ -16,6 +16,7 @@ protocol HomeCardsService {
     func save(with id: Int, handler: @escaping ResponseVoid)
     func delete(with id: Int, handler: @escaping ResponseVoid)
     func updateItem(uuid: String, handler: @escaping (ResponseResult<WrapData>) -> Void)
+    func getBestGroup(handler: @escaping (ResponseResult<BurstGroup>) -> Void)
 }
 
 final class HomeCardsServiceImp {
@@ -85,4 +86,12 @@ extension HomeCardsServiceImp: HomeCardsService {
             handler(.failed(error))
         }
     }
+    
+    func getBestGroup(handler: @escaping (ResponseResult<BurstGroup>) -> Void) {
+        SessionManager
+         .customDefault
+         .request(RouteRequests.HomeCards.bestScene)
+         .customValidate()
+         .responseObject(handler)
+       }
 }
