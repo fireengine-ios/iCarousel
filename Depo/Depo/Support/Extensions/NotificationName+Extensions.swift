@@ -24,5 +24,4 @@ extension Notification.Name {
     public static let createOnlyOfficeDocumentsReloadData = Notification.Name("createOnlyOfficeDocumentsReloadData")
     public static let setProfilePhoto = Notification.Name("setProfilePhoto")
     public static let startUpdateProfileFlow = Notification.Name("startUpdateProfileFlow")
-    public static let didReceiveImageUrls = Notification.Name("didReceiveImageUrls")
 }
