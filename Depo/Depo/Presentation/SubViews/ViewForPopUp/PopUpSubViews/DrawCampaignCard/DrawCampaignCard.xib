@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="jES-tc-oE3" customClass="DrawCampaignCard" customModule="Billo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="340" height="579"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AAj-X6-5cC" customClass="LoadingImageView" customModule="Billo" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="59" width="340" height="170"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="AAj-X6-5cC" secondAttribute="height" multiplier="2" id="LEX-Xr-9hM"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MRx-8P-0Ge">
+                    <rect key="frame" x="14" y="274" width="312" height="20.333333333333314"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YKd-jS-s8s">
+                    <rect key="frame" x="14" y="237" width="312" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VOk-kY-Pgv" customClass="DarkBlueButton" customModule="Billo" customModuleProvider="target">
+                    <rect key="frame" x="60" y="310.33333333333331" width="220" height="42"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="42" id="gZl-0a-P3Z"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="onActionButton:" destination="jES-tc-oE3" eventType="touchUpInside" id="Xfl-zp-icb"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="Qpd-z7-bhG"/>
+            <color key="backgroundColor" name="secondaryBackground"/>
+            <constraints>
+                <constraint firstItem="AAj-X6-5cC" firstAttribute="leading" secondItem="Qpd-z7-bhG" secondAttribute="leading" id="8rH-Ws-NHK"/>
+                <constraint firstItem="Qpd-z7-bhG" firstAttribute="trailing" secondItem="VOk-kY-Pgv" secondAttribute="trailing" constant="60" id="9DO-Du-ZH0"/>
+                <constraint firstItem="Qpd-z7-bhG" firstAttribute="trailing" secondItem="YKd-jS-s8s" secondAttribute="trailing" constant="14" id="DtM-zf-Hb2"/>
+                <constraint firstItem="Qpd-z7-bhG" firstAttribute="trailing" secondItem="AAj-X6-5cC" secondAttribute="trailing" id="ELZ-Ag-Vmm"/>
+                <constraint firstItem="YKd-jS-s8s" firstAttribute="top" secondItem="AAj-X6-5cC" secondAttribute="bottom" constant="8" id="Jig-Gq-7rz"/>
+                <constraint firstItem="VOk-kY-Pgv" firstAttribute="top" secondItem="MRx-8P-0Ge" secondAttribute="bottom" constant="16" id="Knk-mZ-Yxi"/>
+                <constraint firstItem="MRx-8P-0Ge" firstAttribute="top" secondItem="YKd-jS-s8s" secondAttribute="bottom" constant="16" id="LaJ-Xr-BXs"/>
+                <constraint firstItem="Qpd-z7-bhG" firstAttribute="trailing" secondItem="MRx-8P-0Ge" secondAttribute="trailing" constant="14" id="SlU-eE-ti4"/>
+                <constraint firstItem="MRx-8P-0Ge" firstAttribute="leading" secondItem="Qpd-z7-bhG" secondAttribute="leading" constant="14" id="XAp-Ib-Yle"/>
+                <constraint firstItem="YKd-jS-s8s" firstAttribute="leading" secondItem="Qpd-z7-bhG" secondAttribute="leading" constant="14" id="lYE-q1-LDs"/>
+                <constraint firstItem="AAj-X6-5cC" firstAttribute="top" secondItem="Qpd-z7-bhG" secondAttribute="top" id="m8M-nF-xKm"/>
+                <constraint firstItem="VOk-kY-Pgv" firstAttribute="leading" secondItem="Qpd-z7-bhG" secondAttribute="leading" constant="60" id="zNB-b2-b0T"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="actionButton" destination="VOk-kY-Pgv" id="Vx4-ca-7UU"/>
+                <outlet property="imageView" destination="AAj-X6-5cC" id="wXc-zD-Qy1"/>
+                <outlet property="messageLabel" destination="MRx-8P-0Ge" id="6Mg-s3-pbh"/>
+                <outlet property="titleLabel" destination="YKd-jS-s8s" id="9pY-GU-w0J"/>
+            </connections>
+            <point key="canvasLocation" x="16" y="43.628185907046479"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
