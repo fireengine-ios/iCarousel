@@ -29,14 +29,33 @@ final class DrawCampaignCard: BaseCardView {
         }
     }
     
+    @IBOutlet weak var endDateLabel: PaddingLabel! {
+        willSet {
+            newValue.numberOfLines = 1
+            newValue.layer.backgroundColor = AppColor.background.cgColor
+            newValue.font = .appFont(.medium, size: 12)
+            newValue.textColor = AppColor.highlightColor.color
+            newValue.textAlignment = .center
+            newValue.paddingLeft = 15
+            newValue.paddingRight = 15
+            newValue.paddingTop = 8
+            newValue.paddingBottom = 8
+            newValue.layer.cornerRadius = 12
+            newValue.clipsToBounds = true
+        }
+    }
+    
     @IBOutlet private weak var actionButton: DarkBlueButton! {
         willSet {
-            newValue.setTitle("Kampanya Detayları", for: .normal)
+            newValue.setTitle(localized(.drawDetailButton), for: .normal)
             newValue.titleLabel?.font = .appFont(.medium, size: 14)
         }
     }
     
     private var campaignId: Int = 0
+    private var endDate: String = ""
+    private var pageTitle: String = ""
+    private lazy var router = RouterVC()
     
     override func set(object: HomeCardResponse?) {
         super.set(object: object)
@@ -49,6 +68,7 @@ final class DrawCampaignCard: BaseCardView {
         }
         
         if let title = cardObject?.details?["title"].string {
+            pageTitle = title
             titleLabel.text = title
         }
         
@@ -58,6 +78,11 @@ final class DrawCampaignCard: BaseCardView {
         
         if let url = cardObject?.details?["thumbnail"].url {
             imageView.loadImageData(with: url)
+        }
+        
+        if let endDate = cardObject?.details?["endDate"].number {
+            self.endDate = dateString(from: endDate)
+            endDateLabel.text = "\(localized(.drawEnddate)) \(dateString(from: endDate))"
         }
     }
     
@@ -72,6 +97,13 @@ final class DrawCampaignCard: BaseCardView {
     }
     
     @IBAction private func onActionButton(_ sender: UIButton) {
-        print("aaaaaaaaaaaa \(campaignId)")
+        let vc = router.drawCampaign(campaignId: campaignId, endDate: endDate, title: pageTitle)
+        router.pushViewController(viewController: vc, animated: false)
+    }
+    
+    private func dateString(from dateInterval: NSNumber) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        return formatter.string(from: Date(timeIntervalSince1970: TimeInterval(dateInterval.doubleValue / 1000)))
     }
 }

@@ -2250,3 +2250,11 @@ then {11,99 TRY/Month}*/
 "forgot_my_password_info" = "";
 "best_photo" = "";
 "security_question_invalid" = "";
+"select_security_question" = "";
+"draw_enddate" = "";
+"draw_detail_button" = "";
+"draw_join" = "";
+"draw_warning_header" = "";
+"draw_warning_body" = "";
+"draw_package_button" = "";
+"draw_already_join" = "";

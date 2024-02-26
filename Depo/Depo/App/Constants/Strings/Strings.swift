@@ -390,4 +390,12 @@ enum Strings: String, Localizable {
     
     case bestscenediscovercardtitle = "best_scene_discover_card_title"
     case bestscenediscovercardbody = "best_scene_discover_card_body"
+    
+    case drawEnddate = "draw_enddate"
+    case drawDetailButton = "draw_detail_button"
+    case drawJoin = "draw_join"
+    case drawWarningHeader = "draw_warning_header"
+    case drawWarningBody = "draw_warning_body"
+    case drawPackageButton = "draw_package_button"
+    case drawAlreadyJoin = "draw_already_join"
 }

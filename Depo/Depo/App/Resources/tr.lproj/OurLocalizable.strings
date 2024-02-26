@@ -2330,3 +2330,23 @@ then {11,99 TRY/Month}*/
 "forgot_my_password_info" = "Şifre sıfırlama işlemine devam edebilmek için hesabına ait e-posta ya da telefon numarasını girin.\nGörseldeki doğrulama kodunu girin.\nArdından e-posta adresinize şifre sıfırlama linki ya da telefon numaranıza SMS ile kod gönderilecektir.";
 "best_photo" = "En İyi Fotoğrafın!";
 "security_question_invalid" = "Seçtiğiniz güvenlik sorusu veya cevabınız yanlış.";
+"select_security_question" = "Daha önce belirlediğin güvenlik sorunu seç";
+
+/*Fuzzy*/
+"draw_enddate" = "Çekilişe Son Katılım Tarihi:";
+
+/*Fuzzy*/
+"draw_detail_button" = "Çekiliş Detayları";
+
+/*Fuzzy*/
+"draw_join" = "Çekilişe Katıl";
+
+/*Fuzzy*/
+"draw_warning_header" = "Çekilişe Katılma Fırsatı Yakala";
+
+/*Fuzzy*/
+"draw_warning_body" = "Çekilişe katılabilmek için ücretli bir pakete sahip olmalısınız. Henüz ücretli bir pakete sahip değilsiniz.";
+
+/*Fuzzy*/
+"draw_package_button" = "Paket Satın Al";
+"draw_already_join" = "Çekilişe katıldınız.";

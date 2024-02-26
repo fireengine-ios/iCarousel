@@ -43,6 +43,15 @@
                         <action selector="onActionButton:" destination="jES-tc-oE3" eventType="touchUpInside" id="Xfl-zp-icb"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u0m-89-rha" customClass="PaddingLabel" customModule="Billo" customModuleProvider="target">
+                    <rect key="frame" x="288" y="69" width="42" height="42"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="42" id="2zk-tK-1tc"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="Qpd-z7-bhG"/>
             <color key="backgroundColor" name="secondaryBackground"/>
@@ -54,6 +63,8 @@
                 <constraint firstItem="YKd-jS-s8s" firstAttribute="top" secondItem="AAj-X6-5cC" secondAttribute="bottom" constant="8" id="Jig-Gq-7rz"/>
                 <constraint firstItem="VOk-kY-Pgv" firstAttribute="top" secondItem="MRx-8P-0Ge" secondAttribute="bottom" constant="16" id="Knk-mZ-Yxi"/>
                 <constraint firstItem="MRx-8P-0Ge" firstAttribute="top" secondItem="YKd-jS-s8s" secondAttribute="bottom" constant="16" id="LaJ-Xr-BXs"/>
+                <constraint firstItem="u0m-89-rha" firstAttribute="top" secondItem="Qpd-z7-bhG" secondAttribute="top" constant="10" id="PtT-dz-0UU"/>
+                <constraint firstItem="Qpd-z7-bhG" firstAttribute="trailing" secondItem="u0m-89-rha" secondAttribute="trailing" constant="10" id="RZK-1Z-vif"/>
                 <constraint firstItem="Qpd-z7-bhG" firstAttribute="trailing" secondItem="MRx-8P-0Ge" secondAttribute="trailing" constant="14" id="SlU-eE-ti4"/>
                 <constraint firstItem="MRx-8P-0Ge" firstAttribute="leading" secondItem="Qpd-z7-bhG" secondAttribute="leading" constant="14" id="XAp-Ib-Yle"/>
                 <constraint firstItem="YKd-jS-s8s" firstAttribute="leading" secondItem="Qpd-z7-bhG" secondAttribute="leading" constant="14" id="lYE-q1-LDs"/>
@@ -63,6 +74,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="actionButton" destination="VOk-kY-Pgv" id="Vx4-ca-7UU"/>
+                <outlet property="endDateLabel" destination="u0m-89-rha" id="7lX-VT-h5E"/>
                 <outlet property="imageView" destination="AAj-X6-5cC" id="wXc-zD-Qy1"/>
                 <outlet property="messageLabel" destination="MRx-8P-0Ge" id="6Mg-s3-pbh"/>
                 <outlet property="titleLabel" destination="YKd-jS-s8s" id="9pY-GU-w0J"/>

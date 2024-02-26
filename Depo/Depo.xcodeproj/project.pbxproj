@@ -1828,6 +1828,10 @@
 		898B44702AC2F53100D29F24 /* PhotoPrintSeeAllCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B446E2AC2F53100D29F24 /* PhotoPrintSeeAllCollectionViewCell.swift */; };
 		898B44712AC2F53100D29F24 /* PhotoPrintSeeAllCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B446E2AC2F53100D29F24 /* PhotoPrintSeeAllCollectionViewCell.swift */; };
 		898B44722AC2F53100D29F24 /* PhotoPrintSeeAllCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B446E2AC2F53100D29F24 /* PhotoPrintSeeAllCollectionViewCell.swift */; };
+		898C75642B8A119E00AAE9BB /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898C75632B8A119E00AAE9BB /* PaddingLabel.swift */; };
+		898C75652B8A119E00AAE9BB /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898C75632B8A119E00AAE9BB /* PaddingLabel.swift */; };
+		898C75662B8A119E00AAE9BB /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898C75632B8A119E00AAE9BB /* PaddingLabel.swift */; };
+		898C75672B8A119E00AAE9BB /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898C75632B8A119E00AAE9BB /* PaddingLabel.swift */; };
 		8991B49D2A6E6AC900B94A2D /* PhotoPrintSelectionSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8991B49C2A6E6AC900B94A2D /* PhotoPrintSelectionSegmentedView.swift */; };
 		8991B49E2A6E6AC900B94A2D /* PhotoPrintSelectionSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8991B49C2A6E6AC900B94A2D /* PhotoPrintSelectionSegmentedView.swift */; };
 		8991B49F2A6E6AC900B94A2D /* PhotoPrintSelectionSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8991B49C2A6E6AC900B94A2D /* PhotoPrintSelectionSegmentedView.swift */; };
@@ -1895,6 +1899,14 @@
 		89B9D17C29BEFC2100C73307 /* CreateCollageDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B9D17A29BEFC2100C73307 /* CreateCollageDetailController.swift */; };
 		89B9D17D29BEFC2100C73307 /* CreateCollageDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B9D17A29BEFC2100C73307 /* CreateCollageDetailController.swift */; };
 		89B9D17E29BEFC2100C73307 /* CreateCollageDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B9D17A29BEFC2100C73307 /* CreateCollageDetailController.swift */; };
+		89BC8F952B8B70AD0025B53F /* DrawCampaignNoPackagePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89BC8F942B8B70AD0025B53F /* DrawCampaignNoPackagePopup.xib */; };
+		89BC8F962B8B70AD0025B53F /* DrawCampaignNoPackagePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89BC8F942B8B70AD0025B53F /* DrawCampaignNoPackagePopup.xib */; };
+		89BC8F972B8B70AD0025B53F /* DrawCampaignNoPackagePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89BC8F942B8B70AD0025B53F /* DrawCampaignNoPackagePopup.xib */; };
+		89BC8F982B8B70AD0025B53F /* DrawCampaignNoPackagePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89BC8F942B8B70AD0025B53F /* DrawCampaignNoPackagePopup.xib */; };
+		89BC8F9A2B8B70E40025B53F /* DrawCampaignNoPackagePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC8F992B8B70E40025B53F /* DrawCampaignNoPackagePopup.swift */; };
+		89BC8F9B2B8B70E40025B53F /* DrawCampaignNoPackagePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC8F992B8B70E40025B53F /* DrawCampaignNoPackagePopup.swift */; };
+		89BC8F9C2B8B70E40025B53F /* DrawCampaignNoPackagePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC8F992B8B70E40025B53F /* DrawCampaignNoPackagePopup.swift */; };
+		89BC8F9D2B8B70E40025B53F /* DrawCampaignNoPackagePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BC8F992B8B70E40025B53F /* DrawCampaignNoPackagePopup.swift */; };
 		89C0AD5A2A8E6D420014D674 /* PhotoPrintInfoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C0AD592A8E6D420014D674 /* PhotoPrintInfoPopup.swift */; };
 		89C0AD5B2A8E6D420014D674 /* PhotoPrintInfoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C0AD592A8E6D420014D674 /* PhotoPrintInfoPopup.swift */; };
 		89C0AD5C2A8E6D420014D674 /* PhotoPrintInfoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C0AD592A8E6D420014D674 /* PhotoPrintInfoPopup.swift */; };
@@ -1928,6 +1940,66 @@
 		89CC89F823AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89CC89F223AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib */; };
 		89CC89FA23AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89CC89F223AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib */; };
 		89CDEBAA29B7122A00870B14 /* CreateCollagePreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CDEBA929B7122A00870B14 /* CreateCollagePreviewController.swift */; };
+		89CF11642B89DC350040F73F /* DrawCampaignInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11632B89DC350040F73F /* DrawCampaignInitializer.swift */; };
+		89CF11652B89DC350040F73F /* DrawCampaignInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11632B89DC350040F73F /* DrawCampaignInitializer.swift */; };
+		89CF11662B89DC350040F73F /* DrawCampaignInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11632B89DC350040F73F /* DrawCampaignInitializer.swift */; };
+		89CF11672B89DC350040F73F /* DrawCampaignInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11632B89DC350040F73F /* DrawCampaignInitializer.swift */; };
+		89CF11692B89DC670040F73F /* DrawCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11682B89DC670040F73F /* DrawCampaignViewController.swift */; };
+		89CF116A2B89DC670040F73F /* DrawCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11682B89DC670040F73F /* DrawCampaignViewController.swift */; };
+		89CF116B2B89DC670040F73F /* DrawCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11682B89DC670040F73F /* DrawCampaignViewController.swift */; };
+		89CF116C2B89DC670040F73F /* DrawCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11682B89DC670040F73F /* DrawCampaignViewController.swift */; };
+		89CF116E2B89DC7C0040F73F /* DrawCampaignViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF116D2B89DC7C0040F73F /* DrawCampaignViewInput.swift */; };
+		89CF116F2B89DC7C0040F73F /* DrawCampaignViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF116D2B89DC7C0040F73F /* DrawCampaignViewInput.swift */; };
+		89CF11702B89DC7C0040F73F /* DrawCampaignViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF116D2B89DC7C0040F73F /* DrawCampaignViewInput.swift */; };
+		89CF11712B89DC7C0040F73F /* DrawCampaignViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF116D2B89DC7C0040F73F /* DrawCampaignViewInput.swift */; };
+		89CF11732B89DC8B0040F73F /* DrawCampaignViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11722B89DC8B0040F73F /* DrawCampaignViewOutput.swift */; };
+		89CF11742B89DC8B0040F73F /* DrawCampaignViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11722B89DC8B0040F73F /* DrawCampaignViewOutput.swift */; };
+		89CF11752B89DC8B0040F73F /* DrawCampaignViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11722B89DC8B0040F73F /* DrawCampaignViewOutput.swift */; };
+		89CF11762B89DC8B0040F73F /* DrawCampaignViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11722B89DC8B0040F73F /* DrawCampaignViewOutput.swift */; };
+		89CF11782B89DCAE0040F73F /* DrawCampaignPresenterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11772B89DCAE0040F73F /* DrawCampaignPresenterInput.swift */; };
+		89CF11792B89DCAE0040F73F /* DrawCampaignPresenterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11772B89DCAE0040F73F /* DrawCampaignPresenterInput.swift */; };
+		89CF117A2B89DCAE0040F73F /* DrawCampaignPresenterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11772B89DCAE0040F73F /* DrawCampaignPresenterInput.swift */; };
+		89CF117B2B89DCAE0040F73F /* DrawCampaignPresenterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11772B89DCAE0040F73F /* DrawCampaignPresenterInput.swift */; };
+		89CF117D2B89DCB70040F73F /* DrawCampaignPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF117C2B89DCB70040F73F /* DrawCampaignPresenter.swift */; };
+		89CF117E2B89DCB70040F73F /* DrawCampaignPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF117C2B89DCB70040F73F /* DrawCampaignPresenter.swift */; };
+		89CF117F2B89DCB70040F73F /* DrawCampaignPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF117C2B89DCB70040F73F /* DrawCampaignPresenter.swift */; };
+		89CF11802B89DCB70040F73F /* DrawCampaignPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF117C2B89DCB70040F73F /* DrawCampaignPresenter.swift */; };
+		89CF11822B89DCCC0040F73F /* DrawCampaignInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11812B89DCCC0040F73F /* DrawCampaignInteractor.swift */; };
+		89CF11832B89DCCC0040F73F /* DrawCampaignInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11812B89DCCC0040F73F /* DrawCampaignInteractor.swift */; };
+		89CF11842B89DCCC0040F73F /* DrawCampaignInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11812B89DCCC0040F73F /* DrawCampaignInteractor.swift */; };
+		89CF11852B89DCCC0040F73F /* DrawCampaignInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11812B89DCCC0040F73F /* DrawCampaignInteractor.swift */; };
+		89CF11872B89DCD50040F73F /* DrawCampaignInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11862B89DCD50040F73F /* DrawCampaignInteractorInput.swift */; };
+		89CF11882B89DCD50040F73F /* DrawCampaignInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11862B89DCD50040F73F /* DrawCampaignInteractorInput.swift */; };
+		89CF11892B89DCD50040F73F /* DrawCampaignInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11862B89DCD50040F73F /* DrawCampaignInteractorInput.swift */; };
+		89CF118A2B89DCD50040F73F /* DrawCampaignInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11862B89DCD50040F73F /* DrawCampaignInteractorInput.swift */; };
+		89CF118C2B89DCE10040F73F /* DrawCampaignInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF118B2B89DCE10040F73F /* DrawCampaignInteractorOutput.swift */; };
+		89CF118D2B89DCE10040F73F /* DrawCampaignInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF118B2B89DCE10040F73F /* DrawCampaignInteractorOutput.swift */; };
+		89CF118E2B89DCE10040F73F /* DrawCampaignInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF118B2B89DCE10040F73F /* DrawCampaignInteractorOutput.swift */; };
+		89CF118F2B89DCE10040F73F /* DrawCampaignInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF118B2B89DCE10040F73F /* DrawCampaignInteractorOutput.swift */; };
+		89CF11912B89DCF50040F73F /* DrawCampaignRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11902B89DCF50040F73F /* DrawCampaignRouter.swift */; };
+		89CF11922B89DCF50040F73F /* DrawCampaignRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11902B89DCF50040F73F /* DrawCampaignRouter.swift */; };
+		89CF11932B89DCF50040F73F /* DrawCampaignRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11902B89DCF50040F73F /* DrawCampaignRouter.swift */; };
+		89CF11942B89DCF50040F73F /* DrawCampaignRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11902B89DCF50040F73F /* DrawCampaignRouter.swift */; };
+		89CF11962B89DD020040F73F /* DrawCampaignRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11952B89DD020040F73F /* DrawCampaignRouterInput.swift */; };
+		89CF11972B89DD020040F73F /* DrawCampaignRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11952B89DD020040F73F /* DrawCampaignRouterInput.swift */; };
+		89CF11982B89DD020040F73F /* DrawCampaignRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11952B89DD020040F73F /* DrawCampaignRouterInput.swift */; };
+		89CF11992B89DD020040F73F /* DrawCampaignRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11952B89DD020040F73F /* DrawCampaignRouterInput.swift */; };
+		89CF119B2B89DD180040F73F /* DrawCampaignConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF119A2B89DD180040F73F /* DrawCampaignConfigurator.swift */; };
+		89CF119C2B89DD180040F73F /* DrawCampaignConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF119A2B89DD180040F73F /* DrawCampaignConfigurator.swift */; };
+		89CF119D2B89DD180040F73F /* DrawCampaignConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF119A2B89DD180040F73F /* DrawCampaignConfigurator.swift */; };
+		89CF119E2B89DD180040F73F /* DrawCampaignConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF119A2B89DD180040F73F /* DrawCampaignConfigurator.swift */; };
+		89CF11A12B89E23D0040F73F /* DrawCampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11A02B89E23D0040F73F /* DrawCampaignService.swift */; };
+		89CF11A22B89E23D0040F73F /* DrawCampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11A02B89E23D0040F73F /* DrawCampaignService.swift */; };
+		89CF11A32B89E23D0040F73F /* DrawCampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11A02B89E23D0040F73F /* DrawCampaignService.swift */; };
+		89CF11A42B89E23D0040F73F /* DrawCampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11A02B89E23D0040F73F /* DrawCampaignService.swift */; };
+		89CF11A62B89E2580040F73F /* CampaignStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11A52B89E2580040F73F /* CampaignStatusResponse.swift */; };
+		89CF11A72B89E2580040F73F /* CampaignStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11A52B89E2580040F73F /* CampaignStatusResponse.swift */; };
+		89CF11A82B89E2580040F73F /* CampaignStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11A52B89E2580040F73F /* CampaignStatusResponse.swift */; };
+		89CF11A92B89E2580040F73F /* CampaignStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11A52B89E2580040F73F /* CampaignStatusResponse.swift */; };
+		89CF11B02B89E2B20040F73F /* CampaignPolicyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11AF2B89E2B20040F73F /* CampaignPolicyResponse.swift */; };
+		89CF11B12B89E2B20040F73F /* CampaignPolicyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11AF2B89E2B20040F73F /* CampaignPolicyResponse.swift */; };
+		89CF11B22B89E2B20040F73F /* CampaignPolicyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11AF2B89E2B20040F73F /* CampaignPolicyResponse.swift */; };
+		89CF11B32B89E2B20040F73F /* CampaignPolicyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CF11AF2B89E2B20040F73F /* CampaignPolicyResponse.swift */; };
 		89D1EBEB23EC3BF000092031 /* UIApplication+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D1EBE923EC3BF000092031 /* UIApplication+Display.swift */; };
 		89D1EBEC23EC3BF000092031 /* UIApplication+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D1EBE923EC3BF000092031 /* UIApplication+Display.swift */; };
 		89D1EBEE23EC3BF000092031 /* UIApplication+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D1EBE923EC3BF000092031 /* UIApplication+Display.swift */; };
@@ -11315,6 +11387,7 @@
 		898B44232AC2AB9200D29F24 /* PhotoPrintForYouViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintForYouViewController.swift; sourceTree = "<group>"; };
 		898B442C2AC2BAB600D29F24 /* PhotoPrintSeeAllTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintSeeAllTableViewCell.swift; sourceTree = "<group>"; };
 		898B446E2AC2F53100D29F24 /* PhotoPrintSeeAllCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintSeeAllCollectionViewCell.swift; sourceTree = "<group>"; };
+		898C75632B8A119E00AAE9BB /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		8991B49C2A6E6AC900B94A2D /* PhotoPrintSelectionSegmentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintSelectionSegmentedView.swift; sourceTree = "<group>"; };
 		8991B4A12A6E6B1E00B94A2D /* PhotoPrintSelectionSegmentedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintSelectionSegmentedController.swift; sourceTree = "<group>"; };
 		8991B4A62A6E6F4E00B94A2D /* PhotoPrintPhotoSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintPhotoSelectionController.swift; sourceTree = "<group>"; };
@@ -11334,6 +11407,8 @@
 		89B40C862AF627C20033147B /* HighlightPackage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HighlightPackage.xib; sourceTree = "<group>"; };
 		89B40C882AF627D20033147B /* HighlightPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightPackage.swift; sourceTree = "<group>"; };
 		89B9D17A29BEFC2100C73307 /* CreateCollageDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageDetailController.swift; sourceTree = "<group>"; };
+		89BC8F942B8B70AD0025B53F /* DrawCampaignNoPackagePopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DrawCampaignNoPackagePopup.xib; sourceTree = "<group>"; };
+		89BC8F992B8B70E40025B53F /* DrawCampaignNoPackagePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCampaignNoPackagePopup.swift; sourceTree = "<group>"; };
 		89C0AD592A8E6D420014D674 /* PhotoPrintInfoPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintInfoPopup.swift; sourceTree = "<group>"; };
 		89C0AD5F2A8E6DD20014D674 /* PhotoPrintInfoPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoPrintInfoPopup.xib; sourceTree = "<group>"; };
 		89C0AD652A8F4E0A0014D674 /* PhotoPrintMissingPhotoPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintMissingPhotoPopup.swift; sourceTree = "<group>"; };
@@ -11344,6 +11419,21 @@
 		89CC89F123AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSSmartAlbumWarningPopUp.swift; sourceTree = "<group>"; };
 		89CC89F223AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSSmartAlbumWarningPopUp.xib; sourceTree = "<group>"; };
 		89CDEBA929B7122A00870B14 /* CreateCollagePreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollagePreviewController.swift; sourceTree = "<group>"; };
+		89CF11632B89DC350040F73F /* DrawCampaignInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCampaignInitializer.swift; sourceTree = "<group>"; };
+		89CF11682B89DC670040F73F /* DrawCampaignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCampaignViewController.swift; sourceTree = "<group>"; };
+		89CF116D2B89DC7C0040F73F /* DrawCampaignViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCampaignViewInput.swift; sourceTree = "<group>"; };
+		89CF11722B89DC8B0040F73F /* DrawCampaignViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCampaignViewOutput.swift; sourceTree = "<group>"; };
+		89CF11772B89DCAE0040F73F /* DrawCampaignPresenterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCampaignPresenterInput.swift; sourceTree = "<group>"; };
+		89CF117C2B89DCB70040F73F /* DrawCampaignPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCampaignPresenter.swift; sourceTree = "<group>"; };
+		89CF11812B89DCCC0040F73F /* DrawCampaignInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCampaignInteractor.swift; sourceTree = "<group>"; };
+		89CF11862B89DCD50040F73F /* DrawCampaignInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCampaignInteractorInput.swift; sourceTree = "<group>"; };
+		89CF118B2B89DCE10040F73F /* DrawCampaignInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCampaignInteractorOutput.swift; sourceTree = "<group>"; };
+		89CF11902B89DCF50040F73F /* DrawCampaignRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCampaignRouter.swift; sourceTree = "<group>"; };
+		89CF11952B89DD020040F73F /* DrawCampaignRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCampaignRouterInput.swift; sourceTree = "<group>"; };
+		89CF119A2B89DD180040F73F /* DrawCampaignConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCampaignConfigurator.swift; sourceTree = "<group>"; };
+		89CF11A02B89E23D0040F73F /* DrawCampaignService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCampaignService.swift; sourceTree = "<group>"; };
+		89CF11A52B89E2580040F73F /* CampaignStatusResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignStatusResponse.swift; sourceTree = "<group>"; };
+		89CF11AF2B89E2B20040F73F /* CampaignPolicyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignPolicyResponse.swift; sourceTree = "<group>"; };
 		89D1EBE923EC3BF000092031 /* UIApplication+Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Display.swift"; sourceTree = "<group>"; };
 		89D2D4CA29D5A52100AC772B /* OnlyOfficePopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnlyOfficePopup.xib; sourceTree = "<group>"; };
 		89D2D4CC29D5A52E00AC772B /* OnlyOfficePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyOfficePopup.swift; sourceTree = "<group>"; };
@@ -16215,6 +16305,7 @@
 		7C032B851EEFFC1A006532C8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				89CF115A2B89DB750040F73F /* DrawCampaign */,
 				8991B48D2A6E69B400B94A2D /* PhotoPrint */,
 				89F0953829B0B4D500F74E7E /* CreateCollage */,
 				07C6D4DD284B4B5700502C28 /* IndeterminateProgressView */,
@@ -17599,6 +17690,15 @@
 			path = HighlightPackage;
 			sourceTree = "<group>";
 		};
+		89BC8F932B8B704F0025B53F /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+				89BC8F942B8B70AD0025B53F /* DrawCampaignNoPackagePopup.xib */,
+				89BC8F992B8B70E40025B53F /* DrawCampaignNoPackagePopup.swift */,
+			);
+			path = Popup;
+			sourceTree = "<group>";
+		};
 		89C0AD452A8E3A520014D674 /* Popups */ = {
 			isa = PBXGroup;
 			children = (
@@ -17660,6 +17760,76 @@
 				89E8AD1D29BDEF960091F898 /* ImageScrollViewCollage.swift */,
 			);
 			path = CreateCollagePreview;
+			sourceTree = "<group>";
+		};
+		89CF115A2B89DB750040F73F /* DrawCampaign */ = {
+			isa = PBXGroup;
+			children = (
+				89CF115E2B89DB840040F73F /* View */,
+				89CF115F2B89DB8A0040F73F /* Presenter */,
+				89CF11612B89DB9A0040F73F /* Interactor */,
+				89CF11602B89DB920040F73F /* Router */,
+				89CF11622B89DBA40040F73F /* Configurator */,
+			);
+			path = DrawCampaign;
+			sourceTree = "<group>";
+		};
+		89CF115E2B89DB840040F73F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				89BC8F932B8B704F0025B53F /* Popup */,
+				89CF11682B89DC670040F73F /* DrawCampaignViewController.swift */,
+				89CF116D2B89DC7C0040F73F /* DrawCampaignViewInput.swift */,
+				89CF11722B89DC8B0040F73F /* DrawCampaignViewOutput.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		89CF115F2B89DB8A0040F73F /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				89CF11772B89DCAE0040F73F /* DrawCampaignPresenterInput.swift */,
+				89CF117C2B89DCB70040F73F /* DrawCampaignPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		89CF11602B89DB920040F73F /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				89CF11902B89DCF50040F73F /* DrawCampaignRouter.swift */,
+				89CF11952B89DD020040F73F /* DrawCampaignRouterInput.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		89CF11612B89DB9A0040F73F /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				89CF11812B89DCCC0040F73F /* DrawCampaignInteractor.swift */,
+				89CF11862B89DCD50040F73F /* DrawCampaignInteractorInput.swift */,
+				89CF118B2B89DCE10040F73F /* DrawCampaignInteractorOutput.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		89CF11622B89DBA40040F73F /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				89CF11632B89DC350040F73F /* DrawCampaignInitializer.swift */,
+				89CF119A2B89DD180040F73F /* DrawCampaignConfigurator.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		89CF119F2B89E2190040F73F /* DrawCampaignService */ = {
+			isa = PBXGroup;
+			children = (
+				89CF11A02B89E23D0040F73F /* DrawCampaignService.swift */,
+				89CF11A52B89E2580040F73F /* CampaignStatusResponse.swift */,
+				89CF11AF2B89E2B20040F73F /* CampaignPolicyResponse.swift */,
+			);
+			path = DrawCampaignService;
 			sourceTree = "<group>";
 		};
 		89D2D4C929D5A44A00AC772B /* OnlyOfficePopUp */ = {
@@ -21432,6 +21602,7 @@
 		CE51A0C61EF8ED38005DCEE0 /* ApiServices */ = {
 			isa = PBXGroup;
 			children = (
+				89CF119F2B89E2190040F73F /* DrawCampaignService */,
 				895A54982B57B01500E2A275 /* QRCodeService */,
 				895BAB662AB478C500920DF9 /* PhotoPrintService */,
 				89CB2BC529D6E474000A15CB /* OnlyOfficeService */,
@@ -21825,6 +21996,7 @@
 				A20CDBAF219DAC2700CA9A67 /* GradientPremiumButton.swift */,
 				F074DD032900214C002E9F1C /* DarkBlueButton.swift */,
 				F074DD0B29002680002E9F1C /* WhiteButton.swift */,
+				898C75632B8A119E00AAE9BB /* PaddingLabel.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -24174,6 +24346,7 @@
 				8C0E90321FDEBDFF00789C91 /* ActivityTimelineTableBackView.xib in Resources */,
 				8C0E90331FDEBDFF00789C91 /* PasscodeEnterViewController.xib in Resources */,
 				8C0E90341FDEBDFF00789C91 /* CollectionViewCellForVideo.xib in Resources */,
+				89BC8F952B8B70AD0025B53F /* DrawCampaignNoPackagePopup.xib in Resources */,
 				8C208654228D4B2E000BEDAD /* PhotoVideoCell.xib in Resources */,
 				8C0E90351FDEBDFF00789C91 /* MusicBar.xib in Resources */,
 				985FFB69255C1FD9001AA845 /* FileMetaInfoView.xib in Resources */,
@@ -24707,6 +24880,7 @@
 				CF7146DF24B597A900D83E60 /* DeleteDuplicatesMainView.xib in Resources */,
 				985FFB6C255C1FD9001AA845 /* FileMetaInfoView.xib in Resources */,
 				F0C447302848C85F00129228 /* AllFilesTypeCollectionViewCell.xib in Resources */,
+				89BC8F972B8B70AD0025B53F /* DrawCampaignNoPackagePopup.xib in Resources */,
 				982319BA24F3A1E700FD16E2 /* HSLView.xib in Resources */,
 				CE784DB422A685FB00662219 /* RecentlySearchedFaceImageTableViewCell.xib in Resources */,
 				98A86D4F23A2208800438225 /* HiddenPhotosViewController.xib in Resources */,
@@ -24967,6 +25141,7 @@
 				8E3B6B4E2462E44800BCB052 /* FileInfoView.xib in Resources */,
 				CF8B68BD23CBC9D70021B021 /* SuggestionTableSectionHeader.xib in Resources */,
 				CF8B68BF23CBC9D70021B021 /* SettingsTableViewCell.xib in Resources */,
+				89BC8F962B8B70AD0025B53F /* DrawCampaignNoPackagePopup.xib in Resources */,
 				CF7D63CE25A42FE3005C22F5 /* SharedFilesSliderPlusCell.xib in Resources */,
 				CF8B68C123CBC9D70021B021 /* CreateStoryPopUp.xib in Resources */,
 				F04E5C4327EDAF9D00CAAEB5 /* LoginWithGooglePopup.xib in Resources */,
@@ -25532,6 +25707,7 @@
 				988BA1C92559248C0086E4BE /* PrivateShareDurationView.xib in Resources */,
 				CF8B717C23CBCA280021B021 /* CollectionViewCellForVideo.xib in Resources */,
 				F0C447312848C85F00129228 /* AllFilesTypeCollectionViewCell.xib in Resources */,
+				89BC8F982B8B70AD0025B53F /* DrawCampaignNoPackagePopup.xib in Resources */,
 				CF8B718023CBCA280021B021 /* CustomScrollIndicator.xib in Resources */,
 				9842FB912563D25700B07606 /* PrivateShareContactsViewController.xib in Resources */,
 				17B9B0D023F1F76A00CAF5E1 /* FullQuotaWarningPopUp.xib in Resources */,
@@ -26889,6 +27065,7 @@
 				CE292C1621BE5DE9004FC745 /* PremiumViewInput.swift in Sources */,
 				892F45332305A72C00604DF5 /* EmailVerifiedPopUp.swift in Sources */,
 				CE292C1721BE5DE9004FC745 /* PremiumViewOutput.swift in Sources */,
+				89CF11692B89DC670040F73F /* DrawCampaignViewController.swift in Sources */,
 				98231A7024F3A23500FD16E2 /* CruzFilter.swift in Sources */,
 				CE292C1821BE5DE9004FC745 /* PremiumRouter.swift in Sources */,
 				CE292C1921BE5DE9004FC745 /* PremiumRouterInput.swift in Sources */,
@@ -27153,6 +27330,7 @@
 				076BD1DF27BC325E004609E3 /* MapSearchService.swift in Sources */,
 				73E6715523EBF789000C4AF7 /* PrivacyPolicyService.swift in Sources */,
 				8991B4A22A6E6B1E00B94A2D /* PhotoPrintSelectionSegmentedController.swift in Sources */,
+				89CF11B02B89E2B20040F73F /* CampaignPolicyResponse.swift in Sources */,
 				8C0E8CE31FDEBDFF00789C91 /* RequestHeader.swift in Sources */,
 				8C0B91BD2017108100A5BA81 /* Validator.swift in Sources */,
 				8C0E8CE61FDEBDFF00789C91 /* HomePageViewController.swift in Sources */,
@@ -27626,6 +27804,7 @@
 				CF7146CA24B597A900D83E60 /* BackUpContactsCard.swift in Sources */,
 				4A0AC139208736FF00032CC7 /* PeriodicContactSyncRouter.swift in Sources */,
 				07567D922721D39900557BCF /* Strings+Attributed.swift in Sources */,
+				89CF11782B89DCAE0040F73F /* DrawCampaignPresenterInput.swift in Sources */,
 				8C89255022529CAD004BE02E /* SettingsBundleHelper.swift in Sources */,
 				8C208675228D4FF1000BEDAD /* NSManagedObjectContext+Extensions.swift in Sources */,
 				984A515B21E88D28004525F5 /* InstapickAnalysisCell.swift in Sources */,
@@ -27649,6 +27828,7 @@
 				8C0E8DD81FDEBDFF00789C91 /* UploadFromLifeBoxViewIO.swift in Sources */,
 				8C0E8DD91FDEBDFF00789C91 /* TermsAndServicesDataStorage.swift in Sources */,
 				A217E44421A5B0B60084AA37 /* LeavePremiumInteractorInput.swift in Sources */,
+				89CF119B2B89DD180040F73F /* DrawCampaignConfigurator.swift in Sources */,
 				8C0E8DDA1FDEBDFF00789C91 /* TermsAndServicesRouterInput.swift in Sources */,
 				8C0E8DDB1FDEBDFF00789C91 /* RingView.swift in Sources */,
 				8C0E8DDC1FDEBDFF00789C91 /* TermsAndServicesRouter.swift in Sources */,
@@ -27685,6 +27865,7 @@
 				0766316227CE913F00AB4BC2 /* MapLocationDetailInitializer.swift in Sources */,
 				89E51D5422CA1125007A7DBC /* CreateStoryPreviewPresenter.swift in Sources */,
 				8C0E8DE71FDEBDFF00789C91 /* IntroduceInteractorInput.swift in Sources */,
+				898C75642B8A119E00AAE9BB /* PaddingLabel.swift in Sources */,
 				8C0E8DE81FDEBDFF00789C91 /* AlbumServiceResponse.swift in Sources */,
 				8C0E8DE91FDEBDFF00789C91 /* IntroduceInteractorOutput.swift in Sources */,
 				98B0482B259314750011DAEB /* Utils.m in Sources */,
@@ -27884,6 +28065,7 @@
 				8C0E8E341FDEBDFF00789C91 /* UploadFromLifeBoxViewController.swift in Sources */,
 				8C0E8E351FDEBDFF00789C91 /* RequestsKey.swift in Sources */,
 				8C0E8E361FDEBDFF00789C91 /* RemoteService.swift in Sources */,
+				89BC8F9A2B8B70E40025B53F /* DrawCampaignNoPackagePopup.swift in Sources */,
 				73B623D723BF5CB700839C47 /* SmashService.swift in Sources */,
 				8C0E8E371FDEBDFF00789C91 /* UsageInfoConfigurator.swift in Sources */,
 				8C0E8E381FDEBDFF00789C91 /* ForgotPasswordRouterInput.swift in Sources */,
@@ -28014,6 +28196,7 @@
 				8CD84C441FDEC570005CD3B8 /* AlbumDetailModuleOutput.swift in Sources */,
 				988BA1832559245F0086E4BE /* PrivateShareAddMessageView.swift in Sources */,
 				8C0E8EAF1FDEBDFF00789C91 /* BaseFilesGreedViewOutput.swift in Sources */,
+				89CF118C2B89DCE10040F73F /* DrawCampaignInteractorOutput.swift in Sources */,
 				8C0E8EB01FDEBDFF00789C91 /* SubscriptionPlan.swift in Sources */,
 				89E51D3A22CA10F9007A7DBC /* CreateStoryPreviewConfigurator.swift in Sources */,
 				8C208644228D4B2E000BEDAD /* GalleryCollectionViewLayout.swift in Sources */,
@@ -28024,6 +28207,7 @@
 				985E6950255A6045006F6CD7 /* PrivateShareUserRoleViewController.swift in Sources */,
 				8C0E8EB21FDEBDFF00789C91 /* ImportFromDropboxInteractor.swift in Sources */,
 				52501E9E29952C040000376C /* NotificationPresenterInput.swift in Sources */,
+				89CF116E2B89DC7C0040F73F /* DrawCampaignViewInput.swift in Sources */,
 				9864296922F834F10039811C /* SpotifyResponse.swift in Sources */,
 				07407D682796DC6F0082FF8D /* EmailVerificationRouter.swift in Sources */,
 				98B04B17259316E40011DAEB /* Notifications.swift in Sources */,
@@ -28133,6 +28317,7 @@
 				98CB9A862202DE4900E861D1 /* AuthenticationServiceResponseError.swift in Sources */,
 				8C0E8EE51FDEBDFF00789C91 /* MediaItem+CoreDataClass.swift in Sources */,
 				B56FBB2C2122C78C004F4A59 /* TermsOfUsePresenter.swift in Sources */,
+				89CF11872B89DCD50040F73F /* DrawCampaignInteractorInput.swift in Sources */,
 				98B0487B259314750011DAEB /* ContactDevice.m in Sources */,
 				8C0E8EE71FDEBDFF00789C91 /* HelpAndSupportInteractor.swift in Sources */,
 				5282AAF029E930900014FBCF /* ImageRetryService.swift in Sources */,
@@ -28516,6 +28701,7 @@
 				8C0E8F7D1FDEBDFF00789C91 /* ImageForDowload.swift in Sources */,
 				8C0E8F7F1FDEBDFF00789C91 /* SelectNameInteractorInput.swift in Sources */,
 				F0571ED8288AE70D00A0D6AC /* ForYouRouterInput.swift in Sources */,
+				89CF11642B89DC350040F73F /* DrawCampaignInitializer.swift in Sources */,
 				F00D7DDF2851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */,
 				8C0E8F801FDEBDFF00789C91 /* SelectNameInteractorOutput.swift in Sources */,
 				52A5E03D29252B4300670B0C /* CustomAVPlayerLayer.swift in Sources */,
@@ -28524,6 +28710,7 @@
 				7C121F0C20874BCE00AA585F /* AppMigrator.swift in Sources */,
 				8C0E8F821FDEBDFF00789C91 /* SelectNameRouterInput.swift in Sources */,
 				8C0E8F831FDEBDFF00789C91 /* PackagesRouterInput.swift in Sources */,
+				89CF11962B89DD020040F73F /* DrawCampaignRouterInput.swift in Sources */,
 				17589F692275E33900A5DB37 /* ErrorBannerView.swift in Sources */,
 				4A56D5BC202AF556003A4624 /* FaceImageAddNameConfigurator.swift in Sources */,
 				17589F672275E33900A5DB37 /* ProfilePasswordEnterView.swift in Sources */,
@@ -28575,6 +28762,7 @@
 				8C0E8F8E1FDEBDFF00789C91 /* DropboxStatusValue.swift in Sources */,
 				8C0E8F8F1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */,
 				89E51D4322CA1106007A7DBC /* CreateStoryPreviewViewIO.swift in Sources */,
+				89CF117D2B89DCB70040F73F /* DrawCampaignPresenter.swift in Sources */,
 				989BDE6222F47B1E001DDEB2 /* SpotifyCollectionViewDataSource.swift in Sources */,
 				8C0E8F901FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,
 				730A998322D740130037ABA9 /* TwoFactorAuthenticationCell.swift in Sources */,
@@ -28610,6 +28798,7 @@
 				8C0E8F9E1FDEBDFF00789C91 /* AlbumsRouter.swift in Sources */,
 				8C0E8F9F1FDEBDFF00789C91 /* UICollectionView+Extensions.swift in Sources */,
 				0780AB4527916820000760D9 /* ImageTextSelectionView.swift in Sources */,
+				89CF11912B89DCF50040F73F /* DrawCampaignRouter.swift in Sources */,
 				171090E223FC8E350036A033 /* SmashActionService.swift in Sources */,
 				486F7B58208D10D3009EB73F /* PeriodicContactSyncDataStorage.swift in Sources */,
 				076BD1AC27BBBE2A004609E3 /* MapSearchViewController.swift in Sources */,
@@ -28618,6 +28807,7 @@
 				CF71461624B597A800D83E60 /* ContactDetailHeader.swift in Sources */,
 				737A2EA22338A5200014258A /* SecurityQuestionView.swift in Sources */,
 				8CD7D8F92111ABA00019B4F3 /* FixedAVPlayerViewController.swift in Sources */,
+				89CF11822B89DCCC0040F73F /* DrawCampaignInteractor.swift in Sources */,
 				07DB939B2860AF5400D5CACF /* AppleReceipt.swift in Sources */,
 				8C0E8FA11FDEBDFF00789C91 /* AlbumDetailViewController.swift in Sources */,
 				8C0E8FA21FDEBDFF00789C91 /* SingletonStorage.swift in Sources */,
@@ -28683,10 +28873,12 @@
 				985E6977255A61FB006F6CD7 /* PrivateShareRoleCheckmarkView.swift in Sources */,
 				CE5FE966208B204A0065AC7E /* FileManager+Size.swift in Sources */,
 				A253D62B21A212020049AC15 /* PremiumViewController.swift in Sources */,
+				89CF11A12B89E23D0040F73F /* DrawCampaignService.swift in Sources */,
 				F095725728A1205700D1D0DD /* PaycellCampaignModel.swift in Sources */,
 				8C0E8FB81FDEBDFF00789C91 /* FeedbackViewInteractorOutput.swift in Sources */,
 				8C0E8FB91FDEBDFF00789C91 /* FeedbackViewInteractor.swift in Sources */,
 				89F0955929B0B6DB00F74E7E /* CreateCollageRouter.swift in Sources */,
+				89CF11732B89DC8B0040F73F /* DrawCampaignViewOutput.swift in Sources */,
 				8C0E8FBA1FDEBDFF00789C91 /* FeedbackViewRouterInput.swift in Sources */,
 				8C0E8FBB1FDEBDFF00789C91 /* FeedbackViewRouter.swift in Sources */,
 				92004B5B21AD136400582C45 /* MyStorageViewInput.swift in Sources */,
@@ -28702,6 +28894,7 @@
 				8C0E8FBE1FDEBDFF00789C91 /* ActivityTimelineViewInput.swift in Sources */,
 				F0571EEC288AE76400A0D6AC /* ForYouViewOutput.swift in Sources */,
 				8C0E8FBF1FDEBDFF00789C91 /* ActivityTimelineViewOutput.swift in Sources */,
+				89CF11A62B89E2580040F73F /* CampaignStatusResponse.swift in Sources */,
 				CED4B0272017505300D06CA9 /* MappingError.swift in Sources */,
 				8C0E8FC01FDEBDFF00789C91 /* ActivityTimelineViewController.swift in Sources */,
 				F036B15827623119005A2D7E /* SpotlightSearchHelper.swift in Sources */,
@@ -29224,6 +29417,7 @@
 				CE78482C22A685FB00662219 /* NotificationName+Extensions.swift in Sources */,
 				52E6817529C33F7F0023DADB /* InstaPickSmallPhotoCollectionViewDataSource.swift in Sources */,
 				CE78482D22A685FB00662219 /* AugmentedRealityController.swift in Sources */,
+				89CF117A2B89DCAE0040F73F /* DrawCampaignPresenterInput.swift in Sources */,
 				98AC47FF252DFC05003EB6C5 /* FunTabBar.swift in Sources */,
 				98792DD122FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift in Sources */,
 				CE78482F22A685FB00662219 /* VisualMusicPlayerViewController.swift in Sources */,
@@ -29329,6 +29523,7 @@
 				F0571EC1288AE6BD00A0D6AC /* ForYouInitilizer.swift in Sources */,
 				989BDE5A22F47B1E001DDEB2 /* SpotifyImportViewController.swift in Sources */,
 				CE78486A22A685FB00662219 /* Device.swift in Sources */,
+				89CF11B22B89E2B20040F73F /* CampaignPolicyResponse.swift in Sources */,
 				CE78486B22A685FB00662219 /* LeavePremiumViewInput.swift in Sources */,
 				CE78486C22A685FB00662219 /* ActivityTimelineParameters.swift in Sources */,
 				CE78486D22A685FB00662219 /* PhotosOrderCollectionViewCell.swift in Sources */,
@@ -29458,6 +29653,7 @@
 				B52BAC5A23AE1BE60051E21D /* CoreDataConfig.swift in Sources */,
 				03404574240794FD0024135B /* SynchronizedDictionary.swift in Sources */,
 				CE7848C322A685FB00662219 /* SearchViewInput.swift in Sources */,
+				89CF11A32B89E23D0040F73F /* DrawCampaignService.swift in Sources */,
 				F0B1A50628D1EBE6006EB2DC /* SelectionTabBarCard.swift in Sources */,
 				52A5E03F29252B4300670B0C /* CustomAVPlayerLayer.swift in Sources */,
 				982319AE24F3A1E700FD16E2 /* ColorCell.swift in Sources */,
@@ -29568,11 +29764,13 @@
 				0780AB3327916820000760D9 /* CGPointDistance.swift in Sources */,
 				8C1E5BE822CB8CD4008FDA02 /* SecurityCodeTextField.swift in Sources */,
 				98792DE022FD4D11000A77E5 /* SpotifySortingManager.swift in Sources */,
+				89CF11842B89DCCC0040F73F /* DrawCampaignInteractor.swift in Sources */,
 				CE78490722A685FB00662219 /* CellsConstant.swift in Sources */,
 				CE78490822A685FB00662219 /* GradientView.swift in Sources */,
 				CE78490922A685FB00662219 /* FaceImagePhotosViewInput.swift in Sources */,
 				CE78490A22A685FB00662219 /* ImportPhotosRouterInput.swift in Sources */,
 				CF9B1F6E24C0A940002CE8E9 /* EmptyDataView.swift in Sources */,
+				89CF11982B89DD020040F73F /* DrawCampaignRouterInput.swift in Sources */,
 				CE78490B22A685FB00662219 /* ProtoInputTextCell.swift in Sources */,
 				CE78490C22A685FB00662219 /* RemoteSearchService.swift in Sources */,
 				895A54B92B57C94400E2A275 /* ConnectedDeviceInteractor.swift in Sources */,
@@ -29684,6 +29882,7 @@
 				CE78494C22A685FB00662219 /* AnalyzeHistoryTabBarPresenter.swift in Sources */,
 				07595515264131FB00C088B1 /* String+Extension.swift in Sources */,
 				CE78494D22A685FB00662219 /* FaceImagePhotosRouter.swift in Sources */,
+				89CF11752B89DC8B0040F73F /* DrawCampaignViewOutput.swift in Sources */,
 				0708C7862677261100680ED6 /* PhotoPrintCard.swift in Sources */,
 				8E26D9822306999C00D08123 /* MusicConfigurator.swift in Sources */,
 				CE78494E22A685FB00662219 /* FaceImageChangeCoverInteractorInput.swift in Sources */,
@@ -29730,6 +29929,7 @@
 				CF7146F724B597A900D83E60 /* ContactListViewController.swift in Sources */,
 				CF7B1E58256B3DD400BAF566 /* PrivateShareSliderFilesCollectionManager.swift in Sources */,
 				CE78496722A685FB00662219 /* HomePageConfigurator.swift in Sources */,
+				89CF11702B89DC7C0040F73F /* DrawCampaignViewInput.swift in Sources */,
 				0334575023C7134700FB6386 /* NetmeraScreenEventTemplate.swift in Sources */,
 				CE78496822A685FB00662219 /* FaceImagePhotosPresenter.swift in Sources */,
 				CE78496B22A685FB00662219 /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */,
@@ -29845,6 +30045,7 @@
 				F0E0A4822897F38500528B39 /* ForYouEmptyCellView.swift in Sources */,
 				CE7849AB22A685FB00662219 /* Keys.swift in Sources */,
 				CE7849AC22A685FB00662219 /* LoginPhoneMailCell.swift in Sources */,
+				89CF116B2B89DC670040F73F /* DrawCampaignViewController.swift in Sources */,
 				CE7849AD22A685FB00662219 /* AlbumDetailModuleOutput.swift in Sources */,
 				CE7849AE22A685FB00662219 /* GradientLoadingIndicator.swift in Sources */,
 				98231A9D24F3A23500FD16E2 /* ClarendonFilter.swift in Sources */,
@@ -29888,6 +30089,7 @@
 				CE7849C922A685FB00662219 /* TermsAndServicesViewOutput.swift in Sources */,
 				98B04810259314750011DAEB /* DepoAdapter.m in Sources */,
 				98B047F8259314750011DAEB /* ContactAddress.m in Sources */,
+				89CF11A82B89E2580040F73F /* CampaignStatusResponse.swift in Sources */,
 				CE7849CA22A685FB00662219 /* PackagesInteractorOutput.swift in Sources */,
 				981642FC233CE2D40070F8B9 /* TBMatikPhotoView.swift in Sources */,
 				CE7849CB22A685FB00662219 /* PeriodicContactSyncRouter.swift in Sources */,
@@ -29900,6 +30102,7 @@
 				895BAB7F2AB480B100920DF9 /* DistrictResponse.swift in Sources */,
 				CE7849D622A685FB00662219 /* PremiumViewController.swift in Sources */,
 				CE7849D722A685FB00662219 /* AudioSelectionCollectionViewCell.swift in Sources */,
+				898C75662B8A119E00AAE9BB /* PaddingLabel.swift in Sources */,
 				F028C1112789F266005CE6AF /* PublicShareViewOutput.swift in Sources */,
 				0309F94023D57F3C001DB5FA /* NetmeraEvents.swift in Sources */,
 				737A2E9C2338989B0014258A /* SetSecurityQuestionViewController.swift in Sources */,
@@ -30004,6 +30207,7 @@
 				CE784A0F22A685FB00662219 /* UINavigationBarExtension.swift in Sources */,
 				98A86D4B23A2200100438225 /* HiddenPhotosViewController.swift in Sources */,
 				CE784A1022A685FB00662219 /* UsageInfoViewOutput.swift in Sources */,
+				89BC8F9C2B8B70E40025B53F /* DrawCampaignNoPackagePopup.swift in Sources */,
 				CE784A1122A685FB00662219 /* IntroduceInitializer.swift in Sources */,
 				CE784A1222A685FB00662219 /* InstapickAlbumSelectionDataSource.swift in Sources */,
 				894327FF2AB3060600778ED3 /* PhotoPrintNoRightPopup.swift in Sources */,
@@ -30021,6 +30225,7 @@
 				CE784A1B22A685FB00662219 /* PhoneVerificationViewInput.swift in Sources */,
 				8C1E5BD922CB8C02008FDA02 /* PhotoVideoPredicateManager.swift in Sources */,
 				89DA5D0523ACF635000FA31D /* SmartAlbumWarningPopUpsFactory.swift in Sources */,
+				89CF117F2B89DCB70040F73F /* DrawCampaignPresenter.swift in Sources */,
 				CE784A1D22A685FB00662219 /* SplitIpadViewContoller.swift in Sources */,
 				894F71842A949B430037FE89 /* PhotoPrintRouterInput.swift in Sources */,
 				3A54C6E5264968C800C2C8BD /* InvitationApiService.swift in Sources */,
@@ -30531,6 +30736,7 @@
 				076BD19A27BBBD3A004609E3 /* MapSearchConfigurator.swift in Sources */,
 				CE784B6822A685FB00662219 /* SearchViewConfigurator.swift in Sources */,
 				CE784B6922A685FB00662219 /* VisualMusicPlayerInitializer.swift in Sources */,
+				89CF118E2B89DCE10040F73F /* DrawCampaignInteractorOutput.swift in Sources */,
 				8C86111B22BCFDEF00108958 /* PermissionsDesigner.swift in Sources */,
 				CE784B6A22A685FB00662219 /* HelpAndSupportViewInput.swift in Sources */,
 				98231A9724F3A23500FD16E2 /* AmazonFilter.swift in Sources */,
@@ -30824,6 +31030,7 @@
 				89E8AD2629BE33C20091F898 /* CreateCollageBottomBarManager.swift in Sources */,
 				9862BC4F255E832C00D7945E /* FileInfoShareView.swift in Sources */,
 				F028C1252789F43B005CE6AF /* PublicShareRouterInput.swift in Sources */,
+				89CF11932B89DCF50040F73F /* DrawCampaignRouter.swift in Sources */,
 				CE784C1A22A685FB00662219 /* LBAlbumLikePreviewSliderViewOutput.swift in Sources */,
 				CE784C1B22A685FB00662219 /* EmailEnterController.swift in Sources */,
 				CE784C1C22A685FB00662219 /* InstaPickSmallPhotoView.swift in Sources */,
@@ -30930,6 +31137,7 @@
 				CE784C5922A685FB00662219 /* StoriesDataSourceForCollectionView.swift in Sources */,
 				73E065D5242A33AE008E73B3 /* BackgroundSyncService.swift in Sources */,
 				8937904829B327E100DD6903 /* CollageTemplateSections.swift in Sources */,
+				89CF11892B89DCD50040F73F /* DrawCampaignInteractorInput.swift in Sources */,
 				CE784C5A22A685FB00662219 /* FeedbackViewInput.swift in Sources */,
 				CE784C5B22A685FB00662219 /* FaceImageItemsInitializer.swift in Sources */,
 				CE784C5C22A685FB00662219 /* SubscriptionsService.swift in Sources */,
@@ -30971,6 +31179,7 @@
 				CE784C7422A685FB00662219 /* SuggestionTableViewCell.swift in Sources */,
 				CE784C7522A685FB00662219 /* ActivityTimelineViewInput.swift in Sources */,
 				CE784C7622A685FB00662219 /* ActivityTimelineViewOutput.swift in Sources */,
+				89CF11662B89DC350040F73F /* DrawCampaignInitializer.swift in Sources */,
 				89D27B1B2B5A58C40017E32A /* QRCodeService.swift in Sources */,
 				894F716B2A9499540037FE89 /* PhotoPrintViewInput.swift in Sources */,
 				F0571ED0288AE6F000A0D6AC /* ForYouInteractorOutput.swift in Sources */,
@@ -31026,6 +31235,7 @@
 				CE784C9422A685FB00662219 /* XCGLogger+Extension.swift in Sources */,
 				CE784C9522A685FB00662219 /* OTPViewInteractorIO.swift in Sources */,
 				CE784C9622A685FB00662219 /* LargeFullOfQuotaPopUp.swift in Sources */,
+				89CF119D2B89DD180040F73F /* DrawCampaignConfigurator.swift in Sources */,
 				07407D582796CB570082FF8D /* EmailVerificationConfigurator.swift in Sources */,
 				895A54BC2B57C94800E2A275 /* ConnectedDeviceRouterInput.swift in Sources */,
 				895A54A42B57C91200E2A275 /* ConnectedDeviceViewInput.swift in Sources */,
@@ -31108,6 +31318,7 @@
 				CF8B639223CBC9D70021B021 /* ViewSortStorage.swift in Sources */,
 				CF8B639323CBC9D70021B021 /* PackageModelResponse.swift in Sources */,
 				CF8B639423CBC9D70021B021 /* AuthorityType.swift in Sources */,
+				89CF11A72B89E2580040F73F /* CampaignStatusResponse.swift in Sources */,
 				CF8B639523CBC9D70021B021 /* AuthoritySingleton.swift in Sources */,
 				CF8B639623CBC9D70021B021 /* PackageService.swift in Sources */,
 				CF8B639723CBC9D70021B021 /* UICollectionView+Layout.swift in Sources */,
@@ -31349,6 +31560,7 @@
 				F02833BA2779E1D100C4217F /* DragAndDropFileExtensions.swift in Sources */,
 				CF8B643E23CBC9D70021B021 /* SmallFullOfQuotaPopUp.swift in Sources */,
 				CF8B643F23CBC9D70021B021 /* LoginViewOutput.swift in Sources */,
+				89CF11882B89DCD50040F73F /* DrawCampaignInteractorInput.swift in Sources */,
 				CF8B644023CBC9D70021B021 /* UIApplication+OpenURL.swift in Sources */,
 				CF8B644123CBC9D70021B021 /* (null) in Sources */,
 				895A54BE2B57C94C00E2A275 /* ConnectedDeviceRouter.swift in Sources */,
@@ -31839,6 +32051,7 @@
 				CF8B658323CBC9D70021B021 /* TermsAndServicesRouter.swift in Sources */,
 				CF8B658423CBC9D70021B021 /* TermsAndServicesConfigurator.swift in Sources */,
 				CF8B658523CBC9D70021B021 /* AugmentedRealityInitializer.swift in Sources */,
+				89CF11922B89DCF50040F73F /* DrawCampaignRouter.swift in Sources */,
 				CF8B658623CBC9D70021B021 /* TermsAndServicesInitializer.swift in Sources */,
 				CF8B658723CBC9D70021B021 /* PreventCollectionView.swift in Sources */,
 				CF8B658823CBC9D70021B021 /* IntroduceViewInput.swift in Sources */,
@@ -31975,6 +32188,7 @@
 				B563200F254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */,
 				CF8B65DE23CBC9D70021B021 /* CollectionViewCellForStoryPhoto.swift in Sources */,
 				0779A7A326EF38C3002BA915 /* ProductSubscriptionPeriodFormatter.swift in Sources */,
+				89CF118D2B89DCE10040F73F /* DrawCampaignInteractorOutput.swift in Sources */,
 				CF8B65DF23CBC9D70021B021 /* SpotifyImportViewController.swift in Sources */,
 				CF8B65E123CBC9D70021B021 /* PhoneVerificationInteractorOutput.swift in Sources */,
 				CF8B65E223CBC9D70021B021 /* MusicViewOutput.swift in Sources */,
@@ -32208,11 +32422,13 @@
 				CF8B668623CBC9D70021B021 /* BaseFilesGreedViewController.swift in Sources */,
 				0766314F27CE8F0000AB4BC2 /* MapLocationDetailViewController.swift in Sources */,
 				CF8B668723CBC9D70021B021 /* FaceImageDisplayManager.swift in Sources */,
+				898C75652B8A119E00AAE9BB /* PaddingLabel.swift in Sources */,
 				CF8B668823CBC9D70021B021 /* FaceImageAddNameInitializer.swift in Sources */,
 				98C19F512485097900527D76 /* ContactSyncApiService.swift in Sources */,
 				CF8B668923CBC9D70021B021 /* ImportFromDropboxInteractor.swift in Sources */,
 				CF8B668A23CBC9D70021B021 /* SpotifyResponse.swift in Sources */,
 				0711888427FA9B3300F512A1 /* NavigationBarImage.swift in Sources */,
+				89CF11652B89DC350040F73F /* DrawCampaignInitializer.swift in Sources */,
 				CF8B668C23CBC9D70021B021 /* BaseFilesGreedModuleInput.swift in Sources */,
 				CF8B668D23CBC9D70021B021 /* MD5.swift in Sources */,
 				CF8B668E23CBC9D70021B021 /* KeyboardHideManager.swift in Sources */,
@@ -32253,6 +32469,7 @@
 				0305A31C23D5C374004D1EC7 /* AlbumsSliderDataSource.swift in Sources */,
 				CF8B66A823CBC9D70021B021 /* UsageInfoInteractor.swift in Sources */,
 				CF8B66A923CBC9D70021B021 /* LocalAlbumCollectionViewCell.swift in Sources */,
+				89CF116A2B89DC670040F73F /* DrawCampaignViewController.swift in Sources */,
 				98BE78B624517E4300B8864F /* SnackbarView.swift in Sources */,
 				98231A5924F3A23500FD16E2 /* AprilFilter.swift in Sources */,
 				CF8B66AA23CBC9D70021B021 /* AlbumItem.swift in Sources */,
@@ -32281,6 +32498,7 @@
 				0305A35623D5C5E3004D1EC7 /* CoreDataMigrationVersion.swift in Sources */,
 				CF8B66BA23CBC9D70021B021 /* SpotifyPlaylistsViewController.swift in Sources */,
 				B5DD3D7B250FA9EC00AFF934 /* VignetteShader.metal in Sources */,
+				89CF116F2B89DC7C0040F73F /* DrawCampaignViewInput.swift in Sources */,
 				CF8B66BB23CBC9D70021B021 /* PermissionsView.swift in Sources */,
 				CF8B66BC23CBC9D70021B021 /* SpotifyAccountConnectionCell.swift in Sources */,
 				CF8B66BD23CBC9D70021B021 /* CollectionViewStoryReorderView.swift in Sources */,
@@ -32448,6 +32666,7 @@
 				076BD1D027BC12E3004609E3 /* MapSearchViewInput.swift in Sources */,
 				CF8B673223CBC9D70021B021 /* PrintInteractorInput.swift in Sources */,
 				CF8B673323CBC9D70021B021 /* LeavePremiumInteractorOutput.swift in Sources */,
+				89CF11A22B89E23D0040F73F /* DrawCampaignService.swift in Sources */,
 				CF8B673423CBC9D70021B021 /* ImportPhotosViewInput.swift in Sources */,
 				CF8B673623CBC9D70021B021 /* MoreFilesActionsModuleInput.swift in Sources */,
 				CF8B673723CBC9D70021B021 /* ScrollDirectionManager.swift in Sources */,
@@ -32475,6 +32694,7 @@
 				CF8B674723CBC9D70021B021 /* SettingsPresenter.swift in Sources */,
 				CF8B674823CBC9D70021B021 /* LifeBoxModel.xcdatamodeld in Sources */,
 				CF8B674923CBC9D70021B021 /* SettingsInteractorInput.swift in Sources */,
+				89CF117E2B89DCB70040F73F /* DrawCampaignPresenter.swift in Sources */,
 				F0571EAE288AE50500A0D6AC /* ForYouTableViewCell.swift in Sources */,
 				CF8B674A23CBC9D70021B021 /* CampaignCard.swift in Sources */,
 				CF8B674C23CBC9D70021B021 /* SettingsInteractorOutput.swift in Sources */,
@@ -32534,6 +32754,7 @@
 				3A54C6E3264968C800C2C8BD /* InvitationApiService.swift in Sources */,
 				CF7146C524B597A900D83E60 /* DeleteDuplicatesCell.swift in Sources */,
 				CF8B676F23CBC9D70021B021 /* SplashInteractor.swift in Sources */,
+				89BC8F9B2B8B70E40025B53F /* DrawCampaignNoPackagePopup.swift in Sources */,
 				CF8B677023CBC9D70021B021 /* XCGLogger+Extension.swift in Sources */,
 				B59E1F8225921F0000640DD1 /* PhotoSyncService.swift in Sources */,
 				52EDD1DF29A502D100D549FC /* NotificationEmptyView.swift in Sources */,
@@ -32614,6 +32835,7 @@
 				CF8B67A623CBC9D70021B021 /* FileInfoConfigurator.swift in Sources */,
 				CF8B67A723CBC9D70021B021 /* FileInfoInitializer.swift in Sources */,
 				CF8B67A823CBC9D70021B021 /* UsageInfoViewInput.swift in Sources */,
+				89CF11972B89DD020040F73F /* DrawCampaignRouterInput.swift in Sources */,
 				07567D932721D39900557BCF /* Strings+Attributed.swift in Sources */,
 				CF8B67A923CBC9D70021B021 /* PhotoVideoCell.swift in Sources */,
 				CF8B67AA23CBC9D70021B021 /* SynchronizedArray.swift in Sources */,
@@ -32686,11 +32908,14 @@
 				F0203392291817E7003508D1 /* ForYouThrowbackCollectionViewCell.swift in Sources */,
 				F0743DCA28B4C63100CC1F24 /* BottomInfoBanner.swift in Sources */,
 				3A0CCF2E2642D20E002E811D /* InvitationGiftCollectionViewCell.swift in Sources */,
+				89CF11742B89DC8B0040F73F /* DrawCampaignViewOutput.swift in Sources */,
 				CF8B67D623CBC9D70021B021 /* SelectNameViewInput.swift in Sources */,
+				89CF11792B89DCAE0040F73F /* DrawCampaignPresenterInput.swift in Sources */,
 				F0CF433D27B67A2E0061DC79 /* PublicShareDownloader.swift in Sources */,
 				F064FB34278CF28100B461D0 /* PublicSharedItemsTableViewCell.swift in Sources */,
 				CF8B67D723CBC9D70021B021 /* FreeAppSpaceInitializer.swift in Sources */,
 				CF8B67D823CBC9D70021B021 /* UILabel+Font.swift in Sources */,
+				89CF11832B89DCCC0040F73F /* DrawCampaignInteractor.swift in Sources */,
 				9808B7E02567EB10001DEF2E /* PrivateShareAccessListHeader.swift in Sources */,
 				CF8B67D923CBC9D70021B021 /* FaceImagePhotosConfigurator.swift in Sources */,
 				CF8B67DA23CBC9D70021B021 /* AccountParameters.swift in Sources */,
@@ -32709,6 +32934,7 @@
 				CF8B67E323CBC9D70021B021 /* PhotoVideoThreeDotMenuManager.swift in Sources */,
 				0305A2EF23D5C152004D1EC7 /* TrashBinViewController.swift in Sources */,
 				CF8B67E423CBC9D70021B021 /* SelectNamePresenter.swift in Sources */,
+				89CF11B12B89E2B20040F73F /* CampaignPolicyResponse.swift in Sources */,
 				CF8B67E623CBC9D70021B021 /* FaceImageItemsInteractorOutput.swift in Sources */,
 				CF8B67E723CBC9D70021B021 /* CampaingnInfoView.swift in Sources */,
 				CF8B67E823CBC9D70021B021 /* BaseCardView.swift in Sources */,
@@ -32879,6 +33105,7 @@
 				CF8B685123CBC9D70021B021 /* PeopleService.swift in Sources */,
 				CF8B685223CBC9D70021B021 /* UploadFromLifeBoxRouter.swift in Sources */,
 				07D0594526F9BEF4005315E2 /* ResetPasswordOTPPresenter.swift in Sources */,
+				89CF119C2B89DD180040F73F /* DrawCampaignConfigurator.swift in Sources */,
 				CF8B685323CBC9D70021B021 /* BaseViewController.swift in Sources */,
 				0780AB5127916834000760D9 /* RemoteTextRecognitionModels.swift in Sources */,
 				CF8B685423CBC9D70021B021 /* FreeAppSpacePresenter.swift in Sources */,
@@ -33038,6 +33265,7 @@
 				0305A35323D5C5DB004D1EC7 /* CoreDataMigrator.swift in Sources */,
 				CF8B6B6923CBCA280021B021 /* UIEdgeInsets+Extensions.swift in Sources */,
 				CF8B6B6A23CBCA280021B021 /* MD5.swift in Sources */,
+				89CF11A42B89E23D0040F73F /* DrawCampaignService.swift in Sources */,
 				CF8B6B6B23CBCA280021B021 /* BottomSelectionMusicTabBarRouter.swift in Sources */,
 				98C8D6AA24F3A4E70061A1B0 /* BasicFilter.swift in Sources */,
 				98B04881259314750011DAEB /* ContactDevice.m in Sources */,
@@ -33118,6 +33346,7 @@
 				B59E1F8B25921F0000640DD1 /* VideoSyncService.swift in Sources */,
 				CF8B6B9E23CBCA280021B021 /* (null) in Sources */,
 				89ECD6A7296FDE6500315A02 /* FavoriteInteractor.swift in Sources */,
+				89CF11712B89DC7C0040F73F /* DrawCampaignViewInput.swift in Sources */,
 				CF8B6B9F23CBCA280021B021 /* CreateStoryMusicEnterView.swift in Sources */,
 				CF8B6BA023CBCA280021B021 /* UIColor+Adjust.swift in Sources */,
 				98B04809259314750011DAEB /* SyncDB.m in Sources */,
@@ -33334,6 +33563,7 @@
 				CF8B6C2C23CBCA280021B021 /* SettingHeaderView.swift in Sources */,
 				CF8B6C2D23CBCA280021B021 /* PeriodicContactSyncInitializer.swift in Sources */,
 				895A54A22B57C90400E2A275 /* ConnectedDeviceViewController.swift in Sources */,
+				89CF119E2B89DD180040F73F /* DrawCampaignConfigurator.swift in Sources */,
 				CF8B6C2E23CBCA280021B021 /* IntroduceDataStorage.swift in Sources */,
 				CF8B6C2F23CBCA280021B021 /* SpotifyPlaylistsViewController.swift in Sources */,
 				CF8B6C3023CBCA280021B021 /* AccountType.swift in Sources */,
@@ -33533,6 +33763,7 @@
 				CF71470A24B597AA00D83E60 /* ContactListMainView.swift in Sources */,
 				07E7A66028585D9C005BBD4C /* DrawerAnimationController.swift in Sources */,
 				B549B6D724CF09D000D39C44 /* AdjustmentParameter.swift in Sources */,
+				89CF118F2B89DCE10040F73F /* DrawCampaignInteractorOutput.swift in Sources */,
 				52501E8829952A8C0000376C /* NotificationConfigurator.swift in Sources */,
 				CF8B6CBB23CBCA280021B021 /* FaceImageItemsRouter.swift in Sources */,
 				0780AB4427916820000760D9 /* ImageTextSelectionIndex.swift in Sources */,
@@ -33706,6 +33937,7 @@
 				CF8B6D3023CBCA280021B021 /* BottomSelectionTabBarViewInput.swift in Sources */,
 				CF8B6D3123CBCA280021B021 /* RegistrationConfigurator.swift in Sources */,
 				CF8B6D3223CBCA280021B021 /* LocalAlbumViewController.swift in Sources */,
+				89CF118A2B89DCD50040F73F /* DrawCampaignInteractorInput.swift in Sources */,
 				CF8B6D3323CBCA280021B021 /* ColorConstants.swift in Sources */,
 				CF8B6D3423CBCA280021B021 /* PurchaseResult.swift in Sources */,
 				894C1BBF2AD6C99300AD291C /* NewAvPlayerViewController.swift in Sources */,
@@ -33763,6 +33995,7 @@
 				9808B41125540E42002B0032 /* PrivateShareContactSuggestionView.swift in Sources */,
 				CF8B6D5923CBCA280021B021 /* Validator.swift in Sources */,
 				CF8B6D5A23CBCA280021B021 /* AssetsCache.swift in Sources */,
+				89CF116C2B89DC670040F73F /* DrawCampaignViewController.swift in Sources */,
 				CF71469824B597A900D83E60 /* ContactsBackupHistoryController.swift in Sources */,
 				CF8B6D5B23CBCA280021B021 /* TermsAndServicesRouter.swift in Sources */,
 				0791816326F88AB20067FB75 /* IdentityVerificationViewController.swift in Sources */,
@@ -33827,6 +34060,7 @@
 				CF8B6D8623CBCA280021B021 /* PhotoSelectionController.swift in Sources */,
 				07E7A6902859FC0C005BBD4C /* AlertFilesActionsViewController.swift in Sources */,
 				CF8B6D8723CBCA280021B021 /* TransparentGradientView.swift in Sources */,
+				89CF11B32B89E2B20040F73F /* CampaignPolicyResponse.swift in Sources */,
 				CF8B6D8823CBCA280021B021 /* HomePagePopUpOperation.swift in Sources */,
 				CF8B6D8923CBCA280021B021 /* UINavigationBarExtension.swift in Sources */,
 				CF8B6D8A23CBCA280021B021 /* UsageInfoViewOutput.swift in Sources */,
@@ -33875,6 +34109,7 @@
 				CF8B6DA823CBCA280021B021 /* TurkcellUpdaterService.swift in Sources */,
 				CF8B6DA923CBCA280021B021 /* PhoneVerificationViewController.swift in Sources */,
 				CF8B6DAA23CBCA280021B021 /* AnalyticsPackageProductObject.swift in Sources */,
+				89CF11A92B89E2580040F73F /* CampaignStatusResponse.swift in Sources */,
 				CF8B6DAB23CBCA280021B021 /* PhoneVerificationModuleInput.swift in Sources */,
 				CF8B6DAC23CBCA280021B021 /* SimpleSliderCell.swift in Sources */,
 				CF8B6DAD23CBCA280021B021 /* Alamofire+Response.swift in Sources */,
@@ -33884,6 +34119,7 @@
 				CF048325256C9335007DAA79 /* SharedFilesCollectionDataSource.swift in Sources */,
 				0305A34C23D5C59B004D1EC7 /* HSSmartAlbumWarningPopUp.swift in Sources */,
 				CF8B6DB023CBCA280021B021 /* InstaPickProgressPopup.swift in Sources */,
+				89CF11802B89DCB70040F73F /* DrawCampaignPresenter.swift in Sources */,
 				CF8B6DB123CBCA280021B021 /* PhoneVerificationInteractorInput.swift in Sources */,
 				CF8B6DB223CBCA280021B021 /* CollectionViewCellForStoryPhoto.swift in Sources */,
 				07567D992721D39900557BCF /* Strings+Attributed.swift in Sources */,
@@ -33896,6 +34132,7 @@
 				CF8B6DB623CBCA280021B021 /* MyStorageRouterInput.swift in Sources */,
 				0791818226F89FAF0067FB75 /* ResetPasswordService.swift in Sources */,
 				CF8B6DB723CBCA280021B021 /* SmartTimerLabel.swift in Sources */,
+				89CF11852B89DCCC0040F73F /* DrawCampaignInteractor.swift in Sources */,
 				07DB93962860AF5400D5CACF /* InAppPurchase.swift in Sources */,
 				CF8B6DB923CBCA280021B021 /* BottomSelectionMusicTabBarInteractor.swift in Sources */,
 				CF8B6DBA23CBCA280021B021 /* ManageContactsViewController.swift in Sources */,
@@ -34009,6 +34246,7 @@
 				CF8B6E0123CBCA280021B021 /* ForgotPasswordRouterInput.swift in Sources */,
 				CF8B6E0223CBCA280021B021 /* LanguageModel.swift in Sources */,
 				CF8B6E0323CBCA280021B021 /* Equatable+Contains.swift in Sources */,
+				89CF11672B89DC350040F73F /* DrawCampaignInitializer.swift in Sources */,
 				CF8B6E0423CBCA280021B021 /* String+CyrillicCompare.swift in Sources */,
 				F028C1082789F1C7005CE6AF /* PublicShareRouter.swift in Sources */,
 				CF8B6E0523CBCA280021B021 /* UploadFromLifeBoxPhotosPresenter.swift in Sources */,
@@ -34067,6 +34305,7 @@
 				CF8B6E2A23CBCA280021B021 /* PeriodicContactSyncSettingsOptionView.swift in Sources */,
 				5282AAF329E930900014FBCF /* ImageRetryService.swift in Sources */,
 				CF8B6E2B23CBCA280021B021 /* PackagesViewOutput.swift in Sources */,
+				89CF11992B89DD020040F73F /* DrawCampaignRouterInput.swift in Sources */,
 				891C019729BCB64D003D5CA1 /* StringConstants.swift in Sources */,
 				CF8B6E2C23CBCA280021B021 /* SessionServiceExtension.swift in Sources */,
 				076BD1C327BC0983004609E3 /* MapSearchRouter.swift in Sources */,
@@ -34188,6 +34427,7 @@
 				CF8B6E7823CBCA280021B021 /* UIImage+Color.swift in Sources */,
 				98231A6E24F3A23500FD16E2 /* FilterManager.swift in Sources */,
 				CF8B6E7923CBCA280021B021 /* InstapickService.swift in Sources */,
+				89CF11762B89DC8B0040F73F /* DrawCampaignViewOutput.swift in Sources */,
 				CF8B6E7A23CBCA280021B021 /* BaseFilesGreedInteractorInput.swift in Sources */,
 				07DB93B62860AF5400D5CACF /* UInt8+Extensions.swift in Sources */,
 				CF8B6E7B23CBCA280021B021 /* BaseFilesGreedInteractorOutput.swift in Sources */,
@@ -34433,6 +34673,7 @@
 				CF8B6F2423CBCA280021B021 /* SplashPresenter.swift in Sources */,
 				0305A2F023D5C154004D1EC7 /* TrashBinViewController.swift in Sources */,
 				52A5E017291A465D00670B0C /* SnackBarHeaderTwoLineView.swift in Sources */,
+				89CF11942B89DCF50040F73F /* DrawCampaignRouter.swift in Sources */,
 				CF8B6F2523CBCA280021B021 /* GeneralFilesFiltration.swift in Sources */,
 				CF8B6F2623CBCA280021B021 /* SearchViewInteractorOutput.swift in Sources */,
 				CF8B6F2723CBCA280021B021 /* ThresholdBlockService.swift in Sources */,
@@ -34523,6 +34764,7 @@
 				CF8B6F5E23CBCA280021B021 /* FileInfoRouter.swift in Sources */,
 				CF8B6F5F23CBCA280021B021 /* PeopleService.swift in Sources */,
 				CF8B6F6023CBCA280021B021 /* SpotifyRoutingService.swift in Sources */,
+				898C75672B8A119E00AAE9BB /* PaddingLabel.swift in Sources */,
 				CF8B6F6123CBCA280021B021 /* WrapData+DebugAnalyticsExtension.swift in Sources */,
 				CF8B6F6223CBCA280021B021 /* UsageInfoRouter.swift in Sources */,
 				CF8B6F6323CBCA280021B021 /* AppConfigurator.swift in Sources */,
@@ -34810,6 +35052,7 @@
 				CF8B702023CBCA280021B021 /* ActivityTimelineViewInput.swift in Sources */,
 				CF8B702123CBCA280021B021 /* ActivityTimelineViewOutput.swift in Sources */,
 				CF8B702223CBCA280021B021 /* PeopleAlbumsManager.swift in Sources */,
+				89BC8F9D2B8B70E40025B53F /* DrawCampaignNoPackagePopup.swift in Sources */,
 				CF71474024B597AA00D83E60 /* ContactSyncPopupFactory.swift in Sources */,
 				CF8B702323CBCA280021B021 /* ActivityTimelineViewController.swift in Sources */,
 				CF8B702423CBCA280021B021 /* ActivityTimelineModuleInput.swift in Sources */,
@@ -34877,6 +35120,7 @@
 				CF8B704A23CBCA280021B021 /* AuthorizationRepository.swift in Sources */,
 				CF8B704B23CBCA280021B021 /* UploadFromLifeBoxModuleInput.swift in Sources */,
 				CF8B704C23CBCA280021B021 /* AutoSyncRouterInput.swift in Sources */,
+				89CF117B2B89DCAE0040F73F /* DrawCampaignPresenterInput.swift in Sources */,
 				CF8B704D23CBCA280021B021 /* TokenStorage.swift in Sources */,
 				CF8B704E23CBCA280021B021 /* OptInController.swift in Sources */,
 				07688810271D948F00833F43 /* TooltipViewController.swift in Sources */,

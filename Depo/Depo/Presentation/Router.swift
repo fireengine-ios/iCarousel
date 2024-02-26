@@ -1162,6 +1162,11 @@ class RouterVC: NSObject {
         return ConnectedDeviceInitializer.initializeViewController()
     }
     
+    // MARK: - Settings -> Connected Device
+    func drawCampaign(campaignId: Int, endDate: String, title: String) -> DrawCampaignViewController {
+        return DrawCampaignInitializer.initializeViewController(campaignId: campaignId, endDate: endDate, title: title)
+    }
+    
     // MARK: - Create Collage Template
     
     func createCollage() -> CreateCollageViewController {
