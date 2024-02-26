@@ -89,7 +89,6 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="Bx2-7a-VAr" secondAttribute="trailing" id="2o3-40-611"/>
                         <constraint firstItem="cNI-OR-a4O" firstAttribute="leading" secondItem="OKN-HT-OhB" secondAttribute="leading" constant="14" id="Bm6-yW-y0C"/>
-                        <constraint firstAttribute="bottom" secondItem="Zz7-3F-oqF" secondAttribute="bottom" constant="6.5" id="DgT-Ee-ZZw"/>
                         <constraint firstItem="Bx2-7a-VAr" firstAttribute="leading" secondItem="OKN-HT-OhB" secondAttribute="leading" id="Dnv-eB-V2H"/>
                         <constraint firstItem="ZKE-HD-zu9" firstAttribute="leading" secondItem="OKN-HT-OhB" secondAttribute="leading" constant="14" id="F5e-KR-LKA"/>
                         <constraint firstItem="6FS-eQ-LQr" firstAttribute="leading" secondItem="ZKE-HD-zu9" secondAttribute="trailing" constant="16" id="KaU-ws-7mI"/>
