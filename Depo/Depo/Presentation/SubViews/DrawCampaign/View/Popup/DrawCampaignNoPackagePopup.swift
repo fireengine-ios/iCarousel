@@ -58,6 +58,8 @@ final class DrawCampaignNoPackagePopup: BasePopUpController {
         }
     }
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,6 +70,7 @@ final class DrawCampaignNoPackagePopup: BasePopUpController {
     
     @IBAction func nextButtonTapped(_ sender: Any) {
         dismiss(animated: false, completion: {
+            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .discoverCampaignPackage)
             let router = RouterVC()
             router.pushViewController(viewController: router.myStorage(usageStorage: nil))
         })

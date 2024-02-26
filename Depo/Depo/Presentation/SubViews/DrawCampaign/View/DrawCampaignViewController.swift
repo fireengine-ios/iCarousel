@@ -106,6 +106,7 @@ final class DrawCampaignViewController: BaseViewController {
         return view
     }()
    
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     var output: DrawCampaignViewOutput!
     private var campaignStatus: CampaignStatus = .allowed
     private var campaignId: Int = 0
@@ -180,6 +181,7 @@ final class DrawCampaignViewController: BaseViewController {
         lineView.isHidden = true
         drawJoinButton.setTitle(TextConstants.ok, for: .normal)
         successJoinDraw = true
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .discoverCampaignApply)
     }
     
     private func setDrawJoinButton(status: CampaignStatus) {

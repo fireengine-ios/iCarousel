@@ -527,6 +527,9 @@ enum GAEventLabel {
 
     case createCollage
     case saveCollage
+    case discoverCampaignCard
+    case discoverCampaignPackage
+    case discoverCampaignApply
     
     var text: String {
         switch self {
@@ -796,6 +799,12 @@ enum GAEventLabel {
             return "CreateCollage"
         case .saveCollage:
             return "SaveCollage"
+        case .discoverCampaignCard:
+            return "mt_discover"
+        case .discoverCampaignPackage:
+            return "mt_packages"
+        case .discoverCampaignApply:
+            return "mt_join"
         }
     }
     

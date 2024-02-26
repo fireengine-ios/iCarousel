@@ -56,6 +56,7 @@ final class DrawCampaignCard: BaseCardView {
     private var endDate: String = ""
     private var pageTitle: String = ""
     private lazy var router = RouterVC()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     override func set(object: HomeCardResponse?) {
         super.set(object: object)
@@ -97,6 +98,7 @@ final class DrawCampaignCard: BaseCardView {
     }
     
     @IBAction private func onActionButton(_ sender: UIButton) {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .discoverCampaignCard)
         let vc = router.drawCampaign(campaignId: campaignId, endDate: endDate, title: pageTitle)
         router.pushViewController(viewController: vc, animated: false)
     }
