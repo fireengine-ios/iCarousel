@@ -1163,8 +1163,8 @@ class RouterVC: NSObject {
     }
     
     // MARK: - Settings -> Connected Device
-    func drawCampaign(campaignId: Int, endDate: String, title: String) -> DrawCampaignViewController {
-        return DrawCampaignInitializer.initializeViewController(campaignId: campaignId, endDate: endDate, title: title)
+    func drawCampaign(campaignId: Int) -> DrawCampaignViewController {
+        return DrawCampaignInitializer.initializeViewController(campaignId: campaignId)
     }
     
     // MARK: - Create Collage Template
