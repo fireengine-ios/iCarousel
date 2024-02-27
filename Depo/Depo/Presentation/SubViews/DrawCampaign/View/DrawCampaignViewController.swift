@@ -99,6 +99,7 @@ final class DrawCampaignViewController: BaseViewController {
         view.setTitle(localized(.drawJoin), for: .normal)
         view.titleLabel?.font = .appFont(.medium, size: 14)
         view.setTitleColor(.white, for: .normal)
+        view.setTitleColor(.white, for: .selected)
         view.backgroundColor = AppColor.darkBlueColor.color
         view.layer.cornerRadius = 21
         view.clipsToBounds = true
@@ -108,6 +109,7 @@ final class DrawCampaignViewController: BaseViewController {
         return view
     }()
    
+    private lazy var storageVars: StorageVars = factory.resolve()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     var output: DrawCampaignViewOutput!
     private var campaignStatus: CampaignStatus = .allowed
@@ -134,7 +136,13 @@ final class DrawCampaignViewController: BaseViewController {
         
         showSpinner()
         getCampaignStatus(campaignId: campaignId)
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if storageVars.drawCampaignPackage {
+            showSpinner()
+            getCampaignStatus(campaignId: campaignId)
+        }
     }
     
     private func getCampaignStatus(campaignId: Int) {
@@ -147,7 +155,13 @@ final class DrawCampaignViewController: BaseViewController {
 
     private func setStatus(status: CampaignStatus) {
         campaignStatus = status
-        getCampaignPolicy(campaignId: campaignId)
+        if !storageVars.drawCampaignPackage {
+            storageVars.drawCampaignPackage = false
+            getCampaignPolicy(campaignId: campaignId)
+        } else {
+            hideSpinner()
+            storageVars.drawCampaignPackage = false
+        }
     }
     
     private func setPolicy(response: CampaignPolicyResponse) {

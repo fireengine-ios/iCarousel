@@ -43,7 +43,7 @@ protocol StorageVars: AnyObject {
     var discoverHighlightIndex: Int { get set }
     var highlightedIsFirstLogin: Bool { get set }
     var highlightedPopUpPackageBack: Bool { get set }
-
+    var drawCampaignPackage: Bool { get set }
     func value(forDeepLinkParameter key: DeepLinkParameter) -> Any?
 }
 
@@ -320,4 +320,9 @@ final class UserDefaultsVars: StorageVars {
         set { userDefaults.set(newValue, forKey: imageUrlsForBestSceneKey) }
       }
     
+    private let drawCampaignPackageKey = "drawCampaignPackageKey"
+    var drawCampaignPackage: Bool {
+        get { return userDefaults.object(forKey: drawCampaignPackageKey) as? Bool ?? false }
+        set { userDefaults.set(newValue, forKey: drawCampaignPackageKey) }
+    }
 }
