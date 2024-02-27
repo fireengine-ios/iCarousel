@@ -117,10 +117,8 @@ final class DrawCampaignViewController: BaseViewController {
     private var responsePolicy: CampaignPolicyResponse?
     private var successJoinDraw: Bool = false
     
-    init(campaignId: Int, endDate: String, title: String) {
+    init(campaignId: Int) {
         self.campaignId = campaignId
-        self.endDate = endDate
-        self.pageTitle = title
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -131,7 +129,7 @@ final class DrawCampaignViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setTitle(withString: pageTitle)
+        setTitle(withString: localized(.drawDetailHeader))
         view.backgroundColor = ColorConstants.fileGreedCellColorSecondary
         
         showSpinner()
@@ -165,11 +163,11 @@ final class DrawCampaignViewController: BaseViewController {
         if !successJoinDraw {
             switch campaignStatus {
             case .allowed:
-                let vc = DrawCampaignNoPackagePopup.with()
-                vc.open()
-            case .notAllowed:
                 showSpinner()
                 output.setCampaignApply(campaignId: campaignId)
+            case .notAllowed:
+                let vc = DrawCampaignNoPackagePopup.with()
+                vc.open()
             case .alreadyParticipated:
                 drawJoinButton.isEnabled = false
             }
@@ -262,11 +260,11 @@ extension DrawCampaignViewController {
         imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
         imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1).isActive = true
         
-        imageView.addSubview(imageLabel)
-        imageLabel.translatesAutoresizingMaskIntoConstraints = false
-        imageLabel.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 10).isActive = true
-        imageLabel.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -10).isActive = true
-        imageLabel.heightAnchor.constraint(equalToConstant: 42).isActive = true
+//        imageView.addSubview(imageLabel)
+//        imageLabel.translatesAutoresizingMaskIntoConstraints = false
+//        imageLabel.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 10).isActive = true
+//        imageLabel.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -10).isActive = true
+//        imageLabel.heightAnchor.constraint(equalToConstant: 42).isActive = true
         
         contentView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -316,8 +314,7 @@ extension DrawCampaignViewController {
 extension DrawCampaignViewController {
     private func labelAtrributed(title: String, description: String, content: String, endDate: String) {
         titleLabel.text = title
-        imageLabel.text = "\(localized(.drawEnddate)) \(endDate)"
-        
+        //imageLabel.text = "\(localized(.drawEnddate)) \(endDate)"
         let descriptionString = NSMutableAttributedString(string: description)
         let descriptionParagraphStyle = NSMutableParagraphStyle()
         descriptionParagraphStyle.lineSpacing = 3

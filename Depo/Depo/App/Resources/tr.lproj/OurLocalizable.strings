@@ -2350,3 +2350,4 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "draw_package_button" = "Paket Satın Al";
 "draw_already_join" = "Çekilişe katıldınız.";
+"draw_detail_header" = "Çekiliş Detay";

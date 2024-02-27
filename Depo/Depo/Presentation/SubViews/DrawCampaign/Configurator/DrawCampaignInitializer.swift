@@ -9,8 +9,8 @@
 import Foundation
 
 class DrawCampaignInitializer: NSObject {
-    class func initializeViewController(campaignId: Int, endDate: String, title: String) -> DrawCampaignViewController {
-        let viewController = DrawCampaignViewController(campaignId: campaignId, endDate: endDate, title: title)
+    class func initializeViewController(campaignId: Int) -> DrawCampaignViewController {
+        let viewController = DrawCampaignViewController(campaignId: campaignId)
         let configurator = DrawCampaignConfigurator()
         configurator.configure(viewController: viewController)
         return viewController

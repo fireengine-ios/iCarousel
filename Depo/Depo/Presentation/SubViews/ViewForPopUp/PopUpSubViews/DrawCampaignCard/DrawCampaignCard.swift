@@ -45,6 +45,7 @@ final class DrawCampaignCard: BaseCardView {
             newValue.paddingBottom = 8
             newValue.layer.cornerRadius = 12
             newValue.clipsToBounds = true
+            newValue.isHidden = true
         }
     }
     
@@ -84,10 +85,10 @@ final class DrawCampaignCard: BaseCardView {
             imageView.loadImageData(with: url)
         }
         
-        if let endDate = cardObject?.details?["endDate"].number {
-            self.endDate = dateString(from: endDate)
-            endDateLabel.text = "\(localized(.drawEnddate)) \(dateString(from: endDate))"
-        }
+//        if let endDate = cardObject?.details?["endDate"].number {
+//            self.endDate = dateString(from: endDate)
+//            endDateLabel.text = "\(localized(.drawEnddate)) \(dateString(from: endDate))"
+//        }
     }
     
     override func layoutSubviews() {
@@ -102,7 +103,7 @@ final class DrawCampaignCard: BaseCardView {
     
     @IBAction private func onActionButton(_ sender: UIButton) {
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .discoverCampaignCard)
-        let vc = router.drawCampaign(campaignId: campaignId, endDate: endDate, title: pageTitle)
+        let vc = router.drawCampaign(campaignId: campaignId)
         router.pushViewController(viewController: vc, animated: false)
     }
     

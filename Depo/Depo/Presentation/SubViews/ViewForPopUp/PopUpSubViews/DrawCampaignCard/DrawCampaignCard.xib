@@ -43,8 +43,8 @@
                         <action selector="onActionButton:" destination="jES-tc-oE3" eventType="touchUpInside" id="Xfl-zp-icb"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u0m-89-rha" customClass="PaddingLabel" customModule="Billo" customModuleProvider="target">
-                    <rect key="frame" x="288" y="69" width="42" height="42"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u0m-89-rha" customClass="PaddingLabel" customModule="Billo" customModuleProvider="target">
+                    <rect key="frame" x="330" y="69" width="0.0" height="42"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="42" id="2zk-tK-1tc"/>
                     </constraints>
@@ -82,6 +82,9 @@
             <point key="canvasLocation" x="16" y="43.628185907046479"/>
         </view>
     </objects>
+    <designables>
+        <designable name="u0m-89-rha"/>
+    </designables>
     <resources>
         <namedColor name="secondaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -398,4 +398,5 @@ enum Strings: String, Localizable {
     case drawWarningBody = "draw_warning_body"
     case drawPackageButton = "draw_package_button"
     case drawAlreadyJoin = "draw_already_join"
+    case drawDetailHeader = "draw_detail_header"
 }

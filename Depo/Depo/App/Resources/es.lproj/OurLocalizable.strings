@@ -2300,3 +2300,4 @@ then {11,99 TRY/Month}*/
 "draw_warning_body" = "";
 "draw_package_button" = "";
 "draw_already_join" = "";
+"draw_detail_header" = "";
