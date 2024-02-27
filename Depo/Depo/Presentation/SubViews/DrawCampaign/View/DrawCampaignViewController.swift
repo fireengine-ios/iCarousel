@@ -54,7 +54,9 @@ final class DrawCampaignViewController: BaseViewController {
         let view = UILabel()
         view.font = .appFont(.medium, size: 16)
         view.textColor = AppColor.highlightColor.color
-        view.numberOfLines = 1
+        view.numberOfLines = 0
+        view.textAlignment = .left
+        view.lineBreakMode = .byWordWrapping
         return view
     }()
     
@@ -216,6 +218,7 @@ extension DrawCampaignViewController: DrawCampaignViewInput {
     
     func failCampaignStatus(error: String) {
         hideSpinner()
+        UIApplication.showErrorAlert(message: error)
     }
     
     func successCampaignPolicy(response: CampaignPolicyResponse) {
@@ -225,6 +228,7 @@ extension DrawCampaignViewController: DrawCampaignViewInput {
     
     func failCampaignPolicy(error: String) {
         hideSpinner()
+        UIApplication.showErrorAlert(message: error)
     }
     
     func successCampaignApply() {
@@ -269,7 +273,6 @@ extension DrawCampaignViewController {
         titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
-        titleLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
         
         contentView.addSubview(descriptionLabel)
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -312,11 +315,7 @@ extension DrawCampaignViewController {
 
 extension DrawCampaignViewController {
     private func labelAtrributed(title: String, description: String, content: String, endDate: String) {
-        let descriptionText = "lifebox’tan paket satın alan 50 kişiyle Milli Takım antrenmanına katılma şansını yakala"
-        let contentText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
-        
         titleLabel.text = title
-        
         imageLabel.text = "\(localized(.drawEnddate)) \(endDate)"
         
         let descriptionString = NSMutableAttributedString(string: description)
@@ -325,10 +324,6 @@ extension DrawCampaignViewController {
         descriptionString.addAttribute(NSAttributedString.Key.paragraphStyle, value:descriptionParagraphStyle, range:NSMakeRange(0, descriptionString.length))
         descriptionLabel.attributedText = descriptionString
         
-        let contentString = NSMutableAttributedString(string: content)
-        let contentParagraphStyle = NSMutableParagraphStyle()
-        contentParagraphStyle.lineSpacing = 3
-        contentString.addAttribute(NSAttributedString.Key.paragraphStyle, value:contentParagraphStyle, range:NSMakeRange(0, contentString.length))
-        contentLabel.attributedText = contentString
+        contentLabel.attributedText = content.getAsHtml
     }
 }

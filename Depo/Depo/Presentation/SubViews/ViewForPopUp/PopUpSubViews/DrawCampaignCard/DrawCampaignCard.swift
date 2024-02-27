@@ -13,6 +13,9 @@ final class DrawCampaignCard: BaseCardView {
         willSet {
             newValue.font = .appFont(.medium, size: 16)
             newValue.textColor = AppColor.label.color
+            newValue.numberOfLines = 0
+            newValue.textAlignment = .left
+            newValue.lineBreakMode = .byWordWrapping
         }
     }
     
