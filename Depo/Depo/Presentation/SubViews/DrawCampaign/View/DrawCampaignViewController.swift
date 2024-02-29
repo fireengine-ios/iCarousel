@@ -28,7 +28,6 @@ final class DrawCampaignViewController: BaseViewController {
     
     private lazy var imageView: LoadingImageView = {
         let view = LoadingImageView()
-        view.backgroundColor = .red
         view.layer.cornerRadius = 12
         view.clipsToBounds = true
         return view
