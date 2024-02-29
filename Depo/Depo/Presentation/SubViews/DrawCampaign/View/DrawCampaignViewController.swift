@@ -14,7 +14,7 @@ final class DrawCampaignViewController: BaseViewController {
     private var containerScrollView: UIScrollView = {
         let view = UIScrollView()
         view.translatesAutoresizingMaskIntoConstraints  = false
-        view.backgroundColor = ColorConstants.fileGreedCellColorSecondary
+        view.backgroundColor = AppColor.background.color
         view.isScrollEnabled = true
         return view
     }()
@@ -22,12 +22,12 @@ final class DrawCampaignViewController: BaseViewController {
     private var contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints  = false
-        view.backgroundColor = ColorConstants.fileGreedCellColorSecondary
+        view.backgroundColor = AppColor.background.color
         return view
     }()
     
-    private lazy var imageView: UIImageView = {
-        let view = UIImageView()
+    private lazy var imageView: LoadingImageView = {
+        let view = LoadingImageView()
         view.backgroundColor = .red
         view.layer.cornerRadius = 12
         view.clipsToBounds = true
@@ -39,7 +39,7 @@ final class DrawCampaignViewController: BaseViewController {
         view.numberOfLines = 1
         view.layer.backgroundColor = AppColor.background.cgColor
         view.font = .appFont(.medium, size: 12)
-        view.textColor = AppColor.highlightColor.color
+        view.textColor = AppColor.label.color
         view.textAlignment = .center
         view.paddingLeft = 15
         view.paddingRight = 15
@@ -53,7 +53,7 @@ final class DrawCampaignViewController: BaseViewController {
     private lazy var titleLabel: UILabel = {
         let view = UILabel()
         view.font = .appFont(.medium, size: 16)
-        view.textColor = AppColor.highlightColor.color
+        view.textColor = AppColor.label.color
         view.numberOfLines = 0
         view.textAlignment = .left
         view.lineBreakMode = .byWordWrapping
@@ -63,7 +63,7 @@ final class DrawCampaignViewController: BaseViewController {
     private lazy var descriptionLabel: UILabel = {
         let view = UILabel()
         view.font = .appFont(.medium, size: 14)
-        view.textColor = AppColor.highlightColor.color
+        view.textColor = AppColor.label.color
         view.numberOfLines = 0
         view.textAlignment = .left
         view.lineBreakMode = .byWordWrapping
@@ -79,18 +79,22 @@ final class DrawCampaignViewController: BaseViewController {
     private lazy var contentLabel: UILabel = {
         let view = UILabel()
         view.font = .appFont(.medium, size: 12)
-        view.textColor = AppColor.highlightColor.color
+        view.textColor = AppColor.label.color
         view.numberOfLines = 0
         view.textAlignment = .left
         view.lineBreakMode = .byWordWrapping
         return view
     }()
     
+    private lazy var buttonContentLineView: UIView = {
+        let view = UIView()
+        view.layer.backgroundColor = AppColor.borderLightGray.cgColor
+        return view
+    }()
+    
     private lazy var buttonContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = ColorConstants.fileGreedCellColorSecondary
-        view.layer.borderColor = AppColor.borderLightGray.cgColor
-        view.layer.borderWidth = 1.0
+        view.backgroundColor = AppColor.background.color
         return view
     }()
     
@@ -132,7 +136,7 @@ final class DrawCampaignViewController: BaseViewController {
         super.viewDidLoad()
         
         setTitle(withString: localized(.drawDetailHeader))
-        view.backgroundColor = ColorConstants.fileGreedCellColorSecondary
+        view.backgroundColor = AppColor.background.color
         
         showSpinner()
         getCampaignStatus(campaignId: campaignId)
@@ -168,7 +172,7 @@ final class DrawCampaignViewController: BaseViewController {
         DispatchQueue.main.async {
             self.responsePolicy = response
             self.setupPage()
-            self.labelAtrributed(title: response.title, description: response.description, content: response.content, endDate: self.endDate)
+            self.labelAtrributed(title: response.title, description: response.description, content: response.content, url: response.thumbnail)
             self.setDrawJoinButton(status: self.campaignStatus)
         }
     }
@@ -191,7 +195,7 @@ final class DrawCampaignViewController: BaseViewController {
     }
     
     private func successDrawJoin() {
-        labelAtrributed(title: responsePolicy?.title ?? "", description: "Çekiliş başvurunuz tammalanmıştır. Başarılar…", content: "", endDate: self.endDate)
+        labelAtrributed(title: responsePolicy?.title ?? "", description: "Çekiliş başvurunuz tammalanmıştır. Başarılar…", content: "", url: responsePolicy?.thumbnail ?? "")
         lineView.isHidden = true
         drawJoinButton.setTitle(TextConstants.ok, for: .normal)
         successJoinDraw = true
@@ -295,8 +299,8 @@ extension DrawCampaignViewController {
         contentView.addSubview(lineView)
         lineView.translatesAutoresizingMaskIntoConstraints = false
         lineView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10).isActive = true
-        lineView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0).isActive = true
-        lineView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0).isActive = true
+        lineView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
+        lineView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
         lineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
         contentView.addSubview(contentLabel)
@@ -313,20 +317,24 @@ extension DrawCampaignViewController {
         buttonContentView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
         buttonContentView.heightAnchor.constraint(equalToConstant: 100).isActive = true
         
+        view.addSubview(buttonContentLineView)
+        buttonContentLineView.translatesAutoresizingMaskIntoConstraints = false
+        buttonContentLineView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        buttonContentLineView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+        buttonContentLineView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -101).isActive = true
+        buttonContentLineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        
         buttonContentView.addSubview(drawJoinButton)
         drawJoinButton.translatesAutoresizingMaskIntoConstraints = false
         drawJoinButton.topAnchor.constraint(equalTo: buttonContentView.topAnchor, constant: 20).isActive = true
         drawJoinButton.leadingAnchor.constraint(equalTo: buttonContentView.leadingAnchor, constant: 60).isActive = true
         drawJoinButton.trailingAnchor.constraint(equalTo: buttonContentView.trailingAnchor, constant: -60).isActive = true
         drawJoinButton.heightAnchor.constraint(equalToConstant: 42).isActive = true
-        
-        
-        
     }
 }
 
 extension DrawCampaignViewController {
-    private func labelAtrributed(title: String, description: String, content: String, endDate: String) {
+    private func labelAtrributed(title: String, description: String, content: String, url: String) {
         titleLabel.text = title
         //imageLabel.text = "\(localized(.drawEnddate)) \(endDate)"
         let descriptionString = NSMutableAttributedString(string: description)
@@ -335,6 +343,16 @@ extension DrawCampaignViewController {
         descriptionString.addAttribute(NSAttributedString.Key.paragraphStyle, value:descriptionParagraphStyle, range:NSMakeRange(0, descriptionString.length))
         descriptionLabel.attributedText = descriptionString
         
-        contentLabel.attributedText = content.getAsHtml
+        if #available(iOS 12.0, *) {
+            if traitCollection.userInterfaceStyle == .light {
+                contentLabel.attributedText = content.getAsHtml
+            } else {
+                contentLabel.attributedText = content.getAsHtmldarkMode
+            }
+        } else {
+            contentLabel.attributedText = content.getAsHtml
+        }
+        
+        imageView.loadImageData(with: URL(string: url))
     }
 }
