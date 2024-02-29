@@ -265,7 +265,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 let isPackage = SingletonStorage.shared.accountInfo?.photoPrintPackage ?? true
                 let maxSelection = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
                 let sendRemaining = SingletonStorage.shared.accountInfo?.photoPrintSendRemaining ?? 0
-//                print("⚠️", maxSelection)
                 let wrapData = selectedItems as? [WrapData] ?? []
                 let searchItemResponse = wrapData.map { $0.toSearchItemResponse() }
                 
