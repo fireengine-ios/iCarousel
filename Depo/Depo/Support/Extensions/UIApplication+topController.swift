@@ -62,14 +62,18 @@ extension UIApplication {
     
     static func showErrorAlert(message: String, closed: (() -> Void)? = nil) {
         debugLog("showErrorAlert \(message)")
+        var newMessage = message
         guard message != TextConstants.errorBadConnection else {
             return
+        }
+        if message == "account_has_foreign_subscription" || message == "ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" {
+            newMessage = localized(.accountHasForeignSubscription)
         }
         let controller = topController()
         if controller is PopUpController {
             return
         }
-        let vc = PopUpController.with(title: TextConstants.errorAlert, message: message, image: .error, buttonTitle: TextConstants.ok) { vc in
+        let vc = PopUpController.with(title: TextConstants.errorAlert, message: newMessage, image: .error, buttonTitle: TextConstants.ok) { vc in
             vc.close {
                 closed?()
             }
