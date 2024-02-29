@@ -231,15 +231,10 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
     }
     
     @IBAction func saveAdressButtonTapped(_ sender: Any) {
-        if postaCodeView.textField.text?.count == 5 {
-            if isAddressSave {
-                checkButtonIsChecked ? addAddressFunc(saveStatus: true) : addAddressFunc(saveStatus: false)
-            } else {
-                checkButtonIsChecked ? updateAddressFunc(saveStatus: true) : updateAddressFunc(saveStatus: false)
-            }
+        if isAddressSave {
+            checkButtonIsChecked ? addAddressFunc(saveStatus: true) : addAddressFunc(saveStatus: false)
         } else {
-            let errorMessage = localized(.minPostaCode)
-            UIApplication.showErrorAlert(message: errorMessage)
+            checkButtonIsChecked ? updateAddressFunc(saveStatus: true) : updateAddressFunc(saveStatus: false)
         }
     }
     
@@ -362,7 +357,27 @@ final class PhotoPrintAddAdressPopup: BasePopUpController {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        isTextFieldEmpty()
+        if textField.text?.count ?? 0 > 0 {
+            if let newText = textField.text {
+                let allZeros = newText.allSatisfy { $0 == "0" }
+                if allZeros {
+                    enableButton(isEnable: false)
+                } else {
+                    isTextFieldEmpty()
+                }
+            }
+        } else {
+            isTextFieldEmpty()
+        }
+    }
+    
+    func checkForZeros() -> Bool {
+        if let text = postaCodeView.textField.text {
+            // Remove whitespace and check if all characters are '0'
+            let allZeros = text.trimmingCharacters(in: .whitespacesAndNewlines).allSatisfy { $0 == "0" }
+            return allZeros
+        }
+        return false
     }
     
     private func configureTableView() {
@@ -435,7 +450,7 @@ extension PhotoPrintAddAdressPopup: UITextFieldDelegate {
             
             let allowedCharacters = CharacterSet.decimalDigits
             let characterSet = CharacterSet(charactersIn: string)
-            return newLength <= 5 && allowedCharacters.isSuperset(of: characterSet)
+            return newLength <= 6 && allowedCharacters.isSuperset(of: characterSet)
         } else if textField == adressTitleView.textField || textField == neighbourhoodView.textField || textField == streetView.textField || textField == nameView.textField {
             let currentCharacterCount = textField.text?.count ?? 0
             if range.length + range.location > currentCharacterCount {
@@ -453,8 +468,6 @@ extension PhotoPrintAddAdressPopup: UITextFieldDelegate {
         }
         return false
     }
-    
-    
 }
 
 extension PhotoPrintAddAdressPopup: UITableViewDelegate, UITableViewDataSource {
