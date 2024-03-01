@@ -2182,6 +2182,18 @@
 		89F99F8B29B5F65800F99CB5 /* CreateCollagePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F7729B5C07800F99CB5 /* CreateCollagePhotoCell.swift */; };
 		89F99F8C29B5F65900F99CB5 /* CreateCollagePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F7729B5C07800F99CB5 /* CreateCollagePhotoCell.swift */; };
 		89F99F8D29B5F65900F99CB5 /* CreateCollagePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F7729B5C07800F99CB5 /* CreateCollagePhotoCell.swift */; };
+		89FDAD3C2B90A92500BDE505 /* GarentaCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89FDAD3B2B90A92500BDE505 /* GarentaCard.xib */; };
+		89FDAD3D2B90A92500BDE505 /* GarentaCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89FDAD3B2B90A92500BDE505 /* GarentaCard.xib */; };
+		89FDAD3E2B90A92500BDE505 /* GarentaCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89FDAD3B2B90A92500BDE505 /* GarentaCard.xib */; };
+		89FDAD3F2B90A92500BDE505 /* GarentaCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89FDAD3B2B90A92500BDE505 /* GarentaCard.xib */; };
+		89FDAD412B90A93000BDE505 /* GarentaCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FDAD402B90A93000BDE505 /* GarentaCard.swift */; };
+		89FDAD422B90A93000BDE505 /* GarentaCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FDAD402B90A93000BDE505 /* GarentaCard.swift */; };
+		89FDAD432B90A93000BDE505 /* GarentaCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FDAD402B90A93000BDE505 /* GarentaCard.swift */; };
+		89FDAD442B90A93000BDE505 /* GarentaCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FDAD402B90A93000BDE505 /* GarentaCard.swift */; };
+		89FDAD462B90AFB300BDE505 /* GarentaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FDAD452B90AFB300BDE505 /* GarentaViewController.swift */; };
+		89FDAD472B90AFB300BDE505 /* GarentaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FDAD452B90AFB300BDE505 /* GarentaViewController.swift */; };
+		89FDAD482B90AFB300BDE505 /* GarentaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FDAD452B90AFB300BDE505 /* GarentaViewController.swift */; };
+		89FDAD492B90AFB300BDE505 /* GarentaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FDAD452B90AFB300BDE505 /* GarentaViewController.swift */; };
 		8AC39F6514E4A3AA9063E699 /* Pods_LifeboxNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DEAF992B97ECC1677684443 /* Pods_LifeboxNotificationServiceExtension.framework */; };
 		8C017B762074B782002484E7 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
 		8C017B772074B795002484E7 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
@@ -11474,6 +11486,9 @@
 		89F99F7329B5BDB400F99CB5 /* CreateCollageAlbumSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageAlbumSelectionViewController.swift; sourceTree = "<group>"; };
 		89F99F7529B5BE2A00F99CB5 /* CreateCollageAlbumSelectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageAlbumSelectionDataSource.swift; sourceTree = "<group>"; };
 		89F99F7729B5C07800F99CB5 /* CreateCollagePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollagePhotoCell.swift; sourceTree = "<group>"; };
+		89FDAD3B2B90A92500BDE505 /* GarentaCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GarentaCard.xib; sourceTree = "<group>"; };
+		89FDAD402B90A93000BDE505 /* GarentaCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarentaCard.swift; sourceTree = "<group>"; };
+		89FDAD452B90AFB300BDE505 /* GarentaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarentaViewController.swift; sourceTree = "<group>"; };
 		8A226C38114FC93E746DB9EF /* Pods-lifeBox_Business_Bundle.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lifeBox_Business_Bundle.appstore.xcconfig"; path = "Target Support Files/Pods-lifeBox_Business_Bundle/Pods-lifeBox_Business_Bundle.appstore.xcconfig"; sourceTree = "<group>"; };
 		8A4620DB4814DE9B2BF69415 /* SplashModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashModuleInput.swift; sourceTree = "<group>"; };
 		8ACB18A67C5CBB40E87DBA64 /* UploadFilesSelectionModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionModuleInput.swift; sourceTree = "<group>"; };
@@ -17187,6 +17202,7 @@
 		7CE825B81F823CAD00356AD2 /* PopUpSubViews */ = {
 			isa = PBXGroup;
 			children = (
+				89FDAD3A2B90A91700BDE505 /* GarentaCard */,
 				8979A68B2B88C74B00E198FF /* DrawCampaignCard */,
 				89B40C822AF627890033147B /* HighlightPackage */,
 				066B39422B7B9A7D000211E3 /* DiscoverCard */,
@@ -17972,6 +17988,16 @@
 				89F99F7729B5C07800F99CB5 /* CreateCollagePhotoCell.swift */,
 			);
 			path = CreateCollageSelection;
+			sourceTree = "<group>";
+		};
+		89FDAD3A2B90A91700BDE505 /* GarentaCard */ = {
+			isa = PBXGroup;
+			children = (
+				89FDAD3B2B90A92500BDE505 /* GarentaCard.xib */,
+				89FDAD402B90A93000BDE505 /* GarentaCard.swift */,
+				89FDAD452B90AFB300BDE505 /* GarentaViewController.swift */,
+			);
+			path = GarentaCard;
 			sourceTree = "<group>";
 		};
 		8C0097071F6BD8AA00FA069C /* MoreFilesActions */ = {
@@ -24334,6 +24360,7 @@
 				98C298532302B15300C9811E /* SpotifyCancelImportPopup.xib in Resources */,
 				8C0E902B1FDEBDFF00789C91 /* TurkcellSaturaMed.ttf in Resources */,
 				8C0E902D1FDEBDFF00789C91 /* RegistrationScreen.xib in Resources */,
+				89FDAD3C2B90A92500BDE505 /* GarentaCard.xib in Resources */,
 				8934DD6E23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */,
 				8C0E902F1FDEBDFF00789C91 /* ActivityTimelineTimeCell.xib in Resources */,
 				8C0E90311FDEBDFF00789C91 /* FeedbackViewController.xib in Resources */,
@@ -24868,6 +24895,7 @@
 				CE784D9322A685FB00662219 /* TurkcellSaturaMed.ttf in Resources */,
 				07C6D4E8284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.xib in Resources */,
 				734CA11D244D64150076F6A7 /* DocumentsAlbumCard.xib in Resources */,
+				89FDAD3E2B90A92500BDE505 /* GarentaCard.xib in Resources */,
 				CE784D9722A685FB00662219 /* RegistrationScreen.xib in Resources */,
 				9808B3182553DEBD002B0032 /* PrivateShareViewController.xib in Resources */,
 				9862BC6C255E895600D7945E /* FileInfoShareView.xib in Resources */,
@@ -25241,6 +25269,7 @@
 				CF8B696E23CBC9D70021B021 /* CollageCard.xib in Resources */,
 				CF8B697023CBC9D70021B021 /* AutoSyncViewController.xib in Resources */,
 				CF8B697223CBC9D70021B021 /* TurkcellSaturaBol.ttf in Resources */,
+				89FDAD3D2B90A92500BDE505 /* GarentaCard.xib in Resources */,
 				07567DAA2721DFBC00557BCF /* DeleteAccountPopUp.xib in Resources */,
 				B55C970D2559353800623C5C /* PrivateShareLocalSuggestionsViewController.xib in Resources */,
 				CF71469B24B597A900D83E60 /* ContactsBackupHistoryView.xib in Resources */,
@@ -25695,6 +25724,7 @@
 				CF8B715A23CBCA280021B021 /* ActivityTimelineTimeCell.xib in Resources */,
 				07C6D4E9284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.xib in Resources */,
 				CF8B715D23CBCA280021B021 /* TitleView.xib in Resources */,
+				89FDAD3F2B90A92500BDE505 /* GarentaCard.xib in Resources */,
 				CF8B716123CBCA280021B021 /* FeedbackViewController.xib in Resources */,
 				CF8B716223CBCA280021B021 /* LargeFullOfQuotaPopUp.xib in Resources */,
 				98B04B24259316FF0011DAEB /* PlusMenuItemView.xib in Resources */,
@@ -27843,6 +27873,7 @@
 				8C0E8DDF1FDEBDFF00789C91 /* IntroduceViewInput.swift in Sources */,
 				17CD85B323ACDA40004CFF7E /* HSCompetionPopUpsFactory.swift in Sources */,
 				FA016FB423D30750008713ED /* FileInfoModuleOutput.swift in Sources */,
+				89FDAD462B90AFB300BDE505 /* GarentaViewController.swift in Sources */,
 				8C0E8DE01FDEBDFF00789C91 /* IntroduceViewOutput.swift in Sources */,
 				8C0E8DE11FDEBDFF00789C91 /* IntroduceViewController.swift in Sources */,
 				CF7145F224B597A800D83E60 /* ContactInfoView.swift in Sources */,
@@ -28337,6 +28368,7 @@
 				984A514521E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift in Sources */,
 				897D1A862AD5895F00F488FB /* TimelineResponse.swift in Sources */,
 				8C0E8EEA1FDEBDFF00789C91 /* PhotoVideoDetailInteractor.swift in Sources */,
+				89FDAD412B90A93000BDE505 /* GarentaCard.swift in Sources */,
 				4ADE087F202DC7890095346F /* FaceImagePhotosModuleOutput.swift in Sources */,
 				8C0E8EEB1FDEBDFF00789C91 /* PackagesModuleInput.swift in Sources */,
 				B571FC8D23AE1B3800398B48 /* CoreDataMigrationVersion.swift in Sources */,
@@ -29786,6 +29818,7 @@
 				CE78491122A685FB00662219 /* AutoSyncSettingsOptionView.swift in Sources */,
 				CE78491222A685FB00662219 /* HomeViewTopView.swift in Sources */,
 				CE78491322A685FB00662219 /* NavBarConfugurator.swift in Sources */,
+				89FDAD432B90A93000BDE505 /* GarentaCard.swift in Sources */,
 				8C1E5BE922CB8CE0008FDA02 /* NSManagedObject+Extensions.swift in Sources */,
 				CE78491522A685FB00662219 /* ConnectWithInstaView.swift in Sources */,
 				CE78491622A685FB00662219 /* UIViewController+NavBar.swift in Sources */,
@@ -31081,6 +31114,7 @@
 				CE784C3522A685FB00662219 /* LBAlbumLikePreviewSliderInitializer.swift in Sources */,
 				52501E7D29952A520000376C /* NotificationPresenter.swift in Sources */,
 				07E7A67E2859D046005BBD4C /* BottomSelectionTabBarDrawerViewController.swift in Sources */,
+				89FDAD482B90AFB300BDE505 /* GarentaViewController.swift in Sources */,
 				CE784C3622A685FB00662219 /* PackagesInteractor.swift in Sources */,
 				CE784C3722A685FB00662219 /* AlbumSelectionViewController.swift in Sources */,
 				CE784C3822A685FB00662219 /* SyncedBlock.swift in Sources */,
@@ -31960,6 +31994,7 @@
 				CF8B654623CBC9D70021B021 /* QuickScrollService.swift in Sources */,
 				CF8B654723CBC9D70021B021 /* PopUpService.swift in Sources */,
 				CF8B654823CBC9D70021B021 /* SpotifyImportedPlaylistsNavbarManager.swift in Sources */,
+				89FDAD422B90A93000BDE505 /* GarentaCard.swift in Sources */,
 				CF8B654923CBC9D70021B021 /* GradientLoadingIndicator.swift in Sources */,
 				CF8B654A23CBC9D70021B021 /* SingleThumbnailAlbumCell.swift in Sources */,
 				CF8B654B23CBC9D70021B021 /* ContactSyncResponse.swift in Sources */,
@@ -32913,6 +32948,7 @@
 				89CF11792B89DCAE0040F73F /* DrawCampaignPresenterInput.swift in Sources */,
 				F0CF433D27B67A2E0061DC79 /* PublicShareDownloader.swift in Sources */,
 				F064FB34278CF28100B461D0 /* PublicSharedItemsTableViewCell.swift in Sources */,
+				89FDAD472B90AFB300BDE505 /* GarentaViewController.swift in Sources */,
 				CF8B67D723CBC9D70021B021 /* FreeAppSpaceInitializer.swift in Sources */,
 				CF8B67D823CBC9D70021B021 /* UILabel+Font.swift in Sources */,
 				89CF11832B89DCCC0040F73F /* DrawCampaignInteractor.swift in Sources */,
@@ -33610,6 +33646,7 @@
 				F04E5C4027EDAF7D00CAAEB5 /* LoginWithGooglePopup.swift in Sources */,
 				07620294269B83F700D4FB2C /* GifToMP4Formatter.swift in Sources */,
 				CF8B6C5323CBCA280021B021 /* VisualMusicPlayerViewOutput.swift in Sources */,
+				89FDAD442B90A93000BDE505 /* GarentaCard.swift in Sources */,
 				89DCC5DE2403AC3F00488F1F /* SubscriptionFeaturesView.swift in Sources */,
 				CF8B6C5423CBCA280021B021 /* TwoFactorAuthenticationCell.swift in Sources */,
 				CF8B6C5623CBCA280021B021 /* ManageContactsRouterInput.swift in Sources */,
@@ -34420,6 +34457,7 @@
 				CF8B6E7323CBCA280021B021 /* BaseFilesGreedModuleInput.swift in Sources */,
 				030207AD23D1D32700BF8006 /* NetmeraScreenEvents.swift in Sources */,
 				CF8B6E7423CBCA280021B021 /* InstaPickSmartAlbumCell.swift in Sources */,
+				89FDAD492B90AFB300BDE505 /* GarentaViewController.swift in Sources */,
 				CF8B6E7523CBCA280021B021 /* KeyboardHideManager.swift in Sources */,
 				98B04851259314750011DAEB /* CNContactUnified.m in Sources */,
 				CF8B6E7623CBCA280021B021 /* BaseFilesGreedPresenter.swift in Sources */,

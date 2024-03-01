@@ -387,6 +387,7 @@ enum Strings: String, Localizable {
     case twoFaTooManyRequestsErrorMessage = "two_fa_too_many_requests_error_message"
     case forgotMyPasswordInfo = "forgot_my_password_info"
     case securityQuestionInvalid = "security_question_invalid"
+    case accountHasForeignSubscription = "ACCOUNT_HAS_FOREIGN_SUBSCRIPTION"
     
     case bestscenediscovercardtitle = "best_scene_discover_card_title"
     case bestscenediscovercardbody = "best_scene_discover_card_body"
