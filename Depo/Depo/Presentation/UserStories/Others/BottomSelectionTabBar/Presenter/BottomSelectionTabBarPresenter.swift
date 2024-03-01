@@ -265,7 +265,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 let isPackage = SingletonStorage.shared.accountInfo?.photoPrintPackage ?? true
                 let maxSelection = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
                 let sendRemaining = SingletonStorage.shared.accountInfo?.photoPrintSendRemaining ?? 0
-                
                 let wrapData = selectedItems as? [WrapData] ?? []
                 let searchItemResponse = wrapData.map { $0.toSearchItemResponse() }
                 
@@ -278,13 +277,16 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 }
                 
                 if selectedItemsCount > maxSelection {
-                    let vc = PhotoPrintNoRightPopup.with()
+                    let vc = PhotoPrintInfoPopup.with()
+                    vc.tempTitle = String(format: localized(.photoMaxSelectionTitle), maxSelection)
+                    vc.tempDescription = String(format: localized(.photoMaxSelectionBody), maxSelection)
                     vc.open()
                 } else if sendRemaining == 0 {
                     let vc = PhotoPrintNoRightPopup.with()
                     vc.open()
                 } else {
-                    router.showPrintViewController(selectedPhotos: searchItemResponse)
+                    let vc = PhotoPrintMissingPhotoPopup.with(selectedPhotoCount: selectedItemsCount, selectedPhotos: searchItemResponse)
+                    vc.openWithBlur()
                 }
                 
             case .removeAlbum:

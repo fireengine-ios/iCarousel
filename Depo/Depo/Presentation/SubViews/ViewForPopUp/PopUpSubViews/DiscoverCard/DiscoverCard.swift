@@ -18,7 +18,6 @@ class DiscoverCard: BaseCardView {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var showAllPictureLabel: UIButton!
     
-    
     private var operation: OperationType?
     weak var popupDelegate: DiscoverCardPopupDelegate?
     private let userDefaultsVars = UserDefaultsVars()
@@ -34,7 +33,9 @@ class DiscoverCard: BaseCardView {
         let imageUrls = userDefaultsVars.imageUrlsForBestScene
         if let newImageUrls = imageUrls as? [String] {
             self.imageUrls = newImageUrls.count > 5 ? Array(newImageUrls.prefix(5)) : newImageUrls
-            self.collectionView.reloadData()
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
     }
     

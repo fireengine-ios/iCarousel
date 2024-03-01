@@ -112,14 +112,14 @@ extension HomePagePresenter: HomePageInteractorOutput {
         
         if let paycellIndex = sortedCard.firstIndex(where: { $0.type == .paycell }) {
             bestSceneCards.first?.order = paycellIndex + 1
-            self.cards.append(bestSceneCards.first)
         } else if let contactBackupIndex = sortedCard.firstIndex(where: { $0.type == .contactBackup }) {
             bestSceneCards.first?.order = contactBackupIndex
-            self.cards.append(bestSceneCards.first)
         } else {
             bestSceneCards.first?.order = 6
-            self.cards.append(bestSceneCards.first)
         }
+        
+        self.cards.append(bestSceneCards.first)
+        self.cards = self.cards.sorted { $0.order < $1.order }
     }
     
     func didObtainHomeCardsBestScene(_ bestSceneCard: HomeCardResponse, imageUrls: [String]) {
