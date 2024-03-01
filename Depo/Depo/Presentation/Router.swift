@@ -1162,9 +1162,14 @@ class RouterVC: NSObject {
         return ConnectedDeviceInitializer.initializeViewController()
     }
     
-    // MARK: - Settings -> Connected Device
+    // MARK: - Draw Campaign
     func drawCampaign(campaignId: Int) -> DrawCampaignViewController {
         return DrawCampaignInitializer.initializeViewController(campaignId: campaignId)
+    }
+    
+    // MARK: - Garenta
+    func garenta(details: String, pageTitle: String) -> GarentaViewController {
+        return GarentaViewController(details: details, pageTitle: pageTitle)
     }
     
     // MARK: - Create Collage Template
