@@ -220,7 +220,7 @@ final class HomePageInteractor: HomePageInteractorInput {
                 }
             case .failed(let error):
                 DispatchQueue.main.async {
-                    self.output.didObtainError(with: error.localizedDescription, isNeedStopRefresh: true)
+                    self.output.didObtainError(with: error.localizedDescription, isNeedStopRefresh: false)
                 }
             }
         }

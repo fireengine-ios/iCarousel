@@ -554,4 +554,9 @@ struct RouteRequests {
     
     //MARK: -TOGG QR Code
     static let readQrCode = baseUrl +/ "auth/qrcode/referenceToken"
+    
+    //MARK: -DrawCampaign
+    static let getCampaignStatus = "draw/%d/status"
+    static let getCampaignPolicy = "draw/%d/policy"
+    static let setCampaignApply = "draw/%d/apply"
 }

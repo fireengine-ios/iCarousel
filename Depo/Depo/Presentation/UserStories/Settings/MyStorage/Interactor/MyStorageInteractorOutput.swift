@@ -35,4 +35,5 @@ protocol MyStorageInteractorOutput: AnyObject {
     
     func getActiveSubscriptionForBanner(offers: [SubscriptionPlanBaseResponse])
     func getAvailableOffersForBanner(offers: [SubscriptionPlan])
+    func navigationToController()
 }
