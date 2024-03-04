@@ -35,8 +35,8 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
         snCollectionViewLayout.itemSpacing = 8
         snCollectionViewLayout.scrollDirection = .vertical
         
-        let popUp = BestScenePopUp.with()
-        popUp.open()
+//        let popUp = BestScenePopUp.with()
+//        popUp.open()
         
         setupLayout()
     }
