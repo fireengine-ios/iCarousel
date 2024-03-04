@@ -325,4 +325,16 @@ final class UserDefaultsVars: StorageVars {
         get { return userDefaults.object(forKey: drawCampaignPackageKey) as? Bool ?? false }
         set { userDefaults.set(newValue, forKey: drawCampaignPackageKey) }
     }
+    
+    private let dateForBestSceneKey = "dateForBestSceneKey"
+    var dateForBestScene: Int {
+        get { return userDefaults.object(forKey: dateForBestSceneKey) as? Int ?? 0 }
+        set { userDefaults.set(newValue, forKey: dateForBestSceneKey) }
+    }
+    
+    private let groupIdBestSceneKey = "groupIdBestSceneKey"
+    var groupIdBestScene: [Int] {
+        get { return userDefaults.object(forKey: groupIdBestSceneKey) as? [Int] ?? [] }
+        set { userDefaults.set(newValue, forKey: groupIdBestSceneKey) }
+    }
 }
