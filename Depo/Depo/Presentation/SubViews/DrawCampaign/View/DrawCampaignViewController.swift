@@ -193,8 +193,8 @@ final class DrawCampaignViewController: BaseViewController {
         }
     }
     
-    private func successDrawJoin() {
-        labelAtrributed(title: responsePolicy?.title ?? "", description: "Çekiliş başvurunuz tammalanmıştır. Başarılar…", content: "", url: responsePolicy?.thumbnail ?? "")
+    private func successDrawJoin(title: String, message: String) {
+        labelAtrributed(title: title, description: message, content: "", url: responsePolicy?.thumbnail ?? "")
         lineView.isHidden = true
         drawJoinButton.setTitle(TextConstants.ok, for: .normal)
         successJoinDraw = true
@@ -246,9 +246,9 @@ extension DrawCampaignViewController: DrawCampaignViewInput {
         UIApplication.showErrorAlert(message: error)
     }
     
-    func successCampaignApply() {
+    func successCampaignApply(response: CampaignApplyResponse) {
         hideSpinner()
-        successDrawJoin()
+        successDrawJoin(title: response.title, message: response.message)
     }
 }
 

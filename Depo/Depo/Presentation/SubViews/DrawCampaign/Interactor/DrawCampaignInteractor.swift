@@ -38,8 +38,8 @@ class DrawCampaignInteractor {
     func campaignApply(campaignId: Int) {
         service.setCampaignApply(campaignId: campaignId) { [weak self] result in
             switch result {
-            case .success():
-                self?.output.successCampaignApply()
+            case .success(let response):
+                self?.output.successCampaignApply(response: response)
             case .failed(let error):
                 self?.output.failCampaignPolicy(error: error.description)
             }
