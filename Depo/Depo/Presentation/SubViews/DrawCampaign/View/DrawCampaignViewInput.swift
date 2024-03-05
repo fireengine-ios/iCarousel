@@ -13,5 +13,5 @@ protocol DrawCampaignViewInput {
     func failCampaignStatus(error: String)
     func successCampaignPolicy(response: CampaignPolicyResponse)
     func failCampaignPolicy(error: String)
-    func successCampaignApply()
+    func successCampaignApply(response: CampaignApplyResponse)
 }

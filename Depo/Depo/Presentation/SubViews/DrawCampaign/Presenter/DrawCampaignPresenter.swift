@@ -32,8 +32,8 @@ extension DrawCampaignPresenter: DrawCampaignInteractorOutput {
         view?.failCampaignPolicy(error: error)
     }
     
-    func successCampaignApply() {
-        view?.successCampaignApply()
+    func successCampaignApply(response: CampaignApplyResponse) {
+        view?.successCampaignApply(response: response)
     }
 }
 

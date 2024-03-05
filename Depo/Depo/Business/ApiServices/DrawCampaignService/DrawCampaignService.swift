@@ -49,7 +49,7 @@ final class DrawCampaignService: BaseRequestService {
     }
     
     @discardableResult
-    func setCampaignApply(campaignId: Int, handler: @escaping ResponseVoid) -> URLSessionTask? {
+    func setCampaignApply(campaignId: Int, handler: @escaping (ResponseResult<CampaignApplyResponse>) -> Void) -> URLSessionTask? {
         debugLog("setCampaignApply")
         
         let path = String(format: RouteRequests.setCampaignApply, campaignId)
@@ -60,9 +60,13 @@ final class DrawCampaignService: BaseRequestService {
         
         return SessionManager
             .customDefault
-            .request(url)
+            .request(url, method: .post)
             .customValidate()
-            .responseVoid(handler)
+            .responseObject(handler)
             .task
     }
+}
+
+struct CampaignApplyResponse: Codable {
+    let title, message: String
 }
