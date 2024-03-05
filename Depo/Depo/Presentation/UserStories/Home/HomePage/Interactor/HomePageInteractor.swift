@@ -215,7 +215,9 @@ final class HomePageInteractor: HomePageInteractorInput {
                     homeCard.id = burstGroup.id
                     homeCard.type = .discoverCard
                     let imageUrls = response.map { $0.coverPhoto.metadata.thumbnailMedium }.compactMap { $0 }
-                    self.output.didObtainHomeCardsBestScene(homeCard, imageUrls: imageUrls)
+                    let burstGroupId = response.map { $0.id }.compactMap { $0 }
+                    let createdDate = response.first?.groupDate
+                    self.output.didObtainHomeCardsBestScene(homeCard, imageUrls: imageUrls, createdDate: createdDate ?? 0, groupId: burstGroupId)
                     return homeCard
                 }
             case .failed(let error):

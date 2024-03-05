@@ -390,6 +390,10 @@ enum Strings: String, Localizable {
     case forgotMyPasswordInfo = "forgot_my_password_info"
     case securityQuestionInvalid = "security_question_invalid"
     case accountHasForeignSubscription = "ACCOUNT_HAS_FOREIGN_SUBSCRIPTION"
+    case deleteForSelected = "delete_for_selected"
+    case keepEverything = "keep_everything"
+    case deleteInfo = "delete_info"
+    case bestPhoto = "best_photo"
     
     case bestscenediscovercardtitle = "best_scene_discover_card_title"
     case bestscenediscovercardbody = "best_scene_discover_card_body"

@@ -972,6 +972,19 @@ class RouterVC: NSObject {
         return PaycellCampaignViewController()
     }
     
+    // MARK: Best Scene All Group
+    
+    func bestSceneAllGroupController() -> BestSceneAllGroupViewController {
+        return BestSceneAllGroupViewController()
+    }
+    
+    // MARK: Best Scene All Group Sorted
+    
+    func bestSceneAllGroupSortedViewController(coverPhotoUrl: String, fileListUrls: [String]) -> BestSceneAllGroupSortedViewController {
+        let bestSceneVC = BestSceneAllGroupSortedInitializer.initializeController(coverPhotoUrl: coverPhotoUrl, fileListUrls: fileListUrls) as! BestSceneAllGroupSortedViewController
+        return bestSceneVC
+    }
+    
     // MARK: Face Image Recognition Photos
     
     func imageFacePhotosController(album: AlbumItem, item: Item, status: ItemStatus, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool = false, faceImageType: FaceImageType? = nil) -> BaseFilesGreedChildrenViewController {

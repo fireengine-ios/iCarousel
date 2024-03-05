@@ -353,6 +353,10 @@ struct RouteRequests {
             return all +/ String(id)
         }
         static let bestScene = baseUrl +/ "burstgroups/"
+        
+        static func burstGroupFiles(for groupId: Int) -> URL {
+            return bestScene +/ "\(groupId)/files"
+        }
     }
 
     // MARK: - Print
