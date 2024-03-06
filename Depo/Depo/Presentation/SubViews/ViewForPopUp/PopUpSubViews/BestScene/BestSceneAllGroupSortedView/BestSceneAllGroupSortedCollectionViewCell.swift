@@ -213,13 +213,6 @@ class BestSceneAllGroupSortedCollectionViewCell: UICollectionViewCell {
         titleLabelView.layer.insertSublayer(gradientLayer, at: 0)
     }
     
-    func configure(with isFirstCell: Bool) {
-        if isFirstCell {
-            tickImage.isHidden = false
-        }
-        
-    }
-    
     func configureTickImage(forFirstCell isFirstCell: Bool) {
         tickImage.isHidden = isFirstCell
         if isFirstCell {
