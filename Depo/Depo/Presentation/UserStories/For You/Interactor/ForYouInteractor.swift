@@ -294,7 +294,8 @@ final class ForYouInteractor {
             self?.group.leave()
             switch result {
             case .success(let response):
-                self?.output.getPrintedPhotos(data: response)
+                let reversedData = Array(response.reversed())
+                self?.output.getPrintedPhotos(data: reversedData)
             case .failed(let error):
                 debugLog("ForYou Error getPrintedPhotos: \(error.description)-\(String(describing: error.description))")
                 break
