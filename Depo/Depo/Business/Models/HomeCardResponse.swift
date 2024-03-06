@@ -139,6 +139,6 @@ enum HomeCardTypes: String {
     case biOgrenci = "BI_OGRENCI"
     case discoverCard = "BEST_SCENE_CARD"
     case drawCampaignApply = "DRAW_CAMPAIGN_APPLY"
-    case garenta = "GARENTA1"
+    case garenta = "GARENTA"
 }
 

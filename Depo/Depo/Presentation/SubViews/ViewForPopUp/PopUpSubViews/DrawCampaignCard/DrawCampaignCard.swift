@@ -102,7 +102,7 @@ final class DrawCampaignCard: BaseCardView {
     }
     
     @IBAction private func onActionButton(_ sender: UIButton) {
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .discoverCampaignCard)
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .discoverCampaignCard(campaignId: campaignId))
         let vc = router.drawCampaign(campaignId: campaignId)
         router.pushViewController(viewController: vc, animated: false)
     }

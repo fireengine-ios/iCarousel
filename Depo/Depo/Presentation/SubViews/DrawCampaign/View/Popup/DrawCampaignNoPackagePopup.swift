@@ -60,6 +60,7 @@ final class DrawCampaignNoPackagePopup: BasePopUpController {
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var storageVars: StorageVars = factory.resolve()
+    private var campaignId: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +73,7 @@ final class DrawCampaignNoPackagePopup: BasePopUpController {
     @IBAction func nextButtonTapped(_ sender: Any) {
         dismiss(animated: false, completion: {
             self.storageVars.drawCampaignPackage = true
-            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .discoverCampaignPackage)
+            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .discoverCampaignPackage(campaignId: self.campaignId))
             let router = RouterVC()
             router.pushViewController(viewController: router.myStorage(usageStorage: nil))
         })
@@ -82,19 +83,24 @@ final class DrawCampaignNoPackagePopup: BasePopUpController {
         dismiss(animated: true)
     }
     
+    private func setCampaignId(campaignId: Int) {
+        self.campaignId = campaignId
+    }
+    
 }
 
 // MARK: - Init
 extension DrawCampaignNoPackagePopup {
-    static func with() -> DrawCampaignNoPackagePopup {
-        let vc = controllerWith()
+    static func with(campaignId: Int) -> DrawCampaignNoPackagePopup {
+        let vc = controllerWith(campaignId: campaignId)
         return vc
     }
     
-    private static func controllerWith() -> DrawCampaignNoPackagePopup {
+    private static func controllerWith(campaignId: Int) -> DrawCampaignNoPackagePopup {
         let vc = DrawCampaignNoPackagePopup(nibName: "DrawCampaignNoPackagePopup", bundle: nil)
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overFullScreen
+        vc.setCampaignId(campaignId: campaignId)
         return vc
     }
 }

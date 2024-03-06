@@ -52,7 +52,7 @@ final class DrawCampaignViewController: BaseViewController {
     private lazy var titleLabel: UILabel = {
         let view = UILabel()
         view.font = .appFont(.medium, size: 16)
-        view.textColor = AppColor.label.color
+        view.textColor = AppColor.textButton.color
         view.numberOfLines = 0
         view.textAlignment = .left
         view.lineBreakMode = .byWordWrapping
@@ -62,7 +62,7 @@ final class DrawCampaignViewController: BaseViewController {
     private lazy var descriptionLabel: UILabel = {
         let view = UILabel()
         view.font = .appFont(.medium, size: 14)
-        view.textColor = AppColor.label.color
+        view.textColor = AppColor.textButton.color
         view.numberOfLines = 0
         view.textAlignment = .left
         view.lineBreakMode = .byWordWrapping
@@ -75,13 +75,18 @@ final class DrawCampaignViewController: BaseViewController {
         return view
     }()
     
-    private lazy var contentLabel: UILabel = {
-        let view = UILabel()
-        view.font = .appFont(.medium, size: 12)
-        view.textColor = AppColor.label.color
-        view.numberOfLines = 0
+    private lazy var contentTextView: UITextView = {
+        let view = UITextView()
+        view.textColor = AppColor.textButton.color
+        view.font = .appFont(.regular, size: 12)
         view.textAlignment = .left
-        view.lineBreakMode = .byWordWrapping
+        view.textContainer.lineBreakMode = .byWordWrapping
+        view.isSelectable = true
+        view.dataDetectorTypes = .link
+        view.isEditable = false
+        view.sizeToFit()
+        view.isScrollEnabled = false
+        view.isUserInteractionEnabled = true
         return view
     }()
     
@@ -183,7 +188,7 @@ final class DrawCampaignViewController: BaseViewController {
                 showSpinner()
                 output.setCampaignApply(campaignId: campaignId)
             case .notAllowed:
-                let vc = DrawCampaignNoPackagePopup.with()
+                let vc = DrawCampaignNoPackagePopup.with(campaignId: campaignId)
                 vc.open()
             case .alreadyParticipated:
                 drawJoinButton.isEnabled = false
@@ -198,7 +203,7 @@ final class DrawCampaignViewController: BaseViewController {
         lineView.isHidden = true
         drawJoinButton.setTitle(TextConstants.ok, for: .normal)
         successJoinDraw = true
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .discoverCampaignApply)
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .discoverCampaignApply(campaignId: campaignId))
     }
     
     private func setDrawJoinButton(status: CampaignStatus) {
@@ -302,12 +307,12 @@ extension DrawCampaignViewController {
         lineView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
         lineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
-        contentView.addSubview(contentLabel)
-        contentLabel.translatesAutoresizingMaskIntoConstraints = false
-        contentLabel.topAnchor.constraint(equalTo: lineView.bottomAnchor, constant: 20).isActive = true
-        contentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
-        contentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
-        contentLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -120).isActive = true
+        contentView.addSubview(contentTextView)
+        contentTextView.translatesAutoresizingMaskIntoConstraints = false
+        contentTextView.topAnchor.constraint(equalTo: lineView.bottomAnchor, constant: 20).isActive = true
+        contentTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
+        contentTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
+        contentTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -120).isActive = true
         
         view.addSubview(buttonContentView)
         buttonContentView.translatesAutoresizingMaskIntoConstraints = false
@@ -344,12 +349,12 @@ extension DrawCampaignViewController {
         
         if #available(iOS 12.0, *) {
             if traitCollection.userInterfaceStyle == .light {
-                contentLabel.attributedText = content.getAsHtml
+                contentTextView.attributedText = content.getAsHtml
             } else {
-                contentLabel.attributedText = content.getAsHtmldarkMode
+                contentTextView.attributedText = content.getAsHtmldarkMode
             }
         } else {
-            contentLabel.attributedText = content.getAsHtml
+            contentTextView.attributedText = content.getAsHtml
         }
         
         imageView.loadImageData(with: URL(string: url))
