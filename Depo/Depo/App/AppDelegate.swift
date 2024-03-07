@@ -221,6 +221,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AdjustDelegate {
         Adjust.appWillOpen(url)
         
         if let urlHost = url.host {
+            if urlHost.contains("=") {
+                let newUrl = urlHost.split(separator: "=")[0]
+                let param = urlHost.split(separator: "=")[1]
+                if PushNotificationService.shared.assignDeepLink(innerLink: String("\(newUrl)"), options: url.queryParameters) {
+                    storageVars.drawCampaignDeeplinkId = Int(String("\(param)")) ?? 0
+                    PushNotificationService.shared.openActionScreen()
+                }
+            }
+        }
+        
+        if let urlHost = url.host {
             if PushNotificationService.shared.assignDeepLink(innerLink: urlHost, options: url.queryParameters) {
                 PushNotificationService.shared.openActionScreen()
             }
