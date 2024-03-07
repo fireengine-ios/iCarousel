@@ -9,28 +9,21 @@
 import Foundation
 
 final class GarentaCard: BaseCardView {
-    @IBOutlet private weak var titleLabel: UILabel! {
-        willSet {
-            newValue.font = .appFont(.medium, size: 16)
-            newValue.textColor = AppColor.label.color
-            newValue.numberOfLines = 0
-            newValue.textAlignment = .left
-            newValue.lineBreakMode = .byWordWrapping
-        }
-    }
-    
-    @IBOutlet private weak var messageLabel: UILabel! {
-        willSet {
-            newValue.font = .appFont(.light, size: 14)
-            newValue.textColor = AppColor.label.color
-        }
-    }
     
     @IBOutlet private weak var imageView: LoadingImageView! {
         willSet {
             newValue.contentMode = .scaleToFill
             newValue.isUserInteractionEnabled = true
             let tapImage = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+            newValue.addGestureRecognizer(tapImage)
+        }
+    }
+    
+    @IBOutlet weak var cancelImageView: UIImageView! {
+        willSet {
+            newValue.image = Image.iconCancelBorder.image
+            newValue.isUserInteractionEnabled = true
+            let tapImage = UITapGestureRecognizer(target: self, action: #selector(cancelImageTapped))
             newValue.addGestureRecognizer(tapImage)
         }
     }
@@ -51,11 +44,6 @@ final class GarentaCard: BaseCardView {
         
         if let title = cardObject?.content?["title"].string {
             pageTitle = title
-            titleLabel.text = title
-        }
-        
-        if let message = cardObject?.content?["message"].string {
-            messageLabel.text = message
         }
         
         if let detailsText = cardObject?.content?["detailsText"].string {
@@ -68,12 +56,20 @@ final class GarentaCard: BaseCardView {
         router.pushViewController(viewController: vc, animated: false)
     }
     
+    @objc private func cancelImageTapped() {
+        deleteCard()
+    }
+    
+    override func deleteCard() {
+        super.deleteCard()
+        CardsManager.default.stopOperationWith(type: .garenta)
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-        let bottomSpace: CGFloat = 16.0
-        let h = messageLabel.frame.origin.y + messageLabel.frame.height + bottomSpace
-        if calculatedH != h {
-            calculatedH = h
+        let height = imageView.frame.size.height
+        if calculatedH != height {
+            calculatedH = height
             layoutIfNeeded()
         }
     }
