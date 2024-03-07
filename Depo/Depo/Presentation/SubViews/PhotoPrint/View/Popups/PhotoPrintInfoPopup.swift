@@ -12,9 +12,6 @@ typealias PhotoPrintInfoPopupButtonHandler = (_: PhotoPrintInfoPopup) -> Void
 
 final class PhotoPrintInfoPopup: BasePopUpController {
     
-    var tempTitle: String?
-    var tempDescription: String?
-    
     @IBOutlet private weak var exitImageView: UIImageView! {
         willSet {
             newValue.image = Image.iconCancelUnborder.image
@@ -74,29 +71,14 @@ final class PhotoPrintInfoPopup: BasePopUpController {
     //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let tempTitle = tempTitle, let tempDescription = tempDescription {
-            titleLabel.text = tempTitle
-            descriptionLabel.text = tempDescription
-        } else {
-            let maxSelection = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
-            titleLabel.text = String(format: localized(.printInfoPopUpTitle), maxSelection)
-            descriptionLabel.text = String(format: localized(.printInfoPopUpSubtitle), maxSelection)
-        }
+
+        let maxSelection = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
+        titleLabel.text = String(format: localized(.printInfoPopUpTitle), maxSelection)
+        descriptionLabel.text = String(format: localized(.printInfoPopUpSubtitle), maxSelection)
         
         exitImageView.isUserInteractionEnabled = true
         let tapImage = UITapGestureRecognizer(target: self, action: #selector(dismissPopup))
         exitImageView.addGestureRecognizer(tapImage)
-    }
-    
-    func updateContent(title: String, description: String) {
-        if isViewLoaded {
-            titleLabel.text = title
-            descriptionLabel.text = description
-        } else {
-            tempTitle = title
-            tempDescription = description
-        }
     }
     
     @IBAction func checkBoxButtonTapped(_ sender: Any) {

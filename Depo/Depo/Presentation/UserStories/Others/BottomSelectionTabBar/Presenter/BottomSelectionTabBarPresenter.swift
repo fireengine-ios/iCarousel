@@ -278,8 +278,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 
                 if selectedItemsCount > maxSelection {
                     let vc = PhotoPrintInfoPopup.with()
-                    vc.tempTitle = String(format: localized(.photoMaxSelectionTitle), maxSelection)
-                    vc.tempDescription = String(format: localized(.photoMaxSelectionBody), maxSelection)
+//                    vc.titleLabel.text = String(format: localized(.photoMaxSelectionTitle), maxSelection)
+//                    vc.descriptionLabel.text = String(format: localized(.photoMaxSelectionBody), maxSelection)
                     vc.open()
                 } else if sendRemaining == 0 {
                     let vc = PhotoPrintNoRightPopup.with()
