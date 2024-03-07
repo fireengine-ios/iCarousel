@@ -64,6 +64,7 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
         button.layer.borderWidth = 1.0
         button.layer.borderColor = AppColor.darkBlueColor.cgColor
         button.titleLabel?.font = UIFont(name: "TurkcellSaturaMed", size: 14)
+        button.addTarget(self, action: #selector(tappedDeleteButton), for: .touchUpInside)
         return button
     }()
     
@@ -78,6 +79,7 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
         button.layer.borderWidth = 1.0
         button.layer.borderColor = AppColor.darkBlueColor.cgColor
         button.titleLabel?.font = UIFont(name: "TurkcellSaturaMed", size: 14)
+        button.addTarget(self, action: #selector(tappedKeepItemButton), for: .touchUpInside)
         return button
     }()
     
@@ -182,6 +184,14 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
         collectionView.register(BestSceneAllGroupSortedCollectionViewCell.self, forCellWithReuseIdentifier: "BestSceneAllGroupSortedCollectionViewCell")
         return collectionView
     }()
+    
+    @objc func tappedDeleteButton() {
+         
+     }
+     
+     @objc func tappedKeepItemButton() {
+         
+     }
 }
 
 extension BestSceneAllGroupSortedViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SNCollectionViewLayoutDelegate {
