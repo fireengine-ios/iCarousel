@@ -652,7 +652,6 @@ private extension PushNotificationService {
     
     func openDrawCampaign() {
         let campaignId = storageVars.drawCampaignDeeplinkId
-        storageVars.drawCampaignDeeplinkId = 0
         pushTo(router.drawCampaign(campaignId: campaignId))
     }
     
