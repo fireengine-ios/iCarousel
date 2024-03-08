@@ -20,7 +20,7 @@ final class TextEnterController: ViewController, NibInit, ErrorPresenter {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
-            titleLabel.text = TextConstants.pleaseEnterYourMissingAccountInformation
+            titleLabel.text = localized(.pleaseEnterYourMsisdn)
             titleLabel.font = .appFont(.regular, size: 14)
         }
     }

@@ -2356,3 +2356,4 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "delete_popup_title" = "Seçili Olan Fotoğrafların Silinecektir.";
 "delete_popup_body" = "Silmek istediğine emin misin?";
+"please_enter_your_msisdn" = "Lüfen telefon numaranızı girin.";

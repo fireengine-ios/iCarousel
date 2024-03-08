@@ -406,4 +406,5 @@ enum Strings: String, Localizable {
     case drawPackageButton = "draw_package_button"
     case drawAlreadyJoin = "draw_already_join"
     case drawDetailHeader = "draw_detail_header"
+    case pleaseEnterYourMsisdn = "please_enter_your_msisdn"
 }
