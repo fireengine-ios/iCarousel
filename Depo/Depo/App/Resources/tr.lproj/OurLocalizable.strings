@@ -4,7 +4,7 @@
 "This file will be removed only from your album. You can access this file from Photos tab" = "Bu dosya sadece albümünden kaldırılacak. Fotoğraflar sekmesi üzerinden bu dosyaya erişebilirsin. Çıkarmak istediğine emin misin?";
 "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Bu albümü sildiğinde albümün içindeki dosyalar lifebox'ında kalmaya devam edecek. Dosyalarına Fotoğraflar sekmesinden ulaşabilirsin. Silmek istediğine emin misin?";
 "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Seçilen dosya(lar) çöp kutusuna taşınacak. 90 gün içinde geri alabileceksin. lifebox hafızanda yer açman gerekirse öncelikle çöp kutusunu boşaltmayı unutma.";
-"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Seçilen dosya(lar) çöp kutusuna taşınacak. 90 gün içinde geri alabileceksin. lifebox hafızanda yer açman gerekirse öncelikle çöp kutusunu boşaltmayı unutma.";
+"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Seçilen dosya(lar) çöp kutusuna taşınacak ( sadece yedeklenmiş dosya(lar) ). 90 gün içinde geri alabileceksin. lifebox hafızanda yer açman gerekirse öncelikle çöp kutusunu boşaltmayı unutma.";
 "Purchase" = "Satın Al";
 "Packages" = "Paketler";
 "Verification code is blocked.\nPlease request a new code" = "Doğrulama kodu bloke durumda. Lütfen yeni bir kod talep et.";
@@ -2342,12 +2342,17 @@ then {11,99 TRY/Month}*/
 "draw_join" = "Çekilişe Katıl";
 
 /*Fuzzy*/
-"draw_warning_header" = "Çekilişe Katılma Fırsatı Yakala";
+"draw_warning_header" = "Çekilişe Katılım Sağlanamadı";
 
 /*Fuzzy*/
-"draw_warning_body" = "Çekilişe katılabilmek için ücretli bir pakete sahip olmalısınız. Henüz ücretli bir pakete sahip değilsiniz.";
+"draw_warning_body" = "Kampanyamıza sadece ücretli paketi olanlar katılabilir. Hemen bir paket satın alıp tekrardan çekilişe katılım sağlayınız.";
 
 /*Fuzzy*/
-"draw_package_button" = "Paket Satın Al";
-"draw_already_join" = "Çekilişe katıldınız.";
-"draw_detail_header" = "Çekiliş Detay";
+"draw_package_button" = "Paketlere Git";
+"draw_already_join" = "Çekilişe katıldınız";
+"draw_detail_header" = "Çekiliş Detayları";
+"draw_success" = "Çekiliş başvurunuz tamamlanmıştır. Detaylı bilgiye çekiliş detaylarından ulaşabilirsiniz.";
+
+/*Fuzzy*/
+"delete_popup_title" = "Seçili Olan Fotoğrafların Silinecektir.";
+"delete_popup_body" = "Silmek istediğine emin misin?";

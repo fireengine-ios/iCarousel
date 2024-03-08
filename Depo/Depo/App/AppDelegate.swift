@@ -613,6 +613,13 @@ extension AppDelegate {
                     } else if PushNotificationService.shared.assignDeepLink(innerLink: host, options: userActivity.userInfo) {
                         debugLog("Should open Action Screen")
                         PushNotificationService.shared.openActionScreen()
+                    } else if host.contains("=") {
+                        let newUrl = host.split(separator: "=")[0]
+                        let param = host.split(separator: "=")[1]
+                        if PushNotificationService.shared.assignDeepLink(innerLink: String("\(newUrl)"), options: url.queryParameters) {
+                            storageVars.drawCampaignDeeplinkId = Int(String("\(param)")) ?? 0
+                            PushNotificationService.shared.openActionScreen()
+                        }
                     }
                 }
             }

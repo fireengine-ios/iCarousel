@@ -80,6 +80,8 @@ enum PushNotificationAction: String {
     case brandAmbassador = "markaelcisi"
     case foryou = "seninicin"
     case discover = "discover"
+    case drawCampaign = "drawCampaign"
+    case photoprint = "photoprint"
 
     var fromWidget: Bool {
         isContained(in: [.widgetLogout,
