@@ -14,7 +14,7 @@
 
 /*Suggested: "Deleting these files will remove them from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?"*/
 "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Le ou les fichiers sélectionnés seront mis dans la poubelle. Vous pourrez les récupérer en 90 jours. N'oubliez pas de vider d'abord la corbeille si vous devez faire de place pour la mémoire de votre lifebox,";
-"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Le ou les fichiers sélectionnés seront mis dans la poubelle. Vous pourrez les récupérer en 90 jours. N'oubliez pas de vider d'abord la poubelle si vous devez faire de place pour la mémoire de votre lifebox,";
+"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Le(s) fichier(s) sélectionné(s) sera(ont) déplacé(s) dans la corbeille (pour les sauvegardes uniquement). Vous pourrez les restaurer dans les 90 jours. Si vous avez besoin de libérer de l'espace dans votre lifebox, n'oubliez pas de vider d'abord la corbeille.";
 "Purchase" = "Achat";
 "Packages" = "Offres";
 "Verification code is blocked.\nPlease request a new code" = "Le code de vérification est bloqué. Veuillez réinitialiser votre code.";
@@ -2557,10 +2557,13 @@ then {11,99 TRY/Month}*/
 "security_question_invalid" = "";
 "select_security_question" = "";
 "draw_enddate" = "";
-"draw_detail_button" = "";
-"draw_join" = "";
-"draw_warning_header" = "";
-"draw_warning_body" = "";
-"draw_package_button" = "";
-"draw_already_join" = "";
-"draw_detail_header" = "";
+"draw_detail_button" = "Raffle Details";
+"draw_join" = "Join the Raffle";
+"draw_warning_header" = "You Couldn't Participate in the Raffle";
+"draw_warning_body" = "Only those with paid packages can participate in our campaign. Buy a package now and participate in the raffle again.";
+"draw_package_button" = "Go to Packages";
+"draw_already_join" = "You have entered the raffle";
+"draw_detail_header" = "Raffle Details";
+"draw_success" = "";
+"delete_popup_title" = "";
+"delete_popup_body" = "";
