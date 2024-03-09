@@ -357,6 +357,10 @@ struct RouteRequests {
         static func burstGroupFiles(for groupId: Int) -> URL {
             return bestScene +/ "\(groupId)/files"
         }
+        
+        static func deleteSelectedPhotos(for groupId: Int) -> URL {
+            return bestScene +/ "\(groupId)"
+        }
     }
 
     // MARK: - Print
