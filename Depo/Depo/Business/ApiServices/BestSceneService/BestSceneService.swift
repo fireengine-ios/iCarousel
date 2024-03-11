@@ -17,29 +17,33 @@ final class BestSceneService: BaseRequestService {
         debugLog("deleteSelectedPhotos")
         
         let url = RouteRequests.HomeCards.deleteSelectedPhotos(for: groupId)
+        let parameters: Parameters = ["delete": ["file-1-uuid"]]
         
         return SessionManager
             .customDefault
-            .request(url)
+            .request(url, parameters: parameters)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
+    
+    @discardableResult
+    func keepAllPhotosInGroup(groupId: Int, photoIds: [String], handler: @escaping (ResponseResult<KeepAllPhotosResponse>) -> Void) -> URLSessionTask? {
+        debugLog("keepAllPhotosInGroup")
+        
+        let url = RouteRequests.HomeCards.deleteSelectedPhotos(for: groupId)
+        let parameters: Parameters = ["delete": photoIds]
+        
+        return SessionManager
+            .customDefault
+            .request(url, parameters: parameters)
             .customValidate()
             .responseObject(handler)
             .task
     }
 }
 
-@discardableResult
-func keepAllPhotosInGroup(groupId: Int, photoIds: [String], handler: @escaping (ResponseResult<KeepAllPhotosResponse>) -> Void) -> URLSessionTask? {
-    debugLog("keepAllPhotosInGroup")
-    
-    let url = RouteRequests.HomeCards.deleteSelectedPhotos(for: groupId)
-    
-    return SessionManager
-        .customDefault
-        .request(url)
-        .customValidate()
-        .responseObject(handler)
-        .task
-}
+
 
 
 

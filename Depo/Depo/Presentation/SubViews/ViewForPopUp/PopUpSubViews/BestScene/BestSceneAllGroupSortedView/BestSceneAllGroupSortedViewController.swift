@@ -11,6 +11,8 @@ import SNCollectionViewLayout
 
 class BestSceneAllGroupSortedViewController: BaseViewController {
     
+    private let service = BestSceneService()
+    
     private lazy var customView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -46,7 +48,7 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.text = localized(.deleteInfo)
-        label.textColor = UIColor(red: 0.19, green: 0.19, blue: 0.19, alpha: 1.00)
+        label.textColor = AppColor.label.color
         label.font = UIFont(name: "TurkcellSaturaMed", size: 14)
         label.textAlignment = .left
         
@@ -97,7 +99,7 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
         snCollectionViewLayout.itemSpacing = 8
         snCollectionViewLayout.scrollDirection = .vertical
         
-        setupLayout()
+        setupLayout()        
     }
     
     init(coverPhotoUrl: String, fileListUrls: [String]) {
@@ -186,11 +188,15 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
     }()
     
     @objc func tappedDeleteButton() {
-         
+        service.deleteSelectedPhotos(groupId: 14962, photoIds: []) { response in
+            print("⚠️", response)
+        }
      }
      
      @objc func tappedKeepItemButton() {
-         
+         service.keepAllPhotosInGroup(groupId: 14962, photoIds: []) { response in
+             print("⚠️", response)
+         }
      }
 }
 

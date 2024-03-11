@@ -26,6 +26,10 @@ class DiscoverCard: BaseCardView {
     var imageUrls: [String] = []
     var groupId: [Int] = []
     
+    var coverPhotoUrl: String = ""
+    var fileListUrls: [String] = []
+    
+    
     @objc func updateImageUrls() {
         let imageUrls = userDefaultsVars.imageUrlsForBestScene
         if let newImageUrls = imageUrls as? [String] {
@@ -121,14 +125,18 @@ extension DiscoverCard: UICollectionViewDelegate, UICollectionViewDataSource, UI
                 let coverPhotoUrl = response.coverPhoto.tempDownloadURL
                 let fileListUrls = response.fileList.compactMap { $0.tempDownloadURL }
                 
-                DispatchQueue.main.async {
-                    let router = RouterVC()
-                    let controller = router.bestSceneAllGroupSortedViewController(coverPhotoUrl: coverPhotoUrl ?? "", fileListUrls: fileListUrls)
-                    router.pushViewController(viewController: controller)
-                }
+                self.coverPhotoUrl = coverPhotoUrl ?? ""
+                self.fileListUrls = fileListUrls
+                
             case .failed(let error):
                 print(error.localizedDescription)
             }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            let router = RouterVC()
+            let controller = router.bestSceneAllGroupSortedViewController(coverPhotoUrl: self.coverPhotoUrl, fileListUrls: self.fileListUrls)
+            router.pushViewController(viewController: controller)
         }
     }
     

@@ -18,7 +18,7 @@ class BestSceneAllGroupCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = UIFont(name: "TurkcellSaturaMed", size: 12)
-        label.textColor = UIColor(red: 0.01, green: 0.11, blue: 0.16, alpha: 1.00)
+        label.textColor = AppColor.label.color
         return label
     }()
     
