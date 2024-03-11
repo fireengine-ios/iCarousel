@@ -122,18 +122,15 @@ extension DiscoverCard: UICollectionViewDelegate, UICollectionViewDataSource, UI
             switch result {
             case .success(let response):
                 
-                let coverPhotoUrl = response.coverPhoto.tempDownloadURL
-                let fileListUrls = response.fileList.compactMap { $0.tempDownloadURL }
-                
-                self.coverPhotoUrl = coverPhotoUrl ?? ""
-                self.fileListUrls = fileListUrls
+                self.coverPhotoUrl = response.coverPhoto.tempDownloadURL ?? ""
+                self.fileListUrls = response.fileList.compactMap { $0.tempDownloadURL }
                 
             case .failed(let error):
                 print(error.localizedDescription)
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.async {
             let router = RouterVC()
             let controller = router.bestSceneAllGroupSortedViewController(coverPhotoUrl: self.coverPhotoUrl, fileListUrls: self.fileListUrls)
             router.pushViewController(viewController: controller)

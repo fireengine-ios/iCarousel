@@ -17,11 +17,14 @@ final class BestSceneService: BaseRequestService {
         debugLog("deleteSelectedPhotos")
         
         let url = RouteRequests.HomeCards.deleteSelectedPhotos(for: groupId)
-        let parameters: Parameters = ["delete": ["file-1-uuid"]]
+        
+        let parameters: Parameters = ["delete": photoIds]
+        
+        print("⚠️", parameters)
         
         return SessionManager
             .customDefault
-            .request(url, parameters: parameters)
+            .request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .customValidate()
             .responseObject(handler)
             .task
@@ -32,11 +35,14 @@ final class BestSceneService: BaseRequestService {
         debugLog("keepAllPhotosInGroup")
         
         let url = RouteRequests.HomeCards.deleteSelectedPhotos(for: groupId)
+        
         let parameters: Parameters = ["delete": photoIds]
+        print("⚠️", parameters)
+
         
         return SessionManager
             .customDefault
-            .request(url, parameters: parameters)
+            .request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .customValidate()
             .responseObject(handler)
             .task
