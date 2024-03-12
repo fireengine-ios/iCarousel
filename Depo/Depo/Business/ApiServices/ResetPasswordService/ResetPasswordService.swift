@@ -223,18 +223,18 @@ private extension ResetPasswordService {
     }
 
     func callSendSMS(referenceToken: String, completion: @escaping DefaultResponseCompletion<ResetPasswordResponse>) {
-//        let param = TokenInBody(token: referenceToken, url: RouteRequests.ForgotMyPassword.sendSMS)
-//        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { legacyResponse in
-//            do {
-//                let response = try legacyResponse.decodedResponse(ResetPasswordResponse.self)
-//                completion(.success(response))
-//            } catch {
-//                completion(.failure(error))
-//            }
-//        } fail: { error in
-//            completion(.failure(error))
-//        }
-//        executePostRequest(param: param, handler: handler)
+        let param = BodyToken(token: referenceToken, url: RouteRequests.ForgotMyPassword.sendSMS)
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { legacyResponse in
+            do {
+                let response = try legacyResponse.decodedResponse(ResetPasswordResponse.self)
+                completion(.success(response))
+            } catch {
+                completion(.failure(error))
+            }
+        } fail: { error in
+            completion(.failure(error))
+        }
+        executePostRequest(param: param, handler: handler)
     }
 
     func callValidatePhoneNumber(referenceToken: String, otp: String, completion: @escaping DefaultResponseCompletion<ResetPasswordResponse>) {
@@ -430,6 +430,27 @@ private struct TokenInBody: RequestParametrs {
         return url
     }
 
+    var header: RequestHeaderParametrs {
+        return RequestHeaders.base()
+    }
+}
+
+private struct BodyToken: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
+    
+    let token: String
+    let url: URL
+    
+    var requestParametrs: Any {
+        return token
+    }
+    
+    var patch: URL {
+        return url
+    }
+    
     var header: RequestHeaderParametrs {
         return RequestHeaders.base()
     }

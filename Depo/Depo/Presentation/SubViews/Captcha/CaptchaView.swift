@@ -185,7 +185,10 @@ final class CaptchaView: UIView, FromNib {
             }, fail: { [weak self] error in
                 let topController = UIApplication.topController()
                 if !((topController is LoginViewController) || (topController is RegistrationViewController)) {
-                    UIApplication.showErrorAlert(message: TextConstants.tooManyRequests)
+                    UIApplication.showCustomAlert(title: TextConstants.errorAlert,
+                                                  message: TextConstants.tooManyRequests,
+                                                  image: .custom(Image.iconErrorRed.image),
+                                                  buttonTitle: TextConstants.ok)
                 }
                 
         })
