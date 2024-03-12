@@ -194,8 +194,8 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
      }
      
      @objc func tappedKeepItemButton() {
-         service.keepAllPhotosInGroup(groupId: 14962, photoIds: []) { response in
-             print("⚠️", response)
+         service.keepAllPhotosInGroup(groupId: nil, photoIds: []) { response in
+             self.collectionView.reloadData()
          }
      }
 }

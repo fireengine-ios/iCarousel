@@ -29,6 +29,7 @@ class DiscoverCard: BaseCardView {
     var coverPhotoUrl: String = ""
     var fileListUrls: [String] = []
     
+    private var isScreenPresented = false
     
     @objc func updateImageUrls() {
         let imageUrls = userDefaultsVars.imageUrlsForBestScene
@@ -115,6 +116,10 @@ extension DiscoverCard: UICollectionViewDelegate, UICollectionViewDataSource, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard !isScreenPresented else { return }
+        isScreenPresented = true
+        
         let selectedGroupId = self.groupId[indexPath.row]
         
         homeCardsServiseDiscoverCard.getBestGroupWithId(with: selectedGroupId) { [weak self] result in
@@ -125,15 +130,16 @@ extension DiscoverCard: UICollectionViewDelegate, UICollectionViewDataSource, UI
                 self.coverPhotoUrl = response.coverPhoto.tempDownloadURL ?? ""
                 self.fileListUrls = response.fileList.compactMap { $0.tempDownloadURL }
                 
+                DispatchQueue.main.async {
+                    let router = RouterVC()
+                    let controller = router.bestSceneAllGroupSortedViewController(coverPhotoUrl: self.coverPhotoUrl, fileListUrls: self.fileListUrls)
+                    router.pushViewController(viewController: controller)
+                    self.isScreenPresented = false
+                }
+                
             case .failed(let error):
                 print(error.localizedDescription)
             }
-        }
-        
-        DispatchQueue.main.async {
-            let router = RouterVC()
-            let controller = router.bestSceneAllGroupSortedViewController(coverPhotoUrl: self.coverPhotoUrl, fileListUrls: self.fileListUrls)
-            router.pushViewController(viewController: controller)
         }
     }
     

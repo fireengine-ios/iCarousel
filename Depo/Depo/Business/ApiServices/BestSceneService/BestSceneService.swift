@@ -13,38 +13,34 @@ import SwiftyJSON
 final class BestSceneService: BaseRequestService {
     
     @discardableResult
-    func deleteSelectedPhotos(groupId: Int, photoIds: [String], handler: @escaping (ResponseResult<DeletePhotosResponse>) -> Void) -> URLSessionTask? {
+    func deleteSelectedPhotos(groupId: Int, photoIds: [String], handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("deleteSelectedPhotos")
         
         let url = RouteRequests.HomeCards.deleteSelectedPhotos(for: groupId)
         
-        let parameters: Parameters = ["delete": photoIds]
-        
-        print("⚠️", parameters)
+        let parameters: [String: Any] = ["delete": photoIds]
         
         return SessionManager
             .customDefault
             .request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .customValidate()
-            .responseObject(handler)
+            .responseVoid(handler)
             .task
     }
     
     @discardableResult
-    func keepAllPhotosInGroup(groupId: Int, photoIds: [String], handler: @escaping (ResponseResult<KeepAllPhotosResponse>) -> Void) -> URLSessionTask? {
+    func keepAllPhotosInGroup(groupId: Int?, photoIds: [String], handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("keepAllPhotosInGroup")
         
-        let url = RouteRequests.HomeCards.deleteSelectedPhotos(for: groupId)
+        let url = RouteRequests.HomeCards.deleteSelectedPhotos(for: groupId ?? 0)
         
-        let parameters: Parameters = ["delete": photoIds]
-        print("⚠️", parameters)
-
+        let parameters: [String: Any] = ["delete": photoIds]
         
         return SessionManager
             .customDefault
             .request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .customValidate()
-            .responseObject(handler)
+            .responseVoid(handler)
             .task
     }
 }

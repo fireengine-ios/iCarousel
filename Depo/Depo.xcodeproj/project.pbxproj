@@ -198,7 +198,6 @@
 		06A4B6222B7EB22F00119748 /* DiscoverCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06A4B61B2B7EB22F00119748 /* DiscoverCard.xib */; };
 		06A4B6232B7EB22F00119748 /* DiscoverCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06A4B61B2B7EB22F00119748 /* DiscoverCard.xib */; };
 		06F0F76A2B9D03F900B9A72A /* BestSceneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F0F7692B9D03F900B9A72A /* BestSceneService.swift */; };
-		06F0F76C2B9D0F5A00B9A72A /* DeletePhotosResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F0F76B2B9D0F5A00B9A72A /* DeletePhotosResponse.swift */; };
 		0708C7832677261100680ED6 /* PhotoPrintCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0708C7802677261000680ED6 /* PhotoPrintCard.swift */; };
 		0708C7842677261100680ED6 /* PhotoPrintCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0708C7802677261000680ED6 /* PhotoPrintCard.swift */; };
 		0708C7862677261100680ED6 /* PhotoPrintCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0708C7802677261000680ED6 /* PhotoPrintCard.swift */; };
@@ -10472,7 +10471,6 @@
 		06A4B61B2B7EB22F00119748 /* DiscoverCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscoverCard.xib; sourceTree = "<group>"; };
 		06B86902F4B6DCEC18002C23 /* FeedbackViewConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewConfigurator.swift; sourceTree = "<group>"; };
 		06F0F7692B9D03F900B9A72A /* BestSceneService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSceneService.swift; sourceTree = "<group>"; };
-		06F0F76B2B9D0F5A00B9A72A /* DeletePhotosResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePhotosResponse.swift; sourceTree = "<group>"; };
 		0708C7802677261000680ED6 /* PhotoPrintCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPrintCard.swift; sourceTree = "<group>"; };
 		0708C7812677261100680ED6 /* PhotoPrintCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoPrintCard.xib; sourceTree = "<group>"; };
 		070E96452742993A00CFED55 /* LifeBoxModel 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "LifeBoxModel 6.xcdatamodel"; sourceTree = "<group>"; };
@@ -13723,7 +13721,6 @@
 			isa = PBXGroup;
 			children = (
 				06F0F7692B9D03F900B9A72A /* BestSceneService.swift */,
-				06F0F76B2B9D0F5A00B9A72A /* DeletePhotosResponse.swift */,
 			);
 			path = BestSceneService;
 			sourceTree = "<group>";
@@ -28201,7 +28198,6 @@
 				8980D93C292620E200817FF8 /* DiscoverInteractorOutput.swift in Sources */,
 				8E26D97B2306999000D08123 /* MusicPresenter.swift in Sources */,
 				8C208642228D4B2E000BEDAD /* ScrollBarView.swift in Sources */,
-				06F0F76C2B9D0F5A00B9A72A /* DeletePhotosResponse.swift in Sources */,
 				8C0E8E3A1FDEBDFF00789C91 /* Equatable+Contains.swift in Sources */,
 				8C0E8E3C1FDEBDFF00789C91 /* UploadFromLifeBoxPhotosPresenter.swift in Sources */,
 				89B9D17B29BEFC2100C73307 /* CreateCollageDetailController.swift in Sources */,
