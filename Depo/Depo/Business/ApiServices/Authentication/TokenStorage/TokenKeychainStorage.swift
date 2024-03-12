@@ -25,7 +25,6 @@ final class TokenKeychainStorage: TokenStorage {
             guard let token = keychain.get(accessTokenKey) else {
                 return nil
             }
-            debugPrint("- accessToken", token)
             return token
         }
         set {
@@ -45,7 +44,6 @@ final class TokenKeychainStorage: TokenStorage {
             guard let token = keychain.get(refreshTokenKey) else {
                 return nil
             }
-            debugPrint("- refreshToken", token)
             return token
         }
         set {

@@ -2269,7 +2269,6 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "Photo limit exceeded.";
 "order_not_delivered" = "Your order could not be delivered to print";
 "order_not_delivered_detail" = "Your order could not be delivered to print for technical reasons. Please send a new print again.";
-"grace_banner_paycell_text" = "";
 
 /*Fuzzy*/
 "sync_page_offer_pop_up" = "Click now to discover advantageous lifebox packages special for you!";

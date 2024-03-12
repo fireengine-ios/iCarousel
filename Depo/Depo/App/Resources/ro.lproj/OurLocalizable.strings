@@ -2207,7 +2207,6 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "Limita fotografiilor a fost depășită.";
 "order_not_delivered" = "Comanda nu a putut fi livrată la imprimare";
 "order_not_delivered_detail" = "Comanda dvs. nu a putut fi livrată la imprimare din motive tehnice. Vă rugăm să trimiteți din nou o nouă imprimare.";
-"grace_banner_paycell_text" = "";
 
 /*Fuzzy*/
 "sync_page_offer_pop_up" = "Dă click acum pentru a descoperi pachetele avantajoase lifebox speciale pentru tine!";

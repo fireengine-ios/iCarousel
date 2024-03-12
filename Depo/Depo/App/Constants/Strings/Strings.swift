@@ -407,4 +407,5 @@ enum Strings: String, Localizable {
     case drawAlreadyJoin = "draw_already_join"
     case drawDetailHeader = "draw_detail_header"
     case pleaseEnterYourMsisdn = "please_enter_your_msisdn"
+    case selectSecurityQuestion = "select_security_question"
 }

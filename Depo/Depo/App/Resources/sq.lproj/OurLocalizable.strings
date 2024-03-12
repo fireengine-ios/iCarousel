@@ -2250,7 +2250,6 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "Kufiri i fotografisë tejkaluar.";
 "order_not_delivered" = "Porosia nuk mund të dorëzohej për printim";
 "order_not_delivered_detail" = "Porosia juaj nuk mund të dorëzohej në printim për arsye teknike. Ju lutemi dërgoni përsëri një printim të ri.";
-"grace_banner_paycell_text" = "";
 
 /*Fuzzy*/
 "sync_page_offer_pop_up" = "Klikoni tani për të zbuluar paketa të favorshme lifebox të veçanta për ju!";
