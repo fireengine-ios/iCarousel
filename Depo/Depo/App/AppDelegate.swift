@@ -541,37 +541,72 @@ extension AppDelegate {
     //MARK: Adjust
     
     func adjustDeeplinkResponse(_ deeplink: URL?) -> Bool {
-           
-           guard let url = deeplink else {
-               return false
-           }
-           
-           Adjust.appWillOpen(url)
-           
-           if let oldURL = Adjust.convertUniversalLink(url, scheme: SharedConstants.applicationQueriesSchemeShort) {
-               debugLog("Adjust old path :\(oldURL.path)")
-               if let host = oldURL.host {
-                   debugLog("Adjust old host :\(host)")
-                   
-                   if host == PushNotificationAction.packages.rawValue {
-                       if let data = oldURL.queryParameters["affiliate"] as? String {
-                           let result = ["affiliate" : data]
-                           if PushNotificationService.shared.assignDeepLink(innerLink: host, options: result) {
-                               PushNotificationService.shared.openActionScreen()
-                           }
-                       }
-                   } else if PushNotificationService.shared.assignDeepLink(innerLink: host, options: userActivity?.userInfo) {
-                       debugLog("Should open Action Screen")
-                       PushNotificationService.shared.openActionScreen()
-                   } else if PushNotificationService.shared.assignDeepLink(innerLink: host, options: userActivity?.userInfo) {
-                       debugLog("Should open Action Screen")
-                       PushNotificationService.shared.openActionScreen()
-                   }
-               }
-           }
-           
-           return false
-       }
+        
+        if userActivity?.activityType == CSSearchableItemActionType {
+            guard let albumUUID = userActivity?.userInfo?[CSSearchableItemActivityIdentifier] as? String,
+                  tokenStorage.accessToken != nil else {
+                return true
+            }
+            if PushNotificationService.shared.assignDeepLink(innerLink: PushNotificationAction.albumDetail.rawValue,
+                                                             options: [DeepLinkParameter.albumUUID.rawValue: albumUUID]) {
+                debugLog("Should open Action Screen")
+                PushNotificationService.shared.openActionScreen()
+            }
+        }
+        
+        if userActivity?.activityType == NSUserActivityTypeBrowsingWeb, let url = userActivity?.webpageURL {
+            if PushNotificationService.shared.assignUniversalLink(url: url) {
+                PushNotificationService.shared.openActionScreen()
+                return true
+            }
+            
+            Adjust.appWillOpen(url)
+            
+            if let oldURL = Adjust.convertUniversalLink(url, scheme: SharedConstants.applicationQueriesSchemeShort) {
+                debugLog("Adjust old path :\(oldURL.path)")
+                if let host = oldURL.host {
+                    debugLog("Adjust old host :\(host)")
+                    
+                    if userActivity?.userInfo?.count == 0 && host == PushNotificationAction.packages.rawValue {
+                        if let data = oldURL.queryParameters["affiliate"] as? String {
+                            let result = ["affiliate" : data]
+                            if PushNotificationService.shared.assignDeepLink(innerLink: host, options: result) {
+                                PushNotificationService.shared.openActionScreen()
+                            }
+                        }
+                    } else if userActivity?.userInfo?.count != 0 && PushNotificationService.shared.assignDeepLink(innerLink: host, options: userActivity?.userInfo) {
+                        debugLog("Should open Action Screen")
+                        PushNotificationService.shared.openActionScreen()
+                    } else if PushNotificationService.shared.assignDeepLink(innerLink: host, options: userActivity?.userInfo) {
+                        debugLog("Should open Action Screen")
+                        PushNotificationService.shared.openActionScreen()
+                    }
+                }
+            }
+        }
+        
+        if let incomingUrl = userActivity?.webpageURL {
+            if AGCAppLinking.instance().continueUserActivity(userActivity ?? NSUserActivity(activityType: "")) {
+                storageVars.isAppFirstLaunchForPublicSharedItems = false
+                return true
+            }
+            
+            let linkHandled = DynamicLinks.dynamicLinks().handleUniversalLink(incomingUrl) { (dynamicLink, error) in
+                guard error == nil else { return }
+                if let dynamicLink = dynamicLink {
+                    self.storageVars.isAppFirstLaunchForPublicSharedItems = false
+                    self.handleIncomingDynamicLink(dynamicLink)
+                }
+            }
+            if linkHandled {
+                return true
+            } else {
+                return false
+            }
+        }
+        
+        return true
+    }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
 
