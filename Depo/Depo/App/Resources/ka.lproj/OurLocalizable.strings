@@ -2199,7 +2199,6 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "";
 "order_not_delivered" = "";
 "order_not_delivered_detail" = "";
-"grace_banner_paycell_text" = "";
 "sync_page_offer_pop_up" = "დააჭირე და აღმოაჩინე შენთვის ხელსაყრელი lifebox-ის პაკეტები!";
 "validate_purchase_already_subscribed_text" = "აღნიშნული გამოწერა უკვე აქტიურია %@ ანგარიშზე, ელ.ფოსტით %@ სხვა lifebox მომხმარებლისთვის. გაითვალისწინე, რომ lifebox-ის სხვადასხვა ანგარიშის გამოყენებამ, იმავე Apple/Google-ის ანგარიშით, შესაძლოა გამოიწვიოს ეს ვითარება.";
 "print_edit_cancel_popup_info" = "";

@@ -29,6 +29,9 @@ final class DrawCampaignCard: BaseCardView {
     @IBOutlet private weak var imageView: LoadingImageView! {
         willSet {
             newValue.contentMode = .scaleToFill
+            newValue.isUserInteractionEnabled = true
+            let tapImage = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+            newValue.addGestureRecognizer(tapImage)
         }
     }
     
@@ -102,6 +105,12 @@ final class DrawCampaignCard: BaseCardView {
     }
     
     @IBAction private func onActionButton(_ sender: UIButton) {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .discoverCampaignCard(campaignId: campaignId))
+        let vc = router.drawCampaign(campaignId: campaignId)
+        router.pushViewController(viewController: vc, animated: false)
+    }
+    
+    @objc private func imageTapped() {
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .discoverCampaignCard(campaignId: campaignId))
         let vc = router.drawCampaign(campaignId: campaignId)
         router.pushViewController(viewController: vc, animated: false)

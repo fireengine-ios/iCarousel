@@ -2207,7 +2207,6 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "Das Limit für den Fotodruck wurde überschritten.";
 "order_not_delivered" = "Bestellung konnte nicht zum Druck übertragen werden";
 "order_not_delivered_detail" = "Ihre Bestellung konnte aus technischen Gründen nicht zum Druck übertragen werden. Bitte geben Sie einen neuen Druckauftrag auf.";
-"grace_banner_paycell_text" = "";
 
 /*Fuzzy*/
 "sync_page_offer_pop_up" = "Klicken Sie jetzt, um die vorteilhaften lifebox-Pakete zu entdecken, die speziell für Sie bestimmt sind!";

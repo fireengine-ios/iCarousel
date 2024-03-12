@@ -2275,7 +2275,6 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "Fotoğraf limiti aşıldı.";
 "order_not_delivered" = "Siparişin Baskıya Teslim Edilemedi";
 "order_not_delivered_detail" = "Siparişin teknik nedenlerden dolayı baskıya teslim edilemedi. Lütfen tekrar yeni baskı gönderiniz.";
-"grace_banner_paycell_text" = "";
 
 /*Fuzzy*/
 "sync_page_offer_pop_up" = "Sana özel avantajlı lifebox paketlerini keşfetmek için hemen tıkla!";
