@@ -261,7 +261,7 @@ enum Strings: String, Localizable {
     // MARK: - Contact Us
     
     case contactUsComplaintCellfie = "contact_us_complaint_cellfie"
-    case photoPrint = "new_print"
+    case photoPrint = "print"
     
     // MARK: - Photo Print
     case selectedForPrint = "selected_for_print"
@@ -378,4 +378,34 @@ enum Strings: String, Localizable {
     case setRecoveryMailSecurityQuestionSuccess = "set_recoverymail_securityquestion_success"
     case settingsSetPasswordApppleWarning = "settings_set_password_apple_warning"
     case lifeboxResignupWarning = "lifebox_resignup_warning"
+    case photoMaxSelectionBody = "photo_max_selection_body"
+    case photoMaxSelectionTitle = "photo_max_selection_title"
+    
+    case canNotSentOtpSms = "can_not_sent_otp_sms"
+    case invalidRefenrenceCode = "invalid_refenrence_code"
+    case tooManyRequests = "too_many_requests"
+    case noAccountFound = "no_account_found"
+    case invalidOtp = "invalid_otp"
+    case twoFaTooManyRequestsErrorMessage = "two_fa_too_many_requests_error_message"
+    case forgotMyPasswordInfo = "forgot_my_password_info"
+    case securityQuestionInvalid = "security_question_invalid"
+    case accountHasForeignSubscription = "ACCOUNT_HAS_FOREIGN_SUBSCRIPTION"
+    case deleteForSelected = "delete_for_selected"
+    case keepEverything = "keep_everything"
+    case deleteInfo = "delete_info"
+    case bestPhoto = "best_photo"
+    
+    case bestscenediscovercardtitle = "best_scene_discover_card_title"
+    case bestscenediscovercardbody = "best_scene_discover_card_body"
+    
+    case drawEnddate = "draw_enddate"
+    case drawDetailButton = "draw_detail_button"
+    case drawJoin = "draw_join"
+    case drawWarningHeader = "draw_warning_header"
+    case drawWarningBody = "draw_warning_body"
+    case drawPackageButton = "draw_package_button"
+    case drawAlreadyJoin = "draw_already_join"
+    case drawDetailHeader = "draw_detail_header"
+    case pleaseEnterYourMsisdn = "please_enter_your_msisdn"
+    case selectSecurityQuestion = "select_security_question"
 }

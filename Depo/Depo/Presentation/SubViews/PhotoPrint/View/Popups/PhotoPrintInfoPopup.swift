@@ -71,14 +71,14 @@ final class PhotoPrintInfoPopup: BasePopUpController {
     //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let maxSelection = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
+        titleLabel.text = String(format: localized(.printInfoPopUpTitle), maxSelection)
+        descriptionLabel.text = String(format: localized(.printInfoPopUpSubtitle), maxSelection)
         
         exitImageView.isUserInteractionEnabled = true
         let tapImage = UITapGestureRecognizer(target: self, action: #selector(dismissPopup))
         exitImageView.addGestureRecognizer(tapImage)
-        
-        let maxSelection = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
-        titleLabel.text = String(format: localized(.printInfoPopUpTitle), maxSelection)
-        descriptionLabel.text = String(format: localized(.printInfoPopUpSubtitle), maxSelection)
     }
     
     @IBAction func checkBoxButtonTapped(_ sender: Any) {

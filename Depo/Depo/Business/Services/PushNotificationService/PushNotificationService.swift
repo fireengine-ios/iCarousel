@@ -247,6 +247,8 @@ final class PushNotificationService {
         case .brandAmbassador: openBrandAmbassador()
         case .foryou: openForyou()
         case .discover: openDiscover()
+        case .drawCampaign: openDrawCampaign()
+        case .photoprint: openPhotoPrint()
         }
         
         
@@ -644,8 +646,28 @@ private extension PushNotificationService {
     }
     
     func openDiscover() {
-         let root = RouterVC()
+        let root = RouterVC()
         root.openTabBarItem(index: .discover)
+    }
+    
+    func openDrawCampaign() {
+        let campaignId = storageVars.drawCampaignDeeplinkId
+        pushTo(router.drawCampaign(campaignId: campaignId))
+    }
+    
+    func openPhotoPrint() {
+        let isPackage = SingletonStorage.shared.accountInfo?.photoPrintPackage ?? true
+        let sendRemaining = SingletonStorage.shared.accountInfo?.photoPrintSendRemaining ?? 0
+        let maxSelection = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
         
+        if !isPackage {
+            openPackages()
+        } else {
+            if sendRemaining == 0 {
+                openForyou()
+            } else {
+                pushTo(router.photoPrintSelectPhotos())
+            }
+        }
     }
 }

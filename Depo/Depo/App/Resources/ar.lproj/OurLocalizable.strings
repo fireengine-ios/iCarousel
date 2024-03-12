@@ -4,7 +4,7 @@
 "This file will be removed only from your album. You can access this file from Photos tab" = "لن يحذف هذا الملف إلا من الألبوم. يمكن الوصول إليه من علامة تبويب الصور.";
 "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "لن يؤدي حذف هذا الألبوم إلى إزالة الملفات من لايف بوكس. يمكن الوصول إليها من علامة تبويب الصور. هل أنت متأكد من حذف الألبوم؟";
 "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "سوف تنتقل الملفات المختارة لسلة المهملات. سوف يمكنكم استرجاع ما بداخل سلة المهملات خلال 90 يوما.وإذا لزم فتح مساحة بذاكرة lifebox  فلا تنسى أولا تفريغ ما بسلة المهملات.";
-"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "سوف تنتقل الملفات المختارة لسلة المهملات. سوف يمكنكم استرجاع ما بداخل سلة المهملات خلال 90 يوما.وإذا لزم فتح مساحة بذاكرة lifebox  فلا تنسى أولا تفريغ ما بسلة المهملات.";
+"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "سيتم نقل الملف (الملفات) المحددة إلى سلة المهملات (الملفات التي تمت مزامنتها فقط). في غضون 90 يومًا ستتمكن من استعادتها. إذا كنت بحاجة إلى إخلاء مساحة في lifebox الخاص بك، يُرجى تذكُّر إفراغ سلة المهملات أولاً.";
 "Purchase" = "شراء";
 "Packages" = "الحزم";
 "Verification code is blocked.\nPlease request a new code" = "حُظِرَ رمز التحقق. يرجى طلب رمز تحقق آخر.";
@@ -2219,7 +2219,6 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "تم تجاوز حد الصورة.";
 "order_not_delivered" = "لا يمكن تسليم الطلب للطباعة";
 "order_not_delivered_detail" = "لا يمكن تسليم طلبك للطباعة لأسباب فنية. الرجاء إرسال نسخة جديدة مرة أخرى.";
-"grace_banner_paycell_text" = "";
 
 /*Fuzzy*/
 "sync_page_offer_pop_up" = "انقر الآن لاكتشاف حزم lifebox المفيدة والمخصصة لك!";
@@ -2247,7 +2246,31 @@ then {11,99 TRY/Month}*/
 "set_recoverymail_securityquestion_success" = "تم إنشاء البريد الإلكتروني الخاص بالاسترداد وسؤال الأمان.";
 "settings_set_password_apple_warning" = "لتعيين كلمة المرور الخاصة بك، يجب عليك تسجيل الدخول إلى lifebox باستخدام حساب Apple الخاص بك.";
 "lifebox_resignup_warning" = "حساب للمعلومات التي أدخلتها موجود بالفعل. إذا تابعت، سيتم حذف رقم GSM من الحساب الآخر. لن تتمكن من الوصول إلى حسابك إلا باستخدام عنوان بريدك الإلكتروني وكلمة المرور. هل أنت متأكد من رغبتك في المتابعة؟";
-"best_scene_discover_card_title" = "سلسلة الصور";
+
+/*Fuzzy*/
+"best_scene_title" = "سلسلة الصور";
 "best_scene_discover_card_body" = "اختر الأفضل من سلسلة الصور!";
 "print_discover_card_title" = "طباعة الحزمة";
 "print_discover_card_body" = "اطبع ما يصل إلى 5 من صورك كل شهر مع باقة طباعة وأرسلها مباشرةً إلى عنوانك مجاناً.";
+"can_not_sent_otp_sms" = "";
+"invalid_refenrence_code" = "";
+"delete_for_selected" = "";
+"keep_everything" = "";
+"delete_info" = "";
+"best_scene_discover_card_title" = "سلسلة الصور";
+"forgot_my_password_info" = "";
+"best_photo" = "";
+"security_question_invalid" = "";
+"select_security_question" = "";
+"draw_enddate" = "";
+"draw_detail_button" = "Raffle Details";
+"draw_join" = "Join the Raffle";
+"draw_warning_header" = "You Couldn't Participate in the Raffle";
+"draw_warning_body" = "Only those with paid packages can participate in our campaign. Buy a package now and participate in the raffle again.";
+"draw_package_button" = "Go to Packages";
+"draw_already_join" = "You have entered the raffle";
+"draw_detail_header" = "Raffle Details";
+"draw_success" = "";
+"delete_popup_title" = "";
+"delete_popup_body" = "";
+"please_enter_your_msisdn" = "";

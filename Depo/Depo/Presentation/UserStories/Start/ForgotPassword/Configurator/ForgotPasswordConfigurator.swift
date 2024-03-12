@@ -10,14 +10,14 @@ import UIKit
 
 class ForgotPasswordModuleConfigurator {
 
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
+    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, loginText: String) {
 
         if let viewController = viewInput as? ForgotPasswordViewController {
-            configure(viewController: viewController)
+            configure(viewController: viewController, loginText: loginText)
         }
     }
 
-    private func configure(viewController: ForgotPasswordViewController) {
+    private func configure(viewController: ForgotPasswordViewController, loginText: String) {
 
         let router = ForgotPasswordRouter()
 
@@ -30,6 +30,7 @@ class ForgotPasswordModuleConfigurator {
 
         presenter.interactor = interactor
         viewController.output = presenter
+        viewController.loginEnterViewText = loginText
     }
 
 }

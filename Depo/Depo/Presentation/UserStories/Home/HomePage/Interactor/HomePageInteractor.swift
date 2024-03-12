@@ -8,7 +8,7 @@
 
 
 final class HomePageInteractor: HomePageInteractorInput {
-
+    
     private enum RefreshStatus {
         case reloadAll
         case reloadSingle
@@ -23,11 +23,12 @@ final class HomePageInteractor: HomePageInteractorInput {
     private lazy var accountService = AccountService()
     private let packageService = PackageService()
     private lazy var storageVars: StorageVars = factory.resolve()
-
+    
     private let smartAlbumsManager: SmartAlbumsManager = factory.resolve()
     private let campaignService = CampaignServiceImpl()
-
+    
     private var isShowPopupAboutPremium = true
+    private var isShowPopupDiscoverCard = true
     private(set) var homeCardsLoaded = false
     private var isFirstAuthorityRequest = true
     private var bannerCallMethodCount: Int = 0
@@ -39,15 +40,16 @@ final class HomePageInteractor: HomePageInteractorInput {
         self.homeCardsLoaded = true
         self.output.fillCollectionView(isReloadAll: isReloadAll)
     }
-
+    
     func viewIsReady() {
         homeCardsService.delegate = self
         FreeAppSpace.session.showFreeUpSpaceCard()
         FreeAppSpace.session.checkFreeUpSpace()
-
+        
         getQuotaInfo()
         getAccountInfo()
         getPremiumCardInfo(loadStatus: .reloadAll)
+        getBestScene()
         getAllCardsForHomePage()
         getCampaignStatus()
         
@@ -70,7 +72,7 @@ final class HomePageInteractor: HomePageInteractorInput {
         getPremiumCardInfo(loadStatus: .reloadAll)
         getAllCardsForHomePage()
     }
-
+    
     func updateLocalUserDetail() {
         getPremiumCardInfo(loadStatus: .reloadSingle)
         getInstaPickInfo()
@@ -119,7 +121,7 @@ final class HomePageInteractor: HomePageInteractorInput {
             case let .success(response):
                 let dates = response.dates
                 let isActive = Date().isInRange(start: dates.startDate, end: dates.launchDate)
-
+                
                 if isActive && SingletonStorage.shared.isUserFromTurkey {
                     DispatchQueue.toMain {
                         self?.output.showGiftBox()
@@ -172,7 +174,7 @@ final class HomePageInteractor: HomePageInteractorInput {
             switch response {
             case .success(let result):
                 AuthoritySingleton.shared.refreshStatus(with: result)
-
+                
                 SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] response in
                     DispatchQueue.main.async {
                         self?.fillCollectionView(isReloadAll: loadStatus == .reloadAll)
@@ -180,9 +182,9 @@ final class HomePageInteractor: HomePageInteractorInput {
                 }, fail: { [weak self] error in
                     DispatchQueue.main.async {
                         self?.fillCollectionView(isReloadAll: true)
-
+                        
                         self?.output.didObtainError(with: error.description,
-                                                           isNeedStopRefresh: loadStatus == .reloadSingle)
+                                                    isNeedStopRefresh: loadStatus == .reloadSingle)
                     }
                 })
                 
@@ -196,11 +198,36 @@ final class HomePageInteractor: HomePageInteractorInput {
                     }
                     
                     self?.output.didObtainError(with: error.description,
-                                                       isNeedStopRefresh: loadStatus == .reloadSingle)
+                                                isNeedStopRefresh: loadStatus == .reloadSingle)
                 }
             }
         }
     }
+    
+    
+    private func getBestScene() {
+        homeCardsService.getBestGroup { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let response):
+                _ = response.map { burstGroup -> HomeCardResponse in
+                    let homeCard = HomeCardResponse()
+                    homeCard.id = burstGroup.id
+                    homeCard.type = .discoverCard
+                    let imageUrls = response.map { $0.coverPhoto.metadata.thumbnailMedium }.compactMap { $0 }
+                    let burstGroupId = response.map { $0.id }.compactMap { $0 }
+                    let createdDate = response.first?.groupDate
+                    self.output.didObtainHomeCardsBestScene(homeCard, imageUrls: imageUrls, createdDate: createdDate ?? 0, groupId: burstGroupId)
+                    return homeCard
+                }
+            case .failed(let error):
+                DispatchQueue.main.async {
+                    self.output.didObtainError(with: error.localizedDescription, isNeedStopRefresh: false)
+                }
+            }
+        }
+    }
+    
     
     private func getInstaPickInfo() {
         instapickService.getAnalyzesCount { [weak self] result in
@@ -368,12 +395,12 @@ final class HomePageInteractor: HomePageInteractorInput {
 }
 
 extension HomePageInteractor: HomeCardsServiceImpDelegte {
- 
+    
     func albumHiddenSuccessfully(_ successfully: Bool) {
         let message = successfully ? TextConstants.hideSingleAlbumSuccessPopupMessage : TextConstants.temporaryErrorOccurredTryAgainLater
         output.showSnackBarWith(message: message)
     }
-        
+    
     func needUpdateHomeScreen() {
         getAllCardsForHomePage()
     }

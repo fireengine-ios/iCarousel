@@ -43,7 +43,8 @@ protocol StorageVars: AnyObject {
     var discoverHighlightIndex: Int { get set }
     var highlightedIsFirstLogin: Bool { get set }
     var highlightedPopUpPackageBack: Bool { get set }
-
+    var drawCampaignPackage: Bool { get set }
+    var drawCampaignDeeplinkId: Int { get set }
     func value(forDeepLinkParameter key: DeepLinkParameter) -> Any?
 }
 
@@ -97,6 +98,12 @@ final class UserDefaultsVars: StorageVars {
             return ""
         }
         return version
+    }
+    
+    private let isProcessPrepairingDoneKey = "isProcessDonePrepairing"
+    var isProcessPrepairingDone: Bool? {
+        get { return userDefaults.bool(forKey: isProcessPrepairingDoneKey) }
+        set { userDefaults.set(newValue, forKey: isProcessPrepairingDoneKey) }
     }
     
     private let currentAppVersionKey = "currentAppVersionKey"
@@ -308,4 +315,33 @@ final class UserDefaultsVars: StorageVars {
         set { userDefaults.set(newValue, forKey: highlightedPopUpPackageBackKey) }
     }
     
+    private let imageUrlsForBestSceneKey = "imageUrlsForBestSceneKey"
+      var imageUrlsForBestScene: [String] {
+        get { return userDefaults.object(forKey: imageUrlsForBestSceneKey) as? [String] ?? [] }
+        set { userDefaults.set(newValue, forKey: imageUrlsForBestSceneKey) }
+      }
+    
+    private let drawCampaignPackageKey = "drawCampaignPackageKey"
+    var drawCampaignPackage: Bool {
+        get { return userDefaults.object(forKey: drawCampaignPackageKey) as? Bool ?? false }
+        set { userDefaults.set(newValue, forKey: drawCampaignPackageKey) }
+    }
+    
+    private let dateForBestSceneKey = "dateForBestSceneKey"
+    var dateForBestScene: Int {
+        get { return userDefaults.object(forKey: dateForBestSceneKey) as? Int ?? 0 }
+        set { userDefaults.set(newValue, forKey: dateForBestSceneKey) }
+    }
+    
+    private let groupIdBestSceneKey = "groupIdBestSceneKey"
+    var groupIdBestScene: [Int] {
+        get { return userDefaults.object(forKey: groupIdBestSceneKey) as? [Int] ?? [] }
+        set { userDefaults.set(newValue, forKey: groupIdBestSceneKey) }
+    }
+    
+    private let drawCampaignDeeplinkIdKey = "drawCampaignDeeplinkIdKey"
+    var drawCampaignDeeplinkId: Int {
+        get { return userDefaults.object(forKey: drawCampaignDeeplinkIdKey) as? Int ?? 0 }
+        set { userDefaults.set(newValue, forKey: drawCampaignDeeplinkIdKey) }
+    }
 }

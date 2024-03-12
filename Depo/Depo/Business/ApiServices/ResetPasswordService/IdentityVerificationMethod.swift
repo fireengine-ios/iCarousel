@@ -11,7 +11,7 @@ import Foundation
 enum IdentityVerificationMethod: Codable {
     case email(email: String)
     case recoveryEmail(email: String)
-    case securityQuestion(id: Int)
+    case securityQuestion
     case sms(phone: String)
     case unknown
 
@@ -31,8 +31,7 @@ enum IdentityVerificationMethod: Codable {
             let content = try container.decode(String.self, forKey: .content)
             self = .recoveryEmail(email: content)
         case "SECURITY_QUESTION":
-            let content = try container.decode(Int.self, forKey: .content)
-            self = .securityQuestion(id: content)
+            self = .securityQuestion
         case "MSISDN":
             let content = try container.decode(String.self, forKey: .content)
             self = .sms(phone: content)
@@ -43,5 +42,25 @@ enum IdentityVerificationMethod: Codable {
 
     func encode(to encoder: Encoder) throws {
 
+    }
+}
+
+enum VerificationMethod {
+    case eMail
+    case recoveryEMail
+    case securityQuestion
+    case msisdn
+    
+    var methodString: String {
+        switch self {
+        case .eMail:
+            return "EMAIL"
+        case .recoveryEMail:
+            return "RECOVERY_EMAIL"
+        case .securityQuestion:
+            return "SECURITY_QUESTION"
+        case .msisdn:
+            return "MSISDN"
+        }
     }
 }

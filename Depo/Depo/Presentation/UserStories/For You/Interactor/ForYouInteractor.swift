@@ -70,7 +70,8 @@ final class ForYouInteractor {
                 return
             }
             self?.group.leave()
-            self?.output.getPeople(data: (response.list.map({ PeopleItem(response: $0) })))
+            let filterResponse = response.list.filter({$0.visible == true})
+            self?.output.getPeople(data: (filterResponse.map({ PeopleItem(response: $0) })))
         }, fail: { error in
             self.group.leave()
             debugLog("ForYou Error getPeople: \(error.errorCode)-\(String(describing: error.errorDescriptionLog))")
@@ -94,7 +95,7 @@ final class ForYouInteractor {
             }
             
             let list = resultResponse.list.compactMap { AlbumItem(remote: $0) }
-            self?.output.getAlbums(data: list)
+            self?.output.getAlbums(data: list.filter({ $0.preview?.id != nil }))
             self?.group.leave()
             
         }, fail: { errorResponse in
@@ -293,7 +294,8 @@ final class ForYouInteractor {
             self?.group.leave()
             switch result {
             case .success(let response):
-                self?.output.getPrintedPhotos(data: response)
+                let reversedData = Array(response.reversed())
+                self?.output.getPrintedPhotos(data: reversedData)
             case .failed(let error):
                 debugLog("ForYou Error getPrintedPhotos: \(error.description)-\(String(describing: error.description))")
                 break

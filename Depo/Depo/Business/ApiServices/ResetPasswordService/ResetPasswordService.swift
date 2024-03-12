@@ -16,7 +16,7 @@ protocol ResetPasswordServiceProtocol {
     func beginResetFlow(with params: ForgotPasswordV2)
     func proceedVerification(with method: IdentityVerificationMethod)
     func sendOTP()
-    func verifyOTP(code: String)
+    func verifyOTP(referenceToken: String, code: String)
     func validateSecurityQuestion(id: Int, answer: String)
     func reset(newPassword: String)
 }
@@ -28,15 +28,17 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
     weak var delegate: ResetPasswordServiceDelegate?
 
     private let sessionManager = SessionManager.sessionWithoutAuth
-    private var referenceToken: String?
+    private(set) var referenceToken: String?
+    private var action: ResetPassword.ContinuationAction = .withSMSVerification
+    private(set) var msisdn: String?
     private(set) var isInSecondChallenge: Bool = false
 
     func beginResetFlow(with params: ForgotPasswordV2) {
         callForgotMyPassword(params: params) { result in
             switch result {
             case let .success(response):
+                self.msisdn = params.msisdn
                 self.handleFirstResponse(response)
-
             case let .failure(error):
                 self.delegate?.resetPasswordService(self, receivedError: error)
             }
@@ -91,13 +93,11 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
         }
     }
 
-    func verifyOTP(code: String) {
-        guard let referenceToken = self.referenceToken else { return }
+    func verifyOTP(referenceToken: String, code: String) {
         callValidatePhoneNumber(referenceToken: referenceToken, otp: code) { result in
             switch result {
-            case .success:
-                self.checkStatusAfterPhoneVerification(referenceToken: referenceToken)
-
+            case .success(let response):
+                self.afterVeriyfOTP(response: response, referenceToken: referenceToken)
             case let .failure(error):
                 self.delegate?.resetPasswordService(self, receivedError: error)
             }
@@ -130,7 +130,22 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
 
     private func handleFirstResponse(_ response: ResetPasswordResponse) {
         referenceToken = response.referenceToken
-        delegate?.resetPasswordService(self, resetBeganWithMethods: response.methods)
+        action = response.action ?? .withAvailableMethods
+        //delegate?.resetPasswordService(self, resetBeganWithMethods: response.methods)
+        
+        switch response.action {
+        case .withEmailLinkVerification:
+            delegate?.successForgotMyPassWordWithMail()
+        case .withSMSVerification:
+            delegate?.receivedOTPVerification(response.methods)
+            //delegate?.resetPasswordService(self, resetBeganWithMethods: response.methods)
+        case .withAvailableMethods:
+            return
+        case .withRecoveryEmailLinkVerification:
+            return
+        case .none:
+            return
+        }
     }
 
     private func proceedWithEmail(referenceToken: String, completion: @escaping DefaultResponseCompletion<Void>) {
@@ -161,6 +176,12 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
             }
         }
     }
+    
+    private func afterVeriyfOTP(response: ResetPasswordResponse, referenceToken: String) {
+        self.isInSecondChallenge = true
+        self.referenceToken = response.referenceToken
+        self.delegate?.resetPasswordService(self, phoneVerified: response.methods)
+    }
 }
 
 // MARK: - API Calls
@@ -182,27 +203,43 @@ private extension ResetPasswordService {
     }
     
     func callSendEmail(referenceToken: String, completion: @escaping DefaultResponseCompletion<Void>) {
-        let param = TokenInBody(token: referenceToken, url: RouteRequests.ForgotMyPassword.sendEmail)
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { _ in
-            completion(.success(()))
-        } fail: { error in
-            completion(.failure(error))
-        }
-        executePostRequest(param: param, handler: handler)
+//        let param = TokenInBody(token: referenceToken, url: RouteRequests.ForgotMyPassword.sendEmail)
+//        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { _ in
+//            completion(.success(()))
+//        } fail: { error in
+//            completion(.failure(error))
+//        }
+//        executePostRequest(param: param, handler: handler)
     }
 
     func callSendRecoveryEmail(referenceToken: String, completion: @escaping DefaultResponseCompletion<Void>) {
-        let param = TokenInBody(token: referenceToken, url: RouteRequests.ForgotMyPassword.sendRecoveryEmail)
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { _ in
-            completion(.success(()))
-        } fail: { error in
-            completion(.failure(error))
-        }
-        executePostRequest(param: param, handler: handler)
+//        let param = TokenInBody(token: referenceToken, url: RouteRequests.ForgotMyPassword.sendRecoveryEmail)
+//        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { _ in
+//            completion(.success(()))
+//        } fail: { error in
+//            completion(.failure(error))
+//        }
+//        executePostRequest(param: param, handler: handler)
     }
 
     func callSendSMS(referenceToken: String, completion: @escaping DefaultResponseCompletion<ResetPasswordResponse>) {
-        let param = TokenInBody(token: referenceToken, url: RouteRequests.ForgotMyPassword.sendSMS)
+//        let param = TokenInBody(token: referenceToken, url: RouteRequests.ForgotMyPassword.sendSMS)
+//        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { legacyResponse in
+//            do {
+//                let response = try legacyResponse.decodedResponse(ResetPasswordResponse.self)
+//                completion(.success(response))
+//            } catch {
+//                completion(.failure(error))
+//            }
+//        } fail: { error in
+//            completion(.failure(error))
+//        }
+//        executePostRequest(param: param, handler: handler)
+    }
+
+    func callValidatePhoneNumber(referenceToken: String, otp: String, completion: @escaping DefaultResponseCompletion<ResetPasswordResponse>) {
+        let verificationMethod = VerificationMethod.msisdn.methodString
+        let param = ValidatePhoneNumber(token: referenceToken, otp: otp, verificationMethod: verificationMethod)
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { legacyResponse in
             do {
                 let response = try legacyResponse.decodedResponse(ResetPasswordResponse.self)
@@ -210,16 +247,6 @@ private extension ResetPasswordService {
             } catch {
                 completion(.failure(error))
             }
-        } fail: { error in
-            completion(.failure(error))
-        }
-        executePostRequest(param: param, handler: handler)
-    }
-
-    func callValidatePhoneNumber(referenceToken: String, otp: String, completion: @escaping DefaultResponseCompletion<Void>) {
-        let param = ValidatePhoneNumber(token: referenceToken, otp: otp)
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { _ in
-            completion(.success(()))
         } fail: { error in
             completion(.failure(error))
         }
@@ -227,22 +254,23 @@ private extension ResetPasswordService {
     }
 
     func callCheckStatus(referenceToken: String, completion: @escaping DefaultResponseCompletion<ResetPasswordResponse>) {
-        let param = TokenInBody(token: referenceToken, url: RouteRequests.ForgotMyPassword.checkStatus)
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { legacyResponse in
-            do {
-                let response = try legacyResponse.decodedResponse(ResetPasswordResponse.self)
-                completion(.success(response))
-            } catch {
-                completion(.failure(error))
-            }
-        } fail: { error in
-            completion(.failure(error))
-        }
-        executePostRequest(param: param, handler: handler)
+//        let param = TokenInBody(token: referenceToken, url: RouteRequests.ForgotMyPassword.checkStatus)
+//        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { legacyResponse in
+//            do {
+//                let response = try legacyResponse.decodedResponse(ResetPasswordResponse.self)
+//                completion(.success(response))
+//            } catch {
+//                completion(.failure(error))
+//            }
+//        } fail: { error in
+//            completion(.failure(error))
+//        }
+//        executePostRequest(param: param, handler: handler)
     }
 
     func callContinueWithEmail(referenceToken: String, completion: @escaping DefaultResponseCompletion<Void>) {
-        let param = TokenInBody(token: referenceToken, url: RouteRequests.ForgotMyPassword.continueWithEmail)
+        let verificationMethod = VerificationMethod.eMail.methodString
+        let param = TokenInBody(referenceToken: referenceToken, verificationMethod: verificationMethod)
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { _ in
             completion(.success(()))
         } fail: { error in
@@ -252,7 +280,8 @@ private extension ResetPasswordService {
     }
 
     func callContinueWithRecoveryEmail(referenceToken: String, completion: @escaping DefaultResponseCompletion<Void>) {
-        let param = TokenInBody(token: referenceToken, url: RouteRequests.ForgotMyPassword.continueWithRecoveryEmail)
+        let verificationMethod = VerificationMethod.recoveryEMail.methodString
+        let param = TokenInBody(referenceToken: referenceToken, verificationMethod: verificationMethod)
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { _ in
             completion(.success(()))
         } fail: { error in
@@ -263,7 +292,8 @@ private extension ResetPasswordService {
 
     func callValidateSecurityQuestion(referenceToken: String, questionId: Int, answer: String,
                                       completion: @escaping DefaultResponseCompletion<Void>) {
-        let param = ValidateSecurityQuestion(referenceToken: referenceToken, questionId: questionId, answer: answer)
+        let verificationMethod = VerificationMethod.securityQuestion.methodString
+        let param = ValidateSecurityQuestion(verificationMethod: verificationMethod, referenceToken: referenceToken, questionId: questionId, answer: answer)
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { _ in
             completion(.success(()))
         } fail: { error in
@@ -367,11 +397,11 @@ struct ForgotPasswordV2: RequestParametrs {
     }
 
     var patch: URL {
-        return RouteRequests.ForgotMyPassword.link
+        return RouteRequests.ForgotMyPasswordV2.link
     }
 
     var header: RequestHeaderParametrs {
-        let headers = RequestHeaders.base() + RequestHeaders.deviceUuidHeader()
+        let headers = RequestHeaders.base()
         if let captcha = attachedCaptcha {
             return headers + captcha.header
         }
@@ -384,19 +414,24 @@ private struct TokenInBody: RequestParametrs {
         return NumericConstants.defaultTimeout
     }
 
-    let token: String
-    let url: URL
+    let referenceToken: String
+    let verificationMethod: String
 
     var requestParametrs: Any {
-        return token
+        return [
+            LbRequestkeys.referenceToken: referenceToken,
+            LbRequestkeys.verificationMethod: verificationMethod
+        ]
     }
 
     var patch: URL {
+        let patch = String(format: RouteRequests.ForgotMyPasswordV2.continueWithEmailOrRecoveryEmail.absoluteString, "?", referenceToken)
+        let url = URL(string: patch) ?? RouteRequests.ForgotMyPasswordV2.continueWithEmailOrRecoveryEmail
         return url
     }
 
     var header: RequestHeaderParametrs {
-        return RequestHeaders.base() + RequestHeaders.deviceUuidHeader()
+        return RequestHeaders.base()
     }
 }
 
@@ -407,22 +442,24 @@ private struct ValidatePhoneNumber: RequestParametrs {
 
     let token: String
     let otp: String
+    let verificationMethod: String
 
     var requestParametrs: Any {
         let dict: [String: Any] = [
             LbRequestkeys.referenceToken: token,
-            LbRequestkeys.otp: otp
+            LbRequestkeys.otp: otp,
+            LbRequestkeys.verificationMethod: verificationMethod
         ]
 
         return dict
     }
 
     var patch: URL {
-        return RouteRequests.ForgotMyPassword.validatePhoneNumber
+        return RouteRequests.ForgotMyPasswordV2.validatePhoneNumber
     }
 
     var header: RequestHeaderParametrs {
-        return RequestHeaders.base() + RequestHeaders.deviceUuidHeader()
+        return RequestHeaders.base()
     }
 }
 
@@ -431,12 +468,14 @@ private struct ValidateSecurityQuestion: RequestParametrs {
         return NumericConstants.defaultTimeout
     }
 
+    let verificationMethod: String
     let referenceToken: String
     let questionId: Int
     let answer: String
 
     var requestParametrs: Any {
         let dict: [String: Any] = [
+            LbRequestkeys.verificationMethod: verificationMethod,
             LbRequestkeys.referenceToken: referenceToken,
             LbRequestkeys.securityQuestionId: questionId,
             LbRequestkeys.securityQuestionAnswer: answer
@@ -446,10 +485,10 @@ private struct ValidateSecurityQuestion: RequestParametrs {
     }
 
     var patch: URL {
-        return RouteRequests.ForgotMyPassword.validateSecurityQuestion
+        return RouteRequests.ForgotMyPasswordV2.validateSecurityQuestion
     }
 
     var header: RequestHeaderParametrs {
-        return RequestHeaders.base() + RequestHeaders.deviceUuidHeader()
+        return RequestHeaders.base()
     }
 }

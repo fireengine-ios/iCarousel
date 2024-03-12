@@ -17,13 +17,35 @@ final class NavigationHeaderButton: UIButton {
         return view
     }()
     
+    private lazy var loadingBadgeView: UIImageView = {
+        let view = UIImageView()
+        view.isHidden = true
+        view.image = Image.iconHeaderPreparing.image
+        return view
+    }()
+    
+    private lazy var loadingImageView: UIImageView = {
+        let view = UIImageView()
+        view.isHidden = true
+        view.image = Image.loadingCircle.image
+        return view
+    }()
+    
     private let singletonStorage = SingletonStorage.shared
+    private let userDefaultsVars = UserDefaultsVars()
     private var topConstant: CGFloat = -2.0
-    private var trailingConstant: CGFloat = 4.0
-    private var heightWidthAnchor: CGFloat = 18.0
+    private var trailingConstant: CGFloat = 0.0
+    private var heightWidthAnchor: CGFloat = 16.0
+    private var topConstantForLoading: CGFloat = 4
+    private var trailingConstantForLoading: CGFloat = -5
+    private var heightWidthAnchorForLoading: CGFloat = 32
+    private var timer: Timer?
+    private lazy var earingView = UIView()
+    private var notificationCount: Int = 0
     
     convenience init(type: `Type`, target: Any? = nil, action: Selector? = nil) {
         self.init()
+        loadingImageView.isHidden = true
         setImage(type.image?.image, for: .normal)
         setProfilePhotos(type: type)
         accessibilityIdentifier = type.accessibilityId
@@ -33,7 +55,23 @@ final class NavigationHeaderButton: UIButton {
         }
         
         if type == .settings {
-            addNotification()
+            NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(stopLoadingAndStartNotification),
+                                                   name: .isProcecessPrepairing,
+                                                   object: nil)
+            if userDefaultsVars.isProcessPrepairingDone ?? true {
+                addNotification()
+            } else {
+                addLoadingView()
+            }
+        }
+    }
+    
+    @objc func stopLoadingAndStartNotification() {
+        DispatchQueue.main.async {
+            self.stopTimer()
+            self.addNotification()
+            self.setnotificationCount(with: self.notificationCount)
         }
     }
 
@@ -53,18 +91,44 @@ final class NavigationHeaderButton: UIButton {
         }
     }
     
+    private func addLoadingView() {
+        if singletonStorage.isSetProfilePhotoImage {
+            topConstant = -6
+            trailingConstant = 6
+            heightWidthAnchor = 20
+            topConstantForLoading = 0
+            trailingConstantForLoading = 0
+            heightWidthAnchorForLoading = 42
+        }
+        
+        addSubview(loadingImageView)
+        loadingImageView.translatesAutoresizingMaskIntoConstraints = false
+        loadingImageView.topAnchor.constraint(equalTo: topAnchor, constant: topConstantForLoading).activate()
+        loadingImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: trailingConstantForLoading).activate()
+        loadingImageView.heightAnchor.constraint(equalToConstant: heightWidthAnchorForLoading).activate()
+        loadingImageView.widthAnchor.constraint(equalToConstant: heightWidthAnchorForLoading).activate()
+        self.bringSubviewToFront(loadingImageView)
+        
+        addSubview(loadingBadgeView)
+        loadingBadgeView.translatesAutoresizingMaskIntoConstraints = false
+        loadingBadgeView.topAnchor.constraint(equalTo: topAnchor, constant: topConstant).activate()
+        loadingBadgeView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: trailingConstant).activate()
+        loadingBadgeView.heightAnchor.constraint(equalToConstant: heightWidthAnchor).activate()
+        loadingBadgeView.widthAnchor.constraint(equalToConstant: heightWidthAnchor).activate()
+        loadingImageView.bringSubviewToFront(loadingBadgeView)
+        
+        startTimer()
+    }
 }
 
 extension NavigationHeaderButton {
-    
     private func addNotification() {
         if singletonStorage.isSetProfilePhotoImage {
             topConstant = -6
-            trailingConstant = 8
+            trailingConstant = 6
             heightWidthAnchor = 20
         }
         
-        let earingView = UIView()
         earingView.isHidden = true
         earingView.backgroundColor = AppColor.notification.color
         earingView.layer.cornerRadius = heightWidthAnchor / 2
@@ -73,7 +137,6 @@ extension NavigationHeaderButton {
         notificationLabel.translatesAutoresizingMaskIntoConstraints = false
         notificationLabel.centerYAnchor.constraint(equalTo: earingView.centerYAnchor).activate()
         notificationLabel.centerXAnchor.constraint(equalTo: earingView.centerXAnchor).activate()
-        
         
         addSubview(earingView)
         earingView.translatesAutoresizingMaskIntoConstraints = false
@@ -84,6 +147,7 @@ extension NavigationHeaderButton {
     }
     
     func setnotificationCount(with number: Int) {
+        notificationCount = number
         notificationLabel.superview?.isHidden = number == 0 ? true : false
         
         let strNum = String(number)
@@ -127,5 +191,33 @@ extension NavigationHeaderButton {
                 return "NavigationHeaderButtonPlus"
             }
         }
+    }
+}
+
+
+extension NavigationHeaderButton {
+    func startTimer() {
+        loadingImageView.isHidden = false
+        loadingBadgeView.isHidden = false
+        if timer == nil {
+            timer = Timer.scheduledTimer(timeInterval:0.0, target: self, selector: #selector(self.animateView), userInfo: nil, repeats: false)
+        }
+    }
+    
+    @objc func animateView() {
+        UIView.animate(withDuration: 0.8, delay: 0.0, options: .curveLinear, animations: {
+            self.loadingImageView.transform = self.loadingImageView.transform.rotated(by: CGFloat(Double.pi))
+        }, completion: { (finished) in
+            if self.timer != nil {
+                self.timer = Timer.scheduledTimer(timeInterval:0.0, target: self, selector: #selector(self.animateView), userInfo: nil, repeats: false)
+            }
+        })
+    }
+    
+    func stopTimer() {
+        timer?.invalidate()
+        timer = nil
+        loadingImageView.isHidden = true
+        loadingBadgeView.isHidden = true
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 
 protocol LoginRouterInput {
 
-    func goToForgotPassword()
+    func goToForgotPassword(loginText: String)
     
     func goToHomePage()
     

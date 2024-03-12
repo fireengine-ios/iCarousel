@@ -81,7 +81,7 @@ final class SecurityQuestionView: UIView, NibInit {
     }
     
     private func setDescriptionLabelTitle() {
-        descriptionLabel.text = TextConstants.userProfileSecretQuestionLabelPlaceHolder
+        descriptionLabel.text = localized(.selectSecurityQuestion)
     }
     
     @objc func viewWasTapped() {

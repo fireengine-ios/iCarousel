@@ -171,14 +171,21 @@ final class CacheManager {
     
     private func updatePreparation(isBegun: Bool) {
         if isBegun {
+            self.prepairingLoadingForProfileImage(isStart: false)
             CardsManager.default.startOperationWith(type: .prepareQuickScroll)
         } else {
+            self.prepairingLoadingForProfileImage(isStart: true)
             CardsManager.default.stopOperationWith(type: .prepareQuickScroll)
         }
         
         DispatchQueue.main.async {
             UIApplication.shared.isIdleTimerDisabled = isBegun
         }
+    }
+    
+    private func prepairingLoadingForProfileImage(isStart: Bool) {
+        userDefaultsVars.isProcessPrepairingDone = isStart
+        NotificationCenter.default.post(name: .isProcecessPrepairing, object: nil)
     }
     
     private func scheduleActualization() {

@@ -4,7 +4,7 @@
 "This file will be removed only from your album. You can access this file from Photos tab" = "Diese Datei wird nur aus Ihrem Album entfernt. Sie können auf diese Datei über die Registerkarte Fotos zugreifen";
 "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Durch das Löschen dieses Albums werden die Dateien aus der Lifebox nicht gelöscht. Sie können auf diese Dateien über die Registerkarte Fotos zugreifen. Sind Sie sicher, dass Sie löschen möchten?";
 "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Die ausgewählte/-n Datei/-en wird/werden in den Papierkorb verschoben. Du kannst diese innerhalb von 90 Tagen wieder vom Papierkorb zurückholen. Vergiss nicht, den Papierkorb zuerst zu leeren, wenn Du Speicherplatz für Deine Lifebox freigeben willst. ";
-"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Die ausgewählte/-n Datei/-en wird/werden in den Papierkorb verschoben. Du kannst diese innerhalb von 90 Tagen wieder vom Papierkorb zurückholen. Vergiss nicht, den Papierkorb zuerst zu leeren, wenn Du Speicherplatz für Deine Lifebox freigeben willst. ";
+"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Die ausgewählte(n) Datei(en) wird (werden) in den Papierkorb verschoben (nur synchronisierte Dateien). Innerhalb von 90 Tagen können Sie sie wiederherstellen. Wenn Sie Speicherplatz in Ihrer lifebox freigeben müssen, denken Sie daran, zuerst den Papierkorb zu leeren.";
 "Purchase" = "Kauf";
 "Packages" = "Pakete";
 "Verification code is blocked.\nPlease request a new code" = "Der Bestätigungscode ist blockiert. Bitte fordern Sie einen neuen Code an.";
@@ -2207,7 +2207,6 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "Das Limit für den Fotodruck wurde überschritten.";
 "order_not_delivered" = "Bestellung konnte nicht zum Druck übertragen werden";
 "order_not_delivered_detail" = "Ihre Bestellung konnte aus technischen Gründen nicht zum Druck übertragen werden. Bitte geben Sie einen neuen Druckauftrag auf.";
-"grace_banner_paycell_text" = "";
 
 /*Fuzzy*/
 "sync_page_offer_pop_up" = "Klicken Sie jetzt, um die vorteilhaften lifebox-Pakete zu entdecken, die speziell für Sie bestimmt sind!";
@@ -2235,7 +2234,31 @@ then {11,99 TRY/Month}*/
 "set_recoverymail_securityquestion_success" = "Ihre Wiederherstellungs-E-Mail und die geheime Frage wurden erstellt.";
 "settings_set_password_apple_warning" = "Sie müssen mit einem Apple-Konto bei lifebox angemeldet sein, um ein Kennwort festzulegen.";
 "lifebox_resignup_warning" = "Es existiert bereits ein Konto mit den von Ihnen eingegebenen Informationen. Wenn Sie fortfahren, wird die GSM-Nummer des anderen Kontos gelöscht. Sie können dann nur mit Ihrer E-Mail-Adresse und Ihrem Passwort auf Ihr Konto zugreifen. Sind Sie sicher, dass Sie fortfahren möchten?";
-"best_scene_discover_card_title" = "Fotoserien";
+
+/*Fuzzy*/
+"best_scene_title" = "Fotoserien";
 "best_scene_discover_card_body" = "Wählen Sie das Beste aus einer Fotoserie aus!";
 "print_discover_card_title" = "Druck-Paket";
 "print_discover_card_body" = "Drucken Sie mit dem Druckpaket jeden Monat bis zu 5 Fotos und lassen Sie sie kostenlos an Ihre Adresse liefern.";
+"can_not_sent_otp_sms" = "";
+"invalid_refenrence_code" = "";
+"delete_for_selected" = "";
+"keep_everything" = "";
+"delete_info" = "";
+"best_scene_discover_card_title" = "Fotoserien";
+"forgot_my_password_info" = "";
+"best_photo" = "";
+"security_question_invalid" = "";
+"select_security_question" = "";
+"draw_enddate" = "";
+"draw_detail_button" = "Raffle Details";
+"draw_join" = "Join the Raffle";
+"draw_warning_header" = "You Couldn't Participate in the Raffle";
+"draw_warning_body" = "Only those with paid packages can participate in our campaign. Buy a package now and participate in the raffle again.";
+"draw_package_button" = "Go to Packages";
+"draw_already_join" = "You have entered the raffle";
+"draw_detail_header" = "Raffle Details";
+"draw_success" = "";
+"delete_popup_title" = "";
+"delete_popup_body" = "";
+"please_enter_your_msisdn" = "";

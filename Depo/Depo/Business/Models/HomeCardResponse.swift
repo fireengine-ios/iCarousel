@@ -19,6 +19,7 @@ final class HomeCardResponse : Equatable {
     var saved: Bool = false
     var actionable: Bool = false
     var details: JSON?
+    var content: JSON?
     var fileList: [JSON]?
     var order = 0
     
@@ -80,6 +81,12 @@ final class HomeCardResponse : Equatable {
             return .milliPiyango
         case .biOgrenci:
             return .biOgrenci
+        case .discoverCard:
+            return .discoverCard
+        case .drawCampaignApply:
+            return .drawCampaignApply
+        case .garenta:
+            return .garenta
         }
     }
 }
@@ -95,12 +102,8 @@ extension HomeCardResponse: Map {
         saved = json["saved"].boolValue
         actionable = json["actionable"].boolValue
         
-//        if type == .tbMatik {
-//            details = json["fileList"]
-//        } else {
-//            details = json["details"]
-//        }
         details = json["details"]
+        content = json["details"]["content"]
         if type == .thingsDocument {
             fileList = json["fileList"].array
         }
@@ -134,5 +137,8 @@ enum HomeCardTypes: String {
     case drawCampaign = "DRAW_CAMPAIGN"
     case milliPiyango = "MILLIPIYANGO"
     case biOgrenci = "BI_OGRENCI"
+    case discoverCard = "BEST_SCENE_CARD"
+    case drawCampaignApply = "DRAW_CAMPAIGN_APPLY"
+    case garenta = "GARENTA"
 }
 

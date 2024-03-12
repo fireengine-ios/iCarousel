@@ -130,7 +130,16 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.segmentImage = .favorites
         
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
+        
+        var elementsConfig: [ElementTypes] = [.share, .move, .moveToTrash]
+        
+        if SingletonStorage.shared.accountInfo?.isUserFromTurkey == true {
+            if let moveIndex = elementsConfig.firstIndex(of: .move) {
+                elementsConfig.insert(.print, at: moveIndex + 1)
+            }
+        }
+        
+        let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
                                                style: .default,
                                                tintColor: AppColor.tint.color,
                                                unselectedItemTintColor: AppColor.label.color,

@@ -14,7 +14,7 @@
 
 /*Suggested: "Deleting these files will remove them from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?"*/
 "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Le ou les fichiers sélectionnés seront mis dans la poubelle. Vous pourrez les récupérer en 90 jours. N'oubliez pas de vider d'abord la corbeille si vous devez faire de place pour la mémoire de votre lifebox,";
-"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Le ou les fichiers sélectionnés seront mis dans la poubelle. Vous pourrez les récupérer en 90 jours. N'oubliez pas de vider d'abord la poubelle si vous devez faire de place pour la mémoire de votre lifebox,";
+"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Le(s) fichier(s) sélectionné(s) sera(ont) déplacé(s) dans la corbeille (pour les sauvegardes uniquement). Vous pourrez les restaurer dans les 90 jours. Si vous avez besoin de libérer de l'espace dans votre lifebox, n'oubliez pas de vider d'abord la corbeille.";
 "Purchase" = "Achat";
 "Packages" = "Offres";
 "Verification code is blocked.\nPlease request a new code" = "Le code de vérification est bloqué. Veuillez réinitialiser votre code.";
@@ -2512,7 +2512,6 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "Limite de photos dépassée.";
 "order_not_delivered" = "La commande n'a pas pu être envoyée à l'impression";
 "order_not_delivered_detail" = "Votre commande n'a pas pu être envoyée à l'impression pour des raisons techniques. Veuillez envoyer une nouvelle impression.";
-"grace_banner_paycell_text" = "";
 
 /*Fuzzy*/
 "sync_page_offer_pop_up" = "Cliquez maintenant pour découvrir les forfaits lifebox avantageux qui vous sont destinés!";
@@ -2540,7 +2539,31 @@ then {11,99 TRY/Month}*/
 "set_recoverymail_securityquestion_success" = "Votre courriel de récupération et votre question secrète ont été créés.";
 "settings_set_password_apple_warning" = "Vous devez être connecté à lifebox avec un compte Apple pour définir un mot de passe.";
 "lifebox_resignup_warning" = "Il existe déjà un compte pour l'information que vous avez introduite. Si vous continuez, le numéro de GSM de l'autre compte sera supprimé. Vous ne pourrez accéder à votre compte qu'avec votre adresse e-mail et votre mot de passe. Etes-vous sûr de vouloir continuer?";
-"best_scene_discover_card_title" = "Série de Photos";
+
+/*Fuzzy*/
+"best_scene_title" = "Série de Photos";
 "best_scene_discover_card_body" = "Choisissez le meilleur d'une série de photos!";
 "print_discover_card_title" = "Pack d'impression";
 "print_discover_card_body" = "Imprimez jusqu'à 5 photos chaque mois avec le forfait d'impression et faites-les livrer gratuitement à votre adresse.";
+"can_not_sent_otp_sms" = "";
+"invalid_refenrence_code" = "";
+"delete_for_selected" = "";
+"keep_everything" = "";
+"delete_info" = "";
+"best_scene_discover_card_title" = "Série de Photos";
+"forgot_my_password_info" = "";
+"best_photo" = "";
+"security_question_invalid" = "";
+"select_security_question" = "";
+"draw_enddate" = "";
+"draw_detail_button" = "Raffle Details";
+"draw_join" = "Join the Raffle";
+"draw_warning_header" = "You Couldn't Participate in the Raffle";
+"draw_warning_body" = "Only those with paid packages can participate in our campaign. Buy a package now and participate in the raffle again.";
+"draw_package_button" = "Go to Packages";
+"draw_already_join" = "You have entered the raffle";
+"draw_detail_header" = "Raffle Details";
+"draw_success" = "";
+"delete_popup_title" = "";
+"delete_popup_body" = "";
+"please_enter_your_msisdn" = "";

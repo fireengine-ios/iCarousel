@@ -457,12 +457,13 @@ class RouterVC: NSObject {
         return loginController
     }
     
-    var forgotPasswordScreen: UIViewController? {
-        let inicializer = ForgotPasswordModuleInitializer()
+    func forgotPasswordScreen(loginText: String) -> UIViewController {
+        let initializer = ForgotPasswordModuleInitializer()
         let controller = ForgotPasswordViewController(nibName: "ForgotPasswordViewController",
                                                       bundle: nil)
-        inicializer.forgotpasswordViewController = controller
-        inicializer.setupVC()
+        initializer.forgotpasswordViewController = controller
+        initializer.loginText = loginText
+        initializer.setupVC()
         return controller
     }
     
@@ -971,6 +972,19 @@ class RouterVC: NSObject {
         return PaycellCampaignViewController()
     }
     
+    // MARK: Best Scene All Group
+    
+    func bestSceneAllGroupController() -> BestSceneAllGroupViewController {
+        return BestSceneAllGroupViewController()
+    }
+    
+    // MARK: Best Scene All Group Sorted
+    
+    func bestSceneAllGroupSortedViewController(coverPhotoUrl: String, fileListUrls: [String]) -> BestSceneAllGroupSortedViewController {
+        let bestSceneVC = BestSceneAllGroupSortedInitializer.initializeController(coverPhotoUrl: coverPhotoUrl, fileListUrls: fileListUrls) as! BestSceneAllGroupSortedViewController
+        return bestSceneVC
+    }
+    
     // MARK: Face Image Recognition Photos
     
     func imageFacePhotosController(album: AlbumItem, item: Item, status: ItemStatus, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool = false, faceImageType: FaceImageType? = nil) -> BaseFilesGreedChildrenViewController {
@@ -1159,6 +1173,16 @@ class RouterVC: NSObject {
     // MARK: - Settings -> Connected Device
     func connectedDevice() -> ConnectedDeviceViewController {
         return ConnectedDeviceInitializer.initializeViewController()
+    }
+    
+    // MARK: - Draw Campaign
+    func drawCampaign(campaignId: Int) -> DrawCampaignViewController {
+        return DrawCampaignInitializer.initializeViewController(campaignId: campaignId)
+    }
+    
+    // MARK: - Garenta
+    func garenta(details: String, pageTitle: String) -> GarentaViewController {
+        return GarentaViewController(details: details, pageTitle: pageTitle)
     }
     
     // MARK: - Create Collage Template

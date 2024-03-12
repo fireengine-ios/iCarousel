@@ -14,6 +14,7 @@ protocol UserInfoSubViewViewControllerActionsDelegate: AnyObject {
     func upgradeButtonPressed(quotaInfo: QuotaInfoResponse?)
     func premiumButtonPressed()
     func freeUpCardRemoved()
+    func discoverCardRemoved()
 }
 
 final class UserInfoSubViewViewController: ViewController, NibInit {
@@ -112,6 +113,15 @@ extension UserInfoSubViewViewController: FreeUpSpacePopupDelegate {
         DispatchQueue.main.async {
             self.stackView.isHidden = true
             self.actionsDelegate?.freeUpCardRemoved()
+        }
+    }
+}
+
+extension UserInfoSubViewViewController: DiscoverCardPopupDelegate {
+    func removeDiscoverCard() {
+        DispatchQueue.main.async {
+            self.stackView.isHidden = true
+            self.actionsDelegate?.discoverCardRemoved()
         }
     }
 }

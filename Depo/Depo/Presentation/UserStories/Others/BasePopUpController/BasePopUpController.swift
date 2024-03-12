@@ -34,6 +34,15 @@ class BasePopUpController: UIViewController {
             drawer.drawerPresentationController?.dimmedViewStyle = .blurEffect(style: .dark)
         }, completion: completion)
     }
+    
+    func openBesScene(_ completion: VoidHandler? = nil) {
+        presentAsDrawer(config: { drawer in
+            drawer.drawerPresentationController?.allowsDismissalWithPanGesture = false
+            drawer.drawerPresentationController?.allowsDismissalWithTapGesture = false
+            drawer.showsDrawerIndicator = false
+        }, completion: completion)
+    }
+
 
     ///isFinalStep is used for dismissCompletion performing
     ///set isFinalStep as false to skip dismissCompletion performing

@@ -4,7 +4,7 @@
 "This file will be removed only from your album. You can access this file from Photos tab" = "Acest fișier va fi eliminat doar din album. Îl vei putea accesa din pagina Fotografii.";
 "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Ștergerea albumului nu va elimina fișierele din lifebox. Vei putea accesa aceste fișiere din pagina Forografii. Sigur vrei să-l ștergi?";
 "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Albumul selectat va fi eliminat în coșul de gunoi. Le puteți restaura în 90 de zile. Vă rugăm să goliți coșul de gunoi în caz de nevoie pentru a elibera spațiu.";
-"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Albumul selectat va fi eliminat în coșul de gunoi. Le puteți restaura în 90 de zile. Vă rugăm să goliți coșul de gunoi în caz de nevoie pentru a elibera spațiu.";
+"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Fișierul (fișierele) selectat(e) va (vor) fi mutat(e) în coșul de gunoi (numai fișierele sincronizate). Le veți putea restaura în termen de 90 de zile. Dacă aveți nevoie să eliberați spațiu în lifebox, nu uitați să goliți mai întâi coșul de reciclare.";
 "Purchase" = "Achiziție";
 "Packages" = "Pachete";
 "Verification code is blocked.\nPlease request a new code" = "Codul de verificare este blocat. Solicită un nou cod.";
@@ -2207,7 +2207,6 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "Limita fotografiilor a fost depășită.";
 "order_not_delivered" = "Comanda nu a putut fi livrată la imprimare";
 "order_not_delivered_detail" = "Comanda dvs. nu a putut fi livrată la imprimare din motive tehnice. Vă rugăm să trimiteți din nou o nouă imprimare.";
-"grace_banner_paycell_text" = "";
 
 /*Fuzzy*/
 "sync_page_offer_pop_up" = "Dă click acum pentru a descoperi pachetele avantajoase lifebox speciale pentru tine!";
@@ -2235,7 +2234,31 @@ then {11,99 TRY/Month}*/
 "set_recoverymail_securityquestion_success" = "Au fost create e-mailul de recuperare și întrebarea secretă.";
 "settings_set_password_apple_warning" = "Trebuie să fiți conectat la lifebox cu un cont Apple pentru a seta o parolă.";
 "lifebox_resignup_warning" = "Există deja un cont pentru informațiile pe care le-ați introdus. Dacă continuați, numărul GSM din celălalt cont va fi șters. Veți putea accesa contul dvs. doar cu adresa dvs. de e-mail și parola. Sunteți sigur că doriți să continuați?";
-"best_scene_discover_card_title" = "Serie de Fotografii";
+
+/*Fuzzy*/
+"best_scene_title" = "Serie de Fotografii";
 "best_scene_discover_card_body" = "Alegeți cea mai bună dintr-o serie de fotografii!";
 "print_discover_card_title" = "Pachet de Imprimare";
 "print_discover_card_body" = "Imprimați până la 5 din fotografiile dvs. în fiecare lună cu un pachet de imprimare și trimiteți-le gratuit direct la adresa dvs.";
+"can_not_sent_otp_sms" = "";
+"invalid_refenrence_code" = "";
+"delete_for_selected" = "";
+"keep_everything" = "";
+"delete_info" = "";
+"best_scene_discover_card_title" = "Serie de Fotografii";
+"forgot_my_password_info" = "";
+"best_photo" = "";
+"security_question_invalid" = "";
+"select_security_question" = "";
+"draw_enddate" = "";
+"draw_detail_button" = "Raffle Details";
+"draw_join" = "Join the Raffle";
+"draw_warning_header" = "You Couldn't Participate in the Raffle";
+"draw_warning_body" = "Only those with paid packages can participate in our campaign. Buy a package now and participate in the raffle again.";
+"draw_package_button" = "Go to Packages";
+"draw_already_join" = "You have entered the raffle";
+"draw_detail_header" = "Raffle Details";
+"draw_success" = "";
+"delete_popup_title" = "";
+"delete_popup_body" = "";
+"please_enter_your_msisdn" = "";

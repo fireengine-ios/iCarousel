@@ -382,6 +382,10 @@ extension MyStorageViewController: MyStorageViewInput {
         stopPurchase()
     }
     
+    func navigationToController() {
+        self.navigationController?.popViewController(animated: true) // to discover draw campaign
+    }
+    
     func showRestoreButton() {
         restorePurchasesButton.isEnabled = true
         restorePurchasesButton.isHidden = false

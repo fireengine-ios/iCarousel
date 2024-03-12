@@ -47,6 +47,7 @@ final class ForYouViewController: BaseViewController {
         output.getUpdateData(for: ForYouSections.hidden)
         output.getUpdateData(for: ForYouSections.favorites)
         output.getHeightForRow(at: ForYouSections.timeline)
+        output.getUpdateData(for: .albumCards)
         fullReload()
     }
     

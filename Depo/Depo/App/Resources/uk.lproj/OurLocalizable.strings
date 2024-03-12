@@ -4,7 +4,7 @@
 "This file will be removed only from your album. You can access this file from Photos tab" = "Цей файл буде видалено лише з вашого альбому. Ви можете отримати доступ до цього файлу з вкладки \"Фото\"";
 "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Видалення цього альбому не призведе до видалення файлів з lifebox. Ви можете отримати доступ до цих файлів з вкладки \"Фото\". Ви впевнені, що хочете видалити?";
 "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Вибрані файли будуть переміщені в корзину. Ви зможете повернути їх протягом 90 днів. Якщо вам потрібно звільнити місце в пам'яті lifebox, не забудьте спочатку очистити корзину.";
-"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Вибрані файли будуть переміщені в корзину. Ви зможете повернути їх протягом 90 днів. Якщо вам потрібно звільнити місце в пам'яті lifebox, не забудьте спочатку очистити корзину.";
+"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Обраний файл(и) буде переміщений(і) в кошик (тільки для резервних копій). Протягом 90 днів ви зможете їх відновити. Якщо вам знадобиться звільнити місце у вашому lifebox, не забудьте спочатку очистити кошик.";
 "Purchase" = "Покупка";
 "Packages" = "Пакети";
 "Verification code is blocked.\nPlease request a new code" = "Код заблокований. Будь ласка, запитайте новий код";
@@ -2209,7 +2209,6 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "Перевищено ліміт фотографій.";
 "order_not_delivered" = "Замовлення не вдалося передати на друк";
 "order_not_delivered_detail" = "Ваше замовлення не вдалося передати на друк з технічних причин. Будь ласка, надішліть нове замовлення на друк ще раз.";
-"grace_banner_paycell_text" = "";
 
 /*Fuzzy*/
 "sync_page_offer_pop_up" = "Натисніть зараз, щоб дізнатися про вигідні пакети lifebox, призначені спеціально для Вас!";
@@ -2237,7 +2236,31 @@ then {11,99 TRY/Month}*/
 "set_recoverymail_securityquestion_success" = "Вашу електронну пошту для відновлення та секретне запитання було створено.";
 "settings_set_password_apple_warning" = "Щоб встановити пароль, необхідно увійти в lifebox за допомогою облікового запису Apple.";
 "lifebox_resignup_warning" = "Акаунт для введеної вами інформації вже існує. Якщо ви продовжите, номер GSM з іншого акаунта буде видалено. Ви зможете отримати доступ до свого облікового запису тільки за допомогою адреси електронної пошти та пароля. Ви впевнені, що хочете продовжити?";
-"best_scene_discover_card_title" = "Серія Фотографій";
+
+/*Fuzzy*/
+"best_scene_title" = "Серія Фотографій";
 "best_scene_discover_card_body" = "Виберіть найкраще із серії фотографій!";
 "print_discover_card_title" = "Пакет Друку";
 "print_discover_card_body" = "Друкуйте до 5 фотографій щомісяця з пакетом друку та отримуйте їх безкоштовно прямо на свою адресу.";
+"can_not_sent_otp_sms" = "";
+"invalid_refenrence_code" = "";
+"delete_for_selected" = "";
+"keep_everything" = "";
+"delete_info" = "";
+"best_scene_discover_card_title" = "Серія Фотографій";
+"forgot_my_password_info" = "";
+"best_photo" = "";
+"security_question_invalid" = "";
+"select_security_question" = "";
+"draw_enddate" = "";
+"draw_detail_button" = "Raffle Details";
+"draw_join" = "Join the Raffle";
+"draw_warning_header" = "You Couldn't Participate in the Raffle";
+"draw_warning_body" = "Only those with paid packages can participate in our campaign. Buy a package now and participate in the raffle again.";
+"draw_package_button" = "Go to Packages";
+"draw_already_join" = "You have entered the raffle";
+"draw_detail_header" = "Raffle Details";
+"draw_success" = "";
+"delete_popup_title" = "";
+"delete_popup_body" = "";
+"please_enter_your_msisdn" = "";

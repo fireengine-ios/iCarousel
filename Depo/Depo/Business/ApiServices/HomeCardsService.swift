@@ -16,6 +16,8 @@ protocol HomeCardsService {
     func save(with id: Int, handler: @escaping ResponseVoid)
     func delete(with id: Int, handler: @escaping ResponseVoid)
     func updateItem(uuid: String, handler: @escaping (ResponseResult<WrapData>) -> Void)
+    func getBestGroup(handler: @escaping (ResponseResult<BurstGroup>) -> Void)
+    func getBestGroupWithId(with id: Int, handler: @escaping (ResponseResult<BurstGroupsWithId>) -> Void)
 }
 
 final class HomeCardsServiceImp {
@@ -84,5 +86,21 @@ extension HomeCardsServiceImp: HomeCardsService {
         }) { error in
             handler(.failed(error))
         }
+    }
+    
+    func getBestGroup(handler: @escaping (ResponseResult<BurstGroup>) -> Void) {
+        SessionManager
+         .customDefault
+         .request(RouteRequests.HomeCards.bestScene)
+         .customValidate()
+         .responseObject(handler)
+       }
+    
+    func getBestGroupWithId(with id: Int, handler: @escaping (ResponseResult<BurstGroupsWithId>) -> Void) {
+        SessionManager
+            .customDefault
+            .request(RouteRequests.HomeCards.burstGroupFiles(for: id))
+            .customValidate()
+            .responseObject(handler)
     }
 }

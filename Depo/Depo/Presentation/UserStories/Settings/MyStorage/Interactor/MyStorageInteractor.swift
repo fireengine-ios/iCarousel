@@ -21,6 +21,7 @@ final class MyStorageInteractor {
     private let accountService: AccountServicePrl = AccountService()
     private let offersService: OffersService = OffersServiceIml()
     private let packageService = PackageService()
+    private lazy var storageVars: StorageVars = factory.resolve()
     
     private func getInfoForAppleProducts(offers: [SubscriptionPlanBaseResponse]) {
         packageService.getInfoForAppleProducts(offers: offers, isActivePurchases: true, success: { [weak self] in
@@ -119,8 +120,13 @@ extension MyStorageInteractor: MyStorageInteractorInput {
                     WidgetCenter.shared.reloadAllTimelines()
                 }
                 DispatchQueue.toMain {
-                    self?.getAccountInfo()
-                    self?.output.refreshPackages()
+                    let drawCampaignPackage = self?.storageVars.drawCampaignPackage
+                    if drawCampaignPackage ?? false {
+                        self?.output.navigationToController()
+                    } else {
+                        self?.getAccountInfo()
+                        self?.output.refreshPackages()
+                    }
                 }
             } else {
                 DispatchQueue.main.async {

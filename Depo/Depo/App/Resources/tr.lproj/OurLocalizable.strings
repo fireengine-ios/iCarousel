@@ -4,7 +4,7 @@
 "This file will be removed only from your album. You can access this file from Photos tab" = "Bu dosya sadece albümünden kaldırılacak. Fotoğraflar sekmesi üzerinden bu dosyaya erişebilirsin. Çıkarmak istediğine emin misin?";
 "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Bu albümü sildiğinde albümün içindeki dosyalar lifebox'ında kalmaya devam edecek. Dosyalarına Fotoğraflar sekmesinden ulaşabilirsin. Silmek istediğine emin misin?";
 "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Seçilen dosya(lar) çöp kutusuna taşınacak. 90 gün içinde geri alabileceksin. lifebox hafızanda yer açman gerekirse öncelikle çöp kutusunu boşaltmayı unutma.";
-"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Seçilen dosya(lar) çöp kutusuna taşınacak. 90 gün içinde geri alabileceksin. lifebox hafızanda yer açman gerekirse öncelikle çöp kutusunu boşaltmayı unutma.";
+"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Seçilen dosya(lar) çöp kutusuna taşınacak ( sadece yedeklenmiş dosya(lar) ). 90 gün içinde geri alabileceksin. lifebox hafızanda yer açman gerekirse öncelikle çöp kutusunu boşaltmayı unutma.";
 "Purchase" = "Satın Al";
 "Packages" = "Paketler";
 "Verification code is blocked.\nPlease request a new code" = "Doğrulama kodu bloke durumda. Lütfen yeni bir kod talep et.";
@@ -2275,7 +2275,6 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "Fotoğraf limiti aşıldı.";
 "order_not_delivered" = "Siparişin Baskıya Teslim Edilemedi";
 "order_not_delivered_detail" = "Siparişin teknik nedenlerden dolayı baskıya teslim edilemedi. Lütfen tekrar yeni baskı gönderiniz.";
-"grace_banner_paycell_text" = "";
 
 /*Fuzzy*/
 "sync_page_offer_pop_up" = "Sana özel avantajlı lifebox paketlerini keşfetmek için hemen tıkla!";
@@ -2309,7 +2308,51 @@ then {11,99 TRY/Month}*/
 "set_recoverymail_securityquestion_success" = "Kurtarma mailiniz ve güvenlik sorunuz oluşturuldu.";
 "settings_set_password_apple_warning" = "Şifreni belirleyebilmek için öncelikle Apple Hesabın ile lifebox’a giriş yapmalısın.";
 "lifebox_resignup_warning" = "Girmiş oldugunuz bilgilere ait hesap bulunmaktadır. Devam etmeniz durumunda diğer hesaptan GSM numarası silinecektir. Hesabınıza sadece mail adresi ve şifreniz ile ulaşabileceksiniz. İşleme devam etmek istediğinize emin misiniz?";
-"best_scene_discover_card_title" = "Seri Fotoğraflar";
+
+/*Fuzzy*/
+"best_scene_title" = "Seri Fotoğraflar";
 "best_scene_discover_card_body" = "Seri fotoğraflarından en iyisini seç!";
 "print_discover_card_title" = "Baskı Paketi";
 "print_discover_card_body" = "Baskı paketi ile her ay en fazla 5 tane fotoğrafını bastır ve hemen ücretsiz adresine gelsin.";
+
+/*Fuzzy*/
+"can_not_sent_otp_sms" = "Şu anda doğrulama kodu için SMS gönderemiyoruz. Hesabına ait E-Posta ile işleme devam edebilirsin.";
+"invalid_refenrence_code" = "Referans kodu geçersizdir.";
+
+/*Fuzzy*/
+"delete_for_selected" = "Seçili Olanları Sil";
+
+/*Fuzzy*/
+"keep_everything" = "Tümünü Tut";
+"delete_info" = "Silmek istediğin fotoğrafları seç.";
+"best_scene_discover_card_title" = "Seri Fotoğraflar";
+"forgot_my_password_info" = "Şifre sıfırlama işlemine devam edebilmek için hesabına ait e-posta ya da telefon numarasını girin.\nGörseldeki doğrulama kodunu girin.\nArdından e-posta adresinize şifre sıfırlama linki ya da telefon numaranıza SMS ile kod gönderilecektir.";
+"best_photo" = "En İyi Fotoğrafın!";
+"security_question_invalid" = "Seçtiğiniz güvenlik sorusu veya cevabınız yanlış.";
+"select_security_question" = "Daha önce belirlediğin güvenlik sorunu seç";
+
+/*Fuzzy*/
+"draw_enddate" = "Çekilişe Son Katılım Tarihi:";
+
+/*Fuzzy*/
+"draw_detail_button" = "Çekiliş Detayları";
+
+/*Fuzzy*/
+"draw_join" = "Çekilişe Katıl";
+
+/*Fuzzy*/
+"draw_warning_header" = "Çekilişe Katılım Sağlanamadı";
+
+/*Fuzzy*/
+"draw_warning_body" = "Kampanyamıza sadece ücretli paketi olanlar katılabilir. Hemen bir paket satın alıp tekrardan çekilişe katılım sağlayınız.";
+
+/*Fuzzy*/
+"draw_package_button" = "Paketlere Git";
+"draw_already_join" = "Çekilişe katıldınız";
+"draw_detail_header" = "Çekiliş Detayları";
+"draw_success" = "Çekiliş başvurunuz tamamlanmıştır. Detaylı bilgiye çekiliş detaylarından ulaşabilirsiniz.";
+
+/*Fuzzy*/
+"delete_popup_title" = "Seçili Olan Fotoğrafların Silinecektir.";
+"delete_popup_body" = "Silmek istediğine emin misin?";
+"please_enter_your_msisdn" = "Lüfen telefon numaranızı girin.";

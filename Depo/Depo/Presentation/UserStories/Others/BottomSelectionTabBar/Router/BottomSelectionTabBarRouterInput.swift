@@ -22,5 +22,7 @@ protocol BottomSelectionTabBarRouterInput {
     
     func showDeleteMusic(_ completion: @escaping VoidHandler)
     
-    func showErrorShareEmptyAlbums()
+    func showErrorShareEmptyAlbums()    
+    
+    func showPrintViewController(selectedPhotos: [SearchItemResponse])
 }

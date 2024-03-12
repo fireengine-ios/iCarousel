@@ -22,7 +22,9 @@ final class HomePagePresenter: HomePageModuleInput {
     
     private let spotlightManager = SpotlightManager.shared
     private var cards: [HomeCardResponse] = []
-    
+    private var bestSceneCards: [HomeCardResponse] = []
+    private let userDefaultsVars = UserDefaultsVars()
+        
     private(set) var allFilesViewType = MoreActionsConfig.ViewType.Grid
     private(set) var allFilesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
     
@@ -104,7 +106,28 @@ extension HomePagePresenter: HomePageInteractorOutput {
     
     func didObtainHomeCards(_ cards: [HomeCardResponse]) {
         self.cards = cards
+        bestSceneCards.first?.order = Int.max
+        
+        let sortedCard = self.cards.sorted { $0.order < $1.order }
+        
+        if let paycellIndex = sortedCard.firstIndex(where: { $0.type == .paycell }) {
+            bestSceneCards.first?.order = paycellIndex + 1
+        } else if let contactBackupIndex = sortedCard.firstIndex(where: { $0.type == .contactBackup }) {
+            bestSceneCards.first?.order = contactBackupIndex
+        } else {
+            bestSceneCards.first?.order = 6
+        }
+        
+        self.cards.append(bestSceneCards.first)
+        self.cards = self.cards.sorted { $0.order < $1.order }
     }
+
+    func didObtainHomeCardsBestScene(_ bestSceneCard: HomeCardResponse, imageUrls: [String], createdDate: Int, groupId: [Int]) {
+        bestSceneCards = [bestSceneCard]
+        userDefaultsVars.imageUrlsForBestScene = imageUrls
+        userDefaultsVars.dateForBestScene = createdDate
+        userDefaultsVars.groupIdBestScene = groupId
+      }
     
     func fillCollectionView(isReloadAll: Bool) {
         if !AuthoritySingleton.shared.isBannerShowedForPremium {
@@ -382,5 +405,4 @@ extension HomePagePresenter: SpotlightManagerDelegate {
             view.needShowSpotlight(type: type)
         }  
     }
-    
 }

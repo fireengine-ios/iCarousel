@@ -23,6 +23,7 @@ final class DiscoverInteractor: DiscoverInteractorInput {
     private let smartAlbumsManager: SmartAlbumsManager = factory.resolve()
     private let campaignService = CampaignServiceImpl()
     private var isShowPopupAboutPremium = true
+    private var isShowPopupDiscoverCard = true
     private(set) var homeCardsLoaded = false
     private var isFirstAuthorityRequest = true
     

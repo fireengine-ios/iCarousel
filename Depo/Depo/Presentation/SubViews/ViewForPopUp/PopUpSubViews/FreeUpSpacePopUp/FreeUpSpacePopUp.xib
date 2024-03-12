@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNd-Lf-Xnb">
-                    <rect key="frame" x="16" y="112" width="200" height="32"/>
+                    <rect key="frame" x="16" y="79" width="200" height="32"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="200" id="6TR-6X-tEa"/>
                         <constraint firstAttribute="height" constant="32" id="Lz2-uH-LUw"/>
@@ -64,7 +64,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tCv-r8-d7f" customClass="WhiteButtonWithRoundedCorner" customModule="Billo" customModuleProvider="target">
-                    <rect key="frame" x="232" y="112" width="135" height="32"/>
+                    <rect key="frame" x="232" y="79" width="135" height="32"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="32" id="fmP-64-kGn"/>
                     </constraints>
@@ -81,7 +81,6 @@
             <constraints>
                 <constraint firstItem="yZg-TM-xac" firstAttribute="top" secondItem="15l-Sg-8pX" secondAttribute="bottom" constant="20" id="1RY-gb-UK5"/>
                 <constraint firstAttribute="trailing" secondItem="yZg-TM-xac" secondAttribute="trailing" id="2Fl-as-TT3"/>
-                <constraint firstAttribute="bottom" secondItem="eNd-Lf-Xnb" secondAttribute="bottom" constant="16" id="2Y2-EK-knI"/>
                 <constraint firstItem="dyj-bv-ETM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="2i7-iE-pD7"/>
                 <constraint firstAttribute="trailing" secondItem="5bF-UL-a8f" secondAttribute="trailing" constant="16" id="J29-XO-5FQ"/>
                 <constraint firstAttribute="trailing" secondItem="tCv-r8-d7f" secondAttribute="trailing" constant="8" id="Sno-RY-Adb"/>
@@ -90,12 +89,13 @@
                 <constraint firstItem="yZg-TM-xac" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="bo0-4i-guN"/>
                 <constraint firstAttribute="top" secondItem="yZg-TM-xac" secondAttribute="bottom" constant="-63" id="cbb-Hq-qfZ"/>
                 <constraint firstItem="tCv-r8-d7f" firstAttribute="height" secondItem="eNd-Lf-Xnb" secondAttribute="height" id="fJx-1h-Cgc"/>
-                <constraint firstAttribute="bottom" secondItem="tCv-r8-d7f" secondAttribute="bottom" constant="16" id="h2E-xb-AMp"/>
                 <constraint firstItem="eNd-Lf-Xnb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="h6S-Wq-FZe"/>
                 <constraint firstItem="5bF-UL-a8f" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="18" id="jHG-bq-q81"/>
                 <constraint firstItem="15l-Sg-8pX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="lGm-hA-542"/>
                 <constraint firstItem="5bF-UL-a8f" firstAttribute="leading" secondItem="15l-Sg-8pX" secondAttribute="trailing" constant="16" id="vyH-PK-G4V"/>
                 <constraint firstItem="tCv-r8-d7f" firstAttribute="leading" secondItem="eNd-Lf-Xnb" secondAttribute="trailing" constant="16" id="xF4-wJ-Mq6"/>
+                <constraint firstItem="eNd-Lf-Xnb" firstAttribute="top" secondItem="yZg-TM-xac" secondAttribute="bottom" constant="16" id="yg3-zZ-8LF"/>
+                <constraint firstItem="tCv-r8-d7f" firstAttribute="top" secondItem="yZg-TM-xac" secondAttribute="bottom" constant="16" id="zes-JK-qIU"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

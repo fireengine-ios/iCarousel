@@ -47,6 +47,10 @@ extension ForgotPasswordPresenter: ForgotPasswordViewOutput {
         interactor.sendForgotPasswordRequest(withLogin: removeBrackets(text: login),
                                              enteredCaptcha: enteredCaptcha, captchaUDID: captchaUDID)
     }
+    
+    func popBack() {
+        router.popBack()
+    }
 }
 
 // MARK: - ForgotPasswordModuleInput
@@ -74,10 +78,20 @@ extension ForgotPasswordPresenter: ForgotPasswordInteractorOutput {
         router.proceedToIdentityVerification(service: interactor.resetPasswordService,
                                              availableMethods: methods)
     }
+    
+    func receivedOTPVerification(_ methods: [IdentityVerificationMethod]) {
+        completeAsyncOperationEnableScreen()
+        router.receivedOTPVerification(service: interactor.resetPasswordService, availableMethods: methods)
+    }
 
     func requestFailed(withError error: String) {
         completeAsyncOperationEnableScreen(errorMessage: error)
         view.showCapcha()
+    }
+    
+    func successForgotMyPassWordWithMail() {
+        completeAsyncOperationEnableScreen()
+        view.successForgotMyPassWordWithMail()
     }
 }
 

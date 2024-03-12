@@ -137,6 +137,13 @@ struct RouteRequests {
         static let validateSecurityQuestion = baseUrl +/ "forgotMyPassword/validateSecurityQuestion"
         static let change = baseUrl +/ "forgotMyPassword/change"
     }
+    
+    enum ForgotMyPasswordV2 {
+        static let link = baseUrl +/ "v2/forgotMyPassword"
+        static let validatePhoneNumber = baseUrl +/ "v2/forgotMyPassword/verify"
+        static let continueWithEmailOrRecoveryEmail = baseUrl +/ "v2/forgotMyPassword%@referenceToken=%@"
+        static let validateSecurityQuestion = baseUrl +/ "v2/forgotMyPassword/verify"
+    }
 
     // MARK: EULA 
     static let eulaGet     = "eula/get/%@?brand=" + applicationTarget
@@ -345,6 +352,11 @@ struct RouteRequests {
         static func card(with id: Int) -> URL {
             return all +/ String(id)
         }
+        static let bestScene = baseUrl +/ "burstgroups/"
+        
+        static func burstGroupFiles(for groupId: Int) -> URL {
+            return bestScene +/ "\(groupId)/files"
+        }
     }
 
     // MARK: - Print
@@ -546,4 +558,9 @@ struct RouteRequests {
     
     //MARK: -TOGG QR Code
     static let readQrCode = baseUrl +/ "auth/qrcode/referenceToken"
+    
+    //MARK: -DrawCampaign
+    static let getCampaignStatus = "draw/%d/status"
+    static let getCampaignPolicy = "draw/%d/policy"
+    static let setCampaignApply = "draw/%d/apply"
 }

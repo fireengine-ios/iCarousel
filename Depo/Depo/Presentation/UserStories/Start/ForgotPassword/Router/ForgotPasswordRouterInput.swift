@@ -13,4 +13,6 @@ protocol ForgotPasswordRouterInput {
     func proceedToIdentityVerification(service: ResetPasswordService,
                                        availableMethods: [IdentityVerificationMethod])
     func popBack()
+    
+    func receivedOTPVerification(service: ResetPasswordService, availableMethods: [IdentityVerificationMethod])
 }

@@ -10,13 +10,25 @@ import Foundation
 
 final class PhotoVideoBottomBarManager {
     
-    private let photoVideoBottomBarConfig = EditingBarConfig(
-        elementsConfig:  [.share, .download, .sync, .hide, .moveToTrash],
-        style: .default,
-        tintColor: AppColor.tint.color,
-        unselectedItemTintColor: AppColor.label.color,
-        barTintColor: AppColor.secondaryBackground.color
-    )
+    var elementsConfig: [ElementTypes] = [.share, .download, .sync, .moveToTrash]
+    
+    private lazy var photoVideoBottomBarConfig: EditingBarConfig = {
+        return EditingBarConfig(
+            elementsConfig: self.elementsConfig,
+            style: .default,
+            tintColor: AppColor.tint.color,
+            unselectedItemTintColor: AppColor.label.color,
+            barTintColor: AppColor.secondaryBackground.color
+        )
+    }()
+    
+    private func configureElementsForTurkey() {
+        if SingletonStorage.shared.accountInfo?.isUserFromTurkey == true {
+            if let syncIndex = elementsConfig.firstIndex(of: .sync) {
+                elementsConfig.insert(.print, at: syncIndex + 1)
+            }
+        }
+    }
     
     var editingTabBar: BottomSelectionTabBarDrawerViewController?
     private let bottomBarPresenter = BottomSelectionTabBarPresenter()
@@ -25,6 +37,7 @@ final class PhotoVideoBottomBarManager {
     
     init(delegate: BaseItemInputPassingProtocol) {
         self.delegate = delegate
+        configureElementsForTurkey()
     }
     
     func setup() {
@@ -36,6 +49,19 @@ final class PhotoVideoBottomBarManager {
     
     func update(for items: [WrapData]) {
         bottomBarPresenter.setupTabBarWith(items: items, originalConfig: photoVideoBottomBarConfig)
+        
+        for item in items {
+            switch item.syncStatus {
+            case .synced:
+                editingTabBar?.enableItems(at: [3])
+            case .notSynced:
+                editingTabBar?.disableItems(at: [3])
+            case .synchronizing:
+                print("synchronizing")
+            case .unknown:
+                print("unknown")
+            }
+        }
     }
     
     func show() {
@@ -45,6 +71,4 @@ final class PhotoVideoBottomBarManager {
     func hide() {
         bottomBarPresenter.dismissWithNotification()
     }
-    
-    
 }
