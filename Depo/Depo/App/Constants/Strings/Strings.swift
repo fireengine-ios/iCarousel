@@ -378,8 +378,8 @@ enum Strings: String, Localizable {
     case setRecoveryMailSecurityQuestionSuccess = "set_recoverymail_securityquestion_success"
     case settingsSetPasswordApppleWarning = "settings_set_password_apple_warning"
     case lifeboxResignupWarning = "lifebox_resignup_warning"
-    case photoMaxSelectionBody = "photo_max_selection_body"
-    case photoMaxSelectionTitle = "photo_max_selection_title"
+    case photoMaxSelectionBodyX = "photo_max_selection_body_x"
+    case photoMaxSelectionTitleX = "photo_max_selection_title_x"
     
     case canNotSentOtpSms = "can_not_sent_otp_sms"
     case invalidRefenrenceCode = "invalid_refenrence_code"
@@ -407,4 +407,5 @@ enum Strings: String, Localizable {
     case drawAlreadyJoin = "draw_already_join"
     case drawDetailHeader = "draw_detail_header"
     case pleaseEnterYourMsisdn = "please_enter_your_msisdn"
+    case okButton = "OK"
 }

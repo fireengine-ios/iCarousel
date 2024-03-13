@@ -2209,7 +2209,6 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "Перевищено ліміт фотографій.";
 "order_not_delivered" = "Замовлення не вдалося передати на друк";
 "order_not_delivered_detail" = "Ваше замовлення не вдалося передати на друк з технічних причин. Будь ласка, надішліть нове замовлення на друк ще раз.";
-"grace_banner_paycell_text" = "";
 
 /*Fuzzy*/
 "sync_page_offer_pop_up" = "Натисніть зараз, щоб дізнатися про вигідні пакети lifebox, призначені спеціально для Вас!";
@@ -2231,8 +2230,12 @@ then {11,99 TRY/Month}*/
 "scan_qr_code_info" = "Відскануйте QR-код на пристрої, який ви хочете підключити.";
 "qr_code_try_again" = "Не вдалося відсканувати QR-код. Будь ласка, спробуйте ще раз.";
 "print" = "Друкувати";
-"photo_max_selection_title" = "Ви Маєте Право на %@ Фотографій";
-"photo_max_selection_body" = "Ви можете відправити на друк не більше %@ фотографій.";
+
+/*Fuzzy*/
+"photo_max_selection_title_x" = "Ви Маєте Право на %@ Фотографій";
+
+/*Fuzzy*/
+"photo_max_selection_body_x" = "Ви можете відправити на друк не більше %@ фотографій.";
 "set_recovery_mail_success" = "Вашу електронну пошту для відновлення було створено.";
 "set_recoverymail_securityquestion_success" = "Вашу електронну пошту для відновлення та секретне запитання було створено.";
 "settings_set_password_apple_warning" = "Щоб встановити пароль, необхідно увійти в lifebox за допомогою облікового запису Apple.";
@@ -2243,17 +2246,17 @@ then {11,99 TRY/Month}*/
 "best_scene_discover_card_body" = "Виберіть найкраще із серії фотографій!";
 "print_discover_card_title" = "Пакет Друку";
 "print_discover_card_body" = "Друкуйте до 5 фотографій щомісяця з пакетом друку та отримуйте їх безкоштовно прямо на свою адресу.";
-"can_not_sent_otp_sms" = "";
-"invalid_refenrence_code" = "";
-"delete_for_selected" = "";
-"keep_everything" = "";
-"delete_info" = "";
+"can_not_sent_otp_sms" = "Неможливо надіслати SMS для отримання коду перевірки. Ви можете продовжити роботу з електронною поштою, що належить вашому обліковому запису.";
+"invalid_refenrence_code" = "Код посилання недійсний.";
+"delete_for_selected" = "Видалити Вибране";
+"keep_everything" = "Зберегти Усі";
+"delete_info" = "Виберіть фотографії, які потрібно видалити.";
 "best_scene_discover_card_title" = "Серія Фотографій";
-"forgot_my_password_info" = "";
-"best_photo" = "";
-"security_question_invalid" = "";
-"select_security_question" = "";
-"draw_enddate" = "";
+"forgot_my_password_info" = "Введіть адресу електронної пошти або номер телефону облікового запису, щоб продовжити процес скидання пароля. \nВведіть код підтвердження на зображенні.\nПісля цього на вашу адресу електронної пошти буде відправлено посилання для скидання пароля або на ваш номер телефону буде надіслано код SMS.";
+"best_photo" = "Ваша Краща Фотографія!";
+"security_question_invalid" = "Обране вами питання безпеки або відповідь невірна.";
+"select_security_question" = "Виберіть питання безпеки, яке ви обрали раніше";
+"draw_enddate" = "Остання Дата участі в Лотереї:";
 "draw_detail_button" = "Raffle Details";
 "draw_join" = "Join the Raffle";
 "draw_warning_header" = "You Couldn't Participate in the Raffle";
@@ -2261,7 +2264,10 @@ then {11,99 TRY/Month}*/
 "draw_package_button" = "Go to Packages";
 "draw_already_join" = "You have entered the raffle";
 "draw_detail_header" = "Raffle Details";
-"draw_success" = "";
-"delete_popup_title" = "";
-"delete_popup_body" = "";
-"please_enter_your_msisdn" = "";
+"draw_success" = "Вашу заявку на участь у лотереї успішно завершено. Детальну інформацію ви знайдете в описі лотереї.";
+"delete_popup_title" = "Вибрані Фотографії Будуть Видалені.";
+"delete_popup_body" = "Ви впевнені, що хочете видалити фотографії?";
+"please_enter_your_msisdn" = "Будь ласка, введіть номер телефону.";
+"grace_banner_paycell_text" = "";
+"photo_max_selection_title" = "";
+"photo_max_selection_body" = "";

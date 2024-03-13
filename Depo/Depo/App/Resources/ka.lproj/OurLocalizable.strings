@@ -2199,7 +2199,6 @@ then {11,99 TRY/Month}*/
 "print_file_limit_exceeded_error" = "";
 "order_not_delivered" = "";
 "order_not_delivered_detail" = "";
-"grace_banner_paycell_text" = "";
 "sync_page_offer_pop_up" = "დააჭირე და აღმოაჩინე შენთვის ხელსაყრელი lifebox-ის პაკეტები!";
 "validate_purchase_already_subscribed_text" = "აღნიშნული გამოწერა უკვე აქტიურია %@ ანგარიშზე, ელ.ფოსტით %@ სხვა lifebox მომხმარებლისთვის. გაითვალისწინე, რომ lifebox-ის სხვადასხვა ანგარიშის გამოყენებამ, იმავე Apple/Google-ის ანგარიშით, შესაძლოა გამოიწვიოს ეს ვითარება.";
 "print_edit_cancel_popup_info" = "";
@@ -2219,8 +2218,8 @@ then {11,99 TRY/Month}*/
 "scan_qr_code_info" = "დაასკანირე QR კოდი იმ მოწყობილობაზე, რომლის დაკავშირებაც გსურს";
 "qr_code_try_again" = "QR კოდის დასკანირება ვერ მოხერხდა. გთხოვთ, სცადო მოგვიანებით.";
 "print" = "";
-"photo_max_selection_title" = "";
-"photo_max_selection_body" = "";
+"photo_max_selection_title_x" = "";
+"photo_max_selection_body_x" = "";
 "set_recovery_mail_success" = "აღდგენის ელ.ფოსტა შექმნილია";
 "set_recoverymail_securityquestion_success" = "აღდგენის ელ.ფოსტა და უსაფრთხოების შეკითხვა შექმნილია";
 "settings_set_password_apple_warning" = "პაროლის დასაყენებლად უნდა შეხვიდე lifebox-ში შენი Apple-ის ანგარიშით";
@@ -2251,3 +2250,6 @@ then {11,99 TRY/Month}*/
 "delete_popup_title" = "";
 "delete_popup_body" = "";
 "please_enter_your_msisdn" = "";
+"grace_banner_paycell_text" = "";
+"photo_max_selection_title" = "";
+"photo_max_selection_body" = "";
