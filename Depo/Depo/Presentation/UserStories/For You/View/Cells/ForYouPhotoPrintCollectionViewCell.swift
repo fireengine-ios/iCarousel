@@ -138,10 +138,10 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
     
     func configure(with item: GetOrderResponse) {
         printedPhotosData = item
-        let status = getStatus(status: item.status)
+        let status = getStatus(status: item.status ?? "")
         bgView.layer.borderWidth = 1
         bgView.layer.borderColor = status.titleLabelColor.cgColor
-        cardTitleLabel.text = dateConverter(epochTimeInMilliseconds: item.createdDate)
+        cardTitleLabel.text = dateConverter(epochTimeInMilliseconds: item.createdDate ?? 0)
         statusLabel.text = status.titleText
         statusLabel.textColor = status.titleLabelColor
         statusLabel.isHidden = false
@@ -152,7 +152,7 @@ class ForYouPhotoPrintCollectionViewCell: UICollectionViewCell {
         cardThumbnailImage.contentMode = .scaleAspectFill
         cardThumbnailImage.layer.cornerRadius = 15
         let infoData = item.affiliateOrderDetails[0]
-        guard let url = URL(string: infoData.fileInfo.metadata.thumbnailMedium) else {
+        guard let url = URL(string: infoData.fileInfo.metadata?.thumbnailMedium ?? "") else {
             return
         }
         cardThumbnailImage.loadImageData(with: url, animated: false)
