@@ -2250,3 +2250,6 @@ then {11,99 TRY/Month}*/
 "delete_popup_title" = "";
 "delete_popup_body" = "";
 "please_enter_your_msisdn" = "";
+"grace_banner_paycell_text" = "";
+"photo_max_selection_title_x" = "";
+"photo_max_selection_body_x" = "";

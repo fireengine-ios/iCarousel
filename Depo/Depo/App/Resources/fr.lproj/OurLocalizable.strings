@@ -2533,8 +2533,12 @@ then {11,99 TRY/Month}*/
 "scan_qr_code_info" = "Scannez le code QR de l'appareil que vous souhaitez connecter.";
 "qr_code_try_again" = "Le scan du code QR a échoué. Veuillez réessayer.";
 "print" = "Imprimer";
-"photo_max_selection_title" = "Vous Avez Droit à %@ Photos";
-"photo_max_selection_body" = "Vous avez le droit d'envoyer un maximum de %@ photos pour impression.";
+
+/*Fuzzy*/
+"photo_max_selection_title" = "Vous Avez Droit à %d Photos";
+
+/*Fuzzy*/
+"photo_max_selection_body" = "Vous avez le droit d'envoyer un maximum de %d photos pour impression.";
 "set_recovery_mail_success" = "Votre e-mail de récupération a été créé.";
 "set_recoverymail_securityquestion_success" = "Votre courriel de récupération et votre question secrète ont été créés.";
 "settings_set_password_apple_warning" = "Vous devez être connecté à lifebox avec un compte Apple pour définir un mot de passe.";
@@ -2545,17 +2549,17 @@ then {11,99 TRY/Month}*/
 "best_scene_discover_card_body" = "Choisissez le meilleur d'une série de photos!";
 "print_discover_card_title" = "Pack d'impression";
 "print_discover_card_body" = "Imprimez jusqu'à 5 photos chaque mois avec le forfait d'impression et faites-les livrer gratuitement à votre adresse.";
-"can_not_sent_otp_sms" = "";
-"invalid_refenrence_code" = "";
-"delete_for_selected" = "";
-"keep_everything" = "";
-"delete_info" = "";
+"can_not_sent_otp_sms" = "Échec de l'envoi d'un SMS pour recevoir un code de vérification. Vous pouvez continuer avec l'e-mail appartenant à votre compte.";
+"invalid_refenrence_code" = "Le code de référence n'est pas valide.";
+"delete_for_selected" = "Supprimer Sélectionnée";
+"keep_everything" = "Conserver Tout";
+"delete_info" = "Sélectionnez les photos que vous souhaitez supprimer.";
 "best_scene_discover_card_title" = "Série de Photos";
-"forgot_my_password_info" = "";
-"best_photo" = "";
-"security_question_invalid" = "";
-"select_security_question" = "";
-"draw_enddate" = "";
+"forgot_my_password_info" = "Saisissez l'adresse électronique ou le numéro de téléphone de votre compte pour poursuivre la procédure de réinitialisation du mot de passe.\nSaisissez le code de vérification dans l'image.\nEnsuite, un lien de réinitialisation du mot de passe sera envoyé à votre adresse e-mail ou un code sera envoyé à votre numéro de téléphone par SMS.";
+"best_photo" = "Votre Meilleure Photo!";
+"security_question_invalid" = "La question de sécurité ou la réponse que vous avez sélectionnée est incorrecte.";
+"select_security_question" = "Sélectionnez la question de sécurité que vous avez choisie précédemment";
+"draw_enddate" = "Dernière Date Pour Participer à la Tombola:";
 "draw_detail_button" = "Raffle Details";
 "draw_join" = "Join the Raffle";
 "draw_warning_header" = "You Couldn't Participate in the Raffle";
@@ -2563,7 +2567,10 @@ then {11,99 TRY/Month}*/
 "draw_package_button" = "Go to Packages";
 "draw_already_join" = "You have entered the raffle";
 "draw_detail_header" = "Raffle Details";
-"draw_success" = "";
-"delete_popup_title" = "";
-"delete_popup_body" = "";
-"please_enter_your_msisdn" = "";
+"draw_success" = "Votre demande de participation à la loterie a été complétée. Vous trouverez des informations détaillées dans les détails de la tombola.";
+"delete_popup_title" = "Les Photos Sélectionnées Seront Supprimées.";
+"delete_popup_body" = "Êtes-vous sûr de vouloir les supprimer?";
+"please_enter_your_msisdn" = "Veuillez saisir votre numéro de téléphone.";
+"grace_banner_paycell_text" = "";
+"photo_max_selection_title_x" = "";
+"photo_max_selection_body_x" = "";
