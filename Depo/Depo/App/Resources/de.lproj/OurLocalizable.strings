@@ -2228,8 +2228,12 @@ then {11,99 TRY/Month}*/
 "scan_qr_code_info" = "Scannen Sie den QR-Code auf dem Gerät, das Sie verbinden möchten.";
 "qr_code_try_again" = "QR-Code-Scan fehlgeschlagen. Bitte versuchen Sie es erneut.";
 "print" = "Drucken";
-"photo_max_selection_title" = "Sie haben das Recht auf %@ Fotos";
-"photo_max_selection_body" = "Sie können maximal %@ Fotos zum Drucken senden.";
+
+/*Fuzzy*/
+"photo_max_selection_title" = "Sie haben das Recht auf %d Fotos";
+
+/*Fuzzy*/
+"photo_max_selection_body" = "Sie können maximal %d Fotos zum Drucken senden.";
 "set_recovery_mail_success" = "Ihre Wiederherstellungs-E-Mail wurde erstellt.";
 "set_recoverymail_securityquestion_success" = "Ihre Wiederherstellungs-E-Mail und die geheime Frage wurden erstellt.";
 "settings_set_password_apple_warning" = "Sie müssen mit einem Apple-Konto bei lifebox angemeldet sein, um ein Kennwort festzulegen.";
@@ -2240,17 +2244,17 @@ then {11,99 TRY/Month}*/
 "best_scene_discover_card_body" = "Wählen Sie das Beste aus einer Fotoserie aus!";
 "print_discover_card_title" = "Druck-Paket";
 "print_discover_card_body" = "Drucken Sie mit dem Druckpaket jeden Monat bis zu 5 Fotos und lassen Sie sie kostenlos an Ihre Adresse liefern.";
-"can_not_sent_otp_sms" = "";
-"invalid_refenrence_code" = "";
-"delete_for_selected" = "";
-"keep_everything" = "";
-"delete_info" = "";
+"can_not_sent_otp_sms" = "Es kann keine SMS für den Bestätigungscode gesendet werden. Sie können mit der zu Ihrem Konto gehörenden E-Mail fortfahren.";
+"invalid_refenrence_code" = "Der Referenzcode ist ungültig.";
+"delete_for_selected" = "Ausgewählte Löschen";
+"keep_everything" = "Alle Behalten";
+"delete_info" = "Wählen Sie die Fotos aus, die Sie löschen möchten.";
 "best_scene_discover_card_title" = "Fotoserien";
-"forgot_my_password_info" = "";
-"best_photo" = "";
-"security_question_invalid" = "";
-"select_security_question" = "";
-"draw_enddate" = "";
+"forgot_my_password_info" = "Geben Sie die E-Mail-Adresse oder die Telefonnummer Ihres Kontos ein, um mit dem Zurücksetzen des Passworts fortzufahren.\nGeben Sie den Verifizierungscode im Bild ein.\nAnschließend wird ein Link zum Zurücksetzen des Passworts an Ihre E-Mail-Adresse oder ein Code per SMS an Ihre Telefon-Nummer gesendet.";
+"best_photo" = "Ihr Bestes Foto!";
+"security_question_invalid" = "Die von Ihnen gewählte Sicherheitsfrage oder Antwort ist falsch.";
+"select_security_question" = "Wählen Sie die Sicherheitsfrage, die Sie zuvor ausgewählt haben";
+"draw_enddate" = "Letzter Termin für die Teilnahme an der Verlosung:";
 "draw_detail_button" = "Raffle Details";
 "draw_join" = "Join the Raffle";
 "draw_warning_header" = "You Couldn't Participate in the Raffle";
@@ -2258,7 +2262,10 @@ then {11,99 TRY/Month}*/
 "draw_package_button" = "Go to Packages";
 "draw_already_join" = "You have entered the raffle";
 "draw_detail_header" = "Raffle Details";
-"draw_success" = "";
-"delete_popup_title" = "";
-"delete_popup_body" = "";
-"please_enter_your_msisdn" = "";
+"draw_success" = "Ihr Gewinnspielantrag wurde ausgefüllt. Detaillierte Informationen finden Sie in den Verlosungsdetails.";
+"delete_popup_title" = "Die Ausgewählten Fotos Werden Gelöscht.";
+"delete_popup_body" = "Sind Sie sicher, dass Sie löschen möchten?";
+"please_enter_your_msisdn" = "Bitte geben Sie Ihre Telefon-Nummer ein.";
+"grace_banner_paycell_text" = "";
+"photo_max_selection_title_x" = "";
+"photo_max_selection_body_x" = "";

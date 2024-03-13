@@ -2228,8 +2228,12 @@ then {11,99 TRY/Month}*/
 "scan_qr_code_info" = "Scanați codul QR de pe dispozitivul pe care doriți să îl conectați.";
 "qr_code_try_again" = "Scanarea codului QR a eșuat. Vă rugăm să încercați din nou.";
 "print" = "Printare";
-"photo_max_selection_title" = "Aveți Dreptul la %@ Fotografii";
-"photo_max_selection_body" = "Aveți dreptul să trimiteți maximum %@ fotografii pentru imprimare.";
+
+/*Fuzzy*/
+"photo_max_selection_title" = "Aveți Dreptul la %d Fotografii";
+
+/*Fuzzy*/
+"photo_max_selection_body" = "Aveți dreptul să trimiteți maximum %d fotografii pentru imprimare.";
 "set_recovery_mail_success" = "E-mailul dvs. de recuperare a fost creat.";
 "set_recoverymail_securityquestion_success" = "Au fost create e-mailul de recuperare și întrebarea secretă.";
 "settings_set_password_apple_warning" = "Trebuie să fiți conectat la lifebox cu un cont Apple pentru a seta o parolă.";
@@ -2240,17 +2244,17 @@ then {11,99 TRY/Month}*/
 "best_scene_discover_card_body" = "Alegeți cea mai bună dintr-o serie de fotografii!";
 "print_discover_card_title" = "Pachet de Imprimare";
 "print_discover_card_body" = "Imprimați până la 5 din fotografiile dvs. în fiecare lună cu un pachet de imprimare și trimiteți-le gratuit direct la adresa dvs.";
-"can_not_sent_otp_sms" = "";
-"invalid_refenrence_code" = "";
-"delete_for_selected" = "";
-"keep_everything" = "";
-"delete_info" = "";
+"can_not_sent_otp_sms" = "Nu se poate trimite SMS pentru codul de verificare. Puteți continua cu adresa de e-mail aparținând contului dvs.";
+"invalid_refenrence_code" = "Codul de referință nu este valabil.";
+"delete_for_selected" = "Ștergeți Selectat";
+"keep_everything" = "Păstrați Toate";
+"delete_info" = "Selectați fotografiile pe care doriți să le ștergeți.";
 "best_scene_discover_card_title" = "Serie de Fotografii";
-"forgot_my_password_info" = "";
-"best_photo" = "";
-"security_question_invalid" = "";
-"select_security_question" = "";
-"draw_enddate" = "";
+"forgot_my_password_info" = "Introduceți adresa de e-mail sau numărul de telefon al contului dvs. pentru a continua procesul de resetare a parolei.\nIntroduceți codul de verificare din imagine.\nApoi, un link de resetare a parolei va fi trimis la adresa dvs. de e-mail sau un cod va fi trimis la numărul dvs. de telefon prin SMS.";
+"best_photo" = "Cea mai bună fotografie a ta!";
+"security_question_invalid" = "Întrebarea de securitate sau răspunsul pe care l-ați selectat este incorect.";
+"select_security_question" = "Selectați întrebarea de securitate pe care ați selectat-o anterior";
+"draw_enddate" = "Ultima dată pentru a participa la tombolă:";
 "draw_detail_button" = "Raffle Details";
 "draw_join" = "Join the Raffle";
 "draw_warning_header" = "You Couldn't Participate in the Raffle";
@@ -2258,7 +2262,10 @@ then {11,99 TRY/Month}*/
 "draw_package_button" = "Go to Packages";
 "draw_already_join" = "You have entered the raffle";
 "draw_detail_header" = "Raffle Details";
-"draw_success" = "";
-"delete_popup_title" = "";
-"delete_popup_body" = "";
-"please_enter_your_msisdn" = "";
+"draw_success" = "Cererea dvs. pentru loterie a fost completată. Puteți găsi informații detaliate în detaliile tombolei.";
+"delete_popup_title" = "Fotografiile Selectate Vor Fi Șterse.";
+"delete_popup_body" = "Sunteți sigur că doriți să le ștergeți?";
+"please_enter_your_msisdn" = "Vă rugăm să introduceți numărul dvs. de telefon.";
+"grace_banner_paycell_text" = "";
+"photo_max_selection_title_x" = "";
+"photo_max_selection_body_x" = "";

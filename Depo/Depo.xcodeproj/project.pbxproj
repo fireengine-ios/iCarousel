@@ -181,6 +181,14 @@
 		063A9A942B95BD9B00B98CF0 /* BestSceneAllGroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063A9A922B95BD9B00B98CF0 /* BestSceneAllGroupCollectionViewCell.swift */; };
 		063A9A952B95BD9B00B98CF0 /* BestSceneAllGroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063A9A922B95BD9B00B98CF0 /* BestSceneAllGroupCollectionViewCell.swift */; };
 		063A9A962B95BD9B00B98CF0 /* BestSceneAllGroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063A9A922B95BD9B00B98CF0 /* BestSceneAllGroupCollectionViewCell.swift */; };
+		064C81A92BA0762C00BEC0B8 /* PhotoPrintStatusInfoPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064C81A82BA0762C00BEC0B8 /* PhotoPrintStatusInfoPopUp.swift */; };
+		064C81AA2BA0762C00BEC0B8 /* PhotoPrintStatusInfoPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064C81A82BA0762C00BEC0B8 /* PhotoPrintStatusInfoPopUp.swift */; };
+		064C81AB2BA0762C00BEC0B8 /* PhotoPrintStatusInfoPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064C81A82BA0762C00BEC0B8 /* PhotoPrintStatusInfoPopUp.swift */; };
+		064C81AC2BA0762C00BEC0B8 /* PhotoPrintStatusInfoPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064C81A82BA0762C00BEC0B8 /* PhotoPrintStatusInfoPopUp.swift */; };
+		064C81B12BA0766800BEC0B8 /* PhotoPrintStatusInfoPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 064C81B02BA0766800BEC0B8 /* PhotoPrintStatusInfoPopUp.xib */; };
+		064C81B22BA0766800BEC0B8 /* PhotoPrintStatusInfoPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 064C81B02BA0766800BEC0B8 /* PhotoPrintStatusInfoPopUp.xib */; };
+		064C81B32BA0766800BEC0B8 /* PhotoPrintStatusInfoPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 064C81B02BA0766800BEC0B8 /* PhotoPrintStatusInfoPopUp.xib */; };
+		064C81B42BA0766800BEC0B8 /* PhotoPrintStatusInfoPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 064C81B02BA0766800BEC0B8 /* PhotoPrintStatusInfoPopUp.xib */; };
 		066693842B7E330000AFBEF1 /* BestSceneResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066693832B7E330000AFBEF1 /* BestSceneResponse.swift */; };
 		066693852B7E330000AFBEF1 /* BestSceneResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066693832B7E330000AFBEF1 /* BestSceneResponse.swift */; };
 		066693862B7E330000AFBEF1 /* BestSceneResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066693832B7E330000AFBEF1 /* BestSceneResponse.swift */; };
@@ -10463,6 +10471,8 @@
 		063A9A872B95BD2D00B98CF0 /* BestSceneAllGroupSortedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSceneAllGroupSortedViewController.swift; sourceTree = "<group>"; };
 		063A9A8D2B95BD7900B98CF0 /* BestSceneAllGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSceneAllGroupViewController.swift; sourceTree = "<group>"; };
 		063A9A922B95BD9B00B98CF0 /* BestSceneAllGroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSceneAllGroupCollectionViewCell.swift; sourceTree = "<group>"; };
+		064C81A82BA0762C00BEC0B8 /* PhotoPrintStatusInfoPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintStatusInfoPopUp.swift; sourceTree = "<group>"; };
+		064C81B02BA0766800BEC0B8 /* PhotoPrintStatusInfoPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoPrintStatusInfoPopUp.xib; sourceTree = "<group>"; };
 		066693832B7E330000AFBEF1 /* BestSceneResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSceneResponse.swift; sourceTree = "<group>"; };
 		066B39462B7B9A9D000211E3 /* DiscoverCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCard.swift; sourceTree = "<group>"; };
 		066B39482B7B9AF2000211E3 /* DiscoverCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -17786,6 +17796,8 @@
 		89C0AD452A8E3A520014D674 /* Popups */ = {
 			isa = PBXGroup;
 			children = (
+				064C81A82BA0762C00BEC0B8 /* PhotoPrintStatusInfoPopUp.swift */,
+				064C81B02BA0766800BEC0B8 /* PhotoPrintStatusInfoPopUp.xib */,
 				89C0AD592A8E6D420014D674 /* PhotoPrintInfoPopup.swift */,
 				89C0AD5F2A8E6DD20014D674 /* PhotoPrintInfoPopup.xib */,
 				89C0AD652A8F4E0A0014D674 /* PhotoPrintMissingPhotoPopup.swift */,
@@ -24300,6 +24312,7 @@
 				4A9B3912201F5EC5009FC572 /* FaceImageItemsViewController.xib in Resources */,
 				890F737922EEFB0000BA0020 /* BaseChangeEmailPopUp.xib in Resources */,
 				4A56D5C2202AF658003A4624 /* FaceImageAddNameViewController.xib in Resources */,
+				064C81B12BA0766800BEC0B8 /* PhotoPrintStatusInfoPopUp.xib in Resources */,
 				4A6DBE8A21A6F9260003D1B4 /* PremiumView.xib in Resources */,
 				8E7659882333745A00D728A5 /* CredsUpdateCheckPopUp.xib in Resources */,
 				920DC89B21CBABBB009777AD /* LeavePremiumViewController.xib in Resources */,
@@ -24835,6 +24848,7 @@
 				98C298542302B15300C9811E /* SpotifyCancelImportPopup.xib in Resources */,
 				0711888D27FA9E7900F512A1 /* NavigationBar.xcassets in Resources */,
 				0791816E26F88AB20067FB75 /* VerificationMethodTableViewCell.xib in Resources */,
+				064C81B32BA0766800BEC0B8 /* PhotoPrintStatusInfoPopUp.xib in Resources */,
 				CE784CD422A685FB00662219 /* AutoUploadIsOffPopUp.xib in Resources */,
 				CE784CD622A685FB00662219 /* AnimationCard.xib in Resources */,
 				F013FA8B28059150004B9BB8 /* SecurityInfoWarningPopup.xib in Resources */,
@@ -25353,6 +25367,7 @@
 				F0E0A4792897F36400528B39 /* ForYouEmptyCellView.xib in Resources */,
 				CF8B697923CBC9D70021B021 /* CampaignCard.xib in Resources */,
 				CF8B697B23CBC9D70021B021 /* SmallFullOfQuotaPopUp.xib in Resources */,
+				064C81B22BA0766800BEC0B8 /* PhotoPrintStatusInfoPopUp.xib in Resources */,
 				CF8B697D23CBC9D70021B021 /* ActivityTimelineHeader.xib in Resources */,
 				CF71462F24B597A800D83E60 /* ContactSyncViewController.xib in Resources */,
 				CF8B698223CBC9D70021B021 /* EmailEnterController.xib in Resources */,
@@ -25664,6 +25679,7 @@
 				0711888E27FA9E7900F512A1 /* NavigationBar.xcassets in Resources */,
 				0791816F26F88AB20067FB75 /* VerificationMethodTableViewCell.xib in Resources */,
 				CF8B708A23CBCA280021B021 /* AutoUploadIsOffPopUp.xib in Resources */,
+				064C81B42BA0766800BEC0B8 /* PhotoPrintStatusInfoPopUp.xib in Resources */,
 				CF8B708C23CBCA280021B021 /* AnimationCard.xib in Resources */,
 				F013FA8C28059150004B9BB8 /* SecurityInfoWarningPopup.xib in Resources */,
 				07C75A30281A786400B028F0 /* GT-America-LC-Standard-Light.ttf in Resources */,
@@ -28426,6 +28442,7 @@
 				9877FABB23B62AE800DA6C63 /* FaceImagePhotosDataSource.swift in Sources */,
 				98231A8824F3A23500FD16E2 /* MarsFilter.swift in Sources */,
 				98CB9A862202DE4900E861D1 /* AuthenticationServiceResponseError.swift in Sources */,
+				064C81A92BA0762C00BEC0B8 /* PhotoPrintStatusInfoPopUp.swift in Sources */,
 				8C0E8EE51FDEBDFF00789C91 /* MediaItem+CoreDataClass.swift in Sources */,
 				B56FBB2C2122C78C004F4A59 /* TermsOfUsePresenter.swift in Sources */,
 				89CF11872B89DCD50040F73F /* DrawCampaignInteractorInput.swift in Sources */,
@@ -30471,6 +30488,7 @@
 				CE784A6A22A685FB00662219 /* AutoSyncViewOutput.swift in Sources */,
 				CE784A6C22A685FB00662219 /* Spotlight.swift in Sources */,
 				CE784A6D22A685FB00662219 /* ImportFromInstagramInteractor.swift in Sources */,
+				064C81AB2BA0762C00BEC0B8 /* PhotoPrintStatusInfoPopUp.swift in Sources */,
 				CE784A6E22A685FB00662219 /* ForgotPasswordInteractor.swift in Sources */,
 				B54E09D4233252D100C3AB94 /* PaycellViewController.swift in Sources */,
 				CE784A6F22A685FB00662219 /* OffersService.swift in Sources */,
@@ -32569,6 +32587,7 @@
 				CF8B669223CBC9D70021B021 /* VisualMusicPlayerInteractorInput.swift in Sources */,
 				CF8B669323CBC9D70021B021 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */,
 				CF8B669423CBC9D70021B021 /* InstapickCampaignCell.swift in Sources */,
+				064C81AA2BA0762C00BEC0B8 /* PhotoPrintStatusInfoPopUp.swift in Sources */,
 				CF8B669623CBC9D70021B021 /* BaseFilesGreedInteractor.swift in Sources */,
 				CF8B669723CBC9D70021B021 /* CardsManagerViewProtocol.swift in Sources */,
 				CF8B669823CBC9D70021B021 /* BaseFilesGreedRouterInput.swift in Sources */,
@@ -34729,6 +34748,7 @@
 				0780AB6727916846000760D9 /* TextRecognitionProcessor.swift in Sources */,
 				3A58C4CF2636A74900570811 /* InvitationCard.swift in Sources */,
 				893DCFEE292B866B00271379 /* DiscoverViewController.swift in Sources */,
+				064C81AC2BA0762C00BEC0B8 /* PhotoPrintStatusInfoPopUp.swift in Sources */,
 				98231A5624F3A23500FD16E2 /* AweStruckFilter.swift in Sources */,
 				CF8B6EEF23CBCA280021B021 /* SearchViewConfigurator.swift in Sources */,
 				CF8B6EF023CBCA280021B021 /* VisualMusicPlayerInitializer.swift in Sources */,
