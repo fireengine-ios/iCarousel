@@ -44,7 +44,8 @@ class UserProfileInteractor: UserProfileInteractorInput {
         }
         
         configuresecretQuestionView(userInfo: userInfo)
-        output.configurateUserInfo(userInfo: userInfo)
+        //output.configurateUserInfo(userInfo: userInfo)
+        allUpdated()
     }
     
     private func isEmailChanged(email: String) -> Bool {
@@ -249,6 +250,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
     
     private func allUpdated() {
         ///need to refresh local info after change
+        output.startNetworkOperation()
         SingletonStorage.shared.getAccountInfoForUser(forceReload: true, success: { [weak self] response in
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else {
