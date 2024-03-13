@@ -276,17 +276,21 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     return
                 }
                 
-                if selectedItemsCount > maxSelection {
-                    let vc = PhotoPrintInfoPopup.with()
-//                    vc.titleLabel.text = String(format: localized(.photoMaxSelectionTitle), maxSelection)
-//                    vc.descriptionLabel.text = String(format: localized(.photoMaxSelectionBody), maxSelection)
-                    vc.open()
-                } else if sendRemaining == 0 {
+                if sendRemaining == 0 {
                     let vc = PhotoPrintNoRightPopup.with()
                     vc.open()
                 } else {
-                    let vc = PhotoPrintMissingPhotoPopup.with(selectedPhotoCount: selectedItemsCount, selectedPhotos: searchItemResponse)
-                    vc.openWithBlur()
+                    if selectedItemsCount > maxSelection {
+                        let vc = PhotoPrintInfoPopup.with()
+                        vc.open()
+                    } else if selectedItemsCount < maxSelection {
+                        let vc = PhotoPrintMissingPhotoPopup.with(selectedPhotoCount: selectedItemsCount, selectedPhotos: searchItemResponse)
+                        vc.openWithBlur()
+                    } else if  selectedItemsCount == maxSelection {
+                        let routerVC = RouterVC()
+                        let vc = routerVC.photoPrintViewController(selectedPhotos: searchItemResponse)
+                        routerVC.pushViewController(viewController: vc)
+                    }
                 }
                 
             case .removeAlbum:

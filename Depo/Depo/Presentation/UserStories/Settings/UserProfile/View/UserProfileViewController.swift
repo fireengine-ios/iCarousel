@@ -188,7 +188,6 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
         // TODO: responderOnNext for birthdayDetailView
         //birthdayDetailView.textField.delegate = self
         
-        output.viewIsReady()
         NotificationCenter.default.addObserver(self,selector: #selector(onReadyButtonAction),name: .startUpdateProfileFlow, object: nil)
     }
     
@@ -208,12 +207,7 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
         super.viewDidAppear(animated)
         output.viewDidAppear()
 
-        
-        if let savedPhoneNumber = getPhoneNumberFromPersistentStorage() {
-            phoneView.numberTextField.text = savedPhoneNumber
-        } else {
-            phoneView.numberTextField.text = getPhoneNumber().replacingOccurrences(of: phoneView.codeTextField.text ?? "", with: "")
-        }
+        output.viewIsReady()
     }
     
     func setupEditState(_ isEdit: Bool) {
