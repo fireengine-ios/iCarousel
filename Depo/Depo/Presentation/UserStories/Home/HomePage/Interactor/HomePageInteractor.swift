@@ -49,7 +49,7 @@ final class HomePageInteractor: HomePageInteractorInput {
         getQuotaInfo()
         getAccountInfo()
         getPremiumCardInfo(loadStatus: .reloadAll)
-        getBestScene()
+        //getBestScene()
         getAllCardsForHomePage()
         getCampaignStatus()
         

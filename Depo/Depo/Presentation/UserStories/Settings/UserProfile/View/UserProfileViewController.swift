@@ -207,7 +207,7 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
         super.viewDidAppear(animated)
         output.viewDidAppear()
 
-        output.viewIsReady()}
+        output.viewIsReady()
     }
     
     func setupEditState(_ isEdit: Bool) {
