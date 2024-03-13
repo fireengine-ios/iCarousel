@@ -57,8 +57,8 @@ final class PhotoPrintStatusInfoPopUp: BasePopUpController {
         super.viewDidLoad()
 
         let maxSelection = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
-        titleLabel.text = localized(.photoMaxSelectionTitleX).replacingOccurrences(of: "%@", with: "5")
-        descriptionLabel.text = localized(.photoMaxSelectionBodyX).replacingOccurrences(of: "%@", with: "5")
+        titleLabel.text = String(format: localized(.photoMaxSelectionTitleX), maxSelection)
+        descriptionLabel.text = String(format: localized(.photoMaxSelectionBodyX), maxSelection)
                 
         exitImageView.isUserInteractionEnabled = true
         let tapImage = UITapGestureRecognizer(target: self, action: #selector(dismissPopup))

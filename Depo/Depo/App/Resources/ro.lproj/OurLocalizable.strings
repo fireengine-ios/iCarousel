@@ -2230,10 +2230,10 @@ then {11,99 TRY/Month}*/
 "print" = "Printare";
 
 /*Fuzzy*/
-"photo_max_selection_title_x" = "Aveți Dreptul la %@ Fotografii";
+"photo_max_selection_title" = "Aveți Dreptul la %d Fotografii";
 
 /*Fuzzy*/
-"photo_max_selection_body_x" = "Aveți dreptul să trimiteți maximum %@ fotografii pentru imprimare.";
+"photo_max_selection_body" = "Aveți dreptul să trimiteți maximum %d fotografii pentru imprimare.";
 "set_recovery_mail_success" = "E-mailul dvs. de recuperare a fost creat.";
 "set_recoverymail_securityquestion_success" = "Au fost create e-mailul de recuperare și întrebarea secretă.";
 "settings_set_password_apple_warning" = "Trebuie să fiți conectat la lifebox cu un cont Apple pentru a seta o parolă.";
@@ -2267,5 +2267,5 @@ then {11,99 TRY/Month}*/
 "delete_popup_body" = "Sunteți sigur că doriți să le ștergeți?";
 "please_enter_your_msisdn" = "Vă rugăm să introduceți numărul dvs. de telefon.";
 "grace_banner_paycell_text" = "";
-"photo_max_selection_title" = "";
-"photo_max_selection_body" = "";
+"photo_max_selection_title_x" = "";
+"photo_max_selection_body_x" = "";

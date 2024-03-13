@@ -2273,10 +2273,10 @@ then {11,99 TRY/Month}*/
 "print" = "Printoni";
 
 /*Fuzzy*/
-"photo_max_selection_title_x" = "Ju Keni %@ të Drejtat e Fotografisë";
+"photo_max_selection_title" = "Ju Keni %d të Drejtat e Fotografisë";
 
 /*Fuzzy*/
-"photo_max_selection_body_x" = "Mund të dërgoni deri në %@ fotografi për printim.";
+"photo_max_selection_body" = "Mund të dërgoni deri në %d fotografi për printim.";
 "set_recovery_mail_success" = "Email-i juaj i rikuperimit është krijuar.";
 "set_recoverymail_securityquestion_success" = "Email-i juaj i rikuperimit dhe pyetja e sigurisë janë krijuar.";
 "settings_set_password_apple_warning" = "Për të vendosur fjalëkalimin tuaj, duhet të identifikoheni në lifebox me llogarinë tuaj Apple.";
@@ -2310,5 +2310,5 @@ then {11,99 TRY/Month}*/
 "delete_popup_body" = "Jeni i sigurt që dëshironi të fshini fotot?";
 "please_enter_your_msisdn" = "Ju lutemi shkruani numrin tuaj të telefonit.";
 "grace_banner_paycell_text" = "";
-"photo_max_selection_title" = "";
-"photo_max_selection_body" = "";
+"photo_max_selection_title_x" = "";
+"photo_max_selection_body_x" = "";

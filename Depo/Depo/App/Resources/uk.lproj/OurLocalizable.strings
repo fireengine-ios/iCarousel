@@ -2232,10 +2232,10 @@ then {11,99 TRY/Month}*/
 "print" = "Друкувати";
 
 /*Fuzzy*/
-"photo_max_selection_title_x" = "Ви Маєте Право на %@ Фотографій";
+"photo_max_selection_title" = "Ви Маєте Право на %d Фотографій";
 
 /*Fuzzy*/
-"photo_max_selection_body_x" = "Ви можете відправити на друк не більше %@ фотографій.";
+"photo_max_selection_body" = "Ви можете відправити на друк не більше %d фотографій.";
 "set_recovery_mail_success" = "Вашу електронну пошту для відновлення було створено.";
 "set_recoverymail_securityquestion_success" = "Вашу електронну пошту для відновлення та секретне запитання було створено.";
 "settings_set_password_apple_warning" = "Щоб встановити пароль, необхідно увійти в lifebox за допомогою облікового запису Apple.";
@@ -2269,5 +2269,5 @@ then {11,99 TRY/Month}*/
 "delete_popup_body" = "Ви впевнені, що хочете видалити фотографії?";
 "please_enter_your_msisdn" = "Будь ласка, введіть номер телефону.";
 "grace_banner_paycell_text" = "";
-"photo_max_selection_title" = "";
-"photo_max_selection_body" = "";
+"photo_max_selection_title_x" = "";
+"photo_max_selection_body_x" = "";

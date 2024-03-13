@@ -2294,10 +2294,10 @@ then {11,99 TRY/Month}*/
 "print" = "Print";
 
 /*Fuzzy*/
-"photo_max_selection_title_x" = "You Have %@ Photo Rights";
+"photo_max_selection_title" = "You Have %d Photo Rights";
 
 /*Fuzzy*/
-"photo_max_selection_body_x" = "You can send a maximum of %@ photos for printing.";
+"photo_max_selection_body" = "You can send a maximum of %d photos for printing.";
 "set_recovery_mail_success" = "Your recovery email has been created.";
 "set_recoverymail_securityquestion_success" = "Your recovery email and security question have been created.";
 "settings_set_password_apple_warning" = "To set your password, you must log in to lifebox with your Apple Account.";
@@ -2331,5 +2331,9 @@ then {11,99 TRY/Month}*/
 "delete_popup_body" = "Are you sure you want to delete?";
 "please_enter_your_msisdn" = "Please enter your phone number.";
 "grace_banner_paycell_text" = "";
-"photo_max_selection_title" = "You Have %@ Photo Rights";
-"photo_max_selection_body" = "You can send a maximum of %@ photos for printing.";
+
+/*Fuzzy*/
+"photo_max_selection_title_x" = "You Have %@ Photo Rights";
+
+/*Fuzzy*/
+"photo_max_selection_body_x" = "You can send a maximum of %@ photos for printing.";

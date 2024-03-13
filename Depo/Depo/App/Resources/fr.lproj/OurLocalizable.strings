@@ -2535,10 +2535,10 @@ then {11,99 TRY/Month}*/
 "print" = "Imprimer";
 
 /*Fuzzy*/
-"photo_max_selection_title_x" = "Vous Avez Droit à %@ Photos";
+"photo_max_selection_title" = "Vous Avez Droit à %d Photos";
 
 /*Fuzzy*/
-"photo_max_selection_body_x" = "Vous avez le droit d'envoyer un maximum de %@ photos pour impression.";
+"photo_max_selection_body" = "Vous avez le droit d'envoyer un maximum de %d photos pour impression.";
 "set_recovery_mail_success" = "Votre e-mail de récupération a été créé.";
 "set_recoverymail_securityquestion_success" = "Votre courriel de récupération et votre question secrète ont été créés.";
 "settings_set_password_apple_warning" = "Vous devez être connecté à lifebox avec un compte Apple pour définir un mot de passe.";
@@ -2572,5 +2572,5 @@ then {11,99 TRY/Month}*/
 "delete_popup_body" = "Êtes-vous sûr de vouloir les supprimer?";
 "please_enter_your_msisdn" = "Veuillez saisir votre numéro de téléphone.";
 "grace_banner_paycell_text" = "";
-"photo_max_selection_title" = "";
-"photo_max_selection_body" = "";
+"photo_max_selection_title_x" = "";
+"photo_max_selection_body_x" = "";
