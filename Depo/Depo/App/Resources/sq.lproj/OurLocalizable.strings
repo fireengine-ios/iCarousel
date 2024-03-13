@@ -2271,8 +2271,12 @@ then {11,99 TRY/Month}*/
 "scan_qr_code_info" = "Skanoni kodin QR në pajisjen që dëshironi të lidhni.";
 "qr_code_try_again" = "Skanimi i kodit QR dështoi. Ju lutem provoni përsëri.";
 "print" = "Printoni";
-"photo_max_selection_title" = "Ju Keni %@ të Drejtat e Fotografisë";
-"photo_max_selection_body" = "Mund të dërgoni deri në %@ fotografi për printim.";
+
+/*Fuzzy*/
+"photo_max_selection_title" = "Ju Keni %d të Drejtat e Fotografisë";
+
+/*Fuzzy*/
+"photo_max_selection_body" = "Mund të dërgoni deri në %d fotografi për printim.";
 "set_recovery_mail_success" = "Email-i juaj i rikuperimit është krijuar.";
 "set_recoverymail_securityquestion_success" = "Email-i juaj i rikuperimit dhe pyetja e sigurisë janë krijuar.";
 "settings_set_password_apple_warning" = "Për të vendosur fjalëkalimin tuaj, duhet të identifikoheni në lifebox me llogarinë tuaj Apple.";
@@ -2283,17 +2287,17 @@ then {11,99 TRY/Month}*/
 "best_scene_discover_card_body" = "Zgjidh më të mirën nga një seri fotografish!";
 "print_discover_card_title" = "Paketën e Printimit";
 "print_discover_card_body" = "Printoni deri në 5 fotografi çdo muaj me paketën tonë të printimit dhe dërgojini ato drejtpërdrejt në derën tuaj falas.";
-"can_not_sent_otp_sms" = "";
-"invalid_refenrence_code" = "";
-"delete_for_selected" = "";
-"keep_everything" = "";
-"delete_info" = "";
+"can_not_sent_otp_sms" = "Nuk është e mundur të dërgoni SMS për të marrë një kod verifikimi. Mund të vazhdoni të punoni me email që i përket llogarisë tuaj.";
+"invalid_refenrence_code" = "Kodi i referencës është i pavlefshëm.";
+"delete_for_selected" = "Fshi të Zgjedhurit";
+"keep_everything" = "Ruaj te Gjitha";
+"delete_info" = "Zgjidhni fotot që dëshironi të fshini.";
 "best_scene_discover_card_title" = "Seria e Fotografive";
-"forgot_my_password_info" = "";
-"best_photo" = "";
-"security_question_invalid" = "";
-"select_security_question" = "";
-"draw_enddate" = "";
+"forgot_my_password_info" = "Fut adresën e emailit të llogarisë ose numrin e telefonit për të vazhduar procesin e rivendosjes së fjalëkalimit.\nFutni kodin e verifikimit në imazh.\nPas kësaj, një lidhje e rivendosjes së fjalëkalimit do të dërgohet në adresën tuaj të emailit ose një kod do të dërgohet në numrin tuaj të telefonit me SMS.";
+"best_photo" = "Fotoja juaj më e mirë!";
+"security_question_invalid" = "Pyetja ose përgjigja e sigurisë që keni zgjedhur është e pasaktë.";
+"select_security_question" = "Zgjidhni pyetjen tuaj të sigurisë të zgjedhur më parë";
+"draw_enddate" = "Data e Fundit për Pjesëmarrje në Lotari:";
 "draw_detail_button" = "Raffle Details";
 "draw_join" = "Join the Raffle";
 "draw_warning_header" = "You Couldn't Participate in the Raffle";
@@ -2301,7 +2305,10 @@ then {11,99 TRY/Month}*/
 "draw_package_button" = "Go to Packages";
 "draw_already_join" = "You have entered the raffle";
 "draw_detail_header" = "Raffle Details";
-"draw_success" = "";
-"delete_popup_title" = "";
-"delete_popup_body" = "";
-"please_enter_your_msisdn" = "";
+"draw_success" = "Aplikimi juaj për pjesëmarrje në llotari është plotësuar me sukses. Do të gjeni informacion të detajuar në përshkrimin e lotarisë.";
+"delete_popup_title" = "Fotografitë e përzgjedhura do të fshihen.";
+"delete_popup_body" = "Jeni i sigurt që dëshironi të fshini fotot?";
+"please_enter_your_msisdn" = "Ju lutemi shkruani numrin tuaj të telefonit.";
+"grace_banner_paycell_text" = "";
+"photo_max_selection_title_x" = "";
+"photo_max_selection_body_x" = "";

@@ -170,7 +170,7 @@ final class PhotoPrintViewController: BaseViewController {
         
         for index in 0..<selectedPhotos.count {
             showSpinner()
-            var imageUrl = selectedPhotos[index].tempDownloadURL
+            var imageUrl = selectedPhotos[index].metadata?.largeUrl
             if imageUrl == nil {
                 imageUrl = selectedPhotos[index].tempDownloadURL
             }

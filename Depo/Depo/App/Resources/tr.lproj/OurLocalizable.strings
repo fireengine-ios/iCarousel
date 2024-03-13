@@ -2300,10 +2300,10 @@ then {11,99 TRY/Month}*/
 "print" = "Baskı";
 
 /*Fuzzy*/
-"photo_max_selection_title" = "%@ Fotoğraf Hakkın Bulunuyor";
+"photo_max_selection_title" = "%d Fotoğraf Hakkın Bulunuyor";
 
 /*Fuzzy*/
-"photo_max_selection_body" = "En fazla %@ adet fotoğraf baskıya gönderebilirsin.";
+"photo_max_selection_body" = "En fazla %d adet fotoğraf baskıya gönderebilirsin.";
 "set_recovery_mail_success" = "Kurtarma mailiniz oluşturuldu.";
 "set_recoverymail_securityquestion_success" = "Kurtarma mailiniz ve güvenlik sorunuz oluşturuldu.";
 "settings_set_password_apple_warning" = "Şifreni belirleyebilmek için öncelikle Apple Hesabın ile lifebox’a giriş yapmalısın.";
@@ -2356,3 +2356,6 @@ then {11,99 TRY/Month}*/
 "delete_popup_title" = "Seçili Olan Fotoğrafların Silinecektir.";
 "delete_popup_body" = "Silmek istediğine emin misin?";
 "please_enter_your_msisdn" = "Lüfen telefon numaranızı girin.";
+"grace_banner_paycell_text" = "";
+"photo_max_selection_title_x" = "";
+"photo_max_selection_body_x" = "";

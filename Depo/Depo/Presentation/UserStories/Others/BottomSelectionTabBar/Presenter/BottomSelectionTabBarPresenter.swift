@@ -10,7 +10,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     
     weak var view: BottomSelectionTabBarViewInput!
     var router: BottomSelectionTabBarRouterInput!
-    
+
     let middleTabBarRect = CGRect(x: Device.winSize.width / 2 - 5, y: Device.winSize.height - 49, width: 10, height: 50)
     
     func viewIsReady() {
@@ -281,7 +281,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     vc.open()
                 } else {
                     if selectedItemsCount > maxSelection {
-                        let vc = PhotoPrintInfoPopup.with()
+                        let vc = PhotoPrintStatusInfoPopUp.with()
                         vc.open()
                     } else if selectedItemsCount < maxSelection {
                         let vc = PhotoPrintMissingPhotoPopup.with(selectedPhotoCount: selectedItemsCount, selectedPhotos: searchItemResponse)

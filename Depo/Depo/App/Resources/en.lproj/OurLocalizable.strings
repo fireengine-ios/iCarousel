@@ -2292,8 +2292,12 @@ then {11,99 TRY/Month}*/
 "scan_qr_code_info" = "Scan the QR code on the device you want to connect";
 "qr_code_try_again" = "QR code scanning failed. Please try again.";
 "print" = "Print";
-"photo_max_selection_title" = "You Have %@ Photo Rights";
-"photo_max_selection_body" = "You can send a maximum of %@ photos for printing.";
+
+/*Fuzzy*/
+"photo_max_selection_title" = "You Have %d Photo Rights";
+
+/*Fuzzy*/
+"photo_max_selection_body" = "You can send a maximum of %d photos for printing.";
 "set_recovery_mail_success" = "Your recovery email has been created.";
 "set_recoverymail_securityquestion_success" = "Your recovery email and security question have been created.";
 "settings_set_password_apple_warning" = "To set your password, you must log in to lifebox with your Apple Account.";
@@ -2304,17 +2308,17 @@ then {11,99 TRY/Month}*/
 "best_scene_discover_card_body" = "Choose the best from the series photos!";
 "print_discover_card_title" = "Print Package";
 "print_discover_card_body" = "Print up to 5 photos each month with the printing package and have them delivered to your address free of charge.";
-"can_not_sent_otp_sms" = "";
-"invalid_refenrence_code" = "";
-"delete_for_selected" = "";
-"keep_everything" = "";
-"delete_info" = "";
+"can_not_sent_otp_sms" = "Can not to send SMS for verification code. You can continue with the e-mail belonging to your account.";
+"invalid_refenrence_code" = "Reference code is invalid.";
+"delete_for_selected" = "Delete Selected";
+"keep_everything" = "Keep All";
+"delete_info" = "Select the photos you want to delete.";
 "best_scene_discover_card_title" = "Series Photos";
-"forgot_my_password_info" = "";
-"best_photo" = "";
-"security_question_invalid" = "";
-"select_security_question" = "";
-"draw_enddate" = "";
+"forgot_my_password_info" = "Enter the email or phone number of your account to continue the password reset process.\nEnter the verification code in the image.\nThen, a password reset link will be sent to your e-mail address or a code will be sent to your phone number via SMS.";
+"best_photo" = "Your Best Photo!";
+"security_question_invalid" = "The security question or answer you selected is incorrect.";
+"select_security_question" = "Select the security question you previously selected";
+"draw_enddate" = "Last Date to Participate in the Raffle:";
 "draw_detail_button" = "Raffle Details";
 "draw_join" = "Join the Raffle";
 "draw_warning_header" = "You Couldn't Participate in the Raffle";
@@ -2322,7 +2326,14 @@ then {11,99 TRY/Month}*/
 "draw_package_button" = "Go to Packages";
 "draw_already_join" = "You have entered the raffle";
 "draw_detail_header" = "Raffle Details";
-"draw_success" = "";
-"delete_popup_title" = "";
-"delete_popup_body" = "";
-"please_enter_your_msisdn" = "";
+"draw_success" = "Your lottery application has been completed. You can find detailed information in the raffle details.";
+"delete_popup_title" = "Selected Photos Will Be Deleted.";
+"delete_popup_body" = "Are you sure you want to delete?";
+"please_enter_your_msisdn" = "Please enter your phone number.";
+"grace_banner_paycell_text" = "";
+
+/*Fuzzy*/
+"photo_max_selection_title_x" = "You Have %@ Photo Rights";
+
+/*Fuzzy*/
+"photo_max_selection_body_x" = "You can send a maximum of %@ photos for printing.";
