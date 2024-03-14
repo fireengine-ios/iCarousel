@@ -16,6 +16,7 @@ protocol ResetPasswordServiceProtocol {
     func beginResetFlow(with params: ForgotPasswordV2)
     func proceedVerification(with method: IdentityVerificationMethod)
     func sendOTP()
+    func sendOTPV2()
     func verifyOTP(referenceToken: String, code: String)
     func validateSecurityQuestion(id: Int, answer: String)
     func reset(newPassword: String)
@@ -92,12 +93,26 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
             }
         }
     }
+    
+    func sendOTPV2() {
+        guard let referenceToken = self.referenceToken else { return }
+        callSendSMSV2(referenceToken: referenceToken) { result in
+            switch result {
+            case let .success(response):
+                self.referenceToken = response.referenceToken
+                self.delegate?.resetPasswordService(self, receivedOTPResponse: response)
+            case let .failure(error):
+                self.delegate?.resetPasswordService(self, receivedError: error)
+            }
+        }
+    }
 
     func verifyOTP(referenceToken: String, code: String) {
-        callValidatePhoneNumber(referenceToken: referenceToken, otp: code) { result in
+        guard let referenceTokenSelf = self.referenceToken else { return }
+        callValidatePhoneNumber(referenceToken: referenceTokenSelf, otp: code) { result in
             switch result {
             case .success(let response):
-                self.afterVeriyfOTP(response: response, referenceToken: referenceToken)
+                self.afterVeriyfOTP(response: response, referenceToken: referenceTokenSelf)
             case let .failure(error):
                 self.delegate?.resetPasswordService(self, receivedError: error)
             }
@@ -224,6 +239,22 @@ private extension ResetPasswordService {
 
     func callSendSMS(referenceToken: String, completion: @escaping DefaultResponseCompletion<ResetPasswordResponse>) {
         let param = BodyToken(token: referenceToken, url: RouteRequests.ForgotMyPassword.sendSMS)
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { legacyResponse in
+            do {
+                let response = try legacyResponse.decodedResponse(ResetPasswordResponse.self)
+                completion(.success(response))
+            } catch {
+                completion(.failure(error))
+            }
+        } fail: { error in
+            completion(.failure(error))
+        }
+        executePostRequest(param: param, handler: handler)
+    }
+    
+    func callSendSMSV2(referenceToken: String, completion: @escaping DefaultResponseCompletion<ResetPasswordResponse>) {
+        let verificationMethod = VerificationMethod.msisdn.methodString
+        let param = TokenInBodyResendOtp(referenceToken: referenceToken, msisdn: msisdn ?? "")
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { legacyResponse in
             do {
                 let response = try legacyResponse.decodedResponse(ResetPasswordResponse.self)
@@ -426,6 +457,32 @@ private struct TokenInBody: RequestParametrs {
 
     var patch: URL {
         let patch = String(format: RouteRequests.ForgotMyPasswordV2.continueWithEmailOrRecoveryEmail.absoluteString, "?", referenceToken)
+        let url = URL(string: patch) ?? RouteRequests.ForgotMyPasswordV2.continueWithEmailOrRecoveryEmail
+        return url
+    }
+
+    var header: RequestHeaderParametrs {
+        return RequestHeaders.base()
+    }
+}
+
+private struct TokenInBodyResendOtp: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
+
+    let referenceToken: String
+    let msisdn: String
+
+    var requestParametrs: Any {
+        return [
+            LbRequestkeys.referenceToken: referenceToken,
+            LbRequestkeys.msisdn: msisdn
+        ]
+    }
+
+    var patch: URL {
+        let patch = String(format: RouteRequests.ForgotMyPasswordV2.sendSMS.absoluteString, "?", referenceToken)
         let url = URL(string: patch) ?? RouteRequests.ForgotMyPasswordV2.continueWithEmailOrRecoveryEmail
         return url
     }

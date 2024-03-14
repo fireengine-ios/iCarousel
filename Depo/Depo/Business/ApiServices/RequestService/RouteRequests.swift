@@ -143,6 +143,7 @@ struct RouteRequests {
         static let validatePhoneNumber = baseUrl +/ "v2/forgotMyPassword/verify"
         static let continueWithEmailOrRecoveryEmail = baseUrl +/ "v2/forgotMyPassword%@referenceToken=%@"
         static let validateSecurityQuestion = baseUrl +/ "v2/forgotMyPassword/verify"
+        static let sendSMS = baseUrl +/ "v2/forgotMyPassword%@referenceToken=%@"
     }
 
     // MARK: EULA 

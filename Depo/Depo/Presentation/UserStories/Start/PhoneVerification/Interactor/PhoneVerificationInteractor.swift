@@ -91,6 +91,10 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
         })
     }
     
+    func startFlow() {
+        print()
+    }
+    
     func verifyCode(code: String) {
         let request = SignUpValidateOTP(referenceToken: dataStorage.signUpResponse.referenceToken ?? "",
                                         otp: code)
