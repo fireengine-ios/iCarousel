@@ -200,6 +200,11 @@ final class SubscriptionOfferView: UIView, NibInit {
             featureView.purchaseButton.isHidden = false
         }
         
+        if plan.packageStatus == "WAITING_DEACTIVATION" {
+            featureView.purchaseButton.isHidden = true
+            featureView.purchaseButtonHeightConstaint.constant = 0
+        }
+        
         featureView.delegate = delegate
         featureView.index = index
     }
@@ -325,6 +330,9 @@ final class SubscriptionOfferView: UIView, NibInit {
     private func updateDetails(plan: SubscriptionPlan) {
         if plan.date.isEmpty, plan.store.isEmpty {
             detailsView.isHidden = true
+        } else if plan.packageStatus == "WAITING_DEACTIVATION" {
+            paydayLabel.text = plan.date
+            offerStoreLabel.text = "MASTERPASS"
         } else {
             paydayLabel.text = plan.date
             offerStoreLabel.text = plan.store

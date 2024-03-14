@@ -300,7 +300,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
                 DispatchQueue.toMain {
                     self?.output.failed(with: errorResponse)
                 }
-            }, isLogin: false)
+            }, isLogin: true)
     }
     
     func getActiveSubscriptionForBanner() {
@@ -316,7 +316,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
                 DispatchQueue.main.async {
                     self?.output.getActiveSubscriptionForBanner(offers: offersList)
                 }
-            }, fail: { value in }, isLogin: false)
+            }, fail: { value in }, isLogin: true)
     }
     
     func getAvailableOffersForBanner() {
