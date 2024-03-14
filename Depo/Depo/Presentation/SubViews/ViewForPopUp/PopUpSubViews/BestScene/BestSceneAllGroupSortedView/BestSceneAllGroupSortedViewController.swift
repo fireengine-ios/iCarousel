@@ -189,7 +189,13 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
     
     @objc func tappedDeleteButton() {
         service.deleteSelectedPhotos(groupId: 14962, photoIds: ["file-1-uuid"]) { response in
-            print("⚠️", response)
+            switch response {
+            case .success():
+                let vc = BestSceneSuccessPopUp.with()
+                vc.open()
+            case .failed(let error):
+                print(error.localizedDescription)
+            }
         }
      }
      
