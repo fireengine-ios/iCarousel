@@ -23,8 +23,16 @@ class FavoriteInitializer: NSObject {
         viewController.forYouControllerSection = .favorites
         viewController.isFavorites = true
         
+        var elements: [ElementTypes] = [.share, .download, .moveToTrash]
+        
+        if SingletonStorage.shared.accountInfo?.isUserFromTurkey == true {
+            if let moveIndex = elements.firstIndex(of: .download) {
+                elements.insert(.print, at: moveIndex + 1)
+            }
+        }
+        
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .moveToTrash],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: elements,
                                                style: .default, tintColor: AppColor.tint.color,
                                                unselectedItemTintColor: AppColor.label.color,
                                                barTintColor: AppColor.drawerBackground.color)
