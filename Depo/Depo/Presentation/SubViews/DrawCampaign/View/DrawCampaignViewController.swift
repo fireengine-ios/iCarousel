@@ -77,6 +77,7 @@ final class DrawCampaignViewController: BaseViewController {
     
     private lazy var contentTextView: UITextView = {
         let view = UITextView()
+        view.backgroundColor = AppColor.background.color
         view.textColor = AppColor.textButton.color
         view.font = .appFont(.regular, size: 12)
         view.textAlignment = .left
