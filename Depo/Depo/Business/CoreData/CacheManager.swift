@@ -90,6 +90,7 @@ final class CacheManager {
                     
                     if isNoRemotes || self.userDefaultsVars.currentRemotesPage > 0 {
                         self.showPreparationCardAfterDelay()
+                        prepairingLoadingForProfileImage(isStart: false)
                         self.startAppendingAllRemotes(completion: { [weak self] in
                             debugLog("CacheManager no remotes, appended all remotes")
                             guard let self = self, !self.processingRemoteItems else {
@@ -135,6 +136,7 @@ final class CacheManager {
                             return
                         }
                         self.showPreparationCardAfterDelay()
+                        prepairingLoadingForProfileImage(isStart: false)
                         self.startProcessingAllLocals(completion: { [weak self] in
                             self?.actualizeUnsavedFileSyncStatus() { [weak self] in
                                 guard let self = self, !self.processingRemoteItems else {
