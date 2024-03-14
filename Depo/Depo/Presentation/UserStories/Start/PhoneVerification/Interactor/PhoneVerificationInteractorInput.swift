@@ -42,4 +42,6 @@ protocol PhoneVerificationInteractorInput {
 
     func stopUpdatePhone()
     
+    func startFlow()
+    
 }

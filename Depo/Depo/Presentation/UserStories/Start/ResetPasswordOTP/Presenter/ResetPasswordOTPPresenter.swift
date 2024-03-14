@@ -19,7 +19,7 @@ final class ResetPasswordOTPPresenter: PhoneVerificationPresenter, ResetPassword
         view.setupInitialState(timerEnabled: timerEnabled)
         configure()
         view.setupButtonsInitialState()
-        interactor.resendCode()
+        interactor.startFlow()
     }
 
     func verified(with resetPasswordService: ResetPasswordService, newMethods: [IdentityVerificationMethod]) {
