@@ -629,7 +629,9 @@ final class PackageService {
         if let expirationDate = model.subscriptionEndDate, model.subscriptionPlanType.isSameAs(QuotaPackageType.promo) {
             let date = dateString(from: expirationDate)
             resultDate = String(format: TextConstants.subscriptionEndDate, date)
-            
+        } else if let expirationDate = model.subscriptionEndDate, model.subscriptionPlanType.isSameAs(QuotaPackageType.masterpass) {
+            let date = dateString(from: expirationDate)
+            resultDate = String(format: TextConstants.subscriptionEndDate, date)
         } else if let renewalDate = model.nextRenewalDate {
             let date = dateString(from: renewalDate)
             resultDate = String(format: TextConstants.renewalDate, date)
