@@ -13,6 +13,7 @@ final class GarentaViewController: BaseViewController {
     
     private lazy var descriptionTextView: UITextView = {
         let view = UITextView()
+        view.backgroundColor = AppColor.background.color
         view.textColor = AppColor.textButton.color
         view.font = .appFont(.regular, size: 12)
         view.textAlignment = .left

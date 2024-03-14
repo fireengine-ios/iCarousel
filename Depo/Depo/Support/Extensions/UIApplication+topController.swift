@@ -66,7 +66,7 @@ extension UIApplication {
         guard message != TextConstants.errorBadConnection else {
             return
         }
-        if message == "account_has_foreign_subscription" || message == "ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" {
+        if message == "account_has_foreign_subscription" || message == "ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" || message == "CAN_NOT_CHANGE_MSISDN" {
             newMessage = localized(.accountHasForeignSubscription)
         }
         let controller = topController()

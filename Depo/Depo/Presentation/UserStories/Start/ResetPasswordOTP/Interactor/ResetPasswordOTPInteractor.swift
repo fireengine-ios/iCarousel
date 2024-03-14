@@ -49,13 +49,18 @@ final class ResetPasswordOTPInteractor {
     let MaxAttemps = NumericConstants.maxVerificationAttempts
 
     private var isVerifying = false
+    
+    func startFlow() {
+        isVerifying = false
+        attempts = 0
+        remainingTimeInSeconds = 180
+        output.resendCodeRequestSucceeded()
+    }
 
     func resendCode() {
         isVerifying = false
-
         attempts = 0
-        //resetPasswordService.sendOTP()
-        remainingTimeInSeconds = 180
+        resetPasswordService.sendOTPV2()
         output.resendCodeRequestSucceeded()
     }
 
@@ -87,7 +92,7 @@ final class ResetPasswordOTPInteractor {
 extension ResetPasswordOTPInteractor: ResetPasswordServiceDelegate {
     func resetPasswordService(_ service: ResetPasswordService, receivedOTPResponse response: ResetPasswordResponse) {
         expectedInputLength = response.expectedInputLength
-        remainingTimeInSeconds = (response.remainingTimeInMinutes ?? 1) * 60
+        remainingTimeInSeconds = 180
         output.resendCodeRequestSucceeded()
     }
 
