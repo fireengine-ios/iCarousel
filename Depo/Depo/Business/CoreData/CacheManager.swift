@@ -185,7 +185,9 @@ final class CacheManager {
     
     private func prepairingLoadingForProfileImage(isStart: Bool) {
         userDefaultsVars.isProcessPrepairingDone = isStart
-        NotificationCenter.default.post(name: .isProcecessPrepairing, object: nil)
+        if isStart {
+            NotificationCenter.default.post(name: .isProcecessPrepairing, object: nil)
+        }
     }
     
     private func scheduleActualization() {
