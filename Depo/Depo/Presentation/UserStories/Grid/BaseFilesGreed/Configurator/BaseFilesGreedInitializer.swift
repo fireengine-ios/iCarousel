@@ -123,7 +123,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     class func initializeFavoritesViewController(with nibName: String, moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
-        viewController.floatingButtonsArray.append(contentsOf: [.uploadFiles, .uploadFromLifeboxFavorites])
+        viewController.floatingButtonsArray.append(contentsOf: [.uploadFromLifeboxFavorites])
         viewController.cardsContainerView.addPermittedPopUpViewTypes(types: [.upload, .download])
         viewController.cardsContainerView.isEnable = true
         viewController.isFavorites = true
