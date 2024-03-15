@@ -130,6 +130,12 @@ extension DiscoverCard: UICollectionViewDelegate, UICollectionViewDataSource, UI
                 self.coverPhotoUrl = response.coverPhoto.tempDownloadURL ?? ""
                 self.fileListUrls = response.fileList.compactMap { $0.tempDownloadURL }
                 
+                let id = response.id
+                let groupUUID = response.coverPhoto.album
+                
+                print("😎 id", id)
+                print("😎 groupUUID", groupUUID)
+                
                 DispatchQueue.main.async {
                     let router = RouterVC()
                     let controller = router.bestSceneAllGroupSortedViewController(coverPhotoUrl: self.coverPhotoUrl, fileListUrls: self.fileListUrls)

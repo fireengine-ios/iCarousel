@@ -63,7 +63,7 @@ final class BestSceneSuccessPopUp: BasePopUpController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        titleLabel.text = "localized(.printInfoPopUpTitle)"
+        titleLabel.text = localized(TextConstants.contactBackupHistoryDeletePopUpTitle)
         descriptionLabel.text = localized(TextConstants.contactConfirmDeleteTitle)
     }
     
