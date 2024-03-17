@@ -146,9 +146,12 @@ extension BestSceneAllGroupViewController: UICollectionViewDelegate, UICollectio
                 let coverPhotoUrl = response.coverPhoto.tempDownloadURL
                 let fileListUrls = response.fileList.compactMap { $0.tempDownloadURL }
                 
+                let selectedId = response.id
+                let selectedGroupID = response.coverPhoto.id
+                
                 DispatchQueue.main.async {
                     let router = RouterVC()
-                    let controller = router.bestSceneAllGroupSortedViewController(coverPhotoUrl: coverPhotoUrl ?? "", fileListUrls: fileListUrls)
+                    let controller = router.bestSceneAllGroupSortedViewController(coverPhotoUrl: coverPhotoUrl ?? "", fileListUrls: fileListUrls, selectedId: selectedId ?? 0, selectedGroupID: selectedGroupID ?? 0)
                     router.pushViewController(viewController: controller)
                 }
             case .failed(let error):

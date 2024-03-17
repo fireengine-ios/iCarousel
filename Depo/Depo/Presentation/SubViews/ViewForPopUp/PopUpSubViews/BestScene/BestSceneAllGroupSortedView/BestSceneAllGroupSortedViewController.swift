@@ -9,6 +9,11 @@
 import UIKit
 import SNCollectionViewLayout
 
+struct PhotoSelection {
+    var selectedId: Int
+    var selectedGroupId: Int
+}
+
 class BestSceneAllGroupSortedViewController: BaseViewController {
     
     private let service = BestSceneService()
@@ -88,6 +93,11 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
     var coverPhotoUrl: String?
     var fileListUrls: [String] = []
     
+    var selectedId: Int?
+    var selectedGroupID: Int?
+    
+    var selectedPhotos: [PhotoSelection] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -102,9 +112,11 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
         setupLayout()        
     }
     
-    init(coverPhotoUrl: String, fileListUrls: [String]) {
+    init(coverPhotoUrl: String, fileListUrls: [String], selectedId: Int, selectedGroupID: Int) {
         self.coverPhotoUrl = coverPhotoUrl
         self.fileListUrls = fileListUrls
+        self.selectedId = selectedId
+        self.selectedGroupID = selectedGroupID
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -116,6 +128,9 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         collectionView.reloadData()
+        
+        print("😎", selectedId)
+        print("😎", selectedGroupID)
     }
     
     private func setupLayout() {
@@ -188,7 +203,10 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
     }()
     
     @objc func tappedDeleteButton() {
-        service.deleteSelectedPhotos(groupId: 14962, photoIds: ["file-1-uuid"]) { response in
+        let stringIds = selectedPhotos.map { String($0.selectedId) }
+
+        service.deleteSelectedPhotos(groupId: selectedId ?? 0, photoIds: stringIds) { response in
+            print("😎", response)
             switch response {
             case .success():
                 let vc = BestSceneSuccessPopUp.with()
@@ -206,8 +224,8 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
      }
 }
 
-extension BestSceneAllGroupSortedViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SNCollectionViewLayoutDelegate {
-    
+extension BestSceneAllGroupSortedViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SNCollectionViewLayoutDelegate, BestSceneCellDelegate {
+   
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1 + fileListUrls.count
     }
@@ -220,6 +238,9 @@ extension BestSceneAllGroupSortedViewController: UICollectionViewDelegate, UICol
         cell.configureTickViews(forFirstCell: indexPath.item == 0)
         cell.configureBorder(forFirstCell: indexPath.item == 0)
         cell.configureTickImage(forFirstCell: indexPath.item == 0)
+        
+        cell.selectedId = self.selectedId
+        cell.selectedGroupID = self.selectedGroupID
                 
         let photoUrl = indexPath.row == 0 ? coverPhotoUrl : fileListUrls[indexPath.row - 1]
         cell.imageView.sd_setImage(with: URL(string: photoUrl ?? ""))
@@ -227,8 +248,16 @@ extension BestSceneAllGroupSortedViewController: UICollectionViewDelegate, UICol
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("cell tapped")
+    func didTapTickImage(selectedId: Int, selectedGroupId: Int, isSelected: Bool) {
+        let selection = PhotoSelection(selectedId: selectedId, selectedGroupId: selectedGroupId)
+        
+        if isSelected {
+            if !selectedPhotos.contains(where: { $0.selectedId == selectedId && $0.selectedGroupId == selectedGroupId }) {
+                selectedPhotos.append(selection)
+            }
+        } else {
+            selectedPhotos.removeAll(where: { $0.selectedId == selectedId && $0.selectedGroupId == selectedGroupId })
+        }
     }
     
     func scaleForItem(inCollectionView collectionView: UICollectionView, withLayout layout: UICollectionViewLayout, atIndexPath indexPath: IndexPath) -> UInt {

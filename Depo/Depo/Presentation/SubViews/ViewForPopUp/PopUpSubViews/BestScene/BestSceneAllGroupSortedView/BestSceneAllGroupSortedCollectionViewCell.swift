@@ -8,9 +8,18 @@
 
 import UIKit
 
+protocol BestSceneCellDelegate: AnyObject {
+    func didTapTickImage(selectedId: Int, selectedGroupId: Int, isSelected: Bool)
+}
+
 class BestSceneAllGroupSortedCollectionViewCell: UICollectionViewCell {
     
     let imageView = UIImageView()
+    
+    weak var delegate: BestSceneCellDelegate?
+    
+    var selectedId: Int?
+    var selectedGroupID: Int?
     
     var bigTickViewTopConstraint: NSLayoutConstraint!
     var bigTickViewLeadingConstraint: NSLayoutConstraint!
@@ -74,6 +83,10 @@ class BestSceneAllGroupSortedCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func didTapTick() {
+        isSelected = !isSelected
+        
+        delegate?.didTapTickImage(selectedId: selectedId ?? 0, selectedGroupId: selectedGroupID ?? 0, isSelected: isSelected)
+        
         if tickImage.isHidden {
             tickImage.image = UIImage(named: "iconCheckboxCheckFill")
         }

@@ -28,6 +28,8 @@ class DiscoverCard: BaseCardView {
     
     var coverPhotoUrl: String = ""
     var fileListUrls: [String] = []
+    var selectedId: Int = 0
+    var selectedGroupID: Int = 0
     
     private var isScreenPresented = false
     
@@ -129,16 +131,13 @@ extension DiscoverCard: UICollectionViewDelegate, UICollectionViewDataSource, UI
                 
                 self.coverPhotoUrl = response.coverPhoto.tempDownloadURL ?? ""
                 self.fileListUrls = response.fileList.compactMap { $0.tempDownloadURL }
-                
-                let id = response.id
-                let groupUUID = response.coverPhoto.album
-                
-                print("😎 id", id)
-                print("😎 groupUUID", groupUUID)
+                                
+                self.selectedId = response.id ?? 0
+                self.selectedGroupID = response.coverPhoto.id ?? 0
                 
                 DispatchQueue.main.async {
                     let router = RouterVC()
-                    let controller = router.bestSceneAllGroupSortedViewController(coverPhotoUrl: self.coverPhotoUrl, fileListUrls: self.fileListUrls)
+                    let controller = router.bestSceneAllGroupSortedViewController(coverPhotoUrl: self.coverPhotoUrl, fileListUrls: self.fileListUrls, selectedId: self.selectedId, selectedGroupID: self.selectedGroupID)
                     router.pushViewController(viewController: controller)
                     self.isScreenPresented = false
                 }
