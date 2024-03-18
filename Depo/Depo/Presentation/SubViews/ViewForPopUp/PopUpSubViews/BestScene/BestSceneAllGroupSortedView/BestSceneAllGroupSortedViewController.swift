@@ -9,11 +9,6 @@
 import UIKit
 import SNCollectionViewLayout
 
-struct PhotoSelection {
-    var selectedId: Int
-    var selectedGroupId: Int
-}
-
 class BestSceneAllGroupSortedViewController: BaseViewController {
     
     private let service = BestSceneService()
@@ -95,8 +90,9 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
     
     var selectedId: Int?
     var selectedGroupID: Int?
-    
-    var selectedPhotos: [PhotoSelection] = []
+        
+    var selectedPhotoIds: [Int] = []
+    var selectedGroupIds: [Int] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,9 +124,6 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         collectionView.reloadData()
-        
-        print("😎", selectedId)
-        print("😎", selectedGroupID)
     }
     
     private func setupLayout() {
@@ -203,19 +196,41 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
     }()
     
     @objc func tappedDeleteButton() {
-        let stringIds = selectedPhotos.map { String($0.selectedId) }
-
-        service.deleteSelectedPhotos(groupId: selectedId ?? 0, photoIds: stringIds) { response in
-            print("😎", response)
-            switch response {
-            case .success():
-                let vc = BestSceneSuccessPopUp.with()
-                vc.open()
-            case .failed(let error):
-                print(error.localizedDescription)
+        
+        guard !selectedPhotoIds.isEmpty else {
+            print("😎 No photos selected.")
+            return
+        }
+        
+        let stringIds = selectedPhotoIds.map { String($0) }
+        
+        let uniqueGroupIds = Array(Set(selectedGroupIds))
+        
+        print("😎 a", stringIds)
+        print("😎 b", uniqueGroupIds)
+        
+        uniqueGroupIds.forEach { groupId in
+            let photoIdsForThisGroup = selectedPhotoIds.enumerated().filter { index, _ in
+                selectedGroupIds[index] == groupId
+            }.map { _, id in
+                return String(id)
+            }
+            
+            print("😎 c", groupId)
+            print("😎 d", photoIdsForThisGroup)
+            
+            service.deleteSelectedPhotos(groupId: groupId, photoIds: photoIdsForThisGroup) { response in
+                print("😎", response)
+                switch response {
+                case .success():
+                    let vc = BestSceneSuccessPopUp.with()
+                    vc.open()
+                case .failed(let error):
+                    print(error.localizedDescription)
+                }
             }
         }
-     }
+    }
      
      @objc func tappedKeepItemButton() {
          service.keepAllPhotosInGroup(groupId: nil, photoIds: []) { response in
@@ -239,27 +254,32 @@ extension BestSceneAllGroupSortedViewController: UICollectionViewDelegate, UICol
         cell.configureBorder(forFirstCell: indexPath.item == 0)
         cell.configureTickImage(forFirstCell: indexPath.item == 0)
         
-        cell.selectedId = self.selectedId
-        cell.selectedGroupID = self.selectedGroupID
-                
         let photoUrl = indexPath.row == 0 ? coverPhotoUrl : fileListUrls[indexPath.row - 1]
         cell.imageView.sd_setImage(with: URL(string: photoUrl ?? ""))
+        
+        cell.selectedId = self.selectedId
+        cell.selectedGroupID = self.selectedGroupID
+        cell.delegate = self
         
         return cell
     }
     
     func didTapTickImage(selectedId: Int, selectedGroupId: Int, isSelected: Bool) {
-        let selection = PhotoSelection(selectedId: selectedId, selectedGroupId: selectedGroupId)
-        
         if isSelected {
-            if !selectedPhotos.contains(where: { $0.selectedId == selectedId && $0.selectedGroupId == selectedGroupId }) {
-                selectedPhotos.append(selection)
+            if !selectedPhotoIds.contains(selectedId) {
+                selectedPhotoIds.append(selectedId)
+                selectedGroupIds.append(selectedGroupId)
             }
         } else {
-            selectedPhotos.removeAll(where: { $0.selectedId == selectedId && $0.selectedGroupId == selectedGroupId })
+            if let index = selectedPhotoIds.firstIndex(of: selectedId) {
+                selectedPhotoIds.remove(at: index)
+                selectedGroupIds.remove(at: index)
+            }
         }
+        print("😎 Selected Photos: \(selectedPhotoIds)")
+        print("😎 Selected Groups: \(selectedGroupIds)")
     }
-    
+
     func scaleForItem(inCollectionView collectionView: UICollectionView, withLayout layout: UICollectionViewLayout, atIndexPath indexPath: IndexPath) -> UInt {
         if indexPath.row == 0 {
             
