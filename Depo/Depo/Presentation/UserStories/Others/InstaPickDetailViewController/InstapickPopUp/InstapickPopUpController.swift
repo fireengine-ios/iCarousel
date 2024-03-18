@@ -326,13 +326,13 @@ extension InstapickPopUpController {
         
         containerView.addSubview(withoutConnectingButton)
         withoutConnectingButton.translatesAutoresizingMaskIntoConstraints = false
-        withoutConnectingButton.topAnchor.constraint(equalTo: withConnectingButton.bottomAnchor, constant: 40).isActive = true
+        withoutConnectingButton.topAnchor.constraint(equalTo: withConnectingButton.bottomAnchor, constant: 30).isActive = true
         withoutConnectingButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         withoutConnectingButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
         
         containerView.addSubview(checkBoxStackView)
         checkBoxStackView.translatesAutoresizingMaskIntoConstraints = false
-        checkBoxStackView.topAnchor.constraint(equalTo: withoutConnectingButton.bottomAnchor, constant: 81).isActive = true
+        checkBoxStackView.topAnchor.constraint(equalTo: withoutConnectingButton.bottomAnchor, constant: 40).isActive = true
         
         checkBoxStackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         
