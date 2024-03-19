@@ -275,7 +275,7 @@ extension ForgotPasswordViewController: ForgotPasswordViewInput {
     func successForgotMyPassWordWithMail() {
         let message = String(format: localized(.resetPasswordEmailPopupMessage), loginEnterView.textField.text ?? "")
         
-        let popUp = PopUpController.withDark(title: "E-Posta ile Doğrulama",
+        let popUp = PopUpController.withDark(title: nil,
                                          message: message,
                                          image: .custom(Image.forgetPassPopupLock.image),
                                          buttonTitle: TextConstants.ok) { vc in

@@ -29,13 +29,12 @@ final class PremiumViewController: BaseViewController, NibInit {
 
         activityManager.delegate = self
         setTitle(withString: TextConstants.becomePremiumNavBarTitle)
-        
-        output.onViewDidLoad(with: premiumView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        output.onViewDidLoad(with: premiumView)
     }
 }
 

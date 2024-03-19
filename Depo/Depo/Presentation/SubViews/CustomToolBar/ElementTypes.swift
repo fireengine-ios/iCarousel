@@ -946,7 +946,7 @@ enum ElementTypes {
         case .endSharing:
             return Image.iconUnShare.image
         case .leaveSharing:
-            return nil
+            return Image.iconUnShare.image
         case .moveToTrashShared:
             return nil
         case .shareOriginal:

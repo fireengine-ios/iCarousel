@@ -53,7 +53,7 @@ final class ResetPasswordOTPInteractor {
     func startFlow() {
         isVerifying = false
         attempts = 0
-        remainingTimeInSeconds = 180
+        remainingTimeInSeconds = 120
         output.resendCodeRequestSucceeded()
     }
 
@@ -92,7 +92,7 @@ final class ResetPasswordOTPInteractor {
 extension ResetPasswordOTPInteractor: ResetPasswordServiceDelegate {
     func resetPasswordService(_ service: ResetPasswordService, receivedOTPResponse response: ResetPasswordResponse) {
         expectedInputLength = response.expectedInputLength
-        remainingTimeInSeconds = 180
+        remainingTimeInSeconds = 120
         output.resendCodeRequestSucceeded()
     }
 
@@ -104,13 +104,13 @@ extension ResetPasswordOTPInteractor: ResetPasswordServiceDelegate {
     }
 
     func resetPasswordService(_ service: ResetPasswordService, receivedError error: Error) {
-        if isVerifying {
-            verifyCodeFailed(with: error)
-            
-            trackContinueEvent(error: error)
-        } else {
-            resendCodeFailed(with: error)
-        }
+        resendCodeFailed(with: error)
+//        if isVerifying {
+//            verifyCodeFailed(with: error)
+//            trackContinueEvent(error: error)
+//        } else {
+//            resendCodeFailed(with: error)
+//        }
     }
 }
 

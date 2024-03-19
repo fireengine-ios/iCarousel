@@ -398,7 +398,9 @@ class FileService: BaseRequestService {
     
     func download(items: [WrapData], album: AlbumItem? = nil, success: FileOperation?, fail: FailResponse?) {
         debugLog("FileService download")
+        debugLog("prepairing download createDownloadUrls 11")
         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            debugLog("prepairing download createDownloadUrls 12")
             showAccessAlert()
             success?()
             return
@@ -406,36 +408,43 @@ class FileService: BaseRequestService {
         let supportedItemsToDownload = items.filter { $0.hasSupportedExtension() }
         
         guard !supportedItemsToDownload.isEmpty else {
+            debugLog("prepairing download createDownloadUrls 13")
             fail?(ErrorResponse.string(TextConstants.errorUnsupportedExtension))
             return
         }
         
         if supportedItemsToDownload.count != items.count {
+            debugLog("prepairing download createDownloadUrls 14")
             UIApplication.showErrorAlert(message: TextConstants.errorUnsupportedExtension)
         }
         
         allOperationsCount = allOperationsCount + supportedItemsToDownload.count
         CardsManager.default.startOperationWith(type: .download, allOperations: allOperationsCount, completedOperations: 0)
+        debugLog("prepairing download createDownloadUrls 15")
         let downloadRequests: [BaseDownloadRequestParametrs] = supportedItemsToDownload.compactMap {
             guard let urlToFile = $0.urlToFile, let fileName = $0.name else {
+                debugLog("prepairing download createDownloadUrls 16")
                 return nil
             }
             
             let url = urlToFile.isExpired ? urlToFile.byTrimmingQuery : urlToFile
-            
+            debugLog("prepairing download createDownloadUrls 17")
             guard let downloadUrl = url else {
+                debugLog("prepairing download createDownloadUrls 18")
                 return nil
             }
             
             return BaseDownloadRequestParametrs(urlToFile: downloadUrl, fileName: fileName, contentType: $0.fileType, albumName: album?.name, item: $0)
         }
-        
+        debugLog("prepairing download createDownloadUrls 19")
         let operations = downloadRequests.compactMap { baseDownloadRequest in
             DownLoadOperation(downloadParam: baseDownloadRequest, success: { [weak self] in
                 guard let `self` = self else {
+                    debugLog("prepairing download createDownloadUrls 20")
                     return
                 }
                 if let unwrapItem = baseDownloadRequest.item {
+                    debugLog("prepairing download createDownloadUrls 21")
                     switch unwrapItem.fileType {
                     case .video:
                         self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .download, eventLabel: .download(.video))
@@ -454,12 +463,13 @@ class FileService: BaseRequestService {
                         break
                     }
                 }
-
+                debugLog("prepairing download createDownloadUrls 22")
                 self.completedOperationsCount += 1
                 CardsManager.default.setProgressForOperationWith(type: .download,
                                                                  allOperations: self.allOperationsCount,
                                                                  completedOperations: self.completedOperationsCount)
             }, fail: { [weak self] error in
+                debugLog("prepairing download createDownloadUrls 23")
                 self?.error = error.isUnknownError ? ErrorResponse.string(TextConstants.errorUnsupportedExtension) : error
                 /// HERE MUST BE ERROR HANDLER
                 self?.completedOperationsCount += 1
@@ -470,7 +480,7 @@ class FileService: BaseRequestService {
             guard let `self` = self else {
                 return
             }
-            
+            debugLog("prepairing download createDownloadUrls 24")
             self.downloadOperation.addOperations(operations, waitUntilFinished: true)
             
             if self.allOperationsCount == self.completedOperationsCount {
@@ -485,6 +495,7 @@ class FileService: BaseRequestService {
                 if self.allOperationsCount == self.completedOperationsCount {
                     self.allOperationsCount = 0
                     self.completedOperationsCount = 0
+                    debugLog("prepairing download createDownloadUrls 25")
                     success?()
                 }
             }
