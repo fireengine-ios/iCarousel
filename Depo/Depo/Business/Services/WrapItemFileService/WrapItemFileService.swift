@@ -288,7 +288,7 @@ class WrapItemFileService: WrapItemFileOperations {
     }
     
     func download(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?) {
-        
+        debugLog("prepairing download createDownloadUrls 8")
         if items.first?.fileType == .timeline {
             let downloadItems = remoteWrapDataItems(files: items)
             createDownloadUrls(for: downloadItems) { [weak self] in
@@ -300,31 +300,34 @@ class WrapItemFileService: WrapItemFileOperations {
         let downloadItems = remoteWrapDataItems(files: items)
         
         let itemsWithoutUrl = items.filter { $0.tmpDownloadUrl == nil || !$0.isOwner }
-        
+        debugLog("prepairing download createDownloadUrls 9")
         createDownloadUrls(for: itemsWithoutUrl) { [weak self] in
+            debugLog("prepairing download createDownloadUrls 10")
             self?.remoteFileService.download(items: downloadItems, success: success, fail: fail)
         }
     }
     
     func createDownloadUrls(for items: [WrapData], completion: @escaping VoidHandler) {
         let group = DispatchGroup()
-        
+        debugLog("prepairing download createDownloadUrls 1")
         items.forEach { item in
             group.enter()
-            
+            debugLog("prepairing download createDownloadUrls 2")
             guard let projectId = item.projectId else {
+                debugLog("prepairing download createDownloadUrls 3")
                 group.leave()
                 return
             }
             
             privateShareApiService.createDownloadUrl(projectId: projectId, uuid: item.uuid) { response in
+                debugLog("prepairing download createDownloadUrls 4")
                 if case let ResponseResult.success(urlToDownload) = response {
                     item.tmpDownloadUrl = urlToDownload.url
                 }
                 group.leave()
             }
         }
-        
+        debugLog("prepairing download createDownloadUrls 5")
         group.notify(queue: .main, execute: completion)
     }
     
