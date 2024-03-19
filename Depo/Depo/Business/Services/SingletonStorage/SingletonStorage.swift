@@ -101,16 +101,17 @@ class SingletonStorage {
             AccountService().info(success: { [weak self] accountInfoResponse in
                 if let resp = accountInfoResponse as? AccountInfoResponse {
                     self?.accountInfo = resp
-                    self?.setProfilePhoto(url: resp.urlForPhoto)
-                    self?.resumableUploadInfoService.updateInfo { [weak self] featuresInfo in
-                        self?.featuresInfo = featuresInfo
-                        ///remove user photo from cache on start application
-                        ImageDownloder.removeImageFromCache(url: resp.urlForPhoto, completion: {
-                            DispatchQueue.toMain {
-                                success(resp)
-                            }
-                        })
-                    }
+                    self?.setProfilePhoto(url: resp.urlForPhoto, completion: {
+                        self?.resumableUploadInfoService.updateInfo { [weak self] featuresInfo in
+                            self?.featuresInfo = featuresInfo
+                            ///remove user photo from cache on start application
+                            ImageDownloder.removeImageFromCache(url: resp.urlForPhoto, completion: {
+                                DispatchQueue.toMain {
+                                    success(resp)
+                                }
+                            })
+                        }
+                    })
                 } else {
                     DispatchQueue.toMain {
                         fail(ErrorResponse.string(TextConstants.errorServer))
@@ -124,10 +125,18 @@ class SingletonStorage {
         }
     }
     
-    private func setProfilePhoto(url: URL?) {
-        let profilePhotoUrl = "defaultuser.png"
-        profilePhotoImage.sd_setImage(with: url)
-        isSetProfilePhotoImage = url?.lastPathComponent == profilePhotoUrl ? false : true
+    private func setProfilePhoto(url: URL?, completion: @escaping VoidHandler) {
+        profilePhotoImage.sd_setImage(with: url) { image, error, _, _ in
+            if error == nil {
+                self.profilePhotoImage.sd_setImage(with: url)
+            }
+            if let image = image {
+                self.profilePhotoImage.image = image
+                let profilePhotoUrl = "defaultuser.png"
+                self.isSetProfilePhotoImage = url?.lastPathComponent == profilePhotoUrl ? false : true
+            }
+            completion()
+        }
     }
     
     func getOverQuotaStatus(completion: @escaping VoidHandler) {
