@@ -168,16 +168,26 @@ final class SubscriptionOfferView: UIView, NibInit {
                    index: Int,
                    style: Style,
                    needHidePurchaseInfo: Bool = true) {
-
         let hasIntroPrice = plan.introductoryPrice != nil
-
         nameLabel.text = plan.name
         if hasIntroPrice {
             priceLabel.text = plan.introductoryPrice
             priceLabel.font = priceIntroFont
             priceLabel.textAlignment = .center
         } else {
-            priceLabel.text = plan.price
+            if let model = plan.model as? PackageModelResponse, model.inAppPurchaseId == "v1_100GB_month" {
+                let period = plan.period ?? ""
+                priceLabel.text = formattedStringPrice(discountTotalPeriod: "2 \(localizedOfferPeriod(period.lowercased()))", price: "\(model.price ?? 0)", period: localizedOfferPeriod(period.lowercased()))
+                priceLabel.font = priceIntroFont
+                priceLabel.textAlignment = .center
+            } else if let model = plan.model as? PackageModelResponse, model.inAppPurchaseId == "v1_50GB_teknofest" {
+                let period = plan.period ?? ""
+                priceLabel.text = formattedStringPrice(discountTotalPeriod: "2 \(localizedOfferPeriod(period.lowercased()))", price: "\(model.price ?? 0)", period: localizedOfferPeriod(period.lowercased()))
+                priceLabel.font = priceIntroFont
+                priceLabel.textAlignment = .center
+            } else {
+                priceLabel.text = plan.price
+            }
         }
         featureView.purchaseButton.isHidden = hasIntroPrice
         detailsView.isHidden = needHidePurchaseInfo
@@ -186,25 +196,20 @@ final class SubscriptionOfferView: UIView, NibInit {
         } else {
             typeLabel.isHidden = true
         }
-        
         if plan.addonType == .photoPrint {
             topNameLabel.isHidden = false
             topNameLabel.text = localized(.printPageName)
         } else {
             topNameLabel.isHidden = true
         }
-        
         updateDesign(with: plan, style: style)
-        
         if featureView.purchaseButton.titleLabel?.text != localized(.subscriptionOfferCancelButton) {
             featureView.purchaseButton.isHidden = false
         }
-        
         if plan.packageStatus == "WAITING_DEACTIVATION" {
             featureView.purchaseButton.isHidden = true
             featureView.purchaseButtonHeightConstaint.constant = 0
         }
-        
         featureView.delegate = delegate
         featureView.index = index
     }
