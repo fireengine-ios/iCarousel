@@ -30,10 +30,7 @@ final class EmailEnterDesigner: NSObject {
             newValue.insets = UIEdgeInsets(top: 5, left: 30, bottom: 5, right: 30)
             
             newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.setTitleColor(UIColor.white.darker(by: 30), for: .highlighted)
-            newValue.setBackgroundColor(UIColor.lrTealish, for: .normal)
-            newValue.setBackgroundColor(UIColor.lrTealish.darker(by: 30), for: .highlighted)
-            newValue.setBackgroundColor(UIColor.lrTealish.withAlphaComponent(0.5), for: .disabled)
+            newValue.setBackgroundColor(AppColor.darkBlueColor.color, for: .normal)
             
             newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
             newValue.adjustsFontSizeToFitWidth()

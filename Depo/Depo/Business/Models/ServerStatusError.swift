@@ -41,6 +41,7 @@ final class ServerStatusError {
         static let tooManyInvalidAttempts = "TOO_MANY_INVALID_ATTEMPTS"
         static let recoveryEmailIsSameWithAccountEmail = "RECOVERY_EMAIL_IS_SAME_WITH_ACCOUNT_EMAIL"
         static let invalidOTP = "INVALID_OTP"
+        static let accountHasSLCMSubscription = "ACCOUNT_HAS_SLCM_SUBSCRIPTION"
     }
 }
 extension ServerStatusError: LocalizedError {
@@ -108,6 +109,9 @@ extension ServerStatusError: LocalizedError {
 
         case ErrorKeys.invalidOTP:
             return TextConstants.phoneVerificationNonValidCodeErrorText
+            
+        case ErrorKeys.accountHasSLCMSubscription:
+            return TextConstants.profileDetailErrorContactCallCenter
 
         default:
             return status

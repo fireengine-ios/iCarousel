@@ -109,7 +109,7 @@ class UserPhoneNumberParameters: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: AccountPath.updatePhoneNumber, relativeTo: super.patch)!
+        return URL(string: AccountPath.updatePhoneNumberV2, relativeTo: super.patch)!
     }
 }
 
@@ -131,7 +131,7 @@ class VerifyPhoneNumberParameter: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: AccountPath.verifyPhoneNumber, relativeTo: super.patch)!
+        return URL(string: AccountPath.verifyPhoneNumberV2, relativeTo: super.patch)!
     }
     
 }
