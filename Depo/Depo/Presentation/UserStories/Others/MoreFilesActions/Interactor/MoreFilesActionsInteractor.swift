@@ -966,7 +966,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     }
                     self?.successAction(elementType: .download, relatedItems: item)()
                 }
-                debugLog("prepairing download createDownloadUrls 0")
                 fileService.download(items: item, toPath: "",
                                      success: successAction,
                                      fail: failAction(elementType: .download))
@@ -977,7 +976,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             albumService.loadItemsBy(albums: albums, success: { [weak self] itemsByAlbums in
                 let allItems = itemsByAlbums.flatMap { $1.filter { !$0.isLocalItem }}
                 self?.output?.completeAsyncOperationEnableScreen()
-                debugLog("prepairing download createDownloadUrls 7")
                 self?.fileService.download(itemsByAlbums: itemsByAlbums,
                                            success: self?.successAction(elementType: .download, relatedItems: allItems),
                                            fail: self?.failAction(elementType: .download))
