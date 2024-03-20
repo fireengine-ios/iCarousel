@@ -221,12 +221,12 @@ final class UserProfileViewController: BaseViewController, KeyboardHandler {
         addressView.isEditState = isEdit
         
         /// phoneView disabled for Turkcell user
-        if isTurkcellUser {
-            isEdit ? phoneView.showTextAnimated(text: TextConstants.profileDetailErrorContactCallCenter) : phoneView.hideSubtitleAnimated()
-        } else {
-            phoneView.isEditState = isEdit
-        }
-        
+//        if isTurkcellUser {
+//            isEdit ? phoneView.showTextAnimated(text: TextConstants.profileDetailErrorContactCallCenter) : phoneView.hideSubtitleAnimated()
+//        } else {
+//            phoneView.isEditState = isEdit
+//        }
+        phoneView.isEditState = isEdit
         isEdit ? addressView.showSubtitleAnimated() : addressView.hideSubtitleAnimated()
         isEdit ? recoveryEmailView.showSubtitleAnimated() : recoveryEmailView.hideSubtitleAnimated()
     }
