@@ -20,6 +20,7 @@ final class InstapickPopUpController: UIViewController {
         sv.backgroundColor = AppColor.background.color
         sv.layer.cornerRadius = 16
         sv.clipsToBounds = true
+        sv.showsVerticalScrollIndicator = false
         sv.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         return sv
     }()
@@ -286,10 +287,13 @@ extension InstapickPopUpController {
     func setLayout() {
         view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 270).isActive = true
+        let screenHeight = UIScreen.main.bounds.height
+//        scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: screenHeight / 3).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).isActive = true
+        scrollView.heightAnchor.constraint(equalToConstant: screenHeight / 2).isActive = true
+
         
         scrollView.addSubview(containerView)
         containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -301,38 +305,38 @@ extension InstapickPopUpController {
         
         containerView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 60).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 35).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 60).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -60).isActive = true
         
         containerView.addSubview(subtitleLabel)
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 32).isActive = true
+        subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20).isActive = true
         subtitleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 60).isActive = true
         subtitleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -60).isActive = true
         
         containerView.addSubview(descriptionLabel)
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 24).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 15).isActive = true
         descriptionLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 60).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -60).isActive = true
         
         containerView.addSubview(withConnectingButton)
         withConnectingButton.translatesAutoresizingMaskIntoConstraints = false
-        withConnectingButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 40).isActive = true
+        withConnectingButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 30).isActive = true
         withConnectingButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16).isActive = true
         withConnectingButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16).isActive = true
         withConnectingButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
         
         containerView.addSubview(withoutConnectingButton)
         withoutConnectingButton.translatesAutoresizingMaskIntoConstraints = false
-        withoutConnectingButton.topAnchor.constraint(equalTo: withConnectingButton.bottomAnchor, constant: 30).isActive = true
+        withoutConnectingButton.topAnchor.constraint(equalTo: withConnectingButton.bottomAnchor, constant: 20).isActive = true
         withoutConnectingButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         withoutConnectingButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
         
         containerView.addSubview(checkBoxStackView)
         checkBoxStackView.translatesAutoresizingMaskIntoConstraints = false
-        checkBoxStackView.topAnchor.constraint(equalTo: withoutConnectingButton.bottomAnchor, constant: 40).isActive = true
+        checkBoxStackView.topAnchor.constraint(equalTo: withoutConnectingButton.bottomAnchor, constant: 20).isActive = true
         
         checkBoxStackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         
