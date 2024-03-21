@@ -55,17 +55,22 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configure()
-        trackScreen()
-        reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        reloadCards()
+//        reloadCards()
         
         editingTabBar?.view.layoutIfNeeded()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        configure()
+        trackScreen()
+        reloadData()
     }
     
     func updateAnalyzeCount(with analyzesCount: InstapickAnalyzesCount) {
