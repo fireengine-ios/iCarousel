@@ -2329,7 +2329,7 @@ then {11,99 TRY/Month}*/
 "draw_success" = "Your lottery application has been completed. You can find detailed information in the raffle details.";
 "delete_popup_title" = "Selected Photos Will Be Deleted.";
 "delete_popup_body" = "Are you sure you want to delete?";
-"please_enter_your_msisdn" = "Please enter your phone number.";
+"please_enter_your_msisdn" = "Adding your phone number to lifebox is the most reliable way to protect your account for a lifetime. Please add your phone number to continue accessing your memories in lifebox.";
 "grace_banner_paycell_text" = "";
 
 /*Fuzzy*/
