@@ -2277,7 +2277,7 @@ then {11,99 TRY/Month}*/
 "draw_success" = "لقد اكتمل طلب اليانصيب الخاص بك. يمكنك العثور على معلومات مفصلة في تفاصيل السحب.";
 "delete_popup_title" = "سيتم حذف الصور المحددة.";
 "delete_popup_body" = "هل أنت متأكد أنك تريد حذف؟";
-"please_enter_your_msisdn" = "يرجى إدخال رقم الهاتف الخاص بك.";
+"please_enter_your_msisdn" = "ضافة رقم هاتفك إلى lifebox هي أضمن طريقة لحماية حسابك مدى الحياة. يُرجى إضافة رقم هاتفك لمواصلة الوصول إلى ذكرياتك في lifebox.";
 "grace_banner_paycell_text" = "";
 "photo_max_selection_title_x" = "";
 "photo_max_selection_body_x" = "";

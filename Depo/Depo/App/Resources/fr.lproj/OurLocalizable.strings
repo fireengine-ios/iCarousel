@@ -2570,7 +2570,7 @@ then {11,99 TRY/Month}*/
 "draw_success" = "Votre demande de participation à la loterie a été complétée. Vous trouverez des informations détaillées dans les détails de la tombola.";
 "delete_popup_title" = "Les Photos Sélectionnées Seront Supprimées.";
 "delete_popup_body" = "Êtes-vous sûr de vouloir les supprimer?";
-"please_enter_your_msisdn" = "Veuillez saisir votre numéro de téléphone.";
+"please_enter_your_msisdn" = "L'ajout de votre numéro de téléphone à lifebox est le moyen le plus fiable de protéger votre compte à vie. Veuillez ajouter votre numéro de téléphone pour continuer à accéder à vos souvenirs dans lifebox.";
 "grace_banner_paycell_text" = "";
 "photo_max_selection_title_x" = "";
 "photo_max_selection_body_x" = "";

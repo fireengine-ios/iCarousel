@@ -2307,7 +2307,7 @@ then {11,99 TRY/Month}*/
 "draw_success" = "Su solicitud de lotería ha sido completada. Encontrará información detallada en los detalles del sorteo.";
 "delete_popup_title" = "Las Fotos Seleccionadas Serán Eliminadas.";
 "delete_popup_body" = "¿Está seguro de que desea borrarlas?";
-"please_enter_your_msisdn" = "Por favor, introduzca su número de teléfono.";
+"please_enter_your_msisdn" = "Añadir tu número de teléfono a lifebox es la forma más segura de proteger tu cuenta de por vida. Añade tu número de teléfono para seguir accediendo a tus recuerdos en lifebox.";
 "grace_banner_paycell_text" = "";
 "photo_max_selection_title_x" = "";
 "photo_max_selection_body_x" = "";

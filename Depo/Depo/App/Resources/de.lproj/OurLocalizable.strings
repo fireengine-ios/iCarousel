@@ -2265,7 +2265,7 @@ then {11,99 TRY/Month}*/
 "draw_success" = "Ihr Gewinnspielantrag wurde ausgefüllt. Detaillierte Informationen finden Sie in den Verlosungsdetails.";
 "delete_popup_title" = "Die Ausgewählten Fotos Werden Gelöscht.";
 "delete_popup_body" = "Sind Sie sicher, dass Sie löschen möchten?";
-"please_enter_your_msisdn" = "Bitte geben Sie Ihre Telefon-Nummer ein.";
+"please_enter_your_msisdn" = "Das Hinzufügen Ihrer Telefonnummer zu lifebox ist der sicherste Weg, um Ihr Konto lebenslang zu schützen. Bitte fügen Sie Ihre Telefonnummer hinzu, um weiterhin auf Ihre Erinnerungen in lifebox zugreifen zu können.";
 "grace_banner_paycell_text" = "";
 "photo_max_selection_title_x" = "";
 "photo_max_selection_body_x" = "";

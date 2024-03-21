@@ -2308,7 +2308,7 @@ then {11,99 TRY/Month}*/
 "draw_success" = "Aplikimi juaj për pjesëmarrje në llotari është plotësuar me sukses. Do të gjeni informacion të detajuar në përshkrimin e lotarisë.";
 "delete_popup_title" = "Fotografitë e përzgjedhura do të fshihen.";
 "delete_popup_body" = "Jeni i sigurt që dëshironi të fshini fotot?";
-"please_enter_your_msisdn" = "Ju lutemi shkruani numrin tuaj të telefonit.";
+"please_enter_your_msisdn" = "Shtimi i numrit tuaj të telefonit në lifebox është mënyra më e besueshme për të mbrojtur llogarinë tuaj gjatë gjithë jetës. Ju lutemi shtoni numrin tuaj të telefonit për të vazhduar qasjen në kujtimet tuaja në lifebox.";
 "grace_banner_paycell_text" = "";
 "photo_max_selection_title_x" = "";
 "photo_max_selection_body_x" = "";
