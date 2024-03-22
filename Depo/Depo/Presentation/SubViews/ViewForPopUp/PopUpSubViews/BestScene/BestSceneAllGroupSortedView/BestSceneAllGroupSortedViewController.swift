@@ -102,10 +102,9 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
         snCollectionViewLayout.itemSpacing = 8
         snCollectionViewLayout.scrollDirection = .vertical
         
-        setupLayout()        
-        
-        print("😎", selectedId)
-        print("😎", selectedGroupID)
+        setupLayout()
+                
+//        print("😎", self.selectedId)
     }
     
     init(coverPhotoUrl: String, fileListUrls: [String], selectedId: [Int], selectedGroupID: Int) {
@@ -196,19 +195,17 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
     }()
     
     @objc func tappedDeleteButton() {
-                        
-        service.deleteSelectedPhotos(groupId: selectedGroupID ?? 0, photoIds: selectedId) { response in
-                switch response {
-                case .success():
-                    let vc = BestSceneSuccessPopUp.with()
-                    vc.open()
-                case .failed(let error):
-                    print(error.localizedDescription)
-                }
+        service.deleteSelectedPhotos(groupId: self.selectedGroupID ?? 0, photoIds: self.selectedId) { response in
+            switch response {
+            case .success():
+                let vc = BestSceneSuccessPopUp.with()
+                vc.open()
+            case .failed(let error):
+                print(error.localizedDescription)
             }
-        
+        }
     }
-     
+    
      @objc func tappedKeepItemButton() {
          service.keepAllPhotosInGroup(groupId: nil, photoIds: []) { response in
              self.collectionView.reloadData()
@@ -218,25 +215,6 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
 
 extension BestSceneAllGroupSortedViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SNCollectionViewLayoutDelegate, BestSceneCellDelegate {
     
-   
-    func didTapTickImage(selectedId: Int, isSelected: Bool) {
-        if isSelected {
-            // Eğer fotoğraf seçildiyse ve ID zaten listede değilse, ID'yi listeye ekle
-            if !self.selectedId.contains(selectedId) {
-                self.selectedId.append(selectedId)
-            }
-        } else {
-            // Eğer fotoğrafın seçimi kaldırıldıysa ve ID listedeyse, ID'yi listeden çıkar
-            self.selectedId.removeAll { $0 == selectedId }
-        }
-        // Seçili ID'leri ve güncel durumu kontrol etmek için yazdır
-        print("😎Güncel Seçilen ID'ler: \(self.selectedId)")
-    }
-
-
-
-    
-   
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1 + fileListUrls.count
     }
@@ -255,6 +233,8 @@ extension BestSceneAllGroupSortedViewController: UICollectionViewDelegate, UICol
         
         cell.selectedId = self.selectedId
         cell.selectedGroupID = self.selectedGroupID
+               
+        cell.uniqueId = self.selectedId[indexPath.row]
         
         cell.delegate = self
         
@@ -275,6 +255,26 @@ extension BestSceneAllGroupSortedViewController: UICollectionViewDelegate, UICol
     
     func headerFlexibleDimension(inCollectionView collectionView: UICollectionView, withLayout layout: UICollectionViewLayout, fixedDimension: CGFloat) -> CGFloat {
         return 0
+    }
+    
+    func didTapTickImage(selectedId: Int, isSelected: Bool) {
+        var deletedIndex: Int = -1
+        
+        if isSelected {
+            if !self.selectedId.contains(selectedId) {
+                self.selectedId.append(selectedId)
+            }
+        } else {
+            for(index, value) in self.selectedId.enumerated() {
+                if value == selectedId {
+                    deletedIndex = index
+                }
+            }
+            if deletedIndex > -1 {
+                self.selectedId.remove(at: deletedIndex)
+            }
+        }
+//        print("😎 Güncel Seçilen ID'ler: \(self.selectedId)")
     }
 }
 

@@ -21,7 +21,7 @@ class BestSceneAllGroupSortedCollectionViewCell: UICollectionViewCell {
     var selectedId: [Int]
     var selectedGroupID: Int?
     
-    let uniqueId: Int?
+    var uniqueId: Int?
         
     var bigTickViewTopConstraint: NSLayoutConstraint!
     var bigTickViewLeadingConstraint: NSLayoutConstraint!
@@ -87,20 +87,20 @@ class BestSceneAllGroupSortedCollectionViewCell: UICollectionViewCell {
         super.init(coder: aDecoder)
         setupViews()
     }
-
+    
     @objc func didTapTick() {
-        isSelected = !isSelected
-        
-        if let id = self.uniqueId {
-               delegate?.didTapTickImage(selectedId: id, isSelected: isSelected)
-           }
-        
+        guard let id = self.uniqueId else { return }
+
+        let currentlySelected = !tickImage.isHidden
+        delegate?.didTapTickImage(selectedId: id, isSelected: !currentlySelected)
+
+        tickImage.isHidden = currentlySelected
         if tickImage.isHidden {
+            tickImage.image = nil
+        } else {
             tickImage.image = UIImage(named: "iconCheckboxCheckFill")
         }
-        tickImage.isHidden = !tickImage.isHidden
     }
-
     
     private func setupViews() {
         contentView.addSubview(imageView)

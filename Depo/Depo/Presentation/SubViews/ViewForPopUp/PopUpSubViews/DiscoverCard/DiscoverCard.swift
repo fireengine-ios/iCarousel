@@ -132,11 +132,11 @@ extension DiscoverCard: UICollectionViewDelegate, UICollectionViewDataSource, UI
                 self.coverPhotoUrl = response.coverPhoto.tempDownloadURL ?? ""
                 self.fileListUrls = response.fileList.compactMap { $0.tempDownloadURL }
                                 
-//                self.selectedId = response.id ?? 0
-                self.selectedGroupID = response.coverPhoto.id ?? 0
+                self.selectedGroupID = response.id ?? 0
                                                 
+                self.selectedId.append(response.coverPhoto.id)
+                
                 for ids in response.fileList {
-//                    print("🥰", ids.id)
                     self.selectedId.append(ids.id)
                 }
                 
