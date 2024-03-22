@@ -58,12 +58,11 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         configure()
         trackScreen()
         reloadData()
+        reloadCards()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        reloadCards()
         
         editingTabBar?.view.layoutIfNeeded()
     }
