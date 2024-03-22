@@ -28,7 +28,7 @@ class DiscoverCard: BaseCardView {
     
     var coverPhotoUrl: String = ""
     var fileListUrls: [String] = []
-    var selectedId: Int = 0
+    var selectedId: [Int] = []
     var selectedGroupID: Int = 0
     
     private var isScreenPresented = false
@@ -132,8 +132,13 @@ extension DiscoverCard: UICollectionViewDelegate, UICollectionViewDataSource, UI
                 self.coverPhotoUrl = response.coverPhoto.tempDownloadURL ?? ""
                 self.fileListUrls = response.fileList.compactMap { $0.tempDownloadURL }
                                 
-                self.selectedId = response.id ?? 0
+//                self.selectedId = response.id ?? 0
                 self.selectedGroupID = response.coverPhoto.id ?? 0
+                                                
+                for ids in response.fileList {
+//                    print("🥰", ids.id)
+                    self.selectedId.append(ids.id)
+                }
                 
                 DispatchQueue.main.async {
                     let router = RouterVC()

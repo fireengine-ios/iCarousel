@@ -980,7 +980,7 @@ class RouterVC: NSObject {
     
     // MARK: Best Scene All Group Sorted
     
-    func bestSceneAllGroupSortedViewController(coverPhotoUrl: String, fileListUrls: [String], selectedId: Int, selectedGroupID: Int) -> BestSceneAllGroupSortedViewController {
+    func bestSceneAllGroupSortedViewController(coverPhotoUrl: String, fileListUrls: [String], selectedId: [Int], selectedGroupID: Int) -> BestSceneAllGroupSortedViewController {
         let bestSceneVC = BestSceneAllGroupSortedInitializer.initializeController(coverPhotoUrl: coverPhotoUrl, fileListUrls: fileListUrls, selectedId: selectedId, selectedGroupID: selectedGroupID) as! BestSceneAllGroupSortedViewController
         return bestSceneVC
     }

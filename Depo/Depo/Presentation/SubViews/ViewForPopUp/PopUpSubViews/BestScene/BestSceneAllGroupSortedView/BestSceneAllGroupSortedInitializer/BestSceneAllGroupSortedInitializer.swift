@@ -9,7 +9,7 @@
 import Foundation
 
 final class BestSceneAllGroupSortedInitializer {
-    class func initializeController(coverPhotoUrl: String, fileListUrls: [String], selectedId: Int, selectedGroupID: Int) -> UIViewController {
+    class func initializeController(coverPhotoUrl: String, fileListUrls: [String], selectedId: [Int], selectedGroupID: Int) -> UIViewController {
     
         let viewController = BestSceneAllGroupSortedViewController(coverPhotoUrl: coverPhotoUrl, fileListUrls: fileListUrls, selectedId: selectedId, selectedGroupID: selectedGroupID)
         

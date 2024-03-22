@@ -13,7 +13,7 @@ import SwiftyJSON
 final class BestSceneService: BaseRequestService {
     
     @discardableResult
-    func deleteSelectedPhotos(groupId: Int, photoIds: [String], handler: @escaping ResponseVoid) -> URLSessionTask? {
+    func deleteSelectedPhotos(groupId: Int, photoIds: [Int], handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("deleteSelectedPhotos")
         
         let url = RouteRequests.HomeCards.deleteSelectedPhotos(for: groupId)
@@ -29,7 +29,7 @@ final class BestSceneService: BaseRequestService {
     }
     
     @discardableResult
-    func keepAllPhotosInGroup(groupId: Int?, photoIds: [String], handler: @escaping ResponseVoid) -> URLSessionTask? {
+    func keepAllPhotosInGroup(groupId: Int?, photoIds: [Int], handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("keepAllPhotosInGroup")
         
         let url = RouteRequests.HomeCards.deleteSelectedPhotos(for: groupId ?? 0)

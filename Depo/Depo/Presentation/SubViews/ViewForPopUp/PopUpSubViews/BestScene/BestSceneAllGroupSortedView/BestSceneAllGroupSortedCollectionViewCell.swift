@@ -9,7 +9,7 @@
 import UIKit
 
 protocol BestSceneCellDelegate: AnyObject {
-    func didTapTickImage(selectedId: Int, selectedGroupId: Int, isSelected: Bool)
+    func didTapTickImage(selectedId: Int, isSelected: Bool)
 }
 
 class BestSceneAllGroupSortedCollectionViewCell: UICollectionViewCell {
@@ -18,9 +18,11 @@ class BestSceneAllGroupSortedCollectionViewCell: UICollectionViewCell {
     
     weak var delegate: BestSceneCellDelegate?
     
-    var selectedId: Int?
+    var selectedId: [Int]
     var selectedGroupID: Int?
     
+    let uniqueId: Int?
+        
     var bigTickViewTopConstraint: NSLayoutConstraint!
     var bigTickViewLeadingConstraint: NSLayoutConstraint!
     var bigTickViewWidthConstraint: NSLayoutConstraint!
@@ -73,25 +75,32 @@ class BestSceneAllGroupSortedCollectionViewCell: UICollectionViewCell {
     }()
     
     override init(frame: CGRect) {
+        self.selectedId = []
+        self.uniqueId = 0
         super.init(frame: frame)
         setupViews()
     }
     
     required init?(coder aDecoder: NSCoder) {
+        self.selectedId = []
+        self.uniqueId = 0
         super.init(coder: aDecoder)
         setupViews()
     }
-    
+
     @objc func didTapTick() {
         isSelected = !isSelected
         
-        delegate?.didTapTickImage(selectedId: selectedId ?? 0, selectedGroupId: selectedGroupID ?? 0, isSelected: isSelected)
+        if let id = self.uniqueId {
+               delegate?.didTapTickImage(selectedId: id, isSelected: isSelected)
+           }
         
         if tickImage.isHidden {
             tickImage.image = UIImage(named: "iconCheckboxCheckFill")
         }
         tickImage.isHidden = !tickImage.isHidden
     }
+
     
     private func setupViews() {
         contentView.addSubview(imageView)
