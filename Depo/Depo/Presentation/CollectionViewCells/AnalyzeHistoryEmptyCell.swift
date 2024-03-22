@@ -10,24 +10,23 @@ import UIKit
 
 final class AnalyzeHistoryEmptyCell: UICollectionViewCell, NibInit {
     
-    @IBOutlet private weak var emptyTitleLabel: UILabel!     
-    @IBOutlet private weak var emptySubtitleLabel: UILabel! 
-
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        emptyTitleLabel.text = TextConstants.analyzeHistoryEmptyTitle
-        emptyTitleLabel.textColor = ColorConstants.darkText
-        emptyTitleLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
-        emptyTitleLabel.textAlignment = .center
-        emptyTitleLabel.numberOfLines = 0
-        
-        emptySubtitleLabel.text = TextConstants.analyzeHistoryEmptySubtitle
-        emptySubtitleLabel.textColor = ColorConstants.textGrayColor
-        emptySubtitleLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
-        emptySubtitleLabel.textAlignment = .center
-        emptySubtitleLabel.numberOfLines = 0
+    @IBOutlet private weak var emptyTitleLabel: UILabel! {
+        willSet {
+            newValue.text = TextConstants.analyzeHistoryEmptyTitle
+            newValue.textColor = ColorConstants.darkText
+            newValue.font = UIFont.TurkcellSaturaBolFont(size: 20)
+            newValue.textAlignment = .center
+            newValue.numberOfLines = 0
+        }
     }
     
+    @IBOutlet private weak var emptySubtitleLabel: UILabel! {
+        willSet {
+            newValue.text = TextConstants.analyzeHistoryEmptySubtitle
+            newValue.textColor = ColorConstants.textGrayColor
+            newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
+            newValue.textAlignment = .center
+            newValue.numberOfLines = 0
+        }
+    }
 }
