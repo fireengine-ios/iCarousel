@@ -14,9 +14,25 @@ protocol DiscoverCardPopupDelegate: AnyObject {
 class DiscoverCard: BaseCardView {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var showAllPictureLabel: UIButton!
+    @IBOutlet weak var titleLabel: UILabel! {
+        willSet {
+            newValue.font = .appFont(.medium, size: 16)
+            newValue.textColor = AppColor.label.color
+        }
+    }
+    
+    @IBOutlet weak var descriptionLabel: UILabel! {
+        willSet {
+            newValue.font = .appFont(.bold, size: 14)
+            newValue.textColor = AppColor.label.color
+        }
+    }
+    
+    @IBOutlet weak var showAllPictureLabel: UIButton! {
+        willSet {
+            newValue.titleLabel?.font = .appFont(.bold, size: 14)
+        }
+    }
     
     private var operation: OperationType?
     weak var popupDelegate: DiscoverCardPopupDelegate?
@@ -25,6 +41,13 @@ class DiscoverCard: BaseCardView {
     
     var imageUrls: [String] = []
     var groupId: [Int] = []
+    
+    var coverPhotoUrl: String = ""
+    var fileListUrls: [String] = []
+    var selectedId: [Int] = []
+    var selectedGroupID: Int = 0
+    
+    private var isScreenPresented = false
     
     @objc func updateImageUrls() {
         let imageUrls = userDefaultsVars.imageUrlsForBestScene
@@ -111,6 +134,10 @@ extension DiscoverCard: UICollectionViewDelegate, UICollectionViewDataSource, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard !isScreenPresented else { return }
+        isScreenPresented = true
+        
         let selectedGroupId = self.groupId[indexPath.row]
         
         homeCardsServiseDiscoverCard.getBestGroupWithId(with: selectedGroupId) { [weak self] result in
@@ -118,14 +145,26 @@ extension DiscoverCard: UICollectionViewDelegate, UICollectionViewDataSource, UI
             switch result {
             case .success(let response):
                 
-                let coverPhotoUrl = response.coverPhoto.tempDownloadURL
-                let fileListUrls = response.fileList.compactMap { $0.tempDownloadURL }
+                self.coverPhotoUrl = response.coverPhoto.tempDownloadURL ?? ""
+                self.fileListUrls = response.fileList.compactMap { $0.tempDownloadURL }
+                                
+                self.selectedGroupID = response.id ?? 0
+                                                
+                self.selectedId.append(response.coverPhoto.id)
+                
+//                print("😎 Cover ID", response.coverPhoto.id)
+                
+                for ids in response.fileList {
+                    self.selectedId.append(ids.id)
+                }
                 
                 DispatchQueue.main.async {
                     let router = RouterVC()
-                    let controller = router.bestSceneAllGroupSortedViewController(coverPhotoUrl: coverPhotoUrl ?? "", fileListUrls: fileListUrls)
+                    let controller = router.bestSceneAllGroupSortedViewController(coverPhotoUrl: self.coverPhotoUrl, fileListUrls: self.fileListUrls, selectedId: self.selectedId, selectedGroupID: self.selectedGroupID)
                     router.pushViewController(viewController: controller)
+                    self.isScreenPresented = false
                 }
+                
             case .failed(let error):
                 print(error.localizedDescription)
             }

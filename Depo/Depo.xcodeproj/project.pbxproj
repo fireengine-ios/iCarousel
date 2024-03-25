@@ -205,6 +205,7 @@
 		06A4B6212B7EB22F00119748 /* DiscoverCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06A4B61B2B7EB22F00119748 /* DiscoverCard.xib */; };
 		06A4B6222B7EB22F00119748 /* DiscoverCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06A4B61B2B7EB22F00119748 /* DiscoverCard.xib */; };
 		06A4B6232B7EB22F00119748 /* DiscoverCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06A4B61B2B7EB22F00119748 /* DiscoverCard.xib */; };
+		06F0F76A2B9D03F900B9A72A /* BestSceneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F0F7692B9D03F900B9A72A /* BestSceneService.swift */; };
 		0708C7832677261100680ED6 /* PhotoPrintCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0708C7802677261000680ED6 /* PhotoPrintCard.swift */; };
 		0708C7842677261100680ED6 /* PhotoPrintCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0708C7802677261000680ED6 /* PhotoPrintCard.swift */; };
 		0708C7862677261100680ED6 /* PhotoPrintCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0708C7802677261000680ED6 /* PhotoPrintCard.swift */; };
@@ -4743,6 +4744,8 @@
 		B5ECA57425063E0C00C290BA /* CIImage+CGConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ECA56E25063E0C00C290BA /* CIImage+CGConvert.swift */; };
 		B5F40BB2204A80220011CB66 /* AutoSyncSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */; };
 		C14F60B7903DFBDD79BD9ECB /* Pods_BilloWidgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA14B6FE8165C7E0C534AB1 /* Pods_BilloWidgetExtension.framework */; };
+		C39FD8AC2BA202660054DE13 /* BestSceneSuccessPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39FD8AB2BA202660054DE13 /* BestSceneSuccessPopUp.swift */; };
+		C39FD8AE2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39FD8AD2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib */; };
 		C4A38BA321EE1F4B00ECCCEA /* TransparentGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */; };
 		C4A38BA421EE1F4E00ECCCEA /* InstaPickSelectionSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D9C03121EDC6DB00693D94 /* InstaPickSelectionSegmentedController.swift */; };
 		C62239A4204972B00043ED44 /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
@@ -10479,6 +10482,7 @@
 		0677956CBF9CEA407F5F8D23 /* Pods_BilloShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BilloShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		06A4B61B2B7EB22F00119748 /* DiscoverCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscoverCard.xib; sourceTree = "<group>"; };
 		06B86902F4B6DCEC18002C23 /* FeedbackViewConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewConfigurator.swift; sourceTree = "<group>"; };
+		06F0F7692B9D03F900B9A72A /* BestSceneService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSceneService.swift; sourceTree = "<group>"; };
 		0708C7802677261000680ED6 /* PhotoPrintCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPrintCard.swift; sourceTree = "<group>"; };
 		0708C7812677261100680ED6 /* PhotoPrintCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoPrintCard.xib; sourceTree = "<group>"; };
 		070E96452742993A00CFED55 /* LifeBoxModel 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "LifeBoxModel 6.xcdatamodel"; sourceTree = "<group>"; };
@@ -12456,6 +12460,8 @@
 		C14662373D7DDA7928074D3C /* IntroduceConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceConfigurator.swift; sourceTree = "<group>"; };
 		C2287D169D831E3173413D01 /* IntroduceRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceRouterInput.swift; sourceTree = "<group>"; };
 		C32DD0C129BDD14A38BEF0AA /* Pods-LifeTech_Billo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_Billo.debug.xcconfig"; path = "Target Support Files/Pods-LifeTech_Billo/Pods-LifeTech_Billo.debug.xcconfig"; sourceTree = "<group>"; };
+		C39FD8AB2BA202660054DE13 /* BestSceneSuccessPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSceneSuccessPopUp.swift; sourceTree = "<group>"; };
+		C39FD8AD2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BestSceneSuccessPopUp.xib; sourceTree = "<group>"; };
 		C3C2356B20B6DA1B00F3FB6D /* MPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MPush.framework; sourceTree = "<group>"; };
 		C4A00B9575D3535660EB20D3 /* SelectNameViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameViewController.swift; sourceTree = "<group>"; };
 		C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentGradientView.swift; sourceTree = "<group>"; };
@@ -13699,6 +13705,7 @@
 		063A9A812B95BCCC00B98CF0 /* BestSceneAllGroupSortedView */ = {
 			isa = PBXGroup;
 			children = (
+				C39FD8A72BA202430054DE13 /* BestSceneSuccessPopUp */,
 				063A9A7B2B95BC8A00B98CF0 /* BestSceneAllGroupSortedInitializer */,
 				063A9A822B95BCFD00B98CF0 /* BestSceneAllGroupSortedCollectionViewCell.swift */,
 				063A9A872B95BD2D00B98CF0 /* BestSceneAllGroupSortedViewController.swift */,
@@ -13723,6 +13730,14 @@
 				06A4B61B2B7EB22F00119748 /* DiscoverCard.xib */,
 			);
 			path = DiscoverCard;
+			sourceTree = "<group>";
+		};
+		06F0F7652B9D037400B9A72A /* BestSceneService */ = {
+			isa = PBXGroup;
+			children = (
+				06F0F7692B9D03F900B9A72A /* BestSceneService.swift */,
+			);
+			path = BestSceneService;
 			sourceTree = "<group>";
 		};
 		0708C77C267725B000680ED6 /* PhotoPrintCard */ = {
@@ -20919,6 +20934,15 @@
 			path = Others;
 			sourceTree = "<group>";
 		};
+		C39FD8A72BA202430054DE13 /* BestSceneSuccessPopUp */ = {
+			isa = PBXGroup;
+			children = (
+				C39FD8AB2BA202660054DE13 /* BestSceneSuccessPopUp.swift */,
+				C39FD8AD2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib */,
+			);
+			path = BestSceneSuccessPopUp;
+			sourceTree = "<group>";
+		};
 		C3E6F774523B0C33C60BE23C /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -21708,6 +21732,7 @@
 		CE51A0C61EF8ED38005DCEE0 /* ApiServices */ = {
 			isa = PBXGroup;
 			children = (
+				06F0F7652B9D037400B9A72A /* BestSceneService */,
 				89CF119F2B89E2190040F73F /* DrawCampaignService */,
 				895A54982B57B01500E2A275 /* QRCodeService */,
 				895BAB662AB478C500920DF9 /* PhotoPrintService */,
@@ -24612,6 +24637,7 @@
 				98164304233CE2D40070F8B9 /* TBMatikPhotosViewController.xib in Resources */,
 				9823199924F3A1E700FD16E2 /* LightView.xib in Resources */,
 				4A6DBE8821A6F9190003D1B4 /* PackagePremiumView.xib in Resources */,
+				C39FD8AE2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib in Resources */,
 				F0571E9C288AE31700A0D6AC /* ForYou.xib in Resources */,
 				8CD2B3B81FE7B44000280547 /* WaitingForWiFiPopUp.xib in Resources */,
 				F0E0A4782897F36400528B39 /* ForYouEmptyCellView.xib in Resources */,
@@ -27737,6 +27763,7 @@
 				8C0E8D731FDEBDFF00789C91 /* UploadFromLifeBoxRouterInput.swift in Sources */,
 				8C0E8D741FDEBDFF00789C91 /* HelpAndSupportInteractorOutput.swift in Sources */,
 				9842FB872563D25700B07606 /* PrivateShareContactsViewController.swift in Sources */,
+				06F0F76A2B9D03F900B9A72A /* BestSceneService.swift in Sources */,
 				8C0E8D751FDEBDFF00789C91 /* MoreFilesActionsInteractorOutput.swift in Sources */,
 				981616FC2578B97D009F1C31 /* FirebaseAnalyticsEvents.swift in Sources */,
 				9808A05F206A88580022376D /* PushNotificationService.swift in Sources */,
@@ -28894,6 +28921,7 @@
 				8C0E8F8E1FDEBDFF00789C91 /* DropboxStatusValue.swift in Sources */,
 				8C0E8F8F1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */,
 				89E51D4322CA1106007A7DBC /* CreateStoryPreviewViewIO.swift in Sources */,
+				C39FD8AC2BA202660054DE13 /* BestSceneSuccessPopUp.swift in Sources */,
 				89CF117D2B89DCB70040F73F /* DrawCampaignPresenter.swift in Sources */,
 				989BDE6222F47B1E001DDEB2 /* SpotifyCollectionViewDataSource.swift in Sources */,
 				8C0E8F901FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,

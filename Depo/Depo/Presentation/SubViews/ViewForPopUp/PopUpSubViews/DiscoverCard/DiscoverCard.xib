@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -54,7 +55,7 @@
                 </label>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="awZ-iK-HFW">
                     <rect key="frame" x="0.0" y="135" width="359" height="162"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" name="secondaryBackground"/>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6TR-1b-Z2v">
                         <size key="itemSize" width="128" height="160"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -74,7 +75,7 @@
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="4eL-ld-hXs"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" name="secondaryBackground"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="qvY-He-XIf" secondAttribute="trailing" constant="16" id="01C-3Y-qrV"/>
                 <constraint firstItem="eMp-8L-cCl" firstAttribute="leading" secondItem="4eL-ld-hXs" secondAttribute="leading" constant="16" id="436-fW-m40"/>
@@ -103,10 +104,13 @@
                 <outlet property="showAllPictureLabel" destination="eMp-8L-cCl" id="tiu-aO-CVE"/>
                 <outlet property="titleLabel" destination="q50-zj-Sfq" id="W2i-2j-kHH"/>
             </connections>
-            <point key="canvasLocation" x="-208.3969465648855" y="-99.295774647887328"/>
+            <point key="canvasLocation" x="-210" y="-106"/>
         </view>
     </objects>
     <resources>
         <image name="iconCancelUnborderV2" width="24" height="24"/>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

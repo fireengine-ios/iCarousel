@@ -16,6 +16,7 @@ class BestSceneAllGroupViewController: BaseViewController {
     var imageUrls: [String] = []
     var timestamp: Int = 0
     var groupId: [Int] = []
+    var selectedId: [Int] = []
     
     private lazy var customView: UIView = {
         let view = UIView()
@@ -25,18 +26,30 @@ class BestSceneAllGroupViewController: BaseViewController {
         return view
     }()
     
+    private lazy var closeSelfButton = UIBarButtonItem(image: NavigationBarImage.back.image,
+                                                       style: .plain,
+                                                       target: self,
+                                                       action: #selector(closeSelf))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setTitle(withString: localized(.bestscenediscovercardtitle))
         
         setupLayout()
+        
+        navigationItem.leftBarButtonItem = closeSelfButton
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         updateImageUrls()
+    }
+    
+    @objc private func closeSelf() {
+        let router = RouterVC()
+        router.openTabBarItem(index: .discover)
     }
     
     @objc func updateImageUrls() {
@@ -146,9 +159,17 @@ extension BestSceneAllGroupViewController: UICollectionViewDelegate, UICollectio
                 let coverPhotoUrl = response.coverPhoto.tempDownloadURL
                 let fileListUrls = response.fileList.compactMap { $0.tempDownloadURL }
                 
+                let selectedGroupID = response.id
+                                                
+                self.selectedId.append(response.coverPhoto.id)
+                
+                for ids in response.fileList {
+                    self.selectedId.append(ids.id)
+                }
+                
                 DispatchQueue.main.async {
                     let router = RouterVC()
-                    let controller = router.bestSceneAllGroupSortedViewController(coverPhotoUrl: coverPhotoUrl ?? "", fileListUrls: fileListUrls)
+                    let controller = router.bestSceneAllGroupSortedViewController(coverPhotoUrl: coverPhotoUrl ?? "", fileListUrls: fileListUrls, selectedId: self.selectedId, selectedGroupID: selectedGroupID ?? 0)
                     router.pushViewController(viewController: controller)
                 }
             case .failed(let error):

@@ -45,19 +45,15 @@ final class HomePageInteractor: HomePageInteractorInput {
         homeCardsService.delegate = self
         FreeAppSpace.session.showFreeUpSpaceCard()
         FreeAppSpace.session.checkFreeUpSpace()
-        
         getQuotaInfo()
         getAccountInfo()
         getPremiumCardInfo(loadStatus: .reloadAll)
         //getBestScene()
         getAllCardsForHomePage()
         getCampaignStatus()
-        
         getActiveSubscriptionForBanner()
         getAvailableOffersForBanner()
-        
         smartAlbumsManager.requestAllItems()
-        
         //handle public shared items save operation after login
         if let publicTokenToSave = storageVars.publicSharedItemsToken {
             savePublicSharedItems(with: publicTokenToSave)
@@ -67,7 +63,6 @@ final class HomePageInteractor: HomePageInteractorInput {
     
     func needRefresh() {
         homeCardsLoaded = false
-        
         getCampaignStatus()
         getPremiumCardInfo(loadStatus: .reloadAll)
         getAllCardsForHomePage()
