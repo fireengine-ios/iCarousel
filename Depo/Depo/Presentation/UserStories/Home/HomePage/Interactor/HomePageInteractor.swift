@@ -48,7 +48,9 @@ final class HomePageInteractor: HomePageInteractorInput {
         getQuotaInfo()
         getAccountInfo()
         getPremiumCardInfo(loadStatus: .reloadAll)
-        //getBestScene()
+        getBestScene {
+            self.getAllCardsForHomePage()
+        }
         getAllCardsForHomePage()
         getCampaignStatus()
         getActiveSubscriptionForBanner()
@@ -65,7 +67,10 @@ final class HomePageInteractor: HomePageInteractorInput {
         homeCardsLoaded = false
         getCampaignStatus()
         getPremiumCardInfo(loadStatus: .reloadAll)
-        getAllCardsForHomePage()
+        
+        getBestScene {
+            self.getAllCardsForHomePage()
+        }
     }
     
     func updateLocalUserDetail() {
@@ -200,7 +205,7 @@ final class HomePageInteractor: HomePageInteractorInput {
     }
     
     
-    private func getBestScene() {
+    private func getBestScene(completion: @escaping () -> Void) {
         homeCardsService.getBestGroup { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -220,6 +225,7 @@ final class HomePageInteractor: HomePageInteractorInput {
                     self.output.didObtainError(with: error.localizedDescription, isNeedStopRefresh: false)
                 }
             }
+            completion()
         }
     }
     
