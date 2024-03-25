@@ -16,6 +16,14 @@ extension Array where Element: Equatable {
     }
 }
 
+extension Array where Element: Hashable {
+    func difference(from other: [Element]) -> [Element] {
+        let thisSet = Set(self)
+        let otherSet = Set(other)
+        return Array(thisSet.symmetricDifference(otherSet))
+    }
+}
+
 extension Array {
     mutating func append(_ newElement: Element?) {
         if let element = newElement {
