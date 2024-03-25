@@ -45,21 +45,15 @@ final class HomePageInteractor: HomePageInteractorInput {
         homeCardsService.delegate = self
         FreeAppSpace.session.showFreeUpSpaceCard()
         FreeAppSpace.session.checkFreeUpSpace()
-        
         getQuotaInfo()
         getAccountInfo()
         getPremiumCardInfo(loadStatus: .reloadAll)
-        getBestScene {
-            self.getAllCardsForHomePage()
-        }
-       
+        //getBestScene()
+        getAllCardsForHomePage()
         getCampaignStatus()
-        
         getActiveSubscriptionForBanner()
         getAvailableOffersForBanner()
-        
         smartAlbumsManager.requestAllItems()
-        
         //handle public shared items save operation after login
         if let publicTokenToSave = storageVars.publicSharedItemsToken {
             savePublicSharedItems(with: publicTokenToSave)
@@ -69,12 +63,9 @@ final class HomePageInteractor: HomePageInteractorInput {
     
     func needRefresh() {
         homeCardsLoaded = false
-        
         getCampaignStatus()
         getPremiumCardInfo(loadStatus: .reloadAll)
-        getBestScene {
-            self.getAllCardsForHomePage()
-        }
+        getAllCardsForHomePage()
     }
     
     func updateLocalUserDetail() {
@@ -209,7 +200,7 @@ final class HomePageInteractor: HomePageInteractorInput {
     }
     
     
-    private func getBestScene(completion: @escaping () -> Void) {
+    private func getBestScene() {
         homeCardsService.getBestGroup { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -229,7 +220,6 @@ final class HomePageInteractor: HomePageInteractorInput {
                     self.output.didObtainError(with: error.localizedDescription, isNeedStopRefresh: false)
                 }
             }
-            completion()
         }
     }
     
