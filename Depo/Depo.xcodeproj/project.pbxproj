@@ -1811,6 +1811,12 @@
 		895EC84C2AB70ED9007D6CEB /* PhotoPrintSendPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 895EC8482AB70ED9007D6CEB /* PhotoPrintSendPopup.xib */; };
 		896133A42338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */; };
 		896133A52338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A22338C29F000083B7 /* HomePagePopUpOperation.swift */; };
+		896DD99F2BB1AE2700857FE3 /* BestSceneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F0F7692B9D03F900B9A72A /* BestSceneService.swift */; };
+		896DD9A32BB1AE2800857FE3 /* BestSceneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F0F7692B9D03F900B9A72A /* BestSceneService.swift */; };
+		896DD9A42BB1AE2900857FE3 /* BestSceneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F0F7692B9D03F900B9A72A /* BestSceneService.swift */; };
+		896DD9A52BB1AE7700857FE3 /* BestSceneSuccessPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39FD8AB2BA202660054DE13 /* BestSceneSuccessPopUp.swift */; };
+		896DD9A62BB1AE7700857FE3 /* BestSceneSuccessPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39FD8AB2BA202660054DE13 /* BestSceneSuccessPopUp.swift */; };
+		896DD9A72BB1AE7800857FE3 /* BestSceneSuccessPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39FD8AB2BA202660054DE13 /* BestSceneSuccessPopUp.swift */; };
 		8979A6952B88C78500E198FF /* DrawCampaignCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8979A6942B88C78500E198FF /* DrawCampaignCard.xib */; };
 		8979A6962B88C78500E198FF /* DrawCampaignCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8979A6942B88C78500E198FF /* DrawCampaignCard.xib */; };
 		8979A6972B88C78500E198FF /* DrawCampaignCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8979A6942B88C78500E198FF /* DrawCampaignCard.xib */; };
@@ -30434,6 +30440,7 @@
 				CE784A3822A685FB00662219 /* PeriodicContactSyncDataStorage.swift in Sources */,
 				CE784A3A22A685FB00662219 /* MyStorageRouterInput.swift in Sources */,
 				07DB93952860AF5400D5CACF /* InAppPurchase.swift in Sources */,
+				896DD9A62BB1AE7700857FE3 /* BestSceneSuccessPopUp.swift in Sources */,
 				CE784A3B22A685FB00662219 /* SmartTimerLabel.swift in Sources */,
 				CE784A3E22A685FB00662219 /* BottomSelectionMusicTabBarInteractor.swift in Sources */,
 				CE784A3F22A685FB00662219 /* ManageContactsViewController.swift in Sources */,
@@ -30973,6 +30980,7 @@
 				CE784B9622A685FB00662219 /* ErrorBannerView.swift in Sources */,
 				CE784B9722A685FB00662219 /* MoreFilesActionsPresenter.swift in Sources */,
 				734D9E15233B58B600B143D4 /* SetSecretQuestionErrors.swift in Sources */,
+				896DD9A32BB1AE2800857FE3 /* BestSceneService.swift in Sources */,
 				CE784B9822A685FB00662219 /* SplashPresenter.swift in Sources */,
 				CE784B9922A685FB00662219 /* GeneralFilesFiltration.swift in Sources */,
 				CE784B9A22A685FB00662219 /* SearchViewInteractorOutput.swift in Sources */,
@@ -31955,6 +31963,7 @@
 				CF8B64D423CBC9D70021B021 /* UploadFromLifeBoxInitializer.swift in Sources */,
 				98B0483C259314750011DAEB /* ContactUtil.m in Sources */,
 				893DD004292B86FA00271379 /* DiscoverRouter.swift in Sources */,
+				896DD9A52BB1AE7700857FE3 /* BestSceneSuccessPopUp.swift in Sources */,
 				CF7146D724B597A900D83E60 /* DeleteDuplicatesMainView.swift in Sources */,
 				CF8B64D523CBC9D70021B021 /* DataStorage.swift in Sources */,
 				CF8B64D623CBC9D70021B021 /* BaseUserInputCellView.swift in Sources */,
@@ -31965,6 +31974,7 @@
 				CF8B64DB23CBC9D70021B021 /* BaseMediaContent.swift in Sources */,
 				CF8B64DC23CBC9D70021B021 /* IntroduceSubView.swift in Sources */,
 				73E065D3242A33AE008E73B3 /* BackgroundSyncService.swift in Sources */,
+				896DD99F2BB1AE2700857FE3 /* BestSceneService.swift in Sources */,
 				CF8B64DD23CBC9D70021B021 /* LoginInteractorOutput.swift in Sources */,
 				CF8B64DE23CBC9D70021B021 /* UsageInfoInitializer.swift in Sources */,
 				CF8B64DF23CBC9D70021B021 /* PhoneVerificationDataStorage.swift in Sources */,
@@ -33831,6 +33841,7 @@
 				CF8B6C6A23CBCA280021B021 /* ProtoInputTextCell.swift in Sources */,
 				CF8B6C6B23CBCA280021B021 /* RemoteSearchService.swift in Sources */,
 				CF8B6C6C23CBCA280021B021 /* MyStorageModuleConfigurator.swift in Sources */,
+				896DD9A42BB1AE2900857FE3 /* BestSceneService.swift in Sources */,
 				CF8B6C6D23CBCA280021B021 /* HomeCollectionViewDataSource.swift in Sources */,
 				CF8B6C6E23CBCA280021B021 /* CollectionViewSimpleHeaderWithText.swift in Sources */,
 				CF9B1F6F24C0A940002CE8E9 /* EmptyDataView.swift in Sources */,
@@ -34593,6 +34604,7 @@
 				CF8B6E6923CBCA280021B021 /* FaceImagePhotosInitializer.swift in Sources */,
 				CF8B6E6A23CBCA280021B021 /* BaseFilesGreedViewInput.swift in Sources */,
 				CF8B6E6B23CBCA280021B021 /* InstaPickSelectionSegmentedView.swift in Sources */,
+				896DD9A72BB1AE7800857FE3 /* BestSceneSuccessPopUp.swift in Sources */,
 				0780AB6327916846000760D9 /* TextRecognitionService.swift in Sources */,
 				CF8B6E6D23CBCA280021B021 /* BaseFilesGreedViewOutput.swift in Sources */,
 				CF8B6E6E23CBCA280021B021 /* ImageManager.swift in Sources */,
