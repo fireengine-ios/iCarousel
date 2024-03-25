@@ -14,9 +14,25 @@ protocol DiscoverCardPopupDelegate: AnyObject {
 class DiscoverCard: BaseCardView {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var showAllPictureLabel: UIButton!
+    @IBOutlet weak var titleLabel: UILabel! {
+        willSet {
+            newValue.font = .appFont(.medium, size: 16)
+            newValue.textColor = AppColor.label.color
+        }
+    }
+    
+    @IBOutlet weak var descriptionLabel: UILabel! {
+        willSet {
+            newValue.font = .appFont(.bold, size: 14)
+            newValue.textColor = AppColor.label.color
+        }
+    }
+    
+    @IBOutlet weak var showAllPictureLabel: UIButton! {
+        willSet {
+            newValue.titleLabel?.font = .appFont(.bold, size: 14)
+        }
+    }
     
     private var operation: OperationType?
     weak var popupDelegate: DiscoverCardPopupDelegate?
@@ -135,6 +151,8 @@ extension DiscoverCard: UICollectionViewDelegate, UICollectionViewDataSource, UI
                 self.selectedGroupID = response.id ?? 0
                                                 
                 self.selectedId.append(response.coverPhoto.id)
+                
+//                print("😎 Cover ID", response.coverPhoto.id)
                 
                 for ids in response.fileList {
                     self.selectedId.append(ids.id)

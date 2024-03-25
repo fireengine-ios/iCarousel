@@ -90,7 +90,7 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
     
     var selectedId: [Int]
     var selectedGroupID: Int?
-            
+                
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -103,8 +103,8 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
         snCollectionViewLayout.scrollDirection = .vertical
         
         setupLayout()
-                
-//        print("😎", self.selectedId)
+
+//        print("Güncel dizi 😎: \(self.selectedId)")
     }
     
     init(coverPhotoUrl: String, fileListUrls: [String], selectedId: [Int], selectedGroupID: Int) {
@@ -195,15 +195,19 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
     }()
     
     @objc func tappedDeleteButton() {
-        service.deleteSelectedPhotos(groupId: self.selectedGroupID ?? 0, photoIds: self.selectedId) { response in
-            switch response {
-            case .success():
-                let vc = BestSceneSuccessPopUp.with()
-                vc.open()
-            case .failed(let error):
-                print(error.localizedDescription)
+        let vc = BestSceneSuccessPopUp.with()
+        vc.onYesButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            service.deleteSelectedPhotos(groupId: self.selectedGroupID ?? 0, photoIds: self.selectedId) { response in
+                switch response {
+                case .success():
+                    print("Photos deleted successfully")
+                case .failed(let error):
+                    print(error.localizedDescription)
+                }
             }
         }
+        vc.open()
     }
     
      @objc func tappedKeepItemButton() {

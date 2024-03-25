@@ -12,6 +12,8 @@ typealias BestSceneSuccessPopUpButtonHandler = (_: BestSceneSuccessPopUp) -> Voi
 
 final class BestSceneSuccessPopUp: BasePopUpController {
     
+    var onYesButtonTapped: (() -> Void)?
+    
     @IBOutlet private weak var imageView: UIImageView! {
         willSet {
             newValue.image = UIImage(named: "customPopUpInfo")
@@ -20,7 +22,7 @@ final class BestSceneSuccessPopUp: BasePopUpController {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.font = .appFont(.medium, size: 20)
+            newValue.font = .appFont(.bold, size: 20)
             newValue.textColor = AppColor.forgetPassTimer.color
         }
     }
@@ -36,7 +38,7 @@ final class BestSceneSuccessPopUp: BasePopUpController {
     @IBOutlet private weak var yesButton: UIButton! {
         willSet {
             newValue.setTitle(localized(TextConstants.faceImageYes), for: .normal)
-            newValue.titleLabel?.font = .appFont(.medium, size: 16)
+            newValue.titleLabel?.font = .appFont(.medium, size: 14)
             newValue.setTitleColor(.white, for: .normal)
             newValue.backgroundColor = AppColor.darkBlueColor.color
             newValue.layer.cornerRadius = newValue.frame.size.height * 0.5
@@ -49,7 +51,7 @@ final class BestSceneSuccessPopUp: BasePopUpController {
     @IBOutlet private weak var dismissButton: UIButton! {
         willSet {
             newValue.setTitle(localized(TextConstants.createStoryPhotosCancel), for: .normal)
-            newValue.titleLabel?.font = .appFont(.medium, size: 16)
+            newValue.titleLabel?.font = .appFont(.medium, size: 14)
             newValue.setTitleColor(AppColor.darkBlueColor.color, for: .normal)
             newValue.backgroundColor = .white
             newValue.layer.cornerRadius = newValue.frame.size.height * 0.5
@@ -69,6 +71,7 @@ final class BestSceneSuccessPopUp: BasePopUpController {
     
     @IBAction func yesButtonTapped(_ sender: Any) {
         dismiss(animated: true) {
+            self.onYesButtonTapped?()
             let router = RouterVC()
             let controller = router.bestSceneAllGroupController()
             router.pushViewController(viewController: controller)
@@ -82,7 +85,6 @@ final class BestSceneSuccessPopUp: BasePopUpController {
     @objc private func dismissPopup() {
         dismiss(animated: true)
     }
-    
 }
 
 // MARK: - Init

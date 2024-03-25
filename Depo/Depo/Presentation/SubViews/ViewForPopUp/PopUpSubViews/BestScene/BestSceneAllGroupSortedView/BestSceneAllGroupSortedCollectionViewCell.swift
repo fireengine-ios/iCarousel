@@ -70,7 +70,7 @@ class BestSceneAllGroupSortedCollectionViewCell: UICollectionViewCell {
         label.textAlignment = .center
         label.text = localized(.bestPhoto)
         label.textColor = .white
-        label.font = UIFont(name: "TurkcellSaturaMed", size: 12)
+        label.font = .appFont(.medium, size: 12)
         return label
     }()
     
