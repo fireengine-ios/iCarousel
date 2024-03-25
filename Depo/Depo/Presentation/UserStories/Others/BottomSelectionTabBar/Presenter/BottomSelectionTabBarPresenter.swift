@@ -262,13 +262,23 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .print))
                 self.interactor.trackEvent(elementType: .print)
                 
+                let videoItems = selectedItems.filter { $0.fileType == .video }
+                
+                let itemsToPrint = selectedItems.filter { !$0.isLocalItem && $0.fileType == .image }
+                
+                if videoItems.count == selectedItems.count {
+                    let vc = PhotoPrintVideoPopUp()
+                    vc.open()
+                    return
+                }
+                
                 let isPackage = SingletonStorage.shared.accountInfo?.photoPrintPackage ?? true
                 let maxSelection = SingletonStorage.shared.accountInfo?.photoPrintMaxSelection ?? 0
                 let sendRemaining = SingletonStorage.shared.accountInfo?.photoPrintSendRemaining ?? 0
-                let wrapData = selectedItems as? [WrapData] ?? []
+                let wrapData = itemsToPrint as? [WrapData] ?? []
                 let searchItemResponse = wrapData.map { $0.toSearchItemResponse() }
                 
-                let selectedItemsCount = selectedItems.count
+                let selectedItemsCount = itemsToPrint.count
                 
                 guard isPackage else {
                     let vc = PhotoPrintNoPackagePopup.with()
