@@ -2359,3 +2359,5 @@ then {11,99 TRY/Month}*/
 "grace_banner_paycell_text" = "";
 "photo_max_selection_title_x" = "";
 "photo_max_selection_body_x" = "";
+"no_video_to_print_popup_title" = "Seçilen Videolar Baskıya Gönderilemez";
+"no_video_to_print_popup_body" = "Baskı işlemine devam edebilmek için sadece fotoğraflarını seçmelisin.";

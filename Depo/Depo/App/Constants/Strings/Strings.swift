@@ -380,6 +380,8 @@ enum Strings: String, Localizable {
     case lifeboxResignupWarning = "lifebox_resignup_warning"
     case photoMaxSelectionBodyX = "photo_max_selection_body"
     case photoMaxSelectionTitleX = "photo_max_selection_title"
+    case noVideoToPrintPopupTitle = "no_video_to_print_popup_title"
+    case noVideoToPrintPopupBody = "no_video_to_print_popup_body"
     
     case canNotSentOtpSms = "can_not_sent_otp_sms"
     case invalidRefenrenceCode = "invalid_refenrence_code"

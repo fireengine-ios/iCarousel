@@ -2337,3 +2337,5 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "photo_max_selection_body_x" = "You can send a maximum of %@ photos for printing.";
+"no_video_to_print_popup_title" = "";
+"no_video_to_print_popup_body" = "";

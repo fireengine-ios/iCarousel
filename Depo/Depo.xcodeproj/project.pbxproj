@@ -4750,6 +4750,14 @@
 		B5ECA57425063E0C00C290BA /* CIImage+CGConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ECA56E25063E0C00C290BA /* CIImage+CGConvert.swift */; };
 		B5F40BB2204A80220011CB66 /* AutoSyncSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */; };
 		C14F60B7903DFBDD79BD9ECB /* Pods_BilloWidgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA14B6FE8165C7E0C534AB1 /* Pods_BilloWidgetExtension.framework */; };
+		C328E99F2BB2086E00CA9A3D /* PhotoPrintVideoPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C328E99E2BB2086E00CA9A3D /* PhotoPrintVideoPopUp.swift */; };
+		C328E9A02BB2086E00CA9A3D /* PhotoPrintVideoPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C328E99E2BB2086E00CA9A3D /* PhotoPrintVideoPopUp.swift */; };
+		C328E9A12BB2086E00CA9A3D /* PhotoPrintVideoPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C328E99E2BB2086E00CA9A3D /* PhotoPrintVideoPopUp.swift */; };
+		C328E9A22BB2086E00CA9A3D /* PhotoPrintVideoPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C328E99E2BB2086E00CA9A3D /* PhotoPrintVideoPopUp.swift */; };
+		C328E9A72BB2088C00CA9A3D /* PhotoPrintVideoPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = C328E9A62BB2088C00CA9A3D /* PhotoPrintVideoPopUp.xib */; };
+		C328E9A82BB2088C00CA9A3D /* PhotoPrintVideoPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = C328E9A62BB2088C00CA9A3D /* PhotoPrintVideoPopUp.xib */; };
+		C328E9A92BB2088C00CA9A3D /* PhotoPrintVideoPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = C328E9A62BB2088C00CA9A3D /* PhotoPrintVideoPopUp.xib */; };
+		C328E9AA2BB2088C00CA9A3D /* PhotoPrintVideoPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = C328E9A62BB2088C00CA9A3D /* PhotoPrintVideoPopUp.xib */; };
 		C39FD8AC2BA202660054DE13 /* BestSceneSuccessPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39FD8AB2BA202660054DE13 /* BestSceneSuccessPopUp.swift */; };
 		C39FD8AE2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39FD8AD2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib */; };
 		C4A38BA321EE1F4B00ECCCEA /* TransparentGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */; };
@@ -12465,6 +12473,8 @@
 		C1189F38BB8EA8AC5F7031CD /* Pods-LifeTech_BilloWidgetExtension.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_BilloWidgetExtension.appstore.xcconfig"; path = "Target Support Files/Pods-LifeTech_BilloWidgetExtension/Pods-LifeTech_BilloWidgetExtension.appstore.xcconfig"; sourceTree = "<group>"; };
 		C14662373D7DDA7928074D3C /* IntroduceConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceConfigurator.swift; sourceTree = "<group>"; };
 		C2287D169D831E3173413D01 /* IntroduceRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceRouterInput.swift; sourceTree = "<group>"; };
+		C328E99E2BB2086E00CA9A3D /* PhotoPrintVideoPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintVideoPopUp.swift; sourceTree = "<group>"; };
+		C328E9A62BB2088C00CA9A3D /* PhotoPrintVideoPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoPrintVideoPopUp.xib; sourceTree = "<group>"; };
 		C32DD0C129BDD14A38BEF0AA /* Pods-LifeTech_Billo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_Billo.debug.xcconfig"; path = "Target Support Files/Pods-LifeTech_Billo/Pods-LifeTech_Billo.debug.xcconfig"; sourceTree = "<group>"; };
 		C39FD8AB2BA202660054DE13 /* BestSceneSuccessPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSceneSuccessPopUp.swift; sourceTree = "<group>"; };
 		C39FD8AD2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BestSceneSuccessPopUp.xib; sourceTree = "<group>"; };
@@ -17837,6 +17847,8 @@
 				895768052ABC698900FCD708 /* PhotoPrintSendedPopup.xib */,
 				8991E1D92AC3FE410046E4F5 /* PhotoPrintStatusPopup.swift */,
 				8991E1E12AC3FE670046E4F5 /* PhotoPrintStatusPopup.xib */,
+				C328E99E2BB2086E00CA9A3D /* PhotoPrintVideoPopUp.swift */,
+				C328E9A62BB2088C00CA9A3D /* PhotoPrintVideoPopUp.xib */,
 			);
 			path = Popups;
 			sourceTree = "<group>";
@@ -24571,6 +24583,7 @@
 				989BDE3B22F47B1E001DDEB2 /* SpotifyPlaylistsViewController.xib in Resources */,
 				8991E1E22AC3FE670046E4F5 /* PhotoPrintStatusPopup.xib in Resources */,
 				F006110028A1181100911048 /* PaycellDetailPopup.xib in Resources */,
+				C328E9A72BB2088C00CA9A3D /* PhotoPrintVideoPopUp.xib in Resources */,
 				8C0E90501FDEBDFF00789C91 /* TurkcellSaturaDem.ttf in Resources */,
 				CF38A81E2575315F0000994F /* PrivateShareWithContactView.xib in Resources */,
 				98AA104623585E0C00B12485 /* CampaignDetailViewController.xib in Resources */,
@@ -25161,6 +25174,7 @@
 				8C86111D22BCFDF800108958 /* PermissionsView.xib in Resources */,
 				CE784E6D22A685FB00662219 /* SwipeableCardCell.xib in Resources */,
 				CE784E7022A685FB00662219 /* UserInfoSubViewViewController.xib in Resources */,
+				C328E9A92BB2088C00CA9A3D /* PhotoPrintVideoPopUp.xib in Resources */,
 				98792DDC22FD486F000A77E5 /* SpotifyImportedTracksViewController.xib in Resources */,
 				CE784E7222A685FB00662219 /* PhotosOrderCollectionViewCell.xib in Resources */,
 				9853CD3A2361BD6F00E19BF7 /* LaunchScreen.storyboard in Resources */,
@@ -25512,6 +25526,7 @@
 				CF8B6A3C23CBC9D70021B021 /* TurkcellSaturaDem.ttf in Resources */,
 				CF8B6A4623CBC9D70021B021 /* CampaignDetailViewController.xib in Resources */,
 				F092578B27DCF7E60001737C /* SecurityInfoViewController.xib in Resources */,
+				C328E9A82BB2088C00CA9A3D /* PhotoPrintVideoPopUp.xib in Resources */,
 				988BA18B255924670086E4BE /* PrivateShareAddMessageView.xib in Resources */,
 				CF8B6A4F23CBC9D70021B021 /* FolderSelectionCollectionViewCell.xib in Resources */,
 				9842FC172563D34800B07606 /* PrivateShareContactCell.xib in Resources */,
@@ -25992,6 +26007,7 @@
 				982319F724F3A1E700FD16E2 /* PhotoEditTabbar.xib in Resources */,
 				CF8B724223CBCA280021B021 /* PhotosOrderCollectionViewCell.xib in Resources */,
 				CF8B724423CBCA280021B021 /* LaunchScreen.storyboard in Resources */,
+				C328E9AA2BB2088C00CA9A3D /* PhotoPrintVideoPopUp.xib in Resources */,
 				CF8B724623CBCA280021B021 /* PackagesViewController.xib in Resources */,
 				CF8B724923CBCA280021B021 /* LocalAlbumCollectionViewCell.xib in Resources */,
 				CF8B724B23CBCA280021B021 /* PrepareQuickScroll.xib in Resources */,
@@ -28556,6 +28572,7 @@
 				925B59A622C3BF85004697F3 /* CreateStorySelectionController.swift in Sources */,
 				8C20865E228D4B2E000BEDAD /* PhotoVideoController.swift in Sources */,
 				895EC8412AB70E9F007D6CEB /* PhotoPrintSendPopup.swift in Sources */,
+				C328E99F2BB2086E00CA9A3D /* PhotoPrintVideoPopUp.swift in Sources */,
 				98231A1124F3A1E700FD16E2 /* SelectionMenuCell.swift in Sources */,
 				FA475ACD203EAFB9008D79C2 /* PushPopAnimator.swift in Sources */,
 				4AD1A81F208A2F2100930112 /* PeriodContactsSyncModel.swift in Sources */,
@@ -30094,6 +30111,7 @@
 				CE78496322A685FB00662219 /* Array+Safe.swift in Sources */,
 				98B04860259314750011DAEB /* RestoreHelper.m in Sources */,
 				CE78496422A685FB00662219 /* AutoSyncRouter.swift in Sources */,
+				C328E9A12BB2086E00CA9A3D /* PhotoPrintVideoPopUp.swift in Sources */,
 				CE78496522A685FB00662219 /* FaceImageDesigner.swift in Sources */,
 				CE78496622A685FB00662219 /* KeychainSwift+Optional.swift in Sources */,
 				CF7146F724B597A900D83E60 /* ContactListViewController.swift in Sources */,
@@ -32160,6 +32178,7 @@
 				CF8B655223CBC9D70021B021 /* RegistrationRouterInput.swift in Sources */,
 				F0E0A4812897F38500528B39 /* ForYouEmptyCellView.swift in Sources */,
 				CF8B655323CBC9D70021B021 /* PaymentModels.swift in Sources */,
+				C328E9A02BB2086E00CA9A3D /* PhotoPrintVideoPopUp.swift in Sources */,
 				895EC8422AB70E9F007D6CEB /* PhotoPrintSendPopup.swift in Sources */,
 				CFA9D6D22562062D00C8F25D /* DismissKeyboardScrollView.swift in Sources */,
 				CF8B655423CBC9D70021B021 /* RegistrationRouter.swift in Sources */,
@@ -33656,6 +33675,7 @@
 				893DCFFA292B868D00271379 /* DiscoverModuleInput.swift in Sources */,
 				98B047E1259314750011DAEB /* Contact.m in Sources */,
 				CF8B6BEA23CBCA280021B021 /* RequestHeader.swift in Sources */,
+				C328E9A22BB2086E00CA9A3D /* PhotoPrintVideoPopUp.swift in Sources */,
 				CF8B6BEB23CBCA280021B021 /* HomePageViewController.swift in Sources */,
 				CF8B6BEC23CBCA280021B021 /* ThingsServiceResponse.swift in Sources */,
 				07DB93C32860B28000D5CACF /* IAPIntroPriceEligibilityChecker.swift in Sources */,
