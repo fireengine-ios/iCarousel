@@ -49,9 +49,9 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
     override func cancel() {
         super.cancel()
         
-        DispatchQueue.main.async { [weak self] in
-            self?.task?.cancel()
-            self?.task = nil
+        DispatchQueue.main.async {
+            self.task?.cancel()
+            self.task = nil
         }
         semaphore.signal()
     }
@@ -60,7 +60,12 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
         // Potential crash-fix (DE-12449)
         defer { outputBlock = nil }
         
-        guard !isCancelled, let url = url else {
+        
+        guard !isCancelled else {
+            return
+        }
+        
+        guard let url = url else {
             outputBlock?(nil, nil)
             return
         }
@@ -99,11 +104,9 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
         
         task?.priority = URLSessionTask.lowPriority
         
-        self.semaphore.wait()
+        semaphore.wait()
         
-        DispatchQueue.main.async {
-            self.outputBlock?(outputImage, outputData)
-        }
+        outputBlock?(outputImage, outputData)
     }
     
     private func formattedImage(data: Data?) -> UIImage? {

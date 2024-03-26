@@ -89,7 +89,7 @@ final class CacheManager {
                     }
                     
                     if isNoRemotes || self.userDefaultsVars.currentRemotesPage > 0 {
-                        self.showPreparationCardAfterDelay()
+                        //self.showPreparationCardAfterDelay()
                         prepairingLoadingForProfileImage(isStart: false)
                         self.startAppendingAllRemotes(completion: { [weak self] in
                             debugLog("CacheManager no remotes, appended all remotes")
@@ -110,7 +110,8 @@ final class CacheManager {
                                     self.isProcessing = false
                                     self.isCacheActualized = true
                                     debugLog("CacheManager cache is actualized")
-                                    self.updatePreparation(isBegun: false)
+                                    //self.updatePreparation(isBegun: false)
+                                    self.prepairingLoadingForProfileImage(isStart: true)
                                     SyncServiceManager.shared.updateImmediately()
                                     
                                     let mediaService = MediaItemOperationsService.shared
@@ -135,7 +136,7 @@ final class CacheManager {
                             debugLog("CacheManager there are remotes, but locals already being processed")
                             return
                         }
-                        self.showPreparationCardAfterDelay()
+                        //self.showPreparationCardAfterDelay()
                         prepairingLoadingForProfileImage(isStart: false)
                         self.startProcessingAllLocals(completion: { [weak self] in
                             self?.actualizeUnsavedFileSyncStatus() { [weak self] in
@@ -146,7 +147,8 @@ final class CacheManager {
                                 self.isProcessing = false
                                 self.isCacheActualized = true
                                 debugLog("CacheManager cache is actualized")
-                                self.updatePreparation(isBegun: false)
+                                //self.updatePreparation(isBegun: false)
+                                self.prepairingLoadingForProfileImage(isStart: true)
                                 SyncServiceManager.shared.updateImmediately()
                                 
                                 let mediaService = MediaItemOperationsService.shared
