@@ -20,7 +20,7 @@ final class PhotoPrintVideoPopUp: BasePopUpController {
     
     @IBOutlet weak var imageView: UIImageView! {
         willSet {
-            newValue.image = UIImage(named: "customPopUpInfo")
+            newValue.image = UIImage(named: "warningAlert")
         }
     }
     
