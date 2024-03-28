@@ -2273,3 +2273,15 @@ then {11,99 TRY/Month}*/
 "photo_max_selection_body_x" = "";
 "no_video_to_print_popup_title" = "";
 "no_video_to_print_popup_body" = "";
+
+/*deeplink nereye olacak? ona göre metin güncelleyebilirim*/
+"\n\"peo" = "";
+
+/*deeplink nereye olacak? ona göre metin güncelleyebilirim*/
+"\n\"\n\"peo\"" = "";
+
+/*deeplink nereye olacak? ona göre metin güncelleyebilirim*/
+"\n\"\n\"\n\"peo\"\"" = "";
+
+/*deeplink nereye olacak? ona göre metin güncelleyebilirim*/
+"\n\"\n\"\n\"\n\"peo\"\"\"" = "";
