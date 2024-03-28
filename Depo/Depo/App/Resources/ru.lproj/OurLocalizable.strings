@@ -2286,14 +2286,23 @@ then {11,99 TRY/Month}*/
 "no_video_to_print_popup_title" = "";
 "no_video_to_print_popup_body" = "";
 
-/*deeplink nereye olacak? ona göre metin güncelleyebilirim*/
-"\n\"peo" = "";
+/*Hediye çekiliş hakkı ekranı başlık*/
+"gamification_raffle_count" = "";
 
-/*deeplink nereye olacak? ona göre metin güncelleyebilirim*/
-"\n\"\n\"peo\"" = "";
+/*Kampanya tarih aralıgı*/
+"gamification_raffle_dates" = "";
 
-/*deeplink nereye olacak? ona göre metin güncelleyebilirim*/
-"\n\"\n\"\n\"peo\"\"" = "";
+/*Toplam çekiliş hak sayısı*/
+"gamification_raffle_count" = "";
 
-/*deeplink nereye olacak? ona göre metin güncelleyebilirim*/
-"\n\"\n\"\n\"\n\"peo\"\"\"" = "";
+/*Çekiliş özetini gör buton*/
+"gamification_raffle_brief" = "";
+
+/*Çekiliş özet açıklaması*/
+"gamification_event_description" = "";
+
+/*Yarın tekrar gel metni*/
+"gamification_comeback" = "";
+
+/*Paket satın alma kuralı için*/
+"gamification_package_rule" = "";
