@@ -177,7 +177,9 @@ final class ForYouTableViewCell: UITableViewCell {
 
     @IBAction func seeAllButtonTapped(_ sender: UIButton) {
         if let currentView = currentView {
-            delegate?.onSeeAllButton(for: currentView)
+            DispatchQueue.main.async {
+                self.delegate?.onSeeAllButton(for: currentView)
+            }
         }
     }
 }
