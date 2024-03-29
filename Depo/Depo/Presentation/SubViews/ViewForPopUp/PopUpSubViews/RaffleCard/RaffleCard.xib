@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="TgC-k5-iSK" customClass="RaffleCard" customModule="Billo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="340" height="579"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IKi-8I-LdK" customClass="LoadingImageView" customModule="Billo" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="59" width="340" height="170"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="IKi-8I-LdK" secondAttribute="height" multiplier="2" id="Re4-p0-hPw"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydl-41-Zuz">
+                    <rect key="frame" x="14" y="274" width="312" height="20.333333333333314"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nY4-07-4cX">
+                    <rect key="frame" x="14" y="237" width="312" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sNM-Xo-zjc" customClass="DarkBlueButton" customModule="Billo" customModuleProvider="target">
+                    <rect key="frame" x="60" y="310.33333333333331" width="220" height="42"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="42" id="9Zo-Ib-fqQ"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="onActionButton:" destination="TgC-k5-iSK" eventType="touchUpInside" id="QXg-S9-Z83"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F2C-Bo-K80" customClass="PaddingLabel" customModule="Billo" customModuleProvider="target">
+                    <rect key="frame" x="330" y="69" width="0.0" height="42"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="42" id="Vmw-Xy-WNr"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="8XX-F7-odc"/>
+            <color key="backgroundColor" name="secondaryBackground"/>
+            <constraints>
+                <constraint firstItem="IKi-8I-LdK" firstAttribute="top" secondItem="8XX-F7-odc" secondAttribute="top" id="0Kc-tW-cYm"/>
+                <constraint firstItem="IKi-8I-LdK" firstAttribute="leading" secondItem="8XX-F7-odc" secondAttribute="leading" id="3ZX-X8-Ndn"/>
+                <constraint firstItem="sNM-Xo-zjc" firstAttribute="top" secondItem="ydl-41-Zuz" secondAttribute="bottom" constant="16" id="6oI-7W-m32"/>
+                <constraint firstItem="8XX-F7-odc" firstAttribute="trailing" secondItem="nY4-07-4cX" secondAttribute="trailing" constant="14" id="7F8-wl-1tG"/>
+                <constraint firstItem="8XX-F7-odc" firstAttribute="trailing" secondItem="IKi-8I-LdK" secondAttribute="trailing" id="CQ2-8j-o4Q"/>
+                <constraint firstItem="8XX-F7-odc" firstAttribute="trailing" secondItem="F2C-Bo-K80" secondAttribute="trailing" constant="10" id="Ihe-Do-rST"/>
+                <constraint firstItem="ydl-41-Zuz" firstAttribute="top" secondItem="nY4-07-4cX" secondAttribute="bottom" constant="16" id="OnF-nf-h4i"/>
+                <constraint firstItem="8XX-F7-odc" firstAttribute="trailing" secondItem="ydl-41-Zuz" secondAttribute="trailing" constant="14" id="b1L-R6-reG"/>
+                <constraint firstItem="8XX-F7-odc" firstAttribute="trailing" secondItem="sNM-Xo-zjc" secondAttribute="trailing" constant="60" id="bCU-XK-x74"/>
+                <constraint firstItem="F2C-Bo-K80" firstAttribute="top" secondItem="8XX-F7-odc" secondAttribute="top" constant="10" id="md2-QG-Lip"/>
+                <constraint firstItem="nY4-07-4cX" firstAttribute="leading" secondItem="8XX-F7-odc" secondAttribute="leading" constant="14" id="oQz-SH-zZc"/>
+                <constraint firstItem="sNM-Xo-zjc" firstAttribute="leading" secondItem="8XX-F7-odc" secondAttribute="leading" constant="60" id="wHN-eT-qsd"/>
+                <constraint firstItem="nY4-07-4cX" firstAttribute="top" secondItem="IKi-8I-LdK" secondAttribute="bottom" constant="8" id="zYm-2W-b1k"/>
+                <constraint firstItem="ydl-41-Zuz" firstAttribute="leading" secondItem="8XX-F7-odc" secondAttribute="leading" constant="14" id="zcE-KD-7fJ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="actionButton" destination="sNM-Xo-zjc" id="bRy-3w-MtY"/>
+                <outlet property="imageView" destination="IKi-8I-LdK" id="9mW-zJ-RdF"/>
+                <outlet property="messageLabel" destination="ydl-41-Zuz" id="xIy-As-WLz"/>
+                <outlet property="titleLabel" destination="nY4-07-4cX" id="cZa-76-o2h"/>
+            </connections>
+            <point key="canvasLocation" x="16" y="43.628185907046479"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="F2C-Bo-K80"/>
+    </designables>
+    <resources>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
