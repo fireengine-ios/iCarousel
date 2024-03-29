@@ -45,6 +45,7 @@ final class RaffleCard: BaseCardView {
     private var id: Int = 0
     private var pageTitle: String = ""
     private lazy var router = RouterVC()
+    private var detailUrl: String = ""
     
     override func set(object: HomeCardResponse?) {
         super.set(object: object)
@@ -68,6 +69,10 @@ final class RaffleCard: BaseCardView {
         if let url = cardObject?.details?["imagePath"].url {
             imageView.loadImageData(with: url)
         }
+        
+        if let detailUrl = cardObject?.details?["detailImagePath"].string {
+            self.detailUrl = detailUrl
+        }
     }
     
     override func layoutSubviews() {
@@ -81,12 +86,12 @@ final class RaffleCard: BaseCardView {
     }
     
     @IBAction private func onActionButton(_ sender: UIButton) {
-        let vc = router.raffle(id: id)
+        let vc = router.raffle(id: id, url: detailUrl)
         router.pushViewController(viewController: vc, animated: false)
     }
     
     @objc private func imageTapped() {
-        let vc = router.raffle(id: id)
+        let vc = router.raffle(id: id, url: detailUrl)
         router.pushViewController(viewController: vc, animated: false)
     }
 }
