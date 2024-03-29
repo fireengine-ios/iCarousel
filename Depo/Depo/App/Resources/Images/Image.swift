@@ -261,4 +261,13 @@ enum Image: String, AppImage {
     /// Prepairing Loading View
     case loadingCircle
     case iconHeaderPreparing
+    
+    //RAFFLE
+    case raffleCreateCollage
+    case raffleCreateStory
+    case rafflePhotopick
+    case raffleReferans
+    case raffleLogin
+    case rafflePhotoPrint
+    case rafflePurchasePackage
 }

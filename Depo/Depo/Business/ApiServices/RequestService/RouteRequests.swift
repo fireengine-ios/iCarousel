@@ -568,4 +568,7 @@ struct RouteRequests {
     static let getCampaignStatus = "draw/%d/status"
     static let getCampaignPolicy = "draw/%d/policy"
     static let setCampaignApply = "draw/%d/apply"
+    
+    //MARK: -RAFFLE (GAMIFICATION)
+    static let getRaffleStatus = "v1/campaign/%d"
 }
