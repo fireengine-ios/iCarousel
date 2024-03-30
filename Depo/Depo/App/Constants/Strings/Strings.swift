@@ -411,4 +411,14 @@ enum Strings: String, Localizable {
     case pleaseEnterYourMsisdn = "please_enter_your_msisdn"
     case selectSecurityQuestion = "select_security_question"
     case okButton = "OK"
+    
+    case gamificationRaffleCount = "gamification_raffle_count"
+    case gamificationRaffleDates = "gamification_raffle_dates"
+    case gamificationRaffleBrief = "gamification_raffle_brief"
+    case gamificationEventDescription = "gamification_event_description"
+    case gamificationComeback = "gamification_comeback"
+    case gamificationPackageRule = "gamification_package_rule"
+    case gamificationRaffleInfo = "gamification_raffle_info"
+    case gamificationRaffleDraw = "gamification_raffle_draw"
+
 }

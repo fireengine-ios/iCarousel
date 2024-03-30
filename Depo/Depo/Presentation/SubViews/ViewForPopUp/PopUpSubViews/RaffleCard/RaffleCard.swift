@@ -46,6 +46,9 @@ final class RaffleCard: BaseCardView {
     private var pageTitle: String = ""
     private lazy var router = RouterVC()
     private var detailUrl: String = ""
+    private var startDate: String = ""
+    private var endDate: String = ""
+    private var drawEndDateText: String = ""
     
     override func set(object: HomeCardResponse?) {
         super.set(object: object)
@@ -73,6 +76,15 @@ final class RaffleCard: BaseCardView {
         if let detailUrl = cardObject?.details?["detailImagePath"].string {
             self.detailUrl = detailUrl
         }
+        
+        if let startDate = cardObject?.details?["startDate"].number {
+            self.startDate = dateString(from: startDate)
+        }
+        
+        if let endDate = cardObject?.details?["endDate"].number {
+            self.endDate = dateString(from: endDate)
+        }
+        drawEndDateText = "\(localized(.gamificationRaffleDates)) \(startDate) - \(endDate)"
     }
     
     override func layoutSubviews() {
@@ -86,12 +98,18 @@ final class RaffleCard: BaseCardView {
     }
     
     @IBAction private func onActionButton(_ sender: UIButton) {
-        let vc = router.raffle(id: id, url: detailUrl)
+        let vc = router.raffle(id: id, url: detailUrl, endDateText: drawEndDateText)
         router.pushViewController(viewController: vc, animated: false)
     }
     
     @objc private func imageTapped() {
-        let vc = router.raffle(id: id, url: detailUrl)
+        let vc = router.raffle(id: id, url: detailUrl, endDateText: drawEndDateText)
         router.pushViewController(viewController: vc, animated: false)
+    }
+    
+    private func dateString(from dateInterval: NSNumber) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        return formatter.string(from: Date(timeIntervalSince1970: TimeInterval(dateInterval.doubleValue / 1000)))
     }
 }

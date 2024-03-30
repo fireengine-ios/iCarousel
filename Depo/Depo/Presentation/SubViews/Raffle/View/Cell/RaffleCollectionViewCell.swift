@@ -37,6 +37,18 @@ class RaffleCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
+    private lazy var nextDayLabel: UILabel = {
+        let view = UILabel()
+        view.font = .appFont(.medium, size: 10)
+        view.textColor = AppColor.forgetPassTimer.color
+        view.numberOfLines = 0
+        view.textAlignment = .center
+        view.lineBreakMode = .byWordWrapping
+        view.text = localized(.gamificationComeback)
+        view.isHidden = true
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setLayout()
@@ -46,10 +58,11 @@ class RaffleCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(image: UIImage, title: String, imageOppacity: Float) {
+    func configure(image: UIImage, title: String, imageOppacity: Float, nextLabelIsHidden: Bool) {
         iconImage.image = image
         titleLabel.text = title
         iconImage.layer.opacity = imageOppacity
+        nextDayLabel.isHidden = nextLabelIsHidden
     }
 }
 
@@ -74,5 +87,11 @@ extension RaffleCollectionViewCell {
         titleLabel.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 10).activate()
         titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 2).activate()
         titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -2).activate()
+        
+        addSubview(nextDayLabel)
+        nextDayLabel.translatesAutoresizingMaskIntoConstraints = false
+        nextDayLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).activate()
+        nextDayLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 2).activate()
+        nextDayLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -2).activate()
     }
 }

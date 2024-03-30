@@ -2359,5 +2359,13 @@ then {11,99 TRY/Month}*/
 "grace_banner_paycell_text" = "";
 "photo_max_selection_title_x" = "";
 "photo_max_selection_body_x" = "";
-"no_video_to_print_popup_title" = "Seçilen Videolar Baskıya Gönderilemez";
+"no_video_to_print_popup_title" = "Seçilen Videolar Baskıya Gönderilemez!";
 "no_video_to_print_popup_body" = "Baskı işlemine devam edebilmek için sadece fotoğraflarını seçmelisin.";
+"gamification_raffle_count" = "%d Adet çekiliş hakkın mevcut";
+"gamification_raffle_dates" = "Çekilişe katılım tarihi:";
+"gamification_raffle_brief" = "Çekiliş Özetini Gör";
+"gamification_event_description" = "Kazanma şansını artırmak için aşağıdaki rozetleri tamamlaman kazanma şansını artıracaktır";
+"gamification_comeback" = "Yarın tekrar gel!";
+"gamification_package_rule" = "Paket Al";
+"gamification_raffle_info" = "Hediye Çekiliş Hakkı";
+"gamification_raffle_draw" = "Kampanya Koşullarını öğrenmek için tıklayın.";

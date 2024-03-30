@@ -2254,6 +2254,9 @@
 		89F0958329B0C0B200F74E7E /* CreateCollageViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0958129B0C0B200F74E7E /* CreateCollageViewOutput.swift */; };
 		89F0958429B0C0B200F74E7E /* CreateCollageViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0958129B0C0B200F74E7E /* CreateCollageViewOutput.swift */; };
 		89F0958529B0C0B200F74E7E /* CreateCollageViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0958129B0C0B200F74E7E /* CreateCollageViewOutput.swift */; };
+		89F79E1E2BB6A72900D6F46D /* RaffleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89232DB92BB5468300C5B898 /* RaffleService.swift */; };
+		89F79E222BB6A72A00D6F46D /* RaffleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89232DB92BB5468300C5B898 /* RaffleService.swift */; };
+		89F79E232BB6A72A00D6F46D /* RaffleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89232DB92BB5468300C5B898 /* RaffleService.swift */; };
 		89F99F6A29B5B9A600F99CB5 /* CreateCollageSelectionSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F6929B5B9A600F99CB5 /* CreateCollageSelectionSegmentedView.swift */; };
 		89F99F6C29B5B9F400F99CB5 /* CreateCollageSelectionSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F6B29B5B9F400F99CB5 /* CreateCollageSelectionSegmentedController.swift */; };
 		89F99F6E29B5BB7000F99CB5 /* CreateCollagePhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F99F6D29B5BB7000F99CB5 /* CreateCollagePhotoSelectionController.swift */; };
@@ -31579,6 +31582,7 @@
 				F0571ED0288AE6F000A0D6AC /* ForYouInteractorOutput.swift in Sources */,
 				CF71473F24B597AA00D83E60 /* ContactSyncPopupFactory.swift in Sources */,
 				9809317C23952CAC00ECFEF8 /* PeopleAlbumsManager.swift in Sources */,
+				89F79E222BB6A72A00D6F46D /* RaffleService.swift in Sources */,
 				CE784C7722A685FB00662219 /* ActivityTimelineViewController.swift in Sources */,
 				981617892578BA3D009F1C31 /* FirebaseAnalyticsLabels.swift in Sources */,
 				CE784C7822A685FB00662219 /* ActivityTimelineModuleInput.swift in Sources */,
@@ -32649,6 +32653,7 @@
 				CF8B660023CBC9D70021B021 /* TwoFactorAuthenticationViewController.swift in Sources */,
 				CF8B660123CBC9D70021B021 /* SpotifyAuthViewController.swift in Sources */,
 				CF8B660223CBC9D70021B021 /* PackagesViewController.swift in Sources */,
+				89F79E1E2BB6A72900D6F46D /* RaffleService.swift in Sources */,
 				07DB93A42860AF5400D5CACF /* ASN1ObjectIdentifierBuilder.swift in Sources */,
 				CF8B660323CBC9D70021B021 /* PasscodeSettingsModuleInput.swift in Sources */,
 				CF8B660423CBC9D70021B021 /* SpotifyService.swift in Sources */,
@@ -35312,6 +35317,7 @@
 				CF8B6FA623CBCA280021B021 /* PermissionsView.swift in Sources */,
 				9823198524F3A1E700FD16E2 /* AdjustView.swift in Sources */,
 				CF8B6FA723CBCA280021B021 /* ProfileTextPickerView.swift in Sources */,
+				89F79E232BB6A72A00D6F46D /* RaffleService.swift in Sources */,
 				98B04801259314750011DAEB /* SyncRecord.m in Sources */,
 				CF8B6FA823CBCA280021B021 /* SelectNameInteractorInput.swift in Sources */,
 				52501E6F299528360000376C /* NotificationViewController.swift in Sources */,

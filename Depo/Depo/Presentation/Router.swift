@@ -1176,8 +1176,8 @@ class RouterVC: NSObject {
     }
     
     // MARK: - Raffle - Gamification
-    func raffle(id: Int, url: String) -> RaffleViewController {
-        return RaffleInitializer.initializeViewController(id: id, url: url)
+    func raffle(id: Int, url: String, endDateText: String) -> RaffleViewController {
+        return RaffleInitializer.initializeViewController(id: id, url: url, endDateText: endDateText)
     }
     
     // MARK: - Draw Campaign
