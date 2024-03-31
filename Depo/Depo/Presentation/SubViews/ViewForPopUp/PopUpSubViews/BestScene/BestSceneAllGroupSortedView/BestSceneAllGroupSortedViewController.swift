@@ -104,7 +104,7 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
         
         setupLayout()
 
-//        print("Güncel dizi 😎: \(self.selectedId)")
+        print("Güncel dizi 😎: \(self.selectedId)")
     }
     
     init(coverPhotoUrl: String, fileListUrls: [String], selectedId: [Int], selectedGroupID: Int) {
@@ -201,9 +201,9 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
             service.deleteSelectedPhotos(groupId: self.selectedGroupID ?? 0, photoIds: self.selectedId) { response in
                 switch response {
                 case .success():
-                    print("Photos deleted successfully")
+                    debugPrint("Photos deleted successfully")
                 case .failed(let error):
-                    print(error.localizedDescription)
+                    debugPrint(error.localizedDescription)
                 }
             }
         }
@@ -212,6 +212,14 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
     
      @objc func tappedKeepItemButton() {
          service.keepAllPhotosInGroup(groupId: nil, photoIds: []) { response in
+             switch response {
+             case .success():
+                 let router = RouterVC()
+                 let controller = router.bestSceneAllGroupController()
+                 router.pushViewController(viewController: controller)
+             case .failed(let error):
+                 debugPrint("😎 Error:", error.localizedDescription)
+             }
              self.collectionView.reloadData()
          }
      }
@@ -278,7 +286,7 @@ extension BestSceneAllGroupSortedViewController: UICollectionViewDelegate, UICol
                 self.selectedId.remove(at: deletedIndex)
             }
         }
-//        print("😎 Güncel Seçilen ID'ler: \(self.selectedId)")
+        print("😎 Güncel Seçilen ID'ler: \(self.selectedId)")
     }
 }
 

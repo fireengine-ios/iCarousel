@@ -4758,6 +4758,9 @@
 		C328E9A82BB2088C00CA9A3D /* PhotoPrintVideoPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = C328E9A62BB2088C00CA9A3D /* PhotoPrintVideoPopUp.xib */; };
 		C328E9A92BB2088C00CA9A3D /* PhotoPrintVideoPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = C328E9A62BB2088C00CA9A3D /* PhotoPrintVideoPopUp.xib */; };
 		C328E9AA2BB2088C00CA9A3D /* PhotoPrintVideoPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = C328E9A62BB2088C00CA9A3D /* PhotoPrintVideoPopUp.xib */; };
+		C328E9B42BB8B73700CA9A3D /* BestSceneSuccessPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39FD8AD2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib */; };
+		C328E9B82BB8B73800CA9A3D /* BestSceneSuccessPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39FD8AD2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib */; };
+		C328E9B92BB8B75000CA9A3D /* BestSceneSuccessPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39FD8AD2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib */; };
 		C39FD8AC2BA202660054DE13 /* BestSceneSuccessPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39FD8AB2BA202660054DE13 /* BestSceneSuccessPopUp.swift */; };
 		C39FD8AE2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39FD8AD2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib */; };
 		C4A38BA321EE1F4B00ECCCEA /* TransparentGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */; };
@@ -25162,6 +25165,7 @@
 				890F737A22EEFB0000BA0020 /* BaseChangeEmailPopUp.xib in Resources */,
 				CE784E5822A685FB00662219 /* FolderSelectionCollectionViewCell.xib in Resources */,
 				989BDE4B22F47B1E001DDEB2 /* SpotifyAuthViewController.xib in Resources */,
+				C328E9B42BB8B73700CA9A3D /* BestSceneSuccessPopUp.xib in Resources */,
 				CE784E5D22A685FB00662219 /* AlbumCard.xib in Resources */,
 				98231A2024F3A1E700FD16E2 /* SelectionMenuCell.xib in Resources */,
 				CF71465B24B597A800D83E60 /* ContactSyncSmallCardView.xib in Resources */,
@@ -25522,6 +25526,7 @@
 				CF8B6A3923CBC9D70021B021 /* SpotifyPlaylistsViewController.xib in Resources */,
 				CF7145F924B597A800D83E60 /* ContactDetailNoInfoCell.xib in Resources */,
 				F01C14D128FB47C200F5D380 /* ForYouCardsCollectionViewCell.xib in Resources */,
+				C328E9B92BB8B75000CA9A3D /* BestSceneSuccessPopUp.xib in Resources */,
 				0305A30423D5C2C4004D1EC7 /* OverlayStickerViewController.xib in Resources */,
 				CF8B6A3C23CBC9D70021B021 /* TurkcellSaturaDem.ttf in Resources */,
 				CF8B6A4623CBC9D70021B021 /* CampaignDetailViewController.xib in Resources */,
@@ -25995,6 +26000,7 @@
 				981EA2EB247D4CA700A51B7D /* ContactsOperationView.xib in Resources */,
 				CF8B723323CBCA280021B021 /* InstapickAnalyzeHistoryPhotoCell.xib in Resources */,
 				9823197F24F3A1E700FD16E2 /* AdjustView.xib in Resources */,
+				C328E9B82BB8B73800CA9A3D /* BestSceneSuccessPopUp.xib in Resources */,
 				CF8B723523CBCA280021B021 /* PermissionsView.xib in Resources */,
 				9808B7CB2567EB10001DEF2E /* PrivateShareAccessListHeader.xib in Resources */,
 				98231A0324F3A1E700FD16E2 /* PhotoEditChangesBar.xib in Resources */,

@@ -11,6 +11,7 @@ import SDWebImage
 protocol DiscoverCardPopupDelegate: AnyObject {
     func removeDiscoverCard()
 }
+
 class DiscoverCard: BaseCardView {
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -51,19 +52,17 @@ class DiscoverCard: BaseCardView {
     
     @objc func updateImageUrls() {
         let imageUrls = userDefaultsVars.imageUrlsForBestScene
-        if let newImageUrls = imageUrls as? [String] {
-            self.imageUrls = newImageUrls.count > 5 ? Array(newImageUrls.prefix(5)) : newImageUrls
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
+        self.imageUrls = imageUrls.count > 5 ? Array(imageUrls.prefix(5)) : imageUrls
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
         }
     }
     
     @objc func updateGroupId() {
         let groupId = userDefaultsVars.groupIdBestScene
-        if let newGroupId = groupId as? [Int] {
-            self.groupId = newGroupId
-            collectionView.reloadData()
+        self.groupId = groupId
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
         }
     }
     
@@ -110,7 +109,6 @@ class DiscoverCard: BaseCardView {
         let controller = router.bestSceneAllGroupController()
         router.pushViewController(viewController: controller)
     }
-    
 }
 
 extension DiscoverCard: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
