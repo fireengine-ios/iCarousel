@@ -12,6 +12,10 @@ class BestSceneAllGroupViewController: BaseViewController {
     
     private let userDefaultsVars = UserDefaultsVars()
     private lazy var homeCardsServisBestSceneAllGroup: HomeCardsService = factory.resolve()
+    weak var output: HomePageInteractorOutput!
+        
+    private let userDefaults = UserDefaultsVars()
+    private var bestSceneCards: [HomeCardResponse] = []
 
     var imageUrls: [String] = []
     var timestamp: Int = 0
@@ -44,7 +48,44 @@ class BestSceneAllGroupViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        updateImageUrls()
+        self.updateImageUrls()
+        
+        getBestScene {
+            DispatchQueue.main.async {
+                self.updateImageUrls()
+            }
+        }
+    }
+    
+    private func getBestScene(completion: @escaping () -> Void) {
+        homeCardsServisBestSceneAllGroup.getBestGroup { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let response):
+                _ = response.map { burstGroup -> HomeCardResponse in
+                    let homeCard = HomeCardResponse()
+                    homeCard.id = burstGroup.id
+                    homeCard.type = .discoverCard
+                    let imageUrls = response.map { $0.coverPhoto.metadata.thumbnailMedium }.compactMap { $0 }
+                    let burstGroupId = response.map { $0.id }.compactMap { $0 }
+                    let createdDate = response.first?.groupDate
+                    
+//                    self.output?.didObtainHomeCardsBestScene(homeCard, imageUrls: imageUrls, createdDate: createdDate ?? 0, groupId: burstGroupId)
+                    
+                    self.bestSceneCards = [homeCard]
+                    self.userDefaultsVars.imageUrlsForBestScene = imageUrls
+                    self.userDefaultsVars.dateForBestScene = createdDate ?? 0
+                    self.userDefaultsVars.groupIdBestScene = burstGroupId
+                    
+                    return homeCard
+                }
+            case .failed(let error):
+                DispatchQueue.main.async {
+                    self.output?.didObtainError(with: error.localizedDescription, isNeedStopRefresh: false)
+                }
+            }
+            completion()
+        }
     }
     
     @objc private func closeSelf() {
@@ -53,27 +94,18 @@ class BestSceneAllGroupViewController: BaseViewController {
     }
     
     @objc func updateImageUrls() {
+        
         let imageUrls = userDefaultsVars.imageUrlsForBestScene
-        if let newImageUrls = imageUrls as? [String] {
-            self.imageUrls = newImageUrls
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
+        self.imageUrls = imageUrls
+        
         
         let createdDate = userDefaultsVars.dateForBestScene
-        if let newDate = createdDate as? Int {
-            self.timestamp = newDate
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
+        self.timestamp = createdDate
         
         let groupId = userDefaultsVars.groupIdBestScene
-        if let newGroupId = groupId as? [Int] {
-            self.groupId = newGroupId
-            collectionView.reloadData()
-        }
+        self.groupId = groupId
+        
+        self.collectionView.reloadData()
     }
     
     func dateFormat() -> String {

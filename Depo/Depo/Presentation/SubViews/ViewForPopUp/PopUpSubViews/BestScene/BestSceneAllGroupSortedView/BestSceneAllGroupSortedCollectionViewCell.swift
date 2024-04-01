@@ -122,7 +122,7 @@ class BestSceneAllGroupSortedCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             titleLabelView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -4),
             titleLabelView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            titleLabelView.widthAnchor.constraint(equalToConstant: 90),
+            titleLabelView.widthAnchor.constraint(equalToConstant: 110),
             titleLabelView.heightAnchor.constraint(equalToConstant: 30)
         ])
         

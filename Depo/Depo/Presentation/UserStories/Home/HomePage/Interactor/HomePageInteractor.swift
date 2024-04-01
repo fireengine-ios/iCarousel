@@ -203,8 +203,6 @@ final class HomePageInteractor: HomePageInteractorInput {
             }
         }
     }
-    
-    
     private func getBestScene(completion: @escaping () -> Void) {
         homeCardsService.getBestGroup { [weak self] result in
             guard let self = self else { return }
@@ -228,7 +226,6 @@ final class HomePageInteractor: HomePageInteractorInput {
             completion()
         }
     }
-    
     
     private func getInstaPickInfo() {
         instapickService.getAnalyzesCount { [weak self] result in
