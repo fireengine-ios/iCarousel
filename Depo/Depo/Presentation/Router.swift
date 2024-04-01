@@ -1175,6 +1175,11 @@ class RouterVC: NSObject {
         return ConnectedDeviceInitializer.initializeViewController()
     }
     
+    // MARK: - Raffle - Gamification
+    func raffle(id: Int, url: String, endDateText: String) -> RaffleViewController {
+        return RaffleInitializer.initializeViewController(id: id, url: url, endDateText: endDateText)
+    }
+    
     // MARK: - Draw Campaign
     func drawCampaign(campaignId: Int) -> DrawCampaignViewController {
         return DrawCampaignInitializer.initializeViewController(campaignId: campaignId)

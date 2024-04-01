@@ -241,6 +241,8 @@ enum AppColor {
     case tealBlue
     case switcherGrayColor
     case profileGrayColor
+    case raffleView
+    case raffleLabel
     
 
     var color: UIColor {

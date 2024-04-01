@@ -87,6 +87,8 @@ final class HomeCardResponse : Equatable {
             return .drawCampaignApply
         case .garenta:
             return .garenta
+        case .newCampaign:
+            return .newCampaign
         }
     }
 }
@@ -140,5 +142,6 @@ enum HomeCardTypes: String {
     case discoverCard = "BEST_SCENE_CARD"
     case drawCampaignApply = "DRAW_CAMPAIGN_APPLY"
     case garenta = "GARENTA"
+    case newCampaign = "NEW_CAMPAIGN"
 }
 

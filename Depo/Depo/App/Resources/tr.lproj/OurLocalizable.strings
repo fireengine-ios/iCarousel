@@ -2400,3 +2400,11 @@ then {11,99 TRY/Month}*/
 
 /*Paket satın alma kuralı için*/
 "gamification_package_rule" = "";
+"gamification_raffle_count" = "%d Adet çekiliş hakkın mevcut";
+"gamification_raffle_dates" = "Çekilişe katılım tarihi:";
+"gamification_raffle_brief" = "Çekiliş Özetini Gör";
+"gamification_event_description" = "Kazanma şansını artırmak için aşağıdaki rozetleri tamamlaman kazanma şansını artıracaktır";
+"gamification_comeback" = "Yarın tekrar gel!";
+"gamification_package_rule" = "Paket Al";
+"gamification_raffle_info" = "Hediye Çekiliş Hakkı";
+"gamification_raffle_draw" = "Kampanya Koşullarını öğrenmek için tıklayın.";

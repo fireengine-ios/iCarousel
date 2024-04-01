@@ -2324,3 +2324,11 @@ then {11,99 TRY/Month}*/
 
 /*Paket satın alma kuralı için*/
 "gamification_package_rule" = "";
+"gamification_raffle_count" = "";
+"gamification_raffle_dates" = "";
+"gamification_raffle_brief" = "";
+"gamification_event_description" = "";
+"gamification_comeback" = "";
+"gamification_package_rule" = "";
+"gamification_raffle_info" = "";
+"gamification_raffle_draw" = "";
