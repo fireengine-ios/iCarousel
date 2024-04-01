@@ -48,7 +48,7 @@ class BestSceneAllGroupViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        updateImageUrls()
+        self.updateImageUrls()
         
         getBestScene {
             DispatchQueue.main.async {
@@ -77,7 +77,6 @@ class BestSceneAllGroupViewController: BaseViewController {
                     self.userDefaultsVars.dateForBestScene = createdDate ?? 0
                     self.userDefaultsVars.groupIdBestScene = burstGroupId
                     
-                    self.updateImageUrls()
                     return homeCard
                 }
             case .failed(let error):
