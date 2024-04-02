@@ -13,6 +13,8 @@ class BestSceneAllGroupViewController: BaseViewController {
     private let userDefaultsVars = UserDefaultsVars()
     private lazy var homeCardsServisBestSceneAllGroup: HomeCardsService = factory.resolve()
     weak var output: HomePageInteractorOutput!
+    
+    private var isScreenPresented = false
         
     private let userDefaults = UserDefaultsVars()
     private var bestSceneCards: [HomeCardResponse] = []
@@ -49,6 +51,10 @@ class BestSceneAllGroupViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         self.updateImageUrls()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         getBestScene {
             DispatchQueue.main.async {
@@ -180,6 +186,9 @@ extension BestSceneAllGroupViewController: UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard !isScreenPresented else { return }
+        isScreenPresented = true
 
         let selectedGroupId = self.groupId[indexPath.row]
         
@@ -203,6 +212,7 @@ extension BestSceneAllGroupViewController: UICollectionViewDelegate, UICollectio
                     let router = RouterVC()
                     let controller = router.bestSceneAllGroupSortedViewController(coverPhotoUrl: coverPhotoUrl ?? "", fileListUrls: fileListUrls, selectedId: self.selectedId, selectedGroupID: selectedGroupID ?? 0)
                     router.pushViewController(viewController: controller)
+                    self.isScreenPresented = false
                 }
             case .failed(let error):
                 print(error.localizedDescription)
