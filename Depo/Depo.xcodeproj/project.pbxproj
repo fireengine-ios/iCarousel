@@ -2198,6 +2198,14 @@
 		89ECD6A5296FDE6500315A02 /* FavoriteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECD6A3296FDE6500315A02 /* FavoriteInteractor.swift */; };
 		89ECD6A6296FDE6500315A02 /* FavoriteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECD6A3296FDE6500315A02 /* FavoriteInteractor.swift */; };
 		89ECD6A7296FDE6500315A02 /* FavoriteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECD6A3296FDE6500315A02 /* FavoriteInteractor.swift */; };
+		89EDEB1B2BB812CD00D754D9 /* RaffleSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EDEB1A2BB812CD00D754D9 /* RaffleSummaryViewController.swift */; };
+		89EDEB1C2BB812CD00D754D9 /* RaffleSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EDEB1A2BB812CD00D754D9 /* RaffleSummaryViewController.swift */; };
+		89EDEB1D2BB812CD00D754D9 /* RaffleSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EDEB1A2BB812CD00D754D9 /* RaffleSummaryViewController.swift */; };
+		89EDEB1E2BB812CD00D754D9 /* RaffleSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EDEB1A2BB812CD00D754D9 /* RaffleSummaryViewController.swift */; };
+		89EDEB232BB8178700D754D9 /* RaffleSummaryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EDEB222BB8178700D754D9 /* RaffleSummaryCollectionViewCell.swift */; };
+		89EDEB242BB8178700D754D9 /* RaffleSummaryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EDEB222BB8178700D754D9 /* RaffleSummaryCollectionViewCell.swift */; };
+		89EDEB252BB8178700D754D9 /* RaffleSummaryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EDEB222BB8178700D754D9 /* RaffleSummaryCollectionViewCell.swift */; };
+		89EDEB262BB8178700D754D9 /* RaffleSummaryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EDEB222BB8178700D754D9 /* RaffleSummaryCollectionViewCell.swift */; };
 		89F0953129B0B3E000F74E7E /* CollageTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0953029B0B3E000F74E7E /* CollageTemplate.swift */; };
 		89F0953229B0B3E000F74E7E /* CollageTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0953029B0B3E000F74E7E /* CollageTemplate.swift */; };
 		89F0953329B0B3E000F74E7E /* CollageTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0953029B0B3E000F74E7E /* CollageTemplate.swift */; };
@@ -11603,6 +11611,8 @@
 		89EA4F77240902C400A2C543 /* PackagesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackagesTableViewCell.swift; sourceTree = "<group>"; };
 		89EA4F78240902C400A2C543 /* PackagesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PackagesTableViewCell.xib; sourceTree = "<group>"; };
 		89ECD6A3296FDE6500315A02 /* FavoriteInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteInteractor.swift; sourceTree = "<group>"; };
+		89EDEB1A2BB812CD00D754D9 /* RaffleSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaffleSummaryViewController.swift; sourceTree = "<group>"; };
+		89EDEB222BB8178700D754D9 /* RaffleSummaryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaffleSummaryCollectionViewCell.swift; sourceTree = "<group>"; };
 		89F0953029B0B3E000F74E7E /* CollageTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollageTemplate.swift; sourceTree = "<group>"; };
 		89F0953F29B0B67400F74E7E /* CreateCollagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollagePresenter.swift; sourceTree = "<group>"; };
 		89F0954429B0B68B00F74E7E /* CreateCollageModuleInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollageModuleInput.swift; sourceTree = "<group>"; };
@@ -17555,6 +17565,7 @@
 				890B31162BB2FFE000C5A789 /* RaffleViewController.swift */,
 				890B31182BB2FFF200C5A789 /* RaffleViewInput.swift */,
 				890B311D2BB2FFFD00C5A789 /* RaffleViewOutput.swift */,
+				89EDEB1A2BB812CD00D754D9 /* RaffleSummaryViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -17722,6 +17733,7 @@
 			isa = PBXGroup;
 			children = (
 				89232DBC2BB5615600C5B898 /* RaffleCollectionViewCell.swift */,
+				89EDEB222BB8178700D754D9 /* RaffleSummaryCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -27469,6 +27481,7 @@
 				17052DEF2270B44700674D62 /* ProfileBirthdayFieldView.swift in Sources */,
 				B57D854623DAD11E0057B5D6 /* MigrationModel_3_4.xcmappingmodel in Sources */,
 				8C0B91B320170F5B00A5BA81 /* ContactSyncParametrs.swift in Sources */,
+				89EDEB1B2BB812CD00D754D9 /* RaffleSummaryViewController.swift in Sources */,
 				894F718C2A949BA30037FE89 /* PhotoPrintInteractorInput.swift in Sources */,
 				8C20867C228D5012000BEDAD /* CacheManager.swift in Sources */,
 				3A134C602645535700CFC736 /* InvitedPeopleCollectionViewCell.swift in Sources */,
@@ -28499,6 +28512,7 @@
 				F028C0DF2789DDBC005CE6AF /* PublicShareInitializer.swift in Sources */,
 				8CCA070620C4412800558AB0 /* SessionServiceExtension.swift in Sources */,
 				8C0E8E731FDEBDFF00789C91 /* PackagesViewOutput.swift in Sources */,
+				89EDEB232BB8178700D754D9 /* RaffleSummaryCollectionViewCell.swift in Sources */,
 				921E7C382201EAAA00341F75 /* InstaPickBigPhotoView.swift in Sources */,
 				8C0E8E761FDEBDFF00789C91 /* LoadingImageView.swift in Sources */,
 				8C0E8E771FDEBDFF00789C91 /* PasscodeSettingsViewIO.swift in Sources */,
@@ -30038,6 +30052,7 @@
 				07D0593026F9B24D005315E2 /* ResetPasswordOTPInteractor.swift in Sources */,
 				CE7848C722A685FB00662219 /* AutoSyncDataStorage.swift in Sources */,
 				CE7848C822A685FB00662219 /* PrintInitializer.swift in Sources */,
+				89EDEB252BB8178700D754D9 /* RaffleSummaryCollectionViewCell.swift in Sources */,
 				CE7848C922A685FB00662219 /* UserProfileInitializer.swift in Sources */,
 				CE7848CB22A685FB00662219 /* BaseCellModel.swift in Sources */,
 				CE7848CC22A685FB00662219 /* FaceImagePhotosInteractorOutput.swift in Sources */,
@@ -31335,6 +31350,7 @@
 				8C1E5BD622CB8BBF008FDA02 /* Double+Extensions.swift in Sources */,
 				072468262855CC9E0079B07E /* DrawerViewController.swift in Sources */,
 				CE784BE622A685FB00662219 /* UploadFilesSelectionInteractorInput.swift in Sources */,
+				89EDEB1D2BB812CD00D754D9 /* RaffleSummaryViewController.swift in Sources */,
 				CE784BE722A685FB00662219 /* UploadFilesSelectionInteractorOutput.swift in Sources */,
 				CE784BE822A685FB00662219 /* LatestUploadCardCell.swift in Sources */,
 				9853CD4A2361BDD200E19BF7 /* LandingPageCollectionViewDataSource.swift in Sources */,
@@ -31879,6 +31895,7 @@
 				0766316327CE913F00AB4BC2 /* MapLocationDetailInitializer.swift in Sources */,
 				F028C11A2789F3B4005CE6AF /* PublicShareInteractorInput.swift in Sources */,
 				0711887127F6EBDE00F512A1 /* AppImage.swift in Sources */,
+				89EDEB242BB8178700D754D9 /* RaffleSummaryCollectionViewCell.swift in Sources */,
 				CF8B640623CBC9D70021B021 /* QuestionCell.swift in Sources */,
 				CF8B640723CBC9D70021B021 /* PhotoSelectionNoFilesView.swift in Sources */,
 				CF8B640823CBC9D70021B021 /* LoginRouter.swift in Sources */,
@@ -32969,6 +32986,7 @@
 				CF8B66DC23CBC9D70021B021 /* RequestService.swift in Sources */,
 				98B04DCE25931FD50011DAEB /* SettingsTypes.swift in Sources */,
 				CF8B66DD23CBC9D70021B021 /* InstapickAnalyzeHistoryPhotoCell.swift in Sources */,
+				89EDEB1C2BB812CD00D754D9 /* RaffleSummaryViewController.swift in Sources */,
 				89F0956929B0B70A00F74E7E /* CreateCollageInitilizer.swift in Sources */,
 				98B0486C259314750011DAEB /* SyncSettings.m in Sources */,
 				CF8B66DE23CBC9D70021B021 /* PhotoVideoDetailInteractor.swift in Sources */,
@@ -34009,6 +34027,7 @@
 				CF8B6C3723CBCA280021B021 /* UIApplication+Settings.swift in Sources */,
 				CF8B6C3823CBCA280021B021 /* LoginRouterInput.swift in Sources */,
 				CF8B6C3923CBCA280021B021 /* AlbumDetailResponse.swift in Sources */,
+				89EDEB262BB8178700D754D9 /* RaffleSummaryCollectionViewCell.swift in Sources */,
 				CF8B6C3A23CBCA280021B021 /* CountiesGSMCodeCompositor.swift in Sources */,
 				CF8B6C3B23CBCA280021B021 /* HomePageInteractorInput.swift in Sources */,
 				3A0CCF312642D20E002E811D /* InvitationGiftCollectionViewCell.swift in Sources */,
@@ -34130,6 +34149,7 @@
 				CF8B6C8D23CBCA280021B021 /* CALayer+Animation.swift in Sources */,
 				CF8B6C8E23CBCA280021B021 /* FaceImageAddNameRouter.swift in Sources */,
 				076BD1B927BC0958004609E3 /* MapSearchPresenter.swift in Sources */,
+				89EDEB1E2BB812CD00D754D9 /* RaffleSummaryViewController.swift in Sources */,
 				CF8B6C8F23CBCA280021B021 /* BaseUserInputCellView.swift in Sources */,
 				CF8B6C9023CBCA280021B021 /* CredsUpdateCheckPopUp.swift in Sources */,
 				CF8B6C9123CBCA280021B021 /* PremiumRouterInput.swift in Sources */,

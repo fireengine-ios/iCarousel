@@ -1180,6 +1180,10 @@ class RouterVC: NSObject {
         return RaffleInitializer.initializeViewController(id: id, url: url, endDateText: endDateText)
     }
     
+    func raffleSummary(statusResponse: RaffleStatusResponse?) -> RaffleSummaryViewController {
+        return RaffleSummaryViewController(statusResponse: statusResponse)
+    }
+    
     // MARK: - Draw Campaign
     func drawCampaign(campaignId: Int) -> DrawCampaignViewController {
         return DrawCampaignInitializer.initializeViewController(campaignId: campaignId)

@@ -29,4 +29,8 @@ extension RafflePresenter: RaffleViewOutput {
     func getRaffleStatus(id: Int) {
         interactor.getRaffleStatus(id: id)
     }
+    
+    func goToRaffleSummary(statusResponse: RaffleStatusResponse?) {
+        router.goToRaffleSummary(statusResponse: statusResponse)
+    }
 }
