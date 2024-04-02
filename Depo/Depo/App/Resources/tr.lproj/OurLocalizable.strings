@@ -2362,49 +2362,22 @@ then {11,99 TRY/Month}*/
 "no_video_to_print_popup_title" = "Seçilen Videolar Baskıya Gönderilemez!";
 "no_video_to_print_popup_body" = "Baskı işlemine devam edebilmek için sadece fotoğraflarını seçmelisin.";
 
-/*Hediye çekiliş hakkı ekranı başlık*/
-"gamification_raffle_count" = "";
-
-/*Kampanya tarih aralıgı*/
-"gamification_raffle_dates" = "";
-
 /*Toplam çekiliş hak sayısı*/
-"gamification_raffle_count" = "";
-
-/*Çekiliş özetini gör buton*/
-"gamification_raffle_brief" = "";
-
-/*Çekiliş özet açıklaması*/
-"gamification_event_description" = "";
-
-/*Yarın tekrar gel metni*/
-"gamification_comeback" = "";
-
-/*Paket satın alma kuralı için*/
-"gamification_package_rule" = "";
-
-/*Toplam çekiliş hak sayısı*/
-"gamification_raffle_count" = "";
-
-/*Kampanya tarih aralıgı*/
-"gamification_raffle_dates" = "";
-
-/*Çekiliş özetini gör buton*/
-"gamification_raffle_brief" = "";
-
-/*Çekiliş özet açıklaması*/
-"gamification_event_description" = "";
-
-/*Yarın tekrar gel metni*/
-"gamification_comeback" = "";
-
-/*Paket satın alma kuralı için*/
-"gamification_package_rule" = "";
 "gamification_raffle_count" = "%d Adet çekiliş hakkın mevcut";
+
+/*Kampanya tarih aralıgı*/
 "gamification_raffle_dates" = "Çekilişe katılım tarihi:";
+
+/*Çekiliş özetini gör buton*/
 "gamification_raffle_brief" = "Çekiliş Özetini Gör";
+
+/*Çekiliş özet açıklaması*/
 "gamification_event_description" = "Kazanma şansını artırmak için aşağıdaki rozetleri tamamlaman kazanma şansını artıracaktır";
+
+/*Yarın tekrar gel metni*/
 "gamification_comeback" = "Yarın tekrar gel!";
+
+/*Paket satın alma kuralı için*/
 "gamification_package_rule" = "Paket Al";
 "gamification_raffle_info" = "Hediye Çekiliş Hakkı";
 "gamification_raffle_draw" = "Kampanya Koşullarını öğrenmek için tıklayın.";

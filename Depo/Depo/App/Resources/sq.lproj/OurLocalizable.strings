@@ -2315,27 +2315,6 @@ then {11,99 TRY/Month}*/
 "no_video_to_print_popup_title" = "";
 "no_video_to_print_popup_body" = "";
 
-/*Hediye çekiliş hakkı ekranı başlık*/
-"gamification_raffle_count" = "";
-
-/*Kampanya tarih aralıgı*/
-"gamification_raffle_dates" = "";
-
-/*Toplam çekiliş hak sayısı*/
-"gamification_raffle_count" = "";
-
-/*Çekiliş özetini gör buton*/
-"gamification_raffle_brief" = "";
-
-/*Çekiliş özet açıklaması*/
-"gamification_event_description" = "";
-
-/*Yarın tekrar gel metni*/
-"gamification_comeback" = "";
-
-/*Paket satın alma kuralı için*/
-"gamification_package_rule" = "";
-
 /*Toplam çekiliş hak sayısı*/
 "gamification_raffle_count" = "";
 
@@ -2352,12 +2331,6 @@ then {11,99 TRY/Month}*/
 "gamification_comeback" = "";
 
 /*Paket satın alma kuralı için*/
-"gamification_package_rule" = "";
-"gamification_raffle_count" = "";
-"gamification_raffle_dates" = "";
-"gamification_raffle_brief" = "";
-"gamification_event_description" = "";
-"gamification_comeback" = "";
 "gamification_package_rule" = "";
 "gamification_raffle_info" = "";
 "gamification_raffle_draw" = "";
