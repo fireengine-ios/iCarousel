@@ -9,5 +9,5 @@
 import Foundation
 
 protocol RaffleRouterInput {
-    
+    func goToRaffleSummary(statusResponse: RaffleStatusResponse?)
 }

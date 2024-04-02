@@ -35,6 +35,39 @@ enum RaffleElement: String, Codable {
         case .createStory: return Image.raffleCreateStory.image
         }
     }
+    
+    var detailText: String {
+        switch self {
+        case .login: return "Bugüne kadar %@ lifebox'a giriş yaptın. Toplam: %@ kazandın."
+        case .purchasePackage: return "Bugüne kadar %@ paket satın aldın. Toplam: %@ kazandın."
+        case .photopick: return "Bugüne kadar %@ photopick yaptın. Toplam: %@ kazandın."
+        case .createCollage: return "Bugüne kadar %@ kolaj oluşturdun. Toplam: %@ kazandın."
+        case .photoPrint: return "Bugüne kadar %@ baskı yaptın. Toplam: %@ kazandın."
+        case .createStory: return "Bugüne kadar %@ story oluşturdun. Toplam: %@ kazandın."
+        }
+    }
+    
+    var detailTextNoAction: String {
+        switch self {
+        case .login: return "Bugüne kadar giriş yapmadın. Toplam: %@ kazandın."
+        case .purchasePackage: return "Bugüne kadar paket satın almadın. Toplam: %@ kazandın."
+        case .photopick: return "Bugüne kadar photopick yapmadın. Toplam: %@ kazandın."
+        case .createCollage: return "Bugüne kadar kolaj oluşturmadın. Toplam: %@ kazandın."
+        case .photoPrint: return "Bugüne kadar baskı yapmadın. Toplam: %@ kazandın."
+        case .createStory: return "Bugüne kadar story oluşturmadın. Toplam: %@ kazandın."
+        }
+    }
+    
+    var infoLabelText: String {
+        switch self {
+        case .login: return "Bugün giriş yaptın"
+        case .purchasePackage: return "Bugün paket aldın"
+        case .photopick: return "Bugün photopick yaptın"
+        case .createCollage: return "Bugün kolaj yaptın"
+        case .photoPrint: return "Bugün baskı yaptın"
+        case .createStory: return "Bugün story yaptın"
+        }
+    }
 }
 
 final class RaffleViewController: BaseViewController {
@@ -191,7 +224,7 @@ final class RaffleViewController: BaseViewController {
     }
     
     @objc private func summaryButtonTapped() {
-        print("aaaaaaaaaaaaa 0")
+        output.goToRaffleSummary(statusResponse: statusResponse)
     }
     
     @objc private func infoLabelTapped() {
@@ -202,8 +235,6 @@ final class RaffleViewController: BaseViewController {
         DispatchQueue.main.async {
             self.statusResponse = status
             self.setupLayout()
-            
-            
         }
     }
     
@@ -351,7 +382,9 @@ extension RaffleViewController {
             for value in statusResponse?.details ?? [] {
                 if el.rawValue == value.earnType {
                     oppacity = 1
-                    isHidden = false
+                    if value.dailyRemainingPoints == 0 {
+                        isHidden = false
+                    }
                 }
             }
             raffleStatusElementOppacity.append(Float(oppacity))
@@ -364,7 +397,7 @@ extension RaffleViewController {
         imageView.loadImageData(with: URL(string: imageUrl))
         imageLabel.text = endDateText
         rightViewTitleLabel.text = localized(.gamificationRaffleInfo)
-        rightViewTextView.text = String(format: localized(.gamificationRaffleCount), statusResponse?.totalPointsEarned ?? 0) 
+        rightViewTextView.text = String(format: localized(.gamificationRaffleCount), statusResponse?.totalPointsEarned ?? 0)
         infoLabel.text = localized(.gamificationEventDescription)
         
         let attributedString = NSMutableAttributedString(string: localized(.gamificationRaffleDraw))
@@ -372,8 +405,6 @@ extension RaffleViewController {
         rightViewInfoLabel.attributedText = attributedString
         
         hideSpinner()
-        
-        
     }
 }
 

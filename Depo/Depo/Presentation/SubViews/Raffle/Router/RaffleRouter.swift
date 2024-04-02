@@ -12,4 +12,9 @@ class RaffleRouter: RaffleRouterInput {
 
     let router = RouterVC()
     
+    func goToRaffleSummary(statusResponse: RaffleStatusResponse?) {
+        let vc = router.raffleSummary(statusResponse: statusResponse)
+        router.pushViewController(viewController: vc, animated: false)
+    }
+    
 }
