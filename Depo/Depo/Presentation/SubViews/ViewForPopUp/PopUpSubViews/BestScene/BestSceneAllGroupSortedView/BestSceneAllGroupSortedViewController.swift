@@ -211,14 +211,14 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
     }
     
      @objc func tappedKeepItemButton() {
-         service.keepAllPhotosInGroup(groupId: nil, photoIds: []) { response in
+         service.keepAllPhotosInGroup(groupId: self.selectedGroupID ?? 0, photoIds: []) { response in
              switch response {
              case .success():
                  let router = RouterVC()
                  let controller = router.bestSceneAllGroupController()
                  router.pushViewController(viewController: controller)
              case .failed(let error):
-                 debugPrint("😎 Error:", error.localizedDescription)
+                 debugPrint("Error:", error.localizedDescription)
              }
              self.collectionView.reloadData()
          }
