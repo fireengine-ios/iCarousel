@@ -49,8 +49,10 @@ class BestSceneAllGroupViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-//        self.updateImageUrls()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         getBestScene {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
