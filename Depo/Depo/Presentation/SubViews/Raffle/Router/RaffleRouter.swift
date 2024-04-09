@@ -17,4 +17,9 @@ class RaffleRouter: RaffleRouterInput {
         router.pushViewController(viewController: vc, animated: false)
     }
     
+    func goToRaffleCondition(statusResponse: RaffleStatusResponse?) {
+        let vc = router.raffleCondition(statusResponse: statusResponse)
+        router.pushViewController(viewController: vc, animated: false)
+    }
+    
 }

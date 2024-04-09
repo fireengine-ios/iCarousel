@@ -181,11 +181,12 @@ final class RaffleViewController: BaseViewController {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.itemSize = CGSize(width: 45, height: 45)
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .vertical
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.register(RaffleCollectionViewCell.self, forCellWithReuseIdentifier: "RaffleCollectionViewCell")
         view.backgroundColor = AppColor.background.color
         view.showsHorizontalScrollIndicator = false
+        view.isScrollEnabled = false
         return view
     }()
     
@@ -193,7 +194,8 @@ final class RaffleViewController: BaseViewController {
     private var id: Int = 0
     private var imageUrl: String = ""
     private var statusResponse: RaffleStatusResponse?
-    private var raffleStatusElement: [RaffleElement] = [.login, .purchasePackage, .photopick, .createCollage, .photoPrint, .createStory]
+    //private var raffleStatusElement: [RaffleElement] = [.login, .purchasePackage, .photopick, .createCollage, .photoPrint, .createStory]
+    private var raffleStatusElement: [RaffleElement] = []
     private var raffleStatusElementOppacity: [Float] = []
     private var nextDayIsHidden: [Bool] = []
     private var endDateText: String = ""
@@ -228,12 +230,16 @@ final class RaffleViewController: BaseViewController {
     }
     
     @objc private func infoLabelTapped() {
-        print("aaaaaaaaaaaaa 1")
+        output.goToRaffleCondition(statusResponse: statusResponse)
     }
     
     private func successStatus(status: RaffleStatusResponse) {
         DispatchQueue.main.async {
             self.statusResponse = status
+            for detail in self.statusResponse?.details ?? [] {
+                let element = RaffleElement(rawValue: detail.earnType!)
+                self.raffleStatusElement.append(element)
+            }
             self.setupLayout()
         }
     }
@@ -272,18 +278,11 @@ extension RaffleViewController: UICollectionViewDataSource {
 
 extension RaffleViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         let columns: CGFloat = 3
-        let row: CGFloat = 2
         let spacing: CGFloat = 5
-        
         let totalHorizontalSpacing = (columns - 1) * spacing
         let itemWidth = (collectionView.bounds.width - totalHorizontalSpacing) / columns
-        
-        let totalVerticalSpacing = (row - 1) * spacing
-        let itemHeight = (collectionView.bounds.height - totalVerticalSpacing) / row
-        
-        let itemSize = CGSize(width: itemWidth, height: itemHeight)
+        let itemSize = CGSize(width: itemWidth, height: itemWidth)
         return itemSize
     }
     
@@ -374,7 +373,8 @@ extension RaffleViewController {
         collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).activate()
         collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).activate()        
         collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40).activate()
-        collectionView.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        let rowCount = (CGFloat(raffleStatusElement.count) / 3.0).rounded(.awayFromZero)
+        collectionView.heightAnchor.constraint(equalToConstant: rowCount * 115).isActive = true
         
         for el in raffleStatusElement {
             var oppacity = 0.2

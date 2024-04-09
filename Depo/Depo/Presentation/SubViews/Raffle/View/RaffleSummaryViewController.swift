@@ -46,7 +46,8 @@ final class RaffleSummaryViewController: BaseViewController {
     }()
     
     private var statusResponse: RaffleStatusResponse?
-    private var raffleStatusElement: [RaffleElement] = [.login, .purchasePackage, .photopick, .createCollage, .photoPrint, .createStory]
+    //private var raffleStatusElement: [RaffleElement] = [.login, .purchasePackage, .photopick, .createCollage, .photoPrint, .createStory]
+    private var raffleStatusElement: [RaffleElement] = []
     private var raffleStatusElementOppacity: [Float] = []
     private lazy var router = RouterVC()
     
@@ -64,7 +65,14 @@ final class RaffleSummaryViewController: BaseViewController {
         
         setTitle(withString: localized(.gamificationRaffleBrief))
         view.backgroundColor = AppColor.background.color
-        
+        setRaffleElement()
+    }
+    
+    private func setRaffleElement() {
+        for detail in self.statusResponse?.details ?? [] {
+            let element = RaffleElement(rawValue: detail.earnType!)
+            self.raffleStatusElement.append(element)
+        }
         setupLayout()
     }
 }
