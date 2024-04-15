@@ -249,6 +249,7 @@ final class PushNotificationService {
         case .discover: openDiscover()
         case .drawCampaign: openDrawCampaign()
         case .photoprint: openPhotoPrint()
+        case .bestscenegroup: bestscenegroup()
         }
         
         
@@ -669,5 +670,11 @@ private extension PushNotificationService {
                 pushTo(router.photoPrintSelectPhotos())
             }
         }
+    }
+    
+    func bestscenegroup() {
+        let router = RouterVC()
+        let controller = router.bestSceneAllGroupController()
+        router.pushViewController(viewController: controller)
     }
 }

@@ -82,6 +82,7 @@ enum PushNotificationAction: String {
     case discover = "discover"
     case drawCampaign = "drawCampaign"
     case photoprint = "photoprint"
+    case bestscenegroup = "bestscenegroup"
 
     var fromWidget: Bool {
         isContained(in: [.widgetLogout,
