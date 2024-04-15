@@ -104,7 +104,7 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
         
         setupLayout()
 
-        print("Güncel dizi 😎: \(self.selectedId)")
+//        print("Güncel dizi 😎: \(self.selectedId)")
     }
     
     init(coverPhotoUrl: String, fileListUrls: [String], selectedId: [Int], selectedGroupID: Int) {
@@ -286,7 +286,7 @@ extension BestSceneAllGroupSortedViewController: UICollectionViewDelegate, UICol
                 self.selectedId.remove(at: deletedIndex)
             }
         }
-        print("😎 Güncel Seçilen ID'ler: \(self.selectedId)")
+//        print("😎 Güncel Seçilen ID'ler: \(self.selectedId)")
     }
 }
 

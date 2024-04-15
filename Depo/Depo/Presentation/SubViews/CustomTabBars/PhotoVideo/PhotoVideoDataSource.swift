@@ -144,7 +144,11 @@ final class PhotoVideoDataSource: NSObject {
     
     func getObject(at indexPath: IndexPath, mediaItemCallback: @escaping MediaItemCallback) {
         fetchedResultsController.managedObjectContext.perform { [weak self] in
-            mediaItemCallback(self?.getObject(at: indexPath))
+            let object = self?.getObject(at: indexPath)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                mediaItemCallback(object)
+            }
+            // mediaItemCallback(self?.getObject(at: indexPath))
         }
     }
     
