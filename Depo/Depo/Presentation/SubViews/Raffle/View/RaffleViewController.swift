@@ -68,6 +68,17 @@ enum RaffleElement: String, Codable {
         case .createStory: return "Bugün story yaptın"
         }
     }
+    
+    var earnLabelText: String {
+        switch self {
+        case .login: return "Her gün tek seferde + %d Çekiliş Puanı kazandırır."
+        case .purchasePackage: return "Her gün tek seferde + %d Çekiliş Puanı kazandırır."
+        case .photopick: return "Her gün tek seferde + %d Çekiliş Puanı kazandırır."
+        case .createCollage: return "Her gün tek seferde + %d Çekiliş Puanı kazandırır."
+        case .photoPrint: return "Her gün tek seferde + %d Çekiliş Puanı kazandırır."
+        case .createStory: return "Her gün tek seferde + %d Çekiliş Puanı kazandırır."
+        }
+    }
 }
 
 final class RaffleViewController: BaseViewController {
