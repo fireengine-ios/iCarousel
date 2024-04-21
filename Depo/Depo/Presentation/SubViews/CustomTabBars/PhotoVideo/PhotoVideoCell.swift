@@ -310,7 +310,11 @@ extension PhotoVideoCell {
 extension PhotoVideoCell {
     
     /// not working for cell update (become favorite)
-    /// override func prepareForReuse() {}
+    override func prepareForReuse() {
+        
+        resetImage()
+    }
+    
     func setProgressForObject(progress: Float) {
         DispatchQueue.toMain {
             let value = CGFloat(progress)
