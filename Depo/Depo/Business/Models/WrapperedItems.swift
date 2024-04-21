@@ -11,6 +11,7 @@ import Photos
 import SDWebImage
 import SwiftyJSON
 import MobileCoreServices
+import Vision
 
 typealias Item = WrapData
 typealias UploadServiceBaseUrlResponse = (_ resonse: UploadBaseURLResponse?) -> Void
@@ -1117,6 +1118,31 @@ class WrapData: BaseDataSourceItem, Wrappered {
                 let tmp = LocalMediaContent(asset: asset, urlToFile: urlToFile)
                 assetDuration = asset.duration
                 patchToPreview = .localMediaContent(tmp)
+                
+                let mediaType = tmp.asset
+
+                switch mediaType.playbackStyle {
+                case .imageAnimated:
+                    print("", "Animation")
+                case .livePhoto:
+                    print("livePhoto")
+                case .video:
+                    print("😎", "video")
+                case .image:
+                    print("😎", "image")
+                default:
+                    print("default")
+                }
+                
+                switch mediaType.mediaSubtypes {
+                case .photoScreenshot:
+                    print("", "Screenshot")
+                default:
+                    print("default")
+                }
+                
+               
+                
             } else {
                 // WARNIG: THIS CASE INCOREECTif 
                 // add only for debud and test !!
@@ -1145,6 +1171,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         } else {
             uuid = (mediaItem.trimmedLocalFileID ?? "") + "~" + UUID().uuidString
         }
+        
         
         isLocalItem = mediaItem.isLocalItemValue
         name = mediaItem.nameValue
@@ -1453,4 +1480,5 @@ extension WrapData {
         return response
     }
 }
+
 

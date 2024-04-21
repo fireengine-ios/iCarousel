@@ -2291,3 +2291,10 @@ then {11,99 TRY/Month}*/
 "gamification_package_rule" = "";
 "gamification_raffle_info" = "";
 "gamification_raffle_draw" = "";
+"gamification_raffle_summary" = "";
+"gamification_event_not_trigerred" = "";
+"gamification_event_trigger_count" = "";
+"gamification_event_completed" = "";
+"gamification_total_count" = "";
+"gamification_campaign_conditions" = "";
+"gamification_rules" = "";
