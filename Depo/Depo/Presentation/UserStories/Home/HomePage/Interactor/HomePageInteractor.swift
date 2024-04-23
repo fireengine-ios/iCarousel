@@ -209,9 +209,6 @@ final class HomePageInteractor: HomePageInteractorInput {
             guard let self = self else { return }
             switch result {
             case .success(let response):
-                
-                print("😎", response)
-                
                 _ = response.map { burstGroup -> HomeCardResponse in
                     let homeCard = HomeCardResponse()
                     homeCard.id = burstGroup.id
@@ -223,8 +220,6 @@ final class HomePageInteractor: HomePageInteractorInput {
                     return homeCard
                 }
             case .failed(let error):
-                print("😎", error.localizedDescription)
-
                 DispatchQueue.main.async {
                     self.output.didObtainError(with: error.localizedDescription, isNeedStopRefresh: false)
                 }
