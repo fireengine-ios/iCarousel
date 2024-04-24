@@ -203,6 +203,7 @@ final class HomePageInteractor: HomePageInteractorInput {
             }
         }
     }
+    
     private func getBestScene(completion: @escaping () -> Void) {
         homeCardsService.getBestGroup { [weak self] result in
             guard let self = self else { return }
