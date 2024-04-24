@@ -70,7 +70,7 @@ enum AllFilesType: CaseIterable {
     }
     
     static func getSegments() -> [AllFilesType] {
-        return [.documents, .music, .favorites, .sharedWithMe, .trashBin]
+        return [.documents, .favorites, .trashBin, .sharedWithMe, .music]
     }
     
     static func getSharedItemsSegments() -> [AllFilesType] {
