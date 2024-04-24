@@ -82,6 +82,8 @@ class RegistrationTermsInfoViewController: UIViewController {
         view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         confirmButton.isHidden = confirmed == nil
         setupTextView()
+        
+        scrollView.delegate = self
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -188,4 +190,20 @@ private extension UITextView {
         let defaultInset: CGFloat = 14
         textContainerInset = UIEdgeInsets(top: defaultInset, left: defaultInset, bottom: defaultInset, right: defaultInset)
     }
+}
+
+extension RegistrationTermsInfoViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+           let offsetY = scrollView.contentOffset.y
+           let contentHeight = scrollView.contentSize.height
+           let frameHeight = scrollView.bounds.size.height
+
+           if offsetY + frameHeight >= contentHeight {
+               confirmButton.isEnabled = true
+           } else {
+               confirmButton.isEnabled = false
+           }
+       }
+
 }
