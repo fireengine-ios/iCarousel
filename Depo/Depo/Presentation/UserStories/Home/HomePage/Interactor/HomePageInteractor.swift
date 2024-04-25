@@ -51,7 +51,6 @@ final class HomePageInteractor: HomePageInteractorInput {
         getBestScene {
             self.getAllCardsForHomePage()
         }
-        getAllCardsForHomePage()
         getCampaignStatus()
         getActiveSubscriptionForBanner()
         getAvailableOffersForBanner()
@@ -401,7 +400,9 @@ extension HomePageInteractor: HomeCardsServiceImpDelegte {
     }
     
     func needUpdateHomeScreen() {
-        getAllCardsForHomePage()
+        if !homeCardsLoaded {
+            self.getAllCardsForHomePage()
+        }
     }
     
     func showSpinner() {

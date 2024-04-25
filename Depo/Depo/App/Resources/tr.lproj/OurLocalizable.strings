@@ -2390,3 +2390,4 @@ then {11,99 TRY/Month}*/
 "gamification_total_count" = "Toplam %d Çekiliş Hakkı Kazandın.";
 "gamification_campaign_conditions" = "Kampanya Detayları";
 "gamification_rules" = "Çekiliş Hak Kazanımı";
+"gamification_campaign_policy_title" = "Yasal MPİ";
