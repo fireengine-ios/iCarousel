@@ -851,11 +851,6 @@ final class MediaItemOperationsService {
             return
         }
         
-        let time = Date()
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "HH:ss"
-        let stringDate = timeFormatter.string(from: time)
-        
         let localIdentifiers = assets.map { $0.localIdentifier }
         let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.localFileID) IN %@ AND \(MediaItem.PropertyNameKey.isLocalItemValue) = true", localIdentifiers)
         coreDataStack.performBackgroundTask { [weak self] context in
@@ -863,17 +858,13 @@ final class MediaItemOperationsService {
                 debugLog("db has \(mediaItems.count) saved local items")
                 let alredySavedIDs = mediaItems.compactMap { $0.localFileID }
                 let difference = localIdentifiers.difference(from: alredySavedIDs)
-                let notSaved = assets.filter { difference.contains($0.localIdentifier) }
+                //let notSaved = assets.filter { difference.contains($0.localIdentifier) }
                 
-                let time1 = Date()
-                let timeFormatter1 = DateFormatter()
-                timeFormatter1.dateFormat = "HH:ss"
-                let diffinSeconds = time1.timeIntervalSinceReferenceDate - time.timeIntervalSinceReferenceDate
-                debugLog("db has \(mediaItems.count) saved local items")
-                debugLog("aaaaaaaaaaaa \(diffinSeconds)-\(notSaved.count)")
+                let invalidIdentifierUserDefaults = UserDefaults.standard.array(forKey: "invalidIdentifier") as? [String]
                 
+                let lastDiff = difference.difference(from: invalidIdentifierUserDefaults ?? [])
                 
-                
+                let notSaved = assets.filter { lastDiff.contains($0.localIdentifier) }
                 callback(notSaved)
             })
         }
