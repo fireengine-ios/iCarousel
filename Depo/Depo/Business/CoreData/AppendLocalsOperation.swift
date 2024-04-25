@@ -19,6 +19,7 @@ final class AppendLocalsOperation: Operation {
     private let mediaStorage = LocalMediaStorage.default
     private let needCreateRelationships: Bool
     private lazy var localAlbumsCache = LocalAlbumsCache.shared
+    private var invalidIdentifier: [String] = []
     
     
     init(assets: [PHAsset], needCreateRelationships: Bool, completion: VoidHandler?) {
@@ -104,6 +105,17 @@ final class AppendLocalsOperation: Operation {
                 }
                 
                 SharedGroupCoreDataStack.shared.saveInvalid(localIdentifiers: invalidAssetsInfo.compactMap { $0.asset.localIdentifier })
+                
+                let invalidIdentifierUserDefaults = UserDefaults.standard.array(forKey: "invalidIdentifier") as? [String]
+                invalidIdentifier = invalidIdentifierUserDefaults ?? []
+                
+                if invalidAssetsInfo.count > 0 {
+                    invalidAssetsInfo.forEach {
+                        self.invalidIdentifier.append($0.asset.localIdentifier)
+                    }
+                    UserDefaults.standard.removeObject(forKey: "invalidIdentifier")
+                    UserDefaults.standard.setValue(invalidIdentifier, forKey: "invalidIdentifier")
+                }
                 
                 let smartAssets = PHAssetCollection.smartAlbums.map { (album: $0, assets: $0.allAssets) }
                 
