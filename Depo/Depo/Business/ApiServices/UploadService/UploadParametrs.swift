@@ -192,6 +192,8 @@ final class ResumableUpload: UploadRequestParametrs {
     private let destitantionURL: URL
     private let isFavorite: Bool
     private var fileSize: Int?
+    private var isScreenShot: Bool
+    private var isAnimation: Bool
     
     let uploadType: UploadType?
     
@@ -225,6 +227,11 @@ final class ResumableUpload: UploadRequestParametrs {
         self.isFavorite = isFavorite
         self.uploadType = uploadType
         self.fileSize = fileSize
+        self.isScreenShot = item.isScreenShot
+        self.isAnimation = item.isAnimation
+        
+        print("😎", isAnimation)
+        print("😎", isScreenShot)
 
         if let previousUploadId = interruptedUploadId {
             self.tmpUUID = previousUploadId

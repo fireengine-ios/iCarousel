@@ -712,6 +712,10 @@ class WrapData: BaseDataSourceItem, Wrappered {
         return metaData?.largeUrl != nil
     }
     
+    var isScreenShot: Bool = false
+    
+    var isAnimation: Bool = false
+    
     @available(*, deprecated, message: "Use convenience init(info: AssetInfo) instead")
     convenience init(asset: PHAsset) {
         let info = LocalMediaStorage.default.fullInfoAboutAsset(asset: asset)
@@ -1124,12 +1128,9 @@ class WrapData: BaseDataSourceItem, Wrappered {
                 switch mediaType.playbackStyle {
                 case .imageAnimated:
                     print("", "Animation")
+                    self.isAnimation = true
                 case .livePhoto:
                     print("livePhoto")
-                case .video:
-                    print("😎", "video")
-                case .image:
-                    print("😎", "image")
                 default:
                     print("default")
                 }
@@ -1137,6 +1138,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
                 switch mediaType.mediaSubtypes {
                 case .photoScreenshot:
                     print("", "Screenshot")
+                    self.isScreenShot = true
                 default:
                     print("default")
                 }
