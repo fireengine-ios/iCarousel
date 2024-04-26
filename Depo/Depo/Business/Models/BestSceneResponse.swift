@@ -12,7 +12,7 @@ typealias BurstGroup = [BurstGroups]
 
 struct BurstGroups: Codable {
     let id, groupDate: Int?
-    let coverPhoto: CoverPhoto
+    let coverPhoto: CoverPhoto?
     
     // MARK: - CoverPhoto
     struct CoverPhoto: Codable {
@@ -21,12 +21,12 @@ struct BurstGroups: Codable {
         let bytes: Int?
         let folder: Bool?
         let status: String?
-        let uploaderDeviceType: String
+        let uploaderDeviceType: String?
         let tempDownloadURL: String?
-        let contentType: String
-        let metadata: Metadata
+        let contentType: String?
+        let metadata: Metadata?
         let album: [JSONAny]
-        let location: Location
+        let location: Location?
         let ugglaID: String?
         
         enum CodingKeys: String, CodingKey {
