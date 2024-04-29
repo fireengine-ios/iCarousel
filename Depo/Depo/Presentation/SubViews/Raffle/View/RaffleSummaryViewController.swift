@@ -46,7 +46,7 @@ final class RaffleSummaryViewController: BaseViewController {
     }()
     
     private var statusResponse: RaffleStatusResponse?
-    private var raffleStatusElement: [RaffleElement] = [.login, .purchasePackage, .photopick, .createCollage, .photoPrint, .createStory]
+    private var raffleStatusElement: [RaffleElement] = []
     private var raffleStatusElementOppacity: [Float] = []
     private lazy var router = RouterVC()
     
@@ -62,9 +62,16 @@ final class RaffleSummaryViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setTitle(withString: localized(.gamificationRaffleBrief))
+        setTitle(withString: localized(.gamificationRaffleSummary))
         view.backgroundColor = AppColor.background.color
-        
+        setRaffleElement()
+    }
+    
+    private func setRaffleElement() {
+        for detail in self.statusResponse?.details ?? [] {
+            let element = RaffleElement(rawValue: detail.earnType!)
+            self.raffleStatusElement.append(element)
+        }
         setupLayout()
     }
 }
@@ -89,7 +96,7 @@ extension RaffleSummaryViewController: UICollectionViewDataSource {
         cell.delegate = self
         cell.configure(raffle: raffle, imageOppacity: oppacity, statusResponse: statusResponse)
         
-        if indexPath.row == 0 || indexPath.row == 2 || indexPath.row == 4 {
+        if indexPath.row % 2 == 0 {
             cell.layer.addBorder(edge: .right, thickness: 1)
             cell.layer.addBorder(edge: .bottom, thickness: 1)
         } else {
@@ -134,7 +141,7 @@ extension RaffleSummaryViewController: UICollectionViewDelegateFlowLayout {
         let totalVerticalSpacing = (row - 1) * spacing
         let itemHeight = (collectionView.bounds.height - totalVerticalSpacing) / row
         
-        let itemSize = CGSize(width: itemWidth, height: 230)
+        let itemSize = CGSize(width: itemWidth, height: 180)
         return itemSize
     }
     

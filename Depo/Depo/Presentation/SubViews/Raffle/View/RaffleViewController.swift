@@ -5,6 +5,19 @@
 //  Created by Ozan Salman on 26.03.2024.
 //  Copyright © 2024 LifeTech. All rights reserved.
 //
+enum RafflePeriod: String, Codable {
+    case daily = "DAILY"
+    case weekly = "WEEKLY"
+    case monthly = "MONTHLY"
+    
+    var title: String {
+        switch self {
+        case .daily: return localized(.daily)
+        case .weekly: return localized(.weekly)
+        case .monthly: return localized(.monthly)
+        }
+    }
+}
 
 enum RaffleElement: String, Codable {
     case login = "LOGIN"
@@ -13,6 +26,10 @@ enum RaffleElement: String, Codable {
     case createCollage = "CREATE_COLLAGE"
     case photoPrint = "PHOTO_PRINT"
     case createStory = "CREATE_STORY"
+    case createAlbum = "CREATE_ALBUM"
+    case faceImage = "FACE_IMAGE"
+    case fotoVideoUpload = "FOTO_VIDEO_UPLOAD"
+    case inviteSignup = "INVITE_SIGNUP"
     
     var title: String {
         switch self {
@@ -22,6 +39,10 @@ enum RaffleElement: String, Codable {
         case .createCollage: return localized(.createCollageLabel)
         case .photoPrint: return localized(.photoPrint)
         case .createStory: return TextConstants.createStory
+        case .createAlbum: return TextConstants.createAlbum
+        case .faceImage: return "Face Image"
+        case .fotoVideoUpload: return "Foto Video Upload"
+        case .inviteSignup: return "Invite Signup"
         }
     }
     
@@ -33,39 +54,28 @@ enum RaffleElement: String, Codable {
         case .createCollage: return Image.raffleCreateCollage.image
         case .photoPrint: return Image.rafflePhotoPrint.image
         case .createStory: return Image.raffleCreateStory.image
+        case .createAlbum: return Image.raffleCreateStory.image
+        case .faceImage: return Image.raffleCreateStory.image
+        case .fotoVideoUpload: return Image.raffleUploadPhotos.image
+        case .inviteSignup: return Image.raffleCreateStory.image
         }
     }
     
     var detailText: String {
         switch self {
-        case .login: return "Bugüne kadar %@ lifebox'a giriş yaptın. Toplam: %@ kazandın."
-        case .purchasePackage: return "Bugüne kadar %@ paket satın aldın. Toplam: %@ kazandın."
-        case .photopick: return "Bugüne kadar %@ photopick yaptın. Toplam: %@ kazandın."
-        case .createCollage: return "Bugüne kadar %@ kolaj oluşturdun. Toplam: %@ kazandın."
-        case .photoPrint: return "Bugüne kadar %@ baskı yaptın. Toplam: %@ kazandın."
-        case .createStory: return "Bugüne kadar %@ story oluşturdun. Toplam: %@ kazandın."
+        default: return localized(.gamificationEventTriggerCount)
         }
     }
     
     var detailTextNoAction: String {
         switch self {
-        case .login: return "Bugüne kadar giriş yapmadın. Toplam: %@ kazandın."
-        case .purchasePackage: return "Bugüne kadar paket satın almadın. Toplam: %@ kazandın."
-        case .photopick: return "Bugüne kadar photopick yapmadın. Toplam: %@ kazandın."
-        case .createCollage: return "Bugüne kadar kolaj oluşturmadın. Toplam: %@ kazandın."
-        case .photoPrint: return "Bugüne kadar baskı yapmadın. Toplam: %@ kazandın."
-        case .createStory: return "Bugüne kadar story oluşturmadın. Toplam: %@ kazandın."
+        default: return localized(.gamificationEventNotTrigerred)
         }
     }
     
     var infoLabelText: String {
         switch self {
-        case .login: return "Bugün giriş yaptın"
-        case .purchasePackage: return "Bugün paket aldın"
-        case .photopick: return "Bugün photopick yaptın"
-        case .createCollage: return "Bugün kolaj yaptın"
-        case .photoPrint: return "Bugün baskı yaptın"
-        case .createStory: return "Bugün story yaptın"
+        default: return localized(.gamificationEventCompleted)
         }
     }
 }
@@ -107,6 +117,7 @@ final class RaffleViewController: BaseViewController {
         view.paddingBottom = 8
         view.layer.cornerRadius = 12
         view.clipsToBounds = true
+        view.isHidden = true
         return view
     }()
     
@@ -125,17 +136,6 @@ final class RaffleViewController: BaseViewController {
         view.numberOfLines = 0
         view.textAlignment = .left
         view.lineBreakMode = .byWordWrapping
-        return view
-    }()
-    
-    private lazy var rightViewTextView: UITextView = {
-        let view = UITextView()
-        view.backgroundColor = AppColor.background.color
-        view.textColor = AppColor.label.color
-        view.font = .appFont(.regular, size: 10)
-        view.textAlignment = .left
-        view.layer.cornerRadius = 21
-        view.clipsToBounds = true
         return view
     }()
     
@@ -181,11 +181,12 @@ final class RaffleViewController: BaseViewController {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.itemSize = CGSize(width: 45, height: 45)
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .vertical
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.register(RaffleCollectionViewCell.self, forCellWithReuseIdentifier: "RaffleCollectionViewCell")
         view.backgroundColor = AppColor.background.color
         view.showsHorizontalScrollIndicator = false
+        view.isScrollEnabled = false
         return view
     }()
     
@@ -193,9 +194,10 @@ final class RaffleViewController: BaseViewController {
     private var id: Int = 0
     private var imageUrl: String = ""
     private var statusResponse: RaffleStatusResponse?
-    private var raffleStatusElement: [RaffleElement] = [.login, .purchasePackage, .photopick, .createCollage, .photoPrint, .createStory]
+    private var raffleStatusElement: [RaffleElement] = []
     private var raffleStatusElementOppacity: [Float] = []
     private var nextDayIsHidden: [Bool] = []
+    private var rafflePeriod: [String] = []
     private var endDateText: String = ""
     
     init(id: Int, url: String, endDateText: String) {
@@ -212,15 +214,11 @@ final class RaffleViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setTitle(withString: localized(.drawDetailHeader))
+        setTitle(withString: localized(.gamificationRaffleInfo))
         view.backgroundColor = AppColor.background.color
         
         showSpinner()
         output.getRaffleStatus(id: 1)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        rightViewTextView.centerVertically()
     }
     
     @objc private func summaryButtonTapped() {
@@ -228,12 +226,16 @@ final class RaffleViewController: BaseViewController {
     }
     
     @objc private func infoLabelTapped() {
-        print("aaaaaaaaaaaaa 1")
+        output.goToRaffleCondition(statusResponse: statusResponse)
     }
     
     private func successStatus(status: RaffleStatusResponse) {
         DispatchQueue.main.async {
             self.statusResponse = status
+            for detail in self.statusResponse?.details ?? [] {
+                let element = RaffleElement(rawValue: detail.earnType ?? RaffleElement.login.rawValue)
+                self.raffleStatusElement.append(element)
+            }
             self.setupLayout()
         }
     }
@@ -253,6 +255,13 @@ extension RaffleViewController: RaffleViewInput {
     }
 }
 
+extension RaffleViewController: RaffleCollectionViewCellDelegate {
+    func didImageTapped(raffle: RaffleElement) {
+//        let asd = RaffleRouter()
+//        asd.goToPages(raffle: raffle)
+    }
+}
+
 extension RaffleViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return raffleStatusElement.count
@@ -265,25 +274,20 @@ extension RaffleViewController: UICollectionViewDataSource {
         let raffle = raffleStatusElement[indexPath.row]
         let oppacity = raffleStatusElementOppacity[indexPath.row]
         let isHidden = nextDayIsHidden[indexPath.row]
-        cell.configure(image: raffle.icon, title: raffle.title, imageOppacity: oppacity, nextLabelIsHidden: isHidden)
+        let period = rafflePeriod[indexPath.row]
+        cell.delegate = self
+        cell.configure(raffle: raffle, imageOppacity: oppacity, nextLabelIsHidden: isHidden, period: period)
         return cell
     }
 }
 
 extension RaffleViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         let columns: CGFloat = 3
-        let row: CGFloat = 2
         let spacing: CGFloat = 5
-        
         let totalHorizontalSpacing = (columns - 1) * spacing
         let itemWidth = (collectionView.bounds.width - totalHorizontalSpacing) / columns
-        
-        let totalVerticalSpacing = (row - 1) * spacing
-        let itemHeight = (collectionView.bounds.height - totalVerticalSpacing) / row
-        
-        let itemSize = CGSize(width: itemWidth, height: itemHeight)
+        let itemSize = CGSize(width: itemWidth, height: itemWidth)
         return itemSize
     }
     
@@ -332,7 +336,7 @@ extension RaffleViewController {
         rightView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20).isActive = true
         rightView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
         rightView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
-        rightView.heightAnchor.constraint(equalToConstant: 180).isActive = true
+        rightView.heightAnchor.constraint(equalToConstant: 138).isActive = true
         
         rightView.addSubview(rightViewTitleLabel)
         rightViewTitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -341,16 +345,9 @@ extension RaffleViewController {
         rightViewTitleLabel.trailingAnchor.constraint(equalTo: rightView.trailingAnchor, constant: -8).isActive = true
         rightViewTitleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
-        rightView.addSubview(rightViewTextView)
-        rightViewTextView.translatesAutoresizingMaskIntoConstraints = false
-        rightViewTextView.topAnchor.constraint(equalTo: rightViewTitleLabel.bottomAnchor, constant: 8).isActive = true
-        rightViewTextView.leadingAnchor.constraint(equalTo: rightView.leadingAnchor, constant: 8).isActive = true
-        rightViewTextView.trailingAnchor.constraint(equalTo: rightView.trailingAnchor, constant: -8).isActive = true
-        rightViewTextView.heightAnchor.constraint(equalToConstant: 42).isActive = true
-        
         rightView.addSubview(rightViewSummaryButton)
         rightViewSummaryButton.translatesAutoresizingMaskIntoConstraints = false
-        rightViewSummaryButton.topAnchor.constraint(equalTo: rightViewTextView.bottomAnchor, constant: 12).isActive = true
+        rightViewSummaryButton.topAnchor.constraint(equalTo: rightViewTitleLabel.bottomAnchor, constant: 12).isActive = true
         rightViewSummaryButton.leadingAnchor.constraint(equalTo: rightView.leadingAnchor, constant: 8).isActive = true
         rightViewSummaryButton.trailingAnchor.constraint(equalTo: rightView.trailingAnchor, constant: -8).isActive = true
         rightViewSummaryButton.heightAnchor.constraint(equalToConstant: 42).isActive = true
@@ -374,21 +371,27 @@ extension RaffleViewController {
         collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).activate()
         collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).activate()        
         collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40).activate()
-        collectionView.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        let rowCount = (CGFloat(raffleStatusElement.count) / 3.0).rounded(.awayFromZero)
+        collectionView.heightAnchor.constraint(equalToConstant: rowCount * 120).isActive = true
         
         for el in raffleStatusElement {
-            var oppacity = 0.2
+            var oppacity: Float = 1.0
             var isHidden = true
+            var period = RafflePeriod.daily
             for value in statusResponse?.details ?? [] {
                 if el.rawValue == value.earnType {
-                    oppacity = 1
-                    if value.dailyRemainingPoints == 0 {
+                    let periodEarnLimit = value.periodEarnLimit ?? 0
+                    let periodEarnedPoints = value.periodEarnedPoints ?? 0
+                    if periodEarnLimit - periodEarnedPoints == 0 {
+                        period = RafflePeriod(rawValue: value.periodType ?? RafflePeriod.daily.rawValue) ?? RafflePeriod.daily
                         isHidden = false
+                        oppacity = 0.2
                     }
                 }
             }
             raffleStatusElementOppacity.append(Float(oppacity))
             nextDayIsHidden.append(isHidden)
+            rafflePeriod.append(period.title)
         }
 
         self.collectionView.dataSource = self
@@ -396,8 +399,7 @@ extension RaffleViewController {
         
         imageView.loadImageData(with: URL(string: imageUrl))
         imageLabel.text = endDateText
-        rightViewTitleLabel.text = localized(.gamificationRaffleInfo)
-        rightViewTextView.text = String(format: localized(.gamificationRaffleCount), statusResponse?.totalPointsEarned ?? 0)
+        rightViewTitleLabel.text = String(format: localized(.gamificationRaffleCount), statusResponse?.totalPointsEarned ?? 0)
         infoLabel.text = localized(.gamificationEventDescription)
         
         let attributedString = NSMutableAttributedString(string: localized(.gamificationRaffleDraw))

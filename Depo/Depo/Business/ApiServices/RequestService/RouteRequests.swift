@@ -571,4 +571,5 @@ struct RouteRequests {
     
     //MARK: -RAFFLE (GAMIFICATION)
     static let getRaffleStatus = "v1/campaign/%d"
+    static let getRaffleCondition = "v1/campaign/rules/%d"
 }

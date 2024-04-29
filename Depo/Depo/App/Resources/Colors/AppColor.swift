@@ -243,6 +243,7 @@ enum AppColor {
     case profileGrayColor
     case raffleView
     case raffleLabel
+    case raffleCondition
     
 
     var color: UIColor {

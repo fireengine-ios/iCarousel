@@ -29,6 +29,30 @@ final class RaffleService: BaseRequestService {
             .responseObject(handler)
             .task
     }
+    
+    @discardableResult
+    func getRaffleConditions(id: Int, handler: @escaping (ResponseResult<String>) -> Void) -> URLSessionTask? {
+     
+        let path = String(format: RouteRequests.getRaffleCondition, id)
+        guard let url = URL(string: path, relativeTo: RouteRequests.baseUrl) else {
+            assertionFailure()
+           return nil
+        }
+        
+        return SessionManager
+            .customDefault
+            .request(url)
+            .customValidate()
+            .responseString { response in
+                switch response.result {
+                case .success(let string):
+                    handler(.success(string))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+            }
+            .task
+    }
 }
 
 struct RaffleStatusResponse: Codable {
@@ -37,7 +61,9 @@ struct RaffleStatusResponse: Codable {
     
     struct Detail: Codable {
         let earnType: String?
-        let transactionCount, totalPointsEarnedRule, dailyRemainingPoints: Int?
+        let transactionCount, totalPointsEarnedRule, periodEarnedPoints: Int?
+        let periodType: String?
+        let periodEarnLimit, totalEarnLimit: Int?
     }
 }
 

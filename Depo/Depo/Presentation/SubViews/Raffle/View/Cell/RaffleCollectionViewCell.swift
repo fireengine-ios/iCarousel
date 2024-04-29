@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol RaffleCollectionViewCellDelegate: AnyObject {
+    func didImageTapped(raffle: RaffleElement)
+}
+
 class RaffleCollectionViewCell: UICollectionViewCell {
     
     private lazy var containerView: UIView = {
@@ -24,6 +28,9 @@ class RaffleCollectionViewCell: UICollectionViewCell {
         view.contentMode = .scaleAspectFit
         view.layer.cornerRadius = 5
         view.backgroundColor = .blue
+        view.isUserInteractionEnabled = true
+        let tapImage = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+        view.addGestureRecognizer(tapImage)
         return view
     }()
     
@@ -45,9 +52,12 @@ class RaffleCollectionViewCell: UICollectionViewCell {
         view.textAlignment = .center
         view.lineBreakMode = .byWordWrapping
         view.text = localized(.gamificationComeback)
-        view.isHidden = true
+        //view.isHidden = true
         return view
     }()
+    
+    weak var delegate: RaffleCollectionViewCellDelegate?
+    private var raffle: RaffleElement?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -58,11 +68,24 @@ class RaffleCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(image: UIImage, title: String, imageOppacity: Float, nextLabelIsHidden: Bool) {
-        iconImage.image = image
-        titleLabel.text = title
+    
+    func configure(raffle: RaffleElement, imageOppacity: Float, nextLabelIsHidden: Bool, period: String) {
+        self.raffle = raffle
+        iconImage.image = raffle.icon
+        titleLabel.text = raffle.title
         iconImage.layer.opacity = imageOppacity
-        nextDayLabel.isHidden = nextLabelIsHidden
+        //nextDayLabel.isHidden = nextLabelIsHidden
+        if nextLabelIsHidden { // hak var
+            nextDayLabel.text = localized(.gamificationRaffleWin)
+        } else { //hak yok
+            nextDayLabel.text = String(format: localized(.gamificationEventCompleted), period)
+        }
+    }
+    
+    @objc private func imageTapped() {
+        if let raffle = raffle {
+            delegate?.didImageTapped(raffle: raffle)
+        }
     }
 }
 

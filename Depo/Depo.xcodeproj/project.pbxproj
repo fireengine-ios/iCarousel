@@ -1593,6 +1593,10 @@
 		89104BCA22CBA1B4005B3F58 /* PackagePremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A26E66B21A6E7D70033B797 /* PackagePremiumView.swift */; };
 		8915C325233B7D4A00EFC706 /* BasePopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A723390D69000083B7 /* BasePopUpController.swift */; };
 		8915C326233B7D4A00EFC706 /* BasePopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896133A723390D69000083B7 /* BasePopUpController.swift */; };
+		891955882BCCFD3C00E52919 /* RaffleConditionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891955872BCCFD3C00E52919 /* RaffleConditionTableViewCell.swift */; };
+		891955892BCCFD3C00E52919 /* RaffleConditionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891955872BCCFD3C00E52919 /* RaffleConditionTableViewCell.swift */; };
+		8919558A2BCCFD3C00E52919 /* RaffleConditionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891955872BCCFD3C00E52919 /* RaffleConditionTableViewCell.swift */; };
+		8919558B2BCCFD3C00E52919 /* RaffleConditionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891955872BCCFD3C00E52919 /* RaffleConditionTableViewCell.swift */; };
 		891C019429BCB64D003D5CA1 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891C019329BCB64D003D5CA1 /* StringConstants.swift */; };
 		891C019529BCB64D003D5CA1 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891C019329BCB64D003D5CA1 /* StringConstants.swift */; };
 		891C019629BCB64D003D5CA1 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891C019329BCB64D003D5CA1 /* StringConstants.swift */; };
@@ -2023,6 +2027,10 @@
 		89C0AD6F2A8F4F210014D674 /* PhotoPrintMissingPhotoPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C0AD6D2A8F4F210014D674 /* PhotoPrintMissingPhotoPopup.xib */; };
 		89C0AD702A8F4F210014D674 /* PhotoPrintMissingPhotoPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C0AD6D2A8F4F210014D674 /* PhotoPrintMissingPhotoPopup.xib */; };
 		89C0AD712A8F4F210014D674 /* PhotoPrintMissingPhotoPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C0AD6D2A8F4F210014D674 /* PhotoPrintMissingPhotoPopup.xib */; };
+		89C768222BC51ABB001C41F9 /* RaffleConditionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C768212BC51ABB001C41F9 /* RaffleConditionViewController.swift */; };
+		89C768232BC51ABB001C41F9 /* RaffleConditionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C768212BC51ABB001C41F9 /* RaffleConditionViewController.swift */; };
+		89C768242BC51ABB001C41F9 /* RaffleConditionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C768212BC51ABB001C41F9 /* RaffleConditionViewController.swift */; };
+		89C768252BC51ABB001C41F9 /* RaffleConditionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C768212BC51ABB001C41F9 /* RaffleConditionViewController.swift */; };
 		89CB2BCA29D6E4CB000A15CB /* OnlyOfficeParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CB2BC929D6E4CB000A15CB /* OnlyOfficeParameters.swift */; };
 		89CB2BCB29D6E4CB000A15CB /* OnlyOfficeParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CB2BC929D6E4CB000A15CB /* OnlyOfficeParameters.swift */; };
 		89CB2BCC29D6E4CB000A15CB /* OnlyOfficeParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CB2BC929D6E4CB000A15CB /* OnlyOfficeParameters.swift */; };
@@ -11455,6 +11463,7 @@
 		890F736E22EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseEmailVerificationPopUp.xib; sourceTree = "<group>"; };
 		890F737622EEFAFF00BA0020 /* BaseChangeEmailPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseChangeEmailPopUp.xib; sourceTree = "<group>"; };
 		890F737722EEFAFF00BA0020 /* BaseChangeEmailPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseChangeEmailPopUp.swift; sourceTree = "<group>"; };
+		891955872BCCFD3C00E52919 /* RaffleConditionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaffleConditionTableViewCell.swift; sourceTree = "<group>"; };
 		891C019329BCB64D003D5CA1 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
 		891CDE3A296EF11200E5CD3B /* FavoriteInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteInitializer.swift; sourceTree = "<group>"; };
 		8921222D2303FFA400396ED0 /* EmailVerifiedPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerifiedPopUp.swift; sourceTree = "<group>"; };
@@ -11574,6 +11583,7 @@
 		89C0AD5F2A8E6DD20014D674 /* PhotoPrintInfoPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoPrintInfoPopup.xib; sourceTree = "<group>"; };
 		89C0AD652A8F4E0A0014D674 /* PhotoPrintMissingPhotoPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintMissingPhotoPopup.swift; sourceTree = "<group>"; };
 		89C0AD6D2A8F4F210014D674 /* PhotoPrintMissingPhotoPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoPrintMissingPhotoPopup.xib; sourceTree = "<group>"; };
+		89C768212BC51ABB001C41F9 /* RaffleConditionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaffleConditionViewController.swift; sourceTree = "<group>"; };
 		89CB2BC929D6E4CB000A15CB /* OnlyOfficeParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyOfficeParameters.swift; sourceTree = "<group>"; };
 		89CB2BCE29D6EE9F000A15CB /* OnlyOfficeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyOfficeResponse.swift; sourceTree = "<group>"; };
 		89CB2BD329D6EF5F000A15CB /* OnlyOfficeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyOfficeService.swift; sourceTree = "<group>"; };
@@ -17569,6 +17579,7 @@
 				890B31182BB2FFF200C5A789 /* RaffleViewInput.swift */,
 				890B311D2BB2FFFD00C5A789 /* RaffleViewOutput.swift */,
 				89EDEB1A2BB812CD00D754D9 /* RaffleSummaryViewController.swift */,
+				89C768212BC51ABB001C41F9 /* RaffleConditionViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -17737,6 +17748,7 @@
 			children = (
 				89232DBC2BB5615600C5B898 /* RaffleCollectionViewCell.swift */,
 				89EDEB222BB8178700D754D9 /* RaffleSummaryCollectionViewCell.swift */,
+				891955872BCCFD3C00E52919 /* RaffleConditionTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -27682,6 +27694,7 @@
 				C62239AC204973270043ED44 /* FaceImageChangeCoverInitializer.swift in Sources */,
 				B5BBBE9B24FCF0B100A719CB /* PhotoEditSaveService.swift in Sources */,
 				89F0954A29B0B69D00F74E7E /* CreateCollageInteractor.swift in Sources */,
+				891955882BCCFD3C00E52919 /* RaffleConditionTableViewCell.swift in Sources */,
 				CE23A0F3205FF5250048267D /* ErrorPresenter.swift in Sources */,
 				737A2E9B2338989B0014258A /* SetSecurityQuestionViewController.swift in Sources */,
 				8C0E8CDF1FDEBDFF00789C91 /* AutoSyncInteractorOutput.swift in Sources */,
@@ -28191,6 +28204,7 @@
 				8C0E8DD51FDEBDFF00789C91 /* TermsAndServicesInteractorInput.swift in Sources */,
 				CEF00FDD227B2BC100248A15 /* EmailEnterDesigner.swift in Sources */,
 				CED4B0282017505300D06CA9 /* Mapping.swift in Sources */,
+				89C768222BC51ABB001C41F9 /* RaffleConditionViewController.swift in Sources */,
 				8C0E8DD61FDEBDFF00789C91 /* TermsAndServicesInteractorOutput.swift in Sources */,
 				8C0E8DD71FDEBDFF00789C91 /* TermsAndServicesInteractor.swift in Sources */,
 				C62239BA204977090043ED44 /* FaceImagePhotosRouter.swift in Sources */,
@@ -30590,6 +30604,7 @@
 				CE784A0822A685FB00662219 /* AlertFilesActionsSheetInteractor.swift in Sources */,
 				07111F2726E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */,
 				4B88BB70233A352C001350F8 /* SubjectDetailsDesigner.swift in Sources */,
+				8919558A2BCCFD3C00E52919 /* RaffleConditionTableViewCell.swift in Sources */,
 				9823196024F3A1E600FD16E2 /* PreparedFilterSliderView.swift in Sources */,
 				98B047B0259314740011DAEB /* Configuration.m in Sources */,
 				CE784A0922A685FB00662219 /* TapGestureRecognizerWithClosure.swift in Sources */,
@@ -31127,6 +31142,7 @@
 				988BA133255924150086E4BE /* PrivateShareWithView.swift in Sources */,
 				890B31322BB3003C00C5A789 /* RaffleInteractor.swift in Sources */,
 				07DB93B92860AF5400D5CACF /* ArraySlice_UInt8+Extensions.swift in Sources */,
+				89C768242BC51ABB001C41F9 /* RaffleConditionViewController.swift in Sources */,
 				CFBD0147253737B50055726C /* DebugLogsService.swift in Sources */,
 				CE784B5B22A685FB00662219 /* PasscodeSettingsInitializer.swift in Sources */,
 				B592449123C86BA70066CA57 /* HiddenService.swift in Sources */,
@@ -31971,6 +31987,7 @@
 				CF8B643123CBC9D70021B021 /* AssetsCache.swift in Sources */,
 				98BE78B024517E4300B8864F /* SnackbarManager.swift in Sources */,
 				CF8B643223CBC9D70021B021 /* AuthorizationRepository.swift in Sources */,
+				891955892BCCFD3C00E52919 /* RaffleConditionTableViewCell.swift in Sources */,
 				F01C14CD28FB47C200F5D380 /* ForYouCardsCollectionViewCell.swift in Sources */,
 				CF8B643323CBC9D70021B021 /* AutoSyncModuleInput.swift in Sources */,
 				CF8B643423CBC9D70021B021 /* FaceImageChangeCoverInitializer.swift in Sources */,
@@ -32136,6 +32153,7 @@
 				CF8B64A423CBC9D70021B021 /* FilesDataSource.swift in Sources */,
 				CF8B64A523CBC9D70021B021 /* UploadFromLifeBoxInteractor.swift in Sources */,
 				52A5E023291C17F900670B0C /* CustomSegmentedView.swift in Sources */,
+				89C768232BC51ABB001C41F9 /* RaffleConditionViewController.swift in Sources */,
 				52EDD1DA29A3A06000D549FC /* SimpleBottomBarCard.swift in Sources */,
 				89CB2BD029D6EE9F000A15CB /* OnlyOfficeResponse.swift in Sources */,
 				CF8B64A623CBC9D70021B021 /* UIApplication+topController.swift in Sources */,
@@ -34123,6 +34141,7 @@
 				B558279524FE91600039DD11 /* ObjectRequestResponse.swift in Sources */,
 				CF8B6C7623CBCA280021B021 /* UIViewController+NavBar.swift in Sources */,
 				CF8B6C7723CBCA280021B021 /* SupportFormBannerView.swift in Sources */,
+				89C768252BC51ABB001C41F9 /* RaffleConditionViewController.swift in Sources */,
 				CF8B6C7823CBCA280021B021 /* SwiftyJSONExtension.swift in Sources */,
 				CF8B6C7A23CBCA280021B021 /* UserDefaultsForUserID.swift in Sources */,
 				CF8B6C7B23CBCA280021B021 /* RemoteDownloder.swift in Sources */,
@@ -34765,6 +34784,7 @@
 				CF8B6E2423CBCA280021B021 /* CustomScrollIndicator.swift in Sources */,
 				CF8B6E2523CBCA280021B021 /* PeriodicContactSyncInteractor.swift in Sources */,
 				CF8B6E2623CBCA280021B021 /* AlertFilesActionsSheetPresenter.swift in Sources */,
+				8919558B2BCCFD3C00E52919 /* RaffleConditionTableViewCell.swift in Sources */,
 				CF8B6E2723CBCA280021B021 /* InstagramAuthViewController.swift in Sources */,
 				CF8B6E2823CBCA280021B021 /* EULAResponse.swift in Sources */,
 				CF8B6E2923CBCA280021B021 /* FromNib.swift in Sources */,
