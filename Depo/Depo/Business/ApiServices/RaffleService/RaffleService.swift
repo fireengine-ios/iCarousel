@@ -61,7 +61,9 @@ struct RaffleStatusResponse: Codable {
     
     struct Detail: Codable {
         let earnType: String?
-        let transactionCount, totalPointsEarnedRule, dailyRemainingPoints: Int?
+        let transactionCount, totalPointsEarnedRule, periodEarnedPoints: Int?
+        let periodType: String?
+        let periodEarnLimit, totalEarnLimit: Int?
     }
 }
 

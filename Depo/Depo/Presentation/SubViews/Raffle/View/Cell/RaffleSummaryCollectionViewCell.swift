@@ -115,59 +115,34 @@ class RaffleSummaryCollectionViewCell: UICollectionViewCell {
         infoLabel.text = raffle.infoLabelText
         
         var mainText: String = ""
-        let transactionCountText = "%d kez"
-        let pointCountText = "%d çekiliş puanı"
-        var transactionCount: Int = 0
         var pointCount: Int = 0
-        var isHaveDetail: Bool = false
         
         for status in statusResponse?.details ?? [] {
             if raffle.rawValue == status.earnType {
-                mainText = raffle.detailText
-                transactionCount = status.transactionCount ?? 0
                 pointCount = status.totalPointsEarnedRule ?? 0
-                isHaveDetail = true
-                if status.dailyRemainingPoints == 0 {
+                mainText = pointCount == 0 ? raffle.detailTextNoAction : String(format: raffle.detailText, pointCount)
+                let periodEarnLimit = status.periodEarnLimit ?? 0
+                let periodEarnedPoints = status.periodEarnedPoints ?? 0
+                if periodEarnLimit - periodEarnedPoints == 0 {
                     actionButton.isHidden = true
                     infoLabel.isHidden = false
                     comeBackLabel.isHidden = false
+                    let period = RafflePeriod(rawValue: status.periodType ?? RafflePeriod.daily.rawValue) ?? RafflePeriod.daily
+                    infoLabel.text = String(format: raffle.infoLabelText, period.title)
                 } else {
                     actionButton.isHidden = false
                     infoLabel.isHidden = true
                     comeBackLabel.isHidden = true
                 }
                 break
-            } else {
-                mainText = raffle.detailTextNoAction
-                transactionCount = 0
-                pointCount = 0
-                isHaveDetail = false
-                actionButton.isHidden = false
-                infoLabel.isHidden = true
-                comeBackLabel.isHidden = true
             }
         }
+        let content = NSMutableAttributedString(string: mainText, attributes: [.font: UIFont.appFont(.light, size: 10)])
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        content.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, content.length))
+        summaryLabel.attributedText = NSAttributedString(format: content)
         
-        if isHaveDetail {
-            let content = NSMutableAttributedString(string: mainText, attributes: [.font: UIFont.appFont(.light, size: 10)])
-            let transaction = NSAttributedString(string: String(format: transactionCountText, transactionCount), attributes: [.font: UIFont.appFont(.bold, size: 10)])
-            let point = NSAttributedString(string: String(format: pointCountText, pointCount), attributes: [.font: UIFont.appFont(.bold, size: 10)])
-            
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.lineSpacing = 14
-            paragraphStyle.alignment = .center
-            content.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, content.length))
-            summaryLabel.attributedText = NSAttributedString(format: content, args: transaction, point)
-        } else {
-            let content = NSMutableAttributedString(string: mainText, attributes: [.font: UIFont.appFont(.light, size: 10)])
-            let point = NSAttributedString(string: String(format: pointCountText, pointCount), attributes: [.font: UIFont.appFont(.bold, size: 10)])
-            
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.lineSpacing = 14
-            paragraphStyle.alignment = .center
-            content.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, content.length))
-            summaryLabel.attributedText = NSAttributedString(format: content, args: point)
-        }
     }
     
     @objc private func actionButtonTapped() {

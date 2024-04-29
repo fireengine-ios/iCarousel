@@ -33,13 +33,13 @@ final class RaffleConditionViewController: BaseViewController {
         return view
     }()
     
-    private lazy var tableView: UITableView = {
-        let view = UITableView()
-        view.register(RaffleConditionTableViewCell.self, forCellReuseIdentifier: "RaffleConditionTableViewCell")
-        view.backgroundColor = AppColor.raffleCondition.color
-        view.separatorStyle = .none
-        return view
-    }()
+//    private lazy var tableView: UITableView = {
+//        let view = UITableView()
+//        view.register(RaffleConditionTableViewCell.self, forCellReuseIdentifier: "RaffleConditionTableViewCell")
+//        view.backgroundColor = AppColor.raffleCondition.color
+//        view.separatorStyle = .none
+//        return view
+//    }()
     
     private lazy var bottomContentView: UIView = {
         let view = UIView()
@@ -90,11 +90,11 @@ final class RaffleConditionViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTitle(withString: localized(.paycellCampaignDetailTitle))
+        setTitle(withString: localized(.gamificationCampaignConditions))
         view.backgroundColor = AppColor.background.color
         showSpinner()
         getRaffleRules()
-        configureTableView()
+        //configureTableView()
     }
     
     private func getRaffleRules() {
@@ -112,11 +112,11 @@ final class RaffleConditionViewController: BaseViewController {
         }
     }
     
-    private func configureTableView() {
-        view.addSubview(tableView)
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
+//    private func configureTableView() {
+//        view.addSubview(tableView)
+//        tableView.delegate = self
+//        tableView.dataSource = self
+//    }
     
     private func setRaffleElement() {
         for detail in self.statusResponse?.details ?? [] {
@@ -133,37 +133,37 @@ final class RaffleConditionViewController: BaseViewController {
             raffleStatusElementOppacity.append(Float(oppacity))
         }
         setupPage()
-        configureTableView()
+        //configureTableView()
     }
     
 }
 
 
-extension RaffleConditionViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return statusResponse?.details?.count ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RaffleConditionTableViewCell", for: indexPath) as? RaffleConditionTableViewCell else {
-            return UITableViewCell()
-        }
-        
-        //cell.delegate = self
-        let raffle = raffleStatusElement[indexPath.row]
-        let oppacity = raffleStatusElementOppacity[indexPath.row]
-        let earnCount = statusResponse?.details?[indexPath.row].dailyRemainingPoints ?? 1
-        cell.configure(raffle: raffle, imageOppacity: oppacity, earnCount: earnCount)
-        return cell
-    }
-}
-extension RaffleConditionViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let cell = cell as? RaffleConditionTableViewCell else {
-            return
-        }
-    }
-}
+//extension RaffleConditionViewController: UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return statusResponse?.details?.count ?? 0
+//    }
+//    
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RaffleConditionTableViewCell", for: indexPath) as? RaffleConditionTableViewCell else {
+//            return UITableViewCell()
+//        }
+//        
+//        //cell.delegate = self
+//        let raffle = raffleStatusElement[indexPath.row]
+//        let oppacity = raffleStatusElementOppacity[indexPath.row]
+//        //let earnCount = statusResponse?.details?[indexPath.row].dailyRemainingPoints ?? 1
+//        cell.configure(raffle: raffle, imageOppacity: oppacity, earnCount: 2)
+//        return cell
+//    }
+//}
+//extension RaffleConditionViewController: UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        guard let cell = cell as? RaffleConditionTableViewCell else {
+//            return
+//        }
+//    }
+//}
 
 extension RaffleConditionViewController {
     private func setupPage() {
@@ -190,11 +190,11 @@ extension RaffleConditionViewController {
         topContentLineView.trailingAnchor.constraint(equalTo: topContentView.trailingAnchor, constant: -8).isActive = true
         topContentLineView.heightAnchor.constraint(equalToConstant: 1).activate()
         
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: topContentLineView.bottomAnchor, constant: 8).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: topContentView.leadingAnchor, constant: 0).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: topContentView.trailingAnchor, constant: 0).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: topContentView.bottomAnchor, constant: 0).isActive = true
+//        tableView.translatesAutoresizingMaskIntoConstraints = false
+//        tableView.topAnchor.constraint(equalTo: topContentLineView.bottomAnchor, constant: 8).isActive = true
+//        tableView.leadingAnchor.constraint(equalTo: topContentView.leadingAnchor, constant: 0).isActive = true
+//        tableView.trailingAnchor.constraint(equalTo: topContentView.trailingAnchor, constant: 0).isActive = true
+//        tableView.bottomAnchor.constraint(equalTo: topContentView.bottomAnchor, constant: 0).isActive = true
         
         // MARK: BOTTOMCONTENTVIEW
         view.addSubview(bottomContentView)
@@ -224,8 +224,8 @@ extension RaffleConditionViewController {
         bottomTextView.trailingAnchor.constraint(equalTo: bottomContentView.trailingAnchor, constant: -8).isActive = true
         bottomTextView.bottomAnchor.constraint(equalTo: bottomContentView.bottomAnchor, constant: -8).activate()
         
-        topContentTitleLabel.text = "Puan Tablosu"
-        bottomContentTitleLabel.text = "Çekiliş Tablosu"
+        topContentTitleLabel.text = localized(.gamificationRules)
+        bottomContentTitleLabel.text = localized(.gamificationCampaignPolicyTitle)
         if #available(iOS 12.0, *) {
             if traitCollection.userInterfaceStyle == .light {
                 bottomTextView.attributedText = rulesText.getAsHtml

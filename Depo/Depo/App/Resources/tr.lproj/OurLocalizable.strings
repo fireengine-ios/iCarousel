@@ -2379,5 +2379,16 @@ then {11,99 TRY/Month}*/
 
 /*Paket satın alma kuralı için*/
 "gamification_package_rule" = "Paket Al";
-"gamification_raffle_info" = "Hediye Çekiliş Hakkı";
+"gamification_raffle_info" = "Kampanya Detayları";
 "gamification_raffle_draw" = "Kampanya Koşullarını öğrenmek için tıklayın.";
+
+/*Fuzzy*/
+"gamification_raffle_summary" = "Çekiliş Özeti";
+"gamification_event_not_trigerred" = "Henüz bu kullanımdan çekiliş hakkı kazanmadın. Hemen dene!";
+"gamification_event_trigger_count" = "%d Adet Çekiliş Hakkı Kazandın.";
+"gamification_event_completed" = "Bu %@ hakkını tamamladın.";
+"gamification_total_count" = "Toplam %d Çekiliş Hakkı Kazandın.";
+"gamification_campaign_conditions" = "Kampanya Detayları";
+"gamification_rules" = "Çekiliş Hak Kazanımı";
+"gamification_campaign_policy_title" = "Yasal MPİ";
+"gamification_raffle_win" = "Çekiliş Hakkı Kazan";

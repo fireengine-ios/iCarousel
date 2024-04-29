@@ -61,7 +61,7 @@ final class RaffleConditionTableViewCell: UITableViewCell {
         iconImage.image = raffle.icon
         iconImage.layer.opacity = imageOppacity
         titleLabel.text = raffle.title
-        summaryLabel.text = String(format: raffle.earnLabelText, earnCount)
+        //summaryLabel.text = String(format: raffle.earnLabelText, earnCount)
     }
 }
 

@@ -420,5 +420,18 @@ enum Strings: String, Localizable {
     case gamificationPackageRule = "gamification_package_rule"
     case gamificationRaffleInfo = "gamification_raffle_info"
     case gamificationRaffleDraw = "gamification_raffle_draw"
+    
+    case gamificationRaffleSummary = "gamification_raffle_summary"
+    case gamificationEventNotTrigerred = "gamification_event_not_trigerred"
+    case gamificationEventTriggerCount = "gamification_event_trigger_count"
+    case gamificationEventCompleted = "gamification_event_completed"
+    case gamificationTotalCount = "gamification_total_count"
+    case gamificationCampaignConditions = "gamification_campaign_conditions"
+    case gamificationRules = "gamification_rules"
+    case gamificationCampaignPolicyTitle = "gamification_campaign_policy_title"
+    case gamificationRaffleWin = "gamification_raffle_win"
+    case daily = "Daily"
+    case weekly = "Weekly"
+    case monthly = "Monthly"
 
 }
