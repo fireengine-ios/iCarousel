@@ -81,6 +81,7 @@ class RegistrationTermsInfoViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         confirmButton.isHidden = confirmed == nil
+        confirmButton.isEnabled = false
         setupTextView()
         
         scrollView.delegate = self
