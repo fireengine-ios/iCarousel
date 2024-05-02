@@ -9,8 +9,8 @@
 import Foundation
 
 class RaffleInitializer: NSObject {
-    class func initializeViewController(id: Int, url: String, endDateText: String) -> RaffleViewController {
-        let viewController = RaffleViewController(id: id, url: url, endDateText: endDateText)
+    class func initializeViewController(id: Int, url: String, endDateText: String, conditionImageUrl: String) -> RaffleViewController {
+        let viewController = RaffleViewController(id: id, url: url, endDateText: endDateText, conditionImageUrl: conditionImageUrl)
         let configurator = RaffleConfigurator()
         configurator.configure(viewController: viewController)
         return viewController

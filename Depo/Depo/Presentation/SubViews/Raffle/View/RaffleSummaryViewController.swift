@@ -78,7 +78,8 @@ final class RaffleSummaryViewController: BaseViewController {
 
 extension RaffleSummaryViewController: RaffleSummaryCollectionViewCellDelegate {
     func didActionButtonTapped(raffle: RaffleElement) {
-        print("aaaaaaaaaaaa \(raffle.rawValue)")
+        let router = RaffleRouter()
+        router.goToPages(raffle: raffle)
     }
 }
 

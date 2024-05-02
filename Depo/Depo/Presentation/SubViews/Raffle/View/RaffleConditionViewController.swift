@@ -33,6 +33,13 @@ final class RaffleConditionViewController: BaseViewController {
         return view
     }()
     
+    private lazy var topContentImageView: LoadingImageView = {
+        let view = LoadingImageView()
+        view.layer.cornerRadius = 16
+        view.clipsToBounds = true
+        return view
+    }()
+    
 //    private lazy var tableView: UITableView = {
 //        let view = UITableView()
 //        view.register(RaffleConditionTableViewCell.self, forCellReuseIdentifier: "RaffleConditionTableViewCell")
@@ -78,9 +85,11 @@ final class RaffleConditionViewController: BaseViewController {
     private var raffleStatusElement: [RaffleElement] = []
     private var raffleStatusElementOppacity: [Float] = []
     private var rulesText: String = ""
+    private var conditionImageUrl: String = ""
     
-    init(statusResponse: RaffleStatusResponse?) {
+    init(statusResponse: RaffleStatusResponse?, conditionImageUrl: String) {
         self.statusResponse = statusResponse
+        self.conditionImageUrl = conditionImageUrl
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -196,6 +205,13 @@ extension RaffleConditionViewController {
 //        tableView.trailingAnchor.constraint(equalTo: topContentView.trailingAnchor, constant: 0).isActive = true
 //        tableView.bottomAnchor.constraint(equalTo: topContentView.bottomAnchor, constant: 0).isActive = true
         
+        view.addSubview(topContentImageView)
+        topContentImageView.translatesAutoresizingMaskIntoConstraints = false
+        topContentImageView.topAnchor.constraint(equalTo: topContentLineView.bottomAnchor, constant: 8).isActive = true
+        topContentImageView.leadingAnchor.constraint(equalTo: topContentView.leadingAnchor, constant: 0).isActive = true
+        topContentImageView.trailingAnchor.constraint(equalTo: topContentView.trailingAnchor, constant: 0).isActive = true
+        topContentImageView.bottomAnchor.constraint(equalTo: topContentView.bottomAnchor, constant: 0).isActive = true
+        
         // MARK: BOTTOMCONTENTVIEW
         view.addSubview(bottomContentView)
         bottomContentView.translatesAutoresizingMaskIntoConstraints = false
@@ -226,6 +242,7 @@ extension RaffleConditionViewController {
         
         topContentTitleLabel.text = localized(.gamificationRules)
         bottomContentTitleLabel.text = localized(.gamificationCampaignPolicyTitle)
+        topContentImageView.loadImageData(with: URL(string: conditionImageUrl))
         if #available(iOS 12.0, *) {
             if traitCollection.userInterfaceStyle == .light {
                 bottomTextView.attributedText = rulesText.getAsHtml

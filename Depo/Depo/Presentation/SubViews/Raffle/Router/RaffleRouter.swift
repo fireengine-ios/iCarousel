@@ -17,8 +17,8 @@ class RaffleRouter: RaffleRouterInput {
         router.pushViewController(viewController: vc, animated: false)
     }
     
-    func goToRaffleCondition(statusResponse: RaffleStatusResponse?) {
-        let vc = router.raffleCondition(statusResponse: statusResponse)
+    func goToRaffleCondition(statusResponse: RaffleStatusResponse?, conditionImageUrl: String) {
+        let vc = router.raffleCondition(statusResponse: statusResponse, conditionImageUrl: conditionImageUrl)
         router.pushViewController(viewController: vc, animated: false)
     }
     
@@ -46,7 +46,8 @@ class RaffleRouter: RaffleRouterInput {
         case .faceImage:
             print("aaaaaaaaaaaa faceImage")
         case .fotoVideoUpload:
-            print("aaaaaaaaaaaa fotoVideoUpload")
+            let vc = router.uploadPhotos()
+            router.pushViewController(viewController: vc)
         case .inviteSignup:
             print("aaaaaaaaaaaa inviteSignup")
         }

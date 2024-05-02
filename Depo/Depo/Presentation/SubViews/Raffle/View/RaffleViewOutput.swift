@@ -11,5 +11,5 @@ import Foundation
 protocol RaffleViewOutput {
     func getRaffleStatus(id: Int)
     func goToRaffleSummary(statusResponse: RaffleStatusResponse?)
-    func goToRaffleCondition(statusResponse: RaffleStatusResponse?)
+    func goToRaffleCondition(statusResponse: RaffleStatusResponse?, conditionImageUrl: String)
 }

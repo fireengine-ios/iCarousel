@@ -193,6 +193,7 @@ final class RaffleViewController: BaseViewController {
     var output: RaffleViewOutput!
     private var id: Int = 0
     private var imageUrl: String = ""
+    private var conditionImageUrl: String = ""
     private var statusResponse: RaffleStatusResponse?
     private var raffleStatusElement: [RaffleElement] = []
     private var raffleStatusElementOppacity: [Float] = []
@@ -200,9 +201,10 @@ final class RaffleViewController: BaseViewController {
     private var rafflePeriod: [String] = []
     private var endDateText: String = ""
     
-    init(id: Int, url: String, endDateText: String) {
+    init(id: Int, url: String, endDateText: String, conditionImageUrl: String) {
         self.id = id
         self.imageUrl = url
+        self.conditionImageUrl = conditionImageUrl
         self.endDateText = endDateText
         super.init(nibName: nil, bundle: nil)
     }
@@ -218,7 +220,7 @@ final class RaffleViewController: BaseViewController {
         view.backgroundColor = AppColor.background.color
         
         showSpinner()
-        output.getRaffleStatus(id: 1)
+        output.getRaffleStatus(id: id)
     }
     
     @objc private func summaryButtonTapped() {
@@ -226,7 +228,7 @@ final class RaffleViewController: BaseViewController {
     }
     
     @objc private func infoLabelTapped() {
-        output.goToRaffleCondition(statusResponse: statusResponse)
+        output.goToRaffleCondition(statusResponse: statusResponse, conditionImageUrl: conditionImageUrl)
     }
     
     private func successStatus(status: RaffleStatusResponse) {
@@ -257,8 +259,8 @@ extension RaffleViewController: RaffleViewInput {
 
 extension RaffleViewController: RaffleCollectionViewCellDelegate {
     func didImageTapped(raffle: RaffleElement) {
-//        let asd = RaffleRouter()
-//        asd.goToPages(raffle: raffle)
+        let router = RaffleRouter()
+        router.goToPages(raffle: raffle)
     }
 }
 
