@@ -123,7 +123,7 @@ class RaffleSummaryCollectionViewCell: UICollectionViewCell {
                 mainText = pointCount == 0 ? raffle.detailTextNoAction : String(format: raffle.detailText, pointCount)
                 let periodEarnLimit = status.periodEarnLimit ?? 0
                 let periodEarnedPoints = status.periodEarnedPoints ?? 0
-                if periodEarnLimit - periodEarnedPoints == 0 {
+                if periodEarnLimit - periodEarnedPoints <= 0 {
                     actionButton.isHidden = true
                     infoLabel.isHidden = false
                     comeBackLabel.isHidden = false

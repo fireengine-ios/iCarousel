@@ -384,7 +384,7 @@ extension RaffleViewController {
                 if el.rawValue == value.earnType {
                     let periodEarnLimit = value.periodEarnLimit ?? 0
                     let periodEarnedPoints = value.periodEarnedPoints ?? 0
-                    if periodEarnLimit - periodEarnedPoints == 0 {
+                    if periodEarnLimit - periodEarnedPoints <= 0 {
                         period = RafflePeriod(rawValue: value.periodType ?? RafflePeriod.daily.rawValue) ?? RafflePeriod.daily
                         isHidden = false
                         oppacity = 0.2
