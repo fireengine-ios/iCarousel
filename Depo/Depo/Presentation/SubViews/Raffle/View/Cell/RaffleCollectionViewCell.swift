@@ -77,8 +77,10 @@ class RaffleCollectionViewCell: UICollectionViewCell {
         //nextDayLabel.isHidden = nextLabelIsHidden
         if nextLabelIsHidden { // hak var
             nextDayLabel.text = localized(.gamificationRaffleWin)
+            iconImage.isUserInteractionEnabled = true
         } else { //hak yok
             nextDayLabel.text = String(format: localized(.gamificationEventCompleted), period)
+            iconImage.isUserInteractionEnabled = false
         }
     }
     

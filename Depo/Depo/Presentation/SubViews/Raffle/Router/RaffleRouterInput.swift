@@ -10,5 +10,5 @@ import Foundation
 
 protocol RaffleRouterInput {
     func goToRaffleSummary(statusResponse: RaffleStatusResponse?)
-    func goToRaffleCondition(statusResponse: RaffleStatusResponse?)
+    func goToRaffleCondition(statusResponse: RaffleStatusResponse?, conditionImageUrl: String)
 }

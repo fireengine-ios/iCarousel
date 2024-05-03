@@ -34,7 +34,7 @@ extension RafflePresenter: RaffleViewOutput {
         router.goToRaffleSummary(statusResponse: statusResponse)
     }
     
-    func goToRaffleCondition(statusResponse: RaffleStatusResponse?) {
-        router.goToRaffleCondition(statusResponse: statusResponse)
+    func goToRaffleCondition(statusResponse: RaffleStatusResponse?, conditionImageUrl: String) {
+        router.goToRaffleCondition(statusResponse: statusResponse, conditionImageUrl: conditionImageUrl)
     }
 }

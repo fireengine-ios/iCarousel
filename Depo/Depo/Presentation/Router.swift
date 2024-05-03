@@ -1176,16 +1176,16 @@ class RouterVC: NSObject {
     }
     
     // MARK: - Raffle - Gamification
-    func raffle(id: Int, url: String, endDateText: String) -> RaffleViewController {
-        return RaffleInitializer.initializeViewController(id: id, url: url, endDateText: endDateText)
+    func raffle(id: Int, url: String, endDateText: String, conditionImageUrl: String) -> RaffleViewController {
+        return RaffleInitializer.initializeViewController(id: id, url: url, endDateText: endDateText, conditionImageUrl: conditionImageUrl)
     }
     
     func raffleSummary(statusResponse: RaffleStatusResponse?) -> RaffleSummaryViewController {
         return RaffleSummaryViewController(statusResponse: statusResponse)
     }
     
-    func raffleCondition(statusResponse: RaffleStatusResponse?) -> RaffleConditionViewController {
-        return RaffleConditionViewController(statusResponse: statusResponse)
+    func raffleCondition(statusResponse: RaffleStatusResponse?, conditionImageUrl: String) -> RaffleConditionViewController {
+        return RaffleConditionViewController(statusResponse: statusResponse, conditionImageUrl: conditionImageUrl)
     }
     
     // MARK: - Draw Campaign

@@ -46,6 +46,7 @@ final class RaffleCard: BaseCardView {
     private var pageTitle: String = ""
     private lazy var router = RouterVC()
     private var detailUrl: String = ""
+    private var conditionImageUrl: String = ""
     private var startDate: String = ""
     private var endDate: String = ""
     private var drawEndDateText: String = ""
@@ -84,6 +85,11 @@ final class RaffleCard: BaseCardView {
         if let endDate = cardObject?.details?["endDate"].number {
             self.endDate = dateString(from: endDate)
         }
+        
+        if let conditionImage = cardObject?.details?["extraData"]["conditionImage"].string {
+            self.conditionImageUrl = conditionImage
+        }
+        
         drawEndDateText = "\(localized(.gamificationRaffleDates)) \(startDate) - \(endDate)"
     }
     
@@ -98,12 +104,15 @@ final class RaffleCard: BaseCardView {
     }
     
     @IBAction private func onActionButton(_ sender: UIButton) {
-        let vc = router.raffle(id: id, url: detailUrl, endDateText: drawEndDateText)
-        router.pushViewController(viewController: vc, animated: false)
+        goToRafflePage()
     }
     
     @objc private func imageTapped() {
-        let vc = router.raffle(id: id, url: detailUrl, endDateText: drawEndDateText)
+        goToRafflePage()
+    }
+    
+    private func goToRafflePage() {
+        let vc = router.raffle(id: id, url: detailUrl, endDateText: drawEndDateText, conditionImageUrl: conditionImageUrl)
         router.pushViewController(viewController: vc, animated: false)
     }
     
