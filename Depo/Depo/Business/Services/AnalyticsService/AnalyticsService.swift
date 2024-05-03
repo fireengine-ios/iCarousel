@@ -124,6 +124,8 @@ final class AnalyticsService: NSObject {
         if let price = price, let currency = currency
         {
             event?.setRevenue(price, currency: currency)
+            let gapId = SingletonStorage.shared.accountInfo?.gapId ?? "0"
+            event?.addCallbackParameter("userId", value: gapId)
         }
         Adjust.trackEvent(event)
     }
