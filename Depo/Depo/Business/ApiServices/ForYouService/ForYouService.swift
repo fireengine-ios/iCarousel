@@ -150,6 +150,18 @@ final class ForYouService: BaseRequestService {
     }
     
     @discardableResult
+    func forYouWinterVideoTimeline(handler: @escaping (ResponseResult<WinterThemeVideoResponse>) -> Void) -> URLSessionTask? {
+        debugLog("forYouTimeline")
+        
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.winterThemedVideo)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
+    
+    @discardableResult
     func forYouSaveTimelineCard(with id: Int, handler: @escaping ResponseVoid) -> URLSessionTask? {
         let url = RouteRequests.saveDeleteTimeline(with: id)
         
