@@ -543,6 +543,7 @@ struct RouteRequests {
     static let forYouThrowbackDetail = "foryou/years-ago/%d"
     static let collageTemplate = baseUrl +/ "template/collages"
     static let timeline = baseUrl +/ "foryou/timeline"
+    static let winterThemedVideo = baseUrl +/ "foryou/timeline/themed"
     static func saveDeleteTimeline(with id: Int) -> URL {
         return timeline +/ String(id)
     }

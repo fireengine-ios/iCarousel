@@ -4841,6 +4841,14 @@
 		C328E9B42BB8B73700CA9A3D /* BestSceneSuccessPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39FD8AD2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib */; };
 		C328E9B82BB8B73800CA9A3D /* BestSceneSuccessPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39FD8AD2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib */; };
 		C328E9B92BB8B75000CA9A3D /* BestSceneSuccessPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39FD8AD2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib */; };
+		C35CF69E2BE6AE0B00821B02 /* ForYouWinterVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35CF69D2BE6AE0B00821B02 /* ForYouWinterVideoTableViewCell.swift */; };
+		C35CF69F2BE6AE0B00821B02 /* ForYouWinterVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35CF69D2BE6AE0B00821B02 /* ForYouWinterVideoTableViewCell.swift */; };
+		C35CF6A02BE6AE0B00821B02 /* ForYouWinterVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35CF69D2BE6AE0B00821B02 /* ForYouWinterVideoTableViewCell.swift */; };
+		C35CF6A12BE6AE0B00821B02 /* ForYouWinterVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35CF69D2BE6AE0B00821B02 /* ForYouWinterVideoTableViewCell.swift */; };
+		C35CF6A62BE6AEB200821B02 /* ForYouWinterVideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C35CF6A52BE6AEB200821B02 /* ForYouWinterVideoTableViewCell.xib */; };
+		C35CF6A72BE6AEB200821B02 /* ForYouWinterVideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C35CF6A52BE6AEB200821B02 /* ForYouWinterVideoTableViewCell.xib */; };
+		C35CF6A82BE6AEB200821B02 /* ForYouWinterVideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C35CF6A52BE6AEB200821B02 /* ForYouWinterVideoTableViewCell.xib */; };
+		C35CF6A92BE6AEB200821B02 /* ForYouWinterVideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C35CF6A52BE6AEB200821B02 /* ForYouWinterVideoTableViewCell.xib */; };
 		C39FD8AC2BA202660054DE13 /* BestSceneSuccessPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39FD8AB2BA202660054DE13 /* BestSceneSuccessPopUp.swift */; };
 		C39FD8AE2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39FD8AD2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib */; };
 		C4A38BA321EE1F4B00ECCCEA /* TransparentGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */; };
@@ -12579,6 +12587,8 @@
 		C328E99E2BB2086E00CA9A3D /* PhotoPrintVideoPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPrintVideoPopUp.swift; sourceTree = "<group>"; };
 		C328E9A62BB2088C00CA9A3D /* PhotoPrintVideoPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoPrintVideoPopUp.xib; sourceTree = "<group>"; };
 		C32DD0C129BDD14A38BEF0AA /* Pods-LifeTech_Billo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_Billo.debug.xcconfig"; path = "Target Support Files/Pods-LifeTech_Billo/Pods-LifeTech_Billo.debug.xcconfig"; sourceTree = "<group>"; };
+		C35CF69D2BE6AE0B00821B02 /* ForYouWinterVideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouWinterVideoTableViewCell.swift; sourceTree = "<group>"; };
+		C35CF6A52BE6AEB200821B02 /* ForYouWinterVideoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForYouWinterVideoTableViewCell.xib; sourceTree = "<group>"; };
 		C39FD8AB2BA202660054DE13 /* BestSceneSuccessPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSceneSuccessPopUp.swift; sourceTree = "<group>"; };
 		C39FD8AD2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BestSceneSuccessPopUp.xib; sourceTree = "<group>"; };
 		C3C2356B20B6DA1B00F3FB6D /* MPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MPush.framework; sourceTree = "<group>"; };
@@ -23709,6 +23719,8 @@
 				8944D6E12ABF0F5C0072742E /* ForYouPhotoPrintCollectionViewCell.xib */,
 				89B359302AD67A5E007920B7 /* ForYouTimelineTableViewCell.swift */,
 				89B359352AD67A77007920B7 /* ForYouTimelineTableViewCell.xib */,
+				C35CF69D2BE6AE0B00821B02 /* ForYouWinterVideoTableViewCell.swift */,
+				C35CF6A52BE6AEB200821B02 /* ForYouWinterVideoTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -24761,6 +24773,7 @@
 				98570AFD208F7558002CCEBA /* SpotlightViewController.xib in Resources */,
 				0708C7892677261100680ED6 /* PhotoPrintCard.xib in Resources */,
 				F028D79C2719C0FD00FF204D /* FileDescriptionView.xib in Resources */,
+				C35CF6A62BE6AEB200821B02 /* ForYouWinterVideoTableViewCell.xib in Resources */,
 				CF71471224B597AA00D83E60 /* ContactListMainView.xib in Resources */,
 				B5AB5B6721F9B01B003AABB4 /* DropboxAccountConnectionCell.xib in Resources */,
 				8C0E90471FDEBDFF00789C91 /* ActivityTimelineFileCell.xib in Resources */,
@@ -25300,6 +25313,7 @@
 				CE784E0522A685FB00662219 /* BasicCollectionMultiFileCell.xib in Resources */,
 				B55C970F2559353800623C5C /* PrivateShareLocalSuggestionsViewController.xib in Resources */,
 				CE784E0622A685FB00662219 /* DropboxAccountConnectionCell.xib in Resources */,
+				C35CF6A82BE6AEB200821B02 /* ForYouWinterVideoTableViewCell.xib in Resources */,
 				F04E5C4427EDAF9D00CAAEB5 /* LoginWithGooglePopup.xib in Resources */,
 				982319A824F3A1E700FD16E2 /* ColorCell.xib in Resources */,
 				CE784E0B22A685FB00662219 /* DarkPopUpController.xib in Resources */,
@@ -25518,6 +25532,7 @@
 				3A9C284026529C3900EFADE9 /* InvitationCampaignDetailView.xib in Resources */,
 				CF8B68D223CBC9D70021B021 /* LeavePremiumViewController.xib in Resources */,
 				52E6816F29C33E200023DADB /* InstaPickSmallPhotoCell.xib in Resources */,
+				C35CF6A72BE6AEB200821B02 /* ForYouWinterVideoTableViewCell.xib in Resources */,
 				CF8B68D323CBC9D70021B021 /* FreeAppSpaceViewCotroller.xib in Resources */,
 				CF8B68D823CBC9D70021B021 /* PVViewerController.xib in Resources */,
 				F028C0FC2789E022005CE6AF /* PublicShareViewController.xib in Resources */,
@@ -26137,6 +26152,7 @@
 				3A9C284326529C3900EFADE9 /* InvitationCampaignDetailView.xib in Resources */,
 				CF8B71D323CBCA280021B021 /* DarkPopUpController.xib in Resources */,
 				F04E5C4527EDAF9D00CAAEB5 /* LoginWithGooglePopup.xib in Resources */,
+				C35CF6A92BE6AEB200821B02 /* ForYouWinterVideoTableViewCell.xib in Resources */,
 				CF8B71DA23CBCA280021B021 /* ActivityTimelineFileCell.xib in Resources */,
 				982319D924F3A1E700FD16E2 /* AdjustmentCategoryCell.xib in Resources */,
 				CF38A853257532590000994F /* PrivateShareDurationCell.xib in Resources */,
@@ -27657,6 +27673,7 @@
 				8C0E8CC81FDEBDFF00789C91 /* CreateStoryResponse.swift in Sources */,
 				8C0E8CC91FDEBDFF00789C91 /* UserProfileInteractor.swift in Sources */,
 				8C0E8CCA1FDEBDFF00789C91 /* HomePagePresenter.swift in Sources */,
+				C35CF69E2BE6AE0B00821B02 /* ForYouWinterVideoTableViewCell.swift in Sources */,
 				734CA113244D64000076F6A7 /* DocumentsAlbumCard.swift in Sources */,
 				F028C0E42789DE43005CE6AF /* PublicShareConfigurator.swift in Sources */,
 				8C0E8CCB1FDEBDFF00789C91 /* SearchViewInteractor.swift in Sources */,
@@ -30258,6 +30275,7 @@
 				98BE78B224517E4300B8864F /* SnackbarManager.swift in Sources */,
 				CE78493422A685FB00662219 /* BaseMediaContent.swift in Sources */,
 				07E7A6872859FBF5005BBD4C /* AlertFilesAction.swift in Sources */,
+				C35CF6A02BE6AE0B00821B02 /* ForYouWinterVideoTableViewCell.swift in Sources */,
 				CE78493522A685FB00662219 /* AuthenticationServiceResponseError.swift in Sources */,
 				07D42137274E4D0800061EA2 /* ItemAnnotation.swift in Sources */,
 				F09279A62886CA4400874ADD /* AlertFilesCancelView.swift in Sources */,
@@ -33153,6 +33171,7 @@
 				076BD1AD27BBBE2A004609E3 /* MapSearchViewController.swift in Sources */,
 				CF8B674423CBC9D70021B021 /* PasscodeInputView.swift in Sources */,
 				CF8B674523CBC9D70021B021 /* SettingsModuleInput.swift in Sources */,
+				C35CF69F2BE6AE0B00821B02 /* ForYouWinterVideoTableViewCell.swift in Sources */,
 				CF8B674623CBC9D70021B021 /* CreateStoryAudioSelectionItemDesigner.swift in Sources */,
 				0708C7842677261100680ED6 /* PhotoPrintCard.swift in Sources */,
 				CF8B674723CBC9D70021B021 /* SettingsPresenter.swift in Sources */,
@@ -34279,6 +34298,7 @@
 				CF8B6CD123CBCA280021B021 /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */,
 				CF8B6CD223CBCA280021B021 /* AutoSyncConfigurator.swift in Sources */,
 				CF8B6CD323CBCA280021B021 /* WrapperedItems.swift in Sources */,
+				C35CF6A12BE6AE0B00821B02 /* ForYouWinterVideoTableViewCell.swift in Sources */,
 				CF7146F824B597A900D83E60 /* ContactListViewController.swift in Sources */,
 				CF7B1E59256B3DD400BAF566 /* PrivateShareSliderFilesCollectionManager.swift in Sources */,
 				F01C14CF28FB47C200F5D380 /* ForYouCardsCollectionViewCell.swift in Sources */,

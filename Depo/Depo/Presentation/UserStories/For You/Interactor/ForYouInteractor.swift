@@ -320,6 +320,24 @@ final class ForYouInteractor {
             }
         }
     }
+    
+    private func getWinterVideoTimeline() {
+        debugLog("ForYou getTimeline")
+        group.enter()
+
+        service.forYouWinterVideoTimeline() { [weak self] result in
+            self?.group.leave()
+
+            switch result {
+            case .success(let response):
+                self?.output.getWinterVideoTimelineData(data: response)
+            case .failed(let error):
+                self?.output.setTimelineNilForError()
+                debugLog("ForYou Error getTimeline: \(error.errorCode)-\(String(describing: error.description))")
+                break
+            }
+        }
+    }
 }
 
 extension ForYouInteractor: ForYouInteractorInput {
@@ -328,6 +346,7 @@ extension ForYouInteractor: ForYouInteractorInput {
         if timelineEnable {
             getTimeline()
         }
+        getWinterVideoTimeline()
         getThrowbacks()
         getThings()
         getPlaces()
@@ -427,6 +446,8 @@ extension ForYouInteractor: ForYouInteractorInput {
             getPrintedPhotos()
         case .timeline:
             getTimeline()
+        case .winterVideotimeline:
+            getWinterVideoTimeline()
         }
         
         group.notify(queue: .main) {

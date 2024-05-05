@@ -29,7 +29,8 @@ final class ForYouPresenter: BasePresenter, ForYouModuleInput {
     private lazy var albumCardsData: [HomeCardResponse] = []
     private lazy var animationCardsData: [HomeCardResponse] = []
     private lazy var throwbackData: [ThrowbackData] = []
-    private var timelineData: TimelineResponse?
+//    private var timelineData: TimelineResponse?
+    private var timelineData: WinterThemeVideoResponse?
     
     func viewIsReady() {
         interactor.viewIsReady()
@@ -141,6 +142,8 @@ extension ForYouPresenter: ForYouViewOutput {
             return 370
         case .timeline:
             return timelineData != nil ? 400 : 0
+        case .winterVideotimeline:
+            return timelineData != nil ? 400 : 0
         }
     }
     
@@ -179,6 +182,8 @@ extension ForYouPresenter: ForYouViewOutput {
         case .printedPhotos:
             return printedPhotosData
         case .timeline:
+            return timelineData
+        case .winterVideotimeline:
             return timelineData
         }
     }
@@ -275,6 +280,10 @@ extension ForYouPresenter: ForYouInteractorOutput {
     }
     
     func getTimelineData(data: TimelineResponse) {
+//        self.timelineData = data
+    }
+    
+    func getWinterVideoTimelineData(data: WinterThemeVideoResponse) {
         self.timelineData = data
     }
     
