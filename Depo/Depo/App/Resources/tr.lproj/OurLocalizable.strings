@@ -2386,7 +2386,6 @@ then {11,99 TRY/Month}*/
 "gamification_raffle_summary" = "Çekiliş Özeti";
 "gamification_event_not_trigerred" = "Henüz bu kullanımdan çekiliş hakkı kazanmadın. Hemen dene!";
 "gamification_event_trigger_count" = "%d Adet Çekiliş Hakkı Kazandın.";
-"gamification_event_completed" = "";
 "gamification_event_completed" = "Bu %@ hakkını tamamladın.";
 "gamification_total_count" = "Toplam %d Çekiliş Hakkı Kazandın.";
 "gamification_campaign_conditions" = "Kampanya Detayları";

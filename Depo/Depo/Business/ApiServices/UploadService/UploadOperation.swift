@@ -62,14 +62,12 @@ final class UploadOperation: Operation {
     }
     private var isCollage: Bool = false
     private var isPhotoPrint: Bool = false
-    private var isAnimation: Bool = false
-    private var isScreenShot: Bool = false
     
     private lazy var storageVars: StorageVars = factory.resolve()
     
     //MARK: - Init
     
-    init(item: WrapData, uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, projectId: String? = nil, isCollage: Bool = false, isPhotoPrint: Bool = false, isScreenShot: Bool = false, isAnimation: Bool = false, handler: @escaping UploadOperationHandler) {
+    init(item: WrapData, uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, projectId: String? = nil, isCollage: Bool = false, isPhotoPrint: Bool = false, handler: @escaping UploadOperationHandler) {
         self.inputItem = item
         self.uploadType = uploadType
         self.uploadTo = uploadTo
@@ -82,8 +80,6 @@ final class UploadOperation: Operation {
         self.isPhotoAlbum = isFromAlbum
         self.isCollage = isCollage
         self.isPhotoPrint = isPhotoPrint
-        self.isAnimation = isAnimation
-        self.isScreenShot = isScreenShot
         
         if uploadType != .sharedWithMe {
             if item.fileType.isContained(in: [.video]), resumableInfoService.isResumableUploadAllowed(with: item.fileSize.intValue) {
@@ -490,9 +486,7 @@ final class UploadOperation: Operation {
                                                uploadType: self.uploadType,
                                                isCollage: self.isCollage,
                                                isPhotoPrint: self.isPhotoPrint,
-                                               isFromAlbum: self.isPhotoAlbum,
-                                               isAnimation: self.isAnimation,
-                                               isScreenShot: self.isScreenShot)
+                                               isFromAlbum: self.isPhotoAlbum)
             }
             
             success(parameters)
