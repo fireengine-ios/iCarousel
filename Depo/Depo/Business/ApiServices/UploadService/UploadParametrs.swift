@@ -28,8 +28,6 @@ class SimpleUpload: UploadRequestParametrs {
     private let isCollage: Bool
     private let isPhotoPrint: Bool
     private let isFromAlbum: Bool
-    private var isScreenShot: Bool
-    private var isAnimation: Bool
     
     let rootFolder: String
     let uploadType: UploadType?
@@ -68,11 +66,11 @@ class SimpleUpload: UploadRequestParametrs {
     
     let tmpUUID: String
     
-    static func with(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?, isCollage: Bool, isPhotoPrint: Bool, isFromAlbum: Bool, isAnimation: Bool, isScreenShot: Bool) -> SimpleUpload {
-        return SimpleUpload(item: item, destitantion: destitantion, uploadStategy: uploadStategy, uploadTo: uploadTo, rootFolder: rootFolder, isFavorite: isFavorite, uploadType: uploadType, isCollage: isCollage, isPhotoPrint: isPhotoPrint, isFromAlbum: isFromAlbum, isAnimation: isAnimation, isScreenShot: isScreenShot)
+    static func with(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?, isCollage: Bool, isPhotoPrint: Bool, isFromAlbum: Bool) -> SimpleUpload {
+        return SimpleUpload(item: item, destitantion: destitantion, uploadStategy: uploadStategy, uploadTo: uploadTo, rootFolder: rootFolder, isFavorite: isFavorite, uploadType: uploadType, isCollage: isCollage, isPhotoPrint: isPhotoPrint, isFromAlbum: isFromAlbum)
     }
     
-    private init(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?, isCollage: Bool, isPhotoPrint: Bool, isFromAlbum: Bool, isAnimation: Bool, isScreenShot: Bool) {
+    private init(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?, isCollage: Bool, isPhotoPrint: Bool, isFromAlbum: Bool) {
         
         self.item = item
         self.uploadType = uploadType
@@ -84,8 +82,6 @@ class SimpleUpload: UploadRequestParametrs {
         self.isCollage = isCollage
         self.isPhotoPrint = isPhotoPrint
         self.isFromAlbum = isFromAlbum
-        self.isAnimation = isAnimation
-        self.isScreenShot = isScreenShot
         
         switch uploadType {
             case .save:
@@ -166,21 +162,18 @@ class SimpleUpload: UploadRequestParametrs {
                 HeaderConstant.XObjectMetaTakenDate: String(milliseconds)
             ]
         }
-        
-        if isScreenShot {
-            print("😎 isScreenShot", isScreenShot)
-            header = header + [
+      
+        if item.asset?.mediaSubtypes == .photoScreenshot {
+              header = header + [
                 HeaderConstant.XObjectMetaFolderLabel: "SCREENSHOTS"
-            ]
-        }
+              ]
+            }
         
-        if isAnimation {
-            print("😎 isAnimation", isAnimation)
-
-            header = header + [
+            if item.asset?.playbackStyle == .imageAnimated {
+              header = header + [
                 HeaderConstant.XObjectMetaFolderLabel: "ANIMATIONS"
-            ]
-        }
+              ]
+            }
 
         return header
     }
