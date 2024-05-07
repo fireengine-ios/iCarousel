@@ -34,15 +34,30 @@ enum RaffleElement: String, Codable {
     var title: String {
         switch self {
         case .login: return TextConstants.loginTitle
-        case .purchasePackage: return localized(.gamificationPackageRule)
-        case .photopick: return TextConstants.myStreamInstaPickTitle
-        case .createCollage: return localized(.createCollageLabel)
-        case .photoPrint: return localized(.photoPrint)
-        case .createStory: return TextConstants.createStory
-        case .createAlbum: return TextConstants.createAlbum
-        case .faceImage: return "Face Image"
-        case .fotoVideoUpload: return "Foto Video Upload"
-        case .inviteSignup: return "Invite Signup"
+        case .purchasePackage: return localized(.gamificationTitleBuy)
+        case .photopick: return localized(.gamificationTitlePhotopick)
+        case .createCollage: return localized(.gamificationTitleCreateCollage)
+        case .photoPrint: return localized(.gamificationTitlePrint)
+        case .createStory: return localized(.gamificationTitleCreateStory)
+        case .createAlbum: return localized(.gamificationTitleCreateAlbum)
+        case .faceImage: return localized(.gamificationTitleActFaceimage)
+        case .fotoVideoUpload: return localized(.gamificationTitleUpload)
+        case .inviteSignup: return localized(.gamificationTitleInvite)
+        }
+    }
+    
+    var buttonTitle: String {
+        switch self {
+        case .login: return TextConstants.loginTitle
+        case .purchasePackage: return localized(.gamificationBuy)
+        case .photopick: return localized(.gamificationPhotopick)
+        case .createCollage: return localized(.gamificationCreateCollage)
+        case .photoPrint: return localized(.gamificationPrint)
+        case .createStory: return localized(.gamificationCreateStory)
+        case .createAlbum: return localized(.gamificationCreateAlbum)
+        case .faceImage: return localized(.gamificationActFaceimage)
+        case .fotoVideoUpload: return localized(.gamificationUpload)
+        case .inviteSignup: return localized(.gamificationInvite)
         }
     }
     
@@ -54,8 +69,8 @@ enum RaffleElement: String, Codable {
         case .createCollage: return Image.raffleCreateCollage.image
         case .photoPrint: return Image.rafflePhotoPrint.image
         case .createStory: return Image.raffleCreateStory.image
-        case .createAlbum: return Image.raffleCreateStory.image
-        case .faceImage: return Image.raffleCreateStory.image
+        case .createAlbum: return Image.raffleCreateAlbum.image
+        case .faceImage: return Image.raffleFaceImage.image
         case .fotoVideoUpload: return Image.raffleUploadPhotos.image
         case .inviteSignup: return Image.raffleCreateStory.image
         }
@@ -384,7 +399,9 @@ extension RaffleViewController {
                 if el.rawValue == value.earnType {
                     let periodEarnLimit = value.periodEarnLimit ?? 0
                     let periodEarnedPoints = value.periodEarnedPoints ?? 0
-                    if periodEarnLimit - periodEarnedPoints <= 0 {
+                    let totalEarnLimit = value.totalEarnLimit ?? 0
+                    let totalPointsEarnedRule = value.totalPointsEarnedRule ?? 0
+                    if periodEarnLimit - periodEarnedPoints <= 0 || totalEarnLimit == totalPointsEarnedRule {
                         period = RafflePeriod(rawValue: value.periodType ?? RafflePeriod.daily.rawValue) ?? RafflePeriod.daily
                         isHidden = false
                         oppacity = 0.2

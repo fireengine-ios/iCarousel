@@ -111,7 +111,7 @@ class RaffleSummaryCollectionViewCell: UICollectionViewCell {
         iconImage.image = raffle.icon
         titleLabel.text = raffle.title
         iconImage.layer.opacity = imageOppacity
-        actionButton.setTitle(raffle.title, for: .normal)
+        actionButton.setTitle(raffle.buttonTitle, for: .normal)
         infoLabel.text = raffle.infoLabelText
         
         var mainText: String = ""
@@ -123,7 +123,9 @@ class RaffleSummaryCollectionViewCell: UICollectionViewCell {
                 mainText = pointCount == 0 ? raffle.detailTextNoAction : String(format: raffle.detailText, pointCount)
                 let periodEarnLimit = status.periodEarnLimit ?? 0
                 let periodEarnedPoints = status.periodEarnedPoints ?? 0
-                if periodEarnLimit - periodEarnedPoints <= 0 {
+                let totalEarnLimit = status.totalEarnLimit ?? 0
+                let totalPointsEarnedRule = status.totalPointsEarnedRule ?? 0
+                if periodEarnLimit - periodEarnedPoints <= 0 || totalEarnLimit == totalPointsEarnedRule {
                     actionButton.isHidden = true
                     infoLabel.isHidden = false
                     comeBackLabel.isHidden = false

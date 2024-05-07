@@ -271,4 +271,6 @@ enum Image: String, AppImage {
     case rafflePhotoPrint
     case rafflePurchasePackage
     case raffleUploadPhotos
+    case raffleCreateAlbum
+    case raffleFaceImage
 }
