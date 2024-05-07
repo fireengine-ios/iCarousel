@@ -311,8 +311,6 @@ extension PhotoVideoCell {
     
     /// not working for cell update (become favorite)
     override func prepareForReuse() {
-        
-        resetImage()
     }
     
     func setProgressForObject(progress: Float) {
