@@ -88,9 +88,9 @@ final class AutoSyncDataSource: NSObject {
     
     private func setupDefaultState() {
 //      if selected albums autosync, delete comment
-        models = [AutoSyncHeaderModel(type: .autosync, setting: nil, isSelected: true),
-                  AutoSyncHeaderModel(type: .albums, setting: nil, isSelected: false)]
-        //models = [AutoSyncHeaderModel(type: .autosync, setting: nil, isSelected: true)]
+//        models = [AutoSyncHeaderModel(type: .autosync, setting: nil, isSelected: true),
+//                  AutoSyncHeaderModel(type: .albums, setting: nil, isSelected: false)]
+        models = [AutoSyncHeaderModel(type: .autosync, setting: nil, isSelected: true)]
         tableView.reloadData()
     }
     
@@ -132,10 +132,10 @@ final class AutoSyncDataSource: NSObject {
     func forceDisableAutoSync() {
         autoSyncSetting.isAutoSyncOptionEnabled = false
         //if selected albums autosync, delete comment
-        models = [AutoSyncHeaderModel(type: .autosync, setting: nil, isSelected: false),
-                  AutoSyncHeaderModel(type: .albums, setting: nil, isSelected: false)]
+//        models = [AutoSyncHeaderModel(type: .autosync, setting: nil, isSelected: false),
+//                  AutoSyncHeaderModel(type: .albums, setting: nil, isSelected: false)]
         
-        //models = [AutoSyncHeaderModel(type: .autosync, setting: nil, isSelected: false)]
+        models = [AutoSyncHeaderModel(type: .autosync, setting: nil, isSelected: false)]
         
         tableView.reloadData()
     }

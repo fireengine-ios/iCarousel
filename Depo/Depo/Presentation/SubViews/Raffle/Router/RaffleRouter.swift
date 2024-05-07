@@ -35,8 +35,18 @@ class RaffleRouter: RaffleRouterInput {
             let vc = router.createCollage()
             router.pushViewController(viewController: vc)
         case .photoPrint:
-            let vc = router.photoPrintSelectPhotos()
-            router.pushViewController(viewController: vc)
+            let isHavePrintPackage = SingletonStorage.shared.accountInfo?.photoPrintPackage ?? false
+            let sendRemaining = SingletonStorage.shared.accountInfo?.photoPrintSendRemaining ?? 0
+            if !isHavePrintPackage {
+                let vc = PhotoPrintNoPackagePopup.with()
+                vc.open()
+            } else if sendRemaining == 0 {
+                let vc = PhotoPrintNoRightPopup.with()
+                vc.open()
+            } else {
+                let vc = router.photoPrintSelectPhotos(popupShowing: true)
+                router.pushViewController(viewController: vc, animated: false)
+            }
         case .createStory:
             let controller = router.createStory(navTitle: TextConstants.createStory)
             router.pushViewController(viewController: controller)
