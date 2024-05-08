@@ -530,6 +530,9 @@ enum GAEventLabel {
     case discoverCampaignCard(campaignId: Int)
     case discoverCampaignPackage(campaignId: Int)
     case discoverCampaignApply(campaignId: Int)
+    case gamification
+    case gamificationOnSummary
+    case gamificationEvent(RaffleElement)
     
     var text: String {
         switch self {
@@ -789,7 +792,6 @@ enum GAEventLabel {
             return "Delete My Account"
         case .deleteAccount:
             return "Delete Account"
-
         //
         case .impression:
             return "Impression"
@@ -805,6 +807,12 @@ enum GAEventLabel {
             return "mt_packages_\(campaignId)"
         case .discoverCampaignApply(let campaignId):
             return "mt_join_\(campaignId)"
+        case .gamification:
+            return "g_discover"
+        case .gamificationOnSummary:
+            return "g_summary"
+        case .gamificationEvent(let element):
+            return "g_\(element.rawValue)"
         }
     }
     

@@ -11,6 +11,7 @@ import Foundation
 class RaffleRouter: RaffleRouterInput {
 
     let router = RouterVC()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     func goToRaffleSummary(statusResponse: RaffleStatusResponse?) {
         let vc = router.raffleSummary(statusResponse: statusResponse)
@@ -23,6 +24,7 @@ class RaffleRouter: RaffleRouterInput {
     }
     
     func goToPages(raffle: RaffleElement) {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .gamificationEvent(raffle))
         switch raffle {
         case .login:
             print("aaaaaaaaaaaa login")
