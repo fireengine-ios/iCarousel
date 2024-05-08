@@ -164,16 +164,22 @@ class SimpleUpload: UploadRequestParametrs {
         }
       
         if item.asset?.mediaSubtypes == .photoScreenshot {
-              header = header + [
+            header = header + [
                 HeaderConstant.XObjectMetaFolderLabel: "SCREENSHOTS"
-              ]
-            }
+            ]
+        }
         
-            if item.asset?.playbackStyle == .imageAnimated {
-              header = header + [
+        if item.asset?.playbackStyle == .imageAnimated {
+            header = header + [
                 HeaderConstant.XObjectMetaFolderLabel: "ANIMATIONS"
-              ]
-            }
+            ]
+        }
+        
+//        if item.asset?.mediaSubtypes == .photoPanorama {
+//          header = header + [
+//            HeaderConstant.XObjectMetaFolderLabel: ""
+//          ]
+//        }
 
         return header
     }

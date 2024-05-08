@@ -138,9 +138,11 @@ final class HomePageViewController: BaseViewController {
     }
     
     @objc func reloadData() {
-        showSpinner()
-        refreshControl.endRefreshing()
-        output.needRefresh()
+        DispatchQueue.main.async {
+            self.showSpinner()
+            self.refreshControl.endRefreshing()
+            self.output.needRefresh()
+        }
     }
     
     //MARK: Utility Methods(private)

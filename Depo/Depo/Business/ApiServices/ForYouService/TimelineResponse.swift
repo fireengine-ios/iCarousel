@@ -73,7 +73,7 @@ struct Details: Codable {
     let tempDownloadURL: String?
     let contentType: String?
     let metadata: Metadata?
-    let album: [JSONAny]
+    let album: [JSONAny]?
     let location: Location?
 
     enum CodingKeys: String, CodingKey {
