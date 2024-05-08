@@ -50,6 +50,7 @@ final class RaffleCard: BaseCardView {
     private var startDate: String = ""
     private var endDate: String = ""
     private var drawEndDateText: String = ""
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     override func set(object: HomeCardResponse?) {
         super.set(object: object)
@@ -112,6 +113,7 @@ final class RaffleCard: BaseCardView {
     }
     
     private func goToRafflePage() {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .gamification)
         let vc = router.raffle(id: id, url: detailUrl, endDateText: drawEndDateText, conditionImageUrl: conditionImageUrl)
         router.pushViewController(viewController: vc, animated: false)
     }

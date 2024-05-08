@@ -215,6 +215,7 @@ final class RaffleViewController: BaseViewController {
     private var nextDayIsHidden: [Bool] = []
     private var rafflePeriod: [String] = []
     private var endDateText: String = ""
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     init(id: Int, url: String, endDateText: String, conditionImageUrl: String) {
         self.id = id
@@ -239,6 +240,7 @@ final class RaffleViewController: BaseViewController {
     }
     
     @objc private func summaryButtonTapped() {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .gamificationOnSummary)
         output.goToRaffleSummary(statusResponse: statusResponse)
     }
     
