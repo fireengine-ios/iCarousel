@@ -142,8 +142,6 @@ extension ForYouPresenter: ForYouViewOutput {
             return 370
         case .timeline:
             return timelineData != nil ? 400 : 0
-        case .winterVideotimeline:
-            return timelineData != nil ? 400 : 0
         }
     }
     
@@ -182,8 +180,6 @@ extension ForYouPresenter: ForYouViewOutput {
         case .printedPhotos:
             return printedPhotosData
         case .timeline:
-            return timelineData
-        case .winterVideotimeline:
             return timelineData
         }
     }

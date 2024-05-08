@@ -11,7 +11,6 @@ import Foundation
 enum ForYouSections: CaseIterable {
     /// this enum is sorted in the same order as the For You  screen.
     case timeline
-    case winterVideotimeline
     case faceImage
     case people
     case throwback
@@ -48,7 +47,6 @@ enum ForYouSections: CaseIterable {
         case .albumCards: return TextConstants.myStreamAlbumsTitle
         case .printedPhotos: return localized(.printedPhotoCardTitle)
         case .timeline: return localized(.printedPhotoCardTitle)
-        case .winterVideotimeline: return localized(.printedPhotoCardTitle)
         }
     }
     

@@ -22,14 +22,22 @@ final class PlayerThreeDotMenuManager {
         self.delegate = delegate
     }
     
+//    func showActions(sender: Any?, item: WrapData, isSaved: Bool) {
+//        var elementTypes: [ElementTypes] = []
+//        if isSaved {
+//            elementTypes.append(.download)
+//            elementTypes.append(.share)
+//        } else {
+//            elementTypes.append(.delete)
+//        }
+//        alert.showVideoPlayer(with: elementTypes, for: item, presentedBy: sender, onSourceView: nil, viewController: nil)
+//    }
+    
     func showActions(sender: Any?, item: WrapData, isSaved: Bool) {
         var elementTypes: [ElementTypes] = []
-        if isSaved {
-            elementTypes.append(.download)
-            elementTypes.append(.share)
-        } else {
-            elementTypes.append(.delete)
-        }
+        
+        elementTypes.append(.delete)
+        
         alert.showVideoPlayer(with: elementTypes, for: item, presentedBy: sender, onSourceView: nil, viewController: nil)
     }
 }
