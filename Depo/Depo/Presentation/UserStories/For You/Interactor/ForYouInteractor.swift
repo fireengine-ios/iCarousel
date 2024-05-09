@@ -446,7 +446,6 @@ extension ForYouInteractor: ForYouInteractorInput {
             getPrintedPhotos()
         case .timeline:
             getTimeline()
-        case .winterVideotimeline:
             getWinterVideoTimeline()
         }
         
