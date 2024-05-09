@@ -228,7 +228,7 @@ final class WinterVideoNewAvPlayerViewController: AVPlayerViewController {
         let item = WrapData(timelineResponse: timelineResponse!)
         self.item = item
         let isSaved = timelineResponse?.saved ?? false
-        threeDotMenuManager.showActions(sender: sender, item: item, isSaved: isSaved)
+        threeDotMenuManager.showWinterVideoActions(sender: sender, item: item, isSaved: isSaved)
     }
     
     @objc private func onBackPressed() {
