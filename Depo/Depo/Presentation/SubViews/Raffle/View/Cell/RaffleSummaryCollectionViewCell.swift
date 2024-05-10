@@ -184,7 +184,7 @@ extension RaffleSummaryCollectionViewCell {
         
         addSubview(infoView)
         infoView.translatesAutoresizingMaskIntoConstraints = false
-        infoView.topAnchor.constraint(equalTo: summaryLabel.bottomAnchor, constant: 20).activate()
+        //infoView.topAnchor.constraint(equalTo: summaryLabel.bottomAnchor, constant: 20).activate()
         infoView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).activate()
         infoView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).activate()
         infoView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).activate()
