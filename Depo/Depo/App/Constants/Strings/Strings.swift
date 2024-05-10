@@ -216,6 +216,7 @@ enum Strings: String, Localizable {
     case becomePremiumBannerDesc = "mystorage_become_premium"
     case timelineHeader = "timeline_header"
     case timelineDescription = "timeline_description"
+    case winterVideoTimelineHeader = "winter_video_timeline_header"
     
     case trashBin = "trash_bin"
     

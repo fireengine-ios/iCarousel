@@ -60,7 +60,7 @@ struct TimelineResponse: Codable {
 struct WinterThemeVideoResponse: Codable {
     let id: Int?
     let title, description: String?
-    let saved: Bool?
+    var saved: Bool?
     let details: Details?
 
 // MARK: - Details

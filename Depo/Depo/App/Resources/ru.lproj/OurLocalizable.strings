@@ -2142,7 +2142,7 @@ then {11,99 TRY/Month}*/
 "printed_package_view" = "Посмотреть мои пакеты печати.";
 "more_photo_right" = "У вас есть еще %d фотографий для отправки. Вы уверены, что хотите продолжить?";
 "no_more_photo_right" = "Вы выбрали более %d фотографий. Уменьшите, чтобы продолжить.";
-"timeline_header" = "Лучшие воспоминания 2023 года";
+"timeline_header" = "Ваши Самые Яркие Зимние Воспоминания";
 
 /*Fuzzy*/
 "timeline_description" = "Мы собрали для вас самые прекрасные моменты года 2023. Откройте их для себя прямо сейчас.";
@@ -2332,3 +2332,5 @@ then {11,99 TRY/Month}*/
 "gamification_title_invite" = "";
 "gamification_title_createstory" = "";
 "gamification_title_createalbum" = "";
+"timeline_header_backup" = "Лучшие воспоминания 2023 года";
+"winter_video_timeline_header" = "";

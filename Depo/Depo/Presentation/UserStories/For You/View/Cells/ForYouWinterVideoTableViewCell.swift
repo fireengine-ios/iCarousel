@@ -107,23 +107,30 @@ class ForYouWinterVideoTableViewCell: UITableViewCell {
     }
     
     func configure(with item: WinterThemeVideoResponse?) {
-//        saveButton.setTitle(item?.saved ?? false ? TextConstants.tabBarShareLabel : TextConstants.save, for: .normal)
+        
+        if let urlString = item?.details?.tempDownloadURL, let url = URL(string: urlString) {
+            self.videoUrl = url
+        } else {
+            debugPrint("⚠️ url is nil")
+        }
+        
+        saveButton.setTitle(item?.saved ?? false ? TextConstants.tabBarShareLabel : TextConstants.save, for: .normal)
         self.winterVideoResponse = item
         
         let year = dateConverter(epochTimeInMilliseconds: UInt64(item?.details?.createdDate ?? 0))
         titleLabel.text = item?.title
         descriptionLabel.text = item?.description
         
-//        type = item?.saved ?? false ? .display : .save
-//        switch type {
-//        case .display:
-//            saveButton.setTitle(TextConstants.homeLikeFilterViewPhoto, for: .normal)
-//            shareButton.setTitle(TextConstants.tabBarShareLabel, for: .normal)
-//            shareButton.isHidden = true //change to false if needed
-//        case .save:
+        type = item?.saved ?? false ? .display : .save
+        switch type {
+        case .display:
+            saveButton.setTitle(TextConstants.homeLikeFilterViewPhoto, for: .normal)
+            shareButton.setTitle(TextConstants.tabBarShareLabel, for: .normal)
+            shareButton.isHidden = false
+        case .save:
             saveButton.setTitle(TextConstants.save, for: .normal)
-//            shareButton.isHidden = true
-//        }
+            shareButton.isHidden = true
+        }
         
         guard let url = URL(string: item?.details?.metadata?.thumbnailMedium ?? "") else {
             return
@@ -146,12 +153,14 @@ class ForYouWinterVideoTableViewCell: UITableViewCell {
     
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-//        switch type {
-//        case .display:
-//            showTimelineVideo()
-//        case .save:
-            delegate?.saveTimelineCard(id: winterVideoResponse?.id ?? 0)
-//        }
+        switch type {
+        case .display:
+            showTimelineVideo()
+        case .save:
+        delegate?.saveTimelineCard(id: winterVideoResponse?.id ?? 0)
+        winterVideoResponse?.saved = true
+        configure(with: winterVideoResponse)
+        }
     }
     
     @IBAction func shareButtonTapped(_ sender: Any) {
@@ -161,7 +170,8 @@ class ForYouWinterVideoTableViewCell: UITableViewCell {
     
     private func showTimelineVideo() {
         guard let videoUrl = videoUrl else {
-            assertionFailure()
+            debugPrint("⚠️", videoUrl ?? "")
+//            assertionFailure()
             return
         }
         let player = AVPlayer(url: videoUrl)
