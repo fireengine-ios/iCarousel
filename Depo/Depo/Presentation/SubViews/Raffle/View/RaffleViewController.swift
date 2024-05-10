@@ -28,7 +28,7 @@ enum RaffleElement: String, Codable {
     case createStory = "CREATE_STORY"
     case createAlbum = "CREATE_ALBUM"
     case faceImage = "FACE_IMAGE"
-    case fotoVideoUpload = "FOTO_VIDEO_UPLOAD"
+    case fotoVideoUpload = "PHOTO_VIDEO_UPLOAD"
     case inviteSignup = "INVITE_SIGNUP"
     
     var title: String {
