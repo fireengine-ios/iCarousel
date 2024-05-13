@@ -122,7 +122,7 @@ extension HomePagePresenter: HomePageInteractorOutput {
         self.cards = self.cards.sorted { $0.order < $1.order }
     }
 
-    func didObtainHomeCardsBestScene(_ bestSceneCard: HomeCardResponse, imageUrls: [String], createdDate: Int, groupId: [Int]) {
+    func didObtainHomeCardsBestScene(_ bestSceneCard: HomeCardResponse, imageUrls: [String], createdDate: [Int], groupId: [Int]) {
         bestSceneCards = [bestSceneCard]
         userDefaultsVars.imageUrlsForBestScene = imageUrls
         userDefaultsVars.dateForBestScene = createdDate
