@@ -508,9 +508,10 @@ extension ForYouInteractor: ForYouInteractorInput {
         
         service.forYouSaveTimelineCard(with: id, handler: { [weak self] result in
             switch result {
-            case .success(_):
+            case .success():
                 self?.output.saveTimelineCardSuccess(section: .timeline)
             case .failed(let error):
+                print("⚠️", error.localizedDescription)
                 if error.isOutOfSpaceError {
                     self?.output.saveCardFailedFullQuota(section: .timeline)
                 } else {

@@ -2171,7 +2171,7 @@ then {11,99 TRY/Month}*/
 "printed_package_view" = "Shiko paketat e mia të printimit.";
 "more_photo_right" = "Ju keni më shumë se %d dorëzim fotografie. A jeni i sigurt që doni të vazhdoni?";
 "no_more_photo_right" = "Ju keni zgjedhur më shumë se fotot %d. Redukto për të vazhduar.";
-"timeline_header" = "Kujtimet Më të Mira Të Vitit 2023";
+"timeline_header" = "Kujtimet Tuaja Më Të Gjalla Të Dimrit";
 
 /*Fuzzy*/
 "timeline_description" = "Ne kemi përpiluar kujtimet më të mira të 2023 për ju. Zbuloni ato tani.";
@@ -2361,3 +2361,5 @@ then {11,99 TRY/Month}*/
 "gamification_title_invite" = "";
 "gamification_title_createstory" = "";
 "gamification_title_createalbum" = "";
+"timeline_header_backup" = "Kujtimet Më të Mira Të Vitit 2023";
+"winter_video_timeline_header" = "";

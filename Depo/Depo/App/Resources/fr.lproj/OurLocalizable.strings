@@ -2433,7 +2433,7 @@ then {11,99 TRY/Month}*/
 "printed_package_view" = "Voir mes forfaits d'impression.";
 "more_photo_right" = "Vous avez sélectionné plus de %d photos. Etes-vous sûr de vouloir continuer?";
 "no_more_photo_right" = "Vous avez sélectionné plus de %d photos. Réduisez pour continuer.";
-"timeline_header" = "Les Meilleurs Souvenirs De 2023";
+"timeline_header" = "Vos Plus Beaux Souvenirs D'Hiver";
 
 /*Fuzzy*/
 "timeline_description" = "Nous avons compilé pour vous les meilleurs moments de l'année 2023. Découvrez-les dès maintenant.";
@@ -2623,3 +2623,5 @@ then {11,99 TRY/Month}*/
 "gamification_title_invite" = "";
 "gamification_title_createstory" = "";
 "gamification_title_createalbum" = "";
+"timeline_header_backup" = "Les Meilleurs Souvenirs De 2023";
+"winter_video_timeline_header" = "";

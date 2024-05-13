@@ -2190,7 +2190,7 @@ then {11,99 TRY/Month}*/
 "printed_package_view" = "View My Print Packages";
 "more_photo_right" = "You've got %d more photo submission. Are you sure you want to continue?";
 "no_more_photo_right" = "Has seleccionado más de %d fotos. Reduzca para continuar.";
-"timeline_header" = "The Best Memories of 2023";
+"timeline_header" = "Your Special Winter Memories";
 
 /*Fuzzy*/
 "timeline_description" = "We have compiled the best memories of 2023 for you. Check them out now!";
@@ -2386,3 +2386,5 @@ then {11,99 TRY/Month}*/
 "gamification_title_invite" = "";
 "gamification_title_createstory" = "";
 "gamification_title_createalbum" = "";
+"timeline_header_backup" = "The Best Memories of 2023";
+"winter_video_timeline_header" = "Your Special Winter Memories";

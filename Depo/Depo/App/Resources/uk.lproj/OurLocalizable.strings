@@ -2130,7 +2130,7 @@ then {11,99 TRY/Month}*/
 "printed_package_view" = "Переглянути мої пакети для друку.";
 "more_photo_right" = "Ви вибрали більше ніж %d фотографій. Ви впевнені, що хочете продовжити?";
 "no_more_photo_right" = "Ви вибрали більше %d фотографій. Зменшіть, щоб продовжити.";
-"timeline_header" = "Найкращі спогади 2023 року";
+"timeline_header" = "Ваші Найяскравіші Зимові Спогади";
 
 /*Fuzzy*/
 "timeline_description" = "Ми зібрали для вас найкращі моменти року 2023. Відкрийте їх для себе зараз.";
@@ -2320,3 +2320,5 @@ then {11,99 TRY/Month}*/
 "gamification_title_invite" = "";
 "gamification_title_createstory" = "";
 "gamification_title_createalbum" = "";
+"timeline_header_backup" = "Найкращі спогади 2023 року";
+"winter_video_timeline_header" = "";

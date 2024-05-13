@@ -2170,7 +2170,7 @@ then {11,99 TRY/Month}*/
 "printed_package_view" = "Ver mis paquetes de impresión";
 "more_photo_right" = "Tienes %d más envío de fotos. ¿Está seguro de que desea continuar?";
 "no_more_photo_right" = "Has seleccionado más de %d fotos. Reduzca para continuar.";
-"timeline_header" = "Los mejores recuerdos de 2023";
+"timeline_header" = "Tus Recuerdos más Vívidos del Invierno";
 
 /*Fuzzy*/
 "timeline_description" = "Hemos recopilado para ti los mejores momentos del año 2023. Descúbrelos ahora.";
@@ -2360,3 +2360,5 @@ then {11,99 TRY/Month}*/
 "gamification_title_invite" = "";
 "gamification_title_createstory" = "";
 "gamification_title_createalbum" = "";
+"timeline_header_backup" = "Los mejores recuerdos de 2023";
+"winter_video_timeline_header" = "";
