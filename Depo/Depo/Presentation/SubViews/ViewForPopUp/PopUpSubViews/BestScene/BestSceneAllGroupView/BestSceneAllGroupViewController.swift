@@ -20,10 +20,10 @@ class BestSceneAllGroupViewController: BaseViewController {
     private var bestSceneCards: [HomeCardResponse] = []
 
     var imageUrls: [String] = []
-    var timestamp: Int = 0
+    var timestamp: [Int] = []
     var groupId: [Int] = []
     var selectedId: [Int] = []
-    
+        
     private lazy var customView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -72,13 +72,14 @@ class BestSceneAllGroupViewController: BaseViewController {
                     homeCard.type = .discoverCard
                     let imageUrls = response.map { $0.coverPhoto?.metadata?.thumbnailMedium }.compactMap { $0 }
                     let burstGroupId = response.map { $0.id }.compactMap { $0 }
-                    let createdDate = response.first?.groupDate
                     
+                    let createdDate = response.map { $0.groupDate }.compactMap { $0 }
+
 //                    self.output?.didObtainHomeCardsBestScene(homeCard, imageUrls: imageUrls, createdDate: createdDate ?? 0, groupId: burstGroupId)
                     
                     self.bestSceneCards = [homeCard]
                     self.userDefaultsVars.imageUrlsForBestScene = imageUrls
-                    self.userDefaultsVars.dateForBestScene = createdDate ?? 0
+                    self.userDefaultsVars.dateForBestScene = createdDate
                     self.userDefaultsVars.groupIdBestScene = burstGroupId
                     
                     return homeCard
@@ -112,13 +113,15 @@ class BestSceneAllGroupViewController: BaseViewController {
         self.collectionView.reloadData()
     }
     
-    func dateFormat() -> String {
-        let date = Date(timeIntervalSince1970: TimeInterval(self.timestamp) / 1000)
-        let formatter = DateFormatter()
-        formatter.dateFormat = "d MMMM yyyy"
-        formatter.locale = Locale(identifier: "tr_TR")
-        formatter.timeZone = TimeZone(abbreviation: "UTC")
-        return formatter.string(from: date)
+    func dateFormat() -> [String] {
+        return self.timestamp.map { timestamp in
+            let date = Date(timeIntervalSince1970: TimeInterval(timestamp))
+            let formatter = DateFormatter()
+            formatter.dateFormat = "d MMMM yyyy"
+            formatter.locale = Locale(identifier: "tr_TR")
+            formatter.timeZone = TimeZone(abbreviation: "UTC")
+            return formatter.string(from: date)
+        }
     }
 
     private func setupLayout() {
@@ -178,7 +181,7 @@ extension BestSceneAllGroupViewController: UICollectionViewDelegate, UICollectio
             }
         }
         
-        cell.dateLabel.text = dateFormat()
+        cell.dateLabel.text = dateFormat()[indexPath.row]
         
         return cell
     }

@@ -36,6 +36,9 @@ final class HomePageInteractor: HomePageInteractorInput {
     private var highlightedPackage: SubscriptionPlan?
     private var highlightedPackageIndex: Int = 0
     
+    private var groupDate: [Int] = []
+
+    
     private func fillCollectionView(isReloadAll: Bool) {
         self.homeCardsLoaded = true
         self.output.fillCollectionView(isReloadAll: isReloadAll)
@@ -214,8 +217,10 @@ final class HomePageInteractor: HomePageInteractorInput {
                     homeCard.type = .discoverCard
                     let imageUrls = response.map { $0.coverPhoto?.metadata?.thumbnailMedium }.compactMap { $0 }
                     let burstGroupId = response.map { $0.id }.compactMap { $0 }
-                    let createdDate = response.first?.groupDate
-                    self.output.didObtainHomeCardsBestScene(homeCard, imageUrls: imageUrls, createdDate: createdDate ?? 0, groupId: burstGroupId)
+                  
+                    let createdDate = response.map { $0.groupDate }.compactMap { $0 }
+                    
+                    self.output.didObtainHomeCardsBestScene(homeCard, imageUrls: imageUrls, createdDate: createdDate, groupId: burstGroupId)
                     return homeCard
                 }
             case .failed(let error):

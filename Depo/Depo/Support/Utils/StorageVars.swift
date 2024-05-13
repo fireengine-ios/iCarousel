@@ -328,8 +328,8 @@ final class UserDefaultsVars: StorageVars {
     }
     
     private let dateForBestSceneKey = "dateForBestSceneKey"
-    var dateForBestScene: Int {
-        get { return userDefaults.object(forKey: dateForBestSceneKey) as? Int ?? 0 }
+    var dateForBestScene: [Int] {
+        get { return userDefaults.object(forKey: dateForBestSceneKey) as? [Int] ?? [] }
         set { userDefaults.set(newValue, forKey: dateForBestSceneKey) }
     }
     

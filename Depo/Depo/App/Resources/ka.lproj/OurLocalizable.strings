@@ -2124,7 +2124,7 @@ then {11,99 TRY/Month}*/
 "printed_package_view" = "";
 "more_photo_right" = "";
 "no_more_photo_right" = "";
-"timeline_header" = "2023-ის საუკეთესო მოგონებები";
+"timeline_header" = "შენი განსაკუთრებული ზამთრის მოგონებები";
 "timeline_description" = "ჩვენ შევადგინეთ თქვენთვის 2023 წლის საუკეთესო მოგონებები. ნახე ისინი!";
 "selected_for_print" = "";
 "print_cancel_popup_question" = "";
@@ -2302,3 +2302,5 @@ then {11,99 TRY/Month}*/
 "gamification_title_invite" = "";
 "gamification_title_createstory" = "";
 "gamification_title_createalbum" = "";
+"timeline_header_backup" = "2023-ის საუკეთესო მოგონებები";
+"winter_video_timeline_header" = "";
