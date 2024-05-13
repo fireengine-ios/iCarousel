@@ -112,10 +112,10 @@ class BestSceneAllGroupViewController: BaseViewController {
         
         self.collectionView.reloadData()
     }
-    
+        
     func dateFormat() -> [String] {
         return self.timestamp.map { timestamp in
-            let date = Date(timeIntervalSince1970: TimeInterval(timestamp))
+            let date = Date(timeIntervalSince1970: TimeInterval(timestamp / 1000))
             let formatter = DateFormatter()
             formatter.dateFormat = "d MMMM yyyy"
             formatter.locale = Locale(identifier: "tr_TR")
