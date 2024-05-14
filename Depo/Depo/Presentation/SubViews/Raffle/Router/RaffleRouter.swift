@@ -56,12 +56,16 @@ class RaffleRouter: RaffleRouterInput {
             let vc = router.createNewAlbum()
             router.pushViewController(viewController: vc)
         case .faceImage:
-            print("aaaaaaaaaaaa faceImage")
+            let vc = router.faceImage
+            router.pushViewController(viewController: vc)
         case .fotoVideoUpload:
             let vc = router.uploadPhotos()
-            router.pushViewController(viewController: vc)
+            let navigation = NavigationController(rootViewController: vc)
+            navigation.navigationBar.isHidden = false
+            router.presentViewController(controller: navigation)
         case .inviteSignup:
-            print("aaaaaaaaaaaa inviteSignup")
+            let vc = router.invitationController()
+            router.pushViewController(viewController: vc)
         }
     }
 }
