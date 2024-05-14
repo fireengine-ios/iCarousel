@@ -2128,7 +2128,7 @@ then {11,99 TRY/Month}*/
 "printed_package_view" = "Meine Druckpakete anzeigen";
 "more_photo_right" = "Sie haben mehr als %d Fotos eingereicht. Sind Sie sicher, dass Sie fortfahren möchten?";
 "no_more_photo_right" = "Sie haben mehr als %d Fotos ausgewählt. Reduzieren Sie, um fortzufahren.";
-"timeline_header" = "Die Besten Erinnerungen An Das Jahr 2023";
+"timeline_header" = "Ihre lebhaftesten Wintererinnerungen";
 
 /*Fuzzy*/
 "timeline_description" = "Wir haben für Sie die schönsten Momente des Jahres 2023 gesammelt. Entdecken Sie sie jetzt für sich selbst.";
@@ -2318,3 +2318,5 @@ then {11,99 TRY/Month}*/
 "gamification_title_invite" = "";
 "gamification_title_createstory" = "";
 "gamification_title_createalbum" = "";
+"timeline_header_backup" = "Die Besten Erinnerungen An Das Jahr 2023";
+"winter_video_timeline_header" = "";

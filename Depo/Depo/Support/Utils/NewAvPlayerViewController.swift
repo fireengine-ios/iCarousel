@@ -217,7 +217,7 @@ final class WinterVideoNewAvPlayerViewController: AVPlayerViewController {
         
         let navbarTitle = UILabel()
         navbarTitle.textColor = .white
-        navbarTitle.text = String(format: localized(.timelineHeader), 2023)
+        navbarTitle.text = localized(.timelineHeader)
         navbarTitle.font = .appFont(.medium, size: 16)
         navbarTitle.minimumScaleFactor = 0.5
         navbarTitle.adjustsFontSizeToFitWidth = true

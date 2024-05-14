@@ -2184,7 +2184,7 @@ then {11,99 TRY/Month}*/
 "printed_package_view" = "Baskı paketlerimi gör.";
 "more_photo_right" = "%d fotoğraf gönderme hakkın daha var. Devam etmek istediğine emin misin?";
 "no_more_photo_right" = "%d’ten fazla fotoğraf seçtin. Devam edebilmek için azaltın.";
-"timeline_header" = "2023 En Güzel Anıları";
+"timeline_header" = "Sana Özel Kış Anıların";
 
 /*Fuzzy*/
 "timeline_description" = "2023 yılının en güzel anılarını senin için derledik. Hemen keşfet.";
@@ -2410,3 +2410,5 @@ then {11,99 TRY/Month}*/
 "gamification_title_invite" = "Davet";
 "gamification_title_createstory" = "Hikaye Oluştur";
 "gamification_title_createalbum" = "Albüm";
+"timeline_header_backup" = "2023 En Güzel Anıları";
+"winter_video_timeline_header" = "";

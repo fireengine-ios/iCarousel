@@ -35,8 +35,12 @@ final class PlayerThreeDotMenuManager {
     
     func showWinterVideoActions(sender: Any?, item: WrapData, isSaved: Bool) {
         var elementTypes: [ElementTypes] = []
-        
-        elementTypes.append(.delete)
+        if isSaved {
+            elementTypes.append(.download)
+            elementTypes.append(.share)
+        } else {
+            elementTypes.append(.delete)
+        }
         
         alert.showVideoPlayer(with: elementTypes, for: item, presentedBy: sender, onSourceView: nil, viewController: nil)
     }

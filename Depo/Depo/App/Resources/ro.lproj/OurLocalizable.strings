@@ -2128,7 +2128,7 @@ then {11,99 TRY/Month}*/
 "printed_package_view" = "Vizualizați Pachetele mele de imprimare.";
 "more_photo_right" = "Aveți mai mult de %d fotografii trimise. Sunteți sigur că doriți să continuați?";
 "no_more_photo_right" = "Ați selectat mai mult de %d fotografii. Reduceți pentru a continua.";
-"timeline_header" = "Les Meilleurs Souvenirs De 2023";
+"timeline_header" = "Cele mai vii amintiri de iarnă ale tale";
 
 /*Fuzzy*/
 "timeline_description" = "Am compilat pentru tine cele mai bune momente ale anului 2023. Descoperă-le pentru tine chiar acum.";
@@ -2318,3 +2318,5 @@ then {11,99 TRY/Month}*/
 "gamification_title_invite" = "";
 "gamification_title_createstory" = "";
 "gamification_title_createalbum" = "";
+"timeline_header_backup" = "Les Meilleurs Souvenirs De 2023";
+"winter_video_timeline_header" = "";

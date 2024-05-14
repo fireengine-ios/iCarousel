@@ -2140,7 +2140,7 @@ then {11,99 TRY/Month}*/
 "printed_package_view" = "عرض حزم الطباعة الخاصة بي";
 "more_photo_right" = "كنت قد حصلت على أكثر من %d تقديم الصور. هل أنت متأكد أنك تريد الاستمرار?";
 "no_more_photo_right" = "لقد اخترت أكثر من %d الصور. تقليل للمتابعة.";
-"timeline_header" = "أفضل ذكريات 2023";
+"timeline_header" = "ذكرياتك الشتوية المميزة";
 
 /*Fuzzy*/
 "timeline_description" = "لقد قمنا بتجميع أفضل ذكريات 2023 لك.";
@@ -2330,3 +2330,5 @@ then {11,99 TRY/Month}*/
 "gamification_title_invite" = "";
 "gamification_title_createstory" = "";
 "gamification_title_createalbum" = "";
+"timeline_header_backup" = "أفضل ذكريات 2023";
+"winter_video_timeline_header" = "";
