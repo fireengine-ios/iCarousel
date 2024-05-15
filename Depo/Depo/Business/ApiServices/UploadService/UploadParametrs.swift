@@ -175,6 +175,16 @@ class SimpleUpload: UploadRequestParametrs {
             ]
         }
         
+        WrapData.fetchSelfies { selfies in
+            for selfie in selfies {
+                print("⚠️", "Found Selfie: \(selfie)")
+                
+                header = header + [
+                    HeaderConstant.XObjectMetaFolderLabel: "SELFIES"
+                ]
+            }
+        }
+        
 //        if item.asset?.mediaSubtypes == .photoPanorama {
 //          header = header + [
 //            HeaderConstant.XObjectMetaFolderLabel: ""

@@ -2372,43 +2372,43 @@ then {11,99 TRY/Month}*/
 "gamification_raffle_brief" = "Çekiliş Özetini Gör";
 
 /*Çekiliş özet açıklaması*/
-"gamification_event_description" = "Kazanma şansını artırmak için aşağıdaki rozetleri tamamlaman kazanma şansını artıracaktır";
+"gamification_event_description" = "Her ay aşağıdaki özellikleri kullan, çekilişi kazanma şansını artır.";
 
 /*Yarın tekrar gel metni*/
-"gamification_comeback" = "Yarın tekrar gel!";
+"gamification_comeback" = "";
 
 /*Paket satın alma kuralı için*/
-"gamification_package_rule" = "Paket Al";
+"gamification_package_rule" = "Paket Satın Al";
 "gamification_raffle_info" = "Kampanya Detayları";
-"gamification_raffle_draw" = "Kampanya Koşullarını öğrenmek için tıklayın.";
+"gamification_raffle_draw" = "Kampanya koşulları için tıkla.";
 
 /*Fuzzy*/
-"gamification_raffle_summary" = "Çekiliş Özeti";
-"gamification_event_not_trigerred" = "Henüz bu kullanımdan çekiliş hakkı kazanmadın. Hemen dene!";
+"gamification_raffle_summary" = "Çekiliş Özetini Gör";
+"gamification_event_not_trigerred" = "Bu özellikten çekiliş hakkı kazanmadın. Hemen dene!";
 "gamification_event_trigger_count" = "%d Adet Çekiliş Hakkı Kazandın.";
 "gamification_event_completed" = "Bu %@ hakkını tamamladın.";
 "gamification_total_count" = "Toplam %d Çekiliş Hakkı Kazandın.";
 "gamification_campaign_conditions" = "Kampanya Detayları";
 "gamification_rules" = "Çekiliş Hak Kazanımı";
-"gamification_campaign_policy_title" = "Yasal MPİ";
-"gamification_raffle_win" = "Çekiliş Hakkı Kazan";
-"gamification_title_upload" = "Fotoğraf Yükle";
-"gamification_title_act_faceimage" = "FaceImage";
-"gamification_buy" = "Paket Al";
+"gamification_campaign_policy_title" = "Kampanya Katılım Koşulları";
+"gamification_raffle_win" = "";
+"gamification_title_upload" = "Fotoğraf/Video Yükle";
+"gamification_title_act_faceimage" = "Yüz/Nesne Tanıma Açma";
+"gamification_buy" = "Paket Satın Al";
 "gamification_photopick" = "Photopick Yap";
-"gamification_create_collage" = "Kolaj Yarat";
-"gamification_print" = "Baskı Al";
-"gamification_invite" = "Davet Et";
+"gamification_create_collage" = "Kolaj Oluştur";
+"gamification_print" = "Fotoğraf Baskısı Al";
+"gamification_invite" = "Arkadaşını Davet Et";
 "gamification_createstory" = "Hikaye Oluştur";
-"gamification_createalbum" = "Albüm Yarat";
-"gamification_act_faceimage" = "FaceImage";
-"gamification_upload" = "Fotoğraf Yükle";
-"gamification_title_buy" = "Paket";
-"gamification_title_photopick" = "Photopick";
-"gamification_title_create_collage" = "Kolaj";
-"gamification_title_print" = "Baskı";
-"gamification_title_invite" = "Davet";
+"gamification_createalbum" = "Albüm Oluştur";
+"gamification_act_faceimage" = "Yüz/Nesne Tanıma Aç";
+"gamification_upload" = "Fotoğraf/Video Yükle";
+"gamification_title_buy" = "Paket Satın Al";
+"gamification_title_photopick" = "Photopick Yap";
+"gamification_title_create_collage" = "Kolaj Oluştur";
+"gamification_title_print" = "Fotoğraf Baskısı Al";
+"gamification_title_invite" = "Arkadaşını Davet Et";
 "gamification_title_createstory" = "Hikaye Oluştur";
-"gamification_title_createalbum" = "Albüm";
+"gamification_title_createalbum" = "Albüm Oluştur";
 "timeline_header_backup" = "2023 En Güzel Anıları";
 "winter_video_timeline_header" = "";
