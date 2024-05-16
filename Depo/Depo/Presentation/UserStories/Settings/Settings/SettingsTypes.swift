@@ -39,11 +39,11 @@ enum SettingsTypes: Int {
     static let defaultSectionTwoTypes = [myActivities, passcode]
     static var defaultSectionThreeTypes = [helpAndSupport]
     
-    static func prepareTypes(isChatbotShown: Bool) -> [[SettingsTypes]] {
+    static func prepareTypes(isChatbotShown: Bool, isDisplayConnect: Bool) -> [[SettingsTypes]] {
         var result = [[SettingsTypes]]()
         addNotification(to: &result)
         addPackagesSection(to: &result)
-        addDefaultSection(to: &result, isChatbotShown: isChatbotShown)
+        addDefaultSection(to: &result, isChatbotShown: isChatbotShown, isDisplayConnect: isDisplayConnect)
         return result
     }
     
@@ -59,8 +59,7 @@ enum SettingsTypes: Int {
         result.append(cells)
     }
     
-    private static func addDefaultSection(to result: inout [[SettingsTypes]],
-                                          isChatbotShown: Bool) {
+    private static func addDefaultSection(to result: inout [[SettingsTypes]], isChatbotShown: Bool, isDisplayConnect: Bool) {
         var cells: [SettingsTypes] = []
 
         cells.append(contentsOf: SettingsTypes.defaultSectionOneTypes)
@@ -68,8 +67,7 @@ enum SettingsTypes: Int {
         cells.append(contentsOf: SettingsTypes.defaultSectionTwoTypes)
         cells.append(.permissions)
         
-        let displayConnectAccount = FirebaseRemoteConfig.shared.displayConnectAccount
-        if displayConnectAccount {
+        if isDisplayConnect {
             cells.append(.connectedDevice)
         }
         
