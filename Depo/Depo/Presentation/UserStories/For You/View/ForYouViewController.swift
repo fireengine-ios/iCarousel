@@ -119,7 +119,7 @@ final class ForYouViewController: BaseViewController {
         isFIREnabled = isAllowed
     }
     
-    private func updateTableView(for view: ForYouSections) {
+     func updateTableView(for view: ForYouSections) {
         guard let index = forYouSections.firstIndex(of: view) else { return }
         DispatchQueue.main.async {
             self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
