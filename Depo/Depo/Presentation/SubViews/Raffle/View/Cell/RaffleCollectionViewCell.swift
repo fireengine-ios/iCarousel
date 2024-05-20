@@ -69,18 +69,23 @@ class RaffleCollectionViewCell: UICollectionViewCell {
     }
     
     
-    func configure(raffle: RaffleElement, imageOppacity: Float, nextLabelIsHidden: Bool, period: String) {
+    func configure(raffle: RaffleElement, imageOppacity: Float, nextLabelIsHidden: Bool, period: String, packagePeriod: String) {
         self.raffle = raffle
         iconImage.image = raffle.icon
-        titleLabel.text = raffle.title
         iconImage.layer.opacity = imageOppacity
-        //nextDayLabel.isHidden = nextLabelIsHidden
+        nextDayLabel.isHidden = true
         if nextLabelIsHidden { // hak var
             nextDayLabel.text = localized(.gamificationRaffleWin)
             iconImage.isUserInteractionEnabled = true
         } else { //hak yok
             nextDayLabel.text = String(format: localized(.gamificationEventCompleted), period)
             iconImage.isUserInteractionEnabled = false
+        }
+        
+        if raffle == .purchasePackage {
+            titleLabel.text = "\(raffle.title) (\(packagePeriod))"
+        } else {
+            titleLabel.text = raffle.title
         }
     }
     
