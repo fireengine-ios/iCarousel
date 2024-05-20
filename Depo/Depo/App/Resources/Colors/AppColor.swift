@@ -244,6 +244,8 @@ enum AppColor {
     case raffleView
     case raffleLabel
     case raffleCondition
+    case summaryButtonBack
+    case summaryButtonTitle
     
 
     var color: UIColor {

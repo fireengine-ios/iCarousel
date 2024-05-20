@@ -1181,12 +1181,12 @@ class RouterVC: NSObject {
         return RaffleInitializer.initializeViewController(id: id, url: url, endDateText: endDateText, conditionImageUrl: conditionImageUrl)
     }
     
-    func raffleSummary(statusResponse: RaffleStatusResponse?) -> RaffleSummaryViewController {
-        return RaffleSummaryViewController(statusResponse: statusResponse)
+    func raffleSummary(statusResponse: RaffleStatusResponse?, campaignId: Int) -> RaffleSummaryViewController {
+        return RaffleSummaryViewController(statusResponse: statusResponse, campaignId: campaignId)
     }
     
-    func raffleCondition(statusResponse: RaffleStatusResponse?, conditionImageUrl: String) -> RaffleConditionViewController {
-        return RaffleConditionViewController(statusResponse: statusResponse, conditionImageUrl: conditionImageUrl)
+    func raffleCondition(statusResponse: RaffleStatusResponse?, conditionImageUrl: String, campaignId: Int) -> RaffleConditionNewViewController {
+        return RaffleConditionNewViewController(statusResponse: statusResponse, conditionImageUrl: conditionImageUrl, campaignId: campaignId)
     }
     
     // MARK: - Draw Campaign

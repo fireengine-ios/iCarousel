@@ -54,8 +54,9 @@ class RaffleSummaryCollectionViewCell: UICollectionViewCell {
     private lazy var actionButton: UIButton = {
         let view = UIButton()
         view.titleLabel?.font = .appFont(.medium, size: 10)
-        view.setTitleColor(AppColor.darkBlueColor.color, for: .normal)
-        view.setTitleColor(AppColor.darkBlueColor.color, for: .selected)
+        view.setTitleColor(AppColor.summaryButtonTitle.color, for: .normal)
+        view.setTitleColor(AppColor.summaryButtonTitle.color, for: .selected)
+        view.backgroundColor = AppColor.summaryButtonBack.color
         view.layer.cornerRadius = 12
         view.clipsToBounds = true
         view.layer.borderWidth = 1.0
@@ -106,13 +107,18 @@ class RaffleSummaryCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(raffle: RaffleElement, imageOppacity: Float, statusResponse: RaffleStatusResponse?) {
+    func configure(raffle: RaffleElement, imageOppacity: Float, statusResponse: RaffleStatusResponse?, packagePeriod: String) {
         self.raffle = raffle
         iconImage.image = raffle.icon
-        titleLabel.text = raffle.title
         iconImage.layer.opacity = imageOppacity
         actionButton.setTitle(raffle.buttonTitle, for: .normal)
         infoLabel.text = raffle.infoLabelText
+        
+        if raffle == .purchasePackage {
+            titleLabel.text = "\(raffle.title) (\(packagePeriod))"
+        } else {
+            titleLabel.text = raffle.title
+        }
         
         var mainText: String = ""
         var pointCount: Int = 0
@@ -185,15 +191,15 @@ extension RaffleSummaryCollectionViewCell {
         addSubview(infoView)
         infoView.translatesAutoresizingMaskIntoConstraints = false
         //infoView.topAnchor.constraint(equalTo: summaryLabel.bottomAnchor, constant: 20).activate()
-        infoView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).activate()
-        infoView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).activate()
+        infoView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).activate()
+        infoView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).activate()
         infoView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).activate()
         
         infoView.addSubview(actionButton)
         actionButton.translatesAutoresizingMaskIntoConstraints = false
         actionButton.topAnchor.constraint(equalTo: infoView.topAnchor, constant: 0).activate()
-        actionButton.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 0).activate()
-        actionButton.trailingAnchor.constraint(equalTo: infoView.trailingAnchor, constant: 0).activate()
+        actionButton.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 20).activate()
+        actionButton.trailingAnchor.constraint(equalTo: infoView.trailingAnchor, constant: -20).activate()
         actionButton.bottomAnchor.constraint(equalTo: infoView.bottomAnchor, constant: 0).activate()
         
         infoView.addSubview(infoLabel)

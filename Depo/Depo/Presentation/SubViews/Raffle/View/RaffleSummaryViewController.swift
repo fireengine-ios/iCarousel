@@ -48,10 +48,13 @@ final class RaffleSummaryViewController: BaseViewController {
     private var statusResponse: RaffleStatusResponse?
     private var raffleStatusElement: [RaffleElement] = []
     private var raffleStatusElementOppacity: [Float] = []
+    private var packagePeriod: [String] = []
+    private var campaignId: Int = 0
     private lazy var router = RouterVC()
+    private lazy var service = RaffleService()
     
-    init(statusResponse: RaffleStatusResponse?) {
-        self.statusResponse = statusResponse
+    init(statusResponse: RaffleStatusResponse?, campaignId: Int) {
+        self.campaignId = campaignId
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -61,16 +64,20 @@ final class RaffleSummaryViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setTitle(withString: localized(.gamificationRaffleSummary))
         view.backgroundColor = AppColor.background.color
-        setRaffleElement()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        raffleStatus(id: campaignId)
     }
     
     private func setRaffleElement() {
         for detail in self.statusResponse?.details ?? [] {
             let element = RaffleElement(rawValue: detail.earnType!)
             self.raffleStatusElement.append(element)
+            var packagePeriods = RafflePeriod(rawValue: detail.packagePeriodType ?? RafflePeriod.month.rawValue) ?? RafflePeriod.month
+            self.packagePeriod.append(packagePeriods.packageTitle)
         }
         setupLayout()
     }
@@ -94,8 +101,9 @@ extension RaffleSummaryViewController: UICollectionViewDataSource {
         }
         let raffle = raffleStatusElement[indexPath.row]
         let oppacity = raffleStatusElementOppacity[indexPath.row]
+        let packPeriod = packagePeriod[indexPath.row]
         cell.delegate = self
-        cell.configure(raffle: raffle, imageOppacity: oppacity, statusResponse: statusResponse)
+        cell.configure(raffle: raffle, imageOppacity: oppacity, statusResponse: statusResponse, packagePeriod: packPeriod)
         
         if indexPath.row % 2 == 0 {
             cell.layer.addBorder(edge: .right, thickness: 1)
@@ -212,5 +220,22 @@ extension RaffleSummaryViewController {
         paragraphStyle.alignment = .right
         content.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, content.length))
         summaryPointLabel.attributedText = NSAttributedString(format: content, args: pointText)
+    }
+}
+
+extension RaffleSummaryViewController {
+    private func raffleStatus(id: Int) {
+        showSpinner()
+        service.getRaffleStatus(id: id) { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.statusResponse = response
+                self?.setRaffleElement()
+                self?.hideSpinner()
+            case .failed(let error):
+                self?.hideSpinner()
+                UIApplication.showErrorAlert(message: error.description)
+            }
+        }
     }
 }

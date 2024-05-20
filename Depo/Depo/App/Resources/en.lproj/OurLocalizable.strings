@@ -2353,7 +2353,7 @@ then {11,99 TRY/Month}*/
 "gamification_event_description" = "Use the features below every month to increase your chances of winning the raffle.";
 
 /*Yarın tekrar gel metni*/
-"gamification_comeback" = "";
+"gamification_comeback" = "Stay tuned.";
 
 /*Paket satın alma kuralı için*/
 "gamification_package_rule" = "Buy Package";
@@ -2388,3 +2388,4 @@ then {11,99 TRY/Month}*/
 "gamification_title_createalbum" = "Create Album";
 "timeline_header_backup" = "The Best Memories of 2023";
 "winter_video_timeline_header" = "Your Special Winter Memories";
+"yearly" = "";

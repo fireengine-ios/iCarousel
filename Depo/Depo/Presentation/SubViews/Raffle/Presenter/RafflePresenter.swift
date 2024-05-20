@@ -30,11 +30,11 @@ extension RafflePresenter: RaffleViewOutput {
         interactor.getRaffleStatus(id: id)
     }
     
-    func goToRaffleSummary(statusResponse: RaffleStatusResponse?) {
-        router.goToRaffleSummary(statusResponse: statusResponse)
+    func goToRaffleSummary(statusResponse: RaffleStatusResponse?, campaignId: Int) {
+        router.goToRaffleSummary(statusResponse: statusResponse, campaignId: campaignId)
     }
     
-    func goToRaffleCondition(statusResponse: RaffleStatusResponse?, conditionImageUrl: String) {
-        router.goToRaffleCondition(statusResponse: statusResponse, conditionImageUrl: conditionImageUrl)
+    func goToRaffleCondition(statusResponse: RaffleStatusResponse?, conditionImageUrl: String, campaignId: Int) {
+        router.goToRaffleCondition(statusResponse: statusResponse, conditionImageUrl: conditionImageUrl, campaignId: campaignId)
     }
 }
