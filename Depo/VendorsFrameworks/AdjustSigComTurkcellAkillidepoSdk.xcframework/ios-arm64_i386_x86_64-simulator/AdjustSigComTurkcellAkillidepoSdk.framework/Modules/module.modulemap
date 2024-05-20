@@ -1,0 +1,6 @@
+framework module AdjustSigComTurkcellAkillidepoSdk {
+  umbrella header "ADJSigner.h"
+
+  export *
+  module * { export * }
+}

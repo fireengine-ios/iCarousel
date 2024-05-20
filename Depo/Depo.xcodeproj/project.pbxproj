@@ -2140,6 +2140,10 @@
 		89DB124B2BFB53A00005513B /* RaffleConditionNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DB12492BFB53A00005513B /* RaffleConditionNewViewController.swift */; };
 		89DB124C2BFB53A00005513B /* RaffleConditionNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DB12492BFB53A00005513B /* RaffleConditionNewViewController.swift */; };
 		89DB124D2BFB53A00005513B /* RaffleConditionNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DB12492BFB53A00005513B /* RaffleConditionNewViewController.swift */; };
+		89DB12812BFB96540005513B /* AdjustSigComTurkcellAkillidepoSdk.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DB12802BFB96540005513B /* AdjustSigComTurkcellAkillidepoSdk.xcframework */; };
+		89DB12822BFB96540005513B /* AdjustSigComTurkcellAkillidepoSdk.xcframework in Copy Files GPUImage */ = {isa = PBXBuildFile; fileRef = 89DB12802BFB96540005513B /* AdjustSigComTurkcellAkillidepoSdk.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		89DB12832BFB96690005513B /* AdjustSigComTurkcellAkillidepoSdk.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DB12802BFB96540005513B /* AdjustSigComTurkcellAkillidepoSdk.xcframework */; };
+		89DB12842BFB96690005513B /* AdjustSigComTurkcellAkillidepoSdk.xcframework in Copy Files GPUImage */ = {isa = PBXBuildFile; fileRef = 89DB12802BFB96540005513B /* AdjustSigComTurkcellAkillidepoSdk.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		89DCB67F2B18AA6F00B65D53 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DCB67E2B18AA6F00B65D53 /* NotificationService.swift */; };
 		89DCB6832B18AA6F00B65D53 /* LifeboxNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 89DCB67C2B18AA6E00B65D53 /* LifeboxNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		89DCC5CC2403A99900488F1F /* SubscriptionOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DCC5C92403A99900488F1F /* SubscriptionOfferView.swift */; };
@@ -2198,10 +2202,6 @@
 		89E8AD2529BE33C10091F898 /* CreateCollageBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ABFDCF29B9F34D000237A4 /* CreateCollageBottomBarManager.swift */; };
 		89E8AD2629BE33C20091F898 /* CreateCollageBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ABFDCF29B9F34D000237A4 /* CreateCollageBottomBarManager.swift */; };
 		89E8AD2729BE33C40091F898 /* CreateCollageBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ABFDCF29B9F34D000237A4 /* CreateCollageBottomBarManager.swift */; };
-		89E95A4F2BF61CAE0081E86F /* AdjustSigComTurkcellAkillidepoSdk.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1894786A2A8A4D3500E59DEE /* AdjustSigComTurkcellAkillidepoSdk.xcframework */; };
-		89E95A502BF61CAE0081E86F /* AdjustSigComTurkcellAkillidepoSdk.xcframework in Copy Files GPUImage */ = {isa = PBXBuildFile; fileRef = 1894786A2A8A4D3500E59DEE /* AdjustSigComTurkcellAkillidepoSdk.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		89E95A542BF61CB70081E86F /* AdjustSigComTurkcellAkillidepoSdk.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1894786A2A8A4D3500E59DEE /* AdjustSigComTurkcellAkillidepoSdk.xcframework */; };
-		89E95A552BF61CB70081E86F /* AdjustSigComTurkcellAkillidepoSdk.xcframework in Copy Files GPUImage */ = {isa = PBXBuildFile; fileRef = 1894786A2A8A4D3500E59DEE /* AdjustSigComTurkcellAkillidepoSdk.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		89EA4F7A240902C400A2C543 /* PackagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EA4F77240902C400A2C543 /* PackagesTableViewCell.swift */; };
 		89EA4F7B240902C400A2C543 /* PackagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EA4F77240902C400A2C543 /* PackagesTableViewCell.swift */; };
 		89EA4F7D240902C400A2C543 /* PackagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EA4F77240902C400A2C543 /* PackagesTableViewCell.swift */; };
@@ -10456,7 +10456,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				B549B6B424CF07CC00D39C44 /* GPUImage.framework in Copy Files GPUImage */,
-				89E95A502BF61CAE0081E86F /* AdjustSigComTurkcellAkillidepoSdk.xcframework in Copy Files GPUImage */,
+				89DB12842BFB96690005513B /* AdjustSigComTurkcellAkillidepoSdk.xcframework in Copy Files GPUImage */,
 			);
 			name = "Copy Files GPUImage";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -10468,7 +10468,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				B549B6B924CF07E800D39C44 /* GPUImage.framework in Copy Files GPUImage */,
-				89E95A552BF61CB70081E86F /* AdjustSigComTurkcellAkillidepoSdk.xcframework in Copy Files GPUImage */,
+				89DB12822BFB96540005513B /* AdjustSigComTurkcellAkillidepoSdk.xcframework in Copy Files GPUImage */,
 			);
 			name = "Copy Files GPUImage";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -11631,6 +11631,8 @@
 		89DAB3D823AB513600D4337D /* HSCompletionPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HSCompletionPopUp.xib; sourceTree = "<group>"; };
 		89DAB3D923AB513700D4337D /* HSCompletionPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSCompletionPopUp.swift; sourceTree = "<group>"; };
 		89DB12492BFB53A00005513B /* RaffleConditionNewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaffleConditionNewViewController.swift; sourceTree = "<group>"; };
+		89DB127D2BFB96360005513B /* AdjustSigComTurkcellAkillidepoSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdjustSigComTurkcellAkillidepoSdk.framework; path = "VendorsFrameworks/AdjustSigComTurkcellAkillidepoSdk.xcframework/ios-arm64_armv7/AdjustSigComTurkcellAkillidepoSdk.framework"; sourceTree = "<group>"; };
+		89DB12802BFB96540005513B /* AdjustSigComTurkcellAkillidepoSdk.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AdjustSigComTurkcellAkillidepoSdk.xcframework; path = VendorsFrameworks/AdjustSigComTurkcellAkillidepoSdk.xcframework; sourceTree = "<group>"; };
 		89DCB67C2B18AA6E00B65D53 /* LifeboxNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeboxNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		89DCB67E2B18AA6F00B65D53 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		89DCB6802B18AA6F00B65D53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -13402,7 +13404,7 @@
 				8C0E8FED1FDEBDFF00789C91 /* Foundation.framework in Frameworks */,
 				8C0E8FEE1FDEBDFF00789C91 /* UIKit.framework in Frameworks */,
 				B56E0DD820B414580082044D /* StoreKit.framework in Frameworks */,
-				89E95A4F2BF61CAE0081E86F /* AdjustSigComTurkcellAkillidepoSdk.xcframework in Frameworks */,
+				89DB12832BFB96690005513B /* AdjustSigComTurkcellAkillidepoSdk.xcframework in Frameworks */,
 				8C0E8FEF1FDEBDFF00789C91 /* Accelerate.framework in Frameworks */,
 				0798D5CA26981BF600F5EDE0 /* Photos.framework in Frameworks */,
 				8C0E8FF11FDEBDFF00789C91 /* WebKit.framework in Frameworks */,
@@ -13548,7 +13550,7 @@
 				CF8B689D23CBC9D70021B021 /* AudioToolbox.framework in Frameworks */,
 				CF8B689E23CBC9D70021B021 /* MobileCoreServices.framework in Frameworks */,
 				CF8B689F23CBC9D70021B021 /* CoreTelephony.framework in Frameworks */,
-				89E95A542BF61CB70081E86F /* AdjustSigComTurkcellAkillidepoSdk.xcframework in Frameworks */,
+				89DB12812BFB96540005513B /* AdjustSigComTurkcellAkillidepoSdk.xcframework in Frameworks */,
 				CF8B68A023CBC9D70021B021 /* MediaPlayer.framework in Frameworks */,
 				98B047CC259314740011DAEB /* MPush.framework in Frameworks */,
 				CF8B68A223CBC9D70021B021 /* QuartzCore.framework in Frameworks */,
@@ -13708,7 +13710,9 @@
 		051E1DF519CAC2F900FD1E03 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				89DB12802BFB96540005513B /* AdjustSigComTurkcellAkillidepoSdk.xcframework */,
 				895685C22AE7BE5300652D48 /* AdjustSigComTurkcellAkillidepoSdk.framework */,
+				89DB127D2BFB96360005513B /* AdjustSigComTurkcellAkillidepoSdk.framework */,
 				18E5E6582AE64D8500F65353 /* AdjustSigComTurkcellAkillidepoSdk.xcframework */,
 				189BA23F2ABC8B77007D0B17 /* AdjustSigComTurkcellAkillidepoSdk.framework */,
 				189BA23C2ABC8AC1007D0B17 /* AdjustSigComTurkcellAkillidepoSdk */,
@@ -36490,6 +36494,7 @@
 					"$(PROJECT_DIR)/VendorsFrameworks",
 					"$(PROJECT_DIR)/Depo/App",
 					"$(PROJECT_DIR)/VendorsFrameworks",
+					"$(PROJECT_DIR)/VendorsFrameworks/AdjustSigComTurkcellAkillidepoSdk.xcframework/ios-arm64_armv7",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -36562,6 +36567,7 @@
 					"$(PROJECT_DIR)/VendorsFrameworks",
 					"$(PROJECT_DIR)/Depo/App",
 					"$(PROJECT_DIR)/VendorsFrameworks",
+					"$(PROJECT_DIR)/VendorsFrameworks/AdjustSigComTurkcellAkillidepoSdk.xcframework/ios-arm64_armv7",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -36632,6 +36638,7 @@
 					"$(PROJECT_DIR)/VendorsFrameworks",
 					"$(PROJECT_DIR)/Depo/App",
 					"$(PROJECT_DIR)/VendorsFrameworks",
+					"$(PROJECT_DIR)/VendorsFrameworks/AdjustSigComTurkcellAkillidepoSdk.xcframework/ios-arm64_armv7",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -36703,6 +36710,7 @@
 					"$(PROJECT_DIR)/VendorsFrameworks",
 					"$(PROJECT_DIR)/Depo/App",
 					"$(PROJECT_DIR)/VendorsFrameworks",
+					"$(PROJECT_DIR)/VendorsFrameworks/AdjustSigComTurkcellAkillidepoSdk.xcframework/ios-arm64_armv7",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
