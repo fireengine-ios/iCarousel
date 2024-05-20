@@ -1421,21 +1421,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
             }
         }
     }
-    
-    static func fetchSelfies(completion: @escaping ([PHAsset]) -> Void) {
-        var selfies: [PHAsset] = []
-        
-        let collection = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumSelfPortraits, options: nil)
-        
-        if let firstObject = collection.firstObject {
-            let assets = PHAsset.fetchAssets(in: firstObject, options: nil)
-            assets.enumerateObjects { (asset, index, stop) in
-                selfies.append(asset)
-            }
-        }
-        
-        completion(selfies)
-    }
 }
 
 extension WrapData {

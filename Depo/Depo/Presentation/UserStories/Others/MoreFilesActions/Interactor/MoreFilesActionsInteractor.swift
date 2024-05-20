@@ -258,12 +258,14 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     self?.router.presentViewController(controller: activityVC)
                 } else if let controller = UIApplication.topController() as? TBMatikPhotosViewController {
                     self?.router.presentViewController(controller: activityVC)
+                } else if let controller = UIApplication.topController() as? WinterVideoNewAvPlayerViewController {
+                    self?.router.presentViewController(controller: activityVC)
                 } else {
                     self?.router.presentViewControllerForShareOriginal(controller: activityVC)
                 }
             }
-            }, fail: { [weak self] errorMessage in
-                self?.output?.operationFailed(type: .share, message: errorMessage)
+        }, fail: { [weak self] errorMessage in
+            self?.output?.operationFailed(type: .share, message: errorMessage)
         })
     }
     

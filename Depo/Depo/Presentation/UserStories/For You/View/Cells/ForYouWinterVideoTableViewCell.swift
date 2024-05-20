@@ -159,7 +159,11 @@ class ForYouWinterVideoTableViewCell: UITableViewCell {
         case .save:
         delegate?.saveTimelineCard(id: winterVideoResponse?.id ?? 0)
         winterVideoResponse?.saved = true
-        configure(with: winterVideoResponse)
+            configure(with: winterVideoResponse)
+            
+            if let delegate = delegate as? ForYouViewController {
+                delegate.updateTableView(for: .timeline)
+            }
         }
     }
     
