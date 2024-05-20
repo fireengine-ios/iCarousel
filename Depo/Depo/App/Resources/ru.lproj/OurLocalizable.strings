@@ -2287,51 +2287,51 @@ then {11,99 TRY/Month}*/
 "no_video_to_print_popup_body" = "";
 
 /*Toplam çekiliş hak sayısı*/
-"gamification_raffle_count" = "";
+"gamification_raffle_count" = "У вас %d прав на участие в розыгрыше";
 
 /*Kampanya tarih aralıgı*/
-"gamification_raffle_dates" = "";
+"gamification_raffle_dates" = "Дата участия в розыгрыше:";
 
 /*Çekiliş özetini gör buton*/
-"gamification_raffle_brief" = "";
+"gamification_raffle_brief" = "Посмотреть Обзор Розыгрыша";
 
 /*Çekiliş özet açıklaması*/
-"gamification_event_description" = "";
+"gamification_event_description" = "Используйте нижеуказанные действия каждый месяц, чтобы увеличить свои шансы на победу в розыгрыше.";
 
 /*Yarın tekrar gel metni*/
-"gamification_comeback" = "";
+"gamification_comeback" = "Следите за новостями.";
 
 /*Paket satın alma kuralı için*/
-"gamification_package_rule" = "";
-"gamification_raffle_info" = "";
-"gamification_raffle_draw" = "";
-"gamification_raffle_summary" = "";
-"gamification_event_not_trigerred" = "";
+"gamification_package_rule" = "Купить Пакет";
+"gamification_raffle_info" = "Подробности Кампании";
+"gamification_raffle_draw" = "Нажмите, чтобы узнать условия кампании.";
+"gamification_raffle_summary" = "Посмотреть Обзор Розыгрыша";
+"gamification_event_not_trigerred" = "Эта функция еще не использовалась. Попробуйте сейчас!";
 "gamification_event_trigger_count" = "You Have %d Raffle Rights";
-"gamification_event_completed" = "";
-"gamification_total_count" = "";
-"gamification_campaign_conditions" = "";
-"gamification_rules" = "";
-"gamification_campaign_policy_title" = "";
+"gamification_event_completed" = "Вы получили все права в %@ месяце.";
+"gamification_total_count" = "Итого Получено %d Прав На Розыгрыш.";
+"gamification_campaign_conditions" = "Сведения О Кампании";
+"gamification_rules" = "Условия Розыгрыша";
+"gamification_campaign_policy_title" = "Условия Участия В Кампании";
 "gamification_raffle_win" = "";
-"gamification_title_upload" = "";
-"gamification_title_act_faceimage" = "";
-"gamification_buy" = "";
-"gamification_photopick" = "";
-"gamification_create_collage" = "";
-"gamification_print" = "";
-"gamification_invite" = "";
-"gamification_createstory" = "";
-"gamification_createalbum" = "";
-"gamification_act_faceimage" = "";
-"gamification_upload" = "";
-"gamification_title_buy" = "";
-"gamification_title_photopick" = "";
-"gamification_title_create_collage" = "";
-"gamification_title_print" = "";
-"gamification_title_invite" = "";
-"gamification_title_createstory" = "";
-"gamification_title_createalbum" = "";
+"gamification_title_upload" = "Загрузите Фото/Видео";
+"gamification_title_act_faceimage" = "Включить Функцию Распознавания Лиц/Объектов";
+"gamification_buy" = "Приобрести Пакет";
+"gamification_photopick" = "Создать Photopick";
+"gamification_create_collage" = "Создать Коллаж";
+"gamification_print" = "Получить Распечатки Фотографий";
+"gamification_invite" = "Пригласить Друга";
+"gamification_createstory" = "Создать Историю";
+"gamification_createalbum" = "Создать Альбом";
+"gamification_act_faceimage" = "Включить Функцию Распознавания Лиц/Объектов";
+"gamification_upload" = "Загрузить Фото/Видео";
+"gamification_title_buy" = "Приобрести Пакет";
+"gamification_title_photopick" = "Создать Photopick";
+"gamification_title_create_collage" = "Создать Коллаж";
+"gamification_title_print" = "Получить Распечатки Фотографий";
+"gamification_title_invite" = "Пригласить Друга";
+"gamification_title_createstory" = "Создать Историю";
+"gamification_title_createalbum" = "Создать Альбом";
 "timeline_header_backup" = "Лучшие воспоминания 2023 года";
 "winter_video_timeline_header" = "";
-"yearly" = "";
+"yearly" = "Ежегодник";
