@@ -2136,6 +2136,10 @@
 		89DAB3DD23AB513700D4337D /* HSCompletionPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89DAB3D823AB513600D4337D /* HSCompletionPopUp.xib */; };
 		89DAB3DF23AB513700D4337D /* HSCompletionPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DAB3D923AB513700D4337D /* HSCompletionPopUp.swift */; };
 		89DAB3E123AB513700D4337D /* HSCompletionPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DAB3D923AB513700D4337D /* HSCompletionPopUp.swift */; };
+		89DB124A2BFB53A00005513B /* RaffleConditionNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DB12492BFB53A00005513B /* RaffleConditionNewViewController.swift */; };
+		89DB124B2BFB53A00005513B /* RaffleConditionNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DB12492BFB53A00005513B /* RaffleConditionNewViewController.swift */; };
+		89DB124C2BFB53A00005513B /* RaffleConditionNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DB12492BFB53A00005513B /* RaffleConditionNewViewController.swift */; };
+		89DB124D2BFB53A00005513B /* RaffleConditionNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DB12492BFB53A00005513B /* RaffleConditionNewViewController.swift */; };
 		89DCB67F2B18AA6F00B65D53 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DCB67E2B18AA6F00B65D53 /* NotificationService.swift */; };
 		89DCB6832B18AA6F00B65D53 /* LifeboxNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 89DCB67C2B18AA6E00B65D53 /* LifeboxNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		89DCC5CC2403A99900488F1F /* SubscriptionOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DCC5C92403A99900488F1F /* SubscriptionOfferView.swift */; };
@@ -11626,6 +11630,7 @@
 		89DA5D0123ACF635000FA31D /* SmartAlbumWarningPopUpsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartAlbumWarningPopUpsFactory.swift; sourceTree = "<group>"; };
 		89DAB3D823AB513600D4337D /* HSCompletionPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HSCompletionPopUp.xib; sourceTree = "<group>"; };
 		89DAB3D923AB513700D4337D /* HSCompletionPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSCompletionPopUp.swift; sourceTree = "<group>"; };
+		89DB12492BFB53A00005513B /* RaffleConditionNewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaffleConditionNewViewController.swift; sourceTree = "<group>"; };
 		89DCB67C2B18AA6E00B65D53 /* LifeboxNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeboxNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		89DCB67E2B18AA6F00B65D53 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		89DCB6802B18AA6F00B65D53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -17598,6 +17603,7 @@
 				890B311D2BB2FFFD00C5A789 /* RaffleViewOutput.swift */,
 				89EDEB1A2BB812CD00D754D9 /* RaffleSummaryViewController.swift */,
 				89C768212BC51ABB001C41F9 /* RaffleConditionViewController.swift */,
+				89DB12492BFB53A00005513B /* RaffleConditionNewViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -28820,6 +28826,7 @@
 				077D1D9C280568CD001C6E72 /* AppFont.swift in Sources */,
 				8C975E14220DA25000AC3502 /* InstapickAnalyzesCount.swift in Sources */,
 				9862BC4C255E832C00D7945E /* FileInfoShareView.swift in Sources */,
+				89DB124A2BFB53A00005513B /* RaffleConditionNewViewController.swift in Sources */,
 				C62239AD2049732D0043ED44 /* FaceImageChangeCoverRouter.swift in Sources */,
 				076BD1A727BBBE02004609E3 /* MapSearchInteractorOutput.swift in Sources */,
 				8C0E8F081FDEBDFF00789C91 /* FBService.swift in Sources */,
@@ -31033,6 +31040,7 @@
 				CE784AFF22A685FB00662219 /* CardsManagerViewProtocol.swift in Sources */,
 				CE784B0022A685FB00662219 /* BaseFilesGreedRouterInput.swift in Sources */,
 				CE784B0122A685FB00662219 /* LeavePremiumRouter.swift in Sources */,
+				89DB124C2BFB53A00005513B /* RaffleConditionNewViewController.swift in Sources */,
 				CF01729823D00B9F00C0B0DE /* NetmeraCustomUser.swift in Sources */,
 				890B31462BB3007200C5A789 /* RaffleRouterInput.swift in Sources */,
 				98A86D8A23A7C8BC00438225 /* EmptyView.swift in Sources */,
@@ -32031,6 +32039,7 @@
 				89CF11882B89DCD50040F73F /* DrawCampaignInteractorInput.swift in Sources */,
 				CF8B644023CBC9D70021B021 /* UIApplication+OpenURL.swift in Sources */,
 				CF8B644123CBC9D70021B021 /* (null) in Sources */,
+				89DB124B2BFB53A00005513B /* RaffleConditionNewViewController.swift in Sources */,
 				895A54BE2B57C94C00E2A275 /* ConnectedDeviceRouter.swift in Sources */,
 				CF8B644223CBC9D70021B021 /* TabBarActionHandler.swift in Sources */,
 				98231A0C24F3A1E700FD16E2 /* SelectionMenuController.swift in Sources */,
@@ -34316,6 +34325,7 @@
 				CF8B6CD523CBCA280021B021 /* FileForDownload.swift in Sources */,
 				CF8B6CD723CBCA280021B021 /* ServerErrors.swift in Sources */,
 				CF8B6CD823CBCA280021B021 /* SearchService.swift in Sources */,
+				89DB124D2BFB53A00005513B /* RaffleConditionNewViewController.swift in Sources */,
 				CF8B6CD923CBCA280021B021 /* MediaItemsMetaData+CoreDataClass.swift in Sources */,
 				CF8B6CDA23CBCA280021B021 /* PackagePremiumView.swift in Sources */,
 				0305A34323D5C562004D1EC7 /* TrashBinRouter.swift in Sources */,
