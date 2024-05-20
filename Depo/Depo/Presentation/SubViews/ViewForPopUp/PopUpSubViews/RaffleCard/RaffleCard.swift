@@ -87,7 +87,7 @@ final class RaffleCard: BaseCardView {
             self.endDate = dateString(from: endDate)
         }
         
-        if let conditionImage = cardObject?.details?["extraData"]["conditionImage"].string {
+        if let conditionImage = cardObject?.details?["extraData"]["conditionImagePath"].string {
             self.conditionImageUrl = conditionImage
         }
         
