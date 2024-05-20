@@ -9,12 +9,23 @@ enum RafflePeriod: String, Codable {
     case daily = "DAILY"
     case weekly = "WEEKLY"
     case monthly = "MONTHLY"
+    case year = "YEAR"
+    case month = "MONTH"
     
     var title: String {
         switch self {
         case .daily: return localized(.daily)
         case .weekly: return localized(.weekly)
         case .monthly: return localized(.monthly)
+        default: return localized(.daily)
+        }
+    }
+    
+    var packageTitle: String {
+        switch self {
+        case .month: return localized(.monthly)
+        case .year: return localized(.yearly)
+        default: return localized(.monthly)
         }
     }
 }
@@ -214,6 +225,7 @@ final class RaffleViewController: BaseViewController {
     private var raffleStatusElementOppacity: [Float] = []
     private var nextDayIsHidden: [Bool] = []
     private var rafflePeriod: [String] = []
+    private var packagePeriod: [String] = []
     private var endDateText: String = ""
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
@@ -241,19 +253,39 @@ final class RaffleViewController: BaseViewController {
     
     @objc private func summaryButtonTapped() {
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .gamificationOnSummary)
-        output.goToRaffleSummary(statusResponse: statusResponse)
+        output.goToRaffleSummary(statusResponse: statusResponse, campaignId: id)
     }
     
     @objc private func infoLabelTapped() {
-        output.goToRaffleCondition(statusResponse: statusResponse, conditionImageUrl: conditionImageUrl)
+        output.goToRaffleCondition(statusResponse: statusResponse, conditionImageUrl: conditionImageUrl, campaignId: id)
     }
     
     private func successStatus(status: RaffleStatusResponse) {
         DispatchQueue.main.async {
             self.statusResponse = status
             for detail in self.statusResponse?.details ?? [] {
+                var oppacity: Float = 1.0
+                var isHidden = true
+                var period = RafflePeriod.daily
+                
+                let periodEarnLimit = detail.periodEarnLimit ?? 0
+                let periodEarnedPoints = detail.periodEarnedPoints ?? 0
+                let totalEarnLimit = detail.totalEarnLimit ?? 0
+                let totalPointsEarnedRule = detail.totalPointsEarnedRule ?? 0
+                if periodEarnLimit - periodEarnedPoints <= 0 || totalEarnLimit == totalPointsEarnedRule {
+                    period = RafflePeriod(rawValue: detail.periodType ?? RafflePeriod.daily.rawValue) ?? RafflePeriod.daily
+                    isHidden = false
+                    oppacity = 0.2
+                }
+                
                 let element = RaffleElement(rawValue: detail.earnType ?? RaffleElement.login.rawValue)
+                var packagePeriods = RafflePeriod(rawValue: detail.packagePeriodType ?? RafflePeriod.month.rawValue) ?? RafflePeriod.month
+                
                 self.raffleStatusElement.append(element)
+                self.packagePeriod.append(packagePeriods.packageTitle)
+                self.raffleStatusElementOppacity.append(Float(oppacity))
+                self.nextDayIsHidden.append(isHidden)
+                self.rafflePeriod.append(period.title)
             }
             self.setupLayout()
         }
@@ -294,8 +326,9 @@ extension RaffleViewController: UICollectionViewDataSource {
         let oppacity = raffleStatusElementOppacity[indexPath.row]
         let isHidden = nextDayIsHidden[indexPath.row]
         let period = rafflePeriod[indexPath.row]
+        let packPeriod = packagePeriod[indexPath.row]
         cell.delegate = self
-        cell.configure(raffle: raffle, imageOppacity: oppacity, nextLabelIsHidden: isHidden, period: period)
+        cell.configure(raffle: raffle, imageOppacity: oppacity, nextLabelIsHidden: isHidden, period: period, packagePeriod: packPeriod)
         return cell
     }
 }
@@ -392,28 +425,6 @@ extension RaffleViewController {
         collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40).activate()
         let rowCount = (CGFloat(raffleStatusElement.count) / 3.0).rounded(.awayFromZero)
         collectionView.heightAnchor.constraint(equalToConstant: rowCount * 120).isActive = true
-        
-        for el in raffleStatusElement {
-            var oppacity: Float = 1.0
-            var isHidden = true
-            var period = RafflePeriod.daily
-            for value in statusResponse?.details ?? [] {
-                if el.rawValue == value.earnType {
-                    let periodEarnLimit = value.periodEarnLimit ?? 0
-                    let periodEarnedPoints = value.periodEarnedPoints ?? 0
-                    let totalEarnLimit = value.totalEarnLimit ?? 0
-                    let totalPointsEarnedRule = value.totalPointsEarnedRule ?? 0
-                    if periodEarnLimit - periodEarnedPoints <= 0 || totalEarnLimit == totalPointsEarnedRule {
-                        period = RafflePeriod(rawValue: value.periodType ?? RafflePeriod.daily.rawValue) ?? RafflePeriod.daily
-                        isHidden = false
-                        oppacity = 0.2
-                    }
-                }
-            }
-            raffleStatusElementOppacity.append(Float(oppacity))
-            nextDayIsHidden.append(isHidden)
-            rafflePeriod.append(period.title)
-        }
 
         self.collectionView.dataSource = self
         self.collectionView.delegate = self

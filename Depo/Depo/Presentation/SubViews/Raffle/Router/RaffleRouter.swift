@@ -13,13 +13,13 @@ class RaffleRouter: RaffleRouterInput {
     let router = RouterVC()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
-    func goToRaffleSummary(statusResponse: RaffleStatusResponse?) {
-        let vc = router.raffleSummary(statusResponse: statusResponse)
+    func goToRaffleSummary(statusResponse: RaffleStatusResponse?, campaignId: Int) {
+        let vc = router.raffleSummary(statusResponse: statusResponse, campaignId: campaignId)
         router.pushViewController(viewController: vc, animated: false)
     }
     
-    func goToRaffleCondition(statusResponse: RaffleStatusResponse?, conditionImageUrl: String) {
-        let vc = router.raffleCondition(statusResponse: statusResponse, conditionImageUrl: conditionImageUrl)
+    func goToRaffleCondition(statusResponse: RaffleStatusResponse?, conditionImageUrl: String, campaignId: Int) {
+        let vc = router.raffleCondition(statusResponse: statusResponse, conditionImageUrl: conditionImageUrl, campaignId: campaignId)
         router.pushViewController(viewController: vc, animated: false)
     }
     
