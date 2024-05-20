@@ -2375,7 +2375,7 @@ then {11,99 TRY/Month}*/
 "gamification_event_description" = "Her ay aşağıdaki özellikleri kullan, çekilişi kazanma şansını artır.";
 
 /*Yarın tekrar gel metni*/
-"gamification_comeback" = "";
+"gamification_comeback" = "Takipte kal.";
 
 /*Paket satın alma kuralı için*/
 "gamification_package_rule" = "Paket Satın Al";
@@ -2412,3 +2412,4 @@ then {11,99 TRY/Month}*/
 "gamification_title_createalbum" = "Albüm Oluştur";
 "timeline_header_backup" = "2023 En Güzel Anıları";
 "winter_video_timeline_header" = "";
+"yearly" = "Yıllık";

@@ -434,6 +434,7 @@ enum Strings: String, Localizable {
     case daily = "Daily"
     case weekly = "Weekly"
     case monthly = "Monthly"
+    case yearly = "yearly"
     case gamificationTitleUpload = "gamification_title_upload"
     case gamificationTitleActFaceimage = "gamification_title_act_faceimage"
     case gamificationBuy = "gamification_buy"
