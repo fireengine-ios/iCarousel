@@ -37,7 +37,6 @@ struct BurstGroupsWithId: Codable {
             case metadata
         }
         
-        
         struct Metadata: Codable {
             let thumbnailLarge: String?
             let originalHash: String?
@@ -67,6 +66,5 @@ struct BurstGroupsWithId: Codable {
         struct Location: Codable {
             
         }
-        
     }
 }

@@ -53,13 +53,29 @@ final class LaunchCampaignCard: BaseCardView {
     }
     
     private func loadImage() {
-        URLSession.shared.dataTask(with: RouteRequests.launchCampaignImage) { [weak self] data, _, error in
-            guard let data = data, error == nil else { 
+        URLSession.shared.dataTask(with: RouteRequests.launchCampaignImage) { [weak self] data, response, error in
+            
+            guard let data = data else {
+                debugLog("Data is nil.")
                 return
             }
-            DispatchQueue.toMain {
-                self?.imageView.image = UIImage(data: data)
-                self?.campaignImageView.frame = CGRect(x: (self?.imageView.frame.maxY)! - 25.0, y: (self?.imageView.frame.maxY)! - 70.0, width: 50, height: 50)
+            
+            if let httpResponse = response as? HTTPURLResponse, !(200...299).contains(httpResponse.statusCode) {
+                debugLog("HTTP Request failed with status code: \(httpResponse.statusCode)")
+                return
+            }
+            
+            if let error = error {
+                debugLog("Data task error: \(error.localizedDescription)")
+                return
+            }
+            
+            DispatchQueue.main.async {
+                if let weakSelf = self, let image = UIImage(data: data) {
+                    weakSelf.imageView.image = image
+                    self?.imageView.image = UIImage(data: data)
+                    self?.campaignImageView.frame = CGRect(x: (self?.imageView.frame.maxY)! - 25.0, y: (self?.imageView.frame.maxY)! - 70.0, width: 50, height: 50)
+                }
             }
         }.resume()
     }

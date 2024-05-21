@@ -2190,7 +2190,7 @@ then {11,99 TRY/Month}*/
 "printed_package_view" = "View My Print Packages";
 "more_photo_right" = "You've got %d more photo submission. Are you sure you want to continue?";
 "no_more_photo_right" = "Has seleccionado más de %d fotos. Reduzca para continuar.";
-"timeline_header" = "The Best Memories of 2023";
+"timeline_header" = "Your Special Winter Memories";
 
 /*Fuzzy*/
 "timeline_description" = "We have compiled the best memories of 2023 for you. Check them out now!";
@@ -2337,3 +2337,55 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "photo_max_selection_body_x" = "You can send a maximum of %@ photos for printing.";
+"no_video_to_print_popup_title" = "";
+"no_video_to_print_popup_body" = "";
+
+/*Toplam çekiliş hak sayısı*/
+"gamification_raffle_count" = "You Have %d Raffle Rights";
+
+/*Kampanya tarih aralıgı*/
+"gamification_raffle_dates" = "Participation date in the draw:";
+
+/*Çekiliş özetini gör buton*/
+"gamification_raffle_brief" = "See Raffle Summary";
+
+/*Çekiliş özet açıklaması*/
+"gamification_event_description" = "Use the features below every month to increase your chances of winning the raffle.";
+
+/*Yarın tekrar gel metni*/
+"gamification_comeback" = "Stay tuned.";
+
+/*Paket satın alma kuralı için*/
+"gamification_package_rule" = "Buy Package";
+"gamification_raffle_info" = "Campaign Details";
+"gamification_raffle_draw" = "Click for campaign conditions.";
+"gamification_raffle_summary" = "See Raffle Summary";
+"gamification_event_not_trigerred" = "This feature has not been used yet.Try now!";
+"gamification_event_trigger_count" = "You Have %d Raffle Rights";
+"gamification_event_completed" = "You have completed your rights this %@ month.";
+"gamification_total_count" = "You Won a Total of %d Raffle Rights.";
+"gamification_campaign_conditions" = "Campaign Details";
+"gamification_rules" = "Raffle Eligibility";
+"gamification_campaign_policy_title" = "Campaign Participation Conditions";
+"gamification_raffle_win" = "";
+"gamification_title_upload" = "Upload Photo/Video";
+"gamification_title_act_faceimage" = "Turn on Face Object Recognition";
+"gamification_buy" = "Purchasing a Package";
+"gamification_photopick" = "Create Photopick";
+"gamification_create_collage" = "Create Collage";
+"gamification_print" = "Get Photo Prints";
+"gamification_invite" = "Invite a Friend";
+"gamification_createstory" = "Create Story";
+"gamification_createalbum" = "Create an Album";
+"gamification_act_faceimage" = "Turn on Face/Object Recognition";
+"gamification_upload" = "Upload Photo/Video";
+"gamification_title_buy" = "Buy Package";
+"gamification_title_photopick" = "Create Photopick";
+"gamification_title_create_collage" = "Create Collage";
+"gamification_title_print" = "Get Photo Prints";
+"gamification_title_invite" = "Invite a Friend";
+"gamification_title_createstory" = "Create Story";
+"gamification_title_createalbum" = "Create Album";
+"timeline_header_backup" = "The Best Memories of 2023";
+"winter_video_timeline_header" = "Your Special Winter Memories";
+"yearly" = "";

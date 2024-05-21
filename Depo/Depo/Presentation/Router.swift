@@ -627,7 +627,8 @@ class RouterVC: NSObject {
             assertionFailure()
             return AllFilesSegmentedController()
         }
-        let controllers = [documents, musics, favorites, sharedWithMe, trashBin, shareByMeSegment, allFiles, documentsAndMusic]
+        let controllers = [documents, favorites, trashBin, sharedWithMe, musics, shareByMeSegment, allFiles, documentsAndMusic]
+        
         return AllFilesSegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
     }
     
@@ -980,8 +981,8 @@ class RouterVC: NSObject {
     
     // MARK: Best Scene All Group Sorted
     
-    func bestSceneAllGroupSortedViewController(coverPhotoUrl: String, fileListUrls: [String]) -> BestSceneAllGroupSortedViewController {
-        let bestSceneVC = BestSceneAllGroupSortedInitializer.initializeController(coverPhotoUrl: coverPhotoUrl, fileListUrls: fileListUrls) as! BestSceneAllGroupSortedViewController
+    func bestSceneAllGroupSortedViewController(coverPhotoUrl: String, fileListUrls: [String], selectedId: [Int], selectedGroupID: Int) -> BestSceneAllGroupSortedViewController {
+        let bestSceneVC = BestSceneAllGroupSortedInitializer.initializeController(coverPhotoUrl: coverPhotoUrl, fileListUrls: fileListUrls, selectedId: selectedId, selectedGroupID: selectedGroupID) as! BestSceneAllGroupSortedViewController
         return bestSceneVC
     }
     
@@ -1173,6 +1174,19 @@ class RouterVC: NSObject {
     // MARK: - Settings -> Connected Device
     func connectedDevice() -> ConnectedDeviceViewController {
         return ConnectedDeviceInitializer.initializeViewController()
+    }
+    
+    // MARK: - Raffle - Gamification
+    func raffle(id: Int, url: String, endDateText: String, conditionImageUrl: String) -> RaffleViewController {
+        return RaffleInitializer.initializeViewController(id: id, url: url, endDateText: endDateText, conditionImageUrl: conditionImageUrl)
+    }
+    
+    func raffleSummary(statusResponse: RaffleStatusResponse?, campaignId: Int) -> RaffleSummaryViewController {
+        return RaffleSummaryViewController(statusResponse: statusResponse, campaignId: campaignId)
+    }
+    
+    func raffleCondition(statusResponse: RaffleStatusResponse?, conditionImageUrl: String, campaignId: Int) -> RaffleConditionNewViewController {
+        return RaffleConditionNewViewController(statusResponse: statusResponse, conditionImageUrl: conditionImageUrl, campaignId: campaignId)
     }
     
     // MARK: - Draw Campaign

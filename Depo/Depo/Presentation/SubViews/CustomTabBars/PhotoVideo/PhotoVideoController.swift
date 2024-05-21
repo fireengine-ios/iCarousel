@@ -1031,21 +1031,27 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         
         switch type {
         case .galleryAll:
-//            category = .photosAndVideos
-//            fileTypes = [.image, .video]
-//            collectionViewManager.viewType = .all
-//            performFetch()
+            category = .photosAndVideos
+            fileTypes = [.image, .video]
+            collectionViewManager.viewType = .all
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.performFetch()
+            }
             changeViewType(to: .all)
         case .galleryPhotos:
             category = .photos
             fileTypes = [.image]
             collectionViewManager.viewType = .all
-            performFetch()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.performFetch()
+            }
         case .galleryVideos:
             category = .videos
             fileTypes = [.video]
             collectionViewManager.viewType = .all
-            performFetch()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.performFetch()
+            }
         case .gallerySync:
             changeViewType(to: .synced)
         case .galleryUnsync:

@@ -2124,7 +2124,7 @@ then {11,99 TRY/Month}*/
 "printed_package_view" = "";
 "more_photo_right" = "";
 "no_more_photo_right" = "";
-"timeline_header" = "2023-ის საუკეთესო მოგონებები";
+"timeline_header" = "შენი განსაკუთრებული ზამთრის მოგონებები";
 "timeline_description" = "ჩვენ შევადგინეთ თქვენთვის 2023 წლის საუკეთესო მოგონებები. ნახე ისინი!";
 "selected_for_print" = "";
 "print_cancel_popup_question" = "";
@@ -2253,3 +2253,55 @@ then {11,99 TRY/Month}*/
 "grace_banner_paycell_text" = "";
 "photo_max_selection_title_x" = "";
 "photo_max_selection_body_x" = "";
+"no_video_to_print_popup_title" = "";
+"no_video_to_print_popup_body" = "";
+
+/*Toplam çekiliş hak sayısı*/
+"gamification_raffle_count" = "";
+
+/*Kampanya tarih aralıgı*/
+"gamification_raffle_dates" = "";
+
+/*Çekiliş özetini gör buton*/
+"gamification_raffle_brief" = "";
+
+/*Çekiliş özet açıklaması*/
+"gamification_event_description" = "";
+
+/*Yarın tekrar gel metni*/
+"gamification_comeback" = "";
+
+/*Paket satın alma kuralı için*/
+"gamification_package_rule" = "";
+"gamification_raffle_info" = "";
+"gamification_raffle_draw" = "";
+"gamification_raffle_summary" = "";
+"gamification_event_not_trigerred" = "";
+"gamification_event_trigger_count" = "You Have %d Raffle Rights";
+"gamification_event_completed" = "";
+"gamification_total_count" = "";
+"gamification_campaign_conditions" = "";
+"gamification_rules" = "";
+"gamification_campaign_policy_title" = "";
+"gamification_raffle_win" = "";
+"gamification_title_upload" = "";
+"gamification_title_act_faceimage" = "";
+"gamification_buy" = "";
+"gamification_photopick" = "";
+"gamification_create_collage" = "";
+"gamification_print" = "";
+"gamification_invite" = "";
+"gamification_createstory" = "";
+"gamification_createalbum" = "";
+"gamification_act_faceimage" = "";
+"gamification_upload" = "";
+"gamification_title_buy" = "";
+"gamification_title_photopick" = "";
+"gamification_title_create_collage" = "";
+"gamification_title_print" = "";
+"gamification_title_invite" = "";
+"gamification_title_createstory" = "";
+"gamification_title_createalbum" = "";
+"timeline_header_backup" = "2023-ის საუკეთესო მოგონებები";
+"winter_video_timeline_header" = "";
+"yearly" = "";

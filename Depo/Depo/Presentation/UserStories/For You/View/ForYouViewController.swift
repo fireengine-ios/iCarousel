@@ -102,7 +102,8 @@ final class ForYouViewController: BaseViewController {
         tableView.delegate = self
         tableView.register(nibCell: ForYouTableViewCell.self)
         tableView.register(nibCell: ForYouFaceImageTableViewCell.self)
-        tableView.register(nibCell: ForYouTimelineTableViewCell.self)
+//        tableView.register(nibCell: ForYouTimelineTableViewCell.self)
+        tableView.register(nibCell: ForYouWinterVideoTableViewCell.self)
     }
     
     private func faceImagePermissionChanged(to isAllowed: Bool) {
@@ -118,7 +119,7 @@ final class ForYouViewController: BaseViewController {
         isFIREnabled = isAllowed
     }
     
-    private func updateTableView(for view: ForYouSections) {
+     func updateTableView(for view: ForYouSections) {
         guard let index = forYouSections.firstIndex(of: view) else { return }
         DispatchQueue.main.async {
             self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
@@ -172,8 +173,8 @@ extension ForYouViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            let cell = tableView.dequeue(reusable: ForYouTimelineTableViewCell.self, for: indexPath)
-            let model = output.getModel(for: forYouSections[indexPath.row]) as? TimelineResponse
+            let cell = tableView.dequeue(reusable: ForYouWinterVideoTableViewCell.self, for: indexPath)
+            let model = output.getModel(for: forYouSections[indexPath.row]) as? WinterThemeVideoResponse
             cell.delegate = self
             cell.configure(with: model)
             cell.isHidden = model != nil ? false : true
@@ -274,7 +275,23 @@ extension ForYouViewController: ForYouFaceImageTableViewCellDelegae {
     }
 }
 
-extension ForYouViewController: ForYouTimelineTableViewCellDelegate {
+//extension ForYouViewController: ForYouTimelineTableViewCellDelegate {
+//    func saveTimelineCard(id: Int) {
+//        output.currentSection = .timeline
+//        output.saveTimelineCard(id: id)
+//    }
+//    
+//    func setTimelineNil() {
+//        output.setTimelineNil()
+//        updateTableView(for: .timeline)
+//    }
+//    
+//    func shareTimeline(item: BaseDataSourceItem, type: CardShareType) {
+//        shareCardContentManager.presentSharingMenu(item: item, type: type)
+//    }
+//}
+
+extension ForYouViewController: ForYouWinterVideoTableViewCellDelegate {
     func saveTimelineCard(id: Int) {
         output.currentSection = .timeline
         output.saveTimelineCard(id: id)

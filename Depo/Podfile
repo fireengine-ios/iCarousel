@@ -30,7 +30,7 @@ def core_pods
   pod 'SDWebImage', '~> 4'
   pod 'GoogleConversionTracking', '~> 3'
   pod 'GoogleTagManager', '~> 7'
-  pod 'Adjust', '~> 4.33.3'
+  pod 'Adjust', '~> 4.35.2'
   pod 'SNCollectionViewLayout'
   #pod 'ActiveLabel'
 

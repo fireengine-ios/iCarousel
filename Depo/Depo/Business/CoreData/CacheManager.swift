@@ -72,6 +72,7 @@ final class CacheManager {
         isCacheActualized = false
         isProcessing = true
 
+        prepairingLoadingForProfileImage(isDone: false)
         self.startProccessingLocalAlbums { [weak self] in
             debugLog("CacheManager startProccessingLocalAlbums")
             guard let self = self else {
@@ -89,8 +90,8 @@ final class CacheManager {
                     }
                     
                     if isNoRemotes || self.userDefaultsVars.currentRemotesPage > 0 {
-                        self.showPreparationCardAfterDelay()
-                        prepairingLoadingForProfileImage(isStart: false)
+                        //self.showPreparationCardAfterDelay()
+                        //prepairingLoadingForProfileImage(isDone: false)
                         self.startAppendingAllRemotes(completion: { [weak self] in
                             debugLog("CacheManager no remotes, appended all remotes")
                             guard let self = self, !self.processingRemoteItems else {
@@ -110,7 +111,8 @@ final class CacheManager {
                                     self.isProcessing = false
                                     self.isCacheActualized = true
                                     debugLog("CacheManager cache is actualized")
-                                    self.updatePreparation(isBegun: false)
+                                    //self.updatePreparation(isBegun: false)
+                                    self.prepairingLoadingForProfileImage(isDone: true)
                                     SyncServiceManager.shared.updateImmediately()
                                     
                                     let mediaService = MediaItemOperationsService.shared
@@ -135,8 +137,8 @@ final class CacheManager {
                             debugLog("CacheManager there are remotes, but locals already being processed")
                             return
                         }
-                        self.showPreparationCardAfterDelay()
-                        prepairingLoadingForProfileImage(isStart: false)
+                        //self.showPreparationCardAfterDelay()
+                        //prepairingLoadingForProfileImage(isDone: false)
                         self.startProcessingAllLocals(completion: { [weak self] in
                             self?.actualizeUnsavedFileSyncStatus() { [weak self] in
                                 guard let self = self, !self.processingRemoteItems else {
@@ -146,7 +148,8 @@ final class CacheManager {
                                 self.isProcessing = false
                                 self.isCacheActualized = true
                                 debugLog("CacheManager cache is actualized")
-                                self.updatePreparation(isBegun: false)
+                                //self.updatePreparation(isBegun: false)
+                                self.prepairingLoadingForProfileImage(isDone: true)
                                 SyncServiceManager.shared.updateImmediately()
                                 
                                 let mediaService = MediaItemOperationsService.shared
@@ -173,10 +176,10 @@ final class CacheManager {
     
     private func updatePreparation(isBegun: Bool) {
         if isBegun {
-            self.prepairingLoadingForProfileImage(isStart: false)
+            self.prepairingLoadingForProfileImage(isDone: false)
             CardsManager.default.startOperationWith(type: .prepareQuickScroll)
         } else {
-            self.prepairingLoadingForProfileImage(isStart: true)
+            self.prepairingLoadingForProfileImage(isDone: true)
             CardsManager.default.stopOperationWith(type: .prepareQuickScroll)
         }
         
@@ -185,10 +188,14 @@ final class CacheManager {
         }
     }
     
-    private func prepairingLoadingForProfileImage(isStart: Bool) {
-        userDefaultsVars.isProcessPrepairingDone = isStart
-        if isStart {
+    private func prepairingLoadingForProfileImage(isDone: Bool) {
+        self.userDefaultsVars.isProcessPrepairingDone = isDone
+        if isDone {
             NotificationCenter.default.post(name: .isProcecessPrepairing, object: nil)
+        }
+        
+        DispatchQueue.main.async {
+            UIApplication.shared.isIdleTimerDisabled = !isDone
         }
     }
     

@@ -337,7 +337,8 @@ extension SettingsViewController: SettingsViewInput {
     
     func prepareCellsData(isChatbotShown: Bool) {
         self.isChatbotShown = isChatbotShown
-        cellTypes = SettingsTypes.prepareTypes(isChatbotShown: isChatbotShown)
+        let displayConnectAccount = FirebaseRemoteConfig.shared.displayConnectAccount
+        cellTypes = SettingsTypes.prepareTypes(isChatbotShown: isChatbotShown, isDisplayConnect: displayConnectAccount)
         self.setupTableViewFooter()
     }
     

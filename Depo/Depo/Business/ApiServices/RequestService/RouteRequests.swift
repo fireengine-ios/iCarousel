@@ -358,6 +358,10 @@ struct RouteRequests {
         static func burstGroupFiles(for groupId: Int) -> URL {
             return bestScene +/ "\(groupId)/files"
         }
+        
+        static func deleteSelectedPhotos(for groupId: Int) -> URL {
+            return bestScene +/ "\(groupId)"
+        }
     }
 
     // MARK: - Print
@@ -539,6 +543,7 @@ struct RouteRequests {
     static let forYouThrowbackDetail = "foryou/years-ago/%d"
     static let collageTemplate = baseUrl +/ "template/collages"
     static let timeline = baseUrl +/ "foryou/timeline"
+    static let winterThemedVideo = baseUrl +/ "foryou/timeline/themed"
     static func saveDeleteTimeline(with id: Int) -> URL {
         return timeline +/ String(id)
     }
@@ -564,4 +569,8 @@ struct RouteRequests {
     static let getCampaignStatus = "draw/%d/status"
     static let getCampaignPolicy = "draw/%d/policy"
     static let setCampaignApply = "draw/%d/apply"
+    
+    //MARK: -RAFFLE (GAMIFICATION)
+    static let getRaffleStatus = "v1/campaign/%d"
+    static let getRaffleCondition = "v1/campaign/rules/%d"
 }

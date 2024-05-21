@@ -67,6 +67,8 @@ final class HomePageViewController: BaseViewController {
         }
 
         output.viewWillAppear()
+                
+        reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -136,9 +138,11 @@ final class HomePageViewController: BaseViewController {
     }
     
     @objc func reloadData() {
-        showSpinner()
-        refreshControl.endRefreshing()
-        output.needRefresh()
+        DispatchQueue.main.async {
+            self.showSpinner()
+            self.refreshControl.endRefreshing()
+            self.output.needRefresh()
+        }
     }
     
     //MARK: Utility Methods(private)

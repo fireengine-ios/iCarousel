@@ -162,7 +162,19 @@ class SimpleUpload: UploadRequestParametrs {
                 HeaderConstant.XObjectMetaTakenDate: String(milliseconds)
             ]
         }
-
+      
+        if item.asset?.mediaSubtypes == .photoScreenshot {
+            header = header + [
+                HeaderConstant.XObjectMetaFolderLabel: "SCREENSHOTS"
+            ]
+        }
+        
+        if item.asset?.playbackStyle == .imageAnimated {
+            header = header + [
+                HeaderConstant.XObjectMetaFolderLabel: "ANIMATIONS"
+            ]
+        }
+        
         return header
     }
     

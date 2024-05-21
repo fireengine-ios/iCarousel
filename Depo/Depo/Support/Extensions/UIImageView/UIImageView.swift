@@ -34,11 +34,18 @@ extension UIImage {
                               width: rect.width,
                               height: rect.height)
         
-        UIGraphicsBeginImageContext(rect)
+        UIGraphicsBeginImageContextWithOptions(rect, false, 1.0)
         draw(in: drawRect)
-        let newImg = UIGraphicsGetImageFromCurrentImageContext()
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return newImg
+        
+        return newImage
+        
+//        UIGraphicsBeginImageContext(rect)
+//        draw(in: drawRect)
+//        let newImg = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        return newImg
     }
 }
 

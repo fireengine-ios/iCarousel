@@ -11,6 +11,8 @@ import SNCollectionViewLayout
 
 class BestSceneAllGroupSortedViewController: BaseViewController {
     
+    private let service = BestSceneService()
+    
     private lazy var customView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -46,8 +48,8 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.text = localized(.deleteInfo)
-        label.textColor = UIColor(red: 0.19, green: 0.19, blue: 0.19, alpha: 1.00)
-        label.font = UIFont(name: "TurkcellSaturaMed", size: 14)
+        label.textColor = AppColor.label.color
+        label.font = .appFont(.medium, size: 14)
         label.textAlignment = .left
         
         return label
@@ -63,7 +65,8 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
         button.clipsToBounds = true
         button.layer.borderWidth = 1.0
         button.layer.borderColor = AppColor.darkBlueColor.cgColor
-        button.titleLabel?.font = UIFont(name: "TurkcellSaturaMed", size: 14)
+        button.titleLabel?.font = .appFont(.medium, size: 14)
+        button.addTarget(self, action: #selector(tappedDeleteButton), for: .touchUpInside)
         return button
     }()
     
@@ -77,13 +80,17 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
         button.clipsToBounds = true
         button.layer.borderWidth = 1.0
         button.layer.borderColor = AppColor.darkBlueColor.cgColor
-        button.titleLabel?.font = UIFont(name: "TurkcellSaturaMed", size: 14)
+        button.titleLabel?.font = .appFont(.medium, size: 14)
+        button.addTarget(self, action: #selector(tappedKeepItemButton), for: .touchUpInside)
         return button
     }()
     
     var coverPhotoUrl: String?
     var fileListUrls: [String] = []
     
+    var selectedId: [Int]
+    var selectedGroupID: Int?
+                
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -96,11 +103,15 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
         snCollectionViewLayout.scrollDirection = .vertical
         
         setupLayout()
+
+//        print("Güncel dizi 😎: \(self.selectedId)")
     }
     
-    init(coverPhotoUrl: String, fileListUrls: [String]) {
+    init(coverPhotoUrl: String, fileListUrls: [String], selectedId: [Int], selectedGroupID: Int) {
         self.coverPhotoUrl = coverPhotoUrl
         self.fileListUrls = fileListUrls
+        self.selectedId = selectedId
+        self.selectedGroupID = selectedGroupID
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -182,9 +193,39 @@ class BestSceneAllGroupSortedViewController: BaseViewController {
         collectionView.register(BestSceneAllGroupSortedCollectionViewCell.self, forCellWithReuseIdentifier: "BestSceneAllGroupSortedCollectionViewCell")
         return collectionView
     }()
+    
+    @objc func tappedDeleteButton() {
+        let vc = BestSceneSuccessPopUp.with()
+        vc.onYesButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            service.deleteSelectedPhotos(groupId: self.selectedGroupID ?? 0, photoIds: self.selectedId) { response in
+                switch response {
+                case .success():
+                    debugPrint("Photos deleted successfully")
+                case .failed(let error):
+                    debugPrint(error.localizedDescription)
+                }
+            }
+        }
+        vc.open()
+    }
+    
+     @objc func tappedKeepItemButton() {
+         service.keepAllPhotosInGroup(groupId: self.selectedGroupID ?? 0, photoIds: []) { response in
+             switch response {
+             case .success():
+                 let router = RouterVC()
+                 let controller = router.bestSceneAllGroupController()
+                 router.pushViewController(viewController: controller)
+             case .failed(let error):
+                 debugPrint("Error:", error.localizedDescription)
+             }
+             self.collectionView.reloadData()
+         }
+     }
 }
 
-extension BestSceneAllGroupSortedViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SNCollectionViewLayoutDelegate {
+extension BestSceneAllGroupSortedViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SNCollectionViewLayoutDelegate, BestSceneCellDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1 + fileListUrls.count
@@ -198,17 +239,20 @@ extension BestSceneAllGroupSortedViewController: UICollectionViewDelegate, UICol
         cell.configureTickViews(forFirstCell: indexPath.item == 0)
         cell.configureBorder(forFirstCell: indexPath.item == 0)
         cell.configureTickImage(forFirstCell: indexPath.item == 0)
-                
+        
         let photoUrl = indexPath.row == 0 ? coverPhotoUrl : fileListUrls[indexPath.row - 1]
         cell.imageView.sd_setImage(with: URL(string: photoUrl ?? ""))
         
+        cell.selectedId = self.selectedId
+        cell.selectedGroupID = self.selectedGroupID
+               
+        cell.uniqueId = self.selectedId[indexPath.row]
+        
+        cell.delegate = self
+        
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("cell tapped")
-    }
-    
+
     func scaleForItem(inCollectionView collectionView: UICollectionView, withLayout layout: UICollectionViewLayout, atIndexPath indexPath: IndexPath) -> UInt {
         if indexPath.row == 0 {
             
@@ -223,6 +267,26 @@ extension BestSceneAllGroupSortedViewController: UICollectionViewDelegate, UICol
     
     func headerFlexibleDimension(inCollectionView collectionView: UICollectionView, withLayout layout: UICollectionViewLayout, fixedDimension: CGFloat) -> CGFloat {
         return 0
+    }
+    
+    func didTapTickImage(selectedId: Int, isSelected: Bool) {
+        var deletedIndex: Int = -1
+        
+        if isSelected {
+            if !self.selectedId.contains(selectedId) {
+                self.selectedId.append(selectedId)
+            }
+        } else {
+            for(index, value) in self.selectedId.enumerated() {
+                if value == selectedId {
+                    deletedIndex = index
+                }
+            }
+            if deletedIndex > -1 {
+                self.selectedId.remove(at: deletedIndex)
+            }
+        }
+//        print("😎 Güncel Seçilen ID'ler: \(self.selectedId)")
     }
 }
 

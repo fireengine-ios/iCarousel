@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -40,10 +40,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2MQ-qj-fo6">
-                            <rect key="frame" x="0.0" y="40" width="390" height="696"/>
+                            <rect key="frame" x="0.0" y="40" width="390" height="577"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tcD-wQ-E8s">
-                                    <rect key="frame" x="0.0" y="0.0" width="390" height="384"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="329"/>
                                     <subviews>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="16S-4E-sIn" customClass="IntrinsicTextView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="3" y="0.0" width="384" height="329"/>
@@ -56,21 +56,13 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wJ2-y2-eJx" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
-                                            <rect key="frame" x="61" y="329" width="268" height="55"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="55" id="5n0-0R-iUM"/>
-                                                <constraint firstAttribute="width" constant="268" id="A2N-Z6-NJl"/>
-                                            </constraints>
-                                            <state key="normal" title="Button"/>
-                                        </button>
                                     </subviews>
                                 </stackView>
                             </subviews>
                             <constraints>
                                 <constraint firstItem="tcD-wQ-E8s" firstAttribute="top" secondItem="2MQ-qj-fo6" secondAttribute="top" id="DkE-o2-lRM"/>
+                                <constraint firstAttribute="bottom" secondItem="tcD-wQ-E8s" secondAttribute="bottom" constant="248" id="DsJ-Qg-zS6"/>
                                 <constraint firstAttribute="trailing" secondItem="tcD-wQ-E8s" secondAttribute="trailing" id="Mso-WC-iXn"/>
-                                <constraint firstAttribute="bottom" secondItem="tcD-wQ-E8s" secondAttribute="bottom" constant="40" id="YXN-V4-meh"/>
                                 <constraint firstItem="tcD-wQ-E8s" firstAttribute="width" secondItem="2MQ-qj-fo6" secondAttribute="width" id="glZ-91-Atm"/>
                                 <constraint firstItem="tcD-wQ-E8s" firstAttribute="leading" secondItem="2MQ-qj-fo6" secondAttribute="leading" id="k3u-pe-18K"/>
                             </constraints>
@@ -78,18 +70,29 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqP-EQ-bdd">
                             <rect key="frame" x="344" y="16" width="30" height="30"/>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wJ2-y2-eJx" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
+                            <rect key="frame" x="16" y="636" width="358" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="EC5-Ko-1zd"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" name="secondaryBackground"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="wJ2-y2-eJx" secondAttribute="trailing" constant="16" id="01A-Zu-vWJ"/>
+                        <constraint firstItem="2MQ-qj-fo6" firstAttribute="top" secondItem="NjN-pl-NhF" secondAttribute="bottom" constant="4" id="1Jk-Lm-aOJ"/>
                         <constraint firstItem="NjN-pl-NhF" firstAttribute="leading" secondItem="OfJ-rq-wb5" secondAttribute="leading" constant="16" id="42j-U0-mwb"/>
                         <constraint firstItem="wqP-EQ-bdd" firstAttribute="trailing" secondItem="NjN-pl-NhF" secondAttribute="trailing" constant="16" id="6cH-Lc-EzN"/>
                         <constraint firstAttribute="trailing" secondItem="2MQ-qj-fo6" secondAttribute="trailing" id="9h6-Uy-A4h"/>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="500" id="AXg-sq-eon"/>
+                        <constraint firstItem="wJ2-y2-eJx" firstAttribute="top" secondItem="2MQ-qj-fo6" secondAttribute="bottom" constant="19" id="PCo-jg-i28"/>
+                        <constraint firstItem="wJ2-y2-eJx" firstAttribute="leading" secondItem="OfJ-rq-wb5" secondAttribute="leading" constant="16" id="Rnx-Re-9yA"/>
                         <constraint firstAttribute="height" priority="999" constant="400" id="TAw-7e-v7W"/>
+                        <constraint firstItem="wJ2-y2-eJx" firstAttribute="top" relation="lessThanOrEqual" secondItem="2MQ-qj-fo6" secondAttribute="bottom" constant="19" id="bb6-1z-pGL"/>
                         <constraint firstAttribute="trailing" secondItem="wqP-EQ-bdd" secondAttribute="trailing" constant="16" id="bxy-kf-IHQ"/>
-                        <constraint firstAttribute="bottom" secondItem="2MQ-qj-fo6" secondAttribute="bottom" id="cRL-S6-1l2"/>
                         <constraint firstItem="2MQ-qj-fo6" firstAttribute="leading" secondItem="OfJ-rq-wb5" secondAttribute="leading" id="htt-39-NFO"/>
-                        <constraint firstItem="2MQ-qj-fo6" firstAttribute="top" secondItem="NjN-pl-NhF" secondAttribute="top" constant="24" id="thI-kM-zdT"/>
+                        <constraint firstAttribute="bottom" secondItem="wJ2-y2-eJx" secondAttribute="bottom" constant="55" id="u0T-dz-aaD"/>
                         <constraint firstItem="NjN-pl-NhF" firstAttribute="top" secondItem="OfJ-rq-wb5" secondAttribute="top" constant="16" id="vkz-hY-r0g"/>
                         <constraint firstItem="wqP-EQ-bdd" firstAttribute="top" secondItem="OfJ-rq-wb5" secondAttribute="top" constant="16" id="yY5-pe-jTr"/>
                     </constraints>
@@ -117,16 +120,16 @@
             </constraints>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="fnc-5J-LG3"/>
                     <exclude reference="qPN-np-MWc"/>
+                    <exclude reference="fnc-5J-LG3"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=regular">
                 <mask key="constraints">
                     <exclude reference="qDF-fX-jlN"/>
-                    <exclude reference="FWv-uR-3Qt"/>
-                    <include reference="fnc-5J-LG3"/>
                     <include reference="qPN-np-MWc"/>
+                    <include reference="fnc-5J-LG3"/>
+                    <exclude reference="FWv-uR-3Qt"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="131.8840579710145" y="131.91964285714286"/>

@@ -2130,7 +2130,7 @@ then {11,99 TRY/Month}*/
 "printed_package_view" = "Переглянути мої пакети для друку.";
 "more_photo_right" = "Ви вибрали більше ніж %d фотографій. Ви впевнені, що хочете продовжити?";
 "no_more_photo_right" = "Ви вибрали більше %d фотографій. Зменшіть, щоб продовжити.";
-"timeline_header" = "Найкращі спогади 2023 року";
+"timeline_header" = "Ваші Найяскравіші Зимові Спогади";
 
 /*Fuzzy*/
 "timeline_description" = "Ми зібрали для вас найкращі моменти року 2023. Відкрийте їх для себе зараз.";
@@ -2271,3 +2271,67 @@ then {11,99 TRY/Month}*/
 "grace_banner_paycell_text" = "";
 "photo_max_selection_title_x" = "";
 "photo_max_selection_body_x" = "";
+"no_video_to_print_popup_title" = "";
+"no_video_to_print_popup_body" = "";
+
+/*Toplam çekiliş hak sayısı*/
+"gamification_raffle_count" = "У Вас %d Прав На Участь У Розіграші";
+
+/*Kampanya tarih aralıgı*/
+"gamification_raffle_dates" = "Дата участі в розіграші:";
+
+/*Çekiliş özetini gör buton*/
+"gamification_raffle_brief" = "Переглянути Огляд Розіграшу";
+
+/*Çekiliş özet açıklaması*/
+"gamification_event_description" = "Використовуйте нижчезазначені функції щомісяця, щоб збільшити свої шанси на перемогу в розіграші.";
+
+/*Yarın tekrar gel metni*/
+"gamification_comeback" = "Слідкуйте за новинами.";
+
+/*Paket satın alma kuralı için*/
+"gamification_package_rule" = "";
+"gamification_raffle_info" = "";
+"gamification_raffle_draw" = "";
+"gamification_raffle_summary" = "";
+"gamification_event_not_trigerred" = "";
+"gamification_event_trigger_count" = "You Have %d Raffle Rights";
+"gamification_event_completed" = "";
+"gamification_total_count" = "";
+"gamification_campaign_conditions" = "";
+"gamification_rules" = "";
+"gamification_campaign_policy_title" = "";
+"gamification_package_rule" = "Купити Пакет";
+"gamification_raffle_info" = "Подробиці Кампанії";
+"gamification_raffle_draw" = "Натисніть, щоб дізнатися умови кампанії.";
+"gamification_raffle_summary" = "Переглянути Огляд Розіграшу";
+"gamification_event_not_trigerred" = "Ця функція ще не використовувалася. Спробуйте зараз!";
+"gamification_event_trigger_count" = "You Have %d Raffle Rights";
+"gamification_event_completed" = "Ви використали свої права цього %@ місяця.";
+"gamification_total_count" = "Разом Отримано %d Прав На Розіграш.";
+"gamification_campaign_conditions" = "Деталі Кампанії";
+"gamification_rules" = "Умови Розіграшу";
+"gamification_campaign_policy_title" = "Умови Участі в Кампанії";
+"gamification_raffle_win" = "";
+"gamification_title_upload" = "Завантажте Фото/Відео";
+"gamification_title_act_faceimage" = "Увімкнути Функцію Розпізнавання Облич/Об'єктів";
+"gamification_buy" = "Купити Пакет";
+"gamification_photopick" = "Створити Photopick";
+"gamification_create_collage" = "Створити Колаж";
+"gamification_print" = "Отримати Роздруківки Фотографій";
+"gamification_invite" = "Запросити Друга";
+"gamification_createstory" = "Створити Історію";
+"gamification_createalbum" = "Створити Альбом";
+"gamification_act_faceimage" = "Увімкнути Функцію Розпізнавання Облич/Об'єктів";
+"gamification_upload" = "Завантажити Фото/Відео";
+"gamification_title_buy" = "Купити Пакет";
+"gamification_title_photopick" = "Створити Photopick";
+"gamification_title_create_collage" = "Створити Колаж";
+"gamification_title_print" = "Отримати Роздруківки Фотографій";
+"gamification_title_invite" = "Запросити Друга";
+"gamification_title_createstory" = "Створити Історію";
+"gamification_title_createalbum" = "Створити Альбом";
+"timeline_header_backup" = "Найкращі спогади 2023 року";
+"winter_video_timeline_header" = "";
+"yearly" = "";
+"yearly" = "Щорічник";

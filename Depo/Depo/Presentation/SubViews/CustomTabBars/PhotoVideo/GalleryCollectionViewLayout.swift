@@ -91,91 +91,53 @@ final class GalleryCollectionViewLayout: UICollectionViewLayout {
         super.finalizeLayoutTransition()
         isTransitioning = false
     }
-
+    
     override func prepare() {
-        guard let collectionView = self.collectionView, collectionView.numberOfSections > 0 else {
-            cache = [:]
-            headerCache = [:]
-            contentHeight = 0
-            return
-        }
+        super.prepare()
 
-        cache = [:]
-        headerCache = [:]
-
+        cache.removeAll()
+        headerCache.removeAll()
         contentHeight = 0
-        let itemSize = (contentWidth - (columns - 1) * itemSpacing) / columns
 
-        var xOffset: CGFloat = 0
-        var yOffset: CGFloat = 0
+        guard let collectionView = collectionView else { return }
+
+        let columnWidth = contentWidth / columns
+        var xOffset: [CGFloat] = []
+        for column in 0..<Int(columns) {
+            xOffset.append(CGFloat(column) * columnWidth)
+        }
+        var columnHeights: [CGFloat] = Array(repeating: 0, count: Int(columns))
 
         for section in 0..<collectionView.numberOfSections {
-            xOffset = 0
-            yOffset = contentHeight
-
+            let headerIndexPath = IndexPath(item: 0, section: section)
+            let headerHeight: CGFloat = 50
             let headerAttributes = GalleryCollectionViewLayoutAttributes(
                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                with: IndexPath(item: 0, section: section)
+                with: headerIndexPath
             )
-            headerAttributes.zIndex = 1000
+            headerAttributes.frame = CGRect(x: 0, y: contentHeight, width: collectionView.bounds.width, height: headerHeight)
             headerCache[section] = headerAttributes
-            headerAttributes.frame = CGRect(x: 0, y: yOffset, width: contentWidth, height: section == 0 && graceBannerState ? graceBannerHeight + 50 : 50)
-            contentHeight = max(headerAttributes.frame.maxY, contentHeight)
-            yOffset = headerAttributes.frame.maxY
+            contentHeight += headerHeight
 
-            var currentXBoundary: CGFloat?
-            var currentXBoundarySpans = 1
-
-            var nextXStartBoundary: CGFloat?
-            for index in 0..<collectionView.numberOfItems(inSection: section) {
-                let indexPath = IndexPath(item: index, section: section)
-                //let columnSpan = CGFloat(columnSpanForItem(at: indexPath))
-                let columnSpan = CGFloat(1.0)
-                let currentItemSize = itemSize * columnSpan + itemSpacing * (columnSpan - 1)
-
+            for item in 0..<collectionView.numberOfItems(inSection: section) {
+                let column = item % Int(columns)
+                let indexPath = IndexPath(item: item, section: section)
+                let itemHeight = columnWidth
+                let frame = CGRect(x: xOffset[column], y: columnHeights[column] + contentHeight, width: columnWidth, height: itemHeight)
                 let attributes = GalleryCollectionViewLayoutAttributes(forCellWith: indexPath)
+                attributes.frame = frame
                 cache[indexPath] = attributes
 
-                attributes.isSpanned = columnSpan > 1
-                attributes.frame = CGRect(
-                    x: xOffset,
-                    y: yOffset,
-                    width: currentItemSize,
-                    height: currentItemSize
-                )
-                contentHeight = max(attributes.frame.maxY, contentHeight)
+                columnHeights[column] = columnHeights[column] + itemHeight + itemSpacing
+            }
 
-                let endOfLine = currentXBoundary ?? contentWidth
-                if itemSize > (endOfLine - attributes.frame.maxX) {
-                    let nextLineOffset = columnSpan == 1
-                        ? attributes.frame.maxY
-                        : attributes.frame.maxY - (attributes.frame.height - itemSize)
-
-                    yOffset = nextLineOffset + itemSpacing
-                    xOffset = nextXStartBoundary ?? 0
-
-                    nextXStartBoundary = nil
-
-                    if currentXBoundary == endOfLine {
-                        currentXBoundarySpans -= 1
-                        if currentXBoundarySpans == 1 {
-                            currentXBoundary = nil
-                        }
-                    }
-                } else {
-                    xOffset = attributes.frame.maxX + itemSpacing
-                }
-
-                if columnSpan > 1 && ceil(attributes.frame.maxX) < contentWidth {
-                    nextXStartBoundary = attributes.frame.maxX + itemSpacing
-                } else if columnSpan > 1 {
-                    currentXBoundary = attributes.frame.minX - itemSpacing
-                    currentXBoundarySpans = Int(columnSpan)
-                }
+            if let maxColumnHeight = columnHeights.max() {
+                contentHeight += maxColumnHeight
+                columnHeights = Array(repeating: 0, count: Int(columns))
             }
         }
     }
-
+    
     private func columnSpanForItem(at indexPath: IndexPath) -> Int {
         let itemNumber = indexPath.item + 1
         switch gridSize {

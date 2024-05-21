@@ -10,10 +10,10 @@ import UIKit
 
 enum AllFilesType: CaseIterable {
     case documents
-    case music
     case favorites
-    case sharedWithMe
     case trashBin
+    case sharedWithMe
+    case music
     case sharedByMe
     case allFiles
     case documentsAndMusic
@@ -22,14 +22,14 @@ enum AllFilesType: CaseIterable {
         switch self {
         case .documents:
             return Image.iconTabFiles.image
-        case .music:
-            return Image.iconTabMusic.image
         case .favorites:
             return Image.iconTabStar.image
-        case .sharedByMe, .sharedWithMe:
-            return Image.iconTabShare.image
         case .trashBin:
             return Image.iconTabDelete.image
+        case .sharedByMe, .sharedWithMe:
+            return Image.iconTabShare.image
+        case .music:
+            return Image.iconTabMusic.image
         case .allFiles, .documentsAndMusic:
             return nil
         }
@@ -39,14 +39,14 @@ enum AllFilesType: CaseIterable {
         switch self {
         case .documents:
             return TextConstants.containerDocument
-        case .music:
-            return TextConstants.containerMusic
         case .favorites:
             return TextConstants.containerFavourite
-        case .sharedByMe, .sharedWithMe:
-            return TextConstants.containerShared
         case .trashBin:
             return localized(.trashBin)
+        case .sharedByMe, .sharedWithMe:
+            return TextConstants.containerShared
+        case .music:
+            return TextConstants.containerMusic
         case .allFiles, .documentsAndMusic:
             return nil
         }
@@ -56,21 +56,21 @@ enum AllFilesType: CaseIterable {
         switch self {
         case .documents:
             return AppColor.filesDocumentTab.color
-        case .music:
-            return AppColor.filesMusicTab.color
         case .favorites:
             return AppColor.filesFavoriteTab.color
-        case .sharedByMe, .sharedWithMe:
-            return AppColor.filesSharedTab.color
         case .trashBin:
             return AppColor.filesDocumentTab.color
+        case .sharedByMe, .sharedWithMe:
+            return AppColor.filesSharedTab.color
+        case .music:
+            return AppColor.filesMusicTab.color
         case .allFiles, .documentsAndMusic:
             return nil
         }
     }
     
     static func getSegments() -> [AllFilesType] {
-        return [.documents, .music, .favorites, .sharedWithMe, .trashBin]
+        return [.documents, .favorites, .trashBin, .sharedWithMe, .music]
     }
     
     static func getSharedItemsSegments() -> [AllFilesType] {

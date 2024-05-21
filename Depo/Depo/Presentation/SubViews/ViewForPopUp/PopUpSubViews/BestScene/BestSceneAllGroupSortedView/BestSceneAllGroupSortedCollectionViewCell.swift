@@ -8,10 +8,21 @@
 
 import UIKit
 
+protocol BestSceneCellDelegate: AnyObject {
+    func didTapTickImage(selectedId: Int, isSelected: Bool)
+}
+
 class BestSceneAllGroupSortedCollectionViewCell: UICollectionViewCell {
     
     let imageView = UIImageView()
     
+    weak var delegate: BestSceneCellDelegate?
+    
+    var selectedId: [Int]
+    var selectedGroupID: Int?
+    
+    var uniqueId: Int?
+        
     var bigTickViewTopConstraint: NSLayoutConstraint!
     var bigTickViewLeadingConstraint: NSLayoutConstraint!
     var bigTickViewWidthConstraint: NSLayoutConstraint!
@@ -59,25 +70,36 @@ class BestSceneAllGroupSortedCollectionViewCell: UICollectionViewCell {
         label.textAlignment = .center
         label.text = localized(.bestPhoto)
         label.textColor = .white
-        label.font = UIFont(name: "TurkcellSaturaMed", size: 12)
+        label.font = .appFont(.medium, size: 12)
         return label
     }()
     
     override init(frame: CGRect) {
+        self.selectedId = []
+        self.uniqueId = 0
         super.init(frame: frame)
         setupViews()
     }
     
     required init?(coder aDecoder: NSCoder) {
+        self.selectedId = []
+        self.uniqueId = 0
         super.init(coder: aDecoder)
         setupViews()
     }
     
     @objc func didTapTick() {
+        guard let id = self.uniqueId else { return }
+
+        let currentlySelected = !tickImage.isHidden
+        delegate?.didTapTickImage(selectedId: id, isSelected: !currentlySelected)
+
+        tickImage.isHidden = currentlySelected
         if tickImage.isHidden {
+            tickImage.image = nil
+        } else {
             tickImage.image = UIImage(named: "iconCheckboxCheckFill")
         }
-        tickImage.isHidden = !tickImage.isHidden
     }
     
     private func setupViews() {
@@ -100,7 +122,7 @@ class BestSceneAllGroupSortedCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             titleLabelView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -4),
             titleLabelView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            titleLabelView.widthAnchor.constraint(equalToConstant: 90),
+            titleLabelView.widthAnchor.constraint(equalToConstant: 110),
             titleLabelView.heightAnchor.constraint(equalToConstant: 30)
         ])
         

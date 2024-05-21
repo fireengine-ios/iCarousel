@@ -857,7 +857,14 @@ final class MediaItemOperationsService {
             self?.executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { mediaItems in
                 debugLog("db has \(mediaItems.count) saved local items")
                 let alredySavedIDs = mediaItems.compactMap { $0.localFileID }
-                let notSaved = assets.filter { !alredySavedIDs.contains($0.localIdentifier) }
+                let difference = localIdentifiers.difference(from: alredySavedIDs)
+                //let notSaved = assets.filter { difference.contains($0.localIdentifier) }
+                
+                let invalidIdentifierUserDefaults = UserDefaults.standard.array(forKey: "invalidIdentifier") as? [String]
+                
+                let lastDiff = difference.difference(from: invalidIdentifierUserDefaults ?? [])
+                
+                let notSaved = assets.filter { lastDiff.contains($0.localIdentifier) }
                 callback(notSaved)
             })
         }

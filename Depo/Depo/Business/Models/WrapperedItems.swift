@@ -11,6 +11,7 @@ import Photos
 import SDWebImage
 import SwiftyJSON
 import MobileCoreServices
+import Vision
 
 typealias Item = WrapData
 typealias UploadServiceBaseUrlResponse = (_ resonse: UploadBaseURLResponse?) -> Void
@@ -750,6 +751,34 @@ class WrapData: BaseDataSourceItem, Wrappered {
         mimeType = "video/mp4"
     }
     
+    //MARK:- Winter Theme Video
+    
+    init(timelineResponse: WinterThemeVideoResponse) {
+        fileSize = 0
+        id = Int64(timelineResponse.id ?? 0)
+        tmpDownloadUrl = URL(string: timelineResponse.details?.tempDownloadURL ?? "")
+        metaData = BaseMetaData()
+        metaData?.videoPreviewURL = URL(string: timelineResponse.details?.metadata?.videoPreview ?? "")
+        metaData?.largeUrl = URL(string: timelineResponse.details?.metadata?.thumbnailLarge ?? "")
+        metaData?.smalURl = URL(string: timelineResponse.details?.metadata?.thumbnailSmall ?? "")
+        metaData?.mediumUrl = URL(string: timelineResponse.details?.metadata?.thumbnailMedium ?? "")
+        favorites = false
+        status = .unknown
+        metaData?.takenDate = Date()
+        
+        status = .unknown
+        patchToPreview = .remoteUrl(nil)
+        super.init()
+        //name = timelineResponse.details.name
+        name = "2023Özetin.mp4"
+        favorites = false
+        isLocalItem = false
+        uuid = timelineResponse.details?.uuid ?? ""
+        fileType = .timeline
+        projectId = SingletonStorage.shared.accountInfo?.projectID
+        mimeType = "video/mp4"
+    }
+    
     init(musicForCreateStory: CreateStoryMusicItem) {
         id = musicForCreateStory.id
         tmpDownloadUrl = musicForCreateStory.path
@@ -1146,6 +1175,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
             uuid = (mediaItem.trimmedLocalFileID ?? "") + "~" + UUID().uuidString
         }
         
+        
         isLocalItem = mediaItem.isLocalItemValue
         name = mediaItem.nameValue
         creationDate = mediaItem.creationDateValue as Date?
@@ -1453,4 +1483,5 @@ extension WrapData {
         return response
     }
 }
+
 

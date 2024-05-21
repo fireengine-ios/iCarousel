@@ -320,6 +320,24 @@ final class ForYouInteractor {
             }
         }
     }
+    
+    private func getWinterVideoTimeline() {
+        debugLog("ForYou getTimeline")
+        group.enter()
+
+        service.forYouWinterVideoTimeline() { [weak self] result in
+            self?.group.leave()
+
+            switch result {
+            case .success(let response):
+                self?.output.getWinterVideoTimelineData(data: response)
+            case .failed(let error):
+                self?.output.setTimelineNilForError()
+                debugLog("ForYou Error getTimeline: \(error.errorCode)-\(String(describing: error.description))")
+                break
+            }
+        }
+    }
 }
 
 extension ForYouInteractor: ForYouInteractorInput {
@@ -328,6 +346,7 @@ extension ForYouInteractor: ForYouInteractorInput {
         if timelineEnable {
             getTimeline()
         }
+        getWinterVideoTimeline()
         getThrowbacks()
         getThings()
         getPlaces()
@@ -427,6 +446,7 @@ extension ForYouInteractor: ForYouInteractorInput {
             getPrintedPhotos()
         case .timeline:
             getTimeline()
+            getWinterVideoTimeline()
         }
         
         group.notify(queue: .main) {
@@ -488,9 +508,10 @@ extension ForYouInteractor: ForYouInteractorInput {
         
         service.forYouSaveTimelineCard(with: id, handler: { [weak self] result in
             switch result {
-            case .success(_):
+            case .success():
                 self?.output.saveTimelineCardSuccess(section: .timeline)
             case .failed(let error):
+                print("⚠️", error.localizedDescription)
                 if error.isOutOfSpaceError {
                     self?.output.saveCardFailedFullQuota(section: .timeline)
                 } else {

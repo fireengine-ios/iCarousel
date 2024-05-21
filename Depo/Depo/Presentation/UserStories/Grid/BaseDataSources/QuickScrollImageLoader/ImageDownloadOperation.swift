@@ -53,13 +53,14 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
             self.task?.cancel()
             self.task = nil
         }
-//        semaphore.signal()
+        semaphore.signal()
     }
     
     override func main() {
         // Potential crash-fix (DE-12449)
         defer { outputBlock = nil }
-
+        
+        
         guard !isCancelled else {
             return
         }

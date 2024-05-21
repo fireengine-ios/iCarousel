@@ -12,11 +12,18 @@ class BestSceneAllGroupViewController: BaseViewController {
     
     private let userDefaultsVars = UserDefaultsVars()
     private lazy var homeCardsServisBestSceneAllGroup: HomeCardsService = factory.resolve()
+    weak var output: HomePageInteractorOutput!
+    
+    private var isScreenPresented = false
+        
+    private let userDefaults = UserDefaultsVars()
+    private var bestSceneCards: [HomeCardResponse] = []
 
     var imageUrls: [String] = []
-    var timestamp: Int = 0
+    var timestamp: [Int] = []
     var groupId: [Int] = []
-    
+    var selectedId: [Int] = []
+        
     private lazy var customView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -25,51 +32,96 @@ class BestSceneAllGroupViewController: BaseViewController {
         return view
     }()
     
+    private lazy var closeSelfButton = UIBarButtonItem(image: NavigationBarImage.back.image,
+                                                       style: .plain,
+                                                       target: self,
+                                                       action: #selector(closeSelf))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setTitle(withString: localized(.bestscenediscovercardtitle))
         
         setupLayout()
+        
+        navigationItem.leftBarButtonItem = closeSelfButton
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        updateImageUrls()
+        getBestScene {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.updateImageUrls()
+            }
+        }
+    }
+    
+    private func getBestScene(completion: @escaping () -> Void) {
+        homeCardsServisBestSceneAllGroup.getBestGroup { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let response):
+                _ = response.map { burstGroup -> HomeCardResponse in
+                    let homeCard = HomeCardResponse()
+                    homeCard.id = burstGroup.id
+                    homeCard.type = .discoverCard
+                    let imageUrls = response.map { $0.coverPhoto?.metadata?.thumbnailMedium }.compactMap { $0 }
+                    let burstGroupId = response.map { $0.id }.compactMap { $0 }
+                    
+                    let createdDate = response.map { $0.groupDate }.compactMap { $0 }
+
+//                    self.output?.didObtainHomeCardsBestScene(homeCard, imageUrls: imageUrls, createdDate: createdDate ?? 0, groupId: burstGroupId)
+                    
+                    self.bestSceneCards = [homeCard]
+                    self.userDefaultsVars.imageUrlsForBestScene = imageUrls
+                    self.userDefaultsVars.dateForBestScene = createdDate
+                    self.userDefaultsVars.groupIdBestScene = burstGroupId
+                    
+                    return homeCard
+                }
+            case .failed(let error):
+                DispatchQueue.main.async {
+                    self.output?.didObtainError(with: error.localizedDescription, isNeedStopRefresh: false)
+                }
+            }
+            completion()
+        }
+    }
+    
+    @objc private func closeSelf() {
+        let router = RouterVC()
+        router.openTabBarItem(index: .discover)
     }
     
     @objc func updateImageUrls() {
+        
         let imageUrls = userDefaultsVars.imageUrlsForBestScene
-        if let newImageUrls = imageUrls as? [String] {
-            self.imageUrls = newImageUrls
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
+        self.imageUrls = imageUrls
+        
         
         let createdDate = userDefaultsVars.dateForBestScene
-        if let newDate = createdDate as? Int {
-            self.timestamp = newDate
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
+        self.timestamp = createdDate
         
         let groupId = userDefaultsVars.groupIdBestScene
-        if let newGroupId = groupId as? [Int] {
-            self.groupId = newGroupId
-            collectionView.reloadData()
-        }
+        self.groupId = groupId
+        
+        self.collectionView.reloadData()
     }
-    
-    func dateFormat() -> String {
-        let date = Date(timeIntervalSince1970: TimeInterval(self.timestamp) / 1000)
-        let formatter = DateFormatter()
-        formatter.dateFormat = "d MMMM yyyy"
-        formatter.locale = Locale(identifier: "tr_TR")
-        formatter.timeZone = TimeZone(abbreviation: "UTC")
-        return formatter.string(from: date)
+        
+    func dateFormat() -> [String] {
+        return self.timestamp.map { timestamp in
+            let date = Date(timeIntervalSince1970: TimeInterval(timestamp / 1000))
+            let formatter = DateFormatter()
+            formatter.dateFormat = "d MMMM yyyy"
+            formatter.locale = Locale(identifier: "tr_TR")
+            formatter.timeZone = TimeZone(abbreviation: "UTC")
+            return formatter.string(from: date)
+        }
     }
 
     private func setupLayout() {
@@ -129,12 +181,15 @@ extension BestSceneAllGroupViewController: UICollectionViewDelegate, UICollectio
             }
         }
         
-        cell.dateLabel.text = dateFormat()
+        cell.dateLabel.text = dateFormat()[indexPath.row]
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard !isScreenPresented else { return }
+        isScreenPresented = true
 
         let selectedGroupId = self.groupId[indexPath.row]
         
@@ -146,10 +201,19 @@ extension BestSceneAllGroupViewController: UICollectionViewDelegate, UICollectio
                 let coverPhotoUrl = response.coverPhoto.tempDownloadURL
                 let fileListUrls = response.fileList.compactMap { $0.tempDownloadURL }
                 
+                let selectedGroupID = response.id
+                                                
+                self.selectedId.append(response.coverPhoto.id)
+                
+                for ids in response.fileList {
+                    self.selectedId.append(ids.id)
+                }
+                
                 DispatchQueue.main.async {
                     let router = RouterVC()
-                    let controller = router.bestSceneAllGroupSortedViewController(coverPhotoUrl: coverPhotoUrl ?? "", fileListUrls: fileListUrls)
+                    let controller = router.bestSceneAllGroupSortedViewController(coverPhotoUrl: coverPhotoUrl ?? "", fileListUrls: fileListUrls, selectedId: self.selectedId, selectedGroupID: selectedGroupID ?? 0)
                     router.pushViewController(viewController: controller)
+                    self.isScreenPresented = false
                 }
             case .failed(let error):
                 print(error.localizedDescription)
