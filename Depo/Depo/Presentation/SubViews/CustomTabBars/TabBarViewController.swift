@@ -11,10 +11,10 @@ import SDWebImage
 
 enum DocumentsScreenSegmentIndex: Int {
     case documents = 0
-    case music = 1
-    case favorites = 2
+    case music = 4
+    case favorites = 1
     case share = 3
-    case trashBin = 4
+    case trashBin = 2
     case allFiles = 5
 }
 

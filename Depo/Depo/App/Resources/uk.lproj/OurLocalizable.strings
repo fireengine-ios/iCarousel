@@ -2290,17 +2290,6 @@ then {11,99 TRY/Month}*/
 "gamification_comeback" = "Слідкуйте за новинами.";
 
 /*Paket satın alma kuralı için*/
-"gamification_package_rule" = "";
-"gamification_raffle_info" = "";
-"gamification_raffle_draw" = "";
-"gamification_raffle_summary" = "";
-"gamification_event_not_trigerred" = "";
-"gamification_event_trigger_count" = "You Have %d Raffle Rights";
-"gamification_event_completed" = "";
-"gamification_total_count" = "";
-"gamification_campaign_conditions" = "";
-"gamification_rules" = "";
-"gamification_campaign_policy_title" = "";
 "gamification_package_rule" = "Купити Пакет";
 "gamification_raffle_info" = "Подробиці Кампанії";
 "gamification_raffle_draw" = "Натисніть, щоб дізнатися умови кампанії.";
@@ -2333,5 +2322,4 @@ then {11,99 TRY/Month}*/
 "gamification_title_createalbum" = "Створити Альбом";
 "timeline_header_backup" = "Найкращі спогади 2023 року";
 "winter_video_timeline_header" = "";
-"yearly" = "";
 "yearly" = "Щорічник";
