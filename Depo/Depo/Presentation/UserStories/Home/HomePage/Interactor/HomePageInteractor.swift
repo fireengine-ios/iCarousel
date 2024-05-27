@@ -51,9 +51,10 @@ final class HomePageInteractor: HomePageInteractorInput {
         getQuotaInfo()
         getAccountInfo()
         getPremiumCardInfo(loadStatus: .reloadAll)
-        getBestScene {
-            self.getAllCardsForHomePage()
-        }
+//        getBestScene { //v31 bestscene delete
+//            self.getAllCardsForHomePage()
+//        }
+        getAllCardsForHomePage()
         getCampaignStatus()
         getActiveSubscriptionForBanner()
         getAvailableOffersForBanner()
@@ -70,9 +71,7 @@ final class HomePageInteractor: HomePageInteractorInput {
         getCampaignStatus()
         getPremiumCardInfo(loadStatus: .reloadAll)
         
-        getBestScene {
-            self.getAllCardsForHomePage()
-        }
+        getAllCardsForHomePage()
     }
     
     func updateLocalUserDetail() {
