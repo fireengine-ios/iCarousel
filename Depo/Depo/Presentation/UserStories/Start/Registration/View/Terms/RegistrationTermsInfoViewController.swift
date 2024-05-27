@@ -62,9 +62,9 @@ class RegistrationTermsInfoViewController: UIViewController {
     @IBOutlet weak var confirmButton: RoundedInsetsButton! {
         willSet {
             newValue.setBackgroundColor(AppColor.registerNextButtonNormal.color, for: .normal)
-            newValue.setBackgroundColor(.white, for: .disabled)
+            newValue.setBackgroundColor(AppColor.registerNextButtonNormal.withAlphaComponent(0.4), for: .disabled)
             newValue.setTitleColor(.white, for: .normal)
-            newValue.setTitleColor(AppColor.registerNextButtonNormalTextColor.color, for: .disabled)
+            newValue.setTitleColor(.white.withAlphaComponent(0.4), for: .disabled)
             newValue.titleLabel?.font = UIFont.appFont(.medium, size: 16)
             newValue.isOpaque = true
             newValue.setTitle(TextConstants.signupRedesignEulaAcceptButton, for: .normal)

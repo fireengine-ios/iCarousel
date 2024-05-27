@@ -17,13 +17,16 @@ final class ImageColCell: UICollectionViewCell {
     }
     
     func setup(with sharedItem: SharedItemSource) {
-        switch sharedItem {
-        case .url(let item):
-            SharedItemImageLoader.shared.loadImage(for: photoImageView, with: item)
-            
-        case .data(let item):
-            photoImageView.image = item.image
-        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+            switch sharedItem {
+            case .url(let item):
+                SharedItemImageLoader.shared.loadImage(for: self.photoImageView, with: item)
+                
+            case .data(let item):
+                self.photoImageView.image = item.image
+            }
+        })
+       
     }
     
     func setup(isCurrentUploading: Bool) {

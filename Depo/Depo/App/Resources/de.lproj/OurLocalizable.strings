@@ -2273,51 +2273,51 @@ then {11,99 TRY/Month}*/
 "no_video_to_print_popup_body" = "";
 
 /*Toplam çekiliş hak sayısı*/
-"gamification_raffle_count" = "";
+"gamification_raffle_count" = "Sie haben %d Verlosungsrechte";
 
 /*Kampanya tarih aralıgı*/
-"gamification_raffle_dates" = "";
+"gamification_raffle_dates" = "Datum der Teilnahme an der Verlosung:";
 
 /*Çekiliş özetini gör buton*/
-"gamification_raffle_brief" = "";
+"gamification_raffle_brief" = "Siehe Verlosungsübersicht";
 
 /*Çekiliş özet açıklaması*/
-"gamification_event_description" = "";
+"gamification_event_description" = "Nutzen Sie die folgenden Funktionen jeden Monat, um Ihre Gewinnchancen bei der Verlosung zu erhöhen.";
 
 /*Yarın tekrar gel metni*/
-"gamification_comeback" = "";
+"gamification_comeback" = "Bleiben Sie auf dem Laufenden.";
 
 /*Paket satın alma kuralı için*/
-"gamification_package_rule" = "";
-"gamification_raffle_info" = "";
-"gamification_raffle_draw" = "";
-"gamification_raffle_summary" = "";
-"gamification_event_not_trigerred" = "";
+"gamification_package_rule" = "Paket Kaufen";
+"gamification_raffle_info" = "Details zur Kampagne";
+"gamification_raffle_draw" = "Klicken Sie für die Bedingungen der Kampagne.";
+"gamification_raffle_summary" = "Siehe Verlosungsübersicht";
+"gamification_event_not_trigerred" = "Diese Funktion wurde noch nicht verwendet. Probieren Sie es jetzt aus!";
 "gamification_event_trigger_count" = "You Have %d Raffle Rights";
-"gamification_event_completed" = "";
-"gamification_total_count" = "";
-"gamification_campaign_conditions" = "";
-"gamification_rules" = "";
-"gamification_campaign_policy_title" = "";
+"gamification_event_completed" = "Sie haben Ihre Rechte in diesem %@ Monat erfüllt.";
+"gamification_total_count" = "Sie Haben Insgesamt %d Verlosungsrechte Gewonnen.";
+"gamification_campaign_conditions" = "Details zur Kampagne";
+"gamification_rules" = "Teilnahmeberechtigung für die Verlosung";
+"gamification_campaign_policy_title" = "Bedingungen für die Teilnahme an der Kampagne";
 "gamification_raffle_win" = "";
-"gamification_title_upload" = "";
-"gamification_title_act_faceimage" = "";
-"gamification_buy" = "";
-"gamification_photopick" = "";
-"gamification_create_collage" = "";
-"gamification_print" = "";
-"gamification_invite" = "";
-"gamification_createstory" = "";
-"gamification_createalbum" = "";
-"gamification_act_faceimage" = "";
-"gamification_upload" = "";
-"gamification_title_buy" = "";
-"gamification_title_photopick" = "";
-"gamification_title_create_collage" = "";
-"gamification_title_print" = "";
-"gamification_title_invite" = "";
-"gamification_title_createstory" = "";
-"gamification_title_createalbum" = "";
+"gamification_title_upload" = "Foto/Video Hochladen";
+"gamification_title_act_faceimage" = "Gesichts-/Objekterkennung Einschalten";
+"gamification_buy" = "Paket Kaufen";
+"gamification_photopick" = "Fotopick Erstellen";
+"gamification_create_collage" = "Collage Erstellen";
+"gamification_print" = "Fotoabzüge Bestellen";
+"gamification_invite" = "Einen Freund Einladen";
+"gamification_createstory" = "Geschichte Erstellen";
+"gamification_createalbum" = "Album Erstellen";
+"gamification_act_faceimage" = "Gesichts-/Objekterkennung Einschalten";
+"gamification_upload" = "Foto/Video Hochladen";
+"gamification_title_buy" = "Paket Kaufen";
+"gamification_title_photopick" = "Fotopick Erstellen";
+"gamification_title_create_collage" = "Collage Erstellen";
+"gamification_title_print" = "Fotoabzüge Bestellen";
+"gamification_title_invite" = "Einen Freund Einladen";
+"gamification_title_createstory" = "Geschichte Erstellen";
+"gamification_title_createalbum" = "Album Erstellen";
 "timeline_header_backup" = "Die Besten Erinnerungen An Das Jahr 2023";
 "winter_video_timeline_header" = "";
-"yearly" = "";
+"yearly" = "Jährlich";
