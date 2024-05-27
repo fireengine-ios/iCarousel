@@ -2273,51 +2273,51 @@ then {11,99 TRY/Month}*/
 "no_video_to_print_popup_body" = "";
 
 /*Toplam çekiliş hak sayısı*/
-"gamification_raffle_count" = "";
+"gamification_raffle_count" = "Aveți %d drepturi de tombolă";
 
 /*Kampanya tarih aralıgı*/
-"gamification_raffle_dates" = "";
+"gamification_raffle_dates" = "Data participării la tombolă:";
 
 /*Çekiliş özetini gör buton*/
-"gamification_raffle_brief" = "";
+"gamification_raffle_brief" = "Consultați Rezumatul Tombolei";
 
 /*Çekiliş özet açıklaması*/
-"gamification_event_description" = "";
+"gamification_event_description" = "Utilizați în fiecare lună funcțiile de mai jos pentru a vă crește șansele de a câștiga la tombolă.";
 
 /*Yarın tekrar gel metni*/
-"gamification_comeback" = "";
+"gamification_comeback" = "Rămâneți la curent.";
 
 /*Paket satın alma kuralı için*/
-"gamification_package_rule" = "";
-"gamification_raffle_info" = "";
-"gamification_raffle_draw" = "";
-"gamification_raffle_summary" = "";
-"gamification_event_not_trigerred" = "";
+"gamification_package_rule" = "Cumpărați Pachetul";
+"gamification_raffle_info" = "Detalii Despre Campanie";
+"gamification_raffle_draw" = "Faceți clic pentru condițiile campaniei.";
+"gamification_raffle_summary" = "Vezi Rezumatul Tombolei";
+"gamification_event_not_trigerred" = "Această caracteristică nu a fost încă utilizată. Încercați acum!";
 "gamification_event_trigger_count" = "You Have %d Raffle Rights";
-"gamification_event_completed" = "";
-"gamification_total_count" = "";
-"gamification_campaign_conditions" = "";
-"gamification_rules" = "";
-"gamification_campaign_policy_title" = "";
+"gamification_event_completed" = "V-ați completat drepturile în această %@ lună.";
+"gamification_total_count" = "Ați Câștigat un Total de %d Drepturi de Tombolă.";
+"gamification_campaign_conditions" = "Detalii Despre Campanie";
+"gamification_rules" = "Eligibilitate la Tombolă";
+"gamification_campaign_policy_title" = "Condiții de Participare la Campanie";
 "gamification_raffle_win" = "";
-"gamification_title_upload" = "";
-"gamification_title_act_faceimage" = "";
-"gamification_buy" = "";
-"gamification_photopick" = "";
-"gamification_create_collage" = "";
-"gamification_print" = "";
-"gamification_invite" = "";
-"gamification_createstory" = "";
-"gamification_createalbum" = "";
-"gamification_act_faceimage" = "";
-"gamification_upload" = "";
-"gamification_title_buy" = "";
-"gamification_title_photopick" = "";
-"gamification_title_create_collage" = "";
-"gamification_title_print" = "";
-"gamification_title_invite" = "";
-"gamification_title_createstory" = "";
-"gamification_title_createalbum" = "";
+"gamification_title_upload" = "Încărcați o Fotografie/Video";
+"gamification_title_act_faceimage" = "Activați recunoașterea Feței/Obiectului";
+"gamification_buy" = "Cumpărați Pachetul";
+"gamification_photopick" = "Creați Photopick";
+"gamification_create_collage" = "Creați un Colaj";
+"gamification_print" = "Obțineți Printuri Foto";
+"gamification_invite" = "Invitați un Prieten";
+"gamification_createstory" = "Creați o Poveste";
+"gamification_createalbum" = "Creați un Album";
+"gamification_act_faceimage" = "Activați Recunoașterea Feței/Obiectului";
+"gamification_upload" = "Încărcați Fotografii/Video";
+"gamification_title_buy" = "Cumpărați Pachetul";
+"gamification_title_photopick" = "Creați Photopick";
+"gamification_title_create_collage" = "Creați un Colaj";
+"gamification_title_print" = "Obțineți Printuri Foto";
+"gamification_title_invite" = "Invitați un Prieten";
+"gamification_title_createstory" = "Creați o Poveste";
+"gamification_title_createalbum" = "Creați un Album";
 "timeline_header_backup" = "Les Meilleurs Souvenirs De 2023";
 "winter_video_timeline_header" = "";
-"yearly" = "";
+"yearly" = "Anual";

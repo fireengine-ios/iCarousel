@@ -2285,51 +2285,51 @@ then {11,99 TRY/Month}*/
 "no_video_to_print_popup_body" = "";
 
 /*Toplam çekiliş hak sayısı*/
-"gamification_raffle_count" = "";
+"gamification_raffle_count" = "لديك %d الحق في المشاركة في السحب";
 
 /*Kampanya tarih aralıgı*/
-"gamification_raffle_dates" = "";
+"gamification_raffle_dates" = "تاريخ المشاركة في السحب:";
 
 /*Çekiliş özetini gör buton*/
-"gamification_raffle_brief" = "";
+"gamification_raffle_brief" = "عرض نظرة عامة على السحب";
 
 /*Çekiliş özet açıklaması*/
-"gamification_event_description" = "";
+"gamification_event_description" = "استخدم الميزات أدناه كل شهر لزيادة فرصك في الفوز بالسحب.";
 
 /*Yarın tekrar gel metni*/
-"gamification_comeback" = "";
+"gamification_comeback" = "ترقبوا";
 
 /*Paket satın alma kuralı için*/
-"gamification_package_rule" = "";
-"gamification_raffle_info" = "";
-"gamification_raffle_draw" = "";
-"gamification_raffle_summary" = "";
-"gamification_event_not_trigerred" = "";
+"gamification_package_rule" = "شراء باقة";
+"gamification_raffle_info" = "تفاصيل الحملة";
+"gamification_raffle_draw" = "انقر لمعرفة شروط وأحكام الحملة.";
+"gamification_raffle_summary" = "عرض نظرة عامة على السحب";
+"gamification_event_not_trigerred" = "لم يتم استخدام هذه الميزة بعد. جربها الآن!";
 "gamification_event_trigger_count" = "You Have %d Raffle Rights";
-"gamification_event_completed" = "";
-"gamification_total_count" = "";
-"gamification_campaign_conditions" = "";
-"gamification_rules" = "";
-"gamification_campaign_policy_title" = "";
+"gamification_event_completed" = "لقد أكملت حقوقك في هذا الشهر %@.";
+"gamification_total_count" = "لقد فزت بإجمالي %d حقوق السحب.";
+"gamification_campaign_conditions" = "معلومات الحملة";
+"gamification_rules" = "شروط وأحكام السحب";
+"gamification_campaign_policy_title" = "شروط المشاركة في الحملة";
 "gamification_raffle_win" = "";
-"gamification_title_upload" = "";
-"gamification_title_act_faceimage" = "";
-"gamification_buy" = "";
-"gamification_photopick" = "";
-"gamification_create_collage" = "";
-"gamification_print" = "";
-"gamification_invite" = "";
-"gamification_createstory" = "";
-"gamification_createalbum" = "";
-"gamification_act_faceimage" = "";
-"gamification_upload" = "";
-"gamification_title_buy" = "";
-"gamification_title_photopick" = "";
-"gamification_title_create_collage" = "";
-"gamification_title_print" = "";
-"gamification_title_invite" = "";
-"gamification_title_createstory" = "";
-"gamification_title_createalbum" = "";
+"gamification_title_upload" = "تحميل صورة/فيديو";
+"gamification_title_act_faceimage" = "تمكين خاصية التعرف على الوجه/الكائنات";
+"gamification_buy" = "شراء باقة";
+"gamification_photopick" = "إنشاء Photopick";
+"gamification_create_collage" = "إنشاء صورة مجمعة";
+"gamification_print" = "الحصول على صور مطبوعة";
+"gamification_invite" = "دعوة صديق";
+"gamification_createstory" = "إنشاء قصة";
+"gamification_createalbum" = "إنشاء ألبوم";
+"gamification_act_faceimage" = "تمكين التعرف على الوجوه/الأشياء";
+"gamification_upload" = "تحميل صورة/فيديو";
+"gamification_title_buy" = "شراء باقة";
+"gamification_title_photopick" = "إنشاء Photopick";
+"gamification_title_create_collage" = "إنشاء صورة مجمعة";
+"gamification_title_print" = "الحصول على صور مطبوعة";
+"gamification_title_invite" = "دعوة صديق";
+"gamification_title_createstory" = "إنشاء قصة";
+"gamification_title_createalbum" = "إنشاء ألبوم";
 "timeline_header_backup" = "أفضل ذكريات 2023";
 "winter_video_timeline_header" = "";
-"yearly" = "";
+"yearly" = "سنوي";

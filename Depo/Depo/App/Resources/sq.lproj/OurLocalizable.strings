@@ -2316,51 +2316,51 @@ then {11,99 TRY/Month}*/
 "no_video_to_print_popup_body" = "";
 
 /*Toplam çekiliş hak sayısı*/
-"gamification_raffle_count" = "";
+"gamification_raffle_count" = "Ju keni %d të drejta lotarie";
 
 /*Kampanya tarih aralıgı*/
-"gamification_raffle_dates" = "";
+"gamification_raffle_dates" = "Data e pjesëmarrjes në lotari:";
 
 /*Çekiliş özetini gör buton*/
-"gamification_raffle_brief" = "";
+"gamification_raffle_brief" = "Shih Përmbledhjen e Lotarisë";
 
 /*Çekiliş özet açıklaması*/
-"gamification_event_description" = "";
+"gamification_event_description" = "Përdorni veçoritë më poshtë çdo muaj për të rritur shanset tuaja për të fituar lotarinë.";
 
 /*Yarın tekrar gel metni*/
-"gamification_comeback" = "";
+"gamification_comeback" = "Qëndroni të sintonizuar.";
 
 /*Paket satın alma kuralı için*/
-"gamification_package_rule" = "";
-"gamification_raffle_info" = "";
-"gamification_raffle_draw" = "";
-"gamification_raffle_summary" = "";
-"gamification_event_not_trigerred" = "";
+"gamification_package_rule" = "Blej Paketë";
+"gamification_raffle_info" = "Detajet e Fushatës";
+"gamification_raffle_draw" = "Klikoni për kushtet e fushatës.";
+"gamification_raffle_summary" = "Shih Përmbledhjen e Lotarisë";
+"gamification_event_not_trigerred" = "Kjo veçori nuk është përdorur ende. Provoni tani!";
 "gamification_event_trigger_count" = "You Have %d Raffle Rights";
-"gamification_event_completed" = "";
-"gamification_total_count" = "";
-"gamification_campaign_conditions" = "";
-"gamification_rules" = "";
-"gamification_campaign_policy_title" = "";
+"gamification_event_completed" = "Ju keni përfunduar të drejtat tuaja këtë %@ muaj.";
+"gamification_total_count" = "Ju Fituat Një Total Prej %d të Drejtash Lotarie.";
+"gamification_campaign_conditions" = "Detajet e Fushatës";
+"gamification_rules" = "Kushtet e Lotarisë";
+"gamification_campaign_policy_title" = "Kushtet e Pjesëmarrjes në Fushatë";
 "gamification_raffle_win" = "";
-"gamification_title_upload" = "";
-"gamification_title_act_faceimage" = "";
-"gamification_buy" = "";
-"gamification_photopick" = "";
-"gamification_create_collage" = "";
-"gamification_print" = "";
-"gamification_invite" = "";
-"gamification_createstory" = "";
-"gamification_createalbum" = "";
-"gamification_act_faceimage" = "";
-"gamification_upload" = "";
-"gamification_title_buy" = "";
-"gamification_title_photopick" = "";
-"gamification_title_create_collage" = "";
-"gamification_title_print" = "";
-"gamification_title_invite" = "";
-"gamification_title_createstory" = "";
-"gamification_title_createalbum" = "";
+"gamification_title_upload" = "Ngarko Foto/Video";
+"gamification_title_act_faceimage" = "Aktivizoni Njohjen e Fytyrës/Objektit";
+"gamification_buy" = "Blej Paketë";
+"gamification_photopick" = "Krijoni Photopick";
+"gamification_create_collage" = "Krijoni Kolazh";
+"gamification_print" = "Merrni Printime Fotografish";
+"gamification_invite" = "Ftoni Një Mik";
+"gamification_createstory" = "Krijoni Histori";
+"gamification_createalbum" = "Krijoni Një Album";
+"gamification_act_faceimage" = "Aktivizoni Njohjen e Fytyrës/Objektit";
+"gamification_upload" = "Ngarko Foto/Video";
+"gamification_title_buy" = "Blej Paketë";
+"gamification_title_photopick" = "Krijoni Photopick";
+"gamification_title_create_collage" = "Krijoni Kolazh";
+"gamification_title_print" = "Merrni Printime Fotografish";
+"gamification_title_invite" = "Ftoni Një Mik";
+"gamification_title_createstory" = "Krijoni Histori";
+"gamification_title_createalbum" = "Krijoni Një Album";
 "timeline_header_backup" = "Kujtimet Më të Mira Të Vitit 2023";
 "winter_video_timeline_header" = "";
-"yearly" = "";
+"yearly" = "Vjetore";
