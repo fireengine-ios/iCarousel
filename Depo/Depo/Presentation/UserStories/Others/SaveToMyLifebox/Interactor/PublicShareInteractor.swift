@@ -100,6 +100,8 @@ class PublicShareInteractor: NSObject, PublicShareInteractorInput {
                 return "DocumentAndMusic"
             case .timeline:
                 return "Timeline"
+            case .collage:
+                return "Collage"
             }
         }
         
