@@ -50,7 +50,7 @@ class CollageInitializer: NSObject {
                                                                                      selectionModeTypes: [.addToAlbum]),
                                topBarConfig: gridListTopBarConfig)
         
-        interactor.originalFilters = [.fileType(.photoAlbum)]
+        interactor.originalFilters = [.fileType(.collage)]
         viewController.mainTitle = localized(.forYouMyCollagesTitle)
         
         return viewController

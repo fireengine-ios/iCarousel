@@ -85,6 +85,7 @@ enum FileType: Hashable, Equatable {
     case imageAndVideo
     case documentsAndMusic
     case timeline
+    case collage
 
     
     var convertedToSearchFieldValue: FieldValue {
@@ -110,6 +111,8 @@ enum FileType: Hashable, Equatable {
             return .documentsAndMusic
         case .timeline:
             return .timeline
+        case .collage:
+            return .collage
         default:
             return .all
         }
