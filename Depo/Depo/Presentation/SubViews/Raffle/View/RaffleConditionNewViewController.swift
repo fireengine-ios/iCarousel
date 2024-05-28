@@ -71,6 +71,13 @@ final class RaffleConditionNewViewController: BaseViewController {
         view.textColor = AppColor.label.color
         view.font = .appFont(.medium, size: 8)
         view.textAlignment = .left
+        view.textContainer.lineBreakMode = .byWordWrapping
+        view.isSelectable = true
+        view.dataDetectorTypes = .link
+        view.isEditable = false
+        view.sizeToFit()
+        view.isScrollEnabled = true
+        view.isUserInteractionEnabled = true
         return view
     }()
     
@@ -182,8 +189,6 @@ extension RaffleConditionNewViewController {
         bottomTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).activate()
         bottomTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40).activate()
         bottomTextView.heightAnchor.constraint(equalToConstant: 600).activate()
-
-        
         
         topTitleLabel.text = localized(.gamificationRules)
         bottomTitleLabel.text = localized(.gamificationCampaignPolicyTitle)
