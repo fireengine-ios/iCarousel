@@ -111,7 +111,7 @@ class LoginPresenter: BasePresenter {
             .paragraphStyle : messageParagraphStyle,
             .kern : 0
         ]
-        
+        CacheManager.shared.actualizeCache()
         let popup = PopUpController.with(title: title,
                                          message: message,
                                          image: .none,
