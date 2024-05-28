@@ -83,7 +83,7 @@ enum RaffleElement: String, Codable {
         case .createAlbum: return Image.raffleCreateAlbum.image
         case .faceImage: return Image.raffleFaceImage.image
         case .fotoVideoUpload: return Image.raffleUploadPhotos.image
-        case .inviteSignup: return Image.raffleCreateStory.image
+        case .inviteSignup: return Image.raffleReferans.image
         }
     }
     
