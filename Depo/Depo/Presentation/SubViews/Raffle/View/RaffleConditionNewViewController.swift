@@ -159,7 +159,7 @@ extension RaffleConditionNewViewController {
         topLineView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
         topLineView.heightAnchor.constraint(equalToConstant: 1).activate()
         
-        let ratio = (view.frame.width - 40) / imageSize.width
+        let ratio = imageSize.width / (view.frame.width - 40)
         let imageViewHeight = imageSize.height / ratio
         
         contentView.addSubview(topImageView)
