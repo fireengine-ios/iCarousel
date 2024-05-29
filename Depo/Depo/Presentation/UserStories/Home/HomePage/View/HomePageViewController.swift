@@ -67,8 +67,6 @@ final class HomePageViewController: BaseViewController {
         }
 
         output.viewWillAppear()
-                
-        reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
