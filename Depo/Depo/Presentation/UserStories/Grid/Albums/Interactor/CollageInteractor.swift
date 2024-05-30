@@ -25,6 +25,7 @@ class CollageInteractor: BaseFilesGreedInteractor {
             case .success(let response):
                 var array = [[BaseDataSourceItem]]()
                 var sortedList: [BaseDataSourceItem] = response.fileList
+                var wrapData: [WrapData] = response.fileList as? [WrapData] ?? []
                 
                 switch sortBy {
                 case .lettersAZ:
@@ -44,15 +45,15 @@ class CollageInteractor: BaseFilesGreedInteractor {
                         (item1.creationDate ?? Date.distantPast) > (item2.creationDate ?? Date.distantPast)
                     }
                 case .sizeAZ:
-//                    sortedList.sort { (item1: BaseDataSourceItem, item2: BaseDataSourceItem) -> Bool in
-//                        (item1.size ?? 0) < (item2.size ?? 0)
-//                    }
-                    print("")
+                    wrapData.sort { (item1: WrapData, item2: WrapData) -> Bool in
+                        item1.fileSize < item2.fileSize
+                    }
+                    sortedList = wrapData
                 case .sizeZA:
-//                    sortedList.sort { (item1: BaseDataSourceItem, item2: BaseDataSourceItem) -> Bool in
-//                        (item1.size ?? 0) > (item2.size ?? 0)
-//                    }
-                    print("")
+                    wrapData.sort { (item1: WrapData, item2: WrapData) -> Bool in
+                        item1.fileSize > item2.fileSize
+                    }
+                    sortedList = wrapData
                 case .albumlettersAZ, .albumlettersZA, .metaDataTimeUp, .metaDataTimeDown, .lastModifiedTimeUp, .lastModifiedTimeDown, .timeUpWithoutSection, .timeDownWithoutSection:
                     break
                 }
@@ -64,6 +65,7 @@ class CollageInteractor: BaseFilesGreedInteractor {
             }
         }
     }
+
     
     override func trackScreen() {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.CollagesScreen())
