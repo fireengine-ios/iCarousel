@@ -49,7 +49,7 @@ final class ForgotPasswordViewController: ViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        loginEnterView.textField.becomeFirstResponder()
+//        loginEnterView.textField.becomeFirstResponder()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
