@@ -2174,7 +2174,7 @@ then {11,99 TRY/Month}*/
 "timeline_header" = "Kujtimet Tuaja Më Të Gjalla Të Dimrit";
 
 /*Fuzzy*/
-"timeline_description" = "Ne kemi përpiluar kujtimet më të mira të 2023 për ju. Zbuloni ato tani.";
+"timeline_description_backup" = "Ne kemi përpiluar kujtimet më të mira të 2023 për ju. Zbuloni ato tani.";
 "selected_for_print" = "Zgjedhur për printim";
 "print_cancel_popup_question" = "A jeni i sigurt që doni të anuloni?";
 "print_cancel_popup_info" = "Të gjitha redaktimet e fotografive që keni zgjedhur për albumin e shtypur do të fshihen. Do t'ju duhet të zgjidhni dhe modifikoni përsëri fotot.";
@@ -2310,8 +2310,6 @@ then {11,99 TRY/Month}*/
 "delete_popup_body" = "Jeni i sigurt që dëshironi të fshini fotot?";
 "please_enter_your_msisdn" = "Shtimi i numrit tuaj të telefonit në lifebox është mënyra më e besueshme për të mbrojtur llogarinë tuaj gjatë gjithë jetës. Ju lutemi shtoni numrin tuaj të telefonit për të vazhduar qasjen në kujtimet tuaja në lifebox.";
 "grace_banner_paycell_text" = "";
-"photo_max_selection_title_x" = "";
-"photo_max_selection_body_x" = "";
 "no_video_to_print_popup_title" = "";
 "no_video_to_print_popup_body" = "";
 
@@ -2362,5 +2360,8 @@ then {11,99 TRY/Month}*/
 "gamification_title_createstory" = "Krijoni Histori";
 "gamification_title_createalbum" = "Krijoni Një Album";
 "timeline_header_backup" = "Kujtimet Më të Mira Të Vitit 2023";
-"winter_video_timeline_header" = "";
+"winter_video_timeline_header" = "Kujtimet Tuaja Më Të Gjalla Të Dimrit";
 "yearly" = "Vjetore";
+"timeline_description" = "Ne kemi përgatitur për ju një surprizë nga kujtimet që keni ruajtur në lifebox këtë dimër. Zbuloni ato tani.";
+"photo_max_selection_title_x" = "";
+"photo_max_selection_body_x" = "";

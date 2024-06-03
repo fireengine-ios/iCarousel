@@ -38,20 +38,20 @@ class CollageInteractor: BaseFilesGreedInteractor {
                     }
                 case .timeUp:
                     sortedList.sort { (item1: BaseDataSourceItem, item2: BaseDataSourceItem) -> Bool in
-                        (item1.creationDate ?? Date.distantPast) < (item2.creationDate ?? Date.distantPast)
+                        (item1.creationDate ?? Date.distantPast) > (item2.creationDate ?? Date.distantPast)
                     }
                 case .timeDown:
                     sortedList.sort { (item1: BaseDataSourceItem, item2: BaseDataSourceItem) -> Bool in
-                        (item1.creationDate ?? Date.distantPast) > (item2.creationDate ?? Date.distantPast)
+                        (item1.creationDate ?? Date.distantPast) < (item2.creationDate ?? Date.distantPast)
                     }
                 case .sizeAZ:
                     wrapData.sort { (item1: WrapData, item2: WrapData) -> Bool in
-                        item1.fileSize < item2.fileSize
+                        item1.fileSize > item2.fileSize
                     }
                     sortedList = wrapData
                 case .sizeZA:
                     wrapData.sort { (item1: WrapData, item2: WrapData) -> Bool in
-                        item1.fileSize > item2.fileSize
+                        item1.fileSize < item2.fileSize
                     }
                     sortedList = wrapData
                 case .albumlettersAZ, .albumlettersZA, .metaDataTimeUp, .metaDataTimeDown, .lastModifiedTimeUp, .lastModifiedTimeDown, .timeUpWithoutSection, .timeDownWithoutSection:
