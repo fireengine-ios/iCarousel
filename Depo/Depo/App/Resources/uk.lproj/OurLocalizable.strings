@@ -2294,7 +2294,7 @@ then {11,99 TRY/Month}*/
 "gamification_raffle_summary" = "Переглянути Огляд Розіграшу";
 "gamification_event_not_trigerred" = "Ця функція ще не використовувалася. Спробуйте зараз!";
 "gamification_event_trigger_count" = "You Have %d Raffle Rights";
-"gamification_event_completed" = "Ви використали свої права цього %@ місяця.";
+"gamification_event_completed" = "Ви використали свої права цього %@.";
 "gamification_total_count" = "Разом Отримано %d Прав На Розіграш.";
 "gamification_campaign_conditions" = "Деталі Кампанії";
 "gamification_rules" = "Умови Розіграшу";
@@ -2324,3 +2324,5 @@ then {11,99 TRY/Month}*/
 "timeline_description" = "Ми приготували для вас сюрприз зі спогадів, які ви зберегли в lifebox цієї зими. Подивіться просто зараз.";
 "photo_max_selection_title_x" = "";
 "photo_max_selection_body_x" = "";
+"right" = "";
+"rights" = "";

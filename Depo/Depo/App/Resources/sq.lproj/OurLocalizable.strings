@@ -2335,7 +2335,7 @@ then {11,99 TRY/Month}*/
 "gamification_raffle_summary" = "Shih Përmbledhjen e Lotarisë";
 "gamification_event_not_trigerred" = "Kjo veçori nuk është përdorur ende. Provoni tani!";
 "gamification_event_trigger_count" = "You Have %d Raffle Rights";
-"gamification_event_completed" = "Ju keni përfunduar të drejtat tuaja këtë %@ muaj.";
+"gamification_event_completed" = "Ju keni përfunduar të drejtat tuaja këtë %@.";
 "gamification_total_count" = "Ju Fituat Një Total Prej %d të Drejtash Lotarie.";
 "gamification_campaign_conditions" = "Detajet e Fushatës";
 "gamification_rules" = "Kushtet e Lotarisë";
@@ -2365,3 +2365,5 @@ then {11,99 TRY/Month}*/
 "timeline_description" = "Ne kemi përgatitur për ju një surprizë nga kujtimet që keni ruajtur në lifebox këtë dimër. Zbuloni ato tani.";
 "photo_max_selection_title_x" = "";
 "photo_max_selection_body_x" = "";
+"right" = "";
+"rights" = "";

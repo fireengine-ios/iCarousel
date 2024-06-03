@@ -2414,3 +2414,5 @@ then {11,99 TRY/Month}*/
 "timeline_description" = "Bu kış lifebox’ta yedeklediğin anılarından sana bir sürpriz hazırladık. Hemen keşfet.";
 "photo_max_selection_title_x" = "";
 "photo_max_selection_body_x" = "";
+"right" = "hakkın";
+"rights" = "hakkın";

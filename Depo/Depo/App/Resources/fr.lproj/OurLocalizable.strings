@@ -2597,7 +2597,7 @@ then {11,99 TRY/Month}*/
 "gamification_raffle_summary" = "Voir le Résumé du Tirage au Sort";
 "gamification_event_not_trigerred" = "Cette fonction n'a pas encore été utilisée, essayez maintenant !";
 "gamification_event_trigger_count" = "You Have %d Raffle Rights";
-"gamification_event_completed" = "Vous avez complété vos droits ce %@ mois.";
+"gamification_event_completed" = "Vous avez complété vos droits ce %@.";
 "gamification_total_count" = "Vous Avez Gagné un Total de %d Droits au Tirage au Sort.";
 "gamification_campaign_conditions" = "Détails de la Campagne";
 "gamification_rules" = "Éligibilité au Tirage au Sort";
@@ -2627,3 +2627,5 @@ then {11,99 TRY/Month}*/
 "timeline_description" = "Nous vous avons préparé une surprise à partir des souvenirs que vous avez sauvegardés dans lifebox cet hiver. Découvrez-les dès maintenant.";
 "photo_max_selection_title_x" = "";
 "photo_max_selection_body_x" = "";
+"right" = "";
+"rights" = "";

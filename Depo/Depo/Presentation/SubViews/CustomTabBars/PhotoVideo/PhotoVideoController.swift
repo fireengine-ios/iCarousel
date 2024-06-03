@@ -212,13 +212,14 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     private func performFetch() {
         dataSource.setupOriginalPredicates(fileTypes: fileTypes) { [weak self] in
+            guard let self = self else { return }
             DispatchQueue.main.async {
-                self?.fetchAndReload()
+                self.fetchAndReload()
 
                 // The very first viewWillAppear will return zero for collectionView.indexPathsForVisibleItems
                 // We need to call updateDB() after the initial db fetch
-                self?.collectionView.layoutIfNeeded()
-                self?.updateDB()
+                self.collectionView.layoutIfNeeded()
+                self.updateDB()
             }
         }
     }
@@ -227,8 +228,11 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         CellImageManager.clear()
         assetsFileCacheManager.resetCachedAssets()
         dataSource.performFetch()
-        collectionView.reloadData()
-        collectionView.collectionViewLayout.invalidateLayout()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.collectionView.reloadData()
+            self.collectionView.collectionViewLayout.invalidateLayout()
+        }
     }
     
     func scrollToItem(_ item: Item) {
@@ -349,15 +353,19 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
     
     private func updateSelection(cell: PhotoVideoCell) {
-        cell.updateSelection(isSelectionMode: self.dataSource.isSelectingMode, animated: false)
-        updateSelectedItemsCount()
+        DispatchQueue.main.async { [ weak self ] in
+            cell.updateSelection(isSelectionMode: self?.dataSource.isSelectingMode ?? false, animated: false)
+            self?.updateSelectedItemsCount()
+        }
         
         ///fix bottom bar update scrolling freeze on dragging
         guard !collectionView.isQuickSelecting else {
             return
         }
-
-        updateBarsForSelectedObjects()
+        
+        DispatchQueue.main.async { [ weak self ] in
+            self?.updateBarsForSelectedObjects()
+        }
     }
     
     private func trackClickOnPhotoOrVideo(isPhoto: Bool) {
@@ -482,11 +490,11 @@ extension PhotoVideoController: UIScrollViewDelegate {
             debugLog("RangeAPI workaroundVisibleIndexes = self.collectionView?.indexPathsForVisibleItems.sorted(by: <) failed")
             return
         }
-        debugLog("RangeAPI first index \(workaroundVisibleIndexes.first) ")
+        debugLog("RangeAPI first index \(String(describing: workaroundVisibleIndexes.first)) ")
         rangeAPIInfo(at: workaroundVisibleIndexes.first) { [weak self] topAPIInfo in
-            debugLog("RangeAPI top info  date \(topAPIInfo?.date) id \(topAPIInfo?.id)")
+            debugLog("RangeAPI top info  date \(String(describing: topAPIInfo?.date)) id \(String(describing: topAPIInfo?.id))")
             self?.self.rangeAPIInfo(at: workaroundVisibleIndexes.last) { [weak self] bottomAPIInfo in
-                 debugLog("RangeAPI bottom info  date \(bottomAPIInfo?.date) id \(bottomAPIInfo?.id)")
+                debugLog("RangeAPI bottom info  date \(String(describing: bottomAPIInfo?.date)) id \(String(describing: bottomAPIInfo?.id))")
                 guard let topAPIInfo = topAPIInfo,
                     let bottomAPIInfo = bottomAPIInfo else {
                     return
@@ -510,7 +518,7 @@ extension PhotoVideoController: UIScrollViewDelegate {
                         case .success(let quckScrollResponse):
                             debugLog("RangeAPI response success")
                             debugLog("RangeAPI response count \(quckScrollResponse.size) \(quckScrollResponse.files.count)")
-                            debugLog("RangeAPI first date \(quckScrollResponse.files.first?.metaDate) last date \(quckScrollResponse.files.last?.metaDate)")
+                            debugLog("RangeAPI first date \(String(describing: quckScrollResponse.files.first?.metaDate)) last date \(String(describing: quckScrollResponse.files.last?.metaDate))")
                             self.dispatchQueue.async {
                                 MediaItemOperationsService.shared.updateRemoteItems(remoteItems: quckScrollResponse.files, fileTypes: self.fileTypes, topInfo: topAPIInfo, bottomInfo: bottomAPIInfo, completion: {
                                     debugLog("RangeAPI DB UPDATED")
@@ -1034,7 +1042,7 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
             category = .photosAndVideos
             fileTypes = [.image, .video]
             collectionViewManager.viewType = .all
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.performFetch()
             }
             changeViewType(to: .all)
@@ -1042,14 +1050,14 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
             category = .photos
             fileTypes = [.image]
             collectionViewManager.viewType = .all
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.performFetch()
             }
         case .galleryVideos:
             category = .videos
             fileTypes = [.video]
             collectionViewManager.viewType = .all
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.performFetch()
             }
         case .gallerySync:
