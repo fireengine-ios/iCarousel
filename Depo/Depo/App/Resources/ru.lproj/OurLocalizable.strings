@@ -2145,7 +2145,7 @@ then {11,99 TRY/Month}*/
 "timeline_header" = "Ваши Самые Яркие Зимние Воспоминания";
 
 /*Fuzzy*/
-"timeline_description" = "Мы собрали для вас самые прекрасные моменты года 2023. Откройте их для себя прямо сейчас.";
+"timeline_description_backup" = "Мы собрали для вас самые прекрасные моменты года 2023. Откройте их для себя прямо сейчас.";
 "selected_for_print" = "Выбрано для печати";
 "print_cancel_popup_question" = "Вы уверены, что хотите отказаться?";
 "print_cancel_popup_info" = "Все фотографии, выбранные для печатного альбома, будут удалены. Вам придется выбирать и редактировать фотографии заново.";
@@ -2281,8 +2281,6 @@ then {11,99 TRY/Month}*/
 "delete_popup_body" = "Вы уверены, что хотите удалить фотографии?";
 "please_enter_your_msisdn" = "Внесение своего номера телефона в lifebox - это самый надежный способ защитить свой аккаунт на всю жизнь. Пожалуйста, добавьте свой номер телефона, чтобы продолжить получать доступ к своим воспоминаниям в lifebox.";
 "grace_banner_paycell_text" = "";
-"photo_max_selection_title_x" = "";
-"photo_max_selection_body_x" = "";
 "no_video_to_print_popup_title" = "";
 "no_video_to_print_popup_body" = "";
 
@@ -2333,5 +2331,8 @@ then {11,99 TRY/Month}*/
 "gamification_title_createstory" = "Создать Историю";
 "gamification_title_createalbum" = "Создать Альбом";
 "timeline_header_backup" = "Лучшие воспоминания 2023 года";
-"winter_video_timeline_header" = "";
+"winter_video_timeline_header" = "Ваши Самые Яркие Зимние Воспоминания";
 "yearly" = "Ежегодник";
+"timeline_description" = "Мы приготовили для вас сюрприз из воспоминаний, которые вы сохранили в lifebox этой зимой. Смотрите прямо сейчас.";
+"photo_max_selection_title_x" = "";
+"photo_max_selection_body_x" = "";

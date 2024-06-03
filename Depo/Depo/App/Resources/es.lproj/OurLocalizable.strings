@@ -2173,7 +2173,7 @@ then {11,99 TRY/Month}*/
 "timeline_header" = "Tus Recuerdos más Vívidos del Invierno";
 
 /*Fuzzy*/
-"timeline_description" = "Hemos recopilado para ti los mejores momentos del año 2023. Descúbrelos ahora.";
+"timeline_description_backup" = "Hemos recopilado para ti los mejores momentos del año 2023. Descúbrelos ahora.";
 "selected_for_print" = "Seleccionado para impresión";
 "print_cancel_popup_question" = "¿Seguro que quieres cancelarlo?";
 "print_cancel_popup_info" = "Se borrarán todas las ediciones de fotos que hayas seleccionado para el álbum impreso. Tendrás que volver a seleccionar y editar las fotos.";
@@ -2309,8 +2309,6 @@ then {11,99 TRY/Month}*/
 "delete_popup_body" = "¿Está seguro de que desea borrarlas?";
 "please_enter_your_msisdn" = "Añadir tu número de teléfono a lifebox es la forma más segura de proteger tu cuenta de por vida. Añade tu número de teléfono para seguir accediendo a tus recuerdos en lifebox.";
 "grace_banner_paycell_text" = "";
-"photo_max_selection_title_x" = "";
-"photo_max_selection_body_x" = "";
 "no_video_to_print_popup_title" = "";
 "no_video_to_print_popup_body" = "";
 
@@ -2361,5 +2359,8 @@ then {11,99 TRY/Month}*/
 "gamification_title_createstory" = "Crear Historia";
 "gamification_title_createalbum" = "Crear un Álbum";
 "timeline_header_backup" = "Los mejores recuerdos de 2023";
-"winter_video_timeline_header" = "";
+"winter_video_timeline_header" = "Tus Recuerdos más Vívidos del Invierno";
 "yearly" = "Anualmente";
+"timeline_description" = "Hemos preparado una sorpresa de los recuerdos que guardaste en lifebox este invierno. Descúbrelos ahora.";
+"photo_max_selection_title_x" = "";
+"photo_max_selection_body_x" = "";
