@@ -544,6 +544,10 @@ struct RouteRequests {
     static let collageTemplate = baseUrl +/ "template/collages"
     static let timeline = baseUrl +/ "foryou/timeline"
     static let winterThemedVideo = baseUrl +/ "foryou/timeline/themed"
+    static let recommendedDeeplink = baseUrl +/ "v2/foryou/recommend/generated"
+    static func getRecommendedDeeplinkData(with uuid: String) -> URL {
+        return recommendedDeeplink +/ String(uuid)
+    }
     static func saveDeleteTimeline(with id: Int) -> URL {
         return timeline +/ String(id)
     }
