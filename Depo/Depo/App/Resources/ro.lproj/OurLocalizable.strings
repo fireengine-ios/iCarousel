@@ -2292,7 +2292,7 @@ then {11,99 TRY/Month}*/
 "gamification_raffle_summary" = "Vezi Rezumatul Tombolei";
 "gamification_event_not_trigerred" = "Această caracteristică nu a fost încă utilizată. Încercați acum!";
 "gamification_event_trigger_count" = "You Have %d Raffle Rights";
-"gamification_event_completed" = "V-ați completat drepturile în această %@ lună.";
+"gamification_event_completed" = "V-ați completat drepturile în această %@.";
 "gamification_total_count" = "Ați Câștigat un Total de %d Drepturi de Tombolă.";
 "gamification_campaign_conditions" = "Detalii Despre Campanie";
 "gamification_rules" = "Eligibilitate la Tombolă";
@@ -2322,3 +2322,5 @@ then {11,99 TRY/Month}*/
 "timeline_description" = "V-am pregătit o surpriză cu amintirile pe care le-ați salvat în lifebox în această iarnă. Descoperă-le chiar acum.";
 "photo_max_selection_title_x" = "";
 "photo_max_selection_body_x" = "";
+"right" = "";
+"rights" = "";

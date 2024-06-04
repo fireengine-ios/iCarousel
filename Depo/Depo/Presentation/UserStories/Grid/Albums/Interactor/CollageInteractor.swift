@@ -11,6 +11,7 @@ import UIKit
 class CollageInteractor: BaseFilesGreedInteractor {
     
     private lazy var service = ForYouService()
+    private var isLoading = false
 
     override func getAllItems(sortBy: SortedRules) {
         debugLog("CollageInteractor getAllItems")
@@ -19,8 +20,17 @@ class CollageInteractor: BaseFilesGreedInteractor {
     }
     
     private func getCollages(sortBy: SortedRules) {
+        
+        guard !isLoading else { return }
+        
+        isLoading = true
+        
         debugLog("ForYou getCollages")
+        
         service.forYouCollages() { [weak self] result in
+            
+            defer { self?.isLoading = false }
+            
             switch result {
             case .success(let response):
                 var array = [[BaseDataSourceItem]]()

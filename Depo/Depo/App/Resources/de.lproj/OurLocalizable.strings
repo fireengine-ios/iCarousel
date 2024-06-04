@@ -2292,7 +2292,7 @@ then {11,99 TRY/Month}*/
 "gamification_raffle_summary" = "Siehe Verlosungsübersicht";
 "gamification_event_not_trigerred" = "Diese Funktion wurde noch nicht verwendet. Probieren Sie es jetzt aus!";
 "gamification_event_trigger_count" = "You Have %d Raffle Rights";
-"gamification_event_completed" = "Sie haben Ihre Rechte in diesem %@ Monat erfüllt.";
+"gamification_event_completed" = "Sie haben Ihre Rechte in diesem %@ erfüllt.";
 "gamification_total_count" = "Sie Haben Insgesamt %d Verlosungsrechte Gewonnen.";
 "gamification_campaign_conditions" = "Details zur Kampagne";
 "gamification_rules" = "Teilnahmeberechtigung für die Verlosung";
@@ -2322,3 +2322,5 @@ then {11,99 TRY/Month}*/
 "timeline_description" = "Wir haben für Sie eine Überraschung aus Ihren Erinnerungen vorbereitet, die Sie in diesem Winter in lifebox gespeichert haben. Entdecken Sie jetzt.";
 "photo_max_selection_title_x" = "";
 "photo_max_selection_body_x" = "";
+"right" = "";
+"rights" = "";

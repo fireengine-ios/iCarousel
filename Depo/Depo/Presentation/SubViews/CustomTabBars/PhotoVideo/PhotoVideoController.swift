@@ -1034,7 +1034,7 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
             category = .photosAndVideos
             fileTypes = [.image, .video]
             collectionViewManager.viewType = .all
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.performFetch()
             }
             changeViewType(to: .all)
@@ -1042,14 +1042,14 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
             category = .photos
             fileTypes = [.image]
             collectionViewManager.viewType = .all
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.performFetch()
             }
         case .galleryVideos:
             category = .videos
             fileTypes = [.video]
             collectionViewManager.viewType = .all
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.performFetch()
             }
         case .gallerySync:
