@@ -83,17 +83,17 @@ class RaffleSummaryCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    private lazy var comeBackLabel: UILabel = {
-        let view = UILabel()
-        view.font = .appFont(.medium, size: 10)
-        view.textColor = AppColor.profileInfoOrange.color
-        view.text = localized(.gamificationComeback)
-        view.numberOfLines = 0
-        view.textAlignment = .center
-        view.lineBreakMode = .byWordWrapping
-        view.isHidden = true
-        return view
-    }()
+//    private lazy var comeBackLabel: UILabel = {
+//        let view = UILabel()
+//        view.font = .appFont(.medium, size: 10)
+//        view.textColor = AppColor.profileInfoOrange.color
+//        view.text = localized(.gamificationComeback)
+//        view.numberOfLines = 0
+//        view.textAlignment = .center
+//        view.lineBreakMode = .byWordWrapping
+//        view.isHidden = true
+//        return view
+//    }()
     
     weak var delegate: RaffleSummaryCollectionViewCellDelegate?
     private var raffle: RaffleElement?
@@ -112,7 +112,6 @@ class RaffleSummaryCollectionViewCell: UICollectionViewCell {
         iconImage.image = raffle.icon
         iconImage.layer.opacity = imageOppacity
         actionButton.setTitle(raffle.buttonTitle, for: .normal)
-        infoLabel.text = raffle.infoLabelText
         
         if raffle == .purchasePackage {
             titleLabel.text = "\(raffle.title) (\(packagePeriod))"
@@ -134,13 +133,13 @@ class RaffleSummaryCollectionViewCell: UICollectionViewCell {
                 if periodEarnLimit - periodEarnedPoints <= 0 || totalEarnLimit == totalPointsEarnedRule {
                     actionButton.isHidden = true
                     infoLabel.isHidden = false
-                    comeBackLabel.isHidden = false
+                    //comeBackLabel.isHidden = false
                     let period = RafflePeriod(rawValue: status.periodType ?? RafflePeriod.daily.rawValue) ?? RafflePeriod.daily
-                    infoLabel.text = String(format: raffle.infoLabelText, period.title)
+                    infoLabel.text = "\(String(format: raffle.infoLabelText, period.title)) \(localized(.gamificationComeback))"
                 } else {
                     actionButton.isHidden = false
                     infoLabel.isHidden = true
-                    comeBackLabel.isHidden = true
+                    //comeBackLabel.isHidden = true
                 }
                 break
             }
@@ -207,14 +206,14 @@ extension RaffleSummaryCollectionViewCell {
         infoLabel.topAnchor.constraint(equalTo: infoView.topAnchor, constant: 0).activate()
         infoLabel.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 0).activate()
         infoLabel.trailingAnchor.constraint(equalTo: infoView.trailingAnchor, constant: 0).activate()
-        infoLabel.heightAnchor.constraint(equalToConstant: 20).activate()
+        infoLabel.bottomAnchor.constraint(equalTo: infoView.bottomAnchor, constant: 0).activate()
         
-        infoView.addSubview(comeBackLabel)
-        comeBackLabel.translatesAutoresizingMaskIntoConstraints = false
-        comeBackLabel.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 0).activate()
-        comeBackLabel.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 0).activate()
-        comeBackLabel.trailingAnchor.constraint(equalTo: infoView.trailingAnchor, constant: 0).activate()
-        comeBackLabel.heightAnchor.constraint(equalToConstant: 20).activate()
+//        infoView.addSubview(comeBackLabel)
+//        comeBackLabel.translatesAutoresizingMaskIntoConstraints = false
+//        comeBackLabel.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 0).activate()
+//        comeBackLabel.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 0).activate()
+//        comeBackLabel.trailingAnchor.constraint(equalTo: infoView.trailingAnchor, constant: 0).activate()
+//        comeBackLabel.heightAnchor.constraint(equalToConstant: 20).activate()
     }
 }
 

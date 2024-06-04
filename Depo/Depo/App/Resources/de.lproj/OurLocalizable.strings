@@ -2271,10 +2271,10 @@ then {11,99 TRY/Month}*/
 "no_video_to_print_popup_body" = "";
 
 /*Toplam çekiliş hak sayısı*/
-"gamification_raffle_count" = "Sie haben %d Verlosungsrechte";
+"gamification_raffle_count" = "You Have %d Raffle Right(s)";
 
 /*Kampanya tarih aralıgı*/
-"gamification_raffle_dates" = "Datum der Teilnahme an der Verlosung:";
+"gamification_raffle_dates" = "Participation date in the draw:";
 
 /*Çekiliş özetini gör buton*/
 "gamification_raffle_brief" = "Siehe Verlosungsübersicht";
@@ -2292,6 +2292,7 @@ then {11,99 TRY/Month}*/
 "gamification_raffle_summary" = "Siehe Verlosungsübersicht";
 "gamification_event_not_trigerred" = "Diese Funktion wurde noch nicht verwendet. Probieren Sie es jetzt aus!";
 "gamification_event_trigger_count" = "You Have %d Raffle Rights";
+"gamification_event_trigger_count" = "You Have %d Raffle Right(s)";
 "gamification_event_completed" = "Sie haben Ihre Rechte in diesem %@ erfüllt.";
 "gamification_total_count" = "Sie Haben Insgesamt %d Verlosungsrechte Gewonnen.";
 "gamification_campaign_conditions" = "Details zur Kampagne";
@@ -2324,3 +2325,5 @@ then {11,99 TRY/Month}*/
 "photo_max_selection_body_x" = "";
 "right" = "";
 "rights" = "";
+"gamification_total_earn_point_1" = "You earned %@";
+"gamification_total_earn_point_2" = "%d raffle right(s)";

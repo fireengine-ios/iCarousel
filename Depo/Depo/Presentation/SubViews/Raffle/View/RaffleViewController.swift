@@ -14,9 +14,9 @@ enum RafflePeriod: String, Codable {
     
     var title: String {
         switch self {
-        case .daily: return localized(.daily)
-        case .weekly: return localized(.weekly)
-        case .monthly: return localized(.monthly)
+        case .daily: return TextConstants.packagePeriodDay.lowercased()
+        case .weekly: return TextConstants.packagePeriodWeek.lowercased()
+        case .monthly: return TextConstants.packagePeriodMonth.lowercased()
         default: return localized(.daily)
         }
     }
