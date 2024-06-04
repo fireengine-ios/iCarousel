@@ -2271,10 +2271,10 @@ then {11,99 TRY/Month}*/
 "no_video_to_print_popup_body" = "";
 
 /*Toplam çekiliş hak sayısı*/
-"gamification_raffle_count" = "Aveți %d drepturi de tombolă";
+"gamification_raffle_count" = "You Have %d Raffle Right(s)";
 
 /*Kampanya tarih aralıgı*/
-"gamification_raffle_dates" = "Data participării la tombolă:";
+"gamification_raffle_dates" = "Participation date in the draw:";
 
 /*Çekiliş özetini gör buton*/
 "gamification_raffle_brief" = "Consultați Rezumatul Tombolei";
@@ -2292,6 +2292,7 @@ then {11,99 TRY/Month}*/
 "gamification_raffle_summary" = "Vezi Rezumatul Tombolei";
 "gamification_event_not_trigerred" = "Această caracteristică nu a fost încă utilizată. Încercați acum!";
 "gamification_event_trigger_count" = "You Have %d Raffle Rights";
+"gamification_event_trigger_count" = "You Have %d Raffle Right(s)";
 "gamification_event_completed" = "V-ați completat drepturile în această %@.";
 "gamification_total_count" = "Ați Câștigat un Total de %d Drepturi de Tombolă.";
 "gamification_campaign_conditions" = "Detalii Despre Campanie";
@@ -2324,3 +2325,5 @@ then {11,99 TRY/Month}*/
 "photo_max_selection_body_x" = "";
 "right" = "";
 "rights" = "";
+"gamification_total_earn_point_1" = "You earned %@";
+"gamification_total_earn_point_2" = "%d raffle right(s)";

@@ -2383,7 +2383,7 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "gamification_raffle_summary" = "Çekiliş Özetini Gör";
 "gamification_event_not_trigerred" = "Bu özellikten çekiliş hakkı kazanmadın. Hemen dene!";
-"gamification_event_trigger_count" = "%d Adet Çekiliş Hakkı Kazandın.";
+"gamification_event_trigger_count" = "%d Adet Çekiliş Hakkı Kazandın";
 "gamification_event_completed" = "Bu %@ hakkını tamamladın.";
 "gamification_total_count" = "Toplam %d Çekiliş Hakkı Kazandın.";
 "gamification_campaign_conditions" = "Kampanya Detayları";
@@ -2416,3 +2416,7 @@ then {11,99 TRY/Month}*/
 "photo_max_selection_body_x" = "";
 "right" = "hakkın";
 "rights" = "hakkın";
+
+/*Fuzzy*/
+"gamification_total_earn_point_1" = "Toplam %@ kazandın";
+"gamification_total_earn_point_2" = "%d çekiliş puanı";

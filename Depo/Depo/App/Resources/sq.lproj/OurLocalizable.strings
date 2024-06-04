@@ -2314,10 +2314,10 @@ then {11,99 TRY/Month}*/
 "no_video_to_print_popup_body" = "";
 
 /*Toplam çekiliş hak sayısı*/
-"gamification_raffle_count" = "Ju keni %d të drejta lotarie";
+"gamification_raffle_count" = "You Have %d Raffle Right(s)";
 
 /*Kampanya tarih aralıgı*/
-"gamification_raffle_dates" = "Data e pjesëmarrjes në lotari:";
+"gamification_raffle_dates" = "Participation date in the draw:";
 
 /*Çekiliş özetini gör buton*/
 "gamification_raffle_brief" = "Shih Përmbledhjen e Lotarisë";
@@ -2335,6 +2335,7 @@ then {11,99 TRY/Month}*/
 "gamification_raffle_summary" = "Shih Përmbledhjen e Lotarisë";
 "gamification_event_not_trigerred" = "Kjo veçori nuk është përdorur ende. Provoni tani!";
 "gamification_event_trigger_count" = "You Have %d Raffle Rights";
+"gamification_event_trigger_count" = "You Have %d Raffle Right(s)";
 "gamification_event_completed" = "Ju keni përfunduar të drejtat tuaja këtë %@.";
 "gamification_total_count" = "Ju Fituat Një Total Prej %d të Drejtash Lotarie.";
 "gamification_campaign_conditions" = "Detajet e Fushatës";
@@ -2367,3 +2368,5 @@ then {11,99 TRY/Month}*/
 "photo_max_selection_body_x" = "";
 "right" = "";
 "rights" = "";
+"gamification_total_earn_point_1" = "You earned %@";
+"gamification_total_earn_point_2" = "%d raffle right(s)";

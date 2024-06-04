@@ -2335,7 +2335,7 @@ then {11,99 TRY/Month}*/
 "no_video_to_print_popup_body" = "You only need to select photos to continue printing.";
 
 /*Toplam çekiliş hak sayısı*/
-"gamification_raffle_count" = "You Have %d Raffle Rights";
+"gamification_raffle_count" = "You Have %d Raffle Right(s)";
 
 /*Kampanya tarih aralıgı*/
 "gamification_raffle_dates" = "Participation date in the draw:";
@@ -2356,6 +2356,7 @@ then {11,99 TRY/Month}*/
 "gamification_raffle_summary" = "See Raffle Summary";
 "gamification_event_not_trigerred" = "This feature has not been used yet.Try now!";
 "gamification_event_trigger_count" = "You Have %d Raffle Rights";
+"gamification_event_trigger_count" = "You Have %d Raffle Right(s)";
 "gamification_event_completed" = "You have completed your rights this %@.";
 "gamification_total_count" = "You Won a Total of %d Raffle Rights.";
 "gamification_campaign_conditions" = "Campaign Details";
@@ -2394,3 +2395,5 @@ then {11,99 TRY/Month}*/
 "photo_max_selection_body_x" = "You can send a maximum of %@ photos for printing.";
 "right" = "right";
 "rights" = "rights";
+"gamification_total_earn_point_1" = "You earned %@";
+"gamification_total_earn_point_2" = "%d raffle right(s)";

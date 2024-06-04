@@ -208,8 +208,8 @@ extension RaffleSummaryViewController {
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         
-        let mainText = "Toplam %@ kazandın."
-        let pointCountText = "%d çekiliş puanı"
+        let mainText = localized(.gamificationTotalEarnPoint1)
+        let pointCountText = localized(.gamificationTotalEarnPoint2)
         let point = statusResponse?.totalPointsEarned
         
         let content = NSMutableAttributedString(string: mainText, attributes: [.font: UIFont.appFont(.light, size: 10)])
