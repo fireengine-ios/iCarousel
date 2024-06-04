@@ -2131,7 +2131,7 @@ then {11,99 TRY/Month}*/
 "timeline_header" = "Cele mai vii amintiri de iarnă ale tale";
 
 /*Fuzzy*/
-"timeline_description" = "Am compilat pentru tine cele mai bune momente ale anului 2023. Descoperă-le pentru tine chiar acum.";
+"timeline_description_backup" = "Am compilat pentru tine cele mai bune momente ale anului 2023. Descoperă-le pentru tine chiar acum.";
 "selected_for_print" = "Selectate pentru imprimare";
 "print_cancel_popup_question" = "Sunteți sigur că doriți să anulați?";
 "print_cancel_popup_info" = "Toate editările de fotografii pe care le-ați selectat pentru albumul tipărit vor fi șterse. Va trebui să selectați și să editați din nou fotografiile.";
@@ -2267,16 +2267,14 @@ then {11,99 TRY/Month}*/
 "delete_popup_body" = "Sunteți sigur că doriți să le ștergeți?";
 "please_enter_your_msisdn" = "Adăugarea numărului dvs. de telefon la lifebox este cea mai sigură modalitate de a vă proteja contul pe viață. Vă rugăm să vă adăugați numărul de telefon pentru a continua să vă accesați amintirile în lifebox.";
 "grace_banner_paycell_text" = "";
-"photo_max_selection_title_x" = "";
-"photo_max_selection_body_x" = "";
 "no_video_to_print_popup_title" = "";
 "no_video_to_print_popup_body" = "";
 
 /*Toplam çekiliş hak sayısı*/
-"gamification_raffle_count" = "Aveți %d drepturi de tombolă";
+"gamification_raffle_count" = "You Have %d Raffle Right(s)";
 
 /*Kampanya tarih aralıgı*/
-"gamification_raffle_dates" = "Data participării la tombolă:";
+"gamification_raffle_dates" = "Participation date in the draw:";
 
 /*Çekiliş özetini gör buton*/
 "gamification_raffle_brief" = "Consultați Rezumatul Tombolei";
@@ -2294,7 +2292,8 @@ then {11,99 TRY/Month}*/
 "gamification_raffle_summary" = "Vezi Rezumatul Tombolei";
 "gamification_event_not_trigerred" = "Această caracteristică nu a fost încă utilizată. Încercați acum!";
 "gamification_event_trigger_count" = "You Have %d Raffle Rights";
-"gamification_event_completed" = "V-ați completat drepturile în această %@ lună.";
+"gamification_event_trigger_count" = "You Have %d Raffle Right(s)";
+"gamification_event_completed" = "V-ați completat drepturile în această %@.";
 "gamification_total_count" = "Ați Câștigat un Total de %d Drepturi de Tombolă.";
 "gamification_campaign_conditions" = "Detalii Despre Campanie";
 "gamification_rules" = "Eligibilitate la Tombolă";
@@ -2319,5 +2318,12 @@ then {11,99 TRY/Month}*/
 "gamification_title_createstory" = "Creați o Poveste";
 "gamification_title_createalbum" = "Creați un Album";
 "timeline_header_backup" = "Les Meilleurs Souvenirs De 2023";
-"winter_video_timeline_header" = "";
+"winter_video_timeline_header" = "Cele mai vii amintiri de iarnă ale tale";
 "yearly" = "Anual";
+"timeline_description" = "V-am pregătit o surpriză cu amintirile pe care le-ați salvat în lifebox în această iarnă. Descoperă-le chiar acum.";
+"photo_max_selection_title_x" = "";
+"photo_max_selection_body_x" = "";
+"right" = "";
+"rights" = "";
+"gamification_total_earn_point_1" = "You earned %@";
+"gamification_total_earn_point_2" = "%d raffle right(s)";

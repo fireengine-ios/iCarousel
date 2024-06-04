@@ -2131,7 +2131,7 @@ then {11,99 TRY/Month}*/
 "timeline_header" = "Ihre lebhaftesten Wintererinnerungen";
 
 /*Fuzzy*/
-"timeline_description" = "Wir haben für Sie die schönsten Momente des Jahres 2023 gesammelt. Entdecken Sie sie jetzt für sich selbst.";
+"timeline_description_backup" = "Wir haben für Sie die schönsten Momente des Jahres 2023 gesammelt. Entdecken Sie sie jetzt für sich selbst.";
 "selected_for_print" = "Zum Drucken ausgewählt";
 "print_cancel_popup_question" = "Sind Sie sicher, dass Sie abbrechen möchten?";
 "print_cancel_popup_info" = "Alle Fotobearbeitungen, die Sie für das gedruckte Album ausgewählt haben, werden gelöscht. Sie müssen die Fotos erneut auswählen und bearbeiten.";
@@ -2267,16 +2267,14 @@ then {11,99 TRY/Month}*/
 "delete_popup_body" = "Sind Sie sicher, dass Sie löschen möchten?";
 "please_enter_your_msisdn" = "Das Hinzufügen Ihrer Telefonnummer zu lifebox ist der sicherste Weg, um Ihr Konto lebenslang zu schützen. Bitte fügen Sie Ihre Telefonnummer hinzu, um weiterhin auf Ihre Erinnerungen in lifebox zugreifen zu können.";
 "grace_banner_paycell_text" = "";
-"photo_max_selection_title_x" = "";
-"photo_max_selection_body_x" = "";
 "no_video_to_print_popup_title" = "";
 "no_video_to_print_popup_body" = "";
 
 /*Toplam çekiliş hak sayısı*/
-"gamification_raffle_count" = "Sie haben %d Verlosungsrechte";
+"gamification_raffle_count" = "You Have %d Raffle Right(s)";
 
 /*Kampanya tarih aralıgı*/
-"gamification_raffle_dates" = "Datum der Teilnahme an der Verlosung:";
+"gamification_raffle_dates" = "Participation date in the draw:";
 
 /*Çekiliş özetini gör buton*/
 "gamification_raffle_brief" = "Siehe Verlosungsübersicht";
@@ -2294,7 +2292,8 @@ then {11,99 TRY/Month}*/
 "gamification_raffle_summary" = "Siehe Verlosungsübersicht";
 "gamification_event_not_trigerred" = "Diese Funktion wurde noch nicht verwendet. Probieren Sie es jetzt aus!";
 "gamification_event_trigger_count" = "You Have %d Raffle Rights";
-"gamification_event_completed" = "Sie haben Ihre Rechte in diesem %@ Monat erfüllt.";
+"gamification_event_trigger_count" = "You Have %d Raffle Right(s)";
+"gamification_event_completed" = "Sie haben Ihre Rechte in diesem %@ erfüllt.";
 "gamification_total_count" = "Sie Haben Insgesamt %d Verlosungsrechte Gewonnen.";
 "gamification_campaign_conditions" = "Details zur Kampagne";
 "gamification_rules" = "Teilnahmeberechtigung für die Verlosung";
@@ -2319,5 +2318,12 @@ then {11,99 TRY/Month}*/
 "gamification_title_createstory" = "Geschichte Erstellen";
 "gamification_title_createalbum" = "Album Erstellen";
 "timeline_header_backup" = "Die Besten Erinnerungen An Das Jahr 2023";
-"winter_video_timeline_header" = "";
+"winter_video_timeline_header" = "Ihre lebhaftesten Wintererinnerungen";
 "yearly" = "Jährlich";
+"timeline_description" = "Wir haben für Sie eine Überraschung aus Ihren Erinnerungen vorbereitet, die Sie in diesem Winter in lifebox gespeichert haben. Entdecken Sie jetzt.";
+"photo_max_selection_title_x" = "";
+"photo_max_selection_body_x" = "";
+"right" = "";
+"rights" = "";
+"gamification_total_earn_point_1" = "You earned %@";
+"gamification_total_earn_point_2" = "%d raffle right(s)";

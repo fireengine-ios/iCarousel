@@ -11,6 +11,7 @@ import UIKit
 class CollageInteractor: BaseFilesGreedInteractor {
     
     private lazy var service = ForYouService()
+    private var isLoading = false
 
     override func getAllItems(sortBy: SortedRules) {
         debugLog("CollageInteractor getAllItems")
@@ -19,8 +20,17 @@ class CollageInteractor: BaseFilesGreedInteractor {
     }
     
     private func getCollages(sortBy: SortedRules) {
+        
+        guard !isLoading else { return }
+        
+        isLoading = true
+        
         debugLog("ForYou getCollages")
+        
         service.forYouCollages() { [weak self] result in
+            
+            defer { self?.isLoading = false }
+            
             switch result {
             case .success(let response):
                 var array = [[BaseDataSourceItem]]()
@@ -38,20 +48,20 @@ class CollageInteractor: BaseFilesGreedInteractor {
                     }
                 case .timeUp:
                     sortedList.sort { (item1: BaseDataSourceItem, item2: BaseDataSourceItem) -> Bool in
-                        (item1.creationDate ?? Date.distantPast) < (item2.creationDate ?? Date.distantPast)
+                        (item1.creationDate ?? Date.distantPast) > (item2.creationDate ?? Date.distantPast)
                     }
                 case .timeDown:
                     sortedList.sort { (item1: BaseDataSourceItem, item2: BaseDataSourceItem) -> Bool in
-                        (item1.creationDate ?? Date.distantPast) > (item2.creationDate ?? Date.distantPast)
+                        (item1.creationDate ?? Date.distantPast) < (item2.creationDate ?? Date.distantPast)
                     }
                 case .sizeAZ:
                     wrapData.sort { (item1: WrapData, item2: WrapData) -> Bool in
-                        item1.fileSize < item2.fileSize
+                        item1.fileSize > item2.fileSize
                     }
                     sortedList = wrapData
                 case .sizeZA:
                     wrapData.sort { (item1: WrapData, item2: WrapData) -> Bool in
-                        item1.fileSize > item2.fileSize
+                        item1.fileSize < item2.fileSize
                     }
                     sortedList = wrapData
                 case .albumlettersAZ, .albumlettersZA, .metaDataTimeUp, .metaDataTimeDown, .lastModifiedTimeUp, .lastModifiedTimeDown, .timeUpWithoutSection, .timeDownWithoutSection:

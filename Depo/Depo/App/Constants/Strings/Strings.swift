@@ -453,5 +453,7 @@ enum Strings: String, Localizable {
     case gamificationTitleInvite = "gamification_title_invite"
     case gamificationTitleCreateStory = "gamification_title_createstory"
     case gamificationTitleCreateAlbum = "gamification_title_createalbum"
+    case gamificationTotalEarnPoint1 = "gamification_total_earn_point_1";
+    case gamificationTotalEarnPoint2 = "gamification_total_earn_point_2";
 
 }

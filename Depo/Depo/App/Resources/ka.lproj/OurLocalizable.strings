@@ -2125,7 +2125,9 @@ then {11,99 TRY/Month}*/
 "more_photo_right" = "";
 "no_more_photo_right" = "";
 "timeline_header" = "შენი განსაკუთრებული ზამთრის მოგონებები";
-"timeline_description" = "ჩვენ შევადგინეთ თქვენთვის 2023 წლის საუკეთესო მოგონებები. ნახე ისინი!";
+
+/*Fuzzy*/
+"timeline_description_backup" = "ჩვენ შევადგინეთ თქვენთვის 2023 წლის საუკეთესო მოგონებები. ნახე ისინი!";
 "selected_for_print" = "";
 "print_cancel_popup_question" = "";
 "print_cancel_popup_info" = "";
@@ -2251,16 +2253,14 @@ then {11,99 TRY/Month}*/
 "delete_popup_body" = "Დარწმუნებული ხარ რომ წაშლა გინდა?";
 "please_enter_your_msisdn" = "თქვენი ტელეფონის ნომრის lifebox-ში დამატება ყველაზე საიმედო გზაა თქვენი ანგარიშის სიცოცხლის განმავლობაში დასაცავად. გთხოვთ, დაამატოთ თქვენი ტელეფონის ნომერი, რათა გააგრძელოთ თქვენს მოგონებებზე წვდომა lifebox-ში.";
 "grace_banner_paycell_text" = "";
-"photo_max_selection_title_x" = "";
-"photo_max_selection_body_x" = "";
 "no_video_to_print_popup_title" = "";
 "no_video_to_print_popup_body" = "";
 
 /*Toplam çekiliş hak sayısı*/
-"gamification_raffle_count" = "";
+"gamification_raffle_count" = "You Have %d Raffle Right(s)";
 
 /*Kampanya tarih aralıgı*/
-"gamification_raffle_dates" = "";
+"gamification_raffle_dates" = "Participation date in the draw:";
 
 /*Çekiliş özetini gör buton*/
 "gamification_raffle_brief" = "";
@@ -2277,7 +2277,7 @@ then {11,99 TRY/Month}*/
 "gamification_raffle_draw" = "";
 "gamification_raffle_summary" = "";
 "gamification_event_not_trigerred" = "";
-"gamification_event_trigger_count" = "You Have %d Raffle Rights";
+"gamification_event_trigger_count" = "You Have %d Raffle Right(s)";
 "gamification_event_completed" = "";
 "gamification_total_count" = "";
 "gamification_campaign_conditions" = "";
@@ -2303,5 +2303,12 @@ then {11,99 TRY/Month}*/
 "gamification_title_createstory" = "";
 "gamification_title_createalbum" = "";
 "timeline_header_backup" = "2023-ის საუკეთესო მოგონებები";
-"winter_video_timeline_header" = "";
+"winter_video_timeline_header" = "შენი განსაკუთრებული ზამთრის მოგონებები";
 "yearly" = "ყოველწლიურად";
+"timeline_description" = "ჩვენ მოვამზადეთ შენთვის სიურპრიზი იმ მოგონებებიდან, რომლებიც ამ ზამთარში lifebox-ში შექმენი. აღმოაჩინე ისინი ახლავე.";
+"photo_max_selection_title_x" = "";
+"photo_max_selection_body_x" = "";
+"right" = "";
+"rights" = "";
+"gamification_total_earn_point_1" = "You earned %@";
+"gamification_total_earn_point_2" = "%d raffle right(s)";

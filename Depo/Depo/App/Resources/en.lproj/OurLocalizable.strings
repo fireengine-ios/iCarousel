@@ -2014,7 +2014,7 @@
 "save_to_my_lifebox_full_storage_body" = "You can free up space on this iPhone by managing your storage in Settings.";
 "places_map_title" = "Map";
 "map_location_detail_header" = "Photos at this Location";
-"beeline_feature_cancel_TC" = "You can cancel or manage your lifebox subscription from the Cellfie application. ";
+"beeline_feature_cancel_TC" = "You can cancel or manage your lifebox subscription from the Cellfie application.";
 "security_popup_body" = "Please enter at least 1 field to recover your account easily when you forgot your password";
 "security_popup_header" = "Set Your Recovery E-mail or Security Question";
 "save_to_my_billo" = "Save to My Billo";
@@ -2193,7 +2193,7 @@ then {11,99 TRY/Month}*/
 "timeline_header" = "Your Special Winter Memories";
 
 /*Fuzzy*/
-"timeline_description" = "We have compiled the best memories of 2023 for you. Check them out now!";
+"timeline_description_backup" = "We have compiled the best memories of 2023 for you. Check them out now!";
 "selected_for_print" = "Selected for printing";
 "print_cancel_popup_question" = "Are you sure you want to cancel?";
 "print_cancel_popup_info" = "All photo edits you have selected for the printed album will be deleted. You will need to select and edit photos again.";
@@ -2331,17 +2331,11 @@ then {11,99 TRY/Month}*/
 "delete_popup_body" = "Are you sure you want to delete?";
 "please_enter_your_msisdn" = "Adding your phone number to lifebox is the most reliable way to protect your account for a lifetime. Please add your phone number to continue accessing your memories in lifebox.";
 "grace_banner_paycell_text" = "";
-
-/*Fuzzy*/
-"photo_max_selection_title_x" = "You Have %@ Photo Rights";
-
-/*Fuzzy*/
-"photo_max_selection_body_x" = "You can send a maximum of %@ photos for printing.";
-"no_video_to_print_popup_title" = "";
-"no_video_to_print_popup_body" = "";
+"no_video_to_print_popup_title" = "Selected Videos Cannot Be Sent to Printing!";
+"no_video_to_print_popup_body" = "You only need to select photos to continue printing.";
 
 /*Toplam çekiliş hak sayısı*/
-"gamification_raffle_count" = "You Have %d Raffle Rights";
+"gamification_raffle_count" = "You Have %d Raffle Right(s)";
 
 /*Kampanya tarih aralıgı*/
 "gamification_raffle_dates" = "Participation date in the draw:";
@@ -2362,7 +2356,8 @@ then {11,99 TRY/Month}*/
 "gamification_raffle_summary" = "See Raffle Summary";
 "gamification_event_not_trigerred" = "This feature has not been used yet.Try now!";
 "gamification_event_trigger_count" = "You Have %d Raffle Rights";
-"gamification_event_completed" = "You have completed your rights this %@ month.";
+"gamification_event_trigger_count" = "You Have %d Raffle Right(s)";
+"gamification_event_completed" = "You have completed your rights this %@.";
 "gamification_total_count" = "You Won a Total of %d Raffle Rights.";
 "gamification_campaign_conditions" = "Campaign Details";
 "gamification_rules" = "Raffle Eligibility";
@@ -2389,3 +2384,16 @@ then {11,99 TRY/Month}*/
 "timeline_header_backup" = "The Best Memories of 2023";
 "winter_video_timeline_header" = "Your Special Winter Memories";
 "yearly" = "Yearly";
+
+/*Fuzzy*/
+"timeline_description" = "We have prepared a surprise for you from the memories you have backed up in lifebox this winter. Discover now.";
+
+/*Fuzzy*/
+"photo_max_selection_title_x" = "You Have %@ Photo Rights";
+
+/*Fuzzy*/
+"photo_max_selection_body_x" = "You can send a maximum of %@ photos for printing.";
+"right" = "right";
+"rights" = "rights";
+"gamification_total_earn_point_1" = "You earned %@";
+"gamification_total_earn_point_2" = "%d raffle right(s)";

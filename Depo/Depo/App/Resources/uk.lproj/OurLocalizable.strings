@@ -2133,7 +2133,7 @@ then {11,99 TRY/Month}*/
 "timeline_header" = "Ваші Найяскравіші Зимові Спогади";
 
 /*Fuzzy*/
-"timeline_description" = "Ми зібрали для вас найкращі моменти року 2023. Відкрийте їх для себе зараз.";
+"timeline_description_backup" = "Ми зібрали для вас найкращі моменти року 2023. Відкрийте їх для себе зараз.";
 "selected_for_print" = "Вибрано для друку";
 "print_cancel_popup_question" = "Ви впевнені, що хочете скасувати?";
 "print_cancel_popup_info" = "Всі редагування фотографій, які ви вибрали для друкованого альбому, будуть видалені. Вам потрібно буде вибрати та відредагувати фотографії знову.";
@@ -2269,16 +2269,14 @@ then {11,99 TRY/Month}*/
 "delete_popup_body" = "Ви впевнені, що хочете видалити фотографії?";
 "please_enter_your_msisdn" = "Додавання номера телефону до lifebox - це найнадійніший спосіб захистити свій обліковий запис на все життя. Будь ласка, додайте свій номер телефону, щоб продовжити отримувати доступ до своїх спогадів у lifebox.";
 "grace_banner_paycell_text" = "";
-"photo_max_selection_title_x" = "";
-"photo_max_selection_body_x" = "";
 "no_video_to_print_popup_title" = "";
 "no_video_to_print_popup_body" = "";
 
 /*Toplam çekiliş hak sayısı*/
-"gamification_raffle_count" = "У Вас %d Прав На Участь У Розіграші";
+"gamification_raffle_count" = "You Have %d Raffle Right(s)";
 
 /*Kampanya tarih aralıgı*/
-"gamification_raffle_dates" = "Дата участі в розіграші:";
+"gamification_raffle_dates" = "Participation date in the draw:";
 
 /*Çekiliş özetini gör buton*/
 "gamification_raffle_brief" = "Переглянути Огляд Розіграшу";
@@ -2296,7 +2294,7 @@ then {11,99 TRY/Month}*/
 "gamification_raffle_summary" = "Переглянути Огляд Розіграшу";
 "gamification_event_not_trigerred" = "Ця функція ще не використовувалася. Спробуйте зараз!";
 "gamification_event_trigger_count" = "You Have %d Raffle Rights";
-"gamification_event_completed" = "Ви використали свої права цього %@ місяця.";
+"gamification_event_completed" = "Ви використали свої права цього %@.";
 "gamification_total_count" = "Разом Отримано %d Прав На Розіграш.";
 "gamification_campaign_conditions" = "Деталі Кампанії";
 "gamification_rules" = "Умови Розіграшу";
@@ -2321,5 +2319,12 @@ then {11,99 TRY/Month}*/
 "gamification_title_createstory" = "Створити Історію";
 "gamification_title_createalbum" = "Створити Альбом";
 "timeline_header_backup" = "Найкращі спогади 2023 року";
-"winter_video_timeline_header" = "";
+"winter_video_timeline_header" = "Ваші Найяскравіші Зимові Спогади";
 "yearly" = "Щорічник";
+"timeline_description" = "Ми приготували для вас сюрприз зі спогадів, які ви зберегли в lifebox цієї зими. Подивіться просто зараз.";
+"photo_max_selection_title_x" = "";
+"photo_max_selection_body_x" = "";
+"right" = "";
+"rights" = "";
+"gamification_total_earn_point_1" = "You earned %@";
+"gamification_total_earn_point_2" = "%d raffle right(s)";

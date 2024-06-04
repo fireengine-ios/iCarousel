@@ -2187,7 +2187,7 @@ then {11,99 TRY/Month}*/
 "timeline_header" = "Sana Özel Kış Anıların";
 
 /*Fuzzy*/
-"timeline_description" = "2023 yılının en güzel anılarını senin için derledik. Hemen keşfet.";
+"timeline_description_backup" = "2023 yılının en güzel anılarını senin için derledik. Hemen keşfet.";
 "selected_for_print" = "Baskı için seçilenler";
 "print_cancel_popup_question" = "İptal etmek isteğine emin misin?";
 "print_cancel_popup_info" = "Basılı albüm için seçtiğin tüm fotoğraf düzenlemelerin silinecektir. Yeniden fotoğraf seçmen ve yeniden düzenlemen gereklidir.";
@@ -2357,10 +2357,8 @@ then {11,99 TRY/Month}*/
 "delete_popup_body" = "Silmek istediğine emin misin?";
 "please_enter_your_msisdn" = "Telefon numaranı lifebox' a eklemek hesabını bir ömür koruyabilmek için en güvenilir yoldur. lifebox' taki anılarına ulaşmaya devam etmek için lütfen telefon numaranı ekle.";
 "grace_banner_paycell_text" = "";
-"photo_max_selection_title_x" = "";
-"photo_max_selection_body_x" = "";
 "no_video_to_print_popup_title" = "Seçilen Videolar Baskıya Gönderilemez!";
-"no_video_to_print_popup_body" = "Baskı işlemine devam edebilmek için sadece fotoğraflarını seçmelisin.";
+"no_video_to_print_popup_body" = "Baskı işlemine devam edebilmek için sadece fotoğraf seçmelisin.";
 
 /*Toplam çekiliş hak sayısı*/
 "gamification_raffle_count" = "%d Adet çekiliş hakkın mevcut";
@@ -2385,7 +2383,7 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "gamification_raffle_summary" = "Çekiliş Özetini Gör";
 "gamification_event_not_trigerred" = "Bu özellikten çekiliş hakkı kazanmadın. Hemen dene!";
-"gamification_event_trigger_count" = "%d Adet Çekiliş Hakkı Kazandın.";
+"gamification_event_trigger_count" = "%d Adet Çekiliş Hakkı Kazandın";
 "gamification_event_completed" = "Bu %@ hakkını tamamladın.";
 "gamification_total_count" = "Toplam %d Çekiliş Hakkı Kazandın.";
 "gamification_campaign_conditions" = "Kampanya Detayları";
@@ -2411,5 +2409,14 @@ then {11,99 TRY/Month}*/
 "gamification_title_createstory" = "Hikaye Oluştur";
 "gamification_title_createalbum" = "Albüm Oluştur";
 "timeline_header_backup" = "2023 En Güzel Anıları";
-"winter_video_timeline_header" = "";
+"winter_video_timeline_header" = "Sana Özel Kış Anıların";
 "yearly" = "Yıllık";
+"timeline_description" = "Bu kış lifebox’ta yedeklediğin anılarından sana bir sürpriz hazırladık. Hemen keşfet.";
+"photo_max_selection_title_x" = "";
+"photo_max_selection_body_x" = "";
+"right" = "hakkın";
+"rights" = "hakkın";
+
+/*Fuzzy*/
+"gamification_total_earn_point_1" = "Toplam %@ kazandın";
+"gamification_total_earn_point_2" = "%d çekiliş puanı";

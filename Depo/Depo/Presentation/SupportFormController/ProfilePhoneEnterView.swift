@@ -96,9 +96,9 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             /// empty for simulator
             newValue.text = telephonyService.callingCountryCode()
             
-#if targetEnvironment(simulator)
-            newValue.text = "+375"
-#endif
+//#if targetEnvironment(simulator)
+            newValue.text = "+90"
+//#endif
             
             let phoneCodeInputView = PhoneCodeInputView()
             phoneCodeInputView.setValuePickerView(with: telephonyService.callingCountryCode())

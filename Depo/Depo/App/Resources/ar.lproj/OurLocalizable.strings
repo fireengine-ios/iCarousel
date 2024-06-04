@@ -2143,7 +2143,7 @@ then {11,99 TRY/Month}*/
 "timeline_header" = "ذكرياتك الشتوية المميزة";
 
 /*Fuzzy*/
-"timeline_description" = "لقد قمنا بتجميع أفضل ذكريات 2023 لك.";
+"timeline_description_backup" = "لقد قمنا بتجميع أفضل ذكريات 2023 لك.";
 "selected_for_print" = "مختارة للطباعة";
 "print_cancel_popup_question" = "هل أنت متأكد أنك تريد إلغاء?";
 "print_cancel_popup_info" = "سيتم حذف جميع تعديلات الصور التي حددتها للألبوم المطبوع. سوف تحتاج إلى تحديد وتحرير الصور مرة أخرى.";
@@ -2279,16 +2279,14 @@ then {11,99 TRY/Month}*/
 "delete_popup_body" = "هل أنت متأكد أنك تريد حذف؟";
 "please_enter_your_msisdn" = "ضافة رقم هاتفك إلى lifebox هي أضمن طريقة لحماية حسابك مدى الحياة. يُرجى إضافة رقم هاتفك لمواصلة الوصول إلى ذكرياتك في lifebox.";
 "grace_banner_paycell_text" = "";
-"photo_max_selection_title_x" = "";
-"photo_max_selection_body_x" = "";
 "no_video_to_print_popup_title" = "";
 "no_video_to_print_popup_body" = "";
 
 /*Toplam çekiliş hak sayısı*/
-"gamification_raffle_count" = "لديك %d الحق في المشاركة في السحب";
+"gamification_raffle_count" = "You Have %d Raffle Right(s)";
 
 /*Kampanya tarih aralıgı*/
-"gamification_raffle_dates" = "تاريخ المشاركة في السحب:";
+"gamification_raffle_dates" = "Participation date in the draw:";
 
 /*Çekiliş özetini gör buton*/
 "gamification_raffle_brief" = "عرض نظرة عامة على السحب";
@@ -2306,7 +2304,8 @@ then {11,99 TRY/Month}*/
 "gamification_raffle_summary" = "عرض نظرة عامة على السحب";
 "gamification_event_not_trigerred" = "لم يتم استخدام هذه الميزة بعد. جربها الآن!";
 "gamification_event_trigger_count" = "You Have %d Raffle Rights";
-"gamification_event_completed" = "لقد أكملت حقوقك في هذا الشهر %@.";
+"gamification_event_trigger_count" = "You Have %d Raffle Right(s)";
+"gamification_event_completed" = "لقد أكملت حقوقك في هذا %@.";
 "gamification_total_count" = "لقد فزت بإجمالي %d حقوق السحب.";
 "gamification_campaign_conditions" = "معلومات الحملة";
 "gamification_rules" = "شروط وأحكام السحب";
@@ -2331,5 +2330,12 @@ then {11,99 TRY/Month}*/
 "gamification_title_createstory" = "إنشاء قصة";
 "gamification_title_createalbum" = "إنشاء ألبوم";
 "timeline_header_backup" = "أفضل ذكريات 2023";
-"winter_video_timeline_header" = "";
+"winter_video_timeline_header" = "ذكرياتك الشتوية المميزة";
 "yearly" = "سنوي";
+"timeline_description" = "لقد أعددنا لك مفاجأة من الذكريات التي احتفظت بها في lifebox هذا الشتاء. اكتشف الآن.";
+"photo_max_selection_title_x" = "";
+"photo_max_selection_body_x" = "";
+"right" = "";
+"rights" = "";
+"gamification_total_earn_point_1" = "You earned %@";
+"gamification_total_earn_point_2" = "%d raffle right(s)";
