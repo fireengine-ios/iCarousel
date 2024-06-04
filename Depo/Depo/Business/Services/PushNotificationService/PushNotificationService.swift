@@ -250,6 +250,9 @@ final class PushNotificationService {
         case .drawCampaign: openDrawCampaign()
         case .photoprint: openPhotoPrint()
         case .bestscenegroup: bestscenegroup()
+        case .generatedCollage: openGeneratedItemForyou(action: action)
+        case .generatedAnimation: openGeneratedItemForyou(action: action)
+        case .generatedAlbum: openGeneratedItemForyou(action: action)
         }
         
         
@@ -654,6 +657,33 @@ private extension PushNotificationService {
     func openDrawCampaign() {
         let campaignId = storageVars.drawCampaignDeeplinkId
         pushTo(router.drawCampaign(campaignId: campaignId))
+    }
+    
+    func openGeneratedItemForyou(action: PushNotificationAction) {
+        let uuid = storageVars.deepLinkParameters?.first?.value
+        switch action {
+        case .generatedCollage: openPreview(uuid: uuid as? String, action: .generatedCollage)
+        case .generatedAnimation: openPreview(uuid: uuid as? String, action: .generatedAnimation)
+        case .generatedAlbum: print("aaaaaaaaaaaa \(action)-\(uuid)")
+        default: print()
+        }
+    }
+    
+    private func openPreview(uuid: String?, action: PushNotificationAction?) {
+        ForYouService().recommendedDeeplink(uuid: uuid ?? "", handler: { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.showGeneratedItem(item: WrapData(wrapDataResponse: response), action: action)
+            case .failed(let error):
+                print("aaaaaaaaaaaaa \(error.localizedDescription)")
+            }
+        })
+    }
+    
+    private func showGeneratedItem(item: WrapData, action: PushNotificationAction?) {
+        let controller = PVViewerController.with(item: item, action: action)
+        let navController = NavigationController(rootViewController: controller)
+        router.presentViewController(controller: navController)
     }
     
     func openPhotoPrint() {

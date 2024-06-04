@@ -754,6 +754,23 @@ class WrapData: BaseDataSourceItem, Wrappered {
         mimeType = "video/mp4"
     }
     
+    init(wrapDataResponse: WrapDataResponse) {
+        fileSize = 0
+        favorites = false
+        status = .unknown
+        metaData = BaseMetaData()
+        metaData?.takenDate = Date()
+        
+        tmpDownloadUrl = URL(string: wrapDataResponse.tempDownloadURL ?? "")
+        patchToPreview = .remoteUrl(tmpDownloadUrl)
+        super.init()
+        name = wrapDataResponse.name
+        isLocalItem = false
+        creationDate = Date()
+        syncStatus = .notSynced
+        fileType = .collage
+    }
+    
     //MARK:- Winter Theme Video
     
     init(timelineResponse: WinterThemeVideoResponse) {

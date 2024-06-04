@@ -1578,6 +1578,10 @@
 		890B5FBF2AF26BCD00A68968 /* HighlightedPackageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890B5FBD2AF26BCD00A68968 /* HighlightedPackageView.swift */; };
 		890B5FC02AF26BCD00A68968 /* HighlightedPackageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890B5FBD2AF26BCD00A68968 /* HighlightedPackageView.swift */; };
 		890B5FC12AF26BCD00A68968 /* HighlightedPackageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890B5FBD2AF26BCD00A68968 /* HighlightedPackageView.swift */; };
+		890BB94F2C0DD95A007D7CDA /* WrapDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890BB94E2C0DD95A007D7CDA /* WrapDataResponse.swift */; };
+		890BB9502C0DD95A007D7CDA /* WrapDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890BB94E2C0DD95A007D7CDA /* WrapDataResponse.swift */; };
+		890BB9512C0DD95A007D7CDA /* WrapDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890BB94E2C0DD95A007D7CDA /* WrapDataResponse.swift */; };
+		890BB9522C0DD95A007D7CDA /* WrapDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890BB94E2C0DD95A007D7CDA /* WrapDataResponse.swift */; };
 		890DDC582316B0D80022F7D2 /* TwoFactorChallengeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890DDC562316B0D70022F7D2 /* TwoFactorChallengeRouter.swift */; };
 		890DDC592316B0D80022F7D2 /* TwoFactorChallengeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890DDC562316B0D70022F7D2 /* TwoFactorChallengeRouter.swift */; };
 		890F737022EEFA3E00BA0020 /* VerifyEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */; };
@@ -11476,6 +11480,7 @@
 		890B31542BB300E400C5A789 /* RaffleCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaffleCard.swift; sourceTree = "<group>"; };
 		890B31592BB300EE00C5A789 /* RaffleCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RaffleCard.xib; sourceTree = "<group>"; };
 		890B5FBD2AF26BCD00A68968 /* HighlightedPackageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightedPackageView.swift; sourceTree = "<group>"; };
+		890BB94E2C0DD95A007D7CDA /* WrapDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapDataResponse.swift; sourceTree = "<group>"; };
 		890DDC562316B0D70022F7D2 /* TwoFactorChallengeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TwoFactorChallengeRouter.swift; path = Depo/Presentation/UserStories/Start/TwoFactorChallenge/Router/TwoFactorChallengeRouter.swift; sourceTree = SOURCE_ROOT; };
 		890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyEmailPopUp.swift; sourceTree = "<group>"; };
 		890F736E22EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseEmailVerificationPopUp.xib; sourceTree = "<group>"; };
@@ -16859,6 +16864,7 @@
 				89F0953029B0B3E000F74E7E /* CollageTemplate.swift */,
 				066693832B7E330000AFBEF1 /* BestSceneResponse.swift */,
 				063A9A722B95BADE00B98CF0 /* BestSceneResponseWithId.swift */,
+				890BB94E2C0DD95A007D7CDA /* WrapDataResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -27899,6 +27905,7 @@
 				CF7146EE24B597A900D83E60 /* ContactListDataSource.swift in Sources */,
 				8C06AC1F2008AAC4003D8E05 /* FileForDownload.swift in Sources */,
 				8C0E8D281FDEBDFF00789C91 /* AutoSyncInteractor.swift in Sources */,
+				890BB94F2C0DD95A007D7CDA /* WrapDataResponse.swift in Sources */,
 				071E7B6C2832438C00A5DD24 /* GalleryCollectionGridSize.swift in Sources */,
 				A771D4CA23DEFD8D00EA78BF /* AnalyticsPermissionNetmeraEvent.swift in Sources */,
 				8C0E8D291FDEBDFF00789C91 /* FilesDataSource.swift in Sources */,
@@ -30524,6 +30531,7 @@
 				8991B49F2A6E6AC900B94A2D /* PhotoPrintSelectionSegmentedView.swift in Sources */,
 				730F8AC223CDEE6000798B61 /* OptimizingGifService.swift in Sources */,
 				CE7849B922A685FB00662219 /* SpringLabel.swift in Sources */,
+				890BB9512C0DD95A007D7CDA /* WrapDataResponse.swift in Sources */,
 				CE7849BA22A685FB00662219 /* SocialAccountSectionMediator.swift in Sources */,
 				CE7849BB22A685FB00662219 /* BottomSelectionTabBarViewInput.swift in Sources */,
 				CE7849BC22A685FB00662219 /* RegistrationConfigurator.swift in Sources */,
@@ -32220,6 +32228,7 @@
 				CF8B64B223CBC9D70021B021 /* CellsConstant.swift in Sources */,
 				8991B4AD2A6E6F6D00B94A2D /* PhotoPrintPhotoSelectionDataSourceProtocol.swift in Sources */,
 				CF8B64B323CBC9D70021B021 /* GradientView.swift in Sources */,
+				890BB9502C0DD95A007D7CDA /* WrapDataResponse.swift in Sources */,
 				076BD1A827BBBE02004609E3 /* MapSearchInteractorOutput.swift in Sources */,
 				CF8B64B423CBC9D70021B021 /* ImportPhotosRouterInput.swift in Sources */,
 				B5BF438C2514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */,
@@ -34665,6 +34674,7 @@
 				CF8B6DBA23CBCA280021B021 /* ManageContactsViewController.swift in Sources */,
 				CF8B6DBB23CBCA280021B021 /* ProfileBirthdayFieldView.swift in Sources */,
 				CF8B6DBC23CBCA280021B021 /* WKWebView+Extensions.swift in Sources */,
+				890BB9522C0DD95A007D7CDA /* WrapDataResponse.swift in Sources */,
 				07D42134274E4D0800061EA2 /* ItemAnnotationView.swift in Sources */,
 				CF8B6DBD23CBCA280021B021 /* PhoneVerificationInteractor.swift in Sources */,
 				89F99F7B29B5F62800F99CB5 /* CreateCollageSelectionSegmentedView.swift in Sources */,
