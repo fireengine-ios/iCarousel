@@ -40,11 +40,11 @@ class CollageInteractor: BaseFilesGreedInteractor {
                 switch sortBy {
                 case .lettersAZ:
                     sortedList.sort { (item1: BaseDataSourceItem, item2: BaseDataSourceItem) -> Bool in
-                        (item1.name ?? "") < (item2.name ?? "")
+                        (item1.name ?? "") > (item2.name ?? "")
                     }
                 case .lettersZA:
                     sortedList.sort { (item1: BaseDataSourceItem, item2: BaseDataSourceItem) -> Bool in
-                        (item1.name ?? "") > (item2.name ?? "")
+                        (item1.name ?? "") < (item2.name ?? "")
                     }
                 case .timeUp:
                     sortedList.sort { (item1: BaseDataSourceItem, item2: BaseDataSourceItem) -> Bool in
