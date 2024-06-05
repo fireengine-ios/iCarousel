@@ -2269,8 +2269,8 @@ then {11,99 TRY/Month}*/
 "delete_popup_body" = "Ви впевнені, що хочете видалити фотографії?";
 "please_enter_your_msisdn" = "Додавання номера телефону до lifebox - це найнадійніший спосіб захистити свій обліковий запис на все життя. Будь ласка, додайте свій номер телефону, щоб продовжити отримувати доступ до своїх спогадів у lifebox.";
 "grace_banner_paycell_text" = "";
-"no_video_to_print_popup_title" = "";
-"no_video_to_print_popup_body" = "";
+"no_video_to_print_popup_title" = "Вибрані відео не можна надсилати на друк!";
+"no_video_to_print_popup_body" = "Щоб продовжити процес друку, потрібно лише вибрати фотографію.";
 
 /*Toplam çekiliş hak sayısı*/
 "gamification_raffle_count" = "You Have %d Raffle Right(s)";
@@ -2279,52 +2279,52 @@ then {11,99 TRY/Month}*/
 "gamification_raffle_dates" = "Participation date in the draw:";
 
 /*Çekiliş özetini gör buton*/
-"gamification_raffle_brief" = "Переглянути Огляд Розіграшу";
+"gamification_raffle_brief" = "See Raffle Summary";
 
 /*Çekiliş özet açıklaması*/
-"gamification_event_description" = "Використовуйте нижчезазначені функції щомісяця, щоб збільшити свої шанси на перемогу в розіграші.";
+"gamification_event_description" = "Use the features below every month to increase your chances of winning the raffle.";
 
 /*Yarın tekrar gel metni*/
-"gamification_comeback" = "Слідкуйте за новинами.";
+"gamification_comeback" = "Stay tuned.";
 
 /*Paket satın alma kuralı için*/
-"gamification_package_rule" = "Купити Пакет";
-"gamification_raffle_info" = "Подробиці Кампанії";
-"gamification_raffle_draw" = "Натисніть, щоб дізнатися умови кампанії.";
-"gamification_raffle_summary" = "Переглянути Огляд Розіграшу";
-"gamification_event_not_trigerred" = "Ця функція ще не використовувалася. Спробуйте зараз!";
+"gamification_package_rule" = "Buy Package";
+"gamification_raffle_info" = "Campaign Details";
+"gamification_raffle_draw" = "Click for campaign conditions.";
+"gamification_raffle_summary" = "See Raffle Summary";
+"gamification_event_not_trigerred" = "This feature has not been used yet.Try now!";
 "gamification_event_trigger_count" = "You Have %d Raffle Rights";
-"gamification_event_completed" = "Ви використали свої права цього %@.";
-"gamification_total_count" = "Разом Отримано %d Прав На Розіграш.";
-"gamification_campaign_conditions" = "Деталі Кампанії";
-"gamification_rules" = "Умови Розіграшу";
-"gamification_campaign_policy_title" = "Умови Участі в Кампанії";
+"gamification_event_completed" = "You have completed your rights this %@.";
+"gamification_total_count" = "You Won a Total of %d Raffle Right(s).";
+"gamification_campaign_conditions" = "Campaign Details";
+"gamification_rules" = "Raffle Eligibility";
+"gamification_campaign_policy_title" = "Campaign Participation Conditions";
 "gamification_raffle_win" = "";
-"gamification_title_upload" = "Завантажте Фото/Відео";
-"gamification_title_act_faceimage" = "Увімкнути Функцію Розпізнавання Облич/Об'єктів";
-"gamification_buy" = "Купити Пакет";
-"gamification_photopick" = "Створити Photopick";
-"gamification_create_collage" = "Створити Колаж";
-"gamification_print" = "Отримати Роздруківки Фотографій";
-"gamification_invite" = "Запросити Друга";
-"gamification_createstory" = "Створити Історію";
-"gamification_createalbum" = "Створити Альбом";
-"gamification_act_faceimage" = "Увімкнути Функцію Розпізнавання Облич/Об'єктів";
-"gamification_upload" = "Завантажити Фото/Відео";
-"gamification_title_buy" = "Купити Пакет";
-"gamification_title_photopick" = "Створити Photopick";
-"gamification_title_create_collage" = "Створити Колаж";
-"gamification_title_print" = "Отримати Роздруківки Фотографій";
-"gamification_title_invite" = "Запросити Друга";
-"gamification_title_createstory" = "Створити Історію";
-"gamification_title_createalbum" = "Створити Альбом";
+"gamification_title_upload" = "Upload Photo/Video";
+"gamification_title_act_faceimage" = "Turn on Face Object Recognition";
+"gamification_buy" = "Purchasing a Package";
+"gamification_photopick" = "Create Photopick";
+"gamification_create_collage" = "Create Collage";
+"gamification_print" = "Get Photo Prints";
+"gamification_invite" = "Invite a Friend";
+"gamification_createstory" = "Create Story";
+"gamification_createalbum" = "Create an Album";
+"gamification_act_faceimage" = "Turn on Face/Object Recognition";
+"gamification_upload" = "Upload Photo/Video";
+"gamification_title_buy" = "Buy Package";
+"gamification_title_photopick" = "Create Photopick";
+"gamification_title_create_collage" = "Create Collage";
+"gamification_title_print" = "Get Photo Prints";
+"gamification_title_invite" = "Invite a Friend";
+"gamification_title_createstory" = "Create Story";
+"gamification_title_createalbum" = "Create Album";
 "timeline_header_backup" = "Найкращі спогади 2023 року";
 "winter_video_timeline_header" = "Ваші Найяскравіші Зимові Спогади";
 "yearly" = "Щорічник";
 "timeline_description" = "Ми приготували для вас сюрприз зі спогадів, які ви зберегли в lifebox цієї зими. Подивіться просто зараз.";
 "photo_max_selection_title_x" = "";
 "photo_max_selection_body_x" = "";
-"right" = "";
-"rights" = "";
 "gamification_total_earn_point_1" = "You earned %@";
 "gamification_total_earn_point_2" = "%d raffle right(s)";
+"right" = "";
+"rights" = "";
