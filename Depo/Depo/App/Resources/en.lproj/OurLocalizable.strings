@@ -2355,10 +2355,9 @@ then {11,99 TRY/Month}*/
 "gamification_raffle_draw" = "Click for campaign conditions.";
 "gamification_raffle_summary" = "See Raffle Summary";
 "gamification_event_not_trigerred" = "This feature has not been used yet.Try now!";
-"gamification_event_trigger_count" = "You Have %d Raffle Rights";
 "gamification_event_trigger_count" = "You Have %d Raffle Right(s)";
 "gamification_event_completed" = "You have completed your rights this %@.";
-"gamification_total_count" = "You Won a Total of %d Raffle Rights.";
+"gamification_total_count" = "You Won a Total of %d Raffle Right(s).";
 "gamification_campaign_conditions" = "Campaign Details";
 "gamification_rules" = "Raffle Eligibility";
 "gamification_campaign_policy_title" = "Campaign Participation Conditions";
@@ -2393,7 +2392,7 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "photo_max_selection_body_x" = "You can send a maximum of %@ photos for printing.";
-"right" = "right";
-"rights" = "rights";
 "gamification_total_earn_point_1" = "You earned %@";
 "gamification_total_earn_point_2" = "%d raffle right(s)";
+"right" = "right";
+"rights" = "rights";

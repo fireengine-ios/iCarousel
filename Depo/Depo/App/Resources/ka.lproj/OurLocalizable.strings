@@ -2253,8 +2253,8 @@ then {11,99 TRY/Month}*/
 "delete_popup_body" = "Დარწმუნებული ხარ რომ წაშლა გინდა?";
 "please_enter_your_msisdn" = "თქვენი ტელეფონის ნომრის lifebox-ში დამატება ყველაზე საიმედო გზაა თქვენი ანგარიშის სიცოცხლის განმავლობაში დასაცავად. გთხოვთ, დაამატოთ თქვენი ტელეფონის ნომერი, რათა გააგრძელოთ თქვენს მოგონებებზე წვდომა lifebox-ში.";
 "grace_banner_paycell_text" = "";
-"no_video_to_print_popup_title" = "";
-"no_video_to_print_popup_body" = "";
+"no_video_to_print_popup_title" = "შერჩეული ვიდეოები არ შეიძლება გაიგზავნოს ბეჭდვისთვის!";
+"no_video_to_print_popup_body" = "ბეჭდვის პროცესის გასაგრძელებლად, უბრალოდ აირჩიეთ ფოტო.";
 
 /*Toplam çekiliş hak sayısı*/
 "gamification_raffle_count" = "You Have %d Raffle Right(s)";
@@ -2263,52 +2263,52 @@ then {11,99 TRY/Month}*/
 "gamification_raffle_dates" = "Participation date in the draw:";
 
 /*Çekiliş özetini gör buton*/
-"gamification_raffle_brief" = "";
+"gamification_raffle_brief" = "See Raffle Summary";
 
 /*Çekiliş özet açıklaması*/
-"gamification_event_description" = "";
+"gamification_event_description" = "Use the features below every month to increase your chances of winning the raffle.";
 
 /*Yarın tekrar gel metni*/
-"gamification_comeback" = "";
+"gamification_comeback" = "Stay tuned.";
 
 /*Paket satın alma kuralı için*/
-"gamification_package_rule" = "";
-"gamification_raffle_info" = "";
-"gamification_raffle_draw" = "";
-"gamification_raffle_summary" = "";
-"gamification_event_not_trigerred" = "";
+"gamification_package_rule" = "Buy Package";
+"gamification_raffle_info" = "Campaign Details";
+"gamification_raffle_draw" = "Click for campaign conditions.";
+"gamification_raffle_summary" = "See Raffle Summary";
+"gamification_event_not_trigerred" = "This feature has not been used yet.Try now!";
 "gamification_event_trigger_count" = "You Have %d Raffle Right(s)";
-"gamification_event_completed" = "";
-"gamification_total_count" = "";
-"gamification_campaign_conditions" = "";
-"gamification_rules" = "";
-"gamification_campaign_policy_title" = "";
+"gamification_event_completed" = "You have completed your rights this %@.";
+"gamification_total_count" = "You Won a Total of %d Raffle Right(s).";
+"gamification_campaign_conditions" = "Campaign Details";
+"gamification_rules" = "Raffle Eligibility";
+"gamification_campaign_policy_title" = "Campaign Participation Conditions";
 "gamification_raffle_win" = "";
-"gamification_title_upload" = "";
-"gamification_title_act_faceimage" = "";
-"gamification_buy" = "";
-"gamification_photopick" = "";
-"gamification_create_collage" = "";
-"gamification_print" = "";
-"gamification_invite" = "";
-"gamification_createstory" = "";
-"gamification_createalbum" = "";
-"gamification_act_faceimage" = "";
-"gamification_upload" = "";
-"gamification_title_buy" = "";
-"gamification_title_photopick" = "";
-"gamification_title_create_collage" = "";
-"gamification_title_print" = "";
-"gamification_title_invite" = "";
-"gamification_title_createstory" = "";
-"gamification_title_createalbum" = "";
+"gamification_title_upload" = "Upload Photo/Video";
+"gamification_title_act_faceimage" = "Turn on Face Object Recognition";
+"gamification_buy" = "Purchasing a Package";
+"gamification_photopick" = "Create Photopick";
+"gamification_create_collage" = "Create Collage";
+"gamification_print" = "Get Photo Prints";
+"gamification_invite" = "Invite a Friend";
+"gamification_createstory" = "Create Story";
+"gamification_createalbum" = "Create an Album";
+"gamification_act_faceimage" = "Turn on Face/Object Recognition";
+"gamification_upload" = "Upload Photo/Video";
+"gamification_title_buy" = "Buy Package";
+"gamification_title_photopick" = "Create Photopick";
+"gamification_title_create_collage" = "Create Collage";
+"gamification_title_print" = "Get Photo Prints";
+"gamification_title_invite" = "Invite a Friend";
+"gamification_title_createstory" = "Create Story";
+"gamification_title_createalbum" = "Create Album";
 "timeline_header_backup" = "2023-ის საუკეთესო მოგონებები";
 "winter_video_timeline_header" = "შენი განსაკუთრებული ზამთრის მოგონებები";
 "yearly" = "ყოველწლიურად";
 "timeline_description" = "ჩვენ მოვამზადეთ შენთვის სიურპრიზი იმ მოგონებებიდან, რომლებიც ამ ზამთარში lifebox-ში შექმენი. აღმოაჩინე ისინი ახლავე.";
 "photo_max_selection_title_x" = "";
 "photo_max_selection_body_x" = "";
-"right" = "";
-"rights" = "";
 "gamification_total_earn_point_1" = "You earned %@";
 "gamification_total_earn_point_2" = "%d raffle right(s)";
+"right" = "";
+"rights" = "";

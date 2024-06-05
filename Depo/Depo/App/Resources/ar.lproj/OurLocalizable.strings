@@ -2279,8 +2279,8 @@ then {11,99 TRY/Month}*/
 "delete_popup_body" = "هل أنت متأكد أنك تريد حذف؟";
 "please_enter_your_msisdn" = "ضافة رقم هاتفك إلى lifebox هي أضمن طريقة لحماية حسابك مدى الحياة. يُرجى إضافة رقم هاتفك لمواصلة الوصول إلى ذكرياتك في lifebox.";
 "grace_banner_paycell_text" = "";
-"no_video_to_print_popup_title" = "";
-"no_video_to_print_popup_body" = "";
+"no_video_to_print_popup_title" = "لا يمكن إرسال مقاطع الفيديو المحددة للطباعة!";
+"no_video_to_print_popup_body" = "ما عليك سوى تحديد الصورة لمتابعة الطباعة.";
 
 /*Toplam çekiliş hak sayısı*/
 "gamification_raffle_count" = "You Have %d Raffle Right(s)";
@@ -2289,53 +2289,52 @@ then {11,99 TRY/Month}*/
 "gamification_raffle_dates" = "Participation date in the draw:";
 
 /*Çekiliş özetini gör buton*/
-"gamification_raffle_brief" = "عرض نظرة عامة على السحب";
+"gamification_raffle_brief" = "See Raffle Summary";
 
 /*Çekiliş özet açıklaması*/
-"gamification_event_description" = "استخدم الميزات أدناه كل شهر لزيادة فرصك في الفوز بالسحب.";
+"gamification_event_description" = "Use the features below every month to increase your chances of winning the raffle.";
 
 /*Yarın tekrar gel metni*/
-"gamification_comeback" = "ترقبوا";
+"gamification_comeback" = "Stay tuned.";
 
 /*Paket satın alma kuralı için*/
-"gamification_package_rule" = "شراء باقة";
-"gamification_raffle_info" = "تفاصيل الحملة";
-"gamification_raffle_draw" = "انقر لمعرفة شروط وأحكام الحملة.";
-"gamification_raffle_summary" = "عرض نظرة عامة على السحب";
-"gamification_event_not_trigerred" = "لم يتم استخدام هذه الميزة بعد. جربها الآن!";
-"gamification_event_trigger_count" = "You Have %d Raffle Rights";
+"gamification_package_rule" = "Buy Package";
+"gamification_raffle_info" = "Campaign Details";
+"gamification_raffle_draw" = "Click for campaign conditions.";
+"gamification_raffle_summary" = "See Raffle Summary";
+"gamification_event_not_trigerred" = "This feature has not been used yet.Try now!";
 "gamification_event_trigger_count" = "You Have %d Raffle Right(s)";
-"gamification_event_completed" = "لقد أكملت حقوقك في هذا %@.";
-"gamification_total_count" = "لقد فزت بإجمالي %d حقوق السحب.";
-"gamification_campaign_conditions" = "معلومات الحملة";
-"gamification_rules" = "شروط وأحكام السحب";
-"gamification_campaign_policy_title" = "شروط المشاركة في الحملة";
+"gamification_event_completed" = "You have completed your rights this %@.";
+"gamification_total_count" = "You Won a Total of %d Raffle Right(s).";
+"gamification_campaign_conditions" = "Campaign Details";
+"gamification_rules" = "Raffle Eligibility";
+"gamification_campaign_policy_title" = "Campaign Participation Conditions";
 "gamification_raffle_win" = "";
-"gamification_title_upload" = "تحميل صورة/فيديو";
-"gamification_title_act_faceimage" = "تمكين خاصية التعرف على الوجه/الكائنات";
-"gamification_buy" = "شراء باقة";
-"gamification_photopick" = "إنشاء Photopick";
-"gamification_create_collage" = "إنشاء صورة مجمعة";
-"gamification_print" = "الحصول على صور مطبوعة";
-"gamification_invite" = "دعوة صديق";
-"gamification_createstory" = "إنشاء قصة";
-"gamification_createalbum" = "إنشاء ألبوم";
-"gamification_act_faceimage" = "تمكين التعرف على الوجوه/الأشياء";
-"gamification_upload" = "تحميل صورة/فيديو";
-"gamification_title_buy" = "شراء باقة";
-"gamification_title_photopick" = "إنشاء Photopick";
-"gamification_title_create_collage" = "إنشاء صورة مجمعة";
-"gamification_title_print" = "الحصول على صور مطبوعة";
-"gamification_title_invite" = "دعوة صديق";
-"gamification_title_createstory" = "إنشاء قصة";
-"gamification_title_createalbum" = "إنشاء ألبوم";
+"gamification_title_upload" = "Upload Photo/Video";
+"gamification_title_act_faceimage" = "Turn on Face Object Recognition";
+"gamification_buy" = "Purchasing a Package";
+"gamification_photopick" = "Create Photopick";
+"gamification_create_collage" = "Create Collage";
+"gamification_print" = "Get Photo Prints";
+"gamification_invite" = "Invite a Friend";
+"gamification_createstory" = "Create Story";
+"gamification_createalbum" = "Create an Album";
+"gamification_act_faceimage" = "Turn on Face/Object Recognition";
+"gamification_upload" = "Upload Photo/Video";
+"gamification_title_buy" = "Buy Package";
+"gamification_title_photopick" = "Create Photopick";
+"gamification_title_create_collage" = "Create Collage";
+"gamification_title_print" = "Get Photo Prints";
+"gamification_title_invite" = "Invite a Friend";
+"gamification_title_createstory" = "Create Story";
+"gamification_title_createalbum" = "Create Album";
 "timeline_header_backup" = "أفضل ذكريات 2023";
 "winter_video_timeline_header" = "ذكرياتك الشتوية المميزة";
 "yearly" = "سنوي";
 "timeline_description" = "لقد أعددنا لك مفاجأة من الذكريات التي احتفظت بها في lifebox هذا الشتاء. اكتشف الآن.";
 "photo_max_selection_title_x" = "";
 "photo_max_selection_body_x" = "";
-"right" = "";
-"rights" = "";
 "gamification_total_earn_point_1" = "You earned %@";
 "gamification_total_earn_point_2" = "%d raffle right(s)";
+"right" = "";
+"rights" = "";

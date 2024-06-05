@@ -2267,8 +2267,8 @@ then {11,99 TRY/Month}*/
 "delete_popup_body" = "Sind Sie sicher, dass Sie löschen möchten?";
 "please_enter_your_msisdn" = "Das Hinzufügen Ihrer Telefonnummer zu lifebox ist der sicherste Weg, um Ihr Konto lebenslang zu schützen. Bitte fügen Sie Ihre Telefonnummer hinzu, um weiterhin auf Ihre Erinnerungen in lifebox zugreifen zu können.";
 "grace_banner_paycell_text" = "";
-"no_video_to_print_popup_title" = "";
-"no_video_to_print_popup_body" = "";
+"no_video_to_print_popup_title" = "Ausgewählte Videos können nicht zum Drucken gesendet werden!";
+"no_video_to_print_popup_body" = "Sie müssen nur ein Foto auswählen, um den Druck fortzusetzen.";
 
 /*Toplam çekiliş hak sayısı*/
 "gamification_raffle_count" = "You Have %d Raffle Right(s)";
@@ -2277,53 +2277,52 @@ then {11,99 TRY/Month}*/
 "gamification_raffle_dates" = "Participation date in the draw:";
 
 /*Çekiliş özetini gör buton*/
-"gamification_raffle_brief" = "Siehe Verlosungsübersicht";
+"gamification_raffle_brief" = "See Raffle Summary";
 
 /*Çekiliş özet açıklaması*/
-"gamification_event_description" = "Nutzen Sie die folgenden Funktionen jeden Monat, um Ihre Gewinnchancen bei der Verlosung zu erhöhen.";
+"gamification_event_description" = "Use the features below every month to increase your chances of winning the raffle.";
 
 /*Yarın tekrar gel metni*/
-"gamification_comeback" = "Bleiben Sie auf dem Laufenden.";
+"gamification_comeback" = "Stay tuned.";
 
 /*Paket satın alma kuralı için*/
-"gamification_package_rule" = "Paket Kaufen";
-"gamification_raffle_info" = "Details zur Kampagne";
-"gamification_raffle_draw" = "Klicken Sie für die Bedingungen der Kampagne.";
-"gamification_raffle_summary" = "Siehe Verlosungsübersicht";
-"gamification_event_not_trigerred" = "Diese Funktion wurde noch nicht verwendet. Probieren Sie es jetzt aus!";
-"gamification_event_trigger_count" = "You Have %d Raffle Rights";
+"gamification_package_rule" = "Buy Package";
+"gamification_raffle_info" = "Campaign Details";
+"gamification_raffle_draw" = "Click for campaign conditions.";
+"gamification_raffle_summary" = "See Raffle Summary";
+"gamification_event_not_trigerred" = "This feature has not been used yet.Try now!";
 "gamification_event_trigger_count" = "You Have %d Raffle Right(s)";
-"gamification_event_completed" = "Sie haben Ihre Rechte in diesem %@ erfüllt.";
-"gamification_total_count" = "Sie Haben Insgesamt %d Verlosungsrechte Gewonnen.";
-"gamification_campaign_conditions" = "Details zur Kampagne";
-"gamification_rules" = "Teilnahmeberechtigung für die Verlosung";
-"gamification_campaign_policy_title" = "Bedingungen für die Teilnahme an der Kampagne";
+"gamification_event_completed" = "You have completed your rights this %@.";
+"gamification_total_count" = "You Won a Total of %d Raffle Right(s).";
+"gamification_campaign_conditions" = "Campaign Details";
+"gamification_rules" = "Raffle Eligibility";
+"gamification_campaign_policy_title" = "Campaign Participation Conditions";
 "gamification_raffle_win" = "";
-"gamification_title_upload" = "Foto/Video Hochladen";
-"gamification_title_act_faceimage" = "Gesichts-/Objekterkennung Einschalten";
-"gamification_buy" = "Paket Kaufen";
-"gamification_photopick" = "Fotopick Erstellen";
-"gamification_create_collage" = "Collage Erstellen";
-"gamification_print" = "Fotoabzüge Bestellen";
-"gamification_invite" = "Einen Freund Einladen";
-"gamification_createstory" = "Geschichte Erstellen";
-"gamification_createalbum" = "Album Erstellen";
-"gamification_act_faceimage" = "Gesichts-/Objekterkennung Einschalten";
-"gamification_upload" = "Foto/Video Hochladen";
-"gamification_title_buy" = "Paket Kaufen";
-"gamification_title_photopick" = "Fotopick Erstellen";
-"gamification_title_create_collage" = "Collage Erstellen";
-"gamification_title_print" = "Fotoabzüge Bestellen";
-"gamification_title_invite" = "Einen Freund Einladen";
-"gamification_title_createstory" = "Geschichte Erstellen";
-"gamification_title_createalbum" = "Album Erstellen";
+"gamification_title_upload" = "Upload Photo/Video";
+"gamification_title_act_faceimage" = "Turn on Face Object Recognition";
+"gamification_buy" = "Purchasing a Package";
+"gamification_photopick" = "Create Photopick";
+"gamification_create_collage" = "Create Collage";
+"gamification_print" = "Get Photo Prints";
+"gamification_invite" = "Invite a Friend";
+"gamification_createstory" = "Create Story";
+"gamification_createalbum" = "Create an Album";
+"gamification_act_faceimage" = "Turn on Face/Object Recognition";
+"gamification_upload" = "Upload Photo/Video";
+"gamification_title_buy" = "Buy Package";
+"gamification_title_photopick" = "Create Photopick";
+"gamification_title_create_collage" = "Create Collage";
+"gamification_title_print" = "Get Photo Prints";
+"gamification_title_invite" = "Invite a Friend";
+"gamification_title_createstory" = "Create Story";
+"gamification_title_createalbum" = "Create Album";
 "timeline_header_backup" = "Die Besten Erinnerungen An Das Jahr 2023";
 "winter_video_timeline_header" = "Ihre lebhaftesten Wintererinnerungen";
 "yearly" = "Jährlich";
 "timeline_description" = "Wir haben für Sie eine Überraschung aus Ihren Erinnerungen vorbereitet, die Sie in diesem Winter in lifebox gespeichert haben. Entdecken Sie jetzt.";
 "photo_max_selection_title_x" = "";
 "photo_max_selection_body_x" = "";
-"right" = "";
-"rights" = "";
 "gamification_total_earn_point_1" = "You earned %@";
 "gamification_total_earn_point_2" = "%d raffle right(s)";
+"right" = "";
+"rights" = "";
