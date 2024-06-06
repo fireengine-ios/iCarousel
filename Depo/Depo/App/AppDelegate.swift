@@ -229,7 +229,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AdjustDelegate {
                     PushNotificationService.shared.openActionScreen()
                 }
             } else {
-                
                 if PushNotificationService.shared.assignDeepLink(innerLink: urlHost, options: url.queryParameters) {
                     PushNotificationService.shared.openActionScreen()
                 }
