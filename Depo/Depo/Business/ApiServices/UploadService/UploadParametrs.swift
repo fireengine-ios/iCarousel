@@ -175,6 +175,18 @@ class SimpleUpload: UploadRequestParametrs {
             ]
         }
         
+        if item.asset?.mediaSubtypes == .photoPanorama {
+            header = header + [
+                HeaderConstant.XObjectMetaFolderLabel: "PANORAMA"
+            ]
+        }
+        
+        if item.asset?.mediaSubtypes == .videoTimelapse {
+            header = header + [
+                HeaderConstant.XObjectMetaFolderLabel: "TIME-LAPSE"
+            ]
+        }
+        
         return header
     }
     
