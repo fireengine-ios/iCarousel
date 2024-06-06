@@ -9,24 +9,26 @@
 import UIKit
 
 class StoriesInteractor: BaseFilesGreedInteractor {
+    
+    private lazy var service = ForYouService()
 
     override func getAllItems(sortBy: SortedRules) {
         debugLog("StoriesInteractor getAllItems")
-        
-        guard let remote = remoteItems as? StoryService else {
-            return
-        }
-        remote.allStories(sortBy: sortBy.sortingRules, sortOrder: sortBy.sortOder, success: { [weak self] stories in
-            DispatchQueue.main.async {
+        getStories()
+    }
+    
+    private func getStories() {
+        service.forYouStories() { [weak self] result in
+            switch result {
+            case .success(let response):
                 var array = [[BaseDataSourceItem]]()
-                array.append(stories)
+                array.append(response.fileList)
                 self?.output.getContentWithSuccess(array: array)
+            case .failed(let error):
+                debugLog("StoriesInteractor: \(error.errorCode)-\(String(describing: error.description))")
+                break
             }
-            }, fail: { [weak self] in
-                DispatchQueue.main.async {
-                    self?.output.asyncOperationFail(errorMessage: "fail")
-                }
-        })
+        }
     }
     
     override func trackScreen() {

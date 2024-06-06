@@ -200,6 +200,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AdjustDelegate {
     }
     
     /// iOS 9+
+    /// FOR akillidepo://..... LINK
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
         print("I have received a URL through a custom sceme! \(url.absoluteString)")
@@ -220,8 +221,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AdjustDelegate {
         Adjust.appWillOpen(url)
         
         if let urlHost = url.host {
-            if PushNotificationService.shared.assignDeepLink(innerLink: urlHost, options: url.queryParameters) {
-                PushNotificationService.shared.openActionScreen()
+            if urlHost.contains("=") {
+                let newUrl = urlHost.split(separator: "=")[0]
+                let param = urlHost.split(separator: "=")[1]
+                let options = ["uuid" : param]
+                if PushNotificationService.shared.assignDeepLink(innerLink: String("\(newUrl)"), options: options) {
+                    PushNotificationService.shared.openActionScreen()
+                }
+            } else {
+                if PushNotificationService.shared.assignDeepLink(innerLink: urlHost, options: url.queryParameters) {
+                    PushNotificationService.shared.openActionScreen()
+                }
             }
         }
         
@@ -606,7 +616,7 @@ extension AppDelegate {
         
         return true
     }
-    
+    // FOR ADJUST LINK
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
 
         if userActivity.activityType == CSSearchableItemActionType {

@@ -11,9 +11,15 @@ import UIKit
 class AlbumDetailViewController: BaseFilesGreedChildrenViewController {
 
     var album: AlbumItem?
+    private lazy var storageVars: StorageVars = factory.resolve()
+    private lazy var closeSelfButton = UIBarButtonItem(image: NavigationBarImage.back.image,
+                                                       style: .plain,
+                                                       target: self,
+                                                       action: #selector(closeSelf))
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.leftBarButtonItem = closeSelfButton
         view.addInteraction(UIDropInteraction(delegate: self))
     }
     
@@ -22,6 +28,17 @@ class AlbumDetailViewController: BaseFilesGreedChildrenViewController {
             mainTitle = name
         }
         super.viewWillAppear(animated)
+    }
+    
+    @objc private func closeSelf() {
+        if storageVars.albumDetailFromDeeplink {
+            dismiss(animated: false)
+            let root = RouterVC()
+            root.openTabBarItem(index: .forYou)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
+        storageVars.albumDetailFromDeeplink = false
     }
     
     override func stopSelection() {

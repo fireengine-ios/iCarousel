@@ -45,6 +45,7 @@ protocol StorageVars: AnyObject {
     var highlightedPopUpPackageBack: Bool { get set }
     var drawCampaignPackage: Bool { get set }
     var drawCampaignDeeplinkId: Int { get set }
+    var albumDetailFromDeeplink: Bool { get set }
     func value(forDeepLinkParameter key: DeepLinkParameter) -> Any?
 }
 
@@ -343,5 +344,11 @@ final class UserDefaultsVars: StorageVars {
     var drawCampaignDeeplinkId: Int {
         get { return userDefaults.object(forKey: drawCampaignDeeplinkIdKey) as? Int ?? 0 }
         set { userDefaults.set(newValue, forKey: drawCampaignDeeplinkIdKey) }
+    }
+    
+    private let albumDetailFromDeeplinkKey = "albumDetailFromDeeplinkKey"
+    var albumDetailFromDeeplink: Bool {
+        get { return userDefaults.object(forKey: albumDetailFromDeeplinkKey) as? Bool ?? false }
+        set { userDefaults.set(newValue, forKey: albumDetailFromDeeplinkKey) }
     }
 }

@@ -250,6 +250,9 @@ final class PushNotificationService {
         case .drawCampaign: openDrawCampaign()
         case .photoprint: openPhotoPrint()
         case .bestscenegroup: bestscenegroup()
+        case .generatedCollage: openGeneratedItemForyou(action: action)
+        case .generatedAnimation: openGeneratedItemForyou(action: action)
+        case .generatedAlbum: openGeneratedItemForyou(action: action)
         }
         
         
@@ -654,6 +657,56 @@ private extension PushNotificationService {
     func openDrawCampaign() {
         let campaignId = storageVars.drawCampaignDeeplinkId
         pushTo(router.drawCampaign(campaignId: campaignId))
+    }
+    
+    func openGeneratedItemForyou(action: PushNotificationAction) {
+        let uuid = storageVars.deepLinkParameters?.first?.value
+        switch action {
+        case .generatedCollage: openPreviewForGeneratedItem(uuid: uuid as? String, action: .generatedCollage)
+        case .generatedAnimation: openPreviewForGeneratedItem(uuid: uuid as? String, action: .generatedAnimation)
+        case .generatedAlbum: openGeneratedAlbumDetail(uuid: uuid as? String)
+        default: print()
+        }
+    }
+    
+    private func openPreviewForGeneratedItem(uuid: String?, action: PushNotificationAction?) {
+        ForYouService().recommendedDeeplink(uuid: uuid ?? "", handler: { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.showGeneratedItem(item: WrapData(wrapDataResponse: response), action: action)
+            case .failed(let error):
+                UIApplication.showCustomAlert(title: TextConstants.errorAlert,
+                                              message: error.localizedDescription,
+                                              image: .custom(Image.iconErrorRed.image),
+                                              buttonTitle: TextConstants.ok)
+            }
+        })
+    }
+    
+    private func showGeneratedItem(item: WrapData, action: PushNotificationAction?) {
+        let controller = PVViewerController.with(item: item, action: action)
+        let navController = NavigationController(rootViewController: controller)
+        router.presentViewController(controller: navController)
+    }
+    
+    func openGeneratedAlbumDetail(uuid: String?) {
+        storageVars.albumDetailFromDeeplink = true
+        PhotosAlbumService().getAlbum(for: uuid ?? "") { response in
+            switch response {
+            case .success(let data):
+                let viewController = self.router.albumDetailController(album: AlbumItem(remote: data), type: .List, status: .active, moduleOutput: nil)
+                if self.isExistingViewController(controller: viewController) {
+                    self.router.popViewController()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.pushTo(viewController)
+                    }
+                } else {
+                    self.pushTo(viewController)
+                }
+            case .failed( _):
+                UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
+            }
+        }
     }
     
     func openPhotoPrint() {
