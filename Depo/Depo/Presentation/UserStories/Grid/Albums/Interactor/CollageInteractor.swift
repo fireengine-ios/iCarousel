@@ -40,11 +40,47 @@ class CollageInteractor: BaseFilesGreedInteractor {
                 switch sortBy {
                 case .lettersAZ:
                     sortedList.sort { (item1: BaseDataSourceItem, item2: BaseDataSourceItem) -> Bool in
-                        (item1.name ?? "") > (item2.name ?? "")
+                        let name1 = item1.name ?? ""
+                        let name2 = item2.name ?? ""
+                        
+                        if name1.isEmpty && !name2.isEmpty {
+                            return false
+                        } else if !name1.isEmpty && name2.isEmpty {
+                            return true
+                        } else {
+                            let firstCharacter1 = name1.prefix(1)
+                            let firstCharacter2 = name2.prefix(1)
+                            
+                            if firstCharacter1.rangeOfCharacter(from: .letters) != nil && firstCharacter2.rangeOfCharacter(from: .letters) == nil {
+                                return true
+                            } else if firstCharacter1.rangeOfCharacter(from: .letters) == nil && firstCharacter2.rangeOfCharacter(from: .letters) != nil {
+                                return false
+                            } else {
+                                return name1 < name2
+                            }
+                        }
                     }
                 case .lettersZA:
                     sortedList.sort { (item1: BaseDataSourceItem, item2: BaseDataSourceItem) -> Bool in
-                        (item1.name ?? "") < (item2.name ?? "")
+                        let name1 = item1.name ?? ""
+                        let name2 = item2.name ?? ""
+                        
+                        if name1.isEmpty && !name2.isEmpty {
+                            return true
+                        } else if !name1.isEmpty && name2.isEmpty {
+                            return false
+                        } else {
+                            let firstCharacter1 = name1.prefix(1)
+                            let firstCharacter2 = name2.prefix(1)
+                            
+                            if firstCharacter1.rangeOfCharacter(from: .letters) != nil && firstCharacter2.rangeOfCharacter(from: .letters) == nil {
+                                return false
+                            } else if firstCharacter1.rangeOfCharacter(from: .letters) == nil && firstCharacter2.rangeOfCharacter(from: .letters) != nil {
+                                return true
+                            } else {
+                                return name1 > name2
+                            }
+                        }
                     }
                 case .timeUp:
                     sortedList.sort { (item1: BaseDataSourceItem, item2: BaseDataSourceItem) -> Bool in
@@ -58,12 +94,12 @@ class CollageInteractor: BaseFilesGreedInteractor {
                     wrapData.sort { (item1: WrapData, item2: WrapData) -> Bool in
                         item1.fileSize > item2.fileSize
                     }
-                    sortedList = wrapData
+                    sortedList = wrapData as [BaseDataSourceItem]
                 case .sizeZA:
                     wrapData.sort { (item1: WrapData, item2: WrapData) -> Bool in
                         item1.fileSize < item2.fileSize
                     }
-                    sortedList = wrapData
+                    sortedList = wrapData as [BaseDataSourceItem]
                 case .albumlettersAZ, .albumlettersZA, .metaDataTimeUp, .metaDataTimeDown, .lastModifiedTimeUp, .lastModifiedTimeDown, .timeUpWithoutSection, .timeDownWithoutSection:
                     break
                 }
@@ -75,6 +111,7 @@ class CollageInteractor: BaseFilesGreedInteractor {
             }
         }
     }
+
 
     
     override func trackScreen() {

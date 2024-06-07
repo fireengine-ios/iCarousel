@@ -2599,7 +2599,7 @@ then {11,99 TRY/Month}*/
 "gamification_event_trigger_count" = "You Have %d Raffle Right(s)";
 "gamification_event_completed" = "You have completed your rights this %@.";
 "gamification_total_count" = "You Won a Total of %d Raffle Right(s).";
-"gamification_campaign_conditions" = "Campaign Details";
+"gamification_campaign_conditions" = "Campaign Conditions";
 "gamification_rules" = "Raffle Eligibility";
 "gamification_campaign_policy_title" = "Campaign Participation Conditions";
 "gamification_raffle_win" = "";
@@ -2631,3 +2631,4 @@ then {11,99 TRY/Month}*/
 "gamification_total_earn_point_2" = "%d raffle right(s)";
 "right" = "";
 "rights" = "";
+"gamification_raffle_call" = "Use the features below every month to increase your chances of winning the raffle.";
