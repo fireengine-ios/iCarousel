@@ -187,6 +187,16 @@ class SimpleUpload: UploadRequestParametrs {
             ]
         }
         
+        if item.asset?.isFavorite ?? false {
+            header = header + [
+                HeaderConstant.XObjectMetaFavorites  : "true"
+            ]
+        } else {
+            header = header + [
+                HeaderConstant.XObjectMetaFavorites  : "false"
+            ]
+        }
+        
         return header
     }
     
