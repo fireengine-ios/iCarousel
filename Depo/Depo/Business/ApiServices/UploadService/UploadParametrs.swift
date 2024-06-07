@@ -129,7 +129,6 @@ class SimpleUpload: UploadRequestParametrs {
             HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,
             HeaderConstant.objecMetaDevice       : Device.deviceId ?? "",
             HeaderConstant.XObjectMetaFileName   : encodedName,
-            HeaderConstant.XObjectMetaFavorites  : isFavorite ? "true" : "false",
             HeaderConstant.XObjectMetaParentUuid : rootFolder,
             HeaderConstant.XObjectMetaSpecialFolder : uploadTo.rawValue,
             HeaderConstant.Expect                : "100-continue",
