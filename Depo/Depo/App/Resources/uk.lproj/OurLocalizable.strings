@@ -2291,7 +2291,7 @@ then {11,99 TRY/Month}*/
 "gamification_package_rule" = "Buy Package";
 "gamification_raffle_info" = "Campaign Details";
 "gamification_raffle_draw" = "Click for campaign conditions.";
-"gamification_raffle_summary" = "See Raffle Summary";
+"gamification_raffle_summary" = "Raffle Summary";
 "gamification_event_not_trigerred" = "This feature has not been used yet.Try now!";
 "gamification_event_trigger_count" = "You Have %d Raffle Rights";
 "gamification_event_completed" = "You have completed your rights this %@.";
