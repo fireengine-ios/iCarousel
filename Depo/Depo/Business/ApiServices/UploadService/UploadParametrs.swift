@@ -196,6 +196,14 @@ class SimpleUpload: UploadRequestParametrs {
             ]
         }
         
+        let smartAssets = PHAssetCollection.selfieAlbums
+        let asd = smartAssets.first?.allAssets.filter { $0.localIdentifier == item.getLocalID() }
+        if !(asd?.isEmpty ?? false) {
+            header = header + [
+                HeaderConstant.XObjectMetaFolderLabel: "SELFIES"
+            ]
+        }
+        
         return header
     }
     
