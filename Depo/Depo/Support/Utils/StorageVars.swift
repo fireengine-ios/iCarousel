@@ -44,7 +44,6 @@ protocol StorageVars: AnyObject {
     var highlightedIsFirstLogin: Bool { get set }
     var highlightedPopUpPackageBack: Bool { get set }
     var drawCampaignPackage: Bool { get set }
-    var drawCampaignDeeplinkId: Int { get set }
     var albumDetailFromDeeplink: Bool { get set }
     func value(forDeepLinkParameter key: DeepLinkParameter) -> Any?
 }
@@ -338,12 +337,6 @@ final class UserDefaultsVars: StorageVars {
     var groupIdBestScene: [Int] {
         get { return userDefaults.object(forKey: groupIdBestSceneKey) as? [Int] ?? [] }
         set { userDefaults.set(newValue, forKey: groupIdBestSceneKey) }
-    }
-    
-    private let drawCampaignDeeplinkIdKey = "drawCampaignDeeplinkIdKey"
-    var drawCampaignDeeplinkId: Int {
-        get { return userDefaults.object(forKey: drawCampaignDeeplinkIdKey) as? Int ?? 0 }
-        set { userDefaults.set(newValue, forKey: drawCampaignDeeplinkIdKey) }
     }
     
     private let albumDetailFromDeeplinkKey = "albumDetailFromDeeplinkKey"
