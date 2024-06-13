@@ -25,7 +25,6 @@ final class FreeUpSpacePopUp: BaseCardView {
             newValue.contentHorizontalAlignment = .center
             newValue.sizeToFit()
             newValue.titleLabel?.font = .appFont(.medium, size: 16)
-            
         }
     }
     
@@ -71,7 +70,9 @@ final class FreeUpSpacePopUp: BaseCardView {
     
     override func configurateView() {
         super.configurateView()
-
+        
+        freeAppSpaceButton.isEnabled = !CacheManager.shared.isProcessing
+        
         titleLabel.font = .appFont(.regular, size: 12)
         titleLabel.textColor = UIColor.white
         
@@ -82,7 +83,13 @@ final class FreeUpSpacePopUp: BaseCardView {
         freeAppSpaceButton.setTitle(TextConstants.freeAppSpacePopUpButtonTitle, for: .normal)
         cancelButton.setImage(Image.iconCancelUnborderV2.image, for: .normal)
         freeAppSpaceButton.setTitleColor(.black, for: .normal)
-        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(freeAppSpaceButtonIsEnabled), name: .isProcecessPrepairing, object: nil)
+    }
+    
+    @objc private func freeAppSpaceButtonIsEnabled() {
+        freeAppSpaceButton.isEnabled = !CacheManager.shared.isProcessing
+    }
     
     override func viewDeletedBySwipe() {
         onCancelButton()
