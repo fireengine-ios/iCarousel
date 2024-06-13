@@ -196,6 +196,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AdjustDelegate {
         UNUserNotificationCenter.current().delegate = self
         //AnalyticsService.startNetmera()
         NetmeraService.startNetmera()
+        Netmera.setPushDelegate(self)
         debugLog("AppDelegate setupPushNotifications setuped")
     }
     
@@ -616,7 +617,7 @@ extension AppDelegate {
         
         return true
     }
-    // FOR ADJUST LINK
+    // FOR ADJUST LINK - DEEPLINK
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
 
         if userActivity.activityType == CSSearchableItemActionType {
@@ -660,8 +661,8 @@ extension AppDelegate {
                     } else if host.contains("=") {
                         let newUrl = host.split(separator: "=")[0]
                         let param = host.split(separator: "=")[1]
-                        if PushNotificationService.shared.assignDeepLink(innerLink: String("\(newUrl)"), options: url.queryParameters) {
-                            storageVars.drawCampaignDeeplinkId = Int(String("\(param)")) ?? 0
+                        let options = ["uuid" : param]
+                        if PushNotificationService.shared.assignDeepLink(innerLink: String("\(newUrl)"), options: options) {
                             PushNotificationService.shared.openActionScreen()
                         }
                     }
@@ -714,5 +715,31 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert, .sound, .badge])
+    }
+}
+
+// FOR NETMERA POPUP BUTTON DEEPLINK
+extension AppDelegate: NetmeraPushDelegate {
+    func shouldHandleOpen(_ url: URL!, for object: NetmeraPushObject!) -> Bool {
+        return true
+    }
+    
+    func handleOpen(_ url: URL!, for object: NetmeraPushObject!) {
+        if let urlHost = url.host {
+            let router = RouterVC()
+            if urlHost.contains("=") {
+                let newUrl = urlHost.split(separator: "=")[0]
+                let param = urlHost.split(separator: "=")[1]
+                let options = ["uuid" : param]
+                if PushNotificationService.shared.assignDeepLink(innerLink: String("\(newUrl)"), options: options) {
+                    router.setNavigationController(controller: router.tabBarScreen)
+                }
+            } else {
+                if PushNotificationService.shared.assignDeepLink(innerLink: urlHost, options: url.queryParameters) {
+                    router.setNavigationController(controller: router.tabBarScreen)
+                }
+
+            }
+        }
     }
 }
