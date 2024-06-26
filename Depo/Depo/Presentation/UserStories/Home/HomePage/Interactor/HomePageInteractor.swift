@@ -37,7 +37,11 @@ final class HomePageInteractor: HomePageInteractorInput {
     private var highlightedPackageIndex: Int = 0
     
     private var groupDate: [Int] = []
-
+        
+    private(set) var toolsCards: [HomeCardResponse] = []
+    private(set) var campaignsCards: [HomeCardResponse] = []
+    
+    private var isCampaign: Bool = false
     
     private func fillCollectionView(isReloadAll: Bool) {
         self.homeCardsLoaded = true
@@ -46,32 +50,56 @@ final class HomePageInteractor: HomePageInteractorInput {
     
     func viewIsReady() {
         homeCardsService.delegate = self
-        FreeAppSpace.session.showFreeUpSpaceCard()
-        FreeAppSpace.session.checkFreeUpSpace()
-        getQuotaInfo()
-        getAccountInfo()
-        getPremiumCardInfo(loadStatus: .reloadAll)
-//        getBestScene { //v31 bestscene delete
-//            self.getAllCardsForHomePage()
-//        }
-        getAllCardsForHomePage()
-        getCampaignStatus()
-        getActiveSubscriptionForBanner()
-        getAvailableOffersForBanner()
-        smartAlbumsManager.requestAllItems()
+
         //handle public shared items save operation after login
         if let publicTokenToSave = storageVars.publicSharedItemsToken {
             savePublicSharedItems(with: publicTokenToSave)
             storageVars.publicSharedItemsToken = nil
         }
+        
+        getCampaignsScene {  [weak self] isCampaignsAvailable in
+            guard let self = self else { return }
+            if isCampaignsAvailable {
+                self.output.showSegmentControl()
+                self.getAllCardsForHomePage()
+            } else {
+                self.output.hideSegmentControl()
+                self.callRemainingAPIs()
+            }
+        }
+    }
+
+    
+    private func callRemainingAPIs() {
+        FreeAppSpace.session.showFreeUpSpaceCard()
+        FreeAppSpace.session.checkFreeUpSpace()
+        getQuotaInfo()
+        getAccountInfo()
+        getPremiumCardInfo(loadStatus: .reloadAll)
+        //        getBestScene { //v31 bestscene delete
+        //            self.getAllCardsForHomePage()
+        //        }
+        getAllCardsForHomePage()
+        getCampaignStatus()
+        getActiveSubscriptionForBanner()
+        getAvailableOffersForBanner()
+        smartAlbumsManager.requestAllItems()
     }
     
     func needRefresh() {
-        homeCardsLoaded = false
-        getCampaignStatus()
-        getPremiumCardInfo(loadStatus: .reloadAll)
-        
-        getAllCardsForHomePage()
+        getCampaignsScene { [weak self] isCampaignsAvailable in
+            guard let self = self else { return }
+            if isCampaignsAvailable {
+                self.output.showSegmentControl()
+                self.getAllCardsForHomePage()
+            } else {
+                homeCardsLoaded = false
+                self.output.hideSegmentControl()
+                getCampaignStatus()
+                getPremiumCardInfo(loadStatus: .reloadAll)
+                getAllCardsForHomePage()
+            }
+        }
     }
     
     func updateLocalUserDetail() {
@@ -161,6 +189,10 @@ final class HomePageInteractor: HomePageInteractorInput {
                 case .success(let response):
                     self?.output.didObtainHomeCards(response)
                     self?.fillCollectionView(isReloadAll: true)
+                    
+                    if self?.isCampaign == true {
+                        self?.filterCardsData(cards: response)
+                    }
                 case .failed(let error):
                     DispatchQueue.toMain {
                         self?.output.didObtainError(with: error.description, isNeedStopRefresh: true)
@@ -168,6 +200,34 @@ final class HomePageInteractor: HomePageInteractorInput {
                 }
             }
         }
+    }
+    
+    internal func filterCardsData(cards: [HomeCardResponse]) {
+        toolsCards = cards.filter {
+            print("⚠️ Tool Card Type: \($0.type)")
+            guard let type = $0.type else { return false }
+            switch type {
+            case .emptyStorage, .storageAlert, .latestUploads, .contactBackup, .autoSyncWatingForWifi, .autoSyncOff, .freeUpSpace, .instaPick,
+                 .promotion, .divorce, .thingsDocument, .photoPrint, .discoverCard:
+                return true
+            default:
+                return false
+            }
+        }
+        
+        campaignsCards = cards.filter {
+            debugPrint("⚠️ Campaign Card Type: \($0.type)")
+            guard let type = $0.type else { return false }
+            switch type {
+            case .launchCampaign, .campaign, .newCampaign:
+                return true
+            default:
+                return false
+            }
+        }
+        
+        print("⚠️ 🧰 Tools Cards: \(toolsCards)")
+        print("⚠️ 🧰 Campaigns Cards: \(campaignsCards)")
     }
     
     private func getPremiumCardInfo(loadStatus: RefreshStatus) {
@@ -228,6 +288,25 @@ final class HomePageInteractor: HomePageInteractorInput {
                 }
             }
             completion()
+        }
+    }
+    
+    private func getCampaignsScene(completion: @escaping (Bool) -> Void) {
+        homeCardsService.getCampaigns { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let response):
+                let isAvailable = !response.isEmpty
+                completion(isAvailable)
+                self.isCampaign = true
+            case .failed(let error):
+                DispatchQueue.main.async {
+                    self.output.didObtainError(with: error.localizedDescription, isNeedStopRefresh: false)
+                }
+                self.output.hideSegmentControl()
+                completion(false)
+            }
+            
         }
     }
     

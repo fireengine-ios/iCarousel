@@ -4863,6 +4863,10 @@
 		C35CF6A92BE6AEB200821B02 /* ForYouWinterVideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C35CF6A52BE6AEB200821B02 /* ForYouWinterVideoTableViewCell.xib */; };
 		C39FD8AC2BA202660054DE13 /* BestSceneSuccessPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39FD8AB2BA202660054DE13 /* BestSceneSuccessPopUp.swift */; };
 		C39FD8AE2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39FD8AD2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib */; };
+		C3F3DF722C19A73C0007AC7B /* Campaigns.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F3DF712C19A73C0007AC7B /* Campaigns.swift */; };
+		C3F3DF732C19A73C0007AC7B /* Campaigns.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F3DF712C19A73C0007AC7B /* Campaigns.swift */; };
+		C3F3DF742C19A73C0007AC7B /* Campaigns.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F3DF712C19A73C0007AC7B /* Campaigns.swift */; };
+		C3F3DF752C19A73C0007AC7B /* Campaigns.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F3DF712C19A73C0007AC7B /* Campaigns.swift */; };
 		C4A38BA321EE1F4B00ECCCEA /* TransparentGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */; };
 		C4A38BA421EE1F4E00ECCCEA /* InstaPickSelectionSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D9C03121EDC6DB00693D94 /* InstaPickSelectionSegmentedController.swift */; };
 		C62239A4204972B00043ED44 /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
@@ -12610,6 +12614,7 @@
 		C39FD8AB2BA202660054DE13 /* BestSceneSuccessPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSceneSuccessPopUp.swift; sourceTree = "<group>"; };
 		C39FD8AD2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BestSceneSuccessPopUp.xib; sourceTree = "<group>"; };
 		C3C2356B20B6DA1B00F3FB6D /* MPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MPush.framework; sourceTree = "<group>"; };
+		C3F3DF712C19A73C0007AC7B /* Campaigns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Campaigns.swift; sourceTree = "<group>"; };
 		C4A00B9575D3535660EB20D3 /* SelectNameViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameViewController.swift; sourceTree = "<group>"; };
 		C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentGradientView.swift; sourceTree = "<group>"; };
 		C4D9C03121EDC6DB00693D94 /* InstaPickSelectionSegmentedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickSelectionSegmentedController.swift; sourceTree = "<group>"; };
@@ -16865,6 +16870,7 @@
 				066693832B7E330000AFBEF1 /* BestSceneResponse.swift */,
 				063A9A722B95BADE00B98CF0 /* BestSceneResponseWithId.swift */,
 				890BB94E2C0DD95A007D7CDA /* WrapDataResponse.swift */,
+				C3F3DF712C19A73C0007AC7B /* Campaigns.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -28252,6 +28258,7 @@
 				C62239BA204977090043ED44 /* FaceImagePhotosRouter.swift in Sources */,
 				F0571EC9288AE6DF00A0D6AC /* ForYouInteractorInput.swift in Sources */,
 				8C0E8DD81FDEBDFF00789C91 /* UploadFromLifeBoxViewIO.swift in Sources */,
+				C3F3DF722C19A73C0007AC7B /* Campaigns.swift in Sources */,
 				8C0E8DD91FDEBDFF00789C91 /* TermsAndServicesDataStorage.swift in Sources */,
 				A217E44421A5B0B60084AA37 /* LeavePremiumInteractorInput.swift in Sources */,
 				89CF119B2B89DD180040F73F /* DrawCampaignConfigurator.swift in Sources */,
@@ -31515,6 +31522,7 @@
 				98F9C57423585168008C5ECF /* CampaignContestInfoView.swift in Sources */,
 				CE784C1D22A685FB00662219 /* ServerError.swift in Sources */,
 				89E51D3E22CA10FD007A7DBC /* CreateStoryPreviewInitializer.swift in Sources */,
+				C3F3DF742C19A73C0007AC7B /* Campaigns.swift in Sources */,
 				CE784C1F22A685FB00662219 /* LBAlbumLikePreviewSliderViewController.swift in Sources */,
 				CE784C2022A685FB00662219 /* UploadFilesSelectionDataSource.swift in Sources */,
 				CE784C2122A685FB00662219 /* GridListTopBarSortingTableCell.swift in Sources */,
@@ -33555,6 +33563,7 @@
 				CF8B681E23CBC9D70021B021 /* MoreFilesActionsInteractorInput.swift in Sources */,
 				CF8B681F23CBC9D70021B021 /* ViewController.swift in Sources */,
 				CF8B682023CBC9D70021B021 /* LBAlbumLikePreviewSliderConfigurator.swift in Sources */,
+				C3F3DF732C19A73C0007AC7B /* Campaigns.swift in Sources */,
 				CF8B682123CBC9D70021B021 /* LBAlbumLikePreviewSliderInitializer.swift in Sources */,
 				CF8B682323CBC9D70021B021 /* PopUpImage.swift in Sources */,
 				CF8B682423CBC9D70021B021 /* AlbumSelectionViewController.swift in Sources */,
@@ -34604,6 +34613,7 @@
 				074E6F1C27C67360003DDB93 /* Watchdog.swift in Sources */,
 				CF8B6D8B23CBCA280021B021 /* IntroduceInitializer.swift in Sources */,
 				9808B3132553DEBD002B0032 /* PrivateShareViewController.swift in Sources */,
+				C3F3DF752C19A73C0007AC7B /* Campaigns.swift in Sources */,
 				F0D2976527F782DE0082C768 /* MessageAndButtonPopup.swift in Sources */,
 				F074DD072900214C002E9F1C /* DarkBlueButton.swift in Sources */,
 				CF8B6D8C23CBCA280021B021 /* InstapickAlbumSelectionDataSource.swift in Sources */,

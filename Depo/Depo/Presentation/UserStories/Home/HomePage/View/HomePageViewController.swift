@@ -6,6 +6,11 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+enum SegmentType {
+    case tools
+    case campaigns
+}
+
 import UIKit
 
 final class HomePageViewController: BaseViewController {
@@ -68,9 +73,11 @@ final class HomePageViewController: BaseViewController {
         
         setDefaultNavigationHeaderActions()
         
-        output.viewIsReady()
-        
         setupSegmentControl()
+        
+        segmentContainerView.isHidden = true
+        
+        output.viewIsReady()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -207,14 +214,19 @@ final class HomePageViewController: BaseViewController {
         }
     
     @objc private func segmentButtonTapped(_ sender: UIButton) {
+        print("⚠️", sender)
+
         if sender == button1 {
             updateSelectedSegment(index: 0)
-        } else {
+            output.updateCollectionView(for: .tools)
+        } else if sender == button2 {
             updateSelectedSegment(index: 1)
+            output.updateCollectionView(for: .campaigns)
         }
     }
     
     private func updateSelectedSegment(index: Int) {
+        print("⚠️😎", index)
         switch index {
         case 0:
             stackView2Container.backgroundColor = .clear
@@ -225,6 +237,15 @@ final class HomePageViewController: BaseViewController {
         default:
             break
         }
+    }
+    
+    func showSegmentControl() {
+        segmentContainerView.isHidden = false
+    }
+
+    func hideSegmentControl() {
+        segmentContainerView.isHidden = true
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
     func updateNavigationItemsState(state: Bool) {
@@ -286,7 +307,7 @@ final class HomePageViewController: BaseViewController {
 extension HomePageViewController: HeaderContainingViewControllerChild {
     var scrollViewForHeaderTracking: UIScrollView? {
         
-        return collectionView
+        return nil
     }
 }
 
@@ -331,6 +352,12 @@ extension HomePageViewController: HomePageViewInput {
     
     func startSpinner() {
         showSpinner()
+    }
+    
+    func updateCollectionView(with items: [HomeCardResponse]) {
+        homePageDataSource.updateData(with: items)
+        
+        collectionView.reloadData()
     }
     
     //MARK: Spotlight

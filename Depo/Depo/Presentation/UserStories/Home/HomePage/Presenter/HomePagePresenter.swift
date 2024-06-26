@@ -45,8 +45,9 @@ final class HomePagePresenter: HomePageModuleInput {
         
         dispatchGroupReasons.remove(at: index)
         presentPopUpsGroup?.leave()
-    }
+    }    
     
+    private var currentSegment: SegmentType = .tools
 }
 
 // MARK: - BaseFilesGreedModuleOutput
@@ -93,6 +94,26 @@ extension HomePagePresenter: HomePageInteractorOutput {
     }
     
     func stopRefresh() {
+        view.stopRefresh()
+    }
+    
+    func showSegmentControl() {
+        view.showSegmentControl()
+    }
+
+    func hideSegmentControl() {
+        view.hideSegmentControl()
+    }
+    
+    func updateCollectionView(for segment: SegmentType) {
+        self.currentSegment = segment
+        print("⚠️⚠️", segment)
+        switch segment {
+        case .tools:
+            view.updateCollectionView(with: interactor.toolsCards)
+        case .campaigns:
+            view.updateCollectionView(with: interactor.campaignsCards)
+        }
         view.stopRefresh()
     }
     

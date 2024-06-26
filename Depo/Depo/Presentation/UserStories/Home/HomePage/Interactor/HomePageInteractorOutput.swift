@@ -49,4 +49,8 @@ protocol HomePageInteractorOutput: AnyObject {
     func publicShareSaveFail(message: String)
     
     func publicShareSaveStorageFail()
-    }
+    
+    func showSegmentControl()
+    
+    func hideSegmentControl()
+}

@@ -30,6 +30,7 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
     var isViewActive = false
     
     var cards = [BaseCardView]()
+    private var items: [HomeCardResponse] = []
     
     //FE-1720
 //    private let cardsRefreshQueue = DispatchQueue(label: DispatchQueueLabels.homePageCardsUpdateQueue)
@@ -55,6 +56,18 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
         let nibName = UINib(nibName: CollectionViewCellsIdsConstant.cellForController, bundle: nil)
         collectionView.register(nibName, forCellWithReuseIdentifier: CollectionViewCellsIdsConstant.cellForController)
     }
+    
+    func updateData(with newItems: [HomeCardResponse]) {
+        print("⚠️🥰", newItems)
+          self.items = newItems
+          self.cards = newItems.compactMap { cardResponse in
+              guard let type = cardResponse.getOperationType() else { return nil }
+              let view = getViewForOperation(operation: type)
+              view.set(object: cardResponse)
+              return view
+          }
+          collectionView.reloadData()
+      }
     
     // MARK: BaseCollectionViewCellWithSwipeDelegate
     
