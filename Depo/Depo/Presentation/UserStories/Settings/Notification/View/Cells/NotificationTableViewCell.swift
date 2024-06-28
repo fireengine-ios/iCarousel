@@ -219,7 +219,7 @@ class NotificationTableViewCell: UITableViewCell {
         titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8).activate()
         titleLabel.leadingAnchor.constraint(equalTo: cardImageView.trailingAnchor, constant: 16).activate()
         titleLabel.trailingAnchor.constraint(equalTo: checkBox.leadingAnchor, constant: -2).activate()
-        titleLabel.heightAnchor.constraint(equalToConstant: 24).activate()
+        //titleLabel.heightAnchor.constraint(equalToConstant: 24).activate()
         
         containerView.addSubview(descriptionTextView)
         descriptionTextView.translatesAutoresizingMaskIntoConstraints = false
