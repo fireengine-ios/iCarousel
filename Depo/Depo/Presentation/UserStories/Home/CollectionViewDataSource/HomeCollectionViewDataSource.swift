@@ -61,6 +61,7 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
         print("⚠️🥰", newItems)
           self.items = newItems
           self.cards = newItems.compactMap { cardResponse in
+              print("⚠️😀", cards)
               guard let type = cardResponse.getOperationType() else { return nil }
               let view = getViewForOperation(operation: type)
               view.set(object: cardResponse)

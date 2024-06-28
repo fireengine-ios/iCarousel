@@ -162,12 +162,12 @@ final class HomePageViewController: BaseViewController {
             segmentStackEmptyView.backgroundColor = .clear
             segmentStackEmptyView.translatesAutoresizingMaskIntoConstraints = false
             
-            button1.setTitle("Araçlar", for: .normal)
+            button1.setTitle(localized(.discoverTools), for: .normal)
             button1.setTitleColor(AppColor.label.color, for: .normal)
             button1.titleLabel?.font = .appFont(.medium, size: 14)
             button1.addTarget(self, action: #selector(segmentButtonTapped(_:)), for: .touchUpInside)
             
-            button2.setTitle("Kampanyalar", for: .normal)
+            button2.setTitle(localized(.discoverCampaigns), for: .normal)
             button2.setTitleColor(AppColor.label.color, for: .normal)
             button2.titleLabel?.font = .appFont(.medium, size: 14)
 
@@ -214,8 +214,6 @@ final class HomePageViewController: BaseViewController {
         }
     
     @objc private func segmentButtonTapped(_ sender: UIButton) {
-        print("⚠️", sender)
-
         if sender == button1 {
             updateSelectedSegment(index: 0)
             output.updateCollectionView(for: .tools)
@@ -226,7 +224,6 @@ final class HomePageViewController: BaseViewController {
     }
     
     private func updateSelectedSegment(index: Int) {
-        print("⚠️😎", index)
         switch index {
         case 0:
             stackView2Container.backgroundColor = .clear

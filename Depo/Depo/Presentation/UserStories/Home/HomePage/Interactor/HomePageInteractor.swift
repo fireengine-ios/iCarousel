@@ -189,10 +189,7 @@ final class HomePageInteractor: HomePageInteractorInput {
                 case .success(let response):
                     self?.output.didObtainHomeCards(response)
                     self?.fillCollectionView(isReloadAll: true)
-                    
-                    if self?.isCampaign == true {
-                        self?.filterCardsData(cards: response)
-                    }
+                    self?.filterCardsData(cards: response)
                 case .failed(let error):
                     DispatchQueue.toMain {
                         self?.output.didObtainError(with: error.description, isNeedStopRefresh: true)
@@ -202,9 +199,9 @@ final class HomePageInteractor: HomePageInteractorInput {
         }
     }
     
-    internal func filterCardsData(cards: [HomeCardResponse]) {
+     func filterCardsData(cards: [HomeCardResponse]) {
+        print("⚠️😇⚠️", cards)
         toolsCards = cards.filter {
-            print("⚠️ Tool Card Type: \($0.type)")
             guard let type = $0.type else { return false }
             switch type {
             case .emptyStorage, .storageAlert, .latestUploads, .contactBackup, .autoSyncWatingForWifi, .autoSyncOff, .freeUpSpace, .instaPick,
@@ -216,7 +213,6 @@ final class HomePageInteractor: HomePageInteractorInput {
         }
         
         campaignsCards = cards.filter {
-            debugPrint("⚠️ Campaign Card Type: \($0.type)")
             guard let type = $0.type else { return false }
             switch type {
             case .launchCampaign, .campaign, .newCampaign:

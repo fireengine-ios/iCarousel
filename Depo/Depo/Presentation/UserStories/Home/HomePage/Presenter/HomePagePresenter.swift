@@ -111,8 +111,10 @@ extension HomePagePresenter: HomePageInteractorOutput {
         switch segment {
         case .tools:
             view.updateCollectionView(with: interactor.toolsCards)
+            print("⚠️😇", interactor.toolsCards)
         case .campaigns:
             view.updateCollectionView(with: interactor.campaignsCards)
+            print("⚠️😇", interactor.campaignsCards)
         }
         view.stopRefresh()
     }
