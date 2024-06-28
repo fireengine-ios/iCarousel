@@ -78,7 +78,7 @@ final class ContactSyncViewController: BaseViewController, NibInit {
         }
 
         setDefaultNavigationHeaderActions()
-        headerContainingViewController?.isHeaderBehindContent = false
+        //headerContainingViewController?.isHeaderBehindContent = false
 
         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
             self?.updateBackupStatus()

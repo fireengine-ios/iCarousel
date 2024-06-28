@@ -37,7 +37,7 @@ final class GalleryCollectionViewLayout: UICollectionViewLayout {
         CGFloat(gridSize.rawValue)
     }
     
-    var graceBannerState: Bool = true
+    var graceBannerState: Bool = false
     var graceBannerHeight: CGFloat = 150
 
     private let itemSpacing: CGFloat = 1
@@ -93,47 +93,85 @@ final class GalleryCollectionViewLayout: UICollectionViewLayout {
     }
     
     override func prepare() {
-        super.prepare()
-
-        cache.removeAll()
-        headerCache.removeAll()
-        contentHeight = 0
-
-        guard let collectionView = collectionView else { return }
-
-        let columnWidth = contentWidth / columns
-        var xOffset: [CGFloat] = []
-        for column in 0..<Int(columns) {
-            xOffset.append(CGFloat(column) * columnWidth)
+        guard let collectionView = self.collectionView, collectionView.numberOfSections > 0 else {
+            cache = [:]
+            headerCache = [:]
+            contentHeight = 0
+            return
         }
-        var columnHeights: [CGFloat] = Array(repeating: 0, count: Int(columns))
+        
+        cache = [:]
+        headerCache = [:]
+        
+        contentHeight = 0
+        let itemSize = (contentWidth - (columns - 1) * itemSpacing) / columns
+        
+        var xOffset: CGFloat = 0
+        var yOffset: CGFloat = 0
 
         for section in 0..<collectionView.numberOfSections {
-            let headerIndexPath = IndexPath(item: 0, section: section)
-            let headerHeight: CGFloat = 50
+            xOffset = 0
+            yOffset = contentHeight
+            
             let headerAttributes = GalleryCollectionViewLayoutAttributes(
                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                with: headerIndexPath
+                with: IndexPath(item: 0, section: section)
             )
-            headerAttributes.frame = CGRect(x: 0, y: contentHeight, width: collectionView.bounds.width, height: headerHeight)
+            headerAttributes.zIndex = 1000
             headerCache[section] = headerAttributes
-            contentHeight += headerHeight
-
-            for item in 0..<collectionView.numberOfItems(inSection: section) {
-                let column = item % Int(columns)
-                let indexPath = IndexPath(item: item, section: section)
-                let itemHeight = columnWidth
-                let frame = CGRect(x: xOffset[column], y: columnHeights[column] + contentHeight, width: columnWidth, height: itemHeight)
+            headerAttributes.frame = CGRect(x: 0, y: yOffset, width: contentWidth, height: section == 0 && graceBannerState ? graceBannerHeight + 50 : 50)
+            contentHeight = max(headerAttributes.frame.maxY, contentHeight)
+            yOffset = headerAttributes.frame.maxY
+            
+            var currentXBoundary: CGFloat?
+            var currentXBoundarySpans = 1
+            
+            var nextXStartBoundary: CGFloat?
+            for index in 0..<collectionView.numberOfItems(inSection: section) {
+                let indexPath = IndexPath(item: index, section: section)
+                //let columnSpan = CGFloat(columnSpanForItem(at: indexPath))
+                let columnSpan = CGFloat(1.0)
+                let currentItemSize = itemSize * columnSpan + itemSpacing * (columnSpan - 1)
+                
                 let attributes = GalleryCollectionViewLayoutAttributes(forCellWith: indexPath)
-                attributes.frame = frame
                 cache[indexPath] = attributes
-
-                columnHeights[column] = columnHeights[column] + itemHeight + itemSpacing
-            }
-
-            if let maxColumnHeight = columnHeights.max() {
-                contentHeight += maxColumnHeight
-                columnHeights = Array(repeating: 0, count: Int(columns))
+                
+                attributes.isSpanned = columnSpan > 1
+                attributes.frame = CGRect(
+                    x: xOffset,
+                    y: yOffset,
+                    width: currentItemSize,
+                    height: currentItemSize
+                )
+                contentHeight = max(attributes.frame.maxY, contentHeight)
+                
+                let endOfLine = currentXBoundary ?? contentWidth
+                if itemSize > (endOfLine - attributes.frame.maxX) {
+                    let nextLineOffset = columnSpan == 1
+                    ? attributes.frame.maxY
+                    : attributes.frame.maxY - (attributes.frame.height - itemSize)
+                    
+                    yOffset = nextLineOffset + itemSpacing
+                    xOffset = nextXStartBoundary ?? 0
+                    
+                    nextXStartBoundary = nil
+                    
+                    if currentXBoundary == endOfLine {
+                        currentXBoundarySpans -= 1
+                        if currentXBoundarySpans == 1 {
+                            currentXBoundary = nil
+                        }
+                    }
+                } else {
+                    xOffset = attributes.frame.maxX + itemSpacing
+                }
+                
+                if columnSpan > 1 && ceil(attributes.frame.maxX) < contentWidth {
+                    nextXStartBoundary = attributes.frame.maxX + itemSpacing
+                } else if columnSpan > 1 {
+                    currentXBoundary = attributes.frame.minX - itemSpacing
+                    currentXBoundarySpans = Int(columnSpan)
+                }
             }
         }
     }
@@ -251,7 +289,7 @@ final class GalleryCollectionViewLayout: UICollectionViewLayout {
         }
 
         let headerFrame = attributes.frame
-        let pinOffset = collectionView.contentOffset.y + layoutGuide.layoutFrame.origin.y
+        let pinOffset = collectionView.contentOffset.y + layoutGuide.layoutFrame.origin.y + headerFrame.height
         let minY = firstItemAttributes.frame.minY - headerFrame.height
         let maxY = lastItemAttributes.frame.maxY - headerFrame.height
         let y = min(max(pinOffset, minY), maxY)

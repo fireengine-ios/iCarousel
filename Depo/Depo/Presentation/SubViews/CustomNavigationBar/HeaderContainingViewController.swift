@@ -78,9 +78,9 @@ final class HeaderContainingViewController: BaseViewController {
         updateStatusBarBackgroundViewStyle()
         setupOriginalSafeAreaLayoutGuide()
 
-        if let scrollView = child.scrollViewForHeaderTracking {
-            bindHeaderView(with: scrollView)
-        }
+//        if let scrollView = child.scrollViewForHeaderTracking {
+//            bindHeaderView(with: scrollView)
+//        }
     }
 
     override func viewSafeAreaInsetsDidChange() {
@@ -90,6 +90,7 @@ final class HeaderContainingViewController: BaseViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        headerView.backgroundColor = AppColor.background.color
         headerView.mask?.frame.size.width = headerView.bounds.width
     }
 

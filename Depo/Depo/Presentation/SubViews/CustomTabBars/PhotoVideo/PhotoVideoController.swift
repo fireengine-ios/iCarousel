@@ -96,7 +96,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         collectionView.addInteraction(UIDropInteraction(delegate: self))
 
         setDefaultNavigationHeaderActions()
-        headerContainingViewController?.isHeaderBehindContent = false
+        headerContainingViewController?.isHeaderBehindContent = true
         headerContainingViewController?.statusBarBackgroundViewStyle = .plain(color: .background)
         
         // Handle parsed deeplink if any
