@@ -1452,7 +1452,7 @@
 "mobile_payment_open_popup_description_bold_range" = "532 532";
 "mobile_payment_open_popup_later_button" = "Later";
 "mobile_payment_open_popup_continue_button" = "Continue";
-"we_recommend" = "Recommended for You";
+"we_recommend" = "Recommended for You!";
 "show_more" = "Show features";
 "show_less" = "Show less";
 "face_recognition_package_description" = "+ Unlimited Face&Image Recognition";
@@ -2397,3 +2397,5 @@ then {11,99 TRY/Month}*/
 "right" = "right";
 "rights" = "rights";
 "gamification_raffle_call" = "Use the features below every month to increase your chances of winning the raffle.";
+"discover_tools" = "";
+"discover_campaigns" = "";
