@@ -109,7 +109,8 @@ final class PassThroughView: UIView {
     }
     
     @objc private func swipeGestureRecognizerHandler(_ gestureRecognizer: UISwipeGestureRecognizer) {
-        delegate?.handleSwipe(recognizer: gestureRecognizer)
+        guard let delegate = delegate else { return }
+        delegate.handleSwipe(recognizer: gestureRecognizer)
     }
     
     @objc private func tapGestureRecognizerHandler(_ gestureRecognizer: UITapGestureRecognizer) {

@@ -314,13 +314,15 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     func getPersonsOnPhoto(uuid: String, completion: VoidHandler? = nil) {
         peopleService.getPeopleForMedia(with: uuid, success: { [weak self] peopleThumbnails in
             DispatchQueue.main.async {
-                self?.output.updatePeople(items: peopleThumbnails)
+                guard let strongSelf = self else { return }
+                strongSelf.output.updatePeople(items: peopleThumbnails)
                     completion?()
             }
         }) { [weak self] (errorResponse) in
             DispatchQueue.main.async {
+                guard let strongSelf = self else { return }
                 //self?.output.failedUpdate(error: errorResponse) İşlem tekrar başlatıldığı için kullanıcıya hatayı göstermeye gerek yok kararı alındı.
-                self?.output.updatePeople(items: [])
+                strongSelf.output.updatePeople(items: [])
                     completion?()
             }
         }
