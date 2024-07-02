@@ -45,6 +45,7 @@ protocol StorageVars: AnyObject {
     var highlightedPopUpPackageBack: Bool { get set }
     var drawCampaignPackage: Bool { get set }
     var albumDetailFromDeeplink: Bool { get set }
+    var isSyncProgress: Bool { get set }
     func value(forDeepLinkParameter key: DeepLinkParameter) -> Any?
 }
 
@@ -343,5 +344,11 @@ final class UserDefaultsVars: StorageVars {
     var albumDetailFromDeeplink: Bool {
         get { return userDefaults.object(forKey: albumDetailFromDeeplinkKey) as? Bool ?? false }
         set { userDefaults.set(newValue, forKey: albumDetailFromDeeplinkKey) }
+    }
+    
+    private let isSyncProgressKey = "isSyncProgressKey"
+    var isSyncProgress: Bool {
+        get { return userDefaults.object(forKey: isSyncProgressKey) as? Bool ?? false }
+        set { userDefaults.set(newValue, forKey: isSyncProgressKey) }
     }
 }

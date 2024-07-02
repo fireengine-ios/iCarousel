@@ -119,8 +119,8 @@ final class PhotoVideoCell: UICollectionViewCell {
         accessibilityLabel = mediaItem.nameValue ?? ""
         favoriteImageView.isHidden = !mediaItem.favoritesValue
 
-        var settings = AutoSyncDataStorage().settings
-        if settings.isAutoSyncEnabled {
+        let userDefaultsVars = UserDefaultsVars()
+        if userDefaultsVars.isSyncProgress {
             update(syncStatus: .regular)
         } else {
             if mediaItem.isLocalItemValue, mediaItem.fileSizeValue < NumericConstants.fourGigabytes {

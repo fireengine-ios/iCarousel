@@ -45,6 +45,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     var lastSyncedMD5s: [String] = []
     var storageVars: StorageVars = factory.resolve()
     private let uploadService = UploadService.default
+    private let userDefaultsVars = UserDefaultsVars()
     
     var photoVideoService: PhotoAndVideoService {
         let fieldValue: FieldValue = (fileType == .image) ? .image : .video
@@ -136,7 +137,7 @@ class ItemSyncServiceImpl: ItemSyncService {
                     self.status = .synced
                     return
                 }
-
+                userDefaultsVars.isSyncProgress = true
                 self.upload(items: self.localItems)
             }
         }
