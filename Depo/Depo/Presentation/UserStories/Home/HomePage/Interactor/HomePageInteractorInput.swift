@@ -31,4 +31,6 @@ protocol HomePageInteractorInput {
     var toolsCards: [HomeCardResponse] { get }
     
     var campaignsCards: [HomeCardResponse] { get }
+    
+    func updateCurrentSegment(_ segment: SegmentType)
 }

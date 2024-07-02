@@ -55,6 +55,8 @@ final class HomePageViewController: BaseViewController {
     
     private var isGiftButtonEnabled = false
     
+    private var currentSegment: SegmentType = .tools
+    
     //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -224,16 +226,20 @@ final class HomePageViewController: BaseViewController {
     }
     
     private func updateSelectedSegment(index: Int) {
+        print("⚠️", index)
         switch index {
         case 0:
-            stackView2Container.backgroundColor = .clear
-            stackView1Container.backgroundColor = AppColor.settingsMyPackages.color
+            self.stackView2Container.backgroundColor = .clear
+            self.stackView1Container.backgroundColor = AppColor.settingsMyPackages.color
+            self.currentSegment = .tools
         case 1:
-            stackView1Container.backgroundColor = .clear
-            stackView2Container.backgroundColor = AppColor.settingsMyPackages.color
+            self.stackView1Container.backgroundColor = .clear
+            self.stackView2Container.backgroundColor = AppColor.settingsMyPackages.color
+            self.currentSegment = .campaigns
         default:
             break
         }
+        output.updateCurrentSegment(currentSegment)
     }
     
     func showSegmentControl() {
@@ -304,7 +310,7 @@ final class HomePageViewController: BaseViewController {
 extension HomePageViewController: HeaderContainingViewControllerChild {
     var scrollViewForHeaderTracking: UIScrollView? {
         
-        return nil
+        return collectionView
     }
 }
 

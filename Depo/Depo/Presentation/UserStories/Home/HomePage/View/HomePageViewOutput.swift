@@ -37,4 +37,6 @@ protocol HomePageViewOutput {
     func giftButtonPressed()
     
     func updateCollectionView(for segment: SegmentType)
+    
+    func updateCurrentSegment(_ segment: SegmentType)
 }

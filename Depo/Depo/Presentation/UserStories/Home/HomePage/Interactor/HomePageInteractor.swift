@@ -40,8 +40,8 @@ final class HomePageInteractor: HomePageInteractorInput {
         
     private(set) var toolsCards: [HomeCardResponse] = []
     private(set) var campaignsCards: [HomeCardResponse] = []
-    
-    private var isCampaign: Bool = false
+        
+    private var currentSegment: SegmentType = .tools
     
     private func fillCollectionView(isReloadAll: Bool) {
         self.homeCardsLoaded = true
@@ -93,11 +93,11 @@ final class HomePageInteractor: HomePageInteractorInput {
                 self.output.showSegmentControl()
                 self.getAllCardsForHomePage()
             } else {
-                homeCardsLoaded = false
+                self.homeCardsLoaded = false
                 self.output.hideSegmentControl()
-                getCampaignStatus()
-                getPremiumCardInfo(loadStatus: .reloadAll)
-                getAllCardsForHomePage()
+                self.getCampaignStatus()
+                self.getPremiumCardInfo(loadStatus: .reloadAll)
+                self.getAllCardsForHomePage()
             }
         }
     }
@@ -181,15 +181,26 @@ final class HomePageInteractor: HomePageInteractorInput {
         })
     }
     
+    func updateCurrentSegment(_ segment: SegmentType) {
+            self.currentSegment = segment
+        }
+    
     private func getAllCardsForHomePage() {
         homeCardsService.all { [weak self] result in
             DispatchQueue.main.async {
                 self?.output.stopRefresh()
                 switch result {
                 case .success(let response):
-                    self?.output.didObtainHomeCards(response)
-                    self?.fillCollectionView(isReloadAll: true)
+                   
+//                    self?.output.didObtainHomeCards(response)
+//                    self?.fillCollectionView(isReloadAll: true)
+                    
                     self?.filterCardsData(cards: response)
+                    
+                    if let currentSegment = self?.currentSegment {
+                                            self?.updateCollectionView(for: currentSegment)
+                                        }
+                    
                 case .failed(let error):
                     DispatchQueue.toMain {
                         self?.output.didObtainError(with: error.description, isNeedStopRefresh: true)
@@ -199,8 +210,19 @@ final class HomePageInteractor: HomePageInteractorInput {
         }
     }
     
+    private func updateCollectionView(for segment: SegmentType) {
+        self.currentSegment = segment
+        print("⚠️⚠️", self.currentSegment)
+        switch currentSegment {
+        case .tools:
+            self.output.updateCollectionView(with: toolsCards)
+        case .campaigns:
+            self.output.updateCollectionView(with: campaignsCards)
+        }
+    }
+
+    
      func filterCardsData(cards: [HomeCardResponse]) {
-        print("⚠️😇⚠️", cards)
         toolsCards = cards.filter {
             guard let type = $0.type else { return false }
             switch type {
@@ -222,8 +244,26 @@ final class HomePageInteractor: HomePageInteractorInput {
             }
         }
         
-        print("⚠️ 🧰 Tools Cards: \(toolsCards)")
-        print("⚠️ 🧰 Campaigns Cards: \(campaignsCards)")
+        print("⚠️ Tools Cards: \(toolsCards)")
+        print("⚠️ Campaigns Cards: \(campaignsCards)")
+    }
+    
+    private func getCampaignsScene(completion: @escaping (Bool) -> Void) {
+        homeCardsService.getCampaigns { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let response):
+                let isAvailable = !response.isEmpty
+                completion(isAvailable)
+            case .failed(let error):
+                DispatchQueue.main.async {
+                    self.output.didObtainError(with: error.localizedDescription, isNeedStopRefresh: false)
+                }
+                self.output.hideSegmentControl()
+                completion(false)
+            }
+            
+        }
     }
     
     private func getPremiumCardInfo(loadStatus: RefreshStatus) {
@@ -286,26 +326,7 @@ final class HomePageInteractor: HomePageInteractorInput {
             completion()
         }
     }
-    
-    private func getCampaignsScene(completion: @escaping (Bool) -> Void) {
-        homeCardsService.getCampaigns { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let response):
-                let isAvailable = !response.isEmpty
-                completion(isAvailable)
-                self.isCampaign = true
-            case .failed(let error):
-                DispatchQueue.main.async {
-                    self.output.didObtainError(with: error.localizedDescription, isNeedStopRefresh: false)
-                }
-                self.output.hideSegmentControl()
-                completion(false)
-            }
-            
-        }
-    }
-    
+        
     private func getInstaPickInfo() {
         instapickService.getAnalyzesCount { [weak self] result in
             guard let `self` = self else { return }

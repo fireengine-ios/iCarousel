@@ -53,4 +53,8 @@ protocol HomePageInteractorOutput: AnyObject {
     func showSegmentControl()
     
     func hideSegmentControl()
+    
+    func updateCollectionView(with: [HomeCardResponse])
+    
+    func updateCurrentSegment(_ segment: SegmentType)
 }

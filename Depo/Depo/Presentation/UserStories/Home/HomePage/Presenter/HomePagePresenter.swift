@@ -67,6 +67,11 @@ extension HomePagePresenter: BaseFilesGreedModuleOutput {
 
 // MARK: - HomePageInteractorOutput
 extension HomePagePresenter: HomePageInteractorOutput {
+    
+    func updateCollectionView(with items: [HomeCardResponse]) {
+        view.updateCollectionView(with: items.filter { $0.details != nil })
+    }
+    
     func publicShareSaveStorageFail() {
         router.presentFullQuotaPopup()
     }
@@ -105,16 +110,19 @@ extension HomePagePresenter: HomePageInteractorOutput {
         view.hideSegmentControl()
     }
     
+    func updateCurrentSegment(_ segment: SegmentType) {
+           self.currentSegment = segment
+           interactor.updateCurrentSegment(segment)
+       }
+    
     func updateCollectionView(for segment: SegmentType) {
+        print("⚠️⚠️⚠️", self.currentSegment)
         self.currentSegment = segment
-        print("⚠️⚠️", segment)
         switch segment {
         case .tools:
             view.updateCollectionView(with: interactor.toolsCards)
-            print("⚠️😇", interactor.toolsCards)
         case .campaigns:
             view.updateCollectionView(with: interactor.campaignsCards)
-            print("⚠️😇", interactor.campaignsCards)
         }
         view.stopRefresh()
     }

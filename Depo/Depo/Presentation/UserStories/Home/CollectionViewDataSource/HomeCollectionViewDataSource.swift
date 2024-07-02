@@ -58,10 +58,8 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
     }
     
     func updateData(with newItems: [HomeCardResponse]) {
-        print("⚠️🥰", newItems)
           self.items = newItems
           self.cards = newItems.compactMap { cardResponse in
-              print("⚠️😀", cards)
               guard let type = cardResponse.getOperationType() else { return nil }
               let view = getViewForOperation(operation: type)
               view.set(object: cardResponse)
