@@ -104,7 +104,7 @@ final class HomePageInteractor: HomePageInteractorInput {
     
     func updateLocalUserDetail() {
         getPremiumCardInfo(loadStatus: .reloadSingle)
-        getInstaPickInfo()
+//        getInstaPickInfo()
     }
     
     //MARK: tracking
@@ -226,7 +226,7 @@ final class HomePageInteractor: HomePageInteractorInput {
         toolsCards = cards.filter {
             guard let type = $0.type else { return false }
             switch type {
-            case .emptyStorage, .storageAlert, .latestUploads, .contactBackup, .autoSyncWatingForWifi, .autoSyncOff, .freeUpSpace, .instaPick,
+            case .emptyStorage, .storageAlert, .latestUploads, .contactBackup, .autoSyncWatingForWifi, .autoSyncOff, .freeUpSpace,
                  .promotion, .divorce, .thingsDocument, .photoPrint, .discoverCard:
                 return true
             default:
