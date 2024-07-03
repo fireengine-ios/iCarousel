@@ -21,6 +21,7 @@ final class GarentaCard: BaseCardView {
     
     @IBOutlet weak var cancelImageView: UIImageView! {
         willSet {
+            newValue.isHidden = true
             newValue.image = Image.iconCancelBorder.image
             newValue.isUserInteractionEnabled = true
             let tapImage = UITapGestureRecognizer(target: self, action: #selector(cancelImageTapped))
