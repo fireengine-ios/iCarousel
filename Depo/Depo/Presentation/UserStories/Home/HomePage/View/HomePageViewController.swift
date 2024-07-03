@@ -6,6 +6,11 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+enum SegmentType {
+    case tools
+    case campaigns
+}
+
 import UIKit
 
 final class HomePageViewController: BaseViewController {
@@ -50,6 +55,8 @@ final class HomePageViewController: BaseViewController {
     
     private var isGiftButtonEnabled = false
     
+    private var currentSegment: SegmentType = .tools
+    
     //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,9 +75,11 @@ final class HomePageViewController: BaseViewController {
         
         setDefaultNavigationHeaderActions()
         
-        output.viewIsReady()
-        
         setupSegmentControl()
+        
+        segmentContainerView.isHidden = true
+        
+        output.viewIsReady()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -155,12 +164,12 @@ final class HomePageViewController: BaseViewController {
             segmentStackEmptyView.backgroundColor = .clear
             segmentStackEmptyView.translatesAutoresizingMaskIntoConstraints = false
             
-            button1.setTitle("Araçlar", for: .normal)
+            button1.setTitle(localized(.discoverTools), for: .normal)
             button1.setTitleColor(AppColor.label.color, for: .normal)
             button1.titleLabel?.font = .appFont(.medium, size: 14)
             button1.addTarget(self, action: #selector(segmentButtonTapped(_:)), for: .touchUpInside)
             
-            button2.setTitle("Kampanyalar", for: .normal)
+            button2.setTitle(localized(.discoverCampaigns), for: .normal)
             button2.setTitleColor(AppColor.label.color, for: .normal)
             button2.titleLabel?.font = .appFont(.medium, size: 14)
 
@@ -209,22 +218,37 @@ final class HomePageViewController: BaseViewController {
     @objc private func segmentButtonTapped(_ sender: UIButton) {
         if sender == button1 {
             updateSelectedSegment(index: 0)
-        } else {
+            output.updateCollectionView(for: .tools)
+        } else if sender == button2 {
             updateSelectedSegment(index: 1)
+            output.updateCollectionView(for: .campaigns)
         }
     }
     
     private func updateSelectedSegment(index: Int) {
+        print("⚠️", index)
         switch index {
         case 0:
-            stackView2Container.backgroundColor = .clear
-            stackView1Container.backgroundColor = AppColor.settingsMyPackages.color
+            self.stackView2Container.backgroundColor = .clear
+            self.stackView1Container.backgroundColor = AppColor.settingsMyPackages.color
+            self.currentSegment = .tools
         case 1:
-            stackView1Container.backgroundColor = .clear
-            stackView2Container.backgroundColor = AppColor.settingsMyPackages.color
+            self.stackView1Container.backgroundColor = .clear
+            self.stackView2Container.backgroundColor = AppColor.settingsMyPackages.color
+            self.currentSegment = .campaigns
         default:
             break
         }
+        output.updateCurrentSegment(currentSegment)
+    }
+    
+    func showSegmentControl() {
+        segmentContainerView.isHidden = false
+    }
+
+    func hideSegmentControl() {
+        segmentContainerView.isHidden = true
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
     func updateNavigationItemsState(state: Bool) {
@@ -331,6 +355,12 @@ extension HomePageViewController: HomePageViewInput {
     
     func startSpinner() {
         showSpinner()
+    }
+    
+    func updateCollectionView(with items: [HomeCardResponse]) {
+        homePageDataSource.updateData(with: items)
+        
+        collectionView.reloadData()
     }
     
     //MARK: Spotlight

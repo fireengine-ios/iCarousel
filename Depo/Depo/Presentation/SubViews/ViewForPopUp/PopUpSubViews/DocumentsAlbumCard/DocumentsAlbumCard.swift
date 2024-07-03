@@ -60,7 +60,8 @@ final class DocumentsAlbumCard: BaseCardView {
             let model =  DocumentsAlbumCardResponce.init(json: details),
             let fileList = object?.fileList?.compactMap({WrapData(searchResponse: $0)})
         else {
-            assertionFailure()
+            print("⚠️ Failed to set object in DocumentsAlbumCard: \(String(describing: object))")
+//            assertionFailure()
             return
         }
         
@@ -111,6 +112,7 @@ final class DocumentsAlbumCard: BaseCardView {
     private func openAlbum() {
         
         guard let uuid = albumItem?.uuid else {
+            print("⚠️ Album UUID is nil")
             return
         }
         
@@ -122,12 +124,14 @@ final class DocumentsAlbumCard: BaseCardView {
             case .success(let data):
                 
                 guard let thingsItem = self?.thingsItem else {
-                    assertionFailure()
+                    print("⚠️ thingsItem is nil")
+//                    assertionFailure()
                     return
                 }
                 
                 guard let controller = self?.router.imageFacePhotosController(album: AlbumItem(remote: data), item: thingsItem, status: .active, moduleOutput: nil) as? FaceImagePhotosViewController else {
-                    assertionFailure()
+                    print("⚠️ Failed to create FaceImagePhotosViewController")
+//                    assertionFailure()
                     return
                 }
                 
@@ -146,7 +150,8 @@ final class DocumentsAlbumCard: BaseCardView {
     
     @IBAction private func hideDocumentsButton(_ sender: UIButton) {
         guard let albumItem = albumItem else {
-            assertionFailure()
+            print("⚠️ albumItem is nil")
+//            assertionFailure()
             return
         }
         homeCardsService.delegate?.showSpinner()

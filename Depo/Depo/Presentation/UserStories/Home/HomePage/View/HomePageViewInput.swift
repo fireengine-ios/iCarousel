@@ -21,4 +21,10 @@ protocol HomePageViewInput: AnyObject, CurrentNavController {
     func closePermissionPopUp()
     
     func showSnackBarWithMessage(message: String)
+    
+    func showSegmentControl()
+    
+    func hideSegmentControl()
+    
+    func updateCollectionView(with items: [HomeCardResponse])
 }

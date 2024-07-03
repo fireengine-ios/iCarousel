@@ -25,7 +25,7 @@ struct RouteRequests {
     }
     
     // MARK: Environment
-    static var currentServerEnvironment = ServerEnvironment.production
+    static var currentServerEnvironment = ServerEnvironment.test
     private static let applicationTarget = TextConstants.NotLocalized.appName
     
     static let baseShortUrlString: String = {
@@ -362,6 +362,8 @@ struct RouteRequests {
         static func deleteSelectedPhotos(for groupId: Int) -> URL {
             return bestScene +/ "\(groupId)"
         }
+        
+        static let campaigns = baseUrl +/ "v1/campaigns"
     }
 
     // MARK: - Print
