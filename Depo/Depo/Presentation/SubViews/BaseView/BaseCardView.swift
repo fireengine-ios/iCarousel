@@ -13,6 +13,7 @@ class BaseCardView: UIView, NibInit {
     @IBOutlet weak var whiteView: UIView?
     @IBOutlet weak var closeButton: UIButton! {
         willSet {
+            newValue.isHidden = true
             newValue.setTitle("", for: .normal)
             newValue.setImage(Image.iconCancelBorder.image.withRenderingMode(.alwaysTemplate), for: .normal)
             newValue.tintColor = AppColor.label.color
