@@ -63,7 +63,7 @@ final class DiscoverInteractor: DiscoverInteractorInput {
 
     func updateLocalUserDetail() {
         getPremiumCardInfo(loadStatus: .reloadSingle)
-        getInstaPickInfo()
+//        getInstaPickInfo()
     }
     
     //MARK: tracking
