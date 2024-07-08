@@ -46,6 +46,7 @@ protocol StorageVars: AnyObject {
     var drawCampaignPackage: Bool { get set }
     var albumDetailFromDeeplink: Bool { get set }
     var isSyncProgress: Bool { get set }
+    var isPhotosScreenTime: Date? { get set }
     func value(forDeepLinkParameter key: DeepLinkParameter) -> Any?
 }
 
@@ -350,5 +351,11 @@ final class UserDefaultsVars: StorageVars {
     var isSyncProgress: Bool {
         get { return userDefaults.object(forKey: isSyncProgressKey) as? Bool ?? false }
         set { userDefaults.set(newValue, forKey: isSyncProgressKey) }
+    }
+    
+    private let isPhotosScreenTimeKey = "isPhotosScreenTimeKey"
+    var isPhotosScreenTime: Date? {
+        get { return userDefaults.object(forKey: isPhotosScreenTimeKey) as? Date }
+        set { userDefaults.set(newValue, forKey: isPhotosScreenTimeKey) }
     }
 }

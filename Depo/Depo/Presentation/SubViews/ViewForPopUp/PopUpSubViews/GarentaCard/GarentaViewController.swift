@@ -22,7 +22,8 @@ final class GarentaViewController: BaseViewController {
         view.dataDetectorTypes = .link
         view.isEditable = false
         view.sizeToFit()
-        view.isScrollEnabled = false
+        view.isScrollEnabled = true
+        view.showsVerticalScrollIndicator = false
         view.isUserInteractionEnabled = true
         return view
     }()

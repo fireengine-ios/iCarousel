@@ -103,7 +103,7 @@ extension RaffleSummaryViewController: UICollectionViewDataSource {
         let oppacity = raffleStatusElementOppacity[indexPath.row]
         let packPeriod = packagePeriod[indexPath.row]
         cell.delegate = self
-        cell.configure(raffle: raffle, imageOppacity: oppacity, statusResponse: statusResponse, packagePeriod: packPeriod)
+        cell.configure(raffle: raffle, imageOppacity: oppacity, statusResponse: statusResponse, packagePeriod: packPeriod, index: indexPath.row)
         
         if indexPath.row % 2 == 0 {
             cell.layer.addBorder(edge: .right, thickness: 1)

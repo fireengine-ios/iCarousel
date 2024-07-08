@@ -41,8 +41,10 @@ final class GalleryCollectionViewLayout: UICollectionViewLayout {
     var graceBannerHeight: CGFloat = 150
 
     private let itemSpacing: CGFloat = 1
-    private var cache: [IndexPath: GalleryCollectionViewLayoutAttributes] = [:]
+    var cache: [IndexPath: GalleryCollectionViewLayoutAttributes] = [:]
     private var headerCache: [Int: GalleryCollectionViewLayoutAttributes] = [:]
+    private let userDefaults = UserDefaultsVars()
+    private var lastCallPrepare: Bool = false
 
     private var contentHeight: CGFloat = 0
     private var contentWidth: CGFloat {
@@ -91,8 +93,42 @@ final class GalleryCollectionViewLayout: UICollectionViewLayout {
         super.finalizeLayoutTransition()
         isTransitioning = false
     }
+       
+    private func setStartTime() {
+        let time = Date()
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "HH:ss"
+        timeFormatter.timeStyle = .short
+        _ = timeFormatter.string(from: time)
+        userDefaults.isPhotosScreenTime = time
+    }
+    
+    private func diffInTime() -> TimeInterval {
+        let timex = userDefaults.isPhotosScreenTime
+        let currentTime = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:ss"
+        let diffinSeconds = currentTime.timeIntervalSinceReferenceDate - (timex as AnyObject).timeIntervalSinceReferenceDate
+        return diffinSeconds
+    }
     
     override func prepare() {
+        let isPrepairing = CacheManager.shared.isProcessing
+        if isPrepairing {
+            if cache.isEmpty || diffInTime() >= 20.0  {
+                setStartTime()
+                calculateCollectionViewHeaderAndContent()
+                lastCallPrepare = true
+            }
+        } else {
+            if cache.isEmpty || lastCallPrepare {
+                calculateCollectionViewHeaderAndContent()
+                lastCallPrepare = false
+            }
+        }
+    }
+    
+    private func calculateCollectionViewHeaderAndContent() {
         guard let collectionView = self.collectionView, collectionView.numberOfSections > 0 else {
             cache = [:]
             headerCache = [:]
