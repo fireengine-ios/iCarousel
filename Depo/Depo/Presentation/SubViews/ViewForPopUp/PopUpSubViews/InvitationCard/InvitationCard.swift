@@ -137,4 +137,6 @@ final class InvitationCard: BaseCardView {
             router.pushViewController(viewController: router.paycell)
         }
     }
+    
+    
 }

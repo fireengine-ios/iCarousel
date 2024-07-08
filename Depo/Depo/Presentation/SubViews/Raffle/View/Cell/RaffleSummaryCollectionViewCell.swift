@@ -107,7 +107,7 @@ class RaffleSummaryCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(raffle: RaffleElement, imageOppacity: Float, statusResponse: RaffleStatusResponse?, packagePeriod: String) {
+    func configure(raffle: RaffleElement, imageOppacity: Float, statusResponse: RaffleStatusResponse?, packagePeriod: String, index: Int) {
         self.raffle = raffle
         iconImage.image = raffle.icon
         iconImage.layer.opacity = imageOppacity
@@ -121,28 +121,24 @@ class RaffleSummaryCollectionViewCell: UICollectionViewCell {
         
         var mainText: String = ""
         var pointCount: Int = 0
+        let status = statusResponse?.details?[index]
         
-        for status in statusResponse?.details ?? [] {
-            if raffle.rawValue == status.earnType {
-                pointCount = status.totalPointsEarnedRule ?? 0
-                mainText = pointCount == 0 ? raffle.detailTextNoAction : String(format: raffle.detailText, pointCount)
-                let periodEarnLimit = status.periodEarnLimit ?? 0
-                let periodEarnedPoints = status.periodEarnedPoints ?? 0
-                let totalEarnLimit = status.totalEarnLimit ?? 0
-                let totalPointsEarnedRule = status.totalPointsEarnedRule ?? 0
-                if periodEarnLimit - periodEarnedPoints <= 0 || totalEarnLimit == totalPointsEarnedRule {
-                    actionButton.isHidden = true
-                    infoLabel.isHidden = false
-                    //comeBackLabel.isHidden = false
-                    let period = RafflePeriod(rawValue: status.periodType ?? RafflePeriod.daily.rawValue) ?? RafflePeriod.daily
-                    infoLabel.text = "\(String(format: raffle.infoLabelText, period.title)) \(localized(.gamificationComeback))"
-                } else {
-                    actionButton.isHidden = false
-                    infoLabel.isHidden = true
-                    //comeBackLabel.isHidden = true
-                }
-                break
-            }
+        pointCount = status?.totalPointsEarnedRule ?? 0
+        mainText = pointCount == 0 ? raffle.detailTextNoAction : String(format: raffle.detailText, pointCount)
+        let periodEarnLimit = status?.periodEarnLimit ?? 0
+        let periodEarnedPoints = status?.periodEarnedPoints ?? 0
+        let totalEarnLimit = status?.totalEarnLimit ?? 0
+        let totalPointsEarnedRule = status?.totalPointsEarnedRule ?? 0
+        if periodEarnLimit - periodEarnedPoints <= 0 || totalEarnLimit == totalPointsEarnedRule {
+            actionButton.isHidden = true
+            infoLabel.isHidden = false
+            //comeBackLabel.isHidden = false
+            let period = RafflePeriod(rawValue: status?.periodType ?? RafflePeriod.daily.rawValue) ?? RafflePeriod.daily
+            infoLabel.text = "\(String(format: raffle.infoLabelText, period.title)) \(localized(.gamificationComeback))"
+        } else {
+            actionButton.isHidden = false
+            infoLabel.isHidden = true
+            //comeBackLabel.isHidden = true
         }
         let content = NSMutableAttributedString(string: mainText, attributes: [.font: UIFont.appFont(.light, size: 10)])
         let paragraphStyle = NSMutableParagraphStyle()
