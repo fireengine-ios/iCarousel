@@ -362,11 +362,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
     
     private func updateSelection(cell: PhotoVideoCell) {
-        let maxSelectCount = FirebaseRemoteConfig.shared.maxSelectCount
-        if collectionView.indexPathsForSelectedItems?.count ?? 0 > maxSelectCount {
-            return
-        }
-        
         cell.updateSelection(isSelectionMode: self.dataSource.isSelectingMode, animated: false)
         updateSelectedItemsCount()
         
