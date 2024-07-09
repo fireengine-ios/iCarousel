@@ -112,10 +112,18 @@ final class GalleryCollectionViewLayout: UICollectionViewLayout {
         return diffinSeconds
     }
     
+    @objc func callCalculate() {
+        calculateCollectionViewHeaderAndContent()
+    }
+    
     override func prepare() {
         let isPrepairing = CacheManager.shared.isProcessing
         if isPrepairing {
-            if cache.isEmpty || diffInTime() >= 20.0  {
+            if cache.isEmpty || diffInTime() >= 10.0  {
+                NotificationCenter.default.addObserver(self,
+                                                       selector: #selector(callCalculate),
+                                                       name: .isProcecessPrepairing,
+                                                       object: nil)
                 setStartTime()
                 calculateCollectionViewHeaderAndContent()
                 lastCallPrepare = true
