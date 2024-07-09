@@ -163,6 +163,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
 
     @objc private func fullReload() {
+        collectionViewManager.collectionViewLayout.cache = [:]
         fetchAndReload()
         stopRefresher()
     }
@@ -361,6 +362,11 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
     
     private func updateSelection(cell: PhotoVideoCell) {
+        let maxSelectCount = FirebaseRemoteConfig.shared.maxSelectCount
+        if collectionView.indexPathsForSelectedItems?.count ?? 0 > maxSelectCount {
+            return
+        }
+        
         cell.updateSelection(isSelectionMode: self.dataSource.isSelectingMode, animated: false)
         updateSelectedItemsCount()
         
@@ -649,6 +655,12 @@ extension PhotoVideoController: UICollectionViewDelegate {
         if dataSource.isSelectingMode {
             updateSelection(cell: cell)
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        let maxSelectCount = FirebaseRemoteConfig.shared.maxSelectCount
+        let isMaxSelect = (collectionView.indexPathsForSelectedItems?.count ?? 0) < maxSelectCount
+        return isMaxSelect
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {

@@ -60,7 +60,6 @@ final class FirebaseRemoteConfig {
         return remoteConfig.configValue(forKey: key).numberValue.intValue
     }
     
-    
     var resignupEnabled: Bool {
         let key = RemoteConfigKeys.resignupEnabled
         return remoteConfig.configValue(forKey: key).boolValue
