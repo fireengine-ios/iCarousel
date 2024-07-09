@@ -119,7 +119,7 @@ final class GalleryCollectionViewLayout: UICollectionViewLayout {
     override func prepare() {
         let isPrepairing = CacheManager.shared.isProcessing
         if isPrepairing {
-            if cache.isEmpty || diffInTime() >= 20.0  {
+            if cache.isEmpty || diffInTime() >= 10.0  {
                 NotificationCenter.default.addObserver(self,
                                                        selector: #selector(callCalculate),
                                                        name: .isProcecessPrepairing,
