@@ -655,6 +655,12 @@ extension PhotoVideoController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         let maxSelectCount = FirebaseRemoteConfig.shared.maxSelectCount
         let isMaxSelect = (collectionView.indexPathsForSelectedItems?.count ?? 0) < maxSelectCount
+        if !isMaxSelect {
+            //popup
+            let text = String(format: localized(.maxFilesSelectError), maxSelectCount)
+            let vc = PopUpController.with(title: TextConstants.warning, message: text, image: .error, buttonTitle: TextConstants.ok)
+            vc.open()
+        }
         return isMaxSelect
     }
     

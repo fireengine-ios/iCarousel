@@ -2421,5 +2421,10 @@ then {11,99 TRY/Month}*/
 "right" = "";
 "rights" = "";
 "gamification_raffle_call" = "Her ay aşağıdaki özellikleri kullan, çekilişi kazanma şansını artır.";
+
+/*Fuzzy*/
 "discover_tools" = "Araçlar";
+
+/*Fuzzy*/
 "discover_campaigns" = "Kampanyalar";
+"max_files_select_error" = "Maksimum %d dosya/fotograf/video seçebilirsiniz.";
