@@ -273,10 +273,12 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     func didStartSelection(selected: Int) {
         updateBars(isSelecting: true)
         configureCountView(isShown: true)
+        gridListBar.moreButton.isEnabled = false
     }
     
     func didEndSelection() {
         updateBars(isSelecting: false)
+        gridListBar.moreButton.isEnabled = true
     }
     
     func didChangeSelection(selectedItems: [WrapData]) {
@@ -286,8 +288,10 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         
         if selectedItems.isEmpty {
             bottomBarManager.hide()
+            gridListBar.moreButton.isEnabled = true
         } else {
             bottomBarManager.show()
+            gridListBar.moreButton.isEnabled = false
         }
     }
     
