@@ -1006,6 +1006,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func onSelectObject(object: BaseDataSourceItem) {
+        let maxSelectCount = FirebaseRemoteConfig.shared.maxSelectCount
         if isObjectSelected(object: object) {
             selectedItemsArray.remove(object)
         } else {
@@ -1020,7 +1021,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     }
                 }
             }
-            selectedItemsArray.insert(object)
+            if selectedItemsArray.count < maxSelectCount {
+                selectedItemsArray.insert(object)
+            } else {
+                let text = String(format: localized(.maxFilesSelectError), maxSelectCount)
+                let vc = PopUpController.with(title: TextConstants.warning, message: text, image: .error, buttonTitle: TextConstants.ok)
+                vc.open()
+            }
+            
         }
         
         for header in headers{

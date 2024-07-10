@@ -324,7 +324,7 @@
 "Create album" = "Crear álbum";
 "Sync Contacts" = "Sincronizar Contactos";
 "Favorites" = "Favoritos";
-"All Files" = "Todos los archivos";
+"All Files" = "Archivos";
 "Choose" = "Elegir";
 "Hide" = "Ocultar";
 "Show" = "Mostrar";
@@ -1494,7 +1494,7 @@
 "tabbar_item_home_label" = "Página Principal";
 "tabbar_item_gallery_label" = "Galería";
 "tabbar_item_contacts_label" = "Contactos";
-"tabbar_item_all_files_label" = "Todos los archivos";
+"tabbar_item_all_files_label" = "Archivos";
 "see_features" = "Mostrar las funciones";
 "middle_user_package_description" = "+ Análisis de 15 PhotoPick";
 "features_only_package_addon_type" = "Las funciones Premium";
@@ -2369,5 +2369,10 @@ then {11,99 TRY/Month}*/
 "right" = "";
 "rights" = "";
 "gamification_raffle_call" = "Use the features below every month to increase your chances of winning the raffle.";
+
+/*Fuzzy*/
 "discover_tools" = "Útiles";
+
+/*Fuzzy*/
 "discover_campaigns" = "Campañas";
+"max_files_select_error" = "";

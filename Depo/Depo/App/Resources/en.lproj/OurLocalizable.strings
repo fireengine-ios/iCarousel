@@ -2397,5 +2397,10 @@ then {11,99 TRY/Month}*/
 "right" = "right";
 "rights" = "rights";
 "gamification_raffle_call" = "Use the features below every month to increase your chances of winning the raffle.";
+
+/*Fuzzy*/
 "discover_tools" = "Tools";
-"discover_campaigns" = "";
+
+/*Fuzzy*/
+"discover_campaigns" = "Campaigns";
+"max_files_select_error" = "";

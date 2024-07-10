@@ -458,5 +458,7 @@ enum Strings: String, Localizable {
     case gamificationTitleCreateAlbum = "gamification_title_createalbum"
     case gamificationTotalEarnPoint1 = "gamification_total_earn_point_1";
     case gamificationTotalEarnPoint2 = "gamification_total_earn_point_2";
+    
+    case maxFilesSelectError = "max_files_select_error"
 
 }
