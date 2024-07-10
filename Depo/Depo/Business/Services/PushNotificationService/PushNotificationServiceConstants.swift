@@ -86,6 +86,7 @@ enum PushNotificationAction: String {
     case generatedCollage = "generatedcollage"
     case generatedAnimation = "generatedanimation"
     case generatedAlbum = "generatedalbum"
+    case campaignAktiflik = "campaignAktiflik"
 
     var fromWidget: Bool {
         isContained(in: [.widgetLogout,

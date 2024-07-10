@@ -253,6 +253,7 @@ final class PushNotificationService {
         case .generatedCollage: openGeneratedItemForyou(action: action)
         case .generatedAnimation: openGeneratedItemForyou(action: action)
         case .generatedAlbum: openGeneratedItemForyou(action: action)
+        case .campaignAktiflik: openCampaignAkfitlik(action: action)
         }
         
         
@@ -667,6 +668,34 @@ private extension PushNotificationService {
         case .generatedAnimation: openPreviewForGeneratedItem(uuid: uuid as? String, action: .generatedAnimation)
         case .generatedAlbum: openGeneratedAlbumDetail(uuid: uuid as? String)
         default: print()
+        }
+    }
+    
+    func openCampaignAkfitlik(action: PushNotificationAction) {
+        let campaignId = storageVars.deepLinkParameters?.first?.value as? String ?? "0"
+        var detUrl: String = ""
+        var condUrl: String = ""
+        lazy var homeCardsService: HomeCardsService = factory.resolve()
+        homeCardsService.all { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    let campaignResponse = response.filter ({$0.type == .newCampaign && $0.details?["id"].int == Int(campaignId)})
+                    if let detailUrl = campaignResponse.first?.details?["detailImagePath"].string {
+                        detUrl = detailUrl
+                    }
+                    if let conditionImage = campaignResponse.first?.details?["conditionImagePath"].string {
+                        condUrl = conditionImage
+                    }
+                    let vc = self?.router.raffle(id: Int(campaignId) ?? 0, url: detUrl, endDateText: "", conditionImageUrl: condUrl)
+                    self?.router.pushViewController(viewController: vc!, animated: false)
+                    
+                case .failed(_):
+                    DispatchQueue.toMain {
+                        print()
+                    }
+                }
+            }
         }
     }
     
