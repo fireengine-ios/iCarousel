@@ -191,15 +191,12 @@ final class HomePageInteractor: HomePageInteractorInput {
                 self?.output.stopRefresh()
                 switch result {
                 case .success(let response):
-                   
-//                    self?.output.didObtainHomeCards(response)
-//                    self?.fillCollectionView(isReloadAll: true)
-                    
+                                       
                     self?.filterCardsData(cards: response)
                     
                     if let currentSegment = self?.currentSegment {
-                                            self?.updateCollectionView(for: currentSegment)
-                                        }
+                        self?.updateCollectionView(for: currentSegment)
+                    }
                     
                 case .failed(let error):
                     DispatchQueue.toMain {
@@ -234,18 +231,15 @@ final class HomePageInteractor: HomePageInteractorInput {
             }
         }
         
-        campaignsCards = cards.filter {
-            guard let type = $0.type else { return false }
-            switch type {
-            case .launchCampaign, .campaign, .newCampaign:
-                return true
-            default:
-                return false
-            }
-        }
-        
-        print("⚠️ Tools Cards: \(toolsCards)")
-        print("⚠️ Campaigns Cards: \(campaignsCards)")
+//        campaignsCards = cards.filter {
+//            guard let type = $0.type else { return false }
+//            switch type {
+//            case .launchCampaign, .campaign, .newCampaign:
+//                return true
+//            default:
+//                return false
+//            }
+//        }
     }
     
     private func getCampaignsScene(completion: @escaping (Bool) -> Void) {
@@ -253,6 +247,11 @@ final class HomePageInteractor: HomePageInteractorInput {
             guard let self = self else { return }
             switch result {
             case .success(let response):
+                
+                print("⚠️", response)
+                
+                self.campaignsCards = HomeCardResponse.shared.convertCampaignsToHomeCardResponses(response)
+                
                 let isAvailable = !response.isEmpty
                 completion(isAvailable)
             case .failed(let error):

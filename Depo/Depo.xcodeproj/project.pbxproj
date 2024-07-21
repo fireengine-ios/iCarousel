@@ -4871,6 +4871,14 @@
 		C35CF6A92BE6AEB200821B02 /* ForYouWinterVideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C35CF6A52BE6AEB200821B02 /* ForYouWinterVideoTableViewCell.xib */; };
 		C39FD8AC2BA202660054DE13 /* BestSceneSuccessPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39FD8AB2BA202660054DE13 /* BestSceneSuccessPopUp.swift */; };
 		C39FD8AE2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39FD8AD2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib */; };
+		C3E6B3242C471FC300FA954F /* NewCampaignCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E6B3232C471FC300FA954F /* NewCampaignCard.swift */; };
+		C3E6B3252C471FC300FA954F /* NewCampaignCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E6B3232C471FC300FA954F /* NewCampaignCard.swift */; };
+		C3E6B3262C471FC300FA954F /* NewCampaignCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E6B3232C471FC300FA954F /* NewCampaignCard.swift */; };
+		C3E6B3272C471FC300FA954F /* NewCampaignCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E6B3232C471FC300FA954F /* NewCampaignCard.swift */; };
+		C3E6B3292C472B4000FA954F /* NewCampaignCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3E6B3282C472B4000FA954F /* NewCampaignCard.xib */; };
+		C3E6B32A2C472B4000FA954F /* NewCampaignCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3E6B3282C472B4000FA954F /* NewCampaignCard.xib */; };
+		C3E6B32B2C472B4000FA954F /* NewCampaignCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3E6B3282C472B4000FA954F /* NewCampaignCard.xib */; };
+		C3E6B32C2C472B4000FA954F /* NewCampaignCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3E6B3282C472B4000FA954F /* NewCampaignCard.xib */; };
 		C3F3DF722C19A73C0007AC7B /* Campaigns.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F3DF712C19A73C0007AC7B /* Campaigns.swift */; };
 		C3F3DF732C19A73C0007AC7B /* Campaigns.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F3DF712C19A73C0007AC7B /* Campaigns.swift */; };
 		C3F3DF742C19A73C0007AC7B /* Campaigns.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F3DF712C19A73C0007AC7B /* Campaigns.swift */; };
@@ -12624,6 +12632,8 @@
 		C39FD8AB2BA202660054DE13 /* BestSceneSuccessPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSceneSuccessPopUp.swift; sourceTree = "<group>"; };
 		C39FD8AD2BA202BF0054DE13 /* BestSceneSuccessPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BestSceneSuccessPopUp.xib; sourceTree = "<group>"; };
 		C3C2356B20B6DA1B00F3FB6D /* MPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MPush.framework; sourceTree = "<group>"; };
+		C3E6B3232C471FC300FA954F /* NewCampaignCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCampaignCard.swift; sourceTree = "<group>"; };
+		C3E6B3282C472B4000FA954F /* NewCampaignCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewCampaignCard.xib; sourceTree = "<group>"; };
 		C3F3DF712C19A73C0007AC7B /* Campaigns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Campaigns.swift; sourceTree = "<group>"; };
 		C4A00B9575D3535660EB20D3 /* SelectNameViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameViewController.swift; sourceTree = "<group>"; };
 		C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentGradientView.swift; sourceTree = "<group>"; };
@@ -17463,6 +17473,7 @@
 		7CE825B81F823CAD00356AD2 /* PopUpSubViews */ = {
 			isa = PBXGroup;
 			children = (
+				C3E6B3222C4719E400FA954F /* NewCampaignCard */,
 				897497072C2C25FE00151981 /* ExternalCard */,
 				890B31532BB300B900C5A789 /* RaffleCard */,
 				89FDAD3A2B90A91700BDE505 /* GarentaCard */,
@@ -21215,6 +21226,15 @@
 			path = BestSceneSuccessPopUp;
 			sourceTree = "<group>";
 		};
+		C3E6B3222C4719E400FA954F /* NewCampaignCard */ = {
+			isa = PBXGroup;
+			children = (
+				C3E6B3232C471FC300FA954F /* NewCampaignCard.swift */,
+				C3E6B3282C472B4000FA954F /* NewCampaignCard.xib */,
+			);
+			path = NewCampaignCard;
+			sourceTree = "<group>";
+		};
 		C3E6F774523B0C33C60BE23C /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -24891,6 +24911,7 @@
 				3A9C283F26529C3900EFADE9 /* InvitationCampaignDetailView.xib in Resources */,
 				CE634AFC230ED69900CED18C /* PaymentTypeView.xib in Resources */,
 				89CC89F823AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib in Resources */,
+				C3E6B3292C472B4000FA954F /* NewCampaignCard.xib in Resources */,
 				9892229A240D0C3C004155A5 /* BecomePremiumView.xib in Resources */,
 				988BA18A255924670086E4BE /* PrivateShareAddMessageView.xib in Resources */,
 				98164304233CE2D40070F8B9 /* TBMatikPhotosViewController.xib in Resources */,
@@ -25432,6 +25453,7 @@
 				CE784E8222A685FB00662219 /* GridListTopBarSortingTableCell.xib in Resources */,
 				077D1DBC2805B92B001C6E72 /* NavigationHeaderView.xib in Resources */,
 				CE784E8422A685FB00662219 /* TurkcellSaturaIta.ttf in Resources */,
+				C3E6B32B2C472B4000FA954F /* NewCampaignCard.xib in Resources */,
 				CE784E8822A685FB00662219 /* PasscodeViewImp.xib in Resources */,
 				CF703F4D24E3CC5B005EFFFD /* (null) in Resources */,
 				CE784E8B22A685FB00662219 /* SearchView.xib in Resources */,
@@ -25682,6 +25704,7 @@
 				CF8B699C23CBC9D70021B021 /* FeedbackViewController.xib in Resources */,
 				CF7146DD24B597A900D83E60 /* DeleteDuplicatesMainView.xib in Resources */,
 				CF8B69A123CBC9D70021B021 /* SpotifyImportedTracksViewController.xib in Resources */,
+				C3E6B32A2C472B4000FA954F /* NewCampaignCard.xib in Resources */,
 				9823197024F3A1E600FD16E2 /* PreparedFilterCell.xib in Resources */,
 				CF8B69A223CBC9D70021B021 /* ActivityTimelineTableBackView.xib in Resources */,
 				CF8B69A323CBC9D70021B021 /* PasscodeEnterViewController.xib in Resources */,
@@ -26273,6 +26296,7 @@
 				CF703F4E24E3CC5C005EFFFD /* (null) in Resources */,
 				077D1DBD2805B92B001C6E72 /* NavigationHeaderView.xib in Resources */,
 				98231A1B24F3A1E700FD16E2 /* SelectionMenuController.xib in Resources */,
+				C3E6B32C2C472B4000FA954F /* NewCampaignCard.xib in Resources */,
 				CF8B725B23CBCA280021B021 /* SearchView.xib in Resources */,
 				CF8B725C23CBCA280021B021 /* ManageContactsViewController.xib in Resources */,
 				CF8B725E23CBCA280021B021 /* InstaPickDetailViewController.xib in Resources */,
@@ -29231,6 +29255,7 @@
 				B551D0D224614C5900B21970 /* LogoutDBCleaner.swift in Sources */,
 				B501EF2F2421FF6100DEA9B4 /* LocalAlbumsCache.swift in Sources */,
 				9240C04D21B805A8005E710C /* PremiumFooterCollectionReusableView.swift in Sources */,
+				C3E6B3242C471FC300FA954F /* NewCampaignCard.swift in Sources */,
 				B58533212397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift in Sources */,
 				8C0E8F931FDEBDFF00789C91 /* HelpAndSupportInitializer.swift in Sources */,
 				8C0E8F941FDEBDFF00789C91 /* LBAlbumLikePreviewSliderRouterInput.swift in Sources */,
@@ -29966,6 +29991,7 @@
 				8C1E5BDE22CB8C1A008FDA02 /* RangeAPIInfo.swift in Sources */,
 				98A86D5823A238E700438225 /* AlbumsSliderCell.swift in Sources */,
 				982319C024F3A1E700FD16E2 /* AdjustmentParameterSliderView.swift in Sources */,
+				C3E6B3262C471FC300FA954F /* NewCampaignCard.swift in Sources */,
 				071E7B6E2832438C00A5DD24 /* GalleryCollectionGridSize.swift in Sources */,
 				89D2D4CF29D5A53300AC772B /* OnlyOfficePopup.swift in Sources */,
 				CE78485F22A685FB00662219 /* AppMigrator.swift in Sources */,
@@ -32484,6 +32510,7 @@
 				739D4AB5248910C20032EA31 /* BottomDetailViewAnimationManager.swift in Sources */,
 				CF8B654E23CBC9D70021B021 /* RegistrationInteractor.swift in Sources */,
 				CF8B654F23CBC9D70021B021 /* BottomSelectionTabBarInteractor.swift in Sources */,
+				C3E6B3252C471FC300FA954F /* NewCampaignCard.swift in Sources */,
 				CF8B655023CBC9D70021B021 /* SavingAttemptsCounterByUnigueUserID.swift in Sources */,
 				CF8B655123CBC9D70021B021 /* FaceImageItemsModuleOutput.swift in Sources */,
 				981617A42578BA5F009F1C31 /* FirebaseAnalyticsDementions.swift in Sources */,
@@ -34857,6 +34884,7 @@
 				8919558B2BCCFD3C00E52919 /* RaffleConditionTableViewCell.swift in Sources */,
 				CF8B6E2723CBCA280021B021 /* InstagramAuthViewController.swift in Sources */,
 				CF8B6E2823CBCA280021B021 /* EULAResponse.swift in Sources */,
+				C3E6B3272C471FC300FA954F /* NewCampaignCard.swift in Sources */,
 				CF8B6E2923CBCA280021B021 /* FromNib.swift in Sources */,
 				CF8B6E2A23CBCA280021B021 /* PeriodicContactSyncSettingsOptionView.swift in Sources */,
 				5282AAF329E930900014FBCF /* ImageRetryService.swift in Sources */,
@@ -36344,12 +36372,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 693N5K66ZJ;
+				DEVELOPMENT_TEAM = 693N5K66ZJ;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LifeboxNotificationServiceExtension/Info.plist;
@@ -36367,7 +36393,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.pushimage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "akillidepo push image";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -36428,13 +36453,11 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 693N5K66ZJ;
+				DEVELOPMENT_TEAM = 693N5K66ZJ;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LifeboxNotificationServiceExtension/Info.plist;
@@ -36452,7 +36475,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.pushimage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "akillidepo push image";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -36512,12 +36534,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Depo/App/Depo-AppStore.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 693N5K66ZJ;
+				DEVELOPMENT_TEAM = 693N5K66ZJ;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -36560,7 +36580,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo;
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "akillidepo Extension";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
@@ -36657,12 +36676,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Depo/App/Depo-AppStore.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 693N5K66ZJ;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 693N5K66ZJ;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -36703,8 +36720,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DLIFEBOX";
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo;
 				PRODUCT_NAME = lifebox;
-				PROVISIONING_PROFILE_SPECIFIER = "akillidepo Extension";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "akillidepo Extension";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "APPSTORE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
@@ -37509,11 +37525,9 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProvider/LifeboxFileProvider-appstore.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 693N5K66ZJ;
+				DEVELOPMENT_TEAM = 693N5K66ZJ;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -37536,7 +37550,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "akillidepo IOS11 files";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -37603,13 +37616,11 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProvider/LifeboxFileProvider-appstore.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 693N5K66ZJ;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 693N5K66ZJ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -37630,8 +37641,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "akillidepo IOS11 files";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "akillidepo IOS11 files";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -37698,11 +37708,9 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProviderUI/LifeboxFileProviderUI-appstore.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 693N5K66ZJ;
+				DEVELOPMENT_TEAM = 693N5K66ZJ;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -37725,7 +37733,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "akillidepo IOS11 files UI";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -37792,9 +37799,8 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProviderUI/LifeboxFileProviderUI-appstore.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 693N5K66ZJ;
@@ -37818,7 +37824,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DLIFEBOX";
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "akillidepo IOS11 files UI";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -37885,11 +37891,9 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "LifeboxShared/LifeboxShared-appstore.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 693N5K66ZJ;
+				DEVELOPMENT_TEAM = 693N5K66ZJ;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -37912,7 +37916,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "akillidepo share extension";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -37979,13 +37982,11 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "LifeboxShared/LifeboxShared-appstore.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 693N5K66ZJ;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 693N5K66ZJ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -38006,8 +38007,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "akillidepo share extension";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "akillidepo share extension";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -38322,10 +38322,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 693N5K66ZJ;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxUnitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
@@ -38461,12 +38461,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Depo/App/Depo-AppStore.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 18;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 693N5K66ZJ;
+				DEVELOPMENT_TEAM = 693N5K66ZJ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -38505,7 +38503,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo;
 				PRODUCT_NAME = lifebox_friendly;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "akillidepo Extension";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
@@ -38586,12 +38583,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Depo/App/Depo-AppStore.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = 693N5K66ZJ;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 693N5K66ZJ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -38628,8 +38623,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DLIFEBOX";
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo;
 				PRODUCT_NAME = lifebox_friendly;
-				PROVISIONING_PROFILE_SPECIFIER = "akillidepo Extension";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "akillidepo Extension";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "APPSTORE MAIN_APP DEBUG_BUNDLE_ENABLED";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
@@ -38961,10 +38955,10 @@
 				CODE_SIGN_ENTITLEMENTS = "LifeboxWidget/LifeboxTC/autosync-widget-appstore.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = d2.1.8;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 693N5K66ZJ;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxWidget/LifeboxTC/Info.plist";
