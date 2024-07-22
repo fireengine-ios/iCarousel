@@ -30,6 +30,7 @@ final class PhotoVideoScrollBarManager {
         guard !isScrollBarAdded, let collectionView = collectionView else {
             return
         }
+        scrollBar.alpha = 0
         isScrollBarAdded = true
         yearsView.add(to: collectionView)
         scrollBar.add(to: collectionView)
@@ -46,7 +47,7 @@ final class PhotoVideoScrollBarManager {
     }
     
     func hideScrollBarIfNeed(for contentOffsetY: CGFloat) {
-        if contentOffsetY < 0 {
+        if contentOffsetY < -scrollBar.originalTopInset {
             scrollBar.alpha = 0
         } else {
             scrollBar.alpha = 1
