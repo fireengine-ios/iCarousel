@@ -71,7 +71,7 @@ final class ScrollBarView: UIView {
     private let handleHeight: CGFloat = scrollBarHandleImage.size.height
     private var horizontalOffset: CGFloat = 0
     
-    private var originalTopInset: CGFloat = 0
+    var originalTopInset: CGFloat = 0
     private var yOffset: CGFloat = 0
     
     private var isInsetForLargeTitles = false
