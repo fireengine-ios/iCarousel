@@ -226,7 +226,6 @@ final class HomePageViewController: BaseViewController {
     }
     
     private func updateSelectedSegment(index: Int) {
-        print("⚠️", index)
         switch index {
         case 0:
             self.stackView2Container.backgroundColor = .clear

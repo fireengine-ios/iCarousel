@@ -72,7 +72,7 @@ final class CampaignCard: BaseCardView {
             case let data?? = try? object?.details?.rawData(),
             let model = try? campaignService.getPhotopickDetails(from: data)
         else {
-            assertionFailure()
+//            assertionFailure()
             return
         }
         setupCardView(campaign: model)

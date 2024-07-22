@@ -10,6 +10,9 @@ import Foundation
 import SwiftyJSON
 
 final class HomeCardResponse : Equatable {
+    
+    static let shared = HomeCardResponse()
+    
     static func == (lhs: HomeCardResponse, rhs: HomeCardResponse) -> Bool {
         return lhs.id == rhs.id
     }
@@ -91,6 +94,28 @@ final class HomeCardResponse : Equatable {
             return .newCampaign
         case .external:
             return .external
+        case .campaignNew:
+            return .campaignNew
+        }
+    }
+    
+    func convertCampaignsToHomeCardResponses(_ campaigns: [Campaign]) -> [HomeCardResponse] {
+        return campaigns.map { campaign in
+            let response = HomeCardResponse()
+            response.id = campaign.id
+            response.type = .campaignNew
+            response.details = JSON([
+                "imagePath": campaign.imagePath,
+                "detailImagePath": campaign.detailImagePath,
+                "conditionImagePath": campaign.conditionImagePath ?? "",
+                "title": campaign.title,
+                "name": campaign.name,
+                "description": campaign.description,
+                "startDate": campaign.startDate,
+                "endDate": campaign.endDate,
+                "extraData": campaign.extraData?.toJSON() ?? ""
+            ])
+            return response
         }
     }
 }
@@ -146,5 +171,37 @@ enum HomeCardTypes: String {
     case garenta = "GARENTA"
     case newCampaign = "NEW_CAMPAIGN"
     case external = "EXTERNAL"
+    case campaignNew = "CAMPAIGN_NEW"
 }
 
+extension Campaign.ExtraData {
+    func toJSON() -> JSON {
+        var json: [String: Any] = [:]
+        
+        if let buttons = self.buttons {
+            json["buttons"] = buttons.toJSON()
+        }
+        
+        return JSON(json)
+    }
+}
+
+extension Campaign.ExtraData.Buttons {
+    func toJSON() -> JSON {
+        return JSON(self.button.map { $0.toJSON() })
+    }
+}
+
+extension Campaign.ExtraData.Buttons.Button {
+    func toJSON() -> JSON {
+        return JSON([
+            "id": self.id,
+            "text": self.text,
+            "action": self.action,
+            "web_view": self.web_view,
+            "url": self.url,
+            "auth_needed": self.auth_needed,
+            "api_body": self.api_body ?? ""
+        ])
+    }
+}

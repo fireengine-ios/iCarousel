@@ -2403,4 +2403,4 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "discover_campaigns" = "Campaigns";
-"max_files_select_error" = "";
+"max_files_select_error" = "You can select only %d files/photos/videos.";
