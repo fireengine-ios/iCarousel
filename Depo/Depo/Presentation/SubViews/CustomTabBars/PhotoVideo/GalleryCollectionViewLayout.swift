@@ -125,12 +125,16 @@ final class GalleryCollectionViewLayout: UICollectionViewLayout {
                                                        name: .isProcecessPrepairing,
                                                        object: nil)
                 setStartTime()
-                calculateCollectionViewHeaderAndContent()
+                DispatchQueue.main.async {
+                    self.calculateCollectionViewHeaderAndContent()
+                }
                 lastCallPrepare = true
             }
         } else {
             if cache.isEmpty || lastCallPrepare {
-                calculateCollectionViewHeaderAndContent()
+                DispatchQueue.main.async {
+                    self.calculateCollectionViewHeaderAndContent()
+                }
                 lastCallPrepare = false
             }
         }

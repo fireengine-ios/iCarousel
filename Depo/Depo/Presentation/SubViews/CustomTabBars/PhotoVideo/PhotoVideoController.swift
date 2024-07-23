@@ -450,7 +450,7 @@ extension PhotoVideoController: UIScrollViewDelegate {
 //        assetsFileCacheManager.updateCachedAssets(on: collectionView, itemProviderClosure: itemProviderClosure)
         updateScrollBarTextIfNeed()
         scrollBarManager.scrollViewDidScroll()
-        scrollBarManager.hideScrollBarIfNeed(for: scrollView.contentOffset.y)
+        scrollBarManager.hideScrollBarIfNeed(for: scrollBarManager.scrollBar.originalTopInset)
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
