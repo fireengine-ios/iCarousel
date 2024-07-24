@@ -163,9 +163,7 @@ class BaseEmailVerificationPopUp: BasePopUpController {
         updateEmail()
 
         #if DEBUG
-        //laterButton.isHidden = false
-        let allowSkip = verificationRemainingDays > 0
-        laterButton.isHidden = !allowSkip && !alwaysShowsLaterButton
+        laterButton.isHidden = false
         #else
         let allowSkip = verificationRemainingDays > 0
         laterButton.isHidden = !allowSkip && !alwaysShowsLaterButton
