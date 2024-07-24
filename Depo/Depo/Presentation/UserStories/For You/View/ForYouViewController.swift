@@ -93,7 +93,7 @@ final class ForYouViewController: BaseViewController {
         navigationBarHidden = true
         needToShowTabBar = true
         setDefaultNavigationHeaderActions()
-        //headerContainingViewController?.isHeaderBehindContent = false
+        headerContainingViewController?.isHeaderBehindContent = false
         ItemOperationManager.default.startUpdateView(view: self)
     }
     

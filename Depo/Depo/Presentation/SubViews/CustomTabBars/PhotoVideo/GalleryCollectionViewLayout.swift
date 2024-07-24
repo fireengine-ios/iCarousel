@@ -333,7 +333,7 @@ final class GalleryCollectionViewLayout: UICollectionViewLayout {
         }
 
         let headerFrame = attributes.frame
-        let pinOffset = collectionView.contentOffset.y + layoutGuide.layoutFrame.origin.y + headerFrame.height
+        let pinOffset = collectionView.contentOffset.y + layoutGuide.layoutFrame.origin.y
         let minY = firstItemAttributes.frame.minY - headerFrame.height
         let maxY = lastItemAttributes.frame.maxY - headerFrame.height
         let y = min(max(pinOffset, minY), maxY)
