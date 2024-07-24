@@ -122,6 +122,10 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
                 }
             }
         }
+        
+        if accountInfo?.emailVerified == false {
+            presentEmailVerificationPopUp()
+        }
  
         storageVars.isUserFirstLoggedIn = false
         canNotificationPopupRaiseUp()
@@ -584,6 +588,11 @@ extension PhotoVideoController: UIScrollViewDelegate {
         let lastIndexPath = IndexPath(row: lastRowNumber, section: lastSectionNumber)
         
         return indexPath == lastIndexPath
+    }
+    
+    private func presentEmailVerificationPopUp() {
+        let popup = RouterVC().verifyEmailPopUp
+        present(popup, animated: true)
     }
     
     func presentRecoveryEmailVerificationPopUp() {
