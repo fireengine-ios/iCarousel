@@ -41,10 +41,8 @@ final class GalleryCollectionViewLayout: UICollectionViewLayout {
     var graceBannerHeight: CGFloat = 150
 
     private let itemSpacing: CGFloat = 1
-    var cache: [IndexPath: GalleryCollectionViewLayoutAttributes] = [:]
+    private var cache: [IndexPath: GalleryCollectionViewLayoutAttributes] = [:]
     private var headerCache: [Int: GalleryCollectionViewLayoutAttributes] = [:]
-    private let userDefaults = UserDefaultsVars()
-    private var lastCallPrepare: Bool = false
 
     private var contentHeight: CGFloat = 0
     private var contentWidth: CGFloat {
@@ -93,54 +91,8 @@ final class GalleryCollectionViewLayout: UICollectionViewLayout {
         super.finalizeLayoutTransition()
         isTransitioning = false
     }
-       
-    private func setStartTime() {
-        let time = Date()
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "HH:ss"
-        timeFormatter.timeStyle = .short
-        _ = timeFormatter.string(from: time)
-        //userDefaults.isPhotosScreenTime = time
-    }
-    
-    private func diffInTime() -> TimeInterval {
-        //let timex = userDefaults.isPhotosScreenTime
-        let currentTime = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:ss"
-        let diffinSeconds = TimeInterval()
-        return diffinSeconds
-    }
-    
-    @objc func callCalculate() {
-        calculateCollectionViewHeaderAndContent()
-    }
     
     override func prepare() {
-        let isPrepairing = CacheManager.shared.isProcessing
-        if isPrepairing {
-            if cache.isEmpty || diffInTime() >= 10.0  {
-                NotificationCenter.default.addObserver(self,
-                                                       selector: #selector(callCalculate),
-                                                       name: .isProcecessPrepairing,
-                                                       object: nil)
-                setStartTime()
-                DispatchQueue.main.async {
-                    self.calculateCollectionViewHeaderAndContent()
-                }
-                lastCallPrepare = true
-            }
-        } else {
-            if cache.isEmpty || lastCallPrepare {
-                DispatchQueue.main.async {
-                    self.calculateCollectionViewHeaderAndContent()
-                }
-                lastCallPrepare = false
-            }
-        }
-    }
-    
-    private func calculateCollectionViewHeaderAndContent() {
         guard let collectionView = self.collectionView, collectionView.numberOfSections > 0 else {
             cache = [:]
             headerCache = [:]
