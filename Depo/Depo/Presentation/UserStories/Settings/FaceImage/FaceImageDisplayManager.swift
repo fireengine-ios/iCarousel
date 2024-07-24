@@ -130,5 +130,11 @@ final class FaceImageDisplayManager: NSObject {
             /// facebook switch is on
             /// hide button and second text
         }
+        
+        let isFacebookEnable = FirebaseRemoteConfig.shared.fetchFacebookMenuEnable
+        if !isFacebookEnable {
+            facebookView.isHidden = true
+            facebookBackView.isHidden = true
+        }
     }
 }
