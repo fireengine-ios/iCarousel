@@ -96,7 +96,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         collectionView.addInteraction(UIDropInteraction(delegate: self))
 
         setDefaultNavigationHeaderActions()
-        headerContainingViewController?.isHeaderBehindContent = true
+        headerContainingViewController?.isHeaderBehindContent = false
         headerContainingViewController?.statusBarBackgroundViewStyle = .plain(color: .background)
         
         // Handle parsed deeplink if any
@@ -122,21 +122,14 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
                 }
             }
         }
+        
+        if accountInfo?.emailVerified == false {
+            presentEmailVerificationPopUp()
+        }
  
         storageVars.isUserFirstLoggedIn = false
         canNotificationPopupRaiseUp()
         setupAutoSyncTriggering()
-        
-        setPrepairingTimer()
-    }
-    
-    private func setPrepairingTimer() {
-        let time = Date()
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "HH:ss"
-        timeFormatter.timeStyle = .short
-        let stringDate = timeFormatter.string(from: time)
-        storageVars.isPhotosScreenTime = time
     }
     
     private func setupAutoSyncTriggering() {
@@ -163,7 +156,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
 
     @objc private func fullReload() {
-        collectionViewManager.collectionViewLayout.cache = [:]
         fetchAndReload()
         stopRefresher()
     }
@@ -223,7 +215,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     // MARK: - setup
     
     private func performFetch() {
-        collectionViewManager.collectionViewLayout.cache = [:]
         dataSource.setupOriginalPredicates(fileTypes: fileTypes) { [weak self] in
             DispatchQueue.main.async {
                 self?.fetchAndReload()
@@ -584,6 +575,11 @@ extension PhotoVideoController: UIScrollViewDelegate {
         let lastIndexPath = IndexPath(row: lastRowNumber, section: lastSectionNumber)
         
         return indexPath == lastIndexPath
+    }
+    
+    private func presentEmailVerificationPopUp() {
+        let popup = RouterVC().verifyEmailPopUp
+        present(popup, animated: true)
     }
     
     func presentRecoveryEmailVerificationPopUp() {

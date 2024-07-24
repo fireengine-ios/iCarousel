@@ -100,15 +100,15 @@ final class GalleryCollectionViewLayout: UICollectionViewLayout {
         timeFormatter.dateFormat = "HH:ss"
         timeFormatter.timeStyle = .short
         _ = timeFormatter.string(from: time)
-        userDefaults.isPhotosScreenTime = time
+        //userDefaults.isPhotosScreenTime = time
     }
     
     private func diffInTime() -> TimeInterval {
-        let timex = userDefaults.isPhotosScreenTime
+        //let timex = userDefaults.isPhotosScreenTime
         let currentTime = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:ss"
-        let diffinSeconds = currentTime.timeIntervalSinceReferenceDate - (timex as AnyObject).timeIntervalSinceReferenceDate
+        let diffinSeconds = TimeInterval()
         return diffinSeconds
     }
     
@@ -337,7 +337,7 @@ final class GalleryCollectionViewLayout: UICollectionViewLayout {
         }
 
         let headerFrame = attributes.frame
-        let pinOffset = collectionView.contentOffset.y + layoutGuide.layoutFrame.origin.y + headerFrame.height
+        let pinOffset = collectionView.contentOffset.y + layoutGuide.layoutFrame.origin.y
         let minY = firstItemAttributes.frame.minY - headerFrame.height
         let maxY = lastItemAttributes.frame.maxY - headerFrame.height
         let y = min(max(pinOffset, minY), maxY)
