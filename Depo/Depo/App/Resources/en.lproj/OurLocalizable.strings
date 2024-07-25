@@ -1527,7 +1527,7 @@
 "snackbar_trash_bin" = "Trash Bin";
 "snackbar_hidden_bin" = "Hidden Bin";
 "analyze_history_delete_success" = "%d item(s) deleted";
-"added_to_favorites_message" = "Added to favourites";
+"added_to_favorites_message" = "Added to favorites";
 "removed_from_favorites" = "Removed from favorites";
 "added_to_album" = "Added to album";
 "downloaded_files" = "%d file(s) downloaded";
@@ -1902,7 +1902,7 @@
 "container_shared_files" = "Shared By Me";
 "container_document" = "Document";
 "container_music" = "Music";
-"container_favourite" = "Favourites";
+"container_favourite" = "Favorites";
 "container_trashed" = "Trash Bin";
 
 /*Chatbot*/
