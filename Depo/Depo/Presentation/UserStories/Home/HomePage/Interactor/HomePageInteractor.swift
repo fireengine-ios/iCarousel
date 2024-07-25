@@ -193,13 +193,12 @@ final class HomePageInteractor: HomePageInteractorInput {
                 self?.output.stopRefresh()
                 switch result {
                 case .success(let response):
-                                       
-                    self?.filterCardsData(cards: response)
-                    
-                    if let currentSegment = self?.currentSegment {
-                        self?.updateCollectionView(for: currentSegment)
-                    }
-                    
+//                    self?.filterCardsData(cards: response)
+//                    if let currentSegment = self?.currentSegment {
+//                        self?.updateCollectionView(for: currentSegment)
+//                    }
+                    self?.output.didObtainHomeCards(response)
+                    self?.fillCollectionView(isReloadAll: true)
                 case .failed(let error):
                     DispatchQueue.toMain {
                         self?.output.didObtainError(with: error.description, isNeedStopRefresh: true)
