@@ -57,16 +57,17 @@ final class HomePageInteractor: HomePageInteractorInput {
             storageVars.publicSharedItemsToken = nil
         }
         
-        getCampaignsScene {  [weak self] isCampaignsAvailable in
-            guard let self = self else { return }
-            if isCampaignsAvailable {
-                self.output.showSegmentControl()
-                self.getAllCardsForHomePage()
-            } else {
+        // v32 campaign remove
+//        getCampaignsScene {  [weak self] isCampaignsAvailable in
+//            guard let self = self else { return }
+//            if isCampaignsAvailable {
+//                self.output.showSegmentControl()
+//                self.getAllCardsForHomePage()
+//            } else {
                 self.output.hideSegmentControl()
                 self.callRemainingAPIs()
-            }
-        }
+//            }
+//        }
     }
 
     
@@ -87,19 +88,20 @@ final class HomePageInteractor: HomePageInteractorInput {
     }
     
     func needRefresh() {
-        getCampaignsScene { [weak self] isCampaignsAvailable in
-            guard let self = self else { return }
-            if isCampaignsAvailable {
-                self.output.showSegmentControl()
-                self.getAllCardsForHomePage()
-            } else {
+        // v32 campaign remove
+//        getCampaignsScene { [weak self] isCampaignsAvailable in
+//            guard let self = self else { return }
+//            if isCampaignsAvailable {
+//                self.output.showSegmentControl()
+//                self.getAllCardsForHomePage()
+//            } else {
                 self.homeCardsLoaded = false
                 self.output.hideSegmentControl()
                 self.getCampaignStatus()
                 self.getPremiumCardInfo(loadStatus: .reloadAll)
                 self.getAllCardsForHomePage()
-            }
-        }
+//            }
+//        }
     }
     
     func updateLocalUserDetail() {
@@ -209,7 +211,6 @@ final class HomePageInteractor: HomePageInteractorInput {
     
     private func updateCollectionView(for segment: SegmentType) {
         self.currentSegment = segment
-        print("⚠️⚠️", self.currentSegment)
         switch currentSegment {
         case .tools:
             self.output.updateCollectionView(with: toolsCards)
@@ -218,7 +219,6 @@ final class HomePageInteractor: HomePageInteractorInput {
         }
     }
 
-    
      func filterCardsData(cards: [HomeCardResponse]) {
         toolsCards = cards.filter {
             guard let type = $0.type else { return false }
@@ -230,16 +230,6 @@ final class HomePageInteractor: HomePageInteractorInput {
                 return false
             }
         }
-        
-//        campaignsCards = cards.filter {
-//            guard let type = $0.type else { return false }
-//            switch type {
-//            case .launchCampaign, .campaign, .newCampaign:
-//                return true
-//            default:
-//                return false
-//            }
-//        }
     }
     
     private func getCampaignsScene(completion: @escaping (Bool) -> Void) {
@@ -247,9 +237,7 @@ final class HomePageInteractor: HomePageInteractorInput {
             guard let self = self else { return }
             switch result {
             case .success(let response):
-                
-                print("⚠️", response)
-                
+                                
                 self.campaignsCards = HomeCardResponse.shared.convertCampaignsToHomeCardResponses(response)
                 
                 let isAvailable = !response.isEmpty
