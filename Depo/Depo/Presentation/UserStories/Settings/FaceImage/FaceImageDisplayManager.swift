@@ -135,6 +135,7 @@ final class FaceImageDisplayManager: NSObject {
         if !isFacebookEnable {
             facebookView.isHidden = true
             facebookBackView.isHidden = true
+            facebookImportButton.isHidden = true
         }
     }
 }
