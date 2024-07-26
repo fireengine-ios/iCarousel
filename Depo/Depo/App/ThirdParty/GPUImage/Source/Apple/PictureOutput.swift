@@ -44,44 +44,88 @@ public class PictureOutput: ImageConsumer {
                 try imageData.write(to: self.url, options:.atomic)
             } catch {
                 // TODO: Handle this better
-                print("WARNING: Couldn't save image with error:\(error)")
+                print("⚠️ WARNING: Couldn't save image with error:\(error)")
             }
         }
     }
     
     // TODO: Replace with texture caches
-    func cgImageFromFramebuffer(_ framebuffer:Framebuffer) -> CGImage {
-        let renderFramebuffer = sharedImageProcessingContext.framebufferCache.requestFramebufferWithProperties(orientation:framebuffer.orientation, size:framebuffer.size)
+    
+    func cgImageFromFramebuffer(_ framebuffer: Framebuffer) -> CGImage? {
+        let renderFramebuffer = sharedImageProcessingContext.framebufferCache.requestFramebufferWithProperties(orientation: framebuffer.orientation, size: framebuffer.size)
         renderFramebuffer.lock()
         renderFramebuffer.activateFramebufferForRendering()
         clearFramebufferWithColor(Color.red)
-        renderQuadWithShader(sharedImageProcessingContext.passthroughShader, uniformSettings:ShaderUniformSettings(), vertexBufferObject:sharedImageProcessingContext.standardImageVBO, inputTextures:[framebuffer.texturePropertiesForOutputRotation(.noRotation)])
+        renderQuadWithShader(sharedImageProcessingContext.passthroughShader, uniformSettings: ShaderUniformSettings(), vertexBufferObject: sharedImageProcessingContext.standardImageVBO, inputTextures: [framebuffer.texturePropertiesForOutputRotation(.noRotation)])
         framebuffer.unlock()
         
         let imageByteSize = Int(framebuffer.size.width * framebuffer.size.height * 4)
         let data = UnsafeMutablePointer<UInt8>.allocate(capacity: imageByteSize)
+        
+        print("⚠️ Framebuffer size: \(framebuffer.size.width) x \(framebuffer.size.height)")
+
+        var framebufferBinding: GLint = 0
+        glGetIntegerv(GLenum(GL_FRAMEBUFFER_BINDING), &framebufferBinding)
+        print("⚠️ Current framebuffer binding: \(framebufferBinding)")
+
         glReadPixels(0, 0, framebuffer.size.width, framebuffer.size.height, GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE), data)
+        
+        let glError = glGetError()
+        if glError != GL_NO_ERROR {
+            print("⚠️ OpenGL Error: \(glError)")
+            data.deallocate()
+            renderFramebuffer.unlock()
+            return nil
+        }
+
         renderFramebuffer.unlock()
-        guard let dataProvider = CGDataProvider(dataInfo:nil, data:data, size:imageByteSize, releaseData: dataProviderReleaseCallback) else {fatalError("Could not allocate a CGDataProvider")}
+        
+        guard let dataProvider = CGDataProvider(dataInfo: nil, data: data, size: imageByteSize, releaseData: dataProviderReleaseCallback) else {
+            print("⚠️ Could not allocate a CGDataProvider")
+            data.deallocate()
+            return nil
+        }
+        
         let defaultRGBColorSpace = CGColorSpaceCreateDeviceRGB()
-        return CGImage(width:Int(framebuffer.size.width), height:Int(framebuffer.size.height), bitsPerComponent:8, bitsPerPixel:32, bytesPerRow:4 * Int(framebuffer.size.width), space:defaultRGBColorSpace, bitmapInfo:CGBitmapInfo() /*| CGImageAlphaInfo.Last*/, provider:dataProvider, decode:nil, shouldInterpolate:false, intent:.defaultIntent)!
+        
+        guard let cgImage = CGImage(
+            width: Int(framebuffer.size.width),
+            height: Int(framebuffer.size.height),
+            bitsPerComponent: 8,
+            bitsPerPixel: 32,
+            bytesPerRow: 4 * Int(framebuffer.size.width),
+            space: defaultRGBColorSpace,
+            bitmapInfo: CGBitmapInfo(),
+            provider: dataProvider,
+            decode: nil,
+            shouldInterpolate: false,
+            intent: .defaultIntent
+        ) else {
+            print("⚠️ CGImage creation failed")
+            return nil
+        }
+        
+        return cgImage
     }
     
-    public func newFramebufferAvailable(_ framebuffer:Framebuffer, fromSourceIndex:UInt) {
+    public func newFramebufferAvailable(_ framebuffer: Framebuffer, fromSourceIndex: UInt) {
         if keepImageAroundForSynchronousCapture {
             storedFramebuffer?.unlock()
             storedFramebuffer = framebuffer
         }
         
         if let imageCallback = imageAvailableCallback {
-            let cgImageFromBytes = cgImageFromFramebuffer(framebuffer)
+            guard let cgImageFromBytes = cgImageFromFramebuffer(framebuffer) else {
+                print("⚠️ Failed to create CGImage from framebuffer")
+                return
+            }
             
             // TODO: Let people specify orientations
-#if canImport(UIKit)
-            let image = UIImage(cgImage:cgImageFromBytes, scale:1.0, orientation:.up)
-#else
-            let image = NSImage(cgImage:cgImageFromBytes, size:NSZeroSize)
-#endif
+    #if canImport(UIKit)
+            let image = UIImage(cgImage: cgImageFromBytes, scale: 1.0, orientation: .up)
+    #else
+            let image = NSImage(cgImage: cgImageFromBytes, size: NSZeroSize)
+    #endif
             
             imageCallback(image)
             
@@ -91,22 +135,25 @@ public class PictureOutput: ImageConsumer {
         }
         
         if let imageCallback = encodedImageAvailableCallback {
-            let cgImageFromBytes = cgImageFromFramebuffer(framebuffer)
-            let imageData:Data
+            guard let cgImageFromBytes = cgImageFromFramebuffer(framebuffer) else {
+                print("⚠️ Failed to create CGImage from framebuffer")
+                return
+            }
+            let imageData: Data
             
-#if canImport(UIKit)
-            let image = UIImage(cgImage:cgImageFromBytes, scale:1.0, orientation:.up)
+    #if canImport(UIKit)
+            let image = UIImage(cgImage: cgImageFromBytes, scale: 1.0, orientation: .up)
             switch encodedImageFormat {
                 case .png: imageData = image.pngData()! // TODO: Better error handling here
                 case .jpeg: imageData = image.jpegData(compressionQuality: 0.8)! // TODO: Be able to set image quality
             }
-#else
-            let bitmapRepresentation = NSBitmapImageRep(cgImage:cgImageFromBytes)
+    #else
+            let bitmapRepresentation = NSBitmapImageRep(cgImage: cgImageFromBytes)
             switch encodedImageFormat {
-                case .png: imageData = bitmapRepresentation.representation(using: .png, properties: [NSBitmapImageRep.PropertyKey(rawValue: ""):""])!
-                case .jpeg: imageData = bitmapRepresentation.representation(using: .jpeg, properties: [NSBitmapImageRep.PropertyKey(rawValue: ""):""])!
+                case .png: imageData = bitmapRepresentation.representation(using: .png, properties: [:])!
+                case .jpeg: imageData = bitmapRepresentation.representation(using: .jpeg, properties: [:])!
             }
-#endif
+    #endif
 
             imageCallback(imageData)
             
@@ -122,7 +169,9 @@ public class PictureOutput: ImageConsumer {
         sharedImageProcessingContext.runOperationSynchronously{
             guard let currentFramebuffer = storedFramebuffer else { fatalError("Synchronous access requires keepImageAroundForSynchronousCapture to be set to true") }
             
-            let cgImageFromBytes = cgImageFromFramebuffer(currentFramebuffer)
+            guard let cgImageFromBytes = cgImageFromFramebuffer(currentFramebuffer) else {
+                return
+            }
             outputImage = UIImage(cgImage:cgImageFromBytes, scale:1.0, orientation:.up)
         }
         
