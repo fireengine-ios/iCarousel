@@ -17,6 +17,7 @@ final class YearsView: UIView {
     private var labels = [UILabel]()
     private var labelsOffsetRatio = [CGFloat]()
     private var selfWidth: CGFloat = 85
+    private var headerHeight = 50.0
     
     private let lock = NSLock()
     
@@ -83,8 +84,8 @@ final class YearsView: UIView {
         }
 
         frame.origin = CGPoint(x: scrollView.frame.width - selfWidth,
-                               y: scrollView.contentOffset.y + scrollView.adjustedContentInset.top)
-        frame.size = CGSize(width: selfWidth, height: scrollView.frame.height - (scrollView.adjustedContentInset.top + scrollView.adjustedContentInset.bottom))
+                               y: scrollView.contentOffset.y + scrollView.adjustedContentInset.top + headerHeight)
+        frame.size = CGSize(width: selfWidth, height: scrollView.frame.height - (scrollView.adjustedContentInset.top + scrollView.adjustedContentInset.bottom) - headerHeight)
     }
     
     override func layoutSubviews() {

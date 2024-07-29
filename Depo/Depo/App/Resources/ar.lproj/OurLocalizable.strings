@@ -2301,12 +2301,12 @@ then {11,99 TRY/Month}*/
 "gamification_package_rule" = "Buy Package";
 "gamification_raffle_info" = "Campaign Details";
 "gamification_raffle_draw" = "Click for campaign conditions.";
-"gamification_raffle_summary" = "See Raffle Summary";
+"gamification_raffle_summary" = "Raffle Summary";
 "gamification_event_not_trigerred" = "This feature has not been used yet.Try now!";
 "gamification_event_trigger_count" = "You Have %d Raffle Right(s)";
 "gamification_event_completed" = "You have completed your rights this %@.";
 "gamification_total_count" = "You Won a Total of %d Raffle Right(s).";
-"gamification_campaign_conditions" = "Campaign Details";
+"gamification_campaign_conditions" = "Campaign Conditions";
 "gamification_rules" = "Raffle Eligibility";
 "gamification_campaign_policy_title" = "Campaign Participation Conditions";
 "gamification_raffle_win" = "";
@@ -2338,3 +2338,11 @@ then {11,99 TRY/Month}*/
 "gamification_total_earn_point_2" = "%d raffle right(s)";
 "right" = "";
 "rights" = "";
+"gamification_raffle_call" = "Use the features below every month to increase your chances of winning the raffle.";
+
+/*Fuzzy*/
+"discover_tools" = "أدوات";
+
+/*Fuzzy*/
+"discover_campaigns" = "الحملات";
+"max_files_select_error" = "";

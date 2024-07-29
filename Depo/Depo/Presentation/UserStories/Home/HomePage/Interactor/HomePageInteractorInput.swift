@@ -27,4 +27,10 @@ protocol HomePageInteractorInput {
     func updateMobilePaymentPermissionFeedback()
     
     func changePermissionsAllowed(type: PermissionType, isApproved: Bool)
+    
+    var toolsCards: [HomeCardResponse] { get }
+    
+    var campaignsCards: [HomeCardResponse] { get }
+    
+    func updateCurrentSegment(_ segment: SegmentType)
 }

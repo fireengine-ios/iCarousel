@@ -129,7 +129,6 @@ class SimpleUpload: UploadRequestParametrs {
             HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,
             HeaderConstant.objecMetaDevice       : Device.deviceId ?? "",
             HeaderConstant.XObjectMetaFileName   : encodedName,
-            HeaderConstant.XObjectMetaFavorites  : isFavorite ? "true" : "false",
             HeaderConstant.XObjectMetaParentUuid : rootFolder,
             HeaderConstant.XObjectMetaSpecialFolder : uploadTo.rawValue,
             HeaderConstant.Expect                : "100-continue",
@@ -172,6 +171,36 @@ class SimpleUpload: UploadRequestParametrs {
         if item.asset?.playbackStyle == .imageAnimated {
             header = header + [
                 HeaderConstant.XObjectMetaFolderLabel: "ANIMATIONS"
+            ]
+        }
+        
+        if item.asset?.mediaSubtypes == .photoPanorama {
+            header = header + [
+                HeaderConstant.XObjectMetaFolderLabel: "PANORAMA"
+            ]
+        }
+        
+        if item.asset?.mediaSubtypes == .videoTimelapse {
+            header = header + [
+                HeaderConstant.XObjectMetaFolderLabel: "TIME-LAPSE"
+            ]
+        }
+        
+        if item.asset?.isFavorite ?? false {
+            header = header + [
+                HeaderConstant.XObjectMetaFavorites  : "true"
+            ]
+        } else {
+            header = header + [
+                HeaderConstant.XObjectMetaFavorites  : "false"
+            ]
+        }
+        
+        let smartAssets = PHAssetCollection.selfieAlbums
+        let asd = smartAssets.first?.allAssets.filter { $0.localIdentifier == item.getLocalID() }
+        if !(asd?.isEmpty ?? false) {
+            header = header + [
+                HeaderConstant.XObjectMetaFolderLabel: "SELFIES"
             ]
         }
         

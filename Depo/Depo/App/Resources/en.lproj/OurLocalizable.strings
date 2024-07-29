@@ -1452,7 +1452,7 @@
 "mobile_payment_open_popup_description_bold_range" = "532 532";
 "mobile_payment_open_popup_later_button" = "Later";
 "mobile_payment_open_popup_continue_button" = "Continue";
-"we_recommend" = "Recommended for You";
+"we_recommend" = "Recommended for You!";
 "show_more" = "Show features";
 "show_less" = "Show less";
 "face_recognition_package_description" = "+ Unlimited Face&Image Recognition";
@@ -1527,7 +1527,7 @@
 "snackbar_trash_bin" = "Trash Bin";
 "snackbar_hidden_bin" = "Hidden Bin";
 "analyze_history_delete_success" = "%d item(s) deleted";
-"added_to_favorites_message" = "Added to favourites";
+"added_to_favorites_message" = "Added to favorites";
 "removed_from_favorites" = "Removed from favorites";
 "added_to_album" = "Added to album";
 "downloaded_files" = "%d file(s) downloaded";
@@ -1902,7 +1902,7 @@
 "container_shared_files" = "Shared By Me";
 "container_document" = "Document";
 "container_music" = "Music";
-"container_favourite" = "Favourites";
+"container_favourite" = "Favorites";
 "container_trashed" = "Trash Bin";
 
 /*Chatbot*/
@@ -2353,12 +2353,12 @@ then {11,99 TRY/Month}*/
 "gamification_package_rule" = "Buy Package";
 "gamification_raffle_info" = "Campaign Details";
 "gamification_raffle_draw" = "Click for campaign conditions.";
-"gamification_raffle_summary" = "See Raffle Summary";
+"gamification_raffle_summary" = "Raffle Summary";
 "gamification_event_not_trigerred" = "This feature has not been used yet.Try now!";
 "gamification_event_trigger_count" = "You Have %d Raffle Right(s)";
 "gamification_event_completed" = "You have completed your rights this %@.";
 "gamification_total_count" = "You Won a Total of %d Raffle Right(s).";
-"gamification_campaign_conditions" = "Campaign Details";
+"gamification_campaign_conditions" = "Campaign Conditions";
 "gamification_rules" = "Raffle Eligibility";
 "gamification_campaign_policy_title" = "Campaign Participation Conditions";
 "gamification_raffle_win" = "";
@@ -2396,3 +2396,11 @@ then {11,99 TRY/Month}*/
 "gamification_total_earn_point_2" = "%d raffle right(s)";
 "right" = "right";
 "rights" = "rights";
+"gamification_raffle_call" = "Use the features below every month to increase your chances of winning the raffle.";
+
+/*Fuzzy*/
+"discover_tools" = "Tools";
+
+/*Fuzzy*/
+"discover_campaigns" = "Campaigns";
+"max_files_select_error" = "You can select only %d files/photos/videos.";

@@ -119,10 +119,15 @@ final class PhotoVideoCell: UICollectionViewCell {
         accessibilityLabel = mediaItem.nameValue ?? ""
         favoriteImageView.isHidden = !mediaItem.favoritesValue
 
-        if mediaItem.isLocalItemValue, mediaItem.fileSizeValue < NumericConstants.fourGigabytes {
-            update(syncStatus: .notSynced)
-        } else {
+        let userDefaultsVars = UserDefaultsVars()
+        if userDefaultsVars.isSyncProgress {
             update(syncStatus: .regular)
+        } else {
+            if mediaItem.isLocalItemValue, mediaItem.fileSizeValue < NumericConstants.fourGigabytes {
+                update(syncStatus: .notSynced)
+            } else {
+                update(syncStatus: .regular)
+            }
         }
         
         switch currentFileType {

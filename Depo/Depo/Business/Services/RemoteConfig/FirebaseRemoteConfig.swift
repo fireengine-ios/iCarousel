@@ -35,6 +35,7 @@ private struct RemoteConfigKeys {
     static let displayConnectAccount = "display_connect_account"
     static let autosyncStartDuration = "autosync_start_duration"
     static let resignupEnabled = "resignup_enabled"
+    static let maxSelectCount = "max_select_count"
 }
 
 final class FirebaseRemoteConfig {
@@ -54,10 +55,15 @@ final class FirebaseRemoteConfig {
         remoteConfig.setDefaults(fromPlist: "FirebaseRemoteConfigDefaults")
     }
     
+    var maxSelectCount: Int {
+        let key = RemoteConfigKeys.maxSelectCount
+        return remoteConfig.configValue(forKey: key).numberValue.intValue
+    }
+    
     var resignupEnabled: Bool {
-          let key = RemoteConfigKeys.resignupEnabled
-          return remoteConfig.configValue(forKey: key).boolValue
-      }
+        let key = RemoteConfigKeys.resignupEnabled
+        return remoteConfig.configValue(forKey: key).boolValue
+    }
     
     var autosyncStartDuration: Double {
         let key = RemoteConfigKeys.autosyncStartDuration

@@ -122,6 +122,10 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
                 }
             }
         }
+        
+        if accountInfo?.emailVerified == false {
+            presentEmailVerificationPopUp()
+        }
  
         storageVars.isUserFirstLoggedIn = false
         canNotificationPopupRaiseUp()
@@ -437,7 +441,7 @@ extension PhotoVideoController: UIScrollViewDelegate {
 //        assetsFileCacheManager.updateCachedAssets(on: collectionView, itemProviderClosure: itemProviderClosure)
         updateScrollBarTextIfNeed()
         scrollBarManager.scrollViewDidScroll()
-        scrollBarManager.hideScrollBarIfNeed(for: scrollView.contentOffset.y)
+        scrollBarManager.hideScrollBarIfNeed(for: scrollBarManager.scrollBar.originalTopInset)
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -573,6 +577,11 @@ extension PhotoVideoController: UIScrollViewDelegate {
         return indexPath == lastIndexPath
     }
     
+    private func presentEmailVerificationPopUp() {
+        let popup = RouterVC().verifyEmailPopUp
+        present(popup, animated: true)
+    }
+    
     func presentRecoveryEmailVerificationPopUp() {
         let popup = RouterVC().verifyRecoveryEmailPopUp
         //popup.delegate = self
@@ -637,6 +646,18 @@ extension PhotoVideoController: UICollectionViewDelegate {
         if dataSource.isSelectingMode {
             updateSelection(cell: cell)
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        let maxSelectCount = FirebaseRemoteConfig.shared.maxSelectCount
+        let isMaxSelect = (collectionView.indexPathsForSelectedItems?.count ?? 0) < maxSelectCount
+        if !isMaxSelect {
+            //popup
+            let text = String(format: localized(.maxFilesSelectError), maxSelectCount)
+            let vc = PopUpController.with(title: TextConstants.warning, message: text, image: .error, buttonTitle: TextConstants.ok)
+            vc.open()
+        }
+        return isMaxSelect
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {

@@ -252,6 +252,7 @@ class ItemOperationManager: NSObject {
     private var currentDownloadingProgress: Float = 0
     
     private let serialItemOperationQueue = DispatchQueue(label: DispatchQueueLabels.serialStopUpdateItemManager)
+    private let userDefaultsVars = UserDefaultsVars()
     
     func startUpdateView(view: ItemOperationManagerViewProtocol) {
         views.add(view)
@@ -458,6 +459,7 @@ class ItemOperationManager: NSObject {
     
     func syncFinished() {
 //        DispatchQueue.main.async {
+        userDefaultsVars.isSyncProgress = false
         currentUploadingObject = nil
         views.invoke { $0.syncFinished() }
 //        }

@@ -45,8 +45,9 @@ final class HomePagePresenter: HomePageModuleInput {
         
         dispatchGroupReasons.remove(at: index)
         presentPopUpsGroup?.leave()
-    }
+    }    
     
+    private var currentSegment: SegmentType = .tools
 }
 
 // MARK: - BaseFilesGreedModuleOutput
@@ -66,6 +67,11 @@ extension HomePagePresenter: BaseFilesGreedModuleOutput {
 
 // MARK: - HomePageInteractorOutput
 extension HomePagePresenter: HomePageInteractorOutput {
+    
+    func updateCollectionView(with items: [HomeCardResponse]) {
+        view.updateCollectionView(with: items.filter { $0.details != nil })
+    }
+    
     func publicShareSaveStorageFail() {
         router.presentFullQuotaPopup()
     }
@@ -93,6 +99,31 @@ extension HomePagePresenter: HomePageInteractorOutput {
     }
     
     func stopRefresh() {
+        view.stopRefresh()
+    }
+    
+    func showSegmentControl() {
+        view.showSegmentControl()
+    }
+
+    func hideSegmentControl() {
+        view.hideSegmentControl()
+    }
+    
+    func updateCurrentSegment(_ segment: SegmentType) {
+           self.currentSegment = segment
+           interactor.updateCurrentSegment(segment)
+       }
+    
+    func updateCollectionView(for segment: SegmentType) {
+        print("⚠️⚠️⚠️", self.currentSegment)
+        self.currentSegment = segment
+        switch segment {
+        case .tools:
+            view.updateCollectionView(with: interactor.toolsCards)
+        case .campaigns:
+            view.updateCollectionView(with: interactor.campaignsCards)
+        }
         view.stopRefresh()
     }
     

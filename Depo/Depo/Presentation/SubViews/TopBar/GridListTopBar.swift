@@ -25,7 +25,7 @@ class GridListTopBar: ViewController {
     }
     
     @IBOutlet fileprivate weak var gridListButton: UIButton!
-    @IBOutlet private weak var moreButton: UIButton!
+    @IBOutlet public weak var moreButton: UIButton!
     @IBOutlet private weak var middleLabel: UILabel! {
         willSet {
             newValue.textColor = AppColor.label.color

@@ -344,10 +344,11 @@ extension BottomDetailViewAnimationManager {
 extension BottomDetailViewAnimationManager {
         
     func handleSwipe(recognizer: UISwipeGestureRecognizer) {
-        switch (recognizer.state, recognizer.direction) {
-        case (.ended, .left):
+        guard recognizer.state == .ended else { return }
+        switch recognizer.direction {
+        case .left:
             scrollLeft()
-        case (.ended, .right):
+        case .right:
             scrollRight()
         default:
             return
@@ -374,8 +375,10 @@ extension BottomDetailViewAnimationManager {
             return
         }
         
-        let cell = collectionView.visibleCells.first as? PhotoVideoDetailCell
-        cell?.delegate = self
+        if let cell = collectionView.visibleCells.first as? PhotoVideoDetailCell {
+            cell.delegate = self
+        }
+        
         let offsetY = collectionView.contentOffset.y
         selectedIndex = index
         

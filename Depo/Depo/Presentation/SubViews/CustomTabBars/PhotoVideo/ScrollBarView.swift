@@ -71,7 +71,7 @@ final class ScrollBarView: UIView {
     private let handleHeight: CGFloat = scrollBarHandleImage.size.height
     private var horizontalOffset: CGFloat = 0
     
-    private var originalTopInset: CGFloat = 0
+    var originalTopInset: CGFloat = 0
     private var yOffset: CGFloat = 0
     
     private var isInsetForLargeTitles = false
@@ -95,6 +95,7 @@ final class ScrollBarView: UIView {
     private let animationDuration = 0.3
     private let hideAnimationDelay = 1.0
     private var cellWidth: CGFloat = 100
+    private var headerHeight = 50.0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -218,7 +219,7 @@ final class ScrollBarView: UIView {
         
         var frame = CGRect.zero
         frame.size.width = scrollBarWidth
-        frame.size.height = scrollViewFrame.height - (scrollView.adjustedContentInset.top + scrollView.adjustedContentInset.bottom) //isDragging ? originalHeight : height
+        frame.size.height = scrollViewFrame.height - (scrollView.adjustedContentInset.top + scrollView.adjustedContentInset.bottom) - headerHeight //isDragging ? originalHeight : height
         frame.origin.x = scrollViewFrame.width - (edgeInset + halfWidth) - scrollView.safeAreaInsets.right
         
         frame.origin.x = min(frame.origin.x, scrollViewFrame.width - scrollBarWidth)
@@ -231,7 +232,7 @@ final class ScrollBarView: UIView {
 //            frame.origin.y += largeTitleDelta
 //        }
         
-        frame.origin.y = scrollView.contentOffset.y + scrollView.adjustedContentInset.top
+        frame.origin.y = scrollView.contentOffset.y + scrollView.adjustedContentInset.top + headerHeight
         
         self.frame = frame
     }
@@ -375,12 +376,12 @@ final class ScrollBarView: UIView {
         var contentInset = scrollView.adjustedContentInset
         contentInset.top = originalTopInset
         
-        let totalScrollSize = contentSize.height + contentInset.bottom - scrollView.frame.height //+ contentInset.top
+        let totalScrollSize = contentSize.height + contentInset.bottom - scrollView.frame.height + contentInset.top
         var scrollOffset = totalScrollSize * positionRatio
         scrollOffset -= contentInset.top
         
         var contentOffset = scrollView.contentOffset
-        contentOffset.y = scrollOffset + contentInset.top
+        contentOffset.y = scrollOffset
         
         
         scrollView.setContentOffset(contentOffset, animated: false)

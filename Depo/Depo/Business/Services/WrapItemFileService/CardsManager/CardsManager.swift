@@ -50,6 +50,8 @@ enum OperationType: String {
     case drawCampaignApply          = "DRAW_CAMPAIGN_APPLY"
     case garenta                    = "GARENTA"
     case newCampaign                = "NEW_CAMPAIGN"
+    case external                   = "EXTERNAL"
+    case campaignNew                = "CAMPAIGN_NEW"
 }
 
 typealias BlockObject = VoidHandler
@@ -459,6 +461,10 @@ class CardsManager: NSObject {
             cardView = GarentaCard.initFromNib()
         case .newCampaign:
             cardView = RaffleCard.initFromNib()
+        case .external:
+            cardView = ExternalCard.initFromNib()
+        case .campaignNew:
+            cardView = NewCampaignCard.initFromNib()
         }
         
         /// seems like duplicated logic "set(object:".

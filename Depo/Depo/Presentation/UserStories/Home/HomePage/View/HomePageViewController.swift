@@ -6,12 +6,31 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+enum SegmentType {
+    case tools
+    case campaigns
+}
+
 import UIKit
 
 final class HomePageViewController: BaseViewController {
-
+    
     //MARK: IBOutlet
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    private let segmentContainerView = UIView()
+    private let segmentStackView = UIStackView()
+    
+    private let stackView1Container = UIView()
+    private let stackView2Container = UIView()
+    
+    private let button1StackView = UIStackView()
+    private let button2StackView = UIStackView()
+    
+    private let button1 = UIButton(type: .system)
+    private let button2 = UIButton(type: .system)
+    
+    private let segmentStackEmptyView = UIView()
     
     //MARK: Properties
     var output: HomePageViewOutput!
@@ -25,7 +44,7 @@ final class HomePageViewController: BaseViewController {
     
     private var refreshControl = UIRefreshControl()
     private lazy var shareCardContentManager = ShareCardContentManager(delegate: self)
-
+    
     private var homepageIsActiveAndVisible: Bool {
         var result = false
         if let topController = navigationController?.topViewController, topController == self {
@@ -35,7 +54,9 @@ final class HomePageViewController: BaseViewController {
     }
     
     private var isGiftButtonEnabled = false
-
+    
+    private var currentSegment: SegmentType = .tools
+    
     //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,9 +72,13 @@ final class HomePageViewController: BaseViewController {
         configurateRefreshControl()
         
         showSpinner()
-
+        
         setDefaultNavigationHeaderActions()
-
+        
+        setupSegmentControl()
+        
+        segmentContainerView.isHidden = true
+        
         output.viewIsReady()
     }
     
@@ -61,11 +86,11 @@ final class HomePageViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         updateNavigationItemsState(state: true)
-                
+        
         if let searchController = navigationController?.topViewController as? SearchViewController {
             searchController.dismissController(animated: false)
         }
-
+        
         output.viewWillAppear()
     }
     
@@ -77,7 +102,7 @@ final class HomePageViewController: BaseViewController {
         homePageDataSource.isViewActive = true
         
         CardsManager.default.updateAllProgressesInCardsForView(view: homePageDataSource)
-
+        
         if homepageIsActiveAndVisible {
             configureNavBarActions()
         }
@@ -94,12 +119,135 @@ final class HomePageViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         homePageDataSource.isViewActive = false
-
+        
         hideSpotlightIfNeeded()
     }
     
     deinit {
         CardsManager.default.removeViewForNotification(view: homePageDataSource)
+    }
+    
+    // MARK: Segment Control Components
+    
+    private func setupSegmentControl() {
+            segmentContainerView.backgroundColor = ColorConstants.fileGreedCellColorSecondary
+            segmentContainerView.layer.cornerRadius = 20
+            segmentContainerView.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(segmentContainerView)
+            
+            segmentStackView.axis = .horizontal
+            segmentStackView.distribution = .fill
+            segmentStackView.alignment = .center
+            segmentStackView.spacing = 8
+            segmentStackView.translatesAutoresizingMaskIntoConstraints = false
+            
+            button1StackView.axis = .horizontal
+            button1StackView.distribution = .fill
+            button1StackView.alignment = .center
+            button1StackView.spacing = 2
+            button1StackView.translatesAutoresizingMaskIntoConstraints = false
+            
+            button2StackView.axis = .horizontal
+            button2StackView.distribution = .fill
+            button2StackView.alignment = .center
+            button2StackView.spacing = 2
+            button2StackView.translatesAutoresizingMaskIntoConstraints = false
+            
+            stackView1Container.layer.cornerRadius = 12
+            stackView1Container.backgroundColor = AppColor.settingsMyPackages.color
+            stackView1Container.translatesAutoresizingMaskIntoConstraints = false
+            
+            stackView2Container.layer.cornerRadius = 12
+            stackView2Container.backgroundColor = AppColor.settingsMyPackages.color
+            stackView2Container.translatesAutoresizingMaskIntoConstraints = false
+            
+            segmentStackEmptyView.backgroundColor = .clear
+            segmentStackEmptyView.translatesAutoresizingMaskIntoConstraints = false
+            
+            button1.setTitle(localized(.discoverTools), for: .normal)
+            button1.setTitleColor(AppColor.label.color, for: .normal)
+            button1.titleLabel?.font = .appFont(.medium, size: 14)
+            button1.addTarget(self, action: #selector(segmentButtonTapped(_:)), for: .touchUpInside)
+            
+            button2.setTitle(localized(.discoverCampaigns), for: .normal)
+            button2.setTitleColor(AppColor.label.color, for: .normal)
+            button2.titleLabel?.font = .appFont(.medium, size: 14)
+
+            button2.addTarget(self, action: #selector(segmentButtonTapped(_:)), for: .touchUpInside)
+            
+            segmentContainerView.addSubview(segmentStackView)
+            
+            button1StackView.addArrangedSubview(button1)
+
+            button2StackView.addArrangedSubview(button2)
+
+            stackView1Container.addSubview(button1StackView)
+            stackView2Container.addSubview(button2StackView)
+            
+            segmentStackView.addArrangedSubview(stackView1Container)
+            segmentStackView.addArrangedSubview(stackView2Container)
+            segmentStackView.addArrangedSubview(segmentStackEmptyView)
+        
+            NSLayoutConstraint.activate([
+                segmentContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+                segmentContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+                segmentContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+                segmentContainerView.heightAnchor.constraint(equalToConstant: 42),
+                
+                segmentStackView.topAnchor.constraint(equalTo: segmentContainerView.topAnchor, constant: 8),
+                segmentStackView.leadingAnchor.constraint(equalTo: segmentContainerView.leadingAnchor, constant: 8),
+                segmentStackView.trailingAnchor.constraint(equalTo: segmentContainerView.trailingAnchor, constant: -8),
+                segmentStackView.bottomAnchor.constraint(equalTo: segmentContainerView.bottomAnchor, constant: -8),
+                
+                button1StackView.topAnchor.constraint(equalTo: stackView1Container.topAnchor, constant: 8),
+                button1StackView.leadingAnchor.constraint(equalTo: stackView1Container.leadingAnchor, constant: 8),
+                button1StackView.trailingAnchor.constraint(equalTo: stackView1Container.trailingAnchor, constant: -8),
+                button1StackView.bottomAnchor.constraint(equalTo: stackView1Container.bottomAnchor, constant: -8),
+                
+                button2StackView.topAnchor.constraint(equalTo: stackView2Container.topAnchor, constant: 8),
+                button2StackView.leadingAnchor.constraint(equalTo: stackView2Container.leadingAnchor, constant: 8),
+                button2StackView.trailingAnchor.constraint(equalTo: stackView2Container.trailingAnchor, constant: -8),
+                button2StackView.bottomAnchor.constraint(equalTo: stackView2Container.bottomAnchor, constant: -8),
+            ])
+            
+            collectionView.contentInset = UIEdgeInsets(top: segmentContainerView.frame.height + 58, left: 0, bottom: 0, right: 0)
+            
+            updateSelectedSegment(index: 0)
+        }
+    
+    @objc private func segmentButtonTapped(_ sender: UIButton) {
+        if sender == button1 {
+            updateSelectedSegment(index: 0)
+            output.updateCollectionView(for: .tools)
+        } else if sender == button2 {
+            updateSelectedSegment(index: 1)
+            output.updateCollectionView(for: .campaigns)
+        }
+    }
+    
+    private func updateSelectedSegment(index: Int) {
+        switch index {
+        case 0:
+            self.stackView2Container.backgroundColor = .clear
+            self.stackView1Container.backgroundColor = AppColor.settingsMyPackages.color
+            self.currentSegment = .tools
+        case 1:
+            self.stackView1Container.backgroundColor = .clear
+            self.stackView2Container.backgroundColor = AppColor.settingsMyPackages.color
+            self.currentSegment = .campaigns
+        default:
+            break
+        }
+        output.updateCurrentSegment(currentSegment)
+    }
+    
+    func showSegmentControl() {
+        segmentContainerView.isHidden = false
+    }
+
+    func hideSegmentControl() {
+        segmentContainerView.isHidden = true
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
     func updateNavigationItemsState(state: Bool) {
@@ -111,14 +259,14 @@ final class HomePageViewController: BaseViewController {
             item.isEnabled = state
         }
     }
-
+    
     //MARK: Search
     func configureNavBarActions() {
         let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] _ in
             self?.updateNavigationItemsState(state: false)
             self?.output.showSearch(output: self)
         })
-
+        
         let setting = NavBarWithAction(navItem: NavigationBarList().settings, action: { [weak self] _ in
             self?.updateNavigationItemsState(state: false)
             self?.output.showSettings()
@@ -160,6 +308,7 @@ final class HomePageViewController: BaseViewController {
 
 extension HomePageViewController: HeaderContainingViewControllerChild {
     var scrollViewForHeaderTracking: UIScrollView? {
+        
         return collectionView
     }
 }
@@ -205,6 +354,12 @@ extension HomePageViewController: HomePageViewInput {
     
     func startSpinner() {
         showSpinner()
+    }
+    
+    func updateCollectionView(with items: [HomeCardResponse]) {
+        homePageDataSource.updateData(with: items)
+        
+        collectionView.reloadData()
     }
     
     //MARK: Spotlight

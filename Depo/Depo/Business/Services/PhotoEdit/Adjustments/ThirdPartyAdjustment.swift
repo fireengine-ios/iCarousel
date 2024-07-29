@@ -66,6 +66,8 @@ final class GPUAdjustment: ThirdPartyAdjustmentProtocol {
     
     
     func applyOn(image: UIImage, onFinished: @escaping ValueHandler<UIImage>) {
+        
+        debugLog("PHOTO EDIT: applyOn started")
 
         guard let cgImage = image.cgImage ?? getConvertedCGImage(image: image) else {
             debugLog("PHOTO EDIT: applyOn unable to get cgImage")
@@ -75,16 +77,29 @@ final class GPUAdjustment: ThirdPartyAdjustmentProtocol {
         
         let input = PictureInput(image: cgImage)
         
-        pictureOutput.imageAvailableCallback = onFinished
-        
-        //remove previous input
-        operation.removeSourceAtIndex(0)
-        
-        input --> operation
-        input.processImage(synchronously: true)
+        DispatchQueue.main.async {
+            self.pictureOutput.imageAvailableCallback = { outputImage in
+                debugLog("PHOTO EDIT: imageAvailableCallback called")
+                onFinished(outputImage)
+                self.cleanUp()
+            }
+            
+            // Remove previous input
+            self.operation.removeSourceAtIndex(0)
+            
+            input --> self.operation
+            input.processImage(synchronously: true)
+            
+            debugLog("PHOTO EDIT: applyOn completed")
+        }
     }
     
     deinit {
+        pictureOutput.imageAvailableCallback = nil
+        operation.removeAllTargets()
+    }
+    
+    private func cleanUp() {
         pictureOutput.imageAvailableCallback = nil
         operation.removeAllTargets()
     }

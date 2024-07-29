@@ -10,9 +10,10 @@ import UIKit
 
 final class PVViewerController: BaseViewController, NibInit {
     
-    static func with(item: Item) -> PVViewerController {
+    static func with(item: Item, action: PushNotificationAction? = .drawCampaign) -> PVViewerController {
         let controller = PVViewerController.initFromNib()
         controller.item = item
+        controller.action = action
         return controller
     }
     
@@ -26,6 +27,7 @@ final class PVViewerController: BaseViewController, NibInit {
     
     private var image: UIImage?
     private var item: Item?
+    private var action: PushNotificationAction?
     
     //MARK: - View lifecycle
     
@@ -88,7 +90,13 @@ final class PVViewerController: BaseViewController, NibInit {
     
     private func getBackButtonItem() -> BackButtonItem {
         BackButtonItem { [weak self] in
-            self?.hideView()
+            if self?.action == .generatedCollage || self?.action == .generatedAnimation {
+                self?.hideView()
+                let root = RouterVC()
+                root.openTabBarItem(index: .forYou)
+            } else {
+                self?.hideView()
+            }
         }
     }
     

@@ -57,6 +57,19 @@ extension PHAssetCollection {
         return albums
     }
     
+    static var selfieAlbums: [PHAssetCollection] {
+         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+             return []
+         }
+         
+         var albums = [PHAssetCollection]()
+         let fetchRequest = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumSelfPortraits, options: nil)
+         fetchRequest.enumerateObjects { collection, _ , _  in
+             albums.append(collection)
+         }
+         return albums
+     }
+    
     static func getAssets(for localIdentifiers: [String]) -> [PHAssetCollection] {
         var assets = [PHAssetCollection]()
         let fetchResult = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: localIdentifiers, options: nil)

@@ -18,6 +18,7 @@ protocol HomeCardsService {
     func updateItem(uuid: String, handler: @escaping (ResponseResult<WrapData>) -> Void)
     func getBestGroup(handler: @escaping (ResponseResult<BurstGroup>) -> Void)
     func getBestGroupWithId(with id: Int, handler: @escaping (ResponseResult<BurstGroupsWithId>) -> Void)
+    func getCampaigns(handler: @escaping (ResponseResult<[Campaign]>) -> Void)
 }
 
 final class HomeCardsServiceImp {
@@ -102,5 +103,13 @@ extension HomeCardsServiceImp: HomeCardsService {
             .request(RouteRequests.HomeCards.burstGroupFiles(for: id))
             .customValidate()
             .responseObject(handler)
+    }
+    
+    func getCampaigns(handler: @escaping (ResponseResult<[Campaign]>) -> Void) {
+        SessionManager
+         .customDefault
+         .request(RouteRequests.HomeCards.campaigns)
+         .customValidate()
+         .responseObject(handler)
     }
 }

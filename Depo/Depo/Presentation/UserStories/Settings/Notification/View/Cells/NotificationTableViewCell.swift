@@ -218,15 +218,15 @@ class NotificationTableViewCell: UITableViewCell {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8).activate()
         titleLabel.leadingAnchor.constraint(equalTo: cardImageView.trailingAnchor, constant: 16).activate()
-        titleLabel.trailingAnchor.constraint(equalTo: checkBox.leadingAnchor, constant: -16).activate()
-        titleLabel.heightAnchor.constraint(equalToConstant: 24).activate()
+        titleLabel.trailingAnchor.constraint(equalTo: checkBox.leadingAnchor, constant: -2).activate()
+        //titleLabel.heightAnchor.constraint(equalToConstant: 24).activate()
         
         containerView.addSubview(descriptionTextView)
         descriptionTextView.translatesAutoresizingMaskIntoConstraints = false
         descriptionTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).activate()
         descriptionTextView.leadingAnchor.constraint(equalTo: cardImageView.trailingAnchor, constant: 16).activate()
         descriptionTextView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -40).activate()
-        descriptionTextView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16).activate()
+        descriptionTextView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8).activate()
         
         containerView.addSubview(createDateLabel)
         createDateLabel.translatesAutoresizingMaskIntoConstraints = false

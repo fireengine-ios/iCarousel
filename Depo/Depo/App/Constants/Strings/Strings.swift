@@ -401,6 +401,9 @@ enum Strings: String, Localizable {
     case bestscenediscovercardtitle = "best_scene_discover_card_title"
     case bestscenediscovercardbody = "best_scene_discover_card_body"
     
+    case discoverCampaigns = "discover_campaigns"
+    case discoverTools = "discover_tools"
+    
     case drawEnddate = "draw_enddate"
     case drawDetailButton = "draw_detail_button"
     case drawJoin = "draw_join"
@@ -455,5 +458,7 @@ enum Strings: String, Localizable {
     case gamificationTitleCreateAlbum = "gamification_title_createalbum"
     case gamificationTotalEarnPoint1 = "gamification_total_earn_point_1";
     case gamificationTotalEarnPoint2 = "gamification_total_earn_point_2";
+    
+    case maxFilesSelectError = "max_files_select_error"
 
 }

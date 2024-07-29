@@ -184,4 +184,16 @@ final class ForYouService: BaseRequestService {
             .responseVoid(handler)
             .task
     }
+    
+    @discardableResult
+    func recommendedDeeplink(uuid: String, handler: @escaping (ResponseResult<WrapDataResponse>) -> Void) -> URLSessionTask? {
+        let url = RouteRequests.getRecommendedDeeplinkData(with: uuid)
+        
+        return SessionManager
+            .customDefault
+            .request(url)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
 }

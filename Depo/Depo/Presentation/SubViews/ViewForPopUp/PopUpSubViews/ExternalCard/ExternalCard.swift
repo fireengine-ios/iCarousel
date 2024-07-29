@@ -1,14 +1,14 @@
 //
-//  GarentaCard.swift
+//  ExternalCard.swift
 //  Depo
 //
-//  Created by Ozan Salman on 29.02.2024.
+//  Created by Ozan Salman on 26.06.2024.
 //  Copyright © 2024 LifeTech. All rights reserved.
 //
 
 import Foundation
 
-final class GarentaCard: BaseCardView {
+final class ExternalCard: BaseCardView {
     
     @IBOutlet private weak var imageView: LoadingImageView! {
         willSet {
@@ -21,7 +21,6 @@ final class GarentaCard: BaseCardView {
     
     @IBOutlet weak var cancelImageView: UIImageView! {
         willSet {
-            newValue.isHidden = true
             newValue.image = Image.iconCancelBorder.image
             newValue.isUserInteractionEnabled = true
             let tapImage = UITapGestureRecognizer(target: self, action: #selector(cancelImageTapped))
@@ -29,8 +28,7 @@ final class GarentaCard: BaseCardView {
         }
     }
     
-    private var details: String = ""
-    private var pageTitle: String = ""
+    private var detailsUrl: String = ""
     private lazy var router = RouterVC()
     
     override func set(object: HomeCardResponse?) {
@@ -43,18 +41,14 @@ final class GarentaCard: BaseCardView {
             imageView.loadImageData(with: url)
         }
         
-        if let title = cardObject?.content?["title"].string {
-            pageTitle = title
-        }
-        
-        if let detailsText = cardObject?.content?["detailsText"].string {
-            details = detailsText
+        if let url = cardObject?.details?["detailsUrl"].string {
+            detailsUrl = url
         }
     }
     
     @objc private func imageTapped() {
-        let vc = router.garenta(details: details, pageTitle: pageTitle)
-        router.pushViewController(viewController: vc, animated: false)
+        let url = URL(string: detailsUrl)
+        UIApplication.shared.open(url!)
     }
     
     @objc private func cancelImageTapped() {
