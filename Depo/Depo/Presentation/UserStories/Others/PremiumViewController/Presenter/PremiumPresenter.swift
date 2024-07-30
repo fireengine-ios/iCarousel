@@ -229,7 +229,7 @@ extension PremiumPresenter: PremiumInteractorOutput {
     
     func successed(allFeatures: [PackageModelResponse]) {
         features = allFeatures.filter { $0.isFeaturePack == true && $0.type?.isPaymentType == true }
-        let recommendedPackages = allFeatures.filter({$0.isRecommendedPremium == true})
+        let recommendedPackages = allFeatures
         features.append(contentsOf: recommendedPackages)
 
         guard features.hasItems else {
