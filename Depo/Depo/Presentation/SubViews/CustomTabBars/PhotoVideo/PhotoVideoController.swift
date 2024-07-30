@@ -113,6 +113,10 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         
         setupRefresher()
         
+        if accountInfo?.emailVerified == false {
+            presentEmailVerificationPopUp()
+        }
+        
         if !storageVars.isUserFirstLoggedIn {
             if accountInfo?.hasRecoveryMail == false && accountInfo?.hasSecurityQuestionInfo == false {
                 RouterVC().securityInfoViewController(fromHomeScreen: true)
@@ -123,10 +127,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             }
         }
         
-        if accountInfo?.emailVerified == false {
-            presentEmailVerificationPopUp()
-        }
- 
         storageVars.isUserFirstLoggedIn = false
         canNotificationPopupRaiseUp()
         setupAutoSyncTriggering()
