@@ -136,6 +136,7 @@ final class FreeAppSpace: NSObject {
                 debugPrint("duplicates count = ", self.duplicatesArray.count)
             }
             self.state = .finished
+            debugLog("freeappspace startSearchDuplicates count \(duplicatesArray.count)")
             finished()
         }
     }
@@ -174,6 +175,7 @@ final class FreeAppSpace: NSObject {
         ///For now changed to get info from DB every time we enter FreeUP screen
         //TODO: optimize this class
             MediaItemOperationsService.shared.getLocalDuplicates { localItems in
+                debugLog("freeappspace getDuplicatesItems count \(localItems.count)")
                 localItemsCallback(localItems.map { WrapData(mediaItem: $0)}.sorted(by: {
                     $0.metaDate > $1.metaDate
                 }) )

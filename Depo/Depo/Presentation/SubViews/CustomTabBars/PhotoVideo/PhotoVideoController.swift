@@ -649,7 +649,10 @@ extension PhotoVideoController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        let maxSelectCount = FirebaseRemoteConfig.shared.maxSelectCount
+        var maxSelectCount = FirebaseRemoteConfig.shared.maxSelectCount
+        if maxSelectCount == 0 {
+            maxSelectCount = 500
+        }
         let isMaxSelect = (collectionView.indexPathsForSelectedItems?.count ?? 0) < maxSelectCount
         if !isMaxSelect {
             //popup
@@ -1052,27 +1055,21 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         
         switch type {
         case .galleryAll:
-            category = .photosAndVideos
-            fileTypes = [.image, .video]
-            collectionViewManager.viewType = .all
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.performFetch()
-            }
+//            category = .photosAndVideos
+//            fileTypes = [.image, .video]
+//            collectionViewManager.viewType = .all
+//            performFetch()
             changeViewType(to: .all)
         case .galleryPhotos:
             category = .photos
             fileTypes = [.image]
             collectionViewManager.viewType = .all
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.performFetch()
-            }
+            performFetch()
         case .galleryVideos:
             category = .videos
             fileTypes = [.video]
             collectionViewManager.viewType = .all
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.performFetch()
-            }
+            performFetch()
         case .gallerySync:
             changeViewType(to: .synced)
         case .galleryUnsync:

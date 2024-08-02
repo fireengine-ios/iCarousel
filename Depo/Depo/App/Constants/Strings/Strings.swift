@@ -460,5 +460,7 @@ enum Strings: String, Localizable {
     case gamificationTotalEarnPoint2 = "gamification_total_earn_point_2";
     
     case maxFilesSelectError = "max_files_select_error"
+    case instagramLogin = "instagram_login"
+    case canNotSentLinkEmail = "can_not_sent_link_email"
 
 }

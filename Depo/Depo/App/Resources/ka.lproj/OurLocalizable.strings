@@ -2320,3 +2320,5 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "discover_campaigns" = "კამპანიები";
 "max_files_select_error" = "";
+"instagram_login" = "";
+"can_not_sent_link_email" = "";

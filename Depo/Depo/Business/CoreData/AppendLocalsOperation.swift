@@ -113,6 +113,7 @@ final class AppendLocalsOperation: Operation {
                     invalidAssetsInfo.forEach {
                         self.invalidIdentifier.append($0.asset.localIdentifier)
                     }
+                    debugLog("page has \(invalidIdentifier.count) inavalid Local Items")	
                     UserDefaults.standard.removeObject(forKey: "invalidIdentifier")
                     UserDefaults.standard.setValue(invalidIdentifier, forKey: "invalidIdentifier")
                 }

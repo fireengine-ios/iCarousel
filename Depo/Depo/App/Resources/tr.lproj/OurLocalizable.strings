@@ -2286,7 +2286,7 @@ then {11,99 TRY/Month}*/
 "ACCOUNT_HAS_FOREIGN_SUBSCRIPTION" = "Telefon numaranızı değiştirmek için öncelikle operatörünüz ile iletişime geçerek paketlerinizin iptal edilmesini sağlayınız.";
 
 /*Fuzzy*/
-"free_up_space_title_settings" = "Telefonunun hafizasında yer aç.";
+"free_up_space_title_settings" = "Telefonunun hafızasında yer aç.";
 "recommended" = "Önerilen";
 "dont_miss_opportunity" = "Fırsatı Kaçırma";
 "print_package_print_firm" = "Fotoğraflar anlaşmalı baskı firması tarafından basılacaktır.";
@@ -2428,3 +2428,5 @@ then {11,99 TRY/Month}*/
 /*Fuzzy*/
 "discover_campaigns" = "Kampanyalar";
 "max_files_select_error" = "Maksimum %d dosya/fotograf/video seçebilirsiniz.";
+"instagram_login" = "Instagram'la Bağlan";
+"can_not_sent_link_email" = "E-Postanız doğrulanmadığı için işleminize telefon numaranız ile devam edebilirsiniz.";
