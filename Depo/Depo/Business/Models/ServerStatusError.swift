@@ -42,6 +42,7 @@ final class ServerStatusError {
         static let recoveryEmailIsSameWithAccountEmail = "RECOVERY_EMAIL_IS_SAME_WITH_ACCOUNT_EMAIL"
         static let invalidOTP = "INVALID_OTP"
         static let accountHasSLCMSubscription = "ACCOUNT_HAS_SLCM_SUBSCRIPTION"
+        static let canNotSentLinkEmail = "CAN_NOT_SENT_LINK_EMAIL"
     }
 }
 extension ServerStatusError: LocalizedError {
@@ -112,6 +113,9 @@ extension ServerStatusError: LocalizedError {
             
         case ErrorKeys.accountHasSLCMSubscription:
             return TextConstants.profileDetailErrorContactCallCenter
+            
+        case ErrorKeys.canNotSentLinkEmail:
+            return localized(.canNotSentLinkEmail)
 
         default:
             return status

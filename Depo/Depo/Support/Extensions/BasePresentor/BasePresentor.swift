@@ -86,8 +86,12 @@ class BasePresenter: NSObject, BaseAsyncOperationInteractorOutput {
     
     private func showMessage(errorMessage: String?) {
         if let message = errorMessage {
+            var msg = message
+            if message == ServerStatusError.ErrorKeys.canNotSentLinkEmail {
+                msg = localized(.canNotSentLinkEmail)
+            }
             UIApplication.showCustomAlert(title: TextConstants.errorAlert,
-                                          message: message,
+                                          message: msg,
                                           image: .custom(Image.forgetPassPopupLock.image),
                                           buttonTitle: TextConstants.ok)
         }

@@ -55,7 +55,7 @@ class InstagramAuthViewController: ViewController {
         removeCache()
         
         
-        setTitle(withString: "Instagram login")
+        setTitle(withString: localized(.instagramLogin))
         webView.backgroundColor = UIColor.white
         webView.isOpaque = false
 

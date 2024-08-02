@@ -1006,7 +1006,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func onSelectObject(object: BaseDataSourceItem) {
-        let maxSelectCount = FirebaseRemoteConfig.shared.maxSelectCount
+        var maxSelectCount = FirebaseRemoteConfig.shared.maxSelectCount
+        if maxSelectCount == 0 {
+            maxSelectCount = 500
+        }
         if isObjectSelected(object: object) {
             selectedItemsArray.remove(object)
         } else {
