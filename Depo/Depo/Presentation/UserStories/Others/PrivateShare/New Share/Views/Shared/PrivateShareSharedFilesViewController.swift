@@ -430,9 +430,15 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
                 }
                 
             case .byMe:
-                if type.isContained(in: [.rename, .move, .share, .addToFavorites, .removeFromFavorites]) {
+                if type.isContained(in: [.rename, .move, .share]) {
                     collectionManager.reload(type: .onOperationFinished)
                 }
+            
+            if type.isContained(in: [.addToFavorites, .removeFromFavorites]) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                    self.collectionManager.reload(type: .onOperationFinished)
+                })
+            }
                 
             default:
                 assertionFailure()
