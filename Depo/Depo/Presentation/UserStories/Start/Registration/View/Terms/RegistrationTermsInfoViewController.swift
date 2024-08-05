@@ -80,8 +80,6 @@ class RegistrationTermsInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-        confirmButton.isHidden = confirmed == nil
-        confirmButton.isEnabled = false
         setupTextView()
         
         scrollView.delegate = self
@@ -199,12 +197,6 @@ extension RegistrationTermsInfoViewController: UIScrollViewDelegate {
            let offsetY = scrollView.contentOffset.y
            let contentHeight = scrollView.contentSize.height
            let frameHeight = scrollView.bounds.size.height
-
-           if offsetY + frameHeight >= contentHeight {
-               confirmButton.isEnabled = true
-           } else {
-               confirmButton.isEnabled = false
-           }
        }
 
 }
