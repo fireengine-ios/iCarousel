@@ -693,7 +693,7 @@
 "face_image_apple_price" = "%@/%@";
 "package_apple_price" = "%@ / %@";
 "package_apple_cancel_text" = "Pentru a anula pachetul tău, te rugăm să folosești meniul iTunes & App Store  din dispozitivul tău";
-"package_slcm_cancel_text" = "Pentru a-ți anula pachetul, transmite un SMS cu textul \"IPTAL LIFEBOX %@\" la 2200";
+"package_slcm_cancel_text" = "Pentru a vă anula abonamentul, apelați centrul de apel la numărul 532.";
 "package_google_cancel_text" = "Pentru a anula pachetul tău, te rugăm să folosești Magazinul Google Play";
 "package_free_of_charge_cancel_text" = "Pentru a ne informa de solicitarea ta, te rugăm să folosești meniul Cotactează-ne";
 "package_lifecell_cancel_text" = "Pentru suspendarea pachetului lifebox 50GB, transmite SMS cu textul 50VYKL, iar pentru pachetul lifebox 500GB, respectiv cu textul 500VYKL, la numărul 8080.";
@@ -2320,12 +2320,8 @@ then {11,99 TRY/Month}*/
 "winter_video_timeline_header" = "Cele mai vii amintiri de iarnă ale tale";
 "yearly" = "Anual";
 "timeline_description" = "V-am pregătit o surpriză cu amintirile pe care le-ați salvat în lifebox în această iarnă. Descoperă-le chiar acum.";
-"photo_max_selection_title_x" = "";
-"photo_max_selection_body_x" = "";
 "gamification_total_earn_point_1" = "You earned %@";
 "gamification_total_earn_point_2" = "%d raffle right(s)";
-"right" = "";
-"rights" = "";
 "gamification_raffle_call" = "Use the features below every month to increase your chances of winning the raffle.";
 
 /*Fuzzy*/
@@ -2333,6 +2329,7 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "discover_campaigns" = "Campanii";
-"max_files_select_error" = "";
-"instagram_login" = "";
-"can_not_sent_link_email" = "";
+"max_files_select_error" = "Puteți selecta un număr maxim de %d.";
+"instagram_login" = "Conectare cu Instagram";
+"can_not_sent_link_email" = "Deoarece e-mailul dvs. nu este verificat, puteți continua cu numărul dvs. de telefon.";
+"right" = "";

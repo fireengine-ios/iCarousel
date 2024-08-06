@@ -693,7 +693,7 @@
 "face_image_apple_price" = "%@/%@";
 "package_apple_price" = "%@ / %@";
 "package_apple_cancel_text" = "Um Ihr Paket zu stornieren, verwenden Sie bitte das iTunes & App Store-Menü auf Ihrem Gerät";
-"package_slcm_cancel_text" = "Um Ihr Paket zu stornieren, senden Sie bitte eine SMS mit dem folgenden Text an die Nummer 2200: \"IPTAL LIFEBOX %@\"";
+"package_slcm_cancel_text" = "Um Ihr Abonnement zu kündigen, rufen Sie das Call Center unter 532.";
 "package_google_cancel_text" = "Um Ihr Paket zu stornieren, verwenden Sie bitte den Google-Play-Store";
 "package_free_of_charge_cancel_text" = "Bitte verwenden Sie das Menü \"Kontaktieren Sie uns\", um uns Ihre Anfrage zu bearbeiten";
 "package_lifecell_cancel_text" = "Um lifebox 50GB zu deaktivieren, senden Sie bitte eine SMS mit dem Text 50VYKL. Für lifebox 500GB senden Sie bitte eine SMS mit dem Text 500VYKL an die Nummer 8080.";
@@ -2320,12 +2320,8 @@ then {11,99 TRY/Month}*/
 "winter_video_timeline_header" = "Ihre lebhaftesten Wintererinnerungen";
 "yearly" = "Jährlich";
 "timeline_description" = "Wir haben für Sie eine Überraschung aus Ihren Erinnerungen vorbereitet, die Sie in diesem Winter in lifebox gespeichert haben. Entdecken Sie jetzt.";
-"photo_max_selection_title_x" = "";
-"photo_max_selection_body_x" = "";
 "gamification_total_earn_point_1" = "You earned %@";
 "gamification_total_earn_point_2" = "%d raffle right(s)";
-"right" = "";
-"rights" = "";
 "gamification_raffle_call" = "Use the features below every month to increase your chances of winning the raffle.";
 
 /*Fuzzy*/
@@ -2333,6 +2329,7 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "discover_campaigns" = "Kampagnen";
-"max_files_select_error" = "";
-"instagram_login" = "";
-"can_not_sent_link_email" = "";
+"max_files_select_error" = "Sie können maximal %d auswählen.";
+"instagram_login" = "Anmeldung mit Instagram";
+"can_not_sent_link_email" = "Da Ihre E-Mail nicht verifiziert ist, können Sie mit Ihrer Telefonnummer fortfahren.";
+"right" = "";

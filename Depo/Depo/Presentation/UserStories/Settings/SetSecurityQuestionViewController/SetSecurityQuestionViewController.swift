@@ -129,6 +129,9 @@ final class SetSecurityQuestionViewController: BaseViewController, KeyboardHandl
         answer.question = selectedQuestion?.text
         setupDescriptionLabel(selectedQuestion: selectedQuestion?.text)
         isEditingQuestion = selectedQuestion != nil
+        if !isEditingQuestion {
+            securityQuestionView.setDescriptionLabel(text: TextConstants.userProfileSelectQuestion)
+        }
     }
     
     private func setupDescriptionLabel(selectedQuestion: String?) {

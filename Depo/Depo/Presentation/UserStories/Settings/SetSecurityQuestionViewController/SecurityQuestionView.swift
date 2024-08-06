@@ -80,6 +80,12 @@ final class SecurityQuestionView: UIView, NibInit {
         }
     }
     
+    func setDescriptionLabel(text: String) {
+        DispatchQueue.toMain {
+            self.descriptionLabel.text = text
+        }
+    }
+    
     private func setDescriptionLabelTitle() {
         descriptionLabel.text = localized(.selectSecurityQuestion)
     }
