@@ -693,7 +693,7 @@
 "face_image_apple_price" = "%@/%@";
 "package_apple_price" = "%@ / %@";
 "package_apple_cancel_text" = "Ви можете відмінити підписку через iTunes або App Store меню";
-"package_slcm_cancel_text" = "Будь ласка, відправте СМС з текстом \"IPTAL LIFEBOX %@” на 2200, щоб відмінити підписку";
+"package_slcm_cancel_text" = "Щоб скасувати підписку, необхідно зателефонувати в кол-центр за номером 532.";
 "package_google_cancel_text" = "Ви можете відмінити підписку через Google Play Store";
 "package_free_of_charge_cancel_text" = "Щоб надіслати запит, будь ласка, скористуйтеся меню Залишити відгук";
 "package_lifecell_cancel_text" = "Щоб відмінити підписку lifebox 50ГБ, відправте СМС з текстом 50VYKL, підписку lifebox 500ГБ - відправте СМС з текстом 500VYKL на номер 8080";
@@ -2322,12 +2322,8 @@ then {11,99 TRY/Month}*/
 "winter_video_timeline_header" = "Ваші Найяскравіші Зимові Спогади";
 "yearly" = "Щорічник";
 "timeline_description" = "Ми приготували для вас сюрприз зі спогадів, які ви зберегли в lifebox цієї зими. Подивіться просто зараз.";
-"photo_max_selection_title_x" = "";
-"photo_max_selection_body_x" = "";
 "gamification_total_earn_point_1" = "You earned %@";
 "gamification_total_earn_point_2" = "%d raffle right(s)";
-"right" = "";
-"rights" = "";
 "gamification_raffle_call" = "Use the features below every month to increase your chances of winning the raffle.";
 
 /*Fuzzy*/
@@ -2335,6 +2331,7 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "discover_campaigns" = "Кампанії";
-"max_files_select_error" = "";
-"instagram_login" = "";
-"can_not_sent_link_email" = "";
+"max_files_select_error" = "Ви можете вибрати максимум %d.";
+"instagram_login" = "Вхід у систему з Instagram";
+"can_not_sent_link_email" = "Оскільки ваш e-mail не підтверджено, ви можете продовжити за допомогою номера телефону.";
+"right" = "";

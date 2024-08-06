@@ -701,7 +701,7 @@
 "face_image_apple_price" = "%@/%@";
 "package_apple_price" = "%@/%@";
 "package_apple_cancel_text" = "Paketini iptal etmek için lütfen telefonundaki iTunes & App Store menüsünü kullan.";
-"package_slcm_cancel_text" = "Paketini iptal etmek için lütfen “IPTAL LIFEBOX %@” yazıp 2200’a gönder.";
+"package_slcm_cancel_text" = "Aboneliği iptal etmek için 532 numaralı çağrı merkezini arayınız.";
 "package_google_cancel_text" = "Paketini iptal etmek için lütfen Google Play Store'u kullan.";
 "package_free_of_charge_cancel_text" = "Bize Ulaşın menüsünden iptal talebini bize iletebilirsin.";
 "package_lifecell_cancel_text" = "lifebox 50 GB’yi devre dışı bırakmak için 50VYKL yazarak, lifebox 500 GB için ise 500VYKL yazarak 8080’e SMS gönderin.";
@@ -2412,14 +2412,10 @@ then {11,99 TRY/Month}*/
 "winter_video_timeline_header" = "Sana Özel Kış Anıların";
 "yearly" = "Yıllık";
 "timeline_description" = "Bu kış lifebox’ta yedeklediğin anılarından sana bir sürpriz hazırladık. Hemen keşfet.";
-"photo_max_selection_title_x" = "";
-"photo_max_selection_body_x" = "";
 
 /*Fuzzy*/
 "gamification_total_earn_point_1" = "Toplam %@ kazandın";
 "gamification_total_earn_point_2" = "%d çekiliş puanı";
-"right" = "";
-"rights" = "";
 "gamification_raffle_call" = "Her ay aşağıdaki özellikleri kullan, çekilişi kazanma şansını artır.";
 
 /*Fuzzy*/
@@ -2427,6 +2423,7 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "discover_campaigns" = "Kampanyalar";
-"max_files_select_error" = "Maksimum %d dosya/fotograf/video seçebilirsiniz.";
+"max_files_select_error" = "Maksimum %d seçim yapabilirsiniz.";
 "instagram_login" = "Instagram'la Bağlan";
 "can_not_sent_link_email" = "E-Postanız doğrulanmadığı için işleminize telefon numaranız ile devam edebilirsiniz.";
+"right" = "";

@@ -705,7 +705,7 @@
 "face_image_apple_price" = "%@/%@";
 "package_apple_price" = "%@ / %@";
 "package_apple_cancel_text" = "لإلغاء حزمتك، يرجى استخدام قائمة iTunes & App Store على جهازك.";
-"package_slcm_cancel_text" = "لإلغاء حزمتك يمكنك إرسال رسالة نصية قصيرة إلى 2200 مكتوب بها  %@ IPTAL LIFEBOX.";
+"package_slcm_cancel_text" = "لإلغاء اشتراكك، اتصل بمركز الاتصال على الرقم 532.";
 "package_google_cancel_text" = "لإلغاء حزمتك، يرجى استخدام جوجل بلاي ستور.";
 "package_free_of_charge_cancel_text" = "يرجى استخدام قائمة الاتصال بنا لإبلاغنا بمعالجة طلبك.";
 "package_lifecell_cancel_text" = "يمكنك إرسال رسالة نصية قصيرة إلى 8080، وتكتب فيها “50VYKL” من أجل إلغاء لايف بوكس 50 جيجا، ولإلغاء لايف بوكس 500 جيجا أرسل رسالة مكتوب بها“500VYKL” ";
@@ -2332,12 +2332,8 @@ then {11,99 TRY/Month}*/
 "winter_video_timeline_header" = "ذكرياتك الشتوية المميزة";
 "yearly" = "سنوي";
 "timeline_description" = "لقد أعددنا لك مفاجأة من الذكريات التي احتفظت بها في lifebox هذا الشتاء. اكتشف الآن.";
-"photo_max_selection_title_x" = "";
-"photo_max_selection_body_x" = "";
 "gamification_total_earn_point_1" = "You earned %@";
 "gamification_total_earn_point_2" = "%d raffle right(s)";
-"right" = "";
-"rights" = "";
 "gamification_raffle_call" = "Use the features below every month to increase your chances of winning the raffle.";
 
 /*Fuzzy*/
@@ -2345,6 +2341,7 @@ then {11,99 TRY/Month}*/
 
 /*Fuzzy*/
 "discover_campaigns" = "الحملات";
-"max_files_select_error" = "";
-"instagram_login" = "";
-"can_not_sent_link_email" = "";
+"max_files_select_error" = "يمكنك تحديد %d كحد أقصى.";
+"instagram_login" = "تسجيل الدخول باستخدام Instagram";
+"can_not_sent_link_email" = "بما أنه لم يتم التحقق من بريدك الإلكتروني، يمكنك المتابعة باستخدام رقم هاتفك.";
+"right" = "";

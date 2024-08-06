@@ -2306,12 +2306,8 @@ then {11,99 TRY/Month}*/
 "winter_video_timeline_header" = "შენი განსაკუთრებული ზამთრის მოგონებები";
 "yearly" = "ყოველწლიურად";
 "timeline_description" = "ჩვენ მოვამზადეთ შენთვის სიურპრიზი იმ მოგონებებიდან, რომლებიც ამ ზამთარში lifebox-ში შექმენი. აღმოაჩინე ისინი ახლავე.";
-"photo_max_selection_title_x" = "";
-"photo_max_selection_body_x" = "";
 "gamification_total_earn_point_1" = "You earned %@";
 "gamification_total_earn_point_2" = "%d raffle right(s)";
-"right" = "";
-"rights" = "";
 "gamification_raffle_call" = "Use the features below every month to increase your chances of winning the raffle.";
 
 /*Fuzzy*/
@@ -2322,3 +2318,4 @@ then {11,99 TRY/Month}*/
 "max_files_select_error" = "";
 "instagram_login" = "";
 "can_not_sent_link_email" = "";
+"right" = "";
