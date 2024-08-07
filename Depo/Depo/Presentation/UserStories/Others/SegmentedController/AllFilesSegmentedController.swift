@@ -61,7 +61,7 @@ final class AllFilesSegmentedController: SegmentedController, HeaderContainingVi
     private func setCollectionView() {
         if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-            flowLayout.minimumLineSpacing = 0
+            flowLayout.minimumLineSpacing = -10
             flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         }
     }
@@ -123,6 +123,11 @@ extension AllFilesSegmentedController: UICollectionViewDataSource {
             return cell
         }
         return UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (collectionView.frame.width - 10) / 2.5 // 2 item yan yana, aralarındaki boşluk 10
+        return CGSize(width: width, height: width)
     }
 }
 
