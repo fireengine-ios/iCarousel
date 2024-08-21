@@ -2307,7 +2307,7 @@ then {11,99 TRY/Month}*/
 "set_recovery_mail_success" = "Kurtarma mailiniz oluşturuldu.";
 "set_recoverymail_securityquestion_success" = "Kurtarma mailiniz ve güvenlik sorunuz oluşturuldu.";
 "settings_set_password_apple_warning" = "Şifreni belirleyebilmek için öncelikle Apple Hesabın ile lifebox’a giriş yapmalısın.";
-"lifebox_resignup_warning" = "Girmiş oldugunuz bilgilere ait hesap bulunmaktadır. Devam etmeniz durumunda diğer hesaptan GSM numarası silinecektir. Hesabınıza sadece mail adresi ve şifreniz ile ulaşabileceksiniz. İşleme devam etmek istediğinize emin misiniz?";
+"lifebox_resignup_warning" = "Girmiş oldugunuz bilgilere ait hesap bulunmaktadır. Devam etmeniz durumunda diğer hesaptan GSM numarası silinecektir ve bu hesaba sadece mail adresi ve şifre ile ulaşılabilecektir. İşleme devam etmek istediğinize emin misiniz?";
 
 /*Fuzzy*/
 "best_scene_title" = "Seri Fotoğraflar";
@@ -2427,3 +2427,5 @@ then {11,99 TRY/Month}*/
 "instagram_login" = "Instagram'la Bağlan";
 "can_not_sent_link_email" = "E-Postanız doğrulanmadığı için işleminize telefon numaranız ile devam edebilirsiniz.";
 "right" = "";
+"forgotmypassword_invalid_token" = "Geçici bir hata oluştu. Lütfen tekrar deneyin.";
+"no_campaign_found" = "Kampanya bulunamadı.";

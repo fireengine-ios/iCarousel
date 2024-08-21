@@ -680,7 +680,16 @@ private extension PushNotificationService {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let response):
-                    let campaignResponse = response.filter ({$0.type == .newCampaign && $0.details?["id"].int == Int(campaignId)})
+                    var campaignResponse = response.filter ({$0.type == .newCampaign && $0.details?["id"].int == Int(campaignId)})
+                    if campaignResponse.isEmpty {
+                        campaignResponse = response.filter ({$0.type == .newCampaign})
+                    }
+                    if campaignResponse.isEmpty {
+                        let vc = PopUpController.with(title: TextConstants.warning, message: localized(.noCampaignFound), image: .error, buttonTitle: TextConstants.ok)
+                        vc.open()
+                        return
+                    }
+                    
                     if let detailUrl = campaignResponse.first?.details?["detailImagePath"].string {
                         detUrl = detailUrl
                     }

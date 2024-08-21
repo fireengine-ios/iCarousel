@@ -2347,3 +2347,5 @@ then {11,99 TRY/Month}*/
 "instagram_login" = "Вход в систему с помощью Instagram";
 "can_not_sent_link_email" = "Поскольку ваш e-mail не подтвержден, вы можете продолжить с помощью номера телефона.";
 "right" = "";
+"forgotmypassword_invalid_token" = "Произошла временная ошибка. Пожалуйста, попробуйте еще раз.";
+"no_campaign_found" = "Кампания не найдена.";
