@@ -55,7 +55,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         }
     }
 
-    private let priceIntroFont = UIFont.appFont(.medium, size: 14)
+    private let priceIntroFont = UIFont.appFont(.medium, size: 12)
     @IBOutlet private weak var priceLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0
@@ -65,7 +65,7 @@ final class SubscriptionOfferView: UIView, NibInit {
     
     @IBOutlet private weak var typeLabel: UILabel! {
         willSet {
-            newValue.numberOfLines = 0
+            newValue.numberOfLines = 2
         }
     }
 
@@ -173,7 +173,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         if hasIntroPrice {
             priceLabel.text = plan.introductoryPrice
             priceLabel.font = priceIntroFont
-            priceLabel.textAlignment = .center
+            priceLabel.textAlignment = .right
         } else {
             if let model = plan.model as? PackageModelResponse, model.inAppPurchaseId == "v1_100GB_month" {
                 let period = plan.period ?? ""
@@ -241,6 +241,14 @@ final class SubscriptionOfferView: UIView, NibInit {
         if plan.addonType == .storageOnly {
             font = UIFont.appFont(.regular, size: 16)
             textColor = AppColor.marineTwoAndWhite.color
+        } else if plan.addonType == .bundle {
+            if plan.introductoryPrice != nil {
+                font = UIFont.appFont(.bold, size: 12)
+                textColor = ColorConstants.cardBorderOrange
+            } else {
+                font = UIFont.appFont(.regular, size: 16)
+                textColor = AppColor.marineTwoAndWhite.color
+            }
         } else {
             font = UIFont.appFont(.bold, size: 16)
             textColor = ColorConstants.cardBorderOrange
