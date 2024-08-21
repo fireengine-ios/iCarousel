@@ -2334,4 +2334,4 @@ then {11,99 TRY/Month}*/
 "can_not_sent_link_email" = "Deoarece e-mailul dvs. nu este verificat, puteți continua cu numărul dvs. de telefon.";
 "right" = "";
 "forgotmypassword_invalid_token" = "A apărut o eroare temporară. Te rog să încerci din nou.";
-"no_campaign_found" = "";
+"no_campaign_found" = "Nicio campanie nu a fost găsită.";

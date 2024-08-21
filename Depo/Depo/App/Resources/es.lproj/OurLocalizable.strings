@@ -2376,4 +2376,4 @@ then {11,99 TRY/Month}*/
 "can_not_sent_link_email" = "Como tu correo electrónico no está verificado, puedes continuar con tu número de teléfono.";
 "right" = "";
 "forgotmypassword_invalid_token" = "Ha ocurrido un error temporal. Inténtalo de nuevo.";
-"no_campaign_found" = "";
+"no_campaign_found" = "No se encontró ninguna campaña.";
