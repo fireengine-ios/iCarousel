@@ -2376,3 +2376,5 @@ then {11,99 TRY/Month}*/
 "instagram_login" = "Hyni me Instagram";
 "can_not_sent_link_email" = "Meqenëse e-maili juaj nuk është i verifikuar, mund të vazhdoni me numrin tuaj të telefonit.";
 "right" = "";
+"forgotmypassword_invalid_token" = "Ka ndodhur një gabim i përkohshëm. Ju lutemi provojeni përsëri.";
+"no_campaign_found" = "";

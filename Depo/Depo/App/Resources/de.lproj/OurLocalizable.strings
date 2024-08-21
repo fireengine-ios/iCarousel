@@ -2333,3 +2333,5 @@ then {11,99 TRY/Month}*/
 "instagram_login" = "Anmeldung mit Instagram";
 "can_not_sent_link_email" = "Da Ihre E-Mail nicht verifiziert ist, können Sie mit Ihrer Telefonnummer fortfahren.";
 "right" = "";
+"forgotmypassword_invalid_token" = "Ein vorübergehender Fehler ist aufgetreten. Bitte versuchen Sie es erneut.";
+"no_campaign_found" = "";

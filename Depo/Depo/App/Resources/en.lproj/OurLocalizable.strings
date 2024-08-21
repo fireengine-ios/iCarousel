@@ -2301,7 +2301,7 @@ then {11,99 TRY/Month}*/
 "set_recovery_mail_success" = "Your recovery email has been created.";
 "set_recoverymail_securityquestion_success" = "Your recovery email and security question have been created.";
 "settings_set_password_apple_warning" = "To set your password, you must log in to lifebox with your Apple Account.";
-"lifebox_resignup_warning" = "There is an account for the information you entered. If you continue, the GSM number from the other account will be deleted. You will be able to access your account only with your e-mail address and password. Are you sure you want to continue?";
+"lifebox_resignup_warning" = "There is an account for the information you entered. If you continue, the GSM number from the other account will be deleted and will be able to access this account only with e-mail address and password. Are you sure you want to continue?";
 
 /*Fuzzy*/
 "best_scene_title" = "Series Photos";
@@ -2399,3 +2399,5 @@ then {11,99 TRY/Month}*/
 "instagram_login" = "Instagram Login";
 "can_not_sent_link_email" = "Since your e-mail is not verified, you can continue with your phone number.";
 "right" = "right";
+"forgotmypassword_invalid_token" = "A temporary error has occurred. Please try again.";
+"no_campaign_found" = "";

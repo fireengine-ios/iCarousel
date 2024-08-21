@@ -462,5 +462,6 @@ enum Strings: String, Localizable {
     case maxFilesSelectError = "max_files_select_error"
     case instagramLogin = "instagram_login"
     case canNotSentLinkEmail = "can_not_sent_link_email"
+    case noCampaignFound = "no_campaign_found"
 
 }

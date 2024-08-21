@@ -2319,3 +2319,5 @@ then {11,99 TRY/Month}*/
 "instagram_login" = "Instagram შესვლა";
 "can_not_sent_link_email" = "ვინაიდან თქვენი ელფოსტა არ არის დადასტურებული, შეგიძლიათ გააგრძელოთ თქვენი ტელეფონის ნომერი.";
 "right" = "";
+"forgotmypassword_invalid_token" = "დროებითი შეცდომა დაფიქსირდა. მოგვიანდებით სცადე.";
+"no_campaign_found" = "";

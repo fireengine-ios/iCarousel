@@ -2345,3 +2345,5 @@ then {11,99 TRY/Month}*/
 "instagram_login" = "تسجيل الدخول باستخدام Instagram";
 "can_not_sent_link_email" = "بما أنه لم يتم التحقق من بريدك الإلكتروني، يمكنك المتابعة باستخدام رقم هاتفك.";
 "right" = "";
+"forgotmypassword_invalid_token" = "حدثخطأمؤقت.من فضلكحاولمرةاخرى.";
+"no_campaign_found" = "";
