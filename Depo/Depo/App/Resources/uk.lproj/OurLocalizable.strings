@@ -2336,4 +2336,4 @@ then {11,99 TRY/Month}*/
 "can_not_sent_link_email" = "Оскільки ваш e-mail не підтверджено, ви можете продовжити за допомогою номера телефону.";
 "right" = "";
 "forgotmypassword_invalid_token" = "Виникла тимчасова помилка. Будь ласка, спробуйте ще раз.";
-"no_campaign_found" = "";
+"no_campaign_found" = "Кампанія не знайдена.";

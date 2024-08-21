@@ -179,17 +179,18 @@ final class SubscriptionOfferView: UIView, NibInit {
                 let period = plan.period ?? ""
                 priceLabel.text = formattedStringPrice(discountTotalPeriod: "2 \(localizedOfferPeriod(period.lowercased()))", price: "\(model.price ?? 0)", period: localizedOfferPeriod(period.lowercased()))
                 priceLabel.font = priceIntroFont
-                priceLabel.textAlignment = .center
+                priceLabel.textAlignment = .right
             } else if let model = plan.model as? PackageModelResponse, model.inAppPurchaseId == "v1_50GB_teknofest" {
                 let period = plan.period ?? ""
                 priceLabel.text = formattedStringPrice(discountTotalPeriod: "2 \(localizedOfferPeriod(period.lowercased()))", price: "\(model.price ?? 0)", period: localizedOfferPeriod(period.lowercased()))
                 priceLabel.font = priceIntroFont
-                priceLabel.textAlignment = .center
+                priceLabel.textAlignment = .right
             } else {
                 priceLabel.text = plan.price
             }
         }
-        featureView.purchaseButton.isHidden = hasIntroPrice
+        
+        featureView.purchaseButton.isHidden = false
         detailsView.isHidden = needHidePurchaseInfo
         if let attributedText = makePackageFeature(plan: plan) {
             typeLabel.attributedText = attributedText
@@ -207,6 +208,10 @@ final class SubscriptionOfferView: UIView, NibInit {
             featureView.purchaseButton.isHidden = false
         }
         if plan.packageStatus == "WAITING_DEACTIVATION" {
+            featureView.purchaseButton.isHidden = true
+            featureView.purchaseButtonHeightConstaint.constant = 0
+        }
+        if plan.store == "Promo" {
             featureView.purchaseButton.isHidden = true
             featureView.purchaseButtonHeightConstaint.constant = 0
         }

@@ -2346,4 +2346,4 @@ then {11,99 TRY/Month}*/
 "can_not_sent_link_email" = "بما أنه لم يتم التحقق من بريدك الإلكتروني، يمكنك المتابعة باستخدام رقم هاتفك.";
 "right" = "";
 "forgotmypassword_invalid_token" = "حدثخطأمؤقت.من فضلكحاولمرةاخرى.";
-"no_campaign_found" = "";
+"no_campaign_found" = "لم يتم العثور على أي حملة.";

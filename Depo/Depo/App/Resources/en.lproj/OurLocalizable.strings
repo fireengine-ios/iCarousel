@@ -2400,4 +2400,4 @@ then {11,99 TRY/Month}*/
 "can_not_sent_link_email" = "Since your e-mail is not verified, you can continue with your phone number.";
 "right" = "right";
 "forgotmypassword_invalid_token" = "A temporary error has occurred. Please try again.";
-"no_campaign_found" = "";
+"no_campaign_found" = "No campaign found.";
