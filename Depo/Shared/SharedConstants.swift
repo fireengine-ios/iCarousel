@@ -12,8 +12,8 @@ import Foundation
 struct SharedConstants {
     private init() {}
     
-    #if ENTERPRISE
-    static let groupIdentifier = "group.com.turkcell.akillideponew.ent"
+    #if DEBUG
+    static let groupIdentifier = "group.by.com.life.lifebox"
     #else
     static let groupIdentifier = "group.com.turkcell.akillidepo"
     #endif

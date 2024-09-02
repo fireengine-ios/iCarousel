@@ -398,13 +398,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AdjustDelegate {
     }
     
     private func startListeninAppLink() {
-        AGCInstance.startUp()
-        
-        AGCAppLinking.instance().handle { (link, error) in
-            if let deepLink = link {
-                self.handleIncomingApplink(deepLink)
-            }
-        }
+//        AGCInstance.startUp()
+//        
+//        AGCAppLinking.instance().handle { (link, error) in
+//            if let deepLink = link {
+//                self.handleIncomingApplink(deepLink)
+//            }
+//        }
     }
     
     private func checkNewAppVersion() {
