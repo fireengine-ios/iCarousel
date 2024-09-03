@@ -685,6 +685,11 @@
 		52A682D62C873D650001ABBE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 52A682D52C873D650001ABBE /* Alamofire */; };
 		52A682D82C873D700001ABBE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 52A682D72C873D700001ABBE /* Alamofire */; };
 		52A682DA2C873D7F0001ABBE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 52A682D92C873D7F0001ABBE /* Alamofire */; };
+		52A682E52C8745480001ABBE /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 52A682E42C8745480001ABBE /* SwiftyJSON */; };
+		52A682E72C8745A30001ABBE /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 52A682E62C8745A30001ABBE /* SwiftyJSON */; };
+		52A682E92C8745AE0001ABBE /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 52A682E82C8745AE0001ABBE /* SwiftyJSON */; };
+		52A682EB2C8745B60001ABBE /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 52A682EA2C8745B60001ABBE /* SwiftyJSON */; };
+		52A682ED2C8745C00001ABBE /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 52A682EC2C8745C00001ABBE /* SwiftyJSON */; };
 		52B9004F28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
 		52BF679628FFE05300D8D4E6 /* PasswordValidationSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF679528FFE05300D8D4E6 /* PasswordValidationSetView.swift */; };
 		52BF679728FFE05300D8D4E6 /* PasswordValidationSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF679528FFE05300D8D4E6 /* PasswordValidationSetView.swift */; };
@@ -7998,6 +8003,7 @@
 				8C0E8FF51FDEBDFF00789C91 /* MediaPlayer.framework in Frameworks */,
 				8C0E8FF61FDEBDFF00789C91 /* QuartzCore.framework in Frameworks */,
 				8C0E8FF71FDEBDFF00789C91 /* libsqlite3.dylib in Frameworks */,
+				52A682E52C8745480001ABBE /* SwiftyJSON in Frameworks */,
 				8C0E8FF91FDEBDFF00789C91 /* libz.dylib in Frameworks */,
 				8C0E8FFA1FDEBDFF00789C91 /* CoreGraphics.framework in Frameworks */,
 				98B047D3259314750011DAEB /* SpotifyiOS.framework in Frameworks */,
@@ -8010,6 +8016,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52A682EB2C8745B60001ABBE /* SwiftyJSON in Frameworks */,
 				BC27C046A07C345BCA8EE5D4 /* Pods_LifeboxFileProvider.framework in Frameworks */,
 				52A682D82C873D700001ABBE /* Alamofire in Frameworks */,
 			);
@@ -8027,6 +8034,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52A682E92C8745AE0001ABBE /* SwiftyJSON in Frameworks */,
 				5B2F1D44305B1F1E2BFEBCAF /* Pods_LifeboxShared.framework in Frameworks */,
 				52A682D62C873D650001ABBE /* Alamofire in Frameworks */,
 			);
@@ -8062,6 +8070,7 @@
 				52A682D42C873D540001ABBE /* Alamofire in Frameworks */,
 				52A682C12C8739360001ABBE /* ObjcExceptionBridging in Frameworks */,
 				CF8B689623CBC9D70021B021 /* iAd.framework in Frameworks */,
+				52A682E72C8745A30001ABBE /* SwiftyJSON in Frameworks */,
 				CF8B689723CBC9D70021B021 /* Foundation.framework in Frameworks */,
 				CF8B689823CBC9D70021B021 /* UIKit.framework in Frameworks */,
 				CF8B689923CBC9D70021B021 /* StoreKit.framework in Frameworks */,
@@ -8087,6 +8096,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52A682C92C873A3F0001ABBE /* ObjcExceptionBridging in Frameworks */,
+				52A682ED2C8745C00001ABBE /* SwiftyJSON in Frameworks */,
 				CFE4E711252D9F2300F165AD /* SwiftUI.framework in Frameworks */,
 				CFE4E712252D9F2300F165AD /* WidgetKit.framework in Frameworks */,
 				52A682DA2C873D7F0001ABBE /* Alamofire in Frameworks */,
@@ -18154,6 +18164,7 @@
 				52A682C42C8739AC0001ABBE /* ObjcExceptionBridging */,
 				52A682C62C8739AC0001ABBE /* XCGLogger */,
 				52A682D12C873D3B0001ABBE /* Alamofire */,
+				52A682E42C8745480001ABBE /* SwiftyJSON */,
 			);
 			productName = Depo;
 			productReference = 8C0E907E1FDEBE0000789C91 /* lifebox.app */;
@@ -18175,6 +18186,7 @@
 			name = LifeboxFileProvider;
 			packageProductDependencies = (
 				52A682D72C873D700001ABBE /* Alamofire */,
+				52A682EA2C8745B60001ABBE /* SwiftyJSON */,
 			);
 			productName = LifeboxFileProvider;
 			productReference = CE1BE922204831CD0074BDDC /* LifeboxFileProvider.appex */;
@@ -18214,6 +18226,7 @@
 			name = LifeboxShared;
 			packageProductDependencies = (
 				52A682D52C873D650001ABBE /* Alamofire */,
+				52A682E82C8745AE0001ABBE /* SwiftyJSON */,
 			);
 			productName = LifeboxShared;
 			productReference = CE58FAEF20444492007F3F54 /* LifeboxShared.appex */;
@@ -18267,6 +18280,7 @@
 				52A682C02C8739360001ABBE /* ObjcExceptionBridging */,
 				52A682C22C8739360001ABBE /* XCGLogger */,
 				52A682D32C873D540001ABBE /* Alamofire */,
+				52A682E62C8745A30001ABBE /* SwiftyJSON */,
 			);
 			productName = Depo;
 			productReference = CF8B6B2E23CBC9D70021B021 /* lifebox_friendly.app */;
@@ -18290,6 +18304,7 @@
 				52A682C82C873A3F0001ABBE /* ObjcExceptionBridging */,
 				52A682CA2C873A3F0001ABBE /* XCGLogger */,
 				52A682D92C873D7F0001ABBE /* Alamofire */,
+				52A682EC2C8745C00001ABBE /* SwiftyJSON */,
 			);
 			productName = LifeboxWidgetExtension;
 			productReference = CFE4E71C252D9F2300F165AD /* LifeboxWidgetExtension.appex */;
@@ -18396,6 +18411,7 @@
 			packageReferences = (
 				52A682B72C8736E60001ABBE /* XCRemoteSwiftPackageReference "XCGLogger" */,
 				52A682D02C873D3B0001ABBE /* XCRemoteSwiftPackageReference "Alamofire" */,
+				52A682E32C8745480001ABBE /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 			);
 			productRefGroup = 051E1DF419CAC2F900FD1E03 /* Products */;
 			projectDirPath = "";
@@ -19526,7 +19542,6 @@
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyDropbox/SwiftyDropbox.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TTGSnackbar/TTGSnackbar.framework",
 				"${BUILT_PRODUCTS_DIR}/Typist/Typist.framework",
 				"${BUILT_PRODUCTS_DIR}/UICKeyChainStore/UICKeyChainStore.framework",
@@ -19577,7 +19592,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyDropbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTGSnackbar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Typist.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICKeyChainStore.framework",
@@ -19638,7 +19652,6 @@
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyDropbox/SwiftyDropbox.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TTGSnackbar/TTGSnackbar.framework",
 				"${BUILT_PRODUCTS_DIR}/Typist/Typist.framework",
 				"${BUILT_PRODUCTS_DIR}/UICKeyChainStore/UICKeyChainStore.framework",
@@ -19688,7 +19701,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyDropbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTGSnackbar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Typist.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICKeyChainStore.framework",
@@ -19912,7 +19924,6 @@
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyDropbox/SwiftyDropbox.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TTGSnackbar/TTGSnackbar.framework",
 				"${BUILT_PRODUCTS_DIR}/Typist/Typist.framework",
 				"${BUILT_PRODUCTS_DIR}/UICKeyChainStore/UICKeyChainStore.framework",
@@ -19962,7 +19973,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyDropbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTGSnackbar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Typist.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICKeyChainStore.framework",
@@ -26286,6 +26296,14 @@
 				minimumVersion = 4.8.1;
 			};
 		};
+		52A682E32C8745480001ABBE /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -26343,6 +26361,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 52A682D02C873D3B0001ABBE /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		52A682E42C8745480001ABBE /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52A682E32C8745480001ABBE /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		52A682E62C8745A30001ABBE /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52A682E32C8745480001ABBE /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		52A682E82C8745AE0001ABBE /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52A682E32C8745480001ABBE /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		52A682EA2C8745B60001ABBE /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52A682E32C8745480001ABBE /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		52A682EC2C8745C00001ABBE /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52A682E32C8745480001ABBE /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
 		};
 /* End XCSwiftPackageProductDependency section */
 

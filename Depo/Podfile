@@ -9,7 +9,7 @@ ENV['SWIFT_VERSION'] = '5'
 
 def shared_pods
   #pod 'Alamofire', '~> 4.8.1'
-  pod 'SwiftyJSON', '~> 5'
+  #pod 'SwiftyJSON', '~> 5'
   pod 'KeychainSwift', '~> 19'
 end
 
