@@ -39,5 +39,4 @@ final class PrivacyPolicyServiceImp: BaseRequestService, PrivacyPolicyService {
                 }
         }
     }
-    
 }

@@ -44,7 +44,7 @@ def core_pods
   pod 'TTGSnackbar', '~> 1'
   
   #logger
-  pod 'XCGLogger', '~> 7'
+  #pod 'XCGLogger', '~> 7'
 
   #widget
   pod 'MMWormhole', '~> 2.0.0'
@@ -92,7 +92,7 @@ def widget_pods
   shared_pods
   pod 'SDWebImage', '~> 4'
   pod 'MMWormhole', '~> 2.0.0'
-  pod 'XCGLogger', '~> 7'
+#  pod 'XCGLogger', '~> 7'
 end
 
 target 'Lifebox' do

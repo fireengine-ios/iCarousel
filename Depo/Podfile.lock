@@ -248,9 +248,6 @@ PODS:
   - Netmera/NotificationServiceExtension (3.16.0):
     - NetmeraCore (= 3.16.0)
   - NetmeraCore (3.16.0)
-  - ObjcExceptionBridging (1.0.1):
-    - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
-  - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - PromisesObjC (1.2.12)
   - ReachabilitySwift (5.0.0)
   - SDWebImage (4.4.8):
@@ -267,10 +264,6 @@ PODS:
   - TTGSnackbar (1.11.1)
   - Typist (1.4.2)
   - UICKeyChainStore (2.2.1)
-  - XCGLogger (7.0.1):
-    - XCGLogger/Core (= 7.0.1)
-  - XCGLogger/Core (7.0.1):
-    - ObjcExceptionBridging
   - YYImage (1.0.4):
     - YYImage/Core (= 1.0.4)
   - YYImage/Core (1.0.4)
@@ -311,7 +304,6 @@ DEPENDENCIES:
   - SwiftyJSON (~> 5)
   - TTGSnackbar (~> 1)
   - Typist (~> 1)
-  - XCGLogger (~> 7)
   - YYImage (~> 1)
 
 SPEC REPOS:
@@ -361,7 +353,6 @@ SPEC REPOS:
     - nanopb
     - Netmera
     - NetmeraCore
-    - ObjcExceptionBridging
     - PromisesObjC
     - ReachabilitySwift
     - SDWebImage
@@ -373,7 +364,6 @@ SPEC REPOS:
     - TTGSnackbar
     - Typist
     - UICKeyChainStore
-    - XCGLogger
     - YYImage
 
 EXTERNAL SOURCES:
@@ -433,7 +423,6 @@ SPEC CHECKSUMS:
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   Netmera: 427501683df64a7d4e8daed979c8d29c1ebe3e59
   NetmeraCore: 7e953a735ba5b6d38ca4294d300cf8700591c3c5
-  ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SDWebImage: 783af2c3fa36291a250030c4752ee370a9a51d13
@@ -445,9 +434,8 @@ SPEC CHECKSUMS:
   TTGSnackbar: fea91c62637b5662f808a4c3b55f7631cb7e1ef7
   Typist: 06465ab9867782aa6c81e38f073dfc01dab73deb
   UICKeyChainStore: ba3bff2c762b12db1e516f395c837dd25298b05e
-  XCGLogger: 1943831ef907df55108b0b18657953f868de973b
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: 5a7d97c3d18ace0da4622ab3d64009023964cd20
+PODFILE CHECKSUM: bd7696051799c308a409e1982797215374fdc671
 
 COCOAPODS: 1.15.2

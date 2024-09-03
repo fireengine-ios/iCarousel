@@ -674,6 +674,12 @@
 		52A5E0332922546000670B0C /* InstaPickLineLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0312922546000670B0C /* InstaPickLineLoader.swift */; };
 		52A5E03D29252B4300670B0C /* CustomAVPlayerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E03C29252B4300670B0C /* CustomAVPlayerLayer.swift */; };
 		52A5E03E29252B4300670B0C /* CustomAVPlayerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E03C29252B4300670B0C /* CustomAVPlayerLayer.swift */; };
+		52A682C12C8739360001ABBE /* ObjcExceptionBridging in Frameworks */ = {isa = PBXBuildFile; productRef = 52A682C02C8739360001ABBE /* ObjcExceptionBridging */; settings = {ATTRIBUTES = (Required, ); }; };
+		52A682C32C8739360001ABBE /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 52A682C22C8739360001ABBE /* XCGLogger */; settings = {ATTRIBUTES = (Required, ); }; };
+		52A682C52C8739AC0001ABBE /* ObjcExceptionBridging in Frameworks */ = {isa = PBXBuildFile; productRef = 52A682C42C8739AC0001ABBE /* ObjcExceptionBridging */; };
+		52A682C72C8739AC0001ABBE /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 52A682C62C8739AC0001ABBE /* XCGLogger */; };
+		52A682C92C873A3F0001ABBE /* ObjcExceptionBridging in Frameworks */ = {isa = PBXBuildFile; productRef = 52A682C82C873A3F0001ABBE /* ObjcExceptionBridging */; };
+		52A682CB2C873A3F0001ABBE /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 52A682CA2C873A3F0001ABBE /* XCGLogger */; };
 		52B9004F28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
 		52BF679628FFE05300D8D4E6 /* PasswordValidationSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF679528FFE05300D8D4E6 /* PasswordValidationSetView.swift */; };
 		52BF679728FFE05300D8D4E6 /* PasswordValidationSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF679528FFE05300D8D4E6 /* PasswordValidationSetView.swift */; };
@@ -7965,6 +7971,7 @@
 				8C0E8FE21FDEBDFF00789C91 /* Security.framework in Frameworks */,
 				8C0E8FE51FDEBDFF00789C91 /* CoreLocation.framework in Frameworks */,
 				0798D5C626981BC600F5EDE0 /* Photos.framework in Frameworks */,
+				52A682C72C8739AC0001ABBE /* XCGLogger in Frameworks */,
 				8C0E8FE71FDEBDFF00789C91 /* CoreData.framework in Frameworks */,
 				98B047CB259314740011DAEB /* MPush.framework in Frameworks */,
 				8C0E8FE81FDEBDFF00789C91 /* AVKit.framework in Frameworks */,
@@ -7978,6 +7985,7 @@
 				89DB12832BFB96690005513B /* AdjustSigComTurkcellAkillidepoSdk.xcframework in Frameworks */,
 				8C0E8FEF1FDEBDFF00789C91 /* Accelerate.framework in Frameworks */,
 				0798D5CA26981BF600F5EDE0 /* Photos.framework in Frameworks */,
+				52A682C52C8739AC0001ABBE /* ObjcExceptionBridging in Frameworks */,
 				8C0E8FF11FDEBDFF00789C91 /* WebKit.framework in Frameworks */,
 				8C0E8FF21FDEBDFF00789C91 /* AudioToolbox.framework in Frameworks */,
 				8C0E8FF41FDEBDFF00789C91 /* CoreTelephony.framework in Frameworks */,
@@ -8033,6 +8041,7 @@
 				CF8B688A23CBC9D70021B021 /* AdSupport.framework in Frameworks */,
 				CF8B688B23CBC9D70021B021 /* SystemConfiguration.framework in Frameworks */,
 				CF8B688C23CBC9D70021B021 /* Social.framework in Frameworks */,
+				52A682C32C8739360001ABBE /* XCGLogger in Frameworks */,
 				CF8B688D23CBC9D70021B021 /* MessageUI.framework in Frameworks */,
 				CF8B688E23CBC9D70021B021 /* CoreBluetooth.framework in Frameworks */,
 				CF8B688F23CBC9D70021B021 /* AssetsLibrary.framework in Frameworks */,
@@ -8042,6 +8051,7 @@
 				CF8B689323CBC9D70021B021 /* AVKit.framework in Frameworks */,
 				CF8B689423CBC9D70021B021 /* Photos.framework in Frameworks */,
 				CF8B689523CBC9D70021B021 /* CFNetwork.framework in Frameworks */,
+				52A682C12C8739360001ABBE /* ObjcExceptionBridging in Frameworks */,
 				CF8B689623CBC9D70021B021 /* iAd.framework in Frameworks */,
 				CF8B689723CBC9D70021B021 /* Foundation.framework in Frameworks */,
 				CF8B689823CBC9D70021B021 /* UIKit.framework in Frameworks */,
@@ -8067,9 +8077,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52A682C92C873A3F0001ABBE /* ObjcExceptionBridging in Frameworks */,
 				CFE4E711252D9F2300F165AD /* SwiftUI.framework in Frameworks */,
 				CFE4E712252D9F2300F165AD /* WidgetKit.framework in Frameworks */,
 				170474C471C2E516A69D866B /* Pods_LifeboxWidgetExtension.framework in Frameworks */,
+				52A682CB2C873A3F0001ABBE /* XCGLogger in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -18128,6 +18140,10 @@
 				89DCB6822B18AA6F00B65D53 /* PBXTargetDependency */,
 			);
 			name = Lifebox;
+			packageProductDependencies = (
+				52A682C42C8739AC0001ABBE /* ObjcExceptionBridging */,
+				52A682C62C8739AC0001ABBE /* XCGLogger */,
+			);
 			productName = Depo;
 			productReference = 8C0E907E1FDEBE0000789C91 /* lifebox.app */;
 			productType = "com.apple.product-type.application";
@@ -18230,6 +18246,10 @@
 				CF8B637323CBC9D70021B021 /* PBXTargetDependency */,
 			);
 			name = Lifebox_Bundle;
+			packageProductDependencies = (
+				52A682C02C8739360001ABBE /* ObjcExceptionBridging */,
+				52A682C22C8739360001ABBE /* XCGLogger */,
+			);
 			productName = Depo;
 			productReference = CF8B6B2E23CBC9D70021B021 /* lifebox_friendly.app */;
 			productType = "com.apple.product-type.application";
@@ -18248,6 +18268,10 @@
 			dependencies = (
 			);
 			name = LifeboxWidgetExtension;
+			packageProductDependencies = (
+				52A682C82C873A3F0001ABBE /* ObjcExceptionBridging */,
+				52A682CA2C873A3F0001ABBE /* XCGLogger */,
+			);
 			productName = LifeboxWidgetExtension;
 			productReference = CFE4E71C252D9F2300F165AD /* LifeboxWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -18350,6 +18374,9 @@
 				ka,
 			);
 			mainGroup = 051E1DEA19CAC2F900FD1E03;
+			packageReferences = (
+				52A682B72C8736E60001ABBE /* XCRemoteSwiftPackageReference "XCGLogger" */,
+			);
 			productRefGroup = 051E1DF419CAC2F900FD1E03 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -19472,7 +19499,6 @@
 				"${BUILT_PRODUCTS_DIR}/Mantis/Mantis.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
 				"${BUILT_PRODUCTS_DIR}/MetalPetal/MetalPetal.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -19484,7 +19510,6 @@
 				"${BUILT_PRODUCTS_DIR}/TTGSnackbar/TTGSnackbar.framework",
 				"${BUILT_PRODUCTS_DIR}/Typist/Typist.framework",
 				"${BUILT_PRODUCTS_DIR}/UICKeyChainStore/UICKeyChainStore.framework",
-				"${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework",
 				"${BUILT_PRODUCTS_DIR}/YYImage/YYImage.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -19525,7 +19550,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mantis.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MetalPetal.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -19537,7 +19561,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTGSnackbar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Typist.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICKeyChainStore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -19588,7 +19611,6 @@
 				"${BUILT_PRODUCTS_DIR}/Mantis/Mantis.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
 				"${BUILT_PRODUCTS_DIR}/MetalPetal/MetalPetal.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -19600,7 +19622,6 @@
 				"${BUILT_PRODUCTS_DIR}/TTGSnackbar/TTGSnackbar.framework",
 				"${BUILT_PRODUCTS_DIR}/Typist/Typist.framework",
 				"${BUILT_PRODUCTS_DIR}/UICKeyChainStore/UICKeyChainStore.framework",
-				"${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework",
 				"${BUILT_PRODUCTS_DIR}/YYImage/YYImage.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -19640,7 +19661,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mantis.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MetalPetal.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -19652,7 +19672,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTGSnackbar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Typist.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICKeyChainStore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -19866,7 +19885,6 @@
 				"${BUILT_PRODUCTS_DIR}/Mantis/Mantis.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
 				"${BUILT_PRODUCTS_DIR}/MetalPetal/MetalPetal.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -19878,7 +19896,6 @@
 				"${BUILT_PRODUCTS_DIR}/TTGSnackbar/TTGSnackbar.framework",
 				"${BUILT_PRODUCTS_DIR}/Typist/Typist.framework",
 				"${BUILT_PRODUCTS_DIR}/UICKeyChainStore/UICKeyChainStore.framework",
-				"${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework",
 				"${BUILT_PRODUCTS_DIR}/YYImage/YYImage.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -19918,7 +19935,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mantis.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MetalPetal.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -19930,7 +19946,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTGSnackbar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Typist.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICKeyChainStore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -26233,6 +26248,50 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		52A682B72C8736E60001ABBE /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DaveWoodCom/XCGLogger";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		52A682C02C8739360001ABBE /* ObjcExceptionBridging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52A682B72C8736E60001ABBE /* XCRemoteSwiftPackageReference "XCGLogger" */;
+			productName = ObjcExceptionBridging;
+		};
+		52A682C22C8739360001ABBE /* XCGLogger */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52A682B72C8736E60001ABBE /* XCRemoteSwiftPackageReference "XCGLogger" */;
+			productName = XCGLogger;
+		};
+		52A682C42C8739AC0001ABBE /* ObjcExceptionBridging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52A682B72C8736E60001ABBE /* XCRemoteSwiftPackageReference "XCGLogger" */;
+			productName = ObjcExceptionBridging;
+		};
+		52A682C62C8739AC0001ABBE /* XCGLogger */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52A682B72C8736E60001ABBE /* XCRemoteSwiftPackageReference "XCGLogger" */;
+			productName = XCGLogger;
+		};
+		52A682C82C873A3F0001ABBE /* ObjcExceptionBridging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52A682B72C8736E60001ABBE /* XCRemoteSwiftPackageReference "XCGLogger" */;
+			productName = ObjcExceptionBridging;
+		};
+		52A682CA2C873A3F0001ABBE /* XCGLogger */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52A682B72C8736E60001ABBE /* XCRemoteSwiftPackageReference "XCGLogger" */;
+			productName = XCGLogger;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		8C47809F228D7BD4003EE471 /* LifeBoxModel.xcdatamodeld */ = {
