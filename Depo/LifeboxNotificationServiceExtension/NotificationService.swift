@@ -18,5 +18,4 @@ class NotificationService : NetmeraNotificationServiceExtension {
     override func serviceExtensionTimeWillExpire() {
         super.serviceExtensionTimeWillExpire()
     }
-
 }
