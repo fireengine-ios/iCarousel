@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import UIKit
 
 protocol RequestParameters {
     var requestURL: URL { get }

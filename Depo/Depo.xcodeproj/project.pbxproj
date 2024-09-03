@@ -680,6 +680,11 @@
 		52A682C72C8739AC0001ABBE /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 52A682C62C8739AC0001ABBE /* XCGLogger */; };
 		52A682C92C873A3F0001ABBE /* ObjcExceptionBridging in Frameworks */ = {isa = PBXBuildFile; productRef = 52A682C82C873A3F0001ABBE /* ObjcExceptionBridging */; };
 		52A682CB2C873A3F0001ABBE /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 52A682CA2C873A3F0001ABBE /* XCGLogger */; };
+		52A682D22C873D3B0001ABBE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 52A682D12C873D3B0001ABBE /* Alamofire */; };
+		52A682D42C873D540001ABBE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 52A682D32C873D540001ABBE /* Alamofire */; };
+		52A682D62C873D650001ABBE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 52A682D52C873D650001ABBE /* Alamofire */; };
+		52A682D82C873D700001ABBE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 52A682D72C873D700001ABBE /* Alamofire */; };
+		52A682DA2C873D7F0001ABBE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 52A682D92C873D7F0001ABBE /* Alamofire */; };
 		52B9004F28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B9004E28D8758400B99FD9 /* PackagesBannerBuyPremiumView.swift */; };
 		52BF679628FFE05300D8D4E6 /* PasswordValidationSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF679528FFE05300D8D4E6 /* PasswordValidationSetView.swift */; };
 		52BF679728FFE05300D8D4E6 /* PasswordValidationSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF679528FFE05300D8D4E6 /* PasswordValidationSetView.swift */; };
@@ -7971,6 +7976,7 @@
 				8C0E8FE21FDEBDFF00789C91 /* Security.framework in Frameworks */,
 				8C0E8FE51FDEBDFF00789C91 /* CoreLocation.framework in Frameworks */,
 				0798D5C626981BC600F5EDE0 /* Photos.framework in Frameworks */,
+				52A682D22C873D3B0001ABBE /* Alamofire in Frameworks */,
 				52A682C72C8739AC0001ABBE /* XCGLogger in Frameworks */,
 				8C0E8FE71FDEBDFF00789C91 /* CoreData.framework in Frameworks */,
 				98B047CB259314740011DAEB /* MPush.framework in Frameworks */,
@@ -8005,6 +8011,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC27C046A07C345BCA8EE5D4 /* Pods_LifeboxFileProvider.framework in Frameworks */,
+				52A682D82C873D700001ABBE /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8021,6 +8028,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B2F1D44305B1F1E2BFEBCAF /* Pods_LifeboxShared.framework in Frameworks */,
+				52A682D62C873D650001ABBE /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8051,6 +8059,7 @@
 				CF8B689323CBC9D70021B021 /* AVKit.framework in Frameworks */,
 				CF8B689423CBC9D70021B021 /* Photos.framework in Frameworks */,
 				CF8B689523CBC9D70021B021 /* CFNetwork.framework in Frameworks */,
+				52A682D42C873D540001ABBE /* Alamofire in Frameworks */,
 				52A682C12C8739360001ABBE /* ObjcExceptionBridging in Frameworks */,
 				CF8B689623CBC9D70021B021 /* iAd.framework in Frameworks */,
 				CF8B689723CBC9D70021B021 /* Foundation.framework in Frameworks */,
@@ -8080,6 +8089,7 @@
 				52A682C92C873A3F0001ABBE /* ObjcExceptionBridging in Frameworks */,
 				CFE4E711252D9F2300F165AD /* SwiftUI.framework in Frameworks */,
 				CFE4E712252D9F2300F165AD /* WidgetKit.framework in Frameworks */,
+				52A682DA2C873D7F0001ABBE /* Alamofire in Frameworks */,
 				170474C471C2E516A69D866B /* Pods_LifeboxWidgetExtension.framework in Frameworks */,
 				52A682CB2C873A3F0001ABBE /* XCGLogger in Frameworks */,
 			);
@@ -18143,6 +18153,7 @@
 			packageProductDependencies = (
 				52A682C42C8739AC0001ABBE /* ObjcExceptionBridging */,
 				52A682C62C8739AC0001ABBE /* XCGLogger */,
+				52A682D12C873D3B0001ABBE /* Alamofire */,
 			);
 			productName = Depo;
 			productReference = 8C0E907E1FDEBE0000789C91 /* lifebox.app */;
@@ -18162,6 +18173,9 @@
 			dependencies = (
 			);
 			name = LifeboxFileProvider;
+			packageProductDependencies = (
+				52A682D72C873D700001ABBE /* Alamofire */,
+			);
 			productName = LifeboxFileProvider;
 			productReference = CE1BE922204831CD0074BDDC /* LifeboxFileProvider.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -18198,6 +18212,9 @@
 			dependencies = (
 			);
 			name = LifeboxShared;
+			packageProductDependencies = (
+				52A682D52C873D650001ABBE /* Alamofire */,
+			);
 			productName = LifeboxShared;
 			productReference = CE58FAEF20444492007F3F54 /* LifeboxShared.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -18249,6 +18266,7 @@
 			packageProductDependencies = (
 				52A682C02C8739360001ABBE /* ObjcExceptionBridging */,
 				52A682C22C8739360001ABBE /* XCGLogger */,
+				52A682D32C873D540001ABBE /* Alamofire */,
 			);
 			productName = Depo;
 			productReference = CF8B6B2E23CBC9D70021B021 /* lifebox_friendly.app */;
@@ -18271,6 +18289,7 @@
 			packageProductDependencies = (
 				52A682C82C873A3F0001ABBE /* ObjcExceptionBridging */,
 				52A682CA2C873A3F0001ABBE /* XCGLogger */,
+				52A682D92C873D7F0001ABBE /* Alamofire */,
 			);
 			productName = LifeboxWidgetExtension;
 			productReference = CFE4E71C252D9F2300F165AD /* LifeboxWidgetExtension.appex */;
@@ -18376,6 +18395,7 @@
 			mainGroup = 051E1DEA19CAC2F900FD1E03;
 			packageReferences = (
 				52A682B72C8736E60001ABBE /* XCRemoteSwiftPackageReference "XCGLogger" */,
+				52A682D02C873D3B0001ABBE /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 051E1DF419CAC2F900FD1E03 /* Products */;
 			projectDirPath = "";
@@ -26258,6 +26278,14 @@
 				minimumVersion = 7.1.5;
 			};
 		};
+		52A682D02C873D3B0001ABBE /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 4.8.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -26290,6 +26318,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 52A682B72C8736E60001ABBE /* XCRemoteSwiftPackageReference "XCGLogger" */;
 			productName = XCGLogger;
+		};
+		52A682D12C873D3B0001ABBE /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52A682D02C873D3B0001ABBE /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		52A682D32C873D540001ABBE /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52A682D02C873D3B0001ABBE /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		52A682D52C873D650001ABBE /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52A682D02C873D3B0001ABBE /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		52A682D72C873D700001ABBE /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52A682D02C873D3B0001ABBE /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		52A682D92C873D7F0001ABBE /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52A682D02C873D3B0001ABBE /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 

@@ -272,7 +272,6 @@ DEPENDENCIES:
   - Adjust (~> 4.35.2)
   - AGConnectAppLinking
   - AGConnectCore
-  - Alamofire (~> 4.8.1)
   - FBSDKCoreKit (~> 8)
   - FBSDKLoginKit (~> 8)
   - FBSDKShareKit (~> 8)
@@ -436,6 +435,6 @@ SPEC CHECKSUMS:
   UICKeyChainStore: ba3bff2c762b12db1e516f395c837dd25298b05e
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: bd7696051799c308a409e1982797215374fdc671
+PODFILE CHECKSUM: 8044c2a8c20a325d18df56ca6c709243e026f274
 
 COCOAPODS: 1.15.2

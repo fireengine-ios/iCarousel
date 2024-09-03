@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 typealias RequestResponse = (Data?, URLResponse?, Error?) -> Void
 typealias RequestFileDownloadResponse = (URL?, URLResponse?, Error?) -> Void
@@ -21,7 +22,6 @@ enum RequestMethod: String {
     case Patch  = "PATCH"
 }
 
-import Alamofire
 class RequestService {
     
     static let `default` = RequestService()
@@ -197,12 +197,19 @@ class RequestService {
         return sessionRequest.task!
     }
     
-    func requestProgressHander(_ progress: Alamofire.Progress, request: URLRequest) {
-        guard let url = request.url
-            else { return }
+    func requestProgressHander(_ progress: Foundation.Progress, request: URLRequest) {
+        guard let url = request.url else {
+            return
+        }
         
-        SingletonStorage.shared.progressDelegates.invoke(invocation: { delegate in
-            delegate.didSend(ratio: Float(progress.fractionCompleted), bytes: progress.completedUnitCount.intValue, for: url)
-        })
+        SingletonStorage.shared.progressDelegates.invoke(
+            invocation: { delegate in
+                delegate.didSend(
+                    ratio: Float(progress.fractionCompleted),
+                    bytes: progress.completedUnitCount.intValue,
+                    for: url
+                )
+            }
+        )
     }
 }
