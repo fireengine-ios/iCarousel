@@ -709,11 +709,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
     func updateBrandType() {
         
         var params = [String: Any]()
-#if LIFEBOX
         params["brandType"] = "LIFEBOX"
-#elseif LIFEDRIVE
-        params["brandType"] = "BILLO"
-#endif
         
         sessionManager.request(RouteRequests.Account.Settings.settingsApi,
                                method: .patch,

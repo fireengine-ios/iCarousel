@@ -180,15 +180,6 @@ final class NetmeraService {
         case .preProduction, .test:
             return "3PJRHrXDiqa-pwWScAq1P8Kdy36nFr6GtZJwBnfqCpCxnST7-scT_Q"
         }
-
-        #elseif LIFEDRIVE
-        switch RouteRequests.currentServerEnvironment {
-        case .production:
-            return "LINA4LCdpz6st8QajRsXvZ3eUwV5ENwJTbzrhSufrxjRWv-pvzwmZw"
-        case .preProduction, .test:
-            return "6l30TJ05YenQKefUTBw81SZPwBa404aJoAhPAsmZEdyxLJVO90Q8Rw"
-        }
-
         #else
         return ""
         #endif

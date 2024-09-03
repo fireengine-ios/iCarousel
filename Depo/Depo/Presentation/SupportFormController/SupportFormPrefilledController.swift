@@ -223,37 +223,22 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
             
             getUserInfo { quota, quotaUsed, packages, feedbackEmail in
                 let versionString = SettingsBundleHelper.appVersion()
-                #if LIFEDRIVE
-                    let emailBody = TextConstants.supportFormBilloTopText + "\n\n" + problem + "\n\n" +
-                        String(format: TextConstants.supportFormEmailBody,
-                               name,
-                               surname,
-                               email,
-                               fullPhoneNumber,
-                               versionString,
-                               CoreTelephonyService().operatorName() ?? "",
-                               UIDevice.current.modelName,
-                               UIDevice.current.systemVersion,
-                               Device.locale,
-                               ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN")
-                #else
-                    let emailBody = problem + "\n\n" +
-                        String(format: TextConstants.feedbackMailTextFormat,
-                               versionString,
-                               fullPhoneNumber,
-                               CoreTelephonyService().operatorName() ?? "",
-                               UIDevice.current.modelName,
-                               UIDevice.current.systemVersion,
-                               Device.locale,
-                               ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN",
-                               packages,
-                               quota,
-                               quotaUsed,
-                               name,
-                               surname,
-                               email,
-                               subject)
-                #endif
+                let emailBody = problem + "\n\n" +
+                String(format: TextConstants.feedbackMailTextFormat,
+                       versionString,
+                       fullPhoneNumber,
+                       CoreTelephonyService().operatorName() ?? "",
+                       UIDevice.current.modelName,
+                       UIDevice.current.systemVersion,
+                       Device.locale,
+                       ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN",
+                       packages,
+                       quota,
+                       quotaUsed,
+                       name,
+                       surname,
+                       email,
+                       subject)
                 
                 let subjectWithAppName = TextConstants.NotLocalized.appNameMailSubject + subject
                 let emailSubject: String

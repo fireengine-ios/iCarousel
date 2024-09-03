@@ -27,11 +27,7 @@ struct TextConstants {
         static let permissionsPolicyLink = "ETK_KVKK_Izin_Politikasi"
         
         static let appNameLowercased: String = {
-            #if LIFEDRIVE
-                return "billo"
-            #else
                 return "lifebox"
-            #endif
         }()
         private static let appNameUppercased = appNameLowercased.uppercased()
         private static let appNameCapitalized = appNameLowercased.capitalized

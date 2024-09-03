@@ -92,10 +92,6 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
         setupGradientBackground()
         navigationItem.leftBarButtonItem = cancelAsBackButton
         navigationItem.title = TextConstants.Spotify.Import.navBarTitle
-        
-        #if LIFEDRIVE
-        brandImageHeight.constant = 72
-        #endif
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -114,11 +114,7 @@ struct WidgetMediumSizeView: View {
 //MARK: - Rule 0 - WidgetLoginRequiredView
 struct WidgetLoginRequiredSmallView: View {
     var body: some View {
-        #if LIFEDRIVE
-            let imageName = "sign_in_billo"
-        #else
-            let imageName = "sign_in"
-        #endif
+        let imageName = "sign_in"
         
         WidgetEntrySmallView(imageName: imageName,
                              title: "",
@@ -130,11 +126,7 @@ struct WidgetLoginRequiredSmallView: View {
 
 struct WidgetLoginRequiredMediumView: View {
     var body: some View {
-        #if LIFEDRIVE
-            let imageName = "sign_in_billo"
-        #else
-            let imageName = "sign_in"
-        #endif
+        let imageName = "sign_in"
         
         WidgetEntryMediumView(imageName: imageName,
                               title: "",

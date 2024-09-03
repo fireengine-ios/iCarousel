@@ -72,12 +72,10 @@ enum SettingsTypes: Int {
         }
         
         //if ((Device.locale == "tr" || Device.locale == "en") && !RouteRequests.isBillo) {
-        if (!RouteRequests.isBillo) {
-            if isChatbotShown && !defaultSectionThreeTypes.contains(chatbot) {
-                SettingsTypes.defaultSectionThreeTypes.insert(chatbot, at: 1)
-            } else if !isChatbotShown && defaultSectionThreeTypes.contains(chatbot){
-                SettingsTypes.defaultSectionThreeTypes.remove(chatbot)
-            }
+        if isChatbotShown && !defaultSectionThreeTypes.contains(chatbot) {
+            SettingsTypes.defaultSectionThreeTypes.insert(chatbot, at: 1)
+        } else if !isChatbotShown && defaultSectionThreeTypes.contains(chatbot){
+            SettingsTypes.defaultSectionThreeTypes.remove(chatbot)
         }
         cells.append(contentsOf: SettingsTypes.defaultSectionThreeTypes)
         result.append(cells)

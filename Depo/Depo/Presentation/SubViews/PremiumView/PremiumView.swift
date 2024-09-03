@@ -92,7 +92,7 @@ final class PremiumView: UIView {
             attributes: [.foregroundColor: ColorConstants.textGrayColor,
                          .font: UIFont.TurkcellSaturaBolFont(size: policyHeaderSize)])
         
-        let policyText = RouteRequests.isBillo ? TextConstants.packagesPolicyBilloText : TextConstants.packagesPolicyText
+        let policyText = TextConstants.packagesPolicyText
         
         let policyAttributedString = NSMutableAttributedString(
             string: "\n\n" + policyText,

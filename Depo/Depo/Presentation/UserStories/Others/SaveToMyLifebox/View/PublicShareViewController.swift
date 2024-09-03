@@ -100,7 +100,7 @@ class PublicShareViewController: BaseViewController {
     
     private func createDownloadFileName() -> String {
         let date = Date().createCurrentDate() + "-" + Date().createCurrentHour()
-        let appName = RouteRequests.isBillo ? "billo" : "lifebox"
+        let appName = "lifebox"
         return "\(appName)-\(date).zip"
     }
     

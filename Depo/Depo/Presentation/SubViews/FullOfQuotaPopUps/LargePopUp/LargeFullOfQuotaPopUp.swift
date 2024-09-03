@@ -169,11 +169,7 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
     }
     
     private func setupBackgroundImageView() {
-        #if LIFEDRIVE
-        //For Billo(Lifedrive) background image should be clear
-        #else
         backgroundImageView.image = UIImage(named: "FullOfQuotaImage")
-        #endif
     }
     
     private func setupViewAsType() {

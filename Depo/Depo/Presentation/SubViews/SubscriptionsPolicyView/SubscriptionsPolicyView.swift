@@ -50,9 +50,7 @@ final class SubscriptionsPolicyView: UIView {
                           .font: UIFont.TurkcellSaturaBolFont(size: policyHeaderSize)]
         )
         
-        let policyText = RouteRequests.isBillo
-            ? TextConstants.packagesPolicyBilloText
-            : TextConstants.packagesPolicyText
+        let policyText = TextConstants.packagesPolicyText
         let policyAttributedString = NSMutableAttributedString(
             string: "\n\n" + policyText,
             attributes: [.foregroundColor: ColorConstants.textGrayColor,

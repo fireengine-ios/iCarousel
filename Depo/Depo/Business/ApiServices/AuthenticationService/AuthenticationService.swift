@@ -98,11 +98,7 @@ class SignUpUser: BaseRequestParametrs {
     let resignup: Bool?
     let appleGoogleUser: AppleGoogleUser?
     var brandType: String {
-        #if LIFEDRIVE 
-            return "BILLO"
-        #else
-            return "LIFEBOX"
-        #endif
+        return "LIFEBOX"
     }
 
     override var requestParametrs: Any {

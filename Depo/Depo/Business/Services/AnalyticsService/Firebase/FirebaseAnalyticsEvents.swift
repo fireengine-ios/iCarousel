@@ -59,46 +59,6 @@ enum AnalyticsEvent {
     static var purchaseToken: String = ""
     
     var token: String {
-        #if LIFEDRIVE
-            switch self {
-            case .signUp: return "vq33ql"
-            case .login: return "6p1zes"
-                
-            case .uploadPhoto: return "bb7rkc"
-            case .uploadVideo: return "syfucn"
-            case .uploadFromCamera: return "f1xmv5"
-            case .uploadMusic: return "92mj33"
-            case .uploadDocument: return "at77np"
-                
-            case .purchaseTurkcell50: return "8oapnp"
-            case .purchaseTurkcell100: return "oziuyb"
-            case .purchaseTurkcell250: return "48kuya"
-            case .purchaseTurkcell250_SixMonth: return "a6uav1"
-            case .purchaseTurkcell500: return "hmuea4"
-            case .purchaseTurkcell2500: return "br8bqi"
-            case .purchaseTurkcellPremium: return "48qsxv"
-                
-            case .purchaseNonTurkcell50: return "pdouoa"
-            case .purchaseNonTurkcell100: return "qsa0yw"
-            case .purchaseNonTurkcell250: return "48kuya"
-            case .purchaseNonTurkcell250_SixMonth: return "a6uav1"
-            case .purchaseNonTurkcell500: return "alvhrn"
-            case .purchaseNonTurkcell2500: return "lr6i1j"
-            case .purchaseNonTurkcellPremium: return "cxf2hr"
-                
-            case .importDropbox: return "afb0bz"
-            case .importFacebook: return "pto7xt"
-            case .importInstagram: return "kp4fu3"
-                
-            case .turnOnAutosync: return "4nsckx"
-            case .contactBackup: return "c94pqu"
-            case .freeUpSpace: return "3cccmx"
-            case .setPasscode: return "kj4blr"
-            case .createStory: return "x35cgx"
-            case .photopickClick: return "nodn1h"
-            case .photopick: return "v5uyyi"
-            }
-        #else
             switch self {
             case .signUp: return "ese4q4"
             case .login: return "qqnm9p"
@@ -149,7 +109,6 @@ enum AnalyticsEvent {
             case .photopickClick: return "rijrgk"
             case .photopick: return "ew0s45"
             }
-        #endif
     }
         
     var facebookEventName: String {

@@ -9,15 +9,6 @@
 import Foundation
 
 struct RouteRequests {
-    
-    static let isBillo: Bool = {
-        #if LIFEDRIVE
-        return true
-        #else
-        return false
-        #endif
-    }()
-    
     enum ServerEnvironment {
         case test
         case preProduction
@@ -88,14 +79,10 @@ struct RouteRequests {
     }()
     
     static let dynamicLinkDomain: String = {
-        if isBillo {
-            return "https://billo.page.link"
-        } else {
-            switch currentServerEnvironment {
+        switch currentServerEnvironment {
             case .test: return "https://testlifebox.page.link"
             case .preProduction: return "https://testlifebox.page.link"
             case .production: return "https://mylifebox.page.link"
-            }
         }
     }()
     
@@ -256,14 +243,11 @@ struct RouteRequests {
     //MARK : Faq
     static var faqContentUrl: String {
         switch currentServerEnvironment {
-        case .production: return isBillo ? "https://mybilloapp.com/faq/?lang=%@)" :
-            "https://mylifebox.com/%@/faq/index.html"
+        case .production: return "https://mylifebox.com/%@/faq/index.html"
             
-        case .preProduction: return isBillo ? "https://prp.mylifebox.com/faq/?lang=%@" :
-            "https://mylifebox.com/%@/faq/index.html"
+        case .preProduction: return "https://mylifebox.com/%@/faq/index.html"
             
-        case .test: return isBillo ? "https://dev.mylifebox.com/faq/?lang=%@" :
-                   "https://adepodev.turkcell.com.tr/%@/faq/index.html"
+        case .test: return "https://adepodev.turkcell.com.tr/%@/faq/index.html"
         }
     }
 
@@ -337,8 +321,6 @@ struct RouteRequests {
     static func updaterUrl() -> String {
         #if LIFEBOX
             let jsonName = "download/update_ios.json"
-        #elseif LIFEDRIVE
-            let jsonName = "download/update_lifedrive_ios.json"
         #else
             let jsonName = "unknown"
             debugPrint("⚠️: unknown turkcell updater url")
@@ -487,13 +469,11 @@ struct RouteRequests {
     
     static var globalPermissionsDetails: String {
         switch currentServerEnvironment {
-        case .production: return isBillo ? "https://mybilloapp.com/global_ops.html?lang=\(Device.locale)" :
-                                           "https://mylifebox.com/portal/global_ops.html?lang=\(Device.locale)"
-                                            
-        case .preProduction: return isBillo ? "https://prp.mylifebox.com/global_ops.html?lang=\(Device.locale)" :
-                                "https://adepotest.turkcell.com.tr/portal/global_ops.html?lang=\(Device.locale)"
-            
-        case .test: return isBillo ? "https://dev.mylifebox.com/global_ops.html?lang=\(Device.locale)" :  ""
+            case .production: return "https://mylifebox.com/portal/global_ops.html?lang=\(Device.locale)"
+                
+            case .preProduction: return "https://adepotest.turkcell.com.tr/portal/global_ops.html?lang=\(Device.locale)"
+                
+            case .test: return  ""
         }
     }
     
