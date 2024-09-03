@@ -17,7 +17,7 @@
                      BuildableIdentifier = "primary"
                      BlueprintIdentifier = "CF8B636A23CBC9D70021B021"
                      BuildableName = "lifebox_friendly.app"
-                     BlueprintName = "Lifebox_Bundle"
+                     BlueprintName = "Lifebox_Friendly"
                      ReferencedContainer = "container:Depo.xcodeproj">
                   </BuildableReference>
                </EnvironmentBuildable>
@@ -35,7 +35,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CF8B636A23CBC9D70021B021"
                BuildableName = "lifebox_friendly.app"
-               BlueprintName = "Lifebox_Bundle"
+               BlueprintName = "Lifebox_Friendly"
                ReferencedContainer = "container:Depo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -65,7 +65,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CF8B636A23CBC9D70021B021"
             BuildableName = "lifebox_friendly.app"
-            BlueprintName = "Lifebox_Bundle"
+            BlueprintName = "Lifebox_Friendly"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -82,7 +82,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CF8B636A23CBC9D70021B021"
             BuildableName = "lifebox_friendly.app"
-            BlueprintName = "Lifebox_Bundle"
+            BlueprintName = "Lifebox_Friendly"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

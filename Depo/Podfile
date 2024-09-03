@@ -99,7 +99,7 @@ target 'Lifebox' do
   lifebox_pods
 end
 
-target 'Lifebox_Bundle' do
+target 'Lifebox_Friendly' do
   lifebox_pods
 end
 
