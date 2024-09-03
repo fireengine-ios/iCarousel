@@ -145,7 +145,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AdjustDelegate {
             }
         }
         
-        startListeninAppLink()
+        startAppLinkListening()
         checkNewAppVersion()
         
         return true
@@ -397,14 +397,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AdjustDelegate {
         
     }
     
-    private func startListeninAppLink() {
-//        AGCInstance.startUp()
-//        
-//        AGCAppLinking.instance().handle { (link, error) in
-//            if let deepLink = link {
-//                self.handleIncomingApplink(deepLink)
-//            }
-//        }
+    private func startAppLinkListening() {
+#if APPSTORE
+        AGCInstance.startUp(config)
+        
+        AGCAppLinking.instance().handle { (link, error) in
+            if let deepLink = link {
+                self.handleIncomingApplink(deepLink)
+            }
+        }
+#endif
     }
     
     private func checkNewAppVersion() {
