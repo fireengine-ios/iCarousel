@@ -1,6 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '11.0'
+platform :ios, '12.0'
 use_frameworks!
 inhibit_all_warnings!
 ENV['COCOAPODS_DISABLE_STATS'] = "true"
@@ -83,11 +83,6 @@ def file_provider_ui_pods
   shared_pods
 end
 
-def autosync_widget_pods
-  pod 'MMWormhole', '~> 2.0.0'
-  pod 'KeychainSwift', '~> 19'
-end
-
 def notification_pods
   pod 'Netmera', '~> 3.16.0'
   pod 'iCarousel', '~> 1'
@@ -124,44 +119,8 @@ target 'LifeboxWidgetExtension' do
   widget_pods
 end
 
-#target 'autosync-widget' do
-#  autosync_widget_pods
-#end
-
 target 'LifeboxUnitTests' do
   lifebox_pods
-end
-
-target 'Billo' do
-  lifebox_pods
-end
-
-target 'Billo_Bundle' do
-  lifebox_pods
-end
-
-target 'BilloShared' do
-  sharing_pods
-end
-
-target 'BilloFileProvider' do
-  file_provider_pods
-end
-
-target 'BilloProviderUI' do
-  file_provider_ui_pods
-end
-
-#target 'Billo-widget' do
-#  autosync_widget_pods
-#end
-
-target 'BilloWidgetExtension' do
-  widget_pods
-end
-
-target 'BilloNotificationService' do
-  notification_pods
 end
 
 target 'LifeboxNotificationServiceExtension' do
@@ -173,8 +132,8 @@ post_install do |installer|
     installer.pods_project.targets.each do |target|
         target.build_configurations.each do |config|
             config.build_settings['ONLY_ACTIVE_ARCH'] = 'NO'
-            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
-config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
+            config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
         end
     end
 end
