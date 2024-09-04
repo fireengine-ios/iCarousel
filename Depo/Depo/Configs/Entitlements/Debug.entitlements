@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>aps-environment</key>
+	<string>development</string>
+	<key>com.apple.developer.applesignin</key>
+	<array>
+		<string>Default</string>
+	</array>
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>applinks:ld9m.adj.st</string>
+		<string>applinks:tcloudstb.turkcell.com.tr</string>
+		<string>applinks:adepotest.turkcell.com.tr</string>
+		<string>applinks:mylifebox.com</string>
+		<string>applinks:testlifebox.page.link</string>
+		<string>applinks:mylifebox.page.link</string>
+		<string>applinks:mylifebox.dre.agconnect.link</string>
+		<string>applinks:mylifeboxpaycell.dre.agconnect.link</string>
+	</array>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>group.by.com.life.lifebox</string>
+	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)by.com.life.lifebox</string>
+	</array>
+</dict>
+</plist>
