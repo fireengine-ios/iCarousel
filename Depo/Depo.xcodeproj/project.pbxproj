@@ -663,6 +663,11 @@
 		527302EE2940D1120061E754 /* BrandAmbassadorDeeplinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527302EC2940D1120061E754 /* BrandAmbassadorDeeplinkHandler.swift */; };
 		5282AAF029E930900014FBCF /* ImageRetryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5282AAEF29E930900014FBCF /* ImageRetryService.swift */; };
 		5282AAF129E930900014FBCF /* ImageRetryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5282AAEF29E930900014FBCF /* ImageRetryService.swift */; };
+		52830ABF2C888EEB004E23D5 /* NetmeraIOS in Frameworks */ = {isa = PBXBuildFile; productRef = 52830ABE2C888EEB004E23D5 /* NetmeraIOS */; };
+		52830AC12C888F27004E23D5 /* NetmeraIOS in Frameworks */ = {isa = PBXBuildFile; productRef = 52830AC02C888F27004E23D5 /* NetmeraIOS */; };
+		52830AC32C888F31004E23D5 /* NetmeraIOS in Frameworks */ = {isa = PBXBuildFile; productRef = 52830AC22C888F31004E23D5 /* NetmeraIOS */; };
+		52830AC52C888F39004E23D5 /* NetmeraIOS in Frameworks */ = {isa = PBXBuildFile; productRef = 52830AC42C888F39004E23D5 /* NetmeraIOS */; };
+		52830AC72C888F4A004E23D5 /* NetmeraNotificationServiceExtensionSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 52830AC62C888F4A004E23D5 /* NetmeraNotificationServiceExtensionSDK */; };
 		52A5E00A2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
 		52A5E00B2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
 		52A5E014291A465D00670B0C /* SnackBarHeaderTwoLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */; };
@@ -7926,6 +7931,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43B02CE5B49ED5951332A104 /* Pods_LifeboxNotificationServiceExtension.framework in Frameworks */,
+				52830AC72C888F4A004E23D5 /* NetmeraNotificationServiceExtensionSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7954,6 +7960,7 @@
 				8C0E8FED1FDEBDFF00789C91 /* Foundation.framework in Frameworks */,
 				8C0E8FEE1FDEBDFF00789C91 /* UIKit.framework in Frameworks */,
 				B56E0DD820B414580082044D /* StoreKit.framework in Frameworks */,
+				52830ABF2C888EEB004E23D5 /* NetmeraIOS in Frameworks */,
 				89DB12832BFB96690005513B /* AdjustSigComTurkcellAkillidepoSdk.xcframework in Frameworks */,
 				8C0E8FEF1FDEBDFF00789C91 /* Accelerate.framework in Frameworks */,
 				0798D5CA26981BF600F5EDE0 /* Photos.framework in Frameworks */,
@@ -7978,6 +7985,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52A682EB2C8745B60001ABBE /* SwiftyJSON in Frameworks */,
+				52830AC52C888F39004E23D5 /* NetmeraIOS in Frameworks */,
 				52A682D82C873D700001ABBE /* Alamofire in Frameworks */,
 				F26917F8B115AF62714430CE /* Pods_LifeboxFileProvider.framework in Frameworks */,
 			);
@@ -7996,6 +8004,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52A682E92C8745AE0001ABBE /* SwiftyJSON in Frameworks */,
+				52830AC32C888F31004E23D5 /* NetmeraIOS in Frameworks */,
 				52A682D62C873D650001ABBE /* Alamofire in Frameworks */,
 				FB99DBFC7593688C8EC71AB7 /* Pods_LifeboxShared.framework in Frameworks */,
 			);
@@ -8019,6 +8028,7 @@
 				CF8B688B23CBC9D70021B021 /* SystemConfiguration.framework in Frameworks */,
 				CF8B688C23CBC9D70021B021 /* Social.framework in Frameworks */,
 				52A682C32C8739360001ABBE /* XCGLogger in Frameworks */,
+				52830AC12C888F27004E23D5 /* NetmeraIOS in Frameworks */,
 				CF8B688D23CBC9D70021B021 /* MessageUI.framework in Frameworks */,
 				CF8B688E23CBC9D70021B021 /* CoreBluetooth.framework in Frameworks */,
 				CF8B688F23CBC9D70021B021 /* AssetsLibrary.framework in Frameworks */,
@@ -18133,6 +18143,9 @@
 			dependencies = (
 			);
 			name = LifeboxNotificationServiceExtension;
+			packageProductDependencies = (
+				52830AC62C888F4A004E23D5 /* NetmeraNotificationServiceExtensionSDK */,
+			);
 			productName = LifeboxNotificationServiceExtension;
 			productReference = 89DCB67C2B18AA6E00B65D53 /* LifeboxNotificationServiceExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -18167,6 +18180,7 @@
 				52A682C62C8739AC0001ABBE /* XCGLogger */,
 				52A682D12C873D3B0001ABBE /* Alamofire */,
 				52A682E42C8745480001ABBE /* SwiftyJSON */,
+				52830ABE2C888EEB004E23D5 /* NetmeraIOS */,
 			);
 			productName = Depo;
 			productReference = 8C0E907E1FDEBE0000789C91 /* lifebox.app */;
@@ -18189,6 +18203,7 @@
 			packageProductDependencies = (
 				52A682D72C873D700001ABBE /* Alamofire */,
 				52A682EA2C8745B60001ABBE /* SwiftyJSON */,
+				52830AC42C888F39004E23D5 /* NetmeraIOS */,
 			);
 			productName = LifeboxFileProvider;
 			productReference = CE1BE922204831CD0074BDDC /* LifeboxFileProvider.appex */;
@@ -18229,6 +18244,7 @@
 			packageProductDependencies = (
 				52A682D52C873D650001ABBE /* Alamofire */,
 				52A682E82C8745AE0001ABBE /* SwiftyJSON */,
+				52830AC22C888F31004E23D5 /* NetmeraIOS */,
 			);
 			productName = LifeboxShared;
 			productReference = CE58FAEF20444492007F3F54 /* LifeboxShared.appex */;
@@ -18285,6 +18301,7 @@
 				52A682C22C8739360001ABBE /* XCGLogger */,
 				52A682D32C873D540001ABBE /* Alamofire */,
 				52A682E62C8745A30001ABBE /* SwiftyJSON */,
+				52830AC02C888F27004E23D5 /* NetmeraIOS */,
 			);
 			productName = Depo;
 			productReference = CF8B6B2E23CBC9D70021B021 /* lifebox_friendly.app */;
@@ -18416,6 +18433,7 @@
 				52A682B72C8736E60001ABBE /* XCRemoteSwiftPackageReference "XCGLogger" */,
 				52A682D02C873D3B0001ABBE /* XCRemoteSwiftPackageReference "Alamofire" */,
 				52A682E32C8745480001ABBE /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				52830ABD2C888EEB004E23D5 /* XCRemoteSwiftPackageReference "netmera-ios" */,
 			);
 			productRefGroup = 051E1DF419CAC2F900FD1E03 /* Products */;
 			projectDirPath = "";
@@ -19392,14 +19410,12 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Lifebox_Friendly/Pods-Lifebox_Friendly-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseAuth/FirebaseAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
@@ -19418,7 +19434,6 @@
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
-				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
 				"${BUILT_PRODUCTS_DIR}/Mantis/Mantis.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
 				"${BUILT_PRODUCTS_DIR}/MetalPetal/MetalPetal.framework",
@@ -19431,25 +19446,18 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
 				"${BUILT_PRODUCTS_DIR}/TTGSnackbar/TTGSnackbar.framework",
 				"${BUILT_PRODUCTS_DIR}/Typist/Typist.framework",
-				"${BUILT_PRODUCTS_DIR}/UICKeyChainStore/UICKeyChainStore.framework",
 				"${BUILT_PRODUCTS_DIR}/YYImage/YYImage.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Netmera/AdIdSupport/NetmeraAdId.framework/NetmeraAdId",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Netmera/Application/Netmera.framework/Netmera",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/NetmeraCore/NetmeraCore.framework/NetmeraCore",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Netmera/NotificationServiceExtension/NetmeraNotificationServiceExtension.framework/NetmeraNotificationServiceExtension",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Adjust.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseABTesting.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
@@ -19468,7 +19476,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mantis.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MetalPetal.framework",
@@ -19481,14 +19488,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTGSnackbar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Typist.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICKeyChainStore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NetmeraAdId.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Netmera.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NetmeraCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NetmeraNotificationServiceExtension.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -19774,14 +19776,12 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Lifebox/Pods-Lifebox-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseAuth/FirebaseAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
@@ -19800,7 +19800,6 @@
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
-				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
 				"${BUILT_PRODUCTS_DIR}/Mantis/Mantis.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
 				"${BUILT_PRODUCTS_DIR}/MetalPetal/MetalPetal.framework",
@@ -19813,25 +19812,18 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
 				"${BUILT_PRODUCTS_DIR}/TTGSnackbar/TTGSnackbar.framework",
 				"${BUILT_PRODUCTS_DIR}/Typist/Typist.framework",
-				"${BUILT_PRODUCTS_DIR}/UICKeyChainStore/UICKeyChainStore.framework",
 				"${BUILT_PRODUCTS_DIR}/YYImage/YYImage.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Netmera/AdIdSupport/NetmeraAdId.framework/NetmeraAdId",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Netmera/Application/Netmera.framework/Netmera",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/NetmeraCore/NetmeraCore.framework/NetmeraCore",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Netmera/NotificationServiceExtension/NetmeraNotificationServiceExtension.framework/NetmeraNotificationServiceExtension",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Adjust.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseABTesting.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
@@ -19850,7 +19842,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mantis.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MetalPetal.framework",
@@ -19863,14 +19854,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTGSnackbar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Typist.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICKeyChainStore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NetmeraAdId.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Netmera.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NetmeraCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NetmeraNotificationServiceExtension.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -19884,14 +19870,12 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseAuth/FirebaseAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
@@ -19910,7 +19894,6 @@
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
-				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
 				"${BUILT_PRODUCTS_DIR}/Mantis/Mantis.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
 				"${BUILT_PRODUCTS_DIR}/MetalPetal/MetalPetal.framework",
@@ -19923,24 +19906,18 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
 				"${BUILT_PRODUCTS_DIR}/TTGSnackbar/TTGSnackbar.framework",
 				"${BUILT_PRODUCTS_DIR}/Typist/Typist.framework",
-				"${BUILT_PRODUCTS_DIR}/UICKeyChainStore/UICKeyChainStore.framework",
 				"${BUILT_PRODUCTS_DIR}/YYImage/YYImage.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Netmera/AdIdSupport/NetmeraAdId.framework/NetmeraAdId",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Netmera/Application/Netmera.framework/Netmera",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/NetmeraCore/NetmeraCore.framework/NetmeraCore",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Adjust.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseABTesting.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
@@ -19959,7 +19936,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mantis.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MetalPetal.framework",
@@ -19972,13 +19948,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTGSnackbar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Typist.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICKeyChainStore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NetmeraAdId.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Netmera.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NetmeraCore.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -25938,6 +25910,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		52830ABD2C888EEB004E23D5 /* XCRemoteSwiftPackageReference "netmera-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Netmera/netmera-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.23.12;
+			};
+		};
 		52A682B72C8736E60001ABBE /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/DaveWoodCom/XCGLogger";
@@ -25965,6 +25945,31 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		52830ABE2C888EEB004E23D5 /* NetmeraIOS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830ABD2C888EEB004E23D5 /* XCRemoteSwiftPackageReference "netmera-ios" */;
+			productName = NetmeraIOS;
+		};
+		52830AC02C888F27004E23D5 /* NetmeraIOS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830ABD2C888EEB004E23D5 /* XCRemoteSwiftPackageReference "netmera-ios" */;
+			productName = NetmeraIOS;
+		};
+		52830AC22C888F31004E23D5 /* NetmeraIOS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830ABD2C888EEB004E23D5 /* XCRemoteSwiftPackageReference "netmera-ios" */;
+			productName = NetmeraIOS;
+		};
+		52830AC42C888F39004E23D5 /* NetmeraIOS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830ABD2C888EEB004E23D5 /* XCRemoteSwiftPackageReference "netmera-ios" */;
+			productName = NetmeraIOS;
+		};
+		52830AC62C888F4A004E23D5 /* NetmeraNotificationServiceExtensionSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830ABD2C888EEB004E23D5 /* XCRemoteSwiftPackageReference "netmera-ios" */;
+			productName = NetmeraNotificationServiceExtensionSDK;
+		};
 		52A682C02C8739360001ABBE /* ObjcExceptionBridging */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 52A682B72C8736E60001ABBE /* XCRemoteSwiftPackageReference "XCGLogger" */;

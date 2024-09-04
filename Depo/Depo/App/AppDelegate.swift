@@ -21,7 +21,6 @@ import FirebaseDynamicLinks
 import GoogleSignIn
 import AGConnectCore
 import AGConnectAppLinking
-import Netmera
 
 // the global reference to logging mechanism to be available in all files
 let log: XCGLogger = {

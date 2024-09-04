@@ -25,7 +25,7 @@ def core_pods
   pod 'AGConnectCore'
   pod 'AGConnectAppLinking'
 
-  pod 'Netmera', '~> 3.16.0'
+#  pod 'Netmera', '~> 3.16.0'
 
   pod 'SDWebImage', '~> 4'
   pod 'GoogleConversionTracking', '~> 3'
@@ -47,7 +47,7 @@ def core_pods
   #pod 'XCGLogger', '~> 7'
 
   #widget
-  pod 'MMWormhole', '~> 2.0.0'
+  #pod 'MMWormhole', '~> 2.0.0'
   
   #migration
   pod 'SQLite.swift', '0.12.0'
@@ -69,14 +69,14 @@ end
 
 def sharing_pods
   shared_pods
-  pod 'Netmera', '~> 3.16.0'
-  pod 'MMWormhole', '~> 2.0.0'
+#  pod 'Netmera', '~> 3.16.0'
+#  pod 'MMWormhole', '~> 2.0.0'
 end
 
 def file_provider_pods
   shared_pods
-  pod 'Netmera', '~> 3.16.0'
-  pod 'MMWormhole', '~> 2.0.0'
+#  pod 'Netmera', '~> 3.16.0'
+#  pod 'MMWormhole', '~> 2.0.0'
 end
 
 def file_provider_ui_pods
@@ -84,14 +84,14 @@ def file_provider_ui_pods
 end
 
 def notification_pods
-  pod 'Netmera', '~> 3.16.0'
+#  pod 'Netmera', '~> 3.16.0'
   pod 'iCarousel', '~> 1'
 end
 
 def widget_pods
   shared_pods
   pod 'SDWebImage', '~> 4'
-  pod 'MMWormhole', '~> 2.0.0'
+#  pod 'MMWormhole', '~> 2.0.0'
 #  pod 'XCGLogger', '~> 7'
 end
 
@@ -124,7 +124,7 @@ target 'LifeboxUnitTests' do
 end
 
 target 'LifeboxNotificationServiceExtension' do
- pod "Netmera/NotificationServiceExtension"
+# pod "Netmera/NotificationServiceExtension"
 end
 
 post_install do |installer|

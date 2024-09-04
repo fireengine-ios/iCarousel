@@ -1,5 +1,5 @@
 {
-  "originHash" : "168c1c8b69b68ad2b146ed94729390abfdec70baa1b1489139052227708a21a0",
+  "originHash" : "1faf77de0ee9c0e8680eddd8d6ae096d8e5e5f2f8779f1e8f77c1619ab896e86",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "75bba56748359f297a83f620d45f72cf4ebee4e7",
         "version" : "4.8.2"
+      }
+    },
+    {
+      "identity" : "netmera-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Netmera/netmera-ios.git",
+      "state" : {
+        "revision" : "e909411d4598089b9e9b3ef138a92019650f5eac",
+        "version" : "3.23.12"
       }
     },
     {
