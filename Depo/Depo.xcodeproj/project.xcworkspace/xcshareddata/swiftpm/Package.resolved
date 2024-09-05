@@ -1,5 +1,5 @@
 {
-  "originHash" : "0861c9bf7e43e71fc05ec6db5cba05db53952545075da5d8a85430aa358ebcca",
+  "originHash" : "50a2f752e636475803d014d1d1ac48d2c6aed4fe128cfa5c041fdc39d0fef4e8",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -26,6 +26,15 @@
       "state" : {
         "revision" : "c00b1ae9fa1ad8af4465bb6ca901f6943fc98eba",
         "version" : "6.5.16"
+      }
+    },
+    {
+      "identity" : "mbprogresshud",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jdg/MBProgressHUD.git",
+      "state" : {
+        "revision" : "bca42b801100b2b3a4eda0ba8dd33d858c780b0d",
+        "version" : "1.2.0"
       }
     },
     {

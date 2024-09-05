@@ -676,6 +676,8 @@
 		52830B062C899BFC004E23D5 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B052C899BFC004E23D5 /* IQKeyboardManagerSwift */; };
 		52830B152C89AB4C004E23D5 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B142C89AB4C004E23D5 /* Reachability */; };
 		52830B172C89AB8F004E23D5 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B162C89AB8F004E23D5 /* Reachability */; };
+		52830B222C89AC74004E23D5 /* MBProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B212C89AC74004E23D5 /* MBProgressHUD */; };
+		52830B242C89AC8E004E23D5 /* MBProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B232C89AC8E004E23D5 /* MBProgressHUD */; };
 		52A5E00A2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
 		52A5E00B2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
 		52A5E014291A465D00670B0C /* SnackBarHeaderTwoLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */; };
@@ -7960,6 +7962,7 @@
 				52A682D22C873D3B0001ABBE /* Alamofire in Frameworks */,
 				52A682C72C8739AC0001ABBE /* XCGLogger in Frameworks */,
 				8C0E8FE71FDEBDFF00789C91 /* CoreData.framework in Frameworks */,
+				52830B222C89AC74004E23D5 /* MBProgressHUD in Frameworks */,
 				98B047CB259314740011DAEB /* MPush.framework in Frameworks */,
 				52830AF12C898E1A004E23D5 /* Adjust in Frameworks */,
 				8C0E8FE81FDEBDFF00789C91 /* AVKit.framework in Frameworks */,
@@ -8058,6 +8061,7 @@
 				52A682E72C8745A30001ABBE /* SwiftyJSON in Frameworks */,
 				CF8B689723CBC9D70021B021 /* Foundation.framework in Frameworks */,
 				CF8B689823CBC9D70021B021 /* UIKit.framework in Frameworks */,
+				52830B242C89AC8E004E23D5 /* MBProgressHUD in Frameworks */,
 				CF8B689923CBC9D70021B021 /* StoreKit.framework in Frameworks */,
 				CF8B689A23CBC9D70021B021 /* Accelerate.framework in Frameworks */,
 				52830B062C899BFC004E23D5 /* IQKeyboardManagerSwift in Frameworks */,
@@ -18201,6 +18205,7 @@
 				52830AF62C899A15004E23D5 /* Typist */,
 				52830B032C899BBA004E23D5 /* IQKeyboardManagerSwift */,
 				52830B142C89AB4C004E23D5 /* Reachability */,
+				52830B212C89AC74004E23D5 /* MBProgressHUD */,
 			);
 			productName = Depo;
 			productReference = 8C0E907E1FDEBE0000789C91 /* lifebox.app */;
@@ -18326,6 +18331,7 @@
 				52830AF82C899A41004E23D5 /* Typist */,
 				52830B052C899BFC004E23D5 /* IQKeyboardManagerSwift */,
 				52830B162C89AB8F004E23D5 /* Reachability */,
+				52830B232C89AC8E004E23D5 /* MBProgressHUD */,
 			);
 			productName = Depo;
 			productReference = CF8B6B2E23CBC9D70021B021 /* lifebox_friendly.app */;
@@ -18462,6 +18468,7 @@
 				52830AF52C899A15004E23D5 /* XCRemoteSwiftPackageReference "Typist" */,
 				52830B022C899BBA004E23D5 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				52830B132C89AB4C004E23D5 /* XCRemoteSwiftPackageReference "Reachability" */,
+				52830B202C89AC74004E23D5 /* XCRemoteSwiftPackageReference "MBProgressHUD" */,
 			);
 			productRefGroup = 051E1DF419CAC2F900FD1E03 /* Products */;
 			projectDirPath = "";
@@ -19457,7 +19464,6 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleSignIn/GoogleSignIn.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
 				"${BUILT_PRODUCTS_DIR}/Mantis/Mantis.framework",
@@ -19495,7 +19501,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleSignIn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mantis.framework",
@@ -19815,7 +19820,6 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleSignIn/GoogleSignIn.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
 				"${BUILT_PRODUCTS_DIR}/Mantis/Mantis.framework",
@@ -19853,7 +19857,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleSignIn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mantis.framework",
@@ -19901,7 +19904,6 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleSignIn/GoogleSignIn.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
 				"${BUILT_PRODUCTS_DIR}/Mantis/Mantis.framework",
@@ -19939,7 +19941,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleSignIn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mantis.framework",
@@ -25954,6 +25955,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		52830B202C89AC74004E23D5 /* XCRemoteSwiftPackageReference "MBProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jdg/MBProgressHUD.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
 		52A682B72C8736E60001ABBE /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/DaveWoodCom/XCGLogger";
@@ -26045,6 +26054,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 52830B132C89AB4C004E23D5 /* XCRemoteSwiftPackageReference "Reachability" */;
 			productName = Reachability;
+		};
+		52830B212C89AC74004E23D5 /* MBProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830B202C89AC74004E23D5 /* XCRemoteSwiftPackageReference "MBProgressHUD" */;
+			productName = MBProgressHUD;
+		};
+		52830B232C89AC8E004E23D5 /* MBProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830B202C89AC74004E23D5 /* XCRemoteSwiftPackageReference "MBProgressHUD" */;
+			productName = MBProgressHUD;
 		};
 		52A682C02C8739360001ABBE /* ObjcExceptionBridging */ = {
 			isa = XCSwiftPackageProductDependency;

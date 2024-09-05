@@ -40,7 +40,7 @@ def core_pods
 #  pod 'IQKeyboardManagerSwift'
 
 #  pod 'ReachabilitySwift'
-  pod 'MBProgressHUD', '~> 1'
+#  pod 'MBProgressHUD', '~> 1'
   pod 'TTGSnackbar', '~> 1'
   
   #logger
