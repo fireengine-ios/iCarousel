@@ -1,5 +1,5 @@
 {
-  "originHash" : "e5b58ecd4901bc1ab7e33fadea3d3a0ece50cbdb1faf2f80fa9c4802d06d7368",
+  "originHash" : "fdd5ba5c3ed6aabf101fe7ef7ee6569cf5abe0b6422579280d8754824727d3b5",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -35,6 +35,15 @@
       "state" : {
         "revision" : "bca42b801100b2b3a4eda0ba8dd33d858c780b0d",
         "version" : "1.2.0"
+      }
+    },
+    {
+      "identity" : "metalpetal",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/MetalPetal/MetalPetal",
+      "state" : {
+        "revision" : "f9b78897bd4214bb097f352a1bde0a4f4a1e2ddb",
+        "version" : "1.25.2"
       }
     },
     {

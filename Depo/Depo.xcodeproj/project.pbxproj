@@ -684,6 +684,8 @@
 		52830B3E2C89D427004E23D5 /* SwiftyGif in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B3D2C89D427004E23D5 /* SwiftyGif */; };
 		52830B512C89DFB4004E23D5 /* SwiftyDropbox in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B502C89DFB4004E23D5 /* SwiftyDropbox */; };
 		52830B532C89DFC0004E23D5 /* SwiftyDropbox in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B522C89DFC0004E23D5 /* SwiftyDropbox */; };
+		52830B732C89ED89004E23D5 /* MetalPetal in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B722C89ED89004E23D5 /* MetalPetal */; };
+		52830B752C89EDE9004E23D5 /* MetalPetal in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B742C89EDE9004E23D5 /* MetalPetal */; };
 		52A5E00A2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
 		52A5E00B2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
 		52A5E014291A465D00670B0C /* SnackBarHeaderTwoLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */; };
@@ -7967,6 +7969,7 @@
 				0798D5C626981BC600F5EDE0 /* Photos.framework in Frameworks */,
 				52A682D22C873D3B0001ABBE /* Alamofire in Frameworks */,
 				52A682C72C8739AC0001ABBE /* XCGLogger in Frameworks */,
+				52830B732C89ED89004E23D5 /* MetalPetal in Frameworks */,
 				8C0E8FE71FDEBDFF00789C91 /* CoreData.framework in Frameworks */,
 				52830B222C89AC74004E23D5 /* MBProgressHUD in Frameworks */,
 				98B047CB259314740011DAEB /* MPush.framework in Frameworks */,
@@ -8057,6 +8060,7 @@
 				52830AC12C888F27004E23D5 /* NetmeraIOS in Frameworks */,
 				CF8B688D23CBC9D70021B021 /* MessageUI.framework in Frameworks */,
 				CF8B688E23CBC9D70021B021 /* CoreBluetooth.framework in Frameworks */,
+				52830B752C89EDE9004E23D5 /* MetalPetal in Frameworks */,
 				CF8B688F23CBC9D70021B021 /* AssetsLibrary.framework in Frameworks */,
 				CF8B689023CBC9D70021B021 /* Security.framework in Frameworks */,
 				CF8B689123CBC9D70021B021 /* CoreLocation.framework in Frameworks */,
@@ -18221,6 +18225,7 @@
 				52830B2E2C89CFC1004E23D5 /* TTGSnackbar */,
 				52830B3B2C89D400004E23D5 /* SwiftyGif */,
 				52830B502C89DFB4004E23D5 /* SwiftyDropbox */,
+				52830B722C89ED89004E23D5 /* MetalPetal */,
 			);
 			productName = Depo;
 			productReference = 8C0E907E1FDEBE0000789C91 /* lifebox.app */;
@@ -18350,6 +18355,7 @@
 				52830B302C89CFD0004E23D5 /* TTGSnackbar */,
 				52830B3D2C89D427004E23D5 /* SwiftyGif */,
 				52830B522C89DFC0004E23D5 /* SwiftyDropbox */,
+				52830B742C89EDE9004E23D5 /* MetalPetal */,
 			);
 			productName = Depo;
 			productReference = CF8B6B2E23CBC9D70021B021 /* lifebox_friendly.app */;
@@ -18490,6 +18496,7 @@
 				52830B2D2C89CFC1004E23D5 /* XCRemoteSwiftPackageReference "TTGSnackbar" */,
 				52830B3A2C89D400004E23D5 /* XCRemoteSwiftPackageReference "SwiftyGif" */,
 				52830B472C89D7FC004E23D5 /* XCRemoteSwiftPackageReference "SwiftyDropbox" */,
+				52830B712C89ED89004E23D5 /* XCRemoteSwiftPackageReference "MetalPetal" */,
 			);
 			productRefGroup = 051E1DF419CAC2F900FD1E03 /* Products */;
 			projectDirPath = "";
@@ -19488,7 +19495,6 @@
 				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
 				"${BUILT_PRODUCTS_DIR}/Mantis/Mantis.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
-				"${BUILT_PRODUCTS_DIR}/MetalPetal/MetalPetal.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SNCollectionViewLayout/SNCollectionViewLayout.framework",
@@ -19521,7 +19527,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mantis.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MetalPetal.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SNCollectionViewLayout.framework",
@@ -19836,7 +19841,6 @@
 				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
 				"${BUILT_PRODUCTS_DIR}/Mantis/Mantis.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
-				"${BUILT_PRODUCTS_DIR}/MetalPetal/MetalPetal.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SNCollectionViewLayout/SNCollectionViewLayout.framework",
@@ -19869,7 +19873,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mantis.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MetalPetal.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SNCollectionViewLayout.framework",
@@ -19912,7 +19915,6 @@
 				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
 				"${BUILT_PRODUCTS_DIR}/Mantis/Mantis.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
-				"${BUILT_PRODUCTS_DIR}/MetalPetal/MetalPetal.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SNCollectionViewLayout/SNCollectionViewLayout.framework",
@@ -19945,7 +19947,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mantis.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MetalPetal.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SNCollectionViewLayout.framework",
@@ -24778,7 +24779,7 @@
 					"$(PROJECT_DIR)/Depo",
 				);
 				MARKETING_VERSION = 26;
-				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
+				MTL_HEADER_SEARCH_PATHS = "$(HEADER_SEARCH_PATHS)";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -24851,7 +24852,7 @@
 					"$(PROJECT_DIR)/Depo",
 				);
 				MARKETING_VERSION = 26;
-				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
+				MTL_HEADER_SEARCH_PATHS = "$(HEADER_SEARCH_PATHS)";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -24923,7 +24924,7 @@
 					"$(PROJECT_DIR)/Depo",
 				);
 				MARKETING_VERSION = 26;
-				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
+				MTL_HEADER_SEARCH_PATHS = "$(HEADER_SEARCH_PATHS)";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -25531,7 +25532,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 				);
-				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
+				MTL_HEADER_SEARCH_PATHS = "$(HEADER_SEARCH_PATHS)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -25594,7 +25595,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 				);
-				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
+				MTL_HEADER_SEARCH_PATHS = "$(HEADER_SEARCH_PATHS)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -25656,7 +25657,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 				);
-				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
+				MTL_HEADER_SEARCH_PATHS = "$(HEADER_SEARCH_PATHS)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -25984,6 +25985,14 @@
 				minimumVersion = 10.1.0;
 			};
 		};
+		52830B712C89ED89004E23D5 /* XCRemoteSwiftPackageReference "MetalPetal" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MetalPetal/MetalPetal";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.2;
+			};
+		};
 		52A682B72C8736E60001ABBE /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/DaveWoodCom/XCGLogger";
@@ -26115,6 +26124,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 52830B472C89D7FC004E23D5 /* XCRemoteSwiftPackageReference "SwiftyDropbox" */;
 			productName = SwiftyDropbox;
+		};
+		52830B722C89ED89004E23D5 /* MetalPetal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830B712C89ED89004E23D5 /* XCRemoteSwiftPackageReference "MetalPetal" */;
+			productName = MetalPetal;
+		};
+		52830B742C89EDE9004E23D5 /* MetalPetal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830B712C89ED89004E23D5 /* XCRemoteSwiftPackageReference "MetalPetal" */;
+			productName = MetalPetal;
 		};
 		52A682C02C8739360001ABBE /* ObjcExceptionBridging */ = {
 			isa = XCSwiftPackageProductDependency;
