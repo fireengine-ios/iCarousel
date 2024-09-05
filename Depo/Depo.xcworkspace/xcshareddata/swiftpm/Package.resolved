@@ -1,5 +1,5 @@
 {
-  "originHash" : "d613fce0459b5734e1e52212995b557c5f9b8ac55e0b7a3127fa1e7ba6a84478",
+  "originHash" : "31d240c317e7c5fa8b167ec2793d1b51ba4d38c17fbb3835329027adf43adb66",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -53,6 +53,15 @@
       "state" : {
         "revision" : "7cbd73f46a7dfaeca079e18df7324c6de6d1834a",
         "version" : "5.2.3"
+      }
+    },
+    {
+      "identity" : "swiftygif",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/alexiscreuzot/SwiftyGif",
+      "state" : {
+        "revision" : "4430cbc148baa3907651d40562d96325426f409a",
+        "version" : "5.4.5"
       }
     },
     {
