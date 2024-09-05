@@ -41,7 +41,7 @@ def core_pods
 
 #  pod 'ReachabilitySwift'
 #  pod 'MBProgressHUD', '~> 1'
-  pod 'TTGSnackbar', '~> 1'
+#  pod 'TTGSnackbar', '~> 1'
   
   #logger
   #pod 'XCGLogger', '~> 7'

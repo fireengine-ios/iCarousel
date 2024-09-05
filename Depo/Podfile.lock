@@ -226,7 +226,6 @@ PODS:
   - SwiftyDropbox (6.0.3):
     - Alamofire (~> 4.8.2)
   - SwiftyGif (5.4.3)
-  - TTGSnackbar (1.11.1)
   - YYImage (1.0.4):
     - YYImage/Core (= 1.0.4)
   - YYImage/Core (1.0.4)
@@ -256,7 +255,6 @@ DEPENDENCIES:
   - SQLite.swift (= 0.12.0)
   - SwiftyDropbox (~> 6)
   - SwiftyGif (~> 5)
-  - TTGSnackbar (~> 1)
   - YYImage (~> 1)
 
 SPEC REPOS:
@@ -304,7 +302,6 @@ SPEC REPOS:
     - SQLite.swift
     - SwiftyDropbox
     - SwiftyGif
-    - TTGSnackbar
     - YYImage
 
 EXTERNAL SOURCES:
@@ -362,9 +359,8 @@ SPEC CHECKSUMS:
   SQLite.swift: 7cad9db150a03716336e69469ec9559c85aece5b
   SwiftyDropbox: 7e864f1e826bfc1b9b53a5edccef6c8d5fbe9e3b
   SwiftyGif: 6c3eafd0ce693cad58bb63d2b2fb9bacb8552780
-  TTGSnackbar: fea91c62637b5662f808a4c3b55f7631cb7e1ef7
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: 768ab3c856cfb55993312ab38c891a1958d9e004
+PODFILE CHECKSUM: 5768829daf8f4a06ba28eda5ff49919f9d1c6ea0
 
 COCOAPODS: 1.15.2

@@ -678,6 +678,8 @@
 		52830B172C89AB8F004E23D5 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B162C89AB8F004E23D5 /* Reachability */; };
 		52830B222C89AC74004E23D5 /* MBProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B212C89AC74004E23D5 /* MBProgressHUD */; };
 		52830B242C89AC8E004E23D5 /* MBProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B232C89AC8E004E23D5 /* MBProgressHUD */; };
+		52830B2F2C89CFC1004E23D5 /* TTGSnackbar in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B2E2C89CFC1004E23D5 /* TTGSnackbar */; };
+		52830B312C89CFD0004E23D5 /* TTGSnackbar in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B302C89CFD0004E23D5 /* TTGSnackbar */; };
 		52A5E00A2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
 		52A5E00B2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
 		52A5E014291A465D00670B0C /* SnackBarHeaderTwoLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */; };
@@ -7964,6 +7966,7 @@
 				8C0E8FE71FDEBDFF00789C91 /* CoreData.framework in Frameworks */,
 				52830B222C89AC74004E23D5 /* MBProgressHUD in Frameworks */,
 				98B047CB259314740011DAEB /* MPush.framework in Frameworks */,
+				52830B2F2C89CFC1004E23D5 /* TTGSnackbar in Frameworks */,
 				52830AF12C898E1A004E23D5 /* Adjust in Frameworks */,
 				8C0E8FE81FDEBDFF00789C91 /* AVKit.framework in Frameworks */,
 				8C0E8FE91FDEBDFF00789C91 /* Photos.framework in Frameworks */,
@@ -8043,6 +8046,7 @@
 				CF8B688B23CBC9D70021B021 /* SystemConfiguration.framework in Frameworks */,
 				CF8B688C23CBC9D70021B021 /* Social.framework in Frameworks */,
 				52A682C32C8739360001ABBE /* XCGLogger in Frameworks */,
+				52830B312C89CFD0004E23D5 /* TTGSnackbar in Frameworks */,
 				52830AC12C888F27004E23D5 /* NetmeraIOS in Frameworks */,
 				CF8B688D23CBC9D70021B021 /* MessageUI.framework in Frameworks */,
 				CF8B688E23CBC9D70021B021 /* CoreBluetooth.framework in Frameworks */,
@@ -18206,6 +18210,7 @@
 				52830B032C899BBA004E23D5 /* IQKeyboardManagerSwift */,
 				52830B142C89AB4C004E23D5 /* Reachability */,
 				52830B212C89AC74004E23D5 /* MBProgressHUD */,
+				52830B2E2C89CFC1004E23D5 /* TTGSnackbar */,
 			);
 			productName = Depo;
 			productReference = 8C0E907E1FDEBE0000789C91 /* lifebox.app */;
@@ -18332,6 +18337,7 @@
 				52830B052C899BFC004E23D5 /* IQKeyboardManagerSwift */,
 				52830B162C89AB8F004E23D5 /* Reachability */,
 				52830B232C89AC8E004E23D5 /* MBProgressHUD */,
+				52830B302C89CFD0004E23D5 /* TTGSnackbar */,
 			);
 			productName = Depo;
 			productReference = CF8B6B2E23CBC9D70021B021 /* lifebox_friendly.app */;
@@ -18469,6 +18475,7 @@
 				52830B022C899BBA004E23D5 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				52830B132C89AB4C004E23D5 /* XCRemoteSwiftPackageReference "Reachability" */,
 				52830B202C89AC74004E23D5 /* XCRemoteSwiftPackageReference "MBProgressHUD" */,
+				52830B2D2C89CFC1004E23D5 /* XCRemoteSwiftPackageReference "TTGSnackbar" */,
 			);
 			productRefGroup = 051E1DF419CAC2F900FD1E03 /* Products */;
 			projectDirPath = "";
@@ -19475,7 +19482,6 @@
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyDropbox/SwiftyDropbox.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
-				"${BUILT_PRODUCTS_DIR}/TTGSnackbar/TTGSnackbar.framework",
 				"${BUILT_PRODUCTS_DIR}/YYImage/YYImage.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -19512,7 +19518,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyDropbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTGSnackbar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -19831,7 +19836,6 @@
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyDropbox/SwiftyDropbox.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
-				"${BUILT_PRODUCTS_DIR}/TTGSnackbar/TTGSnackbar.framework",
 				"${BUILT_PRODUCTS_DIR}/YYImage/YYImage.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -19868,7 +19872,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyDropbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTGSnackbar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -19915,7 +19918,6 @@
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyDropbox/SwiftyDropbox.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
-				"${BUILT_PRODUCTS_DIR}/TTGSnackbar/TTGSnackbar.framework",
 				"${BUILT_PRODUCTS_DIR}/YYImage/YYImage.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -19952,7 +19954,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyDropbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTGSnackbar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -25963,6 +25964,14 @@
 				minimumVersion = 1.2.0;
 			};
 		};
+		52830B2D2C89CFC1004E23D5 /* XCRemoteSwiftPackageReference "TTGSnackbar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/zekunyan/TTGSnackbar";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.12.0;
+			};
+		};
 		52A682B72C8736E60001ABBE /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/DaveWoodCom/XCGLogger";
@@ -26064,6 +26073,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 52830B202C89AC74004E23D5 /* XCRemoteSwiftPackageReference "MBProgressHUD" */;
 			productName = MBProgressHUD;
+		};
+		52830B2E2C89CFC1004E23D5 /* TTGSnackbar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830B2D2C89CFC1004E23D5 /* XCRemoteSwiftPackageReference "TTGSnackbar" */;
+			productName = TTGSnackbar;
+		};
+		52830B302C89CFD0004E23D5 /* TTGSnackbar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830B2D2C89CFC1004E23D5 /* XCRemoteSwiftPackageReference "TTGSnackbar" */;
+			productName = TTGSnackbar;
 		};
 		52A682C02C8739360001ABBE /* ObjcExceptionBridging */ = {
 			isa = XCSwiftPackageProductDependency;

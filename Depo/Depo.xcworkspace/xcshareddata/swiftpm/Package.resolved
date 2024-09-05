@@ -1,5 +1,5 @@
 {
-  "originHash" : "50a2f752e636475803d014d1d1ac48d2c6aed4fe128cfa5c041fdc39d0fef4e8",
+  "originHash" : "d613fce0459b5734e1e52212995b557c5f9b8ac55e0b7a3127fa1e7ba6a84478",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -62,6 +62,15 @@
       "state" : {
         "revision" : "af76cf3ef710b6ca5f8c05f3a31307d44a3c5828",
         "version" : "5.0.2"
+      }
+    },
+    {
+      "identity" : "ttgsnackbar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/zekunyan/TTGSnackbar",
+      "state" : {
+        "revision" : "123e3ef9b91252c0aae20b13625b4e2a160c5f4b",
+        "version" : "1.12.0"
       }
     },
     {
