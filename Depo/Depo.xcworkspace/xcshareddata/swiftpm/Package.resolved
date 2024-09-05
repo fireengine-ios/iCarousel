@@ -1,5 +1,5 @@
 {
-  "originHash" : "1faf77de0ee9c0e8680eddd8d6ae096d8e5e5f2f8779f1e8f77c1619ab896e86",
+  "originHash" : "ef1191e28901a725f404cb101683bfa65c230d0a81b233c885410265178926df",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "75bba56748359f297a83f620d45f72cf4ebee4e7",
         "version" : "4.8.2"
+      }
+    },
+    {
+      "identity" : "ios_sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/adjust/ios_sdk",
+      "state" : {
+        "revision" : "e163732d55c3c0eb749f22418b6e4855839696c3",
+        "version" : "4.38.4"
       }
     },
     {

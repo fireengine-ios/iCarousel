@@ -668,6 +668,8 @@
 		52830AC32C888F31004E23D5 /* NetmeraIOS in Frameworks */ = {isa = PBXBuildFile; productRef = 52830AC22C888F31004E23D5 /* NetmeraIOS */; };
 		52830AC52C888F39004E23D5 /* NetmeraIOS in Frameworks */ = {isa = PBXBuildFile; productRef = 52830AC42C888F39004E23D5 /* NetmeraIOS */; };
 		52830AC72C888F4A004E23D5 /* NetmeraNotificationServiceExtensionSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 52830AC62C888F4A004E23D5 /* NetmeraNotificationServiceExtensionSDK */; };
+		52830AEF2C898E06004E23D5 /* Adjust in Frameworks */ = {isa = PBXBuildFile; productRef = 52830AEE2C898E06004E23D5 /* Adjust */; };
+		52830AF12C898E1A004E23D5 /* Adjust in Frameworks */ = {isa = PBXBuildFile; productRef = 52830AF02C898E1A004E23D5 /* Adjust */; };
 		52A5E00A2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
 		52A5E00B2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
 		52A5E014291A465D00670B0C /* SnackBarHeaderTwoLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */; };
@@ -7952,6 +7954,7 @@
 				52A682C72C8739AC0001ABBE /* XCGLogger in Frameworks */,
 				8C0E8FE71FDEBDFF00789C91 /* CoreData.framework in Frameworks */,
 				98B047CB259314740011DAEB /* MPush.framework in Frameworks */,
+				52830AF12C898E1A004E23D5 /* Adjust in Frameworks */,
 				8C0E8FE81FDEBDFF00789C91 /* AVKit.framework in Frameworks */,
 				8C0E8FE91FDEBDFF00789C91 /* Photos.framework in Frameworks */,
 				0798D5CE26981CBB00F5EDE0 /* Contacts.framework in Frameworks */,
@@ -8035,6 +8038,7 @@
 				CF8B689023CBC9D70021B021 /* Security.framework in Frameworks */,
 				CF8B689123CBC9D70021B021 /* CoreLocation.framework in Frameworks */,
 				CF8B689223CBC9D70021B021 /* CoreData.framework in Frameworks */,
+				52830AEF2C898E06004E23D5 /* Adjust in Frameworks */,
 				CF8B689323CBC9D70021B021 /* AVKit.framework in Frameworks */,
 				CF8B689423CBC9D70021B021 /* Photos.framework in Frameworks */,
 				CF8B689523CBC9D70021B021 /* CFNetwork.framework in Frameworks */,
@@ -18181,6 +18185,7 @@
 				52A682D12C873D3B0001ABBE /* Alamofire */,
 				52A682E42C8745480001ABBE /* SwiftyJSON */,
 				52830ABE2C888EEB004E23D5 /* NetmeraIOS */,
+				52830AF02C898E1A004E23D5 /* Adjust */,
 			);
 			productName = Depo;
 			productReference = 8C0E907E1FDEBE0000789C91 /* lifebox.app */;
@@ -18302,6 +18307,7 @@
 				52A682D32C873D540001ABBE /* Alamofire */,
 				52A682E62C8745A30001ABBE /* SwiftyJSON */,
 				52830AC02C888F27004E23D5 /* NetmeraIOS */,
+				52830AEE2C898E06004E23D5 /* Adjust */,
 			);
 			productName = Depo;
 			productReference = CF8B6B2E23CBC9D70021B021 /* lifebox_friendly.app */;
@@ -18434,6 +18440,7 @@
 				52A682D02C873D3B0001ABBE /* XCRemoteSwiftPackageReference "Alamofire" */,
 				52A682E32C8745480001ABBE /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				52830ABD2C888EEB004E23D5 /* XCRemoteSwiftPackageReference "netmera-ios" */,
+				52830AD92C898549004E23D5 /* XCRemoteSwiftPackageReference "ios_sdk" */,
 			);
 			productRefGroup = 051E1DF419CAC2F900FD1E03 /* Products */;
 			projectDirPath = "";
@@ -19410,7 +19417,6 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Lifebox_Friendly/Pods-Lifebox_Friendly-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -19452,7 +19458,6 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Adjust.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
@@ -19776,7 +19781,6 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Lifebox/Pods-Lifebox-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -19818,7 +19822,6 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Adjust.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
@@ -19870,7 +19873,6 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -19912,7 +19914,6 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Adjust.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
@@ -25918,6 +25919,14 @@
 				minimumVersion = 3.23.12;
 			};
 		};
+		52830AD92C898549004E23D5 /* XCRemoteSwiftPackageReference "ios_sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/adjust/ios_sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		52A682B72C8736E60001ABBE /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/DaveWoodCom/XCGLogger";
@@ -25969,6 +25978,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 52830ABD2C888EEB004E23D5 /* XCRemoteSwiftPackageReference "netmera-ios" */;
 			productName = NetmeraNotificationServiceExtensionSDK;
+		};
+		52830AEE2C898E06004E23D5 /* Adjust */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830AD92C898549004E23D5 /* XCRemoteSwiftPackageReference "ios_sdk" */;
+			productName = Adjust;
+		};
+		52830AF02C898E1A004E23D5 /* Adjust */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830AD92C898549004E23D5 /* XCRemoteSwiftPackageReference "ios_sdk" */;
+			productName = Adjust;
 		};
 		52A682C02C8739360001ABBE /* ObjcExceptionBridging */ = {
 			isa = XCSwiftPackageProductDependency;
