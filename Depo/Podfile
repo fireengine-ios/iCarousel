@@ -35,9 +35,9 @@ def core_pods
   #pod 'ActiveLabel'
 
   #Keyboard
-  pod 'Typist', '~> 1'
+#  pod 'Typist', '~> 1'
   pod 'iCarousel', '~> 1'
-  pod 'IQKeyboardManagerSwift'
+#  pod 'IQKeyboardManagerSwift'
 
   pod 'ReachabilitySwift'
   pod 'MBProgressHUD', '~> 1'
