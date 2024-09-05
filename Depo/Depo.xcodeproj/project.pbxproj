@@ -682,6 +682,8 @@
 		52830B312C89CFD0004E23D5 /* TTGSnackbar in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B302C89CFD0004E23D5 /* TTGSnackbar */; };
 		52830B3C2C89D400004E23D5 /* SwiftyGif in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B3B2C89D400004E23D5 /* SwiftyGif */; };
 		52830B3E2C89D427004E23D5 /* SwiftyGif in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B3D2C89D427004E23D5 /* SwiftyGif */; };
+		52830B512C89DFB4004E23D5 /* SwiftyDropbox in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B502C89DFB4004E23D5 /* SwiftyDropbox */; };
+		52830B532C89DFC0004E23D5 /* SwiftyDropbox in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B522C89DFC0004E23D5 /* SwiftyDropbox */; };
 		52A5E00A2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
 		52A5E00B2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
 		52A5E014291A465D00670B0C /* SnackBarHeaderTwoLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */; };
@@ -7982,6 +7984,7 @@
 				89DB12832BFB96690005513B /* AdjustSigComTurkcellAkillidepoSdk.xcframework in Frameworks */,
 				8C0E8FEF1FDEBDFF00789C91 /* Accelerate.framework in Frameworks */,
 				0798D5CA26981BF600F5EDE0 /* Photos.framework in Frameworks */,
+				52830B512C89DFB4004E23D5 /* SwiftyDropbox in Frameworks */,
 				52A682C52C8739AC0001ABBE /* ObjcExceptionBridging in Frameworks */,
 				8C0E8FF11FDEBDFF00789C91 /* WebKit.framework in Frameworks */,
 				8C0E8FF21FDEBDFF00789C91 /* AudioToolbox.framework in Frameworks */,
@@ -8057,6 +8060,7 @@
 				CF8B688F23CBC9D70021B021 /* AssetsLibrary.framework in Frameworks */,
 				CF8B689023CBC9D70021B021 /* Security.framework in Frameworks */,
 				CF8B689123CBC9D70021B021 /* CoreLocation.framework in Frameworks */,
+				52830B532C89DFC0004E23D5 /* SwiftyDropbox in Frameworks */,
 				CF8B689223CBC9D70021B021 /* CoreData.framework in Frameworks */,
 				52830AEF2C898E06004E23D5 /* Adjust in Frameworks */,
 				CF8B689323CBC9D70021B021 /* AVKit.framework in Frameworks */,
@@ -18216,6 +18220,7 @@
 				52830B212C89AC74004E23D5 /* MBProgressHUD */,
 				52830B2E2C89CFC1004E23D5 /* TTGSnackbar */,
 				52830B3B2C89D400004E23D5 /* SwiftyGif */,
+				52830B502C89DFB4004E23D5 /* SwiftyDropbox */,
 			);
 			productName = Depo;
 			productReference = 8C0E907E1FDEBE0000789C91 /* lifebox.app */;
@@ -18344,6 +18349,7 @@
 				52830B232C89AC8E004E23D5 /* MBProgressHUD */,
 				52830B302C89CFD0004E23D5 /* TTGSnackbar */,
 				52830B3D2C89D427004E23D5 /* SwiftyGif */,
+				52830B522C89DFC0004E23D5 /* SwiftyDropbox */,
 			);
 			productName = Depo;
 			productReference = CF8B6B2E23CBC9D70021B021 /* lifebox_friendly.app */;
@@ -18483,6 +18489,7 @@
 				52830B202C89AC74004E23D5 /* XCRemoteSwiftPackageReference "MBProgressHUD" */,
 				52830B2D2C89CFC1004E23D5 /* XCRemoteSwiftPackageReference "TTGSnackbar" */,
 				52830B3A2C89D400004E23D5 /* XCRemoteSwiftPackageReference "SwiftyGif" */,
+				52830B472C89D7FC004E23D5 /* XCRemoteSwiftPackageReference "SwiftyDropbox" */,
 			);
 			productRefGroup = 051E1DF419CAC2F900FD1E03 /* Products */;
 			projectDirPath = "";
@@ -19459,7 +19466,6 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Lifebox_Friendly/Pods-Lifebox_Friendly-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
@@ -19487,14 +19493,12 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SNCollectionViewLayout/SNCollectionViewLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyDropbox/SwiftyDropbox.framework",
 				"${BUILT_PRODUCTS_DIR}/YYImage/YYImage.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
@@ -19522,7 +19526,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SNCollectionViewLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyDropbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -19811,7 +19814,6 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Lifebox/Pods-Lifebox-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
@@ -19839,14 +19841,12 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SNCollectionViewLayout/SNCollectionViewLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyDropbox/SwiftyDropbox.framework",
 				"${BUILT_PRODUCTS_DIR}/YYImage/YYImage.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
@@ -19874,7 +19874,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SNCollectionViewLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyDropbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -19891,7 +19890,6 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
@@ -19919,14 +19917,12 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SNCollectionViewLayout/SNCollectionViewLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyDropbox/SwiftyDropbox.framework",
 				"${BUILT_PRODUCTS_DIR}/YYImage/YYImage.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
@@ -19954,7 +19950,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SNCollectionViewLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyDropbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -25981,6 +25976,14 @@
 				minimumVersion = 5.4.5;
 			};
 		};
+		52830B472C89D7FC004E23D5 /* XCRemoteSwiftPackageReference "SwiftyDropbox" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dropbox/SwiftyDropbox";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.1.0;
+			};
+		};
 		52A682B72C8736E60001ABBE /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/DaveWoodCom/XCGLogger";
@@ -26102,6 +26105,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 52830B3A2C89D400004E23D5 /* XCRemoteSwiftPackageReference "SwiftyGif" */;
 			productName = SwiftyGif;
+		};
+		52830B502C89DFB4004E23D5 /* SwiftyDropbox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830B472C89D7FC004E23D5 /* XCRemoteSwiftPackageReference "SwiftyDropbox" */;
+			productName = SwiftyDropbox;
+		};
+		52830B522C89DFC0004E23D5 /* SwiftyDropbox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830B472C89D7FC004E23D5 /* XCRemoteSwiftPackageReference "SwiftyDropbox" */;
+			productName = SwiftyDropbox;
 		};
 		52A682C02C8739360001ABBE /* ObjcExceptionBridging */ = {
 			isa = XCSwiftPackageProductDependency;

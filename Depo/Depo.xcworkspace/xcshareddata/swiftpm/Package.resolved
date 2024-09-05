@@ -1,5 +1,5 @@
 {
-  "originHash" : "31d240c317e7c5fa8b167ec2793d1b51ba4d38c17fbb3835329027adf43adb66",
+  "originHash" : "e5b58ecd4901bc1ab7e33fadea3d3a0ece50cbdb1faf2f80fa9c4802d06d7368",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -53,6 +53,15 @@
       "state" : {
         "revision" : "7cbd73f46a7dfaeca079e18df7324c6de6d1834a",
         "version" : "5.2.3"
+      }
+    },
+    {
+      "identity" : "swiftydropbox",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dropbox/SwiftyDropbox",
+      "state" : {
+        "revision" : "5cbf001757b5cf1d58323a7034f1516e58714cb0",
+        "version" : "10.1.0"
       }
     },
     {

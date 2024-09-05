@@ -61,7 +61,7 @@ def lifebox_pods
   pod 'FBSDKLoginKit', '~> 8'
   pod 'FBSDKShareKit', '~> 8'
   pod 'YYImage', '~> 1'
-  pod 'SwiftyDropbox', '~> 6'
+#  pod 'SwiftyDropbox', '~> 6'
   pod 'MaterialComponents/Slider'
   pod 'Mantis', :git => 'https://github.com/fireengine-ios/Mantis.git', :tag => 'FE-1.3.2.5'
   pod 'MetalPetal/Swift', '=1.15.0'

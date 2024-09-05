@@ -1,5 +1,5 @@
 {
-  "originHash" : "50a2f752e636475803d014d1d1ac48d2c6aed4fe128cfa5c041fdc39d0fef4e8",
+  "originHash" : "e5b58ecd4901bc1ab7e33fadea3d3a0ece50cbdb1faf2f80fa9c4802d06d7368",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -56,12 +56,39 @@
       }
     },
     {
+      "identity" : "swiftydropbox",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dropbox/SwiftyDropbox",
+      "state" : {
+        "revision" : "5cbf001757b5cf1d58323a7034f1516e58714cb0",
+        "version" : "10.1.0"
+      }
+    },
+    {
+      "identity" : "swiftygif",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/alexiscreuzot/SwiftyGif",
+      "state" : {
+        "revision" : "4430cbc148baa3907651d40562d96325426f409a",
+        "version" : "5.4.5"
+      }
+    },
+    {
       "identity" : "swiftyjson",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SwiftyJSON/SwiftyJSON.git",
       "state" : {
         "revision" : "af76cf3ef710b6ca5f8c05f3a31307d44a3c5828",
         "version" : "5.0.2"
+      }
+    },
+    {
+      "identity" : "ttgsnackbar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/zekunyan/TTGSnackbar",
+      "state" : {
+        "revision" : "123e3ef9b91252c0aae20b13625b4e2a160c5f4b",
+        "version" : "1.12.0"
       }
     },
     {

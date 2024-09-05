@@ -5,7 +5,6 @@ PODS:
     - HMFoundation (~> 1.4)
   - AGConnectCredential (1.7.1.300):
     - AGConnectCore (~> 1.4)
-  - Alamofire (4.8.2)
   - AppAuth (1.5.0):
     - AppAuth/Core (= 1.5.0)
     - AppAuth/ExternalUserAgent (= 1.5.0)
@@ -223,8 +222,6 @@ PODS:
   - SQLite.swift (0.12.0):
     - SQLite.swift/standard (= 0.12.0)
   - SQLite.swift/standard (0.12.0)
-  - SwiftyDropbox (6.0.3):
-    - Alamofire (~> 4.8.2)
   - YYImage (1.0.4):
     - YYImage/Core (= 1.0.4)
   - YYImage/Core (1.0.4)
@@ -252,7 +249,6 @@ DEPENDENCIES:
   - SDWebImage (~> 4)
   - SNCollectionViewLayout
   - SQLite.swift (= 0.12.0)
-  - SwiftyDropbox (~> 6)
   - YYImage (~> 1)
 
 SPEC REPOS:
@@ -260,7 +256,6 @@ SPEC REPOS:
     - AGConnectAppLinking
     - AGConnectCore
     - AGConnectCredential
-    - Alamofire
     - AppAuth
     - FBSDKCoreKit
     - FBSDKLoginKit
@@ -298,7 +293,6 @@ SPEC REPOS:
     - SDWebImage
     - SNCollectionViewLayout
     - SQLite.swift
-    - SwiftyDropbox
     - YYImage
 
 EXTERNAL SOURCES:
@@ -315,7 +309,6 @@ SPEC CHECKSUMS:
   AGConnectAppLinking: e76d372cf359bbb423fb25ef346c69cbbf41ec81
   AGConnectCore: 8387ec577f8140989b2f9056c4650d7d6c8435d4
   AGConnectCredential: f83a5f6a3b640ae1e4a6fe9426d6cd81482cf93c
-  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   AppAuth: 80317d99ac7ff2801a2f18ff86b48cd315ed465d
   FBSDKCoreKit: 4afd6ff53d8133a433dbcda44451c9498f8c6ce4
   FBSDKLoginKit: 7181765f2524d7ebf82d9629066c8e6caafc99d0
@@ -354,9 +347,8 @@ SPEC CHECKSUMS:
   SDWebImage: 783af2c3fa36291a250030c4752ee370a9a51d13
   SNCollectionViewLayout: 9991574aa022237c75acf0e3dc890b09aa4e4c31
   SQLite.swift: 7cad9db150a03716336e69469ec9559c85aece5b
-  SwiftyDropbox: 7e864f1e826bfc1b9b53a5edccef6c8d5fbe9e3b
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: 871fa8cc362399e3c1b364c72f6b5cd47345c048
+PODFILE CHECKSUM: f43c49877c5fc236d0a98e1813ed6950e82df702
 
 COCOAPODS: 1.15.2
