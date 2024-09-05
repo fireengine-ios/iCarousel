@@ -217,7 +217,6 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PromisesObjC (1.2.12)
-  - ReachabilitySwift (5.0.0)
   - SDWebImage (4.4.8):
     - SDWebImage/Core (= 4.4.8)
   - SDWebImage/Core (4.4.8)
@@ -254,7 +253,6 @@ DEPENDENCIES:
   - MaterialComponents/Slider
   - MBProgressHUD (~> 1)
   - MetalPetal/Swift (= 1.15.0)
-  - ReachabilitySwift
   - SDWebImage (~> 4)
   - SNCollectionViewLayout
   - SQLite.swift (= 0.12.0)
@@ -304,7 +302,6 @@ SPEC REPOS:
     - MetalPetal
     - nanopb
     - PromisesObjC
-    - ReachabilitySwift
     - SDWebImage
     - SNCollectionViewLayout
     - SQLite.swift
@@ -364,7 +361,6 @@ SPEC CHECKSUMS:
   MetalPetal: 921da5639036cbec057f8a39b5309d72cf1491a4
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
-  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SDWebImage: 783af2c3fa36291a250030c4752ee370a9a51d13
   SNCollectionViewLayout: 9991574aa022237c75acf0e3dc890b09aa4e4c31
   SQLite.swift: 7cad9db150a03716336e69469ec9559c85aece5b
@@ -373,6 +369,6 @@ SPEC CHECKSUMS:
   TTGSnackbar: fea91c62637b5662f808a4c3b55f7631cb7e1ef7
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: dfa346223fec14cdc0493653119b3cfdef36e232
+PODFILE CHECKSUM: 2ef1f25021b69c4683ecc38c30cf0027580d935f
 
 COCOAPODS: 1.15.2

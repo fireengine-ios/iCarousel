@@ -674,6 +674,8 @@
 		52830AF92C899A41004E23D5 /* Typist in Frameworks */ = {isa = PBXBuildFile; productRef = 52830AF82C899A41004E23D5 /* Typist */; };
 		52830B042C899BBA004E23D5 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B032C899BBA004E23D5 /* IQKeyboardManagerSwift */; };
 		52830B062C899BFC004E23D5 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B052C899BFC004E23D5 /* IQKeyboardManagerSwift */; };
+		52830B152C89AB4C004E23D5 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B142C89AB4C004E23D5 /* Reachability */; };
+		52830B172C89AB8F004E23D5 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B162C89AB8F004E23D5 /* Reachability */; };
 		52A5E00A2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
 		52A5E00B2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
 		52A5E014291A465D00670B0C /* SnackBarHeaderTwoLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */; };
@@ -7946,6 +7948,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B549B6B224CF07B800D39C44 /* GPUImage.framework in Frameworks */,
+				52830B152C89AB4C004E23D5 /* Reachability in Frameworks */,
 				8C0E8FEA1FDEBDFF00789C91 /* AdSupport.framework in Frameworks */,
 				CE39615220C29B6400D145E0 /* SystemConfiguration.framework in Frameworks */,
 				CE39615120C29B5E00D145E0 /* Social.framework in Frameworks */,
@@ -8046,6 +8049,7 @@
 				CF8B689223CBC9D70021B021 /* CoreData.framework in Frameworks */,
 				52830AEF2C898E06004E23D5 /* Adjust in Frameworks */,
 				CF8B689323CBC9D70021B021 /* AVKit.framework in Frameworks */,
+				52830B172C89AB8F004E23D5 /* Reachability in Frameworks */,
 				CF8B689423CBC9D70021B021 /* Photos.framework in Frameworks */,
 				CF8B689523CBC9D70021B021 /* CFNetwork.framework in Frameworks */,
 				52A682D42C873D540001ABBE /* Alamofire in Frameworks */,
@@ -18196,6 +18200,7 @@
 				52830AF02C898E1A004E23D5 /* Adjust */,
 				52830AF62C899A15004E23D5 /* Typist */,
 				52830B032C899BBA004E23D5 /* IQKeyboardManagerSwift */,
+				52830B142C89AB4C004E23D5 /* Reachability */,
 			);
 			productName = Depo;
 			productReference = 8C0E907E1FDEBE0000789C91 /* lifebox.app */;
@@ -18320,6 +18325,7 @@
 				52830AEE2C898E06004E23D5 /* Adjust */,
 				52830AF82C899A41004E23D5 /* Typist */,
 				52830B052C899BFC004E23D5 /* IQKeyboardManagerSwift */,
+				52830B162C89AB8F004E23D5 /* Reachability */,
 			);
 			productName = Depo;
 			productReference = CF8B6B2E23CBC9D70021B021 /* lifebox_friendly.app */;
@@ -18455,6 +18461,7 @@
 				52830AD92C898549004E23D5 /* XCRemoteSwiftPackageReference "ios_sdk" */,
 				52830AF52C899A15004E23D5 /* XCRemoteSwiftPackageReference "Typist" */,
 				52830B022C899BBA004E23D5 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				52830B132C89AB4C004E23D5 /* XCRemoteSwiftPackageReference "Reachability" */,
 			);
 			productRefGroup = 051E1DF419CAC2F900FD1E03 /* Products */;
 			projectDirPath = "";
@@ -19457,7 +19464,6 @@
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
 				"${BUILT_PRODUCTS_DIR}/MetalPetal/MetalPetal.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SNCollectionViewLayout/SNCollectionViewLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
@@ -19496,7 +19502,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MetalPetal.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SNCollectionViewLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
@@ -19817,7 +19822,6 @@
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
 				"${BUILT_PRODUCTS_DIR}/MetalPetal/MetalPetal.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SNCollectionViewLayout/SNCollectionViewLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
@@ -19856,7 +19860,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MetalPetal.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SNCollectionViewLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
@@ -19905,7 +19908,6 @@
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
 				"${BUILT_PRODUCTS_DIR}/MetalPetal/MetalPetal.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SNCollectionViewLayout/SNCollectionViewLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
@@ -19944,7 +19946,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MetalPetal.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SNCollectionViewLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
@@ -25945,6 +25946,14 @@
 				minimumVersion = 6.5.0;
 			};
 		};
+		52830B132C89AB4C004E23D5 /* XCRemoteSwiftPackageReference "Reachability" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		52A682B72C8736E60001ABBE /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/DaveWoodCom/XCGLogger";
@@ -26026,6 +26035,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 52830B022C899BBA004E23D5 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		52830B142C89AB4C004E23D5 /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830B132C89AB4C004E23D5 /* XCRemoteSwiftPackageReference "Reachability" */;
+			productName = Reachability;
+		};
+		52830B162C89AB8F004E23D5 /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830B132C89AB4C004E23D5 /* XCRemoteSwiftPackageReference "Reachability" */;
+			productName = Reachability;
 		};
 		52A682C02C8739360001ABBE /* ObjcExceptionBridging */ = {
 			isa = XCSwiftPackageProductDependency;

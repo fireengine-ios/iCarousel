@@ -39,7 +39,7 @@ def core_pods
   pod 'iCarousel', '~> 1'
 #  pod 'IQKeyboardManagerSwift'
 
-  pod 'ReachabilitySwift'
+#  pod 'ReachabilitySwift'
   pod 'MBProgressHUD', '~> 1'
   pod 'TTGSnackbar', '~> 1'
   
