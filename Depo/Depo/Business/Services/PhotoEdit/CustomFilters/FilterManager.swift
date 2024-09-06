@@ -107,7 +107,7 @@ final class FilterManager {
             return result
         }
 
-        let mtiImage = MTIImage(image: source, isOpaque: source.isOpaque) // TODO: Check, -=-
+        let mtiImage = MTIImage(image: source, isOpaque: source.isOpaque)
             
         filters.forEach {
             let filtered = $0.apply(on: mtiImage)
@@ -145,7 +145,7 @@ final class FilterManager {
             return image
         }
         
-        let mtiImage = MTIImage(image: source, isOpaque: source.isOpaque) // TODO: Check, -=-
+        let mtiImage = MTIImage(image: source, isOpaque: source.isOpaque)
 
         filter.parameter.set(value: intensity)
         lastApplied = intensity > 0 ? (type, intensity) : nil
