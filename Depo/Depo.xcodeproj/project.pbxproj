@@ -733,6 +733,16 @@
 		52C886CB2C8AF3F000129BA2 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 52C886CA2C8AF3F000129BA2 /* FacebookCore */; };
 		52C886CD2C8AF3F000129BA2 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 52C886CC2C8AF3F000129BA2 /* FacebookLogin */; };
 		52C886CF2C8AF3F000129BA2 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 52C886CE2C8AF3F000129BA2 /* FacebookShare */; };
+		52C886E22C8B1AC400129BA2 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 52C886E12C8B1AC400129BA2 /* FirebaseAnalytics */; };
+		52C886E42C8B1AC400129BA2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 52C886E32C8B1AC400129BA2 /* FirebaseAuth */; };
+		52C886E62C8B1AC400129BA2 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 52C886E52C8B1AC400129BA2 /* FirebaseCrashlytics */; };
+		52C886E82C8B1AC400129BA2 /* FirebaseDynamicLinks in Frameworks */ = {isa = PBXBuildFile; productRef = 52C886E72C8B1AC400129BA2 /* FirebaseDynamicLinks */; };
+		52C886EA2C8B1AC400129BA2 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 52C886E92C8B1AC400129BA2 /* FirebaseRemoteConfig */; };
+		52C886EC2C8B1AD800129BA2 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 52C886EB2C8B1AD800129BA2 /* FirebaseAnalytics */; };
+		52C886EE2C8B1AD800129BA2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 52C886ED2C8B1AD800129BA2 /* FirebaseAuth */; };
+		52C886F02C8B1AD800129BA2 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 52C886EF2C8B1AD800129BA2 /* FirebaseCrashlytics */; };
+		52C886F22C8B1AD800129BA2 /* FirebaseDynamicLinks in Frameworks */ = {isa = PBXBuildFile; productRef = 52C886F12C8B1AD800129BA2 /* FirebaseDynamicLinks */; };
+		52C886F42C8B1AD800129BA2 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 52C886F32C8B1AD800129BA2 /* FirebaseRemoteConfig */; };
 		52E0994528C1ECCB004AE4EC /* PackagesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56091F7552A900F49DA1 /* PackagesPresenter.swift */; };
 		52E0994628C1ECCC004AE4EC /* PackagesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56091F7552A900F49DA1 /* PackagesPresenter.swift */; };
 		52E0994728C1ECD0004AE4EC /* PackagesInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56061F7552A900F49DA1 /* PackagesInteractorOutput.swift */; };
@@ -7992,6 +8002,7 @@
 				52830BB22C8AE831004E23D5 /* GoogleSignIn in Frameworks */,
 				98B047CB259314740011DAEB /* MPush.framework in Frameworks */,
 				52830B2F2C89CFC1004E23D5 /* TTGSnackbar in Frameworks */,
+				52C886EA2C8B1AC400129BA2 /* FirebaseRemoteConfig in Frameworks */,
 				52830B9D2C8AE151004E23D5 /* KeychainSwift in Frameworks */,
 				52C886C72C8AF3E600129BA2 /* FacebookLogin in Frameworks */,
 				52830AF12C898E1A004E23D5 /* Adjust in Frameworks */,
@@ -8017,12 +8028,16 @@
 				52830B042C899BBA004E23D5 /* IQKeyboardManagerSwift in Frameworks */,
 				8C0E8FF51FDEBDFF00789C91 /* MediaPlayer.framework in Frameworks */,
 				8C0E8FF61FDEBDFF00789C91 /* QuartzCore.framework in Frameworks */,
+				52C886E22C8B1AC400129BA2 /* FirebaseAnalytics in Frameworks */,
+				52C886E62C8B1AC400129BA2 /* FirebaseCrashlytics in Frameworks */,
 				8C0E8FF71FDEBDFF00789C91 /* libsqlite3.dylib in Frameworks */,
 				52A682E52C8745480001ABBE /* SwiftyJSON in Frameworks */,
 				8C0E8FF91FDEBDFF00789C91 /* libz.dylib in Frameworks */,
 				52830AF72C899A15004E23D5 /* Typist in Frameworks */,
+				52C886E82C8B1AC400129BA2 /* FirebaseDynamicLinks in Frameworks */,
 				8C0E8FFA1FDEBDFF00789C91 /* CoreGraphics.framework in Frameworks */,
 				98B047D3259314750011DAEB /* SpotifyiOS.framework in Frameworks */,
+				52C886E42C8B1AC400129BA2 /* FirebaseAuth in Frameworks */,
 				0798D5CC26981C9F00F5EDE0 /* CoreServices.framework in Frameworks */,
 				7F95E6548988617F48CDAC51 /* Pods_Lifebox.framework in Frameworks */,
 				52830B3C2C89D400004E23D5 /* SwiftyGif in Frameworks */,
@@ -8093,6 +8108,7 @@
 				CF8B689123CBC9D70021B021 /* CoreLocation.framework in Frameworks */,
 				52830B532C89DFC0004E23D5 /* SwiftyDropbox in Frameworks */,
 				CF8B689223CBC9D70021B021 /* CoreData.framework in Frameworks */,
+				52C886F22C8B1AD800129BA2 /* FirebaseDynamicLinks in Frameworks */,
 				52830AEF2C898E06004E23D5 /* Adjust in Frameworks */,
 				CF8B689323CBC9D70021B021 /* AVKit.framework in Frameworks */,
 				52830B172C89AB8F004E23D5 /* Reachability in Frameworks */,
@@ -8101,6 +8117,7 @@
 				52A682D42C873D540001ABBE /* Alamofire in Frameworks */,
 				52A682C12C8739360001ABBE /* ObjcExceptionBridging in Frameworks */,
 				CF8B689623CBC9D70021B021 /* iAd.framework in Frameworks */,
+				52C886F02C8B1AD800129BA2 /* FirebaseCrashlytics in Frameworks */,
 				52830B8E2C8ADB72004E23D5 /* Mantis in Frameworks */,
 				52830BB42C8AE839004E23D5 /* GoogleSignIn in Frameworks */,
 				52A682E72C8745A30001ABBE /* SwiftyJSON in Frameworks */,
@@ -8120,12 +8137,15 @@
 				89DB12812BFB96540005513B /* AdjustSigComTurkcellAkillidepoSdk.xcframework in Frameworks */,
 				CF8B68A023CBC9D70021B021 /* MediaPlayer.framework in Frameworks */,
 				98B047CC259314740011DAEB /* MPush.framework in Frameworks */,
+				52C886F42C8B1AD800129BA2 /* FirebaseRemoteConfig in Frameworks */,
 				CF8B68A223CBC9D70021B021 /* QuartzCore.framework in Frameworks */,
 				CF8B68A323CBC9D70021B021 /* libsqlite3.dylib in Frameworks */,
 				CF8B68A423CBC9D70021B021 /* AddressBook.framework in Frameworks */,
+				52C886EE2C8B1AD800129BA2 /* FirebaseAuth in Frameworks */,
 				CF8B68A523CBC9D70021B021 /* libz.dylib in Frameworks */,
 				CF8B68A623CBC9D70021B021 /* CoreGraphics.framework in Frameworks */,
 				4A585758A2671723C59125AF /* Pods_Lifebox_Friendly.framework in Frameworks */,
+				52C886EC2C8B1AD800129BA2 /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -18264,6 +18284,11 @@
 				52C886C42C8AF3E500129BA2 /* FacebookCore */,
 				52C886C62C8AF3E600129BA2 /* FacebookLogin */,
 				52C886C82C8AF3E600129BA2 /* FacebookShare */,
+				52C886E12C8B1AC400129BA2 /* FirebaseAnalytics */,
+				52C886E32C8B1AC400129BA2 /* FirebaseAuth */,
+				52C886E52C8B1AC400129BA2 /* FirebaseCrashlytics */,
+				52C886E72C8B1AC400129BA2 /* FirebaseDynamicLinks */,
+				52C886E92C8B1AC400129BA2 /* FirebaseRemoteConfig */,
 			);
 			productName = Depo;
 			productReference = 8C0E907E1FDEBE0000789C91 /* lifebox.app */;
@@ -18405,6 +18430,11 @@
 				52C886CA2C8AF3F000129BA2 /* FacebookCore */,
 				52C886CC2C8AF3F000129BA2 /* FacebookLogin */,
 				52C886CE2C8AF3F000129BA2 /* FacebookShare */,
+				52C886EB2C8B1AD800129BA2 /* FirebaseAnalytics */,
+				52C886ED2C8B1AD800129BA2 /* FirebaseAuth */,
+				52C886EF2C8B1AD800129BA2 /* FirebaseCrashlytics */,
+				52C886F12C8B1AD800129BA2 /* FirebaseDynamicLinks */,
+				52C886F32C8B1AD800129BA2 /* FirebaseRemoteConfig */,
 			);
 			productName = Depo;
 			productReference = CF8B6B2E23CBC9D70021B021 /* lifebox_friendly.app */;
@@ -18552,6 +18582,7 @@
 				52830BB02C8AE811004E23D5 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				52830BBD2C8AEDBC004E23D5 /* XCRemoteSwiftPackageReference "google-tag-manager-ios-sdk" */,
 				52C886C32C8AF3AD00129BA2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				52C886E02C8B19CB00129BA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 051E1DF419CAC2F900FD1E03 /* Products */;
 			projectDirPath = "";
@@ -19528,51 +19559,25 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Lifebox_Friendly/Pods-Lifebox_Friendly-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseAuth/FirebaseAuth.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCrashlytics/FirebaseCrashlytics.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseDynamicLinks/FirebaseDynamicLinks.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfig/FirebaseRemoteConfig.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
-				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SNCollectionViewLayout/SNCollectionViewLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/YYImage/YYImage.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseABTesting.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseAuth.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreDiagnostics.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCrashlytics.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseDynamicLinks.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseRemoteConfig.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SNCollectionViewLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -19823,7 +19828,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+			shellScript = "${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\n";
 		};
 		771E5F088976C3076C6EC142 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -19854,51 +19859,25 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Lifebox/Pods-Lifebox-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseAuth/FirebaseAuth.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCrashlytics/FirebaseCrashlytics.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseDynamicLinks/FirebaseDynamicLinks.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfig/FirebaseRemoteConfig.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
-				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SNCollectionViewLayout/SNCollectionViewLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/YYImage/YYImage.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseABTesting.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseAuth.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreDiagnostics.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCrashlytics.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseDynamicLinks.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseRemoteConfig.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SNCollectionViewLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -19912,51 +19891,25 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseAuth/FirebaseAuth.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCrashlytics/FirebaseCrashlytics.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseDynamicLinks/FirebaseDynamicLinks.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfig/FirebaseRemoteConfig.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
-				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SNCollectionViewLayout/SNCollectionViewLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/YYImage/YYImage.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseABTesting.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseAuth.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreDiagnostics.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCrashlytics.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseDynamicLinks.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseRemoteConfig.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SNCollectionViewLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -26058,6 +26011,14 @@
 				minimumVersion = 12.0.0;
 			};
 		};
+		52C886E02C8B19CB00129BA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -26335,6 +26296,56 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 52C886C32C8AF3AD00129BA2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookShare;
+		};
+		52C886E12C8B1AC400129BA2 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52C886E02C8B19CB00129BA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		52C886E32C8B1AC400129BA2 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52C886E02C8B19CB00129BA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		52C886E52C8B1AC400129BA2 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52C886E02C8B19CB00129BA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		52C886E72C8B1AC400129BA2 /* FirebaseDynamicLinks */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52C886E02C8B19CB00129BA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDynamicLinks;
+		};
+		52C886E92C8B1AC400129BA2 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52C886E02C8B19CB00129BA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		52C886EB2C8B1AD800129BA2 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52C886E02C8B19CB00129BA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		52C886ED2C8B1AD800129BA2 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52C886E02C8B19CB00129BA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		52C886EF2C8B1AD800129BA2 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52C886E02C8B19CB00129BA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		52C886F12C8B1AD800129BA2 /* FirebaseDynamicLinks */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52C886E02C8B19CB00129BA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDynamicLinks;
+		};
+		52C886F32C8B1AD800129BA2 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52C886E02C8B19CB00129BA2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
 		};
 /* End XCSwiftPackageProductDependency section */
 
