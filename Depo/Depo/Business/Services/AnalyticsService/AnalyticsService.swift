@@ -92,7 +92,7 @@ final class AnalyticsService: NSObject {
     
     func track(event: AnalyticsEvent) {
         logAdjustEvent(name: event.token)
-        logFacebookEvent(name: AppEvents.Name.viewedContent.rawValue, parameters: [AppEvents.ParameterName.content.rawValue: event.facebookEventName])
+        logFacebookEvent(name: AppEvents.Name.viewedContent.rawValue, parameters: [AppEvents.ParameterName.content: event.facebookEventName])
     }
     
     func trackPurchase(offer: Any) {
@@ -112,8 +112,8 @@ final class AnalyticsService: NSObject {
     private func logPurchase(event: AnalyticsEvent, price: Double, currency: String) {
         logAdjustEvent(name: AnalyticsEvent.purchaseToken, price: price, currency: currency)
         //Facebook has automatic tracking in-app purchases. If this function is enabled in the web settings, then there will be duplicates
-        AppEvents.logPurchase(
-            price,
+        AppEvents.shared.logPurchase(
+            amount: price,
             currency: currency,
             parameters: [AppEvents.ParameterName.content.rawValue: event.facebookEventName]
         )
@@ -130,9 +130,9 @@ final class AnalyticsService: NSObject {
         Adjust.trackEvent(event)
     }
     
-    private func logFacebookEvent(name: String, parameters: [String: Any]? = nil) {
+    private func logFacebookEvent(name: String, parameters: [AppEvents.ParameterName: Any]? = nil) {
         if let parameters = parameters {
-            AppEvents.logEvent(AppEvents.Name(rawValue: name), parameters: parameters)
+            AppEvents.shared.logEvent(AppEvents.Name(rawValue: name), parameters: parameters)
         }
     }    
 }

@@ -727,6 +727,12 @@
 		52BF679728FFE05300D8D4E6 /* PasswordValidationSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF679528FFE05300D8D4E6 /* PasswordValidationSetView.swift */; };
 		52C1BB932996770C00D9FB09 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C1BB922996770C00D9FB09 /* NotificationTableViewCell.swift */; };
 		52C1BB942996770C00D9FB09 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C1BB922996770C00D9FB09 /* NotificationTableViewCell.swift */; };
+		52C886C52C8AF3E500129BA2 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 52C886C42C8AF3E500129BA2 /* FacebookCore */; };
+		52C886C72C8AF3E600129BA2 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 52C886C62C8AF3E600129BA2 /* FacebookLogin */; };
+		52C886C92C8AF3E600129BA2 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 52C886C82C8AF3E600129BA2 /* FacebookShare */; };
+		52C886CB2C8AF3F000129BA2 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 52C886CA2C8AF3F000129BA2 /* FacebookCore */; };
+		52C886CD2C8AF3F000129BA2 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 52C886CC2C8AF3F000129BA2 /* FacebookLogin */; };
+		52C886CF2C8AF3F000129BA2 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 52C886CE2C8AF3F000129BA2 /* FacebookShare */; };
 		52E0994528C1ECCB004AE4EC /* PackagesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56091F7552A900F49DA1 /* PackagesPresenter.swift */; };
 		52E0994628C1ECCC004AE4EC /* PackagesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56091F7552A900F49DA1 /* PackagesPresenter.swift */; };
 		52E0994728C1ECD0004AE4EC /* PackagesInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56061F7552A900F49DA1 /* PackagesInteractorOutput.swift */; };
@@ -7974,6 +7980,7 @@
 				CE39615120C29B5E00D145E0 /* Social.framework in Frameworks */,
 				8C0E8FE61FDEBDFF00789C91 /* MessageUI.framework in Frameworks */,
 				8C0E8FE11FDEBDFF00789C91 /* CoreBluetooth.framework in Frameworks */,
+				52C886C52C8AF3E500129BA2 /* FacebookCore in Frameworks */,
 				8C0E8FE21FDEBDFF00789C91 /* Security.framework in Frameworks */,
 				8C0E8FE51FDEBDFF00789C91 /* CoreLocation.framework in Frameworks */,
 				0798D5C626981BC600F5EDE0 /* Photos.framework in Frameworks */,
@@ -7986,9 +7993,11 @@
 				98B047CB259314740011DAEB /* MPush.framework in Frameworks */,
 				52830B2F2C89CFC1004E23D5 /* TTGSnackbar in Frameworks */,
 				52830B9D2C8AE151004E23D5 /* KeychainSwift in Frameworks */,
+				52C886C72C8AF3E600129BA2 /* FacebookLogin in Frameworks */,
 				52830AF12C898E1A004E23D5 /* Adjust in Frameworks */,
 				52830B8C2C8ADB61004E23D5 /* Mantis in Frameworks */,
 				8C0E8FE81FDEBDFF00789C91 /* AVKit.framework in Frameworks */,
+				52C886C92C8AF3E600129BA2 /* FacebookShare in Frameworks */,
 				8C0E8FE91FDEBDFF00789C91 /* Photos.framework in Frameworks */,
 				0798D5CE26981CBB00F5EDE0 /* Contacts.framework in Frameworks */,
 				8C0E8FEC1FDEBDFF00789C91 /* CFNetwork.framework in Frameworks */,
@@ -8066,6 +8075,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B549B6B724CF07DC00D39C44 /* GPUImage.framework in Frameworks */,
+				52C886CB2C8AF3F000129BA2 /* FacebookCore in Frameworks */,
 				52830B3E2C89D427004E23D5 /* SwiftyGif in Frameworks */,
 				98B047D4259314750011DAEB /* SpotifyiOS.framework in Frameworks */,
 				CF8B688A23CBC9D70021B021 /* AdSupport.framework in Frameworks */,
@@ -8099,12 +8109,14 @@
 				52830B242C89AC8E004E23D5 /* MBProgressHUD in Frameworks */,
 				CF8B689923CBC9D70021B021 /* StoreKit.framework in Frameworks */,
 				CF8B689A23CBC9D70021B021 /* Accelerate.framework in Frameworks */,
+				52C886CD2C8AF3F000129BA2 /* FacebookLogin in Frameworks */,
 				52830B062C899BFC004E23D5 /* IQKeyboardManagerSwift in Frameworks */,
 				CF8B689C23CBC9D70021B021 /* WebKit.framework in Frameworks */,
 				52830AF92C899A41004E23D5 /* Typist in Frameworks */,
 				CF8B689D23CBC9D70021B021 /* AudioToolbox.framework in Frameworks */,
 				CF8B689E23CBC9D70021B021 /* MobileCoreServices.framework in Frameworks */,
 				CF8B689F23CBC9D70021B021 /* CoreTelephony.framework in Frameworks */,
+				52C886CF2C8AF3F000129BA2 /* FacebookShare in Frameworks */,
 				89DB12812BFB96540005513B /* AdjustSigComTurkcellAkillidepoSdk.xcframework in Frameworks */,
 				CF8B68A023CBC9D70021B021 /* MediaPlayer.framework in Frameworks */,
 				98B047CC259314740011DAEB /* MPush.framework in Frameworks */,
@@ -18249,6 +18261,9 @@
 				52830B8B2C8ADB61004E23D5 /* Mantis */,
 				52830B9C2C8AE151004E23D5 /* KeychainSwift */,
 				52830BB12C8AE831004E23D5 /* GoogleSignIn */,
+				52C886C42C8AF3E500129BA2 /* FacebookCore */,
+				52C886C62C8AF3E600129BA2 /* FacebookLogin */,
+				52C886C82C8AF3E600129BA2 /* FacebookShare */,
 			);
 			productName = Depo;
 			productReference = 8C0E907E1FDEBE0000789C91 /* lifebox.app */;
@@ -18387,6 +18402,9 @@
 				52830B8D2C8ADB72004E23D5 /* Mantis */,
 				52830B9E2C8AE158004E23D5 /* KeychainSwift */,
 				52830BB32C8AE839004E23D5 /* GoogleSignIn */,
+				52C886CA2C8AF3F000129BA2 /* FacebookCore */,
+				52C886CC2C8AF3F000129BA2 /* FacebookLogin */,
+				52C886CE2C8AF3F000129BA2 /* FacebookShare */,
 			);
 			productName = Depo;
 			productReference = CF8B6B2E23CBC9D70021B021 /* lifebox_friendly.app */;
@@ -18533,6 +18551,7 @@
 				52830B9B2C8AE134004E23D5 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				52830BB02C8AE811004E23D5 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				52830BBD2C8AEDBC004E23D5 /* XCRemoteSwiftPackageReference "google-tag-manager-ios-sdk" */,
+				52C886C32C8AF3AD00129BA2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = 051E1DF419CAC2F900FD1E03 /* Products */;
 			projectDirPath = "";
@@ -19509,9 +19528,6 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Lifebox_Friendly/Pods-Lifebox_Friendly-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseAuth/FirebaseAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
@@ -19536,9 +19552,6 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseABTesting.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
@@ -19841,9 +19854,6 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Lifebox/Pods-Lifebox-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseAuth/FirebaseAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
@@ -19868,9 +19878,6 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseABTesting.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
@@ -19905,9 +19912,6 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseAuth/FirebaseAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
@@ -19932,9 +19936,6 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseABTesting.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
@@ -26049,6 +26050,14 @@
 				minimumVersion = 5.0.2;
 			};
 		};
+		52C886C32C8AF3AD00129BA2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -26296,6 +26305,36 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 52A682E32C8745480001ABBE /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
 			productName = SwiftyJSON;
+		};
+		52C886C42C8AF3E500129BA2 /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52C886C32C8AF3AD00129BA2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		52C886C62C8AF3E600129BA2 /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52C886C32C8AF3AD00129BA2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
+		52C886C82C8AF3E600129BA2 /* FacebookShare */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52C886C32C8AF3AD00129BA2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookShare;
+		};
+		52C886CA2C8AF3F000129BA2 /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52C886C32C8AF3AD00129BA2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		52C886CC2C8AF3F000129BA2 /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52C886C32C8AF3AD00129BA2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
+		52C886CE2C8AF3F000129BA2 /* FacebookShare */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52C886C32C8AF3AD00129BA2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookShare;
 		};
 /* End XCSwiftPackageProductDependency section */
 
