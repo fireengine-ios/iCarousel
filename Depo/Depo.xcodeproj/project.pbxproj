@@ -686,6 +686,8 @@
 		52830B532C89DFC0004E23D5 /* SwiftyDropbox in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B522C89DFC0004E23D5 /* SwiftyDropbox */; };
 		52830B732C89ED89004E23D5 /* MetalPetal in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B722C89ED89004E23D5 /* MetalPetal */; };
 		52830B752C89EDE9004E23D5 /* MetalPetal in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B742C89EDE9004E23D5 /* MetalPetal */; };
+		52830B8C2C8ADB61004E23D5 /* Mantis in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B8B2C8ADB61004E23D5 /* Mantis */; };
+		52830B8E2C8ADB72004E23D5 /* Mantis in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B8D2C8ADB72004E23D5 /* Mantis */; };
 		52A5E00A2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
 		52A5E00B2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
 		52A5E014291A465D00670B0C /* SnackBarHeaderTwoLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */; };
@@ -7975,6 +7977,7 @@
 				98B047CB259314740011DAEB /* MPush.framework in Frameworks */,
 				52830B2F2C89CFC1004E23D5 /* TTGSnackbar in Frameworks */,
 				52830AF12C898E1A004E23D5 /* Adjust in Frameworks */,
+				52830B8C2C8ADB61004E23D5 /* Mantis in Frameworks */,
 				8C0E8FE81FDEBDFF00789C91 /* AVKit.framework in Frameworks */,
 				8C0E8FE91FDEBDFF00789C91 /* Photos.framework in Frameworks */,
 				0798D5CE26981CBB00F5EDE0 /* Contacts.framework in Frameworks */,
@@ -8074,6 +8077,7 @@
 				52A682D42C873D540001ABBE /* Alamofire in Frameworks */,
 				52A682C12C8739360001ABBE /* ObjcExceptionBridging in Frameworks */,
 				CF8B689623CBC9D70021B021 /* iAd.framework in Frameworks */,
+				52830B8E2C8ADB72004E23D5 /* Mantis in Frameworks */,
 				52A682E72C8745A30001ABBE /* SwiftyJSON in Frameworks */,
 				CF8B689723CBC9D70021B021 /* Foundation.framework in Frameworks */,
 				CF8B689823CBC9D70021B021 /* UIKit.framework in Frameworks */,
@@ -18226,6 +18230,7 @@
 				52830B3B2C89D400004E23D5 /* SwiftyGif */,
 				52830B502C89DFB4004E23D5 /* SwiftyDropbox */,
 				52830B722C89ED89004E23D5 /* MetalPetal */,
+				52830B8B2C8ADB61004E23D5 /* Mantis */,
 			);
 			productName = Depo;
 			productReference = 8C0E907E1FDEBE0000789C91 /* lifebox.app */;
@@ -18356,6 +18361,7 @@
 				52830B3D2C89D427004E23D5 /* SwiftyGif */,
 				52830B522C89DFC0004E23D5 /* SwiftyDropbox */,
 				52830B742C89EDE9004E23D5 /* MetalPetal */,
+				52830B8D2C8ADB72004E23D5 /* Mantis */,
 			);
 			productName = Depo;
 			productReference = CF8B6B2E23CBC9D70021B021 /* lifebox_friendly.app */;
@@ -18497,6 +18503,7 @@
 				52830B3A2C89D400004E23D5 /* XCRemoteSwiftPackageReference "SwiftyGif" */,
 				52830B472C89D7FC004E23D5 /* XCRemoteSwiftPackageReference "SwiftyDropbox" */,
 				52830B712C89ED89004E23D5 /* XCRemoteSwiftPackageReference "MetalPetal" */,
+				52830B8A2C8ADB61004E23D5 /* XCRemoteSwiftPackageReference "Mantis" */,
 			);
 			productRefGroup = 051E1DF419CAC2F900FD1E03 /* Products */;
 			projectDirPath = "";
@@ -19493,7 +19500,6 @@
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
-				"${BUILT_PRODUCTS_DIR}/Mantis/Mantis.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -19525,7 +19531,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mantis.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -19839,7 +19844,6 @@
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
-				"${BUILT_PRODUCTS_DIR}/Mantis/Mantis.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -19871,7 +19875,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mantis.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -19913,7 +19916,6 @@
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
-				"${BUILT_PRODUCTS_DIR}/Mantis/Mantis.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -19945,7 +19947,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mantis.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -25993,6 +25994,14 @@
 				minimumVersion = 1.0.2;
 			};
 		};
+		52830B8A2C8ADB61004E23D5 /* XCRemoteSwiftPackageReference "Mantis" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fireengine-ios/Mantis";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.3;
+			};
+		};
 		52A682B72C8736E60001ABBE /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/DaveWoodCom/XCGLogger";
@@ -26134,6 +26143,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 52830B712C89ED89004E23D5 /* XCRemoteSwiftPackageReference "MetalPetal" */;
 			productName = MetalPetal;
+		};
+		52830B8B2C8ADB61004E23D5 /* Mantis */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830B8A2C8ADB61004E23D5 /* XCRemoteSwiftPackageReference "Mantis" */;
+			productName = Mantis;
+		};
+		52830B8D2C8ADB72004E23D5 /* Mantis */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830B8A2C8ADB61004E23D5 /* XCRemoteSwiftPackageReference "Mantis" */;
+			productName = Mantis;
 		};
 		52A682C02C8739360001ABBE /* ObjcExceptionBridging */ = {
 			isa = XCSwiftPackageProductDependency;

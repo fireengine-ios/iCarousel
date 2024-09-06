@@ -63,7 +63,7 @@ def lifebox_pods
   pod 'YYImage', '~> 1'
 #  pod 'SwiftyDropbox', '~> 6'
   pod 'MaterialComponents/Slider'
-  pod 'Mantis', :git => 'https://github.com/fireengine-ios/Mantis.git', :tag => 'FE-1.3.2.5'
+#  pod 'Mantis', :git => 'https://github.com/fireengine-ios/Mantis.git', :tag => 'FE-1.3.2.5'
 #  pod 'MetalPetal/Swift', '=1.15.0'
 end
 

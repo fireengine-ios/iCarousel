@@ -1,5 +1,5 @@
 {
-  "originHash" : "fdd5ba5c3ed6aabf101fe7ef7ee6569cf5abe0b6422579280d8754824727d3b5",
+  "originHash" : "668093c6928abfc6877456b4918dc4ca8a596742b4b95365a9ae517fb4a9e4eb",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -26,6 +26,15 @@
       "state" : {
         "revision" : "c00b1ae9fa1ad8af4465bb6ca901f6943fc98eba",
         "version" : "6.5.16"
+      }
+    },
+    {
+      "identity" : "mantis",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/fireengine-ios/Mantis",
+      "state" : {
+        "revision" : "d4551c8002bc4c6b73c0068cd0cbf86a9cbf3097",
+        "version" : "1.3.3"
       }
     },
     {
