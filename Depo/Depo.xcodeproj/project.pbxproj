@@ -18532,6 +18532,7 @@
 				52830B8A2C8ADB61004E23D5 /* XCRemoteSwiftPackageReference "Mantis" */,
 				52830B9B2C8AE134004E23D5 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				52830BB02C8AE811004E23D5 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				52830BBD2C8AEDBC004E23D5 /* XCRemoteSwiftPackageReference "google-tag-manager-ios-sdk" */,
 			);
 			productRefGroup = 051E1DF419CAC2F900FD1E03 /* Products */;
 			projectDirPath = "";
@@ -19681,12 +19682,10 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh",
 				"${PODS_ROOT}/AGConnectCredential/AGCResources.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AGCResources.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TagManagerResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -19767,12 +19766,10 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Lifebox_Friendly/Pods-Lifebox_Friendly-resources.sh",
 				"${PODS_ROOT}/AGConnectCredential/AGCResources.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AGCResources.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TagManagerResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -20039,12 +20036,10 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Lifebox/Pods-Lifebox-resources.sh",
 				"${PODS_ROOT}/AGConnectCredential/AGCResources.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AGCResources.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TagManagerResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -26020,6 +26015,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 6.0.0;
+			};
+		};
+		52830BBD2C8AEDBC004E23D5 /* XCRemoteSwiftPackageReference "google-tag-manager-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleanalytics/google-tag-manager-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
 			};
 		};
 		52A682B72C8736E60001ABBE /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
