@@ -688,6 +688,12 @@
 		52830B752C89EDE9004E23D5 /* MetalPetal in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B742C89EDE9004E23D5 /* MetalPetal */; };
 		52830B8C2C8ADB61004E23D5 /* Mantis in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B8B2C8ADB61004E23D5 /* Mantis */; };
 		52830B8E2C8ADB72004E23D5 /* Mantis in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B8D2C8ADB72004E23D5 /* Mantis */; };
+		52830B9D2C8AE151004E23D5 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B9C2C8AE151004E23D5 /* KeychainSwift */; };
+		52830B9F2C8AE158004E23D5 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 52830B9E2C8AE158004E23D5 /* KeychainSwift */; };
+		52830BA12C8AE15F004E23D5 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 52830BA02C8AE15F004E23D5 /* KeychainSwift */; };
+		52830BA32C8AE166004E23D5 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 52830BA22C8AE166004E23D5 /* KeychainSwift */; };
+		52830BA52C8AE16D004E23D5 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 52830BA42C8AE16D004E23D5 /* KeychainSwift */; };
+		52830BA72C8AE180004E23D5 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 52830BA62C8AE180004E23D5 /* KeychainSwift */; };
 		52A5E00A2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
 		52A5E00B2915FFA100670B0C /* CreateStorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E0092915FFA000670B0C /* CreateStorySelectionView.swift */; };
 		52A5E014291A465D00670B0C /* SnackBarHeaderTwoLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A5E013291A465D00670B0C /* SnackBarHeaderTwoLineView.swift */; };
@@ -7976,6 +7982,7 @@
 				52830B222C89AC74004E23D5 /* MBProgressHUD in Frameworks */,
 				98B047CB259314740011DAEB /* MPush.framework in Frameworks */,
 				52830B2F2C89CFC1004E23D5 /* TTGSnackbar in Frameworks */,
+				52830B9D2C8AE151004E23D5 /* KeychainSwift in Frameworks */,
 				52830AF12C898E1A004E23D5 /* Adjust in Frameworks */,
 				52830B8C2C8ADB61004E23D5 /* Mantis in Frameworks */,
 				8C0E8FE81FDEBDFF00789C91 /* AVKit.framework in Frameworks */,
@@ -8016,6 +8023,7 @@
 			files = (
 				52A682EB2C8745B60001ABBE /* SwiftyJSON in Frameworks */,
 				52830AC52C888F39004E23D5 /* NetmeraIOS in Frameworks */,
+				52830BA32C8AE166004E23D5 /* KeychainSwift in Frameworks */,
 				52A682D82C873D700001ABBE /* Alamofire in Frameworks */,
 				F26917F8B115AF62714430CE /* Pods_LifeboxFileProvider.framework in Frameworks */,
 			);
@@ -8025,6 +8033,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52830BA72C8AE180004E23D5 /* KeychainSwift in Frameworks */,
 				4ACD8FBD97DFD63D02325793 /* Pods_LifeboxFileProviderUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -8035,6 +8044,7 @@
 			files = (
 				52A682E92C8745AE0001ABBE /* SwiftyJSON in Frameworks */,
 				52830AC32C888F31004E23D5 /* NetmeraIOS in Frameworks */,
+				52830BA12C8AE15F004E23D5 /* KeychainSwift in Frameworks */,
 				52A682D62C873D650001ABBE /* Alamofire in Frameworks */,
 				FB99DBFC7593688C8EC71AB7 /* Pods_LifeboxShared.framework in Frameworks */,
 			);
@@ -8058,6 +8068,7 @@
 				CF8B688A23CBC9D70021B021 /* AdSupport.framework in Frameworks */,
 				CF8B688B23CBC9D70021B021 /* SystemConfiguration.framework in Frameworks */,
 				CF8B688C23CBC9D70021B021 /* Social.framework in Frameworks */,
+				52830B9F2C8AE158004E23D5 /* KeychainSwift in Frameworks */,
 				52A682C32C8739360001ABBE /* XCGLogger in Frameworks */,
 				52830B312C89CFD0004E23D5 /* TTGSnackbar in Frameworks */,
 				52830AC12C888F27004E23D5 /* NetmeraIOS in Frameworks */,
@@ -8112,6 +8123,7 @@
 				CFE4E712252D9F2300F165AD /* WidgetKit.framework in Frameworks */,
 				52A682DA2C873D7F0001ABBE /* Alamofire in Frameworks */,
 				52A682CB2C873A3F0001ABBE /* XCGLogger in Frameworks */,
+				52830BA52C8AE16D004E23D5 /* KeychainSwift in Frameworks */,
 				9C940EF696B67ADA7BD2B0C9 /* Pods_LifeboxWidgetExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -18231,6 +18243,7 @@
 				52830B502C89DFB4004E23D5 /* SwiftyDropbox */,
 				52830B722C89ED89004E23D5 /* MetalPetal */,
 				52830B8B2C8ADB61004E23D5 /* Mantis */,
+				52830B9C2C8AE151004E23D5 /* KeychainSwift */,
 			);
 			productName = Depo;
 			productReference = 8C0E907E1FDEBE0000789C91 /* lifebox.app */;
@@ -18254,6 +18267,7 @@
 				52A682D72C873D700001ABBE /* Alamofire */,
 				52A682EA2C8745B60001ABBE /* SwiftyJSON */,
 				52830AC42C888F39004E23D5 /* NetmeraIOS */,
+				52830BA22C8AE166004E23D5 /* KeychainSwift */,
 			);
 			productName = LifeboxFileProvider;
 			productReference = CE1BE922204831CD0074BDDC /* LifeboxFileProvider.appex */;
@@ -18273,6 +18287,9 @@
 			dependencies = (
 			);
 			name = LifeboxFileProviderUI;
+			packageProductDependencies = (
+				52830BA62C8AE180004E23D5 /* KeychainSwift */,
+			);
 			productName = LifeboxFileProviderUI;
 			productReference = CE1BE930204831CE0074BDDC /* LifeboxFileProviderUI.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -18295,6 +18312,7 @@
 				52A682D52C873D650001ABBE /* Alamofire */,
 				52A682E82C8745AE0001ABBE /* SwiftyJSON */,
 				52830AC22C888F31004E23D5 /* NetmeraIOS */,
+				52830BA02C8AE15F004E23D5 /* KeychainSwift */,
 			);
 			productName = LifeboxShared;
 			productReference = CE58FAEF20444492007F3F54 /* LifeboxShared.appex */;
@@ -18362,6 +18380,7 @@
 				52830B522C89DFC0004E23D5 /* SwiftyDropbox */,
 				52830B742C89EDE9004E23D5 /* MetalPetal */,
 				52830B8D2C8ADB72004E23D5 /* Mantis */,
+				52830B9E2C8AE158004E23D5 /* KeychainSwift */,
 			);
 			productName = Depo;
 			productReference = CF8B6B2E23CBC9D70021B021 /* lifebox_friendly.app */;
@@ -18386,6 +18405,7 @@
 				52A682CA2C873A3F0001ABBE /* XCGLogger */,
 				52A682D92C873D7F0001ABBE /* Alamofire */,
 				52A682EC2C8745C00001ABBE /* SwiftyJSON */,
+				52830BA42C8AE16D004E23D5 /* KeychainSwift */,
 			);
 			productName = LifeboxWidgetExtension;
 			productReference = CFE4E71C252D9F2300F165AD /* LifeboxWidgetExtension.appex */;
@@ -18504,6 +18524,7 @@
 				52830B472C89D7FC004E23D5 /* XCRemoteSwiftPackageReference "SwiftyDropbox" */,
 				52830B712C89ED89004E23D5 /* XCRemoteSwiftPackageReference "MetalPetal" */,
 				52830B8A2C8ADB61004E23D5 /* XCRemoteSwiftPackageReference "Mantis" */,
+				52830B9B2C8AE134004E23D5 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = 051E1DF419CAC2F900FD1E03 /* Products */;
 			projectDirPath = "";
@@ -19497,7 +19518,6 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleSignIn/GoogleSignIn.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
@@ -19528,7 +19548,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleSignIn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
@@ -19841,7 +19860,6 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleSignIn/GoogleSignIn.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
@@ -19872,7 +19890,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleSignIn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
@@ -19913,7 +19930,6 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleSignIn/GoogleSignIn.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
@@ -19944,7 +19960,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleSignIn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
@@ -26002,6 +26017,14 @@
 				minimumVersion = 1.3.3;
 			};
 		};
+		52830B9B2C8AE134004E23D5 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 19.0.0;
+			};
+		};
 		52A682B72C8736E60001ABBE /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/DaveWoodCom/XCGLogger";
@@ -26153,6 +26176,36 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 52830B8A2C8ADB61004E23D5 /* XCRemoteSwiftPackageReference "Mantis" */;
 			productName = Mantis;
+		};
+		52830B9C2C8AE151004E23D5 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830B9B2C8AE134004E23D5 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+		52830B9E2C8AE158004E23D5 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830B9B2C8AE134004E23D5 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+		52830BA02C8AE15F004E23D5 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830B9B2C8AE134004E23D5 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+		52830BA22C8AE166004E23D5 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830B9B2C8AE134004E23D5 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+		52830BA42C8AE16D004E23D5 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830B9B2C8AE134004E23D5 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+		52830BA62C8AE180004E23D5 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52830B9B2C8AE134004E23D5 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 		52A682C02C8739360001ABBE /* ObjcExceptionBridging */ = {
 			isa = XCSwiftPackageProductDependency;

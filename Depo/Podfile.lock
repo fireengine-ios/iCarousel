@@ -152,7 +152,6 @@ PODS:
   - GTMSessionFetcher/Core (1.7.2)
   - HMFoundation (1.7.1.300)
   - iCarousel (1.8.3)
-  - KeychainSwift (19.0.0)
   - MaterialComponents/AnimationTiming (124.2.0)
   - MaterialComponents/Availability (124.2.0)
   - MaterialComponents/Elevation (124.2.0):
@@ -238,7 +237,6 @@ DEPENDENCIES:
   - GoogleSignIn
   - GoogleTagManager (~> 7)
   - iCarousel (~> 1)
-  - KeychainSwift (~> 19)
   - MaterialComponents/Slider
   - SDWebImage (~> 4)
   - SNCollectionViewLayout
@@ -277,7 +275,6 @@ SPEC REPOS:
     - GTMSessionFetcher
     - HMFoundation
     - iCarousel
-    - KeychainSwift
     - MaterialComponents
     - MDFInternationalization
     - MDFTextAccessibility
@@ -319,7 +316,6 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
   HMFoundation: 9b3246fc5c0285e94ae4a65ed5b08e9c3dda3cc3
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
-  KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
   MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
   MDFInternationalization: d697c55307816222a55685c4ccb1044ffb030c12
   MDFTextAccessibility: f4bb4cc2194286651b59a215fdeaa0e05dc90ba5
@@ -330,6 +326,6 @@ SPEC CHECKSUMS:
   SQLite.swift: 7cad9db150a03716336e69469ec9559c85aece5b
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: 95fa3847b58bcb3c98eaa4c02546d178410d84d2
+PODFILE CHECKSUM: 16f7e6cbd533b1b9a22a0ef3f69a4d88a6f4c9d5
 
 COCOAPODS: 1.15.2
