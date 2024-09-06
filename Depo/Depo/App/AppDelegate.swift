@@ -21,7 +21,6 @@ import FirebaseDynamicLinks
 import GoogleSignIn
 import AGConnectCore
 import AGConnectAppLinking
-import Netmera
 
 // the global reference to logging mechanism to be available in all files
 let log: XCGLogger = {
@@ -459,7 +458,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AdjustDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         debugLog("AppDelegate applicationDidBecomeActive")
         checkPasscodeIfNeed()
-        AppEvents.activateApp()
+        AppEvents.shared.activateApp()
         overrideApplicationThemeStyle()
     }
     
@@ -520,7 +519,7 @@ extension AppDelegate {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         debugLog("AppDelegate didReceiveRemoteNotification")
         
-        AppEvents.logPushNotificationOpen(userInfo)
+        AppEvents.shared.logPushNotificationOpen(payload: userInfo.toStringAny())
         
         // track receiving TBMatik Push notifications
         if let pushType = Netmera.recentPushObject()?.customDictionary[PushNotificationParameter.pushType.rawValue] as? String,

@@ -27,3 +27,15 @@ extension Dictionary {
         }
     }
 }
+
+extension Dictionary where Key == AnyHashable, Value == Any {
+    func toStringAny() -> [String: Any] {
+        var dict = [String: Any]()
+        self.forEach {
+            if let key = $0.key as? String {
+                dict[key] = $0.value
+            }
+        }
+        return dict
+    }
+}

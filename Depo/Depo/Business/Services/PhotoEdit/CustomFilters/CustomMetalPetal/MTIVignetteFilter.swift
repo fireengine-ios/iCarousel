@@ -6,8 +6,7 @@
 //  Copyright © 2020 LifeTech. All rights reserved.
 //
 
-import MetalPetal.Extension
-
+import MetalPetalObjectiveC.Extension
 
 class MTIVignetteFilter: MTIUnaryImageRenderingFilter {
     

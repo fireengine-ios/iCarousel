@@ -34,7 +34,7 @@ final class DropboxManager {
     func handleRedirect(url: URL) -> Bool {
         debugLog("DropboxManager handleRedirect")
         
-        return DropboxClientsManager.handleRedirectURL(url) { [weak self] authResult in
+        return DropboxClientsManager.handleRedirectURL(url, includeBackgroundClient: false) { [weak self] authResult in // TODO: check includeBackgroundClient, -=-
             self?.handle(result: authResult)
         }
     }

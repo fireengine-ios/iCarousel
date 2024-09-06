@@ -6,6 +6,8 @@
 //  Copyright © 2020 LifeTech. All rights reserved.
 //
 
+import MetalPetal
+import MetalPetalObjectiveC
 
 final class FilterManager {
     private static func filter(type: FilterType, convert: MTIConvert?) -> CustomFilterProtocol? {
@@ -104,12 +106,9 @@ final class FilterManager {
             debugLog("PhotoEdit: Pass a nonnil image")
             return result
         }
-        
-        guard let mtiImage = source.makeMTIImage(isOpaque: source.isOpaque) else {
-            debugLog("PhotoEdit: can't create MTI image")
-            return result
-        }
-    
+
+        let mtiImage = MTIImage(image: source, isOpaque: source.isOpaque)
+            
         filters.forEach {
             let filtered = $0.apply(on: mtiImage)
             if let output = convert?.uiImage(from: filtered, scale: source.scale, orientation: source.imageOrientation) {
@@ -146,10 +145,8 @@ final class FilterManager {
             return image
         }
         
-        guard let mtiImage = source.makeMTIImage(isOpaque: source.isOpaque) else {
-            return image
-        }
-        
+        let mtiImage = MTIImage(image: source, isOpaque: source.isOpaque)
+
         filter.parameter.set(value: intensity)
         lastApplied = intensity > 0 ? (type, intensity) : nil
         

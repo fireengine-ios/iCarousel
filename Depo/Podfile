@@ -8,9 +8,9 @@ ENV['SWIFT_VERSION'] = '5'
 
 
 def shared_pods
-  pod 'Alamofire', '~> 4.8.1'
-  pod 'SwiftyJSON', '~> 5'
-  pod 'KeychainSwift', '~> 19'
+  #pod 'Alamofire', '~> 4.8.1'
+  #pod 'SwiftyJSON', '~> 5'
+  #pod 'KeychainSwift', '~> 19'
 end
 
 def core_pods
@@ -21,62 +21,62 @@ def core_pods
   pod 'Firebase/RemoteConfig', '~> 7'
   pod 'Firebase/DynamicLinks', '~> 7'
   pod 'Firebase/Auth', '~> 7'
-  pod 'GoogleSignIn'
+#  pod 'GoogleSignIn'
   pod 'AGConnectCore'
   pod 'AGConnectAppLinking'
 
-  pod 'Netmera', '~> 3.16.0'
+#  pod 'Netmera', '~> 3.16.0'
 
   pod 'SDWebImage', '~> 4'
   pod 'GoogleConversionTracking', '~> 3'
-  pod 'GoogleTagManager', '~> 7'
-  pod 'Adjust', '~> 4.35.2'
+#  pod 'GoogleTagManager', '~> 7'
+#  pod 'Adjust', '~> 4.35.2'
   pod 'SNCollectionViewLayout'
   #pod 'ActiveLabel'
 
   #Keyboard
-  pod 'Typist', '~> 1'
+#  pod 'Typist', '~> 1'
   pod 'iCarousel', '~> 1'
-  pod 'IQKeyboardManagerSwift'
+#  pod 'IQKeyboardManagerSwift'
 
-  pod 'ReachabilitySwift'
-  pod 'MBProgressHUD', '~> 1'
-  pod 'TTGSnackbar', '~> 1'
+#  pod 'ReachabilitySwift'
+#  pod 'MBProgressHUD', '~> 1'
+#  pod 'TTGSnackbar', '~> 1'
   
   #logger
-  pod 'XCGLogger', '~> 7'
+  #pod 'XCGLogger', '~> 7'
 
   #widget
-  pod 'MMWormhole', '~> 2.0.0'
+  #pod 'MMWormhole', '~> 2.0.0'
   
   #migration
   pod 'SQLite.swift', '0.12.0'
   
-  pod 'SwiftyGif', '~> 5'
+#  pod 'SwiftyGif', '~> 5'
 end
 
 def lifebox_pods
   core_pods
-  pod 'FBSDKCoreKit', '~> 8'
-  pod 'FBSDKLoginKit', '~> 8'
-  pod 'FBSDKShareKit', '~> 8'
+#  pod 'FBSDKCoreKit', '~> 8'
+#  pod 'FBSDKLoginKit', '~> 8'
+#  pod 'FBSDKShareKit', '~> 8'
   pod 'YYImage', '~> 1'
-  pod 'SwiftyDropbox', '~> 6'
+#  pod 'SwiftyDropbox', '~> 6'
   pod 'MaterialComponents/Slider'
-  pod 'Mantis', :git => 'https://github.com/fireengine-ios/Mantis.git', :tag => 'FE-1.3.2.5'
-  pod 'MetalPetal/Swift', '=1.15.0'
+#  pod 'Mantis', :git => 'https://github.com/fireengine-ios/Mantis.git', :tag => 'FE-1.3.2.5'
+#  pod 'MetalPetal/Swift', '=1.15.0'
 end
 
 def sharing_pods
   shared_pods
-  pod 'Netmera', '~> 3.16.0'
-  pod 'MMWormhole', '~> 2.0.0'
+#  pod 'Netmera', '~> 3.16.0'
+#  pod 'MMWormhole', '~> 2.0.0'
 end
 
 def file_provider_pods
   shared_pods
-  pod 'Netmera', '~> 3.16.0'
-  pod 'MMWormhole', '~> 2.0.0'
+#  pod 'Netmera', '~> 3.16.0'
+#  pod 'MMWormhole', '~> 2.0.0'
 end
 
 def file_provider_ui_pods
@@ -84,15 +84,15 @@ def file_provider_ui_pods
 end
 
 def notification_pods
-  pod 'Netmera', '~> 3.16.0'
+#  pod 'Netmera', '~> 3.16.0'
   pod 'iCarousel', '~> 1'
 end
 
 def widget_pods
   shared_pods
   pod 'SDWebImage', '~> 4'
-  pod 'MMWormhole', '~> 2.0.0'
-  pod 'XCGLogger', '~> 7'
+#  pod 'MMWormhole', '~> 2.0.0'
+#  pod 'XCGLogger', '~> 7'
 end
 
 target 'Lifebox' do
@@ -124,7 +124,7 @@ target 'LifeboxUnitTests' do
 end
 
 target 'LifeboxNotificationServiceExtension' do
- pod "Netmera/NotificationServiceExtension"
+# pod "Netmera/NotificationServiceExtension"
 end
 
 post_install do |installer|

@@ -9,6 +9,7 @@
 import Foundation
 import MMWormhole
 import WidgetKit
+import UIKit
 
 final class WidgetService {
     static let shared = WidgetService()
